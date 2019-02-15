@@ -179,21 +179,21 @@ Yukarıdaki `AlisverisListesi` component'i, yalnızca `<div />` ve `<li />` gibi
 
 Eğer bu öğreticiyi **tarayıcınızda** takip edecekseniz, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip edecekseniz, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız (bu dosyaya daha önce [kurulum](#setup-option-2-local-development-environment) aşamasında değinmiştik). 
 
-This Starter Code is the base of what we're building. We've provided the CSS styling so that you only need to focus on learning React and programming the tic-tac-toe game.
+Bu başlangıç kodu, yapacağımız proje ile ilgili bir temel niteliğindedir. Size CSS kodlarını hazır olarak sunduk, bu sayede CSS ile uğraşmaksızın yalnızca React'i öğrenmeye ve tic-tac-toe oyununun programlanmasına yoğunlaşacabileceksiniz.
 
-By inspecting the code, you'll notice that we have three React components:
+Kodu incelediğinizde aşağıdaki 3 React component'ini fark edeceksiniz:
 
-* Square
-* Board
-* Game
+* Square (Kare)
+* Board (Tahta)
+* Game (Oyun)
 
-The Square component renders a single `<button>` and the Board renders 9 squares. The Game component renders a board with placeholder values which we'll modify later. There are currently no interactive components.
+Şu an Square component'i yalnızca bir adet `<button>` elemanını, Board ise 9 adet Square component'ini render ediyor. Game component'i ise Board component'ini ve daha sonra değiştireceğimiz bir kısa metni render ediyor. Henüz uygulama içerisinde etkileşimli bir component yer almamaktadır.
 
-### Passing Data Through Props {#passing-data-through-props}
+### Prop'lar Aracılığıyla Veri Aktarımı {#prop-araciligiyla-veri-aktarimi}
 
-Just to get our feet wet, let's try passing some data from our Board component to our Square component.
+Şimdi işe koyulalım ve Board component'inden Square component'imize bazı verileri göndermeyi deneyelim.
 
-In Board's `renderSquare` method, change the code to pass a prop called `value` to the Square:
+Board'ın `renderSquare` metodunda, `value` (değer) adındaki prop'u Square'e gönderecek şekilde kodu değiştirelim:
 
 ```js{3}
 class Board extends React.Component {
@@ -202,7 +202,7 @@ class Board extends React.Component {
   }
 ```
 
-Change Square's `render` method to show that value by replacing `{/* TODO */}` with `{this.props.value}`:
+Square's `render` metodunu ilgili değeri göstermesi için `{/* TODO */}` kısmını `{this.props.value}` şekilde değiştirelim:
 
 ```js{5}
 class Square extends React.Component {
@@ -216,17 +216,17 @@ class Square extends React.Component {
 }
 ```
 
-Before:
+Öncesi:
 
 ![React Devtools](../images/tutorial/tictac-empty.png)
 
-After: You should see a number in each square in the rendered output.
+Sonrası: Eğer değişiklikleri doğru bir şekilde uyguladıysanız render işlemi bitiminde her karede içerisinde bir sayı görüyor olmalısınız. 
 
 ![React Devtools](../images/tutorial/tictac-numbers.png)
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/aWWQOG?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/aWWQOG?editors=0010)**
 
-Congratulations! You've just "passed a prop" from a parent Board component to a child Square component. Passing props is how information flows in React apps, from parents to children.
+Tebrikler! Board component'inden Square component'ine "prop ile veri geçirmeyi" başardınız. React uygulamalarında prop'ların ebeveyn component'ten çocuk component'e geçişi sayesinde veri akışının oluşması sağlanır.
 
 ### Making an Interactive Component {#making-an-interactive-component}
 
