@@ -1,6 +1,6 @@
 ---
 id: tutorial
-title: "Tutorial: Intro to React"
+title: "Öğretici: React'a giriş"
 layout: tutorial
 sectionid: tutorial
 permalink: tutorial/tutorial.html
@@ -10,101 +10,104 @@ redirect_from:
   - "docs/tutorial-ja-JP.html"
   - "docs/tutorial-ko-KR.html"
   - "docs/tutorial-zh-CN.html"
+  - "docs/tutorial-tr.html"
 ---
 
-This tutorial doesn't assume any existing React knowledge.
+Bu öğretici, herhangi bir React bilginizin olmadığını varsayar.
 
-## Before We Start the Tutorial {#before-we-start-the-tutorial}
+## Öğreticiye Başlamadan Önce {#ogreticiye-baslamadan-once}
 
-We will build a small game during this tutorial. **You might be tempted to skip it because you're not building games -- but give it a chance.** The techniques you'll learn in the tutorial are fundamental to building any React apps, and mastering it will give you a deep understanding of React.
+Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun yapmadığınızdan dolayı bu öğreticiyi atlamak istiyor olabilirsiniz -- ama bir şans vermeniz iyi olacaktır.** Zira bu öğreticide edineceğiniz teknikler herhangi bir React uygulaması geliştirmek için temel niteliğindedir, ve bu temeller üzerinde uzmanlaşmak React'ı daha derinlemesine öğrenmenizi sağlayacaktır.
 
->Tip
+>İpucu
 >
->This tutorial is designed for people who prefer to **learn by doing**. If you prefer learning concepts from the ground up, check out our [step-by-step guide](/docs/hello-world.html). You might find this tutorial and the guide complementary to each other.
+>Bu öğretici, **kodlayarak öğrenmek** isteyen kişiler için tasarlanmıştır. Eğer bu konseptleri her yönüyle edinmek isterseniz [adım adım öğrenme rehberini](/docs/hello-world.html) inceleyebilirsiniz. Bu öğretici ve adım adım öğrenme rehberinin birbirini tamamlayıcı nitelikte olduğunu görebilirsiniz.  
 
-The tutorial is divided into several sections:
+Bu öğretici birkaç bölüme ayrılmıştır:
 
-* [Setup for the Tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-* [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-* [Completing the Game](#completing-the-game) will teach you **the most common techniques** in React development.
-* [Adding Time Travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+* [Öğretici İçin Kurulum](#oretici-icin-kurulum) bu öğreticiyi takip etmek için size bir **başlangıç noktası** sunar. 
+* [Genel bakış](#genel-bakis) React'ın **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
+* [Oyunun Tamamlanması](#oyunun-tamamlanmasi) React geliştirimindeki **en yaygın teknikleri** aktaracaktır.
+* [Zaman Yolculuğunun Eklenmesi](#zaman-yolculugunun-eklenmesi) React'ın benzersiz özelliklerini ile ilgili **daha derinlemesine** kavramanızı sağlayacaktır.
 
-You don't have to complete all of the sections at once to get the value out of this tutorial. Try to get as far as you can -- even if it's one or two sections.
+Bu öğreticiden yararlanmanız için tüm bölümleri tamamen bitirmek zorunda değilsiniz. Bir-iki bölüm tamamlasanız bile sizin için yararlı olacaktır.
 
-It's fine to copy and paste code as you're following along the tutorial, but we recommend to type it by hand. This will help you develop a muscle memory and a stronger understanding.
+Bu öğreticiyi takip ederken kodları kopyala-yapıştır yaparak denemenizde hiçbir sorun yoktur fakat elle kodlayarak ilerlemenizi tavsiye ederiz. Bu sayede kas hafızanız gelişecek ve React'ı daha güçlü bir şekilde öğrenmiş hale geleceksiniz. 
 
-### What Are We Building? {#what-are-we-building}
+### Ne kodlayacağız? {#ne-kodlayacagiz}
 
-In this tutorial, we'll show how to build an interactive tic-tac-toe game with React.
+Bu öğreticide, React ile bir tic-tac-toe (XOX oyunu) nasıl geliştirilir onu göstereceğiz. 
 
-You can see what we'll be building here: **[Final Result](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**. If the code doesn't make sense to you, or if you are unfamiliar with the code's syntax, don't worry! The goal of this tutorial is to help you understand React and its syntax.
+**[Buradan](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** oyunun son halini görebilirsiniz. Eğer kodlar size karışık geliyorsa veya koda aşina değilseniz endişelenmeyin. Çünkü bu öğreticinin amacı, React'ın ve React'taki kod yapısının anlaşılmasında size yardımcı olmaktır. 
 
-We recommend that you check out the tic-tac-toe game before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and is updated as the game progresses.
+Bu öğreticiye başlamadan önce yukarıda belirttiğimiz tic-tac-toe oyununu incelemenizi tavsiye ediyoruz. Oyunu oynadığınızda farkedeceğiniz gibi oyun tahtasının sağında numaralandırılmış bir liste bulunmaktadır. Bu liste size, oyunda oluşan hamlelerin bir geçmişini sunar ve oyunda ilerledikçe liste de otomatik olarak güncellenir.
 
-You can close the tic-tac-toe game once you're familiar with it. We'll be starting from a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
+tic-tac-toe oyununu inceledikten sonra kapatabilirsiniz. Bu öğreticide daha basit bir şablondan başlayacağız. Sonraki adımımızda oyunu geliştirmek için gereken ortamın kurulumuna değineceğiz.
 
-### Prerequisites {#prerequisites}
+### Ön gereksinimler {#on-gereksinimler}
 
-We'll assume that you have some familiarity with HTML and JavaScript, but you should be able to follow along even if you're coming from a different programming language. We'll also assume that you're familiar with programming concepts like functions, objects, arrays, and to a lesser extent, classes.
+Bu öğreticide, HTML ve JavaScript'i az-çok bildiğinizi varsayacağız, fakat herhangi bir programlama dilinden gelmiş olsanız bile aşamaları takip edebiliyor olmalısınız. Ayrıca temel programlama konseptleri olan fonksiyonlar, nesneler, diziler ve daha az oranda da sınıflar hakkında aşina olduğunuzu varsayıyoruz.
 
-If you need to review JavaScript, we recommend reading [this guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript). Note that we're also using some features from ES6 -- a recent version of JavaScript. In this tutorial, we're using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), and [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) statements. You can use the [Babel REPL](babel://es5-syntax-example) to check what ES6 code compiles to.
+Eğer JavaScript hakkında bilgi edinmeniz gerekiyorsa, [bu rehberi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) okumanızı tavsiye ederiz. JavaScript'in en güncel versiyonu olan ES6'dan bazı özellikleri kullanıyoruz. Bu öğreticide de ES6 özelliği olan [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), [`class`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), ve [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ifadelerini kullanıyor olacağız. [Babel REPL](babel://es5-syntax-example)'ı kullanarak ES6 kodunun derlenmiş halini görebilirsiniz.
 
-## Setup for the Tutorial {#setup-for-the-tutorial}
+## Öğretici İçin Kurulum {#ogretici-icin-kurulum}
 
-There are two ways to complete this tutorial: you can either write the code in your browser, or you can set up a local development environment on your computer.
+Bu öğreticiyi tamamlamanın iki yolu bulunmaktadır: kodu tarayıcınızda yazabilir veya bilgisayarınızdaki yerel geliştirim ortamını kurabilirsiniz. 
 
-### Setup Option 1: Write Code in the Browser {#setup-option-1-write-code-in-the-browser}
+### Kurulum Seçeneği 1: Kodu Tarayıcıda Yazma {#kurulum-secenegi-1-kodu-tarayicida-yazma}
 
-This is the quickest way to get started!
+Başlamanız için en kolay yol budur!
 
-First, open this **[Starter Code](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** in a new tab. The new tab should display an empty tic-tac-toe game board and React code. We will be editing the React code in this tutorial.
+Öncelikle, bu **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Yeni sekme boş bir tic-tac-toe oyunu ve React kodu görüntülüyor olacaktır. Bu öğreticide React kodunu düzenliyor olacağız.
 
-You can now skip the second setup option, and go to the [Overview](#overview) section to get an overview of React.
+Bu seçeneği istiyorsanıaz ikinci seçeneği es geçebilir, ve [Genel bakış](#genel-bakis) bölümüne giderekn genel bilgi edinebilirsiniz.
 
-### Setup Option 2: Local Development Environment {#setup-option-2-local-development-environment}
+### Kurulum Seçeneği 2: Yerel Geliştirim Ortamı {#kurulum-secenegi-2-yerel-gelistirim-ortami}
 
-This is completely optional and not required for this tutorial!
+Bu seçenek tamamen isteğe bağlıdır ve bu öğretici için gerekli değildir!
 
 <br>
 
 <details>
 
-<summary><b>Optional: Instructions for following along locally using your preferred text editor</b></summary>
+<summary><b>İsteğe bağlı: Tercih ettiğiniz metin editörünü kullanarak projeyi yerel ortamınızda geliştirmeniz için yönergeler</b></summary>
 
-This setup requires more work but allows you to complete the tutorial using an editor of your choice. Here are the steps to follow:
+Bu kurulum daha fazla çalışmayı gerektirir fakat aynı zamanda favori editörünüzü kullanarak projeyi tamamlamanıza da olanak tanır. İzlenecek adımlar aşağıdaki gibidir:
 
-1. Make sure you have a recent version of [Node.js](https://nodejs.org/en/) installed.
-2. Follow the [installation instructions for Create React App](/docs/create-a-new-react-app.html#create-react-app) to make a new project.
+1. [Node.js](https://nodejs.org/en/)'in güncel versiyonunun yüklü olduğundan emin olunuz.
+2. Yeni bir proje oluşturmak için [Create React App uygulaması kurulum yönergelerini](/docs/create-a-new-react-app.html#create-react-app) takip ediniz.
 
 ```bash
 npx create-react-app my-app
 ```
 
-3. Delete all files in the `src/` folder of the new project 
+3. Yeni projenin `src/` dizininin içerisindeki tüm dosyaları siliniz
 
-> Note:
+> Not:
 >
->**Don't delete the entire `src` folder, just the original source files inside it.** We'll replace the default source files with examples for this project in the next step.
+>**`src` dizininin kendisini silmeyiniz, sadece içerisinde yer alan ve varsayılan olarak gelen kaynak dosyalarını siliniz.** Sonraki adımda oluşan varsayılan dosyaları, bu projenin dosyaları ile değiştireceğiz. 
 
 ```bash
+# Proje dizinindeki src'nin içine gitmek için aşağıdaki komutlar kullanılır:
 cd my-app
 cd src
 
-# If you're using a Mac or Linux:
+# Daha sonra dizin içerisindeki dosyaları silmek içim işletim sistemine göre rm veya del komutu kullanılır.
+# Eğer Mac veya Linux kullanıyorsanız:
 rm -f *
 
-# Or, if you're on Windows:
+# Windows kullanıyorsanız:
 del *
 
 # Then, switch back to the project folder
 cd ..
 ```
 
-4. Add a file named `index.css` in the `src/` folder with [this CSS code](https://codepen.io/gaearon/pen/oWWQNa?editors=0100).
+4. `src/` dizininde `index.css` dosyasını oluşturup [buradaki CSS kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0100) ekleyiniz.
 
-5. Add a file named `index.js` in the `src/` folder with [this JS code](https://codepen.io/gaearon/pen/oWWQNa?editors=0010).
+5. `src/` dizininde `index.js` dosyasını oluşturup [buradaki JS kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010) ekleyiniz.
 
-6. Add these three lines to the top of `index.js` in the `src/` folder:
+6. `src/` dizinindeki `index.js` dosyasını açıp en üste bu 3 satırı ekleyiniz:
 
 ```js
 import React from 'react';
@@ -112,69 +115,69 @@ import ReactDOM from 'react-dom';
 import './index.css';
 ```
 
-Now if you run `npm start` in the project folder and open `http://localhost:3000` in the browser, you should see an empty tic-tac-toe field.
+Artık projeyi çalıştırabilirsiniz. Proje dizininde iken `npm start` yazıp enter'a bastığınızda, tarayıcıda `http://localhost:3000` url'i açılacak ve devamında boş bir tic-tac-toe oyunu görüyor olacaksınız.
 
-We recommend following [these instructions](https://babeljs.io/docs/editors/) to configure syntax highlighting for your editor.
+Metin editörünüzde, kodun renkli halde görüntülenmesini sağlamak için [buradaki yönergeleri](https://babeljs.io/docs/editors/) izlemenizi tavsiye ederiz.
 
 </details>
 
-### Help, I'm Stuck! {#help-im-stuck}
+### Bir Yerde Takıldım, Yardım! {#bir-yerde-takildim-yardim}
 
-If you get stuck, check out the [community support resources](/community/support.html). In particular, [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) is a great way to get help quickly. If you don't receive an answer, or if you remain stuck, please file an issue, and we'll help you out.
+Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınızdan dolayı devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız devamında size yardımıcı olacağız.
 
-## Overview {#overview}
+## Genel Bakış {#genel-bakis}
 
-Now that you're set up, let's get an overview of React!
+Kurulumu tamamladığınıza göre haydi şimdi React'e giriş yapalım!
 
-### What Is React? {#what-is-react}
+### React Nedir? {#react-nedir}
 
-React is a declarative, efficient, and flexible JavaScript library for building user interfaces. It lets you compose complex UIs from small and isolated pieces of code called "components".
+React, kullanıcı arayüzleri oluşturmak için açık, verimli ve esnek bir JavaScript kütüphanesidir. Component (bileşen) denilen küçük ve izole parçalar sayesinde karmaşık arayüz birimlerini oluşturmanıza olanak tanır. 
 
-React has a few different kinds of components, but we'll start with `React.Component` subclasses:
+React'te birkaç tipte component bulunmaktadır. `React.Component` alt sınıflarına değinelim:
 
 ```javascript
-class ShoppingList extends React.Component {
+class AlisverisListesi extends React.Component {
   render() {
     return (
-      <div className="shopping-list">
-        <h1>Shopping List for {this.props.name}</h1>
+      <div className="alisveris-listesi">
+        <h1>{this.props.adi}e ait Alışveriş Listesi</h1>
         <ul>
-          <li>Instagram</li>
-          <li>WhatsApp</li>
-          <li>Oculus</li>
+          <li>Elma</li>
+          <li>Armut</li>
+          <li>Muz</li>
         </ul>
       </div>
     );
   }
 }
 
-// Example usage: <ShoppingList name="Mark" />
+// Örnek kullanım: <AlisverisListesi adi="Mehmet" />
 ```
 
-We'll get to the funny XML-like tags soon. We use components to tell React what we want to see on the screen. When our data changes, React will efficiently update and re-render our components.
+Birazdan üstte kullandığımız XML-tarzı etiketlere değineceğiz. Component'leri kulanarak ekranda görmek istediğimiz arayüz birimlerini React'a belirtmiş oluyoruz. Verilerimiz değiştiği zaman React, etkili bir şekilde component'lerimizi güncelleyecek ve tekrar render edecektir (arayüze işleyecektir). 
 
-Here, ShoppingList is a **React component class**, or **React component type**. A component takes in parameters, called `props` (short for "properties"), and returns a hierarchy of views to display via the `render` method.
+Burada AlisverisListesi için bir **React component sınıfıdır**, veya **React component tipidir** diyebiliriz. Bir component, "properties" (özellikler)'in kısaltması olan `props` adı verilen parametreleri alır, ve `render` metodu aracılığıyla görüntülemek için bir görünüm hiyerarşisi (XML) return eder. 
 
-The `render` method returns a *description* of what you want to see on the screen. React takes the description and displays the result. In particular, `render` returns a **React element**, which is a lightweight description of what to render. Most React developers use a special syntax called "JSX" which makes these structures easier to write. The `<div />` syntax is transformed at build time to `React.createElement('div')`. The example above is equivalent to:
+`render` metodu, ekranda neyi görüntülemek istiyorsanız onunla ilgili bir *tanımlama* return eder. React bu tanımlamayı alır ve görüntüler. Bilhassa `render` metodu, neyi render edeceği ile ilgili bir tanımlama olan **React elemanı** return eder. Birçok React geliştiricisi, bu tanımlamaları kolayca kodlamayı sağlayan ve "JSX" denilen özel bir kod dili kullanır. JSX olan `<div />` içeriği ise derleme zamanında `React.createElement('div')` JavaScript metod çağrısına dönüştürülür. Üstteki örneğin derlenmiş hali aşağıdaki gibidir:
 
 ```javascript
-return React.createElement('div', {className: 'shopping-list'},
-  React.createElement('h1', /* ... h1 children ... */),
-  React.createElement('ul', /* ... ul children ... */)
+return React.createElement('div', {className: 'alisveris-listesi'},
+  React.createElement('h1', /* ... h1 içeriği ... */),
+  React.createElement('ul', /* ... ul içeriği ... */)
 );
 ```
 
-[See full expanded version.](babel://tutorial-expanded-version)
+[Tam hali için tıklayınız.](babel://tutorial-expanded-version)
 
-If you're curious, `createElement()` is described in more detail in the [API reference](/docs/react-api.html#createelement), but we won't be using it in this tutorial. Instead, we will keep using JSX.
+Eğer `createElement()` fonksiyonunu merak ediyorsanız, [API dokümanında](/docs/react-api.html#createelement) daha detaylı şekilde ele alınacaktır, fakat bu öğreticide `createElement()` fonksiyonunu kullanmayacağız. Bunun yerine JSX notasyonunu ele alacağız.
 
-JSX comes with the full power of JavaScript. You can put *any* JavaScript expressions within braces inside JSX. Each React element is a JavaScript object that you can store in a variable or pass around in your program.
+JSX, JavaScript'in bütün gücünü kullanacak şekilde tasarlanmıştır. Bu sayede JSX kodu içerisinde süslü parantezler kullanarak herhangi bir JavaScript ifadesini çalıştırabilirsiniz. Her React elemanı, bir değişkende saklayabileceğiniz veya uygulama içerisinde herhangi bir yere aktarabileceğiniz bir JavaScript nesnesidir.
 
-The `ShoppingList` component above only renders built-in DOM components like `<div />` and `<li />`. But you can compose and render custom React components too. For example, we can now refer to the whole shopping list by writing `<ShoppingList />`. Each React component is encapsulated and can operate independently; this allows you to build complex UIs from simple components.
+Yukarıdaki `AlisverisListesi` component'i, yalnızca `<div />` ve `<li />` gibi yerleşik DOM bileşenlerini render eder. Fakat uygulamanıza özel React component'leri oluşturarak ve birleştirerek bu React component'lerinin de render edilmesini sağlayabilirsiniz. Örneğin sadece `<AlisverisListesi />` yazarak bütün alışveriş listesinin görüntülenmesini sağlayabiliriz. Her React component'i izole edilmiştir ve birbirlerinden bağımsız olarak çalışabilir. Bu sayede basit component'leri bir araya getirerek kompleks kullanıcı arayüzleri oluşturabilirsiniz.
 
-## Inspecting the Starter Code {#inspecting-the-starter-code}
+## Başlangıç Kodunun İncelenmesi {#baslangic-kodunun-incelenmesi}
 
-If you're going to work on the tutorial **in your browser,** open this code in a new tab: **[Starter Code](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)**. If you're going to work on the tutorial **locally,** instead open `src/index.js` in your project folder (you have already touched this file during the [setup](#setup-option-2-local-development-environment)).
+Eğer bu öğreticiyi **tarayıcınızda** takip edecekseniz, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip edecekseniz, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız (bu dosyaya daha önce [kurulum](#setup-option-2-local-development-environment) aşamasında değinmiştik). 
 
 This Starter Code is the base of what we're building. We've provided the CSS styling so that you only need to focus on learning React and programming the tic-tac-toe game.
 
