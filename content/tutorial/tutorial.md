@@ -228,10 +228,10 @@ Sonrası: Eğer değişiklikleri doğru bir şekilde uyguladıysanız render iş
 
 Tebrikler! Board component'inden Square component'ine "prop ile veri geçirmeyi" başardınız. React uygulamalarında prop'ların ebeveyn component'ten çocuk component'e geçişi sayesinde veri akışının oluşması sağlanır.
 
-### Making an Interactive Component {#making-an-interactive-component}
+### Etkileşimli bir Component Yapımı {#etkilesimli-bir-component-yapimi}
 
-Let's fill the Square component with an "X" when we click it. 
-First, change the button tag that is returned from the Square component's `render()` function to this:
+Haydi şimdi Square component'ine tıkladığımızda içini "X" ile dolduralım. 
+Öncelikle, Square component'inin `render()` fonksiyonundan dönen button etiketini bu şekilde değiştirelim:
 
 ```javascript{4}
 class Square extends React.Component {
@@ -245,11 +245,11 @@ class Square extends React.Component {
 }
 ```
 
-If we click on a Square now, we should get an alert in our browser.
+Şimdi herhangi bir kareye tıkladığımızda tarayıcıda bir alert mesajı görüntülenecektir. 
 
->Note
+>Not:
 >
->To save typing and avoid the [confusing behavior of `this`](https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/), we will use the [arrow function syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) for event handlers here and further below:
+>Daha az kod yazmak ve [`this`'in kafa karıştırıcı kullanımından](https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) kaçınmak için, event handler gibi kısımlarda [arrow function syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)'ını kullanacağız:
 >
 >```javascript{4}
 >class Square extends React.Component {
@@ -263,13 +263,13 @@ If we click on a Square now, we should get an alert in our browser.
 >}
 >```
 >
->Notice how with `onClick={() => alert('click')}`, we're passing *a function* as the `onClick` prop. It only fires after a click. Forgetting `() =>` and writing `onClick={alert('click')}` is a common mistake, and would fire the alert every time the component re-renders.
+>Farkedeceğiniz üzere, `onClick={() => alert('click')}` kısmında butonun `onClick` prop'una *bir fonksiyon* ataması gerçekleştiriyoruz. Bu fonksiyon sadece butona tıkladığımızda çalışıyor. Genellikle bir yazılımcı hatası olarak parantezli ok `() =>` ifadesinin unutulması yerine direkt olarak `onClick={alert('click')}` ifadesinin yazılması gerçekleşebiliyor. Bu durumda tıklama anında gerçekleşmesi istenen olay yanlış bir şekilde çalışarak, component tekrar render edildiğinde gerçekleşmiş oluyor.
 
-As a next step, we want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use **state**.
+Sonraki adım olarak, Square component'inin tıklandığı zamanı "hatırlamasını" ve "X" işareti ile doldurulmasını isteyeceğiz. Bir şeyleri "hatırlamak" için component'ler **state**'i (durum) kullanırlar.
 
-React components can have state by setting `this.state` in their constructors. `this.state` should be considered as private to a React component that it's defined in. Let's store the current value of the Square in `this.state`, and change it when the Square is clicked.
+React component'leri constructor (yapıcı) fonksiyonlarında `this.state`'e atama yaparak bir state'e sahip olurlar. React component'i içerisinde tanımlanan `this.state` özelliğinin erişim belirleyicisi private olarak düşünülmelidir. Şimdi Square'in mevcut değerini `this.state` içerisinde saklayalım ve Square'e tıklandığında değiştirelim. 
 
-First, we'll add a constructor to the class to initialize the state:
+Öncelikle class'a bir constructor ekleyeceğiz ve içerisinde state'in başlangıç değerlerini oluşturacağız:
 
 ```javascript{2-7}
 class Square extends React.Component {
@@ -290,17 +290,17 @@ class Square extends React.Component {
 }
 ```
 
->Note
+>Not:
 >
->In [JavaScript classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), you need to always call `super` when defining the constructor of a subclass. All React component classes that have a `constructor` should start it with a `super(props)` call.
+>[JavaScript class'larında](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), alt sınıfın constructor'ını oluştururken her zaman `super` fonksiyonunu çağırmanız gerekmektedir. Her bir React component class'ı içerisinde `super(props)` çağrısı ile başlayan bir constructor barındırmalıdır.
 
-Now we'll change the Square's `render` method to display the current state's value when clicked:
+Şimdi Square'e tıklandığında state'in mevcut değerinin görüntülenmesi için Square'in `render` metodunu değiştireceğiz:
 
-* Replace `this.props.value` with `this.state.value` inside the `<button>` tag.
-* Replace the `() => alert()` event handler with `() => this.setState({value: 'X'})`.
-* Put the `className` and `onClick` props on separate lines for better readability.
+* `<button>` etiketi içerisinde yer alan `this.props.value` yerine `this.state.value` yazalım.
+* `() => alert()` event handler'ını `() => this.setState({value: 'X'})` ile değiştirelim.
+* Okunabilirliği arttırmak için `className` ve `onClick` prop'larını ayrı satırlara alalım.
 
-After these changes, the `<button>` tag that is returned by the Square's `render` method looks like this:
+Bu değişikliklerden sonra Square'in `render` metodundan dönen `<button>` etiketi aşağıdaki gibi görüntülenecektir:
 
 ```javascript{12-13,15}
 class Square extends React.Component {
@@ -324,11 +324,11 @@ class Square extends React.Component {
 }
 ```
 
-By calling `this.setState` from an `onClick` handler in the Square's `render` method, we tell React to re-render that Square whenever its `<button>` is clicked. After the update, the Square's `this.state.value` will be `'X'`, so we'll see the `X` on the game board. If you click on any Square, an `X` should show up.
+Square'in `render` metodundaki bir `onClick` metodundan `this.setState`'in çağrılması ile, Square'in `<button>` elemanına her tıklandığında tekrar render edilmesi gerektiğini React'a belirtiyoruz.  Güncelleme sonrasında Square'in `this.state.value` değerine `'X'` ataması gerçekleşiyor, ve bu sayede oyun tahtasında 'X''i görüyoruz. Herhangi bir kareye tıklandığı anda içerisinde 'X' görüntülenecektir.
 
-When you call `setState` in a component, React automatically updates the child components inside of it too.
+Bir component'teki `setState` fonksiyonunu çağırdığınızda, React otomatik olarak içerisindeki çocuk component'leri de güncellemiş oluyor.
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/VbbVLg?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/VbbVLg?editors=0010)**
 
 ### Developer Tools {#developer-tools}
 
