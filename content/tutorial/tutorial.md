@@ -330,22 +330,22 @@ Bir component'teki `setState` fonksiyonunu çağırdığınızda, React otomatik
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/VbbVLg?editors=0010)**
 
-### Developer Tools {#developer-tools}
+### Geliştirici Araçları {#gelistirici-araclari}
 
-The React Devtools extension for [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) lets you inspect a React component tree with your browser's developer tools.
+[Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) ve [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) için React Devtools eklentisi sayesinde herhangi bir React component ağacını, tarayıcınızın geliştirici araçları kısmından görüntüleyebilirsiniz.
 
 <img src="../images/tutorial/devtools.png" alt="React Devtools" style="max-width: 100%">
 
-The React DevTools let you check the props and the state of your React components.
+React DevTools, React component'lerinizin state'ini ve prop'larını kontrol etmenize olanak tanır.
 
-After installing React DevTools, you can right-click on any element on the page, click "Inspect" to open the developer tools, and the React tab will appear as the last tab to the right.
+React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ tıklayarak çıkan menüde "İncele"'yi seçerek geliştirici araçlarını açabilir, ve devamında en sağda yer alan React sekmesinde incelemelerinizi yürütebilirsiniz.
 
-**However, note there are a few extra steps to get it working with CodePen:**
+**Eklentinin CodePen ile çalışabilmesi için harici olarak birkaç adım daha vardır:**
 
-1. Log in or register and confirm your email (required to prevent spam).
-2. Click the "Fork" button.
-3. Click "Change View" and then choose "Debug mode".
-4. In the new tab that opens, the devtools should now have a React tab.
+1. CodePen'e e-posta adresiniz ile giriş yapın veya kaydolunuz (spam'lerin engellenmesi için gereklidir).
+2. "Fork" butonuna basınız.
+3. "Change View"'a tıklayarak devamında "Debug mode"'u seçiniz.
+4. Açılan yeni sekmede, artık Devtools içerisinde React sekmesi yer alacaktır.
 
 ## Completing the Game {#completing-the-game}
 
