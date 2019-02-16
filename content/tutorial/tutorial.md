@@ -351,15 +351,15 @@ React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ
 
 Artık tic-tac-toe oyunumuz için temel kod bloklarına sahibiz. Oyunun tamamlanması için tahta üzerinde "X" ve "O"'ların birbiri ardına yerleştirilmesi ve devamında bir kazananın belirlenmesi için değişiklikler yapmamız gerekiyor. 
 
-### Lifting State Up {#lifting-state-up}
+### State'in Ebeveyn Component'e Taşınması {#state-in-ebeveyn-componente-tasinmasi}
 
-Currently, each Square component maintains the game's state. To check for a winner, we'll maintain the value of each of the 9 squares in one location.
+Şu an her bir Square component'i oyunun state'ini değiştirebiliyor. Kazananı belirleyebilmemiz için her bir 9 square'in değerine ihtiyacımız var.
 
-We may think that Board should just ask each Square for the Square's state. Although this approach is possible in React, we discourage it because the code becomes difficult to understand, susceptible to bugs, and hard to refactor. Instead, the best approach is to store the game's state in the parent Board component instead of in each Square. The Board component can tell each Square what to display by passing a prop, [just like we did when we passed a number to each Square](#passing-data-through-props).
+Board'ın her bir Square'e, kendi state'inin ne olduğunu sorması gerektiğini düşünebiliriz. Bu yöntem her ne kadar React'te uygulanabilir olsa da yapmanızı tavsiye etmiyoruz. Çünkü bu şekilde kod anlaşılabilirlikten uzak hale gelecek, hataların oluşmasına daha müsait olacak ve kodu refactor etmek istediğimizde bize çok daha büyük zorluklar çıkaracaktır. Bu nedenle, her bir Square'de kendi state'inin tutulmasının yerine, ebeveyn olan Board component'inde oyunun tüm state'ini tutmak en iyi yaklaşımdır. Bunun sonucunda Board component'i, her bir Square'e neyi göstermesi gerektiğini prop'lar aracılığıyla aktarır [daha önce her bir Square'e bir sayı atadığımız gibi](#prop-araciligiyla-veri-aktarimi).
 
-**To collect data from multiple children, or to have two child components communicate with each other, you need to declare the shared state in their parent component instead. The parent component can pass the state back down to the children by using props; this keeps the child components in sync with each other and with the parent component.**
+**Birçok çocuk component'ten verilerin toplanması için veya iki çocuğun birbirleri arasında iletişim kurabilmesi için ebeveyn component'te paylaşımlı bir state oluşturmanız gerekmektedir. Ebeveyn component, prop'lar aracılığıyla state'ini çocuklara aktarabilir. Bu sayede çocuk component'ler hem birbirleri arasında hem de ebeveyn ile senkronize hale gelirler.**
 
-Lifting state into a parent component is common when React components are refactored -- let's take this opportunity to try it out. We'll add a constructor to the Board and set the Board's initial state to contain an array with 9 nulls. These 9 nulls correspond to the 9 squares:
+State'in ebeveyn'e taşınması React component'leri refactor edilirken çok yaygın bir durumdur -- haydi şimdi bu fırsatı değerlendirelim ve işe koyulalım. Board'a bir constructor ekleyelim ve Board'ın başlangıç state'ine bir array atayarak içerisinde 9 adet null değerinin bulunmasını sağlayalım. 9 adet null, 9 kareye karşılık gelecektir:
 
 ```javascript{2-7}
 class Board extends React.Component {
@@ -401,7 +401,7 @@ class Board extends React.Component {
 }
 ```
 
-When we fill the board in later, the board will look something like this:
+Daha sonra Board'ı doldurdukça , array içeriği aşağıdaki gibi görünmeye başlayacaktır: 
 
 ```javascript
 [
@@ -411,7 +411,7 @@ When we fill the board in later, the board will look something like this:
 ]
 ```
 
-The Board's `renderSquare` method currently looks like this:
+Board'ın `renderSquare` metodu aşağıdaki gibi görünüyor:
 
 ```javascript
   renderSquare(i) {
@@ -419,9 +419,9 @@ The Board's `renderSquare` method currently looks like this:
   }
 ```
 
-In the beginning, we [passed the `value` prop down](#passing-data-through-props) from the Board to show numbers from 0 to 8 in every Square. In a different previous step, we replaced the numbers with an "X" mark [determined by Square's own state](#making-an-interactive-component). This is why Square currently ignores the `value` prop passed to it by the Board.
+Projeye başladığımızda her bir karede 0'dan 8'e kadar olan sayıları göstermek için Board'daki `value` prop'unu çocuk component'lere [aktarmıştık](#prop-araciligiyla-veri-aktarimi). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square component'inin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square component'i, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
 
-We will now use the prop passing mechanism again. We will modify the Board to instruct each individual Square about its current value (`'X'`, `'O'`, or `null`). We have already defined the `squares` array in the Board's constructor, and we will modify the Board's `renderSquare` method to read from it:
+Şimdi prop aktarma mekanizmasını tekrar kullanacağız. Bunun için her bir Square'e kendi mevcut değerini (`'X'`, `'O'`, or `null`) atamak için Board component'inde değişiklik yapalım. Board'un constructor'ında halihazırda tanımladığımız bir `squares` array'i bulunuyor. Board'un `renderSquare` metodunu, bu array'den verileri alacak şekilde değiştirelim: 
 
 ```javascript{2}
   renderSquare(i) {
@@ -429,13 +429,13 @@ We will now use the prop passing mechanism again. We will modify the Board to in
   }
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/gWWQPY?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/gWWQPY?editors=0010)**
 
-Each Square will now receive a `value` prop that will either be `'X'`, `'O'`, or `null` for empty squares.
+Artık her bir Square component'i `value` prop'unu alacak ve 'X', 'O' veya boş square'ler için `null` değerini edinecektir. 
 
-Next, we need to change what happens when a Square is clicked. The Board component now maintains which squares are filled. We need to create a way for the Square to update the Board's state. Since state is considered to be private to a component that defines it, we cannot update the Board's state directly from Square.
+Şimdi Square'e tıklandığında ne olacağona karar vermemiz gerekiyor. Board component'i artık hangi square'in doldurulacağına karar verebildiğine göre Square'e tıklandığında Board component'inin state'inin güncellenmesini sağlamalıyız. State her bir component'e private olduğundan dolayı Square üzerinden direkt olarak Board'un state'ini değiştiremeyiz. 
 
-To maintain the Board's state's privacy, we'll pass down a function from the Board to the Square. This function will get called when a Square is clicked. We'll change the `renderSquare` method in Board to:
+Board'un state'inin gizliliğini korumak için, Board'dan Square'e bir fonksiyon aktarmamız gerekiyor. Square'e her tıklama anında bu fonksiyonun otomatik olarak çağrısı gerçekleşecektir. Şimdi Board'un `renderSquare` metodunu aşağıdaki şekilde değiştirelim:
 
 ```javascript{5}
   renderSquare(i) {
@@ -448,15 +448,15 @@ To maintain the Board's state's privacy, we'll pass down a function from the Boa
   }
 ```
 
->Note
+>Not
 >
->We split the returned element into multiple lines for readability, and added parentheses so that JavaScript doesn't insert a semicolon after `return` and break our code.
+>Kodun okunabilirliği için geri dönüş elemanını birçok satıra böldük ve parantezler ekledik. Bu sayede JavaScript, `return`'den sonra otomatik olarak bir noktalı virgül eklemeyecek ve bundan dolayı kodun bozulması engellenmiş hale gelecektir.
 
-Now we're passing down two props from Board to Square: `value` and `onClick`. The `onClick` prop is a function that Square can call when clicked. We'll make the following changes to Square:
+Artık Board'dan Square'e, `value` ve `onClick` olmak üzere iki tane prop gönderiyoruz. Square'e tıklandığında ise prop olarak gelen `onClick` fonksiyonu çağrılmasına ihtiyacımız var. Bunun için Square'e aşağıdaki değişiklikleri uygulamamız gerekiyor:
 
-* Replace `this.state.value` with `this.props.value` in Square's `render` method
-* Replace `this.setState()` with `this.props.onClick()` in Square's `render` method
-* Delete the `constructor` from Square because Square no longer keeps track of the game's state
+* Square'in `render` metodu içerisinde yer alan `this.state.value` yerine `this.props.value` yazınız.
+* Yine Square'in `render` metodundaki `this.setState()` yerine `this.props.onClick()` yazınız.
+* Square artık oyunun state'ini değiştirmeyeceği için, Square'in `constructor` metodunu siliniz.
 
 After these changes, the Square component looks like this:
 
@@ -475,19 +475,19 @@ class Square extends React.Component {
 }
 ```
 
-When a Square is clicked, the `onClick` function provided by the Board is called. Here's a review of how this is achieved:
+Artık Square'e tıklandığında, Board tarafından aktarılan `onClick` fonksiyonu çağrılacaktır. Here's a review of how this is achieved:
 
-1. The `onClick` prop on the built-in DOM `<button>` component tells React to set up a click event listener.
-2. When the button is clicked, React will call the `onClick` event handler that is defined in Square's `render()` method.
-3. This event handler calls `this.props.onClick()`. The Square's `onClick` prop was specified by the Board.
-4. Since the Board passed `onClick={() => this.handleClick(i)}` to Square, the Square calls `this.handleClick(i)` when clicked.
-5. We have not defined the `handleClick()` method yet, so our code crashes.
+1. HTML'de varsayılan olan `<button>` component'inin `onClick` prop'u React'e, tıklama olayını oluşturmasını söyler.
+2. Butona tıklandığında React, Square'in `render()` metodunda tanımlanan `onClick` fonksiyonunu çalıştırır.
+3. Bu fonksiyon ise, `this.props.onClick()` çağrısını gerçekleştirir. Square'in `onClick` prop'u, Board tarafından kendisine aktarılmıştır.
+4. Board, Square'e `onClick={() => this.handleClick(i)}` kodunu aktardığı için, Square'e tıklandığında Board'un `this.handleClick(i)` metodu çağrılır.
+5. Şu an `handleClick()` metodunu tanımlamadığımız için kodumuz hata verecektir.
 
->Note
+>Not
 >
->The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. We could name the Square's `onClick` prop or Board's `handleClick` method differently. In React, however, it is a convention to use `on[Event]` names for props which represent events and `handle[Event]` for the methods which handle the events.
+>DOM'daki `<button>` elemanı varsayılan component olarak geldiği için, `onClick` fonksiyonu, React için özel bir anlam ihtiva eder. Fakat Square gibi custom component'lerde, prop isimlendirmesi size kalmıştır. Bu nedenle Square'in `onClick` prop'unu veya Board'un `handleClick` metodunu daha farklı şekilde isimlendirebilirsiniz. Ancak React'teki isimlendirme kuralına uymak gereklidir. Bu kural şu şekildedir: olayları temsil eden prop'lar için `on[Olay]`, olayları handle eden metodlar için ise `handle[Olay]` ifadeleri kullanılır. 
 
-When we try to click a Square, we should get an error because we haven't defined `handleClick` yet. We'll now add `handleClick` to the Board class:
+Square'e tıkladığımızda, `handleClick`'i tanımlamadığımız için hata aldığımızdan bahsetmiştik. Gelin şimdi Board sınıfına `handleClick`'i ekleyelim:
 
 ```javascript{9-13}
 class Board extends React.Component {
@@ -540,13 +540,13 @@ class Board extends React.Component {
 }
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/ybbQJX?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/ybbQJX?editors=0010)**
 
-After these changes, we're again able to click on the Squares to fill them. However, now the state is stored in the Board component instead of the individual Square components. When the Board's state changes, the Square components re-render automatically. Keeping the state of all squares in the Board component will allow it to determine the winner in the future.
+Bu değişikliklerden sonra, oyundaki karelere tıkladığımızda içeriğinin "X" ile doluyor olduğunu tekrar görebiliyoruz. Fakat, artık state'in her bir Square'de ayrı ayrı yer alması yerine Board component'inde barındırılmış hale geldi. Bu sayede Board'daki state değiştiğinde tüm Square component'leri otomatik olarak tekrar render edilecektir. Bunun yanında, bütün Square'lerin state'inin Board component'inde tutulması, gelecekte kazananı belirlememiz için önemli bir yol teşkil edecektir.
 
-Since the Square components no longer maintain state, the Square components receive values from the Board component and inform the Board component when they're clicked. In React terms, the Square components are now **controlled components**. The Board has full control over them.
+Square component'leri artık state'i direkt olarak değiştirmediği için, değerleri Board component'inden alıyorlar ve tıklandıklarında Board'u haberdar ediyorlar. React terminolojisinde Square component'leri için **controlled components** (kontrollü bileşenler) adı verilir. Çünkü tüm kontrol Board component'inin elindedir. 
 
-Note how in `handleClick`, we call `.slice()` to create a copy of the `squares` array to modify instead of modifying the existing array. We will explain why we create a copy of the `squares` array in the next section.
+Fark ettiyseniz `handleClick` fonksiyonu içerisinde, halihazırda var olan `squares` array'ini direkt olarak değiştirmek yerine, `.slice()`'ı kullanarak bir kopyasını oluşturduk ve bu kopyayı değiştirdik. Sonraki bölümde neden `squares` array'inin bir kopyasını oluşturduğumuza değineceğiz. 
 
 ### Why Immutability Is Important {#why-immutability-is-important}
 
