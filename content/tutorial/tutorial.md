@@ -347,9 +347,9 @@ React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ
 3. "Change View"'a tıklayarak devamında "Debug mode"'u seçiniz.
 4. Açılan yeni sekmede, artık Devtools içerisinde React sekmesi yer alacaktır.
 
-## Completing the Game {#completing-the-game}
+## Oyunun Tamamlanması {#oyunun-tamamlanmasi}
 
-We now have the basic building blocks for our tic-tac-toe game. To have a complete game, we now need to alternate placing "X"s and "O"s on the board, and we need a way to determine a winner.
+Artık tic-tac-toe oyunumuz için temel kod bloklarına sahibiz. Oyunun tamamlanması için tahta üzerinde "X" ve "O"'ların birbiri ardına yerleştirilmesi ve devamında bir kazananın belirlenmesi için değişiklikler yapmamız gerekiyor. 
 
 ### Lifting State Up {#lifting-state-up}
 
