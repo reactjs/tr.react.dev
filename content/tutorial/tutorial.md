@@ -777,9 +777,9 @@ Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstü
 
 Tebrikler! Artık çalışan bir tic-tac-toe oyununuz var. Ayrıca bu kısma kadar React'in temel özelliklerini de öğrenmiş durumdasınız. Bu nedenle aslında gerçek kazanan *sizsiniz*.
 
-## Adding Time Travel {#adding-time-travel}
+## Zamanda Yolculuğun eklenmesi {#adding-time-travel}
 
-As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
+Son çalışma olarak oyunda önceki hamlelere gitmeyi sağayacak "zamanda geriye gitme" özelliğini ekleyelim.
 
 ### Storing a History of Moves {#storing-a-history-of-moves}
 
