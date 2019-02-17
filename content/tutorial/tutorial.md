@@ -554,25 +554,25 @@ Fark ettiyseniz `handleClick` fonksiyonu içerisinde, halihazırda var olan `squ
 
 Genellikle verinin değiştirilmesi için iki farklı yaklaşım vardır. İlk yaklaşımda, verinin değerleri direkt olarak değiştirilerek ilgili verinin değişmesi (mutate) sağlanır. İkinci yaklaşımda ise, ilgili veri kopyalanarak, kopya veri üzerinde istenen değişiklikler gerçekleştirildikten sonra kopya verinin, ana veriye atanması işlemidir.
 
-#### Data Change with Mutation {#data-change-with-mutation}
+#### Mutasyon Kullanılarak Verinin Değiştirilmesi {#data-change-with-mutation}
 ```javascript
-var player = {score: 1, name: 'Jeff'};
-player.score = 2;
-// Now player is {score: 2, name: 'Jeff'}
+var oyuncu = {skor: 1, adi: 'Zafer'};
+oyuncu.skor = 2;
+// Oyuncu nesnesinin son hali: {score: 2, name: 'Jeff'}
 ```
 
-#### Data Change without Mutation {#data-change-without-mutation}
+#### Mutasyon Kullanılmadan Verinin Değiştirilmesi {#data-change-without-mutation}
 ```javascript
-var player = {score: 1, name: 'Jeff'};
+var oyuncu = {skor: 1, adi: 'Zafer'};
 
-var newPlayer = Object.assign({}, player, {score: 2});
-// Now player is unchanged, but newPlayer is {score: 2, name: 'Jeff'}
+var yeniOyuncu = Object.assign({}, oyuncu, {skor: 2});
+// Şu an oyuncu nesnesi değişmedi, fakat oyuncu nesnesinden yeniOyuncu nesnesi oluşturuldu: {skor: 2, adi: 'Zafer'}
 
-// Or if you are using object spread syntax proposal, you can write:
-// var newPlayer = {...player, score: 2};
+// Object spread syntax proposal'ı kullanarak aşağıdaki gibi de yazabilirsiniz:
+// var yeniOyuncu = {...oyuncu, skor: 2};
 ```
 
-The end result is the same but by not mutating (or changing the underlying data) directly, we gain several benefits described below.
+Sonuç iki durumda da aynı oldu ama direkt olarak veriyi değiştirmeden kopya üzerinde değişiklikler yapmanın aşağıdaki gibi birçok yararı vardır. 
 
 #### Complex Features Become Simple {#complex-features-become-simple}
 
