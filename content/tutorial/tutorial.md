@@ -616,11 +616,11 @@ Kodda iki yerde `this.props` yerine `props` terimini kullandık.
 >
 >Square'i, fonksiyon component olarak değiştirerek aynı zamanda uzun olan `onClick={() => this.props.onClick()}` kod parçasını, `onClick={props.onClick}` şeklinde yazarak daha kısa hale getirmiş olduk (her iki taraftaki parantezlerin de gittiğine dikkat ediniz). Sınıf component'inde gerçek `this` değerine ulaşmak için arrow (ok) fonksiyonu kullanmıştık. Bunun tersine fonksiyon component'lerinde `this` ile uğraşmanıza gerek yoktur.
 
-### Taking Turns {#taking-turns}
+### Hamle Sırası Değişikliği {#taking-turns}
 
-We now need to fix an obvious defect in our tic-tac-toe game: the "O"s cannot be marked on the board.
+Şimdi tic-tac-toe oyunumuzdaki hatayı çözmemiz gerekiyor. Oyunun son hali ile sadece "X" eklenebiliyor ama "O" eklenemiyor.
 
-We'll set the first move to be "X" by default. We can set this default by modifying the initial state in our Board constructor:
+Oyuna varsayılan olarak "X" başlıyor. X'in ilk başlayıp/başlamayacağını Board'un constructor'ındaki başlangıç state'inde belirleyebiliriz:
 
 ```javascript{6}
 class Board extends React.Component {
@@ -633,7 +633,7 @@ class Board extends React.Component {
   }
 ```
 
-Each time a player moves, `xIsNext` (a boolean) will be flipped to determine which player goes next and the game's state will be saved. We'll update the Board's `handleClick` function to flip the value of `xIsNext`:
+Herhangi bir oyuncu hamlesini yaptığında `xIsNext` (xSonrakiElemanMı) boolean değişkeninin tersini alarak hangi oyuncunun sonraki hamleyi yapacağını belirleyebilir ve oyunun state'inde bunu kaydedebiliriz. Board'un `handleClick` fonksiyonunu, `xIsNext` değişkeninin zıttını dönüştürecek şekilde ilgili değişikliği yapalım:
 
 ```javascript{3,6}
   handleClick(i) {
@@ -646,17 +646,17 @@ Each time a player moves, `xIsNext` (a boolean) will be flipped to determine whi
   }
 ```
 
-With this change, "X"s and "O"s can take turns. Let's also change the "status" text in Board's `render` so that it displays which player has the next turn:
+Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar. Ayrıca oyunda sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için Board'un, `render` metodunda "status" değişkenini oluşturabilirz:
 
 ```javascript{2}
   render() {
     const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
-      // the rest has not changed
+      // Kalan kısımlar değişmedi
 ```
 
-After applying these changes, you should have this Board component:
+Bu değişikliklerden sonra Board component'inin son hali aşağıdaki gibi olacaktır:
 
 ```javascript{6,11-16,29}
 class Board extends React.Component {
@@ -713,7 +713,7 @@ class Board extends React.Component {
 }
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/KmmrBy?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/KmmrBy?editors=0010)**
 
 ### Declaring a Winner {#declaring-a-winner}
 
