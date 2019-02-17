@@ -781,17 +781,17 @@ Tebrikler! Artık çalışan bir tic-tac-toe oyununuz var. Ayrıca bu kısma kad
 
 Son çalışma olarak oyunda önceki hamlelere gitmeyi sağayacak "zamanda geriye gitme" özelliğini ekleyelim.
 
-### Storing a History of Moves {#storing-a-history-of-moves}
+### Hamlelerin Geçmişinin Saklanması {#storing-a-history-of-moves}
 
-If we mutated the `squares` array, implementing time travel would be very difficult.
+Eğer `squares` array'ine direkt olarak elle müdahale ederek değiştirseydik, zaman yolculuğu özelliğini geliştirmemiz daha zor olurdu.
 
-However, we used `slice()` to create a new copy of the `squares` array after every move, and [treated it as immutable](#why-immutability-is-important). This will allow us to store every past version of the `squares` array, and navigate between the turns that have already happened.
+Ancak, `slice()` fonksiyonu yardımıyla her hamleden sonra `squares` array'inin kopyasını alarak [immutable olarak değiştirilmesini sağladık](#why-immutability-is-important). Bu durum bize, `squares` array'inin geçmişteki her halinin kaydedebilmemize, ve halihazırda oluşan hamleler arasında gezinebilmemize imkan sağlamış oldu.
 
-We'll store the past `squares` arrays in another array called `history`. The `history` array represents all board states, from the first to the last move, and has a shape like this:
+`squares` array'inin geçmiş hallerini tutabilmek için `history` adında bir array oluşturabiliriz. `history` array'i, oyundaki ilk hamleden son hamleye kadar oyun tahtasının tüm durumlarını aşağıdaki gibi tutuyor olacaktır: 
 
 ```javascript
 history = [
-  // Before first move
+  // İlk hamleden öncesi
   {
     squares: [
       null, null, null,
@@ -799,7 +799,7 @@ history = [
       null, null, null,
     ]
   },
-  // After first move
+  // İlk hamleden sonrası
   {
     squares: [
       null, null, null,
@@ -807,7 +807,7 @@ history = [
       null, null, null,
     ]
   },
-  // After second move
+  // İkinci hamleden sonrası
   {
     squares: [
       null, null, null,
@@ -819,7 +819,7 @@ history = [
 ]
 ```
 
-Now we need to decide which component should own the `history` state.
+Artık, hangi component'in state'inin `history` sahip olması gerektiğine karar vermemiz gerekiyor.
 
 ### Lifting State Up, Again {#lifting-state-up-again}
 
