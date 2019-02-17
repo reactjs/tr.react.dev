@@ -15,7 +15,7 @@ redirect_from:
 
 Bu öğretici, herhangi bir React bilginizin olmadığını varsayar.
 
-## Öğreticiye Başlamadan Önce {#ogreticiye-baslamadan-once}
+## Öğreticiye Başlamadan Önce {#before-we-start-the-tutorial}
 
 Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun yapmadığınızdan dolayı bu öğreticiyi atlamak istiyor olabilirsiniz -- ama bir şans vermeniz iyi olacaktır.** Zira bu öğreticide edineceğiniz teknikler herhangi bir React uygulaması geliştirmek için temel niteliğindedir, ve bu temeller üzerinde uzmanlaşmak React'ı daha derinlemesine öğrenmenizi sağlayacaktır.
 
@@ -26,15 +26,15 @@ Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun yapmadığınızdan d
 Bu öğretici birkaç bölüme ayrılmıştır:
 
 * [Öğretici İçin Kurulum](#oretici-icin-kurulum) bu öğreticiyi takip etmek için size bir **başlangıç noktası** sunar. 
-* [Genel bakış](#genel-bakis) React'ın **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
-* [Oyunun Tamamlanması](#oyunun-tamamlanmasi) React geliştirimindeki **en yaygın teknikleri** aktaracaktır.
+* [Genel bakış](#overview) React'ın **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
+* [Oyunun Tamamlanması](#completing-the-game) React geliştirimindeki **en yaygın teknikleri** aktaracaktır.
 * [Zaman Yolculuğunun Eklenmesi](#zaman-yolculugunun-eklenmesi) React'ın benzersiz özelliklerini ile ilgili **daha derinlemesine** kavramanızı sağlayacaktır.
 
 Bu öğreticiden yararlanmanız için tüm bölümleri tamamen bitirmek zorunda değilsiniz. Bir-iki bölüm tamamlasanız bile sizin için yararlı olacaktır.
 
 Bu öğreticiyi takip ederken kodları kopyala-yapıştır yaparak denemenizde hiçbir sorun yoktur fakat elle kodlayarak ilerlemenizi tavsiye ederiz. Bu sayede kas hafızanız gelişecek ve React'ı daha güçlü bir şekilde öğrenmiş hale geleceksiniz. 
 
-### Ne kodlayacağız? {#ne-kodlayacagiz}
+### Ne kodlayacağız? {#what-are-we-building}
 
 Bu öğreticide, React ile bir tic-tac-toe (XOX oyunu) nasıl geliştirilir onu göstereceğiz. 
 
@@ -44,25 +44,25 @@ Bu öğreticiye başlamadan önce yukarıda belirttiğimiz tic-tac-toe oyununu i
 
 tic-tac-toe oyununu inceledikten sonra kapatabilirsiniz. Bu öğreticide daha basit bir şablondan başlayacağız. Sonraki adımımızda oyunu geliştirmek için gereken ortamın kurulumuna değineceğiz.
 
-### Ön gereksinimler {#on-gereksinimler}
+### Ön gereksinimler {#prerequisites}
 
 Bu öğreticide, HTML ve JavaScript'i az-çok bildiğinizi varsayacağız, fakat herhangi bir programlama dilinden gelmiş olsanız bile aşamaları takip edebiliyor olmalısınız. Ayrıca temel programlama konseptleri olan fonksiyonlar, nesneler, diziler ve daha az oranda da sınıflar hakkında aşina olduğunuzu varsayıyoruz.
 
 Eğer JavaScript hakkında bilgi edinmeniz gerekiyorsa, [bu rehberi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) okumanızı tavsiye ederiz. JavaScript'in en güncel versiyonu olan ES6'dan bazı özellikleri kullanıyoruz. Bu öğreticide de ES6 özelliği olan [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), [`class`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), ve [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ifadelerini kullanıyor olacağız. [Babel REPL](babel://es5-syntax-example)'ı kullanarak ES6 kodunun derlenmiş halini görebilirsiniz.
 
-## Öğretici İçin Kurulum {#ogretici-icin-kurulum}
+## Öğretici İçin Kurulum {#setup-for-the-tutorial}
 
 Bu öğreticiyi tamamlamanın iki yolu bulunmaktadır: kodu tarayıcınızda yazabilir veya bilgisayarınızdaki yerel geliştirim ortamını kurabilirsiniz. 
 
-### Kurulum Seçeneği 1: Kodu Tarayıcıda Yazma {#kurulum-secenegi-1-kodu-tarayicida-yazma}
+### Kurulum Seçeneği 1: Kodu Tarayıcıda Yazma {#setup-option-1-write-code-in-the-browser}
 
 Başlamanız için en kolay yol budur!
 
 Öncelikle, bu **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Yeni sekme boş bir tic-tac-toe oyunu ve React kodu görüntülüyor olacaktır. Bu öğreticide React kodunu düzenliyor olacağız.
 
-Bu seçeneği istiyorsanıaz ikinci seçeneği es geçebilir, ve [Genel bakış](#genel-bakis) bölümüne giderekn genel bilgi edinebilirsiniz.
+Bu seçeneği istiyorsanıaz ikinci seçeneği es geçebilir, ve [Genel bakış](#overview) bölümüne giderekn genel bilgi edinebilirsiniz.
 
-### Kurulum Seçeneği 2: Yerel Geliştirim Ortamı {#kurulum-secenegi-2-yerel-gelistirim-ortami}
+### Kurulum Seçeneği 2: Yerel Geliştirim Ortamı {#setup-option-2-local-development-environment}
 
 Bu seçenek tamamen isteğe bağlıdır ve bu öğretici için gerekli değildir!
 
@@ -121,15 +121,15 @@ Metin editörünüzde, kodun renkli halde görüntülenmesini sağlamak için [b
 
 </details>
 
-### Bir Yerde Takıldım, Yardım! {#bir-yerde-takildim-yardim}
+### Bir Yerde Takıldım, Yardım! {#help-im-stuck}
 
 Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınızdan dolayı devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız devamında size yardımıcı olacağız.
 
-## Genel Bakış {#genel-bakis}
+## Genel Bakış {#overview}
 
 Kurulumu tamamladığınıza göre haydi şimdi React'e giriş yapalım!
 
-### React Nedir? {#react-nedir}
+### React Nedir? {#what-is-react}
 
 React, kullanıcı arayüzleri oluşturmak için açık, verimli ve esnek bir JavaScript kütüphanesidir. Component (bileşen) denilen küçük ve izole parçalar sayesinde karmaşık arayüz birimlerini oluşturmanıza olanak tanır. 
 
@@ -175,7 +175,7 @@ JSX, JavaScript'in bütün gücünü kullanacak şekilde tasarlanmıştır. Bu s
 
 Yukarıdaki `AlisverisListesi` component'i, yalnızca `<div />` ve `<li />` gibi yerleşik DOM bileşenlerini render eder. Fakat uygulamanıza özel React component'leri oluşturarak ve birleştirerek bu React component'lerinin de render edilmesini sağlayabilirsiniz. Örneğin sadece `<AlisverisListesi />` yazarak bütün alışveriş listesinin görüntülenmesini sağlayabiliriz. Her React component'i izole edilmiştir ve birbirlerinden bağımsız olarak çalışabilir. Bu sayede basit component'leri bir araya getirerek kompleks kullanıcı arayüzleri oluşturabilirsiniz.
 
-## Başlangıç Kodunun İncelenmesi {#baslangic-kodunun-incelenmesi}
+## Başlangıç Kodunun İncelenmesi {#inspecting-the-starter-code}
 
 Eğer bu öğreticiyi **tarayıcınızda** takip edecekseniz, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip edecekseniz, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız (bu dosyaya daha önce [kurulum](#setup-option-2-local-development-environment) aşamasında değinmiştik). 
 
@@ -189,7 +189,7 @@ Kodu incelediğinizde aşağıdaki 3 React component'ini fark edeceksiniz:
 
 Şu an Square component'i yalnızca bir adet `<button>` elemanını, Board ise 9 adet Square component'ini render ediyor. Game component'i ise Board component'ini ve daha sonra değiştireceğimiz bir kısa metni render ediyor. Henüz uygulama içerisinde etkileşimli bir component yer almamaktadır.
 
-### Prop'lar Aracılığıyla Veri Aktarımı {#prop-araciligiyla-veri-aktarimi}
+### Prop'lar Aracılığıyla Veri Aktarımı {#passing-data-through-props}
 
 Şimdi işe koyulalım ve Board component'inden Square component'imize bazı verileri göndermeyi deneyelim.
 
@@ -330,7 +330,7 @@ Bir component'teki `setState` fonksiyonunu çağırdığınızda, React otomatik
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/VbbVLg?editors=0010)**
 
-### Geliştirici Araçları {#gelistirici-araclari}
+### Geliştirici Araçları {#developer-tools}
 
 [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) ve [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) için React Devtools eklentisi sayesinde herhangi bir React component ağacını, tarayıcınızın geliştirici araçları kısmından görüntüleyebilirsiniz.
 
@@ -347,15 +347,15 @@ React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ
 3. "Change View"'a tıklayarak devamında "Debug mode"'u seçiniz.
 4. Açılan yeni sekmede, artık Devtools içerisinde React sekmesi yer alacaktır.
 
-## Oyunun Tamamlanması {#oyunun-tamamlanmasi}
+## Oyunun Tamamlanması {#completing-the-game}
 
 Artık tic-tac-toe oyunumuz için temel kod bloklarına sahibiz. Oyunun tamamlanması için tahta üzerinde "X" ve "O"'ların birbiri ardına yerleştirilmesi ve devamında bir kazananın belirlenmesi için değişiklikler yapmamız gerekiyor. 
 
-### State'in Ebeveyn Component'e Taşınması {#state-in-ebeveyn-componente-tasinmasi}
+### State'in Ebeveyn Component'e Taşınması {#lifting-state-up}
 
 Şu an her bir Square component'i oyunun state'ini değiştirebiliyor. Kazananı belirleyebilmemiz için her bir 9 square'in değerine ihtiyacımız var.
 
-Board'ın her bir Square'e, kendi state'inin ne olduğunu sorması gerektiğini düşünebiliriz. Bu yöntem her ne kadar React'te uygulanabilir olsa da yapmanızı tavsiye etmiyoruz. Çünkü bu şekilde kod anlaşılabilirlikten uzak hale gelecek, hataların oluşmasına daha müsait olacak ve kodu refactor etmek istediğimizde bize çok daha büyük zorluklar çıkaracaktır. Bu nedenle, her bir Square'de kendi state'inin tutulmasının yerine, ebeveyn olan Board component'inde oyunun tüm state'ini tutmak en iyi yaklaşımdır. Bunun sonucunda Board component'i, her bir Square'e neyi göstermesi gerektiğini prop'lar aracılığıyla aktarır [daha önce her bir Square'e bir sayı atadığımız gibi](#prop-araciligiyla-veri-aktarimi).
+Board'ın her bir Square'e, kendi state'inin ne olduğunu sorması gerektiğini düşünebiliriz. Bu yöntem her ne kadar React'te uygulanabilir olsa da yapmanızı tavsiye etmiyoruz. Çünkü bu şekilde kod anlaşılabilirlikten uzak hale gelecek, hataların oluşmasına daha müsait olacak ve kodu refactor etmek istediğimizde bize çok daha büyük zorluklar çıkaracaktır. Bu nedenle, her bir Square'de kendi state'inin tutulmasının yerine, ebeveyn olan Board component'inde oyunun tüm state'ini tutmak en iyi yaklaşımdır. Bunun sonucunda Board component'i, her bir Square'e neyi göstermesi gerektiğini prop'lar aracılığıyla aktarır [daha önce her bir Square'e bir sayı atadığımız gibi](#passing-data-through-props).
 
 **Birçok çocuk component'ten verilerin toplanması için veya iki çocuğun birbirleri arasında iletişim kurabilmesi için ebeveyn component'te paylaşımlı bir state oluşturmanız gerekmektedir. Ebeveyn component, prop'lar aracılığıyla state'ini çocuklara aktarabilir. Bu sayede çocuk component'ler hem birbirleri arasında hem de ebeveyn ile senkronize hale gelirler.**
 
@@ -419,7 +419,7 @@ Board'ın `renderSquare` metodu aşağıdaki gibi görünüyor:
   }
 ```
 
-Projeye başladığımızda her bir karede 0'dan 8'e kadar olan sayıları göstermek için Board'daki `value` prop'unu çocuk component'lere [aktarmıştık](#prop-araciligiyla-veri-aktarimi). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square component'inin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square component'i, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
+Projeye başladığımızda her bir karede 0'dan 8'e kadar olan sayıları göstermek için Board'daki `value` prop'unu çocuk component'lere [aktarmıştık](#passing-data-through-props). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square component'inin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square component'i, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
 
 Şimdi prop aktarma mekanizmasını tekrar kullanacağız. Bunun için her bir Square'e kendi mevcut değerini (`'X'`, `'O'`, or `null`) atamak için Board component'inde değişiklik yapalım. Board'un constructor'ında halihazırda tanımladığımız bir `squares` array'i bulunuyor. Board'un `renderSquare` metodunu, bu array'den verileri alacak şekilde değiştirelim: 
 
@@ -548,7 +548,7 @@ Square component'leri artık state'i direkt olarak değiştirmediği için, değ
 
 Fark ettiyseniz `handleClick` fonksiyonu içerisinde, halihazırda var olan `squares` array'ini direkt olarak değiştirmek yerine, `.slice()`'ı kullanarak bir kopyasını oluşturduk ve bu kopyayı değiştirdik. Sonraki bölümde neden `squares` array'inin bir kopyasını oluşturduğumuza değineceğiz. 
 
-### Neden Immutability Önemlidir {#neden-immutability-onemlidir}
+### Neden Immutability Önemlidir {#why-immutability-is-important}
 
 **Immutability**, anlam olarak **mutate** (değişmek) kelimesinin zıttı olan **değişmezlik** kavramını oluşturmaktadır. Önceki kod örneğinde, mevcut `squares` array'ini değiştirmek yerine array'in `.slice()` metodu ile bir kopyasının oluşturulması gerektiğini önermiştik. Şimdi ise immutability'i ve immutability'i öğrenmenin neden önemli olduğunu tartışacağız.
 
