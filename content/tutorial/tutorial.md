@@ -584,11 +584,11 @@ Mutable nesneler, direkt olarak değiştirilebildikleri için, değişip/değiş
 
 Immutable nesnelerdeki değişikliklerin tespit edilmesi daha kolaydır. Immutable nesne, öncekinden farklı bir değişkene referans edilmişse o halde nesne değişmiştir diyebiliriz.
 
-#### Determining When to Re-render in React {#determining-when-to-re-render-in-react}
+#### Tekrar Render Etme Zamanı Kolayca Belirlenebilir {#determining-when-to-re-render-in-react}
 
-The main benefit of immutability is that it helps you build _pure components_ in React. Immutable data can easily determine if changes have been made which helps to determine when a component requires re-rendering.
+React'te Immutability'nin ana faydası ise, _pure component_'ler (saf/katıksız bileşenler) yapmayı kolaylaştırmasıdır. Immutable veriler, değişiklik yapıldığını kolayca tespit edebilirler. Bu sayede değişiklik olduğunda ilgili component'in tekrar render edilmesine yardımcı olurlar.
 
-You can learn more about `shouldComponentUpdate()` and how you can build *pure components* by reading [Optimizing Performance](/docs/optimizing-performance.html#examples).
+[Performansın iyileştirmesi](/docs/optimizing-performance.html#examples) yazısında  `shouldComponentUpdate()` fonksiyonunun ne olduğunu ve nasıl *pure component*'leri oluşturabileceğiniz hakkında bilgi edinebilirsiniz.
 
 ### Function Components {#function-components}
 
