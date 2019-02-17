@@ -821,13 +821,13 @@ history = [
 
 Artık, hangi component'in state'inin `history` sahip olması gerektiğine karar vermemiz gerekiyor.
 
-### Lifting State Up, Again {#lifting-state-up-again}
+### State'in Ebeveyn Component'e Taşınması (Tekrar) {#lifting-state-up-again}
 
-We'll want the top-level Game component to display a list of past moves. It will need access to the `history` to do that, so we will place the `history` state in the top-level Game component.
+En üst seviyedeki Game component'inin, geçmiş hamlelerin listesini görüntülemesini istiyoruz. Bunun için, Game component'inin `history`'e erişebilmesi gerekiyor. Bunu sağlamanın yolu, `history`'i en üst seviyedeki Game component'ine taşımaktan geçiyor.
 
-Placing the `history` state into the Game component lets us remove the `squares` state from its child Board component. Just like we ["lifted state up"](#lifting-state-up) from the Square component into the Board component, we are now lifting it up from the Board into the top-level Game component. This gives the Game component full control over the Board's data, and lets it instruct the Board to render previous turns from the `history`.
+`history` state'ini, Game component'ine yerleştireceğimiz için, bir alt component olan Board'dan `squares` state'ini çıkarmamız gerekiyor. [lifted state up](#lifting-state-up)'ta Square component'inden Board component'ine yaptığımız gibi, şimdi de Board component'inden Game component'ine taşıma işlemini gerçekleştirmemiz gerekiyor. Bu sayede Game component'i, Board'un verisi üzerinde tamamen kontrolü ele almış olacak ve `history`'deki önceki hamlelerin Board'a işlemesini bildirebilecektir.
 
-First, we'll set up the initial state for the Game component within its constructor:
+Öncelikle, Game component'inin constructor'ında, state'in ilk halini oluşturmamız gerekiyor: 
 
 ```javascript{2-10}
 class Game extends React.Component {
@@ -857,13 +857,13 @@ class Game extends React.Component {
 }
 ```
 
-Next, we'll have the Board component receive `squares` and `onClick` props from the Game component. Since we now have a single click handler in Board for many Squares, we'll need to pass the location of each Square into the `onClick` handler to indicate which Square was clicked. Here are the required steps to transform the Board component:
+Şimdi Game component'inden Board component'ine `squares` array'ini `onClick` event'ini prop'lar aracılığıyla aktarmamız gerekiyor. Birden fazla Square için Board'da sadece bir tane click handler'ı bulunduğundan dolayı, tıklanan square'in hangisi olduğunun belirlenebilmesi için `onClick` handler'ına her bir Square'in konumunu iletmemiz gerekiyor. Bu gereksinimler için Board component'ini aşağıdaki gibi değiştirebilirsiniz: 
 
-* Delete the `constructor` in Board.
-* Replace `this.state.squares[i]` with `this.props.squares[i]` in Board's `renderSquare`.
-* Replace `this.handleClick(i)` with `this.props.onClick(i)` in Board's `renderSquare`.
+* Board'daki `constructor` siliniz.
+* Board'un `renderSquare` metodunda `this.state.squares[i]` yerine `this.props.squares[i]` yazınız.
+* Board'un `renderSquare` metodunda `this.handleClick(i)` yerine `this.props.onClick(i)` yazınız.
 
-The Board component now looks like this:
+Board'un son hali aşağıdaki gibi olmalıdır:
 
 ```javascript{17,18}
 class Board extends React.Component {
@@ -921,7 +921,7 @@ class Board extends React.Component {
 }
 ```
 
-We'll update the Game component's `render` function to use the most recent history entry to determine and display the game's status:
+Şimdi de oyun geçmişindeki son girdiyi kullanarak, oyunun son durumunun belirlenmesi ve görüntülenmesi için, Game component'indeki `render` fonksiyonunu değiştirelim:
 
 ```javascript{2-11,16-19,22}
   render() {
@@ -953,7 +953,7 @@ We'll update the Game component's `render` function to use the most recent histo
   }
 ```
 
-Since the Game component is now rendering the game's status, we can remove the corresponding code from the Board's `render` method. After refactoring, the Board's `render` function looks like this:
+Oyunun durumunu Game component'i render ettiği için, Board'daki `render` metodundan oyunun durumunu ilgilendiren kısımları çıkarabiliriz:
 
 ```js{1-4}
   render() {
@@ -979,7 +979,7 @@ Since the Game component is now rendering the game's status, we can remove the c
   }
 ```
 
-Finally, we need to move the `handleClick` method from the Board component to the Game component. We also need to modify `handleClick` because the Game component's state is structured differently. Within the Game's `handleClick` method, we concatenate new history entries onto `history`.
+Son olarak, Board component'indeki `handleClick` metodunu Game component'ine taşıyacağız. Ayrıca, Game component'i Board'a göre daha farklı oluşturulduğu için `handleClick` metodunu da uygun şekilde değiştirmemiz gerekiyor. Bunun için Game'in `handleClick` metodu içerisinde, oyundaki hamleleri `history` array'ine ekleyeceğiz:
 
 ```javascript{2-4,10-12}
   handleClick(i) {
@@ -999,13 +999,13 @@ Finally, we need to move the `handleClick` method from the Board component to th
   }
 ```
 
->Note
+>Not
 >
->Unlike the array `push()` method you might be more familiar with, the `concat()` method doesn't mutate the original array, so we prefer it.
+>Bir array'e eleman eklemek için genellikle array'in `push()` metodu kullanılır. Fakat `push()`'un aksine `concat()` metodu, orijinal array'i değiştirmez. Bu nedenle immutability'nin sağlanması için `concat()`fonksiyonunun kullanılması önem teşkil etmektedir.
 
-At this point, the Board component only needs the `renderSquare` and `render` methods. The game's state and the `handleClick` method should be in the Game component.
+Geldiğimiz noktada, Board component'i sadece `renderSquare` ve `render` metotlarına ihtiyaç duyuyor. Oyunun durumu ve `handleClick` metodu ise artık Game component'inde yer alıyor.
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/EmmOqJ?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmOqJ?editors=0010)**
 
 ### Showing the Past Moves {#showing-the-past-moves}
 
