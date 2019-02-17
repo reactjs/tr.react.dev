@@ -578,11 +578,11 @@ Sonuç iki durumda da aynı oldu ama direkt olarak veriyi değiştirmeden kopya 
 
 Immutability sayesinde karmaşık özellikleri kodlamak çok daha kolaydır. Bu öğreticinin sonunda, tic-tac-toe oyunundaki hamlelerin geçmişini incelemeyi ve önceki hamlelere geri dönmeyi sağlayan "zaman yolculuğu" özelliğini kodlayacağız.  Bu özellik sadece oyunlarda değil birçok uygulamada ileri ve geri alma işlemlerinin kurgulanması için bir gereksinim teşkil edebilir. Direkt olarak veri mutasyonundan kaçınarak, oyunun önceki versiyonlarını oyun geçmişinde bozmadan tutabilir ve daha sonra, önceki bir versiyona geri dönmeyi sağlayabilirsiniz.
 
-#### Detecting Changes {#detecting-changes}
+#### Değişikliklerin Tespit Edilmesini Kolaylaştırır {#detecting-changes}
 
-Detecting changes in mutable objects is difficult because they are modified directly. This detection requires the mutable object to be compared to previous copies of itself and the entire object tree to be traversed.
+Mutable nesneler, direkt olarak değiştirilebildikleri için, değişip/değişmediklerinin tespit edilmesi güçtür. Değişikliğin tespit edilebilmesi için, nesnenin öneki kopyaları ile kendisinin karşılaştırılması ve bütün nesne ağacı üzerinde gezilmesi gereklidir.
 
-Detecting changes in immutable objects is considerably easier. If the immutable object that is being referenced is different than the previous one, then the object has changed.
+Immutable nesnelerdeki değişikliklerin tespit edilmesi daha kolaydır. Immutable nesne, öncekinden farklı bir değişkene referans edilmişse o halde nesne değişmiştir diyebiliriz.
 
 #### Determining When to Re-render in React {#determining-when-to-re-render-in-react}
 
