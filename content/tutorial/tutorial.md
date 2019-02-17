@@ -548,11 +548,11 @@ Square component'leri artık state'i direkt olarak değiştirmediği için, değ
 
 Fark ettiyseniz `handleClick` fonksiyonu içerisinde, halihazırda var olan `squares` array'ini direkt olarak değiştirmek yerine, `.slice()`'ı kullanarak bir kopyasını oluşturduk ve bu kopyayı değiştirdik. Sonraki bölümde neden `squares` array'inin bir kopyasını oluşturduğumuza değineceğiz. 
 
-### Why Immutability Is Important {#why-immutability-is-important}
+### Neden Immutability Önemlidir {#neden-immutability-onemlidir}
 
-In the previous code example, we suggested that you use the `.slice()` operator to create a copy of the `squares` array to modify instead of modifying the existing array. We'll now discuss immutability and why immutability is important to learn.
+**Immutability**, anlam olarak **mutate** (değişmek) kelimesinin zıttı olan **değişmezlik** kavramını oluşturmaktadır. Önceki kod örneğinde, mevcut `squares` array'ini değiştirmek yerine array'in `.slice()` metodu ile bir kopyasının oluşturulması gerektiğini önermiştik. Şimdi ise immutability'i ve immutability'i öğrenmenin neden önemli olduğunu tartışacağız.
 
-There are generally two approaches to changing data. The first approach is to *mutate* the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes.
+Genellikle verinin değiştirilmesi için iki farklı yaklaşım vardır. İlk yaklaşımda, verinin değerleri direkt olarak değiştirilerek ilgili verinin değişmesi (mutate) sağlanır. İkinci yaklaşımda ise, ilgili veri kopyalanarak, kopya veri üzerinde istenen değişiklikler gerçekleştirildikten sonra kopya verinin, ana veriye atanması işlemidir.
 
 #### Data Change with Mutation {#data-change-with-mutation}
 ```javascript
