@@ -715,9 +715,9 @@ class Board extends React.Component {
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/KmmrBy?editors=0010)**
 
-### Declaring a Winner {#declaring-a-winner}
+### Kazananın Belirlenmesi {#declaring-a-winner}
 
-Now that we show which player's turn is next, we should also show when the game is won and there are no more turns to make. We can determine a winner by adding this helper function to the end of the file:
+Artık sonraki oyuncuyu görüntüleyebiliyoruz. Bundan sonra artık oyunun bitmesi için oyunun kazanıldığını ve artık başka bir hamle kalmadığını göstermemiz gerekiyor. Bunun için, dosyanın sonuna yardımcı bir fonksiyon ekleyerek kazananı belirleyebiliriz:
 
 ```javascript
 function calculateWinner(squares) {
@@ -741,7 +741,7 @@ function calculateWinner(squares) {
 }
 ```
 
-We will call `calculateWinner(squares)` in the Board's `render` function to check if a player has won. If a player has won, we can display text such as "Winner: X" or "Winner: O". We'll replace the `status` declaration in Board's `render` function with this code:
+Board'un `render` fonksiyonunda, `calculateWinner(squares)`'ı çağırarak ilgili oyuncunun kazanma durumunu kontrol edebiliriz. Oyuncu kazandıysa, "Winner: X" veya "Winner: O" gibi kazananı belirten bir metin görüntüleyebiliriz. Şimdi, Board'un `render` fonksiyonunda yer alan `status` değişkenini aşağıdaki gibi değiştirelim:
 
 ```javascript{2-8}
   render() {
@@ -754,10 +754,10 @@ We will call `calculateWinner(squares)` in the Board's `render` function to chec
     }
 
     return (
-      // the rest has not changed
+      // geriye kalan kısımlar değiştirilmedi
 ```
 
-We can now change the Board's `handleClick` function to return early by ignoring a click if someone has won the game or if a Square is already filled:
+Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstüne tekrar işaretleme yapabiliyor. Buna ek olarak oyun kazanıldığı durumda da tekrar hamle yapmayı engellemeliyiz. Bunun için Board'un `handleClick` fonksiyonunu ilgili koşullarda return edecek şekilde değiştirelim: 
 
 ```javascript{3-5}
   handleClick(i) {
@@ -773,7 +773,7 @@ We can now change the Board's `handleClick` function to return early by ignoring
   }
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/LyyXgK?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/LyyXgK?editors=0010)**
 
 Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So *you're* probably the real winner here.
 
