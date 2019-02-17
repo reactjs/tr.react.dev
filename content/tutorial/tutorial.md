@@ -775,7 +775,7 @@ Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstü
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/LyyXgK?editors=0010)**
 
-Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So *you're* probably the real winner here.
+Tebrikler! Artık çalışan bir tic-tac-toe oyununuz var. Ayrıca bu kısma kadar React'in temel özelliklerini de öğrenmiş durumdasınız. Bu nedenle aslında gerçek kazanan *sizsiniz*.
 
 ## Adding Time Travel {#adding-time-travel}
 
