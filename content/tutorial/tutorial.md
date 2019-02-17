@@ -590,13 +590,13 @@ React'te Immutability'nin ana faydası ise, _pure component_'ler (saf/katıksız
 
 [Performansın iyileştirmesi](/docs/optimizing-performance.html#examples) yazısında  `shouldComponentUpdate()` fonksiyonunun ne olduğunu ve nasıl *pure component*'leri oluşturabileceğiniz hakkında bilgi edinebilirsiniz.
 
-### Function Components {#function-components}
+### Fonksiyon Component'leri {#function-components}
 
-We'll now change the Square to be a **function component**.
+Square component'ini masıl **fonksiyon component**'i haline getireceğimize değinelim.
 
-In React, **function components** are a simpler way to write components that only contain a `render` method and don't have their own state. Instead of defining a class which extends `React.Component`, we can write a function that takes `props` as input and returns what should be rendered. Function components are less tedious to write than classes, and many components can be expressed this way.
+React'te **fonksiyon component**'leri sadece `render` metodunu içerdikleri ve state'leri bulunmadıkları için daha kolay bir şekilde component oluşturmayı sağlarlar. `React.Component`'tan türetilen bir sınıf oluşturmak yerine, sadece `prop`'ları girdi olarak alan ve neyin render edileceğini döndüren bir fonksiyon yazabiliriz. Fonksiyon component'leri kısa bir şekilde yazıldığı için, sınıf component'lerine göre sizi mental açıdan daha az yorar.
 
-Replace the Square class with this function:
+Square sınıfını aşağıdaki fonksiyon ile değiştirelim: 
 
 ```javascript
 function Square(props) {
@@ -608,13 +608,13 @@ function Square(props) {
 }
 ```
 
-We have changed `this.props` to `props` both times it appears.
+Kodda iki yerde `this.props` yerine `props` terimini kullandık.
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/QvvJOv?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/QvvJOv?editors=0010)**
 
->Note
+>Not
 >
->When we modified the Square to be a function component, we also changed `onClick={() => this.props.onClick()}` to a shorter `onClick={props.onClick}` (note the lack of parentheses on *both* sides). In a class, we used an arrow function to access the correct `this` value, but in a function component we don't need to worry about `this`.
+>Square'i, fonksiyon component olarak değiştirerek aynı zamanda uzun olan `onClick={() => this.props.onClick()}` kod parçasını, `onClick={props.onClick}` şeklinde yazarak daha kısa hale getirmiş olduk (her iki taraftaki parantezlerin de gittiğine dikkat ediniz). Sınıf component'inde gerçek `this` değerine ulaşmak için arrow (ok) fonksiyonu kullanmıştık. Bunun tersine fonksiyon component'lerinde `this` ile uğraşmanıza gerek yoktur.
 
 ### Taking Turns {#taking-turns}
 
