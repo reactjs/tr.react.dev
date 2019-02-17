@@ -1007,22 +1007,22 @@ Geldiğimiz noktada, Board component'i sadece `renderSquare` ve `render` metotla
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmOqJ?editors=0010)**
 
-### Showing the Past Moves {#showing-the-past-moves}
+### Geçmiş Hamlelerin Görüntülenmesi {#showing-the-past-moves}
 
-Since we are recording the tic-tac-toe game's history, we can now display it to the player as a list of past moves.
+tic-tac-toe oyununun geçmişini kaydedebildiğimize göre, artık oyuncuya geçmiş hamlelerin görüntülenmesini sağlayabiliriz. 
 
-We learned earlier that React elements are first-class JavaScript objects; we can pass them around in our applications. To render multiple items in React, we can use an array of React elements.
+Daha önce React elemanlarının, birinci kalitede JavaScript nesneleri olduğunu öğrenmiştik. Bu sayede React elemanlarını, uygulama içerisinde istediğimiz yere aktarabiliyoruz. Bu nedenle JavaScript mantığıyla düşünerek, React'te birden fazla elemanı render edebilmek için, React elemanlarından oluşan bir array'i kullabiliriz.
 
-In JavaScript, arrays have a [`map()` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) that is commonly used for mapping data to other data, for example:
+JavaScript'te array'ler bir [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (harita) metodu içerirler. Bu metod sayesinde verileri istenilen şekilde haritalayabilirler. Örneğin 1, 2, 3 sayılarının, iki katını alan bir dizinin oluşturulmasını sağlayabilirler:
 
 ```js
 const numbers = [1, 2, 3];
 const doubled = numbers.map(x => x * 2); // [2, 4, 6]
 ``` 
 
-Using the `map` method, we can map our history of moves to React elements representing buttons on the screen, and display a list of buttons to "jump" to past moves.
+`map` metodunu kullanarak oyunun hamle geçmişini, ekranda butonlar halinde görüntülemek için React elemanlarına map edebiliriz. Ve bu butonlara tıklayarak geçmiş hamlelere atlanmasını sağlayabiliriz.
 
-Let's `map` over the `history` in the Game's `render` method:
+Game'in `render` metodunda yer alan `history` array'i üzerinde `map` fonksiyonunun çalıştırılmasını sağlayalım: 
 
 ```javascript{6-15,34}
   render() {
@@ -1065,14 +1065,14 @@ Let's `map` over the `history` in the Game's `render` method:
   }
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
 
-For each move in the tic-tac-toes's game's history, we create a list item `<li>` which contains a button `<button>`. The button has a `onClick` handler which calls a method called `this.jumpTo()`. We haven't implemented the `jumpTo()` method yet. For now, we should see a list of the moves that have occurred in the game and a warning in the developer tools console that says:
+tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir `<li>` elemanı oluşturuyoruz. Butondaki `onClick` metodu, üzerine tıklandığında `this.jumpTo()` fonksiyonunu çağırıyor fakat henüz `jumpTo()` metodunu oluşturmadık. Şu an, oyun içerisinde oluşan hamlelerin bir listesini görüyor olmanız lazım. Ayrıca geliştirici araçları konsolunda da aşağıdaki şekilde bir uyarı vermiş olmalıdır:
 
 >  Warning:
 >  Each child in an array or iterator should have a unique "key" prop. Check the render method of "Game".
 
-Let's discuss what the above warning means.
+Üstteki uyarının ne anlama geldiğine bakalım.
 
 ### Picking a Key {#picking-a-key}
 
