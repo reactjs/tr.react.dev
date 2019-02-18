@@ -1074,18 +1074,18 @@ tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir 
 
 Üstteki uyarının ne anlama geldiğine bakalım.
 
-### Picking a Key {#picking-a-key}
+### Key seçimi {#picking-a-key}
 
-When we render a list, React stores some information about each rendered list item. When we update a list, React needs to determine what has changed. We could have added, removed, re-arranged, or updated the list's items.
+Bir liste görüntüledğimizde React, render edilen her bir liste elemanı için bazı bilgileri saklar. Listeyi güncellediğimizde React, listede neyin değiştiğine karar vermesi gerekir. Çünkü listenin elemanlarını eklemiş, silmiş, tekrar düzenlemiş veya güncellemiş olabilirirz. 
 
-Imagine transitioning from
+Listenin kodlarının buradan:
 
 ```html
 <li>Alexa: 7 tasks left</li>
 <li>Ben: 5 tasks left</li>
 ```
 
-to
+bu koda değiştiğini düşünelim: 
 
 ```html
 <li>Ben: 9 tasks left</li>
@@ -1093,21 +1093,21 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-In addition to the updated counts, a human reading this would probably say that we swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what we intended. Because React cannot know our intentions, we need to specify a *key* property for each list item to differentiate each list item from its siblings. One option would be to use the strings `alexa`, `ben`, `claudia`. If we were displaying data from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+Bu iki kodu okuyan bir kişi, sayıların değişmesine ek olarak Alexa ile Ben'in sıralamasının değiştiğini, bununla birlikte Alexa ile Ben'in arasına Claudia'nın eklendiğini farkedecektir. Ancak React bir bilgisayar programıdır ve amacımızın ne olduğunu kestiremez. React uygulamada listeyi değiştirmemizdeki maksadımızın ne olduğunu bilemeyeceğindan dolayı, her liste eleamanını birbirinden ayırt etmek için, liste elemanlarına bir *key* (anahtar değer) vermemiz gerekir. Bu örnekte, `alexa`, `ben`, `claudia` ifadelerini key olarak kullanabilirz. Fakat bu verileri veritabanından getirseydik, key olarak Alexa, Ben, ve Claudia'nın ID'lerini kullanabilirdik:
 
 ```html
 <li key={user.id}>{user.name}: {user.taskCount} tasks left</li>
 ```
 
-When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that didn't exist before, React creates a component. If the current list is missing a key that existed in the previous list, React destroys the previous component. If two keys match, the corresponding component is moved. Keys tell React about the identity of each component which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
+Bir liste tekrar render edileceği zaman React, her liste elemanının key'ini alır ve önceki listenin elemanlarıyla karşılaştırır. Eğer yeni listede, önceki listede bulunmayan bir key varsa React bir liste elemanı component'i oluşturur. Eğer önceki listede bulunan bir key, yeni listede bulunmuyorsa React, ilgili liste elemanını yok eder. Eğer iki key eşleşiyorsa, eski liste elemanı yeni listeye taşınır. React'in tekrar render etme aşamaları arasında state'in korunması amacıyla key'ler, her bir component'in kimliği hakkında React'e bilgi verir. Eğer bir component'in key'i değiştiyse, component React tarafından yok edilir ve yeni bir state ile tekrar oluşturulur.
 
-`key` is a special and reserved property in React (along with `ref`, a more advanced feature). When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it belongs in `props`, `key` cannot be referenced using `this.props.key`. React automatically uses `key` to decide which components to update. A component cannot inquire about its `key`.
+React'teki `key` kelimesi özeldir ve React içerisinde rezerve edilmiş kelimeler arasındadır (`ref` de rezerve edilmiştir, fakat daha gelişmiş bir özelliktir). Bir eleman oluşturulduğunda React, elemanın `key` özellğini alır ve direkt olarak return edilen elemanın üzerinde saklar. `key` `props`'a ait gibi görünse de, `this.props.key` kullanılarak erişilemez. Çünkü `key` özelliği, React'in otomatik hangi component'i güncelleyeceğine karar vermesi için tasarlanmıştır. Bu nedenle bir component, kendi `key`'i hakkında bilgi edinemez.
 
-**It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
+**Dinamik listeler oluştururken, benzersiz key değerleri atamanız kesinlikle tavsiye edilir.** Eğer uygun key değerine sahip değilseniz, verinizi gözden geçirerek uygun bir id değerin bulmak mantıklı olacaktır. 
 
-If no key is specified, React will present a warning and use the array index as a key by default. Using the array index as a key is problematic when trying to re-order a list's items or inserting/removing list items. Explicitly passing `key={i}` silences the warning but has the same problems as array indices and is not recommended in most cases.
+Eğer bir key ataması yapmazsanız, React bir uyarı görüntüler ve varsayılan olarak ilgili liste elemanının index'ini key olarak kullanır. Array'in index'ini key olarak kullanmak, liste elemanlarına ekleme/çıkarma veya tekrar sıralama yapılırken problem oluşturabilir. `key={i}` ataması yapmak uyarının susturulmasını sağlar ama array indeksleri üzerindeki problemi gidermez. Bu nedenle birçok durum için bu kullanım önerilmez. 
 
-Keys do not need to be globally unique; they only need to be unique between components and their siblings.
+Key'lerin uygulama içerisinde global olarak benzersiz olmasına gerek yoktur. Sadece bulunduğu component'in içerisindeki diğer list elemanları arasında benzersiz olması gereklidir. 
 
 
 ### Implementing Time Travel {#implementing-time-travel}
