@@ -19,7 +19,7 @@ Ekrana "Merhaba dünya!" başlığını yazdırır.
 
 **[Codepen'de Aç](codepen://hello-world)**
 
-Yukarıdaki linke tıklayarak online düzenleyiciyi açabilirsiniz. Ywgözlemleyin, değişiklik yapmaktan çekinmeyin. Bu rehberdeki çoğu sayfada bunun gibi düzenlenebilir örnekler göreceksiniz.
+Yukarıdaki linke tıklayarak online düzenleyiciyi açabilirsiniz. Değişiklik yapmaktan çekinmeyin ve yaptığınız değikliklerin çıktısını gözlemleyin. Bu rehberdeki çoğu sayfada bunun gibi düzenlenebilir örnekler göreceksiniz.
 
 ## Bu Rehberi Nasıl Okumalısınız {#how-to-read-this-guide}
 s
@@ -29,7 +29,7 @@ Bu rehberde, React uygulamalarının inşa blokları olan elemanları (Element) 
 >
 >Bu rehber **adım adım öğrenme** konseptini tercih eden kişiler için hazırlanmıştır. Eğer yaparak öğrenmeyi tercih ediyorsanız, [pratiğe dayalı dersler](/tutorial/tutorial.html) sayfamıza göz atabilirsiniz. Bu rehberi ve pratiğe dayalı dersleri birbirine tamamlayıcı olarak kullanabilirsiniz. 
 
-Bu bölüm, adım adım temel React konseptlerinin ilk bölümü. Yandaki menüden diğer bölümlere ulaşabilirsiniz. Eğer bunu mobil cihazla okuyorsanız, sağ alt köşedeki butona basarak menüye ulaşabilirsiniz.
+Bu bölüm, adım adım temel React konseptlerinin ilk bölümü. Yandaki menüden diğer bölümlere ulaşabilirsiniz. Eğer bunu mobil cihazda okuyorsanız, sağ alt köşedeki butona basarak menüye ulaşabilirsiniz.
 
 Bu rehberdeki her bölüm, önceki bölümlerden edinilen bilgiler temelinde ilerlemektedir. **Yan menüde "Temel Konseptler" başlığı altındaki bölümleri sırasıyla okuyarak React hakkındaki önemli konuları öğrenebilirsiniz.** Örneğin bundan sonraki bölüm, [“JSX'e Giriş”](/docs/introducing-jsx.html).
 
@@ -40,7 +40,7 @@ React bir JavaScript kütüphanesi, ve bu yüzden sizin temel düzeyde JavaScrip
 >Not
 >
 >Bu rehberde örneklerde bazen yeni JavaScript sentaks kullanımlarına rastlayabilirsiniz. Eğer son bir kaç yıldır JavaScript'le çalışmadıysanız, 
-[bu üç nokta](https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c) şuan için yeterli olacaktır.
+[bu üç nokta](https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c) şu an için yeterli olacaktır.
 
 
 ## Hadi Başlayalım! {#lets-get-started}
