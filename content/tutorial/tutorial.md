@@ -1110,11 +1110,11 @@ Eğer bir key ataması yapmazsanız, React bir uyarı görüntüler ve varsayıl
 Key'lerin uygulama içerisinde global olarak benzersiz olmasına gerek yoktur. Sadece bulunduğu component'in içerisindeki diğer list elemanları arasında benzersiz olması gereklidir. 
 
 
-### Implementing Time Travel {#implementing-time-travel}
+### Zaman Yolculuğunun Kodlanması {#implementing-time-travel}
 
-In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. The moves are never re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
+tic-tac-toe oyununun geçmişinde, her bir geçmiş hamlenin benzersiz bir ID'si bulunmaktadır. Bu ID'ler, ardışık hamle sayılarından oluşurlar. Hamleler asla silinmezler, ortadan eklenmezler ve tekrar sıralanmazlar. Bu nedenle key olarak hamle index'inin kullanılması uygundur. 
 
-In the Game component's `render` method, we can add the key as `<li key={move}>` and React's warning about keys should disappear:
+Game component'indeki render metoduna  `<li key={move}>` olacak şekilde key'imizi ekleyelim ve bu sayede React'in key hakkındaki uyarısını kaldıralım:
 
 ```js{6}
     const moves = history.map((step, move) => {
@@ -1129,11 +1129,11 @@ In the Game component's `render` method, we can add the key as `<li key={move}>`
     });
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/PmmXRE?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/PmmXRE?editors=0010)**
 
-Clicking any of the list item's buttons throws an error because the `jumpTo` method is undefined. Before we implement `jumpTo`, we'll add `stepNumber` to the Game component's state to indicate which step we're currently viewing.
+Liste elemanlarındaki butonlara tıklamak, `jumpTo` metodunun bulunmadığı için bir hata oluşturur. `jumpTo`'yu kodlamadan önce, mevcut durumda hangi adımın görüntülendiğini belirtmek için Game component'inin state'ine `stepNumber` değişkenini eklememiz gerekiyor.
 
-First, add `stepNumber: 0` to the initial state in Game's `constructor`:
+Game'in `constructor`'ındaki başlangıç state'ine `stepNumber: 0`'ı ekleyelim:
 
 ```js{8}
 class Game extends React.Component {
@@ -1149,11 +1149,11 @@ class Game extends React.Component {
   }
 ```
 
-Next, we'll define the `jumpTo` method in Game to update that `stepNumber`. We also set `xIsNext` to true if the number that we're changing `stepNumber` to is even:
+Sonra, Game'in içerisinde `stepNumber` değişkenini güncelleyecek olan `jumpTo` metodunu oluşturalım. Ayrıca değiştirdiğimiz `stepNumber` değişkeni çift ise `xIsNext` değişkenine true'yu atayalım: 
 
 ```javascript{5-10}
   handleClick(i) {
-    // this method has not changed
+    // Bu metot değişmedi
   }
 
   jumpTo(step) {
@@ -1164,15 +1164,15 @@ Next, we'll define the `jumpTo` method in Game to update that `stepNumber`. We a
   }
 
   render() {
-    // this method has not changed
+    // Bu metod değişmedi
   }
 ```
 
-We will now make a few changes to the Game's `handleClick` method which fires when you click on a square.
+Şimdi, oyundaki bir kareye tıklandığında çağrılan `handleClick` metodunda birkaç değişiklik yapaılm. 
 
-The `stepNumber` state we've added reflects the move displayed to the user now. After we make a new move, we need to update `stepNumber` by adding `stepNumber: history.length` as part of the `this.setState` argument. This ensures we don't get stuck showing the same move after a new one has been made.
+Artık eklediğimiz `stepNumber` state'i kullanıcının mevcut hamlesini yansıtıyor. Yeni bir hamle yaptıktan sonra, `stepNumber` değerini güncellememiz için `this.setState()` çağrımına `stepNumber: history.length`'i eklememiz gerekiyor. Bu sayede, yeni bir hamle yapıldıktan sonra aynı hamleyi görüntülemekten dolayı oluşan takılmayı engellemiş oluyoruz.
 
-We will also replace reading `this.state.history` with `this.state.history.slice(0, this.state.stepNumber + 1)`. This ensures that if we "go back in time" and then make a new move from that point, we throw away all the "future" history that would now become incorrect.
+Ayrıca oyun geçmişine atama yapmak için `this.state.history` yerine `this.state.history.slice(0, this.state.stepNumber + 1)` yazacağız. Bu sayede, "zamanda geriye döndüğümüzde" o noktadan devam edebileceğiz ve gelecekte yaptığımız hamleler işe yaramaz hale geleceğinden dolayı bu hamlelerin de `slice()` ile atılmasını sağlamış olacağız:
 
 ```javascript{2,13}
   handleClick(i) {
@@ -1193,7 +1193,7 @@ We will also replace reading `this.state.history` with `this.state.history.slice
   }
 ```
 
-Finally, we will modify the Game component's `render` method from always rendering the last move to rendering the currently selected move according to `stepNumber`:
+Son olarak, Game component'inin `render` metodunda, her zaman yapılan son hamlenin render edilmesi yerine, `stepNumber`'a göre mevcut seçilen hamlenin render edilmesini sağlayacağız:
 
 ```javascript{3}
   render() {
@@ -1201,33 +1201,33 @@ Finally, we will modify the Game component's `render` method from always renderi
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    // the rest has not changed
+    // Kalan kısımlar değişmedi
 ```
 
-If we click on any step in the game's history, the tic-tac-toe board should immediately update to show what the board looked like after that step occurred.
+Oyun geçmişinde herhangi bir adıma tıkladığımızda tic-tac-toe tahtası, o adım bittikten sonraki halini alacak şekilde anında güncellenecektir.
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**
+**[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**
 
-### Wrapping Up {#wrapping-up}
+### Sonuç Olarak {#wrapping-up}
 
-Congratulations! You've created a tic-tac-toe game that:
+Tebrikler! Kodladığınız bu tic-tac-toe oyunu:
 
-* Lets you play tic-tac-toe,
-* Indicates when a player has won the game,
-* Stores a game's history as a game progresses,
-* Allows players to review a game's history and see previous versions of a game's board.
+* Tabii ki tic-tac-toe oynamanızı sağlar,
+* Bir oyuncu kazandığında bunu gösterir, 
+* Oyun ilerledikçe oyun geçmişini saklar,
+* Oyunculara oyun geçmişini görüntüleyebilmelerini ve oyun tahtasının önceji versiyonlarına gidebilmelerini sağlar.
 
-Nice work! We hope you now feel like you have a decent grasp on how React works.
+İyi işti! Umarız artık React'in nasıl çalıştığını öğrenmişsinizdir. Nice work! We hope you now feel like you have a decent grasp on how React works.
 
-Check out the final result here: **[Final Result](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**.
+Kodun son haline buradan bakabilirsiniz: **[Kodun Son Hali(https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**.
 
-If you have extra time or want to practice your new React skills, here are some ideas for improvements that you could make to the tic-tac-toe game which are listed in order of increasing difficulty:
+Eğer boş zamanınız varsa ve yeni React yetenekleriniz ile ilgili pratik yapmak istiyorsanız, aşağıda zorluk derecesine göre sıralanmış fikirler sayesinde, tic-tac-toe oyununu geliştirerek daha ileriye götürebilirsiniz:
 
-1. Display the location for each move in the format (col, row) in the move history list.
-2. Bold the currently selected item in the move list.
-3. Rewrite Board to use two loops to make the squares instead of hardcoding them.
-4. Add a toggle button that lets you sort the moves in either ascending or descending order.
-5. When someone wins, highlight the three squares that caused the win.
-6. When no one wins, display a message about the result being a draw.
+1. Oyun geçmişinde, her hamlenin konumunun "(satır,sütun)" formatına göre görüntülenmesi.
+2. Oyun geçmişi listesinde tıklanan liste elemanının, seçili olarak işaretlenmesi.
+3. Board'daki karelerin, elle hardcoded olarak kodlanmasının yerine iki for döngüsü kullanılarak Board component'inin düzenlenmesi.
+4. Bir buton eklenerek, tıklandığında oyun geçmişinin artan veya azalan şekilde sıralanmasının sağlanması. 
+5. Bir kişi kazandığında, kazanmasına neden olan 3 karenin renklendirilerek vurgulanması. 
+6. Eğer hiç kazanan yoksa, berabere mesajının görüntülenmesi.
 
-Throughout this tutorial, we touched on React concepts including elements, components, props, and state. For a more detailed explanation of each of these topics, check out [the rest of the documentation](/docs/hello-world.html). To learn more about defining components, check out the [`React.Component` API reference](/docs/react-component.html).
+Bu öğreticide, React konseptleri olan elemanlar, component'ler, prop'lar, ve state'e değindik. Bu konular hakkında daha detaylı bir açıklama için [dokümanın geri kalanını](/docs/hello-world.html) inceleyebilirsiniz. For a more detailed explanation of each of these topics, check out [the rest of the documentation](/docs/hello-world.html). Component'leri tanımlamak hakkında daha fazla bilgi almak için [`React.Component` API dokümanını](/docs/react-component.html) inceleyebilirsiniz.
