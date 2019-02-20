@@ -595,9 +595,9 @@ React'te Immutability'nin ana faydası ise, _pure component_'lar (saf/katıksız
 
 ### Fonksiyon bileşenleri {#function-components}
 
-Square bileşenini masıl **fonksiyon component**'i haline getireceğimize değinelim.
+Square bileşenini masıl **fonksiyon bileşeni** haline getireceğimize değinelim.
 
-React'te **fonksiyon component**'leri sadece `render` metodunu içerdikleri ve state'leri bulunmadıkları için daha kolay bir şekilde component oluşturmayı sağlarlar. `React.Component`'tan türetilen bir sınıf oluşturmak yerine, sadece `prop`'ları girdi olarak alan ve neyin render edileceğini döndüren bir fonksiyon yazabiliriz. Fonksiyon bileşenleri kısa bir şekilde yazıldığı için, sınıf bileşenlerine göre sizi mental açıdan daha az yorar.
+React'te **fonksiyon bileşen**leri, sadece `render` metodunu içerirler. İçerisinde herhangi bir state bulundurmadıkları için daha kolay bir şekilde bileşen oluşturmayı sağlarlar. `React.Component`'tan türetilen bir sınıf bileşeni oluşturmak yerine, sadece `prop`ları girdi olarak alan ve render edilecek kısımları döndüren bir fonksiyon bileşeni yazabiliriz. Fonksiyon bileşenleri kısa bir şekilde yazıldığı için, sizi sınıf bileşenlerine göre daha az yorar.
 
 Square sınıfını aşağıdaki fonksiyon ile değiştirelim: 
 
@@ -611,13 +611,13 @@ function Square(props) {
 }
 ```
 
-Kodda iki yerde `this.props` yerine `props` terimini kullandık.
+Dikkat edecek olursanız sııf bileşeninde kullandığımız `this.props` ifadesi yerine sadece `props`'u kullandık.
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/QvvJOv?editors=0010)**
 
 >Not
 >
->Square'i, fonksiyon component olarak değiştirerek aynı zamanda uzun olan `onClick={() => this.props.onClick()}` kod parçasını, `onClick={props.onClick}` şeklinde yazarak daha kısa hale getirmiş olduk (her iki taraftaki parantezlerin de gittiğine dikkat ediniz). Sınıf bileşeninde gerçek `this` değerine ulaşmak için arrow (ok) fonksiyonu kullanmıştık. Bunun tersine fonksiyon bileşenlerinde `this` ile uğraşmanıza gerek yoktur.
+>Square'i, fonksiyon bileşeni olarak değiştirdiğimiz için, uzun olan `onClick={() => this.props.onClick()}` kod parçasını, `onClick={props.onClick}` şeklinde yazarak daha kısa hale getirmiş olduk (her iki taraftaki parantezlerin de gittiğine dikkat ediniz). Sınıf bileşeninde gerçek `this` değerine ulaşmak için arrow (ok) fonksiyonu kullanmıştık. Bunun aksine fonksiyon bileşenlerinde `this` ile uğraşmanıza gerek yoktur.
 
 ### Hamle Sırası Değişikliği {#taking-turns}
 
@@ -636,7 +636,7 @@ class Board extends React.Component {
   }
 ```
 
-Herhangi bir oyuncu hamlesini yaptığında `xIsNext` (xSonrakiElemanMı) boolean değişkeninin tersini alarak hangi oyuncunun sonraki hamleyi yapacağını belirleyebilir ve oyunun state'inde bunu kaydedebiliriz. Board'un `handleClick` fonksiyonunu, `xIsNext` değişkeninin zıttını dönüştürecek şekilde ilgili değişikliği yapalım:
+Herhangi bir oyuncu hamlesini yaptığında `xIsNext` (xSonrakiElemanMı) boolean değişkeninin tersini alarak hangi oyuncunun sonraki hamleyi yapacağını belirleyebiliriz. Ayrıca oyunun state'inde bu değişkeni kaydedebiliriz. Board'un `handleClick` fonksiyonunu, `xIsNext` değişkeninin tersini alacak şekilde ilgili değişikliği yapalım:
 
 ```javascript{3,6}
   handleClick(i) {
@@ -649,7 +649,7 @@ Herhangi bir oyuncu hamlesini yaptığında `xIsNext` (xSonrakiElemanMı) boolea
   }
 ```
 
-Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar. Ayrıca oyunda sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için Board'un, `render` metodunda "status" değişkenini oluşturabilirz:
+Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar. Ayrıca oyunda, sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için, Board'un `render` metodunda "status" değişkenini oluşturabiliriz:
 
 ```javascript{2}
   render() {
@@ -720,7 +720,7 @@ class Board extends React.Component {
 
 ### Kazananın Belirlenmesi {#declaring-a-winner}
 
-Artık sonraki oyuncuyu görüntüleyebiliyoruz. Bundan sonra artık oyunun bitmesi için oyunun kazanıldığını ve artık başka bir hamle kalmadığını göstermemiz gerekiyor. Bunun için, dosyanın sonuna yardımcı bir fonksiyon ekleyerek kazananı belirleyebiliriz:
+Artık sonraki oyuncuyu görüntüleyebiliyoruz. Bundan sonraki amacımız olarak, oyunun bitmesi durumunu belirtmek için, oyunun kazanıldığını ve artık başka bir hamle kalmadığını göstermemiz gerekiyor. Bunun için, kazanan oyuncuyu belirtmek amacıyla, dosyanın sonuna yardımcı bir fonksiyon ekleyebiliriz:
 
 ```javascript
 function calculateWinner(squares) {
@@ -744,7 +744,7 @@ function calculateWinner(squares) {
 }
 ```
 
-Board'un `render` fonksiyonunda, `calculateWinner(squares)`'ı çağırarak ilgili oyuncunun kazanma durumunu kontrol edebiliriz. Oyuncu kazandıysa, "Winner: X" veya "Winner: O" gibi kazananı belirten bir metin görüntüleyebiliriz. Şimdi, Board'un `render` fonksiyonunda yer alan `status` değişkenini aşağıdaki gibi değiştirelim:
+Board'un `render` fonksiyonunda, `calculateWinner(squares)` fonksiyonunu çağırarak, ilgili oyuncunun kazanma durumunun kontrol edilmesini sağlayabiliriz. Hamleyi yapan oyuncu kazandıysa, "Winner: X" veya "Winner: O" gibi kazananı belirten bir metin görüntüleyebiliriz. Şimdi, Board'un `render` fonksiyonunda yer alan `status` değişkenini aşağıdaki şekilde değiştirelim:
 
 ```javascript{2-8}
   render() {
@@ -760,7 +760,7 @@ Board'un `render` fonksiyonunda, `calculateWinner(squares)`'ı çağırarak ilgi
       // geriye kalan kısımlar değiştirilmedi
 ```
 
-Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstüne tekrar işaretleme yapabiliyor. Buna ek olarak oyun kazanıldığı durumda da tekrar hamle yapmayı engellemeliyiz. Bunun için Board'un `handleClick` fonksiyonunu ilgili koşullarda return edecek şekilde değiştirelim: 
+Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstüne tekrar işaretleme yapabiliyor. Buna ek olarak oyun kazanıldığı durumda da tekrar işaretleme yapmayı engellemeliyiz. Bunun için Board'un `handleClick` fonksiyonunu, belirli koşullarda return edecek şekilde değiştirelim: 
 
 ```javascript{3-5}
   handleClick(i) {
@@ -778,19 +778,19 @@ Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstü
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/LyyXgK?editors=0010)**
 
-Tebrikler! Artık çalışan bir tic-tac-toe oyununuz var. Ayrıca bu kısma kadar React'in temel özelliklerini de öğrenmiş durumdasınız. Bu nedenle aslında gerçek kazanan *sizsiniz*.
+Tebrikler. Artık çalışan bir tic-tac-toe oyununuz var. Ayrıca bu kısma kadar React'in temel özelliklerini de öğrenmiş durumdasınız. Bu nedenle aslında gerçek kazanan *sizsiniz*.
 
 ## Zamanda Yolculuğun eklenmesi {#adding-time-travel}
 
-Son çalışma olarak oyunda önceki hamlelere gitmeyi sağayacak "zamanda geriye gitme" özelliğini ekleyelim.
+Son çalışma olarak, oyunda önceki hamlelere gitmeyi sağayacak olan "zamanda geriye gitme" özelliğini ekleyelim.
 
 ### Hamlelerin Geçmişinin Saklanması {#storing-a-history-of-moves}
 
-Eğer `squares` array'ine direkt olarak elle müdahale ederek değiştirseydik, zaman yolculuğu özelliğini geliştirmemiz daha zor olurdu.
+Eğer `squares` dizisine direkt olarak elle müdahale ederek değiştirseydik, zaman yolculuğu özelliğini geliştirmemiz daha zor olurdu.
 
-Ancak, `slice()` fonksiyonu yardımıyla her hamleden sonra `squares` array'inin kopyasını alarak [immutable olarak değiştirilmesini sağladık](#why-immutability-is-important). Bu durum bize, `squares` array'inin geçmişteki her halinin kaydedebilmemize, ve halihazırda oluşan hamleler arasında gezinebilmemize imkan sağlamış oldu.
+Ancak, `slice()` fonksiyonu yardımıyla her hamleden sonra `squares` dizisinin kopyasını alarak [immutable olarak değiştirilmesini sağladık](#why-immutability-is-important). Bu durum bize, `squares` dizisinin geçmişteki her halinin kaydedebilmemize, ve halihazırda oluşan hamleler arasında gezinebilmemize imkan sağlamış oldu.
 
-`squares` array'inin geçmiş hallerini tutabilmek için `history` adında bir array oluşturabiliriz. `history` array'i, oyundaki ilk hamleden son hamleye kadar oyun tahtasının tüm durumlarını aşağıdaki gibi tutuyor olacaktır: 
+`squares` dizisinin geçmiş hallerini tutabilmek için `history` adında başka bir dizi oluşturabiliriz. `history` dizisi, oyunda ilk hamleden son hamleye kadar tahtanın tüm durumlarını barındırıyor olacaktır: 
 
 ```javascript
 history = [
@@ -822,13 +822,13 @@ history = [
 ]
 ```
 
-Artık, hangi bileşenin state'inin `history` sahip olması gerektiğine karar vermemiz gerekiyor.
+Şimdi `history` dizisinin, hangi bileşenin state'inde yer alması gerektiğine karar vereceğiz.
 
 ### State'in Ebeveyn bileşene Taşınması (Tekrar) {#lifting-state-up-again}
 
-En üst seviyedeki Game bileşeninin, geçmiş hamlelerin listesini görüntülemesini istiyoruz. Bunun için, Game bileşeninin `history`'e erişebilmesi gerekiyor. Bunu sağlamanın yolu, `history`'i en üst seviyedeki Game bileşenine taşımaktan geçiyor.
+En üst seviyedeki Game bileşeninin, geçmiş hamlelerin listesini görüntülemesini istiyoruz. Bunun için, Game bileşeninin `history`'e erişebilmesi gerekiyor. Bunu sağlamanın yolu, `history`'i Game bileşenine taşımaktan geçiyor.
 
-`history` state'ini, Game bileşenine yerleştireceğimiz için, bir alt component olan Board'dan `squares` state'ini çıkarmamız gerekiyor. [lifted state up](#lifting-state-up)'ta Square bileşeninden Board bileşenine yaptığımız gibi, şimdi de Board bileşeninden Game bileşenine taşıma işlemini gerçekleştirmemiz gerekiyor. Bu sayede Game bileşeni, Board'un verisi üzerinde tamamen kontrolü ele almış olacak ve `history`'deki önceki hamlelerin Board'a işlemesini bildirebilecektir.
+`history` state'ini, Game bileşenine yerleştireceğimiz için, bir alt bileşen olan Board'dan `squares` state'ini çıkarmamız gerekiyor. [State'in Ebeveyn bileşene Taşınması](#lifting-state-up) bölümünde Square bileşeninden Board bileşenine taşıma yaptığımız gibi, şimdi de Board bileşeninden Game bileşenine taşıma işlemini gerçekleştirmemiz gerekiyor. Bu sayede Game bileşeni, Board'un verisi üzerinde tamamen kontrolü ele almış olacak ve `history`'deki önceki hamlelerin Board'a işlemesini bildirebilecektir.
 
 Öncelikle, Game bileşeninin constructor'ında, state'in ilk halini oluşturmamız gerekiyor: 
 
@@ -860,9 +860,9 @@ class Game extends React.Component {
 }
 ```
 
-Şimdi Game bileşeninden Board bileşenine `squares` array'ini `onClick` event'ini prop'lar aracılığıyla aktarmamız gerekiyor. Birden fazla Square için Board'da sadece bir tane click handler'ı bulunduğundan dolayı, tıklanan square'in hangisi olduğunun belirlenebilmesi için `onClick` handler'ına her bir Square'in konumunu iletmemiz gerekiyor. Bu gereksinimler için Board bileşenini aşağıdaki gibi değiştirebilirsiniz: 
+Şimdi `squares` dizisini ve `onClick` event'ini, prop'lar aracılığıyla Game bileşeninden, Board bileşenine aktarmamız gerekiyor. Birden fazla Square için Board'da sadece bir tane click handler'ı bulunduğundan dolayı, tıklanan square'in hangisi olduğunun belirlenebilmesi için, `onClick` handler'ına her bir Square'in konumunu iletmemiz gerekiyor. Bu gereksinimler için Board bileşenini aşağıdaki gibi değiştirebilirsiniz: 
 
-* Board'daki `constructor` siliniz.
+* Board'daki `constructor`'ı siliniz.
 * Board'un `renderSquare` metodunda `this.state.squares[i]` yerine `this.props.squares[i]` yazınız.
 * Board'un `renderSquare` metodunda `this.handleClick(i)` yerine `this.props.onClick(i)` yazınız.
 
@@ -982,7 +982,7 @@ Oyunun durumunu Game bileşeni render ettiği için, Board'daki `render` metodun
   }
 ```
 
-Son olarak, Board bileşenindeki `handleClick` metodunu Game bileşenine taşıyacağız. Ayrıca, Game bileşeni Board'a göre daha farklı oluşturulduğu için `handleClick` metodunu da uygun şekilde değiştirmemiz gerekiyor. Bunun için Game'in `handleClick` metodu içerisinde, oyundaki hamleleri `history` array'ine ekleyeceğiz:
+Son olarak, Board bileşenindeki `handleClick` metodunu Game bileşenine taşıyacağız. Ayrıca, Game bileşeni Board'a göre daha farklı oluşturulduğu için, `handleClick` metodunu da uygun şekilde değiştirmemiz gerekiyor. Bunun için Game'in `handleClick` metodu içerisinde, oyundaki hamleleri `history` dizisine ekleyeceğiz:
 
 ```javascript{2-4,10-12}
   handleClick(i) {
@@ -1004,7 +1004,7 @@ Son olarak, Board bileşenindeki `handleClick` metodunu Game bileşenine taşıy
 
 >Not
 >
->Bir array'e eleman eklemek için genellikle array'in `push()` metodu kullanılır. Fakat `push()`'un aksine `concat()` metodu, orijinal array'i değiştirmez. Bu nedenle immutability'nin sağlanması için `concat()`fonksiyonunun kullanılması önem teşkil etmektedir.
+>Bir diziye eleman eklemek için, genellikle dizinin `push()` metodu kullanılır. Fakat `push()`'un aksine `concat()` metodu orijinal diziyi değiştirmez. Bu nedenle immutability'nin sağlanması için `concat()`fonksiyonunun kullanılması önem teşkil etmektedir.
 
 Geldiğimiz noktada, Board bileşeni sadece `renderSquare` ve `render` metotlarına ihtiyaç duyuyor. Oyunun durumu ve `handleClick` metodu ise artık Game bileşeninde yer alıyor.
 
@@ -1014,9 +1014,9 @@ Geldiğimiz noktada, Board bileşeni sadece `renderSquare` ve `render` metotlar�
 
 tic-tac-toe oyununun geçmişini kaydedebildiğimize göre, artık oyuncuya geçmiş hamlelerin görüntülenmesini sağlayabiliriz. 
 
-Daha önce React elemanlarının, birinci kalitede JavaScript nesneleri olduğunu öğrenmiştik. Bu sayede React elemanlarını, uygulama içerisinde istediğimiz yere aktarabiliyoruz. Bu nedenle JavaScript mantığıyla düşünerek, React'te birden fazla elemanı render edebilmek için, React elemanlarından oluşan bir array'i kullabiliriz.
+Daha önce React elemanlarının, birinci kalite JavaScript nesneleri olduğunu öğrenmiştik. Bu sayede React elemanlarını, uygulama içerisinde istediğimiz yere aktarabiliyoruz. Bu nedenle JavaScript mantığıyla düşündüğümüzde, React'te birden fazla elemanı render edebilmek için, React elemanlarından oluşan bir diziyi kullabiliriz.
 
-JavaScript'te array'ler bir [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (harita) metodu içerirler. Bu metod sayesinde verileri istenilen şekilde haritalayabilirler. Örneğin 1, 2, 3 sayılarının, iki katını alan bir dizinin oluşturulmasını sağlayabilirler:
+JavaScript'te diziler bir [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (harita) metodu içerirler. Bu metod sayesinde verileri istenilen şekilde haritalayabilirler. Örneğin 1, 2, 3 sayılarının, iki katını alan bir dizinin oluşturulmasını sağlayabilirler:
 
 ```js
 const numbers = [1, 2, 3];
@@ -1025,7 +1025,7 @@ const doubled = numbers.map(x => x * 2); // [2, 4, 6]
 
 `map` metodunu kullanarak oyunun hamle geçmişini, ekranda butonlar halinde görüntülemek için React elemanlarına map edebiliriz. Ve bu butonlara tıklayarak geçmiş hamlelere atlanmasını sağlayabiliriz.
 
-Game'in `render` metodunda yer alan `history` array'i üzerinde `map` fonksiyonunun çalıştırılmasını sağlayalım: 
+Game'in `render` metodunda yer alan `history` diziyi üzerinde `map` fonksiyonunun çalıştırılmasını sağlayalım: 
 
 ```javascript{6-15,34}
   render() {
@@ -1070,7 +1070,7 @@ Game'in `render` metodunda yer alan `history` array'i üzerinde `map` fonksiyonu
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
 
-tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir `<li>` elemanı oluşturuyoruz. Butondaki `onClick` metodu, üzerine tıklandığında `this.jumpTo()` fonksiyonunu çağırıyor fakat henüz `jumpTo()` metodunu oluşturmadık. Şu an, oyun içerisinde oluşan hamlelerin bir listesini görüyor olmanız lazım. Ayrıca geliştirici araçları konsolunda da aşağıdaki şekilde bir uyarı vermiş olmalıdır:
+tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir `<li>` elemanı oluşturuyoruz. Butondaki `onClick` metodu, üzerine tıklandığında `this.jumpTo()` fonksiyonunu çağırıyor fakat, henüz `jumpTo()` metodunu oluşturmadık. Şu an, oyun içerisinde oluşan hamlelerin bir listesini görüyor olmanız lazım. Ayrıca geliştirici araçları konsolunda da aşağıdaki şekilde bir uyarı vermiş olmalıdır:
 
 >  Warning:
 >  Each child in an array or iterator should have a unique "key" prop. Check the render method of "Game".
@@ -1079,9 +1079,9 @@ tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir 
 
 ### Key seçimi {#picking-a-key}
 
-Bir liste görüntüledğimizde React, render edilen her bir liste elemanı için bazı bilgileri saklar. Listeyi güncellediğimizde React, listede neyin değiştiğine karar vermesi gerekir. Çünkü listenin elemanlarını eklemiş, silmiş, tekrar düzenlemiş veya güncellemiş olabilirirz. 
+Bir liste görüntüledğimizde React, render edilen her bir liste elemanı için bazı bilgileri saklar. Listeyi güncellediğimizde ise listede neyin değiştiğine karar vermesi gerekir. Çünkü listenin elemanlarını eklemiş, silmiş, tekrar düzenlemiş veya güncellemiş olabilirirz. 
 
-Listenin kodlarının buradan:
+Örnek olarak bir listenin kodlarının bu şekilde olup:
 
 ```html
 <li>Alexa: 7 tasks left</li>
@@ -1096,26 +1096,26 @@ bu koda değiştiğini düşünelim:
 <li>Alexa: 5 tasks left</li>
 ```
 
-Bu iki kodu okuyan bir kişi, sayıların değişmesine ek olarak Alexa ile Ben'in sıralamasının değiştiğini, bununla birlikte Alexa ile Ben'in arasına Claudia'nın eklendiğini farkedecektir. Ancak React bir bilgisayar programıdır ve amacımızın ne olduğunu kestiremez. React uygulamada listeyi değiştirmemizdeki maksadımızın ne olduğunu bilemeyeceğindan dolayı, her liste eleamanını birbirinden ayırt etmek için, liste elemanlarına bir *key* (anahtar değer) vermemiz gerekir. Bu örnekte, `alexa`, `ben`, `claudia` ifadelerini key olarak kullanabilirz. Fakat bu verileri veritabanından getirseydik, key olarak Alexa, Ben, ve Claudia'nın ID'lerini kullanabilirdik:
+Bu iki kodu okuyan bir kişi, sayıların değişmesine ek olarak Alexa ile Ben'in sıralamasının değiştiğini,ve araya Claudia'nın eklendiğini farkedecektir. Ancak React bir bilgisayar programıdır, ve amacımızın ne olduğunu kestiremez. React uygulamada listeyi değiştirmemizdeki maksadımızın ne olduğunu bilemeyeceğindan dolayı, her liste eleamanını birbirinden ayırt etmek için, liste elemanlarına bir *key* (anahtar değer) vermemiz gerekir. Bu örnekte, `alexa`, `ben`, `claudia` isimlerini key olarak kullanabilirz. Fakat bu verileri veritabanından getirseydik key olarak; Alexa, Ben, ve Claudia'nın ID'lerini kullanabilirdik:
 
 ```html
 <li key={user.id}>{user.name}: {user.taskCount} tasks left</li>
 ```
 
-Bir liste tekrar render edileceği zaman React, her liste elemanının key'ini alır ve önceki listenin elemanlarıyla karşılaştırır. Eğer yeni listede, önceki listede bulunmayan bir key varsa React bir liste elemanı bileşeni oluşturur. Eğer önceki listede bulunan bir key, yeni listede bulunmuyorsa React, ilgili liste elemanını yok eder. Eğer iki key eşleşiyorsa, eski liste elemanı yeni listeye taşınır. React'in tekrar render etme aşamaları arasında state'in korunması amacıyla key'ler, her bir bileşenin kimliği hakkında React'e bilgi verir. Eğer bir bileşenin key'i değiştiyse, component React tarafından yok edilir ve yeni bir state ile tekrar oluşturulur.
+Bir liste tekrar render edileceği zaman React, her liste elemanının key'ini alır ve önceki listenin elemanlarıyla karşılaştırır. Eğer yeni listede, önceki listede bulunmayan bir key varsa, React bir `<li>` bileşeni oluşturur. Eğer önceki listede bulunan bir key, yeni listede bulunmuyorsa React, ilgili `<li>`'yi yok eder. Eğer iki key eşleşiyorsa, eski liste elemanı yeni listeye taşınır. Render etme aşamaları arasında, state'in korunması amacıyla key'ler, her bir bileşenin kimliği hakkında React'e bilgi sunar. Bu sayede eğer bir bileşenin key'i değiştiyse, ilgili bileşen React tarafından yok edilir ve yeni bir state ile tekrar oluşturulur.
 
-React'teki `key` kelimesi özeldir ve React içerisinde rezerve edilmiş kelimeler arasındadır (`ref` de rezerve edilmiştir, fakat daha gelişmiş bir özelliktir). Bir eleman oluşturulduğunda React, elemanın `key` özellğini alır ve direkt olarak return edilen elemanın üzerinde saklar. `key` `props`'a ait gibi görünse de, `this.props.key` kullanılarak erişilemez. Çünkü `key` özelliği, React'in otomatik hangi bileşeni güncelleyeceğine karar vermesi için tasarlanmıştır. Bu nedenle bir component, kendi `key`'i hakkında bilgi edinemez.
+React'teki `key` kelimesi özeldir ve React içerisinde rezerve edilmiş kelimeler arasındadır (`ref` de rezerve edilmiştir, fakat daha gelişmiş bir özelliktir). Bir eleman oluşturulduğunda React, elemanın `key` özellğini alır ve direkt olarak return edilen elemanın üzerinde saklar. `key`, `props`'a ait gibi görünse de, `this.props.key` kullanılarak erişilemez. Çünkü `key` özelliği, React'in otomatik olarak hangi bileşeni güncelleyeceğine karar vermesi için tasarlanmıştır. Bu nedenle `props` bir bileşenin, `key`'i hakkında bilgi edinemez.
 
 **Dinamik listeler oluştururken, benzersiz key değerleri atamanız kesinlikle tavsiye edilir.** Eğer uygun key değerine sahip değilseniz, verinizi gözden geçirerek uygun bir id değerin bulmak mantıklı olacaktır. 
 
-Eğer bir key ataması yapmazsanız, React bir uyarı görüntüler ve varsayılan olarak ilgili liste elemanının index'ini key olarak kullanır. Array'in index'ini key olarak kullanmak, liste elemanlarına ekleme/çıkarma veya tekrar sıralama yapılırken problem oluşturabilir. `key={i}` ataması yapmak uyarının susturulmasını sağlar ama array indeksleri üzerindeki problemi gidermez. Bu nedenle birçok durum için bu kullanım önerilmez. 
+Eğer bir key ataması yapmazsanız React, ekranda bir uyarı görüntüler ve varsayılan olarak ilgili liste elemanının index'ini key olarak kullanır. Dizinin indeksini key olarak kullanmak, liste elemanlarına ekleme/çıkarma veya tekrar sıralama yapılırken problem oluşturabilir. `key={i}` ataması yapmak uyarının susturulmasını sağlar fakat dizi indeksleri üzerindeki problemi gidermiş olmaz. Bu nedenle birçok durum için bu kullanım önerilmez. 
 
-Key'lerin uygulama içerisinde global olarak benzersiz olmasına gerek yoktur. Sadece bulunduğu bileşenin içerisindeki diğer list elemanları arasında benzersiz olması gereklidir. 
+Key'lerin uygulama içerisinde global olarak benzersiz olmasına gerek yoktur. Sadece bulunduğu bileşenin içerisinde yer alan diğer list elemanları arasında benzersiz olması yeterlidir. 
 
 
 ### Zaman Yolculuğunun Kodlanması {#implementing-time-travel}
 
-tic-tac-toe oyununun geçmişinde, her bir geçmiş hamlenin benzersiz bir ID'si bulunmaktadır. Bu ID'ler, ardışık hamle sayılarından oluşurlar. Hamleler asla silinmezler, ortadan eklenmezler ve tekrar sıralanmazlar. Bu nedenle key olarak hamle index'inin kullanılması uygundur. 
+tic-tac-toe oyununun geçmişinde, her bir geçmiş hamlenin benzersiz bir ID'si bulunmaktadır. Bu ID'ler, ardışık hamle sayılarından oluşurlar. Hamleler asla silinmezler, ortadan eklenmezler ve tekrar sıralanmazlar. Bu nedenle key olarak hamle index'inin kullanılması bu durum için uygundur. 
 
 Game bileşenindeki render metoduna  `<li key={move}>` olacak şekilde key'imizi ekleyelim ve bu sayede React'in key hakkındaki uyarısını kaldıralım:
 
@@ -1171,11 +1171,11 @@ Sonra, Game'in içerisinde `stepNumber` değişkenini güncelleyecek olan `jumpT
   }
 ```
 
-Şimdi, oyundaki bir kareye tıklandığında çağrılan `handleClick` metodunda birkaç değişiklik yapaılm. 
+Şimdi, oyundaki bir kareye tıklandığında çağrılan `handleClick` metodunda birkaç değişiklik yapalım. 
 
-Artık eklediğimiz `stepNumber` state'i kullanıcının mevcut hamlesini yansıtıyor. Yeni bir hamle yaptıktan sonra, `stepNumber` değerini güncellememiz için `this.setState()` çağrımına `stepNumber: history.length`'i eklememiz gerekiyor. Bu sayede, yeni bir hamle yapıldıktan sonra aynı hamleyi görüntülemekten dolayı oluşan takılmayı engellemiş oluyoruz.
+Artık eklediğimiz `stepNumber` değişkeni, kullanıcının mevcut hamlesini gösteriyor. Yeni bir hamle yaptıktan sonra, `stepNumber` değerini güncellememiz için `this.setState()` çağrımına `stepNumber: history.length`'i eklememiz gerekiyor. Bu sayede, yeni bir hamle yapıldıktan sonra, sürekli aynı hamleyi görüntülemekten dolayı oluşan takılmayı engellemiş oluyoruz.
 
-Ayrıca oyun geçmişine atama yapmak için `this.state.history` yerine `this.state.history.slice(0, this.state.stepNumber + 1)` yazacağız. Bu sayede, "zamanda geriye döndüğümüzde" o noktadan devam edebileceğiz ve gelecekte yaptığımız hamleler işe yaramaz hale geleceğinden dolayı bu hamlelerin de `slice()` ile atılmasını sağlamış olacağız:
+Ayrıca oyun geçmişine atama yapmak için `this.state.history` yerine `this.state.history.slice(0, this.state.stepNumber + 1)` yazacağız. Bu sayede, "zamanda geriye döndüğümüzde" o noktadan devam edebileceğiz, ve gelecekte yaptığımız hamleler işe yaramaz hale geleceğinden dolayı bu hamlelerin de `slice()` ile oyun tahtasından atılmasını sağlamış olacağız:
 
 ```javascript{2,13}
   handleClick(i) {
@@ -1207,30 +1207,30 @@ Son olarak, Game bileşeninin `render` metodunda, her zaman yapılan son hamleni
     // Kalan kısımlar değişmedi
 ```
 
-Oyun geçmişinde herhangi bir adıma tıkladığımızda tic-tac-toe tahtası, o adım bittikten sonraki halini alacak şekilde anında güncellenecektir.
+Oyun geçmişinde herhangi bir adıma tıkladığımızda, tic-tac-toe tahtası o adım bittikten sonraki halini alacak şekilde anında güncellenecektir.
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**
 
 ### Sonuç Olarak {#wrapping-up}
 
-Tebrikler! Kodladığınız bu tic-tac-toe oyunu:
+Tebrikler, bir tic-tac-toe oyunu kodladınız. Bu oyun:
 
-* Tabii ki tic-tac-toe oynamanızı sağlar,
+* Kendisinden de bekleyeceğiniz gibi bir tic-tac-toe oynamanızı sağlar,
 * Bir oyuncu kazandığında bunu gösterir, 
 * Oyun ilerledikçe oyun geçmişini saklar,
 * Oyunculara oyun geçmişini görüntüleyebilmelerini ve oyun tahtasının önceji versiyonlarına gidebilmelerini sağlar.
 
-İyi işti! Umarız artık React'in nasıl çalıştığını öğrenmişsinizdir. Nice work! We hope you now feel like you have a decent grasp on how React works.
+İyi iş çıkardınız. Umarız artık React'in nasıl çalıştığını öğrenmişsinizdir.
 
-Kodun son haline buradan bakabilirsiniz: **[Kodun Son Hali(https://codepen.io/gaearon/pen/gWWZgR?editors=0010)**.
+Kodun son haline **[buradan(https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** bakabilirsiniz.
 
-Eğer boş zamanınız varsa ve yeni React yetenekleriniz ile ilgili pratik yapmak istiyorsanız, aşağıda zorluk derecesine göre sıralanmış fikirler sayesinde, tic-tac-toe oyununu geliştirerek daha ileriye götürebilirsiniz:
+Eğer biraz daha boş vaktiniz varsa ve yeni edindiğiniz React yetenekleriniz ile ilgili pratik yapmak istiyorsanız, aşağıda zorluk derecesine göre sıralanmış işler sayesinde, tic-tac-toe oyununuzu geliştirerek daha ileriye götürebilirsiniz:
 
 1. Oyun geçmişinde, her hamlenin konumunun "(satır,sütun)" formatına göre görüntülenmesi.
 2. Oyun geçmişi listesinde tıklanan liste elemanının, seçili olarak işaretlenmesi.
 3. Board'daki karelerin, elle hardcoded olarak kodlanmasının yerine iki for döngüsü kullanılarak Board bileşeninin düzenlenmesi.
 4. Bir buton eklenerek, tıklandığında oyun geçmişinin artan veya azalan şekilde sıralanmasının sağlanması. 
-5. Bir kişi kazandığında, kazanmasına neden olan 3 karenin renklendirilerek vurgulanması. 
+5. Bir kişi kazandığında, kazanmasına vesile olan 3 karenin renklendirilerek vurgulanması. 
 6. Eğer hiç kazanan yoksa, berabere mesajının görüntülenmesi.
 
-Bu öğreticide, React konseptleri olan elemanlar, bileşenler, prop'lar, ve state'e değindik. Bu konular hakkında daha detaylı bir açıklama için [dokümanın geri kalanını](/docs/hello-world.html) inceleyebilirsiniz. For a more detailed explanation of each of these topics, check out [the rest of the documentation](/docs/hello-world.html). bileşenleri tanımlamak hakkında daha fazla bilgi almak için [`React.Component` API dokümanını](/docs/react-component.html) inceleyebilirsiniz.
+Bu öğreticide, React konseptleri olan elemanlar, bileşenler, prop'lar, ve state'e değindik. Bu konular hakkında daha detaylı bir açıklama için [dokümanın geri kalanını](/docs/hello-world.html) inceleyebilirsiniz. Bileşen tanımlama hakkında daha fazla bilgi almak için [`React.Component` API dokümanını](/docs/react-component.html) inceleyebilirsiniz.
