@@ -1,6 +1,6 @@
 ---
 id: state-and-lifecycle
-title: State and Lifecycle
+title: State ve Yaşam Döngüsü
 permalink: docs/state-and-lifecycle.html
 redirect_from:
   - "docs/interactivity-and-dynamic-uis.html"
@@ -8,7 +8,7 @@ prev: components-and-props.html
 next: handling-events.html
 ---
 
-This page introduces the concept of state and lifecycle in a React component. You can find a [detailed component API reference here](/docs/react-component.html).
+Bu sayfada, state kavramı ve bir React bileşeninin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
 
 Consider the ticking clock example from [one of the previous sections](/docs/rendering-elements.html#updating-the-rendered-element). In [Rendering Elements](/docs/rendering-elements.html#rendering-an-element-into-the-dom), we have only learned one way to update the UI. We call `ReactDOM.render()` to change the rendered output:
 
