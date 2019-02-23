@@ -233,13 +233,8 @@ Tebrikler! Board bileşeninden Square bileşenine "prop ile veri geçirmeyi" ba�
 
 ### Etkileşimli bir Bileşen Yapımı {#making-an-interactive-component}
 
-<<<<<<< HEAD
 Haydi şimdi Square bileşenine tıkladığımızda içini "X" ile dolduralım. 
 Öncelikle, Square bileşeninin `render()` fonksiyonundan dönen button etiketini bu şekilde değiştirelim:
-=======
-Let's fill the Square component with an "X" when we click it.
-First, change the button tag that is returned from the Square component's `render()` function to this:
->>>>>>> d615c5b7bcceef420c7f9246035f8ae3ba8ae11a
 
 ```javascript{4}
 class Square extends React.Component {
