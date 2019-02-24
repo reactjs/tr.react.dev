@@ -186,7 +186,7 @@ Nasıl çalıştığını şimdi adım adım inceleyelim.
     // ...
 ```
 
-[Prop'larom salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` lokal state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` ebeveynden prop olarak gedliği için `TemperatureInput` bileşeni artık `temperature` üzerinde bir kontrolü kalmadı.
+[Prop'ların salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` lokal state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` ebeveynden prop olarak gedliği için `TemperatureInput` bileşeni artık `temperature` üzerinde bir kontrolü kalmadı.
 
 React'te, bu durum genellikle bileşen oluşturulurken, "kontrollü" bileşen biçiminde yapılarak çözülür. DOM'da `<input>` öğesinin hem `value` hem de `onChange` prop'unu kabul etmesi gibi, oluşturduğumuz `TemperatureInput` bileşeni hem `temperature` hem de `onTemperatureChange` prop'larını ebeveyni `Calculator` bileşeninden kabul edebilecektir.
 
@@ -318,7 +318,7 @@ Her güncelleme aynı adımlardan geçer, böylece input'lar senkronize kalır.
 
 ## Neler Öğrendik {#lessons-learned}
 
-React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i en yakın ortak ebeveyne taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'nu kullanabilirsiniz.
+React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i en yakın ortak ebeveyne taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'ın kullanabilirsiniz.
 
 State taşıma daha çok genel hatlarıyla kod yazmayı ve iki yönlü bağlama yaklaşımını gerektirmektedir. Bu işin getirisi hataları bulup ayıklamak için daha az iş gerektirmektedr. Herhangi bir state, bazı bileşenlerde "yaşadığından" ve bileşenler tek başına onu değiştirebildiğinden, hataların kapsam alanı büyük ölçüde azalmaktadır. Ek olarak, kullanıcı tarafından girilen input değerlerini reddetmek veya dönüştürmek için herhangi bir özel mantık uygulayabilirsiniz.
 
