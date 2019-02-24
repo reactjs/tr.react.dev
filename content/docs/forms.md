@@ -9,7 +9,7 @@ redirect_from:
   - "docs/forms-zh-CN.html"
 ---
 
-HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
+HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çalışır, çünkü form elemanlarının kendilerine has iç stateleri vardır. Örneğin, bu kod HTML’de bir form içerisinde name girişi ister:
 
 ```html
 <form>
@@ -23,13 +23,13 @@ HTML form elements work a little bit differently from other DOM elements in Reac
 
 This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it's convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called "controlled components".
 
-## Controlled Components {#controlled-components}
+## Kontrollü Componentler {#controlled-components}
 
-In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with [`setState()`](/docs/react-component.html#setstate).
+HTML’de, `<input>`, `<textarea>` ve `<select>` gibi form elemanları genellikle kendi state’ini korur ve kullanıcı girdisine dayalı olarak güncelleşir. React’te ise state’ler genellikle componentlerin this.state özelliğinde saklanır ve yalnızca  [`setState()`](/docs/react-component.html#setstate). ile güncellenir.
 
-We can combine the two by making the React state be the "single source of truth". Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a "controlled component".
+React state’te tek kaynak olarak ikisini birleştirebiliriz. Ardından form oluşturan React componenti, sonraki kullanıcı girişi üzerinde bu formda olanı da kontrol eder. Değeri React tarafından bu şekilde kontrol edilen bir giriş form elemanına kontrollü component denir.
 
-For example, if we want to make the previous example log the name when it is submitted, we can write the form as a controlled component:
+Örneğin, bir önceki örnekte, name değerinin yazılıp submit edildiğinde name i alert ile yazdırmak istiyorsak, formu kontrollü bir component olarak oluşturabiliriz:
 
 ```javascript{4,10-12,24}
 class NameForm extends React.Component {
@@ -64,11 +64,11 @@ class NameForm extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/VmmPgp?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/VmmPgp?editors=0010)
 
-Since the `value` attribute is set on our form element, the displayed value will always be `this.state.value`, making the React state the source of truth. Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types.
+`value` attribute’ü input’un kendisinde zaten var. Öyleyse bu değeri almak için yeni bir React state’i oluşturmaya gerek yok. Bu inputta `value` olarak state’i yazdıracağız ve input’ta her değişiklik olduğunda bu state’i güncelleyeceğiz.
 
-With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write `handleChange` as:
+Kontrollü bir componentte her state değişimi, `handleChange` fonksiyonunu çalıştıracaktır. Örneğin, adın büyük harflerle yazılmasını isteseydik, `handleChange` fonksiyonunu şu şekilde yazabilirdik:
 
 ```javascript{2}
 handleChange(event) {
@@ -76,24 +76,24 @@ handleChange(event) {
 }
 ```
 
-## The textarea Tag {#the-textarea-tag}
+## Textarea Tagı {#the-textarea-tag}
 
-In HTML, a `<textarea>` element defines its text by its children:
+HTML’de, `<textarea>` tagı yazıyı çocuğunda tanımlar:
 
 ```html
 <textarea>
-  Hello there, this is some text in a text area
+  Merhaba, burası textarea yazı alanıdır.
 </textarea>
 ```
 
-In React, a `<textarea>` uses a `value` attribute instead. This way, a form using a `<textarea>` can be written very similarly to a form that uses a single-line input:
+Bunun yerine React, `<textarea>` için bir `value` attribute’ü kullanır. Bu şekilde `<textarea>` kullanan bir form, tek satırlı bir girdi kullanan bir forma çok benzer şekilde yazılabilir:
 
 ```javascript{4-6,12-14,26}
 class EssayForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Please write an essay about your favorite DOM element.'
+      value: 'Bu kısma bir şeyler yazınız.'
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -105,7 +105,7 @@ class EssayForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
+    alert('Gönderilen değer: ' + this.state.value);
     event.preventDefault();
   }
 
@@ -116,35 +116,35 @@ class EssayForm extends React.Component {
           Essay:
           <textarea value={this.state.value} onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Gönder" />
       </form>
     );
   }
 }
 ```
 
-Notice that `this.state.value` is initialized in the constructor, so that the text area starts off with some text in it.
+`this.state.value` 'in constructor’te başlatıldığına dikkat edin, böylece textarea içerisinde varsayılan olarak bu yazı bulunacaktır
 
-## The select Tag {#the-select-tag}
+## Select Tagı {#the-select-tag}
 
-In HTML, `<select>` creates a drop-down list. For example, this HTML creates a drop-down list of flavors:
+HTML’de `<select>`, bir açılır liste oluşturur. Örneğin, aşağıdaki kod bazı meyveleri listeler:
 
 ```html
 <select>
-  <option value="grapefruit">Grapefruit</option>
-  <option value="lime">Lime</option>
-  <option selected value="coconut">Coconut</option>
-  <option value="mango">Mango</option>
+  <option value="elma">Elma</option>
+  <option value="armut">Armut</option>
+  <option selected value="havuç">Havuç</option>
+  <option value="muz">Muz</option>
 </select>
 ```
 
-Note that the Coconut option is initially selected, because of the `selected` attribute. React, instead of using this `selected` attribute, uses a `value` attribute on the root `select` tag. This is more convenient in a controlled component because you only need to update it in one place. For example:
+`Havuç` seçeneğinin başlangıçta `selected` attribute’ü yüzünden seçili olarak geleceğini unutmayın. React, bu `selected` attribute’ünü kullanmak yerine, `select` etiketinde bir `value` attribute’ü kullanır. Kontrollü bir componentte bu daha kullanışlıdır çünkü yalnızca bir yerde güncelleme yapmanızı sağlar. Örneğin:
 
 ```javascript{4,10-12,24}
 class FlavorForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: 'coconut'};
+    this.state = {value: 'havuç'};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -155,7 +155,7 @@ class FlavorForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.value);
+    alert('Favori meyveniz: ' + this.state.value);
     event.preventDefault();
   }
 
@@ -163,28 +163,28 @@ class FlavorForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Pick your favorite flavor:
+          Favori meyveni seç:
           <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            <option value="elma">Elma</option>
+            <option value="armut">Armut</option>
+            <option value="havuç">Havuç</option>
+            <option value="muz">Muz</option>
           </select>
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Gönder" />
       </form>
     );
   }
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/JbbEzX?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/JbbEzX?editors=0010)
 
-Overall, this makes it so that `<input type="text">`, `<textarea>`, and `<select>` all work very similarly - they all accept a `value` attribute that you can use to implement a controlled component.
+Genel olarak bu, `<input type="text">`, `<textarea>` ve `<select>` elementlerinin çok benzer şekilde çalışmasını sağlar.
 
-> Note
+> Not
 >
-> You can pass an array into the `value` attribute, allowing you to select multiple options in a `select` tag:
+> Bir `select` etiketinde birden fazla seçeneği seçmenize izin veren bir diziyi `value` attribute’üne yazabilirsiniz:
 >
 >```js
 ><select multiple={true} value={['B', 'C']}>
@@ -200,11 +200,11 @@ In HTML, an `<input type="file">` lets the user choose one or more files from th
 
 Because its value is read-only, it is an **uncontrolled** component in React. It is discussed together with other uncontrolled components [later in the documentation](/docs/uncontrolled-components.html#the-file-input-tag).
 
-## Handling Multiple Inputs {#handling-multiple-inputs}
+## Çoklu Girişleri Ele Alma {#handling-multiple-inputs}
 
-When you need to handle multiple controlled `input` elements, you can add a `name` attribute to each element and let the handler function choose what to do based on the value of `event.target.name`.
+Çoklu kontrollü `input` öğelerini ele almanız gerektiğinde, her öğeye bir `name` özniteliği ekleyebilir ve işleyici işlevinin `event.target.name` değerine dayanarak ne yapılacağını seçmesine izin verebilirsiniz.
 
-For example:
+Örneğin:
 
 ```javascript{15,18,28,37}
 class Reservation extends React.Component {
@@ -254,9 +254,9 @@ class Reservation extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/wgedvV?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/wgedvV?editors=0010)
 
-Note how we used the ES6 [computed property name](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names) syntax to update the state key corresponding to the given input name:
+Verilen girdi ismine karşılık gelen state keyini güncellemek için [ES6 syntax](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names)’ını nasıl kullandığımıza dikkat edin:
 
 ```js{2}
 this.setState({
@@ -264,7 +264,7 @@ this.setState({
 });
 ```
 
-It is equivalent to this ES5 code:
+Bu da ES5’teki eşdeğer kodudur.
 
 ```js{2}
 var partialState = {};
@@ -274,11 +274,11 @@ this.setState(partialState);
 
 Also, since `setState()` automatically [merges a partial state into the current state](/docs/state-and-lifecycle.html#state-updates-are-merged), we only needed to call it with the changed parts.
 
-## Controlled Input Null Value {#controlled-input-null-value}
+## Kontrollü Giriş Boş Değer {#controlled-input-null-value}
 
-Specifying the value prop on a [controlled component](/docs/forms.html#controlled-components) prevents the user from changing the input unless you desire so. If you've specified a `value` but the input is still editable, you may have accidentally set `value` to `undefined` or `null`.
+[Kontrollü bir component](/docs/forms.html#controlled-components) üzerindeki props’u belirlemek, kullanıcının isteği dışında girişi değiştirmesini önler. `value` belirttiyseniz ancak girdi hala düzenlenebilir ise, yanlışlıkla `value`'i `undefined` veya `null` olarak ayarlamış olabilirsiniz.
 
-The following code demonstrates this. (The input is locked at first but becomes editable after a short delay.)
+Aşağıdaki kod bunu göstermektedir. (Giriş ilk önce kilitlenir ancak kısa bir gecikme sonrasında düzenlenebilir hale gelir.)
 
 ```javascript
 ReactDOM.render(<input value="hi" />, mountNode);
