@@ -8,9 +8,9 @@ prev: components-and-props.html
 next: handling-events.html
 ---
 
-Bu sayfada, state kavramı ve bir React bileşeninin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
+Bu sayfada, state kavramı ve React bileşlerinin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
 
-Consider the ticking clock example from [one of the previous sections](/docs/rendering-elements.html#updating-the-rendered-element). In [Rendering Elements](/docs/rendering-elements.html#rendering-an-element-into-the-dom), we have only learned one way to update the UI. We call `ReactDOM.render()` to change the rendered output:
+Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alalım. [Elemetlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `ReactDOM.render()` metodu ile geçekleştirebiliyorduk:
 
 ```js{8-11}
 function tick() {
@@ -29,11 +29,11 @@ function tick() {
 setInterval(tick, 1000);
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/gwoJZk?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/gwoJZk?editors=0010)
 
-In this section, we will learn how to make the `Clock` component truly reusable and encapsulated. It will set up its own timer and update itself every second.
+Bu bölümde ise, `Clock` bileşeninin nasıl tekrar kullanılabilir ve izole hale getireceğimize değineceğiz. Bu bileşen, kendi zamanlayıcısını başlatacak ve her saniye kendisini güncelleyecek. 
 
-We can start by encapsulating how the clock looks:
+Öncelikle Clock'u, ayrı bir bileşen halinde sarmalayarak görüntüleyelim:
 
 ```js{3-6,12}
 function Clock(props) {
@@ -55,11 +55,11 @@ function tick() {
 setInterval(tick, 1000);
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 
-However, it misses a crucial requirement: the fact that the `Clock` sets up a timer and updates the UI every second should be an implementation detail of the `Clock`.
+Güzel görünüyor ancak kritik bir gereksinimi atladık: `Clock` kendi zamanlayıcısını ayarlaması ve her saniye kullanıcı arayüzünü güncellemesi işi Clock bileşeni içerisinde yer almalıydı.
 
-Ideally we want to write this once and have the `Clock` update itself:
+İdeal olarak aşağıdaki kodu bir kere yazdığımızda, `Clock`'un artık kendi kendisini güncellemesini istiyoruz:
 
 ```js{2}
 ReactDOM.render(
@@ -68,25 +68,25 @@ ReactDOM.render(
 );
 ```
 
-To implement this, we need to add "state" to the `Clock` component.
+Bunu yapmak için, `Clock` bileşenine "state eklememiz gerekiyor.
 
-State is similar to props, but it is private and fully controlled by the component.
+State'ler, prop'larla benzerlik gösterir. Fakat sadece ilgili bileşene özeldir ve yalnızca o bileşen tarafından kontrol edilirler.
 
-We [mentioned before](/docs/components-and-props.html#functional-and-class-components) that components defined as classes have some additional features. Local state is exactly that: a feature available only to classes.
+Sınıf olarak oluşturulan bişeşenlerin, fonksiyon bileşenlerine göre bazı ek özelliklerinin bulunduğundan [bahsetmiştik](/docs/components-and-props.html#functional-and-class-components). Bahsettiğimiz ek özellik yerel state değişkenidir ve sadece sınıf bileşenlerine özgüdür.
 
-## Converting a Function to a Class {#converting-a-function-to-a-class}
+## Bir Fonksiyonun Sınıfa Dönüştürülmesi {#converting-a-function-to-a-class}
 
-You can convert a function component like `Clock` to a class in five steps:
+`Clock` gibi bir fonksiyon bileşenini aşağıdaki 5 adımda sınıf bileşenine dönüştürebilirsiniz:
 
-1. Create an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes), with the same name, that extends `React.Component`.
+1. Öncelikle, fonksiyon ismiyle aynı isimde bir [ES6 sınıfı](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) oluşturun. Ve bu sınıfı `React.Component`'tan türetin.
 
-2. Add a single empty method to it called `render()`.
+2. Sınıfın içerisine, `render()` adında boş bir fonksiyon ekleyin.
 
-3. Move the body of the function into the `render()` method.
+3. Fonksiyon bileşeni içerisindeki kodları `render()` metoduna taşıyın.
 
-4. Replace `props` with `this.props` in the `render()` body.
+4. `render()` metodu içerisindeki `props` yazan yerleri, `this.props` ile değiştirin.
 
-5. Delete the remaining empty function declaration.
+5. İçi boşaltılmış fonksiyonu silin.
 
 ```js
 class Clock extends React.Component {
@@ -101,17 +101,17 @@ class Clock extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/zKRGpo?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/zKRGpo?editors=0010)
 
-`Clock` is now defined as a class rather than a function.
+Artık `Clock` bileşeni, fonksiyon yerine, bir sınıf bileşeni haline gelmiş oldu.
 
-The `render` method will be called each time an update happens, but as long as we render `<Clock />` into the same DOM node, only a single instance of the `Clock` class will be used. This lets us use additional features such as local state and lifecycle methods.
+`render` metodu her güncelleme olduğunda çağrılacaktır. Fakat `<Clock />`'u aynı DOM düğümünde render ettiğimizden dolayı, `Clock` sınıfının yalnızca bir örneği kullanılacaktır.
 
-## Adding Local State to a Class {#adding-local-state-to-a-class}
+## Bir Sınıfa Yerel State'in Eklenmesi {#adding-local-state-to-a-class}
 
-We will move the `date` from props to state in three steps:
+`date` değişkenini, props'tan state'e 3 adımda taşıyacağız:
 
-1) Replace `this.props.date` with `this.state.date` in the `render()` method:
+1) `render()` metodundaki `this.props.date`'i `this.state.date` ile değiştirelim:
 
 ```js{6}
 class Clock extends React.Component {
@@ -126,7 +126,7 @@ class Clock extends React.Component {
 }
 ```
 
-2) Add a [class constructor](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor) that assigns the initial `this.state`:
+2) `state`'in ilk oluşturulacağı yer olan [sınıf constructor](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor)'ını ekleyelim:
 
 ```js{4}
 class Clock extends React.Component {
@@ -146,7 +146,7 @@ class Clock extends React.Component {
 }
 ```
 
-Note how we pass `props` to the base constructor:
+`props`'ı constructor içerisinde nasıl oluşturduğumuza dikkat edin:
 
 ```js{2}
   constructor(props) {
@@ -155,9 +155,9 @@ Note how we pass `props` to the base constructor:
   }
 ```
 
-Class components should always call the base constructor with `props`.
+Sınıf bileşenleri `React.Component` sınıfından türetildikleri için, daima `super(props)`'u çağırmaları gerekir.
 
-3) Remove the `date` prop from the `<Clock />` element:
+3) `<Clock />` elementinden `date` prop'unu çıkaralım:
 
 ```js{2}
 ReactDOM.render(
@@ -166,9 +166,7 @@ ReactDOM.render(
 );
 ```
 
-We will later add the timer code back to the component itself.
-
-The result looks like this:
+Zamanlayıcı kodunu, daha sonra `Clock` bileşenin içerisine ekleyeceğiz. Fakat şimdilik `Clock` bileşeninin son hali aşağıdaki gibi olacaktır:
 
 ```js{2-5,11,18}
 class Clock extends React.Component {
@@ -193,19 +191,19 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/KgQpJd?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/KgQpJd?editors=0010)
 
-Next, we'll make the `Clock` set up its own timer and update itself every second.
+Şimdi `Clock` bileşenini, kendi zamanlayıcısını kuracak ve her saniye kendisini güncelleyecek şekilde ayarlayalım.
 
-## Adding Lifecycle Methods to a Class {#adding-lifecycle-methods-to-a-class}
+## Bir Sınıfın Yaşam Döngüsü Kodlarının Eklenmesi {#adding-lifecycle-methods-to-a-class}
 
-In applications with many components, it's very important to free up resources taken by the components when they are destroyed.
+Birçok bileşene sahip uygulamalarda, bileşenler yok edildiğinde ilgili kaynakların boşaltılması çok önemlidir.
 
-We want to [set up a timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) whenever the `Clock` is rendered to the DOM for the first time. This is called "mounting" in React.
+`Clock` bileşeni ilk kez DOM'a render edildiğinde bir [zamanlayıcı](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) kurmak istiyoruz. React'te bu olaya "mounting" (değişkenin takılması) adı verilir.
 
-We also want to [clear that timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval) whenever the DOM produced by the `Clock` is removed. This is called "unmounting" in React.
+Ayrıca, `Clock` bileşeni DOM'dan çıkarıldığında silindiğinde zamanlayıcının da [temizlenmesini](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval) istiyoruz. React'te bu olaya "unmounting" (değişkenin çıkarılması) adı verilir.
 
-We can declare special methods on the component class to run some code when a component mounts and unmounts:
+`Clock` bileşeni takılıp çıkarıldığında bazı işleri gerçekleştirebilmek için özel metodlar tanımlayabiliriz:
 
 ```js{7-9,11-13}
 class Clock extends React.Component {
@@ -233,9 +231,9 @@ class Clock extends React.Component {
 }
 ```
 
-These methods are called "lifecycle methods".
+Bu metodlara "lifecycle methods" (yaşam döngüsü metodları) adı verilir.
 
-The `componentDidMount()` method runs after the component output has been rendered to the DOM. This is a good place to set up a timer:
+Bileşenin çıktısı, DOM'a render edildikten sonra `componentDidMount()` metodu çalıştırılır. Burası aynı zamanda bir zamanlayıcı oluşturmak için en elverişli yerdir:
 
 ```js{2-5}
   componentDidMount() {
@@ -246,11 +244,11 @@ The `componentDidMount()` method runs after the component output has been render
   }
 ```
 
-Note how we save the timer ID right on `this`.
+`this`'e zamanlayıcı ID'sini nasıl atadığımızı görebilirsiniz.
 
-While `this.props` is set up by React itself and `this.state` has a special meaning, you are free to add additional fields to the class manually if you need to store something that doesn’t participate in the data flow (like a timer ID).
+Daha önce de belirttiğimiz gibi, `this.props` React tarafından yönetiliyor, ve `this.state`'in de özel bir yaşam döngüsü mevcut. Eğer `timerID` gibi veri akışına dahil olmayan değişkenleri saklamanız gerekiyorsa, bu örnekte yaptığımız gibi sınıf içerisinde değişkenler ekleyebilirsiniz.
 
-We will tear down the timer in the `componentWillUnmount()` lifecycle method:
+Oluşturduğumuz zamanlayıcıyı `componentWillUnmount()` yaşam döngüsü metodu içerisinde `Clock` bileşeninden söküp çıkaralım:
 
 ```js{2}
   componentWillUnmount() {
@@ -258,9 +256,9 @@ We will tear down the timer in the `componentWillUnmount()` lifecycle method:
   }
 ```
 
-Finally, we will implement a method called `tick()` that the `Clock` component will run every second.
+Son olarak, `Clock` bileşeninin saniyede bir çalıştıracağı `tick()` fonksiyonunu implement edelim.
 
-It will use `this.setState()` to schedule updates to the component local state:
+`tick()` fonksiyonu, `this.setState()`'i çağırarak `Clock` bileşeninin yerel state'ini güncelleyecektir:
 
 ```js{18-22}
 class Clock extends React.Component {
@@ -302,21 +300,21 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/amqdNA?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/amqdNA?editors=0010)
 
-Now the clock ticks every second.
+Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
-Let's quickly recap what's going on and the order in which the methods are called:
+Şimdi kısa bir özet geçerek neler yaptığımızı ve sırasıyla hangi metotların çağrıldığını kontrol edelim:
 
-1) When `<Clock />` is passed to `ReactDOM.render()`, React calls the constructor of the `Clock` component. Since `Clock` needs to display the current time, it initializes `this.state` with an object including the current time. We will later update this state.
+1) `ReactDOM.render()` metoduna `<Clock />` aktarıldığı zaman React, `Clock` bileşeninin constructor'ını çağırır. `Clock` bileşeni, mevcut saati görüntülemesi gerektiğinden dolayı, `this.state`'e o anki zamanı atar. Daha sonra bu state'i güncelleyeceğiz.
 
-2) React then calls the `Clock` component's `render()` method. This is how React learns what should be displayed on the screen. React then updates the DOM to match the `Clock`'s render output.
+2) Daha sonra React, `Clock` bileşeninin `render()` metodunu çağırır. Bu sayede React, ekranda nelerin gösterilmesi gerektiğini bilir. Sonrasında React, `Clock`'un render edilmiş çıktısı ile eşleşmek için ilgili DOM güncellemelerini gerçekleştirir.
 
-3) When the `Clock` output is inserted in the DOM, React calls the `componentDidMount()` lifecycle method. Inside it, the `Clock` component asks the browser to set up a timer to call the component's `tick()` method once a second.
+3) `Clock` bileşeninin çıktısı DOM'a eklendiğinde React, `componentDidMount()` yaşam döngüsü metodunu çağırır. Bu metodda `Clock` bileşeni, her saniyede bir `tick()` metodunun çalıştırılması gerektiğini tarayıcıya bildirir.
 
-4) Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setState()` with an object containing the current time. Thanks to the `setState()` call, React knows the state has changed, and calls the `render()` method again to learn what should be on the screen. This time, `this.state.date` in the `render()` method will be different, and so the render output will include the updated time. React updates the DOM accordingly.
+4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan dolayı, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'u ilgili şekilde günceller.
 
-5) If the `Clock` component is ever removed from the DOM, React calls the `componentWillUnmount()` lifecycle method so the timer is stopped.
+5) Eğer `Clock` bileşeni, DOM'dan çıkarılırsa React, `componentWillUnmount()` yaşam döngüsü metodunu çağırır ve zamanlayıcı, tarayıcı tarafından durdurulmuş olur.
 
 ## Using State Correctly {#using-state-correctly}
 
