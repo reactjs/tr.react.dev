@@ -316,56 +316,56 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 5) Eğer `Clock` bileşeni, DOM'dan çıkarılırsa React, `componentWillUnmount()` yaşam döngüsü metodunu çağırır ve zamanlayıcı, tarayıcı tarafından durdurulmuş olur.
 
-## Using State Correctly {#using-state-correctly}
+## State'in Doğru Kullanımı {#using-state-correctly}
 
-There are three things you should know about `setState()`.
+`setState()` hakkında bilmeniz gereken 3 şey bulunmaktadır.
 
-### Do Not Modify State Directly {#do-not-modify-state-directly}
+### State'i Direkt Olarak Değiştirmeyiniz {#do-not-modify-state-directly}
 
-For example, this will not re-render a component:
+Aşağıdaki kod, bileşenin tekrar render edilmemesine neden olur:
 
 ```js
-// Wrong
+// Yanlış kullanım
 this.state.comment = 'Hello';
 ```
 
-Instead, use `setState()`:
+Bunun yerine `setState()` kullanınız:
 
 ```js
-// Correct
+// Doğru kullanım
 this.setState({comment: 'Hello'});
 ```
 
-The only place where you can assign `this.state` is the constructor.
+`this.state`'e atama yapmanız gereken tek yer, ilgili bileşenin constructor'ıdır.
 
-### State Updates May Be Asynchronous {#state-updates-may-be-asynchronous}
+### State Güncellemeleri Asenkron Olabilir {#state-updates-may-be-asynchronous}
 
-React may batch multiple `setState()` calls into a single update for performance.
+React, çoklu `setState()` çağrılarını, performans için tekil bir güncellemeye dönüştürebilir.
 
-Because `this.props` and `this.state` may be updated asynchronously, you should not rely on their values for calculating the next state.
+`this.props` ve `this.state` asenkron olarak güncellenebildiklerinden dolayı, sonraki state'i hesaplarken bu nesnelerin değerlerine **güvenmemelisiniz**.
 
-For example, this code may fail to update the counter:
+Örneğin, aşağıdaki kod `counter`'ı güncellemeyebilir:
 
 ```js
-// Wrong
+// Yanlış kullanım
 this.setState({
   counter: this.state.counter + this.props.increment,
 });
 ```
 
-To fix it, use a second form of `setState()` that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:
+Bunu düzeltmek için, `setState()`'in ikinci formunu kullanmamız gerekiyor. Bu formda  `setState()` fonksiyonu, parametre olarak nesne yerine fonksiyon alıyor. Bu fonksiyon, ilk parametre olarak önceki state'i, ikinci parametre olarak da o anda güncellenen props değerini alıyor:
 
 ```js
-// Correct
+// Doğru kullanım
 this.setState((state, props) => ({
   counter: state.counter + props.increment
 }));
 ```
 
-We used an [arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) above, but it also works with regular functions:
+Yukarıda bir [ok fonksiyonu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) kullandık. Fakat normal fonksiyonlarla da gayet çalışabilir:
 
 ```js
-// Correct
+// Doğru kullanım
 this.setState(function(state, props) {
   return {
     counter: state.counter + props.increment
@@ -373,11 +373,11 @@ this.setState(function(state, props) {
 });
 ```
 
-### State Updates are Merged {#state-updates-are-merged}
+### State Güncellemeleri Birleştirilir {#state-updates-are-merged}
 
-When you call `setState()`, React merges the object you provide into the current state.
+`setState()`'i çağırdığınızda React, parametre olarak verdiğiniz nesneyi alıp, mevcut state'e birleştirir.
 
-For example, your state may contain several independent variables:
+Örneğin, state'iniz birçok bağımsız değişken içerebilir:
 
 ```js{4,5}
   constructor(props) {
@@ -389,7 +389,7 @@ For example, your state may contain several independent variables:
   }
 ```
 
-Then you can update them independently with separate `setState()` calls:
+Ve siz de bu değişkenleri `setState()` çağrıları ile güncellemek isteyebilirsiniz:
 
 ```js{4,10}
   componentDidMount() {
@@ -407,27 +407,27 @@ Then you can update them independently with separate `setState()` calls:
   }
 ```
 
-The merging is shallow, so `this.setState({comments})` leaves `this.state.posts` intact, but completely replaces `this.state.comments`.
+Birleşme işlemi yüzeysel olduğundan dolayı, `this.setState({comments})` çağrısı `this.state.posts` değişkenini değişmeden bırakırken, `this.state.comments`'i tamamıyla değiştirir.
 
-## The Data Flows Down {#the-data-flows-down}
+## Verinin Alt Bileşenlere Aktarılması {#the-data-flows-down}
 
-Neither parent nor child components can know if a certain component is stateful or stateless, and they shouldn't care whether it is defined as a function or a class.
+Ne ebeveyn ne de alt bileşenler, belirli bir bileşenin durumlu (stateful) veya durumsuz (stateless) olduğunu bilemez. Ayrıca o bileşenin fonksiyon veya sınıf olarak tanımlanmasını da önemsemezler.
 
-This is why state is often called local or encapsulated. It is not accessible to any component other than the one that owns and sets it.
+Bu nedenle state'e yerel state veya izole state denir. State, kendisine sahip olan ve kendisini ayarlayan bileşen haricinde hiçbir bileşen için erişilebilir değildir.
 
-A component may choose to pass its state down as props to its child components:
+Bir bileşen kendi state'ini, prop'lar aracılığıyla alt bileşenlere aktarabilir:
 
 ```js
 <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
 ```
 
-This also works for user-defined components:
+Kullanıcı tanımlı bileşenler için de bu durum geçerlidir:
 
 ```js
 <FormattedDate date={this.state.date} />
 ```
 
-The `FormattedDate` component would receive the `date` in its props and wouldn't know whether it came from the `Clock`'s state, from the `Clock`'s props, or was typed by hand:
+`FormattedDate` bileşeni, `date` değişkenini props'tan alabilir. Ve bunu alırken `Clock`'un state'inden mi yoksa prop'undan mı geldiğini bilemez. Hatta `date` değişkeni, `Clock` bileşenine elle yazılmış bir değer de olabilir ve bunu bilmesine imkanı yoktur:
 
 ```js
 function FormattedDate(props) {
@@ -435,13 +435,13 @@ function FormattedDate(props) {
 }
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/zKRqNB?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/zKRqNB?editors=0010)
 
-This is commonly called a "top-down" or "unidirectional" data flow. Any state is always owned by some specific component, and any data or UI derived from that state can only affect components "below" them in the tree.
+Bu olaya genellikle **yukarıdan-aşağıya** veya **tek yönlü** veri akışı denir. Her state, belirli bir bileşen tarafından tutulur. Bu bileşenden türetilen herhangi bir veri veya kullanıcı arayüzü, yalnızca bu bileşenin altındaki bileşen ağacına etki edebilir.
 
-If you imagine a component tree as a waterfall of props, each component's state is like an additional water source that joins it at an arbitrary point but also flows down.
+Bileşen ağacını, prop'lardan oluşan bir şelale olarak düşünebilirsiniz. Her bileşenin state'i, prop'ları istenilen bir noktada birleştirebilen ve aynı zamanda alt bileşenlere de akıtan ek bir su kaynağı gibidir.
 
-To show that all components are truly isolated, we can create an `App` component that renders three `<Clock>`s:
+Tüm bileşenlerin tamamen izole olduğunu göstermek için, 3 adet `<Clock>` render eden bir `App` bileşeni oluşturabiliriz:
 
 ```js{4-6}
 function App() {
@@ -460,8 +460,8 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](http://codepen.io/gaearon/pen/vXdGmd?editors=0010)
+[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/vXdGmd?editors=0010)
 
-Each `Clock` sets up its own timer and updates independently.
+Bu örnekte yer alan her bir `Clock` bileşeni, kendi zamanlayıcısını oluşturup, birbirinden bağımsız bir şekilde güncellemektedir.
 
-In React apps, whether a component is stateful or stateless is considered an implementation detail of the component that may change over time. You can use stateless components inside stateful components, and vice versa.
+React uygulamalarında, bir bileşenin state'li veya state'siz olması, bir kodlama detayıdır ve zaman içerisinde değişkenlik gösterebilir. State'li bileşenler içerisinde, state'siz bileşenleri kullanabilirsiniz. Veya bu durumun tam tersi de geçerlidir.
