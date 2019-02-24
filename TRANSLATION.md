@@ -105,17 +105,17 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 
 | Orijinal kelime / terim | Öneri |
 | ------------------------- | ---------- |
-| array              		| array |
-| arrow function 			| arrow fonksiyonu |
+| array              		| dizi |
+| arrow function 			| ok fonksiyonu |
 | bug 						| hata |
 | bundler 					| paketleyici |
 | callback 					| callback |
 | camelCase 				| camelCase |
-| controlled component 		| kontrollü component |
+| controlled component 		| kontrollü bileşen |
 | debugging 				| hata ayıklama |
 | DOM 						| DOM |
 | framework 				| çatı |
-| function component 		| fonksiyon component'i |
+| function component 		| fonksiyon bileşeni |
 | hook 						| hook |
 | key 						| anahtar |
 | lazy initialization 		| lazy başlatım |
@@ -128,4 +128,4 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | state 					| state |
 | string 					| string |
 | template literals 		| template literal'leri |
-| uncontrolled component 	| kontrolsüz component |
+| uncontrolled component 	| kontrolsüz bileşen |
