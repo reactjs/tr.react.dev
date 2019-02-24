@@ -318,7 +318,7 @@ Her güncelleme aynı adımlardan geçer, böylece input'lar senkronize kalır.
 
 ## Neler Öğrendik {#lessons-learned}
 
-React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i ortak en yakın ebeveyne taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'nu kullanabilirsin.
+React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i en yakın ortak ebeveyne taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'nu kullanabilirsiniz.
 
 State taşıma daha çok genel hatlarıyla kod yazmayı ve iki yönlü bağlama yaklaşımını gerektirmektedir. Bu işin getirisi hataları bulup ayıklamak için daha az iş gerektirmektedr. Herhangi bir state, bazı bileşenlerde "yaşadığından" ve bileşenler tek başına onu değiştirebildiğinden, hataların kapsam alanı büyük ölçüde azalmaktadır. Ek olarak, kullanıcı tarafından girilen input değerlerini reddetmek veya dönüştürmek için herhangi bir özel mantık uygulayabilirsiniz.
 
