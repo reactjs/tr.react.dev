@@ -6,9 +6,9 @@ prev: conditional-rendering.html
 next: forms.html
 ---
 
-Öncelikle, listeleri JavaScript'te nasıl dönüştürdüğünüzü gözden geçirelim.
+Öncelikle, listelerin JavaScript'te nasıl dönüştürüldüğünü gözden geçirelim.
 
-Aşağıdaki kod göz önüne alındığında, `sayılardan` oluşan bir arrayi almak ve değerlerini iki katına çıkarmak için [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanırız. `map()` tarafından döndürülen yeni arrayi `doubled` değişkenine atayıp ekrana yazdırırız:
+Aşağıdaki kod göz önüne alındığında, `sayılardan` oluşan bir diziyi almak ve değerlerini iki katına çıkarmak için [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanırız. `map()` tarafından döndürülen yeni diziyi `doubled` değişkenine atayıp ekrana yazdırırız:
 
 ```javascript{2}
 const numbers = [1, 2, 3, 4, 5];
@@ -18,13 +18,13 @@ console.log(doubled);
 
 Bu kod konsol ekranına `[2, 4, 6, 8, 10]` yazdırır.
 
-React'te, arrayleri [öğe](/docs/rendering-elements.html) listelerine dönüştürmek de neredeyse aynıdır.
+React'te, dizileri [öğe](/docs/rendering-elements.html) listelerine dönüştürmek de neredeyse aynıdır.
 
-### Rendering Multiple Components {#rendering-multiple-components}
+### Çoklu Bileşenleri Render Etmek {#rendering-multiple-components}
 
-You can build collections of elements and [include them in JSX](/docs/introducing-jsx.html#embedding-expressions-in-jsx) using curly braces `{}`.
+Ögelerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
 
-Below, we loop through the `numbers` array using the JavaScript [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. We return a `<li>` element for each item. Finally, we assign the resulting array of elements to `listItems`:
+Aşağıda, Javascript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir öğe için bir `<li>` elemanı dönüyoruz. Son olarak da, ortaya çıkan diziyi `listItems` a atıyoruz:
 
 ```javascript{2-4}
 const numbers = [1, 2, 3, 4, 5];
@@ -33,7 +33,7 @@ const listItems = numbers.map((number) =>
 );
 ```
 
-We include the entire `listItems` array inside a `<ul>` element, and [render it to the DOM](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
+`listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz, ve [DOM'a render ediyoruz](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
 
 ```javascript{2}
 ReactDOM.render(
@@ -42,9 +42,9 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
 
-This code displays a bullet list of numbers between 1 and 5.
+Bu kod, 1 ile 5 arasındaki sayıların madde işaretli listesini görüntüler.
 
 ### Basic List Component {#basic-list-component}
 
