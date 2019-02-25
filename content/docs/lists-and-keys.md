@@ -1,14 +1,14 @@
 ---
 id: lists-and-keys
-title: Lists and Keys
+title: Listeler ve Anahtarlar
 permalink: docs/lists-and-keys.html
 prev: conditional-rendering.html
 next: forms.html
 ---
 
-First, let's review how you transform lists in JavaScript.
+Öncelikle, listeleri JavaScript'te nasıl dönüştürdüğünüzü gözden geçirelim.
 
-Given the code below, we use the [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function to take an array of `numbers` and double their values. We assign the new array returned by `map()` to the variable `doubled` and log it:
+Aşağıdaki kod göz önüne alındığında, `sayılardan` oluşan bir arrayi almak ve değerlerini iki katına çıkarmak için [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanırız. `map()` tarafından döndürülen yeni arrayi `doubled` değişkenine atayıp ekrana yazdırırız:
 
 ```javascript{2}
 const numbers = [1, 2, 3, 4, 5];
@@ -16,9 +16,9 @@ const doubled = numbers.map((number) => number * 2);
 console.log(doubled);
 ```
 
-This code logs `[2, 4, 6, 8, 10]` to the console.
+Bu kod konsol ekranına `[2, 4, 6, 8, 10]` yazdırır.
 
-In React, transforming arrays into lists of [elements](/docs/rendering-elements.html) is nearly identical.
+React'te, arrayleri [öğe](/docs/rendering-elements.html) listelerine dönüştürmek de neredeyse aynıdır.
 
 ### Rendering Multiple Components {#rendering-multiple-components}
 
