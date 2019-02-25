@@ -129,3 +129,4 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | string 					| string |
 | template literals 		| template literal'leri |
 | uncontrolled component 	| kontrolsüz bileşen |
+| Try it on CodePen 	| CodePen'de deneyin |
