@@ -101,7 +101,7 @@ Tutarlılığı korumak ve okura saygı ve incelik ile hitap etmek için, you ke
 
 # Ortak çeviriler
 
-Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için bazı öneriler aşağıdaki şekilde sıralanmıştır.
+Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için bazı öneriler aşağıdaki şekilde alfabetik olarak sıralanmıştır.
 
 | Orijinal kelime / terim | Öneri |
 | ------------------------- | ---------- |
@@ -111,6 +111,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | bundler 					| paketleyici |
 | callback 					| callback |
 | camelCase 				| camelCase |
+| child 					| alt |
 | controlled component 		| kontrollü bileşen |
 | debugging 				| hata ayıklama |
 | DOM 						| DOM |
@@ -121,6 +122,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | lazy initialization 		| lazy başlatım |
 | library 					| kütüphane |
 | lowercase 				| küçük harf |
+| parent 					| üst |
 | props 					| prop'ları |
 | React element 			| React elemanı |
 | render 					| render etmek |
@@ -128,5 +130,5 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | state 					| state |
 | string 					| string |
 | template literals 		| template literal'leri |
-| uncontrolled component 	| kontrolsüz bileşen |
 | Try it on CodePen 	| CodePen'de deneyin |
+| uncontrolled component 	| kontrolsüz bileşen |
