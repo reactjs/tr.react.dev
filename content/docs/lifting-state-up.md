@@ -9,7 +9,7 @@ redirect_from:
   - "docs/flux-todo-list.html"
 ---
 
-Çoğu zaman, birden çok bileşen değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın yukarı taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
+Çoğu zaman, birden çok bileşen değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın ortak üst elemana taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
 
 Bu bölümde, suyun belirli bir sıcaklıkta kaynayıp kaynayamayacağını hesaplayan bir sıcaklık hesaplayıcısı oluşturacağız.
 
@@ -171,7 +171,7 @@ class TemperatureInput extends React.Component {
 
 Ancak, bu iki girişin birbiriyle senkronize olmasını istediğimiz için Santigrat input'unu güncellediğimizde, Fahrenayt input'u dönüştürülen sıcaklığı yansıtmalıdır ya da aynı şekilde Fahrenayt input'unu güncellediğimizde Santigrat input'u dönüştürülen sıcaklığı yansıtmalıdır.
 
-React'te state paylaşımı, state'i, ihtiyacı olan bileşenlerin en yakın üst elemana taşıyarak gerçekleştirilir. Buna "lifting state up" yani state'i yukarı taşıma denir. Lokal state'i `TemperatureInput`'dan kaldırıp ve `Calculator` bileşinine taşıyacağız.
+React'te state paylaşımı, state'i, ihtiyacı olan bileşenlerin en yakın ortak üst elemana taşıyarak gerçekleştirilir. Buna "lifting state up" yani state'i yukarı taşıma denir. Lokal state'i `TemperatureInput`'dan kaldırıp ve `Calculator` bileşinine taşıyacağız.
 
 `Calculator` bileşeni paylaşılan state'e sahip olacağı için, bu bileşen her iki input'ta geçerli sıcaklık değeri için "source of truth" yani gerçek veri kaynağı olacaktır. Bu şekilde `Calculator`, her iki input'a birbirleriyle tutarlı değerlere sahip olma talimatını verebilecektir. Her iki `TemperatureInput` bileşeninin `prop`'ları üst eleman olan `Calculator` bileşeninden geldiği için, her iki input değeri her zaman senkronize olacaktır.
 
@@ -318,7 +318,7 @@ Her güncelleme aynı adımlardan geçer, böylece input'lar senkronize kalır.
 
 ## Neler Öğrendik {#lessons-learned}
 
-React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i üst elemana taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'ın kullanabilirsiniz.
+React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i en yakın ortak üst elemana taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'ın kullanabilirsiniz.
 
 State taşıma daha çok genel hatlarıyla kod yazmayı ve iki yönlü bağlama yaklaşımını gerektirmektedir. Bu işin getirisi hataları bulup ayıklamak için daha az iş gerektirmektedr. Herhangi bir state, bazı bileşenlerde "yaşadığından" ve bileşenler tek başına onu değiştirebildiğinden, hataların kapsam alanı büyük ölçüde azalmaktadır. Ek olarak, kullanıcı tarafından girilen input değerlerini reddetmek veya dönüştürmek için herhangi bir özel mantık uygulayabilirsiniz.
 
