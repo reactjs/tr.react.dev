@@ -70,9 +70,9 @@ ReactDOM.render(
 );
 ```
 
-Bu kodu çalıştırdığınızda, liste öğeleri için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar", öğe listeleri oluştururken eklemeniz gereken özel bir dize özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde tartışacağız.
+Bu kodu çalıştırdığınızda, liste öğeleri için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar", öğe listeleri oluştururken eklemeniz gereken özel bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde tartışacağız.
 
-`numbers.map()` içindeki liste öğelerine birer `anahtar` atayalım ve eksik anahtar sorununu düzeltelim.
+`numbers.map()` içindeki liste öğelerine birer `anahtar` atayalım ve eksik anahtar sorununu düzeltelim:
 
 ```javascript{4}
 function NumberList(props) {
@@ -98,7 +98,7 @@ ReactDOM.render(
 
 ## Anahtarlar {#keys}
 
-Anahtarlar hangi öğelerin değiştiğini, eklendiğini ya da silindiğini belirleme noktasında React'e yardımcı olur:
+Anahtarlar; hangi öğelerin değiştiğini, eklendiğini ya da silindiğini belirleme noktasında React'e yardımcı olur:
 
 ```js{3}
 const numbers = [1, 2, 3, 4, 5];
@@ -123,7 +123,7 @@ Render edilen öğeleriniz için sabit ID'leriniz yoksa, son çare olarak, öğe
 
 ```js{2,3}
 const todoItems = todos.map((todo, index) =>
-  // Only do this if items have no stable IDs
+  // Bunu yalnızca öğelerinizin sabit ID'leri yoksa yapın
   <li key={index}>
     {todo.text}
   </li>
