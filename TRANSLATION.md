@@ -1,6 +1,6 @@
 # Çeviri
 
-Şu anki ilerleme: https://github.com/reactjs/tr.reactjs.org/issues/4
+Şu anki ilerleme: https://github.com/reactjs/tr.reactjs.org/issues/1
 
 # Stil Rehberi
 
