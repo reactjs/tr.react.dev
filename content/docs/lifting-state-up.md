@@ -1,6 +1,6 @@
 ---
 id: lifting-state-up
-title: Lifting State Up
+title: State'i Yukarı Taşıma
 permalink: docs/lifting-state-up.html
 prev: forms.html
 next: composition-vs-inheritance.html
@@ -9,24 +9,24 @@ redirect_from:
   - "docs/flux-todo-list.html"
 ---
 
-Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let's see how this works in action.
+Çoğu zaman, birden çok bileşen değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın ortak üst elemana taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
 
-In this section, we will create a temperature calculator that calculates whether the water would boil at a given temperature.
+Bu bölümde, suyun belirli bir sıcaklıkta kaynayıp kaynayamayacağını hesaplayan bir sıcaklık hesaplayıcısı oluşturacağız.
 
-We will start with a component called `BoilingVerdict`. It accepts the `celsius` temperature as a prop, and prints whether it is enough to boil the water:
+`BoilingVerdict` diye isimlendirdiğimiz bir bileşenle işe başlayacağız. Bu bileşen `celsius` değerini bir `prop` olarak kabul edip bu değerin suyu kaynatmaya yeterli olup olmayacağını gösterecektir.
 
 ```js{3,5}
 function BoilingVerdict(props) {
   if (props.celsius >= 100) {
-    return <p>The water would boil.</p>;
+    return <p>Su kaynar.</p>;
   }
-  return <p>The water would not boil.</p>;
+  return <p>Su kaynamaz.</p>;
 }
 ```
 
-Next, we will create a component called `Calculator`. It renders an `<input>` that lets you enter the temperature, and keeps its value in `this.state.temperature`.
+Bir sonraki adımda, `Calculator` diye isimlendirdiğimiz bir bileşen oluşturacağız. Bu bileşen sıcaklık değerini girmemizi sağlayacak bir `<input>` elemanına sahip olacaktır, ve bu input elemanında `this.state.temperature` değeri tutulacaktır.
 
-Additionally, it renders the `BoilingVerdict` for the current input value.
+Bu bileşen ayrıca, `<input>`'ta tuttuğumuz değer için `BoilingVerdict` bileşenini de ekrana yansıtacaktır.
 
 ```js{5,9,13,17-21}
 class Calculator extends React.Component {
@@ -44,7 +44,7 @@ class Calculator extends React.Component {
     const temperature = this.state.temperature;
     return (
       <fieldset>
-        <legend>Enter temperature in Celsius:</legend>
+        <legend>Santigrat cinsinden sıcaklık girin:</legend>
         <input
           value={temperature}
           onChange={this.handleChange} />
@@ -56,18 +56,18 @@ class Calculator extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/ZXeOBm?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ZXeOBm?editors=0010)
 
-## Adding a Second Input {#adding-a-second-input}
+## İkinci Input Elemanı Ekleme {#adding-a-second-input}
 
-Our new requirement is that, in addition to a Celsius input, we provide a Fahrenheit input, and they are kept in sync.
+Santigrat input'una ek olarak Fahrenayt cinsinden de sıcaklık değeri girebileceğimiz bir input'a ve sıcaklık değerlerinin birbirleri cinsinden senkronize şekilde çalışabileceği yeni bir gereksinimimizin olduğunu düşünelim.
 
-We can start by extracting a `TemperatureInput` component from `Calculator`. We will add a new `scale` prop to it that can either be `"c"` or `"f"`:
+Öncelikle `TemperatureInput` bileşenini `Calculator` bileşeninden ayırarak işe başlayacağız. Santigrat birimi olan `"c"` veya Fahrenayt birimi olan `"f"` değerine sahip olacak `scale` prop'unu ekleyeceğiz:
 
 ```js{1-4,19,22}
 const scaleNames = {
-  c: 'Celsius',
-  f: 'Fahrenheit'
+  c: 'Santigrat',
+  f: 'Fahrenayt'
 };
 
 class TemperatureInput extends React.Component {
@@ -86,7 +86,7 @@ class TemperatureInput extends React.Component {
     const scale = this.props.scale;
     return (
       <fieldset>
-        <legend>Enter temperature in {scaleNames[scale]}:</legend>
+        <legend>{scaleNames[scale]} cinsinden sıcaklık girin:</legend>
         <input value={temperature}
                onChange={this.handleChange} />
       </fieldset>
@@ -95,7 +95,7 @@ class TemperatureInput extends React.Component {
 }
 ```
 
-We can now change the `Calculator` to render two separate temperature inputs:
+Şimdi iki ayrı sıcaklık ölçü biriminden de değer girebilmek için `Calculator` bileşenini aşağıdaki gibi değiştirebiliriz:
 
 ```js{5,6}
 class Calculator extends React.Component {
@@ -110,15 +110,15 @@ class Calculator extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/jGBryx?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/jGBryx?editors=0010)
 
-We have two inputs now, but when you enter the temperature in one of them, the other doesn't update. This contradicts our requirement: we want to keep them in sync.
+Şu an sıcaklık değerini girebileceğimiz iki input'unuz var, ancak herhangi birinde sıcaklık değeri girdiğimizde diğer input güncellenmemektedir. Bu durum, değerleri birbiri cinsinden senkronize etme gereksinimimizi karşılamamaktadır.
 
-We also can't display the `BoilingVerdict` from `Calculator`. The `Calculator` doesn't know the current temperature because it is hidden inside the `TemperatureInput`.
+Ayrıca `Calculator` bileşeninde `BoilingVerdict` bileşenini görüntüleyememekteyiz. Sıcaklık değeri `TemperatureInput` bileşeninde gizli olduğundan dolayı `Calculator` bileşeni girilen sıcaklığı bilmemektedir.
 
-## Writing Conversion Functions {#writing-conversion-functions}
+## Dönüştürme Fonksiyonlarını Yazma {#writing-conversion-functions}
 
-First, we will write two functions to convert from Celsius to Fahrenheit and back:
+Öncelikle, Santigrat-Fahrenayt ve Fahrenayt-Santigrat dönüşümlerini sağlayabilmek için iki ayrı fonksiyon yazacağız.
 
 ```js
 function toCelsius(fahrenheit) {
@@ -130,9 +130,9 @@ function toFahrenheit(celsius) {
 }
 ```
 
-These two functions convert numbers. We will write another function that takes a string `temperature` and a converter function as arguments and returns a string. We will use it to calculate the value of one input based on the other input.
+Bu iki fonksiyon, sıcaklık değerlerini birbiri cinsinden dönüştürmeyi sağlamaktadır. 
 
-It returns an empty string on an invalid `temperature`, and it keeps the output rounded to the third decimal place:
+String olarak `temperature` değerini ve de dönüştürücü fonksiyonunu argüman olarak alan, geriye string döndüren başka bir fonksiyon yazacağız. Bu fonksiyonu input'lardaki değerleri birbirleri cinsinden hesaplayabilmek amaçlı kullanacağız. Bu fonksiyon geçerli olmayan bir `temperature` değeri için geriye boş string döndürecektir. Geçerli bir değer girildiğinde ise virgülden sonra 3 basamağa yuvarlanmış bir string döndürecektir.
 
 ```js
 function tryConvert(temperature, convert) {
@@ -146,11 +146,11 @@ function tryConvert(temperature, convert) {
 }
 ```
 
-For example, `tryConvert('abc', toCelsius)` returns an empty string, and `tryConvert('10.22', toFahrenheit)` returns `'50.396'`.
+Örneğin, `tryConvert('abc', toCelsius)` geriye boş string döndürürken, `tryConvert('10.22', toFahrenheit)` ise geriye `'50.396'` değerini döndürecektir.
 
-## Lifting State Up {#lifting-state-up}
+## State'i Yukarı Taşıma {#lifting-state-up}
 
-Currently, both `TemperatureInput` components independently keep their values in the local state:
+Şu anda, her iki `TemperatureInput` bileşeni birbirlerinden bağımsız olarak değerlerini kendi lokal state'lerinde tutmaktadır:
 
 ```js{5,9,13}
 class TemperatureInput extends React.Component {
@@ -169,43 +169,43 @@ class TemperatureInput extends React.Component {
     // ...  
 ```
 
-However, we want these two inputs to be in sync with each other. When we update the Celsius input, the Fahrenheit input should reflect the converted temperature, and vice versa.
+Ancak, bu iki girişin birbiriyle senkronize olmasını istediğimiz için Santigrat input'unu güncellediğimizde, Fahrenayt input'u dönüştürülen sıcaklığı yansıtmalıdır ya da aynı şekilde Fahrenayt input'unu güncellediğimizde Santigrat input'u dönüştürülen sıcaklığı yansıtmalıdır.
 
-In React, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called "lifting state up". We will remove the local state from the `TemperatureInput` and move it into the `Calculator` instead.
+React'te state paylaşımı, state'i, ihtiyacı olan bileşenlerin en yakın ortak üst elemana taşıyarak gerçekleştirilir. Buna "lifting state up" yani state'i yukarı taşıma denir. Lokal state'i `TemperatureInput`'dan kaldırıp ve `Calculator` bileşinine taşıyacağız.
 
-If the `Calculator` owns the shared state, it becomes the "source of truth" for the current temperature in both inputs. It can instruct them both to have values that are consistent with each other. Since the props of both `TemperatureInput` components are coming from the same parent `Calculator` component, the two inputs will always be in sync.
+`Calculator` bileşeni paylaşılan state'e sahip olacağı için, bu bileşen her iki input'ta geçerli sıcaklık değeri için "source of truth" yani gerçek veri kaynağı olacaktır. Bu şekilde `Calculator`, her iki input'a birbirleriyle tutarlı değerlere sahip olma talimatını verebilecektir. Her iki `TemperatureInput` bileşeninin `prop`'ları üst eleman olan `Calculator` bileşeninden geldiği için, her iki input değeri her zaman senkronize olacaktır.
 
-Let's see how this works step by step.
+Nasıl çalıştığını şimdi adım adım inceleyelim.
 
-First, we will replace `this.state.temperature` with `this.props.temperature` in the `TemperatureInput` component. For now, let's pretend `this.props.temperature` already exists, although we will need to pass it from the `Calculator` in the future:
+İlk olarak, `TemperatureInput` bileşeninde `this.state.temperature`'u `this.props.temperature` olarak değiştireceğiz. Şimdilik, `this.props.temperature` hali hazırda varmış gibi düşünelim, ancak ileride bunu `Calculator` bileşeninden göndermemiz gerekecek.
 
 ```js{3}
   render() {
-    // Before: const temperature = this.state.temperature;
+    // Önceki hali: const temperature = this.state.temperature;
     const temperature = this.props.temperature;
     // ...
 ```
 
-We know that [props are read-only](/docs/components-and-props.html#props-are-read-only). When the `temperature` was in the local state, the `TemperatureInput` could just call `this.setState()` to change it. However, now that the `temperature` is coming from the parent as a prop, the `TemperatureInput` has no control over it.
+[Prop'ların salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` lokal state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` değeri üst elemandan prop olarak gedliği için `TemperatureInput` bileşeni artık `temperature`'ın üzerinde bir kontrolü kalmadı.
 
-In React, this is usually solved by making a component "controlled". Just like the DOM `<input>` accepts both a `value` and an `onChange` prop, so can the custom `TemperatureInput` accept both `temperature` and `onTemperatureChange` props from its parent `Calculator`.
+React'te, bu durum genellikle bileşen oluşturulurken, "kontrollü" bileşen biçiminde yapılarak çözülür. DOM'da `<input>` öğesinin hem `value` hem de `onChange` prop'unu kabul etmesi gibi, oluşturduğumuz `TemperatureInput` bileşeni hem `temperature` hem de `onTemperatureChange` prop'larını üst eleman olan `Calculator` bileşeninden kabul alabilecektir.
 
-Now, when the `TemperatureInput` wants to update its temperature, it calls `this.props.onTemperatureChange`:
+Şimdi, `TemperatureInput` kendi `temperature`'unu güncellemek ya da değiştirmek istediğinde `this.props.onTemperatureChange`'i çağıracaktır.
 
 ```js{3}
   handleChange(e) {
-    // Before: this.setState({temperature: e.target.value});
+    // Önceki hali: this.setState({temperature: e.target.value});
     this.props.onTemperatureChange(e.target.value);
     // ...
 ```
 
->Note:
+>Not:
 >
->There is no special meaning to either `temperature` or `onTemperatureChange` prop names in custom components. We could have called them anything else, like name them `value` and `onChange` which is a common convention.
+>Bileşenlerdeki `temperature` veya `onTemperatureChange` prop isimlerinin özel bir anlamı bulunmamaktadır. Onlara herhangi farklı bir şey diyebilirdik, örneğin onları `value` ve `onChange` gibi genel konvansiyonla isimlendirebilirdik. 
 
-The `onTemperatureChange` prop will be provided together with the `temperature` prop by the parent `Calculator` component. It will handle the change by modifying its own local state, thus re-rendering both inputs with the new values. We will look at the new `Calculator` implementation very soon.
+`onTemperatureChange` prop'u, `Calculator` bileşeni tarafından `temperature` prop'u ile birlikte verilecektir. Değer değişimini kendi lokal state'ini değiştirerek halledecek, böylece her iki input yeni değerlerle beraber gösterilecektir. Birazdan `Calculator`'un yeni implementasyonuna birlikte bakacağız.
 
-Before diving into the changes in the `Calculator`, let's recap our changes to the `TemperatureInput` component. We have removed the local state from it, and instead of reading `this.state.temperature`, we now read `this.props.temperature`. Instead of calling `this.setState()` when we want to make a change, we now call `this.props.onTemperatureChange()`, which will be provided by the `Calculator`:
+`Calculator`'deki değişikliklere başlamadan önce, hızlı bir şekilde `TemperatureInput` bileşenimizdeki yaptığımız değişikliklere bakalım. Lokal state'i bileşenden kaldırdık ve `this.state.temperature` okumak yerine artık `this.props.temperature` okumaktayız. Ayrıca değer değiştirmek için `this.setState()` çağırmak yerine, `Calculator` tarafından sağlanan `this.props.onTemperatureChange()` çağırmaktayız:
 
 ```js{8,12}
 class TemperatureInput extends React.Component {
@@ -223,7 +223,7 @@ class TemperatureInput extends React.Component {
     const scale = this.props.scale;
     return (
       <fieldset>
-        <legend>Enter temperature in {scaleNames[scale]}:</legend>
+        <legend>{scaleNames[scale]} cinsinden sıcaklık girin:</legend>
         <input value={temperature}
                onChange={this.handleChange} />
       </fieldset>
@@ -232,11 +232,11 @@ class TemperatureInput extends React.Component {
 }
 ```
 
-Now let's turn to the `Calculator` component.
+Şimdi `Calculator` bileşenimize dönebiliriz.
 
-We will store the current input's `temperature` and `scale` in its local state. This is the state we "lifted up" from the inputs, and it will serve as the "source of truth" for both of them. It is the minimal representation of all the data we need to know in order to render both inputs.
+Input'un `temperature` ve `scale` değerlerini bileşenimizin lokal state'inde saklayacağız. Böylelikle input'larımızdan "state'i taşımış" olduk. Bu bize her iki input değeri için "source of truth" yani doğru veri kaynağını sağlamış olacaktır. "Source of truth" her iki input değerini senkron bir şekilde göstermek için bilmemiz gereken tüm verilerin asgari temsilidir.
 
-For example, if we enter 37 into the Celsius input, the state of the `Calculator` component will be:
+Örneğin, Santigrat input elemanına 37 yazarsak, `Calculator` bileşenindeki state aşağıdaki gibi olacaktır:
 
 ```js
 {
@@ -245,7 +245,7 @@ For example, if we enter 37 into the Celsius input, the state of the `Calculator
 }
 ```
 
-If we later edit the Fahrenheit field to be 212, the state of the `Calculator` will be:
+Eğer daha sonra Fahrenayt input elemanını 212 olarak değiştirirsek, `Calculator` bileşinindeki state aşağıdaki gibi olacaktır:
 
 ```js
 {
@@ -254,9 +254,9 @@ If we later edit the Fahrenheit field to be 212, the state of the `Calculator` w
 }
 ```
 
-We could have stored the value of both inputs but it turns out to be unnecessary. It is enough to store the value of the most recently changed input, and the scale that it represents. We can then infer the value of the other input based on the current `temperature` and `scale` alone.
+Her iki input değerini de kaydedebilirdik ancak bu gereksiz görünmektedir. En son değiştirilen input değerini ve onun birimini kaydetmek yeterlidir. Daha sonra `temperature` ve `scale` değerlerine bağlı olarak diğerinin değerini hesaplayabiliriz.
 
-The inputs stay in sync because their values are computed from the same state:
+Input'lardaki değerler senkron bir şekilde kalmaktadır, çünkü değerleri aynı state üzerinden hesaplanmaktadır:
 
 ```js{6,10,14,18-21,27-28,31-32,34}
 class Calculator extends React.Component {
@@ -299,32 +299,32 @@ class Calculator extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/WZpxpz?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/WZpxpz?editors=0010)
 
-Now, no matter which input you edit, `this.state.temperature` and `this.state.scale` in the `Calculator` get updated. One of the inputs gets the value as is, so any user input is preserved, and the other input value is always recalculated based on it.
+Şimdi, hangi input'u değiştirdiğinizin önemi olmaksızın, `Calculator` bileşenindeki `this.state.temperature` ve `this.state.scale` güncellenmektedir. Input'lardan herhangi birisinin değeri olduğu gibi alınmaktadır, böylelikle kullanıcı girdisi korunmaktadır, ve diğer input değeri girilen değere göre yeniden hesaplanmaktadır.
 
-Let's recap what happens when you edit an input:
+Herhangi bir input'a değer girildiğinde ne olduğunu özetleyelim:
 
-* React calls the function specified as `onChange` on the DOM `<input>`. In our case, this is the `handleChange` method in the `TemperatureInput` component.
-* The `handleChange` method in the `TemperatureInput` component calls `this.props.onTemperatureChange()` with the new desired value. Its props, including `onTemperatureChange`, were provided by its parent component, the `Calculator`.
-* When it previously rendered, the `Calculator` has specified that `onTemperatureChange` of the Celsius `TemperatureInput` is the `Calculator`'s `handleCelsiusChange` method, and `onTemperatureChange` of the Fahrenheit `TemperatureInput` is the `Calculator`'s `handleFahrenheitChange` method. So either of these two `Calculator` methods gets called depending on which input we edited.
-* Inside these methods, the `Calculator` component asks React to re-render itself by calling `this.setState()` with the new input value and the current scale of the input we just edited.
-* React calls the `Calculator` component's `render` method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.
-* React calls the `render` methods of the individual `TemperatureInput` components with their new props specified by the `Calculator`. It learns what their UI should look like.
-* React calls the `render` method of the `BoilingVerdict` component, passing the temperature in Celsius as its props.
-* React DOM updates the DOM with the boiling verdict and to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion.
+* React, DOM'daki `<input>` üzerinde `onChange` olarak belirtilen fonksiyonu çağırır. Bizim örneğimizde, `TemperatureInput` bileşenindeki `handleChange` metodudur.
+* `TemperatureInput` bileşenindeki `handleChange` metodu `this.props.onTemperatureChange()`'i yeni girilen değerle çağırır. `TemperatureInput` bileşenindeki prop'lar, `onTemperatureChange` ile beraber, üst eleman olan `Calculator` tarafından verilmektedir.
+* `Calculator` bileşeninde bulunan Santigrat cinsindeki `TempratureInput` bileşeninin `onTemperatureChange` fonksiyonunu `handleCelsiusChange` metodu olarak belirledik. Aynı şekilde Fahrenayt için ise `handleFahrenheitChange` olarak belirledik. `Calculator`'deki bu iki fonksiyondan herhangi biri, değişen input'a bağlı olarak çağrılır.
+* Bu metodlarda, `Calculator` bileşeni React'a kendisini tekrar ekranda sunabilmek için `this.setState()`'i yeni input değeri ve input'un bağlı olduğu ölçüm birim değeri ile çağırır.
+* React `Calculator` bileşeninin `render` metodunu çağırarak yeni UI'ın nasıl sunacağını öğrenir. Input'lardaki her iki değer kendi birimlerine göre tekrar hesaplanır. Sıcaklık dönüşümü bu adımda gerçekleşir.
+* React her bir `TemperatureInput` bileşeninin `render` metodunu `Calculator` bileşeni tarafından belirlenen yeni prop'lar ile çağırır. Bu şekilde ekrana bu input'ları nasıl göstereceğini öğrenir.
+* React `BoilingVerdict` bileşeninin `render` metodunu çağırır. Çağırırken Santigrat cinsinden olan değeri prop olarak bileşene gönderir.
+* React DOM, DOM'da suyun kaynayacağını ya da kaynamayacağını gösteren bir mesajla günceller. Ayrıca input değerlerini güncel hesaplanan değerler ile ekrana yansıtır.
 
-Every update goes through the same steps so the inputs stay in sync.
+Her güncelleme aynı adımlardan geçer, böylece input'lar senkronize kalır.
 
-## Lessons Learned {#lessons-learned}
+## Neler Öğrendik {#lessons-learned}
 
-There should be a single "source of truth" for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the [top-down data flow](/docs/state-and-lifecycle.html#the-data-flows-down).
+React uygulamasında değişen veriler için tek bir gerçek veri kaynağı olmalıdır. Genelde, state onu kullanacak olan bileşene eklenir. Daha sonra, diğer bileşenlerde bu state'e ihtiyaç duyarsa state'i en yakın ortak üst elemana taşıyabilirsiniz. State'i farklı bileşenler arasında senkronize etmektense, [yukarıdan-aşağıya veri akışı](/docs/state-and-lifecycle.html#the-data-flows-down)'ın kullanabilirsiniz.
 
-Lifting state involves writing more "boilerplate" code than two-way binding approaches, but as a benefit, it takes less work to find and isolate bugs. Since any state "lives" in some component and that component alone can change it, the surface area for bugs is greatly reduced. Additionally, you can implement any custom logic to reject or transform user input.
+State taşıma daha çok genel hatlarıyla kod yazmayı ve iki yönlü bağlama yaklaşımını gerektirmektedir. Bu işin getirisi hataları bulup ayıklamak için daha az iş gerektirmektedr. Herhangi bir state, bazı bileşenlerde "yaşadığından" ve bileşenler tek başına onu değiştirebildiğinden, hataların kapsam alanı büyük ölçüde azalmaktadır. Ek olarak, kullanıcı tarafından girilen input değerlerini reddetmek veya dönüştürmek için herhangi bir özel mantık uygulayabilirsiniz.
 
-If something can be derived from either props or state, it probably shouldn't be in the state. For example, instead of storing both `celsiusValue` and `fahrenheitValue`, we store just the last edited `temperature` and its `scale`. The value of the other input can always be calculated from them in the `render()` method. This lets us clear or apply rounding to the other field without losing any precision in the user input.
+Eğer herhangi bir şey prop'tan veya state'ten türetilebilirse, büyük ihtimalle o state'te olmamalıdır. Örneğin, hem `celsiusValue` hem de `fahrenheitValue` tutmaktansa, sadece en son değiştirilen `temperature` ve onun `scale`'ini tutarız. Diğer input'un değeri böylelikle bu değerler ile `render()` metodunda hesaplanabilir. Bu bize, kullanıcı input girişinde herhangi bir hesaplama hassasiyetini kaybetirmeden yuvarlama işlemini diğer input'a uygulamamızı veya silmemizi sağlar.
 
-When you see something wrong in the UI, you can use [React Developer Tools](https://github.com/facebook/react-devtools) to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:
+Kullanıcı arayüzünde yanlış bir şey gördüğünüzde, [React Developer Tools](https://github.com/facebook/react-devtools)'u prop'ları incelemek ve state'i güncellemekle sorumlu olan bileşeni bulabilmek için kullanabilirsiniz. Bu size hataları kaynağına kadar izlemenizi sağlar:
 
 <img src="../images/docs/react-devtools-state.gif" alt="Monitoring State in React DevTools" max-width="100%" height="100%">
 
