@@ -34,9 +34,9 @@ Bu sayfa React kullanım kılavuzu ve ilgili kaynaklara genel bir bakıştır.
 
 React, aşamalı olarak benimsenmesi için en baştan tasarlandı ve  **ihtiyacınız kadar az veya daha fazla React kullanabilirsiniz** React’ın tadına bakmak, basit bir HTML sayfasına biraz etkileşim katmak veya karmaşık bir React destekli uygulama başlatmak isteyip istemediğinize göre, bu bölümdeki bağlantılar başlamanıza yardımcı olacaktır.
 
-### Çevrimiçi Takılma Alanları {#online-playgrounds}
+### Çevrimiçi Vakit Geçirme Alanları {#online-playgrounds}
 
-React ile takılmak istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. Bir Merhaba Dünya şablonu deneyin [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), veya [Glitch](https://glitch.com/edit/#!/remix/starter-react-template).
+React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. Bir Merhaba Dünya şablonu deneyin [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), veya [Glitch](https://glitch.com/edit/#!/remix/starter-react-template).
 
 Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
@@ -57,7 +57,7 @@ Uygulamanız büyüdükçe, daha entegre bir kurulum düşünebilirsiniz. Daha b
 * **Yaparak öğrenmeyi** tercih ediyorsanız, [pratik eğitim](/tutorial/tutorial.html)imizle başlayın.
 * **Kavramları adım adım öğrenmeyi** tercih ediyorsanız, [ana kavramlar rehberi](/docs/hello-world.html)mizle başlayın.
 
-Bilinmeyen herhangi bir teknoloji gibi, React da bir öğrenme eğrisine sahiptir. Pratik ve biraz sabır ile üstesinden *geleceksin*.
+Bilinmeyen herhangi bir teknoloji gibi, React da bir öğrenme eğrisine sahiptir. Pratik ve biraz sabır ile üstesinden *geleceksiniz*.
 
 ### İlk Örnekler {#first-examples}
 
@@ -122,6 +122,6 @@ Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için ya
 
 Bu bölüm her zaman React'ın en son kararlı versiyonunu yansıtır. React 16'dan beri, açıklamaların eski sürümlerini [ayrı bir sayfada](/versions) bulabilirsiniz. Geçmiş sürümlere ait açıklamaların yayınlanma tarihinde anlık olarak görüntülendiğini ve sürekli güncellenmediğini unutmayın.
 
-## Eksik bir şey? {#something-missing}
+## Bir şeyler mi eksik? {#something-missing}
 
 Anlatımlarda bir şey eksikse veya kafa karıştırıcı bir bölüm bulursanız, lütfen düzeltme/geliştirme önerilerinizle [ilgili dokümantasyon havuzuna bir sorun](https://github.com/reactjs/reactjs.org/issues/new) gönderin veya [@reactjs hesabına](https://twitter.com/reactjs) tweet atın. Sizden bildirim almayı çok seviyoruz!
