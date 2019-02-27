@@ -1,32 +1,32 @@
 ---
 id: faq-build
-title: Babel, JSX, and Build Steps
+title: Babel, JSX, ve Oluşturma Aşamaları
 permalink: docs/faq-build.html
 layout: docs
 category: FAQ
 ---
 
-### Do I need to use JSX with React? {#do-i-need-to-use-jsx-with-react}
+### React ile JSX kullanmalı mıyım ?  {#do-i-need-to-use-jsx-with-react}
 
-No! Check out ["React Without JSX"](/docs/react-without-jsx.html) to learn more.
+Hayır! Daha fazlası için ["React Without JSX"](/docs/react-without-jsx.html).
 
-### Do I need to use ES6 (+) with React? {#do-i-need-to-use-es6--with-react}
+### React ile ES6 (+) kullanmalı mıyım ? {#do-i-need-to-use-es6--with-react}
 
-No! Check out ["React Without ES6"](/docs/react-without-es6.html) to learn more.
+Hayır! Daha fazlası için ["React Without ES6"](/docs/react-without-es6.html).
 
-### How can I write comments in JSX? {#how-can-i-write-comments-in-jsx}
+### JSX içinde nasıl yorum satırı kullanabilirim ? {#how-can-i-write-comments-in-jsx}
 
 ```jsx
 <div>
-  {/* Comment goes here */}
+  {/* Yorum satırı buraya gelecek */}
   Hello, {name}!
 </div>
 ```
 
 ```jsx
 <div>
-  {/* It also works 
-  for multi-line comments. */}
+  {/* Çok satırlı 
+   yorum satırı */}
   Hello, {name}! 
 </div>
 ```
