@@ -1,6 +1,6 @@
 ---
 id: handling-events
-title: Handling Events
+title: Olay Yönetimi
 permalink: docs/handling-events.html
 prev: state-and-lifecycle.html
 next: conditional-rendering.html
@@ -8,7 +8,7 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:
+React ile olayların yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Bazı söz dizimsel olarak farklılıklar bulunmaktadır: 
 
 * React events are named using camelCase, rather than lowercase.
 * With JSX you pass a function as the event handler, rather than a string.
