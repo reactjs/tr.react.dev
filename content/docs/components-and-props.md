@@ -1,6 +1,6 @@
 ---
 id: components-and-props
-title: Components and Props
+title: Bileşenler ve Prop'lar
 permalink: docs/components-and-props.html
 redirect_from:
   - "docs/reusable-components.html"
@@ -16,13 +16,15 @@ prev: rendering-elements.html
 next: state-and-lifecycle.html
 ---
 
-Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a [detailed component API reference here](/docs/react-component.html).
+Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı birbirinden izole bir şekilde düşünerek kodlayabilirsiniz. 
 
-Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called "props") and return React elements describing what should appear on the screen.
+Bu sayfa, bileşenlerin ne olduğuna dair bir fikir edinmenizi sağlayacaktır. [Bileşenler API dokümanını](/docs/react-component.html) inceleyerek daha detaylı bilgi edinebilirsiniz.
 
-## Function and Class Components {#function-and-class-components}
+Kavramsal olarak bileşenler, JavaScript fonksiyonları gibidir. Bileşenler, "props" adındaki girdileri opsiyonel olarak alırlar ve ekranda görüntülenecek React elementlerini geri döndürürler.
 
-The simplest way to define a component is to write a JavaScript function:
+## Fonksiyon ve Sınıf Bileşenleri {#function-and-class-components}
+
+Bir bileşen oluşturmak için en basit yol, bir JavaScript fonksiyonu yazmaktır:
 
 ```js
 function Welcome(props) {
@@ -30,9 +32,9 @@ function Welcome(props) {
 }
 ```
 
-This function is a valid React component because it accepts a single "props" (which stands for properties) object argument with data and returns a React element. We call such components "function components" because they are literally JavaScript functions.
+Bu fonksiyon, girdi olarak "props" (properties) adındaki tek bir nesneyi aldığı ve geriye bir React elementi döndürdüğü için geçerli bir React bileşenidir. Bu tarz bileşenler, gerçekten de birer JavaScript fonksiyonları oldukları için adına "fonksiyonel bileşenler" denir.
 
-You can also use an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) to define a component:
+Fonksiyon yerine, bir [ES6 sınıfı](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanarak da React bileşeni oluşturabilirsiniz:
 
 ```js
 class Welcome extends React.Component {
@@ -42,27 +44,27 @@ class Welcome extends React.Component {
 }
 ```
 
-The above two components are equivalent from React's point of view.
+Üstteki her iki bileşen de React'in bakış açısından birbirine eşittirler.
 
-Classes have some additional features that we will discuss in the [next sections](/docs/state-and-lifecycle.html). Until then, we will use function components for their conciseness.
+Sınıf bileşenleri, fonksiyon bileşenlerine göre bazı ek özelliklere sahiptirler. Buna [sonraki bölümlerde](/docs/state-and-lifecycle.html) değineceğiz. Fakat şimdilik, kısa olması açısından fonksiyon bileşenleri kullanacağız. 
 
-## Rendering a Component {#rendering-a-component}
+## Bir Bileşenin Render Edilmesi {#rendering-a-component}
 
-Previously, we only encountered React elements that represent DOM tags:
+Önceki bölümlerde, React elementi olarak sadece DOM elementlerini ele almıştık.
 
 ```js
 const element = <div />;
 ```
 
-However, elements can also represent user-defined components:
+Ancak elementler, kullanıcı tanımlı bileşenler de olabilirler:
 
 ```js
 const element = <Welcome name="Sara" />;
 ```
 
-When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object "props".
+React, kullanıcı tanımlı bir bileşeni gördüğü zaman, bünyesinde yer alan JSX özelliklerini bu bileşene tek bir nesne olarak aktarır. Bu nesneye "props" adı verilir.
 
-For example, this code renders "Hello, Sara" on the page:
+Örneğin aşağıdaki kod, sayfada "Hello, Sara" mesajını görüntüler:
 
 ```js{1,5}
 function Welcome(props) {
@@ -78,24 +80,24 @@ ReactDOM.render(
 
 [](codepen://components-and-props/rendering-a-component)
 
-Let's recap what happens in this example:
+Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
-1. We call `ReactDOM.render()` with the `<Welcome name="Sara" />` element.
-2. React calls the `Welcome` component with `{name: 'Sara'}` as the props.
-3. Our `Welcome` component returns a `<h1>Hello, Sara</h1>` element as the result.
-4. React DOM efficiently updates the DOM to match `<h1>Hello, Sara</h1>`.
+1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
+2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor. 
+3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
+4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'u arka planda efektif bir şekilde güncelliyor .
 
->**Note:** Always start component names with a capital letter.
+>**Not:** Bileşen isimlendirmelerinde daima büyük harfle başlayınız.
 >
->React treats components starting with lowercase letters as DOM tags. For example, `<div />` represents an HTML div tag, but `<Welcome />` represents a component and requires `Welcome` to be in scope.
+>Çünkü React, küçük harfle başlayan bileşenlere DOM etiketleri gibi davranır. Örneğin `<div />`, bir HTML div etiketini temsil eder, fakat `<Welcome />` ise bir bileşeni temsil eder ve kodun etki alanında `Welcome`'ın tanımlı olmasını gerektirir. 
 >
->To learn more about the reasoning behind this convention, please read [JSX In Depth](/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized).
+>Bu isimlendirmenin nedeni hakkında detaylı bilgi edinmek için lütfen [Derinlemesine JSX](/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized) sayfasına bakınız.
 
-## Composing Components {#composing-components}
+## Bileşenlerden Kompozisyon Oluşturulması {#composing-components}
 
-Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail. A button, a form, a dialog, a screen: in React apps, all those are commonly expressed as components.
+Bileşenler, çıktılarında diğer bileşenleri gösterebilir. Bu sayede soyutlanan bir bileşen, herhangi bir ayrıntı düzeyinde tekrar kullanılabilir. Butonlar, formlar, diyaloglar, ekranlar ve daha nicesi React uygulamalarında yaygın bir şekilde bileşen olarak ifade edilebilirler.
 
-For example, we can create an `App` component that renders `Welcome` many times:
+Örneğin, `Welcome`'ı istediğimiz kadar görüntüleyecek bir `App` bileşeni oluşturabiliriz:
 
 ```js{8-10}
 function Welcome(props) {
@@ -120,13 +122,13 @@ ReactDOM.render(
 
 [](codepen://components-and-props/composing-components)
 
-Typically, new React apps have a single `App` component at the very top. However, if you integrate React into an existing app, you might start bottom-up with a small component like `Button` and gradually work your way to the top of the view hierarchy.
+Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerirler. Ancak React'i mevcut uygulamanıza entegre ediyorsanız, `Button` gibi en küçük bileşenlerden başlayacak şekilde basitten karmaşığa doğru ilerleyerek bileşen hiyerarşisini oluşturabilirsiniz.
 
-## Extracting Components {#extracting-components}
+## Bileşenlerin Çıkarılması {#extracting-components}
 
-Don't be afraid to split components into smaller components.
+Büyük bileşenleri, sade ve yönetilebilir olması açısından daha küçük bileşenlere bölebilirsiniz.
 
-For example, consider this `Comment` component:
+Örneğin aşağıdaki `Comment` bileşenini ele alalım:
 
 ```js
 function Comment(props) {
@@ -154,11 +156,11 @@ function Comment(props) {
 
 [](codepen://components-and-props/extracting-components)
 
-It accepts `author` (an object), `text` (a string), and `date` (a date) as props, and describes a comment on a social media website.
+Üstteki bileşen; `author` nesnesini, `text` metnini, ve bir `date` tarihini prop olarak alır. Bu bileşen, bir sosyal medya sitesinde yorum kutucuğunun görüntülenmesini sağlar.
 
-This component can be tricky to change because of all the nesting, and it is also hard to reuse individual parts of it. Let's extract a few components from it.
+İç içe halde bulunan bu bileşenin üzerinde değişiklik yapmak zor olabilir. Ayrıca bünyesindeki DOM elementlerinin de tekrar kullanılabilirliği oldukça düşük seviyede. Bu durumu çözmek için, kod içerisinden birkaç bileşen çıkarabiliriz.
 
-First, we will extract `Avatar`:
+Öncelikle `Avatar` bileşenini çıkaralım:
 
 ```js{3-6}
 function Avatar(props) {
@@ -171,11 +173,11 @@ function Avatar(props) {
 }
 ```
 
-The `Avatar` doesn't need to know that it is being rendered inside a `Comment`. This is why we have given its prop a more generic name: `user` rather than `author`.
+`Avatar` bileşeninin, bir `Comment` bileşeni içerisinde render edildiğini bilmesi gerekli değildir. Bu nedenle `Avatar` bileşenini, gelecekte uygulamanın daha farklı yerlerinde de kullanma ihtimalimiz bulunduğundan dolayı, prop değişkenleri için `author` yerine `user` gibi daha genel bir isim verebiliriz.
 
-We recommend naming props from the component's own point of view rather than the context in which it is being used.
+Prop'lar isimlendirilirken, ilgili bileşenin hangi bileşen içerisinde kullanıldığını ele almak yerine, bileşeni bağımsız olarak ele almanız gerekmektedir. 
 
-We can now simplify `Comment` a tiny bit:
+Yaptığımız değişiklikle `Comment` bileşenini az bir miktar basitleştirmiş olduk:
 
 ```js{5}
 function Comment(props) {
@@ -198,7 +200,7 @@ function Comment(props) {
 }
 ```
 
-Next, we will extract a `UserInfo` component that renders an `Avatar` next to the user's name:
+Şimdi `Avatar` ile birlikte, kullanıcı adını da render edecek olan `UserInfo` bileşenini kod içerisinden çıkarabiliriz.
 
 ```js{3-8}
 function UserInfo(props) {
@@ -213,7 +215,7 @@ function UserInfo(props) {
 }
 ```
 
-This lets us simplify `Comment` even further:
+Bu sayede `Comment` bileşeni daha da basitleşmiş hale geldi:
 
 ```js{4}
 function Comment(props) {
@@ -233,11 +235,15 @@ function Comment(props) {
 
 [](codepen://components-and-props/extracting-components-continued)
 
-Extracting components might seem like grunt work at first, but having a palette of reusable components pays off in larger apps. A good rule of thumb is that if a part of your UI is used several times (`Button`, `Panel`, `Avatar`), or is complex enough on its own (`App`, `FeedStory`, `Comment`), it is a good candidate to be a reusable component.
+Bileşenlerin çıkarılması en başta angarya bir işlem gibi görünebilir. Fakat büyük çaplı uygulamalarda, tekrar kullanılabilir bileşenler içeren bir **bileşen paletine** sahip olmak oldukça faydalı hale gelecektir. Bileşen çıkarmanın genel mantığı aşağıdaki gibidir:
+* Eğer kullanıcı arayüzündeki bir eleman (`Button`, `Panel`, `Avatar`) uygulama içerisinde birçok defa kullanılıyorsa,  
+* Eğer bir bileşen (`App`, `FeedStory`, `Comment`) oldukça karmaşık hale geldiyse,   
 
-## Props are Read-Only {#props-are-read-only}
+bu bileşen, içerisinden bileşenler çıkarmak için iyi bir adaydır diyebiliriz. 
 
-Whether you declare a component [as a function or a class](#function-and-class-components), it must never modify its own props. Consider this `sum` function:
+## Prop'lar ve Salt Okunurlar {#props-are-read-only}
+
+[Fonksiyon veya sınıf](#function-and-class-components) bileşeninden herhangi birini oluşturduğunuzda, bu bileşen kendi prop'larını asla değiştirmemelidir. Örneğin aşağıdaki `sum` fonksiyonunu ele alalım:
 
 ```js
 function sum(a, b) {
@@ -245,9 +251,9 @@ function sum(a, b) {
 }
 ```
 
-Such functions are called ["pure"](https://en.wikipedia.org/wiki/Pure_function) because they do not attempt to change their inputs, and always return the same result for the same inputs.
+Bu tarz fonksiyonlar, kendi girdi parametrelerini değiştirmedikleri ve her zaman aynı parametreler için aynı sonucu ürettiklerinden dolayı ["pure"](https://en.wikipedia.org/wiki/Pure_function) (saf) fonksiyonlardır. 
 
-In contrast, this function is impure because it changes its own input:
+Tam ters örnek verecek olursak, aşağıdaki fonksiyon impure'dür (saf değildir). Çünkü kendi girdi değerini değiştirmektedir:
 
 ```js
 function withdraw(account, amount) {
@@ -255,8 +261,8 @@ function withdraw(account, amount) {
 }
 ```
 
-React is pretty flexible but it has a single strict rule:
+React, kod yazımında oldukça esnek olmasına rağmen, sadece bir tek kuralı şart koşmaktadır:
 
-**All React components must act like pure functions with respect to their props.**
+**Bütün React bileşenleri pure fonksiyonlar gibi davranmalı, ve prop'larını asla değiştirmemelidirler.**
 
-Of course, application UIs are dynamic and change over time. In the [next section](/docs/state-and-lifecycle.html), we will introduce a new concept of "state". State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule.
+Tabi ki kullanıcı arayüzleri dinamiktir ve zaman içerisinde değişiklik gösterir. [Sonraki bölümde](/docs/state-and-lifecycle.html), "state" (durum) adındaki yeni konsepte değineceğiz. State bu kurala sadık kalarak; kullanıcı etkileşimleri, ağ istekleri ve diğer şeylerden dolayı zaman içerisinde değişen arayüzün görüntülenmesi için, React bileşenlerinin kendi çıktılarını değiştirebilmesine izin verir. 

@@ -1,24 +1,24 @@
 ---
 id: faq-ajax
-title: AJAX and APIs
+title: AJAX ve APİ'ler
 permalink: docs/faq-ajax.html
 layout: docs
 category: FAQ
 ---
 
-### How can I make an AJAX call? {#how-can-i-make-an-ajax-call}
+### Nasıl AJAX isteği yapabilirim ? {#how-can-i-make-an-ajax-call}
 
-You can use any AJAX library you like with React. Some popular ones are [Axios](https://github.com/axios/axios), [jQuery AJAX](https://api.jquery.com/jQuery.ajax/), and the browser built-in [window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+React ile istediğiniz AJAX kütüphanesini kullanabilirsiniz. Bazı popüler kütüphaneler [Axios](https://github.com/axios/axios), [jQuery AJAX](https://api.jquery.com/jQuery.ajax/), ve tarayıcıda yerleşik bulunan [window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-### Where in the component lifecycle should I make an AJAX call? {#where-in-the-component-lifecycle-should-i-make-an-ajax-call}
+### AJAX isteğini hangi yaşam döngüsü metodunda yapmalıyım ? {#where-in-the-component-lifecycle-should-i-make-an-ajax-call}
 
-You should populate data with AJAX calls in the [`componentDidMount`](/docs/react-component.html#mounting) lifecycle method. This is so you can use `setState` to update your component when the data is retrieved.
+Verilerinizi [`componentDidMount`](/docs/react-component.html#mounting) yaşam döngüsü metodu içinde AJAX isteği yaparak doldurabilirsiniz. Veriler alındığında `setState` fonksiyonu ile bileşeninizi güncelleyebilirsiniz.
 
-### Example: Using AJAX results to set local state {#example-using-ajax-results-to-set-local-state}
+### Örnek: Yerel bileşen durumlarını ayarlamak için AJAX isteği {#example-using-ajax-results-to-set-local-state}
 
-The component below demonstrates how to make an AJAX call in `componentDidMount` to populate local component state. 
+Aşağıda bulunan bileşende `componentDidMount` içinde AJAX isteği yaparak yerel bileşen durumunuzu nasıl güncelleyeceğinizi gösterir. 
 
-The example API returns a JSON object like this:
+API'dan dönen örnek bir JSON verisi:
 
 ```
 {
@@ -50,9 +50,9 @@ class MyComponent extends React.Component {
             items: result.items
           });
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        // Not: Burada hataları yakalamak önemlidir.
+        // Bileşenimizde bug bulunmaması için, 'catch ()' bloğu yerine bulunan
+        // bu blok içinde hatalar yakalanır.
         (error) => {
           this.setState({
             isLoaded: true,
