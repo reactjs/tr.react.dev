@@ -8,10 +8,10 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-React ile olayların yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Bazı söz dizimsel olarak farklılıklar bulunmaktadır: 
+React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük farklılıklar bulunmaktadır: 
 
 * Olay isimleri, DOM'da lowercase iken, React'te camelCase olarak adlandırılır.
-* DOM'da fonksiyon isimleri, ilgili olaya string olarak atanırken, JSX'te fonksiyon olarak atanır.
+* DOM'da fonksiyon isimleri, ilgili olaya string olarak atanırken, JSX'te direkt fonksiyon olarak atanır.
 
 Örneğin HTML'de aşağıdaki gibi olan kod:
 
@@ -29,7 +29,7 @@ React'te biraz daha farklıdır:
 </button>
 ```
 
-React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışı, `false` değeri döndürerek engelleyemezsiniz. Bunun için `preventDefault` şeklinde yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, bir `<a>` elementinin yeni bir sayfayı açmasını engellemek için aşağıdaki şekilde yazabilirsiniz:
+React'teki diğer bir farklılık ise, olaylardaki varsayılan davranış, `false` değeri döndürülerek engellenemezdir. Bunun için `preventDefault` şeklinde açık olarak yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, bir `<a>` elementinin yeni bir sayfayı açmasını engellemek için aşağıdaki şekilde yazabilirsiniz:
 
 ```html
 <a href="#" onclick="console.log('The link was clicked.'); return false">
@@ -37,7 +37,7 @@ React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışı, `fa
 </a>
 ```
 
-React'te ise varsayılan link davranışını `e.preventDefault()` kodu ile engellemeniz gerekir:
+React'te ise varsayılan `<a>` elementi davranışını `e.preventDefault()` kodu ile engellemeniz gerekir:
 
 ```js{2-5,8}
 function ActionLink() {
@@ -54,11 +54,11 @@ function ActionLink() {
 }
 ```
 
-Burada `e`, bir sentetik olaydır. React bu sentetik olayları [W3C şarnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede tarayıcılar arası uyumsuzluk problemi oluşmaz. Daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
+Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şarnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
 
-React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir listener atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine, ilgili element ilk kez render olduğunda ona bir listener atamanız doğru olacaktır.
+React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir listener atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine `render` fonksiyonunda, ilgili element ilk kez render olduğunda ona bir listener atamanız doğru olacaktır.
 
-[ES6 sınıfı](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanarak bir bileşen oluşturduğunuzda, ilgili olayın oluşturulması için en yaygın yaklaşım, o sınıf içerisinde bir metodun tanımlanmasıdır. Örneğin aşağıdaki `Toggle` bileşeni, "ON" ve "OFF" durumlarının gerçekleştirilmesi için bir butonu render etmektedir:
+[ES6 sınıfı](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanarak bir bileşen oluşturulduğunda, ilgili olayın tanımlanması için en yaygın yaklaşım, ilgili metodun o sınıf içerisinde  oluşturulmasıdır. Örneğin aşağıdaki `Toggle` bileşeni, "ON" ve "OFF" durumlarının gerçekleştirilmesi için bir butonu render etmektedir:
 
 ```js{6,7,10-14,18}
 class Toggle extends React.Component {
@@ -93,16 +93,16 @@ ReactDOM.render(
 
 [**CodePen'de deneyin**](http://codepen.io/gaearon/pen/xEmzGg?editors=0010)
 
-JSX callback'lerinde `this` kullanırken dikkat etmeniz gerekmektedir. JavaScript'te, sınıf metotları varsayılan olarak [bağlanmazlar](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind). `this.handleClick`'i `bind(this)` ile bağlamayı unutarak `onClick`'e yazarsanız, fonksiyon çağrıldığında `this` değişkeni `undefined` hale gelecek ve hatalara sebep olacaktır.
+JSX callback'lerinde `this` kullanırken dikkat etmeniz gerekmektedir. Çünkü JavaScript'te, sınıf metotları varsayılan olarak `this`'e [bağlı değillerdir](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind). Bu nedenle, `this.handleClick`'i `bind(this)` ile bağlamayı unutarak `onClick`'e yazarsanız, fonksiyon çağrıldığında `this` değişkeni `undefined` hale gelecek ve hatalara sebep olacaktır.
 
-Bu durum React'e özgü bir davranış biçimi değildir. Aslen, [fonksiyonların JavaScript'te nasıl çalıştığı](https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/) ile ilgilidir. Genellikle, `onClick={this.handleClick}` gibi bir metodu parantez kullanmadan `()`  çağırırken, o metodu `bind` etmeniz gerekir.
+Bu durum, React'e özgü bir davranış biçimi değildir. Aslen, [fonksiyonların JavaScript'te nasıl çalıştığı](https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/) ile ilgilidir. Genellikle, `onClick={this.handleClick}` gibi bir metot, parantez kullanmadan çağırırken, o metodun `bind` edilmesi gerekir.
 
-Eğer sürekli her metot için `bind` ekleyleyip durmayı istemiyorsanız, bunun yerine farklı yöntemler de kullanabilirsiniz. Eğer henüz deneysel bir özellik olan [public class fields](https://babeljs.io/docs/plugins/transform-class-properties/) yöntemini kullanırsanız, callback'leri bağlamak için sınıf değişkenlerini kullanabilirsiniz:
+Eğer sürekli her metot için `bind` eklemek istemiyorsanız, bunun yerine farklı yöntemler de kullanabilirsiniz. Örneğin, henüz deneysel bir özellik olan [public class fields](https://babeljs.io/docs/plugins/transform-class-properties/) yöntemini kullanırsanız, callback'leri bağlamak için sınıf değişkenlerini kullanabilirsiniz:
 
 ```js{2-6}
 class LoggingButton extends React.Component {
-  // This syntax ensures `this` is bound within handleClick.
-  // Warning: this is *experimental* syntax.
+  // Bu yazım şekli, `this`'in handleClick içerisinde bağlanmasını sağlar.
+  // Uyarı: henüz *deneysel* bir özelliktir.
   handleClick = () => {
     console.log('this is:', this);
   }
@@ -117,9 +117,9 @@ class LoggingButton extends React.Component {
 }
 ```
 
-Bu yöntem, [Create React App](https://github.com/facebookincubator/create-react-app) ile oluşturulan geliştirim ortamında, varsayılan olarak gelir. Böylece hiçbir ayarlama yapmadan bu yöntemi kullanabilirsiniz.
+Bu yöntem, [Create React App](https://github.com/facebookincubator/create-react-app) ile oluşturulan geliştirim ortamında varsayılan olarak gelir. Böylece hiçbir ayarlama yapmadan kullanabilirsiniz.
 
-Eğer bu yöntemi kullanmak istemiyorsanuz, callback içerisinde [ok fonksiyonunu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) kullanabilirsiniz:
+Eğer bu yöntemi kullanmak istemiyorsanuz, callback içerisinde [ok fonksiyonunu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) da kullanabilirsiniz:
 
 ```js{7-9}
 class LoggingButton extends React.Component {
@@ -128,7 +128,7 @@ class LoggingButton extends React.Component {
   }
 
   render() {
-    // This syntax ensures `this` is bound within handleClick
+    // Bu yazım şekli, `this`'in handleClick içerisinde bağlanmasını sağlar.
     return (
       <button onClick={(e) => this.handleClick(e)}>
         Click me
@@ -138,7 +138,7 @@ class LoggingButton extends React.Component {
 }
 ```
 
-Bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render olduğu anda yeni bir callback oluşturulur. Bu olay birçok durumda bir sorun teşkil etmez. Ancak bu callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için, binding işleminin ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
+Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için, binding işleminin ,ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
 
 ## Olay Fonksiyonlarına Parametre Gönderimi {#passing-arguments-to-event-handlers}
 
