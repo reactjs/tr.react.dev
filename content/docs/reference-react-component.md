@@ -79,9 +79,9 @@ Bir bileşen, DOM'dan çıkarıldığında bu metot çalışır:
 
 - [**`componentWillUnmount()`**](#componentwillunmount)
 
-#### Error Handling {#error-handling}
+#### Hata Yakalama {#error-handling}
 
-These methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
+Render esnasında, yaşam döngüsü metodunda veya herhangi bir alt bileşenin constructor'ında bir hata oluştuğunda, aşağıdaki metotlar çağrılır:
 
 - [`static getDerivedStateFromError()`](#static-getderivedstatefromerror)
 - [`componentDidCatch()`](#componentdidcatch)
