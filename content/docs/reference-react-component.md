@@ -43,7 +43,7 @@ Her bileşen, belirli anlarda çalıştırabileceğiniz birkaç "yaşam döngüs
 
 #### Ekleme {#mounting}
 
-Aşağıdaki metotlar, bileşenin oluşumundan ve DOM'a eklenmesine kadar geçen süreç içerisinde, belirlendikleri sıra ile çağrılırlar:
+Bir bileşenin oluşumundan ve DOM'a eklenmesine kadar geçen süreç içerisinde çağrılan metotlar, sırasıyla aşağıdaki gibi belirlenmiştir:
 
 - [**`constructor()`**](#constructor)
 - [`static getDerivedStateFromProps()`](#static-getderivedstatefromprops)
@@ -56,9 +56,9 @@ Aşağıdaki metotlar, bileşenin oluşumundan ve DOM'a eklenmesine kadar geçen
 >
 >- [`UNSAFE_componentWillMount()`](#unsafe_componentwillmount)
 
-#### Updating {#updating}
+#### Güncelleme {#updating}
 
-An update can be caused by changes to props or state. These methods are called in the following order when a component is being re-rendered:
+Bir güncelleme, bileşenin props'u veya state'i değiştirilerek oluşabilir. Bir bileşen tekrar render edildiğinde çağrılan fonksiyonlar sırasıyla aşağıdaki gibidir:
 
 - [`static getDerivedStateFromProps()`](#static-getderivedstatefromprops)
 - [`shouldComponentUpdate()`](#shouldcomponentupdate)
@@ -66,9 +66,9 @@ An update can be caused by changes to props or state. These methods are called i
 - [`getSnapshotBeforeUpdate()`](#getsnapshotbeforeupdate)
 - [**`componentDidUpdate()`**](#componentdidupdate)
 
->Note:
+>Not:
 >
->These methods are considered legacy and you should [avoid them](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>Aşağıdaki metotlar problemli olduğundan dolayı artık yeni projelerde [kullanmamanız gerekir](/blog/2018/03/27/update-on-async-rendering.html):
 >
 >- [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate)
 >- [`UNSAFE_componentWillReceiveProps()`](#unsafe_componentwillreceiveprops)
