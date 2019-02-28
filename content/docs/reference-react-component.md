@@ -17,9 +17,9 @@ redirect_from:
 
 Bu sayfa, React sınıf bileşenleri hakkında detaylı bir API dokümanı içerir. Bu nedenle, [Bileşenler ve Prop'lar](/docs/components-and-props.html), [State ve Yaşam Döngüsü](/docs/state-and-lifecycle.html) gibi temel React kavramlarına aşina olduğunuzu varsaymaktadır. Eğer değilseniz öncelikle bu dokümanları okuyunuz. 
 
-## Overview {#overview}
+## Giriş {#overview}
 
-React lets you define components as classes or functions. Components defined as classes currently provide more features which are described in detail on this page. To define a React component class, you need to extend `React.Component`:
+React, sınıf ve fonksiyon bileşenleri oluşturmanıza olanak tanır. Sınıf olarak tanımlanan bileşenler daha fazla özellik sunar. Bu özellikler sayfanın ilerleyen bölümlerinde daha detaylı olarak ele alınacaktır. React bileşen sınıfı oluşturmak için, sınıfınızı `React.Component`'tan türetmeniz gerekir:
 
 ```js
 class Welcome extends React.Component {
@@ -29,13 +29,13 @@ class Welcome extends React.Component {
 }
 ```
 
-The only method you *must* define in a `React.Component` subclass is called [`render()`](#render). All the other methods described on this page are optional.
+`React.Component`'tan türetilen sınıflarda, *zorunlu* olarak tanımlamanız gereken metot sadece [`render()`](#render)'dır. Bu sayfada tanıtılacak diğer metotlar ise opsiyoneldir. 
 
-**We strongly recommend against creating your own base component classes.** In React components, [code reuse is primarily achieved through composition rather than inheritance](/docs/composition-vs-inheritance.html).
+**`React.Component` yerine kendi temel sınıflarınızı oluşturmanızı kesinlikle tavsiye etmiyoruz.** Çünkü React bileşenlerinde, kodun tekrar kullanılabilirliği  [kalıtım yoluyla değil, kompozisyon oluşturma ile sağlanır](/docs/composition-vs-inheritance.html).
 
->Note:
+>Not:
 >
->React doesn't force you to use the ES6 class syntax. If you prefer to avoid it, you may use the `create-react-class` module or a similar custom abstraction instead. Take a look at [Using React without ES6](/docs/react-without-es6.html) to learn more.
+>React'te, ES6 sınıfı olarak bileşen tanımlamak zorunda değilsiniz. Eğer ES6 kullanmak istemiyorsanız, npm paketi olarak yer alan [create-react-class](/docs/creact-without-es6.html) modülü veya benzer bir özel soyutlama yöntemi kullanabilirsiniz. 
 
 ### The Component Lifecycle {#the-component-lifecycle}
 
