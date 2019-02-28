@@ -1,37 +1,45 @@
 ---
 id: glossary
-title: Glossary of React Terms
+title: React Terimleri Sözlüğü
 layout: docs
 category: Reference
 permalink: docs/glossary.html
 
 ---
 
-## Single-page Application {#single-page-application}
+## Tek-sayfalık Uygulama {#single-page-application}
 
 A single-page application is an application that loads a single HTML page and all the necessary assets (such as JavaScript and CSS) required for the application to run. Any interactions with the page or subsequent pages do not require a round trip to the server which means the page is not reloaded.
 
+Tek-sayfalık uygulama, uygulamanın çalışması için gereken tek bir HTML sayfasını ve gerekli tüm varlıkları (JavaScript ve CSS gibi) yükleyen bir uygulamadır. Sayfa veya sonraki sayfalar ile ilgili herhangi bir etkileşim sunucuya gidip gelmeye ihtiyaç duymaz, bu da sayfanın yeniden yüklenmediği anlamına gelir.
+
 Though you may build a single-page application in React, it is not a requirement. React can also be used for enhancing small parts of existing websites with additional interactivity. Code written in React can coexist peacefully with markup rendered on the server by something like PHP, or with other client-side libraries. In fact, this is exactly how React is being used at Facebook.
 
-## ES6, ES2015, ES2016, etc {#es6-es2015-es2016-etc}
+React'te bir tek-sayfalık uygulama oluşturabilseniz de, bu bir gereksinim değildir. React ayrıca, mevcut web sitelerinin küçük parçalarını ilave etkileşim ile geliştirmek için de kullanılabilir. React'te yazılan kod, sunucuda PHP gibi bir şey tarafından oluşturulan işaretlemeyle veya diğer istemci tarafı kitaplıklarıyla barışçıl bir şekilde bir arada bulunabilir. Aslında, bu tam olarak React’in Facebook’ta nasıl kullanıldığıdır.
+
+## ES6, ES2015, ES2016, vs. {#es6-es2015-es2016-etc}
 
 These acronyms all refer to the most recent versions of the ECMAScript Language Specification standard, which the JavaScript language is an implementation of. The ES6 version (also known as ES2015) includes many additions to the previous versions such as: arrow functions, classes, template literals, `let` and `const` statements. You can learn more about specific versions [here](https://en.wikipedia.org/wiki/ECMAScript#Versions).
 
-## Compilers {#compilers}
+Bu kısaltmaların tümü, ECMAScript Dil Belirtimi standardının (JavaScript dilinin bir uygulaması olduğu) en yeni sürümlerine atıfta bulunur. ES6 sürümü (ES2015 olarak da bilinir) önceki sürümlere birçok ek içerir: ok işlevleri, sınıflar, hazır bilgi şablonları, `let` ve` const` ifadeleri. [Buradan](https://en.wikipedia.org/wiki/ECMAScript#Versions) spesifik versiyonlar hakkında daha fazla şey öğrenebilirsiniz.
 
-A JavaScript compiler takes JavaScript code, transforms it and returns JavaScript code in a different format. The most common use case is to take ES6 syntax and transform it into syntax that older browsers are capable of interpreting. [Babel](https://babeljs.io/) is the compiler most commonly used with React.
+## Derleyiciler {#compilers}
 
-## Bundlers {#bundlers}
+Bir JavaScript derleyicisi JavaScript kodunu alır, dönüştürür ve JavaScript kodunu farklı bir formatta döner. En yaygın kullanım durumu, ES6 sözdizimini alıp, eski tarayıcıların yorumlayabildiği sözdizimine dönüştürmektir. [Babel](https://babeljs.io/) React ile en sık kullanılan derleyicidir.
 
-Bundlers take JavaScript and CSS code written as separate modules (often hundreds of them), and combine them together into a few files better optimized for the browsers. Some bundlers commonly used in React applications include [Webpack](https://webpack.js.org/) and [Browserify](http://browserify.org/).
+## Paketleyiciler {#bundlers}
 
-## Package Managers {#package-managers}
+Paketleyiciler ayrı modüller (genellikle yüzlerce) olarak yazılmış JavaScript ve CSS kodlarını alır ve bunları tarayıcılar için daha iyi optimize edilmiş birkaç dosyada birleştirir. React uygulamalarında yaygın olarak kullanılan bazı paketleyiciler arasında [Webpack](https://webpack.js.org/) ve [Browserify](http://browserify.org/) bulunur.
 
-Package managers are tools that allow you to manage dependencies in your project. [npm](https://www.npmjs.com/) and [Yarn](https://yarnpkg.com/) are two package managers commonly used in React applications. Both of them are clients for the same npm package registry.
+## Paket Yöneticileri {#package-managers}
+
+[npm](https://www.npmjs.com/) and [Yarn](https://yarnpkg.com/) are two package managers commonly used in React applications. Both of them are clients for the same npm package registry.
+
+Paket yöneticileri, projenizdeki bağımlılıkları yönetmenize olanak sağlayan araçlardır. [npm](https://www.npmjs.com/) ve [Yarn](https://yarnpkg.com/) React uygulamalarında yaygın olarak kullanılan iki paket yöneticisidir. Her ikisi de aynı npm paket kayıt defteri için istemcilerdir.
 
 ## CDN {#cdn}
 
-CDN stands for Content Delivery Network. CDNs deliver cached, static content from a network of servers across the globe. 
+CDN, İçerik Dağıtım Ağı anlamına gelir. CDN'ler, dünya genelinde bir sunucu ağından önbelleğe alınmış statik içerik sağlar.
 
 ## JSX {#jsx}
 
@@ -51,15 +59,21 @@ ReactDOM.render(
 
 React elements are the building blocks of React applications. One might confuse elements with a more widely known concept of "components". An element describes what you want to see on the screen. React elements are immutable.
 
+React elemanları React uygulamalarının yapı taşlarıdır. Bir kişi, öğeleri daha yaygın olarak bilinen "bileşenler" kavramı ile karıştırabilir. Bir eleman ekranda görmek istediğinizi açıklar. React elemanları değişmezdir.
+
 ```js
 const element = <h1>Hello, world</h1>;
 ```
 
 Typically, elements are not used directly, but get returned from components.
 
+Genellikle, öğeler doğrudan kullanılmaz, ancak bileşenlerden döndürülür.
+
 ## [Components](/docs/components-and-props.html) {#components}
 
 React components are small, reusable pieces of code that return a React element to be rendered to the page. The simplest version of React component is a plain JavaScript function that returns a React element:
+
+React bileşenleri, sayfaya bir React öğesi döndüren küçük, yeniden kullanılabilir kod parçalarıdır. React bileşeninin en basit sürümü, bir React öğesini döndüren düz bir JavaScript fonksiyonudur:
 
 ```js
 function Welcome(props) {
@@ -68,6 +82,8 @@ function Welcome(props) {
 ```
 
 Components can also be ES6 classes:
+
+Bileşenler ayrıca ES6 sınıfları olabilir:
 
 ```js
 class Welcome extends React.Component {
@@ -83,18 +99,24 @@ Components can be broken down into distinct pieces of functionality and used wit
 
 `props` are inputs to a React component. They are data passed down from a parent component to a child component.
 
+`props`, bir React bileşenine ait girdilerdir. Ana bileşenden bir alt bileşene aktarılan verilerdir.
+
 Remember that `props` are readonly. They should not be modified in any way:
 
+'props'ların salt okunur olduklarını unutmayın. Hiçbir şekilde değiştirilmemeleri gerekir:
+
 ```js
-// Wrong!
+// Yanlış!
 props.number = 42;
 ```
 
 If you need to modify some value in response to user input or a network response, use `state` instead.
 
+Kullanıcı girdisine veya bir ağ yanıtına cevap olarak bir değeri değiştirmeniz gerekirse, bunun yerine `state` kullanın.
+
 ### `props.children` {#propschildren}
 
-`props.children` is available on every component. It contains the content between the opening and closing tags of a component. For example:
+`props.children` her bileşende mevcuttur. Bir bileşenin açılış ve kapanış etiketleri arasındaki içeriği kapsar. Örneğin:
 
 ```js
 <Welcome>Hello world!</Welcome>
@@ -102,13 +124,15 @@ If you need to modify some value in response to user input or a network response
 
 The string `Hello world!` is available in `props.children` in the `Welcome` component:
 
+"Hello world!" dizgisi "Welcome" bileşenindeki props.children dizininde bulunur:
+
 ```js
 function Welcome(props) {
   return <p>{props.children}</p>;
 }
 ```
 
-For components defined as classes, use `this.props.children`:
+Sınıf olarak tanımlanan bileşenler için `this.props.children` kullanın:
 
 ```js
 class Welcome extends React.Component {
@@ -159,8 +183,12 @@ Use refs sparingly. If you find yourself often using refs to "make things happen
 Handling events with React elements has some syntactic differences:
 
 * React event handlers are named using camelCase, rather than lowercase.
+* React olay işleyicileri, küçük harf yerine camelCase kullanılarak adlandırılır.
 * With JSX you pass a function as the event handler, rather than a string.
+* JSX ile bir dizge yerine olay işleyicisi olarak bir işlev iletirsiniz.
 
 ## [Reconciliation](/docs/reconciliation.html) {#reconciliation}
 
 When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM. This process is called "reconciliation".
+
+Bir bileşenin prop'ları veya state'i değiştiğinde, React yeni döndürülen elemanı önceden oluşturulmuş olanla karşılaştırarak gerçek bir DOM güncellemesi gerekip gerekmediğine karar verir. Eşit olmadıklarında, React DOM'ı günceller. Bu sürece "uzlaşma" denir.
