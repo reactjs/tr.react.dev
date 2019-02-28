@@ -190,15 +190,16 @@ Genel olarak bu, `<input type="text">`, `<textarea>` ve `<select>` elementlerini
 ><select multiple={true} value={['B', 'C']}>
 >```
 
-## The file input Tag {#the-file-input-tag}
+## Dosya Girişi Tagı {#the-file-input-tag}
 
-In HTML, an `<input type="file">` lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications).
+HTML'de bir `<input type="file">` elemanı, kullanıcını cihazının depolama alanından bir ve ya daha fazla dosyayı sunucuya yüklemesini ya da JavaScript'in [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) aracılığıyla manipüle etmesini sağlar.
 
 ```html
 <input type="file" />
 ```
 
-Because its value is read-only, it is an **uncontrolled** component in React. It is discussed together with other uncontrolled components [later in the documentation](/docs/uncontrolled-components.html#the-file-input-tag).
+Değeri salt okunur olduğu için, React'te **kontrolsüz** bir bileşendir. Daha sonra diğer kontrol edilemeyen bileşenlerle birlikte [dokümanlarda](/docs/uncontrolled-components.html#the-file-input-tag) ele alınmıştır.
+
 
 ## Çoklu Girişleri Ele Alma {#handling-multiple-inputs}
 
@@ -207,12 +208,12 @@ Because its value is read-only, it is an **uncontrolled** component in React. It
 Örneğin:
 
 ```javascript{15,18,28,37}
-class Reservation extends React.Component {
+class Rezervasyon extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isGoing: true,
-      numberOfGuests: 2
+      gidiyor: true,
+      ziyaretciSayisi: 2
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -232,20 +233,20 @@ class Reservation extends React.Component {
     return (
       <form>
         <label>
-          Is going:
+          Gidiyor:
           <input
-            name="isGoing"
+            name="gidiyor"
             type="checkbox"
-            checked={this.state.isGoing}
+            checked={this.state.gidiyor}
             onChange={this.handleInputChange} />
         </label>
         <br />
         <label>
-          Number of guests:
+          Misafir Sayısı:
           <input
-            name="numberOfGuests"
+            name="ziyaretciSayisi"
             type="number"
-            value={this.state.numberOfGuests}
+            value={this.state.ziyaretciSayisi}
             onChange={this.handleInputChange} />
         </label>
       </form>
@@ -271,8 +272,7 @@ var partialState = {};
 partialState[name] = value;
 this.setState(partialState);
 ```
-
-Also, since `setState()` automatically [merges a partial state into the current state](/docs/state-and-lifecycle.html#state-updates-are-merged), we only needed to call it with the changed parts.
+Ayrıca, `setState()` otomatik olarak [kısmi bir durumu geçerli duruma birleştirir](/docs/state-and-lifecycle.html#state-updates-are-merged) olduğundan, yalnızca değiştirilen parçalarla çağırmamız gerekiyor.
 
 ## Kontrollü Giriş Boş Değer {#controlled-input-null-value}
 
@@ -281,7 +281,7 @@ Also, since `setState()` automatically [merges a partial state into the current 
 Aşağıdaki kod bunu göstermektedir. (Giriş ilk önce kilitlenir ancak kısa bir gecikme sonrasında düzenlenebilir hale gelir.)
 
 ```javascript
-ReactDOM.render(<input value="hi" />, mountNode);
+ReactDOM.render(<input value="selam" />, mountNode);
 
 setTimeout(function() {
   ReactDOM.render(<input value={null} />, mountNode);
@@ -289,10 +289,10 @@ setTimeout(function() {
 
 ```
 
-## Alternatives to Controlled Components {#alternatives-to-controlled-components}
+## Kontrollü Bileşenlere Alternatifler {#alternatives-to-controlled-components}
 
-It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out [uncontrolled components](/docs/uncontrolled-components.html), an alternative technique for implementing input forms.
+Kontrollü bileşenleri kullanmak bazen sıkıcı olabilir, çünkü verilerinizin bir React bileşeniyle tüm giriş durumunu değiştirebilmesi ve yayınlayabilmesi için bir olay işleyicisi yazmanız gerekir. Bu, önceden var olan bir kod tabanını React'e dönüştürürken veya bir React uygulamasını React olmayan bir kütüphaneyle birleştirirken özellikle can sıkıcı olabilir. Bu durumlarda, giriş formlarını uygulamak için alternatif bir teknik olan [kontrolsüz bileşenler](/docs/kontrolsüz-components.html) 'i kontrol etmek isteyebilirsiniz.
 
-## Fully-Fledged Solutions {#fully-fledged-solutions}
+## Tam Teşekküllü Çözümler {#fully-fledged-solutions}
 
-If you're looking for a complete solution including validation, keeping track of the visited fields, and handling form submission, [Formik](https://jaredpalmer.com/formik) is one of the popular choices. However, it is built on the same principles of controlled components and managing state — so don't neglect to learn them.
+Doğrulama, ziyaret edilen alanları takip etme ve form teslimini içeren eksiksiz bir çözüm arıyorsanız [Formik](https://jaredpalmer.com/formik) popüler seçeneklerden biridir. Bununla birlikte, aynı kontrol bileşenlerinin ve yönetim durumunun aynı ilkeleri üzerine kuruludur - bu yüzden bunları öğrenmeyi ihmal etmeyin.
