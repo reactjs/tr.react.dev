@@ -1,14 +1,14 @@
 ---
 id: lists-and-keys
-title: Lists and Keys
+title: Listeler ve Anahtarlar
 permalink: docs/lists-and-keys.html
 prev: conditional-rendering.html
 next: forms.html
 ---
 
-First, let's review how you transform lists in JavaScript.
+Öncelikle, listelerin JavaScript'te nasıl dönüştürüldüğünü gözden geçirelim.
 
-Given the code below, we use the [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function to take an array of `numbers` and double their values. We assign the new array returned by `map()` to the variable `doubled` and log it:
+Aşağıdaki kod göz önüne alındığında, `sayılardan` oluşan bir diziyi almak ve değerlerini iki katına çıkarmak için [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanırız. `map()` tarafından döndürülen yeni diziyi `doubled` değişkenine atayıp ekrana yazdırırız:
 
 ```javascript{2}
 const numbers = [1, 2, 3, 4, 5];
@@ -16,15 +16,15 @@ const doubled = numbers.map((number) => number * 2);
 console.log(doubled);
 ```
 
-This code logs `[2, 4, 6, 8, 10]` to the console.
+Bu kod konsol ekranına `[2, 4, 6, 8, 10]` yazdırır.
 
-In React, transforming arrays into lists of [elements](/docs/rendering-elements.html) is nearly identical.
+React'te, dizileri [öğe](/docs/rendering-elements.html) listelerine dönüştürmek de neredeyse aynıdır.
 
-### Rendering Multiple Components {#rendering-multiple-components}
+### Çoklu Bileşenleri Render Etmek {#rendering-multiple-components}
 
-You can build collections of elements and [include them in JSX](/docs/introducing-jsx.html#embedding-expressions-in-jsx) using curly braces `{}`.
+Öğelerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
 
-Below, we loop through the `numbers` array using the JavaScript [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. We return a `<li>` element for each item. Finally, we assign the resulting array of elements to `listItems`:
+Aşağıda, Javascript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir öğe için bir `<li>` elemanı dönüyoruz. Son olarak da, ortaya çıkan diziyi `listItems` a atıyoruz:
 
 ```javascript{2-4}
 const numbers = [1, 2, 3, 4, 5];
@@ -33,7 +33,7 @@ const listItems = numbers.map((number) =>
 );
 ```
 
-We include the entire `listItems` array inside a `<ul>` element, and [render it to the DOM](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
+`listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz, ve [DOM'a render ediyoruz](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
 
 ```javascript{2}
 ReactDOM.render(
@@ -42,15 +42,15 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
 
-This code displays a bullet list of numbers between 1 and 5.
+Bu kod, 1 ile 5 arasındaki sayıların madde işaretli listesini görüntüler.
 
-### Basic List Component {#basic-list-component}
+### Temel Liste Bileşeni {#basic-list-component}
 
-Usually you would render lists inside a [component](/docs/components-and-props.html).
+Genellikle listeleri bir [bileşenin](/docs/components-and-props.html) içinde render edersiniz.
 
-We can refactor the previous example into a component that accepts an array of `numbers` and outputs a list of elements.
+Bir önceki örneği, bir `sayı` dizisini kabul eden ve bir öğe listesi çıktısı veren bir bileşende yeniden düzenleyebiliriz.
 
 ```javascript{3-5,7,13}
 function NumberList(props) {
@@ -70,9 +70,9 @@ ReactDOM.render(
 );
 ```
 
-When you run this code, you'll be given a warning that a key should be provided for list items. A "key" is a special string attribute you need to include when creating lists of elements. We'll discuss why it's important in the next section.
+Bu kodu çalıştırdığınızda, liste öğeleri için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar", öğe listeleri oluştururken eklemeniz gereken özel bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde tartışacağız.
 
-Let's assign a `key` to our list items inside `numbers.map()` and fix the missing key issue.
+`numbers.map()` içindeki liste öğelerine birer `anahtar` atayalım ve eksik anahtar sorununu düzeltelim:
 
 ```javascript{4}
 function NumberList(props) {
@@ -94,11 +94,11 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
 
-## Keys {#keys}
+## Anahtarlar {#keys}
 
-Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:
+Anahtarlar; hangi öğelerin değiştiğini, eklendiğini ya da silindiğini belirleme noktasında React'e yardımcı olur:
 
 ```js{3}
 const numbers = [1, 2, 3, 4, 5];
@@ -109,7 +109,7 @@ const listItems = numbers.map((number) =>
 );
 ```
 
-The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys:
+Bir anahtar seçmenin en iyi yolu, kardeşleri arasında bir liste öğesini benzersiz olarak tanımlayan bir string kullanmaktır. Çoğu zaman verinizin içindeki ID'leri anahtar olarak kullanırsınız:
 
 ```js{2}
 const todoItems = todos.map((todo) =>
@@ -119,34 +119,33 @@ const todoItems = todos.map((todo) =>
 );
 ```
 
-When you don't have stable IDs for rendered items, you may use the item index as a key as a last resort:
+Render edilen öğeleriniz için sabit ID'leriniz yoksa, son çare olarak, öğenin index numarasını anahtar olarak kullanabilirsiniz:
 
 ```js{2,3}
 const todoItems = todos.map((todo, index) =>
-  // Only do this if items have no stable IDs
+  // Bunu yalnızca öğelerinizin sabit ID'leri yoksa yapın
   <li key={index}>
     {todo.text}
   </li>
 );
 ```
+Dizi içindeki elemanların değişme ihtimali varsa, anahtarlar için index numaralarının kullanılmasını önermiyoruz. Bu, performansı olumsuz yönde etkileyebilir ve bileşen state'i ile ilgili sorunlara neden olabilir. [Index numarasının anahtar olarak kullanılmasının olumsuz etkilerine dair detaylı açıklama](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) için Robin Pokorny's makalesine göz atın. Öğeleri listelemek için belirgin bir anahtar atamamayı seçtiğinizde, React varsayılan olarak index numaralarını anahtar olarak kullanacaktır.
 
-We don't recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny's article for an [in-depth explanation on the negative impacts of using an index as a key](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). If you choose not to assign an explicit key to list items then React will default to using indexes as keys.
+Daha fazla bilgi edinmek istiyorsanız, işte size [neden anahtarların gerekli olduğuna dair](/docs/reconciliation.html#recursing-on-children) detaylı bir açıklama.
 
-Here is an [in-depth explanation about why keys are necessary](/docs/reconciliation.html#recursing-on-children) if you're interested in learning more.
+### Anahtarları Olan Bileşenleri Çıkarmak {#extracting-components-with-keys}
 
-### Extracting Components with Keys {#extracting-components-with-keys}
+Anahtarlar yalnızca çevreleyen dizinin bağlamında anlamlıdır.
 
-Keys only make sense in the context of the surrounding array.
+Örneğin, bir `ListItem` bileşenini [çıkarırsanız](/docs/components-and-props.html#extracting-components), anahtarı `ListItem`'in içindeki `<li>` öğesinden ziyade, dizinin içindeki `<ListItem />` öğelerinde tutmalısınız.
 
-For example, if you [extract](/docs/components-and-props.html#extracting-components) a `ListItem` component, you should keep the key on the `<ListItem />` elements in the array rather than on the `<li>` element in the `ListItem` itself.
-
-**Example: Incorrect Key Usage**
+**Örenk: Yanlış Anahtar Kullanımı**
 
 ```javascript{4,5,14,15}
 function ListItem(props) {
   const value = props.value;
   return (
-    // Wrong! There is no need to specify the key here:
+    // Yanlış! Anahtarı burada belirtmeye gerek yok:
     <li key={value.toString()}>
       {value}
     </li>
@@ -156,7 +155,7 @@ function ListItem(props) {
 function NumberList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) =>
-    // Wrong! The key should have been specified here:
+    // Yanlış! Anahtar burada tanımlanmalıydı:
     <ListItem value={number} />
   );
   return (
@@ -173,18 +172,18 @@ ReactDOM.render(
 );
 ```
 
-**Example: Correct Key Usage**
+**Örnek: Doğru Anahtar Kullanımı**
 
 ```javascript{2,3,9,10}
 function ListItem(props) {
-  // Correct! There is no need to specify the key here:
+  // Doğru! Anahtarı burada belirtmeye gerek yok:
   return <li>{props.value}</li>;
 }
 
 function NumberList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) =>
-    // Correct! Key should be specified inside the array.
+    // Doğru! Anahtar dizinin içinde belirtilmelidir:
     <ListItem key={number.toString()}
               value={number} />
   );
@@ -202,13 +201,13 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/ZXeOGM?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ZXeOGM?editors=0010)
 
-A good rule of thumb is that elements inside the `map()` call need keys.
+Temel bir kural da `map()` çağrısının içindeki elemanların anahtarlara ihtiyaç duymasıdır.
 
-### Keys Must Only Be Unique Among Siblings {#keys-must-only-be-unique-among-siblings}
+### Anahtarlar Sadece Kardeşler Arasında Benzersiz Olmalıdır {#keys-must-only-be-unique-among-siblings}
 
-Keys used within arrays should be unique among their siblings. However they don't need to be globally unique. We can use the same keys when we produce two different arrays:
+Dizilerde kullanılan anahtarlar kardeşleri arasında benzersiz olmalıdır. Ancak, küresel olarak benzersiz olmaları gerekmez. İki farklı dizi ürettiğimizde aynı anahtarları kullanabiliriz:
 
 ```js{2,5,11,12,19,21}
 function Blog(props) {
@@ -237,8 +236,8 @@ function Blog(props) {
 }
 
 const posts = [
-  {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
-  {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+  {id: 1, title: 'Merhaba Dünya', content: 'React Öğrenmeye Hoşgeldiniz!'},
+  {id: 2, title: 'Kurulum', content: 'React\'i npm üzerinden kurabilirsiniz.'}
 ];
 ReactDOM.render(
   <Blog posts={posts} />,
@@ -246,9 +245,9 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
 
-Keys serve as a hint to React but they don't get passed to your components. If you need the same value in your component, pass it explicitly as a prop with a different name:
+Anahtarlar, React'e bir ipucu olarak hizmet eder, ancak bileşenlerinize aktarılmazlar. Bileşeninizde aynı değere ihtiyacınız varsa, belirgin bir şekilde farklı bir ada sahip bir `prop` olarak iletin:
 
 ```js{3,4}
 const content = posts.map((post) =>
@@ -259,11 +258,11 @@ const content = posts.map((post) =>
 );
 ```
 
-With the example above, the `Post` component can read `props.id`, but not `props.key`.
+Yukarıdaki örnekte, `Post` bileşeni `props.id` yi okuyabilir, ancak `props.key` i okuyamaz.
 
-### Embedding map() in JSX {#embedding-map-in-jsx}
+### map() i JSX'e gömmek {#embedding-map-in-jsx}
 
-In the examples above we declared a separate `listItems` variable and included it in JSX:
+Yukarıdaki örneklerde ayrı bir `listItems` değişkeni tanımladık ve JSX'e dahil ettik:
 
 ```js{3-6}
 function NumberList(props) {
@@ -280,7 +279,7 @@ function NumberList(props) {
 }
 ```
 
-JSX allows [embedding any expression](/docs/introducing-jsx.html#embedding-expressions-in-jsx) in curly braces so we could inline the `map()` result:
+JSX, [herhangi bir ifadeyi küme parantezlerine yerleştirmeye](/docs/introducing-jsx.html#embedding-expressions-in-jsx) izin verir, böylece `map ()` sonucunu satıriçi olarak ekleyebiliriz:
 
 ```js{5-8}
 function NumberList(props) {
@@ -296,6 +295,6 @@ function NumberList(props) {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/BLvYrB?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/BLvYrB?editors=0010)
 
-Sometimes this results in clearer code, but this style can also be abused. Like in JavaScript, it is up to you to decide whether it is worth extracting a variable for readability. Keep in mind that if the `map()` body is too nested, it might be a good time to [extract a component](/docs/components-and-props.html#extracting-components).
+Bazen bu yöntem daha temiz bir kodla sonuçlanır; ancak bu tarz da kötüye kullanılabilir. JavaScript'te olduğu gibi, okunabilirlik için, bir değişken çıkarmaya değip değmeyeceğine karar vermek size kalmıştır. `Map ()` gövdesi çok fazla iç içe geçmişse, [bir bileşen çıkarmak](/docs/components-and-props.html#extracting-components) için iyi bir zaman olabileceğini unutmayın.
