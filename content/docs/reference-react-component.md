@@ -86,19 +86,19 @@ Render esnasında, yaşam döngüsü metodunda veya herhangi bir alt bileşenin 
 - [`static getDerivedStateFromError()`](#static-getderivedstatefromerror)
 - [`componentDidCatch()`](#componentdidcatch)
 
-### Other APIs {#other-apis}
+### Diğer API'lar {#other-apis}
 
-Each component also provides some other APIs:
+Bunların haricinde her bileşen bazı API'ları sunar:
 
   - [`setState()`](#setstate)
   - [`forceUpdate()`](#forceupdate)
 
-### Class Properties {#class-properties}
+### Sınıf Özellikleri {#class-properties}
 
   - [`defaultProps`](#defaultprops)
   - [`displayName`](#displayname)
 
-### Instance Properties {#instance-properties}
+### Nesne Özellikleri {#instance-properties}
 
   - [`props`](#props)
   - [`state`](#state)
