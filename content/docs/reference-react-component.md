@@ -73,9 +73,9 @@ Bir güncelleme, bileşenin props'u veya state'i değiştirilerek oluşabilir. B
 >- [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate)
 >- [`UNSAFE_componentWillReceiveProps()`](#unsafe_componentwillreceiveprops)
 
-#### Unmounting {#unmounting}
+#### Çıkarılma {#unmounting}
 
-This method is called when a component is being removed from the DOM:
+Bir bileşen, DOM'dan çıkarıldığında bu metot çalışır:
 
 - [**`componentWillUnmount()`**](#componentwillunmount)
 
