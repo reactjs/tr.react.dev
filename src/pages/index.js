@@ -50,7 +50,7 @@ class Home extends Component {
     return (
       <Layout location={location}>
         <TitleAndMetaTags
-          title="React &ndash; Kullanıcı arayüzü geliştirebileceğiniz bir JavaScript kütüphanesi"
+          title="React &ndash; Kullanıcı arayüzleri geliştirebileceğiniz bir JavaScript kütüphanesi"
           ogUrl={createOgUrl('index.html')}
         />
         <div css={{width: '100%'}}>
@@ -133,7 +133,7 @@ class Home extends Component {
                         fontSize: 30,
                       },
                     }}>
-                    Kullanıcı arayüzü geliştirebileceğiniz bir JavaScript
+                    Kullanıcı arayüzleri geliştirebileceğiniz bir JavaScript
                     kütüphanesi
                   </p>
                   <Flex

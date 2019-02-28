@@ -1,5 +1,5 @@
 ---
-title: Dış Eklentiler Kullanan Bir Bileşen
+title: Harici Eklentiler Kullanan Bir Bileşen
 order: 3
 domid: markdown-example
 ---

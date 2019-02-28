@@ -3,6 +3,6 @@ title: Bileşen Tabanlı
 order: 1
 ---
 
-Kendi durum bilgilerini yöneten bileşenler geliştirin ve onları bir araya getirerek bileşik kullanıcı arayüzleri oluşturun.
+Kendi state'ini yöneten bileşenler geliştirin ve onları bir araya getirerek kompleks kullanıcı arayüzleri oluşturun.
 
-Bileşen mantığı, taslaklar yerine JavaScript ile yazıldığı için, uygulamanız boyunca kolayca zengin veri iletebilir ve durum bilgilerini DOM dışında tutabilirsiniz.
+Bileşen mantığı, şablonlar yerine JavaScript'te yazıldığı için, uygulamanız boyunca kolayca zengin veri iletebilir ve state bilgisini DOM dışında tutabilirsiniz.
