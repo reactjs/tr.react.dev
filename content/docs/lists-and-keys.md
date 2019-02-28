@@ -22,7 +22,7 @@ React'te, dizileri [öğe](/docs/rendering-elements.html) listelerine dönüşt�
 
 ### Çoklu Bileşenleri Render Etmek {#rendering-multiple-components}
 
-Ögelerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
+Öğelerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
 
 Aşağıda, Javascript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir öğe için bir `<li>` elemanı dönüyoruz. Son olarak da, ortaya çıkan diziyi `listItems` a atıyoruz:
 
