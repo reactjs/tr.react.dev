@@ -28,7 +28,7 @@ Bu sayfa React kullanım kılavuzu ve ilgili kaynaklara genel bir bakıştır.
 - [React'ı öğrenin](#learn-react)
 - [Haberdar olun](#staying-informed)
 - [Sürüm bilgileri](#versioned-documentation)
-- [Eksik bir şey?](#something-missing)
+- [Bir şeyler mi eksik?](#something-missing)
 
 ## React'ı Deneyin {#try-react}
 
