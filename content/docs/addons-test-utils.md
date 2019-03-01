@@ -1,27 +1,27 @@
 ---
 id: test-utils
-title: Test Utilities
+title: Test Araçları
 permalink: docs/test-utils.html
 layout: docs
 category: Reference
 ---
 
-**Importing**
+**Ekleme**
 
 ```javascript
 import ReactTestUtils from 'react-dom/test-utils'; // ES6
-var ReactTestUtils = require('react-dom/test-utils'); // ES5 with npm
+var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 ```
 
 ## Overview {#overview}
 
-`ReactTestUtils` makes it easy to test React components in the testing framework of your choice. At Facebook we use [Jest](https://facebook.github.io/jest/) for painless JavaScript testing. Learn how to get started with Jest through the Jest website's [React Tutorial](http://facebook.github.io/jest/docs/en/tutorial-react.html#content).
+`ReactTestUtils`, React bileşenlerini seçtiğiniz test çerçevesinde test etmeyi kolaylaştırır. Facebook'ta kolay bir şekilde JavaScript testi için [Jest](https://facebook.github.io/jest/)'i kullanmaktayız. Jest web sitesinde [React](http://facebook.github.io/jest/docs/en/tutorial-react.html#content) ile Jest'e nasıl başlayacağınızı öğrenebilirsiniz.
 
-> Note:
+> Not:
 >
-> We recommend using [`react-testing-library`](https://git.io/react-testing-library) which is designed to enable and encourage writing tests that use your components as the end users do.
+> Bileşenlerinizi son kullanıcılarmışcasına gibi kullanan test testlerini etkinleştirmek ve kullanabilmek için tasarlanmış [`react-testing-library`](https://git.io/react-testing-library) kullanmanızı öneririz.
 >
-> Alternatively, Airbnb has released a testing utility called [Enzyme](http://airbnb.io/enzyme/), which makes it easy to assert, manipulate, and traverse your React Components' output.
+> Alternatif olarak, Airbnb, React bileşenlerinin çıktısını belirlemenizi, değiştirmenizi ve değiştirmenizi kolaylaştıran [Enzyme](http://airbnb.io/enzyme/) adında bir test programı yayınladı.
 
  - [`act()`](#act)
  - [`mockComponent()`](#mockcomponent)
@@ -40,17 +40,17 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 with npm
  - [`renderIntoDocument()`](#renderintodocument)
  - [`Simulate`](#simulate)
 
-## Reference {#reference}
+## Referanslar {#reference}
 
 ### `act()` {#act}
 
-To prepare a component for assertions, wrap the code rendering it and performing updates inside an `act()` call. This makes your test run closer to how React works in the browser.
+Bileşen testlerini hazırlamak için, kodunuzu paket haline getirin ve bunu `act()` çağrısıyla içeride güncelleme gerçekleştirebilirsiniz. Bu sizin testinizi React'in tarayıcıda çalışma biçimine çok yakın bir şekilde çalıştırmanızı sağlar.
 
->Note
+>Not
 >
->If you use `react-test-renderer`, it also provides an `act` export that behaves the same way.
+>Eğer `react-test-renderer`'ı kullanırsanız, bu size `act` çıktısının aynı şekilde davranmasını sağlar.
 
-For example, let's say we have this `Counter` component:
+Örneğin `Counter` bileşenimizin olduğunu düşünün:
 
 ```js
 class App extends React.Component {
@@ -60,10 +60,10 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
-    document.title = `You clicked ${this.state.count} times`;
+    document.title = `${this.state.count} kez tıkladınız`;
   }
   componentDidUpdate() {
-    document.title = `You clicked ${this.state.count} times`;
+    document.title = `${this.state.count} kez tıkladınız`;
   }
   handleClick() {
     this.setState(state => ({
@@ -73,9 +73,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <p>You clicked {this.state.count} times</p>
+        <p>{this.state.count} kez tıkladınız</p>
         <button onClick={this.handleClick}>
-          Click me
+          Beni tıkla
         </button>
       </div>
     );
@@ -83,7 +83,7 @@ class App extends React.Component {
 }
 ```
 
-Here is how we can test it:
+Şu şekilde test edebiliriz:
 
 ```js{3,20-22,29-31}
 import React from 'react';
@@ -103,8 +103,8 @@ afterEach(() => {
   container = null;
 });
 
-it('can render and update a counter', () => {
-  // Test first render and componentDidMount
+it('sayacı ekrana çizebilir ve güncelleyebilir', () => {
+  // İlk render ve componentDidMount'u test eder
   act(() => {
     ReactDOM.render(<Counter />, container);
   });
@@ -113,12 +113,12 @@ it('can render and update a counter', () => {
   expect(label.textContent).toBe('You clicked 0 times');
   expect(document.title).toBe('You clicked 0 times');
 
-  // Test second render and componentDidUpdate
+  // İkinci render and componentDidUpdate'u test eder
   act(() => {
     button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
   });
-  expect(label.textContent).toBe('You clicked 1 times');
-  expect(document.title).toBe('You clicked 1 times');
+  expect(label.textContent).toBe('1 kez tıkladınız');
+  expect(document.title).toBe('1 kez tıkladınız');
 });
 ```
 
