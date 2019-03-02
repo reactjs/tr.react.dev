@@ -129,7 +129,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | React element 			| React elemanı |
 | Reference					| Başvuru dokümanı |
 | render 					| render etmek |
-| shallow rendering 		| yüzeysel render'lama |
+| shallow rendering 		| yüzeysel render'lama / render etme |
 | state 					| state |
 | string 					| string |
 | template literals 		| template literal'leri |
