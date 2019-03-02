@@ -1,8 +1,8 @@
 ---
-title: Component-Based
+title: Bileşen Tabanlı
 order: 1
 ---
 
-Build encapsulated components that manage their own state, then compose them to make complex UIs.
+Kendi state'ini yöneten bileşenler geliştirin ve onları bir araya getirerek kompleks kullanıcı arayüzleri oluşturun.
 
-Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.
+Bileşen mantığı, şablonlar yerine JavaScript'te yazıldığı için, uygulamanız boyunca kolayca zengin veri iletebilir ve state bilgisini DOM dışında tutabilirsiniz.

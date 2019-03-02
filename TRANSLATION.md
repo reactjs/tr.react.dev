@@ -1,6 +1,6 @@
 # Çeviri
 
-Şu anki ilerleme: https://github.com/reactjs/tr.reactjs.org/issues/4
+Şu anki ilerleme: https://github.com/reactjs/tr.reactjs.org/issues/1
 
 # Stil Rehberi
 
@@ -103,7 +103,7 @@ Tutarlılığı korumak ve okura saygı ve incelik ile hitap etmek için, you ke
 
 Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için bazı öneriler aşağıdaki şekilde alfabetik olarak sıralanmıştır.
 
-| Orijinal kelime / terim | Öneri |
+| Orijinal kelime / terim   | Öneri |
 | ------------------------- | ---------- |
 | array                     | dizi |
 | arrow function            | ok fonksiyonu |
@@ -111,19 +111,21 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | bundler                   | paketleyici |
 | callback                  | callback |
 | camelCase                 | camelCase |
-| child                     | alt |
+| child                     | alt / alt eleman |
 | controlled component      | kontrollü bileşen |
 | debugging                 | hata ayıklama |
 | DOM                       | DOM |
+| external                  | harici |
 | fragment                  | fragment |
 | framework                 | çatı |
 | function component        | fonksiyon bileşeni |
 | hook                      | hook |
+| internal                  | dahili |
 | key                       | anahtar |
 | lazy initialization       | lazy başlatım |
 | library                   | kütüphane |
 | lowercase                 | küçük harf |
-| parent                    | üst |
+| parent                    | üst / üst eleman |
 | props                     | prop'ları |
 | pure                      | saf olarak / saf halde |
 | React element             | React elemanı |
