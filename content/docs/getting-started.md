@@ -20,7 +20,7 @@ redirect_from:
 
 Bu sayfa React kullanım kılavuzu ve ilgili kaynaklara genel bir bakıştır.
 
-**React** kullanıcı arayüzleri oluşturabileceğiniz bir JavaScript kütüphanesidir. React'ın tam olarak ne olduğunu [ana sayfamızdan](/) veya [eğitim bölümünden](/tutorial/tutorial.html) öğrenin.
+**React** kullanıcı arayüzleri oluşturabileceğiniz bir JavaScript kütüphanesidir. React'in tam olarak ne olduğunu [ana sayfamızdan](/) veya [eğitim bölümünden](/tutorial/tutorial.html) öğrenin.
 
 ---
 
@@ -69,7 +69,7 @@ React anlatımlarının hızlı geçtiğini düşünüyorsanız, [Tania Rascia i
 
 ### Tasarımcılar İçin React {#react-for-designers}
 
-Tasarım tecrübeniz varsa, [bu kaynaklar](https://reactfordesigners.com/) başlamak için harika.
+Tasarım tecrübeniz varsa, [bu kaynaklar](https://reactfordesigners.com/) başlamanız için uygundur.
 
 ### JavaScript Kaynakları {#javascript-resources}
 
@@ -92,7 +92,7 @@ Seviyenizi kontrol etmek için [JavaScript'e genel bakış](https://developer.mo
 
 ### React İçinde Düşünmek {#thinking-in-react}
 
-Pek çok React kullanıcısı [React İçinde Düşünmek](/docs/thinking-in-react.html) bolümünü nihayet “kafama dank etti” anı olarak belirtir. Muhtemelen React'ın en eski 'oyun nasil bitirilir rehberi' ama hala aynı derecede alakalı.
+Pek çok React kullanıcısı [React İçinde Düşünmek](/docs/thinking-in-react.html) bolümünü nihayet “kafama dank etti” anı olarak belirtir. Muhtemelen React'in en eski 'oyun nasil bitirilir rehberi' ama hala aynı derecede alakalı.
 
 ### Önerilen Kurslar {#recommended-courses}
 
@@ -120,8 +120,8 @@ Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için ya
 
 ## Versiyon Anlatımı {#versioned-documentation}
 
-Bu bölüm her zaman React'ın en son kararlı versiyonunu yansıtır. React 16'dan beri, açıklamaların eski sürümlerini [ayrı bir sayfada](/versions) bulabilirsiniz. Geçmiş sürümlere ait açıklamaların yayınlanma tarihinde anlık olarak görüntülendiğini ve sürekli güncellenmediğini unutmayın.
+Bu bölüm her zaman React'in en son kararlı versiyonunu yansıtır. React 16'dan beri, açıklamaların eski sürümlerini [ayrı bir sayfada](/versions) bulabilirsiniz. Geçmiş sürümlere ait açıklamaların yayınlanma tarihinde anlık olarak görüntülendiğini ve sürekli güncellenmediğini unutmayın.
 
 ## Bir şeyler mi eksik? {#something-missing}
 
-Anlatımlarda bir şey eksikse veya kafa karıştırıcı bir bölüm bulursanız, lütfen düzeltme/geliştirme önerilerinizle [ilgili dokümantasyon havuzuna bir sorun](https://github.com/reactjs/reactjs.org/issues/new) gönderin veya [@reactjs hesabına](https://twitter.com/reactjs) tweet atın. Sizden bildirim almayı çok seviyoruz!
+Anlatımlarda bir şey eksikse veya kafa karıştırıcı bir bölüm bulursanız, lütfen düzeltme/geliştirme önerilerinizle [ilgili issue](https://github.com/reactjs/reactjs.org/issues/new) gönderin veya [@reactjs hesabına](https://twitter.com/reactjs) tweet atın. Sizden bildirim almayı çok seviyoruz!
