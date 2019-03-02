@@ -115,6 +115,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | controlled component 		| kontrollü bileşen |
 | debugging 				| hata ayıklama |
 | DOM 						| DOM |
+| fragment 					| fragment |
 | framework 				| çatı |
 | function component 		| fonksiyon bileşeni |
 | hook 						| hook |
@@ -124,9 +125,11 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | lowercase 				| küçük harf |
 | parent 					| üst |
 | props 					| prop'ları |
+| pure 						| saf olarak / saf halde |
 | React element 			| React elemanı |
+| Reference					| Başvuru dokümanı |
 | render 					| render etmek |
-| shallow rendering 		| shallow rendering |
+| shallow rendering 		| yüzeysel render'lama |
 | state 					| state |
 | string 					| string |
 | template literals 		| template literal'leri |
