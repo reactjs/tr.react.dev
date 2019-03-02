@@ -105,11 +105,11 @@ Bunların haricinde her bileşen bazı API'ları sunar:
 
 * * *
 
-## Reference {#reference}
+## Başvuru Dokümanı {#reference}
 
-### Commonly Used Lifecycle Methods {#commonly-used-lifecycle-methods}
+### Yaygın Olarak Kullanılan Yaşam Döngüsü Metotları {#commonly-used-lifecycle-methods}
 
-The methods in this section cover the vast majority of use cases you'll encounter creating React components. **For a visual reference, check out [this lifecycle diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/).**
+Bu bölümde anlatılacak metotlar, React bileşenleri oluştururken yaygın olarak karşılaşacağınız kullanım senaryolarını içerir. **Görsel bir anlatım için [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) inceleyebilirsiniz.**
 
 ### `render()` {#render}
 
