@@ -105,33 +105,33 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 
 | Orijinal kelime / terim | Öneri |
 | ------------------------- | ---------- |
-| array              		| dizi |
-| arrow function 			| ok fonksiyonu |
-| bug 						| hata |
-| bundler 					| paketleyici |
-| callback 					| callback |
-| camelCase 				| camelCase |
-| child 					| alt |
-| controlled component 		| kontrollü bileşen |
-| debugging 				| hata ayıklama |
-| DOM 						| DOM |
-| fragment 					| fragment |
-| framework 				| çatı |
-| function component 		| fonksiyon bileşeni |
-| hook 						| hook |
-| key 						| anahtar |
-| lazy initialization 		| lazy başlatım |
-| library 					| kütüphane |
-| lowercase 				| küçük harf |
-| parent 					| üst |
-| props 					| prop'ları |
-| pure 						| saf olarak / saf halde |
-| React element 			| React elemanı |
-| Reference					| Başvuru dokümanı |
-| render 					| render etmek |
-| shallow rendering 		| yüzeysel render'lama / render etme |
-| state 					| state |
-| string 					| string |
-| template literals 		| template literal'leri |
-| Try it on CodePen 	| CodePen'de deneyin |
-| uncontrolled component 	| kontrolsüz bileşen |
+| array                     | dizi |
+| arrow function            | ok fonksiyonu |
+| bug                       | hata |
+| bundler                   | paketleyici |
+| callback                  | callback |
+| camelCase                 | camelCase |
+| child                     | alt |
+| controlled component      | kontrollü bileşen |
+| debugging                 | hata ayıklama |
+| DOM                       | DOM |
+| fragment                  | fragment |
+| framework                 | çatı |
+| function component        | fonksiyon bileşeni |
+| hook                      | hook |
+| key                       | anahtar |
+| lazy initialization       | lazy başlatım |
+| library                   | kütüphane |
+| lowercase                 | küçük harf |
+| parent                    | üst |
+| props                     | prop'ları |
+| pure                      | saf olarak / saf halde |
+| React element             | React elemanı |
+| Reference                 | Başvuru dokümanı |
+| render                    | render etmek |
+| shallow rendering         | yüzeysel render'lama / render etme |
+| state                     | state |
+| string                    | string |
+| template literals         | template literal'leri |
+| Try it on CodePen         | CodePen'de deneyin |
+| uncontrolled component    | kontrolsüz bileşen |
