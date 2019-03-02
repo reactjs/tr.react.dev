@@ -117,23 +117,23 @@ Bu bölümde anlatılacak metotlar, React bileşenleri oluştururken yaygın ola
 render()
 ```
 
-The `render()` method is the only required method in a class component.
+`render()` metodu, bir sınıf bileşeni için gereken tek metottur.
 
-When called, it should examine `this.props` and `this.state` and return one of the following types:
+Çağrıldığında, `this.props` ile `this.state`'i denetler ve aşağıdaki veri tiplerinden birini geri döndürür:
 
-- **React elements.** Typically created via [JSX](/docs/introducing-jsx.html). For example, `<div />` and `<MyComponent />` are React elements that instruct React to render a DOM node, or another user-defined component, respectively.
-- **Arrays and fragments.** Let you return multiple elements from render. See the documentation on [fragments](/docs/fragments.html) for more details.
-- **Portals**. Let you render children into a different DOM subtree. See the documentation on [portals](/docs/portals.html) for more details.
-- **String and numbers.** These are rendered as text nodes in the DOM.
-- **Booleans or `null`**. Render nothing. (Mostly exists to support `return test && <Child />` pattern, where `test` is boolean.)
+- **React elementleri.** Genellikle [JSX](/docs/introducing-jsx.html) kullanılarak oluşturulurlar. Örneğin, `<div />` ve `<MyComponent />` birer React elementidir. `<div/>`, React'e bir DOM düğümünün render edilmesini bildirir. `<MyComponent/>` ise kullanıcının tanımladığı bir bileşendir.
+- **Diziler and fragment'lar.** Render edilecek birden fazla elemanları geri döndürmenizi sağlarlar. Daha fazla bilgi için [fragments](/docs/fragments.html) dokümanını inceleyebilirsiniz.
+- **Portal'lar**. Alt bileşenleri, farklı bir DOM alt ağacı olarak render etmeyi sağlarlar. Daha fazla bilgi için [portals](/docs/portals.html) dokümanını inceleyebilirsiniz.
+- **String'ler ve sayılar.** DOM içerisinde metin düğümü olarak render edilirler.
+- **Boolean'lar ve `null`**. Hiçbir şey render etmezler. (Genellikle `return test && <Child />` tarzındaki kod yapısını desteklemek için vardırlar. Buradaki `test`, bir boolean değişkendir.)
 
-The `render()` function should be pure, meaning that it does not modify component state, it returns the same result each time it's invoked, and it does not directly interact with the browser.
+`render()` metodu saf halde olmalıdır. Yani bileşenin state'ini değiştirmemeli, aynı parametrelerle çağrıldığında hep aynı çıktıyı vermeli, ve internet tarayıcısı ile direkt olarak etkileşimde bulunmamalıdırlar.
 
-If you need to interact with the browser, perform your work in `componentDidMount()` or the other lifecycle methods instead. Keeping `render()` pure makes components easier to think about.
+Eğer tarayıcı ile etkileşimde bulunmanız gerekirse, `componentDidMount()` veya diğer yaşam döngüsü metotlarında bu işlemi gerçekleştiriniz. `render()`'ın saf halde tutulması, bileşen üzerinde daha kolay çalışmanızı sağlar.
 
-> Note
+> Not
 >
-> `render()` will not be invoked if [`shouldComponentUpdate()`](#shouldcomponentupdate) returns false.
+> [`shouldComponentUpdate()`](#shouldcomponentupdate) metodu `false` dönerse, `render()` metodu çağrılmaz.
 
 * * *
 
