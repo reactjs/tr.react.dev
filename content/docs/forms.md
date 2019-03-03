@@ -9,7 +9,7 @@ redirect_from:
   - "docs/forms-zh-CN.html"
 ---
 
-HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çalışır, çünkü form elemanlarının kendilerine has iç stateleri vardır. Örneğin, bu kod HTML’de bir form içerisinde name girişi ister:
+HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çalışır, çünkü form elemanlarının kendilerine has iç state'leri vardır. Örneğin, bu kod HTML’de bir form içerisinde name girişi ister:
 
 ```html
 <form>
@@ -21,15 +21,15 @@ HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çal�
 </form>
 ```
 
-This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it's convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called "controlled components".
+Bu form, kullanıcı formu gönderdiğinde yeni bir sayfaya göz atmak gibi varsayılan bir HTML formu davranışına sahiptir. Bu davranışı React'te istiyorsan, işe yarıyor. Ancak çoğu durumda, formun gönderimini işleyen ve kullanıcının forma girdiği verilere erişen bir JavaScript işlevine sahip olmak uygundur. Bunu başarmanın standart yolu "kontrollü bileşenler" adı verilen bir tekniktir.
 
-## Kontrollü Componentler {#controlled-components}
+## Kontrollü Bileşenler {#controlled-components}
 
-HTML’de, `<input>`, `<textarea>` ve `<select>` gibi form elemanları genellikle kendi state’ini korur ve kullanıcı girdisine dayalı olarak güncelleşir. React’te ise state’ler genellikle componentlerin this.state özelliğinde saklanır ve yalnızca  [`setState()`](/docs/react-component.html#setstate). ile güncellenir.
+HTML’de, `<input>`, `<textarea>` ve `<select>` gibi form elemanları genellikle kendi state’ini korur ve kullanıcı girdisine dayalı olarak güncellenir. React’te ise state’ler genellikle bileşenlerin this.state özelliğinde saklanır ve yalnızca  [`setState()`](/docs/react-component.html#setstate). ile güncellenir.
 
-React state’te tek kaynak olarak ikisini birleştirebiliriz. Ardından form oluşturan React componenti, sonraki kullanıcı girişi üzerinde bu formda olanı da kontrol eder. Değeri React tarafından bu şekilde kontrol edilen bir giriş form elemanına kontrollü component denir.
+React state’te tek kaynak olarak ikisini birleştirebiliriz. Ardından form oluşturan React bileşeni, sonraki kullanıcı girişi üzerinde bu formda olanı da kontrol eder. Değeri React tarafından bu şekilde kontrol edilen bir giriş form elemanına kontrollü bileşen denir.
 
-Örneğin, bir önceki örnekte, name değerinin yazılıp submit edildiğinde name i alert ile yazdırmak istiyorsak, formu kontrollü bir component olarak oluşturabiliriz:
+Örneğin, bir önceki örnekte, name değerinin yazılıp submit edildiğinde name i alert ile yazdırmak istiyorsak, formu kontrollü bir bileşen olarak oluşturabiliriz:
 
 ```javascript{4,10-12,24}
 class NameForm extends React.Component {
@@ -66,9 +66,9 @@ class NameForm extends React.Component {
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/VmmPgp?editors=0010)
 
-`value` attribute’ü input’un kendisinde zaten var. Öyleyse bu değeri almak için yeni bir React state’i oluşturmaya gerek yok. Bu inputta `value` olarak state’i yazdıracağız ve input’ta her değişiklik olduğunda bu state’i güncelleyeceğiz.
+`value` özelleği input’un kendisinde zaten var. Öyleyse bu değeri almak için yeni bir React state’i oluşturmaya gerek yok. Bu inputta `value` olarak state’i yazdıracağız ve input’ta her değişiklik olduğunda bu state’i güncelleyeceğiz.
 
-Kontrollü bir componentte her state değişimi, `handleChange` fonksiyonunu çalıştıracaktır. Örneğin, adın büyük harflerle yazılmasını isteseydik, `handleChange` fonksiyonunu şu şekilde yazabilirdik:
+Kontrollü bir bileşende her state değişimi, `handleChange` fonksiyonunu çalıştıracaktır. Örneğin, adın büyük harflerle yazılmasını isteseydik, `handleChange` fonksiyonunu şu şekilde yazabilirdik:
 
 ```javascript{2}
 handleChange(event) {
@@ -76,9 +76,9 @@ handleChange(event) {
 }
 ```
 
-## Textarea Tagı {#the-textarea-tag}
+## Textarea Elemanı {#the-textarea-tag}
 
-HTML’de, `<textarea>` tagı yazıyı çocuğunda tanımlar:
+HTML’de, `<textarea>` elemanı yazıyı çocuğunda tanımlar:
 
 ```html
 <textarea>
@@ -86,7 +86,7 @@ HTML’de, `<textarea>` tagı yazıyı çocuğunda tanımlar:
 </textarea>
 ```
 
-Bunun yerine React, `<textarea>` için bir `value` attribute’ü kullanır. Bu şekilde `<textarea>` kullanan bir form, tek satırlı bir girdi kullanan bir forma çok benzer şekilde yazılabilir:
+Bunun yerine React, `<textarea>` için bir `value` özelliği kullanır. Bu şekilde `<textarea>` kullanan bir form, tek satırlı bir girdi kullanan bir forma çok benzer şekilde yazılabilir:
 
 ```javascript{4-6,12-14,26}
 class EssayForm extends React.Component {
@@ -123,9 +123,9 @@ class EssayForm extends React.Component {
 }
 ```
 
-`this.state.value` 'in constructor’te başlatıldığına dikkat edin, böylece textarea içerisinde varsayılan olarak bu yazı bulunacaktır
+`this.state.value` 'in constructor’da başlatıldığına dikkat edin, böylece textarea içerisinde varsayılan olarak bu yazı bulunacaktır
 
-## Select Tagı {#the-select-tag}
+## Select Elemanı {#the-select-tag}
 
 HTML’de `<select>`, bir açılır liste oluşturur. Örneğin, aşağıdaki kod bazı meyveleri listeler:
 
@@ -138,7 +138,7 @@ HTML’de `<select>`, bir açılır liste oluşturur. Örneğin, aşağıdaki ko
 </select>
 ```
 
-`Havuç` seçeneğinin başlangıçta `selected` attribute’ü yüzünden seçili olarak geleceğini unutmayın. React, bu `selected` attribute’ünü kullanmak yerine, `select` etiketinde bir `value` attribute’ü kullanır. Kontrollü bir componentte bu daha kullanışlıdır çünkü yalnızca bir yerde güncelleme yapmanızı sağlar. Örneğin:
+`Havuç` seçeneğinin başlangıçta `selected` özelliği yüzünden seçili olarak geleceğini unutmayın. React, bu `selected` özelliğini kullanmak yerine, `select` etiketinde bir `value` özelliği kullanır. Kontrollü bir bileşende bu daha kullanışlıdır çünkü yalnızca bir yerde güncelleme yapmanızı sağlar. Örneğin:
 
 ```javascript{4,10-12,24}
 class FlavorForm extends React.Component {
@@ -190,7 +190,7 @@ Genel olarak bu, `<input type="text">`, `<textarea>` ve `<select>` elementlerini
 ><select multiple={true} value={['B', 'C']}>
 >```
 
-## Dosya Girişi Tagı {#the-file-input-tag}
+## Dosya Girişi Elemanı {#the-file-input-tag}
 
 HTML'de bir `<input type="file">` elemanı, kullanıcını cihazının depolama alanından bir ve ya daha fazla dosyayı sunucuya yüklemesini ya da JavaScript'in [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) aracılığıyla manipüle etmesini sağlar.
 
