@@ -1,6 +1,6 @@
 ---
 id: thinking-in-react
-title: Thinking in React
+title: React'te Düşünmek
 permalink: docs/thinking-in-react.html
 redirect_from:
   - 'blog/2013/11/05/thinking-in-react.html'
@@ -8,17 +8,19 @@ redirect_from:
 prev: composition-vs-inheritance.html
 ---
 
-React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
+React, bize göre, JavaScript ile büyük ve hızlı Web uygulamaları oluşturmanın en önde gelen yoludur. Bizim için Facebook ve Instagram'ın geliştirilmesinde çok etkili oldu.
 
-One of the many great parts of React is how it makes you think about apps as you build them. In this document, we'll walk you through the thought process of building a searchable product data table using React.
+React’in en harika yanlarından biri de, uygulamaları oluştururken size kazandırdığı bakış açısıdır. Bu dökümanda, React'i kullanarak aranabilir bir ürün tablosu oluşturmanın düşünce sürecinde size yol göstereceğiz.
 
-## Start With A Mock {#start-with-a-mock}
+## Bir Tasklakla Başlayın {#start-with-a-mock}
 
 Imagine that we already have a JSON API and a mock from our designer. The mock looks like this:
 
+Zaten bir JSON API'ımızın ve tasarımcımızdan gelen bir taslağımızın olduğunu hayal edin. Taslak bunun gibi gözüküyor:
+
 ![Mockup](../images/blog/thinking-in-react-mock.png)
 
-Our JSON API returns some data that looks like this:
+JSON API'ımız şuna benzeyen bir veri dönüyor:
 
 ```
 [
@@ -31,7 +33,7 @@ Our JSON API returns some data that looks like this:
 ];
 ```
 
-## Step 1: Break The UI Into A Component Hierarchy {#step-1-break-the-ui-into-a-component-hierarchy}
+## Adım 1: Kullanıcı Arabirimini Bileşen Hiyerarşisine Bölün{#step-1-break-the-ui-into-a-component-hierarchy}
 
 The first thing you'll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you're working with a designer, they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!
 
