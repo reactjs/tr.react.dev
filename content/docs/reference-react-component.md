@@ -143,47 +143,47 @@ Eğer tarayıcı ile etkileşimde bulunmanız gerekirse, `componentDidMount()` v
 constructor(props)
 ```
 
-**If you don't initialize state and you don't bind methods, you don't need to implement a constructor for your React component.**
+**state'i kullanmadığınız veya `bind()` fonksiyonu ile herhangi bir metot bağlamadığınız sürece, React bileşeni için bir constructor metodu oluşturmanız gerekli değildir.**
 
-The constructor for a React component is called before it is mounted. When implementing the constructor for a `React.Component` subclass, you should call `super(props)` before any other statement. Otherwise, `this.props` will be undefined in the constructor, which can lead to bugs.
+Bir React bileşeninin constructor'ı, ilgili bileşen uygulamaya eklenmeden önce çağrılır. `React.Component`'tan türetilen sınıf için bir constructor oluştururken, fonksiyon içerisinde ilk satırda `super(props)` çağırmanız gereklidir. Aksi halde `this.props` özelliği, constructor içerisinde `undefined` olarak değer alacaktır. Bu durum, uygulamanızda birtakım hatalara neden olabilir.
 
-Typically, in React constructors are only used for two purposes:
+Constructor, genellikle iki temel amaçla kullanılır:
 
-* Initializing [local state](/docs/state-and-lifecycle.html) by assigning an object to `this.state`.
-* Binding [event handler](/docs/handling-events.html) methods to an instance.
+* `this.state`'e bir nesne atanarak [yerel state](/docs/state-and-lifecycle.html)'in oluşturulması.
+* `bind()` metodu kullanılarak, bileşene [olay metotlarının](/docs/handling-events.html) bağlanması.
 
-You **should not call `setState()`** in the `constructor()`. Instead, if your component needs to use local state, **assign the initial state to `this.state`** directly in the constructor:
+`constructor()` içerisinde, **`setState()` metodunu çağırmamalısınız**. Eğer bileşeniniz yerel state'i kullanmak istiyorsa, constructor içerisinde direkt olarak **`this.state`'e atayınız**:
 
 ```js
 constructor(props) {
   super(props);
-  // Don't call this.setState() here!
+  // Burada this.setState()'i çağırmayınız!
   this.state = { counter: 0 };
   this.handleClick = this.handleClick.bind(this);
 }
 ```
 
-Constructor is the only place where you should assign `this.state` directly. In all other methods, you need to use `this.setState()` instead.
+`this.state`'e direkt olarak atama yapmanız gereken tek yer constructor'dır. Diğer tüm metotlarda, `this.setState()`'i kullanmanız gereklidir.
 
-Avoid introducing any side-effects or subscriptions in the constructor. For those use cases, use `componentDidMount()` instead.
+Constructor'da, yan etki eden metotlardan veya `setInterval()` gibi abonelik metotlarını oluşturmaktan kaçınınız. Bunun yerine `componentDidMount()` metodunda gerçekleştiriniz. 
 
->Note
+>Not
 >
->**Avoid copying props into state! This is a common mistake:**
+>**state'e prop nesnelerinin içeriklerini atamayınız! Bu çok yaygın olarak yapılan bir hatadır:**
 >
 >```js
 >constructor(props) {
 >  super(props);
->  // Don't do this!
+>  // İşte bunu yapmayınız!
 >  this.state = { color: props.color };
 >}
 >```
 >
->The problem is that it's both unnecessary (you can use `this.props.color` directly instead), and creates bugs (updates to the `color` prop won't be reflected in the state).
+>Buradaki problemlerden birincisi, state'e props değerinin atanması gereksizdir. Çünkü direkt olarak `this.props.color` değeri kullanılabilir. İkinci problem ise, `color` prop'unda yapılan değişiklikler, state'e yansıtılmadığı için hatalara neden olur. 
 >
->**Only use this pattern if you intentionally want to ignore prop updates.** In that case, it makes sense to rename the prop to be called `initialColor` or `defaultColor`. You can then force a component to "reset" its internal state by [changing its `key`](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) when necessary.
+>**Bu tarz bir kodlamayı, yalnızca prop güncellemelerini göz ardı etmek istediğinizde yapınız.** Bu durumda, `color` değişkenini `initialColor` veya `defaultColor` olarak isimlendirmek daha uygun hale gelecektir. Bileşenin iç state'ini güncellemek için zorlamanız gerektiğinde [`key` özelliğini değiştirerek](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) bunu yapabilirsiniz.
 >
->Read our [blog post on avoiding derived state](/blog/2018/06/07/you-probably-dont-need-derived-state.html) to learn about what to do if you think you need some state to depend on the props.
+>[State'in türetilmesinden kaçınmak](/blog/2018/06/07/you-probably-dont-need-derived-state.html) adlı makalemizi okuyarak, prop'lara bağlı bir state'e ihtiyacınız olduğunda ne yapmanız gerektiği ile ilgili bilgi edinebilirsiniz.
 
 
 * * *
