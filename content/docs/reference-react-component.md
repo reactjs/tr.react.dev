@@ -245,7 +245,7 @@ Bir bileşen, DOM'dan çıkarıldığında veya tamamen yok edildiğinde `compon
 
 ### Nadiren Kullanılan Yaşam Döngüsü Metotları {#rarely-used-lifecycle-methods}
 
-The methods in this section correspond to uncommon use cases. They're handy once in a while, but most of your components probably don't need any of them. **You can see most of the methods below on [this lifecycle diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) if you click the "Show less common lifecycles" checkbox at the top of it.**
+Bu bölümdeki metotlar, nispeten daha az kullanılan durumlar içindir. Nadiren işinizi görseler de, büyük ihtimalle bileşenlerinizde hiçbirini kullanmayacaksınız. **[Bu yaşam döngüsü şemasının](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) üst kısımında yer alan "Daha az kullanılan yaşam döngülerini göster" kutucuğunu işaretlediğinizde** bu metotların çoğunu görebileceksiniz.
 
 
 ### `shouldComponentUpdate()` {#shouldcomponentupdate}
