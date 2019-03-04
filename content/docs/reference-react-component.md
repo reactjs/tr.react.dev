@@ -208,26 +208,26 @@ Ayrıca bu metot, `setInterval()` gibi abonelik gerektiren metotları çağırma
 componentDidUpdate(prevProps, prevState, snapshot)
 ```
 
-`componentDidUpdate()` is invoked immediately after updating occurs. This method is not called for the initial render.
+Adından da anlaşılacağı gibi `componentDidUpdate()` metodu, sadece DOM güncellemelerinde gerçekleştirilir. Bu nedenle başlangıçtaki render işleminde çağrılmaz.
 
-Use this as an opportunity to operate on the DOM when the component has been updated. This is also a good place to do network requests as long as you compare the current props to previous props (e.g. a network request may not be necessary if the props have not changed).
+Bileşen güncellendiğinde, DOM üzerinde yapmak istediğiniz işleri gerçekleştirmek için bu metodu kullanınız. Ayrıca bu metot, önceki prop ile sonraki prop değerlerini karşılaştırıp, buna bağlı olarak ağ isteklerini gerçekleştirmek için uygun bir yerdir. Örneğin, prop nesnesi değişmediyse ağ isteğinin yapılmasına gerek yoktur.
 
 ```js
 componentDidUpdate(prevProps) {
-  // Typical usage (don't forget to compare props):
+  // Genel kullanım (prop değerlerini karşılaştırmayı unutmayınız!):
   if (this.props.userID !== prevProps.userID) {
     this.fetchData(this.props.userID);
   }
 }
 ```
 
-You **may call `setState()` immediately** in `componentDidUpdate()` but note that **it must be wrapped in a condition** like in the example above, or you'll cause an infinite loop. It would also cause an extra re-rendering which, while not visible to the user, can affect the component performance. If you're trying to "mirror" some state to a prop coming from above, consider using the prop directly instead. Read more about [why copying props into state causes bugs](/blog/2018/06/07/you-probably-dont-need-derived-state.html).
+`componentDidUpdate()` metodunun **içerisinde `setState()` çağrısı** yapabilirsiniz. Fakat unutmayınız ki bu çağrı, üstteki gibi bir koşul ifadesi içerisinde yer almalıdır. Aksi halde uygulamanız sonsuz döngüye girebilir. Ayrıca kullanıcı tarafından farkedilmeyen fakat bileşen performansına etki edebilecek seviyede ekstra bir render işlemi gerçekleşmesine neden olur. Eğer üst bileşenden gelen prop'u mevcut bileşenin state'ine kopyalamaya çalışıyorsanız, bunun yerine direkt olarak prop kullanabilirsiniz. Neden [prop'un state'e kopyalanmasının hatalara yol açabileceği](/blog/2018/06/07/you-probably-dont-need-derived-state.html) hakkında daha fazla bilgi edinmek için blog yazısını inceleyebilirsiniz..
 
-If your component implements the `getSnapshotBeforeUpdate()` lifecycle (which is rare), the value it returns will be passed as a third "snapshot" parameter to `componentDidUpdate()`. Otherwise this parameter will be undefined.
+Eğer bileşeninizde `getSnapshotBeforeUpdate()` yaşam döngüsü metodunu kodlamışsanız (ki bu nadir bir durumdur), geri döndürdüğü değer `componentDidUpdate()` metoduna "snapshot" ismiyle üçüncü parametre olarak aktarılır. Aksi halde bu parametre, `undefined` olacaktır.
 
-> Note
+> Not:
 >
-> `componentDidUpdate()` will not be invoked if [`shouldComponentUpdate()`](#shouldcomponentupdate) returns false.
+> Eğer [`shouldComponentUpdate()`](#shouldcomponentupdate) metodu false döndürüyorsa, `componentDidUpdate()` metodu çağrılmayacak demektir.
 
 * * *
 
@@ -237,13 +237,13 @@ If your component implements the `getSnapshotBeforeUpdate()` lifecycle (which is
 componentWillUnmount()
 ```
 
-`componentWillUnmount()` is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in `componentDidMount()`.
+Bir bileşen, DOM'dan çıkarıldığında veya tamamen yok edildiğinde `componentWillUnmount()` metodu çalıştırılır. `componentDidMount()`'ta yapılan; zamanlayıcı fonksiyonların geçersiz kılınması, ağ isteklerinin iptal edilmesi, veya herhangi bir abonelik metodunun temizlenmesi gibi işlemleri bu metotta gerçekleştiriniz.
 
-You **should not call `setState()`** in `componentWillUnmount()` because the component will never be re-rendered. Once a component instance is unmounted, it will never be mounted again.
+`componentWillUnmount()`'ta **`setState()` metodunu çağırmamalısınız.** Çünkü, bileşen artık DOM'dan ayrıldığı için, tekrar render edilme işlemi asla gerçekleştirilmeyecektir. Bir bileşen eğer DOM'dan ayrıldıysa, artık tekrar DOM'a geri takılma süreci gerçekleştirmeyecektir.
 
 * * *
 
-### Rarely Used Lifecycle Methods {#rarely-used-lifecycle-methods}
+### Nadiren Kullanılan Yaşam Döngüsü Metotları {#rarely-used-lifecycle-methods}
 
 The methods in this section correspond to uncommon use cases. They're handy once in a while, but most of your components probably don't need any of them. **You can see most of the methods below on [this lifecycle diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) if you click the "Show less common lifecycles" checkbox at the top of it.**
 
