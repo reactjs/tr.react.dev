@@ -120,6 +120,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | framework                 | çatı |
 | function component        | fonksiyon bileşeni |
 | hook                      | hook |
+| instance                  | nesne |
 | internal                  | dahili |
 | key                       | anahtar |
 | lazy initialization       | lazy başlatım |
