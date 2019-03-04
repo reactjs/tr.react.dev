@@ -107,6 +107,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | ------------------------- | ---------- |
 | array                     | dizi |
 | arrow function            | ok fonksiyonu |
+| attribute                 | özellik |
 | bug                       | hata |
 | bundler                   | paketleyici |
 | callback                  | callback |
