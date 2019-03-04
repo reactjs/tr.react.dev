@@ -254,17 +254,17 @@ Bu bölümdeki metotlar, nispeten daha az kullanılan durumlar içindir. Nadiren
 shouldComponentUpdate(nextProps, nextState)
 ```
 
-Use `shouldComponentUpdate()` to let React know if a component's output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.
+Mevcut state veya prop'lar değiştiğinde, bileşenin çıktısının bu durumdan etkilenmemesini belirtmek için `shouldComponentUpdate()` metodunu kullanınız. Normalde bileşenin varsayılan davranışı, her state değişikliğinde tekrar render edilmesine yöneliktir. Birçok kullanımda bu varsayılan davranışa uymanız gerekmektedir. 
 
-`shouldComponentUpdate()` is invoked before rendering when new props or state are being received. Defaults to `true`. This method is not called for the initial render or when `forceUpdate()` is used.
+Prop veya state değerleri değiştirildiğinde, render işleminden hemen önce `shouldComponentUpdate()` metodu çalıştırılır. Varsayılan olarak `true` döndürür. Bileşenin başlangıçtaki ilk render zamanında veya `forceUpdate()` metodu kullanıldığında, bu metot çalıştırılmaz. 
 
-This method only exists as a **[performance optimization](/docs/optimizing-performance.html).** Do not rely on it to "prevent" a rendering, as this can lead to bugs. **Consider using the built-in [`PureComponent`](/docs/react-api.html#reactpurecomponent)** instead of writing `shouldComponentUpdate()` by hand. `PureComponent` performs a shallow comparison of props and state, and reduces the chance that you'll skip a necessary update.
+Bu metot yalnızca **[performans iyileştirme](/docs/optimizing-performance.html) işlemleri için yapılmıştır.** Render işlemini engellemek için bu metodu kullanmayınız. Zira bazı hataların oluşmasına yol açabilir. Bu nedenle, `shouldComponentUpdate()` metodunu yazmak yerine, React içerisinde varsayılan olarak gelen **[`PureComponent`](/docs/react-api.html#reactpurecomponent)** kullanınız. `PureComponent`, prop ve state'leri yüzeysel olarak karşılaştırır. Bu sayede büyük DOM ağaçlarına sahip bileşenlerde, küçük değişiklikler gerçekleştiğinde oluşacak güncellemelerin oluşma şansını azaltır. Böylece gereksiz güncellemeler göz ardı edilerek performans artışı sağlanmış olur.
 
-If you are confident you want to write it by hand, you may compare `this.props` with `nextProps` and `this.state` with `nextState` and return `false` to tell React the update can be skipped. Note that returning `false` does not prevent child components from re-rendering when *their* state changes.
+Eğer bu metodu kullanmak için kendinize güveniyorsanız, güncellemenin göz ardı edilmesi için `nextProps` ile `this.props`'u, `nextState` ile `this.state` karşılaşştırabilir ve bunun sonucunda `false` değerini döndürebilirsiniz. `false`'un geri döndürülmesi işlemi, alt bileşenlerin state'i değiştiğinde tekrar render edilmelerini engellemeyeceğini unutmayınız.
 
-We do not recommend doing deep equality checks or using `JSON.stringify()` in `shouldComponentUpdate()`. It is very inefficient and will harm performance.
+`shouldComponentUpdate()` metodu içerisinde, eşitlik kontrollerinin derinlemesine gerçekleştirilmesi veya `JSON.stringify()`'ın kullanımı önerilmez. Bu tür kullanımlar verimsizdir ve performansı olumsuz yönde etkiler.
 
-Currently, if `shouldComponentUpdate()` returns `false`, then [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate), [`render()`](#render), and [`componentDidUpdate()`](#componentdidupdate) will not be invoked. In the future React may treat `shouldComponentUpdate()` as a hint rather than a strict directive, and returning `false` may still result in a re-rendering of the component.
+React'in mevcut sürümünde, `shouldComponentUpdate()` metodu `false` döndürdüğünde; [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate), [`render()`](#render), ve [`componentDidUpdate()`](#componentdidupdate) metodları çağrılmaz. Gelecek sürümlerde React, `shouldComponentUpdate()` metodunu sıkı bir şekilde uygulamak yerine bir ipucu şeklinde ele alabilir. Bu nedenle `false` döndürülmesine rağmen, bileşenin tekrar render edilmesi ile sonuçlanabilir.
 
 * * *
 
