@@ -16,7 +16,7 @@ redirect_from:
 
 React, performans ve tarayıcılara uyumluluk sağlayabilmek için tarayıcı bağımsız bir DOM sistemi uygulamaktadır. Tarayıcı DOM geliştirmelerinde birkaç zorlu noktayı düzeltme fırsatı yakaladık.
 
-React'te, tüm DOM özellikleri ve nitelikleri (olay işleyicileri dahil) camelCased olmalıdır. Örneğin, HTML niteliği olan `tabindex`, React'te `tabIndex`'e karşılık gelmektedir. Burada istisna olarak `aria-*` ve `data-*` nitelikleri bulunmaktadır. Bu nitelikler lowercased olmalıdır. Örneğin, `aria-label`'ı `aria-label` olarak yazabilirsiniz.
+React'te, tüm DOM özellikleri ve nitelikleri (olay işleyicileri dahil) camelCased olmalıdır. Örneğin, HTML niteliği olan `tabindex`, React'te `tabIndex`'e karşılık gelmektedir. Burada istisna olarak `aria-*` ve `data-*` nitelikleri bulunmaktadır. Bu nitelikler küçük harfli olmalıdır. Örneğin, `aria-label`'ı `aria-label` olarak yazabilirsiniz.
 
 ## React ve HTML'deki Nitelik Farklılıkları {#differences-in-attributes}
 
@@ -28,9 +28,9 @@ React ve HTML'de birbirlerinden farklı çalışan birkaç nitelik bulunmaktadı
 
 ### className {#classname}
 
-CSS class'ı belirleyebilmek için `className` niteliğini kullanabilirsiniz. Bu nitelik bütün DOM ve SVG elemanlarına uygulanabilmektedir. Örneğin `<div>`, `<a>` ve diğerleri.
+CSS sınıfı belirleyebilmek için `className` niteliğini kullanabilirsiniz. Bu nitelik bütün DOM ve SVG elemanlarına uygulanabilmektedir. Örneğin `<div>`, `<a>` ve diğerleri.
 
-React'ı Web bileşenleri ile birlikte kullanırsanız (ki bu çok nadirdir), `class` niteliğini kullanmalısınız.
+React'i Web bileşenleri ile birlikte kullanırsanız (ki bu çok nadirdir), `class` niteliğini kullanmalısınız.
 
 ### dangerouslySetInnerHTML {#dangerouslysetinnerhtml}
 
@@ -82,7 +82,7 @@ Stiller otomatik düzeltilmemektedir. Eski tarayıcıları da desteklemek için 
 ```js
 const divStyle = {
   WebkitTransition: 'all', // özelliğin burada büyük harfle başlamış olmasına dikkat ediniz
-  msTransition: 'all' // 'ms' lowercase olarak yazılan tek vendor ön ekidir. 
+  msTransition: 'all' // 'ms' küçük harf olarak yazılan tek vendor ön ekidir. 
 };
 
 function ComponentWithTransition() {
@@ -90,7 +90,7 @@ function ComponentWithTransition() {
 }
 ```
 
-Stil anahtarları, JS'deki DOM elemanlarındaki özelliklere erişimle tutarlı olmak için camelCased'dir. (örneğin `node.style.backgroundImage`). Vendor ön ekleri [`ms`'ten hariç](http://www.andismith.com/blog/2012/02/modernizr-prefixed/) büyük harf ile başlamalıdır. Bundan dolayı yukarıda `WebkitTransition`, büyük harfle "W" başlamıştır.
+Stil anahtarları, JS'deki DOM elemanlarındaki özelliklere erişimle tutarlı olmak için camelCased'dır. (örneğin `node.style.backgroundImage`). Vendor ön ekleri [`ms`'ten hariç](http://www.andismith.com/blog/2012/02/modernizr-prefixed/) büyük harf ile başlamalıdır. Bundan dolayı yukarıda `WebkitTransition`, büyük harfle "W" başlamıştır.
 
 React otomatik olarak "px" son ekini belirli stil özelliklerine eklemektedir. "px" haricindeki diğer birimleri kullanmak istiyorsanız, değeri string olarak birimiyle beraber yazmalısınız.
 
@@ -114,7 +114,7 @@ Normalde, alt elemanları bulunan bir eleman `contentEditable` olarak işaretlen
 
 ### suppressHydrationWarning {#suppresshydrationwarning}
 
-Sunucu üzerinden ekran oluşturma yapıyorsanız, sunucu ve istemcinin ekranı farklı oluşturduğuna dair uyarı alırsınız. Fakat, çok nadiren, tam eşleşme neredeyse imkansızdır. Örneğin, timestamps sunucu ve istemcide farklı olması beklenir.
+Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı oluşturduğuna dair uyarı alırsınız. Fakat, çok nadiren, tam eşleşme neredeyse imkansızdır. Örneğin, timestamps sunucu ve istemcide farklı olması beklenir.
 
 `suppressHydrationWarning`'i `true` olarak belirlerseniz, React sizi elemanın niteliklerindeki ve içeriğindeki uyuşmazlıklar hakkında uyarmayacaktır. Sadece bir derece aşağıya kadar çalışmaktadır. Bu nitelik çıkış kapısı olarak kullanılması amaçlanmıştır. Başka amaçlarda kullanılmamasını tavsiye ederiz. [`ReactDOM.hydrate()` dokümentasyonunda](/docs/react-dom.html#hydrate) hidrasyon ile ilgili daha fazla bilgi bulabilirsiniz.
 
@@ -193,4 +193,4 @@ xlinkHref xlinkRole xlinkShow xlinkTitle xlinkType xmlns xmlnsXlink xmlBase
 xmlLang xmlSpace y y1 y2 yChannelSelector z zoomAndPan
 ```
 
-Özel nitelikleri tamamen lowercased yazmak şartıyla kullanabilirsiniz.
+Özel nitelikleri tamamen küçük harfle yazmak şartıyla kullanabilirsiniz.
