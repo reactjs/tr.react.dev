@@ -6,11 +6,11 @@ category: Reference
 permalink: docs/react-dom.html
 ---
 
-If you load React from a `<script>` tag, these top-level APIs are available on the `ReactDOM` global. If you use ES6 with npm, you can write `import ReactDOM from 'react-dom'`. If you use ES5 with npm, you can write `var ReactDOM = require('react-dom')`.
+React, `<script>` elementiyle yuklenirse, bu ust seviye API'lar `ReactDOM` uzerinden kullanilabilirsiniz. Mesela ES6 ile npm kullaniliyorsaniz, `import ReactDOM from 'react-dom'` yazabilir. ES5 ile npm kullaniliyorsaniz `var ReactDOM = require('react-dom')` yazabilirsiniz.
 
-## Overview {#overview}
+## Genel Taslak {#overview}
 
-The `react-dom` package provides DOM-specific methods that can be used at the top level of your app and as an escape hatch to get outside of the React model if you need to. Most of your components should not need to use this module.
+`react-dom` uygulamanin en ust seviyesinde DOM'a ozel metodlar sunar ve bu da gerektiginde React model'inin disina cikabilmenizi saglar. Bu arada, cogu bilesenlerin bu modulu kullanmasina gerek olmaz
 
 - [`render()`](#render)
 - [`hydrate()`](#hydrate)
@@ -18,17 +18,18 @@ The `react-dom` package provides DOM-specific methods that can be used at the to
 - [`findDOMNode()`](#finddomnode)
 - [`createPortal()`](#createportal)
 
-### Browser Support {#browser-support}
+### Tarayici destegi {#browser-support}
 
-React supports all popular browsers, including Internet Explorer 9 and above, although [some polyfills are required](/docs/javascript-environment-requirements.html) for older browsers such as IE 9 and IE 10.
 
-> Note
+React, Internet Explorer 9 ve uzeri de dahil, tum populer tarayicilari desteklemekte, ama  IE 9 ve IE 10 gibi eski tarayicilarda [bazi eklentiler gerekmektedir](/docs/javascript-environment-requirements.html)  
+
+> Not
 >
-> We don't support older browsers that don't support ES5 methods, but you may find that your apps do work in older browsers if polyfills such as [es5-shim and es5-sham](https://github.com/es-shims/es5-shim) are included in the page. You're on your own if you choose to take this path.
+> ES5 metodlarini desteklemeyen tarayicilari desteklemiyoruz, ama [es5-shim ve es5-sham](https://github.com/es-shims/es5-shim) gibi bazi eklentiler kullanildiginda, uygulamanizin calistigini gorebilirsiniz. Bu yolu kullanmak sizin takdiriniz.
 
 * * *
 
-## Reference {#reference}
+## Referans {#reference}
 
 ### `render()` {#render}
 
@@ -37,6 +38,7 @@ ReactDOM.render(element, container[, callback])
 ```
 
 Render a React element into the DOM in the supplied `container` and return a [reference](/docs/more-about-refs.html) to the component (or returns `null` for [stateless components](/docs/components-and-props.html#functional-and-class-components)).
+
 
 If the React element was previously rendered into `container`, this will perform an update on it and only mutate the DOM as necessary to reflect the latest React element.
 
