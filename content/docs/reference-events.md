@@ -41,7 +41,7 @@ string type
 
 ```javascript
 function onClick(event) {
-  console.log(event); // => nullified object.
+  console.log(event); // => null'lanmış nesne.
   console.log(event.type); // => "click"
   const eventType = event.type; // => "click"
 
@@ -50,10 +50,10 @@ function onClick(event) {
     console.log(eventType); // => "click"
   }, 0);
 
-  // Won't work. this.state.clickEvent will only contain null values.
+  // Çalışmayacaktır. this.state.clickEvent sadece null değerleri içerecektir.
   this.setState({clickEvent: event});
 
-  // You can still export event properties.
+  // Olay özelliklerini yine de dışarı aktarabilirsiniz.
   this.setState({eventType: event.type});
 }
 ```
@@ -69,7 +69,7 @@ React olayları normalleştirir ve olaylar bu şekilde farklı tarayıcılarda t
 Aşağıdaki olay yöneticileri, balonlanma(bubbling) evresinde bir olay tarafından tetiklenir. Yakalama evresine bir olay yöneticisi kaydetmek için, olay ismine `Capture` ilave edin. Örneğin tıklama olayını, yakalama evresinde yönetmek için `onClick` kullanmak yerine `onClickCapture` kullanın.
 
 - [Not Panosu Olayları](#clipboard-events)
-- [Dizim Olayları](#composition-events)
+- [Kompozisyon Olayları](#composition-events)
 - [Klavye Olayları](#keyboard-events)
 - [Odaklanma Olayları](#focus-events)
 - [Form Olayları](#form-events)
@@ -105,7 +105,7 @@ DOMDataTransfer clipboardData
 
 * * *
 
-### Dizim Olayları {#composition-events}
+### Kompozisyon Olayları {#composition-events}
 
 Olay isimleri:
 
@@ -147,7 +147,7 @@ boolean shiftKey
 number which
 ```
 
-`key` özelliği [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#named-key-attribute-values)'de belgelenen tüm değerleri alabilir.
+`key` özelliği [DOM 3. Seviye Olaylar Belirlemeleri](https://www.w3.org/TR/uievents-key/#named-key-attribute-values)'nde belgelenen tüm değerleri alabilir.
 
 * * *
 
@@ -191,7 +191,7 @@ onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
 onMouseMove onMouseOut onMouseOver onMouseUp
 ```
 
-The `onMouseEnter` and `onMouseLeave` events propagate from the element being left to the one being entered instead of ordinary bubbling and do not have a capture phase.
+`onMouseEnter` ve `onMouseLeave` olayları, olağan balonlanma yerine bırakılan elemandan girilen elemana doğru yayılırlar ve yakalama evreleri yoktur.
 
 Özellikler:
 
@@ -223,11 +223,11 @@ onPointerDown onPointerMove onPointerUp onPointerCancel onGotPointerCapture
 onLostPointerCapture onPointerEnter onPointerLeave onPointerOver onPointerOut
 ```
 
-The `onPointerEnter` and `onPointerLeave` events propagate from the element being left to the one being entered instead of ordinary bubbling and do not have a capture phase.
+`onMouseEnter` ve `onMouseLeave` olayları, olağan balonlanma yerine bırakılan elemandan girilen elemana doğru yayılırlar ve yakalama evreleri yoktur.
 
 Özellikler:
 
-[W3 spec](https://www.w3.org/TR/pointerevents/)'te tanımlandığı üzere, işaretçi olayları [Fare Olayları](#mouse-events)'nı aşağıdaki özellikler ile genişletir.
+[W3 belirlemeleri](https://www.w3.org/TR/pointerevents/)'nde tanımlandığı üzere, işaretçi olayları [Fare Olayları](#mouse-events)'nı aşağıdaki özellikler ile genişletir.
 
 ```javascript
 number pointerId
@@ -244,15 +244,13 @@ boolean isPrimary
 
 Çapraz-tarayıcı desteği üzerine bir not:
 
-İşaretçi olayları henüz tüm tarayıcılarda desteklenmemektedir (Bu makalenin yazıldığı tarihte destekleyen tarayıcılar: Chrome, Firefox, Edge ve Internet Explorer). React kasıtlı olarak 
+İşaretçi olayları henüz tüm tarayıcılarda desteklenmemektedir (Bu makalenin yazıldığı tarihte destekleyen tarayıcılar: Chrome, Firefox, Edge ve Internet Explorer). React, `react-dom` paket boyutunun önemli bit ölçüde artmaması için kasıtlı olarak diğer tarayıcılar için polyfill desteği sunmamaktadır. 
 
-Pointer events are not yet supported in every browser (at the time of writing this article, supported browsers include: Chrome, Firefox, Edge, and Internet Explorer). React deliberately does not polyfill support for other browsers because a standard-conform polyfill would significantly increase the bundle size of `react-dom`.
-
-If your application requires pointer events, we recommend adding a third party pointer event polyfill.
+Eğer uygulamanızda işaretçi olaylarına ihtiyaç duyarsanız, üçüncuü parti bir işaretçi olay polyfill'i kullanmanızı öneririz.
 
 * * *
 
-### Selection Events {#selection-events}
+### Seçme Olayları {#selection-events}
 
 Olay isimleri:
 
@@ -262,7 +260,7 @@ onSelect
 
 * * *
 
-### Touch Events {#touch-events}
+### Dokunma Olayları {#touch-events}
 
 Olay isimleri:
 
@@ -285,7 +283,7 @@ DOMTouchList touches
 
 * * *
 
-### UI Events {#ui-events}
+### Kullanıcı Arayüzü Olayları {#ui-events}
 
 Olay isimleri:
 
@@ -302,7 +300,7 @@ DOMAbstractView view
 
 * * *
 
-### Wheel Events {#wheel-events}
+### Tekerler Olayları {#wheel-events}
 
 Olay isimleri:
 
@@ -321,7 +319,7 @@ number deltaZ
 
 * * *
 
-### Media Events {#media-events}
+### Medya Olayları {#media-events}
 
 Olay isimleri:
 
@@ -334,7 +332,7 @@ onTimeUpdate onVolumeChange onWaiting
 
 * * *
 
-### Image Events {#image-events}
+### Resim Olayları {#image-events}
 
 Olay isimleri:
 
@@ -344,7 +342,7 @@ onLoad onError
 
 * * *
 
-### Animation Events {#animation-events}
+### Animasyon Olayları {#animation-events}
 
 Olay isimleri:
 
@@ -362,7 +360,7 @@ float elapsedTime
 
 * * *
 
-### Transition Events {#transition-events}
+### Geçiş Olayları {#transition-events}
 
 Olay isimleri:
 
@@ -380,7 +378,7 @@ float elapsedTime
 
 * * *
 
-### Other Events {#other-events}
+### Diğer Olaylar {#other-events}
 
 Olay isimleri:
 
