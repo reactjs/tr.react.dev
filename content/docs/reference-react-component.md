@@ -274,22 +274,22 @@ React'in mevcut sürümünde, `shouldComponentUpdate()` metodu `false` döndürd
 static getDerivedStateFromProps(props, state)
 ```
 
-`getDerivedStateFromProps` is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing.
+Bileşenin başlangıçta DOM'a eklenmesinde ve devamında süregelen güncellemelerde, render metodundan hemen önce `getDerivedStateFromProps` çalıştırılır. Bu metot, state'in güncellenmesi için bir nesne geri döndürür. `null` döndürdüğünde ise güncelleme **gerçekleştirilmemiş** olur.
 
-This method exists for [rare use cases](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) where the state depends on changes in props over time. For example, it might be handy for implementing a `<Transition>` component that compares its previous and next children to decide which of them to animate in and out.
+Bu metot, state'in props değişikliklerine bağlı olduğu [nadiren kullanılan durumlar](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) için vardır. Örneğin `<Transition>` bileşeninin, önceki ve sonraki alt bileşenlerini karşılaştırması sayesinde animasyona girme/çıkma süreçlerinin yönetimi için kullanışlı olabilir.
 
-Deriving state leads to verbose code and makes your components difficult to think about.  
-[Make sure you're familiar with simpler alternatives:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
+getDerivedStateFromProps metodunun kullanılması, daha fazla kod yazmaya neden olur. Ve bir süre sonra bileşen kodunu takip edemez hale gelirsiniz. 
+[Bununyerine alternatif yollar kullanabilirsiniz:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
 
-* If you need to **perform a side effect** (for example, data fetching or an animation) in response to a change in props, use [`componentDidUpdate`](#componentdidupdate) lifecycle instead.
+* Eğer props'ta oluşan değişikliklere cevap olarak, web isteği veya animasyon işlemi gibi **yan etki** içeren bir işlem gerçekleştirmeniz gerekiyorsa, [`componentDidUpdate`](#componentdidupdate) yaşam döngüsü metodunu kullanınız.
 
-* If you want to **re-compute some data only when a prop changes**, [use a memoization helper instead](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
+* Eğer bir prop değiştiğinde, bazı verileri yeniden işlemeniz gerekiyorsa, bunun için [memoization yöntemini kullanınız](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
 
-* If you want to **"reset" some state when a prop changes**, consider either making a component [fully controlled](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) or [fully uncontrolled with a `key`](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) instead.
+* Eğer bir prop değiştiğinde, bazı state değerlerini sıfırlamanız gerekiyorsa, bunun için [tamamen kontrollü bir bileşen](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) veya [bir `key`'e sahip tamamen kontrolsüz bir bileşen](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) kullanınız.
 
-This method doesn't have access to the component instance. If you'd like, you can reuse some code between `getDerivedStateFromProps()` and the other class methods by extracting pure functions of the component props and state outside the class definition.
+Bu metodun, bileşen nesnesine erişimi yoktur. Eğer dilerseniz sınıf tanımının dışarısında, bileşen prop'larından ve state'inden saf fonksiyonlar çıkararak, `getDerivedStateFromProps()` ve diğer sınıf metotları arasında bazı kod içeriklerini tekrar kullanabilirsiniz.
 
-Note that this method is fired on *every* render, regardless of the cause. This is in contrast to `UNSAFE_componentWillReceiveProps`, which only fires when the parent causes a re-render and not as a result of a local `setState`.
+Unutmayınız ki bu metot, sebebi ne olursa olsun **her render işlemi esnasında** çağrılır. Bu durum, yalnızca üst bileşenin tekrar render işlemine sebebiyet verdiği ve yerel `setState`'in render etmediğinde çalıştırılan `UNSAFE_componentWillReceiveProps`'un tam zıttıdır.
 
 * * *
 
