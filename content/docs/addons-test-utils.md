@@ -13,16 +13,15 @@ import ReactTestUtils from 'react-dom/test-utils'; // ES6
 var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 ```
 
-## Test Araçlarına Genel Bakış {#overview}
+## Genel Bakış {#overview}
 
-`ReactTestUtils`, React bileşenlerini seçtiğiniz test çerçevesinde test etmeyi kolaylaştırır. Facebook, JavaScript testi için Jest‘i kullanmaktadır. [Buradan](http://facebook.github.io/jest/docs/en/tutorial-react.html#content) React ile Jest'e nasıl başlayacağınız hakkında bilgi bulabilirsiniz.
+`ReactTestUtils`, React bileşenlerini seçtiğiniz test çerçevesinde test etmeyi kolaylaştırır. Facebook, JavaScript testi için Jest‘i kullanmaktadır.
 
 > Not:
 >
-> Bileşenlerinizi son kullanıcıymışcasına gibi kullanan testlerinizi etkinleştirmek ve kullanabilmek için tasarlanmış [`react-testing-library`](https://git.io/react-testing-library) kullanmanızı öneririz.
+> Bileşenlerinizi son kullanıcı kullanır gibi kullanan testler yazmanız ve etkinleştirmeniz için tasarlanmış [`react-testing-library`](https://git.io/react-testing-library) kullanmanızı öneririz.
 >
-
-> Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizi test etmenizi, üzerinde gezinmenizi ve değiştirmenizi kolaylaştırmaktadır.
+> Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizin çıktısını test etmenizi, üzerinde gezinmenizi ve değiştirmenizi kolaylaştırmaktadır.
 
  - [`act()`](#act)
  - [`mockComponent()`](#mockcomponent)
@@ -41,7 +40,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
  - [`renderIntoDocument()`](#renderintodocument)
  - [`Simulate`](#simulate)
 
-## Referanslar {#reference}
+## Referans {#reference}
 
 ### `act()` {#act}
 
