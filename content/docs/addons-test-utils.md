@@ -15,12 +15,13 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 
 ## Test Araçlarına Genel Bakış {#overview}
 
-`ReactTestUtils`, React bileşenlerini seçtiğiniz test çerçevesinde test etmeyi kolaylaştırır. Facebook'ta kolay bir şekilde JavaScript testi için [Jest](https://facebook.github.io/jest/)'i kullanmaktayız. [Buradan](http://facebook.github.io/jest/docs/en/tutorial-react.html#content) React ile Jest'e nasıl başlayacağınız hakkında bilgi bulabilirsiniz.
+`ReactTestUtils`, React bileşenlerini seçtiğiniz test çerçevesinde test etmeyi kolaylaştırır. Facebook, JavaScript testi için Jest‘i kullanmaktadır. [Buradan](http://facebook.github.io/jest/docs/en/tutorial-react.html#content) React ile Jest'e nasıl başlayacağınız hakkında bilgi bulabilirsiniz.
 
 > Not:
 >
 > Bileşenlerinizi son kullanıcıymışcasına gibi kullanan testlerinizi etkinleştirmek ve kullanabilmek için tasarlanmış [`react-testing-library`](https://git.io/react-testing-library) kullanmanızı öneririz.
 >
+
 > Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizi test etmenizi, üzerinde gezinmenizi ve değiştirmenizi kolaylaştırmaktadır.
 
  - [`act()`](#act)
