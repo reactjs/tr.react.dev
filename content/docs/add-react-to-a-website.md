@@ -110,11 +110,7 @@ Genellikle, HTML sayfasındaki React bileşenlerini birden fazla yerde görünt�
 
 ### İpucu: Üretim İçin JavaScript'i küçültün {#tip-minify-javascript-for-production}
 
-<<<<<<< HEAD
 Web sitenizi yayına almadan önce, küçültülmemiş JavaScript'in sayfanızı kullanıcılarınız için önemli ölçüde yavaşlatabileceğine dikkat edin.
-=======
-Before deploying your website to production, be mindful that unminified JavaScript can significantly slow down the page for your users.
->>>>>>> b50fe64c1e88489022eddf2cfff0995778827f84
 
 Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getirilen HTML'in de React'ın `production.min.js` içinde biten sürümlerini yüklediğinden emin olursanız **siteniz yayına hazır** olur:
 
