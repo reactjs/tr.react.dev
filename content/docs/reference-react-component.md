@@ -313,19 +313,19 @@ Bir anlık görüntü değeri (snapshot) veya `null` geri döndürülür.
 
 * * *
 
-### Error boundaries {#error-boundaries}
+### Hata sınırları {#error-boundaries}
 
-[Error boundaries](/docs/error-boundaries.html) are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
+[Hata sınırları (error boundaries)](/docs/error-boundaries.html), alt bileşen ağacında gerçekleşen bir JavaScript hatasını yakalayan React bileşenleridir. Yakaladıkları hatayı kaydeder ve bu hatadan dolayı çöken bileşen ağacının gösterilmesi yerine, yedek olarak oluşturulan bir arayüz öğesinin görüntülenmesini sağlarlar. Hata sınırları, kendi alt ağacında gerçekleşen render işlemlerinde, yaşam döngüsü metotlarında ve `constructor`'larda oluşan herhangi bir hatayı yakalarlar.
 
-A class component becomes an error boundary if it defines either (or both) of the lifecycle methods `static getDerivedStateFromError()` or `componentDidCatch()`. Updating state from these lifecycles lets you capture an unhandled JavaScript error in the below tree and display a fallback UI.
+Bir sınıf bileşeni, `static getDerivedStateFromError()` veya `componentDidCatch()` yaşam döngüsü metotlarını içerirse, o bileşen artık bir hata sınırı haline gelir. State'in, bu yaşam döngüsü metotları ile güncellenmesi, alt ağaçta oluşabilecek beklenmedik JavaScript hatalarının yakalanmasını ve bunun için bir arayüz görüntülenmesini sağlar.
 
-Only use error boundaries for recovering from unexpected exceptions; **don't try to use them for control flow.**
+Hata sınırlarını yalnızca beklenmedik exception'ların giderilmesi için kullanınız: **kontrol akışı için kullanmayınız.**
 
-For more details, see [*Error Handling in React 16*](/blog/2017/07/26/error-handling-in-react-16.html).
+Daha fazla bilgi için [*React 16'da hata yönetimini inceleyiniz*](/blog/2017/07/26/error-handling-in-react-16.html).
 
-> Note
+> Not
 > 
-> Error boundaries only catch errors in the components **below** them in the tree. An error boundary can’t catch an error within itself.
+> Hata sınırları sadece **altındaki** ağaçta bulunan bileşenlerde oluşan hataları yakalarlar. Bu nedenle hata sınırları, kendi içerisinde oluşan bir hatayı yakalayamazlar.
 
 ### `static getDerivedStateFromError()` {#static-getderivedstatefromerror}
 ```javascript
