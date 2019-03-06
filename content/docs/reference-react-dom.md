@@ -6,7 +6,7 @@ category: Reference
 permalink: docs/react-dom.html
 ---
 
-React, `<script>` elementiyle yuklenirse, bu ust seviye API'lar `ReactDOM` uzerinden kullanilabilirsiniz. Mesela ES6 ile npm kullaniliyorsaniz, `import ReactDOM from 'react-dom'` yazabilir. ES5 ile npm kullaniliyorsaniz `var ReactDOM = require('react-dom')` yazabilirsiniz.
+React, `<script>` elemaniyla yuklenirse, bu ust seviye API'lar `ReactDOM` uzerinden kullanilabilirsiniz. Mesela ES6 ile npm kullaniliyorsaniz, `import ReactDOM from 'react-dom'` yazabilir. ES5 ile npm kullaniliyorsaniz `var ReactDOM = require('react-dom')` yazabilirsiniz.
 
 ## Genel Taslak {#overview}
 
@@ -37,25 +37,24 @@ React, Internet Explorer 9 ve uzeri de dahil, tum populer tarayicilari desteklem
 ReactDOM.render(element, container[, callback])
 ```
 
-Render a React element into the DOM in the supplied `container` and return a [reference](/docs/more-about-refs.html) to the component (or returns `null` for [stateless components](/docs/components-and-props.html#functional-and-class-components)).
+Girilen `container` ile DOM'a React elemani render ederek; bilesene bir  [referans](/docs/more-about-refs.html) donuyoruz (ya da [state'siz bilesenler](/docs/components-and-props.html#functional-and-class-components) icin `null` donuyoruz).
 
 
-If the React element was previously rendered into `container`, this will perform an update on it and only mutate the DOM as necessary to reflect the latest React element.
+Eger React elemani `container` a daha onceden render edildiyse, bu guncelleme olarak gerceklesir ve en guncel React elemanini yansitmask icin sadece DOM'u degistirir.
 
-If the optional callback is provided, it will be executed after the component is rendered or updated.
+Eger istege bagli callback saglandiysa, bilesen render edildikten ya da guncellendikten sonra cagrilir.
 
-> Note:
+> Not:
 >
-> `ReactDOM.render()` controls the contents of the container node you pass in. Any existing DOM elements inside are replaced when first called. Later calls use React’s DOM diffing algorithm for efficient updates.
+> `ReactDOM.render()` ilettiğiniz konteyner elemaninin içeriğini kontrol eder. İlk cagrildiginda, içindeki butun DOM elemanlari değiştirilir. Daha sonra yapılan çağrılar etkili güncellemeler için React'in DOM farklılaştırma algoritmasını kullanır.
 >
-> `ReactDOM.render()` does not modify the container node (only modifies the children of the container). It may be possible to insert a component to an existing DOM node without overwriting the existing children.
+> `ReactDOM.render()`, konteyner elemanini değiştirmez (yalnızca konteynerin alt elemanlarini değiştirir). Mevcut alt elemanlarin üzerine yazmadan varolan bir DOM elemanina, bileşen eklemek mümkün olabilir
 >
-> `ReactDOM.render()` currently returns a reference to the root `ReactComponent` instance. However, using this return value is legacy
-> and should be avoided because future versions of React may render components asynchronously in some cases. If you need a reference to the root `ReactComponent` instance, the preferred solution is to attach a
-> [callback ref](/docs/more-about-refs.html#the-ref-callback-attribute) to the root element.
+> `ReactDOM.render()` halihazirda `ReactComponent` nesnesinin kokune bir referans donuyor. Ancak, bu dönüş değerini kullanmak eskidi
+> ve bundan kaçınılmalıdır, çünkü React'in gelecekteki sürümleri, bazı durumlarda bileşenleri eşzamansız olarak sağlayabilir. Kök `ReactComponent` nesnesine referans gerekiyorsa, tercih edilen çözüm  
+> kök elemana bir [callback referansi](/docs/more-about-refs.html#the-ref-callback-attribute) olmalidir.
 >
-> Using `ReactDOM.render()` to hydrate a server-rendered container is deprecated and will be removed in React 17. Use [`hydrate()`](#hydrate) instead.
-
+> Sunucu tarafından render edilen  bir konteyneri hidratlamak için `ReactDOM.render()`in kullanılması artik desteklenmiyor ve React 17'de de  kaldirilacaktir. Bunun yerine [`hydrate()`](#hydrate) kullanilmalidir
 * * *
 
 ### `hydrate()` {#hydrate}
