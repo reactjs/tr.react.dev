@@ -299,17 +299,17 @@ Unutmayınız ki bu metot, sebebi ne olursa olsun **her render işlemi esnasınd
 getSnapshotBeforeUpdate(prevProps, prevState)
 ```
 
-`getSnapshotBeforeUpdate()` is invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle will be passed as a parameter to `componentDidUpdate()`.
+Bileşenin render edilmiş çıktısı, DOM'a yerleştirilmeden hemen önce `getSnapshotBeforeUpdate()` çağrılır. Bu sayede DOM değişmeden önce, kaydırma çubuğu (scrollbar) pozisyonu gibi bazı bilgilerin DOM'dan alınması sağlanır. Bu yaşam döngüsü metodundan döndürülen her değer, `componentDidUpdate()`'e parametre olarak geçilir.
 
-This use case is not common, but it may occur in UIs like a chat thread that need to handle scroll position in a special way.
+`getSnapshotBeforeUpdate()`'in kullanımı yaygın değildir. Fakat bir sohbet uygulamasında yeni mesaj geldiğinde, kaydırma çubuğunun aşağı kaydırılması gibi özel işlemlerde gerekli olabilir. 
 
-A snapshot value (or `null`) should be returned.
+Bir anlık görüntü değeri (snapshot) veya `null` geri döndürülür. 
 
-For example:
+Örneğin:
 
 `embed:react-component-reference/get-snapshot-before-update.js`
 
-In the above examples, it is important to read the `scrollHeight` property in `getSnapshotBeforeUpdate` because there may be delays between "render" phase lifecycles (like `render`) and "commit" phase lifecycles (like `getSnapshotBeforeUpdate` and `componentDidUpdate`).
+Üstteki örnekte, `scrollHeight` özelliğinin `getSnapshotBeforeUpdate`'ten okunması çok önemlidir. Çünkü "render" adımındaki yaşam döngüsü (`render()`)  ile "commit" adımındaki yaşam döngüleri (`getSnapshotBeforeUpdate` ve `componentDidUpdate`) arasında gecikmeler yaşanabilir.
 
 * * *
 
