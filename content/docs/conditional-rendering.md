@@ -26,7 +26,7 @@ function GuestGreeting(props) {
 
 ```javascript{3-7,11,12}
 function Greeting(props) {
-  const isLoggedIn  = props.isLoggedIn ;
+  const isLoggedIn = props.isLoggedIn;
   if (isLoggedIn) {
     return <UserGreeting />;
   }
