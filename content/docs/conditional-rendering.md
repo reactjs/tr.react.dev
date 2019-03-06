@@ -69,7 +69,7 @@ function LogoutButton(props) {
 ```
 Bu örnek bloğunda, `LoginControl`ü  [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
 
-`LoginControl`, `<LoginButton />` ya da `<LogoutButton />` bileşenlerini kendi state'tine göre render edecek. Ayrıca önceki örnekteki `<Greeting />` componentini de render edecek.
+`LoginControl`, `<LoginButton />` ya da `<LogoutButton />` bileşenlerini kendi state'tine göre render edecek. Ayrıca önceki örnekteki `<Greeting />` bileşenini de render edecek.
 
 ```javascript{20-25,29,30}
 class LoginControl extends React.Component {
@@ -186,11 +186,11 @@ render() {
 
 Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve sizin takımınıza kalmıştır. Bu arada, ne zaman koşullandırma çok karmaşık bir hal almaya başlarsa [extract a component](/docs/components-and-props.html#extracting-components) yapmanın zamanı gelmiştir.
 
-### Component'in Renderlanmasını Engellemek {#preventing-component-from-rendering}
+### Bileşenin Renderlanmasını Engellemek {#preventing-component-from-rendering}
 
 Nadir durumlarda, renderlanmış bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
 
-Bu örnekle, `UyariMesaji` componenti kendisinin `uyariGoster` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, component render edilmeyecek.
+Bu örnekle, `UyariMesaji` bileşeni kendisinin `uyariGoster` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecek.
 
 ```javascript{2-4,29}
 function WarningBanner(props) {
@@ -238,4 +238,4 @@ ReactDOM.render(
 
 [**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
-Bir componentin `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
+Bir bileşenin `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
