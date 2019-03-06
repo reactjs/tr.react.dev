@@ -7,51 +7,51 @@ next: lists-and-keys.html
 redirect_from:
   - "tips/false-in-jsx.html"
 ---
-React'te ihtiyacınız olan duruma göre farklı componentler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, yalnızca componentlerinizin bazılarını renderlayabilirsiniz.
+React'te ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, yalnızca bileşenlerinizin bazılarını renderlayabilirsiniz.
 
-React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre component renderlama imkanı sunar. Ve React, arayüzde uygun componenti render eder.
+React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen  renderlama imkanı sunar. Ve React, arayüzde uygun bileşeni render eder.
 
 Bu iki componenti dikkate alalım:
 
 ```js
-function SadeceKullanicilarIcin(props) {
+function UserGreeting(props) {
   return <h1>Hoş geldiniz!</h1>;
 }
 
-function SadeceMisafirlerIcin(props) {
+function GuestGreeting(props) {
   return <h1>Önce bir giriş yapın...</h1>;
 }
 ```
-`Karsilama` adında bir component daha oluşturuyoruz, bu component kullanıcının giriş yapma durumuna göre yukarıda yazdığımız componentleri render edecektir. 
+`Greeting` adında bir bileşen daha oluşturuyoruz, bu bileşen kullanıcının giriş yapma durumuna göre yukarıda yazdığımız bileşenleri render edecektir. 
 
 ```javascript{3-7,11,12}
-function Karsilama(props) {
-  const kullaniciGirisYapmis = props.kullaniciGirisYapmis;
-  if (kullaniciGirisYapmis) {
-    return <SadeceKullanicilarIcin />;
+function Greeting(props) {
+  const isLoggedIn  = props.isLoggedIn ;
+  if (isLoggedIn) {
+    return <UserGreeting />;
   }
-  return <SadeceMisafirlerIcin />;
+  return <GuestGreeting />;
 }
 
 ReactDOM.render(
-  // Kodu değiştirerek deneyin: kullaniciGirisYapmis={true}:
-  <Karsilama kullaniciGirisYapmis={false} />,
+  // Kodu değiştirerek deneyin: isLoggedIn={true}:
+  <Greeting isLoggedIn={false} />,
   document.getElementById('root')
 );
 ```
 
 [**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
 
-Bu örnek uygulama, `kullaniciGirisYapmis` değerine göre farklı bir karşılama yapacak.
+Bu örnek uygulama, `isLoggedIn` değerine göre farklı bir karşılama yapacak.
 
 ### Element Değişkenleri {#element-variables}
 
-HTML elementlerini saklamak için değişkenleri kullanabilirsiniz. Bu size component yaratırken, componentin bir bölümünü koşullu hale getimenize yardım eder. 
+HTML elementlerini saklamak için değişkenleri kullanabilirsiniz. Bu size bileşen yaratırken, bileşenin bir bölümünü koşullu hale getimenize yardım eder. 
 
-İçerisinde `GirisYap` ve `CikisYap` componentlerinin olduğu iki yeni componentimizin olduğunu varsayalım:
+İçerisinde `LoginButton` ve `LogoutButton` bileşenlerinin olduğu iki yeni bir bileşen olduğunu varsayalım:
 
 ```js
-function GirisYap(props) {
+function LoginButton(props) {
   return (
     <button onClick={props.onClick}>
       Giriş Yap
@@ -59,7 +59,7 @@ function GirisYap(props) {
   );
 }
 
-function CikisYap(props) {
+function LogoutButton(props) {
   return (
     <button onClick={props.onClick}>
       Çıkış Yap
@@ -67,40 +67,40 @@ function CikisYap(props) {
   );
 }
 ```
-Bu örnek bloğunda, `GirisKontrol`ü  [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
+Bu örnek bloğunda, `LoginControl`ü  [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
 
-`GirisKontrol`, `<GirisYap />` ya da `<CikisYap />` componentlerini kendi state'tine göre render edecek. Ayrıca önceki örnekteki `<Karsilama />` componentini de render edecek.
+`LoginControl`, `<LoginButton />` ya da `<LogoutButton />` bileşenlerini kendi state'tine göre render edecek. Ayrıca önceki örnekteki `<Greeting />` componentini de render edecek.
 
 ```javascript{20-25,29,30}
-class GirisKontrol extends React.Component {
+class LoginControl extends React.Component {
   constructor(props) {
     super(props);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = {kullaniciGirisYapmis: false};
+    this.state = {isLoggedIn: false};
   }
 
   handleLoginClick() {
-    this.setState({kullaniciGirisYapmis: true});
+    this.setState({isLoggedIn: true});
   }
 
   handleLogoutClick() {
-    this.setState({kullaniciGirisYapmis: false});
+    this.setState({isLoggedIn: false});
   }
 
   render() {
-    const kullaniciGirisYapmis = this.state.kullaniciGirisYapmis;
+    const isLoggedIn = this.state.isLoggedIn;
     let button;
 
-    if (kullaniciGirisYapmis) {
-      button = <CikisYap onClick={this.handleLogoutClick} />;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
     } else {
-      button = <GirisYap onClick={this.handleLoginClick} />;
+      button = <LoginButton onClick={this.handleLoginClick} />;
     }
 
     return (
       <div>
-        <Karsilama kullaniciGirisYapmis={kullaniciGirisYapmis} />
+        <Greeting isLoggedIn={isLoggedIn} />
         {button}
       </div>
     );
@@ -108,7 +108,7 @@ class GirisKontrol extends React.Component {
 }
 
 ReactDOM.render(
-  <GirisKontrol />,
+  <LoginControl />,
   document.getElementById('root')
 );
 ```
@@ -116,30 +116,30 @@ ReactDOM.render(
 [**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
 
 
-Bir değişken tanımlamak ve `ìf` koşulunu kullanarak bir componenti koşullu renderlamak için iyi bir yöntemdir. Bazen zamanlarda daha kısa bir syntax kullanmak isteyebilirsiniz. Aşağıdaki örnekte olduğu gibi JSX'te tek satırda koşullamanın birkaç yolu vardır.
+Bir değişken tanımlamak ve `ìf` koşulunu kullanarak bir bileşeni koşullu renderlamak için iyi bir yöntemdir. Bazen zamanlarda daha kısa bir syntax kullanmak isteyebilirsiniz. Aşağıdaki örnekte olduğu gibi JSX'te tek satırda koşullamanın birkaç yolu vardır.
 
 ### Mantıksal && Operatörü ile Tek Satırda if {#inline-if-with-logical--operator}
 
-Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz.](/docs/introducing-jsx.html#embedding-expressions-in-jsx) Buna Javascript'teki mantıksal `&&` operatörü de dahildir. Bu componentin içinde koşul vermek için kullanışlı olabilir:
+Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz.](/docs/introducing-jsx.html#embedding-expressions-in-jsx) Buna Javascript'teki mantıksal `&&` operatörü de dahildir. Bu bileşenin içinde koşul vermek için kullanışlı olabilir:
 
 ```js{6-10}
 function Mailbox(props) {
-  const okunmamisMesajlar = props.okunmamisMesajlar;
+  const unreadMessages = props.unreadMessages;
   return (
     <div>
       <h1>Merhaba!</h1>
-      {okunmamisMesajlar.length > 0 &&
+      {unreadMessages.length > 0 &&
         <h2>
-          {okunmamisMesajlar.length} adet okunmamış mesajınız var.
+          {unreadMessages.length} adet okunmamış mesajınız var.
         </h2>
       }
     </div>
   );
 }
 
-const mesajlar = ['React', 'Re: React', 'Re:Re: React'];
+const messages = ['React', 'Re: React', 'Re:Re: React'];
 ReactDOM.render(
-  <Mailbox okunmamisMesajlar={mesajlar} />,
+  <Mailbox unreadMessages={messages} />,
   document.getElementById('root')
 );
 ```
@@ -158,10 +158,10 @@ Bu örnekte, yazının yalnızca bir kısmını koşullayacağız
 
 ```javascript{5}
 render() {
-  const kullaniciGirisYapmis = this.state.kullaniciGirisYapmis;
+  const isLoggedIn = this.state.isLoggedIn;
   return (
     <div>
-      Bu kullanıcı şuan <b>{kullaniciGirisYapmis ? 'çevrimiçi' : 'çevrimdışı'}</b>.
+      Bu kullanıcı şuan <b>{isLoggedIn ? 'çevrimiçi' : 'çevrimdışı'}</b>.
     </div>
   );
 }
@@ -171,13 +171,13 @@ Neler olduğu daha az belirgin olsa da, daha büyük ifadeler için de kullanıl
 
 ```js{5,7,9}
 render() {
-  const kullaniciGirisYapmis = this.state.kullaniciGirisYapmis;
+  const isLoggedIn = this.state.isLoggedIn;
   return (
     <div>
-      {kullaniciGirisYapmis ? (
-        <CikisYap onClick={this.handleLogoutClick} />
+      {isLoggedIn ? (
+        <LogoutButton onClick={this.handleLogoutClick} />
       ) : (
-        <GirisYap onClick={this.handleLoginClick} />
+        <LoginButton onClick={this.handleLoginClick} />
       )}
     </div>
   );
@@ -188,13 +188,13 @@ Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve 
 
 ### Component'in Renderlanmasını Engellemek {#preventing-component-from-rendering}
 
-Nadir durumlarda, renderlanmış bir componentin kendini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
+Nadir durumlarda, renderlanmış bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
 
 Bu örnekle, `UyariMesaji` componenti kendisinin `uyariGoster` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, component render edilmeyecek.
 
 ```javascript{2-4,29}
-function UyariMesaji(props) {
-  if (!props.uyariGoster) {
+function WarningBanner(props) {
+  if (!props.warn) {
     return null;
   }
 
@@ -208,22 +208,22 @@ function UyariMesaji(props) {
 class Page extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {uyariyiGoster: true};
+    this.state = {showWarning: true};
     this.handleToggleClick = this.handleToggleClick.bind(this);
   }
 
   handleToggleClick() {
     this.setState(state => ({
-      uyariyiGoster: !state.uyariyiGoster
+      showWarning: !state.showWarning
     }));
   }
 
   render() {
     return (
       <div>
-        <UyariMesaji uyariGoster={this.state.uyariyiGoster} />
+        <WarningBanner warn={this.state.showWarning} />
         <button onClick={this.handleToggleClick}>
-          {this.state.uyariyiGoster ? 'Gizle' : 'Göster'}
+          {this.state.showWarning ? 'Gizle' : 'Göster'}
         </button>
       </div>
     );
