@@ -11,7 +11,7 @@ React'te ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz
 
 React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen  renderlama imkanı sunar. Ve React, arayüzde uygun bileşeni render eder.
 
-Bu iki componenti dikkate alalım:
+Bu iki bileşeni dikkate alalım:
 
 ```js
 function UserGreeting(props) {
@@ -238,4 +238,4 @@ ReactDOM.render(
 
 [**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
-Bir componentin `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek. 
+Bir componentin `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
