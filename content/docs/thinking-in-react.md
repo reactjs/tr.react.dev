@@ -12,9 +12,7 @@ React, bize göre, JavaScript ile büyük ve hızlı Web uygulamaları oluşturm
 
 React’in en harika yanlarından biri de, uygulamaları oluştururken size kazandırdığı bakış açısıdır. Bu dökümanda, React'i kullanarak aranabilir bir ürün tablosu oluşturmanın düşünce sürecinde size yol göstereceğiz.
 
-## Bir Tasklakla Başlayın {#start-with-a-mock}
-
-Imagine that we already have a JSON API and a mock from our designer. The mock looks like this:
+## Bir Taslakla Başlayın {#start-with-a-mock}
 
 Zaten bir JSON API'ımızın ve tasarımcımızdan gelen bir taslağımızın olduğunu hayal edin. Taslak bunun gibi gözüküyor:
 
@@ -33,27 +31,29 @@ JSON API'ımız şuna benzeyen bir veri dönüyor:
 ];
 ```
 
-## Adım 1: Kullanıcı Arabirimini Bileşen Hiyerarşisine Bölün{#step-1-break-the-ui-into-a-component-hierarchy}
+## Adım 1: Kullanıcı Arabirimini Bileşen Hiyerarşisine Bölün {#step-1-break-the-ui-into-a-component-hierarchy}
 
-The first thing you'll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you're working with a designer, they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!
+Yapmak isteyeceğiniz ilk şey, taslaktaki her bileşenin (ve alt bileşenlerin) etrafina kutular çizip, her birisine isimler vermektir.
+Eğer bir tasarımcıyla çalışıyorsanız, bunu zaten yapmış olabilirler; o zaman gidip onlarla konuşun! Photoshop'taki katman isimleri React bileşenlerinin isimleri olabilir!
 
-But how do you know what should be its own component? Just use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
 
-Since you're often displaying a JSON data model to a user, you'll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely. That's because UI and data models tend to adhere to the same *information architecture*, which means the work of separating your UI into components is often trivial. Just break it up into components that represent exactly one piece of your data model.
+Ama nelerin kendi başına birer bileşen olacağına nasıl karar vereceksiniz? Yeni bir nesne ya da fonksiyon oluşturup oluşturmayacağınıza karar vermek için yine aynı teknikleri kullanın. Bu tekniklerden biri, [tek sorumluluk ilkesidir](https://eksisozluk.com/tek-sorumluluk-prensibi--1667342); yani bir bileşen ideal olarak sadece tek bir şey yapmalıdır. Bileşen büyüdüğü taktirde, daha küçük alt bileşenlere ayrılmalıdır.
 
-![Component diagram](../images/blog/thinking-in-react-components.png)
+Çoğu zaman kullanıcıya bir JSON veri modeli göstereceğiniz için, modeliniz doğru inşa edildiyse, kullanıcı arayüzünüzün (ve dolayısıyla bileşen yapınızın) güzel bir şekilde eşleşeceğini göreceksiniz. Bunun nedeni, kullanıcı arabirimi ve veri modellerinin aynı *bilgi mimarisine* bağlı kalma eğiliminde olmasıdır. Bu yüzden kullanıcı arayüzünüzü bileşenlere ayırma işi genellikle önemsizdir. Arayüzünüzü sadece, her birisi veri modelinizin bir parçasını temsil edecek şekilde, bileşenlere bölün.
 
-You'll see here that we have five components in our simple app. We've italicized the data each component represents.
+![Bileşen Şeması](../images/blog/thinking-in-react-components.png)
 
-  1. **`FilterableProductTable` (orange):** contains the entirety of the example
-  2. **`SearchBar` (blue):** receives all *user input*
-  3. **`ProductTable` (green):** displays and filters the *data collection* based on *user input*
-  4. **`ProductCategoryRow` (turquoise):** displays a heading for each *category*
-  5. **`ProductRow` (red):** displays a row for each *product*
+Burada küçük uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
 
-If you look at `ProductTable`, you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference, and there's an argument to be made either way. For this example, we left it as part of `ProductTable` because it is part of rendering the *data collection* which is `ProductTable`'s responsibility. However, if this header grows to be complex (i.e. if we were to add affordances for sorting), it would certainly make sense to make this its own `ProductTableHeader` component.
+  1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamnı içerir.
+  2. **`SearchBar` (mavi):** bütün *kullanıcı girdilerini* alır.
+  3. **`ProductTable` (yeşil):** *kullanıcı girdisine* bağlı olarak *veri koleksiyonunu* görüntüler ve filtreler.
+  4. **`ProductCategoryRow` (turkuaz):** her bir *kategori* için bir başlık gösterir.
+  5. **`ProductRow` (kırmızı):** her bir *ürün* için bir satır gösterir.
 
-Now that we've identified the components in our mock, let's arrange them into a hierarchy. This is easy. Components that appear within another component in the mock should appear as a child in the hierarchy:
+`ProductTable`'a bakarsanız, tablo başlığının ("Name" ve "Price" etiketlerini içeren kısım) kendi bileşeni olmadığını göreceksiniz. Bu bir tercih meselesi ve her iki şekilde de yapılmasını belirten bir argüman var. Bu örnekte, tablo başlığını `ProductTable`’ın bir parçası olarak bıraktık. Çünkü tablo başlığı, ProductTable’ın sorumluluğunda olan *veri koleksiyonunu* render etme işleminin bir parçasıdır. Yine de, eğer bu başlık giderek karmaşık bir hale gelirse (Mesela sıralama özelliği ekleseydik), kendi ayrı `ProductTableHeader` bileşenini yapmak kesinlikle daha mantıklı olurdu.
+
+Şimdi, taslağımızdaki bileşenleri belirlediğimize göre, onları bir hiyerarşiye göre düzenleyelim. Bu kolay. Taslakta başka bir bileşen içinde görünen bileşenler, hiyerarşideki bir alt eleman olarak görünmelidir:
 
   * `FilterableProductTable`
     * `SearchBar`
