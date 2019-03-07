@@ -431,15 +431,15 @@ Aşağıdaki yaşam döngüsü metotları **eski (legacy)** olarak işaretlenmi�
 UNSAFE_componentWillMount()
 ```
 
-> Note
+> Not
 >
-> This lifecycle was previously named `componentWillMount`. That name will continue to work until version 17. Use the [`rename-unsafe-lifecycles` codemod](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) to automatically update your components.
+> Bu yaşam döngüsü metodunun adı önceden `componentWillMount` şeklindeydi. Bu isim, React'in 17 sürümüne kadar çalışmaya devam edecektir. Bileşenlerinizi otomatik olarak güncellemek için, [`rename-unsafe-lifecycles` ](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) komutunu kullanabilirsiniz.
 
-`UNSAFE_componentWillMount()` is invoked just before mounting occurs. It is called before `render()`, therefore calling `setState()` synchronously in this method will not trigger an extra rendering. Generally, we recommend using the `constructor()` instead for initializing state.
+`UNSAFE_componentWillMount()` metodu, bileşenin DOM'a eklenmesinden önce çağrılır. `render()` metodundan önce çalıştırıldığından dolayı, bu metot içerisinde `setState()` metodunun senkron olarak çağrılması ekstra bir render işlemini tetiklememektedir. Bunun yerine, state'in başlatılması için `constructor()` metodunu kullanmanızı tavsiye ederiz. 
 
-Avoid introducing any side-effects or subscriptions in this method. For those use cases, use `componentDidMount()` instead.
+Bu metot içerisinde herhangi bir yan etki içeren işlem veya abonelik işlemleri yapmaktan kaçınınız. Bu tür yaklaşımlar için `componentDidMount()` metodunu kullanınız.
 
-This is the only lifecycle method called on server rendering.
+Sunucu taraflı render etme işleminde yalnızca bu yaşam döngüsü metodu çağrılır. 
 
 * * *
 
