@@ -371,15 +371,16 @@ Bu tür kullanımlar için, `componentDidCatch()`'i kullanınız.
 componentDidCatch(error, info)
 ```
 
-This lifecycle is invoked after an error has been thrown by a descendant component.
-It receives two parameters:
 
-1. `error` - The error that was thrown.
-2. `info` - An object with a `componentStack` key containing [information about which component threw the error](/docs/error-boundaries.html#component-stack-traces).
+`componentDidCatch(error, info)` metodu, bir alt bileşende hata oluştuktan sonra hemen çalıştırılır. 
+İki parametre alır:
+
+1. `error` - Oluşan hata nesnesi.
+2. `info` - Hatayı [hangi bileşenin verdiği ile ilgili bilgileri](/docs/error-boundaries.html#component-stack-traces) tutan `componentStack`'i içeren hata bilgisi nesnesidir. 
 
 
-`componentDidCatch()` is called during the "commit" phase, so side-effects are permitted.
-It should be used for things like logging errors:
+`componentDidCatch()` metodu, güncellemenin "commit" adımında çalıştırılır. Bu nedenle yan etkiye izin verir. 
+Hataların log'lanması tarzındaki işler için kullanılmalıdır: 
 
 ```js{12-19}
 class ErrorBoundary extends React.Component {
@@ -389,12 +390,12 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
+    // Sonraki render aşamasında hata mesajının görüntülenmesi için state güncelleniyor.
     return { hasError: true };
   }
 
   componentDidCatch(error, info) {
-    // Example "componentStack":
+    // Örnek bir `componentStack` metninin içeriği aşağıdaki gibidir:
     //   in ComponentThatThrows (created by App)
     //   in ErrorBoundary (created by App)
     //   in div (created by App)
@@ -404,7 +405,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
+      // Herhangi bir hata bileşeni görüntüleyebilirsiniz.
       return <h1>Something went wrong.</h1>;
     }
 
@@ -413,10 +414,10 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-> Note
+> Not
 > 
-> In the event of an error, you can render a fallback UI with `componentDidCatch()` by calling `setState`, but this will be deprecated in a future release.
-> Use `static getDerivedStateFromError()` to handle fallback rendering instead.
+> Bir hata durumunda, `setState`'i çağırarak `componentDidCatch()` ile bir hata arayüzü görüntüleyebilirsiniz. Fakat bu yaklaşım, gelecekteki React sürümlerinde kullanımdan kaldırılacaktır.
+> Bunun yerine hata arayüzünün render edilmesi için `static getDerivedStateFromError()` metodunu kullanınız.
 
 * * *
 
