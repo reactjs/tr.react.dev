@@ -63,15 +63,15 @@ Eger istege bagli callback saglandiysa, bilesen render edildikten ya da guncelle
 ReactDOM.hydrate(element, container[, callback])
 ```
 
-Same as [`render()`](#render), but is used to hydrate a container whose HTML contents were rendered by [`ReactDOMServer`](/docs/react-dom-server.html). React will attempt to attach event listeners to the existing markup.
+[`render()`](#render)ile aynıdır, ancak HTML içeriği [`ReactDOMServer`](/docs/react-dom-server.html) tarafından render edilen bir konteyniri hidratlamak için kullanılır. React, olaylarini mevcuda eklemeye çalışacaktır.
 
-React expects that the rendered content is identical between the server and the client. It can patch up differences in text content, but you should treat mismatches as bugs and fix them. In development mode, React warns about mismatches during hydration. There are no guarantees that attribute differences will be patched up in case of mismatches. This is important for performance reasons because in most apps, mismatches are rare, and so validating all markup would be prohibitively expensive.
+React, oluşturulan içeriğin sunucu ve istemci taraflarinda aynı olmasini bekler. Metin içeriğindeki farklılıkları duzeltebilir, ancak uyumsuzlukları hata olarak görmeli ve düzeltmelisiniz. Geliştirme modunda, React, hidrasyon sırasında uyumsuzluklar icin uyarır. Uyuşmazlık durumunda, öznitelik farklılıklarının düzeltileceğinin garantisi yoktur. Bu, performans nedenlerinden ötürü önemlidir, çünkü çoğu uygulamada uyumsuzluklar nadirdir ve bu nedenle tüm biçimlendirmeyi doğrulamak çok pahalı olacaktır.
 
-If a single element's attribute or text content is unavoidably different between the server and the client (for example, a timestamp), you may silence the warning by adding `suppressHydrationWarning={true}` to the element. It only works one level deep, and is intended to be an escape hatch. Don't overuse it. Unless it's text content, React still won't attempt to patch it up, so it may remain inconsistent until future updates.
+Tek bir elemanin ozniteligi veya metin içeriği, sunucu ile istemci arasında kaçınılmaz şekilde farklıysa (örneğin, bir zaman damgası), elemana `suppressHydrationWarning = {true}` ekleyerek uyarıyı susturabilirsiniz. Sadece bir seviye derinlikte çalışır ve bir kaçınma secenegi olarak amaçlanmıştır. Fazla kullanilmamalidir. Metin içeriği olmadığı sürece React düzeltmeye çalışmaz, bu nedenle gelecekteki güncellemelere kadar tutarsız kalabilir.
 
-If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. Components that render something different on the client can read a state variable like `this.state.isClient`, which you can set to `true` in `componentDidMount()`. This way the initial render pass will render the same content as the server, avoiding mismatches, but an additional pass will happen synchronously right after hydration. Note that this approach will make your components slower because they have to render twice, so use it with caution.
+Kasıtlı olarak sunucuda ve istemcide farklı bir şey render etmeniz gerekirse, iki geçişli bir render yapabilirsiniz. İstemcide farklı bir şey render eden bileşenler, `this.state.isClient` gibi bir değişkeni okuyabilir; bu değeri `componentDidMount()`da `true` olarak ayarlayabilirsiniz. Bu şekilde, ilk render, yanlış eşleşmeleri önleyerek sunucu ile aynı içeriği oluşturur, ancak hidrasyondan hemen sonra eş zamanlı olarak ek bir geçiş gerçekleşir. Bu yaklaşımın, bileşenlerinizi yavaşlatacağını unutmayın, çünkü iki kez render olmalari gerekir, bu nedenle dikkatli kullanmalisiniz.
 
-Remember to be mindful of user experience on slow connections. The JavaScript code may load significantly later than the initial HTML render, so if you render something different in the client-only pass, the transition can be jarring. However, if executed well, it may be beneficial to render a "shell" of the application on the server, and only show some of the extra widgets on the client. To learn how to do this without getting the markup mismatch issues, refer to the explanation in the previous paragraph.
+Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayıniz. JavaScript kodu, ilk HTML renderindan önemli ölçüde sonra yüklenebilir; bu nedenle, yalnızca istemci geçişinde farklı bir şey render ederseniz, geçiş yavas olabilir. Ancak, doğru şekilde calistirilirsa, sunucuda uygulamanın bir "kabuğunu" render etmek ve yalnızca istemcideki ekstra gorsel parcaciklari göstermek yararlı olabilir. Biçimlendirme uyumsuzluğu sorunları olmadan bunu nasıl yapacağınızı öğrenmek için önceki paragraftaki açıklamaya bakabilirsiniz.
 
 * * *
 
@@ -81,28 +81,29 @@ Remember to be mindful of user experience on slow connections. The JavaScript co
 ReactDOM.unmountComponentAtNode(container)
 ```
 
-Remove a mounted React component from the DOM and clean up its event handlers and state. If no component was mounted in the container, calling this function does nothing. Returns `true` if a component was unmounted and `false` if there was no component to unmount.
-
+DOM'den yuklenmis bir React bileşenini kaldırıp,  olaylarini ve state'lerini temizleyiniz. Konteynere hiçbir bileşen yuklenmemisse, bu fonksiyonu çağırmak hiçbir şey yapmaz. Bir bileşenin bağlantısı kaldırıldıysa `true` , kaldırılacak bir bileşen yoksa `false` döndürür.
 * * *
 
 ### `findDOMNode()` {#finddomnode}
 
-> Note:
+> Not:
 >
-> `findDOMNode` is an escape hatch used to access the underlying DOM node. In most cases, use of this escape hatch is discouraged because it pierces the component abstraction. [It has been deprecated in `StrictMode`.](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
+> `findDOMNode`, temeldeki DOM elemanina erişmek için kullanılan bir cikis kapisidir. Çoğu durumda, bu cikis kapisinin kullanımı, bileşen soyutlamasını deldiginden tavsiye edilmez. [`StrictMode` da desteklenmemektedir.](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
 
 ```javascript
 ReactDOM.findDOMNode(component)
 ```
-If this component has been mounted into the DOM, this returns the corresponding native browser DOM element. This method is useful for reading values out of the DOM, such as form field values and performing DOM measurements. **In most cases, you can attach a ref to the DOM node and avoid using `findDOMNode` at all.**
+Bu bileşen DOM'a yuklemisse, ilgili yerel tarayıcına, DOM elemanini doner. Bu yöntem, form alanı değerleri gibi DOM dışındaki değerleri okumak ve DOM ölçümleri yapmak için kullanışlıdır. **Çoğu durumda, DOM elemanina bir referans ekleyebilir ve `findDOMNode` komutunu kullanmaktan kaçınabilirsiniz.**
 
 When a component renders to `null` or `false`, `findDOMNode` returns `null`. When a component renders to a string, `findDOMNode` returns a text DOM node containing that value. As of React 16, a component may return a fragment with multiple children, in which case `findDOMNode` will return the DOM node corresponding to the first non-empty child.
 
-> Note:
+Bir bileşen `null` veya `false` olarak render edildiginde, `findDOMNode`, `null` döndürür. Bir bileşen string render ettiginde, `findDOMNode`, bu değeri içeren bir metin DOM elemani döndürür. React 16'dan itibaren, bir bileşen birden fazla alt elemana sahip bir fragment döndürebilir, bu durumda `findDOMNode`, boş olmayan ilk alt elemana karşılık gelen DOM elemani döndürür.
+
+> Not:
 >
-> `findDOMNode` only works on mounted components (that is, components that have been placed in the DOM). If you try to call this on a component that has not been mounted yet (like calling `findDOMNode()` in `render()` on a component that has yet to be created) an exception will be thrown.
+> `findDOMNode` yalnızca yuklenmis bileşenlerde çalışır (yani, DOM'a yerleştirilmiş bileşenler). Henüz yuklenmemis bir bileşende bunu cagirmaya çalışırsanız (henüz olusturulmamis bir bileşende `findDOMNode()`da  `render()`ı çağırmak gibi) bir istisna atılır.
 >
-> `findDOMNode` cannot be used on function components.
+> `findDOMNode` fonksiyon bileşenlerinde kullanılamaz.
 
 * * *
 
@@ -112,4 +113,4 @@ When a component renders to `null` or `false`, `findDOMNode` returns `null`. Whe
 ReactDOM.createPortal(child, container)
 ```
 
-Creates a portal. Portals provide a way to [render children into a DOM node that exists outside the hierarchy of the DOM component](/docs/portals.html).
+Bir portal oluşturur. Portallar [alt elamanlari DOM bileşeninin hiyerarşisi dışında bulunan bir DOM elemanini render için](/docs/portals.html) bir yol sağlar. 
