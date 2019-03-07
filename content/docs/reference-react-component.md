@@ -332,8 +332,8 @@ Daha fazla bilgi için [*React 16'da hata yönetimini inceleyiniz*](/blog/2017/0
 static getDerivedStateFromError(error)
 ```
 
-This lifecycle is invoked after an error has been thrown by a descendant component.
-It receives the error that was thrown as a parameter and should return a value to update state.
+`getDerivedStateFromError(error)` metodu, bir alt bileşende hata oluştuktan sonra hemen çalıştırılır. 
+Oluşan hata nesnesini parametre olarak alır ve state'in güncellenmesi için geriye bir değer döndürür: 
 
 ```js{7-10,13-16}
 class ErrorBoundary extends React.Component {
@@ -343,13 +343,13 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
+    // state'in güncellenmesi ile sonraki aşamada hata mesajının render edilmesi sağlanacaktır 
     return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
+      // Hatanın görüntülenmesi için herhangi bir içerik sunabilirsiniz
       return <h1>Something went wrong.</h1>;
     }
 
@@ -358,10 +358,10 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-> Note
+> Not
 >
-> `getDerivedStateFromError()` is called during the "render" phase, so side-effects are not permitted.
-For those use cases, use `componentDidCatch()` instead.
+> `getDerivedStateFromError()` metodu, "render" aşamasında çağrılır. Bu nedenle herhangi bir yan etkiye izin verilmez. 
+Bu tür kullanımlar için, `componentDidCatch()`'i kullanınız.
 
 * * *
 
