@@ -493,11 +493,11 @@ Genellikle bu metot, `componentDidUpdate()` metodu ile değiştirilebilir. Eğer
 
 * * *
 
-## Other APIs {#other-apis-1}
+## Diğer API'ler {#other-apis-1}
 
-Unlike the lifecycle methods above (which React calls for you), the methods below are the methods *you* can call from your components.
+React'in sizin için otomatik olarak çağırdığı yukarıdaki yaşam döngüsü metotlarının aksine, aşağıda yer alan metotları sadece **siz** çağırabilirsiniz. 
 
-There are just two of them: `setState()` and `forceUpdate()`.
+Yalnızca iki adet metot vardır. Bunlar `setState()` ve `forceUpdate()` metotlarıdır.
 
 ### `setState()` {#setstate}
 
