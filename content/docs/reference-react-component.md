@@ -477,19 +477,19 @@ React, bileşenin DOM'a [eklenmesi](#mounting) sırasında, başlangıç prop de
 UNSAFE_componentWillUpdate(nextProps, nextState)
 ```
 
-> Note
+> Not
 >
-> This lifecycle was previously named `componentWillUpdate`. That name will continue to work until version 17. Use the [`rename-unsafe-lifecycles` codemod](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) to automatically update your components.
+> Bu yaşam döngüsü metodunun adı önceden `componentWillUpdate` şeklindeydi. Bu isim, React'in 17 sürümüne kadar çalışmaya devam edecektir. Bileşenlerinizi otomatik olarak güncellemek için, [`rename-unsafe-lifecycles` ](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) komutunu kullanabilirsiniz.
 
-`UNSAFE_componentWillUpdate()` is invoked just before rendering when new props or state are being received. Use this as an opportunity to perform preparation before an update occurs. This method is not called for the initial render.
+`UNSAFE_componentWillUpdate()` metodu, yeni bir prop veya state değeri alındığında, render işleminin hemen öncesinde çağrılır. Bu fırsatı değerlendirerek, güncelleme oluşmadan önce ilgili hazırlıkları yapabilirsiniz. Bu metot, ilk render işleminde çalıştırılmaz.
 
-Note that you cannot call `this.setState()` here; nor should you do anything else (e.g. dispatch a Redux action) that would trigger an update to a React component before `UNSAFE_componentWillUpdate()` returns.
+Unutmayınız ki, bu fonksiyon içerisinde, `UNSAFE_componentWillUpdate()` metodunun geriye değer döndürmesinden önce, React bileşeninin güncellenmesini tetikleyecek; `this.setState()`'i veya herhangi bir metodu (örneğin Redux action'ının dispatch edilmesini) çağıramazsınız.
 
-Typically, this method can be replaced by `componentDidUpdate()`. If you were reading from the DOM in this method (e.g. to save a scroll position), you can move that logic to `getSnapshotBeforeUpdate()`.
+Genellikle bu metot, `componentDidUpdate()` metodu ile değiştirilebilir. Eğer bu metıt içerisinde DOM'dan bir değer okuması yapıyorsanız (örneğin kaydırma çubuğu pozisyonunu kaydediyorsanız), bu kodları `getSnapshotBeforeUpdate()`'e taşıyabilirsiniz.
 
-> Note
+> Not
 >
-> `UNSAFE_componentWillUpdate()` will not be invoked if [`shouldComponentUpdate()`](#shouldcomponentupdate) returns false.
+> Eğer [`shouldComponentUpdate()`](#shouldcomponentupdate) metodu false döndürüyorsa, `UNSAFE_componentWillUpdate()` metodu çağrılmaz.
 
 * * *
 
