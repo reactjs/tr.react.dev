@@ -7,7 +7,7 @@ next: lists-and-keys.html
 redirect_from:
   - "tips/false-in-jsx.html"
 ---
-React'te ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, yalnızca bileşenlerinizin bazılarını renderlayabilirsiniz.
+React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, yalnızca bileşenlerinizin bazılarını renderlayabilirsiniz.
 
 React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen  renderlama imkanı sunar. Ve React, arayüzde uygun bileşeni render eder.
 
@@ -19,10 +19,11 @@ function UserGreeting(props) {
 }
 
 function GuestGreeting(props) {
-  return <h1>Önce bir giriş yapın...</h1>;
+  return <h1>Lütfen kayıt olun</h1>;
 }
 ```
-`Greeting` adında bir bileşen daha oluşturuyoruz, bu bileşen kullanıcının giriş yapma durumuna göre yukarıda yazdığımız bileşenleri render edecektir. 
+
+`Greeting` adında bir bileşen daha oluşturuyoruz. Bu bileşen, kullanıcının giriş yapma durumuna göre yukarıda yazdığımız bileşenleri gösterecek. 
 
 ```javascript{3-7,11,12}
 function Greeting(props) {
@@ -40,15 +41,15 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
+[**Codepen'de deneyin**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
 
 Bu örnek uygulama, `isLoggedIn` değerine göre farklı bir karşılama yapacak.
 
-### Element Değişkenleri {#element-variables}
+### Eleman Değişkenleri {#element-variables}
 
-HTML elementlerini saklamak için değişkenleri kullanabilirsiniz. Bu size bileşen yaratırken, bileşenin bir bölümünü koşullu hale getimenize yardım eder. 
+HTML elemanlarını saklamak için değişkenleri kullanabilirsiniz. Bu size, bileşen yaratırken, bileşenin bir bölümünü koşullu hale getimenize yardım eder. 
 
-İçerisinde `LoginButton` ve `LogoutButton` bileşenlerinin olduğu iki yeni bir bileşen olduğunu varsayalım:
+Aşağıdaki iki yeni bileşenin `Giriş` ve `Çıkış` butonlarını temsil ettiğini varsayalım: 
 
 ```js
 function LoginButton(props) {
@@ -69,7 +70,7 @@ function LogoutButton(props) {
 ```
 Bu örnek bloğunda, `LoginControl`ü  [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
 
-`LoginControl`, `<LoginButton />` ya da `<LogoutButton />` bileşenlerini kendi state'tine göre render edecek. Ayrıca önceki örnekteki `<Greeting />` bileşenini de render edecek.
+`LoginControl`, o anki durumuna göre `<LoginButton />` ya da `<LogoutButton />` bileşenlerininden birini render edecek. Ayrıca, önceki örnekteki `<Greeting />` bileşenini de render edecek.
 
 ```javascript{20-25,29,30}
 class LoginControl extends React.Component {
@@ -113,10 +114,9 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
 
-
-Bir değişken tanımlamak ve `ìf` koşulunu kullanarak bir bileşeni koşullu renderlamak için iyi bir yöntemdir. Bazen zamanlarda daha kısa bir syntax kullanmak isteyebilirsiniz. Aşağıdaki örnekte olduğu gibi JSX'te tek satırda koşullamanın birkaç yolu vardır.
+Bir değişken tanımlamak ve `if` ifadesini kullanmak, bir bileşeni koşullu olarak render etmek için iyi bir yol olsa da, bazen daha kısa bir sözdizimi kullanmak isteyebilirsiniz. JSX'te satir içi koşullama yapmanın, aşağıda açıklanan, birkaç yolu vardır.
 
 ### Mantıksal && Operatörü ile Tek Satırda if {#inline-if-with-logical--operator}
 
@@ -144,7 +144,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
 
 Bu Javascript üzerinde çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır fakat `false && expression` her zaman `false` döndürür.
 
@@ -236,6 +236,6 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen üzerinde deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
-Bir bileşenin `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
+Bir bileşenin, `render` metodundan `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
