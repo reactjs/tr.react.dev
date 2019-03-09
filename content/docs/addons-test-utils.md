@@ -40,7 +40,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
  - [`renderIntoDocument()`](#renderintodocument)
  - [`Simulate`](#simulate)
 
-## Referans {#reference}
+## Başvuru Dokümanı {#reference}
 
 ### `act()` {#act}
 
@@ -122,7 +122,7 @@ it('sayacı render edebilir ve güncelleyebilir', () => {
 });
 ```
 
-DOM konteynerı `document`e eklendiğinde DOM olaylarının gönderilmesini sağlayabilirsiniz. Ana proje iskeletinizi küçültmek için [`react-testing-library`](https://github.com/kentcdodds/react-testing-library) gibi bir araç kullanabilirsiniz
+Unutmayınız ki, `document`'a DOM container'ı eklenmediği sürece, dispatchEvent() çalışmayacaktır. Bu tarz angarya kodlarla uğraşmamak için, [`react-testing-library`](https://github.com/kentcdodds/react-testing-library) gibi bir kütüphaneyi kullanabilirsiniz.
 
 * * *
 
@@ -135,7 +135,7 @@ mockComponent(
 )
 ```
 
-Sahte bir React bileşeni olarak kullanılabilmesine izin veren yöntemleri ekleyebilmek için bu metoda mock edilmiş bir bileşen modülü gönderin. Her zamanki gibi render etmesi yerine, bileşen belirtilen herhangi bir alt elemanı içeren basit bir `<div>` olacaktır. (Veya `mockTagName` belirtilmişse, belirtilen eleman olacaktır)
+Mock (sahte ya da taklit) bir React bileşeni olarak kullanılabilmesine izin veren yöntemleri ekleyebilmek için bu metoda mock edilmiş bir bileşen modülü gönderin. Her zamanki gibi render etmesi yerine, bileşen belirtilen herhangi bir alt elemanı içeren basit bir `<div>` olacaktır. (Veya `mockTagName` belirtilmişse, belirtilen eleman olacaktır)
 
 > Not:
 >
