@@ -41,13 +41,13 @@ ReactDOM.render(
 );
 ```
 
-[**Codepen'de deneyin**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
+[**Codepen'de Deneyin**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
 
 Bu örnek uygulama, `isLoggedIn` değerine göre farklı bir karşılama yapacak.
 
 ### Eleman Değişkenleri {#element-variables}
 
-HTML elemanlarını saklamak için değişkenleri kullanabilirsiniz. Bu size, bileşen yaratırken, bileşenin bir bölümünü koşullu hale getimenize yardım eder. 
+HTML elemanlarını saklamak için değişkenleri kullanabilirsiniz. Bu size, bileşen yaratırken, bileşenin bir bölümünü koşullu hale getirmenize yardım eder. 
 
 Aşağıdaki iki yeni bileşenin `Giriş` ve `Çıkış` butonlarını temsil ettiğini varsayalım: 
 
@@ -114,7 +114,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
 
 Bir değişken tanımlamak ve `if` ifadesini kullanmak, bir bileşeni koşullu olarak render etmek için iyi bir yol olsa da, bazen daha kısa bir sözdizimi kullanmak isteyebilirsiniz. JSX'te satir içi koşullama yapmanın, aşağıda açıklanan, birkaç yolu vardır.
 
@@ -144,7 +144,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
 
 Bu Javascript üzerinde çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır fakat `false && expression` her zaman `false` döndürür.
 
@@ -236,6 +236,6 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
 Bir bileşenin, `render` metodundan `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
