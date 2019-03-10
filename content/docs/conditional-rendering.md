@@ -1,30 +1,29 @@
 ---
 id: conditional-rendering
-title: Conditional Rendering
+title: Koşullu Renderlama
 permalink: docs/conditional-rendering.html
 prev: handling-events.html
 next: lists-and-keys.html
 redirect_from:
   - "tips/false-in-jsx.html"
 ---
+React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, yalnızca bileşenlerinizin bazılarını renderlayabilirsiniz.
 
-In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application.
+React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen  renderlama imkanı sunar. Ve React, arayüzde uygun bileşeni render eder.
 
-Conditional rendering in React works the same way conditions work in JavaScript. Use JavaScript operators like [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) or the [conditional operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) to create elements representing the current state, and let React update the UI to match them.
-
-Consider these two components:
+Bu iki bileşeni dikkate alalım:
 
 ```js
 function UserGreeting(props) {
-  return <h1>Welcome back!</h1>;
+  return <h1>Hoş geldiniz!</h1>;
 }
 
 function GuestGreeting(props) {
-  return <h1>Please sign up.</h1>;
+  return <h1>Lütfen kayıt olun</h1>;
 }
 ```
 
-We'll create a `Greeting` component that displays either of these components depending on whether a user is logged in:
+`Greeting` adında bir bileşen daha oluşturuyoruz. Bu bileşen, kullanıcının giriş yapma durumuna göre yukarıda yazdığımız bileşenleri gösterecek. 
 
 ```javascript{3-7,11,12}
 function Greeting(props) {
@@ -36,27 +35,27 @@ function Greeting(props) {
 }
 
 ReactDOM.render(
-  // Try changing to isLoggedIn={true}:
+  // Kodu değiştirerek deneyin: isLoggedIn={true}:
   <Greeting isLoggedIn={false} />,
   document.getElementById('root')
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
+[**Codepen'de Deneyin**](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
 
-This example renders a different greeting depending on the value of `isLoggedIn` prop.
+Bu örnek uygulama, `isLoggedIn` değerine göre farklı bir karşılama yapacak.
 
-### Element Variables {#element-variables}
+### Eleman Değişkenleri {#element-variables}
 
-You can use variables to store elements. This can help you conditionally render a part of the component while the rest of the output doesn't change.
+HTML elemanlarını saklamak için değişkenleri kullanabilirsiniz. Bu size, bileşen yaratırken, bileşenin bir bölümünü koşullu hale getirmenize yardım eder. 
 
-Consider these two new components representing Logout and Login buttons:
+Aşağıdaki iki yeni bileşenin `Giriş` ve `Çıkış` butonlarını temsil ettiğini varsayalım: 
 
 ```js
 function LoginButton(props) {
   return (
     <button onClick={props.onClick}>
-      Login
+      Giriş Yap
     </button>
   );
 }
@@ -64,15 +63,14 @@ function LoginButton(props) {
 function LogoutButton(props) {
   return (
     <button onClick={props.onClick}>
-      Logout
+      Çıkış Yap
     </button>
   );
 }
 ```
+Bu örnek bloğunda, `LoginControl`ü  [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
 
-In the example below, we will create a [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) called `LoginControl`.
-
-It will render either `<LoginButton />` or `<LogoutButton />` depending on its current state. It will also render a `<Greeting />` from the previous example:
+`LoginControl`, o anki durumuna göre `<LoginButton />` ya da `<LogoutButton />` bileşenlerininden birini render edecek. Ayrıca, önceki örnekteki `<Greeting />` bileşenini de render edecek.
 
 ```javascript{20-25,29,30}
 class LoginControl extends React.Component {
@@ -116,23 +114,23 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
 
-While declaring a variable and using an `if` statement is a fine way to conditionally render a component, sometimes you might want to use a shorter syntax. There are a few ways to inline conditions in JSX, explained below.
+Bir değişken tanımlamak ve `if` ifadesini kullanmak, bir bileşeni koşullu olarak render etmek için iyi bir yol olsa da, bazen daha kısa bir sözdizimi kullanmak isteyebilirsiniz. JSX'te satir içi koşullama yapmanın, aşağıda açıklanan, birkaç yolu vardır.
 
-### Inline If with Logical && Operator {#inline-if-with-logical--operator}
+### Mantıksal && Operatörü ile Tek Satırda if {#inline-if-with-logical--operator}
 
-You may [embed any expressions in JSX](/docs/introducing-jsx.html#embedding-expressions-in-jsx) by wrapping them in curly braces. This includes the JavaScript logical `&&` operator. It can be handy for conditionally including an element:
+Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz.](/docs/introducing-jsx.html#embedding-expressions-in-jsx) Buna Javascript'teki mantıksal `&&` operatörü de dahildir. Bu bileşenin içinde koşul vermek için kullanışlı olabilir:
 
 ```js{6-10}
 function Mailbox(props) {
   const unreadMessages = props.unreadMessages;
   return (
     <div>
-      <h1>Hello!</h1>
+      <h1>Merhaba!</h1>
       {unreadMessages.length > 0 &&
         <h2>
-          You have {unreadMessages.length} unread messages.
+          {unreadMessages.length} adet okunmamış mesajınız var.
         </h2>
       }
     </div>
@@ -146,30 +144,30 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
 
-It works because in JavaScript, `true && expression` always evaluates to `expression`, and `false && expression` always evaluates to `false`.
+Bu Javascript üzerinde çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır fakat `false && expression` her zaman `false` döndürür.
 
-Therefore, if the condition is `true`, the element right after `&&` will appear in the output. If it is `false`, React will ignore and skip it.
+Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip, geçececektir.
 
-### Inline If-Else with Conditional Operator {#inline-if-else-with-conditional-operator}
+### Koşul Operatörü ile Tek Satırda if-else {#inline-if-else-with-conditional-operator}
 
-Another method for conditionally rendering elements inline is to use the JavaScript conditional operator [`condition ? true : false`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator).
+Koşullu renderlama için farklı bir yöntem ise Javascript koşul operatörünü [`condition ? true : false`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) kullanmaktır.
 
-In the example below, we use it to conditionally render a small block of text.
+Bu örnekte, yazının yalnızca bir kısmını koşullayacağız
 
 ```javascript{5}
 render() {
   const isLoggedIn = this.state.isLoggedIn;
   return (
     <div>
-      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+      Bu kullanıcı şuan <b>{isLoggedIn ? 'çevrimiçi' : 'çevrimdışı'}</b>.
     </div>
   );
 }
 ```
 
-It can also be used for larger expressions although it is less obvious what's going on:
+Neler olduğu daha az belirgin olsa da, daha büyük ifadeler için de kullanılabilir:
 
 ```js{5,7,9}
 render() {
@@ -186,13 +184,13 @@ render() {
 }
 ```
 
-Just like in JavaScript, it is up to you to choose an appropriate style based on what you and your team consider more readable. Also remember that whenever conditions become too complex, it might be a good time to [extract a component](/docs/components-and-props.html#extracting-components).
+Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve sizin takımınıza kalmıştır. Bu arada, ne zaman koşullandırma çok karmaşık bir hal almaya başlarsa [extract a component](/docs/components-and-props.html#extracting-components) yapmanın zamanı gelmiştir.
 
-### Preventing Component from Rendering {#preventing-component-from-rendering}
+### Bileşenin Renderlanmasını Engellemek {#preventing-component-from-rendering}
 
-In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return `null` instead of its render output.
+Nadir durumlarda, renderlanmış bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
 
-In the example below, the `<WarningBanner />` is rendered depending on the value of the prop called `warn`. If the value of the prop is `false`, then the component does not render:
+Bu örnekle, `UyariMesaji` bileşeni kendisinin `uyariGoster` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecek.
 
 ```javascript{2-4,29}
 function WarningBanner(props) {
@@ -202,7 +200,7 @@ function WarningBanner(props) {
 
   return (
     <div className="warning">
-      Warning!
+      Bu konuda seni uyarıyorum!
     </div>
   );
 }
@@ -225,7 +223,7 @@ class Page extends React.Component {
       <div>
         <WarningBanner warn={this.state.showWarning} />
         <button onClick={this.handleToggleClick}>
-          {this.state.showWarning ? 'Hide' : 'Show'}
+          {this.state.showWarning ? 'Gizle' : 'Göster'}
         </button>
       </div>
     );
@@ -238,6 +236,6 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
-Returning `null` from a component's `render` method does not affect the firing of the component's lifecycle methods. For instance `componentDidUpdate` will still be called.
+Bir bileşenin, `render` metodundan `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
