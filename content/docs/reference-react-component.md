@@ -620,7 +620,7 @@ Bunun aksine `props.color` değeri null olarak atanmışsa, değişmeden null ol
 
 ### `displayName` {#displayname}
 
-The `displayName` string is used in debugging messages. Usually, you don't need to set it explicitly because it's inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component, see [Wrap the Display Name for Easy Debugging](/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging) for details.
+`displayName` değişkeni, hata ayıklama mesajlarında kullanılır. Genellikle açık olarak bu değişkene atama yapmanıza gerek yoktur. Çünkü tanımlandığı fonksiyon veya sınıf bileşeninin isminden oluşturulmaktadır. Hata ayıklama işleminde farklı bir isim kullanmak istiyorsanız, elbette bu değişkeni açık bir şekilde tanımlayıp atama yapabilirsiniz. Ayrıca high-order bir bileşen oluştururken de kullanabilirsiniz. [Kolay bir şekilde hata ayıklama için görünen ismin değiştirilmesi](/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging) yazısından daha detaylı bilgi edinebilirsiniz.
 
 * * *
 
