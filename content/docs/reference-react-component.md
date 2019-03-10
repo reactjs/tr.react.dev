@@ -505,21 +505,21 @@ Yalnızca iki adet metot vardır. Bunlar `setState()` ve `forceUpdate()` metotla
 setState(updater[, callback])
 ```
 
-`setState()` enqueues changes to the component state and tells React that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.
+`setState()` metodu, bileşenin state'inde olan değişiklikleri bir kuyruğa atar ve React'e, bu bileşenin ve alt bileşenlerinin güncellenen state ile birlikte tekrar render edilmesi gerektiğini bildirir. Sunucu cevapları ve onClick gibi olay gidericilerinden dönen değişikliklerin arayüze yansıtılması için başlıca metottur. 
 
-Think of `setState()` as a *request* rather than an immediate command to update the component. For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.
+`setState()`, bir bileşeni direkt olarak güncelleyen bir metot değildir. Bu nedenle `setState()`'i, React'e yapılan bir *istek* olarak düşünmelisiniz. React, daha iyi bir performans için bu metodun çalışmasını geciktirebilir, ve daha sonra tüm güncellemeler ile birlikte tek seferde gerçekleştirebilir. Bu nedenle React, state güncellemelerinin anında gerçekleştirileceğini garanti etmemektedir. 
 
-`setState()` does not always immediately update the component. It may batch or defer the update until later. This makes reading `this.state` right after calling `setState()` a potential pitfall. Instead, use `componentDidUpdate` or a `setState` callback (`setState(updater, callback)`), either of which are guaranteed to fire after the update has been applied. If you need to set the state based on the previous state, read about the `updater` argument below.
+`setState()` metodu, her zaman bileşeni anında güncellemez. Güncellemeleri yığın haline getirebilir veya daha sonra gerçekleşmesi için geciktirebilir. Bu nedenle, `setState()` çağrımından sonra `this.state` değerinin okunması yaygın olarak yapılan bir yanlıştır. Bunun yerine, `componentDidUpdate` metodunu veya `setState` callback'ini (`setState(updater, callback)`) kullanınız. Her iki metot da, güncellemeler uygulandıktan sonra kodun çalıştırılacağını garanti eder. Eğer mevcut state'i, önceki state'i baz alarak güncellemeye ihtiyacınız varsa, aşağıda yer alan `updater` parametresini inceleyebilirsiniz.
 
-`setState()` will always lead to a re-render unless `shouldComponentUpdate()` returns `false`. If mutable objects are being used and conditional rendering logic cannot be implemented in `shouldComponentUpdate()`, calling `setState()` only when the new state differs from the previous state will avoid unnecessary re-renders.
+`setState()`, `shouldComponentUpdate()` metodu `false` dönmediği sürece, ilgili bileşenin tekrar render edilmesini sağlar. Eğer değiştirilebilir (mutable) nesneler kullanılırsa ve buna bağlı olarak `shouldComponentUpdate()` içerisinde koşullu render'lama (conditional rendering) mantığı kurulamazsa, önceki state'ten yeni state'in farklı olduğu durumda yalnızca `setState()` çağrımı gereksiz render işlemini gerçekleştirmeyecektir.
 
-The first argument is an `updater` function with the signature:
+`setState()`'in ilk parametresi bir `updater` fonksiyonudur ve aşağıdaki gibi yer almaktadır:
 
 ```javascript
 (state, props) => stateChange
 ```
 
-`state` is a reference to the component state at the time the change is being applied. It should not be directly mutated. Instead, changes should be represented by building a new object based on the input from `state` and `props`. For instance, suppose we wanted to increment a value in state by `props.step`:
+`state`, değişikliğin uygulandığı andaki bileşenin state'ini tutmaktadır. Değişiklikler, `state` ve `props` girdilerini baz alan yeni bir nesne oluşturularak temsil edilmelidir. Örneğin, state'teki bir değeri, `props.step` değeri ile arttırdığımızı varsayalım: 
 
 ```javascript
 this.setState((state, props) => {
@@ -527,23 +527,23 @@ this.setState((state, props) => {
 });
 ```
 
-Both `state` and `props` received by the updater function are guaranteed to be up-to-date. The output of the updater is shallowly merged with `state`.
+Bu kodda, updater fonksiyonuna aktarılan `state` ve `props` değerlerinin güncel olduğu garanti edilir. Updater'ın çıktısı, `state` ile yüzeysel olarak birleştirilir.
 
-The second parameter to `setState()` is an optional callback function that will be executed once `setState` is completed and the component is re-rendered. Generally we recommend using `componentDidUpdate()` for such logic instead.
+`setState()`'in ikinci parametresi, `setState` çağrımı tamamlandığında ve bileşen tekrar render edildiğinde bir defa çağrılacak olan ve isteğe bağlı olarak tanımlanan callback fonksiyonudur. Bunun yerine genellikle `componentDidUpdate()` metodunun kullanılmasını öneririz.
 
-You may optionally pass an object as the first argument to `setState()` instead of a function:
+İsteğe bağlı olarak, `setState()`'in ilk parametresi için, bir fonksiyon yerine aşağıdaki gibi bir nesne geçebilirsiniz:
 
 ```javascript
 setState(stateChange[, callback])
 ```
 
-This performs a shallow merge of `stateChange` into the new state, e.g., to adjust a shopping cart item quantity:
+Bu, `stateChange`'in yüzeysel olarak `state` ile birleştirilmesini sağlar. Örneğin bir alışveriş sepetindeki ürünün adedini aşağıdaki gibi güncelleyebilirsiniz:
 
 ```javascript
 this.setState({quantity: 2})
 ```
 
-This form of `setState()` is also asynchronous, and multiple calls during the same cycle may be batched together. For example, if you attempt to increment an item quantity more than once in the same cycle, that will result in the equivalent of:
+Ayrıca `setState()`'in bu şekilde kullanımı asenkron olarak çalışır. Bu nedenle aynı render döngüsünde birkaç defa yapılan `setState()` çağrıları, tekil hale getirilerek işlenebilir. Örneğin, aynı render döngüsünde ürün adedini birden fazla kez arttırmaya çalışırsanız, işlemin sonucu `Object.assign()` ile tekil bir metot çağrısı haline getirilecek ve aşağıdaki gibi olacaktır:
 
 ```javaScript
 Object.assign(
@@ -554,7 +554,7 @@ Object.assign(
 )
 ```
 
-Subsequent calls will override values from previous calls in the same cycle, so the quantity will only be incremented once. If the next state depends on the current state, we recommend using the updater function form, instead:
+Aynı render döngüsünde art arda yapılan çağrımlar, önceki çağrımdan gelen değişiklikleri ezerek üstüne yazacaktır. Buöylece `quantity` değeri yalnızca bir kez arttırılacaktır. Bu nedenle eğer sonraki state, mevcut state'e bağımlı ise, aşağıdaki gibi bir `updater` fonksiyonu kullanmanızı öneririz: 
 
 ```js
 this.setState((state) => {
@@ -562,11 +562,11 @@ this.setState((state) => {
 });
 ```
 
-For more detail, see:
+Daha fazla bilgi için:
 
-* [State and Lifecycle guide](/docs/state-and-lifecycle.html)
-* [In depth: When and why are `setState()` calls batched?](https://stackoverflow.com/a/48610973/458193)
-* [In depth: Why isn't `this.state` updated immediately?](https://github.com/facebook/react/issues/11527#issuecomment-360199710)
+* [State ve Yaşam Döngüsü Rehberi](/docs/state-and-lifecycle.html)
+* [Derinlemesine inceleme: `setState()` çağrıları neden ve ne zaman tekil hale getirilirler?](https://stackoverflow.com/a/48610973/458193)
+* [Derinlemesine inceleme: `this.state` neden anında güncellenmez?](https://github.com/facebook/react/issues/11527#issuecomment-360199710)
 
 * * *
 
