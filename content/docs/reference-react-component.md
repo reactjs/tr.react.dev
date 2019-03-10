@@ -634,10 +634,10 @@ Bilhassa, `this.props.children` özel bir prop'tur. Genellikle etiketin kendisi 
 
 ### `state` {#state}
 
-The state contains data specific to this component that may change over time. The state is user-defined, and it should be a plain JavaScript object.
+State, zaman içerisinde değişim gösterebilen ve ilgili değişkene özgü olan verileri tutar. State değişkeni kullanıcı tarafından tanımlanır, ve düz bir JavaScript nesnesi olmalıdır.
 
-If some value isn't used for rendering or data flow (for example, a timer ID), you don't have to put it in the state. Such values can be defined as fields on the component instance.
+Eğer state'te tanımlanan bazı değerler, render işleminde veya zamanlayıcı ID'sinin tutulması gibi veri akışına yönelik işlemlerde kullanılmıyorsa, bu değişkenler state içerisine konulmamalıdır. Bu değerler, bileşen nesnesinde değişken olarak tanımlanabilirler.
 
-See [State and Lifecycle](/docs/state-and-lifecycle.html) for more information about the state.
+State hakkında daha fazla bilgi için [State ve Lifecycle](/docs/state-and-lifecycle.html) sayfasına göz atabilirsiniz.
 
-Never mutate `this.state` directly, as calling `setState()` afterwards may replace the mutation you made. Treat `this.state` as if it were immutable.
+`this.state`'i direkt olarak değiştirmeyiniz. Çünkü daha sonra yapılan `setState()` çağrıları, yaptığınız değişikliklerin üzerine yazabilir. Bu nedenle `this.state`'e immutable'mış gibi davranmalısınız.
