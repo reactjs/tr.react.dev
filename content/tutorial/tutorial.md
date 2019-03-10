@@ -32,13 +32,9 @@ Bu öğretici birkaç bölüme ayrılmıştır:
 
 Bu öğreticiden yararlanmanız için tüm bölümleri tamamen bitirmek zorunda değilsiniz. Bir-iki bölüm tamamlamanız bile sizin için yararlı olacaktır. Fakat yine de tüm bölümleri tamamlamaya çalışınız.
 
-<<<<<<< HEAD
 Bu öğreticiyi takip ederken kodları kopyala-yapıştır yaparak denemenizde bizce hiçbir sorun yoktur. Fakat elle kodlayarak ilerlemenizi tavsiye ederiz. Bu sayede kas hafızanız gelişecek ve React'i daha güçlü bir şekilde öğrenmiş hale geleceksiniz. 
 
 ### Ne kodlayacağız? {#what-are-we-building}
-=======
-### What Are We Building? {#what-are-we-building}
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 Bu öğreticide, React ile bir tic-tac-toe (XOX oyunu) nasıl geliştirilir onu göstereceğiz. 
 
@@ -198,13 +194,9 @@ Kodu incelediğinizde aşağıdaki 3 React bileşenini fark edeceksiniz:
 
 ### Prop'lar Aracılığıyla Veri Aktarımı {#passing-data-through-props}
 
-<<<<<<< HEAD
 Şimdi işe koyulalım ve Board bileşeninden Square bileşenimize bazı verileri göndermeyi deneyelim.
-=======
-To get our feet wet, let's try passing some data from our Board component to our Square component.
 
-We strongly recommend typing code by hand as you're working through the tutorial and not using copy/paste. This will help you develop muscle memory and a stronger understanding.
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+Öğretici üzerinde çalışırken ve kopyala / yapıştır yerine, kodu elle yazmanızı şiddetle öneriyoruz. Bu, kas hafızanızı ve daha güçlü bir kavrayış geliştirmenize yardımcı olacaktır.
 
 Board'ın `renderSquare` metodunda, `value` prop'unu Square'e gönderecek şekilde kodu değiştirelim:
 
@@ -258,11 +250,7 @@ class Square extends React.Component {
 }
 ```
 
-<<<<<<< HEAD
-Şimdi herhangi bir kareye tıkladığımızda tarayıcıda bir alert mesajı görüntülenecektir. 
-=======
-If you click on a Square now, you should see an alert in your browser.
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+Şimdi herhangi bir kareye tıkladığımızda tarayıcınızda bir alert mesajı görüntülenecektir. 
 
 >Not:
 >
@@ -280,11 +268,7 @@ If you click on a Square now, you should see an alert in your browser.
 >}
 >```
 >
-<<<<<<< HEAD
 >Farkedeceğiniz üzere, `onClick={() => alert('click')}` kısmında butonun `onClick` prop'una *bir fonksiyon* ataması gerçekleştiriyoruz. Bu fonksiyon sadece butona tıkladığımızda çalışıyor. Genellikle bir yazılımcı hatası olarak parantezli ok `() =>` ifadesinin unutulması yerine direkt olarak `onClick={alert('click')}` ifadesinin yazılması gerçekleşebiliyor. Bu durumda tıklama anında gerçekleşmesi istenen olay yanlış bir şekilde çalışarak, bileşen tekrar render edildiğinde gerçekleşmiş oluyor.
-=======
->Notice how with `onClick={() => alert('click')}`, we're passing *a function* as the `onClick` prop. React will only call this function after a click. Forgetting `() =>` and writing `onClick={alert('click')}` is a common mistake, and would fire the alert every time the component re-renders.
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 Sonraki adımda Square bileşeninin, tıklandığı durumu "hatırlamasını" ve "X" işareti ile doldurulmasını sağlayacağız. Bir şeyleri "hatırlamak" için bileşenler **state** (durum)'u kullanırlar.
 
@@ -317,15 +301,9 @@ class Square extends React.Component {
 
 Şimdi, Square'e tıklanıldığında, state'indeki `value` değerinin `render` metodunda görüntülenebilmesi için aşağıdaki adımları izleyelim:
 
-<<<<<<< HEAD
 * `<button>` etiketi içerisinde yer alan `this.props.value` yerine `this.state.value` yazalım.
 * `() => alert()` event handler'ını `() => this.setState({value: 'X'})` ile değiştirelim.
 * Okunabilirliği arttırmak için `className` ve `onClick` prop'larını ayrı satırlara alalım.
-=======
-* Replace `this.props.value` with `this.state.value` inside the `<button>` tag.
-* Replace the `onClick={...}` event handler with `onClick={() => this.setState({value: 'X'})}`.
-* Put the `className` and `onClick` props on separate lines for better readability.
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 Bu değişikliklerden sonra Square'in `render` metodundan dönen `<button>` etiketi aşağıdaki gibi görüntülenecektir:
 
@@ -386,13 +364,9 @@ Bunu gerçekleştirmek için Board'un, her bir Square'e, kendi state'inin ne old
 
 **Bu örnekteki gibi, birçok çocuk bileşenden verilerin toplanması veya iki çocuğun birbirleri arasında iletişim kurabilmesi için, ebeveyn bileşende paylaşımlı bir state oluşturmanız gerekmektedir. Ebeveyn bileşen, prop'lar aracılığıyla state'ini çocuklara aktarabilir. Bu sayede çocuk bileşenler hem birbirleri arasında hem de ebeveyn ile senkronize hale gelirler.**
 
-<<<<<<< HEAD
-React bileşenleri refactor edilirken, state'in ebeveyn'e taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım. Board'a bir constructor ekleyelim ve Board'un başlangıç state'ine bir dizi atayarak içerisinde 9 adet null değerinin bulunmasını sağlayalım. 9 kareye, 9 adet null karşılık gelecektir:
-=======
-Lifting state into a parent component is common when React components are refactored -- let's take this opportunity to try it out.
+React bileşenleri refactor edilirken, state'in ebeveyn'e taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım.
 
-Add a constructor to the Board and set the Board's initial state to contain an array of 9 nulls corresponding to the 9 squares:
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+Board'a bir constructor ekleyelim ve Board'un başlangıç state'ine bir dizi atayarak içerisinde 9 adet null değerinin bulunmasını sağlayalım. 9 kareye, 9 adet null karşılık gelecektir:
 
 ```javascript{2-7}
 class Board extends React.Component {
@@ -408,11 +382,7 @@ class Board extends React.Component {
   }
 ```
 
-<<<<<<< HEAD
-Daha sonra Board'u doldurdukça, dizi içeriği aşağıdaki gibi görünmeye başlayacaktır: 
-=======
-When we fill the board in later, the `this.state.squares` array will look something like this:
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+Daha sonra Board'u doldurdukça, `this.state.squares` dizisinin içeriği aşağıdaki gibi görünmeye başlayacaktır: 
 
 ```javascript
 [
@@ -446,11 +416,7 @@ Artık her bir Square bileşeni `value` prop'unu alacak ve 'X', 'O' veya boş sq
 
 Şimdi Square'e tıklandığında ne olacağına karar vermemiz gerekiyor. Board bileşeni artık hangi Square'in doldurulacağına karar verebildiğine göre, Square'e tıklandığında Board bileşeninin state'inin güncellenmesini sağlamalıyız. State her bir bileşene private olduğundan dolayı Square üzerinden direkt olarak Board'un state'ini değiştiremeyiz. 
 
-<<<<<<< HEAD
 Board'un state'inin gizliliğini korumak için, Board'dan Square'e bir fonksiyon aktarmamız gerekiyor. Square'e her tıklama anında bu fonksiyonun otomatik olarak çağrısı gerçekleşecektir. Şimdi Board'un `renderSquare` metodunu aşağıdaki şekilde değiştirelim:
-=======
-Instead, we'll pass down a function from the Board to the Square, and we'll have Square call that function when a square is clicked. We'll change the `renderSquare` method in Board to:
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 ```javascript{5}
   renderSquare(i) {
@@ -492,27 +458,15 @@ class Square extends React.Component {
 
 Artık Square'e tıklandığında, Board tarafından aktarılan `onClick` fonksiyonu çağrılacaktır. Bunun nasıl gerçekleştiğini açıklayalım:
 
-<<<<<<< HEAD
 1. HTML'de varsayılan olan `<button>` bileşeninin `onClick` prop'u React'e, tıklama olayını oluşturmasını söyler.
 2. Butona tıklandığında React, Square'in `render()` metodunda tanımlanan `onClick` fonksiyonunu çalıştırır.
 3. Bu fonksiyon ise, `this.props.onClick()` çağrısını gerçekleştirir. Square'in `onClick` prop'u, Board tarafından kendisine aktarılmıştır.
 4. Board, Square'e `onClick={() => this.handleClick(i)}` kodunu aktardığı için, Square'e tıklandığında Board'un `this.handleClick(i)` metodu çağrılır.
 5. Şu an `handleClick()` metodunu oluşturmadığımız için kodumuz hata verecektir.
-=======
-1. The `onClick` prop on the built-in DOM `<button>` component tells React to set up a click event listener.
-2. When the button is clicked, React will call the `onClick` event handler that is defined in Square's `render()` method.
-3. This event handler calls `this.props.onClick()`. The Square's `onClick` prop was specified by the Board.
-4. Since the Board passed `onClick={() => this.handleClick(i)}` to Square, the Square calls `this.handleClick(i)` when clicked.
-5. We have not defined the `handleClick()` method yet, so our code crashes. If you click a square now, you should see a red error screen saying something like "this.handleClick is not a function".
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 >Not
 >
-<<<<<<< HEAD
 >HTML'deki `<button>` elemanı varsayılan bileşen olarak geldiği için, `onClick` fonksiyonu, React için özel bir anlam ihtiva eder. Fakat Square gibi özel olarak yazılan bileşenlerde, prop isimlendirmesi size kalmıştır. Bu nedenle Square'in `onClick` prop'unu veya Board'un `handleClick` metodunu daha farklı şekillerde isimlendirebilirsiniz. Ancak React'teki isimlendirme kuralına uymak gereklidir. Bu kural şu şekildedir: olayları temsil eden prop'lar için `on[Olay]`, olayları handle eden metodlar için ise `handle[Olay]` ifadeleri kullanılır. 
-=======
->The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. We could give any name to the Square's `onClick` prop or Board's `handleClick` method, and the code would work the same. In React, it's conventional to use `on[Event]` names for props which represent events and `handle[Event]` for the methods which handle the events.
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 Square'e tıkladığımızda, `handleClick`'i tanımlamadığımız için hata aldığımızdan bahsetmiştik. Gelin şimdi Board sınıfına `handleClick`'i ekleyelim:
 
@@ -569,11 +523,7 @@ class Board extends React.Component {
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/ybbQJX?editors=0010)**
 
-<<<<<<< HEAD
 Bu değişikliklerden sonra, oyundaki karelere tıkladığımızda içeriğinin "X" ile doluyor olduğunu tekrar görebiliyoruz. Fakat her bir Square'in ayrı ayrı state'e sahip olması yerine, Board bileşeninde tek bir state barındırılmış hale geldi. Bu sayede Board'daki state değiştiğinde tüm Square bileşenleri otomatik olarak tekrar render edilecektir. Bunun yanında, bütün Square'lerin state'inin Board bileşeninde tutulması, gelecekte kazananı belirlememiz için önemli bir yöntem teşkil edecektir.
-=======
-After these changes, we're again able to click on the Squares to fill them, the same as we had before. However, now the state is stored in the Board component instead of the individual Square components. When the Board's state changes, the Square components re-render automatically. Keeping the state of all squares in the Board component will allow it to determine the winner in the future.
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 Square bileşenleri artık state'i direkt olarak değiştirmediği için, değerleri Board bileşeninden alıyorlar ve tıklandıklarında Board'u haberdar ediyorlar. React terminolojisinde Square bileşenleri için **controlled components** (kontrol edilen bileşenler) adı verilir. Çünkü tüm kontrol Board bileşeninin elindedir. 
 
@@ -615,11 +565,7 @@ Mutable nesneler, direkt olarak değiştirilebildikleri için, değişip/değiş
 
 Immutable nesnelerdeki değişikliklerin tespit edilmesi daha kolaydır. Immutable nesne kopyalanarak ataması yapıldığı için, ilgili değişken, öncekinden farklı bir değişkene referans edilmişse o halde nesne değişmiştir diyebiliriz.
 
-<<<<<<< HEAD
-#### Tekrar Render Etme Zamanı Kolayca Belirlenebilir {#determining-when-to-re-render-in-react}
-=======
-#### Determining When to Re-Render in React {#determining-when-to-re-render-in-react}
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+#### Tekrar Render Etme Zamanını Belirlemek {#determining-when-to-re-render-in-react}
 
 React'te Immutability'nin ana faydası ise, _pure component_'lar (saf/katıksız bileşenler) yapmayı kolaylaştırmasıdır. Immutable veriler, değişiklik yapıldığını kolayca tespit edebilirler. Bu sayede değişiklik olduğunda ilgili bileşenin tekrar render edilmesine yardımcı olurlar.
 
@@ -649,11 +595,7 @@ Dikkat edecek olursanız sııf bileşeninde kullandığımız `this.props` ifad
 
 >Not
 >
-<<<<<<< HEAD
 >Square'i, fonksiyon bileşeni olarak değiştirdiğimiz için, uzun olan `onClick={() => this.props.onClick()}` kod parçasını, `onClick={props.onClick}` şeklinde yazarak daha kısa hale getirmiş olduk (her iki taraftaki parantezlerin de gittiğine dikkat ediniz). Sınıf bileşeninde gerçek `this` değerine ulaşmak için arrow (ok) fonksiyonu kullanmıştık. Bunun aksine fonksiyon bileşenlerinde `this` ile uğraşmanıza gerek yoktur.
-=======
->When we modified the Square to be a function component, we also changed `onClick={() => this.props.onClick()}` to a shorter `onClick={props.onClick}` (note the lack of parentheses on *both* sides).
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 ### Hamle Sırası Değişikliği {#taking-turns}
 
@@ -685,13 +627,9 @@ Herhangi bir oyuncu hamlesini yaptığında `xIsNext` (xSonrakiElemanMı) boolea
   }
 ```
 
-<<<<<<< HEAD
-Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar. Ayrıca oyunda, sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için, Board'un `render` metodunda "status" değişkenini oluşturabiliriz:
-=======
-With this change, "X"s and "O"s can take turns. Try it!
+Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar.
 
-Let's also change the "status" text in Board's `render` so that it displays which player has the next turn:
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+Ayrıca oyunda, sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için, Board'un `render` metodunda "status" değişkenini oluşturabiliriz:
 
 ```javascript{2}
   render() {
@@ -762,11 +700,7 @@ class Board extends React.Component {
 
 ### Kazananın Belirlenmesi {#declaring-a-winner}
 
-<<<<<<< HEAD
 Artık sonraki oyuncuyu görüntüleyebiliyoruz. Bundan sonraki amacımız olarak, oyunun bitmesi durumunu belirtmek için, oyunun kazanıldığını ve artık başka bir hamle kalmadığını göstermemiz gerekiyor. Bunun için, kazanan oyuncuyu belirtmek amacıyla, dosyanın sonuna yardımcı bir fonksiyon ekleyebiliriz:
-=======
-Now that we show which player's turn is next, we should also show when the game is won and there are no more turns to make. Copy this helper function and paste it at the end of the file:
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
 
 ```javascript
 function calculateWinner(squares) {
@@ -790,13 +724,9 @@ function calculateWinner(squares) {
 }
 ```
 
-<<<<<<< HEAD
-Board'un `render` fonksiyonunda, `calculateWinner(squares)` fonksiyonunu çağırarak, ilgili oyuncunun kazanma durumunun kontrol edilmesini sağlayabiliriz. Hamleyi yapan oyuncu kazandıysa, "Winner: X" veya "Winner: O" gibi kazananı belirten bir metin görüntüleyebiliriz. Şimdi, Board'un `render` fonksiyonunda yer alan `status` değişkenini aşağıdaki şekilde değiştirelim:
-=======
-Given an array of 9 squares, this function will check for a winner and return `'X'`, `'O'`, or `null` as appropriate.
+9 kareden oluşan bir dizi göz önüne alındığında, bu fonksiyon kazananı kontrol edecek ve uygun şekilde `'X'`, `'O'` veya `null` döndürecektir.
 
-We will call `calculateWinner(squares)` in the Board's `render` function to check if a player has won. If a player has won, we can display text such as "Winner: X" or "Winner: O". We'll replace the `status` declaration in Board's `render` function with this code:
->>>>>>> 8803c6375b153af39a850822d844db94ea4c9b0a
+Board'un `render` fonksiyonunda, `calculateWinner(squares)` fonksiyonunu çağırarak, ilgili oyuncunun kazanma durumunun kontrol edilmesini sağlayabiliriz. Hamleyi yapan oyuncu kazandıysa, "Winner: X" veya "Winner: O" gibi kazananı belirten bir metin görüntüleyebiliriz. Şimdi, Board'un `render` fonksiyonunda yer alan `status` değişkenini aşağıdaki şekilde değiştirelim:
 
 ```javascript{2-8}
   render() {
