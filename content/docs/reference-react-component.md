@@ -624,13 +624,13 @@ Bunun aksine `props.color` değeri null olarak atanmışsa, değişmeden null ol
 
 * * *
 
-## Instance Properties {#instance-properties-1}
+## Bileşen Nesnesinin Değişkenleri {#instance-properties-1}
 
 ### `props` {#props}
 
-`this.props` contains the props that were defined by the caller of this component. See [Components and Props](/docs/components-and-props.html) for an introduction to props.
+`this.props`, bu değişkeni çağıran eleman tarafından tanımlanan prop değerlerini içerir. Prop'lara giriş olması açısından fazla bilgi için [Bileşenler ve Prop'lar](/docs/components-and-props.html) yazısını inceleyebilirsiniz.
 
-In particular, `this.props.children` is a special prop, typically defined by the child tags in the JSX expression rather than in the tag itself.
+Bilhassa, `this.props.children` özel bir prop'tur. Genellikle etiketin kendisi yerine JSX ifadesindeki alt etiketler tarafından tanımlanır. 
 
 ### `state` {#state}
 
