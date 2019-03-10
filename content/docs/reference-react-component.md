@@ -576,11 +576,11 @@ Daha fazla bilgi için:
 component.forceUpdate(callback)
 ```
 
-By default, when your component's state or props change, your component will re-render. If your `render()` method depends on some other data, you can tell React that the component needs re-rendering by calling `forceUpdate()`.
+Bileşeninizin state'i veya prop'ları değiştiğinde, varsayılan olarak bileşeniniz tekrar render edilecektir. Eğer `render()` metodunuz, bunların haricinde başka verilere bağımlı ise, `forceUpdate()`'i çağırarak bileşeninizin tekrar render edilmesi gerektiğini React'e söyleyebilirsiniz.
 
-Calling `forceUpdate()` will cause `render()` to be called on the component, skipping `shouldComponentUpdate()`. This will trigger the normal lifecycle methods for child components, including the `shouldComponentUpdate()` method of each child. React will still only update the DOM if the markup changes.
+Bileşen üzerinde `forceUpdate()` çağrımı, `shouldComponentUpdate()`'in es geçilerek `render()` metodunun çalışmasına neden olacaktır. `forceUpdate()` çağrımı, alt bileşenler için normal yaşam döngüsü metotlarını tetikleyecektir. Bu metotlara, her bir alt bileşen için çağrılacak `shouldComponentUpdate()` metodu da dahildir. Buna rağmen HTML tarafında oluşan değişikliklerde, React sadece DOM'u güncellemeye devam edecektir.
 
-Normally you should try to avoid all uses of `forceUpdate()` and only read from `this.props` and `this.state` in `render()`.
+Normalde `forceUpdate()`'in kullanımından kaçınmalı ve yalnızca `render()` metodu içerisinde `this.props` ve `this.state`'ten okuma işlemi yapmalısınız.
 
 * * *
 
