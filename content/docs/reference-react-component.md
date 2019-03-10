@@ -584,11 +584,11 @@ Normalde `forceUpdate()`'in kullanımından kaçınmalı ve yalnızca `render()`
 
 * * *
 
-## Class Properties {#class-properties-1}
+## Sınıf Bileşeninin Değişkenleri {#class-properties-1}
 
 ### `defaultProps` {#defaultprops}
 
-`defaultProps` can be defined as a property on the component class itself, to set the default props for the class. This is used for undefined props, but not for null props. For example:
+`defaultProps`, bileşen sınıfının varsayılan prop değerlerini atamak için sınıf içerisinde değişken olarak tanımlanabilir. Bu değişken, tanımlı olmayan prop değerleri için kullanılır. Null değeri içeren prop'lar için kullanılmaz. Örneğin:
 
 ```js
 class CustomButton extends React.Component {
@@ -600,7 +600,7 @@ CustomButton.defaultProps = {
 };
 ```
 
-If `props.color` is not provided, it will be set by default to `'blue'`:
+Eğer bileşene `props.color` değeri aktarılmazsa, varsayılan olarak `'blue'` atanacaktır:
 
 ```js
   render() {
@@ -608,11 +608,11 @@ If `props.color` is not provided, it will be set by default to `'blue'`:
   }
 ```
 
-If `props.color` is set to null, it will remain null:
+Bunun aksine `props.color` değeri null olarak atanmışsa, değişmeden null olarak kalacaktır:
 
 ```js
   render() {
-    return <CustomButton color={null} /> ; // props.color will remain null
+    return <CustomButton color={null} /> ; // props.color null olarak kalacaktır
   }
 ```
 
