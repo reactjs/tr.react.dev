@@ -10,7 +10,7 @@ React, `<script>` elemanıyla yüklenirse, bu üst seviye API'ları `ReactDOM` �
 
 ## Genel Taslak {#overview}
 
-`react-dom` uygulamanın en üst seviyesinde, DOM'a özel metodlar sunar ve buda gerektiğinde React model'inin dışına cikabilmenizi sağlar. Bu arada, çoğu bileşenlerin bu modülü kullanmasına gerek olmaz.
+`react-dom` uygulamanın en üst seviyesinde, DOM'a özel metodlar sunar ve buda gerektiğinde React model'inin dışına çıkabilmenizi sağlar. Bu arada, çoğu bileşenlerin bu modülü kullanmasına gerek olmaz.
 
 - [`render()`](#render)
 - [`hydrate()`](#hydrate)
@@ -18,7 +18,7 @@ React, `<script>` elemanıyla yüklenirse, bu üst seviye API'ları `ReactDOM` �
 - [`findDOMNode()`](#finddomnode)
 - [`createPortal()`](#createportal)
 
-### Tarayici destegi {#browser-support}
+### Tarayıcı desteği {#browser-support}
 
 
 React, Internet Explorer 9 ve üzeri de dahil, tüm popüler tarayıcıları desteklemekte, ama IE 9 ve IE 10 gibi eski tarayıcılarda [bazı eklentiler gerekmektedir](/docs/javascript-environment-requirements.html)  
@@ -37,7 +37,7 @@ React, Internet Explorer 9 ve üzeri de dahil, tüm popüler tarayıcıları des
 ReactDOM.render(element, container[, callback])
 ```
 
-Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir  [referans](/docs/more-about-refs.html) donuyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#functional-and-class-components) icin `null` donuyoruz).
+Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir  [referans](/docs/more-about-refs.html) dönüyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#functional-and-class-components) icin `null` dönüyoruz).
 
 
 Eğer React elemanı `container` a daha önceden render edildiyse, bu; güncelleme olarak gerçekleşir ve en güncel React elemanını yansıtmak için sadece DOM'u değiştirir.
@@ -54,7 +54,7 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 > ve bundan kaçınılmalıdır, çünkü React'in gelecekteki sürümleri, bazı durumlarda bileşenleri eşzamansız olarak sağlayabilir. Kök `ReactComponent` nesnesine referans gerekiyorsa, tercih edilen çözüm  
 > kök elemana bir [callback referansı](/docs/more-about-refs.html#the-ref-callback-attribute) olmalıdır.
 >
-> Sunucu tarafından render edilen  bir konteynerı hidratlamak için `ReactDOM.render()`ın kullanılması artik desteklenmiyor ve React 17'de de  kaldırılacaktır. Bunun yerine [`hydrate()`](#hydrate) kullanılmalıdır.
+> Sunucu tarafından render edilen  bir konteynerı hidratlamak için `ReactDOM.render()`ın kullanılması artık desteklenmiyor ve React 17'de de  kaldırılacaktır. Bunun yerine [`hydrate()`](#hydrate) kullanılmalıdır.
 * * *
 
 ### `hydrate()` {#hydrate}
@@ -71,7 +71,7 @@ Tek bir elemanın özniteliği veya metin içeriği, sunucu ile istemci arasınd
 
 Kasıtlı olarak sunucuda ve istemcide farklı bir şey render etmeniz gerekirse, iki geçişli bir render yapabilirsiniz. İstemcide farklı bir şey render eden bileşenler, `this.state.isClient` gibi bir değişkeni okuyabilir; bu değeri `componentDidMount()`da `true` olarak ayarlayabilirsiniz. Bu şekilde, ilk render, yanlış eşleşmeleri önleyerek sunucu ile aynı içeriği oluşturur, ancak hidrasyondan hemen sonra eş zamanlı olarak ek bir geçiş gerçekleşir. Bu yaklaşımın, bileşenlerinizi yavaşlatacağını unutmayın, çünkü iki kez render olmaları gerekir, bu nedenle dikkatli kullanmalısınız.
 
-Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayınız. JavaScript kodu, ilk HTML renderindan önemli ölçüde sonra yüklenebilir; bu nedenle, yalnızca istemci geçişinde farklı bir şey render ederseniz, geçiş yavaş olabilir. Ancak, doğru şekilde çalıştırılırsa, sunucuda uygulamanın bir "kabuğunu" render etmek ve yalnızca istemcideki ekstra görsel parçacıkları göstermek yararlı olabilir. Biçimlendirme uyumsuzluğu sorunları olmadan bunu nasıl yapacağınızı öğrenmek için önceki paragraftaki açıklamaya bakabilirsiniz.
+Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayınız. JavaScript kodu, ilk HTML renderından önemli ölçüde sonra yüklenebilir; bu nedenle, yalnızca istemci geçişinde farklı bir şey render ederseniz, geçiş yavaş olabilir. Ancak, doğru şekilde çalıştırılırsa, sunucuda uygulamanın bir "kabuğunu" render etmek ve yalnızca istemcideki ekstra görsel parçacıkları göstermek yararlı olabilir. Biçimlendirme uyumsuzluğu sorunları olmadan bunu nasıl yapacağınızı öğrenmek için önceki paragraftaki açıklamaya bakabilirsiniz.
 
 * * *
 
@@ -81,7 +81,7 @@ Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayınız. JavaS
 ReactDOM.unmountComponentAtNode(container)
 ```
 
-DOM'den yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'lerini temizleyiniz. Konteynere hiçbir bileşen yuklenmemisse, bu fonksiyonu çağırmak hiçbir şey yapmaz. Bir bileşenin bağlantısı kaldırıldıysa `true` , kaldırılacak bir bileşen yoksa `false` döndürür.
+DOM'dan yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'lerini temizleyiniz. Konteynere hiçbir bileşen yüklenmemişse, bu fonksiyonu çağırmak hiçbir şey yapmaz. Bir bileşenin bağlantısı kaldırıldıysa `true` , kaldırılacak bir bileşen yoksa `false` döndürür.
 * * *
 
 ### `findDOMNode()` {#finddomnode}
@@ -93,7 +93,7 @@ DOM'den yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'leri
 ```javascript
 ReactDOM.findDOMNode(component)
 ```
-Bu bileşen DOM'a yuklemisse, ilgili yerel tarayıcına, DOM elemanını döner. Bu yöntem, form alanı değerleri gibi DOM dışındaki değerleri okumak ve DOM ölçümleri yapmak için kullanışlıdır. **Çoğu durumda, DOM elemanına bir referans ekleyebilir ve `findDOMNode` komutunu kullanmaktan kaçınabilirsiniz.**
+Bu bileşen DOM'a yüklenmişse, ilgili yerel tarayıcınıza, DOM elemanını döner. Bu yöntem, form alanı değerleri gibi DOM dışındaki değerleri okumak ve DOM ölçümleri yapmak için kullanışlıdır. **Çoğu durumda, DOM elemanına bir referans ekleyebilir ve `findDOMNode` komutunu kullanmaktan kaçınabilirsiniz.**
 
 Bir bileşen `null` veya `false` olarak render edildiğinde, `findDOMNode`, `null` döndürür. Bir bileşen string render ettiğinde, `findDOMNode`, bu değeri içeren bir metin DOM elemanı döndürür. React 16'dan itibaren, bir bileşen birden fazla alt elemana sahip bir fragment döndürebilir, bu durumda `findDOMNode`, boş olmayan ilk alt elemana karşılık gelen DOM elemanı döndürür.
 
