@@ -1,37 +1,37 @@
 ---
 id: cdn-links
-title: CDN Links
+title: CDN Bağlantıları
 permalink: docs/cdn-links.html
 prev: create-a-new-react-app.html
 next: hello-world.html
 ---
 
-Both React and ReactDOM are available over a CDN.
+Hem React'e hem de ReactDOM'a CDN üzerinden ulaşılabilir.
 
 ```html
 <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 ```
 
-The versions above are only meant for development, and are not suitable for production. Minified and optimized production versions of React are available at:
+Yukarıdaki sürümler yalnızca geliştirme amaçlıdır ve yayınlamaya uygun değildir. React'in küçültülmüş ve optimize edilmiş yayınlamaya uygun sürümleri şu adreste mevcuttur:
 
 ```html
 <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 ```
 
-To load a specific version of `react` and `react-dom`, replace `16` with the version number.
+`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `16`'yı sürüm numarası ile değiştirin.
 
-### Why the `crossorigin` Attribute? {#why-the-crossorigin-attribute}
+### Neden `crossorigin` Özelliği? {#why-the-crossorigin-attribute}
 
-If you serve React from a CDN, we recommend to keep the [`crossorigin`](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes) attribute set:
+Bir CDN'den React kullanıyorsanız, [`crossorigin`](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes) özelliğini ayarlı tutmanızı öneririz:
 
 ```html
 <script crossorigin src="..."></script>
 ```
 
-We also recommend to verify that the CDN you are using sets the `Access-Control-Allow-Origin: *` HTTP header:
+Ayrıca, kullandığınız CDN’nin `Access-Control-Allow-Origin: *` HTTP başlığını ayarladığını doğrulamanızı öneririz:
 
 ![Access-Control-Allow-Origin: *](../images/docs/cdn-cors-header.png)
 
-This enables a better [error handling experience](/blog/2017/07/26/error-handling-in-react-16.html) in React 16 and later.
+Bu, React 16 ve sonraki sürümlerinde daha iyi bir [hata işleme deneyimi](/blog/2017/07/26/error-handling-in-react-16.html) sağlar.

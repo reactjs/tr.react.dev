@@ -1,6 +1,6 @@
 ---
 id: dom-elements
-title: DOM Elements
+title: DOM Elemanları
 layout: docs
 category: Reference
 permalink: docs/dom-elements.html
@@ -14,31 +14,31 @@ redirect_from:
   - "tips/dangerously-set-inner-html.html"
 ---
 
-React implements a browser-independent DOM system for performance and cross-browser compatibility. We took the opportunity to clean up a few rough edges in browser DOM implementations.
+React, performans ve tarayıcılara uyumluluk sağlayabilmek için tarayıcı bağımsız bir DOM sistemi uygulamaktadır. Tarayıcı DOM geliştirmelerinde birkaç zorlu noktayı düzeltme fırsatı yakaladık.
 
-In React, all DOM properties and attributes (including event handlers) should be camelCased. For example, the HTML attribute `tabindex` corresponds to the attribute `tabIndex` in React. The exception is `aria-*` and `data-*` attributes, which should be lowercased. For example, you can keep `aria-label` as `aria-label`.
+React'te, tüm DOM özellikleri ve nitelikleri (olay işleyicileri dahil) camelCased olmalıdır. Örneğin, HTML niteliği olan `tabindex`, React'te `tabIndex`'e karşılık gelmektedir. Burada istisna olarak `aria-*` ve `data-*` nitelikleri bulunmaktadır. Bu nitelikler küçük harfli olmalıdır. Örneğin, `aria-label`'ı `aria-label` olarak yazabilirsiniz.
 
-## Differences In Attributes {#differences-in-attributes}
+## React ve HTML'deki Nitelik Farklılıkları {#differences-in-attributes}
 
-There are a number of attributes that work differently between React and HTML:
+React ve HTML'de birbirlerinden farklı çalışan birkaç nitelik bulunmaktadır:
 
 ### checked {#checked}
 
-The `checked` attribute is supported by `<input>` components of type `checkbox` or `radio`. You can use it to set whether the component is checked. This is useful for building controlled components. `defaultChecked` is the uncontrolled equivalent, which sets whether the component is checked when it is first mounted.
+`checked` niteliği `checkbox` veya `radio` tipinde olan `<input>` elemanlarında desteklenmektedir. Bu niteliği input elemanındaki değer ya da değerleri seçmek için kullanırsınız. Bu nitelik kontrollü bileşenleri oluşturmak için kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultChecked` bulunmaktadır. `defaultChecked` içeren  bileşen sayfada ilk oluştuğunda kontrol edilip edilmeyeceğini belirlemektedir.
 
 ### className {#classname}
 
-To specify a CSS class, use the `className` attribute. This applies to all regular DOM and SVG elements like `<div>`, `<a>`, and others.
+CSS sınıfı belirleyebilmek için `className` niteliğini kullanabilirsiniz. Bu nitelik bütün DOM ve SVG elemanlarına uygulanabilmektedir. Örneğin `<div>`, `<a>` ve diğerleri.
 
-If you use React with Web Components (which is uncommon), use the `class` attribute instead.
+React'i Web bileşenleri ile birlikte kullanırsanız (ki bu çok nadirdir), `class` niteliğini kullanmalısınız.
 
 ### dangerouslySetInnerHTML {#dangerouslysetinnerhtml}
 
-`dangerouslySetInnerHTML` is React's replacement for using `innerHTML` in the browser DOM. In general, setting HTML from code is risky because it's easy to inadvertently expose your users to a [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) attack. So, you can set HTML directly from React, but you have to type out `dangerouslySetInnerHTML` and pass an object with a `__html` key, to remind yourself that it's dangerous. For example:
+Tarayıcı DOM'unda kullanılan `innerHTML`'e karşılık React'te `dangerouslySetInnerHTML` kullanılır. Genellikle HTML'i kod üzerinden tanımlamak risklidir çünkü yanlışlıkla kullanıcılarınızı [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırısına maruz bırakabilirsiniz. React'te HTML'i doğrudan belirleyebilirsiniz ancak bunu yaparken HTML'i `dangerouslySetInnerHTML`'i `__html` anahtarı üzerinden yazmak zorundasız. Örneğin:
 
 ```js
 function createMarkup() {
-  return {__html: 'First &middot; Second'};
+  return {__html: 'Birinci &middot; İkinci'};
 }
 
 function MyComponent() {
@@ -48,23 +48,23 @@ function MyComponent() {
 
 ### htmlFor {#htmlfor}
 
-Since `for` is a reserved word in JavaScript, React elements use `htmlFor` instead.
+`for` Javascript'te kullanılan bir anahtar kelime olduğundan, React elemanları için `htmlFor` kullanmalısınız.
 
 ### onChange {#onchange}
 
-The `onChange` event behaves as you would expect it to: whenever a form field is changed, this event is fired. We intentionally do not use the existing browser behavior because `onChange` is a misnomer for its behavior and React relies on this event to handle user input in real time.
+`onChange` olayı beklediğiniz gibi davranış sergiler: bir form alanı değiştirildiğinde, bu olay başlatılır. Varolan tarayıcı davranışını bilerek kullanmıyoruz, çünkü `onChange` sergilediği davranışa göre yanlış isimdir. React, kullanıcı girdisini gerçek zamanlı olarak ele almak için bu olaya güvenmektedir.
 
 ### selected {#selected}
 
-The `selected` attribute is supported by `<option>` components. You can use it to set whether the component is selected. This is useful for building controlled components.
+`selected` niteliği `<option>` elemanı tarafından desteklenmektedir. Eleman içerisindeki bir değeri seçmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır.
 
 ### style {#style}
 
->Note
+>Not
 >
->Some examples in the documentation use `style` for convenience, but **using the `style` attribute as the primary means of styling elements is generally not recommended.** In most cases, [`className`](#classname) should be used to reference classes defined in an external CSS stylesheet. `style` is most often used in React applications to add dynamically-computed styles at render time. See also [FAQ: Styling and CSS](/docs/faq-styling.html).
+>Dokümantasyondaki bazı örneklerde kolaylık sağlamak amaçlı `style` kullanıldı, **fakat stil biçimlendirmede kullanılan `style` niteliğinin kullanılması genelde tavsiye edilmez**. Genellikle bu durumlarda [`className`](#classname) kullanılmalıdır. Bu şekilde harici CSS dosyalarında belirtilen class'ları kullanabilirsiniz. `style`'ın kullanım amacı genellikle React'te dinamik hesaplanan stillerin ekrana yansıtma anında ekleyebilmek için kullanılır. [SSS: CSS ve Stillendirme](/docs/faq-styling.html)'ye bakınız. 
 
-The `style` attribute accepts a JavaScript object with camelCased properties rather than a CSS string. This is consistent with the DOM `style` JavaScript property, is more efficient, and prevents XSS security holes. For example:
+`style` niteliği CSS string'i almak yerine camelCased şeklinde yazılmış özellikleri, JavaScript objesi halinde beklemektedir. Bu şekilde DOM `style` JavaScript özelliğiyle tutarlı hale gelmektedir. Ayrıca XSS güvenlik açıklarını önlemesinin de yanı sıra daha verimlidir. Örneğin:
 
 ```js
 const divStyle = {
@@ -73,70 +73,70 @@ const divStyle = {
 };
 
 function HelloWorldComponent() {
-  return <div style={divStyle}>Hello World!</div>;
+  return <div style={divStyle}>Merhaba Dünya!</div>;
 }
 ```
 
-Note that styles are not autoprefixed. To support older browsers, you need to supply corresponding style properties:
+Stiller otomatik düzeltilmemektedir. Eski tarayıcıları da desteklemek için ilgili stilleri belirtmeniz gerekmektedir:
 
 ```js
 const divStyle = {
-  WebkitTransition: 'all', // note the capital 'W' here
-  msTransition: 'all' // 'ms' is the only lowercase vendor prefix
+  WebkitTransition: 'all', // özelliğin burada büyük harfle başlamış olmasına dikkat ediniz
+  msTransition: 'all' // 'ms' küçük harf olarak yazılan tek vendor ön ekidir. 
 };
 
 function ComponentWithTransition() {
-  return <div style={divStyle}>This should work cross-browser</div>;
+  return <div style={divStyle}>Bütün tarayıcılarda çalışmalıdır.</div>;
 }
 ```
 
-Style keys are camelCased in order to be consistent with accessing the properties on DOM nodes from JS (e.g. `node.style.backgroundImage`). Vendor prefixes [other than `ms`](https://www.andismith.com/blogs/2012/02/modernizr-prefixed/) should begin with a capital letter. This is why `WebkitTransition` has an uppercase "W".
+Stil anahtarları, JS'deki DOM elemanlarındaki özelliklere erişimle tutarlı olmak için camelCased'dır. (örneğin `node.style.backgroundImage`). Vendor ön ekleri [`ms`'ten hariç](http://www.andismith.com/blog/2012/02/modernizr-prefixed/) büyük harf ile başlamalıdır. Bundan dolayı yukarıda `WebkitTransition`, büyük harfle "W" başlamıştır.
 
-React will automatically append a "px" suffix to certain numeric inline style properties. If you want to use units other than "px", specify the value as a string with the desired unit. For example:
+React otomatik olarak "px" son ekini belirli stil özelliklerine eklemektedir. "px" haricindeki diğer birimleri kullanmak istiyorsanız, değeri string olarak birimiyle beraber yazmalısınız.
 
 ```js
-// Result style: '10px'
+// Sonuç: '10px'
 <div style={{ height: 10 }}>
-  Hello World!
+  Merhaba Dünya!
 </div>
 
-// Result style: '10%'
+// Sonuç: '10%'
 <div style={{ height: '10%' }}>
-  Hello World!
+  Merhaba Dünya!
 </div>
 ```
 
-Not all style properties are converted to pixel strings though. Certain ones remain unitless (eg `zoom`, `order`, `flex`). A complete list of unitless properties can be seen [here](https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59).
+Tüm stil özellikleri piksel string'ine dönüştürülemez. Bazıları birimsiz kalmaktadır. Örneğin `zoom`, `order`, `flex`. Bütün birimi olmayan özellikler [burada](https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59) görebilirsiniz.
 
 ### suppressContentEditableWarning {#suppresscontenteditablewarning}
 
-Normally, there is a warning when an element with children is also marked as `contentEditable`, because it won't work. This attribute suppresses that warning. Don't use this unless you are building a library like [Draft.js](https://facebook.github.io/draft-js/) that manages `contentEditable` manually.
+Normalde, alt elemanları bulunan bir eleman `contentEditable` olarak işaretlendiğinde çalışmayacağına dair uyarı oluşmaktadır. `suppressContentEditableWarning` niteliği bu uyarıyı bastıracaktır. Bu niteliği [Draft.js](https://facebook.github.io/draft-js/) gibi `contentEditable`'ı manuel olarak yöneten bir kütüphane yazmayacaksınız kullanmamanızı tavsiye ederiz.
 
 ### suppressHydrationWarning {#suppresshydrationwarning}
 
-If you use server-side React rendering, normally there is a warning when the server and the client render different content. However, in some rare cases, it is very hard or impossible to guarantee an exact match. For example, timestamps are expected to differ on the server and on the client.
+Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı oluşturduğuna dair uyarı alırsınız. Fakat, çok nadiren, tam eşleşme neredeyse imkansızdır. Örneğin, timestamps sunucu ve istemcide farklı olması beklenir.
 
-If you set `suppressHydrationWarning` to `true`, React will not warn you about mismatches in the attributes and the content of that element. It only works one level deep, and is intended to be used as an escape hatch. Don't overuse it. You can read more about hydration in the [`ReactDOM.hydrate()` documentation](/docs/react-dom.html#hydrate).
+`suppressHydrationWarning`'i `true` olarak belirlerseniz, React sizi elemanın niteliklerindeki ve içeriğindeki uyuşmazlıklar hakkında uyarmayacaktır. Sadece bir derece aşağıya kadar çalışmaktadır. Bu nitelik çıkış kapısı olarak kullanılması amaçlanmıştır. Başka amaçlarda kullanılmamasını tavsiye ederiz. [`ReactDOM.hydrate()` dokümentasyonunda](/docs/react-dom.html#hydrate) hidrasyon ile ilgili daha fazla bilgi bulabilirsiniz.
 
 ### value {#value}
 
-The `value` attribute is supported by `<input>` and `<textarea>` components. You can use it to set the value of the component. This is useful for building controlled components. `defaultValue` is the uncontrolled equivalent, which sets the value of the component when it is first mounted.
+`value` niteliği `<input>` ve `<textarea>` elemanlarında kullanılmaktadır. Elemanın değerini belirleyebilmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultValue` bulunmaktadır. Bu nitelik elemanın değerini sayfada ilk oluştuğunda belirleyebilmek için kullanılır.
 
-## All Supported HTML Attributes {#all-supported-html-attributes}
+## Desteklenen Bütün HTML Nitelikleri {#all-supported-html-attributes}
 
-As of React 16, any standard [or custom](/blog/2017/09/08/dom-attributes-in-react-16.html) DOM attributes are fully supported.
+React 16'da herhangi bir standart [ya da özelleştirmede](/blog/2017/09/08/dom-attributes-in-react-16.html) DOM nitelikleri tamamen desteklenmektedir.
 
-React has always provided a JavaScript-centric API to the DOM. Since React components often take both custom and DOM-related props, React uses the `camelCase` convention just like the DOM APIs:
+React her zaman JavaScript merkezli API'ı DOM'a sağlamaktadır. React bileşenleri sık sık hem özel hem de DOM'la ilgili prop'ları aldığı için, React, DOM API'lardaki gibi `camelCase` konvansiyonunu kullanmaktadır.
 
 ```js
-<div tabIndex="-1" />      // Just like node.tabIndex DOM API
-<div className="Button" /> // Just like node.className DOM API
-<input readOnly={true} />  // Just like node.readOnly DOM API
+<div tabIndex="-1" />      // Tıpkı node.tabIndex DOM API gibi
+<div className="Button" /> // Tıpkı node.className DOM API gibi
+<input readOnly={true} />  // Tıpkı node.readOnly DOM API gibi
 ```
 
-These props work similarly to the corresponding HTML attributes, with the exception of the special cases documented above.
+Bu prop'lara karşılık gelen HTML nitelikleri benzer şekilde çalışmaktadır. (Yukarıda ifade edilen özel durumlar hariç)
 
-Some of the DOM attributes supported by React include:
+React tarafından desteklenen DOM niteliklerinden bazıları şunlardır:
 
 ```
 accept acceptCharset accessKey action allowFullScreen alt async autoComplete
@@ -154,7 +154,7 @@ sizes span spellCheck src srcDoc srcLang srcSet start step style summary
 tabIndex target title type useMap value width wmode wrap
 ```
 
-Similarly, all SVG attributes are fully supported:
+Benzer olarak, bütün SVG nitelikleri tamamen desteklenmektedir:
 
 ```
 accentHeight accumulate additive alignmentBaseline allowReorder alphabetic
@@ -193,4 +193,4 @@ xlinkHref xlinkRole xlinkShow xlinkTitle xlinkType xmlns xmlnsXlink xmlBase
 xmlLang xmlSpace y y1 y2 yChannelSelector z zoomAndPan
 ```
 
-You may also use custom attributes as long as they're fully lowercase.
+Özel nitelikleri tamamen küçük harfle yazmak şartıyla kullanabilirsiniz.

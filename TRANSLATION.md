@@ -107,6 +107,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | ------------------------- | ---------- |
 | array                     | dizi |
 | arrow function            | ok fonksiyonu |
+| attribute                 | özellik |
 | bug                       | hata |
 | bundler                   | paketleyici |
 | callback                  | callback |
@@ -116,9 +117,11 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | debugging                 | hata ayıklama |
 | DOM                       | DOM |
 | external                  | harici |
+| fragment                  | fragment |
 | framework                 | çatı |
 | function component        | fonksiyon bileşeni |
 | hook                      | hook |
+| instance                  | nesne |
 | internal                  | dahili |
 | key                       | anahtar |
 | lazy initialization       | lazy başlatım |
@@ -126,9 +129,11 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | lowercase                 | küçük harf |
 | parent                    | üst / üst eleman |
 | props                     | prop'ları |
+| pure                      | saf olarak / saf halde |
 | React element             | React elemanı |
+| Reference                 | Başvuru dokümanı |
 | render                    | render etmek |
-| shallow rendering         | shallow rendering |
+| shallow rendering         | yüzeysel render'lama / render etme |
 | state                     | state |
 | string                    | string |
 | template literals         | template literal'leri |

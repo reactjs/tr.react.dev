@@ -196,6 +196,8 @@ Kodu incelediğinizde aşağıdaki 3 React bileşenini fark edeceksiniz:
 
 Şimdi işe koyulalım ve Board bileşeninden Square bileşenimize bazı verileri göndermeyi deneyelim.
 
+Öğretici üzerinde çalışırken ve kopyala / yapıştır yerine, kodu elle yazmanızı şiddetle öneriyoruz. Bu, kas hafızanızı ve daha güçlü bir kavrayış geliştirmenize yardımcı olacaktır.
+
 Board'ın `renderSquare` metodunda, `value` prop'unu Square'e gönderecek şekilde kodu değiştirelim:
 
 ```js{3}
@@ -248,7 +250,7 @@ class Square extends React.Component {
 }
 ```
 
-Şimdi herhangi bir kareye tıkladığımızda tarayıcıda bir alert mesajı görüntülenecektir. 
+Şimdi herhangi bir kareye tıkladığımızda tarayıcınızda bir alert mesajı görüntülenecektir. 
 
 >Not:
 >
@@ -362,7 +364,9 @@ Bunu gerçekleştirmek için Board'un, her bir Square'e, kendi state'inin ne old
 
 **Bu örnekteki gibi, birçok çocuk bileşenden verilerin toplanması veya iki çocuğun birbirleri arasında iletişim kurabilmesi için, ebeveyn bileşende paylaşımlı bir state oluşturmanız gerekmektedir. Ebeveyn bileşen, prop'lar aracılığıyla state'ini çocuklara aktarabilir. Bu sayede çocuk bileşenler hem birbirleri arasında hem de ebeveyn ile senkronize hale gelirler.**
 
-React bileşenleri refactor edilirken, state'in ebeveyn'e taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım. Board'a bir constructor ekleyelim ve Board'un başlangıç state'ine bir dizi atayarak içerisinde 9 adet null değerinin bulunmasını sağlayalım. 9 kareye, 9 adet null karşılık gelecektir:
+React bileşenleri refactor edilirken, state'in ebeveyn'e taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım.
+
+Board'a bir constructor ekleyelim ve Board'un başlangıç state'ine bir dizi atayarak içerisinde 9 adet null değerinin bulunmasını sağlayalım. 9 kareye, 9 adet null karşılık gelecektir:
 
 ```javascript{2-7}
 class Board extends React.Component {
@@ -376,35 +380,9 @@ class Board extends React.Component {
   renderSquare(i) {
     return <Square value={i} />;
   }
-
-  render() {
-    const status = 'Next player: X';
-
-    return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
 ```
 
-Daha sonra Board'u doldurdukça, dizi içeriği aşağıdaki gibi görünmeye başlayacaktır: 
+Daha sonra Board'u doldurdukça, `this.state.squares` dizisinin içeriği aşağıdaki gibi görünmeye başlayacaktır: 
 
 ```javascript
 [
@@ -587,7 +565,7 @@ Mutable nesneler, direkt olarak değiştirilebildikleri için, değişip/değiş
 
 Immutable nesnelerdeki değişikliklerin tespit edilmesi daha kolaydır. Immutable nesne kopyalanarak ataması yapıldığı için, ilgili değişken, öncekinden farklı bir değişkene referans edilmişse o halde nesne değişmiştir diyebiliriz.
 
-#### Tekrar Render Etme Zamanı Kolayca Belirlenebilir {#determining-when-to-re-render-in-react}
+#### Tekrar Render Etme Zamanını Belirlemek {#determining-when-to-re-render-in-react}
 
 React'te Immutability'nin ana faydası ise, _pure component_'lar (saf/katıksız bileşenler) yapmayı kolaylaştırmasıdır. Immutable veriler, değişiklik yapıldığını kolayca tespit edebilirler. Bu sayede değişiklik olduğunda ilgili bileşenin tekrar render edilmesine yardımcı olurlar.
 
@@ -649,7 +627,9 @@ Herhangi bir oyuncu hamlesini yaptığında `xIsNext` (xSonrakiElemanMı) boolea
   }
 ```
 
-Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar. Ayrıca oyunda, sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için, Board'un `render` metodunda "status" değişkenini oluşturabiliriz:
+Bu değişiklik ile sayesinde, "X"'ler ve "O"'lar sırasıyla hamle yapabiliyor olacaklar.
+
+Ayrıca oyunda, sıradaki hamlenin kimde olduğunu gösteren metni değiştirmek için, Board'un `render` metodunda "status" değişkenini oluşturabiliriz:
 
 ```javascript{2}
   render() {
@@ -743,6 +723,8 @@ function calculateWinner(squares) {
   return null;
 }
 ```
+
+9 kareden oluşan bir dizi göz önüne alındığında, bu fonksiyon kazananı kontrol edecek ve uygun şekilde `'X'`, `'O'` veya `null` döndürecektir.
 
 Board'un `render` fonksiyonunda, `calculateWinner(squares)` fonksiyonunu çağırarak, ilgili oyuncunun kazanma durumunun kontrol edilmesini sağlayabiliriz. Hamleyi yapan oyuncu kazandıysa, "Winner: X" veya "Winner: O" gibi kazananı belirten bir metin görüntüleyebiliriz. Şimdi, Board'un `render` fonksiyonunda yer alan `status` değişkenini aşağıdaki şekilde değiştirelim:
 
