@@ -7,21 +7,15 @@ permalink: docs/glossary.html
 
 ---
 
-## Tek-sayfalık Uygulama {#single-page-application}
+## Tek-sayfalı Uygulama {#single-page-application}
 
-A single-page application is an application that loads a single HTML page and all the necessary assets (such as JavaScript and CSS) required for the application to run. Any interactions with the page or subsequent pages do not require a round trip to the server which means the page is not reloaded.
+Tek-sayfalı uygulama, uygulamanın çalışması için gereken tek bir HTML sayfasını ve gerekli tüm varlıkları (JavaScript ve CSS gibi) yükleyen bir uygulamadır. Sayfa veya sonraki sayfalar ile ilgili herhangi bir etkileşim sunucuya gidip gelmeye ihtiyaç duymaz, bu da sayfanın yeniden yüklenmediği anlamına gelir.
 
-Tek-sayfalık uygulama, uygulamanın çalışması için gereken tek bir HTML sayfasını ve gerekli tüm varlıkları (JavaScript ve CSS gibi) yükleyen bir uygulamadır. Sayfa veya sonraki sayfalar ile ilgili herhangi bir etkileşim sunucuya gidip gelmeye ihtiyaç duymaz, bu da sayfanın yeniden yüklenmediği anlamına gelir.
-
-Though you may build a single-page application in React, it is not a requirement. React can also be used for enhancing small parts of existing websites with additional interactivity. Code written in React can coexist peacefully with markup rendered on the server by something like PHP, or with other client-side libraries. In fact, this is exactly how React is being used at Facebook.
-
-React'te bir tek-sayfalık uygulama oluşturabilseniz de, bu bir gereksinim değildir. React ayrıca, mevcut web sitelerinin küçük parçalarını ilave etkileşim ile geliştirmek için de kullanılabilir. React'te yazılan kod, sunucuda PHP gibi bir şey tarafından oluşturulan işaretlemeyle veya diğer istemci tarafı kitaplıklarıyla barışçıl bir şekilde bir arada bulunabilir. Aslında, bu tam olarak React’in Facebook’ta nasıl kullanıldığıdır.
+React'te bir tek-sayfalı uygulama oluşturabilseniz de, bu bir gereksinim değildir. React ayrıca, mevcut web sitelerinin küçük parçalarını ilave etkileşim ile geliştirmek için de kullanılabilir. React'te yazılan kod, sunucuda PHP gibi bir şey tarafından oluşturulan işaretlemeyle veya diğer istemci tarafı kitaplıklarıyla barışçıl bir şekilde bir arada bulunabilir. Aslında, bu tam olarak React’in Facebook’ta kullanım şeklidir.
 
 ## ES6, ES2015, ES2016, vs. {#es6-es2015-es2016-etc}
 
-These acronyms all refer to the most recent versions of the ECMAScript Language Specification standard, which the JavaScript language is an implementation of. The ES6 version (also known as ES2015) includes many additions to the previous versions such as: arrow functions, classes, template literals, `let` and `const` statements. You can learn more about specific versions [here](https://en.wikipedia.org/wiki/ECMAScript#Versions).
-
-Bu kısaltmaların tümü, ECMAScript Dil Belirtimi standardının (JavaScript dilinin bir uygulaması olduğu) en yeni sürümlerine atıfta bulunur. ES6 sürümü (ES2015 olarak da bilinir) önceki sürümlere birçok ek içerir: ok işlevleri, sınıflar, hazır bilgi şablonları, `let` ve` const` ifadeleri. [Buradan](https://en.wikipedia.org/wiki/ECMAScript#Versions) spesifik versiyonlar hakkında daha fazla şey öğrenebilirsiniz.
+Bu kısaltmaların tümü, ECMAScript Dil Belirtimi standardının (JavaScript dilinin bir uygulaması) en yeni sürümlerine atıfta bulunur. ES6 sürümü (ES2015 olarak da bilinir) önceki sürümlere birçok ek içerir: ok işlevleri, sınıflar, hazır bilgi şablonları, `let` ve` const` ifadeleri. [Buradan](https://en.wikipedia.org/wiki/ECMAScript#Versions) spesifik versiyonlar hakkında daha fazla şey öğrenebilirsiniz.
 
 ## Derleyiciler {#compilers}
 
@@ -33,8 +27,6 @@ Paketleyiciler ayrı modüller (genellikle yüzlerce) olarak yazılmış JavaScr
 
 ## Paket Yöneticileri {#package-managers}
 
-[npm](https://www.npmjs.com/) and [Yarn](https://yarnpkg.com/) are two package managers commonly used in React applications. Both of them are clients for the same npm package registry.
-
 Paket yöneticileri, projenizdeki bağımlılıkları yönetmenize olanak sağlayan araçlardır. [npm](https://www.npmjs.com/) ve [Yarn](https://yarnpkg.com/) React uygulamalarında yaygın olarak kullanılan iki paket yöneticisidir. Her ikisi de aynı npm paket kayıt defteri için istemcilerdir.
 
 ## CDN {#cdn}
@@ -43,9 +35,9 @@ CDN, İçerik Dağıtım Ağı anlamına gelir. CDN'ler, dünya genelinde bir su
 
 ## JSX {#jsx}
 
-JSX is a syntax extension to JavaScript. It is similar to a template language, but it has full power of JavaScript. JSX gets compiled to `React.createElement()` calls which return plain JavaScript objects called "React elements". To get a basic introduction to JSX [see the docs here](/docs/introducing-jsx.html) and find a more in-depth tutorial on JSX [here](/docs/jsx-in-depth.html).
+JSX, JavaScript için bir sözdizimi uzantısıdır. Bir şablon diline benzer ancak JavaScript'in tam gücüne sahiptir. JSX, "React elemanları" olarak adlandırılan düz JavaScript nesnelerini döndüren `React.createElement ()` çağrıları için derlenir. JSX'e temel bir giriş yapmak için [buradaki belgelere bakın](/docs/introducing-jsx.html) ve JSX hakkında daha ayrıntılı eğitimlere [buradan](/docs/jsx-in-depth.html) ulaşın.
 
-React DOM uses camelCase property naming convention instead of HTML attribute names. For example, `tabindex` becomes `tabIndex` in JSX. The attribute `class` is also written as `className` since `class` is a reserved word in JavaScript:
+React DOM, HTML özellik adları yerine camelCase özellik adlandırma kuralını kullanır. Örneğin, JSX'te `tabindex` `tabIndex` olur. `class` özelliği de JavaScript'e özel bir sözcük olduğu için 'className` olarak yazılır:
 
 ```js
 const name = 'Clementine';
@@ -55,33 +47,25 @@ ReactDOM.render(
 );
 ```  
 
-## [Elements](/docs/rendering-elements.html) {#elements}
+## [Elemanlar](/docs/rendering-elements.html) {#elements}
 
-React elements are the building blocks of React applications. One might confuse elements with a more widely known concept of "components". An element describes what you want to see on the screen. React elements are immutable.
-
-React elemanları React uygulamalarının yapı taşlarıdır. Bir kişi, öğeleri daha yaygın olarak bilinen "bileşenler" kavramı ile karıştırabilir. Bir eleman ekranda görmek istediğinizi açıklar. React elemanları değişmezdir.
+React elemanları React uygulamalarının yapı taşlarıdır. Biri, öğeleri daha yaygın olarak bilinen "bileşenler" kavramı ile karıştırabilir. Bir eleman ekranda görmek istediğinizi açıklar. React elemanları değişmezdir.
 
 ```js
 const element = <h1>Hello, world</h1>;
 ```
 
-Typically, elements are not used directly, but get returned from components.
-
-Genellikle, öğeler doğrudan kullanılmaz, ancak bileşenlerden döndürülür.
+Genellikle, elemanlar doğrudan kullanılmaz, ancak bileşenlerden döndürülür.
 
 ## [Components](/docs/components-and-props.html) {#components}
 
-React components are small, reusable pieces of code that return a React element to be rendered to the page. The simplest version of React component is a plain JavaScript function that returns a React element:
-
-React bileşenleri, sayfaya bir React öğesi döndüren küçük, yeniden kullanılabilir kod parçalarıdır. React bileşeninin en basit sürümü, bir React öğesini döndüren düz bir JavaScript fonksiyonudur:
+React bileşenleri, sayfaya bir React öğesi döndüren küçük, yeniden kullanılabilir kod parçalarıdır. React bileşeninin en basit sürümü, bir React öğesi dönen düz bir JavaScript fonksiyonudur:
 
 ```js
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
 }
 ```
-
-Components can also be ES6 classes:
 
 Bileşenler ayrıca ES6 sınıfları olabilir:
 
@@ -95,13 +79,9 @@ class Welcome extends React.Component {
 
 Components can be broken down into distinct pieces of functionality and used within other components. Components can return other components, arrays, strings and numbers. A good rule of thumb is that if a part of your UI is used several times (Button, Panel, Avatar), or is complex enough on its own (App, FeedStory, Comment), it is a good candidate to be a reusable component. Component names should also always start with a capital letter (`<Wrapper/>` **not** `<wrapper/>`). See [this documentation](/docs/components-and-props.html#rendering-a-component) for more information on rendering components. 
 
-### [`props`](/docs/components-and-props.html) {#props}
-
-`props` are inputs to a React component. They are data passed down from a parent component to a child component.
+### [`prop'lar`](/docs/components-and-props.html) {#props}
 
 `props`, bir React bileşenine ait girdilerdir. Ana bileşenden bir alt bileşene aktarılan verilerdir.
-
-Remember that `props` are readonly. They should not be modified in any way:
 
 'props'ların salt okunur olduklarını unutmayın. Hiçbir şekilde değiştirilmemeleri gerekir:
 
@@ -109,8 +89,6 @@ Remember that `props` are readonly. They should not be modified in any way:
 // Yanlış!
 props.number = 42;
 ```
-
-If you need to modify some value in response to user input or a network response, use `state` instead.
 
 Kullanıcı girdisine veya bir ağ yanıtına cevap olarak bir değeri değiştirmeniz gerekirse, bunun yerine `state` kullanın.
 
@@ -122,9 +100,7 @@ Kullanıcı girdisine veya bir ağ yanıtına cevap olarak bir değeri değişti
 <Welcome>Hello world!</Welcome>
 ```
 
-The string `Hello world!` is available in `props.children` in the `Welcome` component:
-
-"Hello world!" dizgisi "Welcome" bileşenindeki props.children dizininde bulunur:
+"Hello world!" string'i "Welcome" bileşenindeki `props.children`da bulunur:
 
 ```js
 function Welcome(props) {
@@ -187,8 +163,6 @@ Handling events with React elements has some syntactic differences:
 * With JSX you pass a function as the event handler, rather than a string.
 * JSX ile bir dizge yerine olay işleyicisi olarak bir işlev iletirsiniz.
 
-## [Reconciliation](/docs/reconciliation.html) {#reconciliation}
+## [Uyumlaştırma](/docs/reconciliation.html) {#reconciliation}
 
-When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM. This process is called "reconciliation".
-
-Bir bileşenin prop'ları veya state'i değiştiğinde, React yeni döndürülen elemanı önceden oluşturulmuş olanla karşılaştırarak gerçek bir DOM güncellemesi gerekip gerekmediğine karar verir. Eşit olmadıklarında, React DOM'ı günceller. Bu sürece "uzlaşma" denir.
+Bir bileşenin prop'ları veya state'i değiştiğinde, React yeni döndürülen elemanı önceden oluşturulmuş olanla karşılaştırarak gerçek bir DOM güncellemesi gerekip gerekmediğine karar verir. Eşit olmadıklarında, React DOM'ı günceller. Bu sürece "uyumlaştırma" denir.
