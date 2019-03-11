@@ -61,14 +61,14 @@ Burada küçük uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her
       * `ProductCategoryRow`
       * `ProductRow`
 
-## Step 2: Build A Static Version in React {#step-2-build-a-static-version-in-react}
+## Adım 2: React'te Statik Versiyonunu Oluşturun {#step-2-build-a-static-version-in-react}
 
-<p data-height="600" data-theme-id="0" data-slug-hash="BwWzwm" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/BwWzwm">Thinking In React: Step 2</a> on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="600" data-theme-id="0" data-slug-hash="BwWzwm" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen"><a href="https://codepen.io">CodePen</a>'deki <a href="https://codepen.io/gaearon/pen/BwWzwm">React'te Düşünmek: Adım 2</a> sayfasını ziyaret edin.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-Now that you have your component hierarchy, it's time to implement your app. The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. It's best to decouple these processes because building a static version requires a lot of typing and no thinking, and adding interactivity requires a lot of thinking and not a lot of typing. We'll see why.
+Artık bileşen hiyerarşisine sahip olduğunuza göre, uygulamanızı hayata geçirme vakti geldi. Bunun en kolay yolu, veri modelinizi alıp, kullanıcı arayüzünü oluşturan; ancak etkileşimli (interaktif) olmayan bir sürüm oluşturmaktır. Bu noktada en iyi yaklaşım bu süreçleri birbirinden ayırmaktır. Çünkü statik bir versiyonu oluşturmak çok fazla yazmayı ama çok az düşünmeyi gerektirir. Bunun yanında etkileşimli (interaktif) versiyonunu yapmak çok daha fazla düşünmeyi ama daha az yazmayı gerektirir. Neden böyle olduğunu göreceğiz.
 
-To build a static version of your app that renders your data model, you'll want to build components that reuse other components and pass data using *props*. *props* are a way of passing data from parent to child. If you're familiar with the concept of *state*, **don't use state at all** to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don't need it.
+Veri modelinizi render eden bir statik versiyonu yapmak için, diğer bileşenleri kullanan ve *prop'lar* aracılığıyla veri ileten bileşenler oluşturmak isteyeceksiniz. *prop'lar* bileşenler arasında yukarıdan aşağıya veri iletmenin bir yoludur. Eğer *state* konseptina aşinaysanız, bu statik versiyonu oluşturmak için **state'leri hiçbir şekilde kullanmayın.** State konsepti sadece etkileşim, yani zaman içinde değişen verilerin olduğu durumlar, için ayrılmıştır. Buna, uygulamanın statik bir sürümü olduğundan, ihtiyacınız yoktur.
 
 You can build top-down or bottom-up. That is, you can either start with building the components higher up in the hierarchy (i.e. starting with `FilterableProductTable`) or with the ones lower in it (`ProductRow`). In simpler examples, it's usually easier to go top-down, and on larger projects, it's easier to go bottom-up and write tests as you build.
 
