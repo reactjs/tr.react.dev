@@ -1,14 +1,14 @@
 ---
 id: javascript-environment-requirements
-title: JavaScript Environment Requirements
+title: JavaScript Ortam Gereksinimleri
 layout: docs
 category: Reference
 permalink: docs/javascript-environment-requirements.html
 ---
 
-React 16 depends on the collection types [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set). If you support older browsers and devices which may not yet provide these natively (e.g. IE < 11) or which have non-compliant implementations (e.g. IE 11), consider including a global polyfill in your bundled application, such as [core-js](https://github.com/zloirock/core-js) or [babel-polyfill](https://babeljs.io/docs/usage/polyfill/).
+React 16 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) ve [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) gibi koleksiyon tiplerine bağlıdır. Eğer bunları henüz yerel olarak sağlayamayan (ör. IE <11) veya uyumlu olmayan uygulamaları (ör. IE 11) olan eski tarayıcıları ve cihazları destekliyorsanız, paketlenmiş uygulamanıza global polyfill dahil etmeyi düşünün. [core-js](https://github.com/zloirock/core-js) ya da [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) gibi.
 
-A polyfilled environment for React 16 using core-js to support older browsers might look like:
+React 16 için eski tarayıcıları destekleyen core-js kullanılan polyfilled bir ortam şöyle görünebilir:
 
 ```js
 import 'core-js/es6/map';
@@ -18,13 +18,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <h1>Merhaba, dünya!</h1>,
   document.getElementById('root')
 );
 ```
 
-React also depends on `requestAnimationFrame` (even in test environments).  
-You can use the [raf](https://www.npmjs.com/package/raf) package to shim `requestAnimationFrame`:
+React aynı zamanda `requestAnimationFrame`'e bağlıdır(test ortamında bile).
+`requestAnimationFrame` için [raf](https://www.npmjs.com/package/raf) paketini kullanabilirsiniz:
 
 ```js
 import 'raf/polyfill';
