@@ -1,6 +1,6 @@
 ---
 id: test-renderer
-title: Test Renderer
+title: Test Render Edici
 permalink: docs/test-renderer.html
 layout: docs
 category: Reference
@@ -13,13 +13,14 @@ import TestRenderer from 'react-test-renderer'; // ES6
 const TestRenderer = require('react-test-renderer'); // ES5 with npm
 ```
 
-## Overview {#overview}
+## Genel Bakış {#overview}
 
-This package provides a React renderer that can be used to render React components to pure JavaScript objects, without depending on the DOM or a native mobile environment.
 
-Essentially, this package makes it easy to grab a snapshot of the platform view hierarchy (similar to a DOM tree) rendered by a React DOM or React Native component without using a browser or [jsdom](https://github.com/tmpvar/jsdom).
+Bu paket, DOM'a veya yerel bir mobil ortama bağlı olmadan React bileşenlerini saf JavaScript objesine  dönüştürmek için kullanılabilecek bir React render edici sağlar.
 
-Example:
+Temel olarak, bu paket, bir tarayıcı veya [jsdom] (https://github.com/tmpvar/jsdom) kullanmadan, React DOM veya React Native bileşeninin oluşturduğu platform görünümü hiyerarşisinin (DOM ağacına benzer olarak) anlık görüntüsünü almayı kolaylaştırır.
+
+Örnek:
 
 ```javascript
 import TestRenderer from 'react-test-renderer';
@@ -38,9 +39,11 @@ console.log(testRenderer.toJSON());
 //   children: [ 'Facebook' ] }
 ```
 
-You can use Jest's snapshot testing feature to automatically save a copy of the JSON tree to a file and check in your tests that it hasn't changed: [Learn more about it](https://facebook.github.io/jest/blog/2016/07/27/jest-14.html).
+JSON ağacının bir kopyasını bir dosyaya otomatik olarak kaydetmek ve testlerinizde değişip değişmediğini kontrol etmek için Jest'in anlık görüntü test özelliğini kullanabilirsiniz [Daha fazla bilgi için](https://facebook.github.io/jest/blog/2016/07/27/jest-14.html).
 
-You can also traverse the output to find specific nodes and make assertions about them.
+
+Ayrıca bileşen çıktısı üzerinde gezerek, belirli düğümleri bulup bu düğümler üzerinde doğrulama metotlarını (toBe, toEqual vb.) çağırabilirsiniz:
+
 
 ```javascript
 import TestRenderer from 'react-test-renderer';
@@ -49,7 +52,7 @@ function MyComponent() {
   return (
     <div>
       <SubComponent foo="bar" />
-      <p className="my">Hello</p>
+      <p className="my">Merhaba</p>
     </div>
   )
 }
@@ -67,11 +70,11 @@ expect(testInstance.findByType(SubComponent).props.foo).toBe('bar');
 expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 ```
 
-### TestRenderer {#testrenderer}
+### Test Renderer {#testrenderer}
 
 * [`TestRenderer.create()`](#testrenderercreate)
 
-### TestRenderer instance {#testrenderer-instance}
+### TestRenderer Nesnesi {#testrenderer-instance}
 
 * [`testRenderer.toJSON()`](#testrenderertojson)
 * [`testRenderer.toTree()`](#testrenderertotree)
@@ -80,7 +83,7 @@ expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 * [`testRenderer.getInstance()`](#testrenderergetinstance)
 * [`testRenderer.root`](#testrendererroot)
 
-### TestInstance {#testinstance}
+### Test Nesnesi {#testinstance}
 
 * [`testInstance.find()`](#testinstancefind)
 * [`testInstance.findByType()`](#testinstancefindbytype)
@@ -94,7 +97,7 @@ expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 * [`testInstance.parent`](#testinstanceparent)
 * [`testInstance.children`](#testinstancechildren)
 
-## Reference {#reference}
+## Başvuru Dokümanı {#reference}
 
 ### `TestRenderer.create()` {#testrenderercreate}
 
@@ -102,7 +105,7 @@ expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 TestRenderer.create(element, options);
 ```
 
-Create a `TestRenderer` instance with the passed React element. It doesn't use the real DOM, but it still fully renders the component tree into memory so you can make assertions about it. The returned instance has the following methods and properties.
+İletilen React elemanı ile bir TestRenderer nesnesi oluşturun. Bu nesne gerçek DOM'u kullanmaz; ancak yine de bileşen ağacını tamamen belleğe render eder, böylece bu konuda doğrulamalar (assertions) yapabilirsiniz. Döndürülen nesne, aşağıda belirtilen metot ve özelliklere sahiptir:
 
 ### `testRenderer.toJSON()` {#testrenderertojson}
 
@@ -110,7 +113,7 @@ Create a `TestRenderer` instance with the passed React element. It doesn't use t
 testRenderer.toJSON()
 ```
 
-Return an object representing the rendered tree. This tree only contains the platform-specific nodes like `<div>` or `<View>` and their props, but doesn't contain any user-written components. This is handy for [snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest).
+İşlenen ağacı temsil eden bir nesne döndürün. Bu ağaç yalnızca <div> veya <View> gibi platforma özgü birimleri ve bunların bileşenlerini içerir, ancak kullanıcı tarafından yazılmış bileşenleri içermez.Bu, anlık görüntü [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) testi için kullanışlıdır.
 
 ### `testRenderer.toTree()` {#testrenderertotree}
 
@@ -118,7 +121,7 @@ Return an object representing the rendered tree. This tree only contains the pla
 testRenderer.toTree()
 ```
 
-Return an object representing the rendered tree. Unlike `toJSON()`, the representation is more detailed than the one provided by `toJSON()`, and includes the user-written components. You probably don't need this method unless you're writing your own assertion library on top of the test renderer.
+Render edilen ağacı temsil eden bir nesne döndürün. `toJSON()` 'dan farklı olarak, gösterim `toJSON()` tarafından sağlanandan daha fazla ayrıntıya sahiptir ve kullanıcı tarafından yazılan bileşenleri içerir. Test render ediciye ilave olarak kendi doğrulama kütüphanenizi yazmadığınız sürece muhtemelen bu yönteme ihtiyacınız olmayacaktır.
 
 ### `testRenderer.update()` {#testrendererupdate}
 
@@ -126,7 +129,7 @@ Return an object representing the rendered tree. Unlike `toJSON()`, the represen
 testRenderer.update(element)
 ```
 
-Re-render the in-memory tree with a new root element. This simulates a React update at the root. If the new element has the same type and key as the previous element, the tree will be updated; otherwise, it will re-mount a new tree.
+Dahili bellek ağacını yeni bir kök elemanla tekrar render edin. Bu, kökte bir React güncellemesini simüle eder. Yeni eleman, önceki elemanla aynı tip ve anahtara sahipse, ağaç güncellenir; aksi takdirde yeni bir ağaca yeniden monte edilir.
 
 ### `testRenderer.unmount()` {#testrendererunmount}
 
@@ -134,7 +137,7 @@ Re-render the in-memory tree with a new root element. This simulates a React upd
 testRenderer.unmount()
 ```
 
-Unmount the in-memory tree, triggering the appropriate lifecycle events.
+Uygun yaşam döngüsü olaylarını tetikleyerek dahili hafıza ağacını çıkarın.
 
 ### `testRenderer.getInstance()` {#testrenderergetinstance}
 
@@ -142,7 +145,7 @@ Unmount the in-memory tree, triggering the appropriate lifecycle events.
 testRenderer.getInstance()
 ```
 
-Return the instance corresponding to the root element, if available. This will not work if the root element is a function component because they don't have instances.
+Eğer mevcutsa, kök elemana karşılık gelen nesneyi döndürün. Kök eleman eğer bir fonksiyon bileşeni ise, bir nesnesi olmadığından çalışmaz.
 
 ### `testRenderer.root` {#testrendererroot}
 
@@ -150,7 +153,7 @@ Return the instance corresponding to the root element, if available. This will n
 testRenderer.root
 ```
 
-Returns the root "test instance" object that is useful for making assertions about specific nodes in the tree. You can use it to find other "test instances" deeper below.
+Ağaçtaki belirli düğümler hakkında doğrulama yapmaya yarayan kök "test nesnesini" döndürür. Aşağıda daha derinde bulunan diğer "test nesnelerini" bulmak için kullanabilirsiniz.
 
 ### `testInstance.find()` {#testinstancefind}
 
@@ -158,7 +161,7 @@ Returns the root "test instance" object that is useful for making assertions abo
 testInstance.find(test)
 ```
 
-Find a single descendant test instance for which `test(testInstance)` returns `true`. If `test(testInstance)` does not return `true` for exactly one test instance, it will throw an error.
+`test(testInstance)` 'ı `true` olarak döndüren tek bir alt test nesnesi bulun. Eğer bir test nesnesi için `test(testInstance)` `true` döndürmez ise, bir hata verecektir.
 
 ### `testInstance.findByType()` {#testinstancefindbytype}
 
@@ -166,7 +169,8 @@ Find a single descendant test instance for which `test(testInstance)` returns `t
 testInstance.findByType(type)
 ```
 
-Find a single descendant test instance with the provided `type`. If there is not exactly one test instance with the provided `type`, it will throw an error.
+Verilen `type` ile tek bir alt test nesnesi bulun. Verilen `type` ile tam bir test nesnesi yoksa, bir hata verecektir.
+
 
 ### `testInstance.findByProps()` {#testinstancefindbyprops}
 
@@ -174,7 +178,7 @@ Find a single descendant test instance with the provided `type`. If there is not
 testInstance.findByProps(props)
 ```
 
-Find a single descendant test instance with the provided `props`. If there is not exactly one test instance with the provided `props`, it will throw an error.
+Verilen prop'lara sahip olan bir alt test nesnesi bulun. Tam olarak verilen prop'lara sahip bir test nesnesi yoksa, bir hata verecektir.
 
 ### `testInstance.findAll()` {#testinstancefindall}
 
@@ -182,7 +186,7 @@ Find a single descendant test instance with the provided `props`. If there is no
 testInstance.findAll(test)
 ```
 
-Find all descendant test instances for which `test(testInstance)` returns `true`.
+`test(testInstance)`'ı `true` olarak döndüren tüm alt test nesnelerini bulun.
 
 ### `testInstance.findAllByType()` {#testinstancefindallbytype}
 
@@ -190,7 +194,8 @@ Find all descendant test instances for which `test(testInstance)` returns `true`
 testInstance.findAllByType(type)
 ```
 
-Find all descendant test instances with the provided `type`.
+Verilen `type` ile tüm alt test nesnelerini bulun.
+
 
 ### `testInstance.findAllByProps()` {#testinstancefindallbyprops}
 
@@ -198,7 +203,7 @@ Find all descendant test instances with the provided `type`.
 testInstance.findAllByProps(props)
 ```
 
-Find all descendant test instances with the provided `props`.
+Verilen `prop`'lara ile tüm alt test nesnelerini bulun.
 
 ### `testInstance.instance` {#testinstanceinstance}
 
@@ -206,7 +211,7 @@ Find all descendant test instances with the provided `props`.
 testInstance.instance
 ```
 
-The component instance corresponding to this test instance. It is only available for class components, as function components don't have instances. It matches the `this` value inside the given component.
+Bu test nesnesine karşılık gelen bileşen nesnesi. Fonksiyon bileşenlerinin nesneleri bulunmadığından yalnızca sınıf bileşenleri için kullanılabilir. Verilen bileşenin içindeki `this` değerine karşılık gelir.
 
 ### `testInstance.type` {#testinstancetype}
 
@@ -214,7 +219,7 @@ The component instance corresponding to this test instance. It is only available
 testInstance.type
 ```
 
-The component type corresponding to this test instance. For example, a `<Button />` component has a type of `Button`.
+Bu test nesnesine karşılık gelen bileşen türü. Örneğin, bir `<Button />` bileşeni bir tür `Button` türüne sahiptir.
 
 ### `testInstance.props` {#testinstanceprops}
 
@@ -222,7 +227,7 @@ The component type corresponding to this test instance. For example, a `<Button 
 testInstance.props
 ```
 
-The props corresponding to this test instance. For example, a `<Button size="small" />` component has `{size: 'small'}` as props.
+Bu test nesnesine karşılık gelen prop'lar. Örneğin, bir `<Button size ="small"/>` bileşeni props olarak `{size: 'small'}` 'a sahiptir.
 
 ### `testInstance.parent` {#testinstanceparent}
 
@@ -230,7 +235,8 @@ The props corresponding to this test instance. For example, a `<Button size="sma
 testInstance.parent
 ```
 
-The parent test instance of this test instance.
+Bu test nesnesinin üst test örneği.
+
 
 ### `testInstance.children` {#testinstancechildren}
 
@@ -238,13 +244,12 @@ The parent test instance of this test instance.
 testInstance.children
 ```
 
-The children test instances of this test instance.
+Bu test objesinin alt test nesneleri.
 
-## Ideas {#ideas}
 
-You can pass `createNodeMock` function to `TestRenderer.create` as the option, which allows for custom mock refs.
-`createNodeMock` accepts the current element and should return a mock ref object.
-This is useful when you test a component that relies on refs.
+## Öneriler {#ideas}
+
+`createNodeMock` fonksiyonunu, özel taklit referanslarına izin veren seçenek olarak“TestRenderer.create” 'e iletebilirsiniz. `createNodeMock`, mevcut elemanı kabul eder ve taklit olan bir başvuru nesnesi return eder. Bu, referanslara dayanan bir bileşeni test ederken kullanışlıdır.
 
 ```javascript
 import TestRenderer from 'react-test-renderer';
