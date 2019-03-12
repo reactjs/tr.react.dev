@@ -112,18 +112,18 @@ Sonuç olarak, state'imiz aşağıdaki gibidir:
 
 ## Step 4: Identify Where Your State Should Live {#step-4-identify-where-your-state-should-live}
 
-<p data-height="600" data-theme-id="0" data-slug-hash="qPrNQZ" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/qPrNQZ">Thinking In React: Step 4</a> on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="600" data-theme-id="0" data-slug-hash="qPrNQZ" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen"><a href="https://codepen.io">CodePen</a>'deki <a href="https://codepen.io/gaearon/pen/qPrNQZ">React'te Düşünmek: Adım 4</a> sayfasını ziyaret edin.</p>
 
-OK, so we've identified what the minimal set of app state is. Next, we need to identify which component mutates, or *owns*, this state.
+Evet, uygulama state'inin asgari düzeydeki setinin ne olduğunu belirledik. Şimdi, hangi bileşenin bu state'i değiştirdiğini veya *sahip olduğunu* belirlememiz gerekir.
 
-Remember: React is all about one-way data flow down the component hierarchy. It may not be immediately clear which component should own what state. **This is often the most challenging part for newcomers to understand,** so follow these steps to figure it out:
+Unutmayın: React'in tüm olayı, bileşen hiyerarşisinde yukarıdan aşağı doğru tek yönlü veri akışıdır. Hangi bileşenin hangi state'e sahip olması gerektiği hemen belli olmayabilir. **Bu, yeni gelenlerin anlaması için en zor kısımdır.** Bu yüzden, bunu anlamak için şu adımları izleyin:
 
-For each piece of state in your application:
+Uygulamanızdaki her state parçası için:
 
-  * Identify every component that renders something based on that state.
-  * Find a common owner component (a single component above all the components that need the state in the hierarchy).
-  * Either the common owner or another component higher up in the hierarchy should own the state.
-  * If you can't find a component where it makes sense to own the state, create a new component simply for holding the state and add it somewhere in the hierarchy above the common owner component.
+  * O state göre bir şeyler render eden her bileşeni belirleyin.
+  * Ortak bir sahip bileşen bulun. (Hiyerarşide, state'e ihtiyaç duyan bütün bileşenlerin üzerinde bulunan tek bir bileşen)
+  * *Ya ortak bir sahip bileşen ya da hiyerarşide daha yüksekte bulunan bir bileşen* state'e sahip olmalıdır.
+  * State'e sahip olması mantıklı olmayan bir bileşen bulamazsanız, yalnızca state'i tutması için yeni bir bileşen oluşturun ve onu hiyerarşide ortak sahip bileşeninin üzerindeki bir yere ekleyin.
 
 Let's run through this strategy for our application:
 
