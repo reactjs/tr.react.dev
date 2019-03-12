@@ -98,16 +98,17 @@ Uygulamanızın ihtiyaç duyduğu state'in mutlak asgari temsilini belirleyin ve
 
 Her birini gözden geçirelim ve hangisinin state'e dahil olduğunu bulalım. Bunun için, her veri parçasına dair üç soru sorun:
 
-  1. Is it passed in from a parent via props? If so, it probably isn't state.
-  2. Does it remain unchanged over time? If so, it probably isn't state.
-  3. Can you compute it based on any other state or props in your component? If so, it isn't state.
+  1. Üst elemandan prop'lar aracılığıyla mı iletilmiş? Eğer öylese state'e ait değildir.
+  2. Zaman içerisinde değişiklik göstermiyor mu? Eğer öyleyse state'e ait değildir.
+  3. Bileşeninizdeki herhangi başka bir state'e veya prop'a göre hesaplayabiliyor musunuz? Eğer öyleyse state'e ait değildir.
 
-The original list of products is passed in as props, so that's not state. The search text and the checkbox seem to be state since they change over time and can't be computed from anything. And finally, the filtered list of products isn't state because it can be computed by combining the original list of products with the search text and value of the checkbox.
+`Orijinal ürün listesi` prop olarak iletildiği için state'e ait değildir. `Arama metni` ve `checkbox`, zaman içerisinde değiştikleri ve başka bir şey üzerinden hesaplanamadıkları için state'e ait gibi duruyorlar. Ve son olarak, `filtrelenmiş ürün listesi` de; orijinal ürün listesi, arama metni ve checkbox ın değerine göre hesaplanabileceği için, state'e ait değildir.
 
-So finally, our state is:
 
-  * The search text the user has entered
-  * The value of the checkbox
+Sonuç olarak, state'imiz aşağıdaki gibidir:
+
+  * Kullanıcının girdiği arama metni
+  * Checkbox'ın değeri
 
 ## Step 4: Identify Where Your State Should Live {#step-4-identify-where-your-state-should-live}
 
