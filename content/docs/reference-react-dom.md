@@ -6,9 +6,9 @@ category: Reference
 permalink: docs/react-dom.html
 ---
 
-React, `<script>` elemanıyla yüklenirse, bu üst seviye API'ları `ReactDOM` üzerinden kullanılabilirsiniz. Mesela ES6 ile npm kullanıyorsanız, `import ReactDOM from 'react-dom'` yazabilir. ES5 ile npm kullanıyorsanız `var ReactDOM = require('react-dom')` yazabilirsiniz.
+React'i, `<script>` etiketinden yüklerseniz, bu üst seviye API'ları `ReactDOM` üzerinden kullanabilirsiniz. Eğer npm ile birlikte ES6 kullanıyorsanız, `import ReactDOM from 'react-dom'` yazabilirsiniz. Eğer npm ile birlikte ES5 kullanıyorsanız, `var ReactDOM = require('react-dom')` yazabilirsiniz.
 
-## Genel Taslak {#overview}
+## Genel Bakış {#overview}
 
 `react-dom` uygulamanın en üst seviyesinde, DOM'a özel metodlar sunar ve buda gerektiğinde React model'inin dışına çıkabilmenizi sağlar. Bu arada, çoğu bileşenlerin bu modülü kullanmasına gerek olmaz.
 
@@ -18,10 +18,10 @@ React, `<script>` elemanıyla yüklenirse, bu üst seviye API'ları `ReactDOM` �
 - [`findDOMNode()`](#finddomnode)
 - [`createPortal()`](#createportal)
 
-### Tarayıcı desteği {#browser-support}
+### Tarayıcı Desteği {#browser-support}
 
 
-React, Internet Explorer 9 ve üzeri de dahil, tüm popüler tarayıcıları desteklemekte, ama IE 9 ve IE 10 gibi eski tarayıcılarda [bazı eklentiler gerekmektedir](/docs/javascript-environment-requirements.html)  
+React, Internet Explorer 9 ve üzeri de dahil olmak üzere, tüm popüler tarayıcıları desteklemektedir. Ancak, IE 9 ve IE 10 gibi eski tarayıcılar için bazı polyfill'ler [eklentiler gerekmektedir](/docs/javascript-environment-requirements.html)  
 
 > Not
 >
