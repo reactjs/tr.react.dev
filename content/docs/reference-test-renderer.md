@@ -18,7 +18,7 @@ const TestRenderer = require('react-test-renderer'); // ES5 with npm
 
 Bu paket, DOM'a veya yerel bir mobil ortama bağlı olmadan React bileşenlerini saf JavaScript objesine  dönüştürmek için kullanılabilecek bir React render edici sağlar.
 
-Temel olarak, bu paket, bir tarayıcı veya [jsdom] (https://github.com/tmpvar) kullanmadan, React DOM veya React Native bileşeninin oluşturduğu platform görünümü hiyerarşisinin (DOM ağacına benzer olarak) anlık görüntüsünü almayı kolaylaştırır.
+Temel olarak, bu paket, bir tarayıcı veya [jsdom] (https://github.com/tmpvar/jsdom) kullanmadan, React DOM veya React Native bileşeninin oluşturduğu platform görünümü hiyerarşisinin (DOM ağacına benzer olarak) anlık görüntüsünü almayı kolaylaştırır.
 
 Örnek:
 
@@ -70,11 +70,11 @@ expect(testInstance.findByType(SubComponent).props.foo).toBe('bar');
 expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 ```
 
-### Test Render Edici {#testrenderer}
+### Test Renderer {#testrenderer}
 
 * [`TestRenderer.create()`](#testrenderercreate)
 
-### Test Render Edici Nesnesi {#testrenderer-instance}
+### TestRenderer Nesnesi {#testrenderer-instance}
 
 * [`testRenderer.toJSON()`](#testrenderertojson)
 * [`testRenderer.toTree()`](#testrenderertotree)
@@ -105,7 +105,7 @@ expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 TestRenderer.create(element, options);
 ```
 
-Geçirilen React elemaniyla bir `Test Render Edici` nesnesi oluşturun. Bu `Test Render Edici` nesnesi gerçek DOM'u kullanmaz, ancak bileşen ağacını yinede eksiksiz olarak belleğe render eder ve bu konuda doğrulama yapabilirsiniz. Oluşturulan bu nesne, aşağıdaki methodlara ve özelliklere sahiptir.
+İletilen React elemanı ile bir TestRenderer nesnesi oluşturun. Bu nesne gerçek DOM'u kullanmaz; ancak yine de bileşen ağacını tamamen belleğe render eder, böylece bu konuda doğrulamalar (assertions) yapabilirsiniz. Döndürülen nesne, aşağıda belirtilen metot ve özelliklere sahiptir:
 
 ### `testRenderer.toJSON()` {#testrenderertojson}
 
@@ -113,7 +113,7 @@ Geçirilen React elemaniyla bir `Test Render Edici` nesnesi oluşturun. Bu `Test
 testRenderer.toJSON()
 ```
 
-Render edilen ağacı temsil eden bir object return edin. Bu ağaç yalnızca `<div>` veya `<View>` gibi platforma özgü düğümleri ve bunların props larını içerir, ancak kullanıcı tarafından yazılmış bileşenleri içermez. Bu, [anlık görüntü](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) testi için kullanışlıdır.
+İşlenen ağacı temsil eden bir nesne döndürün. Bu ağaç yalnızca <div> veya <View> gibi platforma özgü birimleri ve bunların bileşenlerini içerir, ancak kullanıcı tarafından yazılmış bileşenleri içermez.Bu, anlık görüntü [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) testi için kullanışlıdır.
 
 ### `testRenderer.toTree()` {#testrenderertotree}
 
@@ -121,7 +121,7 @@ Render edilen ağacı temsil eden bir object return edin. Bu ağaç yalnızca `<
 testRenderer.toTree()
 ```
 
-Render edilen ağacı temsil eden bir nesne return edin. `toJSON()` 'dan farklı olarak, gösterim `toJSON()` tarafından sağlanandan daha fazla ayrıntıya sahiptir ve kullanıcı tarafından yazılan bileşenleri içerir. Test render ediciye ilave olarak kendi doğrulama kütüphanenizi yazmadığınız sürece muhtemelen bu yönteme ihtiyacınız olmayacaktır.
+Render edilen ağacı temsil eden bir nesne döndürün. `toJSON()` 'dan farklı olarak, gösterim `toJSON()` tarafından sağlanandan daha fazla ayrıntıya sahiptir ve kullanıcı tarafından yazılan bileşenleri içerir. Test render ediciye ilave olarak kendi doğrulama kütüphanenizi yazmadığınız sürece muhtemelen bu yönteme ihtiyacınız olmayacaktır.
 
 ### `testRenderer.update()` {#testrendererupdate}
 
@@ -145,7 +145,7 @@ Uygun yaşam döngüsü olaylarını tetikleyerek dahili hafıza ağacını çı
 testRenderer.getInstance()
 ```
 
-Eğer mevcutsa, kök elemana karşılık gelen nesneyi return edin. Kök eleman eğer bir fonksiyon bileşeni ise, bir nesnesi olmadığından çalışmaz.
+Eğer mevcutsa, kök elemana karşılık gelen nesneyi döndürün. Kök eleman eğer bir fonksiyon bileşeni ise, bir nesnesi olmadığından çalışmaz.
 
 ### `testRenderer.root` {#testrendererroot}
 
@@ -153,7 +153,7 @@ Eğer mevcutsa, kök elemana karşılık gelen nesneyi return edin. Kök eleman 
 testRenderer.root
 ```
 
-Ağaçtaki belirli düğümler hakkında doğrulama yapmaya yarayan kök "test nesnesini" return eder. Aşağıda daha derinde bulunan diğer "test nesnelerini" bulmak için kullanabilirsiniz.
+Ağaçtaki belirli düğümler hakkında doğrulama yapmaya yarayan kök "test nesnesini" döndürür. Aşağıda daha derinde bulunan diğer "test nesnelerini" bulmak için kullanabilirsiniz.
 
 ### `testInstance.find()` {#testinstancefind}
 
@@ -161,7 +161,7 @@ Ağaçtaki belirli düğümler hakkında doğrulama yapmaya yarayan kök "test n
 testInstance.find(test)
 ```
 
-`test(testInstance)` 'ı `true` olarak return eden tek bir alt test nesnesi bulun. Eğer bir test nesnesi için `test(testInstance)` `true` return etmezse, bir hata verecektir.
+`test(testInstance)` 'ı `true` olarak döndüren tek bir alt test nesnesi bulun. Eğer bir test nesnesi için `test(testInstance)` `true` döndürmez ise, bir hata verecektir.
 
 ### `testInstance.findByType()` {#testinstancefindbytype}
 
@@ -178,7 +178,7 @@ Verilen `type` ile tek bir alt test nesnesi bulun. Verilen `type` ile tam bir te
 testInstance.findByProps(props)
 ```
 
-Verilen `props` ile tek bir alt test nesnesi bulun. Verilen `props` ile tam bir test nesnesi yoksa, bir hata verecektir.
+Verilen prop'lara sahip olan bir alt test nesnesi bulun. Tam olarak verilen prop'lara sahip bir test nesnesi yoksa, bir hata verecektir.
 
 ### `testInstance.findAll()` {#testinstancefindall}
 
@@ -186,7 +186,7 @@ Verilen `props` ile tek bir alt test nesnesi bulun. Verilen `props` ile tam bir 
 testInstance.findAll(test)
 ```
 
-`test(testInstance)`'ı `true` olarak return eden tüm alt test nesnelerini bulun.
+`test(testInstance)`'ı `true` olarak döndüren tüm alt test nesnelerini bulun.
 
 ### `testInstance.findAllByType()` {#testinstancefindallbytype}
 
@@ -203,7 +203,7 @@ Verilen `type` ile tüm alt test nesnelerini bulun.
 testInstance.findAllByProps(props)
 ```
 
-Verilen `props` ile tüm alt test nesnelerini bulun.
+Verilen `prop`'lara ile tüm alt test nesnelerini bulun.
 
 ### `testInstance.instance` {#testinstanceinstance}
 
@@ -227,7 +227,7 @@ Bu test nesnesine karşılık gelen bileşen türü. Örneğin, bir `<Button />`
 testInstance.props
 ```
 
-Bu test nesnesine karşılık gelen props lar. Örneğin, bir `<Button size ="small"/>` bileşeni props olarak `{size: 'small'}` 'a sahiptir.
+Bu test nesnesine karşılık gelen prop'lar. Örneğin, bir `<Button size ="small"/>` bileşeni props olarak `{size: 'small'}` 'a sahiptir.
 
 ### `testInstance.parent` {#testinstanceparent}
 
@@ -244,7 +244,7 @@ Bu test nesnesinin üst test örneği.
 testInstance.children
 ```
 
-Bu test nesnesinin alt test örneği.
+Bu test objesinin alt test nesneleri.
 
 
 ## Öneriler {#ideas}
