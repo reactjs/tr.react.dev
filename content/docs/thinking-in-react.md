@@ -76,24 +76,27 @@ Bu adımın sonunda, veri modelinizi oluşturan yeniden kullanılabilir bileşen
 
 Bu adımı uygulamak için yardıma ihtiyaç duyarsanız, basitçe [React Dokümanlarına](/docs/) bakın.
 
-### A Brief Interlude: Props vs State {#a-brief-interlude-props-vs-state}
+### Kısa bir araya girme: Prop'lar vs State {#a-brief-interlude-props-vs-state}
 
 There are two types of "model" data in React: props and state. It's important to understand the distinction between the two; skim [the official React docs](/docs/interactivity-and-dynamic-uis.html) if you aren't sure what the difference is.
 
-## Step 3: Identify The Minimal (but complete) Representation Of UI State {#step-3-identify-the-minimal-but-complete-representation-of-ui-state}
+## Step 3: UI State'inin Minimal (ancak eksiksiz) Temsilini Belirleme {#step-3-identify-the-minimal-but-complete-representation-of-ui-state}
 
-To make your UI interactive, you need to be able to trigger changes to your underlying data model. React makes this easy with **state**.
+Kullanıcı arayüzünüzü etkileşimli hale getirmek için, temel veri modelinizde değişiklikleri tetikleyebilmeniz gerekir. React bunu **state** ile kolaylaştırmaktadır.
 
-To build your app correctly, you first need to think of the minimal set of mutable state that your app needs. The key here is [DRY: *Don't Repeat Yourself*](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). Figure out the absolute minimal representation of the state your application needs and compute everything else you need on-demand. For example, if you're building a TODO list, just keep an array of the TODO items around; don't keep a separate state variable for the count. Instead, when you want to render the TODO count, simply take the length of the TODO items array.
 
-Think of all of the pieces of data in our example application. We have:
+Uygulamanızı doğru bir şekilde oluşturmak için, öncelikle uygulamanızın ihtiyaç duyduğu minimum değişken `state` kümesini düşünmeniz gerekir. Burada anahtar kelime [*TEK: Tekrar Etme Kendini*](https://eksisozluk.com/entry/35405641) (DRY: *Don't Repeat Yourself*) dir.
+Uygulamanızın ihtiyaç duyduğu state'in mutlak asgari temsilini belirleyin ve talep üzerine ihtiyacınız olan her şeyi hesaplayın. Örneğin; bir YAPILACAKLAR listesi oluşturuyorsanız, sadece YAPILACAKLAR listesini tutan bir dizi saklayın; listedeki madde sayısı için ayrı bir state değişkeni tutmayın. Bunun yerine, listedeki madde sayısını render etmek istediğinizde, sadece YAPILACAKLAR dizisinin uzunluğunu alıp kullanın.
 
-  * The original list of products
-  * The search text the user has entered
-  * The value of the checkbox
-  * The filtered list of products
 
-Let's go through each one and figure out which one is state. Simply ask three questions about each piece of data:
+Örnek uygulamamızdaki sahip olduğumuz tüm veri parçalarına bakalım:
+
+  * Orijinal ürün listesi
+  * Kullanıcının girdiği arama metni
+  * Checkbox'ın değeri
+  * Filtrelenmiş ürün listesi
+
+Her birini gözden geçirelim ve hangisinin state'e dahil olduğunu bulalım. Bunun için, her veri parçasına dair üç soru sorun:
 
   1. Is it passed in from a parent via props? If so, it probably isn't state.
   2. Does it remain unchanged over time? If so, it probably isn't state.
