@@ -116,10 +116,13 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | controlled component      | kontrollü bileşen |
 | debugging                 | hata ayıklama |
 | DOM                       | DOM |
+| event                     | olay |
+| event handler             | olay yöneticisi |
 | external                  | harici |
 | fragment                  | fragment |
 | framework                 | çatı |
 | function component        | fonksiyon bileşeni |
+| handler                   | yönetici |
 | hook                      | hook |
 | instance                  | nesne |
 | internal                  | dahili |
