@@ -126,42 +126,43 @@ The most important difference between `state` and `props` is that `props` are pa
 
 For each particular piece of changing data, there should be just one component that "owns" it in its state. Don't try to synchronize states of two different components. Instead, [lift it up](/docs/lifting-state-up.html) to their closest shared ancestor, and pass it down as props to both of them.
 
-## [Lifecycle Methods](/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) {#lifecycle-methods}
+## [Yaşam Döngüsü Metotları](/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) {#lifecycle-methods}
 
 Lifecycle methods are custom functionality that gets executed during the different phases of a component. There are methods available when the component gets created and inserted into the DOM ([mounting](/docs/react-component.html#mounting)), when the component updates, and when the component gets unmounted or removed from the DOM.
 
- ## [Controlled](/docs/forms.html#controlled-components) vs. [Uncontrolled Components](/docs/uncontrolled-components.html)
+Yaşam döngüsü metotları, bir bileşenin farklı aşamalarında yürütülen özel fonksiyonelliklerdir.
 
-React has two different approaches to dealing with form inputs. 
+ ## [Kontrollü](/docs/forms.html#controlled-components) ve [Kontrolsüz Bileşenlerin](/docs/uncontrolled-components.html) Farkları
 
-An input form element whose value is controlled by React is called a *controlled component*. When a user enters data into a controlled component a change event handler is triggered and your code decides whether the input is valid (by re-rendering with the updated value). If you do not re-render then the form element will remain unchanged.
+React, form girdilerini yönetmek için iki farklı yaklaşıma sahiptir.
+
+Değeri React tarafından kontrol edilen bir girdi formu elemanına *kontrollü bileşen* denir. Kullanıcı bir kontrollü bileşene veri girdiğinde bir değişim olay yöneticisi tetiklenir ve kodunuz girdinin geçerli olup olmadığına karar verir (güncellenmiş değerle yeniden render ederek). Eğer yeniden render etmezseniz, form elemanı değişmeden kalacaktır.
 
 An *uncontrolled component* works like form elements do outside of React. When a user inputs data into a form field (an input box, dropdown, etc) the updated information is reflected without React needing to do anything. However, this also means that you can't force the field to have a certain value.
 
-In most cases you should use controlled components.
+Çoğu durumda kontrollü bileşenler kullanmalısınız.
 
-## [Keys](/docs/lists-and-keys.html) {#keys}
+## [Anahtarlar](/docs/lists-and-keys.html) {#keys}
 
-A "key" is a special string attribute you need to include when creating arrays of elements. Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside an array to give the elements a stable identity.
+Bir "anahtar", eleman dizileri oluştururken eklemeniz gereken özel bir string özelliğidir. Anahtarlar, React'in hangi öğelerin değiştiğini, eklendiğini veya kaldırıldığını belirlemesine yardımcı olur. Elemanlara stabil bir kimlik kazandırmak için bir dizideki elemanlara anahtarlar verilmelidir.
 
-Keys only need to be unique among sibling elements in the same array. They don't need to be unique across the whole application or even a single component.
+Anahtarların yalnızca aynı dizideki kardeş elemanlar arasında benzersiz olması gerekir. Tüm uygulama boyunca veya hatta tek bir bileşende bile benzersiz olmaları gerekmez.
 
-Don't pass something like `Math.random()` to keys. It is important that keys have a "stable identity" across re-renders so that React can determine when items are added, removed, or re-ordered. Ideally, keys should correspond to unique and stable identifiers coming from your data, such as `post.id`.
+`Math.random()` gibi şeyleri anahtarlara iletmeyin. Anahtarların yeniden render ediciler arasında bir "stabil kimliğe" sahip olması önemlidir, böylece React elemanların ne zaman ekleneceğini, kaldırıldığını veya yeniden sıralandığını belirler. İdeal olarak, anahtarlar `post.id` gibi verilerinizden gelen benzersiz ve stabil tanımlayıcılara karşılık gelmelidir.
 
-## [Refs](/docs/refs-and-the-dom.html) {#refs}
+## [Ref'ler](/docs/refs-and-the-dom.html) {#refs}
 
-React supports a special attribute that you can attach to any component. The `ref` attribute can be an object created by [`React.createRef()` function](/docs/react-api.html#reactcreateref) or a callback function, or a string (in legacy API). When the `ref` attribute is a callback function, the function receives the underlying DOM element or class instance (depending on the type of element) as its argument. This allows you to have direct access to the DOM element or component instance.
+React herhangi bir bileşene ekleyebileceğiniz özel bir özelliği destekler. `ref` özelliği, [`React.createRef()` fonksiyonu](/docs/react-api.html#reactcreateref), callback fonksiyonu veya bir string (eski API'da) tarafından oluşturulan bir nesne olabilir. 
+`ref` özelliği bir callback fonksiyonu olduğunda, fonksiyon temel DOM öğesini veya sınıf nesnesine (elemanın türüne bağlı olarak) argümanı olarak alır. Bu, DOM elemanına veya bileşen nesnesine doğrudan erişmenize izin verir.
 
-Use refs sparingly. If you find yourself often using refs to "make things happen" in your app, consider getting more familiar with [top-down data flow](/docs/lifting-state-up.html).
+Ref'leri tutumlu bir şekilde kullanın. Eğer kendinizi uygulamanızda sürekli "bir şeyleri gerçekleştirmek" için ref kullanırken buluyorsanız, [yukarıdan aşağı veri akışı](/docs/lifting-state-up.html) ile daha aşina olmayı düşünün.
 
-## [Events](/docs/handling-events.html) {#events}
+## [Olaylar](/docs/handling-events.html) {#events}
 
-Handling events with React elements has some syntactic differences:
+Olayları React elemanlarıyla yönetme, söz dizimsel bazı farklılıklara sahiptir:
 
-* React event handlers are named using camelCase, rather than lowercase.
-* React olay işleyicileri, küçük harf yerine camelCase kullanılarak adlandırılır.
-* With JSX you pass a function as the event handler, rather than a string.
-* JSX ile bir dizge yerine olay işleyicisi olarak bir işlev iletirsiniz.
+* React olay yöneticileri, küçük harf yerine camelCase kullanılarak adlandırılır.
+* JSX ile bir fonksiyonu string yerine olay yöneticisi olarak iletirsiniz.
 
 ## [Uyumlaştırma](/docs/reconciliation.html) {#reconciliation}
 
