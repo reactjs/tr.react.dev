@@ -1,111 +1,111 @@
-- title: Tutorial
+- title: Öğretici
   items:
     - id: before-we-start-the-tutorial
-      title: Before We Start the Tutorial
+      title: Öğrenmeye Başlamadan
       href: /tutorial/tutorial.html#before-we-start-the-tutorial
       forceInternal: true
       subitems:
         - id: what-are-we-building
-          title: What Are We Building?
+          title: Ne Geliştiriyoruz?
           href: /tutorial/tutorial.html#what-are-we-building
           forceInternal: true
         - id: prerequisites
-          title: Prerequisites
+          title: Ön Koşullar
           href: /tutorial/tutorial.html#prerequisites
           forceInternal: true
     - id: setup-for-the-tutorial
-      title: Setup for the Tutorial
+      title: Kurulum
       href: /tutorial/tutorial.html#setup-for-the-tutorial
       forceInternal: true
       subitems:
         - id: setup-option-1-write-code-in-the-browser
-          title: "Option 1: Write Code in the Browser"
+          title: "1. Seçenek: Tarayıcıda Kodla"
           href: /tutorial/tutorial.html#setup-option-1-write-code-in-the-browser
           forceInternal: true
         - id: setup-option-2-local-development-environment
-          title: "Option 2: Local Development Environment"
+          title: "2. Seçenek: Yerel Geliştirme Çevresi"
           href: /tutorial/tutorial.html#setup-option-2-local-development-environment
           forceInternal: true
         - id: help-im-stuck
-          title: Help, I'm Stuck!
+          title: Takıldım, yardım edin!
           href: /tutorial/tutorial.html#help-im-stuck
           forceInternal: true
     - id: overview
-      title: Overview
+      title: Genel Bakış
       href: /tutorial/tutorial.html#overview
       forceInternal: true
       subitems:
         - id: what-is-react
-          title: What Is React?
+          title: React nedir?
           href: /tutorial/tutorial.html#what-is-react
           forceInternal: true
         - id: inspecting-the-starter-code
-          title: Inspecting the Starter Code
+          title: Başlangıç Kodunu İnceleyelim
           href: /tutorial/tutorial.html#inspecting-the-starter-code
           forceInternal: true
         - id: passing-data-through-props
-          title: Passing Data Through Props
+          title: Prop'lar yoluyla Veri Gönderme
           href: /tutorial/tutorial.html#passing-data-through-props
           forceInternal: true
         - id: making-an-interactive-component
-          title: Making an Interactive Component
+          title: Etkileşimli Bileşen Oluşturma
           href: /tutorial/tutorial.html#making-an-interactive-component
           forceInternal: true
         - id: developer-tools
-          title: Developer Tools
+          title: Geliştirici Araçları
           href: /tutorial/tutorial.html#developer-tools
           forceInternal: true
     - id: completing-the-game
-      title: Completing the Game
+      title: Oyunu Tamamlama
       href: /tutorial/tutorial.html#completing-the-game
       forceInternal: true
       subitems:
         - id: lifting-state-up
-          title: Lifting State Up
+          title: State'leri Kaldırma
           href: /tutorial/tutorial.html#lifting-state-up
           forceInternal: true
         - id: why-immutability-is-important
-          title: Why Immutability Is Important
+          title: Değişmezlik Niçin Önemli
           href: /tutorial/tutorial.html#why-immutability-is-important
           forceInternal: true
         - id: function-components
-          title: Function Components
+          title: Fonksiyon Bileşenleri
           href: /tutorial/tutorial.html#function-components
           forceInternal: true
         - id: taking-turns
-          title: Taking Turns
+          title: Sıraya Alma
           href: /tutorial/tutorial.html#taking-turns
           forceInternal: true
         - id: declaring-a-winner
-          title: Declaring a Winner
+          title: Kazananı Bildirme
           href: /tutorial/tutorial.html#declaring-a-winner
           forceInternal: true
     - id: adding-time-travel
-      title: Adding Time Travel
+      title: Zamanda Yolculuk Ekleme
       href: /tutorial/tutorial.html#adding-time-travel
       forceInternal: true
       subitems:
         - id: storing-a-history-of-moves
-          title: Storing a History of Moves
+          title: Hareketlerin Geçmişini Saklama
           href: /tutorial/tutorial.html#storing-a-history-of-moves
           forceInternal: true
         - id: lifting-state-up-again
-          title: Lifting State Up, Again
+          title: Yeniden Sıraya Alma
           href: /tutorial/tutorial.html#lifting-state-up-again
           forceInternal: true
         - id: showing-the-past-moves
-          title: Showing the Past Moves
+          title: Geçmiş Hareketleri Gösterme
           href: /tutorial/tutorial.html#showing-the-past-moves
           forceInternal: true
         - id: picking-a-key
-          title: Picking a Key
+          title: Anahtar Toplama
           href: /tutorial/tutorial.html#picking-a-key
           forceInternal: true
         - id: implementing-time-travel
-          title: Implementing Time Travel
+          title: Zamanda Yolculuk Uygulama
           href: /tutorial/tutorial.html#implementing-time-travel
           forceInternal: true
         - id: wrapping-up
-          title: Wrapping Up
+          title: Tamamlama
           href: /tutorial/tutorial.html#wrapping-up
           forceInternal: true
