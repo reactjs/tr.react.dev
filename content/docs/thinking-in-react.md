@@ -110,7 +110,7 @@ Sonuç olarak, state'imiz aşağıdaki gibidir:
   * Kullanıcının girdiği arama metni
   * Checkbox'ın değeri
 
-## Step 4: Identify Where Your State Should Live {#step-4-identify-where-your-state-should-live}
+## Adım 4: State'inizin Nerede Yaşaması Gerektiğini Belirleyin {#step-4-identify-where-your-state-should-live}
 
 <p data-height="600" data-theme-id="0" data-slug-hash="qPrNQZ" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen"><a href="https://codepen.io">CodePen</a>'deki <a href="https://codepen.io/gaearon/pen/qPrNQZ">React'te Düşünmek: Adım 4</a> sayfasını ziyaret edin.</p>
 
@@ -125,15 +125,15 @@ Uygulamanızdaki her state parçası için:
   * *Ya ortak bir sahip bileşen ya da hiyerarşide daha yüksekte bulunan bir bileşen* state'e sahip olmalıdır.
   * State'e sahip olması mantıklı olmayan bir bileşen bulamazsanız, yalnızca state'i tutması için yeni bir bileşen oluşturun ve onu hiyerarşide ortak sahip bileşeninin üzerindeki bir yere ekleyin.
 
-Let's run through this strategy for our application:
+Şimdi bu stratejiyi uygulamamız için uygulayalım:
 
-  * `ProductTable` needs to filter the product list based on state and `SearchBar` needs to display the search text and checked state.
-  * The common owner component is `FilterableProductTable`.
-  * It conceptually makes sense for the filter text and checked value to live in `FilterableProductTable`
+  * `ProductTable` ürün listesini state'e göre filtrelemeli ve `SearchBar` arama metnini ve *Checkbox*'ın durumunu göstermelidir.
+  * Ortak sahip bileşen `FilterableProductTable` bileşinidir.
+  * Filtre metninin ve *Checkbox* değerininin `FilterableProductTable` içinde yaşaması mantıklıdır.
 
-Cool, so we've decided that our state lives in `FilterableProductTable`. First, add an instance property `this.state = {filterText: '', inStockOnly: false}` to `FilterableProductTable`'s `constructor` to reflect the initial state of your application. Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as a prop. Finally, use these props to filter the rows in `ProductTable` and set the values of the form fields in `SearchBar`.
+Harika; state'imizin `FilterableProductTable` bileşeninde yaşamasına karar verdik. İlk olarak, uygulamanın giriş state'ini belirlemek için `this.state = {filterText: '', inStockOnly: false}` nesne özelliğini `constructor`'a ekleyin. Devamında, `filterText` ve `inStockOnly` değerlerini `ProductTable` ve `SearchBar` bileşenlerine prop olarak iletin. Son olarak, `ProductTable`'daki satırları filtrelemek ve form alanlarının değerlerini `SearchBar`'da ayarlamak için bu prop'ları kullanın.
 
-You can start seeing how your application will behave: set `filterText` to `"ball"` and refresh your app. You'll see that the data table is updated correctly.
+Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz: `filterText`'i `top` olarak ayarlayın ve uygulamanızı yenileyin. Veri tablosunun doğru bir şekilde güncellendiğini göreceksiniz.
 
 ## Step 5: Add Inverse Data Flow {#step-5-add-inverse-data-flow}
 
