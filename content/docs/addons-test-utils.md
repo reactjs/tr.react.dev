@@ -44,7 +44,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 
 ### `act()` {#act}
 
-Bileşen testlerini hazırlamak için kodunuzu paket haline getirin ve `act()`'i kullanarak bileşeniniz içersinde güncelleme yapabilirsiniz. `act()`, React'ın tarayıcıda çalışma biçimine çok yakın bir şekilde çalışmasını sağlamaktadır.
+Bileşen testlerini hazırlamak için kodunuzu paket haline getirin ve `act()`'i kullanarak bileşeniniz içerisinde güncelleme yapabilirsiniz. `act()`, React'ın tarayıcıda çalışma biçimine çok yakın bir şekilde çalışmasını sağlamaktadır.
 
 >Not
 >
