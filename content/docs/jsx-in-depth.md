@@ -1,6 +1,6 @@
 ---
 id: jsx-in-depth
-title: JSX In Depth
+title: Derinlemesine JSX 
 permalink: docs/jsx-in-depth.html
 redirect_from:
   - "docs/jsx-spread.html"
@@ -13,31 +13,31 @@ redirect_from:
   - "docs/jsx-in-depth-ko-KR.html"
 ---
 
-Fundamentally, JSX just provides syntactic sugar for the `React.createElement(component, props, ...children)` function. The JSX code:
+Esas olarak, `React.createElement(component, props, ...children)` fonksiyonu için JSX sözdizimsel güzellik sağlar.
 
 ```js
 <MyButton color="blue" shadowSize={2}>
-  Click Me
+  Bana Tıkla
 </MyButton>
 ```
 
-compiles into:
+Yukarıdaki JSX kodunu aşağıdaki gibi derler:
 
 ```js
 React.createElement(
   MyButton,
   {color: 'blue', shadowSize: 2},
-  'Click Me'
+  'Bana Tıkla'
 )
 ```
 
-You can also use the self-closing form of the tag if there are no children. So:
+Alt elemanı olmayan bir etiket kullanıyorsanız, tek etiket içerisinde kapatabilirsiniz:
 
 ```js
 <div className="sidebar" />
 ```
 
-compiles into:
+JSX kodu aşağıdaki gibi derler:
 
 ```js
 React.createElement(
@@ -47,19 +47,19 @@ React.createElement(
 )
 ```
 
-If you want to test out how some specific JSX is converted into JavaScript, you can try out [the online Babel compiler](babel://jsx-simple-example).
+Eğer belirli JSX'in nasıl JavaScript'e dönüştürüldüğünü test etmek istiyorsanız, [çevrimiçi Babel derleyicisini](babel://jsx-simple-example) deneyin.
 
-## Specifying The React Element Type {#specifying-the-react-element-type}
+## React Element Tipini Belirtmek {#specifying-the-react-element-type}
 
-The first part of a JSX tag determines the type of the React element.
+JSX etiketinin ilk kısmı React elementinin tipini belirler.
 
-Capitalized types indicate that the JSX tag is referring to a React component. These tags get compiled into a direct reference to the named variable, so if you use the JSX `<Foo />` expression, `Foo` must be in scope.
+Büyük harfli JSX tipleri bir React bileşenine atıfta bulunduğunu gösterir. Bu etiketler adlandırılmış değişkene doğrudan derlenir, bu yüzden eğer `<Foo />` JSX ifadesini kullanıyorsanız, `Foo` kapsamda olmalı.
 
-### React Must Be in Scope {#react-must-be-in-scope}
+### React Kapsamda Olmalı {#react-must-be-in-scope}
 
-Since JSX compiles into calls to `React.createElement`, the `React` library must also always be in scope from your JSX code.
+JSX `React.createElement` şeklinde derlediği anda, `React` kütüphanesi de JSX kodunuzun kapsamında olmalı.
 
-For example, both of the imports are necessary in this code, even though `React` and `CustomButton` are not directly referenced from JavaScript:
+Örneğin, JavaScript tarafından `React` ve `CustomButton` kütüphaneleri doğrudan atıfta bulunulmamasına rağmen ikisininde kodunuzun kapsamında olması gerekli:
 
 ```js{1,2,5}
 import React from 'react';
@@ -71,9 +71,9 @@ function WarningButton() {
 }
 ```
 
-If you don't use a JavaScript bundler and loaded React from a `<script>` tag, it is already in scope as the `React` global.
+Eğer bir JavaScript paketleyici kullanmıyorsanız ve React'ı `<script>` etiketiyle yüklediyseniz, `React` global olarak kapsama eklenmiş olur.
 
-### Using Dot Notation for JSX Type {#using-dot-notation-for-jsx-type}
+### JSX Tipi için Nokta Notasyonu Kullanımı {#using-dot-notation-for-jsx-type}
 
 You can also refer to a React component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if `MyComponents.DatePicker` is a component, you can use it directly from JSX with:
 
