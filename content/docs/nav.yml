@@ -79,7 +79,7 @@
       title: Uncontrolled Components
     - id: web-components
       title: Web Components
-- title: API Reference
+- title: API Kaynağı
   items:
     - id: react-api
       title: React
@@ -91,17 +91,17 @@
     - id: react-dom-server
       title: ReactDOMServer
     - id: dom-elements
-      title: DOM Elements
+      title: DOM Elemanları
     - id: events
       title: SyntheticEvent
     - id: test-utils
-      title: Test Utilities
+      title: Test Araçları
     - id: shallow-renderer
       title: Shallow Renderer
     - id: test-renderer
-      title: Test Renderer
+      title: Test Render Edici
     - id: javascript-environment-requirements
-      title: JS Environment Requirements
+      title: Javascript Ortam Gereksinimleri
     - id: glossary
       title: Glossary
 - title: Hooks (New)
