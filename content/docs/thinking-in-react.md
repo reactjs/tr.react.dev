@@ -133,11 +133,11 @@ Uygulamanızdaki her state parçası için:
 
 Harika; state'imizin `FilterableProductTable` bileşeninde yaşamasına karar verdik. İlk olarak, uygulamanın giriş state'ini belirlemek için `this.state = {filterText: '', inStockOnly: false}` nesne özelliğini `constructor`'a ekleyin. Devamında, `filterText` ve `inStockOnly` değerlerini `ProductTable` ve `SearchBar` bileşenlerine prop olarak iletin. Son olarak, `ProductTable`'daki satırları filtrelemek ve form alanlarının değerlerini `SearchBar`'da ayarlamak için bu prop'ları kullanın.
 
-Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz: `filterText`'i `top` olarak ayarlayın ve uygulamanızı yenileyin. Veri tablosunun doğru bir şekilde güncellendiğini göreceksiniz.
+Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz: `filterText`'i `ball` olarak ayarlayın ve uygulamanızı yenileyin. Veri tablosunun doğru bir şekilde güncellendiğini göreceksiniz.
 
-## Step 5: Add Inverse Data Flow {#step-5-add-inverse-data-flow}
+## Adım 5: Ters Veri Akışı Ekleyin {#step-5-add-inverse-data-flow}
 
-<p data-height="600" data-theme-id="0" data-slug-hash="LzWZvb" data-default-tab="js,result" data-user="rohan10" data-embed-version="2" data-pen-title="Thinking In React: Step 5" class="codepen">See the Pen <a href="https://codepen.io/gaearon/pen/LzWZvb">Thinking In React: Step 5</a> on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="600" data-theme-id="0" data-slug-hash="LzWZvb" data-default-tab="js" data-user="lacker" data-embed-version="2" class="codepen"><a href="https://codepen.io">CodePen</a>'deki <a href="https://codepen.io/gaearon/pen/LzWZvb">React'te Düşünmek: Adım 5</a> sayfasını ziyaret edin.</p>
 
 So far, we've built an app that renders correctly as a function of props and state flowing down the hierarchy. Now it's time to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`.
 
