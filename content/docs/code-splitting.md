@@ -182,7 +182,7 @@ function MyComponent() {
 
 ### Hata Sınırları {#error-boundaries}
 
-Eğer diğer modül bir nedenden dolayı yüklenmezse (örneğin, ağ sorunu) hata fırlatacaktır. Güzel bir kullanıcı deneyimi göstermek ve kurtarmayı yönetmek için bu hataları [Hata Sınırları](/docs/error-boundaries.html) ile işleyebilirsiniz. Hata Sınırı oluşturduktan sonra, ağ sorunu olduğunda hata göstermek için Hata Sınırını lazy bileşenlerinizin üstünde herhangi bir yerde kullanabilirsiniz.
+Eğer diğer modül bir nedenden dolayı yüklenmezse (örneğin, ağ sorunu) hata fırlatacaktır. Güzel bir kullanıcı deneyimi sunmak ve kurtarmayı yönetmek için bu hataları [Hata Sınırları](/docs/error-boundaries.html) ile işleyebilirsiniz. Hata Sınırı oluşturduktan sonra, ağ sorunu olduğunda hata göstermek için Hata Sınırını lazy bileşenlerinizin üstünde herhangi bir yerde kullanabilirsiniz.
 
 ```js
 import MyErrorBoundary from './MyErrorBoundary';
