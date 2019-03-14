@@ -4,7 +4,7 @@ title: React Without ES6
 permalink: docs/react-without-es6.html
 ---
 
-Normalde bir React bileşenini düz JavaScript class'ı olarak tanımlarsınız:
+Normalde bir React bileşenini düz JavaScript sınıfı olarak tanımlarsınız:
 
 ```javascript
 class Greeting extends React.Component {
@@ -14,7 +14,7 @@ class Greeting extends React.Component {
 }
 ```
 
-Henüz ES6 kullanmıyorsanız, class yerine `create-react-class` modülünü kullanabilirsiniz:
+Henüz ES6 kullanmıyorsanız, sınıf yerine `create-react-class` modülünü kullanabilirsiniz:
 
 ```javascript
 var createReactClass = require('create-react-class');
@@ -25,11 +25,11 @@ var Greeting = createReactClass({
 });
 ```
 
-ES6 classlarının çalışma şekli bir kaç istisna dışında `createReactClass()`'a benzer.
+ES6 sınıflarının çalışma şekli bir kaç istisna dışında `createReactClass()`'a benzer.
 
-## Varsayılan Propları Tanımlama {#declaring-default-props}
+## Varsayılan Prop'ları Tanımlama {#declaring-default-props}
 
-Fonksiyonlarda ve ES6 classlarında `defaultProps`, bileşenin kendisinde özellik olarak tanımlanır.
+Fonksiyonlarda ve ES6 sınıflarında `defaultProps`, bileşenin kendisinde özellik olarak tanımlanır.
 
 ```javascript
 class Greeting extends React.Component {
@@ -56,9 +56,9 @@ var Greeting = createReactClass({
 });
 ```
 
-## Başlangıç State'i Ayarlamak {#setting-the-initial-state}
+## Başlangıç State'ini Ayarlamak {#setting-the-initial-state}
 
-ES6 classlarında, başlangıç state'inizi constructor içindeki `this.state`e atayarak tanımlayabilirsiniz.
+ES6 sınıflarında, başlangıç state'inizi constructor içindeki `this.state`'e atayarak tanımlayabilirsiniz.
 
 ```javascript
 class Counter extends React.Component {
@@ -83,7 +83,7 @@ var Counter = createReactClass({
 
 ## Autobinding {#autobinding}
 
-ES6 classı olarak kullanılan React bileşenlerinde metodlar, normal ES6 classlarındaki mantığın aynısını kullanırlar. Yani nesne ile `this`'i otomatik olarak ilişkilendirmezler. Constructor'da açık bir şekilde `.bind(this)` kullanmanız gerekir.
+ES6 sınıfı olarak kullanılan React bileşenlerinde metodlar, normal ES6 sınıflarındaki mantığın aynısını kullanırlar. Yani nesne ile `this`'i otomatik olarak ilişkilendirmezler. Constructor'da açık bir şekilde `.bind(this)` kullanmanız gerekir.
 
 ```javascript
 class SayHello extends React.Component {
@@ -131,9 +131,9 @@ var SayHello = createReactClass({
 });
 ```
 
-Yani ES6 classları ile yazmak, olay yöneticileri için biraz daha taslak kod yazmayı gerektirir ama iyi tarafıysa şudur: büyük uygulamalarda biraz daha iyi performans gösterir.
+Yani ES6 sınıfları ile yazmak, olay yöneticileri için biraz daha taslak kod yazmayı gerektirir ama iyi tarafıysa şudur: Büyük uygulamalarda biraz daha iyi performans gösterir.
 
-Eğer taslak kod yazmak size itici geliyorsa, Babel ile **deneysel** [Class Özellikleri](https://babeljs.io/docs/plugins/transform-class-properties/) sözdizimini aktif edebilirsiniz.
+Eğer taslak kod yazmak size itici geliyorsa, Babel ile **deneysel** [Sınıf Özellikleri](https://babeljs.io/docs/plugins/transform-class-properties/) sözdizimini aktif edebilirsiniz.
 
 
 ```javascript
@@ -169,7 +169,7 @@ Eğer güvenli şekilde hareket etmeyi tercih ediyorsanız, işte size bir kaç 
 
 >**Not:**
 >
->ES6, hiç mixin desteği olmadan başlatıldı. Bu nedenle, ES6 classları ile React kullandığınızda mixin desteği yoktur.
+>ES6, hiç mixin desteği olmadan başlatıldı. Bu nedenle, ES6 sınıfları ile React kullandığınızda mixin desteği yoktur.
 >
 >**Aynı zamanda, mixin kullanan kod tabanlarında sayısız sorun bulduk [ve yeni kodlarda kullanmanızı tavsiye etmiyoruz](/blog/2016/07/13/mixins-considered-harmful.html).**
 >
