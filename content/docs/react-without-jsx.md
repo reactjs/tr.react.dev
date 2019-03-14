@@ -4,21 +4,21 @@ title: JSX Olmadan React
 permalink: docs/react-without-jsx.html
 ---
 
-JSX, React'i kullanmak için bir gereklilik değildir. JSX olmadan React'i kullanmak geliştirme ortamınızda özellikle derleme ayarlamak istemediğinizde uygundur.
+JSX, React'i kullanmak için bir gereksinim değildir. JSX olmadan React'i kullanmak özellikle, geliştirme ortamınızda derleme ayarlarıyla uğraşmak istemediğiniz durumlarda daha uygundur.
 
 Her JSX elementi sadece `React.createElement(component, props, ...children)`'i çağırmak için sözdizimsel şekerdir. Yani, JSX ile yapabileceğiniz her şeyi sadece düz JavaScript ile yapabilirsiniz.
 
 Örneğin, bu kod JSX ile yazılmış:
 
 ```js
-class Merhaba extends React.Component {
+class Hello extends React.Component {
   render() {
-    return <div>Merhaba {this.props.neye}</div>;
+    return <div>Hello {this.props.toWhat}</div>;
   }
 }
 
 ReactDOM.render(
-  <Merhaba neye="Dünya" />,
+  <Hello toWhat="World" />,
   document.getElementById('root')
 );
 ```
@@ -26,14 +26,14 @@ ReactDOM.render(
 JSX kullanmayan bu koda derlenebilir:
 
 ```js
-class Merhaba extends React.Component {
+class Hello extends React.Component {
   render() {
-    return React.createElement('div', null, `Merhaba ${this.props.neye}`);
+    return React.createElement('div', null, `Hello ${this.props.toWhat}`);
   }
 }
 
 ReactDOM.render(
-  React.createElement(Merhaba, {neye: 'Dünya'}, null),
+  React.createElement(Hello, {toWhat: 'World'}, null),
   document.getElementById('root')
 );
 ```
@@ -55,4 +55,4 @@ ReactDOM.render(
 
 Eğer bu kısaltma halini `React.createElement` için kullanırsanız, JSX olmadan React'i kullanmak daha pratik olabilir.
 
-Alternatif olarak, [`react-hyperscript`](https://github.com/mlmorg/react-hyperscript) ve [`hyperscript-helpers`](https://github.com/ohanhi/hyperscript-helpers) gibi terser sözdizimi sunan topluluk projelerine göz atabilirsiniz.
+Alternatif olarak, [`react-hyperscript`](https://github.com/mlmorg/react-hyperscript) ve [`hyperscript-helpers`](https://github.com/ohanhi/hyperscript-helpers) gibi `terser` sözdizimi sunan topluluk projelerine göz atabilirsiniz.
