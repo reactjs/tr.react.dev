@@ -151,4 +151,4 @@ Karışık görünmesine rağmen, aslında sadece birkaç satır kod satırında
 
 ## Ve Bu Kadar {#and-thats-it}
 
-Umuyorız, bu bölüm size, React ile bileşenler ve uygulamalar oluştururken nasıl düşünmeniz gerektiği hakkında bir fikir vermiştir. Normalde alıştığınızdan biraz daha fazla kod yazmanız gerekebilir. Ancak kodun yazıldığından çok daha fazla okuduğunu; ve bu modüler, açık kodun okumak için oldukça kolay olduğunu unutmayın. Büyük bileşen kütüphaneleri oluşturmaya başladığınızda, bu açıklık ve modülerliği takdir edeceksiniz ve yazdığınız kodu yeniden kullandıkça kod satırlarınız küçülmeye başlayacak. :)
+Umuyoruz ki bu bölüm, React ile bileşen ve uygulamalar oluştururken nasıl düşünmeniz gerektiği hakkında size bir fikir vermiştir. Normalde alıştığınızdan biraz daha fazla kod yazmanız gerekebilir. Ancak kodun yazıldığından çok daha fazla okuduğunu; ve bu modüler, açık kodun okumak için oldukça kolay olduğunu unutmayın. Büyük bileşen kütüphaneleri oluşturmaya başladığınızda, bu açıklık ve modülerliği takdir edeceksiniz ve yazdığınız kodu yeniden kullandıkça kod satırlarınız küçülmeye başlayacak. :)
