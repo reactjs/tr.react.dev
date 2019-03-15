@@ -10,7 +10,7 @@ prev: composition-vs-inheritance.html
 
 React, bize göre, JavaScript ile büyük ve hızlı Web uygulamaları oluşturmanın en önde gelen yoludur. Bizim için Facebook ve Instagram'ın geliştirilmesinde çok etkili oldu.
 
-React’in en harika yanlarından biri de, uygulamaları oluştururken size kazandırdığı bakış açısıdır. Bu dökümanda, React'i kullanarak aranabilir bir ürün tablosu oluşturmanın düşünce sürecinde size yol göstereceğiz.
+React’in en harika yanlarından biri de, uygulamaları oluştururken size kazandırdığı bakış açısıdır. Bu dökümanda, React'i kullanarak arama özelliği olan bir ürün tablosu oluşturmanın düşünce sürecinde size yol göstereceğiz.
 
 ## Bir Taslakla Başlayın {#start-with-a-mock}
 
@@ -18,7 +18,7 @@ Zaten bir JSON API'ımızın ve tasarımcımızdan gelen bir taslağımızın ol
 
 ![Mockup](../images/blog/thinking-in-react-mock.png)
 
-JSON API'ımız şuna benzeyen bir veri dönüyor:
+JSON API'ımız aşağıdakine benzeyen bir veri dönüyor:
 
 ```
 [
@@ -45,13 +45,13 @@ Ama nelerin kendi başına birer bileşen olacağına nasıl karar vereceksiniz?
 
 Burada küçük uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
 
-  1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamnı içerir.
+  1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamını içerir.
   2. **`SearchBar` (mavi):** bütün *kullanıcı girdilerini* alır.
   3. **`ProductTable` (yeşil):** *kullanıcı girdisine* bağlı olarak *veri koleksiyonunu* görüntüler ve filtreler.
   4. **`ProductCategoryRow` (turkuaz):** her bir *kategori* için bir başlık gösterir.
   5. **`ProductRow` (kırmızı):** her bir *ürün* için bir satır gösterir.
 
-`ProductTable`'a bakarsanız, tablo başlığının ("Name" ve "Price" etiketlerini içeren kısım) kendi bileşeni olmadığını göreceksiniz. Bu bir tercih meselesi ve her iki şekilde de yapılmasını belirten bir argüman var. Bu örnekte, tablo başlığını `ProductTable`’ın bir parçası olarak bıraktık. Çünkü tablo başlığı, ProductTable’ın sorumluluğunda olan *veri koleksiyonunu* render etme işleminin bir parçasıdır. Yine de, eğer bu başlık giderek karmaşık bir hale gelirse (Mesela sıralama özelliği ekleseydik), kendi ayrı `ProductTableHeader` bileşenini yapmak kesinlikle daha mantıklı olurdu.
+`ProductTable`'a bakarsanız, tablo başlığının ("Name" ve "Price" etiketlerini içeren kısım) kendi bileşeni olmadığını göreceksiniz. Bu bir tercih meselesi ve her iki şekilde de yapılmasını savunan bir argüman var. Bu örnekte, tablo başlığını `ProductTable`’ın bir parçası olarak bıraktık. Çünkü tablo başlığı, ProductTable’ın sorumluluğunda olan *veri koleksiyonunu* render etme işleminin bir parçasıdır. Yine de, eğer bu başlık giderek karmaşık bir hale gelirse (Mesela sıralama özelliği ekleseydik), kendi ayrı `ProductTableHeader` bileşenini yapmak kesinlikle daha mantıklı olurdu.
 
 Şimdi, taslağımızdaki bileşenleri belirlediğimize göre, onları bir hiyerarşiye göre düzenleyelim. Bu kolay. Taslakta başka bir bileşen içinde görünen bileşenler, hiyerarşideki bir alt eleman olarak görünmelidir:
 
@@ -98,9 +98,9 @@ Uygulamanızın ihtiyaç duyduğu state'in mutlak asgari temsilini belirleyin ve
 
 Her birini gözden geçirelim ve hangisinin state'e dahil olduğunu bulalım. Bunun için, her veri parçasına dair üç soru sorun:
 
-  1. Üst elemandan prop'lar aracılığıyla mı iletilmiş? Eğer öylese state'e ait değildir.
-  2. Zaman içerisinde değişiklik göstermiyor mu? Eğer öyleyse state'e ait değildir.
-  3. Bileşeninizdeki herhangi başka bir state'e veya prop'a göre hesaplayabiliyor musunuz? Eğer öyleyse state'e ait değildir.
+  1. Üst elemandan prop'lar aracılığıyla mı iletilmiş? Öyleyse state'e ait değildir.
+  2. Zaman içerisinde değişiklik göstermiyor mu? Öyleyse state'e ait değildir.
+  3. Bileşeninizdeki herhangi başka bir state'e veya prop'a göre hesaplayabiliyor musunuz? Öyleyse state'e ait değildir.
 
 `Orijinal ürün listesi` prop olarak iletildiği için state'e ait değildir. `Arama metni` ve `checkbox`, zaman içerisinde değiştikleri ve başka bir şey üzerinden hesaplanamadıkları için state'e ait gibi duruyorlar. Ve son olarak, `filtrelenmiş ürün listesi` de; orijinal ürün listesi, arama metni ve checkbox ın değerine göre hesaplanabileceği için, state'e ait değildir.
 
@@ -125,7 +125,7 @@ Uygulamanızdaki her state parçası için:
   * *Ya ortak bir sahip bileşen ya da hiyerarşide daha yüksekte bulunan bir bileşen* state'e sahip olmalıdır.
   * State'e sahip olması mantıklı olmayan bir bileşen bulamazsanız, yalnızca state'i tutması için yeni bir bileşen oluşturun ve onu hiyerarşide ortak sahip bileşeninin üzerindeki bir yere ekleyin.
 
-Şimdi bu stratejiyi uygulamamız için uygulayalım:
+Şimdi bu stratejiyi uygulamamız için hayata geçirelim:
 
   * `ProductTable` ürün listesini state'e göre filtrelemeli ve `SearchBar` arama metnini ve *Checkbox*'ın durumunu göstermelidir.
   * Ortak sahip bileşen `FilterableProductTable` bileşinidir.
@@ -145,9 +145,7 @@ React, programınızın nasıl çalıştığını anlamayı kolaylaştırmak iç
 
 Eğer yukarıdaki örnekte metin kutusuna yazmayı ya da kutucuğu işaretlemeyi denediğiniz taktirde, React'in bunu görmezden geldiğini göreceksiniz. Bu kasıtlı olarak böyledir. Çünkü `input` un `value` prop'unu her zaman `FilterableProductTable` bileşeninden gelen `state`'e eşit olacak şekilde ayarladık.
 
-Let's think about what we want to happen. We want to make sure that whenever the user changes the form, we update the state to reflect the user input. Since components should only update their own state, `FilterableProductTable` will pass callbacks to `SearchBar` that will fire whenever the state should be updated. We can use the `onChange` event on the inputs to be notified of it. The callbacks passed by `FilterableProductTable` will call `setState()`, and the app will be updated.
-
-Ne olmasını istediğimizi düşünelim. Kullanıcı form'u her değiştirmesinde, kullanıcının yaptığı değişikliği yansıtacak şekilde state'i güncellediğimizden emin olmak istiyoruz. Bileşenlerin yalnızca kendi state'lerini güncellemesi gerektiği için, `FilterableProductTable` bileşeni, `SearchBar` bileşenine, state'in her güncellenmesinde çağrılacak `callback`'ler iletir.
+Ne olmasını istediğimizi düşünelim. Kullanıcı form'u her değiştirmesinde, kullanıcının yaptığı değişikliği yansıtacak şekilde state'i güncellediğimizden emin olmak istiyoruz. Bileşenlerin yalnızca kendi state'lerini güncellemesi gerektiği için, `FilterableProductTable` bileşeni, `SearchBar` bileşenine, state'in her güncellenmesinde çağrılacak `callback`'ler iletir. Girdilerin (input) `OnChange` olayını, `SearchBar` bileşenini bilgilendirmek için kullanabiliriz. `FilterableProductTable` tarafından iletilen callBack'ler `setState()`'i çağıracak ve uygulama güncellenecektir.
 
 Karışık görünmesine rağmen, aslında sadece birkaç satır kod satırından ibaret. Ve verilerinizin uygulama boyunca nasıl aktığı da gerçekten çok belirgindir.
 
