@@ -131,7 +131,7 @@ Uygulamanızdaki her state parçası için:
   * Ortak sahip bileşen `FilterableProductTable` bileşinidir.
   * Filtre metninin ve *Checkbox* değerininin `FilterableProductTable` içinde yaşaması mantıklıdır.
 
-Harika; state'imizin `FilterableProductTable` bileşeninde yaşamasına karar verdik. İlk olarak, uygulamanın giriş state'ini belirlemek için `this.state = {filterText: '', inStockOnly: false}` nesne özelliğini `constructor`'a ekleyin. Devamında, `filterText` ve `inStockOnly` değerlerini `ProductTable` ve `SearchBar` bileşenlerine prop olarak iletin. Son olarak, `ProductTable`'daki satırları filtrelemek ve form alanlarının değerlerini `SearchBar`'da ayarlamak için bu prop'ları kullanın.
+Harika; state'imizin `FilterableProductTable` bileşeninde yaşamasına karar verdik. İlk olarak, uygulamanın başlangıç state'ini belirlemek için `this.state = {filterText: '', inStockOnly: false}` nesne özelliğini `constructor`'a ekleyin. Devamında, `filterText` ve `inStockOnly` değerlerini `ProductTable` ve `SearchBar` bileşenlerine prop olarak iletin. Son olarak, `ProductTable`'daki satırları filtrelemek ve form alanlarının değerlerini `SearchBar`'da ayarlamak için bu prop'ları kullanın.
 
 Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz: `filterText`'i `ball` olarak ayarlayın ve uygulamanızı yenileyin. Veri tablosunun doğru bir şekilde güncellendiğini göreceksiniz.
 
@@ -143,11 +143,11 @@ Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz: `filterText
 
 React, programınızın nasıl çalıştığını anlamayı kolaylaştırmak için bu veri akışını açık bir hale getirir, ancak geleneksel iki yönlü (yukarıdan aşağı ve aşağıdan yukarı) veri akışından biraz daha fazla yazma gerektirir.
 
-Eğer yukarıdaki örnekte metin kutusuna yazmayı ya da kutucuğu işaretlemeyi denediğiniz taktirde, React'in bunu görmezden geldiğini göreceksiniz. Bu kasıtlı olarak böyledir. Çünkü `input` un `value` prop'unu her zaman `FilterableProductTable` bileşeninden gelen `state`'e eşit olacak şekilde ayarladık.
+Eğer yukarıdaki örnekte metin kutusuna yazmayı ya da kutucuğu işaretlemeyi denediğiniz taktirde, React'in bunu görmezden geldiğini göreceksiniz. Bu kasıtlı olarak böyledir. Çünkü `input` un `value` prop'unu, her zaman `FilterableProductTable` bileşeninden gelen `state`'e eşit olacak şekilde ayarladık.
 
 Ne olmasını istediğimizi düşünelim. Kullanıcı form'u her değiştirmesinde, kullanıcının yaptığı değişikliği yansıtacak şekilde state'i güncellediğimizden emin olmak istiyoruz. Bileşenlerin yalnızca kendi state'lerini güncellemesi gerektiği için, `FilterableProductTable` bileşeni, `SearchBar` bileşenine, state'in her güncellenmesinde çağrılacak `callback`'ler iletir. Girdilerin (input) `OnChange` olayını, `SearchBar` bileşenini bilgilendirmek için kullanabiliriz. `FilterableProductTable` tarafından iletilen callBack'ler `setState()`'i çağıracak ve uygulama güncellenecektir.
 
-Karışık görünmesine rağmen, aslında sadece birkaç satır kod satırından ibaret. Ve verilerinizin uygulama boyunca nasıl aktığı da gerçekten çok belirgindir.
+Karışık görünmesine rağmen, aslında sadece birkaç kod satırından ibaret. Ve verilerinizin uygulama boyunca nasıl aktığı da gerçekten çok belirgindir.
 
 ## Ve Bu Kadar {#and-thats-it}
 
