@@ -10,7 +10,7 @@ redirect_from:
 >
 > `React.PropTypes` React v15.5'ten bu yana farklı bir pakete taşındı. Lütfen bunun yerine [`prop-types` kütüphanesini kullanın](https://www.npmjs.com/package/prop-types).
 >
-> Dönüştürme işlemini otomatikleştirmek için [bir codemod betiği](/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactproptypes) sunuyoruz.
+> Dönüştürme işlemini otomatikleştirmek için [bir codemod script](/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactproptypes)'i sunuyoruz.
 
 Uygulamanız büyüdükçe, tip kontrolü ile birçok hata yakalayabilirsiniz. Bazı uygulamalarda, tüm uygulamanız üzerinde tip kontrolü yapmak için [Flow](https://flow.org/) veya [TypeScript](https://www.typescriptlang.org/) gibi JavaScript uzantılarını kullanabilirsiniz. Ama bunları kullanmasanız bile, React bazı yerleşik tip kontrolü yeteneklerine sahiptir. Bir bileşenin prop'ları üzerinde tip kontrolü yapmak için, özel `propTypes` niteliğini atayabilirsiniz:
 
@@ -128,7 +128,7 @@ import PropTypes from 'prop-types';
 
 class MyComponent extends React.Component {
   render() {
-    // Bu sadece bir eleman olmalı aksi takdirde uyarı verecektir.
+    // Bu kesinlikle tek bir eleman olmalı; aksi takdirde uyarı verecektir.
     const children = this.props.children;
     return (
       <div>
@@ -184,4 +184,4 @@ class Greeting extends React.Component {
 }
 ```
 
-`defaultProps` üst bileşen tarafından belirtilmemişse, `this.props.name` değerinin olmasını sağlamak için kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
+`this.props.name`'in üst bileşen tarafından belirtilen bir değerinin olmadığı durumlarda, varsayılan bir değere sahip olmasını sağlamak için `defaultProps` kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
