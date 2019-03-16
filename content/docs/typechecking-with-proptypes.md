@@ -97,8 +97,8 @@ MyComponent.propTypes = {
   customProp: function(props, propName, componentName) {
     if (!/matchme/.test(props[propName])) {
       return new Error(
-        'Geçersiz prop `' + propName + '`, `' +
-        componentName + '` bileşenine verildi. Doğrulama başarısız.'
+        'Invalid prop `' + propName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
       );
     }
   },
@@ -111,8 +111,8 @@ MyComponent.propTypes = {
   customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
     if (!/matchme/.test(propValue[key])) {
       return new Error(
-        'Geçersiz prop `' + propFullName + '`, `' +
-        componentName + '` bileşenine verildi. Doğrulama başarısız.'
+        'Invalid prop `' + propFullName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
       );
     }
   })
