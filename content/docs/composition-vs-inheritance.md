@@ -8,15 +8,15 @@ prev: lifting-state-up.html
 next: thinking-in-react.html
 ---
 
-React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components.
+React güçlü bir yapı modeline sahiptir ve bileşenler arasındaki kodu tekrar kullanmak için kalıtım yerine bileşim kullanmanızı öneririz.
 
-In this section, we will consider a few problems where developers new to React often reach for inheritance, and show how we can solve them with composition.
+Bu bölümde, React'te yeni geliştiricilerin kalıtım ile ilgili karşılaştığı birkaç sorunu ele alacağız ve bunları bileşimlerle nasıl çözebileceğimizi göstereceğiz.
 
-## Containment {#containment}
+## Kapsama {#containment}
 
-Some components don't know their children ahead of time. This is especially common for components like `Sidebar` or `Dialog` that represent generic "boxes".
+Bazı componentler önceden alt elemanlarını bilmezler. Bu, özellikle genel "kutuları" temsil eden `Sidebar` veya `Dialog` gibi bileşenler için geçerlidir.
 
-We recommend that such components use the special `children` prop to pass children elements directly into their output:
+Bu tür bileşenlerin, alt elemanlarını doğrudan çıktılarına geçirmek için özel `children` prop'unu kullanmasını öneririz:
 
 ```js{4}
 function FancyBorder(props) {
@@ -28,28 +28,29 @@ function FancyBorder(props) {
 }
 ```
 
-This lets other components pass arbitrary children to them by nesting the JSX:
+Bu, JSX'i iç içe koyarak diğer bileşenlere geçirmelerini sağlar:
+
 
 ```js{4-9}
 function WelcomeDialog() {
   return (
     <FancyBorder color="blue">
       <h1 className="Dialog-title">
-        Welcome
+        Hoşgeldiniz
       </h1>
       <p className="Dialog-message">
-        Thank you for visiting our spacecraft!
+        Uzay aracımızı ziyaret ettiğiniz için teşekkür ederiz!
       </p>
     </FancyBorder>
   );
 }
 ```
 
-**[Try it on CodePen](https://codepen.io/gaearon/pen/ozqNOV?editors=0010)**
+**[CodePen'de deneyin](https://codepen.io/gaearon/pen/ozqNOV?editors=0010)**
 
-Anything inside the `<FancyBorder>` JSX tag gets passed into the `FancyBorder` component as a `children` prop. Since `FancyBorder` renders `{props.children}` inside a `<div>`, the passed elements appear in the final output.
+`FancyBorder` JSX etiketinin içindeki herhangi bir şey `children` prop'u olarak `FancyBorder` bileşenine geçer. `FancyBorder`, bir `<div>` içinde `{props.children}` render edildiğinden, iletilen öğeler son çıktıda görünür.
 
-While this is less common, sometimes you might need multiple "holes" in a component. In such cases you may come up with your own convention instead of using `children`:
+Daha az yaygın olsa da, bazen bir bileşende birden fazla "delik" gerekebilir. Bu gibi durumlarda, `children` kullanmak yerine kendi yönteminizi uygulayabilirsiniz:
 
 ```js{5,8,18,21}
 function SplitPane(props) {
@@ -78,15 +79,15 @@ function App() {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/gwZOJp?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/gwZOJp?editors=0010)
 
-React elements like `<Contacts />` and `<Chat />` are just objects, so you can pass them as props like any other data. This approach may remind you of "slots" in other libraries but there are no limitations on what you can pass as props in React.
+`<Contacts />` ve `<Chat />` gibi React elementleri yalnızca nesnelerdir, bu nedenle bunları diğer veriler gibi prop'lar olarak geçirebilirsiniz. Bu yaklaşım size diğer kütüphanelerdeki "slotları" hatırlatabilir ancak React'te prop olarak ne geçeceğiniz konusunda hiçbir sınırlama yoktur.
 
-## Specialization {#specialization}
+## Uzmanlaşma {#specialization}
 
-Sometimes we think about components as being "special cases" of other components. For example, we might say that a `WelcomeDialog` is a special case of `Dialog`.
+Bazen bileşenleri diğer bileşenlerin "özel durumları" olarak düşünüyoruz. Örneğin, bir `WelcomeDialog` `Dialog`un özel bir durumu olduğunu söyleyebiliriz.
 
-In React, this is also achieved by composition, where a more "specific" component renders a more "generic" one and configures it with props:
+React'te, aynı zamanda daha "spesifik" bir bileşenin daha "jenerik" bir bileşen oluşturduğu ve onu prop gereçleriyle konfigüre ettiği bileşimlerle de elde edilir:
 
 ```js{5,8,16-18}
 function Dialog(props) {
@@ -105,15 +106,15 @@ function Dialog(props) {
 function WelcomeDialog() {
   return (
     <Dialog
-      title="Welcome"
-      message="Thank you for visiting our spacecraft!" />
+      title="Hoşgeldiniz"
+      message="Uzay aracımızı ziyaret ettiğiniz için teşekkür ederiz!" />
   );
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/kkEaOZ?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/kkEaOZ?editors=0010)
 
-Composition works equally well for components defined as classes:
+Bileşim, sınıf olarak tanımlanan bileşenler için eşit derecede iyi çalışır:
 
 ```js{10,27-31}
 function Dialog(props) {
@@ -140,12 +141,12 @@ class SignUpDialog extends React.Component {
 
   render() {
     return (
-      <Dialog title="Mars Exploration Program"
-              message="How should we refer to you?">
+      <Dialog title="Mars Keşif Programı"
+              message="Size nasıl başvurabiliriz?">
         <input value={this.state.login}
                onChange={this.handleChange} />
         <button onClick={this.handleSignUp}>
-          Sign Me Up!
+          Beni kaydet!
         </button>
       </Dialog>
     );
@@ -161,12 +162,12 @@ class SignUpDialog extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/gwZbYa?editors=0010)
+[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/gwZbYa?editors=0010)
 
-## So What About Inheritance? {#so-what-about-inheritance}
+## Kalıtım Hakkında Ne Söyleyebiliriz? {#so-what-about-inheritance}
 
-At Facebook, we use React in thousands of components, and we haven't found any use cases where we would recommend creating component inheritance hierarchies.
+Facebook binlerce componentte React kullanıyor ve component hiyerarşileri oluştururken önerdiğimiz herhangi bir kullanım durumu bulamadık.
 
-Props and composition give you all the flexibility you need to customize a component's look and behavior in an explicit and safe way. Remember that components may accept arbitrary props, including primitive values, React elements, or functions.
+Prop'lar ve bileşimler, bir bileşenin görünüşünü ve davranışını açık ve güvenli bir şekilde özelleştirmek için ihtiyacınız olan tüm esnekliği sunar. Bileşenlerin, ilkel değerler, React öğeleri veya fonksiyonlar dahil olmak üzere isteğe bağlı prop'ları kabul edebileceğini unutmayın.
 
-If you want to reuse non-UI functionality between components, we suggest extracting it into a separate JavaScript module. The components may import it and use that function, object, or a class, without extending it.
+UI dışı fonksiyonelliği bileşenler arasında yeniden kullanmak istiyorsanız, ayrı bir JavaScript modülüne çıkarmanızı öneririz. Bileşenler onu içe dahil edebilir ve genişletmeden bu fonksiyonu, nesneyi veya bir sınıfı kullanabilir.
