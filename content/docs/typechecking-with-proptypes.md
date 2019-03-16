@@ -1,18 +1,18 @@
 ---
 id: typechecking-with-proptypes
-title: Typechecking With PropTypes
+title: PropTypes ile Tip Kontrolü
 permalink: docs/typechecking-with-proptypes.html
 redirect_from:
   - "docs/react-api.html#typechecking-with-proptypes"
 ---
 
-> Note:
+> Not:
 >
-> `React.PropTypes` has moved into a different package since React v15.5. Please use [the `prop-types` library instead](https://www.npmjs.com/package/prop-types).
+> `React.PropTypes` React v15.5'ten bu yana farklı bir pakete taşındı. Lütfen bunun yerine [`prop-types` kütüphanesini kullanın](https://www.npmjs.com/package/prop-types).
 >
->We provide [a codemod script](/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactproptypes) to automate the conversion.
+> Dönüştürme işlemini otomatikleştirmek için [bir codemod script](/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactproptypes)'i sunuyoruz.
 
-As your app grows, you can catch a lot of bugs with typechecking. For some applications, you can use JavaScript extensions like [Flow](https://flow.org/) or [TypeScript](https://www.typescriptlang.org/) to typecheck your whole application. But even if you don't use those, React has some built-in typechecking abilities. To run typechecking on the props for a component, you can assign the special `propTypes` property:
+Uygulamanız büyüdükçe, tip kontrolü ile birçok hata yakalayabilirsiniz. Bazı uygulamalarda, tüm uygulamanız üzerinde tip kontrolü yapmak için [Flow](https://flow.org/) veya [TypeScript](https://www.typescriptlang.org/) gibi JavaScript uzantılarını kullanabilirsiniz. Ama bunları kullanmasanız bile, React bazı yerleşik tip kontrolü yeteneklerine sahiptir. Bir bileşenin prop'ları üzerinde tip kontrolü yapmak için, özel `propTypes` niteliğini atayabilirsiniz:
 
 ```javascript
 import PropTypes from 'prop-types';
@@ -30,18 +30,18 @@ Greeting.propTypes = {
 };
 ```
 
-`PropTypes` exports a range of validators that can be used to make sure the data you receive is valid. In this example, we're using `PropTypes.string`. When an invalid value is provided for a prop, a warning will be shown in the JavaScript console. For performance reasons, `propTypes` is only checked in development mode.
+`PropTypes` alınan verilerin geçerli olduğundan emin olmak için kullanılabilecek bir dizi doğrulayıcı verir. Bu örnekte, `PropTypes.string`'i kullanıyoruz. Bir prop için geçersiz bir değer sağlandığında, JavaScript konsolunda bir uyarı gösterilecektir. Performans nedeniyle, `propTypes` sadece geliştirme modunda kontrol edilir.
 
 ### PropTypes {#proptypes}
 
-Here is an example documenting the different validators provided:
+İşte sağlanan çeşitli doğrulayıcıları gösteren bir örnek:
 
 ```javascript
 import PropTypes from 'prop-types';
 
 MyComponent.propTypes = {
-  // You can declare that a prop is a specific JS type. By default, these
-  // are all optional.
+  // Bir prop'un belirli bir JS türü olduğunu belirtebilirsiniz.
+  // Varsayılan olarak, bunların hepsi isteğe bağlıdır.
   optionalArray: PropTypes.array,
   optionalBool: PropTypes.bool,
   optionalFunc: PropTypes.func,
@@ -50,50 +50,50 @@ MyComponent.propTypes = {
   optionalString: PropTypes.string,
   optionalSymbol: PropTypes.symbol,
 
-  // Anything that can be rendered: numbers, strings, elements or an array
-  // (or fragment) containing these types.
+  // Render edilebilecek her şey: sayılar, dizeler, elemanlar veya bir dizi
+  // (veya fragment) bu türleri içeren.
   optionalNode: PropTypes.node,
 
-  // A React element.
+  // React elemanı.
   optionalElement: PropTypes.element,
 
-  // You can also declare that a prop is an instance of a class. This uses
-  // JS's instanceof operator.
+  // Bir prop'un sınıf nesnesi olduğunu da belirtebilirsiniz.
+  // Bu JS'in instanceof operatörünü kullanır.
   optionalMessage: PropTypes.instanceOf(Message),
 
-  // You can ensure that your prop is limited to specific values by treating
-  // it as an enum.
-  optionalEnum: PropTypes.oneOf(['News', 'Photos']),
+  // Bir prop'un enum olarak değerlendirilerek
+  // belirli değerlerle sınırlı olmasını sağlayabilirsiniz.
+  optionalEnum: PropTypes.oneOf(['Haberler', 'Fotoğraflar']),
 
-  // An object that could be one of many types
+  // Birçok türden birinin olabileceği bir nesne
   optionalUnion: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.instanceOf(Message)
   ]),
 
-  // An array of a certain type
+  // Belirli bir türde bir dizi
   optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
 
-  // An object with property values of a certain type
+  // Belirli bir türde özellik değerlerine sahip bir nesne
   optionalObjectOf: PropTypes.objectOf(PropTypes.number),
 
-  // An object taking on a particular shape
+  // Belirli bir şekildeki nesne
   optionalObjectWithShape: PropTypes.shape({
     color: PropTypes.string,
     fontSize: PropTypes.number
   }),
 
-  // You can chain any of the above with `isRequired` to make sure a warning
-  // is shown if the prop isn't provided.
+  // Prop'un sağlanmadığı durumlarda bir uyarının gösterildiğinden emin olmak için,
+  // yukarıdakilerden herhangi birini `isRequired` ile zincirleyebilirsiniz.
   requiredFunc: PropTypes.func.isRequired,
 
-  // A value of any data type
+  // Herhangi bir veri türünün değeri
   requiredAny: PropTypes.any.isRequired,
 
-  // You can also specify a custom validator. It should return an Error
-  // object if the validation fails. Don't `console.warn` or throw, as this
-  // won't work inside `oneOfType`.
+  // Özel bir doğrulayıcı da belirtebilirsiniz.
+  // Doğrulama başarısız olursa bir Error nesnesi döndürmelidir.
+  // `console.warn` veya `throw` kullanmayın, çünkü bu `oneOfType` içinde çalışmayacaktır.
   customProp: function(props, propName, componentName) {
     if (!/matchme/.test(props[propName])) {
       return new Error(
@@ -103,11 +103,11 @@ MyComponent.propTypes = {
     }
   },
 
-  // You can also supply a custom validator to `arrayOf` and `objectOf`.
-  // It should return an Error object if the validation fails. The validator
-  // will be called for each key in the array or object. The first two
-  // arguments of the validator are the array or object itself, and the
-  // current item's key.
+  // Ayrıca `arrayOf` ve `objectOf`'lara özel bir doğrulayıcı da belirtebilirsiniz.
+  // Doğrulama başarısız olursa bir Error nesnesi döndürmelidir.
+  // Doğrulayıcı, dizideki veya nesnedeki her anahtar için çağrılacaktır.
+  // Doğrulayıcının ilk iki argümanı dizi veya nesnenin kendisi
+  // ve geçerli öğenin anahtarıdır.
   customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
     if (!/matchme/.test(propValue[key])) {
       return new Error(
@@ -119,16 +119,16 @@ MyComponent.propTypes = {
 };
 ```
 
-### Requiring Single Child {#requiring-single-child}
+### Tek Alt Eleman Gerektirmek {#requiring-single-child}
 
-With `PropTypes.element` you can specify that only a single child can be passed to a component as children.
+`PropTypes.element` ile, yalnızca tek bir elemanın bir bileşene alt eleman olarak geçeceğini belirtebilirsiniz.
 
 ```javascript
 import PropTypes from 'prop-types';
 
 class MyComponent extends React.Component {
   render() {
-    // This must be exactly one element or it will warn.
+    // Bu kesinlikle tek bir eleman olmalı; aksi takdirde uyarı verecektir.
     const children = this.props.children;
     return (
       <div>
@@ -143,9 +143,9 @@ MyComponent.propTypes = {
 };
 ```
 
-### Default Prop Values {#default-prop-values}
+### Varsayılan Prop Değerleri {#default-prop-values}
 
-You can define default values for your `props` by assigning to the special `defaultProps` property:
+Özel `defaultProps` niteliğine atama yaparak, `prop`'larınız için varsayılan değerleri tanımlayabilirsiniz:
 
 ```javascript
 class Greeting extends React.Component {
@@ -156,19 +156,19 @@ class Greeting extends React.Component {
   }
 }
 
-// Specifies the default values for props:
+// Prop'lar için varsayılan değerleri belirtir:
 Greeting.defaultProps = {
   name: 'Stranger'
 };
 
-// Renders "Hello, Stranger":
+// "Hello, Stranger" yazısını çıktılar:
 ReactDOM.render(
   <Greeting />,
   document.getElementById('example')
 );
 ```
 
-If you are using a Babel transform like [transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/) , you can also declare `defaultProps` as static property within a React component class. This syntax has not yet been finalized though and will require a compilation step to work within a browser. For more information, see the [class fields proposal](https://github.com/tc39/proposal-class-fields).
+Eğer [transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/) gibi bir Babel dönüşümü kullanıyorsanız, `defaultProps`'u bir React bileşen sınıfında statik özellik olarak da tanımlayabilirsiniz. Bu sözdizimi henüz tamamlanmadı ve tarayıcıda çalışabilmesi için bir derleme adımı gerektirecektir. Daha fazla bilgi için, [sınıf alanları önergesi](https://github.com/tc39/proposal-class-fields)'ne göz atabilirsiniz.
 
 ```javascript
 class Greeting extends React.Component {
@@ -184,4 +184,4 @@ class Greeting extends React.Component {
 }
 ```
 
-The `defaultProps` will be used to ensure that `this.props.name` will have a value if it was not specified by the parent component. The `propTypes` typechecking happens after `defaultProps` are resolved, so typechecking will also apply to the `defaultProps`.
+`this.props.name`'in üst bileşen tarafından belirtilen bir değerinin olmadığı durumlarda, varsayılan bir değere sahip olmasını sağlamak için `defaultProps` kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
