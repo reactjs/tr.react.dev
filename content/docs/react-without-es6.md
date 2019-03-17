@@ -4,18 +4,17 @@ title: React Without ES6
 permalink: docs/react-without-es6.html
 ---
 
-Normally you would define a React component as a plain JavaScript class:
+Normalde bir React bileşenini düz JavaScript sınıfı olarak tanımlarsınız:
 
 ```javascript
 class Greeting extends React.Component {
   render() {
-    return <h1>Hello, {this.props.name}</h1>;
+    return <h1>Merhaba, {this.props.name}</h1>;
   }
 }
 ```
 
-If you don't use ES6 yet, you may use the `create-react-class` module instead:
-
+Henüz ES6 kullanmıyorsanız, sınıf yerine `create-react-class` modülünü kullanabilirsiniz:
 
 ```javascript
 var createReactClass = require('create-react-class');
@@ -26,11 +25,11 @@ var Greeting = createReactClass({
 });
 ```
 
-The API of ES6 classes is similar to `createReactClass()` with a few exceptions.
+ES6 sınıflarının çalışma şekli bir kaç istisna dışında `createReactClass()`'a benzer.
 
-## Declaring Default Props {#declaring-default-props}
+## Varsayılan Prop'ları Tanımlama {#declaring-default-props}
 
-With functions and ES6 classes `defaultProps` is defined as a property on the component itself:
+Fonksiyonlarda ve ES6 sınıflarında `defaultProps`, bileşenin kendisinde özellik olarak tanımlanır.
 
 ```javascript
 class Greeting extends React.Component {
@@ -42,7 +41,7 @@ Greeting.defaultProps = {
 };
 ```
 
-With `createReactClass()`, you need to define `getDefaultProps()` as a function on the passed object:
+`createReactClass()` ile birlikte obje iletilen bir `getDefaultProps()` fonksiyonu tanımlamanız gerekir.
 
 ```javascript
 var Greeting = createReactClass({
@@ -57,9 +56,9 @@ var Greeting = createReactClass({
 });
 ```
 
-## Setting the Initial State {#setting-the-initial-state}
+## Başlangıç State'ini Ayarlamak {#setting-the-initial-state}
 
-In ES6 classes, you can define the initial state by assigning `this.state` in the constructor:
+ES6 sınıflarında, başlangıç state'inizi constructor içindeki `this.state`'e atayarak tanımlayabilirsiniz.
 
 ```javascript
 class Counter extends React.Component {
@@ -71,7 +70,7 @@ class Counter extends React.Component {
 }
 ```
 
-With `createReactClass()`, you have to provide a separate `getInitialState` method that returns the initial state:
+`createReactClass()` ile birlikte, başlangıç state'inizi döndüren ayrı bir `getInitialState` metodu sağlamanız gerekir.
 
 ```javascript
 var Counter = createReactClass({
@@ -84,14 +83,14 @@ var Counter = createReactClass({
 
 ## Autobinding {#autobinding}
 
-In React components declared as ES6 classes, methods follow the same semantics as regular ES6 classes. This means that they don't automatically bind `this` to the instance. You'll have to explicitly use `.bind(this)` in the constructor:
+ES6 sınıfı olarak kullanılan React bileşenlerinde metodlar, normal ES6 sınıflarındaki mantığın aynısını kullanırlar. Yani nesne ile `this`'i otomatik olarak ilişkilendirmezler. Constructor'da açık bir şekilde `.bind(this)` kullanmanız gerekir.
 
 ```javascript
 class SayHello extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {message: 'Hello!'};
-    // This line is important!
+    this.state = {message: 'Merhaba!'};
+    // Bu satır önemli!
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -100,22 +99,22 @@ class SayHello extends React.Component {
   }
 
   render() {
-    // Because `this.handleClick` is bound, we can use it as an event handler.
+    // `this.handleClick` bağlı olduğu için olay yöneticisi olarak kullanabiliriz.
     return (
       <button onClick={this.handleClick}>
-        Say hello
+        Merhaba de
       </button>
     );
   }
 }
 ```
 
-With `createReactClass()`, this is not necessary because it binds all methods:
+Tüm metodları ilişkilendirdiği için `createReactClass()` ile birlikte bunu kullanmak gereksizdir:
 
 ```javascript
 var SayHello = createReactClass({
   getInitialState: function() {
-    return {message: 'Hello!'};
+    return {message: 'Merhaba!'};
   },
 
   handleClick: function() {
@@ -125,26 +124,26 @@ var SayHello = createReactClass({
   render: function() {
     return (
       <button onClick={this.handleClick}>
-        Say hello
+        Merhaba de
       </button>
     );
   }
 });
 ```
 
-This means writing ES6 classes comes with a little more boilerplate code for event handlers, but the upside is slightly better performance in large applications.
+Yani ES6 sınıfları ile yazmak, olay yöneticileri için biraz daha taslak kod yazmayı gerektirir ama iyi tarafıysa şudur: Büyük uygulamalarda biraz daha iyi performans gösterir.
 
-If the boilerplate code is too unattractive to you, you may enable the **experimental** [Class Properties](https://babeljs.io/docs/plugins/transform-class-properties/) syntax proposal with Babel:
+Eğer taslak kod yazmak size itici geliyorsa, Babel ile **deneysel** [Sınıf Özellikleri](https://babeljs.io/docs/plugins/transform-class-properties/) sözdizimini aktif edebilirsiniz.
 
 
 ```javascript
 class SayHello extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {message: 'Hello!'};
+    this.state = {message: 'Merhaba!'};
   }
-  // WARNING: this syntax is experimental!
-  // Using an arrow here binds the method:
+  // UYARI: bu söz dizimi deneyseldir!
+  // Burada arrow kullanmak, metodu ilişkilendirir.
   handleClick = () => {
     alert(this.state.message);
   }
@@ -152,34 +151,33 @@ class SayHello extends React.Component {
   render() {
     return (
       <button onClick={this.handleClick}>
-        Say hello
+        Merhaba de
       </button>
     );
   }
 }
 ```
+Lütfen yukarıdaki sözdiziminin **deneysel** olduğunu ve değişebileceğini ya da teklifin dile aktarılmayabileceğini unutmayınız.
 
-Please note that the syntax above is **experimental** and the syntax may change, or the proposal might not make it into the language.
+Eğer güvenli şekilde hareket etmeyi tercih ediyorsanız, işte size bir kaç seçenek:
 
-If you'd rather play it safe, you have a few options:
+* Metodları constructor içinde bind ediniz.
+* Arrow fonksiyonları kullanınız, örneğin `onClick={(e) => this.handleClick(e)}`.
+* `createReactClass` kullanmaya devam ediniz.
 
-* Bind methods in the constructor.
-* Use arrow functions, e.g. `onClick={(e) => this.handleClick(e)}`.
-* Keep using `createReactClass`.
+## Mixinler {#mixins}
 
-## Mixins {#mixins}
-
->**Note:**
+>**Not:**
 >
->ES6 launched without any mixin support. Therefore, there is no support for mixins when you use React with ES6 classes.
+>ES6, hiç mixin desteği olmadan başlatıldı. Bu nedenle, ES6 sınıfları ile React kullandığınızda mixin desteği yoktur.
 >
->**We also found numerous issues in codebases using mixins, [and don't recommend using them in the new code](/blog/2016/07/13/mixins-considered-harmful.html).**
+>**Aynı zamanda, mixin kullanan kod tabanlarında sayısız sorun bulduk [ve yeni kodlarda kullanmanızı tavsiye etmiyoruz](/blog/2016/07/13/mixins-considered-harmful.html).**
 >
->This section exists only for the reference.
+>Bu alan sadece referans için bulunmaktadır.
 
-Sometimes very different components may share some common functionality. These are sometimes called [cross-cutting concerns](https://en.wikipedia.org/wiki/Cross-cutting_concern). `createReactClass` lets you use a legacy `mixins` system for that.
+Bazen çok farklı bileşenler aynı fonksiyonaliteyi paylaşabilirler. Bazen buna [kesişen endişe](https://eksisozluk.com/aspect-oriented-programming--574712?nr=true&rf=cross%20cutting%20concern) denir. `createReactClass` bunun için eski `mixins` sistemini kullanmanıza izin verir.
 
-One common use case is a component wanting to update itself on a time interval. It's easy to use `setInterval()`, but it's important to cancel your interval when you don't need it anymore to save memory. React provides [lifecycle methods](/docs/react-component.html#the-component-lifecycle) that let you know when a component is about to be created or destroyed. Let's create a simple mixin that uses these methods to provide an easy `setInterval()` function that will automatically get cleaned up when your component is destroyed.
+Sık kullanılan durumlardan biri, bileşenin bir zaman aralığında kendisini güncellemek istemesidir. `setInterval()` kullanmak kolaydır ama hafızadan yer kazanmak için ona ihtiyacınız olmadığında zaman aralığını iptal etmek önemlidir. React size bileşenin yaratılmak ya da yok edilmek üzere olduğunu anlamanız için [hayat döngüsü](/docs/react-component.html#the-component-lifecycle) metodlarını sağlar. Gelin bileşeniniz yok edildiğinde otomatik olarak temizlenen basit bir `setInterval()` fonksiyonunu yaratmak için bu metodları kullanan basit bir mixin yazalım.
 
 ```javascript
 var SetIntervalMixin = {
@@ -197,12 +195,12 @@ var SetIntervalMixin = {
 var createReactClass = require('create-react-class');
 
 var TickTock = createReactClass({
-  mixins: [SetIntervalMixin], // Use the mixin
+  mixins: [SetIntervalMixin], // Mixin kullan
   getInitialState: function() {
     return {seconds: 0};
   },
   componentDidMount: function() {
-    this.setInterval(this.tick, 1000); // Call a method on the mixin
+    this.setInterval(this.tick, 1000); // Mixinde metod çağır
   },
   tick: function() {
     this.setState({seconds: this.state.seconds + 1});
@@ -210,7 +208,7 @@ var TickTock = createReactClass({
   render: function() {
     return (
       <p>
-        React has been running for {this.state.seconds} seconds.
+        React {this.state.seconds} saniyedir çalışıyor.
       </p>
     );
   }
@@ -222,4 +220,4 @@ ReactDOM.render(
 );
 ```
 
-If a component is using multiple mixins and several mixins define the same lifecycle method (i.e. several mixins want to do some cleanup when the component is destroyed), all of the lifecycle methods are guaranteed to be called. Methods defined on mixins run in the order mixins were listed, followed by a method call on the component.
+Eğer bir bileşen birden çok mixin kullanıyor ve birkaç mixini aynı hayat döngüsü metodunda tanımlıyorsa (yani bileşen yok edildiğinde birkaç mixin temizlenmek isteniyorsa), tüm yaşam döngüsü metodlarının çağrılması garanti edilir. Mixin'lerde tanımlanan metodlar, bileşendeki metod çağrılarından sonra listelenen sırayla çalıştırılırlar.

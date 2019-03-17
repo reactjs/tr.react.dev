@@ -40,21 +40,21 @@ Bu öğreticide, React ile bir tic-tac-toe (XOX oyunu) nasıl geliştirilir onu 
 
 **[Buradan](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** oyunun son halini görebilirsiniz. Eğer bu kodlara aşina değilseniz ve size karışık geliyorsa endişelenmeyin. Çünkü bu öğreticinin amacı, React'in ve React'teki kod yapısının anlaşılmasında size yardımcı olmaktır. 
 
-Bu öğreticiye başlamadan önce, yukarıda belirttiğimiz linke giderek oyununu oynamanızı ve incelemenizi tavsiye ediyoruz. Oyunu oynadığınızda farkedeceğiniz gibi oyun tahtasının sağında numaralandırılmış bir liste bulunmaktadır. Bu liste size, oyunda oluşan hamlelerin bir geçmişini sunar ve oyunda ilerledikçe liste de otomatik olarak güncellenir.
+Bu öğreticiye başlamadan önce, yukarıda belirttiğimiz linke giderek oyunu oynamanızı ve incelemenizi tavsiye ediyoruz. Oyunu oynadığınızda farkedeceğiniz gibi; oyun tahtasının sağında, numaralandırılmış bir liste bulunmaktadır. Bu liste size, oyunda oluşan hamlelerin bir geçmişini sunar ve oyunda ilerledikçe liste de otomatik olarak güncellenir.
 
 Oyunu inceledikten sonra ilgili sayfayı kapatabilirsiniz. Çünkü bu öğreticiye sıfırdan bir şablonla başlayacağız. 
 
-Gelin şimdi oyunu kodlamak için gereken geliştirim ortamının kurulumuna değinelim.
+Gelin şimdi oyunu kodlamak için gereken geliştirme ortamının kurulumuna değinelim.
 
 ### Ön gereksinimler {#prerequisites}
 
-Bu öğreticide, HTML ve JavaScript'i az-çok bildiğinizi varsayacağız. Fakat herhangi bir programlama dilinden gelseniz bile aşamaları takip edebilirsiniz. Ayrıca temel programlama konseptleri olan fonksiyonlar, nesneler, diziler ve daha az oranda da sınıflar hakkında aşina olduğunuzu varsayıyoruz.
+Bu öğreticide, HTML ve JavaScript'i az-çok bildiğinizi varsayacağız. Fakat herhangi bir programlama dilinden gelseniz bile aşamaları takip edebilirsiniz. Ayrıca temel programlama konseptleri olan fonksiyonlara, nesnelere, dizilere ve az da olsa sınıflara aşina olduğunuzu varsayıyoruz.
 
 Eğer JavaScript hakkında bilgi edinmeniz gerekiyorsa, [bu rehberi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) okumanızı tavsiye ederiz. JavaScript'in en güncel versiyonu olan ES6 (EcmaScript 6)'dan bazı özellikleri kullanacağız. Bu öğreticide de hepsi birer ES6 özelliği olan [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), [`class`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), ve [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ifadelerini kullanıyor olacağız. ES6, henüz her tarayıcı tarafından tam olarak desteklenmediği için [Babel REPL](babel://es5-syntax-example)'ı kullanarak ES6 kodunun derlenmiş halini görebilirsiniz.
 
 ## Öğretici İçin Kurulum {#setup-for-the-tutorial}
 
-Bu öğreticiyi tamamlamanın iki yolu bulunmaktadır: kodu tarayıcınızda yazabilir veya bilgisayarınızdaki yerel geliştirim ortamını kurabilirsiniz. 
+Bu öğreticiyi tamamlamanın iki yolu bulunmaktadır: kodu tarayıcınızda yazabilir veya bilgisayarınızdaki yerel geliştirme ortamını kurabilirsiniz. 
 
 ### Kurulum Seçeneği 1: Kodu Tarayıcıda Yazma {#setup-option-1-write-code-in-the-browser}
 
@@ -64,7 +64,7 @@ Başlamanız için en kolay olan yöntemdir.
 
 Bu seçeneği tercih ediyorsanız, ikinci seçeneği es geçebilir, ve [Genel bakış](#overview) bölümüne giderek genel bilgi edinebilirsiniz.
 
-### Kurulum Seçeneği 2: Yerel Geliştirim Ortamı {#setup-option-2-local-development-environment}
+### Kurulum Seçeneği 2: Yerel Geliştirme Ortamı {#setup-option-2-local-development-environment}
 
 Bu seçenek tamamen isteğe bağlıdır ve bu öğreticiyi takip etmek için zorunlu değildir.
 
@@ -124,7 +124,7 @@ Metin editörünüzde, kodun renkli halde görüntülenmesini sağlamak için [b
 
 </details>
 
-### Bir Yerde Takıldım, Yardım! {#help-im-stuck}
+### Takıldım, Yardım Edin! {#help-im-stuck}
 
 Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınızdan dolayı devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız. Devamında size yardımıcı olacağız.
 
@@ -198,7 +198,7 @@ Kodu incelediğinizde aşağıdaki 3 React bileşenini fark edeceksiniz:
 
 Öğretici üzerinde çalışırken ve kopyala / yapıştır yerine, kodu elle yazmanızı şiddetle öneriyoruz. Bu, kas hafızanızı ve daha güçlü bir kavrayış geliştirmenize yardımcı olacaktır.
 
-Board'ın `renderSquare` metodunda, `value` prop'unu Square'e gönderecek şekilde kodu değiştirelim:
+Board bileşeninin `renderSquare` metodunda, `value` prop'unu Square bileşenine gönderecek şekilde kodu değiştirelim:
 
 ```js{3}
 class Board extends React.Component {
@@ -207,7 +207,7 @@ class Board extends React.Component {
   }
 ```
 
-Square's `render` metodunu ilgili değeri göstermesi için `{/* TODO */}` kısmını `{this.props.value}` şekilde değiştirelim:
+Square bileşeninin `render` metodunu, ilgili değeri göstermesi için `{/* TODO */}` kısmını `{this.props.value}` şekilde değiştirelim:
 
 ```js{5}
 class Square extends React.Component {
@@ -231,7 +231,7 @@ Sonrası: Eğer değişiklikleri doğru bir şekilde uyguladıysanız render iş
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/aWWQOG?editors=0010)**
 
-Tebrikler! Board bileşeninden Square bileşenine "prop ile veri geçirmeyi" başardınız. React uygulamalarında prop'ların ebeveyn bileşenten çocuk bileşene geçişi sayesinde veri akışının oluşması sağlanır.
+Tebrikler! Board bileşeninden Square bileşenine "prop ile veri geçirmeyi" başardınız. React uygulamalarında prop'ların üst bileşenden alt bileşene geçişi sayesinde veri akışının oluşması sağlanır.
 
 ### Etkileşimli bir Bileşen Yapımı {#making-an-interactive-component}
 
@@ -331,7 +331,7 @@ class Square extends React.Component {
 
 Square'in `render` metodundaki `onClick` metodundan, `this.setState`'in çağrılmasını sağladık. Bu sayede Square'deki `<button>` elemanına her tıklandığında React, Square bileşenini tekrar render edecektir.  Güncelleme sonrasında Square'in `this.state.value` değerine `'X'` ataması gerçekleşecektir, ve bu sayede oyun tahtasında 'X''i göreceğiz. Herhangi bir Square bileşenine tıklandığı anda içerisinde 'X' görüntülenecektir.
 
-Bir bileşenteki `setState` fonksiyonunu çağırdığınızda, React otomatik olarak içerisindeki çocuk bileşenleri de güncellemiş oluyor.
+Bir bileşenteki `setState` fonksiyonunu çağırdığınızda, React otomatik olarak içerisindeki alt bileşenleri de güncellemiş oluyor.
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/VbbVLg?editors=0010)**
 
@@ -356,15 +356,15 @@ React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ
 
 Artık tic-tac-toe oyunumuz için temel kod bloklarına sahibiz. Oyunun tamamlanması için tahta üzerinde "X" ve "O"'ların birbiri ardına yerleştirilmesi gerekiyor. Sonrasında oyunda bir kazananın belirlenmesi için değişiklikler yapılmasına ihtiyaç var. 
 
-### State'in Ebeveyn bileşene Taşınması {#lifting-state-up}
+### State'in Yukarı Taşınması {#lifting-state-up}
 
 Şu an her bir Square bileşeni oyunun state'ini değiştirebiliyor. Kazananı belirleyebilmemiz için, 9 square'in de değerine ihtiyacımız var.
 
-Bunu gerçekleştirmek için Board'un, her bir Square'e, kendi state'inin ne olduğunu sorması gerektiğini düşünebiliriz. Bu yöntem her ne kadar React'te uygulanabilir olsa da, yapmanızı tavsiye etmiyoruz. Çünkü bu şekilde yazılan kod; anlaşılabilirlikten uzak olacak, hataların oluşmasına daha müsait hale gelecek ve kodu refactor etmek istediğimizde bize çok daha büyük zorluklar çıkaracaktır. Bu nedenle, her bir Square sınıfında, kendi state'inin tutulmasının yerine, ebeveyn olan Board bileşeninde oyunun tüm state'ini tutmak en iyi çözümdür. Bunun sonucunda Board bileşeni, her bir Square'e neyi göstermesi gerektiğini prop'lar aracılığıyla aktarır ([daha önce de prop'lar aracılığıyla her bir Square'e bir sayı atamıştık](#passing-data-through-props)).
+Bunu gerçekleştirmek için Board'un, her bir Square'e, kendi state'inin ne olduğunu sorması gerektiğini düşünebiliriz. Bu yöntem her ne kadar React'te uygulanabilir olsa da, yapmanızı tavsiye etmiyoruz. Çünkü bu şekilde yazılan kod; anlaşılabilirlikten uzak olacak, hataların oluşmasına daha müsait hale gelecek ve kodu refactor etmek istediğimizde bize çok daha büyük zorluklar çıkaracaktır. Bu nedenle, her bir Square sınıfında, kendi state'inin tutulmasının yerine, üst bileşen olan Board bileşeninde oyunun tüm state'ini tutmak en iyi çözümdür. Bunun sonucunda Board bileşeni, her bir Square'e neyi göstermesi gerektiğini prop'lar aracılığıyla aktarır ([daha önce de prop'lar aracılığıyla her bir Square'e bir sayı atamıştık](#passing-data-through-props)).
 
-**Bu örnekteki gibi, birçok çocuk bileşenden verilerin toplanması veya iki çocuğun birbirleri arasında iletişim kurabilmesi için, ebeveyn bileşende paylaşımlı bir state oluşturmanız gerekmektedir. Ebeveyn bileşen, prop'lar aracılığıyla state'ini çocuklara aktarabilir. Bu sayede çocuk bileşenler hem birbirleri arasında hem de ebeveyn ile senkronize hale gelirler.**
+**Bu örnekteki gibi, birçok alt bileşenden verilerin toplanması veya iki çocuğun birbirleri arasında iletişim kurabilmesi için, üst bileşende paylaşımlı bir state oluşturmanız gerekmektedir. Üst bileşen, prop'lar aracılığıyla state'ini alt bileşenlere aktarabilir. Bu sayede alt bileşenler hem birbirleri arasında hem de üst bileşen ile senkronize hale gelirler.**
 
-React bileşenleri refactor edilirken, state'in ebeveyn'e taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım.
+React bileşenleri refactor edilirken, state'in yukarı taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım.
 
 Board'a bir constructor ekleyelim ve Board'un başlangıç state'ine bir dizi atayarak içerisinde 9 adet null değerinin bulunmasını sağlayalım. 9 kareye, 9 adet null karşılık gelecektir:
 
@@ -400,7 +400,7 @@ Board'un `renderSquare` metodu aşağıdaki gibi görünüyor:
   }
 ```
 
-Projeye başladığımızda, 0'dan 8'e kadar olan sayıları her bir karede göstermek için, Board'daki `value` prop'unu çocuk bileşenlere [aktarmıştık](#passing-data-through-props). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square bileşeninin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square bileşeni, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
+Projeye başladığımızda, 0'dan 8'e kadar olan sayıları her bir karede göstermek için, Board'daki `value` prop'unu alt bileşenlere [aktarmıştık](#passing-data-through-props). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square bileşeninin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square bileşeni, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
 
 Şimdi prop aktarma mekanizmasını tekrar kullanacağız. Bunun için her bir Square'e kendi mevcut değerini (`'X'`, `'O'`, or `null`) atamak için Board bileşeninde değişiklik yapalım. Board'un constructor'ında halihazırda tanımladığımız bir `squares` dizisi bulunuyor. Board'un `renderSquare` metodunu, bu diziden verileri alacak şekilde değiştirelim: 
 
@@ -567,13 +567,13 @@ Immutable nesnelerdeki değişikliklerin tespit edilmesi daha kolaydır. Immutab
 
 #### Tekrar Render Etme Zamanını Belirlemek {#determining-when-to-re-render-in-react}
 
-React'te Immutability'nin ana faydası ise, _pure component_'lar (saf/katıksız bileşenler) yapmayı kolaylaştırmasıdır. Immutable veriler, değişiklik yapıldığını kolayca tespit edebilirler. Bu sayede değişiklik olduğunda ilgili bileşenin tekrar render edilmesine yardımcı olurlar.
+React'te Immutability'nin ana faydası ise, _pure component_'ler (saf/katıksız bileşenler) yapmayı kolaylaştırmasıdır. Immutable veriler, değişiklik yapıldığını kolayca tespit edebilirler. Bu sayede değişiklik olduğunda ilgili bileşenin tekrar render edilmesine yardımcı olurlar.
 
-[Performansın iyileştirmesi](/docs/optimizing-performance.html#examples) yazısında  `shouldComponentUpdate()` fonksiyonunun ne olduğuna ve nasıl *pure component*'ları oluşturabileceğiniz hakkında bilgi edinebilirsiniz.
+[Performansın iyileştirmesi](/docs/optimizing-performance.html#examples) yazısında  `shouldComponentUpdate()` fonksiyonunun ne olduğuna ve nasıl *pure component*'leri oluşturabileceğiniz hakkında bilgi edinebilirsiniz.
 
 ### Fonksiyon bileşenleri {#function-components}
 
-Square bileşenini masıl **fonksiyon bileşeni** haline getireceğimize değinelim.
+Square bileşenini nasıl **fonksiyon bileşeni** haline getireceğimize değinelim.
 
 React'te **fonksiyon bileşen**leri, sadece `render` metodunu içerirler. İçerisinde herhangi bir state bulundurmadıkları için daha kolay bir şekilde bileşen oluşturmayı sağlarlar. `React.Component`'tan türetilen bir sınıf bileşeni oluşturmak yerine, sadece `prop`ları girdi olarak alan ve render edilecek kısımları döndüren bir fonksiyon bileşeni yazabiliriz. Fonksiyon bileşenleri kısa bir şekilde yazıldığı için, sizi sınıf bileşenlerine göre daha az yorar.
 
@@ -762,7 +762,7 @@ Oyunda farkettiyseniz bir oyuncu, diğer oyuncunun işaretlediği karenin üstü
 
 Tebrikler. Artık çalışan bir tic-tac-toe oyununuz var. Ayrıca bu kısma kadar React'in temel özelliklerini de öğrenmiş durumdasınız. Bu nedenle aslında gerçek kazanan *sizsiniz*.
 
-## Zamanda Yolculuğun eklenmesi {#adding-time-travel}
+## Zamanda Yolculuğun Eklenmesi {#adding-time-travel}
 
 Son çalışma olarak, oyunda önceki hamlelere gitmeyi sağayacak olan "zamanda geriye gitme" özelliğini ekleyelim.
 
@@ -806,11 +806,11 @@ history = [
 
 Şimdi `history` dizisinin, hangi bileşenin state'inde yer alması gerektiğine karar vereceğiz.
 
-### State'in Ebeveyn bileşene Taşınması (Tekrar) {#lifting-state-up-again}
+### State'in Yukarı Taşınması (Tekrar) {#lifting-state-up-again}
 
 En üst seviyedeki Game bileşeninin, geçmiş hamlelerin listesini görüntülemesini istiyoruz. Bunun için, Game bileşeninin `history`'e erişebilmesi gerekiyor. Bunu sağlamanın yolu, `history`'i Game bileşenine taşımaktan geçiyor.
 
-`history` state'ini, Game bileşenine yerleştireceğimiz için, bir alt bileşen olan Board'dan `squares` state'ini çıkarmamız gerekiyor. [State'in Ebeveyn bileşene Taşınması](#lifting-state-up) bölümünde Square bileşeninden Board bileşenine taşıma yaptığımız gibi, şimdi de Board bileşeninden Game bileşenine taşıma işlemini gerçekleştirmemiz gerekiyor. Bu sayede Game bileşeni, Board'un verisi üzerinde tamamen kontrolü ele almış olacak ve `history`'deki önceki hamlelerin Board'a işlemesini bildirebilecektir.
+`history` state'ini, Game bileşenine yerleştireceğimiz için, bir alt bileşen olan Board'dan `squares` state'ini çıkarmamız gerekiyor. [State'in Yukarı Taşınması](#lifting-state-up) bölümünde Square bileşeninden Board bileşenine taşıma yaptığımız gibi, şimdi de Board bileşeninden Game bileşenine taşıma işlemini gerçekleştirmemiz gerekiyor. Bu sayede Game bileşeni, Board'un verisi üzerinde tamamen kontrolü ele almış olacak ve `history`'deki önceki hamlelerin Board'a işlemesini bildirebilecektir.
 
 Öncelikle, Game bileşeninin constructor'ında, state'in ilk halini oluşturmamız gerekiyor: 
 

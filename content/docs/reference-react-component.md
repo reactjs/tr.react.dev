@@ -15,11 +15,13 @@ redirect_from:
   - "tips/use-react-with-other-libraries.html"
 ---
 
-This page contains a detailed API reference for the React component class definition. It assumes you're familiar with fundamental React concepts, such as [Components and Props](/docs/components-and-props.html), as well as [State and Lifecycle](/docs/state-and-lifecycle.html). If you're not, read them first.
+Bu sayfa, React sınıf bileşenleri hakkında detaylı bir API dokümanı içerir. Bu nedenle, [Bileşenler ve Prop'lar](/docs/components-and-props.html), [State ve Yaşam Döngüsü](/docs/state-and-lifecycle.html) gibi temel React kavramlarına aşina olduğunuzu varsaymaktadır. Eğer değilseniz öncelikle bu dokümanları okuyunuz. 
 
-## Overview {#overview}
+## Giriş {#overview}
 
-React lets you define components as classes or functions. Components defined as classes currently provide more features which are described in detail on this page. To define a React component class, you need to extend `React.Component`:
+React, bileşenleri sınıf ve fonksiyon olarak tanımlamanızı sağlar. Sınıf olarak tanımlanan bileşenler, fonksiyon olanlara göre daha fazla özellik sunar. Bu özellikler sayfanın ilerleyen bölümlerinde daha detaylı şekilde ele alınacaktır. 
+
+React bileşen sınıfı oluşturmak için, sınıfınızı `React.Component`'tan türetmeniz gerekir:
 
 ```js
 class Welcome extends React.Component {
@@ -29,36 +31,36 @@ class Welcome extends React.Component {
 }
 ```
 
-The only method you *must* define in a `React.Component` subclass is called [`render()`](#render). All the other methods described on this page are optional.
+`React.Component`'tan türetilen sınıflarda, *zorunlu* olarak tanımlamanız gereken metot sadece [`render()`](#render)'dır. Bu sayfada tanıtılacak olan diğer metotlar ise opsiyoneldir. 
 
-**We strongly recommend against creating your own base component classes.** In React components, [code reuse is primarily achieved through composition rather than inheritance](/docs/composition-vs-inheritance.html).
+**`React.Component` yerine kendi ürettiğiniz temel sınıfları oluşturmanızı kesinlikle tavsiye etmiyoruz.** Çünkü React bileşenlerinde, kodun tekrar kullanılabilirliği  [kalıtım yoluyla değil, kompozisyon ile sağlanır](/docs/composition-vs-inheritance.html).
 
->Note:
+>Not:
 >
->React doesn't force you to use the ES6 class syntax. If you prefer to avoid it, you may use the `create-react-class` module or a similar custom abstraction instead. Take a look at [Using React without ES6](/docs/react-without-es6.html) to learn more.
+>React'te sınıf bileşeni tanımlarken, ES6 kod yapısını kullanmak zorunda değilsiniz. Eğer ES6 kullanmak istemiyorsanız, npm paketi olarak yer alan [create-react-class](/docs/creact-without-es6.html) modülünü veya benzer bir özel soyutlama yöntemini kullanabilirsiniz. 
 
-### The Component Lifecycle {#the-component-lifecycle}
+### Bir Bileşenin Yaşam Döngüsü {#the-component-lifecycle}
 
-Each component has several "lifecycle methods" that you can override to run code at particular times in the process. **You can use [this lifecycle diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) as a cheat sheet.** In the list below, commonly used lifecycle methods are marked as **bold**. The rest of them exist for relatively rare use cases.
+Her bileşen, belirli durumlarda çalıştırabileceğiniz birkaç "yaşam döngüsü metodu" (lifecycle methods) sunar. **Bu metodları hatırlamak için, [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) kullanabilirsiniz.** Aşağıdaki listede, yaygın olarak kullanılan yaşam döngüsü metodları **kalın** harfler ile belirtilmiştir. Geri kalan metotlar, daha nadir kullanımlar için uygundur.
 
-#### Mounting {#mounting}
+#### Eklenmesi {#mounting}
 
-These methods are called in the following order when an instance of a component is being created and inserted into the DOM:
+Bir bileşenin oluşumundan ve DOM'a eklenmesine kadar geçen süreç içerisinde çağrılan metotlar, sırasıyla aşağıdaki gibi belirlenmiştir:
 
 - [**`constructor()`**](#constructor)
 - [`static getDerivedStateFromProps()`](#static-getderivedstatefromprops)
 - [**`render()`**](#render)
 - [**`componentDidMount()`**](#componentdidmount)
 
->Note:
+>Not:
 >
->These methods are considered legacy and you should [avoid them](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>Aşağıdaki metot eski React projelerinde kullanılmaktaydı. Fakat asenkron render etme süreçlerinde problemli olduğundan dolayı artık yeni projelerde [kullanmamanız gerekmektedir](/blog/2018/03/27/update-on-async-rendering.html):
 >
 >- [`UNSAFE_componentWillMount()`](#unsafe_componentwillmount)
 
-#### Updating {#updating}
+#### Güncellenmesi {#updating}
 
-An update can be caused by changes to props or state. These methods are called in the following order when a component is being re-rendered:
+Bileşenin güncellemesi, kendi props'u veya state'i üzerindeki değişikliklerden oluşabilir. Bir bileşenin tekrar render edildiğinde çağrılan metotlar sırasıyla aşağıdaki gibidir:
 
 - [`static getDerivedStateFromProps()`](#static-getderivedstatefromprops)
 - [`shouldComponentUpdate()`](#shouldcomponentupdate)
@@ -66,50 +68,50 @@ An update can be caused by changes to props or state. These methods are called i
 - [`getSnapshotBeforeUpdate()`](#getsnapshotbeforeupdate)
 - [**`componentDidUpdate()`**](#componentdidupdate)
 
->Note:
+>Not:
 >
->These methods are considered legacy and you should [avoid them](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>Aşağıdaki metotlar problemli olduğundan dolayı artık yeni projelerde [kullanmamanız gerekir](/blog/2018/03/27/update-on-async-rendering.html):
 >
 >- [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate)
 >- [`UNSAFE_componentWillReceiveProps()`](#unsafe_componentwillreceiveprops)
 
-#### Unmounting {#unmounting}
+#### Çıkarılması {#unmounting}
 
-This method is called when a component is being removed from the DOM:
+Bir bileşen, DOM'dan çıkarıldığında bu metot çalışır:
 
 - [**`componentWillUnmount()`**](#componentwillunmount)
 
-#### Error Handling {#error-handling}
+#### Hatanın Yakalanması {#error-handling}
 
-These methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
+Aşağıdaki metotlar; render esnasında, yaşam döngüsü metodunda veya herhangi bir alt bileşenin constructor'ında bir hata oluştuğunda çağrılmaktadır:
 
 - [`static getDerivedStateFromError()`](#static-getderivedstatefromerror)
 - [`componentDidCatch()`](#componentdidcatch)
 
-### Other APIs {#other-apis}
+### Diğer API'lar {#other-apis}
 
-Each component also provides some other APIs:
+hHr bileşen, bu metotların haricinde aşağıdaki gibi bazı API'ları sunmaktadır:
 
   - [`setState()`](#setstate)
   - [`forceUpdate()`](#forceupdate)
 
-### Class Properties {#class-properties}
+### Sınıf Özellikleri {#class-properties}
 
   - [`defaultProps`](#defaultprops)
   - [`displayName`](#displayname)
 
-### Instance Properties {#instance-properties}
+### Nesne Özellikleri {#instance-properties}
 
   - [`props`](#props)
   - [`state`](#state)
 
 * * *
 
-## Reference {#reference}
+## Başvuru Dokümanı {#reference}
 
-### Commonly Used Lifecycle Methods {#commonly-used-lifecycle-methods}
+### Yaygın Olarak Kullanılan Yaşam Döngüsü Metotları {#commonly-used-lifecycle-methods}
 
-The methods in this section cover the vast majority of use cases you'll encounter creating React components. **For a visual reference, check out [this lifecycle diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/).**
+Bu bölümde anlatılacak metotlar, React bileşenleri oluştururken yaygın olarak karşılaşacağınız kullanım senaryolarını içerir. **Görsel bir anlatım için [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) inceleyebilirsiniz.**
 
 ### `render()` {#render}
 
@@ -117,23 +119,23 @@ The methods in this section cover the vast majority of use cases you'll encounte
 render()
 ```
 
-The `render()` method is the only required method in a class component.
+`render()` metodu, bir sınıf bileşeni oluşturmak için gereken tek metottur.
 
-When called, it should examine `this.props` and `this.state` and return one of the following types:
+Çağrıldığında, `this.props` ile `this.state`'i denetler ve aşağıdaki veri tiplerinden birini geri döndürür:
 
-- **React elements.** Typically created via [JSX](/docs/introducing-jsx.html). For example, `<div />` and `<MyComponent />` are React elements that instruct React to render a DOM node, or another user-defined component, respectively.
-- **Arrays and fragments.** Let you return multiple elements from render. See the documentation on [fragments](/docs/fragments.html) for more details.
-- **Portals**. Let you render children into a different DOM subtree. See the documentation on [portals](/docs/portals.html) for more details.
-- **String and numbers.** These are rendered as text nodes in the DOM.
-- **Booleans or `null`**. Render nothing. (Mostly exists to support `return test && <Child />` pattern, where `test` is boolean.)
+- **React elementleri.** Genellikle [JSX kodu](/docs/introducing-jsx.html) kullanılarak oluşturulurlar. Örneğin, `<div />` ve `<MyComponent />` birer React elementidir. `<div/>`, React'e bir HTML DOM düğümünü render etmesini gerektiğini bildirir. `<MyComponent/>` ise kullanıcının tanımladığı bir React bileşendir.
+- **Diziler and fragment'lar.** Render edilecek olan birden fazla elemanı geri döndürürler. Daha fazla bilgi için [fragments](/docs/fragments.html) dokümanını inceleyebilirsiniz.
+- **Portal'lar**. Alt bileşenleri, farklı bir DOM alt ağacı olarak render etmeyi sağlarlar. Daha fazla bilgi için [portals](/docs/portals.html) dokümanını inceleyebilirsiniz.
+- **String'ler ve sayılar.** DOM içerisinde metin düğümü olarak render edilirler.
+- **Boolean'lar ve `null`**. Hiçbir şey render etmezler. (Genellikle `return test && <Child />` tarzındaki kod yapısını desteklemek için vardırlar. Buradaki `test`, boolean tipinde bir değişkendir.)
 
-The `render()` function should be pure, meaning that it does not modify component state, it returns the same result each time it's invoked, and it does not directly interact with the browser.
+`render()` metodu saf halde olmalıdır. Yani bileşenin state'ini değiştirmemeli, aynı parametrelerle çağrıldığında hep aynı çıktıyı vermeli, ve internet tarayıcısı ile direkt olarak etkileşimde **bulunmamalıdır**. Eğer tarayıcı ile etkileşimde bulunmanız gerekirse, `componentDidMount()`'ta veya diğer yaşam döngüsü metotlarında bu işlemi gerçekleştiriniz. 
 
-If you need to interact with the browser, perform your work in `componentDidMount()` or the other lifecycle methods instead. Keeping `render()` pure makes components easier to think about.
+`render()`'ın saf halde tutulması, bileşen üzerinde daha kolay düşünmenizi sağlar.
 
-> Note
+> Not
 >
-> `render()` will not be invoked if [`shouldComponentUpdate()`](#shouldcomponentupdate) returns false.
+> Eğer [`shouldComponentUpdate()`](#shouldcomponentupdate) metodu `false` dönerse, `render()` metodu çağrılmaz.
 
 * * *
 
@@ -143,47 +145,47 @@ If you need to interact with the browser, perform your work in `componentDidMoun
 constructor(props)
 ```
 
-**If you don't initialize state and you don't bind methods, you don't need to implement a constructor for your React component.**
+**state'i kullanmadığınız durumlarda veya `bind()` fonksiyonu ile herhangi bir metot bağlamadığınız sürece, React bileşeni için bir constructor metodu oluşturmanız gerekli değildir.**
 
-The constructor for a React component is called before it is mounted. When implementing the constructor for a `React.Component` subclass, you should call `super(props)` before any other statement. Otherwise, `this.props` will be undefined in the constructor, which can lead to bugs.
+Bir React bileşeninin constructor'ı, ilgili bileşen uygulamaya eklenmeden önce çağrılır. `React.Component`'tan türetilen sınıf için bir constructor oluştururken, fonksiyon içerisinde ilk satırda `super(props)` çağırmanız **zorunludur**. Aksi halde `this.props` özelliği, constructor içerisinde `undefined` olarak değer alacaktır. Bu durum, uygulamanızda birtakım hatalara neden olabilir.
 
-Typically, in React constructors are only used for two purposes:
+Constructor, genellikle iki temel amaçla kullanılır:
 
-* Initializing [local state](/docs/state-and-lifecycle.html) by assigning an object to `this.state`.
-* Binding [event handler](/docs/handling-events.html) methods to an instance.
+1. `this.state`'e bir nesne atanarak [yerel state](/docs/state-and-lifecycle.html)'in oluşturulması.
+2. `bind()` metodu kullanılarak, bileşene [olay metotlarının](/docs/handling-events.html) bağlanması.
 
-You **should not call `setState()`** in the `constructor()`. Instead, if your component needs to use local state, **assign the initial state to `this.state`** directly in the constructor:
+`constructor()` içerisinde, `setState()` metodunu **çağırmamalısınız**. Eğer bileşeninizin yerel state'i kullanması gerekiyorsa, ilgili değişkenleri constructor içerisinde direkt olarak **`this.state`'e atayınız**:
 
 ```js
 constructor(props) {
   super(props);
-  // Don't call this.setState() here!
+  // Burada this.setState()'i çağırmayınız!
   this.state = { counter: 0 };
   this.handleClick = this.handleClick.bind(this);
 }
 ```
 
-Constructor is the only place where you should assign `this.state` directly. In all other methods, you need to use `this.setState()` instead.
+`this.state`'e direkt olarak atama yapmanız gereken tek yer constructor'dır. Diğer tüm metotlarda, `this.setState()`'i kullanmanız gereklidir.
 
-Avoid introducing any side-effects or subscriptions in the constructor. For those use cases, use `componentDidMount()` instead.
+Constructor'da, yan etki eden metotlardan veya `setInterval()` gibi abonelik metotlarını oluşturmaktan kaçınınız. Bu tür işlemleri `componentDidMount()` metodunda gerçekleştiriniz. 
 
->Note
+>Not
 >
->**Avoid copying props into state! This is a common mistake:**
+>**state'e prop nesnelerinin içeriklerini atamayınız! Bu çok yaygın olarak yapılan bir hatadır:**
 >
 >```js
 >constructor(props) {
 >  super(props);
->  // Don't do this!
+>  // İşte bunu yapmayınız!
 >  this.state = { color: props.color };
 >}
 >```
 >
->The problem is that it's both unnecessary (you can use `this.props.color` directly instead), and creates bugs (updates to the `color` prop won't be reflected in the state).
+>Buradaki problemlerden birincisi, state'e props değerinin atanması gereksizdir. Çünkü `this.props.color` değeri direkt olarak kullanılabilir. İkinci problem ise, `color` prop'unda yapılan değişiklikler, state'e henüz yansıtılmadığı için hatalara neden olur. 
 >
->**Only use this pattern if you intentionally want to ignore prop updates.** In that case, it makes sense to rename the prop to be called `initialColor` or `defaultColor`. You can then force a component to "reset" its internal state by [changing its `key`](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) when necessary.
+>**Bu tarz bir kodlamayı, yalnızca prop güncellemelerini göz ardı etmek istediğinizde yapınız.** Böyle bir durumda `color` değişkenini, `initialColor` (başlangıç rengi) veya `defaultColor` (varsayılan renk) olarak isimlendirmek daha uygun hale gelecektir. Bileşenin iç state'ini güncellemek için zorlamanız gerektiğinde bunu [`key` özelliğini değiştirerek](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) yapabilirsiniz.
 >
->Read our [blog post on avoiding derived state](/blog/2018/06/07/you-probably-dont-need-derived-state.html) to learn about what to do if you think you need some state to depend on the props.
+>[State'in türetilmesinden kaçınmak](/blog/2018/06/07/you-probably-dont-need-derived-state.html) adlı makalemizi okuyarak, prop'lara bağlı bir state'e ihtiyacınız olduğunda ne yapmanız gerektiği ile ilgili detaylı bilgi edinebilirsiniz.
 
 
 * * *
@@ -194,11 +196,11 @@ Avoid introducing any side-effects or subscriptions in the constructor. For thos
 componentDidMount()
 ```
 
-`componentDidMount()` is invoked immediately after a component is mounted (inserted into the tree). Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+Bir bileşen, DOM ağacına eklendikten hemen sonra `componentDidMount()` çalıştırılır. DOM düğümleri ile ilişkili atama işlemleri bu fonksiyon içerisinde yapılmalıdır. Bu nedenle eğer verilerinizi uzak bir API'den yüklemeniz gerekiyorsa, ağ isteğini bu fonksiyonda başlatabilirsiniz.
 
-This method is a good place to set up any subscriptions. If you do that, don't forget to unsubscribe in `componentWillUnmount()`.
+Ayrıca bu metot, `setInterval()` gibi abonelik gerektiren metotları çağırmak için de uygundur. Eğer böyle bir abonelik metodu çağırdıysanız, `componentWillUnmount()` metodu içerisinde abonelikten çıkmayı unutmayınız. 
 
-You **may call `setState()` immediately** in `componentDidMount()`. It will trigger an extra rendering, but it will happen before the browser updates the screen. This guarantees that even though the `render()` will be called twice in this case, the user won't see the intermediate state. Use this pattern with caution because it often causes performance issues. In most cases, you should be able to assign the initial state in the `constructor()` instead. It can, however, be necessary for cases like modals and tooltips when you need to measure a DOM node before rendering something that depends on its size or position.
+`componentDidMount()`'ta `setState()`'i **çağırabilirsiniz**. Bunun sonucunda, bileşenin fazladan render edilmesi tetiklenecektir. Fakat bu işlem, tarayıcının arayüzü güncellemesinden önce gerçekleşecektir. Bu durum, `render()` metodu iki kez çalışsa bile, kullanıcının bu olayı farketmemesini garanti eder. Fakat bu kodlama mantığını kullanırken dikkatli olunuz. Çünkü bu kullanım, genellikle performans sorunlarına yol açmaktadır. Bu nedenle birçok durumda, `state` atamalarını `constructor()` metodu içerisinde gerçekleştiriniz. Ancak tooltip veya modal bileşenlerinin gösterildiği durumlarda, render işlemi öncesinde ilgili DOM düğümünün boyutu veya pozisyonu gibi bir özelliği ölçümlemek istiyorsanız, bu kod mantığını kullanmanız gereklidir.
 
 * * *
 
@@ -208,26 +210,26 @@ You **may call `setState()` immediately** in `componentDidMount()`. It will trig
 componentDidUpdate(prevProps, prevState, snapshot)
 ```
 
-`componentDidUpdate()` is invoked immediately after updating occurs. This method is not called for the initial render.
+Adından da anlaşılacağı gibi `componentDidUpdate()` metodu, sadece DOM güncellemelerinde gerçekleştirilir. Bu nedenle başlangıçtaki render işleminde çağrılmaz.
 
-Use this as an opportunity to operate on the DOM when the component has been updated. This is also a good place to do network requests as long as you compare the current props to previous props (e.g. a network request may not be necessary if the props have not changed).
+Bileşen güncellendiğinde, DOM üzerinde yapmak istediğiniz işleri gerçekleştirmek için bu metodu kullanınız. Ayrıca bu metot, önceki prop ile sonraki prop değerlerini karşılaştırıp, buna bağlı olarak ağ isteklerini gerçekleştirmek için de uygun bir yerdir. Örneğin aşağıdaki örnekte olduğu gibi, prop nesnesi değişmediyse ağ isteğinin yapılmasına da gerek yoktur:
 
 ```js
 componentDidUpdate(prevProps) {
-  // Typical usage (don't forget to compare props):
+  // Genel kullanım (prop değerlerini karşılaştırmayı unutmayınız!):
   if (this.props.userID !== prevProps.userID) {
     this.fetchData(this.props.userID);
   }
 }
 ```
 
-You **may call `setState()` immediately** in `componentDidUpdate()` but note that **it must be wrapped in a condition** like in the example above, or you'll cause an infinite loop. It would also cause an extra re-rendering which, while not visible to the user, can affect the component performance. If you're trying to "mirror" some state to a prop coming from above, consider using the prop directly instead. Read more about [why copying props into state causes bugs](/blog/2018/06/07/you-probably-dont-need-derived-state.html).
+`componentDidUpdate()` metodunun **içerisinde `setState()` çağrısı** yapabilirsiniz. Fakat unutmayınız ki bu çağrı, üstteki gibi bir koşul ifadesi içerisinde yer almalıdır. Aksi halde uygulamanız sonsuz döngüye girebilir. Ayrıca kullanıcı tarafından farkedilmeyen fakat bileşen performansına etki edebilecek seviyede ekstra bir render işlemi gerçekleşmesine neden olur. Eğer üst bileşenden gelen prop'u mevcut bileşenin state'ine kopyalamaya çalışıyorsanız, bunun yerine direkt olarak prop kullanabilirsiniz. Neden [prop'un state'e kopyalanmasının hatalara yol açabileceği](/blog/2018/06/07/you-probably-dont-need-derived-state.html) hakkında daha fazla bilgi edinmek için blog yazısını inceleyebilirsiniz..
 
-If your component implements the `getSnapshotBeforeUpdate()` lifecycle (which is rare), the value it returns will be passed as a third "snapshot" parameter to `componentDidUpdate()`. Otherwise this parameter will be undefined.
+Eğer bileşeninizde `getSnapshotBeforeUpdate()` yaşam döngüsü metodunu kodlamışsanız (ki bu nadir bir durumdur), geri döndürdüğü değer `componentDidUpdate()` metoduna "snapshot" ismiyle üçüncü parametre olarak aktarılır. Aksi halde bu parametre, `undefined` olacaktır.
 
-> Note
+> Not:
 >
-> `componentDidUpdate()` will not be invoked if [`shouldComponentUpdate()`](#shouldcomponentupdate) returns false.
+> Eğer [`shouldComponentUpdate()`](#shouldcomponentupdate) metodu false döndürüyorsa, `componentDidUpdate()` metodu çağrılmayacak demektir.
 
 * * *
 
@@ -237,15 +239,15 @@ If your component implements the `getSnapshotBeforeUpdate()` lifecycle (which is
 componentWillUnmount()
 ```
 
-`componentWillUnmount()` is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in `componentDidMount()`.
+`componentWillUnmount()` metodu, bir bileşen DOM'dan çıkarıldığında veya tamamen yok edildiğinde çalıştırılır. `componentDidMount()`'ta yapılan; zamanlayıcı fonksiyonların geçersiz kılınması, ağ isteklerinin iptal edilmesi, veya herhangi bir abonelik metodunun temizlenmesi gibi işlemleri bu metotta gerçekleştiriniz.
 
-You **should not call `setState()`** in `componentWillUnmount()` because the component will never be re-rendered. Once a component instance is unmounted, it will never be mounted again.
+`componentWillUnmount()`'ta `setState()` metodunu **çağırmamalısınız.** Çünkü, bileşen artık DOM'dan ayrıldığı için, tekrar render edilme işlemi asla gerçekleştirilmeyecektir. Bir bileşen eğer DOM'dan ayrıldıysa, artık tekrar DOM'a geri takılma süreci gerçekleştirmeyecektir.
 
 * * *
 
-### Rarely Used Lifecycle Methods {#rarely-used-lifecycle-methods}
+### Nadiren Kullanılan Yaşam Döngüsü Metotları {#rarely-used-lifecycle-methods}
 
-The methods in this section correspond to uncommon use cases. They're handy once in a while, but most of your components probably don't need any of them. **You can see most of the methods below on [this lifecycle diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) if you click the "Show less common lifecycles" checkbox at the top of it.**
+Bu bölümdeki metotlar, nispeten daha az kullanılan durumlar içindir. Nadiren işinizi görseler de, büyük ihtimalle bileşenlerinizde hiçbirini kullanmayacaksınız. **[Bu yaşam döngüsü şemasının](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) üst kısımında yer alan "Daha az kullanılan yaşam döngülerini göster" kutucuğunu işaretlediğinizde** bu metotların çoğunu görebileceksiniz.
 
 
 ### `shouldComponentUpdate()` {#shouldcomponentupdate}
@@ -254,17 +256,17 @@ The methods in this section correspond to uncommon use cases. They're handy once
 shouldComponentUpdate(nextProps, nextState)
 ```
 
-Use `shouldComponentUpdate()` to let React know if a component's output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.
+Mevcut state veya prop'lar değiştiğinde, bileşenin çıktısının bu durumdan etkilenmemesini belirtmek için `shouldComponentUpdate()` metodunu kullanınız. Normalde bileşenin varsayılan davranışı, her state değişikliğinde tekrar render edilmesine yöneliktir. Birçok kullanımda bu varsayılan davranışa uymanız gerekmektedir. 
 
-`shouldComponentUpdate()` is invoked before rendering when new props or state are being received. Defaults to `true`. This method is not called for the initial render or when `forceUpdate()` is used.
+Prop veya state değerleri değiştirildiğinde, render işleminden hemen önce `shouldComponentUpdate()` metodu çalıştırılır ve varsayılan olarak `true` döndürür. Bileşenin başlangıçtaki ilk render zamanında veya `forceUpdate()` metodu kullanıldığında, bu metot **çalıştırılmaz**. 
 
-This method only exists as a **[performance optimization](/docs/optimizing-performance.html).** Do not rely on it to "prevent" a rendering, as this can lead to bugs. **Consider using the built-in [`PureComponent`](/docs/react-api.html#reactpurecomponent)** instead of writing `shouldComponentUpdate()` by hand. `PureComponent` performs a shallow comparison of props and state, and reduces the chance that you'll skip a necessary update.
+Bu metot yalnızca **[performans iyileştirme](/docs/optimizing-performance.html) işlemleri için yapılmıştır.** Render işlemini engellemek için bu metodu kullanmayınız. Zira bazı hataların oluşmasına yol açabilir. Bu nedenle, `shouldComponentUpdate()` metodunu yazmak yerine, React içerisinde varsayılan olarak gelen **[`PureComponent`](/docs/react-api.html#reactpurecomponent)** kullanınız. `PureComponent`, prop ve state'leri yüzeysel olarak karşılaştırır. Bu sayede büyük DOM ağaçlarına sahip bileşenlerde, küçük değişiklikler gerçekleştiğinde oluşacak güncellemelerin oluşma şansını azaltır. Böylece gereksiz güncellemeler göz ardı edilerek performans artışı sağlanmış olur.
 
-If you are confident you want to write it by hand, you may compare `this.props` with `nextProps` and `this.state` with `nextState` and return `false` to tell React the update can be skipped. Note that returning `false` does not prevent child components from re-rendering when *their* state changes.
+Eğer bu metodu kullanmak için eminseniz, güncellemenin göz ardı edilmesi için `nextProps` ile `this.props`'u, `nextState` ile `this.state` karşılaştırabilir ve bunun sonucunda `false` değerini döndürebilirsiniz. `false`'un geri döndürülmesi işlemi, alt bileşenlerin state'i değiştiğinde tekrar render edilmelerini engellemeyeceğini unutmayınız.
 
-We do not recommend doing deep equality checks or using `JSON.stringify()` in `shouldComponentUpdate()`. It is very inefficient and will harm performance.
+`shouldComponentUpdate()` metodu içerisinde, eşitlik kontrollerinin derinlemesine gerçekleştirilmesi veya `JSON.stringify()`'ın kullanımı önerilmez. Bu tür kullanımlar verimsizdir ve performansı olumsuz yönde etkiler.
 
-Currently, if `shouldComponentUpdate()` returns `false`, then [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate), [`render()`](#render), and [`componentDidUpdate()`](#componentdidupdate) will not be invoked. In the future React may treat `shouldComponentUpdate()` as a hint rather than a strict directive, and returning `false` may still result in a re-rendering of the component.
+React'in mevcut sürümünde, `shouldComponentUpdate()` metodu `false` döndürdüğünde; [`UNSAFE_componentWillUpdate()`](#unsafe_componentwillupdate), [`render()`](#render), ve [`componentDidUpdate()`](#componentdidupdate) metodları çağrılmaz. Gelecek sürümlerde React, `shouldComponentUpdate()` metodunu sıkı bir şekilde uygulamak yerine bir ipucu şeklinde ele alabilir. Bu nedenle `false` döndürülmesine rağmen, bileşenin tekrar render edilmesi ile sonuçlanabilir.
 
 * * *
 
@@ -274,22 +276,22 @@ Currently, if `shouldComponentUpdate()` returns `false`, then [`UNSAFE_component
 static getDerivedStateFromProps(props, state)
 ```
 
-`getDerivedStateFromProps` is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing.
+Bileşenin başlangıçta DOM'a eklenmesinde ve devamında süregelen güncellemelerde, render metodundan hemen önce `getDerivedStateFromProps` çalıştırılır. Bu metot, state'in güncellenmesi için bir nesne geri döndürür. `null` döndürdüğünde ise güncelleme **gerçekleştirilmemiş** olur.
 
-This method exists for [rare use cases](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) where the state depends on changes in props over time. For example, it might be handy for implementing a `<Transition>` component that compares its previous and next children to decide which of them to animate in and out.
+Bu metot, state'in props değişikliklerine bağlı olduğu [nadiren kullanılan durumlar](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) için vardır. Örneğin `<Transition>` bileşeninin, önceki ve sonraki alt bileşenlerini karşılaştırması sayesinde animasyona girme/çıkma süreçlerinin yönetimi için kullanışlı olabilir.
 
-Deriving state leads to verbose code and makes your components difficult to think about.  
-[Make sure you're familiar with simpler alternatives:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
+getDerivedStateFromProps metodunun kullanılması, daha fazla kod yazmaya neden olur. Ve bir süre sonra bileşen kodunu takip edemez hale gelirsiniz. 
+[Bunun yerine alternatif yollar deneyebilirsiniz:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
 
-* If you need to **perform a side effect** (for example, data fetching or an animation) in response to a change in props, use [`componentDidUpdate`](#componentdidupdate) lifecycle instead.
+* Eğer props'ta oluşan değişikliklere cevap olarak, web isteği veya animasyon işlemi gibi **yan etki** içeren bir işlem gerçekleştirmeniz gerekiyorsa, [`componentDidUpdate`](#componentdidupdate) yaşam döngüsü metodunu kullanınız.
 
-* If you want to **re-compute some data only when a prop changes**, [use a memoization helper instead](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
+* Eğer bir prop değiştiğinde, bazı verileri yeniden işlemeniz gerekiyorsa, bunun için [memoization yöntemini kullanınız](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
 
-* If you want to **"reset" some state when a prop changes**, consider either making a component [fully controlled](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) or [fully uncontrolled with a `key`](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) instead.
+* Eğer bir prop değiştiğinde, bazı state değerlerini sıfırlamanız gerekiyorsa, bunun için [tamamen kontrollü bir bileşen](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) veya [bir `key`'e sahip tamamen kontrolsüz bir bileşen](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) kullanınız.
 
-This method doesn't have access to the component instance. If you'd like, you can reuse some code between `getDerivedStateFromProps()` and the other class methods by extracting pure functions of the component props and state outside the class definition.
+Bu metodun, bileşen nesnesine erişimi yoktur. Eğer dilerseniz sınıf tanımının dışarısında, bileşen prop'larından ve state'inden saf fonksiyonlar çıkararak, `getDerivedStateFromProps()` ve diğer sınıf metotları arasında bazı kod içeriklerini tekrar kullanabilirsiniz.
 
-Note that this method is fired on *every* render, regardless of the cause. This is in contrast to `UNSAFE_componentWillReceiveProps`, which only fires when the parent causes a re-render and not as a result of a local `setState`.
+Unutmayınız ki bu metot, sebebi ne olursa olsun **her render işlemi esnasında** çağrılır. Bu durum, yalnızca üst bileşenin tekrar render işlemine sebebiyet verdiği ve yerel `setState`'in render etmediğinde çalıştırılan `UNSAFE_componentWillReceiveProps`'un tam zıttıdır.
 
 * * *
 
@@ -299,41 +301,41 @@ Note that this method is fired on *every* render, regardless of the cause. This 
 getSnapshotBeforeUpdate(prevProps, prevState)
 ```
 
-`getSnapshotBeforeUpdate()` is invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle will be passed as a parameter to `componentDidUpdate()`.
+Bileşenin render edilmiş çıktısı DOM'a yerleştirilmeden hemen önce `getSnapshotBeforeUpdate()` çağrılır. Bu sayede DOM değişmeden önce, kaydırma çubuğu (scrollbar) pozisyonu gibi bazı bilgilerin DOM'dan alınması sağlanır. Bu yaşam döngüsü metodundan döndürülen her değer, `componentDidUpdate()`'e parametre olarak geçilir.
 
-This use case is not common, but it may occur in UIs like a chat thread that need to handle scroll position in a special way.
+`getSnapshotBeforeUpdate()`'in kullanımı yaygın değildir. Fakat bir sohbet uygulamasında yeni mesaj geldiğinde, kaydırma çubuğunun aşağı kaydırılması gibi özel işlemlerde gerekli olabilir. 
 
-A snapshot value (or `null`) should be returned.
+Bir anlık görüntü değeri (snapshot) veya `null` geri döndürülür. 
 
-For example:
+Örneğin:
 
 `embed:react-component-reference/get-snapshot-before-update.js`
 
-In the above examples, it is important to read the `scrollHeight` property in `getSnapshotBeforeUpdate` because there may be delays between "render" phase lifecycles (like `render`) and "commit" phase lifecycles (like `getSnapshotBeforeUpdate` and `componentDidUpdate`).
+Üstteki örnekte, `scrollHeight` özelliğinin `getSnapshotBeforeUpdate`'ten okunması çok önemlidir. Çünkü "render" adımındaki yaşam döngüsü (`render()`)  ile "commit" adımındaki yaşam döngüleri (`getSnapshotBeforeUpdate` ve `componentDidUpdate`) arasında gecikmeler yaşanabilir.
 
 * * *
 
-### Error boundaries {#error-boundaries}
+### Hata sınırları {#error-boundaries}
 
-[Error boundaries](/docs/error-boundaries.html) are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
+[Hata sınırları (error boundaries)](/docs/error-boundaries.html), alt bileşen ağacında gerçekleşen bir JavaScript hatasını yakalayan React bileşenleridir. Yakaladıkları hatayı kaydeder ve bu hatadan dolayı çöken bileşen ağacının gösterilmesi yerine, yedek olarak oluşturulan bir arayüz öğesinin görüntülenmesini sağlarlar. Hata sınırları, kendi alt ağacında gerçekleşen render işlemlerinde, yaşam döngüsü metotlarında ve `constructor`'larda oluşan herhangi bir hatayı yakalarlar.
 
-A class component becomes an error boundary if it defines either (or both) of the lifecycle methods `static getDerivedStateFromError()` or `componentDidCatch()`. Updating state from these lifecycles lets you capture an unhandled JavaScript error in the below tree and display a fallback UI.
+Bir sınıf bileşeni, `static getDerivedStateFromError()` veya `componentDidCatch()` yaşam döngüsü metotlarını içerirse, o bileşen artık bir hata sınırı haline gelir. State'in bu yaşam döngüsü metotları ile güncellenmesi, alt ağaçta oluşabilecek beklenmedik JavaScript hatalarının yakalanmasını ve bunun için bir arayüz görüntülenmesini sağlar.
 
-Only use error boundaries for recovering from unexpected exceptions; **don't try to use them for control flow.**
+Hata sınırlarını yalnızca beklenmedik exception'ların giderilmesi için kullanınız: **kontrol akışı için kullanmayınız.**
 
-For more details, see [*Error Handling in React 16*](/blog/2017/07/26/error-handling-in-react-16.html).
+Daha fazla bilgi için [*React 16'da hata yönetimini inceleyiniz*](/blog/2017/07/26/error-handling-in-react-16.html).
 
-> Note
+> Not
 > 
-> Error boundaries only catch errors in the components **below** them in the tree. An error boundary can’t catch an error within itself.
+> Hata sınırları sadece **altındaki** ağaçta bulunan bileşenlerde oluşan hataları yakalarlar. Bu nedenle hata sınırları, kendi içerisinde oluşan bir hatayı yakalayamazlar.
 
 ### `static getDerivedStateFromError()` {#static-getderivedstatefromerror}
 ```javascript
 static getDerivedStateFromError(error)
 ```
 
-This lifecycle is invoked after an error has been thrown by a descendant component.
-It receives the error that was thrown as a parameter and should return a value to update state.
+`getDerivedStateFromError(error)` metodu, bir alt bileşende hata oluştuktan hemen sonra çalıştırılır. 
+Parametre olarak oluşan hata nesnesini alır ve state'in güncellenmesi için geriye bir değer döndürür: 
 
 ```js{7-10,13-16}
 class ErrorBoundary extends React.Component {
@@ -343,13 +345,13 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
+    // state'in güncellenmesi ile sonraki aşamada hata mesajının render edilmesi sağlanacaktır 
     return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
+      // Hatanın görüntülenmesi için herhangi bir içerik sunabilirsiniz
       return <h1>Something went wrong.</h1>;
     }
 
@@ -358,10 +360,10 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-> Note
+> Not
 >
-> `getDerivedStateFromError()` is called during the "render" phase, so side-effects are not permitted.
-For those use cases, use `componentDidCatch()` instead.
+> `getDerivedStateFromError()` metodu, "render" aşamasında çağrılır. Bu nedenle herhangi bir yan etkiye izin verilmez. 
+Bu tür kullanımlar için, `componentDidCatch()`'i kullanınız.
 
 * * *
 
@@ -371,15 +373,16 @@ For those use cases, use `componentDidCatch()` instead.
 componentDidCatch(error, info)
 ```
 
-This lifecycle is invoked after an error has been thrown by a descendant component.
-It receives two parameters:
 
-1. `error` - The error that was thrown.
-2. `info` - An object with a `componentStack` key containing [information about which component threw the error](/docs/error-boundaries.html#component-stack-traces).
+`componentDidCatch(error, info)` metodu, bir alt bileşende hata oluştuktan sonra hemen çalıştırılır. 
+İki parametre alır:
+
+1. `error` - Oluşan hata nesnesi.
+2. `info` - Hatayı [hangi bileşenin verdiği ile ilgili bilgileri](/docs/error-boundaries.html#component-stack-traces) tutan `componentStack`'i içeren hata bilgisi nesnesidir. 
 
 
-`componentDidCatch()` is called during the "commit" phase, so side-effects are permitted.
-It should be used for things like logging errors:
+`componentDidCatch()` metodu, güncellemenin "commit" adımında çalıştırılır. Bu nedenle yan etkiye izin verir. 
+Hataların log'lanması tarzındaki işler için kullanılmalıdır: 
 
 ```js{12-19}
 class ErrorBoundary extends React.Component {
@@ -389,12 +392,12 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
+    // Sonraki render aşamasında hata mesajının görüntülenmesi için state güncelleniyor.
     return { hasError: true };
   }
 
   componentDidCatch(error, info) {
-    // Example "componentStack":
+    // Örnek bir `componentStack` metninin içeriği aşağıdaki gibidir:
     //   in ComponentThatThrows (created by App)
     //   in ErrorBoundary (created by App)
     //   in div (created by App)
@@ -404,7 +407,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
+      // Herhangi bir hata bileşeni görüntüleyebilirsiniz.
       return <h1>Something went wrong.</h1>;
     }
 
@@ -413,16 +416,16 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-> Note
+> Not
 > 
-> In the event of an error, you can render a fallback UI with `componentDidCatch()` by calling `setState`, but this will be deprecated in a future release.
-> Use `static getDerivedStateFromError()` to handle fallback rendering instead.
+> Bir hata durumunda, `setState`'i çağırarak `componentDidCatch()` ile bir hata arayüzü görüntüleyebilirsiniz. Fakat bu yaklaşım, gelecekteki React sürümlerinde kullanımdan kaldırılacaktır.
+> Bunun yerine hata arayüzünün render edilmesi için `static getDerivedStateFromError()` metodunu kullanınız.
 
 * * *
 
-### Legacy Lifecycle Methods {#legacy-lifecycle-methods}
+### Eski Yaşam Döngüsü Methotları {#legacy-lifecycle-methods}
 
-The lifecycle methods below are marked as "legacy". They still work, but we don't recommend using them in the new code. You can learn more about migrating away from legacy lifecycle methods in [this blog post](/blog/2018/03/27/update-on-async-rendering.html).
+Aşağıdaki yaşam döngüsü metotları **eski (legacy)** olarak işaretlenmişlerdir. Bu metotlar hala çalışıyor olmalarına rağmen, yeni yazacağınız kodlarda bu metotları kullanmanızı tavsiye etmiyoruz. Eski yaşam döngüsü metotlarından kurtulmak için [bu blog yazısını](/blog/2018/03/27/update-on-async-rendering.html) inceleyebilirsiniz.
 
 ### `UNSAFE_componentWillMount()` {#unsafe_componentwillmount}
 
@@ -430,15 +433,15 @@ The lifecycle methods below are marked as "legacy". They still work, but we don'
 UNSAFE_componentWillMount()
 ```
 
-> Note
+> Not:
 >
-> This lifecycle was previously named `componentWillMount`. That name will continue to work until version 17. Use the [`rename-unsafe-lifecycles` codemod](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) to automatically update your components.
+> Bu yaşam döngüsü metodunun adı önceden `componentWillMount` şeklindeydi. Bu isim, React'in 17 sürümüne kadar çalışmaya devam edecektir. Bileşenlerinizi otomatik olarak güncellemek için, [`rename-unsafe-lifecycles` ](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) komutunu kullanabilirsiniz.
 
-`UNSAFE_componentWillMount()` is invoked just before mounting occurs. It is called before `render()`, therefore calling `setState()` synchronously in this method will not trigger an extra rendering. Generally, we recommend using the `constructor()` instead for initializing state.
+`UNSAFE_componentWillMount()` metodu, bileşenin DOM'a eklenmesinden önce çağrılır. `render()` metodundan önce çalıştırıldığından dolayı, bu metot içerisinde `setState()` metodunun senkron olarak çağrılması ekstra bir render işlemini tetiklememektedir. Bunun yerine, state'in başlatılması için `constructor()` metodunu kullanmanızı tavsiye ederiz. 
 
-Avoid introducing any side-effects or subscriptions in this method. For those use cases, use `componentDidMount()` instead.
+Bu metot içerisinde herhangi bir yan etki içeren işlem veya abonelik işlemleri yapmaktan kaçınınız. Bu tür yaklaşımlar için `componentDidMount()` metodunu kullanınız.
 
-This is the only lifecycle method called on server rendering.
+Sunucu taraflı render etme işleminde yalnızca bu yaşam döngüsü metodu çağrılır. 
 
 * * *
 
@@ -450,23 +453,23 @@ UNSAFE_componentWillReceiveProps(nextProps)
 
 > Note
 >
-> This lifecycle was previously named `componentWillReceiveProps`. That name will continue to work until version 17. Use the [`rename-unsafe-lifecycles` codemod](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) to automatically update your components.
+> Bu yaşam döngüsü metodunun adı önceden `componentWillReceiveProps` şeklindeydi. Bu isim, React'in 17 sürümüne kadar çalışmaya devam edecektir. Bileşenlerinizi otomatik olarak güncellemek için, [`rename-unsafe-lifecycles` ](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) komutunu kullanabilirsiniz.
 
-> Note:
+> Not:
 >
-> Using this lifecycle method often leads to bugs and inconsistencies
+> Bu yaşam döngüsü metodunun kullanımı, uygulamanın hatalı ve tutarsız çalışmasına sebep olacaktır.
 >
-> * If you need to **perform a side effect** (for example, data fetching or an animation) in response to a change in props, use [`componentDidUpdate`](#componentdidupdate) lifecycle instead.
-> * If you used `componentWillReceiveProps` for **re-computing some data only when a prop changes**, [use a memoization helper instead](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
-> * If you used `componentWillReceiveProps` to **"reset" some state when a prop changes**, consider either making a component [fully controlled](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) or [fully uncontrolled with a `key`](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) instead.
+> * Eğer verilerin getirilmesi veya bir animasyonun uygulanması gibi bir **yan etki** gerçekleştirmek istiyorsanız, props'ta oluşan değişikliklere yanıt vermek için [`componentDidUpdate`](#componentdidupdate) metodunu kullanınız.
+> * Sadece bir prop değiştiğinde bazı verilerin tekrar hesaplanması için `componentWillReceiveProps` metodunu kullandıysanız, bunun yerine [memoization helper kullanınız](/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization).
+> * Eğer bir prop değiştiğinde bazı state değişkenlerini `componentWillReceiveProps` metodu ile yeniden başlattıysanız, bunun yerine [tamamen kontrollü bir bileşen](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component) veya [bir `key`'e sahip tamamen kontrolsüz bir bileşen](/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key) oluşturabilrsiniz.
 >
-> For other use cases, [follow the recommendations in this blog post about derived state](/blog/2018/06/07/you-probably-dont-need-derived-state.html).
+> Diğer kullanım durumları için, [state'in türetilmesi ile ilgili bu blog yazısını](/blog/2018/06/07/you-probably-dont-need-derived-state.html) inceleyebilirsiniz.
 
-`UNSAFE_componentWillReceiveProps()` is invoked before a mounted component receives new props. If you need to update the state in response to prop changes (for example, to reset it), you may compare `this.props` and `nextProps` and perform state transitions using `this.setState()` in this method.
+DOM'a eklenmiş bir bileşen, yeni prop değerlerini almasından hemen önce `UNSAFE_componentWillReceiveProps()` metodu çağrılır. Prop değişikliklerine göre state'i güncellemeniz (örneğin state'i yeniden başlatmanız) gerekiyorsa, `this.props` ve `nextProps` değerlerini karşılaştırabilir ve bu metot içerisinde `this.setState()`'i kullanarak state geçişlerini gerçekleştirebilirsiniz.
 
-Note that if a parent component causes your component to re-render, this method will be called even if props have not changed. Make sure to compare the current and next values if you only want to handle changes.
+Unutmayınız ki, eğer bir üst bileşen, altındaki bileşenin tekrar render edilmesine sebep oluyorsa, props değerleri değişmemiş olsa bile bu metot çağrılır. Bu nedenle oluşan değişiklikleri yönetmek için, mevcut değer ile ve sonraki değerleri karşılaştırınız.
 
-React doesn't call `UNSAFE_componentWillReceiveProps()` with initial props during [mounting](#mounting). It only calls this method if some of component's props may update. Calling `this.setState()` generally doesn't trigger `UNSAFE_componentWillReceiveProps()`.
+React, bileşenin DOM'a [eklenmesi](#mounting) sırasında, başlangıç prop değerleri ile `UNSAFE_componentWillReceiveProps()` metodunu çağırmaz. Yalnızca bileşenin prop değerleri değiştiğinde bu metodu çalıştırır. Bunun haricinde `this.setState()`'in çağrılması da `UNSAFE_componentWillReceiveProps()` metodunun çağrılmasını tetiklemez.
 
 * * *
 
@@ -476,27 +479,27 @@ React doesn't call `UNSAFE_componentWillReceiveProps()` with initial props durin
 UNSAFE_componentWillUpdate(nextProps, nextState)
 ```
 
-> Note
+> Not:
 >
-> This lifecycle was previously named `componentWillUpdate`. That name will continue to work until version 17. Use the [`rename-unsafe-lifecycles` codemod](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) to automatically update your components.
+> Bu yaşam döngüsü metodunun adı önceden `componentWillUpdate` şeklindeydi. Bu isim, React'in 17 sürümüne kadar çalışmaya devam edecektir. Bileşenlerinizi otomatik olarak güncellemek için, [`rename-unsafe-lifecycles` ](https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles) komutunu kullanabilirsiniz.
 
-`UNSAFE_componentWillUpdate()` is invoked just before rendering when new props or state are being received. Use this as an opportunity to perform preparation before an update occurs. This method is not called for the initial render.
+`UNSAFE_componentWillUpdate()` metodu, yeni bir prop veya state değeri alındığında, render işleminin hemen öncesinde çağrılır. Bu fırsatı değerlendirerek, güncelleme oluşmadan önce ilgili hazırlıkları yapabilirsiniz. Bu metot, ilk render işleminde çalıştırılmaz.
 
-Note that you cannot call `this.setState()` here; nor should you do anything else (e.g. dispatch a Redux action) that would trigger an update to a React component before `UNSAFE_componentWillUpdate()` returns.
+Unutmayınız ki, bu fonksiyon içerisinde, `UNSAFE_componentWillUpdate()` metodunun geriye değer döndürmesinden önce, React bileşeninin güncellenmesini tetikleyecek; `this.setState()`'i veya herhangi bir metodu (örneğin Redux action'ının dispatch edilmesini) çağıramazsınız.
 
-Typically, this method can be replaced by `componentDidUpdate()`. If you were reading from the DOM in this method (e.g. to save a scroll position), you can move that logic to `getSnapshotBeforeUpdate()`.
+Genellikle bu metot, `componentDidUpdate()` metodu ile değiştirilebilir. Eğer bu metot içerisinde DOM'dan bir değer okuması yapıyorsanız (örneğin kaydırma çubuğu pozisyonunu kaydediyorsanız), bu kodları `getSnapshotBeforeUpdate()`'e taşıyabilirsiniz.
 
-> Note
+> Not:
 >
-> `UNSAFE_componentWillUpdate()` will not be invoked if [`shouldComponentUpdate()`](#shouldcomponentupdate) returns false.
+> Eğer [`shouldComponentUpdate()`](#shouldcomponentupdate) metodu false döndürüyorsa, `UNSAFE_componentWillUpdate()` metodu çağrılmaz.
 
 * * *
 
-## Other APIs {#other-apis-1}
+## Diğer API'lar {#other-apis-1}
 
-Unlike the lifecycle methods above (which React calls for you), the methods below are the methods *you* can call from your components.
+React'in sizin için otomatik olarak çağırdığı yukarıdaki yaşam döngüsü metotlarının aksine, aşağıda yer alan metotları sadece **siz** çağırabilirsiniz. 
 
-There are just two of them: `setState()` and `forceUpdate()`.
+Yalnızca iki adet metot vardır. Bunlar `setState()` ve `forceUpdate()` metotlarıdır.
 
 ### `setState()` {#setstate}
 
@@ -504,21 +507,21 @@ There are just two of them: `setState()` and `forceUpdate()`.
 setState(updater[, callback])
 ```
 
-`setState()` enqueues changes to the component state and tells React that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.
+`setState()` metodu, bileşenin state'inde olan değişiklikleri bir kuyruğa atar ve React'e, bu bileşenin ve alt bileşenlerinin güncellenen state ile birlikte tekrar render edilmesi gerektiğini bildirir. Sunucu cevapları ve onClick gibi olay gidericilerinden dönen değişikliklerin arayüze yansıtılması için başlıca metottur. 
 
-Think of `setState()` as a *request* rather than an immediate command to update the component. For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.
+`setState()`, bir bileşeni direkt olarak güncelleyen bir metot değildir. Bu nedenle `setState()`'i, React'e yapılan bir *istek* olarak düşünmelisiniz. React, daha iyi bir performans için bu metodun çalışmasını geciktirebilir, ve daha sonra tüm güncellemeler ile birlikte tek seferde gerçekleştirebilir. Bu nedenle React, state güncellemelerinin anında gerçekleştirileceğini garanti etmemektedir. 
 
-`setState()` does not always immediately update the component. It may batch or defer the update until later. This makes reading `this.state` right after calling `setState()` a potential pitfall. Instead, use `componentDidUpdate` or a `setState` callback (`setState(updater, callback)`), either of which are guaranteed to fire after the update has been applied. If you need to set the state based on the previous state, read about the `updater` argument below.
+`setState()` metodu, her zaman bileşeni anında güncellemez. Güncellemeleri yığın haline getirebilir veya daha sonra gerçekleşmesi için geciktirebilir. Bu nedenle, `setState()` çağrımından sonra `this.state` değerinin okunması yaygın olarak yapılan bir yanlıştır. Bunun yerine, `componentDidUpdate` metodunu veya `setState` callback'ini (`setState(updater, callback)`) kullanınız. Her iki kullanım da, güncellemeler uygulandıktan sonra kodun çalıştırılacağını garanti eder. Eğer mevcut state'i, önceki state'e göre güncellemeye ihtiyacınız varsa, aşağıda yer alan `updater` parametresini inceleyebilirsiniz.
 
-`setState()` will always lead to a re-render unless `shouldComponentUpdate()` returns `false`. If mutable objects are being used and conditional rendering logic cannot be implemented in `shouldComponentUpdate()`, calling `setState()` only when the new state differs from the previous state will avoid unnecessary re-renders.
+`setState()`, `shouldComponentUpdate()` metodu `false` dönmediği sürece, ilgili bileşenin tekrar render edilmesini sağlar. Eğer değiştirilebilir (mutable) nesneler kullanılırsa ve buna bağlı olarak `shouldComponentUpdate()` içerisinde koşullu render'lama (conditional rendering) mantığı kurulamazsa, önceki state'ten yeni state'in farklı olduğu durumda yalnızca `setState()` çağrımı gereksiz render işlemini **gerçekleştirmeyecektir**.
 
-The first argument is an `updater` function with the signature:
+`setState()`'in ilk parametresi bir `updater` fonksiyonudur ve aşağıdaki gibi yer almaktadır:
 
 ```javascript
 (state, props) => stateChange
 ```
 
-`state` is a reference to the component state at the time the change is being applied. It should not be directly mutated. Instead, changes should be represented by building a new object based on the input from `state` and `props`. For instance, suppose we wanted to increment a value in state by `props.step`:
+`state`, değişikliğin uygulandığı andaki bileşenin state'ini tutmaktadır. Değişiklikler, `state` ve `props` girdilerini baz alan yeni bir nesne oluşturularak temsil edilmelidir. Örneğin, state'teki bir değeri, `props.step` değeri ile arttırdığımızı varsayalım: 
 
 ```javascript
 this.setState((state, props) => {
@@ -526,23 +529,23 @@ this.setState((state, props) => {
 });
 ```
 
-Both `state` and `props` received by the updater function are guaranteed to be up-to-date. The output of the updater is shallowly merged with `state`.
+Bu kodda, updater fonksiyonuna aktarılan `state` ve `props` değerlerinin güncel olduğu garanti edilir. Updater'ın çıktısı, `state` ile yüzeysel olarak birleştirilir.
 
-The second parameter to `setState()` is an optional callback function that will be executed once `setState` is completed and the component is re-rendered. Generally we recommend using `componentDidUpdate()` for such logic instead.
+`setState()`'in ikinci parametresi, `setState` çağrımı tamamlandığında ve bileşen tekrar render edildiğinde bir defa çağrılacak olan ve isteğe bağlı olarak tanımlanan callback fonksiyonudur. Bunun yerine genellikle `componentDidUpdate()` metodunun kullanılmasını öneririz.
 
-You may optionally pass an object as the first argument to `setState()` instead of a function:
+İsteğe bağlı olarak, `setState()`'in ilk parametresi için, bir fonksiyon yerine aşağıdaki gibi bir nesne geçebilirsiniz:
 
 ```javascript
 setState(stateChange[, callback])
 ```
 
-This performs a shallow merge of `stateChange` into the new state, e.g., to adjust a shopping cart item quantity:
+Bu, `stateChange`'in yüzeysel olarak `state` ile birleştirilmesini sağlar. Örneğin bir alışveriş sepetindeki ürünün adedini aşağıdaki gibi güncelleyebilirsiniz:
 
 ```javascript
 this.setState({quantity: 2})
 ```
 
-This form of `setState()` is also asynchronous, and multiple calls during the same cycle may be batched together. For example, if you attempt to increment an item quantity more than once in the same cycle, that will result in the equivalent of:
+Ayrıca `setState()`'in bu şekilde kullanımı asenkron olarak çalışır. Bu nedenle aynı render döngüsünde birkaç defa yapılan `setState()` çağrıları, tekil hale getirilerek işlenebilir. Örneğin, aynı render döngüsünde ürün adedini birden fazla kez arttırmaya çalışırsanız, işlemin sonucu `Object.assign()` ile tekil bir metot çağrısı haline getirilecek ve aşağıdaki gibi olacaktır:
 
 ```javaScript
 Object.assign(
@@ -553,7 +556,7 @@ Object.assign(
 )
 ```
 
-Subsequent calls will override values from previous calls in the same cycle, so the quantity will only be incremented once. If the next state depends on the current state, we recommend using the updater function form, instead:
+Aynı render döngüsünde art arda yapılan çağrımlar, önceki çağrımdan gelen değişiklikleri ezerek üstüne yazacaktır. Böylece `quantity` değeri yalnızca bir kez arttırılacaktır. Bu nedenle eğer sonraki state, mevcut state'e bağımlı ise, aşağıdaki gibi bir `updater` fonksiyonu kullanmanızı öneririz: 
 
 ```js
 this.setState((state) => {
@@ -561,11 +564,11 @@ this.setState((state) => {
 });
 ```
 
-For more detail, see:
+Daha fazla bilgi için:
 
-* [State and Lifecycle guide](/docs/state-and-lifecycle.html)
-* [In depth: When and why are `setState()` calls batched?](https://stackoverflow.com/a/48610973/458193)
-* [In depth: Why isn't `this.state` updated immediately?](https://github.com/facebook/react/issues/11527#issuecomment-360199710)
+* [State ve Yaşam Döngüsü Rehberi](/docs/state-and-lifecycle.html)
+* [Derinlemesine inceleme: `setState()` çağrıları neden ve ne zaman tekil hale getirilirler?](https://stackoverflow.com/a/48610973/458193)
+* [Derinlemesine inceleme: `this.state` neden anında güncellenmez?](https://github.com/facebook/react/issues/11527#issuecomment-360199710)
 
 * * *
 
@@ -575,19 +578,19 @@ For more detail, see:
 component.forceUpdate(callback)
 ```
 
-By default, when your component's state or props change, your component will re-render. If your `render()` method depends on some other data, you can tell React that the component needs re-rendering by calling `forceUpdate()`.
+Bileşeninizin state'i veya prop'ları değiştiğinde, varsayılan olarak bileşeniniz tekrar render edilecektir. Eğer `render()` metodunuz, bunların haricinde başka verilere bağımlı ise, `forceUpdate()`'i çağırarak bileşeninizin tekrar render edilmesi gerektiğini React'e söyleyebilirsiniz.
 
-Calling `forceUpdate()` will cause `render()` to be called on the component, skipping `shouldComponentUpdate()`. This will trigger the normal lifecycle methods for child components, including the `shouldComponentUpdate()` method of each child. React will still only update the DOM if the markup changes.
+Bileşen üzerinde `forceUpdate()` çağrımı, `shouldComponentUpdate()`'in es geçilerek `render()` metodunun çalışmasına neden olacaktır. `forceUpdate()` çağrımı, alt bileşenler için normal yaşam döngüsü metotlarını tetikleyecektir. Bu metotlara, her bir alt bileşen için çağrılacak `shouldComponentUpdate()` metodu da dahildir. Buna rağmen HTML tarafında oluşan değişikliklerde, React sadece DOM'u güncellemeye devam edecektir.
 
-Normally you should try to avoid all uses of `forceUpdate()` and only read from `this.props` and `this.state` in `render()`.
+Normalde `forceUpdate()`'in kullanımından kaçınmalı ve yalnızca `render()` metodu içerisinde `this.props` ve `this.state`'ten okuma işlemi yapmalısınız.
 
 * * *
 
-## Class Properties {#class-properties-1}
+## Sınıf Bileşeninin Değişkenleri {#class-properties-1}
 
 ### `defaultProps` {#defaultprops}
 
-`defaultProps` can be defined as a property on the component class itself, to set the default props for the class. This is used for undefined props, but not for null props. For example:
+`defaultProps`, bileşen sınıfının varsayılan prop değerlerini atamak için sınıf içerisinde değişken olarak tanımlanabilir. Bu değişken, tanımlı olmayan prop değerleri için kullanılır. Null değeri içeren prop'lar için kullanılmaz. Örneğin:
 
 ```js
 class CustomButton extends React.Component {
@@ -599,19 +602,19 @@ CustomButton.defaultProps = {
 };
 ```
 
-If `props.color` is not provided, it will be set by default to `'blue'`:
+Eğer bileşene `props.color` değeri aktarılmazsa, varsayılan olarak `'blue'` atanacaktır:
 
 ```js
   render() {
-    return <CustomButton /> ; // props.color will be set to blue
+    return <CustomButton /> ; // props.color değeri blue olarak atanacaktır
   }
 ```
 
-If `props.color` is set to null, it will remain null:
+Bunun aksine `props.color` değeri null olarak atanmışsa, değişmeden null olarak kalacaktır:
 
 ```js
   render() {
-    return <CustomButton color={null} /> ; // props.color will remain null
+    return <CustomButton color={null} /> ; // props.color değeri null olarak kalacaktır
   }
 ```
 
@@ -619,24 +622,24 @@ If `props.color` is set to null, it will remain null:
 
 ### `displayName` {#displayname}
 
-The `displayName` string is used in debugging messages. Usually, you don't need to set it explicitly because it's inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component, see [Wrap the Display Name for Easy Debugging](/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging) for details.
+`displayName` değişkeni, hata ayıklama mesajlarında kullanılır. Genellikle açık olarak bu değişkene atama yapmanıza gerek yoktur. Çünkü tanımlandığı fonksiyon veya sınıf bileşeninin isminden oluşturulmaktadır. Hata ayıklama işleminde farklı bir isim kullanmak istiyorsanız, elbette bu değişkeni açık bir şekilde tanımlayıp atama yapabilirsiniz. Ayrıca high-order bir bileşen oluştururken de kullanabilirsiniz. [Kolay bir şekilde hata ayıklama için görünen ismin değiştirilmesi](/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging) yazısından daha detaylı bilgi edinebilirsiniz.
 
 * * *
 
-## Instance Properties {#instance-properties-1}
+## Bileşen Nesnesinin Değişkenleri {#instance-properties-1}
 
 ### `props` {#props}
 
-`this.props` contains the props that were defined by the caller of this component. See [Components and Props](/docs/components-and-props.html) for an introduction to props.
+`this.props`, bu değişkeni çağıran eleman tarafından tanımlanan prop değerlerini içerir. Prop'lara giriş olması açısından fazla bilgi için [Bileşenler ve Prop'lar](/docs/components-and-props.html) yazısını inceleyebilirsiniz.
 
-In particular, `this.props.children` is a special prop, typically defined by the child tags in the JSX expression rather than in the tag itself.
+Bilhassa, `this.props.children` özel bir prop'tur. Genellikle etiketin kendisi yerine JSX ifadesindeki alt etiketler tarafından tanımlanır. 
 
 ### `state` {#state}
 
-The state contains data specific to this component that may change over time. The state is user-defined, and it should be a plain JavaScript object.
+State, zaman içerisinde değişim gösterebilen ve ilgili değişkene özgü olan verileri tutar. State değişkeni kullanıcı tarafından tanımlanır, ve düz bir JavaScript nesnesi olmalıdır.
 
-If some value isn't used for rendering or data flow (for example, a timer ID), you don't have to put it in the state. Such values can be defined as fields on the component instance.
+Eğer state'te tanımlanan bazı değerler, render işleminde veya zamanlayıcı ID'sinin tutulması gibi veri akışına yönelik işlemlerde kullanılmıyorsa, bu değişkenler state içerisine konulmamalıdır. Bu değerler, bileşen nesnesinde değişken olarak tanımlanabilirler.
 
-See [State and Lifecycle](/docs/state-and-lifecycle.html) for more information about the state.
+State hakkında daha fazla bilgi için [State ve Lifecycle](/docs/state-and-lifecycle.html) sayfasına göz atabilirsiniz.
 
-Never mutate `this.state` directly, as calling `setState()` afterwards may replace the mutation you made. Treat `this.state` as if it were immutable.
+`this.state`'i direkt olarak değiştirmeyiniz. Çünkü daha sonra yapılan `setState()` çağrıları, yaptığınız değişikliklerin üzerine yazabilir. Bu nedenle `this.state`'e immutable'mış gibi davranmalısınız.

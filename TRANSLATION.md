@@ -75,7 +75,7 @@ ReactDOM.işle(bileşen, document.idKullanarakElemanıGetir('kök'));
 
 ## Dış Bağlantılar
 
-Sayfada yer alan [MDN] veya [Wikipedia] gibi harici bağlantılar diğer bir bmakaleye yönelikse ve bu makalenin Türkçe dilinde kabul edilebilir kalitede bir sürümü varsa, bağlantıyı bu sürümünkiyle değiştirmeyi düşününüz. Ayrıca Wikipedia Türkiye'de uzun süredir yasaklı olduğu için, Wikipedia linklerini [MDN] veya [EksiSozluk] gibi tanınmış sitelerdeki versiyonları ile değiştirebilirsiniz.
+Sayfada yer alan [MDN] veya [Wikipedia] gibi harici bağlantılar diğer bir makaleye yönelikse ve bu makalenin Türkçe dilinde kabul edilebilir kalitede bir sürümü varsa, bağlantıyı bu sürümünkiyle değiştirmeyi düşününüz. Ayrıca Wikipedia Türkiye'de uzun süredir yasaklı olduğu için, Wikipedia linklerini [MDN] veya [EksiSozluk] gibi tanınmış sitelerdeki versiyonları ile değiştirebilirsiniz.
 
 [MDN]: https://developer.mozilla.org/en-US/
 [Wikipedia]: https://en.wikipedia.org/wiki/Main_Page
@@ -116,10 +116,13 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | controlled component      | kontrollü bileşen |
 | debugging                 | hata ayıklama |
 | DOM                       | DOM |
+| event                     | olay |
+| event handler             | olay yöneticisi |
 | external                  | harici |
 | fragment                  | fragment |
 | framework                 | çatı |
 | function component        | fonksiyon bileşeni |
+| handler                   | yönetici |
 | hook                      | hook |
 | instance                  | nesne |
 | internal                  | dahili |
