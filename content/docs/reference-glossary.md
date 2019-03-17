@@ -9,7 +9,7 @@ permalink: docs/glossary.html
 
 ## Tek-sayfalı Uygulama {#single-page-application}
 
-Tek-sayfalı uygulama, uygulamanın çalışması için gereken tek bir HTML sayfasını ve gerekli tüm varlıkları (JavaScript ve CSS gibi) yükleyen bir uygulamadır. Sayfa veya sonraki sayfalar ile ilgili herhangi bir etkileşim sunucuya gidip gelmeye ihtiyaç duymaz, bu da sayfanın yeniden yüklenmediği anlamına gelir.
+Tek-sayfalı uygulama, uygulamanın çalışması için gereken tek bir HTML sayfasını ve gerekli tüm varlıkları (JavaScript ve CSS gibi) yükleyen bir uygulamadır. Sayfa veya daha sonraki sayfalar ile ilgili herhangi bir etkileşim sunucuya gidip gelmeye ihtiyaç duymaz, bu da sayfanın yeniden yüklenmediği anlamına gelir.
 
 React'te bir tek-sayfalı uygulama oluşturabilseniz de, bu bir gereksinim değildir. React ayrıca, mevcut web sitelerinin küçük parçalarını ilave etkileşim ile geliştirmek için de kullanılabilir. React'te yazılan kod, sunucuda PHP gibi bir şey tarafından oluşturulan işaretlemeyle veya diğer istemci tarafı kitaplıklarıyla barışçıl bir şekilde bir arada bulunabilir. Aslında, bu tam olarak React’in Facebook’ta kullanım şeklidir.
 
@@ -35,9 +35,9 @@ CDN, İçerik Dağıtım Ağı anlamına gelir. CDN'ler, dünya genelinde bir su
 
 ## JSX {#jsx}
 
-JSX, JavaScript için bir sözdizimi uzantısıdır. Bir şablon diline benzer ancak JavaScript'in tam gücüne sahiptir. JSX, "React elemanları" olarak adlandırılan düz JavaScript nesnelerini dönen `React.createElement()` çağrıları için derlenir. JSX'e temel bir giriş yapmak için [buradaki belgelere bakın](/docs/introducing-jsx.html) ve JSX hakkında daha ayrıntılı eğitimlere [buradan](/docs/jsx-in-depth.html) ulaşın.
+JSX, JavaScript için bir sözdizimi uzantısıdır. Bir şablon diline benzer ancak JavaScript'in tam gücüne sahiptir. JSX, "React elemanları" olarak adlandırılan düz JavaScript nesnelerini dönen `React.createElement()` çağrıları için derlenir. JSX'e temel bir giriş yapmak için [buradaki dokümanı inceleyin](/docs/introducing-jsx.html) ve JSX hakkında daha ayrıntılı eğitimlere [buradan](/docs/jsx-in-depth.html) ulaşın.
 
-React DOM, HTML özellik adları yerine camelCase özellik adlandırma kuralını kullanır. Örneğin, JSX'te `tabindex` `tabIndex` olur. `class` özelliği de JavaScript'e özel bir sözcük olduğu için 'className` olarak yazılır:
+React DOM, HTML özellik adları yerine camelCase özellik adlandırma kuralını kullanır. Örneğin, JSX'te `tabindex` `tabIndex` olur. `class` özelliği de JavaScript'e özel bir sözcük olduğu için `className` olarak yazılır:
 
 ```js
 const name = 'Clementine';
@@ -49,7 +49,7 @@ ReactDOM.render(
 
 ## [Elemanlar](/docs/rendering-elements.html) {#elements}
 
-React elemanları React uygulamalarının yapı taşlarıdır. Biri, öğeleri daha yaygın olarak bilinen "bileşenler" kavramı ile karıştırabilir. Bir eleman ekranda görmek istediğinizi açıklar. React elemanları değişmezdir.
+React elemanları React uygulamalarının yapı taşlarıdır. Biri öğeleri daha yaygın olarak bilinen "bileşenler" kavramı ile karıştırabilir. Bir eleman ekranda görmek istediğinizi açıklar. React elemanları değişmezdir.
 
 ```js
 const element = <h1>Hello, world</h1>;
@@ -57,7 +57,7 @@ const element = <h1>Hello, world</h1>;
 
 Genellikle, elemanlar doğrudan kullanılmaz, ancak bileşenlerden döner.
 
-## [Components](/docs/components-and-props.html) {#components}
+## [Bileşenler](/docs/components-and-props.html) {#components}
 
 React bileşenleri, sayfaya bir React öğesi dönen küçük, yeniden kullanılabilir kod parçalarıdır. React bileşeninin en basit sürümü, bir React öğesi dönen düz bir JavaScript fonksiyonudur:
 
@@ -77,14 +77,13 @@ class Welcome extends React.Component {
 }
 ```
 
-Bileşenler farklı fonksiyonellik parçalarına ayrılabilir ve diğer bileşenlerde kullanılabilir. Bileşenler; diğer bileşenleri, dizileri, string'leri ve sayıları dönebilir. UI'nızın bir kısmı birkaç kez kullanılmışsa (Buton, Panel, Avatar) veya kendi başına yeterince karmaşıksa (App, FeedStory, Yorum), yeniden kullanılabilir bir bileşen olmak için iyi bir aday olması iyi bir temel kuraldır. Bileşen adları ayrıca her zaman büyük harfle başlamalıdır (`<Wrapper/>` olmalı, `<wrapper/>` **değil**). Bileşenleri render etme ile ilgili daha fazla bilgi için [bu dokümana](/docs/components-and-props.html#rendering-a-component) bakabilirsiniz.
+Bileşenler farklı fonksiyonellik parçalarına ayrılabilir ve diğer bileşenlerde kullanılabilir. Bileşenler; diğer bileşenleri, dizileri, string'leri ve sayıları dönebilir. UI'nızın bir kısmı birkaç kez kullanılmışsa (Button, Panel, Avatar) veya kendi başına yeterince karmaşıksa (App, FeedStory, Comment), yeniden kullanılabilir bir bileşen olmak için iyi bir aday olması iyi bir temel kuraldır. Bileşen adları ayrıca her zaman büyük harfle başlamalıdır (`<Wrapper/>` olmalı, `<wrapper/>` **değil**). Bileşenleri render etme ile ilgili daha fazla bilgi için [bu dokümana](/docs/components-and-props.html#rendering-a-component) bakabilirsiniz.
 
-
-### [`prop'lar`](/docs/components-and-props.html) {#props}
+### [`props`](/docs/components-and-props.html) {#props}
 
 `props`, bir React bileşenine ait girdilerdir. Ana bileşenden bir alt bileşene aktarılan verilerdir.
 
-'props'ların salt okunur olduklarını unutmayın. Hiçbir şekilde değiştirilmemeleri gerekir:
+`props`ın salt okunur olduğunu unutmayın. Hiçbir şekilde değiştirilmemeleri gerekir:
 
 ```js
 // Yanlış!
