@@ -331,7 +331,7 @@ class Square extends React.Component {
 
 Square'in `render` metodundaki `onClick` metodundan, `this.setState`'in çağrılmasını sağladık. Bu sayede Square'deki `<button>` elemanına her tıklandığında React, Square bileşenini tekrar render edecektir.  Güncelleme sonrasında Square'in `this.state.value` değerine `'X'` ataması gerçekleşecektir, ve bu sayede oyun tahtasında 'X''i göreceğiz. Herhangi bir Square bileşenine tıklandığı anda içerisinde 'X' görüntülenecektir.
 
-Bir bileşenteki `setState` fonksiyonunu çağırdığınızda, React otomatik olarak içerisindeki çocuk bileşenleri de güncellemiş oluyor.
+Bir bileşenteki `setState` fonksiyonunu çağırdığınızda, React otomatik olarak içerisindeki alt bileşenleri de güncellemiş oluyor.
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/VbbVLg?editors=0010)**
 
@@ -362,7 +362,7 @@ Artık tic-tac-toe oyunumuz için temel kod bloklarına sahibiz. Oyunun tamamlan
 
 Bunu gerçekleştirmek için Board'un, her bir Square'e, kendi state'inin ne olduğunu sorması gerektiğini düşünebiliriz. Bu yöntem her ne kadar React'te uygulanabilir olsa da, yapmanızı tavsiye etmiyoruz. Çünkü bu şekilde yazılan kod; anlaşılabilirlikten uzak olacak, hataların oluşmasına daha müsait hale gelecek ve kodu refactor etmek istediğimizde bize çok daha büyük zorluklar çıkaracaktır. Bu nedenle, her bir Square sınıfında, kendi state'inin tutulmasının yerine, üst bileşen olan Board bileşeninde oyunun tüm state'ini tutmak en iyi çözümdür. Bunun sonucunda Board bileşeni, her bir Square'e neyi göstermesi gerektiğini prop'lar aracılığıyla aktarır ([daha önce de prop'lar aracılığıyla her bir Square'e bir sayı atamıştık](#passing-data-through-props)).
 
-**Bu örnekteki gibi, birçok çocuk bileşenden verilerin toplanması veya iki çocuğun birbirleri arasında iletişim kurabilmesi için, üst bileşende paylaşımlı bir state oluşturmanız gerekmektedir. Üst bileşen, prop'lar aracılığıyla state'ini çocuklara aktarabilir. Bu sayede çocuk bileşenler hem birbirleri arasında hem de üst bileşen ile senkronize hale gelirler.**
+**Bu örnekteki gibi, birçok alt bileşenden verilerin toplanması veya iki çocuğun birbirleri arasında iletişim kurabilmesi için, üst bileşende paylaşımlı bir state oluşturmanız gerekmektedir. Üst bileşen, prop'lar aracılığıyla state'ini alt bileşenlere aktarabilir. Bu sayede alt bileşenler hem birbirleri arasında hem de üst bileşen ile senkronize hale gelirler.**
 
 React bileşenleri refactor edilirken, state'in yukarı taşınması çok yaygın bir durumdur. Şimdi bu fırsatı değerlendirelim ve işe koyulalım.
 
@@ -400,7 +400,7 @@ Board'un `renderSquare` metodu aşağıdaki gibi görünüyor:
   }
 ```
 
-Projeye başladığımızda, 0'dan 8'e kadar olan sayıları her bir karede göstermek için, Board'daki `value` prop'unu çocuk bileşenlere [aktarmıştık](#passing-data-through-props). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square bileşeninin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square bileşeni, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
+Projeye başladığımızda, 0'dan 8'e kadar olan sayıları her bir karede göstermek için, Board'daki `value` prop'unu alt bileşenlere [aktarmıştık](#passing-data-through-props). Bir diğer önceki aşamada ise sayıların yerine [mevcut Square bileşeninin kendi state'i tarafından belirlenen](#making-an-interactive-component) "X" işaretinin almasını sağlamıştık. İşte bu nedenle Square bileşeni, Board tarafından kendisine gönderilen `value` prop'unu göz ardı ediyor.
 
 Şimdi prop aktarma mekanizmasını tekrar kullanacağız. Bunun için her bir Square'e kendi mevcut değerini (`'X'`, `'O'`, or `null`) atamak için Board bileşeninde değişiklik yapalım. Board'un constructor'ında halihazırda tanımladığımız bir `squares` dizisi bulunuyor. Board'un `renderSquare` metodunu, bu diziden verileri alacak şekilde değiştirelim: 
 
