@@ -30,14 +30,14 @@ Bu aynı zamanda **Hâlihazırda var olan websitesine React'i entegre etmenin en
 
 React takımı öncelikli olarak şu çözümleri öneriyor:
 
-- Eğer **React öğreniyorsanız** veya **yeni bir [single-page](/docs/glossary.html#single-page-application) uygulama oluşturuyorsanız,** [Create React App](#create-react-app) kullanın.
+- Eğer **React öğreniyorsanız** veya **yeni bir [tek sayfa](/docs/glossary.html#single-page-application) uygulama oluşturuyorsanız,** [Create React App](#create-react-app) kullanın.
 - Eğer **Node.js ile sunucu tarafında işlenen bir sayfa** geliştiriyorsanız [Next.js](#nextjs)'i deneyin.
 - Eğer **sabit içerikli bir websitesi,** geliştiriyorsanız [Gatsby](#gatsby)'i deneyin.
-- Eğer **bileşen kütüphanesi** geliştiriyor veya **var olan kod bir temeli ile entegre ediyorsanız**, [Daha esnek araçlar](#daha-esnek-araclar)'ı deneyin.
+- Eğer **bileşen kütüphanesi** geliştiriyor veya **var olan bir kod temeli ile entegre ediyorsanız**, [Daha esnek araçlar](#daha-esnek-araclar)'ı deneyin.
 
 ### Create React App {#create-react-app}
 
-[Create React App](https://github.com/facebookincubator/create-react-app) **React ögrenmek** için rahat bir ortamdır ve React ile **yeni bir [single-page](/docs/glossary.html#single-page-application) uygulama** geliştirmeye başlamanın en iyi yoludur.
+[Create React App](https://github.com/facebookincubator/create-react-app) **React ögrenmek** için rahat bir ortamdır ve React ile **yeni bir [tek sayfa](/docs/glossary.html#single-page-application) uygulama** geliştirmeye başlamanın en iyi yoludur.
 
 En son JavaScript özelliklerini kullanabilmeniz için geliştirme ortamınızı kurar, güzel bir geliştirici deneyimi sağlar ve uygulamanızı ürün için optimize eder. Bilgisayarınızda Node >= 6 ve npm >= 5.2 sürümlerinin yüklü olması gerekir. Bir proje oluşturmak için:
 
