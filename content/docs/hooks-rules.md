@@ -8,24 +8,24 @@ prev: hooks-effect.html
 
 *Hook'lar* React 16.8'deki yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar.
 
-Hooks JavaScript fonksiyonlarıdır, ancak bunları kullanırken iki kurala uymanız gerekir. Bu kuralları otomatik olarak uygulamak için bir [linter eklentisi](https://www.npmjs.com/package/eslint-plugin-react-hooks) sunuyoruz:
+Hook'lar JavaScript fonksiyonlarıdır, ancak bunları kullanırken iki kurala uymanız gerekir. Bu kuralları otomatik olarak uygulamak için bir [linter eklentisi](https://www.npmjs.com/package/eslint-plugin-react-hooks) sunuyoruz:
 
-### Sadece En Üst Seviyede Hooks Çağrısı Yapın {#only-call-hooks-at-the-top-level}
+### Hook'ları Sadece En Üst Seviyede Çağırın {#only-call-hooks-at-the-top-level}
 
-**Döngülerde, koşullarda veya iç içe geçmiş fonksiyonlarda Hooks çağrısı yapmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde kullanın. Bu kuralı uygulayarak, bir bileşenin her render edildiğinde *Hook*'ların aynı sırada çağrıldığından emin olursunuz. React'in çoklu `useState` ve `useEffect` çağrıları arasındaki Hook'ların durumunu doğru şekilde korumasını sağlayan şey budur. Merak ediyorsanız, bunu [aşağıda](#explanation) detaylıca açıklayacağız.
+**Döngülerde, koşullarda veya iç içe geçmiş fonksiyonlarda Hook çağrısı yapmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde kullanın. Bu kuralı uygulayarak, bir bileşenin her render edildiğinde *Hook*'ların aynı sırada çağrıldığından emin olursunuz. React'in çoklu `useState` ve `useEffect` çağrıları arasındaki Hook'ların durumunu doğru şekilde korumasını sağlayan şey budur. (Merak ediyorsanız, bunu [aşağıda](#explanation) detaylıca açıklayacağız.)
 
-### Sadece React Fonksiyonlarında Hook'ları Çağırın {#only-call-hooks-from-react-functions}
+### Hook'ları Sadece React Fonksiyonlarından Çağırın {#only-call-hooks-from-react-functions}
 
-**Sıradan JavaScript fonksiyonlarında Hook'ları çağırmayın** Bunun yerine, bunları yapabilirsiniz:
+**Sıradan JavaScript fonksiyonlarında Hook'ları çağırmayın.** Bunun yerine:
 
-* ✅ React fonksiyon bileşenlerinden Hook'ları çağırın.
-* ✅ Özel Hook'lardan Hook'ları çağırın. [Bir sonraki sayfada](/docs/hooks-custom.html) bunları öğreneceğiz.
+* ✅ React fonksiyon bileşenlerinden Hook'ları çağırabilirsiniz.
+* ✅ Özel Hook'lardan Hook'ları çağırabilirsiniz. ([bir sonraki sayfada](/docs/hooks-custom.html) bunları öğreneceğiz.)
 
 Bu kuralı uygulayarak, bir bileşendeki tüm durum bilgisi mantığının kaynak kodundan açıkça görülebildiğinden emin olursunuz.
 
 ## ESLint Eklentisi {#eslint-plugin}
 
-Bu iki kuralı uygulayan [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) adında bir ESLint eklentisini yayınladık. Denemek isterseniz, bu eklentiyi projenize ekleyebilirsiniz:
+Bu iki kuralı uygulayan [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) adında bir ESLint eklentisi yayınladık. Denemek isterseniz, bu eklentiyi projenize ekleyebilirsiniz:
 
 ```bash
 npm install eslint-plugin-react-hooks
@@ -40,19 +40,19 @@ npm install eslint-plugin-react-hooks
   ],
   "rules": {
     // ...
-    "react-hooks/rules-of-hooks": "error", // Hook'ların kurallarını kontrol eder
+    "react-hooks/rules-of-hooks": "error", // Hook kurallarını kontrol eder
     "react-hooks/exhaustive-deps": "warn" // Efekt bağımlılıklarını kontrol eder
   }
 }
 ```
 
-Gelecekte, bu eklentiyi varsayılan olarak Create React App ve benzeri araç takımlarına eklemeyi düşünüyoruz.
+İleride, bu eklentiyi varsayılan olarak Create React App ve benzer araç takımlarına eklemeyi düşünüyoruz.
 
-**[Kendi Hook'larınızı](/docs/hooks-custom.html) nasıl yazacağınızı anlatan bir sonraki sayfaya şimdi atlayabilirsiniz.** Bu sayfada, bu kuralların arkasındaki gerekçeyi açıklayarak devam edeceğiz.
+**[Kendi Hook'larınızı](/docs/hooks-custom.html) nasıl yazacağınızı açıklayan bir sonraki sayfaya şimdi atlayabilirsiniz.** Bu sayfada, bu kuralların ardındaki mantığı açıklayarak devam edeceğiz.
 
 ## Açıklama {#explanation}
 
-[Daha önce öğrendiğimiz](/docs/hooks-state.html#tip-using-multiple-state-variables) gibi, tek bir bileşende birden fazla State veya Effect Hook'larını kullanabiliriz:
+[Daha önce öğrendiğimiz](/docs/hooks-state.html#tip-using-multiple-state-variables) gibi, tek bir bileşende birden fazla State veya Efekt Hook'larını kullanabiliriz:
 
 
 ```js
@@ -91,9 +91,9 @@ useEffect(updateTitle)     // 4. Başlığı güncellemek için bir efekt ekle
 // -------------
 // İkinci render etme
 // -------------
-useState('Mary')           // 1. name state değişkenini oku (değişken yoksayılmıştır)
+useState('Mary')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
 useEffect(persistForm)     // 2. Formun devamlılığını sağlamak efekti değiştir
-useState('Poppins')        // 3. Read the surname state variable (değişken yoksayılmıştır)
+useState('Poppins')        // 3. surname state değişkenini oku (argüman yoksayılmıştır)
 useEffect(updateTitle)     // 4. Başlığı güncellemek için efekti değiştir
 
 // ...
@@ -110,16 +110,16 @@ Hook çağrılarının sırası render etmeler arasında aynı olduğu sürece, 
   }
 ```
 
-İlk render etmede `name !== ''` koşulu `true`, bu yüzden bu Hook'u çalıştırıyoruz. Bununla birlikte, bir sonraki render etmede kullanıcı formu temizleyerek koşulu `false` hale getirebilir. Artık render etme sırasında bu Hook'u atladığımız için, Hook çağrılarının sırası farklılaşıyor:
+İlk render etmede `name !== ''` koşulu `true`, bu yüzden bu Hook'u çalıştırıyoruz. Bununla birlikte, bir sonraki render etmede kullanıcı formu temizleyerek koşulu `false` hale getirebilir. Artık render etme sırasında bu Hook'u atladığımız için, Hook çağrılarının sırası değişiyor:
 
 ```js
-useState('Mary')           // 1. name state değişkenini oku (değişken yoksayılmıştır)
+useState('Mary')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
 // useEffect(persistForm)  // 🔴 Bu Hook atlandı!
 useState('Poppins')        // 🔴 2 (ama 3'tü). surname state değişkeni okunamadı
 useEffect(updateTitle)     // 🔴 3 (ama 4'tü). Efekt değiştirilemedi
 ```
 
-React, ikinci `useState` Hook çağrısı için ne döneceğini bilemezdi. React, bu bileşendeki ikinci Hook çağrısının, önceki render etme sırasında olduğu gibi, `persistForm` efektine karşılık gelmesini bekliyordu, ancak artık gelmiyor. Bu noktadan itibaren, atladığımızdan sonraki her bir Hook çağrısı da birer birer kayıp, hatalara yol açacaktır.
+React, ikinci `useState` Hook çağrısı için ne döneceğini bilemezdi. React, bu bileşendeki ikinci Hook çağrısının, bir önceki render etme sırasında olduğu gibi, `persistForm` efektine karşılık gelmesini bekliyordu, ancak artık gelmiyor. Bu noktadan itibaren, atladığımız çağrıdan sonraki her bir Hook çağrısı da birer birer kayıp, hatalara yol açacaktır.
 
 **Bu yüzden Hook'lar bileşenlerimizin en üst seviyesinde çağrılmalıdır.** Eğer bir efekti koşullu olarak çalıştırmak istiyorsak, bu koşulu Hook'umuzun *içerisine* koyabiliriz:
 
@@ -132,7 +132,7 @@ React, ikinci `useState` Hook çağrısı için ne döneceğini bilemezdi. React
   });
 ```
 
-**Eğer [verilen lint kuralını](https://www.npmjs.com/package/eslint-plugin-react-hooks) kullanırsanız, bu sorun için endişelenmenize gerek olmadığını unutmayın.** Ama artık Hook'ların *neden* bu şekilde çalıştığını ve kuralın hangi sorunları önlediğini de biliyorsunuz.
+**Eğer [sunulan lint kuralını](https://www.npmjs.com/package/eslint-plugin-react-hooks) kullanırsanız, bu sorun için endişelenmenize gerek kalmadığını unutmayın.** Ama artık Hook'ların *neden* bu şekilde çalıştığını ve kuralın hangi sorunları önlediğini de biliyorsunuz.
 
 ## Sonraki Adımlar {#next-steps}
 
