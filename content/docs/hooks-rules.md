@@ -1,38 +1,38 @@
 ---
 id: hooks-rules
-title: Rules of Hooks
+title: Hook Kuralları
 permalink: docs/hooks-rules.html
 next: hooks-custom.html
 prev: hooks-effect.html
 ---
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
+*Hook'lar* React 16.8'deki yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar.
 
-Hooks are JavaScript functions, but you need to follow two rules when using them. We provide a [linter plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) to enforce these rules automatically:
+Hook'lar JavaScript fonksiyonlarıdır, ancak bunları kullanırken iki kurala uymanız gerekir. Bu kuralları otomatik olarak uygulamak için bir [linter eklentisi](https://www.npmjs.com/package/eslint-plugin-react-hooks) sunuyoruz:
 
-### Only Call Hooks at the Top Level {#only-call-hooks-at-the-top-level}
+### Hook'ları Sadece En Üst Seviyede Çağırın {#only-call-hooks-at-the-top-level}
 
-**Don't call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. By following this rule, you ensure that Hooks are called in the same order each time a component renders. That's what allows React to correctly preserve the state of Hooks between multiple `useState` and `useEffect` calls. (If you're curious, we'll explain this in depth [below](#explanation).)
+**Döngülerde, koşullarda veya iç içe geçmiş fonksiyonlarda Hook çağrısı yapmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde kullanın. Bu kuralı uygulayarak, bir bileşenin her render edildiğinde *Hook*'ların aynı sırada çağrıldığından emin olursunuz. React'in çoklu `useState` ve `useEffect` çağrıları arasındaki Hook'ların durumunu doğru şekilde korumasını sağlayan şey budur. (Merak ediyorsanız, bunu [aşağıda](#explanation) detaylıca açıklayacağız.)
 
-### Only Call Hooks from React Functions {#only-call-hooks-from-react-functions}
+### Hook'ları Sadece React Fonksiyonlarından Çağırın {#only-call-hooks-from-react-functions}
 
-**Don't call Hooks from regular JavaScript functions.** Instead, you can:
+**Sıradan JavaScript fonksiyonlarında Hook'ları çağırmayın.** Bunun yerine:
 
-* ✅ Call Hooks from React function components.
-* ✅ Call Hooks from custom Hooks (we'll learn about them [on the next page](/docs/hooks-custom.html)).
+* ✅ React fonksiyon bileşenlerinden Hook'ları çağırabilirsiniz.
+* ✅ Özel Hook'lardan Hook'ları çağırabilirsiniz. ([bir sonraki sayfada](/docs/hooks-custom.html) bunları öğreneceğiz.)
 
-By following this rule, you ensure that all stateful logic in a component is clearly visible from its source code.
+Bu kuralı uygulayarak, bir bileşendeki tüm durum bilgisi mantığının kaynak kodundan açıkça görülebildiğinden emin olursunuz.
 
-## ESLint Plugin {#eslint-plugin}
+## ESLint Eklentisi {#eslint-plugin}
 
-We released an ESLint plugin called [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) that enforces these two rules. You can add this plugin to your project if you'd like to try it:
+Bu iki kuralı uygulayan [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) adında bir ESLint eklentisi yayınladık. Denemek isterseniz, bu eklentiyi projenize ekleyebilirsiniz:
 
 ```bash
 npm install eslint-plugin-react-hooks
 ```
 
 ```js
-// Your ESLint configuration
+// Sizin ESLint yapılandırmanız
 {
   "plugins": [
     // ...
@@ -40,34 +40,35 @@ npm install eslint-plugin-react-hooks
   ],
   "rules": {
     // ...
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    "react-hooks/rules-of-hooks": "error", // Hook kurallarını kontrol eder
+    "react-hooks/exhaustive-deps": "warn" // Efekt bağımlılıklarını kontrol eder
   }
 }
 ```
 
-In the future, we intend to include this plugin by default into Create React App and similar toolkits.
+İleride, bu eklentiyi varsayılan olarak Create React App ve benzer araç takımlarına eklemeyi düşünüyoruz.
 
-**You can skip to the next page explaining how to write [your own Hooks](/docs/hooks-custom.html) now.** On this page, we'll continue by explaining the reasoning behind these rules.
+**[Kendi Hook'larınızı](/docs/hooks-custom.html) nasıl yazacağınızı açıklayan bir sonraki sayfaya şimdi atlayabilirsiniz.** Bu sayfada, bu kuralların ardındaki mantığı açıklayarak devam edeceğiz.
 
-## Explanation {#explanation}
+## Açıklama {#explanation}
 
-As we [learned earlier](/docs/hooks-state.html#tip-using-multiple-state-variables), we can use multiple State or Effect Hooks in a single component:
+[Daha önce öğrendiğimiz](/docs/hooks-state.html#tip-using-multiple-state-variables) gibi, tek bir bileşende birden fazla State veya Efekt Hook'larını kullanabiliriz:
+
 
 ```js
 function Form() {
-  // 1. Use the name state variable
+  // 1. name state değişkenini kullan
   const [name, setName] = useState('Mary');
 
-  // 2. Use an effect for persisting the form
+  // 2. Formun devamlılığını sağlamak için bir efekt kullan
   useEffect(function persistForm() {
     localStorage.setItem('formData', name);
   });
 
-  // 3. Use the surname state variable
+  // 3. surname state değişkenini kullan
   const [surname, setSurname] = useState('Poppins');
 
-  // 4. Use an effect for updating the title
+  // 4. Başlığı güncellemek için bir efekt kullan
   useEffect(function updateTitle() {
     document.title = name + ' ' + surname;
   });
@@ -76,32 +77,32 @@ function Form() {
 }
 ```
 
-So how does React know which state corresponds to which `useState` call? The answer is that **React relies on the order in which Hooks are called**. Our example works because the order of the Hook calls is the same on every render:
+Peki React, hangi state'in hangi `useState` çağrısına karşılık geldiğini nasıl biliyor? Cevap, **React'in Hook'ların çağrılma sırasına dayalı olmasıdır.** Örneğimiz çalışıyor çünkü Hook çağrılarının sırası her render etmede aynı:
 
 ```js
 // ------------
-// First render
+// İlk render etme
 // ------------
-useState('Mary')           // 1. Initialize the name state variable with 'Mary'
-useEffect(persistForm)     // 2. Add an effect for persisting the form
-useState('Poppins')        // 3. Initialize the surname state variable with 'Poppins'
-useEffect(updateTitle)     // 4. Add an effect for updating the title
+useState('Mary')           // 1. name state değişkenini 'Mary' ile başlat
+useEffect(persistForm)     // 2. Formun devamlılığını sağlamak için bir efekt ekle
+useState('Poppins')        // 3. surname state değişkenini 'Poppins' ile başlat
+useEffect(updateTitle)     // 4. Başlığı güncellemek için bir efekt ekle
 
 // -------------
-// Second render
+// İkinci render etme
 // -------------
-useState('Mary')           // 1. Read the name state variable (argument is ignored)
-useEffect(persistForm)     // 2. Replace the effect for persisting the form
-useState('Poppins')        // 3. Read the surname state variable (argument is ignored)
-useEffect(updateTitle)     // 4. Replace the effect for updating the title
+useState('Mary')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
+useEffect(persistForm)     // 2. Formun devamlılığını sağlamak efekti değiştir
+useState('Poppins')        // 3. surname state değişkenini oku (argüman yoksayılmıştır)
+useEffect(updateTitle)     // 4. Başlığı güncellemek için efekti değiştir
 
 // ...
 ```
 
-As long as the order of the Hook calls is the same between renders, React can associate some local state with each of them. But what happens if we put a Hook call (for example, the `persistForm` effect) inside a condition?
+Hook çağrılarının sırası render etmeler arasında aynı olduğu sürece, React bazı yerel state'leri bu çağrıların her biriyle ilişkilendirebilir. Ancak bir koşulun içine bir Hook çağrısı (örneğin, `persistForm` efekti) koyarsak ne olur?
 
 ```js
-  // 🔴 We're breaking the first rule by using a Hook in a condition
+  // 🔴 Bir koşul içerisinde Hook kullanarak ilk kuralı çiğniyoruz
   if (name !== '') {
     useEffect(function persistForm() {
       localStorage.setItem('formData', name);
@@ -109,30 +110,30 @@ As long as the order of the Hook calls is the same between renders, React can as
   }
 ```
 
-The `name !== ''` condition is `true` on the first render, so we run this Hook. However, on the next render the user might clear the form, making the condition `false`. Now that we skip this Hook during rendering, the order of the Hook calls becomes different:
+İlk render etmede `name !== ''` koşulu `true`, bu yüzden bu Hook'u çalıştırıyoruz. Bununla birlikte, bir sonraki render etmede kullanıcı formu temizleyerek koşulu `false` hale getirebilir. Artık render etme sırasında bu Hook'u atladığımız için, Hook çağrılarının sırası değişiyor:
 
 ```js
-useState('Mary')           // 1. Read the name state variable (argument is ignored)
-// useEffect(persistForm)  // 🔴 This Hook was skipped!
-useState('Poppins')        // 🔴 2 (but was 3). Fail to read the surname state variable
-useEffect(updateTitle)     // 🔴 3 (but was 4). Fail to replace the effect
+useState('Mary')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
+// useEffect(persistForm)  // 🔴 Bu Hook atlandı!
+useState('Poppins')        // 🔴 2 (ama 3'tü). surname state değişkeni okunamadı
+useEffect(updateTitle)     // 🔴 3 (ama 4'tü). Efekt değiştirilemedi
 ```
 
-React wouldn't know what to return for the second `useState` Hook call. React expected that the second Hook call in this component corresponds to the `persistForm` effect, just like during the previous render, but it doesn't anymore. From that point, every next Hook call after the one we skipped would also shift by one, leading to bugs.
+React, ikinci `useState` Hook çağrısı için ne döneceğini bilemezdi. React, bu bileşendeki ikinci Hook çağrısının, bir önceki render etme sırasında olduğu gibi, `persistForm` efektine karşılık gelmesini bekliyordu, ancak artık gelmiyor. Bu noktadan itibaren, atladığımız çağrıdan sonraki her bir Hook çağrısı da birer birer kayıp, hatalara yol açacaktır.
 
-**This is why Hooks must be called on the top level of our components.** If we want to run an effect conditionally, we can put that condition *inside* our Hook:
+**Bu yüzden Hook'lar bileşenlerimizin en üst seviyesinde çağrılmalıdır.** Eğer bir efekti koşullu olarak çalıştırmak istiyorsak, bu koşulu Hook'umuzun *içerisine* koyabiliriz:
 
 ```js
   useEffect(function persistForm() {
-    // 👍 We're not breaking the first rule anymore
+    // 👍 Artık ilk kuralı çiğnemiyoruz
     if (name !== '') {
       localStorage.setItem('formData', name);
     }
   });
 ```
 
-**Note that you don't need to worry about this problem if you use the [provided lint rule](https://www.npmjs.com/package/eslint-plugin-react-hooks).** But now you also know *why* Hooks work this way, and which issues the rule is preventing.
+**Eğer [sunulan lint kuralını](https://www.npmjs.com/package/eslint-plugin-react-hooks) kullanırsanız, bu sorun için endişelenmenize gerek kalmadığını unutmayın.** Ama artık Hook'ların *neden* bu şekilde çalıştığını ve kuralın hangi sorunları önlediğini de biliyorsunuz.
 
-## Next Steps {#next-steps}
+## Sonraki Adımlar {#next-steps}
 
-Finally, we're ready to learn about [writing your own Hooks](/docs/hooks-custom.html)! Custom Hooks let you combine Hooks provided by React into your own abstractions, and reuse common stateful logic between different components.
+Sonunda, [kendi Hook'larınızı yazmayı](/docs/hooks-custom.html) öğrenmeye hazırız. Özel Hook'lar, React tarafından sağlanan Hook'ları kendi soyutlamalarınızla birleştirmenize ve farklı bileşenler arasındaki ortak durum mantığını yeniden kullanmanıza olanak sağlar.
