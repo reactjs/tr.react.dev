@@ -51,8 +51,8 @@
           title: "Etkileşimli bir Bileşen Yapımı"
           href: /tutorial/tutorial.html#making-an-interactive-component
           forceInternal: true
-        - id: "Geliştirici Araçları"
-          title: Developer Tools
+        - id: developer-tools
+          title: "Geliştirici Araçları"
           href: /tutorial/tutorial.html#developer-tools
           forceInternal: true
     - id: completing-the-game
