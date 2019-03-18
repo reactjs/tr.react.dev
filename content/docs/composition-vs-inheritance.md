@@ -8,13 +8,13 @@ prev: lifting-state-up.html
 next: thinking-in-react.html
 ---
 
-React güçlü bir yapı modeline sahiptir ve bileşenler arasındaki kodu tekrar kullanmak için kalıtım yerine bileşim kullanmanızı öneririz.
+React güçlü bir bileşim modeline sahiptir. Aynı kodu bileşenler arasında tekrar kullanmak için kalıtım yerine bileşim modelini kullanmanızı öneririz.
 
 Bu bölümde, React'te yeni geliştiricilerin kalıtım ile ilgili karşılaştığı birkaç sorunu ele alacağız ve bunları bileşimlerle nasıl çözebileceğimizi göstereceğiz.
 
 ## Kapsama {#containment}
 
-Bazı componentler önceden alt elemanlarını bilmezler. Bu, özellikle genel "kutuları" temsil eden `Sidebar` veya `Dialog` gibi bileşenler için geçerlidir.
+Bazı bileşenler önceden alt elemanlarını bilmezler. Bu, özellikle genel "kutuları" temsil eden `Sidebar` veya `Dialog` gibi bileşenler için geçerlidir.
 
 Bu tür bileşenlerin, alt elemanlarını doğrudan çıktılarına geçirmek için özel `children` prop'unu kullanmasını öneririz:
 
@@ -46,7 +46,7 @@ function WelcomeDialog() {
 }
 ```
 
-**[CodePen'de deneyin](https://codepen.io/gaearon/pen/ozqNOV?editors=0010)**
+**[CodePen'de Deneyin](https://codepen.io/gaearon/pen/ozqNOV?editors=0010)**
 
 `FancyBorder` JSX etiketinin içindeki herhangi bir şey `children` prop'u olarak `FancyBorder` bileşenine geçer. `FancyBorder`, bir `<div>` içinde `{props.children}` render edildiğinden, iletilen öğeler son çıktıda görünür.
 
@@ -79,11 +79,11 @@ function App() {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/gwZOJp?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/gwZOJp?editors=0010)
 
 `<Contacts />` ve `<Chat />` gibi React elementleri yalnızca nesnelerdir, bu nedenle bunları diğer veriler gibi prop'lar olarak geçirebilirsiniz. Bu yaklaşım size diğer kütüphanelerdeki "slotları" hatırlatabilir ancak React'te prop olarak ne geçeceğiniz konusunda hiçbir sınırlama yoktur.
 
-## Uzmanlaşma {#specialization}
+## Özelleşme {#specialization}
 
 Bazen bileşenleri diğer bileşenlerin "özel durumları" olarak düşünüyoruz. Örneğin, bir `WelcomeDialog` `Dialog`un özel bir durumu olduğunu söyleyebiliriz.
 
@@ -112,7 +112,7 @@ function WelcomeDialog() {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/kkEaOZ?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/kkEaOZ?editors=0010)
 
 Bileşim, sınıf olarak tanımlanan bileşenler için eşit derecede iyi çalışır:
 
@@ -162,12 +162,12 @@ class SignUpDialog extends React.Component {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/gwZbYa?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/gwZbYa?editors=0010)
 
 ## Kalıtım Hakkında Ne Söyleyebiliriz? {#so-what-about-inheritance}
 
-Facebook binlerce componentte React kullanıyor ve component hiyerarşileri oluştururken önerdiğimiz herhangi bir kullanım durumu bulamadık.
+Facebook binlerce bileşende React kullanıyor ve component hiyerarşileri oluştururken önerdiğimiz herhangi bir kullanım durumu bulamadık.
 
 Prop'lar ve bileşimler, bir bileşenin görünüşünü ve davranışını açık ve güvenli bir şekilde özelleştirmek için ihtiyacınız olan tüm esnekliği sunar. Bileşenlerin, ilkel değerler, React öğeleri veya fonksiyonlar dahil olmak üzere isteğe bağlı prop'ları kabul edebileceğini unutmayın.
 
-UI dışı fonksiyonelliği bileşenler arasında yeniden kullanmak istiyorsanız, ayrı bir JavaScript modülüne çıkarmanızı öneririz. Bileşenler onu içe dahil edebilir ve genişletmeden bu fonksiyonu, nesneyi veya bir sınıfı kullanabilir.
+UI (Kullanıcı Arayüzü) dışı işlevselliği bileşenler arasında yeniden kullanmak istiyorsanız, ayrı bir JavaScript modülüne çıkarmanızı öneririz. Bileşenler onu içe dahil edebilir ve genişletmeden bu fonksiyonu, nesneyi veya bir sınıfı kullanabilir.
