@@ -1,6 +1,6 @@
 ---
 id: composition-vs-inheritance
-title: Composition vs Inheritance
+title: Bileşim vs Kalıtım
 permalink: docs/composition-vs-inheritance.html
 redirect_from:
   - "docs/multiple-components.html"
@@ -166,7 +166,7 @@ class SignUpDialog extends React.Component {
 
 ## Kalıtım Hakkında Ne Söyleyebiliriz? {#so-what-about-inheritance}
 
-Facebook binlerce bileşende React kullanıyor ve component hiyerarşileri oluştururken önerdiğimiz herhangi bir kullanım durumu bulamadık.
+Facebook binlerce bileşende React kullanıyor ve bileşen hiyerarşileri oluştururken önerdiğimiz herhangi bir kullanım durumu bulamadık.
 
 Prop'lar ve bileşimler, bir bileşenin görünüşünü ve davranışını açık ve güvenli bir şekilde özelleştirmek için ihtiyacınız olan tüm esnekliği sunar. Bileşenlerin, ilkel değerler, React öğeleri veya fonksiyonlar dahil olmak üzere isteğe bağlı prop'ları kabul edebileceğini unutmayın.
 
