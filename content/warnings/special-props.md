@@ -1,9 +1,9 @@
 ---
-title: Special Props Warning
+title: Özel Prop'lar Uyarısı
 layout: single
 permalink: warnings/special-props.html
 ---
 
-Most props on a JSX element are passed on to the component, however, there are two special props (`ref` and `key`) which are used by React, and are thus not forwarded to the component.
+Bir JSX elemanındaki çoğu prop bileşene iletilir, ancak React tarafından kullanılan ve bu nedenle bileşene iletilmeyen iki özel prop (`ref` ve `key`) vardır.
 
-For instance, attempting to access `this.props.key` from a component (i.e., the render function or [propTypes](/docs/typechecking-with-proptypes.html#proptypes)) is not defined. If you need to access the same value within the child component, you should pass it as a different prop (ex: `<ListItemWrapper key={result.id} id={result.id} />`). While this may seem redundant, it's important to separate app logic from reconciling hints.
+Örneğin, bir bileşenden (diğer bir deyişle bir render etme fonksiyonu veya [propTypes](/docs/typechecking-with-proptypes.html#proptypes)) `this.props.key`e erişmeye çalışmak tanımlı değildir. Alt bileşende aynı değere erişmeniz gerekiyorsa, bunu farklı bir prop (örnek: `<ListItemWrapper key={result.id} id={result.id} />`) olarak iletmelisiniz. Bu gereksiz görünse de, uygulama mantığını uzlaşma ipuçlarından ayırmak önemlidir.
