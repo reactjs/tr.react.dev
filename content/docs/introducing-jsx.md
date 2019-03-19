@@ -1,12 +1,12 @@
 ---
 id: introducing-jsx
-title: Introducing JSX
+title: JSX'e Giriş
 permalink: docs/introducing-jsx.html
 prev: hello-world.html
 next: rendering-elements.html
 ---
 
-Consider this variable declaration:
+Aşağıdaki değişken tanımını ele alalım:
 
 ```js
 const element = <h1>Hello, world!</h1>;
