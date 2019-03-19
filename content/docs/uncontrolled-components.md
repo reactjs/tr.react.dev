@@ -1,14 +1,14 @@
 ---
 id: uncontrolled-components
-title: Uncontrolled Components
+title: Kontrolsüz Bileşenler
 permalink: docs/uncontrolled-components.html
 ---
 
-In most cases, we recommend using [controlled components](/docs/forms.html) to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
+Çoğu durumda, formları uygulamak için [kontrollü bileşenler](/docs/forms.html) kullanmanızı öneririz. Kontrollü bir bileşende, form verileri bir React bileşeni tarafından ele alınır. Alternatifi ise, form verilerinin DOM'un kendisi tarafından işlendiği kontrolsüz bileşenlerdir.
 
-To write an uncontrolled component, instead of writing an event handler for every state update, you can [use a ref](/docs/refs-and-the-dom.html) to get form values from the DOM.
+Bir kontrolsüz bileşen yazmak için, her state güncellemesine bir olay yöneticisi yazmak yerine, form verilerini DOM üzerinden getirmek için [ref kullanabilirsiniz](/docs/refs-and-the-dom.html).
 
-For example, this code accepts a single name in an uncontrolled component:
+Örneğin, bu kod kontrolsüz bir bileşende tek bir isim kabul eder:
 
 ```javascript{5,9,18}
 class NameForm extends React.Component {
@@ -37,15 +37,15 @@ class NameForm extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/WooRWa?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/WooRWa?editors=0010)
 
-Since an uncontrolled component keeps the source of truth in the DOM, it is sometimes easier to integrate React and non-React code when using uncontrolled components. It can also be slightly less code if you want to be quick and dirty. Otherwise, you should usually use controlled components.
+Kontrolsüz bir bileşen DOM üzerinde gerçeğin kaynağını koruduğundan, kontrolsüz bileşenleri kullanırken React ve React olmayan kodu entegre etmek bazen daha kolaydır. Ayrıca hızlı ve özensiz olmak istiyorsanız bu biraz daha az kod olabilir. Aksi takdirde, genellikle kontrollü bileşenler kullanmalısınız.
 
-If it's still not clear which type of component you should use for a particular situation, you might find [this article on controlled versus uncontrolled inputs](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/) to be helpful.
+Eğer henüz belirli bir durum için hangi bileşen tipini kullanmanız gerektiğini bilmiyorsanız, [kontrollü ve kontrolsüz input'lara ilişkin bu makaleyi](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/) faydalı bulabilirsiniz.
 
-### Default Values {#default-values}
+### Varsayılan Değerler {#default-values}
 
-In the React rendering lifecycle, the `value` attribute on form elements will override the value in the DOM. With an uncontrolled component, you often want React to specify the initial value, but leave subsequent updates uncontrolled. To handle this case, you can specify a `defaultValue` attribute instead of `value`.
+React render etme yaşam döngüsünde, form elemanlarında bulunan `value` niteliği, DOM içindeki değeri geçersiz kılar. Kontrolsüz bir bileşen ile, React'in başlangıç ​​değerini belirlemesini isteyebilir, ancak sonraki güncellemeleri kontrolsüz bırakmak isteyebilirsiniz. Bu durumda, `value` yerine `defaultValue` niteliğini belirtebilirsiniz.
 
 ```javascript{7}
 render() {
@@ -64,21 +64,21 @@ render() {
 }
 ```
 
-Likewise, `<input type="checkbox">` and `<input type="radio">` support `defaultChecked`, and `<select>` and `<textarea>` supports `defaultValue`.
+Aynı şekilde, `<input type="checkbox">` ve `<input type="radio">` `defaultChecked` niteliğini destekler, `<select>` ve `<textarea>` ise `defaultValue` niteliğini destekler.
 
-## The file input Tag {#the-file-input-tag}
+## Dosya Girdisi Etiketi {#the-file-input-tag}
 
-In HTML, an `<input type="file">` lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications).
+HTML'de, `<input type="file">` kullanıcının cihaz belleği üzerinden bir sunucuya yükleneceği veya JavaScript tarafından [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) ile değiştirebileceği bir veya daha fazla dosya seçmesini sağlar.
 
 ```html
 <input type="file" />
 ```
 
-In React, an `<input type="file" />` is always an uncontrolled component because its value can only be set by a user, and not programmatically.
+React'te, `<input type="file" />` her zaman kontrolsüz bir bileşendir, çünkü değeri yalnızca bir kullanıcı tarafından ayarlanabilir, programlanabilir bir biçimde olamaz.
 
-You should use the File API to interact with the files. The following example shows how to create a [ref to the DOM node](/docs/refs-and-the-dom.html) to access file(s) in a submit handler:
+Dosyalarla etkileşimde bulunmak için File API'ını kullanmalısınız. Aşağıdaki örnek, bir gönderme yöneticisi üzerinde bulunan dosyalara erişmek için [DOM node'una bir ref'in nasıl oluşturulacağı](/docs/refs-and-the-dom.html)nı gösterir:
 
 `embed:uncontrolled-components/input-type-file.js`
 
-[](codepen://uncontrolled-components/input-type-file)
+**[CodePen'de Deneyin](codepen://uncontrolled-components/input-type-file)**
 
