@@ -15,18 +15,18 @@ redirect_from:
 
 `React`, React kütüphanesine giriş noktasıdır. React'i bir `<script>` etiketinden yüklerseniz, bu üst düzey API'ler `React` globali üzerinde mevcut olacaktır. ES6'yı npm ile kullanıyorsanız, `import React from 'react'` yazabilirsiniz. ES5'i npm ile kullanıyorsanız, `var React = require('react')` yazabilirsiniz.
 
-## Overview {#overview}
+## Genel Bakış {#overview}
 
-### Components {#components}
+### Bileşenler {#components}
 
-React components let you split the UI into independent, reusable pieces, and think about each piece in isolation. React components can be defined by subclassing `React.Component` or `React.PureComponent`.
+React bileşenleri, kullanıcı arabirimini bağımsız, yeniden kullanılabilir parçalara ayırmanıza ve ayrılmış her bir parça hakkında düşünmenize olanak sağlar. React bileşenleri, `React.Component` yada `React.PureComponent` üzerinden alt sınıflandırma yoluyla tanımlanabilir.
 
  - [`React.Component`](#reactcomponent)
  - [`React.PureComponent`](#reactpurecomponent)
 
-If you don't use ES6 classes, you may use the `create-react-class` module instead. See [Using React without ES6](/docs/react-without-es6.html) for more information.
+ES6 sınıflarını kullanmıyorsanız, bunun yerine `create-react-class` modülünü kullanabilirsiniz. Daha fazla bilgi için [ES6 olmadan React kullanma](/docs/react-without-es6.html) bölümüne bakınız.
 
-React components can also be defined as functions which can be wrapped:
+React bileşenleri ayrıca sarılabilecek fonksiyonlar olarak tanımlanabilir:
 
 - [`React.memo`](#reactmemo)
 
