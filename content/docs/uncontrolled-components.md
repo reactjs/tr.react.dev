@@ -37,11 +37,11 @@ class NameForm extends React.Component {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/WooRWa?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/WooRWa?editors=0010)
 
 Kontrolsüz bir bileşen DOM üzerinde gerçeğin kaynağını koruduğundan, kontrolsüz bileşenleri kullanırken React ve React olmayan kodu entegre etmek bazen daha kolaydır. Ayrıca hızlı ve özensiz olmak istiyorsanız bu biraz daha az kod olabilir. Aksi takdirde, genellikle kontrollü bileşenler kullanmalısınız.
 
-Eğer henüz belirli bir durum için hangi bileşen tipini kullanmanız gerektiğini bilmiyorsanız, [kontrollü ve kontrolsüz input'lara ilişkin bu makale](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)yi faydalı bulabilirsiniz.
+Eğer henüz belirli bir durum için hangi bileşen tipini kullanmanız gerektiğini bilmiyorsanız, [kontrollü ve kontrolsüz input'lara ilişkin bu makaleyi](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/) faydalı bulabilirsiniz.
 
 ### Varsayılan Değerler {#default-values}
 
@@ -66,7 +66,7 @@ render() {
 
 Aynı şekilde, `<input type="checkbox">` ve `<input type="radio">` `defaultChecked` niteliğini destekler, `<select>` ve `<textarea>` ise `defaultValue` niteliğini destekler.
 
-## Dosya input etiketi {#the-file-input-tag}
+## Dosya Girdisi Etiketi {#the-file-input-tag}
 
 HTML'de, `<input type="file">` kullanıcının cihaz belleği üzerinden bir sunucuya yükleneceği veya JavaScript tarafından [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) ile değiştirebileceği bir veya daha fazla dosya seçmesini sağlar.
 
@@ -74,11 +74,11 @@ HTML'de, `<input type="file">` kullanıcının cihaz belleği üzerinden bir sun
 <input type="file" />
 ```
 
-React'de, `<input type="file" />` her zaman kontrolsüz bir bileşendir, çünkü değeri yalnızca bir kullanıcı tarafından ayarlanabilir, programlanabilir bir biçimde olamaz.
+React'te, `<input type="file" />` her zaman kontrolsüz bir bileşendir, çünkü değeri yalnızca bir kullanıcı tarafından ayarlanabilir, programlanabilir bir biçimde olamaz.
 
 Dosyalarla etkileşimde bulunmak için File API'ını kullanmalısınız. Aşağıdaki örnek, bir gönderme yöneticisi üzerinde bulunan dosyalara erişmek için [DOM node'una bir ref'in nasıl oluşturulacağı](/docs/refs-and-the-dom.html)nı gösterir:
 
 `embed:uncontrolled-components/input-type-file.js`
 
-**[CodePen'de deneyin](codepen://uncontrolled-components/input-type-file)**
+**[CodePen'de Deneyin](codepen://uncontrolled-components/input-type-file)**
 
