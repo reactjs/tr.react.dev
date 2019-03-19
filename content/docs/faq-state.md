@@ -1,82 +1,82 @@
 ---
 id: faq-state
-title: Component State
+title: Bileşen State'i
 permalink: docs/faq-state.html
 layout: docs
 category: FAQ
 ---
 
-### What does `setState` do? {#what-does-setstate-do}
+### `setState` ne yapar? {#what-does-setstate-do}
 
-`setState()` schedules an update to a component's `state` object. When state changes, the component responds by re-rendering.
+`setState()`, bir bileşenin `state` nesnesine bir güncelleme planlar. State değiştiğinde, bileşen yeniden render ederek karşılık verir.
 
-### What is the difference between `state` and `props`? {#what-is-the-difference-between-state-and-props}
+### `state` ve `props` arasındaki fark nedir? {#what-is-the-difference-between-state-and-props}
 
-[`props`](/docs/components-and-props.html) (short for "properties") and [`state`](/docs/state-and-lifecycle.html) are both plain JavaScript objects. While both hold information that influences the output of render, they are different in one important way: `props` get passed *to* the component (similar to function parameters) whereas `state` is managed *within* the component (similar to variables declared within a function).
+[`props`](/docs/components-and-props.html) ("properties" kısaltması) ve [`state`](/docs/state-and-lifecycle.html), her ikisi de düz JavaScript nesneleridir. Her ikisi de render etmenin çıktısını etkileyen bilgileri tutarken, önemli bir yönden farklıdırlar: `props`, *bileşene* iletilirken (fonksiyon parametrelerine benzer), `state` *bileşende* yönetilir (bir fonksiyon içinde tanımlanan değişkenlere benzer).
 
-Here are some good resources for further reading on when to use `props` vs `state`:
+İşte `props` ve `state`in ne zaman kullanılacağı hakkında daha fazla okumak için bir kaç iyi kaynak:
 * [Props vs State](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
 * [ReactJS: Props vs. State](https://lucybain.com/blog/2016/react-state-vs-pros/)
 
-### Why is `setState` giving me the wrong value? {#why-is-setstate-giving-me-the-wrong-value}
+### Neden `setState` bana yanlış bir değer veriyor? {#why-is-setstate-giving-me-the-wrong-value}
 
-In React, both `this.props` and `this.state` represent the *rendered* values, i.e. what's currently on the screen.
+React'te, hem `this.props` hem de `this.state` *render edilmiş* değerleri, yani şu anda ekranda olanları belirtir.
 
-Calls to `setState` are asynchronous - don't rely on `this.state` to reflect the new value immediately after calling `setState`. Pass an updater function instead of an object if you need to compute values based on the current state (see below for details).
+`setState`'e yapılan çağrılar asenkrondur - `setState` çağrısı yaptıktan hemen sonra yeni değeri yansıtmak için `this.state`'e güvenmeyin. Mevcut state'e göre değerleri hesaplamanız gerekiyorsa, nesne yerine güncelleyici bir fonksiyon iletin (ayrıntılar için aşağıya bakın).
 
-Example of code that will *not* behave as expected:
+Beklendiği gibi *davranmayacak* kod örneği:
 
 ```jsx
 incrementCount() {
-  // Note: this will *not* work as intended.
+  // Not: bu amaçlandığı gibi *çalışmayacaktır*.
   this.setState({count: this.state.count + 1});
 }
 
 handleSomething() {
-  // Let's say `this.state.count` starts at 0.
+  // `this.state.count` 0 olarak başlar diyelim.
   this.incrementCount();
   this.incrementCount();
   this.incrementCount();
-  // When React re-renders the component, `this.state.count` will be 1, but you expected 3.
+  // React bileşeni yeniden render ettiğinde, `this.state.count` 1 olur, ancak 3 olacak sandın.
 
-  // This is because `incrementCount()` function above reads from `this.state.count`,
-  // but React doesn't update `this.state.count` until the component is re-rendered.
-  // So `incrementCount()` ends up reading `this.state.count` as 0 every time, and sets it to 1.
+  // Bunun sebebi yukarıdaki `incrementCount()` fonksiyonunun `this.state.count`'tan okumasıdır,
+  // ancak React, bileşen yeniden render edilene kadar `this.state.count`'u güncellemez.
+  // Böylece `incrementCount()`, `this.state.count`'u her seferinde 0 olarak okumuş ve 1 olarak set etmiş olur.
 
-  // The fix is described below!
+  // Çözüm aşağıda açıklanmıştır!
 }
 ```
 
-See below for how to fix this problem.
+Bu sorunu nasıl çözeceğinizi öğrenmek için aşağıya bakınız.
 
-### How do I update state with values that depend on the current state? {#how-do-i-update-state-with-values-that-depend-on-the-current-state}
+### State'i mevcut state'e bağlı değerlerle nasıl güncellerim? {#how-do-i-update-state-with-values-that-depend-on-the-current-state}
 
-Pass a function instead of an object to `setState` to ensure the call always uses the most updated version of state (see below). 
+Çağrının her zaman state'in en güncel sürümünü kullandığından emin olmak için `setState`'e nesne yerine bir fonksiyon iletin (aşağıya bakınız).
 
-### What is the difference between passing an object or a function in `setState`? {#what-is-the-difference-between-passing-an-object-or-a-function-in-setstate}
+### `setState`'teki bir nesneyi veya fonksiyonu iletmek arasındaki fark nedir? {#what-is-the-difference-between-passing-an-object-or-a-function-in-setstate}
 
-Passing an update function allows you to access the current state value inside the updater. Since `setState` calls are batched, this lets you chain updates and ensure they build on top of each other instead of conflicting:
+Bir güncelleme fonksiyonunu iletmek, güncelleyicinin içindeki mevcut state değerine erişmenizi sağlar. `setState` çağrıları toplu halde işlendiğinden, bu, güncellemeleri zincirlemenizi ve çakışma yerine birbirlerinin üzerine inşa etmelerini sağlar:
 
 ```jsx
 incrementCount() {
   this.setState((state) => {
-    // Important: read `state` instead of `this.state` when updating.
+    // Önemli: Güncelleme yaparken `this.state` yerine` state`'i kullanın.
     return {count: state.count + 1}
   });
 }
 
 handleSomething() {
-  // Let's say `this.state.count` starts at 0.
+  // `this.state.count` 0 olarak başlar diyelim.
   this.incrementCount();
   this.incrementCount();
   this.incrementCount();
 
-  // If you read `this.state.count` now, it would still be 0.
-  // But when React re-renders the component, it will be 3.
+  // `this.state.count`'a şimdi bakarsanız, hala 0 görürsünüz.
+  // Fakat React bileşeni yeniden render ettiğinde, 3 olacaktır.
 }
 ```
 
-[Learn more about setState](/docs/react-component.html#setstate)
+[setState hakkında daha fazla bilgi edinin](/docs/react-component.html#setstate)
 
 ### When is `setState` asynchronous? {#when-is-setstate-asynchronous}
 
