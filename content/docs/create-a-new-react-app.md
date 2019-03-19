@@ -20,7 +20,7 @@ Bu sayfa, görevlere yardımcı olan bazı popüler araçları anlatır.
 
 Bu sayfada tavsiye edilen araçlar **başlangıç için ayarlama gerektirmez**.
 
-## Bir araca ihtiyacınız olmayabilir {#you-might-not-need-a-toolchain}
+## Bir Araca İhtiyacınız Olmayabilir {#you-might-not-need-a-toolchain}
 
 Eğer yukarıda anlatılan sorunlarla karşılaşmazsanız veya henüz kendinizi JavaScript araçları kullanmak konusunda rahat hissetmiyorsanız, [React'i yalın `<script>` etiketi ile HTML sayfasına eklemek](/docs/add-react-to-a-website.html) (isterseniz [JSX ile birlikte](/docs/add-react-to-a-website.html#optional-try-react-with-jsx)) seçeneğini aklınızda bulundurun.
 
@@ -81,7 +81,7 @@ Devamındaki araçlar daha fazla esneklik ve seçenek sunar. Bunları daha tecr�
 
 - **[Razzle](https://github.com/jaredpalmer/razzle)**; herhangi bir yapılandırma gerektirmeyen ancak Next.js'e göre daha fazla esneklik sunan, bir sunucu tarafinda işleme çatısıdır.
 
-## Sıfırdan bir araç zinciri oluşturmak {#creating-a-toolchain-from-scratch}
+## Sıfırdan Bir Araç Zinciri Oluşturmak {#creating-a-toolchain-from-scratch}
 
 Bir JavaScript derleme araç zinciri tipik olarak aşağıdakilerden oluşur:
 
