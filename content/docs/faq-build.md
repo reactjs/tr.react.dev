@@ -1,6 +1,6 @@
 ---
 id: faq-build
-title: Babel, JSX, ve Oluşturma Aşamaları
+title: Babel, JSX, ve Derleme Aşamaları
 permalink: docs/faq-build.html
 layout: docs
 category: FAQ
