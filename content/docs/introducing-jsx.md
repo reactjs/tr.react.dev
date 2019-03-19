@@ -12,11 +12,11 @@ Aşağıdaki değişken tanımını ele alalım:
 const element = <h1>Hello, world!</h1>;
 ```
 
-This funny tag syntax is neither a string nor HTML.
+Burada acayip bir şekilde yazılan söz dizimi ne bir string ne de HTML'e aittir.
 
-It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.
+Bu söz dizimi JSX olarak adlandırılır ve JavaScript'in bir uzantısıdır. Arayüzün nasıl görünmesi gerektiğini tanımlamak için, JSX'i React ile birlikte kullanmanızı tavsiye ederiz. JSX size bir şablon dili gibi görünebilir fakat JavaScript'i tüm gücüyle kullanmanızı sağlayacak yeteneklerle donatılmıştır.
 
-JSX produces React "elements". We will explore rendering them to the DOM in the [next section](/docs/rendering-elements.html). Below, you can find the basics of JSX necessary to get you started.
+JSX, React elementleri oluşturmanızı sağlar. [Sonraki bölümde](/docs/rendering-elements.html)) bu elementlerin nasıl DOM'a render edileceğine değineceğiz. Aşağıdaki bölümlerde, JSX'e başlangıç yapabilmeniz için gerekli bilgiler mevcuttur.
 
 ### Why JSX? {#why-jsx}
 
