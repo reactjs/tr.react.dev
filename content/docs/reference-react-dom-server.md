@@ -22,7 +22,7 @@ Aşağıdaki metotlar hem sunucu hem de tarayıcı ortamlarında kullanılabilir
 - [`renderToString()`](#rendertostring)
 - [`renderToStaticMarkup()`](#rendertostaticmarkup)
 
-Bu ilave yöntemler **yalnızca sunucuda** kullanılabilen ve tarayıcıda çalışmayan bir pakete (`stream`) bağlıdır.
+Bu ilave metotlar **yalnızca sunucuda** kullanılabilen bir pakete (stream) bağlıdır ve tarayıcıda çalışmayacaktır.
 
 - [`renderToNodeStream()`](#rendertonodestream)
 - [`renderToStaticNodeStream()`](#rendertostaticnodestream)
