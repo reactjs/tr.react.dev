@@ -10,23 +10,23 @@ next: cdn-links.html
 
 En iyi kullanıcı ve geliştirici deneyimi için tümleşik araç kullanın.
 
-Bu sayfa görevlere yardımcı olan bazı popüler araçları anlatır.
+Bu sayfa, görevlere yardımcı olan bazı popüler araçları anlatır.
 
 * Birçok dosya ve bileşene ölçeklendirme.
-* Npmden üçüncü parti kütüphanelerin kullanımı.
+* Npm'den üçüncü parti kütüphanelerin kullanımı.
 * Yaygın hataların erken farkedilmesi.
 * JS ve CSS'in geliştirme anında canlı olarak güncellenmesi.
 * Çıktının ürün için optimize edilmesi.
 
 Bu sayfada tavsiye edilen araçlar **başlangıç için ayarlama gerektirmez**.
 
-## Bir araca ihtiyacınız olmayabilir {#bir-araca-ihtiyaciniz-olmayabilir}
+## Bir araca ihtiyacınız olmayabilir {#you-might-not-need-a-toolchain}
 
-Eğer yukarıda anlatılan sorunlarla karşılaşmazsanız veya henüz kendinizi JavaScript araçları kullanmak konusunda rahat hissetmiyorsanız, [React'i yalın `<script>` etiketi ile HTML sayfasına eklemek](/docs/add-react-to-a-website.html)'i aklınızda bulundurun, isteğe bağlı [JSX ile birlikte](/docs/add-react-to-a-website.html#optional-try-react-with-jsx).
+Eğer yukarıda anlatılan sorunlarla karşılaşmazsanız veya henüz kendinizi JavaScript araçları kullanmak konusunda rahat hissetmiyorsanız, [React'i yalın `<script>` etiketi ile HTML sayfasına eklemek](/docs/add-react-to-a-website.html) (isterseniz [JSX ile birlikte](/docs/add-react-to-a-website.html#optional-try-react-with-jsx)) seçeneğini aklınızda bulundurun.
 
-Bu aynı zamanda **Hâlihazırda var olan websitesine React'i entegre etmenin en kolay yoludur.** Eğer yardımcı olabileceğini düşünüyorsanız, her zaman daha büyük bir araç ekleyebilirsiniz!
+Bu aynı zamanda **Hâlihazırda var olan web sitesine React'i entegre etmenin en kolay yoludur.** Eğer yardımcı olabileceğini düşünüyorsanız, her zaman daha büyük bir araç ekleyebilirsiniz!
 
-## Tavsiye Edilen Araçlar {#tavsiye-edilen-araclar}
+## Tavsiye Edilen Araçlar {#recommended-toolchains}
 
 React takımı öncelikli olarak şu çözümleri öneriyor:
 
@@ -59,29 +59,29 @@ Create React App, backend mantığı veya veritabanlarını idare etmez; sadece 
 
 ### Next.js {#nextjs}
 
-[Next.js](https://nextjs.org/) React ile **statik ve sunucu tarafından işlenen uygulamalar** geliştirmek için popüler ve hafif bir çatıdır. Kutunun dışında **stillendirme ve yönlendirme çözümleri** içerir, ve sunucu ortamı olarak [Node.js](https://nodejs.org/) kullandığınızı varsayar.
+[Next.js](https://nextjs.org/) React ile **statik ve sunucu tarafından işlenen uygulamalar** geliştirmek için popüler ve hafif bir çatıdır. Hazır olarak **stillendirme ve yönlendirme çözümleri** içerir, ve sunucu ortamı olarak [Node.js](https://nodejs.org/) kullandığınızı varsayar.
 
 Next.js'i [resmi rehberinden](https://nextjs.org/learn/) öğrenin.
 
 ### Gatsby {#gatsby}
 
-[Gatsby](https://www.gatsbyjs.org/), React ile **statik web siteleri** geliştirmenin en iyi yoludur. React bileşenlerini kullanmanıza olanak sağlar, fakat çıktılar en hızlı yükleme süresini garantilemek için önceden (sunucu tarafında) işlenmiş HTML ve CSSdir.
+[Gatsby](https://www.gatsbyjs.org/), React ile **statik web siteleri** geliştirmenin en iyi yoludur. React bileşenlerini kullanmanıza olanak sağlar, fakat en hızlı yükleme süresini garanti etmek için önceden işlenmiş HTML ve CSS çıktılarını verir.
 
 Gatsby'i [resmi rehberinden](https://www.gatsbyjs.org/docs/) veya [yeni başlayanlar galerisinden](https://www.gatsbyjs.org/docs/gatsby-starters/) öğrenin.
 
-### Daha Esnek Araçlar {#daha-esnek-araclar}
+### Daha Esnek Araçlar {#more-flexible-toolchains}
 
 Devamındaki araçlar daha fazla esneklik ve seçenek sunar. Bunları daha tecrübeli kullanıcılar için öneriyoruz:
 
-- **[Neutrino](https://neutrinojs.org/)** [webpack](https://webpack.js.org/)'in gücünü ön ayarların sadeliği ile birleştirir, [React uygulamaları](https://neutrinojs.org/packages/react/) ve [React bileşenleri](https://neutrinojs.org/packages/react-components/) için bir ön ayar da içerir.
+- **[Neutrino](https://neutrinojs.org/)**; [webpack](https://webpack.js.org/)'in gücünü ön ayarların sadeliği ile birleştirir, [React uygulamaları](https://neutrinojs.org/packages/react/) ve [React bileşenleri](https://neutrinojs.org/packages/react-components/) için bir ön ayar da içerir.
 
-- **[nwb](https://github.com/insin/nwb)** Bilhassa [npm için React bileşenleri yayımlamak](https://github.com/insin/nwb/blob/master/docs/guides/ReactComponents.md#developing-react-components-and-libraries-with-nwb) için mükemmeldir. React uygulamaları oluşturmak için de [kullanılabilir](https://github.com/insin/nwb/blob/master/docs/guides/ReactApps.md#developing-react-apps-with-nwb)
+- **[nwb](https://github.com/insin/nwb)**; Bilhassa [npm için React bileşenleri yayımlamak](https://github.com/insin/nwb/blob/master/docs/guides/ReactComponents.md#developing-react-components-and-libraries-with-nwb) için mükemmeldir. React uygulamaları oluşturmak için de [kullanılabilir](https://github.com/insin/nwb/blob/master/docs/guides/ReactApps.md#developing-react-apps-with-nwb)
 
-- **[Parcel](https://parceljs.org/)** [React ile çalışan](https://parceljs.org/recipes.html#react) hızlı, ayarlama gerektirmeyen bir web uygulama paketleyicisidir.
+- **[Parcel](https://parceljs.org/)**; [React ile çalışan](https://parceljs.org/recipes.html#react), hızlı, ayarlama gerektirmeyen bir web uygulama paketleyicisidir.
 
-- **[Razzle](https://github.com/jaredpalmer/razzle)** Hiç bir ayarlama gerektirmeyen bir sunucu tarafinda işleme çatısıdır, Next.js daha fazla esneklik sunar.
+- **[Razzle](https://github.com/jaredpalmer/razzle)**; herhangi bir yapılandırma gerektirmeyen ancak Next.js'e göre daha fazla esneklik sunan, bir sunucu tarafinda işleme çatısıdır.
 
-## Sıfırdan bir araç zinciri oluşturmak {#sifirdan-bir-arac-zinciri-olusturmak}
+## Sıfırdan bir araç zinciri oluşturmak {#creating-a-toolchain-from-scratch}
 
 Bir JavaScript derleme araç zinciri tipik olarak aşağıdakilerden oluşur:
 
@@ -91,6 +91,6 @@ Bir JavaScript derleme araç zinciri tipik olarak aşağıdakilerden oluşur:
 
 * Bir **derleyici** [Babel](https://babeljs.io/) gibi. Bu, yazdığınız modern JavaScript kodunun eski tarayıcılarda da çalışmasını sağlar.
 
-Eğer sıfırdan kendi JavaScript araç zincirinizi kurmayı tercih ederseniz, Bazı Create React App fonksiyonelliklerini yeniden oluşturan [şu rehbere bir göz atın](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658).
+Eğer sıfırdan kendi JavaScript araç zincirinizi kurmayı tercih ederseniz, bazı Create React App fonksiyonelliklerini yeniden oluşturan [şu rehbere bir göz atın](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658).
 
 Özel araç zincirinizin [ürün için doğru bir şekilde kurulduğunu](/docs/optimizing-performance.html#use-the-production-build) garanti altına almayı unutmayın.
