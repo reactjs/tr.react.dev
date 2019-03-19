@@ -1,6 +1,6 @@
 ---
 id: react-api
-title: React Top-Level API
+title: React Üst Düzey API
 layout: docs
 category: Reference
 permalink: docs/react-api.html
@@ -13,7 +13,7 @@ redirect_from:
   - "docs/top-level-api-zh-CN.html"
 ---
 
-`React` is the entry point to the React library. If you load React from a `<script>` tag, these top-level APIs are available on the `React` global. If you use ES6 with npm, you can write `import React from 'react'`. If you use ES5 with npm, you can write `var React = require('react')`.
+`React`, React kütüphanesine giriş noktasıdır. React'i bir `<script>` etiketinden yüklerseniz, bu üst düzey API'ler `React` globali üzerinde mevcut olacaktır. ES6'yı npm ile kullanıyorsanız, `import React from 'react'` yazabilirsiniz. ES5'i npm ile kullanıyorsanız, `var React = require('react')` yazabilirsiniz.
 
 ## Overview {#overview}
 
