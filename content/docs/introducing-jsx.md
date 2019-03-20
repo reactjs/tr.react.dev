@@ -109,15 +109,15 @@ JavaScript ifadesini bir özellik içerisine yazarken çift tırnak kullanmayın
 >
 >Örneğin JSX içerisinde `class` özelliği [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className), ve `tabindex` özelliği de [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex) olarak yazılmalıdır.
 
-### Specifying Children with JSX {#specifying-children-with-jsx}
+### JSX ile Alt Elemanların Tanımlanması {#specifying-children-with-jsx}
 
-If a tag is empty, you may close it immediately with `/>`, like XML:
+Eğer bir etiketin içeriği boş ise, XML'deki gibi `/>` kullanarak etiketi kapatabilirsiniz:
 
 ```js
 const element = <img src={user.avatarUrl} />;
 ```
 
-JSX tags may contain children:
+JSX etiketleri alt elemanlar içerebilir:
 
 ```js
 const element = (
