@@ -84,11 +84,11 @@ Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağ
 
 * * *
 
-## Reference {#reference}
+## Referans {#reference}
 
 ### `React.Component` {#reactcomponent}
 
-`React.Component` is the base class for React components when they are defined using [ES6 classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
+`React.Component`, [ES6 sınıfları](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanılarak tanımlandıklarında React bileşenleri için temel sınıftır:
 
 ```javascript
 class Greeting extends React.Component {
@@ -98,21 +98,21 @@ class Greeting extends React.Component {
 }
 ```
 
-See the [React.Component API Reference](/docs/react-component.html) for a list of methods and properties related to the base `React.Component` class.
+Temel `React.Component` sınıfına ilişkin metod ve özelliklerin listesi için [React.Component API Referansına](/docs/react-component.html) bakın.
 
 * * *
 
 ### `React.PureComponent` {#reactpurecomponent}
 
-`React.PureComponent` is similar to [`React.Component`](#reactcomponent). The difference between them is that [`React.Component`](#reactcomponent) doesn't implement [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate), but `React.PureComponent` implements it with a shallow prop and state comparison. 
+`React.PureComponent` [`React.Component`](#reactcomponent)'e benzer. Aralarındaki fark, [`React.Component`](#reactcomponent)'in [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunu uygulamamasıdır, ancak `React.PureComponent` bunu yüzeysel bir prop ve state karşılaştırması ile birlikte uygular.
 
-If your React component's `render()` function renders the same result given the same props and state, you can use `React.PureComponent` for a performance boost in some cases.
+Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile aynı sonucu render ediyor ise, bazı durumlarda performans artışı için `React.PureComponent` kullanabilirsiniz.
 
-> Note
+> Not
 >
-> `React.PureComponent`'s `shouldComponentUpdate()` only shallowly compares the objects. If these contain complex data structures, it may produce false-negatives for deeper differences. Only extend `PureComponent` when you expect to have simple props and state, or use [`forceUpdate()`](/docs/react-component.html#forceupdate) when you know deep data structures have changed. Or, consider using [immutable objects](https://facebook.github.io/immutable-js/) to facilitate fast comparisons of nested data.
+> `React.PureComponent`'in `shouldComponentUpdate()` metodu sadece nesneleri yüzeysel olarak karşılaştırır. Eğer bunlar karmaşık veri yapıları içeriyorsa, daha derin farklılıklar için yanlış sonuçlar üretebilir. `PureComponent`'i yalnızca prop'lar ve state'in basit olmasını beklediğiniz durumlarda uzatın, veya derin veri yapılarının değiştiğini biliyorsanız [`forceUpdate()`](/docs/react-component.html#forceupdate) işlevini kullanın. Veya iç içe geçmiş verilerin hızlı bir şekilde karşılaştırılmasını kolaylaştırmak için [değişmez nesneler](https://facebook.github.io/immutable-js/) kullanmayı düşünebilirsiniz.
 >
-> Furthermore, `React.PureComponent`'s `shouldComponentUpdate()` skips prop updates for the whole component subtree. Make sure all the children components are also "pure".
+> Ayrıca, `React.PureComponent`'in `shouldComponentUpdate()` metodu tüm bileşen alt ağacı için prop güncellemelerini atlar. Tüm alt bileşenlerinin de "pure" olduğundan emin olun.
 
 * * *
 
@@ -120,35 +120,35 @@ If your React component's `render()` function renders the same result given the 
 
 ```javascript
 const MyComponent = React.memo(function MyComponent(props) {
-  /* render using props */
+  /* prop'ları kullanarak render et */
 });
 ```
 
-`React.memo` is a [higher order component](/docs/higher-order-components.html). It's similar to [`React.PureComponent`](#reactpurecomponent) but for function components instead of classes.
+`React.memo` bir [üst katman bileşenidir](/docs/higher-order-components.html). [`React.PureComponent`](#reactpurecomponent)'e benzer ancak sınıflar yerine fonksiyon bileşenleri için geçerlidir.
 
-If your function component renders the same result given the same props, you can wrap it in a call to `React.memo` for a performance boost in some cases by memoizing the result. This means that React will skip rendering the component, and reuse the last rendered result.
+Eğer fonksiyon bileşeniniz aynı prop'lar ile aynı sonucu render ediyor ise, bazı durumlarda sonucu ezberleyerek performans artışı sağlaması için onu bir `React.memo` çağrısına sarabilirsiniz. Bu, React'in bileşeni render etmeyi atlayacağı ve son render edilen sonucu yeniden kullanacağı anlamına gelir.
 
-By default it will only shallowly compare complex objects in the props object. If you want control over the comparison, you can also provide a custom comparison function as the second argument.
+Varsayılan olarak, prop'lar nesnesindeki karmaşık nesneleri sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
 
 ```javascript
 function MyComponent(props) {
-  /* render using props */
+  /* prop'ları kullanarak render et */
 }
 function areEqual(prevProps, nextProps) {
   /*
-  return true if passing nextProps to render would return
-  the same result as passing prevProps to render,
-  otherwise return false
+  nextProps'u render'a iletmek,
+  prevProps'u render'a iletmek ile aynı sonucu verirse true
+  aksi takdirde false döndürür
   */
 }
 export default React.memo(MyComponent, areEqual);
 ```
 
-This method only exists as a **[performance optimization](/docs/optimizing-performance.html).** Do not rely on it to "prevent" a render, as this can lead to bugs.
+Bu metod yalnızca bir **[performans optimizasyonu](/docs/optimizing-performance.html)** olarak vardır. Bir render işlemini "önlemek" için ona güvenmeyin, bu hatalara neden olabilir.
 
-> Note
+> Not
 >
-> Unlike the [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) method on class components, the `areEqual` function returns `true` if the props are equal and `false` if the props are not equal. This is the inverse from `shouldComponentUpdate`.
+> Sınıf bileşenlerinde bulunan [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunun aksine, `areEqual` fonksiyonu prop'lar birbirine eşitse `true`, prop'lar birbirine eşit değilse `false` döndürür. Bu `shouldComponentUpdate` işlevinin tersidir.
 
 * * *
 
