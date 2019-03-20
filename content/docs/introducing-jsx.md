@@ -128,17 +128,17 @@ const element = (
 );
 ```
 
-### JSX Prevents Injection Attacks {#jsx-prevents-injection-attacks}
+### JSX, Injection Saldırılarını Engeller {#jsx-prevents-injection-attacks}
 
-It is safe to embed user input in JSX:
+JSX içerisinde kullanıcı girdisini gömmek güvenlidir:
 
 ```js
 const title = response.potentiallyMaliciousInput;
-// This is safe:
+// Bu kullanım güvenlidir:
 const element = <h1>{title}</h1>;
 ```
 
-By default, React DOM [escapes](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that's not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent [XSS (cross-site-scripting)](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks.
+Varsayılan olarak React DOM, render işlemi öncesinde gömülen değerlerdeki bazı karakterleri [escape eder](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html). Böylece uygulama içerisinde, kullanıcının yazabileceği kötü amaçlı kodların enjekte edilmesi engellenmiş olur. Render işlemi öncesi her şey string ifadeye dönüştürülür. Bu sayede [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırıları engellenmiş olur.
 
 ### JSX Represents Objects {#jsx-represents-objects}
 
