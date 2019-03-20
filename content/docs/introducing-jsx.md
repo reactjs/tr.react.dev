@@ -87,27 +87,27 @@ function getGreeting(user) {
 }
 ```
 
-### Specifying Attributes with JSX {#specifying-attributes-with-jsx}
+### JSX ile Özelliklerin Tanımlanması {#specifying-attributes-with-jsx}
 
-You may use quotes to specify string literals as attributes:
+Bir HTML elemanı için string ifadelerini çift tırnak içerisinde atayabilirsiniz:
 
 ```js
 const element = <div tabIndex="0"></div>;
 ```
 
-You may also use curly braces to embed a JavaScript expression in an attribute:
+Ayrıca bir JavaScript ifadesini, elemanın özelliği olarak tanımlamak için süslü parantezler ile sarmalayabilirsiniz:
 
 ```js
 const element = <img src={user.avatarUrl}></img>;
 ```
 
-Don't put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.
+JavaScript ifadesini bir özellik içerisine yazarken çift tırnak kullanmayınız. String için çift tırnak, JavaScript ifadeleri için süslü parantezler kullanmalısınız. Aynı özellik için hem çift tırnak hem de süslü parantez kullanmayınız.
 
->**Warning:**
+>**Uyarı:**
 >
->Since JSX is closer to JavaScript than to HTML, React DOM uses `camelCase` property naming convention instead of HTML attribute names.
+>JSX ifadeleri HTML'den çok JavaScript'e daha yakındırlar. Bu nedenle React DOM, özellik isimlendirme için HTML'deki gibi bir isimlendirme yerine `camelCase` isimlendirme standardını kullanmaktadır.
 >
->For example, `class` becomes [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) in JSX, and `tabindex` becomes [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex).
+>Örneğin JSX içerisinde `class` özelliği [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className), ve `tabindex` özelliği de [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex) olarak yazılmalıdır.
 
 ### Specifying Children with JSX {#specifying-children-with-jsx}
 
