@@ -39,41 +39,41 @@ Kullanıcı arayüzünüzün nasıl görünmesi gerektiğini tanımlamak için [
 
 Daha fazla bilgi için [JSX olmadan React kullanma](/docs/react-without-jsx.html) bölümüne bakınız.
 
-### Transforming Elements {#transforming-elements}
+### Öğeleri Dönüştürme {#transforming-elements}
 
-`React` provides several APIs for manipulating elements:
+`React` öğeleri işlemek için birkaç API sağlar:
 
 - [`cloneElement()`](#cloneelement)
 - [`isValidElement()`](#isvalidelement)
 - [`React.Children`](#reactchildren)
 
-### Fragments {#fragments}
+### Fragment'ler {#fragments}
 
-`React` also provides a component for rendering multiple elements without a wrapper.
+`React` ayrıca sarıcı olmadan birden fazla eleman render etmek için bir bileşen sağlar.
 
 - [`React.Fragment`](#reactfragment)
 
-### Refs {#refs}
+### Ref'ler {#refs}
 
 - [`React.createRef`](#reactcreateref)
 - [`React.forwardRef`](#reactforwardref)
 
 ### Suspense {#suspense}
 
-Suspense lets components "wait" for something before rendering. Today, Suspense only supports one use case: [loading components dynamically with `React.lazy`](/docs/code-splitting.html#reactlazy). In the future, it will support other use cases like data fetching.
+Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağlar. Günümüzde, Suspense yalnızca bir kullanım durumunu destekler: [bileşenleri `React.lazy` ile dinamik olarak yükleme](/docs/code-splitting.html#reactlazy). Gelecekte, veri getirme gibi diğer kullanım durumlarını destekleyecektir.
 
 - [`React.lazy`](#reactlazy)
 - [`React.Suspense`](#reactsuspense)
 
-### Hooks {#hooks}
+### Hook'lar {#hooks}
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a [dedicated docs section](/docs/hooks-intro.html) and a separate API reference:
+*Hook'lar*, React 16.8 ile gelen yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar. Hook'lar [özel bir döküman bölümüne](/docs/hooks-intro.html) ve ayrı bir API referansına sahiptir:
 
-- [Basic Hooks](/docs/hooks-reference.html#basic-hooks)
+- [Temel Hook'lar](/docs/hooks-reference.html#basic-hooks)
   - [`useState`](/docs/hooks-reference.html#usestate)
   - [`useEffect`](/docs/hooks-reference.html#useeffect)
   - [`useContext`](/docs/hooks-reference.html#usecontext)
-- [Additional Hooks](/docs/hooks-reference.html#additional-hooks)
+- [Ek Hook'lar](/docs/hooks-reference.html#additional-hooks)
   - [`useReducer`](/docs/hooks-reference.html#usereducer)
   - [`useCallback`](/docs/hooks-reference.html#usecallback)
   - [`useMemo`](/docs/hooks-reference.html#usememo)
