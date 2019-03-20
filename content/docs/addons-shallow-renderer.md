@@ -1,23 +1,23 @@
 ---
 id: shallow-renderer
-title: Shallow Renderer
+title: Yüzeysel Render Edici
 permalink: docs/shallow-renderer.html
 layout: docs
 category: Reference
 ---
 
-**Importing**
+**İçe aktarım**
 
 ```javascript
 import ShallowRenderer from 'react-test-renderer/shallow'; // ES6
-var ShallowRenderer = require('react-test-renderer/shallow'); // ES5 with npm
+var ShallowRenderer = require('react-test-renderer/shallow'); // npm ile ES5
 ```
 
-## Overview {#overview}
+## Genel Bakış {#overview}
 
-When writing unit tests for React, shallow rendering can be helpful. Shallow rendering lets you render a component "one level deep" and assert facts about what its render method returns, without worrying about the behavior of child components, which are not instantiated or rendered. This does not require a DOM.
+React için birim testleri yazarken, yüzeysel render edici yardımcı olabilir. Yüzeysel render etme; bir bileşeni, somutlaştırılmayan veya render edilmeyen alt bileşenlerinin davranışları hakkında endişelenmeden, "bir seviye alta" render etmenize ve render etme metodunun ne döndüğü ile ilgili gerçekleri teyit etmenize olanak sağlar. Bu bir DOM gerektirmez.
 
-For example, if you have the following component:
+Örneğin, aşağıdaki gibi bir bileşeniniz varsa:
 
 ```javascript
 function MyComponent() {
@@ -30,12 +30,12 @@ function MyComponent() {
 }
 ```
 
-Then you can assert:
+O zaman şu şekilde kullanabilirsiniz:
 
 ```javascript
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-// in your test:
+// Testinizde:
 const renderer = new ShallowRenderer();
 renderer.render(<MyComponent />);
 const result = renderer.getRenderOutput();
@@ -47,22 +47,22 @@ expect(result.props.children).toEqual([
 ]);
 ```
 
-Shallow testing currently has some limitations, namely not supporting refs.
+Yüzeysel test etmenin şu anda bazı kısıtlamaları var, mesela ref'leri desteklemiyor.
 
-> Note:
+> Not:
 >
-> We also recommend checking out Enzyme's [Shallow Rendering API](https://airbnb.io/enzyme/docs/api/shallow.html). It provides a nicer higher-level API over the same functionality.
+> Ayrıca Enzyme'in [Yüzeysel Render Etme API'si](https://airbnb.io/enzyme/docs/api/shallow.html)ne de göz atmanızı öneririz. Aynı işlevsellik üzerinden daha iyi ve üst düzey bir API sağlar.
 
-## Reference {#reference}
+## Referans {#reference}
 
 ### `shallowRenderer.render()` {#shallowrendererrender}
 
-You can think of the shallowRenderer as a "place" to render the component you're testing, and from which you can extract the component's output.
+shallowRenderer'ı, test ettiğiniz bileşeni render edeceğiniz ve bu bileşenin çıktısını alabileceğiniz bir "yer" olarak düşünebilirsiniz.
 
-`shallowRenderer.render()` is similar to [`ReactDOM.render()`](/docs/react-dom.html#render) but it doesn't require DOM and only renders a single level deep. This means you can test components isolated from how their children are implemented.
+`shallowRenderer.render()`, [`ReactDOM.render()`](/docs/react-dom.html#render)'a benzer, ancak DOM gerektirmez ve yalnızca bir seviye alta render eder. Bu, alt öğelerinin nasıl uygulandığından bağımsız şekilde bileşenleri test edebileceğiniz anlamına gelir.
 
 ### `shallowRenderer.getRenderOutput()` {#shallowrenderergetrenderoutput}
 
-After `shallowRenderer.render()` has been called, you can use `shallowRenderer.getRenderOutput()` to get the shallowly rendered output.
+`shallowRenderer.render()` çağrıldıktan sonra, yüzeysel render edilen çıktıyı almak için `shallowRenderer.getRenderOutput()` kullanabilirsiniz.
 
-You can then begin to assert facts about the output.
+Sonrasında çıktı hakkında gerçekleri teyit etmeye başlayabilirsiniz.
