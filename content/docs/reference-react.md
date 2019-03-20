@@ -30,14 +30,14 @@ React bileşenleri ayrıca sarılabilecek fonksiyonlar olarak tanımlanabilir:
 
 - [`React.memo`](#reactmemo)
 
-### Creating React Elements {#creating-react-elements}
+### React Öğeleri Oluşturma {#creating-react-elements}
 
-We recommend [using JSX](/docs/introducing-jsx.html) to describe what your UI should look like. Each JSX element is just syntactic sugar for calling [`React.createElement()`](#createelement). You will not typically invoke the following methods directly if you are using JSX.
+Kullanıcı arayüzünüzün nasıl görünmesi gerektiğini tanımlamak için [JSX kullanmanızı](/docs/introducing-jsx.html) öneririz. Her JSX elementi sadece [`React.createElement()`](#createelement) metodunu çağırmak için sözdizimsel şekerdir. JSX kullanıyorsanız, genellikle aşağıdaki metodları doğrudan çağırmazsınız.
 
 - [`createElement()`](#createelement)
 - [`createFactory()`](#createfactory)
 
-See [Using React without JSX](/docs/react-without-jsx.html) for more information.
+Daha fazla bilgi için [JSX olmadan React kullanma](/docs/react-without-jsx.html) bölümüne bakınız.
 
 ### Transforming Elements {#transforming-elements}
 
