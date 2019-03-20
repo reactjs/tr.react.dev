@@ -140,11 +140,11 @@ const element = <h1>{title}</h1>;
 
 Varsayılan olarak React DOM, render işlemi öncesinde gömülen değerlerdeki bazı karakterleri [escape eder](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html). Böylece uygulama içerisinde, kullanıcının yazabileceği kötü amaçlı kodların enjekte edilmesi engellenmiş olur. Render işlemi öncesi her şey string ifadeye dönüştürülür. Bu sayede [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırıları engellenmiş olur.
 
-### JSX Represents Objects {#jsx-represents-objects}
+### JSX, JavaScript Nesnelerini Temsil Eder {#jsx-represents-objects}
 
-Babel compiles JSX down to `React.createElement()` calls.
+Babel derleyicisi, JSX kodlarını `React.createElement()` çağrılarına dönüştürür.
 
-These two examples are identical:
+Bu nedenle aşağıdaki iki kod örneği aynı işlemi gerçekleştirir:
 
 ```js
 const element = (
@@ -162,10 +162,10 @@ const element = React.createElement(
 );
 ```
 
-`React.createElement()` performs a few checks to help you write bug-free code but essentially it creates an object like this:
+`React.createElement()` çağrısı, hatasız kod yazmanız için size yardımcı olacak birtakım kontrolleri gerçekleştirir. Aslında yaptığı şey, aşağıdaki gibi bir nesne oluşturmaktadır:
 
 ```js
-// Note: this structure is simplified
+// Not: bu yapı basitleştirilmiştir
 const element = {
   type: 'h1',
   props: {
@@ -175,10 +175,10 @@ const element = {
 };
 ```
 
-These objects are called "React elements". You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.
+Bu nesnelere "React elementleri" adı verilir. Bunu, ekranda görmek istediğiniz kullanıcı arayüzünün kodlar ile tasvir edilmesi gibi düşünebilirsiniz. React, bu nesneleri okuyarak DOM'u oluşturur ve arayüzü günceller.
 
-We will explore rendering React elements to the DOM in the next section.
+Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini detaylı bir şekilde ele alacağız.
 
->**Tip:**
+>**İpucu:**
 >
->We recommend using the ["Babel" language definition](https://babeljs.io/docs/editors) for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) color scheme which is compatible with it.
+>ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/editors) kullanmanızı öneririz. Bu web sitesi de, JSX kodları için Babel dil tanımlamaları ile uyumlu olan [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) renk şemasını kullanmaktadır.
