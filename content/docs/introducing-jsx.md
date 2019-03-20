@@ -1,36 +1,36 @@
 ---
 id: introducing-jsx
-title: Introducing JSX
+title: JSX'e Giriş
 permalink: docs/introducing-jsx.html
 prev: hello-world.html
 next: rendering-elements.html
 ---
 
-Consider this variable declaration:
+Aşağıdaki değişken tanımını ele alalım:
 
 ```js
 const element = <h1>Hello, world!</h1>;
 ```
 
-This funny tag syntax is neither a string nor HTML.
+Burada acayip bir şekilde yazılan söz dizimi ne bir string ne de HTML'e aittir.
 
-It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.
+Bu söz dizimi JSX olarak adlandırılır ve JavaScript'in bir söz dizimi uzantısıdır. Arayüzün nasıl görünmesi gerektiğini tanımlamak için, React ile birlikte JSX'i kullanmanızı tavsiye ederiz. JSX, bu bağlamda size kullanıcı arayüzü oluşturmayı sağlayan bir şablon dili gibi görünebilir. Fakat JavaScript'i tüm gücüyle kullanmanızı sağlayacak yeteneklerle donatılmıştır.
 
-JSX produces React "elements". We will explore rendering them to the DOM in the [next section](/docs/rendering-elements.html). Below, you can find the basics of JSX necessary to get you started.
+JSX, React elementleri oluşturmanızı sağlar. [Sonraki bölümde](/docs/rendering-elements.html) bu elementlerin nasıl DOM'a render edileceğine değineceğiz. Aşağıdaki bölümlerde, JSX'e başlangıç yapabilmeniz için gerekli bilgiler mevcuttur.
 
-### Why JSX? {#why-jsx}
+### Neden JSX? {#why-jsx}
 
-React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+React, render edilecek kısımların yer aldığı kodlar ile diğer arayüz kodlarının birbirinden ayrılmasını teşvik eder. Diğer arayüz kodlarına örnek verecek olursak: `onClick` gibi olayların nasıl işleneceği, state'in zaman içerisinde nasıl değiştirileceği ve gösterim için verilerin nasıl hazırlanacağıdır.
 
-Instead of artificially separating *technologies* by putting markup and logic in separate files, React [separates *concerns*](https://en.wikipedia.org/wiki/Separation_of_concerns) with loosely coupled units called "components" that contain both. We will come back to components in a [further section](/docs/components-and-props.html), but if you're not yet comfortable putting markup in JS, [this talk](https://www.youtube.com/watch?v=x7cQ3mrcKaY) might convince you otherwise.
+HTML ve JavaScript kodlarının ayrı dosyalarda tutularak *teknolojilerin* birbirinden yapay bir şekilde ayrılması yerine React, hem HTML hem de JavaScript kodu barındıran ve birbirine gevşek bir şekilde bağlı olan bileşenler (components) sayesinde ilgili [*işlerin* ayrılmasını](https://en.wikipedia.org/wiki/Separation_of_concerns) sağlar. [İlerleyen bölümlerde](/docs/components-and-props.html) bileşenlere tekrar değineceğiz. Fakat hala HTML kodlarının JavaScript içerisine konulması sizi rahatsız ediyorsa [bu video](https://www.youtube.com/watch?v=x7cQ3mrcKaY) sizi ikna edecektir.
 
-React [doesn't require](/docs/react-without-jsx.html) using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.
+React, JSX kullanımını [zorunlu tutmaz](/docs/react-without-jsx.html). Fakat birçok geliştirici, JavaScript kodu içerisinde arayüz ile ilgili çalışırken JSX'in kullanılmasının, görsel anlamda yardımcı olduğunu düşünüyor. Ayrıca JSX, React için daha anlaşılır hata ve uyarı mesajlarının görüntülenmesini sağlıyor.
 
-With that out of the way, let's get started!
+Bu kısımda anlaştıysak, artık JSX ile React kullanımına geçebiliriz.
 
-### Embedding Expressions in JSX {#embedding-expressions-in-jsx}
+### JSX İçerisinde JavaScript Kodlarının Kullanımı {#embedding-expressions-in-jsx}
 
-In the example below, we declare a variable called `name` and then use it inside JSX by wrapping it in curly braces:
+Aşağıdaki örnekte ilk satırda `name` değişkenini tanımlıyoruz. Ardından bu değişkeni süslü parantezler ile sarmalayarak JSX kodu içerisinde kullanıyoruz:
 
 ```js{1,2}
 const name = 'Josh Perez';
@@ -42,9 +42,9 @@ ReactDOM.render(
 );
 ```
 
-You can put any valid [JavaScript expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) inside the curly braces in JSX. For example, `2 + 2`, `user.firstName`, or `formatName(user)` are all valid JavaScript expressions.
+JSX'te süslü parantezler arasına dilediğiniz herhangi bir [JavaScript ifadesini](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) yazabilirsiniz. Örneğin, `2 + 2`, `user.firstName`, veya `formatName(user)` gibi JavaScript ifadelerini kullanabilirsiniz.
 
-In the example below, we embed the result of calling a JavaScript function, `formatName(user)`, into an `<h1>` element.
+Aşağıdaki örnekte, bir JavaScript fonksiyonun çağrısının sonucu JSX içerisine gömülmektedir. Yani `formatName(user)`, `<h1>` elemanının içerisine konulmaktadır.
 
 ```js{12}
 function formatName(user) {
@@ -68,15 +68,15 @@ ReactDOM.render(
 );
 ```
 
-[](codepen://introducing-jsx)
+[Codepen'de Deneyin](codepen://introducing-jsx)
 
-We split JSX over multiple lines for readability. While it isn't required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of [automatic semicolon insertion](https://stackoverflow.com/q/2846283).
+Okunabilirliği arttırmak için JSX kodunu birkaç satır halinde yazdık. Buradaki gibi, JSX kodunu birçok satır halinde yazarken, kodu parantezler ile sarmalamanızı öneririz. Bu sayede [otomatik olarak noktalı virgül eklenmesi](https://stackoverflow.com/q/2846283) ile oluşan birçok hatanın önüne geçebilirsiniz. 
 
-### JSX is an Expression Too {#jsx-is-an-expression-too}
+### JSX de bir JavaScript İfadesidir {#jsx-is-an-expression-too}
 
-After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.
+Oluşan derlemenin ardından JSX ifadeleri, sıradan JavaScript fonksiyon çağrılarına dönüşür ve bu fonksiyonlar JavaScript nesnelerini işleyecek şekilde çalışırlar.
 
-This means that you can use JSX inside of `if` statements and `for` loops, assign it to variables, accept it as arguments, and return it from functions:
+Bu sayede `if` ifadelerini ve `for` döngülerini JSX içerisinde kullanabilir, değişkenlere atama yapabilir, fonksiyona parametre olarak geçebilir ve fonksiyondan geri döndürebilirsiniz:
 
 ```js{3,5}
 function getGreeting(user) {
@@ -87,37 +87,37 @@ function getGreeting(user) {
 }
 ```
 
-### Specifying Attributes with JSX {#specifying-attributes-with-jsx}
+### JSX ile Özelliklerin Tanımlanması {#specifying-attributes-with-jsx}
 
-You may use quotes to specify string literals as attributes:
+Bir HTML elemanı için string ifadelerini çift tırnak içerisinde atayabilirsiniz:
 
 ```js
 const element = <div tabIndex="0"></div>;
 ```
 
-You may also use curly braces to embed a JavaScript expression in an attribute:
+Ayrıca bir JavaScript ifadesini, elemanın özelliği olarak tanımlamak için süslü parantezler ile sarmalayabilirsiniz:
 
 ```js
 const element = <img src={user.avatarUrl}></img>;
 ```
 
-Don't put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.
+Bir JavaScript ifadesini, herhangi bir özellik içerisine yazarken çift tırnak kullanmayınız. String için çift tırnak, JavaScript ifadeleri için süslü parantezler kullanmalısınız. Aynı özellik için hem çift tırnak hem de süslü parantez **kullanmayınız**.
 
->**Warning:**
+>**Uyarı:**
 >
->Since JSX is closer to JavaScript than to HTML, React DOM uses `camelCase` property naming convention instead of HTML attribute names.
+>JSX ifadeleri, HTML'den ziyade JavaScript'e daha yakındırlar. Bu nedenle React DOM, özellik isimlendirme için HTML'deki gibi bir isimlendirme yerine `camelCase` isimlendirme standardını kullanmaktadır.
 >
->For example, `class` becomes [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) in JSX, and `tabindex` becomes [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex).
+>Örneğin JSX içerisinde `class` özelliği [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className), ve `tabindex` özelliği de [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex) olarak yazılmalıdır.
 
-### Specifying Children with JSX {#specifying-children-with-jsx}
+### JSX ile Alt Elemanların Tanımlanması {#specifying-children-with-jsx}
 
-If a tag is empty, you may close it immediately with `/>`, like XML:
+Eğer bir HTML etiketinin içeriği boş ise, XML'deki gibi `/>` kullanarak etiketi kapatabilirsiniz:
 
 ```js
 const element = <img src={user.avatarUrl} />;
 ```
 
-JSX tags may contain children:
+JSX etiketleri alt elemanlar da içerebilir:
 
 ```js
 const element = (
@@ -128,23 +128,23 @@ const element = (
 );
 ```
 
-### JSX Prevents Injection Attacks {#jsx-prevents-injection-attacks}
+### JSX, Injection Saldırılarını Engeller {#jsx-prevents-injection-attacks}
 
-It is safe to embed user input in JSX:
+JSX'te kullanıcı girdisini koda direkt olarak gömmek güvenlidir:
 
 ```js
 const title = response.potentiallyMaliciousInput;
-// This is safe:
+// Bu kullanım güvenlidir:
 const element = <h1>{title}</h1>;
 ```
 
-By default, React DOM [escapes](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that's not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent [XSS (cross-site-scripting)](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks.
+Çünkü varsayılan olarak React DOM, render işlemi öncesinde gömülen değerlerdeki `<`, `&` gibi bazı özel karakterleri `&lt;` ve `&amp;` olacak şekilde [dönüştürür](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html). Böylece uygulama içerisinde, kullanıcının yazabileceği kötü amaçlı kodların enjekte edilmesi engellenmiş olur. Render işlemi öncesi her şey string ifadeye dönüştürüldüğünden dolayı, [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırıları engellenmiş olur.
 
-### JSX Represents Objects {#jsx-represents-objects}
+### JSX, JavaScript Nesnelerini Temsil Eder {#jsx-represents-objects}
 
-Babel compiles JSX down to `React.createElement()` calls.
+Babel derleyicisi, JSX kodlarını `React.createElement()` çağrılarına dönüştürür.
 
-These two examples are identical:
+Bu nedenle aşağıdaki iki kod örneği de aynı işlemi gerçekleştirir:
 
 ```js
 const element = (
@@ -162,10 +162,10 @@ const element = React.createElement(
 );
 ```
 
-`React.createElement()` performs a few checks to help you write bug-free code but essentially it creates an object like this:
+`React.createElement()` çağrısı, hatasız kod yazmanız için size yardımcı olacak birtakım kontrolleri gerçekleştirir. Aslında yaptığı şey, aşağıdaki gibi bir nesne oluşturmaktadır:
 
 ```js
-// Note: this structure is simplified
+// Not: bu yapı basitleştirilmiştir
 const element = {
   type: 'h1',
   props: {
@@ -175,10 +175,10 @@ const element = {
 };
 ```
 
-These objects are called "React elements". You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.
+Bu nesnelere "React elementleri" adı verilir. Bunu, ekranda görmek istediğiniz kullanıcı arayüzünün kodlar ile tasvir edilmesi gibi düşünebilirsiniz. React, bu nesneleri okuyarak DOM'u oluşturur ve arayüzü günceller.
 
-We will explore rendering React elements to the DOM in the next section.
+Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini daha detaylı bir şekilde ele alacağız.
 
->**Tip:**
+>**İpucu:**
 >
->We recommend using the ["Babel" language definition](https://babeljs.io/docs/editors) for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) color scheme which is compatible with it.
+>ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/editors) kullanmanızı öneririz. Bu web sitesi de, JSX kodları için Babel dil tanımlamaları ile uyumlu olan [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) renk şemasını kullanmaktadır.
