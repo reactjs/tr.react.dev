@@ -2,7 +2,7 @@ class MarkdownEditor extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { value: 'Hello, **world**!' };
+    this.state = { value: 'Merhaba, **dünya**!' };
   }
 
   handleChange(e) {
