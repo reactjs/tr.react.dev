@@ -14,15 +14,15 @@ const element = <h1>Hello, world!</h1>;
 
 Burada acayip bir şekilde yazılan söz dizimi ne bir string ne de HTML'e aittir.
 
-Bu söz dizimi JSX olarak adlandırılır ve JavaScript'in bir uzantısıdır. Arayüzün nasıl görünmesi gerektiğini tanımlamak için, JSX'i React ile birlikte kullanmanızı tavsiye ederiz. JSX size bir şablon dili gibi görünebilir fakat JavaScript'i tüm gücüyle kullanmanızı sağlayacak yeteneklerle donatılmıştır.
+Bu söz dizimi JSX olarak adlandırılır ve JavaScript'in bir söz dizimi uzantısıdır. Arayüzün nasıl görünmesi gerektiğini tanımlamak için, React ile birlikte JSX'i kullanmanızı tavsiye ederiz. JSX, bu bağlamda size kullanıcı arayüzü oluşturmayı sağlayan bir şablon dili gibi görünebilir. Fakat JavaScript'i tüm gücüyle kullanmanızı sağlayacak yeteneklerle donatılmıştır.
 
-JSX, React elementleri oluşturmanızı sağlar. [Sonraki bölümde](/docs/rendering-elements.html)) bu elementlerin nasıl DOM'a render edileceğine değineceğiz. Aşağıdaki bölümlerde, JSX'e başlangıç yapabilmeniz için gerekli bilgiler mevcuttur.
+JSX, React elementleri oluşturmanızı sağlar. [Sonraki bölümde](/docs/rendering-elements.html) bu elementlerin nasıl DOM'a render edileceğine değineceğiz. Aşağıdaki bölümlerde, JSX'e başlangıç yapabilmeniz için gerekli bilgiler mevcuttur.
 
 ### Neden JSX? {#why-jsx}
 
 React, render edilecek kısımların yer aldığı kodlar ile diğer arayüz kodlarının birbirinden ayrılmasını teşvik eder. Diğer arayüz kodlarına örnek verecek olursak: `onClick` gibi olayların nasıl işleneceği, state'in zaman içerisinde nasıl değiştirileceği ve gösterim için verilerin nasıl hazırlanacağıdır.
 
-HTML ve JavaScript kodlarının ayrı dosyalarda tutularak *teknolojilerin* birbirinden yapay bir şekilde ayrılması yerine, React hem HTML hem de JavaScript kodu barındıran ve birbirine gevşek bir şekilde bağlı olan bileşenler (components) sayesinde ilgili [*işlerin* ayrılmasını](https://en.wikipedia.org/wiki/Separation_of_concerns) sağlar. [İlerleyen bölümlerde](/docs/components-and-props.html) bileşenlere tekrar değineceğiz. Fakat hala HTML kodlarının JavaScript içerisine konması sizi rahatsız ediyorsa [bu video](https://www.youtube.com/watch?v=x7cQ3mrcKaY) sizi ikna edecektir.
+HTML ve JavaScript kodlarının ayrı dosyalarda tutularak *teknolojilerin* birbirinden yapay bir şekilde ayrılması yerine React, hem HTML hem de JavaScript kodu barındıran ve birbirine gevşek bir şekilde bağlı olan bileşenler (components) sayesinde ilgili [*işlerin* ayrılmasını](https://en.wikipedia.org/wiki/Separation_of_concerns) sağlar. [İlerleyen bölümlerde](/docs/components-and-props.html) bileşenlere tekrar değineceğiz. Fakat hala HTML kodlarının JavaScript içerisine konulması sizi rahatsız ediyorsa [bu video](https://www.youtube.com/watch?v=x7cQ3mrcKaY) sizi ikna edecektir.
 
 React, JSX kullanımını [zorunlu tutmaz](/docs/react-without-jsx.html). Fakat birçok geliştirici, JavaScript kodu içerisinde arayüz ile ilgili çalışırken JSX'in kullanılmasının, görsel anlamda yardımcı olduğunu düşünüyor. Ayrıca JSX, React için daha anlaşılır hata ve uyarı mesajlarının görüntülenmesini sağlıyor.
 
@@ -30,7 +30,7 @@ Bu kısımda anlaştıysak, artık JSX ile React kullanımına geçebiliriz.
 
 ### JSX İçerisinde JavaScript Kodlarının Kullanımı {#embedding-expressions-in-jsx}
 
-Aşağıdaki örnekte ilk satırda `name` değişkenini tanımlıyoruz. Ardından süslü parantezler ile çevreleyerek JSX kodu içerisinde kullanıyoruz:
+Aşağıdaki örnekte ilk satırda `name` değişkenini tanımlıyoruz. Ardından bu değişkeni süslü parantezler ile sarmalayarak JSX kodu içerisinde kullanıyoruz:
 
 ```js{1,2}
 const name = 'Josh Perez';
@@ -42,7 +42,7 @@ ReactDOM.render(
 );
 ```
 
-JSX içerisinde süslü parantezler arasına herhangi bir [JavaScript ifadesini](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) yazabilirsiniz. Örneğin, `2 + 2`, `user.firstName`, veya `formatName(user)` gibi JavaScript ifadelerini kullanabilirsiniz.
+JSX'te süslü parantezler arasına dilediğiniz herhangi bir [JavaScript ifadesini](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) yazabilirsiniz. Örneğin, `2 + 2`, `user.firstName`, veya `formatName(user)` gibi JavaScript ifadelerini kullanabilirsiniz.
 
 Aşağıdaki örnekte, bir JavaScript fonksiyonun çağrısının sonucu JSX içerisine gömülmektedir. Yani `formatName(user)`, `<h1>` elemanının içerisine konulmaktadır.
 
@@ -68,9 +68,9 @@ ReactDOM.render(
 );
 ```
 
-[](codepen://introducing-jsx)
+[Codepen'de Deneyin](codepen://introducing-jsx)
 
-Okunabilirliği arttırmak için JSX kodunu birkaç satır halinde yazdık. Buradaki gibi, JSX kodunu birçok satır halinde yazarken, kodu parantezler ile sarmalamanızı öneririz. Çünkü bu sayede [otomatik olarak noktalı virgül eklenmesi](https://stackoverflow.com/q/2846283) ile oluşan birçok hatanın önüne geçebilirsiniz. 
+Okunabilirliği arttırmak için JSX kodunu birkaç satır halinde yazdık. Buradaki gibi, JSX kodunu birçok satır halinde yazarken, kodu parantezler ile sarmalamanızı öneririz. Bu sayede [otomatik olarak noktalı virgül eklenmesi](https://stackoverflow.com/q/2846283) ile oluşan birçok hatanın önüne geçebilirsiniz. 
 
 ### JSX de bir JavaScript İfadesidir {#jsx-is-an-expression-too}
 
@@ -101,23 +101,23 @@ Ayrıca bir JavaScript ifadesini, elemanın özelliği olarak tanımlamak için 
 const element = <img src={user.avatarUrl}></img>;
 ```
 
-JavaScript ifadesini bir özellik içerisine yazarken çift tırnak kullanmayınız. String için çift tırnak, JavaScript ifadeleri için süslü parantezler kullanmalısınız. Aynı özellik için hem çift tırnak hem de süslü parantez kullanmayınız.
+Bir JavaScript ifadesini, herhangi bir özellik içerisine yazarken çift tırnak kullanmayınız. String için çift tırnak, JavaScript ifadeleri için süslü parantezler kullanmalısınız. Aynı özellik için hem çift tırnak hem de süslü parantez **kullanmayınız**.
 
 >**Uyarı:**
 >
->JSX ifadeleri HTML'den çok JavaScript'e daha yakındırlar. Bu nedenle React DOM, özellik isimlendirme için HTML'deki gibi bir isimlendirme yerine `camelCase` isimlendirme standardını kullanmaktadır.
+>JSX ifadeleri, HTML'den ziyade JavaScript'e daha yakındırlar. Bu nedenle React DOM, özellik isimlendirme için HTML'deki gibi bir isimlendirme yerine `camelCase` isimlendirme standardını kullanmaktadır.
 >
 >Örneğin JSX içerisinde `class` özelliği [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className), ve `tabindex` özelliği de [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex) olarak yazılmalıdır.
 
 ### JSX ile Alt Elemanların Tanımlanması {#specifying-children-with-jsx}
 
-Eğer bir etiketin içeriği boş ise, XML'deki gibi `/>` kullanarak etiketi kapatabilirsiniz:
+Eğer bir HTML etiketinin içeriği boş ise, XML'deki gibi `/>` kullanarak etiketi kapatabilirsiniz:
 
 ```js
 const element = <img src={user.avatarUrl} />;
 ```
 
-JSX etiketleri alt elemanlar içerebilir:
+JSX etiketleri alt elemanlar da içerebilir:
 
 ```js
 const element = (
@@ -130,7 +130,7 @@ const element = (
 
 ### JSX, Injection Saldırılarını Engeller {#jsx-prevents-injection-attacks}
 
-JSX içerisinde kullanıcı girdisini gömmek güvenlidir:
+JSX'te kullanıcı girdisini koda direkt olarak gömmek güvenlidir:
 
 ```js
 const title = response.potentiallyMaliciousInput;
@@ -138,13 +138,13 @@ const title = response.potentiallyMaliciousInput;
 const element = <h1>{title}</h1>;
 ```
 
-Varsayılan olarak React DOM, render işlemi öncesinde gömülen değerlerdeki bazı karakterleri [escape eder](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html). Böylece uygulama içerisinde, kullanıcının yazabileceği kötü amaçlı kodların enjekte edilmesi engellenmiş olur. Render işlemi öncesi her şey string ifadeye dönüştürülür. Bu sayede [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırıları engellenmiş olur.
+Çünkü varsayılan olarak React DOM, render işlemi öncesinde gömülen değerlerdeki `<`, `&` gibi bazı özel karakterleri `&lt;` ve `&amp;` olacak şekilde [dönüştürür](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html). Böylece uygulama içerisinde, kullanıcının yazabileceği kötü amaçlı kodların enjekte edilmesi engellenmiş olur. Render işlemi öncesi her şey string ifadeye dönüştürüldüğünden dolayı, [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırıları engellenmiş olur.
 
 ### JSX, JavaScript Nesnelerini Temsil Eder {#jsx-represents-objects}
 
 Babel derleyicisi, JSX kodlarını `React.createElement()` çağrılarına dönüştürür.
 
-Bu nedenle aşağıdaki iki kod örneği aynı işlemi gerçekleştirir:
+Bu nedenle aşağıdaki iki kod örneği de aynı işlemi gerçekleştirir:
 
 ```js
 const element = (
@@ -177,7 +177,7 @@ const element = {
 
 Bu nesnelere "React elementleri" adı verilir. Bunu, ekranda görmek istediğiniz kullanıcı arayüzünün kodlar ile tasvir edilmesi gibi düşünebilirsiniz. React, bu nesneleri okuyarak DOM'u oluşturur ve arayüzü günceller.
 
-Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini detaylı bir şekilde ele alacağız.
+Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini daha detaylı bir şekilde ele alacağız.
 
 >**İpucu:**
 >
