@@ -198,11 +198,11 @@ Bu API kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yeri
 React.createFactory(type)
 ```
 
-Return a function that produces React elements of a given type. Like [`React.createElement()`](#createElement), the type argument can be either a tag name string (such as `'div'` or `'span'`), a [React component](/docs/components-and-props.html) type (a class or a function), or a [React fragment](#reactfragment) type.
+Belirli bir türden React elemanlarını üreten bir fonksiyon döndür. [`React.createElement()`](#createElement) gibi, type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf yada fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
 
-This helper is considered legacy, and we encourage you to either use JSX or use `React.createElement()` directly instead.
+Bu yardımcı işlev eski kabul edilir, ve bunun yerine ya doğrudan JSX kullanmanız ya da `React.createElement()` kullanmanız önerilir.
 
-You will not typically invoke `React.createFactory()` directly if you are using JSX. See [React Without JSX](/docs/react-without-jsx.html) to learn more.
+JSX kullanıyorsanız genellikle `React.createFactory()` işlevini doğrudan çağırmazsınız. Daha fazla bilgi için bkz. [JSX Olmadan React](/docs/react-without-jsx.html).
 
 * * *
 
@@ -212,7 +212,7 @@ You will not typically invoke `React.createFactory()` directly if you are using 
 React.isValidElement(object)
 ```
 
-Verifies the object is a React element. Returns `true` or `false`.
+Nesnenin bir React öğesi olduğunu doğrular. `true` veya `false` döndürür.
 
 * * *
 
