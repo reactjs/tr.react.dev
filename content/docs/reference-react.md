@@ -218,7 +218,7 @@ Nesnenin bir React öğesi olduğunu doğrular. `true` veya `false` döndürür.
 
 ### `React.Children` {#reactchildren}
 
-`React.Children` provides utilities for dealing with the `this.props.children` opaque data structure.
+`React.Children` belirsiz veri yapısına sahip `this.props.children` ile ilgilenmek için yardımcı işlevler sağlar.
 
 #### `React.Children.map` {#reactchildrenmap}
 
@@ -226,11 +226,11 @@ Nesnenin bir React öğesi olduğunu doğrular. `true` veya `false` döndürür.
 React.Children.map(children, function[(thisArg)])
 ```
 
-Invokes a function on every immediate child contained within `children` with `this` set to `thisArg`. If `children` is an array it will be traversed and the function will be called for each child in the array. If children is `null` or `undefined`, this method will return `null` or `undefined` rather than an array.
+`children` içinde yer alan her birincil alt eleman için bir fonksiyon çağırır, `this`'i (kendisini) `thisArg` ile belirleyin. Eğer `children` bir dizi ise taranacak ve dizi içindeki her alt eleman için fonksiyon çağrılacaktır. Eğer alt elemanlar `null` veya `undefined` ise, bu metod bir dizi yerine `null` veya `undefined` döndürür.
 
-> Note
+> Not
 >
-> If `children` is a `Fragment` it will be treated as a single child and not traversed.
+> Eğer `children` bir `Fragment` ise tek bir alt olarak kabul edilir ve tarama yapılmaz.
 
 #### `React.Children.forEach` {#reactchildrenforeach}
 
@@ -238,7 +238,7 @@ Invokes a function on every immediate child contained within `children` with `th
 React.Children.forEach(children, function[(thisArg)])
 ```
 
-Like [`React.Children.map()`](#reactchildrenmap) but does not return an array.
+[`React.Children.map()`](#reactchildrenmap) gibidir ancak bir dizi döndürmez.
 
 #### `React.Children.count` {#reactchildrencount}
 
@@ -246,7 +246,7 @@ Like [`React.Children.map()`](#reactchildrenmap) but does not return an array.
 React.Children.count(children)
 ```
 
-Returns the total number of components in `children`, equal to the number of times that a callback passed to `map` or `forEach` would be invoked.
+`children` içinde bulunan toplam bileşen sayısını döndürür, bir callback'in `map` veya `forEach`'e geçtiği sayıya eşit olarak çağrılır.
 
 #### `React.Children.only` {#reactchildrenonly}
 
@@ -254,11 +254,11 @@ Returns the total number of components in `children`, equal to the number of tim
 React.Children.only(children)
 ```
 
-Verifies that `children` has only one child (a React element) and returns it. Otherwise this method throws an error.
+`children`'ın yalnızca bir alt elemanı (bir React elemanı) olduğunu doğrular ve döndürür. Aksi halde bu metod bir hata fırlatır.
 
-> Note:
+> Not:
 >
->`React.Children.only()` does not accept the return value of [`React.Children.map()`](#reactchildrenmap) because it is an array rather than a React element.
+>`React.Children.only()`, [`React.Children.map()`](#reactchildrenmap) işlevinin dönüş değerini kabul etmez, çünkü bu bir React elemanından ziyade bir dizidir.
 
 #### `React.Children.toArray` {#reactchildrentoarray}
 
@@ -266,17 +266,17 @@ Verifies that `children` has only one child (a React element) and returns it. Ot
 React.Children.toArray(children)
 ```
 
-Returns the `children` opaque data structure as a flat array with keys assigned to each child. Useful if you want to manipulate collections of children in your render methods, especially if you want to reorder or slice `this.props.children` before passing it down.
+`children`'ın belirsiz veri yapısını her bir alt elemana atanmış anahtarları olan düz bir dizi olarak döndürür. Render metodlarınızda bulunan alt eleman koleksiyonlarını işlemek istiyorsanız, özellikle de `this.props.children`'ı alta geçmeden önce yeniden düzenlemek veya dilimlemek istiyorsanız kullanışlıdır.
 
-> Note:
+> Not:
 >
-> `React.Children.toArray()` changes keys to preserve the semantics of nested arrays when flattening lists of children. That is, `toArray` prefixes each key in the returned array so that each element's key is scoped to the input array containing it.
+> `React.Children.toArray()` alt eleman listelerini düzleştirirken iç içe dizilerin anlamını korumak için anahtarları değiştirir. Yani, `toArray` döndürülen dizideki her bir anahtarı öneklendirir, böylece her bir elemanın anahtarı onu içeren veri dizisini kapsar.
 
 * * *
 
 ### `React.Fragment` {#reactfragment}
 
-The `React.Fragment` component lets you return multiple elements in a `render()` method without creating an additional DOM element:
+`React.Fragment` bileşeni, ek bir DOM öğesi oluşturmadan `render()` metodu içinde bir çok eleman döndürmenizi sağlar:
 
 ```javascript
 render() {
@@ -289,12 +289,12 @@ render() {
 }
 ```
 
-You can also use it with the shorthand `<></>` syntax. For more information, see [React v16.2.0: Improved Support for Fragments](/blog/2017/11/28/react-v16.2.0-fragment-support.html).
+Ayrıca `<></>` sözdizimi kısayoluyla da kullanabilirsiniz. Daha fazla bilgi için, bkz. [React v16.2.0: Fragment'ler için Geliştirilmiş Destek](/blog/2017/11/28/react-v16.2.0-fragment-support.html).
 
 
 ### `React.createRef` {#reactcreateref}
 
-`React.createRef` creates a [ref](/docs/refs-and-the-dom.html) that can be attached to React elements via the ref attribute.
+`React.createRef` ref özelliği ile React elemanlarına eklenebilecek bir [ref](/docs/refs-and-the-dom.html) oluşturur.
 `embed:16-3-release-blog-post/create-ref-example.js`
 
 ### `React.forwardRef` {#reactforwardref}
