@@ -66,7 +66,7 @@ class Columns extends React.Component {
 </table>
 ```
 
-Fragments bu sorunu çözer.
+Fragmentler bu sorunu çözer.
 
 ## Usage {#usage}
 
@@ -111,7 +111,7 @@ class Columns extends React.Component {
 }
 ```
 
-Anahtarları veya nitelikleri desteklememesi dışında, diğer elementleri kullandığınız gibi `<> </>` kullanabilirsiniz.
+Anahtarları veya nitelikleri desteklememesi dışında, diğer elementleri kullandığınız gibi `<></>` kullanabilirsiniz.
 
 Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)** bu nedenle, destekleninceye kadar `<React.Fragment>` yazmak isteyebilirsiniz.
 
@@ -135,7 +135,7 @@ function Glossary(props) {
 }
 ```
 
- `key`, `Fragment`'e iletilebilecek tek özelliktir. Gelecekte, etkinlik işleyicileri gibi ek özellikler için destek ekleyebiliriz.
+`key`, `Fragment`'e iletilebilecek tek özelliktir. Gelecekte, etkinlik işleyicileri gibi ek özellikler için destek ekleyebiliriz.
 
 ### Live Demo {#live-demo}
 
