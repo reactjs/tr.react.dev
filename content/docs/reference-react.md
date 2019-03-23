@@ -299,49 +299,49 @@ Ayrıca `<></>` sözdizimi kısayoluyla da kullanabilirsiniz. Daha fazla bilgi i
 
 ### `React.forwardRef` {#reactforwardref}
 
-`React.forwardRef` creates a React component that forwards the [ref](/docs/refs-and-the-dom.html) attribute it receives to another component below in the tree. This technique is not very common but is particularly useful in two scenarios:
+`React.forwardRef` aldığı [ref](/docs/refs-and-the-dom.html) özelliğini ağacın altında bulunan bir diğer bileşene ileten bir React bileşeni oluşturur. Bu teknik çok yaygın değildir, ancak iki durumda özellikle faydalıdır:
 
-* [Forwarding refs to DOM components](/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
-* [Forwarding refs in higher-order-components](/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components)
+* [Ref'leri DOM bileşenlerine iletme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
+* [Üst katman bileşenlerinde ref iletimi](/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components)
 
-`React.forwardRef` accepts a rendering function as an argument. React will call this function with `props` and `ref` as two arguments. This function should return a React node.
+`React.forwardRef` bir render etme fonksiyonunu argüman olarak kabul eder. React bu fonksiyonu `props` ve `ref` olmak üzere iki argüman ile çağıracaktır. Bu fonksiyon bir React node'u döndürmelidir.
 
 `embed:reference-react-forward-ref.js`
 
-In the above example, React passes a `ref` given to `<FancyButton ref={ref}>` element as a second argument to the rendering function inside the `React.forwardRef` call. This rendering function passes the `ref` to the `<button ref={ref}>` element.
+Yukarıdaki örnekte, React `React.forwardRef` çağrısının içindeki render etme fonksiyonuna ikinci bir argüman olarak `<FancyButton ref={ref}>` elementine verilen bir `ref` değerini iletir. Bu render etme fonksiyonu `ref`'i `<button ref={ref}>` elementine geçer.
 
-As a result, after React attaches the ref, `ref.current` will point directly to the `<button>` DOM element instance.
+Sonuç olarak, React ref'i ekledikten sonra, `ref.current` doğrudan `<button>` DOM öğesinin örneğine işaret edecektir.
 
-For more information, see [forwarding refs](/docs/forwarding-refs.html).
+Daha fazla bilgi için, bkz. [ref iletimi](/docs/forwarding-refs.html).
 
 ### `React.lazy` {#reactlazy}
 
-`React.lazy()` lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren't used during the initial render.
+`React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
 
-You can learn how to use it from our [code splitting documentation](/docs/code-splitting.html#reactlazy). You might also want to check out [this article](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) explaining how to use it in more detail.
+Nasıl kullanılacağını [kod bölümleme dökümanımızdan](/docs/code-splitting.html#reactlazy) öğrenebilirsiniz. Daha ayrıntılı olarak nasıl kullanılacağını açıklayan [bu makaleye](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) de göz atmak isteyebilirsiniz.
 
 ```js
-// This component is loaded dynamically
+// Bu bileşen dinamik olarak yüklenir
 const SomeComponent = React.lazy(() => import('./SomeComponent'));
 ```
 
-Note that rendering `lazy` components requires that there's a `<React.Suspense>` component higher in the rendering tree. This is how you specify a loading indicator.
+`lazy` bileşenlerinin render edilmesi için render etme ağacında daha yüksek bir `<React.Suspense>` bileşeni olmasını gerektirdiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
 
-> **Note**
+> **Not**
 >
-> Using `React.lazy`with dynamic import requires Promises to be available in the JS environment. This requires a polyfill on IE11 and below.
+> `React.lazy`'i dinamik içe aktarma ile kullanmak JS ortamında Promise'lerin kullanılabilir olmasını gerektirir. Bu IE11 ve altında bir polyfill gerektirir.
 
 ### `React.Suspense` {#reactsuspense}
 
-`React.Suspense` let you specify the loading indicator in case some components in the tree below it are not yet ready to render. Today, lazy loading components is the **only** use case supported by `<React.Suspense>`:
+`React.Suspense` altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
 
 ```js
-// This component is loaded dynamically
+// Bu bileşen dinamik olarak yüklenir
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 function MyComponent() {
   return (
-    // Displays <Spinner> until OtherComponent loads
+    // OtherComponent yüklenene kadar <Spinner> öğesini görüntüler
     <React.Suspense fallback={<Spinner />}>
       <div>
         <OtherComponent />
@@ -351,10 +351,10 @@ function MyComponent() {
 }
 ```
 
-It is documented in our [code splitting guide](/docs/code-splitting.html#reactlazy). Note that `lazy` components can be deep inside the `Suspense` tree -- it doesn't have to wrap every one of them. The best practice is to place `<Suspense>` where you want to see a loading indicator, but to use `lazy()` wherever you want to do code splitting.
+Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenleri `Suspense` ağacının içinde derinlerde olabileceğini unutmayın -- her birini sarmak zorunda değil. En iyi uygulama `<Suspense>`'i bir yükleme göstergesi görmek istediğiniz yere yerleştirmek, ancak kodu bölümlemek istediğiniz her yerde `lazy()` kullanmaktır.
 
-While this is not supported today, in the future we plan to let `Suspense` handle more scenarios such as data fetching. You can read about this in [our roadmap](/blog/2018/11/27/react-16-roadmap.html).
+Bu bugün desteklenmiyor olsa da, gelecekte `Suspense`'in veri toplama gibi daha fazla durum ile ilgilenmesine izin vermeyi planlıyoruz. Bu konuyu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
->Note:
+>Not:
 >
->`React.lazy()` and `<React.Suspense>` are not yet supported by `ReactDOMServer`. This is a known limitation that will be resolved in the future.
+>`React.lazy()` ve `<React.Suspense>` henüz `ReactDOMServer` tarafından desteklenmiyor. Bu gelecekte çözülecek bilinen bir sınırlamadır.
