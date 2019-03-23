@@ -351,7 +351,7 @@ function MyComponent() {
 }
 ```
 
-Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenleri `Suspense` ağacının içinde derinlerde olabileceğini unutmayın -- her birini sarmak zorunda değil. En iyi uygulama `<Suspense>`'i bir yükleme göstergesi görmek istediğiniz yere yerleştirmek, ancak kodu bölümlemek istediğiniz her yerde `lazy()` kullanmaktır.
+Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerinin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın -- her birini sarmak zorunda değil. En iyi uygulama `<Suspense>`'i bir yükleme göstergesi görmek istediğiniz yere yerleştirmek, ancak kodu bölümlemek istediğiniz her yerde `lazy()` kullanmaktır.
 
 Bu bugün desteklenmiyor olsa da, gelecekte `Suspense`'in veri toplama gibi daha fazla durum ile ilgilenmesine izin vermeyi planlıyoruz. Bu konuyu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
