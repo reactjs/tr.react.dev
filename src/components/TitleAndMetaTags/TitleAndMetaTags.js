@@ -8,7 +8,8 @@
 import Helmet from 'react-helmet';
 import React from 'react';
 
-const defaultDescription = 'Kullanıcı arayüzleri geliştirebileceğiniz bir JavaScript kütüphanesi';
+const defaultDescription =
+  'Kullanıcı arayüzleri geliştirebileceğiniz bir JavaScript kütüphanesi';
 
 type Props = {
   title: string,

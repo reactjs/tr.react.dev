@@ -69,8 +69,8 @@ function ErrorResult(props: {|code: ?string, msg: string|}) {
   if (!code) {
     return (
       <p>
-        Bir hata ile karşılaştığınızda, söz konusu hata için bu sayfaya
-        bir bağlantı alırsınız ve size tam hata metnini gösteririz.
+        Bir hata ile karşılaştığınızda, söz konusu hata için bu sayfaya bir
+        bağlantı alırsınız ve size tam hata metnini gösteririz.
       </p>
     );
   }

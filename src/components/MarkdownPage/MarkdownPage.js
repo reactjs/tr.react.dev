@@ -95,8 +95,8 @@ const MarkdownPage = ({
                           key={author.frontmatter.name}>
                           {author.frontmatter.name}
                         </a>
-                      ))}
-                      {' '}tarafından
+                      ))}{' '}
+                      tarafından
                     </span>
                   )}
                 </div>
