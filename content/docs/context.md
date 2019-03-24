@@ -4,35 +4,36 @@ title: Context
 permalink: docs/context.html
 ---
 
-Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen ağacı üzerinden veriye ulaşmayı sağlar.
 
-In a typical React application, data is passed top-down (parent to child) via props, but this can be cumbersome for certain types of props (e.g. locale preference, UI theme) that are required by many components within an application. Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree.
+Klasik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; mahal tercihi, UI tema) için kullanışsız olabilir. Context, bileşenler arasında ağacın her seviyesi üzerinden doğrudan bir prop'a geçiş yapmadan veri paylaşımı sağlar.
 
-- [When to Use Context](#when-to-use-context)
-- [Before You Use Context](#before-you-use-context)
+
+- [Context ne zaman kullanılır](#when-to-use-context)
+- [Context kullanmadan önce](#before-you-use-context)
 - [API](#api)
   - [React.createContext](#reactcreatecontext)
   - [Context.Provider](#contextprovider)
   - [Class.contextType](#classcontexttype)
   - [Context.Consumer](#contextconsumer)
-- [Examples](#examples)
-  - [Dynamic Context](#dynamic-context)
-  - [Updating Context from a Nested Component](#updating-context-from-a-nested-component)
-  - [Consuming Multiple Contexts](#consuming-multiple-contexts)
+- [Örnekler](#examples)
+  - [Dinamik Context](#dynamic-context)
+  - [İç içe geçmiş bileşenden Context güncelleme](#updating-context-from-a-nested-component)
+  - [Çoklu Context'leri kullanma](#consuming-multiple-contexts)
 - [Caveats](#caveats)
 - [Legacy API](#legacy-api)
 
-## When to Use Context {#when-to-use-context}
+## Context ne zaman kullanılır {#when-to-use-context}
 
-Context is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language. For example, in the code below we manually thread through a "theme" prop in order to style the Button component:
+Context mevcut kullanıcı doğrulama, tema veya dil seçimi gibi React bileşen ağacında global olarak düşünülebilecek verileri paylaşmak için tasarlanmıştır. Örneğin aşağıdaki kodda Button bileşenine stil vermek için manuel olarak bir "tema" prop'unu geçiyoruz.
 
 `embed:context/motivation-problem.js`
 
-Using context, we can avoid passing props through intermediate elements:
+Context kullanarak ara elementler üzerinden prop'ları geçmekten kaçınabiliriz.
 
 `embed:context/motivation-solution.js`
 
-## Before You Use Context {#before-you-use-context}
+## Context Kullanmadan Önce {#before-you-use-context}
 
 Context is primarily used when some data needs to be accessible by *many* components at different nesting levels. Apply it sparingly because it makes component reuse more difficult.
 
