@@ -113,7 +113,7 @@ class Columns extends React.Component {
 
 Anahtarları veya nitelikleri desteklememesi dışında, diğer elementleri kullandığınız gibi `<></>` kullanabilirsiniz.
 
-Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)**. Bu nedenle, destekleninceye kadar  `<React.Fragment>` yazmak isteyebilirsiniz.
+Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)**. Bu nedenle, destekleninceye kadar `<React.Fragment>` yazmak isteyebilirsiniz.
 
 ### Keyed Fragments {#keyed-fragments}
 
