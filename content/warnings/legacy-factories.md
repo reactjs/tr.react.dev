@@ -1,22 +1,22 @@
 ---
-title: React Element Factories and JSX Warning
+title: React Element Factories and JSX Uyarısı
 layout: single
 permalink: warnings/legacy-factories.html
 ---
 
-You probably came here because your code is calling your component as a plain function call. This is now deprecated:
+Muhtemelen buraya kodunuz, bileşeninizi sade bir fonksiyon olarak çağırdığı için geldiniz. Bu artık kullanımdan kaldırıldı:
 
 ```javascript
 var MyComponent = require('MyComponent');
 
 function render() {
-  return MyComponent({ foo: 'bar' });  // WARNING
+  return MyComponent({ foo: 'bar' });  // UYARI
 }
 ```
 
 ## JSX {#jsx}
 
-React components can no longer be called directly like this. Instead [you can use JSX](/docs/jsx-in-depth.html).
+React bileşenleri artık bu şekilde direkt olarak çağırılamaz. Bunun yerine [JSX kullanabilirsiniz](/docs/jsx-in-depth.html).
 
 ```javascript
 var React = require('react');
@@ -27,9 +27,9 @@ function render() {
 }
 ```
 
-## Without JSX {#without-jsx}
+## JSX Olmadan {#without-jsx}
 
-If you don't want to, or can't use JSX, then you'll need to wrap your component in a factory before calling it:
+Eğer JSX kullanmak istemiyorsanız ya da kullanamıyorsanız bileşeninizi çağırmadan önce onu bir [`createFactory`(/docs/react-api.html#createfactory)] ile sarmallamanız gerekiyor:
 
 ```javascript
 var React = require('react');
@@ -40,11 +40,11 @@ function render() {
 }
 ```
 
-This is an easy upgrade path if you have a lot of existing function calls.
+Eğer halihazırda çok fazla fonksiyon çağrınız varsa bu onları yükseltmek için kolay bir yoldur.
 
-## Dynamic components without JSX {#dynamic-components-without-jsx}
+## JSX Olmadan dinamik bileşenler {#dynamic-components-without-jsx}
 
-If you get a component class from a dynamic source, then it might be unnecessary to create a factory that you immediately invoke. Instead you can just create your element inline:
+Eğer bir bileşen sınıfını dinamik bir kaynaktan alıyorsanız, anlık olarak çalıştırdığınız için bir Factory oluşturmak gereksiz olabilir. Bunun yerine sadece elemanınızı satır içi şeklinde oluşturabilirsiniz:
 
 ```javascript
 var React = require('react');
@@ -54,6 +54,6 @@ function render(MyComponent) {
 }
 ```
 
-## In Depth {#in-depth}
+## Daha derin detay {#in-depth}
 
-[Read more about WHY we're making this change.](https://gist.github.com/sebmarkbage/d7bce729f38730399d28)
+[Bu değişikliği NEDEN yaptığımıza dair daha fazla detayı okuyun.](https://gist.github.com/sebmarkbage/d7bce729f38730399d28)
