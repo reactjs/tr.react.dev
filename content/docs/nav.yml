@@ -32,7 +32,7 @@
     - id: lifting-state-up
       title: State'i Yukarı Taşıma
     - id: composition-vs-inheritance
-      title: Composition vs Inheritance
+      title: Bileşim vs Kalıtım
     - id: thinking-in-react
       title: React'te Düşünmek
 - title: Gelişmiş Kılavuz
@@ -40,7 +40,7 @@
     - id: accessibility
       title: Erişebilirlik
     - id: code-splitting
-      title: Kod Bölme
+      title: Kod Bölümleme
     - id: context
       title: İçerik
     - id: error-boundaries
@@ -66,13 +66,13 @@
     - id: reconciliation
       title: Reconciliation
     - id: refs-and-the-dom
-      title: Refs and the DOM
+      title: Ref'ler ve DOM
     - id: render-props
       title: Render Props
     - id: static-type-checking
-      title: Static Type Checking
+      title: Statik Tip Kontrolü
     - id: strict-mode
-      title: Strict Mode
+      title: Strict Kipi
     - id: typechecking-with-proptypes
       title: PropTypes ile Tip Kontrolü
     - id: uncontrolled-components
@@ -118,11 +118,11 @@
       - id: hooks-rules
         title: Hook Kuralları
       - id: hooks-custom
-        title: Building Your Own Hooks
+        title: Kendi Hook'unuzu Oluşturun
       - id: hooks-reference
-        title: Hooks API Reference
+        title: Hooks API'si Kaynağı
       - id: hooks-faq
-        title: Hooks FAQ
+        title: Hooks SSS
 - title: Katkı Sağlamak
   items:
   - id: how-to-contribute
@@ -130,9 +130,9 @@
   - id: codebase-overview
     title: Codebase'e Genel Bakış
   - id: implementation-notes
-    title: Implementation Notes
+    title: Yürütmeye Dair Notlar
   - id: design-principles
-    title: Design Principles
+    title: Tasarım İlkeleri
 - title: Sıkça Sorulan Sorular
   items:
     - id: faq-ajax
