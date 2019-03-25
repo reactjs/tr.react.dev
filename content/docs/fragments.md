@@ -1,10 +1,10 @@
 ---
 id: fragments
-title: Fragmentler
+title: Fragment'ler
 permalink: docs/fragments.html
 ---
 
-React'teki ortak şablon, bir bileşenin birden fazla öğe döndürmesidir. Fragmentler, Dom'a ekstra düğüm eklemeden bir çocuk listesini gruplandırmanıza izin verir.
+React'teki ortak model, bir bileşenin birden fazla öğe döndürmesidir. Fragmentler, Dom'a ekstra düğüm eklemeden bir alt elemanlar listesini gruplandırmanıza izin verir.
 
 ```js
 render() {
@@ -22,7 +22,7 @@ Onları tanımlamak için yeni bir [kısa sözdizimi](#short-syntax) de vardır,
 
 ## Motivation {#motivation}
 
-Bir bileşenin çocuk listesini döndürmesi için yaygın bir şablon. Örnek için bu React kod parçasına bakın.
+Bir bileşenin alt eleman listesini döndürmesi için yaygın bir modeldir. Örnek için bu React kod parçasına bakın.
 
 ```jsx
 class Table extends React.Component {
@@ -38,7 +38,7 @@ class Table extends React.Component {
 }
 ```
 
-Oluşturulan HTML'in geçerli olması için `<Columns />` birden fazla `<td>` öğesini döndürmesi gerekir. Bir üst div `<Columns />` 'ı `render()` içinde kullanılmışsa, sonuçta ortaya çıkan HTML geçersiz olacaktır.
+Oluşturulan HTML'in geçerli olması için `<Columns />` birden fazla `<td>` öğesini döndürmesi gerekir. Bir üst div `<Columns />` bileşeninin `render()` metodu içinde kullanılmışsa, sonuçta ortaya çıkan HTML geçersiz olacaktır.
 
 ```jsx
 class Columns extends React.Component {
@@ -113,7 +113,7 @@ class Columns extends React.Component {
 
 Anahtarları veya nitelikleri desteklememesi dışında, diğer elementleri kullandığınız gibi `<></>` kullanabilirsiniz.
 
-Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)** bu nedenle, destekleninceye kadar `<React.Fragment>` yazmak isteyebilirsiniz.
+Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)**. Bu nedenle, destekleninceye kadar  `<React.Fragment>` yazmak isteyebilirsiniz.
 
 ### Keyed Fragments {#keyed-fragments}
 
@@ -135,7 +135,7 @@ function Glossary(props) {
 }
 ```
 
-`key`, `Fragment`'e iletilebilecek tek özelliktir. Gelecekte, etkinlik işleyicileri gibi ek özellikler için destek ekleyebiliriz.
+`key`, `Fragment`'e iletilebilecek tek özelliktir. Gelecekte, olay yöneticileri gibi ek özellikler için destek ekleyebiliriz.
 
 ### Live Demo {#live-demo}
 
