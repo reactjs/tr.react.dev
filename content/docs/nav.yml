@@ -42,23 +42,23 @@
     - id: code-splitting
       title: Kod Bölümleme
     - id: context
-      title: İçerik
+      title: Bağlam (Context)
     - id: error-boundaries
-      title: Error Boundaries
+      title: Hata Sınırlandırıcıları
     - id: forwarding-refs
-      title: Forwarding Refs
+      title: Ref'leri Taşımak
     - id: fragments
       title: Fragment'ler
     - id: higher-order-components
-      title: Higher-Order Components
+      title: Üst-Seviye Bileşenler
     - id: integrating-with-other-libraries
-      title: Integrating with Other Libraries
+      title: Başka Kütüphaneleri Entegre Etmek
     - id: jsx-in-depth
       title: Derinlemesine JSX
     - id: optimizing-performance
-      title: Optimizing Performance
+      title: Performansı En İyi Duruma Getirmek
     - id: portals
-      title: Portals
+      title: Portallar
     - id: react-without-es6
       title: ES6 Olmadan React
     - id: react-without-jsx
@@ -68,7 +68,7 @@
     - id: refs-and-the-dom
       title: Ref'ler ve DOM
     - id: render-props
-      title: Render Props
+      title: Prop'ları Renderlamak
     - id: static-type-checking
       title: Statik Tip Kontrolü
     - id: strict-mode
@@ -110,11 +110,11 @@
       - id: hooks-intro
         title: Hook'a Giriş
       - id: hooks-overview
-        title: Hooks at a Glance
+        title: Hook'lara Kısa Bir Bakış
       - id: hooks-state
-        title: Using the State Hook
+        title: Hook Durumunu Kullanmak
       - id: hooks-effect
-        title: Using the Effect Hook
+        title: Hook Efekt'ini Kullanmak
       - id: hooks-rules
         title: Hook Kuralları
       - id: hooks-custom
