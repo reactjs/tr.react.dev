@@ -19,7 +19,7 @@ redirect_from:
 
 ### Bileşenler {#components}
 
-React bileşenleri, kullanıcı arabirimini bağımsız, yeniden kullanılabilir parçalara ayırmanıza ve ayrılmış her bir parça hakkında düşünmenize olanak sağlar. React bileşenleri, `React.Component` yada `React.PureComponent` üzerinden alt sınıflandırma yoluyla tanımlanabilir.
+React bileşenleri, kullanıcı arabirimini bağımsız, yeniden kullanılabilir parçalara ayırmanıza ve ayrılmış her bir parça hakkında düşünmenize olanak sağlar. React bileşenleri, `React.Component` ya da `React.PureComponent` üzerinden alt sınıflandırma yoluyla tanımlanabilir.
 
  - [`React.Component`](#reactcomponent)
  - [`React.PureComponent`](#reactpurecomponent)
@@ -60,7 +60,7 @@ Daha fazla bilgi için [JSX olmadan React kullanma](/docs/react-without-jsx.html
 
 ### Suspense {#suspense}
 
-Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağlar. Günümüzde, Suspense yalnızca bir kullanım durumunu destekler: [bileşenleri `React.lazy` ile dinamik olarak yükleme](/docs/code-splitting.html#reactlazy). Gelecekte, veri getirme gibi diğer kullanım durumlarını destekleyecektir.
+Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağlar. Şu an için, Suspense yalnızca bir kullanım durumunu destekler: [bileşenleri `React.lazy` ile dinamik olarak yükleme](/docs/code-splitting.html#reactlazy). Gelecekte, veri getirme gibi diğer kullanım durumlarını destekleyecektir.
 
 - [`React.lazy`](#reactlazy)
 - [`React.Suspense`](#reactsuspense)
@@ -73,7 +73,7 @@ Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağ
   - [`useState`](/docs/hooks-reference.html#usestate)
   - [`useEffect`](/docs/hooks-reference.html#useeffect)
   - [`useContext`](/docs/hooks-reference.html#usecontext)
-- [Ek Hook'lar](/docs/hooks-reference.html#additional-hooks)
+- [İlave Hook'lar](/docs/hooks-reference.html#additional-hooks)
   - [`useReducer`](/docs/hooks-reference.html#usereducer)
   - [`useCallback`](/docs/hooks-reference.html#usecallback)
   - [`useMemo`](/docs/hooks-reference.html#usememo)
@@ -110,7 +110,7 @@ Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile ayn
 
 > Not
 >
-> `React.PureComponent`'in `shouldComponentUpdate()` metodu sadece nesneleri yüzeysel olarak karşılaştırır. Eğer bunlar karmaşık veri yapıları içeriyorsa, daha derin farklılıklar için yanlış sonuçlar üretebilir. `PureComponent`'i yalnızca prop'lar ve state'in basit olmasını beklediğiniz durumlarda uzatın, veya derin veri yapılarının değiştiğini biliyorsanız [`forceUpdate()`](/docs/react-component.html#forceupdate) işlevini kullanın. Veya iç içe geçmiş verilerin hızlı bir şekilde karşılaştırılmasını kolaylaştırmak için [değişmez nesneler](https://facebook.github.io/immutable-js/) kullanmayı düşünebilirsiniz.
+> `React.PureComponent`'in `shouldComponentUpdate()` metodu sadece nesneleri yüzeysel olarak karşılaştırır. Eğer bunlar karmaşık veri yapıları içeriyorsa, daha derin farklılıklar için yanlış sonuçlar üretebilir. `PureComponent`'i yalnızca prop'lar ve state'in basit olmasını beklediğiniz durumlarda uzatın, veya derin veri yapılarının değiştiğini biliyorsanız [`forceUpdate()`](/docs/react-component.html#forceupdate) işlevini kullanın. Ya da, iç içe geçmiş verilerin hızlı bir şekilde karşılaştırılmasını kolaylaştırmak için [değişmez nesneler](https://facebook.github.io/immutable-js/) kullanmayı düşünebilirsiniz.
 >
 > Ayrıca, `React.PureComponent`'in `shouldComponentUpdate()` metodu tüm bileşen alt ağacı için prop güncellemelerini atlar. Tüm alt bileşenlerinin de "pure" olduğundan emin olun.
 
@@ -162,7 +162,7 @@ React.createElement(
 )
 ```
 
-Verilen tipte yeni bir [React elemanı](/docs/rendering-elements.html) oluştur ve döndür. Type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf yada fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
+Verilen tipte yeni bir [React elemanı](/docs/rendering-elements.html) oluşturun ve döndürün. Type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf ya da fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
 
 [JSX](/docs/introducing-jsx.html) ile yazılmış kod `React.createElement()` işlevini kullanmak üzere dönüştürülecektir. JSX kullanıyorsanız genellikle `React.createElement()` işlevini doğrudan çağırmazsınız. Daha fazla bilgi için bkz. [JSX Olmadan React](/docs/react-without-jsx.html).
 
@@ -178,7 +178,7 @@ React.cloneElement(
 )
 ```
 
-Bir `element`'i kullanarak yeni bir React elemanı klonla ve döndür. Elde edilen eleman, orjinal elemanın prop'larına yeni prop'ları ile yüzeysel olarak birleştirilmiş bir biçimde sahip olacaktır. Yeni alt eleman varolan alt elemanın yerine geçecektir. Orjinal elemandan gelen `key` ve `ref` korunacaktır.
+Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. Elde edilen eleman, orjinal elemanın prop'larına yeni prop'ları ile yüzeysel olarak birleştirilmiş bir biçimde sahip olacaktır. Yeni alt eleman varolan alt elemanın yerine geçecektir. Orjinal elemandan gelen `key` ve `ref` korunacaktır.
 
 `React.cloneElement()` neredeyse şuna eşdeğerdir:
 
@@ -188,7 +188,7 @@ Bir `element`'i kullanarak yeni bir React elemanı klonla ve döndür. Elde edil
 
 Ancak, aynı zamanda `ref`'leri de korur. Bu, üzerinde `ref` bulunan bir alt eleman alırsanız, ona üst eleman üzerinden ulaşamayacağınız anlamına gelir. Yeni elemanınız üzerinde aynı `ref` bağlı olarak gelecektir.
 
-Bu API kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yerine geçmiştir.
+Bu API, kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yerine geçmiştir.
 
 * * *
 
@@ -304,7 +304,7 @@ Ayrıca `<></>` sözdizimi kısayoluyla da kullanabilirsiniz. Daha fazla bilgi i
 * [Ref'leri DOM bileşenlerine iletme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
 * [Üst katman bileşenlerinde ref iletimi](/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components)
 
-`React.forwardRef` bir render etme fonksiyonunu argüman olarak kabul eder. React bu fonksiyonu `props` ve `ref` olmak üzere iki argüman ile çağıracaktır. Bu fonksiyon bir React node'u döndürmelidir.
+`React.forwardRef` bir render etme fonksiyonunu argüman olarak kabul eder. React bu fonksiyonu `props` ve `ref` olmak üzere iki argüman ile çağıracaktır. Bu fonksiyon geçerli bir React birimi döndürmelidir.
 
 `embed:reference-react-forward-ref.js`
 
@@ -316,7 +316,7 @@ Daha fazla bilgi için, bkz. [ref iletimi](/docs/forwarding-refs.html).
 
 ### `React.lazy` {#reactlazy}
 
-`React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
+`React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu, ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
 
 Nasıl kullanılacağını [kod bölümleme dökümanımızdan](/docs/code-splitting.html#reactlazy) öğrenebilirsiniz. Daha ayrıntılı olarak nasıl kullanılacağını açıklayan [bu makaleye](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) de göz atmak isteyebilirsiniz.
 
@@ -325,15 +325,15 @@ Nasıl kullanılacağını [kod bölümleme dökümanımızdan](/docs/code-split
 const SomeComponent = React.lazy(() => import('./SomeComponent'));
 ```
 
-`lazy` bileşenlerinin render edilmesi için render etme ağacında daha yüksek bir `<React.Suspense>` bileşeni olmasını gerektirdiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
+`lazy` bileşenlerin render edilmesi için render ağacında daha yukarıda bulunan bir `<React.Suspense>` bileşeninin olması gerektiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
 
 > **Not**
 >
-> `React.lazy`'i dinamik içe aktarma ile kullanmak JS ortamında Promise'lerin kullanılabilir olmasını gerektirir. Bu IE11 ve altında bir polyfill gerektirir.
+> `React.lazy`'i dinamik içe aktarma ile kullanmak JS ortamında Promise'lerin kullanılabilir olmasını gerektirir. Bu, IE11 (Internet Explorer 11) ve aşağısı için bir polyfill gerektirir.
 
 ### `React.Suspense` {#reactsuspense}
 
-`React.Suspense` altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
+`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
 
 ```js
 // Bu bileşen dinamik olarak yüklenir
@@ -351,10 +351,10 @@ function MyComponent() {
 }
 ```
 
-Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerinin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın -- her birini sarmak zorunda değil. En iyi uygulama `<Suspense>`'i bir yükleme göstergesi görmek istediğiniz yere yerleştirmek, ancak kodu bölümlemek istediğiniz her yerde `lazy()` kullanmaktır.
+Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerinin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın (her birini sarmak zorunda değildir). En iyi uygulama, bir yükleme göstergesi görmek istediğiniz yerlere `Suspense` koymak, ancak kodu bölmek istediğiniz her yerde `lazy()` kullanmaktır.
 
 Bu bugün desteklenmiyor olsa da, gelecekte `Suspense`'in veri toplama gibi daha fazla durum ile ilgilenmesine izin vermeyi planlıyoruz. Bu konuyu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
 >Not:
 >
->`React.lazy()` ve `<React.Suspense>` henüz `ReactDOMServer` tarafından desteklenmiyor. Bu gelecekte çözülecek bilinen bir sınırlamadır.
+>`React.lazy()` ve `<React.Suspense>` henüz `ReactDOMServer` tarafından desteklenmiyor. Bu, gelecekte çözülecek olan bilinen bir sınırlamadır.
