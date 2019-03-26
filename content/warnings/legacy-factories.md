@@ -42,7 +42,7 @@ function render() {
 
 Eğer halihazırda çok fazla fonksiyon çağrınız varsa bu onları yükseltmek için kolay bir yoldur.
 
-## JSX Olmadan dinamik bileşenler {#dynamic-components-without-jsx}
+## JSX'siz dinamik bileşenler {#dynamic-components-without-jsx}
 
 Eğer bir bileşen sınıfını dinamik bir kaynaktan alıyorsanız, anlık olarak çalıştırdığınız için bir Factory oluşturmak gereksiz olabilir. Bunun yerine sadece elemanınızı satır içi şeklinde oluşturabilirsiniz:
 
@@ -54,6 +54,6 @@ function render(MyComponent) {
 }
 ```
 
-## Daha derin detay {#in-depth}
+## Daha fazla detay {#in-depth}
 
 [Bu değişikliği NEDEN yaptığımıza dair daha fazla detayı okuyun.](https://gist.github.com/sebmarkbage/d7bce729f38730399d28)
