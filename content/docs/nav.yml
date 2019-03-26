@@ -5,7 +5,7 @@
     - id: add-react-to-a-website
       title: Bir Web Sitesine React Eklemek
     - id: create-a-new-react-app
-      title: Yeni bir React Uygulaması Başlatmak
+      title: Yeni bir React Uygulaması Oluşturun
     - id: cdn-links
       title: CDN Bağlantıları
 - title: Temel Kavramlar
@@ -44,7 +44,7 @@
     - id: context
       title: Bağlam (Context)
     - id: error-boundaries
-      title: Hata Sınırlandırıcıları
+      title: Hata Sınırları
     - id: forwarding-refs
       title: Ref'leri Taşımak
     - id: fragments
@@ -58,7 +58,7 @@
     - id: optimizing-performance
       title: Performansı En İyi Duruma Getirmek
     - id: portals
-      title: Portallar
+      title: Portal'lar
     - id: react-without-es6
       title: ES6 Olmadan React
     - id: react-without-jsx
@@ -103,7 +103,7 @@
     - id: javascript-environment-requirements
       title: Javascript Ortam Gereksinimleri
     - id: glossary
-      title: React Terimler Sözlüğü
+      title: React Terimleri Sözlüğü
 - title: Hook (Yeni)
   isOrdered: true
   items:
@@ -112,9 +112,9 @@
       - id: hooks-overview
         title: Hook'lara Kısa Bir Bakış
       - id: hooks-state
-        title: Hook Durumunu Kullanmak
+        title: Durum Hook'unu Kullanmak
       - id: hooks-effect
-        title: Hook Efekt'ini Kullanmak
+        title: Efekt Hook'unu Kullanmak
       - id: hooks-rules
         title: Hook Kuralları
       - id: hooks-custom
@@ -126,7 +126,7 @@
 - title: Katkı Sağlamak
   items:
   - id: how-to-contribute
-    title: Nasıl Katkı Sağlarsanız?
+    title: Nasıl Katkı Sağlarsınız?
   - id: codebase-overview
     title: Codebase'e Genel Bakış
   - id: implementation-notes
