@@ -60,9 +60,9 @@
     - id: portals
       title: Portal'lar
     - id: react-without-es6
-      title: ES6 Olmadan React
+      title: ES6 Olmadan React Kullanımı
     - id: react-without-jsx
-      title: JSX Olmadan React
+      title: JSX Olmadan React Kullanımı
     - id: reconciliation
       title: Reconciliation
     - id: refs-and-the-dom
@@ -108,7 +108,7 @@
   isOrdered: true
   items:
       - id: hooks-intro
-        title: Hook'a Giriş
+        title: Hook'lara Giriş
       - id: hooks-overview
         title: Hook'lara Kısa Bir Bakış
       - id: hooks-state
@@ -138,7 +138,7 @@
     - id: faq-ajax
       title: AJAX ve API'ler
     - id: faq-build
-      title: Babel, JSX, ve Derleme Aşamaları
+      title: Babel, JSX, ve Kurulum Aşamaları
     - id: faq-functions
       title: Bileşenlere Fonksiyon Göndermek
     - id: faq-state
@@ -150,4 +150,4 @@
     - id: faq-versioning
       title: Sürüm Politikası
     - id: faq-internals
-      title: Sanal DOM ve Internal'ler
+      title: Virtual DOM ve İç Dinamikler
