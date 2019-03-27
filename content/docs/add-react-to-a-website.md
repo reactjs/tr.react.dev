@@ -8,7 +8,7 @@ prev: getting-started.html
 next: create-a-new-react-app.html
 ---
 
-İhtiyacınız kadar az veya daha fazla React kullannın.
+İhtiyacınız kadar az veya daha fazla React kullanın.
 
 React, aşamalı olarak benimsenmesi için en baştan tasarlandı, ve **ihtiyacınız kadar az veya daha fazla React kullanabilirsiniz**. Belki de varolan bir sayfaya sadece biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.
 
