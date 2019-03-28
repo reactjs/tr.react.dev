@@ -35,11 +35,11 @@ Context kullanarak ara elementler üzerinden prop'ları geçmekten kaçınabilir
 
 ## Context Kullanmadan Önce {#before-you-use-context}
 
-Context is primarily used when some data needs to be accessible by *many* components at different nesting levels. Apply it sparingly because it makes component reuse more difficult.
+Context öncelikle bazı verilere farklı seviyedeki iç içe geçmiş *birçok* bileşen tarafından erişilmesi gerektiğinde kullanılır. Bileşenin yeniden kullanımını daha zor kıldığı için onu tedbirli bir şekilde uygulayın.
 
-**If you only want to avoid passing some props through many levels, [component composition](/docs/composition-vs-inheritance.html) is often a simpler solution than context.**
+**Eğer sadece bazı prop'ları birçok seviye üzerinden geçmekten kaçınmak isterseniz, [bileşen kompozisyonu](/docs/composition-vs-inheritance.html) genellikle Context'ten daha basit bir çözümdür.**
 
-For example, consider a `Page` component that passes a `user` and `avatarSize` prop several levels down so that deeply nested `Link` and `Avatar` components can read it:
+Örneğin, iç içe geçmiş `Link` ve `Avatar` bileşenlerinin okuyabilmesi için `avatarSize` ve `user` prop'larını birkaç seviye aşağıya aktaran bir `Sayfa` bileşeni düşünün:
 
 ```js
 <Page user={user} avatarSize={avatarSize} />
@@ -53,9 +53,9 @@ For example, consider a `Page` component that passes a `user` and `avatarSize` p
 </Link>
 ```
 
-It might feel redundant to pass down the `user` and `avatarSize` props through many levels if in the end only the `Avatar` component really needs it. It's also annoying that whenever the `Avatar` component needs more props from the top, you have to add them at all the intermediate levels too.
+Sadece `Avatar` bileşeni ihtiyaç duyarsa, `user` ve `avatarSize` prop'larını birçok seviye üzerinden geçmek gereksiz hissettirebilir. `Avatar` bileşeni ne zamanki üstten daha fazla prop'lara ihtiyaç duyar, bu prop'ları ara seviyelerde de eklemeniz gerekir.
 
-One way to solve this issue **without context** is to [pass down the `Avatar` component itself](/docs/composition-vs-inheritance.html#containment) so that the intermediate components don't need to know about the `user` or `avatarSize` props:
+Bu sorunu **Context'siz** çözmenin yolu [Avatar bileşenin kendisini aşağıya çekmesidir](/docs/composition-vs-inheritance.html#containment), böylece ara bileşenlerin `user` ve `avatarSize` prop'larını bilmesine gerek kalmaz:
 
 ```js
 function Page(props) {
@@ -78,11 +78,11 @@ function Page(props) {
 {props.userLink}
 ```
 
-With this change, only the top-most Page component needs to know about the `Link` and `Avatar` components' use of `user` and `avatarSize`.
+Bu değişiklikle sadece en üstteki Page bileşeni `Link` ve `Avatar` bileşenlerinin `user` ve `avatarSize` prop'larını geçmesini bilmelidir.
 
-This *inversion of control* can make your code cleaner in many cases by reducing the amount of props you need to pass through your application and giving more control to the root components. However, this isn't the right choice in every case: moving more complexity higher in the tree makes those higher-level components more complicated and forces the lower-level components to be more flexible than you may want.
+Bu *kontrolün tersine çevrilmesi*, birçok durumda uygulamanızda geçirmeniz gereken prop'ların miktarını azaltarak ve kök bileşenlere daha fazla kontrol vererek kodunuzu daha temiz hale getirebilir. Ancak bu her durumda doğru bir seçim değildir: ağaçta yukarıya daha fazla karmaşıklık taşımak, daha üst düzey bileşenleri daha karmaşık hale getirir ve daha düşük düzeydeki bileşenleri istediğinizden daha esnek olmaya zorlar.
 
-You're not limited to a single child for a component. You may pass multiple children, or even have multiple separate "slots" for children, [as documented here](/docs/composition-vs-inheritance.html#containment):
+Bir bileşen için sadece tek bir alt elemanla sınırlı değilsiniz. [Burada belirtildiği gibi](/docs/composition-vs-inheritance.html#containment), alt elemanlar için birden çok alt eleman geçilebilir, hatta alt bileşenler için birden fazla ayrı "slots'a" sahip olabilirsiniz.
 
 ```js
 function Page(props) {
@@ -104,9 +104,9 @@ function Page(props) {
 }
 ```
 
-This pattern is sufficient for many cases when you need to decouple a child from its immediate parents. You can take it even further with [render props](/docs/render-props.html) if the child needs to communicate with the parent before rendering.
+Bu patern, bir alt elemanı mevcut elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
 
-However, sometimes the same data needs to be accessible by many components in the tree, and at different nesting levels. Context lets you "broadcast" such data, and changes to it, to all components below. Common examples where using context might be simpler than the alternatives include managing the current locale, theme, or a data cache. 
+Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı seviyedeki bileşenlerde erişebilir olması gerekir. Context, bu tür verileri "yayınlamanıza" izin verir ve tüm alt bileşenlerdeki datayı değiştirir. Context'in kullanıldığı yaygın örnekler mevcut yerel ayarı, temayı veya bir veri önbelleği yönetmeyi içeren alternatiflerden daha basit olabilir.
 
 ## API {#api}
 
@@ -116,9 +116,9 @@ However, sometimes the same data needs to be accessible by many components in th
 const MyContext = React.createContext(defaultValue);
 ```
 
-Creates a Context object. When React renders a component that subscribes to this Context object it will read the current context value from the closest matching `Provider` above it in the tree.
+Bir Context objesi yaratır. React bu Context objesine bağlanan bir bileşen oluşturduğunda, mevcut Context değerini ağaçta en yakın eşleşen `Provider'dan` okuyacaktır.
 
-The `defaultValue` argument is **only** used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them. Note: passing `undefined` as a Provider value does not cause consuming components to use `defaultValue`.
+`defaultValue` argümanı **yanlızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenlerin sarılmadan yanlız bir şekilde test edilmesine yardımcı olabilir. Not: Provider value değerini `tanımsız` geçmek alt bileşenlerin `defaultValue` tüketmeye sebep olmaz.
 
 ### `Context.Provider` {#contextprovider}
 
@@ -126,17 +126,17 @@ The `defaultValue` argument is **only** used when a component does not have a ma
 <MyContext.Provider value={/* some value */}>
 ```
 
-Every Context object comes with a Provider React component that allows consuming components to subscribe to context changes.
+Her Context objesi dağıtıcı bileşenlerin context değişliklerine bağlı olmalarına sağlayan bir React Provider bileşeni ile birlikte gelir.
 
-Accepts a `value` prop to be passed to consuming components that are descendants of this Provider. One Provider can be connected to many consumers. Providers can be nested to override values deeper within the tree.
+Bu Provider'ın devamından(soyundan) gelen dağıtıcı bileşenlere geçirilecek bir prop `değerini` kabul eder. Bir Provider, birçok dağıtıcıya bağlanabilir. Provider'lar ağacın derinliklerinde değerleri geçersiz kılmak için iç içe geçebilir.
 
-All consumers that are descendants of a Provider will re-render whenever the Provider's `value` prop changes. The propagation from Provider to its descendant consumers is not subject to the `shouldComponentUpdate` method, so the consumer is updated even when an ancestor component bails out of the update.
+Bir Provider'ın soyundan(devamından) gelen tüm dağıtıcılar, Provider'ın değeri prop değiştiğinde yeniden oluşturulur. Provider'ın devamından(soyundan) gelen dağıtıcılara yayılma, `shouldComponentUpdate` fonksiyonuna bağlı değildir, bu nedenle bir dağıtıcı bileşeni güncellemeden düştüğünde bile dağıtıcı güncellenir.
 
-Changes are determined by comparing the new and old values using the same algorithm as [`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description). 
+[`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) ile aynı algoritmayı kullanarak yeni ve eski değerler karşılaştırarak değişiklikler belirlenir.
 
-> Note
-> 
-> The way changes are determined can cause some issues when passing objects as `value`: see [Caveats](#caveats).
+> Not
+>
+> Değişimlerin belirlenme şekli, nesneleri `değer` olarak geçirirken bazı sorunlara neden olabilir: [Uyarılara](#caveats) bakınız.
 
 ### `Class.contextType` {#classcontexttype}
 
@@ -164,11 +164,13 @@ MyClass.contextType = MyContext;
 
 The `contextType` property on a class can be assigned a Context object created by [`React.createContext()`](#reactcreatecontext). This lets you consume the nearest current value of that Context type using `this.context`. You can reference this in any of the lifecycle methods including the render function.
 
-> Note:
+Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafıdan oluşturulan bir Context nesnesi atanabilir. Bu `this.context'i` kullanarak bu Context türünün en yakın o anki değerine dağıtmanıza olanak sağlar. Bu render işlevi de dahil olmak üzere yaşam döngüsü yöntemlerinden herhangi birinde başvuruda bulunabilir. 
+
+> Not:
 >
-> You can only subscribe to a single context using this API. If you need to read more than one see [Consuming Multiple Contexts](#consuming-multiple-contexts).
+> Bu API'yi kullanarak yalnızca tek bir içeriğe abone olabilirsiniz. Birden fazla okumanız gerekiyorsa, bakınız [Çoklu Context Dağıtımı](#consuming-multiple-contexts).
 >
-> If you are using the experimental [public class fields syntax](https://babeljs.io/docs/plugins/transform-class-properties/), you can use a **static** class field to initialize your `contextType`.
+> Deneysel olarak [açık sınıf alanları sözdizimini](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
 
 
 ```js
