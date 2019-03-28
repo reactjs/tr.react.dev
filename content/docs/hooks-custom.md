@@ -1,12 +1,12 @@
 ---
 id: hooks-custom
-title: Building Your Own Hooks
+title: Kendi Hook'unuzu Oluşturun
 permalink: docs/hooks-custom.html
 next: hooks-reference.html
 prev: hooks-rules.html
 ---
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
+*Hook*'lar React'e 16.8 versiyonunda henüz yeni eklenmişlerdir. Hook'lar sayesinde state ve diğer React özelliklerini bir sınıf oluşturmadan kullanabilirsiniz.
 
 Building your own Hooks lets you extract component logic into reusable functions.
 
