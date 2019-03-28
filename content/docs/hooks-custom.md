@@ -6,11 +6,11 @@ next: hooks-reference.html
 prev: hooks-rules.html
 ---
 
-*Hook*'lar React'e 16.8 versiyonunda henüz yeni eklenmişlerdir. Hook'lar sayesinde state ve diğer React özelliklerini bir sınıf oluşturmadan kullanabilirsiniz.
+*Hook*'lar React'e 16.8 versiyonu ile henüz yeni eklenmişlerdir. Hook'lar sayesinde state ve diğer React özelliklerini bir sınıf oluşturmadan kullanabilirsiniz.
 
-Building your own Hooks lets you extract component logic into reusable functions.
+Kendi hook'unuzu oluşturmak, bileşen kodunuzu tekrar kullanılabilir fonksiyonlar halinde oluşturarak yönetmenizi sağlar.
 
-When we were learning about [using the Effect Hook](/docs/hooks-effect.html#example-using-hooks-1), we saw this component from a chat application that displays a message indicating whether a friend is online or offline:
+[Effect Hook'unu](/docs/hooks-effect.html#example-using-hooks-1) kullanma yazısında, bir chat uygulamasında, arkadaşın çevrimiçi veya çevrimdışı olduğunu belirten mesajı görüntüleyen aşağıdaki bileşene değinmiştik: 
 
 ```js{4-15}
 import React, { useState, useEffect } from 'react';
@@ -36,7 +36,7 @@ function FriendStatus(props) {
 }
 ```
 
-Now let's say that our chat application also has a contact list, and we want to render names of online users with a green color. We could copy and paste similar logic above into our `FriendListItem` component but it wouldn't be ideal:
+Şimdi, chat uygulamamızın bir kişi listesine sahip olduğunu düşünelim. Kişi listesindeki çevrimiçi olan kullanıcıların isimlerini yeşil renkte render etmek için, üstteki `FriendStatus` bileşeni ile benzer mantığı `FriendListItem` bileşenine kopyala/yapıştır yapabiliriz. Fakat bu durum kod tekrarı oluşturduğundan dolayı ideal bir çözüm olmayacaktır:
 
 ```js{4-15}
 import React, { useState, useEffect } from 'react';
@@ -63,9 +63,9 @@ function FriendListItem(props) {
 }
 ```
 
-Instead, we'd like to share this logic between `FriendStatus` and `FriendListItem`.
+`FriendStatus` ve `FriendListItem`'te bulunan bu mantığı daha genel bir hale getirip bileşenler arasında paylaştırabiliriz.
 
-Traditionally in React, we've had two popular ways to share stateful logic between components: [render props](/docs/render-props.html) and [higher-order components](/docs/higher-order-components.html). We will now look at how Hooks solve many of the same problems without forcing you to add more components to the tree.
+React'te geleneksel olrak state'li mantığı bileşenler arasında paylaşmak için [render props](/docs/render-props.html) ve [higher-order components](/docs/higher-order-components.html) olmak üzere iki yöntem bulunmaktadır. Bunların yerine hook'lar sayesinde bileşen ağacına yeni bir bileşen eklemeden bu tarz problemleri nasıl çözeceğimize değineceğiz.
 
 ## Extracting a Custom Hook {#extracting-a-custom-hook}
 
