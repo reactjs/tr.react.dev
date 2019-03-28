@@ -10,7 +10,7 @@ next: create-a-new-react-app.html
 
 İhtiyacınız kadar az veya daha fazla React kullanın.
 
-React, aşamalı olarak benimsenmesi için en baştan tasarlandı, ve **ihtiyacınız kadar az veya daha fazla React kullanabilirsiniz**. Belki de varolan bir sayfaya sadece biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.
+React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **ihtiyacınız kadar az veya daha fazla kullanabilirsiniz**. Belki de sadece varolan bir sayfaya biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.
 
 Web sitelerinin çoğu, tek sayfalı uygulamalar değildir ve olması da gerekmez. **Hiçbir kurulum aracı olmadan sadece birkaç satır kod** ile web sitenizin küçük bir bölümünde React'ı deneyin. Daha sonra içeriğini aşamalı olarak genişletebilir veya sadece birkaç dinamik bileşen olarak tutabilirsiniz.
 
