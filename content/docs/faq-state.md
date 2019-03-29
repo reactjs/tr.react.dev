@@ -14,7 +14,7 @@ category: FAQ
 
 [`props`](/docs/components-and-props.html) ("properties" kısaltması) ve [`state`](/docs/state-and-lifecycle.html), her ikisi de düz JavaScript nesneleridir. Her ikisi de render etmenin çıktısını etkileyen bilgileri tutarken, önemli bir yönden farklıdırlar: `props`, *bileşene* iletilirken (fonksiyon parametrelerine benzer), `state` *bileşende* yönetilir (bir fonksiyon içinde tanımlanan değişkenlere benzer).
 
-İşte `props` ve `state`in ne zaman kullanılacağı hakkında daha fazla okumak için bir kaç iyi kaynak:
+İşte `props` ve `state`in ne zaman kullanılacağı hakkında daha fazla okumak için birkaç iyi kaynak:
 * [Props vs State](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
 * [ReactJS: Props vs. State](https://lucybain.com/blog/2016/react-state-vs-pros/)
 
@@ -78,29 +78,29 @@ handleSomething() {
 
 [setState hakkında daha fazla bilgi edinin](/docs/react-component.html#setstate)
 
-### When is `setState` asynchronous? {#when-is-setstate-asynchronous}
+### `setState` ne zaman asenkrondur? {#when-is-setstate-asynchronous}
 
-Currently, `setState` is asynchronous inside event handlers.
+Şu anda, `setState` olay yöneticileri içinde asenkrondur.
 
-This ensures, for example, that if both `Parent` and `Child` call `setState` during a click event, `Child` isn't re-rendered twice. Instead, React "flushes" the state updates at the end of the browser event. This results in significant performance improvements in larger apps.
+Bu, örneğin bir tıklama olayı sırasında hem `Üst Eleman` hem de `Alt Eleman` `setState` çağrısı yaptığında, `Alt Eleman`'ın iki kez yeniden render edilmemesini sağlar. Bunun yerine, React, tarayıcı olayının sonunda state güncellemelerini "temizler". Bu, daha büyük uygulamalarda önemli performans iyileştirmeleri sağlar.
 
-This is an implementation detail so avoid relying on it directly. In the future versions, React will batch updates by default in more cases.
+Bu bir uygulama detayı, bu yüzden doğrudan buna güvenmekten kaçının. Gelecekteki sürümlerde, React birçok durumda varsayılan olarak toplu güncelleştirmeler barındıracak.
 
-### Why doesn't React update `this.state` synchronously? {#why-doesnt-react-update-thisstate-synchronously}
+### React neden `this.state`'i senkron olarak güncellemez? {#why-doesnt-react-update-thisstate-synchronously}
 
-As explained in the previous section, React intentionally "waits" until all components call `setState()` in their event handlers before starting to re-render. This boosts performance by avoiding unnecessary re-renders.
+Önceki bölümde açıklandığı gibi React, tüm bileşenler yeniden render edilmeye başlamadan önce olay yöneticilerinde `setState()`'i çağırıncaya kadar kasten "bekler". Gereksiz yeniden render etme işlemlerinden kaçınarak performansı artırır.
 
-However, you might still be wondering why React doesn't just update `this.state` immediately without re-rendering.
+Bununla birlikte, React'in neden yeniden render etmeden hemen `this.state`'i güncellemediğini merak ediyor olabilirsiniz.
 
-There are two main reasons:
+İki ana sebep var:
 
-* This would break the consistency between `props` and `state`, causing issues that are very hard to debug.
-* This would make some of the new features we're working on impossible to implement.
+* Bu, `props` ile `state` arasındaki tutarlılığı bozar ve hata ayıklaması zor olan sorunlara neden olur.
+* Bu, üzerinde çalıştığımız bazı yeni özelliklerin uygulanmasını imkansız kılar.
 
-This [GitHub comment](https://github.com/facebook/react/issues/11527#issuecomment-360199710) dives deep into the specific examples.
+Bu [GitHub yorumu](https://github.com/facebook/react/issues/11527#issuecomment-360199710) belirli örneklerin derinliklerine iniyor.
 
-### Should I use a state management library like Redux or MobX? {#should-i-use-a-state-management-library-like-redux-or-mobx}
+### Redux veya MobX gibi bir state yönetimi kütüphanesi mi kullanmalıyım? {#should-i-use-a-state-management-library-like-redux-or-mobx}
 
-[Maybe.](https://redux.js.org/faq/general#when-should-i-use-redux)
+[Olabilir.](https://redux.js.org/faq/general#when-should-i-use-redux)
 
-It's a good idea to get to know React first, before adding in additional libraries. You can build quite complex applications using only React.
+Ek kütüphaneleri eklemeden önce React'i anlamak iyi bir fikir. Yalnızca React'i kullanarak oldukça karmaşık uygulamalar oluşturabilirsiniz.
