@@ -67,11 +67,11 @@ function FriendListItem(props) {
 
 React'te geleneksel olrak state'li mantığı bileşenler arasında paylaşmak için [render props](/docs/render-props.html) ve [higher-order components](/docs/higher-order-components.html) olmak üzere iki yöntem bulunmaktadır. Bunların yerine hook'lar sayesinde bileşen ağacına yeni bir bileşen eklemeden bu tarz problemleri nasıl çözeceğimize değineceğiz.
 
-## Extracting a Custom Hook {#extracting-a-custom-hook}
+## Özel Hook Oluşturma {#extracting-a-custom-hook}
 
-When we want to share logic between two JavaScript functions, we extract it to a third function. Both components and Hooks are functions, so this works for them too!
+Ortak bir işlevin iki JavaScript fonksiyonu arasında paylaştırılmasını istediğimizde, o işlev için üçüncü bir fonksiyon oluşturabiliyoruz. Bileşenler ve Hook'lar da birer fonksiyon olduklarından dolayı, bu durum onlar için de geçerlidir.
 
-**A custom Hook is a JavaScript function whose name starts with "`use`" and that may call other Hooks.** For example, `useFriendStatus` below is our first custom Hook:
+**Özel Hook aslında bir JavaScript fonksiyonudur ve isimlendirmeleri "`use`" ile başlar. Ayrıca diğer Hook'ları da çağırabilirler.** Örneğin aşağıda ilk olarak oluşturduğumuz özel Hook'umuz bulunuyor:
 
 ```js{3}
 import React, { useState, useEffect } from 'react';
@@ -94,11 +94,11 @@ function useFriendStatus(friendID) {
 }
 ```
 
-There's nothing new inside of it -- the logic is copied from the components above. Just like in a component, make sure to only call other Hooks unconditionally at the top level of your custom Hook.
+Kod mantığını üstteki bileşenlerden aldığı için içerisinde yeni bir şey bulunmuyor. Tıpkı bileşenlerde olduğu gibi, özel Hook'unuzun üst seviyesinde diğer Hook'ları çağırabilirsiniz. 
 
-Unlike a React component, a custom Hook doesn't need to have a specific signature. We can decide what it takes as arguments, and what, if anything, it should return. In other words, it's just like a normal function. Its name should always start with `use` so that you can tell at a glance that the [rules of Hooks](/docs/hooks-rules.html) apply to it.
+Bileşenlerin aksine, özel Hook'larda belirli bir fonksiyon imzasının bulunma zorunluluğu yoktur. Hangi değerlerin parametre olarak verileceğine ve Hook'tan geri döndürüleceğine biz karar verebiliriz. Başka bir deyişle, normal fonksiyonlarda yaptığımız gibi Hook'ların kodlayabiliriz. Tek bir şart bulunuyor o da ilk bakışta fonksiyonun bir React Hook olduğunu anlayabilmek için fonksiyon isimlendirmesinin başında `use` kullanılması gerekiyor. Buna benzer olarak Hook'lar hakkında diğer kurallar için [bu dokümanı](/docs/hooks-rules.html) inceleyebilirsiniz. 
 
-The purpose of our `useFriendStatus` Hook is to subscribe us to a friend's status. This is why it takes `friendID` as an argument, and returns whether this friend is online:
+`useFriendStatus` Hook'unun amacı, chat'teki ilgili arkadaşın durumuna abone olmayı sağlamaktır. Bu nedenle parametre olarak `friendID`'yi alır ve kullanıcının çevrimiçi/çevrimdışı durumunu geri döndürür:
 
 ```js
 function useFriendStatus(friendID) {
@@ -110,7 +110,7 @@ function useFriendStatus(friendID) {
 }
 ```
 
-Now let's see how we can use our custom Hook.
+Şimdi özel Hook'umuzu nasıl kullanacağımıza geçelim.
 
 ## Using a Custom Hook {#using-a-custom-hook}
 
