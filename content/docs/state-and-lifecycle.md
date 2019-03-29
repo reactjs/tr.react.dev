@@ -72,7 +72,7 @@ Bunu yapmak için, `Clock` bileşenine **state** eklememiz gerekiyor.
 
 State'ler, prop'larla benzerlik gösterir. Fakat sadece ilgili bileşene özeldir ve yalnızca o bileşen tarafından kontrol edilirler.
 
-Sınıf olarak oluşturulan bişeşenlerin, fonksiyon bileşenlerine göre bazı ek özelliklerinin bulunduğundan [bahsetmiştik](/docs/components-and-props.html#functional-and-class-components). Bahsettiğimiz ek özellik yerel state değişkenidir ve sadece sınıf bileşenlerine özgüdür.
+Sınıf olarak oluşturulan bileşenlerin, fonksiyon bileşenlerine göre bazı ek özelliklerinin bulunduğundan [bahsetmiştik](/docs/components-and-props.html#functional-and-class-components). Bahsettiğimiz ek özellik yerel state değişkenidir ve sadece sınıf bileşenlerine özgüdür.
 
 ## Bir Fonksiyonun Sınıfa Dönüştürülmesi {#converting-a-function-to-a-class}
 

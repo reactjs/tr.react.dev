@@ -1,6 +1,6 @@
 ---
 id: react-api
-title: React Top-Level API
+title: React Üst Düzey API
 layout: docs
 category: Reference
 permalink: docs/react-api.html
@@ -13,67 +13,67 @@ redirect_from:
   - "docs/top-level-api-zh-CN.html"
 ---
 
-`React` is the entry point to the React library. If you load React from a `<script>` tag, these top-level APIs are available on the `React` global. If you use ES6 with npm, you can write `import React from 'react'`. If you use ES5 with npm, you can write `var React = require('react')`.
+`React`, React kütüphanesine giriş noktasıdır. React'i bir `<script>` etiketinden yüklerseniz, bu üst düzey API'ler `React` globali üzerinde mevcut olacaktır. ES6'yı npm ile kullanıyorsanız, `import React from 'react'` yazabilirsiniz. ES5'i npm ile kullanıyorsanız, `var React = require('react')` yazabilirsiniz.
 
-## Overview {#overview}
+## Genel Bakış {#overview}
 
-### Components {#components}
+### Bileşenler {#components}
 
-React components let you split the UI into independent, reusable pieces, and think about each piece in isolation. React components can be defined by subclassing `React.Component` or `React.PureComponent`.
+React bileşenleri, kullanıcı arabirimini bağımsız, yeniden kullanılabilir parçalara ayırmanıza ve ayrılmış her bir parça hakkında düşünmenize olanak sağlar. React bileşenleri, `React.Component` ya da `React.PureComponent` üzerinden alt sınıflandırma yoluyla tanımlanabilir.
 
  - [`React.Component`](#reactcomponent)
  - [`React.PureComponent`](#reactpurecomponent)
 
-If you don't use ES6 classes, you may use the `create-react-class` module instead. See [Using React without ES6](/docs/react-without-es6.html) for more information.
+ES6 sınıflarını kullanmıyorsanız, bunun yerine `create-react-class` modülünü kullanabilirsiniz. Daha fazla bilgi için [ES6 olmadan React kullanma](/docs/react-without-es6.html) bölümüne bakınız.
 
-React components can also be defined as functions which can be wrapped:
+React bileşenleri ayrıca sarılabilecek fonksiyonlar olarak tanımlanabilir:
 
 - [`React.memo`](#reactmemo)
 
-### Creating React Elements {#creating-react-elements}
+### React Öğeleri Oluşturma {#creating-react-elements}
 
-We recommend [using JSX](/docs/introducing-jsx.html) to describe what your UI should look like. Each JSX element is just syntactic sugar for calling [`React.createElement()`](#createelement). You will not typically invoke the following methods directly if you are using JSX.
+Kullanıcı arayüzünüzün nasıl görünmesi gerektiğini tanımlamak için [JSX kullanmanızı](/docs/introducing-jsx.html) öneririz. Her JSX elementi sadece [`React.createElement()`](#createelement) metodunu çağırmak için sözdizimsel şekerdir. JSX kullanıyorsanız, genellikle aşağıdaki metodları doğrudan çağırmazsınız.
 
 - [`createElement()`](#createelement)
 - [`createFactory()`](#createfactory)
 
-See [Using React without JSX](/docs/react-without-jsx.html) for more information.
+Daha fazla bilgi için [JSX olmadan React kullanma](/docs/react-without-jsx.html) bölümüne bakınız.
 
-### Transforming Elements {#transforming-elements}
+### Öğeleri Dönüştürme {#transforming-elements}
 
-`React` provides several APIs for manipulating elements:
+`React` öğeleri işlemek için birkaç API sağlar:
 
 - [`cloneElement()`](#cloneelement)
 - [`isValidElement()`](#isvalidelement)
 - [`React.Children`](#reactchildren)
 
-### Fragments {#fragments}
+### Fragment'ler {#fragments}
 
-`React` also provides a component for rendering multiple elements without a wrapper.
+`React` ayrıca sarıcı olmadan birden fazla eleman render etmek için bir bileşen sağlar.
 
 - [`React.Fragment`](#reactfragment)
 
-### Refs {#refs}
+### Ref'ler {#refs}
 
 - [`React.createRef`](#reactcreateref)
 - [`React.forwardRef`](#reactforwardref)
 
 ### Suspense {#suspense}
 
-Suspense lets components "wait" for something before rendering. Today, Suspense only supports one use case: [loading components dynamically with `React.lazy`](/docs/code-splitting.html#reactlazy). In the future, it will support other use cases like data fetching.
+Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağlar. Şu an için, Suspense yalnızca bir kullanım durumunu destekler: [bileşenleri `React.lazy` ile dinamik olarak yükleme](/docs/code-splitting.html#reactlazy). Gelecekte, veri getirme gibi diğer kullanım durumlarını destekleyecektir.
 
 - [`React.lazy`](#reactlazy)
 - [`React.Suspense`](#reactsuspense)
 
-### Hooks {#hooks}
+### Hook'lar {#hooks}
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a [dedicated docs section](/docs/hooks-intro.html) and a separate API reference:
+*Hook'lar*, React 16.8 ile gelen yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar. Hook'lar [özel bir döküman bölümüne](/docs/hooks-intro.html) ve ayrı bir API referansına sahiptir:
 
-- [Basic Hooks](/docs/hooks-reference.html#basic-hooks)
+- [Temel Hook'lar](/docs/hooks-reference.html#basic-hooks)
   - [`useState`](/docs/hooks-reference.html#usestate)
   - [`useEffect`](/docs/hooks-reference.html#useeffect)
   - [`useContext`](/docs/hooks-reference.html#usecontext)
-- [Additional Hooks](/docs/hooks-reference.html#additional-hooks)
+- [İlave Hook'lar](/docs/hooks-reference.html#additional-hooks)
   - [`useReducer`](/docs/hooks-reference.html#usereducer)
   - [`useCallback`](/docs/hooks-reference.html#usecallback)
   - [`useMemo`](/docs/hooks-reference.html#usememo)
@@ -84,11 +84,11 @@ Suspense lets components "wait" for something before rendering. Today, Suspense 
 
 * * *
 
-## Reference {#reference}
+## Referans {#reference}
 
 ### `React.Component` {#reactcomponent}
 
-`React.Component` is the base class for React components when they are defined using [ES6 classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
+`React.Component`, [ES6 sınıfları](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanılarak tanımlandıklarında React bileşenleri için temel sınıftır:
 
 ```javascript
 class Greeting extends React.Component {
@@ -98,21 +98,21 @@ class Greeting extends React.Component {
 }
 ```
 
-See the [React.Component API Reference](/docs/react-component.html) for a list of methods and properties related to the base `React.Component` class.
+Temel `React.Component` sınıfına ilişkin metod ve özelliklerin listesi için [React.Component API Referansına](/docs/react-component.html) bakın.
 
 * * *
 
 ### `React.PureComponent` {#reactpurecomponent}
 
-`React.PureComponent` is similar to [`React.Component`](#reactcomponent). The difference between them is that [`React.Component`](#reactcomponent) doesn't implement [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate), but `React.PureComponent` implements it with a shallow prop and state comparison. 
+`React.PureComponent` [`React.Component`](#reactcomponent)'e benzer. Aralarındaki fark, [`React.Component`](#reactcomponent)'in [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunu uygulamamasıdır, ancak `React.PureComponent` bunu yüzeysel bir prop ve state karşılaştırması ile birlikte uygular.
 
-If your React component's `render()` function renders the same result given the same props and state, you can use `React.PureComponent` for a performance boost in some cases.
+Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile aynı sonucu render ediyor ise, bazı durumlarda performans artışı için `React.PureComponent` kullanabilirsiniz.
 
-> Note
+> Not
 >
-> `React.PureComponent`'s `shouldComponentUpdate()` only shallowly compares the objects. If these contain complex data structures, it may produce false-negatives for deeper differences. Only extend `PureComponent` when you expect to have simple props and state, or use [`forceUpdate()`](/docs/react-component.html#forceupdate) when you know deep data structures have changed. Or, consider using [immutable objects](https://facebook.github.io/immutable-js/) to facilitate fast comparisons of nested data.
+> `React.PureComponent`'in `shouldComponentUpdate()` metodu sadece nesneleri yüzeysel olarak karşılaştırır. Eğer bunlar karmaşık veri yapıları içeriyorsa, daha derin farklılıklar için yanlış sonuçlar üretebilir. `PureComponent`'i yalnızca prop'lar ve state'in basit olmasını beklediğiniz durumlarda uzatın, veya derin veri yapılarının değiştiğini biliyorsanız [`forceUpdate()`](/docs/react-component.html#forceupdate) işlevini kullanın. Ya da, iç içe geçmiş verilerin hızlı bir şekilde karşılaştırılmasını kolaylaştırmak için [değişmez nesneler](https://facebook.github.io/immutable-js/) kullanmayı düşünebilirsiniz.
 >
-> Furthermore, `React.PureComponent`'s `shouldComponentUpdate()` skips prop updates for the whole component subtree. Make sure all the children components are also "pure".
+> Ayrıca, `React.PureComponent`'in `shouldComponentUpdate()` metodu tüm bileşen alt ağacı için prop güncellemelerini atlar. Tüm alt bileşenlerinin de "pure" olduğundan emin olun.
 
 * * *
 
@@ -120,35 +120,35 @@ If your React component's `render()` function renders the same result given the 
 
 ```javascript
 const MyComponent = React.memo(function MyComponent(props) {
-  /* render using props */
+  /* prop'ları kullanarak render et */
 });
 ```
 
-`React.memo` is a [higher order component](/docs/higher-order-components.html). It's similar to [`React.PureComponent`](#reactpurecomponent) but for function components instead of classes.
+`React.memo` bir [üst katman bileşenidir](/docs/higher-order-components.html). [`React.PureComponent`](#reactpurecomponent)'e benzer ancak sınıflar yerine fonksiyon bileşenleri için geçerlidir.
 
-If your function component renders the same result given the same props, you can wrap it in a call to `React.memo` for a performance boost in some cases by memoizing the result. This means that React will skip rendering the component, and reuse the last rendered result.
+Eğer fonksiyon bileşeniniz aynı prop'lar ile aynı sonucu render ediyor ise, bazı durumlarda sonucu ezberleyerek performans artışı sağlaması için onu bir `React.memo` çağrısına sarabilirsiniz. Bu, React'in bileşeni render etmeyi atlayacağı ve son render edilen sonucu yeniden kullanacağı anlamına gelir.
 
-By default it will only shallowly compare complex objects in the props object. If you want control over the comparison, you can also provide a custom comparison function as the second argument.
+Varsayılan olarak, prop'lar nesnesindeki karmaşık nesneleri sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
 
 ```javascript
 function MyComponent(props) {
-  /* render using props */
+  /* prop'ları kullanarak render et */
 }
 function areEqual(prevProps, nextProps) {
   /*
-  return true if passing nextProps to render would return
-  the same result as passing prevProps to render,
-  otherwise return false
+  nextProps'u render'a iletmek,
+  prevProps'u render'a iletmek ile aynı sonucu verirse true
+  aksi takdirde false döndürür
   */
 }
 export default React.memo(MyComponent, areEqual);
 ```
 
-This method only exists as a **[performance optimization](/docs/optimizing-performance.html).** Do not rely on it to "prevent" a render, as this can lead to bugs.
+Bu metod yalnızca bir **[performans optimizasyonu](/docs/optimizing-performance.html)** olarak vardır. Bir render işlemini "önlemek" için ona güvenmeyin, bu hatalara neden olabilir.
 
-> Note
+> Not
 >
-> Unlike the [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) method on class components, the `areEqual` function returns `true` if the props are equal and `false` if the props are not equal. This is the inverse from `shouldComponentUpdate`.
+> Sınıf bileşenlerinde bulunan [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunun aksine, `areEqual` fonksiyonu prop'lar birbirine eşitse `true`, prop'lar birbirine eşit değilse `false` döndürür. Bu `shouldComponentUpdate` işlevinin tersidir.
 
 * * *
 
@@ -162,9 +162,9 @@ React.createElement(
 )
 ```
 
-Create and return a new [React element](/docs/rendering-elements.html) of the given type. The type argument can be either a tag name string (such as `'div'` or `'span'`), a [React component](/docs/components-and-props.html) type (a class or a function), or a [React fragment](#reactfragment) type.
+Verilen tipte yeni bir [React elemanı](/docs/rendering-elements.html) oluşturun ve döndürün. Type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf ya da fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
 
-Code written with [JSX](/docs/introducing-jsx.html) will be converted to use `React.createElement()`. You will not typically invoke `React.createElement()` directly if you are using JSX. See [React Without JSX](/docs/react-without-jsx.html) to learn more.
+[JSX](/docs/introducing-jsx.html) ile yazılmış kod `React.createElement()` işlevini kullanmak üzere dönüştürülecektir. JSX kullanıyorsanız genellikle `React.createElement()` işlevini doğrudan çağırmazsınız. Daha fazla bilgi için bkz. [JSX Olmadan React](/docs/react-without-jsx.html).
 
 * * *
 
@@ -178,17 +178,17 @@ React.cloneElement(
 )
 ```
 
-Clone and return a new React element using `element` as the starting point. The resulting element will have the original element's props with the new props merged in shallowly. New children will replace existing children. `key` and `ref` from the original element will be preserved.
+Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. Elde edilen eleman, orjinal elemanın prop'larına yeni prop'ları ile yüzeysel olarak birleştirilmiş bir biçimde sahip olacaktır. Yeni alt eleman varolan alt elemanın yerine geçecektir. Orjinal elemandan gelen `key` ve `ref` korunacaktır.
 
-`React.cloneElement()` is almost equivalent to:
+`React.cloneElement()` neredeyse şuna eşdeğerdir:
 
 ```js
 <element.type {...element.props} {...props}>{children}</element.type>
 ```
 
-However, it also preserves `ref`s. This means that if you get a child with a `ref` on it, you won't accidentally steal it from your ancestor. You will get the same `ref` attached to your new element.
+Ancak, aynı zamanda `ref`'leri de korur. Bu, üzerinde `ref` bulunan bir alt eleman alırsanız, ona üst eleman üzerinden ulaşamayacağınız anlamına gelir. Yeni elemanınız üzerinde aynı `ref` bağlı olarak gelecektir.
 
-This API was introduced as a replacement of the deprecated `React.addons.cloneWithProps()`.
+Bu API, kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yerine geçmiştir.
 
 * * *
 
@@ -198,11 +198,11 @@ This API was introduced as a replacement of the deprecated `React.addons.cloneWi
 React.createFactory(type)
 ```
 
-Return a function that produces React elements of a given type. Like [`React.createElement()`](#createElement), the type argument can be either a tag name string (such as `'div'` or `'span'`), a [React component](/docs/components-and-props.html) type (a class or a function), or a [React fragment](#reactfragment) type.
+Belirli bir türden React elemanlarını üreten bir fonksiyon döndür. [`React.createElement()`](#createElement) gibi, type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf yada fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
 
-This helper is considered legacy, and we encourage you to either use JSX or use `React.createElement()` directly instead.
+Bu yardımcı işlev eski kabul edilir, ve bunun yerine ya doğrudan JSX kullanmanız ya da `React.createElement()` kullanmanız önerilir.
 
-You will not typically invoke `React.createFactory()` directly if you are using JSX. See [React Without JSX](/docs/react-without-jsx.html) to learn more.
+JSX kullanıyorsanız genellikle `React.createFactory()` işlevini doğrudan çağırmazsınız. Daha fazla bilgi için bkz. [JSX Olmadan React](/docs/react-without-jsx.html).
 
 * * *
 
@@ -212,13 +212,13 @@ You will not typically invoke `React.createFactory()` directly if you are using 
 React.isValidElement(object)
 ```
 
-Verifies the object is a React element. Returns `true` or `false`.
+Nesnenin bir React öğesi olduğunu doğrular. `true` veya `false` döndürür.
 
 * * *
 
 ### `React.Children` {#reactchildren}
 
-`React.Children` provides utilities for dealing with the `this.props.children` opaque data structure.
+`React.Children` belirsiz veri yapısına sahip `this.props.children` ile ilgilenmek için yardımcı işlevler sağlar.
 
 #### `React.Children.map` {#reactchildrenmap}
 
@@ -226,11 +226,11 @@ Verifies the object is a React element. Returns `true` or `false`.
 React.Children.map(children, function[(thisArg)])
 ```
 
-Invokes a function on every immediate child contained within `children` with `this` set to `thisArg`. If `children` is an array it will be traversed and the function will be called for each child in the array. If children is `null` or `undefined`, this method will return `null` or `undefined` rather than an array.
+`children` içinde yer alan her birincil alt eleman için bir fonksiyon çağırır, `this`'i (kendisini) `thisArg` ile belirleyin. Eğer `children` bir dizi ise taranacak ve dizi içindeki her alt eleman için fonksiyon çağrılacaktır. Eğer alt elemanlar `null` veya `undefined` ise, bu metod bir dizi yerine `null` veya `undefined` döndürür.
 
-> Note
+> Not
 >
-> If `children` is a `Fragment` it will be treated as a single child and not traversed.
+> Eğer `children` bir `Fragment` ise tek bir alt olarak kabul edilir ve tarama yapılmaz.
 
 #### `React.Children.forEach` {#reactchildrenforeach}
 
@@ -238,7 +238,7 @@ Invokes a function on every immediate child contained within `children` with `th
 React.Children.forEach(children, function[(thisArg)])
 ```
 
-Like [`React.Children.map()`](#reactchildrenmap) but does not return an array.
+[`React.Children.map()`](#reactchildrenmap) gibidir ancak bir dizi döndürmez.
 
 #### `React.Children.count` {#reactchildrencount}
 
@@ -246,7 +246,7 @@ Like [`React.Children.map()`](#reactchildrenmap) but does not return an array.
 React.Children.count(children)
 ```
 
-Returns the total number of components in `children`, equal to the number of times that a callback passed to `map` or `forEach` would be invoked.
+`children` içinde bulunan toplam bileşen sayısını döndürür, bir callback'in `map` veya `forEach`'e geçtiği sayıya eşit olarak çağrılır.
 
 #### `React.Children.only` {#reactchildrenonly}
 
@@ -254,11 +254,11 @@ Returns the total number of components in `children`, equal to the number of tim
 React.Children.only(children)
 ```
 
-Verifies that `children` has only one child (a React element) and returns it. Otherwise this method throws an error.
+`children`'ın yalnızca bir alt elemanı (bir React elemanı) olduğunu doğrular ve döndürür. Aksi halde bu metod bir hata fırlatır.
 
-> Note:
+> Not:
 >
->`React.Children.only()` does not accept the return value of [`React.Children.map()`](#reactchildrenmap) because it is an array rather than a React element.
+>`React.Children.only()`, [`React.Children.map()`](#reactchildrenmap) işlevinin dönüş değerini kabul etmez, çünkü bu bir React elemanından ziyade bir dizidir.
 
 #### `React.Children.toArray` {#reactchildrentoarray}
 
@@ -266,17 +266,17 @@ Verifies that `children` has only one child (a React element) and returns it. Ot
 React.Children.toArray(children)
 ```
 
-Returns the `children` opaque data structure as a flat array with keys assigned to each child. Useful if you want to manipulate collections of children in your render methods, especially if you want to reorder or slice `this.props.children` before passing it down.
+`children`'ın belirsiz veri yapısını her bir alt elemana atanmış anahtarları olan düz bir dizi olarak döndürür. Render metodlarınızda bulunan alt eleman koleksiyonlarını işlemek istiyorsanız, özellikle de `this.props.children`'ı alta geçmeden önce yeniden düzenlemek veya dilimlemek istiyorsanız kullanışlıdır.
 
-> Note:
+> Not:
 >
-> `React.Children.toArray()` changes keys to preserve the semantics of nested arrays when flattening lists of children. That is, `toArray` prefixes each key in the returned array so that each element's key is scoped to the input array containing it.
+> `React.Children.toArray()` alt eleman listelerini düzleştirirken iç içe dizilerin anlamını korumak için anahtarları değiştirir. Yani, `toArray` döndürülen dizideki her bir anahtarı öneklendirir, böylece her bir elemanın anahtarı onu içeren veri dizisini kapsar.
 
 * * *
 
 ### `React.Fragment` {#reactfragment}
 
-The `React.Fragment` component lets you return multiple elements in a `render()` method without creating an additional DOM element:
+`React.Fragment` bileşeni, ek bir DOM öğesi oluşturmadan `render()` metodu içinde bir çok eleman döndürmenizi sağlar:
 
 ```javascript
 render() {
@@ -289,59 +289,59 @@ render() {
 }
 ```
 
-You can also use it with the shorthand `<></>` syntax. For more information, see [React v16.2.0: Improved Support for Fragments](/blog/2017/11/28/react-v16.2.0-fragment-support.html).
+Ayrıca `<></>` sözdizimi kısayoluyla da kullanabilirsiniz. Daha fazla bilgi için, bkz. [React v16.2.0: Fragment'ler için Geliştirilmiş Destek](/blog/2017/11/28/react-v16.2.0-fragment-support.html).
 
 
 ### `React.createRef` {#reactcreateref}
 
-`React.createRef` creates a [ref](/docs/refs-and-the-dom.html) that can be attached to React elements via the ref attribute.
+`React.createRef` ref özelliği ile React elemanlarına eklenebilecek bir [ref](/docs/refs-and-the-dom.html) oluşturur.
 `embed:16-3-release-blog-post/create-ref-example.js`
 
 ### `React.forwardRef` {#reactforwardref}
 
-`React.forwardRef` creates a React component that forwards the [ref](/docs/refs-and-the-dom.html) attribute it receives to another component below in the tree. This technique is not very common but is particularly useful in two scenarios:
+`React.forwardRef` aldığı [ref](/docs/refs-and-the-dom.html) özelliğini ağacın altında bulunan bir diğer bileşene ileten bir React bileşeni oluşturur. Bu teknik çok yaygın değildir, ancak iki durumda özellikle faydalıdır:
 
-* [Forwarding refs to DOM components](/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
-* [Forwarding refs in higher-order-components](/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components)
+* [Ref'leri DOM bileşenlerine iletme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
+* [Üst katman bileşenlerinde ref iletimi](/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components)
 
-`React.forwardRef` accepts a rendering function as an argument. React will call this function with `props` and `ref` as two arguments. This function should return a React node.
+`React.forwardRef` bir render etme fonksiyonunu argüman olarak kabul eder. React bu fonksiyonu `props` ve `ref` olmak üzere iki argüman ile çağıracaktır. Bu fonksiyon geçerli bir React birimi döndürmelidir.
 
 `embed:reference-react-forward-ref.js`
 
-In the above example, React passes a `ref` given to `<FancyButton ref={ref}>` element as a second argument to the rendering function inside the `React.forwardRef` call. This rendering function passes the `ref` to the `<button ref={ref}>` element.
+Yukarıdaki örnekte, React `React.forwardRef` çağrısının içindeki render etme fonksiyonuna ikinci bir argüman olarak `<FancyButton ref={ref}>` elementine verilen bir `ref` değerini iletir. Bu render etme fonksiyonu `ref`'i `<button ref={ref}>` elementine geçer.
 
-As a result, after React attaches the ref, `ref.current` will point directly to the `<button>` DOM element instance.
+Sonuç olarak, React ref'i ekledikten sonra, `ref.current` doğrudan `<button>` DOM öğesinin örneğine işaret edecektir.
 
-For more information, see [forwarding refs](/docs/forwarding-refs.html).
+Daha fazla bilgi için, bkz. [ref iletimi](/docs/forwarding-refs.html).
 
 ### `React.lazy` {#reactlazy}
 
-`React.lazy()` lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren't used during the initial render.
+`React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu, ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
 
-You can learn how to use it from our [code splitting documentation](/docs/code-splitting.html#reactlazy). You might also want to check out [this article](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) explaining how to use it in more detail.
+Nasıl kullanılacağını [kod bölümleme dökümanımızdan](/docs/code-splitting.html#reactlazy) öğrenebilirsiniz. Daha ayrıntılı olarak nasıl kullanılacağını açıklayan [bu makaleye](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) de göz atmak isteyebilirsiniz.
 
 ```js
-// This component is loaded dynamically
+// Bu bileşen dinamik olarak yüklenir
 const SomeComponent = React.lazy(() => import('./SomeComponent'));
 ```
 
-Note that rendering `lazy` components requires that there's a `<React.Suspense>` component higher in the rendering tree. This is how you specify a loading indicator.
+`lazy` bileşenlerin render edilmesi için render ağacında daha yukarıda bulunan bir `<React.Suspense>` bileşeninin olması gerektiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
 
-> **Note**
+> **Not**
 >
-> Using `React.lazy`with dynamic import requires Promises to be available in the JS environment. This requires a polyfill on IE11 and below.
+> `React.lazy`'i dinamik içe aktarma ile kullanmak JS ortamında Promise'lerin kullanılabilir olmasını gerektirir. Bu, IE11 (Internet Explorer 11) ve aşağısı için bir polyfill gerektirir.
 
 ### `React.Suspense` {#reactsuspense}
 
-`React.Suspense` let you specify the loading indicator in case some components in the tree below it are not yet ready to render. Today, lazy loading components is the **only** use case supported by `<React.Suspense>`:
+`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
 
 ```js
-// This component is loaded dynamically
+// Bu bileşen dinamik olarak yüklenir
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 function MyComponent() {
   return (
-    // Displays <Spinner> until OtherComponent loads
+    // OtherComponent yüklenene kadar <Spinner> öğesini görüntüler
     <React.Suspense fallback={<Spinner />}>
       <div>
         <OtherComponent />
@@ -351,10 +351,10 @@ function MyComponent() {
 }
 ```
 
-It is documented in our [code splitting guide](/docs/code-splitting.html#reactlazy). Note that `lazy` components can be deep inside the `Suspense` tree -- it doesn't have to wrap every one of them. The best practice is to place `<Suspense>` where you want to see a loading indicator, but to use `lazy()` wherever you want to do code splitting.
+Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerinin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın (her birini sarmak zorunda değildir). En iyi uygulama, bir yükleme göstergesi görmek istediğiniz yerlere `Suspense` koymak, ancak kodu bölmek istediğiniz her yerde `lazy()` kullanmaktır.
 
-While this is not supported today, in the future we plan to let `Suspense` handle more scenarios such as data fetching. You can read about this in [our roadmap](/blog/2018/11/27/react-16-roadmap.html).
+Bu bugün desteklenmiyor olsa da, gelecekte `Suspense`'in veri toplama gibi daha fazla durum ile ilgilenmesine izin vermeyi planlıyoruz. Bu konuyu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
->Note:
+>Not:
 >
->`React.lazy()` and `<React.Suspense>` are not yet supported by `ReactDOMServer`. This is a known limitation that will be resolved in the future.
+>`React.lazy()` ve `<React.Suspense>` henüz `ReactDOMServer` tarafından desteklenmiyor. Bu, gelecekte çözülecek olan bilinen bir sınırlamadır.

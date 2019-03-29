@@ -1,4 +1,4 @@
-- title: Community Resources
+- title: Topluluk Kaynakları
   items:
     - id: support
       title: Support
@@ -18,7 +18,7 @@
       title: Videos
     - id: external-resources
       title: External Resources
-- title: Tools
+- title: Araçlar
   items:
     - id: debugging-tools
       title: Debugging
