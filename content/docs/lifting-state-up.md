@@ -24,7 +24,7 @@ function BoilingVerdict(props) {
 }
 ```
 
-Bir sonraki adımda, `Calculator` diye isimlendirdiğimiz bir bileşen oluşturacağız. Bu bileşen sıcaklık değerini girmemizi sağlayacak bir `<input>` elemanına sahip olacaktır, ve bu input elemanında `this.state.temperature` değeri tutulacaktır.
+Bir sonraki adımda, `Calculator` diye isimlendirdiğimiz bir bileşen oluşturacağız. Bu bileşen sıcaklık değerini girmemizi sağlayacak bir `<input>` elemanına sahip olacak ve bu input elemanında `this.state.temperature` değeri tutulacaktır.
 
 Bu bileşen ayrıca, `<input>`'ta tuttuğumuz değer için `BoilingVerdict` bileşenini de ekrana yansıtacaktır.
 

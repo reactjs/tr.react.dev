@@ -190,7 +190,7 @@ Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve 
 
 Nadir durumlarda, renderlanmış bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
 
-Bu örnekle, `UyariMesaji` bileşeni kendisinin `uyariGoster` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecek.
+Bu örnekle, `WarningBanner` bileşeni kendisinin `warn` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecek.
 
 ```javascript{2-4,29}
 function WarningBanner(props) {

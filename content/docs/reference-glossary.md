@@ -122,7 +122,7 @@ class Welcome extends React.Component {
 
 Bir bileşen, kendisiyle ilişkili bazı veriler zaman içinde değiştiğinde `state`e ihtiyaç duyar. Örneğin, bir “Checkbox” bileşeni state'inde `isChecked`e ihtiyaç duyabilir ve bir `NewsFeed` bileşeni `fetchedPosts`u `state`inde takip etmek isteyebilir.
 
-`state` ile `props` arasındaki en önemli fark, `props`ın bir üst bileşenden geçirilmesidir, ancak `state` bileşenin kendisi tarafından yönetilir. Bir bileşen `props`larını değiştiremez, ancak `state`ini değiştirebilir. Bunu yapmak için `this.setState()`i çağırması gerekir. Yalnızca sınıf olarak tanımlanan bileşenlerin state'i olabilir.
+`state` ile `props` arasındaki en önemli fark, `props`ın bir üst bileşenden geçirilmesidir, ancak `state` bileşenin kendisi tarafından yönetilir. Bir bileşen `props`larını değiştiremez, ancak `state`ini değiştirebilir.
 
 Her değişen veri parçası için, state'inde "sahibi" olan tek bir bileşen olmalıdır. İki farklı bileşenin state'lerini senkronize etmeye çalışmayın. Bunun yerine, en yakın paylaşımlı atalarına [çıkartın](/docs/lifting-state-up.html) ve her ikisine de props olarak aktarın.
 

@@ -70,7 +70,7 @@ Artık bileşen hiyerarşisine sahip olduğunuza göre, uygulamanızı hayata ge
 
 Veri modelinizi render eden bir statik versiyonu yapmak için, diğer bileşenleri kullanan ve *prop'lar* aracılığıyla veri ileten bileşenler oluşturmak isteyeceksiniz. *prop'lar* bileşenler arasında yukarıdan aşağıya veri iletmenin bir yoludur. Eğer *state* konseptina aşinaysanız, bu statik versiyonu oluşturmak için **state'leri hiçbir şekilde kullanmayın.** State konsepti sadece etkileşim, yani zaman içinde değişen verilerin olduğu durumlar, için ayrılmıştır. Buna, uygulamanın statik bir sürümü olduğundan, ihtiyacınız yoktur.
 
-Yukarıdan aşağıya veya aşağıdan yukarıya oluşturabilirsiniz. Diğer bir deyişle, oluşturmaya hiyerarşide daha yukaridaki (örneğin, `FilterableProductTable`) veya daha aşağıdaki (`ProductRow`) bileşenler ile başlayabilirsiniz. Daha basit örneklerde, yukarıdan aşağıya gitmek genellikle daha kolaydır ve daha büyük projelerde, aşağıdan yukarıya gitmek ve de bileşenleri oluşturdukça testler yazmak daha kolaydır.
+Yukarıdan aşağıya veya aşağıdan yukarıya oluşturabilirsiniz. Diğer bir deyişle, oluşturmaya hiyerarşide daha yukarıdaki (örneğin, `FilterableProductTable`) veya daha aşağıdaki (`ProductRow`) bileşenler ile başlayabilirsiniz. Daha basit örneklerde, yukarıdan aşağıya gitmek genellikle daha kolaydır ve daha büyük projelerde, aşağıdan yukarıya gitmek ve de bileşenleri oluşturdukça testler yazmak daha kolaydır.
 
 Bu adımın sonunda, veri modelinizi oluşturan yeniden kullanılabilir bileşenlerden oluşan bir kütüphaneye sahip olacaksınız. Bileşenler yalnızca `render()` metotlarına sahip olacaktır, çünkü bu, uygulamanızın statik bir sürümüdür. Hiyerarşinin en üstündeki bileşen (`FilterableProductTable`) veri modelinizi bir prop olarak alır. Temel veri modelinizde değişiklik yaparsanız ve tekrar `ReactDOM.render()`'ı çağırırsanız, kullanıcı arayüzü güncellenecektir. Arayüzünüzün nasıl güncellendiğini ve, karmaşık bir şey olmadığından, nerede değişiklik yapılacağını görmek kolaydır. React'in **tek yönlü veri akışı** (ayrıca *tek yönlü bağlama* olarak da bilinir) her şeyi modüler ve hızlı tutar.
 
@@ -78,7 +78,7 @@ Bu adımı uygulamak için yardıma ihtiyaç duyarsanız, basitçe [React Doküm
 
 ### Kısa bir araya girme: Prop'lar vs State {#a-brief-interlude-props-vs-state}
 
-There are two types of "model" data in React: props and state. It's important to understand the distinction between the two; skim [the official React docs](/docs/interactivity-and-dynamic-uis.html) if you aren't sure what the difference is.
+React'ta iki tür "model" datası vardır: props ve state. Bunlar arasındaki farkı anlamak önemlidir. Eğer aradaki farkın ne olduğundan emin değilseniz [React Dokümanlarına](/docs/interactivity-and-dynamic-uis.html) a göz gezdirin.
 
 ## Adım 3: UI State'inin Minimal (ancak eksiksiz) Temsilini Belirleme {#step-3-identify-the-minimal-but-complete-representation-of-ui-state}
 
