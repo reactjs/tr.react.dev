@@ -1,6 +1,6 @@
 ---
 id: hooks-intro
-title: Hook Tanıtımı
+title: Hook'lara Giriş
 permalink: docs/hooks-intro.html
 next: hooks-overview.html
 ---
@@ -45,7 +45,7 @@ React 2018 Konferansı'nda, Sophie Alpert ve Dan Abramov Hook'ları tanıttı, a
 
 Devam etmeden önce, unutmayın ki Hook'lar:
 
-* **Tamamen yerleşiktir.** Hook'ları mevcut herhangi bir kodu tekrar yazmadan birkaç bileşende deneyebilirsiniz. Fakat istemiyorsanız şu anda Hook'ları öğrenmek veya kullanmak zorunda değilsiniz.
+* **Tamamen opsiyoneldir.** Hook'ları mevcut herhangi bir kodu tekrar yazmadan birkaç bileşende deneyebilirsiniz. Fakat istemiyorsanız şu anda Hook'ları öğrenmek veya kullanmak zorunda değilsiniz.
 * **100% geriye uyumludur.** Hook'lar mevcut kodu bozan herhangi bir değişiklik içermiyor.
 * **Şu an kullanılabilir.** Hook'lar v16.8.0 sürümünün yayımlanması ile şu an kullanıma uygundur.
 
@@ -81,30 +81,30 @@ Buna daha çok [Efekt Hook'unu Kullanma](/docs/hooks-effect.html#tip-use-multipl
 
 Sınıfların, kodun yeniden kullanılmasını ve kod organizasyonunu zorlaştırmasının yanı sıra, React'i öğrenme konusunda büyük bir engel olabileceğini gördük. `Bunun` JavaScript'te nasıl çalıştığını anlamalısınız, bu birçok dilde nasıl çalıştığından çok farklı. Olay yöneticilerini bağlamayı için hatırlamanız gereklidir. Kararsız [sözdizimi önerileri](https://babeljs.io/docs/en/babel-plugin-transform-class-properties/) olmadan, kod çok ayrıntılıdır. İnsanlar prop'ları, state'i ve yukarıdan aşağıya veri akışını mükemmel bir şekilde anlayabilir, ancak yine de sınıfları anlamak için çaba sarfedebilir. React'teki fonksiyon ve sınıf bileşenleri arasındaki ayrım ve her birinin ne zaman kullanılacağı, deneyimli React geliştiricileri arasında bile anlaşmazlıklara yol açar.
 
-Additionally, React has been out for about five years, and we want to make sure it stays relevant in the next five years. As [Svelte](https://svelte.technology/), [Angular](https://angular.io/), [Glimmer](https://glimmerjs.com/), and others show, [ahead-of-time compilation](https://en.wikipedia.org/wiki/Ahead-of-time_compilation) of components has a lot of future potential. Especially if it's not limited to templates. Recently, we've been experimenting with [component folding](https://github.com/facebook/react/issues/7323) using [Prepack](https://prepack.io/), and we've seen promising early results. However, we found that class components can encourage unintentional patterns that make these optimizations fall back to a slower path. Classes present issues for today's tools, too. For example, classes don't minify very well, and they make hot reloading flaky and unreliable. We want to present an API that makes it more likely for code to stay on the optimizable path.
+Ayrıca, React 5 yıldır mevcut ve önümüzdeki beş yıl için de kalıcı olacağından emin olmak istiyoruz. [Svelte](https://svelte.technology/), [Angular](https://angular.io/), [Glimmer](https://glimmerjs.com/) ve diğerlerinin gösterdiği gibi, bileşenlerin [önceden yapılmış derlemeler](https://en.wikipedia.org/wiki/Ahead-of-time_compilation) çok fazla gelecek potansiyeli var. Özellikle de şablonlarla sınırlı değilse. Son zamanlarda, [Prepack](https://prepack.io/) kullanarak [bileşen katlama](https://github.com/facebook/react/issues/7323) ile deneme yaptık ve ilk sonuçların umut verici olduğunu gözlemledik. Bununla birlikte, sınıf bileşenlerinin bu optimizasyonları daha yavaş bir yola geri çekmesini sağlayan istemsiz kalıpları teşvik edebileceğini gördük. Sınıflar da bugünün araçları için sorunlar sunmaktadır. Örneğin, sınıflar çok küçültmezler ve hot reloading'i tuhaf ve güvenilmez yaparlar. Kodun optimize edilebilir yolda kalmasını daha kolay kılan bir API sunmak istiyoruz.
 
-To solve these problems, **Hooks let you use more of React's features without classes.** Conceptually, React components have always been closer to functions. Hooks embrace functions, but without sacrificing the practical spirit of React. Hooks provide access to imperative escape hatches and don't require you to learn complex functional or reactive programming techniques.
+Bu sorunları çözmek için, **Hooks, sınıfsız şekilde React'in özelliklerini daha fazla kullanmanızı sağlar.** Kavramsal olarak, React bileşenleri her zaman fonksiyonlara daha yakın olmuştur. Hook'lar React'in pratik ruhundan ödün vermeden. fonksiyonları kucaklar. Hook'lar, mecburi kaçış kapaklarına erişim sağlar ve karmaşık fonksiyonel veya reaktif programlama tekniklerini öğrenmenizi gerektirmez.
 
->Examples
+>Örnekler
 >
->[Hooks at a Glance](/docs/hooks-overview.html) is a good place to start learning Hooks.
+>[Bir Bakışta Hook'lar](/docs/hooks-overview.html), Hook'ları öğrenmeye başlamak için iyi bir yer.
 
-## Gradual Adoption Strategy {#gradual-adoption-strategy}
+## Kademeli Kabul Stratejisi {#gradual-adoption-strategy}
 
->**TLDR: There are no plans to remove classes from React.**
+>**Kısaca: Sınıfları React'ten kaldırmak gibi bir planımız yok.**
 
-We know that React developers are focused on shipping products and don't have time to look into every new API that's being released. Hooks are very new, and it might be better to wait for more examples and tutorials before considering learning or adopting them.
+React geliştiricilerinin ürünlerini teslim etmeye odaklandığını ve yayımlanan her yeni API’yı incelemeye zamanlarının olmadığını biliyoruz. Hook'lar çok yeni ve öğrenmeyi veya benimsemeyi düşünmeden önce daha fazla örnek ve öğretici beklemek daha iyi olabilir.
 
-We also understand that the bar for adding a new primitive to React is extremely high. For curious readers, we have prepared a [detailed RFC](https://github.com/reactjs/rfcs/pull/68) that dives into motivation with more details, and provides extra perspective on the specific design decisions and related prior art.
+Meraklı okuyucular için, daha detaylıca motivasyonu işleyen ve belirli tasarım kararları ve önceki ilgili teknikler hakkında ekstra perspektif sağlayan [detaylı RFC](https://github.com/reactjs/rfcs/pull/68)'i hazırladık.
 
-**Crucially, Hooks work side-by-side with existing code so you can adopt them gradually.** There is no rush to migrate to Hooks. We recommend avoiding any "big rewrites", especially for existing, complex class components. It takes a bit of a mindshift to start "thinking in Hooks". In our experience, it's best to practice using Hooks in new and non-critical components first, and ensure that everybody on your team feels comfortable with them. After you give Hooks a try, please feel free to [send us feedback](https://github.com/facebook/react/issues/new), positive or negative.
+**Önemli olan Hook'lar, mevcut kodla yan yana çalışır, böylece bunları aşamalı olarak kullanabilirsiniz.** Hook'lara geçmeniz için acele etmenize gerek yok. Özellikle mevcut, karmaşık sınıf bileşenlerinizi "yeniden yazmak"tan kaçınmanızı öneririz. “Hook'ları anlamak" biraz zaman alabilir. Tecrübelerimize göre, Hook'ları öncelikle yeni ve kritik olmayan bileşenlerde kullanarak pratik yapmak ve ekibinizdeki herkesin kendisini bunu konuda rahat hissetmesini sağlamak en iyisi. Hook'ları denedikten sonra, lütfen bize olumlu ya da olumsuz [geri bildirim gönderin](https://github.com/facebook/react/issues/new).
 
-We intend for Hooks to cover all existing use cases for classes, but **we will keep supporting class components for the foreseeable future.** At Facebook, we have tens of thousands of components written as classes, and we have absolutely no plans to rewrite them. Instead, we are starting to use Hooks in the new code side by side with classes.
+Hook'ların sınıflar için mevcut tüm kullanım durumlarını kapsamasını istiyoruz, ancak **öngörülebilir gelecek için sınıf bileşenlerini desteklemeye devam edeceğiz.** Facebook'ta, sınıf olarak yazılmış on binlerce bileşene sahibiz ve bunları yeniden yazmak için kesinlikle hiçbir planımız yok. Bunun yerine, yeni kodda Hook'ları yan yana sınıflarla kullanmaya başlıyoruz.
 
-## Frequently Asked Questions {#frequently-asked-questions}
+## Sıkça Sorulan Sorular {#frequently-asked-questions}
 
-We've prepared a [Hooks FAQ page](/docs/hooks-faq.html) that answers the most common questions about Hooks.
+Hook'lar hakkında en sık sorulan soruları cevaplayan bir [Hook'lar için SSS sayfası](/docs/hooks-faq.html) hazırladık.
 
-## Next Steps {#next-steps}
+## Sonraki Adımlar {#next-steps}
 
-By the end of this page, you should have a rough idea of what problems Hooks are solving, but many details are probably unclear. Don't worry! **Let's now go to [the next page](/docs/hooks-overview.html) where we start learning about Hooks by example.**
+Bu sayfanın sonunda, Hook'ların hangi problemleri çözdüğü hakkında kabaca bir fikriniz olmalı, ancak birçok detay muhtemelen belirsiz. Merak etmeyin! **Şimdi Hook'ları örneklerle öğrenmeye başladığımız [bir sonraki sayfa](/docs/hooks-overview.html)ya gidelim.**

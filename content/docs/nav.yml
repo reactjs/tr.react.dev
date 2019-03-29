@@ -110,19 +110,19 @@
       - id: hooks-intro
         title: Hook'lara Giriş
       - id: hooks-overview
-        title: Hook'lara Kısa Bir Bakış
+        title: Bir Bakışta Hook'lar
       - id: hooks-state
-        title: Durum Hook'unu Kullanmak
+        title: State Hook'unu Kullanmak
       - id: hooks-effect
         title: Efekt Hook'unu Kullanmak
       - id: hooks-rules
         title: Hook Kuralları
       - id: hooks-custom
-        title: Kendi Hook'unuzu Oluşturun
+        title: Kendi Hook'larınızı Oluşturmak
       - id: hooks-reference
-        title: Hooks API'si Kaynağı
+        title: Hook'ların API Kaynağı
       - id: hooks-faq
-        title: Hooks SSS
+        title: Hook'lar için SSS
 - title: Katkı Sağlamak
   items:
   - id: how-to-contribute
