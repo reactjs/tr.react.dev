@@ -24,13 +24,13 @@ Bu sayfa React kullanım kılavuzu ve ilgili kaynaklara genel bir bakıştır.
 
 ---
 
-- [React'ı deneyin](#try-react)
-- [React'ı öğrenin](#learn-react)
+- [React'i deneyin](#try-react)
+- [React'i öğrenin](#learn-react)
 - [Haberdar olun](#staying-informed)
 - [Sürüm bilgileri](#versioned-documentation)
 - [Bir şeyler mi eksik?](#something-missing)
 
-## React'ı Deneyin {#try-react}
+## React'i Deneyin {#try-react}
 
 React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **ihtiyacınız kadar az veya daha fazla kullanabilirsiniz**. React’ın tadına bakmak, basit bir HTML sayfasına biraz etkileşim katmak veya karmaşık bir React destekli uygulama başlatmak isteyip istemediğinize göre, bu bölümdeki bağlantılar başlamanıza yardımcı olacaktır.
 
@@ -52,7 +52,7 @@ Uygulamanız büyüdükçe, daha entegre bir kurulum düşünebilirsiniz. Daha b
 
 ## React Öğrenin {#learn-react}
 
-İnsanlar farklı geçmişlerden ve farklı öğrenme tarzlarıyla React'a geliyorlar. Tercih ettiğiniz yaklaşım ister teorik, ister pratik olsun, bu bölümü faydalı bulacağınızı umuyoruz.
+İnsanlar farklı geçmişlerden ve farklı öğrenme tarzlarıyla React'e geliyorlar. Tercih ettiğiniz yaklaşım ister teorik, ister pratik olsun, bu bölümü faydalı bulacağınızı umuyoruz.
 
 * **Yaparak öğrenmeyi** tercih ediyorsanız, [pratik öğretici](/tutorial/tutorial.html)mizle başlayın.
 * **Kavramları adım adım öğrenmeyi** tercih ediyorsanız, [ana kavramlar rehberi](/docs/hello-world.html)mizle başlayın.
@@ -65,7 +65,7 @@ Bilinmeyen herhangi bir teknoloji gibi, React de bir öğrenme eğrisine sahipti
 
 ### Yeni Başlayanlar İçin React {#react-for-beginners}
 
-React anlatımlarının hızlı geçtiğini düşünüyorsanız, [Tania Rascia ile React'a genel bakış](https://www.taniarascia.com/getting-started-with-react/)ı inceleyin. En önemli React konseptlerini ayrıntılı, acemi ​​dostu bir şekilde sunar. İşiniz bittiğinde anlatımları bir kez daha deneyin!
+React anlatımlarının hızlı geçtiğini düşünüyorsanız, [Tania Rascia ile React'e genel bakış](https://www.taniarascia.com/getting-started-with-react/)ı inceleyin. En önemli React konseptlerini ayrıntılı, acemi ​​dostu bir şekilde sunar. İşiniz bittiğinde anlatımları bir kez daha deneyin!
 
 ### Tasarımcılar İçin React {#react-for-designers}
 

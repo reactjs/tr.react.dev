@@ -1,6 +1,6 @@
 ---
 id: tutorial
-title: "Öğretici: React'a giriş"
+title: "Öğretici: React'e giriş"
 layout: tutorial
 sectionid: tutorial
 permalink: tutorial/tutorial.html
@@ -26,7 +26,7 @@ Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun geliştiricisi olmad�
 Bu öğretici birkaç bölüme ayrılmıştır:
 
 * [Öğretici İçin Kurulum Rehberi:](#setup-for-the-tutorial) bu öğreticiyi takip etmek için size bir **başlangıç noktası** sunar. 
-* [Genel bakış:](#overview) React'ın **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
+* [Genel bakış:](#overview) React'in **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
 * [Oyunun Tamamlanması:](#completing-the-game) React geliştirimindeki **en yaygın teknikleri** aktaracaktır.
 * [Zamanda Yolculuğun Eklenmesi:](#adding-time-travel) React'in benzersiz özellikleri hakkında **daha derinlemesine** bilgiler edinmenizi sağlayacaktır.
 
