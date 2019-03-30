@@ -1,18 +1,20 @@
 ---
 id: faq-internals
-title: Virtual DOM and Internals
+title: Virtual DOM ve İç Dinamikler
 permalink: docs/faq-internals.html
 layout: docs
 category: FAQ
 ---
 
-### What is the Virtual DOM? {#what-is-the-virtual-dom}
+### Virtual DOM nedir? {#what-is-the-virtual-dom}
 
-The virtual DOM (VDOM) is a programming concept where an ideal, or "virtual", representation of a UI is kept in memory and synced with the "real" DOM by a library such as ReactDOM. This process is called [reconciliation](/docs/reconciliation.html).
+Virtual DOM (VDOM), bir UI'ın ideal veya "sanal" bir temsilinin bellekte tutulduğu ve ReactDOM gibi bir kütüphane tarafından "gerçek" DOM ​​ile senkronize edildiği bir programlama konseptidir. Bu sürece [uyumlaştırma](/docs/reconciliation.html) denir.
 
-This approach enables the declarative API of React: You tell React what state you want the UI to be in, and it makes sure the DOM matches that state. This abstracts out the attribute manipulation, event handling, and manual DOM updating that you would otherwise have to use to build your app.
+Bu yaklaşım, bildirimsel React API'sini etkinleştirir: React'e UI'ın hangi state'te olmasını istediğinizi söylersiniz ve DOM'un bu durumla eşleştiğinden emin olur. Bu, uygulamanızı oluşturmak için kullanmak zorunda kalacağınız özellik manipülasyonu, olay yönetimi ve manuel DOM güncellemesini özetler.
 
 Since "virtual DOM" is more of a pattern than a specific technology, people sometimes say it to mean different things. In React world, the term "virtual DOM" is usually associated with [React elements](/docs/rendering-elements.html) since they are the objects representing the user interface. React, however, also uses internal objects called "fibers" to hold additional information about the component tree. They may also be considered a part of "virtual DOM" implementation in React.
+
+"Virtual DOM" belirli bir teknolojiden daha ziyade bir kalıp olduğundan, insanlar bazen farklı şeyler ifade ettiğini söylüyor. React dünyasında, "virtual DOM" terimi genellikle [React elemanları](/docs/rendering-elements.html) ile ilişkilendirilir, çünkü bunlar kullanıcı arayüzünü temsil eden nesnelerdir. Bununla birlikte, React, bileşen ağacı hakkında ek bilgi tutmak için "fibers" adı verilen dahili nesneleri de kullanır. Ayrıca React'teki "virtual DOM" uygulamasının bir parçası olarak da düşünülebilirler.
 
 ### Is the Shadow DOM the same as the Virtual DOM? {#is-the-shadow-dom-the-same-as-the-virtual-dom}
 
