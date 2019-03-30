@@ -16,7 +16,7 @@ Bir element, ekranda neyi görmek istiyorsanız onu tasvir eder:
 const element = <h1>Hello, world</h1>;
 ```
 
-Tarayıcının DOM elementlerinin aksine, React elementleri daha sade nesnelerdir ve oluşturulmaları daha kolaydır. Çünkü React DOM, elementler ile eşleşmek için DOM'un güncellenmesi işini kendisi halleder.
+Tarayıcının DOM elementlerinin aksine, React elementleri daha sade nesnelerdir ve oluşturulmaları daha kolaydır. Çünkü React DOM, elementler ile eşleşmek için DOM'ın güncellenmesi işini kendisi halleder.
 
 >**Not:**
 >

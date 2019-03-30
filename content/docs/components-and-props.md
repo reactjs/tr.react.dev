@@ -85,7 +85,7 @@ Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
 2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor. 
 3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
-4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'u arka planda efektif bir şekilde güncelliyor .
+4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor .
 
 >**Not:** Bileşen isimlendirmelerinde daima büyük harfle başlayınız.
 >

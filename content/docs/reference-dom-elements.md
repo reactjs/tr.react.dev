@@ -34,7 +34,7 @@ React'i Web bileşenleri ile birlikte kullanırsanız (ki bu çok nadirdir), `cl
 
 ### dangerouslySetInnerHTML {#dangerouslysetinnerhtml}
 
-Tarayıcı DOM'unda kullanılan `innerHTML`'e karşılık React'te `dangerouslySetInnerHTML` kullanılır. Genellikle HTML'i kod üzerinden tanımlamak risklidir çünkü yanlışlıkla kullanıcılarınızı [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırısına maruz bırakabilirsiniz. React'te HTML'i doğrudan belirleyebilirsiniz ancak bunu yaparken HTML'i `dangerouslySetInnerHTML`'i `__html` anahtarı üzerinden yazmak zorundasız. Örneğin:
+Tarayıcı DOM'ında kullanılan `innerHTML`'e karşılık React'te `dangerouslySetInnerHTML` kullanılır. Genellikle HTML'i kod üzerinden tanımlamak risklidir çünkü yanlışlıkla kullanıcılarınızı [cross-site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting) saldırısına maruz bırakabilirsiniz. React'te HTML'i doğrudan belirleyebilirsiniz ancak bunu yaparken HTML'i `dangerouslySetInnerHTML`'i `__html` anahtarı üzerinden yazmak zorundasız. Örneğin:
 
 ```js
 function createMarkup() {

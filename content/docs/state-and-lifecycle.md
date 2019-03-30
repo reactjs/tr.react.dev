@@ -312,7 +312,7 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 3) `Clock` bileşeninin çıktısı DOM'a eklendiğinde, yaşam döngüsündeki `componentDidMount()` metodu çağrılır. Bu metodda `Clock` bileşeni, her saniyede bir `tick()` metodunun çalıştırılması gerektiğini tarayıcıya bildirir.
 
-4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan dolayı, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'u ilgili şekilde günceller.
+4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan dolayı, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'ı ilgili şekilde günceller.
 
 5) Eğer `Clock` bileşeni, DOM'dan çıkarılırsa, yaşam döngüsündeki `componentWillUnmount()` metodu çağrılır ve tarayıcı tarafından zamanlayıcı durdurulmuş olur.
 

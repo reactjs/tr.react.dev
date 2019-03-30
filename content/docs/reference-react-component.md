@@ -580,7 +580,7 @@ component.forceUpdate(callback)
 
 Bileşeninizin state'i veya prop'ları değiştiğinde, varsayılan olarak bileşeniniz tekrar render edilecektir. Eğer `render()` metodunuz, bunların haricinde başka verilere bağımlı ise, `forceUpdate()`'i çağırarak bileşeninizin tekrar render edilmesi gerektiğini React'e söyleyebilirsiniz.
 
-Bileşen üzerinde `forceUpdate()` çağrımı, `shouldComponentUpdate()`'in es geçilerek `render()` metodunun çalışmasına neden olacaktır. `forceUpdate()` çağrımı, alt bileşenler için normal yaşam döngüsü metotlarını tetikleyecektir. Bu metotlara, her bir alt bileşen için çağrılacak `shouldComponentUpdate()` metodu da dahildir. Buna rağmen HTML tarafında oluşan değişikliklerde, React sadece DOM'u güncellemeye devam edecektir.
+Bileşen üzerinde `forceUpdate()` çağrımı, `shouldComponentUpdate()`'in es geçilerek `render()` metodunun çalışmasına neden olacaktır. `forceUpdate()` çağrımı, alt bileşenler için normal yaşam döngüsü metotlarını tetikleyecektir. Bu metotlara, her bir alt bileşen için çağrılacak `shouldComponentUpdate()` metodu da dahildir. Buna rağmen HTML tarafında oluşan değişikliklerde, React sadece DOM'ı güncellemeye devam edecektir.
 
 Normalde `forceUpdate()`'in kullanımından kaçınmalı ve yalnızca `render()` metodu içerisinde `this.props` ve `this.state`'ten okuma işlemi yapmalısınız.
 
