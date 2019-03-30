@@ -85,7 +85,7 @@ Peki React, hangi state'in hangi `useState` çağrısına karşılık geldiğini
 // ------------
 useState('Onur')           // 1. name state değişkenini 'Onur' ile başlat
 useEffect(persistForm)     // 2. Formun devamlılığını sağlamak için bir efekt ekle
-useState('Şuyalçınkaya')        // 3. surname state değişkenini 'Şuyalçınkaya' ile başlat
+useState('Şuyalçınkaya')   // 3. surname state değişkenini 'Şuyalçınkaya' ile başlat
 useEffect(updateTitle)     // 4. Başlığı güncellemek için bir efekt ekle
 
 // -------------
@@ -93,7 +93,7 @@ useEffect(updateTitle)     // 4. Başlığı güncellemek için bir efekt ekle
 // -------------
 useState('Onur')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
 useEffect(persistForm)     // 2. Formun devamlılığını sağlamak efekti değiştir
-useState('Şuyalçınkaya')        // 3. surname state değişkenini oku (argüman yoksayılmıştır)
+useState('Şuyalçınkaya')   // 3. surname state değişkenini oku (argüman yoksayılmıştır)
 useEffect(updateTitle)     // 4. Başlığı güncellemek için efekti değiştir
 
 // ...
@@ -115,7 +115,7 @@ Hook çağrılarının sırası render etmeler arasında aynı olduğu sürece, 
 ```js
 useState('Onur')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
 // useEffect(persistForm)  // 🔴 Bu Hook atlandı!
-useState('Şuyalçınkaya')        // 🔴 2 (ama 3'tü). surname state değişkeni okunamadı
+useState('Şuyalçınkaya')   // 🔴 2 (ama 3'tü). surname state değişkeni okunamadı
 useEffect(updateTitle)     // 🔴 3 (ama 4'tü). Efekt değiştirilemedi
 ```
 
