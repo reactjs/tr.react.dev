@@ -191,19 +191,19 @@ class MyClass extends React.Component {
 </MyContext.Consumer>
 ```
 
-A React component that subscribes to context changes. This lets you subscribe to a context within a [function component](/docs/components-and-props.html#function-and-class-components).
+Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bileşen](/docs/components-and-props.html#function-and-class-components) içindeki bir context'e abone olmanıza izin verir.
 
-Requires a [function as a child](/docs/render-props.html#using-props-other-than-render). The function receives the current context value and returns a React node. The `value` argument passed to the function will be equal to the `value` prop of the closest Provider for this context above in the tree. If there is no Provider for this context above, the `value` argument will be equal to the `defaultValue` that was passed to `createContext()`.
+[Alt eleman gibi fonksiyonlar](/docs/render-props.html#using-props-other-than-render) gereklidir. Fonksiyon geçerli context değerini alır ve bir React düğümü döndürür. Fonksiyona iletilen `value` argümanı, yukarıda bu context için ağaçta en yakın Provider'ın `value` prop'una eşit olacaktır. Yukarıdaki bu context için Provider yoksa, `value` argümanı `createContext()` öğesine iletilmiş `defaultValue` değerine eşit olur.
 
-> Note
+> Not
 > 
-> For more information about the 'function as a child' pattern, see [render props](/docs/render-props.html).
+> Alt eleman gibi fonksiyonlar paternleri hakkında daha çok  bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
 
-## Examples {#examples}
+## Örnekler {#examples}
 
-### Dynamic Context {#dynamic-context}
+### Dinamik Context {#dynamic-context}
 
-A more complex example with dynamic values for the theme:
+Tema için dinamik değerli çok karmaşık bir örnek:
 
 **theme-context.js**
 `embed:context/theme-detailed-theme-context.js`
@@ -214,9 +214,9 @@ A more complex example with dynamic values for the theme:
 **app.js**
 `embed:context/theme-detailed-app.js`
 
-### Updating Context from a Nested Component {#updating-context-from-a-nested-component}
+### İç içe geçmiş bileşenden Context güncelleme {#updating-context-from-a-nested-component}
 
-It is often necessary to update the context from a component that is nested somewhere deeply in the component tree. In this case you can pass a function down through the context to allow consumers to update the context:
+Context'i bileşen ağacında derin bir yere yerleştirilmiş bir bileşenden güncellemek genellikle gerekir. Bu durumda, tüketicilerin içeriği güncellemesine izin vermek için içeriğin bir işlevini aşağı iletebilirsiniz:
 
 **theme-context.js**
 `embed:context/updating-nested-context-context.js`
@@ -227,28 +227,27 @@ It is often necessary to update the context from a component that is nested some
 **app.js**
 `embed:context/updating-nested-context-app.js`
 
-### Consuming Multiple Contexts {#consuming-multiple-contexts}
+### Çoklu Context’leri kullanma {#consuming-multiple-contexts}
 
-To keep context re-rendering fast, React needs to make each context consumer a separate node in the tree. 
+Context'in yeniden oluşturulmasını hızlı tutmak için React her context tüketiciyi ağaçta ayrı bir düğüm haline getirmelidir.
 
 `embed:context/multiple-contexts.js`
 
-If two or more context values are often used together, you might want to consider creating your own render prop component that provides both.
+İki veya daha fazla contex değeri sıklıkla birlikte kullanılıyorsa her ikisini de sağlayan kendi render prop bileşeninizi oluşturmayı düşünebilirsiniz.
 
-## Caveats {#caveats}
+## Uyarılar {#caveats}
 
-Because context uses reference identity to determine when to re-render, there are some gotchas that could trigger unintentional renders in consumers when a provider's parent re-renders. For example, the code below will re-render all consumers every time the Provider re-renders because a new object is always created for `value`:
+Context ne zaman yeniden oluşturulacağını belirlemek için referans kimliğini kullandığından bir Provider'ın üst elemanları yeniden işlendiğinde dağıtıcılarda ki istenmeyen işleyicileri tetikleyebilecek bazı kazançlar vardır. Örneğin aşağıdaki kod dağıtıcının her yeniden oluşturuşunda  tüm dağıtıcıları yeniden oluşturur. Çünkü her zaman `value` içim yeni bir obje oluşturulur:
 
 `embed:context/reference-caveats-problem.js`
 
 
-To get around this, lift the value into the parent's state:
+Bunu aşmak için, değeri üst eleman'ın state'ine getirin:
 
 `embed:context/reference-caveats-solution.js`
 
 ## Legacy API {#legacy-api}
 
-> Note
+> Not
 > 
-> React previously shipped with an experimental context API. The old API will be supported in all 16.x releases, but applications using it should migrate to the new version. The legacy API will be removed in a future major React version. Read the [legacy context docs here](/docs/legacy-context.html).
- 
+> React önceleri deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak kullanan uygulamalar yeni süreme geçmelidir. Eski sürüm API'ler gelecekteki ana React versiyonundan kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyun.
