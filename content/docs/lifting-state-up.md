@@ -308,7 +308,7 @@ Herhangi bir input'a değer girildiğinde ne olduğunu özetleyelim:
 * React, DOM'daki `<input>` üzerinde `onChange` olarak belirtilen fonksiyonu çağırır. Bizim örneğimizde, `TemperatureInput` bileşenindeki `handleChange` metodudur.
 * `TemperatureInput` bileşenindeki `handleChange` metodu `this.props.onTemperatureChange()`'i yeni girilen değerle çağırır. `TemperatureInput` bileşenindeki prop'lar, `onTemperatureChange` ile beraber, üst eleman olan `Calculator` tarafından verilmektedir.
 * `Calculator` bileşeninde bulunan Santigrat cinsindeki `TempratureInput` bileşeninin `onTemperatureChange` fonksiyonunu `handleCelsiusChange` metodu olarak belirledik. Aynı şekilde Fahrenayt için ise `handleFahrenheitChange` olarak belirledik. `Calculator`'deki bu iki fonksiyondan herhangi biri, değişen input'a bağlı olarak çağrılır.
-* Bu metodlarda, `Calculator` bileşeni React'a kendisini tekrar ekranda sunabilmek için `this.setState()`'i yeni input değeri ve input'un bağlı olduğu ölçüm birim değeri ile çağırır.
+* Bu metodlarda, `Calculator` bileşeni React'e kendisini tekrar ekranda sunabilmek için `this.setState()`'i yeni input değeri ve input'un bağlı olduğu ölçüm birim değeri ile çağırır.
 * React `Calculator` bileşeninin `render` metodunu çağırarak yeni UI'ın nasıl sunacağını öğrenir. Input'lardaki her iki değer kendi birimlerine göre tekrar hesaplanır. Sıcaklık dönüşümü bu adımda gerçekleşir.
 * React her bir `TemperatureInput` bileşeninin `render` metodunu `Calculator` bileşeni tarafından belirlenen yeni prop'lar ile çağırır. Bu şekilde ekrana bu input'ları nasıl göstereceğini öğrenir.
 * React `BoilingVerdict` bileşeninin `render` metodunu çağırır. Çağırırken Santigrat cinsinden olan değeri prop olarak bileşene gönderir.

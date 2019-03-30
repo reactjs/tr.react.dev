@@ -1,6 +1,6 @@
 ---
 id: tutorial
-title: "Öğretici: React'a giriş"
+title: "Öğretici: React'e giriş"
 layout: tutorial
 sectionid: tutorial
 permalink: tutorial/tutorial.html
@@ -26,7 +26,7 @@ Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun geliştiricisi olmad�
 Bu öğretici birkaç bölüme ayrılmıştır:
 
 * [Öğretici İçin Kurulum Rehberi:](#setup-for-the-tutorial) bu öğreticiyi takip etmek için size bir **başlangıç noktası** sunar. 
-* [Genel bakış:](#overview) React'ın **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
+* [Genel bakış:](#overview) React'in **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
 * [Oyunun Tamamlanması:](#completing-the-game) React geliştirimindeki **en yaygın teknikleri** aktaracaktır.
 * [Zamanda Yolculuğun Eklenmesi:](#adding-time-travel) React'in benzersiz özellikleri hakkında **daha derinlemesine** bilgiler edinmenizi sağlayacaktır.
 
@@ -1078,7 +1078,7 @@ bu koda değiştiğini düşünelim:
 <li>Alexa: 5 tasks left</li>
 ```
 
-Bu iki kodu okuyan bir kişi, sayıların değişmesine ek olarak Alexa ile Ben'in sıralamasının değiştiğini,ve araya Claudia'nın eklendiğini farkedecektir. Ancak React bir bilgisayar programıdır, ve amacımızın ne olduğunu kestiremez. React uygulamada listeyi değiştirmemizdeki maksadımızın ne olduğunu bilemeyeceğindan dolayı, her liste eleamanını birbirinden ayırt etmek için, liste elemanlarına bir *key* (anahtar değer) vermemiz gerekir. Bu örnekte, `alexa`, `ben`, `claudia` isimlerini key olarak kullanabilirz. Fakat bu verileri veritabanından getirseydik key olarak; Alexa, Ben, ve Claudia'nın ID'lerini kullanabilirdik:
+Bu iki kodu okuyan bir kişi, sayıların değişmesine ek olarak Alexa ile Ben'in sıralamasının değiştiğini, ve araya Claudia'nın eklendiğini farkedecektir. Ancak React bir bilgisayar programıdır, ve amacımızın ne olduğunu kestiremez. React uygulamada listeyi değiştirmemizdeki maksadımızın ne olduğunu bilemeyeceğindan dolayı, her liste eleamanını birbirinden ayırt etmek için, liste elemanlarına bir *key* (anahtar değer) vermemiz gerekir. Bu örnekte, `alexa`, `ben`, `claudia` isimlerini key olarak kullanabilirz. Fakat bu verileri veritabanından getirseydik key olarak; Alexa, Ben, ve Claudia'nın ID'lerini kullanabilirdik:
 
 ```html
 <li key={user.id}>{user.name}: {user.taskCount} tasks left</li>
@@ -1208,7 +1208,7 @@ Kodun son haline **[buradan(https://codepen.io/gaearon/pen/gWWZgR?editors=0010)*
 
 Eğer biraz daha boş vaktiniz varsa ve yeni edindiğiniz React yetenekleriniz ile ilgili pratik yapmak istiyorsanız, aşağıda zorluk derecesine göre sıralanmış işler sayesinde, tic-tac-toe oyununuzu geliştirerek daha ileriye götürebilirsiniz:
 
-1. Oyun geçmişinde, her hamlenin konumunun "(satır,sütun)" formatına göre görüntülenmesi.
+1. Oyun geçmişinde, her hamlenin konumunun "(satır, sütun)" formatına göre görüntülenmesi.
 2. Oyun geçmişi listesinde tıklanan liste elemanının, seçili olarak işaretlenmesi.
 3. Board'daki karelerin, elle hardcoded olarak kodlanmasının yerine iki for döngüsü kullanılarak Board bileşeninin düzenlenmesi.
 4. Bir buton eklenerek, tıklandığında oyun geçmişinin artan veya azalan şekilde sıralanmasının sağlanması. 

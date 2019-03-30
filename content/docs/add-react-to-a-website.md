@@ -12,7 +12,7 @@ next: create-a-new-react-app.html
 
 React, aşamalı olarak benimsenmesi için en baştan tasarlandı, ve  **ihtiyacınız kadar az veya daha fazla React kullanabilirsiniz**. Belki de varolan bir sayfaya sadece biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.
 
-Web sitelerinin çoğu, tek sayfalı uygulamalar değildir ve olması da gerekmez. **Hiçbir yapım aracı olmadan sadece birkaç satır kod** ile web sitenizin küçük bir bölümüne React'ı deneyin. Daha sonra içeriğini aşamalı olarak genişletebilir veya birkaç dinamik araca dahil edebilirsiniz.
+Web sitelerinin çoğu, tek sayfalı uygulamalar değildir ve olması da gerekmez. **Hiçbir yapım aracı olmadan sadece birkaç satır kod** ile web sitenizin küçük bir bölümüne React'i deneyin. Daha sonra içeriğini aşamalı olarak genişletebilir veya birkaç dinamik araca dahil edebilirsiniz.
 
 ---
 
@@ -52,7 +52,7 @@ Daha sonra, `</body>` etiketini kapatmadan hemen önce HTML sayfasına üç `<sc
 ```html{5,6,9}
   <!-- ... diğer HTML ... -->
 
-  <!-- React'ı yükle. -->
+  <!-- React'i yükle. -->
   <!-- Not: yayınlama için hazırlanırken,  "development.js" yi "production.min.js" ile değiştirin -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
@@ -112,7 +112,7 @@ Genellikle, HTML sayfasındaki React bileşenlerini birden fazla yerde görünt�
 
 Web sitenizi yayına almadan önce, küçültülmemiş JavaScript'in sayfanızı kullanıcılarınız için önemli ölçüde yavaşlatabileceğine dikkat edin.
 
-Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getirilen HTML'in de React'ın `production.min.js` içinde biten sürümlerini yüklediğinden emin olursanız **siteniz yayına hazır** olur:
+Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getirilen HTML'in de React'in `production.min.js` içinde biten sürümlerini yüklediğinden emin olursanız **siteniz yayına hazır** olur:
 
 ```js
 <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
@@ -121,7 +121,7 @@ Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getir
 
 JavaScript dosyalarınız için bir küçültme adımınız yoksa, [ayarlamanın bir yolu budur](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3).
 
-## İsteğe bağlı: React'ı JSX ile deneyin {#optional-try-react-with-jsx}
+## İsteğe bağlı: React'i JSX ile deneyin {#optional-try-react-with-jsx}
 
 Yukarıdaki örneklerde, yalnızca tarayıcılar tarafından doğal olarak desteklenen özelliklere itibar ettik. Bu yüzden React’e ne göstereceğini söylemek için bir JavaScript fonksiyon çağrısı kullandık:
 
