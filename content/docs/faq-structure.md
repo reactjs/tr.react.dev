@@ -67,7 +67,7 @@ Javascript projelerinde klasörleri derinlemesine iç içe koymanın çok fazla 
 
 #### Çok fazla düşünmeyin {#dont-overthink-it}
 
-Eğer bir projeye henüz yeni başlıyorsanız, dizin yapısı üzerine [beş dakikadan daha fazla zaman harcamayın](https://en.wikipedia.org/wiki/Analysis_paralysis). Yukarıdaki yaklaşımlardan herhangi birini seçin (veya kendi yönteminizi getirin) ve kod yazmaya başlayın! Biraz gerçek kod yazdıktan sonra bu husus hakkında muhtemelen yeniden düşünmek isteyeceksinizdir.
+Eğer bir projeye henüz yeni başlıyorsanız, dizin yapısı üzerine [beş dakikadan daha fazla zaman harcamayın](https://eksisozluk.com/analysis-paralysis--833201). Yukarıdaki yaklaşımlardan herhangi birini seçin (veya kendi yönteminizi getirin) ve kod yazmaya başlayın! Biraz gerçek kod yazdıktan sonra bu husus hakkında muhtemelen yeniden düşünmek isteyeceksinizdir.
 
 Eğer tamamen çıkmaza girdiyseniz, tüm dosyaları tek bir klasörde tutarak başlayın. Eninde sonunda projeniz bazı dosyaları diğerlerinden ayırmak isteyeceğiniz kadar büyüyecek. O zamana kadar hangi dosyaları çoğu kez birlikte düzenlediğinizi söylemeye yetecek kadar bilginiz olacaktır. Genel olarak, sıklıkla birlikte değiştirilen dosyaları birbirlerine yakın tutmak iyi bir fikirdir. Bu prensip, "ortak yerleşim" olarak adlandırılır.
 
