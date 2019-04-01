@@ -6,11 +6,11 @@ next: hooks-reference.html
 prev: hooks-rules.html
 ---
 
-*Hook*'lar React'e 16.8 versiyonu ile henüz yeni eklenmişlerdir. Hook'lar sayesinde state ve diğer React özelliklerini bir sınıf oluşturmadan kullanabilirsiniz.
+Hook'lar React'e 16.8 versiyonu ile henüz yeni eklenmişlerdir. Hook'lar sayesinde state ve diğer React özelliklerini bir sınıf oluşturmadan kullanabilirsiniz.
 
 Kendi hook'unuzu oluşturmak, bileşen kodunuzu tekrar kullanılabilir fonksiyonlar halinde oluşturarak yönetmenizi sağlar.
 
-[Effect Hook'unu](/docs/hooks-effect.html#example-using-hooks-1) kullanma yazısında, bir chat uygulamasında, arkadaşın çevrimiçi veya çevrimdışı olduğunu belirten mesajı görüntüleyen aşağıdaki bileşene değinmiştik: 
+[Effect Hook'unu](/docs/hooks-effect.html#example-using-hooks-1) kullanma yazısında, mesajlaşma uygulamasında bir arkadaşın çevrimiçi veya çevrimdışı olduğunu belirten mesajı görüntüleyen aşağıdaki bileşene değinmiştik: 
 
 ```js{4-15}
 import React, { useState, useEffect } from 'react';
@@ -36,7 +36,7 @@ function FriendStatus(props) {
 }
 ```
 
-Şimdi, chat uygulamamızın bir kişi listesine sahip olduğunu düşünelim. Kişi listesindeki çevrimiçi olan kullanıcıların isimlerini yeşil renkte render etmek için, üstteki `FriendStatus` bileşeni ile benzer mantığı `FriendListItem` bileşenine kopyala/yapıştır yapabiliriz. Fakat bu durum kod tekrarı oluşturduğundan dolayı ideal bir çözüm olmayacaktır:
+Şimdi, mesajlaşma uygulamamızın bir kişi listesine sahip olduğunu düşünelim. Kişi listesindeki çevrimiçi olan kullanıcıların isimlerini yeşil renkte render etmek için, üstteki `FriendStatus` bileşeni ile benzer mantığı `FriendListItem` bileşenine kopyala/yapıştır yapabiliriz. Fakat bu durum kod tekrarı oluşturduğundan dolayı ideal bir çözüm olmayacaktır:
 
 ```js{4-15}
 import React, { useState, useEffect } from 'react';
@@ -63,15 +63,15 @@ function FriendListItem(props) {
 }
 ```
 
-`FriendStatus` ve `FriendListItem`'te bulunan bu mantığı daha genel bir hale getirip bileşenler arasında paylaştırabiliriz.
+`FriendStatus` ve `FriendListItem`'da bulunan bu mantığı daha genel bir hale getirip bileşenler arasında paylaştırabiliriz.
 
-React'te geleneksel olrak state'li mantığı bileşenler arasında paylaşmak için [render props](/docs/render-props.html) ve [higher-order components](/docs/higher-order-components.html) olmak üzere iki yöntem bulunmaktadır. Bunların yerine hook'lar sayesinde bileşen ağacına yeni bir bileşen eklemeden bu tarz problemleri nasıl çözeceğimize değineceğiz.
+React'te state'li mantığı bileşenler arasında paylaşmak için [render props](/docs/render-props.html) ve [higher-order components](/docs/higher-order-components.html) olmak üzere iki geleneksel yöntem bulunmaktadır. Bunların yerine Hook'ları kullanarak, DOM ağacına yeni bir bileşen eklemeden bu tarz problemleri nasıl çözeceğimize değineceğiz.
 
-## Özel Hook Oluşturma {#extracting-a-custom-hook}
+## Özel bir Hook Oluşturma {#extracting-a-custom-hook}
 
-Ortak bir işlevin iki JavaScript fonksiyonu arasında paylaştırılmasını istediğimizde, o işlev için üçüncü bir fonksiyon oluşturabiliyoruz. Bileşenler ve Hook'lar da birer fonksiyon olduklarından dolayı, bu durum onlar için de geçerlidir.
+Normalde, ortak bir işlevin iki JavaScript fonksiyonu arasında paylaştırılmasını istediğimizde, o işlev için üçüncü bir fonksiyon oluşturabiliyoruz. Bileşenler ve Hook'lar da aslında birer fonksiyon olduklarından dolayı, bu durum onlar için de geçerlidir.
 
-**Özel Hook aslında bir JavaScript fonksiyonudur ve isimlendirmeleri "`use`" ile başlar. Ayrıca diğer Hook'ları da çağırabilirler.** Örneğin aşağıda ilk olarak oluşturduğumuz özel Hook'umuz bulunuyor:
+**Özel Hook aslında bir JavaScript fonksiyonudur ve adları "`use`" ile başlar. Ayrıca diğer Hook'ları da çağırabilirler.** Örneğin aşağıda ilk defa oluşturduğumuz özel Hook'umuz bulunuyor:
 
 ```js{3}
 import React, { useState, useEffect } from 'react';
@@ -94,11 +94,11 @@ function useFriendStatus(friendID) {
 }
 ```
 
-Kod mantığını üstteki bileşenlerden aldığı için içerisinde yeni bir şey bulunmuyor. Tıpkı bileşenlerde olduğu gibi, özel Hook'unuzun üst seviyesinde diğer Hook'ları çağırabilirsiniz. 
+Kod mantığını üstteki bileşenlerden aldığı için içerisinde yeni bir şey bulunmuyor. Tıpkı bileşenlerde olduğu gibi, özel Hook'unuzun üst kısmında `useState()` gibi diğer Hook'ları çağırabilirsiniz. 
 
-Bileşenlerin aksine, özel Hook'larda belirli bir fonksiyon imzasının bulunma zorunluluğu yoktur. Hangi değerlerin parametre olarak verileceğine ve Hook'tan geri döndürüleceğine biz karar verebiliriz. Başka bir deyişle, normal fonksiyonlarda yaptığımız gibi Hook'ların kodlayabiliriz. Tek bir şart bulunuyor o da ilk bakışta fonksiyonun bir React Hook olduğunu anlayabilmek için fonksiyon isimlendirmesinin başında `use` kullanılması gerekiyor. Buna benzer olarak Hook'lar hakkında diğer kurallar için [bu dokümanı](/docs/hooks-rules.html) inceleyebilirsiniz. 
+Bileşenlerin aksine, özel Hook'larda belirli bir fonksiyon imzasının bulunma zorunluluğu yoktur. Hangi değerlerin parametre olarak verileceğine ve Hook'tan neyin geri döndürüleceğine biz karar verebiliriz. Başka bir deyişle, normal fonksiyonlarda yaptığımız gibi Hook'ları kodlayabiliriz. Özel Hook oluştururken tek bir şartbulunuyor: ilk bakışta fonksiyonun bir React Hook olduğunu anlayabilmek için fonksiyon isimlendirmesinin başında `use` kullanılması gerekiyor. Buna benzer olarak Hook'lar hakkında diğer kurallar için [bu dokümanı](/docs/hooks-rules.html) inceleyebilirsiniz. 
 
-`useFriendStatus` Hook'unun amacı, chat'teki ilgili arkadaşın durumuna abone olmayı sağlamaktır. Bu nedenle parametre olarak `friendID`'yi alır ve kullanıcının çevrimiçi/çevrimdışı durumunu geri döndürür:
+`useFriendStatus` Hook'unun amacı, mesajlaşma uygulamasındaki ilgili arkadaşın durumuna abone olmayı sağlamaktır. Bu nedenle parametre olarak `friendID`'yi alır ve kullanıcının çevrimiçi/çevrimdışı durumunu geri döndürür:
 
 ```js
 function useFriendStatus(friendID) {
@@ -112,9 +112,9 @@ function useFriendStatus(friendID) {
 
 Şimdi özel Hook'umuzu nasıl kullanacağımıza geçelim.
 
-## Özel Hook'un Kullanımı {#using-a-custom-hook}
+## Özel bir Hook'un Kullanımı {#using-a-custom-hook}
 
-Başlangıçtaki amacımız, `FriendStatus` ve `FriendListItem` bileşenlerindeki mükerrer kod mantığını genel bir hale getirmek idi. Çünkü iki bileşen de bir arkadaşın çevrimiçi olma durumundan haberdar olması gerekiyordu.
+Başlangıçtaki amacımız, `FriendStatus` ve `FriendListItem` bileşenlerindeki tekrar eden kod mantığını genel bir hale getirmek idi. Çünkü iki bileşen de bir arkadaşın çevrimiçi olma durumundan haberdar olması gerekiyordu.
 
 Bu kod mantığını iki bileşenden çıkararak `useFriendStatus` hook'unu oluşturduk. Artık aşağıdaki gibi kullanabiliriz: 
 
@@ -141,9 +141,9 @@ function FriendListItem(props) {
 }
 ```
 
-**Bu kod orijinal örneklerdeki ile aynı şekilde çalışır mı?** diye soracak olursanız, evet tam olarak aynı şekilde çalışacağını söyleyebiliriz. Eğer yakından bakarsanız, kod mantığı üzerinde hiçbir değişiklik yapmadığımızı göreceksiniz. Yaptığımız tek şey, iki fonksiyonda da olan kodu, ayrı bir fonksiyona taşımak oldu. **Bu nedenle özel Hook'lar, bir React özelliğinden ziyade, Hook'lardaki tasarımsal mantığı takip ederek oluşturulurlar.**
+**Bu kod orijinal örneklerdeki ile aynı şekilde çalışır mı?** diye soracak olursanız, evet tam olarak aynı şekilde çalışacağını söyleyebiliriz. Eğer yakından bakarsanız, kod mantığı üzerinde hiçbir değişiklik yapmadığımızı göreceksiniz. Yaptığımız tek şey, iki fonksiyonda da olan kodu, ayrı bir fonksiyona taşımak oldu. **Bu nedenle özel olarak yazılan Hook'lar, bir React özelliğinden ziyade, Hook'lardaki tasarımsal mantığı takip ederek oluşturulurlar.**
 
-**Peki ya "`use`" ön eki kullanarak özel Hook'larımı isimlendirmek zorunda mıyım?** Zorunda değilsiniz fakat lütfen bu şekilde isimlendiriniz. Eğer böyle yapmazsanız, [Hooks kurallarının](/docs/hooks-rules.html) ihlalini otomatik olarak kontrol edemeyiz. Çünkü hangi fonksiyonun kendi içerisinde Hook'lara çağrı yaptığını bilemeyiz. 
+**Özel olarak oluşturduğum Hook'u, "`use`" ön ekini kullanarak isimlendirmek zorunda mıyım?** Zorunda değilsiniz fakat bu şekilde isimlendirmenizi tavsiye ederiz. Eğer bu şekilde isimlendirmezseniz, [Hook kurallarının](/docs/hooks-rules.html) ihlalini otomatik olarak kontrol edemeyiz. Çünkü hangi fonksiyonun kendi içerisinde Hook'lara çağrı yaptığını bilemeyiz. 
 
 **Aynı Hook'u kullanan iki bileşen, birbirleri arasında state'i de paylaşır mı?** Hayır. Özel Hook'lar, *state'li mantığı* (örneğin, bir abonelik oluşturmak ve bu aboneliğin değerini barındırmak gibi işlemleri) tekrar kullanmak için bir mekanizmadır. Fakat her defasında özel bir Hook kullandığınızda, state ve içerisindeki etkileri tamamen bileşenden izole edilmiştir.
 
@@ -151,9 +151,9 @@ function FriendListItem(props) {
 
 ### İpucu: Bilginin Hook'lar Arasında Aktarılması {#tip-pass-information-between-hooks}
 
-Hook'lar fonksiyon oldukları için, bir bilgiyi birbirlerine aktarabiliriz. 
+Hook'lar birer fonksiyon oldukları için, bilgiyi birbirlerine aktarabiliriz. 
 
-Bunu daha iyi açıklamak için, daha önceki chat örneğimizdeki diğer bir bileşeni kullanacağız. Bu bileşen, chat mesajı için alıcı seçmeye yarar. Bu sayede seçili olarak belirtilmiş çevrimiçi arkadaşın görüntülenmesi sağlanır:
+Bunu daha iyi açıklamak için, mesajlaşma uygulaması örneğimizdeki diğer bir bileşeni kullanacağız. Bu bileşen, bir mesaj için alıcı seçmeye yarar. Bu sayede seçili olarak işaretlenmiş bir arkadaşın çevrimiçi olup olmadığının görüntülenmesi sağlanır:
 
 ```js{8-9,13}
 const friendList = [
@@ -201,7 +201,7 @@ Daha önce React bileşenlerinde mümkün olmayan paylaşım esnekliğini özel 
 
 Erken aşamalarda hemen soyutlamaya gitmeyiniz. Şu an bir fonksiyon bileşeni birçok işlemi gerçekleştiriyorsa, daha sonra projenizdeki bir fonksiyon bileşeninin ortalama uzunluğu da daha fazla olacaktır. Bu normaldir -- hemen kodu Hook'lara ayırma ihtiyacı duymak *zorunda değilsiniz*. Fakat basit bir arayüz arkasındaki karmaşık mantığın gizlenmesini veya karmaşık bir bileşenin ayrıştırılmasına yardımcı olmasını sağlayacak yerlerde özel Hook oluşturmanızı da tavsiye ederiz.
 
-Örneğin, belirli bir amaç için yazılmış birçok yerel state içeren karmaşık bir bileşene sahip olduğunuzu düşünelim. `useState` Hook'u, state güncelleme mantığını merkezi bir hale getirmesi kolay olmayacağından dolayı, [Redux](https://redux.js.org/) reducer olarak yazmayı tercih edebilirsiniz:
+Örneğin, belirli bir amaç için yazılmış birçok yerel state içeren karmaşık bir bileşene sahip olduğunuzu düşünelim. `useState` Hook'unun, state güncelleme mantığını merkezi bir hale getirmesi kolay olmayacağından dolayı, [Redux](https://redux.js.org/) reducer olarak yazmayı tercih edebilirsiniz:
 
 ```js
 function todosReducer(state, action) {
@@ -218,9 +218,9 @@ function todosReducer(state, action) {
 }
 ```
 
-Reducer'lar, izole bir ortamda test yapmak ve karmaşık güncelleme mekanizmalarını ölçekleyerek oluşturmak için oldukça kullanışlıdır. Bu sayede bir reducer'ı gerektiğinde birden fazla küçük reducer'lara ayırabilirsiniz. Ancak, React'in yerel state'inin kullanımından keyif alıyor ve projenize harici bir kod kütüphanesini eklemek istemiyor olabilirsiniz.
+Reducer'lar, izole bir ortamda test yapmak ve karmaşık güncelleme mekanizmalarını ölçekleyerek oluşturmak için oldukça kullanışlıdır. Bu sayede bir reducer'ı gerektiğinde birden fazla küçük reducer'lara ayırabilirsiniz. Ancak, React'in yerel state'inin kullanımından keyif alıyor ve projenize harici bir kod kütüphanesini eklemek istemiyor da olabilirsiniz.
 
-Peki ya `useReducer` Hook'unu, bir reducer ile birlikte bileşenimizin `yerel` state'ini yönetecek şekilde yazarsak nasıl olur? Basitleştirilmiş versiyonu aşağıdaki gibi olacaktır: 
+Peki  `useReducer` Hook'unu, bir reducer ile birlikte bileşenimizin `yerel` state'ini yönetecek şekilde yazarsak nasıl olur? Basitleştirilmiş versiyonu aşağıdaki gibi olacaktır: 
 
 ```js
 function useReducer(reducer, initialState) {
