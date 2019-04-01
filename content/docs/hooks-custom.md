@@ -149,11 +149,11 @@ function FriendListItem(props) {
 
 **Özel Hook, izole bir state'e nasıl sahip olur?** Hook'a yapılan her çağrı, izole state'e sahip olur. Biz `useFriendStatus`'u direkt olarak çağırdığımızda, React'in bakış açısıyla `useState` ve `useEffect` hook'ları çağrılmış olur. [Daha önce](/docs/hooks-effect.html#tip-use-multiple-effects-to-separate-concerns) de [öğrendiğimiz gibi](/docs/hooks-state.html#tip-using-multiple-state-variables) bir bileşen içerisinde `useState` ve `useEffect` hook'larını istediğimiz kadar çağırabiliriz ve bunu yaptığımızda iki hook da birbirinden bağımsız olarak çalışacaktır.
 
-### Tip: Pass Information Between Hooks {#tip-pass-information-between-hooks}
+### İpucu: Bilginin Hook'lar Arasında Aktarılması {#tip-pass-information-between-hooks}
 
-Since Hooks are functions, we can pass information between them.
+Hook'lar fonksiyon oldukları için, bir bilgiyi birbirlerine aktarabiliriz. 
 
-To illustrate this, we'll use another component from our hypothetical chat example. This is a chat message recipient picker that displays whether the currently selected friend is online:
+Bunu daha iyi açıklamak için, daha önceki chat örneğimizdeki diğer bir bileşeni kullanacağız. Bu bileşen, chat mesajı için alıcı seçmeye yarar. Bu sayede seçili olarak belirtilmiş çevrimiçi arkadaşın görüntülenmesi sağlanır:
 
 ```js{8-9,13}
 const friendList = [
@@ -184,16 +184,16 @@ function ChatRecipientPicker() {
 }
 ```
 
-We keep the currently chosen friend ID in the `recipientID` state variable, and update it if the user chooses a different friend in the `<select>` picker.
+Mevcut seçili arkadaş ID'sini `recipientID` ismindeki state değşkeninde saklıyoruz ve eğer kullanıcı `<select>` seçicisinden farklı bir arkadaşı seçerse bu değişkeni güncelliyoruz.
 
-Because the `useState` Hook call gives us the latest value of the `recipientID` state variable, we can pass it to our custom `useFriendStatus` Hook as an argument:
+`useState` Hook'u, `recipientID` state değişkeninin en güncel değerini bize verdiğinden dolayı, önceden oluşturduğumuz `useFriendStatus` adındaki özel hook'a bu değeri parametre olarak geçirebiliriz: 
 
 ```js
   const [recipientID, setRecipientID] = useState(1);
   const isRecipientOnline = useFriendStatus(recipientID);
 ```
 
-This lets us know whether the *currently selected* friend is online. If we pick a different friend and update the `recipientID` state variable, our `useFriendStatus` Hook will unsubscribe from the previously selected friend, and subscribe to the status of the newly selected one.
+Bu kod, *mevcut seçili* arkadaşın çevrimiçi olup olmadığını bilmemizi sağlar. Eğer farklı bir arkadaşı seçip `recipientID` state değişkenini güncellersek, `useFriendStatus` Hook'u önceden seçili arkadaşın durumunu izlemedeki abonelikten çıkacak ve yeni seçili olan arkadaşın durumu için abone olacaktır.
 
 ## `useYourImagination()` {#useyourimagination}
 
