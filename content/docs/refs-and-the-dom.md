@@ -13,11 +13,11 @@ permalink: docs/refs-and-the-dom.html
 
 Ref'ler, render metodu içerisinde oluşturulan DOM node'larına veya React elemanlarına erişmeyi sağlar.
 
-React'ın tipik veri akışında, [prop'lar](/docs/components-and-props.html) üst bileşenlerin alt bileşenleri ile etkileşime geçmelerinin tek yoludur. Bir alt bileşeni düzenlemek için, onu yeni prop'lar ile yeniden render ederiz. Fakat, birkaç senaryo vardır ki bir alt bileşeni tipik veri akışının dışında mecburi olarak düzenlememiz gerekebilir. Düzenlenecek olan bir alt bileşen, bir React bileşeni'nin nesnesi veya bir DOM elemanı olabilir. Her iki durum içinde, React bir kaçış yolu sağlar.
+React'ın tipik veri akışında, [prop'lar](/docs/components-and-props.html) üst bileşenlerin alt bileşenleri ile etkileşime geçmelerinin tek yoludur. Bir alt bileşeni düzenlemek için, onu yeni prop'lar ile yeniden render edersiniz. Fakat, birkaç senaryo vardır ki bir alt bileşeni tipik veri akışının dışında mecburi olarak düzenlemeniz gerekebilir. Düzenlenecek olan bir alt bileşen, bir React bileşeni'nin nesnesi veya bir DOM elemanı olabilir. Her iki durum içinde, React bir çıkış yolu sağlar.
 
-### Ref'ler Ne zaman kullanılmalıdır {#when-to-use-refs}
+### Ref'ler Ne Zaman Kullanılmalıdır {#when-to-use-refs}
 
-There are a few good use cases for refs:
+Ref'leri kullanmak için birkaç iyi kullanım senaryosu bulunmaktadır:
 
 * Managing focus, text selection, or media playback.
 * Triggering imperative animations.
@@ -25,19 +25,19 @@ There are a few good use cases for refs:
 
 Avoid using refs for anything that can be done declaratively.
 
-For example, instead of exposing `open()` and `close()` methods on a `Dialog` component, pass an `isOpen` prop to it.
+Örneğin, bir `Dialog` bileşen'i için `open()` ve `close()` metodlarını kullanmak yerine, `isOpen` prop'unu `Dialog`'a atayabilirsiniz.
 
-### Don't Overuse Refs {#dont-overuse-refs}
+### Ref'leri fazla kullanmayın {#dont-overuse-refs}
 
-Your first inclination may be to use refs to "make things happen" in your app. If this is the case, take a moment and think more critically about where state should be owned in the component hierarchy. Often, it becomes clear that the proper place to "own" that state is at a higher level in the hierarchy. See the [Lifting State Up](/docs/lifting-state-up.html) guide for examples of this.
+Ref'leri kullanmakta ki ilk eğiliminiz uygulamanızda ki bazı şeyleri gerçekleştirmek için olabilir. Eğer durum bu ise, biraz durun ve state'in bileşen hiyerarşisinde nerede tutulması gerektiği hakkında biraz daha eleştirel düşünün. Bunun ile ilgili örnekler için [State'i yukarı taşıma](/docs/lifting-state-up.html) rehberini inceleyebilirsiniz.
 
-> Note
+> Not
 >
-> The examples below have been updated to use the `React.createRef()` API introduced in React 16.3. If you are using an earlier release of React, we recommend using [callback refs](#callback-refs) instead.
+> Aşağıdaki örnekler React 16.3 ile gelen `React.createRef()` API'sini kullanabilmek için güncellenmiştir. React'ın erken sürümlerini kullanıyorsanız eğer, [callback ref'leri](#callback-refs) kullanmanızı tavsiye ederiz.
 
-### Creating Refs {#creating-refs}
+### Ref'ler Oluşturma {#creating-refs}
 
-Refs are created using `React.createRef()` and attached to React elements via the `ref` attribute. Refs are commonly assigned to an instance property when a component is constructed so they can be referenced throughout the component.
+Ref'ler, `React.createRef()` kullanılarak oluşturulur ve React elemanlarına `ref` özelliğini kullanarak eklenir. Ref'ler genellikle bir bileşen oluşturulduğunda, bir nesnenin özelliğine atanır. Böylelikle refler bileşen boyunca referans alınabilir.
 
 ```javascript{4,7}
 class MyComponent extends React.Component {
