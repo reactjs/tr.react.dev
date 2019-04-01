@@ -195,13 +195,13 @@ Mevcut seçili arkadaş ID'sini `recipientID` ismindeki state değşkeninde sakl
 
 Bu kod, *mevcut seçili* arkadaşın çevrimiçi olup olmadığını bilmemizi sağlar. Eğer farklı bir arkadaşı seçip `recipientID` state değişkenini güncellersek, `useFriendStatus` Hook'u önceden seçili arkadaşın durumunu izlemedeki abonelikten çıkacak ve yeni seçili olan arkadaşın durumu için abone olacaktır.
 
-## `useYourImagination()` {#useyourimagination}
+## `useHayalGücü()` {#useyourimagination}
 
-Custom Hooks offer the flexibility of sharing logic that wasn't possible in React components before. You can write custom Hooks that cover a wide range of use cases like form handling, animation, declarative subscriptions, timers, and probably many more we haven't considered. What's more, you can build Hooks that are just as easy to use as React's built-in features.
+Daha önce React bileşenlerinde mümkün olmayan paylaşım esnekliğini özel Hook'lar sunmaktadır. Aklınıza gelebilecek bir çok kullanım durumu için özel Hook'lar oluşturabilirsiniz. Bu kullanım durumlarına örnek verecek olursak: form işleme, animasyon, abonelikler, zamanlayıcılar ve şu an aklımıza gelmeyen daha bir çok şey. React'in beraberinde gelen özellikleri kadar kullanımı kolay olacak biçimde kendi Hook'unuzu oluşturabilirsiniz. 
 
-Try to resist adding abstraction too early. Now that function components can do more, it's likely that the average function component in your codebase will become longer. This is normal -- don't feel like you *have to* immediately split it into Hooks. But we also encourage you to start spotting cases where a custom Hook could hide complex logic behind a simple interface, or help untangle a messy component.
+Erken aşamalarda hemen soyutlamaya gitmeyiniz. Şu an bir fonksiyon bileşeni birçok işlemi gerçekleştiriyorsa, daha sonra projenizdeki bir fonksiyon bileşeninin ortalama uzunluğu da daha fazla olacaktır. Bu normaldir -- hemen kodu Hook'lara ayırma ihtiyacı duymak *zorunda değilsiniz*. Fakat basit bir arayüz arkasındaki karmaşık mantığın gizlenmesini veya karmaşık bir bileşenin ayrıştırılmasına yardımcı olmasını sağlayacak yerlerde özel Hook oluşturmanızı da tavsiye ederiz.
 
-For example, maybe you have a complex component that contains a lot of local state that is managed in an ad-hoc way. `useState` doesn't make centralizing the update logic any easier so might you prefer to write it as a [Redux](https://redux.js.org/) reducer:
+Örneğin, belirli bir amaç için yazılmış birçok yerel state içeren karmaşık bir bileşene sahip olduğunuzu düşünelim. `useState` Hook'u, state güncelleme mantığını merkezi bir hale getirmesi kolay olmayacağından dolayı, [Redux](https://redux.js.org/) reducer olarak yazmayı tercih edebilirsiniz:
 
 ```js
 function todosReducer(state, action) {
@@ -218,9 +218,9 @@ function todosReducer(state, action) {
 }
 ```
 
-Reducers are very convenient to test in isolation, and scale to express complex update logic. You can further break them apart into smaller reducers if necessary. However, you might also enjoy the benefits of using React local state, or might not want to install another library.
+Reducer'lar, izole bir ortamda test yapmak ve karmaşık güncelleme mekanizmalarını ölçekleyerek oluşturmak için oldukça kullanışlıdır. Bu sayede bir reducer'ı gerektiğinde birden fazla küçük reducer'lara ayırabilirsiniz. Ancak, React'in yerel state'inin kullanımından keyif alıyor ve projenize harici bir kod kütüphanesini eklemek istemiyor olabilirsiniz.
 
-So what if we could write a `useReducer` Hook that lets us manage the *local* state of our component with a reducer? A simplified version of it might look like this:
+Peki ya `useReducer` Hook'unu, bir reducer ile birlikte bileşenimizin `yerel` state'ini yönetecek şekilde yazarsak nasıl olur? Basitleştirilmiş versiyonu aşağıdaki gibi olacaktır: 
 
 ```js
 function useReducer(reducer, initialState) {
@@ -235,7 +235,7 @@ function useReducer(reducer, initialState) {
 }
 ```
 
-Now we could use it in our component, and let the reducer drive its state management:
+Artık oluşturduğumuz Hook'u bileşenimizde kullanabilir, ve reducer'ın state yönetiminde dümene geçmesini sağlayabiliriz:
 
 ```js{2}
 function Todos() {
@@ -249,4 +249,4 @@ function Todos() {
 }
 ```
 
-The need to manage local state with a reducer in a complex component is common enough that we've built the `useReducer` Hook right into React. You'll find it together with other built-in Hooks in the [Hooks API reference](/docs/hooks-reference.html).
+Karmaşık bir bileşende, reducer ile yerel state'in yönetim ihtiyacı oldukça yaygındır. Bu nedenle React'e, `useReducer` Hook'unu varsayılan olarak ekledik. Bunun gibi varsayılan olarak gelen diğer Hook'lar hakkında bilgi için [Hooks API başvuru dokümanını](/docs/hooks-reference.html) inceleyebilirsiniz.
