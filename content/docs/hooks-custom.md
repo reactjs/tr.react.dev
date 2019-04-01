@@ -112,11 +112,11 @@ function useFriendStatus(friendID) {
 
 Şimdi özel Hook'umuzu nasıl kullanacağımıza geçelim.
 
-## Using a Custom Hook {#using-a-custom-hook}
+## Özel Hook'un Kullanımı {#using-a-custom-hook}
 
-In the beginning, our stated goal was to remove the duplicated logic from the `FriendStatus` and `FriendListItem` components. Both of them want to know whether a friend is online.
+Başlangıçtaki amacımız, `FriendStatus` ve `FriendListItem` bileşenlerindeki mükerrer kod mantığını genel bir hale getirmek idi. Çünkü iki bileşen de bir arkadaşın çevrimiçi olma durumundan haberdar olması gerekiyordu.
 
-Now that we've extracted this logic to a `useFriendStatus` hook, we can *just use it:*
+Bu kod mantığını iki bileşenden çıkararak `useFriendStatus` hook'unu oluşturduk. Artık aşağıdaki gibi kullanabiliriz: 
 
 ```js{2}
 function FriendStatus(props) {
@@ -141,13 +141,13 @@ function FriendListItem(props) {
 }
 ```
 
-**Is this code equivalent to the original examples?** Yes, it works in exactly the same way. If you look closely, you'll notice we didn't make any changes to the behavior. All we did was to extract some common code between two functions into a separate function. **Custom Hooks are a convention that naturally follows from the design of Hooks, rather than a React feature.**
+**Bu kod orijinal örneklerdeki ile aynı şekilde çalışır mı?** diye soracak olursanız, evet tam olarak aynı şekilde çalışacağını söyleyebiliriz. Eğer yakından bakarsanız, kod mantığı üzerinde hiçbir değişiklik yapmadığımızı göreceksiniz. Yaptığımız tek şey, iki fonksiyonda da olan kodu, ayrı bir fonksiyona taşımak oldu. **Bu nedenle özel Hook'lar, bir React özelliğinden ziyade, Hook'lardaki tasarımsal mantığı takip ederek oluşturulurlar.**
 
-**Do I have to name my custom Hooks starting with “`use`”?** Please do. This convention is very important. Without it, we wouldn't be able to automatically check for violations of [rules of Hooks](/docs/hooks-rules.html) because we couldn't tell if a certain function contains calls to Hooks inside of it.
+**Peki ya "`use`" ön eki kullanarak özel Hook'larımı isimlendirmek zorunda mıyım?** Zorunda değilsiniz fakat lütfen bu şekilde isimlendiriniz. Eğer böyle yapmazsanız, [Hooks kurallarının](/docs/hooks-rules.html) ihlalini otomatik olarak kontrol edemeyiz. Çünkü hangi fonksiyonun kendi içerisinde Hook'lara çağrı yaptığını bilemeyiz. 
 
-**Do two components using the same Hook share state?** No. Custom Hooks are a mechanism to reuse *stateful logic* (such as setting up a subscription and remembering the current value), but every time you use a custom Hook, all state and effects inside of it are fully isolated.
+**Aynı Hook'u kullanan iki bileşen, birbirleri arasında state'i de paylaşır mı?** Hayır. Özel Hook'lar, *state'li mantığı* (örneğin, bir abonelik oluşturmak ve bu aboneliğin değerini barındırmak gibi işlemleri) tekrar kullanmak için bir mekanizmadır. Fakat her defasında özel bir Hook kullandığınızda, state ve içerisindeki etkileri tamamen bileşenden izole edilmiştir.
 
-**How does a custom Hook get isolated state?** Each *call* to a Hook gets isolated state. Because we call `useFriendStatus` directly, from React's point of view our component just calls `useState` and `useEffect`. And as we [learned](/docs/hooks-state.html#tip-using-multiple-state-variables) [earlier](/docs/hooks-effect.html#tip-use-multiple-effects-to-separate-concerns), we can call `useState` and `useEffect` many times in one component, and they will be completely independent.
+**Özel Hook, izole bir state'e nasıl sahip olur?** Hook'a yapılan her çağrı, izole state'e sahip olur. Biz `useFriendStatus`'u direkt olarak çağırdığımızda, React'in bakış açısıyla `useState` ve `useEffect` hook'ları çağrılmış olur. [Daha önce](/docs/hooks-effect.html#tip-use-multiple-effects-to-separate-concerns) de [öğrendiğimiz gibi](/docs/hooks-state.html#tip-using-multiple-state-variables) bir bileşen içerisinde `useState` ve `useEffect` hook'larını istediğimiz kadar çağırabiliriz ve bunu yaptığımızda iki hook da birbirinden bağımsız olarak çalışacaktır.
 
 ### Tip: Pass Information Between Hooks {#tip-pass-information-between-hooks}
 
