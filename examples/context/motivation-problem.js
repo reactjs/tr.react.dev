@@ -6,10 +6,10 @@ class App extends React.Component {
 
 function Toolbar(props) {
   // highlight-range{1-4,7}
-  // Toolbar bileşeni fazladan "theme" prop almak zorundadır
-  // ve onu ThemedButton'a geçirmek zorundadır. Bu biraz zahmetli olabilir
-  // eğer uygulamadaki her button theme'yi bilmek zorunda ise zahmetli olabilir
-  // çünkü o tüm bileşenler üzerinden geçirimek zorunda kalır.
+  // Toolbar bileşeni fazladan "theme" prop'u almak zorunda 
+  // ve onu ThemedButton'a geçirmek zorundadır. 
+  // Uygulamadaki her Button theme prop'unu bilmesi gerekiyor ve onu
+  // tüm bileşenlerden geçirmek zorunda kalıyorsa bu işlem biraz zahmetli olabilir.
   return (
     <div>
       <ThemedButton theme={props.theme} />

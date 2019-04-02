@@ -20,8 +20,8 @@ Klasik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağ
   - [Dinamik Context](#dynamic-context)
   - [İç içe geçmiş bileşenden Context güncelleme](#updating-context-from-a-nested-component)
   - [Çoklu Context'leri kullanma](#consuming-multiple-contexts)
-- [Caveats](#caveats)
-- [Legacy API](#legacy-api)
+- [Uyarılar](#caveats)
+- [Eski Sürüm API](#legacy-api)
 
 ## Context ne zaman kullanılır {#when-to-use-context}
 
@@ -68,13 +68,13 @@ function Page(props) {
   return <PageLayout userLink={userLink} />;
 }
 
-// Now, we have:
+// Şimdi, Bizde olan:
 <Page user={user} avatarSize={avatarSize} />
-// ... which renders ...
+// ... render eden ...
 <PageLayout userLink={...} />
-// ... which renders ...
+// ... render eden ...
 <NavigationBar userLink={...} />
-// ... which renders ...
+// ... render eden ...
 {props.userLink}
 ```
 
@@ -123,20 +123,22 @@ Bir Context objesi yaratır. React bu Context objesine bağlanan bir bileşen ol
 ### `Context.Provider` {#contextprovider}
 
 ```js
-<MyContext.Provider value={/* some value */}>
+<MyContext.Provider value={/* bazı değer */}>
 ```
 
 Her Context objesi dağıtıcı bileşenlerin context değişliklerine bağlı olmalarına sağlayan bir React Provider bileşeni ile birlikte gelir.
 
-Bu Provider'ın devamından(soyundan) gelen dağıtıcı bileşenlere geçirilecek bir prop `değerini` kabul eder. Bir Provider, birçok dağıtıcıya bağlanabilir. Provider'lar ağacın derinliklerinde değerleri geçersiz kılmak için iç içe geçebilir.
+Bu Provider'ın devamından(soyundan) gelen dağıtıcı bileşenlere geçirilecek bir prop `değerini` kabul eder. Bir Provider, birçok dağıtıcıya bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
-Bir Provider'ın soyundan(devamından) gelen tüm dağıtıcılar, Provider'ın değeri prop değiştiğinde yeniden oluşturulur. Provider'ın devamından(soyundan) gelen dağıtıcılara yayılma, `shouldComponentUpdate` fonksiyonuna bağlı değildir, bu nedenle bir dağıtıcı bileşeni güncellemeden düştüğünde bile dağıtıcı güncellenir.
+Bir Provider'ın soyundan(devamından) gelen tüm dağıtıcılar, Provider'ın değeri prop değiştiğinde yeniden oluşturur. Provider'ın devamından(soyundan) gelen dağıtıcılara yayılma, `shouldComponentUpdate` fonksiyonuna bağlı değildir, bu nedenle bir dağıtıcı bileşeni güncellemeden düştüğünde bile dağıtıcı güncellenir.
 
-[`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) ile aynı algoritmayı kullanarak yeni ve eski değerler karşılaştırarak değişiklikler belirlenir.
+Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın prop değeri her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` fonksiyonuna tabi değildir, dolayısıyla bir ana bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
+
+[`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) gibi aynı algoritmayı kullanarak yeni ve eski değerleri karşılaştırarak değişiklikler belirlenir.
 
 > Not
 >
-> Değişimlerin belirlenme şekli, nesneleri `değer` olarak geçirirken bazı sorunlara neden olabilir: [Uyarılara](#caveats) bakınız.
+> Değişimlerin belirlenme şekli, nesneleri `değer` olarak geçirirken bazı sorunlara neden olabilir: bakınız [Uyarılar](#caveats).
 
 ### `Class.contextType` {#classcontexttype}
 
@@ -144,7 +146,7 @@ Bir Provider'ın soyundan(devamından) gelen tüm dağıtıcılar, Provider'ın 
 class MyClass extends React.Component {
   componentDidMount() {
     let value = this.context;
-    /* perform a side-effect at mount using the value of MyContext */
+    /* Mycontext değerini kullanarak mount'da yan etki yapma */
   }
   componentDidUpdate() {
     let value = this.context;
@@ -156,21 +158,19 @@ class MyClass extends React.Component {
   }
   render() {
     let value = this.context;
-    /* render something based on the value of MyContext */
+    /* Mycontext değerini esas alarak bir şey oluşturma */
   }
 }
 MyClass.contextType = MyContext;
 ```
 
-The `contextType` property on a class can be assigned a Context object created by [`React.createContext()`](#reactcreatecontext). This lets you consume the nearest current value of that Context type using `this.context`. You can reference this in any of the lifecycle methods including the render function.
-
-Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafıdan oluşturulan bir Context nesnesi atanabilir. Bu `this.context'i` kullanarak bu Context türünün en yakın o anki değerine dağıtmanıza olanak sağlar. Bu render işlevi de dahil olmak üzere yaşam döngüsü yöntemlerinden herhangi birinde başvuruda bulunabilir. 
+Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu `this.context'i` kullanarak bu Context türünün en yakın mevcut değerini dağıtmanıza olanak sağlar. Bu render işlevi de dahil olmak üzere yaşam döngüsü yöntemlerinden herhangi birinde başvuruda bulunabilirsiniz. 
 
 > Not:
 >
-> Bu API'yi kullanarak yalnızca tek bir içeriğe abone olabilirsiniz. Birden fazla okumanız gerekiyorsa, bakınız [Çoklu Context Dağıtımı](#consuming-multiple-contexts).
+> Bu API'yi kullanarak yalnızca tek bir içeriğe abone olabilirsiniz. Daha fazla okumanız gerekiyorsa, bakınız [Çoklu Context Dağıtımı](#consuming-multiple-contexts).
 >
-> Deneysel olarak [açık sınıf alanları sözdizimini](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
+> Deneysel [açık sınıf alanları sözdizimini](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
 
 
 ```js
@@ -178,7 +178,7 @@ class MyClass extends React.Component {
   static contextType = MyContext;
   render() {
     let value = this.context;
-    /* render something based on the value */
+    /* value'ya bağlı bir şey yapmak. */
   }
 }
 ```
@@ -187,7 +187,7 @@ class MyClass extends React.Component {
 
 ```js
 <MyContext.Consumer>
-  {value => /* render something based on the context value */}
+  {value => /* context değerine göre bir şey oluşturma */}
 </MyContext.Consumer>
 ```
 
@@ -246,7 +246,7 @@ Bunu aşmak için, değeri üst eleman'ın state'ine getirin:
 
 `embed:context/reference-caveats-solution.js`
 
-## Legacy API {#legacy-api}
+## Eski Sürüm API {#legacy-api}
 
 > Not
 > 
