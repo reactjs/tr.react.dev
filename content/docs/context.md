@@ -4,9 +4,9 @@ title: Context
 permalink: docs/context.html
 ---
 
-Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen ağacı üzerinden veriye ulaşmayı sağlar.
+Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen ağacı üzerinden veri iletmenin bir yolunu sağlar.
 
-Klasik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; mahal tercihi, UI tema) için kullanışsız olabilir. Context, bileşenler arasında ağacın her seviyesi üzerinden doğrudan bir prop'a geçiş yapmadan veri paylaşımı sağlar.
+Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
 
 
 - [Context ne zaman kullanılır](#when-to-use-context)
@@ -18,28 +18,28 @@ Klasik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağ
   - [Context.Consumer](#contextconsumer)
 - [Örnekler](#examples)
   - [Dinamik Context](#dynamic-context)
-  - [İç içe geçmiş bileşenden Context güncelleme](#updating-context-from-a-nested-component)
-  - [Çoklu Context'leri kullanma](#consuming-multiple-contexts)
+  - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
+  - [Çoklu Context'leri Kullanma](#consuming-multiple-contexts)
 - [Uyarılar](#caveats)
 - [Eski Sürüm API](#legacy-api)
 
-## Context ne zaman kullanılır {#when-to-use-context}
+## Context Ne Zaman Kullanılır {#when-to-use-context}
 
-Context mevcut kullanıcı doğrulama, tema veya dil seçimi gibi React bileşen ağacında global olarak düşünülebilecek verileri paylaşmak için tasarlanmıştır. Örneğin aşağıdaki kodda Button bileşenine stil vermek için manuel olarak bir "tema" prop'unu geçiyoruz.
+Context mevcut kullanıcı doğrulama, tema veya dil seçimi gibi React bileşen ağacında global olarak düşünülebilecek verileri paylaşmak için tasarlanmıştır. Örneğin aşağıdaki kodda Button bileşenine stil vermek için manuel olarak bir "theme" prop'unu geçiyoruz.
 
 `embed:context/motivation-problem.js`
 
-Context kullanarak ara elementler üzerinden prop'ları geçmekten kaçınabiliriz.
+Context kullanarak, prop'ları ara öğelerden geçirmekten kaçınabiliriz.
 
 `embed:context/motivation-solution.js`
 
 ## Context Kullanmadan Önce {#before-you-use-context}
 
-Context öncelikle bazı verilere farklı seviyedeki iç içe geçmiş *birçok* bileşen tarafından erişilmesi gerektiğinde kullanılır. Bileşenin yeniden kullanımını daha zor kıldığı için onu tedbirli bir şekilde uygulayın.
+Context esas olarak bazı verilere farklı düzeylerdeki iç içe geçmiş *birçok* bileşen tarafından erişilebilir olması gerektiğinde kullanılır. Bileşenin yeniden kullanımını zorlaştırdığından onu ölçülü bir şekilde uygulayın.
 
-**Eğer sadece bazı prop'ları birçok seviye üzerinden geçmekten kaçınmak isterseniz, [bileşen kompozisyonu](/docs/composition-vs-inheritance.html) genellikle Context'ten daha basit bir çözümdür.**
+**Yanlızca bazı prop'ları birçok aşama üzerinden geçmek istemezseniz, [bileşen kompozisyonu](/docs/composition-vs-inheritance.html) genellikle Context'ten daha basit bir çözümdür.**
 
-Örneğin, iç içe geçmiş `Link` ve `Avatar` bileşenlerinin okuyabilmesi için `avatarSize` ve `user` prop'larını birkaç seviye aşağıya aktaran bir `Sayfa` bileşeni düşünün:
+Örneğin, derinlemesine iç içe geçmiş `Link` ve `Avatar` bileşenlerinin okuyabilmesi için `avatarSize` ve `user` prop'larını birkaç seviye aşağıya aktaran bir `Page` bileşeni düşünün:
 
 ```js
 <Page user={user} avatarSize={avatarSize} />
