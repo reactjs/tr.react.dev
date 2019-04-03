@@ -6,9 +6,9 @@ next: hooks-rules.html
 prev: hooks-state.html
 ---
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
+Hook'lar React'e 16.8 versiyonu ile henüz yeni eklenmişlerdir. Hook'lar sayesinde state ve diğer React özelliklerini bir sınıf oluşturmadan kullanabilirsiniz.
 
-The *Effect Hook* lets you perform side effects in function components:
+*Effect Hook*'u, fonksiyon bileşenlerinde yan etkili (side effect) işlemleri gerçekleştirebilmenizi sağlar:
 
 ```js{1,6-10}
 import React, { useState, useEffect } from 'react';
@@ -16,9 +16,9 @@ import React, { useState, useEffect } from 'react';
 function Example() {
   const [count, setCount] = useState(0);
 
-  // Similar to componentDidMount and componentDidUpdate:
+  // componentDidMount ve componentDidUpdate'e benzer:
   useEffect(() => {
-    // Update the document title using the browser API
+    // Tarayıcı API'si kullanarak doküman başlığının güncellenmesi
     document.title = `You clicked ${count} times`;
   });
 
@@ -33,15 +33,15 @@ function Example() {
 }
 ```
 
-This snippet is based on the [counter example from the previous page](/docs/hooks-state.html), but we added a new feature to it: we set the document title to a custom message including the number of clicks.
+Bu kodu [önceki sayfada yer alan sayaç örneğinden](/docs/hooks-state.html) baz alarak oluşturduk. fakat yeni bir özellik de ekledik. Artık doküman başlığında, tıklama sayısını içeren özel bir mesaj görüntülenebiliyor.
 
-Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. Whether or not you're used to calling these operations "side effects" (or just "effects"), you've likely performed them in your components before.
+Veri çekme, abonelik oluşturma, ve React bileşenlerinin elle direkt olarak DOM'u değiştirmesi gibi işlemler yan etkilere örnek olarak verilebilir. Bu işlemlerin türünün yan etki (side effect) olduğunu bilmiyor olabilirsiniz. Fakat daha önceden React ile proje geliştirdiyseniz bu işlemleri büyük ihtimalle kullanmışsınızdır.
 
->Tip
+>İpucu
 >
->If you're familiar with React class lifecycle methods, you can think of `useEffect` Hook as `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` combined.
+>Eğer React sınıflarının yaşam döngüsü metotlarına aşinaysanız, `useEffect` Hook'unu `componentDidMount`, `componentDidUpdate`, ve `componentWillUnmount` metotlarının birleşimi olarak düşünebilirsiniz.
 
-There are two common kinds of side effects in React components: those that don't require cleanup, and those that do. Let's look at this distinction in more detail.
+React bileşenlerinde iki adet yan etki türü bulunmaktadır. Bu türlerden birinde yan etki sonrası ilgili değişkenlerin temizliği gerekirken, diğer türde böyle bir gereksinim olmaz. Şimdi bu ayrıma daha detaylı bir şekilde değinelim.
 
 ## Effects Without Cleanup {#effects-without-cleanup}
 
