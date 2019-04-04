@@ -291,7 +291,7 @@ setTimeout(function() {
 
 ## Kontrollü Bileşenlere Alternatifler {#alternatives-to-controlled-components}
 
-Kontrollü bileşenleri kullanmak bazen sıkıcı olabilir, çünkü verilerinizin bir React bileşeniyle tüm giriş durumunu değiştirebilmesi ve yayınlayabilmesi için bir olay işleyicisi yazmanız gerekir. Bu, önceden var olan bir kod tabanını React'e dönüştürürken veya bir React uygulamasını React olmayan bir kütüphaneyle birleştirirken özellikle can sıkıcı olabilir. Bu durumlarda, giriş formlarını uygulamak için alternatif bir teknik olan [kontrolsüz bileşenler](/docs/kontrolsüz-components.html) 'i kontrol etmek isteyebilirsiniz.
+Kontrollü bileşenleri kullanmak bazen sıkıcı olabilir, çünkü verilerinizin bir React bileşeniyle tüm giriş durumunu değiştirebilmesi ve yayınlayabilmesi için bir olay işleyicisi yazmanız gerekir. Bu, önceden var olan bir kod tabanını React'e dönüştürürken veya bir React uygulamasını React olmayan bir kütüphaneyle birleştirirken özellikle can sıkıcı olabilir. Bu durumlarda, giriş formlarını uygulamak için alternatif bir teknik olan [kontrolsüz bileşenler](/docs/uncontrolled-components.html) 'i kontrol etmek isteyebilirsiniz.
 
 ## Tam Teşekküllü Çözümler {#fully-fledged-solutions}
 
