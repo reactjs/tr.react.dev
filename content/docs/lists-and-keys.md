@@ -18,13 +18,13 @@ console.log(doubled);
 
 Bu kod konsol ekranına `[2, 4, 6, 8, 10]` yazdırır.
 
-React'te, dizileri [öğe](/docs/rendering-elements.html) listelerine dönüştürmek de neredeyse aynıdır.
+React'te, dizileri [element](/docs/rendering-elements.html) listelerine dönüştürmek de neredeyse aynıdır.
 
 ### Çoklu Bileşenleri Render Etmek {#rendering-multiple-components}
 
-Öğelerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
+Elementlerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
 
-Aşağıda, Javascript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir öğe için bir `<li>` elemanı dönüyoruz. Son olarak da, ortaya çıkan diziyi `listItems` a atıyoruz:
+Aşağıda, Javascript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir element için bir `<li>` elemanı dönüyoruz. Son olarak da, ortaya çıkan diziyi `listItems` a atıyoruz:
 
 ```javascript{2-4}
 const numbers = [1, 2, 3, 4, 5];
@@ -42,7 +42,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
 
 Bu kod, 1 ile 5 arasındaki sayıların madde işaretli listesini görüntüler.
 
@@ -70,9 +70,9 @@ ReactDOM.render(
 );
 ```
 
-Bu kodu çalıştırdığınızda, liste öğeleri için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar", öğe listeleri oluştururken eklemeniz gereken özel bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde tartışacağız.
+Bu kodu çalıştırdığınızda, liste elemanları için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar", öğe listeleri oluştururken eklemeniz gereken bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde inceleyeceğiz.
 
-`numbers.map()` içindeki liste öğelerine birer `anahtar` atayalım ve eksik anahtar sorununu düzeltelim:
+`numbers.map()` içindeki liste elemanlarına birer `anahtar` atayalım ve eksik anahtar sorununu düzeltelim:
 
 ```javascript{4}
 function NumberList(props) {
@@ -94,7 +94,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
 
 ## Anahtarlar {#keys}
 
@@ -207,7 +207,7 @@ Temel bir kural da `map()` çağrısının içindeki elemanların anahtarlara ih
 
 ### Anahtarlar Sadece Kardeşler Arasında Benzersiz Olmalıdır {#keys-must-only-be-unique-among-siblings}
 
-Dizilerde kullanılan anahtarlar kardeşleri arasında benzersiz olmalıdır. Ancak, küresel olarak benzersiz olmaları gerekmez. İki farklı dizi ürettiğimizde aynı anahtarları kullanabiliriz:
+Dizilerde kullanılan anahtarlar kardeşleri arasında benzersiz olmalıdır. Ancak, küresel olarak (uygulama genelinde) benzersiz olmaları gerekmez. İki farklı dizi ürettiğimizde aynı anahtarları kullanabiliriz:
 
 ```js{2,5,11,12,19,21}
 function Blog(props) {
