@@ -55,7 +55,7 @@ function tick() {
 setInterval(tick, 1000);
 ```
 
-[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
+[**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 
 Güzel görünüyor ancak bu aşamada kritik bir gereksinimi atladık: `Clock`'un kendi zamanlayıcısını ayarlaması, ve her saniye kullanıcı arayüzünü güncellemesi işini kendi bünyesinde gerçekleştirmesi gerekiyordu.
 
@@ -101,7 +101,7 @@ class Clock extends React.Component {
 }
 ```
 
-[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/zKRGpo?editors=0010)
+[**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/zKRGpo?editors=0010)
 
 Önceden fonksiyon bileşeni olan `Clock`, artık bir sınıf bileşeni haline gelmiş oldu.
 
@@ -300,7 +300,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/amqdNA?editors=0010)
+[**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/amqdNA?editors=0010)
 
 Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
@@ -435,7 +435,7 @@ function FormattedDate(props) {
 }
 ```
 
-[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/zKRqNB?editors=0010)
+[**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/zKRqNB?editors=0010)
 
 Bu olaya genellikle **yukarıdan-aşağıya** veya **tek yönlü** veri akışı denir. Her state, belirli bir bileşen tarafından tutulur. Bu bileşenden türetilen herhangi bir veri veya kullanıcı arayüzü, yalnızca bu bileşenin altındaki bileşen ağacına etki edebilir.
 
@@ -460,7 +460,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/vXdGmd?editors=0010)
+[**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/vXdGmd?editors=0010)
 
 Bu örnekte yer alan her bir `Clock` bileşeni, kendi zamanlayıcısını oluşturup, birbirinden bağımsız bir şekilde güncellemektedir.
 
