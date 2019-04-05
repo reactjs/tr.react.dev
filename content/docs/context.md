@@ -43,19 +43,19 @@ Context esas olarak bazı verilere farklı düzeylerdeki iç içe geçmiş *bir�
 
 ```js
 <Page user={user} avatarSize={avatarSize} />
-// ... which renders ...
+// ... render eden ...
 <PageLayout user={user} avatarSize={avatarSize} />
-// ... which renders ...
+// ... render eden ...
 <NavigationBar user={user} avatarSize={avatarSize} />
-// ... which renders ...
+// ... render eden ...
 <Link href={user.permalink}>
   <Avatar user={user} size={avatarSize} />
 </Link>
 ```
 
-Sadece `Avatar` bileşeni ihtiyaç duyarsa, `user` ve `avatarSize` prop'larını birçok seviye üzerinden geçmek gereksiz hissettirebilir. `Avatar` bileşeni ne zamanki üstten daha fazla prop'lara ihtiyaç duyar, bu prop'ları ara seviyelerde de eklemeniz gerekir.
+Sonunda sadece `Avatar` bileşeni ihtiyaç duyuyorsa, `user` ve `avatarSize` 'ın birçok seviyeden geçmesi gereksiz olabilir. Ayrıca `Avatar` bileşeni yukarıdan daha fazla prop'a ihtiyaç duyduğunda, bu prop'ları tüm ara seviyelerde de eklemeniz gerekir.
 
-Bu sorunu **Context'siz** çözmenin yolu [Avatar bileşenin kendisini aşağıya çekmesidir](/docs/composition-vs-inheritance.html#containment), böylece ara bileşenlerin `user` ve `avatarSize` prop'larını bilmesine gerek kalmaz:
+Bu sorunu **Context'siz** çözmenin bir yolu [Avatar bileşeninin kendisinin prop olarak geçilmesidir](/docs/composition-vs-inheritance.html#containment), böylece ara bileşenlerin `user` ve `avatarSize` prop'ları hakkında bilgi sahibi olması gerekmez:
 
 ```js
 function Page(props) {
@@ -78,11 +78,11 @@ function Page(props) {
 {props.userLink}
 ```
 
-Bu değişiklikle sadece en üstteki Page bileşeni `Link` ve `Avatar` bileşenlerinin `user` ve `avatarSize` prop'larını geçmesini bilmelidir.
+Bu değişiklikle birlikte sadece en üstteki Page bileşeni `Link` ve `Avatar` bileşenlerinin `user` ve `avatarSize` kullanımını bilmesi gerekir.
 
-Bu *kontrolün tersine çevrilmesi*, birçok durumda uygulamanızda geçirmeniz gereken prop'ların miktarını azaltarak ve kök bileşenlere daha fazla kontrol vererek kodunuzu daha temiz hale getirebilir. Ancak bu her durumda doğru bir seçim değildir: ağaçta yukarıya daha fazla karmaşıklık taşımak, daha üst düzey bileşenleri daha karmaşık hale getirir ve daha düşük düzeydeki bileşenleri istediğinizden daha esnek olmaya zorlar.
+Bu *kontrolün tersine çevrilmesi*, birçok durumda uygulamanızdan geçirmeniz gereken prop'ların sayısını azaltarak ve kök bileşenlere daha fazla kontrol sağlayarak kodunuzu daha temiz hale getirebilir. Fakat bu her durumda doğru bir seçim değildir: ağaçta daha fazla karmaşıklık taşımak, daha üst seviyeli bileşenleri daha karmaşık hale getirir ve daha düşük seviyeli bileşenleri istediğinizden daha esnek olmaya zorlar.
 
-Bir bileşen için sadece tek bir alt elemanla sınırlı değilsiniz. [Burada belirtildiği gibi](/docs/composition-vs-inheritance.html#containment), alt elemanlar için birden çok alt eleman geçilebilir, hatta alt bileşenler için birden fazla ayrı "slots'a" sahip olabilirsiniz.
+Bir bileşen için tek bir alt elemanla sınırlı değilsiniz. [Burada belirtildiği gibi](/docs/composition-vs-inheritance.html#containment), alt elemanlar için birden çok alt eleman geçirebilirsiniz, hatta alt bileşenler için birden fazla ayrı "slots'a" sahip olabilirsiniz.
 
 ```js
 function Page(props) {
@@ -104,9 +104,9 @@ function Page(props) {
 }
 ```
 
-Bu patern, bir alt elemanı mevcut elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
+Bu patern, bir alt elemanı üst elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
 
-Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı seviyedeki bileşenlerde erişebilir olması gerekir. Context, bu tür verileri "yayınlamanıza" izin verir ve tüm alt bileşenlerdeki datayı değiştirir. Context'in kullanıldığı yaygın örnekler mevcut yerel ayarı, temayı veya bir veri önbelleği yönetmeyi içeren alternatiflerden daha basit olabilir.
+Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı iç içe geçmiş seviyelerinde erişilebilir olması gerekir. Context, bu tur verileri ve güncellemeleri ağaçtaki tüm bileşenlere "yaymanızı" sağlar. Context kullanımının diğer alternatiflerden daha basit olabileceği ortak örnekler arasında konum ayarlarının yönetimi, tema veya veri önbelleği bulunur.
 
 ## API {#api}
 
