@@ -19,7 +19,7 @@ var createFragment = require('react-addons-create-fragment'); // ES5 with npm
 
 ## Genel Bakış {#overview}
 
-Çoğu durumda, `render` fonksiyonundan döndürdüğünüz öğelerdeki anahtarları belirlemek için `key` prop'unu kullanabilirsiniz. Fakat, bu bir durumda çalışmaz: yeniden sıralamak zorunda olduğunuz iki çocuk grubunuz varsa, bir sarmalayıcı öğe eklemeden her gruba anahtar koymanın yolu yoktur.
+Çoğu durumda, `render` fonksiyonundan döndürdüğünüz öğelerdeki anahtarları belirlemek için `key` prop'unu kullanabilirsiniz. Fakat, bu bir durumda çalışmaz: yeniden sıralamak zorunda olduğunuz iki alt eleman grubunuz varsa, bir sarmalayıcı öğe eklemeden her gruba anahtar koymanın yolu yoktur.
 
 Yani, şu şekilde bir bileşeniniz var ise:
 
@@ -35,9 +35,9 @@ function Swapper(props) {
 }
 ```
 
-İki grup çocukta da herhangi bir işaretlenmiş anahtar olmadığı için, her `swapped` prop'unu değiştirdiğinizde çocuk çıkarılıp yeniden eklenecektir.
+İki grup alt eleman da herhangi bir işaretlenmiş anahtara sahip olmadığı için, her `swapped` prop'unu değiştirdiğinizde alt eleman çıkarılıp yeniden eklenecektir.
 
-Bu sorunu çözmek için, çocuk gruplarına `createFragment` eklentisini kullanarak anahtarlar verebilirsiniz.
+Bu sorunu çözmek için, alt eleman gruplarına `createFragment` eklentisini kullanarak anahtarlar verebilirsiniz.
 
 #### `Array<ReactNode> createFragment(object children)` {#arrayreactnode-createfragmentobject-children}
 
@@ -63,7 +63,7 @@ function Swapper(props) {
 }
 ```
 
-İletilen nesnenin anahtarları (yani, `left` ve `right`) tüm çocuklar için anahtar olarak kullanılır ve nesnenin anahtarlarının sırası, 'render' edilen çocukların sırasını belirlemek için kullanılır. Bu değişilik ile birlikte, bu iki grup çocuk DOM içerisinde çıkarılmaya gerek kalmadan, düzgün bir şekilde yeniden sıralanacaktır.
+İletilen nesnenin anahtarları (yani, `left` ve `right`) tüm alt elemanlar için anahtar olarak kullanılır ve nesnenin anahtarlarının sırası, render edilen alt elemanların sırasını belirlemek için kullanılır. Bu değişilik ile birlikte, bu iki grup alt eleman DOM içerisinde çıkarılmaya gerek kalmadan, düzgün bir şekilde yeniden sıralanacaktır.
 
 
-`createFragment` öğesinin dönüş değeri, opak bir nesne olarak değerlendirilmelidir; [`React.Children`](/docs/react-api.html#react.children) yardımcılarını, bir 'fragment' içerisinde döngü ile gezinmek için kullanabilirsiniz ancak doğrudan erişmemelisiniz. Ayrıca, tanımlamalarında garanti edilmemişte olsa, tüm önemli tarayıcılar ve VM'ler tarafından sayısal olmayan anahtarlara sahip nesneler için uygulanmış bulunan, nesne numaralandırma düzenini muhafaza eden JavaScript motoruna güvendiğimizi unutmayın.
+`createFragment` öğesinin dönüş değeri, opak bir nesne olarak değerlendirilmelidir; [`React.Children`](/docs/react-api.html#react.children) yardımcılarını, bir fragment içerisinde döngü ile gezinmek için kullanabilirsiniz ancak doğrudan erişmemelisiniz. Ayrıca, tanımlamalarında garanti edilmemişte olsa, tüm önemli tarayıcılar ve VM'ler tarafından sayısal olmayan anahtarlara sahip nesneler için uygulanmış bulunan, nesne numaralandırma düzenini muhafaza eden JavaScript motoruna güvendiğimizi unutmayın.
