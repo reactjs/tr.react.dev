@@ -29,9 +29,9 @@ class App extends React.Component {
 
   render() {
     //highlight-range{1-3}
-    // ThemeProvider içinde bulunan ThemedButton düğmesi 
-    // uses the theme from state while the one outside uses
-    // the default dark theme
+    // ThemeProvider içinde bulunan ThemedButton elementi 
+    // dıştaki varsayılan dark temayı kullanırken
+    // state'den temayı kullanır
     //highlight-range{3-5,7}
     return (
       <Page>

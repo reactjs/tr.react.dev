@@ -116,9 +116,9 @@ Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı i�
 const MyContext = React.createContext(defaultValue);
 ```
 
-Bir Context objesi yaratır. React bu Context objesine bağlanan bir bileşen oluşturduğunda, mevcut Context değerini ağaçta en yakın eşleşen `Provider'dan` okuyacaktır.
+Bir Context nesnesi oluşturur. React, bu Context nesnesine abone bir bileşen oluşturduğunda, context'in mevcut değerini ağaçtaki en yakın `Provider'dan` okuyacaktır.
 
-`defaultValue` argümanı **yanlızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenlerin sarılmadan yanlız bir şekilde test edilmesine yardımcı olabilir. Not: Provider value değerini `tanımsız` geçmek alt bileşenlerin `defaultValue` tüketmeye sebep olmaz.
+`defaultValue` argümanı **yanlızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenleri içermeden izolasyonda test etmek için yardımcı olabilir. Not: Provider value değerini `tanımsız` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
 
 ### `Context.Provider` {#contextprovider}
 
@@ -126,19 +126,17 @@ Bir Context objesi yaratır. React bu Context objesine bağlanan bir bileşen ol
 <MyContext.Provider value={/* bazı değer */}>
 ```
 
-Her Context objesi dağıtıcı bileşenlerin context değişliklerine bağlı olmalarına sağlayan bir React Provider bileşeni ile birlikte gelir.
+Her Context nesnesi, tüketici bileşenlerin context güncellemelerine abone olmasını sağlayan bir React Provider bileşeni ile birlikte gelir.
 
-Bu Provider'ın devamından(soyundan) gelen dağıtıcı bileşenlere geçirilecek bir prop `değerini` kabul eder. Bir Provider, birçok dağıtıcıya bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
+Bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
-Bir Provider'ın soyundan(devamından) gelen tüm dağıtıcılar, Provider'ın değeri prop değiştiğinde yeniden oluşturur. Provider'ın devamından(soyundan) gelen dağıtıcılara yayılma, `shouldComponentUpdate` fonksiyonuna bağlı değildir, bu nedenle bir dağıtıcı bileşeni güncellemeden düştüğünde bile dağıtıcı güncellenir.
+Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
 
-Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın prop değeri her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` fonksiyonuna tabi değildir, dolayısıyla bir ana bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
-
-[`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) gibi aynı algoritmayı kullanarak yeni ve eski değerleri karşılaştırarak değişiklikler belirlenir.
+[`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) gibi aynı algoritma kullanılarak yeni ve eski değerler karşılaştırıp değişiklikler belirlenir.
 
 > Not
 >
-> Değişimlerin belirlenme şekli, nesneleri `değer` olarak geçirirken bazı sorunlara neden olabilir: bakınız [Uyarılar](#caveats).
+> Değişiklikleri belirlerken nesneleri `value` olarak geçmek bazı sorunlara neden olabilir: bakınız [Uyarılar](#caveats).
 
 ### `Class.contextType` {#classcontexttype}
 
@@ -164,13 +162,13 @@ class MyClass extends React.Component {
 MyClass.contextType = MyContext;
 ```
 
-Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu `this.context'i` kullanarak bu Context türünün en yakın mevcut değerini dağıtmanıza olanak sağlar. Bu render işlevi de dahil olmak üzere yaşam döngüsü yöntemlerinden herhangi birinde başvuruda bulunabilirsiniz. 
+Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu, `this.context` 'i kullanarak bu Context türünün en yakın mevcut değerini kullanmanızı sağlar. Bunu render methodu da dahil olmak üzere yaşam döngüsü methodlarından herhangi birinde belirtebilirsiniz. 
 
 > Not:
 >
-> Bu API'yi kullanarak yalnızca tek bir içeriğe abone olabilirsiniz. Daha fazla okumanız gerekiyorsa, bakınız [Çoklu Context Dağıtımı](#consuming-multiple-contexts).
+> Bu API'yi kullanarak yalnızca tek bir içeriğe abone olabilirsiniz. Daha fazla okumanız gerekiyorsa, bakınız [Çoklu Context Tüketimi](#consuming-multiple-contexts).
 >
-> Deneysel [açık sınıf alanları sözdizimini](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
+> Deneysel [genel sınıf alanları sözdizimini](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
 
 
 ```js
@@ -178,7 +176,7 @@ class MyClass extends React.Component {
   static contextType = MyContext;
   render() {
     let value = this.context;
-    /* value'ya bağlı bir şey yapmak. */
+    /* value'ya dayalı bir şey render etmek */
   }
 }
 ```
@@ -187,17 +185,17 @@ class MyClass extends React.Component {
 
 ```js
 <MyContext.Consumer>
-  {value => /* context değerine göre bir şey oluşturma */}
+  {value => /* context değerine dayalı bir şey render etme */}
 </MyContext.Consumer>
 ```
 
 Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bileşen](/docs/components-and-props.html#function-and-class-components) içindeki bir context'e abone olmanıza izin verir.
 
-[Alt eleman gibi fonksiyonlar](/docs/render-props.html#using-props-other-than-render) gereklidir. Fonksiyon geçerli context değerini alır ve bir React düğümü döndürür. Fonksiyona iletilen `value` argümanı, yukarıda bu context için ağaçta en yakın Provider'ın `value` prop'una eşit olacaktır. Yukarıdaki bu context için Provider yoksa, `value` argümanı `createContext()` öğesine iletilmiş `defaultValue` değerine eşit olur.
+[Alt eleman olarak fonksiyon](/docs/render-props.html#using-props-other-than-render) verilmesine ihtiyaç duyar. Fonksiyon geçerli context değerini alır ve bir React düğümü döndürür. Fonksiyona iletilen `value` argümanı, yukarıda bu context için ağaçta en yakın Provider'ın `value` prop'una eşit olacaktır. Yukarıdaki bu context için Provider yoksa, `value` argümanı `createContext()` öğesine iletilmiş `defaultValue` değerine eşit olur.
 
 > Not
 > 
-> Alt eleman gibi fonksiyonlar paternleri hakkında daha çok  bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
+> Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
 
 ## Örnekler {#examples}
 
