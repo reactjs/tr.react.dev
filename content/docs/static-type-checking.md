@@ -1,24 +1,24 @@
 ---
 id: static-type-checking
-title: Static Type Checking
+title: Statik tip denetlemesi
 permalink: docs/static-type-checking.html
 prev: typechecking-with-proptypes.html
 next: refs-and-the-dom.html
 ---
 
-Static type checkers like [Flow](https://flow.org/) and [TypeScript](https://www.typescriptlang.org/) identify certain types of problems before you even run your code. They can also improve developer workflow by adding features like auto-completion. For this reason, we recommend using Flow or TypeScript instead of `PropTypes` for larger code bases.
+[Flow](https://flow.org/) ve [TypeScript](https://www.typescriptlang.org/) gibi statik tip denetleyicileri belli türdeki sorunları siz henüz kodunuzu çalıştırmadan belirlerler. Bunun yanı sıra, otomatik tamamlama gibi özellikleri ekleyerek geliştirici iş akışlarını iyileştirirler. Bu yüzden büyük kod tabanları için `PropTypes` yerine Flow veya TypeScript kullanılmasını tavsiye ediyoruz.
 
 ## Flow {#flow}
 
-[Flow](https://flow.org/) is a static type checker for your JavaScript code. It is developed at Facebook and is often used with React. It lets you annotate the variables, functions, and React components with a special type syntax, and catch mistakes early. You can read an [introduction to Flow](https://flow.org/en/docs/getting-started/) to learn its basics.
+[Flow](https://flow.org/), JavaScript kodunuz için bir statik tip denetleyicisidir. Facebook'ta geliştirilmiştir ve sıkça React ile birlikte kullanılır. Özel bir tip sözdizimiyle değişkenlerinizi, fonksiyonlarınızı ve React bileşenlerinizi açıklama şansı ve hataları erkenden yakalama şansı verir. [Flow'a giriş](https://flow.org/en/docs/getting-started/)i okuyarak temellerini öğrenebilirsiniz.
 
-To use Flow, you need to:
+Flow'u kullanmak için:
 
-* Add Flow to your project as a dependency.
-* Ensure that Flow syntax is stripped from the compiled code.
-* Add type annotations and run Flow to check them.
+* Flow'u projenize bağımlılık olarak ekleyin.
+* Flow sözdiziminin derlenmiş koddan ayrıldığından emin olun.
+* Tip açıklamalarını ekleyin ve Flow'u çalıştırarak kodunuzu denetleyin.
 
-We will explain these steps below in detail.
+Bu maddeleri aşağıda daha detaylı olarak açıklayacağız.
 
 ### Adding Flow to a Project {#adding-flow-to-a-project}
 
