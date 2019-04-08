@@ -67,37 +67,36 @@ npm run flow init
 
 Bu komut, sizin için commit etmeniz gereken bir Flow ayar dosyası oluşturacaktır.
 
-### Stripping Flow Syntax from the Compiled Code {#stripping-flow-syntax-from-the-compiled-code}
+### Flow Sözdiziminin Derlenmiş Koddan Ayrılması {#stripping-flow-syntax-from-the-compiled-code}
 
-Flow extends the JavaScript language with a special syntax for type annotations. However, browsers aren't aware of this syntax, so we need to make sure it doesn't end up in the compiled JavaScript bundle that is sent to the browser.
+Flow, JavaScript dilini tip açıklamaları için özel bir sözdizimi ile genişletir. Ancak, tarayıcılar bu sözdiziminden haberdar değildir. Bu güzden, onun tarayıcıya yollanan JavaScript demetinde yer almadığından emin olmalıyız.
 
-The exact way to do this depends on the tools you use to compile JavaScript.
+Bunun tam olarak nasıl sağlandığı, JavaScript'i derlemek için kullandığınız araca bağlıdır.
 
 #### Create React App {#create-react-app}
 
-If your project was set up using [Create React App](https://github.com/facebookincubator/create-react-app), congratulations! The Flow annotations are already being stripped by default so you don't need to do anything else in this step.
+Eğer projeniz [Create React App](https://github.com/facebookincubator/create-react-app) ile oluşturulduysa, tebrikler! Flow açıklamaları zaten öntanımlı olarak saf dışı bırakılmıştır. Bu yüzden sizin bu adımda herhangi bir şey yapmanıza gerek yok.
 
 #### Babel {#babel}
 
->Note:
+>Not:
 >
->These instructions are *not* for Create React App users. Even though Create React App uses Babel under the hood, it is already configured to understand Flow. Only follow this step if you *don't* use Create React App.
+> Bu talimatlar Create React App kullanıcıları için *değildir*. Create React App özünde Babel kullanıyor olsa da, o zaten Flow'u anlayacak şekilde ayarlanmıştır. Bu adımı sadece eğer Create React App *kullanmıyorsanız* takip ediniz.
 
-If you manually configured Babel for your project, you will need to install a special preset for Flow.
+Eğer projenizi Babel kullanmak üzere elle ayarladıysanız, Flow için özel bir önayar yüklemeniz gerekmektedir.
 
-If you use Yarn, run:
+Eğer yarn kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 yarn add --dev babel-preset-flow
 ```
 
-If you use npm, run:
+Eğer npm kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npm install --save-dev babel-preset-flow
 ```
-
-Then add the `flow` preset to your [Babel configuration](https://babeljs.io/docs/usage/babelrc/). For example, if you configure Babel through `.babelrc` file, it could look like this:
+Ardından, `flow` ön ayarını [Babel ayarlarınıza](https://babeljs.io/docs/usage/babelrc/) ekleyin. Örneğin, eğer Babel'i `.babelrc` ile ayarlıyorsanız, şöyle görünebilir:
 
 ```js{3}
 {
@@ -108,15 +107,15 @@ Then add the `flow` preset to your [Babel configuration](https://babeljs.io/docs
 }
 ```
 
-This will let you use the Flow syntax in your code.
+Bu size Flow sözdizimini kodunuzda kullanma fırsatı tanır.
 
->Note:
+>Not:
 >
->Flow does not require the `react` preset, but they are often used together. Flow itself understands JSX syntax out of the box.
+>Flow, `react` ön ayarına ihtiyaç duymaz, ancak ikisi genellikle birlikte kullanılır. Flow, JSX sözdizimini kendiliğinden anlayabilir.
 
-#### Other Build Setups {#other-build-setups}
+#### Diğer İnşa Ayarları {#other-build-setups}
 
-If you don't use either Create React App or Babel, you can use [flow-remove-types](https://github.com/flowtype/flow-remove-types) to strip the type annotations.
+Eğer Create React App veya Babel'den birini kullanmıyorsanırz, [flow-remove-types](https://github.com/flowtype/flow-remove-types) kullanarak tip açıklamalarını ayırabilirsiniz.
 
 ### Running Flow {#running-flow}
 
