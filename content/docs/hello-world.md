@@ -22,7 +22,6 @@ Ekrana "Merhaba dünya!" başlığını yazdırır.
 Yukarıdaki linke tıklayarak online düzenleyiciyi açabilirsiniz. Değişiklik yapmaktan çekinmeyin ve yaptığınız değikliklerin çıktısını gözlemleyin. Bu rehberdeki çoğu sayfada bunun gibi düzenlenebilir örnekler göreceksiniz.
 
 ## Bu Rehberi Nasıl Okumalısınız {#how-to-read-this-guide}
-s
 Bu rehberde, React uygulamalarının inşa blokları olan elemanları (Element) ve bileşenleri (Component) inceleyeceğiz. Bunlarda uzmanlaştığınızda, küçük ve tekrar kullanılabilir parçalardan karmaşık uygulamalar oluşturabilirsiniz.
 
 >İpucu
