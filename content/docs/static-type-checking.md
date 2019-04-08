@@ -259,36 +259,34 @@ Harika! Şimdi inşa betiğimizi çalıştırdığımızda, derleyici üretilen 
 
 Genellikle üretilen javascript'i kaynak kontrolünüzde tutmak istemezsiniz. Bu yüzden, `build` dizininizi `.gitignore` dosyanıza eklediğinizden emin olun.
 
-### File extensions {#file-extensions}
-In React, you most likely write your components in a `.js` file. In TypeScript we have 2 file extensions:
+### Dosya uzantıları {#file-extensions}
+React'te bileşenlerinizi muhtemelen bir `.js` dosyasına yazıyorsunuz. TypeScript'te iki dosya uzantımız var:
 
-`.ts` is the default file extension while `.tsx` is a special extension used for files which contain `JSX`.
+`.ts` öntanımlı dosya uzantısıyken, `.tsx` ise `JSX` içeren dosyalar için kullanılan özel bir dosya uzantısıdır.
 
-### Running TypeScript {#running-typescript}
-
-If you followed the instructions above, you should be able to run TypeScript for the first time.
+### TypeScript'i Çalıştırma {#running-typescript}
+Eğer yukarıdaki yönergeleri takip ettiyseniz, TypeScript'i ilk kez çalıştırabiliyor olmalısınız.
 
 ```bash
 yarn build
 ```
 
-If you use npm, run:
+Eğer npm kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npm run build
 ```
+Eğer bir çıktı görmüyorsanız kodunuz başarılı olarak derlenmiş demektir.
 
-If you see no output, it means that it completed successfully.
 
+### Tip Tanımlamaları {#type-definitions}
+Derleyici, diğer paketlerdeki hataları ve ipuçlarını göstermek için beyan dosyalarına ihtiyaç duyar. Beyan dosyası, bir kütüphane hakkındaki tüm tip bilgilerini sağlar. Bu bize javascript kütüphanelerini tıpkı npm gibi kullanma imkanını sunar.
 
-### Type Definitions {#type-definitions}
-To be able to show errors and hints from other packages, the compiler relies on declaration files. A declaration file provides all the type information about a library. This enables us to use javascript libraries like those on npm in our project. 
+Bir kütüphane için beyana ulaşmanın iki yolu vardır:
 
-There are two main ways to get declarations for a library:
+__Paket__ - Kütüphane kendi beyan dosyasını tanımlar. Bu, tüm yapmamız gerekenin yalnızca kütüphaneyi yüklemek olması ve onu anında kullanmamızı sağladığı için bizim için harikadır. Bir kütüphanenin tiplerinin paketli olup olmadığını denetlemek için projenizde bir `index.d.ts` dosyasının olup olmadığına bakın. Kimi kütüphaneler bunu kendi `package.json` dosyalarında, `typings` veya `types` alanında belirtirler.
 
-__Bundled__ - The library bundles its own declaration file. This is great for us, since all we need to do is install the library, and we can use it right away. To check if a library has bundled types, look for an `index.d.ts` file in the project. Some libraries will have it specified in their `package.json` under the `typings` or `types` field.
-
-__[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)__ - DefinitelyTyped is a huge repository of declarations for libraries that don't bundle a declaration file. The declarations are crowd-sourced and managed by Microsoft and open source contributors. React for example doesn't bundle its own declaration file. Instead we can get it from DefinitelyTyped. To do so enter this command in your terminal.
+__[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)__ - DefinitelyTyped, beyan dosyalarını paketli olarak ulaştırmayan kütüphaneler için kocaman bir beyan deposudur. Beyanlar, kitle kaynaklıdır ve Microsoft ve açık kaynak katkıcılar tarafından yönetilir. Örneğin React kendi beyan dosyasını paketlemez. Bunun yerine onu DefinitelyTyped'dan alabiliriz. Bunun için aşağıdaki komutu terminale girin:
 
 ```bash
 # yarn
@@ -298,8 +296,8 @@ yarn add --dev @types/react
 npm i --save-dev @types/react
 ```
 
-__Local Declarations__
-Sometimes the package that you want to use doesn't bundle declarations nor is it available on DefinitelyTyped. In that case, we can have a local declaration file. To do this, create a `declarations.d.ts` file in the root of your source directory. A simple declaration could look like this:
+__Yerel Tanımlamalar__
+Bazen kullanmak istediğiniz kütüphane beyanlarını ne paketli halde sunar, ne de onlar DefinitelyTyped'ta mevcuttur. Bu durumda yerel bir beyan dosyamız olabilir. Bunun için kaynak dizininizin kökünde `declarations.d.ts` dosyasını oluşturun. Basit bir beyan dosyası şöyle görünebilir:
 
 ```typescript
 declare module 'querystring' {
@@ -307,8 +305,12 @@ declare module 'querystring' {
   export function parse(val: string): object
 }
 ```
+Şimdi kodlamaya hazırsınız! Size tavsiyemiz, TypeScript hakkında daha fazla bilgiye ulaşmak için aşağıdaki kaynaklara bir göz atmanız:
 
-You are now ready to code! We recommend to check out the following resources to learn more about TypeScript:
+* [TypeScript Dokümantasyonu: Temel Tipler](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+* [TypeScript Dokümantasyonu: JavaScript'ten Göç](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+* [TypeScript Dokümantasyonu: React ve Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+
 
 * [TypeScript Documentation: Basic Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 * [TypeScript Documentation: Migrating from Javascript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
