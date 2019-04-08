@@ -311,23 +311,17 @@ declare module 'querystring' {
 * [TypeScript Dokümantasyonu: JavaScript'ten Göç](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 * [TypeScript Dokümantasyonu: React ve Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
 
-
-* [TypeScript Documentation: Basic Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
-* [TypeScript Documentation: Migrating from Javascript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
-* [TypeScript Documentation: React and Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
-
 ## Reason {#reason}
 
-[Reason](https://reasonml.github.io/) is not a new language; it's a new syntax and toolchain powered by the battle-tested language, [OCaml](https://ocaml.org/). Reason gives OCaml a familiar syntax geared toward JavaScript programmers, and caters to the existing NPM/Yarn workflow folks already know.
+[Reason](https://reasonml.github.io/) yeni bir dil değil, güvenilirliği kanıtlanmış [OCaml](https://ocaml.org/) ile güçlendirilen yeni bir sözdizimi ve araçlar zincidir. Reason, OCaml'a JavaScript programcılarına yönelik bilindik bir sözdizimi verir ve mevcut NPM/Yarn iş akışlarına hakim kişilerin ihtiyaçlarını karşılar.
 
-Reason is developed at Facebook, and is used in some of its products like Messenger. It is still somewhat experimental but it has [dedicated React bindings](https://reasonml.github.io/reason-react/) maintained by Facebook and a [vibrant community](https://reasonml.github.io/docs/en/community.html).
+Reason Facebook'ta geliştirilmekte ve Messenger gibi kimi ürünlerinde kullanılmaktadır. Hala biraz deneyseldir ama Facebook tarafından sürdürülen, [React'e adanmış bağlamaları](https://reasonml.github.io/reason-react/) ve [enerjik bir topluluğu](https://reasonml.github.io/docs/en/community.html) vardır.
 
 ## Kotlin {#kotlin}
 
-[Kotlin](https://kotlinlang.org/) is a statically typed language developed by JetBrains. Its target platforms include the JVM, Android, LLVM, and [JavaScript](https://kotlinlang.org/docs/reference/js-overview.html). 
+[Kotlin](https://kotlinlang.org/) JetBrains tarafından geliştirilmiş statik tipli bir dildir. Hedef platformları arasında JVM, Android, LLVM ve [JavaScript](https://kotlinlang.org/docs/reference/js-overview.html) bulunur.
 
-JetBrains develops and maintains several tools specifically for the React community: [React bindings](https://github.com/JetBrains/kotlin-wrappers) as well as [Create React Kotlin App](https://github.com/JetBrains/create-react-kotlin-app). The latter helps you start building React apps with Kotlin with no build configuration.
+JetBrains React topluluğu için özel olarak kimi araçlar geliştirmekte ve bakımlarını yapmaktadır: [React bağlamaları](https://github.com/JetBrains/kotlin-wrappers) ve [Create React Kotlin App](https://github.com/JetBrains/create-react-kotlin-app). Sonraki, Kotlin uygulamalarını hiçbir inşa ayarına ihtiyaç duymadan React ile yazmanıza yardımcı olur.
 
-## Other Languages {#other-languages}
-
-Note there are other statically typed languages that compile to JavaScript and are thus React compatible. For example, [F#/Fable](https://fable.io/) with [elmish-react](https://elmish.github.io/react). Check out their respective sites for more information, and feel free to add more statically typed languages that work with React to this page!
+## Diğer Diller {#other-languages}
+JavaScript'e derlenebilen ve dolayısıyla React'e uyumlu başka statik tipli diller diller de mevcuttur; örneğin [elmish-react](https://elmish.github.io/react)'li [F#/Fable](https://fable.io/). Daha fazla bilgi için sitelerini ziyaret edin ve React ile çalışan diğer statik tipli dilleri de bu sayfaya eklemekten çekinmeyin.
