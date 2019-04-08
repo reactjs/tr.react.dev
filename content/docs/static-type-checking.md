@@ -20,25 +20,25 @@ Flow'u kullanmak için:
 
 Bu maddeleri aşağıda daha detaylı olarak açıklayacağız.
 
-### Adding Flow to a Project {#adding-flow-to-a-project}
+### Flow'u Bir Projeye Ekleme {#adding-flow-to-a-project}
 
-First, navigate to your project directory in the terminal. You will need to run the following command:
+Öncelikle, terminalde proje dizininize gidin. Sonra aşağıdaki komutu çalıştırmanız gerekecek:
 
-If you use [Yarn](https://yarnpkg.com/), run:
+Eğer [Yarn](https://yarnpkg.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 yarn add --dev flow-bin
 ```
 
-If you use [npm](https://www.npmjs.com/), run:
+Eğer [npm](https://www.npmjs.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npm install --save-dev flow-bin
 ```
 
-This command installs the latest version of Flow into your project.
+Bu komut, Flow'un son sürümünün projenize yüklenmesini sağlar.
 
-Now, add `flow` to the `"scripts"` section of your `package.json` to be able to use this from the terminal:
+Şimdi, bunu terminalde kullanabilmek için `flow`'u `package.json` dosyanızın `"scripts"` kısmına ekleyin:
 
 ```js{4}
 {
@@ -51,21 +51,21 @@ Now, add `flow` to the `"scripts"` section of your `package.json` to be able to 
 }
 ```
 
-Finally, run one of the following commands:
+Son olarak, aşağıdaki komutlardan birini çalıştırın:
 
-If you use [Yarn](https://yarnpkg.com/), run:
+Eğer [Yarn](https://yarnpkg.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 yarn run flow init
 ```
 
-If you use [npm](https://www.npmjs.com/), run:
+Eğer [npm](https://www.npmjs.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npm run flow init
 ```
 
-This command will create a Flow configuration file that you will need to commit.
+Bu komut, sizin için commit etmeniz gereken bir Flow ayar dosyası oluşturacaktır.
 
 ### Stripping Flow Syntax from the Compiled Code {#stripping-flow-syntax-from-the-compiled-code}
 
