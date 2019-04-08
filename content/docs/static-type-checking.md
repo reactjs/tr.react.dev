@@ -159,49 +159,48 @@ Artık hazırsınız! Flow hakkında daha fazla bilgi için aşağıdaki kaynakl
 
 ## TypeScript {#typescript}
 
-[TypeScript](https://www.typescriptlang.org/) is a programming language developed by Microsoft. It is a typed superset of JavaScript, and includes its own compiler. Being a typed language, TypeScript can catch errors and bugs at build time, long before your app goes live. You can learn more about using TypeScript with React [here](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter).
+[TypeScript](https://www.typescriptlang.org/), Microsoft tarafından geliştirilmiş bir yazılım dilidir. JavaScript'in bir üst kümesidir ve kendi derleyicisi vardır. TypeScript tipli bir programlama dili olduğundan, hataları ve sorunları inşa sırasında, uygulamanız canlıya geçmeden çok önce yakalayabilir. React'i TypeScript ile kullanma hakkında [buradan](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) daha fazla bilgiye ulaşabilirsiniz.
 
-To use TypeScript, you need to:
-* Add TypeScript as a dependency to your project
-* Configure the TypeScript compiler options
-* Use the right file extensions
-* Add definitions for libraries you use
+TypeScript'i kullanmak için:
+* TypeScript'i projenize bir bağımlılık olarak eklemeye
+* TypeScript derleyicisi ayarlarını yapmaya
+* Doğru dosya uzantılarını kullanmaya
+* Kullandığınız kütüphaneler için tanımları eklemeye
 
-Let's go over these in detail.
+ihtiyacınız vardır.
 
-### Using TypeScript with Create React App {#using-typescript-with-create-react-app}
+Gelin şimdi bunların detaylarına inelim.
 
-Create React App supports TypeScript out of the box.
+### TypeScript'i Create React App İle Kullanmak {#using-typescript-with-create-react-app}
 
-To create a **new project** with TypeScript support, run:
+Create React App TypeScript'i kendiliğinden destekler.
+
+TypeScript kullanan **yeni bir proje** oluşturmak için, şu komutu çalıştırın:
 
 ```bash
 npx create-react-app my-app --typescript
 ```
+Ayrıca, [burada anlatıldığı şekilde](https://facebook.github.io/create-react-app/docs/adding-typescript) **varolan Create React App** projelerinize de ekleyebilirsiniz.
 
-You can also add it to an **existing Create React App project**, [as documented here](https://facebook.github.io/create-react-app/docs/adding-typescript).
-
->Note:
+>Not:
 >
->If you use Create React App, you can **skip the rest of this page**. It describes the manual setup which doesn't apply to Create React App users.
+>Eğer Create React app kullanıyorsanız, **bu sayfanın geri kalanını geçebilirsiniz**. Elle ayarlamayı anlattığı için, Create React App kullanıcıları için geçerli değildir.
 
+### TypeScript'i Bir Projeye Eklemek {#adding-typescript-to-a-project}
+Her şey bir komutu terminalde çalıştırmayla başlıyor.
 
-### Adding TypeScript to a Project {#adding-typescript-to-a-project}
-It all begins with running one command in your terminal.
-
-If you use [Yarn](https://yarnpkg.com/), run:
+Eğer [Yarn](https://yarnpkg.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 yarn add --dev typescript
 ```
 
-If you use [npm](https://www.npmjs.com/), run:
+Eğer [npm](https://www.npmjs.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npm install --save-dev typescript
 ```
-
-Congrats! You've installed the latest version of TypeScript into your project. Installing TypeScript gives us access to the `tsc` command. Before configuration, let's add `tsc` to the "scripts" section in our `package.json`:
+Tebrikler! TypeScript'in en güncel sürümünü projenize yüklediniz. TypeScript'i yüklemek bize `tsc` komutuna erişim sağlıyor. Ayarlamadan önce, gelin `tsc`'yi `package.json`'umuzun "script" kısmına ekleyelim:
 
 ```js{4}
 {
