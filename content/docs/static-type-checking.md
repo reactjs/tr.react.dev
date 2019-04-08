@@ -117,45 +117,45 @@ Bu size Flow sözdizimini kodunuzda kullanma fırsatı tanır.
 
 Eğer Create React App veya Babel'den birini kullanmıyorsanırz, [flow-remove-types](https://github.com/flowtype/flow-remove-types) kullanarak tip açıklamalarını ayırabilirsiniz.
 
-### Running Flow {#running-flow}
+### Flow'u Çalıştırmak {#running-flow}
 
-If you followed the instructions above, you should be able to run Flow for the first time.
+Eğer yukarıdaki yönergeleri takip ettiyseniz, Flow'u ilk seferde çalıştırabilmelisiniz.
 
 ```bash
 yarn flow
 ```
 
-If you use npm, run:
+Eğer npm kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npm run flow
 ```
 
-You should see a message like:
+Şu şekilde bir mesaj görmelisiniz:
 
 ```
 No errors!
 ✨  Done in 0.17s.
 ```
 
-### Adding Flow Type Annotations {#adding-flow-type-annotations}
+### Flow Tip Açıklamaları Ekleme {#adding-flow-type-annotations}
 
-By default, Flow only checks the files that include this annotation:
+Öntanımlı olarak, Flow yalnız şu açıklamayı içeren dosyaları denetler:
 
 ```js
 // @flow
 ```
 
-Typically it is placed at the top of a file. Try adding it to some files in your project and run `yarn flow` or `npm run flow` to see if Flow already found any issues.
+Bu, genellike dosyanın en üstünde yer alır. Flow'un hiç sorun bulup bulmadığını görmek için, projenizdeki bazı dosyalara eklemeyi ve `yarn flow` veya `npm run flow` komutlarını çalıştırmayı deneyin.
 
-There is also [an option](https://flow.org/en/docs/config/options/#toc-all-boolean) to force Flow to check *all* files regardless of the annotation. This can be too noisy for existing projects, but is reasonable for a new project if you want to fully type it with Flow.
+Bunun yanında, Flow'u açıklamaya bağlı olmadan *tüm* dosyaları denetlemeye zorlamanın [bir yolu daha](https://flow.org/en/docs/config/options/#toc-all-boolean) var. Eski projeleriniz için biraz fazla olabilir, ancak yeni başlanan bir projelede Flow ile tip denetimi isterseniz mantıklı olur.
 
-Now you're all set! We recommend to check out the following resources to learn more about Flow:
+Artık hazırsınız! Flow hakkında daha fazla bilgi için aşağıdaki kaynaklara da bir göz atmanızı öneririz:
 
-* [Flow Documentation: Type Annotations](https://flow.org/en/docs/types/)
-* [Flow Documentation: Editors](https://flow.org/en/docs/editors/)
-* [Flow Documentation: React](https://flow.org/en/docs/react/)
-* [Linting in Flow](https://medium.com/flow-type/linting-in-flow-7709d7a7e969)
+* [Flow dokümantasyonu: Tip açıklamaları](https://flow.org/en/docs/types/)
+* [Flow dokümantasyonu: Editörler](https://flow.org/en/docs/editors/)
+* [Flow dokümantasyonu: React](https://flow.org/en/docs/react/)
+* [Flow'da linting](https://medium.com/flow-type/linting-in-flow-7709d7a7e969)
 
 ## TypeScript {#typescript}
 
