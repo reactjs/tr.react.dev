@@ -213,27 +213,27 @@ Tebrikler! TypeScript'in en güncel sürümünü projenize yüklediniz. TypeScri
 }
 ```
 
-### Configuring the TypeScript Compiler {#configuring-the-typescript-compiler}
-The compiler is of no help to us until we tell it what to do. In TypeScript, these rules are defined in a special file called `tsconfig.json`. To generate this file:
+### TypeScript Derleyicisini Ayarlama {#configuring-the-typescript-compiler}
+Derleyici, biz ona ne yapacağını söyleyene dek, bize çok da yardımcı olamaz. TypeScript'te, bu kurallar `tsconfig.json` isminde özel bir dosyada tanımlanır. Bu dosyayı oluşturmak için:
 
-If you use [Yarn](https://yarnpkg.com/), run:
+Eğer [Yarn](https://yarnpkg.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 yarn run tsc --init
 ```
 
-If you use [npm](https://www.npmjs.com/), run:
+Eğer [npm](https://www.npmjs.com/) kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
 npx tsc --init
 ```
 
-Looking at the now generated `tsconfig.json`, you can see that there are many options you can use to configure the compiler. For a detailed description of all the options, check [here](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+Yeni oluşturduğumuz `tsconfig.json`'a baktığımızda, derleyiciyi ayarlayabileceğimiz birçok seçenek olduğunu görebilirsiniz. Tüm seçeneklerin detaylı bir açıklaması için, [buraya](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) bakınız.
 
-Of the many options, we'll look at `rootDir` and `outDir`. In its true fashion, the compiler will take in typescript files and generate javascript files. However we don't want to get confused with our source files and the generated output.
+Biz, bu birçok seçenekten `rootDir` ve `outDir`'e bakacağız. Kendinden beklendiği gibi derleyici, typescript dosyalarını javascript dosyalarına dönüştürecek. Ancak biz, kendi kaynak dosyalarımızla üretilmiş dosyaların karışmasını istemiyoruz.
 
-We'll address this in two steps:
-* Firstly, let's arrange our project structure like this. We'll place all our source code in the `src` directory.
+Bunu iki adımda çözeceğiz:
+* İlk olarak, gelin proje yapımızı şu sekilde düzenleyelim. Tüm kaynak kodlarımızı `src` dizinine koyacağız.
 
 ```
 ├── package.json
@@ -241,8 +241,7 @@ We'll address this in two steps:
 │   └── index.ts
 └── tsconfig.json
 ```
-
-* Next, we'll tell the compiler where our source code is and where the output should go.
+* Sonra derleyiciye kaynak kodumuzun nerede olduğunu ve derlenmiş dosyaların nereye gideceğini söyleyeceğiz.
 
 ```js{6,7}
 // tsconfig.json
@@ -256,10 +255,9 @@ We'll address this in two steps:
   },
 }
 ```
+Harika! Şimdi inşa betiğimizi çalıştırdığımızda, derleyici üretilen javascript'i `build` dizinine koyacak. [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter/blob/master/tsconfig.json) başlangıç için iyi bir kurallar bütününü size sunuyor.
 
-Great! Now when we run our build script the compiler will output the generated javascript to the `build` folder. The [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter/blob/master/tsconfig.json) provides a `tsconfig.json` with a good set of rules to get you started.
-
-Generally, you don't want to keep the generated javascript in your source control, so be sure to add the build folder to your `.gitignore`.
+Genellikle üretilen javascript'i kaynak kontrolünüzde tutmak istemezsiniz. Bu yüzden, `build` dizininizi `.gitignore` dosyanıza eklediğinizden emin olun.
 
 ### File extensions {#file-extensions}
 In React, you most likely write your components in a `.js` file. In TypeScript we have 2 file extensions:
