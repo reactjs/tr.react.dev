@@ -148,6 +148,6 @@
     - id: faq-structure
       title: Dosya Yapıları
     - id: faq-versioning
-      title: Sürüm Politikası
+      title: Sürümleme Politikası
     - id: faq-internals
       title: Virtual DOM ve İç Dinamikler
