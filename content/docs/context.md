@@ -212,9 +212,9 @@ Tema için dinamik değerli çok karmaşık bir örnek:
 **app.js**
 `embed:context/theme-detailed-app.js`
 
-### İç içe geçmiş bileşenden Context güncelleme {#updating-context-from-a-nested-component}
+### İç İçe Geçmiş Bileşenden Context Güncelleme {#updating-context-from-a-nested-component}
 
-Context'i bileşen ağacında derin bir yere yerleştirilmiş bir bileşenden güncellemek genellikle gerekir. Bu durumda, tüketicilerin içeriği güncellemesine izin vermek için içeriğin bir işlevini aşağı iletebilirsiniz:
+Context'i bileşen ağacında derinlere yerleştirilmiş bir bileşenden genellikle güncellemek gerekir. Bu durumda, tüketicilerin context'i güncellemesine izin vermek için context'den bir method'u aşağıya iletebilirsiniz:
 
 **theme-context.js**
 `embed:context/updating-nested-context-context.js`
@@ -225,13 +225,13 @@ Context'i bileşen ağacında derin bir yere yerleştirilmiş bir bileşenden g�
 **app.js**
 `embed:context/updating-nested-context-app.js`
 
-### Çoklu Context’leri kullanma {#consuming-multiple-contexts}
+### Çoklu Context’leri Kullanma {#consuming-multiple-contexts}
 
-Context'in yeniden oluşturulmasını hızlı tutmak için React her context tüketiciyi ağaçta ayrı bir düğüm haline getirmelidir.
+Context'in yeniden render edilmesini hızlı tutmak için React her context tüketiciyi ağaçta ayrı bir düğüm haline getirmelidir.
 
 `embed:context/multiple-contexts.js`
 
-İki veya daha fazla contex değeri sıklıkla birlikte kullanılıyorsa her ikisini de sağlayan kendi render prop bileşeninizi oluşturmayı düşünebilirsiniz.
+İki veya daha fazla context değerleri sıklıkla birlikte kullanılıyorsa her ikisini de sağlayan kendi render prop bileşeninizi oluşturmayı düşünmek isteyebilirsiniz.
 
 ## Uyarılar {#caveats}
 

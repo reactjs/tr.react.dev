@@ -3,7 +3,7 @@ import {ThemeContext} from './theme-context';
 function ThemeTogglerButton() {
   // highlight-range{1-2,5}
   // Tema Değiştirme Düğmesi yalnızca temayı değil, 
-  // aynı zamanda context'ten bir toggleTheme fonksiyonu alır
+  // aynı zamanda context'ten bir toggleTheme methodu alır
   return (
     <ThemeContext.Consumer>
       {({theme, toggleTheme}) => (

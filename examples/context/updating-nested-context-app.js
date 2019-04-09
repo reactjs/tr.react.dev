@@ -25,7 +25,7 @@ class App extends React.Component {
 
   render() {
     // highlight-range{1,3}
-    // Tüm state provider'a iletirlir.
+    // Tüm state provider'a iletilir.
     return (
       <ThemeContext.Provider value={this.state}>
         <Content />
