@@ -1,6 +1,6 @@
 ---
 id: static-type-checking
-title: Statik tip denetlemesi
+title: Statik Tip Denetlemesi
 permalink: docs/static-type-checking.html
 prev: typechecking-with-proptypes.html
 next: refs-and-the-dom.html
@@ -75,7 +75,7 @@ Bunun tam olarak nasıl sağlandığı, JavaScript'i derlemek için kullandığ�
 
 #### Create React App {#create-react-app}
 
-Eğer projeniz [Create React App](https://github.com/facebookincubator/create-react-app) ile oluşturulduysa, tebrikler! Flow açıklamaları zaten öntanımlı olarak saf dışı bırakılmıştır. Bu yüzden sizin bu adımda herhangi bir şey yapmanıza gerek kalmaz.
+Eğer projeniz [Create React App](https://github.com/facebookincubator/create-react-app) ile oluşturulduysa, tebrikler! Flow açıklamaları zaten öntanımlı olarak ayrılmıştır. Bu yüzden sizin bu adımda herhangi bir şey yapmanıza gerek kalmaz.
 
 #### Babel {#babel}
 
@@ -147,9 +147,9 @@ No errors!
 // @flow
 ```
 
-Bu, bir dosyanın genellike en üstünde yer alır. Flow'un hiç sorun bulup bulmadığını görmek için, projenizdeki bazı dosyalara eklemeyi ve `yarn flow` veya `npm run flow` komutlarını çalıştırmayı deneyin.
+Bu, bir dosyanın genellike en üstünde yer alır. Flow'un herhangi bir sorun bulup bulmadığını görmek için, projenizdeki bazı dosyalara eklemeyi ve `yarn flow` veya `npm run flow` komutlarını çalıştırmayı deneyin.
 
-Bunun yanında, Flow'u açıklamadan bağımsız olarak *tüm* dosyaları denetlemeye zorlamanın [bir yolu daha](https://flow.org/en/docs/config/options/#toc-all-boolean) var. Bu eski projeleriniz için biraz fazla olabilir, ancak yeni başlanan bir projelede Flow ile tip denetimi yapmak isterseniz, bu mantıklı olur.
+Bunun yanında, Flow'u açıklamadan bağımsız olarak *tüm* dosyaları denetlemeye zorlamanın [bir yolu daha](https://flow.org/en/docs/config/options/#toc-all-boolean) var. Bu, eski projeleriniz için biraz fazla olabilir; ancak yeni başlanan bir projede Flow ile tip denetimi yapmak isterseniz bu mantıklı olur.
 
 Artık hazırsınız! Flow hakkında daha fazla bilgi için aşağıdaki kaynaklara da bir göz atmanızı öneririz:
 
@@ -214,7 +214,7 @@ Tebrikler! TypeScript'in en güncel sürümünü projenize yüklediniz. TypeScri
 }
 ```
 
-### TypeScript Derleyicisini Ayarlama {#configuring-the-typescript-compiler}
+### TypeScript Derleyicisini Yapılandırma {#configuring-the-typescript-compiler}
 Derleyici, biz ona ne yapacağını söyleyene dek, bize çok da yardımcı olamaz. TypeScript'te, bu kurallar `tsconfig.json` isminde özel bir dosyada tanımlanır. Bu dosyayı oluşturmak için:
 
 Eğer [Yarn](https://yarnpkg.com/) kullanıyorsanız, bu komutu çalıştırın:
