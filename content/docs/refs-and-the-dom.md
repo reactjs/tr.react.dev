@@ -11,13 +11,13 @@ redirect_from:
 permalink: docs/refs-and-the-dom.html
 ---
 
-Ref'ler, render metodu içerisinde oluşturulan DOM node'larına veya React elemanlarına erişmeyi sağlar.
+Ref'ler, render metodu içerisinde oluşturulan DOM node'larına veya React elemanlarına erişmeyi sağlar. 
 
-React'ın tipik veri akışında, [prop'lar](/docs/components-and-props.html) üst bileşenlerin alt bileşenleri ile etkileşime geçmelerinin tek yoludur. Bir alt bileşeni düzenlemek için, onu yeni prop'lar ile yeniden render edersiniz. Fakat, birkaç senaryo vardır ki bir alt bileşeni tipik veri akışının dışında mecburi olarak düzenlemeniz gerekebilir. Düzenlenecek olan bir alt bileşen, bir React bileşeni'nin nesnesi veya bir DOM elemanı olabilir. Her iki durum içinde, React bir çıkış yolu sağlar.
+React'ın tipik veri akışında, [prop'lar](/docs/components-and-props.html) üst bileşenlerin alt bileşenleri ile etkileşime geçmelerinin tek yoludur. Bir alt bileşeni düzenlemek için, onu yeni prop'lar ile yeniden render edersiniz. Fakat, birkaç senaryo vardır ki bir alt bileşeni tipik veri akışının dışında mecburi olarak düzenlemeniz gerekebilir. Düzenlenecek olan bir alt bileşen, bir React bileşeni'nin nesnesi veya bir DOM elemanı olabilir. Her iki durum içinde, React bir çıkış yolu sağlar. 
 
 ### Ref'ler Ne Zaman Kullanılmalıdır {#when-to-use-refs}
 
-Ref'leri kullanmak için birkaç iyi kullanım senaryosu bulunmaktadır:
+Ref'leri kullanmak için birkaç iyi kullanım senaryosu bulunmaktadır: 
 
 * Managing focus, text selection, or media playback.
 * Triggering imperative animations.
@@ -29,7 +29,7 @@ Avoid using refs for anything that can be done declaratively.
 
 ### Ref'leri fazla kullanmayın {#dont-overuse-refs}
 
-Ref'leri kullanmakta ki ilk eğiliminiz uygulamanızda ki bazı şeyleri gerçekleştirmek için olabilir. Eğer durum bu ise, biraz durun ve state'in bileşen hiyerarşisinde nerede tutulması gerektiği hakkında biraz daha eleştirel düşünün. Bunun ile ilgili örnekler için [State'i yukarı taşıma](/docs/lifting-state-up.html) rehberini inceleyebilirsiniz.
+Ref'leri kullanmakta ki ilk eğiliminiz uygulamanızda ki bazı şeyleri gerçekleştirmek için olabilir. Eğer durum bu ise bekleyin ve state'in bileşen hiyerarşisinde nerede tutulması gerektiği hakkında biraz daha eleştirel düşünün. Bunun ile ilgili örnekler için [State'i yukarı taşıma](/docs/lifting-state-up.html) rehberini inceleyebilirsiniz.
 
 > Not
 >
@@ -51,44 +51,45 @@ class MyComponent extends React.Component {
 }
 ```
 
-### Accessing Refs {#accessing-refs}
+### Ref'lere Erişim {#accessing-refs}
 
-When a ref is passed to an element in `render`, a reference to the node becomes accessible at the `current` attribute of the ref.
+Bir ref, `render` içerisinde bir elemena aktarıldığında, node'a bir referans, ref'in `current` özelliğinde erişilebilir hale gelir.
 
 ```javascript
 const node = this.myRef.current;
 ```
 
-The value of the ref differs depending on the type of the node:
+Ref'in değeri, node'un türüne bağlı olarak değişir.
 
-- When the `ref` attribute is used on an HTML element, the `ref` created in the constructor with `React.createRef()` receives the underlying DOM element as its `current` property.
-- When the `ref` attribute is used on a custom class component, the `ref` object receives the mounted instance of the component as its `current`.
-- **You may not use the `ref` attribute on function components** because they don't have instances.
+- `ref` özelliği bir HTML elemanında kullanıldığında, constructorda `React.createRef()` ile oluşturulan `ref`, esas DOM elemanını kendisinin `current` özelliği olarak alır.
+- `ref` özelliği özel bir sınıf bileşininde kullanıldığında,ref nesnesi yerleştirilmiş bileşeninin nesnesini `current` olarak alır.
+- **`ref` özelliğini fonksiyon bileşeni içerisinde kullanmayabilirsiniz** çünkü fonksiyon bileşenlerinin nesneleri olmaz.
 
-The examples below demonstrate the differences.
+Aşağıdaki örnekler farklılıkları göstermektedir.
 
-#### Adding a Ref to a DOM Element {#adding-a-ref-to-a-dom-element}
+#### DOM Elemanına Ref Ekleme {#adding-a-ref-to-a-dom-element}
 
-This code uses a `ref` to store a reference to a DOM node:
+Bu kod bir DOM node'una bir referans tutmak için `ref` kullanır:
+
 
 ```javascript{5,12,22}
 class CustomTextInput extends React.Component {
   constructor(props) {
     super(props);
-    // create a ref to store the textInput DOM element
+    // textInput DOM elemanını kaydetmek için bir ref oluşturulur
     this.textInput = React.createRef();
     this.focusTextInput = this.focusTextInput.bind(this);
   }
 
   focusTextInput() {
-    // Explicitly focus the text input using the raw DOM API
-    // Note: we're accessing "current" to get the DOM node
+    // DOM API kullanark text input'a odaklanın
+    // Not : DOM node'unu getirmek için "current"ı kullanırız.
     this.textInput.current.focus();
   }
 
   render() {
-    // tell React that we want to associate the <input> ref
-    // with the `textInput` that we created in the constructor
+    // React’a <input> ref'i ile ilişkilendirmek istediğimizi belirtiriz.
+    // constructor içerisinde oluşturduğumuz `textInput`u ile
     return (
       <div>
         <input
@@ -105,11 +106,11 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-React will assign the `current` property with the DOM element when the component mounts, and assign it back to `null` when it unmounts. `ref` updates happen before `componentDidMount` or `componentDidUpdate` lifecycle methods.
+Bileşen eklendiğinde, React, `current` özelliğini DOM elemanı ile atar ve bileşen çıkarıldığında geri `null` atanır. `ref` güncellemeleri `componentDidMount` veya `componentDidUpdate` yaşam döngüsü metodlarından önce gerçekleşir.
 
-#### Adding a Ref to a Class Component {#adding-a-ref-to-a-class-component}
+#### Sınıf Bileşenine Ref Ekleme {#adding-a-ref-to-a-class-component}
 
-If we wanted to wrap the `CustomTextInput` above to simulate it being clicked immediately after mounting, we could use a ref to get access to the custom input and call its `focusTextInput` method manually:
+Yukarıda `CustomTextInput`u eklendikten hemen sonra tıklandığını simüle etmek için,  özel input'a erişmek için ve onun `focusTextInput` metodunu çağırmak için ref kullanabiliriz.
 
 ```javascript{4,8,13}
 class AutoFocusTextInput extends React.Component {
@@ -130,7 +131,7 @@ class AutoFocusTextInput extends React.Component {
 }
 ```
 
-Note that this only works if `CustomTextInput` is declared as a class:
+Bu sadece `CustomTextInput` bir sınıf olarak tanımlandığında çalışır.
 
 ```js{1}
 class CustomTextInput extends React.Component {
@@ -138,9 +139,9 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-#### Refs and Function Components {#refs-and-function-components}
+#### Refler ve fonksiyon bileşenleri {#refs-and-function-components}
 
-**You may not use the `ref` attribute on function components** because they don't have instances:
+**`ref` özelliğini fonksiyon bileşeni içerisinde kullanmayabilirsiniz** çünkü fonksiyon bileşenlerinin nesneleri olmaz.
 
 ```javascript{1,8,13}
 function MyFunctionComponent() {
@@ -153,7 +154,7 @@ class Parent extends React.Component {
     this.textInput = React.createRef();
   }
   render() {
-    // This will *not* work!
+    //Bu çalışmayacaktır!
     return (
       <MyFunctionComponent ref={this.textInput} />
     );
@@ -161,13 +162,15 @@ class Parent extends React.Component {
 }
 ```
 
-You should convert the component to a class if you need a ref to it, just like you do when you need lifecycle methods or state.
+Eğer bir ref'e ihtiyacınız varsa, bileşeni sınıfa dönüştürmelisiniz. Tıpkı yaşam döngüsü metodlarında veya state ihtiyacınız olduğunda yaptığınız gibi.
+
 
 You can, however, **use the `ref` attribute inside a function component** as long as you refer to a DOM element or a class component:
+Bir DOM elemanına veya sınıf bileşenine işaret ettiğiniz sürece **fonksiyon bileşeni içerisinde `ref` kullanabilirsiniz**
 
 ```javascript{2,3,6,13}
 function CustomTextInput(props) {
-  // textInput must be declared here so the ref can refer to it
+  //textInput'u burada tanımlanmalıdır. Böylelikle ref onu işaret edebilir
   let textInput = React.createRef();
 
   function handleClick() {
@@ -189,25 +192,31 @@ function CustomTextInput(props) {
 }
 ```
 
-### Exposing DOM Refs to Parent Components {#exposing-dom-refs-to-parent-components}
+### DOM Ref'lerini Üst Bileşenlerde Açığa Çıkarma {#exposing-dom-refs-to-parent-components}
 
-In rare cases, you might want to have access to a child's DOM node from a parent component. This is generally not recommended because it breaks component encapsulation, but it can occasionally be useful for triggering focus or measuring the size or position of a child DOM node.
+Nadir durumlarda, bir alt bileşenin DOM node'una üst bileşenden erişmek isteyebilirsiniz. Bu genelde önerilmez çünkü bileşenin bileşenin kapsüllemesini bozar. Ancak bazen odağı tetiklemek veya bir child DOM node'un boyutunu veya konumunu hesaplamak için faydalı olabilir.
 
-While you could [add a ref to the child component](#adding-a-ref-to-a-class-component), this is not an ideal solution, as you would only get a component instance rather than a DOM node. Additionally, this wouldn't work with function components.
+[Alt bileşene ref ekleyebilirsiniz](#adding-a-ref-to-a-class-component). Ancak bu ideal bir çözüm değildir. DOM node'undan ziyade sadece bir tane bileşen nesnesi alırsınız. Ek olarak, bu fonksiyon bileşenleri ile çalışmaz.
 
-If you use React 16.3 or higher, we recommend to use [ref forwarding](/docs/forwarding-refs.html) for these cases. **Ref forwarding lets components opt into exposing any child component's ref as their own**. You can find a detailed example of how to expose a child's DOM node to a parent component [in the ref forwarding documentation](/docs/forwarding-refs.html#forwarding-refs-to-dom-components).
+React 16.3 veya daha üst bir versiyonunu kullanırsanız, bu durumlar için [ref yönlendirme](/docs/forwarding-refs.html) kullanmanızı tavsite ederiz. **Ref yönlendirme, bileşenlerin, alt bileşenin ref'ini kendilerinin gibi göstermesini sağlar**. Bir alt bileşenin Dom node'unu üst bileşende nasıl kullanacağınızın daha detaylı örneğini [ref yönlendirme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components) dökümanında bulabilirsiniz.
 
-If you use React 16.2 or lower, or if you need more flexibility than provided by ref forwarding, you can use [this alternative approach](https://gist.github.com/gaearon/1a018a023347fe1c2476073330cc5509) and explicitly pass a ref as a differently named prop.
+React 16.2 veya daha eski bir versiyonu kullanıyorsanız, veya ref yönlendirme ile sağlanan esneklikten daha fazla esnekliğe ihtiyacınız varsa, [bu alternatif yaklaşımı](https://gist.github.com/gaearon/1a018a023347fe1c2476073330cc5509) kullanabilirsiniz ve bir ref'i farklı isimlendirilmiş bir prop olarak aktarabilirsiniz.
 
 When possible, we advise against exposing DOM nodes, but it can be a useful escape hatch. Note that this approach requires you to add some code to the child component. If you have absolutely no control over the child component implementation, your last option is to use [`findDOMNode()`](/docs/react-dom.html#finddomnode), but it is discouraged and deprecated in [`StrictMode`](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage).
 
+Mümkünse, DOM birimlerini açığa çıkarmamanızı tavsiye ederiz. Ancak faydalı bir kaçış yolu olabilir. Bu yaklaşımın, alt bileşene bazı kodlar eklemenizi gerektirdiğini unutmayın. Alt bileşen üzerinde herhangi bir kontrolünüz yoksa, son seçeneğiniz [`findDOMNode()`](/docs/react-dom.html#finddomnode) kullanmak olabilir. Ama bu [`StrictMode`](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage) içerisinde kullanımdan kaldırıldı.
+
 ### Callback Refs {#callback-refs}
 
-React also supports another way to set refs called "callback refs", which gives more fine-grain control over when refs are set and unset.
+React ayrıca, "callback refs" adı verilen refleri ayarlamanın başka bir yolunu da destekler. Bu, ref'ler ayarlandıklarında veya ayarlanmadıkları zamanlarda daha fazla kontrol'e sahip olmalarını sağlar.
 
-Instead of passing a `ref` attribute created by `createRef()`, you pass a function. The function receives the React component instance or HTML DOM element as its argument, which can be stored and accessed elsewhere. 
+ 
+`createRef()` tarafından oluşturulan bir `ref`i aktarmaktansa, bir fonksiyon aktarabilirsiniz. Fonksiyon, React bileşeninin nesnesini veya HTML DOM elemanını bir argüman olarak alır, böylelikle bileşenin nesnesi başka bir yerde saklanabilir ve erişilebilir.
 
-The example below implements a common pattern: using the `ref` callback to store a reference to a DOM node in an instance property.
+
+
+Aşağıdaki örnekte yaygın bir kullanım uygulanmıştır. `ref` callback'i kullanarak bir nesnenin özelliğinde
+DOM node'una bir referans kaydedilir.
 
 ```javascript{5,7-9,11-14,19,29,34}
 class CustomTextInput extends React.Component {
@@ -222,18 +231,19 @@ class CustomTextInput extends React.Component {
 
     this.focusTextInput = () => {
       // Focus the text input using the raw DOM API
+    // DOM API kullanark text input'a odaklanın
       if (this.textInput) this.textInput.focus();
     };
   }
 
   componentDidMount() {
-    // autofocus the input on mount
+    // Eklendikten sonra otomatik olarak odaklanma
     this.focusTextInput();
   }
 
   render() {
-    // Use the `ref` callback to store a reference to the text input DOM
-    // element in an instance field (for example, this.textInput).
+    // DOM text input'unda bir referans kaydetmek için `ref` callback'i kullanın
+    // Nesne alanında bir eleman(örneğin, this.textInput)
     return (
       <div>
         <input
@@ -251,9 +261,9 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-React will call the `ref` callback with the DOM element when the component mounts, and call it with `null` when it unmounts. Refs are guaranteed to be up-to-date before `componentDidMount` or `componentDidUpdate` fires.
+React, bileşen eklendiğinde DOM elemanı ile beraber `ref` callback'ini çağırır ve bileşen çıkarıldığında da `null` ile çağırır. Ref'ler `componentDidMount` veya `componentDidUpdate` tetiklenmeden önce güncel oldukları garanti edilir.
 
-You can pass callback refs between components like you can with object refs that were created with `React.createRef()`.
+`React.createRef()` ile oluşturulan nesne refleri gibi, Callback ref'lerini de bileşenler arasında aktarabilirsiniz.
 
 ```javascript{4,13}
 function CustomTextInput(props) {
@@ -275,16 +285,18 @@ class Parent extends React.Component {
 }
 ```
 
-In the example above, `Parent` passes its ref callback as an `inputRef` prop to the `CustomTextInput`, and the `CustomTextInput` passes the same function as a special `ref` attribute to the `<input>`. As a result, `this.inputElement` in `Parent` will be set to the DOM node corresponding to the `<input>` element in the `CustomTextInput`.
+Yukarıda ki örnekte, `Parent`, ref callback'ini `inputRef` prop'u olarak `CustomTextInput`una aktarır ve `CustomTextInput`u aynı fonksiyonu özel bir `ref` özelliği olarak `<input>`a aktarır. Sonuç olarak, `Parent`taki `this.inputElement`i, `CustomTextInput`taki `<input>` elemanına karşılık gelen DOM node'una set edilir.
 
-### Legacy API: String Refs {#legacy-api-string-refs}
+### Eski API: String Refler {#legacy-api-string-refs}
 
 If you worked with React before, you might be familiar with an older API where the `ref` attribute is a string, like `"textInput"`, and the DOM node is accessed as `this.refs.textInput`. We advise against it because string refs have [some issues](https://github.com/facebook/react/pull/8333#issuecomment-271648615), are considered legacy, and **are likely to be removed in one of the future releases**. 
+Daha önceden React ile uğraştıysanız, `ref` özelliğinin `"textInput"` gibi bir string olduğu eski API'ya aşina olabilirsiniz ve DOM node'una da `this.refs.textInput` şeklinde erişilirdi. [Bazı sorunlar](https://github.com/facebook/react/pull/8333#issuecomment-271648615) are considered legacy ve **gelecek sürümlerden birinde kaldırılması muhtemeldir**. 
 
-> Note
->
-> If you're currently using `this.refs.textInput` to access refs, we recommend using either the [callback pattern](#callback-refs) or the [`createRef` API](#creating-refs) instead.
+
+> Not
+> 
+> Eğer `this.refs.textInput`'u reflere erişmek için kullanıyorsanız, [`createRef` API](#creating-refs) veya [callback refleri](#callback-refs)nden birini kullanmanızı tavsiye ederiz.
 
 ### Caveats with callback refs {#caveats-with-callback-refs}
 
-If the `ref` callback is defined as an inline function, it will get called twice during updates, first with `null` and then again with the DOM element. This is because a new instance of the function is created with each render, so React needs to clear the old ref and set up the new one. You can avoid this by defining the `ref` callback as a bound method on the class, but note that it shouldn't matter in most cases.
+Eğer `ref` callback bir inline fonksiyon olarak tanımlanmışsa, güncelleme anında iki kez çağırılacaktır. İlk olarak `null` ve daha sonrasında DOM elemanı yeniden çağrılır.. Bunun sebebi, fonksiyonun bir nesnesi her render'da oluşturulur. Bu yüzden React eski ref'i kaldırır ve yenisini ekler. Bunu önlemek için  `ref` callback'ini sınıfa bağlı bir method olarak tanımlayabilirsiniz. Ancak bu birçok durumda önemli değildir.
