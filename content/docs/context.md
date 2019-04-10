@@ -235,12 +235,12 @@ Context'in yeniden render edilmesini hızlı tutmak için React her context tük
 
 ## Uyarılar {#caveats}
 
-Context ne zaman yeniden oluşturulacağını belirlemek için referans kimliğini kullandığından bir Provider'ın üst elemanları yeniden işlendiğinde dağıtıcılarda ki istenmeyen işleyicileri tetikleyebilecek bazı kazançlar vardır. Örneğin aşağıdaki kod dağıtıcının her yeniden oluşturuşunda  tüm dağıtıcıları yeniden oluşturur. Çünkü her zaman `value` içim yeni bir obje oluşturulur:
+Context yeniden render'lamayı belirlemek için referans kimliği kullandığından, bir Provider'ın üst elemanı yeniden render'landığında tüketicilerdeki istenmeyen render'ları tetikleyebilecek bazı kazanımlar vardır. Örneğin aşağıdaki kodda provider her yeniden render'landığında tüm tüketiciler yeniden render'lanır. Çünkü `value` için her zaman yeni bir obje oluşturulur:
 
 `embed:context/reference-caveats-problem.js`
 
 
-Bunu aşmak için, değeri üst eleman'ın state'ine getirin:
+Bunu aşmak için, value'u üst eleman'ın state'ine getirin:
 
 `embed:context/reference-caveats-solution.js`
 
@@ -248,4 +248,4 @@ Bunu aşmak için, değeri üst eleman'ın state'ine getirin:
 
 > Not
 > 
-> React önceleri deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak kullanan uygulamalar yeni süreme geçmelidir. Eski sürüm API'ler gelecekteki ana React versiyonundan kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyun.
+> React daha önce deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak onu kullanan uygulamalar yeni sürüme geçmelidir. Eski sürüm API'ler önümüzdeki ana React versiyonlarından kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyun.
