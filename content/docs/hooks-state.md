@@ -256,37 +256,35 @@ Bu JavaScript sözdizimi ["array destructuring"](https://developer.mozilla.org/e
 
 ### İpucu: Çoklu State Değişkeni Kullanımı {#tip-using-multiple-state-variables}
 
-State değişkeni tanımlarken bir çift `[something, setSomething]` kullanışlıdır çünkü birden fazla kullanmak istersek *farklı* isimleri farklı state değişkenlerine verebiliriz.
+Ayrıca; birden fazla state kullanmak istediğimiz durumlarda, farklı state değişkenlerine farklı adlar vermemize izin verdiği için, state değişkenlerini bir çift olarak ([something, setSomething]) tanımlamak kullanışlıdır.
 
 ```js
 function ExampleWithManyStates() {
-  // Declare multiple state variables!
+  // Birden fazla state değişkeni bildir!
   const [age, setAge] = useState(42);
   const [fruit, setFruit] = useState('banana');
   const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
 ```
 
-Yukarıdaki bileşende, `age`, `fruit` ve `todos`'a yerel değişken olarak sahibiz ve bunları teker teker güncelleyebiliriz.
+Yukarıdaki bileşende, `age`, `fruit` ve `todos` adında yerel değişkenlerimiz var ve bunları ayrı ayrı güncelleyebiliriz.
 
 ```js
   function handleOrangeClick() {
-    // Similar to this.setState({ fruit: 'orange' })
-    // bu this.setState({ fruit: 'orange' })'a benzer.
+    // this.setState({ fruit: 'orange' }) ile benzerdir.
     setFruit('orange');
   }
 ```
 
-You **don't have to** use many state variables. State variables can hold objects and arrays just fine, so you can still group related data together. However, unlike `this.setState` in a class, updating a state variable always *replaces* it instead of merging it.
-bir çok state değişken **kullanmak zorunda değilsiniz**. State değişkenleri, objeler ve dizileri çok iyi tutabilr bu yüzden ilgili verileri birlikte tutabilirsiniz fakat sınıftaki `this.setState`'ın aksine state değişkenini güncellemek birleştirmek(merge) yerine *değiştirir*.
+birden fazla state değişkeni **kullanmak zorunda değilsiniz**. State değişkenleri, nesneleri ve dizileri gayet güzel bir şekilde tutabilir; böylece ilgili verileri birlikte tutabilirsiniz fakat sınıftaki `this.setState`'ın aksine state değişkenini güncellemek, birleştirmek(merge) yerine *değiştirir*.
 
-Bağımsız değişkenleri bölme konusunda daha çok fazla öneriye bu bölümden ulaşabilirsiniz [in the FAQ](/docs/hooks-faq.html#should-i-use-one-or-many-state-variables).
+Bağımsız değişkenleri bölme konusunda daha çok fazla öneriye [bu bölümden](/docs/hooks-faq.html#should-i-use-one-or-many-state-variables)ulaşabilirsiniz.
 
 
 ## Sonraki Adımlar {#next-steps}
 
-Biz Bu sayfada React tarafından sağlanan Hook'lardan birini, `useState`'i, öğrendik. Bazen buna "State Hook" dedik. Bu bizim React fonksiyon bileşenlerine yerel state eklememize izin veriyor. -- Şimdiye kadar ilk defa yaptık!
+Bu sayfada React tarafından sağlanan Hook'lardan birini, `useState`'i, öğrendik.Bazen bundan "State Hook'u" olarak da bahsedecegiz. Bu, ilk kez yapmış olduğumuz, React'in fonksiyon bileşenlerine yerel state eklememize imkân sağlıyor. 
 
-Aynı zamanda Hook'lar hakkında bir şeyler öğrendik. Hook'lar foksiyon bileşenlerinden özellikleri React'a bağlamanıza izin verirler. İsimleri her zaman `use` ile başlar ve henüz öğrenmediğimiz Hook'lar var.
+Aynı zamanda Hook'lar hakkında bir şeyler öğrendik. Hooklar, React özelliklerini fonksiyon bileşenlerine bağlamamızı sağlayan fonksiyonlardir. İsimleri her zaman use ile başlar ve henüz öğrenmediğimiz Hook'lar vardır.
 
 
-**Hadi şimdi şununla devam edelim [learning the next Hook: `useEffect`.](/docs/hooks-effect.html)** Bu, bileşenlere yan etkiler yapmaya izin verir ve sınıflardaki lifecycle fonksiyonlarına benzer
+**Hadi şimdi bir sonraki hook olarak  [useEffect'i öğrenerek : `useEffect`.](/docs/hooks-effect.html) devam edelim.** useEffect, bileşenler üzerinde yan etkiler gerçekleştirmenize izin verir ve sınıflardaki yaşam döngüsü (lifecycle) metotlarına benzer.
