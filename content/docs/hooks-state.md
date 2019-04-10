@@ -1,20 +1,20 @@
 ---
 id: hooks-state
-title: State Hook kullanımı
+title: State Hook Kullanımı
 permalink: docs/hooks-state.html
 next: hooks-effect.html
 prev: hooks-overview.html
 ---
 
-*Hook'lar* React 16.8. ile gelen yeni bir eklentidir. Bu yeni eklenti size herhangi bir sınıf oluşturmadan state ve diğer React özelliklerini kullanmaya izin verir.
+*Hook'lar* React 16.8. ile gelen yeni bir eklentidir. Bu yeni eklenti size herhangi bir sınıf oluşturmadan state ve diğer React özelliklerini kullanmanıza izin verir.
 
-[önceki sayfada](/docs/hooks-intro.html) Hook'lara aşağıdaki örnekle bir giriş yapılmıştı:
+[Önceki sayfada](/docs/hooks-intro.html) Hook'lara aşağıdaki örnekle bir giriş yapılmıştı:
 
 ```js{4-5}
 import React, { useState } from 'react';
 
 function Example() {
-  // count adında yeni bir state değişkeni tanımlandı.
+  // count adında yeni bir state değişkeni tanımlayın.
   const [count, setCount] = useState(0);
 
   return (
@@ -28,11 +28,11 @@ function Example() {
 }
 ```
 
-Şimdi Hook'ları öğrenmeye bu Hook kodu ile bu koda eşdeğer sınıf kodunu karşılaştırarak başlıyoruz. 
+Bu kodu, eşdeğeri olan sınıf koduyla karşılaştırarak Hook'lari öğrenmeye başlayacağız. 
 
 ## Eşdeğer Sınıf Örneği {#equivalent-class-example}
 
-Eğer React'da sınıfları kullandıysanız, Bu kod size tanıdık gelecektir.
+Eğer React'te sınıfları kullandıysanız, bu kod size tanıdık gelecektir.
 
 ```js
 class Example extends React.Component {
@@ -65,7 +65,7 @@ State `{ count: 0 }` olarak başlar ve kullanıcı her tıkladığında `this.se
 
 ## Hook'lar ve Fonksiyon Bileşenleri {#hooks-and-function-components}
 
-React'daki fonksiyon bileşenlerinin böyle gözüktüğünü unutmayınız:
+React'teki fonksiyon bileşenlerinin böyle gözüktüğünü unutmayınız:
 
 ```js
 const Example = (props) => {
@@ -83,13 +83,13 @@ function Example(props) {
 }
 ```
 
-Yukarıdakileri "stateless bileşenler" olarak biliyor olabilirsiniz. Şimdi bunlarla React state kullanma yeteneğini açıklıyoruz ve bu yüzden bunlara "fonksiyon bileşenleri" demeyi tercih ediyoruz. 
+Yukarıdakileri "durumsuz(stateless) bileşenler" olarak biliyor olabilirsiniz. Şimdi bunlarla React state kullanma özelliğini getiriyoruz; bu yüzden bunlara "fonksiyon bileşenleri" demeyi tercih ediyoruz. 
 
 Hook'lar sınıfların içinde **çalışmazlar** fakat onları sınıf yazmadan da kullanabilirsiniz.
 
 ## Hook Nedir? {#whats-a-hook}
 
-Yeni örneğimize React'dan `useState` hook'u import etmekle başlıyoruz
+Yeni örneğimize React'ten `useState` hook'u import etmekle başlıyoruz
 
 ```js{1}
 import React, { useState } from 'react';
@@ -99,20 +99,20 @@ function Example() {
 }
 ```
 
-**Hook Nedir?** Hook React özelliklerini "bağlayabilmemize" izin veren özel bir fonksiyondur. Örneğin `useState`,  React state'i fonksiyon bileşenlerine eklememize izin veren bir Hook'tur. Yakında diğer Hook'ları da öğreneceğiz.
+**Hook Nedir?** Hook, React özelliklerini "bağlamanıza" izin veren özel bir fonksiyondur. Örneğin `useState`, React state'ini fonksiyon bileşenlerine eklemenize izin veren bir Hook'tur. Yakında diğer Hook'ları da öğreneceğiz.
 
 
-**Ne zaman hook kullanmalıyım?** Eğer bir fonksiyon yazar ve bunu gerçeklemek isterseniz, bazı state'leri eklemeniz gerekiyor. Önceden bunu sınıfa çevirmeniz gerekiyordu fakat şimdi mevcut fonksiyon bileşenlerinin içinde Hook kullanabilirsiniz.
+**Ne zaman bir Hook kullanmalıyım?** Eğer bir fonksiyon bileşeni yazarsanız ve ona biraz state eklemeniz gerektiğini farkederseniz, bundan önce o fonksiyonu bir sinifa (class) dönüştürmeniz gerekiyordu. Fakat şimdi, varolan fonksiyon bileşenlerinin içinde Hook kullanabilirsiniz. Şimdi tam olarak da bunu yapacağız!
 
 
 >Not:
 >
->Hook'ları bileşenlerlerin içinde kullanıp kullanamayacağımız hakkında birkaç özel kural vardır. Bunları [Rules of Hooks](/docs/hooks-rules.html) burada öğreneceğiz.
+>Hook'ları bileşenlerin içinde kullanıp kullanamayacağımız hakkında birkaç özel kural vardır. Bunları [Hook Kuralları](/docs/hooks-rules.html) burada öğreneceğiz.
 
 
-## State Değişkeni Tanımlanması  {#declaring-a-state-variable}
+## Bir State Değişkeni Tanımlamak  {#declaring-a-state-variable}
 
-sınıfta `count` state'ini constructor (yapıcı fonksiyon) içinde `this.state`'i `{ count: 0 }`'a eşitleyerek `0` olarak başlatıyoruz. 
+sınıfın içinde `count` state'ini constructor (yapıcı fonksiyon) içinde `this.state`'i `{ count: 0 }`'a eşitleyerek `0` olarak başlatıyoruz. 
 
 ```js{4-6}
 class Example extends React.Component {
@@ -195,7 +195,7 @@ Fonksiyonda zaten değişken olarak `setCount` ve `count`'a sahibiz, bu yüzden 
 
 ## Özet {#recap}
 
-Hadi şimdi **öğrendiklerimizi baştan sona özetleyelim**
+Hadi şimdi **öğrendiklerimize göz atalım**
 
 <!--
   I'm not proud of this line markup. Please somebody fix this.
@@ -218,11 +218,11 @@ Hadi şimdi **öğrendiklerimizi baştan sona özetleyelim**
 14:  }
 ```
 
-* **Line 1:** React'dan `useState` Hook'u ekliyoruz. Bu yerel state'i fonksiyon bileşenlerinde tutmamıza izin verecek
-* **Line 4:** `Example` bileşeninin içinde `useState` Hook'u çağırarak yeni bir state değişkeni tanımlıyoruz. Bu isimlerini bizim verdiğimiz bir çift değer döndürür. Değişkenimizin adı `count` çünkü tıklama sayısını tutuyor.`useState`e `0` yollayarak `count`'u `0`sıfırdan başlatıyoruz. İkinci döndürülen değerin kendisi bir fonksiyondur. Bu, bize `count`'u güncellemek için izin verir. bu yüzden onu `setCount` diye isimlendirdik.
-* **Line 9:** Kullanıcı her tıkladığında, `setCount`'u yeni bir değerle çağırırız. React, `Example` bileşenini tekrar render edip, ona yeni `count` değerini atar.
+* **Satır 1:** React'dan `useState` Hook'u ekliyoruz. Bu, yerel state'i fonksiyon bileşeninde tutmamıza izin verecek.
+* **Satır 4:** `Example` bileşeninin içinde `useState` Hook'u çağırarak yeni bir state değişkeni tanımlıyoruz. Bu, isimlerini bizim verdiğimiz bir çift değer döndürür. Değişkenimizin adı `count` çünkü tıklama sayısını tutuyor.`useState`e `0` yollayarak `count`'u `0`sıfırdan başlatıyoruz. İkinci döndürülen değerin kendisi bir fonksiyondur. Bu, bize `count`'u güncellemek için izin verir. Bu yüzden onu `setCount` diye isimlendirdik.
+* **Satır 9:** Kullanıcı her tıkladığında, `setCount`'u yeni bir değerle çağırırız. React, `Example` bileşenini tekrar render edip, ona yeni `count` değerini atar.
 
-Başlarken, eklenecek çok şey varmış gibi gözükebilir. Acele etmeyin! Açıklamalar arasında kaybolduysanız, yukarıdaki koda tekrar bakın ve baştan sona tekrar okumaya çalışın. State'in sınıfta nasıl çalıştığını unuttuğunda, bu koda meraklı gözlerle tekrar bak.Sana söz veriyoruz kod anlamlı gelecek.
+İlk bakışta öğrenecek çok fazla şey varmış gibi görünebilir. Acele etmeyin! Açıklamalar arasında kaybolduysanız, yukarıdaki koda tekrar bakın ve baştan sona tekrar okumaya çalışın. State'in sınıflarda nasıl çalıştığını unutup bu koda meraklı gözlerle tekrar baktığınızda, söz veriyoruz, daha anlamlı gelecek.
 
 
 ### İpucu: Köşeli Parantez Ne Anlama gelir? {#tip-what-do-square-brackets-mean}
@@ -233,13 +233,13 @@ State değişkenlerini tanımlarken köşeli parantezleri fark etmiş olabilirsi
   const [count, setCount] = useState(0);
 ```
 
-Soldaki isimler React API'ın bir parçası değiller. State değişkeninizi adlandırabilirsiniz:
+Soldaki isimler React API'inin bir parçası değildir.. State değişkeninizi isimlendirebilirsiniz:
 
 ```js
   const [fruit, setFruit] = useState('banana');
 ```
 
-Bu JavaScript sözdiziminin adı ["array destructuring"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring). Bunun anlamı `fruit` ve `setFruit` diye iki yeni değişken oluştururken, `fruit`'in yazıldığı yer, ilk değer, `useState` döndürür ve `setFruit`, ikinci, bu koda eşittir: 
+Bu JavaScript sözdizimi ["array destructuring"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) olarak adlandırılır.`fruit` ve `setFruit` diye iki yeni değişken oluşturduğumuz anlamına gelir.Burada `fruit` ve `useState` döndürür ve `setFruit` tarafından dönen ilk değere; `setFruit` ise ikinci değere atanır bu kod eşdeğerdir. 
 
 
 ```js
@@ -248,11 +248,11 @@ Bu JavaScript sözdiziminin adı ["array destructuring"](https://developer.mozil
   var setFruit = fruitStateVariable[1]; // Second item in a pair
 ```
 
-`useState` ile state değişkeni tanımladığımız zaman, bu bir çift (iki elemanlı bir dizi) döndürür. İlk eleman o anki değer, ikincisi ise onu güncelleyen fonksiyondur. `[0]` ve `[1]` kullanarak erişmek biraz kafa karıştırıcı çünkü onların kendine özgü anlamları var. Bu yüzden dizi yıkıcıların yerine kullanıyoruz.
+`useState` ile state değişkeni tanımladığımız zaman, bu bir çift (iki elemanlı bir dizi) döndürür. İlk eleman o anki değer, ikincisi ise onu güncelleyen fonksiyondur. `[0]` ve `[1]` kullanarak erişmek biraz kafa karıştırıcı çünkü onların kendine özgü anlamları var. Bu yüzden onun yerine dizi parçalama (array destructuring) yöntemini kullanıyoruz.
 
 >Not
 >
->React'ın `useState` bileşenlerinin hangi bileşene karşılık geldiğini nasıl anladığını merak ediyor olabilirsiniz. çünkü `this` gibi bir şeyi React'a göndermedik. Bunu burada cevaplıyoruz: [this question](/docs/hooks-faq.html#how-does-react-associate-hook-calls-with-components) ve birçok şeyi FAQ bölümünde cevaplıyoruz.
+>this gibi bir şey iletmediğimiz için, React'in useState'in hangi bileşene denk geldiğini nasıl bildiğini merak ediyor olabilirsiniz. Bu soruyu ve bunun gibi daha bir coğunu S.S.S. kısmında cevaplıyoruz.
 
 ### İpucu: Çoklu State Değişkeni Kullanımı {#tip-using-multiple-state-variables}
 
