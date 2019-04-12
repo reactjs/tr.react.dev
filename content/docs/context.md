@@ -6,11 +6,11 @@ permalink: docs/context.html
 
 Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen ağacı üzerinden veri iletmenin bir yolunu sağlar.
 
-Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
+Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, bileşen ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
 
 
-- [Context ne zaman kullanılır](#when-to-use-context)
-- [Context kullanmadan önce](#before-you-use-context)
+- [Context Ne Zaman Kullanılır](#when-to-use-context)
+- [Context Kullanmadan Önce](#before-you-use-context)
 - [API](#api)
   - [React.createContext](#reactcreatecontext)
   - [Context.Provider](#contextprovider)
@@ -25,7 +25,7 @@ Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağ�
 
 ## Context Ne Zaman Kullanılır {#when-to-use-context}
 
-Context mevcut kullanıcı doğrulama, tema veya dil seçimi gibi React bileşen ağacında global olarak düşünülebilecek verileri paylaşmak için tasarlanmıştır. Örneğin aşağıdaki kodda Button bileşenine stil vermek için manuel olarak bir "theme" prop'unu geçiyoruz.
+Context; mevcut kullanıcıyı doğrulama, tema veya dil seçimi gibi React bileşen ağacında global olarak düşünülebilecek verileri paylaşmak için tasarlanmıştır. Örneğin aşağıdaki kodda Button bileşenine stil vermek için manuel olarak bir "theme" prop'unu geçiyoruz.
 
 `embed:context/motivation-problem.js`
 
@@ -35,7 +35,7 @@ Context kullanarak, prop'ları ara öğelerden geçirmekten kaçınabiliriz.
 
 ## Context Kullanmadan Önce {#before-you-use-context}
 
-Context esas olarak bazı verilere farklı düzeylerdeki iç içe geçmiş *birçok* bileşen tarafından erişilebilir olması gerektiğinde kullanılır. Bileşenin yeniden kullanımını zorlaştırdığından onu ölçülü bir şekilde uygulayın.
+Context esas olarak, bazı verilerin farklı düzeylerdeki iç içe geçmiş *birçok* bileşen tarafından erişilebilir olması gerektiğinde kullanılır. Bileşenin yeniden kullanımını zorlaştırdığından onu ölçülü bir şekilde uygulayın.
 
 **Yanlızca bazı prop'ları birçok aşama üzerinden geçmek istemezseniz, [bileşen kompozisyonu](/docs/composition-vs-inheritance.html) genellikle Context'ten daha basit bir çözümdür.**
 
@@ -43,11 +43,11 @@ Context esas olarak bazı verilere farklı düzeylerdeki iç içe geçmiş *bir�
 
 ```js
 <Page user={user} avatarSize={avatarSize} />
-// ... render eden ...
+// ... Bu, bunu render ediyor ...
 <PageLayout user={user} avatarSize={avatarSize} />
-// ... render eden ...
+// ... Bu, bunu render ediyor ...
 <NavigationBar user={user} avatarSize={avatarSize} />
-// ... render eden ...
+// ... Bu, bunu render ediyor ...
 <Link href={user.permalink}>
   <Avatar user={user} size={avatarSize} />
 </Link>
@@ -68,19 +68,19 @@ function Page(props) {
   return <PageLayout userLink={userLink} />;
 }
 
-// Şimdi, Bizde olan:
+// Şimdi, bizde olan:
 <Page user={user} avatarSize={avatarSize} />
-// ... render eden ...
+// ... Bu, bunu render ediyor ...
 <PageLayout userLink={...} />
-// ... render eden ...
+// ... Bu, bunu render ediyor ...
 <NavigationBar userLink={...} />
-// ... render eden ...
+// ... Bu, bunu render ediyor ...
 {props.userLink}
 ```
 
 Bu değişiklikle birlikte sadece en üstteki Page bileşeni `Link` ve `Avatar` bileşenlerinin `user` ve `avatarSize` kullanımını bilmesi gerekir.
 
-Bu *kontrolün tersine çevrilmesi*, birçok durumda uygulamanızdan geçirmeniz gereken prop'ların sayısını azaltarak ve kök bileşenlere daha fazla kontrol sağlayarak kodunuzu daha temiz hale getirebilir. Fakat bu her durumda doğru bir seçim değildir: ağaçta daha fazla karmaşıklık taşımak, daha üst seviyeli bileşenleri daha karmaşık hale getirir ve daha düşük seviyeli bileşenleri istediğinizden daha esnek olmaya zorlar.
+Bu *kontrolün tersine çevrilmesi*, birçok durumda uygulamanızdan geçirmeniz gereken prop'ların sayısını azaltarak ve kök bileşenlere daha fazla kontrol sağlayarak kodunuzu daha temiz hale getirebilir. Fakat bu her durumda doğru bir seçim değildir: bilesen agacinda daha fazla karmaşıklık taşımak, daha üst seviyeli bileşenleri daha karmaşık hale getirir ve daha düşük seviyeli bileşenleri istediğinizden daha esnek olmaya zorlar.
 
 Bir bileşen için tek bir alt elemanla sınırlı değilsiniz. [Burada belirtildiği gibi](/docs/composition-vs-inheritance.html#containment), alt elemanlar için birden çok alt eleman geçirebilirsiniz, hatta alt bileşenler için birden fazla ayrı "slots'a" sahip olabilirsiniz.
 
@@ -104,7 +104,7 @@ function Page(props) {
 }
 ```
 
-Bu patern, bir alt elemanı üst elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
+Bu model, bir alt elemanı üst elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
 
 Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı iç içe geçmiş seviyelerinde erişilebilir olması gerekir. Context, bu tur verileri ve güncellemeleri ağaçtaki tüm bileşenlere "yaymanızı" sağlar. Context kullanımının diğer alternatiflerden daha basit olabileceği ortak örnekler arasında konum ayarlarının yönetimi, tema veya veri önbelleği bulunur.
 
@@ -118,17 +118,17 @@ const MyContext = React.createContext(defaultValue);
 
 Bir Context nesnesi oluşturur. React, bu Context nesnesine abone bir bileşen oluşturduğunda, context'in mevcut değerini ağaçtaki en yakın `Provider'dan` okuyacaktır.
 
-`defaultValue` argümanı **yanlızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenleri içermeden izolasyonda test etmek için yardımcı olabilir. Not: Provider value değerini `tanımsız` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
+`defaultValue` argümanı **yanlızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenleri başka bileşenlerin altına koymadan izole bir şekilde test etmek için yardımcı olabilir. Not: Provider value değerini `undefined` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
 
 ### `Context.Provider` {#contextprovider}
 
 ```js
-<MyContext.Provider value={/* bazı değer */}>
+<MyContext.Provider value={/* bir değer */}>
 ```
 
 Her Context nesnesi, tüketici bileşenlerin context güncellemelerine abone olmasını sağlayan bir React Provider bileşeni ile birlikte gelir.
 
-Bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
+Bu Provider'in soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
 Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
 
@@ -156,19 +156,19 @@ class MyClass extends React.Component {
   }
   render() {
     let value = this.context;
-    /* Mycontext değerini esas alarak bir şey oluşturma */
+    /* Mycontext değerini esas alarak bir şey render etme */
   }
 }
 MyClass.contextType = MyContext;
 ```
 
-Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu, `this.context` 'i kullanarak bu Context türünün en yakın mevcut değerini kullanmanızı sağlar. Bunu render methodu da dahil olmak üzere yaşam döngüsü methodlarından herhangi birinde belirtebilirsiniz. 
+Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu, `this.context` 'i kullanarak bu Context türünün en yakın mevcut değerini kullanmanızı sağlar. Bunu render metodu da dahil olmak üzere yaşam döngüsü metodlarından herhangi birinde belirtebilirsiniz. 
 
 > Not:
 >
-> Bu API'yi kullanarak yalnızca tek bir içeriğe abone olabilirsiniz. Daha fazla okumanız gerekiyorsa, bakınız [Çoklu Context Tüketimi](#consuming-multiple-contexts).
+> Bu API'yi kullanarak yalnızca tek bir context'e abone olabilirsiniz. Daha fazla okumanız gerekiyorsa, [Çoklu Context Tüketimi](#consuming-multiple-contexts) kısmına bakabilirsiniz.
 >
-> Deneysel [genel sınıf alanları sözdizimini](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
+> Deneysel [public sınıf alanları sözdizimini (public class fields)](https://babeljs.io/docs/plugins/transform-class-properties/) kullanıyorsanız, `contextType'ınızı` başlatmak için **statik** bir sınıf alanı kullanablirsiniz.
 
 
 ```js
@@ -176,7 +176,7 @@ class MyClass extends React.Component {
   static contextType = MyContext;
   render() {
     let value = this.context;
-    /* value'ya dayalı bir şey render etmek */
+    /* value değerine dayalı bir şey render etmek */
   }
 }
 ```
@@ -235,12 +235,12 @@ Context'in yeniden render edilmesini hızlı tutmak için React her context tük
 
 ## Uyarılar {#caveats}
 
-Context yeniden render'lamayı belirlemek için referans kimliği kullandığından, bir Provider'ın üst elemanı yeniden render'landığında tüketicilerdeki istenmeyen render'ları tetikleyebilecek bazı kazanımlar vardır. Örneğin aşağıdaki kodda provider her yeniden render'landığında tüm tüketiciler yeniden render'lanır. Çünkü `value` için her zaman yeni bir obje oluşturulur:
+Context, yeniden render edilme zamanını belirlemek icin referans kimliği kullandığından, bir Provider'ın üst elemanı yeniden render'landığında tüketicilerdeki istenmeyen render'ları tetikleyebilecek bazı kazanımlar vardır. Örneğin aşağıdaki kodda provider her yeniden render'landığında tüm tüketiciler yeniden render'lanır. Çünkü `value` için her zaman yeni bir obje oluşturulur:
 
 `embed:context/reference-caveats-problem.js`
 
 
-Bunu aşmak için, value'u üst eleman'ın state'ine getirin:
+Bunu aşmak için, value degerini üst elemanın state'ine taşıyın:
 
 `embed:context/reference-caveats-solution.js`
 
