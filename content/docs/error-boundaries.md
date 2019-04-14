@@ -1,28 +1,28 @@
 ---
 id: error-boundaries
-title: Error Boundaries
+title: Hata Sınırları
 permalink: docs/error-boundaries.html
 ---
 
-In the past, JavaScript errors inside components used to corrupt React’s internal state and cause it to [emit](https://github.com/facebook/react/issues/4026) [cryptic](https://github.com/facebook/react/issues/6895) [errors](https://github.com/facebook/react/issues/8579) on next renders. These errors were always caused by an earlier error in the application code, but React did not provide a way to handle them gracefully in components, and could not recover from them.
+Geçmişte, bileşenler içindeki JavaScript hataları React'in dahili stateini bozar ve sonraki renderlarda [şifreli](https://github.com/facebook/react/issues/6895) [hatalar](https://github.com/facebook/react/issues/8579) [gösterirdi](https://github.com/facebook/react/issues/4026). Bu hataların hepsi uygulama kodunda daha önce ortaya çıkmış hatalardan kaynaklanıyordu ve React bu hataları bileşenlerde ele alacak şık bir yol sunmuyor ve bu hataları da atlatamıyordu.
 
 
-## Introducing Error Boundaries {#introducing-error-boundaries}
+## Hata Sınırlarına Giriş {#introducing-error-boundaries}
 
-A JavaScript error in a part of the UI shouldn’t break the whole app. To solve this problem for React users, React 16 introduces a new concept of an “error boundary”.
+Kullanıcı arayüzünün bir parşasında ortaya çıkan bir hata, tüm uygulamayı bozmamalıdır. React kullanıcıları için bu sorunu çözmek adına React 16, "hata sınırı" adında yeni bir konsepti tanıtıyor.
 
-Error boundaries are React components that **catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI** instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
+Hata sınırları, bozuk bileşen ağacı yerine **herhangi bir alt bileşen ağacında oluşmuş Javascript hatalarını yakalayan, bunları kayda geçiren ve bir son çare arayüzü gösteren** React bileşenleridir. Hata sınırları tüm alt ağaçta render esnasında, yaşam döngüsü metodlarında ve constructor'da oluşan hataları yakalar.
 
-> Note
+> Not
 >
-> Error boundaries do **not** catch errors for:
+> Hata sınırları, aşağıdaki hataları **yakalamaz**:
 >
-> * Event handlers ([learn more](#how-about-event-handlers))
-> * Asynchronous code (e.g. `setTimeout` or `requestAnimationFrame` callbacks)
-> * Server side rendering
-> * Errors thrown in the error boundary itself (rather than its children)
+> * Olay yöneticileri ([daha fazla bilgi](#how-about-event-handlers))
+> * Asenkron kod (örneğin `setTimeout` veya `requestAnimationFrame` callbackleri)
+> * Sunucu tarafındaki render
+> * Hata sınırının (alt elemanları yerine) kendisinde ortaya çıkan hatalar
 
-A class component becomes an error boundary if it defines either (or both) of the lifecycle methods [`static getDerivedStateFromError()`](/docs/react-component.html#static-getderivedstatefromerror) or [`componentDidCatch()`](/docs/react-component.html#componentdidcatch). Use `static getDerivedStateFromError()` to render a fallback UI after an error has been thrown. Use `componentDidCatch()` to log error information.
+Bir sınıf bileşenini, [`static getDerivedStateFromError()`](/docs/react-component.html#static-getderivedstatefromerror) ve [`componentDidCatch()`](/docs/react-component.html#componentdidcatch) metodlarından birini (veya ikisini birden) tanımlarsa, bir hata sınırına dönüşür. Bir hatanın ortaya çıkışının ardından, son çare bileşeni render etmek için, `static getDerivedStateFromError()` metodunu, hata bilgisinin günlüğünü tutmak içinse `componentDidCatch()` metodunu kullanınız.
 
 ```js{7-10,12-15,18-21}
 class ErrorBoundary extends React.Component {
@@ -32,27 +32,28 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
+    // Bir sonraki render'da son çare arayüzünü göstermek için
+    // state'i güncelleyin.
     return { hasError: true };
   }
 
   componentDidCatch(error, info) {
-    // You can also log the error to an error reporting service
+    // Hatanızı bir hata bildirimi servisine de yollayabilirsiniz.
     logErrorToMyService(error, info);
   }
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
+      // İstediğiniz herhangi bir son çare arayüzünü render edebilirsiniz.
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 ```
 
-Then you can use it as a regular component:
+Ardından, normal bir bileşen gibi kullanabilirsiniz:
 
 ```js
 <ErrorBoundary>
@@ -60,13 +61,13 @@ Then you can use it as a regular component:
 </ErrorBoundary>
 ```
 
-Error boundaries work like a JavaScript `catch {}` block, but for components. Only class components can be error boundaries. In practice, most of the time you’ll want to declare an error boundary component once and use it throughout your application.
+Hata sınırları, bileşenler için JavaScript'in `catch {}` bloğu gibidir. Yalnız sınıf bileşenleri hata sınırı olabilirler. Pratikte, genellikle bir hata sınırını bir kez tanımlayıp, tüm uygulamanızda kullanmak isteyeceksiniz.
 
-Note that **error boundaries only catch errors in the components below them in the tree**. An error boundary can’t catch an error within itself. If an error boundary fails trying to render the error message, the error will propagate to the closest error boundary above it. This, too, is similar to how catch {} block works in JavaScript.
+**Hata sınırlarının yalnızca altlarındaki bileşenlerde meydana gelen hataları yakaladıklarını** dikkate alınız.  Bir hata sınırı, kendi içinde meydana gelen hataları yakalayamaz. Eğer bir hata sınırı, hata mesajını render etmekte başarılı olamazsa, bu hata onun üzerindeki en yakın hata sınırına delege edilir. Bu, JavaScript'teki `catch {}` bloğunun çalışma prensibine yakındır.
 
-## Live Demo {#live-demo}
+## Canlı Demo {#live-demo}
 
-Check out [this example of declaring and using an error boundary](https://codepen.io/gaearon/pen/wqvxGa?editors=0010) with [React 16](/blog/2017/09/26/react-v16.0.html).
+[React 16](/blog/2017/09/26/react-v16.0.html) ile [bir hata sınırının nasıl tanımlandığı ve kullanıldığına](https://codepen.io/gaearon/pen/wqvxGa?editors=0010) göz atınız.
 
 
 ## Where to Place Error Boundaries {#where-to-place-error-boundaries}
