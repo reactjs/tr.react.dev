@@ -112,7 +112,7 @@ function Example() {
 
 ## Bir State Değişkeni Tanımlamak  {#declaring-a-state-variable}
 
-Bir sınıfın içinde `count` state'ini constructor (yapıcı fonksiyon) içinde `this.state`'i `{ count: 0 }`'a eşitleyerek `0` olarak başlatıyoruz. 
+Bir sınıfın içinde, `count` state'ini constructor (yapıcı fonksiyon) içinde `this.state`'i `{ count: 0 }`'a eşitleyerek `0` olarak başlatıyoruz. 
 
 ```js{4-6}
 class Example extends React.Component {
@@ -124,7 +124,7 @@ class Example extends React.Component {
   }
 ```
 
-fonksiyon bileşenlerinde `this` yoktur bu yüzden `this.state`'e değer ataması veya okuma yapamıyoruz. Bunun yerine bileşenimizin içinde direkt olarak `useState` hook'unu çağırıyoruz. 
+Fonksiyon bileşenlerinde `this` yoktur; bu yüzden `this.state`'e değer ataması veya `this.state`ten okuma yapamıyoruz. Bunun yerine bileşenimizin içinde direkt olarak `useState` hook'unu çağırıyoruz. 
 
 ```js{4,5}
 import React, { useState } from 'react';
@@ -134,11 +134,11 @@ function Example() {
   const [count, setCount] = useState(0);
 ```
 
-**`useState`'i çağırmak ne işe yarar?** Bu yeni bir "state değişkeni" tanımlar. Değişkenimizin adı `count` fakat farklı bir şekilde( örneğin `banana`) çağırabilirdik. Bu yöntemle fonksiyon çağrıları arasında verilerinizi koruyabilirsiniz. — `useState` ise `this.state`'in sınıfta sağladığı özellikleri kullanmanın yeni bir yoludur. Normalde değişkenler fonksiyon bitiminde kaybolur fakat state değişkenleri React tarafından korunur.
+**`useState`'i çağırmak ne işe yarar?** Bu, yeni bir "state değişkeni" tanımlar. Değişkenimizin adı `count`; fakat farklı bir şekilde de (örneğin `banana`) çağırabilirdik. Bu yöntemle fonksiyon çağrıları arasında verilerinizi koruyabilirsiniz. — `useState` ise `this.state`'in sınıfta sağladığı özellikleri kullanmanın yeni bir yoludur. Normalde değişkenler fonksiyon bitiminde "kaybolur"; fakat state değişkenleri React tarafından korunur.
 
 **`useState`'e argüman olarak ne atarız?** `useState()` Hook'u için tek argüman initial (başlangıç) state argümanıdır. Sınıfların aksine, state bir nesne olmak zorunda değildir. Sayı ya da string tutabiliriz. Örneğimizde kullanıcının tıklama sayısı için bir sayı istedik bu yüzden değişkenimizin başlangıç değeri `0` olarak atandı. (eğer state'in içinde iki farklı değer tutmak isteseydik,  `useState()`'i iki kere çağırmamız gerekecekti.)
 
-**`useState` geriye ne döndürür?** `useState` geriye iki tane değer döndürür: şimdiki state ve o state'i güncelleyen fonksiyon. Bu, `const [count, setCount] = useState()` yazmamızın sebebidir. Bu, bir sınıftaki `this.state.count` ve `this.setState`'e benzer. Eğer bizim kullandığımız söz dizimi size tanıdık gelmediyse, [bu sayfanın alt kısmında](/docs/hooks-state.html#tip-what-do-square-brackets-mean) bu konuya tekrar döneceğiz.
+**`useState` geriye ne döndürür?** `useState` geriye iki tane değer döndürür: Şimdiki state ve o state'i güncelleyen fonksiyon. Bu, `const [count, setCount] = useState()` yazmamızın sebebidir. Bu, bir sınıftaki `this.state.count` ve `this.setState`'e benzer. Eğer kullandığımız söz dizimi size tanıdık gelmediyse, [sayfanın alt kısmında](/docs/hooks-state.html#tip-what-do-square-brackets-mean) bu konuya tekrar döneceğiz.
 
 Şimdi `useState` Hook'unun ne yaptığını bildiğimize göre, örneğimiz daha mantıklı bir hale gelecektir.
 
@@ -158,7 +158,7 @@ function Example() {
 >
 >`useState` 'in isminin neden `createState` olmadığını merak ediyor olabilirsiniz.
 >
->"Create" tam olarak doğru olmazdı. Çünkü state; sadece bileşenimizi ilk kez render ettiğimizde oluşturulur. Sonraki renderlarda `useState` bize o anki state'i verir. Aksi takdirde bu "state" olmazdı. Aynı zamanda hook'ların isimlerinin neden *hep* `use` ile başlamasının nedeni de var. Bunu daha sonra [Rules of Hooks](/docs/hooks-rules.html) bölümünde öğreneceğiz.
+>"Create" tam olarak doğru olmazdı. Çünkü state; sadece bileşenimizi ilk kez render ettiğimizde oluşturulur. Sonraki renderlarda `useState` bize o anki state'i verir. Aksi takdirde bu "state" olmazdı. Aynı zamanda hook'ların isimlerinin neden *hep* `use` ile başlamasının nedeni de var. Bunu daha sonra [Hook Kuralları](/docs/hooks-rules.html) bölümünde öğreneceğiz.
 
 ## State Okuma {#reading-state}
 
@@ -233,13 +233,13 @@ State değişkenlerini tanımlarken köşeli parantezleri fark etmiş olabilirsi
   const [count, setCount] = useState(0);
 ```
 
-Soldaki isimler React API'inin bir parçası değildir. State değişkeninizi isimlendirebilirsiniz:
+Soldaki isimler React API'ının bir parçası değildir.Kendi state değişkenlerinizi isimlendirebilirsiniz:
 
 ```js
   const [fruit, setFruit] = useState('banana');
 ```
 
-Bu JavaScript sözdizimi ["array destructuring"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) olarak adlandırılır.`fruit` ve `setFruit` diye iki yeni değişken oluşturduğumuz anlamına gelir.Burada `fruit`, `useState` tarafından dönen ilk değere; `setFruit` ise ikinci değere atanır bu kod ile eşdeğerdir. 
+Bu JavaScript sözdizimi ["dizi paraçalama (array destructuring)"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) olarak adlandırılır.`fruit` ve `setFruit` diye iki yeni değişken oluşturduğumuz anlamına gelir.Burada `fruit`, `useState` tarafından dönen ilk değere; `setFruit` ise ikinci değere atanır bu kod ile eşdeğerdir. 
 
 
 ```js
@@ -256,7 +256,7 @@ Bu JavaScript sözdizimi ["array destructuring"](https://developer.mozilla.org/e
 
 ### İpucu: Çoklu State Değişkeni Kullanımı {#tip-using-multiple-state-variables}
 
-Ayrıca; birden fazla state kullanmak istediğimiz durumlarda, farklı state değişkenlerine farklı adlar vermemize izin verdiği için, state değişkenlerini bir çift olarak `([something, setSomething])` tanımlamak kullanışlıdır.
+Ayrıca; birden fazla state kullanmak istediğimiz durumlarda, farklı state değişkenlerine farklı adlar vermemize izin verdiği için, state değişkenlerini bir çift olarak (`[something, setSomething]`) tanımlamak kullanışlıdır.
 
 ```js
 function ExampleWithManyStates() {
@@ -287,4 +287,4 @@ Bu sayfada React tarafından sağlanan Hook'lardan birini, `useState`'i, öğren
 Aynı zamanda Hook'lar hakkında bir şeyler öğrendik. Hooklar, React özelliklerini fonksiyon bileşenlerine bağlamamızı sağlayan fonksiyonlardir. İsimleri her zaman `use` ile başlar ve henüz öğrenmediğimiz Hook'lar vardır.
 
 
-**Hadi şimdi bir sonraki hook olarak  [`useEffect` öğrenerek](/docs/hooks-effect.html) devam edelim.** useEffect, bileşenler üzerinde yan etkiler gerçekleştirmenize izin verir ve sınıflardaki yaşam döngüsü (lifecycle) metotlarına benzer.
+**Hadi şimdi bir sonraki hook olarak  [`useEffect`'i öğrenerek](/docs/hooks-effect.html) devam edelim.** useEffect, bileşenler üzerinde yan etkiler gerçekleştirmenize izin verir ve sınıflardaki yaşam döngüsü (lifecycle) metotlarına benzer.
