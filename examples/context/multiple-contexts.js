@@ -1,7 +1,7 @@
-// Theme context, default to light theme
+// Tema context'i, varsayılan olarak light tema
 const ThemeContext = React.createContext('light');
 
-// Signed-in user context
+// Oturum açmış kullanıcı context'i
 const UserContext = React.createContext({
   name: 'Guest',
 });
@@ -10,7 +10,7 @@ class App extends React.Component {
   render() {
     const {signedInUser, theme} = this.props;
 
-    // App component that provides initial context values
+    // İlk context value'larını sağlayan App bileşeni
     // highlight-range{2-3,5-6}
     return (
       <ThemeContext.Provider value={theme}>
@@ -31,7 +31,7 @@ function Layout() {
   );
 }
 
-// A component may consume multiple contexts
+// Bir bileşen birden fazla context'i tüketebilir
 function Content() {
   // highlight-range{2-10}
   return (
