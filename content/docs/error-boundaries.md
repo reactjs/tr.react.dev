@@ -102,12 +102,12 @@ Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/
 
 > Not
 >
-> Yığın izlerinde gösterilen bileşen isimleri, [`Function.name`](https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Function/name) özelliğine bağlıdır. Eğer bunu henüz desteklemeyen eski tarayıcıları (örneğin IE 11) da destekliyorsanız, uygulamanızda `Function.name` desteği sunan [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name) gibi bir polyfill kullanmayı düşünün. Alternatif olarak tüm bileşenlerinizde [`displayName`](/docs/react-component.html#displayname) özelliğini tanımlayabilirsiniz.
+> Yığın izlerinde gösterilen bileşen isimleri, [`Function.name`](https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Function/name) özelliğine bağlıdır. Eğer bunu henüz desteklemeyen eski tarayıcıları (örneğin IE 11) da destekliyorsanız, uygulamanızda `Function.name` desteği sunan [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name) gibi bir polyfill kullanmayı düşünün. Alternatif olarak tüm bileşenlerinizde [`displayName`](/docs/react-component.html#displayname) özelliğini ayarlayabilirsiniz.
 
 
 ## Peki Ya try/catch? {#how-about-trycatch}
 
-`try` / `catch` is great but it only works for imperative code:
+`try` / `catch` harikadır ama sadece eylemsel kodlarda çalışır:
 
 ```js
 try {
@@ -117,21 +117,21 @@ try {
 }
 ```
 
-However, React components are declarative and specify *what* should be rendered:
+Ancak, React bileşenleri bildirimseldir ve **neyin** render edileceğini belirlerler:
 
 ```js
 <Button />
 ```
 
-Error boundaries preserve the declarative nature of React, and behave as you would expect. For example, even if an error occurs in a `componentDidUpdate` method caused by a `setState` somewhere deep in the tree, it will still correctly propagate to the closest error boundary.
+Hata sınırları React'in bildirimsel doğasını korur ve beklendiği gibi davranır. Örneğin, eğer ağacın derinlerinde bir yerde `componentDidUpdate` içinde `setState`'in yol açtığı bir hata oluşsa bile en yakın hata sınırına doğru bir şekilde yönlendirilir.
 
-## How About Event Handlers? {#how-about-event-handlers}
+## Peki Ya Olay Yöneticileri? {#how-about-event-handlers}
 
-Error boundaries **do not** catch errors inside event handlers.
+Hata sınırları, olay yöneticileri içinde oluşan hataları **yakalamazlar**.
 
-React doesn't need error boundaries to recover from errors in event handlers. Unlike the render method and lifecycle methods, the event handlers don't happen during rendering. So if they throw, React still knows what to display on the screen.
+React'in olay yöneticilerinimn içinde oluşan hataları atlatmaya ihtiyacı yoktur. Render ve yaşam döngüsü metodlarının aksine, olay yöneticileri render aşamasında oluşmazlar. Yani onlar bir hata fırlattığında, React hala ekranda ne göstereceğini bilir.
 
-If you need to catch an error inside event handler, use the regular JavaScript `try` / `catch` statement:
+Eğer bir olay yöneticisi içinde bir hatayı yakalamanız gerekiyorsa, JavaScript'in sunduğu normal `try` / `catch` ifadesini kullanın:
 
 ```js{9-13,17-20}
 class MyComponent extends React.Component {
@@ -143,7 +143,7 @@ class MyComponent extends React.Component {
 
   handleClick() {
     try {
-      // Do something that could throw
+      // Hata oluşturacak bir şey yapın
     } catch (error) {
       this.setState({ error });
     }
@@ -151,17 +151,17 @@ class MyComponent extends React.Component {
 
   render() {
     if (this.state.error) {
-      return <h1>Caught an error.</h1>
+      return <h1>Hata yakalandı.</h1>
     }
-    return <div onClick={this.handleClick}>Click Me</div>
+    return <div onClick={this.handleClick}>Beni tıkla</div>
   }
 }
 ```
 
-Note that the above example is demonstrating regular JavaScript behavior and doesn't use error boundaries.
+Yukarıdaki örnekte normal JavaScript davranışlarının gösterildiğini ve hata sınırlarının kullanılmadığını dikkate alınız.
 
-## Naming Changes from React 15 {#naming-changes-from-react-15}
+## React 15'ten Sonraki İsim Değişiklikleri {#naming-changes-from-react-15}
 
-React 15 included a very limited support for error boundaries under a different method name: `unstable_handleError`. This method no longer works, and you will need to change it to `componentDidCatch` in your code starting from the first 16 beta release.
+React 15, hata sınırlarını çok limitli bir şekilde destekleyen, `unstable_handleError` isimli başka bir metod içermekteydi. Bu metod artık çalışmıyor ve onu ilk 16 beta versiyonundan itibaren kodunuzda `componentDidCatch` ile değiştirmeniz gerekmektedir.
 
-For this change, we’ve provided a [codemod](https://github.com/reactjs/react-codemod#error-boundaries) to automatically migrate your code.
+Bu değişiklik için, kodunuzdaki göçü otomatikleştirmek adına bir [codemod](https://github.com/reactjs/react-codemod#error-boundaries) sunuyoruz.
