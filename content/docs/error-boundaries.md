@@ -70,22 +70,22 @@ Hata sınırları, bileşenler için JavaScript'in `catch {}` bloğu gibidir. Ya
 [React 16](/blog/2017/09/26/react-v16.0.html) ile [bir hata sınırının nasıl tanımlandığı ve kullanıldığına](https://codepen.io/gaearon/pen/wqvxGa?editors=0010) göz atınız.
 
 
-## Where to Place Error Boundaries {#where-to-place-error-boundaries}
+## Hata Sınırlarının Konumlandırılması {#where-to-place-error-boundaries}
 
-The granularity of error boundaries is up to you. You may wrap top-level route components to display a “Something went wrong” message to the user, just like server-side frameworks often handle crashes. You may also wrap individual widgets in an error boundary to protect them from crashing the rest of the application.
+Hata sınırlarının detay seviyesi size bırakılmıştır. Tıpkı sunucu taraflı frameworklerin yaptına benzer şekilde, en üst seviyedeki rota bileşenini sararak kullanıcılara "Bir şeyler ters gitti" mesajını gösterebildiğiniz gibi, her bileşen parçasını sararak onları uygulamanın geri kalanını bozmaktan koruyabilirsiniz.
 
 
-## New Behavior for Uncaught Errors {#new-behavior-for-uncaught-errors}
+## Yakalanmamış Hatalar İçin Yeni Bir Davranış {#new-behavior-for-uncaught-errors}
 
-This change has an important implication. **As of React 16, errors that were not caught by any error boundary will result in unmounting of the whole React component tree.**
+Bu değişiklik çok önemli bir içeriğe sahip. **React 16'dan itibaren, bir hata sınırı tarafından yakalanmamış hatalar, tüm React bileşen ağacının devreden çıkmasına neden olacaktır.**
 
-We debated this decision, but in our experience it is worse to leave corrupted UI in place than to completely remove it. For example, in a product like Messenger leaving the broken UI visible could lead to somebody sending a message to the wrong person. Similarly, it is worse for a payments app to display a wrong amount than to render nothing.
+Bu kararı alırkan çok tartıştık, ancak tecrübelerimize dayanarak hatalı bir arayüzün yerinde bırakılması, onun ramamen kaldırılmasından daha kötüdür. Örneğin, Messenger gibi bir üründe hatalı bir arayüzün görünür kalması, birinin yanlış kişiye mesaj göndermesine neden olabilir. Benzer olarak, bir ödeme uygulamasında yanlış miktarın görüntülenmesi, hiçbir şey görünmemesinden daha kötüdür.
 
-This change means that as you migrate to React 16, you will likely uncover existing crashes in your application that have been unnoticed before. Adding error boundaries lets you provide better user experience when something goes wrong.
+Bu değişiklik, React 16'ya göç etmenizin ardından daha önce fark etmediğiniz hataların gün yüzüne çıkması anlamına geliyor. Hata sınırları eklemek, bir şeyler yanlış gittiğinde daha iyi bir kullanıcı deneyimi sunmanızı sağlar.
 
-For example, Facebook Messenger wraps content of the sidebar, the info panel, the conversation log, and the message input into separate error boundaries. If some component in one of these UI areas crashes, the rest of them remain interactive.
+Örneğin Facebook Messenger, kenar çubuğunun, bilgi panelinin, sohbet günlüğü ve mesaj kutusu içeriğini farklı hata sınırlamalarıyla sarar. Eğer bu kullanıcı arayüzlerinden birindeki bileşenlerden biri bozulursa, diğerleriyle etkileşim mümkün kalır.
 
-We also encourage you to use JS error reporting services (or build your own) so that you can learn about unhandled exceptions as they happen in production, and fix them.
+Ayrıca, canlı sistemdeki yakalanmamış exceptionları öğrenmeniz ve düzeltmeniz için size JS hata bildirim servislerini kullanmanızı (veya bir tane yazmanızı) şiddetle tavsiye ederiz.
 
 
 ## Component Stack Traces {#component-stack-traces}
