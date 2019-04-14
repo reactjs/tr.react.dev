@@ -30,7 +30,7 @@ class App extends React.Component {
   render() {
     //highlight-range{1-3}
     // ThemeProvider içinde bulunan ThemedButton
-    // tema bilgisini state'ten alır. Dısarıda bulunan ise
+    // tema bilgisini state'ten alır. Dışarıda bulunan ise
     // varsayılan temayı kullanır.
     //highlight-range{3-5,7}
     return (
