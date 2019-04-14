@@ -88,24 +88,24 @@ Bu değişiklik, React 16'ya göç etmenizin ardından daha önce fark etmediği
 Ayrıca, canlı sistemdeki yakalanmamış exceptionları öğrenmeniz ve düzeltmeniz için size JS hata bildirim servislerini kullanmanızı (veya bir tane yazmanızı) şiddetle tavsiye ederiz.
 
 
-## Component Stack Traces {#component-stack-traces}
+## Bileşen Yığını İzi {#component-stack-traces}
 
-React 16 prints all errors that occurred during rendering to the console in development, even if the application accidentally swallows them. In addition to the error message and the JavaScript stack, it also provides component stack traces. Now you can see where exactly in the component tree the failure has happened:
+React 16, uygulama kazara yutsa bile, render esnasında oluşan tüm hataları geliştirme aşamasında konsola yazar. Hata mesajı ve JavaScript yığınının yanı sıra, bileşen yığını izini de size sunar. Bu sayede, hatanın bileşen ağacının tam olarak neresinde olduğunu görebilirsiniz:
 
-<img src="../images/docs/error-boundaries-stack-trace.png" style="max-width:100%" alt="Error caught by Error Boundary component">
+<img src="../images/docs/error-boundaries-stack-trace.png" style="max-width:100%" alt="Hata Sınırı bileşeninde yakalanmış bir hata">
 
-You can also see the filenames and line numbers in the component stack trace. This works by default in [Create React App](https://github.com/facebookincubator/create-react-app) projects:
+Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izinde görebilirsiniz. Bu, [Create React App](https://github.com/facebookincubator/create-react-app) projelerinde öntanımlı olarak çalışmaktadır:
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
-If you don’t use Create React App, you can add [this plugin](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) manually to your Babel configuration. Note that it’s intended only for development and **must be disabled in production**.
+Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu yalnız geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
 
-> Note
+> Not
 >
-> Component names displayed in the stack traces depend on the [`Function.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name) property. If you support older browsers and devices which may not yet provide this natively (e.g. IE 11), consider including a `Function.name` polyfill in your bundled application, such as [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name). Alternatively, you may explicitly set the [`displayName`](/docs/react-component.html#displayname) property on all your components.
+> Yığın izlerinde gösterilen bileşen isimleri, [`Function.name`](https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Function/name) özelliğine bağlıdır. Eğer bunu henüz desteklemeyen eski tarayıcıları (örneğin IE 11) da destekliyorsanız, uygulamanızda `Function.name` desteği sunan [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name) gibi bir polyfill kullanmayı düşünün. Alternatif olarak tüm bileşenlerinizde [`displayName`](/docs/react-component.html#displayname) özelliğini tanımlayabilirsiniz.
 
 
-## How About try/catch? {#how-about-trycatch}
+## Peki Ya try/catch? {#how-about-trycatch}
 
 `try` / `catch` is great but it only works for imperative code:
 
