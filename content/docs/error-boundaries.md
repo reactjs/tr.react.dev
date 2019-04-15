@@ -81,20 +81,20 @@ Bu değişiklik çok önemli bir içeriğe sahip. **React 16'dan itibaren, bir h
 
 Bu kararı alırkan çok tartıştık, ancak tecrübelerimize dayanarak hatalı bir arayüzün yerinde bırakılması, onun tamamen kaldırılmasından daha kötüdür. Örneğin, Messenger gibi bir üründe hatalı bir arayüzün görünür kalması, birinin yanlış kişiye mesaj göndermesine neden olabilir. Benzer olarak, bir ödeme uygulamasında yanlış miktarın görüntülenmesi, hiçbir şey görünmemesinden daha kötüdür.
 
-Bu değişiklik, React 16'ya göç etmenizin ardından daha önce fark etmediğiniz hataların gün yüzüne çıkması anlamına geliyor. Hata sınırları eklemek, bir şeyler yanlış gittiğinde daha iyi bir kullanıcı deneyimi sunmanızı sağlar.
+Bu değişiklik, React 16'ya taşınmanızın ardından daha önce fark etmediğiniz hataların gün yüzüne çıkması anlamına geliyor. Hata sınırları eklemek, bir şeyler yanlış gittiğinde daha iyi bir kullanıcı deneyimi sunmanızı sağlar.
 
 Örneğin Facebook Messenger, kenar çubuğunun, bilgi panelinin, sohbet günlüğü ve mesaj kutusu içeriğini farklı hata sınırlamalarıyla sarar. Eğer bu kullanıcı arayüzlerinden birindeki bileşenlerden biri bozulursa, diğerleriyle etkileşim mümkün kalır.
 
 Ayrıca, canlı sistemdeki yakalanmamış exceptionları öğrenmeniz ve düzeltmeniz için size JS hata bildirim servislerini kullanmanızı (veya bir tane yazmanızı) şiddetle tavsiye ederiz.
 
 
-## Bileşen Yığını İzi {#component-stack-traces}
+## Bileşen Yığını İzi (Stack Trace) {#component-stack-traces}
 
-React 16, uygulama kazara yutsa bile, render esnasında oluşan tüm hataları geliştirme aşamasında konsola yazar. Hata mesajı ve JavaScript yığınının yanı sıra, bileşen yığını izini de size sunar. Bu sayede, hatanın bileşen ağacının tam olarak neresinde olduğunu görebilirsiniz:
+React 16, uygulama kazara yutsa bile, render esnasında oluşan tüm hataları geliştirme aşamasında konsola yazar. Hata mesajı ve JavaScript yığınının (stack) yanı sıra, bileşen yığını izini (stack trace) de size sunar. Bu sayede, hatanın bileşen ağacının tam olarak neresinde olduğunu görebilirsiniz:
 
 <img src="../images/docs/error-boundaries-stack-trace.png" style="max-width:100%" alt="Hata Sınırı bileşeninde yakalanmış bir hata">
 
-Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izinde görebilirsiniz. Bu, [Create React App](https://github.com/facebookincubator/create-react-app) projelerinde öntanımlı olarak çalışmaktadır:
+Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izinde (stack trace) görebilirsiniz. Bu, [Create React App](https://github.com/facebookincubator/create-react-app) projelerinde öntanımlı olarak çalışmaktadır:
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
@@ -102,7 +102,7 @@ Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/
 
 > Not
 >
-> Yığın izlerinde gösterilen bileşen isimleri, [`Function.name`](https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Function/name) özelliğine bağlıdır. Eğer bunu henüz desteklemeyen eski tarayıcıları (örneğin IE 11) da destekliyorsanız, uygulamanızda `Function.name` desteği sunan [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name) gibi bir polyfill kullanmayı düşünün. Alternatif olarak tüm bileşenlerinizde [`displayName`](/docs/react-component.html#displayname) özelliğini ayarlayabilirsiniz.
+> Yığın izlerinde (stack trace) gösterilen bileşen isimleri, [`Function.name`](https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Function/name) özelliğine bağlıdır. Eğer bunu henüz desteklemeyen eski tarayıcıları (örneğin IE 11) da destekliyorsanız, uygulamanızda `Function.name` desteği sunan [`function.name-polyfill`](https://github.com/JamesMGreene/Function.name) gibi bir polyfill kullanmayı düşünün. Alternatif olarak tüm bileşenlerinizde [`displayName`](/docs/react-component.html#displayname) özelliğini ayarlayabilirsiniz.
 
 
 ## Peki Ya try/catch? {#how-about-trycatch}
@@ -164,4 +164,4 @@ Yukarıdaki örnekte normal JavaScript davranışlarının gösterildiğini ve h
 
 React 15, hata sınırlarını çok limitli bir şekilde destekleyen, `unstable_handleError` isimli başka bir metod içermekteydi. Bu metod artık çalışmıyor ve onu ilk 16 beta versiyonundan itibaren kodunuzda `componentDidCatch` ile değiştirmeniz gerekmektedir.
 
-Bu değişiklik için, kodunuzdaki göçü otomatikleştirmek adına bir [codemod](https://github.com/reactjs/react-codemod#error-boundaries) sunuyoruz.
+Bu değişiklik için, kodunuzun taşınmasını otomatikleştirmek adına bir [codemod](https://github.com/reactjs/react-codemod#error-boundaries) sunuyoruz.
