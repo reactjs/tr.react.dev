@@ -4,14 +4,14 @@ title: Hata Sınırları
 permalink: docs/error-boundaries.html
 ---
 
-Geçmişte, bileşenler içindeki JavaScript hataları React'in dahili stateini bozar ve sonraki renderlarda [şifreli](https://github.com/facebook/react/issues/6895) [hatalar](https://github.com/facebook/react/issues/8579) [gösterirdi](https://github.com/facebook/react/issues/4026). Bu hataların hepsi uygulama kodunda daha önce ortaya çıkmış hatalardan kaynaklanıyordu ve React bu hataları bileşenlerde ele alacak şık bir yol sunmuyor ve bu hataları da atlatamıyordu.
+Geçmişte, bileşenler içindeki JavaScript hataları React'in dahili state'ini bozar ve sonraki renderlarda [şifreli](https://github.com/facebook/react/issues/6895) [hatalar](https://github.com/facebook/react/issues/8579) [gösterirdi](https://github.com/facebook/react/issues/4026). Bu hataların hepsi uygulama kodunda daha önce ortaya çıkmış hatalardan kaynaklanıyordu ve React bu hataları bileşenlerde ele alacak şık bir yol sunmuyor ve bu hataları da atlatamıyordu.
 
 
 ## Hata Sınırlarına Giriş {#introducing-error-boundaries}
 
-Kullanıcı arayüzünün bir parşasında ortaya çıkan bir hata, tüm uygulamayı bozmamalıdır. React kullanıcıları için bu sorunu çözmek adına React 16, "hata sınırı" adında yeni bir konsepti tanıtıyor.
+Kullanıcı arayüzünün bir parçasında ortaya çıkan bir hata, tüm uygulamayı bozmamalıdır. React kullanıcıları için bu sorunu çözmek adına React 16, "hata sınırı" adında yeni bir konsepti tanıtıyor.
 
-Hata sınırları, bozuk bileşen ağacı yerine **herhangi bir alt bileşen ağacında oluşmuş Javascript hatalarını yakalayan, bunları kayda geçiren ve bir son çare arayüzü gösteren** React bileşenleridir. Hata sınırları tüm alt ağaçta render esnasında, yaşam döngüsü metodlarında ve constructor'da oluşan hataları yakalar.
+Hata sınırları, bozuk bileşen ağacı yerine **herhangi bir alt bileşen ağacında oluşmuş Javascript hatalarını yakalayan, bunları kayda geçiren ve bir son çare arayüzü gösteren** React bileşenleridir. Hata sınırları tüm alt bileşen ağacında render esnasında, yaşam döngüsü metodlarında ve constructor'da oluşan hataları yakalar.
 
 > Not
 >
@@ -22,7 +22,7 @@ Hata sınırları, bozuk bileşen ağacı yerine **herhangi bir alt bileşen ağ
 > * Sunucu tarafındaki render
 > * Hata sınırının (alt elemanları yerine) kendisinde ortaya çıkan hatalar
 
-Bir sınıf bileşenini, [`static getDerivedStateFromError()`](/docs/react-component.html#static-getderivedstatefromerror) ve [`componentDidCatch()`](/docs/react-component.html#componentdidcatch) metodlarından birini (veya ikisini birden) tanımlarsa, bir hata sınırına dönüşür. Bir hatanın ortaya çıkışının ardından, son çare bileşeni render etmek için, `static getDerivedStateFromError()` metodunu, hata bilgisinin günlüğünü tutmak içinse `componentDidCatch()` metodunu kullanınız.
+Bir sınıf bileşeni, [`static getDerivedStateFromError()`](/docs/react-component.html#static-getderivedstatefromerror) ve [`componentDidCatch()`](/docs/react-component.html#componentdidcatch) metodlarından birini (veya ikisini birden) tanımlarsa, bir hata sınırına dönüşür. Bir hatanın ortaya çıkışının ardından, son çare bileşeni render etmek için, `static getDerivedStateFromError()` metodunu, hata bilgisinin günlüğünü tutmak içinse `componentDidCatch()` metodunu kullanınız.
 
 ```js{7-10,12-15,18-21}
 class ErrorBoundary extends React.Component {
@@ -72,14 +72,14 @@ Hata sınırları, bileşenler için JavaScript'in `catch {}` bloğu gibidir. Ya
 
 ## Hata Sınırlarının Konumlandırılması {#where-to-place-error-boundaries}
 
-Hata sınırlarının detay seviyesi size bırakılmıştır. Tıpkı sunucu taraflı frameworklerin yaptına benzer şekilde, en üst seviyedeki rota bileşenini sararak kullanıcılara "Bir şeyler ters gitti" mesajını gösterebildiğiniz gibi, her bileşen parçasını sararak onları uygulamanın geri kalanını bozmaktan koruyabilirsiniz.
+Hata sınırlarının detay seviyesi size bırakılmıştır. Tıpkı sunucu taraflı frameworklerin yaptığına benzer şekilde, en üst seviyedeki rota bileşenini sararak kullanıcılara "Bir şeyler ters gitti" mesajını gösterebildiğiniz gibi, her bileşen parçasını sararak onları uygulamanın geri kalanını bozmaktan koruyabilirsiniz.
 
 
 ## Yakalanmamış Hatalar İçin Yeni Bir Davranış {#new-behavior-for-uncaught-errors}
 
 Bu değişiklik çok önemli bir içeriğe sahip. **React 16'dan itibaren, bir hata sınırı tarafından yakalanmamış hatalar, tüm React bileşen ağacının devreden çıkmasına neden olacaktır.**
 
-Bu kararı alırkan çok tartıştık, ancak tecrübelerimize dayanarak hatalı bir arayüzün yerinde bırakılması, onun ramamen kaldırılmasından daha kötüdür. Örneğin, Messenger gibi bir üründe hatalı bir arayüzün görünür kalması, birinin yanlış kişiye mesaj göndermesine neden olabilir. Benzer olarak, bir ödeme uygulamasında yanlış miktarın görüntülenmesi, hiçbir şey görünmemesinden daha kötüdür.
+Bu kararı alırkan çok tartıştık, ancak tecrübelerimize dayanarak hatalı bir arayüzün yerinde bırakılması, onun tamamen kaldırılmasından daha kötüdür. Örneğin, Messenger gibi bir üründe hatalı bir arayüzün görünür kalması, birinin yanlış kişiye mesaj göndermesine neden olabilir. Benzer olarak, bir ödeme uygulamasında yanlış miktarın görüntülenmesi, hiçbir şey görünmemesinden daha kötüdür.
 
 Bu değişiklik, React 16'ya göç etmenizin ardından daha önce fark etmediğiniz hataların gün yüzüne çıkması anlamına geliyor. Hata sınırları eklemek, bir şeyler yanlış gittiğinde daha iyi bir kullanıcı deneyimi sunmanızı sağlar.
 
@@ -98,7 +98,7 @@ Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izind
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
-Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu yalnız geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
+Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
 
 > Not
 >
@@ -107,7 +107,7 @@ Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/
 
 ## Peki Ya try/catch? {#how-about-trycatch}
 
-`try` / `catch` harikadır ama sadece eylemsel kodlarda çalışır:
+`try` / `catch` harikadır ama sadece eylemsel (imperative) kodlarda çalışır:
 
 ```js
 try {
@@ -117,13 +117,13 @@ try {
 }
 ```
 
-Ancak, React bileşenleri bildirimseldir ve **neyin** render edileceğini belirlerler:
+Ancak, React bileşenleri bildirimseldir (declarative) ve **neyin** render edileceğini belirlerler:
 
 ```js
 <Button />
 ```
 
-Hata sınırları React'in bildirimsel doğasını korur ve beklendiği gibi davranır. Örneğin, eğer ağacın derinlerinde bir yerde `componentDidUpdate` içinde `setState`'in yol açtığı bir hata oluşsa bile en yakın hata sınırına doğru bir şekilde yönlendirilir.
+Hata sınırları React'in bildirimsel (declarative) doğasını korur ve beklendiği gibi davranır. Örneğin, eğer bileşen ağacının derinlerinde bir yerde `componentDidUpdate` içinde `setState`'in yol açtığı bir hata oluşsa bile en yakın hata sınırına doğru bir şekilde yönlendirilir.
 
 ## Peki Ya Olay Yöneticileri? {#how-about-event-handlers}
 
