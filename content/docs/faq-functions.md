@@ -1,12 +1,12 @@
 ---
 id: faq-functions
-title: Bileşenlere Fonksiyon Atanması
+title: Bileşenlere Fonksiyon Gönderilmesi
 permalink: docs/faq-functions.html
 layout: docs
 category: FAQ
 ---
 
-### Bir bileşene nasıl olay işleyici atayabilirim? (onClick gibi) {#how-do-i-pass-an-event-handler-like-onclick-to-a-component}
+### Bir bileşene nasıl olay işleyici gönderebilirim? (onClick gibi) {#how-do-i-pass-an-event-handler-like-onclick-to-a-component}
 
 Olayları işleyiciler ve diğer fonksiyonlar alt bileşenlere prop olarak aktarılabilir:
 
@@ -87,7 +87,7 @@ class Foo extends Component {
 
 ### Render metodu içerisinde ok fonksiyonu kullanmak doğru mudur? {#is-it-ok-to-use-arrow-functions-in-render-methods}
 
-Genel olarak konuşursak, evet doğrudur ve genellikle parametreleri geri çağırma fonksiyonlarına aktarmanın en kolay yoludur.
+Genel olarak konuşursak, evet doğrudur ve genellikle parametreleri geri çağırma fonksiyonlarına göndermenin en kolay yoludur.
 
 Eğer performans sorunlarınız varsa, optimize edin!
 
@@ -106,7 +106,7 @@ method();
 
 Metodları bağlamak, ikinci kod parçacığının birincisiyle aynı şekilde çalışmasını sağlar.
 
-React'ta genellikle sadece diğer bileşenlere *aktardığınız* metodları bağlamanız gerekir. Örneğin `<button onClick={this.handleClick}>`, `this.handleClick` fonksiyonunu aktarmaktadır. Bu yüzden bu metodu bağlamanız gerekir. Ancak `render` metodunu veya diğer yaşam döngüsü metodlarını bağlamak gereksizdir çünkü bunlar diğer bileşenlere aktarılmazlar.
+React'te genellikle sadece diğer bileşenlere *gönderdiğiniz* metodları bağlamanız gerekir. Örneğin `<button onClick={this.handleClick}>`, `this.handleClick` fonksiyonunu göndermektedir. Bu yüzden bu metodu bağlamanız gerekir. Ancak `render` metodunu veya diğer yaşam döngüsü metodlarını bağlamak gereksizdir çünkü bunlar diğer bileşenlere aktarılmazlar.
 
 [Yehuda Katz'ın bu yazısı](https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) bağlamanın ne olduğunu ve fonksiyonların JavaScript'te nasıl çalıştıklarını detaylı olarak açıklamaktadır.
 
@@ -130,9 +130,9 @@ render() {
 }
 ```
 
-### Bir olay işleyicisine veya geri çağırma fonksiyonuna nasıl parametre aktarırım? {#how-do-i-pass-a-parameter-to-an-event-handler-or-callback}
+### Bir olay işleyicisine veya geri çağırma fonksiyonuna nasıl parametre gönderirim? {#how-do-i-pass-a-parameter-to-an-event-handler-or-callback}
 
-Bir olay işleyicisini sarmalamak ve parametre aktarmak için ok fonksiyonunu kullanabilirsiniz:
+Bir olay işleyicisini sarmalamak ve parametre göndermek için ok fonksiyonunu kullanabilirsiniz:
 
 ```jsx
 <button onClick={() => this.handleClick(id)} />
@@ -144,7 +144,7 @@ Bu `.bind`'ı çağırmakla aynıdır:
 <button onClick={this.handleClick.bind(this, id)} />
 ```
 
-#### Örnek: Parametreleri ok fonksiyonu kullanarak aktarmak {#example-passing-params-using-arrow-functions}
+#### Örnek: Parametreleri ok fonksiyonu kullanarak göndermek {#example-passing-params-using-arrow-functions}
 
 ```jsx
 const A = 65 // ASCII karakter kodu
@@ -178,7 +178,7 @@ class Alphabet extends React.Component {
 }
 ```
 
-#### Örnek: Veri özelliklerini kullanarak parametre aktarmak {#example-passing-params-using-data-attributes}
+#### Örnek: Veri niteliklerini kullanarak parametre göndermek {#example-passing-params-using-data-attributes}
 
 Alternatif olarak, olaylar işleyiciler için gereken verileri saklamak için DOM API'lerini kullanabilirsiniz. Çok sayıda öğeyi optimize etmeniz gerekiyorsa veya React.PureComponent eşitlik kontrollerine dayanan bir render ağacına sahipseniz bu yaklaşımı göz önünde bulundurun.
 
@@ -220,7 +220,7 @@ class Alphabet extends React.Component {
 
 ### Bir fonksiyonun arka arkaya çok defa veya çok hızlı bir şekilde çağırılmasını nasıl önleyebilirim? {#how-can-i-prevent-a-function-from-being-called-too-quickly-or-too-many-times-in-a-row}
 
-`onClick` veya `onScroll` gibi bir olay işleyiciniz varsa ve geri çağırılmanın çok hızlı bir şekilde başlatılmasını istemiyorsanız, aşağıdaki yöntemlerle yürütülme oranını sınırlayabilirsiniz. 
+`onClick` veya `onScroll` gibi bir olay işleyiciniz varsa ve geri çağırılmanın çok hızlı bir şekilde başlatılmasını istemiyorsanız, aşağıdaki yöntemlerle yürütülme sıklığını sınırlayabilirsiniz. 
 
 - **daraltma**: değişiklikleri zamana dayalı bir frekansa göre örnekler (örneğin [`_.throttle`](https://lodash.com/docs#throttle))
 - **sıçrama önleme**: belirli bir süre işlem yapılmadığında tetiklenir (örneğin [`_.debounce`](https://lodash.com/docs#debounce))
@@ -349,6 +349,6 @@ class ScrollListener extends React.Component {
 }
 ```
 
-#### Oran sınırlamasının test edilmesi {#testing-your-rate-limiting}
+#### Sıklık sınırlamasının test edilmesi {#testing-your-rate-limiting}
 
-Oran sınırlaması kodunuzun doğru çalışıp çalışmadığını test ederken, zamanı ileri sarabilme özelliğine sahip olmak çok yardımcı olacaktır. Eğer [`jest`](https://facebook.github.io/jest/) kullanıyorsanız, zamanı ileri sarmak için [`mock timers`](https://facebook.github.io/jest/docs/en/timer-mocks.html) kullanabilirsiniz. Eğer `requestAnimationFrame` daraltması kullanıyorsanız, [`raf-stub`](https://github.com/alexreardon/raf-stub) animasyon çerçevelerini ileri sarmak için kullanışlı bir araç olabilir.
+Sıklık sınırlaması kodunuzun doğru çalışıp çalışmadığını test ederken, zamanı ileri sarabilme özelliğine sahip olmak çok yardımcı olacaktır. Eğer [`jest`](https://facebook.github.io/jest/) kullanıyorsanız, zamanı ileri sarmak için [`mock timers`](https://facebook.github.io/jest/docs/en/timer-mocks.html) kullanabilirsiniz. Eğer `requestAnimationFrame` daraltması kullanıyorsanız, [`raf-stub`](https://github.com/alexreardon/raf-stub) animasyon çerçevelerini ileri sarmak için kullanışlı bir araç olabilir.
