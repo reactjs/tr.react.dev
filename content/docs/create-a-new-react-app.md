@@ -37,7 +37,7 @@ React takımı öncelikli olarak şu çözümleri öneriyor:
 
 ### Create React App {#create-react-app}
 
-[Create React App](https://github.com/facebookincubator/create-react-app) **React ögrenmek** için rahat bir ortamdır ve React ile **yeni bir [tek sayfa](/docs/glossary.html#single-page-application) uygulama** geliştirmeye başlamanın en iyi yoludur.
+[Create React App](https://github.com/facebook/create-react-app) **React ögrenmek** için rahat bir ortamdır ve React ile **yeni bir [tek sayfa](/docs/glossary.html#single-page-application) uygulama** geliştirmeye başlamanın en iyi yoludur.
 
 En son JavaScript özelliklerini kullanabilmeniz için geliştirme ortamınızı kurar, güzel bir geliştirici deneyimi sağlar ve uygulamanızı ürün için optimize eder. Bilgisayarınızda Node >= 6 ve npm >= 5.2 sürümlerinin yüklü olması gerekir. Bir proje oluşturmak için:
 
@@ -55,7 +55,7 @@ komutlarını çalıştın.
 
 Create React App, backend mantığı veya veritabanlarını idare etmez; sadece frontend geliştirme düzenini oluşturur, yani bunu istediğiniz herhangi bir backend ile kullanabilirsiniz. Arka planda, [Babel](https://babeljs.io/) ve [webpack](https://webpack.js.org/) kullanır, fakat bunlar hakkında hiçbir şey bilmeniz gerekmiyor.
 
-Ürün yayınlamaya hazır olduğunuzda, `npm run build` komutunu çalıştırmak `build` klasöründe uygulamanızın optimize edilmiş bir derlemesini oluşturur. Create React App hakkında daha fazlasını [kendi README'sinden](https://github.com/facebookincubator/create-react-app#create-react-app-) ve [Kullanıcı rehberinden](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents) öğrenebilirsiniz.
+Ürün yayınlamaya hazır olduğunuzda, `npm run build` komutunu çalıştırmak `build` klasöründe uygulamanızın optimize edilmiş bir derlemesini oluşturur. Create React App hakkında daha fazlasını [kendi README'sinden](https://github.com/facebookincubator/create-react-app#create-react-app--) ve [Kullanıcı Rehberinden](https://facebook.github.io/create-react-app/) öğrenebilirsiniz.
 
 ### Next.js {#nextjs}
 
