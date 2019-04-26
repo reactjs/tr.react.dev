@@ -55,7 +55,11 @@ komutlarını çalıştın.
 
 Create React App, backend mantığı veya veritabanlarını idare etmez; sadece frontend geliştirme düzenini oluşturur, yani bunu istediğiniz herhangi bir backend ile kullanabilirsiniz. Arka planda, [Babel](https://babeljs.io/) ve [webpack](https://webpack.js.org/) kullanır, fakat bunlar hakkında hiçbir şey bilmeniz gerekmiyor.
 
+<<<<<<< HEAD
 Ürün yayınlamaya hazır olduğunuzda, `npm run build` komutunu çalıştırmak `build` klasöründe uygulamanızın optimize edilmiş bir derlemesini oluşturur. Create React App hakkında daha fazlasını [kendi README'sinden](https://github.com/facebookincubator/create-react-app#create-react-app-) ve [Kullanıcı rehberinden](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#table-of-contents) öğrenebilirsiniz.
+=======
+When you're ready to deploy to production, running `npm run build` will create an optimized build of your app in the `build` folder. You can learn more about Create React App [from its README](https://github.com/facebookincubator/create-react-app#create-react-app--) and the [User Guide](https://facebook.github.io/create-react-app/).
+>>>>>>> 4244fc646618de6bae934686f93dd04c9000d9ae
 
 ### Next.js {#nextjs}
 
@@ -71,7 +75,11 @@ Gatsby'i [resmi rehberinden](https://www.gatsbyjs.org/docs/) veya [yeni başlaya
 
 ### Daha Esnek Araçlar {#more-flexible-toolchains}
 
+<<<<<<< HEAD
 Devamındaki araçlar daha fazla esneklik ve seçenek sunar. Bunları daha tecrübeli kullanıcılar için öneriyoruz:
+=======
+The following toolchains offer more flexibility and choice. We recommend them to more experienced users:
+>>>>>>> 4244fc646618de6bae934686f93dd04c9000d9ae
 
 - **[Neutrino](https://neutrinojs.org/)**; [webpack](https://webpack.js.org/)'in gücünü ön ayarların sadeliği ile birleştirir, [React uygulamaları](https://neutrinojs.org/packages/react/) ve [React bileşenleri](https://neutrinojs.org/packages/react-components/) için bir ön ayar da içerir.
 

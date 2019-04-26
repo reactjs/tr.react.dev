@@ -28,7 +28,7 @@ Bu kuralı uygulayarak, bir bileşendeki tüm durum bilgisi mantığının kayna
 Bu iki kuralı uygulayan [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) adında bir ESLint eklentisi yayınladık. Denemek isterseniz, bu eklentiyi projenize ekleyebilirsiniz:
 
 ```bash
-npm install eslint-plugin-react-hooks
+npm install eslint-plugin-react-hooks --save-dev
 ```
 
 ```js
