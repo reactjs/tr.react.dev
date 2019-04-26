@@ -87,7 +87,7 @@ class Foo extends Component {
 
 ### Render metodu içerisinde ok fonksiyonu kullanmak doğru mudur? {#is-it-ok-to-use-arrow-functions-in-render-methods}
 
-Genel olarak konuşursak, evet doğrudur ve genellikle parametreleri geri çağırma fonksiyonlarına göndermenin en kolay yoludur.
+Genel olarak konuşursak, evet doğrudur ve genellikle parametreleri geri çağırma fonksiyonlarına (callback) göndermenin en kolay yoludur.
 
 Eğer performans sorunlarınız varsa, optimize edin!
 
@@ -351,4 +351,4 @@ class ScrollListener extends React.Component {
 
 #### Sıklık sınırlamasının test edilmesi {#testing-your-rate-limiting}
 
-Sıklık sınırlaması kodunuzun doğru çalışıp çalışmadığını test ederken, zamanı ileri sarabilme özelliğine sahip olmak çok yardımcı olacaktır. Eğer [`jest`](https://facebook.github.io/jest/) kullanıyorsanız, zamanı ileri sarmak için [`mock timers`](https://facebook.github.io/jest/docs/en/timer-mocks.html) kullanabilirsiniz. Eğer `requestAnimationFrame` daraltması kullanıyorsanız, [`raf-stub`](https://github.com/alexreardon/raf-stub) animasyon çerçevelerini ileri sarmak için kullanışlı bir araç olabilir.
+Sıklık sınırlaması (rate limiting) kodunuzun doğru çalışıp çalışmadığını test ederken, zamanı ileri sarabilme özelliğine sahip olmak çok yardımcı olacaktır. Eğer [`jest`](https://facebook.github.io/jest/) kullanıyorsanız, zamanı ileri sarmak için [`mock timers`](https://facebook.github.io/jest/docs/en/timer-mocks.html) kullanabilirsiniz. Eğer `requestAnimationFrame` daraltması kullanıyorsanız, [`raf-stub`](https://github.com/alexreardon/raf-stub) animasyon çerçevelerini ileri sarmak için kullanışlı bir araç olabilir.
