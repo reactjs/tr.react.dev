@@ -6,15 +6,15 @@ layout: docs
 category: FAQ
 ---
 
-### Bir bileşene nasıl olay işleyici gönderebilirim? (onClick gibi) {#how-do-i-pass-an-event-handler-like-onclick-to-a-component}
+### Bir bileşene nasıl olay yöneticisi gönderebilirim? (onClick gibi) {#how-do-i-pass-an-event-handler-like-onclick-to-a-component}
 
-Olayları işleyiciler ve diğer fonksiyonlar alt bileşenlere prop olarak aktarılabilir:
+Olay yöneticileri ve diğer fonksiyonlar alt bileşenlere prop olarak aktarılabilir:
 
 ```jsx
 <button onClick={this.handleClick}>
 ```
 
-Eğer olay işleyicisi içinden  bir üst bileşene erişmeniz gerekiyorsa, fonksiyonu aynı zamanda bileşene bağlamanız gerekir. (aşağıya bakın).
+Eğer olay yöneticisi içinden  bir üst bileşene erişmeniz gerekiyorsa, fonksiyonu aynı zamanda bileşene bağlamanız gerekir. (aşağıya bakın).
 
 ### Bir fonksiyonu bir bileşene nasıl bağlarım? {#how-do-i-bind-a-function-to-a-component-instance}
 
@@ -130,9 +130,9 @@ render() {
 }
 ```
 
-### Bir olay işleyicisine veya geri çağırma fonksiyonuna nasıl parametre gönderirim? {#how-do-i-pass-a-parameter-to-an-event-handler-or-callback}
+### Bir olay yöneticisine veya geri çağırma fonksiyonuna nasıl parametre gönderirim? {#how-do-i-pass-a-parameter-to-an-event-handler-or-callback}
 
-Bir olay işleyicisini sarmalamak ve parametre göndermek için ok fonksiyonunu kullanabilirsiniz:
+Bir olay yöneticisini sarmalamak ve parametre göndermek için ok fonksiyonunu kullanabilirsiniz:
 
 ```jsx
 <button onClick={() => this.handleClick(id)} />
@@ -180,7 +180,7 @@ class Alphabet extends React.Component {
 
 #### Örnek: Veri niteliklerini kullanarak parametre göndermek {#example-passing-params-using-data-attributes}
 
-Alternatif olarak, olaylar işleyiciler için gereken verileri saklamak için DOM API'lerini kullanabilirsiniz. Çok sayıda öğeyi optimize etmeniz gerekiyorsa veya React.PureComponent eşitlik kontrollerine dayanan bir render ağacına sahipseniz bu yaklaşımı göz önünde bulundurun.
+Alternatif olarak, olay yöneticileri için gereken verileri saklamak için DOM API'lerini kullanabilirsiniz. Çok sayıda öğeyi optimize etmeniz gerekiyorsa veya React.PureComponent eşitlik kontrollerine dayanan bir render ağacına sahipseniz bu yaklaşımı göz önünde bulundurun.
 
 ```jsx
 const A = 65 // ASCII karakter kodu
@@ -220,7 +220,7 @@ class Alphabet extends React.Component {
 
 ### Bir fonksiyonun arka arkaya çok defa veya çok hızlı bir şekilde çağırılmasını nasıl önleyebilirim? {#how-can-i-prevent-a-function-from-being-called-too-quickly-or-too-many-times-in-a-row}
 
-`onClick` veya `onScroll` gibi bir olay işleyiciniz varsa ve geri çağırılmanın çok hızlı bir şekilde başlatılmasını istemiyorsanız, aşağıdaki yöntemlerle yürütülme sıklığını sınırlayabilirsiniz. 
+`onClick` veya `onScroll` gibi bir olay yöneticiniz varsa ve geri çağırılmanın çok hızlı bir şekilde başlatılmasını istemiyorsanız, aşağıdaki yöntemlerle yürütülme sıklığını sınırlayabilirsiniz. 
 
 - **daraltma**: değişiklikleri zamana dayalı bir frekansa göre örnekler (örneğin [`_.throttle`](https://lodash.com/docs#throttle))
 - **sıçrama önleme**: belirli bir süre işlem yapılmadığında tetiklenir (örneğin [`_.debounce`](https://lodash.com/docs#debounce))
@@ -234,7 +234,7 @@ class Alphabet extends React.Component {
 
 #### Daraltma {#throttle}
 
-Daraltma, bir fonksiyonun belirli bir zaman aralığında bir defadan fazla çağırılmasını önler. Aşağıdaki örnekte bir "tıklama" işleyicisinin saniyede birden çok kez çağırılması daraltma yöntemiyle önlenmiştir.
+Daraltma, bir fonksiyonun belirli bir zaman aralığında bir defadan fazla çağırılmasını önler. Aşağıdaki örnekte bir "tıklama" olay yöneticisinin saniyede birden çok kez çağırılması daraltma yöntemiyle önlenmiştir.
 
 ```jsx
 import throttle from 'lodash.throttle';
@@ -262,7 +262,7 @@ class LoadMoreButton extends React.Component {
 
 #### Sıçrama önleme {#debounce}
 
-Sıçrama önleme, bir fonksiyonun son çağırıldığı andan itibaren belirli bir süre geçinceye kadar tekrar yürütülmemesini sağlar. Bu, çok hızlı bir şekilde tetiklenebilecek bir olay işleyicisine (örneğin klavye veya kaydırma olaylarına) yanıt olarak masraflı hesaplamalar yapmanız gerektiği zamanlarda çok yararlı olabilir. Aşağıdaki örnekte olay işleyici, 250ms boyunca metin girişi olmadığında çağırılmak üzere kurulmuştur.
+Sıçrama önleme, bir fonksiyonun son çağırıldığı andan itibaren belirli bir süre geçinceye kadar tekrar yürütülmemesini sağlar. Bu, çok hızlı bir şekilde tetiklenebilecek bir olay yöneticisine (örneğin klavye veya kaydırma olaylarına) yanıt olarak masraflı hesaplamalar yapmanız gerektiği zamanlarda çok yararlı olabilir. Aşağıdaki örnekte olay yöneticisi, 250ms boyunca metin girişi olmadığında çağırılmak üzere kurulmuştur.
 
 ```jsx
 import debounce from 'lodash.debounce';
