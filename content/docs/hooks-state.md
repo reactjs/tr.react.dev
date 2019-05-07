@@ -8,7 +8,7 @@ prev: hooks-overview.html
 
 *Hook'lar* React 16.8. ile gelen yeni bir eklentidir. Bu yeni eklenti size herhangi bir sınıf oluşturmadan state ve diğer React özelliklerini kullanmanıza izin verir.
 
-[Önceki sayfada](/docs/hooks-intro.html) Hook'lara aşağıdaki örnekle bir giriş yapılmıştı:
+[Giriş Sayfasında](/docs/hooks-intro.html), Hook'lara aşina olmak için, aşağıdaki örnek kullanılmıştı:
 
 ```js{4-5}
 import React, { useState } from 'react';
