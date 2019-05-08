@@ -232,11 +232,7 @@ const App = () => (
 
 ## İsimlendirilmiş Dışa Aktarımlar {#named-exports}
 
-<<<<<<< HEAD
 `React.lazy` şu an için sadece default dışa aktarımları desteklemektedir. İçe aktarmak istediğiniz modül, isimlendirilmiş dışa aktarım kullanıyorsa; onu varsayılan olarak tekrar dışa aktaran aracı bir modül yaratabilirsiniz. Bu, ağaçlanmanın çalışmaya devam etmesini ve kullanılmayan bileşenleri çekmemenizi sağlar.
-=======
-`React.lazy` currently only supports default exports. If the module you want to import uses named exports, you can create an intermediate module that reexports it as the default. This ensures that tree shaking keeps working and that you don't pull in unused components.
->>>>>>> a211417f6680cce5b4e4f036dc1492c03bc588c7
 
 ```js
 // ManyComponents.js
