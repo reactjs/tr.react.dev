@@ -81,13 +81,13 @@ function App() {
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/gwZOJp?editors=0010)
 
-`<Contacts />` ve `<Chat />` gibi React elementleri yalnızca nesnelerdir, bu nedenle bunları diğer veriler gibi prop'lar olarak geçirebilirsiniz. Bu yaklaşım size diğer kütüphanelerdeki "slotları" hatırlatabilir ancak React'te prop olarak ne geçeceğiniz konusunda hiçbir sınırlama yoktur.
+`<Contacts />` ve `<Chat />` gibi React elementleri yalnızca nesnelerdir; bu nedenle bunları, diğer veriler gibi, prop'lar olarak geçirebilirsiniz. Bu yaklaşım size diğer kütüphanelerdeki "slotları" hatırlatabilir ancak React'te prop olarak ne geçeceğiniz konusunda hiçbir sınırlama yoktur.
 
 ## Özelleşme {#specialization}
 
-Bazen bileşenleri diğer bileşenlerin "özel durumları" olarak düşünüyoruz. Örneğin, bir `WelcomeDialog` `Dialog`un özel bir durumu olduğunu söyleyebiliriz.
+Bazen bileşenleri diğer bileşenlerin "özel durumları" olarak düşünürüz. Örneğin, bir `WelcomeDialog` `Dialog`unun özel bir durumu olduğunu söyleyebiliriz.
 
-React'te, aynı zamanda daha "spesifik" bir bileşenin daha "jenerik" bir bileşen oluşturduğu ve onu prop gereçleriyle konfigüre ettiği bileşimlerle de elde edilir:
+Bu yaklaşım React'te, aynı zamanda daha "spesifik" bir bileşenin daha "jenerik" bir bileşen oluşturduğu ve onu prop gereçleriyle konfigüre ettiği bileşimlerle de elde edilir:
 
 ```js{5,8,16-18}
 function Dialog(props) {
