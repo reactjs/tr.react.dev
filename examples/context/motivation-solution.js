@@ -1,15 +1,15 @@
 // highlight-range{1-4}
-// Context lets us pass a value deep into the component tree
-// without explicitly threading it through every component.
-// Create a context for the current theme (with "light" as the default).
+// Context her bir bileşenin içinden açıkça geçmeden, 
+// bileşen ağacının derinliklerine bir value geçmemizi sağlar.
+// Mevcut theme için bir context oluştur (varsayılan olarak "light" ile).
 const ThemeContext = React.createContext('light');
 
 class App extends React.Component {
   render() {
     // highlight-range{1-3,5}
-    // Use a Provider to pass the current theme to the tree below.
-    // Any component can read it, no matter how deep it is.
-    // In this example, we're passing "dark" as the current value.
+    // Geçerli temayı aşağıdaki ağaca taşımak için bir Provider kullanın.
+    // Herhangi bir bileşen ne kadar derinde olursa olsun okuyabilir.
+    // Bu örnekte, mevcut değer olarak "dark" geçiyoruz.
     return (
       <ThemeContext.Provider value="dark">
         <Toolbar />
@@ -19,8 +19,7 @@ class App extends React.Component {
 }
 
 // highlight-range{1,2}
-// A component in the middle doesn't have to
-// pass the theme down explicitly anymore.
+// Aradaki bir bileşen artık temayı açıkça aşağı aktarmak zorunda değil.
 function Toolbar(props) {
   return (
     <div>
@@ -31,9 +30,9 @@ function Toolbar(props) {
 
 class ThemedButton extends React.Component {
   // highlight-range{1-3,6}
-  // Assign a contextType to read the current theme context.
-  // React will find the closest theme Provider above and use its value.
-  // In this example, the current theme is "dark".
+  // Mevcut tema context'ini okumak için bir contextType atayın.
+  // React, en yakın tema Provider'ı bulacak ve değerini kullanacak.
+  // Bu örnekte mevcut tema "dark"tır.
   static contextType = ThemeContext;
   render() {
     return <Button theme={this.context} />;

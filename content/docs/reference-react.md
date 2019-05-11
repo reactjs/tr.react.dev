@@ -198,7 +198,7 @@ Bu API, kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yer
 React.createFactory(type)
 ```
 
-Belirli bir türden React elemanlarını üreten bir fonksiyon döndür. [`React.createElement()`](#createElement) gibi, type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf yada fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
+Belirli bir türden React elemanlarını üreten bir fonksiyon döndürür. [`React.createElement()`](#createelement) gibi, type argümanı bir etiket ismi string'i (`'div'` veya `'span'` gibi), bir [React bileşen](/docs/components-and-props.html) tipi (bir sınıf yada fonksiyon), veya bir [React fragment](#reactfragment) tipi olabilir.
 
 Bu yardımcı işlev eski kabul edilir, ve bunun yerine ya doğrudan JSX kullanmanız ya da `React.createElement()` kullanmanız önerilir.
 

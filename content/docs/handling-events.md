@@ -138,7 +138,7 @@ class LoggingButton extends React.Component {
 }
 ```
 
-Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için, binding işleminin, ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
+Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için binding işleminin, ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
 
 ## Olay Yöneticilerine Parametre Gönderimi {#passing-arguments-to-event-handlers}
 

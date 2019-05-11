@@ -1,18 +1,18 @@
 ---
 id: faq-structure
-title: File Structure
+title: Dosya Yapısı
 permalink: docs/faq-structure.html
 layout: docs
 category: FAQ
 ---
 
-### Is there a recommended way to structure React projects? {#is-there-a-recommended-way-to-structure-react-projects}
+### React projelerini yapılandırmak için önerilen bir yol var mı? {#is-there-a-recommended-way-to-structure-react-projects}
 
-React doesn't have opinions on how you put files into folders. That said there are a few common approaches popular in the ecosystem you may want to consider.
+React dosyalarını klasörlere nasıl yerleştireceğinize dair genel bir kanaat bulunmamaktadır. Ancak dikkate almak isteyebileceğiniz ve ekosistemde popüler birkaç yaygın yaklaşım bulunmaktadır.
 
-#### Grouping by features or routes {#grouping-by-features-or-routes}
+#### Özelliklere veya rotalara göre gruplandırma {#grouping-by-features-or-routes}
 
-One common way to structure projects is locate CSS, JS, and tests together inside folders grouped by feature or route.
+Projeleri yapılandırmak için kullanılan yaygın yöntemlerden biri; CSS, JS ve testleri özellik veya rotalara göre gruplanan klasörlerin içine beraber koymaktır.
 
 ```
 common/
@@ -35,11 +35,11 @@ profile/
   ProfileAPI.js
 ```
 
-The definition of a "feature" is not universal, and it is up to you to choose the granularity. If you can't come up with a list of top-level folders, you can ask the users of your product what major parts it consists of, and use their mental model as a blueprint.
+"Özellik" tanımı evrensel değildir ve ayrıntı derecesini seçmek size bırakılmıştır. Eğer bir üst düzey klasörler listesi ortaya çıkaramazsanız, kullanıcılarınıza ürününüzün hangi ana bölümlerden oluştuğunu sorabilir ve akıllarındaki modeli bir taslak olarak kullanabilirsiniz.
 
-#### Grouping by file type {#grouping-by-file-type}
+#### Dosya türüne göre gruplandırma {#grouping-by-file-type}
 
-Another popular way to structure projects is to group similar files together, for example:
+Projeleri yapılandırmanın bir diğer popüler yöntemi ise benzer dosyaları birlikte gruplandırmaktır. Örneğin;
 
 ```
 api/
@@ -59,16 +59,16 @@ components/
   ProfileHeader.css
 ```
 
-Some people also prefer to go further, and separate components into different folders depending on their role in the application. For example, [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/) is a design methodology built on this principle. Remember that it's often more productive to treat such methodologies as helpful examples rather than strict rules to follow.
+Bazı insanlar daha da ileri gidip, bileşenleri uygulamadaki rollerine göre farklı klasörlere ayırmayı tercih ederler. Örneğin [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/), bu ilkeye dayalı bir tasarım metodolojisidir. Bu tür metodolojilerin takip edilmesi gereken katı kurallardan ziyade, yardımcı örnekler olarak değerlendirilmesi  daha verimli olacaktır.
 
-#### Avoid too much nesting {#avoid-too-much-nesting}
+#### Çok fazla iç içe koymaktan kaçının {#avoid-too-much-nesting}
 
-There are many pain points associated with deep directory nesting in JavaScript projects. It becomes harder to write relative imports between them, or to update those imports when the files are moved. Unless you have a very compelling reason to use a deep folder structure, consider limiting yourself to a maximum of three or four nested folders within a single project. Of course, this is only a recommendation, and it may not be relevant to your project.
+Javascript projelerinde klasörleri derinlemesine iç içe koymanın çok fazla zararlı noktası bulunmaktadır. Klasörler arası bağıl import'lar yazmak veya dosyalar taşındığında bu import'ları güncellemek git gide zorlaşır. Derinlemesine bir dizin yapısı kullanmak için çok zorlayıcı bir nedeniniz olmadığı sürece, kendinizi tek bir proje için en fazla üç ya da dört iç içe klasör kullanmakla sınırlamayı düşünebilirsiniz. Tabii ki bu sadece bir öneridir ve sizin projeniz için uygun olmayabilir.
 
-#### Don't overthink it {#dont-overthink-it}
+#### Çok fazla düşünmeyin {#dont-overthink-it}
 
-If you're just starting a project, [don't spend more than five minutes](https://en.wikipedia.org/wiki/Analysis_paralysis) on choosing a file structure. Pick any of the above approaches (or come up with your own) and start writing code! You'll likely want to rethink it anyway after you've written some real code.
+Eğer bir projeye henüz yeni başlıyorsanız, dizin yapısı üzerine [beş dakikadan daha fazla zaman harcamayın](https://eksisozluk.com/analysis-paralysis--833201). Yukarıdaki yaklaşımlardan herhangi birini seçin (veya kendi yönteminizi getirin) ve kod yazmaya başlayın! Biraz gerçek kod yazdıktan sonra bu husus hakkında muhtemelen yeniden düşünmek isteyeceksinizdir.
 
-If you feel completely stuck, start by keeping all files in a single folder. Eventually it will grow large enough that you will want to separate some files from the rest. By that time you'll have enough knowledge to tell which files you edit together most often. In general, it is a good idea to keep files that often change together close to each other. This principle is called "colocation".
+Eğer tamamen çıkmaza girdiyseniz, tüm dosyaları tek bir klasörde tutarak başlayın. Eninde sonunda projeniz bazı dosyaları diğerlerinden ayırmak isteyeceğiniz kadar büyüyecek. O zamana kadar hangi dosyaları çoğu kez birlikte düzenlediğinizi söylemeye yetecek kadar bilginiz olacaktır. Genel olarak, sıklıkla birlikte değiştirilen dosyaları birbirlerine yakın tutmak iyi bir fikirdir. Bu prensip, "ortak yerleşim" olarak adlandırılır.
 
-As projects grow larger, they often use a mix of both of the above approaches in practice. So choosing the "right" one in the beginning isn't very important.
+Projeler büyüdükçe, pratikte yukarıdaki yaklaşımların her ikisinin de bir karışımı uygulanır. Yani başlangıçta "doğru" olanı seçmek çok önemli değil.

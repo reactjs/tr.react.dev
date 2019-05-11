@@ -1,48 +1,49 @@
 ---
 id: faq-versioning
-title: Versioning Policy
+title: Sürümleme Politikası
 permalink: docs/faq-versioning.html
 layout: docs
 category: FAQ
 ---
 
-React follows [semantic versioning (semver)](https://semver.org/) principles.
+React [anlamsal sürümleme (semver)](https://semver.org/lang/tr/) prensiplerini uygulamaktadır.
 
-That means that with a version number **x.y.z**:
+Bu demektir ki sürüm numarası **x.y.z** ile:
 
-* When releasing **breaking changes**, we make a **major release** by changing the **x** number (ex: 15.6.2 to 16.0.0).
-* When releasing **new features**, we make a **minor release** by changing the **y** number (ex: 15.6.2 to 15.7.0).
-* When releasing **bug fixes**, we make a **patch release** by changing the **z** number (ex: 15.6.2 to 15.6.3).
+* **Uyumsuz değişiklikleri** yayınlarken **x** değerini güncelleyerek  **ana sürümü** yayınlarız  (Örneğin: 15.6.2'den 16.0.0'a geçiş).
+* **Yeni özellikleri** yayınlarken **y** değerini güncelleyerek **minör sürümü** yayınlarız (Örneğin: 15.6.2'den 15.7.0'a geçiş).
+* **Hata düzeltmelerini** yayınlarken **z** değerini güncelleyerek **yama sürümünü** yayınlarız (Örneğin: 15.6.2'den 15.6.3'a geçiş).
 
-Major releases can also contain new features, and any release can include bug fixes.
+Ana sürümler de yeni özellikler içerebilir, ve herhangi bir yeni sürüm hata düzeltmelerini bulundurabilir.
 
-### Breaking Changes {#breaking-changes}
+### Uyumsuz Değişiklikler {#breaking-changes}
 
-Breaking changes are inconvenient for everyone, so we try to minimize the number of major releases – for example, React 15 was released in April 2016 and React 16 was released in September 2017; React 17 isn't expected until 2019.
+Uyumsuz değişiklikler hepimiz için zahmetli olduğu için ana sürümlerin sayısını olabildiğince az tutmaya çalışıyoruz – örneğin, React 15, Nisan 2016'da, React 16, Eylül 2017'de yayınlanmıştır; React 17'nin 2019'dan önce yayınlanması beklenmemektedir.
 
-Instead, we release new features in minor versions. That means that minor releases are often more interesting and compelling than majors, despite their unassuming name.
+Bunun yerine yeni özellikleri minör sürümlerle yayınlamaktayız. Bu nedenle minör sürümler çoğu zaman ana sürümlerden daha ilgi çekici ve merak uyandırıcı olmaktadır.
 
-### Commitment to Stability {#commitment-to-stability}
+### Kararlılığa Bağlılık {#commitment-to-stability}
 
-As we change React over time, we try to minimize the effort required to take advantage of new features. When possible, we'll keep an older API working, even if that means putting it in a separate package. For example, [mixins have been discouraged for years](/blog/2016/07/13/mixins-considered-harmful.html) but they're supported to this day [via create-react-class](/docs/react-without-es6.html#mixins) and many codebases continue to use them in stable, legacy code.
+React'ı zaman içinde değiştirdikçe React'ın yeni özelliklerindan faydalanmak için gereken çabayı azaltmaya özen göstermekteyiz.
+Bir önceki APIyi başka pakete koymamız gerekse bile, eski APIyi olabildiğince çalışır durumda tutarız. Örneğin, [mixinlerin kullanımı yıllardır tavsiye edilmese bile](/blog/2016/07/13/mixins-considered-harmful.html), mixinler bu zamana kadar [create-react-class ile](/docs/react-without-es6.html#mixins) desteklenmiştir ve birçok proje mixinleri eski kodlarında stabil şekilde kullanmaya devam etmektedir.
 
-Over a million developers use React, collectively maintaining millions of components. The Facebook codebase alone has over 50,000 React components. That means we need to make it as easy as possible to upgrade to new versions of React; if we make large changes without a migration path, people will be stuck on old versions. We test these upgrade paths on Facebook itself – if our team of less than 10 people can update 50,000+ components alone, we hope the upgrade will be manageable for anyone using React. In many cases, we write [automated scripts](https://github.com/reactjs/react-codemod) to upgrade component syntax, which we then include in the open-source release for everyone to use.
+React kullanan bir milyondan fazla geliştirici, milyonlarca React bileşenini devam ettirmektedir. Sadece Facebook'un kodunda 50.000'den fazla React bileşeni vardır. Bu nedenle React versiyon yükseltemelerini olabildiğince kolay hale getirmemiz gerekmektedir; eğer büyük değişikler yapar ve buna geçiş için bir yol haritası sunmazsak, geliştiriciler eski sürümlerde takılı kalırlar. Geçiş için sunduğumuz çözümleri Facebook'ta kendimiz de test etmekteyiz - eğer 10 kişiden az olan takımımız, 50.000'den fazla bileşeni güncelleyebiliyorsa, React kullanan herkesin bu geçişi kolaylıkla yapabileceğine inanıyoruz. Çoğu zaman  [otomatikleştirilmiş scriptlerle](https://github.com/reactjs/react-codemod) bileşenleri güncelliyoruz, ve sonrasında bunları herkesin kullanması için açık kaynak sürümümüze dahil ediyoruz.
 
-### Gradual Upgrades via Warnings {#gradual-upgrades-via-warnings}
+### Uyarılarla Kademeli Versiyon Geçişi {#gradual-upgrades-via-warnings}
 
-Development builds of React include many helpful warnings. Whenever possible, we add warnings in preparation for future breaking changes. That way, if your app has no warnings on the latest release, it will be compatible with the next major release. This allows you to upgrade your apps one component at a time.
+React'ın geliştirme derlemeleri birçok yararlı uyarı içerir. Uyumsuz değişikliklere hazırlık için olabildiğince uyarı eklemekteyiz. Bu sayede, eğer uygulamanız son sürümde herhangi bir uyarı içermiyorsa, sonraki ana sürüme uyumlu olacaktır. Bu size uygulamalarınızdaki bileşenleri teker teker yeni sürüme geçirme olanağı sağlar.
 
-Development warnings won't affect the runtime behavior of your app. That way, you can feel confident that your app will behave the same way between the development and production builds -- the only differences are that the production build won't log the warnings and that it is more efficient. (If you ever notice otherwise, please file an issue.)
+Geliştirme uyarıları uygulamanızın işleyişini değiştirmez. Bu sayede uygulamanızın geliştirme ve canlı ortam derlemelerinde aynı şekilde davranacağına emin olabilirsiniz; aradaki tek fark canlı ortam derlemesinin uyarıları loglamayacak olmasıdır, ki bu daha verimlidir. (Eğer aksini farkederseniz, lütfen sorunu paylaşın)
 
-### What Counts as a Breaking Change? {#what-counts-as-a-breaking-change}
+### Neler Uyumsuz Değişikliklerdir? {#what-counts-as-a-breaking-change}
 
-In general, we *don't* bump the major version number for changes to:
+Aşağıdaki durumlarda genellikle ana versiyon yükseltmesi *yapmıyoruz*:
 
-* **Development warnings.** Since these don't affect production behavior, we may add new warnings or modify existing warnings in between major versions. In fact, this is what allows us to reliably warn about upcoming breaking changes.
-* **APIs starting with `unstable_`.** These are provided as experimental features whose APIs we are not yet confident in. By releasing these with an `unstable_` prefix, we can iterate faster and get to a stable API sooner.
-* **Alpha and canary versions of React.** We provide alpha versions of React as a way to test new features early, but we need the flexibility to make changes based on what we learn in the alpha period. If you use these versions, note that APIs may change before the stable release.
-* **Undocumented APIs and internal data structures.** If you access internal property names like `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED` or `__reactInternalInstance$uk43rzhitjg`, there is no warranty.  You are on your own.
+* **Geliştirme uyarıları.** Bunlar canlı ortamın davranışını etkilemediği için yeni uyarıları ekleyebilir, ya da varolanları değiştirebiliriz. Bu aslında gelecek uyumsuz değişikliklere karşı geliştiricileri güvenilir biçimde uyarmamızı sağlamaktadır.
+* **`unstable_` ile başlayan APIler.** Bunlar APIlerinden henüz emin olunmayan deneysel özelliklerdir. Bunları `unstable_` ile başlayacak şekilde yayınlayarak daha hızlı ilerleyebilmekte ve stabil APIyi daha önce sunabilmekteyiz.
+* **React'ın alfa ve kanarya sürümleri.** Yeni özelliklerin daha önce test edilebilmesi için alfa sürümlerini sunmaktayız, fakat alfa sürümünden öğrendiklerimizle de değişiklik yapma esnekliğine ihtiyaç duyuyoruz. Bu versiyonları kullanıyorsanız, APIlerin stabil sürümden önce değişebileceği ihtimalini unutmayın.
+* **Dökümente edilmemiş APIler ve içsel veri yapıları.** Eğer `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED` ya da `__reactInternalInstance$uk43rzhitjg`, gibi dahili özellik isimlerine erişim sağladığınızda hiçbir güvence yoktur. Bu noktada artık kendi başınızasınız.
 
-This policy is designed to be pragmatic: certainly, we don't want to cause headaches for you. If we bumped the major version for all of these changes, we would end up releasing more major versions and ultimately causing more versioning pain for the community. It would also mean that we can't make progress in improving React as fast as we'd like.
+Bu prensipler faydacı yaklaşımla tasarlanmıştır; kesinlikle sizler için baş ağrısına sebep olmak istemiyoruz. Eğer bütün bu değişiklerle ana versiyon çıkarsak, daha fazla sayıda ana versiyon çıkmış oluruz ve bu topluluğa daha fazla versiyon çilesi yaratır. Ayrıca bu durum React'ı geliştirmek ve ilerletmek için istediğimiz kadar hızlı olamayacağımız anlamına da gelir.
 
-That said, if we expect that a change on this list will cause broad problems in the community, we will still do our best to provide a gradual migration path.
+Bununla beraber, eğer bu listedeki bir değişikliğin toplulukta fazlaca sorun yaratacağını düşünüyorsak, kademeli geçişte yol haritası sunmak için elimizden gelenin en iyisini yapmaya özen gösteriyoruz. 

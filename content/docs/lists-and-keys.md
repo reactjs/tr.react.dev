@@ -129,7 +129,7 @@ const todoItems = todos.map((todo, index) =>
   </li>
 );
 ```
-Dizi içindeki elemanların değişme ihtimali varsa, anahtarlar için index numaralarının kullanılmasını önermiyoruz. Bu, performansı olumsuz yönde etkileyebilir ve bileşen state'i ile ilgili sorunlara neden olabilir. [Index numarasının anahtar olarak kullanılmasının olumsuz etkilerine dair detaylı açıklama](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) için Robin Pokorny's makalesine göz atın. Öğeleri listelemek için belirgin bir anahtar atamamayı seçtiğinizde, React varsayılan olarak index numaralarını anahtar olarak kullanacaktır.
+Dizi içindeki elemanların değişme ihtimali varsa, anahtarlar için index numaralarının kullanılmasını önermiyoruz. Bu, performansı olumsuz yönde etkileyebilir ve bileşen state'i ile ilgili sorunlara neden olabilir. [Index numarasının anahtar olarak kullanılmasının olumsuz etkilerine dair detaylı açıklama](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) için Robin Pokorny'nin makalesine göz atın. Öğeleri listelemek için belirgin bir anahtar atamamayı seçtiğinizde, React varsayılan olarak index numaralarını anahtar olarak kullanacaktır.
 
 Daha fazla bilgi edinmek istiyorsanız, işte size [neden anahtarların gerekli olduğuna dair](/docs/reconciliation.html#recursing-on-children) detaylı bir açıklama.
 
@@ -279,7 +279,7 @@ function NumberList(props) {
 }
 ```
 
-JSX, [herhangi bir ifadeyi küme parantezlerine yerleştirmeye](/docs/introducing-jsx.html#embedding-expressions-in-jsx) izin verir, böylece `map ()` sonucunu satıriçi olarak ekleyebiliriz:
+JSX, [herhangi bir ifadeyi küme parantezlerine yerleştirmeye](/docs/introducing-jsx.html#embedding-expressions-in-jsx) izin verir, böylece `map ()` sonucunu satır içi olarak ekleyebiliriz:
 
 ```js{5-8}
 function NumberList(props) {

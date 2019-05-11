@@ -1,6 +1,6 @@
 ---
 id: create-fragment
-title: Keyed Fragments
+title: Anahtarlı Fragment'ler
 permalink: docs/create-fragment.html
 layout: docs
 category: Add-Ons
@@ -8,20 +8,20 @@ category: Add-Ons
 
 > Note:
 >
-> `React.addons` entry point is deprecated as of React v15.5. We now have first class support for fragments which you can read about [here](/docs/fragments.html).
+> `React.addons` giriş noktası React v15.5 sürümünden itibaren kullanımdan kaldırılmıştır. Şu anda Fragment'ler için [burada](/docs/fragments.html) okuyabileceğiniz birinci sınıf desteğe sahibiz.
 
-## Importing {#importing}
+## Import etmek {#importing}
 
 ```javascript
 import createFragment from 'react-addons-create-fragment'; // ES6
 var createFragment = require('react-addons-create-fragment'); // ES5 with npm
 ```
 
-## Overview {#overview}
+## Genel Bakış {#overview}
 
-In most cases, you can use the `key` prop to specify keys on the elements you're returning from `render`. However, this breaks down in one situation: if you have two sets of children that you need to reorder, there's no way to put a key on each set without adding a wrapper element.
+Çoğu durumda, `render` fonksiyonundan döndürdüğünüz öğelerdeki anahtarları belirlemek için `key` prop'unu kullanabilirsiniz. Fakat, bu bir durumda çalışmaz: yeniden sıralamak zorunda olduğunuz iki alt eleman grubunuz varsa, bir sarmalayıcı öğe eklemeden her gruba anahtar koymanın yolu yoktur.
 
-That is, if you have a component such as:
+Yani, şu şekilde bir bileşeniniz var ise:
 
 ```js
 function Swapper(props) {
@@ -35,13 +35,13 @@ function Swapper(props) {
 }
 ```
 
-The children will unmount and remount as you change the `swapped` prop because there aren't any keys marked on the two sets of children.
+İki grup alt eleman da herhangi bir işaretlenmiş anahtara sahip olmadığı için, her `swapped` prop'unu değiştirdiğinizde alt eleman çıkarılıp yeniden eklenecektir.
 
-To solve this problem, you can use the `createFragment` add-on to give keys to the sets of children.
+Bu sorunu çözmek için, alt eleman gruplarına `createFragment` eklentisini kullanarak anahtarlar verebilirsiniz.
 
 #### `Array<ReactNode> createFragment(object children)` {#arrayreactnode-createfragmentobject-children}
 
-Instead of creating arrays, we write:
+Diziler oluşturmak yerine, şunu yazıyoruz:
 
 ```javascript
 import createFragment from 'react-addons-create-fragment';
@@ -63,6 +63,7 @@ function Swapper(props) {
 }
 ```
 
-The keys of the passed object (that is, `left` and `right`) are used as keys for the entire set of children, and the order of the object's keys is used to determine the order of the rendered children. With this change, the two sets of children will be properly reordered in the DOM without unmounting.
+İletilen nesnenin anahtarları (yani, `left` ve `right`) tüm alt elemanlar için anahtar olarak kullanılır ve nesnenin anahtarlarının sırası, render edilen alt elemanların sırasını belirlemek için kullanılır. Bu değişilik ile birlikte, bu iki grup alt eleman DOM içerisinde çıkarılmaya gerek kalmadan, düzgün bir şekilde yeniden sıralanacaktır.
 
-The return value of `createFragment` should be treated as an opaque object; you can use the [`React.Children`](/docs/react-api.html#react.children) helpers to loop through a fragment but should not access it directly. Note also that we're relying on the JavaScript engine preserving object enumeration order here, which is not guaranteed by the spec but is implemented by all major browsers and VMs for objects with non-numeric keys.
+
+`createFragment` öğesinin dönüş değeri, opak bir nesne olarak değerlendirilmelidir; [`React.Children`](/docs/react-api.html#react.children) yardımcılarını, bir fragment içerisinde döngü ile gezinmek için kullanabilirsiniz ancak doğrudan erişmemelisiniz. Ayrıca, tanımlamalarında garanti edilmemişte olsa, tüm önemli tarayıcılar ve VM'ler tarafından sayısal olmayan anahtarlara sahip nesneler için uygulanmış bulunan, nesne numaralandırma düzenini muhafaza eden JavaScript motoruna güvendiğimizi unutmayın.
