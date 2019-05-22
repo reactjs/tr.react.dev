@@ -201,7 +201,11 @@ Daha önce React bileşenlerinde mümkün olmayan paylaşım esnekliğini özel 
 
 Erken aşamalarda hemen soyutlamaya gitmeyiniz. Şu an bir fonksiyon bileşeni birçok işlemi gerçekleştiriyorsa, daha sonra projenizdeki bir fonksiyon bileşeninin ortalama uzunluğu da daha fazla olacaktır. Bu normaldir -- hemen kodu Hook'lara ayırma ihtiyacı duymak *zorunda değilsiniz*. Fakat basit bir arayüz arkasındaki karmaşık mantığın gizlenmesini veya karmaşık bir bileşenin ayrıştırılmasına yardımcı olmasını sağlayacak yerlerde özel Hook oluşturmanızı da tavsiye ederiz.
 
+<<<<<<< HEAD
 Örneğin, belirli bir amaç için yazılmış birçok yerel state içeren karmaşık bir bileşene sahip olduğunuzu düşünelim. `useState` Hook'unun, state güncelleme mantığını merkezi bir hale getirmesi kolay olmayacağından dolayı, [Redux](https://redux.js.org/) reducer olarak yazmayı tercih edebilirsiniz:
+=======
+For example, maybe you have a complex component that contains a lot of local state that is managed in an ad-hoc way. `useState` doesn't make centralizing the update logic any easier so you might prefer to write it as a [Redux](https://redux.js.org/) reducer:
+>>>>>>> 1f27bba9484f26ec6dab383b09730ad7ed59f732
 
 ```js
 function todosReducer(state, action) {
