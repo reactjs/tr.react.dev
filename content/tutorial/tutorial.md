@@ -531,11 +531,7 @@ Fark edeceğiniz gibi, `handleClick` fonksiyonu içerisinde, halihazırda var ol
 
 ### Neden Immutability Önemlidir {#why-immutability-is-important}
 
-<<<<<<< HEAD
 **Immutability**, anlam olarak **mutate** (değişmek) kelimesinin zıttı olan **değişmezlik** kavramını oluşturmaktadır. Önceki kod örneğinde, mevcut `squares` dizisini değiştirmek yerine, dizinin `.slice()` metodu ile bir kopyasının oluşturulması gerektiğini önermiştik. Şimdi ise immutability kavramına ve immutability'i öğrenmenin neden önemli olduğuna değineceğiz.
-=======
-In the previous code example, we suggested that you use the `.slice()` method to create a copy of the `squares` array to modify instead of modifying the existing array. We'll now discuss immutability and why immutability is important to learn.
->>>>>>> 1f27bba9484f26ec6dab383b09730ad7ed59f732
 
 Genellikle verinin değiştirilmesi için iki farklı yaklaşım vardır. İlk yaklaşımda, verinin değerleri direkt olarak değiştirilerek ilgili verinin değişmesi (mutate) sağlanır. İkinci yaklaşımda ise, ilgili veri **kopyalanarak**, kopya veri üzerinde istenen değişiklikler gerçekleştirildikten sonra, kopya verinin ana veriye atanması işlemidir.
 
