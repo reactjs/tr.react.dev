@@ -107,4 +107,4 @@ Hook'lar hakkında en sık sorulan soruları cevaplayan bir [Hook'lar için SSS 
 
 ## Sonraki Adımlar {#next-steps}
 
-Bu sayfanın sonunda, Hook'ların hangi problemleri çözdüğü hakkında kabaca bir fikriniz olmalı, ancak birçok detay muhtemelen belirsiz. Merak etmeyin! **Şimdi Hook'ları örneklerle öğrenmeye başladığımız [bir sonraki sayfa](/docs/hooks-overview.html)ya gidelim.**
+Bu sayfanın sonunda, Hook'ların hangi problemleri çözdüğü hakkında kabaca bir fikriniz olmalı, ancak birçok detay muhtemelen belirsiz. Merak etmeyin! **Şimdi Hook'ları örneklerle öğrenmeye başladığımız [bir sonraki sayfaya](/docs/hooks-overview.html) gidelim.**
