@@ -90,7 +90,7 @@ Aşağıdaki metotlar; render esnasında, yaşam döngüsü metodunda veya herha
 
 ### Diğer API'lar {#other-apis}
 
-hHr bileşen, bu metotların haricinde aşağıdaki gibi bazı API'ları sunmaktadır:
+Her bileşen, bu metotların haricinde aşağıdaki gibi bazı API'ları sunmaktadır:
 
   - [`setState()`](#setstate)
   - [`forceUpdate()`](#forceupdate)
