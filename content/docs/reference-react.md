@@ -108,9 +108,9 @@ Temel `React.Component` sınıfına ilişkin metod ve özelliklerin listesi içi
 
 Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile aynı sonucu render ediyor ise, bazı durumlarda performans artışı için `React.PureComponent` kullanabilirsiniz.
 
-> Not
+> Not:
 >
-> `React.PureComponent`'in `shouldComponentUpdate()` metodu sadece nesneleri yüzeysel olarak karşılaştırır. Eğer bunlar karmaşık veri yapıları içeriyorsa, daha derin farklılıklar için yanlış sonuçlar üretebilir. `PureComponent`'i yalnızca prop'lar ve state'in basit olmasını beklediğiniz durumlarda uzatın, veya derin veri yapılarının değiştiğini biliyorsanız [`forceUpdate()`](/docs/react-component.html#forceupdate) işlevini kullanın. Ya da, iç içe geçmiş verilerin hızlı bir şekilde karşılaştırılmasını kolaylaştırmak için [değişmez nesneler](https://facebook.github.io/immutable-js/) kullanmayı düşünebilirsiniz.
+> `React.PureComponent`'in `shouldComponentUpdate()` metodu nesneleri sadece yüzeysel olarak karşılaştırır. Eğer bunlar karmaşık veri yapıları içeriyorsa, daha derin farklılıklar için yanlış sonuçlar üretebilir. `PureComponent`'i yalnızca prop'lar ve state'in basit olmasını beklediğiniz durumlarda uzatın, veya derin veri yapılarının değiştiğini biliyorsanız [`forceUpdate()`](/docs/react-component.html#forceupdate) işlevini kullanın. Ya da, iç içe geçmiş verilerin hızlı bir şekilde karşılaştırılmasını kolaylaştırmak için [değişmez nesneler](https://facebook.github.io/immutable-js/) kullanmayı düşünebilirsiniz.
 >
 > Ayrıca, `React.PureComponent`'in `shouldComponentUpdate()` metodu tüm bileşen alt ağacı için prop güncellemelerini atlar. Tüm alt bileşenlerinin de "pure" olduğundan emin olun.
 
@@ -128,7 +128,7 @@ const MyComponent = React.memo(function MyComponent(props) {
 
 Eğer fonksiyon bileşeniniz aynı prop'lar ile aynı sonucu render ediyor ise, bazı durumlarda sonucu ezberleyerek performans artışı sağlaması için onu bir `React.memo` çağrısına sarabilirsiniz. Bu, React'in bileşeni render etmeyi atlayacağı ve son render edilen sonucu yeniden kullanacağı anlamına gelir.
 
-Varsayılan olarak, prop'lar nesnesindeki karmaşık nesneleri sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
+Varsayılan olarak, `props` nesnesindeki karmaşık yapıları sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
 
 ```javascript
 function MyComponent(props) {
@@ -144,7 +144,7 @@ function areEqual(prevProps, nextProps) {
 export default React.memo(MyComponent, areEqual);
 ```
 
-Bu metod yalnızca bir **[performans optimizasyonu](/docs/optimizing-performance.html)** olarak vardır. Bir render işlemini "önlemek" için ona güvenmeyin, bu hatalara neden olabilir.
+Bu metod yalnızca bir **[performans optimizasyonu](/docs/optimizing-performance.html)** olarak vardır. Bir render işlemini "önlemek" için ona güvenmeyin. Bu, hatalara neden olabilir.
 
 > Not
 >
@@ -228,7 +228,7 @@ React.Children.map(children, function[(thisArg)])
 
 `children` içinde yer alan her birincil alt eleman için bir fonksiyon çağırır, `this`'i (kendisini) `thisArg` ile belirleyin. Eğer `children` bir dizi ise taranacak ve dizi içindeki her alt eleman için fonksiyon çağrılacaktır. Eğer alt elemanlar `null` veya `undefined` ise, bu metod bir dizi yerine `null` veya `undefined` döndürür.
 
-> Not
+> Not:
 >
 > Eğer `children` bir `Fragment` ise tek bir alt olarak kabul edilir ve tarama yapılmaz.
 
@@ -327,13 +327,13 @@ const SomeComponent = React.lazy(() => import('./SomeComponent'));
 
 `lazy` bileşenlerin render edilmesi için render ağacında daha yukarıda bulunan bir `<React.Suspense>` bileşeninin olması gerektiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
 
-> **Not**
+> **Not:**
 >
 > `React.lazy`'i dinamik içe aktarma ile kullanmak JS ortamında Promise'lerin kullanılabilir olmasını gerektirir. Bu, IE11 (Internet Explorer 11) ve aşağısı için bir polyfill gerektirir.
 
 ### `React.Suspense` {#reactsuspense}
 
-`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
+`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel (`lazy`) yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
 
 ```js
 // Bu bileşen dinamik olarak yüklenir
@@ -351,7 +351,7 @@ function MyComponent() {
 }
 ```
 
-Bu [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerinin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın (her birini sarmak zorunda değildir). En iyi uygulama, bir yükleme göstergesi görmek istediğiniz yerlere `Suspense` koymak, ancak kodu bölmek istediğiniz her yerde `lazy()` kullanmaktır.
+Bu, [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın (her birini sarmak zorunda değildir). En iyi uygulama, bir yükleme göstergesi görmek istediğiniz yerlere `Suspense` koymak, ancak kodu bölmek istediğiniz her yerde `lazy()` kullanmaktır.
 
 Bu bugün desteklenmiyor olsa da, gelecekte `Suspense`'in veri toplama gibi daha fazla durum ile ilgilenmesine izin vermeyi planlıyoruz. Bu konuyu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
