@@ -119,7 +119,7 @@ class LoggingButton extends React.Component {
 
 Bu yöntem, [Create React App](https://github.com/facebookincubator/create-react-app) ile oluşturulan geliştirim ortamında varsayılan olarak gelir. Böylece hiçbir ayarlama yapmadan kullanabilirsiniz.
 
-Eğer bu yöntemi kullanmak istemiyorsanuz, callback içerisinde [ok fonksiyonunu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) da kullanabilirsiniz:
+Eğer bu yöntemi kullanmak istemiyorsanız, callback içerisinde [ok fonksiyonunu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) da kullanabilirsiniz:
 
 ```js{7-9}
 class LoggingButton extends React.Component {

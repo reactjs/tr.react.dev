@@ -83,7 +83,7 @@ class Foo extends Component {
 
 >**Not:**
 >
->Render içerisinde ok fonksiyonu kullanmak, bileşen her render edildiğinde yeni bir fonksiyon oluşturur. Bu da performans kayıplarına yol açabilir.
+>Render içerisinde ok fonksiyonu kullanmak, bileşen her render edildiğinde yeni bir fonksiyon oluşturur. Bu da, katı bir kimlik karşılaştırmasına dayalı performans kayıplarına yol açabilir.
 
 ### Render metodu içerisinde ok fonksiyonu kullanmak doğru mudur? {#is-it-ok-to-use-arrow-functions-in-render-methods}
 
