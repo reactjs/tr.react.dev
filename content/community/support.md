@@ -1,6 +1,6 @@
 ---
 id: support
-title: Where To Get Support
+title: Nereden Destek Almalı
 layout: community
 sectionid: community
 permalink: community/support.html
@@ -8,26 +8,26 @@ redirect_from:
   - "support.html"
 ---
 
-React has a community of millions of developers.
+React, milyonlarca yazılım geliştiriciden oluşan bir topluluğa sahiptir.
 
-On this page we've listed some React-related communities that you can be a part of; see the other pages in this section for additional online and in-person learning materials.
+Bu sayfada, üyesi olabileceğiniz, React ile ilgili bazı toplulukları listeledik; çevrimiçi ve yüzyüze öğrenme ek materyalleri için bu kısımdaki diğer sayfalara bakın. 
 
 ## Stack Overflow {#stack-overflow}
 
-Stack Overflow is a popular forum to ask code-level questions or if you're stuck with a specific error. Read through the [existing questions](https://stackoverflow.com/questions/tagged/reactjs) tagged with **reactjs** or [ask your own](https://stackoverflow.com/questions/ask?tags=reactjs)!
+Stack Overflow, kod düzeyinde sorular sorabileceğiniz veya belirli bir hataya takılıp kaldığınızda başvurabileceğiniz popüler bir forumdur. **Reactjs** etiketli [mevcut soruları](https://stackoverflow.com/questions/tagged/reactjs) okuyun veya  [kendiniz sorun](https://stackoverflow.com/questions/ask?tags=reactjs)!
 
-## Popular Discussion Forums {#popular-discussion-forums}
+## Popüler Tartışma Forumları {#popular-discussion-forums}
 
-There are many online forums which are a great place for discussion about best practices and application architecture as well as the future of React. If you have an answerable code-level question, Stack Overflow is usually a better fit.
+En iyi uygulama yöntemlerinin ve uygulama mimarilerinin veya React'in geleceğinin tartışıldığı pek çok harika çevrimiçi forum mevcut. Eğer cevaplanabilir, kod düzeyinde bir sorunuz varsa, Stack Overflow genellikle bunun için daha uygun olur.
 
-Each community consists of many thousands of React users.
+Her bir topluluk, binlerce React kullanıcısından oluşmaktadır.
 
-* [DEV's React community](https://dev.to/t/react)
-* [Hashnode's React community](https://hashnode.com/n/reactjs)
-* [Reactiflux online chat](https://discord.gg/0ZcbPKXt5bZjGY5n)
-* [Reddit's React community](https://www.reddit.com/r/reactjs/)
-* [Spectrum's React community](https://spectrum.chat/react)
+* [DEV'in React topluluğu](https://dev.to/t/react)
+* [Hashnode'un React topluluğu](https://hashnode.com/n/reactjs)
+* [Reactiflux çevrimiçi sohbet](https://discord.gg/0ZcbPKXt5bZjGY5n)
+* [Reddit'in React topluluğu](https://www.reddit.com/r/reactjs/)
+* [Spectrum'un React topluluğu](https://spectrum.chat/react)
 
-## News {#news}
+## Haberler {#news}
 
-For the latest news about React, [follow **@reactjs** on Twitter](https://twitter.com/reactjs) and the [official React blog](/blog/) on this website.
+React hakkında en güncel haberler için [Twitter'da **@reactjs** hesabını](https://twitter.com/reactjs) ve bu sitede [resmi React blog'unu](/blog/) takip edin.
