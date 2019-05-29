@@ -1,11 +1,11 @@
 - title: Topluluk Kaynakları
   items:
     - id: support
-      title: Support
+      title: Destek
     - id: courses
-      title: Courses
+      title: Dersler
     - id: examples
-      title: Examples
+      title: Örnekler
     - id: meetups
       title: Meetups
     - id: conferences
