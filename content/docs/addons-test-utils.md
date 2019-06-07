@@ -19,7 +19,11 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 
 > Not:
 >
+<<<<<<< HEAD
 > Bileşenlerinizi son kullanıcı kullanır gibi kullanan testler yazmanız ve etkinleştirmeniz için tasarlanmış [`react-testing-library`](https://git.io/react-testing-library) kullanmanızı öneririz.
+=======
+> We recommend using [React Testing Library](https://testing-library.com/react) which is designed to enable and encourage writing tests that use your components as the end users do.
+>>>>>>> 2d9c2785dd9bd1d2876dd2c5b1e3bc233b115f3e
 >
 > Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizin çıktısını test etmenizi, üzerinde gezinmenizi ve değiştirmenizi kolaylaştırmaktadır.
 
