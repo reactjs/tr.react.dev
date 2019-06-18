@@ -589,7 +589,7 @@ function Square(props) {
 }
 ```
 
-Dikkat edecek olursanız sııf bileşeninde kullandığımız `this.props` ifadesi yerine sadece `props`'u kullandık.
+Dikkat edecek olursanız sınıf bileşeninde kullandığımız `this.props` ifadesi yerine sadece `props`'u kullandık.
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/QvvJOv?editors=0010)**
 
