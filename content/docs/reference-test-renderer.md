@@ -39,8 +39,7 @@ console.log(testRenderer.toJSON());
 //   children: [ 'Facebook' ] }
 ```
 
-JSON ağacının bir kopyasını bir dosyaya otomatik olarak kaydetmek ve testlerinizde değişip değişmediğini kontrol etmek için Jest'in anlık görüntü test özelliğini kullanabilirsiniz [Daha fazla bilgi için](https://facebook.github.io/jest/blog/2016/07/27/jest-14.html).
-
+JSON ağacının bir kopyasını bir dosyaya otomatik olarak kaydetmek ve testlerinizde değişip değişmediğini kontrol etmek için Jest'in anlık görüntü test özelliğini kullanabilirsiniz.[Daha fazla bilgi için](https://jestjs.io/docs/en/snapshot-testing).
 
 Ayrıca bileşen çıktısı üzerinde gezerek, belirli düğümleri bulup bu düğümler üzerinde doğrulama metotlarını (toBe, toEqual vb.) çağırabilirsiniz:
 
