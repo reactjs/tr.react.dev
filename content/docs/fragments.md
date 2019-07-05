@@ -18,7 +18,11 @@ render() {
 }
 ```
 
+<<<<<<< HEAD
 Onları tanımlamak için yeni bir [kısa sözdizimi](#short-syntax) de vardır, ancak henüz tüm popüler araçlar tarafından desteklenmemektedir.
+=======
+There is also a new [short syntax](#short-syntax) for declaring them.
+>>>>>>> 06a029d53d7ee7e5e717dd39450ac6af1ff554e5
 
 ## Motivation {#motivation}
 
@@ -113,8 +117,11 @@ class Columns extends React.Component {
 
 Anahtarları veya nitelikleri desteklememesi dışında, diğer elementleri kullandığınız gibi `<></>` kullanabilirsiniz.
 
+<<<<<<< HEAD
 Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)**. Bu nedenle, destekleninceye kadar `<React.Fragment>` yazmak isteyebilirsiniz.
 
+=======
+>>>>>>> 06a029d53d7ee7e5e717dd39450ac6af1ff554e5
 ### Keyed Fragments {#keyed-fragments}
 
 Açıkça belirtilen `<React.Fragment>` sözdiziminin anahtarları olabilir. Bunun için bir kullanım durumu, bir koleksiyonun bir fragmentler dizisine eşlenmesidir. -- örneğin, bir açıklama listesi oluşturmak için:

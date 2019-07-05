@@ -17,7 +17,11 @@ Bu öğretici, herhangi bir React bilginizin olmadığını varsayar.
 
 ## Öğreticiye Başlamadan Önce {#before-we-start-the-tutorial}
 
+<<<<<<< HEAD
 Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun geliştiricisi olmadığınızdan dolayı bu öğreticiyi atlamak istiyor olabilirsiniz -- ama bir şans vermeniz iyi olacaktır.** Zira bu öğreticide edineceğiniz teknikler herhangi bir React uygulaması geliştirmek için temel niteliğindedir, ve bu temeller üzerinde uzmanlaşmak React'i daha derinlemesine öğrenmenizi sağlayacaktır.
+=======
+We will build a small game during this tutorial. **You might be tempted to skip it because you're not building games -- but give it a chance.** The techniques you'll learn in the tutorial are fundamental to building any React app, and mastering it will give you a deep understanding of React.
+>>>>>>> 06a029d53d7ee7e5e717dd39450ac6af1ff554e5
 
 >Not:
 >
