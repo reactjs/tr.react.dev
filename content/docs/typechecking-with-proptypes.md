@@ -83,6 +83,12 @@ MyComponent.propTypes = {
     color: PropTypes.string,
     fontSize: PropTypes.number
   }),
+  
+  // An object with warnings on extra properties
+  optionalObjectWithStrictShape: PropTypes.exact({
+    name: PropTypes.string,
+    quantity: PropTypes.number
+  }),   
 
   // Prop'un sağlanmadığı durumlarda bir uyarının gösterildiğinden emin olmak için,
   // yukarıdakilerden herhangi birini `isRequired` ile zincirleyebilirsiniz.
