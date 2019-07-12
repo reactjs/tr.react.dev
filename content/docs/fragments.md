@@ -18,11 +18,7 @@ render() {
 }
 ```
 
-<<<<<<< HEAD
-Onları tanımlamak için yeni bir [kısa sözdizimi](#short-syntax) de vardır, ancak henüz tüm popüler araçlar tarafından desteklenmemektedir.
-=======
-There is also a new [short syntax](#short-syntax) for declaring them.
->>>>>>> e1abbdecfd1a5a804bd38852e88373f54ddde014
+Onları tanımlamak için yeni bir [kısa sözdizimi](#short-syntax) de vardır.
 
 ## Motivation {#motivation}
 
