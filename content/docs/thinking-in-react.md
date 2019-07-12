@@ -43,7 +43,7 @@ Ama nelerin kendi başına birer bileşen olacağına nasıl karar vereceksiniz?
 
 ![Bileşen Şeması](../images/blog/thinking-in-react-components.png)
 
-Burada küçük uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
+Burada uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
 
   1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamını içerir.
   2. **`SearchBar` (mavi):** bütün *kullanıcı girdilerini* alır.
@@ -120,7 +120,7 @@ Unutmayın: React'in tüm olayı, bileşen hiyerarşisinde yukarıdan aşağı d
 
 Uygulamanızdaki her state parçası için:
 
-  * O state göre bir şeyler render eden her bileşeni belirleyin.
+  * O state'e göre bir şeyler render eden her bileşeni belirleyin.
   * Ortak bir sahip bileşen bulun. (Hiyerarşide, state'e ihtiyaç duyan bütün bileşenlerin üzerinde bulunan tek bir bileşen)
   * *Ya ortak bir sahip bileşen ya da hiyerarşide daha yüksekte bulunan bir bileşen* state'e sahip olmalıdır.
   * State'e sahip olması mantıklı olmayan bir bileşen bulamazsanız, yalnızca state'i tutması için yeni bir bileşen oluşturun ve onu hiyerarşide ortak sahip bileşeninin üzerindeki bir yere ekleyin.
