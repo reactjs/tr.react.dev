@@ -57,8 +57,16 @@ MyComponent.propTypes = {
   // React elemanı.
   optionalElement: PropTypes.element,
 
+<<<<<<< HEAD
   // Bir prop'un sınıf nesnesi olduğunu da belirtebilirsiniz.
   // Bu JS'in instanceof operatörünü kullanır.
+=======
+  // A React element type (ie. MyComponent).
+  optionalElementType: PropTypes.elementType,
+  
+  // You can also declare that a prop is an instance of a class. This uses
+  // JS's instanceof operator.
+>>>>>>> a0911655e08da904d0d6abac731c150e83551ff4
   optionalMessage: PropTypes.instanceOf(Message),
 
   // Bir prop'un enum olarak değerlendirilerek
