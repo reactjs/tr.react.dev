@@ -56,7 +56,10 @@ MyComponent.propTypes = {
 
   // React elemanı.
   optionalElement: PropTypes.element,
-
+  
+  // Bir React Eleman Tipi (Örnek: MyComponent).
+  optionalElementType: PropTypes.elementType,
+  
   // Bir prop'un sınıf nesnesi olduğunu da belirtebilirsiniz.
   // Bu JS'in instanceof operatörünü kullanır.
   optionalMessage: PropTypes.instanceOf(Message),
