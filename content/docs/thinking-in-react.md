@@ -78,7 +78,7 @@ Bu adımı uygulamak için yardıma ihtiyaç duyarsanız, basitçe [React Doküm
 
 ### Kısa bir araya girme: Prop'lar vs State {#a-brief-interlude-props-vs-state}
 
-React'ta iki tür "model" datası vardır: props ve state. Bunlar arasındaki farkı anlamak önemlidir. Eğer aradaki farkın ne olduğundan emin değilseniz [React Dokümanlarına](/docs/interactivity-and-dynamic-uis.html) a göz gezdirin.
+React'ta iki tür "model" datası vardır: props ve state. Bunlar arasındaki farkı anlamak önemlidir. Eğer aradaki farkın ne olduğundan emin değilseniz [React Dokümanlarına](/docs/state-and-lifecycle.html) a göz gezdirin. [SSS: state ve props arasındaki farklar nelerdir?](/docs/faq-state.html#what-is-the-difference-between-state-and-props) kısmına da bakınız.
 
 ## Adım 3: UI State'inin Minimal (ancak eksiksiz) Temsilini Belirleme {#step-3-identify-the-minimal-but-complete-representation-of-ui-state}
 
