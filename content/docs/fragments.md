@@ -20,7 +20,7 @@ render() {
 
 Onları tanımlamak için yeni bir [kısa sözdizimi](#short-syntax) de vardır.
 
-## Motivation {#motivation}
+## Motivasyon {#motivation}
 
 Bir bileşenin alt eleman listesini döndürmesi için yaygın bir modeldir. Örnek için bu React kod parçasına bakın.
 
@@ -68,7 +68,7 @@ class Columns extends React.Component {
 
 Fragmentler bu sorunu çözer.
 
-## Usage {#usage}
+## Kullanım {#usage}
 
 ```jsx{4,7}
 class Columns extends React.Component {
@@ -94,7 +94,7 @@ class Columns extends React.Component {
 </table>
 ```
 
-### Short Syntax {#short-syntax}
+### Kısa Sözdizimi {#short-syntax}
 
 Fragmentleri tanımlamak için kullanabileceğiniz yeni, daha kısa bir sözdizimi var. Boş etiketlere benziyor:
 
@@ -115,7 +115,7 @@ Anahtarları veya nitelikleri desteklememesi dışında, diğer elementleri kull
 
 Not, **[birçok araç henüz desteklemiyor](/blog/2017/11/28/react-v16.2.0-fragment-support.html#support-for-fragment-syntax)**. Bu nedenle, destekleninceye kadar `<React.Fragment>` yazmak isteyebilirsiniz.
 
-### Keyed Fragments {#keyed-fragments}
+### Anahtarlı Fragment'ler {#keyed-fragments}
 
 Açıkça belirtilen `<React.Fragment>` sözdiziminin anahtarları olabilir. Bunun için bir kullanım durumu, bir koleksiyonun bir fragmentler dizisine eşlenmesidir. -- örneğin, bir açıklama listesi oluşturmak için:
 
@@ -137,6 +137,6 @@ function Glossary(props) {
 
 `key`, `Fragment`'e iletilebilecek tek özelliktir. Gelecekte, olay yöneticileri gibi ek özellikler için destek ekleyebiliriz.
 
-### Live Demo {#live-demo}
+### Canlı Demo {#live-demo}
 
-Bununla yeni JSX fragment sözdizimini deneyebilirsiniz [CodePen](https://codepen.io/reactjs/pen/VrEbjE?editors=1000).
+Bununla yeni JSX fragment sözdizimini deneyebilirsiniz: [CodePen](https://codepen.io/reactjs/pen/VrEbjE?editors=1000).
