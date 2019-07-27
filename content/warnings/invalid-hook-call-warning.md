@@ -18,32 +18,32 @@ Tüm bu durumları tek tek inceleyelim.
 
 ## React ve React DOM sürümlerinin uyumsuz olması {#mismatching-versions-of-react-and-react-dom}
 
-Henüz Hook desteklemeyen `react-dom` (< 16.8.0) veya `react-native` (< 0.59) bir sürüm kullanıyor olabilirsiniz. Kullanılan sürümü öğrenmek için `npm ls react-dom` veya `npm ls react-native` komutlarını çalıştırabilirsiniz. Eğer birden fazla sürüm bulunda ise sorun bundan olabilir (devamı aşağıda).
+Henüz Hook desteklemeyen `react-dom` (< 16.8.0) veya `react-native` (< 0.59) bir sürüm kullanıyor olabilirsiniz. Kullanılan sürümü öğrenmek için `npm ls react-dom` veya `npm ls react-native` komutlarını çalıştırabilirsiniz. Eğer birden fazla sürüm bulundu ise sorun bundan olabilir (devamı aşağıda).
 
-## Hook kurallarını çiğnemek {#breaking-the-rules-of-hooks}
+## Hook Kurallarını Çiğnemek {#breaking-the-rules-of-hooks}
 
-Hook'ları yalnızca **React fonksiyonunuzun içerisinde kullanabilirsiniz**:
+Hook'ları yalnızca **fonksiyon bileşenlerinin içinde** kullanabilirsiniz:
 
-* ✅ Hook'ları React fonksiyonununuzun en tepesinde çağırın.
-* ✅ Özel Hook'larınızda yine en tepede çağırın [özel Hook](/docs/hooks-custom.html).
+* ✅ Hook'ları fonksiyon bileşenin en tepesinde çağırın.
+* ✅ Özel Hook'ların içinde de en tepede çağırın [özel Hook](/docs/hooks-custom.html).
 
-**Kurallar ile ilgili daha fazla bilgi için [Hook kuralları](/docs/hooks-rules.html).**
+**Bu konuya dair daha fazlasını [Hook kuralları](/docs/hooks-rules.html) bölümünde öğrenin.**
 
 ```js{2-3,8-9}
 function Counter() {
-  // ✅ İyi: fonksiyon bileşenin,tepesinde çağırılmış
+  // ✅ İyi: fonksiyon bileşenin tepesinde çağırılmış
   const [count, setCount] = useState(0);
   // ...
 }
 
 function useWindowWidth() {
-  // ✅ İyi: özel hook'un tepesinde çağırılmış
+  // ✅ İyi: zel Hook'un tepesinde çağırılmış
   const [width, setWidth] = useState(window.innerWidth);
   // ...
 }
 ```
 
-Karışıklığı önlemek için diğer durumlarda Hook'ları **kullanmayın**:
+Karışıklığı önlemek için, diğer durumlarda Hook'ları kullanmak **desteklenmez**:
 
 * 🔴 Sınıf bileşenin içinde çağırmayın.
 * 🔴 Olay yöneticisi içinde çağırmayın.
@@ -82,7 +82,7 @@ class Bad3 extends React.Component {
 
 >Not
 >
->[Özel Hook'lar](/docs/hooks-custom.html) başka Hook'ları çağıralabilir(amaçları doğrultusunda). Bu çalışır, çünkü Hook'lar yalnızca fonksiyon bileşeni içerisindeszn çağırılabiliyordu.
+>[Özel Hook'lar](/docs/hooks-custom.html) başka Hook'ları çağıralabilir(tüm amaçları budur). Bu işe yarar, çünkü Hook'lar yalnızca bir fonksiyon bileşeni içerisindeszn çağırılabiliyordu.
 
 
 ## Birden Fazla React {#duplicate-react}
@@ -100,24 +100,24 @@ Eğer birden fazla react sürümü görürseniz bu sorunu çözmeniz gerekmekted
 Ayrıca, bazı log'lar ekleyerek ve sunucuyu yeniden başlatarak bu sorunu çözmeyi deneyebilirsiniz:
 
 ```js
-// Buraya ekleyin node_modules/react-dom/index.js
+// Bunu node_modules/react-dom/index.js dosyasına ekleyin
 window.React1 = require('react');
 
-// Bileşen dosyanıza ekleyin
+// Bunu bileşen dosyanıza ekleyin
 require('react-dom');
 window.React2 = require('react');
 console.log(window.React1 === window.React2);
 ```
 
-Eğer ekrana `false` yazıyorsa iki farklı react olabilir ve bunun neden olduğunu çözmeniz gerekebilir. [Benzer sorunlar](https://github.com/facebook/react/issues/13991) topluluğun karşılaştığı genel nedenleri içerir.
+Eğer ekrana `false` yazıyorsa iki farklı react olabilir ve bunun neden olduğunu çözmeniz gerekebilir. [Bu sorun](https://github.com/facebook/react/issues/13991) topluluğun karşılaştığı bazı genel nedenleri içerir.
 
-Bu sorun, `npm link` veya eşdeğer bir komut kullandığınızda ortaya çıkabilir. Bu durumda paket yöneticiniz iki farklı React görebilir— biri uygulama içerisinde bir diğeri kütüphane klasörü içerisinde.
+Bu sorun, `npm link` veya eşdeğer bir komut kullandığınızda ortaya çıkabilir. Bu durumda paket yöneticiniz, biri uygulama içerisinde bir diğeri kütüphane klasörü içerisinde olmak üzere 2 farklı React görebilir.
 `myapp` ve `mylib` kardeş klasöler olduğu varsayılırsa olası bir düzeltme için `mylib` klasöründe `npm link` komutu çalıştırılmalıdır.Bu, kütüphanenin uygulama içerisindeki React kopyasını kullanmasını sağlar
 
 >Not
 >
->Genel olarak , React bir sayfada birden fazla bağımsız kopya kullanmayı destekler(örneğin bir uygulama ve third-party eklenti kullanıyorsa). Yalnızca `require('react')` , bileşen içinde kullanılan react ile `react-dom` içerisindeki react sürüme farklı ise çalışmaz.    
+>Genel olarak , React bir sayfada birden fazla bağımsız kopya kullanmayı destekler(örneğin bir uygulama ve third-party eklenti kullanıyorsa). `require('react')` sadece , bileşen içerisindeki ile `react-dom` içerisindeki sürümler farklı ise çalışmaz.    
 
 ## Diğer Nedenler {#other-causes}
 
-Bunların hiçbiri işe yaramaz ise lütfen bize sorunu bildirin [issue aç](https://github.com/facebook/react/issues/13991) size yardımcı olmaya çalışacağız. Küçük bir uygulama oluşturarak tekrar deneyebilirsiniz — belki hatayı bu şekilde bulabilirsiniz.
+Bunların hiçbiri işe yaramaz ise lütfen bize [bu sorun başlığı](https://github.com/facebook/react/issues/13991) altında bildirin. Küçük bir uygulama oluşturarak tekrar deneyebilirsiniz — belki hatayı bu şekilde bulabilirsiniz.
