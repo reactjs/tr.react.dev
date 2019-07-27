@@ -8,7 +8,7 @@ permalink: warnings/invalid-hook-call-warning.html
 
  > Hooks can only be called inside the body of a function component.
 
-Bunu görmenizin 3 sebebi vardır:
+Yaygın 3 sebebi vardır:
 
 1. React ve React DOM sürümleriniz  **uyumsuz** olabilir.
 2.  **[Hook Kuralları](/docs/hooks-rules.html)'nı çiğnemiş** olabilirsiniz.
