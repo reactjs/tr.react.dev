@@ -8,7 +8,7 @@ permalink: warnings/invalid-hook-call-warning.html
 
  > Hooks can only be called inside the body of a function component.
 
-Yaygın 3 sebebi vardır:
+3 yaygın sebebi vardır.
 
 1. React ve React DOM sürümleriniz  **uyumsuz** olabilir.
 2.  **[Hook Kuralları](/docs/hooks-rules.html)'nı çiğnemiş** olabilirsiniz.
@@ -24,8 +24,8 @@ Henüz Hook desteklemeyen `react-dom` (< 16.8.0) veya `react-native` (< 0.59) bi
 
 Hook'ları yalnızca **fonksiyon bileşenlerinin içinde** kullanabilirsiniz:
 
-* ✅ Hook'ları fonksiyon bileşenin en tepesinde çağırın.
-* ✅ Özel Hook'ların içinde de en tepede çağırın [özel Hook](/docs/hooks-custom.html).
+* ✅ Hook'ları fonksiyon bileşeninin en tepesinde çağırın.
+* ✅ [Özel Hook'ların](/docs/hooks-custom.html) içinde de en tepede çağırın.
 
 **Bu konuya dair daha fazlasını [Hook kuralları](/docs/hooks-rules.html) bölümünde öğrenin.**
 
@@ -37,7 +37,7 @@ function Counter() {
 }
 
 function useWindowWidth() {
-  // ✅ İyi: zel Hook'un tepesinde çağırılmış
+  // ✅ İyi: özel Hook'un tepesinde çağırılmış
   const [width, setWidth] = useState(window.innerWidth);
   // ...
 }
@@ -109,15 +109,15 @@ window.React2 = require('react');
 console.log(window.React1 === window.React2);
 ```
 
-Eğer ekrana `false` yazıyorsa iki farklı react olabilir ve bunun neden olduğunu çözmeniz gerekebilir. [Bu sorun](https://github.com/facebook/react/issues/13991) topluluğun karşılaştığı bazı genel nedenleri içerir.
+Eğer ekrana `false` yazıyorsa iki farklı react olabilir ve bunun neden olduğunu çözmeniz gerekebilir. [Bu sorun](https://github.com/facebook/react/issues/13991), topluluğun karşılaştığı bazı genel nedenleri içerir.
 
 Bu sorun, `npm link` veya eşdeğer bir komut kullandığınızda ortaya çıkabilir. Bu durumda paket yöneticiniz, biri uygulama içerisinde bir diğeri kütüphane klasörü içerisinde olmak üzere 2 farklı React görebilir.
 `myapp` ve `mylib` kardeş klasöler olduğu varsayılırsa olası bir düzeltme için `mylib` klasöründe `npm link` komutu çalıştırılmalıdır.Bu, kütüphanenin uygulama içerisindeki React kopyasını kullanmasını sağlar
 
 >Not
 >
->Genel olarak , React bir sayfada birden fazla bağımsız kopya kullanmayı destekler(örneğin bir uygulama ve third-party eklenti kullanıyorsa). `require('react')` sadece , bileşen içerisindeki ile `react-dom` içerisindeki sürümler farklı ise çalışmaz.    
+>Genel olarak, React bir sayfada birden fazla bağımsız kopya kullanmayı destekler(örneğin bir uygulama ve üçüncü-party bir eklenti kullanıyorsa). `require('react')` sadece, bileşen içerisindeki ile `react-dom` içerisindeki sürümler farklı ise çalışmaz.    
 
 ## Diğer Nedenler {#other-causes}
 
-Bunların hiçbiri işe yaramaz ise lütfen bize [bu sorun başlığı](https://github.com/facebook/react/issues/13991) altında bildirin. Küçük bir uygulama oluşturarak tekrar deneyebilirsiniz — belki hatayı bu şekilde bulabilirsiniz.
+Bunların hiçbiri işe yaramaz ise lütfen bize [bu sorun başlığı](https://github.com/facebook/react/issues/13991) altında yorum bırakın.Size yardımcı olmaya çalışacağız.Küçük bir uygulama oluşturarak tekrar deneyebilirsiniz — belki hatayı bu şekilde bulabilirsiniz.
