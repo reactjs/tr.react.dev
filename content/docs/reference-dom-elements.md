@@ -24,7 +24,7 @@ React ve HTML'de birbirlerinden farklı çalışan birkaç nitelik bulunmaktadı
 
 ### checked {#checked}
 
-`checked` niteliği `checkbox` veya `radio` tipinde olan `<input>` elemanlarında desteklenmektedir. Bu niteliği input elemanındaki değer ya da değerleri seçmek için kullanırsınız. Bu nitelik kontrollü bileşenleri oluşturmak için kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultChecked` bulunmaktadır. `defaultChecked` içeren  bileşen sayfada ilk oluştuğunda kontrol edilip edilmeyeceğini belirlemektedir.
+`checked` niteliği `checkbox` veya `radio` tipinde olan `<input>` elemanlarında desteklenmektedir. Bu niteliği input elemanındaki değer ya da değerleri seçmek için kullanırsınız. Bu nitelik kontrollü bileşenleri oluşturmak için kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultChecked` bulunmaktadır. `defaultChecked` içeren bileşen sayfada ilk oluştuğunda kontrol edilip edilmeyeceğini belirlemektedir.
 
 ### className {#classname}
 
@@ -62,7 +62,7 @@ function MyComponent() {
 
 >Not
 >
->Dokümantasyondaki bazı örneklerde kolaylık sağlamak amaçlı `style` kullanıldı, **fakat stil biçimlendirmede kullanılan `style` niteliğinin kullanılması genelde tavsiye edilmez**. Genellikle bu durumlarda [`className`](#classname) kullanılmalıdır. Bu şekilde harici CSS dosyalarında belirtilen class'ları kullanabilirsiniz. `style`'ın kullanım amacı genellikle React'te dinamik hesaplanan stillerin ekrana yansıtma anında ekleyebilmek için kullanılır. [SSS: CSS ve Stillendirme](/docs/faq-styling.html)'ye bakınız. 
+>Dokümantasyondaki bazı örneklerde kolaylık sağlamak amaçlı `style` kullanıldı, **fakat stil biçimlendirmede kullanılan `style` niteliğinin kullanılması genelde tavsiye edilmez**. Genellikle bu durumlarda [`className`](#classname) kullanılmalıdır. Bu şekilde harici CSS dosyalarında belirtilen class'ları kullanabilirsiniz. `style`'ın kullanım amacı genellikle React'te dinamik hesaplanan stillerin ekrana yansıtma anında ekleyebilmek için kullanılır. [SSS: CSS ve Stillendirme](/docs/faq-styling.html)'ye bakınız.
 
 `style` niteliği CSS string'i almak yerine camelCased şeklinde yazılmış özellikleri, JavaScript objesi halinde beklemektedir. Bu şekilde DOM `style` JavaScript özelliğiyle tutarlı hale gelmektedir. Ayrıca XSS güvenlik açıklarını önlemesinin de yanı sıra daha verimlidir. Örneğin:
 
@@ -114,7 +114,7 @@ Normalde, alt elemanları bulunan bir eleman `contentEditable` olarak işaretlen
 
 ### suppressHydrationWarning {#suppresshydrationwarning}
 
-Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı oluşturduğuna dair uyarı alırsınız. Fakat, çok nadiren, tam eşleşme neredeyse imkansızdır. Örneğin, timestamps sunucu ve istemcide farklı olması beklenir.
+Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı oluşturduğuna dair uyarı alırsınız. Fakat çok nadiren, tam eşleşme neredeyse imkansızdır. Örneğin, timestamps sunucu ve istemcide farklı olması beklenir.
 
 `suppressHydrationWarning`'i `true` olarak belirlerseniz, React sizi elemanın niteliklerindeki ve içeriğindeki uyuşmazlıklar hakkında uyarmayacaktır. Sadece bir derece aşağıya kadar çalışmaktadır. Bu nitelik çıkış kapısı olarak kullanılması amaçlanmıştır. Başka amaçlarda kullanılmamasını tavsiye ederiz. [`ReactDOM.hydrate()` dokümentasyonunda](/docs/react-dom.html#hydrate) hidrasyon ile ilgili daha fazla bilgi bulabilirsiniz.
 
