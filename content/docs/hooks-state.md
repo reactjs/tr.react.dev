@@ -162,13 +162,13 @@ function Example() {
 
 ## State Okuma {#reading-state}
 
-Geçerli count'u göstermek istediğimiz zaman `this.state.count`'i okuruz:
+Sınıf temelli bir component'de geçerli count'u göstermek istediğimiz zaman `this.state.count`'i okuruz:
 
 ```js
   <p>You clicked {this.state.count} times</p>
 ```
 
-In a function, we can use `count` directly:
+Foksiyon  temelli bir component'de ise `count` değişkenini direk kullanabiliriz.:
 
 
 ```js
@@ -239,7 +239,7 @@ Soldaki isimler React API'ının bir parçası değildir.Kendi state değişkenl
   const [fruit, setFruit] = useState('banana');
 ```
 
-Bu JavaScript sözdizimi ["dizi paraçalama (array destructuring)"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) olarak adlandırılır.`fruit` ve `setFruit` diye iki yeni değişken oluşturduğumuz anlamına gelir.Burada `fruit`, `useState` tarafından dönen ilk değere; `setFruit` ise ikinci değere atanır bu kod ile eşdeğerdir. 
+Bu JavaScript sözdizimi ["dizi parçalama (array destructuring)"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) olarak adlandırılır.`fruit` ve `setFruit` diye iki yeni değişken oluşturduğumuz anlamına gelir.Burada `fruit`, `useState` tarafından dönen ilk değere; `setFruit` ise ikinci değere atanır bu kod ile eşdeğerdir. 
 
 
 ```js
