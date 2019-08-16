@@ -59,6 +59,8 @@
       title: Performansı En İyi Duruma Getirmek
     - id: portals
       title: Portal'lar
+    - id: profiler
+      title: Profiler
     - id: react-without-es6
       title: ES6 Olmadan React Kullanımı
     - id: react-without-jsx
@@ -123,6 +125,14 @@
         title: Hook'ların API Kaynağı
       - id: hooks-faq
         title: Hook'lar için SSS
+- title: Test Etmek
+  items:
+    - id: testing
+      title: Test Etmeye Genel Bakış
+    - id: testing-recipes
+      title: Test Tarifleri
+    - id: testing-environments
+      title: Test Ortamları
 - title: Katkı Sağlamak
   items:
   - id: how-to-contribute
