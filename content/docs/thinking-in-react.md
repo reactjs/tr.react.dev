@@ -43,7 +43,7 @@ Ama nelerin kendi başına birer bileşen olacağına nasıl karar vereceksiniz?
 
 ![Bileşen Şeması](../images/blog/thinking-in-react-components.png)
 
-Burada küçük uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
+Burada uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
 
   1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamını içerir.
   2. **`SearchBar` (mavi):** bütün *kullanıcı girdilerini* alır.
@@ -78,7 +78,7 @@ Bu adımı uygulamak için yardıma ihtiyaç duyarsanız, basitçe [React Doküm
 
 ### Kısa bir araya girme: Prop'lar vs State {#a-brief-interlude-props-vs-state}
 
-React'ta iki tür "model" datası vardır: props ve state. Bunlar arasındaki farkı anlamak önemlidir. Eğer aradaki farkın ne olduğundan emin değilseniz [React Dokümanlarına](/docs/interactivity-and-dynamic-uis.html) a göz gezdirin.
+React'ta iki tür "model" datası vardır: props ve state. Bunlar arasındaki farkı anlamak önemlidir. Eğer aradaki farkın ne olduğundan emin değilseniz [React Dokümanlarına](/docs/state-and-lifecycle.html) a göz gezdirin. [SSS: state ve props arasındaki farklar nelerdir?](/docs/faq-state.html#what-is-the-difference-between-state-and-props) kısmına da bakınız.
 
 ## Adım 3: UI State'inin Minimal (ancak eksiksiz) Temsilini Belirleme {#step-3-identify-the-minimal-but-complete-representation-of-ui-state}
 
@@ -120,7 +120,7 @@ Unutmayın: React'in tüm olayı, bileşen hiyerarşisinde yukarıdan aşağı d
 
 Uygulamanızdaki her state parçası için:
 
-  * O state göre bir şeyler render eden her bileşeni belirleyin.
+  * O state'e göre bir şeyler render eden her bileşeni belirleyin.
   * Ortak bir sahip bileşen bulun. (Hiyerarşide, state'e ihtiyaç duyan bütün bileşenlerin üzerinde bulunan tek bir bileşen)
   * *Ya ortak bir sahip bileşen ya da hiyerarşide daha yüksekte bulunan bir bileşen* state'e sahip olmalıdır.
   * State'e sahip olması mantıklı olmayan bir bileşen bulamazsanız, yalnızca state'i tutması için yeni bir bileşen oluşturun ve onu hiyerarşide ortak sahip bileşeninin üzerindeki bir yere ekleyin.

@@ -192,7 +192,7 @@ Genel olarak bu, `<input type="text">`, `<textarea>` ve `<select>` elemanların�
 
 ## Dosya Girişi Elemanı {#the-file-input-tag}
 
-HTML'de bir `<input type="file">` elemanı, kullanıcını cihazının depolama alanından bir veya daha fazla dosyayı sunucuya yüklemesini ya da JavaScript'teki [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) aracılığıyla manipüle etmesini sağlar.
+HTML'de bir `<input type="file">` elemanı, kullanıcını cihazının depolama alanından bir veya daha fazla dosyayı sunucuya yüklemesini ya da JavaScript'in [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) aracılığıyla manipüle etmesini sağlar.
 
 ```html
 <input type="file" />

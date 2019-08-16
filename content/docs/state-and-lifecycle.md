@@ -244,7 +244,7 @@ Bileşenin çıktısı, DOM'a render edildikten sonra `componentDidMount()` meto
   }
 ```
 
-`this`'e zamanlayıcı ID'sini nasıl atadığımızı inceleyebilirsiniz.
+`this`'e (`this.timerID`) zamanlayıcı ID'sini nasıl atadığımızı inceleyebilirsiniz.
 
 Daha önce de belirttiğimiz gibi, `this.props` React tarafından yönetiliyor, ve `this.state`'in de özel bir yaşam döngüsü var. Eğer `timerID` gibi veri akışına dahil olmayan değişkenleri saklamanız gerekiyorsa, bu örnekte yaptığımız gibi sınıf içerisinde değişkenler tanımlayabilirsiniz.
 

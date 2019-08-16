@@ -56,7 +56,10 @@ MyComponent.propTypes = {
 
   // React elemanı.
   optionalElement: PropTypes.element,
-
+  
+  // Bir React Eleman Tipi (Örnek: MyComponent).
+  optionalElementType: PropTypes.elementType,
+  
   // Bir prop'un sınıf nesnesi olduğunu da belirtebilirsiniz.
   // Bu JS'in instanceof operatörünü kullanır.
   optionalMessage: PropTypes.instanceOf(Message),
@@ -83,6 +86,12 @@ MyComponent.propTypes = {
     color: PropTypes.string,
     fontSize: PropTypes.number
   }),
+  
+  // An object with warnings on extra properties
+  optionalObjectWithStrictShape: PropTypes.exact({
+    name: PropTypes.string,
+    quantity: PropTypes.number
+  }),   
 
   // Prop'un sağlanmadığı durumlarda bir uyarının gösterildiğinden emin olmak için,
   // yukarıdakilerden herhangi birini `isRequired` ile zincirleyebilirsiniz.

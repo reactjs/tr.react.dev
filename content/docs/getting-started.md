@@ -100,7 +100,8 @@ Bazen insanlar üçüncü şahıs kitapları ve video kurslarını resmi anlatı
 
 ### Gelişmiş Kavramlar {#advanced-concepts}
 
-[Ana kavramlarda](/docs/hello-world.html) bilgi sahibi olup biraz React ile oynadığınızda, daha ileri konulara ilgi duyabilirsiniz. Bu bölüm size [context](/docs/context.html) ve [ref'ler](/docs/refs-and-the-dom.html) gibi güçlü fakat daha az kullanılan React özelliklerini tanıtacaktır..
+
+[Ana kavramlarda](#main-concepts) bilgi sahibi olup biraz React ile oynadığınızda, daha ileri konulara ilgi duyabilirsiniz. Bu bölüm size [context](/docs/context.html) ve [ref'ler](/docs/refs-and-the-dom.html) gibi güçlü fakat daha az kullanılan React özelliklerini tanıtacaktır...
 
 ### API Referansı {#api-reference}
 

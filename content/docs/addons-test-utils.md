@@ -19,7 +19,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 
 > Not:
 >
-> Bileşenlerinizi son kullanıcı kullanır gibi kullanan testler yazmanız ve etkinleştirmeniz için tasarlanmış [`react-testing-library`](https://git.io/react-testing-library) kullanmanızı öneririz.
+> Bileşenlerinizi son kullanıcı kullanır gibi kullanan testler yazmanız ve etkinleştirmeniz için tasarlanmış [React Testing Library](https://testing-library.com/react)'yi kullanmanızı öneririz.
 >
 > Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizin çıktısını test etmenizi, üzerinde gezinmenizi ve değiştirmenizi kolaylaştırmaktadır.
 
@@ -122,7 +122,9 @@ it('sayacı render edebilir ve güncelleyebilir', () => {
 });
 ```
 
-Unutmayınız ki, `document`'a DOM container'ı eklenmediği sürece, dispatchEvent() çalışmayacaktır. Bu tarz angarya kodlarla uğraşmamak için, [`react-testing-library`](https://github.com/kentcdodds/react-testing-library) gibi bir kütüphaneyi kullanabilirsiniz.
+Unutmayınız ki, `document`'a DOM container'ı eklenmediği sürece, DOM olayları çalışmayacaktır. Bu tarz basmakalıp/sabit kodlarla uğraşmamak için, [React Testing Library](https://testing-library.com/react) gibi bir kütüphaneyi kullanabilirsiniz.
+
+The [`Test Tarifleri`](/docs/testing-recipes.html) sayfası `act()` in nasıl çalıştığına dair, örnek kullanımlarla birlikte, daha fazla bilgi içerir.
 
 * * *
 
@@ -139,7 +141,7 @@ Mock (sahte ya da taklit) bir React bileşeni olarak kullanılabilmesine izin ve
 
 > Not:
 >
-> `mockComponent()` eski bir API'dır. [shallow rendering](/docs/shallow-renderer.html)'i veya [`jest.mock()`](https://facebook.github.io/jest/docs/en/tutorial-react-native.html#mock-native-modules-using-jestmock)'u kullanmanızı tavsiye ederiz.
+> `mockComponent()` eski bir API'dır. Onun yerine [`jest.mock()`](https://facebook.github.io/jest/docs/en/tutorial-react-native.html#mock-native-modules-using-jestmock)'u kullanmanızı tavsiye ederiz.
 
 * * *
 

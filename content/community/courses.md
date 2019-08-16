@@ -1,47 +1,49 @@
 ---
 id: courses
-title: Courses
+title: Dersler
 layout: community
 sectionid: community
 permalink: community/courses.html
 ---
 
-## Free Courses {#free-courses}
+## Ücretsiz Dersler {#free-courses}
 
-- [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy's introductory course for React.
+- [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy'nin giriş seviyesindeki React dersi.
 
-- [Egghead.io: Start Learning React](https://egghead.io/courses/start-learning-react) - This series will explore the basic fundamentals of React to get you started.
+- [Egghead.io: React Öğrenmeye Başlayın](https://egghead.io/courses/start-learning-react) - Bu eğitim serisi, React'in temellerini keşfederek başlangıç yapmanıza yardımcı olacak.
 
-- [React Crash Course 2018](https://www.youtube.com/watch?v=Ke90Tje7VS0) - A beginner-friendly crash course through the most important React topics.
+- [React Crash Course 2018](https://www.youtube.com/watch?v=Ke90Tje7VS0) - Başlangıç seviyesine uygun, en önemli React konularını içeren hızlandırılmış bir dersi.
 
-- [React Armory: Learn React by Itself](https://reactarmory.com/guides/learn-react-by-itself) - With React Armory, you can learn React without the buzzwords.
+- [React Armory: Salt React'i Öğrenin](https://reactarmory.com/guides/learn-react-by-itself) - React Armory ile React'i moda tabirlerle uğraşmadan öğrenin.
 
-- [The Road to Learn React](https://www.robinwieruch.de/the-road-to-learn-react/) - Build a real world application in plain React without complicated tooling.
+- [The Road To Learn React](https://www.robinwieruch.de/the-road-to-learn-react/) - Çetrefilli araçlar olmaksızın, salt React ile gerçek hayatta karşılığı olan bir uygulama geliştirin.
 
-- [Egghead.io: The Beginner's Guide to ReactJS](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) - Free course for React newbies and those looking to get a better understanding of React fundamentals.
+- [Egghead.io: ReactJS için Başlangıç Rehberi](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) - React'e yeni başlayanlar ve React temellerini daha iyi anlamak isteyenler için ücretsiz bir ders.
 
-- [Free React Bootcamp](https://tylermcginnis.com/free-react-bootcamp/) - Recordings from three days of a free online React bootcamp.
+- [Ücretsiz React Bootcamp'i](https://tylermcginnis.com/free-react-bootcamp/) - Ücretsiz bir React bootcamp'inin üç günlük kayıtları.
 
-## Paid Courses {#paid-courses}
+- [Scrimba: Learn React for free](https://scrimba.com/g/glearnreact) - 48 hands-on video tutorials building react apps.
 
-- [Egghead.io](https://egghead.io/browse/frameworks/react) - Short instructional videos on React and many other topics.
+## Ücretli Dersler {#paid-courses}
 
-- [Frontend Masters](https://frontendmasters.com/courses/) - Video courses on React and other frontend frameworks.
+- [Egghead.io](https://egghead.io/browse/frameworks/react) - React ve diğer konular hakkında kısa ve eğitici videolar.
 
-- [Fullstack React](https://www.fullstackreact.com/) - The up-to-date, in-depth, complete guide to React and friends.
+- [Frontend Masters](https://frontendmasters.com/courses/) - React ve diğer ön-yüz yapıları hakkında video dersleri. 
 
-- [Pure React](https://daveceddia.com/pure-react/) - A step-by-step guide to mastering React.
+- [Fullstack React](https://www.fullstackreact.com/) - React dostları için güncel, derinlikli, eksiksiz bir rehber.
 
-- [React for Beginners](https://reactforbeginners.com/) - Learn React in just a couple of afternoons.
+- [Pure React](https://daveceddia.com/pure-react/) - React'te uzmanlaşmak için adım adım takip edilebilecek bir rehber.
 
-- [React for Designers](https://designcode.io/react) - A 6-hour React course for designers, by designers.
+- [React for Beginners](https://reactforbeginners.com/) - Saatler içerisinde React'i öğrenin.
 
-- [React Essentials for Designers](https://learnreact.design) - React courses tailored for designers: the fundamentals, capabilities, limitations and how they relate to design.
+- [Tasarımcılar için React](https://designcode.io/react) - Tasarımcılar için, tasarımcılarca hazırlanmış 6 saatlik bir ders.
 
-- [Essential React](https://learnreact.com/lessons/2018-essential-react-1-overview) - A crash course for doers, moving fast from "Hello World" to advanced component composition.
+- [Tasarımcılar için React'in Esasları](https://learnreact.design) - Tasarımcılara özel React dersleri: Temeller, yapılabilecekler, kısıtlamalar ve bunların tasarımla ilişkileri.
 
-- [React Training: Advanced React.js](https://courses.reacttraining.com/p/advanced-react) - Take your React skills to the next level.
+- [React'in Esasları](https://learnreact.com/lessons/2018-essential-react-1-overview) - Yaparak öğrenenleri hedef alan, "Merhaba Dünya"dan başlayarak kısa sürede ileri bileşen kompozisyonuna varan hızlandırılmış bir ders.
 
-- [Tyler McGinnis](https://tylermcginnis.com/courses) - Tyler McGinnis provides access to his courses for a monthly fee. Courses include "React Fundamentals" and "Universal React".
+- [React Training: İleri Düzey React.js](https://courses.reacttraining.com/p/advanced-react) - React hünerlerinizi bir üst seviyeye taşıyın.
 
-- [Mastering React](https://codewithmosh.com/p/mastering-react/) - Build professional interactive apps with React.
+- [Tyler McGinnis](https://tylermcginnis.com/courses) - Tyler McGinnis, aylık bir ücret karşılığında derslerini erişime açıyor. Dersler arasında "React Temelleri" ve "Evrensel React" de var.
+
+- [Mastering React](https://codewithmosh.com/p/mastering-react/) - React ile profesyonel, etkileşimli uygulamalar oluşturun.
