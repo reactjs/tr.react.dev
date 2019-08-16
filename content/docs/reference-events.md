@@ -6,11 +6,11 @@ layout: docs
 category: Reference
 ---
 
-Bu başvuru rehberinde, React Olay Sistemi'nin bir parçasını oluşturan `SyntheticEvent` sarmalayıcısı(wrapper) açıklanmaktadır. Daha fazla bigli sahibi olmak için [Olay Yönetimi](/docs/handling-events.html) kaynağını inceleyebilirsiniz.
+Bu başvuru rehberinde, React Olay Sistemi'nin bir parçasını oluşturan `SyntheticEvent` sarmalayıcısı (wrapper) açıklanmaktadır. Daha fazla bigli sahibi olmak için [Olay Yönetimi](/docs/handling-events.html) kaynağını inceleyebilirsiniz.
 
 ## Genel Bakış {#overview}
 
-Olay yöneticilerinize, tarayıcının kendi olaylarını sarmalayan bir çapraz-tarayıcı `SyntheticEvent` nesnesi iletilir. Bu nesne tüm tarayıcılarda aynı şekilde çalışması dışında, `stopPropagation()` ve `preventDefault()` dahil olmak üzere, tarayıcının kendi olayıyla aynı arabirime sahiptir. 
+Olay yöneticilerinize, tarayıcının kendi olaylarını sarmalayan bir çapraz-tarayıcı `SyntheticEvent` nesnesi iletilir. Bu nesne tüm tarayıcılarda aynı şekilde çalışması dışında, `stopPropagation()` ve `preventDefault()` dahil olmak üzere, tarayıcının kendi olayıyla aynı arabirime sahiptir.
 
 Bir nedenden ötürü esas tarayıcı olayına ihtiyaç duyarsanız, basitçe `nativeEvent` özelliğini kullanın. Her `SyntheticEvent` nesnesi aşağıdaki özelliklere sahiptir:
 
@@ -37,7 +37,7 @@ string type
 
 ### Olay Ortaklama (Event Pooling) {#event-pooling}
 
-`SyntheticEvent` ortaklanmıştır. Bu, `SyntheticEvent` nesnesinin tekrar kullanılacağı ve olay geri dönmesinin(callback) çağırılması durumunda tüm özelliklerinin sıfırlanacağı anlamına gelmektedir. Bu durum performans sebeplerinden kaynaklanmaktadır. Böyle olunca da, olaya asenkron bir şekilde erişmeniz mümkün değildir.
+`SyntheticEvent` ortaklanmıştır. Bu, `SyntheticEvent` nesnesinin tekrar kullanılacağı ve olay geri dönmesinin (callback) çağrılması durumunda tüm özelliklerinin sıfırlanacağı anlamına gelmektedir. Bu durum performans sebeplerinden kaynaklanmaktadır. Böyle olunca da, olaya asenkron bir şekilde erişmeniz mümkün değildir.
 
 ```javascript
 function onClick(event) {
@@ -66,7 +66,7 @@ function onClick(event) {
 
 React olayları normalleştirir ve olaylar bu şekilde farklı tarayıcılarda tutarlı özelliklere sahip olur.
 
-Aşağıdaki olay yöneticileri, balonlanma(bubbling) evresinde bir olay tarafından tetiklenir. Yakalama evresine bir olay yöneticisi kaydetmek için, olay ismine `Capture` ilave edin. Örneğin tıklama olayını, yakalama evresinde yönetmek için `onClick` kullanmak yerine `onClickCapture` kullanın.
+Aşağıdaki olay yöneticileri, balonlanma (bubbling) evresinde bir olay tarafından tetiklenir. Yakalama evresine bir olay yöneticisi kaydetmek için, olay ismine `Capture` ilave edin. Örneğin tıklama olayını, yakalama evresinde yönetmek için `onClick` kullanmak yerine `onClickCapture` kullanın.
 
 - [Not Panosu Olayları](#clipboard-events)
 - [Kompozisyon Olayları](#composition-events)
@@ -244,9 +244,9 @@ boolean isPrimary
 
 Çapraz-tarayıcı desteği üzerine bir not:
 
-İşaretçi olayları henüz tüm tarayıcılarda desteklenmemektedir (Bu makalenin yazıldığı tarihte destekleyen tarayıcılar: Chrome, Firefox, Edge ve Internet Explorer). React, `react-dom` paket boyutunun önemli bit ölçüde artmaması için kasıtlı olarak diğer tarayıcılar için polyfill desteği sunmamaktadır. 
+İşaretçi olayları henüz tüm tarayıcılarda desteklenmemektedir (Bu makalenin yazıldığı tarihte destekleyen tarayıcılar: Chrome, Firefox, Edge ve Internet Explorer). React, `react-dom` paket boyutunun önemli bit ölçüde artmaması için kasıtlı olarak diğer tarayıcılar için polyfill desteği sunmamaktadır.
 
-Eğer uygulamanızda işaretçi olaylarına ihtiyaç duyarsanız, üçüncuü parti bir işaretçi olay polyfill'i kullanmanızı öneririz.
+Eğer uygulamanızda işaretçi olaylarına ihtiyaç duyarsanız, üçüncü parti bir işaretçi olay polyfill'i kullanmanızı öneririz.
 
 * * *
 
