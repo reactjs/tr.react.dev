@@ -124,21 +124,16 @@
       - id: hooks-reference
         title: Hook'ların API Kaynağı
       - id: hooks-faq
-<<<<<<< HEAD
         title: Hook'lar için SSS
-- title: Katkı Sağlamak
-=======
-        title: Hooks FAQ
-- title: Testing
+- title: Test Etmek
   items:
-    - id: testing 
-      title: Testing Overview
+    - id: testing
+      title: Test Etmeye Genel Bakış
     - id: testing-recipes
-      title: Testing Recipes
+      title: Test Tarifleri
     - id: testing-environments
-      title: Testing Environments
-- title: Contributing
->>>>>>> ddbd064d41d719f9ec0c2f6a4227f797a5828310
+      title: Test Ortamları
+- title: Katkı Sağlamak
   items:
   - id: how-to-contribute
     title: Nasıl Katkı Sağlarsınız?
