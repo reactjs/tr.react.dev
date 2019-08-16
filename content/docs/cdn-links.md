@@ -20,7 +20,7 @@ Yukarıdaki sürümler yalnızca geliştirme amaçlıdır ve yayınlamaya uygun 
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 ```
 
-`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `16`'yı sürüm numarası ile değiştirin.
+`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `16`'yı istediğiniz sürüm numarası ile değiştirin.
 
 ### Neden `crossorigin` Özelliği? {#why-the-crossorigin-attribute}
 
@@ -34,4 +34,4 @@ Ayrıca, kullandığınız CDN’nin `Access-Control-Allow-Origin: *` HTTP başl
 
 ![Access-Control-Allow-Origin: *](../images/docs/cdn-cors-header.png)
 
-Bu, React 16 ve sonraki sürümlerinde daha iyi bir [hata işleme deneyimi](/blog/2017/07/26/error-handling-in-react-16.html) sağlar.
+Bu, React 16 ve sonraki sürümlerinde daha iyi bir [hata yönetme deneyimi](/blog/2017/07/26/error-handling-in-react-16.html) sağlar.

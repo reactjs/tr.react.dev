@@ -16,7 +16,7 @@ Bu sayfa, görevlere yardımcı olan bazı popüler araçları anlatır.
 * Npm'den üçüncü parti kütüphanelerin kullanımı.
 * Yaygın hataların erken farkedilmesi.
 * JS ve CSS'in geliştirme anında canlı olarak güncellenmesi.
-* Çıktının ürün için optimize edilmesi.
+* Çıktının canlı ortam (production) için optimize edilmesi.
 
 Bu sayfada tavsiye edilen araçlar **başlangıç için ayarlama gerektirmez**.
 
@@ -51,7 +51,7 @@ komutlarını çalıştın.
 
 >Not
 >
->ilk satırdaki `npx` bir yazım hatası değildir. -- [npm 5.2+ ile gelen bir paket çalıştırma aracıdır](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b).
+>ilk satırdaki `npx` bir harf hatası değildir. -- [npm 5.2+ ile gelen bir paket çalıştırma aracıdır](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b).
 
 Create React App, backend mantığı veya veritabanlarını idare etmez; sadece frontend geliştirme düzenini oluşturur, yani bunu istediğiniz herhangi bir backend ile kullanabilirsiniz. Arka planda, [Babel](https://babeljs.io/) ve [webpack](https://webpack.js.org/) kullanır, fakat bunlar hakkında hiçbir şey bilmeniz gerekmiyor.
 

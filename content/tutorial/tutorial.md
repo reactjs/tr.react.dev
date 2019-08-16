@@ -1,6 +1,6 @@
 ---
 id: tutorial
-title: "Öğretici: React'a giriş"
+title: "Öğretici: React'e giriş"
 layout: tutorial
 sectionid: tutorial
 permalink: tutorial/tutorial.html
@@ -26,7 +26,7 @@ Bu öğreticide küçük bir oyun geliştireceğiz. **Oyun geliştiricisi olmad�
 Bu öğretici birkaç bölüme ayrılmıştır:
 
 * [Öğretici İçin Kurulum Rehberi:](#setup-for-the-tutorial) bu öğreticiyi takip etmek için size bir **başlangıç noktası** sunar. 
-* [Genel bakış:](#overview) React'ın **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
+* [Genel bakış:](#overview) React'in **temellerini** öğretecektir: `component`'lar, `prop`'lar, ve uygulama `state`'i.
 * [Oyunun Tamamlanması:](#completing-the-game) React geliştirimindeki **en yaygın teknikleri** aktaracaktır.
 * [Zamanda Yolculuğun Eklenmesi:](#adding-time-travel) React'in benzersiz özellikleri hakkında **daha derinlemesine** bilgiler edinmenizi sağlayacaktır.
 
@@ -54,7 +54,7 @@ Eğer JavaScript hakkında bilgi edinmeniz gerekiyorsa, [bu rehberi](https://dev
 
 ## Öğretici İçin Kurulum {#setup-for-the-tutorial}
 
-Bu öğreticiyi tamamlamanın iki yolu bulunmaktadır: kodu tarayıcınızda yazabilir veya bilgisayarınızdaki yerel geliştirme ortamını kurabilirsiniz. 
+Bu öğreticiyi tamamlamanın iki yolu bulunmaktadır: kodu tarayıcınızda yazabilir veya bilgisayarınıza yerel geliştirme ortamını kurabilirsiniz. 
 
 ### Kurulum Seçeneği 1: Kodu Tarayıcıda Yazma {#setup-option-1-write-code-in-the-browser}
 
@@ -126,7 +126,7 @@ Metin editörünüzde, kodun renkli halde görüntülenmesini sağlamak için [b
 
 ### Takıldım, Yardım Edin! {#help-im-stuck}
 
-Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınızdan dolayı devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız. Devamında size yardımıcı olacağız.
+Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınız için devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız. Devamında size yardımıcı olacağız.
 
 ## Genel Bakış {#overview}
 
@@ -157,7 +157,7 @@ class ShoppingList extends React.Component {
 // Örnek kullanım: <ShoppingList name="Mark" />
 ```
 
-Birazdan üstte kullandığımız XML-tarzı etiketlere değineceğiz. React bileşenleri sayesinde, ekranda görmek istediğimiz arayüz birimlerini React'e belirtmiş oluyoruz. Verilerimiz değiştiği zaman React, etkili bir şekilde bileşenlerimizi güncelleyecek ve tekrar render edecektir (arayüze işleyecektir). 
+Birazdan yukarıda kullandığımız XML-tarzı etiketlere değineceğiz. React bileşenleri sayesinde, ekranda görmek istediğimiz arayüz birimlerini React'e belirtmiş oluyoruz. Verilerimiz değiştiği zaman React, etkili bir şekilde bileşenlerimizi güncelleyecek ve tekrar render edecektir (arayüze işleyecektir). 
 
 Buradaki ShoppingList, **React bileşen sınıfıdır**, veya **React bileşen tipidir** diyebiliriz. Bir React bileşeni, özellikler anlamına gelen "properties"'in kısaltması olan `props` isimli parametreleri alır, ve arayüzü görüntülemek amacıyla `render` metodundan geriye bir görünüm hiyerarşisi (XML kodu) döndürür. 
 
@@ -1155,7 +1155,7 @@ Sonra, Game'in içerisinde `stepNumber` değişkenini güncelleyecek olan `jumpT
 
 Şimdi, oyundaki bir kareye tıklandığında çağrılan `handleClick` metodunda birkaç değişiklik yapalım. 
 
-Artık eklediğimiz `stepNumber` değişkeni, kullanıcının mevcut hamlesini gösteriyor. Yeni bir hamle yaptıktan sonra, `stepNumber` değerini güncellememiz için `this.setState()` çağrımına `stepNumber: history.length`'i eklememiz gerekiyor. Bu sayede, yeni bir hamle yapıldıktan sonra, sürekli aynı hamleyi görüntülemekten dolayı oluşan takılmayı engellemiş oluyoruz.
+Artık eklediğimiz `stepNumber` değişkeni, kullanıcının mevcut hamlesini gösteriyor. Yeni bir hamle yaptıktan sonra, `stepNumber` değerini güncellememiz için `this.setState()` çağrısına `stepNumber: history.length`'i eklememiz gerekiyor. Bu sayede, yeni bir hamle yapıldıktan sonra, sürekli aynı hamleyi görüntülemekten dolayı oluşan takılmayı engellemiş oluyoruz.
 
 Ayrıca oyun geçmişine atama yapmak için `this.state.history` yerine `this.state.history.slice(0, this.state.stepNumber + 1)` yazacağız. Bu sayede, "zamanda geriye döndüğümüzde" o noktadan devam edebileceğiz, ve gelecekte yaptığımız hamleler işe yaramaz hale geleceğinden dolayı bu hamlelerin de `slice()` ile oyun tahtasından atılmasını sağlamış olacağız:
 

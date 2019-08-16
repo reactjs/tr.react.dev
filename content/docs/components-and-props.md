@@ -16,7 +16,7 @@ prev: rendering-elements.html
 next: state-and-lifecycle.html
 ---
 
-Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı birbirinden izole bir şekilde düşünerek kodlayabilirsiniz. 
+Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı, birbirinden izole bir şekilde düşünerek kodlayabilirsiniz. 
 
 Bu sayfa, bileşenlerin ne olduğuna dair bir fikir edinmenizi sağlayacaktır. [Bileşenler API dokümanını](/docs/react-component.html) inceleyerek daha detaylı bilgi edinebilirsiniz.
 
@@ -85,7 +85,7 @@ Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
 2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor. 
 3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
-4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'u arka planda efektif bir şekilde güncelliyor .
+4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor .
 
 >**Not:** Bileşen isimlendirmelerinde daima büyük harfle başlayınız.
 >
@@ -122,7 +122,7 @@ ReactDOM.render(
 
 [](codepen://components-and-props/composing-components)
 
-Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerirler. Ancak React'i mevcut uygulamanıza entegre ediyorsanız, `Button` gibi en küçük bileşenlerden başlayacak şekilde basitten karmaşığa doğru ilerleyerek bileşen hiyerarşisini oluşturabilirsiniz.
+Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerirler. Ancak React'i mevcut uygulamanıza entegre ediyorsanız, `Button` gibi en küçük bileşenlerden başlayacak şekilde, basitten karmaşığa doğru ilerleyerek bileşen hiyerarşisini oluşturabilirsiniz.
 
 ## Bileşenlerin Çıkarılması {#extracting-components}
 
@@ -158,7 +158,7 @@ function Comment(props) {
 
 Üstteki bileşen; `author` nesnesini, `text` metnini, ve bir `date` tarihini prop olarak alır. Bu bileşen, bir sosyal medya sitesinde yorum kutucuğunun görüntülenmesini sağlar.
 
-İç içe halde bulunan bu bileşenin üzerinde değişiklik yapmak zor olabilir. Ayrıca bünyesindeki DOM elementlerinin de tekrar kullanılabilirliği oldukça düşük seviyede. Bu durumu çözmek için, kod içerisinden birkaç bileşen çıkarabiliriz.
+İç içe halde bulunan bu bileşenin üzerinde değişiklik yapmak zor olabilir. Ayrıca bünyesindeki DOM elementlerinin de tekrar kullanılabilirliği oldukça düşük seviyededir. Bu durumu çözmek için, kod içerisinden birkaç bileşen çıkarabiliriz.
 
 Öncelikle `Avatar` bileşenini çıkaralım:
 
@@ -263,6 +263,6 @@ function withdraw(account, amount) {
 
 React, kod yazımında oldukça esnek olmasına rağmen, sadece bir tek kuralı şart koşmaktadır:
 
-**Bütün React bileşenleri pure fonksiyonlar gibi davranmalı, ve prop'larını asla değiştirmemelidirler.**
+**Bütün React bileşenleri yalın (`pure`) fonksiyonlar gibi davranmalı, ve prop'larını asla değiştirmemelidirler.**
 
-Tabi ki kullanıcı arayüzleri dinamiktir ve zaman içerisinde değişiklik gösterir. [Sonraki bölümde](/docs/state-and-lifecycle.html), "state" (durum) adındaki yeni konsepte değineceğiz. State bu kurala sadık kalarak; kullanıcı etkileşimleri, ağ istekleri ve diğer şeylerden dolayı zaman içerisinde değişen arayüzün görüntülenmesi için, React bileşenlerinin kendi çıktılarını değiştirebilmesine izin verir. 
+Tabii ki kullanıcı arayüzleri dinamiktir ve zaman içerisinde değişiklik gösterir. [Sonraki bölümde](/docs/state-and-lifecycle.html), "state" (durum) adındaki yeni konsepte değineceğiz. State bu kurala sadık kalarak; kullanıcı etkileşimleri, ağ istekleri ve diğer şeylerden dolayı zaman içerisinde değişen arayüzün görüntülenmesi için, React bileşenlerinin kendi çıktılarını değiştirebilmesine izin verir. 

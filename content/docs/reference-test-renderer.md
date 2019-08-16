@@ -105,7 +105,7 @@ expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 TestRenderer.create(element, options);
 ```
 
-İletilen React elemanı ile bir TestRenderer nesnesi oluşturun. Bu nesne gerçek DOM'u kullanmaz; ancak yine de bileşen ağacını tamamen belleğe render eder, böylece bu konuda doğrulamalar (assertions) yapabilirsiniz. Döndürülen nesne, aşağıda belirtilen metot ve özelliklere sahiptir:
+İletilen React elemanı ile bir TestRenderer nesnesi oluşturun. Bu nesne gerçek DOM'ı kullanmaz; ancak yine de bileşen ağacını tamamen belleğe render eder, böylece bu konuda doğrulamalar (assertions) yapabilirsiniz. Döndürülen nesne, aşağıda belirtilen metot ve özelliklere sahiptir:
 
 ### `TestRenderer.act()` {#testrendereract}
 
@@ -113,27 +113,27 @@ TestRenderer.create(element, options);
 TestRenderer.act(callback);
 ```
 
-Similar to the [`act()` helper from `react-dom/test-utils`](/docs/test-utils.html#act), `TestRenderer.act` prepares a component for assertions. Use this version of `act()` to wrap calls to `TestRenderer.create` and `testRenderer.update`.
+`TestRenderer.act`, [`react-dom/test-utils` içindeki `act()`](/docs/test-utils.html#act)'e benzer şekilde, bir bileşeni iddialar (assertions) için hazır hale getirir. `TestRenderer.create` ve `testRenderer.update` e yapılan çağrıları sarmalamak için `act()`'in bu versiyonunu kullanın.
 
 ```javascript
 import {create, act} from 'react-test-renderer';
-import App from './app.js'; // The component being tested
+import App from './app.js'; // Test edilen bileşen
 
-// render the component
+// bileşeni render edin
 let root; 
 act(() => {
   root = create(<App value={1}/>)
 });
 
-// make assertions on root 
+// root üzerinde iddialar belirleyin.
 expect(root.toJSON()).toMatchSnapshot();
 
-// update with some different props
+// bazı farklı proplar ile güncelleyin
 act(() => {
   root = root.update(<App value={2}/>);
 })
 
-// make assertions on root 
+// root üzerinde iddialar belirleyin
 expect(root.toJSON()).toMatchSnapshot();
 ```
 

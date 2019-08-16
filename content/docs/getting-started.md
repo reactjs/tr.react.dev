@@ -20,19 +20,19 @@ redirect_from:
 
 Bu sayfa React kullanım kılavuzu ve ilgili kaynaklara genel bir bakıştır.
 
-**React** kullanıcı arayüzleri oluşturabileceğiniz bir JavaScript kütüphanesidir. React'in tam olarak ne olduğunu [ana sayfamızdan](/) veya [eğitim bölümünden](/tutorial/tutorial.html) öğrenin.
+**React** kullanıcı arayüzleri geliştirebileceğiniz bir JavaScript kütüphanesidir. React'in tam olarak ne olduğunu [ana sayfamızdan](/) veya [eğitim bölümünden](/tutorial/tutorial.html) öğrenin.
 
 ---
 
-- [React'ı deneyin](#try-react)
-- [React'ı öğrenin](#learn-react)
+- [React'i deneyin](#try-react)
+- [React'i öğrenin](#learn-react)
 - [Haberdar olun](#staying-informed)
 - [Sürüm bilgileri](#versioned-documentation)
 - [Bir şeyler mi eksik?](#something-missing)
 
-## React'ı Deneyin {#try-react}
+## React'i Deneyin {#try-react}
 
-React, aşamalı olarak benimsenmesi için en baştan tasarlandı ve  **ihtiyacınız kadar az veya daha fazla React kullanabilirsiniz** React’ın tadına bakmak, basit bir HTML sayfasına biraz etkileşim katmak veya karmaşık bir React destekli uygulama başlatmak isteyip istemediğinize göre, bu bölümdeki bağlantılar başlamanıza yardımcı olacaktır.
+React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **ihtiyacınız kadar az veya daha fazla kullanabilirsiniz**. React’ın tadına bakmak, basit bir HTML sayfasına biraz etkileşim katmak veya karmaşık bir React destekli uygulama başlatmak isteyip istemediğinize göre, bu bölümdeki bağlantılar başlamanıza yardımcı olacaktır.
 
 ### Çevrimiçi Vakit Geçirme Alanları {#online-playgrounds}
 
@@ -40,9 +40,9 @@ React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kull
 
 Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
-### Bir Web Sitesine React Ekle {#add-react-to-a-website}
+### Bir Web Sitesine React Ekleyin {#add-react-to-a-website}
 
-[Bir dakika içinde bir HTML sayfasına React ekle](/docs/add-react-to-a-website.html)yebilirsiniz. Daha sonra içeriğini aşamalı olarak genişletebilir veya birkaç dinamik araca dahil edebilirsiniz.
+[Bir dakika içinde bir HTML sayfasına React ekleyebilirsiniz](/docs/add-react-to-a-website.html). Daha sonra içeriğini aşamalı olarak genişletebilir veya birkaç dinamik araca dahil edebilirsiniz.
 
 ### Yeni bir React Uygulaması Oluşturun {#create-a-new-react-app}
 
@@ -50,14 +50,14 @@ Bir React projesi başlatırken, [script etiketli basit bir HTML sayfası](/docs
 
 Uygulamanız büyüdükçe, daha entegre bir kurulum düşünebilirsiniz. Daha büyük uygulamalar için önerdiğimiz [birkaç JavaScript araç-zinciri](/docs/create-a-new-react-app.html) vardır. Her biri çok az veya sıfır yapılandırma ile çalışabilir ve zengin React ekosisteminden tam olarak yararlanmanızı sağlar.
 
-## React Öğrenmek {#learn-react}
+## React Öğrenin {#learn-react}
 
-İnsanlar farklı geçmişlerden ve farklı öğrenme tarzlarıyla React'a geliyorlar. İster teorik ister pratik bir yaklaşım tercih edersiniz, bu bölümü faydalı bulacağınızı umarız.
+İnsanlar farklı geçmişlerden ve farklı öğrenme tarzlarıyla React'e geliyorlar. Tercih ettiğiniz yaklaşım ister teorik, ister pratik olsun, bu bölümü faydalı bulacağınızı umuyoruz.
 
-* **Yaparak öğrenmeyi** tercih ediyorsanız, [pratik eğitim](/tutorial/tutorial.html)imizle başlayın.
+* **Yaparak öğrenmeyi** tercih ediyorsanız, [pratik öğretici](/tutorial/tutorial.html)mizle başlayın.
 * **Kavramları adım adım öğrenmeyi** tercih ediyorsanız, [ana kavramlar rehberi](/docs/hello-world.html)mizle başlayın.
 
-Bilinmeyen herhangi bir teknoloji gibi, React da bir öğrenme eğrisine sahiptir. Pratik ve biraz sabır ile üstesinden *geleceksiniz*.
+Bilinmeyen herhangi bir teknoloji gibi, React de bir öğrenme eğrisine sahiptir. Pratik yaparak ve biraz da sabır ile üstesinden *geleceksiniz*.
 
 ### İlk Örnekler {#first-examples}
 
@@ -65,7 +65,7 @@ Bilinmeyen herhangi bir teknoloji gibi, React da bir öğrenme eğrisine sahipti
 
 ### Yeni Başlayanlar İçin React {#react-for-beginners}
 
-React anlatımlarının hızlı geçtiğini düşünüyorsanız, [Tania Rascia ile React'a genel bakış](https://www.taniarascia.com/getting-started-with-react/)ı inceleyin. En önemli React konseptlerini ayrıntılı, acemi ​​dostu bir şekilde sunar. İşiniz bittiğinde anlatımları bir kez daha deneyin!
+React anlatımlarının hızlı geçtiğini düşünüyorsanız, [Tania Rascia ile React'e genel bakış](https://www.taniarascia.com/getting-started-with-react/)ı inceleyin. En önemli React konseptlerini ayrıntılı, acemi ​​dostu bir şekilde sunar. İşiniz bittiğinde anlatımları bir kez daha deneyin!
 
 ### Tasarımcılar İçin React {#react-for-designers}
 
@@ -78,21 +78,21 @@ React anlatımları, JavaScript dilinde programlama konusunda biraz bilgi sahibi
 
 Seviyenizi kontrol etmek için [JavaScript'e genel bakış](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) sayfasına gitmenizi öneririz. 30 dakika ile bir saat arasında sürecek ama React öğrenirken daha rahat ve özgüvenli hissedeceksiniz.
 
->Tüyo
+>İpucu
 >
->JavaScript'te bir şeyle ne zaman kafanız karışırsa, [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [javascript.info](https://javascript.info/) kontrol etmek için harika web siteleridir. Ayrıca yardım isteyebileceğiniz [topluluk destek forumları](/community/support.html) da var.
+>JavaScript'te bir konuda ne zaman kafanız karışırsa, [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) ve [javascript.info](https://javascript.info/) kontrol etmek için harika web siteleridir. Ayrıca yardım isteyebileceğiniz [topluluk destek forumları](/community/support.html) da vardır.
 
-### Pratik Eğitim {#practical-tutorial}
+### Pratik Öğretici {#practical-tutorial}
 
-**Yaparak öğrenmeyi** tercih ediyorsanız [pratik eğitim](/tutorial/tutorial.html)imize göz atın. Bu derste React'ta bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için atlamanız istenebilir - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın usta seviyesi size daha derin bir anlayış verecektir.
+**Yaparak öğrenmeyi** tercih ediyorsanız [pratik öğretici](/tutorial/tutorial.html)mize göz atın. Bu derste, React ile bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için bu kısmı atlamak isteyebilirsiniz - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın ileri seviyesi size daha derin bir anlayış verecektir.
 
 ### Adım adım rehber {#step-by-step-guide}
 
-**kavramları adım adım öğrenmeyi** tercih ederseniz [ana kavramlar rehberi](/docs/hello-world.html) başlamak için en iyi yerdir. Her bir sonraki bölüm, önceki bölümlerde sunulan bilgilere dayanıyor, böylece ilerledikçe hiçbir şeyi kaçırmayacaksınız.
+**Kavramları adım adım öğrenmeyi** tercih ederseniz [ana kavramlar rehberi](/docs/hello-world.html) başlamak için en iyi yerdir. Her bir sonraki bölüm, önceki bölümlerde sunulan bilgilere dayanıyor, böylece ilerledikçe hiçbir şeyi kaçırmayacaksınız.
 
-### React İçinde Düşünmek {#thinking-in-react}
+### React'te Düşünmek {#thinking-in-react}
 
-Pek çok React kullanıcısı [React İçinde Düşünmek](/docs/thinking-in-react.html) bolümünü nihayet “kafama dank etti” anı olarak belirtir. Muhtemelen React'in en eski 'oyun nasil bitirilir rehberi' ama hala aynı derecede alakalı.
+Pek çok React kullanıcısı [React'te Düşünmek](/docs/thinking-in-react.html) bolümünü nihayet “kafama dank etti” anı olarak belirtir. Muhtemelen React'in en eski 'oyun nasıl bitirilir rehberi' ama hala aynı derecede alakalı.
 
 ### Önerilen Kurslar {#recommended-courses}
 
@@ -101,11 +101,11 @@ Bazen insanlar üçüncü şahıs kitapları ve video kurslarını resmi anlatı
 ### Gelişmiş Kavramlar {#advanced-concepts}
 
 
-[Ana kavramlarda](#main-concepts) bilgi sahibi olup biraz React ile oynadığınızda, daha ileri konulara ilgi duyabilirsiniz. Bu bölüm size [context](/docs/context.html) ve [ref'ler](/docs/refs-and-the-dom.html) gibi güçlü fakat daha az kullanılan React özelliklerini tanıtacaktır..
+[Ana kavramlarda](#main-concepts) bilgi sahibi olup biraz React ile oynadığınızda, daha ileri konulara ilgi duyabilirsiniz. Bu bölüm size [context](/docs/context.html) ve [ref'ler](/docs/refs-and-the-dom.html) gibi güçlü fakat daha az kullanılan React özelliklerini tanıtacaktır...
 
 ### API Referansı {#api-reference}
 
-Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek istediğinizde faydalıdır. Örneğin, [`React.Component` API reference](/docs/react-component.html) size `setState()`'in nasıl çalıştığını ve hangi 'yaşam döngüsü' yönteminin işinize yarayacağı konusunda ayrıntılı bilgi verebilir.
+Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek istediğinizde faydalıdır. Örneğin, [`React.Component` API reference](/docs/react-component.html) size `setState()`'in nasıl çalıştığını ve hangi 'yaşam döngüsü' metodunun işinize yarayacağı konusunda ayrıntılı bilgi verebilir.
 
 ### Terimler sözlüğü ve SSS {#glossary-and-faq}
 
@@ -117,7 +117,7 @@ Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek iste
 
 Twitter'da [@reactjs hesabını](https://twitter.com/reactjs) da takip edebilirsiniz, ama sadece blogu okursanız önemli hiç bir şeyi kaçırmazsınız.
 
-Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React havuzunun içindeki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react/releases) sayfasında bulabilirsiniz.
+Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react) sayfasında bulabilirsiniz.
 
 ## Versiyon Anlatımı {#versioned-documentation}
 

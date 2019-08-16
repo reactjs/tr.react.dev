@@ -7,7 +7,7 @@ next: lists-and-keys.html
 redirect_from:
   - "tips/false-in-jsx.html"
 ---
-React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, yalnızca bileşenlerinizin bazılarını renderlayabilirsiniz.
+React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, bileşenlerinizin yalnızca  bazılarını render edebilirsiniz.
 
 React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen  renderlama imkanı sunar. Ve React, arayüzde uygun bileşeni render eder.
 
@@ -146,9 +146,9 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
 
-Bu Javascript üzerinde çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır fakat `false && expression` her zaman `false` döndürür.
+Bu kod Javascript'te çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır fakat `false && expression` her zaman `false` döndürür.
 
-Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip, geçececektir.
+Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip, atlayacaktir.
 
 ### Koşul Operatörü ile Tek Satırda if-else {#inline-if-else-with-conditional-operator}
 
@@ -167,7 +167,7 @@ render() {
 }
 ```
 
-Neler olduğu daha az belirgin olsa da, daha büyük ifadeler için de kullanılabilir:
+Her ne kadar neler olduğu daha az belirgin olsa da, daha büyük ifadeler için de kullanılabilir:
 
 ```js{5,7,9}
 render() {
@@ -184,13 +184,13 @@ render() {
 }
 ```
 
-Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve sizin takımınıza kalmıştır. Bu arada, ne zaman koşullandırma çok karmaşık bir hal almaya başlarsa [extract a component](/docs/components-and-props.html#extracting-components) yapmanın zamanı gelmiştir.
+Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve sizin takımınıza kalmıştır. Bu arada, ne zaman koşullandırma çok karmaşık bir hal almaya başlarsa [bir bileşen çıkarmanın](/docs/components-and-props.html#extracting-components) zamanı gelmiştir.
 
-### Bileşenin Renderlanmasını Engellemek {#preventing-component-from-rendering}
+### Bileşenin Render Edilmesini Engellemek {#preventing-component-from-rendering}
 
-Nadir durumlarda, renderlanmış bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
+Nadir durumlarda, render edilmiş bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
 
-Bu örnekle, `WarningBanner` bileşeni kendisinin `warn` özelliğine göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecek.
+Bu örnekte `WarningBanner` bileşeni, `warn` prop'una göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecektir.
 
 ```javascript{2-4,29}
 function WarningBanner(props) {
@@ -238,4 +238,4 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
-Bir bileşenin, `render` metodundan `null` döndürmesi yaşam döngüsü metodlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecek.
+Bir bileşenin, `render` metodundan `null` döndürmesi yaşam döngüsü metotlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecektir.

@@ -131,6 +131,7 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | library                   | kütüphane |
 | lowercase                 | küçük harf |
 | parent                    | üst / üst eleman |
+| production                | canlı ortam / canlı |
 | props                     | prop'ları |
 | pure                      | saf olarak / saf halde |
 | React element             | React elemanı |

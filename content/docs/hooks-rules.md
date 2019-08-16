@@ -58,7 +58,7 @@ npm install eslint-plugin-react-hooks --save-dev
 ```js
 function Form() {
   // 1. name state değişkenini kullan
-  const [name, setName] = useState('Mary');
+  const [name, setName] = useState('Onur');
 
   // 2. Formun devamlılığını sağlamak için bir efekt kullan
   useEffect(function persistForm() {
@@ -66,7 +66,7 @@ function Form() {
   });
 
   // 3. surname state değişkenini kullan
-  const [surname, setSurname] = useState('Poppins');
+  const [surname, setSurname] = useState('Şuyalçınkaya');
 
   // 4. Başlığı güncellemek için bir efekt kullan
   useEffect(function updateTitle() {
@@ -83,17 +83,17 @@ Peki React, hangi state'in hangi `useState` çağrısına karşılık geldiğini
 // ------------
 // İlk render etme
 // ------------
-useState('Mary')           // 1. name state değişkenini 'Mary' ile başlat
+useState('Onur')           // 1. name state değişkenini 'Onur' ile başlat
 useEffect(persistForm)     // 2. Formun devamlılığını sağlamak için bir efekt ekle
-useState('Poppins')        // 3. surname state değişkenini 'Poppins' ile başlat
+useState('Şuyalçınkaya')   // 3. surname state değişkenini 'Şuyalçınkaya' ile başlat
 useEffect(updateTitle)     // 4. Başlığı güncellemek için bir efekt ekle
 
 // -------------
 // İkinci render etme
 // -------------
-useState('Mary')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
+useState('Onur')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
 useEffect(persistForm)     // 2. Formun devamlılığını sağlamak efekti değiştir
-useState('Poppins')        // 3. surname state değişkenini oku (argüman yoksayılmıştır)
+useState('Şuyalçınkaya')   // 3. surname state değişkenini oku (argüman yoksayılmıştır)
 useEffect(updateTitle)     // 4. Başlığı güncellemek için efekti değiştir
 
 // ...
@@ -113,9 +113,9 @@ Hook çağrılarının sırası render etmeler arasında aynı olduğu sürece, 
 İlk render etmede `name !== ''` koşulu `true`, bu yüzden bu Hook'u çalıştırıyoruz. Bununla birlikte, bir sonraki render etmede kullanıcı formu temizleyerek koşulu `false` hale getirebilir. Artık render etme sırasında bu Hook'u atladığımız için, Hook çağrılarının sırası değişiyor:
 
 ```js
-useState('Mary')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
+useState('Onur')           // 1. name state değişkenini oku (argüman yoksayılmıştır)
 // useEffect(persistForm)  // 🔴 Bu Hook atlandı!
-useState('Poppins')        // 🔴 2 (ama 3'tü). surname state değişkeni okunamadı
+useState('Şuyalçınkaya')   // 🔴 2 (ama 3'tü). surname state değişkeni okunamadı
 useEffect(updateTitle)     // 🔴 3 (ama 4'tü). Efekt değiştirilemedi
 ```
 

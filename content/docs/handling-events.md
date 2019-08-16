@@ -29,7 +29,7 @@ React'te biraz daha farklıdır:
 </button>
 ```
 
-React'teki diğer bir farklılık ise, olaylardaki varsayılan davranış, `false` değeri döndürülerek engellenemezdir. Bunun için `preventDefault` şeklinde açık olarak yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, bir `<a>` elementinin yeni bir sayfayı açmasını engellemek için aşağıdaki şekilde yazabilirsiniz:
+React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışın `false` değeri döndürülerek engellenemiyor oluşudur. Bunun için `preventDefault` şeklinde açıkça yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, bir `<a>` elementinin yeni bir sayfayı açmasını engellemek için aşağıdaki gibi yazabilirsiniz:
 
 ```html
 <a href="#" onclick="console.log('The link was clicked.'); return false">
@@ -56,7 +56,7 @@ function ActionLink() {
 
 Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şartnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
 
-React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir listener atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine `render` fonksiyonunda, ilgili element ilk kez render olduğunda ona bir listener atamanız doğru olacaktır.
+React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir dinleyici (`listener`) atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine `render` fonksiyonunda, ilgili element ilk kez render olduğunda ona bir dinleyici (`listener`) atamanız doğru olacaktır.
 
 [ES6 sınıfı](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanarak bir bileşen oluşturulduğunda, ilgili olayın tanımlanması için en yaygın yaklaşım, ilgili metodun o sınıf içerisinde  oluşturulmasıdır. Örneğin aşağıdaki `Toggle` bileşeni, "ON" ve "OFF" durumlarının gerçekleştirilmesi için bir butonu render etmektedir:
 
@@ -91,7 +91,7 @@ ReactDOM.render(
 );
 ```
 
-[**CodePen'de deneyin**](http://codepen.io/gaearon/pen/xEmzGg?editors=0010)
+[**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/xEmzGg?editors=0010)
 
 JSX callback'lerinde `this` kullanırken dikkat etmeniz gerekmektedir. Çünkü JavaScript'te, sınıf metotları varsayılan olarak `this`'e [bağlı değillerdir](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind). Bu nedenle, `this.handleClick`'i `bind(this)` ile bağlamayı unutarak `onClick`'e yazarsanız, fonksiyon çağrıldığında `this` değişkeni `undefined` hale gelecek ve hatalara sebep olacaktır.
 
@@ -138,9 +138,9 @@ class LoggingButton extends React.Component {
 }
 ```
 
-Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için, binding işleminin,ya sınıfın constructor'ında ya da class fields yöntemi ile yapılmasını öneririz.
+Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için binding işleminin, ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
 
-## Olay Fonksiyonlarına Parametre Gönderimi {#passing-arguments-to-event-handlers}
+## Olay Yöneticilerine Parametre Gönderimi {#passing-arguments-to-event-handlers}
 
 Bir döngü içerisinde, olay fonksiyonuna fazladan parametre göndermek isteyebilirsiniz. Örneğin, bir satır `id`'si için, aşağıdaki kodlardan her ikisi de işinizi görecektir: 
 

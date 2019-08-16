@@ -44,7 +44,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 
 ### `act()` {#act}
 
-Bileşen testlerini hazırlamak için kodunuzu paket haline getirin ve `act()`'i kullanarak bileşeniniz içerisinde güncelleme yapabilirsiniz. `act()`, React'ın tarayıcıda çalışma biçimine çok yakın bir şekilde çalışmasını sağlamaktadır.
+Bileşen testlerini hazırlamak için kodunuzu paket haline getirin ve `act()`'i kullanarak bileşeniniz içerisinde güncelleme yapabilirsiniz. `act()`, React'in tarayıcıda çalışma biçimine çok yakın bir şekilde çalışmasını sağlamaktadır.
 
 >Not
 >
@@ -164,7 +164,7 @@ isElementOfType(
 )
 ```
 
-Eğer `element`, React'ın `componentClass` tipinde olan bir React elemanı ise `true` döner.
+Eğer `element`, React'in `componentClass` tipinde olan bir React elemanı ise `true` döner.
 
 * * *
 
@@ -197,7 +197,7 @@ isCompositeComponentWithType(
 )
 ```
 
-Eğer `instance`, React'ın `componentClass` tipinde olan bir React elemanı ise `true` döner.
+Eğer `instance`, React'in `componentClass` tipinde olan bir React elemanı ise `true` döner.
 
 * * *
 
@@ -346,6 +346,6 @@ ReactTestUtils.Simulate.keyDown(node, {key: "Enter", keyCode: 13, which: 13});
 
 > Not
 >
-> React'ın sağlayamadığı ama bileşeninizde kullandığınız herhangi bir olay özelliğini (örneğin, keyCode, which, vb...) sizin sağlamanız gerekmektedir.
+> React'in sağlayamadığı ama bileşeninizde kullandığınız herhangi bir olay özelliğini (örneğin, keyCode, which, vb...) sizin sağlamanız gerekmektedir.
 
 * * *

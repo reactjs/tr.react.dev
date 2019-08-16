@@ -9,7 +9,7 @@ redirect_from:
   - "docs/flux-todo-list.html"
 ---
 
-Çoğu zaman, birden çok bileşen değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın ortak üst elemana taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
+Çoğu zaman, birden çok bileşenin değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın ortak üst elemana taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
 
 Bu bölümde, suyun belirli bir sıcaklıkta kaynayıp kaynayamayacağını hesaplayan bir sıcaklık hesaplayıcısı oluşturacağız.
 
@@ -56,9 +56,9 @@ class Calculator extends React.Component {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ZXeOBm?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/ZXeOBm?editors=0010)
 
-## İkinci Input Elemanı Ekleme {#adding-a-second-input}
+## İkinci Input Elemanını Ekleme {#adding-a-second-input}
 
 Santigrat input'una ek olarak Fahrenayt cinsinden de sıcaklık değeri girebileceğimiz bir input'a ve sıcaklık değerlerinin birbirleri cinsinden senkronize şekilde çalışabileceği yeni bir gereksinimimizin olduğunu düşünelim.
 
@@ -110,7 +110,7 @@ class Calculator extends React.Component {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/jGBryx?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/jGBryx?editors=0010)
 
 Şu an sıcaklık değerini girebileceğimiz iki input'unuz var, ancak herhangi birinde sıcaklık değeri girdiğimizde diğer input güncellenmemektedir. Bu durum, değerleri birbiri cinsinden senkronize etme gereksinimimizi karşılamamaktadır.
 
@@ -132,7 +132,7 @@ function toFahrenheit(celsius) {
 
 Bu iki fonksiyon, sıcaklık değerlerini birbiri cinsinden dönüştürmeyi sağlamaktadır. 
 
-String olarak `temperature` değerini ve de dönüştürücü fonksiyonunu argüman olarak alan, geriye string döndüren başka bir fonksiyon yazacağız. Bu fonksiyonu input'lardaki değerleri birbirleri cinsinden hesaplayabilmek amaçlı kullanacağız. Bu fonksiyon geçerli olmayan bir `temperature` değeri için geriye boş string döndürecektir. Geçerli bir değer girildiğinde ise virgülden sonra 3 basamağa yuvarlanmış bir string döndürecektir.
+String olan `temperature` değerini ve dönüştürücü (`convert`) fonksiyonunu argüman olarak alan, geriye string döndüren başka bir fonksiyon yazacağız. Bu fonksiyonu input'lardaki değerleri birbirleri cinsinden hesaplayabilmek amaçlı kullanacağız. Bu fonksiyon geçerli olmayan bir `temperature` değeri için geriye boş string döndürecektir. Geçerli bir değer girildiğinde ise virgülden sonra 3 basamağa yuvarlanmış bir string döndürecektir.
 
 ```js
 function tryConvert(temperature, convert) {
@@ -150,7 +150,7 @@ function tryConvert(temperature, convert) {
 
 ## State'i Yukarı Taşıma {#lifting-state-up}
 
-Şu anda, her iki `TemperatureInput` bileşeni birbirlerinden bağımsız olarak değerlerini kendi lokal state'lerinde tutmaktadır:
+Şu anda, her iki `TemperatureInput` bileşeni birbirlerinden bağımsız olarak değerlerini kendi yerel state'lerinde tutmaktadır:
 
 ```js{5,9,13}
 class TemperatureInput extends React.Component {
@@ -171,7 +171,7 @@ class TemperatureInput extends React.Component {
 
 Ancak, bu iki girişin birbiriyle senkronize olmasını istediğimiz için Santigrat input'unu güncellediğimizde, Fahrenayt input'u dönüştürülen sıcaklığı yansıtmalıdır ya da aynı şekilde Fahrenayt input'unu güncellediğimizde Santigrat input'u dönüştürülen sıcaklığı yansıtmalıdır.
 
-React'te state paylaşımı, state'i, ihtiyacı olan bileşenlerin en yakın ortak üst elemana taşıyarak gerçekleştirilir. Buna "lifting state up" yani state'i yukarı taşıma denir. Lokal state'i `TemperatureInput`'dan kaldırıp ve `Calculator` bileşinine taşıyacağız.
+React'te state paylaşımı, state'i, ihtiyacı olan bileşenlerin en yakın ortak üst elemana taşıyarak gerçekleştirilir. Buna "lifting state up" yani state'i yukarı taşıma denir. Yerel state'i `TemperatureInput`'dan kaldırıp ve `Calculator` bileşinine taşıyacağız.
 
 `Calculator` bileşeni paylaşılan state'e sahip olacağı için, bu bileşen her iki input'ta geçerli sıcaklık değeri için "source of truth" yani gerçek veri kaynağı olacaktır. Bu şekilde `Calculator`, her iki input'a birbirleriyle tutarlı değerlere sahip olma talimatını verebilecektir. Her iki `TemperatureInput` bileşeninin `prop`'ları üst eleman olan `Calculator` bileşeninden geldiği için, her iki input değeri her zaman senkronize olacaktır.
 
@@ -186,7 +186,7 @@ Nasıl çalıştığını şimdi adım adım inceleyelim.
     // ...
 ```
 
-[Prop'ların salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` lokal state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` değeri üst elemandan prop olarak gedliği için `TemperatureInput` bileşeni artık `temperature`'ın üzerinde bir kontrolü kalmadı.
+[Prop'ların salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` yerel state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` değeri üst elemandan prop olarak gedliği için `TemperatureInput` bileşeni artık `temperature`'ın üzerinde bir kontrolü kalmadı.
 
 React'te, bu durum genellikle bileşen oluşturulurken, "kontrollü" bileşen biçiminde yapılarak çözülür. DOM'da `<input>` öğesinin hem `value` hem de `onChange` prop'unu kabul etmesi gibi, oluşturduğumuz `TemperatureInput` bileşeni hem `temperature` hem de `onTemperatureChange` prop'larını üst eleman olan `Calculator` bileşeninden kabul alabilecektir.
 
@@ -203,9 +203,9 @@ React'te, bu durum genellikle bileşen oluşturulurken, "kontrollü" bileşen bi
 >
 >Bileşenlerdeki `temperature` veya `onTemperatureChange` prop isimlerinin özel bir anlamı bulunmamaktadır. Onlara herhangi farklı bir şey diyebilirdik, örneğin onları `value` ve `onChange` gibi genel konvansiyonla isimlendirebilirdik. 
 
-`onTemperatureChange` prop'u, `Calculator` bileşeni tarafından `temperature` prop'u ile birlikte verilecektir. Değer değişimini kendi lokal state'ini değiştirerek halledecek, böylece her iki input yeni değerlerle beraber gösterilecektir. Birazdan `Calculator`'un yeni implementasyonuna birlikte bakacağız.
+`onTemperatureChange` prop'u, `Calculator` bileşeni tarafından `temperature` prop'u ile birlikte verilecektir. Değer değişimini kendi yerel state'ini değiştirerek halledecek, böylece her iki input yeni değerlerle beraber gösterilecektir. Birazdan `Calculator`'un yeni implementasyonuna birlikte bakacağız.
 
-`Calculator`'deki değişikliklere başlamadan önce, hızlı bir şekilde `TemperatureInput` bileşenimizdeki yaptığımız değişikliklere bakalım. Lokal state'i bileşenden kaldırdık ve `this.state.temperature` okumak yerine artık `this.props.temperature` okumaktayız. Ayrıca değer değiştirmek için `this.setState()` çağırmak yerine, `Calculator` tarafından sağlanan `this.props.onTemperatureChange()` çağırmaktayız:
+`Calculator`'deki değişikliklere başlamadan önce, hızlı bir şekilde `TemperatureInput` bileşenimizdeki yaptığımız değişikliklere bakalım. Yerel state'i bileşenden kaldırdık ve `this.state.temperature` okumak yerine artık `this.props.temperature` okumaktayız. Ayrıca değer değiştirmek için `this.setState()` çağırmak yerine, `Calculator` tarafından sağlanan `this.props.onTemperatureChange()` çağırmaktayız:
 
 ```js{8,12}
 class TemperatureInput extends React.Component {
@@ -234,7 +234,7 @@ class TemperatureInput extends React.Component {
 
 Şimdi `Calculator` bileşenimize dönebiliriz.
 
-Input'un `temperature` ve `scale` değerlerini bileşenimizin lokal state'inde saklayacağız. Böylelikle input'larımızdan "state'i taşımış" olduk. Bu bize her iki input değeri için "source of truth" yani doğru veri kaynağını sağlamış olacaktır. "Source of truth" her iki input değerini senkron bir şekilde göstermek için bilmemiz gereken tüm verilerin asgari temsilidir.
+Input'un `temperature` ve `scale` değerlerini bileşenimizin yerel state'inde saklayacağız. Böylelikle input'larımızdan "state'i taşımış" olduk. Bu bize her iki input değeri için "source of truth" yani doğru veri kaynağını sağlamış olacaktır. "Source of truth" her iki input değerini senkron bir şekilde göstermek için bilmemiz gereken tüm verilerin asgari temsilidir.
 
 Örneğin, Santigrat input elemanına 37 yazarsak, `Calculator` bileşenindeki state aşağıdaki gibi olacaktır:
 
@@ -299,7 +299,7 @@ class Calculator extends React.Component {
 }
 ```
 
-[**CodePen'de deneyin**](https://codepen.io/gaearon/pen/WZpxpz?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/WZpxpz?editors=0010)
 
 Şimdi, hangi input'u değiştirdiğinizin önemi olmaksızın, `Calculator` bileşenindeki `this.state.temperature` ve `this.state.scale` güncellenmektedir. Input'lardan herhangi birisinin değeri olduğu gibi alınmaktadır, böylelikle kullanıcı girdisi korunmaktadır, ve diğer input değeri girilen değere göre yeniden hesaplanmaktadır.
 
@@ -308,7 +308,7 @@ Herhangi bir input'a değer girildiğinde ne olduğunu özetleyelim:
 * React, DOM'daki `<input>` üzerinde `onChange` olarak belirtilen fonksiyonu çağırır. Bizim örneğimizde, `TemperatureInput` bileşenindeki `handleChange` metodudur.
 * `TemperatureInput` bileşenindeki `handleChange` metodu `this.props.onTemperatureChange()`'i yeni girilen değerle çağırır. `TemperatureInput` bileşenindeki prop'lar, `onTemperatureChange` ile beraber, üst eleman olan `Calculator` tarafından verilmektedir.
 * `Calculator` bileşeninde bulunan Santigrat cinsindeki `TempratureInput` bileşeninin `onTemperatureChange` fonksiyonunu `handleCelsiusChange` metodu olarak belirledik. Aynı şekilde Fahrenayt için ise `handleFahrenheitChange` olarak belirledik. `Calculator`'deki bu iki fonksiyondan herhangi biri, değişen input'a bağlı olarak çağrılır.
-* Bu metodlarda, `Calculator` bileşeni React'a kendisini tekrar ekranda sunabilmek için `this.setState()`'i yeni input değeri ve input'un bağlı olduğu ölçüm birim değeri ile çağırır.
+* Bu metodlarda, `Calculator` bileşeni React'e kendisini tekrar ekranda sunabilmek için `this.setState()`'i yeni input değeri ve input'un bağlı olduğu ölçüm birim değeri ile çağırır.
 * React `Calculator` bileşeninin `render` metodunu çağırarak yeni UI'ın nasıl sunacağını öğrenir. Input'lardaki her iki değer kendi birimlerine göre tekrar hesaplanır. Sıcaklık dönüşümü bu adımda gerçekleşir.
 * React her bir `TemperatureInput` bileşeninin `render` metodunu `Calculator` bileşeni tarafından belirlenen yeni prop'lar ile çağırır. Bu şekilde ekrana bu input'ları nasıl göstereceğini öğrenir.
 * React `BoilingVerdict` bileşeninin `render` metodunu çağırır. Çağırırken Santigrat cinsinden olan değeri prop olarak bileşene gönderir.
@@ -324,7 +324,7 @@ State taşıma daha çok genel hatlarıyla kod yazmayı ve iki yönlü bağlama 
 
 Eğer herhangi bir şey prop'tan veya state'ten türetilebilirse, büyük ihtimalle o state'te olmamalıdır. Örneğin, hem `celsiusValue` hem de `fahrenheitValue` tutmaktansa, sadece en son değiştirilen `temperature` ve onun `scale`'ini tutarız. Diğer input'un değeri böylelikle bu değerler ile `render()` metodunda hesaplanabilir. Bu bize, kullanıcı input girişinde herhangi bir hesaplama hassasiyetini kaybetirmeden yuvarlama işlemini diğer input'a uygulamamızı veya silmemizi sağlar.
 
-Kullanıcı arayüzünde yanlış bir şey gördüğünüzde, [React Developer Tools](https://github.com/facebook/react-devtools)'u prop'ları incelemek ve state'i güncellemekle sorumlu olan bileşeni bulabilmek için kullanabilirsiniz. Bu size hataları kaynağına kadar izlemenizi sağlar:
+Kullanıcı arayüzünde yanlış bir şey gördüğünüzde, [React Developer Tools](https://github.com/facebook/react-devtools)'u prop'ları incelemek ve state'i güncellemekle sorumlu olan bileşeni bulabilmek için kullanabilirsiniz. Bu, size hataları kaynağına kadar izleme olanağı sağlar:
 
 <img src="../images/docs/react-devtools-state.gif" alt="Monitoring State in React DevTools" max-width="100%" height="100%">
 

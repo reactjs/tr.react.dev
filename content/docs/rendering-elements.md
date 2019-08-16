@@ -16,7 +16,7 @@ Bir element, ekranda neyi görmek istiyorsanız onu tasvir eder:
 const element = <h1>Hello, world</h1>;
 ```
 
-Tarayıcının DOM elementlerinin aksine, React elementleri daha sade nesnelerdir ve oluşturulmaları daha kolaydır. Çünkü React DOM, elementler ile eşleşmek için DOM'un güncellenmesi işini kendisi halleder.
+Tarayıcının DOM elementlerinin aksine, React elementleri daha sade nesnelerdir ve oluşturulmaları daha kolaydır. Çünkü React DOM, elementler ile eşleşmek için DOM'ın güncellenmesi işini kendisi halleder.
 
 >**Not:**
 >
@@ -44,7 +44,7 @@ Sayfada "Hello, world" mesajı görüntülenecektir.
 
 ## Render Edilmiş Elementin Güncellenmesi {#updating-the-rendered-element}
 
-React elementleri [immutable](https://en.wikipedia.org/wiki/Immutable_object)'dır. Yani bir kez React elementi oluşturduktan sonra, o elementin çocuklarını veya özelliklerini değiştiremezsiniz. Bu nedenle element, bütün bir videonun tek bir karesi gibidir: arayüzün belirli bir andaki görüntüsünü temsil eder.
+React elementleri [immutable](https://en.wikipedia.org/wiki/Immutable_object)'dır. Yani bir kez React elementi oluşturduktan sonra, o elementin alt elemanlarını veya özelliklerini değiştiremezsiniz. Bu nedenle element, bütün bir videonun tek bir karesi gibidir: arayüzün belirli bir andaki görüntüsünü temsil eder.
 
 Bu zamana kadar edindiğimiz bilgiler ışığında, kullanıcı arayüzünün güncellenmesi için tek yolun, yeni bir element oluşturup, `ReactDOM.render()` metoduna aktarmak olduğunu biliyoruz. 
 
@@ -64,7 +64,7 @@ Aşağıdaki saat örneğini ele alalım:
 
 ## React Yalnızca Gerekli Kısımları Günceller {#react-only-updates-whats-necessary}
 
-React DOM, ilgili elementi ve elementin çocuklarını, bir önceki versiyonlarıyla karşılaştırır. Farkları tespit ettikten sonra yalnızca gerekli olan kısımlarda DOM güncellemesi yapar. Bu sayede DOM, istenen duruma getirilmiş olur.
+React DOM, ilgili elementi ve elementin alt elemanlarını, bir önceki versiyonlarıyla karşılaştırır. Farkları tespit ettikten sonra yalnızca gerekli olan kısımlarda DOM güncellemesi yapar. Bu sayede DOM, istenen duruma getirilmiş olur.
 
 Tarayıcı araçlarını kullanarak [son örneği](codepen://rendering-elements/update-rendered-element) incelediğinizde de bu durumu görebilirsiniz:
 
