@@ -37,15 +37,9 @@ class ErrorBoundary extends React.Component {
     return { hasError: true };
   }
 
-<<<<<<< HEAD
-  componentDidCatch(error, info) {
-    // Hatanızı bir hata bildirimi servisine de yollayabilirsiniz.
-    logErrorToMyService(error, info);
-=======
   componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
+    // Hatanızı bir hata bildirimi servisine de yollayabilirsiniz.
     logErrorToMyService(error, errorInfo);
->>>>>>> ddbd064d41d719f9ec0c2f6a4227f797a5828310
   }
 
   render() {

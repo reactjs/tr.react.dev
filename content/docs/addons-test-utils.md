@@ -122,13 +122,9 @@ it('sayacı render edebilir ve güncelleyebilir', () => {
 });
 ```
 
-<<<<<<< HEAD
-Unutmayınız ki, `document`'a DOM container'ı eklenmediği sürece, dispatchEvent() çalışmayacaktır. Bu tarz angarya kodlarla uğraşmamak için, [`react-testing-library`](https://github.com/kentcdodds/react-testing-library) gibi bir kütüphaneyi kullanabilirsiniz.
-=======
-- Don't forget that dispatching DOM events only works when the DOM container is added to the `document`. You can use a library like [React Testing Library](https://testing-library.com/react) to reduce the boilerplate code.
+Unutmayınız ki, `document`'a DOM container'ı eklenmediği sürece, DOM olayları çalışmayacaktır. Bu tarz basmakalıp/sabit kodlarla uğraşmamak için, [React Testing Library](https://testing-library.com/react) gibi bir kütüphaneyi kullanabilirsiniz.
 
-- The [`recipes`](/docs/recipes.html) document contains more details on how `act()` behaves, with examples and usage.
->>>>>>> ddbd064d41d719f9ec0c2f6a4227f797a5828310
+The [`Test Tarifleri`](/docs/testing-recipes.html) sayfası `act()` in nasıl çalıştığına dair, örnek kullanımlarla birlikte, daha fazla bilgi içerir.
 
 * * *
 
@@ -145,11 +141,7 @@ Mock (sahte ya da taklit) bir React bileşeni olarak kullanılabilmesine izin ve
 
 > Not:
 >
-<<<<<<< HEAD
-> `mockComponent()` eski bir API'dır. [shallow rendering](/docs/shallow-renderer.html)'i veya [`jest.mock()`](https://facebook.github.io/jest/docs/en/tutorial-react-native.html#mock-native-modules-using-jestmock)'u kullanmanızı tavsiye ederiz.
-=======
-> `mockComponent()` is a legacy API. We recommend using [`jest.mock()`](https://facebook.github.io/jest/docs/en/tutorial-react-native.html#mock-native-modules-using-jestmock) instead.
->>>>>>> ddbd064d41d719f9ec0c2f6a4227f797a5828310
+> `mockComponent()` eski bir API'dır. Onun yerine [`jest.mock()`](https://facebook.github.io/jest/docs/en/tutorial-react-native.html#mock-native-modules-using-jestmock)'u kullanmanızı tavsiye ederiz.
 
 * * *
 

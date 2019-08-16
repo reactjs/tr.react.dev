@@ -58,13 +58,9 @@
     - id: optimizing-performance
       title: Performansı En İyi Duruma Getirmek
     - id: portals
-<<<<<<< HEAD
       title: Portal'lar
-=======
-      title: Portals
     - id: profiler
       title: Profiler
->>>>>>> ddbd064d41d719f9ec0c2f6a4227f797a5828310
     - id: react-without-es6
       title: ES6 Olmadan React Kullanımı
     - id: react-without-jsx
