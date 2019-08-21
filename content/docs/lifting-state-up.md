@@ -186,7 +186,7 @@ Nasıl çalıştığını şimdi adım adım inceleyelim.
     // ...
 ```
 
-[Prop'ların salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` yerel state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` değeri üst elemandan prop olarak gedliği için `TemperatureInput` bileşeni artık `temperature`'ın üzerinde bir kontrolü kalmadı.
+[Prop'ların salt okunur](/docs/components-and-props.html#props-are-read-only) olduğunu biliyoruz. `temperature` yerel state'te bulunuyorken, `TemperatureInput` bileşeni  bu değeri değiştirebilmek için `this.setState()`'i çağırabiliyordu. Ancak şimdi, `temperature` değeri üst elemandan prop olarak geldiği için `TemperatureInput` bileşeninin artık `temperature`'ın üzerinde bir kontrolü kalmadı.
 
 React'te, bu durum genellikle bileşen oluşturulurken, "kontrollü" bileşen biçiminde yapılarak çözülür. DOM'da `<input>` öğesinin hem `value` hem de `onChange` prop'unu kabul etmesi gibi, oluşturduğumuz `TemperatureInput` bileşeni hem `temperature` hem de `onTemperatureChange` prop'larını üst eleman olan `Calculator` bileşeninden kabul alabilecektir.
 
