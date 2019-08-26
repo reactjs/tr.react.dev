@@ -88,13 +88,13 @@ Eğer projenizi Babel kullanmak üzere elle ayarladıysanız, Flow için özel b
 Eğer yarn kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
-yarn add --dev babel-preset-flow
+yarn add --dev @babel/preset-flow
 ```
 
 Eğer npm kullanıyorsanız, bu komutu çalıştırın:
 
 ```bash
-npm install --save-dev babel-preset-flow
+npm install --save-dev @babel/preset-flow
 ```
 
 Ardından, `flow` ön ayarını [Babel ayarlarınıza](https://babeljs.io/docs/usage/babelrc/) ekleyin. Örneğin, eğer Babel'i `.babelrc` ile ayarlıyorsanız, şöyle görünebilir:
@@ -102,7 +102,7 @@ Ardından, `flow` ön ayarını [Babel ayarlarınıza](https://babeljs.io/docs/u
 ```js{3}
 {
   "presets": [
-    "flow",
+    "@babel/preset-flow",
     "react"
   ]
 }

@@ -31,7 +31,7 @@ Bu yeni `useState` fonksiyonu öğreneceğimiz ilk "Hook", ancak bu örnek sadec
 
 >Not
 >
->React 16.8.0, Hook'ları destekleyen ilk sürümdür. Sürüm yükseltme yaparken, React DOM dahil olmak üzere tüm paketleri güncellemeyi unutmayın. React Native, Hook'ları bir sonraki stabil sürümde destekleyecek.
+>React 16.8.0, Hook'ları destekleyen ilk sürümdür. Sürüm yükseltme yaparken, React DOM dahil olmak üzere tüm paketleri güncellemeyi unutmayın. React Native, Hook'ları [0.59 sürümünden itibaren](https://facebook.github.io/react-native/blog/2019/03/12/releasing-react-native-059) desteklemektedir.
 
 ## Tanıtım Videosu {#video-introduction}
 
