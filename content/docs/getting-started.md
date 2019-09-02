@@ -121,7 +121,11 @@ Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için ya
 
 ## Versiyon Anlatımı {#versioned-documentation}
 
+<<<<<<< HEAD
 Bu bölüm her zaman React'in en son kararlı versiyonunu yansıtır. React 16'dan beri, açıklamaların eski sürümlerini [ayrı bir sayfada](/versions) bulabilirsiniz. Geçmiş sürümlere ait açıklamaların yayınlanma tarihinde anlık olarak görüntülendiğini ve sürekli güncellenmediğini unutmayın.
+=======
+This documentation always reflects the latest stable version of React. Since React 16, you can find older versions of the documentation on a [separate page](/versions). Note that documentation for past versions is snapshotted at the time of the release, and isn't being continuously updated.
+>>>>>>> 941f54180ef5e652221f54ef6d1f6f2e9e063597
 
 ## Bir şeyler mi eksik? {#something-missing}
 
