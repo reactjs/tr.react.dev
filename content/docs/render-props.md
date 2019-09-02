@@ -18,9 +18,9 @@ Render prop’ları kullanan kütüphaneler arasında [React Router](https://rea
 
 Bu dokümanda neden render prop’ların kullanışlı olduğunu tartışıp, bunları nasıl yazabileceğiniz hakkında konuşacağız.
 
-## Render Propları Cross-Cutting İhtiyaçları için Kullanın {#use-render-props-for-cross-cutting-concerns}
+## Render Propları uygulama genelini etkileyen özellikler için Kullanın {#use-render-props-for-cross-cutting-concerns}
 
-Bileşenler React’ın asıl kod yeniden kullanım ünitesidir. Ama state’in nasıl paylaşılacağı veya bir bileşenin başka bir bileşene encapsulate ettiği davranışta hangi state’e ihtiyaç duyulacağı her zaman malum olmayabilir. 
+Bileşenler React'te yeniden kod kullanımının temel birimidir. Ama state’in nasıl paylaşılacağı veya bir bileşenin başka bir bileşene encapsulate ettiği davranışta hangi state’e ihtiyaç duyulacağı her zaman malum olmayabilir. 
 
 Örneğin, farenin bir web uygulamasındaki posizyonunu takip eden aşağıdaki bileşen:
 
@@ -54,7 +54,7 @@ Fare ekranda hareket ettikçe, bileşen (x,y) koordinatlarını `<p>` içerisind
 
 Şimdi soru şu: Bu davranışı başka bir bileşen içerisinde nasıl tekrar kullanabiliriz? Diğer bir deyişle, Başka bir bileşen farenin pozisyonunu bilmek isterse bu davranışı rahatça bu bileşenle paylaşmak için encapsulate edebilir miyiz?
 
-Bileşenler React’ın ana kod yeniden kullanım ünitesi olduğundan, istediğimiz davranışı başka bir yerde kullanabilmemiz için `<Mouse>` bileşeninin kodunu biraz değiştirmeyi deneyelim.
+Bileşenler React'te yeniden kod kullanımının temel birimi olduğundan, istediğimiz davranışı başka bir yerde kullanabilmemiz için `<Mouse>` bileşeninin kodunu biraz değiştirmeyi deneyelim.
 
 ```js
 // The <Mouse> component encapsulates the behavior we need...
@@ -248,7 +248,7 @@ Yukarıdaki örnekler `render`’ı kullanıyor olabilir, ama aynı kolaylıkta 
 )}/>
 ```
 
-Ve hatırlayınız, `children` prop’unun JSX elemanınızın özellikler listesinde adlandırılmasına gerek yok. Onun yerine, direk oalrak elemanın *içine* koyabilirsiniz!
+Ve hatırlayınız, `children` prop’unun JSX elemanınızın özellikler listesinde adlandırılmasına gerek yok. Onun yerine, direkt olarak elemanın *içine* koyabilirsiniz!
 
 ```js
 <Mouse>
@@ -323,4 +323,4 @@ class MouseTracker extends React.Component {
 }
 ```
 
-Prop’u statik olarak tanımlayamadığınız durumlarda(örn. Bileşenin prop’larını ve/veya state’ini gizlemeniz gerektiği durumlarda) ise`<Mouse>` `React.Component`’ten türemelidir.
+Prop’u statik olarak tanımlayamadığınız durumlarda (örn. Bileşenin prop’larını ve/veya state’ini gizlemeniz gerektiği durumlarda) ise `<Mouse>` `React.Component`’ten türemelidir.
