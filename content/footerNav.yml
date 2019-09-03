@@ -2,23 +2,23 @@ community:
   title: Community
 
 docs:
-  title: Docs
+  title: Dokümanlar
 
 more:
-  title: More
+  title: Daha Fazla
   items:
-    - title: Tutorial
+    - title: Öğretici
       to: /tutorial/tutorial.html
     - title: Blog
       to: /blog
-    - title: Acknowledgements
+    - title: Katkıda Bulunanlar
       to: /acknowledgements.html
     - title: React Native
       to: https://facebook.github.io/react-native/
       external: true
 
 channels:
-  title: Channels
+  title: Kanallar
   items:
     - title: Github
       to: https://github.com/facebook/react
