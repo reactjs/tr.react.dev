@@ -14,7 +14,9 @@ Render prop’lu bir bileşen, prop olarak bir React elemanı döndüren bir fon
 )}/>
 ```
 
+
 Render prop’ları kullanan kütüphaneler arasında [React Router](https://reacttraining.com/react-router/web/api/Route/render-func) ve [Downshift](https://github.com/paypal/downshift) de var.
+
 
 Bu dokümanda neden render prop’ların kullanışlı olduğunu tartışıp, bunları nasıl yazabileceğiniz hakkında konuşacağız.
 

@@ -124,7 +124,7 @@ it('sayacı render edebilir ve güncelleyebilir', () => {
 
 Unutmayınız ki, `document`'a DOM container'ı eklenmediği sürece, DOM olayları çalışmayacaktır. Bu tarz basmakalıp/sabit kodlarla uğraşmamak için, [React Testing Library](https://testing-library.com/react) gibi bir kütüphaneyi kullanabilirsiniz.
 
-The [`Test Tarifleri`](/docs/testing-recipes.html) sayfası `act()` in nasıl çalıştığına dair, örnek kullanımlarla birlikte, daha fazla bilgi içerir.
+[`Test Tarifleri`](/docs/testing-recipes.html) sayfası `act()` in nasıl çalıştığına dair, örnek kullanımlarla birlikte, daha fazla bilgi içerir.
 
 * * *
 

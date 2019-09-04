@@ -105,7 +105,7 @@ expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub']);
 TestRenderer.create(element, options);
 ```
 
-İletilen React elemanı ile bir TestRenderer nesnesi oluşturun. Bu nesne gerçek DOM'ı kullanmaz; ancak yine de bileşen ağacını tamamen belleğe render eder, böylece bu konuda doğrulamalar (assertions) yapabilirsiniz. Döndürülen nesne, aşağıda belirtilen metot ve özelliklere sahiptir:
+İletilen React elemanı ile bir TestRenderer nesnesi oluşturun. Bu nesne gerçek DOM'ı kullanmaz; ancak yine de bileşen ağacını tamamen belleğe render eder, böylece bu konuda doğrulamalar (assertions) yapabilirsiniz. Bir [TestRenderer nesnesi](#testrenderer-instance) döndürür.
 
 ### `TestRenderer.act()` {#testrendereract}
 
@@ -143,7 +143,7 @@ expect(root.toJSON()).toMatchSnapshot();
 testRenderer.toJSON()
 ```
 
-İşlenen ağacı temsil eden bir nesne döndürün. Bu ağaç yalnızca <div> veya <View> gibi platforma özgü birimleri ve bunların bileşenlerini içerir, ancak kullanıcı tarafından yazılmış bileşenleri içermez.Bu, anlık görüntü [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) testi için kullanışlıdır.
+İşlenen ağacı temsil eden bir nesne döndürün. Bu ağaç yalnızca <div> veya <View> gibi platforma özgü birimleri ve bunların bileşenlerini içerir, ancak kullanıcı tarafından yazılmış bileşenleri içermez. Bu, anlık görüntü [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) testi için kullanışlıdır.
 
 ### `testRenderer.toTree()` {#testrenderertotree}
 
@@ -151,7 +151,7 @@ testRenderer.toJSON()
 testRenderer.toTree()
 ```
 
-Render edilen ağacı temsil eden bir nesne döndürün. `toJSON()` 'dan farklı olarak, gösterim `toJSON()` tarafından sağlanandan daha fazla ayrıntıya sahiptir ve kullanıcı tarafından yazılan bileşenleri içerir. Test render ediciye ilave olarak kendi doğrulama kütüphanenizi yazmadığınız sürece muhtemelen bu yönteme ihtiyacınız olmayacaktır.
+Render edilen ağacı temsil eden bir nesne döndürün. `toJSON()` 'dan farklı olarak, gösterim `toJSON()` tarafından sağlanandan daha fazla ayrıntıya sahiptir ve kullanıcı tarafından yazılan bileşenleri içerir. Test render edicinin üzerine kendi doğrulama kütüphanenizi yazmadığınız sürece muhtemelen bu yönteme ihtiyacınız olmayacaktır.
 
 ### `testRenderer.update()` {#testrendererupdate}
 
