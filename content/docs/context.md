@@ -37,7 +37,7 @@ Context kullanarak, prop'ları ara öğelerden geçirmekten kaçınabiliriz.
 
 Context esas olarak, bazı verilerin farklı düzeylerdeki iç içe geçmiş *birçok* bileşen tarafından erişilebilir olması gerektiğinde kullanılır. Bileşenin yeniden kullanımını zorlaştırdığından onu ölçülü bir şekilde uygulayın.
 
-**Yanlızca bazı prop'ları birçok aşama üzerinden geçmek istemezseniz, [bileşen kompozisyonu](/docs/composition-vs-inheritance.html) genellikle Context'ten daha basit bir çözümdür.**
+**Yalnızca bazı prop'ları birçok aşama üzerinden geçmek istemezseniz, [bileşen kompozisyonu](/docs/composition-vs-inheritance.html) genellikle Context'ten daha basit bir çözümdür.**
 
 Örneğin, derinlemesine iç içe geçmiş `Link` ve `Avatar` bileşenlerinin okuyabilmesi için `avatarSize` ve `user` prop'larını birkaç seviye aşağıya aktaran bir `Page` bileşeni düşünün:
 
@@ -118,7 +118,7 @@ const MyContext = React.createContext(defaultValue);
 
 Bir Context nesnesi oluşturur. React, bu Context nesnesine abone bir bileşen oluşturduğunda, context'in mevcut değerini ağaçtaki en yakın `Provider'dan` okuyacaktır.
 
-`defaultValue` argümanı **yanlızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenleri başka bileşenlerin altına koymadan izole bir şekilde test etmek için yardımcı olabilir. Not: Provider value değerini `undefined` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
+`defaultValue` argümanı **yalnızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenleri başka bileşenlerin altına koymadan izole bir şekilde test etmek için yardımcı olabilir. Not: Provider value değerini `undefined` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
 
 ### `Context.Provider` {#contextprovider}
 
