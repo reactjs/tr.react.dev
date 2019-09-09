@@ -343,11 +343,7 @@ Bir bileşenteki `setState` fonksiyonunu çağırdığınızda, React otomatik o
 
 React DevTools, React bileşenlerinizin state'ini ve prop'larını kontrol etmenize olanak tanır.
 
-<<<<<<< HEAD
-React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ tıklayarak çıkan menüde "İncele"'yi seçerseniz, geliştirici araçlarını açabilir, ve devamında en sağda yer alan React sekmesinde incelemelerinizi yürütebilirsiniz.
-=======
-After installing React DevTools, you can right-click on any element on the page, click "Inspect" to open the developer tools, and the React tabs ("⚛️ Components" and "⚛️ Profiler") will appear as the last tabs to the right. Use "⚛️ Components" to inspect the component tree.
->>>>>>> 8b30ae43439818009213da86eca872a3d869c5eb
+React DevTools kurulumundan sonra, sayfa içerisindeki herhangi bir elemana sağ tıklayarak çıkan menüde "İncele"'yi seçerseniz, geliştirici araçlarını açabilir, ve devamında en sağda yer alan React sekmesinde ("⚛️ Components" and "⚛️ Profiler") incelemelerinizi yürütebilirsiniz. Bileşen ağacını incelemek için "⚛️ Components" tabına bakın.
 
 **Eklentinin CodePen ile çalışabilmesi için harici olarak birkaç adım daha vardır:**
 
