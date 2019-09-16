@@ -59,4 +59,4 @@ customElements.define('x-search', XSearch);
 > Not:
 >
 > Sınıfları Babel ile dönüştürürseniz, bu kod **çalışmayacaktır**. Sorun için [bu konuya](https://github.com/w3c/webcomponents/issues/587) bakınız.
-> Bu sorunu düzeltmek için web bileşenlerinizi yüklemeden önce [custom-elements-es5-adapter](https://github.com/webcomponents/webcomponentsjs#custom-elements-es5-adapterjs) ekleyin.
+> Bu sorunu düzeltmek için web bileşenlerinizi yüklemeden önce [custom-elements-es5-adapter](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs#custom-elements-es5-adapterjs) ekleyin.

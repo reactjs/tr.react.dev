@@ -113,31 +113,15 @@ fakat dönüştürmediğinden emin olmanız gerekmekte. Bunun için [babel-plugi
 
 ```js
 import OtherComponent from './OtherComponent';
-
-function MyComponent() {
-  return (
-    <div>
-      <OtherComponent />
-    </div>
-  );
-}
 ```
 
 **Sonra:**
 
 ```js
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
-
-function MyComponent() {
-  return (
-    <div>
-      <OtherComponent />
-    </div>
-  );
-}
 ```
 
-Bu kod, bileşen render edildiğinde `OtherComponent`'ı içeren paketi otomatik olarak yükler.
+Bu kod, bileşen ilk render edildiğinde `OtherComponent`'ı içeren paketi otomatik olarak yükler.
 
 `React.lazy`, dinamik `import()`'u çağıran bir fonksiyon alır. `default` ile dışarı aktarılan bir React bileşenini içeren modülü çözümleyen
 `Promise` return etmelidir.
@@ -145,7 +129,6 @@ Bu kod, bileşen render edildiğinde `OtherComponent`'ı içeren paketi otomatik
 ### Suspense {#suspense}
 
 `MyComponent` render edildiğinde `OtherComponent`'ı içeren modül yüklenmediyse, yüklenmesini beklerken geçirdiğimiz süre içerisinde yükleme göstergesi gibi bir yedek içerik göstermeliyiz. Bu, `Suspense` bileşeniyle yapılır.
-
 
 ```js
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
