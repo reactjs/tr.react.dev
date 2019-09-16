@@ -113,39 +113,31 @@ fakat dönüştürmediğinden emin olmanız gerekmekte. Bunun için [babel-plugi
 
 ```js
 import OtherComponent from './OtherComponent';
-
-function MyComponent() {
-  return (
-    <div>
-      <OtherComponent />
-    </div>
-  );
-}
 ```
 
 **Sonra:**
 
 ```js
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
-
-function MyComponent() {
-  return (
-    <div>
-      <OtherComponent />
-    </div>
-  );
-}
 ```
 
+<<<<<<< HEAD
 Bu kod, bileşen render edildiğinde `OtherComponent`'ı içeren paketi otomatik olarak yükler.
+=======
+This will automatically load the bundle containing the `OtherComponent` when this component is first rendered.
+>>>>>>> 6dcb963479953586f462ce31fddf35158c0598a0
 
 `React.lazy`, dinamik `import()`'u çağıran bir fonksiyon alır. `default` ile dışarı aktarılan bir React bileşenini içeren modülü çözümleyen
 `Promise` return etmelidir.
 
+<<<<<<< HEAD
 ### Suspense {#suspense}
 
 `MyComponent` render edildiğinde `OtherComponent`'ı içeren modül yüklenmediyse, yüklenmesini beklerken geçirdiğimiz süre içerisinde yükleme göstergesi gibi bir yedek içerik göstermeliyiz. Bu, `Suspense` bileşeniyle yapılır.
 
+=======
+The lazy component should then be rendered inside a `Suspense` component, which allows us to show some fallback content (such as a loading indicator) while we're waiting for the lazy component to load.
+>>>>>>> 6dcb963479953586f462ce31fddf35158c0598a0
 
 ```js
 const OtherComponent = React.lazy(() => import('./OtherComponent'));

@@ -2,8 +2,6 @@
 id: static-type-checking
 title: Statik Tip Denetlemesi
 permalink: docs/static-type-checking.html
-prev: typechecking-with-proptypes.html
-next: refs-and-the-dom.html
 ---
 
 [Flow](https://flow.org/) ve [TypeScript](https://www.typescriptlang.org/) gibi statik tip denetleyicileri belli türdeki sorunları siz henüz kodunuzu çalıştırmadan belirlerler. Bunun yanı sıra, otomatik tamamlama gibi özellikleri ekleyerek geliştirici iş akışlarını iyileştirirler. Bu yüzden büyük kod tabanları için `PropTypes` yerine Flow veya TypeScript kullanılmasını tavsiye ediyoruz.
