@@ -12,16 +12,19 @@ Daha açıklayıcı olmak gerekirse, **bir üst-seviye bileşen; parametre olara
 const EnhancedComponent = higherOrderComponent(WrappedComponent);
 ```
 
-Bir bileşen proplarını kullanıcı arayüzüne çevirirken, üst-seviye bir bileşen başka bir bileşeni alıp farklı bir bileşene çevirir.
+Bir bileşen; proplarını kullanıcı arayüzüne çevirirken, üst-seviye bir bileşen başka bir bileşeni alıp farklı bir bileşene çevirir.
 
-HOC'lar Redux'un [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect) ve Relay'in [`createFragmentContainer`](http://facebook.github.io/relay/docs/en/fragment-container.html) gibi üçüncü taraf React kütüphanlerinde yaygındır.
+HOC'lar Redux'un [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect) ve Relay'in [`createFragmentContainer`](http://facebook.github.io/relay/docs/en/fragment-container.html) gibi üçüncü taraf React kütüphanelerinde yaygındır.
 
 Bu dokümanda neden üst-seviye bileşenlerin kullanışlı olduğunu tartışıp, bunları nasıl yazabileceğiniz hakkında konuşacağız.
 
-## HOC'ları Uygulama Genelindeki Sorunlar için kullanın {#use-hocs-for-cross-cutting-concerns}
-**Not**
+## HOC'ları Uygulama Genelindeki Sorunlar için Kullanın {#use-hocs-for-cross-cutting-concerns}
 
-Daha önce uygulama genelindeki sorunlar için mixins'in kullanılmasını önermiştik. Fakat o zamandan beri fark ettik ki, mixins yarardan çok zarara yol açıyor. Mixins'ten neden uzaklaştığımız konusunda ve nasıl varolan bileşenlerinizi mixins'ten geçirebileceğiniz hakkında daha fazla bilgiye [buradan](/blog/2016/07/13/mixins-considered-harmful.html) ulaşabilirsiniz
+
+>**Not**
+>
+>Daha önce uygulama genelindeki sorunlar için mixins'in kullanılmasını önermiştik. Fakat o zamandan beri fark ettik ki, mixins yarardan çok zarara yol açıyor. Mixins'ten neden uzaklaştığımız konusunda ve nasıl varolan bileşenlerinizi mixins'ten geçirebileceğiniz hakkında daha fazla bilgiye [buradan](/blog/2016/07/13/mixins-considered-harmful.html) ulaşabilirsiniz.
+
 Bileşenler React’te yeniden kod kullanımının temel birimidir. Fakat, bazı davranışların alışılageldik bileşenlerle kullanılmaya uygun olmadığını göreceksiniz.
 
 Örneğin, `CommentList` diye bir dış data kaynağına bağlanan bir bileşeniniz olduğunu varsayalım.
@@ -104,8 +107,7 @@ class BlogPost extends React.Component {
 - Dinleyicinin içinde, data kaynağı değiştiğinde `setState`'i çağırmak
 - Unmount'da, değişken dinleyiciyi kaldırmak.
 
-Büyük bir uygulamada, bu `DataSource`'a bağlanan ve `setState`'i çağıran davranışın sürekli tekrarlanacağını hayal edebilirsiniz. Fakat bizim istediğimiz şey bu davranışı somutlaştırmak ve bu davranışı tek bir yerde
-birden fazla bileşen arasında paylaşmak. İşte bu gibi durumlarda Üst-seviye bileşenler işimize yarıyor.
+Büyük bir uygulamada, bu `DataSource`'a bağlanan ve `setState`'i çağıran davranışın sürekli tekrarlanacağını hayal edebilirsiniz. Fakat bizim istediğimiz şey bu davranışı somutlaştırmak ve bu davranışı tek bir yerde birden fazla bileşen arasında paylaşmak. İşte bu gibi durumlarda Üst-seviye bileşenler işimize yarıyor.
 
 `CommentList` ve `BlogPost` gibi `DataSource`'a bağlanacak bileşenleri üretecek bir fonksiyon yazabiliriz. Foknsiyon arguman olarak, elde edilen datayı prop olarak alan bir alt eleman alacak. Fonksiyonun adını `withSubscription` koyalım.
 
@@ -162,12 +164,11 @@ function withSubscription(WrappedComponent, selectData) {
 }
 ```
 
-Bir HOC'un input bileşenini değiştirmediğini ve davranışı kopyalamak için inheritance kullanmadığına dikkat ediniz. Bunun yerine; HOC, orjinal bileşeni bir container içine alarak bu bileşeni yaratır.
-Bir HOC yan etkisi olmayan saf bir fonksiyondur.
+Bir HOC'un input bileşenini değiştirmediğini ve davranışı kopyalamak için inheritance kullanmadığına dikkat ediniz. Bunun yerine; HOC, orjinal bileşeni bir container içine alarak bu bileşeni yaratır. Bir HOC yan etkisi olmayan saf bir fonksiyondur.
 
-İşte bu kadar! Kapsanan bileşen, kapsayan bileşenin bütün proplarını alır ayrıca output'unu render etmek için yeni bir prop olan `data`'yı alır. Data'nın neden veya nasıl kullanıldığı
+İşte bu kadar! Kapsanan bileşen, kapsayan bileşenin bütün proplarını alır ayrıca output'unu render etmek için yeni bir prop olan `data`'yı alır. Data'nın neden veya nasıl kullanıldığı HOC'u ilgilendirmez ve kapsanan bileşen de data'nın nereden geldiğiyle ilgilenmez.
 
-`withSubscription` normal bir fonksiyon olduğundan, istediğiniz kadar arguman ekleyebilirsiniz. Örneğin, `data` prop ismini değiştirilebilir yapmak isteyebilirsiniz, bu sayede HOC ve kapsanan bileşen birbirinden daha ayrık bir hale gelecektir. Ya da `shouldComponentUpdate`'i ayarlayan veya data source'u ayarlayan bir arguman alabilirsiniz. Bunların mümkün olmasının sebebi ise HOC'un bileşenin nasıl tanımlandığı üzerinde tam kontrole sahip olmasıdır.
+`withSubscription` normal bir fonksiyon olduğundan, istediğiniz kadar arguman ekleyebilirsiniz. Örneğin, `data` prop ismini değiştirilebilir yapmak isteyebilirsiniz, bu sayede HOC ve kapsanan bileşen birbirinden daha ayrık bir hale gelecektir. Ya da `shouldComponentUpdate`'i ayarlayan veya data kaynağını ayarlayan bir arguman alabilirsiniz. Bunların mümkün olmasının sebebi ise HOC'un bileşenin nasıl tanımlandığı üzerinde tam kontrole sahip olmasıdır.
 
 Bileşenlerde olduğu gibi, `withSubscription` ile kapsanan bileşen arasındaki bağlantı tamamen prop'lar üzerindendir. Bu da kapsanan bileşene aynı propları sağladıkları sürece bir HOC'u başka bir HOC'la değiştirmeyi kolaylaştırır. Eğer data almanıza yarayan kütüphaneleri kullanırsanız bu değişkenlik işinize yarayabilir.
 
@@ -211,13 +212,13 @@ function logProps(WrappedComponent) {
 }
 ```
 
-Bu HOC değiştirilmiş versiyonla aynı fonksiyonaliteye sahip ve bunu yaparken potansiyel sıkıntılardan da kaçınnıyor. Aynı zaman hem class bileşenlerle ve fonksiyonel bileşenlerle aynı şekilde iyi çalışıyor. Ayrıca saf bir fonksiyon olduğu için kendisi de dahil diğer HOC’larla çalışabilir durumda
+Bu HOC değiştirilmiş versiyonla aynı fonksiyonaliteye sahip ve bunu yaparken potansiyel sıkıntılardan da kaçınnıyor. Aynı zamanda hem class bileşenlerle hem fonksiyonel bileşenlerle aynı şekilde iyi çalışıyor. Ayrıca saf bir fonksiyon olduğu için kendisi de dahil diğer HOC’larla çalışabilir durumda.
 
-HOC’ların ve **container components** adlı bir teknik arasında bir kaç benzerlik fark etmiş olabilirsiniz. Container components üst ve alt seviyeyle alakalı sorumluluğu birbirinden ayrımaya yarayan bir stratejidir. Container’lar olayları dinlemek, state ve propların bileşenler arasında yollanması gibi UI’yla alakalı olaylarla ilgilenirler. HOC’lar ise container’ları kendilerini hayata geçirmekte kullanırlar. HOC’ları parametrize edilmiş bileşen tanımları gibi düşünebilirsiniz.
+HOC’ların ve **container components** adlı bir teknik arasında bir kaç benzerlik fark etmiş olabilirsiniz. Container components üst ve alt seviyeyle alakalı sorumluluğu birbirinden ayrımaya yarayan bir stratejidir. Container’lar olayları dinlemek, state ve propların bileşenler arasında yollanması gibi UI’yla alakalı olaylarla ilgilenirler. HOC’lar ise container’ları kendilerini hayata geçirmekte kullanırlar. HOC’ları, parametrize edilmiş bileşen tanımları gibi düşünebilirsiniz.
 
 ## Uzlaşma: Alakasız Prop'ları Kapsanan Bileşen Üzerinden Geçirin {#convention-pass-unrelated-props-through-to-the-wrapped-component}
 
-HOC’lar bileşenlere yeni özellikler eklerler. Ama genel olarak yaptığı işleri çok fazla değiştirmemeleri gerekir. HOC’tan dönen bir bileşenin kapsanan bileşenle benzer bir interface’e sahip olması beklenir.
+HOC’lar bileşenlere yeni özellikler eklerler. Ama genel olarak yaptığı işleri çok fazla değiştirmemeleri gerekir. HOC’tan dönen bir bileşenin, kapsanan bileşenle benzer bir interface’e sahip olması beklenir.
 
 HOC’lar kendileriyle alakası olmayan prop’ları da geçirmelidirler. Çoğu HOC şu tarz bir render metoduna sahiptir:
 
@@ -273,9 +274,9 @@ const enhance = connect(commentListSelector, commentListActions);
 // to the Redux store
 const ConnectedComment = enhance(CommentList);
 ```
-Diğer bir deyişle, connect üst-seviye bileşen döndüren bir `üst-seviye` fonksiyon!
+Diğer bir deyişle, `connect` üst-seviye bileşen döndüren bir üst-seviye fonksiyon!
 
-Bu şekil karmaşık ve gereksiz gözükebilir, ama işe yarayan bir özelliği vra. `Connect` tarafından döndürülen HOC’lar şöyle bir kullanıma sahiptir `Component => Component`. Girdisi ve çıktısı aynı olan fonksiyonların birbirleriyle kullanımı çok kolaydır.
+Bu şekil karmaşık ve gereksiz gözükebilir, ama işe yarayan bir özelliği var. `connect` tarafından döndürülen HOC’lar şöyle bir kullanıma sahiptir `Component => Component`. Girdisi ve çıktısı aynı olan fonksiyonların birbirleriyle kullanımı çok kolaydır.
 
 ```js
 // Instead of doing this...
@@ -293,13 +294,13 @@ const EnhancedComponent = enhance(WrappedComponent)
 
 (Ayrıca bu özellik `connect` ve diğer geliştirme özellikli HOC’ların decorator olarak kullanılmasını da sağlar, decorator deneysel bir JavaScript önerisidir)
 
-`compose` fonksiyonu ana bir özelliği olmasa da kullanışlı olmasının yanı sıra bir çok 3. Parti kütüphaneleri tarafından kullanılır, bunların içinde lodash([`lodash.flowRight`](https://lodash.com/docs/#flowRight) olarak), [Redux](https://redux.js.org/api/compose) ve [Ramda](https://ramdajs.com/docs/#compose) da bulunur.
+`compose` fonksiyonu ana bir özelliği olmasa da kullanışlı olması açısından bir çok 3. Parti kütüphaneleri tarafından kullanılır, bunların içinde lodash([`lodash.flowRight`](https://lodash.com/docs/#flowRight) olarak), [Redux](https://redux.js.org/api/compose) ve [Ramda](https://ramdajs.com/docs/#compose) da bulunur.
 
 ## Uzlaşma: Kolay Debug Etmek için Gösterilen Adı Kapsayın {#convention-wrap-the-display-name-for-easy-debugging}
 
 HOC’lar tarafından yaratılan kapsayan bileşenler, diğer bileşenler gibi [React Developer Tools](https://github.com/facebook/react-devtools) tarafından gösterilir. Debug’lamayı kolaylaştırmak için, gösterilecek adı bu bileşenin bir HOC sonucu olduğunu belirtmesine özen gösterin.
 
-En yaygın teknik kapsanan bileşenin gösterilen adını kapsamaktır. Yani eğer üst-seviye bileşeninizin adı `withSubscription` ise ve kapsanan bileşenin gösterilen adı `CommentList` ise, gösterilen ad olarak `withSubscription(CommentList)`’i kullanın:
+En yaygın teknik, kapsanan bileşenin gösterilen adını kapsamaktır. Yani eğer üst-seviye bileşeninizin adı `withSubscription` ise ve kapsanan bileşenin gösterilen adı `CommentList` ise, gösterilen ad olarak `withSubscription(CommentList)`’i kullanın:
 
 ```js
 function withSubscription(WrappedComponent) {
@@ -316,7 +317,7 @@ function getDisplayName(WrappedComponent) {
 
 ## Uyarılar {#caveats}
 
-Üst-seviye bileşenler dikkat etmeniz gereken ve eğer React’a yeniyseniz hemen göremeyeceğiniz bazı sıkıntılara sahiptir.
+Üst-seviye bileşenler, dikkat etmeniz gereken ve eğer React’a yeniyseniz hemen göremeyeceğiniz bazı sıkıntılara sahiptir.
 
 ### Render Metodu İçerisinde HOC'ları Kullanmayın {#dont-use-hocs-inside-the-render-method}
 
@@ -340,9 +341,9 @@ Bunun yerine HOC’u bileşen tanımının dışında yapın, bu sayede sonuç b
 
 HOC’u dinamik olarak uygulamanız gereken durumlarda ise bunu bileşenin yaşam döngüsü methodlarında veya bileşenin constructor’ında yapabilirsiniz.
 
-### Static Metodlar Kopyalanmalıdır {#static-methods-must-be-copied-over}
+### Statik Metodlar Kopyalanmalıdır {#static-methods-must-be-copied-over}
 
-Bazen bir react bileşeninde static bir method tanımlamak kullanışlı olabilir. Örneğin, Relay container’ları GrahpQL ile birlikte kullanılması için `getFragment` diye statik bir metod açığa çıkarır.
+Bazen bir react bileşeninde statik bir method tanımlamak kullanışlı olabilir. Örneğin, Relay container’ları GrahpQL ile birlikte kullanılması için `getFragment` diye statik bir metod açığa çıkarır.
 
 Bir bileşene HOC uyguladığınız zaman, orijinali bir container bileşen tarafından kapsanmış olabilir. Bu da yeni bileşenin orijinal bileşenin statik fonksiyonlarından hiçbirine sahip olmadığı anlamına gelir.
 
@@ -367,7 +368,7 @@ function enhance(WrappedComponent) {
 }
 ```
 
-Fakat bunun için hangi metodları kopyalamanız gerektiğini bilmelisiniz. Tüm React-dışı statik metodlarını hoist-non-react-statics’i kullanarak kopyalayabilirisiniz:
+Fakat bunun için hangi metodları kopyalamanız gerektiğini bilmelisiniz. Tüm React-dışı statik metodlarını[hoist-non-react-statics](https://github.com/mridgway/hoist-non-react-statics)’i kullanarak kopyalayabilirisiniz:
 
 ```js
 import hoistNonReactStatic from 'hoist-non-react-statics';
@@ -378,7 +379,7 @@ function enhance(WrappedComponent) {
 }
 ```
 
-Başka bir olası çözüm de static metodları bileşenden ayrı olarak dışa aktarmaktır.
+Başka bir olası çözüm de statik metodları bileşenden ayrı olarak dışa aktarmaktır.
 
 ```js
 // Instead of...
