@@ -23,7 +23,7 @@ Bu dokümanda neden üst-seviye bileşenlerin kullanışlı olduğunu tartışı
 
 >**Not**
 >
->Daha önce uygulama genelindeki sorunlar için mixins'in kullanılmasını önermiştik. Fakat o zamandan beri fark ettik ki, mixins yarardan çok zarara yol açıyor. Mixins'ten neden uzaklaştığımız konusunda ve nasıl varolan bileşenlerinizi mixins'ten geçirebileceğiniz hakkında daha fazla bilgiye [buradan](/blog/2016/07/13/mixins-considered-harmful.html) ulaşabilirsiniz.
+>Daha önce uygulama genelindeki sorunlar için mixin'lerin kullanılmasını önermiştik. Fakat o zamandan beri fark ettik ki, mixin'ler yarardan çok zarara yol açıyor. Mixin'lerden neden uzaklaştığımız konusunda ve nasıl varolan bileşenlerinizi mixin'lerden geçirebileceğiniz hakkında daha fazla bilgiye [buradan](/blog/2016/07/13/mixins-considered-harmful.html) ulaşabilirsiniz.
 
 Bileşenler React’te yeniden kod kullanımının temel birimidir. Fakat, bazı davranışların alışılageldik bileşenlerle kullanılmaya uygun olmadığını göreceksiniz.
 
@@ -103,7 +103,7 @@ class BlogPost extends React.Component {
 
 `CommentList` ve `BlogPost` birebir aynı değil - `DataSource`'da farklı methodlar çağırıyorlar ve farklı çıktılar renderlıyorlar. Fakat, kodlamasının çoğu aynı:
 
-- Mount'da `DataSource`'a bir değişken dinleyici eklemek.
+- Yükleme (mount) sırasında `DataSource`'a bir değişken dinleyici eklemek.
 - Dinleyicinin içinde, data kaynağı değiştiğinde `setState`'i çağırmak
 - Unmount'da, değişken dinleyiciyi kaldırmak.
 
@@ -123,9 +123,9 @@ const BlogPostWithSubscription = withSubscription(
 );
 ```
 
-İlk parametre kaplanan bileşen. İkinci parametre is `DataSource` ve anlık proplar'ı aldığı zaman ilgilendiğimiz datayı çekiyor.
+İlk parametre kaplanan bileşen. İkinci parametre is `DataSource` ve anlık propları aldığı zaman ilgilendiğimiz datayı çekiyor.
 
-`CommentListWithSubscription` ve `BlogPostWithSubscription` render edildiğinde `CommentList` ve `BlogPost`'a bir `data` prop'u gelecek ve bu data'da `DataSource`'tan çekilen en gücel data bulunacak.
+`CommentListWithSubscription` ve `BlogPostWithSubscription` render edildiğinde `CommentList` ve `BlogPost`'a bir `data` propu gelecek ve bu data'da `DataSource`'tan çekilen en gücel data bulunacak.
 
 ```js
 // This function takes a component...
@@ -168,9 +168,9 @@ Bir HOC'un input bileşenini değiştirmediğini ve davranışı kopyalamak içi
 
 İşte bu kadar! Kapsanan bileşen, kapsayan bileşenin bütün proplarını alır ayrıca output'unu render etmek için yeni bir prop olan `data`'yı alır. Data'nın neden veya nasıl kullanıldığı HOC'u ilgilendirmez ve kapsanan bileşen de data'nın nereden geldiğiyle ilgilenmez.
 
-`withSubscription` normal bir fonksiyon olduğundan, istediğiniz kadar arguman ekleyebilirsiniz. Örneğin, `data` prop ismini değiştirilebilir yapmak isteyebilirsiniz, bu sayede HOC ve kapsanan bileşen birbirinden daha ayrık bir hale gelecektir. Ya da `shouldComponentUpdate`'i ayarlayan veya data kaynağını ayarlayan bir arguman alabilirsiniz. Bunların mümkün olmasının sebebi ise HOC'un bileşenin nasıl tanımlandığı üzerinde tam kontrole sahip olmasıdır.
+`withSubscription` normal bir fonksiyon olduğundan, istediğiniz kadar arguman ekleyebilirsiniz. Örneğin, `data` prop ismini değiştirilebilir yapmak isteyebilirsiniz, bu sayede HOC ve kapsanan bileşen birbirinden daha ayrık bir hale gelecektir. Ya da `shouldComponentUpdate`'i veya data kaynağını ayarlayan bir arguman alabilirsiniz. Bunların mümkün olmasının sebebi ise HOC'un bileşenin nasıl tanımlandığı üzerinde tam kontrole sahip olmasıdır.
 
-Bileşenlerde olduğu gibi, `withSubscription` ile kapsanan bileşen arasındaki bağlantı tamamen prop'lar üzerindendir. Bu da kapsanan bileşene aynı propları sağladıkları sürece bir HOC'u başka bir HOC'la değiştirmeyi kolaylaştırır. Eğer data almanıza yarayan kütüphaneleri kullanırsanız bu değişkenlik işinize yarayabilir.
+Bileşenlerde olduğu gibi, `withSubscription` ile kapsanan bileşen arasındaki bağlantı tamamen proplar üzerindendir. Bu da kapsanan bileşene aynı propları sağladıkları sürece bir HOC'u başka bir HOC'la değiştirmeyi kolaylaştırır. Eğer data almanıza yarayan kütüphaneleri kullanırsanız bu değişkenlik işinize yarayabilir.
 
 ## Orijinal Bileşeni Değiştirmeyin. Composition Kullanın. {#dont-mutate-the-original-component-use-composition}
 
@@ -193,9 +193,9 @@ const EnhancedComponent = logProps(InputComponent);
 
 Bununla alakalı bir kaç problem var. Birincisi, girdi olarak kullanılan bileşen geliştirilmiş bileşenden ayrı olarak yeniden kullanılamaz. Daha önemlisi, `EnchancedComponent`'e başka bir HOC uygularsanız, o da `componentWillRecieveProps`'u değiştirecektir; ilk HOC’un fonksiyonalitesi kaybolacaktır. Ayrıca bu HOC,  yaşam döngüsü methodları içermeyen fonksiyonel bileşenlerle çalışmayacaktır.
 
-HOC’ları değiştirmek sıkıntılı bir abstraction yöntemidir— kodu kullanacak kişinin bunların nasıl kodlandığını bilmesi gerekiyor, yoksa diğer HOC’larla sıkıntı yaşayabilir.
+HOC’ları değiştirmek sıkıntılı bir soyutlama yöntemidir— kodu kullanacak kişinin bunların nasıl kodlandığını bilmesi gerekiyor, yoksa diğer HOC’larla sıkıntı yaşayabilir.
 
-HOC’ları değiştirmektense, HOC’lar composition kullanmalı. Bunu da girdi bileşeni başka bir bileşen içinde bulundurarak yapabilir.
+HOC'lar, datayi degistirmek yerine girdi bileşenini bir kapsayıcı bileşene sararak bileşim (composition) yontemini kullanmalıdır.
 
 ```js
 function logProps(WrappedComponent) {
@@ -212,15 +212,15 @@ function logProps(WrappedComponent) {
 }
 ```
 
-Bu HOC değiştirilmiş versiyonla aynı fonksiyonaliteye sahip ve bunu yaparken potansiyel sıkıntılardan da kaçınnıyor. Aynı zamanda hem class bileşenlerle hem fonksiyonel bileşenlerle aynı şekilde iyi çalışıyor. Ayrıca saf bir fonksiyon olduğu için kendisi de dahil diğer HOC’larla çalışabilir durumda.
+Bu HOC degistiren versiyonla aynı islevsellige sahiptir ve bunu yaparken de potansiyel sıkıntılardan da kacinmaktadir. Aynı zamanda hem class bileşenlerle hem fonksiyonel bileşenlerle aynı şekilde iyi çalışıyor. Ayrıca saf bir fonksiyon olduğu için kendisi de dahil diğer HOC’larla çalışabilir durumda.
 
-HOC’ların ve **container components** adlı bir teknik arasında bir kaç benzerlik fark etmiş olabilirsiniz. Container components üst ve alt seviyeyle alakalı sorumluluğu birbirinden ayrımaya yarayan bir stratejidir. Container’lar olayları dinlemek, state ve propların bileşenler arasında yollanması gibi UI’yla alakalı olaylarla ilgilenirler. HOC’lar ise container’ları kendilerini hayata geçirmekte kullanırlar. HOC’ları, parametrize edilmiş bileşen tanımları gibi düşünebilirsiniz.
+HOC’ların ve **kapsayıcı bileşenler (container components)** adlı bir teknik arasında bir kaç benzerlik fark etmiş olabilirsiniz. Kapsayıcı bileşenler üst ve alt seviyeyle alakalı sorumluluğu birbirinden ayrımaya yarayan bir stratejidir. Container’lar olayları dinlemek, state ve propların bileşenler arasında yollanması gibi UI’yla alakalı olaylarla ilgilenirler. HOC’lar ise container’ları kendilerini hayata geçirmekte kullanırlar. HOC’ları, parametrize edilmiş bileşen tanımları gibi düşünebilirsiniz.
 
-## Uzlaşma: Alakasız Prop'ları Kapsanan Bileşen Üzerinden Geçirin {#convention-pass-unrelated-props-through-to-the-wrapped-component}
+## Kural: Alakasız Propları Kapsanan Bileşen Üzerinden Geçirin {#convention-pass-unrelated-props-through-to-the-wrapped-component}
 
 HOC’lar bileşenlere yeni özellikler eklerler. Ama genel olarak yaptığı işleri çok fazla değiştirmemeleri gerekir. HOC’tan dönen bir bileşenin, kapsanan bileşenle benzer bir interface’e sahip olması beklenir.
 
-HOC’lar kendileriyle alakası olmayan prop’ları da geçirmelidirler. Çoğu HOC şu tarz bir render metoduna sahiptir:
+HOC’lar kendileriyle alakası olmayan propları da geçirmelidirler. Çoğu HOC şu tarz bir render metoduna sahiptir:
 
 ```js
 render() {
@@ -242,9 +242,9 @@ render() {
 }
 ```
 
-Bu uzlaşma HOC’ların yeterince değişken ve yeniden kullanılabilir olmasını sağlar.
+Bu kural HOC’ların yeterince değişken ve yeniden kullanılabilir olmasını sağlar.
 
-## Uzlaşma: Composability'yi En Üst Seviyeye Çıkartmak {#convention-maximizing-composability}
+## Kural: Composability'yi En Üst Seviyeye Çıkartmak {#convention-maximizing-composability}
 
 Tüm HOC’lar aynı gözükmez. Bazen sadece bir argüman aldıkları da olur, bu da kapsanan bileşendir:
 
@@ -258,7 +258,7 @@ Genellike HOC’lar başka argüman da alırlar. Relay’den alınan bu örnekte
 const CommentWithRelay = Relay.createContainer(Comment, config);
 ```
 
-HOC’ların en sık kullanılan şekli şuna benzer:
+HOC’ların en yaygın kullanım şekli şuna benzer:
 
 ```js
 // React Redux's `connect`
@@ -274,7 +274,7 @@ const enhance = connect(commentListSelector, commentListActions);
 // to the Redux store
 const ConnectedComment = enhance(CommentList);
 ```
-Diğer bir deyişle, `connect` üst-seviye bileşen döndüren bir üst-seviye fonksiyon!
+Diğer bir deyişle, `connect` üst-seviye bileşen döndüren bir üst-seviye fonksiyondur!
 
 Bu şekil karmaşık ve gereksiz gözükebilir, ama işe yarayan bir özelliği var. `connect` tarafından döndürülen HOC’lar şöyle bir kullanıma sahiptir `Component => Component`. Girdisi ve çıktısı aynı olan fonksiyonların birbirleriyle kullanımı çok kolaydır.
 
@@ -296,7 +296,7 @@ const EnhancedComponent = enhance(WrappedComponent)
 
 `compose` fonksiyonu ana bir özelliği olmasa da kullanışlı olması açısından bir çok 3. Parti kütüphaneleri tarafından kullanılır, bunların içinde lodash([`lodash.flowRight`](https://lodash.com/docs/#flowRight) olarak), [Redux](https://redux.js.org/api/compose) ve [Ramda](https://ramdajs.com/docs/#compose) da bulunur.
 
-## Uzlaşma: Kolay Debug Etmek için Gösterilen Adı Kapsayın {#convention-wrap-the-display-name-for-easy-debugging}
+## Kural: Kolay Debug Etmek için Gösterilen Adı Kapsayın {#convention-wrap-the-display-name-for-easy-debugging}
 
 HOC’lar tarafından yaratılan kapsayan bileşenler, diğer bileşenler gibi [React Developer Tools](https://github.com/facebook/react-devtools) tarafından gösterilir. Debug’lamayı kolaylaştırmak için, gösterilecek adı bu bileşenin bir HOC sonucu olduğunu belirtmesine özen gösterin.
 
@@ -323,7 +323,7 @@ function getDisplayName(WrappedComponent) {
 
 React’ın fark algılama algoritması (reconcilliation olarak adlandırılır) var olan bileşen ağacını güncellemesi veya tamamen baştan yaratması gerektiğini anlamak için bileşen kimliğini kullanır. Eğer `render`'dan dönen bileşen bir önceki renderla aynıysa(`===`), React recursive bir şekilde bileşen ağacını yeni olanla farkını ölçelerek günceller. Eğer aynı değillerse, önceki bileşen ağacı tamamen kaldırlır.
 
-Normalde, bunun hakkında düşünmeniz gerekmez. Fakat HOC kullanırken bu render methodu içerisinde HOC kullanayamacağınız anlamına gelir:
+Normalde, bunun hakkında düşünmeniz gerekmez. Fakat HOC kullanırken bu render metodu içerisinde HOC kullanayamacağınız anlamına gelir:
 
 ```js
 render() {
@@ -339,11 +339,11 @@ Buradaki tek sıkıntı performans değil — bir bileşeni tekrar mount etmek b
 
 Bunun yerine HOC’u bileşen tanımının dışında yapın, bu sayede sonuç bileşen sadece bir kez yaratılmış olsun. Bu sayede bu bileşenin kimliği renderlar arasında tutarlı olacaktır. Zaten genelde istenilen davranış bu şekildedir.
 
-HOC’u dinamik olarak uygulamanız gereken durumlarda ise bunu bileşenin yaşam döngüsü methodlarında veya bileşenin constructor’ında yapabilirsiniz.
+HOC’u dinamik olarak uygulamanız gereken durumlarda ise bunu bileşenin yaşam döngüsü metodlarında veya bileşenin constructor’ında yapabilirsiniz.
 
 ### Statik Metodlar Kopyalanmalıdır {#static-methods-must-be-copied-over}
 
-Bazen bir react bileşeninde statik bir method tanımlamak kullanışlı olabilir. Örneğin, Relay container’ları GrahpQL ile birlikte kullanılması için `getFragment` diye statik bir metod açığa çıkarır.
+Bazen bir react bileşeninde statik bir metod tanımlamak kullanışlı olabilir. Örneğin, Relay container’ları GrahpQL ile birlikte kullanılması için `getFragment` diye statik bir metod açığa çıkarır.
 
 Bir bileşene HOC uyguladığınız zaman, orijinali bir container bileşen tarafından kapsanmış olabilir. Bu da yeni bileşenin orijinal bileşenin statik fonksiyonlarından hiçbirine sahip olmadığı anlamına gelir.
 
@@ -395,6 +395,6 @@ import MyComponent, { someFunction } from './MyComponent.js';
 
 ### Ref'ler Geçirilmemektedir {#refs-arent-passed-through}
 
-Üst-seviye bileşenlerin rahatlığı tüm prop’ların kapsanan bileşene geçirilmesi olmasına rağmen, bu `ref`’lerde işe yaramaz. Çünkü ref’ler aslında bir prop değildir — `key` gibi, React tarafından özel olarak yönetilir. Eğer sahip olduğu bir bileşeni, bir HOC sonucu olaran bir elemana ref eklerseniz; bu ref en dıştaki container bileşenine denk gelir, kapsanan bileşene değil.
+Üst-seviye bileşenlerin rahatlığı tüm propların kapsanan bileşene geçirilmesi olmasına rağmen, bu `ref`’lerde işe yaramaz. Çünkü ref’ler aslında bir prop değildir — `key` gibi, React tarafından özel olarak yönetilir. Eğer sahip olduğu bir bileşeni, bir HOC sonucu olaran bir elemana ref eklerseniz; bu ref en dıştaki container bileşenine denk gelir, kapsanan bileşene değil.
 
-Bu sorunun çözümü ise `React.forwardRef` API’nın (React 16.3’le tanıtıldı) kullanılmasıdır.. [Ref’leri taşımak kısmında bu konu hakkında daha çok şey öğrenin.](/docs/forwarding-refs.html).
+Bu sorunun çözümü ise `React.forwardRef` API’nın (React 16.3’le tanıtıldı) kullanılmasıdır. [Ref’leri taşımak kısmında bu konu hakkında daha çok şey öğrenin.](/docs/forwarding-refs.html).
