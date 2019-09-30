@@ -126,7 +126,11 @@ Metin editörünüzde, kodun renkli halde görüntülenmesini sağlamak için [b
 
 ### Takıldım, Yardım Edin! {#help-im-stuck}
 
+<<<<<<< HEAD
 Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınız için devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız. Devamında size yardımıcı olacağız.
+=======
+If you get stuck, check out the [community support resources](/community/support.html). In particular, [Reactiflux Chat](https://discord.gg/reactiflux) is a great way to get help quickly. If you don't receive an answer, or if you remain stuck, please file an issue, and we'll help you out.
+>>>>>>> 647b639259919f96e9b667bf41ec16621e1b84dc
 
 ## Genel Bakış {#overview}
 

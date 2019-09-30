@@ -10,13 +10,25 @@ React [anlamsal sürümleme (semver)](https://semver.org/lang/tr/) prensiplerini
 
 Bu demektir ki sürüm numarası **x.y.z** ile:
 
+<<<<<<< HEAD
 * **Uyumsuz değişiklikleri** yayınlarken **x** değerini güncelleyerek  **ana sürümü** yayınlarız  (Örneğin: 15.6.2'den 16.0.0'a geçiş).
 * **Yeni özellikleri** yayınlarken **y** değerini güncelleyerek **minör sürümü** yayınlarız (Örneğin: 15.6.2'den 15.7.0'a geçiş).
 * **Hata düzeltmelerini** yayınlarken **z** değerini güncelleyerek **yama sürümünü** yayınlarız (Örneğin: 15.6.2'den 15.6.3'a geçiş).
+=======
+* When releasing **critical bug fixes**, we make a **patch release** by changing the **z** number (ex: 15.6.2 to 15.6.3).
+* When releasing **new features** or **non-critical fixes**, we make a **minor release** by changing the **y** number (ex: 15.6.2 to 15.7.0).
+* When releasing **breaking changes**, we make a **major release** by changing the **x** number (ex: 15.6.2 to 16.0.0).
+>>>>>>> 647b639259919f96e9b667bf41ec16621e1b84dc
 
 Ana sürümler de yeni özellikler içerebilir, ve herhangi bir yeni sürüm hata düzeltmelerini bulundurabilir.
 
+<<<<<<< HEAD
 ### Uyumsuz Değişiklikler {#breaking-changes}
+=======
+Minor releases are the most common type of release.
+
+### Breaking Changes {#breaking-changes}
+>>>>>>> 647b639259919f96e9b667bf41ec16621e1b84dc
 
 Uyumsuz değişiklikler hepimiz için zahmetli olduğu için ana sürümlerin sayısını olabildiğince az tutmaya çalışıyoruz – örneğin, React 15, Nisan 2016'da, React 16, Eylül 2017'de yayınlanmıştır; React 17'nin 2019'dan önce yayınlanması beklenmemektedir.
 
@@ -46,4 +58,22 @@ Aşağıdaki durumlarda genellikle ana versiyon yükseltmesi *yapmıyoruz*:
 
 Bu prensipler faydacı yaklaşımla tasarlanmıştır; kesinlikle sizler için baş ağrısına sebep olmak istemiyoruz. Eğer bütün bu değişiklerle ana versiyon çıkarsak, daha fazla sayıda ana versiyon çıkmış oluruz ve bu topluluğa daha fazla versiyon çilesi yaratır. Ayrıca bu durum React'ı geliştirmek ve ilerletmek için istediğimiz kadar hızlı olamayacağımız anlamına da gelir.
 
+<<<<<<< HEAD
 Bununla beraber, eğer bu listedeki bir değişikliğin toplulukta fazlaca sorun yaratacağını düşünüyorsak, kademeli geçişte yol haritası sunmak için elimizden gelenin en iyisini yapmaya özen gösteriyoruz. 
+=======
+That said, if we expect that a change on this list will cause broad problems in the community, we will still do our best to provide a gradual migration path.
+
+### If a Minor Release Includes No New Features, Why Isn't It a Patch? {#minors-versus-patches}
+
+It's possible that a minor release will not include new features. [This is allowed by semver](https://semver.org/#spec-item-7), which states **"[a minor version] MAY be incremented if substantial new functionality or improvements are introduced within the private code. It MAY include patch level changes."**
+
+However, it does raise the question of why these releases aren't versioned as patches instead.
+
+The answer is that any change to React (or other software) carries some risk of breaking in unexpected ways. Imagine a scenario where a patch release that fixes one bug accidentally introduces a different bug. This would not only be disruptive to developers, but also harm their confidence in future patch releases. It's especially regrettable if the original fix is for a bug that is rarely encountered in practice.
+
+We have a pretty good track record for keeping React releases free of bugs, but patch releases have an even higher bar for reliability because most developers assume they can be adopted without adverse consequences.
+
+For these reasons, we reserve patch releases only for the most critical bugs and security vulnerabilities.
+
+If a release includes non-essential changes — such as internal refactors, changes to implementation details, performance improvements, or minor bugfixes — we will bump the minor version even when there are no new features.
+>>>>>>> 647b639259919f96e9b667bf41ec16621e1b84dc
