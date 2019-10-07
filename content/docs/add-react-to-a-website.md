@@ -69,13 +69,21 @@ Daha sonra, `</body>` etiketini kapatmadan hemen önce HTML sayfasına üç `<sc
 
 HTML sayfanızın yanına `like_button.js` adlı bir dosya oluşturun.
 
+<<<<<<< HEAD
 **[Bu başlangıç ​​kodunu](https://cdn.rawgit.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** açın ve oluşturduğunuz dosyaya yapıştırın.
+=======
+Open **[this starter code](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** and paste it into the file you created.
+>>>>>>> 5c371e5e3fd8f92e1d06dfdf1f28edc50fb5d83f
 
 >İpucu
 >
 >Bu kod, `LikeButton` adı verilen bir React bileşenini tanımlar. Henüz anlamadıysanız endişelenmeyin. React'in yapı taşlarını daha sonra [uygulamalı eğitim](/tutorial/tutorial.html) ve [ana kavramlar rehberi](/docs/hello-world.html)nde ele alacağız. Şimdilik sadece ekranda gösterelim!
 
+<<<<<<< HEAD
 **[Başlangıç ​​kodundan](https://cdn.rawgit.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** sonra, `like_button.js`'in en altına iki satır ekleyin :
+=======
+After **[the starter code](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)**, add two lines to the bottom of `like_button.js`:
+>>>>>>> 5c371e5e3fd8f92e1d06dfdf1f28edc50fb5d83f
 
 ```js{3,4}
 // ... yapıştırdığınız başlangıç kodu ...
@@ -195,7 +203,11 @@ npx babel --watch src --out-dir . --presets react-app/prod
 
 Bitmesini beklemeyin -- bu komut JSX için otomatik bir izleyici başlatır.
 
+<<<<<<< HEAD
 Şimdi **[JSX başlangıç ​​kodu](https://cdn.rawgit.com/gaearon/c8e112dc74ac44aac4f673f2c39d19d1/raw/09b951c86c1bf1116af741fa4664511f2f179f0a/like_button.js)** ile `src/like_button.js` adlı bir dosya oluşturursanız, izleyici tarayıcıya uygun sade JavaScript koduyla oluşturulmuş bir önişlenmiş `like_button.js` dosyası oluşturur. Kaynak dosyayı JSX ile düzenlediğinizde, dönüştürme otomatik olarak yeniden çalıştırılır.
+=======
+If you now create a file called `src/like_button.js` with this **[JSX starter code](https://gist.github.com/gaearon/c8e112dc74ac44aac4f673f2c39d19d1/raw/09b951c86c1bf1116af741fa4664511f2f179f0a/like_button.js)**, the watcher will create a preprocessed `like_button.js` with the plain JavaScript code suitable for the browser. When you edit the source file with JSX, the transform will re-run automatically.
+>>>>>>> 5c371e5e3fd8f92e1d06dfdf1f28edc50fb5d83f
 
 Bu aynı zamanda eski tarayıcılarda çökme konusunda endişelenmeden, sınıflar (classes) gibi modern JavaScript sözdizimi özelliklerini kullanmanızı sağlar. Az önce kullandığımız araca Babel denir ve [bu dokümantasyondan](https://babeljs.io/docs/en/babel-cli/) daha fazla bilgi edinebilirsiniz.
 
