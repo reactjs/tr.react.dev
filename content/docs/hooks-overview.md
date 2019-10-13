@@ -1,24 +1,24 @@
 ---
 id: hooks-overview
-title: Hooks at a Glance
+title: Bir bakışta hook
 permalink: docs/hooks-overview.html
 next: hooks-state.html
 prev: hooks-intro.html
 ---
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
+*Hook* lar React 16ç8 ile gelen yeni ilaveler. Class yazmadan stateleri ve diğer özellikleri kullanmana yarar.
 
-Hooks are [backwards-compatible](/docs/hooks-intro.html#no-breaking-changes). This page provides an overview of Hooks for experienced React users. This is a fast-paced overview. If you get confused, look for a yellow box like this:
+Hooklar [geriye-uyumlu](/docs/hooks-intro.html#no-breaking-changes). Bu sayfa deneyimli React kullanıcıları için Hooklar hakkında genel bilgiler sunar. Kafanız karışırsa, bunun gibi sarı bir kutu arayın:
 
->Detailed Explanation
+>Detaylı açıklama
 >
->Read the [Motivation](/docs/hooks-intro.html#motivation) to learn why we're introducing Hooks to React.
+>[Motivation](/docs/hooks-intro.html#motivation) neden react hooku çıkardığımızı öğrenmek için okuyabilirsin.
 
-**↑↑↑ Each section ends with a yellow box like this.** They link to detailed explanations.
+**↑↑↑ Her bölüm bunun gibi sarı bir kutu ile bitiyor.** Detaylı açıklamalarla bağşantılı.
 
 ## 📌 State Hook {#state-hook}
 
-This example renders a counter. When you click the button, it increments the value:
+Bu örnek bir sayıçıyı gösterir. Butona her tıkladığında sayıyı artırır:
 
 ```js{1,4,5}
 import React, { useState } from 'react';
