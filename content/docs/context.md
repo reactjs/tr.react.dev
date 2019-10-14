@@ -16,12 +16,22 @@ Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağ�
   - [Context.Provider](#contextprovider)
   - [Class.contextType](#classcontexttype)
   - [Context.Consumer](#contextconsumer)
+<<<<<<< HEAD
 - [Örnekler](#examples)
   - [Dinamik Context](#dynamic-context)
   - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
   - [Çoklu Context'leri Kullanma](#consuming-multiple-contexts)
 - [Uyarılar](#caveats)
 - [Eski Sürüm API](#legacy-api)
+=======
+  - [Context.displayName](#contextdisplayname)
+- [Examples](#examples)
+  - [Dynamic Context](#dynamic-context)
+  - [Updating Context from a Nested Component](#updating-context-from-a-nested-component)
+  - [Consuming Multiple Contexts](#consuming-multiple-contexts)
+- [Caveats](#caveats)
+- [Legacy API](#legacy-api)
+>>>>>>> 81124465ac68335b2e3fdf21952a51265de6877f
 
 ## Context Ne Zaman Kullanılır {#when-to-use-context}
 
@@ -197,7 +207,25 @@ Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bi
 > 
 > Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
 
+<<<<<<< HEAD
 ## Örnekler {#examples}
+=======
+### `Context.displayName` {#contextdisplayname}
+
+Context object accepts a `displayName` string property. React DevTools uses this string to determine what to display for the context.
+
+For example, the following component will appear as MyDisplayName in the DevTools:
+
+```js{2}
+const MyContext = React.createContext(/* some value */);
+MyContext.displayName = 'MyDisplayName';
+
+<MyContext.Provider> // "MyDisplayName.Provider" in DevTools
+<MyContext.Consumer> // "MyDisplayName.Consumer" in DevTools
+```
+
+## Examples {#examples}
+>>>>>>> 81124465ac68335b2e3fdf21952a51265de6877f
 
 ### Dinamik Context {#dynamic-context}
 
