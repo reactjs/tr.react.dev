@@ -69,13 +69,13 @@ Daha sonra, `</body>` etiketini kapatmadan hemen önce HTML sayfasına üç `<sc
 
 HTML sayfanızın yanına `like_button.js` adlı bir dosya oluşturun.
 
-**[Bu başlangıç ​​kodunu](https://cdn.rawgit.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** açın ve oluşturduğunuz dosyaya yapıştırın.
+**[Bu başlangıç ​​kodunu](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** açın ve oluşturduğunuz dosyaya yapıştırın.
 
 >İpucu
 >
 >Bu kod, `LikeButton` adı verilen bir React bileşenini tanımlar. Henüz anlamadıysanız endişelenmeyin. React'in yapı taşlarını daha sonra [uygulamalı eğitim](/tutorial/tutorial.html) ve [ana kavramlar rehberi](/docs/hello-world.html)nde ele alacağız. Şimdilik sadece ekranda gösterelim!
 
-**[Başlangıç ​​kodundan](https://cdn.rawgit.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** sonra, `like_button.js`'in en altına iki satır ekleyin :
+**[Başlangıç ​​kodundan](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** sonra, `like_button.js`'in en altına iki satır ekleyin :
 
 ```js{3,4}
 // ... yapıştırdığınız başlangıç kodu ...
@@ -195,7 +195,7 @@ npx babel --watch src --out-dir . --presets react-app/prod
 
 Bitmesini beklemeyin -- bu komut JSX için otomatik bir izleyici başlatır.
 
-Şimdi **[JSX başlangıç ​​kodu](https://cdn.rawgit.com/gaearon/c8e112dc74ac44aac4f673f2c39d19d1/raw/09b951c86c1bf1116af741fa4664511f2f179f0a/like_button.js)** ile `src/like_button.js` adlı bir dosya oluşturursanız, izleyici tarayıcıya uygun sade JavaScript koduyla oluşturulmuş bir önişlenmiş `like_button.js` dosyası oluşturur. Kaynak dosyayı JSX ile düzenlediğinizde, dönüştürme otomatik olarak yeniden çalıştırılır.
+Şimdi **[JSX başlangıç ​​kodu](https://gist.github.com/gaearon/c8e112dc74ac44aac4f673f2c39d19d1/raw/09b951c86c1bf1116af741fa4664511f2f179f0a/like_button.js)** ile `src/like_button.js` adlı bir dosya oluşturursanız, izleyici tarayıcıya uygun sade JavaScript koduyla oluşturulmuş bir önişlenmiş `like_button.js` dosyası oluşturur. Kaynak dosyayı JSX ile düzenlediğinizde, dönüştürme otomatik olarak yeniden çalıştırılır.
 
 Bu aynı zamanda eski tarayıcılarda çökme konusunda endişelenmeden, sınıflar (classes) gibi modern JavaScript sözdizimi özelliklerini kullanmanızı sağlar. Az önce kullandığımız araca Babel denir ve [bu dokümantasyondan](https://babeljs.io/docs/en/babel-cli/) daha fazla bilgi edinebilirsiniz.
 

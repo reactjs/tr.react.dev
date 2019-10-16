@@ -10,11 +10,13 @@ React [anlamsal sürümleme (semver)](https://semver.org/lang/tr/) prensiplerini
 
 Bu demektir ki sürüm numarası **x.y.z** ile:
 
+* **Kritik hata düzeltmelerini** yayınlarken **z** değerini güncelleyerek **yama sürümünü** yayınlarız (Örneğin: 15.6.2'den 15.6.3'a geçiş).
+* **Yeni özellikleri** ya da **kritik olmayan hata düzeltmelerini** yayınlarken **y** değerini güncelleyerek **minör sürümü** yayınlarız (Örneğin: 15.6.2'den 15.7.0'a geçiş).
 * **Uyumsuz değişiklikleri** yayınlarken **x** değerini güncelleyerek  **ana sürümü** yayınlarız  (Örneğin: 15.6.2'den 16.0.0'a geçiş).
-* **Yeni özellikleri** yayınlarken **y** değerini güncelleyerek **minör sürümü** yayınlarız (Örneğin: 15.6.2'den 15.7.0'a geçiş).
-* **Hata düzeltmelerini** yayınlarken **z** değerini güncelleyerek **yama sürümünü** yayınlarız (Örneğin: 15.6.2'den 15.6.3'a geçiş).
 
 Ana sürümler de yeni özellikler içerebilir, ve herhangi bir yeni sürüm hata düzeltmelerini bulundurabilir.
+
+Minör sürümler en yaygın sürüm türüdür.
 
 ### Uyumsuz Değişiklikler {#breaking-changes}
 
@@ -46,4 +48,18 @@ Aşağıdaki durumlarda genellikle ana versiyon yükseltmesi *yapmıyoruz*:
 
 Bu prensipler faydacı yaklaşımla tasarlanmıştır; kesinlikle sizler için baş ağrısına sebep olmak istemiyoruz. Eğer bütün bu değişiklerle ana versiyon çıkarsak, daha fazla sayıda ana versiyon çıkmış oluruz ve bu topluluğa daha fazla versiyon çilesi yaratır. Ayrıca bu durum React'ı geliştirmek ve ilerletmek için istediğimiz kadar hızlı olamayacağımız anlamına da gelir.
 
-Bununla beraber, eğer bu listedeki bir değişikliğin toplulukta fazlaca sorun yaratacağını düşünüyorsak, kademeli geçişte yol haritası sunmak için elimizden gelenin en iyisini yapmaya özen gösteriyoruz. 
+Bununla beraber, eğer bu listedeki bir değişikliğin toplulukta fazlaca sorun yaratacağını düşünüyorsak, kademeli geçişte yol haritası sunmak için elimizden gelenin en iyisini yapmaya özen gösteriyoruz.
+
+### Bir minör sürüm yeni özellikler içermediği halde, neden bir yama sürümü değildir? {#minors-versus-patches}
+
+It's possible that a minor release will not include new features. [This is allowed by semver](https://semver.org/#spec-item-7), which states **"[a minor version] MAY be incremented if substantial new functionality or improvements are introduced within the private code. It MAY include patch level changes."**
+
+However, it does raise the question of why these releases aren't versioned as patches instead.
+
+The answer is that any change to React (or other software) carries some risk of breaking in unexpected ways. Imagine a scenario where a patch release that fixes one bug accidentally introduces a different bug. This would not only be disruptive to developers, but also harm their confidence in future patch releases. It's especially regrettable if the original fix is for a bug that is rarely encountered in practice.
+
+We have a pretty good track record for keeping React releases free of bugs, but patch releases have an even higher bar for reliability because most developers assume they can be adopted without adverse consequences.
+
+For these reasons, we reserve patch releases only for the most critical bugs and security vulnerabilities.
+
+If a release includes non-essential changes — such as internal refactors, changes to implementation details, performance improvements, or minor bugfixes — we will bump the minor version even when there are no new features.

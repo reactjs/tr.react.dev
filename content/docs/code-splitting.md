@@ -56,7 +56,8 @@ büyük üçüncü parti kütüphaneleri dahil ediyorsanız. Paketinizin boyutun
 geciktirecek kadar büyük olmaması için paketinize dahil ettiğiniz kodlara
 göz kulak olmanız gerekir.
 
-Büyük paket boyutlarından kurtulmak için problemin üzerine gitmek ve paketinizi "bölümlemeye" başlamak iyi bir yöntemdir. [Kod Bölümleme](https://webpack.js.org/guides/code-splitting/), Webpack ve Browserify ([factor-bundle](https://github.com/browserify/factor-bundle) ile) gibi paketleyicilerin desteklediği, işleyiş süresince dinamik olarak yüklenen birden çok paket yaratmaya yarayan özelliktir.
+Büyük paket boyutlarından kurtulmak için problemin üzerine gitmek ve paketinizi "bölümlemeye" başlamak iyi bir yöntemdir.
+Kod-Bölümleme, [Webpack](https://webpack.js.org/guides/code-splitting/), [Rollup](https://rollupjs.org/guide/en/#code-splitting) ve Browserify ([factor-bundle](https://github.com/browserify/factor-bundle) ile) gibi paketleyicilerin desteklediği, işleyiş süresince dinamik olarak yüklenen birden çok paket yaratmaya yarayan özelliktir.
 
 Uygulamanıza kod bölümlemesi yapmak, kullanıcının anlık olarak ihtiyaç duyduğu şeylerin
 "lazy yüklenmesine" yardımcı olarak uygulama performansını önemli ölçüde
