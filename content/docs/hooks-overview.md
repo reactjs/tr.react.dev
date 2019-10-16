@@ -1,24 +1,24 @@
 ---
 id: hooks-overview
-title: Hooks at a Glance
+title: İlk Bakışta Hook'lar
 permalink: docs/hooks-overview.html
 next: hooks-state.html
 prev: hooks-intro.html
 ---
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
+*Hook*'lar React 16.8'deki yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlar.
 
-Hooks are [backwards-compatible](/docs/hooks-intro.html#no-breaking-changes). This page provides an overview of Hooks for experienced React users. This is a fast-paced overview. If you get confused, look for a yellow box like this:
+Hook'larda [mevcut kodu bozan değişiklikler yok](/docs/hooks-intro.html#no-breaking-changes). Bu sayfa, tecrübeli React kullanıcılarına Hook'lar hakkında genel bir fikir sağlar. Bu hızlı bir gözden geçirme demektir. Eğer kafanız karışırsa bu tarz bir sarı kutu arayın:
 
->Detailed Explanation
+>Detaylı açıklama
 >
->Read the [Motivation](/docs/hooks-intro.html#motivation) to learn why we're introducing Hooks to React.
+>Neden Hook'ları çıkardığımızı anlamak için [Motivasyon](/docs/hooks-intro.html#motivation) bölümünü okuyun.
 
-**↑↑↑ Each section ends with a yellow box like this.** They link to detailed explanations.
+**↑↑↑ Her bölüm böyle bir sarı kutuyla biter** Bunlar detaylı açıklamarın nerede bulunacağını gösterir.
 
-## 📌 State Hook {#state-hook}
+## 📌 State Hook'u {#state-hook}
 
-This example renders a counter. When you click the button, it increments the value:
+Bu örnek bir sayaç render ediyor. Tuşa basıldığında değeri bir arttırıyor:
 
 ```js{1,4,5}
 import React, { useState } from 'react';
@@ -38,13 +38,13 @@ function Example() {
 }
 ```
 
-Here, `useState` is a *Hook* (we'll talk about what this means in a moment). We call it inside a function component to add some local state to it. React will preserve this state between re-renders. `useState` returns a pair: the *current* state value and a function that lets you update it. You can call this function from an event handler or somewhere else. It's similar to `this.setState` in a class, except it doesn't merge the old and new state together. (We'll show an example comparing `useState` to `this.state` in [Using the State Hook](/docs/hooks-state.html).)
+Burada, `useState` bir *Hook* (birazdan bunun ne demek olduğuyla alakalı konuşacağız). Bu fonksiyonu; fonksiyonel bir bileşene, yerel bir state eklemek amacıyla, bu bileşenin içerisinde çağırıyoruz. React bu state'i yenilenen render'lar arasında muhafaza edecek. `useState` bir çift döndürür: *anlık* state değeri ve bunu değiştirmenize yarayan bir fonksiyon. Bu fonksiyonu bir olay yöneticisinde veya başka bir yerde çağırabilirsiniz. Bu, class'lardaki `this.setState` fonksiyonuna benzer, fakat eski ve yeni state'i birleştirmez. (`useState` ve `this.state` farklarını [State Hook'unu Kullanmak](/docs/hooks-state.html) bölümünde göstereceğiz.)
 
-The only argument to `useState` is the initial state. In the example above, it is `0` because our counter starts from zero. Note that unlike `this.state`, the state here doesn't have to be an object -- although it can be if you want. The initial state argument is only used during the first render.
+`useState`'in aldığı tek argüman başlangıçtaki state'dir. Yukarıdaki örnekte bu argüman `0`, çünkü sayacımız sıfırdan başlıyor. `this.state`'ten farklı olarak state'in bir obje olması gerekmediğine dikkat edin -- tabi isterseniz obje de kullanabilirsiniz. Başlangıç state argümanı sadece ilk render'da kullanılır.
 
-#### Declaring multiple state variables {#declaring-multiple-state-variables}
+#### Birden fazla state değişkeni tanımlamak {#declaring-multiple-state-variables}
 
-You can use the State Hook more than once in a single component:
+State Hook'unu tek bir bileşende, birden fazla kullanabilirsiniz:
 
 ```js
 function ExampleWithManyStates() {
@@ -56,25 +56,25 @@ function ExampleWithManyStates() {
 }
 ```
 
-The [array destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) syntax lets us give different names to the state variables we declared by calling `useState`. These names aren't a part of the `useState` API. Instead, React assumes that if you call `useState` many times, you do it in the same order during every render. We'll come back to why this works and when this is useful later.
+[Dizi parçalama (array destructuring)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) syntax'i `useState` kullanarak tanımladığımız state değişkenlerine farklı isimler vermemize olanak tanır. Bu isimler `useState` API'nin bir parçası değildir. Bunun yerine; eğer `useState`'i çok fazla çağırırsanız, React her render'da aynı sırayla çağırdığınızı var sayar. Bunun niye çalıştğına ve nasıl kullanışlı olacağına ileride değineceğiz.
 
-#### But what is a Hook? {#but-what-is-a-hook}
+#### Peki bir hook nedir? {#but-what-is-a-hook}
 
-Hooks are functions that let you “hook into” React state and lifecycle features from function components. Hooks don't work inside classes -- they let you use React without classes. (We [don't recommend](/docs/hooks-intro.html#gradual-adoption-strategy) rewriting your existing components overnight but you can start using Hooks in the new ones if you'd like.)
+Hook'lar React state ve yaşam döngüsü özelliklerine fonksiyonel bileşenleri kullanarak “bağlamanıza” yarayan fonksiyonlardır. Hook'lar class'ların içerisinde çalışmazlar -- React'ı class'lar olmadan kullanmanıza yararlar. (Var olan bileşenlerinizi bir gecede tekrar yazmanızı [önermiyoruz](/docs/hooks-intro.html#gradual-adoption-strategy) fakat yeni bileşenleriniz için Hook'ları kullanmaya başlayabilirsiniz.)
 
-React provides a few built-in Hooks like `useState`. You can also create your own Hooks to reuse stateful behavior between different components. We'll look at the built-in Hooks first.
+React üzerinde `useState` gibi bir kaç Hook bulunmaktadır. Ayrıca siz de state'le alakalı davranışlarınızın, farklı bileşenler tarafından yeniden kullanılması için özel Hook'larınızı yazabilirsiniz. Öncelikle React üzerinde var olan Hook'ları inceleyeceğiz.
 
->Detailed Explanation
+>Detaylı açıklama
 >
->You can learn more about the State Hook on a dedicated page: [Using the State Hook](/docs/hooks-state.html).
+>State Hook'u hakkında daha fazla bilgiye bu sayfadan ulaşabilirsiniz: [State Hook'unu Kullanmak](/docs/hooks-state.html).
 
-## ⚡️ Effect Hook {#effect-hook}
+## ⚡️ Effect Hook'u {#effect-hook}
 
-You've likely performed data fetching, subscriptions, or manually changing the DOM from React components before. We call these operations "side effects" (or "effects" for short) because they can affect other components and can't be done during rendering.
+Yüksek ihtimalle daha öncesinde data çekme, dışarıya bağlanma ya da DOM'u elle değiştirme gibi işlemleri React bileşenleri kullanarak yapmışsınızdır. Bu tarz işlemleri "yan etkiler(side effects)" (veya kısaca "etkiler") olarak adlandırıyoruz çünkü başka bileşenleri etkileyebiliyorlar ve render sırasında yapılamayan işlemler oluyorlar.
 
-The Effect Hook, `useEffect`, adds the ability to perform side effects from a function component. It serves the same purpose as `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` in React classes, but unified into a single API. (We'll show examples comparing `useEffect` to these methods in [Using the Effect Hook](/docs/hooks-effect.html).)
+Effect Hook'u; `useEffect`, fonksiyonel bir bileşene yan etkileri kullanabilme yetkisini ekler. React class'larındaki `componentDidMount`, `componentDidUpdate`, ve `componentWillUnmount` ile aynı işleve sahiptir fakat tek bir API içerisinde birleştirilmiştir. (`useEffect` ve bu metodların farklarını örneklerle [Effect Hook'unu kullanmak](/docs/hooks-effect.html) bölümünde göstereceğiz.)
 
-For example, this component sets the document title after React updates the DOM:
+Örneğin, bu bileşen html dosyasının başlığını React DOM'u güncelledikten sonra değiştirir:
 
 ```js{1,6-10}
 import React, { useState, useEffect } from 'react';
@@ -99,9 +99,9 @@ function Example() {
 }
 ```
 
-When you call `useEffect`, you're telling React to run your "effect" function after flushing changes to the DOM. Effects are declared inside the component so they have access to its props and state. By default, React runs the effects after every render -- *including* the first render. (We'll talk more about how this compares to class lifecycles in [Using the Effect Hook](/docs/hooks-effect.html).)
+`useEffect`'i çağırdığınız zaman, React değişiklikleri DOM'a ilettikten sonra "effect" fonksiyonunu çağırmasını söylüyorsunuz. Effect'ler bileşenin içerisinde tanımlandığından state ve prop'lara erişebiliyor. Varsayılan şekliyle React effect'leri her render sonrasında çalıştırır -- ilk render da bunların *içerisinde*. (Class yaşam döngüleriyle farkını detaylı olarak [Effect Hook'unu kullanmak](/docs/hooks-effect.html) bölümünde işleyeceğiz.)
 
-Effects may also optionally specify how to "clean up" after them by returning a function. For example, this component uses an effect to subscribe to a friend's online status, and cleans up by unsubscribing from it:
+İsteğe bağlı olarak Efect'lerin nasıl kendi "arkalarını toplayacakları", bir fonksiyon döndürülerek belirtilebilir. Örneğin, bu bileşen bir effect kullanarak, bir arkadaşın online bilgisine bağlanıyor ve kendi arkasını bu bağlantıyı kapatarak topluyor:
 
 ```js{10-16}
 import React, { useState, useEffect } from 'react';
@@ -128,9 +128,9 @@ function FriendStatus(props) {
 }
 ```
 
-In this example, React would unsubscribe from our `ChatAPI` when the component unmounts, as well as before re-running the effect due to a subsequent render. (If you want, there's a way to [tell React to skip re-subscribing](/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects) if the `props.friend.id` we passed to `ChatAPI` didn’t change.)
+Bu örnekte, bileşen hem unmount anında hem de sonraki render yüzünden effect’i tekrar çalıştırmadan önce, React `ChatAPI`’ımızla bağlantıyı kesiyor. (eğer `ChatAPI`'a verilen `props.firend.id` değişmediyse, React’a tekrar [bağlantı kurmamasını söyleyebilirsiniz.](/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects))
 
-Just like with `useState`, you can use more than a single effect in a component:
+`useState`’de olduğu gibi tek bir bileşende birden fazla effect kullanabilirsiniz:
 
 ```js{3,8}
 function FriendStatusWithCounter(props) {
@@ -153,32 +153,32 @@ function FriendStatusWithCounter(props) {
   // ...
 ```
 
-Hooks let you organize side effects in a component by what pieces are related (such as adding and removing a subscription), rather than forcing a split based on lifecycle methods.
+Hook’lar bir bileşen içerisindeki yan etkileri yaşam döngüsü metodlarına ayırmaktansa, hangi parçaların etkilendğine bağlı olarak bu yan etkileri organize etmenize yarar.
 
->Detailed Explanation
+>Detaylı Açıklama
 >
->You can learn more about `useEffect` on a dedicated page: [Using the Effect Hook](/docs/hooks-effect.html).
+>`useEffect` hakkında daha fazla bilgiye bu sayfadan ulaşabilirsiniz: [Effect Hook'unu kullanmak](/docs/hooks-effect.html).
 
-## ✌️ Rules of Hooks {#rules-of-hooks}
+## ✌️ Hook'ların Kuralları {#rules-of-hooks}
 
-Hooks are JavaScript functions, but they impose two additional rules:
+Hook'lar JavaScript fonksiyonlarıdır ama ek olarak iki kural koymaktadırlar:
 
-* Only call Hooks **at the top level**. Don’t call Hooks inside loops, conditions, or nested functions.
-* Only call Hooks **from React function components**. Don’t call Hooks from regular JavaScript functions. (There is just one other valid place to call Hooks -- your own custom Hooks. We'll learn about them in a moment.)
+* Hook'ları sadece **en üst seviyede** çağırın. Hook'ları döngülerin, koşulların veya iç içe fonksiyonların içerisinde çağırmayın.
+* Hook'ları sadece **fonksiyonel React bileşenlerinde** çağırın. Normal JavaScript fonksiyonları içerisinde Hook'ları çağırmayın. (Hook'ları başka çağırabileceğiniz tek bir uygun yer var -- kendi yarattığınız Hook'lar. Birazdan bunlar hakkında daha fazla şey öğreneceğiz.)
 
-We provide a [linter plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) to enforce these rules automatically. We understand these rules might seem limiting or confusing at first, but they are essential to making Hooks work well.
+Bu kuralları otomatik bir şekilde yürütmek için bir [linter eklentisi](https://www.npmjs.com/package/eslint-plugin-react-hooks) sağlıyoruz. Bu kuralların ilk bakışta sınırlayıcı ve kafa karıştırıcı görünebileceğini anlıyoruz fakat Hook'ların düzgün çalışması için hepsi çok önemlidir.
 
->Detailed Explanation
+>Detaylı Açıklama
 >
->You can learn more about these rules on a dedicated page: [Rules of Hooks](/docs/hooks-rules.html).
+>Bu kurallar hakkında daha fazla bilgiye bu sayfadan ulaşabilirsiniz: [Hook Kuralları](/docs/hooks-rules.html).
 
-## 💡 Building Your Own Hooks {#building-your-own-hooks}
+## 💡 Özel Hook'larınızı Yapmak {#building-your-own-hooks}
 
-Sometimes, we want to reuse some stateful logic between components. Traditionally, there were two popular solutions to this problem: [higher-order components](/docs/higher-order-components.html) and [render props](/docs/render-props.html). Custom Hooks let you do this, but without adding more components to your tree.
+Bazen state'le alakalı bazı davranışların bileşenler arasında yeniden kullanılabilir olmasını isteriz. Geleneksel olarak bunun için iki tane popüler çözüm vardır: [üst-seviye bileşenler](/docs/higher-order-components.html) ve [render prop'ları](/docs/render-props.html). Özel Hook'larınız da bunu yapmanıza izin verir ve bunu yaparken bileşen ağacınıza daha fazla bileşen eklemek zorunda kalmazsınız.
 
-Earlier on this page, we introduced a `FriendStatus` component that calls the `useState` and `useEffect` Hooks to subscribe to a friend's online status. Let's say we also want to reuse this subscription logic in another component.
+Daha öncesinde `useState` ve `useEffect` kullanarak bir arkadaşın online durumuna bağlanan `FriendStatus` adlı bir bileşen tanıtmıştık. Bu bağlantı davranışını başka bir bileşende tekrar kullanmak istediğimizi varsayalım.
 
-First, we'll extract this logic into a custom Hook called `useFriendStatus`:
+Önce, bu davranışı kendi yarattığımız `useFriendStatus` adlı bir Hook'a aktaracağız:
 
 ```js{3}
 import React, { useState, useEffect } from 'react';
@@ -201,9 +201,9 @@ function useFriendStatus(friendID) {
 }
 ```
 
-It takes `friendID` as an argument, and returns whether our friend is online.
+Argüman olarak `friendID` alıyor, ve arkadaşımızın online olup olmadığını döndürüyor.
 
-Now we can use it from both components:
+Artık iki bileşenden de bu davranışı kullanabiliriz:
 
 
 ```js{2}
@@ -229,19 +229,19 @@ function FriendListItem(props) {
 }
 ```
 
-The state of these components is completely independent. Hooks are a way to reuse *stateful logic*, not state itself. In fact, each *call* to a Hook has a completely isolated state -- so you can even use the same custom Hook twice in one component.
+Bu bileşenlerin state'leri birbirinden tamamen bağımsızdır. Hooklar *state'le alakalı davranışların* tekrar kullanılmasının bir yoludur, state'in yeniden kullanılmasıyla alakalı değildir. Hatta bir Hook her çağırıldığında tamamen ayrı bir state'e sahiptir -- bu sayede özel Hook'unuzu bir bileşen içerisinde iki kere çağırabilirsiniz.
 
-Custom Hooks are more of a convention than a feature. If a function's name starts with "`use`" and it calls other Hooks, we say it is a custom Hook. The `useSomething` naming convention is how our linter plugin is able to find bugs in the code using Hooks.
+Özel Hook'larınız bir özellikten daha çok bir kural gibidir. Eğer bir fonksiyonun adı "`use`" ile başlıyor ve başka Hook'ları çağırıyorsa, bu fonksiyon bir özel Hook'tur diyoruz. `useSomething` adlandırması linter eklentimizin, Hook kullanılarak yazılan kodda bugları bulmasını sağlıyor.
 
-You can write custom Hooks that cover a wide range of use cases like form handling, animation, declarative subscriptions, timers, and probably many more we haven't considered. We are excited to see what custom Hooks the React community will come up with.
+Özel Hook'larınızı bizim bahsetmediğimiz bir çok durum için kullanabilirsiniz, örneğin: form yönetimi, animasyon, tanımsal bağlantılar, zamanlayıcılar ve aklımıza gelmeyen bir çok farklı durum. React topluluğunun ne tür özel Hook'lar üreteceğini sabırsızlıkla bekliyoruz.
 
->Detailed Explanation
+>Detaylı Açıklama
 >
->You can learn more about custom Hooks on a dedicated page: [Building Your Own Hooks](/docs/hooks-custom.html).
+>Özel Hook'lar hakkında daha fazla bilgiye bu sayfadan ulaşabilirsiniz:  [Kendi Hook'larınızı Oluşturmak](/docs/hooks-custom.html).
 
-## 🔌 Other Hooks {#other-hooks}
+## 🔌 Diğer Hook'lar {#other-hooks}
 
-There are a few less commonly used built-in Hooks that you might find useful. For example, [`useContext`](/docs/hooks-reference.html#usecontext) lets you subscribe to React context without introducing nesting:
+React içerisinde bulunan ve daha az kullanılan ama yararlı olabilecek bir kaç Hook daha bulunuyor. Örneğin, [`useContext`](/docs/hooks-reference.html#usecontext) iç içe geçmiş bileşenler kullanmadan, React context'e bağlanmanızı sağlar:
 
 ```js{2,3}
 function Example() {
@@ -251,7 +251,7 @@ function Example() {
 }
 ```
 
-And [`useReducer`](/docs/hooks-reference.html#usereducer) lets you manage local state of complex components with a reducer:
+Ve [`useReducer`](/docs/hooks-reference.html#usereducer) karmaşık bileşenlerinizin yerel state'ini bir reducer olmadan yönetmenizi sağlar:
 
 ```js{2}
 function Todos() {
@@ -259,14 +259,14 @@ function Todos() {
   // ...
 ```
 
->Detailed Explanation
+>Detaylı Açıklama
 >
->You can learn more about all the built-in Hooks on a dedicated page: [Hooks API Reference](/docs/hooks-reference.html).
+>React içerisindeki tüm Hook'lar hakkında daha fazla bilgiye bu sayfadan ulaşabilirsiniz: [Hook'ların API Kaynağı](/docs/hooks-reference.html).
 
-## Next Steps {#next-steps}
+## Sıradaki Adımlar {#next-steps}
 
-Phew, that was fast! If some things didn't quite make sense or you'd like to learn more in detail, you can read the next pages, starting with the [State Hook](/docs/hooks-state.html) documentation.
+Oof, bu hızlıydı! Eğer bazı şeyler kafanıza tam oturmadıysa veya daha fazla detayla öğrenmek isterseniz [State Hook'u](/docs/hooks-state.html) ile başlayarak, sıradaki sayfaları okuyabilirsiniz.
 
-You can also check out the [Hooks API reference](/docs/hooks-reference.html) and the [Hooks FAQ](/docs/hooks-faq.html).
+Ayrıca [Hook'ların API Kaynağı](/docs/hooks-reference.html) ve [Hook'lar için SSS](/docs/hooks-faq.html) bölümlerine bakabilirsiniz.
 
-Finally, don't miss the [introduction page](/docs/hooks-intro.html) which explains *why* we're adding Hooks and how we'll start using them side by side with classes -- without rewriting our apps.
+Son olarak, *neden* Hook'ları eklediğimizi ve uygulamalarımızı baştan yazmadan class'larla nasıl birlikte kullanacağımızı açıkladığımız [Hook'lara Giriş](/docs/hooks-intro.html) bölümünü okumayı unutmayın.
