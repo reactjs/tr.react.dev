@@ -21,7 +21,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 >
 > Bileşenlerinizi son kullanıcı kullanır gibi kullanan testler yazmanız ve etkinleştirmeniz için tasarlanmış [React Testing Library](https://testing-library.com/react)'yi kullanmanızı öneririz.
 >
-> Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizin çıktısını test etmenizi, üzerinde gezinmenizi ve değiştirmenizi kolaylaştırmaktadır.
+> Alternatif olarak Airbnb [Enzyme](http://airbnb.io/enzyme/) adında bir test aracı yayınladı. Bu araç, React bileşenlerinizin çıktısını test etmenizi, çıktının üzerinde gezinmenizi ve çıktıyı değiştirmenizi kolaylaştırmaktadır.
 
  - [`act()`](#act)
  - [`mockComponent()`](#mockcomponent)
@@ -44,7 +44,7 @@ var ReactTestUtils = require('react-dom/test-utils'); // ES5 npm ile
 
 ### `act()` {#act}
 
-Bileşen testlerini hazırlamak için kodunuzu paket haline getirin ve `act()`'i kullanarak bileşeniniz içerisinde güncelleme yapabilirsiniz. `act()`, React'in tarayıcıda çalışma biçimine çok yakın bir şekilde çalışmasını sağlamaktadır.
+Bileşen testlerini hazırlamak için kodunuzu paket haline getirip `act()`'i kullanarak bileşeniniz içerisinde güncelleme yapabilirsiniz. `act()`, React'in tarayıcıda çalışma biçimine çok yakın bir şekilde çalışmasını sağlamaktadır.
 
 >Not
 >
@@ -174,7 +174,7 @@ Eğer `element`, React'in `componentClass` tipinde olan bir React elemanı ise `
 isDOMComponent(instance)
 ```
 
-Eğer `instance`, `div` veya `span` gibi bir DOM bileşeni ise `true` döner
+Eğer `instance`, `div` veya `span` gibi bir DOM bileşeni ise `true` döner.
 
 * * *
 
@@ -210,7 +210,7 @@ findAllInRenderedTree(
 )
 ```
 
-`tree` içindeki tüm bileşenleri dolaşır ve `test(component)`'ın `true` olduğu tüm bileşenleri toplar. Tek başına pek kullanışlı değil, ancak diğer test araçları için basit olarak kullanılmaktadır.
+`tree` içindeki tüm bileşenleri dolaşır ve `test(component)`'ın `true` olduğu tüm bileşenleri toplar. Tek başına pek kullanışlı değildir, ancak diğer test araçları için basit olarak kullanılmaktadır.
 
 * * *
 
@@ -307,7 +307,7 @@ ReactDOM.render(element, domContainer);
 
 > Not:
 >
-> `React`'a eklemeden **önce** global olarak hazır olan `window`, `window.document` ve `window.document.createElement`'e ihtiyacınız olacaktır. Aksi takdirde React DOM'a erişemediğini düşünecektir ve böylece `setState` gibi metodlar çalışmayacaktır.
+> `React`'a eklemeden **önce** global olarak hazır olan `window`, `window.document` ve `window.document.createElement`'e ihtiyacınız olacaktır. Aksi takdirde React DOM'a erişemediğini düşünecektir ve bu sebeple `setState` gibi metodlar çalışmayacaktır.
 
 * * *
 
@@ -346,6 +346,6 @@ ReactTestUtils.Simulate.keyDown(node, {key: "Enter", keyCode: 13, which: 13});
 
 > Not
 >
-> React'in sağlayamadığı ama bileşeninizde kullandığınız herhangi bir olay özelliğini (örneğin, keyCode, which, vb...) sizin sağlamanız gerekmektedir.
+> React'in sağlayamadığı ama bileşeninizde kullandığınız herhangi bir olay özelliğini (örneğin: keyCode, which, vb...) sizin sağlamanız gerekmektedir.
 
 * * *
