@@ -46,7 +46,11 @@ Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasın�
 
 ### Yeni bir React Uygulaması Oluşturun {#create-a-new-react-app}
 
+<<<<<<< HEAD
 Bir React projesi başlatırken, [script etiketli basit bir HTML sayfası](/docs/add-react-to-a-website.html) hala en iyi seçenek olabilir. Kurulumu sadece bir dakika sürer!
+=======
+When starting a React project, a [simple HTML page with script tags](/docs/add-react-to-a-website.html) might still be the best option. It only takes a minute to set up!
+>>>>>>> d2ade76cce133af47ab198188fa2de03fa51834b
 
 Uygulamanız büyüdükçe, daha entegre bir kurulum düşünebilirsiniz. Daha büyük uygulamalar için önerdiğimiz [birkaç JavaScript araç-zinciri](/docs/create-a-new-react-app.html) vardır. Her biri çok az veya sıfır yapılandırma ile çalışabilir ve zengin React ekosisteminden tam olarak yararlanmanızı sağlar.
 
@@ -117,7 +121,11 @@ Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek iste
 
 Twitter'da [@reactjs hesabını](https://twitter.com/reactjs) da takip edebilirsiniz, ama sadece blogu okursanız önemli hiç bir şeyi kaçırmazsınız.
 
+<<<<<<< HEAD
 Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react) sayfasında bulabilirsiniz.
+=======
+Not every React release deserves its own blog post, but you can find a detailed changelog for every release in the [`CHANGELOG.md` file in the React repository](https://github.com/facebook/react/blob/master/CHANGELOG.md), as well as on the [Releases](https://github.com/facebook/react/releases) page.
+>>>>>>> d2ade76cce133af47ab198188fa2de03fa51834b
 
 ## Versiyon Anlatımı {#versioned-documentation}
 

@@ -4,7 +4,11 @@ title: Kontrolsüz Bileşenler
 permalink: docs/uncontrolled-components.html
 ---
 
+<<<<<<< HEAD
 Çoğu durumda, formları uygulamak için [kontrollü bileşenler](/docs/forms.html) kullanmanızı öneririz. Kontrollü bir bileşende, form verileri bir React bileşeni tarafından ele alınır. Alternatifi ise, form verilerinin DOM'ın kendisi tarafından işlendiği kontrolsüz bileşenlerdir.
+=======
+In most cases, we recommend using [controlled components](/docs/forms.html#controlled-components) to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
+>>>>>>> d2ade76cce133af47ab198188fa2de03fa51834b
 
 Bir kontrolsüz bileşen yazmak için, her state güncellemesine bir olay yöneticisi yazmak yerine, form verilerini DOM üzerinden getirmek için [ref kullanabilirsiniz](/docs/refs-and-the-dom.html).
 
