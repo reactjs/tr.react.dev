@@ -162,10 +162,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'React Docs',
-        short_name: 'React', // eg. React [%LANG_CODE%]
+        name: 'React Dokümantasyonu',
+        short_name: 'React [TR]', // eg. React [%LANG_CODE%]
         // Translators: please change this and two above options (see https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/#feature-configuration---optional)
-        lang: 'en',
+        lang: 'tr',
         start_url: '/',
         background_color: '#20232a',
         theme_color: '#20232a',
