@@ -18,7 +18,13 @@ Ana sürümler de yeni özellikler içerebilir, ve herhangi bir yeni sürüm hat
 
 Minör sürümler en yaygın sürüm türüdür.
 
+<<<<<<< HEAD
 ### Uyumsuz Değişiklikler {#breaking-changes}
+=======
+> This versioning policy does not apply to prerelease builds in the Next or Experimental channels. [Learn more about prereleases.](/docs/release-channels.html)
+
+### Breaking Changes {#breaking-changes}
+>>>>>>> 081bb31226919062938ef924472ba1b4170facfc
 
 Uyumsuz değişiklikler hepimiz için zahmetli olduğu için ana sürümlerin sayısını olabildiğince az tutmaya çalışıyoruz – örneğin, React 15, Nisan 2016'da, React 16, Eylül 2017'de yayınlanmıştır; React 17'nin 2019'dan önce yayınlanması beklenmemektedir.
 
