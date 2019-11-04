@@ -139,7 +139,7 @@ Anahtarlar yalnızca çevreleyen dizinin bağlamında anlamlıdır.
 
 Örneğin, bir `ListItem` bileşenini [çıkarırsanız](/docs/components-and-props.html#extracting-components), anahtarı `ListItem`'in içindeki `<li>` öğesinden ziyade, dizinin içindeki `<ListItem />` öğelerinde tutmalısınız.
 
-**Örenk: Yanlış Anahtar Kullanımı**
+**Örnek: Yanlış Anahtar Kullanımı**
 
 ```javascript{4,5,14,15}
 function ListItem(props) {
