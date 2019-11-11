@@ -18,6 +18,7 @@
       title: Videos
     - id: external-resources
       title: External Resources
+<<<<<<< HEAD
 - title: Araçlar
   items:
     - id: debugging-tools
@@ -38,3 +39,5 @@
       title: UI Components
     - id: misc
       title: Miscellaneous
+=======
+>>>>>>> bbea52211971834d041e76871df8981066c42a3b
