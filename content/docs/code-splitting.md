@@ -85,11 +85,6 @@ import("./math").then(math => {
 });
 ```
 
-> Not:
->
-> Dinamik `import()` sözdizimi ECMAScript (JavaScript) [önerisi](https://github.com/tc39/proposal-dynamic-import)
-> henüz dil standartlarının bir parçası değildir. Yakın gelecekte kabul edilmesi beklenmektedir.
-
 Webpack bu sözdizimine denk geldiğinde, uygulamanızda otomatik olarak kod bölümlemeye başlar. Eğer Create React App kullanıyorsanız,
 bu ayar sizin için halihazırda ayarlanmıştır ve [kullanmaya](https://facebook.github.io/create-react-app/docs/code-splitting) hemen
 başlayabilirsiniz. Aynı zamanda [Next.js](https://github.com/zeit/next.js/#dynamic-import)'de de desteklenmektedir.
