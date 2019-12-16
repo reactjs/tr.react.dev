@@ -75,9 +75,13 @@ Aşağıdaki araçlar daha fazla esneklik ve seçenek sunmaktadır. Bunları dah
 
 - **[Neutrino](https://neutrinojs.org/)**; [webpack](https://webpack.js.org/)'in gücünü ön ayarların sadeliği ile birleştirir, [React uygulamaları](https://neutrinojs.org/packages/react/) ve [React bileşenleri](https://neutrinojs.org/packages/react-components/) için bir ön ayar da içerir.
 
+<<<<<<< HEAD
 - **[nwb](https://github.com/insin/nwb)**; Bilhassa [npm için React bileşenleri yayımlamak](https://github.com/insin/nwb/blob/master/docs/guides/ReactComponents.md#developing-react-components-and-libraries-with-nwb) için mükemmeldir. React uygulamaları oluşturmak için de [kullanılabilir](https://github.com/insin/nwb/blob/master/docs/guides/ReactApps.md#developing-react-apps-with-nwb)
 
 - **[Parcel](https://parceljs.org/)**; [React ile çalışan](https://parceljs.org/recipes.html#react), hızlı, ayarlama gerektirmeyen bir web uygulama paketleyicisidir.
+=======
+- **[Parcel](https://parceljs.org/)** is a fast, zero configuration web application bundler that [works with React](https://parceljs.org/recipes.html#react).
+>>>>>>> 401b97e9591ac573eaf35c7cf57e5f145276d140
 
 - **[Razzle](https://github.com/jaredpalmer/razzle)**; herhangi bir yapılandırma gerektirmeyen ancak Next.js'e göre daha fazla esneklik sunan, bir sunucu tarafinda işleme çatısıdır.
 
