@@ -100,8 +100,8 @@ fakat dönüştürmediğinden emin olmanız gerekmekte. Bunun için [babel-plugi
 > Not:
 >
 > `React.lazy` ve Suspense henüz server-side rendering için kullanılabilir değildir. Eğer server taraflı görüntülenen uygulamalar için
-> kod bölümleme yapmak isterseniz, [Loadable Components](https://github.com/smooth-code/loadable-components)'ı tavsiye ederiz. Çok iyi bir
-> [server-side rendering için paket bölümleme rehberi](https://www.smooth-code.com/open-source/loadable-components/docs/server-side-rendering/) var.
+> kod bölümleme yapmak isterseniz, [Loadable Components](https://github.com/gregberge/loadable-components)'ı tavsiye ederiz. Çok iyi bir
+> [server-side rendering için paket bölümleme rehberi](https://loadable-components.com/docs/server-side-rendering/) var.
 
 `React.lazy` fonksiyonu, dinamik import'u normal bir bileşen gibi render etmeye yarar.
 
