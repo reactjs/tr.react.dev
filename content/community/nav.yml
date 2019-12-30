@@ -2,6 +2,8 @@
   items:
     - id: support
       title: Destek
+    - id: team
+      title: React Ekibi
     - id: courses
       title: Dersler
     - id: examples

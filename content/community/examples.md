@@ -9,6 +9,7 @@ permalink: community/examples.html
 React topluluğu tarafından yaratılmış pek çok proje mevcut. Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
 
 
+* **[Zeldog](https://yannsainty.github.io/Zeldog/)** Bir köpeğin daha fazla pizza yemek için ördeklerle savaştığı, Zelda benzeri bir oyun.
 * **[Hesap Makinesi](https://github.com/ahfarmer/calculator)** iOS hesap makinesinin  React ile uygulanmış hali
 * **[Emoji Arama](https://github.com/ahfarmer/emoji-search)** Emoji aramak için basit bir React uygulaması
 * **[Github Savaşı Uygulaması](https://tm.dev/react-course-project/)** İki Github kullanıcısını savaştırın ve her dilde en popüler Github projelerini görün. 
