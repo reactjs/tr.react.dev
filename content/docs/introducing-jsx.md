@@ -181,8 +181,5 @@ Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini daha det
 
 >**İpucu:**
 >
-<<<<<<< HEAD
->ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/editors) kullanmanızı öneririz. Bu web sitesi de, JSX kodları için Babel dil tanımlamaları ile uyumlu olan [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) renk şemasını kullanmaktadır.
-=======
->We recommend using the ["Babel" language definition](https://babeljs.io/docs/editors) for your editor of choice so that both ES6 and JSX code is properly highlighted. This website uses the [Oceanic Next](https://github.com/voronianski/oceanic-next-color-scheme) color scheme which is compatible with it.
->>>>>>> 5b6ad388804aaa5cf5504ccd04329f52960e17ae
+>ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/editors) kullanmanızı öneririz. Bu web sitesi de, JSX kodları için Babel dil tanımlamaları ile uyumlu olan [Oceanic Next](https://github.com/voronianski/oceanic-next-color-scheme) renk şemasını kullanmaktadır.
+
