@@ -37,12 +37,8 @@ React, Internet Explorer 9 ve üzeri de dahil olmak üzere, tüm popüler taray�
 ReactDOM.render(element, container[, callback])
 ```
 
-<<<<<<< HEAD
-Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir [referans](/docs/more-about-refs.html) dönüyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#functional-and-class-components) icin `null` dönüyoruz).
+Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir [referans](/docs/more-about-refs.html) dönüyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#function-and-class-components) icin `null` dönüyoruz).
 
-=======
-Render a React element into the DOM in the supplied `container` and return a [reference](/docs/more-about-refs.html) to the component (or returns `null` for [stateless components](/docs/components-and-props.html#function-and-class-components)).
->>>>>>> 1dd4e325f070ce198aed69fd9cc5467563679e54
 
 Eğer React elemanı `container` a daha önceden render edildiyse, bu; güncelleme olarak gerçekleşir ve en güncel React elemanını yansıtmak için sadece DOM'u değiştirir.
 
