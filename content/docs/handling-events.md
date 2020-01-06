@@ -56,7 +56,11 @@ function ActionLink() {
 
 Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şartnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
 
+<<<<<<< HEAD
 React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir dinleyici (`listener`) atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine `render` fonksiyonunda, ilgili element ilk kez render olduğunda ona bir dinleyici (`listener`) atamanız doğru olacaktır.
+=======
+When using React, you generally don't need to call `addEventListener` to add listeners to a DOM element after it is created. Instead, just provide a listener when the element is initially rendered.
+>>>>>>> 071f5b0e1622465fb6fe5cf6c1cbd2aaef7c5ef4
 
 [ES6 sınıfı](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanarak bir bileşen oluşturulduğunda, ilgili olayın tanımlanması için en yaygın yaklaşım, ilgili metodun o sınıf içerisinde  oluşturulmasıdır. Örneğin aşağıdaki `Toggle` bileşeni, "ON" ve "OFF" durumlarının gerçekleştirilmesi için bir butonu render etmektedir:
 
@@ -142,7 +146,11 @@ Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her rende
 
 ## Olay Yöneticilerine Parametre Gönderimi {#passing-arguments-to-event-handlers}
 
+<<<<<<< HEAD
 Bir döngü içerisinde, olay fonksiyonuna fazladan parametre göndermek isteyebilirsiniz. Örneğin, bir satır `id`'si için, aşağıdaki kodlardan her ikisi de işinizi görecektir: 
+=======
+Inside a loop, it is common to want to pass an extra parameter to an event handler. For example, if `id` is the row ID, either of the following would work:
+>>>>>>> 071f5b0e1622465fb6fe5cf6c1cbd2aaef7c5ef4
 
 ```js
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>

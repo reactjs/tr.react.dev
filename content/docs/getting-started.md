@@ -48,7 +48,11 @@ Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasın�
 
 Bir React projesi başlatırken, [script etiketleri olan basit bir HTML sayfası](/docs/add-react-to-a-website.html) hala en iyi seçenek olabilir. Kurulumu sadece bir dakika sürer!
 
+<<<<<<< HEAD
 Uygulamanız büyüdükçe, daha entegre bir kurulum düşünebilirsiniz. Daha büyük uygulamalar için önerdiğimiz [birkaç JavaScript araç-zinciri](/docs/create-a-new-react-app.html) vardır. Her biri çok az veya sıfır yapılandırma ile çalışabilir ve zengin React ekosisteminden tam olarak yararlanmanızı sağlar.
+=======
+As your application grows, you might want to consider a more integrated setup. There are several JavaScript toolchains we recommend for larger applications. Each of them can work with little to no configuration and lets you take full advantage of the rich React ecosystem. [Learn how.](/docs/create-a-new-react-app.html)
+>>>>>>> 071f5b0e1622465fb6fe5cf6c1cbd2aaef7c5ef4
 
 ## React Öğrenin {#learn-react}
 
