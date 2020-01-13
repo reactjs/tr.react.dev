@@ -107,7 +107,11 @@ function Page(props) {
 
 Bu model, bir alt elemanı üst elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
 
+<<<<<<< HEAD
 Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı iç içe geçmiş seviyelerinde erişilebilir olması gerekir. Context, bu tur verileri ve güncellemeleri ağaçtaki tüm bileşenlere "yaymanızı" sağlar. Context kullanımının diğer alternatiflerden daha basit olabileceği ortak örnekler arasında konum ayarlarının yönetimi, tema veya veri önbelleği bulunur.
+=======
+However, sometimes the same data needs to be accessible by many components in the tree, and at different nesting levels. Context lets you "broadcast" such data, and changes to it, to all components below. Common examples where using context might be simpler than the alternatives include managing the current locale, theme, or a data cache.
+>>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
 
 ## API {#api}
 
@@ -131,6 +135,7 @@ Her Context nesnesi, tüketici bileşenlerin context güncellemelerine abone olm
 
 Bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
+<<<<<<< HEAD
 Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
 
 [`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) gibi aynı algoritma kullanılarak yeni ve eski değerler karşılaştırıp değişiklikler belirlenir.
@@ -138,6 +143,15 @@ Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her
 > Not
 >
 > Değişiklikleri belirlerken nesneleri `value` olarak geçmek bazı sorunlara neden olabilir: bakınız [Uyarılar](#caveats).
+=======
+All consumers that are descendants of a Provider will re-render whenever the Provider's `value` prop changes. The propagation from Provider to its descendant consumers (including [`.contextType`](#classcontexttype) and [`useContext`](/docs/hooks-reference.html#usecontext)) is not subject to the `shouldComponentUpdate` method, so the consumer is updated even when an ancestor component skips an update.
+
+Changes are determined by comparing the new and old values using the same algorithm as [`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description).
+
+> Note
+>
+> The way changes are determined can cause some issues when passing objects as `value`: see [Caveats](#caveats).
+>>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
 
 ### `Class.contextType` {#classcontexttype}
 
@@ -194,9 +208,15 @@ Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bi
 
 [Alt eleman olarak fonksiyon](/docs/render-props.html#using-props-other-than-render) verilmesine ihtiyaç duyar. Fonksiyon geçerli context değerini alır ve bir React düğümü döndürür. Fonksiyona iletilen `value` argümanı, yukarıda bu context için ağaçta en yakın Provider'ın `value` prop'una eşit olacaktır. Yukarıdaki bu context için Provider yoksa, `value` argümanı `createContext()` öğesine iletilmiş `defaultValue` değerine eşit olur.
 
+<<<<<<< HEAD
 > Not
 >
 > Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
+=======
+> Note
+>
+> For more information about the 'function as a child' pattern, see [render props](/docs/render-props.html).
+>>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
 
 ### `Context.displayName` {#contextdisplayname}
 
@@ -242,7 +262,11 @@ Context'i bileşen ağacında derinlere yerleştirilmiş bir bileşenden genelli
 
 ### Çoklu Context’leri Kullanma {#consuming-multiple-contexts}
 
+<<<<<<< HEAD
 Context'in yeniden render edilmesini hızlı tutmak için React her context tüketiciyi ağaçta ayrı bir düğüm haline getirmelidir.
+=======
+To keep context re-rendering fast, React needs to make each context consumer a separate node in the tree.
+>>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
 
 `embed:context/multiple-contexts.js`
 
@@ -261,6 +285,13 @@ Bunu aşmak için, value değerini üst elemanın state'ine taşıyın:
 
 ## Eski Sürüm API {#legacy-api}
 
+<<<<<<< HEAD
 > Not
 > 
 > React daha önce deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak onu kullanan uygulamalar yeni sürüme geçmelidir. Eski sürüm API'ler önümüzdeki ana React versiyonlarından kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyun.
+=======
+> Note
+>
+> React previously shipped with an experimental context API. The old API will be supported in all 16.x releases, but applications using it should migrate to the new version. The legacy API will be removed in a future major React version. Read the [legacy context docs here](/docs/legacy-context.html).
+
+>>>>>>> 99a18287c163e328f87709cb224742ccac3e113a

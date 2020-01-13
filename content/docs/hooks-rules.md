@@ -46,7 +46,11 @@ npm install eslint-plugin-react-hooks --save-dev
 }
 ```
 
+<<<<<<< HEAD
 İleride, bu eklentiyi varsayılan olarak Create React App ve benzer araç takımlarına eklemeyi düşünüyoruz.
+=======
+This plugin is included by default in [Create React App](/docs/create-a-new-react-app.html#create-react-app).
+>>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
 
 **[Kendi Hook'larınızı](/docs/hooks-custom.html) nasıl yazacağınızı açıklayan bir sonraki sayfaya şimdi atlayabilirsiniz.** Bu sayfada, bu kuralların ardındaki mantığı açıklayarak devam edeceğiz.
 
