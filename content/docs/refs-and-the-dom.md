@@ -141,11 +141,7 @@ class CustomTextInput extends React.Component {
 
 #### Refler ve Fonksiyon Bileşenleri {#refs-and-function-components}
 
-<<<<<<< HEAD
-**`ref` özelliğini fonksiyon bileşeni içerisinde kullanmazsınız** çünkü fonksiyon bileşenlerinin nesneleri olmaz.
-=======
-By default, **you may not use the `ref` attribute on function components** because they don't have instances:
->>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
+** Varsayılan olarak, `ref` özelliğini fonksiyon bileşenleri içerisinde kullanmazsınız**. Çünkü fonksiyon bileşenlerinin nesneleri olmaz.
 
 ```javascript{1,8,13}
 function MyFunctionComponent() {
@@ -166,11 +162,7 @@ class Parent extends React.Component {
 }
 ```
 
-<<<<<<< HEAD
-Eğer bir ref'e ihtiyacınız varsa, bileşeni sınıfa dönüştürmelisiniz. Tıpkı yaşam döngüsü metodlarında veya state ihtiyacınız olduğunda yaptığınız gibi.
-=======
-If you want to allow people to take a `ref` to your function component, you can use [`forwardRef`](https://reactjs.org/docs/forwarding-refs.html) (possibly in conjunction with [`useImperativeHandle`](/docs/hooks-reference.html#useimperativehandle)), or you can convert the component to a class.
->>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
+Insanların fonksiyon bileşeniniz için `ref` kullanmalarına izin vermek isterseniz, [`forwardRef`](https://reactjs.org/docs/forwarding-refs.html) (muhtemelen [`useImperativeHandle`](/docs/hooks-reference.html#useimperativehandle) ile birlikte) kullanabilir, ya da bileşeniniz bir sınıfa çevirebilirsiniz.
 
 Bir DOM elemanına veya sınıf bileşenine işaret ettiğiniz sürece **fonksiyon bileşeni içerisinde `ref` kullanabilirsiniz**
 

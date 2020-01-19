@@ -104,11 +104,7 @@ Temel `React.Component` sınıfına ilişkin metod ve özelliklerin listesi içi
 
 ### `React.PureComponent` {#reactpurecomponent}
 
-<<<<<<< HEAD
 `React.PureComponent` [`React.Component`](#reactcomponent)'e benzer. Aralarındaki fark, [`React.Component`](#reactcomponent)'in [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunu uygulamamasıdır, ancak `React.PureComponent` bunu yüzeysel bir prop ve state karşılaştırması ile birlikte uygular.
-=======
-`React.PureComponent` is similar to [`React.Component`](#reactcomponent). The difference between them is that [`React.Component`](#reactcomponent) doesn't implement [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate), but `React.PureComponent` implements it with a shallow prop and state comparison.
->>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
 
 Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile aynı sonucu render ediyor ise, bazı durumlarda performans artışı için `React.PureComponent` kullanabilirsiniz.
 
@@ -132,13 +128,9 @@ const MyComponent = React.memo(function MyComponent(props) {
 
 Eğer fonksiyon bileşeniniz aynı prop'lar ile aynı sonucu render ediyor ise, bazı durumlarda sonucu ezberleyerek performans artışı sağlaması için onu bir `React.memo` çağrısına sarabilirsiniz. Bu, React'in bileşeni render etmeyi atlayacağı ve son render edilen sonucu yeniden kullanacağı anlamına gelir.
 
-<<<<<<< HEAD
-Varsayılan olarak, `props` nesnesindeki karmaşık yapıları sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
-=======
-`React.memo` only affects props changes. If your function component wrapped in `React.memo` has a [`useState`](/docs/hooks-state.html) or [`useContext`](/docs/hooks-reference.html#usecontext) Hook in its implementation, it will still rerender when state or context change.
+`React.memo` sadece prop değişikliklerini etkiler. Eğer `React.memo` içine sarmalanmış bileşeninizde [`useState`](/docs/hooks-state.html) ya da [`useContext`](/docs/hooks-reference.html#usecontext) hookları varsa, state ya da context her değiştiğinde bilşeniniz tekrar render edilecektir.
 
-By default it will only shallowly compare complex objects in the props object. If you want control over the comparison, you can also provide a custom comparison function as the second argument.
->>>>>>> 99a18287c163e328f87709cb224742ccac3e113a
+Varsayılan olarak, `props` nesnesindeki karmaşık yapıları sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
 
 ```javascript
 function MyComponent(props) {
