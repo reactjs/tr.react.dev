@@ -131,7 +131,7 @@ Her Context nesnesi, tüketici bileşenlerin context güncellemelerine abone olm
 
 Bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
-Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
+Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere ([`.contextType`](#classcontexttype) ve [`useContext`](/docs/hooks-reference.html#usecontext) de dahil olmak üzere) yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
 
 [`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) gibi aynı algoritma kullanılarak yeni ve eski değerler karşılaştırıp değişiklikler belirlenir.
 
@@ -196,7 +196,7 @@ Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bi
 
 > Not
 >
-> Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
+> Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [render prop'ları](/docs/render-props.html).
 
 ### `Context.displayName` {#contextdisplayname}
 
@@ -263,4 +263,4 @@ Bunu aşmak için, value değerini üst elemanın state'ine taşıyın:
 
 > Not
 > 
-> React daha önce deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak onu kullanan uygulamalar yeni sürüme geçmelidir. Eski sürüm API'ler önümüzdeki ana React versiyonlarından kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyun.
+> React daha önce deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak onu kullanan uygulamalar yeni sürüme geçmelidir. Eski sürüm API'ler önümüzdeki ana React versiyonunda kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyunuz.
