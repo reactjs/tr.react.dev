@@ -22,7 +22,11 @@ Minör sürümler en yaygın sürüm türüdür.
 
 Bu sürümleme politikası `Next` ve `Experimental` kanallarındaki sürüm-öncesi paketlerine uygulanmaz. [Sürüm-öncesi paketlere dair daha fazlasını öğrenin.](/docs/release-channels.html)
 
+<<<<<<< HEAD
 Uyumsuz değişiklikler hepimiz için zahmetli olduğu için ana sürümlerin sayısını olabildiğince az tutmaya çalışıyoruz – örneğin, React 15, Nisan 2016'da, React 16, Eylül 2017'de yayınlanmıştır; React 17'nin 2019'dan önce yayınlanması beklenmemektedir.
+=======
+Breaking changes are inconvenient for everyone, so we try to minimize the number of major releases – for example, React 15 was released in April 2016 and React 16 was released in September 2017; React 17 isn't expected until sometime in 2020.
+>>>>>>> 4367566bddd06ed9dfbd6b1c3f45f9925e60b2c3
 
 Bunun yerine yeni özellikleri minör sürümlerle yayınlamaktayız. Bu nedenle minör sürümler çoğu zaman ana sürümlerden daha ilgi çekici ve merak uyandırıcı olmaktadır.
 

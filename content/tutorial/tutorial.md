@@ -38,7 +38,11 @@ Bu öğreticiyi takip ederken kodları kopyala-yapıştır yaparak denemenizde b
 
 Bu öğreticide, React ile bir tic-tac-toe (XOX oyunu) nasıl geliştirilir onu göstereceğiz. 
 
+<<<<<<< HEAD
 **[Buradan](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** oyunun son halini görebilirsiniz. Eğer bu kodlara aşina değilseniz ve size karışık geliyorsa endişelenmeyin. Çünkü bu öğreticinin amacı, React'in ve React'teki kod yapısının anlaşılmasında size yardımcı olmaktır. 
+=======
+We recommend that you check out the tic-tac-toe game before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and it is updated as the game progresses.
+>>>>>>> 4367566bddd06ed9dfbd6b1c3f45f9925e60b2c3
 
 Bu öğreticiye başlamadan önce, yukarıda belirttiğimiz linke giderek oyunu oynamanızı ve incelemenizi tavsiye ediyoruz. Oyunu oynadığınızda farkedeceğiniz gibi; oyun tahtasının sağında, numaralandırılmış bir liste bulunmaktadır. Bu liste size, oyunda oluşan hamlelerin bir geçmişini sunar ve oyunda ilerledikçe liste de otomatik olarak güncellenir.
 

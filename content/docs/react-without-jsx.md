@@ -40,7 +40,11 @@ ReactDOM.render(
 
 JSX'in JavaScript'e nasıl dönüştürüldüğüne dair daha fazla örnek görmek isterseniz, [çevrimiçi Babel derleyicisi](babel://jsx-simple-example)ni deneyebilirsiniz.
 
+<<<<<<< HEAD
 Bileşen bir dize olarak veya `React.Component`'in alt sınıfı olarak veya durumsuz bileşenler için düz bir fonksiyon olarak sağlanabilir.
+=======
+The component can either be provided as a string, as a subclass of `React.Component`, or a plain function.
+>>>>>>> 4367566bddd06ed9dfbd6b1c3f45f9925e60b2c3
 
 Eğer çok fazla `React.createElement` yazmaktan bıktıysanız, genel çözüm bir kısaltmaya atamaktır:
 
