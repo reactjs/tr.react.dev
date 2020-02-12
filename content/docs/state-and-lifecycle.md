@@ -8,9 +8,9 @@ prev: components-and-props.html
 next: handling-events.html
 ---
 
-Bu sayfada, state kavramı ve React bileşlerinin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
+Bu sayfada, state kavramı ve React bileşenlerinin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
 
-[Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alacağız. Hatırlayacağınız gibi, [elemetlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `ReactDOM.render()` metodu ile geçekleştirebiliyorduk:
+[Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alacağız. Hatırlayacağınız gibi, [Elementlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `ReactDOM.render()` metodu ile geçekleştirebiliyorduk:
 
 ```js{8-11}
 function tick() {
