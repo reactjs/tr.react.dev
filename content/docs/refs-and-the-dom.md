@@ -162,7 +162,7 @@ class Parent extends React.Component {
 }
 ```
 
-Insanların fonksiyon bileşeniniz için `ref` kullanmalarına izin vermek isterseniz, [`forwardRef`](https://reactjs.org/docs/forwarding-refs.html) (muhtemelen [`useImperativeHandle`](/docs/hooks-reference.html#useimperativehandle) ile birlikte) kullanabilir, ya da bileşeniniz bir sınıfa çevirebilirsiniz.
+Insanların fonksiyon bileşeniniz için `ref` kullanmalarına izin vermek isterseniz, [`forwardRef`](/docs/forwarding-refs.html) (muhtemelen [`useImperativeHandle`](/docs/hooks-reference.html#useimperativehandle) ile birlikte) kullanabilir, ya da bileşeninizi bir sınıfa çevirebilirsiniz.
 
 Bir DOM elemanına veya sınıf bileşenine işaret ettiğiniz sürece **fonksiyon bileşeni içerisinde `ref` kullanabilirsiniz**
 
