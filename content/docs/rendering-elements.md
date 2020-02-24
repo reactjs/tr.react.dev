@@ -70,6 +70,6 @@ Tarayıcı araçlarını kullanarak [son örneği](codepen://rendering-elements/
 
 ![DOM inceleyicisi küçük güncellemeleri gösteriyor](../images/docs/granular-dom-updates.gif)
 
-Oluşturduğumuz element, her saniyede bütün UI ağacını görüntülemesine rağmen, React DOM tarafından yalnızca ilgili metin düğümü ve bu düğümün içerikleri güncelleniyor.
+Bütün UI ağacını her saniye bir görüntüleyen bir element oluşturmamıza rağmen, React DOM tarafından **yalnızca içeriği değişen** metin düğümü güncellenir.
 
 Deneyimlerimizden yola çıkarsak, kullanıcı arayüzünün zaman içerisinde nasıl değiştirileceğinden ziyade herhangi bir anda nasıl görünmesi gerektiğini düşünmek birçok hatanın oluşmasını engellemektedir.
