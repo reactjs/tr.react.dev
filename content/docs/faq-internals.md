@@ -20,6 +20,4 @@ Hayır, farklılar. Shadow DOM, öncelikle web bileşenlerindeki değişkenleri 
 
 ### "React Fiber" nedir? {#what-is-react-fiber}
 
-Fiber is the new reconciliation engine in React 16. Its main goal is to enable incremental rendering of the virtual DOM. [Read more](https://github.com/acdlite/react-fiber-architecture).
-
 Fiber, React 16'daki yeni uyumlaştırma motorudur. Ana hedefi, virtual DOM'ın artımlı render edilmesini sağlamaktır. [Devamını okuyun](https://github.com/acdlite/react-fiber-architecture).
