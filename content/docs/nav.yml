@@ -99,9 +99,13 @@
     - id: events
       title: SyntheticEvent
     - id: test-utils
+<<<<<<< HEAD
       title: Test Araçları
     - id: shallow-renderer
       title: Yüzeysel Render Edici
+=======
+      title: Test Utilities
+>>>>>>> 2ab1ca5007a37ca509863a212293f1c6b26d0afc
     - id: test-renderer
       title: Test Render Edici
     - id: javascript-environment-requirements
@@ -175,4 +179,8 @@
     - id: faq-versioning
       title: Sürümleme Politikası
     - id: faq-internals
+<<<<<<< HEAD
       title: Virtual DOM ve İç Dinamikler
+=======
+      title: Virtual DOM and Internals
+>>>>>>> 2ab1ca5007a37ca509863a212293f1c6b26d0afc
