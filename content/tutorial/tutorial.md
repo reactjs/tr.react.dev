@@ -180,7 +180,7 @@ Yukarıdaki `ShoppingList` bileşeni, yalnızca `<div />` ve `<li />` gibi HTML 
 
 ## Başlangıç Kodunun İncelenmesi {#inspecting-the-starter-code}
 
-Eğer bu öğreticiyi **tarayıcınızda** takip ediyorsanız, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip ediyorsanız, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız (kurulum](#setup-option-2-local-development-environment) aşamasında bu dosyaya değinmiştik). 
+Eğer bu öğreticiyi **tarayıcınızda** takip ediyorsanız, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip ediyorsanız, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız [kurulum](#setup-option-2-local-development-environment) aşamasında bu dosyaya değinmiştik). 
 
 Bu başlangıç kodu, yapacağımız proje ile ilgili bir temel niteliğindedir. tic-tac-toe oyununu programlayarak React öğreniminize yoğunlaşabilmeniz için size CSS kodlarını hazır olarak sunduk. Bu nedenle öğretici boyunca CSS kodu yazmanız gerekli değildir.
 
