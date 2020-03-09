@@ -176,7 +176,7 @@ DOMEventTarget relatedTarget
 Olay isimleri:
 
 ```
-onChange onInput onInvalid onReset onSubmit 
+onChange onInput onInvalid onReset onSubmit
 ```
 
 onChage olayı ile ilgili daha fazla bilgi için [Formlar](/docs/forms.html)'ı inceleyin.
@@ -185,7 +185,7 @@ onChage olayı ile ilgili daha fazla bilgi için [Formlar](/docs/forms.html)'ı 
 
 ### Genel Olaylar {#generic-events}
 
-Event names:
+Olay isimleri:
 
 ```
 onError onLoad
