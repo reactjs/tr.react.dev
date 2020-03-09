@@ -191,11 +191,7 @@ function logProps(InputComponent) {
 const EnhancedComponent = logProps(InputComponent);
 ```
 
-<<<<<<< HEAD
-Bununla alakalı bir kaç problem var. Birincisi, girdi olarak kullanılan bileşen geliştirilmiş bileşenden ayrı olarak yeniden kullanılamaz. Daha önemlisi, `EnchancedComponent`'e başka bir HOC uygularsanız, o da `componentWillRecieveProps`'u değiştirecektir; ilk HOC’un fonksiyonalitesi kaybolacaktır. Ayrıca bu HOC,  yaşam döngüsü methodları içermeyen fonksiyonel bileşenlerle çalışmayacaktır.
-=======
-There are a few problems with this. One is that the input component cannot be reused separately from the enhanced component. More crucially, if you apply another HOC to `EnhancedComponent` that *also* mutates `componentDidUpdate`, the first HOC's functionality will be overridden! This HOC also won't work with function components, which do not have lifecycle methods.
->>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
+Bununla alakalı bir kaç problem var. Birincisi, girdi olarak kullanılan bileşen geliştirilmiş bileşenden ayrı olarak yeniden kullanılamaz. Daha önemlisi, `EnchancedComponent`'e başka bir HOC uygularsanız, o da `componentDidUpdate`'i değiştirecektir; ilk HOC’un fonksiyonalitesi kaybolacaktır. Ayrıca bu HOC, yaşam döngüsü methodları içermedikleri için, fonksiyonel bileşenlerle çalışmayacaktır.
 
 HOC’ları değiştirmek sıkıntılı bir soyutlama yöntemidir— kodu kullanacak kişinin bunların nasıl kodlandığını bilmesi gerekiyor, yoksa diğer HOC’larla sıkıntı yaşayabilir.
 
