@@ -36,7 +36,11 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **i
 
 ### Çevrimiçi Vakit Geçirme Alanları {#online-playgrounds}
 
+<<<<<<< HEAD
 React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. Bir Merhaba Dünya şablonu deneyin [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), veya [Glitch](https://glitch.com/edit/#!/remix/starter-react-template).
+=======
+If you're interested in playing around with React, you can use an online code playground. Try a Hello World template on [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), [Glitch](https://glitch.com/edit/#!/remix/starter-react-template), or [Stackblitz](https://stackblitz.com/fork/react).
+>>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
 
 Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
@@ -86,7 +90,11 @@ Seviyenizi kontrol etmek için [JavaScript'e genel bakış](https://developer.mo
 
 **Yaparak öğrenmeyi** tercih ediyorsanız [pratik öğretici](/tutorial/tutorial.html)mize göz atın. Bu derste, React ile bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için bu kısmı atlamak isteyebilirsiniz - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın ileri seviyesi size daha derin bir anlayış verecektir.
 
+<<<<<<< HEAD
 ### Adım adım rehber {#step-by-step-guide}
+=======
+If you prefer to **learn by doing,** check out our [practical tutorial](/tutorial/tutorial.html). In this tutorial, we build a tic-tac-toe game in React. You might be tempted to skip it because you're not into building games -- but give it a chance. The techniques you'll learn in the tutorial are fundamental to building *any* React apps, and mastering it will give you a much deeper understanding.
+>>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
 
 **Kavramları adım adım öğrenmeyi** tercih ederseniz [ana kavramlar rehberi](/docs/hello-world.html) başlamak için en iyi yerdir. Her bir sonraki bölüm, önceki bölümlerde sunulan bilgilere dayanıyor, böylece ilerledikçe hiçbir şeyi kaçırmayacaksınız.
 

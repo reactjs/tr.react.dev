@@ -177,7 +177,11 @@ const element = {
 
 Bu nesnelere "React elementleri" adı verilir. Bunu, ekranda görmek istediğiniz kullanıcı arayüzünün kodlar ile tasvir edilmesi gibi düşünebilirsiniz. React, bu nesneleri okuyarak DOM'ı oluşturur ve arayüzü günceller.
 
+<<<<<<< HEAD
 Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini daha detaylı bir şekilde ele alacağız.
+=======
+We will explore rendering React elements to the DOM in the [next section](/docs/rendering-elements.html).
+>>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
 
 >**İpucu:**
 >

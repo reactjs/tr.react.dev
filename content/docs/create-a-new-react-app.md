@@ -39,7 +39,11 @@ React takımı öncelikli olarak şu çözümleri öneriyor:
 
 [Create React App](https://github.com/facebook/create-react-app) **React ögrenmek** için rahat bir ortamdır ve React ile **yeni bir [tek sayfa](/docs/glossary.html#single-page-application) uygulama** geliştirmeye başlamanın en iyi yoludur.
 
+<<<<<<< HEAD
 En son JavaScript özelliklerini kullanabilmeniz için geliştirme ortamınızı kurar, güzel bir geliştirici deneyimi sağlar ve uygulamanızı canlı ortam (production) için optimize eder. Bilgisayarınızda Node >= 8.10 ve npm >= 5.6 sürümlerinin yüklü olması gerekir. Bir proje oluşturmak için:
+=======
+It sets up your development environment so that you can use the latest JavaScript features, provides a nice developer experience, and optimizes your app for production. You’ll need to have [Node >= 8.10 and npm >= 5.6](https://nodejs.org/en/) on your machine. To create a project, run:
+>>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
 
 ```bash
 npx create-react-app my-app
