@@ -130,7 +130,7 @@ expect(root.toJSON()).toMatchSnapshot();
 
 // bazı farklı proplar ile güncelleyin
 act(() => {
-  root = root.update(<App value={2}/>);
+  root.update(<App value={2}/>);
 })
 
 // root üzerinde iddialar belirleyin

@@ -26,6 +26,7 @@ void preventDefault()
 boolean isDefaultPrevented()
 void stopPropagation()
 boolean isPropagationStopped()
+void persist()
 DOMEventTarget target
 number timeStamp
 string type
@@ -73,6 +74,7 @@ Aşağıdaki olay yöneticileri, balonlanma (bubbling) evresinde bir olay taraf�
 - [Klavye Olayları](#keyboard-events)
 - [Odaklanma Olayları](#focus-events)
 - [Form Olayları](#form-events)
+- [Genel Olaylar](#generic-events)
 - [Fare Olayları](#mouse-events)
 - [İşaretçi Olayları](#pointer-events)
 - [Seçme Olayları](#selection-events)
@@ -174,10 +176,20 @@ DOMEventTarget relatedTarget
 Olay isimleri:
 
 ```
-onChange onInput onInvalid onSubmit
+onChange onInput onInvalid onReset onSubmit
 ```
 
 onChage olayı ile ilgili daha fazla bilgi için [Formlar](/docs/forms.html)'ı inceleyin.
+
+* * *
+
+### Genel Olaylar {#generic-events}
+
+Olay isimleri:
+
+```
+onError onLoad
+```
 
 * * *
 

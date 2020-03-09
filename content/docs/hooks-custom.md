@@ -74,7 +74,7 @@ Normalde, ortak bir işlevin iki JavaScript fonksiyonu arasında paylaştırılm
 **Özel Hook aslında bir JavaScript fonksiyonudur ve adları "`use`" ile başlar. Ayrıca diğer Hook'ları da çağırabilirler.** Örneğin aşağıda ilk defa oluşturduğumuz özel Hook'umuz bulunuyor:
 
 ```js{3}
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function useFriendStatus(friendID) {
   const [isOnline, setIsOnline] = useState(null);

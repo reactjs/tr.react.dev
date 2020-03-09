@@ -36,7 +36,7 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **i
 
 ### Çevrimiçi Vakit Geçirme Alanları {#online-playgrounds}
 
-React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. Bir Merhaba Dünya şablonu deneyin [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), veya [Glitch](https://glitch.com/edit/#!/remix/starter-react-template).
+React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), [Glitch](https://glitch.com/edit/#!/remix/starter-react-template) veya [Stackblitz](https://stackblitz.com/fork/react) seçeneklerinden birisiyle bir Merhaba Dünya şablonu deneyin.
 
 Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
@@ -84,7 +84,7 @@ Seviyenizi kontrol etmek için [JavaScript'e genel bakış](https://developer.mo
 
 ### Pratik Öğretici {#practical-tutorial}
 
-**Yaparak öğrenmeyi** tercih ediyorsanız [pratik öğretici](/tutorial/tutorial.html)mize göz atın. Bu derste, React ile bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için bu kısmı atlamak isteyebilirsiniz - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın ileri seviyesi size daha derin bir anlayış verecektir.
+**Yaparak öğrenmeyi** tercih ediyorsanız [pratik öğreticimize](/tutorial/tutorial.html) göz atın. Bu derste, React ile bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için bu kısmı atlamak isteyebilirsiniz - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın ileri seviyesi size daha derin bir anlayış verecektir.
 
 ### Adım adım rehber {#step-by-step-guide}
 

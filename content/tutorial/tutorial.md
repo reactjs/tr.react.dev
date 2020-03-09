@@ -298,7 +298,7 @@ class Square extends React.Component {
 
 >Not:
 >
->[JavaScript class'larında](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), alt sınıfın constructor'ını oluştururken her zaman `super` fonksiyonunu çağırmanız gerekmektedir. Her bir React sınıf bileşeni içerisinde `super(props)` çağrısı ile başlayan bir constructor barındırmalıdır.
+>[JavaScript class'larında](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), alt sınıfın constructor'ını oluştururken her zaman `super` fonksiyonunu çağırmanız gerekmektedir. `constructor` metodu olan her bir React sınıf bileşeninde, `constructor` metodu `super(props)` çağrısı ile başlamalıdır.
 
 Şimdi, Square'e tıklanıldığında, state'indeki `value` değerinin `render` metodunda görüntülenebilmesi için aşağıdaki adımları izleyelim:
 

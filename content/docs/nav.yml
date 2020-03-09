@@ -100,8 +100,6 @@
       title: SyntheticEvent
     - id: test-utils
       title: Test Araçları
-    - id: shallow-renderer
-      title: Yüzeysel Render Edici
     - id: test-renderer
       title: Test Render Edici
     - id: javascript-environment-requirements
