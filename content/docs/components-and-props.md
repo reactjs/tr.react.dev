@@ -46,11 +46,7 @@ class Welcome extends React.Component {
 
 Üstteki her iki bileşen de React'in bakış açısından birbirine eşittirler.
 
-<<<<<<< HEAD
-Sınıf bileşenleri, fonksiyon bileşenlerine göre bazı ek özelliklere sahiptirler. Buna [sonraki bölümlerde](/docs/state-and-lifecycle.html) değineceğiz. Fakat şimdilik, kısa olması açısından fonksiyon bileşenleri kullanacağız. 
-=======
-Function and Class components both have some additional features that we will discuss in the [next sections](/docs/state-and-lifecycle.html).
->>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
+Sınıf ve fonksiyon bileşenlerinin her birisi bazı ek özelliklere sahiptirler. Buna [sonraki bölümlerde](/docs/state-and-lifecycle.html) değineceğiz.
 
 ## Bir Bileşenin Render Edilmesi {#rendering-a-component}
 
@@ -66,11 +62,7 @@ Ancak elementler, kullanıcı tanımlı bileşenler de olabilirler:
 const element = <Welcome name="Sara" />;
 ```
 
-<<<<<<< HEAD
-React, kullanıcı tanımlı bir bileşeni gördüğü zaman, bünyesinde yer alan JSX özelliklerini bu bileşene tek bir nesne olarak aktarır. Bu nesneye "props" adı verilir.
-=======
-When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. We call this object "props".
->>>>>>> fb382ccb13e30e0d186b88ec357bb51e91de6504
+React, kullanıcı tanımlı bir bileşeni gördüğü zaman, JSX özelliklerini ve alt elemanlarını bu bileşene tek bir nesne olarak aktarır. Bu nesneye "props" adı verilir.
 
 Örneğin aşağıdaki kod, sayfada "Hello, Sara" mesajını görüntüler:
 
