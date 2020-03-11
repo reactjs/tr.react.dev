@@ -10,7 +10,7 @@ next: create-a-new-react-app.html
 
 İhtiyacınız kadar az veya daha fazla React kullanın.
 
-React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **ihtiyacınız kadar az veya daha fazla kullanabilirsiniz**. Belki de sadece varolan bir sayfaya biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.
+React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **ihtiyacınız kadar az veya daha fazla kullanabilirsiniz**. Belki de sadece var olan bir sayfaya biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.
 
 Web sitelerinin çoğu, tek sayfalı uygulamalar değildir ve olması da gerekmez. **Hiçbir kurulum aracı olmadan sadece birkaç satır kod** ile web sitenizin küçük bir bölümünde React'i deneyin. Daha sonra içeriğini aşamalı olarak genişletebilir veya sadece birkaç dinamik bileşen olarak tutabilirsiniz.
 
@@ -43,7 +43,7 @@ Bu `<div>`'e özgün bir `id` HTML özelliği verdik. Bu `id`, daha sonra JavaSc
 
 >İpucu
 >
->`<body>` etiketinin içinde **herhangi bir yere** böyle bir `<div>` yerleştirebilirsiniz. Tek bir sayfada istediğiniz kadar bağımsız DOM konteynerınız olabilir. Bunlar genellikle boştur. React, DOM konteynerlerinin içindeki mevcut tüm içeriği değiştirir.
+>`<body>` etiketinin içinde **herhangi bir yere** böyle bir `<div>` yerleştirebilirsiniz. Tek bir sayfada istediğiniz kadar bağımsız DOM konteyneriniz olabilir. Bunlar genellikle boştur. React, DOM konteynerlerinin içindeki mevcut tüm içeriği değiştirir.
 
 ### Adım 2: Script Etiketlerini Ekleyin {#step-2-add-the-script-tags}
 
@@ -119,7 +119,7 @@ Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getir
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 ```
 
-JavaScript dosyalarınız için bir küçültme adımınız yoksa, [ayarlamanın bir yolu budur](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3).
+JavaScript dosyalarınız için bir küçültme adımınız yoksa [ayarlamanın bir yolu budur](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3).
 
 ## İsteğe bağlı: React'i JSX ile deneyin {#optional-try-react-with-jsx}
 
@@ -184,7 +184,7 @@ Tebrikler! Projenize bir **yayına hazır JSX kurulumu** eklediniz bile.
 `src` adında bir klasör oluşturun ve bu terminal komutunu çalıştırın:
 
 ```
-npx babel --watch src --out-dir . --presets react-app/prod 
+npx babel --watch src --out-dir . --presets react-app/prod
 ```
 
 >Not
