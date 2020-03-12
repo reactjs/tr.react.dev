@@ -8,7 +8,7 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük farklılıklar bulunmaktadır: 
+React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük farklılıklar bulunmaktadır:
 
 * Olay isimleri, DOM'da lowercase iken, React'te camelCase olarak adlandırılır.
 * DOM'da fonksiyon isimleri, ilgili olaya string olarak atanırken, JSX'te direkt fonksiyon olarak atanır.
@@ -138,11 +138,11 @@ class LoggingButton extends React.Component {
 }
 ```
 
-Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için binding işleminin, ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
+Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için binding işleminin, ya sınıfın constructor'ında ya da class fields yöntemi ile yapılmasını öneririz.
 
 ## Olay Yöneticilerine Parametre Gönderimi {#passing-arguments-to-event-handlers}
 
-Bir döngü içerisinde, olay fonksiyonuna fazladan parametre göndermek isteyebilirsiniz. Örneğin, bir satır ID'si için `id` parametresi , aşağıdaki kodlardan her ikisi de işinizi görecektir:
+Bir döngü içerisinde, olay fonksiyonuna fazladan parametre göndermek isteyebilirsiniz. Örneğin, bir satır ID'si için `id` parametresi, aşağıdaki kodlardan her ikisi de işinizi görecektir:
 
 ```js
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
