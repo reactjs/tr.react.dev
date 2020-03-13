@@ -31,7 +31,7 @@ setInterval(tick, 1000);
 
 [**CodePen'de deneyin**](http://codepen.io/gaearon/pen/gwoJZk?editors=0010)
 
-Bu bölümde ise, `Clock` bileşenini nasıl sarmalayacağımıza ve tekrar kullanılabilir hale getireceğimize değineceğiz. Bu bileşen, kendi zamanlayıcısını başlatacak ve her saniye kendisini güncelleyecek. 
+Bu bölümde ise, `Clock` bileşenini nasıl sarmalayacağımıza ve tekrar kullanılabilir hale getireceğimize değineceğiz. Bu bileşen, kendi zamanlayıcısını başlatacak ve her saniye kendisini güncelleyecek.
 
 Öncelikle Clock'u, ayrı bir bileşen halinde sarmalayarak görüntüleyelim:
 
@@ -57,7 +57,7 @@ setInterval(tick, 1000);
 
 [**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 
-Güzel görünüyor ancak bu aşamada kritik bir gereksinimi atladık: `Clock`'un kendi zamanlayıcısını ayarlaması, ve her saniye kullanıcı arayüzünü güncellemesi işini kendi bünyesinde gerçekleştirmesi gerekiyordu.
+Güzel görünüyor ancak bu aşamada kritik bir gereksinimi atladık: `Clock`'un kendi zamanlayıcısını ayarlaması ve her saniye kullanıcı arayüzünü güncellemesi işini kendi bünyesinde gerçekleştirmesi gerekiyordu.
 
 Aşağıdaki kodu bir kere yazdığımızda, `Clock`'un artık kendi kendisini güncellemesini istiyoruz:
 
@@ -203,7 +203,7 @@ Birçok bileşene sahip uygulamalarda, bileşenler yok edildiğinde ilgili kayna
 
 Ayrıca, `Clock` bileşeni DOM'dan çıkarıldığında, zamanlayıcının da [temizlenmesini](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval) istiyoruz. React'te bu olaya "unmounting" (değişkenin çıkarılması) adı verilir.
 
-`Clock` bileşeni takılıp çıkarıldığında bazı işleri gerçekleştirebilmek için özel metodlar tanımlayabiliriz:
+`Clock` bileşeni takılıp çıkarıldığında bazı işleri gerçekleştirebilmek için özel metotlar tanımlayabiliriz:
 
 ```js{7-9,11-13}
 class Clock extends React.Component {
@@ -246,7 +246,7 @@ Bileşenin çıktısı, DOM'a render edildikten sonra `componentDidMount()` meto
 
 `this`'e (`this.timerID`) zamanlayıcı ID'sini nasıl atadığımızı inceleyebilirsiniz.
 
-Daha önce de belirttiğimiz gibi, `this.props` React tarafından yönetiliyor, ve `this.state`'in de özel bir yaşam döngüsü var. Eğer `timerID` gibi veri akışına dahil olmayan değişkenleri saklamanız gerekiyorsa, bu örnekte yaptığımız gibi sınıf içerisinde değişkenler tanımlayabilirsiniz.
+Daha önce de belirttiğimiz gibi, `this.props` React tarafından yönetiliyor, ve `this.state`'in de özel bir yaşam döngüsü var. Eğer `timerID` gibi veri akışına dâhil olmayan değişkenleri saklamanız gerekiyorsa, bu örnekte yaptığımız gibi sınıf içerisinde değişkenler tanımlayabilirsiniz.
 
 Oluşturduğumuz zamanlayıcıyı `componentWillUnmount()` yaşam döngüsü metodu içerisinde `Clock` bileşeninden söküp çıkaralım:
 
@@ -312,7 +312,7 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 3) `Clock` bileşeninin çıktısı DOM'a eklendiğinde, yaşam döngüsündeki `componentDidMount()` metodu çağrılır. Bu metodda `Clock` bileşeni, her saniyede bir `tick()` metodunun çalıştırılması gerektiğini tarayıcıya bildirir.
 
-4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan dolayı, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'ı ilgili şekilde günceller.
+4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan dolayı, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'u ilgili şekilde günceller.
 
 5) Eğer `Clock` bileşeni, DOM'dan çıkarılırsa, yaşam döngüsündeki `componentWillUnmount()` metodu çağrılır ve tarayıcı tarafından zamanlayıcı durdurulmuş olur.
 
@@ -320,9 +320,9 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 `setState()` hakkında bilmeniz gereken 3 şey bulunmaktadır.
 
-### State'i Direkt Olarak Değiştirmeyiniz {#do-not-modify-state-directly}
+### State'i Doğrudan Değiştirmeyiniz {#do-not-modify-state-directly}
 
-Aşağıdaki kod, bileşenin yeniden render edilmesini **gerçekleştirmez**:
+Örneğin, aşağıdaki kod bileşeni yeniden render **etmeyecektir**:
 
 ```js
 // Yanlış kullanım
@@ -427,7 +427,7 @@ Kullanıcı tanımlı bileşenler için de bu durum geçerlidir:
 <FormattedDate date={this.state.date} />
 ```
 
-`FormattedDate` bileşeni, `date` değişkenini props'tan alabilir. Ve bunu alırken `Clock`'un state'inden mi yoksa prop'undan mı geldiğini bilemez. Hatta `date` değişkeni, `Clock` bileşeni içerisinde state'ten harici olarak tanımlanmış bir değer de olabilir ve bunu da bilmesine imkanı yoktur:
+`FormattedDate` bileşeni, `date` değişkenini props'tan alabilir. Ve bunu alırken `Clock`'un state'inden mi yoksa prop'undan mı geldiğini bilemez. Hatta `date` değişkeni, `Clock` bileşeni içerisinde state'ten harici olarak tanımlanmış bir değer de olabilir ve bunu da bilmesine imkânı yoktur:
 
 ```js
 function FormattedDate(props) {
