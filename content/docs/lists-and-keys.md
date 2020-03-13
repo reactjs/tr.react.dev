@@ -6,7 +6,7 @@ prev: conditional-rendering.html
 next: forms.html
 ---
 
-Öncelikle, listelerin JavaScript'te nasıl dönüştürüldüğünü gözden geçirelim.
+Öncelikle listelerin JavaScript'te nasıl dönüştürüldüğünü gözden geçirelim.
 
 Aşağıdaki kod göz önüne alındığında, `sayılardan` oluşan bir diziyi almak ve değerlerini iki katına çıkarmak için [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanırız. `map()` tarafından döndürülen yeni diziyi `doubled` değişkenine atayıp ekrana yazdırırız:
 
@@ -22,9 +22,9 @@ React'te, dizileri [element](/docs/rendering-elements.html) listelerine dönüş
 
 ### Çoklu Bileşenleri Render Etmek {#rendering-multiple-components}
 
-Elementlerden koleksiyonlar oluşturabilir ve bu koleksiyonları küme parentezlerini `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
+Elementlerden koleksiyonlar oluşturabilir ve bu koleksiyonları süslü parantezleri `{}` kullanarak [JSX'e dahil edebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx).
 
-Aşağıda, Javascript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir element için bir `<li>` elemanı dönüyoruz. Son olarak da, ortaya çıkan diziyi `listItems` a atıyoruz:
+Aşağıda, JavaScript'in [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) fonksiyonunu kullanarak `numbers` dizisinin içinde geziyoruz. Her bir element için bir `<li>` elemanı döndürüyoruz. Son olarak da, ortaya çıkan diziyi `listItems`a atıyoruz:
 
 ```javascript{2-4}
 const numbers = [1, 2, 3, 4, 5];
@@ -33,7 +33,7 @@ const listItems = numbers.map((number) =>
 );
 ```
 
-`listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz, ve [DOM'a render ediyoruz](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
+`listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz ve [DOM'a render ediyoruz](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
 
 ```javascript{2}
 ReactDOM.render(
@@ -44,7 +44,7 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
 
-Bu kod, 1 ile 5 arasındaki sayıların madde işaretli listesini görüntüler.
+Bu kod 1 ile 5 arasındaki sayıların madde işaretli listesini döndürür.
 
 ### Temel Liste Bileşeni {#basic-list-component}
 
@@ -70,7 +70,7 @@ ReactDOM.render(
 );
 ```
 
-Bu kodu çalıştırdığınızda, liste elemanları için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar", öğe listeleri oluştururken eklemeniz gereken bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde inceleyeceğiz.
+Bu kodu çalıştırdığınızda liste elemanları için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar" öğe listeleri oluştururken eklemeniz gereken bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde inceleyeceğiz.
 
 `numbers.map()` içindeki liste elemanlarına birer `anahtar` atayalım ve eksik anahtar sorununu düzeltelim:
 
@@ -119,7 +119,7 @@ const todoItems = todos.map((todo) =>
 );
 ```
 
-Render edilen öğeleriniz için sabit ID'leriniz yoksa, son çare olarak, öğenin index numarasını anahtar olarak kullanabilirsiniz:
+Render edilen öğeleriniz için sabit ID'leriniz yoksa son çare olarak öğenin index numarasını anahtar olarak kullanabilirsiniz:
 
 ```js{2,3}
 const todoItems = todos.map((todo, index) =>
@@ -129,6 +129,7 @@ const todoItems = todos.map((todo, index) =>
   </li>
 );
 ```
+
 Dizi içindeki elemanların değişme ihtimali varsa, anahtarlar için index numaralarının kullanılmasını önermiyoruz. Bu, performansı olumsuz yönde etkileyebilir ve bileşen state'i ile ilgili sorunlara neden olabilir. [Index numarasının anahtar olarak kullanılmasının olumsuz etkilerine dair detaylı açıklama](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) için Robin Pokorny'nin makalesine göz atın. Öğeleri listelemek için belirgin bir anahtar atamamayı seçtiğinizde, React varsayılan olarak index numaralarını anahtar olarak kullanacaktır.
 
 Daha fazla bilgi edinmek istiyorsanız, işte size [neden anahtarların gerekli olduğuna dair](/docs/reconciliation.html#recursing-on-children) detaylı bir açıklama.
@@ -137,7 +138,7 @@ Daha fazla bilgi edinmek istiyorsanız, işte size [neden anahtarların gerekli 
 
 Anahtarlar yalnızca çevreleyen dizinin bağlamında anlamlıdır.
 
-Örneğin, bir `ListItem` bileşenini [çıkarırsanız](/docs/components-and-props.html#extracting-components), anahtarı `ListItem`'in içindeki `<li>` öğesinden ziyade, dizinin içindeki `<ListItem />` öğelerinde tutmalısınız.
+Örneğin bir `ListItem` bileşenini [çıkarırsanız](/docs/components-and-props.html#extracting-components), anahtarı `ListItem`'in içindeki `<li>` öğesinde değil, dizinin içindeki `<ListItem />` öğelerinde tutmalısınız.
 
 **Örnek: Yanlış Anahtar Kullanımı**
 
@@ -203,7 +204,7 @@ ReactDOM.render(
 
 [**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ZXeOGM?editors=0010)
 
-Temel bir kural da `map()` çağrısının içindeki elemanların anahtarlara ihtiyaç duymasıdır.
+Temel bir kural da, `map()` çağrısının içindeki elemanların anahtarlara ihtiyaç duymasıdır.
 
 ### Anahtarlar Sadece Kardeşler Arasında Benzersiz Olmalıdır {#keys-must-only-be-unique-among-siblings}
 
@@ -260,9 +261,9 @@ const content = posts.map((post) =>
 
 Yukarıdaki örnekte, `Post` bileşeni `props.id` yi okuyabilir, ancak `props.key` i okuyamaz.
 
-### map() i JSX'e gömmek {#embedding-map-in-jsx}
+### map()'i JSX'e gömmek {#embedding-map-in-jsx}
 
-Yukarıdaki örneklerde ayrı bir `listItems` değişkeni tanımladık ve JSX'e dahil ettik:
+Yukarıdaki örneklerde ayrı bir `listItems` değişkeni tanımladık ve JSX'e dâhil ettik:
 
 ```js{3-6}
 function NumberList(props) {
@@ -279,7 +280,7 @@ function NumberList(props) {
 }
 ```
 
-JSX, [herhangi bir ifadeyi küme parantezlerine yerleştirmeye](/docs/introducing-jsx.html#embedding-expressions-in-jsx) izin verir, böylece `map ()` sonucunu satır içi olarak ekleyebiliriz:
+JSX, [herhangi bir ifadeyi süslü parantezler içerisine yerleştirmeye](/docs/introducing-jsx.html#embedding-expressions-in-jsx) izin verir, böylece `map ()` sonucunu satır içi olarak ekleyebiliriz:
 
 ```js{5-8}
 function NumberList(props) {
@@ -297,4 +298,4 @@ function NumberList(props) {
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/BLvYrB?editors=0010)
 
-Bazen bu yöntem daha temiz bir kodla sonuçlanır; ancak bu tarz da kötüye kullanılabilir. JavaScript'te olduğu gibi, okunabilirlik için, bir değişken çıkarmaya değip değmeyeceğine karar vermek size kalmıştır. `Map ()` gövdesi çok fazla iç içe geçmişse, [bir bileşen çıkarmak](/docs/components-and-props.html#extracting-components) için iyi bir zaman olabileceğini unutmayın.
+Bazen bu yöntem daha temiz bir kodla sonuçlanır; ancak bu tarz da kötüye kullanılabilir. JavaScript'te olduğu gibi, okunabilirlik için, bir değişken çıkarmaya değip değmeyeceğine karar vermek size kalmıştır. `map()` gövdesi çok fazla iç içe geçmişse, [bir bileşen çıkarmak](/docs/components-and-props.html#extracting-components) için iyi bir zaman olabileceğini unutmayın.
