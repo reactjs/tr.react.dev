@@ -16,7 +16,7 @@ prev: rendering-elements.html
 next: state-and-lifecycle.html
 ---
 
-Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı, birbirinden izole bir şekilde düşünerek kodlayabilirsiniz. 
+Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı, birbirinden izole bir şekilde düşünerek kodlayabilirsiniz.
 
 Bu sayfa, bileşenlerin ne olduğuna dair bir fikir edinmenizi sağlayacaktır. [Bileşenler API dokümanını](/docs/react-component.html) inceleyerek daha detaylı bilgi edinebilirsiniz.
 
@@ -78,18 +78,18 @@ ReactDOM.render(
 );
 ```
 
-[](codepen://components-and-props/rendering-a-component)
+[Codepen'de Deneyin](codepen://components-and-props/rendering-a-component)
 
 Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
 1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
-2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor. 
+2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor.
 3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
-4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor .
+4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor.
 
 >**Not:** Bileşen isimlendirmelerinde daima büyük harfle başlayınız.
 >
->Çünkü React, küçük harfle başlayan bileşenlere DOM etiketleri gibi davranır. Örneğin `<div />`, bir HTML div etiketini temsil eder, fakat `<Welcome />` ise bir bileşeni temsil eder ve kodun etki alanında `Welcome`'ın tanımlı olmasını gerektirir. 
+>Çünkü React, küçük harfle başlayan bileşenlere DOM etiketleri gibi davranır. Örneğin `<div />`, bir HTML div etiketini temsil eder, fakat `<Welcome />` ise bir bileşeni temsil eder ve kodun etki alanında `Welcome`'ın tanımlı olmasını gerektirir.
 >
 >Bu isimlendirmenin nedeni hakkında detaylı bilgi edinmek için lütfen [Derinlemesine JSX](/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized) sayfasına bakınız.
 
@@ -120,7 +120,7 @@ ReactDOM.render(
 );
 ```
 
-[](codepen://components-and-props/composing-components)
+[Codepen'de Deneyin](codepen://components-and-props/composing-components)
 
 Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerirler. Ancak React'i mevcut uygulamanıza entegre ediyorsanız, `Button` gibi en küçük bileşenlerden başlayacak şekilde, basitten karmaşığa doğru ilerleyerek bileşen hiyerarşisini oluşturabilirsiniz.
 
@@ -154,9 +154,9 @@ function Comment(props) {
 }
 ```
 
-[](codepen://components-and-props/extracting-components)
+[Codepen'de Deneyin](codepen://components-and-props/extracting-components)
 
-Üstteki bileşen; `author` nesnesini, `text` metnini, ve bir `date` tarihini prop olarak alır. Bu bileşen, bir sosyal medya sitesinde yorum kutucuğunun görüntülenmesini sağlar.
+Üstteki bileşen; `author` nesnesini, `text` metnini ve bir `date` tarihini prop olarak alır. Bu bileşen, bir sosyal medya sitesinde yorum kutucuğunun görüntülenmesini sağlar.
 
 İç içe halde bulunan bu bileşenin üzerinde değişiklik yapmak zor olabilir. Ayrıca bünyesindeki DOM elementlerinin de tekrar kullanılabilirliği oldukça düşük seviyededir. Bu durumu çözmek için, kod içerisinden birkaç bileşen çıkarabiliriz.
 
@@ -175,7 +175,7 @@ function Avatar(props) {
 
 `Avatar` bileşeninin, bir `Comment` bileşeni içerisinde render edildiğini bilmesi gerekli değildir. Bu nedenle `Avatar` bileşenini, gelecekte uygulamanın daha farklı yerlerinde de kullanma ihtimalimiz bulunduğundan dolayı, prop değişkenleri için `author` yerine `user` gibi daha genel bir isim verebiliriz.
 
-Prop'lar isimlendirilirken, ilgili bileşenin hangi bileşen içerisinde kullanıldığını ele almak yerine, bileşeni bağımsız olarak ele almanız gerekmektedir. 
+Prop'lar isimlendirilirken, ilgili bileşenin hangi bileşen içerisinde kullanıldığını ele almak yerine, bileşeni bağımsız olarak ele almanız gerekmektedir.
 
 Yaptığımız değişiklikle `Comment` bileşenini az bir miktar basitleştirmiş olduk:
 
@@ -233,13 +233,13 @@ function Comment(props) {
 }
 ```
 
-[](codepen://components-and-props/extracting-components-continued)
+[Codepen'de Deneyin](codepen://components-and-props/extracting-components-continued)
 
 Bileşenlerin çıkarılması en başta angarya bir işlem gibi görünebilir. Fakat büyük çaplı uygulamalarda, tekrar kullanılabilir bileşenler içeren bir **bileşen paletine** sahip olmak oldukça faydalı hale gelecektir. Bileşen çıkarmanın genel mantığı aşağıdaki gibidir:
-* Eğer kullanıcı arayüzündeki bir eleman (`Button`, `Panel`, `Avatar`) uygulama içerisinde birçok defa kullanılıyorsa,  
-* Eğer bir bileşen (`App`, `FeedStory`, `Comment`) oldukça karmaşık hale geldiyse,   
+* Eğer kullanıcı arayüzündeki bir eleman (`Button`, `Panel`, `Avatar`) uygulama içerisinde birçok defa kullanılıyorsa,
+* Eğer bir bileşen (`App`, `FeedStory`, `Comment`) oldukça karmaşık hale geldiyse,
 
-bu bileşen, içerisinden bileşenler çıkarmak için iyi bir adaydır diyebiliriz. 
+Bu bileşen, içerisinden bileşenler çıkarmak için iyi bir adaydır diyebiliriz.
 
 ## Prop'lar ve Salt Okunurlar {#props-are-read-only}
 
@@ -251,7 +251,7 @@ function sum(a, b) {
 }
 ```
 
-Bu tarz fonksiyonlar, kendi girdi parametrelerini değiştirmedikleri ve her zaman aynı parametreler için aynı sonucu ürettiklerinden dolayı ["pure"](https://en.wikipedia.org/wiki/Pure_function) (saf) fonksiyonlardır. 
+Bu tarz fonksiyonlar, kendi girdi parametrelerini değiştirmedikleri ve her zaman aynı parametreler için aynı sonucu ürettiklerinden dolayı ["pure"](https://en.wikipedia.org/wiki/Pure_function) (saf) fonksiyonlardır.
 
 Tam ters örnek verecek olursak, aşağıdaki fonksiyon impure'dür (saf değildir). Çünkü kendi girdi değerini değiştirmektedir:
 
@@ -263,6 +263,6 @@ function withdraw(account, amount) {
 
 React, kod yazımında oldukça esnek olmasına rağmen, sadece bir tek kuralı şart koşmaktadır:
 
-**Bütün React bileşenleri yalın (`pure`) fonksiyonlar gibi davranmalı, ve prop'larını asla değiştirmemelidirler.**
+**Bütün React bileşenleri yalın (`pure`) fonksiyonlar gibi davranmalı ve prop'larını asla değiştirmemelidirler.**
 
-Tabii ki kullanıcı arayüzleri dinamiktir ve zaman içerisinde değişiklik gösterir. [Sonraki bölümde](/docs/state-and-lifecycle.html), "state" (durum) adındaki yeni konsepte değineceğiz. State bu kurala sadık kalarak; kullanıcı etkileşimleri, ağ istekleri ve diğer şeylerden dolayı zaman içerisinde değişen arayüzün görüntülenmesi için, React bileşenlerinin kendi çıktılarını değiştirebilmesine izin verir. 
+Tabii ki kullanıcı arayüzleri dinamiktir ve zaman içerisinde değişiklik gösterir. [Sonraki bölümde](/docs/state-and-lifecycle.html), "state" (durum) adındaki yeni konsepte değineceğiz. State bu kurala sadık kalarak; kullanıcı etkileşimleri, ağ istekleri ve diğer şeylerden dolayı zaman içerisinde değişen arayüzün görüntülenmesi için, React bileşenlerinin kendi çıktılarını değiştirebilmesine izin verir.
