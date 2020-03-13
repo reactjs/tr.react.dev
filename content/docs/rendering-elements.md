@@ -8,7 +8,7 @@ prev: introducing-jsx.html
 next: components-and-props.html
 ---
 
-Elementler, React uygulamalarının en küçük yapı birimidir. 
+Elementler, React uygulamalarının en küçük yapı birimidir.
 
 Bir element, ekranda neyi görmek istiyorsanız onu tasvir eder:
 
@@ -38,9 +38,9 @@ Kök DOM düğümü içerisinde bir React elementini render etmek istiyorsanız,
 
 `embed:rendering-elements/render-an-element.js`
 
-[](codepen://rendering-elements/render-an-element)
+[Codepen'de Deneyin](codepen://rendering-elements/render-an-element)
 
-Sayfada "Hello, world" mesajı görüntülenecektir. 
+Sayfada "Hello, world" mesajı görüntülenecektir.
 
 ## Render Edilmiş Elementin Güncellenmesi {#updating-the-rendered-element}
 
@@ -52,7 +52,7 @@ Aşağıdaki saat örneğini ele alalım:
 
 `embed:rendering-elements/update-rendered-element.js`
 
-[](codepen://rendering-elements/update-rendered-element)
+[Codepen'de Deneyin](codepen://rendering-elements/update-rendered-element)
 
 [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) metodu ile her saniye bitiminde [`ReactDOM.render()`](/docs/react-dom.html#render) metodu çağrılıyor.
 
@@ -60,7 +60,7 @@ Aşağıdaki saat örneğini ele alalım:
 >
 >Genelde birçok React uygulamasında [`ReactDOM.render()`](/docs/react-dom.html#render) yalnızca bir kez çağrılır. Sonraki bölümlerde bu tarz kodların nasıl [state'li bileşenlere](/docs/state-and-lifecycle.html) dönüştürüleceğine değineceğiz.
 >
->Her bir konu diğeri için zemin hazırladığından dolayı, bu konuları atlamamanızı öneririz. 
+>Her bir konu diğeri için zemin hazırladığından dolayı, bu konuları atlamamanızı öneririz.
 
 ## React Yalnızca Gerekli Kısımları Günceller {#react-only-updates-whats-necessary}
 
