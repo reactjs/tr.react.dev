@@ -27,6 +27,8 @@ Bu kuralı uygulayarak, bir bileşendeki tüm durum bilgisi mantığının kayna
 
 Bu iki kuralı uygulayan [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) adında bir ESLint eklentisi yayınladık. Denemek isterseniz, bu eklentiyi projenize ekleyebilirsiniz:
 
+This plugin is included by default in [Create React App](/docs/create-a-new-react-app.html#create-react-app).
+
 ```bash
 npm install eslint-plugin-react-hooks --save-dev
 ```
@@ -46,9 +48,13 @@ npm install eslint-plugin-react-hooks --save-dev
 }
 ```
 
+<<<<<<< HEAD
 Bu eklenti varsayılan olarak [Create React App](/docs/create-a-new-react-app.html#create-react-app) aracına dahil edilmiştir.
 
 **[Kendi Hook'larınızı](/docs/hooks-custom.html) nasıl yazacağınızı açıklayan bir sonraki sayfaya şimdi atlayabilirsiniz.** Bu sayfada, bu kuralların ardındaki mantığı açıklayarak devam edeceğiz.
+=======
+**You can skip to the next page explaining how to write [your own Hooks](/docs/hooks-custom.html) now.** On this page, we'll continue by explaining the reasoning behind these rules.
+>>>>>>> 2ef0ee1e4fc4ce620dce1f3e0530471195dc64d1
 
 ## Açıklama {#explanation}
 
