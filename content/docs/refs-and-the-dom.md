@@ -168,8 +168,8 @@ Bir DOM elemanına veya sınıf bileşenine işaret ettiğiniz sürece **fonksiy
 
 ```javascript{2,3,6,13}
 function CustomTextInput(props) {
-  //textInput'u burada tanımlanmalıdır. Böylelikle ref onu işaret edebilir
-  let textInput = useRef(null);
+  // textInput'u burada tanımlanmalıdır. Böylelikle ref onu işaret edebilir.
+  const textInput = useRef(null);
 
   function handleClick() {
     textInput.current.focus();

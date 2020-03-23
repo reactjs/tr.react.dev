@@ -8,7 +8,7 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük farklılıklar bulunmaktadır:
+React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük sözdizimi farklılıkları bulunmaktadır:
 
 * Olay isimleri, DOM'da lowercase iken, React'te camelCase olarak adlandırılır.
 * DOM'da fonksiyon isimleri, ilgili olaya string olarak atanırken, JSX'te direkt fonksiyon olarak atanır.
@@ -130,7 +130,7 @@ class LoggingButton extends React.Component {
   render() {
     // Bu yazım şekli, `this`'in handleClick içerisinde bağlanmasını sağlar.
     return (
-      <button onClick={(e) => this.handleClick(e)}>
+      <button onClick={() => this.handleClick()}>
         Click me
       </button>
     );

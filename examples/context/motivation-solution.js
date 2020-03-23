@@ -20,7 +20,7 @@ class App extends React.Component {
 
 // highlight-range{1,2}
 // Aradaki bir bileşen artık temayı açıkça aşağı aktarmak zorunda değil.
-function Toolbar(props) {
+function Toolbar() {
   return (
     <div>
       <ThemedButton />
