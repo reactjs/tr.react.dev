@@ -87,7 +87,7 @@ import("./math").then(math => {
 
 Webpack bu sözdizimine denk geldiğinde, uygulamanızda otomatik olarak kod bölümlemeye başlar. Eğer Create React App kullanıyorsanız,
 bu ayar sizin için halihazırda ayarlanmıştır ve [kullanmaya](https://facebook.github.io/create-react-app/docs/code-splitting) hemen
-başlayabilirsiniz. Aynı zamanda [Next.js](https://github.com/zeit/next.js/#dynamic-import)'de de desteklenmektedir.
+başlayabilirsiniz. Aynı zamanda [Next.js](https://nextjs.org/docs/advanced-features/dynamic-import)'de de desteklenmektedir.
 
 Eğer Webpack ayarlarını kendiniz yapıyorsanız, Webpack'in [kod bölümleme rehberini](https://webpack.js.org/guides/code-splitting/)
 okumayı tercih edebilirsiniz. Webpack ayarınız hayal meyal [buna benzeyecektir.](https://gist.github.com/gaearon/ca6e803f5c604d37468b0091d9959269)
