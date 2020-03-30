@@ -31,58 +31,56 @@ next: concurrent-mode-reference.html
   - [Neden Bu Kadar Çok Mod Var?](#why-so-many-modes)
   - [Özellik Karşılaştırması](#feature-comparison)
 
-## Installation {#installation}
+## Yükleme {#installation}
 
-Concurrent Mode is only available in the [experimental builds](/blog/2019/10/22/react-release-channels.html#experimental-channel) of React. To install them, run:
+Eşzamanlı mod sadece React'in [deneysel versiyonlarında](/blog/2019/10/22/react-release-channels.html#experimental-channel) bulunmaktadır. Onları yüklemek için, şu komutu çalıştırın:
 
 ```
 npm install react@experimental react-dom@experimental
 ```
+**Deneysel versiyonlar için mantıksal versiyonlamanın garantisi yoktur.** Herhangi bir `@experimental` sürümde API'lar eklenebilir, değişebilir veya kaldırılabilir.
 
-**There are no semantic versioning guarantees for the experimental builds.**  
-APIs may be added, changed, or removed with any `@experimental` release.
+**Deneysel versiyonlar sıkça bozucu değişimler içerirler.**
 
-**Experimental releases will have frequent breaking changes.**
+Bu sürümleri kişisel projelerinizde veya bir branch üzerinde deneyebilirsiniz, ancak canlıda kullanılmasını tavsiye etmeyiz. Biz Facebook'ta onları canlıda *kullanıyoruz*, ama bunun nedeni eğer bir şey bozulursa bugları düzeltmek için bizim varolmamız. Sizi uyardık!
 
-You can try these builds on personal projects or in a branch, but we don't recommend running them in production. At Facebook, we *do* run them in production, but that's because we're also there to fix bugs when something breaks. You've been warned!
+### Bu Deneysel Sürüm Kimin İçin? {#who-is-this-experimental-release-for}
 
-### Who Is This Experimental Release For? {#who-is-this-experimental-release-for}
+Bu sürüm birincil olarak erken adapte edenler, kütüphane yazarları ve meraklı insanlar içindir.
 
-This release is primarily aimed at early adopters, library authors, and curious people.
+Biz bu kodu canlıda kullanıyoruz (ve işimizi görüyor) ancak hala kimi buglar, eksik özellikler ve dokümantasyonda boşluklar var. Gelecekte yayınlanacak olan kararlı sürüme daha iyi hazırlanabilmek için eşzamanlı modda nelerin çalışmadığı konusunda bilgiye toplamak istiyoruz.
 
-We're using this code in production (and it works for us) but there are still some bugs, missing features, and gaps in the documentation. We'd like to hear more about what breaks in Concurrent Mode so we can better prepare it for an official stable release in the future.
+### Eşzamanlı Modu Etkinleştirmek {#enabling-concurrent-mode}
 
-### Enabling Concurrent Mode {#enabling-concurrent-mode}
+Normalde React'e bir özellik eklediğimizde onu hemen kullanmaya başlayabilirsiniz. Fragment, Context ve hatta Hooks böyle özelliklere bir örnek. Bunları eski kodda herhangi bir değişiklik yapmadan yeni kodda kulanabilirsiniz.
 
-Normally, when we add features to React, you can start using them immediately. Fragments, Context, and even Hooks are examples of such features. You can use them in new code without making any changes to the existing code.
+Eşzamanlı mod ise farklı. React'in nasıl çalıştığı konusunda mantıksal değişiklikler ekliyor. Aksi takdirde onun etkinleştirdiği [yeni özellikler](/docs/concurrent-mode-patterns.html) *mümkün  olamazdı*. Bu yüzden izole bir şekilde teker teker yayınlanmak yerine yeni bir "mod" altında gruplandırıldılar.
 
-Concurrent Mode is different. It introduces semantic changes to how React works. Otherwise, the [new features](/docs/concurrent-mode-patterns.html) enabled by it *wouldn't be possible*. This is why they're grouped into a new "mode" rather than released one by one in isolation.
+Eşzamanlı modu sadece belli alt ağaçlarda kullanamazsınız. Onun yerine bugün `ReactDOM.render()` metodunu çağırdığınız yerde kullanmanız gerekiyor.
 
-You can't opt into Concurrent Mode on a per-subtree basis. Instead, to opt in, you have to do it in the place where today you call `ReactDOM.render()`.
-
-**This will enable Concurrent Mode for the whole `<App />` tree:**
+**Bu tüm `<App />` ağacı için eşzamanlı modu etkinleştirir:**
 
 ```js
 import ReactDOM from 'react-dom';
 
-// If you previously had:
+// Eğer eskiden
 //
 // ReactDOM.render(<App />, document.getElementById('root'));
 //
-// You can opt into Concurrent Mode by writing:
+// kullanıyorduysanız, eşzamanlı modu şunu yazarak etkinleştirebilirsiniz:
 
 ReactDOM.createRoot(
   document.getElementById('root')
 ).render(<App />);
 ```
 
->Note:
+>Not:
 >
->Concurrent Mode APIs such as `createRoot` only exist in the experimental builds of React.
+>`createRoot` gibi eşzamanlı mod APIları React'in sadece deneysel versiyonlarında bulunmaktadır.
 
-In Concurrent Mode, the lifecycle methods [previously marked](/blog/2018/03/27/update-on-async-rendering.html) as "unsafe" actually *are* unsafe, and lead to bugs even more than in today's React. We don't recommend trying Concurrent Mode until your app is [Strict Mode](/docs/strict-mode.html)-compatible.
+Eşzamanlı modda [daha önce](/blog/2018/03/27/update-on-async-rendering.html) "güvensiz" olarak işaretlenmiş yaşam döngüsü metotları bu sefer gerçekten *güvensizdir* ve bugünkü React'ten dahi daha çok hataya sebep olurlar. Uygulamanızın [Strict Mode](/docs/strict-mode.html) desteği olana dek eşzamanlı modu kullanmanızı önermiyoruz.
 
-## What to Expect {#what-to-expect}
+## Beklenmesi Gerekenler {#what-to-expect}
 
 If you have a large existing app, or if your app depends on a lot of third-party packages, please don't expect that you can use the Concurrent Mode immediately. **For example, at Facebook we are using Concurrent Mode for the new website, but we're not planning to enable it on the old website.** This is because our old website still uses unsafe lifecycle methods in the product code, incompatible third-party libraries, and patterns that don't work well with the Concurrent Mode.
 
