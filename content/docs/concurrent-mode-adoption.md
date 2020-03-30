@@ -1,6 +1,6 @@
 ---
 id: concurrent-mode-adoption
-title: Adopting Concurrent Mode (Experimental)
+title: Eşzamanlı Mod'u Benimsemek (Deneysel)
 permalink: docs/concurrent-mode-adoption.html
 prev: concurrent-mode-patterns.html
 next: concurrent-mode-reference.html
@@ -15,21 +15,21 @@ next: concurrent-mode-reference.html
 
 <div class="scary">
 
->Caution:
+>Dikkat:
 >
->This page describes **experimental features that are not yet available in a stable release**. Don't rely on experimental builds of React in production apps. These features may change significantly and without a warning before they become a part of React.
+>Bu sayfa, **henüz stabil sürümde yer almayan deneysel özellikleri** anlatmaktadır. Canlı ortamda React'in deneysel versiyonlarına güvenmeyin. Bu özellikler, React'in bir parçası olmadan önce büyük oranda ve haber verilmeden değişikliğe uğrayabilir.
 >
->This documentation is aimed at early adopters and people who are curious. **If you're new to React, don't worry about these features** -- you don't need to learn them right now.
+>Bu dokümantasyonla erken adaptasyon yapanlar ve meraklı insanlar hedeflenmektedir. **Eğer React'te yeniyseniz, bu özellikleri önemsemeyin** -- bunları şu an öğrenmenize gerek yok.
 
 </div>
 
-- [Installation](#installation)
-  - [Who Is This Experimental Release For?](#who-is-this-experimental-release-for)
-  - [Enabling Concurrent Mode](#enabling-concurrent-mode)
-- [What to Expect](#what-to-expect)
-  - [Migration Step: Blocking Mode](#migration-step-blocking-mode)
-  - [Why So Many Modes?](#why-so-many-modes)
-  - [Feature Comparison](#feature-comparison)
+- [Yükleme](#installation)
+  - [Bu Deneysel Sürüm Kimin İçin?](#who-is-this-experimental-release-for)
+  - [Eşzamanlı Modu Etkinleştirmek](#enabling-concurrent-mode)
+- [Beklenmesi Gerekenler](#what-to-expect)
+  - [Göç Adımı: Engelleme Modu](#migration-step-blocking-mode)
+  - [Neden Bu Kadar Çok Mod Var?](#why-so-many-modes)
+  - [Özellik Karşılaştırması](#feature-comparison)
 
 ## Installation {#installation}
 
