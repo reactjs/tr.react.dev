@@ -27,7 +27,7 @@ next: concurrent-mode-reference.html
   - [Bu Deneysel Sürüm Kimin İçin?](#who-is-this-experimental-release-for)
   - [Eşzamanlı Modu Etkinleştirmek](#enabling-concurrent-mode)
 - [Beklenmesi Gerekenler](#what-to-expect)
-  - [Göç Adımı: Engelleme Modu](#migration-step-blocking-mode)
+  - [Migrasyon Adımı: Engelleme Modu](#migration-step-blocking-mode)
   - [Neden Bu Kadar Çok Mod Var?](#why-so-many-modes)
   - [Özellik Karşılaştırması](#feature-comparison)
 
@@ -82,29 +82,30 @@ Eşzamanlı modda [daha önce](/blog/2018/03/27/update-on-async-rendering.html) 
 
 ## Beklenmesi Gerekenler {#what-to-expect}
 
-If you have a large existing app, or if your app depends on a lot of third-party packages, please don't expect that you can use the Concurrent Mode immediately. **For example, at Facebook we are using Concurrent Mode for the new website, but we're not planning to enable it on the old website.** This is because our old website still uses unsafe lifecycle methods in the product code, incompatible third-party libraries, and patterns that don't work well with the Concurrent Mode.
+Eğer büyük bir uygulamanız varsa veya uygulamanızın çok fazla üçüncü parti paketlere bağımlılığı varsa, lütfen eşzamanlı modu anında kullanabileceğiziniz düşünmeyin. **Örneğin biz Facebook'ta eşzamanlı modu yeni sitede kullanıyoruz ama eski sitede kullanmayı planlamıyoruz.** Bunun nedeni, eski sitemizin hala güvensiz yaşam döngüsü metotlarını, uyumsuz üçüncü parti kütüphanelerini ve eşzamanlı modla çok iyi çalışmayan desenleri canlı kodda kullanıyor olması.
 
-In our experience, code that uses idiomatic React patterns and doesn't rely on external state management solutions is the easiest to get running in the Concurrent Mode. We will describe common problems we've seen and the solutions to them separately in the coming weeks.
+Bizim tecrübemiz, deyimsel React desenlerini kullanan ve harici state yönetimi çözümlerine bel bağlamayan kodun eşzamanlı modu çalıştırmada en kolay olduğu yönünde. Gördüğümüz ortak sorunları ve onların çözümlerini önümüzdeki haftalarda ayrıca anlatacağız.
 
-### Migration Step: Blocking Mode {#migration-step-blocking-mode}
+### Migrasyon Adımı: Engelleme Modu {#migration-step-blocking-mode}
 
-For older codebases, Concurrent Mode might be a step too far. This is why we also provide a new "Blocking Mode" in the experimental React builds. You can try it by substituting `createRoot` with `createBlockingRoot`. It only offers a *small subset* of the Concurrent Mode features, but it is closer to how React works today and can serve as a migration step.
+Eski kodlar için eşzamanlı mod biraz ileri gidiyor olabilir. Bu yüzden de deneysel React versiyonunda yeni "engelleme modu"nu sunuyoruz. `createRoot` yerine `createBlockingRoot` deneyebilirsiniz. Bu, eşzamanlı mod özelliklerinin sadece *küçük bir kısmını* sunar, ama React'in bugünkü çalışmasına yakındır ve bir migrasyon adımı olarak kullanılabilir.
 
-To recap:
+Toplamak gerekirse:
 
-* **Legacy Mode:** `ReactDOM.render(<App />, rootNode)`. This is what React apps use today. There are no plans to remove the legacy mode in the observable future — but it won't be able to support these new features.
-* **Blocking Mode:** `ReactDOM.createBlockingRoot(rootNode).render(<App />)`. It is currently experimental. It is intended as a first migration step for apps that want to get a subset of Concurrent Mode features.
-* **Concurrent Mode:** `ReactDOM.createRoot(rootNode).render(<App />)`. It is currently experimental. In the future, after it stabilizes, we intend to make it the default React mode. This mode enables *all* the new features.
+* **Miras modu:** `ReactDOM.render(<App />, rootNode)`. Bu, React uygulamalarının bugün kullandığı moddur. Gözlemlenebilir gelecekte miras modunu kaldırma planı yok - ama bu yeni özellikler de bu modla kullanılamayacak.
+* **Engelleme Modu:** `ReactDOM.createBlockingRoot(rootNode).render(<App />)`. Bu, şu anda deneysel. Eşzamanlı modun özelliklerinin bir alt kümesini kullanmak isteyen uygulamalar için bir migrasyon adımı olarak düşünüldü.
+* **Eşzamanlı mod:** `ReactDOM.createRoot(rootNode).render(<App />)`. 
+Bu, şu anda deneysel. Gelecekte, kararlılığa ulaştıktan sonra onu öntanımlı React modu yapmayı istiyoruz. Bu, yeni özelliklerin *tamamını* etkinleştiriyor.
 
-### Why So Many Modes? {#why-so-many-modes}
+### Neden Bu Kadar Çok Mod Var? {#why-so-many-modes}
 
-We think it is better to offer a [gradual migration strategy](/docs/faq-versioning.html#commitment-to-stability) than to make huge breaking changes — or to let React stagnate into irrelevance.
+Biz, çok büyük ve bozucu değişiklikler yapmak yerine [kademeli migrasyon stratejisi](/docs/faq-versioning.html#commitment-to-stability) sunmanın - veya React'in gereksizliğe doğru durulmasının - daha iyi olduğunu düşünüyoruz.
 
-In practice, we expect that most apps using Legacy Mode today should be able to migrate at least to the Blocking Mode (if not Concurrent Mode). This fragmentation can be annoying for libraries that aim to support all Modes in the short term. However, gradually moving the ecosystem away from the Legacy Mode will also *solve* problems that affect major libraries in the React ecosystem, such as [confusing Suspense behavior when reading layout](https://github.com/facebook/react/issues/14536) and [lack of consistent batching guarantees](https://github.com/facebook/react/issues/15080). There's a number of bugs that can't be fixed in Legacy Mode without changing semantics, but don't exist in Blocking and Concurrent Modes.
+Pratikte miras modunu kullanan uygulamaların çoğunun en azından engelleme moduna (hatta eşzamanlı moda) migrasyonu mümkün olmalı. Bu parçalanma, tüm modları desteklemeyi hedefleyen kütüphaneler için kısa vadede can sıkıcı olabilir. Ancak, ekosistemi miras modundan kademeli olarak uzaklaşmak aynı zamanda React ekosistemindeki büyük kütüphaneleri etkileyen [layoutu okurken kafa karıştıran Suspense davranışı](https://github.com/facebook/react/issues/14536) ve [tutarlı harmanlama garantisinin olmayışı](https://github.com/facebook/react/issues/15080) gibi sorunları da *çözecektir*. Miras modunda bulunan kimi hatalar mantıksal değişiklikler yapılmadan çözülemiyor ama engelleme modunda ve eşzamanlı modda bulunmuyor. 
 
-You can think of the Blocking Mode as a "gracefully degraded" version of the Concurrent Mode. **As a result, in longer term we should be able to converge and stop thinking about different Modes altogether.** But for now, Modes are an important migration strategy. They let everyone decide when a migration is worth it, and upgrade at their own pace.
+Engelleme modunu, eşzamanlı modun "zarifçe indirgenmiş" bir versiyonu olarak düşünebilirsiniz. **Sonuç olarak, uzun vadede birleştirebileceğiz ve farklı modları düşünmeyi komple bırakabileceğız.**  Ama şimdilik modlar önemli bir migrasyon stratejisi. Migrasyonun değip değmeyeceğine herkesin kendinin karar vermesine ve kendi hızlarıyla yükseltmelerine izin veriyorlar.
 
-### Feature Comparison {#feature-comparison}
+### Özellik Karşılaştırması {#feature-comparison}
 
 <style>
   #feature-table table { border-collapse: collapse; }
@@ -114,26 +115,26 @@ You can think of the Blocking Mode as a "gracefully degraded" version of the Con
 
 <div id="feature-table">
 
-|   |Legacy Mode  |Blocking Mode  |Concurrent Mode  |
+|   |Miras modu  |Engelleme modu  |Eşzamanlı mod  |
 |---  |---  |---  |---  |
-|[String Refs](/docs/refs-and-the-dom.html#legacy-api-string-refs)  |✅  |🚫**  |🚫**  |
-|[Legacy Context](/docs/legacy-context.html) |✅  |🚫**  |🚫**  |
+|[String referansları](/docs/refs-and-the-dom.html#legacy-api-string-refs)  |✅  |🚫**  |🚫**  |
+|[Miras Contexti](/docs/legacy-context.html) |✅  |🚫**  |🚫**  |
 |[findDOMNode](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)  |✅  |🚫**  |🚫**  |
 |[Suspense](/docs/concurrent-mode-suspense.html#what-is-suspense-exactly) |✅  |✅  |✅  |
 |[SuspenseList](/docs/concurrent-mode-patterns.html#suspenselist) |🚫  |✅  |✅  |
 |Suspense SSR + Hydration |🚫  |✅  |✅  |
-|Progressive Hydration  |🚫  |✅  |✅  |
-|Selective Hydration  |🚫  |🚫  |✅  |
-|Cooperative Multitasking |🚫  |🚫  |✅  |
-|Automatic batching of multiple setStates     |🚫* |✅  |✅  |
-|[Priority-based Rendering](/docs/concurrent-mode-patterns.html#splitting-high-and-low-priority-state) |🚫  |🚫  |✅  |
-|[Interruptible Prerendering](/docs/concurrent-mode-intro.html#interruptible-rendering) |🚫  |🚫  |✅  |
+|Kademeli Hydration  |🚫  |✅  |✅  |
+|Seçili Hydration  |🚫  |🚫  |✅  |
+|İşbirlikli Çoklugörev |🚫  |🚫  |✅  |
+|Çoklu setStates'in otomatik olarak gruplanması     |🚫* |✅  |✅  |
+|[Öncelik tabanlı Rendering](/docs/concurrent-mode-patterns.html#splitting-high-and-low-priority-state) |🚫  |🚫  |✅  |
+|[Ara verilebilir Prerendering](/docs/concurrent-mode-intro.html#interruptible-rendering) |🚫  |🚫  |✅  |
 |[useTransition](/docs/concurrent-mode-patterns.html#transitions)  |🚫  |🚫  |✅  |
 |[useDeferredValue](/docs/concurrent-mode-patterns.html#deferring-a-value) |🚫  |🚫  |✅  |
 |[Suspense Reveal "Train"](/docs/concurrent-mode-patterns.html#suspense-reveal-train)  |🚫  |🚫  |✅  |
 
 </div>
 
-\*: Legacy mode has automatic batching in React-managed events but it's limited to one browser task. Non-React events must opt-in using `unstable_batchedUpdates`. In Blocking Mode and Concurrent Mode, all `setState`s are batched by default.
+\*: Miras modunun React tarafından yönetilen eventlerde otomatik kümelemesi var ama sadece tek tarayıcı göreviyle sınırlı. React dışı eventler `unstable_batchedUpdates` kullanarak katılmak zorunda. Engelleme modunda ve eşzamanlı modda tüm `setState`ler öntanımlı olarak kümeleniyor.
 
-\*\*: Warns in development.
+\*\*: Geliştirmede uyarı verir.
