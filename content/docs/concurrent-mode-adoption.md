@@ -27,7 +27,7 @@ next: concurrent-mode-reference.html
   - [Bu Deneysel Sürüm Kimin İçin?](#who-is-this-experimental-release-for)
   - [Eşzamanlı Modu Etkinleştirmek](#enabling-concurrent-mode)
 - [Beklenmesi Gerekenler](#what-to-expect)
-  - [Migrasyon Adımı: Engelleme Modu](#migration-step-blocking-mode)
+  - [Geçiş Adımı: Engelleme Modu](#migration-step-blocking-mode)
   - [Neden Bu Kadar Çok Mod Var?](#why-so-many-modes)
   - [Özellik Karşılaştırması](#feature-comparison)
 
@@ -46,7 +46,7 @@ Bu sürümleri kişisel projelerinizde veya bir branch üzerinde deneyebilirsini
 
 ### Bu Deneysel Sürüm Kimin İçin? {#who-is-this-experimental-release-for}
 
-Bu sürüm birincil olarak erken adapte edenler, kütüphane yazarları ve meraklı insanlar içindir.
+Bu sürüm öncelikli olarak erken benimseyenler, kütüphane sahipleri ve meraklı insanlar içindir.
 
 Biz bu kodu canlıda kullanıyoruz (ve işimizi görüyor) ancak hala kimi buglar, eksik özellikler ve dokümantasyonda boşluklar var. Gelecekte yayınlanacak olan kararlı sürüme daha iyi hazırlanabilmek için eşzamanlı modda nelerin çalışmadığı konusunda bilgiye toplamak istiyoruz.
 
@@ -86,24 +86,24 @@ Eğer büyük bir uygulamanız varsa veya uygulamanızın çok fazla üçüncü 
 
 Bizim tecrübemiz, deyimsel React desenlerini kullanan ve harici state yönetimi çözümlerine bel bağlamayan kodun eşzamanlı modu çalıştırmada en kolay olduğu yönünde. Gördüğümüz ortak sorunları ve onların çözümlerini önümüzdeki haftalarda ayrıca anlatacağız.
 
-### Migrasyon Adımı: Engelleme Modu {#migration-step-blocking-mode}
+### Geçiş Adımı: Engelleme Modu {#migration-step-blocking-mode}
 
-Eski kodlar için eşzamanlı mod biraz ileri gidiyor olabilir. Bu yüzden de deneysel React versiyonunda yeni "engelleme modu"nu sunuyoruz. `createRoot` yerine `createBlockingRoot` deneyebilirsiniz. Bu, eşzamanlı mod özelliklerinin sadece *küçük bir kısmını* sunar, ama React'in bugünkü çalışmasına yakındır ve bir migrasyon adımı olarak kullanılabilir.
+Eski kodlar için eşzamanlı mod biraz ileri gidiyor olabilir. Bu yüzden de deneysel React versiyonunda yeni "engelleme modu"nu sunuyoruz. `createRoot` yerine `createBlockingRoot` deneyebilirsiniz. Bu, eşzamanlı mod özelliklerinin sadece *küçük bir kısmını* sunar, ama React'in bugünkü çalışmasına yakındır ve bir geçiş adımı olarak kullanılabilir.
 
 Toplamak gerekirse:
 
 * **Miras modu:** `ReactDOM.render(<App />, rootNode)`. Bu, React uygulamalarının bugün kullandığı moddur. Gözlemlenebilir gelecekte miras modunu kaldırma planı yok - ama bu yeni özellikler de bu modla kullanılamayacak.
-* **Engelleme Modu:** `ReactDOM.createBlockingRoot(rootNode).render(<App />)`. Bu, şu anda deneysel. Eşzamanlı modun özelliklerinin bir alt kümesini kullanmak isteyen uygulamalar için bir migrasyon adımı olarak düşünüldü.
+* **Engelleme Modu:** `ReactDOM.createBlockingRoot(rootNode).render(<App />)`. Bu, şu anda deneysel. Eşzamanlı modun özelliklerinin bir alt kümesini kullanmak isteyen uygulamalar için bir geçiş adımı olarak düşünüldü.
 * **Eşzamanlı mod:** `ReactDOM.createRoot(rootNode).render(<App />)`. 
 Bu, şu anda deneysel. Gelecekte, kararlılığa ulaştıktan sonra onu öntanımlı React modu yapmayı istiyoruz. Bu, yeni özelliklerin *tamamını* etkinleştiriyor.
 
 ### Neden Bu Kadar Çok Mod Var? {#why-so-many-modes}
 
-Biz, çok büyük ve bozucu değişiklikler yapmak yerine [kademeli migrasyon stratejisi](/docs/faq-versioning.html#commitment-to-stability) sunmanın - veya React'in gereksizliğe doğru durulmasının - daha iyi olduğunu düşünüyoruz.
+Biz, çok büyük ve bozucu değişiklikler yapmak yerine [kademeli geçiş stratejisi](/docs/faq-versioning.html#commitment-to-stability) sunmanın - veya React'in gereksizliğe doğru durulmasının - daha iyi olduğunu düşünüyoruz.
 
-Pratikte miras modunu kullanan uygulamaların çoğunun en azından engelleme moduna (hatta eşzamanlı moda) migrasyonu mümkün olmalı. Bu parçalanma, tüm modları desteklemeyi hedefleyen kütüphaneler için kısa vadede can sıkıcı olabilir. Ancak, ekosistemi miras modundan kademeli olarak uzaklaşmak aynı zamanda React ekosistemindeki büyük kütüphaneleri etkileyen [layoutu okurken kafa karıştıran Suspense davranışı](https://github.com/facebook/react/issues/14536) ve [tutarlı harmanlama garantisinin olmayışı](https://github.com/facebook/react/issues/15080) gibi sorunları da *çözecektir*. Miras modunda bulunan kimi hatalar mantıksal değişiklikler yapılmadan çözülemiyor ama engelleme modunda ve eşzamanlı modda bulunmuyor. 
+Pratikte miras modunu kullanan uygulamaların çoğunun en azından engelleme moduna (hatta eşzamanlı moda) geçişi mümkün olmalı. Bu parçalanma, tüm modları desteklemeyi hedefleyen kütüphaneler için kısa vadede can sıkıcı olabilir. Ancak, ekosistemi miras modundan kademeli olarak uzaklaşmak aynı zamanda React ekosistemindeki büyük kütüphaneleri etkileyen [layoutu okurken kafa karıştıran Suspense davranışı](https://github.com/facebook/react/issues/14536) ve [tutarlı harmanlama garantisinin olmayışı](https://github.com/facebook/react/issues/15080) gibi sorunları da *çözecektir*. Miras modunda bulunan kimi hatalar mantıksal değişiklikler yapılmadan çözülemiyor ama engelleme modunda ve eşzamanlı modda bulunmuyor. 
 
-Engelleme modunu, eşzamanlı modun "zarifçe indirgenmiş" bir versiyonu olarak düşünebilirsiniz. **Sonuç olarak, uzun vadede birleştirebileceğiz ve farklı modları düşünmeyi komple bırakabileceğız.**  Ama şimdilik modlar önemli bir migrasyon stratejisi. Migrasyonun değip değmeyeceğine herkesin kendinin karar vermesine ve kendi hızlarıyla yükseltmelerine izin veriyorlar.
+Engelleme modunu, eşzamanlı modun "zarifçe indirgenmiş" bir versiyonu olarak düşünebilirsiniz. **Sonuç olarak, uzun vadede birleştirebileceğiz ve farklı modları düşünmeyi komple bırakabileceğız.**  Ama şimdilik modlar önemli bir geçiş stratejisi. Geçiş yapmaya değip değmeyeceğine herkesin kendinin karar vermesine ve kendi hızlarıyla yükseltmelerine izin veriyorlar.
 
 ### Özellik Karşılaştırması {#feature-comparison}
 
@@ -128,13 +128,13 @@ Engelleme modunu, eşzamanlı modun "zarifçe indirgenmiş" bir versiyonu olarak
 |İşbirlikli Çoklugörev |🚫  |🚫  |✅  |
 |Çoklu setStates'in otomatik olarak gruplanması     |🚫* |✅  |✅  |
 |[Öncelik tabanlı Rendering](/docs/concurrent-mode-patterns.html#splitting-high-and-low-priority-state) |🚫  |🚫  |✅  |
-|[Ara verilebilir Prerendering](/docs/concurrent-mode-intro.html#interruptible-rendering) |🚫  |🚫  |✅  |
+|[Bölünebilir Prerendering](/docs/concurrent-mode-intro.html#interruptible-rendering) |🚫  |🚫  |✅  |
 |[useTransition](/docs/concurrent-mode-patterns.html#transitions)  |🚫  |🚫  |✅  |
 |[useDeferredValue](/docs/concurrent-mode-patterns.html#deferring-a-value) |🚫  |🚫  |✅  |
 |[Suspense Reveal "Train"](/docs/concurrent-mode-patterns.html#suspense-reveal-train)  |🚫  |🚫  |✅  |
 
 </div>
 
-\*: Miras modunun React tarafından yönetilen eventlerde otomatik kümelemesi var ama sadece tek tarayıcı göreviyle sınırlı. React dışı eventler `unstable_batchedUpdates` kullanarak katılmak zorunda. Engelleme modunda ve eşzamanlı modda tüm `setState`ler öntanımlı olarak kümeleniyor.
+\*: Miras modunun React tarafından yönetilen olaylarda otomatik kümelemesi var ama sadece tek tarayıcı göreviyle sınırlı. React dışı olaylar `unstable_batchedUpdates` kullanarak katılmak zorunda. Engelleme modunda ve eşzamanlı modda tüm `setState`ler öntanımlı olarak kümeleniyor.
 
 \*\*: Geliştirmede uyarı verir.
