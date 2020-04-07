@@ -68,17 +68,7 @@ class NameForm extends React.Component {
 
 `value` özelleği input’un kendisinde zaten var. Öyleyse bu değeri almak için yeni bir React state’i oluşturmaya gerek yok. Bu inputta `value` olarak state’i yazdıracağız ve input’ta her değişiklik olduğunda bu state’i güncelleyeceğiz.
 
-<<<<<<< HEAD
-Kontrollü bir bileşende her state değişimi, `handleChange` fonksiyonunu çalıştıracaktır. Örneğin, adın büyük harflerle yazılmasını isteseydik, `handleChange` fonksiyonunu şu şekilde yazabilirdik:
-
-```javascript{2}
-handleChange(event) {
-  this.setState({value: event.target.value.toUpperCase()});
-}
-```
-=======
-With a controlled component, the input's value is always driven by the React state. While this means you have to type a bit more code, you can now pass the value to other UI elements too, or reset it from other event handlers.
->>>>>>> fa5e6e7a988b4cb465601e4c3beece321edeb812
+Kontrollü bir bileşende, input'un değeri her zaman React state'i tarafından kontrol edilir. Bu biraz daha fazla kod yazmanız anlamına gelse de; artık input'un değerini diğer UI elemanlarına gönderebilir, ya da başka olay yöneticileri ile sıfırlayabilirsiniz.
 
 ## Textarea Elemanı {#the-textarea-tag}
 
