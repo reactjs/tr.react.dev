@@ -56,7 +56,7 @@ function ExampleWithManyStates() {
 }
 ```
 
-[Dizi parçalama (array destructuring)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) syntax'i `useState` kullanarak tanımladığımız state değişkenlerine farklı isimler vermemize olanak tanır. Bu isimler `useState` API'nin bir parçası değildir. Bunun yerine; eğer `useState`'i çok fazla çağırırsanız, React her render'da aynı sırayla çağırdığınızı var sayar. Bunun niye çalıştğına ve nasıl kullanışlı olacağına ileride değineceğiz.
+[Dizi parçalama (array destructuring)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring) syntax'i `useState` kullanarak tanımladığımız state değişkenlerine farklı isimler vermemize olanak tanır. Bu isimler `useState` API'nin bir parçası değildir. Bunun yerine; eğer `useState`'i çok fazla çağırırsanız, React her render'da aynı sırayla çağırdığınızı var sayar. Bunun niye çalıştığına ve nasıl kullanışlı olacağına ileride değineceğiz.
 
 #### Peki bir hook nedir? {#but-what-is-a-hook}
 
