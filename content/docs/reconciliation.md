@@ -1,10 +1,10 @@
 ---
 id: reconciliation
-title: Reconciliation
+title: Uyumlaştırma
 permalink: docs/reconciliation.html
 ---
 
-React provides a declarative API so that you don't have to worry about exactly what changes on every update. This makes writing applications a lot easier, but it might not be obvious how this is implemented within React. This article explains the choices we made in React's "diffing" algorithm so that component updates are predictable while being fast enough for high-performance apps.
+React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamarı yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl gerçekleştirildiği açık olmayabilir. Bu makale, React'ın "diffing" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken komponent güncellemeleri tahmin edilebilir.
 
 ## Motivation {#motivation}
 
