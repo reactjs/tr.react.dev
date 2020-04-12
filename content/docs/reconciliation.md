@@ -6,18 +6,18 @@ permalink: docs/reconciliation.html
 
 React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamarı yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl gerçekleştirildiği açık olmayabilir. Bu makale, React'ın "diffing" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken komponent güncellemeleri tahmin edilebilir.
 
-## Motivation {#motivation}
+## Motivasyon {#motivation}
 
-When you use React, at a single point in time you can think of the `render()` function as creating a tree of React elements. On the next state or props update, that `render()` function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.
+React'ı kullandığınızda, zaman içinde bir noktada `render()` fonksiyonunun React elemanlarından bir ağaç oluşturduğunu düşünebilirsiniz. Bir sonraki state veya prop'ların güncellenmesiyle, `render()` fonksiyonu farklı bir React elemanları ağacı döndürecektir. React daha sonra, en son ağaca uyacak şekilde kullanıcı arayüzünü nasıl verimli bir şekilde güncelleyeceğini bulmalıdır.
 
-There are some generic solutions to this algorithmic problem of generating the minimum number of operations to transform one tree into another. However, the [state of the art algorithms](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) have a complexity in the order of O(n<sup>3</sup>) where n is the number of elements in the tree.
+Bir ağacı diğerine dönüştürmek için minimum sayıda işlem üretme sorununa bazı genel çözümler vardır. Bununla birlikte, [en gelişmiş algoritmalarının](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) O(n<sup>3</sup>) düzeyinde karmaşıklığı vardır; burada n, ağaçtaki elemanların sayısıdır.
 
-If we used this in React, displaying 1000 elements would require in the order of one billion comparisons. This is far too expensive. Instead, React implements a heuristic O(n) algorithm based on two assumptions:
+Eğer bunu React'ta kullansaydık, 1000 öğenin görüntülenmesi sırasına göre bir milyar karşılaştırmaya ihtiyaç duyardı. Bu çok maliyetli. Bunun yerine, React iki varsayım üzerinde sezgisel bir O(n) algoritması gerçekleştirir:
 
-1. Two elements of different types will produce different trees.
-2. The developer can hint at which child elements may be stable across different renders with a `key` prop.
+1. Farklı türde iki eleman farklı ağaçlar üretecektir.
+2. Geliştirici, hangi alt elemanların farklı render'larda sabit olabileceğini `key` propu kullanarak belirtebilir.
 
-In practice, these assumptions are valid for almost all practical use cases.
+Uygulamada, bu varsayımlar neredeyse tüm kullanım durumları için geçerlidir.
 
 ## The Diffing Algorithm {#the-diffing-algorithm}
 
