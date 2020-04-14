@@ -97,18 +97,15 @@ November 6, 2020 in Mumbai, India
 
 [Website](https://www.reactindia.io) - [Twitter](https://twitter.com/react_india) - [Facebook](https://www.facebook.com/ReactJSIndia/) - [LinkedIn](https://www.linkedin.com/showcase/14545585) - [YouTube](https://www.youtube.com/channel/UCaFbHCBkPvVv1bWs_jwYt3w/videos)
 
-<<<<<<< HEAD
 ### React Next 2020 {#react-next-2020}
 June 15, 2020. Tel Aviv, Israel.
 
 [Website](https://react-next.com/) - [Twitter](https://twitter.com/reactnext) - [Facebook](https://www.facebook.com/ReactNext2016/) 
 
-=======
 ### React Day Berlin 2020 {#react-day-berlin-2020}
 November 25-27, 2020 in Berlin, Germany
 
 [Website](https://reactday.berlin) - [Twitter](https://twitter.com/reactdayberlin) - [Facebook](https://www.facebook.com/reactdayberlin/) - [Videos](https://www.youtube.com/reactdayberlin)
->>>>>>> b3c7f041586b71b31f556403426fcd7cab342535
 
 ## Past Conferences {#past-conferences}
 
