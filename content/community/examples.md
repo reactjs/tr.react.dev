@@ -6,8 +6,11 @@ sectionid: community
 permalink: community/examples.html
 ---
 
-React topluluğu tarafından yaratılmış pek çok proje mevcut. Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
+React topluluğu tarafından yaratılmış pek çok proje mevcut. Bu sayfada, üçüncü-parti state yönetim kütüphaneleri olmadan React kullanan projelere odaklanıyoruz.
 
+Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
+
+## Small Examples
 
 * **[Zeldog](https://yannsainty.github.io/Zeldog/)** Bir köpeğin daha fazla pizza yemek için ördeklerle savaştığı, Zelda benzeri bir oyun.
 * **[Hesap Makinesi](https://github.com/ahfarmer/calculator)** iOS hesap makinesinin  React ile uygulanmış hali
@@ -24,6 +27,13 @@ React topluluğu tarafından yaratılmış pek çok proje mevcut. Siz de kendi p
 * **[Course Learn Page](https://github.com/ulearnpro/ulearn)** Open Source LMS script in Laravel 5.8 and ReactJS 16.9
 * **[Speedy math](https://github.com/pankajladhar/speedy-math)** An application which allows kids to practice basic Mathematics i.e  Addition, Subtraction, Multiply, Comparison. It is a PWA (Progressive web app) with offline support and install as App features.
 * **[Unit Converter](https://github.com/KarthikeyanRanasthala/react-unit-converter)** Minimal Yet Responsive Unit Converter Built With React, Material-UI & Convert-Units.
+* **[Snap Shot](https://github.com/Yog9/SnapShot)** A photo gallery with search
 * **[BMI Calculator](https://github.com/GermaVinsmoke/bmi-calculator)** A React Hooks app for calculating BMI
-* **[ReactJS Hangman Game](https://github.com/vetrivelcsamy/reactjs-hangman)** ReactJS Hangman Game Find a Programming Language.
-* **[Radix Converter](https://github.com/kumom/radix-converter)** A small tool that converts numbers in radix 2 to 36 with arbitrary precision.
+* **[Image Compressor](https://github.com/RaulB-masai/react-image-compressor)** An offline image compressor built with React and browser-image-compression
+* **[Counter App](https://github.com/arnab-datta/counter-app)** A small shopping cart example
+* **[Tutorial Solutions](https://github.com/harman052/react-tutorial-solutions)** Solutions to challenges mentioned at the end of React tutorial
+
+## Complete Apps
+
+* **[Hacker News Clone React/GraphQL](https://github.com/clintonwoo/hackernews-react-graphql)** Hacker News clone rewritten with universal JavaScript, using React and GraphQL
+* **[Builder Book](https://github.com/builderbook/builderbook)** Open-source web app to write and host documentation or sell books. Built with React, Material-UI, Next, Express, Mongoose, MongoDB
