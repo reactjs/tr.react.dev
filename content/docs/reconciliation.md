@@ -4,7 +4,7 @@ title: Uyumlaştırma
 permalink: docs/reconciliation.html
 ---
 
-React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamarı yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl gerçekleştirildiği açık olmayabilir. Bu makale, React'ın "fark bulma" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken bileşen güncellemeleri tahmin edilebilir.
+React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamaları yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl gerçekleştirildiği açık olmayabilir. Bu makale, React'ın "fark bulma" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken bileşen güncellemeleri tahmin edilebilir.
 
 ## Motivasyon {#motivation}
 
@@ -12,10 +12,10 @@ React'ı kullandığınızda, zaman içinde bir noktada `render()` fonksiyonunun
 
 Bir ağacı diğerine dönüştürmek için minimum sayıda işlem üretme sorununa bazı genel çözümler vardır. Bununla birlikte, [en gelişmiş algoritmalarının](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) O(n<sup>3</sup>) düzeyinde karmaşıklığı vardır; burada n, ağaçtaki elemanların sayısıdır.
 
-Eğer bunu React'ta kullansaydık, 1000 öğenin görüntülenmesi sırasına göre bir milyar karşılaştırmaya ihtiyaç duyardı. Bu çok maliyetli. Bunun yerine, React iki varsayım üzerinde sezgisel bir O(n) algoritması gerçekleştirir:
+Eğer bunu React'ta kullansaydık, 1000 öğenin görüntülenmesi sırasına göre bir milyar karşılaştırmaya ihtiyaç duyardı. Bu çok maliyetli. Bunun yerine, React iki varsayım üzerine sezgisel bir O(n) algoritma gerçekleştirir:
 
 1. Farklı tip iki eleman farklı ağaçlar üretecektir.
-2. Geliştirici, hangi alt elemanların farklı render'larda sabit olabileceğini `key` prop’u kullanarak belirtebilir.
+2. Geliştirici, hangi alt elemanların farklı render edilmelerde sabit olabileceğini `key` prop’u kullanarak belirtebilir.
 
 Pratikte, bu varsayımlar neredeyse tüm kullanım durumları için geçerlidir.
 
@@ -27,7 +27,7 @@ Pratikte, bu varsayımlar neredeyse tüm kullanım durumları için geçerlidir.
 
 Kök elemanların tipleri farklı olduğunda, React eski ağacı yıkacak ve yeni ağacı sıfırdan inşa edecektir. `<a>`'dan `<img>`'e, `<Article>`'dan `<Comment>`'e veya `<Button>`'dan `<div>`'e gitmek - bunlardan herhangi biri tam bir yeniden inşaya yol açacaktır.
 
-Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state, kaybolur.
+Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state kaybolur.
 
 Kökün altındaki tüm bileşenlerin de bağlantısı kesilir ve stateleri yok edilir. Örneğin, fark bulurken:
 
@@ -136,7 +136,7 @@ Pratikte, bir anahtar bulmak genellikle zor değildir. Göstereceğiniz öğenin
 <li key={item.id}>{item.name}</li>
 ```
 
-Durum böyle olmadığında, anahtar oluşturmak için modelinize yeni bir ID özelliği ekleyebilir veya içeriğin bazı bölümlerini karıştırarak (hash) yapabilirsiniz. Anahtar sadece kardeşleri arasında benzersiz olmalı, genel (global) olarak değil.
+Durum böyle olmadığında, anahtar oluşturmak için modelinize yeni bir ID özelliği ekleyebilir veya içeriğin bazı bölümlerini karıştırarak (hash) yapabilirsiniz. Anahtar sadece kardeşleri arasında benzersiz olmalı, global (genel) olarak değil.
 
 Son çare olarak, dizideki bir öğenin dizinini anahtar olarak kullanabilirsiniz. Öğeler hiçbir zaman yeniden sıralanmazsa bu işe yarayabilir, ancak yeniden sıralamalar yavaş olacaktır.
 
@@ -144,14 +144,14 @@ Yeniden sıralamalar, dizinler anahtar olarak kullanıldığında bileşen state
 
 İşte CodePen'de [dizinlerin anahtar olarak kullanılmasından kaynaklanabilecek sorunlara bir örnek](codepen://reconciliation/index-used-as-key), ve işte [dizinlerin anahtar olarak kullanılmamasının sıralama, yeniden sıralama ve beklenen sorunları nasıl çözeceğini gösteren, aynı örneğin güncellenmiş bir sürümü](codepen://reconciliation/no-index-used-as-key).
 
-## Tradeoffs {#tradeoffs}
+## Ödünler {#tradeoffs}
 
-It is important to remember that the reconciliation algorithm is an implementation detail. React could rerender the whole app on every action; the end result would be the same. Just to be clear, rerender in this context means calling `render` for all components, it doesn't mean React will unmount and remount them. It will only apply the differences following the rules stated in the previous sections.
+Uyumlaştırma algoritmasının bir gerçekleştirilme detayı olduğunu hatırlamak önemlidir. React, her eylemde tüm uygulamayı yeniden render edebilir; sonuç aynı olurdu. Açık olmak gerekirse, bu bağlamda yeniden render etmek, tüm bileşenler için "render etmek" anlamına gelir, React'ın bunları sökeceği ve yeniden ekleyeceği anlamına gelmez. Uyumlaştırmayı, önceki bölümlerde belirtilen kurallara göre uygulayacaktır.
 
-We are regularly refining the heuristics in order to make common use cases faster. In the current implementation, you can express the fact that a subtree has been moved amongst its siblings, but you cannot tell that it has moved somewhere else. The algorithm will rerender that full subtree.
+Yaygın kullanım durumlarını daha hızlı hale getirmek için sezgisel yöntemleri düzenli olarak geliştiriyoruz. Mevcut gerçekleştirimde, bir alt ağacın kardeşleri arasında taşındığı gerçeğini ifade edebilirsiniz, ancak başka bir yere taşındığını söyleyemezsiniz. Algoritma tüm alt ağacı yeniden render edecektir.
 
-Because React relies on heuristics, if the assumptions behind them are not met, performance will suffer.
+React sezgisel yöntemlere dayandığı için, arkasındaki varsayımlar karşılanmazsa performans düşük olacaktır.
 
-1. The algorithm will not try to match subtrees of different component types. If you see yourself alternating between two component types with very similar output, you may want to make it the same type. In practice, we haven't found this to be an issue.
+1. Algoritma, farklı bileşen tiplerinin alt ağaçlarını eşleştirmeye çalışmaz. Kendinizi çok benzer çıktıya sahip iki bileşen türü arasında geçiş yaparken görürseniz, bunları aynı tür yapmak isteyebilirsiniz. Pratikte, bunun bir sorun olmadığını gördük.
 
-2. Keys should be stable, predictable, and unique. Unstable keys (like those produced by `Math.random()`) will cause many component instances and DOM nodes to be unnecessarily recreated, which can cause performance degradation and lost state in child components.
+2. Anahtarlar kararlı, öngörülebilir ve benzersiz olmalıdır. Kararsız anahtarlar (`Math.random()` tarafından üretilenler gibi) birçok bileşen nesnesinin ve DOM düğümünün gereksiz yere yeniden oluşturulmasına neden olur ve bu da alt bileşenlerde performans düşüşüne ve state kaybına neden olabilir.
