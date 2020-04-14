@@ -6,17 +6,12 @@ sectionid: community
 permalink: community/examples.html
 ---
 
-<<<<<<< HEAD
-React topluluğu tarafından yaratılmış pek çok proje mevcut. Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
-=======
-There are many example projects created by the React community. We're keeping this page focused on the ones that use React without third-party state management libraries.
->>>>>>> b3c7f041586b71b31f556403426fcd7cab342535
+React topluluğu tarafından yaratılmış pek çok proje mevcut. Bu sayfada, üçüncü-parti state yönetim kütüphaneleri olmadan React kullanan projelere odaklanıyoruz.
 
-If you add a project, please commit to keeping it up to date with the latest versions of React.
+Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
 
 ## Small Examples
 
-<<<<<<< HEAD
 * **[Zeldog](https://yannsainty.github.io/Zeldog/)** Bir köpeğin daha fazla pizza yemek için ördeklerle savaştığı, Zelda benzeri bir oyun.
 * **[Hesap Makinesi](https://github.com/ahfarmer/calculator)** iOS hesap makinesinin  React ile uygulanmış hali
 * **[Emoji Arama](https://github.com/ahfarmer/emoji-search)** Emoji aramak için basit bir React uygulaması
@@ -32,11 +27,7 @@ If you add a project, please commit to keeping it up to date with the latest ver
 * **[Course Learn Page](https://github.com/ulearnpro/ulearn)** Open Source LMS script in Laravel 5.8 and ReactJS 16.9
 * **[Speedy math](https://github.com/pankajladhar/speedy-math)** An application which allows kids to practice basic Mathematics i.e  Addition, Subtraction, Multiply, Comparison. It is a PWA (Progressive web app) with offline support and install as App features.
 * **[Unit Converter](https://github.com/KarthikeyanRanasthala/react-unit-converter)** Minimal Yet Responsive Unit Converter Built With React, Material-UI & Convert-Units.
-=======
-* **[Calculator](https://github.com/ahfarmer/calculator)** Implementation of the iOS calculator built in React
-* **[Emoji Search](https://github.com/ahfarmer/emoji-search)** React app for searching emoji
 * **[Snap Shot](https://github.com/Yog9/SnapShot)** A photo gallery with search
->>>>>>> b3c7f041586b71b31f556403426fcd7cab342535
 * **[BMI Calculator](https://github.com/GermaVinsmoke/bmi-calculator)** A React Hooks app for calculating BMI
 * **[Image Compressor](https://github.com/RaulB-masai/react-image-compressor)** An offline image compressor built with React and browser-image-compression
 * **[Counter App](https://github.com/arnab-datta/counter-app)** A small shopping cart example
