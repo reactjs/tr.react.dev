@@ -8,17 +8,9 @@ permalink: community/courses.html
 
 ## Ücretsiz Dersler {#free-courses}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy'nin giriş seviyesindeki React dersi.
-=======
-- [Glitch: React Starter Kit](https://glitch.com/culture/react-starter-kit/) - A free, 5-part video course with interactive code examples that will help you learn React.
-=======
-- [Glitch: React Starter Kit](https://glitch.com/glimmer/post/react-starter-kit/) - A free, 5-part video course with interactive code examples that will help you learn React.
->>>>>>> b3c7f041586b71b31f556403426fcd7cab342535
 
-- [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy's introductory course for React.
->>>>>>> 519a3aec91a426b0c8c9ae59e292d064df48c66a
+- [Glitch: React Starter Kit](https://glitch.com/glimmer/post/react-starter-kit/) - A free, 5-part video course with interactive code examples that will help you learn React.
 
 - [Egghead.io: React Öğrenmeye Başlayın](https://egghead.io/courses/start-learning-react) - Bu eğitim serisi, React'in temellerini keşfederek başlangıç yapmanıza yardımcı olacak.
 
