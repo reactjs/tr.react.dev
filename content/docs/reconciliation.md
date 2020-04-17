@@ -4,15 +4,15 @@ title: Uyumlaştırma
 permalink: docs/reconciliation.html
 ---
 
-React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamaları yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl gerçekleştirildiği açık olmayabilir. Bu makale, React'ın "fark bulma" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken bileşen güncellemeleri tahmin edilebilir.
+React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamaları yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl uygulandığı (implementation) açık olmayabilir. Bu makale, React'ın "fark bulma" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken bileşen güncellemeleri tahmin edilebilir.
 
 ## Motivasyon {#motivation}
 
 React'ı kullandığınızda, zaman içinde bir noktada `render()` fonksiyonunun React elemanlarından bir ağaç oluşturduğunu düşünebilirsiniz. Bir sonraki state veya prop'ların güncellenmesiyle, `render()` fonksiyonu farklı bir React elemanları ağacı döndürecektir. React daha sonra, en son ağaca uyacak şekilde kullanıcı arayüzünü nasıl verimli bir şekilde güncelleyeceğini bulmalıdır.
 
-Bir ağacı diğerine dönüştürmek için minimum sayıda işlem üretme sorununa bazı genel çözümler vardır. Bununla birlikte, [en gelişmiş algoritmalarının](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) O(n<sup>3</sup>) düzeyinde karmaşıklığı vardır; burada n, ağaçtaki elemanların sayısıdır.
+Bir ağacı diğerine dönüştürmek için minimum sayıda işlem üretme sorununa bazı genel çözümler vardır. Bununla birlikte, [en gelişmiş algoritmaların](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) O(n<sup>3</sup>) düzeyinde karmaşıklığı vardır; burada n, ağaçtaki elemanların sayısıdır.
 
-Eğer bunu React'ta kullansaydık, 1000 öğenin görüntülenmesi sırasına göre bir milyar karşılaştırmaya ihtiyaç duyardı. Bu çok maliyetli. Bunun yerine, React iki varsayım üzerine sezgisel bir O(n) algoritma gerçekleştirir:
+Eğer bunu React'ta kullansaydık, 1000 öğenin görüntülenmesi sırasına göre bir milyar karşılaştırmaya ihtiyaç duyardı. Bu çok maliyetli. Bunun yerine, React iki varsayım üzerine sezgisel bir O(n) algoritma uygular:
 
 1. Farklı tip iki eleman farklı ağaçlar üretecektir.
 2. Geliştirici, hangi alt elemanların farklı render edilmelerde sabit olabileceğini `key` prop’u kullanarak belirtebilir.
@@ -94,7 +94,7 @@ Varsayılan olarak, bir DOM düğümünün alt elemanlarında özyineleme yapark
 
 React iki `<li>first</li>` ağacını eşleştirir, iki `<li>second</li>` ağacını eşleştirir ve sonra `<li>third</li>` ağacını ekler.
 
-Doğal bir şekilde uygularsanız, başlangıçta eleman eklemek daha kötü performansa sahiptir. Örneğin, bu iki ağaç arasında dönüştürme verimsiz çalışır:
+Bunu bilmeden uygularsanız, ağacın sonuna değil de başına eleman eklemek daha kötü bir performansa sahiptir. Örneğin, bu iki ağaç arasında dönüştürme işlemi verimsiz çalışır:
 
 ```xml
 <ul>
@@ -146,9 +146,9 @@ Yeniden sıralamalar, dizinler anahtar olarak kullanıldığında bileşen state
 
 ## Ödünler {#tradeoffs}
 
-Uyumlaştırma algoritmasının bir gerçekleştirilme detayı olduğunu hatırlamak önemlidir. React, her eylemde tüm uygulamayı yeniden render edebilir; sonuç aynı olurdu. Açık olmak gerekirse, bu bağlamda yeniden render etmek, tüm bileşenler için "render etmek" anlamına gelir, React'ın bunları sökeceği ve yeniden ekleyeceği anlamına gelmez. Uyumlaştırmayı, önceki bölümlerde belirtilen kurallara göre uygulayacaktır.
+Uyumlaştırma algoritmasının bir uygulama (implementation) detayı olduğunu hatırlamak önemlidir. React, her eylemde tüm uygulamayı yeniden render edebilir; sonuç aynı olurdu. Açık olmak gerekirse, bu bağlamda yeniden render etmek, tüm bileşenler için "render etmek" anlamına gelir, React'ın bunları sökeceği ve yeniden ekleyeceği anlamına gelmez. Uyumlaştırmayı, önceki bölümlerde belirtilen kurallara göre uygulayacaktır.
 
-Yaygın kullanım durumlarını daha hızlı hale getirmek için sezgisel yöntemleri düzenli olarak geliştiriyoruz. Mevcut gerçekleştirimde, bir alt ağacın kardeşleri arasında taşındığı gerçeğini ifade edebilirsiniz, ancak başka bir yere taşındığını söyleyemezsiniz. Algoritma tüm alt ağacı yeniden render edecektir.
+Yaygın kullanım durumlarını daha hızlı hale getirmek için sezgisel yöntemleri düzenli olarak geliştiriyoruz. Mevcut uygulamada, bir alt ağacın kardeşleri arasında taşındığı gerçeğini ifade edebilirsiniz, ancak başka bir yere taşındığını söyleyemezsiniz. Algoritma tüm alt ağacı yeniden render edecektir.
 
 React sezgisel yöntemlere dayandığı için, arkasındaki varsayımlar karşılanmazsa performans düşük olacaktır.
 
