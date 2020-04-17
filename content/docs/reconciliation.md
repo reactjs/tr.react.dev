@@ -1,35 +1,35 @@
 ---
 id: reconciliation
-title: Reconciliation
+title: Uyumlaştırma
 permalink: docs/reconciliation.html
 ---
 
-React provides a declarative API so that you don't have to worry about exactly what changes on every update. This makes writing applications a lot easier, but it might not be obvious how this is implemented within React. This article explains the choices we made in React's "diffing" algorithm so that component updates are predictable while being fast enough for high-performance apps.
+React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamaları yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl uygulandığı (implementation) açık olmayabilir. Bu makale, React'ın "fark bulma" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken bileşen güncellemeleri tahmin edilebilir.
 
-## Motivation {#motivation}
+## Motivasyon {#motivation}
 
-When you use React, at a single point in time you can think of the `render()` function as creating a tree of React elements. On the next state or props update, that `render()` function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.
+React'ı kullandığınızda, zaman içinde bir noktada `render()` fonksiyonunun React elemanlarından bir ağaç oluşturduğunu düşünebilirsiniz. Bir sonraki state veya prop'ların güncellenmesiyle, `render()` fonksiyonu farklı bir React elemanları ağacı döndürecektir. React daha sonra, en son ağaca uyacak şekilde kullanıcı arayüzünü nasıl verimli bir şekilde güncelleyeceğini bulmalıdır.
 
-There are some generic solutions to this algorithmic problem of generating the minimum number of operations to transform one tree into another. However, the [state of the art algorithms](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) have a complexity in the order of O(n<sup>3</sup>) where n is the number of elements in the tree.
+Bir ağacı diğerine dönüştürmek için minimum sayıda işlem üretme sorununa bazı genel çözümler vardır. Bununla birlikte, [en gelişmiş algoritmaların](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) O(n<sup>3</sup>) düzeyinde karmaşıklığı vardır; burada n, ağaçtaki elemanların sayısıdır.
 
-If we used this in React, displaying 1000 elements would require in the order of one billion comparisons. This is far too expensive. Instead, React implements a heuristic O(n) algorithm based on two assumptions:
+Eğer bunu React'ta kullansaydık, 1000 öğenin görüntülenmesi sırasına göre bir milyar karşılaştırmaya ihtiyaç duyardı. Bu çok maliyetli. Bunun yerine, React iki varsayım üzerine sezgisel bir O(n) algoritma uygular:
 
-1. Two elements of different types will produce different trees.
-2. The developer can hint at which child elements may be stable across different renders with a `key` prop.
+1. Farklı tip iki eleman farklı ağaçlar üretecektir.
+2. Geliştirici, hangi alt elemanların farklı render edilmelerde sabit olabileceğini `key` prop’u kullanarak belirtebilir.
 
-In practice, these assumptions are valid for almost all practical use cases.
+Pratikte, bu varsayımlar neredeyse tüm kullanım durumları için geçerlidir.
 
-## The Diffing Algorithm {#the-diffing-algorithm}
+## Fark Bulma (Diffing) Algoritması {#the-diffing-algorithm}
 
-When diffing two trees, React first compares the two root elements. The behavior is different depending on the types of the root elements.
+İki ağacın farkını bulurken, React önce iki kök elemanı karşılaştırır. Davranış, kök elemanların tipine bağlı olarak farklılık gösterir.
 
-### Elements Of Different Types {#elements-of-different-types}
+### Farklı Tip Elemanlar {#elements-of-different-types}
 
-Whenever the root elements have different types, React will tear down the old tree and build the new tree from scratch. Going from `<a>` to `<img>`, or from `<Article>` to `<Comment>`, or from `<Button>` to `<div>` - any of those will lead to a full rebuild.
+Kök elemanların tipleri farklı olduğunda, React eski ağacı yıkacak ve yeni ağacı sıfırdan inşa edecektir. `<a>`'dan `<img>`'e, `<Article>`'dan `<Comment>`'e veya `<Button>`'dan `<div>`'e gitmek - bunlardan herhangi biri tam bir yeniden inşaya yol açacaktır.
 
-When tearing down a tree, old DOM nodes are destroyed. Component instances receive `componentWillUnmount()`. When building up a new tree, new DOM nodes are inserted into the DOM. Component instances receive `componentWillMount()` and then `componentDidMount()`. Any state associated with the old tree is lost.
+Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state kaybolur.
 
-Any components below the root will also get unmounted and have their state destroyed. For example, when diffing:
+Kökün altındaki tüm bileşenlerin de bağlantısı kesilir ve stateleri yok edilir. Örneğin, fark bulurken:
 
 ```xml
 <div>
@@ -41,11 +41,11 @@ Any components below the root will also get unmounted and have their state destr
 </span>
 ```
 
-This will destroy the old `Counter` and remount a new one.
+Bu, eski `Counter`'ı yok eder ve yenisini oluşturur.
 
-### DOM Elements Of The Same Type {#dom-elements-of-the-same-type}
+### Aynı Tip DOM Elemanları {#dom-elements-of-the-same-type}
 
-When comparing two React DOM elements of the same type, React looks at the attributes of both, keeps the same underlying DOM node, and only updates the changed attributes. For example:
+Aynı tip iki React DOM elemanını karşılaştırırken, React her ikisinin de özelliklerine bakar, aynı DOM düğümünü tutar ve yalnızca değiştirilen özellikleri günceller. Örneğin:
 
 ```xml
 <div className="before" title="stuff" />
@@ -53,9 +53,9 @@ When comparing two React DOM elements of the same type, React looks at the attri
 <div className="after" title="stuff" />
 ```
 
-By comparing these two elements, React knows to only modify the `className` on the underlying DOM node.
+React bu iki elemanı karşılaştırarak, yalnızca DOM düğümündeki `className` özelliğini değiştirmesi gerektiğini bilir.
 
-When updating `style`, React also knows to update only the properties that changed. For example:
+`style`'ı güncellerken, React yalnızca değişen özellikleri güncellemesi gerektiğini de bilir. Örneğin:
 
 ```xml
 <div style={{color: 'red', fontWeight: 'bold'}} />
@@ -63,21 +63,21 @@ When updating `style`, React also knows to update only the properties that chang
 <div style={{color: 'green', fontWeight: 'bold'}} />
 ```
 
-When converting between these two elements, React knows to only modify the `color` style, not the `fontWeight`.
+React, bu iki eleman arasında dönüştürme yaparken `fontWeight`'i değil, yalnızca `color` stilini değiştirmesi gerektiğini bilir.
 
-After handling the DOM node, React then recurses on the children.
+DOM düğümünü yönetildikten sonra, React alt elemanlar üzerinde özyinelemeli olarak devam eder.
 
-### Component Elements Of The Same Type {#component-elements-of-the-same-type}
+### Aynı Tip Bileşen Elemanları {#component-elements-of-the-same-type}
 
-When a component updates, the instance stays the same, so that state is maintained across renders. React updates the props of the underlying component instance to match the new element, and calls `componentWillReceiveProps()` and `componentWillUpdate()` on the underlying instance.
+Bir bileşen güncellendiğinde, nesne aynı kalır, böylece state render edilmeler arasında korunur. React, bileşen nesnesinin prop'larını yeni elemanla eşleşecek şekilde günceller ve nesnede `componentWillReceiveProps()` ve `componentWillUpdate()`'i calıştırır.
 
-Next, the `render()` method is called and the diff algorithm recurses on the previous result and the new result.
+Ardından, `render()` metodu çağrılır ve fark bulma algoritması önceki sonuç ile yeni sonuç üzerinden özyinelemeli olarak devam eder.
 
-### Recursing On Children {#recursing-on-children}
+### Alt Elemanlarda Özyineleme {#recursing-on-children}
 
-By default, when recursing on the children of a DOM node, React just iterates over both lists of children at the same time and generates a mutation whenever there's a difference.
+Varsayılan olarak, bir DOM düğümünün alt elemanlarında özyineleme yaparken, React aynı anda her iki alt eleman listesinde de gezer ve fark olduğunda mutasyon oluşturur.
 
-For example, when adding an element at the end of the children, converting between these two trees works well:
+Örneğin, alt elemanların sonuna bir eleman eklerken, bu iki ağaç arasında dönüştürme iyi sonuç verir:
 
 ```xml
 <ul>
@@ -92,9 +92,9 @@ For example, when adding an element at the end of the children, converting betwe
 </ul>
 ```
 
-React will match the two `<li>first</li>` trees, match the two `<li>second</li>` trees, and then insert the `<li>third</li>` tree.
+React iki `<li>first</li>` ağacını eşleştirir, iki `<li>second</li>` ağacını eşleştirir ve sonra `<li>third</li>` ağacını ekler.
 
-If you implement it naively, inserting an element at the beginning has worse performance. For example, converting between these two trees works poorly:
+Bunu bilmeden uygularsanız, ağacın sonuna değil de başına eleman eklemek daha kötü bir performansa sahiptir. Örneğin, bu iki ağaç arasında dönüştürme işlemi verimsiz çalışır:
 
 ```xml
 <ul>
@@ -109,11 +109,11 @@ If you implement it naively, inserting an element at the beginning has worse per
 </ul>
 ```
 
-React will mutate every child instead of realizing it can keep the `<li>Duke</li>` and `<li>Villanova</li>` subtrees intact. This inefficiency can be a problem.
+React, `<li>Duke</li>` ve `<li>Villanova</li>`  alt ağaçlarını dokunmadan tutabileceğini farketmek yerine, her çocuğu mutasyona uğratacaktır. Bu verimsizlik bir sorun olabilir.
 
-### Keys {#keys}
+### Anahtarlar (Keys) {#keys}
 
-In order to solve this issue, React supports a `key` attribute. When children have keys, React uses the key to match children in the original tree with children in the subsequent tree. For example, adding a `key` to our inefficient example above can make the tree conversion efficient:
+Bu sorunu çözmek için, React `key` özelliğini destekler. Elemanların anahtarı olduğunda, React anahtarı orijinal ağaçtaki elemanları sonraki ağaçtaki elemanlarla eşleştirmek için kullanır. Örneğin, yukarıdaki verimsiz örneğimize bir `key` eklemek ağaç dönüşümünü verimli hale getirebilir:
 
 ```xml
 <ul>
@@ -128,30 +128,30 @@ In order to solve this issue, React supports a `key` attribute. When children ha
 </ul>
 ```
 
-Now React knows that the element with key `'2014'` is the new one, and the elements with the keys `'2015'` and `'2016'` have just moved.
+Artık React, `'2014'` anahtarlı elemanın yeni olduğunu ve `'2015'` ile `'2016'` anahtarlı elemanların sadece yer değiştirdiğini bilir.
 
-In practice, finding a key is usually not hard. The element you are going to display may already have a unique ID, so the key can just come from your data:
+Pratikte, bir anahtar bulmak genellikle zor değildir. Göstereceğiniz öğenin zaten benzersiz bir kimliği (ID) olabilir, bu nedenle anahtar verilerinizden gelebilir:
 
 ```js
 <li key={item.id}>{item.name}</li>
 ```
 
-When that's not the case, you can add a new ID property to your model or hash some parts of the content to generate a key. The key only has to be unique among its siblings, not globally unique.
+Durum böyle olmadığında, anahtar oluşturmak için modelinize yeni bir ID özelliği ekleyebilir veya içeriğin bazı bölümlerini karıştırarak (hash) yapabilirsiniz. Anahtar sadece kardeşleri arasında benzersiz olmalı, global (genel) olarak değil.
 
-As a last resort, you can pass an item's index in the array as a key. This can work well if the items are never reordered, but reorders will be slow.
+Son çare olarak, dizideki bir öğenin dizinini anahtar olarak kullanabilirsiniz. Öğeler hiçbir zaman yeniden sıralanmazsa bu işe yarayabilir, ancak yeniden sıralamalar yavaş olacaktır.
 
-Reorders can also cause issues with component state when indexes are used as keys. Component instances are updated and reused based on their key. If the key is an index, moving an item changes it. As a result, component state for things like uncontrolled inputs can get mixed up and updated in unexpected ways.
+Yeniden sıralamalar, dizinler anahtar olarak kullanıldığında bileşen state'i ile ilgili sorunlara da neden olabilir. Bileşen nesneleri, anahtarlarına göre güncellenir ve yeniden kullanılır. Anahtar bir dizinse, bir öğeyi taşımak onu değiştirir. Sonuç olarak, bileşen state'i kontrolsüz girdiler gibi şeyler için beklenmedik şekillerde karışabilir ve güncellenebilir.
 
-Here is [an example of the issues that can be caused by using indexes as keys](codepen://reconciliation/index-used-as-key) on CodePen, and here is [an updated version of the same example showing how not using indexes as keys will fix these reordering, sorting, and prepending issues](codepen://reconciliation/no-index-used-as-key).
+İşte CodePen'de [dizinlerin anahtar olarak kullanılmasından kaynaklanabilecek sorunlara bir örnek](codepen://reconciliation/index-used-as-key), ve işte [dizinlerin anahtar olarak kullanılmamasının sıralama, yeniden sıralama ve beklenen sorunları nasıl çözeceğini gösteren, aynı örneğin güncellenmiş bir sürümü](codepen://reconciliation/no-index-used-as-key).
 
-## Tradeoffs {#tradeoffs}
+## Ödünler {#tradeoffs}
 
-It is important to remember that the reconciliation algorithm is an implementation detail. React could rerender the whole app on every action; the end result would be the same. Just to be clear, rerender in this context means calling `render` for all components, it doesn't mean React will unmount and remount them. It will only apply the differences following the rules stated in the previous sections.
+Uyumlaştırma algoritmasının bir uygulama (implementation) detayı olduğunu hatırlamak önemlidir. React, her eylemde tüm uygulamayı yeniden render edebilir; sonuç aynı olurdu. Açık olmak gerekirse, bu bağlamda yeniden render etmek, tüm bileşenler için "render etmek" anlamına gelir, React'ın bunları sökeceği ve yeniden ekleyeceği anlamına gelmez. Uyumlaştırmayı, önceki bölümlerde belirtilen kurallara göre uygulayacaktır.
 
-We are regularly refining the heuristics in order to make common use cases faster. In the current implementation, you can express the fact that a subtree has been moved amongst its siblings, but you cannot tell that it has moved somewhere else. The algorithm will rerender that full subtree.
+Yaygın kullanım durumlarını daha hızlı hale getirmek için sezgisel yöntemleri düzenli olarak geliştiriyoruz. Mevcut uygulamada, bir alt ağacın kardeşleri arasında taşındığı gerçeğini ifade edebilirsiniz, ancak başka bir yere taşındığını söyleyemezsiniz. Algoritma tüm alt ağacı yeniden render edecektir.
 
-Because React relies on heuristics, if the assumptions behind them are not met, performance will suffer.
+React sezgisel yöntemlere dayandığı için, arkasındaki varsayımlar karşılanmazsa performans düşük olacaktır.
 
-1. The algorithm will not try to match subtrees of different component types. If you see yourself alternating between two component types with very similar output, you may want to make it the same type. In practice, we haven't found this to be an issue.
+1. Algoritma, farklı bileşen tiplerinin alt ağaçlarını eşleştirmeye çalışmaz. Kendinizi çok benzer çıktıya sahip iki bileşen türü arasında geçiş yaparken görürseniz, bunları aynı tür yapmak isteyebilirsiniz. Pratikte, bunun bir sorun olmadığını gördük.
 
-2. Keys should be stable, predictable, and unique. Unstable keys (like those produced by `Math.random()`) will cause many component instances and DOM nodes to be unnecessarily recreated, which can cause performance degradation and lost state in child components.
+2. Anahtarlar kararlı, öngörülebilir ve benzersiz olmalıdır. Kararsız anahtarlar (`Math.random()` tarafından üretilenler gibi) birçok bileşen nesnesinin ve DOM düğümünün gereksiz yere yeniden oluşturulmasına neden olur ve bu da alt bileşenlerde performans düşüşüne ve state kaybına neden olabilir.
