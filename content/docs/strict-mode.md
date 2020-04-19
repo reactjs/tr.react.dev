@@ -13,9 +13,9 @@ permalink: docs/strict-mode.html
 Strict yöntemini uygulamanızın herhangi bir parçası için aktif hale getirebilirsiniz. Örneğin:
 `embed:strict-mode/enabling-strict-mode.js`
 
-Yukarıdaki örnekte strict yöntem kontrolleri `Header` ve `Footer` bileşenleri için yapılmayacaktır. Ancak `ComponentOne` ve `ComponentTwo` ve onların tüm alt öğeleri için kontroller yapılacaktır.
+Yukarıdaki örnekte strict yöntem kontrolleri `Header` ve `Footer` bileşenleri için *yapılmayacaktır*. Ancak `ComponentOne` ve `ComponentTwo` ve onların tüm alt öğeleri için kontroller yapılacaktır.
 
-`Strict Yöntemi` bize şu konularda yardımcı olur:
+`Strict Yöntemi` şu konularda yardımcı olur:
 * [Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme](#identifying-unsafe-lifecycles)
 * [Eski string ref API kullanımı hakkında uyarma](#warning-about-legacy-string-ref-api-usage)
 * [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
@@ -26,7 +26,7 @@ React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
 ### Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme {#identifying-unsafe-lifecycles}
 
-[Bu blog yazısında](/blog/2018/03/27/update-on-async-rendering.html) açıklandığı gibi, bazı eski yaşam döngüsü metodlarıni asenkron React uygulamalarında kullanmak güvenli değildir. applications. Ancak uygulamanız üçüncü parti kütüphaneler kullanıyorsa bu yaşam döngüsü metodlarının kullanılmadığından emin olmak oldukça zordur. Neyse ki, Strict Yöntemi bize bu konuda yardımcı olabilir!
+[Bu blog yazısında](/blog/2018/03/27/update-on-async-rendering.html) açıklandığı gibi, bazı eski yaşam döngüsü metodlarını asenkron React uygulamalarında kullanmak güvenli değildir. Ancak uygulamanız üçüncü parti kütüphaneler kullanıyorsa bu yaşam döngüsü metodlarının kullanılmadığından emin olmak oldukça zordur. Neyse ki, Strict Yöntemi bize bu konuda yardımcı olabilir!
 
 Strict yöntemi etkinleştirildiğinde, React güvenli olmayan yaşam döngüsü kullanan sınıf bileşenlerinin bir listesini toplar ve bu bileşenler hakkında aşağıdaki gibi bir uyarı verir.
 
@@ -41,7 +41,7 @@ React, daha önce ref'leri yönetmek için iki yol sunuyordu: Eski string ref AP
 React 16.3, herhangi bir dezavantajı olmadan string ref'in rahatlığını sunan üçüncü bir seçenek getirdi:
 `embed:16-3-release-blog-post/create-ref-example.js`
 
-Nesne ref'leri büyük ölçüde string ref'lerinin yerine geldiğinden beri Strict yöntemi artık string ref kullanımları konusunda uyarıyor.
+Nesne ref'leri büyük ölçüde string ref'lerinin yerine geldiğinden beri strict yöntemi artık string ref kullanımları konusunda uyarıyor.
 
 > **Not:**
 >
@@ -57,8 +57,7 @@ React, sınıf nesne örneği verilen bir DOM düğümünü ağaçta aramak içi
 
 `findDOMNode` ayrıca sınıf bileşenlerinde de kullanılabilir ancak bu, bir ebeveynin belirli alt öğelerin render edilmesine izin vererek soyutlama düzeylerini kırıyordu. Bir üst öğe DOM düğümüne erişebileceği için bir bileşenin uygulama ayrıntılarını değiştiremeyeceğiniz bir kodun yeniden düzenlenmesi (refactoring) tehlikesi oluşturur. `findDOMNode` sadece ilk alt öğeyi döndürür fakat Fragment'ler kullanılarak bir bileşenin birden fazla alt öğe render etmesi mümkündür. `findDOMNode` tek seferlik okuma API'sidir. Sadece istendiğinde cevap verir. Bir alt bileşen farklı bir farklı bir düğüm render ediyorsa, bu değişikliği ele almanın bir yolu yoktur. Bu nedenle `findDOMNode` sadece bileşenler asla değişmeyen tek bir DOM düğümü döndürürse işe yarar.
 
-
-Bunun yerine, bunu özel bileşeninize bir ref geçerek ve [ref yönlendirme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components) ile DOM boyunca ileterek açıkça yapabilirsiniz.
+Bunun yerine, bunu özel bileşeninize bir ref geçerek ve [ref yönlendirme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components) ile DOM boyunca ileterek yapabilirsiniz.
 
 Ayrıca bileşeninize bir sarıcı (wrapper) DOM düğümü ekleyebilir ve doğrudan ona bir ref ekleyebilirsiniz.
 
@@ -88,13 +87,13 @@ Commit aşaması genellikle hızlıdır fakat render aşaması yavaş olabilir. 
 
 Render aşaması yaşam döngüleri aşağıdaki sınıf bileşeni metodlarını içerir:
 * `constructor`
-* `componentWillMount` (or `UNSAFE_componentWillMount`)
-* `componentWillReceiveProps` (or `UNSAFE_componentWillReceiveProps`)
-* `componentWillUpdate` (or `UNSAFE_componentWillUpdate`)
+* `componentWillMount` (veya `UNSAFE_componentWillMount`)
+* `componentWillReceiveProps` (veya `UNSAFE_componentWillReceiveProps`)
+* `componentWillUpdate` (veya `UNSAFE_componentWillUpdate`)
 * `getDerivedStateFromProps`
 * `shouldComponentUpdate`
 * `render`
-* `setState` updater functions (the first argument)
+* `setState` güncelleyen fonksiyonlar (ilk argüman)
 
 Yukarıdaki metodlar bir kereden fazla çağrılabileceğinden, yan etkiler içermemesi önemlidir. Bu kuralı göz ardı etmek, bellek sızıntıları (memory leak) ve geçersiz uygulama durumu (invalid application state) gibi çeşitli sorunlara yol açabilir. Ne yazık ki bu sorunları tespit etmek zor olabilir çünkü genellikle [belirlenebilir olmayabilirler](https://en.wikipedia.org/wiki/Deterministic_algorithm).
 
@@ -113,13 +112,13 @@ Strict yöntemi, yan etkileri otomatik olarak tespit edemez ancak onları daha b
 Örneğin, aşağıdaki kodu ele alalım:
 `embed:strict-mode/side-effects-in-constructor.js`
 
-İlk bakışta bu kod sorunlu görünmeyebilir. Ancak `SharedApplicationState.recordEvent` [etkisiz](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning) değilse, bu bileşeni birden çok kez başlatmak geçersiz uygulama durumuna yol açabilir. Bu türk ince bir hata geliştirme sırasında ortaya çıkmayabilir veya bunu tutarsız bir şekilde yaparak gözden kaçabilir.
+İlk bakışta bu kod sorunlu görünmeyebilir. Ancak `SharedApplicationState.recordEvent` [etkisiz](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning) değilse, bu bileşeni birden çok kez başlatmak geçersiz uygulama durumuna yol açabilir. Bu tür ince bir hata geliştirme sırasında ortaya çıkmayabilir veya bunu tutarsız bir şekilde yaparak gözden kaçabilir.
 
 Strict yöntemi, `constructor` gibi metodları kasıtlı olarak iki kere çağırarak, bu gibi desenlerin fark edilmesini sağlar.
 
 ### Eski context API tespit etme {#detecting-legacy-context-api}
 
-Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılacaktır. Hala tüm 16.x sürümleri için çalışır, ancak strict yönteminde şubu uyarı mesajını gösterecektir:
+Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılacaktır. Hala tüm 16.x sürümleri için çalışır, ancak strict yönteminde şu uyarı mesajını gösterecektir:
 
 ![](../images/blog/warn-legacy-context-in-strict-mode.png)
 
