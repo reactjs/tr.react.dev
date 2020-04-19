@@ -51,15 +51,16 @@ Nesne ref'leri büyük ölçüde string ref'lerinin yerine geldiğinden beri Str
 
 [Yeni `createRef` API hakkında daha fazla bilgiyi buradan öğrenebilirsiniz.](/docs/refs-and-the-dom.html)
 
-### Warning about deprecated findDOMNode usage {#warning-about-deprecated-finddomnode-usage}
+### Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma {#warning-about-deprecated-finddomnode-usage}
 
-React used to support `findDOMNode` to search the tree for a DOM node given a class instance. Normally you don't need this because you can [attach a ref directly to a DOM node](/docs/refs-and-the-dom.html#creating-refs).
+React, sınıf nesne örneği verilen bir DOM düğümünü ağaçta aramak için `findDOMNode`'u destekliyordu. Normalde buna ihtiyaç yoktur çünkü [doğrudan bir DOM düğümüne ref ekleyebilirsiniz](/docs/refs-and-the-dom.html#creating-refs).
 
-`findDOMNode` can also be used on class components but this was breaking abstraction levels by allowing a parent to demand that certain children was rendered. It creates a refactoring hazard where you can't change the implementation details of a component because a parent might be reaching into its DOM node. `findDOMNode` only returns the first child, but with the use of Fragments, it is possible for a component to render multiple DOM nodes. `findDOMNode` is a one time read API. It only gave you an answer when you asked for it. If a child component renders a different node, there is no way to handle this change. Therefore `findDOMNode` only worked if components always return a single DOM node that never changes.
+`findDOMNode` ayrıca sınıf bileşenlerinde de kullanılabilir ancak bu, bir ebeveynin belirli alt öğelerin render edilmesine izin vererek soyutlama düzeylerini kırıyordu. Bir üst öğe DOM düğümüne erişebileceği için bir bileşenin uygulama ayrıntılarını değiştiremeyeceğiniz bir kodun yeniden düzenlenmesi (refactoring) tehlikesi oluşturur. `findDOMNode` sadece ilk alt öğeyi döndürür fakat Fragment'ler kullanılarak bir bileşenin birden fazla alt öğe render etmesi mümkündür. `findDOMNode` tek seferlik okuma API'sidir. Sadece istendiğinde cevap verir. Bir alt bileşen farklı bir farklı bir düğüm render ediyorsa, bu değişikliği ele almanın bir yolu yoktur. Bu nedenle `findDOMNode` sadece bileşenler asla değişmeyen tek bir DOM düğümü döndürürse işe yarar.
 
-You can instead make this explicit by passing a ref to your custom component and pass that along to the DOM using [ref forwarding](/docs/forwarding-refs.html#forwarding-refs-to-dom-components).
 
-You can also add a wrapper DOM node in your component and attach a ref directly to it.
+Bunun yerine, bunu özel bileşeninize bir ref geçerek ve [ref yönlendirme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components) ile DOM boyunca ileterek açıkça yapabilirsiniz.
+
+Ayrıca bileşeninize bir sarıcı (wrapper) DOM düğümü ekleyebilir ve doğrudan ona bir ref ekleyebilirsiniz.
 
 ```javascript{4,7}
 class MyComponent extends React.Component {
@@ -73,9 +74,9 @@ class MyComponent extends React.Component {
 }
 ```
 
-> Note:
+> Not:
 >
-> In CSS, the [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) attribute can be used if you don't want the node to be part of the layout.
+> CSS'te, düğümün tasarımın bir parçası olmasını istemiyorsanız [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) özelliğini kullanabilirsiniz.
 
 ### Detecting unexpected side effects {#detecting-unexpected-side-effects}
 
