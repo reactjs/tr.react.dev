@@ -78,15 +78,15 @@ class MyComponent extends React.Component {
 >
 > CSS'te, düğümün tasarımın bir parçası olmasını istemiyorsanız [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) özelliğini kullanabilirsiniz.
 
-### Detecting unexpected side effects {#detecting-unexpected-side-effects}
+### Beklenmeyen yan etkileri tespit etme {#detecting-unexpected-side-effects}
 
-Conceptually, React does work in two phases:
-* The **render** phase determines what changes need to be made to e.g. the DOM. During this phase, React calls `render` and then compares the result to the previous render.
-* The **commit** phase is when React applies any changes. (In the case of React DOM, this is when React inserts, updates, and removes DOM nodes.) React also calls lifecycles like `componentDidMount` and `componentDidUpdate` during this phase.
+Kavramsal olarak, React iki aşamada çalışır:
+* **Render** aşaması, örneğin DOM'da hangi değişikliklerin yapılması gerektiğini belirler. Bu aşamada React, render'ı çağırır ve sonucu bir önceki render çağrısının sonucuyla karşılaştırır. 
+* **Commit** aşaması, React'ın değişiklikleri uyguladığı aşamadır. React DOM durumunda, React bu DOM düğümlerini ekler, günceller ve kaldırır. React ayrıca bu aşamada `componentDidMount` ve `componentDidUpdate` gibi yaşam döngülerini çağırır.
 
-The commit phase is usually very fast, but rendering can be slow. For this reason, the upcoming concurrent mode (which is not enabled by default yet) breaks the rendering work into pieces, pausing and resuming the work to avoid blocking the browser. This means that React may invoke render phase lifecycles more than once before committing, or it may invoke them without committing at all (because of an error or a higher priority interruption).
+Commit aşaması genellikle hızlıdır fakat render aşaması yavaş olabilir. Bu nedenle, yakında gelecek eşzamanlı (concurrent) yöntem (henüz varsayılan olarak etkin değil) render etme işini parçalara ayırır, tarayıcıyı engellememek için işi duraklatır ve devam ettirir. Bu, React'ın render aşaması yaşam döngülerini commit aşamasına hiç geçmeden (bir hata veya daha yüksek öncelikli kesinti nedeniyle) çağırabileceği ya da commit aşamasından önce bir kereden fazla çağırabileceği anlamına gelir. 
 
-Render phase lifecycles include the following class component methods:
+Render aşaması yaşam döngüleri aşağıdaki sınıf bileşeni metodlarını içerir:
 * `constructor`
 * `componentWillMount` (or `UNSAFE_componentWillMount`)
 * `componentWillReceiveProps` (or `UNSAFE_componentWillReceiveProps`)
@@ -96,26 +96,26 @@ Render phase lifecycles include the following class component methods:
 * `render`
 * `setState` updater functions (the first argument)
 
-Because the above methods might be called more than once, it's important that they do not contain side-effects. Ignoring this rule can lead to a variety of problems, including memory leaks and invalid application state. Unfortunately, it can be difficult to detect these problems as they can often be [non-deterministic](https://en.wikipedia.org/wiki/Deterministic_algorithm).
+Yukarıdaki metodlar bir kereden fazla çağrılabileceğinden, yan etkiler içermemesi önemlidir. Bu kuralı göz ardı etmek, bellek sızıntıları (memory leak) ve geçersiz uygulama durumu (invalid application state) gibi çeşitli sorunlara yol açabilir. Ne yazık ki bu sorunları tespit etmek zor olabilir çünkü genellikle [belirlenebilir olmayabilirler](https://en.wikipedia.org/wiki/Deterministic_algorithm).
 
-Strict mode can't automatically detect side effects for you, but it can help you spot them by making them a little more deterministic. This is done by intentionally double-invoking the following functions:
+Strict yöntemi, yan etkileri otomatik olarak tespit edemez ancak onları daha belirgin hale getirerek tespit etmenize yardımcı olabilir. Bu, aşağıdaki fonksiyonları bilinçli bir şekilde iki kere çağırarak (double-invoking) yapılır:
 
-* Class component `constructor`, `render`, and `shouldComponentUpdate` methods
-* Class component static `getDerivedStateFromProps` method
-* Function component bodies
-* State updater functions (the first argument to `setState`)
-* Functions passed to `useState`, `useMemo`, or `useReducer`
+* Sınıf bileşeni `constructor`, `render`, ve `shouldComponentUpdate` metodları
+* Sınıf bileşeni statik `getDerivedStateFromProps` metodu
+* Fonksiyon bileşen gövdeleri
+* State güncelleyen fonksiyonlar (`setState`in ilk argümanı)
+* `useState`, `useMemo`, veya `useReducer`'a aktarılan fonksiyonlar
 
-> Note:
+> Not:
 >
-> This only applies to development mode. _Lifecycles will not be double-invoked in production mode._
+> Bu sadece geliştirme modu için geçerlidir. _Yaşam döngüleri canlıda iki defa çağırılmayacaktır._
 
-For example, consider the following code:
+Örneğin, aşağıdaki kodu ele alalım:
 `embed:strict-mode/side-effects-in-constructor.js`
 
-At first glance, this code might not seem problematic. But if `SharedApplicationState.recordEvent` is not [idempotent](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning), then instantiating this component multiple times could lead to invalid application state. This sort of subtle bug might not manifest during development, or it might do so inconsistently and so be overlooked.
+İlk bakışta bu kod sorunlu görünmeyebilir. Ancak `SharedApplicationState.recordEvent` [etkisiz](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning) değilse, bu bileşeni birden çok kez başlatmak geçersiz uygulama durumuna yol açabilir. Bu türk ince bir hata geliştirme sırasında ortaya çıkmayabilir veya bunu tutarsız bir şekilde yaparak gözden kaçabilir.
 
-By intentionally double-invoking methods like the component constructor, strict mode makes patterns like this easier to spot.
+Strict yöntemi, `constructor` gibi metodları kasıtlı olarak iki kere çağırarak, bu gibi desenlerin fark edilmesini sağlar.
 
 ### Detecting legacy context API {#detecting-legacy-context-api}
 
