@@ -1,28 +1,28 @@
 ---
 id: strict-mode
-title: Strict Mode
+title: Strict Yöntemi
 permalink: docs/strict-mode.html
 ---
 
-`StrictMode` is a tool for highlighting potential problems in an application. Like `Fragment`, `StrictMode` does not render any visible UI. It activates additional checks and warnings for its descendants.
+`Strict Yöntemi` (StrictMode) uygulamadaki potansiyel sorunları vurgulayan bir araçtır. `Fragment` gibi `Strict Yöntemi` de herhangi bir görünür UI render etmez. `Strict Yöntemi` aynı zamanda alt öğeler için ek kontrol ve uyarıları etkinleştirir.
 
-> Note:
+> Not:
 >
-> Strict mode checks are run in development mode only; _they do not impact the production build_.
+> Strict Yöntem kontrolleri sadece geliştirme modunda yapılır.; _canlıda herhangi bir etkisi yoktur_.
 
-You can enable strict mode for any part of your application. For example:
+Strict yöntemini uygulamanızın herhangi bir parçası için aktif hale getirebilirsiniz. Örneğin:
 `embed:strict-mode/enabling-strict-mode.js`
 
-In the above example, strict mode checks will *not* be run against the `Header` and `Footer` components. However, `ComponentOne` and `ComponentTwo`, as well as all of their descendants, will have the checks.
+Yukarıdaki örnekte strict yöntem kontrolleri `Header` ve `Footer` bileşenleri için yapılmayacaktır. Ancak `ComponentOne` ve `ComponentTwo` ve onların tüm alt öğeleri için kontroller yapılacaktır.
 
-`StrictMode` currently helps with:
-* [Identifying components with unsafe lifecycles](#identifying-unsafe-lifecycles)
-* [Warning about legacy string ref API usage](#warning-about-legacy-string-ref-api-usage)
-* [Warning about deprecated findDOMNode usage](#warning-about-deprecated-finddomnode-usage)
-* [Detecting unexpected side effects](#detecting-unexpected-side-effects)
-* [Detecting legacy context API](#detecting-legacy-context-api)
+`Strict Yöntemi` bize şu konularda yardımcı olur:
+* [Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme](#identifying-unsafe-lifecycles)
+* [Eski string ref API kullanımı hakkında uyarma](#warning-about-legacy-string-ref-api-usage)
+* [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
+* [Beklenmeyen yan etkileri tespit etme](#detecting-unexpected-side-effects)
+* [Eski context API tespit etme](#detecting-legacy-context-api)
 
-Additional functionality will be added with future releases of React.
+React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
 ### Identifying unsafe lifecycles {#identifying-unsafe-lifecycles}
 
