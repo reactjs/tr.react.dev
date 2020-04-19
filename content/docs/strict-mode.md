@@ -34,22 +34,22 @@ Strict yöntemi etkinleştirildiğinde, React güvenli olmayan yaşam döngüsü
 
 Strict yöntemi sorunlarına çözüm bulmak, gelecekte React sürümlerinde eşzamanlı render etme işleminden yararlanmanızı kolaylaştıracaktır.
 
-### Warning about legacy string ref API usage {#warning-about-legacy-string-ref-api-usage}
+### Eski string ref API kullanımı hakkında uyarma {#warning-about-legacy-string-ref-api-usage}
 
-Previously, React provided two ways for managing refs: the legacy string ref API and the callback API. Although the string ref API was the more convenient of the two, it had [several downsides](https://github.com/facebook/react/issues/1373) and so our official recommendation was to [use the callback form instead](/docs/refs-and-the-dom.html#legacy-api-string-refs).
+React, daha önce ref'leri yönetmek için iki yol sunuyordu: Eski string ref API ve callback API. String Ref API daha uygun olmasına rağmen [birkaç dezavantajı](https://github.com/facebook/react/issues/1373) vardı ve resmi önerimiz [bunun yerine callback kullanmaktı](/docs/refs-and-the-dom.html#legacy-api-string-refs).
 
-React 16.3 added a third option that offers the convenience of a string ref without any of the downsides:
+React 16.3, herhangi bir dezavantajı olmadan string ref'in rahatlığını sunan üçüncü bir seçenek getirdi:
 `embed:16-3-release-blog-post/create-ref-example.js`
 
-Since object refs were largely added as a replacement for string refs, strict mode now warns about usage of string refs.
+Nesne ref'leri büyük ölçüde string ref'lerinin yerine geldiğinden beri Strict yöntemi artık string ref kullanımları konusunda uyarıyor.
 
-> **Note:**
+> **Not:**
 >
-> Callback refs will continue to be supported in addition to the new `createRef` API.
+> Yeni `createRef` API'sine ek olarak Callback ref'leri de desteklenmeye devam edecektir.
 >
-> You don't need to replace callback refs in your components. They are slightly more flexible, so they will remain as an advanced feature.
+> Bileşenlerinizdeki callback ref'leri değiştirmeniz gerekmez. Biraz daha esnek bir yapıda oldukları için gelişmiş bir özellik olarak kalacaklar.
 
-[Learn more about the new `createRef` API here.](/docs/refs-and-the-dom.html)
+[Yeni `createRef` API hakkında daha fazla bilgiyi buradan öğrenebilirsiniz.](/docs/refs-and-the-dom.html)
 
 ### Warning about deprecated findDOMNode usage {#warning-about-deprecated-finddomnode-usage}
 
