@@ -117,10 +117,10 @@ Strict yöntemi, yan etkileri otomatik olarak tespit edemez ancak onları daha b
 
 Strict yöntemi, `constructor` gibi metodları kasıtlı olarak iki kere çağırarak, bu gibi desenlerin fark edilmesini sağlar.
 
-### Detecting legacy context API {#detecting-legacy-context-api}
+### Eski context API tespit etme {#detecting-legacy-context-api}
 
-The legacy context API is error-prone, and will be removed in a future major version. It still works for all 16.x releases but will show this warning message in strict mode:
+Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılacaktır. Hala tüm 16.x sürümleri için çalışır, ancak strict yönteminde şubu uyarı mesajını gösterecektir:
 
 ![](../images/blog/warn-legacy-context-in-strict-mode.png)
 
-Read the [new context API documentation](/docs/context.html) to help migrate to the new version.
+Yeni sürüme geçmeye yardımcı olması için [yeni context API](/docs/context.html) dökümanını okuyun.
