@@ -24,15 +24,15 @@ Yukarıdaki örnekte strict yöntem kontrolleri `Header` ve `Footer` bileşenler
 
 React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
-### Identifying unsafe lifecycles {#identifying-unsafe-lifecycles}
+### Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme {#identifying-unsafe-lifecycles}
 
-As explained [in this blog post](/blog/2018/03/27/update-on-async-rendering.html), certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren't being used. Fortunately, strict mode can help with this!
+[Bu blog yazısında](/blog/2018/03/27/update-on-async-rendering.html) açıklandığı gibi, bazı eski yaşam döngüsü metodlarıni asenkron React uygulamalarında kullanmak güvenli değildir. applications. Ancak uygulamanız üçüncü parti kütüphaneler kullanıyorsa bu yaşam döngüsü metodlarının kullanılmadığından emin olmak oldukça zordur. Neyse ki, Strict Yöntemi bize bu konuda yardımcı olabilir!
 
-When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
+Strict yöntemi etkinleştirildiğinde, React güvenli olmayan yaşam döngüsü kullanan sınıf bileşenlerinin bir listesini toplar ve bu bileşenler hakkında aşağıdaki gibi bir uyarı verir.
 
 ![](../images/blog/strict-mode-unsafe-lifecycles-warning.png)
 
-Addressing the issues identified by strict mode _now_ will make it easier for you to take advantage of concurrent rendering in future releases of React.
+Strict yöntemi sorunlarına çözüm bulmak, gelecekte React sürümlerinde eşzamanlı render etme işleminden yararlanmanızı kolaylaştıracaktır.
 
 ### Warning about legacy string ref API usage {#warning-about-legacy-string-ref-api-usage}
 
