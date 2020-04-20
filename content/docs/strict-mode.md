@@ -1,65 +1,65 @@
 ---
 id: strict-mode
-title: Strict Mode
+title: Strict Modu
 permalink: docs/strict-mode.html
 ---
 
-`StrictMode` is a tool for highlighting potential problems in an application. Like `Fragment`, `StrictMode` does not render any visible UI. It activates additional checks and warnings for its descendants.
+`Strict Modu` (StrictMode) uygulamadaki potansiyel sorunları vurgulayan bir araçtır. `Fragment` gibi `Strict Modu` de herhangi bir görünür UI render etmez. `Strict Modu` aynı zamanda alt öğeler için ek kontrol ve uyarıları etkinleştirir.
 
-> Note:
+> Not:
 >
-> Strict mode checks are run in development mode only; _they do not impact the production build_.
+> Strict Modu kontrolleri sadece geliştirme modunda yapılır.; _canlıda herhangi bir etkisi yoktur_.
 
-You can enable strict mode for any part of your application. For example:
+Strict Modunu uygulamanızın herhangi bir parçası için aktif hale getirebilirsiniz. Örneğin:
 `embed:strict-mode/enabling-strict-mode.js`
 
-In the above example, strict mode checks will *not* be run against the `Header` and `Footer` components. However, `ComponentOne` and `ComponentTwo`, as well as all of their descendants, will have the checks.
+Yukarıdaki örnekte strict mod kontrolleri `Header` ve `Footer` bileşenleri için *yapılmayacaktır*. Ancak `ComponentOne` ve `ComponentTwo` ve onların tüm alt öğeleri için kontroller yapılacaktır.
 
-`StrictMode` currently helps with:
-* [Identifying components with unsafe lifecycles](#identifying-unsafe-lifecycles)
-* [Warning about legacy string ref API usage](#warning-about-legacy-string-ref-api-usage)
-* [Warning about deprecated findDOMNode usage](#warning-about-deprecated-finddomnode-usage)
-* [Detecting unexpected side effects](#detecting-unexpected-side-effects)
-* [Detecting legacy context API](#detecting-legacy-context-api)
+`Strict Modu` şu konularda yardımcı olur:
+* [Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme](#identifying-unsafe-lifecycles)
+* [Eski string ref API kullanımı hakkında uyarma](#warning-about-legacy-string-ref-api-usage)
+* [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
+* [Beklenmeyen yan etkileri tespit etme](#detecting-unexpected-side-effects)
+* [Eski context API tespit etme](#detecting-legacy-context-api)
 
-Additional functionality will be added with future releases of React.
+React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
-### Identifying unsafe lifecycles {#identifying-unsafe-lifecycles}
+### Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme {#identifying-unsafe-lifecycles}
 
-As explained [in this blog post](/blog/2018/03/27/update-on-async-rendering.html), certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren't being used. Fortunately, strict mode can help with this!
+[Bu blog yazısında](/blog/2018/03/27/update-on-async-rendering.html) açıklandığı gibi, bazı eski yaşam döngüsü metodlarını asenkron React uygulamalarında kullanmak güvenli değildir. Ancak uygulamanız üçüncü parti kütüphaneler kullanıyorsa bu yaşam döngüsü metodlarının kullanılmadığından emin olmak oldukça zordur. Neyse ki, Strict Modu bize bu konuda yardımcı olabilir!
 
-When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
+Strict modu etkinleştirildiğinde, React güvenli olmayan yaşam döngüsü kullanan sınıf bileşenlerinin bir listesini toplar ve bu bileşenler hakkında aşağıdaki gibi bir uyarı verir.
 
 ![](../images/blog/strict-mode-unsafe-lifecycles-warning.png)
 
-Addressing the issues identified by strict mode _now_ will make it easier for you to take advantage of concurrent rendering in future releases of React.
+Strict modu sorunlarına çözüm bulmak, gelecekte React sürümlerinde eşzamanlı render etme işleminden yararlanmanızı kolaylaştıracaktır.
 
-### Warning about legacy string ref API usage {#warning-about-legacy-string-ref-api-usage}
+### Eski string ref API kullanımı hakkında uyarma {#warning-about-legacy-string-ref-api-usage}
 
-Previously, React provided two ways for managing refs: the legacy string ref API and the callback API. Although the string ref API was the more convenient of the two, it had [several downsides](https://github.com/facebook/react/issues/1373) and so our official recommendation was to [use the callback form instead](/docs/refs-and-the-dom.html#legacy-api-string-refs).
+React, daha önce ref'leri yönetmek için iki yol sunuyordu: Eski string ref API ve callback API. String Ref API daha uygun olmasına rağmen [birkaç dezavantajı](https://github.com/facebook/react/issues/1373) vardı ve resmi önerimiz [bunun yerine callback kullanmaktı](/docs/refs-and-the-dom.html#legacy-api-string-refs).
 
-React 16.3 added a third option that offers the convenience of a string ref without any of the downsides:
+React 16.3, herhangi bir dezavantajı olmadan string ref'in rahatlığını sunan üçüncü bir seçenek getirdi:
 `embed:16-3-release-blog-post/create-ref-example.js`
 
-Since object refs were largely added as a replacement for string refs, strict mode now warns about usage of string refs.
+Nesne ref'leri büyük ölçüde string ref'lerinin yerine geldiğinden beri strict modu artık string ref kullanımları konusunda uyarıyor.
 
-> **Note:**
+> **Not:**
 >
-> Callback refs will continue to be supported in addition to the new `createRef` API.
+> Yeni `createRef` API'sine ek olarak Callback ref'leri de desteklenmeye devam edecektir.
 >
-> You don't need to replace callback refs in your components. They are slightly more flexible, so they will remain as an advanced feature.
+> Bileşenlerinizdeki callback ref'leri değiştirmeniz gerekmez. Biraz daha esnek bir yapıda oldukları için gelişmiş bir özellik olarak kalacaklar.
 
-[Learn more about the new `createRef` API here.](/docs/refs-and-the-dom.html)
+[Yeni `createRef` API hakkında daha fazla bilgiyi buradan öğrenebilirsiniz.](/docs/refs-and-the-dom.html)
 
-### Warning about deprecated findDOMNode usage {#warning-about-deprecated-finddomnode-usage}
+### Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma {#warning-about-deprecated-finddomnode-usage}
 
-React used to support `findDOMNode` to search the tree for a DOM node given a class instance. Normally you don't need this because you can [attach a ref directly to a DOM node](/docs/refs-and-the-dom.html#creating-refs).
+React, sınıf nesne örneği verilen bir DOM düğümünü ağaçta aramak için `findDOMNode`'u destekliyordu. Normalde buna ihtiyaç yoktur çünkü [doğrudan bir DOM düğümüne ref ekleyebilirsiniz](/docs/refs-and-the-dom.html#creating-refs).
 
-`findDOMNode` can also be used on class components but this was breaking abstraction levels by allowing a parent to demand that certain children was rendered. It creates a refactoring hazard where you can't change the implementation details of a component because a parent might be reaching into its DOM node. `findDOMNode` only returns the first child, but with the use of Fragments, it is possible for a component to render multiple DOM nodes. `findDOMNode` is a one time read API. It only gave you an answer when you asked for it. If a child component renders a different node, there is no way to handle this change. Therefore `findDOMNode` only worked if components always return a single DOM node that never changes.
+`findDOMNode` ayrıca sınıf bileşenlerinde de kullanılabilir ancak bu, bir üst öğenin belirli alt öğelerin render edilmesine izin vererek soyutlama düzeylerini bozuyordu. Bir üst öğe DOM düğümüne erişebileceği için bir bileşenin uygulama ayrıntılarını değiştiremeyeceğiniz bir kodun yeniden düzenlenmesi (refactoring) tehlikesi oluşturur. `findDOMNode` sadece ilk alt öğeyi döndürür fakat Fragment'ler kullanılarak bir bileşenin birden fazla alt öğe render etmesi mümkündür. `findDOMNode` tek seferlik okuma API'sidir. Sadece istendiğinde cevap verir. Bir alt bileşen farklı bir farklı bir düğüm render ediyorsa, bu değişikliği ele almanın bir yolu yoktur. Bu nedenle `findDOMNode` sadece bileşenler asla değişmeyen tek bir DOM düğümü döndürürse işe yarar.
 
-You can instead make this explicit by passing a ref to your custom component and pass that along to the DOM using [ref forwarding](/docs/forwarding-refs.html#forwarding-refs-to-dom-components).
+Bunun yerine, bunu özel bileşeninize bir ref geçerek ve [ref yönlendirme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components) ile DOM boyunca ileterek yapabilirsiniz.
 
-You can also add a wrapper DOM node in your component and attach a ref directly to it.
+Ayrıca bileşeninize bir sarıcı (wrapper) DOM düğümü ekleyebilir ve doğrudan ona bir ref ekleyebilirsiniz.
 
 ```javascript{4,7}
 class MyComponent extends React.Component {
@@ -73,53 +73,53 @@ class MyComponent extends React.Component {
 }
 ```
 
-> Note:
+> Not:
 >
-> In CSS, the [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) attribute can be used if you don't want the node to be part of the layout.
+> CSS'te, düğümün tasarımın bir parçası olmasını istemiyorsanız [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents) özelliğini kullanabilirsiniz.
 
-### Detecting unexpected side effects {#detecting-unexpected-side-effects}
+### Beklenmeyen yan etkileri tespit etme {#detecting-unexpected-side-effects}
 
-Conceptually, React does work in two phases:
-* The **render** phase determines what changes need to be made to e.g. the DOM. During this phase, React calls `render` and then compares the result to the previous render.
-* The **commit** phase is when React applies any changes. (In the case of React DOM, this is when React inserts, updates, and removes DOM nodes.) React also calls lifecycles like `componentDidMount` and `componentDidUpdate` during this phase.
+Kavramsal olarak, React iki aşamada çalışır:
+* **Render** aşaması, örneğin DOM'da hangi değişikliklerin yapılması gerektiğini belirler. Bu aşamada React, render'ı çağırır ve sonucu bir önceki render çağrısının sonucuyla karşılaştırır. 
+* **Commit** aşaması, React'ın değişiklikleri uyguladığı aşamadır. React DOM durumunda, React bu DOM düğümlerini ekler, günceller ve kaldırır. React ayrıca bu aşamada `componentDidMount` ve `componentDidUpdate` gibi yaşam döngülerini çağırır.
 
-The commit phase is usually very fast, but rendering can be slow. For this reason, the upcoming concurrent mode (which is not enabled by default yet) breaks the rendering work into pieces, pausing and resuming the work to avoid blocking the browser. This means that React may invoke render phase lifecycles more than once before committing, or it may invoke them without committing at all (because of an error or a higher priority interruption).
+Commit aşaması genellikle hızlıdır fakat render aşaması yavaş olabilir. Bu nedenle, yakında gelecek eşzamanlı (concurrent) mod (henüz varsayılan olarak etkin değil) render etme işini parçalara ayırır, tarayıcıyı engellememek için işi duraklatır ve devam ettirir. Bu, React'ın render aşaması yaşam döngülerini commit aşamasına hiç geçmeden (bir hata veya daha yüksek öncelikli kesinti nedeniyle) çağırabileceği ya da commit aşamasından önce bir kereden fazla çağırabileceği anlamına gelir. 
 
-Render phase lifecycles include the following class component methods:
+Render aşaması yaşam döngüleri aşağıdaki sınıf bileşeni metodlarını içerir:
 * `constructor`
-* `componentWillMount` (or `UNSAFE_componentWillMount`)
-* `componentWillReceiveProps` (or `UNSAFE_componentWillReceiveProps`)
-* `componentWillUpdate` (or `UNSAFE_componentWillUpdate`)
+* `componentWillMount` (veya `UNSAFE_componentWillMount`)
+* `componentWillReceiveProps` (veya `UNSAFE_componentWillReceiveProps`)
+* `componentWillUpdate` (veya `UNSAFE_componentWillUpdate`)
 * `getDerivedStateFromProps`
 * `shouldComponentUpdate`
 * `render`
-* `setState` updater functions (the first argument)
+* `setState` güncelleyen fonksiyonlar (ilk argüman)
 
-Because the above methods might be called more than once, it's important that they do not contain side-effects. Ignoring this rule can lead to a variety of problems, including memory leaks and invalid application state. Unfortunately, it can be difficult to detect these problems as they can often be [non-deterministic](https://en.wikipedia.org/wiki/Deterministic_algorithm).
+Yukarıdaki metodlar bir kereden fazla çağrılabileceğinden, yan etkiler içermemesi önemlidir. Bu kuralı göz ardı etmek, bellek sızıntıları (memory leak) ve geçersiz uygulama durumu (invalid application state) gibi çeşitli sorunlara yol açabilir. Ne yazık ki bu sorunları tespit etmek zor olabilir çünkü genellikle [belirlenebilir olmayabilirler](https://en.wikipedia.org/wiki/Deterministic_algorithm).
 
-Strict mode can't automatically detect side effects for you, but it can help you spot them by making them a little more deterministic. This is done by intentionally double-invoking the following functions:
+Strict modu, yan etkileri otomatik olarak tespit edemez ancak onları daha belirgin hale getirerek tespit etmenize yardımcı olabilir. Bu, aşağıdaki fonksiyonları bilinçli bir şekilde iki kere çağırarak (double-invoking) yapılır:
 
-* Class component `constructor`, `render`, and `shouldComponentUpdate` methods
-* Class component static `getDerivedStateFromProps` method
-* Function component bodies
-* State updater functions (the first argument to `setState`)
-* Functions passed to `useState`, `useMemo`, or `useReducer`
+* Sınıf bileşeni `constructor`, `render`, ve `shouldComponentUpdate` metodları
+* Sınıf bileşeni statik `getDerivedStateFromProps` metodu
+* Fonksiyon bileşen gövdeleri
+* State güncelleyen fonksiyonlar (`setState`in ilk argümanı)
+* `useState`, `useMemo`, veya `useReducer`'a aktarılan fonksiyonlar
 
-> Note:
+> Not:
 >
-> This only applies to development mode. _Lifecycles will not be double-invoked in production mode._
+> Bu sadece geliştirme modu için geçerlidir. _Yaşam döngüleri canlıda iki defa çağırılmayacaktır._
 
-For example, consider the following code:
+Örneğin, aşağıdaki kodu ele alalım:
 `embed:strict-mode/side-effects-in-constructor.js`
 
-At first glance, this code might not seem problematic. But if `SharedApplicationState.recordEvent` is not [idempotent](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning), then instantiating this component multiple times could lead to invalid application state. This sort of subtle bug might not manifest during development, or it might do so inconsistently and so be overlooked.
+İlk bakışta bu kod sorunlu görünmeyebilir. Ancak `SharedApplicationState.recordEvent` [etkisiz](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning) değilse, bu bileşeni birden çok kez başlatmak geçersiz uygulama durumuna yol açabilir. Bu tür ince bir hata geliştirme sırasında ortaya çıkmayabilir veya bunu tutarsız bir şekilde yaparak gözden kaçabilir.
 
-By intentionally double-invoking methods like the component constructor, strict mode makes patterns like this easier to spot.
+Strict modu, `constructor` gibi metodları kasıtlı olarak iki kere çağırarak, bu gibi desenlerin fark edilmesini sağlar.
 
-### Detecting legacy context API {#detecting-legacy-context-api}
+### Eski context API tespit etme {#detecting-legacy-context-api}
 
-The legacy context API is error-prone, and will be removed in a future major version. It still works for all 16.x releases but will show this warning message in strict mode:
+Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılacaktır. Hala tüm 16.x sürümleri için çalışır, ancak strict modunda şu uyarı mesajını gösterecektir:
 
 ![](../images/blog/warn-legacy-context-in-strict-mode.png)
 
-Read the [new context API documentation](/docs/context.html) to help migrate to the new version.
+Yeni sürüme geçmeye yardımcı olması için [yeni context API](/docs/context.html) dökümanını okuyun.
