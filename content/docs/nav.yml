@@ -76,7 +76,7 @@
     - id: static-type-checking
       title: Statik Tip Kontrolü
     - id: strict-mode
-      title: Strict Yöntemi
+      title: Strict Modu
     - id: typechecking-with-proptypes
       title: PropTypes ile Tip Kontrolü
     - id: uncontrolled-components
