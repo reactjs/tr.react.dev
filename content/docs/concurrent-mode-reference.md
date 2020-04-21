@@ -64,19 +64,19 @@ Engelleme Mod'u, Eşzamanlı Mod özelliklerinin yalnızca küçük bir alt küm
 ### `Suspense` {#suspensecomponent}
 
 ```js
-<Suspense fallback={<h1>Loading...</h1>}>
+<Suspense fallback={<h1>Yükleniyor...</h1>}>
   <ProfilePhoto />
   <ProfileDetails />
 </Suspense>
 ```
 
-`Suspense` lets your components "wait" for something before they can render, showing a fallback while waiting.
+`Suspense`, bileşenlerinizin bir şey render etmeden önce "beklemelerini" sağlar ve beklerken bir yedek gösterir.
 
-In this example, `ProfileDetails` is waiting for an asynchronous API call to fetch some data. While we wait for `ProfileDetails` and `ProfilePhoto`, we will show the `Loading...` fallback instead. It is important to note that until all children inside `<Suspense>` has loaded, we will continue to show the fallback.
+Bu örnekte, `ProfileDetails` bazı verileri almak için asenkron bir API çağrısını bekliyor. `ProfileDetails` ve `ProfilePhoto` için beklerken bunun yerine `Loading...` yedeğini göstereceğiz. Şunu vurgulamakta yarar var: `<Suspense>` içinde bulunan tüm alt bileşenler yüklenene kadar, yedeği göstermeye devam ederiz.
 
-`Suspense` takes two props:
-* **fallback** takes a loading indicator. The fallback is shown until all of the children of the `Suspense` component have finished rendering.
-* **unstable_avoidThisFallback** takes a boolean. It tells React whether to "skip" revealing this boundary during the initial load. This API will likely be removed in a future release.
+`Suspense` iki prop alır:
+* **fallback** bir yükleme göstergesi alır. Bu yedek `Suspense` bileşenine ait tüm alt bileşenlerin render edilmesini tamamlayana kadar gösterilir.
+* **unstable_avoidThisFallback** bir boolean alır. React'e ilk yüklenme sırasında bu sınırların açığa çıkmasını "atlayıp atlamayacağını" bildirir. Bu API büyük olasılıkla gelecekteki bir sürümde kaldırılacaktır.
 
 ### `<SuspenseList>` {#suspenselist}
 
