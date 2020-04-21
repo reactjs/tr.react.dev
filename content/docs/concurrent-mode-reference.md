@@ -53,11 +53,11 @@ Eşzamanlı Mod hakkında daha fazla bilgi için, [Eşzamanlı Mod dökümanına
 ReactDOM.createBlockingRoot(rootNode).render(<App />)
 ```
 
-Replaces `ReactDOM.render(<App />, rootNode)` and enables [Blocking Mode](/docs/concurrent-mode-adoption.html#migration-step-blocking-mode).
+`ReactDOM.render(<App />, rootNode)` yerine geçer ve [Engelleme Mod'unu](/docs/concurrent-mode-adoption.html#migration-step-blocking-mode) etkinleştirir.
 
-Opting into Concurrent Mode introduces semantic changes to how React works. This means that you can't use Concurrent Mode in just a few components. Because of this, some apps may not be able to migrate directly to Concurrent Mode. 
+Eşzamanlı Mod'u tercih etmek React'in çalışma mantığında anlamsal değişiklikler meydana getirir. Bu, Eşzamanlı Mod'u yalnızca birkaç bileşende kullanamayacağınız anlamına gelir. Bu nedenle, bazı uygulamalar Eşzamanlı Mod'a doğrudan geçemeyebilir.
 
-Blocking Mode only contains a small subset of Concurrent Mode features and is intended as an intermediary migration step for apps that are unable to migrate directly.
+Engelleme Mod'u, Eşzamanlı Mod özelliklerinin yalnızca küçük bir alt kümesini içerir ve doğrudan taşınamayan uygulamalar için ara bir geçiş adımı olarak tasarlanmıştır.
 
 ## Suspense API {#suspense}
 
