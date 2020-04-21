@@ -22,11 +22,11 @@ prev: concurrent-mode-adoption.html
 
 </div>
 
-This page is an API reference for the React [Concurrent Mode](/docs/concurrent-mode-intro.html). If you're looking for a guided introduction instead, check out [Concurrent UI Patterns](/docs/concurrent-mode-patterns.html).
+Bu sayfa, React [Eşzamanlı Mod](/docs/concurrent-mode-intro.html) için bir API kaynağıdır. Eğer bunun yerine rehberlik eden bir tanıtım arıyorsanız, [Eşzamanlı Kullanıcı Arayüzü Desenlerine](/docs/concurrent-mode-patterns.html) göz atın.
 
-**Note: This is a Community Preview and not the final stable version. There will likely be future changes to these APIs. Use at your own risk!**
+**Not: Bu bir topluluk önizlemesidir ve kararlı final sürümü değildir. Bu API'larda gelecekte değişiklikler olması muhtemeldir. Riskin size ait olduğunu bilerek kullanın!**
 
-- [Enabling Concurrent Mode](#concurrent-mode)
+- [Eşzamanlı Mod'u Etkinleştirme](#concurrent-mode)
     - [`createRoot`](#createroot)
     - [`createBlockingRoot`](#createblockingroot)
 - [Suspense](#suspense)
