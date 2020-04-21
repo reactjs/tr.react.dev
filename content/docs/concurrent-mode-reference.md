@@ -159,15 +159,15 @@ Bu kodda, veri getirme işlemimizi `startTransition` içine yerleştirdik. Bu bi
 
 **Geçişleri derinlemesine incelemek için, [Eşzamanlı Kullanıcı Arayüzü Desenlerine](/docs/concurrent-mode-patterns.html#transitions) göz atabilirsiniz.**
 
-#### useTransition Config {#usetransition-config}
+#### useTransition Yapılandırması {#usetransition-config}
 
 ```js
 const SUSPENSE_CONFIG = { timeoutMs: 2000 };
 ```
 
-`useTransition` accepts an **optional Suspense Config** with a `timeoutMs`. This timeout (in milliseconds) tells React how long to wait before showing the next state (the new Profile Page in the above example).
+`useTransition` **isteğe bağlı Suspense Yapılandırması** ile bir `timeoutMs` alır. Bu zaman aşımı (milisaniye cinsinden) React'a bir sonraki state'i (yukarıdaki örnekte yeni Profil Sayfası) göstermeden önce ne kadar bekleyeceğini bildirir.
 
-**Note: We recommend that you share Suspense Config between different modules.**
+**Not: Suspense Yapılandırmanızı farklı modüller arasında ortak kullanmanızı öneririz.**
 
 
 ### `useDeferredValue` {#usedeferredvalue}
