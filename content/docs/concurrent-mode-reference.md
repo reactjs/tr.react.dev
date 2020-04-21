@@ -35,7 +35,7 @@ Bu sayfa, React [Eşzamanlı Mod](/docs/concurrent-mode-intro.html) için bir AP
     - [`useTransition`](#usetransition)
     - [`useDeferredValue`](#usedeferredvalue)
 
-## Enabling Concurrent Mode {#concurrent-mode}
+## Eşzamanlı Mod'u Etkinleştirme {#concurrent-mode}
 
 ### `createRoot` {#createroot}
 
@@ -43,9 +43,9 @@ Bu sayfa, React [Eşzamanlı Mod](/docs/concurrent-mode-intro.html) için bir AP
 ReactDOM.createRoot(rootNode).render(<App />);
 ```
 
-Replaces `ReactDOM.render(<App />, rootNode)` and enables Concurrent Mode.
+`ReactDOM.render(<App />, rootNode)` yerine geçer ve Eşzamanlı Mod'u etkinleştirir.
 
-For more information on Concurrent Mode, check out the [Concurrent Mode documentation.](/docs/concurrent-mode-intro.html)
+Eşzamanlı Mod hakkında daha fazla bilgi için, [Eşzamanlı Mod dökümanına](/docs/concurrent-mode-intro.html) göz atın.
 
 ### `createBlockingRoot` {#createblockingroot}
 
