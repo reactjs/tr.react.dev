@@ -82,32 +82,32 @@ Bu örnekte, `ProfileDetails` bazı verileri almak için asenkron bir API çağr
 
 ```js
 <SuspenseList revealOrder="forwards">
-  <Suspense fallback={'Loading...'}>
+  <Suspense fallback={'Yükleniyor...'}>
     <ProfilePicture id={1} />
   </Suspense>
-  <Suspense fallback={'Loading...'}>
+  <Suspense fallback={'Yükleniyor...'}>
     <ProfilePicture id={2} />
   </Suspense>
-  <Suspense fallback={'Loading...'}>
+  <Suspense fallback={'Yükleniyor...'}>
     <ProfilePicture id={3} />
   </Suspense>
   ...
 </SuspenseList>
 ```
 
-`SuspenseList` helps coordinate many components that can suspend by orchestrating the order in which these components are revealed to the user.
+`SuspenseList` bileşenlerin kullanıcıya gösterilme sırasını yöneterek beklemekte olan birçok bileşeni koordine etmeye yardımcı olur.
 
-When multiple components need to fetch data, this data may arrive in an unpredictable order. However, if you wrap these items in a `SuspenseList`, React will not show an item in the list until previous items have been displayed (this behavior is adjustable).
+Birden fazla bileşenin veri getirmesi gerektiğinde, bu veriler öngörülemeyen bir sıralama ile gelebilir. Ancak, bu öğeleri bir `SuspenseList` içine yerleştirirseniz, React önceki öğeler görüntülenene kadar listede bir öğe göstermez (bu davranış ayarlanabilir).
 
-`SuspenseList` takes two props:
-* **revealOrder (forwards, backwards, together)** defines the order in which the `SuspenseList` children should be revealed.
-  * `together` reveals *all* of them when they're ready instead of one by one.
-* **tail (collapsed, hidden)** dictates how unloaded items in a `SuspenseList` is shown. 
-    * By default, `SuspenseList` will show all fallbacks in the list.
-    * `collapsed` shows only the next fallback in the list.
-    * `hidden` doesn't show any unloaded items.
+`SuspenseList` iki prop alır:
+* **revealOrder (forwards, backwards, together)** `SuspenseList` alt elemanlarının hangi sırayla gösterilmesi gerektiğini tanımlar.
+  * `together` tek tek yerine, hazır olduğunda *tümü* birlikte gösterilir.
+* **tail (collapsed, hidden)** `SuspenseList` içindeki yüklenmemiş alt elemanların nasıl gösterileceğini belirler.
+  * Varsayılan olarak, `SuspenseList` listedeki tüm yedekleri gösterir.
+  * `collapsed` yalnızca listedeki bir sonraki yedeği gösterir.
+  * `hidden` yüklenmemiş hiçbir alt elemanı göstermez.
 
-Note that `SuspenseList` only operates on the closest `Suspense` and `SuspenseList` components below it. It does not search for boundaries deeper than one level. However, it is possible to nest multiple `SuspenseList` components in each other to build grids.
+`SuspenseList` öğesinin yalnızca en yakın `Suspense` ve `SuspenseList` bileşenlerinde çalıştığını unutmayın. Birinci seviyeden daha derinde bulunan içerikler için arama yapmaz. Ancak, ızgara yapısı oluşturmak için birden fazla `SuspenseList` bileşenini iç içe yerleştirmek mümkündür.
 
 ### `useTransition` {#usetransition}
 
