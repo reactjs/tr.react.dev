@@ -117,13 +117,13 @@ const SUSPENSE_CONFIG = { timeoutMs: 2000 };
 const [startTransition, isPending] = useTransition(SUSPENSE_CONFIG);
 ```
 
-`useTransition` allows components to avoid undesirable loading states by waiting for content to load before **transitioning to the next screen**. It also allows components to defer slower, data fetching updates until subsequent renders so that more crucial updates can be rendered immediately.
+`useTransition` **bir sonraki ekrana geçmeden** önce içeriğin yüklenmesini bekleyerek bileşenlerin istenmeyen yükleme durumlarından kaçınmasını sağlar. Ayrıca bileşenlerin bir sonraki render işlemine kadar veri getirme güncellemelerini ertelemesine izin verir, böylece daha önemli güncellemeler hemen render edilebilir.
 
-The `useTransition` hook returns two values in an array.
-* `startTransition` is a function that takes a callback. We can use it to tell React which state we want to defer.
-* `isPending` is a boolean. It's React's way of informing us whether we're waiting for the transition to finish.
+`useTransition` hook'u bir dizide iki değer döndürür.
+* `startTransition` callback alan bir fonksiyondur. React'a hangi state'i ertelemek istediğimizi söylemek için kullanabiliriz.
+* `isPending` bir boolean. React'in geçişin bitmesini bekleyip beklemediğimizi bize bildirmesinin yoludur.
 
-**If some state update causes a component to suspend, that state update should be wrapped in a transition.**
+**Bazı state güncellemeleri bir bileşenin beklemesine neden oluyorsa, bu durum güncellemesi bir geçiş içine yerleştirilmelidir.**
 
 ```js
 const SUSPENSE_CONFIG = { timeoutMs: 2000 };
@@ -144,7 +144,7 @@ function App() {
       >
         Next
       </button>
-      {isPending ? " Loading..." : null}
+      {isPending ? " Yükleniyor..." : null}
       <Suspense fallback={<Spinner />}>
         <ProfilePage resource={resource} />
       </Suspense>
@@ -153,11 +153,11 @@ function App() {
 }
 ```
 
-In this code, we've wrapped our data fetching with `startTransition`. This allows us to start fetching the profile data right away, while deferring the render of the next profile page and its associated `Spinner` for 2 seconds (the time shown in `timeoutMs`).
+Bu kodda, veri getirme işlemimizi `startTransition` içine yerleştirdik. Bu bir sonraki profil sayfasının ve ilişkili `Spinner`'ın render edilmesini 2 saniye (`timeoutMs` ile gösterilen zaman) erteleyerek, profil verilerini hemen almaya başlamamızı sağlar.
 
-The `isPending` boolean lets React know that our component is transitioning, so we are able to let the user know this by showing some loading text on the previous profile page.
+`isPending` boolean'ı React'ın bileşenimizin geçiş yaptığını bilmesine izin verir, böylece önceki profil sayfasında bir yükleme metni göstererek kullanıcıya bunu bildirebiliriz.
 
-**For an in-depth look at transitions, you can read [Concurrent UI Patterns](/docs/concurrent-mode-patterns.html#transitions).**
+**Geçişleri derinlemesine incelemek için, [Eşzamanlı Kullanıcı Arayüzü Desenlerine](/docs/concurrent-mode-patterns.html#transitions) göz atabilirsiniz.**
 
 #### useTransition Config {#usetransition-config}
 
