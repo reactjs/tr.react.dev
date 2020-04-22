@@ -176,32 +176,32 @@ const SUSPENSE_CONFIG = { timeoutMs: 2000 };
 const deferredValue = useDeferredValue(value, { timeoutMs: 2000 });
 ```
 
-Returns a deferred version of the value that may "lag behind" it for at most `timeoutMs`.
+En fazla `timeoutMs` "geride kalarak" değerin gecikmiş bir halini döndürür.
 
-This is commonly used to keep the interface responsive when you have something that renders immediately based on user input and something that needs to wait for a data fetch.
+Bu, genellikle kullanıcı girdisine göre anında render ettiğiniz bir şey olduğunda ve bir veriyi getirmeyi beklemesi gerektiğinde arayüzü duyarlı tutmak için kullanılır.
 
-A good example of this is a text input.
+Bunun iyi bir örneği bir metin input'tur.
 
 ```js
 function App() {
-  const [text, setText] = useState("hello");
+  const [text, setText] = useState("merhaba");
   const deferredText = useDeferredValue(text, { timeoutMs: 2000 }); 
 
   return (
     <div className="App">
-      {/* Keep passing the current text to the input */}
+      {/* Güncel metni input'a iletmeye devam eder */}
       <input value={text} onChange={handleChange} />
       ...
-      {/* But the list is allowed to "lag behind" when necessary */}
+      {/* Ancak listenin gerektiğinde "geride kalmasına" izin verilir */}
       <MySlowList text={deferredText} />
     </div>
   );
  }
 ```
 
-This allows us to start showing the new text for the `input` immediately, which allows the webpage to feel responsive. Meanwhile, `MySlowList` "lags behind" for up to 2 seconds according to the `timeoutMs` before updating, allowing it to render with the current text in the background.
+Bu, web sayfasının duyarlı hissedilmesini sağlayan `input` için yeni metni hemen göstermeye başlamamızı sağlar. Bu arada, `MySlowList` güncellenmeden önce `timeoutMs` değerine göre 2 saniye kadar "geride kalır" ve arka plandaki mevcut metinle render edilmesine izin verir.
 
-**For an in-depth look at deferring values, you can read [Concurrent UI Patterns](/docs/concurrent-mode-patterns.html#deferring-a-value).**
+**Değerleri geciktirmeyi derinlemesine incelemek için, [Eşzamanlı Kullanıcı Arayüzü Desenlerine](/docs/concurrent-mode-patterns.html#deferring-a-value) göz atabilirsiniz.**
 
 #### useDeferredValue Config {#usedeferredvalue-config}
 
