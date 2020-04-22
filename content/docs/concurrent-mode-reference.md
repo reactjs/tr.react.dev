@@ -203,12 +203,12 @@ Bu, web sayfasının duyarlı hissedilmesini sağlayan `input` için yeni metni 
 
 **Değerleri geciktirmeyi derinlemesine incelemek için, [Eşzamanlı Kullanıcı Arayüzü Desenlerine](/docs/concurrent-mode-patterns.html#deferring-a-value) göz atabilirsiniz.**
 
-#### useDeferredValue Config {#usedeferredvalue-config}
+#### useDeferredValue Yapılandırması {#usedeferredvalue-config}
 
 ```js
 const SUSPENSE_CONFIG = { timeoutMs: 2000 };
 ```
 
-`useDeferredValue` accepts an **optional Suspense Config** with a `timeoutMs`. This timeout (in milliseconds) tells React how long the deferred value is allowed to lag behind.
+`useDeferredValue` **isteğe bağlı Suspense Yapılandırması** ile bir `timeoutMs` alır. Bu zaman aşımı (milisaniye cinsinden) React'e ertelenen değerin ne kadar gecikmesine izin verildiğini bildirir.
 
-React will always try to use a shorter lag when network and device allows it.
+React, ağ ve cihaz şartları mumkün olduğunda her zaman daha kısa bir gecikme kullanmaya çalışacaktır.
