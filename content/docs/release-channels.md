@@ -6,73 +6,75 @@ layout: docs
 category: installation
 ---
 
-React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek] (https://github.com/reactjs/rfcs) için başarılı bir açık kaynak topluluğuna güvenir. Geri bildirimi teşvik etmek için bazen yayınlanmamış özellikler içeren özel React yapılarını paylaşırız.
+React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek](https://github.com/reactjs/rfcs) için başarılı bir açık kaynak topluluğuna güvenir. Geri bildirimi teşvik etmek için bazen yayınlanmamış özellikler içeren özel React yapılarını paylaşırız.
 
 
 
- Bu belge, en çok çatı, kütüphane veya geliştirici araçları üzerinde çalışan yazılımcılar için uygundur. React'i öncelikle kullanıcılara yönelik uygulamalar oluşturmak için kullanan yazılımcıların yayın öncesi kanallarımız hakkında endişelenmeleri gerekmez.
+ > Bu belge, en çok çatı, kütüphane veya geliştirici araçları üzerinde çalışan yazılımcılar için uygundur. React'i öncelikle kullanıcılara yönelik uygulamalar oluşturmak için kullanan yazılımcıların yayın öncesi kanallarımız hakkında endişelenmeleri gerekmez.
 
 
 
  React'in yayın kanallarının her biri ayrı bir kullanım için tasarlanmıştır:
 
 
-- [**En Yeni**] (#latest-channel) istikrarli, semver React sürümleri içindir. React'i npm'den yüklediğinizde elde edeceğiniz şey budur. Bugün kullandığınız kanal bu. **Bunu kullanıcılara yönelik tüm React uygulamaları için kullanın.**
+- [**En Yeni**](#latest-channel), istikrarlı, semver React sürümleri içindir. React'i npm'den yüklediğinizde elde edeceğiniz şey budur. Bugün kullandığınız kanal bu. **Bunu kullanıcılara yönelik tüm React uygulamaları için kullanın.**
 
-- [**Sonraki**] (#next-channel), React kaynak kodu veri havuzunun ana dalını izler. Bunları bir sonraki küçük semver sürümü için aday olarak düşünün. React ve üçüncü taraf projeleri arasındaki entegrasyon testi için bunu kullanın.
+- [**Sonraki**](#next-channel), React kaynak kodu veri havuzunun ana dalını izler. Bunları bir sonraki küçük semver sürümü için aday olarak düşünebilirsiniz. React ve üçüncü taraf projeleri arasındaki entegrasyon testi için bunu kullanın.
 
-- [**Deneysel**] (#eperimental-channel), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
-
-
-Tüm sürümler npm'de yayınlanır, ancak yalnızca en yeni kullanımlar [anlamsal sürüm oluşturma] (/ docs / faq-versioning.html). Ön yayınlar (Sonraki ve Deneysel kanallarda bulunanlar), içeriklerinin bir karma değerinden oluşturulan sürümlere sahiptir, örneğin İleri için "0.0.0-1022ee0ec" ve Deney için "0.0.0-deneysel-1022ee0ec".
+- [**Deneysel**](#eperimental-channel), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
 
 
-**Kullanıcıya yönelik uygulamalar için resmi olarak desteklenen tek yayın kanalı En Yeni**. Sonraki ve Deneysel sürümler yalnızca test amacıyla sağlanmıştır ve En Yeni sürümler için kullandığımız semver protokolünü takip etmediklerinden dolayı sürümler arasında davranışın değişmeyeceğine dair hiçbir garanti vermiyoruz. 
+Tüm sürümler npm'de yayınlanır, ancak yalnızca en yeni kullanımlar [anlamsal sürüm oluşturma](/docs/faq-versioning.html). Ön yayınlar (Sonraki ve Deneysel kanallarında bulunanlar), kendi içeriklerinin bir karma değerinden oluşturulan sürümlere sahiptir, örneğin İleri için `0.0.0-1022ee0ec` ve Deney için `0.0.0-experimental-1022ee0ec`.
 
-Ön sürümleri, istikrarlı sürümler için kullandığımız kayıt defterinde yayınlayarak, [unpkg] (https://unpkg.com) ve [CodeSandbox] (https://codesandbox.io) gibi npm iş akışını destekleyen birçok araçtan yararlanabiliyoruz. .
+
+**Kullanıcıya yönelik uygulamalar için resmi olarak desteklenen tek yayın kanalı En Yeni kanalıdır**. Sonraki ve Deneysel sürümler yalnızca test amacıyla sağlanmıştır ve En Yeni sürümler için kullandığımız semver protokolünü takip etmediklerinden dolayı sürümler arasında davranışın değişmeyeceğine dair hiçbir garanti vermiyoruz. 
+
+Ön sürümleri, istikrarlı sürümler için kullandığımız kayıt defterinde yayınlayarak, [unpkg](https://unpkg.com) ve [CodeSandbox](https://codesandbox.io) gibi npm iş akışını destekleyen birçok araçtan yararlanabiliyoruz. .
 
 ### En Yeni Kanalı {#latest-channel}
 En Yeni, istikrarlı React sürümleri için kullanılan kanaldır. Npm'deki `latest` etiketine karşılık gelir. Gerçek kullanıcılara gönderilen tüm React uygulamaları için önerilen kanaldır.
 
-**Hangi kanalı kullanmanız gerektiğinden emin değilseniz, kullanmanız gereken kanal En Yeni'dir.** Bir React yazılımcısıysanız, zaten kullandığınız budur.
+**Hangi kanalı kullanmanız gerektiğinden emin değilseniz, kullanmanız gereken kanal En Yeni kanalıdır.** Bir React yazılımcısıysanız, zaten kullandığınız budur.
 
-Son güncellemelerinin son derece istikrarlı olmasını bekleyebilirsiniz. Sürümler semantik versiyonlama şemasını takip eder. [Sürüm oluşturma politikamız](/ docs / faq-versioning.html) sayfasından istikrarlılık ve aşamalı geçiş taahhüdümüz hakkında daha fazla bilgi edinin.
+Güncellemelerin son derece istikrarlı olmasını bekleyebilirsiniz. Sürümler semantik versiyonlama şemasını takip eder. [Sürüm oluşturma politikamız](/docs/faq-versioning.html) sayfasından istikrarlılık ve aşamalı geçiş taahhüdümüz hakkında daha fazla bilgi edininiz.
 
-### Next Channel {#next-channel}
+### Sonraki Kanalı {#next-channel}
 
-The Next channel is a prerelease channel that tracks the master branch of the React repository. We use prereleases in the Next channel as release candidates for the Latest channel. You can think of Next as a superset of Latest that is updated more frequently.
+Sonraki kanal, React kaynak kodu ana dalını izleyen bir yayın öncesi kanaldır. Bir Sonraki kanaldaki yayın öncesi sürümleri, En Son kanal için yayın adayları olarak kullanıyoruz. İleri kanalını , daha sık güncellenen En Yeni kanalının  üstkümesi olarak düşünebilirsiniz.
 
-The degree of change between the most recent Next release and the most recent Latest release is approximately the same as you would find between two minor semver releases. However, **the Next channel does not conform to semantic versioning.** You should expect occasional breaking changes between successive releases in the Next channel.
+En son yayınlanan Sonraki sürüm ile en Yeni sürüm arasındaki fark, iki küçük dönem sürümü arasında bulacağınız farkla yaklaşık olarak aynı değere sahiptir. Ancak, **Sonraki kanalı, semantik sürümlemeye uymuyor.** Sonraki kanalda birbirini izleyen sürümler arasında zaman zaman değişiklik yapılması beklenmelidir.
 
-**Do not use prereleases in user-facing applications.**
+**Ön sürümleri kullanıcılara yönelik uygulamalarda kullanmayınız.**
 
-Releases in Next are published with the `next` tag on npm. Versions are generated from a hash of the build's contents, e.g. `0.0.0-1022ee0ec`.
+Sonraki kanalındaki sürümler npm'de `next` etiketi ile yayınlanır. Sürümler, yapının içeriğinin bir karma değerinden oluşturulur; `0.0.0-1022ee0ec`.
 
-#### Using the Next Channel for Integration Testing {#using-the-next-channel-for-integration-testing}
+#### Sonraki Kanalını Entegrasyon Testi için  Kullanma {#using-the-next-channel-for-integration-testing}
 
-The Next channel is designed to support integration testing between React and other projects.
+Sonraki kanalı, React ve diğer projeler arasındaki entegrasyon testini desteklemek için tasarlanmıştır.
 
-All changes to React go through extensive internal testing before they are released to the public. However, there are a myriad of environments and configurations used throughout the React ecosystem, and it's not possible for us to test against every single one.
+React'taki tüm değişiklikler kamuya açıklanmadan önce kapsamlı dahili testlerden geçer. Bununla birlikte, React ekosisteminde kullanılan sayısız ortam ve konfigürasyon vardır ve her birine karşı test etmemiz mümkün değildir.
 
-If you're the author of a third party React framework, library, developer tool, or similar infrastructure-type project, you can help us keep React stable for your users and the entire React community by periodically running your test suite against the most recent changes. If you're interested, follow these steps:
+Üçüncü taraf React çatısının, kitaplığının, geliştirici aracının veya benzer altyapı tipi bir projenin sahibiyseniz, test paketinizi en yeni sürümlere karşı düzenli olarak çalıştırarak, React'ı kullanıcılarınız ve tüm React topluluğu için istikrarlı tutmamıza yardımcı olabilirsiniz. İlgileniyorsanız şu adımları izleyiniz:
 
-- Set up a cron job using your preferred continuous integration platform. Cron jobs are supported by both [CircleCI](https://circleci.com/docs/2.0/triggers/#scheduled-builds) and [Travis CI](https://docs.travis-ci.com/user/cron-jobs/).
-- In the cron job, update your React packages to the most recent React release in the Next channel, using `next` tag on npm. Using the npm cli:
+- Tercih ettiğiniz sürekli entegrasyon platformunu kullanarak bir cron işi oluşturun. Cron işleri hem [CircleCI](https://circleci.com/docs/2.0/triggers/#scheduled-builds) hem de [Travis CI](https://docs.travis-ci.com/user/cron-jobs/) tarafından desteklenmektedir. 
+- Cron işinde, npm'de `next` etiketini kullanarak React paketlerinizi Sonraki kanalındaki en son React sürümüne güncelleyin. Npm cli kullanarak:
 
   ```
   npm update react@next react-dom@next
   ```
 
-  Or yarn:
+  Yada yarn ile:
 
   ```
   yarn upgrade react@next react-dom@next
   ```
-- Run your test suite against the updated packages.
-- If everything passes, great! You can expect that your project will work with the next minor React release.
-- If something breaks unexpectedly, please let us know by [filing an issue](https://github.com/facebook/react/issues).
 
-A project that uses this workflow is Next.js. (No pun intended! Seriously!) You can refer to their [CircleCI configuration](https://github.com/zeit/next.js/blob/c0a1c0f93966fe33edd93fb53e5fafb0dcd80a9e/.circleci/config.yml) as an example.
+- Test paketinizi güncellenmiş paketlere karşı çalıştırın.
+- Her şey geçerse harika! Projenizin bir sonraki küçük React sürümüyle çalışmasını bekleyebilirsiniz.
+- Bir şey beklenmedik bir şekilde çalışmazsa, lütfen [bir sorun bildirerek](https://github.com/facebook/react/issues) bize bildiriniz.
+
+
+Next.js bu iş akışını kullanan projelerden birisidir. (Kelime oyunu yok! Gerçekten!) Örnek olarak [CircleCI yapılandırması](https://github.com/zeit/next.js/blob/c0a1c0f93966fe33edd93fb53e5fafb0dcd80a9e/.circleci/config.yml)'na  başvurabilirsiniz.
 
 ### Experimental Channel {#experimental-channel}
 
