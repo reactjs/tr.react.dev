@@ -1,6 +1,6 @@
 ---
 id: release-channels
-title: Release Channels
+title: Yayın Kanalları
 permalink: docs/release-channels.html
 layout: docs
 category: installation
@@ -17,26 +17,26 @@ React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek] (h
  React'in yayın kanallarının her biri ayrı bir kullanım için tasarlanmıştır:
 
 
-- [** En yeni **] (# en yeni kanal) istikrarli, semver React sürümleri içindir. React'i npm'den yüklediğinizde elde edeceğiniz şey budur. Bugün kullandığınız kanal bu. ** Bunu kullanıcılara yönelik tüm React uygulamaları için kullanın. **
+- [**En Yeni**] (#latest-channel) istikrarli, semver React sürümleri içindir. React'i npm'den yüklediğinizde elde edeceğiniz şey budur. Bugün kullandığınız kanal bu. **Bunu kullanıcılara yönelik tüm React uygulamaları için kullanın.**
 
-- [** Sonraki **] (# sonraki kanal), React kaynak kodu veri havuzunun ana dalını izler. Bunları bir sonraki küçük semver sürümü için aday olarak düşünün. React ve üçüncü taraf projeleri arasındaki entegrasyon testi için bunu kullanın.
+- [**Sonraki**] (#next-channel), React kaynak kodu veri havuzunun ana dalını izler. Bunları bir sonraki küçük semver sürümü için aday olarak düşünün. React ve üçüncü taraf projeleri arasındaki entegrasyon testi için bunu kullanın.
 
-- [** Deneysel **] (# deneysel kanal), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
+- [**Deneysel**] (#eperimental-channel), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
 
 
 Tüm sürümler npm'de yayınlanır, ancak yalnızca en yeni kullanımlar [anlamsal sürüm oluşturma] (/ docs / faq-versioning.html). Ön yayınlar (Sonraki ve Deneysel kanallarda bulunanlar), içeriklerinin bir karma değerinden oluşturulan sürümlere sahiptir, örneğin İleri için "0.0.0-1022ee0ec" ve Deney için "0.0.0-deneysel-1022ee0ec".
 
-**The only officially supported release channel for user-facing applications is Latest**. Next and Experimental releases are provided for testing purposes only, and we provide no guarantees that behavior won't change between releases. They do not follow the semver protocol that we use for releases from Latest.
 
-By publishing prereleases to the same registry that we use for stable releases, we are able to take advantage of the many tools that support the npm workflow, like [unpkg](https://unpkg.com) and [CodeSandbox](https://codesandbox.io).
+**Kullanıcıya yönelik uygulamalar için resmi olarak desteklenen tek yayın kanalı En Yeni**. Sonraki ve Deneysel sürümler yalnızca test amacıyla sağlanmıştır ve En Yeni sürümler için kullandığımız semver protokolünü takip etmediklerinden dolayı sürümler arasında davranışın değişmeyeceğine dair hiçbir garanti vermiyoruz. 
 
-### Latest Channel {#latest-channel}
+Ön sürümleri, istikrarlı sürümler için kullandığımız kayıt defterinde yayınlayarak, [unpkg] (https://unpkg.com) ve [CodeSandbox] (https://codesandbox.io) gibi npm iş akışını destekleyen birçok araçtan yararlanabiliyoruz. .
 
-Latest is the channel used for stable React releases. It corresponds to the `latest` tag on npm. It is the recommended channel for all React apps that are shipped to real users.
+### En Yeni Kanalı {#latest-channel}
+En Yeni, istikrarlı React sürümleri için kullanılan kanaldır. Npm'deki `latest` etiketine karşılık gelir. Gerçek kullanıcılara gönderilen tüm React uygulamaları için önerilen kanaldır.
 
-**If you're not sure which channel you should use, it's Latest.** If you're a React developer, this is what you're already using.
+**Hangi kanalı kullanmanız gerektiğinden emin değilseniz, kullanmanız gereken kanal En Yeni'dir.** Bir React yazılımcısıysanız, zaten kullandığınız budur.
 
-You can expect updates to Latest to be extremely stable. Versions follow the semantic versioning scheme. Learn more about our commitment to stability and incremental migration in our [versioning policy](/docs/faq-versioning.html).
+Son güncellemelerinin son derece istikrarlı olmasını bekleyebilirsiniz. Sürümler semantik versiyonlama şemasını takip eder. [Sürüm oluşturma politikamız](/ docs / faq-versioning.html) sayfasından istikrarlılık ve aşamalı geçiş taahhüdümüz hakkında daha fazla bilgi edinin.
 
 ### Next Channel {#next-channel}
 
