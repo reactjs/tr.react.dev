@@ -58,7 +58,7 @@ React'teki tüm değişiklikler kamuya açıklanmadan önce kapsamlı dahili tes
   npm update react@next react-dom@next
   ```
 
-  Yada yarn ile:
+  Ya da yarn ile:
 
   ```
   yarn upgrade react@next react-dom@next
