@@ -1,95 +1,101 @@
 ---
 id: release-channels
-title: Release Channels
+title: Yayın Kanalları
 permalink: docs/release-channels.html
 layout: docs
 category: installation
 ---
 
-React relies on a thriving open source community to file bug reports, open pull requests, and [submit RFCs](https://github.com/reactjs/rfcs). To encourage feedback we sometimes share special builds of React that include unreleased features.
+React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek](https://github.com/reactjs/rfcs) için başarılı bir açık kaynak topluluğuna güvenir. Geri bildirimi teşvik etmek için bazen yayınlanmamış özellikler içeren özel React yapılarını paylaşırız.
 
-> This document will be most relevant to developers who work on frameworks, libraries, or developer tooling. Developers who use React primarily to build user-facing applications should not need to worry about our prerelease channels.
+ > Bu belge, en çok çatı, kütüphane veya geliştirici araçları üzerinde çalışan yazılımcılar için uygundur. React'i öncelikle kullanıcılara yönelik uygulamalar oluşturmak için kullanan yazılımcıların yayın öncesi kanallarımız hakkında endişelenmeleri gerekmez.
 
-Each of React's release channels is designed for a distinct use case:
+ React'in yayın kanallarının her biri ayrı bir kullanım için tasarlanmıştır:
 
-- [**Latest**](#latest-channel) is for stable, semver React releases. It's what you get when you install React from npm. This is the channel you're already using today. **Use this for all user-facing React applications.**
-- [**Next**](#next-channel) tracks the master branch of the React source code repository. Think of these as release candidates for the next minor semver release. Use this for integration testing between React and third party projects.
-- [**Experimental**](#experimental-channel) includes experimental APIs and features that aren't available in the stable releases. These also track the master branch, but with additional feature flags turned on. Use this to try out upcoming features before they are released.
+- [**En Yeni**](#latest-channel), istikrarlı, semver React sürümleri içindir. React'i npm'den yüklediğinizde elde edeceğiniz şey budur. Bugün kullandığınız kanal bu. **Bunu kullanıcılara yönelik tüm React uygulamaları için kullanın.**
 
-All releases are published to npm, but only Latest uses [semantic versioning](/docs/faq-versioning.html). Prereleases (those in the Next and Experimental channels) have versions generated from a hash of their contents, e.g. `0.0.0-1022ee0ec` for Next and `0.0.0-experimental-1022ee0ec` for Experimental.
+- [**Sonraki**](#next-channel), React kaynak kodu veri havuzunun ana dalını izler. Bunları bir sonraki küçük semver sürümü için aday olarak düşünebilirsiniz. React ve üçüncü taraf projeleri arasındaki entegrasyon testi için bunu kullanın.
 
-**The only officially supported release channel for user-facing applications is Latest**. Next and Experimental releases are provided for testing purposes only, and we provide no guarantees that behavior won't change between releases. They do not follow the semver protocol that we use for releases from Latest.
+- [**Deneysel**](#eperimental-channel), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
 
-By publishing prereleases to the same registry that we use for stable releases, we are able to take advantage of the many tools that support the npm workflow, like [unpkg](https://unpkg.com) and [CodeSandbox](https://codesandbox.io).
 
-### Latest Channel {#latest-channel}
+Tüm sürümler npm'de yayınlanır, ancak yalnızca en yeni kullanımlar [anlamsal sürüm oluşturma](/docs/faq-versioning.html). Ön yayınlar (Sonraki ve Deneysel kanallarında bulunanlar), kendi içeriklerinin bir karma değerinden oluşturulan sürümlere sahiptir, örneğin İleri için `0.0.0-1022ee0ec` ve Deney için `0.0.0-experimental-1022ee0ec`.
 
-Latest is the channel used for stable React releases. It corresponds to the `latest` tag on npm. It is the recommended channel for all React apps that are shipped to real users.
 
-**If you're not sure which channel you should use, it's Latest.** If you're a React developer, this is what you're already using.
+**Kullanıcıya yönelik uygulamalar için resmi olarak desteklenen tek yayın kanalı En Yeni kanalıdır**. Sonraki ve Deneysel sürümler yalnızca test amacıyla sağlanmıştır ve En Yeni sürümler için kullandığımız semver protokolünü takip etmediklerinden dolayı sürümler arasında davranışın değişmeyeceğine dair hiçbir garanti vermiyoruz. 
 
-You can expect updates to Latest to be extremely stable. Versions follow the semantic versioning scheme. Learn more about our commitment to stability and incremental migration in our [versioning policy](/docs/faq-versioning.html).
+Ön sürümleri, istikrarlı sürümler için kullandığımız kayıt defterinde yayınlayarak, [unpkg](https://unpkg.com) ve [CodeSandbox](https://codesandbox.io) gibi npm iş akışını destekleyen birçok araçtan yararlanabiliyoruz. .
 
-### Next Channel {#next-channel}
+### En Yeni Kanalı {#latest-channel}
+En Yeni, istikrarlı React sürümleri için kullanılan kanaldır. Npm'deki `latest` etiketine karşılık gelir. Gerçek kullanıcılara gönderilen tüm React uygulamaları için önerilen kanaldır.
 
-The Next channel is a prerelease channel that tracks the master branch of the React repository. We use prereleases in the Next channel as release candidates for the Latest channel. You can think of Next as a superset of Latest that is updated more frequently.
+**Hangi kanalı kullanmanız gerektiğinden emin değilseniz, kullanmanız gereken kanal En Yeni kanalıdır.** Bir React yazılımcısıysanız, zaten kullandığınız budur.
 
-The degree of change between the most recent Next release and the most recent Latest release is approximately the same as you would find between two minor semver releases. However, **the Next channel does not conform to semantic versioning.** You should expect occasional breaking changes between successive releases in the Next channel.
+Güncellemelerin son derece istikrarlı olmasını bekleyebilirsiniz. Sürümler semantik versiyonlama şemasını takip eder. [Sürüm oluşturma politikamız](/docs/faq-versioning.html) sayfasından istikrarlılık ve aşamalı geçiş taahhüdümüz hakkında daha fazla bilgi edininiz.
 
-**Do not use prereleases in user-facing applications.**
+### Sonraki Kanalı {#next-channel}
 
-Releases in Next are published with the `next` tag on npm. Versions are generated from a hash of the build's contents, e.g. `0.0.0-1022ee0ec`.
+Sonraki kanal, React kaynak kodu ana dalını izleyen bir yayın öncesi kanaldır. Bir Sonraki kanaldaki yayın öncesi sürümleri, En Son kanal için yayın adayları olarak kullanıyoruz. İleri kanalını , daha sık güncellenen En Yeni kanalının  üstkümesi olarak düşünebilirsiniz.
 
-#### Using the Next Channel for Integration Testing {#using-the-next-channel-for-integration-testing}
+En son yayınlanan Sonraki sürüm ile en Yeni sürüm arasındaki fark, iki küçük dönem sürümü arasında bulacağınız farkla yaklaşık olarak aynı değere sahiptir. Ancak, **Sonraki kanalı, semantik sürümlemeye uymaz.** Sonraki kanalda birbirini izleyen sürümler arasında zaman zaman değişiklik yapılması beklenmelidir.
 
-The Next channel is designed to support integration testing between React and other projects.
+**Ön sürümleri kullanıcılara yönelik uygulamalarda kullanmayınız.**
 
-All changes to React go through extensive internal testing before they are released to the public. However, there are a myriad of environments and configurations used throughout the React ecosystem, and it's not possible for us to test against every single one.
+Sonraki kanalındaki sürümler npm'de `next` etiketi ile yayınlanır. Sürümler, yapının kendi içeriğinin bir karma değerinden oluşturulur; `0.0.0-1022ee0ec`.
 
-If you're the author of a third party React framework, library, developer tool, or similar infrastructure-type project, you can help us keep React stable for your users and the entire React community by periodically running your test suite against the most recent changes. If you're interested, follow these steps:
+#### Sonraki Kanalını Entegrasyon Testi için  Kullanma {#using-the-next-channel-for-integration-testing}
 
-- Set up a cron job using your preferred continuous integration platform. Cron jobs are supported by both [CircleCI](https://circleci.com/docs/2.0/triggers/#scheduled-builds) and [Travis CI](https://docs.travis-ci.com/user/cron-jobs/).
-- In the cron job, update your React packages to the most recent React release in the Next channel, using `next` tag on npm. Using the npm cli:
+Sonraki kanalı, React ve diğer projeler arasındaki entegrasyon testini desteklemek için tasarlanmıştır.
+
+React'teki tüm değişiklikler kamuya açıklanmadan önce kapsamlı dahili testlerden geçer. Bununla birlikte, React ekosisteminde kullanılan sayısız ortam ve konfigürasyon vardır ve her birine karşı test etmemiz mümkün değildir.
+
+Üçüncü taraf React çatısının, kitaplığının, geliştirici aracının veya benzer altyapı tipi bir projenin sahibiyseniz, test paketinizi en yeni sürümlere karşı düzenli olarak çalıştırarak, React'i kullanıcılarınız ve tüm React topluluğu için istikrarlı tutmamıza yardımcı olabilirsiniz. İlgileniyorsanız şu adımları izleyiniz:
+
+- Tercih ettiğiniz sürekli entegrasyon platformunu kullanarak bir cron işi oluşturun. Cron işleri hem [CircleCI](https://circleci.com/docs/2.0/triggers/#scheduled-builds) hem de [Travis CI](https://docs.travis-ci.com/user/cron-jobs/) tarafından desteklenmektedir. 
+- Cron işinde, npm'de `next` etiketini kullanarak React paketlerinizi Sonraki kanalındaki en son React sürümüne güncelleyin. Npm cli kullanarak:
 
   ```
   npm update react@next react-dom@next
   ```
 
-  Or yarn:
+  Ya da yarn ile:
 
   ```
   yarn upgrade react@next react-dom@next
   ```
-- Run your test suite against the updated packages.
-- If everything passes, great! You can expect that your project will work with the next minor React release.
-- If something breaks unexpectedly, please let us know by [filing an issue](https://github.com/facebook/react/issues).
 
-A project that uses this workflow is Next.js. (No pun intended! Seriously!) You can refer to their [CircleCI configuration](https://github.com/zeit/next.js/blob/c0a1c0f93966fe33edd93fb53e5fafb0dcd80a9e/.circleci/config.yml) as an example.
+- Test paketinizi güncellenmiş paketlere karşı çalıştırın.
+- Her şey geçerse harika! Projenizin bir sonraki küçük React sürümüyle çalışmasını bekleyebilirsiniz.
+- Beklenmedik bir şekilde herhangi bir şeyin çalışmaması durumunda, lütfen [bir sorun bildirerek](https://github.com/facebook/react/issues) bizimle iletişime geçiniz.
 
-### Experimental Channel {#experimental-channel}
 
-Like Next, the Experimental channel is a prerelease channel that tracks the master branch of the React repository. Unlike Next, Experimental releases include additional features and APIs that are not ready for wider release.
+Next.js bu iş akışını kullanan projelerden birisidir. (Kelime oyunu yok! Gerçekten!) Örnek olarak [CircleCI yapılandırması](https://github.com/zeit/next.js/blob/c0a1c0f93966fe33edd93fb53e5fafb0dcd80a9e/.circleci/config.yml)'na  başvurabilirsiniz.
 
-Usually, an update to Next is accompanied by a corresponding update to Experimental. They are based on the same source revision, but are built using a different set of feature flags.
+### Deneysel Kanal {#experimental-channel}
 
-Experimental releases may be significantly different than releases to Next and Latest. **Do not use Experimental releases in user-facing applications.** You should expect frequent breaking changes between releases in the Experimental channel.
+Sonraki kanalı gibi, Deneysel kanal da React deposunun ana dalını izleyen bir yayın öncesi kanaldır. Sonraki'nin aksine, Deneysel sürümler, geniş bir sürüme hazır olmayan ek özellikler ve API'ler içerir.
 
-Releases in Experimental are published with the `experimental` tag on npm. Versions are generated from a hash of the build's contents, e.g. `0.0.0-experimental-1022ee0ec`.
+Genellikle Sonraki kanalına yönelik bir güncellemeye, Deneysel kanalına karşılık gelen bir güncelleme eşlik eder. Aynı kaynak revizyonuna dayanırlar, ancak farklı bir özellik bayrağı seti kullanılarak oluşturulmuştur.
 
-#### What Goes Into an Experimental Release? {#what-goes-into-an-experimental-release}
+Deneysel sürümler, Sonraki ve En Yeni sürümlerden daha farklı olabilir. **Deneysel sürümleri kullanıcılara yönelik uygulamalarda kullanmayınız.** Deney kanalındaki sürümler arasında sık sık değişiklik yapılmasını beklemelisiniz.
 
-Experimental features are ones that are not ready to be released to the wider public, and may change drastically before they are finalized. Some experiments may never be finalized -- the reason we have experiments is to test the viability of proposed changes.
+Deneysel sürümler npm'de `experimental` etiketi ile yayınlanır. Sürümler, yapının kendi içeriğinin bir karma değerinden oluşturulur, örneğin; `0.0.0-experimental-1022ee0ec`.
 
-For example, if the Experimental channel had existed when we announced Hooks, we would have released Hooks to the Experimental channel weeks before they were available in Latest.
 
-You may find it valuable to run integration tests against Experimental. This is up to you. However, be advised that Experimental is even less stable than Next. **We do not guarantee any stability between Experimental releases.**
+#### Deneysel Bir Sürümde Neler Oluyor? {#what-goes-into-an-experimental-release}
 
-#### How Can I Learn More About Experimental Features? {#how-can-i-learn-more-about-experimental-features}
+Deneysel özellikler, daha geniş bir kitleye sunulmaya hazır olmayan özelliklerdir ve sonuçlandırılmadan önce büyük ölçüde değişebilirler. Bazı deneyler asla sonuçlandırılamaz -- deney yapmamızın nedeni, önerilen değişikliklerin uygulanabilirliğini test etmektir.
 
-Experimental features may or may not be documented. Usually, experiments aren't documented until they are close to shipping in Next or Stable.
+Örneğin, Hooks'u duyurduğumuzda Deneysel kanal mevcut olsaydı, Hooks'u En Yeni kanalında kullanıma sunmadan haftalar önce Deneysel kanalında yayınlardık.
 
-If a feature is not documented, they may be accompanied by an [RFC](https://github.com/reactjs/rfcs).
+Denemeye karşı entegrasyon testleri yapmayı değerli bulabilirsiniz. Bu size kalmış. Ancak, Deneysel kanalının Sonraki kanalından daha az istikrarlı olduğunu unutmayınız. **Deneysel sürümler arasında herhangi bir istikrarı garanti etmiyoruz.**
 
-We will post to the [React blog](/blog) when we're ready to announce new experiments, but that doesn't mean we will publicize every experiment.
+#### Deneysel Özellikler Hakkında Nasıl Daha Fazla Bilgi Edinebilirim? {#how-can-i-learn-more-about-experimental-features}
 
-You can always refer to our public GitHub repository's [history](https://github.com/facebook/react/commits/master) for a comprehensive list of changes.
+Deneysel özellikler belgelenebilir veya belgelenmeyebilir. Genellikle, deneyler Sonraki veya İstikrarlı'ya gönderime yakın olana kadar belgelenmez.
+
+Bir özellik belgelenmezse, bir [RFC](https://github.com/reactjs/rfcs) eşlik edebilir.
+
+Yeni deneyleri duyurmaya hazır olduğumuzda [React blog](/blog)'da  yayınlayacağız, ancak bu, her denemeyi yayınlayacağımız anlamına gelmez.
+
+Kapsamlı bir değişiklik listesi için her zaman herkese açık olan GitHub depomuzun [geçmişine](https://github.com/facebook/react/commits/master) başvurabilirsiniz.
