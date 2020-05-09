@@ -167,21 +167,21 @@ function Story(props) {
 }
 ```
 
-## Props in JSX {#props-in-jsx}
+## JSX'de Prop'lar {#props-in-jsx}
 
-There are several different ways to specify props in JSX.
+JSX'te prop'ları belirtmenin birkaç farklı yolu vardır.
 
-### JavaScript Expressions as Props {#javascript-expressions-as-props}
+### Prop Olarak JavaScript İfadeleri {#javascript-expressions-as-props}
 
-You can pass any JavaScript expression as a prop, by surrounding it with `{}`. For example, in this JSX:
+Herhangi bir JavaScript ifadesini `{}` ile çevreleyerek bir prop olarak iletebilirsiniz. Örneğin, bu JSX'te:
 
 ```js
 <MyComponent foo={1 + 2 + 3 + 4} />
 ```
 
-For `MyComponent`, the value of `props.foo` will be `10` because the expression `1 + 2 + 3 + 4` gets evaluated.
+`MyComponent` için, `props.foo` değeri `10` olacaktır çünkü `1 + 2 + 3 + 4` ifadesi çalıştırılır.
 
-`if` statements and `for` loops are not expressions in JavaScript, so they can't be used in JSX directly. Instead, you can put these in the surrounding code. For example:
+`if` bildirimleri ve` for` döngüleri JavaScript'te ifade değildir, bu nedenle doğrudan JSX'te kullanılamazlar. Onun yerine, bunları çevreleyen bir koda koyabilirsiniz. Örneğin:
 
 ```js{3-7}
 function NumberDescriber(props) {
@@ -195,11 +195,11 @@ function NumberDescriber(props) {
 }
 ```
 
-You can learn more about [conditional rendering](/docs/conditional-rendering.html) and [loops](/docs/lists-and-keys.html) in the corresponding sections.
+İlgili bölümlerde [koşullu render etme](/docs/conditional-rendering.html) ve [döngüler](/docs/lists-and-keys.html) hakkında daha fazla bilgi edinebilirsiniz.
 
-### String Literals {#string-literals}
+### String Değişmezleri {#string-literals}
 
-You can pass a string literal as a prop. These two JSX expressions are equivalent:
+Bir string değişmezini prop olarak geçirebilirsiniz. Bu iki JSX ifadesi eşdeğerdir:
 
 ```js
 <MyComponent message="hello world" />
@@ -207,7 +207,7 @@ You can pass a string literal as a prop. These two JSX expressions are equivalen
 <MyComponent message={'hello world'} />
 ```
 
-When you pass a string literal, its value is HTML-unescaped. So these two JSX expressions are equivalent:
+Bir string değişmezini ilettiğinizde, değeri HTML'den kaçmaz. Yani bu iki JSX ifadesi eşdeğerdir:
 
 ```js
 <MyComponent message="&lt;3" />
@@ -215,11 +215,11 @@ When you pass a string literal, its value is HTML-unescaped. So these two JSX ex
 <MyComponent message={'<3'} />
 ```
 
-This behavior is usually not relevant. It's only mentioned here for completeness.
+Bu davranış genellikle alakasızdır. Burada sadece bütünlük için bahsedilmiştir.
 
-### Props Default to "True" {#props-default-to-true}
+### Prop'ların Varsayılan Değeri "True" {#props-default-to-true}
 
-If you pass no value for a prop, it defaults to `true`. These two JSX expressions are equivalent:
+Eğer bir prop için herhangi bir değer iletmezseniz, değeri varsayılan olarak `true` olur. Bu iki JSX ifadesi eşdeğerdir:
 
 ```js
 <MyTextBox autocomplete />
@@ -227,24 +227,24 @@ If you pass no value for a prop, it defaults to `true`. These two JSX expression
 <MyTextBox autocomplete={true} />
 ```
 
-In general, we don't recommend *not* passing a value for a prop, because it can be confused with the [ES6 object shorthand](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015) `{foo}` which is short for `{foo: foo}` rather than `{foo: true}`. This behavior is just there so that it matches the behavior of HTML.
+Genel olarak, bir prop için değer *iletmemenizi* önermiyoruz, çünkü `{foo: true}` yerine `{foo: foo}` için [ES6 obje kısayolu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015) olan `{foo}` ile karıştırılabilir. Bu davranış sadece, HTML davranışıyla eşleşmesi için oradadır.
 
-### Spread Attributes {#spread-attributes}
+### Özelliklerin Yayılması {#spread-attributes}
 
-If you already have `props` as an object, and you want to pass it in JSX, you can use `...` as a "spread" operator to pass the whole props object. These two components are equivalent:
+Zaten nesne olarak bir `prop'lar` objeniz varsa ve bunu JSX'e aktarmak istiyorsanız, tüm prop'ları geçrmek için "yayma" (spread) operatörü olan `...` 'yı kullanabilirsiniz. Bu iki bileşen eşdeğerdir:
 
 ```js{7}
 function App1() {
-  return <Greeting firstName="Ben" lastName="Hector" />;
+  return <Greeting firstName="Yunus Emre" lastName="Dilber" />;
 }
 
 function App2() {
-  const props = {firstName: 'Ben', lastName: 'Hector'};
+  const props = {firstName: 'Yunus Emre', lastName: 'Dilber'};
   return <Greeting {...props} />;
 }
 ```
 
-You can also pick specific props that your component will consume while passing all other props using the spread operator.
+Ayrıca, yayılma operatörünü kullanarak diğer tüm prop'ları geçerken, bileşeninizin kullanacağı özel prop'ları de seçebilirsiniz.
 
 ```js{2}
 const Button = props => {
@@ -264,10 +264,10 @@ const App = () => {
 };
 ```
 
-In the example above, the `kind` prop is safely consumed and *is not* passed on to the `<button>` element in the DOM.
-All other props are passed via the `...other` object making this component really flexible. You can see that it passes an `onClick` and `children` props.
+Yukarıdaki örnekte, `kind` prop'u güvenli bir şekilde kullanılır ve DOM'daki `<button>` elemanına *geçirilmez*.
+Diğer tüm prop'lar bu bileşeni esnek yapan `...other` nesnesi üzerinden geçirilir. `onClick` ve `children` prop'larının geçirildiğini görebilirsiniz.
 
-Spread attributes can be useful but they also make it easy to pass unnecessary props to components that don't care about them or to pass invalid HTML attributes to the DOM. We recommend using this syntax sparingly.  
+Özelliklerin yayılması yararlı olabilir ancak bunlar, onları umursamayan bileşenlere gereksiz prop'ların aktarılmasını veya geçersiz HTML özelliklerinin DOM'a aktarılmasını kolaylaştırır. Bu sözdizimini tedbirli kullanmanızı öneririz.
 
 ## Children in JSX {#children-in-jsx}
 
