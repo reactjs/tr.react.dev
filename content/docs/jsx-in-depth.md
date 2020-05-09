@@ -1,6 +1,6 @@
 ---
 id: jsx-in-depth
-title: JSX In Depth
+title: Derinlemesine JSX
 permalink: docs/jsx-in-depth.html
 redirect_from:
   - "docs/jsx-spread.html"
@@ -13,7 +13,7 @@ redirect_from:
   - "docs/jsx-in-depth-ko-KR.html"
 ---
 
-Fundamentally, JSX just provides syntactic sugar for the `React.createElement(component, props, ...children)` function. The JSX code:
+Temel olarak, JSX `React.createElement(component, props, ...children)` fonksiyonu için sözdizimsel bir kısayol sağlar. JSX, aşağıdaki kodu:
 
 ```js
 <MyButton color="blue" shadowSize={2}>
@@ -21,7 +21,7 @@ Fundamentally, JSX just provides syntactic sugar for the `React.createElement(co
 </MyButton>
 ```
 
-compiles into:
+şuna derler:
 
 ```js
 React.createElement(
@@ -31,13 +31,13 @@ React.createElement(
 )
 ```
 
-You can also use the self-closing form of the tag if there are no children. So:
+Eğer alt eleman yoksa, etiketin (tag) kendiliğinden kapanan formunu da kullanabilirsiniz. Yani:
 
 ```js
 <div className="sidebar" />
 ```
 
-compiles into:
+şuna derlenir:
 
 ```js
 React.createElement(
@@ -46,7 +46,7 @@ React.createElement(
 )
 ```
 
-If you want to test out how some specific JSX is converted into JavaScript, you can try out [the online Babel compiler](babel://jsx-simple-example).
+Belirli bir JSX'in JavaScript'e nasıl dönüştürüldüğünü test etmek istiyorsanız, [çevrimiçi Babil derleyicisi](babel://jsx-simple-example)'ni deneyebilirsiniz.
 
 ## Specifying The React Element Type {#specifying-the-react-element-type}
 
