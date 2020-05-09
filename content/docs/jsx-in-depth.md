@@ -269,25 +269,25 @@ Diğer tüm prop'lar bu bileşeni esnek yapan `...other` nesnesi üzerinden geç
 
 Özelliklerin yayılması yararlı olabilir ancak bunlar, onları umursamayan bileşenlere gereksiz prop'ların aktarılmasını veya geçersiz HTML özelliklerinin DOM'a aktarılmasını kolaylaştırır. Bu sözdizimini tedbirli kullanmanızı öneririz.
 
-## Children in JSX {#children-in-jsx}
+## JSX'de Alt Elemanlar {#children-in-jsx}
 
-In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: `props.children`. There are several different ways to pass children:
+Hem açılış hem de kapanış etiketi içeren JSX ifadelerinde, bu etiketler arasındaki içerik özel bir prop olarak geçirilir: `props.children`. Alt elemanları geçmenin birkaç farklı yolu vardır:
 
-### String Literals {#string-literals-1}
+### String Değişmezleri {#string-literals-1}
 
-You can put a string between the opening and closing tags and `props.children` will just be that string. This is useful for many of the built-in HTML elements. For example:
+Açılış ve kapanış etiketleri arasına bir string koyabilirsiniz ve `props.children` sadece bu string olacaktır. Bu, çoğu dahili HTML elemanı için kullanışlıdır. Örneğin:
 
 ```js
 <MyComponent>Hello world!</MyComponent>
 ```
 
-This is valid JSX, and `props.children` in `MyComponent` will simply be the string `"Hello world!"`. HTML is unescaped, so you can generally write JSX just like you would write HTML in this way:
+Bu geçerli bir JSX ve `MyComponent` içindeki `props.children` sadece `"Hello world!"` stringi olacaktır. HTML'den kaçılmadığı için, genellikle tıpkı HTML yazdığınız gibi JSX'i bu şekilde yazabilirsiniz:
 
 ```html
-<div>This is valid HTML &amp; JSX at the same time.</div>
+<div>Bu geçerli bir HTML &amp; Aynı zamanda JSX.</div>
 ```
 
-JSX removes whitespace at the beginning and ending of a line. It also removes blank lines. New lines adjacent to tags are removed; new lines that occur in the middle of string literals are condensed into a single space. So these all render to the same thing:
+JSX, bir satırın başındaki ve sonundaki boşlukları kaldırır. Ayrıca boş satırları da kaldırır. Etiketlere bitişik yeni satırlar kaldırılır; string değişmezlerinin ortasında oluşan yeni satırlar tek bir boşluğa dönüştürülür. Yani bunların hepsi aynı şeye render ediliyor:
 
 ```js
 <div>Hello World</div>
@@ -307,9 +307,9 @@ JSX removes whitespace at the beginning and ending of a line. It also removes bl
 </div>
 ```
 
-### JSX Children {#jsx-children}
+### JSX Alt Elemanları {#jsx-children}
 
-You can provide more JSX elements as the children. This is useful for displaying nested components:
+Alt eleman olarak daha fazla JSX elemanı sağlayabilirsiniz. Bu, iç içe geçmiş bileşenleri görüntülemek için kullanışlıdır:
 
 ```js
 <MyContainer>
@@ -318,7 +318,7 @@ You can provide more JSX elements as the children. This is useful for displaying
 </MyContainer>
 ```
 
-You can mix together different types of children, so you can use string literals together with JSX children. This is another way in which JSX is like HTML, so that this is both valid JSX and valid HTML:
+Farklı türdeki alt elemanları birlikte kullanabilirsiniz, böylece string değişmezlerini JSX alt elemanlarıyla birlikte kullanabilirsiniz. Bu, JSX'in HTML'e benzemesinin başka bir yoludur; böylece bu, hem geçerli bir JSX hem de geçerli bir HTML'dir:
 
 ```html
 <div>
@@ -330,13 +330,13 @@ You can mix together different types of children, so you can use string literals
 </div>
 ```
 
-A React component can also return an array of elements:
+React bileşeni ayrıca bir dizi eleman döndürebilir:
 
 ```js
 render() {
-  // No need to wrap list items in an extra element!
+  // Liste öğelerini ekstra bir elemanla sarmanıza gerek yok!
   return [
-    // Don't forget the keys :)
+    // Key'leri unutmayın :)
     <li key="A">First item</li>,
     <li key="B">Second item</li>,
     <li key="C">Third item</li>,
@@ -344,9 +344,9 @@ render() {
 }
 ```
 
-### JavaScript Expressions as Children {#javascript-expressions-as-children}
+### Alt Eleman Olarak JavaScript İfadeleri {#javascript-expressions-as-children}
 
-You can pass any JavaScript expression as children, by enclosing it within `{}`. For example, these expressions are equivalent:
+Herhangi bir JavaScript ifadesini `{}` içine koyarak alt eleman olarak iletebilirsiniz. Örneğin, bu ifadeler eşdeğerdir:
 
 ```js
 <MyComponent>foo</MyComponent>
@@ -354,7 +354,7 @@ You can pass any JavaScript expression as children, by enclosing it within `{}`.
 <MyComponent>{'foo'}</MyComponent>
 ```
 
-This is often useful for rendering a list of JSX expressions of arbitrary length. For example, this renders an HTML list:
+Bu genellikle, keyfi uzunluktaki JSX ifadelerinin bir listesini render etmek için kullanışlıdır. Örneğin, bu bir HTML listesi render eder:
 
 ```js{2,9}
 function Item(props) {
@@ -371,7 +371,7 @@ function TodoList() {
 }
 ```
 
-JavaScript expressions can be mixed with other types of children. This is often useful in lieu of string templates:
+JavaScript ifadeleri diğer alt eleman türleri ile birlikte kullanılabilir. Bu genellikle string şablonları yerine kullanışlıdır:
 
 ```js{2}
 function Hello(props) {
@@ -379,12 +379,12 @@ function Hello(props) {
 }
 ```
 
-### Functions as Children {#functions-as-children}
+### Alt Eleman Olarak Fonksiyonlar {#functions-as-children}
 
-Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, `props.children` works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as `props.children`:
+Normalde, JSX'e eklenen JavaScript ifadeleri bir string, bir React elemanı veya bu şeylerin bir listesi olarak değerlendirilir. Bununla birlikte, `props.children`, sadece React'ın nasıl render edeceğini bildiği türler değil, her türde veriyi aktarabilmesi için herhangi bir prop gibi çalışır. Örneğin, özel bir bileşeniniz varsa, bunun `props.children` olarak bir callback almasını sağlayabilirsiniz:
 
 ```js{4,13}
-// Calls the children callback numTimes to produce a repeated component
+// Tekrarlanan bir bileşen üretmek için alt eleman callback'ini numTimes kez çağırır
 function Repeat(props) {
   let items = [];
   for (let i = 0; i < props.numTimes; i++) {
@@ -402,11 +402,11 @@ function ListOfTenThings() {
 }
 ```
 
-Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.
+Özel bir bileşene geçirilen alt elemanlar, bu bileşen onları React'ın render etmeden önce anlayabileceği bir şeye dönüştürdüğü sürece herhangi bir şey olabilir. Bu kullanım yaygın değildir, ancak JSX'in neler yapabileceğini açmak istiyorsanız çalışacaktır.
 
-### Booleans, Null, and Undefined Are Ignored {#booleans-null-and-undefined-are-ignored}
+### Boolean'lar, Null ve Undefined Görmezden Gelinir {#booleans-null-and-undefined-are-ignored}
 
-`false`, `null`, `undefined`, and `true` are valid children. They simply don't render. These JSX expressions will all render to the same thing:
+`false`, `null`, `undefined` ve `true` geçerli alt elemanlardır. Sadece, render edilmezler. Bu JSX ifadelerinin tümü aynı şeye render edilir:
 
 ```js
 <div />
@@ -422,7 +422,7 @@ Children passed to a custom component can be anything, as long as that component
 <div>{true}</div>
 ```
 
-This can be useful to conditionally render React elements. This JSX renders the `<Header />` component only if `showHeader` is `true`:
+Bu, React elemanlarının koşullu olarak render etmek için yararlı olabilir. Bu JSX, `<Header />` bileşenini yalnızca `showHeader` `true` olduğunda render eder:
 
 ```js{2}
 <div>
@@ -431,7 +431,7 @@ This can be useful to conditionally render React elements. This JSX renders the 
 </div>
 ```
 
-One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), such as the `0` number, are still rendered by React. For example, this code will not behave as you might expect because `0` will be printed when `props.messages` is an empty array:
+Bir uyarı, `0` sayısı gibi bazı [“falsy” değerlerin](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) hala React tarafından görüntülenmesidir. Örneğin, bu kod beklediğiniz gibi davranmayacaktır çünkü `props.messages` boş bir dizi olduğunda `0` yazdırılacaktır:
 
 ```js{2}
 <div>
@@ -441,7 +441,7 @@ One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/doc
 </div>
 ```
 
-To fix this, make sure that the expression before `&&` is always boolean:
+Bunu düzeltmek için, `&&` öncesindeki ifadenin her zaman boolean olduğundan emin olun:
 
 ```js{2}
 <div>
@@ -451,7 +451,7 @@ To fix this, make sure that the expression before `&&` is always boolean:
 </div>
 ```
 
-Conversely, if you want a value like `false`, `true`, `null`, or `undefined` to appear in the output, you have to [convert it to a string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion) first:
+Aksine, çıktıda `false`, `true`, `null` veya `undefined` gibi bir değerin görünmesini istiyorsanız, önce [bir stringe dönüştürmeniz](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion) gerekir:
 
 ```js{2}
 <div>
