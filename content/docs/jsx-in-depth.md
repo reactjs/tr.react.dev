@@ -48,17 +48,17 @@ React.createElement(
 
 Belirli bir JSX'in JavaScript'e nasıl dönüştürüldüğünü test etmek istiyorsanız, [çevrimiçi Babil derleyicisi](babel://jsx-simple-example)'ni deneyebilirsiniz.
 
-## Specifying The React Element Type {#specifying-the-react-element-type}
+## React Elemanı Türünü Belirtme {#specifying-the-react-element-type}
 
-The first part of a JSX tag determines the type of the React element.
+JSX etiketinin ilk kısmı, React elemanının türünü belirtir.
 
-Capitalized types indicate that the JSX tag is referring to a React component. These tags get compiled into a direct reference to the named variable, so if you use the JSX `<Foo />` expression, `Foo` must be in scope.
+Büyük harfle başlayan türler, JSX etiketinin bir React bileşenine başvurduğunu belirtir. Bu etiketler, isimlendirilmiş değişkene doğrudan bir referans olarak derlenir, yani JSX `<Foo />` ifadesini kullanırsanız, `Foo` kapsam dahilinde olmalıdır.
 
-### React Must Be in Scope {#react-must-be-in-scope}
+### React Kapsam Dahilinde Olmalı {#react-must-be-in-scope}
 
-Since JSX compiles into calls to `React.createElement`, the `React` library must also always be in scope from your JSX code.
+JSX, `React.createElement` çağrısına derlediğinden, `React` kütüphanesi her zaman JSX kodunuzun kapsamında olmalıdır.
 
-For example, both of the imports are necessary in this code, even though `React` and `CustomButton` are not directly referenced from JavaScript:
+Örneğin, `React` ve `CustomButton` öğeleri doğrudan JavaScript'te kullanılmasa da, her ikisi için de içe aktarma bu kodda gereklidir:
 
 ```js{1,2,5}
 import React from 'react';
@@ -70,11 +70,11 @@ function WarningButton() {
 }
 ```
 
-If you don't use a JavaScript bundler and loaded React from a `<script>` tag, it is already in scope as the `React` global.
+Bir JavaScript paketleyici kullanmıyor ve React'ı bir `<script>` etiketinden yüklüyorsanız, `React` global olarak zaten kapsam dahilindedir.
 
-### Using Dot Notation for JSX Type {#using-dot-notation-for-jsx-type}
+### JSX Türü için Nokta Gösterimini Kullanma {#using-dot-notation-for-jsx-type}
 
-You can also refer to a React component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if `MyComponents.DatePicker` is a component, you can use it directly from JSX with:
+JSX içinden nokta gösterimini kullanarak da bir React bileşenine başvurabilirsiniz. Bu, birçok React bileşenini dışa aktaran tek bir modülünüz varsa kullanışlıdır. Örneğin, `MyComponents.DatePicker` bir bileşense, bunu doğrudan JSX'te aşağıdaki şekilde kullanabilirsiniz:
 
 ```js{10}
 import React from 'react';
@@ -90,49 +90,49 @@ function BlueDatePicker() {
 }
 ```
 
-### User-Defined Components Must Be Capitalized {#user-defined-components-must-be-capitalized}
+### Kullanıcı Tanımlı Bileşenler Büyük Harfle Başlamalıdır {#user-defined-components-must-be-capitalized}
 
-When an element type starts with a lowercase letter, it refers to a built-in component like `<div>` or `<span>` and results in a string `'div'` or `'span'` passed to `React.createElement`. Types that start with a capital letter like `<Foo />` compile to `React.createElement(Foo)` and correspond to a component defined or imported in your JavaScript file.
+Bir elemanın türü küçük harfle başladığında, `<div>` veya `<span>` gibi dahili bir bileşene atıfta bulunur ve bunun sonucu `React.createElement` fonksiyonuna `'div'` veya `'span'` stringlerinin aktarılmasıdır. `<Foo />` gibi büyük harfle başlayan türler `React.createElement(Foo)` şeklinde derlenir ve JavaScript dosyanızda tanımlanan veya içe aktarılan bir bileşene karşılık gelir.
 
-We recommend naming components with a capital letter. If you do have a component that starts with a lowercase letter, assign it to a capitalized variable before using it in JSX.
+Bileşenleri, büyük harfle başlayan bir şekilde adlandırmanızı öneririz. Küçük harfle başlayan bir bileşeniniz varsa, bunu JSX'te kullanmadan önce büyük harfle başlayan bir değişkene atayın.
 
-For example, this code will not run as expected:
+Örneğin, bu kod beklendiği gibi çalışmaz:
 
 ```js{3,4,10,11}
 import React from 'react';
 
-// Wrong! This is a component and should have been capitalized:
+// Yanlış! Bu bir bileşendir ve ismi büyük bir harfle başlamalıdır:
 function hello(props) {
-  // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+  // Doğru! div geçerli bir HTML etiketi olduğundan <div> 'in bu kullanımı uygundur:
   return <div>Hello {props.toWhat}</div>;
 }
 
 function HelloWorld() {
-  // Wrong! React thinks <hello /> is an HTML tag because it's not capitalized:
+  // Yanlış! React, büyük bir harfle başlamadığından <hello /> 'nun bir HTML etiketi olduğunu düşünüyor:
   return <hello toWhat="World" />;
 }
 ```
 
-To fix this, we will rename `hello` to `Hello` and use `<Hello />` when referring to it:
+Bunu düzeltmek için, `hello` fonksiyonunu `Hello` olarak yeniden adlandırıp `<Hello />` olarak kullanacağız:
 
 ```js{3,4,10,11}
 import React from 'react';
 
-// Correct! This is a component and should be capitalized:
+// Doğru! Bu bir bileşendir ve adı büyük harfle başlamalıdır:
 function Hello(props) {
-  // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+  // Doğru! div geçerli bir HTML etiketi olduğundan <div> 'in bu kullanımı uygundur:
   return <div>Hello {props.toWhat}</div>;
 }
 
 function HelloWorld() {
-  // Correct! React knows <Hello /> is a component because it's capitalized.
+  // Doğru! React, <Hello /> büyük bir harfle başladığı için bir bileşen olduğunu biliyor.
   return <Hello toWhat="World" />;
 }
 ```
 
-### Choosing the Type at Runtime {#choosing-the-type-at-runtime}
+### Türü Çalışma Zamanında Seçme {#choosing-the-type-at-runtime}
 
-You cannot use a general expression as the React element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:
+Genel bir ifadeyi (expression) React elemanı türü olarak kullanamazsınız. Elemanın türünü belirtmek için genel bir ifade kullanmak istiyorsanız, sadece öncesinde büyük harfle başlayan bir değişkene atayın. Bu genellikle, bir prop'a göre farklı bir bileşen render etmek istediğinizde ortaya çıkar:
 
 ```js{10,11}
 import React from 'react';
@@ -144,12 +144,12 @@ const components = {
 };
 
 function Story(props) {
-  // Wrong! JSX type can't be an expression.
+  // Yanlış! JSX türü bir ifade olamaz.
   return <components[props.storyType] story={props.story} />;
 }
 ```
 
-To fix this, we will assign the type to a capitalized variable first:
+Bunu düzeltmek için, önce türü büyük harfle başlayan bir değişkene atayacağız:
 
 ```js{10-12}
 import React from 'react';
@@ -161,7 +161,7 @@ const components = {
 };
 
 function Story(props) {
-  // Correct! JSX type can be a capitalized variable.
+  // Doğru! JSX türü büyük harfli bir değişken olabilir.
   const SpecificStory = components[props.storyType];
   return <SpecificStory story={props.story} />;
 }
