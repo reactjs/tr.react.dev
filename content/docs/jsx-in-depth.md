@@ -48,11 +48,11 @@ React.createElement(
 
 Belirli bir JSX'in JavaScript'e nasıl dönüştürüldüğünü test etmek istiyorsanız, [çevrimiçi Babil derleyicisi](babel://jsx-simple-example)'ni deneyebilirsiniz.
 
-## React Elemanı Türünü Belirtme {#specifying-the-react-element-type}
+## React Elemanı Tipini Belirtme {#specifying-the-react-element-type}
 
-JSX etiketinin ilk kısmı, React elemanının türünü belirtir.
+JSX etiketinin ilk kısmı, React elemanının tipini belirtir.
 
-Büyük harfle başlayan türler, JSX etiketinin bir React bileşenine başvurduğunu belirtir. Bu etiketler, isimlendirilmiş değişkene doğrudan bir referans olarak derlenir, yani JSX `<Foo />` ifadesini kullanırsanız, `Foo` kapsam dahilinde olmalıdır.
+Büyük harfle başlayan tipler, JSX etiketinin bir React bileşenine başvurduğunu belirtir. Bu etiketler, isimlendirilmiş değişkene doğrudan bir referans olarak derlenir, yani JSX `<Foo />` ifadesini kullanırsanız, `Foo` kapsam dahilinde olmalıdır.
 
 ### React Kapsam Dahilinde Olmalı {#react-must-be-in-scope}
 
@@ -72,7 +72,7 @@ function WarningButton() {
 
 Bir JavaScript paketleyici kullanmıyor ve React'ı bir `<script>` etiketinden yüklüyorsanız, `React` global olarak zaten kapsam dahilindedir.
 
-### JSX Türü için Nokta Gösterimini Kullanma {#using-dot-notation-for-jsx-type}
+### JSX Tipi için Nokta Gösterimini Kullanma {#using-dot-notation-for-jsx-type}
 
 JSX içinden nokta gösterimini kullanarak da bir React bileşenine başvurabilirsiniz. Bu, birçok React bileşenini dışa aktaran tek bir modülünüz varsa kullanışlıdır. Örneğin, `MyComponents.DatePicker` bir bileşense, bunu doğrudan JSX'te aşağıdaki şekilde kullanabilirsiniz:
 
@@ -92,7 +92,7 @@ function BlueDatePicker() {
 
 ### Kullanıcı Tanımlı Bileşenler Büyük Harfle Başlamalıdır {#user-defined-components-must-be-capitalized}
 
-Bir elemanın türü küçük harfle başladığında, `<div>` veya `<span>` gibi dahili bir bileşene atıfta bulunur ve bunun sonucu `React.createElement` fonksiyonuna `'div'` veya `'span'` stringlerinin aktarılmasıdır. `<Foo />` gibi büyük harfle başlayan türler `React.createElement(Foo)` şeklinde derlenir ve JavaScript dosyanızda tanımlanan veya içe aktarılan bir bileşene karşılık gelir.
+Bir elemanın tipi küçük harfle başladığında, `<div>` veya `<span>` gibi dahili bir bileşene atıfta bulunur ve bunun sonucu `React.createElement` fonksiyonuna `'div'` veya `'span'` stringlerinin aktarılmasıdır. `<Foo />` gibi büyük harfle başlayan tipler `React.createElement(Foo)` şeklinde derlenir ve JavaScript dosyanızda tanımlanan veya içe aktarılan bir bileşene karşılık gelir.
 
 Bileşenleri, büyük harfle başlayan bir şekilde adlandırmanızı öneririz. Küçük harfle başlayan bir bileşeniniz varsa, bunu JSX'te kullanmadan önce büyük harfle başlayan bir değişkene atayın.
 
@@ -130,9 +130,9 @@ function HelloWorld() {
 }
 ```
 
-### Türü Çalışma Zamanında Seçme {#choosing-the-type-at-runtime}
+### Tipi Çalışma Zamanında Seçme {#choosing-the-type-at-runtime}
 
-Genel bir ifadeyi (expression) React elemanı türü olarak kullanamazsınız. Elemanın türünü belirtmek için genel bir ifade kullanmak istiyorsanız, sadece öncesinde büyük harfle başlayan bir değişkene atayın. Bu genellikle, bir prop'a göre farklı bir bileşen render etmek istediğinizde ortaya çıkar:
+Genel bir ifadeyi (expression) React elemanı tipi olarak kullanamazsınız. Elemanın tipini belirtmek için genel bir ifade kullanmak istiyorsanız, sadece öncesinde büyük harfle başlayan bir değişkene atayın. Bu genellikle, bir prop'a göre farklı bir bileşen render etmek istediğinizde ortaya çıkar:
 
 ```js{10,11}
 import React from 'react';
@@ -144,12 +144,12 @@ const components = {
 };
 
 function Story(props) {
-  // Yanlış! JSX türü bir ifade olamaz.
+  // Yanlış! JSX tipi bir ifade olamaz.
   return <components[props.storyType] story={props.story} />;
 }
 ```
 
-Bunu düzeltmek için, önce türü büyük harfle başlayan bir değişkene atayacağız:
+Bunu düzeltmek için, önce tipi büyük harfle başlayan bir değişkene atayacağız:
 
 ```js{10-12}
 import React from 'react';
@@ -161,7 +161,7 @@ const components = {
 };
 
 function Story(props) {
-  // Doğru! JSX türü büyük harfli bir değişken olabilir.
+  // Doğru! JSX tipi büyük harfli bir değişken olabilir.
   const SpecificStory = components[props.storyType];
   return <SpecificStory story={props.story} />;
 }
@@ -181,7 +181,7 @@ Herhangi bir JavaScript ifadesini `{}` ile çevreleyerek bir prop olarak iletebi
 
 `MyComponent` için, `props.foo` değeri `10` olacaktır çünkü `1 + 2 + 3 + 4` ifadesi çalıştırılır.
 
-`if` bildirimleri ve` for` döngüleri JavaScript'te ifade değildir, bu nedenle doğrudan JSX'te kullanılamazlar. Onun yerine, bunları çevreleyen bir koda koyabilirsiniz. Örneğin:
+`if` deyimleri ve` for` döngüleri JavaScript'te ifade değildir, bu nedenle doğrudan JSX'te kullanılamazlar. Onun yerine, bunları çevreleyen bir koda koyabilirsiniz. Örneğin:
 
 ```js{3-7}
 function NumberDescriber(props) {
@@ -318,7 +318,7 @@ Alt eleman olarak daha fazla JSX elemanı sağlayabilirsiniz. Bu, iç içe geçm
 </MyContainer>
 ```
 
-Farklı türdeki alt elemanları birlikte kullanabilirsiniz, böylece string değişmezlerini JSX alt elemanlarıyla birlikte kullanabilirsiniz. Bu, JSX'in HTML'e benzemesinin başka bir yoludur; böylece bu, hem geçerli bir JSX hem de geçerli bir HTML'dir:
+Farklı tiplerdeki alt elemanları birlikte kullanabilirsiniz, böylece string değişmezlerini JSX alt elemanlarıyla birlikte kullanabilirsiniz. Bu, JSX'in HTML'e benzemesinin başka bir yoludur; böylece bu, hem geçerli bir JSX hem de geçerli bir HTML'dir:
 
 ```html
 <div>
@@ -371,7 +371,7 @@ function TodoList() {
 }
 ```
 
-JavaScript ifadeleri diğer alt eleman türleri ile birlikte kullanılabilir. Bu genellikle string şablonları yerine kullanışlıdır:
+JavaScript ifadeleri diğer alt eleman tipleri ile birlikte kullanılabilir. Bu genellikle string şablonları yerine kullanışlıdır:
 
 ```js{2}
 function Hello(props) {
