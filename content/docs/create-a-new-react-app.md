@@ -73,6 +73,8 @@ Aşağıdaki araçlar daha fazla esneklik ve seçenek sunmaktadır. Bunları dah
 
 - **[Neutrino](https://neutrinojs.org/)**; [webpack](https://webpack.js.org/)'in gücünü ön ayarların sadeliği ile birleştirir, [React uygulamaları](https://neutrinojs.org/packages/react/) ve [React bileşenleri](https://neutrinojs.org/packages/react-components/) için bir ön ayar da içerir.
 
+- **[Nx](https://nx.dev/react)**, yerleşik olarak React, Next.js, [Express](https://expressjs.com/) ve daha fazlası için desteğe sahip, tam donanımlı bir monorepo oluşturma aracıdır.
+
 - **[Parcel](https://parceljs.org/)**; [React ile çalışan](https://parceljs.org/recipes.html#react), hızlı, ayarlama gerektirmeyen bir web uygulama paketleyicisidir.
 
 - **[Razzle](https://github.com/jaredpalmer/razzle)**; herhangi bir yapılandırma gerektirmeyen ancak Next.js'e göre daha fazla esneklik sunan, bir sunucu tarafında işleme çatısıdır.

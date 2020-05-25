@@ -185,8 +185,7 @@ function NumberList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) =>
     // Doğru! Anahtar dizinin içinde belirtilmelidir:
-    <ListItem key={number.toString()}
-              value={number} />
+    <ListItem key={number.toString()} value={number} />
   );
   return (
     <ul>
