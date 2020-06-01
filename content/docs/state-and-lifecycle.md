@@ -418,12 +418,6 @@ Bu nedenle state'e, **yerel state** denir. State, kendisine sahip olan ve kendis
 Bir bileşen kendi state'ini, prop'lar aracılığıyla alt bileşenlere aktarabilir:
 
 ```js
-<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-```
-
-Kullanıcı tanımlı bileşenler için de bu durum geçerlidir:
-
-```js
 <FormattedDate date={this.state.date} />
 ```
 
