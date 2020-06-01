@@ -1203,11 +1203,7 @@ Tebrikler, bir tic-tac-toe oyunu kodladınız. Bu oyun:
 * Oyun ilerledikçe oyun geçmişini saklar,
 * Oyunculara oyun geçmişini görüntüleyebilmelerini ve oyun tahtasının önceji versiyonlarına gidebilmelerini sağlar.
 
-<<<<<<< HEAD
 İyi iş çıkardınız. Umarız artık React'in nasıl çalıştığını öğrenmişsinizdir.
-=======
-Nice work! We hope you now feel like you have a decent grasp of how React works.
->>>>>>> b4b59062e59d56da37274c6de1fa4a134d2d8f49
 
 Kodun son haline **[buradan(https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** bakabilirsiniz.
 
