@@ -239,11 +239,7 @@ Bileşenlerin çıkarılması en başta angarya bir işlem gibi görünebilir. F
 * Eğer kullanıcı arayüzündeki bir eleman (`Button`, `Panel`, `Avatar`) uygulama içerisinde birçok defa kullanılıyorsa,
 * Eğer bir bileşen (`App`, `FeedStory`, `Comment`) oldukça karmaşık hale geldiyse,
 
-<<<<<<< HEAD
 Bu bileşen, içerisinden bileşenler çıkarmak için iyi bir adaydır diyebiliriz.
-=======
-Extracting components might seem like grunt work at first, but having a palette of reusable components pays off in larger apps. A good rule of thumb is that if a part of your UI is used several times (`Button`, `Panel`, `Avatar`), or is complex enough on its own (`App`, `FeedStory`, `Comment`), it is a good candidate to be extracted to a separate component.
->>>>>>> c9b990070fc35d31b56957263e1ea9fe2fe67b40
 
 ## Prop'lar ve Salt Okunurlar {#props-are-read-only}
 
