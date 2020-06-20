@@ -14,7 +14,7 @@ Hook'larda [mevcut kodu bozan değişiklikler yok](/docs/hooks-intro.html#no-bre
 >
 >Neden Hook'ları çıkardığımızı anlamak için [Motivasyon](/docs/hooks-intro.html#motivation) bölümünü okuyun.
 
-**↑↑↑ Her bölüm böyle bir sarı kutuyla biter** Bunlar detaylı açıklamarın nerede bulunacağını gösterir.
+**↑↑↑ Her bölüm bunun gibi bir sarı kutuyla biter** Bunlar detaylı açıklamaların nerede bulunacağını gösterir.
 
 ## 📌 State Hook'u {#state-hook}
 
@@ -24,7 +24,7 @@ Bu örnek bir sayaç render ediyor. Tuşa basıldığında değeri bir arttırı
 import React, { useState } from 'react';
 
 function Example() {
-  // Declare a new state variable, which we'll call "count"
+  // Yeni bir state değişkeni belirlenir, biz buna "count" diyeceğiz.
   const [count, setCount] = useState(0);
 
   return (
@@ -82,9 +82,9 @@ import React, { useState, useEffect } from 'react';
 function Example() {
   const [count, setCount] = useState(0);
 
-  // Similar to componentDidMount and componentDidUpdate:
+  // componentdidMount ve componentDidUpdate'e benzer bir şekilde:
   useEffect(() => {
-    // Update the document title using the browser API
+    // Browser API kullanılarak document title güncellenir
     document.title = `You clicked ${count} times`;
   });
 
