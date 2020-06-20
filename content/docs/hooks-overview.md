@@ -82,7 +82,7 @@ import React, { useState, useEffect } from 'react';
 function Example() {
   const [count, setCount] = useState(0);
 
-  // componentdidMount ve componentDidUpdate' e benzer bir şekilde:
+  // componentdidMount ve componentDidUpdate'e benzer bir şekilde:
   useEffect(() => {
     // Browser API kullanılarak document title güncellenir
     document.title = `You clicked ${count} times`;
