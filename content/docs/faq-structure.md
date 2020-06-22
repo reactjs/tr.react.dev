@@ -12,11 +12,7 @@ React dosyalarını klasörlere nasıl yerleştireceğinize dair genel bir kanaa
 
 #### Özelliklere veya rotalara göre gruplandırma {#grouping-by-features-or-routes}
 
-<<<<<<< HEAD
 Projeleri yapılandırmak için kullanılan yaygın yöntemlerden biri; CSS, JS ve testleri özellik veya rotalara göre gruplanan klasörlerin içine beraber koymaktır.
-=======
-One common way to structure projects is to locate CSS, JS, and tests together inside folders grouped by feature or route.
->>>>>>> e548bd7e65086a8206fee46bd9e24b18b68bf045
 
 ```
 common/
