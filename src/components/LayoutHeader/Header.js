@@ -51,13 +51,13 @@ const Header = ({location}: {location: Location}) => (
             fontSize: 25,
           },
         }}>
-        Black Lives Matter.{' '}
+        Siyahilerin Yaşamları Önemlidir.{' '}
         <a
           style={{color: colors.brand}}
           target="_blank"
           rel="noopener"
           href="https://support.eji.org/give/153413/#!/donation/checkout">
-          Support&nbsp;the&nbsp;Equal&nbsp;Justice&nbsp;Initiative.
+          Eşit&nbsp;Adalet&nbsp;Girişimini&nbsp;Destekleyin.
         </a>
       </div>
     </Container>
