@@ -51,7 +51,7 @@ const Header = ({location}: {location: Location}) => (
             fontSize: 25,
           },
         }}>
-        Siyahilerin Yaşamları Önemlidir.{' '}
+        Black Lives Matter.{' '}
         <a
           style={{color: colors.brand}}
           target="_blank"
