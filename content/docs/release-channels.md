@@ -4,6 +4,8 @@ title: Yayın Kanalları
 permalink: docs/release-channels.html
 layout: docs
 category: installation
+prev: cdn-links.html
+next: hello-world.html
 ---
 
 React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek](https://github.com/reactjs/rfcs) için başarılı bir açık kaynak topluluğuna güvenir. Geri bildirimi teşvik etmek için bazen yayınlanmamış özellikler içeren özel React yapılarını paylaşırız.
