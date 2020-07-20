@@ -120,7 +120,7 @@ Bir değişken tanımlamak ve `if` ifadesini kullanmak, bir bileşeni koşullu o
 
 ### Mantıksal && Operatörü ile Tek Satırda if {#inline-if-with-logical--operator}
 
-Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz.](/docs/introducing-jsx.html#embedding-expressions-in-jsx) Buna JavaScript'teki mantıksal `&&` operatörü de dâhildir. Bu bileşenin içinde koşul vermek için kullanışlı olabilir:
+Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx). Buna JavaScript'teki mantıksal `&&` operatörü de dâhildir. Bu bileşenin içinde koşul vermek için kullanışlı olabilir:
 
 ```js{6-10}
 function Mailbox(props) {
