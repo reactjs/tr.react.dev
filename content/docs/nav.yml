@@ -48,7 +48,7 @@
     - id: error-boundaries
       title: Hata Sınırları
     - id: forwarding-refs
-      title: Ref'leri Taşımak
+      title: Ref'leri Yönlendirme
     - id: fragments
       title: Fragment'ler
     - id: higher-order-components
