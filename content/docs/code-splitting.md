@@ -40,15 +40,10 @@ console.log(add(16, 26)); // 42
 >
 > Paketleriniz bundan çok daha farklı gözükecektir.
 
-<<<<<<< HEAD
-Eğer [Create React App](https://github.com/facebookincubator/create-react-app),
-[Next.js](https://github.com/zeit/next.js/), [Gatsby](https://www.gatsbyjs.org/)
+Eğer [Create React App](https://create-react-app.dev/),
+[Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/)
 ya da benzeri bir araç kullanıyorsanız, uygulamanızı paketleyen bir Webpack
 kurulumuna sahip olursunuz.
-=======
-If you're using [Create React App](https://create-react-app.dev/), [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/), or a similar tool, you will have a Webpack setup out of the box to bundle your
-app.
->>>>>>> 63332462bb5afa18ac7a716975b679f4c23cc8a1
 
 Eğer bu araçlardan birini kullanmıyorsanız, paketleyiciyi kendiniz kurmanız gerekir.
 Örnek için, Webpack dokümantasyonundan [Kurulum](https://webpack.js.org/guides/installation/)
