@@ -568,11 +568,7 @@ Immutable nesnelerdeki değişikliklerin tespit edilmesi daha kolaydır. Immutab
 
 #### Tekrar Render Etme Zamanını Belirlemek {#determining-when-to-re-render-in-react}
 
-<<<<<<< HEAD
 React'te Immutability'nin ana faydası ise, _pure component_'ler (saf/katıksız bileşenler) yapmayı kolaylaştırmasıdır. Immutable veriler, değişiklik yapıldığını kolayca tespit edebilirler. Bu sayede değişiklik olduğunda ilgili bileşenin tekrar render edilmesine yardımcı olurlar.
-=======
-The main benefit of immutability is that it helps you build _pure components_ in React. Immutable data can easily determine if changes have been made, which helps to determine when a component requires re-rendering.
->>>>>>> 63332462bb5afa18ac7a716975b679f4c23cc8a1
 
 [Performansın iyileştirmesi](/docs/optimizing-performance.html#examples) yazısında  `shouldComponentUpdate()` fonksiyonunun ne olduğuna ve nasıl *pure component*'leri oluşturabileceğiniz hakkında bilgi edinebilirsiniz.
 
