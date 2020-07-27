@@ -229,11 +229,7 @@ function FriendListItem(props) {
 }
 ```
 
-<<<<<<< HEAD
-Bu bileşenlerin state'leri birbirinden tamamen bağımsızdır. Hooklar *state'le alakalı davranışların* tekrar kullanılmasının bir yoludur, state'in yeniden kullanılmasıyla alakalı değildir. Hatta bir Hook her çağırıldığında tamamen ayrı bir state'e sahiptir -- bu sayede özel Hook'unuzu bir bileşen içerisinde iki kere çağırabilirsiniz.
-=======
-The state of each component is completely independent. Hooks are a way to reuse *stateful logic*, not state itself. In fact, each *call* to a Hook has a completely isolated state -- so you can even use the same custom Hook twice in one component.
->>>>>>> 63332462bb5afa18ac7a716975b679f4c23cc8a1
+Her bileşenin state'i birbirinden tamamen bağımsızdır. Hooklar *state'le alakalı davranışların* tekrar kullanılmasının bir yoludur, state'in yeniden kullanılmasıyla alakalı değildir. Hatta bir Hook her çağırıldığında tamamen ayrı bir state'e sahiptir -- bu sayede özel Hook'unuzu bir bileşen içerisinde iki kere çağırabilirsiniz.
 
 Özel Hook'larınız bir özellikten daha çok bir kural gibidir. Eğer bir fonksiyonun adı "`use`" ile başlıyor ve başka Hook'ları çağırıyorsa, bu fonksiyon bir özel Hook'tur diyoruz. `useSomething` adlandırması linter eklentimizin, Hook kullanılarak yazılan kodda bugları bulmasını sağlıyor.
 
