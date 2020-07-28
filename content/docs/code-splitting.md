@@ -40,8 +40,8 @@ console.log(add(16, 26)); // 42
 >
 > Paketleriniz bundan çok daha farklı gözükecektir.
 
-Eğer [Create React App](https://github.com/facebookincubator/create-react-app),
-[Next.js](https://github.com/zeit/next.js/), [Gatsby](https://www.gatsbyjs.org/)
+Eğer [Create React App](https://create-react-app.dev/),
+[Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/)
 ya da benzeri bir araç kullanıyorsanız, uygulamanızı paketleyen bir Webpack
 kurulumuna sahip olursunuz.
 

@@ -94,7 +94,7 @@ Denemeye karşı entegrasyon testleri yapmayı değerli bulabilirsiniz. Bu size 
 
 #### Deneysel Özellikler Hakkında Nasıl Daha Fazla Bilgi Edinebilirim? {#how-can-i-learn-more-about-experimental-features}
 
-Deneysel özellikler belgelenebilir veya belgelenmeyebilir. Genellikle, deneyler Sonraki veya İstikrarlı'ya gönderime yakın olana kadar belgelenmez.
+Deneysel özellikler belgelenebilir veya belgelenmeyebilir. Genellikle, deneyler Sonrakine veya En yeni'ye gönderime yakın olana kadar belgelenmez.
 
 Bir özellik belgelenmezse, bir [RFC](https://github.com/reactjs/rfcs) eşlik edebilir.
 
