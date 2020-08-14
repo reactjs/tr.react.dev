@@ -10,7 +10,7 @@ React topluluğu tarafından yaratılmış pek çok proje mevcut. Bu sayfada, ü
 
 Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
 
-## Small Examples
+## Small Examples {#small-examples}
 
 * **[Zeldog](https://yannsainty.github.io/Zeldog/)** Bir köpeğin daha fazla pizza yemek için ördeklerle savaştığı, Zelda benzeri bir oyun.
 * **[Hesap Makinesi](https://github.com/ahfarmer/calculator)** iOS hesap makinesinin  React ile uygulanmış hali
@@ -33,7 +33,6 @@ Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütf
 * **[Counter App](https://github.com/arnab-datta/counter-app)** A small shopping cart example
 * **[Tutorial Solutions](https://github.com/harman052/react-tutorial-solutions)** Solutions to challenges mentioned at the end of React tutorial
 
-## Complete Apps
+## Complete Apps {#complete-apps}
 
-* **[Hacker News Clone React/GraphQL](https://github.com/clintonwoo/hackernews-react-graphql)** Hacker News clone rewritten with universal JavaScript, using React and GraphQL
 * **[Builder Book](https://github.com/builderbook/builderbook)** Open-source web app to write and host documentation or sell books. Built with React, Material-UI, Next, Express, Mongoose, MongoDB
