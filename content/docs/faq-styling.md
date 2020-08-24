@@ -42,11 +42,7 @@ CSS sınıfları, performans açısından genellikle satır içi stillerinden da
 
 ### JS-içinde-CSS (CSS-in-JS) nedir? {#what-is-css-in-js}
 
-<<<<<<< HEAD
-"JS-içinde-CSS", CSS'in harici dosyalarda tanımlanması yerine, JavaScript kullanılarak oluşturulduğu bir deseni belirtir. JS-içinde-CSS kütüphanelerinin bir karşılaştırmasını [buradan](https://github.com/MicheleBertoli/css-in-js) okuyun.
-=======
-"CSS-in-JS" refers to a pattern where CSS is composed using JavaScript instead of defined in external files.
->>>>>>> d16f1ee7958b5f80ef790265ba1b8711d4f228d6
+"JS-içinde-CSS", CSS'in harici dosyalarda tanımlanması yerine, JavaScript kullanılarak oluşturulduğu bir deseni belirtir.
 
 _Bu işlevin React'in bir parçası olmadığını, ancak üçüncü parti kütüphaneler tarafından sağlandığını unutmayın._ React, stillerin nasıl tanımlandığı hakkında bir görüşe sahip değildir; şüpheniz varsa, stillerinizi her zamanki gibi ayrı bir `*.css` dosyasında tanımlamak ve [`className`](/docs/dom-elements.html#classname) kullanarak bunlara erişmek iyi bir başlangıç noktasıdır.
 
