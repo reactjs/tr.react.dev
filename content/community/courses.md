@@ -8,7 +8,11 @@ permalink: community/courses.html
 
 ## Ücretsiz Dersler {#free-courses}
 
+<<<<<<< HEAD
 - [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy'nin giriş seviyesindeki React dersi.
+=======
+- [Glitch: React Starter Kit](https://glitch.com/glimmer/post/react-starter-kit) - A free, 5-part video course with interactive code examples that will help you learn React.
+>>>>>>> d16f1ee7958b5f80ef790265ba1b8711d4f228d6
 
 - [Glitch: React Starter Kit](https://glitch.com/glimmer/post/react-starter-kit/) - A free, 5-part video course with interactive code examples that will help you learn React.
 
@@ -48,4 +52,10 @@ permalink: community/courses.html
 
 - [Mastering React](https://codewithmosh.com/p/mastering-react/) - React ile profesyonel, etkileşimli uygulamalar oluşturun.
 
+<<<<<<< HEAD
 - [Road to React](https://www.roadtoreact.com/) - React'te uzmanlaşma yolculuğunuz.
+=======
+- [React Tutorial](https://react-tutorial.app) - Learn React step by step in an interactive environment with flashcards.
+
+- [Road to React](https://www.roadtoreact.com/) - Your journey to master React in JavaScript.
+>>>>>>> d16f1ee7958b5f80ef790265ba1b8711d4f228d6

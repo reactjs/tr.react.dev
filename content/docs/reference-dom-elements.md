@@ -56,7 +56,12 @@ function MyComponent() {
 
 ### selected {#selected}
 
+<<<<<<< HEAD
 `selected` niteliği `<option>` elemanı tarafından desteklenmektedir. Eleman içerisindeki bir değeri seçmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır.
+=======
+If you want to mark an `<option>` as selected, reference the value of that option in the `value` of its `<select>` instead.
+Check out ["The select Tag"](/docs/forms.html#the-select-tag) for detailed instructions.
+>>>>>>> d16f1ee7958b5f80ef790265ba1b8711d4f228d6
 
 ### style {#style}
 
@@ -120,7 +125,11 @@ Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı olu�
 
 ### value {#value}
 
+<<<<<<< HEAD
 `value` niteliği `<input>` ve `<textarea>` elemanlarında kullanılmaktadır. Elemanın değerini belirleyebilmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultValue` bulunmaktadır. Bu nitelik elemanın değerini sayfada ilk oluştuğunda belirleyebilmek için kullanılır.
+=======
+The `value` attribute is supported by `<input>`, `<select>` and `<textarea>` components. You can use it to set the value of the component. This is useful for building controlled components. `defaultValue` is the uncontrolled equivalent, which sets the value of the component when it is first mounted.
+>>>>>>> d16f1ee7958b5f80ef790265ba1b8711d4f228d6
 
 ## Desteklenen Bütün HTML Nitelikleri {#all-supported-html-attributes}
 
