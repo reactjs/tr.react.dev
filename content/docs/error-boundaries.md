@@ -100,11 +100,7 @@ Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izind
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
-<<<<<<< HEAD
-Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
-=======
-If you don’t use Create React App, you can add [this plugin](https://www.npmjs.com/package/@babel/plugin-transform-react-jsx-source) manually to your Babel configuration. Note that it’s intended only for development and **must be disabled in production**.
->>>>>>> d16f1ee7958b5f80ef790265ba1b8711d4f228d6
+Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/@babel/plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
 
 > Not
 >
