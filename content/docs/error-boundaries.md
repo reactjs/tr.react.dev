@@ -2,6 +2,8 @@
 id: error-boundaries
 title: Hata Sınırları
 permalink: docs/error-boundaries.html
+prev: portals.html
+next: web-components.html
 ---
 
 Geçmişte, bileşenler içindeki JavaScript hataları React'in dahili state'ini bozar ve sonraki renderlarda [şifreli](https://github.com/facebook/react/issues/6895) [hatalar](https://github.com/facebook/react/issues/8579) [gösterirdi](https://github.com/facebook/react/issues/4026). Bu hataların hepsi uygulama kodunda daha önce ortaya çıkmış hatalardan kaynaklanıyordu ve React bu hataları bileşenlerde ele alacak şık bir yol sunmuyor ve bu hataları da atlatamıyordu.
@@ -98,7 +100,7 @@ Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izind
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
-Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
+Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/@babel/plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
 
 > Not
 >

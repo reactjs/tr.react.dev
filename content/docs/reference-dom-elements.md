@@ -56,7 +56,7 @@ function MyComponent() {
 
 ### selected {#selected}
 
-`selected` niteliği `<option>` elemanı tarafından desteklenmektedir. Eleman içerisindeki bir değeri seçmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır.
+Bir `<option>`'ı seçili olarak işaretlemek istiyorsanız, `<select>` elemanının `value` kısmında bu seçeneğin değerine bir referans verin. Detaylı talimatlar için ["select Etiketi"](/docs/forms.html#the-select-tag) kısmını inceleyebilirsiniz.
 
 ### style {#style}
 
@@ -120,7 +120,7 @@ Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı olu�
 
 ### value {#value}
 
-`value` niteliği `<input>` ve `<textarea>` elemanlarında kullanılmaktadır. Elemanın değerini belirleyebilmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultValue` bulunmaktadır. Bu nitelik elemanın değerini sayfada ilk oluştuğunda belirleyebilmek için kullanılır.
+`value` niteliği `<input>`, `<select>` ve `<textarea>` elemanlarında kullanılmaktadır. Elemanın değerini belirleyebilmek için kullanabilirsiniz. Kontrollü bileşen oluşturmada kullanışlıdır. Kontrolsüz bileşende karşılık olarak `defaultValue` bulunmaktadır. Bu nitelik elemanın değerini sayfada ilk oluştuğunda belirleyebilmek için kullanılır.
 
 ## Desteklenen Bütün HTML Nitelikleri {#all-supported-html-attributes}
 

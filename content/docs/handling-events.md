@@ -54,7 +54,7 @@ function ActionLink() {
 }
 ```
 
-Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şartnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
+Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şartnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. React olayları, doğal (native) olaylarla tam olarak aynı şekilde çalışmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
 
 React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir dinleyici (`listener`) atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine `render` fonksiyonunda, ilgili element ilk kez render olduğunda ona bir dinleyici (`listener`) atamanız doğru olacaktır.
 

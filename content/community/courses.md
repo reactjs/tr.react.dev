@@ -10,7 +10,7 @@ permalink: community/courses.html
 
 - [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy'nin giriş seviyesindeki React dersi.
 
-- [Glitch: React Starter Kit](https://glitch.com/glimmer/post/react-starter-kit/) - A free, 5-part video course with interactive code examples that will help you learn React.
+- [Glitch: React Başlangıç Kiti](https://glitch.com/glimmer/post/react-starter-kit) - React'i öğrenmenize yardımcı olacak interaktif kod örnekleri içeren ücretsiz, 5 bölümlük video kursu.
 
 - [Egghead.io: React Öğrenmeye Başlayın](https://egghead.io/courses/start-learning-react) - Bu eğitim serisi, React'in temellerini keşfederek başlangıç yapmanıza yardımcı olacak.
 
@@ -47,5 +47,7 @@ permalink: community/courses.html
 - [Tyler McGinnis](https://tylermcginnis.com/courses) - Tyler McGinnis, aylık bir ücret karşılığında derslerini erişime açıyor. Dersler arasında "React Temelleri" ve "Evrensel React" de var.
 
 - [Mastering React](https://codewithmosh.com/p/mastering-react/) - React ile profesyonel, etkileşimli uygulamalar oluşturun.
+
+- [React Öğretici](https://react-tutorial.app) - Bilgi kartlarıyla, interaktif bir ortamda adım adım React'i öğrenin.
 
 - [Road to React](https://www.roadtoreact.com/) - React'te uzmanlaşma yolculuğunuz.

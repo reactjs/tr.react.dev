@@ -12,7 +12,7 @@ Bu başvuru rehberinde, React Olay Sistemi'nin bir parçasını oluşturan `Synt
 
 Olay yöneticilerinize, tarayıcının kendi olaylarını sarmalayan bir çapraz-tarayıcı `SyntheticEvent` nesnesi iletilir. Bu nesne tüm tarayıcılarda aynı şekilde çalışması dışında, `stopPropagation()` ve `preventDefault()` dahil olmak üzere, tarayıcının kendi olayıyla aynı arabirime sahiptir.
 
-Bir nedenden ötürü esas tarayıcı olayına ihtiyaç duyarsanız, basitçe `nativeEvent` özelliğini kullanın. Her `SyntheticEvent` nesnesi aşağıdaki özelliklere sahiptir:
+Bir nedenden ötürü esas tarayıcı olayına ihtiyaç duyarsanız, basitçe `nativeEvent` özelliğini kullanın. Sentetik olaylar, tarayıcının doğal (native) olaylarından farklıdır ve doğrudan bunlarla eşleşmez. Örneğin, `onMouseLeave`'in içindeki `event.nativeEvent` bir `mouseout` olayına işaret edecektir. Spesifik eşleme, genel API'nin bir parçası değildir ve herhangi bir zamanda değişebilir. Her `SyntheticEvent` nesnesi aşağıdaki özelliklere sahiptir:
 
 ```javascript
 boolean bubbles
