@@ -124,9 +124,15 @@ const MyComponent = React.memo(function MyComponent(props) {
 });
 ```
 
+<<<<<<< HEAD
 `React.memo` bir [üst katman bileşenidir](/docs/higher-order-components.html). [`React.PureComponent`](#reactpurecomponent)'e benzer ancak sınıflar yerine fonksiyon bileşenleri için geçerlidir.
 
 Eğer fonksiyon bileşeniniz aynı prop'lar ile aynı sonucu render ediyor ise, bazı durumlarda sonucu ezberleyerek performans artışı sağlaması için onu bir `React.memo` çağrısına sarabilirsiniz. Bu, React'in bileşeni render etmeyi atlayacağı ve son render edilen sonucu yeniden kullanacağı anlamına gelir.
+=======
+`React.memo` is a [higher order component](/docs/higher-order-components.html).
+
+If your component renders the same result given the same props, you can wrap it in a call to `React.memo` for a performance boost in some cases by memoizing the result. This means that React will skip rendering the component, and reuse the last rendered result.
+>>>>>>> 25cc703d1f23f1782ff96c5c7882a806f8741ec4
 
 `React.memo` sadece prop değişikliklerini kontrol eder. Eğer `React.memo` içine sarmalanmış bileşeninizde [`useState`](/docs/hooks-state.html) ya da [`useContext`](/docs/hooks-reference.html#usecontext) hookları varsa, state ya da context her değiştiğinde bilşeniniz tekrar render edilecektir.
 
