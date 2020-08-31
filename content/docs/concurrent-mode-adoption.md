@@ -69,7 +69,7 @@ import ReactDOM from 'react-dom';
 //
 // kullanıyorduysanız, eşzamanlı modu şunu yazarak etkinleştirebilirsiniz:
 
-ReactDOM.createRoot(
+ReactDOM.unstable_createRoot(
   document.getElementById('root')
 ).render(<App />);
 ```
