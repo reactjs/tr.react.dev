@@ -178,7 +178,11 @@ JSX, JavaScript'in bütün gücünü kullanacak şekilde tasarlanmıştır. Bu s
 
 Yukarıdaki `ShoppingList` bileşeni, yalnızca `<div />` ve `<li />` gibi HTML bileşenlerini render eder. Fakat uygulamanıza özel React bileşenleri oluşturarak, toplu halde render edilmesini sağlayabilirsiniz. Örneğin sadece `<ShoppingList />` yazarak bütün alışveriş listesinin görüntülenmesini sağlayabilirsiniz. Her React bileşeni birbirinden izole edilmiştir ve birbirinden bağımsız olarak çalışabilir. Bu sayede basit bileşenleri bir araya getirerek karmaşık kullanıcı arayüzleri oluşturabilirsiniz.
 
+<<<<<<< HEAD
 ## Başlangıç Kodunun İncelenmesi {#inspecting-the-starter-code}
+=======
+### Inspecting the Starter Code {#inspecting-the-starter-code}
+>>>>>>> 954a16f1d358009505ae881afaefe463dc6388a5
 
 Eğer bu öğreticiyi **tarayıcınızda** takip ediyorsanız, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip ediyorsanız, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız [kurulum](#setup-option-2-local-development-environment) aşamasında bu dosyaya değinmiştik). 
 
