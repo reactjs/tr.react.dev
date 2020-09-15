@@ -611,11 +611,7 @@ Eğer bileşene `props.color` değeri aktarılmazsa, varsayılan olarak `'blue'`
   }
 ```
 
-<<<<<<< HEAD
-Bunun aksine `props.color` değeri null olarak atanmışsa, değişmeden null olarak kalacaktır:
-=======
-If `props.color` is set to `null`, it will remain `null`:
->>>>>>> 954a16f1d358009505ae881afaefe463dc6388a5
+`props.color` değeri `null` olarak atanmışsa, değişmeden `null` olarak kalacaktır:
 
 ```js
   render() {
