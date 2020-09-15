@@ -276,11 +276,7 @@ React'in mevcut sürümünde, `shouldComponentUpdate()` metodu `false` döndürd
 static getDerivedStateFromProps(props, state)
 ```
 
-<<<<<<< HEAD
 Bileşenin başlangıçta DOM'a eklenmesinde ve devamında süregelen güncellemelerde, render metodundan hemen önce `getDerivedStateFromProps` çalıştırılır. Bu metot, state'in güncellenmesi için bir nesne geri döndürür. `null` döndürdüğünde ise güncelleme **gerçekleştirilmemiş** olur.
-=======
-`getDerivedStateFromProps` is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or `null` to update nothing.
->>>>>>> 954a16f1d358009505ae881afaefe463dc6388a5
 
 Bu metot, state'in props değişikliklerine bağlı olduğu [nadiren kullanılan durumlar](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) için vardır. Örneğin `<Transition>` bileşeninin, önceki ve sonraki alt bileşenlerini karşılaştırması sayesinde animasyona girme/çıkma süreçlerinin yönetimi için kullanışlı olabilir.
 
@@ -594,11 +590,8 @@ Normalde `forceUpdate()`'in kullanımından kaçınmalı ve yalnızca `render()`
 
 ### `defaultProps` {#defaultprops}
 
-<<<<<<< HEAD
-`defaultProps`, bileşen sınıfının varsayılan prop değerlerini atamak için sınıf içerisinde değişken olarak tanımlanabilir. Bu değişken, tanımlı olmayan prop değerleri için kullanılır. Null değeri içeren prop'lar için kullanılmaz. Örneğin:
-=======
-`defaultProps` can be defined as a property on the component class itself, to set the default props for the class. This is used for `undefined` props, but not for `null` props. For example:
->>>>>>> 954a16f1d358009505ae881afaefe463dc6388a5
+`defaultProps`, bileşen sınıfının varsayılan prop değerlerini atamak için sınıf içerisinde özellik olarak tanımlanabilir. Bu değişken, tanımlı olmayan prop değerleri (`undefined`) için kullanılır. `null` değeri içeren prop'lar için kullanılmaz. Örneğin:
+
 
 ```js
 class CustomButton extends React.Component {
