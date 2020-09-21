@@ -2,8 +2,6 @@
 id: error-boundaries
 title: Hata Sınırları
 permalink: docs/error-boundaries.html
-prev: portals.html
-next: web-components.html
 ---
 
 Geçmişte, bileşenler içindeki JavaScript hataları React'in dahili state'ini bozar ve sonraki renderlarda [şifreli](https://github.com/facebook/react/issues/6895) [hatalar](https://github.com/facebook/react/issues/8579) [gösterirdi](https://github.com/facebook/react/issues/4026). Bu hataların hepsi uygulama kodunda daha önce ortaya çıkmış hatalardan kaynaklanıyordu ve React bu hataları bileşenlerde ele alacak şık bir yol sunmuyor ve bu hataları da atlatamıyordu.

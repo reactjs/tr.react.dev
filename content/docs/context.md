@@ -2,8 +2,6 @@
 id: context
 title: Context
 permalink: docs/context.html
-prev: reconciliation.html
-next: fragments.html
 ---
 
 Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen ağacı üzerinden veri iletmenin bir yolunu sağlar.

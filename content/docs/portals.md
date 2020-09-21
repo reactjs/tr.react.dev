@@ -2,8 +2,6 @@
 id: portals
 title: Portal'lar
 permalink: docs/portals.html
-prev: fragments.html
-next: error-boundaries.html
 ---
 
 Portal'lar, üst bileşenin DOM hiyerarşisinin dışında bulunan bir DOM düğümüne alt eleman render etmek için üstün bir yol sağlar.

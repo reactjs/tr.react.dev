@@ -2,8 +2,6 @@
 id: fragments
 title: Fragment'ler
 permalink: docs/fragments.html
-prev: context.html
-next: portals.html
 ---
 
 React'teki ortak model, bir bileşenin birden fazla öğe döndürmesidir. Fragmentler, Dom'a ekstra düğüm eklemeden bir alt elemanlar listesini gruplandırmanıza izin verir.

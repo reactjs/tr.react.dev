@@ -2,8 +2,6 @@
 id: react-without-jsx
 title: JSX Olmadan React
 permalink: docs/react-without-jsx.html
-prev: react-without-es6.html
-next: reconciliation.html
 ---
 
 JSX, React'i kullanmak için bir gereksinim değildir. JSX olmadan React'i kullanmak özellikle, geliştirme ortamınızda derleme ayarlarıyla uğraşmak istemediğiniz durumlarda daha uygundur.
