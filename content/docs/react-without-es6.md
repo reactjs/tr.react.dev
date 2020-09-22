@@ -2,8 +2,6 @@
 id: react-without-es6
 title: React Without ES6
 permalink: docs/react-without-es6.html
-prev: optimizing-performance.html
-next: react-without-jsx.html
 ---
 
 Normalde bir React bileşenini düz JavaScript sınıfı olarak tanımlarsınız:
