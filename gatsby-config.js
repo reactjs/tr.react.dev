@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * @emails react-core
  */
@@ -62,13 +62,14 @@ module.exports = {
             options: {
               defaultText: '<b>Try it on CodePen</b>',
               directory: `${__dirname}/examples/`,
-              externals: [
-                `//unpkg.com/react/umd/react.development.js`,
-                `//unpkg.com/react-dom/umd/react-dom.development.js`,
-              ],
-              dependencies: [`react`, `react-dom`],
-              redirectTemplate: `${__dirname}/src/templates/codepen-example.js`,
               target: '_blank',
+              codepen: {
+                redirectTemplate: `${__dirname}/src/templates/codepen-example.js`,
+                externals: [
+                  `//unpkg.com/react/umd/react.development.js`,
+                  `//unpkg.com/react-dom/umd/react-dom.development.js`,
+                ],
+              },
             },
           },
           {
@@ -159,5 +160,20 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'React Dokümantasyonu',
+        short_name: 'React [TR]', // eg. React [%LANG_CODE%]
+        // Translators: please change this and two above options (see https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/#feature-configuration---optional)
+        lang: 'tr',
+        start_url: '/',
+        background_color: '#20232a',
+        theme_color: '#20232a',
+        display: 'standalone',
+        icon: 'static/logo-512x512.png',
+        legacy: true,
+      },
+    },
   ],
 };

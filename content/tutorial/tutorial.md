@@ -126,7 +126,7 @@ Metin editörünüzde, kodun renkli halde görüntülenmesini sağlamak için [b
 
 ### Takıldım, Yardım Edin! {#help-im-stuck}
 
-Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/0ZcbPKXt5bZjGY5n) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınız için devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız. Devamında size yardımıcı olacağız.
+Eğer bu öğreticiyi takip ederken herhangi bir yerde takıldıysanız, [topluluk destek kaynaklarına](/community/support.html) bakınız. Özellikle Discord'da yer alan [Reactiflux Chat](https://discord.gg/reactiflux) kanalı, hızlıca yardım almak için oldukça elverişlidir. Eğer bir cevap alamadıysanız veya hala takıldığınız için devam edemiyorsanız lütfen bize GitHub üzerinden issue açınız. Devamında size yardımıcı olacağız.
 
 ## Genel Bakış {#overview}
 
@@ -180,7 +180,7 @@ Yukarıdaki `ShoppingList` bileşeni, yalnızca `<div />` ve `<li />` gibi HTML 
 
 ## Başlangıç Kodunun İncelenmesi {#inspecting-the-starter-code}
 
-Eğer bu öğreticiyi **tarayıcınızda** takip ediyorsanız, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip ediyorsanız, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız (kurulum](#setup-option-2-local-development-environment) aşamasında bu dosyaya değinmiştik). 
+Eğer bu öğreticiyi **tarayıcınızda** takip ediyorsanız, **[başlangıç kodunu](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** yeni sekmede açınız. Eğer öğreticiyi **yerel makinenizde** takip ediyorsanız, bunun yerine proje dizininde yer alan `src/index.js` dosyasını açınız [kurulum](#setup-option-2-local-development-environment) aşamasında bu dosyaya değinmiştik). 
 
 Bu başlangıç kodu, yapacağımız proje ile ilgili bir temel niteliğindedir. tic-tac-toe oyununu programlayarak React öğreniminize yoğunlaşabilmeniz için size CSS kodlarını hazır olarak sunduk. Bu nedenle öğretici boyunca CSS kodu yazmanız gerekli değildir.
 
@@ -205,6 +205,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return <Square value={i} />;
   }
+}
 ```
 
 Square bileşeninin `render` metodunu, ilgili değeri göstermesi için `{/* TODO */}` kısmını `{this.props.value}` şekilde değiştirelim:
@@ -297,7 +298,7 @@ class Square extends React.Component {
 
 >Not:
 >
->[JavaScript class'larında](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), alt sınıfın constructor'ını oluştururken her zaman `super` fonksiyonunu çağırmanız gerekmektedir. Her bir React sınıf bileşeni içerisinde `super(props)` çağrısı ile başlayan bir constructor barındırmalıdır.
+>[JavaScript class'larında](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), alt sınıfın constructor'ını oluştururken her zaman `super` fonksiyonunu çağırmanız gerekmektedir. `constructor` metodu olan her bir React sınıf bileşeninde, `constructor` metodu `super(props)` çağrısı ile başlamalıdır.
 
 Şimdi, Square'e tıklanıldığında, state'indeki `value` değerinin `render` metodunda görüntülenebilmesi için aşağıdaki adımları izleyelim:
 

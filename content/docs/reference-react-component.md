@@ -504,7 +504,7 @@ Yalnızca iki adet metot vardır. Bunlar `setState()` ve `forceUpdate()` metotla
 ### `setState()` {#setstate}
 
 ```javascript
-setState(updater[, callback])
+setState(updater, [callback])
 ```
 
 `setState()` metodu, bileşenin state'inde olan değişiklikleri bir kuyruğa atar ve React'e, bu bileşenin ve alt bileşenlerinin güncellenen state ile birlikte tekrar render edilmesi gerektiğini bildirir. Sunucu cevapları ve onClick gibi olay gidericilerinden dönen değişikliklerin arayüze yansıtılması için başlıca metottur.
@@ -590,7 +590,8 @@ Normalde `forceUpdate()`'in kullanımından kaçınmalı ve yalnızca `render()`
 
 ### `defaultProps` {#defaultprops}
 
-`defaultProps`, bileşen sınıfının varsayılan prop değerlerini atamak için sınıf içerisinde değişken olarak tanımlanabilir. Bu değişken, tanımlı olmayan prop değerleri için kullanılır. Null değeri içeren prop'lar için kullanılmaz. Örneğin:
+`defaultProps`, bileşen sınıfının varsayılan prop değerlerini atamak için sınıf içerisinde özellik olarak tanımlanabilir. Bu değişken, tanımlı olmayan prop değerleri (`undefined`) için kullanılır. `null` değeri içeren prop'lar için kullanılmaz. Örneğin:
+
 
 ```js
 class CustomButton extends React.Component {
@@ -610,7 +611,7 @@ Eğer bileşene `props.color` değeri aktarılmazsa, varsayılan olarak `'blue'`
   }
 ```
 
-Bunun aksine `props.color` değeri null olarak atanmışsa, değişmeden null olarak kalacaktır:
+`props.color` değeri `null` olarak atanmışsa, değişmeden `null` olarak kalacaktır:
 
 ```js
   render() {

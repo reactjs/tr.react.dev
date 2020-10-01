@@ -1,10 +1,24 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * @flow
+ */
+
 import React from 'react';
 
 const JS_NPM_URLS = [
   'https://unpkg.com/docsearch.js@2.4.1/dist/cdn/docsearch.min.js',
 ];
 
-export default class HTML extends React.Component {
+type Props = {|
+  htmlAttributes: any,
+  headComponents: React$Node,
+  bodyAttributes: any,
+  body: string,
+  postBodyComponents: React$Node,
+|};
+
+export default class HTML extends React.Component<Props> {
   render() {
     return (
       <html lang="tr" {...this.props.htmlAttributes}>
@@ -19,6 +33,11 @@ export default class HTML extends React.Component {
             content="width=device-width, initial-scale=1.0"
           />
           <link rel="icon" href="/favicon.ico" />
+
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <link rel="apple-touch-icon" href="/logo-180x180.png" />
+          <meta name="apple-mobile-web-app-title" content="React" />
+
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>

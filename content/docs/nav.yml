@@ -8,6 +8,8 @@
       title: Yeni bir React Uygulaması Oluşturun
     - id: cdn-links
       title: CDN Bağlantıları
+    - id: release-channels
+      title: Yayın Kanalları
 - title: Temel Kavramlar
   isOrdered: true
   items:
@@ -46,7 +48,7 @@
     - id: error-boundaries
       title: Hata Sınırları
     - id: forwarding-refs
-      title: Ref'leri Taşımak
+      title: Ref'leri Yönlendirme
     - id: fragments
       title: Fragment'ler
     - id: higher-order-components
@@ -74,7 +76,7 @@
     - id: static-type-checking
       title: Statik Tip Kontrolü
     - id: strict-mode
-      title: Strict Yöntemi
+      title: Strict Modu
     - id: typechecking-with-proptypes
       title: PropTypes ile Tip Kontrolü
     - id: uncontrolled-components
@@ -98,15 +100,13 @@
       title: SyntheticEvent
     - id: test-utils
       title: Test Araçları
-    - id: shallow-renderer
-      title: Yüzeysel Render Edici
     - id: test-renderer
       title: Test Render Edici
     - id: javascript-environment-requirements
       title: Javascript Ortam Gereksinimleri
     - id: glossary
       title: React Terimleri Sözlüğü
-- title: Hook'lar (Yeni)
+- title: Hook'lar
   isOrdered: true
   items:
       - id: hooks-intro
@@ -133,16 +133,29 @@
       title: Test Tarifleri
     - id: testing-environments
       title: Test Ortamları
+- title: Eşzamanlı Mod (Deneysel)
+  isOrdered: true
+  items:
+    - id: concurrent-mode-intro
+      title: Eşzamanlı Mod'a Giriş
+    - id: concurrent-mode-suspense
+      title: Veri Çekmek için Suspense
+    - id: concurrent-mode-patterns
+      title: Eşzamanlı UI Modelleri
+    - id: concurrent-mode-adoption
+      title: Eşzamanlı Mod'u Benimsemek
+    - id: concurrent-mode-reference
+      title: Eşzamanlı Mod API Kaynağı
 - title: Katkı Sağlamak
   items:
-  - id: how-to-contribute
-    title: Nasıl Katkı Sağlarsınız?
-  - id: codebase-overview
-    title: Codebase'e Genel Bakış
-  - id: implementation-notes
-    title: Uygulama Notları
-  - id: design-principles
-    title: Tasarım İlkeleri
+    - id: how-to-contribute
+      title: Nasıl Katkı Sağlarsınız?
+    - id: codebase-overview
+      title: Codebase'e Genel Bakış
+    - id: implementation-notes
+      title: Uygulama Notları
+    - id: design-principles
+      title: Tasarım İlkeleri
 - title: Sıkça Sorulan Sorular
   items:
     - id: faq-ajax

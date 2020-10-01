@@ -124,9 +124,11 @@ const MyComponent = React.memo(function MyComponent(props) {
 });
 ```
 
-`React.memo` bir [üst katman bileşenidir](/docs/higher-order-components.html). [`React.PureComponent`](#reactpurecomponent)'e benzer ancak sınıflar yerine fonksiyon bileşenleri için geçerlidir.
+`React.memo` bir [üst katman bileşenidir](/docs/higher-order-components.html).
 
 Eğer fonksiyon bileşeniniz aynı prop'lar ile aynı sonucu render ediyor ise, bazı durumlarda sonucu ezberleyerek performans artışı sağlaması için onu bir `React.memo` çağrısına sarabilirsiniz. Bu, React'in bileşeni render etmeyi atlayacağı ve son render edilen sonucu yeniden kullanacağı anlamına gelir.
+
+`React.memo` sadece prop değişikliklerini kontrol eder. Eğer `React.memo` içine sarmalanmış bileşeninizde [`useState`](/docs/hooks-state.html) ya da [`useContext`](/docs/hooks-reference.html#usecontext) hookları varsa, state ya da context her değiştiğinde bilşeniniz tekrar render edilecektir.
 
 Varsayılan olarak, `props` nesnesindeki karmaşık yapıları sadece yüzeysel bir şekilde karşılaştıracaktır. Karşılaştırma üzerinde kontrolü ele almak istiyorsanız, ikinci argüman olarak özel bir karşılaştırma fonksiyonu sağlayabilirsiniz.
 

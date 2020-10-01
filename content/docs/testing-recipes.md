@@ -57,7 +57,7 @@ You may use a different pattern, but keep in mind that we want to execute the cl
 
 ### `act()` {#act}
 
-When writing UI tests, tasks like rendering, user events, or data fetching can be considered as "units" of interaction with a user interface. React provides a helper called `act()` that makes sure all updates related to these "units" have been processed and applied to the DOM before you make any assertions:
+When writing UI tests, tasks like rendering, user events, or data fetching can be considered as "units" of interaction with a user interface. `react-dom/test-utils` provides a helper called [`act()`](/docs/test-utils.html#act) that makes sure all updates related to these "units" have been processed and applied to the DOM before you make any assertions:
 
 ```js
 act(() => {
@@ -253,7 +253,7 @@ export default function Map(props) {
 import React from "react";
 import Map from "./map";
 
-function Contact(props) {
+export default function Contact(props) {
   return (
     <div>
       <address>
@@ -396,14 +396,14 @@ it("changes value when clicked", () => {
 
   // get ahold of the button element, and trigger some clicks on it
   const button = document.querySelector("[data-testid=toggle]");
-  expect(button.innerHTML).toBe("Turn off");
+  expect(button.innerHTML).toBe("Turn on");
 
   act(() => {
     button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
 
   expect(onChange).toHaveBeenCalledTimes(1);
-  expect(button.innerHTML).toBe("Turn on");
+  expect(button.innerHTML).toBe("Turn off");
 
   act(() => {
     for (let i = 0; i < 5; i++) {
@@ -463,6 +463,8 @@ We can write tests for this component by leveraging [Jest's timer mocks](https:/
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+
+import Card from "./card";
 
 jest.useFakeTimers();
 
@@ -529,7 +531,7 @@ it("should accept selections", () => {
 
   act(() => {
     container
-      .querySelector("[data-testid=2]")
+      .querySelector("[data-testid='2']")
       .dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
 

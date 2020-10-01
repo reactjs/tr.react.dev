@@ -1,10 +1,11 @@
 /**
- * Copyright (c) 2013-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * @emails react-core
  * @flow
  */
 
+import Banner from 'components/Banner';
 import Container from 'components/Container';
 import HeaderLink from './HeaderLink';
 import {Link} from 'gatsby';
@@ -29,6 +30,9 @@ const Header = ({location}: {location: Location}) => (
       width: '100%',
       top: 0,
       left: 0,
+      '@media print': {
+        display: 'none',
+      },
     }}>
     <Container>
       <div
@@ -238,6 +242,9 @@ const Header = ({location}: {location: Location}) => (
           </a>
         </div>
       </div>
+    </Container>
+    <Container>
+      <Banner />
     </Container>
   </header>
 );

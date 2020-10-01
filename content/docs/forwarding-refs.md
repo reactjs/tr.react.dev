@@ -1,76 +1,78 @@
 ---
 id: forwarding-refs
-title: Forwarding Refs
+title: Ref'leri Yönlendirme
 permalink: docs/forwarding-refs.html
 ---
 
-Ref forwarding is a technique for automatically passing a [ref](/docs/refs-and-the-dom.html) through a component to one of its children. This is typically not necessary for most components in the application. However, it can be useful for some kinds of components, especially in reusable component libraries. The most common scenarios are described below.
+Ref yönlendirme bir [ref](/docs/refs-and-the-dom.html)'i üst bileşenlerden alt bileşenlerin birine otomatik olarak aktarma tekniğidir. Bu genellikle uygulamadaki çoğu bileşen için gerekli değildir. Ama bazı bileşen türleri için faydalı olabilir, özellikle yeniden kullanılabilir bileşen kütüphaneleri için. En yaygın senaryolar aşağıda açıklanmaktadır.
 
-## Forwarding refs to DOM components {#forwarding-refs-to-dom-components}
+## Ref'leri DOM bileşenlerine aktarmak {#forwarding-refs-to-dom-components}
 
-Consider a `FancyButton` component that renders the native `button` DOM element:
+Yerel (native) `button` öğesini oluşturan `FancyButton` bileşenini düşünün:
 `embed:forwarding-refs/fancy-button-simple.js`
 
-React components hide their implementation details, including their rendered output. Other components using `FancyButton` **usually will not need to** [obtain a ref](/docs/refs-and-the-dom.html) to the inner `button` DOM element. This is good because it prevents components from relying on each other's DOM structure too much.
+React bileşenleri, render edilen çıktıları da dahil olacak bir şekilde uygulama ayrıntılarını gizler. `FancyButton` bileşenini kullanan diğer bileşenler, alt `button` DOM elemanı için genellikle **gerekmeyen** [ref elde ederler.](/docs/refs-and-the-dom.html). Bu iyi bir şeydir, çünkü bileşenlerin birbirilerinin DOM yapısına fazla bağımlı olmasını önler.
 
-Although such encapsulation is desirable for application-level components like `FeedStory` or `Comment`, it can be inconvenient for highly reusable "leaf" components like `FancyButton` or `MyTextInput`. These components tend to be used throughout the application in a similar manner as a regular DOM `button` and `input`, and accessing their DOM nodes may be unavoidable for managing focus, selection, or animations.
+Her ne kadar bu kapsülleme (encapsulation) `FeedStory` veya `Comment` gibi uygulama seviyesi bileşenler için arzu edilse de, `FancyButton` veya `MyTextInput` gibi yüksek oranda yeniden kullanılabilir "yaprak" bileşenler için sakıncalı olabilir. Bu bileşenler uygulama boyunca normal bir DOM `button` ve `input` öğeleri gibi benzer şekilde kullanılma eğilimindedir, odaklama, seçim veya animasyonları yönetmek için DOM düğümlerine erişmek kaçınılmaz olabilir.
 
-**Ref forwarding is an opt-in feature that lets some components take a `ref` they receive, and pass it further down (in other words, "forward" it) to a child.**
+**Ref yönlendirme, bazı bileşenlerin aldıkları bir ref'i almasını ve daha alt elemene aktarmasını sağlayan bir etkinleştirme özelliğidir**
 
-In the example below, `FancyButton` uses `React.forwardRef` to obtain the `ref` passed to it, and then forward it to the DOM `button` that it renders:
+Alttaki örnekte, `FancyButton` kendisine aktarılan ref'i elde etmek için `React.forwardRef` kullanılır ve ardından oluşturduğu DOM `button`'a iletir:
 
 `embed:forwarding-refs/fancy-button-simple-ref.js`
 
-This way, components using `FancyButton` can get a ref to the underlying `button` DOM node and access it if necessary—just like if they used a DOM `button` directly.
+Bu şekilde, `FancyButton` kullanan bileşenler, temelde bulunan `button` DOM düğümüne bir ref oluşturabilir ve gerekirse doğrudan bir DOM `button` kullanmış gibi erişebilir.
 
-Here is a step-by-step explanation of what happens in the above example:
+Yukarıdaki örnekte neler olduğuna dair adım adım açıklama:
 
-1. We create a [React ref](/docs/refs-and-the-dom.html) by calling `React.createRef` and assign it to a `ref` variable.
-1. We pass our `ref` down to `<FancyButton ref={ref}>` by specifying it as a JSX attribute.
-1. React passes the `ref` to the `(props, ref) => ...` function inside `forwardRef` as a second argument.
-1. We forward this `ref` argument down to `<button ref={ref}>` by specifying it as a JSX attribute.
-1. When the ref is attached, `ref.current` will point to the `<button>` DOM node.
+1. `React.createRef`'i çağırarak bir [React ref](/docs/refs-and-the-dom.html) oluşturuyoruz ve `ref` değişkenine atama yapıyoruz.
+1. JSX özelliği olarak belirterek `ref`'i `<FancyButton ref={ref}>` bileşenine aktarıyoruz.
+1. React, ikinci bir argüman olarak `ref`'yi `forwardRef` içindeki `(props, ref) => ...` fonksiyonuna iletir.
+1. JSX özelliği olarak belirterek, `ref` argümanını `<button ref={ref}>`'a aktarıyoruz.
+1. Ref eklendiğinde. `ref.current`, `<button>` DOM düğmüne işaret edecektir.
 
->Note
+>Not
 >
->The second `ref` argument only exists when you define a component with `React.forwardRef` call. Regular function or class components don't receive the `ref` argument, and ref is not available in props either.
+>İkinci `ref` argümanı yalnızca `React.forwardRef` çağrısıyla oluşur. Normal fonksiyon veya sınıf bileşenleri `ref` argümanı almaz, ayrıca ref prop'larda da mevcut değildir.
 >
->Ref forwarding is not limited to DOM components. You can forward refs to class component instances, too.
+>Ref yönlendirme yalnızca DOM bileşenleri ile sınırlı değildir. ref'leri sınıf bileşenlerinden türetilen nesnelere de aktarabilirsiniz.
 
-## Note for component library maintainers {#note-for-component-library-maintainers}
+## Bileşen kütüphanesine bakım yapanlara not {#note-for-component-library-maintainers}
 
-**When you start using `forwardRef` in a component library, you should treat it as a breaking change and release a new major version of your library.** This is because your library likely has an observably different behavior (such as what refs get assigned to, and what types are exported), and this can break apps and other libraries that depend on the old behavior.
+**`forwardRef`'i bir bileşen içinde kullanmaya başladığınızda, Bunu tehlikeli bir değişim olarak değerlendirmelisiniz ve yeni bir sürüm yayınlamalısınız.** Bunun nedeni, kütüphanenizin büyük olasılıkla gözle görülür şekilde farklı bir yaklaşıma sahip olmasıdır (ref'lerin ataması ve hangi türlerin dışa aktarıldığı gibi), ve eski yaklaşıma bağlı uygulamaları ve diğer kütüphaneleri etkiliyebilir.
 
-Conditionally applying `React.forwardRef` when it exists is also not recommended for the same reasons: it changes how your library behaves and can break your users' apps when they upgrade React itself.
+Mevcut olduğunda `React.forwardRef`'i koşullu olarak uygulamak da aynı nedenlerle önerilmez:
+Kütüphanenizin biçimini değiştirir ve React'i yükselttiklerinde kullanıcılarınızın uygulamalarını bozabilir.
 
-## Forwarding refs in higher-order components {#forwarding-refs-in-higher-order-components}
+## Üst-Seviye Bileşenlerde ref'leri yönlendirme {#forwarding-refs-in-higher-order-components}
 
-This technique can also be particularly useful with [higher-order components](/docs/higher-order-components.html) (also known as HOCs). Let's start with an example HOC that logs component props to the console:
+Bu teknik, üst-seviye bileşenlerde özellikle yararlı olabilir [higher-order components](/docs/higher-order-components.html) (HOC olarak da bilinir). Konsola bileşen prop'larını yazdıran örnek bir HOC ile başlayalım:
 `embed:forwarding-refs/log-props-before.js`
 
-The "logProps" HOC passes all `props` through to the component it wraps, so the rendered output will be the same. For example, we can use this HOC to log all props that get passed to our "fancy button" component:
+"logProps" HOC, tüm prop'ları kapladığı bileşene aktarır, böylece sonuç aynı olacaktır.
+Örneğin, "fancy button" bileşenimize iletilen tüm prop'ları yazdırmak için bu HOC'u kullanabiliriz.
 `embed:forwarding-refs/fancy-button.js`
 
-There is one caveat to the above example: refs will not get passed through. That's because `ref` is not a prop. Like `key`, it's handled differently by React. If you add a ref to a HOC, the ref will refer to the outermost container component, not the wrapped component.
+Yukarıdaki örnekle ilgili bir uyarı: ref'ler iletilmeyecek. Bunun nedeni `ref` prop değildir. `key` gibi, React tarafından farklı şekilde ele alınır. Bir HOC'a ref eklerseniz ref, kaplanmış bileşene değil, en dıştaki kapsaycı bileşene atıfta bulunacaktır.
 
-This means that refs intended for our `FancyButton` component will actually be attached to the `LogProps` component:
+Bu, `FancyButton` bileşeni için istenilen ref'lerin aslında `LogProps` bileşenine ekleneceği anlamına gelir.
 `embed:forwarding-refs/fancy-button-ref.js`
 
-Fortunately, we can explicitly forward refs to the inner `FancyButton` component using the `React.forwardRef` API. `React.forwardRef` accepts a render function that receives `props` and `ref` parameters and returns a React node. For example:
+Neyse ki, ref'leri `React.forwardRef` API'ını kullanarak iç `FancyButton` bileşenine iletebiliriz. `React.forwardRef`, `props` ve `ref` parametrelerini alan ve bir React düğüm'u döndüren render fonksiyonu kabul eder. Örneğin:
 `embed:forwarding-refs/log-props-after.js`
 
 ## Displaying a custom name in DevTools {#displaying-a-custom-name-in-devtools}
 
-`React.forwardRef` accepts a render function. React DevTools uses this function to determine what to display for the ref forwarding component.
+`React.forwardRef` render fonksiyonu kabul eder. React DevTools, ref yönlendirme bileşeni için neyin görüntüleneceğini belirlemek için bu fonksiyonu kullanır.
 
-For example, the following component will appear as "*ForwardRef*" in the DevTools:
+Örneğin, aşağıdaki bileşen DevTools'ta "*ForwardRef*" olarak görünür
 
 `embed:forwarding-refs/wrapped-component.js`
 
-If you name the render function, DevTools will also include its name (e.g. "*ForwardRef(myFunction)*"):
+Oluşturma fonksiyonunu adlandırırsanız, DevTools ayrıca adını da ekler (örn. "*ForwardRef(myFunction)*"):
 
 `embed:forwarding-refs/wrapped-component-with-function-name.js`
 
-You can even set the function's `displayName` property to include the component you're wrapping:
+Hatta fonksiyonun `displayName` özelliğini kapladığınız bileşeni içerecek şekilde ayarlayabilirsiniz:
 
 `embed:forwarding-refs/customized-display-name.js`

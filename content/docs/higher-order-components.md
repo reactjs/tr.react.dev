@@ -178,9 +178,9 @@ HOC içerisinde bileşenin prototipini değiştirmemeye çalışın.
 
 ```js
 function logProps(InputComponent) {
-  InputComponent.prototype.componentWillReceiveProps = function(nextProps) {
+  InputComponent.prototype.componentDidUpdate = function(prevProps) {
     console.log('Current props: ', this.props);
-    console.log('Next props: ', nextProps);
+    console.log('Previous props: ', prevProps);
   };
   // The fact that we're returning the original input is a hint that it has
   // been mutated.
@@ -191,7 +191,7 @@ function logProps(InputComponent) {
 const EnhancedComponent = logProps(InputComponent);
 ```
 
-Bununla alakalı bir kaç problem var. Birincisi, girdi olarak kullanılan bileşen geliştirilmiş bileşenden ayrı olarak yeniden kullanılamaz. Daha önemlisi, `EnchancedComponent`'e başka bir HOC uygularsanız, o da `componentWillRecieveProps`'u değiştirecektir; ilk HOC’un fonksiyonalitesi kaybolacaktır. Ayrıca bu HOC,  yaşam döngüsü methodları içermeyen fonksiyonel bileşenlerle çalışmayacaktır.
+Bununla alakalı bir kaç problem var. Birincisi, girdi olarak kullanılan bileşen geliştirilmiş bileşenden ayrı olarak yeniden kullanılamaz. Daha önemlisi, `EnchancedComponent`'e başka bir HOC uygularsanız, o da `componentDidUpdate`'i değiştirecektir; ilk HOC’un fonksiyonalitesi kaybolacaktır. Ayrıca bu HOC, yaşam döngüsü methodları içermedikleri için, fonksiyonel bileşenlerle çalışmayacaktır.
 
 HOC’ları değiştirmek sıkıntılı bir soyutlama yöntemidir— kodu kullanacak kişinin bunların nasıl kodlandığını bilmesi gerekiyor, yoksa diğer HOC’larla sıkıntı yaşayabilir.
 
@@ -200,9 +200,9 @@ HOC'lar, datayi degistirmek yerine girdi bileşenini bir kapsayıcı bileşene s
 ```js
 function logProps(WrappedComponent) {
   return class extends React.Component {
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
       console.log('Current props: ', this.props);
-      console.log('Next props: ', nextProps);
+      console.log('Previous props: ', prevProps);
     }
     render() {
       // Wraps the input component in a container, without mutating it. Good!

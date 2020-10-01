@@ -4,9 +4,9 @@ title: Render Props
 permalink: docs/render-props.html
 ---
 
-["Render prop"](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) tabiri, React bileşenleri arasında kod paylaşımının; değerleri birer fonksiyon olan prop’lar kullanılarak yapılmasına denir.
+["Render prop"](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) tabiri; React bileşenleri arasında kod paylaşımının, değerleri birer fonksiyon olan prop’lar kullanılarak yapılması için kullanılmaktadır.
 
-Render prop’lu bir bileşen, prop olarak bir React elemanı döndüren bir fonksyion alır ve kendi render mantığını yürütmek yerine bu fonksiyonu çağırır.
+Render prop’lu bir bileşen, prop olarak bir React elemanı döndüren bir fonksiyon alır ve kendi render mantığını yürütmek yerine bu fonksiyonu çağırır.
 
 ```jsx
 <DataProvider render={data => (
@@ -15,14 +15,14 @@ Render prop’lu bir bileşen, prop olarak bir React elemanı döndüren bir fon
 ```
 
 
-Render prop’ları kullanan kütüphaneler arasında [React Router](https://reacttraining.com/react-router/web/api/Route/render-func) ve [Downshift](https://github.com/paypal/downshift) de var.
+Render prop’ları kullanan kütüphaneler arasında [React Router](https://reacttraining.com/react-router/web/api/Route/render-func) ve [Downshift](https://github.com/paypal/downshift) de bulunuyor.
 
 
-Bu dokümanda neden render prop’ların kullanışlı olduğunu tartışıp, bunları nasıl yazabileceğiniz hakkında konuşacağız.
+Bu dokümanda neden render prop’ların kullanışlı olduğunu tartışıp, bunları nasıl uygulayabileceğiniz hakkında konuşacağız.
 
 ## Render Propları uygulama genelini etkileyen özellikler için Kullanın {#use-render-props-for-cross-cutting-concerns}
 
-Bileşenler React'te yeniden kod kullanımının temel birimidir. Ama state’in nasıl paylaşılacağı veya bir bileşenin başka bir bileşene encapsulate ettiği davranışta hangi state’e ihtiyaç duyulacağı her zaman malum olmayabilir. 
+Bileşenler, React'te yeniden kod kullanımının temel birimidir. Ama state’in nasıl paylaşılacağı veya bir bileşenin başka bir bileşene encapsulate ettiği davranışlarda hangi state’e ihtiyaç duyulacağı her zaman malum olmayabilir. 
 
 Örneğin, farenin bir web uygulamasındaki posizyonunu takip eden aşağıdaki bileşen:
 
@@ -43,7 +43,7 @@ class MouseTracker extends React.Component {
 
   render() {
     return (
-      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
         <h1>Move the mouse around!</h1>
         <p>The current mouse position is ({this.state.x}, {this.state.y})</p>
       </div>
@@ -54,7 +54,7 @@ class MouseTracker extends React.Component {
 
 Fare ekranda hareket ettikçe, bileşen (x,y) koordinatlarını `<p>` içerisinde gösterir.
 
-Şimdi soru şu: Bu davranışı başka bir bileşen içerisinde nasıl tekrar kullanabiliriz? Diğer bir deyişle, Başka bir bileşen farenin pozisyonunu bilmek isterse bu davranışı rahatça bu bileşenle paylaşmak için encapsulate edebilir miyiz?
+Şimdi soru şu: Bu davranışı başka bir bileşen içerisinde nasıl tekrar kullanabiliriz? Diğer bir deyişle, Başka bir bileşen farenin pozisyonunu bilmek isterse, bu davranışı rahatça bu bileşenle paylaşmak için sarmalayabilir miyiz?
 
 Bileşenler React'te yeniden kod kullanımının temel birimi olduğundan, istediğimiz davranışı başka bir yerde kullanabilmemiz için `<Mouse>` bileşeninin kodunu biraz değiştirmeyi deneyelim.
 
@@ -76,7 +76,7 @@ class Mouse extends React.Component {
 
   render() {
     return (
-      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
 
         {/* ...but how do we render something other than a <p>? */}
         <p>The current mouse position is ({this.state.x}, {this.state.y})</p>
@@ -88,10 +88,10 @@ class Mouse extends React.Component {
 class MouseTracker extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <h1>Move the mouse around!</h1>
         <Mouse />
-      </div>
+      </>
     );
   }
 }
@@ -99,7 +99,7 @@ class MouseTracker extends React.Component {
 
 Artık `mousemove` olayını ve farenin (x, y) pozisyonunu bulunduran tüm davranışlar `<Mouse>` bileşeni tarafından encapsulate ediliyor, fakat hala tam anlamıyla yeniden kullanılabilir değil.
 
-Örneğin; bir kedi resminin, faremizi ekranda kovalamasını render eden bir `<Cat>` bileşenimiz olduğunu düşünelim.  Bu bileşene farenin koordinatlarını bilmesi ve resmin ekrandaki pozisyonunu ayarlaması için `<Cat mouse={{ x, y }}>` prop’unu kullanabiliriz.
+Örneğin; bir kedi resminin, faremizi ekranda kovalamasını render eden bir `<Cat>` bileşenimiz olduğunu varsayalım.  Bu bileşene farenin koordinatlarını bilmesi ve resmin ekrandaki pozisyonunu ayarlayabilmesi için `<Cat mouse={{ x, y }}>` prop’unu kullanabiliriz.
 
 İlk bakışta, <Cat> bileşenini <Mouse> bileşeninin *render metodu içinde* böyle render etmeyi deneyebilirsiniz:
 
@@ -129,7 +129,7 @@ class MouseWithCat extends React.Component {
 
   render() {
     return (
-      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
 
         {/*
           We could just swap out the <p> for a <Cat> here ... but then
@@ -155,9 +155,9 @@ class MouseTracker extends React.Component {
 }
 ```
 
-Bu yaklaşım bize spesifik durumda çalışacaktır, ama hala hedefimiz olan tam anlamıyla istediğimiz davranışı tekrar kullanılabilir bir halde encapsulate edemedik. Artık ne zaman farenin konumunu başka bir durum için almak istersek, farklı bir bileşen(örn. `<MouseWithCat>`) yaratıp o duruma özel bir şekilde render etmesini sağlamalıyız.
+Bu yaklaşım spesifik bir durumda çalışacaktır, fakat hala tam anlamıyla hedefimiz olan davranışı tekrar kullanılabilir bir biçimde sarmalayamadık. Artık farenin konumunu ne zaman başka bir durum için ele almak istersek, farklı bir bileşen(örn. `<MouseWithCat>`) yaratıp, mevcut duruma özel bir render yöntemi sağlamalıyız.
 
-İşte tam da burda devreye render propları giriyor: Doğrudan `<Cat>` bileşenini`<Mouse>` bileşeni içine gömmekten ve render olmuş çıktısını değiştirmektense, `<Mouse>` bileşenine bir fonksiyon prop’u verip dinamik olarak ne render edeceğine karar vermesini sağlayabiliriz-kısacası bir render prop.
+İşte tam da burada devreye render prop'ları giriyor: Doğrudan `<Cat>` bileşenini`<Mouse>` bileşeni içine gömüp, render olmuş çıktısını değiştirmektense, `<Mouse>` bileşenine bir fonksiyon prop’u vererek dinamik olarak neyin render edileceğine karar vermesini sağlayabiliriz-kısacası bir render prop kullanabilir.
 
 ```js
 class Cat extends React.Component {
@@ -185,7 +185,7 @@ class Mouse extends React.Component {
 
   render() {
     return (
-      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
 
         {/*
           Instead of providing a static representation of what <Mouse> renders,

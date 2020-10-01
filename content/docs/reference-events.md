@@ -12,7 +12,7 @@ Bu başvuru rehberinde, React Olay Sistemi'nin bir parçasını oluşturan `Synt
 
 Olay yöneticilerinize, tarayıcının kendi olaylarını sarmalayan bir çapraz-tarayıcı `SyntheticEvent` nesnesi iletilir. Bu nesne tüm tarayıcılarda aynı şekilde çalışması dışında, `stopPropagation()` ve `preventDefault()` dahil olmak üzere, tarayıcının kendi olayıyla aynı arabirime sahiptir.
 
-Bir nedenden ötürü esas tarayıcı olayına ihtiyaç duyarsanız, basitçe `nativeEvent` özelliğini kullanın. Her `SyntheticEvent` nesnesi aşağıdaki özelliklere sahiptir:
+Bir nedenden ötürü esas tarayıcı olayına ihtiyaç duyarsanız, basitçe `nativeEvent` özelliğini kullanın. Sentetik olaylar, tarayıcının doğal (native) olaylarından farklıdır ve doğrudan bunlarla eşleşmez. Örneğin, `onMouseLeave`'in içindeki `event.nativeEvent` bir `mouseout` olayına işaret edecektir. Spesifik eşleme, genel API'nin bir parçası değildir ve herhangi bir zamanda değişebilir. Her `SyntheticEvent` nesnesi aşağıdaki özelliklere sahiptir:
 
 ```javascript
 boolean bubbles
@@ -26,6 +26,7 @@ void preventDefault()
 boolean isDefaultPrevented()
 void stopPropagation()
 boolean isPropagationStopped()
+void persist()
 DOMEventTarget target
 number timeStamp
 string type
@@ -73,6 +74,7 @@ Aşağıdaki olay yöneticileri, balonlanma (bubbling) evresinde bir olay taraf�
 - [Klavye Olayları](#keyboard-events)
 - [Odaklanma Olayları](#focus-events)
 - [Form Olayları](#form-events)
+- [Genel Olaylar](#generic-events)
 - [Fare Olayları](#mouse-events)
 - [İşaretçi Olayları](#pointer-events)
 - [Seçme Olayları](#selection-events)
@@ -174,10 +176,20 @@ DOMEventTarget relatedTarget
 Olay isimleri:
 
 ```
-onChange onInput onInvalid onSubmit
+onChange onInput onInvalid onReset onSubmit
 ```
 
 onChage olayı ile ilgili daha fazla bilgi için [Formlar](/docs/forms.html)'ı inceleyin.
+
+* * *
+
+### Genel Olaylar {#generic-events}
+
+Olay isimleri:
+
+```
+onError onLoad
+```
 
 * * *
 

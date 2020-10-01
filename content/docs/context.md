@@ -9,19 +9,20 @@ Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen
 Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, bileşen ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
 
 
-- [Context Ne Zaman Kullanılır](#when-to-use-context)
-- [Context Kullanmadan Önce](#before-you-use-context)
-- [API](#api)
-  - [React.createContext](#reactcreatecontext)
-  - [Context.Provider](#contextprovider)
-  - [Class.contextType](#classcontexttype)
-  - [Context.Consumer](#contextconsumer)
-- [Örnekler](#examples)
-  - [Dinamik Context](#dynamic-context)
-  - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
-  - [Çoklu Context'leri Kullanma](#consuming-multiple-contexts)
-- [Uyarılar](#caveats)
-- [Eski Sürüm API](#legacy-api)
+- [Context Ne Zaman Kullanılır {#when-to-use-context}](#context-ne-zaman-kullan%c4%b1l%c4%b1r-when-to-use-context)
+- [Context Kullanmadan Önce {#before-you-use-context}](#context-kullanmadan-%c3%96nce-before-you-use-context)
+- [API {#api}](#api-api)
+  - [`React.createContext` {#reactcreatecontext}](#reactcreatecontext-reactcreatecontext)
+  - [`Context.Provider` {#contextprovider}](#contextprovider-contextprovider)
+  - [`Class.contextType` {#classcontexttype}](#classcontexttype-classcontexttype)
+  - [`Context.Consumer` {#contextconsumer}](#contextconsumer-contextconsumer)
+  - [`Context.displayName` {#contextdisplayname}](#contextdisplayname-contextdisplayname)
+- [Örnekler {#examples}](#%c3%96rnekler-examples)
+  - [Dinamik Context {#dynamic-context}](#dinamik-context-dynamic-context)
+  - [İç İçe Geçmiş Bileşenden Context Güncelleme {#updating-context-from-a-nested-component}](#%c4%b0%c3%a7-%c4%b0%c3%a7e-ge%c3%a7mi%c5%9f-bile%c5%9fenden-context-g%c3%bcncelleme-updating-context-from-a-nested-component)
+  - [Çoklu Context’leri Kullanma {#consuming-multiple-contexts}](#%c3%87oklu-contextleri-kullanma-consuming-multiple-contexts)
+- [Uyarılar {#caveats}](#uyar%c4%b1lar-caveats)
+- [Eski Sürüm API {#legacy-api}](#eski-s%c3%bcr%c3%bcm-api-legacy-api)
 
 ## Context Ne Zaman Kullanılır {#when-to-use-context}
 
@@ -130,7 +131,7 @@ Her Context nesnesi, tüketici bileşenlerin context güncellemelerine abone olm
 
 Bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
-Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
+Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere ([`.contextType`](#classcontexttype) ve [`useContext`](/docs/hooks-reference.html#usecontext) de dahil olmak üzere) yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
 
 [`Object.is`](//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) gibi aynı algoritma kullanılarak yeni ve eski değerler karşılaştırıp değişiklikler belirlenir.
 
@@ -194,8 +195,22 @@ Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bi
 [Alt eleman olarak fonksiyon](/docs/render-props.html#using-props-other-than-render) verilmesine ihtiyaç duyar. Fonksiyon geçerli context değerini alır ve bir React düğümü döndürür. Fonksiyona iletilen `value` argümanı, yukarıda bu context için ağaçta en yakın Provider'ın `value` prop'una eşit olacaktır. Yukarıdaki bu context için Provider yoksa, `value` argümanı `createContext()` öğesine iletilmiş `defaultValue` değerine eşit olur.
 
 > Not
-> 
-> Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [prop'ları renderlamak](/docs/render-props.html).
+>
+> Alt eleman olarak fonksiyon modeline dair daha fazla bilgi için, bakınız: [render prop'ları](/docs/render-props.html).
+
+### `Context.displayName` {#contextdisplayname}
+
+Context objeleri `displayName` adında bir string property kabul eder. React DevTools context için ne göstereceğine karar vermek için bu stringi kullanır.
+
+Örneğin, aşağıdaki bileşen DevTools'da MyDisplayName olarak gözükecektir.
+
+```js{2}
+const MyContext = React.createContext(/* some value */);
+MyContext.displayName = 'MyDisplayName';
+
+<MyContext.Provider> // "MyDisplayName.Provider" in DevTools
+<MyContext.Consumer> // "MyDisplayName.Consumer" in DevTools
+```
 
 ## Örnekler {#examples}
 
@@ -248,4 +263,4 @@ Bunu aşmak için, value değerini üst elemanın state'ine taşıyın:
 
 > Not
 > 
-> React daha önce deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak onu kullanan uygulamalar yeni sürüme geçmelidir. Eski sürüm API'ler önümüzdeki ana React versiyonlarından kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyun.
+> React daha önce deneysel bir context API ile yayınlanmıştı. Eski API tüm 16.x sürümlerinde desteklenecek ancak onu kullanan uygulamalar yeni sürüme geçmelidir. Eski sürüm API'ler önümüzdeki ana React versiyonunda kaldırılacaktır. [Eski sürüm Context dökümanlarını buradan](/docs/legacy-context.html) okuyunuz.

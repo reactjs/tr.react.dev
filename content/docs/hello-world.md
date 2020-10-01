@@ -19,15 +19,15 @@ Ekrana "Merhaba dünya!" başlığını yazdırır.
 
 **[Codepen'de Aç](codepen://hello-world)**
 
-Yukarıdaki linke tıklayarak online düzenleyiciyi açabilirsiniz. Değişiklik yapmaktan çekinmeyin ve yaptığınız değikliklerin çıktısını gözlemleyin. Bu rehberdeki çoğu sayfada bunun gibi düzenlenebilir örnekler göreceksiniz.
+Yukarıdaki linke tıklayarak online düzenleyiciyi açabilirsiniz. Değişiklik yapmaktan çekinmeyin ve yaptığınız değişikliklerin çıktısını gözlemleyin. Bu rehberdeki çoğu sayfada bunun gibi düzenlenebilir örnekler göreceksiniz.
 
-## Bu Rehberi Nasıl Okumalısınız {#how-to-read-this-guide}
+## Bu Rehberi Nasıl Okumalısınız? {#how-to-read-this-guide}
 
 Bu rehberde, React uygulamalarının yapı taşları olan elemanları (Element) ve bileşenleri (Component) inceleyeceğiz. Bunlarda uzmanlaştığınızda, küçük ve tekrar kullanılabilir parçalardan karmaşık uygulamalar oluşturabilirsiniz.
 
 >İpucu
 >
->Bu rehber **adım adım öğrenme** konseptini tercih eden kişiler için hazırlanmıştır. Eğer yaparak öğrenmeyi tercih ediyorsanız, [pratik öğretici](/tutorial/tutorial.html) sayfamıza göz atabilirsiniz. Bu rehberi ve pratiğe dayalı dersleri birbirine tamamlayıcı olarak kullanabilirsiniz. 
+>Bu rehber **adım adım öğrenme** konseptini tercih eden kişiler için hazırlanmıştır. Eğer yaparak öğrenmeyi tercih ediyorsanız, [pratik öğretici](/tutorial/tutorial.html) sayfamıza göz atabilirsiniz. Bu rehberi ve pratiğe dayalı dersleri birbirine tamamlayıcı olarak kullanabilirsiniz.
 
 Bu bölüm, adım adım temel React konseptlerinin ilk bölümü. Yandaki menüden diğer bölümlere ulaşabilirsiniz. Eğer bunu mobil cihazda okuyorsanız, sağ alt köşedeki butona basarak menüye ulaşabilirsiniz.
 
@@ -39,7 +39,7 @@ React bir JavaScript kütüphanesidir ve bu yüzden sizin temel düzeyde JavaScr
 
 >Not
 >
->Bu rehberdeki örneklerde bazen yeni JavaScript sözdizimi kullanımlarına rastlayabilirsiniz. Eğer son bir kaç yıldır JavaScript'le çalışmadıysanız, 
+>Bu rehberdeki örneklerde bazen yeni JavaScript sözdizimi kullanımlarına rastlayabilirsiniz. Eğer son bir kaç yıldır JavaScript'le çalışmadıysanız,
 [bu üç madde](https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c) şu an için yeterli olacaktır.
 
 

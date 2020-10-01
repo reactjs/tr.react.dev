@@ -8,21 +8,15 @@ permalink: community/courses.html
 
 ## Ücretsiz Dersler {#free-courses}
 
-<<<<<<< HEAD
 - [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy'nin giriş seviyesindeki React dersi.
-=======
-- [Glitch: React Starter Kit](https://glitch.com/culture/react-starter-kit/) - A free, 5-part video course with interactive code examples that will help you learn React.
 
-- [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy's introductory course for React.
->>>>>>> 519a3aec91a426b0c8c9ae59e292d064df48c66a
+- [Glitch: React Başlangıç Kiti](https://glitch.com/glimmer/post/react-starter-kit) - React'i öğrenmenize yardımcı olacak interaktif kod örnekleri içeren ücretsiz, 5 bölümlük video kursu.
 
 - [Egghead.io: React Öğrenmeye Başlayın](https://egghead.io/courses/start-learning-react) - Bu eğitim serisi, React'in temellerini keşfederek başlangıç yapmanıza yardımcı olacak.
 
 - [React Crash Course 2018](https://www.youtube.com/watch?v=Ke90Tje7VS0) - Başlangıç seviyesine uygun, en önemli React konularını içeren hızlandırılmış bir dersi.
 
 - [React Armory: Salt React'i Öğrenin](https://reactarmory.com/guides/learn-react-by-itself) - React Armory ile React'i moda tabirlerle uğraşmadan öğrenin.
-
-- [The Road To Learn React](https://www.robinwieruch.de/the-road-to-learn-react/) - Çetrefilli araçlar olmaksızın, salt React ile gerçek hayatta karşılığı olan bir uygulama geliştirin.
 
 - [Egghead.io: ReactJS için Başlangıç Rehberi](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) - React'e yeni başlayanlar ve React temellerini daha iyi anlamak isteyenler için ücretsiz bir ders.
 
@@ -53,3 +47,7 @@ permalink: community/courses.html
 - [Tyler McGinnis](https://tylermcginnis.com/courses) - Tyler McGinnis, aylık bir ücret karşılığında derslerini erişime açıyor. Dersler arasında "React Temelleri" ve "Evrensel React" de var.
 
 - [Mastering React](https://codewithmosh.com/p/mastering-react/) - React ile profesyonel, etkileşimli uygulamalar oluşturun.
+
+- [React Öğretici](https://react-tutorial.app) - Bilgi kartlarıyla, interaktif bir ortamda adım adım React'i öğrenin.
+
+- [Road to React](https://www.roadtoreact.com/) - React'te uzmanlaşma yolculuğunuz.

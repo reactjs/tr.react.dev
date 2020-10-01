@@ -68,13 +68,7 @@ class NameForm extends React.Component {
 
 `value` özelleği input’un kendisinde zaten var. Öyleyse bu değeri almak için yeni bir React state’i oluşturmaya gerek yok. Bu inputta `value` olarak state’i yazdıracağız ve input’ta her değişiklik olduğunda bu state’i güncelleyeceğiz.
 
-Kontrollü bir bileşende her state değişimi, `handleChange` fonksiyonunu çalıştıracaktır. Örneğin, adın büyük harflerle yazılmasını isteseydik, `handleChange` fonksiyonunu şu şekilde yazabilirdik:
-
-```javascript{2}
-handleChange(event) {
-  this.setState({value: event.target.value.toUpperCase()});
-}
-```
+Kontrollü bir bileşende, input'un değeri her zaman React state'i tarafından kontrol edilir. Bu biraz daha fazla kod yazmanız anlamına gelse de; artık input'un değerini diğer UI elemanlarına gönderebilir, ya da başka olay yöneticileri ile sıfırlayabilirsiniz.
 
 ## Textarea Elemanı {#the-textarea-tag}
 
@@ -192,7 +186,7 @@ Genel olarak bu, `<input type="text">`, `<textarea>` ve `<select>` elemanların�
 
 ## Dosya Girişi Elemanı {#the-file-input-tag}
 
-HTML'de bir `<input type="file">` elemanı, kullanıcını cihazının depolama alanından bir veya daha fazla dosyayı sunucuya yüklemesini ya da JavaScript'in [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) aracılığıyla manipüle etmesini sağlar.
+HTML'de bir `<input type="file">` elemanı, kullanıcıyı cihazının depolama alanından bir veya daha fazla dosyayı sunucuya yüklemesini ya da JavaScript'in [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) aracılığıyla manipüle etmesini sağlar.
 
 ```html
 <input type="file" />

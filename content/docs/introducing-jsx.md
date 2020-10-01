@@ -177,8 +177,8 @@ const element = {
 
 Bu nesnelere "React elementleri" adı verilir. Bunu, ekranda görmek istediğiniz kullanıcı arayüzünün kodlar ile tasvir edilmesi gibi düşünebilirsiniz. React, bu nesneleri okuyarak DOM'ı oluşturur ve arayüzü günceller.
 
-Sonraki bölümde, React elementlerinin DOM'a render edilmesi işlemini daha detaylı bir şekilde ele alacağız.
+[Sonraki bölümde](/docs/rendering-elements.html), React elementlerinin DOM'a render edilmesi işlemini daha detaylı bir şekilde ele alacağız.
 
 >**İpucu:**
 >
->ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/editors) kullanmanızı öneririz. Bu web sitesi de, JSX kodları için Babel dil tanımlamaları ile uyumlu olan [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) renk şemasını kullanmaktadır.
+>ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/editors) kullanmanızı öneririz.

@@ -6,12 +6,15 @@ sectionid: community
 permalink: community/examples.html
 ---
 
-React topluluğu tarafından yaratılmış pek çok proje mevcut. Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
+React topluluğu tarafından yaratılmış pek çok proje mevcut. Bu sayfada, üçüncü-parti state yönetim kütüphaneleri olmadan React kullanan projelere odaklanıyoruz.
 
+Siz de kendi projenizi eklemekten çekinmeyin. Eğer bir proje eklerseniz, lütfen projenizin React'in en güncel sürümleriyle uyumlu olmasını sağladığınızdan emin olun.
 
+## Small Examples {#small-examples}
+
+* **[Zeldog](https://yannsainty.github.io/Zeldog/)** Bir köpeğin daha fazla pizza yemek için ördeklerle savaştığı, Zelda benzeri bir oyun.
 * **[Hesap Makinesi](https://github.com/ahfarmer/calculator)** iOS hesap makinesinin  React ile uygulanmış hali
 * **[Emoji Arama](https://github.com/ahfarmer/emoji-search)** Emoji aramak için basit bir React uygulaması
-* **[Github Savaşı Uygulaması](https://tm.dev/react-course-project/)** İki Github kullanıcısını savaştırın ve her dilde en popüler Github projelerini görün. 
 * **[React Tabanlı Hacker News İstemcisi](https://github.com/insin/react-hn)** React & react-router kullanılarak geliştirilmiş, Firebase API tabanlı bir Hacker News uygulaması
 * **[Pokedex](https://github.com/alik0211/pokedex)** Canlı arama özellikli Pokémon listesi
 * **[Alışveriş Sepeti](https://github.com/jeffersonRibeiro/react-shopping-cart)** React ile geliştirilmiş basit bir e-ticaret sepeti uygulaması
@@ -23,3 +26,13 @@ React topluluğu tarafından yaratılmış pek çok proje mevcut. Siz de kendi p
 * **[GFonts Space](https://github.com/pankajladhar/GFontsSpace)** Kullanıcının Google fontlarıyla oynamasına imkan sağlayan bir alan. React, Redux ve React-Router kullanılarak geliştirilmiş.
 * **[Course Learn Page](https://github.com/ulearnpro/ulearn)** Open Source LMS script in Laravel 5.8 and ReactJS 16.9
 * **[Speedy math](https://github.com/pankajladhar/speedy-math)** An application which allows kids to practice basic Mathematics i.e  Addition, Subtraction, Multiply, Comparison. It is a PWA (Progressive web app) with offline support and install as App features.
+* **[Unit Converter](https://github.com/KarthikeyanRanasthala/react-unit-converter)** Minimal Yet Responsive Unit Converter Built With React, Material-UI & Convert-Units.
+* **[Snap Shot](https://github.com/Yog9/SnapShot)** A photo gallery with search
+* **[BMI Calculator](https://github.com/GermaVinsmoke/bmi-calculator)** A React Hooks app for calculating BMI
+* **[Image Compressor](https://github.com/RaulB-masai/react-image-compressor)** An offline image compressor built with React and browser-image-compression
+* **[Counter App](https://github.com/arnab-datta/counter-app)** A small shopping cart example
+* **[Tutorial Solutions](https://github.com/harman052/react-tutorial-solutions)** Solutions to challenges mentioned at the end of React tutorial
+
+## Complete Apps {#complete-apps}
+
+* **[Builder Book](https://github.com/builderbook/builderbook)** Open-source web app to write and host documentation or sell books. Built with React, Material-UI, Next, Express, Mongoose, MongoDB

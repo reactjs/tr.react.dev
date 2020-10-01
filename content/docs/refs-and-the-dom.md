@@ -1,6 +1,7 @@
 ---
 id: refs-and-the-dom
 title: Ref'ler ve DOM
+permalink: docs/refs-and-the-dom.html
 redirect_from:
   - "docs/working-with-the-browser.html"
   - "docs/more-about-refs.html"
@@ -8,7 +9,6 @@ redirect_from:
   - "docs/more-about-refs-zh-CN.html"
   - "tips/expose-component-functions.html"
   - "tips/children-undefined.html"
-permalink: docs/refs-and-the-dom.html
 ---
 
 Ref'ler, render metodu içerisinde oluşturulan DOM düğümümlerine veya React elemanlarına erişmeyi sağlar. 
@@ -141,7 +141,7 @@ class CustomTextInput extends React.Component {
 
 #### Refler ve Fonksiyon Bileşenleri {#refs-and-function-components}
 
-**`ref` özelliğini fonksiyon bileşeni içerisinde kullanmazsınız** çünkü fonksiyon bileşenlerinin nesneleri olmaz.
+** Varsayılan olarak, `ref` özelliğini fonksiyon bileşenleri içerisinde kullanmazsınız**. Çünkü fonksiyon bileşenlerinin nesneleri olmaz.
 
 ```javascript{1,8,13}
 function MyFunctionComponent() {
@@ -162,14 +162,14 @@ class Parent extends React.Component {
 }
 ```
 
-Eğer bir ref'e ihtiyacınız varsa, bileşeni sınıfa dönüştürmelisiniz. Tıpkı yaşam döngüsü metodlarında veya state ihtiyacınız olduğunda yaptığınız gibi.
+Insanların fonksiyon bileşeniniz için `ref` kullanmalarına izin vermek isterseniz, [`forwardRef`](/docs/forwarding-refs.html) (muhtemelen [`useImperativeHandle`](/docs/hooks-reference.html#useimperativehandle) ile birlikte) kullanabilir, ya da bileşeninizi bir sınıfa çevirebilirsiniz.
 
 Bir DOM elemanına veya sınıf bileşenine işaret ettiğiniz sürece **fonksiyon bileşeni içerisinde `ref` kullanabilirsiniz**
 
 ```javascript{2,3,6,13}
 function CustomTextInput(props) {
-  //textInput'u burada tanımlanmalıdır. Böylelikle ref onu işaret edebilir
-  let textInput = React.createRef();
+  // textInput'u burada tanımlanmalıdır. Böylelikle ref onu işaret edebilir.
+  const textInput = useRef(null);
 
   function handleClick() {
     textInput.current.focus();

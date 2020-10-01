@@ -98,7 +98,7 @@ Aynı zamanda dosyanın adı ve satır numarasını da bileşen yığını izind
 
 <img src="../images/docs/error-boundaries-stack-trace-line-numbers.png" style="max-width:100%" alt="Error caught by Error Boundary component with line numbers">
 
-Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/babel-plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
+Eğer Create React App kullanmıyorsanız, [bu eklentiyi](https://www.npmjs.com/package/@babel/plugin-transform-react-jsx-source) Babel yapılandırmanıza elle ekleyebilirsiniz. Unutmayın ki bu sadece geliştirme içindir ve **canlıda devre dışı bırakılmalıdır**.
 
 > Not
 >
@@ -153,7 +153,7 @@ class MyComponent extends React.Component {
     if (this.state.error) {
       return <h1>Hata yakalandı.</h1>
     }
-    return <div onClick={this.handleClick}>Beni tıkla</div>
+    return <button onClick={this.handleClick}>Beni tıkla</button>
   }
 }
 ```

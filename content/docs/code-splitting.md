@@ -40,8 +40,8 @@ console.log(add(16, 26)); // 42
 >
 > Paketleriniz bundan çok daha farklı gözükecektir.
 
-Eğer [Create React App](https://github.com/facebookincubator/create-react-app),
-[Next.js](https://github.com/zeit/next.js/), [Gatsby](https://www.gatsbyjs.org/)
+Eğer [Create React App](https://create-react-app.dev/),
+[Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/)
 ya da benzeri bir araç kullanıyorsanız, uygulamanızı paketleyen bir Webpack
 kurulumuna sahip olursunuz.
 
@@ -56,7 +56,8 @@ büyük üçüncü parti kütüphaneleri dahil ediyorsanız. Paketinizin boyutun
 geciktirecek kadar büyük olmaması için paketinize dahil ettiğiniz kodlara
 göz kulak olmanız gerekir.
 
-Büyük paket boyutlarından kurtulmak için problemin üzerine gitmek ve paketinizi "bölümlemeye" başlamak iyi bir yöntemdir. [Kod Bölümleme](https://webpack.js.org/guides/code-splitting/), Webpack ve Browserify ([factor-bundle](https://github.com/browserify/factor-bundle) ile) gibi paketleyicilerin desteklediği, işleyiş süresince dinamik olarak yüklenen birden çok paket yaratmaya yarayan özelliktir.
+Büyük paket boyutlarından kurtulmak için problemin üzerine gitmek ve paketinizi "bölümlemeye" başlamak iyi bir yöntemdir.
+Kod-Bölümleme, [Webpack](https://webpack.js.org/guides/code-splitting/), [Rollup](https://rollupjs.org/guide/en/#code-splitting) ve Browserify ([factor-bundle](https://github.com/browserify/factor-bundle) ile) gibi paketleyicilerin desteklediği, işleyiş süresince dinamik olarak yüklenen birden çok paket yaratmaya yarayan özelliktir.
 
 Uygulamanıza kod bölümlemesi yapmak, kullanıcının anlık olarak ihtiyaç duyduğu şeylerin
 "lazy yüklenmesine" yardımcı olarak uygulama performansını önemli ölçüde
@@ -84,14 +85,9 @@ import("./math").then(math => {
 });
 ```
 
-> Not:
->
-> Dinamik `import()` sözdizimi ECMAScript (JavaScript) [önerisi](https://github.com/tc39/proposal-dynamic-import)
-> henüz dil standartlarının bir parçası değildir. Yakın gelecekte kabul edilmesi beklenmektedir.
-
 Webpack bu sözdizimine denk geldiğinde, uygulamanızda otomatik olarak kod bölümlemeye başlar. Eğer Create React App kullanıyorsanız,
 bu ayar sizin için halihazırda ayarlanmıştır ve [kullanmaya](https://facebook.github.io/create-react-app/docs/code-splitting) hemen
-başlayabilirsiniz. Aynı zamanda [Next.js](https://github.com/zeit/next.js/#dynamic-import)'de de desteklenmektedir.
+başlayabilirsiniz. Aynı zamanda [Next.js](https://nextjs.org/docs/advanced-features/dynamic-import)'de de desteklenmektedir.
 
 Eğer Webpack ayarlarını kendiniz yapıyorsanız, Webpack'in [kod bölümleme rehberini](https://webpack.js.org/guides/code-splitting/)
 okumayı tercih edebilirsiniz. Webpack ayarınız hayal meyal [buna benzeyecektir.](https://gist.github.com/gaearon/ca6e803f5c604d37468b0091d9959269)
@@ -104,8 +100,8 @@ fakat dönüştürmediğinden emin olmanız gerekmekte. Bunun için [babel-plugi
 > Not:
 >
 > `React.lazy` ve Suspense henüz server-side rendering için kullanılabilir değildir. Eğer server taraflı görüntülenen uygulamalar için
-> kod bölümleme yapmak isterseniz, [Loadable Components](https://github.com/smooth-code/loadable-components)'ı tavsiye ederiz. Çok iyi bir
-> [server-side rendering için paket bölümleme rehberi](https://github.com/smooth-code/loadable-components/blob/master/packages/server/README.md) var.
+> kod bölümleme yapmak isterseniz, [Loadable Components](https://github.com/gregberge/loadable-components)'ı tavsiye ederiz. Çok iyi bir
+> [server-side rendering için paket bölümleme rehberi](https://loadable-components.com/docs/server-side-rendering/) var.
 
 `React.lazy` fonksiyonu, dinamik import'u normal bir bileşen gibi render etmeye yarar.
 
@@ -131,6 +127,8 @@ Bu kod, bileşen ilk render edildiğinde `OtherComponent`'ı içeren paketi otom
 `MyComponent` render edildiğinde `OtherComponent`'ı içeren modül yüklenmediyse, yüklenmesini beklerken geçirdiğimiz süre içerisinde yükleme göstergesi gibi bir yedek içerik göstermeliyiz. Bu, `Suspense` bileşeniyle yapılır.
 
 ```js
+import React, { Suspense } from 'react';
+
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 function MyComponent() {
@@ -146,6 +144,8 @@ function MyComponent() {
 `fallback` prop'u, bileşenin yüklenmesini beklerken göstermek istediğiniz herhangi bir React elemanını kabul eder. `Suspense` bileşenini, lazy bileşeninin üstünde herhangi bir yere yerleştirebilirsiniz. Birden fazla lazy bileşenini tek bir `Suspense` bileşeni içerisine bile alabilirsiniz.
 
 ```js
+import React, { Suspense } from 'react';
+
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 const AnotherComponent = React.lazy(() => import('./AnotherComponent'));
 
@@ -168,7 +168,9 @@ function MyComponent() {
 Eğer diğer modül bir nedenden dolayı yüklenmezse (örneğin, ağ sorunu) hata fırlatacaktır. Güzel bir kullanıcı deneyimi sunmak ve kurtarmayı yönetmek için bu hataları [Hata Sınırları](/docs/error-boundaries.html) ile işleyebilirsiniz. Hata Sınırı oluşturduktan sonra, ağ sorunu olduğunda hata göstermek için Hata Sınırını lazy bileşenlerinizin üstünde herhangi bir yerde kullanabilirsiniz.
 
 ```js
+import React, { Suspense } from 'react';
 import MyErrorBoundary from './MyErrorBoundary';
+
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 const AnotherComponent = React.lazy(() => import('./AnotherComponent'));
 
@@ -195,8 +197,8 @@ Rotalar, başlamak için güzel yerlerdir. Webteki çoğu insan, yüklenmesi bir
 İşte [React Router](https://reacttraining.com/react-router/) gibi kütüphaneler kullanan uygulamalarda rota bazlı kod bölümlemenin `React.lazy` ile nasıl kurulabileceğine dair bir örnek.
 
 ```js
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Home = lazy(() => import('./routes/Home'));
 const About = lazy(() => import('./routes/About'));

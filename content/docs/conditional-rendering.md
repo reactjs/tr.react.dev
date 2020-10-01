@@ -7,9 +7,9 @@ next: lists-and-keys.html
 redirect_from:
   - "tips/false-in-jsx.html"
 ---
-React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, bileşenlerinizin yalnızca  bazılarını render edebilirsiniz.
+React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, bileşenlerinizin yalnızca bazılarını render edebilirsiniz.
 
-React'te, koşullu renderlama aynı Javascript'te olduğu gibi çalışır. Javascript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen  renderlama imkanı sunar. Ve React, arayüzde uygun bileşeni render eder.
+React'te, koşullu renderlama aynı JavaScript'te olduğu gibi çalışır. JavaScript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen renderlama imkânı sunar. Ve React, arayüzde uygun bileşeni render eder.
 
 Bu iki bileşeni dikkate alalım:
 
@@ -23,7 +23,7 @@ function GuestGreeting(props) {
 }
 ```
 
-`Greeting` adında bir bileşen daha oluşturuyoruz. Bu bileşen, kullanıcının giriş yapma durumuna göre yukarıda yazdığımız bileşenleri gösterecek. 
+`Greeting` adında bir bileşen daha oluşturuyoruz. Bu bileşen, kullanıcının giriş yapma durumuna göre yukarıda yazdığımız bileşenleri gösterecek.
 
 ```javascript{3-7,11,12}
 function Greeting(props) {
@@ -47,9 +47,9 @@ Bu örnek uygulama, `isLoggedIn` değerine göre farklı bir karşılama yapacak
 
 ### Eleman Değişkenleri {#element-variables}
 
-HTML elemanlarını saklamak için değişkenleri kullanabilirsiniz. Bu size, bileşen yaratırken, bileşenin bir bölümünü koşullu hale getirmenize yardım eder. 
+HTML elemanlarını saklamak için değişkenleri kullanabilirsiniz. Bu size, bileşen yaratırken, bileşenin bir bölümünü koşullu hale getirmenize yardım eder.
 
-Aşağıdaki iki yeni bileşenin `Giriş` ve `Çıkış` butonlarını temsil ettiğini varsayalım: 
+Aşağıdaki iki yeni bileşenin `Giriş` ve `Çıkış` butonlarını temsil ettiğini varsayalım:
 
 ```js
 function LoginButton(props) {
@@ -68,9 +68,9 @@ function LogoutButton(props) {
   );
 }
 ```
-Bu örnek bloğunda, `LoginControl`ü  [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
+Bu örnek bloğunda, `LoginControl`ü [stateful component](/docs/state-and-lifecycle.html#adding-local-state-to-a-class) yardımıyla oluşturacağız.
 
-`LoginControl`, o anki durumuna göre `<LoginButton />` ya da `<LogoutButton />` bileşenlerininden birini render edecek. Ayrıca, önceki örnekteki `<Greeting />` bileşenini de render edecek.
+`LoginControl`, o anki durumuna göre `<LoginButton />` ya da `<LogoutButton />` bileşenlerinden birini render edecek. Ayrıca, önceki örnekteki `<Greeting />` bileşenini de render edecek.
 
 ```javascript{20-25,29,30}
 class LoginControl extends React.Component {
@@ -116,11 +116,11 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
 
-Bir değişken tanımlamak ve `if` ifadesini kullanmak, bir bileşeni koşullu olarak render etmek için iyi bir yol olsa da, bazen daha kısa bir sözdizimi kullanmak isteyebilirsiniz. JSX'te satir içi koşullama yapmanın, aşağıda açıklanan, birkaç yolu vardır.
+Bir değişken tanımlamak ve `if` ifadesini kullanmak, bir bileşeni koşullu olarak render etmek için iyi bir yol olsa da, bazen daha kısa bir sözdizimi kullanmak isteyebilirsiniz. JSX'te satır içi koşullama yapmanın, aşağıda açıklanmış birkaç yolu vardır.
 
 ### Mantıksal && Operatörü ile Tek Satırda if {#inline-if-with-logical--operator}
 
-Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz.](/docs/introducing-jsx.html#embedding-expressions-in-jsx) Buna Javascript'teki mantıksal `&&` operatörü de dahildir. Bu bileşenin içinde koşul vermek için kullanışlı olabilir:
+Süslü parantez kullanarak istediğiniz ifadeyi [JSX içine gömebilirsiniz](/docs/introducing-jsx.html#embedding-expressions-in-jsx). Buna JavaScript'teki mantıksal `&&` operatörü de dâhildir. Bu bileşenin içinde koşul vermek için kullanışlı olabilir:
 
 ```js{6-10}
 function Mailbox(props) {
@@ -146,15 +146,15 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
 
-Bu kod Javascript'te çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır fakat `false && expression` her zaman `false` döndürür.
+Bu kod JavaScript'te çalışır çünkü `true && expression` her zaman `expression` kısmını çalıştırır, fakat `false && expression` her zaman `false` döndürür.
 
-Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip, atlayacaktir.
+Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip atlayacaktır.
 
 ### Koşul Operatörü ile Tek Satırda if-else {#inline-if-else-with-conditional-operator}
 
-Koşullu renderlama için farklı bir yöntem ise Javascript koşul operatörünü [`condition ? true : false`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) kullanmaktır.
+Koşullu renderlama için farklı bir yöntem ise JavaScript koşul operatörünü [`condition ? true : false`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) kullanmaktır.
 
-Bu örnekte, yazının yalnızca bir kısmını koşullayacağız
+Bu örnekte, yazının yalnızca bir kısmını koşullayacağız.
 
 ```javascript{5}
 render() {
@@ -167,28 +167,27 @@ render() {
 }
 ```
 
-Her ne kadar neler olduğu daha az belirgin olsa da, daha büyük ifadeler için de kullanılabilir:
+Her ne kadar neler olduğu daha az belirgin olsa da daha büyük ifadeler için de kullanılabilir:
 
 ```js{5,7,9}
 render() {
   const isLoggedIn = this.state.isLoggedIn;
   return (
     <div>
-      {isLoggedIn ? (
-        <LogoutButton onClick={this.handleLogoutClick} />
-      ) : (
-        <LoginButton onClick={this.handleLoginClick} />
-      )}
+      {isLoggedIn
+        ? <LogoutButton onClick={this.handleLogoutClick} />
+        : <LoginButton onClick={this.handleLoginClick} />
+      }
     </div>
   );
 }
 ```
 
-Javascript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu, size ve sizin takımınıza kalmıştır. Bu arada, ne zaman koşullandırma çok karmaşık bir hal almaya başlarsa [bir bileşen çıkarmanın](/docs/components-and-props.html#extracting-components) zamanı gelmiştir.
+JavaScript'te olduğu gibi, hangisinin daha iyi bir yaklaşım olduğu size ve sizin takımınıza kalmıştır. Bu arada, ne zaman koşullandırma çok karmaşık bir hal almaya başlarsa [bir bileşen çıkarmanın](/docs/components-and-props.html#extracting-components) zamanı gelmiştir.
 
 ### Bileşenin Render Edilmesini Engellemek {#preventing-component-from-rendering}
 
-Nadir durumlarda, render edilmiş bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` return edin.
+Nadir durumlarda, render edilmiş bir bileşenin kendisini gizlemesini isteyebilirsiniz. Böyle durumlarda `null` döndürün.
 
 Bu örnekte `WarningBanner` bileşeni, `warn` prop'una göre kendini render edecektir. Eğer bu özellik `false` olursa, bileşen render edilmeyecektir.
 
@@ -238,4 +237,4 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 
-Bir bileşenin, `render` metodundan `null` döndürmesi yaşam döngüsü metotlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecektir.
+Bir bileşenin `render` metodundan `null` döndürmesi yaşam döngüsü metotlarının çalışmasını engellemez. Örneğin `componentDidUpdate` gerektiği zaman çalışmaya devam edecektir.

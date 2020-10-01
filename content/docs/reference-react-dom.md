@@ -37,7 +37,7 @@ React, Internet Explorer 9 ve üzeri de dahil olmak üzere, tüm popüler taray�
 ReactDOM.render(element, container[, callback])
 ```
 
-Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir [referans](/docs/more-about-refs.html) dönüyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#functional-and-class-components) icin `null` dönüyoruz).
+Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir [referans](/docs/more-about-refs.html) dönüyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#function-and-class-components) icin `null` dönüyoruz).
 
 
 Eğer React elemanı `container` a daha önceden render edildiyse, bu; güncelleme olarak gerçekleşir ve en güncel React elemanını yansıtmak için sadece DOM'u değiştirir.
@@ -46,7 +46,7 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 
 > Not:
 >
-> `ReactDOM.render()` ilettiğiniz konteyner elemanının içeriğini kontrol eder. İlk çağrıldığında, içerisindeki bütün DOM elemanları değiştirilir. Daha sonra yapılan çağrılar, etkili güncellemeler için React'in DOM farklılaştırma algoritmasını kullanır.
+> `ReactDOM.render()` ilettiğiniz konteyner elemanının içeriğini kontrol eder. İlk çağrıldığında, içerisindeki bütün DOM elemanları değiştirilir. Daha sonra yapılan çağrılar, etkili güncellemeler için React'in DOM fark bulma algoritmasını kullanır.
 >
 > `ReactDOM.render()`, konteyner elemanını değiştirmez (yalnızca konteynerın alt elemanlarını değiştirir). Mevcut alt elemanların üzerine yazmadan varolan bir DOM elemanına, bileşen eklemek mümkün olabilir.
 >

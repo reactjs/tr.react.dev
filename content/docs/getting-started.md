@@ -36,17 +36,17 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **i
 
 ### Çevrimiçi Vakit Geçirme Alanları {#online-playgrounds}
 
-React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. Bir Merhaba Dünya şablonu deneyin [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), veya [Glitch](https://glitch.com/edit/#!/remix/starter-react-template).
+React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), [Glitch](https://glitch.com/edit/#!/remix/starter-react-template) veya [Stackblitz](https://stackblitz.com/fork/react) seçeneklerinden birisiyle bir Merhaba Dünya şablonu deneyin.
 
 Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
 ### Bir Web Sitesine React Ekleyin {#add-react-to-a-website}
 
-[Bir dakika içinde bir HTML sayfasına React ekleyebilirsiniz](/docs/add-react-to-a-website.html). Daha sonra içeriğini aşamalı olarak genişletebilir veya birkaç dinamik araca dahil edebilirsiniz.
+[Bir dakika içinde bir HTML sayfasına React ekleyebilirsiniz](/docs/add-react-to-a-website.html). Daha sonra içeriğini aşamalı olarak genişletebilir veya birkaç dinamik araca dâhil edebilirsiniz.
 
 ### Yeni bir React Uygulaması Oluşturun {#create-a-new-react-app}
 
-Bir React projesi başlatırken, [script etiketli basit bir HTML sayfası](/docs/add-react-to-a-website.html) hala en iyi seçenek olabilir. Kurulumu sadece bir dakika sürer!
+Bir React projesi başlatırken, [script etiketleri olan basit bir HTML sayfası](/docs/add-react-to-a-website.html), hâlâ en iyi seçenek olabilir. Kurulumu sadece bir dakika sürer!
 
 Uygulamanız büyüdükçe, daha entegre bir kurulum düşünebilirsiniz. Daha büyük uygulamalar için önerdiğimiz [birkaç JavaScript araç-zinciri](/docs/create-a-new-react-app.html) vardır. Her biri çok az veya sıfır yapılandırma ile çalışabilir ve zengin React ekosisteminden tam olarak yararlanmanızı sağlar.
 
@@ -84,7 +84,7 @@ Seviyenizi kontrol etmek için [JavaScript'e genel bakış](https://developer.mo
 
 ### Pratik Öğretici {#practical-tutorial}
 
-**Yaparak öğrenmeyi** tercih ediyorsanız [pratik öğretici](/tutorial/tutorial.html)mize göz atın. Bu derste, React ile bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için bu kısmı atlamak isteyebilirsiniz - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın ileri seviyesi size daha derin bir anlayış verecektir.
+**Yaparak öğrenmeyi** tercih ediyorsanız [pratik öğreticimize](/tutorial/tutorial.html) göz atın. Bu derste, React ile bir Tic Tac Toe oyunu inşa ediyoruz. Oyun inşa etmediğiniz için bu kısmı atlamak isteyebilirsiniz - ama bir şans verin. Derste öğreneceğiniz teknikler herhangi bir React uygulaması oluşturmak için temeldir ve uygulamanın ileri seviyesi size daha derin bir anlayış verecektir.
 
 ### Adım adım rehber {#step-by-step-guide}
 
@@ -92,14 +92,13 @@ Seviyenizi kontrol etmek için [JavaScript'e genel bakış](https://developer.mo
 
 ### React'te Düşünmek {#thinking-in-react}
 
-Pek çok React kullanıcısı [React'te Düşünmek](/docs/thinking-in-react.html) bolümünü nihayet “kafama dank etti” anı olarak belirtir. Muhtemelen React'in en eski 'oyun nasıl bitirilir rehberi' ama hala aynı derecede alakalı.
+Pek çok React kullanıcısı [React'te Düşünmek](/docs/thinking-in-react.html) bölümünü nihayet “kafama dank etti” anı olarak belirtir. Muhtemelen React'in en eski 'oyun nasıl bitirilir rehberi' ama hala aynı derecede alakalı.
 
 ### Önerilen Kurslar {#recommended-courses}
 
 Bazen insanlar üçüncü şahıs kitapları ve video kurslarını resmi anlatımlara göre daha yararlı bulurlar. Bazıları ücretsiz olan, [sıkça tavsiye edilen kaynakların bir listesini](/community/courses.html) sunuyoruz.
 
 ### Gelişmiş Kavramlar {#advanced-concepts}
-
 
 [Ana kavramlarda](#main-concepts) bilgi sahibi olup biraz React ile oynadığınızda, daha ileri konulara ilgi duyabilirsiniz. Bu bölüm size [context](/docs/context.html) ve [ref'ler](/docs/refs-and-the-dom.html) gibi güçlü fakat daha az kullanılan React özelliklerini tanıtacaktır...
 
@@ -109,15 +108,15 @@ Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek iste
 
 ### Terimler sözlüğü ve SSS {#glossary-and-faq}
 
-[Terimler sözlüğü](/docs/glossary.html) React anlatımlarında göreceğiniz en yaygın terimlerin bir özetini içerir. [AJAX isteği yapma](/docs/faq-ajax.html), [bileşen durumu](/docs/faq-state.html), and [dosya yapısı](/docs/faq-structure.html) dahil olmak üzere ortak konular hakkında kısa soru ve cevaplara ayrılmış bir SSS bölümü de bulunmaktadır.
+[Terimler sözlüğü](/docs/glossary.html) React anlatımlarında göreceğiniz en yaygın terimlerin bir özetini içerir. [AJAX isteği yapma](/docs/faq-ajax.html), [bileşen durumu](/docs/faq-state.html), ve [dosya yapısı](/docs/faq-structure.html) dâhil olmak üzere ortak konular hakkında kısa soru ve cevaplara ayrılmış bir SSS bölümü de bulunmaktadır.
 
 ## Haberdar olun {#staying-informed}
 
-[React blog](/blog/) React ekibinden yapılan güncellemelerin resmi kaynağıdır. Sürüm notları veya itiraz bildirimleri dahil olmak üzere, önemli olan her şey önce buraya gönderilecektir.
+[React blog](/blog/), React ekibinden yapılan güncellemelerin resmi kaynağıdır. Sürüm notları veya itiraz bildirimleri dâhil olmak üzere, önemli olan her şey önce buraya gönderilecektir.
 
 Twitter'da [@reactjs hesabını](https://twitter.com/reactjs) da takip edebilirsiniz, ama sadece blogu okursanız önemli hiç bir şeyi kaçırmazsınız.
 
-Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react) sayfasında bulabilirsiniz.
+Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react/releases) sayfasında bulabilirsiniz.
 
 ## Versiyon Anlatımı {#versioned-documentation}
 

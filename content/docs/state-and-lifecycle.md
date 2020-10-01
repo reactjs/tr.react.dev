@@ -8,9 +8,9 @@ prev: components-and-props.html
 next: handling-events.html
 ---
 
-Bu sayfada, state kavramı ve React bileşlerinin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
+Bu sayfada, state kavramı ve React bileşenlerinin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
 
-[Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alacağız. Hatırlayacağınız gibi, [elemetlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `ReactDOM.render()` metodu ile geçekleştirebiliyorduk:
+[Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alacağız. Hatırlayacağınız gibi, [Elementlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `ReactDOM.render()` metodu ile geçekleştirebiliyorduk:
 
 ```js{8-11}
 function tick() {
@@ -31,7 +31,7 @@ setInterval(tick, 1000);
 
 [**CodePen'de deneyin**](http://codepen.io/gaearon/pen/gwoJZk?editors=0010)
 
-Bu bölümde ise, `Clock` bileşenini nasıl sarmalayacağımıza ve tekrar kullanılabilir hale getireceğimize değineceğiz. Bu bileşen, kendi zamanlayıcısını başlatacak ve her saniye kendisini güncelleyecek. 
+Bu bölümde ise, `Clock` bileşenini nasıl sarmalayacağımıza ve tekrar kullanılabilir hale getireceğimize değineceğiz. Bu bileşen, kendi zamanlayıcısını başlatacak ve her saniye kendisini güncelleyecek.
 
 Öncelikle Clock'u, ayrı bir bileşen halinde sarmalayarak görüntüleyelim:
 
@@ -57,7 +57,7 @@ setInterval(tick, 1000);
 
 [**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/dpdoYR?editors=0010)
 
-Güzel görünüyor ancak bu aşamada kritik bir gereksinimi atladık: `Clock`'un kendi zamanlayıcısını ayarlaması, ve her saniye kullanıcı arayüzünü güncellemesi işini kendi bünyesinde gerçekleştirmesi gerekiyordu.
+Güzel görünüyor ancak bu aşamada kritik bir gereksinimi atladık: `Clock`'un kendi zamanlayıcısını ayarlaması ve her saniye kullanıcı arayüzünü güncellemesi işini kendi bünyesinde gerçekleştirmesi gerekiyordu.
 
 Aşağıdaki kodu bir kere yazdığımızda, `Clock`'un artık kendi kendisini güncellemesini istiyoruz:
 
@@ -320,9 +320,9 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 `setState()` hakkında bilmeniz gereken 3 şey bulunmaktadır.
 
-### State'i Direkt Olarak Değiştirmeyiniz {#do-not-modify-state-directly}
+### State'i Doğrudan Değiştirmeyiniz {#do-not-modify-state-directly}
 
-Aşağıdaki kod, bileşenin yeniden render edilmesini **gerçekleştirmez**:
+Örneğin, aşağıdaki kod bileşeni yeniden render **etmeyecektir**:
 
 ```js
 // Yanlış kullanım
@@ -416,12 +416,6 @@ Ne üst ne de alt bileşenler, belirli bir bileşenin state'li veya state'siz ol
 Bu nedenle state'e, **yerel state** denir. State, kendisine sahip olan ve kendisini ayarlayan bileşen haricinde hiçbir bileşen için erişilebilir değildir.
 
 Bir bileşen kendi state'ini, prop'lar aracılığıyla alt bileşenlere aktarabilir:
-
-```js
-<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-```
-
-Kullanıcı tanımlı bileşenler için de bu durum geçerlidir:
 
 ```js
 <FormattedDate date={this.state.date} />

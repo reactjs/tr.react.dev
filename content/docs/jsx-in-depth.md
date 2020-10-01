@@ -1,6 +1,6 @@
 ---
 id: jsx-in-depth
-title: JSX In Depth
+title: Derinlemesine JSX
 permalink: docs/jsx-in-depth.html
 redirect_from:
   - "docs/jsx-spread.html"
@@ -13,7 +13,7 @@ redirect_from:
   - "docs/jsx-in-depth-ko-KR.html"
 ---
 
-Fundamentally, JSX just provides syntactic sugar for the `React.createElement(component, props, ...children)` function. The JSX code:
+Temel olarak, JSX `React.createElement(component, props, ...children)` fonksiyonu için sözdizimsel bir kısayol sağlar. JSX, aşağıdaki kodu:
 
 ```js
 <MyButton color="blue" shadowSize={2}>
@@ -21,7 +21,7 @@ Fundamentally, JSX just provides syntactic sugar for the `React.createElement(co
 </MyButton>
 ```
 
-compiles into:
+şuna derler:
 
 ```js
 React.createElement(
@@ -31,35 +31,34 @@ React.createElement(
 )
 ```
 
-You can also use the self-closing form of the tag if there are no children. So:
+Eğer alt eleman yoksa, etiketin (tag) kendiliğinden kapanan formunu da kullanabilirsiniz. Yani:
 
 ```js
 <div className="sidebar" />
 ```
 
-compiles into:
+şuna derlenir:
 
 ```js
 React.createElement(
   'div',
-  {className: 'sidebar'},
-  null
+  {className: 'sidebar'}
 )
 ```
 
-If you want to test out how some specific JSX is converted into JavaScript, you can try out [the online Babel compiler](babel://jsx-simple-example).
+Belirli bir JSX'in JavaScript'e nasıl dönüştürüldüğünü test etmek istiyorsanız, [çevrimiçi Babil derleyicisi](babel://jsx-simple-example)'ni deneyebilirsiniz.
 
-## Specifying The React Element Type {#specifying-the-react-element-type}
+## React Elemanı Tipini Belirtme {#specifying-the-react-element-type}
 
-The first part of a JSX tag determines the type of the React element.
+JSX etiketinin ilk kısmı, React elemanının tipini belirtir.
 
-Capitalized types indicate that the JSX tag is referring to a React component. These tags get compiled into a direct reference to the named variable, so if you use the JSX `<Foo />` expression, `Foo` must be in scope.
+Büyük harfle başlayan tipler, JSX etiketinin bir React bileşenine başvurduğunu belirtir. Bu etiketler, isimlendirilmiş değişkene doğrudan bir referans olarak derlenir, yani JSX `<Foo />` ifadesini kullanırsanız, `Foo` kapsam dahilinde olmalıdır.
 
-### React Must Be in Scope {#react-must-be-in-scope}
+### React Kapsam Dahilinde Olmalı {#react-must-be-in-scope}
 
-Since JSX compiles into calls to `React.createElement`, the `React` library must also always be in scope from your JSX code.
+JSX, `React.createElement` çağrısına derlediğinden, `React` kütüphanesi her zaman JSX kodunuzun kapsamında olmalıdır.
 
-For example, both of the imports are necessary in this code, even though `React` and `CustomButton` are not directly referenced from JavaScript:
+Örneğin, `React` ve `CustomButton` öğeleri doğrudan JavaScript'te kullanılmasa da, her ikisi için de içe aktarma bu kodda gereklidir:
 
 ```js{1,2,5}
 import React from 'react';
@@ -71,11 +70,11 @@ function WarningButton() {
 }
 ```
 
-If you don't use a JavaScript bundler and loaded React from a `<script>` tag, it is already in scope as the `React` global.
+Bir JavaScript paketleyici kullanmıyor ve React'ı bir `<script>` etiketinden yüklüyorsanız, `React` global olarak zaten kapsam dahilindedir.
 
-### Using Dot Notation for JSX Type {#using-dot-notation-for-jsx-type}
+### JSX Tipi için Nokta Gösterimini Kullanma {#using-dot-notation-for-jsx-type}
 
-You can also refer to a React component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if `MyComponents.DatePicker` is a component, you can use it directly from JSX with:
+JSX içinden nokta gösterimini kullanarak da bir React bileşenine başvurabilirsiniz. Bu, birçok React bileşenini dışa aktaran tek bir modülünüz varsa kullanışlıdır. Örneğin, `MyComponents.DatePicker` bir bileşense, bunu doğrudan JSX'te aşağıdaki şekilde kullanabilirsiniz:
 
 ```js{10}
 import React from 'react';
@@ -91,49 +90,49 @@ function BlueDatePicker() {
 }
 ```
 
-### User-Defined Components Must Be Capitalized {#user-defined-components-must-be-capitalized}
+### Kullanıcı Tanımlı Bileşenler Büyük Harfle Başlamalıdır {#user-defined-components-must-be-capitalized}
 
-When an element type starts with a lowercase letter, it refers to a built-in component like `<div>` or `<span>` and results in a string `'div'` or `'span'` passed to `React.createElement`. Types that start with a capital letter like `<Foo />` compile to `React.createElement(Foo)` and correspond to a component defined or imported in your JavaScript file.
+Bir elemanın tipi küçük harfle başladığında, `<div>` veya `<span>` gibi dahili bir bileşene atıfta bulunur ve bunun sonucu `React.createElement` fonksiyonuna `'div'` veya `'span'` stringlerinin aktarılmasıdır. `<Foo />` gibi büyük harfle başlayan tipler `React.createElement(Foo)` şeklinde derlenir ve JavaScript dosyanızda tanımlanan veya içe aktarılan bir bileşene karşılık gelir.
 
-We recommend naming components with a capital letter. If you do have a component that starts with a lowercase letter, assign it to a capitalized variable before using it in JSX.
+Bileşenleri, büyük harfle başlayan bir şekilde adlandırmanızı öneririz. Küçük harfle başlayan bir bileşeniniz varsa, bunu JSX'te kullanmadan önce büyük harfle başlayan bir değişkene atayın.
 
-For example, this code will not run as expected:
+Örneğin, bu kod beklendiği gibi çalışmaz:
 
 ```js{3,4,10,11}
 import React from 'react';
 
-// Wrong! This is a component and should have been capitalized:
+// Yanlış! Bu bir bileşendir ve ismi büyük bir harfle başlamalıdır:
 function hello(props) {
-  // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+  // Doğru! div geçerli bir HTML etiketi olduğundan <div> 'in bu kullanımı uygundur:
   return <div>Hello {props.toWhat}</div>;
 }
 
 function HelloWorld() {
-  // Wrong! React thinks <hello /> is an HTML tag because it's not capitalized:
+  // Yanlış! React, büyük bir harfle başlamadığından <hello /> 'nun bir HTML etiketi olduğunu düşünüyor:
   return <hello toWhat="World" />;
 }
 ```
 
-To fix this, we will rename `hello` to `Hello` and use `<Hello />` when referring to it:
+Bunu düzeltmek için, `hello` fonksiyonunu `Hello` olarak yeniden adlandırıp `<Hello />` olarak kullanacağız:
 
 ```js{3,4,10,11}
 import React from 'react';
 
-// Correct! This is a component and should be capitalized:
+// Doğru! Bu bir bileşendir ve adı büyük harfle başlamalıdır:
 function Hello(props) {
-  // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+  // Doğru! div geçerli bir HTML etiketi olduğundan <div> 'in bu kullanımı uygundur:
   return <div>Hello {props.toWhat}</div>;
 }
 
 function HelloWorld() {
-  // Correct! React knows <Hello /> is a component because it's capitalized.
+  // Doğru! React, <Hello /> büyük bir harfle başladığı için bir bileşen olduğunu biliyor.
   return <Hello toWhat="World" />;
 }
 ```
 
-### Choosing the Type at Runtime {#choosing-the-type-at-runtime}
+### Tipi Çalışma Zamanında Seçme {#choosing-the-type-at-runtime}
 
-You cannot use a general expression as the React element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:
+Genel bir ifadeyi (expression) React elemanı tipi olarak kullanamazsınız. Elemanın tipini belirtmek için genel bir ifade kullanmak istiyorsanız, sadece öncesinde büyük harfle başlayan bir değişkene atayın. Bu genellikle, bir prop'a göre farklı bir bileşen render etmek istediğinizde ortaya çıkar:
 
 ```js{10,11}
 import React from 'react';
@@ -145,12 +144,12 @@ const components = {
 };
 
 function Story(props) {
-  // Wrong! JSX type can't be an expression.
+  // Yanlış! JSX tipi bir ifade olamaz.
   return <components[props.storyType] story={props.story} />;
 }
 ```
 
-To fix this, we will assign the type to a capitalized variable first:
+Bunu düzeltmek için, önce tipi büyük harfle başlayan bir değişkene atayacağız:
 
 ```js{10-12}
 import React from 'react';
@@ -162,27 +161,27 @@ const components = {
 };
 
 function Story(props) {
-  // Correct! JSX type can be a capitalized variable.
+  // Doğru! JSX tipi büyük harfli bir değişken olabilir.
   const SpecificStory = components[props.storyType];
   return <SpecificStory story={props.story} />;
 }
 ```
 
-## Props in JSX {#props-in-jsx}
+## JSX'de Prop'lar {#props-in-jsx}
 
-There are several different ways to specify props in JSX.
+JSX'te prop'ları belirtmenin birkaç farklı yolu vardır.
 
-### JavaScript Expressions as Props {#javascript-expressions-as-props}
+### Prop Olarak JavaScript İfadeleri {#javascript-expressions-as-props}
 
-You can pass any JavaScript expression as a prop, by surrounding it with `{}`. For example, in this JSX:
+Herhangi bir JavaScript ifadesini `{}` ile çevreleyerek bir prop olarak iletebilirsiniz. Örneğin, bu JSX'te:
 
 ```js
 <MyComponent foo={1 + 2 + 3 + 4} />
 ```
 
-For `MyComponent`, the value of `props.foo` will be `10` because the expression `1 + 2 + 3 + 4` gets evaluated.
+`MyComponent` için, `props.foo` değeri `10` olacaktır çünkü `1 + 2 + 3 + 4` ifadesi çalıştırılır.
 
-`if` statements and `for` loops are not expressions in JavaScript, so they can't be used in JSX directly. Instead, you can put these in the surrounding code. For example:
+`if` deyimleri ve` for` döngüleri JavaScript'te ifade değildir, bu nedenle doğrudan JSX'te kullanılamazlar. Onun yerine, bunları çevreleyen bir koda koyabilirsiniz. Örneğin:
 
 ```js{3-7}
 function NumberDescriber(props) {
@@ -196,11 +195,11 @@ function NumberDescriber(props) {
 }
 ```
 
-You can learn more about [conditional rendering](/docs/conditional-rendering.html) and [loops](/docs/lists-and-keys.html) in the corresponding sections.
+İlgili bölümlerde [koşullu render etme](/docs/conditional-rendering.html) ve [döngüler](/docs/lists-and-keys.html) hakkında daha fazla bilgi edinebilirsiniz.
 
-### String Literals {#string-literals}
+### String Değişmezleri {#string-literals}
 
-You can pass a string literal as a prop. These two JSX expressions are equivalent:
+Bir string değişmezini prop olarak geçirebilirsiniz. Bu iki JSX ifadesi eşdeğerdir:
 
 ```js
 <MyComponent message="hello world" />
@@ -208,7 +207,7 @@ You can pass a string literal as a prop. These two JSX expressions are equivalen
 <MyComponent message={'hello world'} />
 ```
 
-When you pass a string literal, its value is HTML-unescaped. So these two JSX expressions are equivalent:
+Bir string değişmezini ilettiğinizde, değeri HTML'den kaçmaz. Yani bu iki JSX ifadesi eşdeğerdir:
 
 ```js
 <MyComponent message="&lt;3" />
@@ -216,11 +215,11 @@ When you pass a string literal, its value is HTML-unescaped. So these two JSX ex
 <MyComponent message={'<3'} />
 ```
 
-This behavior is usually not relevant. It's only mentioned here for completeness.
+Bu davranış genellikle alakasızdır. Burada sadece bütünlük için bahsedilmiştir.
 
-### Props Default to "True" {#props-default-to-true}
+### Prop'ların Varsayılan Değeri "True" {#props-default-to-true}
 
-If you pass no value for a prop, it defaults to `true`. These two JSX expressions are equivalent:
+Eğer bir prop için herhangi bir değer iletmezseniz, değeri varsayılan olarak `true` olur. Bu iki JSX ifadesi eşdeğerdir:
 
 ```js
 <MyTextBox autocomplete />
@@ -228,24 +227,24 @@ If you pass no value for a prop, it defaults to `true`. These two JSX expression
 <MyTextBox autocomplete={true} />
 ```
 
-In general, we don't recommend using this because it can be confused with the [ES6 object shorthand](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015) `{foo}` which is short for `{foo: foo}` rather than `{foo: true}`. This behavior is just there so that it matches the behavior of HTML.
+Genel olarak, bir prop için değer *iletmemenizi* önermiyoruz, çünkü `{foo: true}` yerine `{foo: foo}` için [ES6 obje kısayolu](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015) olan `{foo}` ile karıştırılabilir. Bu davranış sadece, HTML davranışıyla eşleşmesi için oradadır.
 
-### Spread Attributes {#spread-attributes}
+### Özelliklerin Yayılması {#spread-attributes}
 
-If you already have `props` as an object, and you want to pass it in JSX, you can use `...` as a "spread" operator to pass the whole props object. These two components are equivalent:
+Zaten nesne olarak bir `prop'lar` objeniz varsa ve bunu JSX'e aktarmak istiyorsanız, tüm prop'ları geçrmek için "yayma" (spread) operatörü olan `...` 'yı kullanabilirsiniz. Bu iki bileşen eşdeğerdir:
 
 ```js{7}
 function App1() {
-  return <Greeting firstName="Ben" lastName="Hector" />;
+  return <Greeting firstName="Yunus Emre" lastName="Dilber" />;
 }
 
 function App2() {
-  const props = {firstName: 'Ben', lastName: 'Hector'};
+  const props = {firstName: 'Yunus Emre', lastName: 'Dilber'};
   return <Greeting {...props} />;
 }
 ```
 
-You can also pick specific props that your component will consume while passing all other props using the spread operator.
+Ayrıca, yayılma operatörünü kullanarak diğer tüm prop'ları geçerken, bileşeninizin kullanacağı özel prop'ları de seçebilirsiniz.
 
 ```js{2}
 const Button = props => {
@@ -265,30 +264,30 @@ const App = () => {
 };
 ```
 
-In the example above, the `kind` prop is safely consumed and *is not* passed on to the `<button>` element in the DOM.
-All other props are passed via the `...other` object making this component really flexible. You can see that it passes an `onClick` and `children` props.
+Yukarıdaki örnekte, `kind` prop'u güvenli bir şekilde kullanılır ve DOM'daki `<button>` elemanına *geçirilmez*.
+Diğer tüm prop'lar bu bileşeni esnek yapan `...other` nesnesi üzerinden geçirilir. `onClick` ve `children` prop'larının geçirildiğini görebilirsiniz.
 
-Spread attributes can be useful but they also make it easy to pass unnecessary props to components that don't care about them or to pass invalid HTML attributes to the DOM. We recommend using this syntax sparingly.  
+Özelliklerin yayılması yararlı olabilir ancak bunlar, onları umursamayan bileşenlere gereksiz prop'ların aktarılmasını veya geçersiz HTML özelliklerinin DOM'a aktarılmasını kolaylaştırır. Bu sözdizimini tedbirli kullanmanızı öneririz.
 
-## Children in JSX {#children-in-jsx}
+## JSX'de Alt Elemanlar {#children-in-jsx}
 
-In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: `props.children`. There are several different ways to pass children:
+Hem açılış hem de kapanış etiketi içeren JSX ifadelerinde, bu etiketler arasındaki içerik özel bir prop olarak geçirilir: `props.children`. Alt elemanları geçmenin birkaç farklı yolu vardır:
 
-### String Literals {#string-literals-1}
+### String Değişmezleri {#string-literals-1}
 
-You can put a string between the opening and closing tags and `props.children` will just be that string. This is useful for many of the built-in HTML elements. For example:
+Açılış ve kapanış etiketleri arasına bir string koyabilirsiniz ve `props.children` sadece bu string olacaktır. Bu, çoğu dahili HTML elemanı için kullanışlıdır. Örneğin:
 
 ```js
 <MyComponent>Hello world!</MyComponent>
 ```
 
-This is valid JSX, and `props.children` in `MyComponent` will simply be the string `"Hello world!"`. HTML is unescaped, so you can generally write JSX just like you would write HTML in this way:
+Bu geçerli bir JSX ve `MyComponent` içindeki `props.children` sadece `"Hello world!"` stringi olacaktır. HTML'den kaçılmadığı için, genellikle tıpkı HTML yazdığınız gibi JSX'i bu şekilde yazabilirsiniz:
 
 ```html
-<div>This is valid HTML &amp; JSX at the same time.</div>
+<div>Bu geçerli bir HTML &amp; Aynı zamanda JSX.</div>
 ```
 
-JSX removes whitespace at the beginning and ending of a line. It also removes blank lines. New lines adjacent to tags are removed; new lines that occur in the middle of string literals are condensed into a single space. So these all render to the same thing:
+JSX, bir satırın başındaki ve sonundaki boşlukları kaldırır. Ayrıca boş satırları da kaldırır. Etiketlere bitişik yeni satırlar kaldırılır; string değişmezlerinin ortasında oluşan yeni satırlar tek bir boşluğa dönüştürülür. Yani bunların hepsi aynı şeye render ediliyor:
 
 ```js
 <div>Hello World</div>
@@ -308,9 +307,9 @@ JSX removes whitespace at the beginning and ending of a line. It also removes bl
 </div>
 ```
 
-### JSX Children {#jsx-children}
+### JSX Alt Elemanları {#jsx-children}
 
-You can provide more JSX elements as the children. This is useful for displaying nested components:
+Alt eleman olarak daha fazla JSX elemanı sağlayabilirsiniz. Bu, iç içe geçmiş bileşenleri görüntülemek için kullanışlıdır:
 
 ```js
 <MyContainer>
@@ -319,7 +318,7 @@ You can provide more JSX elements as the children. This is useful for displaying
 </MyContainer>
 ```
 
-You can mix together different types of children, so you can use string literals together with JSX children. This is another way in which JSX is like HTML, so that this is both valid JSX and valid HTML:
+Farklı tiplerdeki alt elemanları birlikte kullanabilirsiniz, böylece string değişmezlerini JSX alt elemanlarıyla birlikte kullanabilirsiniz. Bu, JSX'in HTML'e benzemesinin başka bir yoludur; böylece bu, hem geçerli bir JSX hem de geçerli bir HTML'dir:
 
 ```html
 <div>
@@ -331,13 +330,13 @@ You can mix together different types of children, so you can use string literals
 </div>
 ```
 
-A React component can also return an array of elements:
+React bileşeni ayrıca bir dizi eleman döndürebilir:
 
 ```js
 render() {
-  // No need to wrap list items in an extra element!
+  // Liste öğelerini ekstra bir elemanla sarmanıza gerek yok!
   return [
-    // Don't forget the keys :)
+    // Key'leri unutmayın :)
     <li key="A">First item</li>,
     <li key="B">Second item</li>,
     <li key="C">Third item</li>,
@@ -345,9 +344,9 @@ render() {
 }
 ```
 
-### JavaScript Expressions as Children {#javascript-expressions-as-children}
+### Alt Eleman Olarak JavaScript İfadeleri {#javascript-expressions-as-children}
 
-You can pass any JavaScript expression as children, by enclosing it within `{}`. For example, these expressions are equivalent:
+Herhangi bir JavaScript ifadesini `{}` içine koyarak alt eleman olarak iletebilirsiniz. Örneğin, bu ifadeler eşdeğerdir:
 
 ```js
 <MyComponent>foo</MyComponent>
@@ -355,7 +354,7 @@ You can pass any JavaScript expression as children, by enclosing it within `{}`.
 <MyComponent>{'foo'}</MyComponent>
 ```
 
-This is often useful for rendering a list of JSX expressions of arbitrary length. For example, this renders an HTML list:
+Bu genellikle, keyfi uzunluktaki JSX ifadelerinin bir listesini render etmek için kullanışlıdır. Örneğin, bu bir HTML listesi render eder:
 
 ```js{2,9}
 function Item(props) {
@@ -372,7 +371,7 @@ function TodoList() {
 }
 ```
 
-JavaScript expressions can be mixed with other types of children. This is often useful in lieu of string templates:
+JavaScript ifadeleri diğer alt eleman tipleri ile birlikte kullanılabilir. Bu genellikle string şablonları yerine kullanışlıdır:
 
 ```js{2}
 function Hello(props) {
@@ -380,12 +379,12 @@ function Hello(props) {
 }
 ```
 
-### Functions as Children {#functions-as-children}
+### Alt Eleman Olarak Fonksiyonlar {#functions-as-children}
 
-Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, `props.children` works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as `props.children`:
+Normalde, JSX'e eklenen JavaScript ifadeleri bir string, bir React elemanı veya bu şeylerin bir listesi olarak değerlendirilir. Bununla birlikte, `props.children`, sadece React'ın nasıl render edeceğini bildiği türler değil, her türde veriyi aktarabilmesi için herhangi bir prop gibi çalışır. Örneğin, özel bir bileşeniniz varsa, bunun `props.children` olarak bir callback almasını sağlayabilirsiniz:
 
 ```js{4,13}
-// Calls the children callback numTimes to produce a repeated component
+// Tekrarlanan bir bileşen üretmek için alt eleman callback'ini numTimes kez çağırır
 function Repeat(props) {
   let items = [];
   for (let i = 0; i < props.numTimes; i++) {
@@ -403,11 +402,11 @@ function ListOfTenThings() {
 }
 ```
 
-Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.
+Özel bir bileşene geçirilen alt elemanlar, bu bileşen onları React'ın render etmeden önce anlayabileceği bir şeye dönüştürdüğü sürece herhangi bir şey olabilir. Bu kullanım yaygın değildir, ancak JSX'in neler yapabileceğini açmak istiyorsanız çalışacaktır.
 
-### Booleans, Null, and Undefined Are Ignored {#booleans-null-and-undefined-are-ignored}
+### Boolean'lar, Null ve Undefined Görmezden Gelinir {#booleans-null-and-undefined-are-ignored}
 
-`false`, `null`, `undefined`, and `true` are valid children. They simply don't render. These JSX expressions will all render to the same thing:
+`false`, `null`, `undefined` ve `true` geçerli alt elemanlardır. Sadece, render edilmezler. Bu JSX ifadelerinin tümü aynı şeye render edilir:
 
 ```js
 <div />
@@ -423,7 +422,7 @@ Children passed to a custom component can be anything, as long as that component
 <div>{true}</div>
 ```
 
-This can be useful to conditionally render React elements. This JSX renders the `<Header />` component only if `showHeader` is `true`:
+Bu, React elemanlarının koşullu olarak render etmek için yararlı olabilir. Bu JSX, `<Header />` bileşenini yalnızca `showHeader` `true` olduğunda render eder:
 
 ```js{2}
 <div>
@@ -432,7 +431,7 @@ This can be useful to conditionally render React elements. This JSX renders the 
 </div>
 ```
 
-One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), such as the `0` number, are still rendered by React. For example, this code will not behave as you might expect because `0` will be printed when `props.messages` is an empty array:
+Bir uyarı, `0` sayısı gibi bazı [“falsy” değerlerin](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) hala React tarafından görüntülenmesidir. Örneğin, bu kod beklediğiniz gibi davranmayacaktır çünkü `props.messages` boş bir dizi olduğunda `0` yazdırılacaktır:
 
 ```js{2}
 <div>
@@ -442,7 +441,7 @@ One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/doc
 </div>
 ```
 
-To fix this, make sure that the expression before `&&` is always boolean:
+Bunu düzeltmek için, `&&` öncesindeki ifadenin her zaman boolean olduğundan emin olun:
 
 ```js{2}
 <div>
@@ -452,7 +451,7 @@ To fix this, make sure that the expression before `&&` is always boolean:
 </div>
 ```
 
-Conversely, if you want a value like `false`, `true`, `null`, or `undefined` to appear in the output, you have to [convert it to a string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion) first:
+Aksine, çıktıda `false`, `true`, `null` veya `undefined` gibi bir değerin görünmesini istiyorsanız, önce [bir stringe dönüştürmeniz](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion) gerekir:
 
 ```js{2}
 <div>

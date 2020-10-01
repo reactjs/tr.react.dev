@@ -8,7 +8,7 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük farklılıklar bulunmaktadır: 
+React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük sözdizimi farklılıkları bulunmaktadır:
 
 * Olay isimleri, DOM'da lowercase iken, React'te camelCase olarak adlandırılır.
 * DOM'da fonksiyon isimleri, ilgili olaya string olarak atanırken, JSX'te direkt fonksiyon olarak atanır.
@@ -54,7 +54,7 @@ function ActionLink() {
 }
 ```
 
-Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şartnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
+Burada `e`, bir sentetik olaydır. React, bu sentetik olayları [W3C şartnamesine](https://www.w3.org/TR/DOM-Level-3-Events/) göre tanımlar. Bu sayede, tarayıcılar arası uyumsuzluk problemi oluşmaz. React olayları, doğal (native) olaylarla tam olarak aynı şekilde çalışmaz. Bu konuda daha fazla bilgi edinmek için [`Sentetik Olaylar`](/docs/events.html) rehberini inceleyebilirsiniz.
 
 React ile kod yazarken, bir DOM elementi oluşturulduktan sonra ona bir dinleyici (`listener`) atamak için, `addEventListener` fonksiyonunu çağırmanıza gerek yoktur. Bunun yerine `render` fonksiyonunda, ilgili element ilk kez render olduğunda ona bir dinleyici (`listener`) atamanız doğru olacaktır.
 
@@ -130,7 +130,7 @@ class LoggingButton extends React.Component {
   render() {
     // Bu yazım şekli, `this`'in handleClick içerisinde bağlanmasını sağlar.
     return (
-      <button onClick={(e) => this.handleClick(e)}>
+      <button onClick={() => this.handleClick()}>
         Click me
       </button>
     );
@@ -138,11 +138,11 @@ class LoggingButton extends React.Component {
 }
 ```
 
-Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için binding işleminin, ya sınıfın constructorın'da ya da class fields yöntemi ile yapılmasını öneririz.
+Fakat bu yöntemin bir dezavantajı vardır. `LoggingButton` bileşeni her render edildiğinde, yeni bir callback oluşturulur. Birçok durumda bu olay bir sorun teşkil etmez. Ancak ilgili callback, prop aracılığıyla alt bileşenlere aktarılırsa, bu bileşenler fazladan render edilebilir. Bu tarz problemlerle karşılaşmamak için binding işleminin, ya sınıfın constructor'ında ya da class fields yöntemi ile yapılmasını öneririz.
 
 ## Olay Yöneticilerine Parametre Gönderimi {#passing-arguments-to-event-handlers}
 
-Bir döngü içerisinde, olay fonksiyonuna fazladan parametre göndermek isteyebilirsiniz. Örneğin, bir satır `id`'si için, aşağıdaki kodlardan her ikisi de işinizi görecektir: 
+Bir döngü içerisinde, olay fonksiyonuna fazladan parametre göndermek isteyebilirsiniz. Örneğin, bir satır ID'si için `id` parametresi, aşağıdaki kodlardan her ikisi de işinizi görecektir:
 
 ```js
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
