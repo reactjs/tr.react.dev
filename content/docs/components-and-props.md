@@ -126,7 +126,7 @@ Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerir
 
 ## Bileşenlerin Çıkarılması {#extracting-components}
 
-Büyük bileşenleri, sade ve yönetilebilir olması açısından daha küçük bileşenlere bölebilirsiniz.
+Büyük bileşenleri, sade ve yönetilebilir olması adına daha küçük bileşenlere bölebilirsiniz.
 
 Örneğin aşağıdaki `Comment` bileşenini ele alalım:
 

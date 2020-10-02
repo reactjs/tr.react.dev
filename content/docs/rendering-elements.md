@@ -16,11 +16,11 @@ Bir element, ekranda neyi görmek istiyorsanız onu tasvir eder:
 const element = <h1>Hello, world</h1>;
 ```
 
-Tarayıcının DOM elementlerinin aksine, React elementleri daha sade nesnelerdir ve oluşturulmaları daha kolaydır. Çünkü React DOM, elementler ile eşleşmek için DOM'ın güncellenmesi işini kendisi halleder.
+Tarayıcının DOM elementlerinin aksine, React elementleri daha sade nesnelerdir ve oluşturulmaları daha kolaydır; çünkü React DOM, elementler ile eşleşmek için DOM'ın güncellenmesi işini kendisi halleder.
 
 >**Not:**
 >
->"Bileşen" (component) konsepti daha yaygın olarak bilindiği için, anlam bakımından elementler ile karıştırılabilir. [Sonraki bölümde](/docs/components-and-props.html) React bileşenlerine de değineceğiz. Fakat elementler, React bileşenlerinin en küçük yapıtaşlarıdır. Bu nedenle sonraki bölüme atlamadan önce bu bölümü okumanızı tavsiye ederiz.
+>"Bileşen" (component) konsepti daha yaygın olarak bilindiği için, anlam bakımından elementler ile karıştırılabilir. [Sonraki bölümde](/docs/components-and-props.html) React bileşenlerine de değineceğiz. Fakat elementler, React bileşenlerinin en küçük yapı taşlarıdır. Bu nedenle sonraki bölüme atlamadan önce bu bölümü okumanızı tavsiye ederiz.
 
 ## Bir Elementin DOM'a Render Edilmesi {#rendering-an-element-into-the-dom}
 
@@ -30,7 +30,7 @@ HTML dosyanızın herhangi bir yerinde `<div>` olduğunu düşünelim:
 <div id="root"></div>
 ```
 
-Buna "root" (kök) düğüm denir. Çünkü içerisindeki her şey React DOM tarafından yönetilir.
+Buna "root" (kök) düğüm denir; çünkü içerisindeki her şey React DOM tarafından yönetilir.
 
 Genellikle React ile yazılan uygulamalar, sadece bir adet kök DOM düğümü içerirler. Eğer React'i mevcut uygulamanıza entegre ediyorsanız, birbirinden izole olacak şekilde dilediğiniz kadar kök DOM düğümüne sahip olabilirsiniz.
 
@@ -60,7 +60,7 @@ Aşağıdaki saat örneğini ele alalım:
 >
 >Genelde birçok React uygulamasında [`ReactDOM.render()`](/docs/react-dom.html#render) yalnızca bir kez çağrılır. Sonraki bölümlerde bu tarz kodların nasıl [state'li bileşenlere](/docs/state-and-lifecycle.html) dönüştürüleceğine değineceğiz.
 >
->Her bir konu diğeri için zemin hazırladığından dolayı, bu konuları atlamamanızı öneririz.
+>Her bir konu diğeri için zemin hazırladığından, bu konuları atlamamanızı öneririz. 
 
 ## React Yalnızca Gerekli Kısımları Günceller {#react-only-updates-whats-necessary}
 

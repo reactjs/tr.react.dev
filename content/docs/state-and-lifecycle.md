@@ -105,7 +105,7 @@ class Clock extends React.Component {
 
 Önceden fonksiyon bileşeni olan `Clock`, artık bir sınıf bileşeni haline gelmiş oldu.
 
-Bu kodda `render` metodumuz, her güncelleme olduğunda yeniden çağrılacaktır. Fakat `<Clock />` bileşenini aynı DOM düğümünde render ettiğimizden dolayı, `Clock` sınıfının yalnızca bir örneği kullanılacaktır.
+Bu kodda `render` metodumuz, her güncelleme olduğunda yeniden çağrılacaktır. Fakat `<Clock />` bileşenini aynı DOM düğümünde render ettiğimizden, `Clock` sınıfının yalnızca bir örneği kullanılacaktır.
 
 ## Bir Sınıfa Yerel State'in Eklenmesi {#adding-local-state-to-a-class}
 
@@ -231,7 +231,7 @@ class Clock extends React.Component {
 }
 ```
 
-Bu metodlara "lifecycle methods" (yaşam döngüsü metodları) adı verilir.
+Bu metotlara "lifecycle methods" (yaşam döngüsü metotları) adı verilir.
 
 Bileşenin çıktısı, DOM'a render edildikten sonra `componentDidMount()` metodu çalıştırılır. Burası aynı zamanda bir zamanlayıcı oluşturmak için en elverişli yerdir:
 
@@ -246,7 +246,7 @@ Bileşenin çıktısı, DOM'a render edildikten sonra `componentDidMount()` meto
 
 `this`'e (`this.timerID`) zamanlayıcı ID'sini nasıl atadığımızı inceleyebilirsiniz.
 
-Daha önce de belirttiğimiz gibi, `this.props` React tarafından yönetiliyor, ve `this.state`'in de özel bir yaşam döngüsü var. Eğer `timerID` gibi veri akışına dâhil olmayan değişkenleri saklamanız gerekiyorsa, bu örnekte yaptığımız gibi sınıf içerisinde değişkenler tanımlayabilirsiniz.
+Daha önce de belirttiğimiz gibi, `this.props` React tarafından yönetiliyor ve `this.state`'in de özel bir yaşam döngüsü var. Eğer `timerID` gibi veri akışına dahil olmayan değişkenleri saklamanız gerekiyorsa, bu örnekte yaptığımız gibi sınıf içerisinde değişkenler tanımlayabilirsiniz.
 
 Oluşturduğumuz zamanlayıcıyı `componentWillUnmount()` yaşam döngüsü metodu içerisinde `Clock` bileşeninden söküp çıkaralım:
 
@@ -306,13 +306,13 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 Şimdi kısa bir özet geçerek neler yaptığımızı ve sırasıyla hangi metotların çağrıldığını kontrol edelim:
 
-1) `ReactDOM.render()` metoduna `<Clock />` aktarıldığı zaman React, `Clock` bileşeninin constructor'ını çağırır. `Clock` bileşeni, mevcut saati görüntülemesi gerektiğinden dolayı, `this.state`'e o anki zamanı atar. Daha sonra bu state güncellenecektir.
+1) `ReactDOM.render()` metoduna `<Clock />` aktarıldığı zaman React, `Clock` bileşeninin constructor'ını çağırır. `Clock` bileşeni, mevcut saati görüntülemesi gerektiğinden, `this.state`'e o anki zamanı atar. Daha sonra bu state güncellenecektir.
 
 2) Devamında React, `Clock` bileşeninin `render()` metodunu çağırır. Bu sayede React, ekranda nelerin gösterilmesi gerektiğini bilir. Sonrasında ise `Clock`'un render edilmiş çıktısı ile eşleşmek için ilgili DOM güncellemelerini gerçekleştirir.
 
-3) `Clock` bileşeninin çıktısı DOM'a eklendiğinde, yaşam döngüsündeki `componentDidMount()` metodu çağrılır. Bu metodda `Clock` bileşeni, her saniyede bir `tick()` metodunun çalıştırılması gerektiğini tarayıcıya bildirir.
+3) `Clock` bileşeninin çıktısı DOM'a eklendiğinde, yaşam döngüsündeki `componentDidMount()` metodu çağrılır. Bu metotta `Clock` bileşeni, her saniyede bir `tick()` metodunun çalıştırılması gerektiğini tarayıcıya bildirir.
 
-4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan dolayı, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'u ilgili şekilde günceller.
+4) Tarayıcı her saniyede bir `tick()` metodunu çağırır. `tick()` metodunda `Clock` bileşeni, kullanıcı arayüzünü güncellemek için `setState()` metodunu çağırır ve bu metoda mevcut tarih/saat değerini aktarır. `setState()`'in çağrılması sayesinde React, state'in değiştiğini anlar ve ekranda neyin görüntüleneceğini anlamak için tekrar `render()` metodunu çağırır. Artık `render()` metodundaki `this.state.date`'in değeri eski halinden farklı olduğundan, render çıktısı güncellenmiş zamanı içerecek demektir. Buna göre React, DOM'ı ilgili şekilde günceller.
 
 5) Eğer `Clock` bileşeni, DOM'dan çıkarılırsa, yaşam döngüsündeki `componentWillUnmount()` metodu çağrılır ve tarayıcı tarafından zamanlayıcı durdurulmuş olur.
 
@@ -342,7 +342,7 @@ this.setState({comment: 'Hello'});
 
 React, çoklu `setState()` çağrılarını, performans için tekil bir güncellemeye dönüştürebilir.
 
-`this.props` ve `this.state`, asenkron olarak güncellenebildiklerinden dolayı, sonraki state'i hesaplarken bu nesnelerin mevcut değerlerine **güvenmemelisiniz**.
+`this.props` ve `this.state`, asenkron olarak güncellenebildiklerinden, sonraki state'i hesaplarken bu nesnelerin mevcut değerlerine **güvenmemelisiniz**.
 
 Örneğin, aşağıdaki kod `counter`'ı güncellemeyebilir:
 
@@ -407,11 +407,11 @@ Ve siz de bu değişkenleri, ayrı birer `setState()` çağrıları ile güncell
   }
 ```
 
-Birleşme işlemi yüzeysel olduğundan dolayı, `this.setState({comments})` çağrısı `this.state.posts` değişkenini değişmeden bırakırken, `this.state.comments`'i tamamıyla değiştirecektir.
+Birleşme işlemi yüzeysel olduğundan, `this.setState({comments})` çağrısı `this.state.posts` değişkenini değişmeden bırakırken, `this.state.comments`'i tamamıyla değiştirecektir.
 
 ## Verinin Alt Bileşenlere Aktarılması {#the-data-flows-down}
 
-Ne üst, ne de alt bileşenler, belirli bir bileşenin state'li veya state'siz olduğunu bilemez. Ayrıca o bileşenin fonksiyon veya sınıf olarak tanımlanmasını da önemsemezler.
+Ne üst ne de alt bileşenler, belirli bir bileşenin state'li veya state'siz olduğunu bilebilir. Ayrıca o bileşenin fonksiyon veya sınıf olarak tanımlanmasını da önemsemezler.
 
 Bu nedenle state'e, **yerel state** denir. State, kendisine sahip olan ve kendisini ayarlayan bileşen haricinde hiçbir bileşen için erişilebilir değildir.
 
@@ -421,7 +421,7 @@ Bir bileşen kendi state'ini, prop'lar aracılığıyla alt bileşenlere aktarab
 <FormattedDate date={this.state.date} />
 ```
 
-`FormattedDate` bileşeni, `date` değişkenini props'tan alabilir. Ve bunu alırken `Clock`'un state'inden mi yoksa prop'undan mı geldiğini bilemez. Hatta `date` değişkeni, `Clock` bileşeni içerisinde state'ten harici olarak tanımlanmış bir değer de olabilir ve bunu da bilmesine imkânı yoktur:
+`FormattedDate` bileşeni, `date` değişkenini props'tan alabilir ve bunu alırken `Clock`'un state'inden mi yoksa prop'undan mı geldiğini bilemez. Hatta `date` değişkeni, `Clock` bileşeni içerisinde state'ten harici olarak tanımlanmış bir değer de olabilir ve bunu bilmesi mümkün değildir:
 
 ```js
 function FormattedDate(props) {
@@ -456,6 +456,6 @@ ReactDOM.render(
 
 [**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/vXdGmd?editors=0010)
 
-Bu örnekte yer alan her bir `Clock` bileşeni, kendi zamanlayıcısını oluşturup, birbirinden bağımsız bir şekilde güncellemektedir.
+Bu örnekte yer alan her bir `Clock` bileşeni, kendi zamanlayıcısını oluşturup birbirinden bağımsız bir şekilde güncellemektedir.
 
-React uygulamalarında, bir bileşenin state'li veya state'siz olması, bir kodlama detayıdır ve zaman içerisinde değişkenlik gösterebilir. State'li bileşenler içerisinde, state'siz bileşenleri kullanabilirsiniz. Veya bu durumun tam tersi de geçerlidir.
+React uygulamalarında, bir bileşenin state'li veya state'siz olması, bir kodlama detayıdır ve zaman içerisinde değişkenlik gösterebilir. State'li bileşenler içerisinde, state'siz bileşenleri kullanabilirsiniz veya bu durumun tam tersi de geçerlidir.
