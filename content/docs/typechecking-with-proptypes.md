@@ -30,7 +30,11 @@ Greeting.propTypes = {
 };
 ```
 
+<<<<<<< HEAD
 Bu örnekte, bir sınıf bileşeni kullanıyoruz, ancak aynı işlevsellik fonksiyon bileşenlerine, veya [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) veya [`React.forwardRef`](https://reactjs.org/docs/react-api.html#reactforwardref) tarafından oluşturulan bileşenlere de uygulanabilir.
+=======
+In this example, we are using a class component, but the same functionality could also be applied to function components, or components created by [`React.memo`](/docs/react-api.html#reactmemo) or [`React.forwardRef`](/docs/react-api.html#reactforwardref).
+>>>>>>> 8f7ffa473905148fd5c7ecfd7fed5dabbd261bf0
 
 `PropTypes` alınan verilerin geçerli olduğundan emin olmak için kullanılabilecek bir dizi doğrulayıcı verir. Bu örnekte, `PropTypes.string`'i kullanıyoruz. Bir prop için geçersiz bir değer sağlandığında, JavaScript konsolunda bir uyarı gösterilecektir. Performans nedeniyle, `propTypes` sadece geliştirme modunda kontrol edilir.
 
