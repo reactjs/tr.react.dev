@@ -4,46 +4,46 @@ title: Add-Ons
 permalink: docs/addons.html
 ---
 
-> Note:
+> Not:
 >
-> `React.addons` entry point is deprecated as of React v15.5. The add-ons have moved to separate modules, and some of them have been deprecated.
+> `React.addons` giriş noktası React v15.5'ten itibaren kullanımdan kaldırılmıştır.. Bu eklentiler ayrı modüllere taşındı ve bazıları kullanımdan kaldırıldı.
 
-The React add-ons are a collection of useful utility modules for building React apps. **These should be considered experimental** and tend to change more often than the core.
+React eklentileri, React uygulamaları oluşturmak için faydalı ve işe yarar modüller koleksiyonudur. **Bunlar deney amaçlı düşünülmeli** ve core'dan daha sık değişime eğilimi olduğu göz önüne alınmalıdır.
 
-- [`createFragment`](/docs/create-fragment.html), to create a set of externally-keyed children.
+- [`createFragment`](/docs/create-fragment.html), harici olarak anahtarlanmış alt diziler oluşturmak için.
 
-The add-ons below are in the development (unminified) version of React only:
+Aşağıdaki eklentiler React'ın sadece geliştirme (unminified) sürümlerinde mevcuttur:
 
-- [`Perf`](/docs/perf.html), a performance profiling tool for finding optimization opportunities.
+- [`Perf`](/docs/perf.html), en uygun seviyedeki imkanları bulmak için geliştirilmiş bir performans profili oluşturma aracı.
 - [`ReactTestUtils`](/docs/test-utils.html), simple helpers for writing test cases.
 
-### Legacy Add-ons {#legacy-add-ons}
+### Eski Sürüm Eklentiler {#legacy-add-ons}
 
-The add-ons below are considered legacy and their use is discouraged. They will keep working in observable future, but there is no further development.
+Aşağıdaki eklentiler eski sürüm olarak kabul edilir ve kullanılmaları önerilmez. Gelecekte çalışmaya devam edecekler ama daha fazla geliştrime yapılmayacak.
 
-- [`PureRenderMixin`](/docs/pure-render-mixin.html). Use [`React.PureComponent`](/docs/react-api.html#reactpurecomponent) instead.
-- [`shallowCompare`](/docs/shallow-compare.html), a helper function that performs a shallow comparison for props and state in a component to decide if a component should update. We recommend using [`React.PureComponent`](/docs/react-api.html#reactpurecomponent) instead.
-- [`update`](/docs/update.html). Use [`kolodny/immutability-helper`](https://github.com/kolodny/immutability-helper) instead.
-- [`ReactDOMFactories`](https://www.npmjs.com/package/react-dom-factories), pre-configured DOM factories to make React easier to use without JSX.
+- [`PureRenderMixin`](/docs/pure-render-mixin.html). Bunun yerine [`React.PureComponent`](/docs/react-api.html#reactpurecomponent) kullanın.
+- [`shallowCompare`](/docs/shallow-compare.html), bir componentin güncellenip güncellenmeyeceğine karar vermek için componentin props ve state'lerini yüzeysel olarak karşılaştıran bir yardımcı işlev. Bunun yerine  [`React.PureComponent`](/docs/react-api.html#reactpurecomponent) kullanılmasını tavsiye ederiz.
+- [`update`](/docs/update.html). Bunun yerine [`kolodny/immutability-helper`](https://github.com/kolodny/immutability-helper) kullanın.
+- [`ReactDOMFactories`](https://www.npmjs.com/package/react-dom-factories), React'in JSX olmadan kullanımını kolaylaştırmak için önceden yapılandırılmış DOM factory'leri.
 
-### Deprecated Add-ons {#deprecated-add-ons}
+### Kullanımdan Kaldırılan Eklentiler {#deprecated-add-ons}
 
-- [`LinkedStateMixin`](/docs/two-way-binding-helpers.html) has been deprecated.
-- [`TransitionGroup` and `CSSTransitionGroup`](/docs/animation.html) have been deprecated in favor of [their drop-in replacements](https://github.com/reactjs/react-transition-group/tree/v1-stable).
+- [`LinkedStateMixin`](/docs/two-way-binding-helpers.html) kullanımdan kaldırılmıştır.
+- [`TransitionGroup` and `CSSTransitionGroup`](/docs/animation.html)  [yerlerine geçen eklentilerin](https://github.com/reactjs/react-transition-group/tree/v1-stable) kullanılması için kullanımdan kaldırılmışlardır.
 
-## Using React with Add-ons {#using-react-with-add-ons}
+## React'i Eklentilerle Kullanma {#using-react-with-add-ons}
 
-You can install the add-ons individually from npm (e.g. `npm install react-addons-create-fragment`) and import them:
+Eklentileri NPM aracılığyla ayrı ayrı yükleyebilir (örnek: `npm install react-addons-create-fragment`) ve onları içeri aktarabilirsiniz:
 
 ```javascript
 import createFragment from 'react-addons-create-fragment'; // ES6
 var createFragment = require('react-addons-create-fragment'); // ES5 with npm
 ```
 
-When using React 15 or earlier from a CDN, you can use `react-with-addons.js` instead of `react.js`:
+When using React 15 or earlier from a CDN, you can use React 15 ya da daha önceki sürümleri bir CDN'den kullanırken `react.js` yerine  `react-with-addons.js` kullanabilirsiniz:
 
 ```html
 <script src="https://unpkg.com/react@15/dist/react-with-addons.js"></script>
 ```
 
-The add-ons will be available via the `React.addons` global (e.g. `React.addons.TestUtils`).
+Eklentiler `React.addons` aracılığıyla global olarak kullanılabilir olacaktır. (örnek: `React.addons.TestUtils`).
