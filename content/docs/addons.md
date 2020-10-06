@@ -8,7 +8,7 @@ permalink: docs/addons.html
 >
 > `React.addons` giriş noktası React v15.5'ten itibaren kullanımdan kaldırılmıştır.. Bu eklentiler ayrı modüllere taşındı ve bazıları kullanımdan kaldırıldı.
 
-React eklentileri, React uygulamaları oluşturmak için faydalı ve işe yarar modüller koleksiyonudur. **Bunlar deney amaçlı düşünülmeli** ve core'dan daha sık değişime eğilimi olduğu göz önüne alınmalıdır.
+React eklentileri, React uygulamaları oluşturmak için faydalı ve işe yarar modüller koleksiyonudur. **Bunlar deney amaçlı düşünülmeli** ve React'in çekirdeğinden daha sık değişime eğilimi olduğu göz önüne alınmalıdır.
 
 - [`createFragment`](/docs/create-fragment.html), harici olarak anahtarlanmış alt diziler oluşturmak için.
 
@@ -40,7 +40,7 @@ import createFragment from 'react-addons-create-fragment'; // ES6
 var createFragment = require('react-addons-create-fragment'); // ES5 with npm
 ```
 
-When using React 15 or earlier from a CDN, you can use React 15 ya da daha önceki sürümleri bir CDN'den kullanırken `react.js` yerine  `react-with-addons.js` kullanabilirsiniz:
+React 15 ya da daha önceki sürümleri bir CDN'den kullanırken `react.js` yerine  `react-with-addons.js` kullanabilirsiniz:
 
 ```html
 <script src="https://unpkg.com/react@15/dist/react-with-addons.js"></script>
