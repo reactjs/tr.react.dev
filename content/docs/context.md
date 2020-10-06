@@ -83,7 +83,7 @@ Bu değişiklikle birlikte sadece en üstteki Page bileşeni `Link` ve `Avatar` 
 
 Bu *kontrolün tersine çevrilmesi*, birçok durumda uygulamanızdan geçirmeniz gereken prop'ların sayısını azaltarak ve kök bileşenlere daha fazla kontrol sağlayarak kodunuzu daha temiz hale getirebilir. Fakat bu her durumda doğru bir seçim değildir: bileşen ağacında daha fazla karmaşıklık taşımak, daha üst seviyeli bileşenleri daha karmaşık hale getirir ve daha düşük seviyeli bileşenleri istediğinizden daha esnek olmaya zorlar.
 
-Bir bileşen için tek bir alt elemanla sınırlı değilsiniz. [Burada belirtildiği gibi](/docs/composition-vs-inheritance.html#containment), alt elemanlar için birden çok alt eleman geçirebilirsiniz, hatta alt bileşenler için birden fazla ayrı "slots'a" sahip olabilirsiniz.
+Bir bileşen için tek bir alt elemanla sınırlı değilsiniz. [Burada belirtildiği gibi](/docs/composition-vs-inheritance.html#containment), alt elemanlar için birden çok alt eleman geçirebilirsiniz, hatta alt bileşenler için birden fazla ayrı "slots"a sahip olabilirsiniz.
 
 ```js
 function Page(props) {
@@ -107,7 +107,7 @@ function Page(props) {
 
 Bu model, bir alt elemanı üst elemanlarından ayırmanız gerektiğinde çoğu durum için yeterlidir. Alt elemanın render olmadan önce üst eleman ile iletişim kurması gerekiyorsa, bunu [render prop'larla](/docs/render-props.html) daha ileriye götürebilirsin.
 
-Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı iç içe geçmiş seviyelerinde erişilebilir olması gerekir. Context, bu tur verileri ve güncellemeleri ağaçtaki tüm bileşenlere "yaymanızı" sağlar. Context kullanımının diğer alternatiflerden daha basit olabileceği ortak örnekler arasında konum ayarlarının yönetimi, tema veya veri önbelleği bulunur.
+Fakat, bazen aynı verinin ağaçtaki birçok bileşen tarafından ve farklı iç içe geçmiş seviyelerinde erişilebilir olması gerekir. Context, bu tür verileri ve güncellemeleri ağaçtaki tüm bileşenlere "yaymanızı" sağlar. Context kullanımının diğer alternatiflerden daha basit olabileceği ortak örnekler arasında konum ayarlarının yönetimi, tema veya veri önbelleği bulunur.
 
 ## API {#api}
 
