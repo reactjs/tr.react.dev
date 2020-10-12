@@ -41,7 +41,11 @@ class Welcome extends React.Component {
 
 ### Bir Bileşenin Yaşam Döngüsü {#the-component-lifecycle}
 
+<<<<<<< HEAD
 Her bileşen, belirli durumlarda çalıştırabileceğiniz birkaç "yaşam döngüsü metodu" (lifecycle methods) sunar. **Bu metodları hatırlamak için, [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) kullanabilirsiniz.** Aşağıdaki listede, yaygın olarak kullanılan yaşam döngüsü metodları **kalın** harfler ile belirtilmiştir. Geri kalan metotlar, daha nadir kullanımlar için uygundur.
+=======
+Each component has several "lifecycle methods" that you can override to run code at particular times in the process. **You can use [this lifecycle diagram](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) as a cheat sheet.** In the list below, commonly used lifecycle methods are marked as **bold**. The rest of them exist for relatively rare use cases.
+>>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
 
 #### Eklenmesi {#mounting}
 
@@ -111,7 +115,11 @@ Her bileşen, bu metotların haricinde aşağıdaki gibi bazı API'ları sunmakt
 
 ### Yaygın Olarak Kullanılan Yaşam Döngüsü Metotları {#commonly-used-lifecycle-methods}
 
+<<<<<<< HEAD
 Bu bölümde anlatılacak metotlar, React bileşenleri oluştururken yaygın olarak karşılaşacağınız kullanım senaryolarını içerir. **Görsel bir anlatım için [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) inceleyebilirsiniz.**
+=======
+The methods in this section cover the vast majority of use cases you'll encounter creating React components. **For a visual reference, check out [this lifecycle diagram](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/).**
+>>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
 
 ### `render()` {#render}
 
@@ -247,7 +255,11 @@ componentWillUnmount()
 
 ### Nadiren Kullanılan Yaşam Döngüsü Metotları {#rarely-used-lifecycle-methods}
 
+<<<<<<< HEAD
 Bu bölümdeki metotlar, nispeten daha az kullanılan durumlar içindir. Nadiren işinizi görseler de, büyük ihtimalle bileşenlerinizde hiçbirini kullanmayacaksınız. **[Bu yaşam döngüsü şemasının](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) üst kısımında yer alan "Daha az kullanılan yaşam döngülerini göster" kutucuğunu işaretlediğinizde** bu metotların çoğunu görebileceksiniz.
+=======
+The methods in this section correspond to uncommon use cases. They're handy once in a while, but most of your components probably don't need any of them. **You can see most of the methods below on [this lifecycle diagram](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) if you click the "Show less common lifecycles" checkbox at the top of it.**
+>>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
 
 
 ### `shouldComponentUpdate()` {#shouldcomponentupdate}
@@ -280,8 +292,13 @@ Bileşenin başlangıçta DOM'a eklenmesinde ve devamında süregelen güncellem
 
 Bu metot, state'in props değişikliklerine bağlı olduğu [nadiren kullanılan durumlar](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) için vardır. Örneğin `<Transition>` bileşeninin, önceki ve sonraki alt bileşenlerini karşılaştırması sayesinde animasyona girme/çıkma süreçlerinin yönetimi için kullanışlı olabilir.
 
+<<<<<<< HEAD
 getDerivedStateFromProps metodunun kullanılması, daha fazla kod yazmaya neden olur. Ve bir süre sonra bileşen kodunu takip edemez hale gelirsiniz.
 [Bunun yerine alternatif yollar deneyebilirsiniz:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
+=======
+Deriving state leads to verbose code and makes your components difficult to think about.
+[Make sure you're familiar with simpler alternatives:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
+>>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
 
 * Eğer props'ta oluşan değişikliklere cevap olarak, web isteği veya animasyon işlemi gibi **yan etki** içeren bir işlem gerçekleştirmeniz gerekiyorsa, [`componentDidUpdate`](#componentdidupdate) yaşam döngüsü metodunu kullanınız.
 
@@ -325,9 +342,15 @@ Hata sınırlarını yalnızca beklenmedik exception'ların giderilmesi için ku
 
 Daha fazla bilgi için [*React 16'da hata yönetimini inceleyiniz*](/blog/2017/07/26/error-handling-in-react-16.html).
 
+<<<<<<< HEAD
 > Not
 >
 > Hata sınırları sadece **altındaki** ağaçta bulunan bileşenlerde oluşan hataları yakalarlar. Bu nedenle hata sınırları, kendi içerisinde oluşan bir hatayı yakalayamazlar.
+=======
+> Note
+>
+> Error boundaries only catch errors in the components **below** them in the tree. An error boundary can’t catch an error within itself.
+>>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
 
 ### `static getDerivedStateFromError()` {#static-getderivedstatefromerror}
 ```javascript
@@ -355,7 +378,7 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 ```
@@ -411,15 +434,22 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 ```
 
+<<<<<<< HEAD
 > Not
 > 
 > Bir hata durumunda, `setState`'i çağırarak `componentDidCatch()` ile bir hata arayüzü görüntüleyebilirsiniz. Fakat bu yaklaşım, gelecekteki React sürümlerinde kullanımdan kaldırılacaktır.
 > Bunun yerine hata arayüzünün render edilmesi için `static getDerivedStateFromError()` metodunu kullanınız.
+=======
+> Note
+>
+> In the event of an error, you can render a fallback UI with `componentDidCatch()` by calling `setState`, but this will be deprecated in a future release.
+> Use `static getDerivedStateFromError()` to handle fallback rendering instead.
+>>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
 
 * * *
 
