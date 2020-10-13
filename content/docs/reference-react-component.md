@@ -41,7 +41,7 @@ class Welcome extends React.Component {
 
 ### Bir Bileşenin Yaşam Döngüsü {#the-component-lifecycle}
 
-Her bileşen, belirli durumlarda çalıştırabileceğiniz birkaç "yaşam döngüsü metodu" (lifecycle methods) sunar. **Bu metodları hatırlamak için, [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) kullanabilirsiniz.** Aşağıdaki listede, yaygın olarak kullanılan yaşam döngüsü metodları **kalın** harfler ile belirtilmiştir. Geri kalan metotlar, daha nadir kullanımlar için uygundur.
+Her bileşen, belirli durumlarda çalıştırabileceğiniz birkaç "yaşam döngüsü metodu" (lifecycle methods) sunar. **Bu metodları hatırlamak için, [yaşam döngüsü diyagramını](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) kullanabilirsiniz.** Aşağıdaki listede, yaygın olarak kullanılan yaşam döngüsü metodları **kalın** harfler ile belirtilmiştir. Geri kalan metotlar, daha nadir kullanımlar için uygundur.
 
 #### Eklenmesi {#mounting}
 
@@ -111,7 +111,7 @@ Her bileşen, bu metotların haricinde aşağıdaki gibi bazı API'ları sunmakt
 
 ### Yaygın Olarak Kullanılan Yaşam Döngüsü Metotları {#commonly-used-lifecycle-methods}
 
-Bu bölümde anlatılacak metotlar, React bileşenleri oluştururken yaygın olarak karşılaşacağınız kullanım senaryolarını içerir. **Görsel bir anlatım için [yaşam döngüsü diyagramını](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) inceleyebilirsiniz.**
+Bu bölümde anlatılacak metotlar, React bileşenleri oluştururken yaygın olarak karşılaşacağınız kullanım senaryolarını içerir. **Görsel bir anlatım için [yaşam döngüsü diyagramını](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) inceleyebilirsiniz.**
 
 ### `render()` {#render}
 
@@ -247,7 +247,7 @@ componentWillUnmount()
 
 ### Nadiren Kullanılan Yaşam Döngüsü Metotları {#rarely-used-lifecycle-methods}
 
-Bu bölümdeki metotlar, nispeten daha az kullanılan durumlar içindir. Nadiren işinizi görseler de, büyük ihtimalle bileşenlerinizde hiçbirini kullanmayacaksınız. **[Bu yaşam döngüsü şemasının](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) üst kısımında yer alan "Daha az kullanılan yaşam döngülerini göster" kutucuğunu işaretlediğinizde** bu metotların çoğunu görebileceksiniz.
+Bu bölümdeki metotlar, nispeten daha az kullanılan durumlar içindir. Nadiren işinizi görseler de, büyük ihtimalle bileşenlerinizde hiçbirini kullanmayacaksınız. **[Bu yaşam döngüsü şemasının](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) üst kısımında yer alan "Daha az kullanılan yaşam döngülerini göster" kutucuğunu işaretlediğinizde** bu metotların çoğunu görebileceksiniz.
 
 
 ### `shouldComponentUpdate()` {#shouldcomponentupdate}
@@ -280,7 +280,7 @@ Bileşenin başlangıçta DOM'a eklenmesinde ve devamında süregelen güncellem
 
 Bu metot, state'in props değişikliklerine bağlı olduğu [nadiren kullanılan durumlar](/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state) için vardır. Örneğin `<Transition>` bileşeninin, önceki ve sonraki alt bileşenlerini karşılaştırması sayesinde animasyona girme/çıkma süreçlerinin yönetimi için kullanışlı olabilir.
 
-getDerivedStateFromProps metodunun kullanılması, daha fazla kod yazmaya neden olur. Ve bir süre sonra bileşen kodunu takip edemez hale gelirsiniz.
+State üretmek, daha fazla kod yazmaya neden olur. Ve bir süre sonra bileşen kodunu takip edemez hale gelirsiniz.
 [Bunun yerine alternatif yollar deneyebilirsiniz:](/blog/2018/06/07/you-probably-dont-need-derived-state.html)
 
 * Eğer props'ta oluşan değişikliklere cevap olarak, web isteği veya animasyon işlemi gibi **yan etki** içeren bir işlem gerçekleştirmeniz gerekiyorsa, [`componentDidUpdate`](#componentdidupdate) yaşam döngüsü metodunu kullanınız.
@@ -355,7 +355,7 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 ```
@@ -411,7 +411,7 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 ```
