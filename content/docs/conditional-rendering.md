@@ -150,10 +150,7 @@ Bu kod JavaScript'te çalışır çünkü `true && expression` her zaman `expres
 
 Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip atlayacaktır.
 
-<<<<<<< HEAD
-### Koşul Operatörü ile Tek Satırda if-else {#inline-if-else-with-conditional-operator}
-=======
-Note that returning a falsy expression will still cause the element after `&&` to be skipped but will return the falsy expression. In the example below, `<div>0</div>` will be returned by the render method.
+Değer olarak `falsy` bir ifade döndürmek, React'in `&&` ifadesinden sonra gelen kısmı atlamasına neden olacaktır. Ancak yine de o `falsy` değeri dönüp render edeceğini unutmayın. Aşağıdaki örnekte `render` metodundan `<div>0</div>` değeri dönecektir:
 
 ```javascript{2,5}
 render() {
@@ -166,8 +163,7 @@ render() {
 }
 ```
 
-### Inline If-Else with Conditional Operator {#inline-if-else-with-conditional-operator}
->>>>>>> bd0c9d8c5f5e78e0bd1066b46024ba98f4daac84
+### Koşul Operatörü ile Tek Satırda if-else {#inline-if-else-with-conditional-operator}
 
 Koşullu renderlama için farklı bir yöntem ise JavaScript koşul operatörünü [`condition ? true : false`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) kullanmaktır.
 
