@@ -260,7 +260,7 @@ const content = posts.map((post) =>
 
 Yukarıdaki örnekte, `Post` bileşeni `props.id` yi okuyabilir, ancak `props.key` i okuyamaz.
 
-### map()'i JSX'e gömmek {#embedding-map-in-jsx}
+### JSX içi map kullanımı {#embedding-map-in-jsx}
 
 Yukarıdaki örneklerde ayrı bir `listItems` değişkeni tanımladık ve JSX'e dâhil ettik:
 
