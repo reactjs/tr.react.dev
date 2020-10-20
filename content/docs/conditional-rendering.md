@@ -1,6 +1,6 @@
 ---
 id: conditional-rendering
-title: Koşullu Renderlama
+title: Koşullu Render İşlemi
 permalink: docs/conditional-rendering.html
 prev: handling-events.html
 next: lists-and-keys.html
