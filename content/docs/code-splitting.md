@@ -6,11 +6,7 @@ permalink: docs/code-splitting.html
 
 ## Paketleme {#bundling}
 
-<<<<<<< HEAD
 Çoğu React uygulaması, dosyalarını [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) veya [Browserify](http://browserify.org/) gibi araçlarla "paketler." Paketleme, içe aktarılan dosyaları işleyip tek bir dosyaya, "paket" haline getirme işlemidir. Daha sonra bu paket, uygulamanın tamamını tek seferde yüklemek için kullanılabilir.
-=======
-Most React apps will have their files "bundled" using tools like [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) or [Browserify](http://browserify.org/). Bundling is the process of following imported files and merging them into a single file: a "bundle". This bundle can then be included on a webpage to load an entire app at once.
->>>>>>> 4e6cee1f82737aa915afd87de0cd4a8393de3fc8
 
 #### Örnek {#example}
 
