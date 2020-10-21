@@ -40,30 +40,19 @@ console.log(add(16, 26)); // 42
 >
 > Paketleriniz bundan çok daha farklı gözükecektir.
 
-Eğer [Create React App](https://create-react-app.dev/),
-[Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/)
-ya da benzeri bir araç kullanıyorsanız, uygulamanızı paketleyen bir Webpack
-kurulumuna sahip olursunuz.
+Eğer [Create React App](https://create-react-app.dev/), [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/) ya da benzeri bir araç kullanıyorsanız, uygulamanızı paketleyen bir Webpack kurulumuna sahip olursunuz.
 
-Eğer bu araçlardan birini kullanmıyorsanız, paketleyiciyi kendiniz kurmanız gerekir.
-Örnek için, Webpack dokümantasyonundan [Kurulum](https://webpack.js.org/guides/installation/)
-ve [Başlangıç](https://webpack.js.org/guides/getting-started/) alanlarına göz atınız.
+Eğer bu araçlardan birini kullanmıyorsanız, paketleyiciyi kendiniz kurmanız gerekir. Örnek için, Webpack dokümantasyonundan [Kurulum](https://webpack.js.org/guides/installation/) ve [Başlangıç](https://webpack.js.org/guides/getting-started/) alanlarına göz atınız.
 
 ## Kod Bölümleme {#code-splitting}
 
-Paketleme güzeldir ama uygulamanız büyüdükçe paketiniz de büyür. Özellikle
-büyük üçüncü parti kütüphaneleri dahil ediyorsanız. Paketinizin boyutunun, uygulamanızın yüklenişini
-geciktirecek kadar büyük olmaması için paketinize dahil ettiğiniz kodlara
-göz kulak olmanız gerekir.
+Paketleme güzeldir ama uygulamanız büyüdükçe paketiniz de büyür. Özellikle büyük üçüncü parti kütüphaneleri dahil ediyorsanız. Paketinizin boyutunun, uygulamanızın yüklenişini geciktirecek kadar büyük olmaması için paketinize dahil ettiğiniz kodlara göz kulak olmanız gerekir.
 
 Büyük paket boyutlarından kurtulmak için problemin üzerine gitmek ve paketinizi "bölümlemeye" başlamak iyi bir yöntemdir.
 Kod-Bölümleme, [Webpack](https://webpack.js.org/guides/code-splitting/), [Rollup](https://rollupjs.org/guide/en/#code-splitting) ve Browserify ([factor-bundle](https://github.com/browserify/factor-bundle) ile) gibi paketleyicilerin desteklediği, işleyiş süresince dinamik olarak yüklenen birden çok paket yaratmaya yarayan özelliktir.
 
-Uygulamanıza kod bölümlemesi yapmak, kullanıcının anlık olarak ihtiyaç duyduğu şeylerin
-"lazy yüklenmesine" yardımcı olarak uygulama performansını önemli ölçüde
-arttırabilir. Uygulamanızdaki toplam kod miktarını azaltmamış olsanız da kullanıcının
-hiçbir zaman ihtiyaç duymayacağı kodu yüklemekten kaçınmış ve ilk yükleme sırasında
-ihtiyaç duyulan kodu azaltmış olursunuz.
+Uygulamanıza kod bölümlemesi yapmak, kullanıcının anlık olarak ihtiyaç duyduğu şeylerin "lazy yüklenmesine" yardımcı olarak uygulama performansını önemli ölçüde
+arttırabilir. Uygulamanızdaki toplam kod miktarını azaltmamış olsanız da kullanıcının hiçbir zaman ihtiyaç duymayacağı kodu yüklemekten kaçınmış ve ilk yükleme sırasında ihtiyaç duyulan kodu azaltmış olursunuz.
 
 ## `import()` {#import}
 
@@ -85,15 +74,12 @@ import("./math").then(math => {
 });
 ```
 
-Webpack bu sözdizimine denk geldiğinde, uygulamanızda otomatik olarak kod bölümlemeye başlar. Eğer Create React App kullanıyorsanız,
-bu ayar sizin için halihazırda ayarlanmıştır ve [kullanmaya](https://create-react-app.dev/docs/code-splitting/) hemen
+Webpack bu sözdizimine denk geldiğinde, uygulamanızda otomatik olarak kod bölümlemeye başlar. Eğer Create React App kullanıyorsanız, bu ayar sizin için halihazırda ayarlanmıştır ve [kullanmaya](https://create-react-app.dev/docs/code-splitting/) hemen
 başlayabilirsiniz. Aynı zamanda [Next.js](https://nextjs.org/docs/advanced-features/dynamic-import)'de de desteklenmektedir.
 
-Eğer Webpack ayarlarını kendiniz yapıyorsanız, Webpack'in [kod bölümleme rehberini](https://webpack.js.org/guides/code-splitting/)
-okumayı tercih edebilirsiniz. Webpack ayarınız hayal meyal [buna benzeyecektir.](https://gist.github.com/gaearon/ca6e803f5c604d37468b0091d9959269)
+Eğer Webpack ayarlarını kendiniz yapıyorsanız, Webpack'in [kod bölümleme rehberini](https://webpack.js.org/guides/code-splitting/) okumayı tercih edebilirsiniz. Webpack ayarınız hayal meyal [buna benzeyecektir.](https://gist.github.com/gaearon/ca6e803f5c604d37468b0091d9959269)
 
-[Babel](https://babeljs.io/) kullanırken, Babel'ın dinamik import sözdizimini çözümleyebildiğinden
-fakat dönüştürmediğinden emin olmanız gerekmekte. Bunun için [@babel/plugin-syntax-dynamic-import](https://classic.yarnpkg.com/en/package/@babel/plugin-syntax-dynamic-import)'a ihtiyacınız var.
+[Babel](https://babeljs.io/) kullanırken, Babel'ın dinamik import sözdizimini çözümleyebildiğinden fakat dönüştürmediğinden emin olmanız gerekmekte. Bunun için [@babel/plugin-syntax-dynamic-import](https://classic.yarnpkg.com/en/package/@babel/plugin-syntax-dynamic-import)'a ihtiyacınız var.
 
 ## `React.lazy` {#reactlazy}
 
