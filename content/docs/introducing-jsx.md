@@ -181,4 +181,4 @@ Bu nesnelere "React elementleri" adı verilir. Bunu, ekranda görmek istediğini
 
 >**İpucu:**
 >
->ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/en/next/editors) kullanmanızı öneririz.
+>ES6 ve JSX kodlarının uygun şekilde renklendirilmesi için, kod editörünüzde ["Babel" dil tanımlamalarını](https://babeljs.io/docs/en/editors) kullanmanızı öneririz.
