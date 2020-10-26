@@ -289,9 +289,12 @@ class Searchbox extends React.Component {
   }
 
   handleChange(e) {
+<<<<<<< HEAD
     // React olayları birleştirir, bu yüzden değeri, zıplama önleyiciden önce okuyoruz.
     // Alternatif olarak `event.persist()`'i çağırabilir ve tüm olayı aktarabilirdik.
     // Daha fazla bilgi için şuraya göz atın: reactjs.org/docs/events.html#event-pooling
+=======
+>>>>>>> 6682068641c16df6547b3fcdb7877e71bb0bebf9
     this.emitChangeDebounced(e.target.value);
   }
 
