@@ -34,34 +34,13 @@ string type
 
 > Not:
 >
-> v0.14 itibariyle, bir olay yöneticisinden `false` döndürmek artık olay yayılımını durdurmayacaktır. Bunun yerine, uygun görüldüğü şekilde `e.stopPropagation()` ya da `e.preventDefault()` manuel olarak tetiklenmelidir.
+> React 17'den itibaren, `e.persist()` in bir işlevi kalmamıştır. Çünkü `SyntheticEvent` artık [ortaklanmamaktadır. (event-pooling)](/docs/legacy-event-pooling.html).
 
-### Olay Ortaklama (Event Pooling) {#event-pooling}
-
-`SyntheticEvent` ortaklanmıştır. Bu, `SyntheticEvent` nesnesinin tekrar kullanılacağı ve olay geri dönmesinin (callback) çağrılması durumunda tüm özelliklerinin sıfırlanacağı anlamına gelmektedir. Bu durum performans sebeplerinden kaynaklanmaktadır. Böyle olunca da, olaya asenkron bir şekilde erişmeniz mümkün değildir.
-
-```javascript
-function onClick(event) {
-  console.log(event); // => null'lanmış nesne.
-  console.log(event.type); // => "click"
-  const eventType = event.type; // => "click"
-
-  setTimeout(function() {
-    console.log(event.type); // => null
-    console.log(eventType); // => "click"
-  }, 0);
-
-  // Çalışmayacaktır. this.state.clickEvent sadece null değerleri içerecektir.
-  this.setState({clickEvent: event});
-
-  // Olay özelliklerini yine de dışarı aktarabilirsiniz.
-  this.setState({eventType: event.type});
-}
-```
 
 > Not:
 >
-> Olay özelliklerine asenkron bir şekilde erişmek isterseniz, olay üzerinde `event.persist()` çağırmalısınız. Bu şekilde sentetik olay havuzdan çıkarılır ve olay referanslarının kullanıcı kodu tarafından korunmasına olanak sağlanır.
+> v0.14 itibariyle, bir olay yöneticisinden `false` döndürmek artık olay yayılımını durdurmayacaktır. Bunun yerine, uygun görüldüğü şekilde `e.stopPropagation()` ya da `e.preventDefault()` manuel olarak tetiklenmelidir.
+
 
 ## Desteklenen Olaylar {#supported-events}
 
@@ -165,9 +144,83 @@ Bu odaklanma olayları sadece form elemanlarında değil, React DOM'daki tüm el
 
 Özellikler:
 
-```javascript
+```js
 DOMEventTarget relatedTarget
 ```
+
+#### onFocus
+
+The `onFocus` event is called when the element (or some element inside of it) receives focus. For example, it's called when the user clicks on a text input.
+
+```javascript
+function Example() {
+  return (
+    <input
+      onFocus={(e) => {
+        console.log('Focused on input');
+      }}
+      placeholder="onFocus is triggered when you click this input."
+    />
+  )
+}
+```
+
+#### onBlur
+
+The `onBlur` event handler is called when focus has left the element (or left some element inside of it). For example, it's called when the user clicks outside of a focused text input.
+
+```javascript
+function Example() {
+  return (
+    <input
+      onBlur={(e) => {
+        console.log('Triggered because this input lost focus');
+      }}
+      placeholder="onBlur is triggered when you click this input and then you click outside of it."
+    />
+  )
+}
+```
+
+#### Detecting Focus Entering and Leaving
+
+You can use the `currentTarget` and `relatedTarget` to differentiate if the focusing or blurring events originated from _outside_ of the parent element. Here is a demo you can copy and paste that shows how to detect focusing a child, focusing the element itself, and focus entering or leaving the whole subtree.
+
+```javascript
+function Example() {
+  return (
+    <div
+      tabIndex={1}
+      onFocus={(e) => {
+        if (e.currentTarget === e.target) {
+          console.log('focused self');
+        } else {
+          console.log('focused child', e.target);
+        }
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          // Not triggered when swapping focus between children
+          console.log('focus entered self');
+        }
+      }}
+      onBlur={(e) => {
+        if (e.currentTarget === e.target) {
+          console.log('unfocused self');
+        } else {
+          console.log('unfocused child', e.target);
+        }
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          // Not triggered when swapping focus between children
+          console.log('focus left self');
+        }
+      }}
+    >
+      <input id="1" />
+      <input id="2" />
+    </div>
+  );
+}
+```
+
 
 * * *
 
@@ -302,6 +355,10 @@ Olay isimleri:
 ```
 onScroll
 ```
+
+>Not
+>
+>React 17'den başlayarak, `onScroll` olayı **balonlanma (bubbling) oluşturmaz**. Bu, tarayıcı davranışıyla eşleşir ve iç içe yapıdaki kaydırılabilir bir öğe uzakta bulunan bir üst elemanda olayları (events) tetiklediğinde karışıklığı önler.
 
 Özellikler:
 

@@ -9,18 +9,18 @@ next: release-channels.html
 Hem React'e hem de ReactDOM'a CDN üzerinden ulaşılabilir.
 
 ```html
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
 ```
 
 Yukarıdaki sürümler yalnızca geliştirme amaçlıdır ve yayınlamaya uygun değildir. React'in küçültülmüş ve optimize edilmiş yayınlamaya uygun sürümleri şu adreste mevcuttur:
 
 ```html
-<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 ```
 
-`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `16`'yı istediğiniz sürüm numarası ile değiştirin.
+`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `17`'yı istediğiniz sürüm numarası ile değiştirin.
 
 ### Neden `crossorigin` Özelliği? {#why-the-crossorigin-attribute}
 

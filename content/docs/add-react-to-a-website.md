@@ -54,8 +54,8 @@ Daha sonra, `</body>` etiketini kapatmadan hemen önce HTML sayfasına üç `<sc
 
   <!-- React'i yükle. -->
   <!-- Not: yayınlama için hazırlanırken,  "development.js" yi "production.min.js" ile değiştirin -->
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
   <!-- React bileşenimizi yükleyin. -->
   <script src="like_button.js"></script>
@@ -115,8 +115,8 @@ Web sitenizi yayına almadan önce, küçültülmemiş JavaScript'in sayfanızı
 Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getirilen HTML'in de React'in `production.min.js` içinde biten sürümlerini yüklediğinden emin olursanız **siteniz yayına hazır** olur:
 
 ```js
-<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 ```
 
 JavaScript dosyalarınız için bir küçültme adımınız yoksa [ayarlamanın bir yolu budur](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3).
