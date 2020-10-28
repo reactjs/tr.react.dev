@@ -34,39 +34,13 @@ string type
 
 > Not:
 >
-<<<<<<< HEAD
-> v0.14 itibariyle, bir olay yöneticisinden `false` döndürmek artık olay yayılımını durdurmayacaktır. Bunun yerine, uygun görüldüğü şekilde `e.stopPropagation()` ya da `e.preventDefault()` manuel olarak tetiklenmelidir.
+> React 17'den itibaren, `e.persist()` in bir işlevi kalmamıştır. Çünkü `SyntheticEvent` artık [ortaklanmamaktadır. (event-pooling)](/docs/legacy-event-pooling.html).
 
-### Olay Ortaklama (Event Pooling) {#event-pooling}
-
-`SyntheticEvent` ortaklanmıştır. Bu, `SyntheticEvent` nesnesinin tekrar kullanılacağı ve olay geri dönmesinin (callback) çağrılması durumunda tüm özelliklerinin sıfırlanacağı anlamına gelmektedir. Bu durum performans sebeplerinden kaynaklanmaktadır. Böyle olunca da, olaya asenkron bir şekilde erişmeniz mümkün değildir.
-
-```javascript
-function onClick(event) {
-  console.log(event); // => null'lanmış nesne.
-  console.log(event.type); // => "click"
-  const eventType = event.type; // => "click"
-
-  setTimeout(function() {
-    console.log(event.type); // => null
-    console.log(eventType); // => "click"
-  }, 0);
-
-  // Çalışmayacaktır. this.state.clickEvent sadece null değerleri içerecektir.
-  this.setState({clickEvent: event});
-
-  // Olay özelliklerini yine de dışarı aktarabilirsiniz.
-  this.setState({eventType: event.type});
-}
-```
-=======
-> As of v17, `e.persist()` doesn't do anything because the `SyntheticEvent` is no longer [pooled](/docs/legacy-event-pooling.html).
->>>>>>> 6682068641c16df6547b3fcdb7877e71bb0bebf9
 
 > Not:
 >
-<<<<<<< HEAD
-> Olay özelliklerine asenkron bir şekilde erişmek isterseniz, olay üzerinde `event.persist()` çağırmalısınız. Bu şekilde sentetik olay havuzdan çıkarılır ve olay referanslarının kullanıcı kodu tarafından korunmasına olanak sağlanır.
+> v0.14 itibariyle, bir olay yöneticisinden `false` döndürmek artık olay yayılımını durdurmayacaktır. Bunun yerine, uygun görüldüğü şekilde `e.stopPropagation()` ya da `e.preventDefault()` manuel olarak tetiklenmelidir.
+
 
 ## Desteklenen Olaylar {#supported-events}
 
@@ -91,33 +65,6 @@ Aşağıdaki olay yöneticileri, balonlanma (bubbling) evresinde bir olay taraf�
 - [Animasyon Olayları](#animation-events)
 - [Geciş Olayları](#transition-events)
 - [Diğer Olaylar](#other-events)
-=======
-> As of v0.14, returning `false` from an event handler will no longer stop event propagation. Instead, `e.stopPropagation()` or `e.preventDefault()` should be triggered manually, as appropriate.
-
-## Supported Events {#supported-events}
-
-React normalizes events so that they have consistent properties across different browsers.
-
-The event handlers below are triggered by an event in the bubbling phase. To register an event handler for the capture phase, append `Capture` to the event name; for example, instead of using `onClick`, you would use `onClickCapture` to handle the click event in the capture phase.
-
-- [Clipboard Events](#clipboard-events)
-- [Composition Events](#composition-events)
-- [Keyboard Events](#keyboard-events)
-- [Focus Events](#focus-events)
-- [Form Events](#form-events)
-- [Generic Events](#generic-events)
-- [Mouse Events](#mouse-events)
-- [Pointer Events](#pointer-events)
-- [Selection Events](#selection-events)
-- [Touch Events](#touch-events)
-- [UI Events](#ui-events)
-- [Wheel Events](#wheel-events)
-- [Media Events](#media-events)
-- [Image Events](#image-events)
-- [Animation Events](#animation-events)
-- [Transition Events](#transition-events)
-- [Other Events](#other-events)
->>>>>>> 6682068641c16df6547b3fcdb7877e71bb0bebf9
 
 * * *
 
@@ -409,15 +356,11 @@ Olay isimleri:
 onScroll
 ```
 
-<<<<<<< HEAD
-Özellikler:
-=======
->Note
+>Not
 >
->Starting with React 17, the `onScroll` event **does not bubble** in React. This matches the browser behavior and prevents the confusion when a nested scrollable element fires events on a distant parent.
+>React 17'den başlayarak, `onScroll` olayı **balonlanma (bubbling) oluşturmaz**. Bu, tarayıcı davranışıyla eşleşir ve iç içe yapıdaki kaydırılabilir bir öğe uzakta bulunan bir üst elemanda olayları (events) tetiklediğinde karışıklığı önler.
 
-Properties:
->>>>>>> 6682068641c16df6547b3fcdb7877e71bb0bebf9
+Özellikler:
 
 ```javascript
 number detail
