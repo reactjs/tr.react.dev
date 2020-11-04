@@ -129,7 +129,7 @@ Bir Context nesnesi oluşturur. React, bu Context nesnesine abone bir bileşen o
 
 Her Context nesnesi, tüketici bileşenlerin context güncellemelerine abone olmasını sağlayan bir React Provider bileşeni ile birlikte gelir.
 
-Bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'u kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
+Provider bileşeni, bu Provider'ın soyundan gelen tüketici bileşenlerine geçirilecek olan bir `value` prop'unu kabul eder. Birçok tüketici bir Provider'a bağlanabilir. Provider'lar ağaçtaki daha derin değerleri değiştirmek için iç içe geçirilebilirler.
 
 Bir Provider'ın soyundan gelen tüm tüketiciler, Provider'ın value prop'u her değiştiğinde yeniden oluşturulur. Provider'ın soyundan gelen tüketicilere ([`.contextType`](#classcontexttype) ve [`useContext`](/docs/hooks-reference.html#usecontext) de dahil olmak üzere) yayılması, `shouldComponentUpdate` metoduna tabi değildir, dolayısıyla herhangi bir bileşen güncellemeyi önlediğinde bile tüketici güncellenir.
 
