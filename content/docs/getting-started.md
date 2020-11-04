@@ -36,11 +36,7 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **i
 
 ### Çevrimiçi Vakit Geçirme Alanları {#online-playgrounds}
 
-<<<<<<< HEAD
-React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), [Glitch](https://glitch.com/edit/#!/remix/starter-react-template) veya [Stackblitz](https://stackblitz.com/fork/react) seçeneklerinden birisiyle bir Merhaba Dünya şablonu deneyin.
-=======
-If you're interested in playing around with React, you can use an online code playground. Try a Hello World template on [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new), or [Stackblitz](https://stackblitz.com/fork/react).
->>>>>>> 30baecf59de28a8cd3c91a2cd878e3822f864061
+React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new) veya [Stackblitz](https://stackblitz.com/fork/react) seçeneklerinden birisiyle bir Merhaba Dünya şablonu deneyin.
 
 Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
