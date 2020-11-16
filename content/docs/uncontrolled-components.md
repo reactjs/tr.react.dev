@@ -45,7 +45,11 @@ Eğer henüz belirli bir durum için hangi bileşen tipini kullanmanız gerekti�
 
 ### Varsayılan Değerler {#default-values}
 
+<<<<<<< HEAD
 React render etme yaşam döngüsünde, form elemanlarında bulunan `value` niteliği, DOM içindeki değeri geçersiz kılar. Kontrolsüz bir bileşen ile, React'in başlangıç ​​değerini belirlemesini isteyebilir, ancak sonraki güncellemeleri kontrolsüz bırakmak isteyebilirsiniz. Bu durumda, `value` yerine `defaultValue` niteliğini belirtebilirsiniz.
+=======
+In the React rendering lifecycle, the `value` attribute on form elements will override the value in the DOM. With an uncontrolled component, you often want React to specify the initial value, but leave subsequent updates uncontrolled. To handle this case, you can specify a `defaultValue` attribute instead of `value`. Changing the value of `defaultValue` attribute after a component has mounted will not cause any update of the value in the DOM.
+>>>>>>> 957276e1e92bb48e5bb6b1c17fd0e7a559de0748
 
 ```javascript{7}
 render() {
