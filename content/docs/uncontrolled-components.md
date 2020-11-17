@@ -45,7 +45,7 @@ Eğer henüz belirli bir durum için hangi bileşen tipini kullanmanız gerekti�
 
 ### Varsayılan Değerler {#default-values}
 
-React render etme yaşam döngüsünde, form elemanlarında bulunan `value` niteliği, DOM içindeki değeri geçersiz kılar. Kontrolsüz bir bileşen ile, React'in başlangıç ​​değerini belirlemesini isteyebilir, ancak sonraki güncellemeleri kontrolsüz bırakmak isteyebilirsiniz. Bu durumda, `value` yerine `defaultValue` niteliğini belirtebilirsiniz.
+React render etme yaşam döngüsünde, form elemanlarında bulunan `value` niteliği, DOM içindeki değeri geçersiz kılar. Kontrolsüz bir bileşen ile, React'in başlangıç ​​değerini belirlemesini isteyebilir, ancak sonraki güncellemeleri kontrolsüz bırakmak isteyebilirsiniz. Bu durumda, `value` yerine `defaultValue` niteliğini belirtebilirsiniz. `defaultValue` değerini bileşen yüklendikten sonra değiştirmek, DOM içinde herhangi bir değer değişikliğine sebep olmayacaktır.
 
 ```javascript{7}
 render() {

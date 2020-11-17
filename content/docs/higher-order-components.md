@@ -321,7 +321,7 @@ function getDisplayName(WrappedComponent) {
 
 ### Render Metodu İçerisinde HOC'ları Kullanmayın {#dont-use-hocs-inside-the-render-method}
 
-React’ın fark algılama algoritması (reconcilliation olarak adlandırılır) var olan bileşen ağacını güncellemesi veya tamamen baştan yaratması gerektiğini anlamak için bileşen kimliğini kullanır. Eğer `render`'dan dönen bileşen bir önceki renderla aynıysa(`===`), React recursive bir şekilde bileşen ağacını yeni olanla farkını ölçelerek günceller. Eğer aynı değillerse, önceki bileşen ağacı tamamen kaldırlır.
+React’ın fark algılama algoritması ([Reconciliation](/docs/reconciliation.html)n olarak adlandırılır) var olan bileşen ağacını güncellemesi veya tamamen baştan yaratması gerektiğini anlamak için bileşen kimliğini kullanır. Eğer `render`'dan dönen bileşen bir önceki renderla aynıysa(`===`), React recursive bir şekilde bileşen ağacını yeni olanla farkını ölçelerek günceller. Eğer aynı değillerse, önceki bileşen ağacı tamamen kaldırlır.
 
 Normalde, bunun hakkında düşünmeniz gerekmez. Fakat HOC kullanırken bu render metodu içerisinde HOC kullanayamacağınız anlamına gelir:
 

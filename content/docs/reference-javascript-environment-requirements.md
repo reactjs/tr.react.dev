@@ -6,7 +6,7 @@ category: Reference
 permalink: docs/javascript-environment-requirements.html
 ---
 
-React 16 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) ve [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) gibi koleksiyon tiplerine bağlıdır. Eğer bunları henüz yerel olarak sağlayamayan (ör. IE <11) veya uyumlu olmayan uygulamaları (ör. IE 11) olan eski tarayıcıları ve cihazları destekliyorsanız, paketlenmiş uygulamanıza global polyfill dahil etmeyi düşünün. [core-js](https://github.com/zloirock/core-js) ya da [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) gibi.
+React 16 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) ve [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) gibi koleksiyon tiplerine bağlıdır. Eğer bunları henüz yerel olarak sağlayamayan (ör. IE <11) veya uyumlu olmayan uygulamaları (ör. IE 11) olan eski tarayıcıları ve cihazları destekliyorsanız, paketlenmiş uygulamanıza [core-js](https://github.com/zloirock/core-js) gibi global polyfill'leri dahil etmeyi düşünün.
 
 Eski tarayıcıları desteklemek için core-js kullanan polyfilled bir React 16 ortamı şöyle görünebilir:
 
