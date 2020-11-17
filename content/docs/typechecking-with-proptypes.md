@@ -99,11 +99,7 @@ MyComponent.propTypes = {
   // yukarıdakilerden herhangi birini `isRequired` ile zincirleyebilirsiniz.
   requiredFunc: PropTypes.func.isRequired,
 
-<<<<<<< HEAD
-  // Herhangi bir veri türünün değeri
-=======
-  // A required value of any data type
->>>>>>> 957276e1e92bb48e5bb6b1c17fd0e7a559de0748
+  // Herhangi bir gerekli (required) veri türünün değeri
   requiredAny: PropTypes.any.isRequired,
 
   // Özel bir doğrulayıcı da belirtebilirsiniz.
