@@ -18,7 +18,7 @@ Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağ�
   - [Context.Consumer](#contextconsumer)
   - [Context.displayName](#contextdisplayname)
 - [Örnekler](#examples)
-  - [Dinamik Context](#dinamik-context-dynamic-context)
+  - [Dinamik Context](#dynamic-context)
   - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
   - [Çoklu Context’leri Kullanma](#consuming-multiple-contexts)
 - [Uyarılar](#caveats)
