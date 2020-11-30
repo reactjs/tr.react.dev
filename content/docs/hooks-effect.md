@@ -483,7 +483,7 @@ Gelecekte, ikinci argüman bir derleme zamanı dönüşümü ile otomatik olarak
 
 ## İleriki Adımlar {#next-steps}
 
-Tebrikler! Bu uzun bir sayfaydı, ama umarım sonunda etkilerle ilgili sorularınızın çoğu yanıtlanmıştır. Hem State Hook'unu hem de Effect Hook'unu öğrendiniz ve ikisini birleştirerek yapabileceğiniz *çok fazla* şey var. Sınıflar için kullanım durumlarının çoğunu kapsar - ve olmadıkları yerlerde, [ek Hook'lar](/docs/hooks-reference.html) yararlı olabilir.
+Tebrikler! Bu uzun bir sayfaydı, ama umarız sonunda etkilerle ilgili sorularınızın çoğu yanıtlanmıştır. Hem State Hook'unu hem de Effect Hook'unu öğrendiniz ve ikisini birleştirerek yapabileceğiniz *çok fazla* şey var. Sınıflar için kullanım durumlarının çoğunu kapsar - ve olmadıkları yerlerde, [ek Hook'lar](/docs/hooks-reference.html) yararlı olabilir.
 
 Ayrıca Hooks'un [Motivasyon](/docs/hooks-intro.html#motivation) bölümünde ana hatlarıyla belirtilen sorunları nasıl çözdüğünü görmeye başlıyoruz. Etkili temizlemenin `componentDidUpdate` ve `componentWillUnmount` ta yinelemeyi nasıl önlediğini, ilgili kodu birbirine yaklaştırdığını ve hataları önlememize yardımcı olduğunu gördük. Ayrıca etkileri amaçlarına göre nasıl ayırabileceğimizi de gördük, ki bu sınıflarda hiç yapamayacağımız bir şey.
 
