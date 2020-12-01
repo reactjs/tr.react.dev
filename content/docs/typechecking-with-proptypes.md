@@ -197,11 +197,11 @@ class Greeting extends React.Component {
 
 `this.props.name`'in üst bileşen tarafından belirtilen bir değerinin olmadığı durumlarda, varsayılan bir değere sahip olmasını sağlamak için `defaultProps` kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
 
-### Function Components
+### Fonksiyon Bileşenleri
 
-If you are using function components in your regular development, you may want to make some small changes to allow PropTypes to be proper applied.
+Geliştirme sırasında düzenli olarak fonksiyon bileşenlerini kullanıyorsanız, PropTypes ın düzgün bir şekilde uygulanması için bazı küçük değişiklikler yapmak isteyebilirsiniz.
 
-Let's say you have a component like this:
+Diyelim ki böyle bir bileşeniniz var:
 
 ```javascript
 export default function HelloWorldComponent({ name }) {
@@ -211,7 +211,7 @@ export default function HelloWorldComponent({ name }) {
 }
 ```
 
-To add PropTypes, you may want to declare the component in a separate function before exporting, like this:
+PropTypes ları eklemek için, bileşeninizi dışarı çıkarmadan önce (exportıng) ayrı bir fonksiyon içinde tanımlamak isteyebilirsiniz:
 
 ```javascript
 function HelloWorldComponent({ name }) {
@@ -223,7 +223,7 @@ function HelloWorldComponent({ name }) {
 export default HelloWorldComponent
 ```
 
-Then, you can add PropTypes directly to the `HelloWorldComponent`:
+Artık PropTypes'ları direkt olarak `HelloWorldComponent` bileşenine ekleyebilirsiniz:
 
 ```javascript
 import PropTypes from 'prop-types'
@@ -240,4 +240,3 @@ HelloWorldComponent.propTypes = {
 
 export default HelloWorldComponent
 ```
->>>>>>> 5e437a10ed4e89cd5eaf990ce4f43e0857592b53
