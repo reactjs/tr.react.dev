@@ -88,7 +88,7 @@ MyComponent.propTypes = {
     color: PropTypes.string,
     fontSize: PropTypes.number
   }),
-  
+
   // An object with warnings on extra properties
   optionalObjectWithStrictShape: PropTypes.exact({
     name: PropTypes.string,
@@ -196,3 +196,47 @@ class Greeting extends React.Component {
 ```
 
 `this.props.name`'in üst bileşen tarafından belirtilen bir değerinin olmadığı durumlarda, varsayılan bir değere sahip olmasını sağlamak için `defaultProps` kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
+
+### Fonksiyon Bileşenleri
+
+Geliştirme sırasında düzenli olarak fonksiyon bileşenlerini kullanıyorsanız, PropTypes ın düzgün bir şekilde uygulanması için bazı küçük değişiklikler yapmak isteyebilirsiniz.
+
+Diyelim ki böyle bir bileşeniniz var:
+
+```javascript
+export default function HelloWorldComponent({ name }) {
+  return (
+    <div>Hello, {name}</div>
+  )
+}
+```
+
+PropTypes ları eklemek için, bileşeninizi dışarı çıkarmadan önce (exportıng) ayrı bir fonksiyon içinde tanımlamak isteyebilirsiniz:
+
+```javascript
+function HelloWorldComponent({ name }) {
+  return (
+    <div>Hello, {name}</div>
+  )
+}
+
+export default HelloWorldComponent
+```
+
+Artık PropTypes'ları direkt olarak `HelloWorldComponent` bileşenine ekleyebilirsiniz:
+
+```javascript
+import PropTypes from 'prop-types'
+
+function HelloWorldComponent({ name }) {
+  return (
+    <div>Hello, {name}</div>
+  )
+}
+
+HelloWorldComponent.propTypes = {
+  name: PropTypes.string
+}
+
+export default HelloWorldComponent
+```

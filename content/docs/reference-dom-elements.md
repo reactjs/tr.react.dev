@@ -129,7 +129,7 @@ React 16'da herhangi bir standart [ya da özelleştirmede](/blog/2017/09/08/dom-
 React her zaman JavaScript merkezli API'ı DOM'a sağlamaktadır. React bileşenleri sık sık hem özel hem de DOM'la ilgili prop'ları aldığı için, React, DOM API'lardaki gibi `camelCase` konvansiyonunu kullanmaktadır.
 
 ```js
-<div tabIndex="-1" />      // Tıpkı node.tabIndex DOM API gibi
+<div tabIndex={-1} />      // Tıpkı node.tabIndex DOM API gibi
 <div className="Button" /> // Tıpkı node.className DOM API gibi
 <input readOnly={true} />  // Tıpkı node.readOnly DOM API gibi
 ```
