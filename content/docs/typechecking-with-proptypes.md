@@ -61,15 +61,9 @@ MyComponent.propTypes = {
   
   // Bir React Eleman Tipi (Örnek: MyComponent).
   optionalElementType: PropTypes.elementType,
-<<<<<<< HEAD
   
   // Bir prop'un sınıf nesnesi olduğunu da belirtebilirsiniz.
   // Bu JS'in instanceof operatörünü kullanır.
-=======
-
-  // You can also declare that a prop is an instance of a class. This uses
-  // JS's instanceof operator.
->>>>>>> 5e437a10ed4e89cd5eaf990ce4f43e0857592b53
   optionalMessage: PropTypes.instanceOf(Message),
 
   // Bir prop'un enum olarak değerlendirilerek
@@ -201,10 +195,7 @@ class Greeting extends React.Component {
 }
 ```
 
-<<<<<<< HEAD
 `this.props.name`'in üst bileşen tarafından belirtilen bir değerinin olmadığı durumlarda, varsayılan bir değere sahip olmasını sağlamak için `defaultProps` kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
-=======
-The `defaultProps` will be used to ensure that `this.props.name` will have a value if it was not specified by the parent component. The `propTypes` typechecking happens after `defaultProps` are resolved, so typechecking will also apply to the `defaultProps`.
 
 ### Function Components
 
