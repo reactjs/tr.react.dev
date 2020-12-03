@@ -61,7 +61,7 @@ Bu, `FancyButton` bileşeni için istenilen ref'lerin aslında `LogProps` bileş
 Neyse ki, ref'leri `React.forwardRef` API'ını kullanarak iç `FancyButton` bileşenine iletebiliriz. `React.forwardRef`, `props` ve `ref` parametrelerini alan ve bir React düğüm'u döndüren render fonksiyonu kabul eder. Örneğin:
 `embed:forwarding-refs/log-props-after.js`
 
-## Displaying a custom name in DevTools {#displaying-a-custom-name-in-devtools}
+## DevTools'ta özel bir ad görüntüleme {#displaying-a-custom-name-in-devtools}
 
 `React.forwardRef` render fonksiyonu kabul eder. React DevTools, ref yönlendirme bileşeni için neyin görüntüleneceğini belirlemek için bu fonksiyonu kullanır.
 
