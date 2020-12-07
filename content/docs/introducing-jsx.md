@@ -92,7 +92,7 @@ function getGreeting(user) {
 Bir HTML elemanı için string ifadelerini çift tırnak içerisinde atayabilirsiniz:
 
 ```js
-const element = <div tabIndex={0}></div>;
+const element = <div tabIndex="0"></div>;
 ```
 
 Ayrıca bir JavaScript ifadesini, elemanın özelliği olarak tanımlamak için süslü parantezler ile sarmalayabilirsiniz:
