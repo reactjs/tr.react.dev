@@ -116,15 +116,11 @@ Strict modu, yan etkileri otomatik olarak tespit edemez ancak onları daha belir
 
 Strict modu, `constructor` gibi metodları kasıtlı olarak iki kere çağırarak, bu gibi desenlerin fark edilmesini sağlar.
 
-<<<<<<< HEAD
-### Eski context API tespit etme {#detecting-legacy-context-api}
-=======
-> Note:
+> Not:
 >
-> Starting with React 17, React automatically modifies the console methods like `console.log()` to silence the logs in the second call to lifecycle functions. However, it may cause undesired behavior in certain cases where [a workaround can be used](https://github.com/facebook/react/issues/20090#issuecomment-715927125).
+> React, 17. versiyonu ile birlikte, yaşam-döngüsü fonksiyonlarına yapılan ikinci çağrılardaki mesajları susturmak için `console.log()` gibi konsol metotlarını otomatik olarak değiştirmektedir. Ancak bu, bazı durumlarda istenmeyen davranışlara sebep olabilir. Bu durumda [geçici bir çözüm kullanılabilir](https://github.com/facebook/react/issues/20090#issuecomment-715927125).
 
-### Detecting legacy context API {#detecting-legacy-context-api}
->>>>>>> 4fc709d0576d0f0f1f8ea8b6bb341a12944b5510
+### Eski context API tespit etme {#detecting-legacy-context-api}
 
 Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılacaktır. Hala tüm 16.x sürümleri için çalışır, ancak strict modunda şu uyarı mesajını gösterecektir:
 
