@@ -197,7 +197,11 @@ class Greeting extends React.Component {
 
 `this.props.name`'in üst bileşen tarafından belirtilen bir değerinin olmadığı durumlarda, varsayılan bir değere sahip olmasını sağlamak için `defaultProps` kullanılır. `propTypes` tip kontrolü `defaultProps` çözümlendikten sonra gerçekleşir, bu nedenle tip kontrolü `defaultProps` için de geçerli olacaktır.
 
+<<<<<<< HEAD
 ### Fonksiyon Bileşenleri
+=======
+### Function Components {#function-components}
+>>>>>>> 923629258fce174a89231c88c90805d9e5b0278d
 
 Geliştirme sırasında düzenli olarak fonksiyon bileşenlerini kullanıyorsanız, PropTypes ın düzgün bir şekilde uygulanması için bazı küçük değişiklikler yapmak isteyebilirsiniz.
 
