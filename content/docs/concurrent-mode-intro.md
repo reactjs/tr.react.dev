@@ -72,7 +72,7 @@ Günümüzde bu her ne kadar uygulanabilir olsa da, uygulama içerisindeki uyuml
 Hadi yukarıdaki iki örneği tekrar gözden geçirelim ve Eşzamanlı Mod'un bu örnekleri nasıl birleştirdiğini anlayalım. **Eşzamanlı Mod'da, React birden çok state güncellemesi üzerinde *eşzamanlı* olarak çalışabilmektedir.** - tıpkı branch'lerin, ekip üyelerinin birbirlerinden bağımsız şekilde çalışabilmelerini sağladıkları gibi:
 
 * CPU'ya bağlı güncellemeler (DOM node'larının oluşturulması ve bileşen kodlarının çalıştırılması gibi) için eşzamanlılık, süregelen render işlemi, daha aciliyeti olan güncellemeler tarafından "yarıda kesilebilir" anlamına gelmektedir.
-* IO'ya bağlı güncellemeler (ağ üzerinden kod ya da verinin alınması gibi) için eşzamanlılık, verinin tamamı henüz ulaşmamış olsa dahi React bellekte render işlemine başlayabilir ve kullanıcı deneyimini zedeleyen, boş yükleme sekanslarını pas geçebilir anlamına gelmektedir.
+* IO(Girdi-Çıktı)'ya bağlı güncellemeler (ağ üzerinden kod ya da verinin alınması gibi) için eşzamanlılık, verinin tamamı henüz ulaşmamış olsa dahi React bellekte render işlemine başlayabilir ve kullanıcı deneyimini zedeleyen, boş yükleme sekanslarını pas geçebilir anlamına gelmektedir.
 
 Önemli olarak bahsetmek gerekir ki, React'in *kullanım* şekli de aynı bu teknik gibidir. Bileşenler, prop'plar ve state temel olarak aynı mantıkla çalışırlar. Ekranı güncellemek istediğinizde, state'i ayarlarsınız.
 
