@@ -90,9 +90,9 @@ Kullanıcı deneyimine önem gösteren ekipler bazen bu tür sorunları günü k
 
 ## Sıradaki Adımlar {#next-steps}
 
-Artık Eşzamanlı Mod'un ne olduğunu tamamen biliyorsun!
+Artık Eşzamanlı Mod'un ne olduğunu tamamen biliyorsunuz!
 
-İleriki sayfalarda daha spesifik konular hakkında detaylar öğreneceksin:
+İleriki sayfalarda daha spesifik konular hakkında detaylar öğreneceksiniz:
 
 * [Veri Alımı İçin Bekleme](/docs/concurrent-mode-suspense.html) React bileşenlerinde veri alımı için yeni bir mekanizma sunar.
 * [Eşzamanlı Kullanıcı Arayüzü Şablonları](/docs/concurrent-mode-patterns.html) Eşzamanlı Mod ve Bekleme sayesinde mümkün kılınan birkaç kullanıcı arayüzü şablonundan bahseder.
