@@ -45,7 +45,7 @@ Bu konsept, React de dahil olmak üzere, kullanıcı arayüzü kütüphanelerini
 
 Eşzamanlı Mod'da, render etmek engelleyici değil ve yarıda kesilebilir. Bu durum kullanıcı deneyimini iyileştirmekte ve aynı zamanda eskiden mümkün olmayan özelliklerin geliştirilmesini mümkün kılmakta. [İleri](/docs/concurrent-mode-suspense.html) [bölümlerdeki](/docs/concurrent-mode-patterns.html) somut örneklere geçmeden önce bu yeni özelliklere genel anlamıyla bir göz atacağız.
 
-### Engellenebilir Render Etmek {#interruptible-rendering}
+### Kesilebilir Render Etmek {#interruptible-rendering}
 
 Filtrelenebilir bir ürün listesi düşünün. Daha önce bir liste filtresine yazı yazarken her tuş basışınızda takılıyormuş gibi hissetiniz mi? Ürün listesini güncellerken yapılan bazı eylemler kaçınılmaz olabilir, yeni DOM node'ları oluşturmak ya da tarayıcının sayfa düzenini oturtması gibi. Ancak, bu eylemleri *ne zaman* ve *nasıl* gerçekleştirdiğimiz oldukça önemlidir.
 
