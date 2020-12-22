@@ -31,7 +31,7 @@ Bu sayfa Eşzamanlı Mod'a teorik bir bakış açısı kazandırmaktadır. **Dah
 
 ## Eşzamanlı Mod Nedir? {#what-is-concurrent-mode}
 
-Eşzamanlı Mod, React uygulamalarının kullanıcı cihaz kapabilitelerine ve ağ hızlarına uyumlu şekilde davranmalarını sağlayan bir dizi yeni özelliktir.
+Eşzamanlı Mod, React uygulamalarının kullanıcı cihaz kapasitelerine ve ağ hızlarına uyumlu şekilde davranmalarını sağlayan bir dizi yeni özelliktir.
 
 Bu özellikler hala deneyseldir ve değişime açıktır. Stabil React versiyonunun henüz bir parçası değildir, ancak deneysel geliştirmelerinizde bu özellikleri kullanabilirsiniz.
 
