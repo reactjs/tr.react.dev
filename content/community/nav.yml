@@ -9,14 +9,14 @@
     - id: examples
       title: Örnekler
     - id: meetups
-      title: Meetups
+      title: Buluşmalar
     - id: conferences
-      title: Conferences
+      title: Konferanslar
     - id: articles
-      title: Articles
+      title: Makaleler
     - id: podcasts
-      title: Podcasts
+      title: Podcastler
     - id: videos
-      title: Videos
+      title: Videolar
     - id: external-resources
-      title: External Resources
+      title: Dış Kaynaklar

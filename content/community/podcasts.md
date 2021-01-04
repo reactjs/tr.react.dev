@@ -1,6 +1,6 @@
 ---
 id: podcasts
-title: Podcasts
+title: Podcastler
 layout: community
 sectionid: community
 permalink: community/podcasts.html
@@ -8,7 +8,7 @@ permalink: community/podcasts.html
 
 Podcasts dedicated to React and individual podcast episodes with React discussions.
 
-## Podcasts {#podcasts}
+## Podcastler {#podcasts}
 
 - [The React Podcast](https://reactpodcast.simplecast.fm/) - The podcast about everything React.js, hosted by [React Training](https://reacttraining.com)
 
@@ -20,7 +20,7 @@ Podcasts dedicated to React and individual podcast episodes with React discussio
 
 - [React Wednesdays](https://www.telerik.com/react-wednesdays) - Weekly live streams with the best and brightest in the React world
 
-## Episodes {#episodes}
+## Bölümler {#episodes}
 
 - [CodeWinds Episode 4](https://codewinds.com/podcast/004.html) - Pete Hunt talks with Jeff Barczewski about React.
 

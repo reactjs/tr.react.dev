@@ -1,12 +1,12 @@
 ---
 id: meetups
-title: Meetups Around the World
+title: Dünya Çapındaki Buluşmalar
 layout: community
 sectionid: community
 permalink: community/meetups.html
 ---
 
-Do you have a local React.js meetup? Add it here! (Please keep the list alphabetical)
+Yerel bir  React.js buluşmanız var mı? Buraya ekleyin! (Lütfen alfabetik sıraya dikkat edin)
 
 ## Albania {#albania}
 * [Tirana](https://www.meetup.com/React-User-Group-Albania/)
