@@ -1,6 +1,6 @@
 ---
 id: videos
-title: Videos
+title: Videolar
 layout: community
 sectionid: community
 permalink: community/videos.html
@@ -8,7 +8,7 @@ redirect_from:
  - "docs/videos.html"
 ---
 
-Videos dedicated to the discussion of React and the React ecosystem.
+React ve React ekosistemini için kayıt edilmiş videolar.
 
 ### React Conf 2019 {#react-conf-2019}
 
