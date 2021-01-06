@@ -6,17 +6,17 @@ prev: hooks-custom.html
 next: hooks-faq.html
 ---
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
+*Hook'lar* React 16.8'deki yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar.
 
-This page describes the APIs for the built-in Hooks in React.
+Bu sayfa React içinde gelen Hook'ların kullanım arayüzünü (API) açıklamaktadır.
 
-If you're new to Hooks, you might want to check out [the overview](/docs/hooks-overview.html) first. You may also find useful information in the [frequently asked questions](/docs/hooks-faq.html) section.
+Eğer Hook'lara yeniyseniz önce [Bir Bakışta Hook'lar](/docs/hooks-overview.html) bölümüne göz atın. [Sıkça sorulan sorular](/docs/hooks-faq.html) bölümünde de işe yarar bilgiler bulabilirsiniz.
 
-- [Basic Hooks](#basic-hooks)
+- [Basit Hook'lar](#basic-hooks)
   - [`useState`](#usestate)
   - [`useEffect`](#useeffect)
   - [`useContext`](#usecontext)
-- [Additional Hooks](#additional-hooks)
+- [Diğer Hook'lar](#additional-hooks)
   - [`useReducer`](#usereducer)
   - [`useCallback`](#usecallback)
   - [`useMemo`](#usememo)
@@ -25,7 +25,7 @@ If you're new to Hooks, you might want to check out [the overview](/docs/hooks-o
   - [`useLayoutEffect`](#uselayouteffect)
   - [`useDebugValue`](#usedebugvalue)
 
-## Basic Hooks {#basic-hooks}
+## Basit Hook'lar {#basic-hooks}
 
 ### `useState` {#usestate}
 
@@ -33,25 +33,25 @@ If you're new to Hooks, you might want to check out [the overview](/docs/hooks-o
 const [state, setState] = useState(initialState);
 ```
 
-Returns a stateful value, and a function to update it.
+Bir state parçası ve onu güncellemek için bir fonksiyon döndürür.
 
-During the initial render, the returned state (`state`) is the same as the value passed as the first argument (`initialState`).
+İlk render aşamasında, döndürülen state parçası (`state`) başlangıçta girilen değerle (`initialState`) aynıdır.
 
-The `setState` function is used to update the state. It accepts a new state value and enqueues a re-render of the component.
+`setState` fonksiyonu state parçasını güncellemek için kullanılır. Yeni bir state değeri kabul eder ve bileşenin yeniden render edilmesini işlem sırasına koyar.
 
 ```js
 setState(newState);
 ```
 
-During subsequent re-renders, the first value returned by `useState` will always be the most recent state after applying updates.
+Sonra gelen yeniden-render aşamalarında, `useState` tarafından döndürülen ilk değer, güncelleme uygulandıktan sonraki en son state değerine eşittir.
 
->Note
+>Not
 >
->React guarantees that `setState` function identity is stable and won't change on re-renders. This is why it's safe to omit from the `useEffect` or `useCallback` dependency list.
+>React, `setState` fonksiyonunun yeniden-render aşamalarında kimliğini sabit tutulacağı garantisini verir. Bu yüzden `setState` fonksiyonunu `useEffect` ya da `useCallback` hook'larının bağımlı değişkenler listesine eklemenize gerek yoktur.
 
-#### Functional updates {#functional-updates}
+#### Fonksiyonlu Güncellemeler {#functional-updates}
 
-If the new state is computed using the previous state, you can pass a function to `setState`. The function will receive the previous value, and return an updated value. Here's an example of a counter component that uses both forms of `setState`:
+Eğer yeni state, bir önceki state değerine bağlı olarak hesaplanıyorsa, `setState` içine fonksiyon girebilirsiniz. Bu fonksiyon bir önceki state değerini parametre olarak alır ve güncel state değerini döndürür. `setState` fonksiyonunun her iki çeşidini de kullanan bir örnek sayaç fonksiyonu oluşturalım:
 
 ```js
 function Counter({initialCount}) {
@@ -67,26 +67,26 @@ function Counter({initialCount}) {
 }
 ```
 
-The "+" and "-" buttons use the functional form, because the updated value is based on the previous value. But the "Reset" button uses the normal form, because it always sets the count back to the initial value.
+"+" ve "-" butonları fonksiyonlu çeşidi kullanır, çünkü güncellenen değer bir önceki değere bağlıdır. Ancak "Reset" butonu normal çeşidi kullanır, çünkü her seferinde sayacı başlangıç değerine sıfırlar.
 
-If your update function returns the exact same value as the current state, the subsequent rerender will be skipped completely.
+Eğer bu güncelleme fonksiyonunuz mevcut state ile aynı değeri döndürürse, sıradaki yeniden-render işlemi tamamen göz ardı edilir.
 
-> Note
+> Not
 >
-> Unlike the `setState` method found in class components, `useState` does not automatically merge update objects. You can replicate this behavior by combining the function updater form with object spread syntax:
+> Sınıf bileşenlerindeki `setState` metodunun aksine, `useState` objeleri otomatik olarak birleştirmez. Fonksiyonlu güncelleme metodu ve obje yayma (spread) operatörü birlikte kullanılarak bu özellik yeniden üretilebilir:
 >
 > ```js
 > setState(prevState => {
->   // Object.assign would also work
+>   // Object.assign da kullanılabilir
 >   return {...prevState, ...updatedValues};
 > });
 > ```
 >
-> Another option is `useReducer`, which is more suited for managing state objects that contain multiple sub-values.
+> Diğer bir seçenek ise `useReducer` hook'udur, ki bu birden fazla alt değeri olan objelerin yönetimine daha uygundur.
 
-#### Lazy initial state {#lazy-initial-state}
+#### Tembel (lazy) başlangıç state değeri {#lazy-initial-state}
 
-The `initialState` argument is the state used during the initial render. In subsequent renders, it is disregarded. If the initial state is the result of an expensive computation, you may provide a function instead, which will be executed only on the initial render:
+`initialState` değeri ilk render aşamasında kullanılan state değeridir. Sonra gelen render işlemlerinde göz ardı edilir. Eğer başlangıç state değeri ağır bir işlemin sonucu olarak hesaplanıyorsa, bunun yerine yalnızca ilk render aşamasında çalışacak bir fonksiyon girebilirsiniz:
 
 ```js
 const [state, setState] = useState(() => {
@@ -95,11 +95,11 @@ const [state, setState] = useState(() => {
 });
 ```
 
-#### Bailing out of a state update {#bailing-out-of-a-state-update}
+#### State güncellemesinden kurtulmak {#bailing-out-of-a-state-update}
 
-If you update a State Hook to the same value as the current state, React will bail out without rendering the children or firing effects. (React uses the [`Object.is` comparison algorithm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description).)
+Bir State Hook'unu mevcut state değeri ile aynı olan bir değerle güncellerseniz, React render işlemini yapmaz ya da efektleri işleme sokmaz. (React [`Object.is` karşılaştırma algoritmasını](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description) kullanır.)
 
-Note that React may still need to render that specific component again before bailing out. That shouldn't be a concern because React won't unnecessarily go "deeper" into the tree. If you're doing expensive calculations while rendering, you can optimize them with `useMemo`.
+Unutmayın, React yine de bu spesifik bileşeni tekrar render edebilir. Bu durum sorun teşkil etmez çünkü React gereksiz bir şekilde bileşen ağacında derinlere doğru inmez. Render aşamasında ağır hesaplamalar yapıyorsanız, bunları `useMemo` ile optimize edebilirsiniz.
 
 ### `useEffect` {#useeffect}
 
@@ -107,45 +107,45 @@ Note that React may still need to render that specific component again before ba
 useEffect(didUpdate);
 ```
 
-Accepts a function that contains imperative, possibly effectful code.
+Zorunlu yan etkileri olan bir fonksiyonu parametre olarak alır.
 
-Mutations, subscriptions, timers, logging, and other side effects are not allowed inside the main body of a function component (referred to as React's _render phase_). Doing so will lead to confusing bugs and inconsistencies in the UI.
+Mutasyonlar, abonelikler, zamanlayıcılar, loglama, ve diğer yan etkisi olan işlemler fonksiyonel bir bileşenin ana gövdesinde bulunamazlar (React'ın _render aşaması_ olarak da bilinir). Böyle yapmak kafa karıştıran hatalara ve kullanıcı arayüzünde (UI) tutarsızlıklara sebep olacaktır.
 
-Instead, use `useEffect`. The function passed to `useEffect` will run after the render is committed to the screen. Think of effects as an escape hatch from React's purely functional world into the imperative world.
+Bunun yerine, `useEffect` kullanın. `useEffect` içine girilen fonksiyon, render işlemi gerçekleşip bileşenler ekrana yazdırıldıktan sonra çalışacaktır. Efekleri, React'ın tamamen fonksiyonel olan dünyasından gerçek dünyaya bir yangın çıkışı olarak görebilirsiniz.
 
-By default, effects run after every completed render, but you can choose to fire them [only when certain values have changed](#conditionally-firing-an-effect).
+Varsayılan olarak, efektler her tamamlanan render işleminden sonra çalışır, ancak [sadece belli değerler değiştiğinde](#conditionally-firing-an-effect) çalıştırmak da sizin elinizde.
 
-#### Cleaning up an effect {#cleaning-up-an-effect}
+#### Bir efekti temizlemek {#cleaning-up-an-effect}
 
-Often, effects create resources that need to be cleaned up before the component leaves the screen, such as a subscription or timer ID. To do this, the function passed to `useEffect` may return a clean-up function. For example, to create a subscription:
+Genelde, efektler bileşen ekrandan kaldırılmadan önce temizlenmesi gereken bazı kaynaklar oluşturur, bir abonelik ve zamanlayıcı gibi. Bunu yapmak için, `useEffect` içine girilen fonksiyon bir temizlik fonksiyonu döndürülebilir. Örneğin bir abonelik oluşturalım:
 
 ```js
 useEffect(() => {
   const subscription = props.source.subscribe();
   return () => {
-    // Clean up the subscription
+    //Aboneliği temizle
     subscription.unsubscribe();
   };
 });
 ```
 
-The clean-up function runs before the component is removed from the UI to prevent memory leaks. Additionally, if a component renders multiple times (as they typically do), the **previous effect is cleaned up before executing the next effect**. In our example, this means a new subscription is created on every update. To avoid firing an effect on every update, refer to the next section.
+Temizlik fonksiyonu, bellek sızıntılarını önlemek için, bileşen ekrandan kaldırılmadan hemen önce çalıştırılır. Ek olarak, bileşen birkaç defa render edilirse (ki genelde edilir), **bir önceki efekt yeni efekt çalıştırılmadan temizlenir**. Bizim örneğimizde bu demektir ki her güncellemede yeni bir abonelik oluşturuluyor. Bir efekti her güncellemede çalıştırmanın önüne geçmek için bir sonraki bölüme bakınız.
 
-#### Timing of effects {#timing-of-effects}
+#### Efektlerin zamanlaması {#timing-of-effects}
 
-Unlike `componentDidMount` and `componentDidUpdate`, the function passed to `useEffect` fires **after** layout and paint, during a deferred event. This makes it suitable for the many common side effects, like setting up subscriptions and event handlers, because most types of work shouldn't block the browser from updating the screen.
+`componentDidMount` ve `componentDidUpdate`'in aksine, `useEffect` içine girilen fonksiyon ekrana yazdırma işleminden **sonra**, gecikmeli bir olay olarak çalışır. Bu `useEffect`'i birçok yaygın yan etki için uygun getirir, mesela aboneliklerin ve olay yöneticilerinin oluşturulması, çünkü birçok işlem türü aslında tarayıcının ekranı güncellemesini engellememelidir.
 
-However, not all effects can be deferred. For example, a DOM mutation that is visible to the user must fire synchronously before the next paint so that the user does not perceive a visual inconsistency. (The distinction is conceptually similar to passive versus active event listeners.) For these types of effects, React provides one additional Hook called [`useLayoutEffect`](#uselayouteffect). It has the same signature as `useEffect`, and only differs in when it is fired.
+Buna rağmen, tüm efekler ertelenemeyebilir. Mesela, kullanıcının görebildiği, DOM üzerindeki bir değişiklik bir sonraki ekrana yazdırma aşamasından önce gerçekleşmelidir ki kullanıcı görsel bir uyumsuzluk yaşamasın. (Aradaki ayırım konsept olarak pasif vs. aktif olay dinleyicilerine benzer.) Bu tip efekler için React, [`useLayoutEffect`](#uselayouteffect) adında başka bir hook daha sağlar. Bu hook da `useEffect` ile aynı şekilde çalışır, sadece ne zaman çalıştırılacağı farklıdır.
 
-Although `useEffect` is deferred until after the browser has painted, it's guaranteed to fire before any new renders. React will always flush a previous render's effects before starting a new update.
+`useEffect` tarayıcı ekrana yazdırma işlemini tamamlanana kadar geciktirilmiş olmasına rağmen, herhangi bir yeniden-render işleminden önce çalışması da garanti edilir. React her zaman bir önceki render işleminin efektlerini, yeni bir güncellemeye başlamadan önce temizleyecektir.
 
-#### Conditionally firing an effect {#conditionally-firing-an-effect}
+#### Şartlı olarak bir efekti çalıştırmak {#conditionally-firing-an-effect}
 
-The default behavior for effects is to fire the effect after every completed render. That way an effect is always recreated if one of its dependencies changes.
+Efektler için varsayılan davranış, her bir tamamlanmış render işleminden sonra efekti çalıştırmaktır. Bu şekilde bir efekt, bağımlı olduğu değişkenlerden birisi değiştiğinde yeniden oluşturulur. 
 
-However, this may be overkill in some cases, like the subscription example from the previous section. We don't need to create a new subscription on every update, only if the `source` prop has changed.
+Ancak, bazı durumlarda bu aşırı güç kullanımı gibi gelebilir, mesela bir önceki bölümdeki abonelik örneğinde olduğu gibi. Her bir güncellemede yeni bir abonelik oluşturmamıza gerek yoktur, sadece `source` prop değeri değişirse.
 
-To implement this, pass a second argument to `useEffect` that is the array of values that the effect depends on. Our updated example now looks like this:
+Bunu uygulamak için, `useEffect`'e efektin bağımlı olduğu değerlerden oluşan bir diziyi ikinci bir argüman girin. Yeni örneğimiz şimdi şu şekilde görünüyor:
 
 ```js
 useEffect(
@@ -159,20 +159,20 @@ useEffect(
 );
 ```
 
-Now the subscription will only be recreated when `props.source` changes.
+Şimdi abonelik yalnızca `props.source` değiştiğinde yeniden oluşturulacaktır.
 
->Note
+>Not
 >
->If you use this optimization, make sure the array includes **all values from the component scope (such as props and state) that change over time and that are used by the effect**. Otherwise, your code will reference stale values from previous renders. Learn more about [how to deal with functions](/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies) and what to do when the [array values change too often](/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often).
+>Eğer bu optimizasyonu kullanırsanız, diziye **bileşenin içindeki zaman içinde değişen ve efekt içinde kullanılan tüm değerleri** dahil etmeyi unutmayın. Aksi takdirde kodunuz bir önceki render işleminden kalma geçerliliğini yitirmiş değerlere referans gösterecektir. [Fonksiyonlarla nasıl çalışılır](/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies) ve [dizinin değerleri çok sık değiştiğinde ne yapılır](/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often) konuları hakkında daha fazla bilgi edinin.
 >
->If you want to run an effect and clean it up only once (on mount and unmount), you can pass an empty array (`[]`) as a second argument. This tells React that your effect doesn't depend on *any* values from props or state, so it never needs to re-run. This isn't handled as a special case -- it follows directly from how the dependencies array always works.
+>Bir efekti yalnızca bir kere çalıştırıp temizlemek istediğinizde (mount ve unmount aşamalarında), ikinci argüman olarak boş bir dizi (`[]`) gönderebilirsiniz. Böylece React'a, efektin state veya props içindeki hiçbir değere bağlı olmadığını söylemiş olursunuz, böylece efekt *hiçbir* zaman yeniden çalıştırılmaz. Bu özel bir durum değildir -- bağımlı değişkenler dizisinin çalışma prensibi bu şekildedir.
 >
->If you pass an empty array (`[]`), the props and state inside the effect will always have their initial values. While passing `[]` as the second argument is closer to the familiar `componentDidMount` and `componentWillUnmount` mental model, there are usually [better](/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies) [solutions](/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often) to avoid re-running effects too often. Also, don't forget that React defers running `useEffect` until after the browser has painted, so doing extra work is less of a problem.
+>Boş bir dizi girdiğinizde (`[]`), efekt içindeki props ve state her zaman başlangıç değerlerini alırlar. İkinci argüman olarak boş dizi `[]` girmek `componentDidMount` ve `componentWillUnmount` modeline benzese de, efektlerin çok fazla yeniden çalışmasını engellemek için genelde [daha iyi](/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies) [çözümler](/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often) mevcuttur. Ayrıca, React'ın `useEffect`'in çalıştırılmasını tarayıcı ekrana yazdırdıktan sonraya bıraktığını unutmayın, yani fazladan iş yapmak çok da önemli değil.
 >
 >
->We recommend using the [`exhaustive-deps`](https://github.com/facebook/react/issues/14920) rule as part of our [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks#installation) package. It warns when dependencies are specified incorrectly and suggests a fix.
+>Biz [`exhaustive-deps`](https://github.com/facebook/react/issues/14920) kuralının [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks#installation) paketinin bir parçası olarak kullanılmasını öneriyoruz. Bu paket bağımlı değişkenler yanlış bir şekilde belirtildiğinde uyarır ve bir çözüm önerir.
 
-The array of dependencies is not passed as arguments to the effect function. Conceptually, though, that's what they represent: every value referenced inside the effect function should also appear in the dependencies array. In the future, a sufficiently advanced compiler could create this array automatically.
+Bağımlı değişkenler dizisi efekt fonksiyonuna argüman olarak girilmez. Ancak konsept olarak temsil ettikleri şey odur: efekt fonksiyonu içerisinde referans gösterilen her değer bağımlı değişkenler dizisinde de bulunmalıdır. Gelecekte, yeterince gelişmiş bir derleyici bu diziyi otomatik olarak oluşturabilir.
 
 ### `useContext` {#usecontext}
 
@@ -180,25 +180,25 @@ The array of dependencies is not passed as arguments to the effect function. Con
 const value = useContext(MyContext);
 ```
 
-Accepts a context object (the value returned from `React.createContext`) and returns the current context value for that context. The current context value is determined by the `value` prop of the nearest `<MyContext.Provider>` above the calling component in the tree.
+Bir context objesi alır (`React.createContext`'den döndürülen değer) ve mevcut context için o andaki context değerini döndürür. Mevcut context değeri, bileşen ağacında yukarı doğru çıkarken en yakında bulunan `<MyContext.Provider>` ifadesinin `value` değeri tarafından belirlenir. 
 
-When the nearest `<MyContext.Provider>` above the component updates, this Hook will trigger a rerender with the latest context `value` passed to that `MyContext` provider. Even if an ancestor uses [`React.memo`](/docs/react-api.html#reactmemo) or [`shouldComponentUpdate`](/docs/react-component.html#shouldcomponentupdate), a rerender will still happen starting at the component itself using `useContext`.
+Yukarı doğru en yakındaki `<MyContext.Provider>` güncellendiğinde, bu Hook en güncel context `value` değerini `MyContext` sağlayıcısına göndererek bir yeniden-render işlemi tetikler. Yukarıdaki bileşenler [`React.memo`](/docs/react-api.html#reactmemo) ya da [`shouldComponentUpdate`](/docs/react-component.html#shouldcomponentupdate) kullansa bile, yeniden-render işlemi `useContext`'i kullanan bileşenden başlayarak yine de gerçekleşir.
 
-Don't forget that the argument to `useContext` must be the *context object itself*:
+`useContext`'e girilen argümanın *context objesinin kendisi* olduğunu unutmayın:
 
- * **Correct:** `useContext(MyContext)`
- * **Incorrect:** `useContext(MyContext.Consumer)`
- * **Incorrect:** `useContext(MyContext.Provider)`
+ * **Doğru:** `useContext(MyContext)`
+ * **Yanlış:** `useContext(MyContext.Consumer)`
+ * **Yanlış:** `useContext(MyContext.Provider)`
 
-A component calling `useContext` will always re-render when the context value changes. If re-rendering the component is expensive, you can [optimize it by using memoization](https://github.com/facebook/react/issues/15156#issuecomment-474590693).
+`useContext`'i çağıran bir bileşen context değeri her değiştiğinde yeniden-render edilecektir. Eğer bileşenin yeniden-render edilmesi ağır bir işlem ise, [memoization kullanarak](https://github.com/facebook/react/issues/15156#issuecomment-474590693) optimize edebilirsiniz.
 
->Tip
+>İpucu
 >
->If you're familiar with the context API before Hooks, `useContext(MyContext)` is equivalent to `static contextType = MyContext` in a class, or to `<MyContext.Consumer>`.
+>Context API ile Hook'lardan önce tanıştıysanız, `useContext(MyContext)` ile sınıf bileşenlerindeki `static contextType = MyContext` ya da `<MyContext.Consumer>` aynı şeylerdir.
 >
->`useContext(MyContext)` only lets you *read* the context and subscribe to its changes. You still need a `<MyContext.Provider>` above in the tree to *provide* the value for this context.
+>`useContext(MyContext)` sadece context'i *okumanıza* olanak sağlar ve oradaki değişikliklere abone olur. Bileşen ağacınızın üst kısımlarında, bu context'in değerinin *sağlayıcısı* olarak `<MyContext.Provider>`'a hala ihtiyacınız vardır. 
 
-**Putting it together with Context.Provider**
+**Context.Provider ile parçaları birleştirelim**
 ```js{31-36}
 const themes = {
   light: {
@@ -239,7 +239,7 @@ function ThemedButton() {
   );
 }
 ```
-This example is modified for hooks from a previous example in the [Context Advanced Guide](/docs/context.html), where you can find more information about when and how to use Context.
+Bu örnek, Context'i ne zaman ve nasıl kullanacağınıza dair bilgiler bulabileceğiniz bir önceki [Context Gelişmiş Rehberi](/docs/context.html) örneğinden alınıp Hook'lar için düzenlenmiştir.
 
 
 ## Additional Hooks {#additional-hooks}
