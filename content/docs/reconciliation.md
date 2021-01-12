@@ -27,11 +27,7 @@ Pratikte, bu varsayımlar neredeyse tüm kullanım durumları için geçerlidir.
 
 Kök elemanların tipleri farklı olduğunda, React eski ağacı yıkacak ve yeni ağacı sıfırdan inşa edecektir. `<a>`'dan `<img>`'e, `<Article>`'dan `<Comment>`'e veya `<Button>`'dan `<div>`'e gitmek - bunlardan herhangi biri tam bir yeniden inşaya yol açacaktır.
 
-<<<<<<< HEAD
-Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state kaybolur.
-=======
-When tearing down a tree, old DOM nodes are destroyed. Component instances receive `componentWillUnmount()`. When building up a new tree, new DOM nodes are inserted into the DOM. Component instances receive `UNSAFE_componentWillMount()` and then `componentDidMount()`. Any state associated with the old tree is lost.
->>>>>>> 82b8c9f2ab094eb7b0268029ab72fc99ffcadaf6
+Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `UNSAFE_componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state kaybolur.
 
 Kökün altındaki tüm bileşenlerin de bağlantısı kesilir ve stateleri yok edilir. Örneğin, fark bulurken:
 
@@ -47,17 +43,13 @@ Kökün altındaki tüm bileşenlerin de bağlantısı kesilir ve stateleri yok 
 
 Bu, eski `Counter`'ı yok eder ve yenisini oluşturur.
 
-<<<<<<< HEAD
-### Aynı Tip DOM Elemanları {#dom-elements-of-the-same-type}
-=======
->Note:
+>Not:
 >
->These methods are considered legacy and you should [avoid them](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>Bu yöntemler eski yöntem olarak kabul edilir ve yeni kodda [bunlardan kaçınmalısınız](/blog/2018/03/27/update-on-async-rendering.html):
 >
 >- `UNSAFE_componentWillMount()`
 
-### DOM Elements Of The Same Type {#dom-elements-of-the-same-type}
->>>>>>> 82b8c9f2ab094eb7b0268029ab72fc99ffcadaf6
+### Aynı Tip DOM Elemanları {#dom-elements-of-the-same-type}
 
 Aynı tip iki React DOM elemanını karşılaştırırken, React her ikisinin de özelliklerine bakar, aynı DOM düğümünü tutar ve yalnızca değiştirilen özellikleri günceller. Örneğin:
 
@@ -83,26 +75,18 @@ DOM düğümünü yönetildikten sonra, React alt elemanlar üzerinde özyinelem
 
 ### Aynı Tip Bileşen Elemanları {#component-elements-of-the-same-type}
 
-<<<<<<< HEAD
-Bir bileşen güncellendiğinde, nesne aynı kalır, böylece state render edilmeler arasında korunur. React, bileşen nesnesinin prop'larını yeni elemanla eşleşecek şekilde günceller ve nesnede `componentWillReceiveProps()` ve `componentWillUpdate()`'i calıştırır.
-=======
-When a component updates, the instance stays the same, so that state is maintained across renders. React updates the props of the underlying component instance to match the new element, and calls `UNSAFE_componentWillReceiveProps()`, `UNSAFE_componentWillUpdate()` and `componentDidUpdate()` on the underlying instance.
->>>>>>> 82b8c9f2ab094eb7b0268029ab72fc99ffcadaf6
+Bir bileşen güncellendiğinde, nesne aynı kalır, böylece state render edilmeler arasında korunur. React, bileşen nesnesinin prop'larını yeni elemanla eşleşecek şekilde günceller ve nesnede `UNSAFE_componentWillReceiveProps()` ve `UNSAFE_componentWillUpdate()`'i calıştırır.
 
 Ardından, `render()` metodu çağrılır ve fark bulma algoritması önceki sonuç ile yeni sonuç üzerinden özyinelemeli olarak devam eder.
 
-<<<<<<< HEAD
-### Alt Elemanlarda Özyineleme {#recursing-on-children}
-=======
 >Note:
 >
->These methods are considered legacy and you should [avoid them](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>Bu yöntemler eski yöntem olarak kabul edilir ve yeni kodda [bunlardan kaçınmalısınız](/blog/2018/03/27/update-on-async-rendering.html):
 >
 >- `UNSAFE_componentWillUpdate()`
 >- `UNSAFE_componentWillReceiveProps()`
 
-### Recursing On Children {#recursing-on-children}
->>>>>>> 82b8c9f2ab094eb7b0268029ab72fc99ffcadaf6
+### Alt Elemanlarda Özyineleme {#recursing-on-children}
 
 Varsayılan olarak, bir DOM düğümünün alt elemanlarında özyineleme yaparken, React aynı anda her iki alt eleman listesinde de gezer ve fark olduğunda mutasyon oluşturur.
 
