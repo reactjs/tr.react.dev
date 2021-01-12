@@ -27,7 +27,7 @@ Pratikte, bu varsayımlar neredeyse tüm kullanım durumları için geçerlidir.
 
 Kök elemanların tipleri farklı olduğunda, React eski ağacı yıkacak ve yeni ağacı sıfırdan inşa edecektir. `<a>`'dan `<img>`'e, `<Article>`'dan `<Comment>`'e veya `<Button>`'dan `<div>`'e gitmek - bunlardan herhangi biri tam bir yeniden inşaya yol açacaktır.
 
-Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state kaybolur.
+Bir ağacı yıkarken, eski DOM düğümleri yok edilir. Bileşen nesnelerinde `componentWillUnmount()` çalıştırılır. Yeni bir ağaç oluştururken, DOM'a yeni DOM düğümleri eklenir. Bileşen nesnelerinde `UNSAFE_componentWillMount()` ve sonra `componentDidMount()` çalıştırılır. Eski ağaçla ilişkili herhangi bir state kaybolur.
 
 Kökün altındaki tüm bileşenlerin de bağlantısı kesilir ve stateleri yok edilir. Örneğin, fark bulurken:
 
@@ -42,6 +42,12 @@ Kökün altındaki tüm bileşenlerin de bağlantısı kesilir ve stateleri yok 
 ```
 
 Bu, eski `Counter`'ı yok eder ve yenisini oluşturur.
+
+>Not:
+>
+>Bu yöntemler eski yöntem olarak kabul edilir ve yeni kodda [bunlardan kaçınmalısınız](/blog/2018/03/27/update-on-async-rendering.html):
+>
+>- `UNSAFE_componentWillMount()`
 
 ### Aynı Tip DOM Elemanları {#dom-elements-of-the-same-type}
 
@@ -69,9 +75,16 @@ DOM düğümünü yönetildikten sonra, React alt elemanlar üzerinde özyinelem
 
 ### Aynı Tip Bileşen Elemanları {#component-elements-of-the-same-type}
 
-Bir bileşen güncellendiğinde, nesne aynı kalır, böylece state render edilmeler arasında korunur. React, bileşen nesnesinin prop'larını yeni elemanla eşleşecek şekilde günceller ve nesnede `componentWillReceiveProps()` ve `componentWillUpdate()`'i calıştırır.
+Bir bileşen güncellendiğinde, nesne aynı kalır, böylece state render edilmeler arasında korunur. React, bileşen nesnesinin prop'larını yeni elemanla eşleşecek şekilde günceller ve nesnede `UNSAFE_componentWillReceiveProps()` ve `UNSAFE_componentWillUpdate()`'i calıştırır.
 
 Ardından, `render()` metodu çağrılır ve fark bulma algoritması önceki sonuç ile yeni sonuç üzerinden özyinelemeli olarak devam eder.
+
+>Note:
+>
+>Bu yöntemler eski yöntem olarak kabul edilir ve yeni kodda [bunlardan kaçınmalısınız](/blog/2018/03/27/update-on-async-rendering.html):
+>
+>- `UNSAFE_componentWillUpdate()`
+>- `UNSAFE_componentWillReceiveProps()`
 
 ### Alt Elemanlarda Özyineleme {#recursing-on-children}
 
