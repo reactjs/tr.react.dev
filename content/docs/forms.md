@@ -31,7 +31,7 @@ React state’inde tek bir kaynak olarak ikisini birleştirebiliriz. Ardından f
 
 Örneğin bir önceki örnekte, `name` girdisine yazılıp butona basıldığı zaman `name`'in değerini `alert` ile yazdırmak istiyorsak, formu kontrollü bir bileşen olarak oluşturabiliriz:
 
-```javascript{4,10-12,24}
+```javascript{4,10-12,21,24}
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
