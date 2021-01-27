@@ -16,11 +16,7 @@ permalink: community/courses.html
 
 - [React Crash Course 2018](https://www.youtube.com/watch?v=Ke90Tje7VS0) - Başlangıç seviyesine uygun, en önemli React konularını içeren hızlandırılmış bir dersi.
 
-<<<<<<< HEAD
-- [React Armory: Salt React'i Öğrenin](https://reactarmory.com/guides/learn-react-by-itself) - React Armory ile React'i moda tabirlerle uğraşmadan öğrenin.
-=======
-- [Frontend Armory: React Fundamentals](https://frontarm.com/courses/react-fundamentals/) - Learn React without the buzzwords.
->>>>>>> ed88a240d9c97822cc2f02074306965a1a4f4ac4
+- [Frontend Armory: React Temelleri](https://frontarm.com/courses/react-fundamentals/) - React'i popüler kelimeler olmadan öğrenin.
 
 - [Egghead.io: ReactJS için Başlangıç Rehberi](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) - React'e yeni başlayanlar ve React temellerini daha iyi anlamak isteyenler için ücretsiz bir ders.
 
