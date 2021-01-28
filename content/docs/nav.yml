@@ -116,7 +116,7 @@
       - id: hooks-state
         title: State Hook'unu Kullanmak
       - id: hooks-effect
-        title: Efekt Hook'unu Kullanmak
+        title: Effect Hook'unu Kullanmak
       - id: hooks-rules
         title: Hook Kuralları
       - id: hooks-custom
