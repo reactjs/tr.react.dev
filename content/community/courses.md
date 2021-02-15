@@ -18,7 +18,11 @@ permalink: community/courses.html
 
 - [Frontend Armory: React Temelleri](https://frontarm.com/courses/react-fundamentals/) - React'i popüler kelimeler olmadan öğrenin.
 
+<<<<<<< HEAD
 - [Egghead.io: ReactJS için Başlangıç Rehberi](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) - React'e yeni başlayanlar ve React temellerini daha iyi anlamak isteyenler için ücretsiz bir ders.
+=======
+- [Egghead.io: The Beginner's Guide to ReactJS](https://egghead.io/courses/the-beginner-s-guide-to-react) - Free course for React newbies and those looking to get a better understanding of React fundamentals.
+>>>>>>> 888d9eae7a33ec1a48c18f28e82c26d048d885be
 
 - [Ücretsiz React Bootcamp'i](https://tylermcginnis.com/free-react-bootcamp/) - Ücretsiz bir React bootcamp'inin üç günlük kayıtları.
 

@@ -199,7 +199,11 @@ class Greeting extends React.Component {
 
 ### Fonksiyon Bileşenleri {#function-components}
 
+<<<<<<< HEAD
 Geliştirme sırasında düzenli olarak fonksiyon bileşenlerini kullanıyorsanız, PropTypes ın düzgün bir şekilde uygulanması için bazı küçük değişiklikler yapmak isteyebilirsiniz.
+=======
+If you are using function components in your regular development, you may want to make some small changes to allow PropTypes to be properly applied.
+>>>>>>> 888d9eae7a33ec1a48c18f28e82c26d048d885be
 
 Diyelim ki böyle bir bileşeniniz var:
 
