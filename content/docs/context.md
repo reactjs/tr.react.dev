@@ -21,7 +21,7 @@ Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağ�
   - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
   - [Çoklu Context’leri Kullanma](#consuming-multiple-contexts)
 - [Uyarılar](#caveats)
-- [Eski Sürüm API](#api-legacy-api)
+- [Eski Sürüm API](#legacy-api)
 
 ## Context Ne Zaman Kullanılır {#when-to-use-context}
 
