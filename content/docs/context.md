@@ -6,23 +6,22 @@ permalink: docs/context.html
 
 Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen ağacı üzerinden veri iletmenin bir yolunu sağlar.
 
-Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere), fakat bu bir uygulamada birçok bileşene ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, bileşen ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
+Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere). Fakat bu tür bir kullanım, uygulamadaki birçok bileşen tarafından ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, bileşen ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
 
-
-- [Context Ne Zaman Kullanılır](#when-to-use-context)
-- [Context Kullanmadan Önce](#before-you-use-context)
-- [API](#api)
-  - [React.createContext](#reactcreatecontext)
-  - [Context.Provider](#contextprovider)
-  - [Class.contextType](#classcontexttype)
-  - [Context.Consumer](#contextconsumer)
-  - [Context.displayName](#contextdisplayname)
-- [Örnekler](#examples)
-  - [Dinamik Context](#dynamic-context)
-  - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
-  - [Çoklu Context’leri Kullanma](#consuming-multiple-contexts)
-- [Uyarılar](#caveats)
-- [Eski Sürüm API](#api-legacy-api)
+- [Context Ne Zaman Kullanılır {#when-to-use-context}](#context-ne-zaman-kullanılır-when-to-use-context)
+- [Context Kullanmadan Önce {#before-you-use-context}](#context-kullanmadan-önce-before-you-use-context)
+- [API {#api}](#api-api)
+  - [`React.createContext` {#reactcreatecontext}](#reactcreatecontext-reactcreatecontext)
+  - [`Context.Provider` {#contextprovider}](#contextprovider-contextprovider)
+  - [`Class.contextType` {#classcontexttype}](#classcontexttype-classcontexttype)
+  - [`Context.Consumer` {#contextconsumer}](#contextconsumer-contextconsumer)
+  - [`Context.displayName` {#contextdisplayname}](#contextdisplayname-contextdisplayname)
+- [Örnekler {#examples}](#örnekler-examples)
+  - [Dinamik Context {#dynamic-context}](#dinamik-context-dynamic-context)
+  - [İç İçe Geçmiş Bileşenden Context Güncelleme {#updating-context-from-a-nested-component}](#i̇ç-i̇çe-geçmiş-bileşenden-context-güncelleme-updating-context-from-a-nested-component)
+  - [Çoklu Context’leri Kullanma {#consuming-multiple-contexts}](#çoklu-contextleri-kullanma-consuming-multiple-contexts)
+- [Uyarılar {#caveats}](#uyarılar-caveats)
+- [Eski Sürüm API {#legacy-api}](#eski-sürüm-api-legacy-api)
 
 ## Context Ne Zaman Kullanılır {#when-to-use-context}
 
@@ -119,7 +118,7 @@ const MyContext = React.createContext(defaultValue);
 
 Bir Context nesnesi oluşturur. React, bu Context nesnesine abone bir bileşen oluşturduğunda, context'in mevcut değerini ağaçtaki en yakın `Provider'dan` okuyacaktır.
 
-`defaultValue` argümanı **yalnızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu, bileşenleri başka bileşenlerin altına koymadan izole bir şekilde test etmek için yardımcı olabilir. Not: Provider value değerini `undefined` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
+`defaultValue` argümanı **yalnızca**, bir bileşenin üstünde ağaçta eşleşen bir Provider bulunmadığında kullanılır. Bu varsayılan değer, bileşenleri başka bileşenlerin altına koymadan izole bir şekilde test etmek için yardımcı olabilir. Not: Provider value değerini `undefined` geçmek tüketici bileşenlerinin `defaultValue` kullanmasına neden olmaz.
 
 ### `Context.Provider` {#contextprovider}
 
@@ -163,7 +162,7 @@ class MyClass extends React.Component {
 MyClass.contextType = MyContext;
 ```
 
-Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu, `this.context` 'i kullanarak bu Context türünün en yakın mevcut değerini kullanmanızı sağlar. Bunu render metodu da dahil olmak üzere yaşam döngüsü metodlarından herhangi birinde belirtebilirsiniz. 
+Bir sınıftaki `contextType` özelliğine [`React.createContext()`](#reactcreatecontext) tarafından oluşturulan bir Context nesnesi atanabilir. Bu özelliği kullanmak, bu Context türünün en yakın mevcut değerine `this.context` 'i kullanarak erişmenizi sağlar. Bunu render metodu da dahil olmak üzere yaşam döngüsü metodlarından herhangi birinde belirtebilirsiniz. 
 
 > Not:
 >
@@ -190,7 +189,7 @@ class MyClass extends React.Component {
 </MyContext.Consumer>
 ```
 
-Context değişikliklerine abone olan bir React bileşeni. Bu, bir [fonksiyon bileşen](/docs/components-and-props.html#function-and-class-components) içindeki bir context'e abone olmanıza izin verir.
+Context değişikliklerine abone olan bir React bileşeni. Bu bileşeni kullanmak, bir [fonksiyon bileşen](/docs/components-and-props.html#function-and-class-components) içindeki bir context'e abone olmanıza izin verir.
 
 [Alt eleman olarak fonksiyon](/docs/render-props.html#using-props-other-than-render) verilmesine ihtiyaç duyar. Fonksiyon geçerli context değerini alır ve bir React düğümü döndürür. Fonksiyona iletilen `value` argümanı, yukarıda bu context için ağaçta en yakın Provider'ın `value` prop'una eşit olacaktır. Yukarıdaki bu context için Provider yoksa, `value` argümanı `createContext()` öğesine iletilmiş `defaultValue` değerine eşit olur.
 
