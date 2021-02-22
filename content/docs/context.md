@@ -8,20 +8,20 @@ Context, prop'ları her seviyede manuel olarak geçmek zorunda kalmadan bileşen
 
 Tipik bir React uygulamasında veri prop'lar aracılığıyla yukarıdan aşağıya aktarılır (üst bileşenlerden alt bileşenlere). Fakat bu tür bir kullanım, uygulamadaki birçok bileşen tarafından ihtiyaç duyulan belirli tipteki prop'lar (örneğin; lokalizasyon, arayüz teması) için kullanışsız olabilir. Context, bileşen ağacın her bir seviyesi üzerinden açıkça bir prop geçirmeden, bileşenler arasında bu gibi değerleri paylaşmanın bir yolunu sağlar.
 
-- [Context Ne Zaman Kullanılır {#when-to-use-context}](#context-ne-zaman-kullanılır-when-to-use-context)
-- [Context Kullanmadan Önce {#before-you-use-context}](#context-kullanmadan-önce-before-you-use-context)
-- [API {#api}](#api-api)
-  - [`React.createContext` {#reactcreatecontext}](#reactcreatecontext-reactcreatecontext)
-  - [`Context.Provider` {#contextprovider}](#contextprovider-contextprovider)
-  - [`Class.contextType` {#classcontexttype}](#classcontexttype-classcontexttype)
-  - [`Context.Consumer` {#contextconsumer}](#contextconsumer-contextconsumer)
-  - [`Context.displayName` {#contextdisplayname}](#contextdisplayname-contextdisplayname)
-- [Örnekler {#examples}](#örnekler-examples)
-  - [Dinamik Context {#dynamic-context}](#dinamik-context-dynamic-context)
-  - [İç İçe Geçmiş Bileşenden Context Güncelleme {#updating-context-from-a-nested-component}](#i̇ç-i̇çe-geçmiş-bileşenden-context-güncelleme-updating-context-from-a-nested-component)
-  - [Çoklu Context’leri Kullanma {#consuming-multiple-contexts}](#çoklu-contextleri-kullanma-consuming-multiple-contexts)
-- [Uyarılar {#caveats}](#uyarılar-caveats)
-- [Eski Sürüm API {#legacy-api}](#eski-sürüm-api-legacy-api)
+- [Context Ne Zaman Kullanılır](#when-to-use-context)
+- [Context Kullanmadan Önce](#before-you-use-context)
+- [API](#api)
+  - [React.createContext](#reactcreatecontext)
+  - [Context.Provider](#contextprovider)
+  - [Class.contextType](#classcontexttype)
+  - [Context.Consumer](#contextconsumer)
+  - [Context.displayName](#contextdisplayname)
+- [Örnekler](#examples)
+  - [Dinamik Context](#dynamic-context)
+  - [İç İçe Geçmiş Bileşenden Context Güncelleme](#updating-context-from-a-nested-component)
+  - [Çoklu Context’leri Kullanma](#consuming-multiple-contexts)
+- [Uyarılar](#caveats)
+- [Eski Sürüm API](#api-legacy-api)
 
 ## Context Ne Zaman Kullanılır {#when-to-use-context}
 
