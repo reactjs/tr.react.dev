@@ -4,23 +4,23 @@ title: Integrating with Other Libraries
 permalink: docs/integrating-with-other-libraries.html
 ---
 
-React can be used in any web application. It can be embedded in other applications and, with a little care, other applications can be embedded in React. This guide will examine some of the more common use cases, focusing on integration with [jQuery](https://jquery.com/) and [Backbone](https://backbonejs.org/), but the same ideas can be applied to integrating components with any existing code.
+React, herhangi bir web uygulamasında kullanılabilir. Diğer uygulamalara yerleştirilebilir ve biraz özenle React'e başka uygulamalar da yerleştirilebilir. Bu rehber, [jQuery](https://jquery.com/) ve [Backbone](https://backbonejs.org/) ile bütünleşmeye odaklanarak cok yaygın kullanım örneklerinin bazılarını inceleyecek, ancak aynı fikirler, bileşenleri varolan herhangi bir kodla bütünleştirme için de uygulanabilir.
 
 ## Integrating with DOM Manipulation Plugins {#integrating-with-dom-manipulation-plugins}
 
-React is unaware of changes made to the DOM outside of React. It determines updates based on its own internal representation, and if the same DOM nodes are manipulated by another library, React gets confused and has no way to recover.
+React, React dışında DOM'da yapılan değişikliklerin farkında değildir. Güncellemeleri kendi iç temsiline göre belirler, ve eğer aynı DOM düğümleri başka bir kütüphane tarafından değiştirilmişse, React şaşırır ve kurtarmak için hiçbir yolu yoktur.
 
-This does not mean it is impossible or even necessarily difficult to combine React with other ways of affecting the DOM, you just have to be mindful of what each is doing.
+Bu demek değildir ki, o imkansızdır veya DOM'u etkileyen diğer yollarla React'i birlestirmek gerekli olarak zor olsa bile, her birinin ne yaptığını dikkate almanız yeterlidir.
 
-The easiest way to avoid conflicts is to prevent the React component from updating. You can do this by rendering elements that React has no reason to update, like an empty `<div />`.
+Çakışmaları önlemenin en kolay yolu, React bileşeninin güncellenmesini önlemektir. Bunu, boş bir `<div />` gibi React'in güncellemek için bir nedeni olmayan öğeleri oluşturarak yapabilirsiniz.
 
 ### How to Approach the Problem {#how-to-approach-the-problem}
 
-To demonstrate this, let's sketch out a wrapper for a generic jQuery plugin.
+Bunu göstermek için, genel bir jQuery eklentisi için bir sarmalayıcı çizelim.
 
-We will attach a [ref](/docs/refs-and-the-dom.html) to the root DOM element. Inside `componentDidMount`, we will get a reference to it so we can pass it to the jQuery plugin.
+Kök DOM öğesine bir [ref](/docs/refs-and-the-dom.html) ekleyeceğiz. `componentDidMount` içinde, jQuery eklentisine iletebilmemiz için ona bir referans alacağız.
 
-To prevent React from touching the DOM after mounting, we will return an empty `<div />` from the `render()` method. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
+Yığılmadan sonra, React'in DOM'a dokunmasını önlemek icin, `render()` yönteminden boş bir `<div />` döndüreceğiz.  `<div />` öğesinin herhangi bir özelliği veya alt öğesi yoktur, bu yüzden React'in onu güncellemek için bir nedeni yoktur, DOM'un bu bölümünü yönetmek için jQuery eklentisi serbest bırakılır:
 
 ```js{3,4,8,12}
 class SomePlugin extends React.Component {
@@ -39,21 +39,21 @@ class SomePlugin extends React.Component {
 }
 ```
 
-Note that we defined both `componentDidMount` and `componentWillUnmount` [lifecycle methods](/docs/react-component.html#the-component-lifecycle). Many jQuery plugins attach event listeners to the DOM so it's important to detach them in `componentWillUnmount`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
+Not edin ki, biz hem `componentDidMount` hem de `componentWillUnmount` [lifecycle methods](/docs/react-component.html#the-component-lifecycle)'i tanımladık. Birçok jQuery eklentisi, olay dinleyicilerini DOM'a ekler, bu nedenle onları `componentWillUnmount`'tan ayırmak önemlidir. Eğer eklenti düzeltme için bir yöntem sağlamıyorsa, muhtemelen hafıza sızıntılarını önlemek için eklentinin kaydettiği herhangi bir olay dinleyicisini kaldırmayı hatırlayarak kendi önleminizi almak zorunda olacaksınız. 
 
 ### Integrating with jQuery Chosen Plugin {#integrating-with-jquery-chosen-plugin}
 
-For a more concrete example of these concepts, let's write a minimal wrapper for the plugin [Chosen](https://harvesthq.github.io/chosen/), which augments `<select>` inputs.
+Bu kavramların daha kesin bir örneği için, `<select>` girdileri arttırılmıs [Chosen](https://harvesthq.github.io/chosen/) eklentisi için küçük bir sarmalayıcı yazalım.
 
->**Note:**
+>**Not:**
 >
->Just because it's possible, doesn't mean that it's the best approach for React apps. We encourage you to use React components when you can. React components are easier to reuse in React applications, and often provide more control over their behavior and appearance.
+>Bunun mümkün olması, React uygulamaları için en iyi yaklaşım olduğu anlamına gelmez. Biz, yapabildiğin zaman, seni React bileşenlerini kullanman için yüreklendiriyoruz. React uygulamalarında, react bileşenlerini yeniden kullanmak daha kolaydır, ve sıklıkla davranışları ve görünümleri üzerinde daha fazla kontrol sağlar.
 
-First, let's look at what Chosen does to the DOM.
+Öncelikle, `Chosen`'ın DOM'a ne yaptığına bakalım.
 
-If you call it on a `<select>` DOM node, it reads the attributes off of the original DOM node, hides it with an inline style, and then appends a separate DOM node with its own visual representation right after the `<select>`. Then it fires jQuery events to notify us about the changes.
+Eğer bunu bir `<select>` DOM ​​düğümünde çağırırsanız, orijinal DOM düğümünün özniteliklerini okur, bir satır içi stil ile onu saklar, ve hemen `<select>`'ten sonra, kendi görsel temsili ile ayrı bir DOM düğümü ekler. Ardından, değişiklikleri bize bildirmek için jQuery olaylarını tetikler.
 
-Let's say that this is the API we're striving for with our `<Chosen>` wrapper React component:
+Diyelim ki, bu `<Chosen>` sarmalayıcı React bileşenimizle uğraştığımız API'dır:
 
 ```js
 function Example() {
@@ -67,9 +67,9 @@ function Example() {
 }
 ```
 
-We will implement it as an [uncontrolled component](/docs/uncontrolled-components.html) for simplicity.
+Sadelik için onu [uncontrolled component](/docs/uncontrolled-components.html) olarak uygulamaya koyacagız.
 
-First, we will create an empty component with a `render()` method where we return `<select>` wrapped in a `<div>`:
+Önce, bir `<div>` içine sarılmış `<select>`'i döndürdüğümüz yerde, `render()` yöntemiyle boş bir bileşen oluşturacağız:
 
 ```js{4,5}
 class Chosen extends React.Component {
@@ -85,14 +85,14 @@ class Chosen extends React.Component {
 }
 ```
 
-Notice how we wrapped `<select>` in an extra `<div>`. This is necessary because Chosen will append another DOM element right after the `<select>` node we passed to it. However, as far as React is concerned, `<div>` always only has a single child. This is how we ensure that React updates won't conflict with the extra DOM node appended by Chosen. It is important that if you modify the DOM outside of React flow, you must ensure React doesn't have a reason to touch those DOM nodes.
+Fazladan bir `<div>` içinde `<select>`'i nasıl sardığımıza dikkat edin. Bu gereklidir çünkü Chosen, ona geçtiğimiz `<select>` düğümünün hemen arkasına başka bir DOM öğesi ekleyecektir. Ancak, React söz konusu olduğunda, `<div>`'in her zaman yalnızca tek bir alt öğesi vardır. Bu, React güncellemelerinin, Chosen tarafından eklenmis fazladan DOM düğümüyle çakışmamasını sağlama şeklimizdir.  Önemlidir ki, eğer DOM'u React akışının dışında değiştirirseniz, React'in bu DOM düğümlerine dokunmak için bir nedeni olmadığından emin olmalısınız.
 
-Next, we will implement the lifecycle methods. We need to initialize Chosen with the ref to the `<select>` node in `componentDidMount`, and tear it down in `componentWillUnmount`:
+Ardından, yaşam döngüsü yöntemlerini uygulayacağız. `componentDidMount`'de `<select>` düğümüne ref ile Chosen'i baslatmamiz  ve `componentWillUnmount`'da parçalamamız gerek:
 
 ```js{2,3,7}
 componentDidMount() {
   this.$el = $(this.el);
-  this.$el.chosen();
+  this.$el.chosen(); 
 }
 
 componentWillUnmount() {
@@ -100,17 +100,17 @@ componentWillUnmount() {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010)
 
-Note that React assigns no special meaning to the `this.el` field. It only works because we have previously assigned this field from a `ref` in the `render()` method:
+Not edin ki, React'in `this.el` alanına özel bir anlam atamaz. O sadece, öncesinde bu alana `render()` yöntemindeki bir `ref`'den atama yapılmış olduğunda çalışır:
 
 ```js
 <select className="Chosen-select" ref={el => this.el = el}>
 ```
 
-This is enough to get our component to render, but we also want to be notified about the value changes. To do this, we will subscribe to the jQuery `change` event on the `<select>` managed by Chosen.
+Bu, bileşenimizin oluşturulması için yeterlidir, ama değer değişiklikleri hakkında da bilgilendirilmek istiyoruz. Bunu yapmak için, Chosen tarafından yönetilen `<select>` üzerindeki jQuery `change` olayına bağlanmak istiyoruz.
 
-We won't pass `this.props.onChange` directly to Chosen because component's props might change over time, and that includes event handlers. Instead, we will declare a `handleChange()` method that calls `this.props.onChange`, and subscribe it to the jQuery `change` event:
+`this.props.onChange`'yi doğrudan Chosen'a geçmeyecegiz, cünkü bileşenin prop'u zamanla değişebilir, ve bu olay handler'i icerir. Bunun yerine, `this.props.onChange`'i çağıran bir `handleChange()` bildireceğiz, ve onu jQuery `change` olayına bağlayacağız:
 
 ```js{5,6,10,14-16}
 componentDidMount() {
@@ -131,11 +131,11 @@ handleChange(e) {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010)
 
-Finally, there is one more thing left to do. In React, props can change over time. For example, the `<Chosen>` component can get different children if parent component's state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.
+Son olarak, yapılması gereken bir şey daha var. React'te, props zaman içinde değişir. Örneğin, ana bileşenin durumu değişirse, `<Chosen>` bileşeni,farklı alt öğeler alabilir. Bu, React'in DOM'u bizim için yönetmesine izin vermediğimizden, entegrasyon noktalarında, prop güncellemelerine yanıt olarak DOM'u manuel olarak güncellememizin önemli olduğu anlamına gelir. 
 
-Chosen's documentation suggests that we can use jQuery `trigger()` API to notify it about changes to the original DOM element. We will let React take care of updating `this.props.children` inside `<select>`, but we will also add a `componentDidUpdate()` lifecycle method that notifies Chosen about changes in the children list:
+Chosen'in dökümantasyonu, orijinal DOM öğesine yapılan  değişiklikler hakkında, jQuery `trigger ()` API'sını kullanabileceğimizi önerir. React'in `<select>` içindeki `this.props.children`'i güncellemesine izin vereceğiz, ancak Chosen'ı alt öğeler listesindeki değişiklikler hakkında bilgilendiren bir `componentDidUpdate()`'e yaşam döngüsü yöntemini de ekleyeceğiz: 
 
 ```js{2,3}
 componentDidUpdate(prevProps) {
@@ -145,9 +145,9 @@ componentDidUpdate(prevProps) {
 }
 ```
 
-This way, Chosen will know to update its DOM element when the `<select>` children managed by React change.
+Bu şekilde Chosen, React tarafından yönetilen `<select>` alt öğeleri değiştiğinde DOM öğesini güncelleyeceğini bilecektir.
 
-The complete implementation of the `Chosen` component looks like this:
+ `Chosen` bileşeninin tam uygulanması şu şekildedir:
 
 ```js
 class Chosen extends React.Component {
@@ -186,21 +186,21 @@ class Chosen extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010)
 
 ## Integrating with Other View Libraries {#integrating-with-other-view-libraries}
 
-React can be embedded into other applications thanks to the flexibility of [`ReactDOM.render()`](/docs/react-dom.html#render).
+React, diğer uygulamalara gömülebilir, [`ReactDOM.render()`](/docs/react-dom.html#render)'in esnekliğine teşekkür ediyoruz.
 
-Although React is commonly used at startup to load a single root React component into the DOM, `ReactDOM.render()` can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.
+React, başlangıçta genellikle DOM'a tek bir kök React bileşeni yüklemek için kullanılsa da, `ReactDOM.render()` bir düğme kadar küçük veya bir uygulama kadar büyük olabilen UI'nin (Kullanıcı Arayüzü'nün) bağımsız bölümleri için bir çok kez çağrılabilir. 
 
-In fact, this is exactly how React is used at Facebook. This lets us write applications in React piece by piece, and combine them with our existing server-generated templates and other client-side code.
+Aslında, Facebook'ta React tam olarak böyle kullanılır. Bu, uygulamaları React'te parça parça yazmamızı sağlar, ve bunları mevcut sunucu tarafından oluşturulan şablonlarımız ve diğer client-side kod ile birleştirir.
 
 ### Replacing String-Based Rendering with React {#replacing-string-based-rendering-with-react}
 
-A common pattern in older web applications is to describe chunks of the DOM as a string and insert it into the DOM like so: `$el.html(htmlString)`. These points in a codebase are perfect for introducing React. Just rewrite the string based rendering as a React component.
+Eski web uygulamalarındaki yaygın bir örnek, DOM parçalarını bir string olarak tanımlamak ve DOM'a şu şekilde eklemektir:  `$el.html(htmlString)`. Bir kod tabanındaki bu noktalar, React'i tanıtmak için mükemmeldir. Sadece string tabanlı oluşturmayı bir React bileşeni olarak yeniden yazın.
 
-So the following jQuery implementation...
+Takip eden JQuery uygulanması...
 
 ```js
 $('#container').html('<button id="btn">Say Hello</button>');
@@ -209,7 +209,7 @@ $('#btn').click(function() {
 });
 ```
 
-...could be rewritten using a React component:
+...bir React bileşeni kullanılarak yeniden yazılabilir:
 
 ```js
 function Button() {
@@ -227,7 +227,7 @@ ReactDOM.render(
 );
 ```
 
-From here you could start moving more logic into the component and begin adopting more common React practices. For example, in components it is best not to rely on IDs because the same component can be rendered multiple times. Instead, we will use the [React event system](/docs/handling-events.html) and register the click handler directly on the React `<button>` element:
+Buradan bileşene daha fazla mantık taşımaya ve daha yaygın React uygulamalarını benimsemeye başlayabilirsiniz. Örneğin, bileşenlerde ID'lere güvenmemek en iyisidir çünkü aynı bileşen birden çok kez işlenebilir. Bunun yerine, [React event system](/docs/handling-events.html)'i kullanacağız ve click handler'i doğrudan React `<button>` öğesine kaydedin::
 
 ```js{2,6,9}
 function Button(props) {
@@ -247,15 +247,15 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/RVKbvW?editors=1010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/RVKbvW?editors=1010)
 
-You can have as many such isolated components as you like, and use `ReactDOM.render()` to render them to different DOM containers. Gradually, as you convert more of your app to React, you will be able to combine them into larger components, and move some of the `ReactDOM.render()` calls up the hierarchy.
+İstediğiniz kadar çok sayıda yalıtılmış bileşeniniz olabilir ve bunları farklı DOM konteynerlerine işlemek için `ReactDOM.render ()`'i kullanabilirsiniz. Yavaş yavaş, uygulamanızı daha fazla React'e dönüştürdükçe, onları daha büyük bileşenlerde birleştirebilecek ve hiyerarşiyi çağıran `ReactDOM.render ()`'in bir kısmını taşıyabileceksiniz. 
 
 ### Embedding React in a Backbone View {#embedding-react-in-a-backbone-view}
 
-[Backbone](https://backbonejs.org/) views typically use HTML strings, or string-producing template functions, to create the content for their DOM elements. This process, too, can be replaced with rendering a React component.
-
-Below, we will create a Backbone view called `ParagraphView`. It will override Backbone's `render()` function to render a React `<Paragraph>` component into the DOM element provided by Backbone (`this.el`). Here, too, we are using [`ReactDOM.render()`](/docs/react-dom.html#render):
+[Backbone](https://backbonejs.org/) görünümleri, DOM öğelerinin içeriğini oluşturmak için tipik olarak HTML stringlerini ya da string üreten şablon fonksiyonları kullanır. Bu işlem de bir React bileşeni oluşturma ile değiştirilebilir.
+ 
+Aşağıda, `ParagraphView` olarak bilinen bir Backbone  görünümü oluşturacağız. Bu bir React `<Paragraph>` bilesenini, Backbone (`this.el`) tarafından sunulan DOM öğesi oluşturmak için Backbone'nın `render()` fonksiyonun geçersiz kılar.
 
 ```js{1,5,8,12}
 function Paragraph(props) {
@@ -275,23 +275,23 @@ const ParagraphView = Backbone.View.extend({
 });
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/gWgOYL?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/gWgOYL?editors=0010)
 
-It is important that we also call `ReactDOM.unmountComponentAtNode()` in the `remove` method so that React unregisters event handlers and other resources associated with the component tree when it is detached.
+`remove` yöntemindeki `ReactDOM.unmountComponentAtNode()`'ı da çağırmamız önemlidir. Böylece React, ayrıldığında bileşen ağacıyla ilişkili event handlers ve diğer kaynakların kaydını siler.
 
-When a component is removed *from within* a React tree, the cleanup is performed automatically, but because we are removing the entire tree by hand, we must call this method.
+Bir bileşen bir React ağacının *içinden* kaldırıldığında, temizleme otomatik olarak gerçekleştirilir, ancak tüm ağacı elle kaldırdığımız için bu yöntemi çağırmalıyız.
 
 ## Integrating with Model Layers {#integrating-with-model-layers}
 
-While it is generally recommended to use unidirectional data flow such as [React state](/docs/lifting-state-up.html), [Flux](https://facebook.github.io/flux/), or [Redux](https://redux.js.org/), React components can use a model layer from other frameworks and libraries.
+Genel olarak, [React state](/docs/lifting-state-up.html), [Flux](https://facebook.github.io/flux/), veya [Redux](https://redux.js.org/) gibi tek yönlü veri akışının kullanılması tavsiye edilirken, React bileşenleri, diğer framework ve kütüphanelerden bir model katmanı kullanabilir.
 
 ### Using Backbone Models in React Components {#using-backbone-models-in-react-components}
 
-The simplest way to consume [Backbone](https://backbonejs.org/) models and collections from a React component is to listen to the various change events and manually force an update.
+Bir React bileşeninden [Backbone](https://backbonejs.org/) modeller ve koleksiyonlarını tüketmenin en basit yolu, çeşitli değişim olaylarını dinlemek ve manuel olarak bir güncellemeyi zorlamaktır.
 
-Components responsible for rendering models would listen to `'change'` events, while components responsible for rendering collections would listen for `'add'` and `'remove'` events. In both cases, call [`this.forceUpdate()`](/docs/react-component.html#forceupdate) to rerender the component with the new data.
+Koleksiyonların oluşturulmasından sorumlu bileşenler  `'add'` ve `'remove'` etkinliklerini dinleyerken, modellerin oluşturulmasından sorumlu bileşenler, `'change'` olaylarını dinleyecektir. Her iki durumda da bileşeni, yeni verilerle yeniden işlemek için [`this.forceUpdate()`](/docs/react-component.html#forceupdate) çağırın. 
 
-In the example below, the `List` component renders a Backbone collection, using the `Item` component to render individual items.
+Aşağıdaki örnekte, `List` bileşeni, tekli öğeleri işlemek için, `Item` bileşenini kullanarak bir Backbone koleksiyonu oluşturur.
 
 ```js{1,7-9,12,16,24,30-32,35,39,46}
 class Item extends React.Component {
@@ -347,19 +347,19 @@ class List extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/GmrREm?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/GmrREm?editors=0010)
 
 ### Extracting Data from Backbone Models {#extracting-data-from-backbone-models}
 
-The approach above requires your React components to be aware of the Backbone models and collections. If you later plan to migrate to another data management solution, you might want to concentrate the knowledge about Backbone in as few parts of the code as possible.
+Yukarıdaki yaklaşım, React bileşenlerinizin Backbone modelleri ve koleksiyonlarının farkında olmasını gerektirir. Eğer daha sonra başka bir veri yönetimi çözümüne geçmeyi planlıyorsanız, Backbone hakkındaki bilgileri kodun olabildiğince az bölümüne yoğunlaştırmak isteyebilirsiniz.
 
-One solution to this is to extract the model's attributes as plain data whenever it changes, and keep this logic in a single place. The following is [a higher-order component](/docs/higher-order-components.html) that extracts all attributes of a Backbone model into state, passing the data to the wrapped component.
+ Buna çözüm olarak, her ne zaman değiştirse, modelin özniteliklerini düz veri olarak çıkarmak ve bu mantığı tek bir yerde tutmaktır. Aşagıdakiler bir Backbone modelinin tüm özniteliklerini duruma çıkaran, verileri sarılmış bileşene ileten [üst düzey bileşenler ](/docs/higher-order-components.html)'dir.
 
-This way, only the higher-order component needs to know about Backbone model internals, and most components in the app can stay agnostic of Backbone.
+Bu şekilde, sadece üst düzey bileşenin Backbone model içselleri hakkında bilmeye gereksinim duyar ve uygulamadaki bir çok bileşen Backbone'dan bağımsız kalabilir.
 
-In the example below, we will make a copy of the model's attributes to form the initial state. We subscribe to the `change` event (and unsubscribe on unmounting), and when it happens, we update the state with the model's current attributes. Finally, we make sure that if the `model` prop itself changes, we don't forget to unsubscribe from the old model, and subscribe to the new one.
+Aşağıdaki örnekte, ilk durumu oluşturmak için modelin özniteliklerinin bir kopyasını yapacağız.  `change` etkinliğine bağlanıyoruz (ve unmounting üyeliğinden çıkıyoruz), ve bu olduğunda, durumu modelin mevcut öznitelikleriyle güncelleriz. Son olarak, eğer `model` prop kendisi değişirse, eski model aboneliğinden çıkmayı ve yenisine abone olmayı unutmadığımızdan emin olalım.
 
-Note that this example is not meant to be exhaustive with regards to working with Backbone, but it should give you an idea for how to approach this in a generic way:
+Not edin ki, bu örnek, Backbone ile çalışmaya ilişkin olarak geniş kapsamli değildir. Ama bu size genel bir şekilde buna nasıl yaklaşılacağına dair bir fikir vermelidir:
 
 ```js{1,5,10,14,16,17,22,26,32}
 function connectToBackboneModel(WrappedComponent) {
@@ -399,7 +399,7 @@ function connectToBackboneModel(WrappedComponent) {
 }
 ```
 
-To demonstrate how to use it, we will connect a `NameInput` React component to a Backbone model, and update its `firstName` attribute every time the input changes:
+Bunun nasıl kullanıldığını göstermek için, Backbone modeline bir `NameInput` React bileşeni bağlayacağız, ve giriş değiştiğinde "firstName" niteliğini güncelleyceğiz: 
 
 ```js{4,6,11,15,19-21}
 function NameInput(props) {
@@ -434,6 +434,6 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/PmWwwa?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/PmWwwa?editors=0010)
 
-This technique is not limited to Backbone. You can use React with any model library by subscribing to its changes in the lifecycle methods and, optionally, copying the data into the local React state.
+Bu teknik Backbone'a limitli değildir. React'i her hangi bir model kütüphanesi ile yaşam döngüsü yöntemlerindeki değişikliklere abone olarak, tercihen, veriyi yerel React state'te kopyalayarak kullanabilirsiniz. 
