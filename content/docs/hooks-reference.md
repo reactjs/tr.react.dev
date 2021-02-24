@@ -303,7 +303,7 @@ function Counter() {
 >
 >React, Redux tarafından popülerleştirilen `state = initialState` geleneğini kullanmaz. State'in başlangıç değeri bazen prop'lara bağlı olabilir ve tam da bu yüzden Hook içinde belirlenmiştir. Bu konuda kendinize güveniyorsanız, Redux'taki işlemi taklit etmek için `useReducer(reducer, undefined, reducer)` şeklinde kullanabilirsiniz fakat bu yöntem tavsiye edilmez.
 
-#### "Lazy yükleme" {#lazy-initialization}
+#### "Lazy başlatma" {#lazy-initialization}
 
 State'in başlangıç değerini lazy yükleme yöntemiyle de oluşturabilirsiniz. Bunun için, üçüncü argüman olarak `init` fonksiyonu girebilirsiniz. Başlangıç state değeri `init(initialArg)` olarak belirlenecektir.
 
@@ -378,7 +378,7 @@ Argüman olarak satıriçi bir callback ve bağımlı değişkenler dizisi girin
 const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```
 
-[Memoize](https://en.wikipedia.org/wiki/Memoization) edilmiş bir değer döndürür.
+[Memoize](https://fazlamesai.net/posts/common-lisp-ve-bir-optimizasyon-teknigi-memoization) edilmiş bir değer döndürür.
 
 "Create" fonksiyonu ve bir bağımlı değişkenler dizisi girin. `useMemo` memoize edilen değeri, yalnızca bağımlı değişkenlerden birisi değiştiğinde yeniden hesaplar. Bu optimizasyon, ağır işlemlerin her render işleminde yeniden gerçekleştirilmesini önlemeye yardımcı olur.
 
