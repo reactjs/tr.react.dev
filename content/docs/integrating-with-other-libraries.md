@@ -47,7 +47,7 @@ Bu kavramların daha kesin bir örneği için, `<select>` girdileri arttırılm�
 
 >**Not:**
 >
->Bunun mümkün olması, React uygulamaları için en iyi yaklaşım olduğu anlamına gelmez. Biz, yapabildiğin zaman, seni React bileşenlerini kullanman için yüreklendiriyoruz. React uygulamalarında, react bileşenlerini yeniden kullanmak daha kolaydır, ve sıklıkla davranışları ve görünümleri üzerinde daha fazla kontrol sağlar.
+>Bunun mümkün olması, React uygulamaları için en iyi yaklaşım olduğu anlamına gelmez. Biz, yapabildiğin zaman, seni React bileşenlerini kullanman için yüreklendiriyoruz. React uygulamalarında, React bileşenlerini yeniden kullanmak daha kolaydır, ve sıklıkla davranışları ve görünümleri üzerinde daha fazla kontrol sağlar.
 
 Öncelikle, `Chosen`'ın DOM'a ne yaptığına bakalım.
 
@@ -87,7 +87,7 @@ class Chosen extends React.Component {
 
 Fazladan bir `<div>` içinde `<select>`'i nasıl sardığımıza dikkat edin. Bu gereklidir çünkü Chosen, ona geçtiğimiz `<select>` düğümünün hemen arkasına başka bir DOM öğesi ekleyecektir. Ancak, React söz konusu olduğunda, `<div>`'in her zaman yalnızca tek bir alt öğesi vardır. Bu, React güncellemelerinin, Chosen tarafından eklenmis fazladan DOM düğümüyle çakışmamasını sağlama şeklimizdir.  Önemlidir ki, eğer DOM'u React akışının dışında değiştirirseniz, React'in bu DOM düğümlerine dokunmak için bir nedeni olmadığından emin olmalısınız.
 
-Ardından, yaşam döngüsü yöntemlerini uygulayacağız. `componentDidMount`'de `<select>` düğümüne ref ile Chosen'i baslatmamiz  ve `componentWillUnmount`'da parçalamamız gerek:
+Ardından, yaşam döngüsü yöntemlerini uygulayacağız. `componentDidMount`'de `<select>` düğümüne ref ile Chosen'i baslatmamız  ve `componentWillUnmount`'da parçalamamız gerek:
 
 ```js{2,3,7}
 componentDidMount() {
@@ -110,7 +110,7 @@ Not edin ki, React'in `this.el` alanına özel bir anlam atamaz. O sadece, önce
 
 Bu, bileşenimizin oluşturulması için yeterlidir, ama değer değişiklikleri hakkında da bilgilendirilmek istiyoruz. Bunu yapmak için, Chosen tarafından yönetilen `<select>` üzerindeki jQuery `change` olayına bağlanmak istiyoruz.
 
-`this.props.onChange`'yi doğrudan Chosen'a geçmeyecegiz, cünkü bileşenin prop'u zamanla değişebilir, ve bu olay handler'i icerir. Bunun yerine, `this.props.onChange`'i çağıran bir `handleChange()` bildireceğiz, ve onu jQuery `change` olayına bağlayacağız:
+`this.props.onChange`'yi doğrudan Chosen'a geçmeyecegiz, çünkü bileşenin prop'u zamanla değişebilir, ve bu olay handler'i içerir. Bunun yerine, `this.props.onChange`'i çağıran bir `handleChange()` bildireceğiz, ve onu jQuery `change` olayına bağlayacağız:
 
 ```js{5,6,10,14-16}
 componentDidMount() {
@@ -135,7 +135,7 @@ handleChange(e) {
 
 Son olarak, yapılması gereken bir şey daha var. React'te, props zaman içinde değişir. Örneğin, ana bileşenin durumu değişirse, `<Chosen>` bileşeni,farklı alt öğeler alabilir. Bu, React'in DOM'u bizim için yönetmesine izin vermediğimizden, entegrasyon noktalarında, prop güncellemelerine yanıt olarak DOM'u manuel olarak güncellememizin önemli olduğu anlamına gelir. 
 
-Chosen'in dökümantasyonu, orijinal DOM öğesine yapılan  değişiklikler hakkında, jQuery `trigger ()` API'sını kullanabileceğimizi önerir. React'in `<select>` içindeki `this.props.children`'i güncellemesine izin vereceğiz, ancak Chosen'ı alt öğeler listesindeki değişiklikler hakkında bilgilendiren bir `componentDidUpdate()`'e yaşam döngüsü yöntemini de ekleyeceğiz: 
+Chosen'in dökümantasyonu, orijinal DOM öğesine yapılan değişiklikler hakkında, jQuery `trigger ()` API'sını kullanabileceğimizi önerir. React'in `<select>` içindeki `this.props.children`'i güncellemesine izin vereceğiz, ancak Chosen'ı alt öğeler listesindeki değişiklikler hakkında bilgilendiren bir `componentDidUpdate()`'e yaşam döngüsü yöntemini de ekleyeceğiz: 
 
 ```js{2,3}
 componentDidUpdate(prevProps) {
@@ -255,7 +255,7 @@ ReactDOM.render(
 
 [Backbone](https://backbonejs.org/) görünümleri, DOM öğelerinin içeriğini oluşturmak için tipik olarak HTML stringlerini ya da string üreten şablon fonksiyonları kullanır. Bu işlem de bir React bileşeni oluşturma ile değiştirilebilir.
  
-Aşağıda, `ParagraphView` olarak bilinen bir Backbone  görünümü oluşturacağız. Bu bir React `<Paragraph>` bilesenini, Backbone (`this.el`) tarafından sunulan DOM öğesi oluşturmak için Backbone'nın `render()` fonksiyonun geçersiz kılar.
+Aşağıda, `ParagraphView` olarak bilinen bir Backbone  görünümü oluşturacağız. Bu bir React `<Paragraph>` bileşenini, Backbone (`this.el`) tarafından sunulan DOM öğesi oluşturmak için Backbone'nın `render()` fonksiyonun geçersiz kılar.
 
 ```js{1,5,8,12}
 function Paragraph(props) {
