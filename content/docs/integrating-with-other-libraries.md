@@ -289,7 +289,7 @@ Genel olarak, [React state](/docs/lifting-state-up.html), [Flux](https://faceboo
 
 Bir React bileşeninden [Backbone](https://backbonejs.org/) modeller ve koleksiyonlarını tüketmenin en basit yolu, çeşitli değişim olaylarını dinlemek ve manuel olarak bir güncellemeyi zorlamaktır.
 
-Koleksiyonların oluşturulmasından sorumlu bileşenler  `'add'` ve `'remove'` etkinliklerini dinlerken, modellerin oluşturulmasından sorumlu bileşenler, `'change'` olaylarını dinleyecektir. Her iki durumda da bileşeni, yeni verilerle yeniden işlemek için [`this.forceUpdate()`](/docs/react-component.html#forceupdate) çağırın. 
+Koleksiyonların oluşturulmasından sorumlu bileşenler `'add'` ve `'remove'` olaylarını dinlerken, modellerin oluşturulmasından sorumlu bileşenler, `'change'` olaylarını dinleyecektir. Her iki durumda da bileşeni, yeni verilerle yeniden işlemek için [`this.forceUpdate()`](/docs/react-component.html#forceupdate) metodunu çağırın.
 
 Aşağıdaki örnekte, `List` bileşeni, tekli öğeleri işlemek için, `Item` bileşenini kullanarak bir Backbone koleksiyonu oluşturur.
 
