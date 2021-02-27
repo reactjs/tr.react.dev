@@ -10,7 +10,7 @@ React, herhangi bir web uygulamasında kullanılabilir. Diğer uygulamalara yerl
 
 React, React dışında DOM'da yapılan değişikliklerin farkında değildir. Güncellemeleri kendi iç temsiline göre belirler, ve eğer aynı DOM düğümleri başka bir kütüphane tarafından değiştirilmişse, React şaşırır ve kurtarmak için hiçbir yolu yoktur.
 
-Bu demek değildir ki, o imkansızdır veya DOM'u etkileyen diğer yollarla React'i birlestirmek gerekli olarak zor olsa bile, her birinin ne yaptığını dikkate almanız yeterlidir.
+Bu demek değildir ki, o imkansızdır veya DOM'u etkileyen diğer yollarla React'i birleştirmek gerekli olarak zor olsa bile, her birinin ne yaptığını dikkate almanız yeterlidir.
 
 Çakışmaları önlemenin en kolay yolu, React bileşeninin güncellenmesini önlemektir. Bunu, boş bir `<div />` gibi React'in güncellemek için bir nedeni olmayan öğeleri oluşturarak yapabilirsiniz.
 
