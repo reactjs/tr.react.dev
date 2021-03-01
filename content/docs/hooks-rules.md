@@ -12,7 +12,11 @@ Hook'lar JavaScript fonksiyonlarıdır, ancak bunları kullanırken iki kurala u
 
 ### Hook'ları Sadece En Üst Seviyede Çağırın {#only-call-hooks-at-the-top-level}
 
+<<<<<<< HEAD
 **Döngülerde, koşullarda veya iç içe geçmiş fonksiyonlarda Hook çağrısı yapmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde kullanın. Bu kuralı uygulayarak, bir bileşenin her render edildiğinde *Hook*'ların aynı sırada çağrıldığından emin olursunuz. React'in çoklu `useState` ve `useEffect` çağrıları arasındaki Hook'ların durumunu doğru şekilde korumasını sağlayan şey budur. (Merak ediyorsanız, bunu [aşağıda](#explanation) detaylıca açıklayacağız.)
+=======
+**Don't call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function, before any early returns. By following this rule, you ensure that Hooks are called in the same order each time a component renders. That's what allows React to correctly preserve the state of Hooks between multiple `useState` and `useEffect` calls. (If you're curious, we'll explain this in depth [below](#explanation).)
+>>>>>>> 4fa06486cdb8c5a1cd7e3d88b24e76b1920f33fd
 
 ### Hook'ları Sadece React Fonksiyonlarından Çağırın {#only-call-hooks-from-react-functions}
 
