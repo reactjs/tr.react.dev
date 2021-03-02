@@ -12,7 +12,7 @@ Hook'lar JavaScript fonksiyonlarıdır, ancak bunları kullanırken iki kurala u
 
 ### Hook'ları Sadece En Üst Seviyede Çağırın {#only-call-hooks-at-the-top-level}
 
-**Döngülerde, koşullarda veya iç içe geçmiş fonksiyonlarda Hook çağrısı yapmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde kullanın. Bu kuralı uygulayarak, bir bileşenin her render edildiğinde *Hook*'ların aynı sırada çağrıldığından emin olursunuz. React'in çoklu `useState` ve `useEffect` çağrıları arasındaki Hook'ların durumunu doğru şekilde korumasını sağlayan şey budur. (Merak ediyorsanız, bunu [aşağıda](#explanation) detaylıca açıklayacağız.)
+**Döngülerde, koşullarda veya iç içe geçmiş fonksiyonlarda Hook çağrısı yapmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde, herhangi bir return yapmadan önce kullanın. Bu kuralı uygulayarak, bir bileşenin her render edildiğinde *Hook*'ların aynı sırada çağrıldığından emin olursunuz. React'in çoklu `useState` ve `useEffect` çağrıları arasındaki Hook'ların durumunu doğru şekilde korumasını sağlayan şey budur. (Merak ediyorsanız, bunu [aşağıda](#explanation) detaylıca açıklayacağız.)
 
 ### Hook'ları Sadece React Fonksiyonlarından Çağırın {#only-call-hooks-from-react-functions}
 
