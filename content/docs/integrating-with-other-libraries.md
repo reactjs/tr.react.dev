@@ -285,13 +285,13 @@ Bir bileşen bir React ağacının *içinden* kaldırıldığında, temizleme ot
 
 Genel olarak, [React state](/docs/lifting-state-up.html), [Flux](https://facebook.github.io/flux/), veya [Redux](https://redux.js.org/) gibi tek yönlü veri akışının kullanılması tavsiye edilirken, React bileşenleri, diğer çatı ve kütüphanelerden bir model katmanı kullanabilir.
 
-### Using Backbone Models in React Components {#using-backbone-models-in-react-components}
+### React Bileşenlerinde Backbone MModellerini Kullanmak{#using-backbone-models-in-react-components}
 
-The simplest way to consume [Backbone](https://backbonejs.org/) models and collections from a React component is to listen to the various change events and manually force an update.
+Bir React bileşeninden [Backbone](https://backbonejs.org/) modellerini ve koleksiyonlarını kullanmanın en basit yolu, çeşitli değişim olaylarını dinlemek ve manuel olarak bir güncellemeyi zorlamaktır.
 
-Components responsible for rendering models would listen to `'change'` events, while components responsible for rendering collections would listen for `'add'` and `'remove'` events. In both cases, call [`this.forceUpdate()`](/docs/react-component.html#forceupdate) to rerender the component with the new data.
+Koleksiyonların oluşturulmasından sorumlu bileşenler `'add'` ve `'remove'` olaylarını dinlerken, modellerin oluşturulmasından sorumlu bileşenler, `'change'` olaylarını dinleyecektir. Her iki durumda da bileşeni, yeni verilerle yeniden işlemek için [`this.forceUpdate()`](/docs/react-component.html#forceupdate) metodunu çağırın. 
 
-In the example below, the `List` component renders a Backbone collection, using the `Item` component to render individual items.
+Aşağıdaki örnekte, `List` bileşeni, tekil öğeleri işlemek için, `Item` bileşenini kullanarak bir Backbone koleksiyonu oluşturur.
 
 ```js{1,7-9,12,16,24,30-32,35,39,46}
 class Item extends React.Component {
@@ -347,7 +347,7 @@ class List extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/GmrREm?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/GmrREm?editors=0010)
 
 ### Extracting Data from Backbone Models {#extracting-data-from-backbone-models}
 
