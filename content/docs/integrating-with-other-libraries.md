@@ -251,11 +251,11 @@ ReactDOM.render(
 
 İstediğiniz kadar çok sayıda izole edilmiş bileşeniniz olabilir ve bunları farklı DOM konteynerlerine işlemek için `ReactDOM.render ()`'i kullanabilirsiniz. Yavaş yavaş, uygulamanızı daha fazla React'e dönüştürdükçe, onları daha büyük bileşenlerde birleştirebilecek ve hiyerarşiyi çağıran `ReactDOM.render ()`'in bir kısmını taşıyabileceksiniz. 
 
-### Embedding React in a Backbone View {#embedding-react-in-a-backbone-view}
+### Bir Backbone Görünümüne React'ı Gömmek{#embedding-react-in-a-backbone-view}
 
-[Backbone](https://backbonejs.org/) views typically use HTML strings, or string-producing template functions, to create the content for their DOM elements. This process, too, can be replaced with rendering a React component.
+[Backbone](https://backbonejs.org/) görünümleri, DOM öğelerinin içeriğini oluşturmak için tipik olarak HTML stringlerini ya da string üreten şablon fonksiyonlarını kullanır. Bu işlem de bir React bileşeni oluşturma ile değiştirilebilir.
 
-Below, we will create a Backbone view called `ParagraphView`. It will override Backbone's `render()` function to render a React `<Paragraph>` component into the DOM element provided by Backbone (`this.el`). Here, too, we are using [`ReactDOM.render()`](/docs/react-dom.html#render):
+Aşağıda, `ParagraphView` olarak bilinen bir Backbone görünümü oluşturacağız. Bu bir React `<Paragraph>` bileşenini, Backbone (`this.el`) tarafından sunulan DOM öğesi oluşturmak için Backbone'nın `render()` fonksiyonun geçersiz kılar.
 
 ```js{1,5,8,12}
 function Paragraph(props) {
@@ -275,11 +275,11 @@ const ParagraphView = Backbone.View.extend({
 });
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/gWgOYL?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/gWgOYL?editors=0010)
 
-It is important that we also call `ReactDOM.unmountComponentAtNode()` in the `remove` method so that React unregisters event handlers and other resources associated with the component tree when it is detached.
+`remove` metodundaki `ReactDOM.unmountComponentAtNode()`'ı da çağırmamız önemlidir. Böylece React, ayrıldığında bileşen ağacıyla ilişkili olay yöneticilerini  ve diğer kaynakların kaydını siler.
 
-When a component is removed *from within* a React tree, the cleanup is performed automatically, but because we are removing the entire tree by hand, we must call this method.
+Bir bileşen bir React ağacının *içinden* kaldırıldığında, temizleme otomatik olarak gerçekleştirilir, ancak tüm ağacı elle kaldırdığımız için bu metodu çağırmalıyız.
 
 ## Integrating with Model Layers {#integrating-with-model-layers}
 
