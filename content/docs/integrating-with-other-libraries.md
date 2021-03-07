@@ -281,9 +281,9 @@ const ParagraphView = Backbone.View.extend({
 
 Bir bileşen bir React ağacının *içinden* kaldırıldığında, temizleme otomatik olarak gerçekleştirilir, ancak tüm ağacı elle kaldırdığımız için bu metodu çağırmalıyız.
 
-## Integrating with Model Layers {#integrating-with-model-layers}
+## Model Katmanları ile Bütünleşmek{#integrating-with-model-layers}
 
-While it is generally recommended to use unidirectional data flow such as [React state](/docs/lifting-state-up.html), [Flux](https://facebook.github.io/flux/), or [Redux](https://redux.js.org/), React components can use a model layer from other frameworks and libraries.
+Genel olarak, [React state](/docs/lifting-state-up.html), [Flux](https://facebook.github.io/flux/), veya [Redux](https://redux.js.org/) gibi tek yönlü veri akışının kullanılması tavsiye edilirken, React bileşenleri, diğer çatı ve kütüphanelerden bir model katmanı kullanabilir.
 
 ### Using Backbone Models in React Components {#using-backbone-models-in-react-components}
 
