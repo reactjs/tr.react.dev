@@ -349,17 +349,17 @@ class List extends React.Component {
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/GmrREm?editors=0010)
 
-### Extracting Data from Backbone Models {#extracting-data-from-backbone-models}
+### Backbone Modellerinden Veriyi Çıkarmak{#extracting-data-from-backbone-models}
 
-The approach above requires your React components to be aware of the Backbone models and collections. If you later plan to migrate to another data management solution, you might want to concentrate the knowledge about Backbone in as few parts of the code as possible.
+Yukarıdaki yaklaşım, React bileşenlerinizin Backbone modelleri ve koleksiyonlarının farkında olmasını gerektirir. Eğer daha sonra, başka bir veri yönetimi çözümüne geçmeyi planlıyorsanız, Backbone hakkındaki bilgileri kodun olabildiğince az bölümüne yoğunlaştırmak isteyebilirsiniz.
 
-One solution to this is to extract the model's attributes as plain data whenever it changes, and keep this logic in a single place. The following is [a higher-order component](/docs/higher-order-components.html) that extracts all attributes of a Backbone model into state, passing the data to the wrapped component.
+ Buna çözüm, her değiştiğinde modelin niteliklerini düz veri olarak çıkarmak ve bu mantığı tek bir yerde tutmaktır. Aşağıdakiler bir Backbone modelinin tüm niteliklerini state'e çıkaran, verileri sarılmış bileşene ileten [üst düzey bir bileşen](/docs/higher-order-components.html)'dir.
 
-This way, only the higher-order component needs to know about Backbone model internals, and most components in the app can stay agnostic of Backbone.
+Bu şekilde, sadece üst düzey bileşen Backbone model içeriği hakkında bilgiye gereksinim duyar ve uygulamadaki bir çok bileşen Backbone'dan bağımsız kalabilir.
 
-In the example below, we will make a copy of the model's attributes to form the initial state. We subscribe to the `change` event (and unsubscribe on unmounting), and when it happens, we update the state with the model's current attributes. Finally, we make sure that if the `model` prop itself changes, we don't forget to unsubscribe from the old model, and subscribe to the new one.
+Aşağıdaki örnekte, ilk state'i oluşturmak için modelin niteliklerinin bir kopyasını yapacağız. `change` olayına bağlanıyoruz (ve unmounting aboneliğinden çıkıyoruz), ve bu olduğunda, state'i modelin mevcut nitelikleriyle güncelleriz. Son olarak, eğer `model` prop'unun kendisi değişirse, eski model aboneliğinden çıkmayı ve yenisine abone olmayı unutmadığımızdan emin olalım.
 
-Note that this example is not meant to be exhaustive with regards to working with Backbone, but it should give you an idea for how to approach this in a generic way:
+Dikkat edin ki, bu örnek, Backbone ile çalışmaya ilişkin olarak geniş kapsamlı değildir. Ama bu size genel bir şekilde buna nasıl yaklaşılacağına dair bir fikir vermelidir:
 
 ```js{1,5,10,14,16,17,22,26,32}
 function connectToBackboneModel(WrappedComponent) {
@@ -399,7 +399,7 @@ function connectToBackboneModel(WrappedComponent) {
 }
 ```
 
-To demonstrate how to use it, we will connect a `NameInput` React component to a Backbone model, and update its `firstName` attribute every time the input changes:
+Bunun nasıl kullanıldığını göstermek için, Backbone modeline bir `NameInput` React bileşeni bağlayacağız, ve giriş değiştiğinde "firstName" özelliğini güncelleyceğiz: 
 
 ```js{4,6,11,15,19-21}
 function NameInput(props) {
@@ -434,6 +434,6 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/PmWwwa?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/PmWwwa?editors=0010)
 
-This technique is not limited to Backbone. You can use React with any model library by subscribing to its changes in the lifecycle methods and, optionally, copying the data into the local React state.
+Bu teknik, Backbone ile limitli değildir. React'i her hangi bir model kütüphanesi ile yaşam döngüsü metotlarındaki değişikliklere abone olarak, tercihen, veriyi yerel React state'e kopyalayarak kullanabilirsiniz. 
