@@ -41,19 +41,19 @@ class SomePlugin extends React.Component {
 
 Dikkate alın ki, biz hem `componentDidMount` hem de `componentWillUnmount` [yaşam döngüsü metotları](/docs/react-component.html#the-component-lifecycle)'nı tanımladık. Birçok jQuery eklentisi, olay dinleyicilerini DOM'a ekler, bu nedenle onları `componentWillUnmount`'tan ayırmak önemlidir. Eğer eklenti düzeltme için bir metot sağlamıyorsa, muhtemelen bellek sızıntılarını önlemek için eklentinin kaydettiği herhangi bir olay dinleyicisini kaldırmayı hatırlayarak, kendi önleminizi almak zorunda olacaksınız. 
 
-### Integrating with jQuery Chosen Plugin {#integrating-with-jquery-chosen-plugin}
+###  jQuery Chosen Eklentisi ile Bütünleşmek {#integrating-with-jquery-chosen-plugin}
 
-For a more concrete example of these concepts, let's write a minimal wrapper for the plugin [Chosen](https://harvesthq.github.io/chosen/), which augments `<select>` inputs.
+Bu kavramların daha kesin bir örneği için, `<select>` girdilerini genişleten [Chosen](https://harvesthq.github.io/chosen/) eklentisi için küçük bir sarmalayıcı yazalım.
 
->**Note:**
+>**Not:**
 >
->Just because it's possible, doesn't mean that it's the best approach for React apps. We encourage you to use React components when you can. React components are easier to reuse in React applications, and often provide more control over their behavior and appearance.
+>Bunun mümkün olması demek, React uygulamaları için en iyi yaklaşım olduğu anlamına gelmez. Yapabildiğiniz zaman, sizi React bileşenlerini kullanmanız için cesaretlendiriyoruz. React uygulamalarında, React bileşenlerini yeniden kullanmak daha kolaydır, ve sıklıkla davranışları ve görünümleri üzerinde daha fazla kontrol sağlar.
 
-First, let's look at what Chosen does to the DOM.
+Öncelikle, `Chosen`'ın DOM'a ne yaptığına bakalım.
 
-If you call it on a `<select>` DOM node, it reads the attributes off of the original DOM node, hides it with an inline style, and then appends a separate DOM node with its own visual representation right after the `<select>`. Then it fires jQuery events to notify us about the changes.
+Eğer bunu bir `<select>` DOM ​​düğümünde çağırırsanız, orijinal DOM düğümünün niteliklerini okur, bir satır içi stil ile onu saklar, ve hemen `<select>`'ten sonra, kendi görsel temsili ile ayrı bir DOM düğümü ekler. Ardından, değişiklikleri bize bildirmek için jQuery olaylarını tetikler.
 
-Let's say that this is the API we're striving for with our `<Chosen>` wrapper React component:
+Diyelim ki, bu `<Chosen>` sarmalayıcısı, React bileşenimizle uğraştığımız API'dır:
 
 ```js
 function Example() {
@@ -67,9 +67,9 @@ function Example() {
 }
 ```
 
-We will implement it as an [uncontrolled component](/docs/uncontrolled-components.html) for simplicity.
+Basit olması için onu [kontrolsüz bileşen](/docs/uncontrolled-components.html) olarak uygulayacağız.
 
-First, we will create an empty component with a `render()` method where we return `<select>` wrapped in a `<div>`:
+İlk önce, bir `<div>` içine sarılmış `<select>`'i döndürdüğümüz yerde, `render()` metoduyla boş bir bileşen oluşturacağız:
 
 ```js{4,5}
 class Chosen extends React.Component {
@@ -85,9 +85,9 @@ class Chosen extends React.Component {
 }
 ```
 
-Notice how we wrapped `<select>` in an extra `<div>`. This is necessary because Chosen will append another DOM element right after the `<select>` node we passed to it. However, as far as React is concerned, `<div>` always only has a single child. This is how we ensure that React updates won't conflict with the extra DOM node appended by Chosen. It is important that if you modify the DOM outside of React flow, you must ensure React doesn't have a reason to touch those DOM nodes.
+Fazladan bir `<div>` içinde `<select>`'i nasıl sardığımıza dikkat edin. Bu gereklidir, çünkü Chosen, ona geçtiğimiz `<select>` düğümünün hemen arkasına başka bir DOM öğesi ekleyecektir. Ancak, React söz konusu olduğunda, `<div>`'in her zaman yalnızca tek bir alt öğesi vardır. Bu, React güncellemelerinin, Chosen tarafından eklenmiş fazladan DOM düğümüyle çakışmamasını sağlama şeklimizdir. Önemlidir ki, eğer DOM'u React akışının dışında değiştirirseniz, React'in bu DOM düğümlerine dokunmak için bir nedeni olmadığından emin olmalısınız.
 
-Next, we will implement the lifecycle methods. We need to initialize Chosen with the ref to the `<select>` node in `componentDidMount`, and tear it down in `componentWillUnmount`:
+Ardından, yaşam döngüsü metodunu uygulayacağız. `componentDidMount`'de `<select>` düğümüne ref ile Chosen'i başlatmamız ve `componentWillUnmount`'da parçalamamız gerek:
 
 ```js{2,3,7}
 componentDidMount() {
@@ -100,17 +100,17 @@ componentWillUnmount() {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010)
 
-Note that React assigns no special meaning to the `this.el` field. It only works because we have previously assigned this field from a `ref` in the `render()` method:
+Dikkat edin ki, React `this.el` alanına özel bir anlam atamaz. O sadece, öncesinde bu alana `render()` metodundaki bir `ref`'den atama yapılmış olduğunda çalışır:
 
 ```js
 <select className="Chosen-select" ref={el => this.el = el}>
 ```
 
-This is enough to get our component to render, but we also want to be notified about the value changes. To do this, we will subscribe to the jQuery `change` event on the `<select>` managed by Chosen.
+Bu, bileşenimizin oluşturulması için yeterlidir, ama değer değişiklikleri hakkında da bilgilendirilmek istiyoruz. Bunu yapmak için, Chosen tarafından yönetilen `<select>` üzerindeki jQuery `change` olayına abone olacağız.
 
-We won't pass `this.props.onChange` directly to Chosen because component's props might change over time, and that includes event handlers. Instead, we will declare a `handleChange()` method that calls `this.props.onChange`, and subscribe it to the jQuery `change` event:
+`this.props.onChange`'i doğrudan Chosen'a geçmeyecegiz, çünkü bileşenin prop'u zamanla değişebilir, ve bu olay yöneticisini içerir. Bunun yerine, `this.props.onChange`'i çağıran bir `handleChange()` metodu tanımlayacağız, ve onu jQuery `change` olayına abone olacağız:
 
 ```js{5,6,10,14-16}
 componentDidMount() {
@@ -131,11 +131,11 @@ handleChange(e) {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010)
 
-Finally, there is one more thing left to do. In React, props can change over time. For example, the `<Chosen>` component can get different children if parent component's state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.
+Son olarak, yapılması gereken bir şey daha var. React'te, props zaman içinde değişir. Örneğin, ana bileşenin durumu değişirse, `<Chosen>` bileşeni, farklı alt öğeler alabilir. Bu, React'in DOM'u bizim için yönetmesine izin vermediğimizden, bütünleşme noktalarında, prop güncellemelerine yanıt olarak DOM'u manuel olarak güncellememizin önemli olduğu anlamına gelir. 
 
-Chosen's documentation suggests that we can use jQuery `trigger()` API to notify it about changes to the original DOM element. We will let React take care of updating `this.props.children` inside `<select>`, but we will also add a `componentDidUpdate()` lifecycle method that notifies Chosen about changes in the children list:
+Chosen'in dökümantasyonu, orijinal DOM öğesine yapılan değişiklikler hakkında, jQuery `trigger ()` API'ını kullanabileceğimizi önerir. React'in `<select>` içindeki `this.props.children`'i güncellemesine izin vereceğiz, ancak Chosen'ı alt öğeler listesindeki değişiklikler hakkında bilgilendiren bir `componentDidUpdate()`'e yaşam döngüsü yöntemini de ekleyeceğiz: 
 
 ```js{2,3}
 componentDidUpdate(prevProps) {
@@ -145,9 +145,9 @@ componentDidUpdate(prevProps) {
 }
 ```
 
-This way, Chosen will know to update its DOM element when the `<select>` children managed by React change.
+Bu şekilde Chosen, React tarafından yönetilen `<select>` alt öğeleri değiştiğinde DOM öğesini güncelleyeceğini bilecektir.
 
-The complete implementation of the `Chosen` component looks like this:
+ `Chosen` bileşeninin tam uygulanması şu şekildedir:
 
 ```js
 class Chosen extends React.Component {
@@ -186,7 +186,7 @@ class Chosen extends React.Component {
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010)
 
 ## Integrating with Other View Libraries {#integrating-with-other-view-libraries}
 
