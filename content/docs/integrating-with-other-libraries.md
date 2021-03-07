@@ -6,21 +6,21 @@ permalink: docs/integrating-with-other-libraries.html
 
 React, herhangi bir web uygulamasında kullanılabilir. Diğer uygulamalara yerleştirilebilir ve biraz özenle React'e başka uygulamalar da yerleştirilebilir. Bu rehber, [jQuery](https://jquery.com/) ve [Backbone](https://backbonejs.org/) ile bütünleşmeye odaklanarak çok yaygın kullanım örneklerinin bazılarını inceleyecek, ancak aynı fikirler, bileşenleri varolan herhangi bir kodla bütünleştirmek için de uygulanabilir.
 
-## Integrating with DOM Manipulation Plugins {#integrating-with-dom-manipulation-plugins}
+## DOM Manipülasyon Eklentileri ile Bütünleşmek {#integrating-with-dom-manipulation-plugins}
 
-React is unaware of changes made to the DOM outside of React. It determines updates based on its own internal representation, and if the same DOM nodes are manipulated by another library, React gets confused and has no way to recover.
+React, React dışında DOM'a yapılan değişikliklerin farkında değildir. Güncellemeleri kendi iç temsiline göre belirler, ve eğer aynı DOM düğümleri başka bir kütüphane tarafından değiştirilmişse, React şaşırır ve bunu kurtarmanın yolu yoktur.
 
-This does not mean it is impossible or even necessarily difficult to combine React with other ways of affecting the DOM, you just have to be mindful of what each is doing.
+Bu demek değildir ki, o imkansızdır veya DOM'u etkileyen diğer yollarla React'i birleştirmek gerekli olarak zor olsa bile, her birinin ne yaptığını dikkate almanız yeterlidir.
 
-The easiest way to avoid conflicts is to prevent the React component from updating. You can do this by rendering elements that React has no reason to update, like an empty `<div />`.
+Çakışmaları önlemenin en kolay yolu, React bileşeninin güncellenmesini önlemektir. Bunu, boş bir `<div />` gibi React'in güncellemek için bir nedeni olmayan öğelerini oluşturarak yapabilirsiniz.
 
-### How to Approach the Problem {#how-to-approach-the-problem}
+### Soruna Nasıl Yaklaşılmalı {#how-to-approach-the-problem}
 
-To demonstrate this, let's sketch out a wrapper for a generic jQuery plugin.
+Bunu göstermek için, genel bir jQuery eklentisi için bir sarmalayıcı çizelim.
 
-We will attach a [ref](/docs/refs-and-the-dom.html) to the root DOM element. Inside `componentDidMount`, we will get a reference to it so we can pass it to the jQuery plugin.
+Kök DOM öğesine bir [ref](/docs/refs-and-the-dom.html) ekleyeceğiz. `componentDidMount` içinde, jQuery eklentisine iletebilmemiz için ona bir referans alacağız.
 
-To prevent React from touching the DOM after mounting, we will return an empty `<div />` from the `render()` method. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
+Monte edildikten sonra, React'in DOM'a dokunmasını önlemek icin, `render()` metodundan boş bir `<div />` döndüreceğiz. `<div />` öğesinin herhangi bir özelliği veya alt öğesi yoktur, bu yüzden React'in onu güncellemek için bir nedeni yoktur, DOM'un bu bölümünü yönetmek için jQuery eklentisi serbest bırakılır:
 
 ```js{3,4,8,12}
 class SomePlugin extends React.Component {
@@ -39,7 +39,7 @@ class SomePlugin extends React.Component {
 }
 ```
 
-Note that we defined both `componentDidMount` and `componentWillUnmount` [lifecycle methods](/docs/react-component.html#the-component-lifecycle). Many jQuery plugins attach event listeners to the DOM so it's important to detach them in `componentWillUnmount`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
+Dikkate alın ki, biz hem `componentDidMount` hem de `componentWillUnmount` [yaşam döngüsü metotları](/docs/react-component.html#the-component-lifecycle)'nı tanımladık. Birçok jQuery eklentisi, olay dinleyicilerini DOM'a ekler, bu nedenle onları `componentWillUnmount`'tan ayırmak önemlidir. Eğer eklenti düzeltme için bir metot sağlamıyorsa, muhtemelen bellek sızıntılarını önlemek için eklentinin kaydettiği herhangi bir olay dinleyicisini kaldırmayı hatırlayarak, kendi önleminizi almak zorunda olacaksınız. 
 
 ### Integrating with jQuery Chosen Plugin {#integrating-with-jquery-chosen-plugin}
 
