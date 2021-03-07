@@ -188,19 +188,19 @@ class Chosen extends React.Component {
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010)
 
-## Integrating with Other View Libraries {#integrating-with-other-view-libraries}
+## Diğer Görünüm Kütüphaneleri ile Bütünleşmek {#integrating-with-other-view-libraries}
 
-React can be embedded into other applications thanks to the flexibility of [`ReactDOM.render()`](/docs/react-dom.html#render).
+React, diğer uygulamalara [`ReactDOM.render()`](/docs/react-dom.html#render)'in esnekliği sayesinde gömülebilir.
 
-Although React is commonly used at startup to load a single root React component into the DOM, `ReactDOM.render()` can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.
+React, başlangıçta genellikle DOM'a tek bir kök React bileşeni yüklemek için kullanılsa da, `ReactDOM.render()` bir buton kadar küçük veya bir uygulama kadar büyük olabilen UI'ın (Kullanıcı Arayüzü'nün) bağımsız bölümleri için bir çok kez çağrılabilir. 
 
-In fact, this is exactly how React is used at Facebook. This lets us write applications in React piece by piece, and combine them with our existing server-generated templates and other client-side code.
+Aslında, Facebook'ta React tam olarak böyle kullanılır. Bu, uygulamaları React'te parça parça yazmamızı sağlar, ve bunları mevcut sunucu tarafından oluşturulan şablonlarımız ve diğer istemci-taraf (client-side) kod ile birleştirir.
 
-### Replacing String-Based Rendering with React {#replacing-string-based-rendering-with-react}
+### String-Tabanlı Render'in React ile Yer Değiştirmesi {#replacing-string-based-rendering-with-react}
 
-A common pattern in older web applications is to describe chunks of the DOM as a string and insert it into the DOM like so: `$el.html(htmlString)`. These points in a codebase are perfect for introducing React. Just rewrite the string based rendering as a React component.
+Eski web uygulamalarındaki yaygın bir örnek, DOM parçalarını bir string olarak tanımlamak ve DOM'a şu şekilde eklemektir: `$el.html(htmlString)`. Bir kod tabanındaki bu noktalar, React'i tanıtmak için mükemmeldir. Sadece string tabanlı oluşturmayı, bir React bileşeni olarak yeniden yazın.
 
-So the following jQuery implementation...
+Aşağıdaki JQuery uygulanması....
 
 ```js
 $('#container').html('<button id="btn">Say Hello</button>');
@@ -209,7 +209,7 @@ $('#btn').click(function() {
 });
 ```
 
-...could be rewritten using a React component:
+...bir React bileşeni kullanılarak yeniden yazılabilir:
 
 ```js
 function Button() {
@@ -227,7 +227,7 @@ ReactDOM.render(
 );
 ```
 
-From here you could start moving more logic into the component and begin adopting more common React practices. For example, in components it is best not to rely on IDs because the same component can be rendered multiple times. Instead, we will use the [React event system](/docs/handling-events.html) and register the click handler directly on the React `<button>` element:
+Buradan bileşene daha fazla mantık taşımaya ve daha yaygın React uygulamalarını benimsemeye başlayabilirsiniz. Örneğin, bileşenlerde ID'lere güvenmemek en iyisidir. Çünkü aynı bileşen birden çok kez işlenebilir. Bunun yerine, [React olay sistemi](/docs/handling-events.html)'ni kullanacağız ve tıklama olayını doğrudan React `<button>` öğesine kaydedeceğiz:
 
 ```js{2,6,9}
 function Button(props) {
@@ -247,9 +247,9 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/RVKbvW?editors=1010)
+[**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/RVKbvW?editors=1010)
 
-You can have as many such isolated components as you like, and use `ReactDOM.render()` to render them to different DOM containers. Gradually, as you convert more of your app to React, you will be able to combine them into larger components, and move some of the `ReactDOM.render()` calls up the hierarchy.
+İstediğiniz kadar çok sayıda izole edilmiş bileşeniniz olabilir ve bunları farklı DOM konteynerlerine işlemek için `ReactDOM.render ()`'i kullanabilirsiniz. Yavaş yavaş, uygulamanızı daha fazla React'e dönüştürdükçe, onları daha büyük bileşenlerde birleştirebilecek ve hiyerarşiyi çağıran `ReactDOM.render ()`'in bir kısmını taşıyabileceksiniz. 
 
 ### Embedding React in a Backbone View {#embedding-react-in-a-backbone-view}
 
