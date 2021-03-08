@@ -40,16 +40,15 @@ Tüm `aria- *` HTML özelliklerinin JSX'te tam olarak desteklendiğini unutmayı
 />
 ```
 
-## Semantic HTML {#semantic-html}
-Semantic HTML is the foundation of accessibility in a web application. Using the various HTML elements to reinforce the meaning of information
-in our websites will often give us accessibility for free.
+## Semantik HTML {#semantic-html}
+Semantik HTML, bir web uygulamasında erişilebilirliğin temelidir. web sitelerimizdeki bilginin anlamını pekiştirmek için, çeşitli HTML öğelerini kullanmak sıklıkla bize ücretsiz olarak erişilebilirlik sağlayacaktır.
 
 - [MDN HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
-Sometimes we break HTML semantics when we add `<div>` elements to our JSX to make our React code work, especially when working with lists (`<ol>`, `<ul>` and `<dl>`) and the HTML `<table>`.
-In these cases we should rather use [React Fragments](/docs/fragments.html) to group together multiple elements.
+Bazen, React kodumuzun çalışması için JSX'imize `<div>` öğeleri eklediğimizde, HTML'in semantiğini bozarız, özellikle listeler (`<ol>`, `<ul>` ve `<dl>`) ve HTML `<table>` ile çalışırken. 
+Bu durumlarda, çoklu öğeleri gruplamak için [React Fragments](/docs/fragments.html) kullanmayı tercih etmelisiniz.
 
-For example,
+Örneğin,
 
 ```javascript{1,5,8}
 import React, { Fragment } from 'react';
@@ -74,14 +73,13 @@ function Glossary(props) {
 }
 ```
 
-You can map a collection of items to an array of fragments as you would any other type of element as well:
+Başka herhangi bir öğe türünde yapacağınız gibi, bir öğe koleksiyonunu bir fragment array'ine eşleyebilirsiniz :
 
 ```javascript{6,9}
 function Glossary(props) {
   return (
     <dl>
-      {props.items.map(item => (
-        // Fragments should also have a `key` prop when mapping collections
+      {props.items.map(item => (// Kolleksiyonları eşleştirirken, fragmentler de bir `anahtar` prop'a sahip olmalıdır. 
         <Fragment key={item.id}>
           <dt>{item.term}</dt>
           <dd>{item.description}</dd>
@@ -92,7 +90,7 @@ function Glossary(props) {
 }
 ```
 
-When you don't need any props on the Fragment tag you can use the [short syntax](/docs/fragments.html#short-syntax), if your tooling supports it:
+Fragment etiketinde herhangi bir prop'a ihtiyacınız olmadığında, eğer arac gerecleriniz onu destekliyorsa [kisa syntax](/docs/fragments.html#short-syntax)'i kullanabilirsiniz:
 
 ```javascript{3,6}
 function ListItem({ item }) {
@@ -105,7 +103,7 @@ function ListItem({ item }) {
 }
 ```
 
-For more info, see [the Fragments documentation](/docs/fragments.html).
+Daha fazla bilgi için, [Fragments dokumantasyonu](/docs/fragments.html)'na bakiniz.
 
 ## Accessible Forms {#accessible-forms}
 
