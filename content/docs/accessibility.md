@@ -4,11 +4,11 @@ title: Accessibility
 permalink: docs/accessibility.html
 ---
 
-## Why Accessibility? {#why-accessibility}
+## Niçin Erişilebilirlik? {#why-accessibility}
 
-Web accessibility (also referred to as [**a11y**](https://en.wiktionary.org/wiki/a11y)) is the design and creation of websites that can be used by everyone. Accessibility support is necessary to allow assistive technology to interpret web pages.
+([**a11y**](https://en.wiktionary.org/wiki/a11y)) olarak da anılan web erişilebilirliği, herkes tarafından kullanılabilir web sitelerinin tasarımı ve oluşturulmasıdır. Erişilebilirlik desteği, yardımcı teknolojinin web sayfalarını yorumlamasına izin vermek için gereklidir.
 
-React fully supports building accessible websites, often by using standard HTML techniques.
+React, sıklıkla standart HTML tekniklerini kullanarak, tamamen erişilebilir web siteleri oluşturmayı destekler.
 
 ## Standards and Guidelines {#standards-and-guidelines}
 
