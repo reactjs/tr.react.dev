@@ -116,19 +116,20 @@ Aşağıdaki kaynaklar bize bunun nasıl yapılacağını gösterir:
 - [WebAIM bize öğelerin nasıl etiketleneceğini gösterir](https://webaim.org/techniques/forms/controls)
 - [Paciello Group erişilebilir isimleri açıklar](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
 
-Bu standart HTML uygulamaları doğrudan React'te kullanılabilmesine rağmen, `for` nitelliginin JSX'de `htmlFor` olarak yazıldığına dikkat edin:
+Bu standart HTML uygulamaları doğrudan React'te kullanılabilmesine rağmen, `for` nitelliğinin JSX'de `htmlFor` olarak yazıldığına dikkat edin:
 
 ```javascript{1}
 <label htmlFor="namedInput">Name:</label>
 <input id="namedInput" type="text" name="name"/>
 ```
 
-### Notifying the user of errors {#notifying-the-user-of-errors}
+### Kullanici hatalarini farketmek {#notifying-the-user-of-errors}
 
-Error situations need to be understood by all users. The following link shows us how to expose error texts to screen readers as well:
+Hata durumlarının tüm kullanıcılar tarafından anlaşılması gerekir. 
+Aşağıdaki link, hata metinlerinin de ekran okuyucuları tarafından nasıl algılandığını gösterir:
 
-- [The W3C demonstrates user notifications](https://www.w3.org/WAI/tutorials/forms/notifications/)
-- [WebAIM looks at form validation](https://webaim.org/techniques/formvalidation/)
+- [W3C, kullanıcı bildirimlerini gösterir](https://www.w3.org/WAI/tutorials/forms/notifications/)
+- [WebAIM form doğrulamaya bakar](https://webaim.org/techniques/formvalidation/)
 
 ## Focus Control {#focus-control}
 
