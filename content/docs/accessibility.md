@@ -131,11 +131,11 @@ Aşağıdaki link, hata metinlerinin de ekran okuyucuları tarafından nasıl al
 - [W3C, kullanıcı bildirimlerini gösterir](https://www.w3.org/WAI/tutorials/forms/notifications/)
 - [WebAIM form doğrulamaya bakar](https://webaim.org/techniques/formvalidation/)
 
-## Focus Control {#focus-control}
+## Odak Kontrolü {#focus-control}
 
-Ensure that your web application can be fully operated with the keyboard only:
+Web uygulamanızın yalnızca klavye ile tam olarak çalıştırılabildiğinden emin olun:
 
-- [WebAIM talks about keyboard accessibility](https://webaim.org/techniques/keyboard/)
+- [WebAIM klavye erişilebilirliği hakkında konuşur](https://webaim.org/techniques/keyboard/)
 
 ### Keyboard focus and focus outline {#keyboard-focus-and-focus-outline}
 
