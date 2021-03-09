@@ -137,13 +137,13 @@ Web uygulamanızın yalnızca klavye ile tam olarak çalıştırılabildiğinden
 
 - [WebAIM klavye erişilebilirliği hakkında konuşur](https://webaim.org/techniques/keyboard/)
 
-### Keyboard focus and focus outline {#keyboard-focus-and-focus-outline}
+### Klavye odağı ve odak ana hatları {#keyboard-focus-and-focus-outline}
 
-Keyboard focus refers to the current element in the DOM that is selected to accept input from the keyboard. We see it everywhere as a focus outline similar to that shown in the following image:
+Klavye odağı, klavyeden girişi kabul etmek için seçilen DOM'daki varolan öğeye başvurur. Bunu her yerde aşağıdaki resimde gösterilene benzer bir odak anahat olarak görürüz:
 
 <img src="../images/docs/keyboard-focus.png" alt="Blue keyboard focus outline around a selected link." />
 
-Only ever use CSS that removes this outline, for example by setting `outline: 0`, if you are replacing it with another focus outline implementation.
+Eger onu başka bir odak anahat uygulamasıyla değiştiriyorsanız, sadece bu anahatı kaldıran CSS'si kullanın.
 
 ### Mechanisms to skip to desired content {#mechanisms-to-skip-to-desired-content}
 
