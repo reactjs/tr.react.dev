@@ -103,20 +103,20 @@ function ListItem({ item }) {
 }
 ```
 
-Daha fazla bilgi için, [Fragments dokumantasyonu](/docs/fragments.html)'na bakiniz.
+Daha fazla bilgi için, [Fragmentler dokumantasyonu](/docs/fragments.html)'na bakiniz.
 
-## Accessible Forms {#accessible-forms}
+## Erişilebilir Formlar {#accessible-forms}
 
-### Labeling {#labeling}
-Every HTML form control, such as `<input>` and `<textarea>`, needs to be labeled accessibly. We need to provide descriptive labels that are also exposed to screen readers.
+### Etiketlemek {#labeling}
+`<input>` ve `<textarea>` gibi her HTML form kontrolunun, erişilebilir halde etiketlenmiş olması gerekir. Ekran okuyucuları tarafndan da ortaya çıkan, açıklayıcı etiketler sağlamamız gerekir.
 
-The following resources show us how to do this:
+Aşağıdaki kaynaklar bize bunun nasıl yapılacağını gösterir:
 
-- [The W3C shows us how to label elements](https://www.w3.org/WAI/tutorials/forms/labels/)
-- [WebAIM shows us how to label elements](https://webaim.org/techniques/forms/controls)
-- [The Paciello Group explains accessible names](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
+- [W3C bize öğeleri nasıl etiketleneceğini gösterir](https://www.w3.org/WAI/tutorials/forms/labels/)
+- [WebAIM bize öğelerin nasıl etiketleneceğini gösterir](https://webaim.org/techniques/forms/controls)
+- [Paciello Group erişilebilir isimleri açıklar](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
 
-Although these standard HTML practices can be directly used in React, note that the `for` attribute is written as `htmlFor` in JSX:
+Bu standart HTML uygulamaları doğrudan React'te kullanılabilmesine rağmen, `for` nitelliginin JSX'de `htmlFor` olarak yazıldığına dikkat edin:
 
 ```javascript{1}
 <label htmlFor="namedInput">Name:</label>
