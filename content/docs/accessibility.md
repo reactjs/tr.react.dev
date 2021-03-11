@@ -145,11 +145,11 @@ Klavye odağı, klavyeden girişi kabul etmek için seçilen DOM'daki varolan ö
 
 Eger onu başka bir odak anahat uygulamasıyla değiştiriyorsanız, sadece bu anahatı kaldıran CSS'si kullanın.
 
-### Mechanisms to skip to desired content {#mechanisms-to-skip-to-desired-content}
+### İstenilen İçeriğe atlama Mekanizmaları{#mechanisms-to-skip-to-desired-content}
 
-Provide a mechanism to allow users to skip past navigation sections in your application as this assists and speeds up keyboard navigation.
+Klavyede gezinmeye yardımcı olduğundan ve hızlandırdığından, kullanıcıların uygulamanızdaki geçmiş gezinme(navigasyon) bölümlerini atlamasına izin veren bir mekanizma sağlayın.
 
-Skiplinks or Skip Navigation Links are hidden navigation links that only become visible when keyboard users interact with the page. They are very easy to implement with internal page anchors and some styling:
+AtlamaLinkleri (Skiplinks) veya Atlama Navigasyon Linkleri (Skip Navigation Links), klavye kullanicilari sadece sayfa ile etkileşimde bulundukları zaman görünür olan gizli navigasyon linkleiridir. Bunların iç sayfa bağlantıları ve bazı stillerle uygulanması çok kolaydır:
 
 - [WebAIM - Skip Navigation Links](https://webaim.org/techniques/skipnav/)
 
