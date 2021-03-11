@@ -151,13 +151,13 @@ Klavyede gezinmeye yardımcı olduğundan ve hızlandırdığından, kullanıcı
 
 AtlamaLinkleri (Skiplinks) veya Atlama Navigasyon Linkleri (Skip Navigation Links), klavye kullanicilari sadece sayfa ile etkileşimde bulundukları zaman görünür olan gizli navigasyon linkleiridir. Bunların iç sayfa bağlantıları ve bazı stillerle uygulanması çok kolaydır:
 
-- [WebAIM - Skip Navigation Links](https://webaim.org/techniques/skipnav/)
+- [WebAIM - Navigasyon Linklerini Atlamak](https://webaim.org/techniques/skipnav/)
 
-Also use landmark elements and roles, such as `<main>` and `<aside>`, to demarcate page regions as assistive technology allow the user to quickly navigate to these sections.
+Yardımcı teknoloji, kullanıcının bu bölümlere cabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için "<main>" ve "<aside>" gibi belirgin isaret öğeleri ve rolleri de kullanın.
 
-Read more about the use of these elements to enhance accessibility here:
+Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha fazlasını buradan okuyun
 
-- [Accessible Landmarks](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
+- [Erisilebiir Belirgin Isaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
 
 ### Programmatically managing focus {#programmatically-managing-focus}
 
