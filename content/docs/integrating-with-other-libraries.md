@@ -10,13 +10,13 @@ React, herhangi bir web uygulamasında kullanılabilir. Diğer uygulamalara yerl
 
 React, React dışında DOM'a yapılan değişikliklerin farkında değildir. Güncellemeleri kendi iç temsiline göre belirler, ve eğer aynı DOM düğümleri başka bir kütüphane tarafından değiştirilmişse, React şaşırır ve bunu kurtarmanın yolu yoktur.
 
-Bu demek değildir ki, o imkansızdır veya DOM'u etkileyen diğer yollarla React'i birleştirmek gerekli olarak zor olsa bile, her birinin ne yaptığını dikkate almanız yeterlidir.
+Bu, React'i DOM'u değistirmenin diğer yollarıyla birlikte kullanmanın imkansız veya zor olduğu anlamına gelmez. Sadece hangisinin ne yaptığına dikkat etmeniz gerekir.
 
 Çakışmaları önlemenin en kolay yolu, React bileşeninin güncellenmesini önlemektir. Bunu, boş bir `<div />` gibi React'in güncellemek için bir nedeni olmayan öğelerini oluşturarak yapabilirsiniz.
 
 ### Soruna Nasıl Yaklaşılmalı {#how-to-approach-the-problem}
 
-Bunu göstermek için, genel bir jQuery eklentisi için bir sarmalayıcı çizelim.
+Bunu göstermek için, genel bir jQuery eklentisi için bir sarmalayıcı tasarlayalım.
 
 Kök DOM öğesine bir [ref](/docs/refs-and-the-dom.html) ekleyeceğiz. `componentDidMount` içinde, jQuery eklentisine iletebilmemiz için ona bir referans alacağız.
 
@@ -39,7 +39,7 @@ class SomePlugin extends React.Component {
 }
 ```
 
-Dikkate alın ki, biz hem `componentDidMount` hem de `componentWillUnmount` [yaşam döngüsü metotları](/docs/react-component.html#the-component-lifecycle)'nı tanımladık. Birçok jQuery eklentisi, olay dinleyicilerini DOM'a ekler, bu nedenle onları `componentWillUnmount`'tan ayırmak önemlidir. Eğer eklenti düzeltme için bir metot sağlamıyorsa, muhtemelen bellek sızıntılarını önlemek için eklentinin kaydettiği herhangi bir olay dinleyicisini kaldırmayı hatırlayarak, kendi önleminizi almak zorunda olacaksınız. 
+Hem `componentDidMount` hem de `componentWillUnmount` [yaşam döngüsü metotları](/docs/react-component.html#the-component-lifecycle)'nı tanımladığımıza dikkat edin. Birçok jQuery eklentisi, olay dinleyicilerini DOM'a ekler, bu nedenle onları `componentWillUnmount`'tan ayırmak önemlidir. Eğer eklenti temizlik için bir metot sağlamıyorsa, muhtemelen bellek sızıntılarını önlemek için eklentinin kaydettiği herhangi bir olay dinleyicisini kaldırmayı hatırlayarak, kendi önleminizi almak zorunda olacaksınız. 
 
 ###  jQuery Chosen Eklentisi ile Bütünleşmek {#integrating-with-jquery-chosen-plugin}
 
@@ -47,7 +47,7 @@ Bu kavramların daha kesin bir örneği için, `<select>` girdilerini genişlete
 
 >**Not:**
 >
->Bunun mümkün olması demek, React uygulamaları için en iyi yaklaşım olduğu anlamına gelmez. Yapabildiğiniz zaman, sizi React bileşenlerini kullanmanız için cesaretlendiriyoruz. React uygulamalarında, React bileşenlerini yeniden kullanmak daha kolaydır, ve sıklıkla davranışları ve görünümleri üzerinde daha fazla kontrol sağlar.
+>Bunun mümkün olması demek, React uygulamaları için en iyi yaklaşım olduğu anlamına gelmez. Mümkün olduğunda React bileşenlerini kullanmanızı öneririz. React uygulamalarında, React bileşenlerini yeniden kullanmak daha kolaydır, ve genellikle davranışları ve görünümleri üzerinde daha fazla kontrol sağlar.
 
 Öncelikle, `Chosen`'ın DOM'a ne yaptığına bakalım.
 
@@ -135,7 +135,7 @@ handleChange(e) {
 
 Son olarak, yapılması gereken bir şey daha var. React'te, props zaman içinde değişir. Örneğin, ana bileşenin durumu değişirse, `<Chosen>` bileşeni, farklı alt öğeler alabilir. Bu, React'in DOM'u bizim için yönetmesine izin vermediğimizden, bütünleşme noktalarında, prop güncellemelerine yanıt olarak DOM'u manuel olarak güncellememizin önemli olduğu anlamına gelir. 
 
-Chosen'in dökümantasyonu, orijinal DOM öğesine yapılan değişiklikler hakkında, jQuery `trigger ()` API'ını kullanabileceğimizi önerir. React'in `<select>` içindeki `this.props.children`'i güncellemesine izin vereceğiz, ancak Chosen'ı alt öğeler listesindeki değişiklikler hakkında bilgilendiren bir `componentDidUpdate()`'e yaşam döngüsü yöntemini de ekleyeceğiz: 
+Chosen'in dokümantasyonu, orijinal DOM öğesine yapılan değişiklikler hakkında, jQuery `trigger ()` API'ını kullanabileceğimizi önerir. React'in `<select>` içindeki `this.props.children`'i güncellemesine izin vereceğiz, ancak Chosen'ı alt öğeler listesindeki değişiklikler hakkında bilgilendiren bir `componentDidUpdate()`'e yaşam döngüsü yöntemini de ekleyeceğiz: 
 
 ```js{2,3}
 componentDidUpdate(prevProps) {
@@ -196,7 +196,7 @@ React, başlangıçta genellikle DOM'a tek bir kök React bileşeni yüklemek i�
 
 Aslında, Facebook'ta React tam olarak böyle kullanılır. Bu, uygulamaları React'te parça parça yazmamızı sağlar, ve bunları mevcut sunucu tarafından oluşturulan şablonlarımız ve diğer istemci-taraf (client-side) kod ile birleştirir.
 
-### String-Tabanlı Render'in React ile Yer Değiştirmesi {#replacing-string-based-rendering-with-react}
+### String-Tabanlı Render'i React ile Değiştirme {#replacing-string-based-rendering-with-react}
 
 Eski web uygulamalarındaki yaygın bir örnek, DOM parçalarını bir string olarak tanımlamak ve DOM'a şu şekilde eklemektir: `$el.html(htmlString)`. Bir kod tabanındaki bu noktalar, React'i tanıtmak için mükemmeldir. Sadece string tabanlı oluşturmayı, bir React bileşeni olarak yeniden yazın.
 
@@ -285,7 +285,7 @@ Bir bileşen bir React ağacının *içinden* kaldırıldığında, temizleme ot
 
 Genel olarak, [React state](/docs/lifting-state-up.html), [Flux](https://facebook.github.io/flux/), veya [Redux](https://redux.js.org/) gibi tek yönlü veri akışının kullanılması tavsiye edilirken, React bileşenleri, diğer çatı ve kütüphanelerden bir model katmanı kullanabilir.
 
-### React Bileşenlerinde Backbone MModellerini Kullanmak{#using-backbone-models-in-react-components}
+### React Bileşenlerinde Backbone Modellerini Kullanmak{#using-backbone-models-in-react-components}
 
 Bir React bileşeninden [Backbone](https://backbonejs.org/) modellerini ve koleksiyonlarını kullanmanın en basit yolu, çeşitli değişim olaylarını dinlemek ve manuel olarak bir güncellemeyi zorlamaktır.
 
@@ -399,7 +399,7 @@ function connectToBackboneModel(WrappedComponent) {
 }
 ```
 
-Bunun nasıl kullanıldığını göstermek için, Backbone modeline bir `NameInput` React bileşeni bağlayacağız, ve giriş değiştiğinde "firstName" özelliğini güncelleyceğiz: 
+Bunun nasıl kullanıldığını göstermek için, Backbone modeline bir `NameInput` React bileşeni bağlayacağız, ve giriş değiştiğinde "firstName" özelliğini güncelleyeceğiz: 
 
 ```js{4,6,11,15,19-21}
 function NameInput(props) {
