@@ -157,28 +157,28 @@ Yardımcı teknoloji, kullanıcının bu bölümlere cabuk bir şekilde gezinmes
 
 Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha fazlasını buradan okuyun
 
-- [Erisilebiir Belirgin Isaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
+- [Erisilebilir Belirgin Isaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
 
-### Programmatically managing focus {#programmatically-managing-focus}
+### Programlı olarak odağı yönetmek {#programmatically-managing-focus}
 
-Our React applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, we need to programmatically nudge the keyboard focus in the right direction. For example, by resetting keyboard focus to a button that opened a modal window after that modal window is closed.
+React uygulamamlarımız çalışma süresinde HTML DOM'u degistirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amaciyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Ornegin, modal penceresi kapatildiktan sonra, bir modal penceresi acan bir butona klavye odagini sifirlatmak.
 
 MDN Web Docs takes a look at this and describes how we can build [keyboard-navigable JavaScript widgets](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets).
 
-To set focus in React, we can use [Refs to DOM elements](/docs/refs-and-the-dom.html).
+React'te odagi ayarlamak icin [DOM ogelerine Refler](/docs/refs-and-the-dom.html)'i kullnabiliriz.
 
-Using this, we first create a ref to an element in the JSX of a component class:
+Bunu kullanarak, we first create a ref to an element in the JSX of a component class:
 
 ```javascript{4-5,8-9,13}
 class CustomTextInput extends React.Component {
   constructor(props) {
     super(props);
-    // Create a ref to store the textInput DOM element
+    // textInput DOM ogesini depolamak icin bir ref olustur
     this.textInput = React.createRef();
   }
   render() {
-  // Use the `ref` callback to store a reference to the text input DOM
-  // element in an instance field (for example, this.textInput).
+  // text input DOM'a bir referans depolamak icin `ref` geri cagriyi kullanin
+  // element in an instance field (ornegin, this.textInput).
     return (
       <input
         type="text"
@@ -189,7 +189,7 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-Then we can focus it elsewhere in our component when needed:
+Daha sonra, gerektiğinde bileşenimizde onu başka bir yere odaklayabiliriz:
 
  ```javascript
  focus() {
@@ -199,7 +199,7 @@ Then we can focus it elsewhere in our component when needed:
  }
  ```
 
-Sometimes a parent component needs to set focus to an element in a child component. We can do this by [exposing DOM refs to parent components](/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components) through a special prop on the child component that forwards the parent's ref to the child's DOM node.
+Bazen bir ust bilesenin, bir alt bilesendeki ogeye odagini ayarlamak gerekir.  We can do this by [Ust bilesene DOM reflerinin aciga cikmasi](/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components) through a special prop on the child component that forwards the parent's ref to the child's DOM node.
 
 ```javascript{4,12,16}
 function CustomTextInput(props) {
@@ -222,7 +222,7 @@ class Parent extends React.Component {
   }
 }
 
-// Now you can set focus when required.
+// Simdi gerektiginde odagi ayarlayabilirsiniz.
 this.inputElement.current.focus();
 ```
 
