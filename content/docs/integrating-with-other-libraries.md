@@ -8,7 +8,7 @@ React, herhangi bir web uygulamasında kullanılabilir. Diğer uygulamalara yerl
 
 ## DOM Manipülasyon Eklentileri ile Bütünleşmek {#integrating-with-dom-manipulation-plugins}
 
-React, React dışında DOM'a yapılan değişikliklerin farkında değildir. Güncellemeleri kendi iç temsiline göre belirler, ve eğer aynı DOM düğümleri başka bir kütüphane tarafından değiştirilmişse, React şaşırır ve bunu kurtarmanın yolu yoktur.
+React, React dışında DOM'a yapılan değişikliklerin farkında değildir. Güncellemeleri kendi iç temsiline göre belirler, ve eğer aynı DOM düğümleri başka bir kütüphane tarafından değiştirilmişse, React'in kafası karışır ve bunu kurtarmanın yolu yoktur.
 
 Bu, React'i DOM'u değistirmenin diğer yollarıyla birlikte kullanmanın imkansız veya zor olduğu anlamına gelmez. Sadece hangisinin ne yaptığına dikkat etmeniz gerekir.
 
