@@ -323,7 +323,7 @@ class BlurExample extends React.Component {
   // Bir sonraki tıklamada, setTimeout kullanarak açılır pencereyi kapatıyoruz.
   // Bu gereklidir çünkü önce kontrol etmemiz gerekiyor, eger
   // öğenin başka bir alt öğesine odaklanilmissa, cunku
-  // bulanıklık olayı, yeni odak olayından önce tetiklenir..
+  // bulanıklık olayı, yeni odak olayından önce tetiklenir.
   onBlurHandler() {
     this.timeOutId = setTimeout(() => {
       this.setState({
@@ -365,20 +365,20 @@ Bu kod fonksiyonelligi hem imleçi hem de klavye kullanıcılarına açiga çika
 
 <img src="../images/docs/blur-popover-close.gif" alt="Hem mouse hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır liste." />
 
-Bu, sadece imleç ve mouse olaylarına bağlı olan klavye kullanicilari icin fonksiyonelligin bozuldugu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yoneticilerini kullanarak duzeltilmis olabilen sorunlu bolgeleri vurgular.
+Bu, sadece imleç ve mouse olaylarına bağlı olan klavye kullanıcıları icin fonksiyonelligin bozuldugu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yoneticilerini kullanarak duzeltilmis olabilen sorunlu bolgeleri vurgular.
 
-## More Complex Widgets {#more-complex-widgets}
+## Daha Karisik Widgetler {#more-complex-widgets}
 
-A more complex user experience should not mean a less accessible one. Whereas accessibility is most easily achieved by coding as close to HTML as possible, even the most complex widget can be coded accessibly.
+Daha karmaşık bir kullanıcı deneyimi, daha az erişilebilir demek degildir. Erişilebilirlik en kolay şekilde mümkün olabildiğince HTML'ye yakın kodlama ile ulaşilabilir iken, en karmaşık widget bile erişilebilir şekilde kodlanmış olabilir.
 
-Here we require knowledge of [ARIA Roles](https://www.w3.org/TR/wai-aria/#roles) as well as [ARIA States and Properties](https://www.w3.org/TR/wai-aria/#states_and_properties).
-These are toolboxes filled with HTML attributes that are fully supported in JSX and enable us to construct fully accessible, highly functional React components.
+Burada [ARIA Durumlari ve Ozellikleri](https://www.w3.org/TR/wai-aria/#states_and_properties) gibi [ARIA Rolleri](https://www.w3.org/TR/wai-aria/#roles)'nin bilgisine gereksinim duyariz. 
+Bunlar JSX'te tamamen desteklenmis ve tamamen erişilebilir, yuksek dereceli fonksiyonel React bileşenleri inşa etmemize imkan veren HTML nitelikleriyle dolu araç kutularıdır.
 
-Each type of widget has a specific design pattern and is expected to function in a certain way by users and user agents alike:
+Her cesit widget öğesi türünün belirli bir tasarım sablon/ornek  vardır ve hem kullanicilar hem de kullanici ajanslari gibi olanlar tarafindan, belirli bir sekilde fonksiyon gostermesi beklenir:
 
-- [WAI-ARIA Authoring Practices - Design Patterns and Widgets](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
-- [Heydon Pickering - ARIA Examples](https://heydonworks.com/article/practical-aria-examples/)
-- [Inclusive Components](https://inclusive-components.design/)
+- [WAI-ARIA Yazarlık Uygulamaları - Tasarım Desenleri ve Widget'lar](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
+- [Heydon Pickering - ARIA Örnekleri](https://heydonworks.com/article/practical-aria-examples/)
+- [Kapsayıcı Bileşenler](https://inclusive-components.design/)
 
 ## Other Points for Consideration {#other-points-for-consideration}
 
