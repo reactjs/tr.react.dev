@@ -103,7 +103,7 @@ function ListItem({ item }) {
 }
 ```
 
-Daha fazla bilgi için, [Fragmentler dokumantasyonu](/docs/fragments.html)'na bakiniz.
+Daha fazla bilgi için, [Fragmentler dokümantasyonu](/docs/fragments.html)'na bakiniz.
 
 ## Erişilebilir Formlar {#accessible-forms}
 
@@ -145,7 +145,7 @@ Klavye odağı, klavyeden girişi kabul etmek için seçilen DOM'daki varolan ö
 
 Eger onu başka bir odak anahat uygulamasıyla değiştiriyorsanız, sadece bu anahatı kaldıran CSS'si kullanın.
 
-### İstenilen İçeriğe atlama Mekanizmaları{#mechanisms-to-skip-to-desired-content}
+### İstenilen İçeriğe atlama mekanizmaları{#mechanisms-to-skip-to-desired-content}
 
 Klavyede gezinmeye yardımcı olduğundan ve hızlandırdığından, kullanıcıların uygulamanızdaki geçmiş gezinme(navigasyon) bölümlerini atlamasına izin veren bir mekanizma sağlayın.
 
@@ -163,11 +163,11 @@ Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha 
 
 React uygulamamlarımız çalışma süresinde HTML DOM'u degistirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amaciyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Ornegin, modal penceresi kapatildiktan sonra, bir modal penceresi acan bir butona klavye odagini sifirlatmak.
 
-MDN Web Docs takes a look at this and describes how we can build [keyboard-navigable JavaScript widgets](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets).
+MDN Web Dokumanlari buna bakar ve [gezinilebilir-klavye JavaScript widgetleri](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)'ni nasil insa edebildigimizi aciklar.
 
 React'te odagi ayarlamak icin [DOM ogelerine Refler](/docs/refs-and-the-dom.html)'i kullnabiliriz.
 
-Bunu kullanarak, we first create a ref to an element in the JSX of a component class:
+Bunu kullanarak, öncelikle, bir bileşen sınıfının JSX'indeki bir öğeye bir ref oluştururuz:
 
 ```javascript{4-5,8-9,13}
 class CustomTextInput extends React.Component {
@@ -178,7 +178,7 @@ class CustomTextInput extends React.Component {
   }
   render() {
   // text input DOM'a bir referans depolamak icin `ref` geri cagriyi kullanin
-  // element in an instance field (ornegin, this.textInput).
+  // bir instance alanindaki öğe (örneğin, this.textInput).
     return (
       <input
         type="text"
@@ -193,13 +193,13 @@ Daha sonra, gerektiğinde bileşenimizde onu başka bir yere odaklayabiliriz:
 
  ```javascript
  focus() {
-   // Explicitly focus the text input using the raw DOM API
-   // Note: we're accessing "current" to get the DOM node
+   // Açık bir şekilde, ham DOM API'ı kullanarak metin girişine odaklanın
+   // Not: DOM düğümünü almak için "current"e erişiyoruz
    this.textInput.current.focus();
  }
  ```
 
-Bazen bir ust bilesenin, bir alt bilesendeki ogeye odagini ayarlamak gerekir.  We can do this by [Ust bilesene DOM reflerinin aciga cikmasi](/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components) through a special prop on the child component that forwards the parent's ref to the child's DOM node.
+Bazen bir üst bileşenin, bir alt bileşendeki bir öğeye odaginin ayarlanması gerekir. Bunu [DOM reflerini ust bilesenler de ortaya cikartarak](/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components) ust ogenin ref'ini alt ogenin DOM düğümüne ileten alt bileşen üzerindeki özel bir destek yoluyla yapabiliriz.
 
 ```javascript{4,12,16}
 function CustomTextInput(props) {
@@ -226,25 +226,25 @@ class Parent extends React.Component {
 this.inputElement.current.focus();
 ```
 
-When using a HOC to extend components, it is recommended to [forward the ref](/docs/forwarding-refs.html) to the wrapped component using the `forwardRef` function of React. If a third party HOC does not implement ref forwarding, the above pattern can still be used as a fallback.
+Bileşenleri genişletmek için bir HOC kullanırken, React'in `forwardRef` fonksiyonu kullanarak [forward the ref](/docs/forwarding-refs.html) sarılmış bileşene iletilmesi önerilir. Eger bir üçüncü taraf HOC, ref iletmeyi  uygulamazsa, yukarıdaki sablon/ornek yine de bir geri cekilme olarak kullanılabilir.
 
-A great focus management example is the [react-aria-modal](https://github.com/davidtheclark/react-aria-modal). This is a relatively rare example of a fully accessible modal window. Not only does it set initial focus on
-the cancel button (preventing the keyboard user from accidentally activating the success action) and trap keyboard focus inside the modal, it also resets focus back to the element that initially triggered the modal.
+[react-aria-modal](https://github.com/davidtheclark/react-aria-modal), harika bir odak yönetimi örneğidir. Bu, tamamen erişilebilir bir modal penceresinin goreceli olarak nadir bir ornegidir.   
+Sadece ilk odagi iptal butonuna ayarlamak (klavye kullanıcısının başarılı eylemi yanlışlıkla etkinleştirmesini engeller) ve klavye odağını modal içinde hapsetmekle kalmaz, onu başlangıçta modali tetikleyen öğeye geri odaklanarak sıfırlar. 
 
->Note:
+>Not:
 >
->While this is a very important accessibility feature, it is also a technique that should be used judiciously. Use it to repair the keyboard focus flow when it is disturbed, not to try and anticipate how
->users want to use applications.
+>Bu çok önemli bir erişilebilirlik özelliği iken, adilce kullanılması da gereken bir tekniktir. Nasıl yapılacağını tahmin etmek için değil, rahatsız edildiğinde klavye odak akışını onarmak için kullanın.
+>kullanıcılar uygulamaları kullanmak ister.
 
-## Mouse and pointer events {#mouse-and-pointer-events}
+## Mouse ve imleç olayları {#mouse-and-pointer-events}
 
-Ensure that all functionality exposed through a mouse or pointer event can also be accessed using the keyboard alone. Depending only on the pointer device will lead to many cases where keyboard users cannot use your application.
+Bir mouse veya imleç olayı aracılığıyla açığa çıkan tüm fonksiyonların yalnızca klavye kullanılarak da erişilebildiğinden emin olun. Sadece imleç cihazına bağlı olarak, klavye kullanıcıları uygulamanızın kullanilamayacağı birçok duruma yonlendirecektir
 
-To illustrate this, let's look at a prolific example of broken accessibility caused by click events. This is the outside click pattern, where a user can disable an opened popover by clicking outside the element.
+Bunu gostermek icin, tıklama olaylarının sebep olduğu bozuk erişilebilirliğin verimli bir örneğine bakalım. Bu, bir kullanıcının öğenin dışına tıklayarak, bir anda açılan (popover) pencereyi engellediği dış tıklama sablonudur/ornektir.
 
 <img src="../images/docs/outerclick-with-mouse.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with a mouse showing that the close action works." />
 
-This is typically implemented by attaching a `click` event to the `window` object that closes the popover:
+Bu genelliklre popover'i kapatan `window` nesnesine bir `click` olayinin baglanarak uygulanmasidir.
 
 ```javascript{12-14,26-30}
 class OuterClickExample extends React.Component {
@@ -295,11 +295,11 @@ class OuterClickExample extends React.Component {
 }
 ```
 
-This may work fine for users with pointer devices, such as a mouse, but operating this with the keyboard alone leads to broken functionality when tabbing to the next element as the `window` object never receives a `click` event. This can lead to obscured functionality which blocks users from using your application.
+Bu mouse gibi imlecli cihaz kullanan kullanicilar icin iyi calisabilir. Ama bunun tek olarak klavye ile çalıştırılması, sonraki öğeye sekme yapıldığında bozuk fonksiyonellige yol acar, cunku `window` nesnesi asla `click` olayini almaz. Bu, kullanıcıların uygulamanızı kullanmasını engelleyen belirsiz fonksiyonellige yol açabilir. 
 
 <img src="../images/docs/outerclick-with-keyboard.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with the keyboard showing the popover not being closed on blur and it obscuring other screen elements." />
 
-The same functionality can be achieved by using appropriate event handlers instead, such as `onBlur` and `onFocus`:
+Bunun yerine `onBlur` ve `onFocus` gibi, aynı fonksiyonellik uygun olay yoneticilerini kullanarak ulasilabilir:
 
 ```javascript{19-29,31-34,37-38,40-41}
 class BlurExample extends React.Component {
@@ -320,10 +320,10 @@ class BlurExample extends React.Component {
     }));
   }
 
-  // We close the popover on the next tick by using setTimeout.
-  // This is necessary because we need to first check if
-  // another child of the element has received focus as
-  // the blur event fires prior to the new focus event.
+  // Bir sonraki tıklamada, setTimeout kullanarak açılır pencereyi kapatıyoruz.
+  // Bu gereklidir çünkü önce kontrol etmemiz gerekiyor, eger
+  // öğenin başka bir alt öğesine odaklanilmissa, cunku
+  // bulanıklık olayı, yeni odak olayından önce tetiklenir..
   onBlurHandler() {
     this.timeOutId = setTimeout(() => {
       this.setState({
@@ -332,14 +332,14 @@ class BlurExample extends React.Component {
     });
   }
 
-  // If a child receives focus, do not close the popover.
+  // Bir alt ogeye odaklanılırsa, açılır pencereyi kapatmayın
   onFocusHandler() {
     clearTimeout(this.timeOutId);
   }
 
   render() {
-    // React assists us by bubbling the blur and
-    // focus events to the parent.
+    // React bulanıklığı köpürterek ve
+    // ve olayları üst ogeye odaklayarak bize yardımcı olur
     return (
       <div onBlur={this.onBlurHandler}
            onFocus={this.onFocusHandler}>
@@ -361,11 +361,11 @@ class BlurExample extends React.Component {
 }
 ```
 
-This code exposes the functionality to both pointer device and keyboard users. Also note the added `aria-*` props to support screen-reader users. For simplicity's sake the keyboard events to enable `arrow key` interaction of the popover options have not been implemented.
+Bu kod fonksiyonelligi hem imleçi hem de klavye kullanıcılarına açiga çikartir. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larina da dikkat edin. Basitlik adina, açılır pencere seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
 
-<img src="../images/docs/blur-popover-close.gif" alt="A popover list correctly closing for both mouse and keyboard users." />
+<img src="../images/docs/blur-popover-close.gif" alt="Hem mouse hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır liste." />
 
-This is one example of many cases where depending on only pointer and mouse events will break functionality for keyboard users. Always testing with the keyboard will immediately highlight the problem areas which can then be fixed by using keyboard aware event handlers.
+Bu, sadece imleç ve mouse olaylarına bağlı olan klavye kullanicilari icin fonksiyonelligin bozuldugu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yoneticilerini kullanarak duzeltilmis olabilen sorunlu bolgeleri vurgular.
 
 ## More Complex Widgets {#more-complex-widgets}
 
