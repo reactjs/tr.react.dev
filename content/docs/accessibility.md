@@ -413,28 +413,29 @@ Kontrast testi becerilerinizi genişletmek istiyorsanız, bu araçları kullanab
 - [WebAIM - Renk Kontrastı Denetleyicisi](https://webaim.org/resources/contrastchecker/)
 - [The Paciello Group - Renk Kontrasti Cözümleyicisi](https://www.paciellogroup.com/resources/contrastanalyser/)
 
-## Development and Testing Tools {#development-and-testing-tools}
+## Geliştirme ve Test Etme Araçları {#development-and-testing-tools}
 
-There are a number of tools we can use to assist in the creation of accessible web applications.
+Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kullanabileceğimiz bir çok araç vardır.
 
-### The keyboard {#the-keyboard}
+### Klavye {#the-keyboard}
 
-By far the easiest and also one of the most important checks is to test if your entire website can be reached and used with the keyboard alone. Do this by:
+Şimdiye kadar en kolay ve ayni zamanda en onemli kontroller, tum websitesinin sadece klavye ile ulasalabilir ve kullanilabilir oldugunu test etmektir. Bunu şu şekilde yapın:
 
-1. Disconnecting your mouse.
-1. Using `Tab` and `Shift+Tab` to browse.
-1. Using `Enter` to activate elements.
-1. Where required, using your keyboard arrow keys to interact with some elements, such as menus and dropdowns.
+1. Mouse'nizin bağlantısını kesmek.
+1. Gözden geçirmek icin `Tab` ve `Shift+Tab` kullanmak.
+1. Öğeleri etkinleştirmek için `Enter` kullanmak
+1. Gerektiğinde, menüler ve asagi dogru açılan menüler (dropdown) gibi bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
 
-### Development assistance {#development-assistance}
+### Geliştirme Asistanı {#development-assistance}
 
-We can check some accessibility features directly in our JSX code. Often intellisense checks are already provided in JSX aware IDE's for the ARIA roles, states and properties. We also have access to the following tool:
+Bazı erişilebilirlik özelliklerini doğrudan JSX kodumuzda kontrol edebiliriz. 
+Genellikle intellisense kontrolleri, zaten JSX uyumlu IDE'lerde ARIA rolleri, durumları ve özellikleri için sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
 
 #### eslint-plugin-jsx-a11y {#eslint-plugin-jsx-a11y}
 
-The [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) plugin for ESLint provides AST linting feedback regarding accessibility issues in your JSX. Many IDE's allow you to integrate these findings directly into code analysis and source code windows.
+ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) eklentisi, JSX'inizdeki erişilebilirlik sorunları ile ilgili AST linting geri bildirimi sağlar. Bir cok IDE, bu bulguları doğrudan kod analizi ve kaynak kodu pencereleri ile birlikte kullanmaniza izin verir.
 
-[Create React App](https://github.com/facebookincubator/create-react-app) has this plugin with a subset of rules activated. If you want to enable even more accessibility rules, you can create an `.eslintrc` file in the root of your project with this content:
+[Create React App](https://github.com/facebookincubator/create-react-app) bir kural alt kümesinin etkinleştirildiği bu eklentiye sahiptir. Daha da fazla erişilebilirlik kurallarını etkinleştirmek istiyorsanız, bu içerikle projenizin root (kök) dizininde bir `.eslintrc` dosyası oluşturabilirsiniz: 
 
   ```json
   {
