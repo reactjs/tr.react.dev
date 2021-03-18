@@ -454,22 +454,22 @@ Deque Systemleri uygulamalarınızın otomatik ve uçtan-uca erişilebilirlik te
 
 [Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` uzerine insa edilmis bir erişilebilirlik denetçisi tarayıcı uzantısi.
 
-Geliştirme ve hata ayıklama sırasında, bu erişilebilirlik bulgularını doğrudan konsola bildirmek için [react-ax](https://github.com/dylanb/react-axe) modülünü de kullanabilirsiniz.
+Geliştirme ve hata ayıklama sırasında, bu erişilebilirlik bulgularını doğrudan konsola bildirmek için [react-axe](https://github.com/dylanb/react-axe) modülünü de kullanabilirsiniz.
 
 #### WebAIM WAVE {#webaim-wave}
 
-The [Web Accessibility Evaluation Tool](https://wave.webaim.org/extension/) is another accessibility browser extension.
+[Web Erişilebilirlik Değerlendirme Aracı](https://wave.webaim.org/extension/) 
+başka bir erişilebilirlik tarayıcı uzantısıdır.
 
-#### Accessibility inspectors and the Accessibility Tree {#accessibility-inspectors-and-the-accessibility-tree}
+#### Erişilebilirlik denetçileri ve Erişilebilirlik Ağacı {#accessibility-inspectors-and-the-accessibility-tree}
 
-[The Accessibility Tree](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/) is a subset of the DOM tree that contains accessible objects for every DOM element that should be exposed
-to assistive technology, such as screen readers.
+[Erişilebilirlik Ağacı](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/), ekran okuyuculari gibi yardımcı teknolojilere maruz bırakılmis olmasi gereken, her DOM ogesi icin erisilebilir nesneleri iceren DOM agacinin alt kumesidir.
 
-In some browsers we can easily view the accessibility information for each element in the accessibility tree:
+Bazı tarayıcılarda, erişilebilirlik ağacındaki her öğe için erişilebilirlik bilgilerini kolayca görüntüleyebiliriz:
 
-- [Using the Accessibility Inspector in Firefox](https://developer.mozilla.org/en-US/docs/Tools/Accessibility_inspector)
-- [Using the Accessibility Inspector in Chrome](https://developers.google.com/web/tools/chrome-devtools/accessibility/reference#pane)
-- [Using the Accessibility Inspector in OS X Safari](https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html)
+- [Firefox'da Erişilebilirlik Denetçisini Kullanmak](https://developer.mozilla.org/en-US/docs/Tools/Accessibility_inspector)
+- [Chrome'da Erişilebilirlik Denetçisini Kullanmak](https://developers.google.com/web/tools/chrome-devtools/accessibility/reference#pane)
+- [OS X Safari'de Erişilebilirlik Denetçisini Kullanmak](https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html)
 
 ### Screen readers {#screen-readers}
 
