@@ -448,13 +448,13 @@ ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-js
 
 Tarayıcınızda web sayfalarındaki erişilebilirlik denetimlerini çalıştırabilen bir dizi araçlar vardir. Onlar yalnızca HTML'nizin teknik erişilebilirliğini test edebildigi icin, lutfen onlari burada belirtilen diger erişilebilirlik kontrolleriyle birlikte kullanin.
 
-#### aXe, aXe-core and react-axe {#axe-axe-core-and-react-axe}
+#### aXe, aXe-core ve react-axe {#axe-axe-core-and-react-axe}
 
-Deque Systems offers [aXe-core](https://github.com/dequelabs/axe-core) for automated and end-to-end accessibility tests of your applications. This module includes integrations for Selenium.
+Deque Systemleri uygulamalarınızın otomatik ve uçtan-uca erişilebilirlik testleri için[aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
 
-[The Accessibility Engine](https://www.deque.com/products/axe/) or aXe, is an accessibility inspector browser extension built on `aXe-core`.
+[Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` uzerine insa edilmis bir erişilebilirlik denetçisi tarayıcı uzantısi.
 
-You can also use the [react-axe](https://github.com/dylanb/react-axe) module to report these accessibility findings directly to the console while developing and debugging.
+Geliştirme ve hata ayıklama sırasında, bu erişilebilirlik bulgularını doğrudan konsola bildirmek için [react-ax](https://github.com/dylanb/react-axe) modülünü de kullanabilirsiniz.
 
 #### WebAIM WAVE {#webaim-wave}
 
