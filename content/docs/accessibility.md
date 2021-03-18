@@ -388,30 +388,30 @@ Ekran okuyucu yazılımı doğru ses ayarlarını seçmek için bunu kullandığ
 
 - [WebAIM - Dokumantasyon Dili](https://webaim.org/techniques/screenreader/#language)
 
-### Setting the document title {#setting-the-document-title}
+### Dokuman basligini ayarlamak {#setting-the-document-title}
 
-Set the document `<title>` to correctly describe the current page content as this ensures that the user remains aware of the current page context:
+Dokumanin `<title>`'ini mevcut sayfa içeriğini doğru şekilde tanımlayarak ayarlayın, çünkü bu, kullanıcının mevcut sayfa bağlamından emin olmasını sağlar: burayi yeniden yaz
 
-- [WCAG - Understanding the Document Title Requirement](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
+- [WCAG - Dokuman Başlığı Gereksinimini Anlamak](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
 
-We can set this in React using the [React Document Title Component](https://github.com/gaearon/react-document-title).
+Bunu React'te [React Dokuman Başlığı Bileşeni](https://github.com/gaearon/react-document-title);ini kullanarak ayarlayabiliriz.
 
-### Color contrast {#color-contrast}
+### Renk Karsiti {#color-contrast}
 
-Ensure that all readable text on your website has sufficient color contrast to remain maximally readable by users with low vision:
+Görme yetisi kisitli kullanıcılar tarafından, maksimum düzeyde okunabilmesi için web sitenizdeki tüm okunabilir metinlerin yeterli renk kontrastına sahip olduğundan emin olun:
 
-- [WCAG - Understanding the Color Contrast Requirement](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
-- [Everything About Color Contrast And Why You Should Rethink It](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
-- [A11yProject - What is Color Contrast](https://a11yproject.com/posts/what-is-color-contrast/)
+- [WCAG - Renk Kontrast Gereksinimini Anlama](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
+- [Renk Kontrastı Hakkındaki Her Şey ve Onu Neden Yeniden Düşünmelisiniz](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
+- [A11yProjesi -Renk Kontrastı Nedir](https://a11yproject.com/posts/what-is-color-contrast/)
 
-It can be tedious to manually calculate the proper color combinations for all cases in your website so instead, you can [calculate an entire accessible color palette with Colorable](https://jxnblk.com/colorable/).
+Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Oyleyse, bunun yerine [colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
 
-Both the aXe and WAVE tools mentioned below also include color contrast tests and will report on contrast errors.
+Hem aXe hem de WAVE araclari asagida  mentioned below also include color contrast tests and will report on contrast errors.
 
-If you want to extend your contrast testing abilities you can use these tools:
+Kontrast testi becerilerinizi genişletmek istiyorsanız, bu araçları kullanabilirsiniz:
 
-- [WebAIM - Color Contrast Checker](https://webaim.org/resources/contrastchecker/)
-- [The Paciello Group - Color Contrast Analyzer](https://www.paciellogroup.com/resources/contrastanalyser/)
+- [WebAIM - Renk Kontrastı Denetleyicisi](https://webaim.org/resources/contrastchecker/)
+- [The Paciello Group - Renk Kontrasti Cözümleyicisi](https://www.paciellogroup.com/resources/contrastanalyser/)
 
 ## Development and Testing Tools {#development-and-testing-tools}
 
