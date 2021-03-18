@@ -471,22 +471,22 @@ Bazı tarayıcılarda, erişilebilirlik ağacındaki her öğe için erişilebil
 - [Chrome'da Erişilebilirlik Denetçisini Kullanmak](https://developers.google.com/web/tools/chrome-devtools/accessibility/reference#pane)
 - [OS X Safari'de Erişilebilirlik Denetçisini Kullanmak](https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html)
 
-### Screen readers {#screen-readers}
+### Ekran Okuyuculari {#screen-readers}
 
-Testing with a screen reader should form part of your accessibility tests.
+Bir ekran okuyucuyla test etmek, erişilebilirlik testlerinizin bir parçasını oluşturmalıdır.
 
-Please note that browser / screen reader combinations matter. It is recommended that you test your application in the browser best suited to your screen reader of choice.
+Tarayıcı / ekran okuyucu kombinasyonlarının önemli olduğunu lütfen unutmayın. Uygulamanızı, seçtiğiniz ekran okuyucuya en uygun tarayıcıda test etmeniz önerilir. 
 
-### Commonly Used Screen Readers {#commonly-used-screen-readers}
+### Yaygin Kullanilan Ekran Okuyuculari {#commonly-used-screen-readers}
 
-#### NVDA in Firefox {#nvda-in-firefox}
+#### Firefox'da NVDA {#nvda-in-firefox}
 
-[NonVisual Desktop Access](https://www.nvaccess.org/) or NVDA is an open source Windows screen reader that is widely used.
+[Görsel Olmayan Masaüstü Erişimi](https://www.nvaccess.org/) veya  NVDA(NonVisual Desktop Access) yaygın olarak kullanılan açık kaynaklı bir Windows ekran okuyucudur.
 
-Refer to the following guides on how to best use NVDA:
+NVDA'yı en iyi şekilde nasıl kullanacağınız konusunda aşağıdaki kılavuzlara basvurun:
 
-- [WebAIM - Using NVDA to Evaluate Web Accessibility](https://webaim.org/articles/nvda/)
-- [Deque - NVDA Keyboard Shortcuts](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
+- [WebAIM - Web Erişilebilirliğini Değerlendirmek için NVDA'yı Kullanma](https://webaim.org/articles/nvda/)
+- [Deque - NVDA Klavye Kisayollari](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
 
 #### VoiceOver in Safari {#voiceover-in-safari}
 
