@@ -380,13 +380,13 @@ Her cesit widget öğesi türünün belirli bir tasarım sablon/ornek  vardır v
 - [Heydon Pickering - ARIA Örnekleri](https://heydonworks.com/article/practical-aria-examples/)
 - [Kapsayıcı Bileşenler](https://inclusive-components.design/)
 
-## Other Points for Consideration {#other-points-for-consideration}
+## Dikkat Edilmesi Gereken Diğer Hususlar {#other-points-for-consideration}
 
-### Setting the language {#setting-the-language}
+### Dilin ayarlanması {#setting-the-language}
 
-Indicate the human language of page texts as screen reader software uses this to select the correct voice settings:
+Ekran okuyucu yazılımı doğru ses ayarlarını seçmek için bunu kullandığından, sayfa metinlerinin insan dilini belirtin:
 
-- [WebAIM - Document Language](https://webaim.org/techniques/screenreader/#language)
+- [WebAIM - Dokumantasyon Dili](https://webaim.org/techniques/screenreader/#language)
 
 ### Setting the document title {#setting-the-document-title}
 
