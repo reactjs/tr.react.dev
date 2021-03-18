@@ -444,10 +444,9 @@ ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-js
   }
   ```
 
-### Testing accessibility in the browser {#testing-accessibility-in-the-browser}
+### Tarayıcıda erişilebilirliği test etme {#testing-accessibility-in-the-browser}
 
-A number of tools exist that can run accessibility audits on web pages in your browser. Please use them in combination with other accessibility checks mentioned here as they can only
-test the technical accessibility of your HTML.
+Tarayıcınızda web sayfalarındaki erişilebilirlik denetimlerini çalıştırabilen bir dizi araçlar vardir. Onlar yalnızca HTML'nizin teknik erişilebilirliğini test edebildigi icin, lutfen onlari burada belirtilen diger erişilebilirlik kontrolleriyle birlikte kullanin.
 
 #### aXe, aXe-core and react-axe {#axe-axe-core-and-react-axe}
 
