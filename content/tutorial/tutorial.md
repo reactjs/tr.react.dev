@@ -1201,7 +1201,7 @@ Tebrikler, bir tic-tac-toe oyunu kodladınız. Bu oyun:
 * Kendisinden de bekleyeceğiniz gibi bir tic-tac-toe oynamanızı sağlar,
 * Bir oyuncu kazandığında bunu gösterir, 
 * Oyun ilerledikçe oyun geçmişini saklar,
-* Oyunculara oyun geçmişini görüntüleyebilmelerini ve oyun tahtasının önceji versiyonlarına gidebilmelerini sağlar.
+* Oyunculara oyun geçmişini görüntüleyebilmelerini ve oyun tahtasının önceki versiyonlarına gidebilmelerini sağlar.
 
 İyi iş çıkardınız. Umarız artık React'in nasıl çalıştığını öğrenmişsinizdir.
 
