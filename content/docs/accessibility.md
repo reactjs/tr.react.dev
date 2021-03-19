@@ -490,13 +490,13 @@ NVDA'yı en iyi şekilde nasıl kullanacağınız konusunda aşağıdaki kılavu
 
 #### VoiceOver in Safari {#voiceover-in-safari}
 
-VoiceOver is an integrated screen reader on Apple devices.
+VoiceOver, Apple cihazlara entegre edilmis bir ekran okuyucudur.
 
-Refer to the following guides on how to activate and use VoiceOver:
+VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağıdaki kılavuzlara bakın:
 
-- [WebAIM - Using VoiceOver to Evaluate Web Accessibility](https://webaim.org/articles/voiceover/)
-- [Deque - VoiceOver for OS X Keyboard Shortcuts](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
-- [Deque - VoiceOver for iOS Shortcuts](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
+- [WebAIM - Web Erişilebilirliğini Değerlendirmek için VoiceOver'ı Kullanmak](https://webaim.org/articles/voiceover/)
+- [Deque - OS X Klavye Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
+- [Deque - iOS Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
 
 #### JAWS in Internet Explorer {#jaws-in-internet-explorer}
 
