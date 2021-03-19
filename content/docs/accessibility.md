@@ -10,7 +10,7 @@ permalink: docs/accessibility.html
 
 React, sıklıkla standart HTML tekniklerini kullanarak, tamamen erişilebilir web siteleri oluşturmayı destekler.
 
-## Standards and Guidelines {#standards-and-guidelines}
+## Standartlar ve Yönergeler {#standards-and-guidelines}
 
 ### WCAG {#wcag}
 
@@ -461,7 +461,7 @@ Geliştirme ve hata ayıklama sırasında, bu erişilebilirlik bulgularını do�
 [Web Erişilebilirlik Değerlendirme Aracı](https://wave.webaim.org/extension/) 
 başka bir erişilebilirlik tarayıcı uzantısıdır.
 
-#### Erişilebilirlik denetçileri ve Erişilebilirlik Ağacı {#accessibility-inspectors-and-the-accessibility-tree}
+#### Erişilebilirlik Denetçileri ve Erişilebilirlik Ağacı {#accessibility-inspectors-and-the-accessibility-tree}
 
 [Erişilebilirlik Ağacı](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/), ekran okuyuculari gibi yardımcı teknolojilere maruz bırakılmis olmasi gereken, her DOM ogesi icin erisilebilir nesneleri iceren DOM agacinin alt kumesidir.
 
@@ -479,7 +479,7 @@ Tarayıcı / ekran okuyucu kombinasyonlarının önemli olduğunu lütfen unutma
 
 ### Yaygin Kullanilan Ekran Okuyuculari {#commonly-used-screen-readers}
 
-#### Firefox'da NVDA {#nvda-in-firefox}
+#### Firefox İçindeki NVDA {#nvda-in-firefox}
 
 [Görsel Olmayan Masaüstü Erişimi](https://www.nvaccess.org/) veya  NVDA(NonVisual Desktop Access) yaygın olarak kullanılan açık kaynaklı bir Windows ekran okuyucudur.
 
@@ -488,7 +488,7 @@ NVDA'yı en iyi şekilde nasıl kullanacağınız konusunda aşağıdaki kılavu
 - [WebAIM - Web Erişilebilirliğini Değerlendirmek için NVDA'yı Kullanma](https://webaim.org/articles/nvda/)
 - [Deque - NVDA Klavye Kisayollari](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
 
-#### VoiceOver in Safari {#voiceover-in-safari}
+#### Safari İçindeki VoiceOver {#voiceover-in-safari}
 
 VoiceOver, Apple cihazlara entegre edilmis bir ekran okuyucudur.
 
@@ -498,7 +498,7 @@ VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağ
 - [Deque - OS X Klavye Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
 - [Deque - iOS Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
 
-#### Internet Explorer'daki JAWS{#jaws-in-internet-explorer}
+#### Internet Explorer İçindeki JAWS{#jaws-in-internet-explorer}
 
 [Job Access With Speech](https://www.freedomscientific.com/Products/software/JAWS/)(Konuşma ile İş Erişimi) veya JAWS, Windows uzerinde uretken olarak kullanilan ekran okuyucudur.
 
@@ -507,13 +507,13 @@ JAWS'ın en iyi nasıl kullanılacağına ilişkin aşağıdaki kılavuzlara bak
 - [WebAIM - JAWS'ı Kullanarak Web Erişilebilirliğini Değerlendirmek ](https://webaim.org/articles/jaws/)
 - [Deque - JAWS Klavye Kısayolları](https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts)
 
-### Other Screen Readers {#other-screen-readers}
+### Diğer Ekran Okuyucular {#other-screen-readers}
 
-#### ChromeVox in Google Chrome {#chromevox-in-google-chrome}
+#### Google Chrome İçindeki ChromeVox{#chromevox-in-google-chrome}
 
-[ChromeVox](https://www.chromevox.com/) is an integrated screen reader on Chromebooks and is available [as an extension](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) for Google Chrome.
+[ChromeVox](https://www.chromevox.com/) Chromebooks'daki bir ekran okuyucudur ve Google Chrome icin [bir uzanti olarak](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) vardir.
 
-Refer to the following guides on how best to use ChromeVox:
+ChromeVox'un en iyi nasıl kullanılacağına ilişkin aşağıdaki kılavuzlara bakın:
 
-- [Google Chromebook Help - Use the Built-in Screen Reader](https://support.google.com/chromebook/answer/7031755?hl=en)
-- [ChromeVox Classic Keyboard Shortcuts Reference](https://www.chromevox.com/keyboard_shortcuts.html)
+- [Google Chromebook Yardim - Yerleşik Ekran Okuyucuyu Kullanın](https://support.google.com/chromebook/answer/7031755?hl=en)
+- [ChromeVox Klasik Klavye Kısayolları Referansı](https://www.chromevox.com/keyboard_shortcuts.html)
