@@ -498,14 +498,14 @@ VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağ
 - [Deque - OS X Klavye Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
 - [Deque - iOS Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
 
-#### JAWS in Internet Explorer {#jaws-in-internet-explorer}
+#### Internet Explorer'daki JAWS{#jaws-in-internet-explorer}
 
-[Job Access With Speech](https://www.freedomscientific.com/Products/software/JAWS/) or JAWS, is a prolifically used screen reader on Windows.
+[Job Access With Speech](https://www.freedomscientific.com/Products/software/JAWS/)(Konuşma ile İş Erişimi) veya JAWS, Windows uzerinde uretken olarak kullanilan ekran okuyucudur.
 
-Refer to the following guides on how to best use JAWS:
+JAWS'ın en iyi nasıl kullanılacağına ilişkin aşağıdaki kılavuzlara bakın:
 
-- [WebAIM - Using JAWS to Evaluate Web Accessibility](https://webaim.org/articles/jaws/)
-- [Deque - JAWS Keyboard Shortcuts](https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts)
+- [WebAIM - JAWS'ı Kullanarak Web Erişilebilirliğini Değerlendirmek ](https://webaim.org/articles/jaws/)
+- [Deque - JAWS Klavye Kısayolları](https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts)
 
 ### Other Screen Readers {#other-screen-readers}
 
