@@ -72,11 +72,7 @@ Hata sınırları, bileşenler için JavaScript'in `catch {}` bloğu gibidir. Ya
 
 ## Hata Sınırlarının Konumlandırılması {#where-to-place-error-boundaries}
 
-<<<<<<< HEAD
 Hata sınırlarının detay seviyesi size bırakılmıştır. Tıpkı sunucu taraflı frameworklerin yaptığına benzer şekilde, en üst seviyedeki rota bileşenini sararak kullanıcılara "Bir şeyler ters gitti" mesajını gösterebildiğiniz gibi, her bileşen parçasını sararak onları uygulamanın geri kalanını bozmaktan koruyabilirsiniz.
-=======
-The granularity of error boundaries is up to you. You may wrap top-level route components to display a “Something went wrong” message to the user, just like how server-side frameworks often handle crashes. You may also wrap individual widgets in an error boundary to protect them from crashing the rest of the application.
->>>>>>> df2fbde3b52336229eee550debd692184c427691
 
 
 ## Yakalanmamış Hatalar İçin Yeni Bir Davranış {#new-behavior-for-uncaught-errors}
@@ -135,11 +131,7 @@ Hata sınırları, olay yöneticileri içinde oluşan hataları **yakalamazlar**
 
 React'in olay yöneticilerinimn içinde oluşan hataları atlatmaya ihtiyacı yoktur. Render ve yaşam döngüsü metodlarının aksine, olay yöneticileri render aşamasında oluşmazlar. Yani onlar bir hata fırlattığında, React hala ekranda ne göstereceğini bilir.
 
-<<<<<<< HEAD
 Eğer bir olay yöneticisi içinde bir hatayı yakalamanız gerekiyorsa, JavaScript'in sunduğu normal `try` / `catch` ifadesini kullanın:
-=======
-If you need to catch an error inside an event handler, use the regular JavaScript `try` / `catch` statement:
->>>>>>> df2fbde3b52336229eee550debd692184c427691
 
 ```js{9-13,17-20}
 class MyComponent extends React.Component {
