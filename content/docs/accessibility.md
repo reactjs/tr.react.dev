@@ -24,10 +24,9 @@ Aşağıdaki WCAG kontrol listeleri genel bir bakış sağlar:
 
 ### WAI-ARIA {#wai-aria}
 
-[Web Erişilebilirlik Girişimi - Erişilebilir Zengin İnternet Uygulamaları](https://www.w3.org/WAI/intro/aria) 
-belgesi, tamamen erişilebilir JavaScript widgetleri oluşturmak için teknikler içerir.
+[Web Erişilebilirlik Girişimi - Erişilebilir Zengin İnternet Uygulamaları](https://www.w3.org/WAI/intro/aria) belgesi, tamamen erişilebilir JavaScript widgetleri oluşturmak için teknikler içerir.
 
-Tüm `aria- *` HTML özelliklerinin JSX'te tam olarak desteklendiğini unutmayın. React'teki çoğu DOM özellikleri ve öznitelikleri camelCased iken, bu öznitelikler düz HTML'de olduğu gibi hyphen-cased şeklinde olmalıdır (kebab-case, lisp-case, ve benzeri olarak da bilinir):
+Tüm `aria- *` HTML özelliklerinin JSX'te tam olarak desteklendiğini unutmayın. React'teki çoğu DOM özellikleri ve nitelikleri camelCased iken, bu nitelikler düz HTML'de olduğu gibi hyphen-cased şeklinde olmalıdır (kebab-case, lisp-case, ve benzeri olarak da bilinir):
 
 ```javascript{3,4}
 <input
@@ -40,13 +39,13 @@ Tüm `aria- *` HTML özelliklerinin JSX'te tam olarak desteklendiğini unutmayı
 />
 ```
 
-## Semantik HTML {#semantic-html}
-Semantik HTML, bir web uygulamasında erişilebilirliğin temelidir. web sitelerimizdeki bilginin anlamını pekiştirmek için, çeşitli HTML öğelerini kullanmak sıklıkla bize ücretsiz olarak erişilebilirlik sağlayacaktır.
+## Anlamsal HTML {#semantic-html}
+Anlamsal HTML, bir web uygulamasında erişilebilirliğin temelidir. Web sitelerimizdeki bilginin anlamını pekiştirmek için, çeşitli HTML öğelerini kullanmak sıklıkla bize ücretsiz olarak erişilebilirlik sağlayacaktır.
 
-- [MDN HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+- [MDN HTML öğeleri referansı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
-Bazen, React kodumuzun çalışması için JSX'imize `<div>` öğeleri eklediğimizde, HTML'in semantiğini bozarız, özellikle listeler (`<ol>`, `<ul>` ve `<dl>`) ve HTML `<table>` ile çalışırken. 
-Bu durumlarda, çoklu öğeleri gruplamak için [React Fragments](/docs/fragments.html) kullanmayı tercih etmelisiniz.
+Bazen, React kodumuzun çalışması için JSX'imize `<div>` öğeleri eklediğimizde, HTML'in anlamsallığını bozarız, özellikle listeler (`<ol>`, `<ul>` ve `<dl>`), ve HTML `<table>` ile çalışırken. 
+Bu durumlarda, çoklu öğeleri gruplamak için [React Fragmentlerı](/docs/fragments.html) kullanmayı tercih etmelisiniz.
 
 Örneğin,
 
@@ -73,7 +72,7 @@ function Glossary(props) {
 }
 ```
 
-Başka herhangi bir öğe türünde yapacağınız gibi, bir öğe koleksiyonunu bir fragment array'ine eşleyebilirsiniz :
+Başka herhangi bir öğe türünde yapacağınız gibi, bir öğe koleksiyonunu bir fragment dizisine (array'ine) eşleyebilirsiniz :
 
 ```javascript{6,9}
 function Glossary(props) {
@@ -90,7 +89,7 @@ function Glossary(props) {
 }
 ```
 
-Fragment etiketinde herhangi bir prop'a ihtiyacınız olmadığında, eğer arac gerecleriniz onu destekliyorsa [kisa syntax](/docs/fragments.html#short-syntax)'i kullanabilirsiniz:
+Fragment etiketinde herhangi bir prop'a ihtiyacınız olmadığında, eğer araç gereçleriniz onu destekliyorsa [kısa sözdizimi(syntax)](/docs/fragments.html#short-syntax)'ni kullanabilirsiniz:
 
 ```javascript{3,6}
 function ListItem({ item }) {
@@ -103,69 +102,69 @@ function ListItem({ item }) {
 }
 ```
 
-Daha fazla bilgi için, [Fragmentler dokümantasyonu](/docs/fragments.html)'na bakiniz.
+Daha fazla bilgi için, [Fragmentler dokümantasyonu](/docs/fragments.html)'na bakınız.
 
 ## Erişilebilir Formlar {#accessible-forms}
 
 ### Etiketlemek {#labeling}
-`<input>` ve `<textarea>` gibi her HTML form kontrolunun, erişilebilir halde etiketlenmiş olması gerekir. Ekran okuyucuları tarafndan da ortaya çıkan, açıklayıcı etiketler sağlamamız gerekir.
+`<input>` ve `<textarea>` gibi her HTML form kontrolunun (form control), erişilebilir halde etiketlenmiş olması gerekir. Ekran okuyucuları tarafndan da ortaya çıkan, açıklayıcı etiketler sağlamamız gerekir.
 
 Aşağıdaki kaynaklar bize bunun nasıl yapılacağını gösterir:
 
-- [W3C bize öğeleri nasıl etiketleneceğini gösterir](https://www.w3.org/WAI/tutorials/forms/labels/)
+- [W3C bize öğelerin nasıl etiketleneceğini gösterir](https://www.w3.org/WAI/tutorials/forms/labels/)
 - [WebAIM bize öğelerin nasıl etiketleneceğini gösterir](https://webaim.org/techniques/forms/controls)
 - [Paciello Group erişilebilir isimleri açıklar](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
 
-Bu standart HTML uygulamaları doğrudan React'te kullanılabilmesine rağmen, `for` nitelliğinin JSX'de `htmlFor` olarak yazıldığına dikkat edin:
+Bu standart HTML uygulamaları doğrudan React'te kullanılabilmesine rağmen, `for` niteliğinin JSX'de `htmlFor` olarak yazıldığına dikkat edin:
 
 ```javascript{1}
 <label htmlFor="namedInput">Name:</label>
 <input id="namedInput" type="text" name="name"/>
 ```
 
-### Kullanici hatalarini farketmek {#notifying-the-user-of-errors}
+### Kullanıcı hatalarını bildirmek {#notifying-the-user-of-errors}
 
-Hata durumlarının tüm kullanıcılar tarafından anlaşılması gerekir. 
+Hata durumlarının tüm kullanıcılar tarafından anlaşılmış olmasş gerekir. 
 Aşağıdaki link, hata metinlerinin de ekran okuyucuları tarafından nasıl algılandığını gösterir:
 
 - [W3C, kullanıcı bildirimlerini gösterir](https://www.w3.org/WAI/tutorials/forms/notifications/)
-- [WebAIM form doğrulamaya bakar](https://webaim.org/techniques/formvalidation/)
+- [WebAIM, form doğrulamaya bakar](https://webaim.org/techniques/formvalidation/)
 
 ## Odak Kontrolü {#focus-control}
 
 Web uygulamanızın yalnızca klavye ile tam olarak çalıştırılabildiğinden emin olun:
 
-- [WebAIM klavye erişilebilirliği hakkında konuşur](https://webaim.org/techniques/keyboard/)
+- [WebAIM, klavye erişilebilirliği hakkında konuşur](https://webaim.org/techniques/keyboard/)
 
 ### Klavye odağı ve odak ana hatları {#keyboard-focus-and-focus-outline}
 
 Klavye odağı, klavyeden girişi kabul etmek için seçilen DOM'daki varolan öğeye başvurur. Bunu her yerde aşağıdaki resimde gösterilene benzer bir odak anahat olarak görürüz:
 
-<img src="../images/docs/keyboard-focus.png" alt="Blue keyboard focus outline around a selected link." />
+<img src="../images/docs/keyboard-focus.png" alt="Mavi renk, seçilmiş bir link etrafindaki klavye odak anahattıdır" />
 
-Eger onu başka bir odak anahat uygulamasıyla değiştiriyorsanız, sadece bu anahatı kaldıran CSS'si kullanın.
+Eğer onu başka bir odak anahat uygulamasıyla değiştiriyorsanız, sadece bu anahattı kaldıran CSS'ini kullanın.
 
-### İstenilen İçeriğe atlama mekanizmaları{#mechanisms-to-skip-to-desired-content}
+### İstenilen içeriğe atlama mekanizmaları{#mechanisms-to-skip-to-desired-content}
 
-Klavyede gezinmeye yardımcı olduğundan ve hızlandırdığından, kullanıcıların uygulamanızdaki geçmiş gezinme(navigasyon) bölümlerini atlamasına izin veren bir mekanizma sağlayın.
+Klavyede gezinmeye yardımcı olduğundan ve hızlandırdığından, kullanıcıların uygulamanızdaki geçmiş navigasyon bölümlerini atlamasına izin veren bir mekanizma sağlayın.
 
-AtlamaLinkleri (Skiplinks) veya Atlama Navigasyon Linkleri (Skip Navigation Links), klavye kullanicilari sadece sayfa ile etkileşimde bulundukları zaman görünür olan gizli navigasyon linkleiridir. Bunların iç sayfa bağlantıları ve bazı stillerle uygulanması çok kolaydır:
+AtlamaLinkleri (Skiplinks) veya Atlama Navigasyon Linkleri (Skip Navigation Links), klavye kullanıcıları, sadece sayfa ile etkileşimde bulundukları zaman görünür olan gizli navigasyon linkleridir. Bunların iç sayfa bağlantıları ve bazı stillerle uygulanması çok kolaydır:
 
 - [WebAIM - Navigasyon Linklerini Atlamak](https://webaim.org/techniques/skipnav/)
 
-Yardımcı teknoloji, kullanıcının bu bölümlere cabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için "<main>" ve "<aside>" gibi belirgin isaret öğeleri ve rolleri de kullanın.
+Yardımcı teknoloji, kullanıcının bu bölümlere çabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için "<main>" ve "<aside>" gibi belirgin isaret (landmark) öğeleri ve rolleri de kullanın.
 
 Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha fazlasını buradan okuyun
 
-- [Erisilebilir Belirgin Isaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
+- [Erisilebilir Belirgin İşaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
 
 ### Programlı olarak odağı yönetmek {#programmatically-managing-focus}
 
-React uygulamamlarımız çalışma süresinde HTML DOM'u degistirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amaciyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Ornegin, modal penceresi kapatildiktan sonra, bir modal penceresi acan bir butona klavye odagini sifirlatmak.
+React uygulamamlarımız çalışma süresinde, HTML DOM'u değiştirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol aar. Bunu düzeltmek amacıyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Örneğin, modal penceresi kapatıldıktan sonra, bir modal penceresi açan bir butona klavye odağını sıfırlatmak.
 
-MDN Web Dokumanlari buna bakar ve [gezinilebilir-klavye JavaScript widgetleri](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)'ni nasil insa edebildigimizi aciklar.
+MDN Web Dokümanları buna bakar ve [gezinilebilir-klavye JavaScript widgetleri](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)'ni nasıl inşa edebildiğimizi açıklar.
 
-React'te odagi ayarlamak icin [DOM ogelerine Refler](/docs/refs-and-the-dom.html)'i kullnabiliriz.
+React'te odaği ayarlamak için [DOM öğelerine Ref'ler](/docs/refs-and-the-dom.html)'i kullanabiliriz.
 
 Bunu kullanarak, öncelikle, bir bileşen sınıfının JSX'indeki bir öğeye bir ref oluştururuz:
 
@@ -173,12 +172,12 @@ Bunu kullanarak, öncelikle, bir bileşen sınıfının JSX'indeki bir öğeye b
 class CustomTextInput extends React.Component {
   constructor(props) {
     super(props);
-    // textInput DOM ogesini depolamak icin bir ref olustur
+    // textInput DOM öğesini depolamak için bir ref oluşturun
     this.textInput = React.createRef();
   }
   render() {
-  // text input DOM'a bir referans depolamak icin `ref` geri cagriyi kullanin
-  // bir instance alanindaki öğe (örneğin, this.textInput).
+  // text input DOM'a bir referans depolamak için `ref` callback'i (geri çağrı) kullanın
+  // bir instance alanındaki öğe (örneğin, this.textInput).
     return (
       <input
         type="text"
@@ -193,13 +192,13 @@ Daha sonra, gerektiğinde bileşenimizde onu başka bir yere odaklayabiliriz:
 
  ```javascript
  focus() {
-   // Açık bir şekilde, ham DOM API'ı kullanarak metin girişine odaklanın
+   // Açık bir şekilde, işlenmemiş DOM API'ı kullanarak metin girişine odaklanın
    // Not: DOM düğümünü almak için "current"e erişiyoruz
    this.textInput.current.focus();
  }
  ```
 
-Bazen bir üst bileşenin, bir alt bileşendeki bir öğeye odaginin ayarlanması gerekir. Bunu [DOM reflerini ust bilesenler de ortaya cikartarak](/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components) ust ogenin ref'ini alt ogenin DOM düğümüne ileten alt bileşen üzerindeki özel bir destek yoluyla yapabiliriz.
+Bazen bir üst bileşenin, bir alt bileşendeki bir öğeye odağının ayarlanması gerekir. Bunu [DOM ref'lerini üst bileşenler de ortaya çıkartarak](/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components), üst öğenin ref'ini alt öğenin DOM düğümüne ileten alt bileşen üzerindeki özel bir prop yoluyla yapabiliriz.
 
 ```javascript{4,12,16}
 function CustomTextInput(props) {
@@ -222,14 +221,14 @@ class Parent extends React.Component {
   }
 }
 
-// Simdi gerektiginde odagi ayarlayabilirsiniz.
+// Simdi gerektiğinde odağı ayarlayabilirsiniz.
 this.inputElement.current.focus();
 ```
 
-Bileşenleri genişletmek için bir HOC kullanırken, React'in `forwardRef` fonksiyonu kullanarak [forward the ref](/docs/forwarding-refs.html) sarılmış bileşene iletilmesi önerilir. Eger bir üçüncü taraf HOC, ref iletmeyi  uygulamazsa, yukarıdaki sablon/ornek yine de bir geri cekilme olarak kullanılabilir.
+Bileşenleri genişletmek için bir HOC kullanırken, React'in `forwardRef` fonksiyonu kullanılarak sarılmış bileşene [ref'i iletmesi](/docs/forwarding-refs.html) önerilir. Eğer  üçüncü bir taraf HOC, ref iletmeyi uygulamazsa, yukarıdaki şablon yine de bir geri çekilme olarak kullanılabilir.
 
-[react-aria-modal](https://github.com/davidtheclark/react-aria-modal), harika bir odak yönetimi örneğidir. Bu, tamamen erişilebilir bir modal penceresinin goreceli olarak nadir bir ornegidir.   
-Sadece ilk odagi iptal butonuna ayarlamak (klavye kullanıcısının başarılı eylemi yanlışlıkla etkinleştirmesini engeller) ve klavye odağını modal içinde hapsetmekle kalmaz, onu başlangıçta modali tetikleyen öğeye geri odaklanarak sıfırlar. 
+[react-aria-modal](https://github.com/davidtheclark/react-aria-modal), harika bir odak yönetimi örneğidir. Bu, tamamen erişilebilir bir modal penceresinin göreceli olarak nadir bir örneğidir.   
+Sadece ilk odaği iptal butonuna ayarlamak (klavye kullanıcısının başarılı eylemi yanlışlıkla etkinleştirmesini engeller) ve klavye odağını modal içinde hapsetmekle kalmaz, onu başlangıçta modalı tetikleyen öğeye geri odaklanarak sıfırlar. 
 
 >Not:
 >
@@ -238,13 +237,13 @@ Sadece ilk odagi iptal butonuna ayarlamak (klavye kullanıcısının başarılı
 
 ## Mouse ve imleç olayları {#mouse-and-pointer-events}
 
-Bir mouse veya imleç olayı aracılığıyla açığa çıkan tüm fonksiyonların yalnızca klavye kullanılarak da erişilebildiğinden emin olun. Sadece imleç cihazına bağlı olarak, klavye kullanıcıları uygulamanızın kullanilamayacağı birçok duruma yonlendirecektir
+Bir mouse veya imleç olayı aracılığıyla açığa çıkan tüm fonksiyonların yalnızca klavye kullanılarak da erişilebildiğinden emin olun. Sadece imleç cihazına bağlı olarak, klavye kullanıcıları uygulamanızın kullanılamayacağı birçok duruma yönlendirilecektir.
 
-Bunu gostermek icin, tıklama olaylarının sebep olduğu bozuk erişilebilirliğin verimli bir örneğine bakalım. Bu, bir kullanıcının öğenin dışına tıklayarak, bir anda açılan (popover) pencereyi engellediği dış tıklama sablonudur/ornektir.
+Bunu göstermek için, tıklama olaylarının sebep olduğu bozuk erişilebilirliğin verimli bir örneğine bakalım. Bu, bir kullanıcının öğenin dışına tıklayarak, bir anda açılan (popover) pencereyi engellediği dış tıklama şablonudur.
 
 <img src="../images/docs/outerclick-with-mouse.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with a mouse showing that the close action works." />
 
-Bu genelliklre popover'i kapatan `window` nesnesine bir `click` olayinin baglanarak uygulanmasidir.
+Bu genelliklre popover'i kapatan `window` nesnesine bir `click` olayının bağlanarak uygulanmasıdır.
 
 ```javascript{12-14,26-30}
 class OuterClickExample extends React.Component {
@@ -295,11 +294,11 @@ class OuterClickExample extends React.Component {
 }
 ```
 
-Bu mouse gibi imlecli cihaz kullanan kullanicilar icin iyi calisabilir. Ama bunun tek olarak klavye ile çalıştırılması, sonraki öğeye sekme yapıldığında bozuk fonksiyonellige yol acar, cunku `window` nesnesi asla `click` olayini almaz. Bu, kullanıcıların uygulamanızı kullanmasını engelleyen belirsiz fonksiyonellige yol açabilir. 
+Bu mouse gibi imleçli cihaz kullanan kullanıcılar için iyi çalışabilir. Ama bunun tek olarak klavye ile çalıştırılması, sonraki öğeye sekme yapıldığında bozuk fonksiyonellige yol açar, çünkü `window` nesnesi asla `click` olayını almaz. Bu, kullanıcıların uygulamanızı kullanmasını engelleyen belirsiz fonksiyonellige yol açabilir. 
 
 <img src="../images/docs/outerclick-with-keyboard.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with the keyboard showing the popover not being closed on blur and it obscuring other screen elements." />
 
-Bunun yerine `onBlur` ve `onFocus` gibi, aynı fonksiyonellik uygun olay yoneticilerini kullanarak ulasilabilir:
+Bunun yerine `onBlur` ve `onFocus` gibi, aynı fonksiyonellik, uygun olay yöneticilerini kullanarak ulaşılabilir:
 
 ```javascript{19-29,31-34,37-38,40-41}
 class BlurExample extends React.Component {
@@ -320,10 +319,10 @@ class BlurExample extends React.Component {
     }));
   }
 
-  // Bir sonraki tıklamada, setTimeout kullanarak açılır pencereyi kapatıyoruz.
+  // Bir sonraki tıklamada, setTimeout kullanarak açılır pencereyi (popover)kapatıyoruz.
   // Bu gereklidir çünkü önce kontrol etmemiz gerekiyor, eger
-  // öğenin başka bir alt öğesine odaklanilmissa, cunku
-  // bulanıklık olayı, yeni odak olayından önce tetiklenir.
+  // öğenin başka bir alt öğesine odaklanılmışsa, 
+  // bulanıklık olayı, yeni odak olayından önce tetiklendiği.
   onBlurHandler() {
     this.timeOutId = setTimeout(() => {
       this.setState({
@@ -332,14 +331,14 @@ class BlurExample extends React.Component {
     });
   }
 
-  // Bir alt ogeye odaklanılırsa, açılır pencereyi kapatmayın
+  // Bir alt öğeye odaklanılırsa, açılır pencereyi (popover)kapatmayın
   onFocusHandler() {
     clearTimeout(this.timeOutId);
   }
 
   render() {
     // React bulanıklığı köpürterek ve
-    // ve olayları üst ogeye odaklayarak bize yardımcı olur
+    // ve olayları üst öğeye odaklayarak bize yardımcı olur
     return (
       <div onBlur={this.onBlurHandler}
            onFocus={this.onFocusHandler}>
@@ -361,57 +360,57 @@ class BlurExample extends React.Component {
 }
 ```
 
-Bu kod fonksiyonelligi hem imleçi hem de klavye kullanıcılarına açiga çikartir. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larina da dikkat edin. Basitlik adina, açılır pencere seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
+Bu kod fonksiyonelliği hem imleci, hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
 
-<img src="../images/docs/blur-popover-close.gif" alt="Hem mouse hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır liste." />
+<img src="../images/docs/blur-popover-close.gif" alt="Hem mouse hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover)liste." />
 
-Bu, sadece imleç ve mouse olaylarına bağlı olan klavye kullanıcıları icin fonksiyonelligin bozuldugu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yoneticilerini kullanarak duzeltilmis olabilen sorunlu bolgeleri vurgular.
+Bu, sadece imleç ve mouse olaylarına bağlı olan klavye kullanıcıları için,fonksiyonelliğin bozulduğu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yöneticilerini kullanarak düzeltilmiş olabilen sorunlu bölgeleri vurgular.
 
-## Daha Karisik Widgetler {#more-complex-widgets}
+## Daha Karmaşık Widgetler {#more-complex-widgets}
 
-Daha karmaşık bir kullanıcı deneyimi, daha az erişilebilir demek degildir. Erişilebilirlik en kolay şekilde mümkün olabildiğince HTML'ye yakın kodlama ile ulaşilabilir iken, en karmaşık widget bile erişilebilir şekilde kodlanmış olabilir.
+Daha karmaşık bir kullanıcı deneyimi, daha az erişilebilir demek değildir. Erişilebilirlik en kolay şekilde mümkün olabildiğince HTML'ye yakın kodlama ile ulaşılabilir iken, en karmaşık widget bile erişilebilir şekilde kodlanmış olabilir.
 
-Burada [ARIA Durumlari ve Ozellikleri](https://www.w3.org/TR/wai-aria/#states_and_properties) gibi [ARIA Rolleri](https://www.w3.org/TR/wai-aria/#roles)'nin bilgisine gereksinim duyariz. 
-Bunlar JSX'te tamamen desteklenmis ve tamamen erişilebilir, yuksek dereceli fonksiyonel React bileşenleri inşa etmemize imkan veren HTML nitelikleriyle dolu araç kutularıdır.
+Burada [ARIA Durumları ve Özellikleri](https://www.w3.org/TR/wai-aria/#states_and_properties) gibi [ARIA Rolleri](https://www.w3.org/TR/wai-aria/#roles)'nin bilgisine gereksinim duyarız. 
+Bunlar JSX'te tamamen desteklenmiş ve tamamen erişilebilir, yüksek dereceli fonksiyonel React bileşenleri inşa etmemize imkan veren HTML nitelikleriyle dolu araç kutularıdır.
 
-Her cesit widget öğesi türünün belirli bir tasarım sablon/ornek  vardır ve hem kullanicilar hem de kullanici ajanslari gibi olanlar tarafindan, belirli bir sekilde fonksiyon gostermesi beklenir:
+Her ceşit widget öğesi türünün belirli bir tasarım deseni vardır ve hem kullanıcılar hem de kullanıcı ajansları gibi olanlar tarafından, belirli bir şekilde fonksiyon göstermesi beklenir:
 
-- [WAI-ARIA Yazarlık Uygulamaları - Tasarım Desenleri ve Widget'lar](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
+- [WAI-ARIA Yazarlık Pratikleri - Tasarım Desenleri ve Widget'lar](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
 - [Heydon Pickering - ARIA Örnekleri](https://heydonworks.com/article/practical-aria-examples/)
 - [Kapsayıcı Bileşenler](https://inclusive-components.design/)
 
-## Dikkat Edilmesi Gereken Diğer Hususlar {#other-points-for-consideration}
+## Düşünülmesi Gereken Diğer Hususlar {#other-points-for-consideration}
 
-### Dilin ayarlanması {#setting-the-language}
+### Dili ayarlanmak {#setting-the-language}
 
-Ekran okuyucu yazılımı doğru ses ayarlarını seçmek için bunu kullandığından, sayfa metinlerinin insan dilini belirtin:
+Ekran okuyucu yazılımı, doğru ses ayarlarını seçmek için bunu kullandığından, sayfa metinlerinin insan dilini belirtin:
 
-- [WebAIM - Dokumantasyon Dili](https://webaim.org/techniques/screenreader/#language)
+- [WebAIM - Dokümantasyon Dili](https://webaim.org/techniques/screenreader/#language)
 
-### Dokuman basligini ayarlamak {#setting-the-document-title}
+### Doküman başlığını ayarlamak {#setting-the-document-title}
 
-Dokumanin `<title>`'ini mevcut sayfa içeriğini doğru şekilde tanımlayarak ayarlayın, çünkü bu, kullanıcının mevcut sayfa bağlamından emin olmasını sağlar: burayi yeniden yaz
+Dokümanın `<title>`'ını mevcut sayfa içeriğini doğru şekilde tanımlayarak ayarlayın, çünkü bu, kullanıcının mevcut sayfa içeriğinden emin olmasını sağlar:
 
-- [WCAG - Dokuman Başlığı Gereksinimini Anlamak](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
+- [WCAG - Doküman Başlığı Gereksinimini Anlamak](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
 
-Bunu React'te [React Dokuman Başlığı Bileşeni](https://github.com/gaearon/react-document-title);ini kullanarak ayarlayabiliriz.
+Bunu React'te [React Doküman Başlığı Bileşeni](https://github.com/gaearon/react-document-title)'ni kullanarak ayarlayabiliriz.
 
-### Renk Karsiti {#color-contrast}
+### Renk Kontrastı {#color-contrast}
 
-Görme yetisi kisitli kullanıcılar tarafından, maksimum düzeyde okunabilmesi için web sitenizdeki tüm okunabilir metinlerin yeterli renk kontrastına sahip olduğundan emin olun:
+Görme yetisi kısıtlı kullanıcılar tarafından, maksimum düzeyde okunabilmesi için web sitenizdeki tüm okunabilir metinlerin yeterli renk kontrastına sahip olduğundan emin olun:
 
-- [WCAG - Renk Kontrast Gereksinimini Anlama](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
+- [WCAG - Renk Kontrastı Gereksinimini Anlama](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
 - [Renk Kontrastı Hakkındaki Her Şey ve Onu Neden Yeniden Düşünmelisiniz](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
 - [A11yProjesi -Renk Kontrastı Nedir](https://a11yproject.com/posts/what-is-color-contrast/)
 
-Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Oyleyse, bunun yerine [colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
+Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Öyleyse, bunun yerine [colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
 
-Hem aXe hem de WAVE araclari asagida  mentioned below also include color contrast tests and will report on contrast errors.
+Aşağıda belirtilen hem aXe hem de WAVE araçları renk kontrast testlerini de içerir ve kontrast hatalarını rapor edecektir. 
 
 Kontrast testi becerilerinizi genişletmek istiyorsanız, bu araçları kullanabilirsiniz:
 
 - [WebAIM - Renk Kontrastı Denetleyicisi](https://webaim.org/resources/contrastchecker/)
-- [The Paciello Group - Renk Kontrasti Cözümleyicisi](https://www.paciellogroup.com/resources/contrastanalyser/)
+- [The Paciello Group - Renk Kontrastı Çözümleyicisi](https://www.paciellogroup.com/resources/contrastanalyser/)
 
 ## Geliştirme ve Test Etme Araçları {#development-and-testing-tools}
 
@@ -419,23 +418,23 @@ Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kul
 
 ### Klavye {#the-keyboard}
 
-Şimdiye kadar en kolay ve ayni zamanda en onemli kontroller, tum websitesinin sadece klavye ile ulasalabilir ve kullanilabilir oldugunu test etmektir. Bunu şu şekilde yapın:
+Şimdiye kadar en kolay ve aynı zamanda en önemli kontroller, tüm websitesinin sadece klavye ile ulaşalabilir ve kullanılabilir olduğunu test etmektir. Bunu şu şekilde yapın:
 
-1. Mouse'nizin bağlantısını kesmek.
+1. Mouse'nızın bağlantısını kesmek.
 1. Gözden geçirmek icin `Tab` ve `Shift+Tab` kullanmak.
-1. Öğeleri etkinleştirmek için `Enter` kullanmak
-1. Gerektiğinde, menüler ve asagi dogru açılan menüler (dropdown) gibi bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
+1. Öğeleri etkinleştirmek için `Enter`i kullanmak
+1. Gerektiğinde, menüler ve aşağı doğru açılan (dropdown) menüler gibi, bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
 
-### Geliştirme Asistanı {#development-assistance}
+### Geliştirme asistanı {#development-assistance}
 
 Bazı erişilebilirlik özelliklerini doğrudan JSX kodumuzda kontrol edebiliriz. 
-Genellikle intellisense kontrolleri, zaten JSX uyumlu IDE'lerde ARIA rolleri, durumları ve özellikleri için sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
+Genellikle, ARIA rolleri, durumları ve özellikleri için intellisense kontrolleri,JSX uyumlu IDE(Integrated Development Environment)'lerde  zaten sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
 
 #### eslint-plugin-jsx-a11y {#eslint-plugin-jsx-a11y}
 
-ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) eklentisi, JSX'inizdeki erişilebilirlik sorunları ile ilgili AST linting geri bildirimi sağlar. Bir cok IDE, bu bulguları doğrudan kod analizi ve kaynak kodu pencereleri ile birlikte kullanmaniza izin verir.
+ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) eklentisi, JSX'inizdeki erişilebilirlik sorunları ile ilgili AST linting geri bildirimini sağlar. Bir cok IDE, bu bulguları doğrudan kod analizi ve kaynak kodu pencereleri ile birlikte kullanmanıza izin verir.
 
-[Create React App](https://github.com/facebookincubator/create-react-app) bir kural alt kümesinin etkinleştirildiği bu eklentiye sahiptir. Daha da fazla erişilebilirlik kurallarını etkinleştirmek istiyorsanız, bu içerikle projenizin root (kök) dizininde bir `.eslintrc` dosyası oluşturabilirsiniz: 
+[Create React App](https://github.com/facebookincubator/create-react-app), bir kural alt kümesinin etkinleştirildiği bu eklentiye sahiptir. Daha da fazla erişilebilirlik kurallarını etkinleştirmek istiyorsanız, bu içerikle projenizin root (kök) dizininde bir `.eslintrc` dosyası oluşturabilirsiniz: 
 
   ```json
   {
@@ -446,13 +445,13 @@ ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-js
 
 ### Tarayıcıda erişilebilirliği test etme {#testing-accessibility-in-the-browser}
 
-Tarayıcınızda web sayfalarındaki erişilebilirlik denetimlerini çalıştırabilen bir dizi araçlar vardir. Onlar yalnızca HTML'nizin teknik erişilebilirliğini test edebildigi icin, lutfen onlari burada belirtilen diger erişilebilirlik kontrolleriyle birlikte kullanin.
+Tarayıcınızda web sayfalarındaki erişilebilirlik denetimlerini çalıştırabilen bir dizi araçlar vardır. Onlar yalnızca HTML'nizin teknik erişilebilirliğini test edebildiği için, lütfen onları burada belirtilen diğer erişilebilirlik kontrolleriyle birlikte kullanın.
 
 #### aXe, aXe-core ve react-axe {#axe-axe-core-and-react-axe}
 
-Deque Systemleri uygulamalarınızın otomatik ve uçtan-uca erişilebilirlik testleri için[aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
+Deque Systemleri uygulamalarınızın otomatik ve uçtan-uça(end-to-end) erişilebilirlik testleri için[aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
 
-[Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` uzerine insa edilmis bir erişilebilirlik denetçisi tarayıcı uzantısi.
+[Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` üzerine inşa edilmiş bir erişilebilirlik denetçisi tarayıcı uzantısı.
 
 Geliştirme ve hata ayıklama sırasında, bu erişilebilirlik bulgularını doğrudan konsola bildirmek için [react-axe](https://github.com/dylanb/react-axe) modülünü de kullanabilirsiniz.
 
@@ -463,7 +462,7 @@ başka bir erişilebilirlik tarayıcı uzantısıdır.
 
 #### Erişilebilirlik Denetçileri ve Erişilebilirlik Ağacı {#accessibility-inspectors-and-the-accessibility-tree}
 
-[Erişilebilirlik Ağacı](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/), ekran okuyuculari gibi yardımcı teknolojilere maruz bırakılmis olmasi gereken, her DOM ogesi icin erisilebilir nesneleri iceren DOM agacinin alt kumesidir.
+[Erişilebilirlik Ağacı](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/), ekran okuyucuları gibi yardımcı teknolojilere maruz bırakılmış olması gereken, her DOM öğesi için erişilebilir nesneleri iceren DOM ağacının alt kümesidir.
 
 Bazı tarayıcılarda, erişilebilirlik ağacındaki her öğe için erişilebilirlik bilgilerini kolayca görüntüleyebiliriz:
 
@@ -477,7 +476,7 @@ Bir ekran okuyucuyla test etmek, erişilebilirlik testlerinizin bir parçasını
 
 Tarayıcı / ekran okuyucu kombinasyonlarının önemli olduğunu lütfen unutmayın. Uygulamanızı, seçtiğiniz ekran okuyucuya en uygun tarayıcıda test etmeniz önerilir. 
 
-### Yaygin Kullanilan Ekran Okuyuculari {#commonly-used-screen-readers}
+### Yaygın Kullanilan Ekran Okuyucuları {#commonly-used-screen-readers}
 
 #### Firefox İçindeki NVDA {#nvda-in-firefox}
 
@@ -485,12 +484,12 @@ Tarayıcı / ekran okuyucu kombinasyonlarının önemli olduğunu lütfen unutma
 
 NVDA'yı en iyi şekilde nasıl kullanacağınız konusunda aşağıdaki kılavuzlara basvurun:
 
-- [WebAIM - Web Erişilebilirliğini Değerlendirmek için NVDA'yı Kullanma](https://webaim.org/articles/nvda/)
-- [Deque - NVDA Klavye Kisayollari](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
+- [WebAIM - Web Erişilebilirliğini Değerlendirmek için NVDA'yı Kullanmak](https://webaim.org/articles/nvda/)
+- [Deque - NVDA Klavye Kısayolları](https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts)
 
-#### Safari İçindeki VoiceOver {#voiceover-in-safari}
+#### Safari içindeki VoiceOver {#voiceover-in-safari}
 
-VoiceOver, Apple cihazlara entegre edilmis bir ekran okuyucudur.
+VoiceOver, Apple cihazlara entegre edilmiş bir ekran okuyucudur.
 
 VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağıdaki kılavuzlara bakın:
 
@@ -498,22 +497,22 @@ VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağ
 - [Deque - OS X Klavye Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
 - [Deque - iOS Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts)
 
-#### Internet Explorer İçindeki JAWS{#jaws-in-internet-explorer}
+#### Internet Explorer içindeki JAWS{#jaws-in-internet-explorer}
 
-[Job Access With Speech](https://www.freedomscientific.com/Products/software/JAWS/)(Konuşma ile İş Erişimi) veya JAWS, Windows uzerinde uretken olarak kullanilan ekran okuyucudur.
+[Job Access With Speech](https://www.freedomscientific.com/Products/software/JAWS/) (Konuşma ile İş Erişimi) veya JAWS, Windows üzerinde üretken olarak kullanılan ekran okuyucudur.
 
-JAWS'ın en iyi nasıl kullanılacağına ilişkin aşağıdaki kılavuzlara bakın:
+JAWS'ın en iyi nasıl kullanılacağına ilişkin aşağıdaki rehberlere başvurun:
 
 - [WebAIM - JAWS'ı Kullanarak Web Erişilebilirliğini Değerlendirmek ](https://webaim.org/articles/jaws/)
 - [Deque - JAWS Klavye Kısayolları](https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts)
 
-### Diğer Ekran Okuyucular {#other-screen-readers}
+### Diğer Ekran Okuyucuları{#other-screen-readers}
 
-#### Google Chrome İçindeki ChromeVox{#chromevox-in-google-chrome}
+#### Google Chrome içindeki ChromeVox{#chromevox-in-google-chrome}
 
-[ChromeVox](https://www.chromevox.com/) Chromebooks'daki bir ekran okuyucudur ve Google Chrome icin [bir uzanti olarak](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) vardir.
+[ChromeVox](https://www.chromevox.com/) Chromebooks'daki bir ekran okuyucudur ve Google Chrome için [bir uzantı olarak](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) vardır.
 
-ChromeVox'un en iyi nasıl kullanılacağına ilişkin aşağıdaki kılavuzlara bakın:
+ChromeVox'un en iyi nasıl kullanılacağına ilişkin aşağıdaki rehberlere başvurun:
 
-- [Google Chromebook Yardim - Yerleşik Ekran Okuyucuyu Kullanın](https://support.google.com/chromebook/answer/7031755?hl=en)
+- [Google Chromebook Yardım - Yerleşik Ekran Okuyucuyu Kullanın](https://support.google.com/chromebook/answer/7031755?hl=en)
 - [ChromeVox Klasik Klavye Kısayolları Referansı](https://www.chromevox.com/keyboard_shortcuts.html)
