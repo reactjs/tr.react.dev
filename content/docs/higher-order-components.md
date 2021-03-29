@@ -14,7 +14,11 @@ const EnhancedComponent = higherOrderComponent(WrappedComponent);
 
 Bir bileşen; proplarını kullanıcı arayüzüne çevirirken, üst-seviye bir bileşen başka bir bileşeni alıp farklı bir bileşene çevirir.
 
+<<<<<<< HEAD
 HOC'lar Redux'un [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect) ve Relay'in [`createFragmentContainer`](http://facebook.github.io/relay/docs/en/fragment-container.html) gibi üçüncü taraf React kütüphanelerinde yaygındır.
+=======
+HOCs are common in third-party React libraries, such as Redux's [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect) and Relay's [`createFragmentContainer`](https://relay.dev/docs/v10.1.3/fragment-container/#createfragmentcontainer).
+>>>>>>> c970f75a0ac3513f50e7a4989757c50cde0b7396
 
 Bu dokümanda neden üst-seviye bileşenlerin kullanışlı olduğunu tartışıp, bunları nasıl yazabileceğiniz hakkında konuşacağız.
 
