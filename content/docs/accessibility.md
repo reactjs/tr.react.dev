@@ -26,7 +26,7 @@ Aşağıdaki WCAG kontrol listeleri genel bir bakış sağlar:
 
 [Web Erişilebilirlik Girişimi - Erişilebilir Zengin İnternet Uygulamaları](https://www.w3.org/WAI/intro/aria) belgesi, tamamen erişilebilir JavaScript widgetleri oluşturmak için teknikler içerir.
 
-Tüm `aria- *` HTML özelliklerinin JSX'te tam olarak desteklendiğini unutmayın. React'teki çoğu DOM özellikleri ve nitelikleri camelCased iken, bu nitelikler düz HTML'de olduğu gibi hyphen-cased şeklinde olmalıdır (kebab-case, lisp-case, ve benzeri olarak da bilinir):
+Tüm `aria- *` HTML özelliklerinin, JSX'te tam olarak desteklendiğini unutmayın. React'teki çoğu DOM özellikleri ve nitelikleri camelCased iken, bu nitelikler düz HTML'de olduğu gibi hyphen-cased şeklinde olmalıdır (kebab-case, lisp-case, ve benzeri olarak da bilinir):
 
 ```javascript{3,4}
 <input
@@ -124,7 +124,7 @@ Bu standart HTML uygulamaları doğrudan React'te kullanılabilmesine rağmen, `
 
 ### Kullanıcı hatalarını bildirmek {#notifying-the-user-of-errors}
 
-Hata durumlarının tüm kullanıcılar tarafından anlaşılmış olmasş gerekir. 
+Hata durumlarının tüm kullanıcılar tarafından anlaşılmış olması gerekir. 
 Aşağıdaki link, hata metinlerinin de ekran okuyucuları tarafından nasıl algılandığını gösterir:
 
 - [W3C, kullanıcı bildirimlerini gösterir](https://www.w3.org/WAI/tutorials/forms/notifications/)
@@ -148,23 +148,23 @@ Eğer onu başka bir odak anahat uygulamasıyla değiştiriyorsanız, sadece bu 
 
 Klavyede gezinmeye yardımcı olduğundan ve hızlandırdığından, kullanıcıların uygulamanızdaki geçmiş navigasyon bölümlerini atlamasına izin veren bir mekanizma sağlayın.
 
-AtlamaLinkleri (Skiplinks) veya Atlama Navigasyon Linkleri (Skip Navigation Links), klavye kullanıcıları, sadece sayfa ile etkileşimde bulundukları zaman görünür olan gizli navigasyon linkleridir. Bunların iç sayfa bağlantıları ve bazı stillerle uygulanması çok kolaydır:
+AtlamaLinkleri (Skiplinks) veya Navigasyon Linklerini Atlamak (Skip Navigation Links), klavye kullanıcıları, sadece sayfa ile etkileşimde bulundukları zaman görünür olan gizli navigasyon linkleridir. Bunların iç sayfa bağlantıları ve bazı stillerle uygulanması çok kolaydır:
 
 - [WebAIM - Navigasyon Linklerini Atlamak](https://webaim.org/techniques/skipnav/)
 
-Yardımcı teknoloji, kullanıcının bu bölümlere çabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için "<main>" ve "<aside>" gibi belirgin isaret (landmark) öğeleri ve rolleri de kullanın.
+Yardımcı teknoloji, kullanıcının bu bölümlere çabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için "<main>" ve "<aside>" gibi belirgin işaret (landmark) öğeleri ve rolleri de kullanın.
 
 Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha fazlasını buradan okuyun
 
-- [Erisilebilir Belirgin İşaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
+- [Erişilebilir Belirgin İşaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
 
 ### Programlı olarak odağı yönetmek {#programmatically-managing-focus}
 
-React uygulamamlarımız çalışma süresinde, HTML DOM'u değiştirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol aar. Bunu düzeltmek amacıyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Örneğin, modal penceresi kapatıldıktan sonra, bir modal penceresi açan bir butona klavye odağını sıfırlatmak.
+React uygulamamlarımız çalışma süresinde, HTML DOM'u değiştirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amacıyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Örneğin, modal penceresi kapatıldıktan sonra, bir modal penceresi açan bir butona klavye odağını sıfırlatmak.
 
 MDN Web Dokümanları buna bakar ve [gezinilebilir-klavye JavaScript widgetleri](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)'ni nasıl inşa edebildiğimizi açıklar.
 
-React'te odaği ayarlamak için [DOM öğelerine Ref'ler](/docs/refs-and-the-dom.html)'i kullanabiliriz.
+React'te odağı ayarlamak için [DOM öğelerine Ref'ler](/docs/refs-and-the-dom.html)'i kullanabiliriz.
 
 Bunu kullanarak, öncelikle, bir bileşen sınıfının JSX'indeki bir öğeye bir ref oluştururuz:
 
@@ -225,25 +225,25 @@ class Parent extends React.Component {
 this.inputElement.current.focus();
 ```
 
-Bileşenleri genişletmek için bir HOC kullanırken, React'in `forwardRef` fonksiyonu kullanılarak sarılmış bileşene [ref'i iletmesi](/docs/forwarding-refs.html) önerilir. Eğer  üçüncü bir taraf HOC, ref iletmeyi uygulamazsa, yukarıdaki şablon yine de bir geri çekilme olarak kullanılabilir.
+Bileşenleri genişletmek için bir HOC kullanırken, React'in `forwardRef` fonksiyonu kullanılarak sarılmış bileşene [ref'i iletmesi](/docs/forwarding-refs.html) önerilir. Eğer üçüncü bir taraf HOC, ref iletmeyi uygulamazsa, yukarıdaki şablon yine de bir geri çekilme olarak kullanılabilir.
 
 [react-aria-modal](https://github.com/davidtheclark/react-aria-modal), harika bir odak yönetimi örneğidir. Bu, tamamen erişilebilir bir modal penceresinin göreceli olarak nadir bir örneğidir.   
-Sadece ilk odaği iptal butonuna ayarlamak (klavye kullanıcısının başarılı eylemi yanlışlıkla etkinleştirmesini engeller) ve klavye odağını modal içinde hapsetmekle kalmaz, onu başlangıçta modalı tetikleyen öğeye geri odaklanarak sıfırlar. 
+Sadece ilk odağı iptal butonuna ayarlamak (klavye kullanıcısının başarılı eylemi yanlışlıkla etkinleştirmesini engeller) ve klavye odağını modal içinde hapsetmekle kalmaz, onu başlangıçta modalı tetikleyen öğeye geri odaklanarak sıfırlar. 
 
 >Not:
 >
 >Bu çok önemli bir erişilebilirlik özelliği iken, adilce kullanılması da gereken bir tekniktir. Nasıl yapılacağını tahmin etmek için değil, rahatsız edildiğinde klavye odak akışını onarmak için kullanın.
 >kullanıcılar uygulamaları kullanmak ister.
 
-## Mouse ve imleç olayları {#mouse-and-pointer-events}
+## Fare ve imleç olayları {#mouse-and-pointer-events}
 
-Bir mouse veya imleç olayı aracılığıyla açığa çıkan tüm fonksiyonların yalnızca klavye kullanılarak da erişilebildiğinden emin olun. Sadece imleç cihazına bağlı olarak, klavye kullanıcıları uygulamanızın kullanılamayacağı birçok duruma yönlendirilecektir.
+Bir fare veya imleç olayı aracılığıyla açığa çıkan tüm fonksiyonların yalnızca klavye kullanılarak da erişilebildiğinden emin olun. Sadece imleç cihazına bağlı olarak, klavye kullanıcıları uygulamanızın kullanılamayacağı birçok duruma yönlendirilecektir.
 
-Bunu göstermek için, tıklama olaylarının sebep olduğu bozuk erişilebilirliğin verimli bir örneğine bakalım. Bu, bir kullanıcının öğenin dışına tıklayarak, bir anda açılan (popover) pencereyi engellediği dış tıklama şablonudur.
+Bunu göstermek için, tıklama olaylarının sebep olduğu bozuk erişilebilirliğin verimli bir örneğine bakalım. Bu, bir kullanıcının öğenin dışına tıklayarak, bir anda açılan pencereyi (popover) engellediği dış tıklama şablonudur.
 
 <img src="../images/docs/outerclick-with-mouse.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with a mouse showing that the close action works." />
 
-Bu genelliklre popover'i kapatan `window` nesnesine bir `click` olayının bağlanarak uygulanmasıdır.
+Bu genelliklre popover'ı kapatan `window` nesnesine bir `click` olayının bağlanarak uygulanmasıdır.
 
 ```javascript{12-14,26-30}
 class OuterClickExample extends React.Component {
@@ -294,7 +294,7 @@ class OuterClickExample extends React.Component {
 }
 ```
 
-Bu mouse gibi imleçli cihaz kullanan kullanıcılar için iyi çalışabilir. Ama bunun tek olarak klavye ile çalıştırılması, sonraki öğeye sekme yapıldığında bozuk fonksiyonellige yol açar, çünkü `window` nesnesi asla `click` olayını almaz. Bu, kullanıcıların uygulamanızı kullanmasını engelleyen belirsiz fonksiyonellige yol açabilir. 
+Bu fare gibi imleçli cihaz kullanan kullanıcılar için iyi çalışabilir. Ama bunun tek olarak klavye ile çalıştırılması, sonraki öğeye sekme yapıldığında bozuk fonksiyonelliğe yol açar, çünkü `window` nesnesi asla `click` olayını almaz. Bu, kullanıcıların uygulamanızı kullanmasını engelleyen belirsiz fonksiyonellige yol açabilir. 
 
 <img src="../images/docs/outerclick-with-keyboard.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with the keyboard showing the popover not being closed on blur and it obscuring other screen elements." />
 
@@ -331,14 +331,14 @@ class BlurExample extends React.Component {
     });
   }
 
-  // Bir alt öğeye odaklanılırsa, açılır pencereyi (popover)kapatmayın
+  // Bir alt öğeye odaklanılırsa, açılır pencereyi (popover) kapatmayın
   onFocusHandler() {
     clearTimeout(this.timeOutId);
   }
 
   render() {
     // React bulanıklığı köpürterek ve
-    // ve olayları üst öğeye odaklayarak bize yardımcı olur
+    // olayları üst öğeye odaklayarak bize yardımcı olur
     return (
       <div onBlur={this.onBlurHandler}
            onFocus={this.onFocusHandler}>
@@ -360,11 +360,11 @@ class BlurExample extends React.Component {
 }
 ```
 
-Bu kod fonksiyonelliği hem imleci, hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
+Bu kod fonksiyonelliği, hem imleçi hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
 
-<img src="../images/docs/blur-popover-close.gif" alt="Hem mouse hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover)liste." />
+<img src="../images/docs/blur-popover-close.gif" alt="Hem fare hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover)liste." />
 
-Bu, sadece imleç ve mouse olaylarına bağlı olan klavye kullanıcıları için,fonksiyonelliğin bozulduğu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yöneticilerini kullanarak düzeltilmiş olabilen sorunlu bölgeleri vurgular.
+Bu, sadece imleç ve fare olaylarına bağlı olan klavye kullanıcıları için,fonksiyonelliğin bozulduğu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yöneticilerini kullanarak düzeltilmiş olabilen sorunlu bölgeleri vurgular.
 
 ## Daha Karmaşık Widgetler {#more-complex-widgets}
 
@@ -373,7 +373,7 @@ Daha karmaşık bir kullanıcı deneyimi, daha az erişilebilir demek değildir.
 Burada [ARIA Durumları ve Özellikleri](https://www.w3.org/TR/wai-aria/#states_and_properties) gibi [ARIA Rolleri](https://www.w3.org/TR/wai-aria/#roles)'nin bilgisine gereksinim duyarız. 
 Bunlar JSX'te tamamen desteklenmiş ve tamamen erişilebilir, yüksek dereceli fonksiyonel React bileşenleri inşa etmemize imkan veren HTML nitelikleriyle dolu araç kutularıdır.
 
-Her ceşit widget öğesi türünün belirli bir tasarım deseni vardır ve hem kullanıcılar hem de kullanıcı ajansları gibi olanlar tarafından, belirli bir şekilde fonksiyon göstermesi beklenir:
+Her çeşit widget öğesi türünün belirli bir tasarım deseni vardır ve hem kullanıcılar hem de kullanıcı ajansları gibi olanlar tarafından, belirli bir şekilde fonksiyon göstermesi beklenir:
 
 - [WAI-ARIA Yazarlık Pratikleri - Tasarım Desenleri ve Widget'lar](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
 - [Heydon Pickering - ARIA Örnekleri](https://heydonworks.com/article/practical-aria-examples/)
@@ -420,7 +420,7 @@ Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kul
 
 Şimdiye kadar en kolay ve aynı zamanda en önemli kontroller, tüm websitesinin sadece klavye ile ulaşalabilir ve kullanılabilir olduğunu test etmektir. Bunu şu şekilde yapın:
 
-1. Mouse'nızın bağlantısını kesmek.
+1. Fare'nızın bağlantısını kesmek.
 1. Gözden geçirmek icin `Tab` ve `Shift+Tab` kullanmak.
 1. Öğeleri etkinleştirmek için `Enter`i kullanmak
 1. Gerektiğinde, menüler ve aşağı doğru açılan (dropdown) menüler gibi, bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
@@ -470,13 +470,13 @@ Bazı tarayıcılarda, erişilebilirlik ağacındaki her öğe için erişilebil
 - [Chrome'da Erişilebilirlik Denetçisini Kullanmak](https://developers.google.com/web/tools/chrome-devtools/accessibility/reference#pane)
 - [OS X Safari'de Erişilebilirlik Denetçisini Kullanmak](https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html)
 
-### Ekran Okuyuculari {#screen-readers}
+### Ekran Okuyucuları {#screen-readers}
 
 Bir ekran okuyucuyla test etmek, erişilebilirlik testlerinizin bir parçasını oluşturmalıdır.
 
 Tarayıcı / ekran okuyucu kombinasyonlarının önemli olduğunu lütfen unutmayın. Uygulamanızı, seçtiğiniz ekran okuyucuya en uygun tarayıcıda test etmeniz önerilir. 
 
-### Yaygın Kullanilan Ekran Okuyucuları {#commonly-used-screen-readers}
+### Yaygın Kullanılan Ekran Okuyucuları {#commonly-used-screen-readers}
 
 #### Firefox İçindeki NVDA {#nvda-in-firefox}
 
@@ -491,7 +491,7 @@ NVDA'yı en iyi şekilde nasıl kullanacağınız konusunda aşağıdaki kılavu
 
 VoiceOver, Apple cihazlara entegre edilmiş bir ekran okuyucudur.
 
-VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağıdaki kılavuzlara bakın:
+VoiceOver'ı nasıl etkinleştireceğiniz ve kullanacağınız ile ilgili aşağıdaki rehberlere bakın:
 
 - [WebAIM - Web Erişilebilirliğini Değerlendirmek için VoiceOver'ı Kullanmak](https://webaim.org/articles/voiceover/)
 - [Deque - OS X Klavye Kısayolları için VoiceOver](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts)
@@ -510,7 +510,7 @@ JAWS'ın en iyi nasıl kullanılacağına ilişkin aşağıdaki rehberlere başv
 
 #### Google Chrome içindeki ChromeVox{#chromevox-in-google-chrome}
 
-[ChromeVox](https://www.chromevox.com/) Chromebooks'daki bir ekran okuyucudur ve Google Chrome için [bir uzantı olarak](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) vardır.
+[ChromeVox](https://www.chromevox.com/), Chromebooks'daki bir ekran okuyucudur ve Google Chrome için [bir uzantı olarak](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) vardır.
 
 ChromeVox'un en iyi nasıl kullanılacağına ilişkin aşağıdaki rehberlere başvurun:
 
