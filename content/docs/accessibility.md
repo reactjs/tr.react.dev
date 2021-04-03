@@ -360,7 +360,7 @@ class BlurExample extends React.Component {
 }
 ```
 
-Bu kod fonksiyonelliği, hem imleçi hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
+Bu kod fonksiyonelliği, hem imleci hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
 
 <img src="../images/docs/blur-popover-close.gif" alt="Hem fare hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover)liste." />
 
@@ -420,7 +420,7 @@ Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kul
 
 Şimdiye kadar en kolay ve aynı zamanda en önemli kontroller, tüm websitesinin sadece klavye ile ulaşalabilir ve kullanılabilir olduğunu test etmektir. Bunu şu şekilde yapın:
 
-1. Fare'nızın bağlantısını kesmek.
+1. Fare'nizin bağlantısını kesmek.
 1. Gözden geçirmek icin `Tab` ve `Shift+Tab` kullanmak.
 1. Öğeleri etkinleştirmek için `Enter`i kullanmak
 1. Gerektiğinde, menüler ve aşağı doğru açılan (dropdown) menüler gibi, bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
