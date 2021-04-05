@@ -55,7 +55,11 @@ Nesne ref'leri büyük ölçüde string ref'lerinin yerine geldiğinden beri str
 
 React, sınıf nesne örneği verilen bir DOM düğümünü ağaçta aramak için `findDOMNode`'u destekliyordu. Normalde buna ihtiyaç yoktur çünkü [doğrudan bir DOM düğümüne ref ekleyebilirsiniz](/docs/refs-and-the-dom.html#creating-refs).
 
+<<<<<<< HEAD
 `findDOMNode` ayrıca sınıf bileşenlerinde de kullanılabilir ancak bu, bir üst öğenin belirli alt öğelerin render edilmesine izin vererek soyutlama düzeylerini bozuyordu. Bir üst öğe DOM düğümüne erişebileceği için bir bileşenin uygulama ayrıntılarını değiştiremeyeceğiniz bir kodun yeniden düzenlenmesi (refactoring) tehlikesi oluşturur. `findDOMNode` sadece ilk alt öğeyi döndürür fakat Fragment'ler kullanılarak bir bileşenin birden fazla alt öğe render etmesi mümkündür. `findDOMNode` tek seferlik okuma API'sidir. Sadece istendiğinde cevap verir. Bir alt bileşen farklı bir farklı bir düğüm render ediyorsa, bu değişikliği ele almanın bir yolu yoktur. Bu nedenle `findDOMNode` sadece bileşenler asla değişmeyen tek bir DOM düğümü döndürürse işe yarar.
+=======
+`findDOMNode` can also be used on class components but this was breaking abstraction levels by allowing a parent to demand that certain children were rendered. It creates a refactoring hazard where you can't change the implementation details of a component because a parent might be reaching into its DOM node. `findDOMNode` only returns the first child, but with the use of Fragments, it is possible for a component to render multiple DOM nodes. `findDOMNode` is a one time read API. It only gave you an answer when you asked for it. If a child component renders a different node, there is no way to handle this change. Therefore `findDOMNode` only worked if components always return a single DOM node that never changes.
+>>>>>>> 49fd7d5f115378e3663b049f108a2d29b31290c8
 
 Bunun yerine, bunu özel bileşeninize bir ref geçerek ve [ref yönlendirme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components) ile DOM boyunca ileterek yapabilirsiniz.
 
