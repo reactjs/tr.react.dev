@@ -1205,7 +1205,7 @@ Tebrikler, bir tic-tac-toe oyunu kodladınız. Bu oyun:
 
 İyi iş çıkardınız. Umarız artık React'in nasıl çalıştığını öğrenmişsinizdir.
 
-Kodun son haline **[buradan(https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** bakabilirsiniz.
+Kodun son haline **[buradan](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)** bakabilirsiniz.
 
 Eğer biraz daha boş vaktiniz varsa ve yeni edindiğiniz React yetenekleriniz ile ilgili pratik yapmak istiyorsanız, aşağıda zorluk derecesine göre sıralanmış işler sayesinde, tic-tac-toe oyununuzu geliştirerek daha ileriye götürebilirsiniz:
 
