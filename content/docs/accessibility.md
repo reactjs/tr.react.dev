@@ -158,7 +158,7 @@ Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha 
 
 - [Erişilebilir Belirgin İşaretler](https://www.scottohara.me/blog/2018/03/03/landmarks.html)
 
-### Programlı olarak odağı yönetmek {#programmatically-managing-focus}
+### Programlayarak odağı yönetmek {#programmatically-managing-focus}
 
 React uygulamamlarımız çalışma süresinde, HTML DOM'u değiştirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amacıyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Örneğin, modal penceresi kapatıldıktan sonra, bir modal penceresi açan bir butona klavye odağını sıfırlatmak.
 
@@ -243,7 +243,7 @@ Bunu göstermek için, tıklama olaylarının sebep olduğu bozuk erişilebilirl
 
 <img src="../images/docs/outerclick-with-mouse.gif" alt="A toggle button opening a popover list implemented with the click outside pattern and operated with a mouse showing that the close action works." />
 
-Bu genelliklre popover'ı kapatan `window` nesnesine bir `click` olayının bağlanarak uygulanmasıdır.
+Bu genellikle popover'ı kapatan `window` nesnesine bir `click` olayının bağlanarak uygulanmasıdır.
 
 ```javascript{12-14,26-30}
 class OuterClickExample extends React.Component {
@@ -319,8 +319,8 @@ class BlurExample extends React.Component {
     }));
   }
 
-  // Bir sonraki tıklamada, setTimeout kullanarak açılır pencereyi (popover)kapatıyoruz.
-  // Bu gereklidir çünkü önce kontrol etmemiz gerekiyor, eger
+  // Bir sonraki tıklamada, setTimeout kullanarak açılır pencereyi (popover) kapatıyoruz.
+  // Bu gereklidir çünkü önce kontrol etmemiz gerekiyor, eğer
   // öğenin başka bir alt öğesine odaklanılmışsa, 
   // bulanıklık olayı, yeni odak olayından önce tetiklendiği.
   onBlurHandler() {
@@ -360,9 +360,9 @@ class BlurExample extends React.Component {
 }
 ```
 
-Bu kod fonksiyonelliği, hem imleci hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
+Bu kod işlevselliği, hem imleci hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
 
-<img src="../images/docs/blur-popover-close.gif" alt="Hem fare hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover)liste." />
+<img src="../images/docs/blur-popover-close.gif" alt="Hem fare hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover) liste." />
 
 Bu, sadece imleç ve fare olaylarına bağlı olan klavye kullanıcıları için,fonksiyonelliğin bozulduğu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yöneticilerini kullanarak düzeltilmiş olabilen sorunlu bölgeleri vurgular.
 
@@ -381,7 +381,7 @@ Her çeşit widget öğesi türünün belirli bir tasarım deseni vardır ve hem
 
 ## Düşünülmesi Gereken Diğer Hususlar {#other-points-for-consideration}
 
-### Dili ayarlanmak {#setting-the-language}
+### Dili ayarlamak {#setting-the-language}
 
 Ekran okuyucu yazılımı, doğru ses ayarlarını seçmek için bunu kullandığından, sayfa metinlerinin insan dilini belirtin:
 
@@ -420,7 +420,7 @@ Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kul
 
 Şimdiye kadar en kolay ve aynı zamanda en önemli kontroller, tüm websitesinin sadece klavye ile ulaşalabilir ve kullanılabilir olduğunu test etmektir. Bunu şu şekilde yapın:
 
-1. Fare'nizin bağlantısını kesmek.
+1. Farenizin bağlantısını kesmek.
 1. Gözden geçirmek icin `Tab` ve `Shift+Tab` kullanmak.
 1. Öğeleri etkinleştirmek için `Enter`i kullanmak
 1. Gerektiğinde, menüler ve aşağı doğru açılan (dropdown) menüler gibi, bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
