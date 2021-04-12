@@ -45,7 +45,7 @@ Anlamsal HTML, bir web uygulamasında erişilebilirliğin temelidir. Web siteler
 - [MDN HTML öğeleri referansı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
 Bazen, React kodumuzun çalışması için JSX'imize `<div>` öğeleri eklediğimizde, HTML'in anlamsallığını bozarız, özellikle listeler (`<ol>`, `<ul>` ve `<dl>`), ve HTML `<table>` ile çalışırken. 
-Bu durumlarda, çoklu öğeleri gruplamak için [React Fragmentlerı](/docs/fragments.html) kullanmayı tercih etmelisiniz.
+Bu durumlarda, çoklu öğeleri gruplamak için [React Fragmentleri](/docs/fragments.html) kullanmayı tercih etmelisiniz.
 
 Örneğin,
 
@@ -360,11 +360,11 @@ class BlurExample extends React.Component {
 }
 ```
 
-Bu kod işlevselliği, hem imleci hem de klavye kullanıcılarını açığa çıkartır. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
+Bu kod, işlevselliği hem imlece hem de klavye kullanıcılarına sunar. Ekran-okuyucu kullanıcılarını desteklemek için eklenen `aria-*` prop'larına da dikkat edin. Basitlik adına, açılır pencere (popover) seçeneklerinin `arrow key` etkileşimini etkinleştirmek için klavye olayları uygulanmamıştır.
 
 <img src="../images/docs/blur-popover-close.gif" alt="Hem fare hem de klavye kullanıcıları için doğru şekilde kapanan bir açılır (popover) liste." />
 
-Bu, sadece imleç ve fare olaylarına bağlı olan klavye kullanıcıları için,fonksiyonelliğin bozulduğu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yöneticilerini kullanarak düzeltilmiş olabilen sorunlu bölgeleri vurgular.
+Bu, sadece imleç ve fare olaylarına bağlı olan klavye kullanıcıları için, fonksiyonelliğin bozulduğu birçok duruma bir örnektir. Daima klavye ile test etmek, derhal klavyeye duyarlı olay yöneticilerini kullanarak düzeltilmiş olabilen sorunlu bölgeleri vurgular.
 
 ## Daha Karmaşık Widgetler {#more-complex-widgets}
 
@@ -401,7 +401,7 @@ Görme yetisi kısıtlı kullanıcılar tarafından, maksimum düzeyde okunabilm
 
 - [WCAG - Renk Kontrastı Gereksinimini Anlama](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html)
 - [Renk Kontrastı Hakkındaki Her Şey ve Onu Neden Yeniden Düşünmelisiniz](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
-- [A11yProjesi -Renk Kontrastı Nedir](https://a11yproject.com/posts/what-is-color-contrast/)
+- [A11yProjesi - Renk Kontrastı Nedir](https://a11yproject.com/posts/what-is-color-contrast/)
 
 Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Öyleyse, bunun yerine [colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
 
@@ -422,17 +422,17 @@ Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kul
 
 1. Farenizin bağlantısını kesmek.
 1. Gözden geçirmek icin `Tab` ve `Shift+Tab` kullanmak.
-1. Öğeleri etkinleştirmek için `Enter`i kullanmak
+1. Öğeleri etkinleştirmek için `Enter`'i kullanmak
 1. Gerektiğinde, menüler ve aşağı doğru açılan (dropdown) menüler gibi, bazı öğelerle etkileşim kurmak için klavye ok tuşlarınızı kullanmak.
 
 ### Geliştirme asistanı {#development-assistance}
 
 Bazı erişilebilirlik özelliklerini doğrudan JSX kodumuzda kontrol edebiliriz. 
-Genellikle, ARIA rolleri, durumları ve özellikleri için intellisense kontrolleri,JSX uyumlu IDE(Integrated Development Environment)'lerde  zaten sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
+Genellikle, ARIA rolleri, durumları ve özellikleri için Intellisense kontrolleri, JSX uyumlu IDE(Integrated Development Environment)'lerde  zaten sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
 
 #### eslint-plugin-jsx-a11y {#eslint-plugin-jsx-a11y}
 
-ESLint icin [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) eklentisi, JSX'inizdeki erişilebilirlik sorunları ile ilgili AST linting geri bildirimini sağlar. Bir cok IDE, bu bulguları doğrudan kod analizi ve kaynak kodu pencereleri ile birlikte kullanmanıza izin verir.
+ESLint için [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) eklentisi, JSX'inizdeki erişilebilirlik sorunları ile ilgili AST linting geri bildirimini sağlar. Bir çok IDE, bu bulguları doğrudan kod analizi ve kaynak kodu pencereleri ile birlikte kullanmanıza izin verir.
 
 [Create React App](https://github.com/facebookincubator/create-react-app), bir kural alt kümesinin etkinleştirildiği bu eklentiye sahiptir. Daha da fazla erişilebilirlik kurallarını etkinleştirmek istiyorsanız, bu içerikle projenizin root (kök) dizininde bir `.eslintrc` dosyası oluşturabilirsiniz: 
 
@@ -449,7 +449,7 @@ Tarayıcınızda web sayfalarındaki erişilebilirlik denetimlerini çalıştır
 
 #### aXe, aXe-core ve react-axe {#axe-axe-core-and-react-axe}
 
-Deque Systemleri uygulamalarınızın otomatik ve uçtan-uça(end-to-end) erişilebilirlik testleri için[aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
+Deque Systemleri uygulamalarınızın otomatik ve uçtan-uça (end-to-end) erişilebilirlik testleri için[aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
 
 [Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` üzerine inşa edilmiş bir erişilebilirlik denetçisi tarayıcı uzantısı.
 
@@ -462,7 +462,7 @@ başka bir erişilebilirlik tarayıcı uzantısıdır.
 
 #### Erişilebilirlik Denetçileri ve Erişilebilirlik Ağacı {#accessibility-inspectors-and-the-accessibility-tree}
 
-[Erişilebilirlik Ağacı](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/), ekran okuyucuları gibi yardımcı teknolojilere maruz bırakılmış olması gereken, her DOM öğesi için erişilebilir nesneleri iceren DOM ağacının alt kümesidir.
+[Erişilebilirlik Ağacı](https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/), ekran okuyucuları gibi yardımcı teknolojilere maruz bırakılmış olması gereken, her DOM öğesi için erişilebilir nesneleri içeren DOM ağacının alt kümesidir.
 
 Bazı tarayıcılarda, erişilebilirlik ağacındaki her öğe için erişilebilirlik bilgilerini kolayca görüntüleyebiliriz:
 
