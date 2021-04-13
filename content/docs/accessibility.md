@@ -403,7 +403,7 @@ Görme yetisi kısıtlı kullanıcılar tarafından, maksimum düzeyde okunabilm
 - [Renk Kontrastı Hakkındaki Her Şey ve Onu Neden Yeniden Düşünmelisiniz](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
 - [A11yProjesi - Renk Kontrastı Nedir](https://a11yproject.com/posts/what-is-color-contrast/)
 
-Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Öyleyse, bunun yerine [colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
+Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Öyleyse, bunun yerine [Colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
 
 Aşağıda belirtilen hem aXe hem de WAVE araçları renk kontrast testlerini de içerir ve kontrast hatalarını rapor edecektir. 
 
@@ -428,7 +428,7 @@ Erişilebilir web uygulamalarının oluşturulmasına yardımcı olmak için kul
 ### Geliştirme asistanı {#development-assistance}
 
 Bazı erişilebilirlik özelliklerini doğrudan JSX kodumuzda kontrol edebiliriz. 
-Genellikle, ARIA rolleri, durumları ve özellikleri için Intellisense kontrolleri, JSX uyumlu IDE(Integrated Development Environment)'lerde  zaten sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
+Genellikle, ARIA rolleri, durumları ve özellikleri için Intellisense kontrolleri, JSX uyumlu IDE (Integrated Development Environment)'lerde zaten sağlanmıştır. Aşağıdaki araca da erişimimiz vardir: 
 
 #### eslint-plugin-jsx-a11y {#eslint-plugin-jsx-a11y}
 
@@ -449,7 +449,7 @@ Tarayıcınızda web sayfalarındaki erişilebilirlik denetimlerini çalıştır
 
 #### aXe, aXe-core ve react-axe {#axe-axe-core-and-react-axe}
 
-Deque Systemleri uygulamalarınızın otomatik ve uçtan-uça (end-to-end) erişilebilirlik testleri için[aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
+Deque Systemleri uygulamalarınızın otomatik ve uçtan-uça (end-to-end) erişilebilirlik testleri için [aXe-core](https://github.com/dequelabs/axe-core) sunar. Bu modül Selenium için entegrasyonları içerir.
 
 [Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` üzerine inşa edilmiş bir erişilebilirlik denetçisi tarayıcı uzantısı.
 
