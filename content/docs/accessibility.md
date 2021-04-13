@@ -1,6 +1,6 @@
 ---
 id: accessibility
-title: Accessibility
+title: Erişilebilirlik
 permalink: docs/accessibility.html
 ---
 
@@ -152,7 +152,7 @@ AtlamaLinkleri (Skiplinks) veya Navigasyon Linklerini Atlamak (Skip Navigation L
 
 - [WebAIM - Navigasyon Linklerini Atlamak](https://webaim.org/techniques/skipnav/)
 
-Yardımcı teknoloji, kullanıcının bu bölümlere çabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için "<main>" ve "<aside>" gibi belirgin işaret (landmark) öğeleri ve rolleri de kullanın.
+Yardımcı teknoloji, kullanıcının bu bölümlere çabuk bir şekilde gezinmesine olanak tanıdığından, sayfa bölümlerini ayırmak için `<main>` ve `<aside>` gibi belirgin işaret (landmark) öğeleri ve rolleri de kullanın.
 
 Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha fazlasını buradan okuyun
 
@@ -160,7 +160,7 @@ Erişilebilirliği geliştirmek için, bu öğelerin kullanımı hakkında daha 
 
 ### Programlayarak odağı yönetmek {#programmatically-managing-focus}
 
-React uygulamamlarımız çalışma süresinde, HTML DOM'u değiştirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amacıyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Örneğin, modal penceresi kapatıldıktan sonra, bir modal penceresi açan bir butona klavye odağını sıfırlatmak.
+React uygulamalarımız, çalışma süresinde, HTML DOM'u değiştirir, bazen klavye odağının kaybolmasına veya beklenmedik bir öğeye ayarlanmasına yol açar. Bunu düzeltmek amacıyla, klavye odağını programlı olarak doğru yönde itelemek gerekir. Örneğin, modal penceresi kapatıldıktan sonra, bir modal penceresi açan bir butona klavye odağını sıfırlatmak.
 
 MDN Web Dokümanları buna bakar ve [gezinilebilir-klavye JavaScript widgetleri](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)'ni nasıl inşa edebildiğimizi açıklar.
 
