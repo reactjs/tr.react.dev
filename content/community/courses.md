@@ -28,7 +28,11 @@ permalink: community/courses.html
 
 - [Egghead.io](https://egghead.io/browse/frameworks/react) - React ve diğer konular hakkında kısa ve eğitici videolar.
 
+<<<<<<< HEAD
 - [Frontend Masters](https://frontendmasters.com/courses/) - React ve diğer ön-yüz yapıları hakkında video dersleri. 
+=======
+- [Frontend Masters](https://frontendmasters.com/learn/react/) - Video courses on React.
+>>>>>>> 446345cfba91b62546f46f88fad893937a826cdc
 
 - [Fullstack React](https://www.fullstackreact.com/) - React dostları için güncel, derinlikli, eksiksiz bir rehber.
 
