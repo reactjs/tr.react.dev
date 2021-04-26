@@ -28,7 +28,6 @@ Bu sayfa, React [Eşzamanlı Mod](/docs/concurrent-mode-intro.html) için bir AP
 
 - [Eşzamanlı Mod'u Etkinleştirme](#concurrent-mode)
     - [`createRoot`](#createroot)
-    - [`createBlockingRoot`](#createblockingroot)
 - [Suspense](#suspense)
     - [`Suspense`](#suspensecomponent)
     - [`SuspenseList`](#suspenselist)
@@ -47,6 +46,7 @@ ReactDOM.createRoot(rootNode).render(<App />);
 
 Eşzamanlı Mod hakkında daha fazla bilgi için, [Eşzamanlı Mod dökümanına](/docs/concurrent-mode-intro.html) göz atın.
 
+<<<<<<< HEAD
 ### `createBlockingRoot` {#createblockingroot}
 
 ```js
@@ -59,6 +59,8 @@ Eşzamanlı Mod'u tercih etmek React'in çalışma mantığında anlamsal deği�
 
 Engelleme Mod'u, Eşzamanlı Mod özelliklerinin yalnızca küçük bir alt kümesini içerir ve doğrudan taşınamayan uygulamalar için ara bir geçiş adımı olarak tasarlanmıştır.
 
+=======
+>>>>>>> 5119600cf6f7a5dcbd4d2cc23f6b4ff55d2969b2
 ## Suspense API {#suspense}
 
 ### `Suspense` {#suspensecomponent}
