@@ -150,7 +150,7 @@ Bu kod JavaScript'te çalışır çünkü `true && expression` her zaman `expres
 
 Bu yüzden, eğer koşulunuz `true` ise, `&&`'den sonra yazacaklarınız çıktı olur. Eğer koşulunuz `false` ise, React onu görmezden gelip atlayacaktır.
 
-Değer olarak `falsy` bir ifade döndürmek, React'in `&&` ifadesinden sonra gelen kısmı atlamasına neden olacaktır. Ancak yine de o `falsy` değeri dönüp render edeceğini unutmayın. Aşağıdaki örnekte `render` metodundan `<div>0</div>` değeri dönecektir:
+Değer olarak `false` bir ifade döndürmek, React'in `&&` ifadesinden sonra gelen kısmı atlamasına neden olacaktır. Ancak yine de o `false` değeri dönüp render edeceğini unutmayın. Aşağıdaki örnekte `render` metodundan `<div>0</div>` değeri dönecektir:
 
 ```javascript{2,5}
 render() {
