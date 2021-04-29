@@ -28,7 +28,6 @@ Bu sayfa, React [Eşzamanlı Mod](/docs/concurrent-mode-intro.html) için bir AP
 
 - [Eşzamanlı Mod'u Etkinleştirme](#concurrent-mode)
     - [`createRoot`](#createroot)
-    - [`createBlockingRoot`](#createblockingroot)
 - [Suspense](#suspense)
     - [`Suspense`](#suspensecomponent)
     - [`SuspenseList`](#suspenselist)
@@ -46,18 +45,6 @@ ReactDOM.createRoot(rootNode).render(<App />);
 `ReactDOM.render(<App />, rootNode)` yerine geçer ve Eşzamanlı Mod'u etkinleştirir.
 
 Eşzamanlı Mod hakkında daha fazla bilgi için, [Eşzamanlı Mod dökümanına](/docs/concurrent-mode-intro.html) göz atın.
-
-### `createBlockingRoot` {#createblockingroot}
-
-```js
-ReactDOM.createBlockingRoot(rootNode).render(<App />)
-```
-
-`ReactDOM.render(<App />, rootNode)` yerine geçer ve [Engelleme Mod'unu](/docs/concurrent-mode-adoption.html#migration-step-blocking-mode) etkinleştirir.
-
-Eşzamanlı Mod'u tercih etmek React'in çalışma mantığında anlamsal değişiklikler meydana getirir. Bu, Eşzamanlı Mod'u yalnızca birkaç bileşende kullanamayacağınız anlamına gelir. Bu nedenle, bazı uygulamalar Eşzamanlı Mod'a doğrudan geçemeyebilir.
-
-Engelleme Mod'u, Eşzamanlı Mod özelliklerinin yalnızca küçük bir alt kümesini içerir ve doğrudan taşınamayan uygulamalar için ara bir geçiş adımı olarak tasarlanmıştır.
 
 ## Suspense API {#suspense}
 

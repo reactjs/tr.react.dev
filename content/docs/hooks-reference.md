@@ -76,6 +76,7 @@ Eğer bu güncelleme fonksiyonunuz mevcut state ile aynı değeri döndürürse,
 >Sınıf bileşenlerindeki `setState` metodunun aksine, `useState` objeleri otomatik olarak birleştirmez. Fonksiyonlu güncelleme metodu ve obje yayma (spread) operatörü birlikte kullanılarak bu özellik yeniden üretilebilir:
 >
 > ```js
+> const [state, setState] = useState({});
 > setState(prevState => {
 >   // Object.assign da kullanılabilir
 >   return {...prevState, ...updatedValues};

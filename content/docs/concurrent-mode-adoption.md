@@ -21,6 +21,10 @@ next: concurrent-mode-reference.html
 >
 >Bu dokümantasyonla erken adaptasyon yapanlar ve meraklı insanlar hedeflenmektedir. **Eğer React'te yeniyseniz, bu özellikleri önemsemeyin** -- bunları şu an öğrenmenize gerek yok.
 
+>Dikkat:
+>
+>Aşağıdaki "Engelleme Modu" ve "createBlockingRoot" ile ilgili tüm kısımlar geçerliliğini yitirmiştir ve dikkate alınmamalıdır.
+
 </div>
 
 - [Yükleme](#installation)
