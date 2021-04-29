@@ -42,11 +42,7 @@ console.log(add(16, 26)); // 42
 
 Eğer [Create React App](https://create-react-app.dev/), [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.org/) ya da benzeri bir araç kullanıyorsanız, uygulamanızı paketleyen bir Webpack kurulumuna sahip olursunuz.
 
-<<<<<<< HEAD
 Eğer bu araçlardan birini kullanmıyorsanız, paketleyiciyi kendiniz kurmanız gerekir. Örnek için, Webpack dokümantasyonundan [Kurulum](https://webpack.js.org/guides/installation/) ve [Başlangıç](https://webpack.js.org/guides/getting-started/) alanlarına göz atınız.
-=======
-If you aren't, you'll need to set up bundling yourself. For example, see the [Installation](https://webpack.js.org/guides/installation/) and [Getting Started](https://webpack.js.org/guides/getting-started/) guides on the Webpack docs.
->>>>>>> 5119600cf6f7a5dcbd4d2cc23f6b4ff55d2969b2
 
 ## Kod Bölümleme {#code-splitting}
 
