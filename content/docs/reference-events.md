@@ -368,7 +368,7 @@ DOMAbstractView view
 
 * * *
 
-### Tekerler Olayları {#wheel-events}
+### Tekerlek Olayları {#wheel-events}
 
 Olay isimleri:
 
