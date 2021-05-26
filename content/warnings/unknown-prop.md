@@ -1,11 +1,11 @@
 ---
-title: Unknown Prop Warning
+title: Unknown Prop Uyarısı
 layout: single
 permalink: warnings/unknown-prop.html
 ---
-The unknown-prop warning will fire if you attempt to render a DOM element with a prop that is not recognized by React as a legal DOM attribute/property. You should ensure that your DOM elements do not have spurious props floating around.
+React tarafından geçerli olarak kabul edilmeyen bir özelliğe sahip bir DOM öğesini oluşturmaya çalışırsanız, `unknown-prop` uyarısı etkinleşir. DOM öğelerinizin geçersiz özelliklerinin olmadığından emin olmalısınız.
 
-There are a couple of likely reasons this warning could be appearing:
+Bu uyarının çıkmasının birkaç olası sebebi vardır:
 
 1. Are you using `{...this.props}` or `cloneElement(element, this.props)`? Your component is transferring its own props directly to a child element (eg. [transferring props](/docs/transferring-props.html)). When transferring props to a child component, you should ensure that you are not accidentally forwarding props that were intended to be interpreted by the parent component.
 
