@@ -129,7 +129,7 @@ Hata sınırları React'in bildirimsel (declarative) doğasını korur ve beklen
 
 Hata sınırları, olay yöneticileri içinde oluşan hataları **yakalamazlar**.
 
-React'in olay yöneticilerinimn içinde oluşan hataları atlatmaya ihtiyacı yoktur. Render ve yaşam döngüsü metodlarının aksine, olay yöneticileri render aşamasında oluşmazlar. Yani onlar bir hata fırlattığında, React hala ekranda ne göstereceğini bilir.
+React'in olay yöneticileri içinde oluşan hataları atlatmaya ihtiyacı yoktur. Render ve yaşam döngüsü metodlarının aksine, olay yöneticileri render aşamasında oluşmazlar. Yani onlar bir hata fırlattığında, React hala ekranda ne göstereceğini bilir.
 
 Eğer bir olay yöneticisi içinde bir hatayı yakalamanız gerekiyorsa, JavaScript'in sunduğu normal `try` / `catch` ifadesini kullanın:
 
