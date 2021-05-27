@@ -15,7 +15,7 @@ React bileşenleri, render edilen çıktıları da dahil olacak bir şekilde uyg
 
 Her ne kadar bu kapsülleme (encapsulation) `FeedStory` veya `Comment` gibi uygulama seviyesi bileşenler için arzu edilse de, `FancyButton` veya `MyTextInput` gibi yüksek oranda yeniden kullanılabilir "yaprak" bileşenler için sakıncalı olabilir. Bu bileşenler uygulama boyunca normal bir DOM `button` ve `input` öğeleri gibi benzer şekilde kullanılma eğilimindedir, odaklama, seçim veya animasyonları yönetmek için DOM düğümlerine erişmek kaçınılmaz olabilir.
 
-**Ref yönlendirme, bazı bileşenlerin aldıkları bir ref'i almasını ve daha alt elemene aktarmasını sağlayan bir etkinleştirme özelliğidir**
+**Ref yönlendirme, bazı bileşenlerin aldıkları bir ref'i almasını ve daha alt elemente aktarmasını sağlayan bir etkinleştirme özelliğidir**
 
 Alttaki örnekte, `FancyButton` kendisine aktarılan ref'i elde etmek için `React.forwardRef` kullanılır ve ardından oluşturduğu DOM `button`'a iletir:
 
