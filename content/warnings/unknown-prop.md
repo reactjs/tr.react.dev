@@ -7,33 +7,33 @@ React tarafından geçerli olarak kabul edilmeyen bir özelliğe sahip bir DOM �
 
 Bu uyarının çıkmasının birkaç olası sebebi vardır:
 
-1. Are you using `{...this.props}` or `cloneElement(element, this.props)`? Your component is transferring its own props directly to a child element (eg. [transferring props](/docs/transferring-props.html)). When transferring props to a child component, you should ensure that you are not accidentally forwarding props that were intended to be interpreted by the parent component.
+1. `{...this.props}` ya da `cloneElement(element, this.props)` yapılarını mı kullanıyorsunuz? Bileşeniniz proplarını direkt olarak alt elemana aktarmaktadır. ([prop'ları aktarmak](/docs/transferring-props.html)). Prop'larınızı bir alt bileşene aktarırken, yanlışlıkla üst bileşen tarafından yorumlanması amaçlanan prop'ları iletmediğinizden emin olmalısınız.
 
-2. You are using a non-standard DOM attribute on a native DOM node, perhaps to represent custom data. If you are trying to attach custom data to a standard DOM element, consider using a custom data attribute as described [on MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes).
+2. Yerel bir DOM düğümünde, belki de özel verilerinizi temsil etmek için, standart olmayan bir DOM özelliği kullanıyorsunuz. Eğer standard bir DOM elemanına özel bir veriyi iliştirmek istiyorsanız, [MDN'de](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes) açıklanmış olan özel veri niteliklerini (data attributes) kullanmayı düşünebilirsiniz.
 
-3. React does not yet recognize the attribute you specified. This will likely be fixed in a future version of React. However, React currently strips all unknown attributes, so specifying them in your React app will not cause them to be rendered.
+3. React henüz belirttiğiniz özniteliği tanımıyor olabilir. Bu muhtemelen React'in gelecekteki bir sürümünde düzeltilecektir. Ancak, React şu anda tüm bilinmeyen öznitelikleri göz ardı etmektedir. Bu nedenle bunları React uygulamanızda kullanmanız render edilmesine neden olmayacaktır.
 
-4. You are using a React component without an upper case. React interprets it as a DOM tag because [React JSX transform uses the upper vs. lower case convention to distinguish between user-defined components and DOM tags](/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized).
+4. Bir React bileşenini ilk harfi büyük harf olmadan kullanıyor olabilirsiniz. Çünkü [JSX, küçük harf / büyük harf kuralını DOM etiketlerini ve kullanıcı tanımlı bileşenleri ayırt etmek için kullanır.](/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized).
 
 ---
 
-To fix this, composite components should "consume" any prop that is intended for the composite component and not intended for the child component. Example:
+Bunu düzeltmek için, karmaşık bileşenlerin sadece karmaşık bileşenlere yönelik olan ve alt bileşenler için tasarlanmamış prop'ları kullanması gerekmektedir. Örneğin:
 
-**Bad:** Unexpected `layout` prop is forwarded to the `div` tag.
+**Kötü:** Beklenmeyen `layout` prop'u `div` etiketine yönlendirilmiş.
 
 ```js
 function MyDiv(props) {
   if (props.layout === 'horizontal') {
-    // BAD! Because you know for sure "layout" is not a prop that <div> understands.
+    // KÖTÜ! Çünkü "layout" un div etiketinin anlayabileceği bir prop olmadığını biliyorsunuz.
     return <div {...props} style={getHorizontalStyle()} />
   } else {
-    // BAD! Because you know for sure "layout" is not a prop that <div> understands.
+    // KÖTÜ! Çünkü "layout" un div etiketinin anlayabileceği bir prop olmadığını biliyorsunuz.
     return <div {...props} style={getVerticalStyle()} />
   }
 }
 ```
 
-**Good:** The spread operator can be used to pull variables off props, and put the remaining props into a variable.
+**İyi:** Yayılma operatörü, değişkenleri propların içinden çıkarmak ve kalan propları başka bir değişkene koymak için kullanılabilir.
 
 ```js
 function MyDiv(props) {
@@ -46,7 +46,7 @@ function MyDiv(props) {
 }
 ```
 
-**Good:** You can also assign the props to a new object and delete the keys that you're using from the new object. Be sure not to delete the props from the original `this.props` object, since that object should be considered immutable.
+**İyi:** Ayrıca, propları yeni bir nesneye atayabilir ve kullanmadığınız değerleri yeni nesneden silebilirsiniz. Orijinal `props` nesnesinden prop'ları silmediğinizden emin olun, çünkü bu nesne değişmez (immutable) olarak düşünülmelidir.
 
 ```js
 function MyDiv(props) {
