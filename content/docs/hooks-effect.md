@@ -224,7 +224,7 @@ function FriendStatus(props) {
 
 **Neden etkimizden bir işlevi döndürdük?** Bu, etkiler için isteğe bağlı temizleme mekanizmasıdır. Her etki, arkasından temizleyen bir işlev döndürebilir. Bu, abonelik ekleme ve kaldırma mantığını birbirine yakın tutmamızı sağlar. Aynı etkinin parçalarıdırlar!
 
-**React bir efekti tam olarak ne zaman temizler?** React temizleme işlemini bileşen ayrıldığında gerçekleştirir. Ancak, daha önce öğrendiğimiz gibi, etkiler yalnızca bir kez değil, her render da çalışır. Bu nedenle React *ayrıca*, etkileri bir sonraki sefer çalıştırmadan önce önceki işlemdeki etkileri temizler. [Bunun neden hatalardan kaçınmaya yardımcı olduğunu] (#explanation-why-effects-run-on-each-update) ve [performans sorunları yaratması durumunda bu davranışın nasıl devre dışı bırakılacağından] (#tip-optimizing-performance-by-skipping-effects) aşağıda daha sonra bahsedeceğiz.
+**React bir efekti tam olarak ne zaman temizler?** React temizleme işlemini bileşen ayrıldığında gerçekleştirir. Ancak, daha önce öğrendiğimiz gibi, etkiler yalnızca bir kez değil, her render da çalışır. Bu nedenle React *ayrıca*, etkileri bir sonraki sefer çalıştırmadan önce önceki işlemdeki etkileri temizler. [Bunun neden hatalardan kaçınmaya yardımcı olduğunu](#explanation-why-effects-run-on-each-update) ve [performans sorunları yaratması durumunda bu davranışın nasıl devre dışı bırakılacağından](#tip-optimizing-performance-by-skipping-effects) aşağıda daha sonra bahsedeceğiz.
 
 >Not
 >
