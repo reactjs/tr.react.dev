@@ -29,27 +29,27 @@ React'te biraz daha farklıdır:
 </button>
 ```
 
-React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışın `false` değeri döndürülerek engellenemiyor oluşudur. Bunun için `preventDefault` şeklinde açıkça yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, bir `<a>` elementinin yeni bir sayfayı açmasını engellemek için aşağıdaki gibi yazabilirsiniz:
+React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışın `false` değeri döndürülerek engellenemiyor oluşudur. Bunun için `preventDefault` şeklinde açıkça yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, form elemanının varsayılan davranışı olan `submit`i engellemek için aşağıdaki gibi bir kod yazabilirsiniz:
 
 ```html
-<a href="#" onclick="console.log('The link was clicked.'); return false">
-  Click me
-</a>
+<form onsubmit="console.log('You clicked submit.'); return false">
+  <button type="submit">Submit</button>
+</form>
 ```
 
-React'te ise varsayılan `<a>` elementi davranışını `e.preventDefault()` kodu ile engellemeniz gerekir:
+React'te ise varsayılan `form` elementi davranışını `e.preventDefault()` kodu ile engellemeniz gerekir:
 
-```js{2-5,8}
-function ActionLink() {
-  function handleClick(e) {
+```js{3}
+function Form() {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log('The link was clicked.');
+    console.log('You clicked submit.');
   }
 
   return (
-    <a href="#" onClick={handleClick}>
-      Click me
-    </a>
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 ```
@@ -71,8 +71,8 @@ class Toggle extends React.Component {
   }
 
   handleClick() {
-    this.setState(state => ({
-      isToggleOn: !state.isToggleOn
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
     }));
   }
 
