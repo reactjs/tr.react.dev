@@ -29,11 +29,7 @@ React'te biraz daha farklıdır:
 </button>
 ```
 
-<<<<<<< HEAD
-React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışın `false` değeri döndürülerek engellenemiyor oluşudur. Bunun için `preventDefault` şeklinde açıkça yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, bir `<a>` elementinin yeni bir sayfayı açmasını engellemek için aşağıdaki gibi yazabilirsiniz:
-=======
-Another difference is that you cannot return `false` to prevent default behavior in React. You must call `preventDefault` explicitly. For example, with plain HTML, to prevent the default form behavior of submitting, you can write:
->>>>>>> ec2d0adcb44d6394f4e6282d8bf52f0e25dbfec3
+React'teki diğer bir farklılık ise, olaylardaki varsayılan davranışın `false` değeri döndürülerek engellenemiyor oluşudur. Bunun için `preventDefault` şeklinde açıkça yazarak tarayıcıya belirtmeniz gerekir. Örneğin düz bir HTML kodunda, form elemanının varsayılan davranışı olan `submit`i engellemek için aşağıdaki gibi bir kod yazabilirsiniz:
 
 ```html
 <form onsubmit="console.log('You clicked submit.'); return false">
@@ -41,7 +37,7 @@ Another difference is that you cannot return `false` to prevent default behavior
 </form>
 ```
 
-React'te ise varsayılan `<a>` elementi davranışını `e.preventDefault()` kodu ile engellemeniz gerekir:
+React'te ise varsayılan `form` elementi davranışını `e.preventDefault()` kodu ile engellemeniz gerekir:
 
 ```js{3}
 function Form() {
