@@ -207,7 +207,11 @@ Temel bir kural da, `map()` çağrısının içindeki elemanların anahtarlara i
 
 ### Anahtarlar Sadece Kardeşler Arasında Benzersiz Olmalıdır {#keys-must-only-be-unique-among-siblings}
 
+<<<<<<< HEAD
 Dizilerde kullanılan anahtarlar kardeşleri arasında benzersiz olmalıdır. Ancak, küresel olarak (uygulama genelinde) benzersiz olmaları gerekmez. İki farklı dizi ürettiğimizde aynı anahtarları kullanabiliriz:
+=======
+Keys used within arrays should be unique among their siblings. However, they don't need to be globally unique. We can use the same keys when we produce two different arrays:
+>>>>>>> 68e4efcf93b6e589355f6aa3cbc3f3c811c0ad37
 
 ```js{2,5,11,12,19,21}
 function Blog(props) {

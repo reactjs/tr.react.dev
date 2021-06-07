@@ -59,7 +59,11 @@ Eşzamanlı Mod hakkında daha fazla bilgi için, [Eşzamanlı Mod dökümanına
 
 `Suspense`, bileşenlerinizin bir şey render etmeden önce "beklemelerini" sağlar ve beklerken bir yedek gösterir.
 
+<<<<<<< HEAD
 Bu örnekte, `ProfileDetails` bazı verileri almak için asenkron bir API çağrısını bekliyor. `ProfileDetails` ve `ProfilePhoto` için beklerken bunun yerine `Loading...` yedeğini göstereceğiz. Şunu vurgulamakta yarar var: `<Suspense>` içinde bulunan tüm alt bileşenler yüklenene kadar, yedeği göstermeye devam ederiz.
+=======
+In this example, `ProfileDetails` is waiting for an asynchronous API call to fetch some data. While we wait for `ProfileDetails` and `ProfilePhoto`, we will show the `Loading...` fallback instead. It is important to note that until all children inside `<Suspense>` have loaded, we will continue to show the fallback.
+>>>>>>> 68e4efcf93b6e589355f6aa3cbc3f3c811c0ad37
 
 `Suspense` iki prop alır:
 * **fallback** bir yükleme göstergesi alır. Bu yedek `Suspense` bileşenine ait tüm alt bileşenlerin render edilmesini tamamlayana kadar gösterilir.

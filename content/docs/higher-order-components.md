@@ -298,7 +298,11 @@ const EnhancedComponent = enhance(WrappedComponent)
 
 ## Kural: Kolay Debug Etmek için Gösterilen Adı Kapsayın {#convention-wrap-the-display-name-for-easy-debugging}
 
+<<<<<<< HEAD
 HOC’lar tarafından yaratılan kapsayan bileşenler, diğer bileşenler gibi [React Developer Tools](https://github.com/facebook/react-devtools) tarafından gösterilir. Debug’lamayı kolaylaştırmak için, gösterilecek adı bu bileşenin bir HOC sonucu olduğunu belirtmesine özen gösterin.
+=======
+The container components created by HOCs show up in the [React Developer Tools](https://github.com/facebook/react/tree/master/packages/react-devtools) like any other component. To ease debugging, choose a display name that communicates that it's the result of a HOC.
+>>>>>>> 68e4efcf93b6e589355f6aa3cbc3f3c811c0ad37
 
 En yaygın teknik, kapsanan bileşenin gösterilen adını kapsamaktır. Yani eğer üst-seviye bileşeninizin adı `withSubscription` ise ve kapsanan bileşenin gösterilen adı `CommentList` ise, gösterilen ad olarak `withSubscription(CommentList)`’i kullanın:
 
