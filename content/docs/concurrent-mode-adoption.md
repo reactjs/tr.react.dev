@@ -17,13 +17,6 @@ next: concurrent-mode-reference.html
 
 >Dikkat:
 >
-<<<<<<< HEAD
->Bu sayfa, **henüz stabil sürümde yer almayan deneysel özellikleri** anlatmaktadır. Canlı ortamda React'in deneysel versiyonlarına güvenmeyin. Bu özellikler, React'in bir parçası olmadan önce büyük oranda ve haber verilmeden değişikliğe uğrayabilir.
->
->Bu dokümantasyonla erken adaptasyon yapanlar ve meraklı insanlar hedeflenmektedir. **Eğer React'te yeniyseniz, bu özellikleri önemsemeyin** -- bunları şu an öğrenmenize gerek yok.
-
->Dikkat:
->
 >Bu sayfa, kararlı bir sürümde henüz mevcut olmayan deneysel özellikler hakkındaydı. Erken benimseyenlere ve meraklı kişilere yönelikti. 
 >
 >Bu sayfadaki bilgilerin çoğu artık güncelliğini yitirmiştir ve yalnızca arşiv amaçlı olarak tutulmaktadır. Güncel bilgi için [React 18 Alfa duyuru postuna](/blog/2021/06/08/the-plan-for-react-18.html) bakınız.
