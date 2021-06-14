@@ -24,15 +24,11 @@ next: concurrent-mode-reference.html
 
 >Dikkat:
 >
->Aşağıdaki "Engelleme Modu" ve "createBlockingRoot" ile ilgili tüm kısımlar geçerliliğini yitirmiştir ve dikkate alınmamalıdır.
-=======
->This page was about experimental features that aren't yet available in a stable release. It was aimed at early adopters and people who are curious.
+>Bu sayfa, kararlı bir sürümde henüz mevcut olmayan deneysel özellikler hakkındaydı. Erken benimseyenlere ve meraklı kişilere yönelikti. 
 >
->Much of the information on this page is now outdated and exists only for archival purposes. **Please refer to the [React 18 Alpha announcement post](/blog/2021/06/08/the-plan-for-react-18.html
-) for the up-to-date information.**
+>Bu sayfadaki bilgilerin çoğu artık güncelliğini yitirmiştir ve yalnızca arşiv amaçlı olarak tutulmaktadır. Güncel bilgi için [React 18 Alfa duyuru postuna](/blog/2021/06/08/the-plan-for-react-18.html) bakınız.
 >
->Before React 18 is released, we will replace this page with stable documentation.
->>>>>>> f3baa6d075c8de475b688abf035d7054bc8a9606
+>React 18 yayınlamadan önce bu sayfadaki bilgileri güncelleyeceğiz.
 
 </div>
 
