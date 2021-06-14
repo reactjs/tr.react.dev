@@ -16,9 +16,11 @@ prev: concurrent-mode-adoption.html
 
 >Uyarı:
 >
->Bu sayfada, **kararlı bir sürümde [henüz bulunmayan](/docs/concurrent-mode-adoption.html) deneysel özellikler** açıklanmaktadır. Canlı ortam uygulamalarında React'in deneysel sürümlerine güvenmeyin. Bu özellikler React'in bir parçası haline gelmeden önce önemli ölçüde ve bir uyarı olmaksızın değişebilir.
+>Bu sayfa, kararlı bir sürümde henüz mevcut olmayan deneysel özellikler hakkındaydı. Erken benimseyenlere ve meraklı kişilere yönelikti. 
 >
->Bu dokümantasyon erken benimseyenlere ve meraklı kişilere yöneliktir. **React'te yeniyseniz, bu özellikler hakkında meraklanmayın** -- bunları şu an öğrenmenize gerek yok.
+>Bu sayfadaki bilgilerin çoğu artık güncelliğini yitirmiştir ve yalnızca arşiv amaçlı olarak tutulmaktadır. Güncel bilgi için [React 18 Alfa duyuru postuna](/blog/2021/06/08/the-plan-for-react-18.html) bakınız.
+>
+>React 18 yayınlamadan önce bu sayfadaki bilgileri güncelleyeceğiz.
 
 </div>
 
