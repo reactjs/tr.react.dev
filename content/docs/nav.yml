@@ -132,26 +132,8 @@
     - id: testing-recipes
       title: Test Tarifleri
     - id: testing-environments
-<<<<<<< HEAD
       title: Test Ortamları
-- title: Eşzamanlı Mod (Deneysel)
-  isOrdered: true
-  items:
-    - id: concurrent-mode-intro
-      title: Eşzamanlı Mod'a Giriş
-    - id: concurrent-mode-suspense
-      title: Veri Çekmek için Suspense
-    - id: concurrent-mode-patterns
-      title: Eşzamanlı UI Modelleri
-    - id: concurrent-mode-adoption
-      title: Eşzamanlı Mod'u Benimsemek
-    - id: concurrent-mode-reference
-      title: Eşzamanlı Mod API Kaynağı
 - title: Katkı Sağlamak
-=======
-      title: Testing Environments
-- title: Contributing
->>>>>>> f3baa6d075c8de475b688abf035d7054bc8a9606
   items:
     - id: how-to-contribute
       title: Nasıl Katkı Sağlarsınız?
