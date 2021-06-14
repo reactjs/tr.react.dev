@@ -9,11 +9,7 @@ redirect_from:
   - "docs/forms-zh-CN.html"
 ---
 
-<<<<<<< HEAD
-HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çalışır; çünkü form elemanlarının kendilerine has iç state'leri vardır. Örneğin, bu kod HTML’de bir form içerisinde isim girilmesini ister:
-=======
-HTML form elements work a bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
->>>>>>> f3baa6d075c8de475b688abf035d7054bc8a9606
+HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çalışır; çünkü form elemanlarının kendilerine has iç state'leri vardır. Örneğin, düz HTML'de yazılmış bu form, tek bir isim (name) değeri kabul etmektedir.
 
 ```html
 <form>
