@@ -96,11 +96,7 @@ Uygulamanızın ihtiyaç duyduğu state'in mutlak asgari temsilini belirleyin ve
   * Checkbox'ın değeri
   * Filtrelenmiş ürün listesi
 
-<<<<<<< HEAD
 Her birini gözden geçirelim ve hangisinin state'e dahil olduğunu bulalım. Bunun için, her veri parçasına dair üç soru sorun:
-=======
-Think of all the pieces of data in our example application. We have:
->>>>>>> f3baa6d075c8de475b688abf035d7054bc8a9606
 
   1. Üst elemandan prop'lar aracılığıyla mı iletilmiş? Öyleyse state'e ait değildir.
   2. Zaman içerisinde değişiklik göstermiyor mu? Öyleyse state'e ait değildir.
