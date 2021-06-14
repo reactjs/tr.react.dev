@@ -16,9 +16,18 @@ prev: concurrent-mode-adoption.html
 
 >Uyarı:
 >
+<<<<<<< HEAD
 >Bu sayfada, **kararlı bir sürümde [henüz bulunmayan](/docs/concurrent-mode-adoption.html) deneysel özellikler** açıklanmaktadır. Canlı ortam uygulamalarında React'in deneysel sürümlerine güvenmeyin. Bu özellikler React'in bir parçası haline gelmeden önce önemli ölçüde ve bir uyarı olmaksızın değişebilir.
 >
 >Bu dokümantasyon erken benimseyenlere ve meraklı kişilere yöneliktir. **React'te yeniyseniz, bu özellikler hakkında meraklanmayın** -- bunları şu an öğrenmenize gerek yok.
+=======
+>This page was about experimental features that aren't yet available in a stable release. It was aimed at early adopters and people who are curious.
+>
+>Much of the information on this page is now outdated and exists only for archival purposes. **Please refer to the [React 18 Alpha announcement post](/blog/2021/06/08/the-plan-for-react-18.html
+) for the up-to-date information.**
+>
+>Before React 18 is released, we will replace this page with stable documentation.
+>>>>>>> f3baa6d075c8de475b688abf035d7054bc8a9606
 
 </div>
 
@@ -59,7 +68,11 @@ Eşzamanlı Mod hakkında daha fazla bilgi için, [Eşzamanlı Mod dökümanına
 
 `Suspense`, bileşenlerinizin bir şey render etmeden önce "beklemelerini" sağlar ve beklerken bir yedek gösterir.
 
+<<<<<<< HEAD
 Bu örnekte, `ProfileDetails` bazı verileri almak için asenkron bir API çağrısını bekliyor. `ProfileDetails` ve `ProfilePhoto` için beklerken bunun yerine `Loading...` yedeğini göstereceğiz. Şunu vurgulamakta yarar var: `<Suspense>` içinde bulunan tüm alt bileşenler yüklenene kadar, yedeği göstermeye devam ederiz.
+=======
+In this example, `ProfileDetails` is waiting for an asynchronous API call to fetch some data. While we wait for `ProfileDetails` and `ProfilePhoto`, we will show the `Loading...` fallback instead. It is important to note that until all children inside `<Suspense>` have loaded, we will continue to show the fallback.
+>>>>>>> f3baa6d075c8de475b688abf035d7054bc8a9606
 
 `Suspense` iki prop alır:
 * **fallback** bir yükleme göstergesi alır. Bu yedek `Suspense` bileşenine ait tüm alt bileşenlerin render edilmesini tamamlayana kadar gösterilir.
