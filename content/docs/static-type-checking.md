@@ -306,9 +306,17 @@ declare module 'querystring' {
 ```
 Şimdi kodlamaya hazırsınız! Size tavsiyemiz, TypeScript hakkında daha fazla bilgiye ulaşmak için aşağıdaki kaynaklara bir göz atmanız:
 
+<<<<<<< HEAD
 * [TypeScript Dokümantasyonu: Temel Tipler](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 * [TypeScript Dokümantasyonu: JavaScript'ten Göç](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 * [TypeScript Dokümantasyonu: React ve Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+=======
+You are now ready to code! We recommend to check out the following resources to learn more about TypeScript:
+
+* [TypeScript Documentation: Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+* [TypeScript Documentation: Migrating from JavaScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+* [TypeScript Documentation: React and Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+>>>>>>> 25f756d8e3800afb032cb31ce3626d6134e31e38
 
 ## Reason {#reason}
 

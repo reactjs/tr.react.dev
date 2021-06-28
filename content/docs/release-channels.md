@@ -16,7 +16,11 @@ React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek](ht
 
 - [**En Yeni**](#latest-channel), istikrarlı, semver React sürümleri içindir. React'i npm'den yüklediğinizde elde edeceğiniz şey budur. Bugün kullandığınız kanal bu. **Bunu kullanıcılara yönelik tüm React uygulamaları için kullanın.**
 
+<<<<<<< HEAD
 - [**Sonraki**](#next-channel), React kaynak kodu veri havuzunun ana dalını izler. Bunları bir sonraki küçük semver sürümü için aday olarak düşünebilirsiniz. React ve üçüncü taraf projeleri arasındaki entegrasyon testi için bunu kullanın.
+=======
+All releases are published to npm, but only Latest uses [semantic versioning](/docs/faq-versioning.html). Prereleases (those in the Next and Experimental channels) have versions generated from a hash of their contents and the commit date, e.g. `0.0.0-68053d940-20210623` for Next and `0.0.0-experimental-68053d940-20210623` for Experimental.
+>>>>>>> 25f756d8e3800afb032cb31ce3626d6134e31e38
 
 - [**Deneysel**](#eperimental-channel), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
 
@@ -37,7 +41,11 @@ Güncellemelerin son derece istikrarlı olmasını bekleyebilirsiniz. Sürümler
 
 ### Sonraki Kanalı {#next-channel}
 
+<<<<<<< HEAD
 Sonraki kanal, React kaynak kodu ana dalını izleyen bir yayın öncesi kanaldır. Bir Sonraki kanaldaki yayın öncesi sürümleri, En Son kanal için yayın adayları olarak kullanıyoruz. İleri kanalını , daha sık güncellenen En Yeni kanalının  üstkümesi olarak düşünebilirsiniz.
+=======
+Releases in Next are published with the `next` tag on npm. Versions are generated from a hash of the build's contents and the commit date, e.g. `0.0.0-68053d940-20210623`.
+>>>>>>> 25f756d8e3800afb032cb31ce3626d6134e31e38
 
 En son yayınlanan Sonraki sürüm ile en Yeni sürüm arasındaki fark, iki küçük dönem sürümü arasında bulacağınız farkla yaklaşık olarak aynı değere sahiptir. Ancak, **Sonraki kanalı, semantik sürümlemeye uymaz.** Sonraki kanalda birbirini izleyen sürümler arasında zaman zaman değişiklik yapılması beklenmelidir.
 
@@ -83,6 +91,10 @@ Deneysel sürümler, Sonraki ve En Yeni sürümlerden daha farklı olabilir. **D
 
 Deneysel sürümler npm'de `experimental` etiketi ile yayınlanır. Sürümler, yapının kendi içeriğinin bir karma değerinden oluşturulur, örneğin; `0.0.0-experimental-1022ee0ec`.
 
+<<<<<<< HEAD
+=======
+Releases in Experimental are published with the `experimental` tag on npm. Versions are generated from a hash of the build's contents and the commit date, e.g. `0.0.0-experimental-68053d940-20210623`.
+>>>>>>> 25f756d8e3800afb032cb31ce3626d6134e31e38
 
 #### Deneysel Bir Sürümde Neler Oluyor? {#what-goes-into-an-experimental-release}
 
