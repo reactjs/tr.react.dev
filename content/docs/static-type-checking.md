@@ -256,7 +256,11 @@ Bunu iki adımda çözeceğiz:
 ```
 Harika! Şimdi inşa betiğimizi çalıştırdığımızda, derleyici üretilen javascript'i `build` dizinine koyacak. Ayrıca [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter/blob/master/tsconfig.json), başlangıç için uygun bir kurallar bütününü size sunuyor.
 
+<<<<<<< HEAD
 Genellikle üretilen javascript'i kaynak kontrolünüzde tutmak istemezsiniz. Bu yüzden, `build` dizininizi `.gitignore` dosyanıza eklediğinizden emin olun.
+=======
+Great! Now when we run our build script the compiler will output the generated javascript to the `build` folder. The [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter/blob/main/tsconfig.json) provides a `tsconfig.json` with a good set of rules to get you started.
+>>>>>>> 0bb0303fb704147452a568472e968993f0729c28
 
 ### Dosya uzantıları {#file-extensions}
 React'te bileşenlerinizi muhtemelen bir `.js` dosyasına yazıyorsunuzdur. TypeScript'te ise iki dosya uzantımız var:
@@ -306,15 +310,29 @@ declare module 'querystring' {
 ```
 Şimdi kodlamaya hazırsınız! Size tavsiyemiz, TypeScript hakkında daha fazla bilgiye ulaşmak için aşağıdaki kaynaklara bir göz atmanız:
 
+<<<<<<< HEAD
 * [TypeScript Dokümantasyonu: Temel Tipler](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 * [TypeScript Dokümantasyonu: JavaScript'ten Göç](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 * [TypeScript Dokümantasyonu: React ve Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+=======
+You are now ready to code! We recommend to check out the following resources to learn more about TypeScript:
 
-## Reason {#reason}
+* [TypeScript Documentation: Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+* [TypeScript Documentation: Migrating from JavaScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+* [TypeScript Documentation: React and Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+>>>>>>> 0bb0303fb704147452a568472e968993f0729c28
 
+## ReScript {#rescript}
+
+<<<<<<< HEAD
 [Reason](https://reasonml.github.io/) yeni bir dil değil, güvenilirliği zaten kanıtlanmış olan [OCaml](https://ocaml.org/) ile güçlendirmiş yeni bir sözdizimi ve araçlar zincidir. Reason, OCaml'a JavaScript programcılarına yönelik bilindik bir sözdizimi verir ve mevcut NPM/Yarn iş akışlarına hakim kişilerin ihtiyaçlarını karşılar.
 
 Reason Facebook'ta geliştirilmekte ve Messenger gibi kimi ürünlerinde kullanılmaktadır. Hala biraz deneyseldir ama Facebook tarafından sürdürülen [React'e adanmış bağlamaları](https://reasonml.github.io/reason-react/) ve [enerjik bir topluluğu](https://reasonml.github.io/docs/en/community.html) vardır.
+=======
+[ReScript](https://rescript-lang.org/) is a typed language that compiles to JavaScript. Some of its core features are  guaranteed 100% type coverage, first-class JSX support and [dedicated React bindings](https://rescript-lang.org/docs/react/latest/introduction) to allow integration in existing JS / TS React codebases.
+
+You can find more infos on integrating ReScript in your existing JS / React codebase [here](https://rescript-lang.org/docs/manual/latest/installation#integrate-into-an-existing-js-project).
+>>>>>>> 0bb0303fb704147452a568472e968993f0729c28
 
 ## Kotlin {#kotlin}
 

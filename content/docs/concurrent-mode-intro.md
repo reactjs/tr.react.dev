@@ -39,7 +39,11 @@ Bu özellikler hala deneyseldir ve değişime açıktır. Stabil React versiyonu
 
 ## Engelleyici Render Etmek, Kesilebilir Render Etmeye Karşı {#blocking-vs-interruptible-rendering}
 
+<<<<<<< HEAD
 **Eşzamanlı Mod'u açıklamak için versiyon kontrolünü bir metafor olarak kullanacağız.** Eğer bir yazılım geliştirme takımı ile çalışıyorsanız, büyük ihtimalle Git gibi bir versiyon kontrol sistemi kullanıyor ve branch'ler üzerinde çalışıyorsunuzdur. Branch'iniz hazır olduğunda diğer insanlar da üzerinde çalışabilsin diye master branch ile birleştirebilirsiniz.
+=======
+**To explain Concurrent Mode, we'll use version control as a metaphor.** If you work on a team, you probably use a version control system like Git and work on branches. When a branch is ready, you can merge your work into main so that other people can pull it.
+>>>>>>> 0bb0303fb704147452a568472e968993f0729c28
 
 Versiyon kontrolü var olmadan önce geliştirme iş akışı çok farklıydı. Branch gibi bir konsept yoktu. Birkaç dosyayı düzenlemek istediğinizde herkese haber vermeliydiniz ki işiniz bitene kadar kimse bu dosyalara dokunmasın. Herhangi birisiyle eşzamanlı olarak çalışmaya bile başlayamazdınız - resmen *bloklanırdınız*.
 
@@ -63,7 +67,11 @@ Eşzamanlı Mod tekniği, kullanıcı arayüzlerindeki girdi bekletme ve baskıl
 
 ### Bilinçli Yükleme Sekansları {#intentional-loading-sequences}
 
+<<<<<<< HEAD
 Daha önce Eşzamanlı Mod'un, React'in "bir branch üzerinde" çalışıyormuş gibi işlediğinden bahsetmiştik. Branch'ler, kısa süreli çözümlerde olduğu gibi, yapımı uzun sürecek özelliklerde de faydalıdır. Bazı zamanlar, master branch ile birleştirilebilecek duruma gelmesi haftalar alabilecek özellikler üzerinde çalışıyor olabilirsiniz. Versiyon kontrol metaforumuzun bu tarafı da render etmeye uygulanabilir.
+=======
+We've said before that Concurrent Mode is like React working "on a branch". Branches are useful not only for short-term fixes, but also for long-running features. Sometimes you might work on a feature, but it could take weeks before it's in a "good enough state" to merge into main. This side of our version control metaphor applies to rendering too.
+>>>>>>> 0bb0303fb704147452a568472e968993f0729c28
 
 Bir uygulama üzerinde iki farklı sayfa arasında geçiş yaptığımızı hayal edin. Bazı durumlarda kullanıcıya yeterli kalitede bir yükleme sekansı veremeyecek kadar kod ya da veri yüklenmemiş olabilir. Boş bir ekrana geçiş yapmak ya da kocaman bir dönen çubuk görmek hoş bir deneyim olmayacaktır. Ancak, gerekli kod ve verinin elde edilmesinin çok uzun sürmemesi de oldukça sık rastlanan bir durumdur. **Böyle bir durumda React eski ekranda biraz daha kalsa ve yeni ekranı göstermeden önce "kötü yükleme sekansını" "pas geçse" iyi olmaz mıydı?**
 
