@@ -38,11 +38,7 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **i
 
 React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new) veya [Stackblitz](https://stackblitz.com/fork/react) seçeneklerinden birisiyle bir Merhaba Dünya şablonu deneyin.
 
-<<<<<<< HEAD
-Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
-=======
-If you prefer to use your own text editor, you can also [download this HTML file](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html), edit it, and open it from the local filesystem in your browser. It does a slow runtime code transformation, so we'd only recommend using this for simple demos.
->>>>>>> 0bb0303fb704147452a568472e968993f0729c28
+Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
 ### Bir Web Sitesine React Ekleyin {#add-react-to-a-website}
 
@@ -120,11 +116,7 @@ Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek iste
 
 Twitter'da [@reactjs hesabını](https://twitter.com/reactjs) da takip edebilirsiniz, ama sadece blogu okursanız önemli hiç bir şeyi kaçırmazsınız.
 
-<<<<<<< HEAD
-Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react/releases) sayfasında bulabilirsiniz.
-=======
-Not every React release deserves its own blog post, but you can find a detailed changelog for every release in the [`CHANGELOG.md` file in the React repository](https://github.com/facebook/react/blob/main/CHANGELOG.md), as well as on the [Releases](https://github.com/facebook/react/releases) page.
->>>>>>> 0bb0303fb704147452a568472e968993f0729c28
+Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/main/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react/releases) sayfasında bulabilirsiniz.
 
 ## Versiyon Anlatımı {#versioned-documentation}
 
