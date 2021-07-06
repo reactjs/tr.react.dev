@@ -324,11 +324,7 @@ State taşıma daha çok genel hatlarıyla kod yazmayı ve iki yönlü bağlama 
 
 Eğer herhangi bir şey prop'tan veya state'ten türetilebilirse, büyük ihtimalle o state'te olmamalıdır. Örneğin, hem `celsiusValue` hem de `fahrenheitValue` tutmaktansa, sadece en son değiştirilen `temperature` ve onun `scale`'ini tutarız. Diğer input'un değeri böylelikle bu değerler ile `render()` metodunda hesaplanabilir. Bu bize, kullanıcı input girişinde herhangi bir hesaplama hassasiyetini kaybetirmeden yuvarlama işlemini diğer input'a uygulamamızı veya silmemizi sağlar.
 
-<<<<<<< HEAD
-Kullanıcı arayüzünde yanlış bir şey gördüğünüzde, [React Developer Tools](https://github.com/facebook/react/tree/master/packages/react-devtools)'u prop'ları incelemek ve state'i güncellemekle sorumlu olan bileşeni bulabilmek için kullanabilirsiniz. Bu, size hataları kaynağına kadar izleme olanağı sağlar:
-=======
-When you see something wrong in the UI, you can use [React Developer Tools](https://github.com/facebook/react/tree/main/packages/react-devtools) to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:
->>>>>>> 0bb0303fb704147452a568472e968993f0729c28
+Kullanıcı arayüzünde yanlış bir şey gördüğünüzde, [React Developer Tools](https://github.com/facebook/react/tree/main/packages/react-devtools)'u prop'ları incelemek ve state'i güncellemekle sorumlu olan bileşeni bulabilmek için kullanabilirsiniz. Bu, size hataları kaynağına kadar izleme olanağı sağlar:
 
 <img src="../images/docs/react-devtools-state.gif" alt="Monitoring State in React DevTools" max-width="100%" height="100%">
 
