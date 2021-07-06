@@ -38,7 +38,7 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **i
 
 React ile vakit geçirmek istiyorsanız, çevrimiçi bir kod oyun alanını kullanabilirsiniz. [CodePen](codepen://hello-world), [CodeSandbox](https://codesandbox.io/s/new) veya [Stackblitz](https://stackblitz.com/fork/react) seçeneklerinden birisiyle bir Merhaba Dünya şablonu deneyin.
 
-Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
+Kendi metin düzenleyicinizi kullanmayı tercih ediyorsanız [bu HTML dosyasını](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html) da indirebilir, düzenleyebilir ve sisteminizde kurulu bir tarayıcı ile açabilirsiniz. Yavaş bir kod işleme dönüşümü yapar, bu yüzden bunu basit gösteriler için kullanmanızı tavsiye ederiz.
 
 ### Bir Web Sitesine React Ekleyin {#add-react-to-a-website}
 
@@ -116,7 +116,7 @@ Bu bölüm, belirli bir React API hakkında daha fazla ayrıntı öğrenmek iste
 
 Twitter'da [@reactjs hesabını](https://twitter.com/reactjs) da takip edebilirsiniz, ama sadece blogu okursanız önemli hiç bir şeyi kaçırmazsınız.
 
-Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/master/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react/releases) sayfasında bulabilirsiniz.
+Her React sürümü kendi blog gönderisini hak etmiyor ama her sürüm için yapılan değişikliklerin ayrıntılarını [React reposundaki `CHANGELOG.md` dosyasında](https://github.com/facebook/react/blob/main/CHANGELOG.md) ve [Sürümler](https://github.com/facebook/react/releases) sayfasında bulabilirsiniz.
 
 ## Versiyon Anlatımı {#versioned-documentation}
 

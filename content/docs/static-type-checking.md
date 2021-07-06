@@ -306,15 +306,15 @@ declare module 'querystring' {
 ```
 Şimdi kodlamaya hazırsınız! Size tavsiyemiz, TypeScript hakkında daha fazla bilgiye ulaşmak için aşağıdaki kaynaklara bir göz atmanız:
 
-* [TypeScript Dokümantasyonu: Temel Tipler](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+* [TypeScript Dokümantasyonu: Temel Tipler](https://www.typescriptlang.org/docs/handbook/2/basic-types.html)
 * [TypeScript Dokümantasyonu: JavaScript'ten Göç](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 * [TypeScript Dokümantasyonu: React ve Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
 
-## Reason {#reason}
+## ReScript {#rescript}
 
-[Reason](https://reasonml.github.io/) yeni bir dil değil, güvenilirliği zaten kanıtlanmış olan [OCaml](https://ocaml.org/) ile güçlendirmiş yeni bir sözdizimi ve araçlar zincidir. Reason, OCaml'a JavaScript programcılarına yönelik bilindik bir sözdizimi verir ve mevcut NPM/Yarn iş akışlarına hakim kişilerin ihtiyaçlarını karşılar.
+[ReScript](https://rescript-lang.org/) is a typed language that compiles to JavaScript. Some of its core features are  guaranteed 100% type coverage, first-class JSX support and [dedicated React bindings](https://rescript-lang.org/docs/react/latest/introduction) to allow integration in existing JS / TS React codebases.
 
-Reason Facebook'ta geliştirilmekte ve Messenger gibi kimi ürünlerinde kullanılmaktadır. Hala biraz deneyseldir ama Facebook tarafından sürdürülen [React'e adanmış bağlamaları](https://reasonml.github.io/reason-react/) ve [enerjik bir topluluğu](https://reasonml.github.io/docs/en/community.html) vardır.
+You can find more infos on integrating ReScript in your existing JS / React codebase [here](https://rescript-lang.org/docs/manual/latest/installation#integrate-into-an-existing-js-project).
 
 ## Kotlin {#kotlin}
 

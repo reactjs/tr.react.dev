@@ -159,7 +159,7 @@ JSX'i projenizde denemenin en hızlı yolu, bu `<script>` etiketini sayfanıza e
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 ```
 
-Şimdi JSX'i, herhangi bir `<script>` etikete `type="text/babel"` niteligini ekleyerek kullanabilirsiniz. İşte indirebileceğiniz ve JSX ile oynayabileceğiniz [örnek bir HTML dosyası](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html).
+Şimdi JSX'i, herhangi bir `<script>` etikete `type="text/babel"` niteligini ekleyerek kullanabilirsiniz. İşte indirebileceğiniz ve JSX ile oynayabileceğiniz [örnek bir HTML dosyası](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html).
 
 Bu yaklaşım, öğrenmek ve basit demolar oluşturmak için iyidir. Ancak, web sitenizi yavaşlatır ve **uygulamayı yayınlamaya uygun değildir**. İlerlemeye hazır olduğunuzda, bu yeni `<script>` etiketi ve eklediğiniz `type="text/babel"` özelliklerini kaldırın. Bunun yerine, bir sonraki bölümde tüm `<script>` etiketlerinizi otomatik olarak dönüştürmek için bir JSX ön-işleyici kuracaksınız.
 

@@ -20,7 +20,6 @@ React, hata raporlarını dosyalamak, pull request açmak ve [RFC göndermek](ht
 
 - [**Deneysel**](#eperimental-channel), kararlı sürümlerde bulunmayan deneysel API'leri ve özellikleri içerir. Bunlar ayrıca ana dalı izler, ancak ek özellik bayrakları açıktır. Gelecek özellikleri yayınlanmadan önce denemek için bunu kullanın.
 
-
 Tüm sürümler npm'de yayınlanır, ancak yalnızca en yeni kullanımlar [anlamsal sürüm oluşturma](/docs/faq-versioning.html). Ön yayınlar (Sonraki ve Deneysel kanallarında bulunanlar), kendi içeriklerinin bir karma değerinden oluşturulan sürümlere sahiptir, örneğin İleri için `0.0.0-1022ee0ec` ve Deney için `0.0.0-experimental-1022ee0ec`.
 
 
@@ -33,11 +32,15 @@ En Yeni, istikrarlı React sürümleri için kullanılan kanaldır. Npm'deki `la
 
 **Hangi kanalı kullanmanız gerektiğinden emin değilseniz, kullanmanız gereken kanal En Yeni kanalıdır.** Bir React yazılımcısıysanız, zaten kullandığınız budur.
 
+The Next channel is a prerelease channel that tracks the main branch of the React repository. We use prereleases in the Next channel as release candidates for the Latest channel. You can think of Next as a superset of Latest that is updated more frequently.
+
 Güncellemelerin son derece istikrarlı olmasını bekleyebilirsiniz. Sürümler semantik versiyonlama şemasını takip eder. [Sürüm oluşturma politikamız](/docs/faq-versioning.html) sayfasından istikrarlılık ve aşamalı geçiş taahhüdümüz hakkında daha fazla bilgi edininiz.
 
 ### Sonraki Kanalı {#next-channel}
 
 Sonraki kanal, React kaynak kodu ana dalını izleyen bir yayın öncesi kanaldır. Bir Sonraki kanaldaki yayın öncesi sürümleri, En Son kanal için yayın adayları olarak kullanıyoruz. İleri kanalını , daha sık güncellenen En Yeni kanalının  üstkümesi olarak düşünebilirsiniz.
+
+Releases in Next are published with the `next` tag on npm. Versions are generated from a hash of the build's contents and the commit date, e.g. `0.0.0-68053d940-20210623`.
 
 En son yayınlanan Sonraki sürüm ile en Yeni sürüm arasındaki fark, iki küçük dönem sürümü arasında bulacağınız farkla yaklaşık olarak aynı değere sahiptir. Ancak, **Sonraki kanalı, semantik sürümlemeye uymaz.** Sonraki kanalda birbirini izleyen sürümler arasında zaman zaman değişiklik yapılması beklenmelidir.
 
@@ -79,9 +82,11 @@ Sonraki kanalı gibi, Deneysel kanal da React deposunun ana dalını izleyen bir
 
 Genellikle Sonraki kanalına yönelik bir güncellemeye, Deneysel kanalına karşılık gelen bir güncelleme eşlik eder. Aynı kaynak revizyonuna dayanırlar, ancak farklı bir özellik bayrağı seti kullanılarak oluşturulmuştur.
 
+Like Next, the Experimental channel is a prerelease channel that tracks the main branch of the React repository. Unlike Next, Experimental releases include additional features and APIs that are not ready for wider release.
+
 Deneysel sürümler, Sonraki ve En Yeni sürümlerden daha farklı olabilir. **Deneysel sürümleri kullanıcılara yönelik uygulamalarda kullanmayınız.** Deney kanalındaki sürümler arasında sık sık değişiklik yapılmasını beklemelisiniz.
 
-Deneysel sürümler npm'de `experimental` etiketi ile yayınlanır. Sürümler, yapının kendi içeriğinin bir karma değerinden oluşturulur, örneğin; `0.0.0-experimental-1022ee0ec`.
+Deneysel sürümler npm'de `experimental` etiketi ile yayınlanır. Sürümler, yapının kendi içeriğinin bir karma değerinden oluşturulur, örneğin; `0.0.0-experimental-68053d940-20210623`.
 
 
 #### Deneysel Bir Sürümde Neler Oluyor? {#what-goes-into-an-experimental-release}
@@ -100,4 +105,4 @@ Bir özellik belgelenmezse, bir [RFC](https://github.com/reactjs/rfcs) eşlik ed
 
 Yeni deneyleri duyurmaya hazır olduğumuzda [React blog](/blog)'da  yayınlayacağız, ancak bu, her denemeyi yayınlayacağımız anlamına gelmez.
 
-Kapsamlı bir değişiklik listesi için her zaman herkese açık olan GitHub depomuzun [geçmişine](https://github.com/facebook/react/commits/master) başvurabilirsiniz.
+Kapsamlı bir değişiklik listesi için her zaman herkese açık olan GitHub depomuzun [geçmişine](https://github.com/facebook/react/commits/main) başvurabilirsiniz.
