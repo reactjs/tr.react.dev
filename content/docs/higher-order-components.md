@@ -14,7 +14,11 @@ const EnhancedComponent = higherOrderComponent(WrappedComponent);
 
 Bir bileşen; proplarını kullanıcı arayüzüne çevirirken, üst-seviye bir bileşen başka bir bileşeni alıp farklı bir bileşene çevirir.
 
+<<<<<<< HEAD
 HOC'lar Redux'un [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect) ve Relay'in [`createFragmentContainer`](https://relay.dev/docs/v10.1.3/fragment-container/#createfragmentcontainer) gibi üçüncü taraf React kütüphanelerinde yaygındır.
+=======
+HOCs are common in third-party React libraries, such as Redux's [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect) and Relay's [`createFragmentContainer`](https://relay.dev/docs/v10.1.3/fragment-container/#createfragmentcontainer).
+>>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 Bu dokümanda neden üst-seviye bileşenlerin kullanışlı olduğunu tartışıp, bunları nasıl yazabileceğiniz hakkında konuşacağız.
 
@@ -298,7 +302,11 @@ const EnhancedComponent = enhance(WrappedComponent)
 
 ## Kural: Kolay Debug Etmek için Gösterilen Adı Kapsayın {#convention-wrap-the-display-name-for-easy-debugging}
 
+<<<<<<< HEAD
 HOC’lar tarafından yaratılan kapsayan bileşenler, diğer bileşenler gibi [React Developer Tools](https://github.com/facebook/react/tree/master/packages/react-devtools) tarafından gösterilir. Debug işlemini kolaylaştırmak için, gösterilecek adı bu bileşenin bir HOC sonucu olduğunu belirtmesine özen gösterin.
+=======
+The container components created by HOCs show up in the [React Developer Tools](https://github.com/facebook/react/tree/main/packages/react-devtools) like any other component. To ease debugging, choose a display name that communicates that it's the result of a HOC.
+>>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 En yaygın teknik, kapsanan bileşenin gösterilen adını kapsamaktır. Yani eğer üst-seviye bileşeninizin adı `withSubscription` ise ve kapsanan bileşenin gösterilen adı `CommentList` ise, gösterilen ad olarak `withSubscription(CommentList)`’i kullanın:
 

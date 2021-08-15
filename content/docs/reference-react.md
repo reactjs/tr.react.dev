@@ -175,12 +175,16 @@ Verilen tipte yeni bir [React elemanı](/docs/rendering-elements.html) oluşturu
 ```
 React.cloneElement(
   element,
-  [props],
+  [config],
   [...children]
 )
 ```
 
+<<<<<<< HEAD
 Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. Elde edilen eleman, orjinal elemanın prop'larına yeni prop'ları ile yüzeysel olarak birleştirilmiş bir biçimde sahip olacaktır. Yeni alt eleman varolan alt elemanın yerine geçecektir. Orjinal elemandan gelen `key` ve `ref` korunacaktır.
+=======
+Clone and return a new React element using `element` as the starting point. `config` should contain all new props, `key`, or `ref`. The resulting element will have the original element's props with the new props merged in shallowly. New children will replace existing children. `key` and `ref` from the original element will be preserved if no `key` and `ref` present in the `config`.
+>>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 `React.cloneElement()` neredeyse şuna eşdeğerdir:
 
@@ -188,7 +192,11 @@ Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. El
 <element.type {...element.props} {...props}>{children}</element.type>
 ```
 
+<<<<<<< HEAD
 Ancak, aynı zamanda `ref`'leri de korur. Bu, üzerinde `ref` bulunan bir alt eleman alırsanız, ona üst eleman üzerinden ulaşamayacağınız anlamına gelir. Yeni elemanınız üzerinde aynı `ref` bağlı olarak gelecektir.
+=======
+However, it also preserves `ref`s. This means that if you get a child with a `ref` on it, you won't accidentally steal it from your ancestor. You will get the same `ref` attached to your new element. The new `ref` or `key` will replace old ones if present.
+>>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 Bu API, kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yerine geçmiştir.
 

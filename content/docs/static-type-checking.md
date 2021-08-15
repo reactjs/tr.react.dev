@@ -256,7 +256,11 @@ Bunu iki adımda çözeceğiz:
 ```
 Harika! Şimdi inşa betiğimizi çalıştırdığımızda, derleyici üretilen javascript'i `build` dizinine koyacak. Ayrıca [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter/blob/master/tsconfig.json), başlangıç için uygun bir kurallar bütününü size sunuyor.
 
+<<<<<<< HEAD
 Genellikle üretilen javascript'i kaynak kontrolünüzde tutmak istemezsiniz. Bu yüzden, `build` dizininizi `.gitignore` dosyanıza eklediğinizden emin olun.
+=======
+Great! Now when we run our build script the compiler will output the generated javascript to the `build` folder. The [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter/blob/master/tsconfig.json) provides a `tsconfig.json` with a good set of rules to get you started.
+>>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 ### Dosya uzantıları {#file-extensions}
 React'te bileşenlerinizi muhtemelen bir `.js` dosyasına yazıyorsunuzdur. TypeScript'te ise iki dosya uzantımız var:

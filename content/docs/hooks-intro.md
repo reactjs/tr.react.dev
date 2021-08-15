@@ -98,7 +98,11 @@ React geliştiricilerinin ürünlerini teslim etmeye odaklandığını ve yayım
 
 Meraklı okuyucular için, daha detaylıca motivasyonu işleyen ve belirli tasarım kararları ve önceki ilgili teknikler hakkında ekstra perspektif sağlayan [detaylı RFC](https://github.com/reactjs/rfcs/pull/68)'i hazırladık.
 
+<<<<<<< HEAD
 **Önemli olan Hook'lar, mevcut kodla yan yana çalışır, böylece bunları aşamalı olarak kullanabilirsiniz.** Hook'lara geçmeniz için acele etmenize gerek yok. Özellikle mevcut, karmaşık sınıf bileşenlerinizi "yeniden yazmak"tan kaçınmanızı öneririz. “Hook'ları anlamak" biraz zaman alabilir. Tecrübelerimize göre, Hook'ları öncelikle yeni ve kritik olmayan bileşenlerde kullanarak pratik yapmak ve ekibinizdeki herkesin kendisini bunu konuda rahat hissetmesini sağlamak en iyisi. Hook'ları denedikten sonra, lütfen bize olumlu ya da olumsuz [geri bildirim gönderin](https://github.com/facebook/react/issues/new).
+=======
+**Crucially, Hooks work side-by-side with existing code so you can adopt them gradually.** There is no rush to migrate to Hooks. We recommend avoiding any "big rewrites", especially for existing, complex class components. It takes a bit of a mind shift to start "thinking in Hooks". In our experience, it's best to practice using Hooks in new and non-critical components first, and ensure that everybody on your team feels comfortable with them. After you give Hooks a try, please feel free to [send us feedback](https://github.com/facebook/react/issues/new), positive or negative.
+>>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 Hook'ların sınıflar için mevcut tüm kullanım durumlarını kapsamasını istiyoruz, ancak **öngörülebilir gelecek için sınıf bileşenlerini desteklemeye devam edeceğiz.** Facebook'ta, sınıf olarak yazılmış on binlerce bileşene sahibiz ve bunları yeniden yazmak için kesinlikle hiçbir planımız yok. Bunun yerine, yeni kodda Hook'ları yan yana sınıflarla kullanmaya başlıyoruz.
 
