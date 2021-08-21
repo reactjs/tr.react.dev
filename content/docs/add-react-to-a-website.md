@@ -123,11 +123,7 @@ JavaScript dosyalarınız için bir küçültme adımınız yoksa [ayarlamanın 
 
 ## İsteğe bağlı: React'i JSX ile deneyin {#optional-try-react-with-jsx}
 
-<<<<<<< HEAD
 Yukarıdaki örneklerde, yalnızca tarayıcılar tarafından doğal olarak desteklenen özelliklere itibar ettik. Bu yüzden React’e ne göstereceğini söylemek için bir JavaScript fonksiyon çağrısı kullandık:
-=======
-In the examples above, we only relied on features that are natively supported by browsers. This is why we used a JavaScript function call to tell React what to display:
->>>>>>> 95e15d063b205007a92c52efb5311f76ad5a0b6c
 
 ```js
 const e = React.createElement;
