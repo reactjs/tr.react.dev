@@ -175,12 +175,12 @@ Verilen tipte yeni bir [React elemanı](/docs/rendering-elements.html) oluşturu
 ```
 React.cloneElement(
   element,
-  [props],
+  [config],
   [...children]
 )
 ```
 
-Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. Elde edilen eleman, orjinal elemanın prop'larına yeni prop'ları ile yüzeysel olarak birleştirilmiş bir biçimde sahip olacaktır. Yeni alt eleman varolan alt elemanın yerine geçecektir. Orjinal elemandan gelen `key` ve `ref` korunacaktır.
+Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. `config` tüm yeni özellikleri, `key` 'i veya `ref` 'i içermelidir. Elde edilen eleman, orjinal elemanın prop'larına yeni prop'ları ile yüzeysel olarak birleştirilmiş bir biçimde sahip olacaktır. Yeni alt eleman varolan alt elemanın yerine geçecektir. Eğer `config` içinde `key` ve `ref` yoksa, orjinal elemandan gelen `key` ve `ref` korunacaktır.
 
 `React.cloneElement()` neredeyse şuna eşdeğerdir:
 
@@ -188,7 +188,7 @@ Bir `element`'i kullanarak yeni bir React elemanı klonlayın ve döndürün. El
 <element.type {...element.props} {...props}>{children}</element.type>
 ```
 
-Ancak, aynı zamanda `ref`'leri de korur. Bu, üzerinde `ref` bulunan bir alt eleman alırsanız, ona üst eleman üzerinden ulaşamayacağınız anlamına gelir. Yeni elemanınız üzerinde aynı `ref` bağlı olarak gelecektir.
+Ancak, aynı zamanda `ref`'leri de korur. Bu, üzerinde `ref` bulunan bir alt eleman alırsanız, ona üst eleman üzerinden ulaşamayacağınız anlamına gelir. Yeni elemanınız üzerinde aynı `ref` bağlı olarak gelecektir. Yeni `ref` veya `key`, eğer varsa eskilerin yerini alacaktır.
 
 Bu API, kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yerine geçmiştir.
 

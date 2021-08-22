@@ -243,7 +243,7 @@ Haydi şimdi Square bileşenine tıkladığımızda içini "X" ile dolduralım.
 class Square extends React.Component {
   render() {
     return (
-      <button className="square" onClick={function() { alert('click'); }}>
+      <button className="square" onClick={function() { console.log('click'); }}>
         {this.props.value}
       </button>
     );
@@ -251,7 +251,7 @@ class Square extends React.Component {
 }
 ```
 
-Şimdi herhangi bir kareye tıkladığımızda tarayıcınızda bir alert mesajı görüntülenecektir. 
+Şimdi herhangi bir kareye tıkladığımızda, tarayıcınızın devtools konsolunda bir alert mesajı görüntülenecektir.
 
 >Not:
 >
@@ -261,7 +261,7 @@ class Square extends React.Component {
 >class Square extends React.Component {
 >  render() {
 >    return (
->      <button className="square" onClick={() => alert('click')}>
+>      <button className="square" onClick={() => console.log('click')}>
 >        {this.props.value}
 >      </button>
 >    );
@@ -269,7 +269,7 @@ class Square extends React.Component {
 >}
 >```
 >
->Farkedeceğiniz üzere, `onClick={() => alert('click')}` kısmında butonun `onClick` prop'una *bir fonksiyon* ataması gerçekleştiriyoruz. Bu fonksiyon sadece butona tıkladığımızda çalışıyor. Genellikle bir yazılımcı hatası olarak parantezli ok `() =>` ifadesinin unutulması yerine direkt olarak `onClick={alert('click')}` ifadesinin yazılması gerçekleşebiliyor. Bu durumda tıklama anında gerçekleşmesi istenen olay yanlış bir şekilde çalışarak, bileşen tekrar render edildiğinde gerçekleşmiş oluyor.
+>Farkedeceğiniz üzere, `onClick={() => console.log('click')}` kısmında butonun `onClick` prop'una *bir fonksiyon* ataması gerçekleştiriyoruz. Bu fonksiyon sadece butona tıkladığımızda çalışıyor. Genellikle bir yazılımcı hatası olarak parantezli ok `() =>` ifadesinin unutulması yerine direkt olarak `onClick={console.log('click')}` ifadesinin yazılması gerçekleşebiliyor. Bu durumda tıklama anında gerçekleşmesi istenen olay yanlış bir şekilde çalışarak, bileşen tekrar render edildiğinde gerçekleşmiş oluyor.
 
 Sonraki adımda Square bileşeninin, tıklandığı durumu "hatırlamasını" ve "X" işareti ile doldurulmasını sağlayacağız. Bir şeyleri "hatırlamak" için bileşenler **state** (durum)'u kullanırlar.
 
@@ -288,7 +288,7 @@ class Square extends React.Component {
 
   render() {
     return (
-      <button className="square" onClick={() => alert('click')}>
+      <button className="square" onClick={() => console.log('click')}>
         {this.props.value}
       </button>
     );

@@ -179,7 +179,7 @@ ReactDOM.render(
 );
 ```
 
-Eğer [transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/) gibi bir Babel dönüşümü kullanıyorsanız, `defaultProps`'u bir React bileşen sınıfında statik özellik olarak da tanımlayabilirsiniz. Bu sözdizimi henüz tamamlanmadı ve tarayıcıda çalışabilmesi için bir derleme adımı gerektirecektir. Daha fazla bilgi için, [sınıf alanları önergesi](https://github.com/tc39/proposal-class-fields)'ne göz atabilirsiniz.
+Eğer [plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties/)(önceden _plugin-transform-class-properties_) gibi bir Babel dönüşümü kullanıyorsanız, `defaultProps`'u bir React bileşen sınıfında statik özellik olarak da tanımlayabilirsiniz. Bu sözdizimi henüz tamamlanmadı ve tarayıcıda çalışabilmesi için bir derleme adımı gerektirecektir. Daha fazla bilgi için, [sınıf alanları önergesi](https://github.com/tc39/proposal-class-fields)'ne göz atabilirsiniz.
 
 ```javascript
 class Greeting extends React.Component {
