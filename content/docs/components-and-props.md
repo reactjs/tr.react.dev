@@ -241,7 +241,7 @@ Bileşenlerin çıkarılması en başta angarya bir işlem gibi görünebilir. F
 
 Bu bileşen, içerisinden bileşenler çıkarmak için iyi bir adaydır diyebiliriz.
 
-## Prop'lar ve Salt Okunurlar {#props-are-read-only}
+## Prop'lar Salt Okunurdur {#props-are-read-only}
 
 [Fonksiyon veya sınıf](#function-and-class-components) bileşeninden herhangi birini oluşturduğunuzda, bu bileşen kendi prop'larını asla değiştirmemelidir. Örneğin aşağıdaki `sum` fonksiyonunu ele alalım:
 
