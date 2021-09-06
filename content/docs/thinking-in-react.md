@@ -39,17 +39,11 @@ Eğer bir tasarımcıyla çalışıyorsanız, bunu zaten yapmış olabilirler; o
 
 Ama nelerin kendi başına birer bileşen olacağına nasıl karar vereceksiniz? Yeni bir nesne ya da fonksiyon oluşturup oluşturmayacağınıza karar vermek için yine aynı teknikleri kullanın. Bu tekniklerden biri, [tek sorumluluk ilkesidir](https://eksisozluk.com/tek-sorumluluk-prensibi--1667342); yani bir bileşen ideal olarak sadece tek bir şey yapmalıdır. Bileşen büyüdüğü taktirde, daha küçük alt bileşenlere ayrılmalıdır.
 
-<<<<<<< HEAD
 Çoğu zaman kullanıcıya bir JSON veri modeli göstereceğiniz için, modeliniz doğru inşa edildiyse, kullanıcı arayüzünüzün (ve dolayısıyla bileşen yapınızın) güzel bir şekilde eşleşeceğini göreceksiniz. Bunun nedeni, kullanıcı arabirimi ve veri modellerinin aynı *bilgi mimarisine* bağlı kalma eğiliminde olmasıdır. Bu yüzden kullanıcı arayüzünüzü bileşenlere ayırma işi genellikle önemsizdir. Arayüzünüzü sadece, her birisi veri modelinizin bir parçasını temsil edecek şekilde, bileşenlere bölün.
 
 ![Bileşen Şeması](../images/blog/thinking-in-react-components.png)
-=======
-![Diagram showing nesting of components](../images/blog/thinking-in-react-components.png)
 
-You'll see here that we have five components in our app. We've italicized the data each component represents. The numbers in the image correspond to the numbers below.
->>>>>>> a11c2534062bd79cc1e6e34db0e149f928df35bb
-
-Burada uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik.
+Burada uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik. Resimdeki sayılar aşağıdaki sayılara karşılık gelmektedir.
 
   1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamını içerir.
   2. **`SearchBar` (mavi):** bütün *kullanıcı girdilerini* alır.
