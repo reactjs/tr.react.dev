@@ -275,7 +275,7 @@ Sonraki adımda Square bileşeninin, tıklandığı durumu "hatırlamasını" ve
 
 React bileşenleri, constructor (yapıcı) fonksiyonlarında `this.state`'e atama yaparak bir state'e sahip olurlar. React bileşeni içerisinde tanımlanan `this.state` özelliğinin erişim belirleyicisi private olarak düşünülmelidir. Çünkü sadece o bileşene özeldir ve diğer bileşenler tarafından direkt olarak erişilemezler.
 
-Şimdi Square'in mevcut değerini `this.state` içerisinde saklayalım ve Square'e tıklandığında değiştirelim. Bunun için öncelikle Square sınfına bir constructor ekleyeceğiz ve içerisinde state'in başlangıç değerlerini oluşturacağız:
+Şimdi Square'in mevcut değerini `this.state` içerisinde saklayalım ve Square'e tıklandığında değiştirelim. Bunun için öncelikle Square sınıfına bir constructor ekleyeceğiz ve içerisinde state'in başlangıç değerlerini oluşturacağız:
 
 ```javascript{2-7}
 class Square extends React.Component {
