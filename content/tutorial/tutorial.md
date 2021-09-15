@@ -989,7 +989,7 @@ Son olarak, Board bileşenindeki `handleClick` metodunu Game bileşenine taşıy
 >
 >Bir diziye eleman eklemek için, genellikle dizinin `push()` metodu kullanılır. Fakat `push()`'un aksine `concat()` metodu orijinal diziyi değiştirmez. Bu nedenle immutability'nin sağlanması için `concat()`fonksiyonunun kullanılması önem teşkil etmektedir.
 
-Geldiğimiz noktada, Board bileşeni sadece `renderSquare` ve `render` metotlarına ihtiyaç duyuyor. Oyunun durumu ve `handleClick` metodu ise artık Game bileşeninde yer alıyor.
+Geldiğimiz noktada, Board bileşeni sadece `renderSquare` ve `render` metodlarına ihtiyaç duyuyor. Oyunun durumu ve `handleClick` metodu ise artık Game bileşeninde yer alıyor.
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmOqJ?editors=0010)**
 
@@ -1117,7 +1117,7 @@ Game bileşenindeki render metoduna  `<li key={move}>` olacak şekilde key'imizi
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/PmmXRE?editors=0010)**
 
-Liste elemanlarındaki butonlara tıklamak, `jumpTo` metodunun bulunmadığı için bir hata oluşturur. `jumpTo`'yu kodlamadan önce, mevcut durumda hangi adımın görüntülendiğini belirtmek için Game bileşeninin state'ine `stepNumber` değişkenini eklememiz gerekiyor.
+Liste elemanlarındaki butonlara tıklamak, `jumpTo` metodu bulunmadığı için bir hata oluşturur. `jumpTo`'yu kodlamadan önce, mevcut durumda hangi adımın görüntülendiğini belirtmek için Game bileşeninin state'ine `stepNumber` değişkenini eklememiz gerekiyor.
 
 Game'in `constructor`'ındaki başlangıç state'ine `stepNumber: 0`'ı ekleyelim:
 
@@ -1150,7 +1150,7 @@ Sonra, Game'in içerisinde `stepNumber` değişkenini güncelleyecek olan `jumpT
   }
 
   render() {
-    // Bu metod değişmedi
+    // Bu metot değişmedi
   }
 ```
 
