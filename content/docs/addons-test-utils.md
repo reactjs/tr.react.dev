@@ -143,7 +143,11 @@ Mock (sahte ya da taklit) bir React bileşeni olarak kullanılabilmesine izin ve
 
 > Not:
 >
+<<<<<<< HEAD
 > `mockComponent()` eski bir API'dır. Onun yerine [`jest.mock()`](https://facebook.github.io/jest/docs/en/tutorial-react-native.html#mock-native-modules-using-jestmock)'u kullanmanızı tavsiye ederiz.
+=======
+> `mockComponent()` is a legacy API. We recommend using [`jest.mock()`](https://jestjs.io/docs/tutorial-react-native#mock-native-modules-using-jestmock) instead.
+>>>>>>> f0a9793dff9f8e86ec365bfadb0b4b23c6f618ce
 
 * * *
 

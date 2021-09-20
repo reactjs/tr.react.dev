@@ -50,8 +50,14 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 >
 > `ReactDOM.render()`, konteyner elemanını değiştirmez (yalnızca konteynerın alt elemanlarını değiştirir). Mevcut alt elemanların üzerine yazmadan varolan bir DOM elemanına, bileşen eklemek mümkün olabilir.
 >
+<<<<<<< HEAD
 > `ReactDOM.render()` halihazırda `ReactComponent` nesnesinin köküne bir referans dönüyor. Ancak, bu dönüş değerini kullanmak eskidi
 > ve bundan kaçınılmalıdır, çünkü React'in gelecekteki sürümleri, bazı durumlarda bileşenleri eşzamansız olarak sağlayabilir. Kök `ReactComponent` nesnesine referans gerekiyorsa, tercih edilen çözüm kök elemana bir [callback referansı](/docs/more-about-refs.html#the-ref-callback-attribute) olmalıdır.
+=======
+> `ReactDOM.render()` currently returns a reference to the root `ReactComponent` instance. However, using this return value is legacy
+> and should be avoided because future versions of React may render components asynchronously in some cases. If you need a reference to the root `ReactComponent` instance, the preferred solution is to attach a
+> [callback ref](/docs/refs-and-the-dom.html#callback-refs) to the root element.
+>>>>>>> f0a9793dff9f8e86ec365bfadb0b4b23c6f618ce
 >
 > Sunucu tarafından render edilen bir konteynerı hidratlamak için `ReactDOM.render()`ın kullanılması artık desteklenmiyor ve React 17'de de kaldırılacaktır. Bunun yerine [`hydrate()`](#hydrate) kullanılmalıdır.
 * * *
