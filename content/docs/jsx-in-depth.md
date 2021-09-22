@@ -354,7 +354,7 @@ Herhangi bir JavaScript ifadesini `{}` içine koyarak alt eleman olarak iletebil
 <MyComponent>{'foo'}</MyComponent>
 ```
 
-Bu genellikle, keyfi uzunluktaki JSX ifadelerinin bir listesini render etmek için kullanışlıdır. Örneğin, bu bir HTML listesi render eder:
+Bu genellikle, keyfî uzunluktaki JSX ifadelerinin bir listesini render etmek için kullanışlıdır. Örneğin, bu bir HTML listesi render eder:
 
 ```js{2,9}
 function Item(props) {
