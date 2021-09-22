@@ -231,7 +231,7 @@ Genel olarak, bir prop için değer *iletmemenizi* önermiyoruz, çünkü `{foo:
 
 ### Özelliklerin Yayılması {#spread-attributes}
 
-Zaten nesne olarak bir `prop'lar` objeniz varsa ve bunu JSX'e aktarmak istiyorsanız, tüm prop'ları geçrmek için "yayma" (spread) operatörü olan `...` 'yı kullanabilirsiniz. Bu iki bileşen eşdeğerdir:
+Zaten nesne olarak bir `prop'lar` objeniz varsa ve bunu JSX'e aktarmak istiyorsanız, tüm prop'ları geçirmek için "yayma" (spread) operatörü olan `...` 'yı kullanabilirsiniz. Bu iki bileşen eşdeğerdir:
 
 ```js{7}
 function App1() {
@@ -354,7 +354,7 @@ Herhangi bir JavaScript ifadesini `{}` içine koyarak alt eleman olarak iletebil
 <MyComponent>{'foo'}</MyComponent>
 ```
 
-Bu genellikle, keyfi uzunluktaki JSX ifadelerinin bir listesini render etmek için kullanışlıdır. Örneğin, bu bir HTML listesi render eder:
+Bu genellikle, keyfî uzunluktaki JSX ifadelerinin bir listesini render etmek için kullanışlıdır. Örneğin, bu bir HTML listesi render eder:
 
 ```js{2,9}
 function Item(props) {
@@ -381,7 +381,7 @@ function Hello(props) {
 
 ### Alt Eleman Olarak Fonksiyonlar {#functions-as-children}
 
-Normalde, JSX'e eklenen JavaScript ifadeleri bir string, bir React elemanı veya bu şeylerin bir listesi olarak değerlendirilir. Bununla birlikte, `props.children`, sadece React'ın nasıl render edeceğini bildiği türler değil, her türde veriyi aktarabilmesi için herhangi bir prop gibi çalışır. Örneğin, özel bir bileşeniniz varsa, bunun `props.children` olarak bir callback almasını sağlayabilirsiniz:
+Normalde, JSX'e eklenen JavaScript ifadeleri bir string, bir React elemanı veya bu şeylerin bir listesi olarak değerlendirilir. Bununla birlikte, `props.children`, sadece React'ın nasıl render edeceğini bildiği türleri değil, her türde veriyi aktarabilmesi için herhangi bir prop gibi çalışır. Örneğin, özel bir bileşeniniz varsa, bunun `props.children` olarak bir callback almasını sağlayabilirsiniz:
 
 ```js{4,13}
 // Tekrarlanan bir bileşen üretmek için alt eleman callback'ini numTimes kez çağırır
