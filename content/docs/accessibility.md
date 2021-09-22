@@ -225,11 +225,7 @@ class Parent extends React.Component {
 this.inputElement.current.focus();
 ```
 
-<<<<<<< HEAD
-Bileşenleri genişletmek için bir HOC kullanırken, React'in `forwardRef` fonksiyonu kullanılarak sarılmış bileşene [ref'i iletmesi](/docs/forwarding-refs.html) önerilir. Eğer üçüncü bir taraf HOC, ref iletmeyi uygulamazsa, yukarıdaki şablon yine de bir geri çekilme olarak kullanılabilir.
-=======
-When using a [HOC](/docs/higher-order-components.html) to extend components, it is recommended to [forward the ref](/docs/forwarding-refs.html) to the wrapped component using the `forwardRef` function of React. If a third party HOC does not implement ref forwarding, the above pattern can still be used as a fallback.
->>>>>>> f0a9793dff9f8e86ec365bfadb0b4b23c6f618ce
+Bileşenleri genişletmek için bir [HOC](/docs/higher-order-components.html) kullanırken, React'in `forwardRef` fonksiyonu kullanılarak sarılmış bileşene [ref'i iletmesi](/docs/forwarding-refs.html) önerilir. Eğer üçüncü bir taraf HOC, ref iletmeyi uygulamazsa, yukarıdaki şablon yine de bir geri çekilme olarak kullanılabilir.
 
 [react-aria-modal](https://github.com/davidtheclark/react-aria-modal), harika bir odak yönetimi örneğidir. Bu, tamamen erişilebilir bir modal penceresinin göreceli olarak nadir bir örneğidir.   
 Sadece ilk odağı iptal butonuna ayarlamak (klavye kullanıcısının başarılı eylemi yanlışlıkla etkinleştirmesini engeller) ve klavye odağını modal içinde hapsetmekle kalmaz, onu başlangıçta modalı tetikleyen öğeye geri odaklanarak sıfırlar. 
