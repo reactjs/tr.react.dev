@@ -270,7 +270,7 @@ Ayrıca, `setState()` otomatik olarak [kısmi bir durumu geçerli duruma birleş
 
 ## Kontrollü Girdilerde `Null` Değeri {#controlled-input-null-value}
 
-[Kontrollü bir bileşen](/docs/forms.html#controlled-components) üzerindeki value prop'unu belirtmek, sizin isteğiniz dışında kullanıcının girdi değerini değiştirmesini önler. `value` belirttiyseniz ancak girdi hala düzenlenebilir ise, yanlışlıkla `value` özelliğini `undefined` veya `null` olarak ayarlamış olabilirsiniz.
+[Kontrollü bir bileşen](/docs/forms.html#controlled-components) üzerindeki `value` prop'unu belirtmek, sizin isteğiniz dışında kullanıcının girdi değerini değiştirmesini önler. `value` belirttiyseniz ancak girdi hala düzenlenebilir ise, yanlışlıkla `value` özelliğini `undefined` veya `null` olarak ayarlamış olabilirsiniz.
 
 Aşağıdaki kod bunu göstermektedir. (Giriş ilk önce kilitlenir ancak kısa bir gecikme sonrasında düzenlenebilir hale gelir.)
 
