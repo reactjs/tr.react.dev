@@ -453,7 +453,11 @@ Deque Systemleri uygulamalarınızın otomatik ve uçtan-uça (end-to-end) eriş
 
 [Erişilebilirlik Motoru](https://www.deque.com/products/axe/) veya aXe, `aXe-core` üzerine inşa edilmiş bir erişilebilirlik denetçisi tarayıcı uzantısı.
 
+<<<<<<< HEAD
 Geliştirme ve hata ayıklama sırasında, bu erişilebilirlik bulgularını doğrudan konsola bildirmek için [react-axe](https://github.com/dylanb/react-axe) modülünü de kullanabilirsiniz.
+=======
+You can also use the [@axe-core/react](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/react) module to report these accessibility findings directly to the console while developing and debugging.
+>>>>>>> 23d03a854ba21aeea0a03a0bd5185e0def9237d6
 
 #### WebAIM WAVE {#webaim-wave}
 
