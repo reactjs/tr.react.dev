@@ -459,19 +459,11 @@ class Square extends React.Component {
 
 Artık Square'e tıklandığında, Board tarafından aktarılan `onClick` fonksiyonu çağrılacaktır. Bunun nasıl gerçekleştiğini açıklayalım:
 
-<<<<<<< HEAD
 1. HTML'de varsayılan olan `<button>` bileşeninin `onClick` prop'u React'e, tıklama olayını oluşturmasını söyler.
 2. Butona tıklandığında React, Square'in `render()` metodunda tanımlanan `onClick` fonksiyonunu çalıştırır.
 3. Bu fonksiyon ise, `this.props.onClick()` çağrısını gerçekleştirir. Square'in `onClick` prop'u, Board tarafından kendisine aktarılmıştır.
 4. Board, Square'e `onClick={() => this.handleClick(i)}` kodunu aktardığı için, Square'e tıklandığında Board'un `this.handleClick(i)` metodu çağrılır.
-5. Şu an `handleClick()` metodunu oluşturmadığımız için kodumuz hata verecektir.
-=======
-1. The `onClick` prop on the built-in DOM `<button>` component tells React to set up a click event listener.
-2. When the button is clicked, React will call the `onClick` event handler that is defined in Square's `render()` method.
-3. This event handler calls `this.props.onClick()`. The Square's `onClick` prop was specified by the Board.
-4. Since the Board passed `onClick={() => this.handleClick(i)}` to Square, the Square calls the Board's `handleClick(i)` when clicked.
-5. We have not defined the `handleClick()` method yet, so our code crashes. If you click a square now, you should see a red error screen saying something like "this.handleClick is not a function".
->>>>>>> 23d03a854ba21aeea0a03a0bd5185e0def9237d6
+5. Şu an `handleClick()` metodunu oluşturmadığımız için kodumuz hata verecektir. Şimdi bir kareye tıklarsanız, "this.handleClick is not a function" gibi bir şey söyleyen kırmızı bir hata ekranı görmelisiniz.
 
 >Not
 >
