@@ -463,7 +463,7 @@ Artık Square'e tıklandığında, Board tarafından aktarılan `onClick` fonksi
 2. Butona tıklandığında React, Square'in `render()` metodunda tanımlanan `onClick` fonksiyonunu çalıştırır.
 3. Bu fonksiyon ise, `this.props.onClick()` çağrısını gerçekleştirir. Square'in `onClick` prop'u, Board tarafından kendisine aktarılmıştır.
 4. Board, Square'e `onClick={() => this.handleClick(i)}` kodunu aktardığı için, Square'e tıklandığında Board'un `this.handleClick(i)` metodu çağrılır.
-5. Şu an `handleClick()` metodunu oluşturmadığımız için kodumuz hata verecektir.
+5. Şu an `handleClick()` metodunu oluşturmadığımız için kodumuz hata verecektir. Şimdi bir kareye tıklarsanız, "this.handleClick is not a function" gibi bir şey söyleyen kırmızı bir hata ekranı görmelisiniz.
 
 >Not
 >
