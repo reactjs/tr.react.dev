@@ -24,11 +24,18 @@ En iyi uygulama yöntemlerinin ve uygulama mimarilerinin veya React'in geleceği
 
 Her bir topluluk, binlerce React kullanıcısından oluşmaktadır.
 
+<<<<<<< HEAD
 * [DEV'in React topluluğu](https://dev.to/t/react)
 * [Hashnode'un React topluluğu](https://hashnode.com/n/reactjs)
 * [Reactiflux çevrimiçi sohbet](https://discord.gg/reactiflux)
 * [Reddit'in React topluluğu](https://www.reddit.com/r/reactjs/)
 * [Spectrum'un React topluluğu](https://spectrum.chat/react)
+=======
+* [DEV's React community](https://dev.to/t/react)
+* [Hashnode's React community](https://hashnode.com/n/reactjs)
+* [Reactiflux online chat](https://discord.gg/reactiflux)
+* [Reddit's React community](https://www.reddit.com/r/reactjs/)
+>>>>>>> 9b3c3f4e613440baf2e2f1775be65dac8c08ab5f
 
 ## Haberler {#news}
 

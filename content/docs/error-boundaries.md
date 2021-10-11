@@ -63,7 +63,11 @@ Ardından, normal bir bileşen gibi kullanabilirsiniz:
 
 Hata sınırları, bileşenler için JavaScript'in `catch {}` bloğu gibidir. Yalnız sınıf bileşenleri hata sınırı olabilirler. Pratikte, genellikle bir hata sınırını bir kez tanımlayıp, tüm uygulamanızda kullanmak isteyeceksiniz.
 
+<<<<<<< HEAD
 **Hata sınırlarının yalnızca altlarındaki bileşenlerde meydana gelen hataları yakaladıklarını** dikkate alınız.  Bir hata sınırı, kendi içinde meydana gelen hataları yakalayamaz. Eğer bir hata sınırı, hata mesajını render etmekte başarılı olamazsa, bu hata onun üzerindeki en yakın hata sınırına delege edilir. Bu, JavaScript'teki `catch {}` bloğunun çalışma prensibine yakındır.
+=======
+Note that **error boundaries only catch errors in the components below them in the tree**. An error boundary can’t catch an error within itself. If an error boundary fails trying to render the error message, the error will propagate to the closest error boundary above it. This, too, is similar to how the `catch {}` block works in JavaScript.
+>>>>>>> 9b3c3f4e613440baf2e2f1775be65dac8c08ab5f
 
 ## Canlı Demo {#live-demo}
 
