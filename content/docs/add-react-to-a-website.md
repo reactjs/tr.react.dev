@@ -149,7 +149,7 @@ return (
 
 Bu iki kod parçacığı eşdeğerdir. **JSX [tamamen isteğe bağlı](/docs/react-without-jsx.html)** olsa da, hem React'i hem de diğer kütüphaneleri kullanan birçok kişi, kullanıcı arayüzü kodu yazmak için JSX'i yararlı bulmaktadır.
 
-[Bu çevrimiçi dönüştürücüyü](https://babeljs.io/en/repl#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=DwIwrgLhD2B2AEcDCAbAlgYwNYF4DeAFAJTw4B88EAFmgM4B0tAphAMoQCGETBe86WJgBMAXJQBOYJvAC-RGWQBQ8FfAAyaQYuAB6cFDhkgA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=es2015%2Creact%2Cstage-2&prettier=false&targets=&version=7.4.3) kullanarak JSX ile oynayabilirsiniz.
+[Bu çevrimiçi dönüştürücüyü](https://babeljs.io/en/repl#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=DwIwrgLhD2B2AEcDCAbAlgYwNYF4DeAFAJTw4B88EAFmgM4B0tAphAMoQCGETBe86WJgBMAXJQBOYJvAC-RGWQBQ8FfAAyaQYuAB6cFDhkgA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=es2015%2Creact%2Cstage-2&prettier=false&targets=&version=7.15.7) kullanarak JSX ile oynayabilirsiniz.
 
 ### JSX'i hızlıca deneyin {#quickly-try-jsx}
 

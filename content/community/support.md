@@ -28,7 +28,6 @@ Her bir topluluk, binlerce React kullanıcısından oluşmaktadır.
 * [Hashnode'un React topluluğu](https://hashnode.com/n/reactjs)
 * [Reactiflux çevrimiçi sohbet](https://discord.gg/reactiflux)
 * [Reddit'in React topluluğu](https://www.reddit.com/r/reactjs/)
-* [Spectrum'un React topluluğu](https://spectrum.chat/react)
 
 ## Haberler {#news}
 

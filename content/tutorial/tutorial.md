@@ -1053,6 +1053,8 @@ Game'in `render` metodunda yer alan `history` diziyi üzerinde `map` fonksiyonun
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
 
+`history` dizisinin içinde yineleme yaptığımız için, `step` değişkeni mevcut `history` elemanının değerini, `move` ise geçerli `history` elemanının dizinini (index) ifade eder. Burada sadece `move` ile ilgilendiğimiz için `step` değişkeni hiçbir şeye atanmıyor.
+
 tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir `<li>` elemanı oluşturuyoruz. Butondaki `onClick` metodu, üzerine tıklandığında `this.jumpTo()` fonksiyonunu çağırıyor fakat, henüz `jumpTo()` metodunu oluşturmadık. Şu an, oyun içerisinde oluşan hamlelerin bir listesini görüyor olmanız lazım. Ayrıca geliştirici araçları konsolunda da aşağıdaki şekilde bir uyarı vermiş olmalıdır:
 
 >  Warning:
