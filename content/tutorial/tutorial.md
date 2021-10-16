@@ -1053,13 +1053,9 @@ Game'in `render` metodunda yer alan `history` diziyi üzerinde `map` fonksiyonun
 
 **[Kodun bu kısma kadar olan son halini görüntülemek için tıklayınız](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
 
-<<<<<<< HEAD
-tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir `<li>` elemanı oluşturuyoruz. Butondaki `onClick` metodu, üzerine tıklandığında `this.jumpTo()` fonksiyonunu çağırıyor fakat, henüz `jumpTo()` metodunu oluşturmadık. Şu an, oyun içerisinde oluşan hamlelerin bir listesini görüyor olmanız lazım. Ayrıca geliştirici araçları konsolunda da aşağıdaki şekilde bir uyarı vermiş olmalıdır:
-=======
-As we iterate through `history` array, `step` variable refers to the current `history` element value, and `move` refers to the current `history` element index. We only interested in `move` here, hence `step` is not getting assigned to anything.
+`history` dizisinin içinde yineleme yaptığımız için, `step` değişkeni mevcut `history` elemanının değerini, `move` ise geçerli `history` elemanının dizinini (index) ifade eder. Burada sadece `move` ile ilgilendiğimiz için `step` değişkeni hiçbir şeye atanmıyor.
 
-For each move in the tic-tac-toe game's history, we create a list item `<li>` which contains a button `<button>`. The button has a `onClick` handler which calls a method called `this.jumpTo()`. We haven't implemented the `jumpTo()` method yet. For now, we should see a list of the moves that have occurred in the game and a warning in the developer tools console that says:
->>>>>>> 9b3c3f4e613440baf2e2f1775be65dac8c08ab5f
+tic-tac-toe oyununun geçmişindeki her bir hamle için, `<button>` içeren bir `<li>` elemanı oluşturuyoruz. Butondaki `onClick` metodu, üzerine tıklandığında `this.jumpTo()` fonksiyonunu çağırıyor fakat, henüz `jumpTo()` metodunu oluşturmadık. Şu an, oyun içerisinde oluşan hamlelerin bir listesini görüyor olmanız lazım. Ayrıca geliştirici araçları konsolunda da aşağıdaki şekilde bir uyarı vermiş olmalıdır:
 
 >  Warning:
 >  Each child in an array or iterator should have a unique "key" prop. Check the render method of "Game".
