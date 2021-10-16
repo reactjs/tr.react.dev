@@ -145,11 +145,7 @@ React, programınızın nasıl çalıştığını anlamayı kolaylaştırmak iç
 
 Eğer yukarıdaki örnekte metin kutusuna yazmayı ya da kutucuğu işaretlemeyi denediğiniz taktirde, React'in bunu yoksaydığını göreceksiniz. Bu kasıtlı olarak böyledir. Çünkü `input` un `value` prop'unu, her zaman `FilterableProductTable` bileşeninden gelen `state`'e eşit olacak şekilde ayarladık.
 
-<<<<<<< HEAD
 Ne olmasını istediğimizi düşünelim. Kullanıcı form'u her değiştirdiğinde, kullanıcının yaptığı değişikliği yansıtacak şekilde state'i güncellediğimizden emin olmak istiyoruz. Bileşenlerin yalnızca kendi state'lerini güncellemesi gerektiği için, `FilterableProductTable` bileşeni, `SearchBar` bileşenine, state'in her güncellenmesinde çağrılacak `callback`'ler iletir. Girdilerin (input) `OnChange` olayını, `SearchBar` bileşenini bilgilendirmek için kullanabiliriz. `FilterableProductTable` tarafından iletilen callBack'ler `setState()`'i çağıracak ve uygulama güncellenecektir.
-=======
-If you try to type or check the box in the previous version of the example (step 4), you'll see that React ignores your input. This is intentional, as we've set the `value` prop of the `input` to always be equal to the `state` passed in from `FilterableProductTable`.
->>>>>>> 9b3c3f4e613440baf2e2f1775be65dac8c08ab5f
 
 Karışık görünmesine rağmen, aslında sadece birkaç kod satırından ibaret. Ve verilerinizin uygulama boyunca nasıl aktığı da gerçekten çok belirgindir.
 
