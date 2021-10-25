@@ -82,8 +82,9 @@ React'ta iki tür "model" datası vardır: props ve state. Bunlar arasındaki fa
 
 ## Adım 3: UI State'inin Minimal (ancak eksiksiz) Temsilini Belirleme {#step-3-identify-the-minimal-but-complete-representation-of-ui-state}
 
-Kullanıcı arayüzünüzü etkileşimli hale getirmek için, temel veri modelinizde değişiklikleri tetikleyebilmeniz gerekir. React bunu **state** ile kolaylaştırmaktadır.
+Eğer bu adımı uygularken yardıma ihtiyacınız olursa [Başlangıç rehberine](/docs/getting-started.html) başvurabilirsiniz.
 
+Kullanıcı arayüzünüzü etkileşimli hale getirmek için, temel veri modelinizde değişiklikleri tetikleyebilmeniz gerekir. React bunu **state** ile kolaylaştırmaktadır.
 
 Uygulamanızı doğru bir şekilde oluşturmak için, öncelikle uygulamanızın ihtiyaç duyduğu minimum değişken `state` kümesini düşünmeniz gerekir. Burada anahtar kelime [*TEK: Tekrar Etme Kendini*](https://eksisozluk.com/entry/35405641) (DRY: *Don't Repeat Yourself*) dir.
 Uygulamanızın ihtiyaç duyduğu state'in mutlak asgari temsilini belirleyin ve talep üzerine ihtiyacınız olan her şeyi hesaplayın. Örneğin; bir YAPILACAKLAR listesi oluşturuyorsanız, sadece YAPILACAKLAR listesini tutan bir dizi saklayın; listedeki madde sayısı için ayrı bir state değişkeni tutmayın. Bunun yerine, listedeki madde sayısını render etmek istediğinizde, sadece YAPILACAKLAR dizisinin uzunluğunu alıp kullanın.
