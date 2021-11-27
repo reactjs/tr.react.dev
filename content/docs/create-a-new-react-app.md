@@ -75,7 +75,7 @@ Aşağıdaki araçlar daha fazla esneklik ve seçenek sunmaktadır. Bunları dah
 
 - **[Nx](https://nx.dev/react)**, yerleşik olarak React, Next.js, [Express](https://expressjs.com/) ve daha fazlası için desteğe sahip, tam donanımlı bir monorepo oluşturma aracıdır.
 
-- **[Parcel](https://parceljs.org/)**; [React ile çalışan](https://parceljs.org/recipes.html#react), hızlı, ayarlama gerektirmeyen bir web uygulama paketleyicisidir.
+- **[Parcel](https://parceljs.org/)**; [React ile çalışan](https://parceljs.org/recipes/react), hızlı, ayarlama gerektirmeyen bir web uygulama paketleyicisidir.
 
 - **[Razzle](https://github.com/jaredpalmer/razzle)**; herhangi bir yapılandırma gerektirmeyen ancak Next.js'e göre daha fazla esneklik sunan, bir sunucu tarafında işleme çatısıdır.
 
