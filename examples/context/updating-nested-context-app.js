@@ -15,7 +15,7 @@ class App extends React.Component {
     };
 
     // highlight-range{1-2,5}
-    // State ayrıca güncelleme işlevini içerir, 
+    // State ayrıca güncelleme işlevini içerir,
     // böylece context provider'a aktarılır.
     this.state = {
       theme: themes.light,

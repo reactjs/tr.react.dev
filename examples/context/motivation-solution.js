@@ -1,5 +1,5 @@
 // highlight-range{1-4}
-// Context her bir bileşenin içinden açıkça geçmeden, 
+// Context her bir bileşenin içinden açıkça geçmeden,
 // bileşen ağacının derinliklerine bir value geçmemizi sağlar.
 // Mevcut theme için bir context oluştur (varsayılan olarak "light" ile).
 const ThemeContext = React.createContext('light');
