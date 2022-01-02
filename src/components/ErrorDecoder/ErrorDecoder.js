@@ -69,8 +69,8 @@ function ErrorResult(props: {|code: ?string, msg: string|}) {
   if (!code) {
     return (
       <p>
-        Bir hata ile karşılaştığınızda, söz konusu hata için bu sayfaya
-        bir bağlantı alırsınız ve size tam hata metnini gösteririz.
+        {`Bir hata ile karşılaştığınızda, söz konusu hata için bu sayfaya bir
+        bağlantı alırsınız ve size tam hata metnini gösteririz.`}
       </p>
     );
   }
@@ -78,7 +78,7 @@ function ErrorResult(props: {|code: ?string, msg: string|}) {
   return (
     <div>
       <p>
-        <b>Az önce karşılaştığınız hatanın tam metni:</b>
+        <b>{`Az önce karşılaştığınız hatanın tam metni:`}</b>
       </p>
       <code>
         <b>{urlify(errorMsg)}</b>
