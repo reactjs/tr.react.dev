@@ -48,4 +48,4 @@ _Bu işlevin React'in bir parçası olmadığını, ancak üçüncü parti küt�
 
 ### React'te animasyon yapabilir miyim? {#can-i-do-animations-in-react}
 
-React, animasyonlara güç vermek için kullanılabilir. Örneğin, [React Transition Group](https://reactcommunity.org/react-transition-group/), [React Motion](https://github.com/chenglou/react-motion) veya [React Spring](https://github.com/react-spring/react-spring) yada [Framer Motion](https://framer.com/motion) 'a bakabilirsiniz.
+React, animasyonlara güç vermek için kullanılabilir. Örneğin, [React Transition Group](https://reactcommunity.org/react-transition-group/), [React Motion](https://github.com/chenglou/react-motion) , [React Spring](https://github.com/react-spring/react-spring) veya [Framer Motion](https://framer.com/motion) 'a bakabilirsiniz.
