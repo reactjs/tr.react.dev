@@ -1,55 +1,55 @@
 ---
-title: Installation
+title: Kurulum
 ---
 
 <Intro>
 
-React has been designed from the start for gradual adoption, and you can use as little or as much React as you need. Whether you want to get a taste of React, add some interactivity to an HTML page, or start a complex React-powered app, this section will help you get started.
+React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React’i ihtiyacınız kadar az veya çok kullanabilirsiniz. React'in tadına bakmak, basit bir HTML sayfasına biraz etkileşim eklemek veya karmaşık bir React destekli uygulamaya başlamak istiyorsanız, bu bölüm başlamanıza yardımcı olacaktır.
 
 </Intro>
 
 <YouWillLearn>
 
-* [How to add React to an HTML page](/learn/add-react-to-a-website)
-* [How to start a standalone React project](/learn/start-a-new-react-project)
-* [How to set up your editor](/learn/editor-setup)
-* [How to install React Developer Tools](/learn/react-developer-tools)
+* [Bir HTML sayfasına React nasıl eklenir](/learn/add-react-to-a-website)
+* [Bağımsız bir React projesine nasıl başlanır](/learn/start-a-new-react-project)
+* [Editörünüzü nasıl kurarsınız](/learn/editor-setup)
+* [React Developer Tools nasıl kurulur](/learn/react-developer-tools)
 
 </YouWillLearn>
 
-## Try React {/*try-react*/}
+## React'i deneyin {/*try-react*/}
 
-You don't need to install anything to play with React. Try editing this sandbox!
+React ile vakit geçirmek için herhangi bir şey yüklemeniz gerekmez. Bu çevrimiçi kod oyun alanını düzenlemeyi deneyin!
 
 <Sandpack>
 
 ```js
 function Greeting({ name }) {
-  return <h1>Hello, {name}</h1>;
+  return <h1>Selam, {name}</h1>;
 }
 
 export default function App() {
-  return <Greeting name="world" />
+  return <Greeting name="Yunus" />
 }
 ```
 
 </Sandpack>
 
-We use sandboxes throughout these docs as teaching aids. Sandboxes can help familiarize you with how React works and help you decide if React is right for you. Outside of the React documentation, there are many online sandboxes that support React: for example, [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), or [CodePen](
+Çevrimiçi kod oyun alanlarını bu dokümanlarda eğitim yardımcıları olarak kullanıyoruz. Çevrimiçi kod oyun alanları, React'in nasıl çalıştığını anlamanıza ve React'in sizin için doğru olup olmadığı konusunda karar vermenize yardımcı olabilir. React dokümanlarının dışında, React'i destekleyen birçok çevrimiçi kod oyun alan var: örneğin, [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), veya [CodePen](
 https://codepen.io/pen/?template=wvdqJJm).
 
-### Try React locally {/*try-react-locally*/}
+### Lokalde React'i deneyin {/*try-react-locally*/}
 
-To try React locally on your computer, [download this HTML page](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html). Open it in your editor and in your browser!
+React'i bilgisayarınızda lokal olarak denemek için, [bu HTML sayfasını indirın](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html). Editörünüzde ve tarayıcınızda açın!
 
-## Add React to a page {/*add-react-to-a-page*/}
+## Bir sayfaya React ekleyin {/*add-react-to-a-page*/}
 
-If you're working with an existing site and just need to add a little bit of React, you can [add React with a script tag.](/learn/add-react-to-a-website)
+Mevcut bir site üzerinde çalışıyorsanız ve biraz React eklemeniz gerekiyorsa, [bir script etiketi ile React ekleyebilirsiniz.](/learn/add-react-to-a-website)
 
-## Start a React project {/*start-a-react-project*/}
+## Bir React projesi oluşturun {/*start-a-react-project*/}
 
-If you're ready to [start a standalone project](/learn/start-a-new-react-project) with React, you can set up a minimal toolchain for a pleasant developer experience. You can also start with a framework that makes a lot of decisions for you out of the box.
+Eğer [bağımsız bir React projesine](/learn/start-a-new-react-project) başlamaya hazırsanız, tatlı bir geliştirici deneyimi için minimal bir araç zinciri kurabilirsiniz. Ayrıca, halihazırda sizin için birçok karar veren bir çatı ile de başlayabilirsiniz.
 
-## Next steps {/*next-steps*/}
+## Sonraki adımlar {/*next-steps*/}
 
-Where you start depends on how you like to learn, what you need to accomplish, and where you want to go next! Why not read [Thinking in React](/learn/thinking-in-react)--our introductory tutorial? Or you can jump to [Describing the UI](/learn/describing-the-ui) to play with more examples and learn each topic step by step. There is no wrong way to learn React!
+Nereden başlayacağınız, nasıl öğrenmek istediğinize, neyi başarmanız gerektiğine ve bir sonraki adımda nereye gitmek istediğinize bağlıdır! Neden giriş eğitimimiz olan [React'te Düşünmek](/learn/thinking-in-react) ile başlamıyorsunuz? Veya daha fazla örnekle oynamak ve adım adım her konuyu öğrenmek için [Kullanıcı Arayüzünü Tanımlamak](/learn/describing-the-ui) bölümüne atlayabilirsiniz. React'i öğrenmek için yanlış bir yol yok!
