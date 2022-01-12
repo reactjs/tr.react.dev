@@ -21,6 +21,7 @@ jobs:
         uses: bahmutov/npm-install@v1.6.0
         with:
           working-directory: 'beta'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-reactjs-tr-org-beta
 
 
       - name: Lint codebase
