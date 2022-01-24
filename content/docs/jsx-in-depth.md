@@ -231,11 +231,7 @@ Genel olarak, bir prop için değer *iletmemenizi* önermiyoruz, çünkü `{foo:
 
 ### Özelliklerin Yayılması {#spread-attributes}
 
-<<<<<<< HEAD
 Zaten nesne olarak bir `prop'lar` objeniz varsa ve bunu JSX'e aktarmak istiyorsanız, tüm prop'ları geçirmek için "yayma" (spread) operatörü olan `...` 'yı kullanabilirsiniz. Bu iki bileşen eşdeğerdir:
-=======
-If you already have `props` as an object, and you want to pass it in JSX, you can use `...` as a "spread" syntax to pass the whole props object. These two components are equivalent:
->>>>>>> 69bd27a3d558d6633e4f0adc61ecb8bb3d5f2edf
 
 ```js{7}
 function App1() {
@@ -248,11 +244,7 @@ function App2() {
 }
 ```
 
-<<<<<<< HEAD
 Ayrıca, yayılma operatörünü kullanarak diğer tüm prop'ları geçerken, bileşeninizin kullanacağı özel prop'ları de seçebilirsiniz.
-=======
-You can also pick specific props that your component will consume while passing all other props using the spread syntax.
->>>>>>> 69bd27a3d558d6633e4f0adc61ecb8bb3d5f2edf
 
 ```js{2}
 const Button = props => {
