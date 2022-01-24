@@ -180,11 +180,7 @@ Uygulamanızda nereye kod bölümleme yapacağınıza karar vermek biraz zor ola
 
 Rotalar, başlamak için güzel yerlerdir. Webteki çoğu insan, yüklenmesi biraz zaman alan sayfa geçişlerine alışıktır. Aynı zamanda tüm sayfayı tek seferde yeniden render etme eğiliminiz vardır ki kullanıcınız, aynı anda sayfanın başka bir elemanıyla etkileşime girmesin.
 
-<<<<<<< HEAD
-İşte [React Router](https://reacttraining.com/react-router/) gibi kütüphaneler kullanan uygulamalarda rota bazlı kod bölümlemenin `React.lazy` ile nasıl kurulabileceğine dair bir örnek.
-=======
-Here's an example of how to setup route-based code splitting into your app using libraries like [React Router](https://reactrouter.com/) with `React.lazy`.
->>>>>>> 69bd27a3d558d6633e4f0adc61ecb8bb3d5f2edf
+İşte [React Router](https://reactrouter.com/) gibi kütüphaneler kullanan uygulamalarda rota bazlı kod bölümlemenin `React.lazy` ile nasıl kurulabileceğine dair bir örnek.
 
 ```js
 import React, { Suspense, lazy } from 'react';
@@ -195,19 +191,11 @@ const About = lazy(() => import('./routes/About'));
 
 const App = () => (
   <Router>
-<<<<<<< HEAD
     <Suspense fallback={<div>Yükleniyor...</div>}>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/about" component={About}/>
-      </Switch>
-=======
-    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
       </Routes>
->>>>>>> 69bd27a3d558d6633e4f0adc61ecb8bb3d5f2edf
     </Suspense>
   </Router>
 );
