@@ -15,7 +15,11 @@ ReactDOM.render(
 ```
 
 
+<<<<<<< HEAD
 Ekrana "Merhaba dünya!" başlığını yazdırır.
+=======
+**[Try it on CodePen](https://codepen.io/gaearon/pen/rrpgNB?editors=1010)**
+>>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
 
 **[Codepen'de Aç](codepen://hello-world)**
 

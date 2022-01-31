@@ -8,7 +8,7 @@ React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React’i i
 
 </Intro>
 
-<YouWillLearn>
+<YouWillLearn isChapter={true}>
 
 * [Bir HTML sayfasına React nasıl eklenir](/learn/add-react-to-a-website)
 * [Bağımsız bir React projesine nasıl başlanır](/learn/start-a-new-react-project)
