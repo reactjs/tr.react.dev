@@ -38,11 +38,7 @@ Kök DOM düğümü içerisinde bir React elementini render etmek istiyorsanız,
 
 `embed:rendering-elements/render-an-element.js`
 
-<<<<<<< HEAD
-[Codepen'de Deneyin](codepen://rendering-elements/render-an-element)
-=======
-**[Try it on CodePen](https://codepen.io/gaearon/pen/ZpvBNJ?editors=1010)**
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/ZpvBNJ?editors=1010)**
 
 Sayfada "Hello, world" mesajı görüntülenecektir.
 
@@ -56,11 +52,7 @@ Aşağıdaki saat örneğini ele alalım:
 
 `embed:rendering-elements/update-rendered-element.js`
 
-<<<<<<< HEAD
-[Codepen'de Deneyin](codepen://rendering-elements/update-rendered-element)
-=======
-**[Try it on CodePen](https://codepen.io/gaearon/pen/gwoJZk?editors=1010)**
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/gwoJZk?editors=1010)**
 
 [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) metodu ile her saniye bitiminde [`ReactDOM.render()`](/docs/react-dom.html#render) metodu çağrılıyor.
 
@@ -74,11 +66,7 @@ Aşağıdaki saat örneğini ele alalım:
 
 React DOM, ilgili elementi ve elementin alt elemanlarını, bir önceki versiyonlarıyla karşılaştırır. Farkları tespit ettikten sonra yalnızca gerekli olan kısımlarda DOM güncellemesi yapar. Bu sayede DOM, istenen duruma getirilmiş olur.
 
-<<<<<<< HEAD
-Tarayıcı araçlarını kullanarak [son örneği](codepen://rendering-elements/update-rendered-element) incelediğinizde de bu durumu görebilirsiniz:
-=======
-You can verify by inspecting the [last example](https://codepen.io/gaearon/pen/gwoJZk?editors=1010) with the browser tools:
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+Tarayıcı araçlarını kullanarak [son örneği](https://codepen.io/gaearon/pen/gwoJZk?editors=1010) incelediğinizde de bu durumu görebilirsiniz:
 
 ![DOM inceleyicisi küçük güncellemeleri gösteriyor](../images/docs/granular-dom-updates.gif)
 

@@ -78,11 +78,7 @@ ReactDOM.render(
 );
 ```
 
-<<<<<<< HEAD
-[Codepen'de Deneyin](codepen://components-and-props/rendering-a-component)
-=======
-**[Try it on CodePen](https://codepen.io/gaearon/pen/YGYmEG?editors=1010)**
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/YGYmEG?editors=1010)**
 
 Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
@@ -124,11 +120,7 @@ ReactDOM.render(
 );
 ```
 
-<<<<<<< HEAD
-[Codepen'de Deneyin](codepen://components-and-props/composing-components)
-=======
-**[Try it on CodePen](https://codepen.io/gaearon/pen/KgQKPr?editors=1010)**
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/KgQKPr?editors=1010)**
 
 Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerirler. Ancak React'i mevcut uygulamanıza entegre ediyorsanız, `Button` gibi en küçük bileşenlerden başlayacak şekilde, basitten karmaşığa doğru ilerleyerek bileşen hiyerarşisini oluşturabilirsiniz.
 
@@ -162,11 +154,7 @@ function Comment(props) {
 }
 ```
 
-<<<<<<< HEAD
-[Codepen'de Deneyin](codepen://components-and-props/extracting-components)
-=======
-**[Try it on CodePen](https://codepen.io/gaearon/pen/VKQwEo?editors=1010)**
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/VKQwEo?editors=1010)**
 
 Üstteki bileşen; `author` nesnesini, `text` metnini ve bir `date` tarihini prop olarak alır. Bu bileşen, bir sosyal medya sitesinde yorum kutucuğunun görüntülenmesini sağlar.
 
@@ -245,11 +233,7 @@ function Comment(props) {
 }
 ```
 
-<<<<<<< HEAD
-[Codepen'de Deneyin](codepen://components-and-props/extracting-components-continued)
-=======
-**[Try it on CodePen](https://codepen.io/gaearon/pen/rrJNJY?editors=1010)**
->>>>>>> 5f0549c86e7a9c0774e66687d1bc0118a681eb9d
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/rrJNJY?editors=1010)**
 
 Bileşenlerin çıkarılması en başta angarya bir işlem gibi görünebilir. Fakat büyük çaplı uygulamalarda, tekrar kullanılabilir bileşenler içeren bir **bileşen paletine** sahip olmak oldukça faydalı hale gelecektir. Bileşen çıkarmanın genel mantığı aşağıdaki gibidir:
 * Eğer kullanıcı arayüzündeki bir eleman (`Button`, `Panel`, `Avatar`) uygulama içerisinde birçok defa kullanılıyorsa,
