@@ -68,7 +68,7 @@ ReactDOM.render(
 );
 ```
 
-[Codepen'de Deneyin](codepen://introducing-jsx)
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/PGEjdG?editors=1010)**
 
 Okunabilirliği arttırmak için JSX kodunu birkaç satır halinde yazdık. Buradaki gibi, JSX kodunu birçok satır halinde yazarken, kodu parantezler ile sarmalamanızı öneririz. Bu sayede [otomatik olarak noktalı virgül eklenmesi](https://stackoverflow.com/q/2846283) ile oluşan birçok hatanın önüne geçebilirsiniz. 
 

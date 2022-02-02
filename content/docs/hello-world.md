@@ -17,7 +17,7 @@ ReactDOM.render(
 
 Ekrana "Merhaba dünya!" başlığını yazdırır.
 
-**[Codepen'de Aç](codepen://hello-world)**
+**[Codepen'de Aç](https://codepen.io/gaearon/pen/rrpgNB?editors=1010)**
 
 Yukarıdaki linke tıklayarak online düzenleyiciyi açabilirsiniz. Değişiklik yapmaktan çekinmeyin ve yaptığınız değişikliklerin çıktısını gözlemleyin. Bu rehberdeki çoğu sayfada bunun gibi düzenlenebilir örnekler göreceksiniz.
 

@@ -78,7 +78,7 @@ ReactDOM.render(
 );
 ```
 
-[Codepen'de Deneyin](codepen://components-and-props/rendering-a-component)
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/YGYmEG?editors=1010)**
 
 Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
@@ -120,7 +120,7 @@ ReactDOM.render(
 );
 ```
 
-[Codepen'de Deneyin](codepen://components-and-props/composing-components)
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/KgQKPr?editors=1010)**
 
 Genellikle, yeni React uygulamaları, en üstte bir tane `App` bileşeni içerirler. Ancak React'i mevcut uygulamanıza entegre ediyorsanız, `Button` gibi en küçük bileşenlerden başlayacak şekilde, basitten karmaşığa doğru ilerleyerek bileşen hiyerarşisini oluşturabilirsiniz.
 
@@ -154,7 +154,7 @@ function Comment(props) {
 }
 ```
 
-[Codepen'de Deneyin](codepen://components-and-props/extracting-components)
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/VKQwEo?editors=1010)**
 
 Üstteki bileşen; `author` nesnesini, `text` metnini ve bir `date` tarihini prop olarak alır. Bu bileşen, bir sosyal medya sitesinde yorum kutucuğunun görüntülenmesini sağlar.
 
@@ -233,7 +233,7 @@ function Comment(props) {
 }
 ```
 
-[Codepen'de Deneyin](codepen://components-and-props/extracting-components-continued)
+**[Codepen'de Deneyin](https://codepen.io/gaearon/pen/rrJNJY?editors=1010)**
 
 Bileşenlerin çıkarılması en başta angarya bir işlem gibi görünebilir. Fakat büyük çaplı uygulamalarda, tekrar kullanılabilir bileşenler içeren bir **bileşen paletine** sahip olmak oldukça faydalı hale gelecektir. Bileşen çıkarmanın genel mantığı aşağıdaki gibidir:
 * Eğer kullanıcı arayüzündeki bir eleman (`Button`, `Panel`, `Avatar`) uygulama içerisinde birçok defa kullanılıyorsa,
