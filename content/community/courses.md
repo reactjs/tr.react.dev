@@ -50,7 +50,11 @@ permalink: community/courses.html
 
 - [Mastering React](https://codewithmosh.com/p/mastering-react/) - React ile profesyonel, etkileşimli uygulamalar oluşturun.
 
+<<<<<<< HEAD
 - [React Öğretici](https://react-tutorial.app) - Bilgi kartlarıyla, interaktif bir ortamda adım adım React'i öğrenin.
+=======
+- [Tyler McGinnis](https://ui.dev/) - Tyler McGinnis provides access to his courses for a monthly fee. Courses include "React Fundamentals" and "Universal React".
+>>>>>>> 20f0fe280f3c122df7541256b983c46e21e33b20
 
 - [Road to React](https://www.roadtoreact.com/) - React'te uzmanlaşma yolculuğunuz.
 
