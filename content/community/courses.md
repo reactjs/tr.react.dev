@@ -46,11 +46,11 @@ permalink: community/courses.html
 
 - [React Training: İleri Düzey React.js](https://courses.reacttraining.com/p/advanced-react) - React hünerlerinizi bir üst seviyeye taşıyın.
 
-- [Tyler McGinnis](https://tylermcginnis.com/courses) - Tyler McGinnis, aylık bir ücret karşılığında derslerini erişime açıyor. Dersler arasında "React Temelleri" ve "Evrensel React" de var.
-
 - [Mastering React](https://codewithmosh.com/p/mastering-react/) - React ile profesyonel, etkileşimli uygulamalar oluşturun.
 
 - [React Öğretici](https://react-tutorial.app) - Bilgi kartlarıyla, interaktif bir ortamda adım adım React'i öğrenin.
+
+- [Tyler McGinnis](https://ui.dev/) - Tyler McGinnis, aylık bir ücret karşılığında derslerini erişime açıyor. Dersler arasında "React Temelleri" ve "Evrensel React" de var.
 
 - [Road to React](https://www.roadtoreact.com/) - React'te uzmanlaşma yolculuğunuz.
 

@@ -161,6 +161,7 @@ Yerel bir  React.js buluşmanız var mı? Buraya ekleyin! (Lütfen alfabetik sı
 
 ## Sweden {#sweden}
 * [Goteborg](https://www.meetup.com/ReactJS-Goteborg/)
+* [Stockholm](https://www.meetup.com/Stockholm-ReactJS-Meetup/)
 
 ## Switzerland {#switzerland}
 * [Zurich](https://www.meetup.com/Zurich-ReactJS-Meetup/)
