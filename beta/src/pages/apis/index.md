@@ -34,10 +34,69 @@ If you use React on the web, you'll also need the same version of [ReactDOM](/ap
 
 ## Exports {/*exports*/}
 
-<YouWillLearnCard title="useState" path="/reference/usestate">
+### State {/*state*/}
 
-A React Hook that lets a component "remember" some information (called state).
+<YouWillLearnCard title="useState" path="/apis/usestate">
+
+Declares a state variable.
+
+```js
+function MyComponent() {
+  const [age, setAge] = useState(42);
+  // ...
+```
 
 </YouWillLearnCard>
+
+<YouWillLearnCard title="useReducer" path="/apis/usereducer">
+
+Declares a state variable managed with a reducer.
+
+```js
+function MyComponent() {
+  const [state, dispatch] = useReducer(reducer, { age: 42 });
+  // ...
+```
+
+</YouWillLearnCard>
+
+### Context {/*context*/}
+
+<YouWillLearnCard title="useContext" path="/apis/usecontext">
+
+Reads and subscribes to a context.
+
+```js
+function MyComponent() {
+  const theme = useContext(ThemeContext);
+  // ...
+```
+
+</YouWillLearnCard>
+
+<YouWillLearnCard title="createContext" path="/apis/createContext">
+
+Creates a context that components can provide or read.
+
+```js
+const ThemeContext = createContext('light');
+```
+
+</YouWillLearnCard>
+
+### Refs {/*refs*/}
+
+<YouWillLearnCard title="useRef" path="/apis/useref">
+
+Declares a ref.
+
+```js
+function MyComponent() {
+  const inputRef = useRef(null);
+  // ...
+```
+
+</YouWillLearnCard>
+
 
 This section is incomplete and is still being written!
