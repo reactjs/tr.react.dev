@@ -8,8 +8,4 @@ invalid-aria-prop uyarısı, Web Erişilebilirlik Girişimi (Web Accessibility I
 
 1. Geçerli bir prop kullandığınızı düşünüyorsanız, imlayı dikkatlice kontrol edin. `aria-labelledby` ve `aria-activedescendant` genellikle yanlış yazılır.
 
-<<<<<<< HEAD
-2. React, belirttiğiniz özelliği henüz tanımıyor. Bu muhtemelen gelecekteki React sürümünde düzeltilecektir. Bununla birlikte, React şu anda bilinmeyen tüm özellikleri çıkarır, bu nedenle bunları React uygulamanızda tanımlamanız render edilmelerine neden olmayacaktır.
-=======
-2. React does not yet recognize the attribute you specified. This will likely be fixed in a future version of React.
->>>>>>> 1e3b023d3192c36a2da7b72389debee2f0e0e8b0
+2. React, belirttiğiniz özelliği henüz tanımıyor. Bu muhtemelen gelecekteki React sürümünde düzeltilecektir.
