@@ -72,7 +72,11 @@ Veri modelinizi render eden bir statik versiyonu yapmak için, diğer bileşenle
 
 Yukarıdan aşağıya veya aşağıdan yukarıya oluşturabilirsiniz. Diğer bir deyişle, oluşturmaya hiyerarşide daha yukarıdaki (örneğin, `FilterableProductTable`) veya daha aşağıdaki (`ProductRow`) bileşenler ile başlayabilirsiniz. Daha basit örneklerde, yukarıdan aşağıya gitmek genellikle daha kolaydır ve daha büyük projelerde, aşağıdan yukarıya gitmek ve de bileşenleri oluşturdukça testler yazmak daha kolaydır.
 
+<<<<<<< HEAD
 Bu adımın sonunda, veri modelinizi oluşturan yeniden kullanılabilir bileşenlerden oluşan bir kütüphaneye sahip olacaksınız. Bileşenler yalnızca `render()` metotlarına sahip olacaktır, çünkü bu, uygulamanızın statik bir sürümüdür. Hiyerarşinin en üstündeki bileşen (`FilterableProductTable`) veri modelinizi bir prop olarak alır. Temel veri modelinizde değişiklik yaparsanız ve tekrar `ReactDOM.render()`'ı çağırırsanız, kullanıcı arayüzü güncellenecektir. Arayüzünüzün nasıl güncellendiğini ve, karmaşık bir şey olmadığından, nerede değişiklik yapılacağını görmek kolaydır. React'in **tek yönlü veri akışı** (ayrıca *tek yönlü bağlama* olarak da bilinir) her şeyi modüler ve hızlı tutar.
+=======
+At the end of this step, you'll have a library of reusable components that render your data model. The components will only have `render()` methods since this is a static version of your app. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. If you make a change to your underlying data model and call `root.render()` again, the UI will be updated. You can see how your UI is updated and where to make changes. React's **one-way data flow** (also called *one-way binding*) keeps everything modular and fast.
+>>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 Bu adımı uygulamak için yardıma ihtiyaç duyarsanız, basitçe [React Dokümanlarına](/docs/) bakın.
 

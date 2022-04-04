@@ -214,10 +214,8 @@ var TickTock = createReactClass({
   }
 });
 
-ReactDOM.render(
-  <TickTock />,
-  document.getElementById('example')
-);
+const root = ReactDOM.createRoot(document.getElementById('example'));
+root.render(<TickTock />);
 ```
 
 Eğer bir bileşen birden çok mixin kullanıyor ve birkaç mixini aynı hayat döngüsü metodunda tanımlıyorsa (yani bileşen yok edildiğinde birkaç mixin temizlenmek isteniyorsa), tüm yaşam döngüsü metodlarının çağrılması garanti edilir. Mixin'lerde tanımlanan metodlar, bileşendeki metod çağrılarından sonra listelenen sırayla çalıştırılırlar.

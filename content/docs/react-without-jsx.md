@@ -17,10 +17,8 @@ class Hello extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Hello toWhat="World" />,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Hello toWhat="World" />);
 ```
 
 JSX kullanmayan bu koda derlenebilir:
@@ -32,10 +30,8 @@ class Hello extends React.Component {
   }
 }
 
-ReactDOM.render(
-  React.createElement(Hello, {toWhat: 'World'}, null),
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(Hello, {toWhat: 'World'}, null));
 ```
 
 JSX'in JavaScript'e nasıl dönüştürüldüğüne dair daha fazla örnek görmek isterseniz, [çevrimiçi Babel derleyicisi](babel://jsx-simple-example)ni deneyebilirsiniz.
@@ -47,10 +43,15 @@ Eğer çok fazla `React.createElement` yazmaktan bıktıysanız, genel çözüm 
 ```js
 const e = React.createElement;
 
+<<<<<<< HEAD
 ReactDOM.render(
   e('div', null, 'Merhaba Dünya'),
   document.getElementById('root')
 );
+=======
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(e('div', null, 'Hello World'));
+>>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 ```
 
 Eğer bu kısaltma halini `React.createElement` için kullanırsanız, JSX olmadan React'i kullanmak daha pratik olabilir.

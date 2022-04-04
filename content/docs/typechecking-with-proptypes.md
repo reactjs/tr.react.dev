@@ -172,11 +172,17 @@ Greeting.defaultProps = {
   name: 'Stranger'
 };
 
+<<<<<<< HEAD
 // "Hello, Stranger" yazısını çıktılar:
 ReactDOM.render(
   <Greeting />,
   document.getElementById('example')
 );
+=======
+// Renders "Hello, Stranger":
+const root = ReactDOM.createRoot(document.getElementById('example')); 
+root.render(<Greeting />);
+>>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 ```
 
 Eğer [plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties/)(önceden _plugin-transform-class-properties_) gibi bir Babel dönüşümü kullanıyorsanız, `defaultProps`'u bir React bileşen sınıfında statik özellik olarak da tanımlayabilirsiniz. Bu sözdizimi henüz tamamlanmadı ve tarayıcıda çalışabilmesi için bir derleme adımı gerektirecektir. Daha fazla bilgi için, [sınıf alanları önergesi](https://github.com/tc39/proposal-class-fields)'ne göz atabilirsiniz.
