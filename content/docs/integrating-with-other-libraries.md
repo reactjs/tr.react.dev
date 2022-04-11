@@ -190,9 +190,15 @@ class Chosen extends React.Component {
 
 ## Diğer Görünüm Kütüphaneleri ile Bütünleşmek {#integrating-with-other-view-libraries}
 
+<<<<<<< HEAD
 React, diğer uygulamalara [`ReactDOM.render()`](/docs/react-dom.html#render)'in esnekliği sayesinde gömülebilir.
 
 React, başlangıçta genellikle DOM'a tek bir kök React bileşeni yüklemek için kullanılsa da, `ReactDOM.render()` bir buton kadar küçük veya bir uygulama kadar büyük olabilen UI'ın (Kullanıcı Arayüzü'nün) bağımsız bölümleri için bir çok kez çağrılabilir. 
+=======
+React can be embedded into other applications thanks to the flexibility of [`createRoot()`](/docs/react-dom-client.html#createRoot).
+
+Although React is commonly used at startup to load a single root React component into the DOM, `root.render()` can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.
+>>>>>>> 84ad3308338e2bb819f4f24fa8e9dfeeffaa970b
 
 Aslında, Facebook'ta React tam olarak böyle kullanılır. Bu, uygulamaları React'te parça parça yazmamızı sağlar, ve bunları mevcut sunucu tarafından oluşturulan şablonlarımız ve diğer istemci-taraf (client-side) kod ile birleştirir.
 
@@ -216,15 +222,9 @@ function Button() {
   return <button id="btn">Say Hello</button>;
 }
 
-ReactDOM.render(
-  <Button />,
-  document.getElementById('container'),
-  function() {
-    $('#btn').click(function() {
-      alert('Hello!');
-    });
-  }
-);
+$('#btn').click(function() {
+  alert('Hello!');
+});
 ```
 
 Buradan bileşene daha fazla mantık taşımaya ve daha yaygın React uygulamalarını benimsemeye başlayabilirsiniz. Örneğin, bileşenlerde ID'lere güvenmemek en iyisidir. Çünkü aynı bileşen birden çok kez işlenebilir. Bunun yerine, [React olay sistemi](/docs/handling-events.html)'ni kullanacağız ve tıklama olayını doğrudan React `<button>` öğesine kaydedeceğiz:
@@ -240,24 +240,27 @@ function HelloButton() {
   }
   return <Button onClick={handleClick} />;
 }
-
-ReactDOM.render(
-  <HelloButton />,
-  document.getElementById('container')
-);
 ```
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/RVKbvW?editors=1010)
 
+<<<<<<< HEAD
 İstediğiniz kadar çok sayıda izole edilmiş bileşeniniz olabilir ve bunları farklı DOM konteynerlerine işlemek için `ReactDOM.render ()`'i kullanabilirsiniz. Yavaş yavaş, uygulamanızı daha fazla React'e dönüştürdükçe, onları daha büyük bileşenlerde birleştirebilecek ve hiyerarşiyi çağıran `ReactDOM.render ()`'in bir kısmını taşıyabileceksiniz. 
+=======
+You can have as many such isolated components as you like, and use `ReactDOM.createRoot()` to render them to different DOM containers. Gradually, as you convert more of your app to React, you will be able to combine them into larger components, and move some of the `ReactDOM.createRoot()` calls up the hierarchy.
+>>>>>>> 84ad3308338e2bb819f4f24fa8e9dfeeffaa970b
 
 ### Bir Backbone Görünümüne React'ı Gömmek{#embedding-react-in-a-backbone-view}
 
 [Backbone](https://backbonejs.org/) görünümleri, DOM öğelerinin içeriğini oluşturmak için tipik olarak HTML stringlerini ya da string üreten şablon fonksiyonlarını kullanır. Bu işlem de bir React bileşeni oluşturma ile değiştirilebilir.
 
+<<<<<<< HEAD
 Aşağıda, `ParagraphView` olarak bilinen bir Backbone görünümü oluşturacağız. Bu bir React `<Paragraph>` bileşenini, Backbone (`this.el`) tarafından sunulan DOM öğesi oluşturmak için Backbone'nın `render()` fonksiyonun geçersiz kılar.
+=======
+Below, we will create a Backbone view called `ParagraphView`. It will override Backbone's `render()` function to render a React `<Paragraph>` component into the DOM element provided by Backbone (`this.el`). Here, too, we are using [`ReactDOM.createRoot()`](/docs/react-dom-client.html#createroot):
+>>>>>>> 84ad3308338e2bb819f4f24fa8e9dfeeffaa970b
 
-```js{1,5,8,12}
+```js{1,5,8-9,13}
 function Paragraph(props) {
   return <p>{props.text}</p>;
 }
@@ -265,11 +268,12 @@ function Paragraph(props) {
 const ParagraphView = Backbone.View.extend({
   render() {
     const text = this.model.get('text');
-    ReactDOM.render(<Paragraph text={text} />, this.el);
+    this.root = ReactDOM.createRoot(this.el);
+    this.root.render(<Paragraph text={text} />);
     return this;
   },
   remove() {
-    ReactDOM.unmountComponentAtNode(this.el);
+    this.root.unmount();
     Backbone.View.prototype.remove.call(this);
   }
 });
@@ -277,7 +281,11 @@ const ParagraphView = Backbone.View.extend({
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/gWgOYL?editors=0010)
 
+<<<<<<< HEAD
 `remove` metodundaki `ReactDOM.unmountComponentAtNode()`'ı da çağırmamız önemlidir. Böylece React, ayrıldığında bileşen ağacıyla ilişkili olay yöneticilerini  ve diğer kaynakların kaydını siler.
+=======
+It is important that we also call `root.unmount()` in the `remove` method so that React unregisters event handlers and other resources associated with the component tree when it is detached.
+>>>>>>> 84ad3308338e2bb819f4f24fa8e9dfeeffaa970b
 
 Bir bileşen bir React ağacının *içinden* kaldırıldığında, temizleme otomatik olarak gerçekleştirilir, ancak tüm ağacı elle kaldırdığımız için bu metodu çağırmalıyız.
 
@@ -428,10 +436,8 @@ function Example(props) {
 }
 
 const model = new Backbone.Model({ firstName: 'Frodo' });
-ReactDOM.render(
-  <Example model={model} />,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Example model={model} />);
 ```
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/PmWwwa?editors=0010)
