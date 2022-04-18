@@ -33,13 +33,14 @@ const listItems = numbers.map((number) =>
 );
 ```
 
+<<<<<<< HEAD
 `listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz ve [DOM'a render ediyoruz](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
+=======
+Then, we can include the entire `listItems` array inside a `<ul>` element:
+>>>>>>> 07dbd86ca421c262157af673a2584a40fd3b2450
 
 ```javascript{2}
-ReactDOM.render(
-  <ul>{listItems}</ul>,
-  document.getElementById('root')
-);
+<ul>{listItems}</ul>
 ```
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/GjPyQr?editors=0011)
@@ -64,10 +65,8 @@ function NumberList(props) {
 }
 
 const numbers = [1, 2, 3, 4, 5];
-ReactDOM.render(
-  <NumberList numbers={numbers} />,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<NumberList numbers={numbers} />);
 ```
 
 Bu kodu çalıştırdığınızda liste elemanları için bir anahtar verilmesi gerektiği konusunda size bir uyarı verilir. Bir "anahtar" öğe listeleri oluştururken eklemeniz gereken bir string özelliğidir. Bunun neden önemli olduğunu bir sonraki bölümde inceleyeceğiz.
@@ -86,12 +85,6 @@ function NumberList(props) {
     <ul>{listItems}</ul>
   );
 }
-
-const numbers = [1, 2, 3, 4, 5];
-ReactDOM.render(
-  <NumberList numbers={numbers} />,
-  document.getElementById('root')
-);
 ```
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/jrXYRR?editors=0011)
@@ -165,12 +158,6 @@ function NumberList(props) {
     </ul>
   );
 }
-
-const numbers = [1, 2, 3, 4, 5];
-ReactDOM.render(
-  <NumberList numbers={numbers} />,
-  document.getElementById('root')
-);
 ```
 
 **Örnek: Doğru Anahtar Kullanımı**
@@ -193,12 +180,6 @@ function NumberList(props) {
     </ul>
   );
 }
-
-const numbers = [1, 2, 3, 4, 5];
-ReactDOM.render(
-  <NumberList numbers={numbers} />,
-  document.getElementById('root')
-);
 ```
 
 [**CodePen'de deneyin**](https://codepen.io/gaearon/pen/ZXeOGM?editors=0010)
@@ -239,10 +220,9 @@ const posts = [
   {id: 1, title: 'Merhaba Dünya', content: 'React Öğrenmeye Hoşgeldiniz!'},
   {id: 2, title: 'Kurulum', content: 'React\'i npm üzerinden kurabilirsiniz.'}
 ];
-ReactDOM.render(
-  <Blog posts={posts} />,
-  document.getElementById('root')
-);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Blog posts={posts} />);
 ```
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/NRZYGN?editors=0010)
