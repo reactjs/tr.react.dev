@@ -275,11 +275,7 @@ Ayrıca, `setState()` otomatik olarak [kısmi bir durumu geçerli duruma birleş
 Aşağıdaki kod bunu göstermektedir. (Giriş ilk önce kilitlenir ancak kısa bir gecikme sonrasında düzenlenebilir hale gelir.)
 
 ```javascript
-<<<<<<< HEAD
-ReactDOM.render(<input value="selam" />, mountNode);
-=======
-ReactDOM.createRoot(mountNode).render(<input value="hi" />);
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+ReactDOM.createRoot(mountNode).render(<input value="selam" />);
 
 setTimeout(function() {
   ReactDOM.createRoot(mountNode).render(<input value={null} />);
