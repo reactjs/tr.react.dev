@@ -80,17 +80,10 @@ root.render(element);
 
 Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
-<<<<<<< HEAD
-1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
+1. `<Welcome name="Sara" />` elementi ile birlikte `root.render()` fonksiyonunu çağırıyoruz.
 2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor.
 3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
 4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor.
-=======
-1. We call `root.render()` with the `<Welcome name="Sara" />` element.
-2. React calls the `Welcome` component with `{name: 'Sara'}` as the props.
-3. Our `Welcome` component returns a `<h1>Hello, Sara</h1>` element as the result.
-4. React DOM efficiently updates the DOM to match `<h1>Hello, Sara</h1>`.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 >**Not:** Bileşen isimlendirmelerinde daima büyük harfle başlayınız.
 >
