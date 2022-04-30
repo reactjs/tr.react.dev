@@ -20,11 +20,7 @@ Yukarıdaki sürümler yalnızca geliştirme amaçlıdır ve yayınlamaya uygun 
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 ```
 
-<<<<<<< HEAD
-`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `17`'yı istediğiniz sürüm numarası ile değiştirin.
-=======
-To load a specific version of `react` and `react-dom`, replace `18` with the version number.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+`react`'in ve `react-dom`'un belirli bir sürümünü yüklemek için, `18`'i istediğiniz sürüm numarası ile değiştirin.
 
 ### Neden `crossorigin` Özelliği? {#why-the-crossorigin-attribute}
 
