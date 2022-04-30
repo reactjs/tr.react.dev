@@ -39,19 +39,9 @@ JSX, JavaScript için bir sözdizimi uzantısıdır. Bir şablon diline benzer a
 
 React DOM, HTML özellik adları yerine camelCase özellik adlandırma kuralını kullanır. Örneğin, JSX'te `tabindex` `tabIndex` olur. `class` özelliği de JavaScript'e özel bir sözcük olduğu için `className` olarak yazılır:
 
-<<<<<<< HEAD
-```js
-const name = 'Onur';
-ReactDOM.render(
-  <h1 className="hello">My name is {name}!</h1>,
-  document.getElementById('root')
-);
-```  
-=======
 ```jsx
-<h1 className="hello">My name is Clementine!</h1>
+<h1 className="hello">My name is Onur!</h1>
 ```
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 ## [Elemanlar](/docs/rendering-elements.html) {#elements}
 
