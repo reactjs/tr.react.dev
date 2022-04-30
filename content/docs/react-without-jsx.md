@@ -43,15 +43,8 @@ Eğer çok fazla `React.createElement` yazmaktan bıktıysanız, genel çözüm 
 ```js
 const e = React.createElement;
 
-<<<<<<< HEAD
-ReactDOM.render(
-  e('div', null, 'Merhaba Dünya'),
-  document.getElementById('root')
-);
-=======
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(e('div', null, 'Hello World'));
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+root.render(e('div', null, 'Merhaba Dünya'));
 ```
 
 Eğer bu kısaltma halini `React.createElement` için kullanırsanız, JSX olmadan React'i kullanmak daha pratik olabilir.
