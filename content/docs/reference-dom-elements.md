@@ -116,11 +116,7 @@ Normalde, alt elemanları bulunan bir eleman `contentEditable` olarak işaretlen
 
 Sunucu tarafında render ediyorsanız, sunucu ve istemcinin ekranı farklı oluşturduğuna dair uyarı alırsınız. Fakat çok nadiren, tam eşleşme neredeyse imkansızdır. Örneğin, timestamps sunucu ve istemcide farklı olması beklenir.
 
-<<<<<<< HEAD
-`suppressHydrationWarning`'i `true` olarak belirlerseniz, React sizi elemanın niteliklerindeki ve içeriğindeki uyuşmazlıklar hakkında uyarmayacaktır. Sadece bir derece aşağıya kadar çalışmaktadır. Bu nitelik çıkış kapısı olarak kullanılması amaçlanmıştır. Başka amaçlarda kullanılmamasını tavsiye ederiz. [`ReactDOM.hydrate()` dokümentasyonunda](/docs/react-dom.html#hydrate) hidrasyon ile ilgili daha fazla bilgi bulabilirsiniz.
-=======
-If you set `suppressHydrationWarning` to `true`, React will not warn you about mismatches in the attributes and the content of that element. It only works one level deep, and is intended to be used as an escape hatch. Don't overuse it. You can read more about hydration in the [`ReactDOM.hydrateRoot()` documentation](/docs/react-dom-client.html#hydrateroot).
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+`suppressHydrationWarning`'i `true` olarak belirlerseniz, React sizi elemanın niteliklerindeki ve içeriğindeki uyuşmazlıklar hakkında uyarmayacaktır. Sadece bir derece aşağıya kadar çalışmaktadır. Bu nitelik çıkış kapısı olarak kullanılması amaçlanmıştır. Başka amaçlarda kullanılmamasını tavsiye ederiz. [`ReactDOM.hydrateRoot()` dokümentasyonunda](/docs/react-dom-client.html#hydrateroot) hidrasyon ile ilgili daha fazla bilgi bulabilirsiniz.
 
 ### value {#value}
 
