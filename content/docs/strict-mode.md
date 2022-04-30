@@ -15,22 +15,13 @@ Strict Modunu uygulamanızın herhangi bir parçası için aktif hale getirebili
 
 Yukarıdaki örnekte strict mod kontrolleri `Header` ve `Footer` bileşenleri için *yapılmayacaktır*. Ancak `ComponentOne` ve `ComponentTwo` ve onların tüm alt öğeleri için kontroller yapılacaktır.
 
-<<<<<<< HEAD
 `Strict Modu` şu konularda yardımcı olur:
 * [Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme](#identifying-unsafe-lifecycles)
 * [Eski string ref API kullanımı hakkında uyarma](#warning-about-legacy-string-ref-api-usage)
 * [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
 * [Beklenmeyen yan etkileri tespit etme](#detecting-unexpected-side-effects)
 * [Eski context API tespit etme](#detecting-legacy-context-api)
-=======
-`StrictMode` currently helps with:
-* [Identifying components with unsafe lifecycles](#identifying-unsafe-lifecycles)
-* [Warning about legacy string ref API usage](#warning-about-legacy-string-ref-api-usage)
-* [Warning about deprecated findDOMNode usage](#warning-about-deprecated-finddomnode-usage)
-* [Detecting unexpected side effects](#detecting-unexpected-side-effects)
-* [Detecting legacy context API](#detecting-legacy-context-api)
-* [Detecting unsafe effects](#detecting-unsafe-effects)
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+* [Güvenli olmayan efektleri tespit etme](#detecting-unsafe-effects)
 
 React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
@@ -128,13 +119,9 @@ Strict modu, `constructor` gibi metodları kasıtlı olarak iki kere çağırara
 
 > Not:
 >
-<<<<<<< HEAD
 > React, 17. versiyonu ile birlikte, yaşam-döngüsü fonksiyonlarına yapılan ikinci çağrılardaki mesajları susturmak için `console.log()` gibi konsol metotlarını otomatik olarak değiştirmektedir. Ancak bu, bazı durumlarda istenmeyen davranışlara sebep olabilir. Bu durumda [geçici bir çözüm kullanılabilir](https://github.com/facebook/react/issues/20090#issuecomment-715927125).
-=======
-> In React 17, React automatically modifies the console methods like `console.log()` to silence the logs in the second call to lifecycle functions. However, it may cause undesired behavior in certain cases where [a workaround can be used](https://github.com/facebook/react/issues/20090#issuecomment-715927125).
->
-> Starting from React 18, React does not suppress any logs. However, if you have React DevTools installed, the logs from the second call will appear slightly dimmed. React DevTools also offers a setting (off by default) to suppress them completely.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+> 
+> React 18 versiyonundan itibaren, hiçbir log'u durdurmaz. Ancak, React DevTools kuruluysa ikinci basılan loglar biraz soluk görünecektir. React DevTools ayrıca bunları tamamen durdurmak için bir ayar sunar (varsayılan olarak kapalı gelir).
 
 ### Eski context API tespit etme {#detecting-legacy-context-api}
 
@@ -142,10 +129,7 @@ Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılac
 
 ![](../images/blog/warn-legacy-context-in-strict-mode.png)
 
-<<<<<<< HEAD
 Yeni sürüme geçmeye yardımcı olması için [yeni context API](/docs/context.html) dökümanını okuyun.
-=======
-Read the [new context API documentation](/docs/context.html) to help migrate to the new version.
 
 
 ### Ensuring reusable state {#ensuring-reusable-state}
@@ -194,4 +178,3 @@ When the component unmounts, effects are destroyed as normal:
 
 For help supporting common issues, see:
   - [How to support Reusable State in Effects](https://github.com/reactwg/react-18/discussions/18)
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
