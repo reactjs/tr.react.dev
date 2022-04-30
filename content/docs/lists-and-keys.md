@@ -33,11 +33,7 @@ const listItems = numbers.map((number) =>
 );
 ```
 
-<<<<<<< HEAD
-`listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz ve [DOM'a render ediyoruz](/docs/rendering-elements.html#rendering-an-element-into-the-dom):
-=======
-Then, we can include the entire `listItems` array inside a `<ul>` element:
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+`listItems` dizisinin tamamını bir `<ul>` elemanının içine ekliyoruz:
 
 ```javascript{2}
 <ul>{listItems}</ul>
