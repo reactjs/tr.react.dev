@@ -6,64 +6,45 @@ category: Reference
 permalink: docs/react-dom.html
 ---
 
-<<<<<<< HEAD
-React'i, `<script>` etiketinden yüklerseniz, bu üst seviye API'ları `ReactDOM` üzerinden kullanabilirsiniz. Eğer npm ile birlikte ES6 kullanıyorsanız, `import ReactDOM from 'react-dom'` yazabilirsiniz. Eğer npm ile birlikte ES5 kullanıyorsanız, `var ReactDOM = require('react-dom')` yazabilirsiniz.
-=======
-The `react-dom` package provides DOM-specific methods that can be used at the top level of your app and as an escape hatch to get outside the React model if you need to.
+`react-dom` uygulamanın en üst seviyesinde, DOM'a özel metotlar sunar ve bu da gerektiğinde React modelinin dışına çıkabilmenizi sağlar.
 
 ```js
 import * as ReactDOM from 'react-dom';
 ```
 
-If you use ES5 with npm, you can write:
+ES5'i npm ile kullanıyorsanız şöyle yazabilirsiniz:
 
 ```js
 var ReactDOM = require('react-dom');
 ```
 
-The `react-dom` package also provides modules specific to client and server apps:
+`react-dom` paketi ayrıca istemci ve sunucu uygulamalarına özel modüller sağlar:
 - [`react-dom/client`](/docs/react-dom-client.html)
 - [`react-dom/server`](/docs/react-dom-server.html)
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 ## Genel Bakış {#overview}
 
-<<<<<<< HEAD
-`react-dom` uygulamanın en üst seviyesinde, DOM'a özel metotlar sunar ve bu da gerektiğinde React modelinin dışına çıkabilmenizi sağlar. Bu arada, çoğu bileşenlerin bu modülü kullanmasına gerek olmaz.
-=======
-The `react-dom` package exports these methods:
+`react-dom` paketi şu metodları dışa aktarır:
 - [`createPortal()`](#createportal)
 - [`flushSync()`](#flushsync)
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
-These `react-dom` methods are also exported, but are considered legacy:
+Bu `react-dom` metodları de dışa aktarılır, ancak eski olarak kabul edilir:
 - [`render()`](#render)
 - [`hydrate()`](#hydrate)
 - [`findDOMNode()`](#finddomnode)
 - [`unmountComponentAtNode()`](#unmountcomponentatnode)
 
-> Note: 
+> Not: 
 > 
-> Both `render` and `hydrate` have been replaced with new [client methods](/docs/react-dom-client.html) in React 18. These methods will warn that your app will behave as if it's running React 17 (learn more [here](https://reactjs.org/link/switch-to-createroot)).
+> React 18'de, hem `render` hem de `hydrate` yeni [istemci metodları](/docs/react-dom-client.html) ile değiştirildi. Bu metodlar, uygulamanızın React versiyon 17 kullanıyormuş gibi davranacağı konusunda uyarır. ([buradan](https://reactjs.org/link/switch-to-createroot) daha fazla bilgi edinin).
 
 ### Tarayıcı Desteği {#browser-support}
 
-<<<<<<< HEAD
-=======
-React supports all modern browsers, although [some polyfills are required](/docs/javascript-environment-requirements.html) for older versions.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
-
-React, Internet Explorer 9 ve üzeri de dahil olmak üzere, tüm popüler tarayıcıları desteklemektedir. Ancak, IE 9 ve IE 10 gibi eski tarayıcılar için bazı [polyfill'ler (eklentiler) gerekmektedir](/docs/javascript-environment-requirements.html).
+React, tüm modern tarayıcıları destekler, yinede eski versiyonlar için [bazı polyfill'ler gereklidir](/docs/javascript-environment-requirements.html).
 
 > Not
 >
-<<<<<<< HEAD
 > ES5 metotlarını desteklemeyen tarayıcıları desteklemiyoruz, ama [es5-shim ve es5-sham](https://github.com/es-shims/es5-shim) gibi bazı eklentiler kullanıldığında, uygulamanızın çalıştığını görebilirsiniz. Bu yolu kullanmak sizin takdirinizdir.
-
-* * *
-=======
-> We do not support older browsers that don't support ES5 methods or microtasks such as Internet Explorer. You may find that your apps do work in older browsers if polyfills such as [es5-shim and es5-sham](https://github.com/es-shims/es5-shim) are included in the page, but you're on your own if you choose to take this path.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 ## Referans {#reference}
 
@@ -73,10 +54,7 @@ React, Internet Explorer 9 ve üzeri de dahil olmak üzere, tüm popüler taray�
 createPortal(child, container)
 ```
 
-<<<<<<< HEAD
-Girilen `container` ile DOM'a React elemanı render ederek; bileşene bir [referans](/docs/more-about-refs.html) dönüyoruz (ya da [state'siz bileşenler](/docs/components-and-props.html#function-and-class-components) icin `null` dönüyoruz).
-=======
-Creates a portal. Portals provide a way to [render children into a DOM node that exists outside the hierarchy of the DOM component](/docs/portals.html).
+Bir portal oluşturur. Portallar, [alt elemanları DOM bileşeninin hiyerarşisi dışında var olan bir DOM düğümüne render etmek](/docs/portals.html) için bir yol sağlar.
 
 ### `flushSync()` {#flushsync}
 
@@ -84,61 +62,50 @@ Creates a portal. Portals provide a way to [render children into a DOM node that
 flushSync(callback)
 ```
 
-Force React to flush any updates inside the provided callback synchronously. This method is useful for being able to read the result of those updates immediately.
+React'i, parametre olarak verilen callback içindeki tüm güncellemeleri senkron olarak çalıştırmaya zorlar. Bu, DOM'un hemen güncellenmesini sağlar.
 
-> Note:
-> 
-> `flushSync` can have a significant impact on performance. Use sparingly.
-> 
-> `flushSync` may force pending Suspense boundaries to show their `fallback` state.
-> 
-> `flushSync` may also run pending effects and synchronously apply any updates they contain before returning.
-> 
-> `flushSync` may also flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
+```javascript
+// Bu state güncellemesini senkronize olmaya zorlayın.
+flushSync(() => {
+  setCount(count + 1);
+});
+// Bu noktada, DOM güncellenmiştir.
+```
 
-## Legacy Reference {#legacy-reference}
+> Not:
+>
+> `flushSync` performansa ciddi ölçüde zarar verebilir. Dikkatli kullanın.
+>
+> `flushSync`, bekleyen Suspense sınırlarını `geçici` durumlarını göstermeye zorlayabilir.
+>
+> `flushSync` ayrıca bekleyen efektleri çalıştırabilir ve geri dönmeden önce içerdikleri güncellemeleri eşzamanlı olarak uygulayabilir.
+>
+> `flushSync`, callback içindeki güncellemeleri uygulamak için gerektiğinde callback dışındaki güncellemeleri de uygulayabilir. Örneğin, bir tıklamadan dolayı bekleyen güncellemeler varsa; React, callback içindeki güncellemeleri uygulamak için önce bunları uygulayabilir.
+
+## Eski Referans {#legacy-reference}
 ### `render()` {#render}
 ```javascript
 render(element, container[, callback])
 ```
 
-> Note:
+> Not:
 >
-> `render` has been replaced with `createRoot` in React 18. See [createRoot](/docs/react-dom-client.html#createroot) for more info.
-
-Render a React element into the DOM in the supplied `container` and return a [reference](/docs/more-about-refs.html) to the component (or returns `null` for [stateless components](/docs/components-and-props.html#function-and-class-components)).
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
-
+> React versiyon 18 ile birlikte `render`'in yerini `createRoot` aldı. Daha fazla bilgi için [createRoot](/docs/react-dom-client.html#createroot) kısmını inceleyebilirsiniz.
 
 Eğer React elemanı `container` a daha önceden render edildiyse, bu; güncelleme olarak gerçekleşir ve en güncel React elemanını yansıtmak için sadece DOM'u değiştirir.
 
-<<<<<<< HEAD
 Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da güncellendikten sonra çağrılır.
-=======
-> Note:
->
-> `render()` controls the contents of the container node you pass in. Any existing DOM elements inside are replaced when first called. Later calls use React’s DOM diffing algorithm for efficient updates.
->
-> `render()` does not modify the container node (only modifies the children of the container). It may be possible to insert a component to an existing DOM node without overwriting the existing children.
->
-> `render()` currently returns a reference to the root `ReactComponent` instance. However, using this return value is legacy
-> and should be avoided because future versions of React may render components asynchronously in some cases. If you need a reference to the root `ReactComponent` instance, the preferred solution is to attach a
-> [callback ref](/docs/refs-and-the-dom.html#callback-refs) to the root element.
->
-> Using `render()` to hydrate a server-rendered container is deprecated. Use [`hydrateRoot()`](#hydrateroot) instead.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 > Not:
 >
-> `ReactDOM.render()` ilettiğiniz konteyner elemanının içeriğini kontrol eder. İlk çağrıldığında, içerisindeki bütün DOM elemanları değiştirilir. Daha sonra yapılan çağrılar, etkili güncellemeler için React'in DOM fark bulma algoritmasını kullanır.
+> `render()` ilettiğiniz konteyner elemanının içeriğini kontrol eder. İlk çağrıldığında, içerisindeki bütün DOM elemanları değiştirilir. Daha sonra yapılan çağrılar, etkili güncellemeler için React'in DOM fark bulma algoritmasını kullanır.
 >
-> `ReactDOM.render()`, konteyner elemanını değiştirmez (yalnızca konteynerın alt elemanlarını değiştirir). Mevcut alt elemanların üzerine yazmadan varolan bir DOM elemanına, bileşen eklemek mümkün olabilir.
+> `render()`, konteyner elemanını değiştirmez (yalnızca konteynerın alt elemanlarını değiştirir). Mevcut alt elemanların üzerine yazmadan varolan bir DOM elemanına, bileşen eklemek mümkün olabilir.
 >
-> `ReactDOM.render()` halihazırda `ReactComponent` nesnesinin köküne bir referans dönüyor. Ancak, bu dönüş değerini kullanmak eskidi
+> `render()` halihazırda `ReactComponent` nesnesinin köküne bir referans dönüyor. Ancak, bu dönüş değerini kullanmak eskidi
 > ve bundan kaçınılmalıdır, çünkü React'in gelecekteki sürümleri, bazı durumlarda bileşenleri eşzamansız olarak sağlayabilir. Kök `ReactComponent` nesnesine referans gerekiyorsa, tercih edilen çözüm kök elemana bir [callback referansı](/docs/refs-and-the-dom.html#callback-refs) olmalıdır.
 >
-> Sunucu tarafından render edilen bir konteynerı hidratlamak için `ReactDOM.render()`ın kullanılması artık desteklenmiyor ve React 17'de de kaldırılacaktır. Bunun yerine [`hydrate()`](#hydrate) kullanılmalıdır.
-* * *
+> Sunucu tarafından render edilen bir konteynerı hidratlamak için `render()`ın kullanılması artık desteklenmiyor. Bunun yerine [`hydrateRoot()`](#hydrateroot) kullanılmalıdır.
 
 ### `hydrate()` {#hydrate}
 
@@ -146,15 +113,11 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 hydrate(element, container[, callback])
 ```
 
-<<<<<<< HEAD
-[`render()`](#render) ile aynıdır, ancak HTML içeriği [`ReactDOMServer`](/docs/react-dom-server.html) tarafından render edilen bir konteynırı hidratlamak için kullanılır. React, olaylarını mevcuda eklemeye çalışacaktır.
-=======
-> Note:
+> Not:
 >
-> `hydrate` has been replaced with `hydrateRoot` in React 18. See [hydrateRoot](/docs/react-dom-client.html#hydrateroot) for more info.
+> React versiyon 18 ile birlikte `hydrate`'in yerini `hydrateRoot` aldı. Daha fazla bilgi için [hydrateRoot](/docs/react-dom-client.html#hydrateroot) kısmını inceleyebilirsiniz.
 
-Same as [`render()`](#render), but is used to hydrate a container whose HTML contents were rendered by [`ReactDOMServer`](/docs/react-dom-server.html). React will attempt to attach event listeners to the existing markup.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+[`render()`](#render) ile aynıdır, ancak HTML içeriği [`ReactDOMServer`](/docs/react-dom-server.html) tarafından render edilen bir konteynırı hidratlamak için kullanılır. React, olaylarını mevcuda eklemeye çalışacaktır.
 
 React, oluşturulan içeriğin sunucu ve istemci taraflarında aynı olmasını bekler. Metin içeriğindeki farklılıkları düzeltebilir, ancak uyumsuzlukları hata olarak görmeli ve düzeltmelisiniz. Geliştirme modunda React, hidrasyon sırasında uyumsuzluklar için uyarır. Uyuşmazlık durumunda, öznitelik farklılıklarının düzeltileceğinin garantisi yoktur. Bu, performans nedenlerinden ötürü önemlidir; çünkü çoğu uygulamada uyumsuzluklar nadirdir ve bu nedenle tüm biçimlendirmeyi doğrulamak çok pahalı olacaktır.
 
@@ -172,16 +135,12 @@ Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayınız. JavaS
 unmountComponentAtNode(container)
 ```
 
-<<<<<<< HEAD
-DOM'dan yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'lerini temizleyiniz. Konteynere hiçbir bileşen yüklenmemişse, bu fonksiyonu çağırmak hiçbir şey yapmaz. Bir bileşenin bağlantısı kaldırıldıysa `true` , kaldırılacak bir bileşen yoksa `false` döndürür.
-=======
-> Note:
+> Not:
 >
-> `unmountComponentAtNode` has been replaced with `root.unmount()` in React 18. See [createRoot](/docs/react-dom-client.html#createroot) for more info.
+> React versiyon 18 ile birlikte `unmountComponentAtNode`'in yerini `root.unmount()` aldı. Daha fazla bilgi için [createRoot](/docs/react-dom-client.html#createroot) kısmını inceleyebilirsiniz.
 
-Remove a mounted React component from the DOM and clean up its event handlers and state. If no component was mounted in the container, calling this function does nothing. Returns `true` if a component was unmounted and `false` if there was no component to unmount.
+DOM'dan yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'lerini temizleyiniz. Konteynere hiçbir bileşen yüklenmemişse, bu fonksiyonu çağırmak hiçbir şey yapmaz. Bir bileşenin bağlantısı kaldırıldıysa `true` , kaldırılacak bir bileşen yoksa `false` döndürür.
 
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 * * *
 
 ### `findDOMNode()` {#finddomnode}
@@ -204,14 +163,3 @@ Bir bileşen `null` veya `false` olarak render edildiğinde, `findDOMNode`, `nul
 > `findDOMNode` fonksiyon bileşenlerinde kullanılamaz.
 
 * * *
-<<<<<<< HEAD
-
-### `createPortal()` {#createportal}
-
-```javascript
-ReactDOM.createPortal(child, container)
-```
-
-Bir portal oluşturur. Portallar [alt elamanlari DOM bileşeninin hiyerarşisi dışında bulunan bir DOM elemanını render için](/docs/portals.html) bir yol sağlar.
-=======
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
