@@ -65,9 +65,6 @@ Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağ
 - [`React.lazy`](#reactlazy)
 - [`React.Suspense`](#reactsuspense)
 
-<<<<<<< HEAD
-### Hook'lar {#hooks}
-=======
 ### Transitions {#transitions}
 
 *Transitions* are a new concurrent feature introduced in React 18. They allow you to mark updates as transitions, which tells React that they can be interrupted and avoid going back to Suspense fallbacks for already visible content.
@@ -75,8 +72,7 @@ Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağ
 - [`React.startTransition`](#starttransition)
 - [`React.useTransition`](/docs/hooks-reference.html#usetransition)
 
-### Hooks {#hooks}
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+### Hook'lar {#hooks}
 
 *Hook'lar*, React 16.8 ile gelen yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar. Hook'lar [özel bir döküman bölümüne](/docs/hooks-intro.html) ve ayrı bir API referansına sahiptir:
 
@@ -346,21 +342,11 @@ const SomeComponent = React.lazy(() => import('./SomeComponent'));
 
 `lazy` bileşenlerin render edilmesi için render ağacında daha yukarıda bulunan bir `<React.Suspense>` bileşeninin olması gerektiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
 
-<<<<<<< HEAD
-> **Not:**
->
-> `React.lazy`'i dinamik içe aktarma ile kullanmak JS ortamında Promise'lerin kullanılabilir olmasını gerektirir. Bu, IE11 (Internet Explorer 11) ve aşağısı için bir polyfill gerektirir.
-
 ### `React.Suspense` {#reactsuspense}
 
-`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Günümüzde, tembel (`lazy`) yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
-=======
-### `React.Suspense` {#reactsuspense}
+`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Gelecekte, veri alma gibi daha fazla senaryoyu `Suspense` 'in işlemesine izin vermeyi planlıyoruz. Bunu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
-`React.Suspense` lets you specify the loading indicator in case some components in the tree below it are not yet ready to render. In the future we plan to let `Suspense` handle more scenarios such as data fetching. You can read about this in [our roadmap](/blog/2018/11/27/react-16-roadmap.html).
-
-Today, lazy loading components is the **only** use case supported by `<React.Suspense>`:
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+Günümüzde, tembel (`lazy`) yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
 
 ```js
 // Bu bileşen dinamik olarak yüklenir
@@ -380,13 +366,6 @@ function MyComponent() {
 
 Bu, [kod bölümleme kılavuzumuzda](/docs/code-splitting.html#reactlazy) anlatılmıştır. `lazy` bileşenlerin `Suspense` ağacının içinde derinlerde olabileceğini unutmayın (her birini sarmak zorunda değildir). En iyi uygulama, bir yükleme göstergesi görmek istediğiniz yerlere `Suspense` koymak, ancak kodu bölmek istediğiniz her yerde `lazy()` kullanmaktır.
 
-<<<<<<< HEAD
-Bu bugün desteklenmiyor olsa da, gelecekte `Suspense`'in veri toplama gibi daha fazla durum ile ilgilenmesine izin vermeyi planlıyoruz. Bu konuyu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
-
->Not:
->
->`React.lazy()` ve `<React.Suspense>` henüz `ReactDOMServer` tarafından desteklenmiyor. Bu, gelecekte çözülecek olan bilinen bir sınırlamadır.
-=======
 > Note
 > 
 > For content that is already shown to the user, switching back to a loading indicator can be disorienting. It is sometimes better to show the "old" UI while the new UI is being prepared. To do this, you can use the new transition APIs [`startTransition`](#starttransition) and [`useTransition`](/docs/hooks-reference.html#usetransition) to mark updates as transitions and avoid unexpected fallbacks.
@@ -413,4 +392,3 @@ React.startTransition(callback)
 > Updates in a transitions will not show a fallback for re-suspended content, allowing the user to continue interacting while rendering the update.
 >
 > `React.startTransition` does not provide an `isPending` flag. To track the pending status of a transition see [`React.useTransition`](/docs/hooks-reference.html#usetransition).
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
