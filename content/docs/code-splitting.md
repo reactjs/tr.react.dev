@@ -83,17 +83,7 @@ Eğer Webpack ayarlarını kendiniz yapıyorsanız, Webpack'in [kod bölümleme 
 
 ## `React.lazy` {#reactlazy}
 
-<<<<<<< HEAD
-> Not:
->
-> `React.lazy` ve Suspense henüz server-side rendering için kullanılabilir değildir. Eğer server taraflı görüntülenen uygulamalar için
-> kod bölümleme yapmak isterseniz, [Loadable Components](https://github.com/gregberge/loadable-components)'ı tavsiye ederiz. Çok iyi bir
-> [server-side rendering için paket bölümleme rehberi](https://loadable-components.com/docs/server-side-rendering/) var.
-
 `React.lazy` fonksiyonu, dinamik import'u normal bir bileşen gibi render etmeye yarar.
-=======
-The `React.lazy` function lets you render a dynamic import as a regular component.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
 
 **Önce:**
 
@@ -153,9 +143,6 @@ function MyComponent() {
 }
 ```
 
-<<<<<<< HEAD
-### Hata Sınırları {#error-boundaries}
-=======
 ### Avoiding fallbacks {#avoiding-fallbacks}
 Any component may suspend as a result of rendering, even components that were already shown to the user. In order for screen content to always be consistent, if an already shown component suspends, React has to hide its tree up to the closest `<Suspense>` boundary. However, from the user's perspective, this can be disorienting.
 
@@ -202,8 +189,7 @@ function handleTabSelect(tab) {
 
 Here, you tell React that setting tab to `'comments'` is not an urgent update, but is a [transition](/docs/react-api.html#transitions) that may take some time. React will then keep the old UI in place and interactive, and will switch to showing `<Comments />` when it is ready. See [Transitions](/docs/react-api.html#transitions) for more info.
 
-### Error boundaries {#error-boundaries}
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+### Hata Sınırları {#error-boundaries}
 
 Eğer diğer modül bir nedenden dolayı yüklenmezse (örneğin, ağ sorunu) hata fırlatacaktır. Güzel bir kullanıcı deneyimi sunmak ve kurtarmayı yönetmek için bu hataları [Hata Sınırları](/docs/error-boundaries.html) ile işleyebilirsiniz. Hata Sınırı oluşturduktan sonra, ağ sorunu olduğunda hata göstermek için Hata Sınırını lazy bileşenlerinizin üstünde herhangi bir yerde kullanabilirsiniz.
 
