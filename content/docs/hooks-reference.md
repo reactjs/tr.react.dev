@@ -144,17 +144,12 @@ Temizlik fonksiyonu, bellek sızıntılarını önlemek için, bileşen ekrandan
 
 Buna rağmen, tüm efekler ertelenemeyebilir. Örneğin, kullanıcının görebildiği, DOM üzerindeki bir değişiklik bir sonraki ekrana yazdırma aşamasından önce gerçekleşmelidir ki kullanıcı görsel bir uyumsuzluk yaşamasın. (Aradaki ayırım konsept olarak pasif vs. aktif olay dinleyicilerine benzer.) Bu tip efekler için React, [`useLayoutEffect`](#uselayouteffect) adında başka bir hook daha sağlar. Bu hook da `useEffect` ile aynı şekilde çalışır, sadece ne zaman çalıştırılacağı farklıdır.
 
-<<<<<<< HEAD
-`useEffect` tarayıcı ekrana yazdırma işlemini tamamlanana kadar geciktirilmiş olmasına rağmen, herhangi bir yeniden-render işleminden önce çalışması da garanti edilir. React her zaman bir önceki render işleminin efektlerini, yeni bir güncellemeye başlamadan önce temizleyecektir.
-=======
 Additionally, starting in React 18, the function passed to `useEffect` will fire synchronously **before** layout and paint when it's the result of a discrete user input such as a click, or when it's the result of an update wrapped in [`flushSync`](/docs/react-dom.html#flushsync). This behavior allows the result of the effect to be observed by the event system, or by the caller of [`flushSync`](/docs/react-dom.html#flushsync).
-
 > Note
 > 
 > This only affects the timing of when the function passed to `useEffect` is called - updates scheduled inside these effects are still deferred. This is different than [`useLayoutEffect`](#uselayouteffect), which fires the function and processes the updates inside of it immediately.
 
-Even in cases where `useEffect` is deferred until after the browser has painted, it's guaranteed to fire before any new renders. React will always flush a previous render's effects before starting a new update.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
+`useEffect` tarayıcı ekrana yazdırma işlemini tamamlanana kadar geciktirilmiş olmasına rağmen, herhangi bir yeniden-render işleminden önce çalışması da garanti edilir. React her zaman bir önceki render işleminin efektlerini, yeni bir güncellemeye başlamadan önce temizleyecektir.
 
 #### Şartlı olarak bir efekti çalıştırmak {#conditionally-firing-an-effect}
 
@@ -523,9 +518,6 @@ Bu sebepten dolayı `useDebugValue` opsiyonel olarak bir biçimlendirme fonksiyo
 
 ```js
 useDebugValue(date, date => date.toDateString());
-<<<<<<< HEAD
-```
-=======
 ```
 
 ### `useDeferredValue` {#usedeferredvalue}
@@ -719,4 +711,3 @@ The signature is identical to `useEffect`, but it fires synchronously _before_ a
 > Note:
 >
 > `useInsertionEffect` should be limited to css-in-js library authors. Prefer [`useEffect`](#useeffect) or [`useLayoutEffect`](#uselayouteffect) instead.
->>>>>>> 707f22d25f5b343a2e5e063877f1fc97cb1f48a1
