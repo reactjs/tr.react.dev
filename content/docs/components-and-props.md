@@ -66,26 +66,31 @@ React, kullanıcı tanımlı bir bileşeni gördüğü zaman, JSX özelliklerini
 
 Örneğin aşağıdaki kod, sayfada "Hello, Sara" mesajını görüntüler:
 
-```js{1,5}
+```js{1,6}
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
 }
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
 const element = <Welcome name="Sara" />;
-ReactDOM.render(
-  element,
-  document.getElementById('root')
-);
+root.render(element);
 ```
 
 **[Codepen'de Deneyin](https://codepen.io/gaearon/pen/YGYmEG?editors=1010)**
 
 Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
+<<<<<<< HEAD
 1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
 2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor.
 3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
 4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor.
+=======
+1. We call `root.render()` with the `<Welcome name="Sara" />` element.
+2. React calls the `Welcome` component with `{name: 'Sara'}` as the props.
+3. Our `Welcome` component returns a `<h1>Hello, Sara</h1>` element as the result.
+4. React DOM efficiently updates the DOM to match `<h1>Hello, Sara</h1>`.
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 >**Not:** Bileşen isimlendirmelerinde daima büyük harfle başlayınız.
 >
@@ -113,11 +118,6 @@ function App() {
     </div>
   );
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
 ```
 
 **[Codepen'de Deneyin](https://codepen.io/gaearon/pen/KgQKPr?editors=1010)**

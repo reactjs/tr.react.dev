@@ -25,7 +25,11 @@ Bu bölümde, mevcut bir HTML sayfasına nasıl React bileşeni ekleneceğini g�
 
 Karmaşık bir araç veya yükleme gereksinimi olmayacak. **Bu bölümü tamamlamak için sadece bir internet bağlantısına ve bir dakikanıza ihtiyacınız var.**
 
+<<<<<<< HEAD
 İsteğe bağlı: [Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/f6c882b6ae18bde42dcf6fdb751aae93495a2275.zip)
+=======
+Optional: [Download the full example (2KB zipped)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 ### Adım 1: HTML koduna bir Div Ekleme {#step-1-add-a-dom-container-to-the-html}
 
@@ -52,10 +56,17 @@ Daha sonra, `</body>` etiketini kapatmadan hemen önce HTML sayfasına üç `<sc
 ```html{5,6,9}
   <!-- ... diğer HTML ... -->
 
+<<<<<<< HEAD
   <!-- React'i yükle. -->
   <!-- Not: yayınlama için hazırlanırken,  "development.js" yi "production.min.js" ile değiştirin -->
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+=======
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
   <!-- React bileşenimizi yükleyin. -->
   <script src="like_button.js"></script>
@@ -75,16 +86,28 @@ HTML sayfanızın yanına `like_button.js` adlı bir dosya oluşturun.
 >
 >Bu kod, `LikeButton` adı verilen bir React bileşenini tanımlar. Henüz anlamadıysanız endişelenmeyin. React'in yapı taşlarını daha sonra [uygulamalı eğitim](/tutorial/tutorial.html) ve [ana kavramlar rehberi](/docs/hello-world.html)nde ele alacağız. Şimdilik sadece ekranda gösterelim!
 
+<<<<<<< HEAD
 **[Başlangıç ​​kodundan](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** sonra, `like_button.js`'in en altına iki satır ekleyin :
 
 ```js{3,4}
 // ... yapıştırdığınız başlangıç kodu ...
+=======
+After **[the starter code](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)**, add three lines to the bottom of `like_button.js`:
+
+```js{3,4,5}
+// ... the starter code you pasted ...
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 const domContainer = document.querySelector('#like_button_container');
-ReactDOM.render(e(LikeButton), domContainer);
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(LikeButton));
 ```
 
+<<<<<<< HEAD
 Bu iki kod satırı ilk adımda HTML’e eklediğimiz `<div>`'i bulur ve ardından içinde React bileşeni olan “Beğen” düğmesini gösterir.
+=======
+These three lines of code find the `<div>` we added to our HTML in the first step, create a React app with it, and then display our "Like" button React component inside of it.
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 ### Bu kadar! {#thats-it}
 
@@ -94,7 +117,11 @@ React'i entegre etmekle ilgili daha fazla İpucu için sonraki bölümlere göz 
 
 **[Örnek kaynak kodunun tamamını görüntüleyin](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605)**
 
+<<<<<<< HEAD
 **[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/f6c882b6ae18bde42dcf6fdb751aae93495a2275.zip)**
+=======
+**[Download the full example (2KB zipped)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)**
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 ### İpucu: Bir Bileşeni Yeniden Kullanma {#tip-reuse-a-component}
 
@@ -102,7 +129,11 @@ Genellikle, HTML sayfasındaki React bileşenlerini birden fazla yerde görünt�
 
 [Örnek kaynak kodunun tamamını görüntüleyin](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda)
 
+<<<<<<< HEAD
 [Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/9d0dd0ee941fea05fd1357502e5aa348abb84c12.zip)
+=======
+[Download the full example (2KB zipped)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/279839cb9891bd41802ebebc5365e9dec08eeb9f.zip)
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 >Not
 >
@@ -115,8 +146,8 @@ Web sitenizi yayına almadan önce, küçültülmemiş JavaScript'in sayfanızı
 Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getirilen HTML'in de React'in `production.min.js` içinde biten sürümlerini yüklediğinden emin olursanız **siteniz yayına hazır** olur:
 
 ```js
-<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 ```
 
 JavaScript dosyalarınız için bir küçültme adımınız yoksa [ayarlamanın bir yolu budur](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3).

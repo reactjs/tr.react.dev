@@ -34,7 +34,11 @@ Buna "root" (kök) düğüm denir; çünkü içerisindeki her şey React DOM tar
 
 Genellikle React ile yazılan uygulamalar, sadece bir adet kök DOM düğümü içerirler. Eğer React'i mevcut uygulamanıza entegre ediyorsanız, birbirinden izole olacak şekilde dilediğiniz kadar kök DOM düğümüne sahip olabilirsiniz.
 
+<<<<<<< HEAD
 Kök DOM düğümü içerisinde bir React elementini render etmek istiyorsanız, bu iki parametreyi de [`ReactDOM.render()`](/docs/react-dom.html#render) metoduna geçirmeniz gereklidir:
+=======
+To render a React element, first pass the DOM element to [`ReactDOM.createRoot()`](/docs/react-dom-client.html#createroot), then pass the React element to `root.render()`:
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 `embed:rendering-elements/render-an-element.js`
 
@@ -46,7 +50,11 @@ Sayfada "Hello, world" mesajı görüntülenecektir.
 
 React elementleri [immutable(değişmez)](https://en.wikipedia.org/wiki/Immutable_object)'dır. Yani bir kez React elementi oluşturduktan sonra, o elementin alt elemanlarını veya özelliklerini değiştiremezsiniz. Bu nedenle element, bütün bir videonun tek bir karesi gibidir: arayüzün belirli bir andaki görüntüsünü temsil eder.
 
+<<<<<<< HEAD
 Bu zamana kadar edindiğimiz bilgiler ışığında, kullanıcı arayüzünün güncellenmesi için tek yolun, yeni bir element oluşturup, [`ReactDOM.render()`](/docs/react-dom.html#render) metoduna aktarmak olduğunu biliyoruz.
+=======
+With our knowledge so far, the only way to update the UI is to create a new element, and pass it to `root.render()`.
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 Aşağıdaki saat örneğini ele alalım:
 
@@ -54,11 +62,19 @@ Aşağıdaki saat örneğini ele alalım:
 
 **[Codepen'de Deneyin](https://codepen.io/gaearon/pen/gwoJZk?editors=1010)**
 
+<<<<<<< HEAD
 [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) metodu ile her saniye bitiminde [`ReactDOM.render()`](/docs/react-dom.html#render) metodu çağrılıyor.
+=======
+It calls [`root.render()`](/docs/react-dom.html#render) every second from a [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) callback.
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 
 >**Not:**
 >
+<<<<<<< HEAD
 >Genelde birçok React uygulamasında [`ReactDOM.render()`](/docs/react-dom.html#render) yalnızca bir kez çağrılır. Sonraki bölümlerde bu tarz kodların nasıl [state'li bileşenlere](/docs/state-and-lifecycle.html) dönüştürüleceğine değineceğiz.
+=======
+>In practice, most React apps only call `root.render()` once. In the next sections we will learn how such code gets encapsulated into [stateful components](/docs/state-and-lifecycle.html).
+>>>>>>> 5f3a9756e00e256735a5f52df19b403d8fdd3a9d
 >
 >Her bir konu diğeri için zemin hazırladığından, bu konuları atlamamanızı öneririz. 
 
