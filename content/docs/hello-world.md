@@ -7,11 +7,11 @@ next: introducing-jsx.html
 ---
 
 En basit React örneği aşağıdaki gibidir:
-```js
-ReactDOM.render(
-  <h1>Merhaba dünya!</h1>,
-  document.getElementById('root')
-);
+
+```jsx
+ReactDOM
+  .createRoot(document.getElementById('root'))
+  .render(<h1>Merhaba dünya!</h1>);
 ```
 
 

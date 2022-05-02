@@ -59,7 +59,7 @@ Yüzeysel test etmenin şu anda bazı kısıtlamaları var, mesela ref'leri dest
 
 shallowRenderer'ı, test ettiğiniz bileşeni render edeceğiniz ve bu bileşenin çıktısını alabileceğiniz bir "yer" olarak düşünebilirsiniz.
 
-`shallowRenderer.render()`, [`ReactDOM.render()`](/docs/react-dom.html#render)'a benzer, ancak DOM gerektirmez ve yalnızca bir seviye alta render eder. Bu, alt öğelerinin nasıl uygulandığından bağımsız şekilde bileşenleri test edebileceğiniz anlamına gelir.
+`shallowRenderer.render()`, [`root.render()`](/docs/react-dom-client.html#createroot)'a benzer, ancak DOM gerektirmez ve yalnızca bir seviye alta render eder. Bu, alt öğelerinin nasıl uygulandığından bağımsız şekilde bileşenleri test edebileceğiniz anlamına gelir.
 
 ### `shallowRenderer.getRenderOutput()` {#shallowrenderergetrenderoutput}
 

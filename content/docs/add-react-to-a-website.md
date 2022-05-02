@@ -53,9 +53,9 @@ Daha sonra, `</body>` etiketini kapatmadan hemen önce HTML sayfasına üç `<sc
   <!-- ... diğer HTML ... -->
 
   <!-- React'i yükle. -->
-  <!-- Not: yayınlama için hazırlanırken,  "development.js" yi "production.min.js" ile değiştirin -->
-  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <!-- Not: yayınlama için hazırlanırken, "development.js" yi "production.min.js" ile değiştirin -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
   <!-- React bileşenimizi yükleyin. -->
   <script src="like_button.js"></script>
@@ -77,14 +77,15 @@ HTML sayfanızın yanına `like_button.js` adlı bir dosya oluşturun.
 
 **[Başlangıç ​​kodundan](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** sonra, `like_button.js`'in en altına iki satır ekleyin :
 
-```js{3,4}
+```js{3,4,5}
 // ... yapıştırdığınız başlangıç kodu ...
 
 const domContainer = document.querySelector('#like_button_container');
-ReactDOM.render(e(LikeButton), domContainer);
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(LikeButton));
 ```
 
-Bu iki kod satırı ilk adımda HTML’e eklediğimiz `<div>`'i bulur ve ardından içinde React bileşeni olan “Beğen” düğmesini gösterir.
+Bu üç kod satırı ilk adımda HTML’e eklediğimiz `<div>`'i bulur ve ardından içinde React bileşeni olan “Beğen” düğmesini gösterir.
 
 ### Bu kadar! {#thats-it}
 
@@ -115,8 +116,8 @@ Web sitenizi yayına almadan önce, küçültülmemiş JavaScript'in sayfanızı
 Uygulama komut dosyalarını küçültürseniz ve yayınlamaya hazır hale getirilen HTML'in de React'in `production.min.js` içinde biten sürümlerini yüklediğinden emin olursanız **siteniz yayına hazır** olur:
 
 ```js
-<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 ```
 
 JavaScript dosyalarınız için bir küçültme adımınız yoksa [ayarlamanın bir yolu budur](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3).

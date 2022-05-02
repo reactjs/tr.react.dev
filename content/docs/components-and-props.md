@@ -72,17 +72,15 @@ function Welcome(props) {
 }
 
 const element = <Welcome name="Sara" />;
-ReactDOM.render(
-  element,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(element);
 ```
 
 **[Codepen'de Deneyin](https://codepen.io/gaearon/pen/YGYmEG?editors=1010)**
 
 Bu örnekte, hangi olayların gerçekleştiğine bir bakalım:
 
-1. `<Welcome name="Sara" />` elementi ile birlikte `ReactDOM.render()` fonksiyonunu çağırıyoruz.
+1. `<Welcome name="Sara" />` elementi ile birlikte `root.render()` fonksiyonunu çağırıyoruz.
 2. Devamında React, `{name: 'Sara'}` prop'u ile `Welcome` bileşenini çağırıyor.
 3. `Welcome` bileşenimiz, sonuç olarak geriye bir `<h1>Hello, Sara</h1>` elementi döndürüyor.
 4. React DOM, `<h1>Hello, Sara</h1>` ile eşleşmek için, DOM'ı arka planda efektif bir şekilde güncelliyor.
@@ -113,11 +111,6 @@ function App() {
     </div>
   );
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
 ```
 
 **[Codepen'de Deneyin](https://codepen.io/gaearon/pen/KgQKPr?editors=1010)**

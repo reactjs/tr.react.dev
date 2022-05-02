@@ -34,7 +34,7 @@ Buna "root" (kök) düğüm denir; çünkü içerisindeki her şey React DOM tar
 
 Genellikle React ile yazılan uygulamalar, sadece bir adet kök DOM düğümü içerirler. Eğer React'i mevcut uygulamanıza entegre ediyorsanız, birbirinden izole olacak şekilde dilediğiniz kadar kök DOM düğümüne sahip olabilirsiniz.
 
-Kök DOM düğümü içerisinde bir React elementini render etmek istiyorsanız, bu iki parametreyi de [`ReactDOM.render()`](/docs/react-dom.html#render) metoduna geçirmeniz gereklidir:
+Bir React elementini render etmek istiyorsanız, öncelikle dom elemanı ile [`ReactDOM.createRoot()`](/docs/react-dom-client.html#createroot) metodunu çağırın, ardından React elemanını, `root.render()` metoduna parametre olarak geçirmeniz gereklidir:
 
 `embed:rendering-elements/render-an-element.js`
 
@@ -46,7 +46,7 @@ Sayfada "Hello, world" mesajı görüntülenecektir.
 
 React elementleri [immutable(değişmez)](https://en.wikipedia.org/wiki/Immutable_object)'dır. Yani bir kez React elementi oluşturduktan sonra, o elementin alt elemanlarını veya özelliklerini değiştiremezsiniz. Bu nedenle element, bütün bir videonun tek bir karesi gibidir: arayüzün belirli bir andaki görüntüsünü temsil eder.
 
-Bu zamana kadar edindiğimiz bilgiler ışığında, kullanıcı arayüzünün güncellenmesi için tek yolun, yeni bir element oluşturup, [`ReactDOM.render()`](/docs/react-dom.html#render) metoduna aktarmak olduğunu biliyoruz.
+Bu zamana kadar edindiğimiz bilgiler ışığında, kullanıcı arayüzünün güncellenmesi için tek yolun, yeni bir element oluşturup, onu `root.render()` metoduna aktarmak olduğunu biliyoruz.
 
 Aşağıdaki saat örneğini ele alalım:
 
@@ -54,11 +54,11 @@ Aşağıdaki saat örneğini ele alalım:
 
 **[Codepen'de Deneyin](https://codepen.io/gaearon/pen/gwoJZk?editors=1010)**
 
-[`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) metodu ile her saniye bitiminde [`ReactDOM.render()`](/docs/react-dom.html#render) metodu çağrılıyor.
+[`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) metodu ile her saniye bitiminde [`root.render()`](/docs/react-dom.html#render) metodu çağrılıyor.
 
 >**Not:**
 >
->Genelde birçok React uygulamasında [`ReactDOM.render()`](/docs/react-dom.html#render) yalnızca bir kez çağrılır. Sonraki bölümlerde bu tarz kodların nasıl [state'li bileşenlere](/docs/state-and-lifecycle.html) dönüştürüleceğine değineceğiz.
+>Genelde birçok React uygulamasında `root.render()` yalnızca bir kez çağrılır. Sonraki bölümlerde bu tarz kodların nasıl [state'li bileşenlere](/docs/state-and-lifecycle.html) dönüştürüleceğine değineceğiz.
 >
 >Her bir konu diğeri için zemin hazırladığından, bu konuları atlamamanızı öneririz. 
 

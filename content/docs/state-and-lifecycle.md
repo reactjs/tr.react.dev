@@ -10,9 +10,11 @@ next: handling-events.html
 
 Bu sayfada, state kavramı ve React bileşenlerinin yaşam döngüsü tanıtılacaktır. Bileşen API'si hakkında ayrıntılı bilgi için, [bu dokümana](/docs/react-component.html) bakabilirsiniz.
 
-[Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alacağız. Hatırlayacağınız gibi, [Elementlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `ReactDOM.render()` metodu ile gerçekleştirebiliyorduk:
+[Önceki bölümlerde bahsettiğimiz](/docs/rendering-elements.html#updating-the-rendered-element), analog saat örneğini ele alacağız. Hatırlayacağınız gibi, [Elementlerin Render Edilmesi](/docs/rendering-elements.html#rendering-an-element-into-the-dom) bölümünde, kullanıcı arayüzünün yalnızca tek yönlü güncellenmesine yer vermiştik. Bunu `root.render()` metodu ile gerçekleştirebiliyorduk:
 
-```js{8-11}
+```js{10}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+  
 function tick() {
   const element = (
     <div>
@@ -20,10 +22,7 @@ function tick() {
       <h2>It is {new Date().toLocaleTimeString()}.</h2>
     </div>
   );
-  ReactDOM.render(
-    element,
-    document.getElementById('root')
-  );
+  root.render(element);
 }
 
 setInterval(tick, 1000);
@@ -35,7 +34,9 @@ Bu bölümde ise, `Clock` bileşenini nasıl sarmalayacağımıza ve tekrar kull
 
 Öncelikle Clock'u, ayrı bir bileşen halinde sarmalayarak görüntüleyelim:
 
-```js{3-6,12}
+```js{5-8,13}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
 function Clock(props) {
   return (
     <div>
@@ -46,10 +47,7 @@ function Clock(props) {
 }
 
 function tick() {
-  ReactDOM.render(
-    <Clock date={new Date()} />,
-    document.getElementById('root')
-  );
+  root.render(<Clock date={new Date()} />);
 }
 
 setInterval(tick, 1000);
@@ -62,10 +60,7 @@ Güzel görünüyor ancak bu aşamada kritik bir gereksinimi atladık: `Clock`'u
 Aşağıdaki kodu bir kere yazdığımızda, `Clock`'un artık kendi kendisini güncellemesini istiyoruz:
 
 ```js{2}
-ReactDOM.render(
-  <Clock />,
-  document.getElementById('root')
-);
+root.render(<Clock />);
 ```
 
 Bunu yapmak için, `Clock` bileşenine **state** eklememiz gerekiyor.
@@ -160,10 +155,7 @@ Sınıf bileşenleri `React.Component` sınıfından türetildikleri için, daim
 3) `<Clock />` elementinden `date` prop'unu çıkaralım:
 
 ```js{2}
-ReactDOM.render(
-  <Clock />,
-  document.getElementById('root')
-);
+root.render(<Clock />);
 ```
 
 Zamanlayıcı kodunu, daha sonra `Clock` bileşenin içerisine ekleyeceğiz. Fakat şimdilik `Clock` bileşeninin son hali aşağıdaki gibi olacaktır:
@@ -185,10 +177,8 @@ class Clock extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Clock />,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clock />);
 ```
 
 [**CodePen'de deneyin**](http://codepen.io/gaearon/pen/KgQpJd?editors=0010)
@@ -294,10 +284,8 @@ class Clock extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Clock />,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clock />);
 ```
 
 [**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/amqdNA?editors=0010)
@@ -306,7 +294,7 @@ Artık saat, her saniye başı tikleyerek mevcut zamanı görüntüleyecektir.
 
 Şimdi kısa bir özet geçerek neler yaptığımızı ve sırasıyla hangi metotların çağrıldığını kontrol edelim:
 
-1) `ReactDOM.render()` metoduna `<Clock />` aktarıldığı zaman React, `Clock` bileşeninin constructor'ını çağırır. `Clock` bileşeni, mevcut saati görüntülemesi gerektiğinden, `this.state`'e o anki zamanı atar. Daha sonra bu state güncellenecektir.
+1) `root.render()` metoduna `<Clock />` aktarıldığı zaman React, `Clock` bileşeninin constructor'ını çağırır. `Clock` bileşeni, mevcut saati görüntülemesi gerektiğinden, `this.state`'e o anki zamanı atar. Daha sonra bu state güncellenecektir.
 
 2) Devamında React, `Clock` bileşeninin `render()` metodunu çağırır. Bu sayede React, ekranda nelerin gösterilmesi gerektiğini bilir. Sonrasında ise `Clock`'un render edilmiş çıktısı ile eşleşmek için ilgili DOM güncellemelerini gerçekleştirir.
 
@@ -447,11 +435,6 @@ function App() {
     </div>
   );
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
 ```
 
 [**CodePen'de Deneyin**](http://codepen.io/gaearon/pen/vXdGmd?editors=0010)
