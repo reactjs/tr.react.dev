@@ -31,7 +31,7 @@ jobs:
         with:
           path: beta/.next/cache
           # change this if you prefer a more strict cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-reactjs-tr-org
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Build next.js app
         # change this if your site requires a custom build command
