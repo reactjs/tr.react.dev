@@ -192,7 +192,11 @@ class Chosen extends React.Component {
 
 React, diğer uygulamalara [`createRoot()`](/docs/react-dom-client.html#createRoot)'un esnekliği sayesinde gömülebilir.
 
+<<<<<<< HEAD
 React, başlangıçta genellikle DOM'a tek bir kök React bileşeni yüklemek için kullanılsa da, `root.render()` bir buton kadar küçük veya bir uygulama kadar büyük olabilen UI'ın (Kullanıcı Arayüzü'nün) bağımsız bölümleri için bir çok kez çağrılabilir.
+=======
+Although React is commonly used at startup to load a single root React component into the DOM, `createRoot()` can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.
+>>>>>>> 26a870e1c6e232062b760d37620d85802750e985
 
 Aslında, Facebook'ta React tam olarak böyle kullanılır. Bu, uygulamaları React'te parça parça yazmamızı sağlar, ve bunları mevcut sunucu tarafından oluşturulan şablonlarımız ve diğer istemci-taraf (client-side) kod ile birleştirir.
 
@@ -246,20 +250,22 @@ function HelloButton() {
 
 Aşağıda, `ParagraphView` olarak bilinen bir Backbone görünümü oluşturacağız. Bu bir React `<Paragraph>` bileşenini, Backbone (`this.el`) tarafından sunulan DOM öğesi oluşturmak için Backbone'nın `render()` fonksiyonun geçersiz kılar. Burada da [`ReactDOM.createRoot()`](/docs/react-dom-client.html#createroot) kullanıyoruz:
 
-```js{1,5,8-9,13}
+```js{7,11,15}
 function Paragraph(props) {
   return <p>{props.text}</p>;
 }
 
 const ParagraphView = Backbone.View.extend({
+  initialize(options) {
+    this.reactRoot = ReactDOM.createRoot(this.el);
+  },
   render() {
     const text = this.model.get('text');
-    this.root = ReactDOM.createRoot(this.el);
-    this.root.render(<Paragraph text={text} />);
+    this.reactRoot.render(<Paragraph text={text} />);
     return this;
   },
   remove() {
-    this.root.unmount();
+    this.reactRoot.unmount();
     Backbone.View.prototype.remove.call(this);
   }
 });

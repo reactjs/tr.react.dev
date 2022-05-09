@@ -67,7 +67,11 @@ Hata sınırları, bileşenler için JavaScript'in `catch {}` bloğu gibidir. Ya
 
 ## Canlı Demo {#live-demo}
 
+<<<<<<< HEAD
 [React 16](/blog/2017/09/26/react-v16.0.html) ile [bir hata sınırının nasıl tanımlandığı ve kullanıldığına](https://codepen.io/gaearon/pen/wqvxGa?editors=0010) göz atınız.
+=======
+Check out [this example of declaring and using an error boundary](https://codepen.io/gaearon/pen/wqvxGa?editors=0010).
+>>>>>>> 26a870e1c6e232062b760d37620d85802750e985
 
 
 ## Hata Sınırlarının Konumlandırılması {#where-to-place-error-boundaries}
