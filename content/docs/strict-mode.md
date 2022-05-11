@@ -21,7 +21,8 @@ Yukarıdaki örnekte strict mod kontrolleri `Header` ve `Footer` bileşenleri i�
 * [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
 * [Beklenmeyen yan etkileri tespit etme](#detecting-unexpected-side-effects)
 * [Eski context API tespit etme](#detecting-legacy-context-api)
-* [Güvenli olmayan efektleri tespit etme](#detecting-unsafe-effects)
+* [State'in yeniden kullanılabilirliğini korumak](#ensuring-reusable-state)
+
 
 React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
@@ -132,7 +133,7 @@ Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılac
 Yeni sürüme geçmeye yardımcı olması için [yeni context API](/docs/context.html) dökümanını okuyun.
 
 
-### Ensuring reusable state {#ensuring-reusable-state}
+### State'in yeniden kullanılabilirliğini korumak {#ensuring-reusable-state}
 
 In the future, we’d like to add a feature that allows React to add and remove sections of the UI while preserving state. For example, when a user tabs away from a screen and back, React should be able to immediately show the previous screen. To do this, React support remounting trees using the same component state used before unmounting.
 
@@ -171,6 +172,14 @@ When the component unmounts, effects are destroyed as normal:
   * Layout effects are destroyed.
   * Effect effects are destroyed.
 ```
+
+Unmounting and remounting includes:
+
+- `componentDidMount`
+- `componentWillUnmount`
+- `useEffect`
+- `useLayoutEffect`
+- `useInsertionEffect`
 
 > Note:
 >

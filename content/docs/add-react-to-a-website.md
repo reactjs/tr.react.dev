@@ -25,7 +25,7 @@ Bu bölümde, mevcut bir HTML sayfasına nasıl React bileşeni ekleneceğini g�
 
 Karmaşık bir araç veya yükleme gereksinimi olmayacak. **Bu bölümü tamamlamak için sadece bir internet bağlantısına ve bir dakikanıza ihtiyacınız var.**
 
-İsteğe bağlı: [Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/f6c882b6ae18bde42dcf6fdb751aae93495a2275.zip)
+İsteğe bağlı: [Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)
 
 ### Adım 1: HTML koduna bir Div Ekleme {#step-1-add-a-dom-container-to-the-html}
 
@@ -95,7 +95,7 @@ React'i entegre etmekle ilgili daha fazla İpucu için sonraki bölümlere göz 
 
 **[Örnek kaynak kodunun tamamını görüntüleyin](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605)**
 
-**[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/f6c882b6ae18bde42dcf6fdb751aae93495a2275.zip)**
+**[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)**
 
 ### İpucu: Bir Bileşeni Yeniden Kullanma {#tip-reuse-a-component}
 
@@ -103,7 +103,7 @@ Genellikle, HTML sayfasındaki React bileşenlerini birden fazla yerde görünt�
 
 [Örnek kaynak kodunun tamamını görüntüleyin](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda)
 
-[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/9d0dd0ee941fea05fd1357502e5aa348abb84c12.zip)
+[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/279839cb9891bd41802ebebc5365e9dec08eeb9f.zip)
 
 >Not
 >

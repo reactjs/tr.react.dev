@@ -10,52 +10,31 @@ permalink: docs/react-dom-server.html
 
 ```js
 // ES modules
-import ReactDOMServer from 'react-dom/server';
+import * as ReactDOMServer from 'react-dom/server';
 // CommonJS
 var ReactDOMServer = require('react-dom/server');
 ```
 
 ## Genel Bakış {#overview}
 
-Aşağıdaki metotlar hem sunucu hem de tarayıcı ortamlarında kullanılabilir:
+Bu metotlar yalnızca **[Node.js Akışlarını](https://nodejs.dev/learn/nodejs-streams) içeren ortamlarda** mevcuttur:
+
+- [`renderToPipeableStream()`](#rendertopipeablestream)
+- [`renderToNodeStream()`](#rendertonodestream) (Deprecated)
+- [`renderToStaticNodeStream()`](#rendertostaticnodestream)
+
+Bu metotlar sadece **[Web Akışları'nın](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) olduğu ortamlarda** (tarayıcılar, Deno, ve bazı modern runtime lar) kullanılabilir:
+
+- [`renderToReadableStream()`](#rendertoreadablestream)
+
+Aşağıdaki metotlar akışları (stream) desteklemeyen ortamlarda kullanılabilir:
 
 - [`renderToString()`](#rendertostring)
 - [`renderToStaticMarkup()`](#rendertostaticmarkup)
 
-Bu ilave metotlar **yalnızca sunucuda** kullanılabilen bir pakete (stream) bağlıdır ve tarayıcıda çalışmayacaktır.
-
-- [`renderToPipeableStream()`](#rendertopipeablestream)
-- [`renderToReadableStream()`](#rendertoreadablestream)
-- [`renderToNodeStream()`](#rendertonodestream) (Deprecated)
-- [`renderToStaticNodeStream()`](#rendertostaticnodestream)
-
 * * *
 
 ## Referans {#reference}
-
-### `renderToString()` {#rendertostring}
-
-```javascript
-ReactDOMServer.renderToString(element)
-```
-
-React öğesini başlangıç HTML'ine dönüştürün. React bir HTML stringi döndürür. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
-
-Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot)'i çağırırsanız, gayet performanslı bir ilk yükleme deneyimine sahip olmanız için React bunu saklayıp, yalnızca olay yöneticilerini ekleyecektir.
-
-* * *
-
-### `renderToStaticMarkup()` {#rendertostaticmarkup}
-
-```javascript
-ReactDOMServer.renderToStaticMarkup(element)
-```
-
-[`renderToString`](#rendertostring)'e benzer şekildedir. Farklı olarak, React'in `data-reactroot` gibi dahili olarak kullandığı fazladan DOM nitelikleri oluşturmaz. Bu, ekstra özellikleri bir kenara atarak biraz bayt kurtarabileceğiniz için, React'i basit bir statik sayfa oluşturucu olarak kullanmak isterseniz yararlıdır.
-
-İşaretlemeyi etkileşimli hale getirmek için istemci tarafında React'i kullanmayı planlıyorsanız, bu yöntemi kullanmayın. Onun yerine, sunucuda [`renderToString`](#rendertostring) ve istemcide [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) kullanın.
-
-* * *
 
 ### `renderToPipeableStream()` {#rendertopipeablestream}
 
@@ -63,48 +42,68 @@ ReactDOMServer.renderToStaticMarkup(element)
 ReactDOMServer.renderToPipeableStream(element, options)
 ```
 
-Render a React element to its initial HTML. Returns a [Control object](https://github.com/facebook/react/blob/3f8990898309c61c817fbf663f5221d9a00d0eaa/packages/react-dom/src/server/ReactDOMFizzServerNode.js#L49-L54) that allows you to pipe the output or abort the request. Fully supports Suspense and streaming of HTML with "delayed" content blocks "popping in" later through javascript execution. [Read more](https://github.com/reactwg/react-18/discussions/37)
+Render a React element to its initial HTML. Returns a stream with a `pipe(res)` method to pipe the output and `abort()` to abort the request. Fully supports Suspense and streaming of HTML with "delayed" content blocks "popping in" via inline `<script>` tags later. [Read more](https://github.com/reactwg/react-18/discussions/37)
 
 If you call [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) on a node that already has this server-rendered markup, React will preserve it and only attach event handlers, allowing you to have a very performant first-load experience.
 
-> Note:
->
-> This is a Node.js specific API and modern server environments should use renderToReadableStream instead.
->
-
-```
-const {pipe, abort} = renderToPipeableStream(
+```javascript
+let didError = false;
+const stream = renderToPipeableStream(
   <App />,
   {
-    onAllReady() {
-      res.statusCode = 200;
+    onShellReady() {
+      // The content above all Suspense boundaries is ready.
+      // If something errored before we started streaming, we set the error code appropriately.
+      res.statusCode = didError ? 500 : 200;
       res.setHeader('Content-type', 'text/html');
-      pipe(res);
+      stream.pipe(res);
     },
-    onShellError(x) {
+    onShellError(error) {
+      // Something errored before we could complete the shell so we emit an alternative shell.
       res.statusCode = 500;
       res.send(
         '<!doctype html><p>Loading...</p><script src="clientrender.js"></script>'
       );
-    }
+    },
+    onAllReady() {
+      // If you don't want streaming, use this instead of onShellReady.
+      // This will fire after the entire page content is ready.
+      // You can use this for crawlers or static generation.
+
+      // res.statusCode = didError ? 500 : 200;
+      // res.setHeader('Content-type', 'text/html');
+      // stream.pipe(res);
+    },
+    onError(err) {
+      didError = true;
+      console.error(err);
+    },
   }
 );
 ```
+
+See the [full list of options](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-dom/src/server/ReactDOMFizzServerNode.js#L36-L46).
+
+> Note:
+>
+> This is a Node.js-specific API. Environments with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), like Deno and modern edge runtimes, should use [`renderToReadableStream`](#rendertoreadablestream) instead.
+>
 
 * * *
 
 ### `renderToReadableStream()` {#rendertoreadablestream}
 
 ```javascript
-    ReactDOMServer.renderToReadableStream(element, options);
+ReactDOMServer.renderToReadableStream(element, options);
 ```
 
-Streams a React element to its initial HTML. Returns a [Readable Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream). Fully supports Suspense and streaming of HTML. [Read more](https://github.com/reactwg/react-18/discussions/127)
+Streams a React element to its initial HTML. Returns a Promise that resolves to a [Readable Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream). Fully supports Suspense and streaming of HTML. [Read more](https://github.com/reactwg/react-18/discussions/127)
 
 If you call [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) on a node that already has this server-rendered markup, React will preserve it and only attach event handlers, allowing you to have a very performant first-load experience.
 
-```
+```javascript
 let controller = new AbortController();
+let didError = false;
 try {
   let stream = await renderToReadableStream(
     <html>
@@ -112,14 +111,21 @@ try {
     </html>,
     {
       signal: controller.signal,
+      onError(error) {
+        didError = true;
+        console.error(error);
+      }
     }
   );
   
-  // This is to wait for all suspense boundaries to be ready. You can uncomment
-  // this line if you don't want to stream to the client
+  // This is to wait for all Suspense boundaries to be ready. You can uncomment
+  // this line if you want to buffer the entire HTML instead of streaming it.
+  // You can use this for crawlers or static generation:
+
   // await stream.allReady;
 
   return new Response(stream, {
+    status: didError ? 500 : 200,
     headers: {'Content-Type': 'text/html'},
   });
 } catch (error) {
@@ -132,15 +138,23 @@ try {
   );
 }
 ```
+
+See the [full list of options](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-dom/src/server/ReactDOMFizzServerBrowser.js#L27-L35).
+
+> Note:
+>
+> This API depends on [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API). For Node.js, use [`renderToPipeableStream`](#rendertopipeablestream) instead.
+>
+
 * * *
 
-### `renderToNodeStream()` {#rendertonodestream} (Deprecated)
+### `renderToNodeStream()`  (Deprecated) {#rendertonodestream}
 
 ```javascript
 ReactDOMServer.renderToNodeStream(element)
 ```
 
-React öğesini başlangıç HTML'ine dönüştürün. React bir HTML string çıktısı veren bir [Readable stream](https://nodejs.org/api/stream.html#stream_readable_streams) döndürür. Bu akışın HTML çıktısı [`ReactDOMServer.renderToString`](#rendertostring) öğesinin döndüreceği değer ile tamamen aynıdır. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
+React öğesini başlangıç HTML'ine dönüştürün. React bir HTML string çıktısı veren bir [Node.js Readable stream](https://nodejs.org/api/stream.html#stream_readable_streams) döndürür. Bu akışın HTML çıktısı [`ReactDOMServer.renderToString`](#rendertostring) öğesinin döndüreceği değer ile tamamen aynıdır. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
 
 Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot)'i çağırırsanız, gayet performanslı bir ilk yükleme deneyimine sahip olmanız için React bunu saklayıp, yalnızca olay yöneticilerini ekleyecektir.
 
@@ -169,3 +183,33 @@ Bu akışın HTML çıktısı [`ReactDOMServer.renderToStaticMarkup`](#rendertos
 > Yalnızca sunucu için. Bu API tarayıcıda mevcut değildir.
 >
 > Bu metot utf-8 ile kodlanmış bir bayt akışı (byte stream) döndürür. Başka bir kodlamadaki bir akışa ihtiyacınız varsa, kod dönüştürme metni için dönüştürme akışları (transform streams) sağlayan [iconv-lite](https://www.npmjs.com/package/iconv-lite) gibi bir projeye göz atın.
+
+* * *
+
+### `renderToString()` {#rendertostring}
+
+```javascript
+ReactDOMServer.renderToString(element)
+```
+
+React öğesini başlangıç HTML'ine dönüştürün. React bir HTML stringi döndürür. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
+
+Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot)'i çağırırsanız, gayet performanslı bir ilk yükleme deneyimine sahip olmanız için React bunu saklayıp, yalnızca olay yöneticilerini ekleyecektir.
+
+> Note
+>
+> This API has limited Suspense support and does not support streaming.
+>
+> On the server, it is recommended to use either [`renderToPipeableStream`](#rendertopipeablestream) (for Node.js) or [`renderToReadableStream`](#rendertoreadablestream) (for Web Streams) instead.
+
+* * *
+
+### `renderToStaticMarkup()` {#rendertostaticmarkup}
+
+```javascript
+ReactDOMServer.renderToStaticMarkup(element)
+```
+
+[`renderToString`](#rendertostring)'e benzer şekildedir. Farklı olarak, React'in `data-reactroot` gibi dahili olarak kullandığı fazladan DOM nitelikleri oluşturmaz. Bu, ekstra özellikleri bir kenara atarak biraz bayt kurtarabileceğiniz için, React'i basit bir statik sayfa oluşturucu olarak kullanmak isterseniz yararlıdır.
+
+İşaretlemeyi etkileşimli hale getirmek için istemci tarafında React'i kullanmayı planlıyorsanız, bu yöntemi kullanmayın. Onun yerine, sunucuda [`renderToString`](#rendertostring) ve istemcide [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) kullanın.

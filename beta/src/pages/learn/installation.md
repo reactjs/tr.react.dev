@@ -36,7 +36,7 @@ export default function App() {
 </Sandpack>
 
 Çevrimiçi kod oyun alanlarını bu dokümanlarda eğitim yardımcıları olarak kullanıyoruz. Çevrimiçi kod oyun alanları, React'in nasıl çalıştığını anlamanıza ve React'in sizin için doğru olup olmadığı konusunda karar vermenize yardımcı olabilir. React dokümanlarının dışında, React'i destekleyen birçok çevrimiçi kod oyun alan var: örneğin, [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), veya [CodePen](
-https://codepen.io/pen/?template=wvdqJJm).
+https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb).
 
 ### Lokalde React'i deneyin {/*try-react-locally*/}
 
@@ -52,4 +52,5 @@ Eğer [bağımsız bir React projesine](/learn/start-a-new-react-project) başla
 
 ## Sonraki adımlar {/*next-steps*/}
 
-Nereden başlayacağınız, nasıl öğrenmek istediğinize, neyi başarmanız gerektiğine ve bir sonraki adımda nereye gitmek istediğinize bağlıdır! Neden giriş eğitimimiz olan [React'te Düşünmek](/learn/thinking-in-react) ile başlamıyorsunuz? Veya daha fazla örnekle oynamak ve adım adım her konuyu öğrenmek için [Kullanıcı Arayüzünü Tanımlamak](/learn/describing-the-ui) bölümüne atlayabilirsiniz. React'i öğrenmek için yanlış bir yol yok!
+Her gün karşılaşacağınız en önmeli React konseptlerini görmek için [Hızlı Başlangıç](/learn) rehberini ziyaret edin!
+
