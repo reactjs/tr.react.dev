@@ -62,7 +62,6 @@ Bir portal oluşturur. Portallar, [alt elemanları DOM bileşeninin hiyerarşisi
 flushSync(callback)
 ```
 
-<<<<<<< HEAD
 React'i, parametre olarak verilen callback içindeki tüm güncellemeleri senkron olarak çalıştırmaya zorlar. Bu, DOM'un hemen güncellenmesini sağlar.
 
 ```javascript
@@ -72,27 +71,6 @@ flushSync(() => {
 });
 // Bu noktada, DOM güncellenmiştir.
 ```
-=======
-Force React to flush any updates inside the provided callback synchronously. This ensures that the DOM is updated immediately.
-
-```javascript
-// Force this state update to be synchronous.
-flushSync(() => {
-  setCount(count + 1);
-});
-// By this point, DOM is updated.
-```
-
-> Note:
-> 
-> `flushSync` can significantly hurt performance. Use sparingly.
-> 
-> `flushSync` may force pending Suspense boundaries to show their `fallback` state.
-> 
-> `flushSync` may also run pending effects and synchronously apply any updates they contain before returning.
-> 
-> `flushSync` may also flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
 
 > Not:
 >

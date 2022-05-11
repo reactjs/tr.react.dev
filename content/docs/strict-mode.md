@@ -15,23 +15,14 @@ Strict Modunu uygulamanızın herhangi bir parçası için aktif hale getirebili
 
 Yukarıdaki örnekte strict mod kontrolleri `Header` ve `Footer` bileşenleri için *yapılmayacaktır*. Ancak `ComponentOne` ve `ComponentTwo` ve onların tüm alt öğeleri için kontroller yapılacaktır.
 
-<<<<<<< HEAD
 `Strict Modu` şu konularda yardımcı olur:
 * [Güvenli olmayan yaşam döngülerine sahip bileşenleri tespit etme](#identifying-unsafe-lifecycles)
 * [Eski string ref API kullanımı hakkında uyarma](#warning-about-legacy-string-ref-api-usage)
 * [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
 * [Beklenmeyen yan etkileri tespit etme](#detecting-unexpected-side-effects)
 * [Eski context API tespit etme](#detecting-legacy-context-api)
-* [Güvenli olmayan efektleri tespit etme](#detecting-unsafe-effects)
-=======
-`StrictMode` currently helps with:
-* [Identifying components with unsafe lifecycles](#identifying-unsafe-lifecycles)
-* [Warning about legacy string ref API usage](#warning-about-legacy-string-ref-api-usage)
-* [Warning about deprecated findDOMNode usage](#warning-about-deprecated-finddomnode-usage)
-* [Detecting unexpected side effects](#detecting-unexpected-side-effects)
-* [Detecting legacy context API](#detecting-legacy-context-api)
-* [Ensuring reusable state](#ensuring-reusable-state)
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+* [State'in yeniden kullanılabilirliğini korumak](#ensuring-reusable-state)
+
 
 React'in gelecek sürümlerinde yeni özellikler eklenecektir.
 
@@ -142,7 +133,7 @@ Eski context API hataya açıktır ve gelecekteki bir ana sürümde kaldırılac
 Yeni sürüme geçmeye yardımcı olması için [yeni context API](/docs/context.html) dökümanını okuyun.
 
 
-### Ensuring reusable state {#ensuring-reusable-state}
+### State'in yeniden kullanılabilirliğini korumak {#ensuring-reusable-state}
 
 In the future, we’d like to add a feature that allows React to add and remove sections of the UI while preserving state. For example, when a user tabs away from a screen and back, React should be able to immediately show the previous screen. To do this, React support remounting trees using the same component state used before unmounting.
 

@@ -9,14 +9,8 @@ next: introducing-jsx.html
 En basit React örneği aşağıdaki gibidir:
 
 ```jsx
-<<<<<<< HEAD
-ReactDOM
-  .createRoot(document.getElementById('root'))
-  .render(<h1>Merhaba dünya!</h1>);
-=======
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<h1>Hello, world!</h1>);
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+root.render(<h1>Merhaba, dünya!</h1>);
 ```
 
 

@@ -25,11 +25,7 @@ Bu bölümde, mevcut bir HTML sayfasına nasıl React bileşeni ekleneceğini g�
 
 Karmaşık bir araç veya yükleme gereksinimi olmayacak. **Bu bölümü tamamlamak için sadece bir internet bağlantısına ve bir dakikanıza ihtiyacınız var.**
 
-<<<<<<< HEAD
-İsteğe bağlı: [Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/f6c882b6ae18bde42dcf6fdb751aae93495a2275.zip)
-=======
-Optional: [Download the full example (2KB zipped)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+İsteğe bağlı: [Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)
 
 ### Adım 1: HTML koduna bir Div Ekleme {#step-1-add-a-dom-container-to-the-html}
 
@@ -79,11 +75,7 @@ HTML sayfanızın yanına `like_button.js` adlı bir dosya oluşturun.
 >
 >Bu kod, `LikeButton` adı verilen bir React bileşenini tanımlar. Henüz anlamadıysanız endişelenmeyin. React'in yapı taşlarını daha sonra [uygulamalı eğitim](/tutorial/tutorial.html) ve [ana kavramlar rehberi](/docs/hello-world.html)nde ele alacağız. Şimdilik sadece ekranda gösterelim!
 
-<<<<<<< HEAD
 **[Başlangıç ​​kodundan](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)** sonra, `like_button.js`'in en altına iki satır ekleyin :
-=======
-After **[the starter code](https://gist.github.com/gaearon/0b180827c190fe4fd98b4c7f570ea4a8/raw/b9157ce933c79a4559d2aa9ff3372668cce48de7/LikeButton.js)**, add three lines to the bottom of `like_button.js`:
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
 
 ```js{3,4,5}
 // ... yapıştırdığınız başlangıç kodu ...
@@ -103,11 +95,7 @@ React'i entegre etmekle ilgili daha fazla İpucu için sonraki bölümlere göz 
 
 **[Örnek kaynak kodunun tamamını görüntüleyin](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605)**
 
-<<<<<<< HEAD
-**[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/f6c882b6ae18bde42dcf6fdb751aae93495a2275.zip)**
-=======
-**[Download the full example (2KB zipped)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)**
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+**[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605/archive/87f0b6f34238595b44308acfb86df6ea43669c08.zip)**
 
 ### İpucu: Bir Bileşeni Yeniden Kullanma {#tip-reuse-a-component}
 
@@ -115,11 +103,7 @@ Genellikle, HTML sayfasındaki React bileşenlerini birden fazla yerde görünt�
 
 [Örnek kaynak kodunun tamamını görüntüleyin](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda)
 
-<<<<<<< HEAD
-[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/9d0dd0ee941fea05fd1357502e5aa348abb84c12.zip)
-=======
-[Download the full example (2KB zipped)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/279839cb9891bd41802ebebc5365e9dec08eeb9f.zip)
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+[Tüm örneği indirin (2KB sıkıştırılmış)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/279839cb9891bd41802ebebc5365e9dec08eeb9f.zip)
 
 >Not
 >
