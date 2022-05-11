@@ -17,65 +17,25 @@ var ReactDOMServer = require('react-dom/server');
 
 ## Genel Bakış {#overview}
 
-<<<<<<< HEAD
-Aşağıdaki metotlar hem sunucu hem de tarayıcı ortamlarında kullanılabilir:
-=======
-These methods are only available in the **environments with [Node.js Streams](https://nodejs.dev/learn/nodejs-streams):**
+Bu metotlar yalnızca **[Node.js Akışlarını](https://nodejs.dev/learn/nodejs-streams) içeren ortamlarda** mevcuttur:
 
 - [`renderToPipeableStream()`](#rendertopipeablestream)
 - [`renderToNodeStream()`](#rendertonodestream) (Deprecated)
 - [`renderToStaticNodeStream()`](#rendertostaticnodestream)
 
-These methods are only available in the **environments with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API)** (this includes browsers, Deno, and some modern edge runtimes):
+Bu metotlar sadece **[Web Akışları'nın](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) olduğu ortamlarda** (tarayıcılar, Deno, ve bazı modern runtime lar) kullanılabilir:
 
 - [`renderToReadableStream()`](#rendertoreadablestream)
 
-The following methods can be used in the environments that don't support streams:
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+Aşağıdaki metotlar akışları (stream) desteklemeyen ortamlarda kullanılabilir:
 
 - [`renderToString()`](#rendertostring)
 - [`renderToStaticMarkup()`](#rendertostaticmarkup)
-
-<<<<<<< HEAD
-Bu ilave metotlar **yalnızca sunucuda** kullanılabilen bir pakete (stream) bağlıdır ve tarayıcıda çalışmayacaktır.
-
-- [`renderToPipeableStream()`](#rendertopipeablestream)
-- [`renderToReadableStream()`](#rendertoreadablestream)
-- [`renderToNodeStream()`](#rendertonodestream) (Deprecated)
-- [`renderToStaticNodeStream()`](#rendertostaticnodestream)
 
 * * *
 
 ## Referans {#reference}
 
-### `renderToString()` {#rendertostring}
-
-```javascript
-ReactDOMServer.renderToString(element)
-```
-
-React öğesini başlangıç HTML'ine dönüştürün. React bir HTML stringi döndürür. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
-
-Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot)'i çağırırsanız, gayet performanslı bir ilk yükleme deneyimine sahip olmanız için React bunu saklayıp, yalnızca olay yöneticilerini ekleyecektir.
-
-* * *
-
-### `renderToStaticMarkup()` {#rendertostaticmarkup}
-
-```javascript
-ReactDOMServer.renderToStaticMarkup(element)
-```
-
-[`renderToString`](#rendertostring)'e benzer şekildedir. Farklı olarak, React'in `data-reactroot` gibi dahili olarak kullandığı fazladan DOM nitelikleri oluşturmaz. Bu, ekstra özellikleri bir kenara atarak biraz bayt kurtarabileceğiniz için, React'i basit bir statik sayfa oluşturucu olarak kullanmak isterseniz yararlıdır.
-
-İşaretlemeyi etkileşimli hale getirmek için istemci tarafında React'i kullanmayı planlıyorsanız, bu yöntemi kullanmayın. Onun yerine, sunucuda [`renderToString`](#rendertostring) ve istemcide [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) kullanın.
-
-* * *
-
-=======
-## Reference {#reference}
-
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
 ### `renderToPipeableStream()` {#rendertopipeablestream}
 
 ```javascript
@@ -194,11 +154,7 @@ See the [full list of options](https://github.com/facebook/react/blob/14c2be8dac
 ReactDOMServer.renderToNodeStream(element)
 ```
 
-<<<<<<< HEAD
-React öğesini başlangıç HTML'ine dönüştürün. React bir HTML string çıktısı veren bir [Readable stream](https://nodejs.org/api/stream.html#stream_readable_streams) döndürür. Bu akışın HTML çıktısı [`ReactDOMServer.renderToString`](#rendertostring) öğesinin döndüreceği değer ile tamamen aynıdır. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
-=======
-Render a React element to its initial HTML. Returns a [Node.js Readable stream](https://nodejs.org/api/stream.html#stream_readable_streams) that outputs an HTML string. The HTML output by this stream is exactly equal to what [`ReactDOMServer.renderToString`](#rendertostring) would return. You can use this method to generate HTML on the server and send the markup down on the initial request for faster page loads and to allow search engines to crawl your pages for SEO purposes.
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+React öğesini başlangıç HTML'ine dönüştürün. React bir HTML string çıktısı veren bir [Node.js Readable stream](https://nodejs.org/api/stream.html#stream_readable_streams) döndürür. Bu akışın HTML çıktısı [`ReactDOMServer.renderToString`](#rendertostring) öğesinin döndüreceği değer ile tamamen aynıdır. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
 
 Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot)'i çağırırsanız, gayet performanslı bir ilk yükleme deneyimine sahip olmanız için React bunu saklayıp, yalnızca olay yöneticilerini ekleyecektir.
 
@@ -226,10 +182,7 @@ Bu akışın HTML çıktısı [`ReactDOMServer.renderToStaticMarkup`](#rendertos
 >
 > Yalnızca sunucu için. Bu API tarayıcıda mevcut değildir.
 >
-<<<<<<< HEAD
 > Bu metot utf-8 ile kodlanmış bir bayt akışı (byte stream) döndürür. Başka bir kodlamadaki bir akışa ihtiyacınız varsa, kod dönüştürme metni için dönüştürme akışları (transform streams) sağlayan [iconv-lite](https://www.npmjs.com/package/iconv-lite) gibi bir projeye göz atın.
-=======
-> The stream returned from this method will return a byte stream encoded in utf-8. If you need a stream in another encoding, take a look at a project like [iconv-lite](https://www.npmjs.com/package/iconv-lite), which provides transform streams for transcoding text.
 
 * * *
 
@@ -239,9 +192,9 @@ Bu akışın HTML çıktısı [`ReactDOMServer.renderToStaticMarkup`](#rendertos
 ReactDOMServer.renderToString(element)
 ```
 
-Render a React element to its initial HTML. React will return an HTML string. You can use this method to generate HTML on the server and send the markup down on the initial request for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+React öğesini başlangıç HTML'ine dönüştürün. React bir HTML stringi döndürür. Sunucuda HTML oluşturmak ve daha hızlı sayfa yüklemeleri için ilk istek üzerine işaretlemeyi göndermek ve arama motorlarının sayfalarınızı SEO amacıyla taramasını sağlamak için bu yöntemi kullanabilirsiniz.
 
-If you call [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) on a node that already has this server-rendered markup, React will preserve it and only attach event handlers, allowing you to have a very performant first-load experience.
+Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot)'i çağırırsanız, gayet performanslı bir ilk yükleme deneyimine sahip olmanız için React bunu saklayıp, yalnızca olay yöneticilerini ekleyecektir.
 
 > Note
 >
@@ -257,7 +210,6 @@ If you call [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) 
 ReactDOMServer.renderToStaticMarkup(element)
 ```
 
-Similar to [`renderToString`](#rendertostring), except this doesn't create extra DOM attributes that React uses internally, such as `data-reactroot`. This is useful if you want to use React as a simple static page generator, as stripping away the extra attributes can save some bytes.
+[`renderToString`](#rendertostring)'e benzer şekildedir. Farklı olarak, React'in `data-reactroot` gibi dahili olarak kullandığı fazladan DOM nitelikleri oluşturmaz. Bu, ekstra özellikleri bir kenara atarak biraz bayt kurtarabileceğiniz için, React'i basit bir statik sayfa oluşturucu olarak kullanmak isterseniz yararlıdır.
 
-If you plan to use React on the client to make the markup interactive, do not use this method. Instead, use [`renderToString`](#rendertostring) on the server and [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) on the client.
->>>>>>> 26a870e1c6e232062b760d37620d85802750e985
+İşaretlemeyi etkileşimli hale getirmek için istemci tarafında React'i kullanmayı planlıyorsanız, bu yöntemi kullanmayın. Onun yerine, sunucuda [`renderToString`](#rendertostring) ve istemcide [`ReactDOM.hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) kullanın.
