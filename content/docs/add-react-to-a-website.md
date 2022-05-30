@@ -184,7 +184,7 @@ Tebrikler! Projenize bir **yayına hazır JSX kurulumu** eklediniz bile.
 
 `src` adında bir klasör oluşturun ve bu terminal komutunu çalıştırın:
 
-```
+```console
 npx babel --watch src --out-dir . --presets react-app/prod
 ```
 

@@ -59,13 +59,13 @@ React'teki tüm değişiklikler kamuya açıklanmadan önce kapsamlı dahili tes
 - Tercih ettiğiniz sürekli entegrasyon platformunu kullanarak bir cron işi oluşturun. Cron işleri hem [CircleCI](https://circleci.com/docs/2.0/triggers/#scheduled-builds) hem de [Travis CI](https://docs.travis-ci.com/user/cron-jobs/) tarafından desteklenmektedir. 
 - Cron işinde, npm'de `next` etiketini kullanarak React paketlerinizi Sonraki kanalındaki en son React sürümüne güncelleyin. Npm cli kullanarak:
 
-  ```
+  ```console
   npm update react@next react-dom@next
   ```
 
   Ya da yarn ile:
 
-  ```
+  ```console
   yarn upgrade react@next react-dom@next
   ```
 
