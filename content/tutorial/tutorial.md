@@ -1156,7 +1156,7 @@ Sonra, Game'in içerisinde `stepNumber` değişkenini güncelleyecek olan `jumpT
   }
 ```
 
-Notice in `jumpTo` method, we haven't updated `history` property of the state. That is because state updates are merged or in more simple words React will update only the properties mentioned in `setState` method leaving the remaining state as is. For more info **[see the documentation](/docs/state-and-lifecycle.html#state-updates-are-merged)**.
+`jumpTo` metodunda dikkat edilmesi gereken, state'in  `history` özelliğini güncellemedik. Bunun nedeni, state güncellemelerinin birleştirilmesi veya daha basit bir deyişle React'ın yalnızca `setState` yönteminde belirtilen özellikleri güncellemesi ve kalan durumu olduğu gibi bırakmasıdır. Daha fazla bilgi için **[dokümanın geri kalanına](/docs/state-and-lifecycle.html#state-updates-are-merged)** bakınız.
 
 Şimdi, oyundaki bir kareye tıklandığında çağrılan `handleClick` metodunda birkaç değişiklik yapalım. 
 
