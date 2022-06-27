@@ -133,7 +133,11 @@ var SayHello = createReactClass({
 
 Yani ES6 sınıfları ile yazmak, olay yöneticileri için biraz daha taslak kod yazmayı gerektirir ama iyi tarafıysa şudur: Büyük uygulamalarda biraz daha iyi performans gösterir.
 
+<<<<<<< HEAD
 Eğer taslak kod yazmak size itici geliyorsa, Babel ile **deneysel** [Sınıf Özellikleri](https://babeljs.io/docs/plugins/transform-class-properties/) sözdizimini aktif edebilirsiniz.
+=======
+If the boilerplate code is too unattractive to you, you may use [ES2022 Class Properties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields#public_instance_fields) syntax:
+>>>>>>> 26caa649827e8f8cadd24dfc420ea802dcbee246
 
 
 ```javascript
@@ -142,11 +146,16 @@ class SayHello extends React.Component {
     super(props);
     this.state = {message: 'Merhaba!'};
   }
+<<<<<<< HEAD
   // UYARI: bu söz dizimi deneyseldir!
   // Burada arrow kullanmak, metodu ilişkilendirir.
+=======
+  
+  // Using an arrow here binds the method:
+>>>>>>> 26caa649827e8f8cadd24dfc420ea802dcbee246
   handleClick = () => {
     alert(this.state.message);
-  }
+  };
 
   render() {
     return (
@@ -159,11 +168,15 @@ class SayHello extends React.Component {
 ```
 Lütfen yukarıdaki sözdiziminin **deneysel** olduğunu ve değişebileceğini ya da teklifin dile aktarılmayabileceğini unutmayınız.
 
+<<<<<<< HEAD
 Eğer güvenli şekilde hareket etmeyi tercih ediyorsanız, işte size bir kaç seçenek:
 
 * Metodları constructor içinde bind ediniz.
 * Arrow fonksiyonları kullanınız, örneğin `onClick={(e) => this.handleClick(e)}`.
 * `createReactClass` kullanmaya devam ediniz.
+=======
+You also have a few other options:
+>>>>>>> 26caa649827e8f8cadd24dfc420ea802dcbee246
 
 ## Mixinler {#mixins}
 

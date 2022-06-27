@@ -105,7 +105,13 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 > `render()` halihazırda `ReactComponent` nesnesinin köküne bir referans dönüyor. Ancak, bu dönüş değerini kullanmak eskidi
 > ve bundan kaçınılmalıdır, çünkü React'in gelecekteki sürümleri, bazı durumlarda bileşenleri eşzamansız olarak sağlayabilir. Kök `ReactComponent` nesnesine referans gerekiyorsa, tercih edilen çözüm kök elemana bir [callback referansı](/docs/refs-and-the-dom.html#callback-refs) olmalıdır.
 >
+<<<<<<< HEAD
 > Sunucu tarafından render edilen bir konteynerı hidratlamak için `render()`ın kullanılması artık desteklenmiyor. Bunun yerine [`hydrateRoot()`](#hydrateroot) kullanılmalıdır.
+=======
+> Using `render()` to hydrate a server-rendered container is deprecated. Use [`hydrateRoot()`](/docs/react-dom-client.html#hydrateroot) instead.
+
+* * *
+>>>>>>> 26caa649827e8f8cadd24dfc420ea802dcbee246
 
 ### `hydrate()` {#hydrate}
 
