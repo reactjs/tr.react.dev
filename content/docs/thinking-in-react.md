@@ -43,7 +43,7 @@ Ama nelerin kendi başına birer bileşen olacağına nasıl karar vereceksiniz?
 
 ![Bileşen Şeması](../images/blog/thinking-in-react-components.png)
 
-Burada uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik hale getirdik. Resimdeki sayılar aşağıdaki sayılara karşılık gelmektedir.
+Burada uygulamamızın beş tane bileşeni olduğunu göreceksiniz. Her bileşenin temsil ettiği verileri italik halde aşağıda belirttik. Resimdeki sayılar aşağıdaki sayılara karşılık gelmektedir.
 
   1. **`FilterableProductTable` (turuncu):** örnek uygulamanın tamamını içerir.
   2. **`SearchBar` (mavi):** bütün *kullanıcı girdilerini* alır.
