@@ -550,8 +550,13 @@ var player = {score: 1, name: 'Jeff'};
 var newPlayer = Object.assign({}, player, {score: 2});
 // Şu an oyuncu nesnesi değişmedi, fakat oyuncu nesnesinden yeniOyuncu nesnesi oluşturuldu: {score: 2, name: 'Jeff'}
 
+<<<<<<< HEAD
 // Object spread syntax proposal'ı kullanarak aşağıdaki gibi de yazabilirsiniz:
 // var yeniOyuncu = {...player, score: 2};
+=======
+// Or if you are using object spread syntax, you can write:
+// var newPlayer = {...player, score: 2};
+>>>>>>> ee7705675d2304c53c174b9fb316e2fbde1e9fb3
 ```
 
 Sonuç iki durumda da aynı oldu ama direkt olarak veriyi değiştirmeden kopya üzerinde değişiklikler yapmanın aşağıdaki gibi birçok yararı vardır. 

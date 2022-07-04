@@ -31,8 +31,13 @@ Bu yeni `useState` fonksiyonu öğreneceğimiz ilk "Hook", ancak bu örnek sadec
 
 >Not
 >
+<<<<<<< HEAD
 >React 16.8.0, Hook'ları destekleyen ilk sürümdür. Sürüm yükseltme yaparken, React DOM dahil olmak üzere tüm paketleri güncellemeyi unutmayın. 
 >React Native, Hook'ları [0.59 sürümünden itibaren](https://reactnative.dev/blog/2019/03/12/releasing-react-native-059) desteklemektedir.
+=======
+>React 16.8.0 is the first release to support Hooks. When upgrading, don't forget to update all packages, including React DOM.
+>React Native has supported Hooks since [the 0.59 release of React Native](https://reactnative.dev/blog/2019/03/12/releasing-react-native-059).
+>>>>>>> ee7705675d2304c53c174b9fb316e2fbde1e9fb3
 
 ## Tanıtım Videosu {#video-introduction}
 
@@ -80,7 +85,11 @@ Buna daha çok [Efekt Hook'unu Kullanma](/docs/hooks-effect.html#tip-use-multipl
 
 ### Sınıflar hem insanların hem de makinelerin kafasını karıştırıyor {#classes-confuse-both-people-and-machines}
 
+<<<<<<< HEAD
 Sınıfların, kodun yeniden kullanılmasını ve kod organizasyonunu zorlaştırmasının yanı sıra, React'i öğrenme konusunda büyük bir engel olabileceğini gördük. `Bunun` JavaScript'te nasıl çalıştığını anlamalısınız, bu birçok dilde nasıl çalıştığından çok farklı. Olay yöneticilerini bağlamayı için hatırlamanız gereklidir. Kararsız [sözdizimi önerileri](https://babeljs.io/docs/en/babel-plugin-transform-class-properties/) olmadan, kod çok ayrıntılıdır. İnsanlar prop'ları, state'i ve yukarıdan aşağıya veri akışını mükemmel bir şekilde anlayabilir, ancak yine de sınıfları anlamak için çaba sarfedebilir. React'teki fonksiyon ve sınıf bileşenleri arasındaki ayrım ve her birinin ne zaman kullanılacağı, deneyimli React geliştiricileri arasında bile anlaşmazlıklara yol açar.
+=======
+In addition to making code reuse and code organization more difficult, we've found that classes can be a large barrier to learning React. You have to understand how `this` works in JavaScript, which is very different from how it works in most languages. You have to remember to bind the event handlers. Without [ES2022 public class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields#public_instance_fields), the code is very verbose. People can understand props, state, and top-down data flow perfectly well but still struggle with classes. The distinction between function and class components in React and when to use each one leads to disagreements even between experienced React developers.
+>>>>>>> ee7705675d2304c53c174b9fb316e2fbde1e9fb3
 
 Ayrıca, React 5 yıldır mevcut ve önümüzdeki 5 yıl için de kalıcı olacağından emin olmak istiyoruz. [Svelte](https://svelte.dev/), [Angular](https://angular.io/), [Glimmer](https://glimmerjs.com/) ve diğerlerinin gösterdiği gibi, bileşenlerin [önceden yapılmış derlemeler](https://en.wikipedia.org/wiki/Ahead-of-time_compilation) çok fazla gelecek potansiyeli var. Özellikle de şablonlarla sınırlı değilse. Son zamanlarda, [Prepack](https://prepack.io/) kullanarak [bileşen katlama](https://github.com/facebook/react/issues/7323) ile deneme yaptık ve ilk sonuçların umut verici olduğunu gözlemledik. Bununla birlikte, sınıf bileşenlerinin bu optimizasyonları daha yavaş bir yola geri çekmesini sağlayan istemsiz kalıpları teşvik edebileceğini gördük. Sınıflar da bugünün araçları için sorunlar sunmaktadır. Örneğin, sınıflar çok küçültmezler ve hot reloading'i tuhaf ve güvenilmez yaparlar. Kodun optimize edilebilir yolda kalmasını daha kolay kılan bir API sunmak istiyoruz.
 
@@ -96,7 +105,11 @@ Bu sorunları çözmek için, **Hook'lar, sınıfsız şekilde React'in özellik
 
 React geliştiricilerinin ürünlerini teslim etmeye odaklandığını ve yayımlanan her yeni API’yı incelemeye zamanlarının olmadığını biliyoruz. Hook'lar çok yeni ve öğrenmeyi veya benimsemeyi düşünmeden önce daha fazla örnek ve öğretici beklemek daha iyi olabilir.
 
+<<<<<<< HEAD
 Meraklı okuyucular için, daha detaylıca motivasyonu işleyen ve belirli tasarım kararları ve önceki ilgili teknikler hakkında ekstra perspektif sağlayan [detaylı RFC](https://github.com/reactjs/rfcs/pull/68)'i hazırladık.
+=======
+We also understand that the bar for adding a new primitive to React is extremely high. For curious readers, we have prepared a [detailed RFC](https://github.com/reactjs/rfcs/pull/68) that dives into the motivation with more details, and provides extra perspective on the specific design decisions and related prior art.
+>>>>>>> ee7705675d2304c53c174b9fb316e2fbde1e9fb3
 
 **Önemli olan Hook'lar, mevcut kodla yan yana çalışır, böylece bunları aşamalı olarak kullanabilirsiniz.** Hook'lara geçmeniz için acele etmenize gerek yok. Özellikle mevcut, karmaşık sınıf bileşenlerinizi "yeniden yazmak"tan kaçınmanızı öneririz. “Hook'ları anlamak" biraz zaman alabilir. Tecrübelerimize göre, Hook'ları öncelikle yeni ve kritik olmayan bileşenlerde kullanarak pratik yapmak ve ekibinizdeki herkesin kendisini bunu konuda rahat hissetmesini sağlamak en iyisi. Hook'ları denedikten sonra, lütfen bize olumlu ya da olumsuz [geri bildirim gönderin](https://github.com/facebook/react/issues/new).
 
