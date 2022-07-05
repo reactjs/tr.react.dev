@@ -403,11 +403,7 @@ Görme yetisi kısıtlı kullanıcılar tarafından, maksimum düzeyde okunabilm
 - [Renk Kontrastı Hakkındaki Her Şey ve Onu Neden Yeniden Düşünmelisiniz](https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/)
 - [A11yProjesi - Renk Kontrastı Nedir](https://a11yproject.com/posts/what-is-color-contrast/)
 
-<<<<<<< HEAD
-Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Öyleyse, bunun yerine [Colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://jxnblk.com/colorable/).
-=======
-It can be tedious to manually calculate the proper color combinations for all cases in your website so instead, you can [calculate an entire accessible color palette with Colorable](https://colorable.jxnblk.com/).
->>>>>>> ee7705675d2304c53c174b9fb316e2fbde1e9fb3
+Web sitenizdeki tüm durumlar için uygun renk kombinasyonlarını manuel olarak hesaplamak yorucu olabilir. Öyleyse, bunun yerine [Colorable ile tüm erişilebilir bir renk paletini hesaplayın](https://colorable.jxnblk.com/).
 
 Aşağıda belirtilen hem aXe hem de WAVE araçları renk kontrast testlerini de içerir ve kontrast hatalarını rapor edecektir. 
 
