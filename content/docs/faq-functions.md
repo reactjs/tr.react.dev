@@ -37,14 +37,13 @@ class Foo extends Component {
 }
 ```
 
-#### Sınıf Özellikleri {#class-properties-stage-3-proposal}
+#### Sınıf Özellikleri {#class-properties-es2022}
 
 ```jsx
 class Foo extends Component {
-  // Not: bu sözdizimi deneyseldir ve henüz standartlaştırılmamıştır.
   handleClick = () => {
     console.log('Click happened');
-  }
+  };
   render() {
     return <button onClick={this.handleClick}>Click Me</button>;
   }

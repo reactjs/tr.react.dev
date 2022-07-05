@@ -550,7 +550,7 @@ var player = {score: 1, name: 'Jeff'};
 var newPlayer = Object.assign({}, player, {score: 2});
 // Şu an oyuncu nesnesi değişmedi, fakat oyuncu nesnesinden yeniOyuncu nesnesi oluşturuldu: {score: 2, name: 'Jeff'}
 
-// Object spread syntax proposal'ı kullanarak aşağıdaki gibi de yazabilirsiniz:
+// Object spread sözdizimini kullanarak aşağıdaki gibi de yazabilirsiniz:
 // var yeniOyuncu = {...player, score: 2};
 ```
 

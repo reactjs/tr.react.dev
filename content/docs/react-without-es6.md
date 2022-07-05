@@ -133,7 +133,7 @@ var SayHello = createReactClass({
 
 Yani ES6 sınıfları ile yazmak, olay yöneticileri için biraz daha taslak kod yazmayı gerektirir ama iyi tarafıysa şudur: Büyük uygulamalarda biraz daha iyi performans gösterir.
 
-Eğer taslak kod yazmak size itici geliyorsa, Babel ile **deneysel** [Sınıf Özellikleri](https://babeljs.io/docs/plugins/transform-class-properties/) sözdizimini aktif edebilirsiniz.
+Eğer taslak kod yazmak size itici geliyorsa, [ES2022 Sınıf Özellikleri](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields#public_instance_fields) sözdizimini kullanabilirsiniz.
 
 
 ```javascript
@@ -142,11 +142,10 @@ class SayHello extends React.Component {
     super(props);
     this.state = {message: 'Merhaba!'};
   }
-  // UYARI: bu söz dizimi deneyseldir!
   // Burada arrow kullanmak, metodu ilişkilendirir.
   handleClick = () => {
     alert(this.state.message);
-  }
+  };
 
   render() {
     return (
@@ -157,13 +156,8 @@ class SayHello extends React.Component {
   }
 }
 ```
-Lütfen yukarıdaki sözdiziminin **deneysel** olduğunu ve değişebileceğini ya da teklifin dile aktarılmayabileceğini unutmayınız.
 
-Eğer güvenli şekilde hareket etmeyi tercih ediyorsanız, işte size bir kaç seçenek:
-
-* Metodları constructor içinde bind ediniz.
-* Arrow fonksiyonları kullanınız, örneğin `onClick={(e) => this.handleClick(e)}`.
-* `createReactClass` kullanmaya devam ediniz.
+Ayrıca başka birkaç tane daha seçeniğiniz bulunmaktadır:
 
 ## Mixinler {#mixins}
 

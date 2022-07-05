@@ -177,7 +177,7 @@ const root = ReactDOM.createRoot(document.getElementById('example'));
 root.render(<Greeting />);
 ```
 
-Eğer [plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties/)(önceden _plugin-transform-class-properties_) gibi bir Babel dönüşümü kullanıyorsanız, `defaultProps`'u bir React bileşen sınıfında statik özellik olarak da tanımlayabilirsiniz. Bu sözdizimi henüz tamamlanmadı ve tarayıcıda çalışabilmesi için bir derleme adımı gerektirecektir. Daha fazla bilgi için, [sınıf alanları önergesi](https://github.com/tc39/proposal-class-fields)'ne göz atabilirsiniz.
+ES2022 ile birlikte, `defaultProps`'u bir React bileşen sınıfında statik özellik olarak da tanımlayabilirsiniz. Daha fazla bilgi için [class public static fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields#public_static_fields) sayfasına göz atın. Bu modern sözdiziminin eski tarayıcılarda çalışması için fazladan bir derleme adımı gerekmektedir.
 
 ```javascript
 class Greeting extends React.Component {
