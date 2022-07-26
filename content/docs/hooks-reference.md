@@ -306,7 +306,7 @@ function Counter() {
 
 >Not
 >
->React `dispatch` fonksiyonunun kimliğinin sabit kalacağını garanti eder ve yeniden render işleminde bu fonksiyon değişmez. Bu yüzden `useEffect` or `useCallback` hook'larının bağımlı değişken dizisine eklenmesine gerek yoktur.
+>React `dispatch` fonksiyonunun kimliğinin sabit kalacağını garanti eder ve yeniden render işleminde bu fonksiyon değişmez. Bu yüzden `useEffect` veya `useCallback` hook'larının bağımlı değişken dizisine eklenmesine gerek yoktur.
 
 #### Başlangıç state değerinin belirlenmesi {#specifying-the-initial-state}
 
