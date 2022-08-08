@@ -119,7 +119,11 @@ const todoItems = todos.map((todo, index) =>
 );
 ```
 
+<<<<<<< HEAD
 Dizi içindeki elemanların değişme ihtimali varsa, anahtarlar için index numaralarının kullanılmasını önermiyoruz. Bu, performansı olumsuz yönde etkileyebilir ve bileşen state'i ile ilgili sorunlara neden olabilir. [Index numarasının anahtar olarak kullanılmasının olumsuz etkilerine dair detaylı açıklama](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) için Robin Pokorny'nin makalesine göz atın. Öğeleri listelemek için belirgin bir anahtar atamamayı seçtiğinizde, React varsayılan olarak index numaralarını anahtar olarak kullanacaktır.
+=======
+We don't recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny's article for an [in-depth explanation on the negative impacts of using an index as a key](https://robinpokorny.com/blog/index-as-a-key-is-an-anti-pattern/). If you choose not to assign an explicit key to list items then React will default to using indexes as keys.
+>>>>>>> 4808a469fa782cead9802619b0341b27b342e2d3
 
 Daha fazla bilgi edinmek istiyorsanız, işte size [neden anahtarların gerekli olduğuna dair](/docs/reconciliation.html#recursing-on-children) detaylı bir açıklama.
 
