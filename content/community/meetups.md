@@ -153,9 +153,6 @@ Yerel bir  React.js buluşmanız var mı? Buraya ekleyin! (Lütfen alfabetik sı
 ## Scotland (UK) {#scotland-uk}
 * [Edinburgh](https://www.meetup.com/React-Scotland/)
 
-## Singapore {#singapore}
-* [Singapore - React Knowledgeable](https://reactknowledgeable.org/)
-
 ## Spain {#spain}
 * [Barcelona](https://www.meetup.com/ReactJS-Barcelona/)
 * [Canarias](https://www.meetup.com/React-Canarias/)
