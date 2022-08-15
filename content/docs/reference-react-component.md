@@ -54,7 +54,11 @@ Bir bileşenin oluşumundan ve DOM'a eklenmesine kadar geçen süreç içerisind
 
 >Not:
 >
+<<<<<<< HEAD
 >Aşağıdaki metot eski React projelerinde kullanılmaktaydı. Fakat asenkron render etme süreçlerinde problemli olduğundan dolayı artık yeni projelerde [kullanmamanız gerekmektedir](/blog/2018/03/27/update-on-async-rendering.html):
+=======
+>This method is considered legacy and you should [avoid it](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>>>>>>> 5fed75dac5f4e208369b102a1337d76944111b33
 >
 >- [`UNSAFE_componentWillMount()`](#unsafe_componentwillmount)
 

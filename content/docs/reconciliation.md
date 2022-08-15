@@ -45,7 +45,11 @@ Bu, eski `Counter`'ı yok eder ve yenisini oluşturur.
 
 >Not:
 >
+<<<<<<< HEAD
 >Bu yöntemler eski yöntem olarak kabul edilir ve yeni kodda [bunlardan kaçınmalısınız](/blog/2018/03/27/update-on-async-rendering.html):
+=======
+>This method is considered legacy and you should [avoid it](/blog/2018/03/27/update-on-async-rendering.html) in new code:
+>>>>>>> 5fed75dac5f4e208369b102a1337d76944111b33
 >
 >- `UNSAFE_componentWillMount()`
 
