@@ -144,7 +144,6 @@ Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz: `filterText
 
 React, programınızın nasıl çalıştığını anlamayı kolaylaştırmak için bu veri akışını açık bir hale getirir, ancak geleneksel iki yönlü (yukarıdan aşağı ve aşağıdan yukarı) veri akışından biraz daha fazla yazma gerektirir.
 
-<<<<<<< HEAD
 Eğer yukarıdaki örnekte metin kutusuna yazmayı ya da kutucuğu işaretlemeyi denediğiniz taktirde, React'in bunu yoksaydığını göreceksiniz. Bu kasıtlı olarak böyledir. Çünkü `input` un `value` prop'unu, her zaman `FilterableProductTable` bileşeninden gelen `state`'e eşit olacak şekilde ayarladık.
 
 Ne olmasını istediğimizi düşünelim. Kullanıcı form'u her değiştirdiğinde, kullanıcının yaptığı değişikliği yansıtacak şekilde state'i güncellediğimizden emin olmak istiyoruz. Bileşenlerin yalnızca kendi state'lerini güncellemesi gerektiği için, `FilterableProductTable` bileşeni, `SearchBar` bileşenine, state'in her güncellenmesinde çağrılacak `callback`'ler iletir. Girdilerin (input) `OnChange` olayını, `SearchBar` bileşenini bilgilendirmek için kullanabiliriz. `FilterableProductTable` tarafından iletilen callBack'ler `setState()`'i çağıracak ve uygulama güncellenecektir.
@@ -154,6 +153,3 @@ Karışık görünmesine rağmen, aslında sadece birkaç kod satırından ibare
 ## Ve Bu Kadar {#and-thats-it}
 
 Umuyoruz ki bu bölüm, React ile bileşen ve uygulamalar oluştururken nasıl düşünmeniz gerektiği hakkında size bir fikir vermiştir. Normalde alıştığınızdan biraz daha fazla kod yazmanız gerekebilir. Ancak kodun yazıldığından çok daha fazla okunduğunu; ve bu modüler, açık kodun okumak için oldukça kolay olduğunu unutmayın. Büyük bileşen kütüphaneleri oluşturmaya başladığınızda, bu açıklık ve modülerliği takdir edeceksiniz ve yazdığınız kodu yeniden kullandıkça kod satırlarınız küçülmeye başlayacak. :)
-=======
-Hopefully, this gives you an idea of how to think about building components and applications with React. While it may be a little more typing than you're used to, remember that code is read far more often than it's written, and it's less difficult to read this modular, explicit code. As you start to build large libraries of components, you'll appreciate this explicitness and modularity, and with code reuse, your lines of code will start to shrink. :)
->>>>>>> e9faee62db6981e26a1cdabad6ae39620a1d2e3e
