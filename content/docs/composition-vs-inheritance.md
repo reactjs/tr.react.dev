@@ -170,4 +170,8 @@ Facebook binlerce bileşende React kullanıyor ve bileşen hiyerarşileri oluşt
 
 Prop'lar ve bileşimler, bir bileşenin görünüşünü ve davranışını açık ve güvenli bir şekilde özelleştirmek için ihtiyacınız olan tüm esnekliği sunar. Bileşenlerin, ilkel değerler, React öğeleri veya fonksiyonlar dahil olmak üzere isteğe bağlı prop'ları kabul edebileceğini unutmayın.
 
+<<<<<<< HEAD
 UI (Kullanıcı Arayüzü) dışı işlevselliği bileşenler arasında yeniden kullanmak istiyorsanız, ayrı bir JavaScript modülüne çıkarmanızı öneririz. Bileşenler onu içe dahil edebilir ve genişletmeden bu fonksiyonu, nesneyi veya bir sınıfı kullanabilir.
+=======
+If you want to reuse non-UI functionality between components, we suggest extracting it into a separate JavaScript module. The components may import it and use that function, object, or class, without extending it.
+>>>>>>> c7d858947f832d1ba4e78caebc391fd964ff6de6
