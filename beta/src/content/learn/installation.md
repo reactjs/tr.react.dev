@@ -38,21 +38,13 @@ export default function App() {
 Çevrimiçi kod oyun alanlarını bu dokümanlarda eğitim yardımcıları olarak kullanıyoruz. Çevrimiçi kod oyun alanları, React'in nasıl çalıştığını anlamanıza ve React'in sizin için doğru olup olmadığı konusunda karar vermenize yardımcı olabilir. React dokümanlarının dışında, React'i destekleyen birçok çevrimiçi kod oyun alan var: örneğin, [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), veya [CodePen](
 https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb).
 
-<<<<<<< HEAD:beta/src/pages/learn/installation.md
-### Lokalde React'i deneyin {/*try-react-locally*/}
-=======
-Most pages in the React documentation contain sandboxes like this. Outside of the React documentation, there are many online sandboxes that support React: for example, [CodeSandbox](https://codesandbox.io/s/new), [StackBlitz](https://stackblitz.com/fork/react), or [CodePen.](https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb)
->>>>>>> c7d858947f832d1ba4e78caebc391fd964ff6de6:beta/src/content/learn/installation.md
+### React'i kendi bilgisayarınızda deneyin {/*try-react-locally*/}
 
-React'i bilgisayarınızda lokal olarak denemek için, [bu HTML sayfasını indirın](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html). Editörünüzde ve tarayıcınızda açın!
+React'i bilgisayarınızda yerel olarak denemek için, [bu HTML sayfasını indirın](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html). Editörünüzde ve tarayıcınızda açın!
 
-<<<<<<< HEAD:beta/src/pages/learn/installation.md
 ## Bir sayfaya React ekleyin {/*add-react-to-a-page*/}
-=======
-To try React locally on your computer, [download this HTML page.](https://raw.githubusercontent.com/reactjs/reactjs.org/main/static/html/single-file-example.html) Open it in your editor and in your browser!
->>>>>>> c7d858947f832d1ba4e78caebc391fd964ff6de6:beta/src/content/learn/installation.md
 
-Mevcut bir site üzerinde çalışıyorsanız ve biraz React eklemeniz gerekiyorsa, [bir script etiketi ile React ekleyebilirsiniz.](/learn/add-react-to-a-website)
+Mevcut bir site üzerinde çalışıyorsanız ve biraz React eklemeniz gerekiyorsa, [bir script etiketi ile React ekleyebilirsiniz](/learn/add-react-to-a-website).
 
 ## Bir React projesi oluşturun {/*start-a-react-project*/}
 
