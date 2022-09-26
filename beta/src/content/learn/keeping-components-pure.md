@@ -43,7 +43,7 @@ function double(number) {
 }
 ```
 
-In the above example, `double()` is a **pure function.** If you pass it `3`, it will return `6`. Always.
+In the above example, `double` is a **pure function.** If you pass it `3`, it will return `6`. Always.
 
 React is designed around this concept. **React assumes that every component you write is a pure function.** This means that React components you write must always return the same JSX given the same inputs:
 
@@ -202,7 +202,7 @@ When possible, try to express your logic with rendering alone. You'll be surpris
 Writing pure functions takes some habit and discipline. But it also unlocks marvelous opportunities:
 
 * Your components could run in a different environment—for example, on the server! Since they return the same result for the same inputs, one component can serve many user requests.
-* You can improve performance by [skipping rendering](TODO:/learn/skipping-unchanged-trees) components whose inputs have not changed. This is safe because pure functions always return the same results, so they are safe to cache.
+* You can improve performance by [skipping rendering](/apis/react/memo) components whose inputs have not changed. This is safe because pure functions always return the same results, so they are safe to cache.
 * If some data changes in the middle of rendering a deep component tree, React can restart rendering without wasting time to finish the outdated render. Purity makes it safe to stop calculating at any time.
 
 Every new React feature we're building takes advantage of purity. From data fetching to animations to performance, keeping components pure unlocks the power of the React paradigm.
@@ -215,7 +215,7 @@ Every new React feature we're building takes advantage of purity. From data fetc
   * **It minds its own business.** It should not change any objects or variables that existed before rendering.
   * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. 
 * Rendering can happen at any time, so components should not depend on each others' rendering sequence.
-* You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](reacting-to-input-with-state) instead of mutating preexisting objects.
+* You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](/learn/state-a-components-memory) instead of mutating preexisting objects.
 * Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
 * Writing pure functions takes a bit of practice, but it unlocks the power of React's paradigm.
 

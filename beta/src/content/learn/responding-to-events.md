@@ -126,7 +126,7 @@ In both cases, what you want to pass is a function:
 * `<button onClick={handleClick}>` passes the `handleClick` function.
 * `<button onClick={() => alert('...')}>` passes the `() => alert('...')` function.
 
-> Check out the [JavaScript Refresher](a-javascript-refresher#arrow-functions) for more on arrow functions.
+> [Read more about arrow functions.](https://javascript.info/arrow-functions-basics)
 
 </Gotcha>
 
@@ -231,7 +231,7 @@ If you use a [design system](https://uxdesign.cc/everything-you-need-to-know-abo
 
 ### Naming event handler props {/*naming-event-handler-props*/}
 
-Built-in components like `<button>` and `<div>` only support [browser event names](/apis/react-dom/events) like `onClick`. However, when you're building your own components, you can name their event handler props any way that you like.
+Built-in components like `<button>` and `<div>` only support [browser event names](TODO:/apis/react-dom/events) like `onClick`. However, when you're building your own components, you can name their event handler props any way that you like.
 
 > By convention, event handler props should start with `on`, followed by a capital letter.
 
@@ -315,10 +315,6 @@ button { margin-right: 10px; }
 Notice how the `App` component does not need to know *what* `Toolbar` will do with `onPlayMovie` or `onUploadImage`. That's an implementation detail of the `Toolbar`. Here, `Toolbar` passes them down as `onClick` handlers to its `Button`s, but it could later also trigger them on a keyboard shortcut. Naming props after app-specific interactions like `onPlayMovie` gives you the flexibility to change how they're used later.
 
 ## Event propagation {/*event-propagation*/}
-
-<!--
-// TODO illo
--->
 
 Event handlers will also catch events from any children your component might have. We say that an event "bubbles" or "propagates" up the tree: it starts with where the event happened, and then goes up the tree.
 
@@ -419,10 +415,6 @@ When you click on a button:
 As a result of `e.stopPropagation()`, clicking on the buttons now only shows a single alert (from the `<button>`) rather than the two of them (from the `<button>` and the parent toolbar `<div>`). Clicking a button is not the same thing as clicking the surrounding toolbar, so stopping the propagation makes sense for this UI.
 
 <DeepDive title="Capture phase events">
-
-<!--
-// TODO Illo
--->
 
 In rare cases, you might need to catch all events on child elements, *even if they stopped propagation*. For example, maybe you want to log every click to analytics, regardless of the propagation logic. You can do this by adding `Capture` at the end of the event name:
 
