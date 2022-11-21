@@ -86,11 +86,11 @@ The `export default` prefix is a [standard JavaScript syntax](https://developer.
 
 With `function Profile() { }` you define a JavaScript function with the name `Profile`.
 
-<Gotcha>
+<Pitfall>
 
 React components are regular JavaScript functions, but **their names must start with a capital letter** or they won't work!
 
-</Gotcha>
+</Pitfall>
 
 ### Step 3: Add markup {/*step-3-add-markup*/}
 
@@ -112,11 +112,11 @@ return (
 );
 ```
 
-<Gotcha>
+<Pitfall>
 
 Without parentheses, any code on the lines after `return` [will be ignored](https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi)!
 
-</Gotcha>
+</Pitfall>
 
 ## Using a component {/*using-a-component*/}
 
@@ -175,6 +175,37 @@ And `Profile` contains even more HTML: `<img />`. In the end, this is what the b
 Components are regular JavaScript functions, so you can keep multiple components in the same file. This is convenient when components are relatively small or tightly related to each other. If this file gets crowded, you can always move `Profile` to a separate file. You will learn how to do this shortly on the [page about imports.](/learn/importing-and-exporting-components)
 
 Because the `Profile` components are rendered inside `Gallery`—even several times!—we can say that `Gallery` is a **parent component,** rendering each `Profile` as a "child". This is part of the magic of React: you can define a component once, and then use it in as many places and as many times as you like.
+
+<Pitfall>
+
+Components can render other components, but **you must never nest their definitions:**
+
+```js {2-5}
+export default function Gallery() {
+  // 🔴 Never define a component inside another component!
+  function Profile() {
+    // ...
+  }
+  // ...
+}
+```
+
+The snippet above is [very slow and causes bugs.](/learn/preserving-and-resetting-state#different-components-at-the-same-position-reset-state) Instead, define every component at the top level:
+
+```js {5-8}
+export default function Gallery() {
+  // ...
+}
+
+// ✅ Declare components at the top level
+function Profile() {
+  // ...
+}
+```
+
+When a child component needs some data from a parent, [pass it by props](/learn/passing-props-to-a-component) instead of nesting definitions.
+
+</Pitfall>
 
 <DeepDive title="Components all the way down">
 

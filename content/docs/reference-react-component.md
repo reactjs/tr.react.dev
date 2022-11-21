@@ -123,11 +123,19 @@ render()
 
 Çağrıldığında, `this.props` ile `this.state`'i denetler ve aşağıdaki veri tiplerinden birini geri döndürür:
 
+<<<<<<< HEAD
 - **React elementleri.** Genellikle [JSX kodu](/docs/introducing-jsx.html) kullanılarak oluşturulurlar. Örneğin, `<div />` ve `<MyComponent />` birer React elementidir. `<div/>`, React'e bir HTML DOM düğümünü render etmesini gerektiğini bildirir. `<MyComponent/>` ise kullanıcının tanımladığı bir React bileşendir.
 - **Diziler and fragment'lar.** Render edilecek olan birden fazla elemanı geri döndürürler. Daha fazla bilgi için [fragments](/docs/fragments.html) dokümanını inceleyebilirsiniz.
 - **Portal'lar**. Alt bileşenleri, farklı bir DOM alt ağacı olarak render etmeyi sağlarlar. Daha fazla bilgi için [portals](/docs/portals.html) dokümanını inceleyebilirsiniz.
 - **String'ler ve sayılar.** DOM içerisinde metin düğümü olarak render edilirler.
 - **Boolean'lar ve `null`**. Hiçbir şey render etmezler. (Genellikle `return test && <Child />` tarzındaki kod yapısını desteklemek için vardırlar. Buradaki `test`, boolean tipinde bir değişkendir.)
+=======
+- **React elements.** Typically created via [JSX](/docs/introducing-jsx.html). For example, `<div />` and `<MyComponent />` are React elements that instruct React to render a DOM node, or another user-defined component, respectively.
+- **Arrays and fragments.** Let you return multiple elements from render. See the documentation on [fragments](/docs/fragments.html) for more details.
+- **Portals**. Let you render children into a different DOM subtree. See the documentation on [portals](/docs/portals.html) for more details.
+- **String and numbers.** These are rendered as text nodes in the DOM.
+- **Booleans or `null` or `undefined`**. Render nothing. (Mostly exists to support `return test && <Child />` pattern, where `test` is boolean).
+>>>>>>> e50e5634cca3c7cdb92c28666220fe3b61e9aa30
 
 `render()` metodu saf halde olmalıdır. Yani bileşenin state'ini değiştirmemeli, aynı parametrelerle çağrıldığında hep aynı çıktıyı vermeli, ve internet tarayıcısı ile direkt olarak etkileşimde **bulunmamalıdır**. Eğer tarayıcı ile etkileşimde bulunmanız gerekirse, `componentDidMount()`'ta veya diğer yaşam döngüsü metotlarında bu işlemi gerçekleştiriniz.
 
