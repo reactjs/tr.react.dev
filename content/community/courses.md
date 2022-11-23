@@ -34,6 +34,8 @@ permalink: community/courses.html
 
 - [Fullstack React](https://www.fullstackreact.com/) - React dostları için güncel, derinlikli, eksiksiz bir rehber.
 
+- [Meta Front-End Developer Professional Certificate](https://www.coursera.org/professional-certificates/meta-front-end-developer) - Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.
+
 - [Pure React](https://daveceddia.com/pure-react/) - React'te uzmanlaşmak için adım adım takip edilebilecek bir rehber.
 
 - [React for Beginners](https://reactforbeginners.com/) - Saatler içerisinde React'i öğrenin.
