@@ -32,13 +32,9 @@ permalink: community/courses.html
 
 - [Frontend Masters](https://frontendmasters.com/learn/react/) - React hakkında video dersleri.
 
-<<<<<<< HEAD
 - [Fullstack React](https://www.fullstackreact.com/) - React dostları için güncel, derinlikli, eksiksiz bir rehber.
-=======
-- [Meta Front-End Developer Professional Certificate](https://www.coursera.org/professional-certificates/meta-front-end-developer) - Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.
 
-- [Egghead.io](https://egghead.io/browse/frameworks/react) - Short instructional videos on React and many other topics.
->>>>>>> e50e5634cca3c7cdb92c28666220fe3b61e9aa30
+- [Meta Front-End Developer Professional Certificate](https://www.coursera.org/professional-certificates/meta-front-end-developer) - Launch your career as a front-end developer. Build job-ready skills for an in-demand career and earn a credential from Meta. No degree or prior experience required to get started.
 
 - [Pure React](https://daveceddia.com/pure-react/) - React'te uzmanlaşmak için adım adım takip edilebilecek bir rehber.
 
