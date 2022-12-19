@@ -1,10 +1,10 @@
 ---
-title: Suspense
+title: <Suspense>
 ---
 
 <Intro>
 
-`Suspense` is a React component that displays a fallback until its children have finished loading.
+`<Suspense>` lets you displays a fallback until its children have finished loading.
 
 
 ```js
@@ -2496,11 +2496,36 @@ However, now imagine you're navigating between two different user profiles. In t
 
 ---
 
+### Providing a fallback for server errors and server-only content {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
+
+If you use one of the [streaming server rendering APIs](/apis/react-dom/server) (or a framework that relies on them), React will also use your `<Suspense>` boundaries to handle errors on the server. If a component throws an error on the server, React will not abort the server render. Instead, it will find the closest `<Suspense>` component above it and include its fallback (such as a spinner) into the generated server HTML. The user will see a spinner instead of an error.
+
+On the client, React will attempt to render the same component again. If it errors on the client too, React will throw the error and display the closest [error boundary.](/apis/react/Component#static-getderivedstatefromerror) However, if it does not error on the client, React will not display the error to the user since the content was eventually displayed successfully.
+
+You can use this to opt out some components from rendering on the server. To do this, throw an error from them in the server environment and then wrap them in a `<Suspense>` boundary to replace their HTML with fallbacks:
+
+```js
+<Suspense fallback={<Loading />}>
+  <Chat />
+</Suspense>
+
+function Chat() {
+  if (typeof window === 'undefined') {
+    throw Error('Chat should only render on the client.');
+  }
+  // ...
+}
+```
+
+The server HTML will include the loading indicator. It will be replaced by the `Chat` component on the client.
+
+---
+
 ## Reference {/*reference*/}
 
-### `Suspense` {/*suspense*/}
+### `<Suspense>` {/*suspense*/}
 
-#### Props {/*suspense-props*/}
+#### Props {/*props*/}
 * `children`: The actual UI you intend to render. If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
 * `fallback`: An alternate UI to render in place of the actual UI if it has not finished loading. Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton. Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready. If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
 
