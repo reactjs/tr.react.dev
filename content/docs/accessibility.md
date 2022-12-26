@@ -375,7 +375,7 @@ Bunlar JSX'te tamamen desteklenmiş ve tamamen erişilebilir, yüksek dereceli f
 
 Her çeşit widget öğesi türünün belirli bir tasarım deseni vardır ve hem kullanıcılar hem de kullanıcı ajansları gibi olanlar tarafından, belirli bir şekilde fonksiyon göstermesi beklenir:
 
-- [WAI-ARIA Yazarlık Pratikleri - Tasarım Desenleri ve Widget'lar](https://www.w3.org/TR/wai-aria-practices/#aria_ex)
+- [ARIA Yazarlık Pratikleri (APG) - Tasarım Desenleri ve Örnekler](https://www.w3.org/WAI/ARIA/apg/patterns/)
 - [Heydon Pickering - ARIA Örnekleri](https://heydonworks.com/article/practical-aria-examples/)
 - [Kapsayıcı Bileşenler](https://inclusive-components.design/)
 

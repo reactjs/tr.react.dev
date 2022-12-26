@@ -46,7 +46,7 @@ Portal'lar için tipik bir kullanım durumu, bir ana bileşenin `overflow: hidde
 >
 > Portal'lar ile çalışırken, [klavye odağını yönetmenin](/docs/accessibility.html#programmatically-managing-focus) çok önemli olduğunu unutmayın.
 >
-> Modal dialog'ları için, [WAI-ARIA Modal Oluşturma Pratiklerine](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal) uygun şekilde herkesin onlarla etkileşim kurabildiğinden emin olun.
+> Modal dialog'ları için, [WAI-ARIA Modal Oluşturma Pratiklerine](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/) uygun şekilde herkesin onlarla etkileşim kurabildiğinden emin olun.
 
 [**CodePen'de Deneyin**](https://codepen.io/gaearon/pen/yzMaBd)
 
