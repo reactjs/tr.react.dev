@@ -53,9 +53,9 @@ React is designed around this concept. **React assumes that every component you 
 function Recipe({ drinkers }) {
   return (
     <ol>    
-      <li>Boil {drinkers} cups of milk.</li>
-      <li>Add {2 * drinkers} spoons of masala spices.</li>
-      <li>Remove from heat, and add {drinkers} spoons of tea.</li>
+      <li>Boil {drinkers} cups of water.</li>
+      <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
+      <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
     </ol>
   );
 }
@@ -64,8 +64,8 @@ export default function App() {
   return (
     <section>
       <h1>Spiced Chai Recipe</h1>
-      <h2>For one</h2> 
-      <Recipe drinkers={1} />
+      <h2>For two</h2>
+      <Recipe drinkers={2} />
       <h2>For a gathering</h2>
       <Recipe drinkers={4} />
     </section>
@@ -75,15 +75,15 @@ export default function App() {
 
 </Sandpack>
 
-When you pass `drinkers={1}` to `Recipe`, it will return JSX containing `1 cups of milk`. Always. 
+When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always. 
 
-If you pass `drinkers={4}`, it will return JSX containing `4 cups of milk`. Always. 
+If you pass `drinkers={4}`, it will return JSX containing `4 cups of water`. Always.
 
 Just like a math formula. 
 
 You could think of your components as recipes: if you follow them and don't introduce new ingredients during the cooking process, you will get the same dish every time. That "dish" is the JSX that the component serves to React to [render.](/learn/render-and-commit)
 
-<Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add 2x spoons of spices, and x spoons of tea!" />
+<Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add x spoons of tea and 0.5x spoons of spices, and 0.5x cups of milk" />
 
 ## Side Effects: (un)intended consequences {/*side-effects-unintended-consequences*/}
 
@@ -109,7 +109,7 @@ export default function TeaSet() {
       <Cup />
       <Cup />
     </>
-  )
+  );
 }
 ```
 
@@ -195,7 +195,7 @@ While functional programming relies heavily on purity, at some point, somewhere,
 
 In React, **side effects usually belong inside [event handlers.](/learn/responding-to-events)** Event handlers are functions that React runs when you perform some action—for example, when you click a button. Even though event handlers are defined *inside* your component, they don't run *during* rendering! **So event handlers don't need to be pure.**
 
-If you've exhausted all other options and can't find the right event handler for your side effect, you can still attach it to your returned JSX with a [`useEffect`](/apis/react/useEffect) call in your component. This tells React to execute it later, after rendering, when side effects are allowed. **However, this approach should be your last resort.**
+If you've exhausted all other options and can't find the right event handler for your side effect, you can still attach it to your returned JSX with a [`useEffect`](/reference/react/useEffect) call in your component. This tells React to execute it later, after rendering, when side effects are allowed. **However, this approach should be your last resort.**
 
 When possible, try to express your logic with rendering alone. You'll be surprised how far this can take you!
 
@@ -206,7 +206,7 @@ When possible, try to express your logic with rendering alone. You'll be surpris
 Writing pure functions takes some habit and discipline. But it also unlocks marvelous opportunities:
 
 * Your components could run in a different environment—for example, on the server! Since they return the same result for the same inputs, one component can serve many user requests.
-* You can improve performance by [skipping rendering](/apis/react/memo) components whose inputs have not changed. This is safe because pure functions always return the same results, so they are safe to cache.
+* You can improve performance by [skipping rendering](/reference/react/memo) components whose inputs have not changed. This is safe because pure functions always return the same results, so they are safe to cache.
 * If some data changes in the middle of rendering a deep component tree, React can restart rendering without wasting time to finish the outdated render. Purity makes it safe to stop calculating at any time.
 
 Every new React feature we're building takes advantage of purity. From data fetching to animations to performance, keeping components pure unlocks the power of the React paradigm.
