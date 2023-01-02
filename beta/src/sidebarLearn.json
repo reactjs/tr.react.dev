@@ -8,15 +8,11 @@
       "path": "",
       "routes": [
         {
-<<<<<<< HEAD
-          "title": "Kurulum",
-=======
           "hasSectionHeader": true,
           "sectionHeader": "Get Started"
         },
         {
-          "title": "Installation",
->>>>>>> e77ba1e90338ff18f965c9b94c733b034b3ac18f
+          "title": "Kurulum",
           "path": "/learn/installation",
           "routes": [
             {
