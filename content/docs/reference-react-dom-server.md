@@ -38,6 +38,10 @@ Aşağıdaki metotlar akışları (stream) desteklemeyen ortamlarda kullanılabi
 
 ### `renderToPipeableStream()` {#rendertopipeablestream}
 
+> Try the new React documentation for [`renderToPipeableStream`](https://beta.reactjs.org/reference/react-dom/server/renderToPipeableStream).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 ReactDOMServer.renderToPipeableStream(element, options)
 ```
@@ -92,6 +96,10 @@ See the [full list of options](https://github.com/facebook/react/blob/14c2be8dac
 * * *
 
 ### `renderToReadableStream()` {#rendertoreadablestream}
+
+> Try the new React documentation for [`renderToReadableStream`](https://beta.reactjs.org/reference/react-dom/server/renderToReadableStream).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```javascript
 ReactDOMServer.renderToReadableStream(element, options);
@@ -150,6 +158,10 @@ See the [full list of options](https://github.com/facebook/react/blob/14c2be8dac
 
 ### `renderToNodeStream()`  (Deprecated) {#rendertonodestream}
 
+> Try the new React documentation for [`renderToNodeStream`](https://beta.reactjs.org/reference/react-dom/server/renderToNodeStream).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 ReactDOMServer.renderToNodeStream(element)
 ```
@@ -167,6 +179,10 @@ Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`R
 * * *
 
 ### `renderToStaticNodeStream()` {#rendertostaticnodestream}
+
+> Try the new React documentation for [`renderToStaticNodeStream`](https://beta.reactjs.org/reference/react-dom/server/renderToStaticNodeStream).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```javascript
 ReactDOMServer.renderToStaticNodeStream(element)
@@ -188,6 +204,10 @@ Bu akışın HTML çıktısı [`ReactDOMServer.renderToStaticMarkup`](#rendertos
 
 ### `renderToString()` {#rendertostring}
 
+> Try the new React documentation for [`renderToString`](https://beta.reactjs.org/reference/react-dom/server/renderToString).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 ReactDOMServer.renderToString(element)
 ```
@@ -205,6 +225,10 @@ Zaten sunucu tarafından oluşturulmuş işaretlemeye sahip olan bir birimde [`R
 * * *
 
 ### `renderToStaticMarkup()` {#rendertostaticmarkup}
+
+> Try the new React documentation for [`renderToStaticMarkup`](https://beta.reactjs.org/reference/react-dom/server/renderToStaticMarkup).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```javascript
 ReactDOMServer.renderToStaticMarkup(element)

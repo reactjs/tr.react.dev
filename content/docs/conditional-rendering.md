@@ -9,7 +9,20 @@ redirect_from:
 ---
 React'te, ihtiyacınız olan duruma göre farklı bileşenler oluşturabilirsiniz. Böylelikle, uygulamanızın durumuna göre, bileşenlerinizin yalnızca bazılarını render edebilirsiniz.
 
+<<<<<<< HEAD
 React'te, koşullu renderlama aynı JavaScript'te olduğu gibi çalışır. JavaScript'teki [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) veya [koşul operatörü](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), size uygulamanızın durumuna göre bileşen renderlama imkânı sunar. Ve React, arayüzde uygun bileşeni render eder.
+=======
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [Conditional Rendering](https://beta.reactjs.org/learn/conditional-rendering)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+
+In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application.
+>>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
 
 Bu iki bileşeni dikkate alalım:
 

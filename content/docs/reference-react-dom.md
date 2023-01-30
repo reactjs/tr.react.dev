@@ -50,6 +50,10 @@ React, tüm modern tarayıcıları destekler, yinede eski versiyonlar için [baz
 
 ### `createPortal()` {#createportal}
 
+> Try the new React documentation for [`createPortal`](https://beta.reactjs.org/reference/react-dom/createPortal).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 createPortal(child, container)
 ```
@@ -57,6 +61,10 @@ createPortal(child, container)
 Bir portal oluşturur. Portallar, [alt elemanları DOM bileşeninin hiyerarşisi dışında var olan bir DOM düğümüne render etmek](/docs/portals.html) için bir yol sağlar.
 
 ### `flushSync()` {#flushsync}
+
+> Try the new React documentation for [`flushSync`](https://beta.reactjs.org/reference/react-dom/flushSync).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```javascript
 flushSync(callback)
@@ -84,6 +92,11 @@ flushSync(() => {
 
 ## Eski Referans {#legacy-reference}
 ### `render()` {#render}
+
+> Try the new React documentation for [`render`](https://beta.reactjs.org/reference/react-dom/render).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 render(element, container[, callback])
 ```
@@ -109,6 +122,10 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 
 ### `hydrate()` {#hydrate}
 
+> Try the new React documentation for [`hydrate`](https://beta.reactjs.org/reference/react-dom/hydrate).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 hydrate(element, container[, callback])
 ```
@@ -131,6 +148,10 @@ Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayınız. JavaS
 
 ### `unmountComponentAtNode()` {#unmountcomponentatnode}
 
+> Try the new React documentation for [`unmountComponentAtNode`](https://beta.reactjs.org/reference/react-dom/unmountComponentAtNode).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 unmountComponentAtNode(container)
 ```
@@ -145,7 +166,15 @@ DOM'dan yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'leri
 
 ### `findDOMNode()` {#finddomnode}
 
+<<<<<<< HEAD
 > Not:
+=======
+> Try the new React documentation for [`findDOMNode`](https://beta.reactjs.org/reference/react-dom/findDOMNode).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+> Note:
+>>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
 >
 > `findDOMNode`, temeldeki DOM elemanına erişmek için kullanılan bir çıkış kapısıdır. Çoğu durumda, bu çıkış kapısının kullanımı, bileşen soyutlamasını deldiğinden tavsiye edilmez. [`StrictMode` da desteklenmemektedir.](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
 

@@ -9,7 +9,21 @@ redirect_from:
   - "docs/forms-zh-CN.html"
 ---
 
+<<<<<<< HEAD
 HTML form elemanları, React’te diğer DOM elemanlarından biraz farklı çalışır; çünkü form elemanlarının kendilerine has iç state'leri vardır. Örneğin, düz HTML'de yazılmış bu form, tek bir isim (name) değeri kabul etmektedir.
+=======
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [`<input>`](https://beta.reactjs.org/reference/react-dom/components/input)
+> - [`<select>`](https://beta.reactjs.org/reference/react-dom/components/select)
+> - [`<textarea>`](https://beta.reactjs.org/reference/react-dom/components/textarea)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+HTML form elements work a bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
+>>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
 
 ```html
 <form>

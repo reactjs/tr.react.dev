@@ -11,7 +11,22 @@ redirect_from:
   - "tips/children-undefined.html"
 ---
 
+<<<<<<< HEAD
 Ref'ler, render metodu içerisinde oluşturulan DOM düğümümlerine veya React elemanlarına erişmeyi sağlar. 
+=======
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [Referencing Values with Refs](https://beta.reactjs.org/learn/referencing-values-with-refs)
+> - [Manipulating the DOM with Refs](https://beta.reactjs.org/learn/manipulating-the-dom-with-refs)
+> - [`useRef`](https://beta.reactjs.org/reference/react/useRef)
+> - [`forwardRef`](https://beta.reactjs.org/reference/react/forwardRef)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+Refs provide a way to access DOM nodes or React elements created in the render method.
+>>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
 
 React'ın tipik veri akışında, [prop'lar](/docs/components-and-props.html) üst bileşenlerin alt bileşenleri ile etkileşime geçmelerinin tek yoludur. Bir alt bileşeni düzenlemek için, onu yeni prop'lar ile yeniden render edersiniz. Fakat, birkaç senaryo vardır ki bir alt bileşeni tipik veri akışının dışında mecburi olarak düzenlemeniz gerekebilir. Düzenlenecek olan bir alt bileşen, bir React bileşeni'nin nesnesi veya bir DOM elemanı olabilir. Her iki durum için de React bir çıkış yolu sağlar. 
 
