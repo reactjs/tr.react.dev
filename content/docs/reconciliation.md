@@ -4,6 +4,14 @@ title: Uyumlaştırma
 permalink: docs/reconciliation.html
 ---
 
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [Preserving and Resetting State](https://beta.reactjs.org/learn/preserving-and-resetting-state)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 React, her güncellemede tam olarak ne değiştiği konusunda endişelenmenize gerek kalmaması için bildirimsel bir API sağlar. Bu, uygulamaları yazmayı daha kolay hale getirir, ancak bunun React içinde nasıl uygulandığı (implementation) açık olmayabilir. Bu makale, React'ın "fark bulma" algoritmasındaki yaptığımız seçimleri açıklar, böylece yüksek performanslı uygulamalar için yeterince hızlı olurken bileşen güncellemeleri tahmin edilebilir.
 
 ## Motivasyon {#motivation}

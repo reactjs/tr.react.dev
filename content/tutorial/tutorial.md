@@ -13,6 +13,12 @@ redirect_from:
   - "docs/tutorial-tr.html"
 ---
 
+> Try the new React documentation.
+> 
+> The updated [Tutorial](https://beta.reactjs.org/learn/tutorial-tic-tac-toe) teaches modern React and includes live examples.
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 Bu öğretici, herhangi bir React bilginizin olmadığını varsayar.
 
 ## Öğreticiye Başlamadan Önce {#before-we-start-the-tutorial}

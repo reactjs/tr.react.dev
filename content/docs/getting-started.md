@@ -18,6 +18,12 @@ redirect_from:
   - "docs/environments.html"
 ---
 
+> Try the new React documentation.
+> 
+> The new [Quick Start](https://beta.reactjs.org/learn) teaches modern React and includes live examples.
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 Bu sayfa React kullanım kılavuzu ve ilgili kaynaklara genel bir bakıştır.
 
 **React** kullanıcı arayüzleri geliştirebileceğiniz bir JavaScript kütüphanesidir. React'in tam olarak ne olduğunu [ana sayfamızdan](/) veya [eğitim bölümünden](/tutorial/tutorial.html) öğrenin.

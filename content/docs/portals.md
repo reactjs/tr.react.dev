@@ -4,6 +4,14 @@ title: Portal'lar
 permalink: docs/portals.html
 ---
 
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [`createPortal`](https://beta.reactjs.org/reference/react-dom/createPortal)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 Portal'lar, üst bileşenin DOM hiyerarşisinin dışında bulunan bir DOM düğümüne alt eleman render etmek için üstün bir yol sağlar.
 
 ```js

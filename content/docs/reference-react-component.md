@@ -15,6 +15,10 @@ redirect_from:
   - "tips/use-react-with-other-libraries.html"
 ---
 
+> Try the new React documentation for [`Component`](https://beta.reactjs.org/reference/react/Component).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 Bu sayfa, React sınıf bileşenleri hakkında detaylı bir API dokümanı içerir. Bu nedenle, [Bileşenler ve Prop'lar](/docs/components-and-props.html), [State ve Yaşam Döngüsü](/docs/state-and-lifecycle.html) gibi temel React kavramlarına aşina olduğunuzu varsaymaktadır. Eğer değilseniz öncelikle bu dokümanları okuyunuz.
 
 ## Giriş {#overview}

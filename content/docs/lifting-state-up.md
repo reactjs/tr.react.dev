@@ -9,6 +9,14 @@ redirect_from:
   - "docs/flux-todo-list.html"
 ---
 
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [Sharing State Between Components](https://beta.reactjs.org/learn/sharing-state-between-components)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 Çoğu zaman, birden çok bileşenin değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın ortak üst elemana taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
 
 Bu bölümde, suyun belirli bir sıcaklıkta kaynayıp kaynayamayacağını hesaplayan bir sıcaklık hesaplayıcısı oluşturacağız.

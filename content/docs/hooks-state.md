@@ -6,6 +6,15 @@ next: hooks-effect.html
 prev: hooks-overview.html
 ---
 
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [State: A Component's Memory](https://beta.reactjs.org/learn/state-a-components-memory)
+> - [`useState`](https://beta.reactjs.org/reference/react/useState)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 *Hook'lar* React 16.8. ile gelen yeni bir eklentidir. Bu yeni eklenti size herhangi bir sınıf oluşturmadan state ve diğer React özelliklerini kullanmanıza izin verir.
 
 [Giriş Sayfasında](/docs/hooks-intro.html), Hook'lara aşina olmak için, aşağıdaki örnek kullanılmıştı:

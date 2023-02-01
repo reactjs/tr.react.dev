@@ -35,6 +35,10 @@ Eğer Hook'lara yeniyseniz önce [Bir Bakışta Hook'lar](/docs/hooks-overview.h
 
 ### `useState` {#usestate}
 
+> Try the new React documentation for [`useState`](https://beta.reactjs.org/reference/react/useState).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```js
 const [state, setState] = useState(initialState);
 ```
@@ -118,6 +122,10 @@ In the rare case that you need to force the DOM update to be applied synchronous
 
 ### `useEffect` {#useeffect}
 
+> Try the new React documentation for [`useEffect`](https://beta.reactjs.org/reference/react/useEffect).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```js
 useEffect(didUpdate);
 ```
@@ -196,6 +204,11 @@ Bağımlı değişkenler dizisi efekt fonksiyonuna argüman olarak girilmez. Anc
 
 ### `useContext` {#usecontext}
 
+> Try the new React documentation for [`useContext`](https://beta.reactjs.org/reference/react/useContext).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+
 ```js
 const value = useContext(MyContext);
 ```
@@ -267,6 +280,11 @@ Bu örnek, Context'i ne zaman ve nasıl kullanacağınıza dair bilgiler bulabil
 Aşağıda bahsedilen hook'lar ya önce bahsedilen hook'lardan türetilmiştir, ya da belli başlı uç örnekler için gereklidir. Başlangıç aşamasında bunları öğrenmeyi dert etmeyin.
 
 ### `useReducer` {#usereducer}
+
+> Try the new React documentation for [`useReducer`](https://beta.reactjs.org/reference/react/useReducer).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 
 ```js
 const [state, dispatch] = useReducer(reducer, initialArg, init);
@@ -371,6 +389,10 @@ Unutmayın, React bu bahsedilen bileşeni, esas yeniden render işleminden kurtu
 
 ### `useCallback` {#usecallback}
 
+> Try the new React documentation for [`useCallback`](https://beta.reactjs.org/reference/react/useCallback).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```js
 const memoizedCallback = useCallback(
   () => {
@@ -394,6 +416,11 @@ Argüman olarak satıriçi bir callback ve bağımlı değişkenler dizisi girin
 
 ### `useMemo` {#usememo}
 
+> Try the new React documentation for [`useMemo`](https://beta.reactjs.org/reference/react/useMemo).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+
 ```js
 const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 ```
@@ -415,6 +442,11 @@ Eğer bir bağımlı değişken dizisi verilmezse, her render işleminde değer 
 >Biz [`exhaustive-deps`](https://github.com/facebook/react/issues/14920) kuralının [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks#installation) paketinin bir parçası olarak kullanılmasını öneriyoruz. Bu paket bağımlı değişkenler yanlış bir şekilde belirtildiğinde uyarır ve bir çözüm önerir.
 
 ### `useRef` {#useref}
+
+> Try the new React documentation for [`useRef`](https://beta.reactjs.org/reference/react/useRef).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 
 ```js
 const refContainer = useRef(initialValue);
@@ -453,6 +485,11 @@ Bu yöntem çalışır çünkü `useRef()` basit bir JavaScript objesi oluşturu
 
 ### `useImperativeHandle` {#useimperativehandle}
 
+> Try the new React documentation for [`useImperativeHandle`](https://beta.reactjs.org/reference/react/useImperativeHandle).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+
 ```js
 useImperativeHandle(ref, createHandle, [deps])
 ```
@@ -476,6 +513,10 @@ Bu örnekte, `<FancyInput ref={inputRef} />` elementini ekrana yazdıran üst bi
 
 ### `useLayoutEffect` {#uselayouteffect}
 
+> Try the new React documentation for [`useLayoutEffect`](https://beta.reactjs.org/reference/react/useLayoutEffect).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 Kullanım şekl `useEffect` ile eşdeğerdir, ancak tüm DOM değişiklikleri ile senkronize olarak çalıştırılır. Bu hook'u DOM'daki tasarımı okuyup senkronize olarak yeniden ekrana yazdırmak için kullanın. `useLayoutEffect` içinde planlanan değişiklikler, tarayıcı daha çizim yapmaya fırsat bulamadan, senkronize olarak temizlenecektir.
 
 Görüntüdeki güncellemeleri geciktirmekten kaçınmak için, mümkün olduğunda standart `useEffect` kullanımını tercih edin.
@@ -489,6 +530,11 @@ Görüntüdeki güncellemeleri geciktirmekten kaçınmak için, mümkün olduğu
 >Serverda render edilen HTML'den layout efektlerine ihtiyacı olan bir bileşeni hariç tutmak için,  `showChild && <Child />` şeklinde koşullu olarak ekrana yazdırın ve görüntülenmesini `useEffect(() => { setShowChild(true); }, [])` ile geciktirin. Bu sayede arayüz, hydration işleminden önce bozuk görünmeyecektir.
 
 ### `useDebugValue` {#usedebugvalue}
+
+> Try the new React documentation for [`useDebugValue`](https://beta.reactjs.org/reference/react/useDebugValue).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 
 ```js
 useDebugValue(value)
@@ -530,6 +576,11 @@ useDebugValue(date, date => date.toDateString());
 
 ### `useDeferredValue` {#usedeferredvalue}
 
+> Try the new React documentation for [`useDeferredValue`](https://beta.reactjs.org/reference/react/useDeferredValue).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+
 ```js
 const deferredValue = useDeferredValue(value);
 ```
@@ -567,6 +618,11 @@ function Typeahead() {
 Memoizing the children tells React that it only needs to re-render them when `deferredQuery` changes and not when `query` changes. This caveat is not unique to `useDeferredValue`, and it's the same pattern you would use with similar hooks that use debouncing or throttling.
 
 ### `useTransition` {#usetransition}
+
+> Try the new React documentation for [`useTransition`](https://beta.reactjs.org/reference/react/useTransition).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 
 ```js
 const [isPending, startTransition] = useTransition();
@@ -611,6 +667,11 @@ function App() {
 > Updates in a transition will not show a fallback for re-suspended content. This allows the user to continue interacting with the current content while rendering the update.
 
 ### `useId` {#useid}
+
+> Try the new React documentation for [`useId`](https://beta.reactjs.org/reference/react/useId).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 
 ```js
 const id = useId();
@@ -668,6 +729,11 @@ The following Hooks are provided for library authors to integrate libraries deep
 
 ### `useSyncExternalStore` {#usesyncexternalstore}
 
+> Try the new React documentation for [`useSyncExternalStore`](https://beta.reactjs.org/reference/react/useSyncExternalStore).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
+
 ```js
 const state = useSyncExternalStore(subscribe, getSnapshot[, getServerSnapshot]);
 ```
@@ -713,6 +779,10 @@ const selectedField = useSyncExternalStore(
 > As a convenience, we also provide a version of the API with automatic support for memoizing the result of getSnapshot published as `use-sync-external-store/with-selector`.
 
 ### `useInsertionEffect` {#useinsertioneffect}
+
+> Try the new React documentation for [`useInsertionEffect`](https://beta.reactjs.org/reference/react/useInsertionEffect).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```js
 useInsertionEffect(didUpdate);

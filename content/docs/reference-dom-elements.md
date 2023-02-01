@@ -14,6 +14,19 @@ redirect_from:
   - "tips/dangerously-set-inner-html.html"
 ---
 
+> Try the new React documentation.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [Common components (e.g. `<div>`)](https://beta.reactjs.org/reference/react-dom/components/common)
+> - [`<input>`](https://beta.reactjs.org/reference/react-dom/components/input)
+> - [`<option>`](https://beta.reactjs.org/reference/react-dom/components/option)
+> - [`<progress>`](https://beta.reactjs.org/reference/react-dom/components/progress)
+> - [`<select>`](https://beta.reactjs.org/reference/react-dom/components/select)
+> - [`<textarea>`](https://beta.reactjs.org/reference/react-dom/components/textarea)
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 React, performans ve tarayıcılara uyumluluk sağlayabilmek için tarayıcı bağımsız bir DOM sistemi uygulamaktadır. Tarayıcı DOM geliştirmelerinde birkaç zorlu noktayı düzeltme fırsatı yakaladık.
 
 React'te, tüm DOM özellikleri ve nitelikleri (olay işleyicileri dahil) camelCased olmalıdır. Örneğin, HTML niteliği olan `tabindex`, React'te `tabIndex`'e karşılık gelmektedir. Burada istisna olarak `aria-*` ve `data-*` nitelikleri bulunmaktadır. Bu nitelikler küçük harfli olmalıdır. Örneğin, `aria-label`'ı `aria-label` olarak yazabilirsiniz.

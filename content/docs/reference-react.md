@@ -101,6 +101,10 @@ Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağ
 
 ### `React.Component` {#reactcomponent}
 
+> Try the new React documentation for [`Component`](https://beta.reactjs.org/reference/react/Component).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 `React.Component`, [ES6 sınıfları](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanılarak tanımlandıklarında React bileşenleri için temel sınıftır:
 
 ```javascript
@@ -117,6 +121,10 @@ Temel `React.Component` sınıfına ilişkin metod ve özelliklerin listesi içi
 
 ### `React.PureComponent` {#reactpurecomponent}
 
+> Try the new React documentation for [`PureComponent`](https://beta.reactjs.org/reference/react/PureComponent).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 `React.PureComponent` [`React.Component`](#reactcomponent)'e benzer. Aralarındaki fark, [`React.Component`](#reactcomponent)'in [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunu uygulamamasıdır, ancak `React.PureComponent` bunu yüzeysel bir prop ve state karşılaştırması ile birlikte uygular.
 
 Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile aynı sonucu render ediyor ise, bazı durumlarda performans artışı için `React.PureComponent` kullanabilirsiniz.
@@ -130,6 +138,10 @@ Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile ayn
 * * *
 
 ### `React.memo` {#reactmemo}
+
+> Try the new React documentation for [`memo`](https://beta.reactjs.org/reference/react/memo).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```javascript
 const MyComponent = React.memo(function MyComponent(props) {
@@ -169,6 +181,10 @@ Bu metod yalnızca bir **[performans optimizasyonu](/docs/optimizing-performance
 
 ### `createElement()` {#createelement}
 
+> Try the new React documentation for [`createElement`](https://beta.reactjs.org/reference/react/createElement).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 React.createElement(
   type,
@@ -184,6 +200,10 @@ Verilen tipte yeni bir [React elemanı](/docs/rendering-elements.html) oluşturu
 * * *
 
 ### `cloneElement()` {#cloneelement}
+
+> Try the new React documentation for [`cloneElement`](https://beta.reactjs.org/reference/react/cloneElement).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```
 React.cloneElement(
@@ -209,6 +229,10 @@ Bu API, kullanımdan kaldırılan `React.addons.cloneWithProps()` işlevinin yer
 
 ### `createFactory()` {#createfactory}
 
+> Try the new React documentation for [`createFactory`](https://beta.reactjs.org/reference/react/createFactory).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 React.createFactory(type)
 ```
@@ -223,6 +247,10 @@ JSX kullanıyorsanız genellikle `React.createFactory()` işlevini doğrudan ça
 
 ### `isValidElement()` {#isvalidelement}
 
+> Try the new React documentation for [`isValidElement`](https://beta.reactjs.org/reference/react/isValidElement).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 ```javascript
 React.isValidElement(object)
 ```
@@ -232,6 +260,10 @@ Nesnenin bir React öğesi olduğunu doğrular. `true` veya `false` döndürür.
 * * *
 
 ### `React.Children` {#reactchildren}
+
+> Try the new React documentation for [`Children`](https://beta.reactjs.org/reference/react/Children).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 `React.Children` belirsiz veri yapısına sahip `this.props.children` ile ilgilenmek için yardımcı işlevler sağlar.
 
@@ -291,6 +323,10 @@ React.Children.toArray(children)
 
 ### `React.Fragment` {#reactfragment}
 
+> Try the new React documentation for [`Fragment`](https://beta.reactjs.org/reference/react/Fragment).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 `React.Fragment` bileşeni, ek bir DOM öğesi oluşturmadan `render()` metodu içinde bir çok eleman döndürmenizi sağlar:
 
 ```javascript
@@ -309,10 +345,18 @@ Ayrıca `<></>` sözdizimi kısayoluyla da kullanabilirsiniz. Daha fazla bilgi i
 
 ### `React.createRef` {#reactcreateref}
 
+> Try the new React documentation for [`createRef`](https://beta.reactjs.org/reference/react/createRef).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 `React.createRef` ref özelliği ile React elemanlarına eklenebilecek bir [ref](/docs/refs-and-the-dom.html) oluşturur.
 `embed:16-3-release-blog-post/create-ref-example.js`
 
 ### `React.forwardRef` {#reactforwardref}
+
+> Try the new React documentation for [`forwardRef`](https://beta.reactjs.org/reference/react/forwardRef).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 `React.forwardRef` aldığı [ref](/docs/refs-and-the-dom.html) özelliğini ağacın altında bulunan bir diğer bileşene ileten bir React bileşeni oluşturur. Bu teknik çok yaygın değildir, ancak iki durumda özellikle faydalıdır:
 
@@ -331,6 +375,10 @@ Daha fazla bilgi için, bkz. [ref iletimi](/docs/forwarding-refs.html).
 
 ### `React.lazy` {#reactlazy}
 
+> Try the new React documentation for [`lazy`](https://beta.reactjs.org/reference/react/lazy).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+
 `React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu, ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
 
 Nasıl kullanılacağını [kod bölümleme dökümanımızdan](/docs/code-splitting.html#reactlazy) öğrenebilirsiniz. Daha ayrıntılı olarak nasıl kullanılacağını açıklayan [bu makaleye](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) de göz atmak isteyebilirsiniz.
@@ -343,6 +391,10 @@ const SomeComponent = React.lazy(() => import('./SomeComponent'));
 `lazy` bileşenlerin render edilmesi için render ağacında daha yukarıda bulunan bir `<React.Suspense>` bileşeninin olması gerektiğini unutmayın. Bir yükleme göstergesini bu şekilde belirlersiniz.
 
 ### `React.Suspense` {#reactsuspense}
+
+> Try the new React documentation for [`Suspense`](https://beta.reactjs.org/reference/react/Suspense).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 `React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Gelecekte, veri alma gibi daha fazla senaryoyu `Suspense` 'in işlemesine izin vermeyi planlıyoruz. Bunu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
@@ -378,6 +430,10 @@ When a component suspends we schedule a low priority task to render the closest 
 Suspense boundaries depend on their parent boundaries being hydrated before they can hydrate, but they can hydrate independently from sibling boundaries. Events on a boundary before it is hydrated will cause the boundary to hydrate at a higher priority than neighboring boundaries. [Read more](https://github.com/reactwg/react-18/discussions/130)
 
 ### `React.startTransition` {#starttransition}
+
+> Try the new React documentation for [`startTransition`](https://beta.reactjs.org/reference/react/startTransition).
+>
+> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
 ```js
 React.startTransition(callback)
