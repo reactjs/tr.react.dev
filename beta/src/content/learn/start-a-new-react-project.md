@@ -46,7 +46,7 @@ npm start
 
 </TerminalBlock>
 
-Daha fazal bilgi için, [resmi dökümantasyona göz atın.](https://create-react-app.dev/docs/getting-started)
+Daha fazal bilgi için, [resmi dokümantasyona göz atın.](https://create-react-app.dev/docs/getting-started)
 
 > Create React App backend veya veritabanı işlemlerini sunmaz. Herhangi bir backend ile kullanabilirsiniz. Bir proje oluşturduğunuzda statik HTML, CSS ve JS dosyalarının olduğu bir klasör elde edersiniz. Create React App sunucu avantajlarından yararlanamadığı için en iyi performansı sağlamaz. Eğer daha hızlı yükleme veya yönlendirme ve sunucu taraflı işlemler arıyorsanız, bir çatı kullanmanızı öneriyoruz.
 
