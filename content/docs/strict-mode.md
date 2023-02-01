@@ -4,9 +4,6 @@ title: Strict Modu
 permalink: docs/strict-mode.html
 ---
 
-<<<<<<< HEAD
-`Strict Modu` (StrictMode) uygulamadaki potansiyel sorunları vurgulayan bir araçtır. `Fragment` gibi `Strict Modu` de herhangi bir görünür UI render etmez. `Strict Modu` aynı zamanda alt öğeler için ek kontrol ve uyarıları etkinleştirir.
-=======
 > Try the new React documentation.
 > 
 > These new documentation pages teach modern React and include live examples:
@@ -15,9 +12,7 @@ permalink: docs/strict-mode.html
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-
-`StrictMode` is a tool for highlighting potential problems in an application. Like `Fragment`, `StrictMode` does not render any visible UI. It activates additional checks and warnings for its descendants.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`Strict Modu` (StrictMode) uygulamadaki potansiyel sorunları vurgulayan bir araçtır. `Fragment` gibi `Strict Modu` de herhangi bir görünür UI render etmez. `Strict Modu` aynı zamanda alt öğeler için ek kontrol ve uyarıları etkinleştirir.
 
 > Not:
 >

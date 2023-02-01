@@ -513,16 +513,11 @@ Bu örnekte, `<FancyInput ref={inputRef} />` elementini ekrana yazdıran üst bi
 
 ### `useLayoutEffect` {#uselayouteffect}
 
-<<<<<<< HEAD
-Kullanım şekl `useEffect` ile eşdeğerdir, ancak tüm DOM değişiklikleri ile senkronize olarak çalıştırılır. Bu hook'u DOM'daki tasarımı okuyup senkronize olarak yeniden ekrana yazdırmak için kullanın. `useLayoutEffect` içinde planlanan değişiklikler, tarayıcı daha çizim yapmaya fırsat bulamadan, senkronize olarak temizlenecektir.
-=======
 > Try the new React documentation for [`useLayoutEffect`](https://beta.reactjs.org/reference/react/useLayoutEffect).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-
-The signature is identical to `useEffect`, but it fires synchronously after all DOM mutations. Use this to read layout from the DOM and synchronously re-render. Updates scheduled inside `useLayoutEffect` will be flushed synchronously, before the browser has a chance to paint.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+Kullanım şekl `useEffect` ile eşdeğerdir, ancak tüm DOM değişiklikleri ile senkronize olarak çalıştırılır. Bu hook'u DOM'daki tasarımı okuyup senkronize olarak yeniden ekrana yazdırmak için kullanın. `useLayoutEffect` içinde planlanan değişiklikler, tarayıcı daha çizim yapmaya fırsat bulamadan, senkronize olarak temizlenecektir.
 
 Görüntüdeki güncellemeleri geciktirmekten kaçınmak için, mümkün olduğunda standart `useEffect` kullanımını tercih edin.
 

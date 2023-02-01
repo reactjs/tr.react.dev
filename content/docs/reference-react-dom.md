@@ -166,15 +166,11 @@ DOM'dan yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'leri
 
 ### `findDOMNode()` {#finddomnode}
 
-<<<<<<< HEAD
-> Not:
-=======
 > Try the new React documentation for [`findDOMNode`](https://beta.reactjs.org/reference/react-dom/findDOMNode).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-> Note:
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+> Not:
 >
 > `findDOMNode`, temeldeki DOM elemanına erişmek için kullanılan bir çıkış kapısıdır. Çoğu durumda, bu çıkış kapısının kullanımı, bileşen soyutlamasını deldiğinden tavsiye edilmez. [`StrictMode` da desteklenmemektedir.](/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
 

@@ -101,15 +101,11 @@ Suspense, bileşenlerin render edilmeden önce bir şey için "beklemesini" sağ
 
 ### `React.Component` {#reactcomponent}
 
-<<<<<<< HEAD
-`React.Component`, [ES6 sınıfları](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanılarak tanımlandıklarında React bileşenleri için temel sınıftır:
-=======
 > Try the new React documentation for [`Component`](https://beta.reactjs.org/reference/react/Component).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.Component` is the base class for React components when they are defined using [ES6 classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.Component`, [ES6 sınıfları](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) kullanılarak tanımlandıklarında React bileşenleri için temel sınıftır:
 
 ```javascript
 class Greeting extends React.Component {
@@ -125,15 +121,11 @@ Temel `React.Component` sınıfına ilişkin metod ve özelliklerin listesi içi
 
 ### `React.PureComponent` {#reactpurecomponent}
 
-<<<<<<< HEAD
-`React.PureComponent` [`React.Component`](#reactcomponent)'e benzer. Aralarındaki fark, [`React.Component`](#reactcomponent)'in [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunu uygulamamasıdır, ancak `React.PureComponent` bunu yüzeysel bir prop ve state karşılaştırması ile birlikte uygular.
-=======
 > Try the new React documentation for [`PureComponent`](https://beta.reactjs.org/reference/react/PureComponent).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.PureComponent` is similar to [`React.Component`](#reactcomponent). The difference between them is that [`React.Component`](#reactcomponent) doesn't implement [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate), but `React.PureComponent` implements it with a shallow prop and state comparison.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.PureComponent` [`React.Component`](#reactcomponent)'e benzer. Aralarındaki fark, [`React.Component`](#reactcomponent)'in [`shouldComponentUpdate()`](/docs/react-component.html#shouldcomponentupdate) metodunu uygulamamasıdır, ancak `React.PureComponent` bunu yüzeysel bir prop ve state karşılaştırması ile birlikte uygular.
 
 Eğer React bileşeninizin `render()` fonksiyonu aynı prop'lar ve state ile aynı sonucu render ediyor ise, bazı durumlarda performans artışı için `React.PureComponent` kullanabilirsiniz.
 
@@ -269,15 +261,11 @@ Nesnenin bir React öğesi olduğunu doğrular. `true` veya `false` döndürür.
 
 ### `React.Children` {#reactchildren}
 
-<<<<<<< HEAD
-`React.Children` belirsiz veri yapısına sahip `this.props.children` ile ilgilenmek için yardımcı işlevler sağlar.
-=======
 > Try the new React documentation for [`Children`](https://beta.reactjs.org/reference/react/Children).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.Children` provides utilities for dealing with the `this.props.children` opaque data structure.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.Children` belirsiz veri yapısına sahip `this.props.children` ile ilgilenmek için yardımcı işlevler sağlar.
 
 #### `React.Children.map` {#reactchildrenmap}
 
@@ -335,15 +323,11 @@ React.Children.toArray(children)
 
 ### `React.Fragment` {#reactfragment}
 
-<<<<<<< HEAD
-`React.Fragment` bileşeni, ek bir DOM öğesi oluşturmadan `render()` metodu içinde bir çok eleman döndürmenizi sağlar:
-=======
 > Try the new React documentation for [`Fragment`](https://beta.reactjs.org/reference/react/Fragment).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-The `React.Fragment` component lets you return multiple elements in a `render()` method without creating an additional DOM element:
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.Fragment` bileşeni, ek bir DOM öğesi oluşturmadan `render()` metodu içinde bir çok eleman döndürmenizi sağlar:
 
 ```javascript
 render() {
@@ -361,28 +345,20 @@ Ayrıca `<></>` sözdizimi kısayoluyla da kullanabilirsiniz. Daha fazla bilgi i
 
 ### `React.createRef` {#reactcreateref}
 
-<<<<<<< HEAD
-`React.createRef` ref özelliği ile React elemanlarına eklenebilecek bir [ref](/docs/refs-and-the-dom.html) oluşturur.
-=======
 > Try the new React documentation for [`createRef`](https://beta.reactjs.org/reference/react/createRef).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.createRef` creates a [ref](/docs/refs-and-the-dom.html) that can be attached to React elements via the ref attribute.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.createRef` ref özelliği ile React elemanlarına eklenebilecek bir [ref](/docs/refs-and-the-dom.html) oluşturur.
 `embed:16-3-release-blog-post/create-ref-example.js`
 
 ### `React.forwardRef` {#reactforwardref}
 
-<<<<<<< HEAD
-`React.forwardRef` aldığı [ref](/docs/refs-and-the-dom.html) özelliğini ağacın altında bulunan bir diğer bileşene ileten bir React bileşeni oluşturur. Bu teknik çok yaygın değildir, ancak iki durumda özellikle faydalıdır:
-=======
 > Try the new React documentation for [`forwardRef`](https://beta.reactjs.org/reference/react/forwardRef).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.forwardRef` creates a React component that forwards the [ref](/docs/refs-and-the-dom.html) attribute it receives to another component below in the tree. This technique is not very common but is particularly useful in two scenarios:
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.forwardRef` aldığı [ref](/docs/refs-and-the-dom.html) özelliğini ağacın altında bulunan bir diğer bileşene ileten bir React bileşeni oluşturur. Bu teknik çok yaygın değildir, ancak iki durumda özellikle faydalıdır:
 
 * [Ref'leri DOM bileşenlerine iletme](/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
 * [Üst katman bileşenlerinde ref iletimi](/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components)
@@ -399,15 +375,11 @@ Daha fazla bilgi için, bkz. [ref iletimi](/docs/forwarding-refs.html).
 
 ### `React.lazy` {#reactlazy}
 
-<<<<<<< HEAD
-`React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu, ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
-=======
 > Try the new React documentation for [`lazy`](https://beta.reactjs.org/reference/react/lazy).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.lazy()` lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren't used during the initial render.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.lazy()` dinamik olarak yüklenen bir bileşeni tanımlamanıza izin verir. Bu, ilk render etme sırasında kullanılmayan bileşenlerin yüklemesini geciktirerek paket boyutunu azaltmaya yardımcı olur.
 
 Nasıl kullanılacağını [kod bölümleme dökümanımızdan](/docs/code-splitting.html#reactlazy) öğrenebilirsiniz. Daha ayrıntılı olarak nasıl kullanılacağını açıklayan [bu makaleye](https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d) de göz atmak isteyebilirsiniz.
 
@@ -420,15 +392,11 @@ const SomeComponent = React.lazy(() => import('./SomeComponent'));
 
 ### `React.Suspense` {#reactsuspense}
 
-<<<<<<< HEAD
-`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Gelecekte, veri alma gibi daha fazla senaryoyu `Suspense` 'in işlemesine izin vermeyi planlıyoruz. Bunu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
-=======
 > Try the new React documentation for [`Suspense`](https://beta.reactjs.org/reference/react/Suspense).
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-`React.Suspense` lets you specify the loading indicator in case some components in the tree below it are not yet ready to render. In the future we plan to let `Suspense` handle more scenarios such as data fetching. You can read about this in [our roadmap](/blog/2018/11/27/react-16-roadmap.html).
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+`React.Suspense`, altındaki ağaçta bulunan bazı bileşenlerin henüz render edilmeye hazır olmaması durumunda yükleme göstergesini belirtmenizi sağlar. Gelecekte, veri alma gibi daha fazla senaryoyu `Suspense` 'in işlemesine izin vermeyi planlıyoruz. Bunu [yol haritamızda](/blog/2018/11/27/react-16-roadmap.html) okuyabilirsiniz.
 
 Günümüzde, tembel (`lazy`) yüklenen bileşenler `<React.Suspense>` tarafından desteklenen **tek** kullanım durumudur:
 

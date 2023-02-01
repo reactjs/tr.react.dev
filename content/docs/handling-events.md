@@ -8,9 +8,6 @@ redirect_from:
   - "docs/events-ko-KR.html"
 ---
 
-<<<<<<< HEAD
-React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük sözdizimi farklılıkları bulunmaktadır:
-=======
 > Try the new React documentation.
 > 
 > These new documentation pages teach modern React and include live examples:
@@ -19,9 +16,7 @@ React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benz
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-
-Handling events with React elements is very similar to handling events on DOM elements. There are some syntax differences:
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+React'teki olay yönetimi, DOM elementlerindeki olay yönetimi ile oldukça benzerdir. Sadece, bazı küçük sözdizimi farklılıkları bulunmaktadır:
 
 * Olay isimleri, DOM'da lowercase iken, React'te camelCase olarak adlandırılır.
 * DOM'da fonksiyon isimleri, ilgili olaya string olarak atanırken, JSX'te direkt fonksiyon olarak atanır.

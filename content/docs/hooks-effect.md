@@ -6,9 +6,6 @@ next: hooks-rules.html
 prev: hooks-state.html
 ---
 
-<<<<<<< HEAD
-Hooks, React 16.8 ile beraber gelen yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar.
-=======
 > Try the new React documentation.
 > 
 > These new documentation pages teach modern React and include live examples:
@@ -19,8 +16,7 @@ Hooks, React 16.8 ile beraber gelen yeni bir eklentidir. Bir sınıf yazmadan st
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-*Hooks* are a new addition in React 16.8. They let you use state and other React features without writing a class.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+Hooks, React 16.8 ile beraber gelen yeni bir eklentidir. Bir sınıf yazmadan state ve diğer React özelliklerini kullanmanıza olanak sağlarlar.
 
 *Effect Hook'u* fonksiyon bileşenlerinde yan etkiler oluşturmanıza olanak sağlar:
 

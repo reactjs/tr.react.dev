@@ -6,9 +6,6 @@ prev: hello-world.html
 next: rendering-elements.html
 ---
 
-<<<<<<< HEAD
-Aşağıdaki değişken tanımını ele alalım:
-=======
 > Try the new React documentation.
 > 
 > These new documentation pages teach modern React and include live examples:
@@ -18,8 +15,7 @@ Aşağıdaki değişken tanımını ele alalım:
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-Consider this variable declaration:
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+Aşağıdaki değişken tanımını ele alalım:
 
 ```js
 const element = <h1>Hello, world!</h1>;

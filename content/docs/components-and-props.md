@@ -16,9 +16,6 @@ prev: rendering-elements.html
 next: state-and-lifecycle.html
 ---
 
-<<<<<<< HEAD
-Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı, birbirinden izole bir şekilde düşünerek kodlayabilirsiniz.
-=======
 > Try the new React documentation.
 > 
 > These new documentation pages teach modern React and include live examples:
@@ -28,8 +25,7 @@ Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a [detailed component API reference here](/docs/react-component.html).
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+Bileşenler, kullanıcı arayüzünü ayrıştırarak birbirinden bağımsız ve tekrar kullanılabilen parçalar oluşturmanızı sağlar. Bu sayede her bir parçayı, birbirinden izole bir şekilde düşünerek kodlayabilirsiniz.
 
 Bu sayfa, bileşenlerin ne olduğuna dair bir fikir edinmenizi sağlayacaktır. [Bileşenler API dokümanını](/docs/react-component.html) inceleyerek daha detaylı bilgi edinebilirsiniz.
 

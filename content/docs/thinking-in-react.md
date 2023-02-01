@@ -8,17 +8,13 @@ redirect_from:
 prev: composition-vs-inheritance.html
 ---
 
-<<<<<<< HEAD
-React, bize göre, JavaScript ile büyük ve hızlı Web uygulamaları oluşturmanın en önde gelen yoludur. Bizim için Facebook ve Instagram'ın geliştirilmesinde çok etkili oldu.
-=======
 > Try the new React documentation.
 > 
 > The updated [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react) guide teaches modern React and includes live examples.
 >
 > The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
 
-React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
->>>>>>> 5647a9485db3426d62b5a8203f4499c01bcd789b
+React, bize göre, JavaScript ile büyük ve hızlı Web uygulamaları oluşturmanın en önde gelen yoludur. Bizim için Facebook ve Instagram'ın geliştirilmesinde çok etkili oldu.
 
 React’in en harika yanlarından biri de, uygulamaları oluştururken size kazandırdığı bakış açısıdır. Bu dökümanda, React'i kullanarak arama özelliği olan bir ürün tablosu oluşturmanın düşünce sürecinde size yol göstereceğiz.
 
