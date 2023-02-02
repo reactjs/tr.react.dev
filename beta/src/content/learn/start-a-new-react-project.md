@@ -1,35 +1,35 @@
 ---
-title: Start a New React Project
+title: Bir React Projesi Oluşturun
 ---
 
 <Intro>
 
-If you're starting a new project, we recommend to use a toolchain or a framework. These tools provide a comfortable development environment but require a local Node.js installation.
+Eğer yeni bir React projesine başlıyorsanız, araç zinciri veya bir çatı kullanmanızı öneriyoruz. Bu araçlar rahat bir geliştirme ortamı sağlar ancak yerel bir Node.js kurulumuna ihtiyaç duyarlar.
 
 </Intro>
 
 <YouWillLearn>
 
-* How toolchains are different from frameworks
-* How to start a project with a minimal toolchain
-* How to start a project with a fully-featured framework
-* What's inside popular toolchains and frameworks
+* Araç zincirleri ile çatılar arasındaki farklar
+* Minimal araç zinciri ile yeni bir proje oluşturmak
+* Tam donanımlı bir çatı ile yeni bir proje oluşturmak
+* Popüler araç zincirlerinin ve çatıların içinde neler var
 
 </YouWillLearn>
 
-## Choose your own adventure {/*choose-your-own-adventure*/}
+## Kendi Serüvenini seç {/*choose-your-own-adventure*/}
 
-React is a library that lets you organize UI code by breaking it apart into pieces called components. React doesn't take care of routing or data management. This means there are several ways to start a new React project:
+React, UI kodunu bileşen adı verilen küçük parçalara ayırarak yönetmenizini sağlayan bir kütüphanedir. React, yönlendirme ve veri yönetimi ile ilgilenmez. Bu, yeni bir React projesine başlamanın birkaç yolu olduğu anlamına gelir:
 
-* [Start with an **HTML file and a script tag.**](/learn/add-react-to-a-website) This doesn't require Node.js setup but offers limited features.
-* Start with a **minimal toolchain,** adding more features to your project as you go. (Great for learning!)
-* Start with an **opinionated framework** that has common features like data fetching and routing built-in.
+* [**HTML dosyası ve bir script etiketi**](/learn/add-react-to-a-website) ile başlayın. Bu yöntem, Node.js kurulumu gerektirmez ancak sunulan özellikler limitlidir.
+* **Minimal araç zinciri** ile başlayın ve ilerledikçe projenize daha fazla özellik ekleyin. (Öğrenmek için harikadır!)
+* Veri çekme ve yönlendirme gibi yaygın özelliklerin yerleşik olarak geldiği **iddiali çatı** ile başlayın.
 
-## Getting started with a minimal toolchain {/*getting-started-with-a-minimal-toolchain*/}
+## Minimal araç zinciri ile başlarken {/*getting-started-with-a-minimal-toolchain*/}
 
-If you're **learning React,** we recommend [Create React App.](https://create-react-app.dev/) It is the most popular way to try out React and build a new single-page, client-side application. It's made for React but isn't opinionated about routing or data fetching.
+Eğer **React öğreniyorsanız,** [Create React App](https://create-react-app.dev/)'i öneriyoruz. Creact React App, React'i denemek için ve tarayıcı bazlı yeni bir tekil sayfa uygulamaları geliştirmek için en popüler araç zinciridir. React için geliştirilmiştir ancak yönlendirme ya da veri çekme için iddialı değildir.
 
-First, install [Node.js.](https://nodejs.org/en/) Then open your terminal and run this line to create a project:
+İlk olarak, [Node.js.](https://nodejs.org/en/) yükleyin. Ardından terminalinizi açın ve yeni bir proje oluşturmak için bu satırı çalıştırın:
 
 <TerminalBlock>
 
@@ -37,7 +37,7 @@ npx create-react-app my-app
 
 </TerminalBlock>
 
-Now you can run your app with:
+Şimdi, şu komutlar ile uygulamanızı çalıştırabilirsiniz:
 
 <TerminalBlock>
 
@@ -46,38 +46,37 @@ npm start
 
 </TerminalBlock>
 
-For more information, [check out the official guide.](https://create-react-app.dev/docs/getting-started)
+Daha fazal bilgi için, [resmi dokümantasyona göz atın.](https://create-react-app.dev/docs/getting-started)
 
-> Create React App doesn't handle backend logic or databases. You can use it with any backend. When you build a project, you'll get a folder with static HTML, CSS and JS. Because Create React App can't take advantage of the server, it doesn't provide the best performance. If you're looking for faster loading times and built-in features like routing and server-side logic, we recommend using a framework instead.
+> Create React App backend veya veritabanı işlemlerini sunmaz. Herhangi bir backend ile kullanabilirsiniz. Bir proje oluşturduğunuzda statik HTML, CSS ve JS dosyalarının olduğu bir klasör elde edersiniz. Create React App sunucu avantajlarından yararlanamadığı için en iyi performansı sağlamaz. Eğer daha hızlı yükleme veya yönlendirme ve sunucu taraflı işlemler arıyorsanız, bir çatı kullanmanızı öneriyoruz.
 
-### Popular alternatives {/*toolkit-popular-alternatives*/}
+### Popüler alternatifler {/*toolkit-popular-alternatives*/}
 
 * [Vite](https://vitejs.dev/guide/)
 * [Parcel](https://parceljs.org/getting-started/webapp/)
 
-## Building with a full-featured framework {/*building-with-a-full-featured-framework*/}
+## Tam donanımlı bir çatı ile proje oluşturmak {/*building-with-a-full-featured-framework*/}
 
-If you're looking to **start a production-ready project,** [Next.js](https://nextjs.org/) is a great place to start. Next.js is a popular, lightweight framework for static and server‑rendered applications built with React. It comes pre-packaged with features like routing, styling, and server-side rendering, getting your project up and running quickly. 
+Eğer **canlı ortama hazır proje oluşturmak istiyorsanız,** [Next.js](https://nextjs.org/) başlamak için harika bir başlangıç noktasıdır. Next js, React ile oluşturulmuş statik ve sunucu taraflı uygulamalar için popüler, hafif bir çatıdır. Yönlendirme, stil oluşturma ve sunucu taraflı render etme, projeyi hızlıca başlatma ve çalıştırma gibi özelliklerin olduğu hazır paketlerle birlikte gelmektedir.
 
-The [Next.js Foundations](https://nextjs.org/learn/foundations/about-nextjs) tutorial is a great introduction to building with React and Next.js.
+[Next.js Foundations](https://nextjs.org/learn/foundations/about-nextjs) öğreticisi, React ve Next js ile proje oluşturmaya harika bir giriştir.
 
-### Popular alternatives {/*framework-popular-alternatives*/}
+### Popüler alternatifler {/*framework-popular-alternatives*/}
 
 * [Gatsby](https://www.gatsbyjs.org/)
 * [Remix](https://remix.run/)
 * [Razzle](https://razzlejs.org/)
 
-## Custom toolchains {/*custom-toolchains*/}
+## Özel araç zincirleri {/*custom-toolchains*/}
 
-You may prefer to create and configure your own toolchain. A toolchain typically consists of:
+Kendi araç zincirinizi kurmayı ve özelleştirmeyi tercih edebilirsiniz. Bir alet zinciri tipik olarak şunlardan oluşur:
 
-* A **package manager** lets you install, update, and manage third-party packages. Popular package managers: [npm](https://www.npmjs.com/) (built into Node.js), [Yarn](https://yarnpkg.com/), [pnpm.](https://pnpm.io/)
-* A **compiler** lets you compile modern language features and additional syntax like JSX or type annotations for the browsers. Popular compilers: [Babel](https://babeljs.io/), [TypeScript](https://www.typescriptlang.org/), [swc.](https://swc.rs/)
-* A **bundler** lets you write modular code and bundle it together into small packages to optimize load time. Popular bundlers: [webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), [esbuild](https://esbuild.github.io/), [swc.](https://swc.rs/)
-* A **minifier** makes your code more compact so that it loads faster. Popular minifiers: [Terser](https://terser.org/), [swc.](https://swc.rs/)
-* A **server** handles server requests so that you can render components to HTML. Popular servers: [Express.](https://expressjs.com/)
-* A **linter** checks your code for common mistakes. Popular linters: [ESLint.](https://eslint.org/)
-* A **test runner** lets you run tests against your code. Popular test runners: [Jest.](https://jestjs.io/)
+* 3. parti paketleri yüklemenizi, güncellemenizi ve yönetmezini sağlayan **paket yöneticisi**. Popüler paket yöneticileri: [npm](https://www.npmjs.com/) (Node.js'e gömülüdür), [Yarn](https://yarnpkg.com/), [pnpm.](https://pnpm.io/)
+* Tarayıcılar için modern dil özelliklerini ve JSX gibi ek sözdizimini derlemenizi veya ek açıklamalar yazmanızı sağlayan **derleyici**. Popüler derleyiciler: [Babel](https://babeljs.io/), [TypeScript](https://www.typescriptlang.org/), [swc.](https://swc.rs/)
+* Yükleme süresini optimize etmek ve modüler kod yazımını sağlayan **paketleyici**. Popüler paketleyiciler: [webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), [esbuild](https://esbuild.github.io/), [swc.](https://swc.rs/)
+* Kodunuzu daha kompakt hale getirerek daha hızlı yüklenmesini sağlayan **sıkıştırıcı**. Popüler sıkıştırıcılar: [Terser](https://terser.org/), [swc.](https://swc.rs/)
+* Bileşenleri HTML'ye dönüştürebilmeniz için sunucu isteklerini işleyen **sunucu**. Popüler sunucular: [Express.](https://expressjs.com/)
+* Kodunuzu yaygın hatalar için kontrol eden **kod denetleyici**. Popüler kod denetleyecileri: [ESLint.](https://eslint.org/)
+* Testlerinizi çalıştırabilmenizi sağlayan **test çalıştırıcı**. Popüler test çalıştırıcıları: [Jest.](https://jestjs.io/)
 
-If you prefer to set up your own JavaScript toolchain from scratch, [check out this guide](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658) that re-creates some of the Create React App functionality. A framework will usually also provide a routing and a data fetching solution. In a larger project, you might also want to manage multiple packages in a single repository with a tool like [Nx](https://nx.dev/react) or [Turborepo.](https://turborepo.org/)
-
+Eğer kendi Javascript araç zincirinizi sıfırdan kurmak isterseniz, Create React App işlevselliğinin bazılarını tekrar oluşturan [bu rehbere bir göz atın.](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658). Bir çatı, genellikle yönlendirme ve veri çekme için bir çözüm sunar. Daha büyük bir projede, [Nx](https://nx.dev/react) veya [Turborepo](https://turborepo.org/) gibi araçla tek bir depoda birden fazla paketi yönetmek isteyebilirsiniz.
