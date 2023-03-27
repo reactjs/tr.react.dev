@@ -1,23 +1,10 @@
 ---
-<<<<<<< HEAD:content/community/conferences.md
-id: conferences
-title: Konferanslar
-layout: community
-sectionid: community
-permalink: community/conferences.html
-redirect_from:
-  - "docs/conferences.html"
----
-
-Yerel bir  React.js konferansınız var mı? Buraya ekleyin! (Lütfen alfabetik sıraya dikkat edin)
-=======
 title: React Conferences
 ---
 
 <Intro>
 
 Do you know of a local React.js conference? Add it here! (Please keep the list chronological)
->>>>>>> e5fd79cdbb296b87cab7dff17c3b7feee5dba96b:src/content/community/conferences.md
 
 </Intro>
 
@@ -228,16 +215,7 @@ November 12-13, 2021 - remote event
 
 [Website](https://www.reactindia.io) - [Twitter](https://twitter.com/react_india) - [Facebook](https://www.facebook.com/ReactJSIndia/) - [LinkedIn](https://www.linkedin.com/showcase/14545585) - [YouTube](https://www.youtube.com/channel/UCaFbHCBkPvVv1bWs_jwYt3w/videos)
 
-<<<<<<< HEAD:content/community/conferences.md
-### React India 2021 {#react-india-2021}
-November 12-13, 2021 - remote event
-
-[Website](https://www.reactindia.io) - [Twitter](https://twitter.com/react_india) - [Facebook](https://www.facebook.com/ReactJSIndia/) - [LinkedIn](https://www.linkedin.com/showcase/14545585) - [YouTube](https://www.youtube.com/channel/UCaFbHCBkPvVv1bWs_jwYt3w/videos)
-
-### < React Global > by Geekle {#react-global-2021}
-=======
 ### React Global by Geekle {/*react-global-by-geekle*/}
->>>>>>> e5fd79cdbb296b87cab7dff17c3b7feee5dba96b:src/content/community/conferences.md
 November 3-4, 2021 - remote event
 
 [Website](https://geekle.us/react) - [LinkedIn](https://www.linkedin.com/events/javascriptglobalsummit6721691514176720896/) - [YouTube](https://www.youtube.com/watch?v=0HhWIvPhbu0)

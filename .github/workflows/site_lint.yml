@@ -22,13 +22,6 @@ jobs:
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1.7.10
-<<<<<<< HEAD:.github/workflows/beta_site_lint.yml
-        with:
-          working-directory: 'beta'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-reactjs-tr-org-beta
-
-=======
->>>>>>> e5fd79cdbb296b87cab7dff17c3b7feee5dba96b:.github/workflows/site_lint.yml
 
       - name: Lint codebase
         run: yarn ci-check

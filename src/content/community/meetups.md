@@ -1,21 +1,10 @@
 ---
-<<<<<<< HEAD:content/community/meetups.md
-id: meetups
-title: Dünya Çapındaki Buluşmalar
-layout: community
-sectionid: community
-permalink: community/meetups.html
----
-
-Yerel bir  React.js buluşmanız var mı? Buraya ekleyin! (Lütfen alfabetik sıraya dikkat edin)
-=======
 title: React Meetups
 ---
 
 <Intro>
 
 Do you have a local React.js meetup? Add it here! (Please keep the list alphabetical)
->>>>>>> e5fd79cdbb296b87cab7dff17c3b7feee5dba96b:src/content/community/meetups.md
 
 </Intro>
 
