@@ -145,7 +145,7 @@ const Header = ({location}: {location: Location}) => (
                 'linear-gradient(to right, transparent, black 20px, black 90%, transparent)',
             },
           }}>
-          {navHeader.items.map(link => (
+          {navHeader.items.map((link) => (
             <HeaderLink
               key={link.title}
               isActive={location.pathname.includes(link.activeSelector)}

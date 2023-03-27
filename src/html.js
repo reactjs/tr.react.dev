@@ -23,7 +23,7 @@ export default class HTML extends React.Component<Props> {
     return (
       <html lang="tr" {...this.props.htmlAttributes}>
         <head>
-          {JS_NPM_URLS.map(url => (
+          {JS_NPM_URLS.map((url) => (
             <link key={url} rel="preload" href={url} as="script" />
           ))}
           <meta charSet="utf-8" />
@@ -152,7 +152,7 @@ export default class HTML extends React.Component<Props> {
             dangerouslySetInnerHTML={{__html: this.props.body}}
           />
           {this.props.postBodyComponents}
-          {JS_NPM_URLS.map(url => (
+          {JS_NPM_URLS.map((url) => (
             <script key={url} src={url} />
           ))}
         </body>
