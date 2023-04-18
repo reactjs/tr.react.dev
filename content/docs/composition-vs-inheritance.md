@@ -8,6 +8,12 @@ prev: lifting-state-up.html
 next: thinking-in-react.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+
+</div>
+
 React güçlü bir bileşim modeline sahiptir. Aynı kodu bileşenler arasında tekrar kullanmak için kalıtım yerine bileşim modelini kullanmanızı öneririz.
 
 Bu bölümde, React'te yeni geliştiricilerin kalıtım ile ilgili karşılaştığı birkaç sorunu ele alacağız ve bunları bileşimlerle nasıl çözebileceğimizi göstereceğiz.

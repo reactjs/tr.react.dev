@@ -4,6 +4,12 @@ title: React Without ES6
 permalink: docs/react-without-es6.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+
+</div>
+
 Normalde bir React bileşenini düz JavaScript sınıfı olarak tanımlarsınız:
 
 ```javascript

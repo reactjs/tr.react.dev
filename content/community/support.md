@@ -8,6 +8,15 @@ redirect_from:
   - "support.html"
 ---
 
+<div class="scary">
+
+>
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+> 
+> See the [Community](https://react.dev/community) resources on the new site.
+
+</div>
+
 React, milyonlarca yazılım geliştiriciden oluşan bir topluluğa sahiptir.
 
 Bu sayfada, üyesi olabileceğiniz, React ile ilgili bazı toplulukları listeledik; çevrimiçi ve yüzyüze öğrenme ek materyalleri için bu kısımdaki diğer sayfalara bakın. 

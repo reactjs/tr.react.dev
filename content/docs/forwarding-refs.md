@@ -4,14 +4,16 @@ title: Ref'leri Yönlendirme
 permalink: docs/forwarding-refs.html
 ---
 
-> Try the new React documentation.
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
 > 
 > These new documentation pages teach modern React and include live examples:
 >
-> - [Manipulating the DOM with Refs](https://beta.reactjs.org/learn/manipulating-the-dom-with-refs)
-> - [`forwardRef`](https://beta.reactjs.org/reference/react/forwardRef)
->
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> - [Manipulating the DOM with Refs](https://react.dev/learn/manipulating-the-dom-with-refs)
+> - [`forwardRef`](https://react.dev/reference/react/forwardRef)
+
+</div>
 
 Ref yönlendirme bir [ref](/docs/refs-and-the-dom.html)'i üst bileşenlerden alt bileşenlerin birine otomatik olarak aktarma tekniğidir. Bu genellikle uygulamadaki çoğu bileşen için gerekli değildir. Ama bazı bileşen türleri için faydalı olabilir, özellikle yeniden kullanılabilir bileşen kütüphaneleri için. En yaygın senaryolar aşağıda açıklanmaktadır.
 
