@@ -6,6 +6,14 @@ redirect_from:
   - "docs/webcomponents.html"
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+>
+> See [Custom HTML elements](https://react.dev/reference/react-dom/components#custom-html-elements) in the new docs.
+>
+</div>
+
 React ve [Web Bileşenleri](https://developer.mozilla.org/en-US/docs/Web/Web_Components) farklı sorunları çözmek için oluşturulmuştur. React, DOM ile verilerinizi senkronize eden bir bildirimsel kitaplık sunarken, Web Bileşenleri yeniden kullanılabilir bileşenler için güçlü bir kapsülleme sağlar. İkisinin de amaçları birbirini tamamlar. Bir geliştirici olarak, Web Bileşenleri'nde React'i, React'te Web Bileşenleri'ni veya her ikisini de kullanmakta serbestsiniz.
 
 React kullanan çoğu kişi Web Bileşenleri'ni kullanmaz, ancak özellikle Web Bileşenleri kullanılarak yazılmış üçüncü-taraf UI bileşenleri kullanıyorsanız kullanmak isteyebilirsiniz.

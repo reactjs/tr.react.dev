@@ -9,13 +9,15 @@ redirect_from:
   - "docs/flux-todo-list.html"
 ---
 
-> Try the new React documentation.
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
 > 
 > These new documentation pages teach modern React and include live examples:
 >
-> - [Sharing State Between Components](https://beta.reactjs.org/learn/sharing-state-between-components)
->
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> - [Sharing State Between Components](https://react.dev/learn/sharing-state-between-components)
+
+</div>
 
 Çoğu zaman, birden çok bileşenin değişen aynı state’i yansıtması gerekmektedir. Bu durum için paylaşılan state'i en yakın ortak üst elemana taşımayı tavsiye etmekteyiz. Bunun nasıl çalıştığını görelim.
 

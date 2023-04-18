@@ -8,6 +8,15 @@ prev: getting-started.html
 next: create-a-new-react-app.html
 ---
 
+<div class="scary">
+
+>
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+> 
+> See [Add React to an Existing Project](https://react.dev/learn/add-react-to-an-existing-project) for the recommended ways to add React.
+
+</div>
+
 İhtiyacınız kadar az veya daha fazla React kullanın.
 
 React, baştan sona aşamalı olarak benimsenmesi için tasarlandı. React'i **ihtiyacınız kadar az veya daha fazla kullanabilirsiniz**. Belki de sadece var olan bir sayfaya biraz "interaktif parçalar" eklemek istiyorsunuz. React bileşenleri bunu yapmak için harika bir yoldur.

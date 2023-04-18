@@ -4,6 +4,14 @@ title: Higher-Order Components
 permalink: docs/higher-order-components.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+> 
+> Higher-order components are not commonly used in modern React code.
+
+</div>
+
 Bir üst-seviye bileşen (İngilizcesi Higher-Order Component - HOC) React'te bileşen mantığının tekrar kullanılmasına yarayan ileri düzey bir tekniktir. HOC'lar React API'nın bir parçası değildir aslında. React'ın bileşen tümleyici doğasından doğan bir modeldir.
 
 Daha açıklayıcı olmak gerekirse, **bir üst-seviye bileşen; parametre olarak bir bileşen alıp output olarak yeni bir bileşen döndüren bir fonksiyondur.**

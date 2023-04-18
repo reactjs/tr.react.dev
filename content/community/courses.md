@@ -6,6 +6,13 @@ sectionid: community
 permalink: community/courses.html
 ---
 
+<div class="scary">
+
+>
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+
+</div>
+
 ## Ücretsiz Dersler {#free-courses}
 
 - [Codecademy: React 101](https://www.codecademy.com/learn/react-101) - Codecademy'nin giriş seviyesindeki React dersi.

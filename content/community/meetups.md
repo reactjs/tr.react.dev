@@ -6,6 +6,14 @@ sectionid: community
 permalink: community/meetups.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+>
+> See the [Meetups](https://react.dev/community/meetups) page on the new site.
+>
+</div>
+
 Yerel bir  React.js buluşmanız var mı? Buraya ekleyin! (Lütfen alfabetik sıraya dikkat edin)
 
 ## Albania {#albania}

@@ -4,6 +4,15 @@ title: Render Props
 permalink: docs/render-props.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+>
+> Render props are used in modern React, but aren't very common.  
+> For many cases, they have been replaced by [custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks).
+
+</div>
+
 ["Render prop"](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) tabiri; React bileşenleri arasında kod paylaşımının, değerleri birer fonksiyon olan prop’lar kullanılarak yapılması için kullanılmaktadır.
 
 Render prop’lu bir bileşen, prop olarak bir React elemanı döndüren bir fonksiyon alır ve kendi render mantığını yürütmek yerine bu fonksiyonu çağırır.

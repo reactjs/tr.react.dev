@@ -6,13 +6,15 @@ layout: docs
 category: Reference
 ---
 
-> Try the new React documentation.
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
 > 
 > These new documentation pages teach modern React and include live examples:
 >
-> - [Common components (e.g. `<div>`)](https://beta.reactjs.org/reference/react-dom/components/common)
->
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> - [Common components (e.g. `<div>`)](https://react.dev/reference/react-dom/components/common)
+
+</div>
 
 Bu başvuru rehberinde, React Olay Sistemi'nin bir parçasını oluşturan `SyntheticEvent` sarmalayıcısı (wrapper) açıklanmaktadır. Daha fazla bigli sahibi olmak için [Olay Yönetimi](/docs/handling-events.html) kaynağını inceleyebilirsiniz.
 

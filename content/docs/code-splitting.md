@@ -4,6 +4,17 @@ title: Code-Splitting
 permalink: docs/code-splitting.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+> 
+> These new documentation pages teach modern React and include live examples:
+>
+> - [`lazy`](https://react.dev/reference/react/lazy)
+> - [`<Suspense>`](https://react.dev/reference/react/Suspense)
+
+</div>
+
 ## Paketleme {#bundling}
 
 Çoğu React uygulaması, dosyalarını [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) veya [Browserify](http://browserify.org/) gibi araçlarla "paketler." Paketleme, içe aktarılan dosyaları işleyip tek bir dosyaya, "paket" haline getirme işlemidir. Daha sonra bu paket, uygulamanın tamamını tek seferde yüklemek için kullanılabilir.

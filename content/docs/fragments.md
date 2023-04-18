@@ -4,6 +4,16 @@ title: Fragment'ler
 permalink: docs/fragments.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+> 
+> These new documentation pages teach modern React:
+>
+> - [`<Fragment>`](https://react.dev/reference/react/Fragment)
+
+</div>
+
 React'teki ortak model, bir bileşenin birden fazla öğe döndürmesidir. Fragmentler, Dom'a ekstra düğüm eklemeden bir alt elemanlar listesini gruplandırmanıza izin verir.
 
 ```js

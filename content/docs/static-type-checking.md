@@ -4,6 +4,14 @@ title: Statik Tip Denetlemesi
 permalink: docs/static-type-checking.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+>
+> Check out [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/) for how to use React with TypeScript.
+
+</div>
+
 [Flow](https://flow.org/) ve [TypeScript](https://www.typescriptlang.org/) gibi statik tip denetleyicileri belli türdeki sorunları siz henüz kodunuzu çalıştırmadan belirlerler. Bunun yanı sıra, otomatik tamamlama gibi özellikleri ekleyerek geliştirici iş akışlarını iyileştirirler. Bu yüzden büyük kod tabanları için `PropTypes` yerine Flow veya TypeScript kullanılmasını tavsiye ediyoruz.
 
 ## Flow {#flow}

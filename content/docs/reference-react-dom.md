@@ -6,6 +6,19 @@ category: Reference
 permalink: docs/react-dom.html
 ---
 
+<div class="scary">
+
+> These docs are old and won't be updated. Go to [react.dev](https://react.dev/) for the new React docs.
+>
+> These new documentation pages teach modern React:
+>
+> - [`react-dom`: Components](https://react.dev/reference/react-dom/components)
+> - [`react-dom`: APIs](https://react.dev/reference/react-dom)
+> - [`react-dom`: Client APIs](https://react.dev/reference/react-dom/client)
+> - [`react-dom`: Server APIs](https://react.dev/reference/react-dom/server)
+
+</div>
+
 `react-dom` uygulamanın en üst seviyesinde, DOM'a özel metotlar sunar ve bu da gerektiğinde React modelinin dışına çıkabilmenizi sağlar.
 
 ```js
@@ -50,9 +63,13 @@ React, tüm modern tarayıcıları destekler, yinede eski versiyonlar için [baz
 
 ### `createPortal()` {#createportal}
 
-> Try the new React documentation for [`createPortal`](https://beta.reactjs.org/reference/react-dom/createPortal).
+<div class="scary">
+
+> This content is out of date.
 >
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> Read the new React documentation for [`createPortal`](https://react.dev/reference/react-dom/createPortal).
+
+</div>
 
 ```javascript
 createPortal(child, container)
@@ -62,9 +79,13 @@ Bir portal oluşturur. Portallar, [alt elemanları DOM bileşeninin hiyerarşisi
 
 ### `flushSync()` {#flushsync}
 
-> Try the new React documentation for [`flushSync`](https://beta.reactjs.org/reference/react-dom/flushSync).
+<div class="scary">
+
+> This content is out of date.
 >
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> Read the new React documentation for [`flushSync`](https://react.dev/reference/react-dom/flushSync).
+
+</div>
 
 ```javascript
 flushSync(callback)
@@ -93,9 +114,13 @@ flushSync(() => {
 ## Eski Referans {#legacy-reference}
 ### `render()` {#render}
 
-> Try the new React documentation for [`render`](https://beta.reactjs.org/reference/react-dom/render).
+<div class="scary">
+
+> This content is out of date.
 >
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> Read the new React documentation for [`render`](https://react.dev/reference/react-dom/render).
+
+</div>
 
 ```javascript
 render(element, container[, callback])
@@ -122,9 +147,13 @@ Eğer isteğe bağlı callback sağlandıysa, bileşen render edildikten ya da g
 
 ### `hydrate()` {#hydrate}
 
-> Try the new React documentation for [`hydrate`](https://beta.reactjs.org/reference/react-dom/hydrate).
+<div class="scary">
+
+> This content is out of date.
 >
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> Read the new React documentation for [`hydrate`](https://react.dev/reference/react-dom/hydrate).
+
+</div>
 
 ```javascript
 hydrate(element, container[, callback])
@@ -148,9 +177,13 @@ Yavaş bağlantılarda kullanıcı deneyimine dikkat etmeyi unutmayınız. JavaS
 
 ### `unmountComponentAtNode()` {#unmountcomponentatnode}
 
-> Try the new React documentation for [`unmountComponentAtNode`](https://beta.reactjs.org/reference/react-dom/unmountComponentAtNode).
+<div class="scary">
+
+> This content is out of date.
 >
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> Read the new React documentation for [`unmountComponentAtNode`](https://react.dev/reference/react-dom/unmountComponentAtNode).
+
+</div>
 
 ```javascript
 unmountComponentAtNode(container)
@@ -166,9 +199,13 @@ DOM'dan yüklenmiş bir React bileşenini kaldırıp, olaylarını ve state'leri
 
 ### `findDOMNode()` {#finddomnode}
 
-> Try the new React documentation for [`findDOMNode`](https://beta.reactjs.org/reference/react-dom/findDOMNode).
+<div class="scary">
+
+> This content is out of date.
 >
-> The new docs will soon replace this site, which will be archived. [Provide feedback.](https://github.com/reactjs/reactjs.org/issues/3308)
+> Read the new React documentation for [`findDOMNode`](https://react.dev/reference/react-dom/findDOMNode).
+
+</div>
 
 > Not:
 >
