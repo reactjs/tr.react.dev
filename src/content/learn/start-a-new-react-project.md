@@ -1,126 +1,128 @@
 ---
-title: Start a New React Project
+title: Yeni bir React Projesi Başlatma
 ---
 
 <Intro>
 
-If you want to build a new app or a new website fully with React, we recommend picking one of the React-powered frameworks popular in the community. Frameworks provide features that most apps and sites eventually need, including routing, data fetching, and generating HTML.
+Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyorsanız, toplulukta popüler olan React destekli çatılardan birini seçmenizi öneririz. Çatılar, uygulamaların ve sitelerin eninde sonunda ihtiyaç duyacağı yönlendirme, veri alımı ve HTML oluşturma gibi özellikler sunar.
 
 </Intro>
 
 <Note>
 
-**You need to install [Node.js](https://nodejs.org/en/) for local development.** You can *also* choose to use Node.js in production, but you don't have to. Many React frameworks support export to a static HTML/CSS/JS folder.
+**Yerel geliştirme için [Node.js](https://nodejs.org/en/) yüklemelisiniz.** Node.js i canlı ortamda da kullanmayı tercih edebilirsiniz, fakat kullanmak zorunda değilsiniz. Birçok React çatısı, statik bir HTML/CSS/JS klasörüne dışa aktarmayı destekler.
 
 </Note>
 
-## Production-grade React frameworks {/*production-grade-react-frameworks*/}
+## Canlı ortam seviyesi React Çatıları {/*production-grade-react-frameworks*/}
 
 ### Next.js {/*nextjs*/}
 
-**[Next.js](https://nextjs.org/) is a full-stack React framework.** It's versatile and lets you create React apps of any size--from a mostly static blog to a complex dynamic application. To create a new Next.js project, run in your terminal:
+**[Next.js](https://nextjs.org/), tam özellikli bir React çatısıdır.** Çok yönlüdür ve her büyüklükte React uygulaması oluşturmanıza olanak tanır-çoğunlukla statik bir blogdan karmaşık bir dinamik uygulamaya kadar. Yeni bir Next.js projesi oluşturmak için terminalinizde şunu çalıştırın:
 
 <TerminalBlock>
 npx create-next-app
 </TerminalBlock>
 
-If you're new to Next.js, check out the [Next.js tutorial.](https://nextjs.org/learn/foundations/about-nextjs)
+Next.js'e yeni başlıyorsanız, [Next.js eğitimi](https://nextjs.org/learn/foundations/about-nextjs)ni takip edebilirsiniz.
 
-Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/deployment) to any Node.js or serverless hosting, or to your own server. [Fully static Next.js apps](https://nextjs.org/docs/advanced-features/static-html-export) can be deployed to any static hosting.
+Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. [Next.js kurulumunu](https://nextjs.org/docs/deployment) herhangi bir Node.js sunucusuna, sunucusuz barındırmaya veya kendi sunucunuza yapabilirsiniz. [Tümüyle statik Next.js uygulamaları](https://nextjs.org/docs/advanced-features/static-html-export) herhangi bir statik barındırmaya kurulabilir.
 
 ### Remix {/*remix*/}
 
-**[Remix](https://remix.run/) is a full-stack React framework with nested routing.** It lets you break your app into nested parts that can load data in parallel and refresh in response to the user actions. To create a new Remix project, run:
+**[Remix](https://remix.run/) iç içe yönlendirmeye sahip tam özellikli bir React çatısıdır.** Uygulamanızı iç içe geçmiş parçalara bölebilmenizi sağlar ve bu parçalar, kullanıcı işlemlerine karşılık olarak paralel olarak veri yükleyebilir ve yenilenebilir. Yeni bir Remix projesi oluşturmak için şunu çalıştırın:
 
 <TerminalBlock>
 npx create-remix
 </TerminalBlock>
 
-If you're new to Remix, check out the Remix [blog tutorial](https://remix.run/docs/en/main/tutorials/blog) (short) and [app tutorial](https://remix.run/docs/en/main/tutorials/jokes) (long).
+Remix'e yeni başlıyorsanız [blog eğitimi](https://remix.run/docs/en/main/tutorials/blog) (kısa) veya [uygulama eğitimi](https://remix.run/docs/en/main/tutorials/jokes) (uzun) ni takip edebilirsiniz.
 
-Remix is maintained by [Shopify](https://www.shopify.com/). When you create a Remix project, you need to [pick your deployment target](https://remix.run/docs/en/main/guides/deployment). You can deploy a Remix app to any Node.js or serverless hosting by using or writing an [adapter](https://remix.run/docs/en/main/other-api/adapter).
+Remix [Shopify](https://www.shopify.com/) tarafından desteklenmektedir. Yeni bir Remix projesi oluşturduğunuzda,  [dağıtım hedefinizi seçmeniz](https://remix.run/docs/en/main/guides/deployment) gerekmektedir. Bir Remix uygulamasını, bir [adaptör](https://remix.run/docs/en/main/other-api/adapter) kullanarak veya yazarak herhangi bir Node.js veya sunucusuz (serverless) barındırmaya dağıtabilirsiniz.
 
 ### Gatsby {/*gatsby*/}
 
-**[Gatsby](https://www.gatsbyjs.com/) is a React framework for fast CMS-backed websites.** Its rich plugin ecosystem and its GraphQL data layer simplify integrating content, APIs, and services into one website. To create a new Gatsby project, run:
+**[Gatsby](https://www.gatsbyjs.com/) hızlı CMS destekli web siteleri için bir React çatısıdır.** Zengin eklenti ekosistemi ve GraphQL veri katmanı, içeriği, API'leri ve hizmetleri tek bir web sitesinde entegre etmeyi basitleştirir. Yeni bir Gatsby projesi oluşturmak için şunu çalıştırın:
 
 <TerminalBlock>
 npx create-gatsby
 </TerminalBlock>
 
-If you're new to Gatsby, check out the [Gatsby tutorial.](https://www.gatsbyjs.com/docs/tutorial/)
+Gatsby'e yeni başlıyorsanız, [Gatsby eğitimi](https://www.gatsbyjs.com/docs/tutorial/)ni takip edebilirsiniz.
 
-Gatsby is maintained by [Netlify](https://www.netlify.com/). You can [deploy a fully static Gatsby site](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting) to any static hosting. If you opt into using server-only features, make sure your hosting provider supports them for Gatsby.
+Gatsby [Netlify](https://www.netlify.com/) tarafından desteklenmektedir. [Tam statik Gatsby sitesini barındırma](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting) için herhangi bir statik barındırma hizmetini kullanabilirsiniz. Yalnızca sunucu özelliklerini kullanmayı tercih ederseniz, Gatsby için barındırma sağlayıcınızın bunları desteklediğinden emin olun.
 
-### Expo (for native apps) {/*expo*/}
+### Expo (yerel uygulamalar için) {/*expo*/}
 
-**[Expo](https://expo.dev/) is a React framework that lets you create universal Android, iOS, and web apps with truly native UIs.** It provides an SDK for [React Native](https://reactnative.dev/) that makes the native parts easier to use. To create a new Expo project, run:
+**[Expo](https://expo.dev/), gerçekten yerel kullanıcı arayüzlerine sahip evrensel Android, iOS ve web uygulamaları oluşturmanıza olanak tanıyan bir React çatısıdır.** [React Native](https://reactnative.dev/) için bir SDK sağlar ve yerel parçaların kullanımını kolaylaştırır. Yeni bir Expo projesi oluşturmak için şunu çalıştırın:
 
 <TerminalBlock>
 npx create-expo-app
 </TerminalBlock>
 
-If you're new to Expo, check out the [Expo tutorial](https://docs.expo.dev/tutorial/introduction/).
+Expo'ya yeni başlıyorsanız, [Expo eğitimi](https://docs.expo.dev/tutorial/introduction/)ni takip edebilirsiniz.
 
-Expo is maintained by [Expo (the company)](https://expo.dev/about). Building apps with Expo is free, and you can submit them to the Google and Apple app stores without restrictions. Expo additionally provides opt-in paid cloud services.
+Expo [Expo (firma)](https://expo.dev/about) tarafından desteklenmektedir. Expo ile uygulama oluşturmak ücretsizdir ve uygulamalarınızı Google ve Apple uygulama mağazalarına kısıtlama olmaksızın gönderebilirsiniz. Ayrıca Expo, opsiyonel olarak ücretli bulut hizmetleri sunar.
 
 <DeepDive>
 
-#### Can I use React without a framework? {/*can-i-use-react-without-a-framework*/}
+#### React'ı bir çatı olmadan kullanabilir miyim? {/*can-i-use-react-without-a-framework*/}
 
-You can definitely use React without a framework--that's how you'd [use React for a part of your page.](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) **However, if you're building a new app or a site fully with React, we recommend using a framework.**
+React'i kesinlikle bir çatı (framework) olmadan da kullanabilirsiniz - bu, [Sayfanızın bir bölümü için React'ı kullanın](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) ile açıklanmaktadır **Ancak, tamamen React ile yeni bir uygulama veya site oluşturuyorsanız, bir çatı kullanmanızı öneririz.**
 
-Here's why.
+İşte nedeni.
 
-Even if you don't need routing or data fetching at first, you'll likely want to add some libraries for them. As your JavaScript bundle grows with every new feature, you might have to figure out how to split code for every route individually. As your data fetching needs get more complex, you are likely to encounter server-client network waterfalls that make your app feel very slow. As your audience includes more users with poor network conditions and low-end devices, you might need to generate HTML from your components to display content early--either on the server, or during the build time. Changing your setup to run some of your code on the server or during the build can be very tricky.
 
-**These problems are not React-specific. This is why Svelte has SvelteKit, Vue has Nuxt, and so on.** To solve these problems on your own, you'll need to integrate your bundler with your router and with your data fetching library. It's not hard to get an initial setup working, but there are a lot of subtleties involved in making an app that loads quickly even as it grows over time. You'll want to send down the minimal amount of app code but do so in a single client–server roundtrip, in parallel with any data required for the page. You'll likely want the page to be interactive before your JavaScript code even runs, to support progressive enhancement. You may want to generate a folder of fully static HTML files for your marketing pages that can be hosted anywhere and still work with JavaScript disabled. Building these capabilities yourself takes real work.
+Başlangıçta yönlendirme veya veri alımına ihtiyaç duymasanız bile, bunlar için bazı kütüphaneler eklemek isteyeceksinizdir. Yeni özelliklerle birlikte JavaScript paketiniz büyüdükçe, her rota için kodu bireysel olarak nasıl böleceğinizi bulmanız gerekebilir. Veri alımı ihtiyaçlarınız daha karmaşık hale geldikçe, uygulamanızın çok yavaş hissettiren sunucu-istemci ağ şelaleleriyle karşılaşma olasılığı yüksektir. Kitleniz, kötü ağ koşullarına sahip ve düşük uçlu cihazları olan daha fazla kullanıcıyı içerdiğinde, bileşenlerinizden HTML oluşturarak içeriği erken göstermek isteyeceksiniz - ister sunucuda, ister derleme sırasında. Kodunuzun bir kısmını sunucuda veya derleme sırasında çalıştırmak için kurulumunuzu değiştirmek oldukça zor olabilir.
 
-**React frameworks on this page solve problems like these by default, with no extra work from your side.** They let you start very lean and then scale your app with your needs. Each React framework has a community, so finding answers to questions and upgrading tooling is easier. Frameworks also give structure to your code, helping you and others retain context and skills between different projects. Conversely, with a custom setup it's easier to get stuck on unsupported dependency versions, and you'll essentially end up creating your own framework—albeit one with no community or upgrade path (and if it's anything like the ones we've made in the past, more haphazardly designed).
+**Bu sorunlar React'a özgü değildir. İşte bu yüzden Svelte'nin SvelteKit'i, Vue'nun Nuxt'ı ve daha fazlası vardır.** Bu sorunları kendi başınıza çözmek için, paketleyicinizi yönlendiricinizle ve veri alımı kütüphanenizle entegre etmeniz gerekecektir. İlk kurulumu çalıştırmak zor değildir, ancak zamanla büyüyen bir uygulamanın hızlı bir şekilde yüklenmesiyle ilgili birçok ince nokta vardır. Sayfanın gereken verilerle paralel olarak, mümkün olan en az uygulama kodunu göndermek isteyeceksiniz, ancak bunu tek bir istemci-sunucu turunda yapacaksınız. Muhtemelen sayfanın, progresif iyileştirmeyi desteklemek için JavaScript kodunuz çalışmadan önce etkileşimli olmasını isteyeceksiniz. Pazarlama sayfalarınız için JavaScript devre dışı bırakılsa bile her yerde barındırılabilen ve çalışabilen tamamen statik HTML dosyaları oluşturmak isteyebilirsiniz. Bu yetenekleri kendiniz oluşturmak gerçekten iş gerektirir.
 
-If you're still not convinced, or your app has unusual constraints not served well by these frameworks and you'd like to roll your own custom setup, we can't stop you--go for it! Grab `react` and `react-dom` from npm, set up your custom build process with a bundler like [Vite](https://vitejs.dev/) or [Parcel](https://parceljs.org/), and add other tools as you need them for routing, static generation or server-side rendering, and more.
+**Bu sayfadaki React çatıları, bu tür sorunları varsayılan olarak çözer ve sizden ekstra çalışma gerektirmeden bunları yapar.** Sizin için çok hafif başlamalarına ve ardından uygulamanızı ihtiyaçlarınızla birlikte ölçeklendirmelerine izin verirler. Her React çatısının bir topluluğu vardır, bu nedenle sorulara yanıt bulmak ve araçları yükseltmek daha kolaydır. Çatılar ayrıca kodunuza yapı sağlar, böylece siz ve diğerleri farklı projeler arasında bağlam ve becerileri koruyabilirsiniz. Öte yandan, özel bir kurulumla desteklenmeyen bağımlılık sürümlerinde sıkışma olasılığı daha yüksektir ve esasen kendi çatınızı oluşturacaksınız - her ne kadar topluluksuz ve yükseltme yolu olmayan bir çatı olsa da (ve geçmişte yaptığımızlar gibi daha dağınık tasarlanmış).
+
+Eğer hala ikna olmadıysanız veya uygulamanızın bu çatılar tarafından iyi hizmet edilmeyen sıradışı kısıtlamaları varsa ve kendi özel kurulumunuzu oluşturmak istiyorsanız, sizi durduramayız - devam edin! `react` ve `react-dom`'u npm'den alın, [Vite](https://vitejs.dev/) veya [Parcel](https://parceljs.org/) gibi bir paketleyici ile özel derleme sürecinizi ayarlayın ve yönlendirme, statik üretim veya sunucu tarafı işleme ve daha fazlası için ihtiyaç duyduğunuz diğer araçları ekleyin.
 </DeepDive>
 
-## Bleeding-edge React frameworks {/*bleeding-edge-react-frameworks*/}
+## Gelişmiş React çatıları {/*bleeding-edge-react-frameworks*/}
 
-As we've explored how to continue improving React, we realized that integrating React more closely with frameworks (specifically, with routing, bundling, and server technologies) is our biggest opportunity to help React users build better apps. The Next.js team has agreed to collaborate with us in researching, developing, integrating, and testing framework-agnostic bleeding-edge React features like [React Server Components.](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components)
+React'ı nasıl daha da geliştirebileceğimizi keşfederken, React'ı çatılarla (özellikle yönlendirme, paketleme ve sunucu teknolojileriyle) daha yakından entegre etmenin, React kullanıcılarının daha iyi uygulamalar geliştirmelerine yardımcı olmak için en büyük fırsatımız olduğunu fark ettik. Next.js ekibi, [React Sunucu Bileşenleri](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) gibi çatı bağımsız gelişmiş React özelliklerinin araştırılması, geliştirilmesi, entegrasyonu ve test edilmesi konusunda bizimle işbirliği yapmayı kabul etti.
 
-These features are getting closer to being production-ready every day, and we've been in talks with other bundler and framework developers about integrating them. Our hope is that in a year or two, all frameworks listed on this page will have full support for these features. (If you're a framework author interested in partnering with us to experiment with these features, please let us know!)
+Bu özellikler, her geçen gün canlı ortama hazır olmaya daha da yaklaşıyor ve bunları entegre etme konusunda diğer paketleyici ve çatı geliştiricileriyle görüşmeler yapıyoruz. Umut ediyoruz ki, bir veya iki yıl içinde bu sayfadaki tüm çatılar, bu özelliklere tam desteğe sahip olacak. (Eğer bir çatı yazarı olarak bu özelliklerle deney yapmak için bizimle ortaklık kurmak istiyorsanız, lütfen bize bildirin!)
 
-### Next.js (App Router) {/*nextjs-app-router*/}
+### Next.js (Uygulama Yönlendirici) {/*nextjs-app-router*/}
 
-**[Next.js's App Router](https://beta.nextjs.org/docs/getting-started) is a redesign of the Next.js APIs aiming to fulfill the React team’s full-stack architecture vision.** It lets you fetch data in asynchronous components that run on the server or even during the build.
+**[Next.js Uygulama Yönlendiricisi](https://beta.nextjs.org/docs/getting-started), React ekibinin tam yığın mimari vizyonunu gerçekleştirmeyi amaçlayan Next.js API'lerinin yeniden tasarımıdır.** Bu, sunucuda veya hatta derleme sırasında çalışan eşzamansız bileşenlerde veri almanıza olanak tanır.
 
-Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/deployment) to any Node.js or serverless hosting, or to your own server. Next.js also supports [static export](https://beta.nextjs.org/docs/configuring/static-export) which doesn't require a server.
+Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. [Next.js uygulama kurulumunu](https://nextjs.org/docs/deployment) herhangi bir NodeJS sunucusu, sunucusuz barındırma veya kendi sunucunuza yapabilirsiniz. Next.js ayrıca [statik dışa aktarma](https://beta.nextjs.org/docs/configuring/static-export)yı da destekler ve bu bir sunucu gerektirmez.
+
 <Pitfall>
 
-Next.js's App Router is **currently in beta and is not yet recommended for production** (as of Mar 2023). To experiment with it in an existing Next.js project, [follow this incremental migration guide](https://beta.nextjs.org/docs/upgrade-guide#migrating-from-pages-to-app).
+Next.js'in Uygulama Yönlendiricisi **şu an beta aşamasında ve henüz canlı ortam kullanımı tavsiye edilmemektedir.** (Mart 2023 itibariyle). Var olan bir Next JS uygulamasında test etmek için, [bu geçiş kılavuzunu takip edebilirsiniz.](https://beta.nextjs.org/docs/upgrade-guide#migrating-from-pages-to-app).
 
 </Pitfall>
 
 <DeepDive>
 
-#### Which features make up the React team’s full-stack architecture vision? {/*which-features-make-up-the-react-teams-full-stack-architecture-vision*/}
+#### React ekibinin eksiksiz mimari vizyonunu hangi özellikler oluşturur? {/*which-features-make-up-the-react-teams-full-stack-architecture-vision*/}
 
-Next.js's App Router bundler fully implements the official [React Server Components specification](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md). This lets you mix build-time, server-only, and interactive components in a single React tree.
+Next.js'in Uygulama Yönlendiricisi resmi [React Sunucu bileşenleri spesifikasyonlarını](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md) tamamen uygular. Bu size, derleme zamanı bileşenleri, sadece sunucu bileşenleri ve inteaktif bileşenlerini tek React ağacı altında karışık olarak kullanmanıza olanak sağlar.
 
-For example, you can write a server-only React component as an `async` function that reads from a database or from a file. Then you can pass data down from it to your interactive components:
+Mesela, sadece sunucu tarafında çalışan, veritabanından veya dosyadan okuma yapan bir React bileşenini `async` fonksiyon olarak yazabilirsiniz. Ardından veriyi alt taraftaki interaktif bileşenlere geçebilirsiniz.
 
 ```js
-// This component runs *only* on the server (or during the build).
+// Bu bileşen *sadece* sunucu tarafında koşar. (veya toplanma sırasında)
 async function Talks({ confId }) {
-  // 1. You're on the server, so you can talk to your data layer. API endpoint not required.
+  // 1. Sunucu tarafındasınız, dolayısıyla data katmanı ile direkt iletişim kurabilirsin. API ucu gerekmiyor.
   const talks = await db.Talks.findAll({ confId });
 
-  // 2. Add any amount of rendering logic. It won't make your JavaScript bundle larger.
+  // 2. herhangi bir render mantığı oluşturabilirsiniz. Bu istemci tarafındaki javascript boyutunuzu arttırmayacaktır.
   const videos = talks.map(talk => talk.video);
 
-  // 3. Pass the data down to the components that will run in the browser.
+  // 3. Oluşan veriyi tarayıcıda çalışacak ilgili bileşene geçiniz.
   return <SearchableVideoList videos={videos} />;
 }
 ```
 
-Next.js's App Router also integrates [data fetching with Suspense](/blog/2022/03/29/react-v18#suspense-in-data-frameworks). This lets you specify a loading state (like a skeleton placeholder) for different parts of your user interface directly in your React tree:
+Next.js'in Uygulama Yönlendiricisi ayrıca [Suspense ile data getirme](/blog/2022/03/29/react-v18#suspense-in-data-frameworks) ile entegre çalışmaktadır. Bu, React ağacınızdaki kullanıcı arayüzünüzün farklı bölümleri için bir yükleme durumu (iskelet yer tutucu gibi) belirtmenize olanak tanır.
 
 ```js
 <Suspense fallback={<TalksLoading />}>
@@ -128,6 +130,6 @@ Next.js's App Router also integrates [data fetching with Suspense](/blog/2022/03
 </Suspense>
 ```
 
-Server Components and Suspense are React features rather than Next.js features. However, adopting them at the framework level requires buy-in and non-trivial implementation work. At the moment, the Next.js App Router is the most complete implementation. The React team is working with bundler developers to make these features easier to implement in the next generation of frameworks.
+Sunucu Bileşenleri ve Suspense, Next.js özelliklerinden ziyade React özellikleridir. Bununla birlikte, bu özellikleri çatı düzeyinde benimsemek, önemli ölçüde uygulama çalışması gerektiren ve destek almayı gerektiren bir süreçtir. Şu anda, Next.js Uygulama Yönlendiricisi en eksiksiz uygulamadır. React ekibi, bu özellikleri bir sonraki nesil çerçevelerde daha kolay uygulanabilir hale getirmek için paketleyici geliştiricileriyle çalışmaktadır.
 
 </DeepDive>
