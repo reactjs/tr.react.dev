@@ -33,7 +33,7 @@ Bazı düzenleyiciler bu özelliklerle birlikte gelir, ancak diğerleri bir ekle
 
 ### Linting {/*linting*/}
 
-Kod linter araçları kodunuzu yazarken problemleri bulmanızı ve düzeltmenizi sağlar. [ESLint](https://eslint.org/) popüler açık kaynak kodu Javascript linter.
+Kod linter araçları kodunuzu yazarken problemleri bulmanızı ve düzeltmenizi sağlar. [ESLint](https://eslint.org/) popüler bir açık kaynak JavaScript linter aracıdır.
 
 * [React için önerilen ESLint ayarlarını kurmak](https://www.npmjs.com/package/eslint-config-react-app) ([Node'un yüklü](https://nodejs.org/en/download/current/)olduğundan emin olun!) 
 * [ESLint'i, VSCode'a resmi eklenti ile entegre edin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
