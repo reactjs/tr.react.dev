@@ -4,12 +4,12 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-`<Fragment>`, often used via `<>...</>` syntax, lets you group elements without a wrapper node.
+<Fragment>, genellikle <>...</> sözdizimiyle birlikte kullanılır ve bir kaplayıcı düğüm olmadan elemanları gruplamaya olanak tanır.
 
 ```js
 <>
-  <OneChild />
-  <AnotherChild />
+  <AltEleman />
+  <BaskaAltEleman />
 </>
 ```
 
@@ -19,21 +19,23 @@ title: <Fragment> (<>...</>)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<Fragment>` {/*fragment*/}
 
-Wrap elements in `<Fragment>` to group them together in situations where you need a single element. Grouping elements in `Fragment` has no effect on the resulting DOM; it is the same as if the elements were not grouped. The empty JSX tag `<></>` is shorthand for `<Fragment></Fragment>` in most cases.
+Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları <Fragment> içine alarak onları bir araya getirebilirsiniz. Fragment içinde elemanları gruplamak, sonuç DOM üzerinde herhangi bir etkiye sahip değildir; sanki elemanlar gruplanmamış gibi aynı kalır. Boş JSX etiketi <></> çoğu durumda <Fragment></Fragment> için kısaltmadır.
 
-#### Props {/*props*/}
+#### Prop'lar {/*props*/}
 
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
+isteğe bağlı `anahtar`: Açık <Fragment> sözdizimiyle tanımlanan Fragment'ler syntax may have [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-- If you want to pass `key` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment key={yourKey}>...</Fragment>`.
+- Eğer bir Fragment'a key değeri geçirmek istiyorsanız, <>...</> sözdizimini kullanamazsınız. 'React'ten Fragment'ı içe aktarmanız ve <Fragment key={anahtar}>...</Fragment> şeklinde render etmeniz gerekmektedir.
 
-- React does not [reset state](/learn/preserving-and-resetting-state) when you go from rendering `<><Child /></>` to `[<Child />]` or back, or when you go from rendering `<><Child /></>` to `<Child />` and back. This only works a single level deep: for example, going from `<><><Child /></></>` to `<Child />` resets the state. See the precise semantics [here.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+- React, <><AltEleman /></>'dan [<AltEleman />]'a veya geriye dönerken, ya da <><AltEleman /></>'dan <AltEleman />'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, <><><AltEleman /></></>'dan <AltEleman />'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
+
+
 
 ---
 
