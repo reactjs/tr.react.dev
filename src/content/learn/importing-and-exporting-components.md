@@ -1,26 +1,26 @@
 ---
-title: Importing and Exporting Components
+title: Bileşenleri İçe ve Dışa Aktarma
 ---
 
 <Intro>
 
-The magic of components lies in their reusability: you can create components that are composed of other components. But as you nest more and more components, it often makes sense to start splitting them into different files. This lets you keep your files easy to scan and reuse components in more places.
+Bileşenlerin büyüsü yeniden kullanılabilirliklerinde yatar: diğer bileşenlerden oluşan bileşenler oluşturabilirsiniz. Ancak, giderek daha fazla bileşeni iç içe yerleştirdikçe, bunları farklı dosyalara bölmeye başlamak genellikle mantıklıdır. Bu, dosyalarınızın kolayca taranmasını ve bileşenlerin daha fazla yerde yeniden kullanılmasını sağlar.
 
 </Intro>
 
 <YouWillLearn>
 
-* What a root component file is
-* How to import and export a component
-* When to use default and named imports and exports
-* How to import and export multiple components from one file
-* How to split components into multiple files
+* Kök bileşen dosyası nedir
+* Bir bileşeni içe ve dışa aktarma
+* Varsayılan ve adlandırılmış içe ve dışa aktarmaların ne zaman kullanılması gerektiği
+* Bir dosyadan birden fazla bileşen içe ve dışa nasıl aktarılır
+* Bileşenler birden fazla dosyaya nasıl bölünür
 
 </YouWillLearn>
 
-## The root component file {/*the-root-component-file*/}
+## Kök bileşen dosyası {/*the-root-component-file*/}
 
-In [Your First Component](/learn/your-first-component), you made a `Profile` component and a `Gallery` component that renders it:
+[İlk bileşeniniz](/learn/your-first-component)'de, `Profile` bileşenini render eden bir `Gallery` bileşeni oluşturmuştunuz:
 
 <Sandpack>
 
@@ -37,7 +37,7 @@ function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem bilim insanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -51,18 +51,17 @@ img { margin: 0 10px 10px 0; height: 90px; }
 ```
 
 </Sandpack>
+Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içerisinde barınmaktadır. [Create React App](https://create-react-app.dev/)'de uygulamanız `src/App.js` dosyası içinde barınmaktadır. Fakat kurulumunuza bağlı olarak kök bileşeniniz başka bir dosyanın içerisinde olabilir. Eğer dosya tabanlı yönlendirmesi olan bir çatı kullanıyorsanız, kök bileşeniniz her sayfa için ayrı olacaktır.
 
-These currently live in a **root component file,** named `App.js` in this example. In [Create React App](https://create-react-app.dev/), your app lives in `src/App.js`. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
+## Bileşenleri içe ve dışa aktarma {/*exporting-and-importing-a-component*/}
 
-## Exporting and importing a component {/*exporting-and-importing-a-component*/}
+Eğer açılış ekranını değiştirmek ve bilim kitaplarının bir listesini koymak isterseniz ne olur? Veya tüm profilleri başka bir yere yerleştirmek isterseniz? Bu durumda "Galeri" ve "Profil" bileşenlerini kök bileşen dosyasından çıkarmak mantıklıdır. Bu, onların daha modüler olmasını ve diğer dosyalarda yeniden kullanılabilir olmasını sağlayacaktır. Bir bileşeni üç adımda taşıyabilirsiniz:
 
-What if you want to change the landing screen in the future and put a list of science books there? Or place all the profiles somewhere else? It makes sense to move `Gallery` and `Profile` out of the root component file. This will make them more modular and reusable in other files. You can move a component in three steps:
+1. **Yeni** bir JS dosyası oluşturunuz ve bileşeni bunun içine koyunuz.
+2. **Dışa aktarma** işlemini bu dosya içerisindeki fonksiyon bileşenine uygulayınız ([varsayılan](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) olarak yada [adlandırılmış](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) olarak dışa aktarım).
+3. **İçe aktarma** işlemini bu bileşeni kullanmak istediğiniz dosyada yapınız ([varsayılan](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults) yada [adlandırılmış](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module) dışa akratıma uygun olacak içe aktarımı kullanarak).
 
-1. **Make** a new JS file to put the components in.
-2. **Export** your function component from that file (using either [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) or [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) exports).
-3. **Import** it in the file where you’ll use the component (using the corresponding technique for importing [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults) or [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module) exports).
-
-Here both `Profile` and `Gallery` have been moved out of `App.js` into a new file called `Gallery.js`. Now you can change `App.js` to import `Gallery` from `Gallery.js`:
+Burada `Profile` ve `Gallery` bileşenleri `App.js` dosyası dışına `Gallery.js` adlı bir dosyaya taşınmıştır. Şimdi `App.js` dosyasını `Gallery.js` dosyasından `Gallery` bileşenini içe aktaracak şekilde düzenleyebilirsiniz:
 
 <Sandpack>
 
@@ -89,7 +88,7 @@ function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem bilim insanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -104,60 +103,60 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-Notice how this example is broken down into two component files now:
+Bu örneğin iki farklı bileşen dosyasına nasıl ayrıldığına dikkat ediniz:
 
 1. `Gallery.js`:
-     - Defines the `Profile` component which is only used within the same file and is not exported.
-     - Exports the `Gallery` component as a **default export.**
+     - Sadece aynı dosya içerisinde kullanılan ve dışa aktarılmayan `Profile` bileşenini tanımlar.
+     - **Varsayılan dışa aktarma** olarak `Gallery` bileşenini dışa aktarır. 
 2. `App.js`:
-     - Imports `Gallery` as a **default import** from `Gallery.js`.
-     - Exports the root `App` component as a **default export.**
+     - `Gallery.js` dosyasından **varsayılan içe aktarma** olarak `Gallery` bileşenini içe aktarır.
+     - **Varsayılan dışa aktarma** olarak `App` bileşenini dışa aktarır.
 
 
 <Note>
 
-You may encounter files that leave off the `.js` file extension like so:
+`.js` dosya uzantısını kullanmayan dosyalarla karşılaşabilirsiniz:
 
 ```js 
 import Gallery from './Gallery';
 ```
 
-Either `'./Gallery.js'` or `'./Gallery'` will work with React, though the former is closer to how [native ES Modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) work.
+`'./Gallery.js'` yada `'./Gallery'` React ile çalışacaktır, ancak ilk kullanım [yerel ES Modülleri](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)'nin çalışma şekline daha yakındır.
 
 </Note>
 
 <DeepDive>
 
-#### Default vs named exports {/*default-vs-named-exports*/}
+#### Varsayılan ve adlandırılmış dışa aktarmalar {/*default-vs-named-exports*/}
 
-There are two primary ways to export values with JavaScript: default exports and named exports. So far, our examples have only used default exports. But you can use one or both of them in the same file. **A file can have no more than one _default_ export, but it can have as many _named_ exports as you like.**
+Javascript'de değerleri dışa aktarmak için başlıca iki yol vardır: varsayılan dışa aktarmalar ve adlandırılmış dışa aktarmalar. Şimdiye kadar, örneklerimizde sadece varsayılan dışa aktarmalar kullanılmıştır. Fakat siz birini yada ikisini birlikte aynı dosyada kullanabilirsiniz. **Bir dosyada birden fazla _varsayılan_ dışa aktarma olamaz, ama dilediğiniz kadar _adlandırılmış_ dışa aktarma olabilir.**
 
-![Default and named exports](/images/docs/illustrations/i_import-export.svg)
+![Varsayılan ve adlandırılmış dışa aktarma](/images/docs/illustrations/i_import-export.svg)
 
-How you export your component dictates how you must import it. You will get an error if you try to import a default export the same way you would a named export! This chart can help you keep track:
+Bileşenlerinizi nasıl dışa aktardığınız nasıl içe aktarmanız gerektiğini belirler. Eğer varsayılan bir dışa aktarmayı, adlandırılmış bir dışa aktarma ile aynı şekilde içe aktarmaya çalışırsanız hata alırsınız! Bu tablo takip etmenize yardımcı olabilir:
 
-| Syntax           | Export statement                           | Import statement                          |
+| Sözdizimi        | Dışa aktarma ifadesi                       | İçe aktarma ifadesi                       |
 | -----------      | -----------                                | -----------                               |
-| Default  | `export default function Button() {}` | `import Button from './Button.js';`     |
-| Named    | `export function Button() {}`         | `import { Button } from './Button.js';` |
+| Varsayılan       | `export default function Button() {}`      | `import Button from './Button.js';`       |
+| Adlandırılmış    | `export function Button() {}`              | `import { Button } from './Button.js';`   |
 
-When you write a _default_ import, you can put any name you want after `import`. For example, you could write `import Banana from './Button.js'` instead and it would still provide you with the same default export. In contrast, with named imports, the name has to match on both sides. That's why they are called _named_ imports!
+Bir içe aktarma yazarken `import` sonrasında istediğiniz adı kullanabilirsiniz. Örneğin, `import Zurna from './Button.js'` şeklinde yazabilirsiniz ve bu size yine aynı varsayılan dışa aktarmayı sağlayacaktır. Buna karşılık, adlandırılmış içe aktarmalarda, ad iki tarafta da aynı olmak zorundadır. Bu sebeple bunlara _adlandırılmış_ içe aktarmalar denir!
 
-**People often use default exports if the file exports only one component, and use named exports if it exports multiple components and values.** Regardless of which coding style you prefer, always give meaningful names to your component functions and the files that contain them. Components without names, like `export default () => {}`, are discouraged because they make debugging harder.
+**Geliştiriciler eğer dosya tek bir bileşeni dışa aktarıyorsa genellikle varsayılan dışa aktarmayı, birden fazla bileşen ve değeri dışa aktarıyorsa adlandırılmış dışa aktarmayı kullanmaktadır.** Hangi kodlama stilini tercih ettiğinizden bağımsız olarak, bileşen fonksiyonlarınıza ve bulundukları dosyalara anlamlı adlar veriniz. Hata ayıklamayı zorlaştırdıkları için, `export default () => {}` gibi adsız bileşenlerin kullanımı önerilmez.
 
 </DeepDive>
 
-## Exporting and importing multiple components from the same file {/*exporting-and-importing-multiple-components-from-the-same-file*/}
+## Aynı dosya içerisinden birden fazla bileşenin içe ve dışa aktarımı {/*exporting-and-importing-multiple-components-from-the-same-file*/}
 
-What if you want to show just one `Profile` instead of a gallery? You can export the `Profile` component, too. But `Gallery.js` already has a *default* export, and you can't have _two_ default exports. You could create a new file with a default export, or you could add a *named* export for `Profile`. **A file can only have one default export, but it can have numerous named exports!**
+Eğer bir galeri yerine sadece bir `Profile` göstermek isterseniz ne olur? `Profile` bileşenini de dışa aktarabilirsiniz. Ancak `Gallery.js` dosyası zaten bir *varsayılan* dışa aktarmaya sahiptir ve _iki_ varsayılan dışa aktarmaya sahip olamaz. Varsayılan aktarmayla yeni bir dosya oluşturabilirsiniz yada `Profile` için *adlandırılmış* dışa aktarma ekleyebilirsiniz. **Bir dosya sadece bir adet varsayılan dışa aktarmaya sahip olabilir, ancak birçok adlandırılmış dışa aktarmaya sahip olabilir!**
 
 <Note>
 
-To reduce the potential confusion between default and named exports, some teams choose to only stick to one style (default or named), or avoid mixing them in a single file. Do what works best for you!
+Varsayılan ve adlandırılmış dışa aktarmalar arasındaki olası karışıklığı azaltmak için, bazı geliştirici ekipler yalnızca bir stile (varsayılan veya adlandırılmış) bağlı kalmayı veya bunları tek bir dosyada birlikte kullanmaktan kaçınmayı seçmektedir. Siz, sizin için en iyi olanı uygulayınız!
 
 </Note>
 
-First, **export** `Profile` from `Gallery.js` using a named export (no `default` keyword):
+İlk olarak, adlandırılmış dışa aktarma kullanarak `Gallery.js`'den `Profile`'ı **dışa aktarınız** (`default` anahtar kelimesi olmadan):
 
 ```js
 export function Profile() {
@@ -165,13 +164,13 @@ export function Profile() {
 }
 ```
 
-Then, **import** `Profile` from `Gallery.js` to `App.js` using a named import (with the curly braces):
+Sonrasında, adlandırılmış içe aktarma kullanarak `Gallery.js`'den `Profile`'ı `App.js`'de **içe aktarınız** (süslü parantezleri kullanarak):
 
 ```js
 import { Profile } from './Gallery.js';
 ```
 
-Finally, **render** `<Profile />` from the `App` component:
+Son olarak, `App` bileşeninde `<Profile />`'ı **render** ediniz:
 
 ```js
 export default function App() {
@@ -179,7 +178,7 @@ export default function App() {
 }
 ```
 
-Now `Gallery.js` contains two exports: a default `Gallery` export, and a named `Profile` export. `App.js` imports both of them. Try editing `<Profile />` to `<Gallery />` and back in this example:
+Şu anda `Gallery.js` dosyası iki adet dışa aktarma içermektedir: bir varsayılan `Gallery` dışa aktarma, ve bir adlandırılmış `Profile` dışa aktarma. `App.js` dosyası her ikisini de içe aktarmaktadır. Bu örnekte `<Profile />` bileşenini `<Gallery />` olarak düzenlemeyi ve geri almayı deneyin:
 
 <Sandpack>
 
@@ -207,7 +206,7 @@ export function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem bilim insanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -222,24 +221,24 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-Now you're using a mix of default and named exports:
+Artık varsayılan ve adlandırılmış dışa aktarmaları bir arada kullanıyorsunuz:
 
 * `Gallery.js`:
-  - Exports the `Profile` component as a **named export called `Profile`.**
-  - Exports the `Gallery` component as a **default export.**
+  - `Profile` bileşenini **adlandırılmış dışa aktarma** olarak `Profile` adıyla dışa aktarır.
+  - `Gallery` bileşenini **varsayılan dışa aktarma** olarak dışa aktarır.
 * `App.js`:
-  - Imports `Profile` as a **named import called `Profile`** from `Gallery.js`.
-  - Imports `Gallery` as a **default import** from `Gallery.js`.
-  - Exports the root `App` component as a **default export.**
+  - `Profile`'ı `Gallery.js`'den **adlandırılmış içe aktarma** olarak `Profile` adıyla dışa aktarır.
+  - `Gallery`'i `Gallery.js`'den **varsayılan içe aktarma** olarak içe aktarır.
+  - Kök `App` bileşenini **varsayılan dışa aktarma** olarak dışa aktarır.
 
 <Recap>
 
-On this page you learned:
+Bu sayfada öğrendikleriniz:
 
-* What a root component file is
-* How to import and export a component
-* When and how to use default and named imports and exports
-* How to export multiple components from the same file
+* Kök bileşeni nedir
+* Bir bileşen içe ve dışa nasıl aktarılır 
+* Varsayılan ve adlandırılmış içe ve dışa aktarmalar ne zaman ve nasıl kullanılmalıdır
+* Aynı dosya içerisinden birden fazla bileşen nasıl dışarı aktarılabilir
 
 </Recap>
 
@@ -247,22 +246,23 @@ On this page you learned:
 
 <Challenges>
 
-#### Split the components further {/*split-the-components-further*/}
+#### Bileşenleri daha fazla ayırın {/*split-the-components-further*/}
 
-Currently, `Gallery.js` exports both `Profile` and `Gallery`, which is a bit confusing.
+Şu anda Gallery.js, hem `Profile`'i hem de `Gallery`i dışa aktarıyor, bu biraz kafa karıştıcı. 
 
-Move the `Profile` component to its own `Profile.js`, and then change the `App` component to render both `<Profile />` and `<Gallery />` one after another.
+`Profile` bileşenini kendi `Profile.js` dosyasına taşıyınız, ve sonrasında `App` bileşenini sırasıyla `<Profile />` ve `<Gallery />` render edecek şekilde değiştiriniz.
 
-You may use either a default or a named export for `Profile`, but make sure that you use the corresponding import syntax in both `App.js` and `Gallery.js`! You can refer to the table from the deep dive above:
+`Profile` için varsayılan yada adlandırılmış bir dışa aktarma kullanabilirsiniz, ancak hem `App.js` hem de `Gallery.js` için kullandığınız dışa aktarmaya uygun içe aktarma sözdizimini kullandığınızdan emin olunuz! Yukarıdaki derinlemesine incelemede verilen tablodan yararlanabilirsiniz:
 
-| Syntax           | Export statement                           | Import statement                          |
-| -----------      | -----------                                | -----------                               |
-| Default  | `export default function Button() {}` | `import Button from './Button.js';`     |
-| Named    | `export function Button() {}`         | `import { Button } from './Button.js';` |
+
+| Sözdizimi        | Dışa aktarma ifadesi                       | İçe aktarma ifadesi                     |
+| -----------      | -----------                                | -----------                             |
+| Varsayılan       | `export default function Button() {}`      | `import Button from './Button.js';`     |
+| Adlandırılmış    | `export function Button() {}`              | `import { Button } from './Button.js';` |
 
 <Hint>
 
-Don't forget to import your components where they are called. Doesn't `Gallery` use `Profile`, too?
+Bileşenleri çağırıldıkları yerde içe aktarmayı unutmayınız. `Gallery`'de `Profile` kullanılmıyor mu?
 
 </Hint>
 
@@ -282,7 +282,7 @@ export default function App() {
 ```
 
 ```js Gallery.js active
-// Move me to Profile.js!
+// Beni Profile.js'e taşıyınız!
 export function Profile() {
   return (
     <img
@@ -295,7 +295,7 @@ export function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem bilim insanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -313,11 +313,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-After you get it working with one kind of exports, make it work with the other kind.
+Bir dışa aktarma türü ile çalıştırdıktan sonra, diğer dışa aktarma türü ile de çalıştırmayı deneyiniz.
 
 <Solution>
 
-This is the solution with named exports:
+Adlandırılmış dışa aktarmalara sahip çözüm:
 
 <Sandpack>
 
@@ -341,7 +341,7 @@ import { Profile } from './Profile.js';
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem bilim insanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -367,7 +367,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-This is the solution with default exports:
+Varsayılan dışa aktarmalara sahip çözüm:
 
 <Sandpack>
 
@@ -391,7 +391,7 @@ import Profile from './Profile.js';
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem bilim insanları</h1>
       <Profile />
       <Profile />
       <Profile />
