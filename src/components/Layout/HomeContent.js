@@ -131,7 +131,7 @@ export function HomeContent() {
             React
           </h1>
           <p className="text-4xl font-display max-w-lg md:max-w-full py-1 text-center text-secondary dark:text-primary-dark leading-snug self-center">
-            The library for web and native user interfaces
+            Web ve yerel kullanıcı arayüzü için kütüphane
           </p>
           <div className="mt-5 self-center flex gap-2 w-full sm:w-auto flex-col sm:flex-row">
             <ButtonLink
@@ -140,7 +140,7 @@ export function HomeContent() {
               size="lg"
               className="w-full sm:w-auto justify-center"
               label="Learn React">
-              Learn React
+              React&apos;ı öğrenin
             </ButtonLink>
             <ButtonLink
               href={'/reference/react'}
@@ -148,20 +148,20 @@ export function HomeContent() {
               size="lg"
               className="w-full sm:w-auto justify-center"
               label="API Reference">
-              API Reference
+              API Tanımları
             </ButtonLink>
           </div>
         </div>
 
         <Section background="left-card">
           <Center>
-            <Header>Create user interfaces from components</Header>
+            <Header>Bileşenlerden kullanıcı arayüzleri oluşturun</Header>
             <Para>
-              React lets you build user interfaces out of individual pieces
-              called components. Create your own React components like{' '}
-              <Code>Thumbnail</Code>, <Code>LikeButton</Code>, and{' '}
-              <Code>Video</Code>. Then combine them into entire screens, pages,
-              and apps.
+              React, bileşen adı verilen birbirinden ayrı parçalardan kullanıcı
+              arayüzü oluşturmanızı sağlar. <Code>Thumbnail</Code>,{' '}
+              <Code>LikeButton</Code> ve <Code>Video</Code> gibi kendi React
+              bileşenlerinizi oluşturabilirsiniz. Ardından bunları birleştirerek
+              tam ekranlara, sayfalara ve uygulamalara çevirebilirsiniz.
             </Para>
           </Center>
           <FullBleed>
@@ -169,22 +169,23 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              Whether you work on your own or with thousands of other
-              developers, using React feels the same. It is designed to let you
-              seamlessly combine components written by independent people,
-              teams, and organizations.
+              İster tek başınıza ister diğer binlerce geliştirici ile çalışın,
+              React kullanmak aynı hissettirir. React diğer insanlar, gruplar
+              veya organizasyonlar tarafından yazılmış bileşenleri sorunsuz bir
+              şekilde birleştirebilmeniz için tasarlanmıştır.
             </Para>
           </Center>
         </Section>
 
         <Section background="right-card">
           <Center>
-            <Header>Write components with code and markup</Header>
+            <Header>Kod ve işaretleme kullanarak bileşenler yazın</Header>
             <Para>
-              React components are JavaScript functions. Want to show some
-              content conditionally? Use an <Code>if</Code> statement.
-              Displaying a list? Try array <Code>map()</Code>. Learning React is
-              learning programming.
+              React bileşenleri aslında JavaScript fonksiyonlarıdır. Bazı
+              içerikleri koşullu olarak göstermek mi istiyorsunuz? Bir{' '}
+              <Code>if</Code> ifadesi kullanın. Bir liste mi göstermek
+              istiyorsunuz? Dizi <Code>map()</Code> fonksiyonunu deneyin. React
+              öğrenmek programlamayı öğrenmektir.
             </Para>
           </Center>
           <FullBleed>
@@ -192,22 +193,22 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              This markup syntax is called JSX. It is a JavaScript syntax
-              extension popularized by React. Putting JSX markup close to
-              related rendering logic makes React components easy to create,
-              maintain, and delete.
+              Bu işaretleme sözdizimine JSX denir. React tarafından popüler hale
+              getirilen bir JavaScript sözdizimi uzantısıdır. JSX işaretlemesini
+              ilgili render etme mantığına yakın yerleştirmek, React
+              bileşenlerini oluşturmayı, bakımını ve silmeyi kolaylaştırır.
             </Para>
           </Center>
         </Section>
 
         <Section background="left-card">
           <Center>
-            <Header>Add interactivity wherever you need it</Header>
+            <Header>İhtiyacınız olan her yere interaktivite ekleyin</Header>
             <Para>
-              React components receive data and return what should appear on the
-              screen. You can pass them new data in response to an interaction,
-              like when the user types into an input. React will then update the
-              screen to match the new data.
+              React bileşenleri veri alır ve ekranda görüntülenecek olanı
+              döndürür. Kullanıcı girişi gibi bir etkileşime yanıt olarak
+              bileşenlere yeni veri yollayabilirsiniz. React daha sonra ekranı
+              yeni veriyle eşleşecek şekilde günceller.
             </Para>
           </Center>
           <FullBleed>
@@ -215,16 +216,16 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              You don’t have to build your whole page in React. Add React to
-              your existing HTML page, and render interactive React components
-              anywhere on it.
+              Tüm sayfanızı React ile oluşturmak zorunda değilsiniz. Mevcut HTML
+              sayfanıza React ekleyin ve interaktif React bileşenlerini herhangi
+              bir yerde render edin.
             </Para>
             <div className="flex justify-start w-full lg:justify-center">
               <CTA
                 color="gray"
                 icon="code"
                 href="/learn/add-react-to-an-existing-project">
-                Add React to your page
+                Sayfanıza React ekleyin
               </CTA>
             </div>
           </Center>
@@ -232,16 +233,14 @@ export function HomeContent() {
 
         <Section background="right-card">
           <Center>
-            <Header>
-              Go full-stack <br className="hidden lg:inline" />
-              with a framework
-            </Header>
+            <Header>Bir çatı ile tam özellikli geliştirmeler yapın</Header>
             <Para>
-              React is a library. It lets you put components together, but it
-              doesn’t prescribe how to do routing and data fetching. To build an
-              entire app with React, we recommend a full-stack React framework
-              like <Link href="https://nextjs.org">Next.js</Link> or{' '}
-              <Link href="https://remix.run">Remix</Link>.
+              React bir kütüphanedir. Bileşenleri bir araya getirmenize olanak
+              sağlar, ancak yönlendirme ve veri çekme gibi konularda nasıl
+              yapılacağına dair talimat vermez. React ile tüm bir uygulama
+              oluşturmak için <Link href="https://nextjs.org">Next.js</Link>{' '}
+              veya <Link href="https://remix.run">Remix</Link> gibi tam
+              özellikli React çatılarını öneriyoruz.
             </Para>
           </Center>
           <FullBleed>
@@ -249,17 +248,17 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              React is also an architecture. Frameworks that implement it let
-              you fetch data in asynchronous components that run on the server
-              or even during the build. Read data from a file or a database, and
-              pass it down to your interactive components.
+              React aynı zamanda bir mimaridir. Onu kullanan çatılar, sunucuda
+              çalışan asenkron bileşenlerde veya hatta derleme sırasında veri
+              çekmenize olanak tanır. Bir dosyadan veya veritabanından veri
+              okuyun ve bunu interaktif bileşenlerinize aktarın.
             </Para>
             <div className="flex justify-start w-full lg:justify-center">
               <CTA
                 color="gray"
                 icon="framework"
                 href="/learn/start-a-new-react-project">
-                Get started with a framework
+                Bir çatı ile başlayın
               </CTA>
             </div>
           </Center>
@@ -267,12 +266,13 @@ export function HomeContent() {
         <Section background="left-card">
           <div className="mx-auto flex flex-col w-full">
             <div className="mx-auto max-w-4xl lg:text-center items-center px-5 flex flex-col">
-              <Header>Use the best from every platform</Header>
+              <Header>Her platformdan en iyisini kullanın</Header>
               <Para>
-                People love web and native apps for different reasons. React
-                lets you build both web apps and native apps using the same
-                skills. It leans upon each platform’s unique strengths to let
-                your interfaces feel just right on every platform.
+                İnsanlar web ve yerel uygulamaları farklı nedenlerden seviyor.
+                React, aynı becerileri kullanarak hem web uygulamaları hem de
+                yerel uygulamalar oluşturmanıza olanak tanır. Her platformun
+                benzersiz güçlerine dayanarak, arayüzlerinizin her platformda
+                doğru hissettirmesine izin verir.
               </Para>
             </div>
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row mt-16 mb-20 lg:mb-28 px-5 gap-20 lg:gap-5">
@@ -286,15 +286,16 @@ export function HomeContent() {
                     <div className="bg-wash relative h-14 w-full" />
                     <div className="relative flex items-start justify-center flex-col flex-1 pb-16 pt-5 gap-3 px-5 lg:px-10 lg:pt-8">
                       <h4 className="leading-tight text-primary font-semibold text-3xl lg:text-4xl">
-                        Stay true to the web
+                        Web&apos;e sadık kalın
                       </h4>
                       <p className="lg:text-xl leading-normal text-secondary">
-                        People expect web app pages to load fast. On the server,
-                        React lets you start streaming HTML while you’re still
-                        fetching data, progressively filling in the remaining
-                        content before any JavaScript code loads. On the client,
-                        React can use standard web APIs to keep your UI
-                        responsive even in the middle of rendering.
+                        İnsanlar web sayfalarının hızlı yüklenmesini
+                        bekliyorlar. Sunucuda, React, veri çekmeye devam ederken
+                        HTML akışını başlatmanıza olanak tanır ve JavaScript
+                        kodu yüklenmeden önce kalan içeriği aşamalı olarak
+                        doldurur. İstemcide, React, arayüzünüzü renderlama
+                        sırasında bile standart web API&apos;lerini kullanarak
+                        bileşenlerin etkileşimli olmasını sağlar.
                       </p>
                     </div>
                   </div>
@@ -372,21 +373,22 @@ export function HomeContent() {
                       </div>
                       <div className="flex flex-col items-start justify-center pt-0 gap-3 px-2.5 lg:pt-8 lg:px-8">
                         <h4 className="leading-tight text-primary dark:text-primary-dark font-semibold text-3xl lg:text-4xl">
-                          Go truly native
+                          Gerçekten yerel olun.
                         </h4>
                         <p className="h-full lg:text-xl text-secondary dark:text-secondary-dark leading-normal">
-                          People expect native apps to look and feel like their
-                          platform.{' '}
+                          İnsanlar yerel uygulamaların kendi platformları gibi
+                          görünüp hisettirmelerini bekliyorlar.{' '}
                           <Link href="https://reactnative.dev">
                             React Native
                           </Link>{' '}
-                          and{' '}
-                          <Link href="https://github.com/expo/expo">Expo</Link>{' '}
-                          let you build apps in React for Android, iOS, and
-                          more. They look and feel native because their UIs{' '}
-                          <i>are</i> truly native. It’s not a web view—your
-                          React components render real Android and iOS views
-                          provided by the platform.
+                          ve{' '}
+                          <Link href="https://github.com/expo/expo">Expo</Link>,
+                          React ile Android, iOS ve daha fazlası için uygulama
+                          oluşturmanıza olanak tanır. Arayüzleri gerçekten yerel
+                          olduğu için yerel gözüküyor ve hissettiriyorlar. Bu
+                          bir web görünümü değil. React bileşenleriniz, platform
+                          tarafından sağlanan gerçek Android ve iOS
+                          görünümlerini renderlar.
                         </p>
                       </div>
                     </div>
@@ -396,14 +398,15 @@ export function HomeContent() {
             </div>
             <div className="px-5 lg:px-0 max-w-4xl mx-auto lg:text-center text-secondary dark:text-secondary-dark">
               <Para>
-                With React, you can be a web <i>and</i> a native developer. Your
-                team can ship to many platforms without sacrificing the user
-                experience. Your organization can bridge the platform silos, and
-                form teams that own entire features end-to-end.
+                React ile web ve yerel geliştirici olabilirsiniz. Takımınız,
+                kullanıcı deneyimini feda etmeden birçok platforma uygulama
+                yapabilir. Organizasyonunuz, platform farklılıklarını
+                bağdaştırabilir ve baştan sona tüm özelliklere sahip olan
+                takımlar oluşturabilir.
               </Para>
               <div className="flex justify-start w-full lg:justify-center">
                 <CTA color="gray" icon="native" href="https://reactnative.dev/">
-                  Build for native platforms
+                  Yerel platformlar için oluşturun
                 </CTA>
               </div>
             </div>
