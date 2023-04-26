@@ -19,7 +19,7 @@ Doğru şekilde yapılandırılmış bir editör, kodun daha kolay okunmasını 
 
 ## Editörünüz {/*your-editor*/}
 
-Günümüzün en popüler editörlerinden biri olan [VS Code](https://code.visualstudio.com/), geniş bir eklenti pazarına sahip olmasının yanı sıra GitHub gibi popüler hizmetlerle iyi bir entegrasyona sahiptir. Aşağıda listelenen özellikler VS Code'a eklenti olarak yüklenebilir ve bu VS Code'u daha fazla yapılandırılabilir hale getirir!
+Günümüzün en popüler editörlerinden biri olan [VS Code](https://code.visualstudio.com/), geniş bir eklenti pazarına sahip olmasının yanı sıra GitHub gibi popüler servislerle iyi bir entegrasyona sahiptir. Aşağıda listelenen özellikler VS Code'a eklenti olarak yüklenebilir ve bu VS Code'u daha fazla yapılandırılabilir hale getirir!
 
 React topluluğunun kullandığı diğer popüler editörler:
 
