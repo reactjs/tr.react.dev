@@ -43,7 +43,7 @@ Kod linter araçları kodunuzu yazarken problemleri bulmanızı ve düzeltmenizi
 
 ### Biçimlendirme {/*formatting*/}
 
-Kodunuza katkıda bulunan başka bir kişiyle yapmak isteyeceğiniz son şey [sekmeler ve boşluklar](https://www.google.com/search?q=tabs+vs+spaces) hakkında bir tartışmaya girmektir! Neyse ki, [Prettier](https://prettier.io/) kodunuzu önceden ayarladığınız kurallara uyacak şekilde biçimlendirerek düzenler ve temizler. Prettier'ı çalıştırın ve tüm sekmeleriniz boşluklara dönüştürülecek ve girintileriniz, alıntılarınız vb. de yapılandırmaya uyacak şekilde değiştirilecektir. İdeal kurulumda Prettier, dosyanızı kaydettiğinizde çalışacak ve bu düzenlemeleri sizin için hızlıca yapacaktır.
+Kodunuza katkıda bulunan başka bir kişiyle yapmak isteyeceğiniz son şey [tab ve boşluklar](https://www.google.com/search?q=tabs+vs+spaces) hakkında bir tartışmaya girmektir! Neyse ki, [Prettier](https://prettier.io/) kodunuzu önceden ayarladığınız kurallara uyacak şekilde biçimlendirerek düzenler ve temizler. Prettier'ı çalıştırın ve tüm tab'lar boşluklara dönüştürülecek ve girintileriniz, alıntılarınız vb. de yapılandırmaya uyacak şekilde değiştirilecektir. İdeal kurulumda Prettier, dosyanızı kaydettiğinizde çalışacak ve bu düzenlemeleri sizin için hızlıca yapacaktır.
 
 [Prettier VSCode eklentisini](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) aşağıdaki adımları takip ederek yükleyebilirsiniz:
 
