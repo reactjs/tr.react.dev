@@ -48,7 +48,7 @@ Kodunuza katkıda bulunan başka bir kişiyle yapmak isteyeceğiniz son şey [se
 [Prettier VSCode eklentisini](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) aşağıdaki adımları takip ederek yükleyebilirsiniz:
 
 1. VS Code'u açın
-2. Kısa yolu kullanın (Ctrl/Cmd+P'ye basın)
+2. Hızlı Aç'ı kullanın (Ctrl/Cmd+P'ye basın)
 3. Yapıştırın `ext install esbenp.prettier-vscode`
 4. Enter'a basın
 
