@@ -51,7 +51,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 ```
 
 </Sandpack>
-Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içerisinde barınmaktadır. [React Uygulaması Oluştur](https://create-react-app.dev/)'da uygulamanız `src/App.js` dosyası içinde barınmaktadır. Fakat kurulumunuza bağlı olarak kök bileşeniniz başka bir dosyanın içerisinde olabilir. Eğer dosya tabanlı yönlendirmesi olan bir çatı kullanıyorsanız, kök bileşeniniz her sayfa için ayrı olacaktır.
+Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içerisinde barınmaktadır. [Create React App](https://create-react-app.dev/)'de uygulamanız `src/App.js` dosyası içinde barınmaktadır. Fakat kurulumunuza bağlı olarak kök bileşeniniz başka bir dosyanın içerisinde olabilir. Eğer dosya tabanlı yönlendirmesi olan bir çatı kullanıyorsanız, kök bileşeniniz her sayfa için ayrı olacaktır.
 
 ## Bileşenleri içe ve dışa aktarma {/*exporting-and-importing-a-component*/}
 
@@ -255,7 +255,7 @@ Bu sayfada öğrendikleriniz:
 `Profile` için varsayılan yada adlandırılmış bir dışa aktarma kullanabilirsiniz, ancak hem `App.js` hem de `Gallery.js` için kullandığınız dışa aktarmaya uygun içe aktarma sözdizimini kullandığınızdan emin olunuz! Yukarıdaki derinlemesine incelemede verilen tablodan yararlanabilirsiniz:
 
 
-| Sözdizim         | Dışa aktarma ifadesi                       | İçe aktarma ifadesi                     |
+| Sözdizimi        | Dışa aktarma ifadesi                       | İçe aktarma ifadesi                     |
 | -----------      | -----------                                | -----------                             |
 | Varsayılan       | `export default function Button() {}`      | `import Button from './Button.js';`     |
 | Adlandırılmış    | `export function Button() {}`              | `import { Button } from './Button.js';` |
