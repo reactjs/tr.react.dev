@@ -20,7 +20,7 @@ const ref = useRef(initialValue)
 
 ### `useRef(initialValue)` {/*useref*/}
 
-Bileşeninizin en üst düzeyinde bir [ref](/learn/referencing-values-with-refs) tanımlamak için `useRef`'i çağırın.
+Bir [ref](/learn/referencing-values-with-refs) tanımlamak için `useRef`'i bileşeninizin en üst seviyesinde çağırın.
 
 ```js
 import { useRef } from 'react';
