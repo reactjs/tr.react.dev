@@ -4,7 +4,7 @@ title: useRef
 
 <Intro>
 
-`useRef` render için gerekli olmayan bir değere başvurmanıza izin veren bir React Hook'tur.
+`useRef` render işlemi için gerekli olmayan bir değeri referans almanıza izin veren bir React Hook'tur.
 
 ```js
 const ref = useRef(initialValue)
@@ -36,9 +36,9 @@ function MyComponent() {
 #### Parametreler {/*parameters*/}
 
 
-* `initialValue`: Ref nesnesinin `current` özelliğinin başlangıçta ne olmasını istediğiniz değer. Herhangi türde bir değer olabilir. Bu argüman, ilk render işleminden sonra göz ardı edilir.
+* `initialValue`: Ref nesnesinin `current` özelliğinin başlangıçta olmasını istediğiniz değer. Herhangi türde bir değer olabilir. Bu argüman, ilk render işleminden sonra göz ardı edilir.
 
-#### Döndürür {/*returns*/}
+#### Geri Dönüş Değeri {/*returns*/}
 
 `useRef`, tek bir özelliğe sahip bir nesne döndürür:
 
@@ -51,7 +51,7 @@ Sonraki render işlemlerinde, `useRef` aynı nesneyi döndürecektir.
 * `ref.current` özelliğini değiştirebilirsiniz. State'in aksine, bu değiştirilebilirdir. Ancak, render için kullanılan bir nesne tutuyorsa (örneğin, State'inizin bir parçası), o nesneyi değiştirmemelisiniz.
 * `ref.current` özelliğini değiştirdiğinizde, React bileşeninizi yeniden render etmez. Ref, düz JavaScript bir nesne olduğundan, ne zaman değiştirdiğinizi React fark etmez.
 * Bileşeninizin davranışını öngörülemez hale getireceğinden render işlemi sırasında, `ref.current`'e yazmayın veya okumayın. Ancak [başlangıçta](#avoiding-recreating-the-ref-contents) yapabilirsiniz.
-* Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu davranışı etkilememelidir.
+* Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu, davranışı etkilememelidir
 
 ---
 
@@ -70,7 +70,7 @@ function Stopwatch() {
 
 `useRef` başlangıçta verdiğiniz <CodeStep step={3}>başlangıç değeri</CodeStep> tanımlanmış bir şekilde sadece <CodeStep step={2}>`current`</CodeStep> özelliğine sahip bir <CodeStep step={1}>ref nesnesi</CodeStep> döndürür.
 
-Bir sonraki render işlemlerinde, `useRef` aynı nesneyi döndürecektir. `current` özelliğini değiştirerek bilgi saklayabilir ve daha sonra okuyabilirsiniz. Bu size [state](/reference/react/useState) özelliğini hatırlatabilir, ancak önemli bir fark var.
+Sonraki render işlemlerinde, `useRef` aynı nesneyi döndürecektir. `current` özelliğini değiştirerek bilgi saklayabilir ve daha sonra okuyabilirsiniz. Bu size [state](/reference/react/useState) özelliğini hatırlatabilir, ancak önemli bir fark var.
 
 **Bir ref'i değiştirmek yeniden render işlemine neden olmaz.** Bu, ref'lerin bileşeninizin görsel çıktısını etkilemeyen bilgileri saklamak için mükemmel olduğu anlamına gelir. Örneğin, bir [interval ID](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) saklamak ve daha sonra geri almak istiyorsanız, bunu bir ref içine koyabilirsiniz. Ref içindeki değeri güncellemek için, <CodeStep step={2}>`current` özelliğini</CodeStep> manuel olarak değiştirmeniz gerekir:
 
@@ -267,7 +267,7 @@ Eleman ekrandan kaldırıldığında, React `current` özelliğini `null` olarak
 
 [Ref'lerle DOM'u manipüle etme](/learn/manipulating-the-dom-with-refs) hakkında daha fazla bilgi edinin.
 
- <Recipes titleText="useRef ile DOM'u manipüle etme örnekleri" titleId="examples-dom">
+<Recipes titleText="useRef ile DOM'u manipüle etme örnekleri" titleId="examples-dom">
 
 #### Input'a odaklanma {/*focusing-a-text-input*/}
 
@@ -510,7 +510,7 @@ function Video() {
   // ...
 ```
 
-Normalde, render sırasında `ref.current` yazmaya veya okumaya izin verilmez. Ancak bu senaryoda sorun yoktur çünkü sonuç her zaman aynıdır ve koşul sadece başlatma sırasında çalışır, bu nedenle tamamen öngörülebilir.
+Normalde, render sırasında `ref.current` yazmaya veya okumaya izin verilmez. Ancak bu senaryoda sorun yoktur çünkü sonuç her zaman aynıdır ve koşul sadece başlatma sırasında çalışır, bu nedenle tamamen öngörülebilirdir.
 
 <DeepDive>
 
