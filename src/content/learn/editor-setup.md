@@ -23,7 +23,7 @@ Günümüzün en popüler editörlerinden biri olan [VS Code](https://code.visua
 
 React topluluğunun kullandığı diğer popüler editörler:
 
-* [WebStorm](https://www.jetbrains.com/webstorm/), Javascript için özel olarak tasarlanmış entegre bir geliştirme ortamına sahiptir.
+* [WebStorm](https://www.jetbrains.com/webstorm/), Javascript için özel olarak tasarlanmış entegre bir geliştirme ortamıdır.
 * [Sublime Text](https://www.sublimetext.com/), JSX ve Typescript desteği ve [sözdizimi vurgusu](https://stackoverflow.com/a/70960574/458193) ve otomatik tamamlama özelliğine sahiptir.
 * [Vim](https://www.vim.org/), her türlü metni oluşturmayı ve değiştirmeyi daha verimli hale getirmek için oluşturulmuş, son derece yapılandırılabilir bir metin düzenleyicisidir. Çoğu UNIX sisteminde ve Apple OS X'te "vi" olarak bulunur.
 
