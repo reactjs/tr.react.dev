@@ -4,7 +4,7 @@ title: createContext
 
 <Intro>
 
-`createContext` lets you create a [context](/learn/passing-data-deeply-with-context) that components can provide or read.
+`createContext`, bileşenlerin sağlayabileceği veya okuyabileceği bir [context](/learn/passing-data-deeply-with-context) oluşturmanızı sağlar.
 
 ```js
 const SomeContext = createContext(defaultValue)
@@ -16,11 +16,11 @@ const SomeContext = createContext(defaultValue)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `createContext(defaultValue)` {/*createcontext*/}
 
-Call `createContext` outside of any components to create a context.
+Bir context oluşturmak için bileşenlerin dışından `createContext`'i çağırın.
 
 ```js
 import { createContext } from 'react';
@@ -28,26 +28,26 @@ import { createContext } from 'react';
 const ThemeContext = createContext('light');
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `defaultValue`: The value that you want the context to have when there is no matching context provider in the tree above the component that reads context. If you don't have any meaningful default value, specify `null`. The default value is meant as a "last resort" fallback. It is static and never changes over time.
+* `defaultValue`: Context'i okuyan bileşenlerin üzerinde eşleşen bir context sağlayıcısı olmadığında contextin sahip olmasını istediğiniz değer. Anlamlı bir varsayılan değeriniz yoksa, `null` belirtin. Varsayılan değer, "son çare" olarak başvurulacak bir alternatif olarak düşünülür. Statik ve zamanla asla değişmez.
 
-#### Returns {/*returns*/}
+#### Geri Dönüş Değeri {/*returns*/}
 
-`createContext` returns a context object.
+`createContext` bir context nesnesi döndürür.
 
-**The context object itself does not hold any information.** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext.Provider`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
+**Context nesnesi kendisi herhangi bir bilgi içermez.** Diğer bileşenlerin _hangi_ contexti okuyacağını veya sağlayacağını temsil eder. Genellikle, context değerini belirtmek için bileşenin üstünde [SomeContext.Provider](https://react.dev/reference/react/createContext#provider) kullanır ve bileşenin altında okumak için [useContext(SomeContext)](https://react.dev/reference/react/useContext) çağırırsınız. Context nesnesinin birkaç özelliği vardır:
 
-* `SomeContext.Provider` lets you provide the context value to components.
-* `SomeContext.Consumer` is an alternative and rarely used way to read the context value.
+* `SomeContext.Provider` bilenşenlerin context değerini sağlamanıza olanak tanır.
+* `SomeContext.Consumer` context değerini okumak için nadiren kullanılan alternatif bir yöntemdir.
 
 ---
 
 ### `SomeContext.Provider` {/*provider*/}
 
-Wrap your components into a context provider to specify the value of this context for all components inside:
+Bileşenlerinizin bir context sağlayıcısı ile sarmalayarak içindeki tüm bileşenler için bu contextin değerini belirtin:
 
 ```js
 function App() {
@@ -63,17 +63,18 @@ function App() {
 
 #### Props {/*provider-props*/}
 
-* `value`: The value that you want to pass to all the components reading this context inside this provider, no matter how deep. The context value can be of any type. A component calling [`useContext(SomeContext)`](/reference/react/useContext) inside of the provider receives the `value` of the innermost corresponding context provider above it.
+* `value`: Ne kadar derin olursa olsun, bu sağlayıcının içindeki contexti okuyan tüm bileşenlere aktarmak istediğiniz değer. Context değeri herhangi bir türde olabilir. Sağlayıcı içinde [`useContext(SomeContext)`](/reference/react/useContext) kullanan bir bileşen,
+üzerindeki en içte bulunan ilgili context sağlayıcısının `value` değerini alır.
 
 ---
 
 ### `SomeContext.Consumer` {/*consumer*/}
 
-Before `useContext` existed, there was an older way to read context:
+`useContext` var olmadan önce, contexti okumak için daha eski bir yol vardı:
 
 ```js
 function Button() {
-  // 🟡 Legacy way (not recommended)
+  // 🟡 Eski yöntem (önerilmez)
   return (
     <ThemeContext.Consumer>
       {theme => (
@@ -84,11 +85,11 @@ function Button() {
 }
 ```
 
-Although this older way still works, but **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+Bu eski yöntem hala çalışıyor olsa da, **yeni yazılan kodun contextini [`useContext()`](/reference/react/useContext) ile okunması daha uygundur:**
 
 ```js
 function Button() {
-  // ✅ Recommended way
+  // ✅ Önerilen yöntem
   const theme = useContext(ThemeContext);
   return <button className={theme} />;
 }
@@ -96,17 +97,17 @@ function Button() {
 
 #### Props {/*consumer-props*/}
 
-* `children`: A function. React will call the function you pass with the current context value determined by the same algorithm as [`useContext()`](/reference/react/useContext) does, and render the result you return from this function. React will also re-run this function and update the UI whenever the context from the parent components changes.
+* `children`: Bir fonksiyon. React, üst bileşenlerden gelen contextin güncel değerini [`useContext()`](/reference/react/useContext) ile aynı algoritmayı kullanarak belirleyecek ve bu fonksiyondan döndürdüğünüz sonucu render edecektir. Üst bileşenlerden gelen context değiştiğinde, React bu fonksiyonu tekrar çalıştırır ve UI'yi günceller.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Creating context {/*creating-context*/}
+### Context oluşturma {/*creating-context*/}
 
-Context lets components [pass information deep down](/learn/passing-data-deeply-with-context) without explicitly passing props.
+Context, bileşenlerin [bilgiyi derinlemesine aktarmasına](/learn/passing-data-deeply-with-context) olanak tanır ve açıkça prop'lar geçirmeden yapar.
 
-Call `createContext` outside any components to create one or more contexts.
+Bir veya birden fazla context oluşturmak için bileşenlerin dışında `createContext`'i çağırın.
 
 ```js [[1, 3, "ThemeContext"], [1, 4, "AuthContext"], [3, 3, "'light'"], [3, 4, "null"]]
 import { createContext } from 'react';
@@ -115,7 +116,7 @@ const ThemeContext = createContext('light');
 const AuthContext = createContext(null);
 ```
 
-`createContext` returns a <CodeStep step={1}>context object</CodeStep>. Components can read context by passing it to [`useContext()`](/reference/react/useContext):
+`createContext` bir <CodeStep step={1}>context nesnesi</CodeStep> döndürür. Bileşenler okumak istediği contexti [useContext()](https://react.dev/reference/react/useContext)'e ileterek kullanabilir:
 
 ```js [[1, 2, "ThemeContext"], [1, 7, "AuthContext"]]
 function Button() {
@@ -129,9 +130,9 @@ function Profile() {
 }
 ```
 
-By default, the values they receive will be the <CodeStep step={3}>default values</CodeStep> you have specified when creating the contexts. However, by itself this isn't useful because the default values never change.
+Varsayılan olarak, aldıkları değerler contexti oluştururken belirttiğiniz <CodeStep step={3}>varsayılan değerler</CodeStep> olacaktır. Ancak, varsayılan değerlerin hiçbiri zamanla değişmediği için bu tek başına yararlı değildir.
 
-Context is useful because you can **provide other, dynamic values from your components:**
+Context, **bileşenlerinizden diğer dinamik değerleri sağlayabileceğiniz** için kullanışlıdır:
 
 ```js {8-9,11-12}
 function App() {
@@ -150,15 +151,16 @@ function App() {
 }
 ```
 
-Now the `Page` component and any components inside it, no matter how deep, will "see" the passed context values. If the passed context values change, React will re-render the components reading the context as well.
+Şimdi `Page` bileşeni ve içindeki herhangi bir bileşen, ne kadar derin olursa olsun, iletilen context değerlerini "görecek" ve iletilen context değerleri değişirse, React contexti okuyan bileşenleri yeniden reder edecektir.
 
-[Read more about reading and providing context and see examples.](/reference/react/useContext)
+[Okuma ve sağlama contexti hakkında daha fazla bilgi edinin ve örnekleri görün.](/reference/react/useContext)
 
 ---
 
-### Importing and exporting context from a file {/*importing-and-exporting-context-from-a-file*/}
+### Contexti bir dosyadan içe ve dışa aktarma {/*importing-and-exporting-context-from-a-file*/}
 
-Often, components in different files will need access to the same context. This is why it's common to declare contexts in a separate file. Then you can use the [`export` statement](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) to make context available for other files:
+
+Çoğu zaman, farklı dosyalardaki bileşenlerin aynı contexte erişmesi gerekecektir. Bu nedenle, contextleri ayrı bir dosyada oluşturmak yaygındır. Ardından, diğer dosyalar için contexti kullanılabilir kılmak için [export ifadesini](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) kullanabilirsiniz:
 
 ```js {4-5}
 // Contexts.js
@@ -168,7 +170,7 @@ export const ThemeContext = createContext('light');
 export const AuthContext = createContext(null);
 ````
 
-Components declared in other files can then use the [`import`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/import) statement to read or provide this context:
+Diğer dosyalarda tanımlanan bileşenler, bu contexti okumak veya sağlamak için [`import`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/import) ifadesini kullanabilir:
 
 ```js {2}
 // Button.js
@@ -196,22 +198,22 @@ function App() {
 }
 ```
 
-This works similar to [importing and exporting components.](/learn/importing-and-exporting-components)
+Bu, [bileşenleri içe ve dışa aktarma.](/learn/importing-and-exporting-components) işlemine benzer şekilde çalışır.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun Giderme {/*troubleshooting*/}
 
-### I can't find a way to change the context value {/*i-cant-find-a-way-to-change-the-context-value*/}
+### Context değerini değiştirmenin bir yolunu bulamıyorum {/*i-cant-find-a-way-to-change-the-context-value*/}
 
 
-Code like this specifies the *default* context value:
+Böyle bir kod, *varsayılan* context değerini belirtir:
 
 ```js
 const ThemeContext = createContext('light');
 ```
 
-This value never changes. React only uses this value as a fallback if it can't find a matching provider above.
+Bu değer asla değişmez. React, yalnızca eşleşen bir sağlayıcı bulamazsa bu değeri bir geri dönüş olarak kullanır.
 
-To make context change over time, [add state and wrap components in a context provider.](/reference/react/useContext#updating-data-passed-via-context)
+Contextin zaman içinde değişmesini sağlamak için, [state ekleyin ve bileşenleri context sağlayıcısıyla sarın.](/reference/react/useContext#updating-data-passed-via-context)
 
