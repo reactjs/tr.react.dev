@@ -884,13 +884,13 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Solution>
 
-#### Nested lists in one component {/*nested-lists-in-one-component*/}
+#### Bir bileşende iç içe geçmiş listeler {/*nested-lists-in-one-component*/}
 
-Make a list of recipes from this array! For each recipe in the array, display its name as an `<h2>` and list its ingredients in a `<ul>`.
+Bu diziden bir tarif listesi yapın! Dizideki her bir tarif için tarifin ismini `<h2>` olarak gösterin ve içindekiler kısmını `<ul>` ile gösterin.
 
 <Hint>
 
-This will require nesting two different `map` calls.
+Bunu yapmak için iki `map` metodunu iç içe kullanmalısınız.
 
 </Hint>
 
@@ -928,7 +928,7 @@ export const recipes = [{
 
 <Solution>
 
-Here is one way you could go about it:
+Problemi çözmenin bir yolu şu şekildeydi:
 
 <Sandpack>
 
@@ -974,7 +974,7 @@ export const recipes = [{
 
 </Sandpack>
 
-Each of the `recipes` already includes an `id` field, so that's what the outer loop uses for its `key`. There is no ID you could use to loop over ingredients. However, it's reasonable to assume that the same ingredient won't be listed twice within the same recipe, so its name can serve as a `key`. Alternatively, you could change the data structure to add IDs, or use index as a `key` (with the caveat that you can't safely reorder ingredients).
+Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü bu değeri `anahtar` olarak kullanmakta. İçindekiler kısmındaki döngü için kullanabiliceğimiz bir ID değerine sahip değiliz. Ancak, bir malzeme aynı tarif içinde iki defa bulunmayacağından  dolayı, malzemenin ismini `anahtar` olarak kullanmakta bir sakınca yoktur. Alternatif olarak, veri yapısını ID'ler olacak şekilde değiştirebilir ya da dizini `anahtar` olarak kullanabiliriz (malzemeleri güvenli bir şekilde yeniden sıralayamayacağımız uyarısıyla).
 
 </Solution>
 
