@@ -39,9 +39,9 @@ isteğe bağlı `anahtar`: Açık <Fragment> sözdizimiyle tanımlanan Fragment'
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Returning multiple elements {/*returning-multiple-elements*/}
+### Birden Fazla Eleman Döndürme {/*returning-multiple-elements*/}
 
 Use `Fragment`, or the equivalent `<>...</>` syntax, to group multiple elements together. You can use it to put multiple elements in any place where a single element can go. For example, a component can only return one element, but by using a Fragment you can group multiple elements together and then return them as a group:
 
