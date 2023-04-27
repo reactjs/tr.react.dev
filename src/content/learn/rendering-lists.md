@@ -1,24 +1,24 @@
 ---
-title: Rendering Lists
+title: Listeleri Render Etmek
 ---
 
 <Intro>
 
-You will often want to display multiple similar components from a collection of data. You can use the [JavaScript array methods](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array#) to manipulate an array of data. On this page, you'll use [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) and [`map()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map) with React to filter and transform your array of data into an array of components.
+Genellikle bir veri topluluğundan birden fazla bileşen göstermek isteyeceksiniz. Bir veri dizisini manipule etmek için [JavaScript dizi metodlarını](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array#) kullanabilirsiniz. Bu sayfada, React ile [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) ve [`map()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map) metodlarını kullanarak bir veri dizisini filtreleyecek ve bir bileşen dizisine dönüştüreceksiniz.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to render components from an array using JavaScript's `map()`
-* How to render only specific components using JavaScript's `filter()`
-* When and why to use React keys
+* Javascript'in `map()` metodunu kullanarak bir diziden nasıl bileşenler oluşturulur? 
+* Javascript'in `filter()` metodunu kullanarak yalnızca belirli bileşenler nasıl oluşturulur?
+* React anahtarlarını ne zaman ve neden kullanmalı?
 
 </YouWillLearn>
 
-## Rendering data from arrays {/*rendering-data-from-arrays*/}
+## Dizilerden veri render etmek {/*rendering-data-from-arrays*/}
 
-Say that you have a list of content.
+Aşağıdaki gibi bir içerik listeniz olduğunu düşünelim.
 
 ```js
 <ul>
@@ -30,11 +30,12 @@ Say that you have a list of content.
 </ul>
 ```
 
-The only difference among those list items is their contents, their data. You will often need to show several instances of the same component using different data when building interfaces: from lists of comments to galleries of profile images. In these situations, you can store that data in JavaScript objects and arrays and use methods like [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) to render lists of components from them.
+Bu liste öğeleri arasındaki tek fark içerikleri, verileridir. Arayüzler oluştururken farklı veriler kullanan aynı bileşenin birkaç örneğini göstermeniz gerekebilir: yorum listelerinden profil resimleri galerilerine kadar. Bu gibi durumlarda, gerekli verileri Javascript objeleri ve dizilerinde saklayabilir ve [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ve [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) gibi metodları kullanarak bu verilerden bileşen listeleri oluşturabilirsiniz.
 
-Here’s a short example of how to generate a list of items from an array:
+Aşağıdaki kısa örnekte bir diziden nasıl öğe listesi oluşturulduğunu görebilirsiniz. 
 
-1. **Move** the data into an array:
+
+1. **Aktar** veriyi bir dizi içine: 
 
 ```js
 const people = [
@@ -46,19 +47,19 @@ const people = [
 ];
 ```
 
-2. **Map** the `people` members into a new array of JSX nodes, `listItems`:
+2. **Map** metodu ile `people` üyelerini `listItems` adında yeni bir JSX node dizisiyle eşleştirin:
 
 ```js
 const listItems = people.map(person => <li>{person}</li>);
 ```
 
-3. **Return** `listItems` from your component wrapped in a `<ul>`:
+3. **Döndür** `<ul>` ile sarılmış bileşeninizden `listItems`:
 
 ```js
 return <ul>{listItems}</ul>;
 ```
 
-Here is the result:
+İşte sonuç:
 
 <Sandpack>
 
@@ -85,19 +86,19 @@ li { margin-bottom: 10px; }
 
 </Sandpack>
 
-Notice the sandbox above displays a console error:
+Yukarıdaki sandbox'un bir konsol hatası gösterdiğine dikkat edin:
 
 <ConsoleBlock level="error">
 
-Warning: Each child in a list should have a unique "key" prop.
+Uyarı: Bir listedeki her alt elemanın benzersiz bir "anahtar" prop'u olmalıdır.
 
 </ConsoleBlock>
 
-You'll learn how to fix this error later on this page. Before we get to that, let's add some structure to your data.
+Bu hatayı daha sonra bu sayfada nasıl düzelteceğinizi öğreneceksiniz. Buna gelmeden önce, verilerinize biraz yapı ekleyelim.
 
-## Filtering arrays of items {/*filtering-arrays-of-items*/}
+## Öğe dizilerini filtreleme {/*filtering-arrays-of-items*/}
 
-This data can be structured even more.
+Bu veriler daha da yapılandırılabilir.
 
 ```js
 const people = [{
@@ -121,11 +122,11 @@ const people = [{
 }];
 ```
 
-Let's say you want a way to only show people whose profession is `'chemist'`. You can use JavaScript's `filter()` method to return just those people. This method takes an array of items, passes them through a “test” (a function that returns `true` or `false`), and returns a new array of only those items that passed the test (returned `true`).
+Diyelim ki sadece mesleği `'chemist'` olan kişileri göstermenin bir yolunu istiyorsunuz. Javacript'in `filter()` metodunu kullanarak yalnızca bu kişileri döndürebilirsiniz. Bu yöntem, bir öğe dizisini alır, onları bir "testten" (`doğru` veya `yanlış` döndüren bir test) geçirir ve yalnızca testi geçen (`doğru` olarak döndürülen) öğelerden oluşan yeni bir dizi döndürür.
 
-You only want the items where `profession` is `'chemist'`. The "test" function for this looks like `(person) => person.profession === 'chemist'`. Here's how to put it together:
+Sadece mesleği `'chemist'` olan kişileri istiyorsunuz. Bunun için "test" fonksiyonu `(person) => person.profession === 'chemist'` şeklindedir. Bunu nasıl bir araya getireceğiniz aşağıda gösterilmiştir:
 
-1. **Create** a new array of just “chemist” people, `chemists`, by calling `filter()` on the `people` filtering by `person.profession === 'chemist'`:
+1. Sadece "kimyacı" mesleğindeki insanlardan yeni bir `chemists` dizisi **oluştur**, bunun için `filter()` metodu `people` dizisinde `person.profession === 'chemist'` şeklinde kullanılır:
 
 ```js
 const chemists = people.filter(person =>
@@ -133,7 +134,7 @@ const chemists = people.filter(person =>
 );
 ```
 
-2. Now **map** over `chemists`:
+2. Şimdi `chemists` dizisinde **map** metodu kullanılır:
 
 ```js {1,13}
 const listItems = chemists.map(person =>
@@ -151,7 +152,7 @@ const listItems = chemists.map(person =>
 );
 ```
 
-3. Lastly, **return** the `listItems` from your component:
+3. Son olarak, bileşeninizden `listItems` **döndürülür**:
 
 ```js
 return <ul>{listItems}</ul>;
@@ -244,7 +245,8 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Pitfall>
 
-Arrow functions implicitly return the expression right after `=>`, so you didn't need a `return` statement:
+Ok fonksiyonları, "=>" ifadesinden hemen sonra ifadeyi hemen döndürür, böyle bir `return` ifadesine ihtiyacınız olmaz:
+
 
 ```js
 const listItems = chemists.map(person =>
@@ -252,7 +254,7 @@ const listItems = chemists.map(person =>
 );
 ```
 
-However, **you must write `return` explicitly if your `=>` is followed by a `{` curly brace!**
+Ancak, **`=>` ifadesinden sonra `{` parentezi kullandıysanız, `return` ifadesini yazmak zorundasınız**
 
 ```js
 const listItems = chemists.map(person => { // Curly brace
@@ -260,21 +262,21 @@ const listItems = chemists.map(person => { // Curly brace
 });
 ```
 
-Arrow functions containing `=> {` are said to have a ["block body".](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#function_body) They let you write more than a single line of code, but you *have to* write a `return` statement yourself. If you forget it, nothing gets returned!
+`=> {` içeren ok fonksiyonların bir ["blok gövdesi".](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#function_body) olduğu söylenir. Ok fonksiyonları tek bir kod satırından daha fazlasını yazmanıza olanak verir ancak `return` ifadesini yazmanız gerekmektedir. Eğer unutursanız, fonksiyonunuz geri hiçbir şey döndürmez!
 
 </Pitfall>
 
-## Keeping list items in order with `key` {/*keeping-list-items-in-order-with-key*/}
+## `anahtar` ile liste öğelerini sıralı tutmak {/*keeping-list-items-in-order-with-key*/}
 
-Notice that all the sandboxes above show an error in the console:
+Yukarıdaki tüm sandboxların konsolda bir hata gösterdiğine dikkat edin:
 
 <ConsoleBlock level="error">
 
-Warning: Each child in a list should have a unique "key" prop.
+Uyarı: Bir listedeki her alt elemanın benzersiz bir "anahtar" prop'u olmalıdır.
 
 </ConsoleBlock>
 
-You need to give each array item a `key` -- a string or a number that uniquely identifies it among other items in that array:
+Herbir dizi öğesine bir `anahtar` vermelisiniz -- dizideki herbir öğeyi birbirinden ayırt edecek şekilde o öğeye bir string ya da numara vermeniz gerekmektedir:
 
 ```js
 <li key={person.id}>...</li>
@@ -282,13 +284,13 @@ You need to give each array item a `key` -- a string or a number that uniquely i
 
 <Note>
 
-JSX elements directly inside a `map()` call always need keys!
+Her `map()` metodu kullanıldığında JSX elementleri bir anahtara ihtiyaç duyar.
 
 </Note>
 
-Keys tell React which array item each component corresponds to, so that it can match them up later. This becomes important if your array items can move (e.g. due to sorting), get inserted, or get deleted. A well-chosen `key` helps React infer what exactly has happened, and make the correct updates to the DOM tree.
+Anahtarlar, React'e her bir bileşenin hangi dizi öğesine karşılık geldiğini söylerek React'in daha sonra bu öğeleri eşleştirmesini sağlar. Bu durum, eğer dizi öğeleriniz yer değiştiriyorsa (örneğin sıralaması değişiyorsa), yeni öğeler eklenip veya çıkartılabiliyorsa daha önemli bir hale gelir. İyi seçilmiş bir `anahtar` React'in değişen öğelerde ne olduğunu anlamasına ve DOM ağacında doğru güncellemeleri yapmasına yardımcı olur.
 
-Rather than generating keys on the fly, you should include them in your data:
+Anında anahtar oluşturmak yerine, anahtarları verilerinize dahil etmelisiniz:
 
 <Sandpack>
 
@@ -316,31 +318,31 @@ export default function List() {
 
 ```js data.js active
 export const people = [{
-  id: 0, // Used in JSX as a key
+  id: 0, // JSX için anahtar olarak kullanılır
   name: 'Creola Katherine Johnson',
   profession: 'mathematician',
   accomplishment: 'spaceflight calculations',
   imageId: 'MK3eW3A'
 }, {
-  id: 1, // Used in JSX as a key
+  id: 1, // JSX için anahtar olarak kullanılır
   name: 'Mario José Molina-Pasquel Henríquez',
   profession: 'chemist',
   accomplishment: 'discovery of Arctic ozone hole',
   imageId: 'mynHUSa'
 }, {
-  id: 2, // Used in JSX as a key
+  id: 2, // JSX için anahtar olarak kullanılır
   name: 'Mohammad Abdus Salam',
   profession: 'physicist',
   accomplishment: 'electromagnetism theory',
   imageId: 'bE7W1ji'
 }, {
-  id: 3, // Used in JSX as a key
+  id: 3, // JSX için anahtar olarak kullanılır
   name: 'Percy Lavon Julian',
   profession: 'chemist',
   accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
   imageId: 'IOjWm71'
 }, {
-  id: 4, // Used in JSX as a key
+  id: 4, // JSX için anahtar olarak kullanılır
   name: 'Subrahmanyan Chandrasekhar',
   profession: 'astrophysicist',
   accomplishment: 'white dwarf star mass calculations',
@@ -374,11 +376,11 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <DeepDive>
 
-#### Displaying several DOM nodes for each list item {/*displaying-several-dom-nodes-for-each-list-item*/}
+#### Her liste öğesi için birkaç DOM node'u göstermek {/*displaying-several-dom-nodes-for-each-list-item*/}
 
-What do you do when each item needs to render not one, but several DOM nodes?
+Her öğenin bir değil birkaç DOM node'u render etmesi gerektiğinde ne yaparsınız?
 
-The short [`<>...</>` Fragment](/reference/react/Fragment) syntax won't let you pass a key, so you need to either group them into a single `<div>`, or use the slightly longer and [more explicit `<Fragment>` syntax:](/reference/react/Fragment#rendering-a-list-of-fragments)
+Kısa [`<>...</>` Fragment](/reference/react/Fragment) syntax'ı bir anahtar belirlemenize izin vermez, bu nedenle tüm elementleri bir `<div>` elementi içinde gruplandırmanız ya da daha uzun olan [`<Fragment>` syntax'i](/reference/react/Fragment#rendering-a-list-of-fragments) kullanmalısınız.
 
 ```js
 import { Fragment } from 'react';
@@ -393,46 +395,46 @@ const listItems = people.map(person =>
 );
 ```
 
-Fragments disappear from the DOM, so this will produce a flat list of `<h1>`, `<p>`, `<h1>`, `<p>`, and so on.
+Fragmentler DOM'dan kaybolur, bu nedenle `<h1>`, `<p>`, `<h1>`, `<p>` gibi elementlerden oluşan düz bir liste oluşturulur.
 
 </DeepDive>
 
-### Where to get your `key` {/*where-to-get-your-key*/}
+### `anahtar` nereden gelir {/*where-to-get-your-key*/}
 
-Different sources of data provide different sources of keys:
+Farklı veri kaynakları, farklı anahtar kaynakları sağlar:
 
-* **Data from a database:** If your data is coming from a database, you can use the database keys/IDs, which are unique by nature.
-* **Locally generated data:** If your data is generated and persisted locally (e.g. notes in a note-taking app), use an incrementing counter, [`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID) or a package like [`uuid`](https://www.npmjs.com/package/uuid) when creating items.
+* **Veritabanından gelen veri:** Eğer veriniz bir veritabanından geliyorsa, doğasında ötürü zaten benzersiz olan veritabanı anahtarları/ID'leri kullanılabilir.
+* **Yerel olarak oluşturulmuş veriler:** Eğer veriniz yerel olarak oluşturuluyor ve saklanıyorsa (örneğin not alma aplikasyonundaki notlar), sıralı olarak artan numaralar [`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID) ya da [`uuid`](https://www.npmjs.com/package/uuid) gibi bir paket kullanabilirsiniz.
 
-### Rules of keys {/*rules-of-keys*/}
+### Anahtarların kuralları {/*rules-of-keys*/}
 
-* **Keys must be unique among siblings.** However, it’s okay to use the same keys for JSX nodes in _different_ arrays.
-* **Keys must not change** or that defeats their purpose! Don't generate them while rendering.
+* **Anahtarl kardeşler arasında benzersiz olmalıdır.** Ancak, _different_ dizilerdeki JSX node'ları için aynı anahtarları kullanmakta bir sakınca yoktur.
+* **Anahtarlar değişmemelidir.** yoksa bu anahtarların bütün amacını bozar! Anahtarları render etme sırasında üretmeyiniz.
 
-### Why does React need keys? {/*why-does-react-need-keys*/}
+### React neden anahtarlara ihtiyaç duyar? {/*why-does-react-need-keys*/}
 
-Imagine that files on your desktop didn't have names. Instead, you'd refer to them by their order -- the first file, the second file, and so on. You could get used to it, but once you delete a file, it would get confusing. The second file would become the first file, the third file would be the second file, and so on.
+Masaüstünüzdeki dosyaların isimlerinin olmadığını düşünün. Imagine that files on your desktop didn't have names. Bunun yerine, dosyalara sıralarına göre refere edersiniz -- ilk dosya, ikinci dosya gibi. Bu sisteme alışabilirsiniz ama bir dosyayı sildiğiniz zaman durum kafa karıştırıcı bir hale gelirdi. İkinci dosya birinci, üçüncü dosya ise ikinci dosya olurdu gibi.
 
-File names in a folder and JSX keys in an array serve a similar purpose. They let us uniquely identify an item between its siblings. A well-chosen key provides more information than the position within the array. Even if the _position_ changes due to reordering, the `key` lets React identify the item throughout its lifetime.
+Dosya isimleri de dizilerdeki JSX anahtarları aynı amaca hizmet etmektedir. Anahtarlar, kardeşleri arasında bir öğeyi benzersiz bir şekilde tanımlamamıza olanak sağlar. İyi seçilmiş bir anahtar, dizi içindeki pozisyondan daha fazla bilgi sağlar. Öğenin _position_ yeniden sıralama nedeniyle değişse bile, `anahtar` React'in öğeyi döngü boyunca tanımasını sağlar.
 
 <Pitfall>
 
-You might be tempted to use an item's index in the array as its key. In fact, that's what React will use if you don't specify a `key` at all. But the order in which you render items will change over time if an item is inserted, deleted, or if the array gets reordered. Index as a key often leads to subtle and confusing bugs.
+Anahtar olarak dizideki bir öğenin dizinini kullanmak isteyebilirsiniz. Aslında, hiç bir `anahtar` belirtmezseniz React'in kullanacağı anahtar budur. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak dizin, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
 
-Similarly, do not generate keys on the fly, e.g. with `key={Math.random()}`. This will cause keys to never match up between renders, leading to all your components and DOM being recreated every time. Not only is this slow, but it will also lose any user input inside the list items. Instead, use a stable ID based on the data.
+Benzer şekilde, anahtarları o anda oluşturmayın, örneğin `anahtar={Math.random()}` ile oluşturulan anahtarlar. Bu, anahtarların render etmeler arasında eşleşmemesine neden olarak tüm bileşenlerinizin ve DOM'un her seferinde yeniden oluşturulmasına yol açar. Bu sadece yavaş olmakla kalmaz, aynı zamanda liste öğeleri içindeki herhangi bir kullanıcı girdisini de kaybeder. Bunun yerine, verilere dayalı sabit bir ID kullanılmalıdır.
 
-Note that your components won't receive `key` as a prop. It's only used as a hint by React itself. If your component needs an ID, you have to pass it as a separate prop: `<Profile key={id} userId={id} />`.
+Bileşenlerinizin prop olarak `anahtar` almayacağını unutmayın. Yalnıcaz React'in kendisi tarafından bir işaret olarak kullanılırlar. Eğer bileşeninizin bir ID'ye ihtiyacı varsa, ID'yi ayrı bir prop olarak şu şekilde kullanabilirsiniz: `<Profile key={id} userId={id} />`.
 
 </Pitfall>
 
 <Recap>
 
-On this page you learned:
+Bu sayfada şunları öğrendiniz:
 
-* How to move data out of components and into data structures like arrays and objects.
-* How to generate sets of similar components with JavaScript's `map()`.
-* How to create arrays of filtered items with JavaScript's `filter()`.
-* Why and how to set `key` on each component in a collection so React can keep track of each of them even if their position or data changes.
+* Verileri bileşenlerin dışına, diziler ve objeler gibi veri yapılarına taşıma.
+* JavaScript'in `map()` metodu ile benzer bileşen setleri oluşturma.
+* JavaScript'in `filter()` metodu ile filterenmiş öğe dizileri oluşturma.
+* React'in, konumları ya da verileri değişse bile her bir koleksiyondaki her bileşeni takip edebilmesi için `anahtar` neden ve nasıl kullanılır. 
 
 </Recap>
 
