@@ -442,11 +442,11 @@ Bu sayfada şunları öğrendiniz:
 
 <Challenges>
 
-#### Splitting a list in two {/*splitting-a-list-in-two*/}
+#### Bir listeyi ikiye bölme {/*splitting-a-list-in-two*/}
 
-This example shows a list of all people.
+Bu örnek tüm insanların bir listesini göstermektedir.
 
-Change it to show two separate lists one after another: **Chemists** and **Everyone Else.** Like previously, you can determine whether a person is a chemist by checking if `person.profession === 'chemist'`.
+Örneği birbiri ardına iki ayrı liste gösterecek şekilde değiştirin: **Chemists** ve **Everyone Else.** Daha önce yaptığımız gibi, bir insanın "chemist" olup olmadığını `person.profession === 'chemist'` ifadesi ile tespit edebilirsiniz.
 
 <Sandpack>
 
@@ -537,7 +537,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Solution>
 
-You could use `filter()` twice, creating two separate arrays, and then `map` over both of them:
+`filter()` metodunu iki defa kullanıp iki farklı dizi oluşturabilir ardından `map` metodunu kullanabilirsiniz:
 
 <Sandpack>
 
@@ -650,9 +650,9 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Sandpack>
 
-In this solution, the `map` calls are placed directly inline into the parent `<ul>` elements, but you could introduce variables for them if you find that more readable.
+Bu çözümde, `map` metodu doğrudan üst `<ul>` elementinin satır içine yerleştirilebilir, ancak daha okunabilir olmasını istiyorsanız yeni değişkenler kullanabilirsiniz.
 
-There is still a bit duplication between the rendered lists. You can go further and extract the repetitive parts into a `<ListSection>` component:
+Render edilmiş listeler arasında hala bazı tekrarlamalar mevcut. Çözümü biraz daha ileri götürmek isterseniz tekrar eden bölümleri yeni bir `<ListSection>` bileşenine aktarabilirsiniz:
 
 <Sandpack>
 
@@ -764,9 +764,9 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Sandpack>
 
-A very attentive reader might notice that with two `filter` calls, we check each person's profession twice. Checking a property is very fast, so in this example it's fine. If your logic was more expensive than that, you could replace the `filter` calls with a loop that manually constructs the arrays and checks each person once.
+Çok dikkatli bir okuyucu, iki defa `filter` metodunu kullanmak her kişinin mesleğinin iki defa kontrol edilmesine sebep olacağını görmüştür. Bir özelliği kontrol etmek çok hızlıdır, bu nedenle bu örnek bir sorun yaratmayacaktır. Ancak kullandığınız mantığın hesaplanması pahalıysa `filter` metodunu, dizileri manuel olarak oluşturan ve her kişiyi bir kez kontrol eden bir döngü ile değiştirebilirsiniz.
 
-In fact, if `people` never change, you could move this code out of your component. From React's perspective, all that matters is that you give it an array of JSX nodes in the end. It doesn't care how you produce that array:
+Aslında, eğer `people` hiç değişmiyorsa, bu kodu bileşeninizden çıkarabilirsiniz. React'in perspektifine göre, önemli olan tek şey sonunda React'e bir dizi JSX node'u vermenizdir. React diziyi nasıl ürettiğiniz ile ilgilenmez:
 
 <Sandpack>
 
