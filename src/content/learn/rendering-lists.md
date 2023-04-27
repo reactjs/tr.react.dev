@@ -978,9 +978,9 @@ Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü
 
 </Solution>
 
-#### Extracting a list item component {/*extracting-a-list-item-component*/}
+#### Bir liste öğesi bileşenini çıkarma {/*extracting-a-list-item-component*/}
 
-This `RecipeList` component contains two nested `map` calls. To simplify it, extract a `Recipe` component from it which will accept `id`, `name`, and `ingredients` props. Where do you place the outer `key` and why?
+`RecipeList` bileşeni iç içe iki defa `map` metodunu kullanmaktadır. Bu işlemin basitleştirmek için, `id`, `name`, ve `ingredients` prop'larını alacak olan yeni bir `Recipe` bileşeni oluşturun. Dıştaki `anahtar` nereye ve neden yerleştirirsiniz?
 
 <Sandpack>
 
@@ -1028,7 +1028,7 @@ export const recipes = [{
 
 <Solution>
 
-You can copy-paste the JSX from the outer `map` into a new `Recipe` component and return that JSX. Then you can change `recipe.name` to `name`, `recipe.id` to `id`, and so on, and pass them as props to the `Recipe`:
+Dıştaki `map` metodundaki JSX'i yeni bir `Recipe` bileşenine kopyalayıp yapıştırabilir ve bu JSX'i geri döndürebilirsiniz. Daha sonra `recipe.name`'i `name`'e, `recipe.id`'yi  `id`'ye dönüştürüp prop olarak `Recipe` bileşenine aktarabilirsiniz:
 
 <Sandpack>
 
@@ -1080,9 +1080,9 @@ export const recipes = [{
 
 </Sandpack>
 
-Here, `<Recipe {...recipe} key={recipe.id} />` is a syntax shortcut saying "pass all properties of the `recipe` object as props to the `Recipe` component". You could also write each prop explicitly: `<Recipe id={recipe.id} name={recipe.name} ingredients={recipe.ingredients} key={recipe.id} />`.
+Burada, `<Recipe {...recipe} key={recipe.id} />` syntax'ı `recipe` objesinin tüm özelliklerini `Recipe` bileşenine prop olarak aktarmanın kısa bir yoludur. Ayrıca her bir prop'u açıkça şu şekilde yazabilirsiniz: `<Recipe id={recipe.id} name={recipe.name} ingredients={recipe.ingredients} key={recipe.id} />`.
 
-**Note that the `key` is specified on the `<Recipe>` itself rather than on the root `<div>` returned from `Recipe`.** This is because this `key` is needed directly within the context of the surrounding array. Previously, you had an array of `<div>`s so each of them needed a `key`, but now you have an array of `<Recipe>`s. In other words, when you extract a component, don't forget to leave the `key` outside the JSX you copy and paste.
+**`anahtar`'ın `Recipe`'den döndürülen root `<div>` yerine `<Recipe>` üzerinde kullanıldığına dikkat edin.** Bunun nedeni, `anahtar`'ın doğrudan çevreleyen dizi bağlamında gerekli olmasıdır. Önceden, bir `<div>` diziniz vardı, dolayısıyla her birinin bir `anahtar` ihtiyacı vardı. Ancak artık bir `<Recipe>` diziniz var. Diğer bir deyişle, yeni bir bileşen çıkarttığınız zaman, `anahtar`'ı kopyalayıp yapıştırdığınız JSX'in dışında bırakmayı unutmayın.
 
 </Solution>
 
