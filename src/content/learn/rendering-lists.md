@@ -419,7 +419,7 @@ Dosya isimleri de dizilerdeki JSX anahtarları aynı amaca hizmet etmektedir. An
 
 <Pitfall>
 
-Anahtar olarak dizideki bir öğenin dizinini kullanmak isteyebilirsiniz. Aslında, hiç bir `anahtar` belirtmezseniz React'in kullanacağı anahtar budur. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak dizin, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
+Anahtar olarak dizideki bir öğenin indeksini kullanmak isteyebilirsiniz. Aslında, hiç bir `anahtar` belirtmezseniz React'in kullanacağı anahtar budur. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak indeksi kullanmak, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
 
 Benzer şekilde, anahtarları o anda oluşturmayın, örneğin `anahtar={Math.random()}` ile oluşturulan anahtarlar. Bu, anahtarların render etmeler arasında eşleşmemesine neden olarak tüm bileşenlerinizin ve DOM'un her seferinde yeniden oluşturulmasına yol açar. Bu sadece yavaş olmakla kalmaz, aynı zamanda liste öğeleri içindeki herhangi bir kullanıcı girdisini de kaybeder. Bunun yerine, verilere dayalı sabit bir ID kullanılmalıdır.
 
@@ -974,11 +974,11 @@ export const recipes = [{
 
 </Sandpack>
 
-Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü bu değeri `anahtar` olarak kullanmakta. İçindekiler kısmındaki döngü için kullanabiliceğimiz bir ID değerine sahip değiliz. Ancak, bir malzeme aynı tarif içinde iki defa bulunmayacağından  dolayı, malzemenin ismini `anahtar` olarak kullanmakta bir sakınca yoktur. Alternatif olarak, veri yapısını ID'ler olacak şekilde değiştirebilir ya da dizini `anahtar` olarak kullanabiliriz (malzemeleri güvenli bir şekilde yeniden sıralayamayacağımız uyarısıyla).
+Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü bu değeri `anahtar` olarak kullanmakta. İçindekiler kısmındaki döngü için kullanabiliceğimiz bir ID değerine sahip değiliz. Ancak, bir malzeme aynı tarif içinde iki defa bulunmayacağından  dolayı, malzemenin ismini `anahtar` olarak kullanmakta bir sakınca yoktur. Alternatif olarak, veri yapısını ID'ler olacak şekilde değiştirebilir ya da indeksi `anahtar` olarak kullanabiliriz (malzemeleri güvenli bir şekilde yeniden sıralayamayacağımız uyarısıyla).
 
 </Solution>
 
-#### Bir liste öğesi bileşenini çıkarma {/*extracting-a-list-item-component*/}
+#### Bir liste öğesi bileşeni çıkarma {/*extracting-a-list-item-component*/}
 
 `RecipeList` bileşeni iç içe iki defa `map` metodunu kullanmaktadır. Bu işlemin basitleştirmek için, `id`, `name`, ve `ingredients` prop'larını alacak olan yeni bir `Recipe` bileşeni oluşturun. Dıştaki `anahtar` nereye ve neden yerleştirirsiniz?
 
@@ -1086,9 +1086,9 @@ Burada, `<Recipe {...recipe} key={recipe.id} />` syntax'ı `recipe` objesinin t�
 
 </Solution>
 
-#### List with a separator {/*list-with-a-separator*/}
+#### Ayraç içeren liste {/*list-with-a-separator*/}
 
-This example renders a famous haiku by Katsushika Hokusai, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
+Bu örnek, Katsushika Hokusai'nin her satırı `<p>` elementi içinde olacak şekilde yazılmış ünlü bir haiku'sunu göstermektedir. Bizim görevimiz, her paragrafın arasına gelecek bir `<hr />` ayırıcı elementi eklemektir. Ortaya şöyle bir yapı çıkmalıdır:
 
 ```js
 <article>
@@ -1100,7 +1100,7 @@ This example renders a famous haiku by Katsushika Hokusai, with each line wrappe
 </article>
 ```
 
-A haiku only contains three lines, but your solution should work with any number of lines. Note that `<hr />` elements only appear *between* the `<p>` elements, not in the beginning or the end!
+Bir haiku yalnızca üç satır içerir ancak yapacağınız çözüm herhangi bir sayıda satırla da çalışmalıdır. `<hr />` elementinin `<p>` elementinin yalnızca *arasında* olduğuna, başında ya da sonunda olmadığına dikkat edin!
 
 <Sandpack>
 
@@ -1143,17 +1143,17 @@ hr {
 
 </Sandpack>
 
-(This is a rare case where index as a key is acceptable because a poem's lines will never reorder.)
+(Burası indeksi anahtar olarak kullanmakta sakınca olmadağı nadir durumlardan biridir çünkü şiirin satırlarının yerleri hiçbir zaman değişmeyecektir.)
 
 <Hint>
 
-You'll either need to convert `map` to a manual loop, or use a fragment.
+Burada `map` metodu yerine manuel bir döngü kullanmanız ya da bir fragment kullanmanız gerekmektedir.
 
 </Hint>
 
 <Solution>
 
-You can write a manual loop, inserting `<hr />` and `<p>...</p>` into the output array as you go:
+Output dizisine `<hr />` ve `<p>...</p>` elementleri ekleyerek manuel bir döngü yazabilirsiniz:
 
 <Sandpack>
 
@@ -1169,7 +1169,7 @@ const poem = {
 export default function Poem() {
   let output = [];
 
-  // Fill the output array
+  // Output dizisine ekleyin
   poem.lines.forEach((line, i) => {
     output.push(
       <hr key={i + '-separator'} />
@@ -1180,7 +1180,7 @@ export default function Poem() {
       </p>
     );
   });
-  // Remove the first <hr />
+  // İlk <hr /> elementi silin
   output.shift();
 
   return (
@@ -1208,9 +1208,9 @@ hr {
 
 </Sandpack>
 
-Using the original line index as a `key` doesn't work anymore because each separator and paragraph are now in the same array. However, you can give each of them a distinct key using a suffix, e.g. `key={i + '-text'}`.
+Şiirin satır indeksini `anahtar` olarak kullanmak artık işe yaramayacaktır çünkü artık her ayraç ve paragraf aynı dizide bulunmakta. Ancak, bir sonek kullanarak her birine ayrı bir anahtar verebilirsiniz, örneğin `key={i + '-text'}`.
 
-Alternatively, you could render a collection of fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+Alternatif olarak, `<hr />` ve `<p>...</p>` elementlerini içeren fragmentler render edebilirsiniz. Ancak, `<>...</>` kısa syntax'i anahtarları prop olarak alamaz bu yüzden `<Fragment>` olarak kullanmanız gerekmektedir:
 
 <Sandpack>
 
@@ -1256,7 +1256,7 @@ hr {
 
 </Sandpack>
 
-Remember, fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+Şunu unutmayın, fragmentler (`<> </>` şeklinde yazılır) fazladan `<div>`ler kullanmadan JSX node'larını gruplamanıza izin verirler.
 
 </Solution>
 
