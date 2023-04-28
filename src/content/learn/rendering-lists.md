@@ -4,7 +4,7 @@ title: Listeleri Render Etmek
 
 <Intro>
 
-Genellikle bir veri topluluğundan birden fazla bileşen göstermek isteyeceksiniz. Bir veri dizisini manipule etmek için [JavaScript dizi metodlarını](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array#) kullanabilirsiniz. Bu sayfada, React ile [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) ve [`map()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map) metodlarını kullanarak bir veri dizisini filtreleyecek ve bir bileşen dizisine dönüştüreceksiniz.
+Genellikle bir veri topluluğundan birden fazla benzer bileşen göstermek isteyeceksiniz. Bir veri dizisini manipule etmek için [JavaScript dizi metodlarını](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array#) kullanabilirsiniz. Bu sayfada, React ile [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) ve [`map()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map) metodlarını kullanarak bir veri dizisini filtreleyecek ve bir bileşen dizisine dönüştüreceksiniz.
 
 </Intro>
 
@@ -12,13 +12,13 @@ Genellikle bir veri topluluğundan birden fazla bileşen göstermek isteyeceksin
 
 * Javascript'in `map()` metodunu kullanarak bir diziden nasıl bileşenler oluşturulur? 
 * Javascript'in `filter()` metodunu kullanarak yalnızca belirli bileşenler nasıl oluşturulur?
-* React anahtarlarını ne zaman ve neden kullanmalı?
+* React anahtarlarını ne zaman ve neden kullanmalıyız?
 
 </YouWillLearn>
 
 ## Dizilerden veri render etmek {/*rendering-data-from-arrays*/}
 
-Aşağıdaki gibi bir içerik listeniz olduğunu düşünelim.
+Aşağıdaki gibi bir listeniz olduğunu düşünelim.
 
 ```js
 <ul>
@@ -30,12 +30,12 @@ Aşağıdaki gibi bir içerik listeniz olduğunu düşünelim.
 </ul>
 ```
 
-Bu liste öğeleri arasındaki tek fark içerikleri, verileridir. Arayüzler oluştururken farklı veriler kullanan aynı bileşenin birkaç örneğini göstermeniz gerekebilir: yorum listelerinden profil resimleri galerilerine kadar. Bu gibi durumlarda, gerekli verileri Javascript objeleri ve dizilerinde saklayabilir ve [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ve [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) gibi metodları kullanarak bu verilerden bileşen listeleri oluşturabilirsiniz.
+Bu liste öğeleri arasındaki tek fark içerikleri, verileridir. Arayüzler oluştururken farklı veriler kullanan aynı bileşenin birkaç örneğini göstermeniz gerekebilir: yorum listeleri ya da profil resimleri galerileri gibi. Bu gibi durumlarda, gerekli verileri Javascript objeleri ve dizilerinde saklayabilir ve [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ve [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) gibi metodları kullanarak bu verilerden bileşen listeleri oluşturabilirsiniz.
 
 Aşağıdaki kısa örnekte bir diziden nasıl öğe listesi oluşturulduğunu görebilirsiniz. 
 
 
-1. **Aktar** veriyi bir dizi içine: 
+1. Verinizi bir dizi içine **aktarın**: 
 
 ```js
 const people = [
@@ -47,13 +47,13 @@ const people = [
 ];
 ```
 
-2. **Map** metodu ile `people` üyelerini `listItems` adında yeni bir JSX node dizisiyle eşleştirin:
+2. **Map** metodu ile `people` üyelerini `listItems` adında yeni bir JSX node dizisine atayın:
 
 ```js
 const listItems = people.map(person => <li>{person}</li>);
 ```
 
-3. **Döndür** `<ul>` ile sarılmış bileşeninizden `listItems`:
+3. **Return** ifadesini kullanarak `<ul>` elementi içinde `listItems`'ı döndürün:
 
 ```js
 return <ul>{listItems}</ul>;
@@ -96,7 +96,7 @@ Uyarı: Bir listedeki her alt elemanın benzersiz bir "anahtar" prop'u olmalıd�
 
 Bu hatayı daha sonra bu sayfada nasıl düzelteceğinizi öğreneceksiniz. Buna gelmeden önce, verilerinize biraz yapı ekleyelim.
 
-## Öğe dizilerini filtreleme {/*filtering-arrays-of-items*/}
+## Bir diziyi filtreleme {/*filtering-arrays-of-items*/}
 
 Bu veriler daha da yapılandırılabilir.
 
@@ -122,11 +122,11 @@ const people = [{
 }];
 ```
 
-Diyelim ki sadece mesleği `'chemist'` olan kişileri göstermenin bir yolunu istiyorsunuz. Javacript'in `filter()` metodunu kullanarak yalnızca bu kişileri döndürebilirsiniz. Bu yöntem, bir öğe dizisini alır, onları bir "testten" (`doğru` veya `yanlış` döndüren bir test) geçirir ve yalnızca testi geçen (`doğru` olarak döndürülen) öğelerden oluşan yeni bir dizi döndürür.
+Diyelim ki sadece mesleği `'chemist'` olan kişileri göstermenin bir yolunu istiyorsunuz. Javacript'in `filter()` metodunu kullanarak yalnızca bu kişileri döndürebilirsiniz. Bu yöntem, bir diziyi alır, onları bir "testten" (`doğru` veya `yanlış` döndüren bir test) geçirir ve yalnızca testi geçen (`doğru` olarak döndürülen) öğelerden oluşan yeni bir dizi oluşturur.
 
 Sadece mesleği `'chemist'` olan kişileri istiyorsunuz. Bunun için "test" fonksiyonu `(person) => person.profession === 'chemist'` şeklindedir. Bunu nasıl bir araya getireceğiniz aşağıda gösterilmiştir:
 
-1. Sadece "kimyacı" mesleğindeki insanlardan yeni bir `chemists` dizisi **oluştur**, bunun için `filter()` metodu `people` dizisinde `person.profession === 'chemist'` şeklinde kullanılır:
+1. Sadece "chemist" mesleğindeki insanlardan yeni bir `chemists` dizisi **oluştur**, bunun için `filter()` metodunu `people` dizisinde `person.profession === 'chemist'` şeklinde kullanabilirsin:
 
 ```js
 const chemists = people.filter(person =>
@@ -245,7 +245,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Pitfall>
 
-Ok fonksiyonları, "=>" ifadesinden hemen sonra ifadeyi hemen döndürür, böyle bir `return` ifadesine ihtiyacınız olmaz:
+Ok fonksiyonları, "=>" ifadesinden sonra ifadeyi hemen döndürür, böylece bir `return` ifadesine ihtiyacınız olmaz:
 
 
 ```js
@@ -254,7 +254,7 @@ const listItems = chemists.map(person =>
 );
 ```
 
-Ancak, **`=>` ifadesinden sonra `{` parentezi kullandıysanız, `return` ifadesini yazmak zorundasınız**
+Ancak, **`=>` ifadesinden sonra `{` parentezini kullandıysanız, `return` ifadesini yazmak zorundasınız**
 
 ```js
 const listItems = chemists.map(person => { // Curly brace
@@ -266,9 +266,9 @@ const listItems = chemists.map(person => { // Curly brace
 
 </Pitfall>
 
-## `anahtar` ile liste öğelerini sıralı tutmak {/*keeping-list-items-in-order-with-key*/}
+## `anahtar` ile liste öğelerini sıralı şekilde tutmak {/*keeping-list-items-in-order-with-key*/}
 
-Yukarıdaki tüm sandboxların konsolda bir hata gösterdiğine dikkat edin:
+Yukarıdaki tüm sandbox'ların konsolda bir hata gösterdiğine dikkat edin:
 
 <ConsoleBlock level="error">
 
@@ -276,7 +276,7 @@ Uyarı: Bir listedeki her alt elemanın benzersiz bir "anahtar" prop'u olmalıd�
 
 </ConsoleBlock>
 
-Herbir dizi öğesine bir `anahtar` vermelisiniz -- dizideki herbir öğeyi birbirinden ayırt edecek şekilde o öğeye bir string ya da numara vermeniz gerekmektedir:
+Her bir dizi öğesine bir `anahtar` vermelisiniz -- dizideki her bir öğeyi birbirinden ayırt edecek şekilde o öğeye bir string ya da numara vermeniz gerekmektedir:
 
 ```js
 <li key={person.id}>...</li>
@@ -380,7 +380,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 Her öğenin bir değil birkaç DOM node'u render etmesi gerektiğinde ne yaparsınız?
 
-Kısa [`<>...</>` Fragment](/reference/react/Fragment) syntax'ı bir anahtar belirlemenize izin vermez, bu nedenle tüm elementleri bir `<div>` elementi içinde gruplandırmanız ya da daha uzun olan [`<Fragment>` syntax'i](/reference/react/Fragment#rendering-a-list-of-fragments) kullanmalısınız.
+Kısa [`<>...</>` Fragment](/reference/react/Fragment) syntax'ı bir anahtar prop'u belirlemenize izin vermez, bu nedenle tüm elementleri bir `<div>` elementi içinde gruplandırmanız ya da daha uzun olan [`<Fragment>` syntax'i](/reference/react/Fragment#rendering-a-list-of-fragments) kullanmalısınız.
 
 ```js
 import { Fragment } from 'react';
@@ -395,7 +395,7 @@ const listItems = people.map(person =>
 );
 ```
 
-Fragmentler DOM'dan kaybolur, bu nedenle `<h1>`, `<p>`, `<h1>`, `<p>` gibi elementlerden oluşan düz bir liste oluşturulur.
+Fragmentler DOM'dan kaybolur, bu nedenle geriye sadece `<h1>`, `<p>`, `<h1>`, `<p>` gibi elementler kalacaktır.
 
 </DeepDive>
 
@@ -408,18 +408,18 @@ Farklı veri kaynakları, farklı anahtar kaynakları sağlar:
 
 ### Anahtarların kuralları {/*rules-of-keys*/}
 
-* **Anahtarl kardeşler arasında benzersiz olmalıdır.** Ancak, _different_ dizilerdeki JSX node'ları için aynı anahtarları kullanmakta bir sakınca yoktur.
+* **Anahtarlar kardeşler arasında benzersiz olmalıdır.** Ancak, _farklı_ dizilerdeki JSX node'ları için aynı anahtarları kullanmakta bir sakınca yoktur.
 * **Anahtarlar değişmemelidir.** yoksa bu anahtarların bütün amacını bozar! Anahtarları render etme sırasında üretmeyiniz.
 
 ### React neden anahtarlara ihtiyaç duyar? {/*why-does-react-need-keys*/}
 
-Masaüstünüzdeki dosyaların isimlerinin olmadığını düşünün. Imagine that files on your desktop didn't have names. Bunun yerine, dosyalara sıralarına göre refere edersiniz -- ilk dosya, ikinci dosya gibi. Bu sisteme alışabilirsiniz ama bir dosyayı sildiğiniz zaman durum kafa karıştırıcı bir hale gelirdi. İkinci dosya birinci, üçüncü dosya ise ikinci dosya olurdu gibi.
+Masaüstünüzdeki dosyaların isimlerinin olmadığını düşünün. Bunun yerine, dosyalara sıralarına göre referans edersiniz -- ilk dosya, ikinci dosya gibi. Bu sisteme alışabilirsiniz ama bir dosyayı sildiğiniz zaman durum kafa karıştırıcı bir hale gelecektir. İkinci dosya birinci, üçüncü dosya ise ikinci dosya olurdu gibi.
 
-Dosya isimleri de dizilerdeki JSX anahtarları aynı amaca hizmet etmektedir. Anahtarlar, kardeşleri arasında bir öğeyi benzersiz bir şekilde tanımlamamıza olanak sağlar. İyi seçilmiş bir anahtar, dizi içindeki pozisyondan daha fazla bilgi sağlar. Öğenin _position_ yeniden sıralama nedeniyle değişse bile, `anahtar` React'in öğeyi döngü boyunca tanımasını sağlar.
+Dosya isimleri de dizilerdeki JSX anahtarları gibi aynı amaca hizmet etmektedir. Anahtarlar, kardeşleri arasında bir öğeyi benzersiz bir şekilde tanımlamamıza olanak sağlar. İyi seçilmiş bir anahtar, dizi içindeki pozisyondan daha fazla bilgi sağlar. Örneğin _sıra_ yeniden sıralama nedeniyle değişse bile, `anahtar` React'in öğeyi döngü boyunca tanımasını sağlar.
 
 <Pitfall>
 
-Anahtar olarak dizideki bir öğenin indeksini kullanmak isteyebilirsiniz. Aslında, hiç bir `anahtar` belirtmezseniz React'in kullanacağı anahtar budur. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak indeksi kullanmak, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
+Anahtar olarak dizideki bir öğenin indeksini kullanmak isteyebilirsiniz. Aslında, hiç bir `anahtar` belirtmezseniz React'in kullanacağı anahtar bu olacaktır. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak indeksi kullanmak, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
 
 Benzer şekilde, anahtarları o anda oluşturmayın, örneğin `anahtar={Math.random()}` ile oluşturulan anahtarlar. Bu, anahtarların render etmeler arasında eşleşmemesine neden olarak tüm bileşenlerinizin ve DOM'un her seferinde yeniden oluşturulmasına yol açar. Bu sadece yavaş olmakla kalmaz, aynı zamanda liste öğeleri içindeki herhangi bir kullanıcı girdisini de kaybeder. Bunun yerine, verilere dayalı sabit bir ID kullanılmalıdır.
 
@@ -980,7 +980,7 @@ Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü
 
 #### Bir liste öğesi bileşeni çıkarma {/*extracting-a-list-item-component*/}
 
-`RecipeList` bileşeni iç içe iki defa `map` metodunu kullanmaktadır. Bu işlemin basitleştirmek için, `id`, `name`, ve `ingredients` prop'larını alacak olan yeni bir `Recipe` bileşeni oluşturun. Dıştaki `anahtar` nereye ve neden yerleştirirsiniz?
+`RecipeList` bileşeni iç içe iki defa `map` metodunu kullanmaktadır. Bu işlemi basitleştirmek için, `id`, `name`, ve `ingredients` prop'larını alacak olan yeni bir `Recipe` bileşeni oluşturun. Dıştaki `anahtar`'ı nereye ve neden yerleştirirsiniz?
 
 <Sandpack>
 
