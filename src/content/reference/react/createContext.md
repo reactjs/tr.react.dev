@@ -32,13 +32,13 @@ const ThemeContext = createContext('light');
 
 #### Parametreler {/*parameters*/}
 
-* `defaultValue`: Context'i okuyan bileşenlerin üzerinde eşleşen bir context sağlayıcısı olmadığında contextin sahip olmasını istediğiniz değer. Anlamlı bir varsayılan değeriniz yoksa, `null` belirtin. Varsayılan değer, "son çare" olarak başvurulacak bir alternatif olarak düşünülür. Statik ve zamanla asla değişmez.
+* `defaultValue`: Context'i okuyan bileşenlerin üzerinde eşleşen bir context sağlayıcısı olmadığında contextin sahip olmasını istediğiniz değer. Anlamlı bir varsayılan değeriniz yoksa, `null` belirtin. Varsayılan değer, "son çare" olarak başvurulacak bir alternatif olarak düşünülür. Statiktir ve zamanla asla değişmez.
 
 #### Geri Dönüş Değeri {/*returns*/}
 
 `createContext` bir context nesnesi döndürür.
 
-**Context nesnesi kendisi herhangi bir bilgi içermez.** Diğer bileşenlerin _hangi_ contexti okuyacağını veya sağlayacağını temsil eder. Genellikle, context değerini belirtmek için bileşenin üstünde [SomeContext.Provider](https://react.dev/reference/react/createContext#provider) kullanır ve bileşenin altında okumak için [useContext(SomeContext)](https://react.dev/reference/react/useContext) çağırırsınız. Context nesnesinin birkaç özelliği vardır:
+**Context nesnesinin kendisi herhangi bir bilgi içermez.** Diğer bileşenlerin _hangi_ contexti okuyacağını veya sağlayacağını temsil eder. Genellikle, context değerini belirtmek için bileşenin üstünde [SomeContext.Provider](https://react.dev/reference/react/createContext#provider) kullanır ve bileşenin altında okumak için [useContext(SomeContext)](https://react.dev/reference/react/useContext) çağırırsınız. Context nesnesinin birkaç özelliği vardır:
 
 * `SomeContext.Provider` bilenşenlerin context değerini sağlamanıza olanak tanır.
 * `SomeContext.Consumer` context değerini okumak için nadiren kullanılan alternatif bir yöntemdir.
@@ -47,7 +47,7 @@ const ThemeContext = createContext('light');
 
 ### `SomeContext.Provider` {/*provider*/}
 
-Bileşenlerinizin bir context sağlayıcısı ile sarmalayarak içindeki tüm bileşenler için bu contextin değerini belirtin:
+Bileşenlerinizi bir context sağlayıcısı ile sarmalayarak içindeki tüm bileşenler için bu contextin değerini belirtin:
 
 ```js
 function App() {
@@ -85,7 +85,7 @@ function Button() {
 }
 ```
 
-Bu eski yöntem hala çalışıyor olsa da, **yeni yazılan kodun contextini [`useContext()`](/reference/react/useContext) ile okunması daha uygundur:**
+Bu eski yöntem hala çalışıyor olsa da, **yeni yazılan kodun contextini [`useContext()`](/reference/react/useContext) ile okunmak daha uygundur:**
 
 ```js
 function Button() {
@@ -105,7 +105,7 @@ function Button() {
 
 ### Context oluşturma {/*creating-context*/}
 
-Context, bileşenlerin [bilgiyi derinlemesine aktarmasına](/learn/passing-data-deeply-with-context) olanak tanır ve açıkça prop'lar geçirmeden yapar.
+Context, bileşenlerin [bilgiyi derinlemesine aktarmasına](/learn/passing-data-deeply-with-context) olanak tanır ve açıkça propları geçirmeden yapar.
 
 Bir veya birden fazla context oluşturmak için bileşenlerin dışında `createContext`'i çağırın.
 
@@ -151,7 +151,7 @@ function App() {
 }
 ```
 
-Şimdi `Page` bileşeni ve içindeki herhangi bir bileşen, ne kadar derin olursa olsun, iletilen context değerlerini "görecek" ve iletilen context değerleri değişirse, React contexti okuyan bileşenleri yeniden reder edecektir.
+Şimdi `Page` bileşeni ve içindeki herhangi bir bileşen, ne kadar derin olursa olsun, iletilen context değerlerini "görecek" ve iletilen context değerleri değişirse, React contexti okuyan bileşenleri yeniden render edecektir.
 
 [Okuma ve sağlama contexti hakkında daha fazla bilgi edinin ve örnekleri görün.](/reference/react/useContext)
 
