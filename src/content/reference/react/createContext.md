@@ -85,7 +85,7 @@ function Button() {
 }
 ```
 
-Bu eski yöntem hala çalışıyor olsa da, **yeni yazılan kodun contextini [`useContext()`](/reference/react/useContext) ile okunmak daha uygundur:**
+Bu eski yöntem hala çalışıyor olsa da, **yeni yazılan kodun contextini [`useContext()`](/reference/react/useContext) ile okumak daha uygundur:**
 
 ```js
 function Button() {
