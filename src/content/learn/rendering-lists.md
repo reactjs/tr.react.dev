@@ -90,7 +90,7 @@ Yukarıdaki sandbox'un bir konsol hatası gösterdiğine dikkat edin:
 
 <ConsoleBlock level="error">
 
-Uyarı: Bir listedeki her alt elemanın benzersiz bir "anahtar" prop'u olmalıdır.
+Uyarı: Bir listedeki her alt elemanın benzersiz bir "key" ("anahtar") prop'u olmalıdır.
 
 </ConsoleBlock>
 
@@ -266,17 +266,17 @@ const listItems = chemists.map(person => { // Curly brace
 
 </Pitfall>
 
-## `anahtar` ile liste öğelerini sıralı şekilde tutmak {/*keeping-list-items-in-order-with-key*/}
+## `key` (`anahtar`) prop'u ile liste öğelerini sıralı şekilde tutmak {/*keeping-list-items-in-order-with-key*/}
 
 Yukarıdaki tüm sandbox'ların konsolda bir hata gösterdiğine dikkat edin:
 
 <ConsoleBlock level="error">
 
-Uyarı: Bir listedeki her alt elemanın benzersiz bir "anahtar" prop'u olmalıdır.
+Uyarı: Bir listedeki her alt elemanın benzersiz bir "key" ("anahtar") prop'u olmalıdır.
 
 </ConsoleBlock>
 
-Her bir dizi öğesine bir `anahtar` vermelisiniz -- dizideki her bir öğeyi birbirinden ayırt edecek şekilde o öğeye bir string ya da numara vermeniz gerekmektedir:
+Her bir dizi öğesine bir `key` (`anahtar`) vermelisiniz -- dizideki her bir öğeyi birbirinden ayırt edecek şekilde o öğeye bir string ya da numara vermeniz gerekmektedir:
 
 ```js
 <li key={person.id}>...</li>
@@ -380,7 +380,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 Her öğenin bir değil birkaç DOM node'u render etmesi gerektiğinde ne yaparsınız?
 
-Kısa [`<>...</>` Fragment](/reference/react/Fragment) syntax'ı bir anahtar prop'u belirlemenize izin vermez, bu nedenle tüm elementleri bir `<div>` elementi içinde gruplandırmanız ya da daha uzun olan [`<Fragment>` syntax'i](/reference/react/Fragment#rendering-a-list-of-fragments) kullanmalısınız.
+Kısa [`<>...</>` Fragment](/reference/react/Fragment) syntax'ı bir key (anahtar) prop'u belirlemenize izin vermez, bu nedenle tüm elementleri bir `<div>` elementi içinde gruplandırmanız ya da daha uzun olan [`<Fragment>` syntax'i](/reference/react/Fragment#rendering-a-list-of-fragments) kullanmalısınız.
 
 ```js
 import { Fragment } from 'react';
@@ -403,7 +403,7 @@ Fragmentler DOM'dan kaybolur, bu nedenle geriye sadece `<h1>`, `<p>`, `<h1>`, `<
 
 Farklı veri kaynakları, farklı anahtar kaynakları sağlar:
 
-* **Veritabanından gelen veri:** Eğer veriniz bir veritabanından geliyorsa, doğasında ötürü zaten benzersiz olan veritabanı anahtarları/ID'leri kullanılabilir.
+* **Veritabanından gelen veri:** Eğer veriniz bir veritabanından geliyorsa, doğasından ötürü zaten benzersiz olan veritabanı anahtarları/ID'leri kullanılabilir.
 * **Yerel olarak oluşturulmuş veriler:** Eğer veriniz yerel olarak oluşturuluyor ve saklanıyorsa (örneğin not alma aplikasyonundaki notlar), sıralı olarak artan numaralar [`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID) ya da [`uuid`](https://www.npmjs.com/package/uuid) gibi bir paket kullanabilirsiniz.
 
 ### Anahtarların kuralları {/*rules-of-keys*/}
@@ -419,11 +419,11 @@ Dosya isimleri de dizilerdeki JSX anahtarları gibi aynı amaca hizmet etmektedi
 
 <Pitfall>
 
-Anahtar olarak dizideki bir öğenin indeksini kullanmak isteyebilirsiniz. Aslında, hiç bir `anahtar` belirtmezseniz React'in kullanacağı anahtar bu olacaktır. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak indeksi kullanmak, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
+Anahtar olarak dizideki bir öğenin indeksini kullanmak isteyebilirsiniz. Aslında, hiç bir `key` (`anahtar`) belirtmezseniz React'in kullanacağı anahtar bu olacaktır. Ancak, bir öğe eklenirse, silinirse veya dizi yeniden sıralanırsa, öğeleri oluşturma sıranız zaman içinde değişecektir. Bir anahtar olarak indeksi kullanmak, genellikle gizli ve kafa karıştırıcı hatalara yol açar.
 
-Benzer şekilde, anahtarları o anda oluşturmayın, örneğin `anahtar={Math.random()}` ile oluşturulan anahtarlar. Bu, anahtarların render etmeler arasında eşleşmemesine neden olarak tüm bileşenlerinizin ve DOM'un her seferinde yeniden oluşturulmasına yol açar. Bu sadece yavaş olmakla kalmaz, aynı zamanda liste öğeleri içindeki herhangi bir kullanıcı girdisini de kaybeder. Bunun yerine, verilere dayalı sabit bir ID kullanılmalıdır.
+Benzer şekilde, anahtarları o anda oluşturmayın, örneğin `key={Math.random()}` ile oluşturulan anahtarlar. Bu, anahtarların render etmeler arasında eşleşmemesine neden olarak tüm bileşenlerinizin ve DOM'un her seferinde yeniden oluşturulmasına yol açar. Bu sadece yavaş olmakla kalmaz, aynı zamanda liste öğeleri içindeki herhangi bir kullanıcı girdisini de kaybeder. Bunun yerine, verilere dayalı sabit bir ID kullanılmalıdır.
 
-Bileşenlerinizin prop olarak `anahtar` almayacağını unutmayın. Yalnıcaz React'in kendisi tarafından bir işaret olarak kullanılırlar. Eğer bileşeninizin bir ID'ye ihtiyacı varsa, ID'yi ayrı bir prop olarak şu şekilde kullanabilirsiniz: `<Profile key={id} userId={id} />`.
+Bileşenlerinizin prop olarak `key` (`anahtar`) almayacağını unutmayın. Yalnıcaz React'in kendisi tarafından bir işaret olarak kullanılırlar. Eğer bileşeninizin bir ID'ye ihtiyacı varsa, ID'yi ayrı bir prop olarak şu şekilde kullanabilirsiniz: `<Profile key={id} userId={id} />`.
 
 </Pitfall>
 
@@ -974,7 +974,7 @@ export const recipes = [{
 
 </Sandpack>
 
-Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü bu değeri `anahtar` olarak kullanmakta. İçindekiler kısmındaki döngü için kullanabiliceğimiz bir ID değerine sahip değiliz. Ancak, bir malzeme aynı tarif içinde iki defa bulunmayacağından  dolayı, malzemenin ismini `anahtar` olarak kullanmakta bir sakınca yoktur. Alternatif olarak, veri yapısını ID'ler olacak şekilde değiştirebilir ya da indeksi `anahtar` olarak kullanabiliriz (malzemeleri güvenli bir şekilde yeniden sıralayamayacağımız uyarısıyla).
+Her bir `recipes` zaten bir `id` değerine sahip, bu yüzden dışardaki döngü bu değeri `key` (`anahtar`) olarak kullanmakta. İçindekiler kısmındaki döngü için kullanabiliceğimiz bir ID değerine sahip değiliz. Ancak, bir malzeme aynı tarif içinde iki defa bulunmayacağından  dolayı, malzemenin ismini `anahtar` olarak kullanmakta bir sakınca yoktur. Alternatif olarak, veri yapısını ID'ler olacak şekilde değiştirebilir ya da indeksi `key` (`anahtar`) olarak kullanabiliriz (malzemeleri güvenli bir şekilde yeniden sıralayamayacağımız uyarısıyla).
 
 </Solution>
 
@@ -1082,7 +1082,7 @@ export const recipes = [{
 
 Burada, `<Recipe {...recipe} key={recipe.id} />` syntax'ı `recipe` objesinin tüm özelliklerini `Recipe` bileşenine prop olarak aktarmanın kısa bir yoludur. Ayrıca her bir prop'u açıkça şu şekilde yazabilirsiniz: `<Recipe id={recipe.id} name={recipe.name} ingredients={recipe.ingredients} key={recipe.id} />`.
 
-**`anahtar`'ın `Recipe`'den döndürülen root `<div>` yerine `<Recipe>` üzerinde kullanıldığına dikkat edin.** Bunun nedeni, `anahtar`'ın doğrudan çevreleyen dizi bağlamında gerekli olmasıdır. Önceden, bir `<div>` diziniz vardı, dolayısıyla her birinin bir `anahtar` ihtiyacı vardı. Ancak artık bir `<Recipe>` diziniz var. Diğer bir deyişle, yeni bir bileşen çıkarttığınız zaman, `anahtar`'ı kopyalayıp yapıştırdığınız JSX'in dışında bırakmayı unutmayın.
+**`key`'in (`anahtar`) `Recipe`'den döndürülen root `<div>` yerine `<Recipe>` üzerinde kullanıldığına dikkat edin.** Bunun nedeni, `anahtar`'ın doğrudan çevreleyen dizi bağlamında gerekli olmasıdır. Önceden, bir `<div>` diziniz vardı, dolayısıyla her birinin bir ``anahtar`'a ihtiyacı vardı. Ancak artık bir `<Recipe>` diziniz var. Diğer bir deyişle, yeni bir bileşen çıkarttığınız zaman, `anahtar`'ı kopyalayıp yapıştırdığınız JSX'in dışında bırakmayı unutmayın.
 
 </Solution>
 
@@ -1208,7 +1208,7 @@ hr {
 
 </Sandpack>
 
-Şiirin satır indeksini `anahtar` olarak kullanmak artık işe yaramayacaktır çünkü artık her ayraç ve paragraf aynı dizide bulunmakta. Ancak, bir sonek kullanarak her birine ayrı bir anahtar verebilirsiniz, örneğin `key={i + '-text'}`.
+Şiirin satır indeksini `key` (`anahtar`) olarak kullanmak artık işe yaramayacaktır çünkü artık her ayraç ve paragraf aynı dizide bulunmakta. Ancak, bir sonek kullanarak her birine ayrı bir anahtar verebilirsiniz, örneğin `key={i + '-text'}`.
 
 Alternatif olarak, `<hr />` ve `<p>...</p>` elementlerini içeren fragmentler render edebilirsiniz. Ancak, `<>...</>` kısa syntax'i anahtarları prop olarak alamaz bu yüzden `<Fragment>` olarak kullanmanız gerekmektedir:
 
