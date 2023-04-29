@@ -1,24 +1,24 @@
 ---
-title: Responding to Events
+title: Olaylara Tepki Verme
 ---
 
 <Intro>
 
-React lets you add *event handlers* to your JSX. Event handlers are your own functions that will be triggered in response to interactions like clicking, hovering, focusing form inputs, and so on.
+React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri (event handler); tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan kendi fonksiyonlarınızdır.
 
 </Intro>
 
 <YouWillLearn>
 
-* Different ways to write an event handler
-* How to pass event handling logic from a parent component
-* How events propagate and how to stop them
+* Olay yöneticisi yazmanın farklı biçimleri
+* Üst bileşenden (parent component) olay yönetimi mantığının nasıl iletileceği
+* Olayların nasıl yayıldığı (propagation) ve nasıl durdurulacağı
 
 </YouWillLearn>
 
-## Adding event handlers {/*adding-event-handlers*/}
+## Olay yöneticileri eklemek {/*adding-event-handlers*/}
 
-To add an event handler, you will first define a function and then [pass it as a prop](/learn/passing-props-to-a-component) to the appropriate JSX tag. For example, here is a button that doesn't do anything yet:
+Olay yöneticisi eklemek için öncelikle bir fonksiyon tanımlarsınız ve uygun JSX etiketine [prop olarak iletirsiniz](/learn/passing-props-to-a-component). Örneğin, hiçbir şey yapmayan bir düğmeyi ele alalım:
 
 <Sandpack>
 
@@ -26,7 +26,7 @@ To add an event handler, you will first define a function and then [pass it as a
 export default function Button() {
   return (
     <button>
-      I don't do anything
+      Hiçbir şey yapmıyorum
     </button>
   );
 }
@@ -34,23 +34,23 @@ export default function Button() {
 
 </Sandpack>
 
-You can make it show a message when a user clicks by following these three steps:
+Kullanıcı düğmeye tıkladığında bir mesaj göstermek için aşağıdaki üç adımı izleyebilirsiniz:
 
-1. Declare a function called `handleClick` *inside* your `Button` component.
-2. Implement the logic inside that function (use `alert` to show the message).
-3. Add `onClick={handleClick}` to the `<button>` JSX.
+1. `Button` bileşeninizin *içerisinde* `handleClick` isimli bir fonksiyon tanımlayın.
+2. Tanımladığınız fonksiyonun içerisinde mantığınızı oluşturun (mesaj göstermek için `alert` kullanın).
+3. `<button>` JSX etiketine `onClick={handleClick}` ekleyin.
 
 <Sandpack>
 
 ```js
 export default function Button() {
   function handleClick() {
-    alert('You clicked me!');
+    alert('Bana tıkladın!');
   }
 
   return (
     <button onClick={handleClick}>
-      Click me
+      Bana tıkla
     </button>
   );
 }
@@ -62,77 +62,77 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-You defined the `handleClick` function and then [passed it as a prop](/learn/passing-props-to-a-component) to `<button>`.  `handleClick` is an **event handler.** Event handler functions:
+`handleClick` fonksiyonunu tanımladınız ve ardından `<button>`'a [prop olarak ilettiniz](/learn/passing-props-to-a-component). `handleClick`, bir **olay yöneticisi**dir (event handler). Olay yönetici fonksiyonları:
 
-* Are usually defined *inside* your components.
-* Have names that start with `handle`, followed by the name of the event.
+* Genellikle bileşenlerinizin *içerisinde* tanımlanır.
+* `handle` ile başlayıp olayın ismiyle devam edecek formatta isimlendirilirler.
 
-By convention, it is common to name event handlers as `handle` followed by the event name. You'll often see `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, and so on.
+Geleneksel olarak olay yöneticilerinin isimlerinin `handle` ile başlaması yaygındır. İncelediğiniz projelerde `onClick={handleClick}` ve `onMouseEnter={handleMouseEnter}` gibi kulanımları sıkça görürsünüz.
 
-Alternatively, you can define an event handler inline in the JSX:
+Alternatif olarak, olay yöneticilerini JSX'de satır içi tanımlayabilirsiniz:
 
 ```jsx
 <button onClick={function handleClick() {
-  alert('You clicked me!');
+  alert('Bana tıkladın!');
 }}>
 ```
 
-Or, more concisely, using an arrow function:
+Ya da ok fonksiyonlarını kullanarak kısaltabilirsiniz:
 
 ```jsx
 <button onClick={() => {
-  alert('You clicked me!');
+  alert('Bana tıkladın!');
 }}>
 ```
 
-All of these styles are equivalent. Inline event handlers are convenient for short functions.
+Bu yazım biçimleri eşdeğerdir. Satır içi olay yöneticileri, basit fonksiyonlar için kullanışlıdır.
 
 <Pitfall>
 
-Functions passed to event handlers must be passed, not called. For example:
+Olay yöneticilerine iletilen fonksiyonlar çağırılmamalıdır, yalnızca iletilmelidir. Örneğin:
 
-| passing a function (correct)     | calling a function (incorrect)     |
+| fonksiyonu iletmek (doğru)       | fonksiyonu çağırmak (yanlış)     |
 | -------------------------------- | ---------------------------------- |
 | `<button onClick={handleClick}>` | `<button onClick={handleClick()}>` |
 
-The difference is subtle. In the first example, the `handleClick` function is passed as an `onClick` event handler. This tells React to remember it and only call your function when the user clicks the button.
+Aradaki farkı farkedebilmek zor olabilir. İlk örnekte, `handleClick` fonksiyonu `onClick` olay yöneticisi olarak iletilir. Bu sayede React, fonksiyonu hatırlar ve yalnızca kullanıcı düğmeye tıkladığında çağırır.
 
-In the second example, the `()` at the end of `handleClick()` fires the function *immediately* during [rendering](/learn/render-and-commit), without any clicks. This is because JavaScript inside the [JSX `{` and `}`](/learn/javascript-in-jsx-with-curly-braces) executes right away.
+İkinci örnekte, `handleClick()` ifadesinin sonundaki parantezler yüzünden [rendering](/learn/render-and-commit) esnasında herhangi bir tıklama olmaksızın fonksiyon doğrudan tetiklenir. Sebebi ise [JSX'de `{` ve `}`](/learn/javascript-in-jsx-with-curly-braces) arasındaki JavaScript kodlarının anında yürütülmesidir.
 
-When you write code inline, the same pitfall presents itself in a different way:
+Satır içi kod yazarken aynı tuzak farklı bir biçimde ortaya çıkar:
 
-| passing a function (correct)            | calling a function (incorrect)    |
+| fonksiyonu iletmek (doğru)              | fonksiyonu çağırmak (yanlış)    |
 | --------------------------------------- | --------------------------------- |
 | `<button onClick={() => alert('...')}>` | `<button onClick={alert('...')}>` |
 
 
-Passing inline code like this won't fire on click—it fires every time the component renders:
+Satır içi yazılan bu gibi kodlar, tıklama esnasında tetiklenmez—bileşenin render'larında tetiklenir:
 
 ```jsx
-// This alert fires when the component renders, not when clicked!
-<button onClick={alert('You clicked me!')}>
+// `alert` her tıklamada değil, her render'da tetiklenir!
+<button onClick={alert('Bana tıkladın!')}>
 ```
 
-If you want to define your event handler inline, wrap it in an anonymous function like so:
+Olay yöneticinizi satır içi tanımlamak isterseniz anonim işleve sarabilirsiniz:
 
 ```jsx
-<button onClick={() => alert('You clicked me!')}>
+<button onClick={() => alert('Bana tıkladın!')}>
 ```
 
-Rather than executing the code inside with every render, this creates a function to be called later.
+Bu sayede her render'da çalıştırmak yerine daha sonra çağrılmak üzere bir fonksiyon oluşturur.
 
-In both cases, what you want to pass is a function:
+Her iki durumda da iletmek istediğimiz şey fonksiyondur:
 
-* `<button onClick={handleClick}>` passes the `handleClick` function.
-* `<button onClick={() => alert('...')}>` passes the `() => alert('...')` function.
+* `<button onClick={handleClick}>` ifadesinde `handleClick` fonksiyonu iletilir.
+* `<button onClick={() => alert('...')}>` ifadesinde `() => alert('...')` fonksiyonu iletilir.
 
-[Read more about arrow functions.](https://javascript.info/arrow-functions-basics)
+[Ok fonksiyonları hakkında daha fazla bilgi edinin.](https://tr.javascript.info/arrow-functions-basics)
 
 </Pitfall>
 
-### Reading props in event handlers {/*reading-props-in-event-handlers*/}
+### Olay yöneticilerinde prop'ları okumak {/*reading-props-in-event-handlers*/}
 
-Because event handlers are declared inside of a component, they have access to the component's props. Here is a button that, when clicked, shows an alert with its `message` prop:
+Olay yöneticileri, bileşenlerin içerisinde tanımlandığından prop'lara erişebilirler. Tıklandığında `message` prop'unun değerini içeren bir uyarı gösteren bir düğme örneğine bakalım:
 
 <Sandpack>
 
@@ -148,11 +148,11 @@ function AlertButton({ message, children }) {
 export default function Toolbar() {
   return (
     <div>
-      <AlertButton message="Playing!">
-        Play Movie
+      <AlertButton message="Oynatılıyor!">
+        Film Oynat
       </AlertButton>
-      <AlertButton message="Uploading!">
-        Upload Image
+      <AlertButton message="Yükleniyor!">
+        Resim Yükle
       </AlertButton>
     </div>
   );
@@ -165,13 +165,13 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-This lets these two buttons show different messages. Try changing the messages passed to them.
+Bu iki düğmenin farklı mesaj gösterebilmesine olanak sağlar. Bileşenlere ilettiğiniz mesajları değiştirmeyi deneyin.
 
-### Passing event handlers as props {/*passing-event-handlers-as-props*/}
+### Olay yöneticilerini prop olarak iletmek {/*passing-event-handlers-as-props*/}
 
-Often you'll want the parent component to specify a child's event handler. Consider buttons: depending on where you're using a `Button` component, you might want to execute a different function—perhaps one plays a movie and another uploads an image. 
+Sıklıkla bileşenlerin alt bileşenlerindeki olay yöneticilerini belirlemesini istersiniz. Düğmeleri düşünelim: bileşeninin nerede kullanıldığına bağlı olarak farklı işlevler yerine getirmesini isteyebilirsiniz - mesela biri film oynatırken diğeri resim yükleyebilir.
 
-To do this, pass a prop the component receives from its parent as the event handler like so:
+Bunun için, üst bileşenden prop olarak alınan fonksiyon olay yöneticisi olarak kullanılabilir:
 
 <Sandpack>
 
@@ -186,20 +186,20 @@ function Button({ onClick, children }) {
 
 function PlayButton({ movieName }) {
   function handlePlayClick() {
-    alert(`Playing ${movieName}!`);
+    alert(`${movieName} oynatılıyor!`);
   }
 
   return (
     <Button onClick={handlePlayClick}>
-      Play "{movieName}"
+      "{movieName}" Filmini Oynat
     </Button>
   );
 }
 
 function UploadButton() {
   return (
-    <Button onClick={() => alert('Uploading!')}>
-      Upload Image
+    <Button onClick={() => alert('Yükleniyor!')}>
+      Resim Yükle
     </Button>
   );
 }
@@ -207,7 +207,7 @@ function UploadButton() {
 export default function Toolbar() {
   return (
     <div>
-      <PlayButton movieName="Kiki's Delivery Service" />
+      <PlayButton movieName="Hababam Sınıfı" />
       <UploadButton />
     </div>
   );
@@ -220,22 +220,23 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-Here, the `Toolbar` component renders a `PlayButton` and an `UploadButton`:
 
-- `PlayButton` passes `handlePlayClick` as the `onClick` prop to the `Button` inside.
-- `UploadButton` passes `() => alert('Uploading!')` as the `onClick` prop to the `Button` inside.
+`Toolbar` bileşeni, `PlayButton` ve `UploadButton` bileşenlerini render eder:
 
-Finally, your `Button` component accepts a prop called `onClick`. It passes that prop directly to the built-in browser `<button>` with `onClick={onClick}`. This tells React to call the passed function on click.
+- `PlayButton`, içerisindeki `Button` bileşenine `onClick` prop'u için `handlePlayClick` fonksiyonunu iletir.
+- `UploadButton`, içerisindeki `Button` bileşenine `onClick` prop'u için `() => alert('Yükleniyor!')` fonksiyonunu iletir.
 
-If you use a [design system](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969), it's common for components like buttons to contain styling but not specify behavior. Instead, components like `PlayButton` and `UploadButton` will pass event handlers down.
+Son olarak, `Button` bileşeniniz `onClick` prop'unu kabul eder ve doğrudan `onClick={onClick}` şeklinde yerleşik `<button>` elementine aktarır. Böylece React, düğmeye tıkladıkça ilettiğiniz fonksiyonu çağırır.
 
-### Naming event handler props {/*naming-event-handler-props*/}
+Bu durum [tasarım sistemlerinde](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) yaygınca kullanılır. Tasarım sistemi bileşenleri varsayılan stillendirmelere sahiptirler ancak davranış tanımlamazlar. Böylece `PlayButton` ve `UploadButton` bileşenlerinde olduğu gibi, olay yöneticileri iletilerek davranış belirlenir.
 
-Built-in components like `<button>` and `<div>` only support [browser event names](/reference/react-dom/components/common#common-props) like `onClick`. However, when you're building your own components, you can name their event handler props any way that you like.
+### Olay yönetici prop'larını adlandırmak {/*naming-event-handler-props*/}
 
-By convention, event handler props should start with `on`, followed by a capital letter.
+`<button>` ve `<div>` gibi yerleşik bileşenler, yalnızca `onClick` gibi [tarayıcı olay adlarını](/reference/react-dom/components/common#common-props) prop adı olarak destekler. Ancak kendi bileşenlerinizin olay yönetici prop'larını istediğiniz gibi adlandırabilirsiniz.
 
-For example, the `Button` component's `onClick` prop could have been called `onSmash`:
+Geleneksel olarak, olay yönetici prop'ları `on` ile başlamalı ve büyük harfle devam etmelidir.
+
+Örneğin, `Button` bileşeninin `onClick` prop'u `onSmash` olarak da adlandırılabilirdi:
 
 <Sandpack>
 
@@ -251,11 +252,11 @@ function Button({ onSmash, children }) {
 export default function App() {
   return (
     <div>
-      <Button onSmash={() => alert('Playing!')}>
-        Play Movie
+      <Button onSmash={() => alert('Oynatılıyor!')}>
+        Film Oynat
       </Button>
-      <Button onSmash={() => alert('Uploading!')}>
-        Upload Image
+      <Button onSmash={() => alert('Yükleniyor!')}>
+        Resim Yükle
       </Button>
     </div>
   );
@@ -268,9 +269,9 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-In this example, `<button onClick={onSmash}>` shows that the browser `<button>` (lowercase) still needs a prop called `onClick`, but the prop name received by your custom `Button` component is up to you!
+Bu örnekte, `<button onClick={onSmash}>` ifadesindeki `<button>` (küçük harfle) tıklama olayı için `onClick` isminde bir prop almak zorundadır ancak özel `Button` bileşeninizin prop adı tamamen size kalmıştır!
 
-When your component supports multiple interactions, you might name event handler props for app-specific concepts. For example, this `Toolbar` component receives `onPlayMovie` and `onUploadImage` event handlers:
+Bileşeniniz birden fazla etkileşimi desteklediğinde, olay işleyicisi prop'larını uygulamaya özgü konseptler için adlandırabilirsiniz. Örneğin, `Toolbar` bileşeni `onPlayMovie` ve `onUploadImage` olay yöneticilerini alır:
 
 <Sandpack>
 
@@ -278,8 +279,8 @@ When your component supports multiple interactions, you might name event handler
 export default function App() {
   return (
     <Toolbar
-      onPlayMovie={() => alert('Playing!')}
-      onUploadImage={() => alert('Uploading!')}
+      onPlayMovie={() => alert('Oynatılıyor!')}
+      onUploadImage={() => alert('Yükleniyor!')}
     />
   );
 }
@@ -288,10 +289,10 @@ function Toolbar({ onPlayMovie, onUploadImage }) {
   return (
     <div>
       <Button onClick={onPlayMovie}>
-        Play Movie
+        Film Oynat
       </Button>
       <Button onClick={onUploadImage}>
-        Upload Image
+        Resim Yükle
       </Button>
     </div>
   );
@@ -312,13 +313,13 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-Notice how the `App` component does not need to know *what* `Toolbar` will do with `onPlayMovie` or `onUploadImage`. That's an implementation detail of the `Toolbar`. Here, `Toolbar` passes them down as `onClick` handlers to its `Button`s, but it could later also trigger them on a keyboard shortcut. Naming props after app-specific interactions like `onPlayMovie` gives you the flexibility to change how they're used later.
+Dikkat ederseniz `App` bileşeni, `Toolbar` bileşeninin `onPlayMovie` veya `onUploadImage` ile *ne* yapacağını bilmek zorunda değildir. Bu `Toolbar` bileşeninin implementasyon detayıdır. `Toolbar`, bu prop'ları `Button`'larına `onClick` olay yöneticisi olarak iletir. İleriki zamanlarda tıklama yerine klavye kısayoluyla da tetikletmek isteyebilirsiniz. Bileşenlerinizin prop'larını `onPlayMovie` gibi uygulamaya özgü etkileşimlere göre adlandırmak ileride kullanım biçimlerini değiştirme esnekliği sağlar.
 
-## Event propagation {/*event-propagation*/}
+## Olayların yayılması {/*event-propagation*/}
 
-Event handlers will also catch events from any children your component might have. We say that an event "bubbles" or "propagates" up the tree: it starts with where the event happened, and then goes up the tree.
+Olay yöneticileri aynı zamanda alt elementlerden gelen olayları da yakalar. Bu durum, olayların "kabarması" (bubble) ya da "yayılması" (propagate) olarak adlandırılır. Meydana geldiği yerde başlar ve DOM ağacında yukarı doğru ilerler.
 
-This `<div>` contains two buttons. Both the `<div>` *and* each button have their own `onClick` handlers. Which handlers do you think will fire when you click a button?
+Örnekteki `<div>` iki düğme içerir. Hem `<div>` *hem de* düğmeler kendi `onClick` yöneticilerine sahiptirler. Bir düğmeye tıkladığınızda hangi yöneticilerin tetikleneceğini düşünürsünüz?
 
 <Sandpack>
 
@@ -326,13 +327,13 @@ This `<div>` contains two buttons. Both the `<div>` *and* each button have their
 export default function Toolbar() {
   return (
     <div className="Toolbar" onClick={() => {
-      alert('You clicked on the toolbar!');
+      alert('Araç çubuğuna tıkladın!');
     }}>
-      <button onClick={() => alert('Playing!')}>
-        Play Movie
+      <button onClick={() => alert('Oynatılıyor!')}>
+        Film Oynat
       </button>
-      <button onClick={() => alert('Uploading!')}>
-        Upload Image
+      <button onClick={() => alert('Yükleniyor!')}>
+        Resim Yükle
       </button>
     </div>
   );
@@ -349,19 +350,19 @@ button { margin: 5px; }
 
 </Sandpack>
 
-If you click on either button, its `onClick` will run first, followed by the parent `<div>`'s `onClick`. So two messages will appear. If you click the toolbar itself, only the parent `<div>`'s `onClick` will run.
+Bir düğmeye tıkladığınızda, önce kendi `onClick`'i çalışır sonrasında üst element olan `div`'in `onClick`'i çalışır. Bu sebeple iki mesaj belirir. Eğer araç çubuğuna tıklarsanız, yalnızca `div`'in `onClick`'i çalışır.
 
 <Pitfall>
 
-All events propagate in React except `onScroll`, which only works on the JSX tag you attach it to.
+React'ta `onScroll` haricindeki tüm olaylar yayılır. `onScroll` ise sadece eklendiği JSX etiketi için çalışır.
 
 </Pitfall>
 
-### Stopping propagation {/*stopping-propagation*/}
+### Yayılımı durdurmak {/*stopping-propagation*/}
 
-Event handlers receive an **event object** as their only argument. By convention, it's usually called `e`, which stands for "event". You can use this object to read information about the event.
+Olay yöneticileri argüman olarak yalnızca bir **olay nesnesi** alır. Genellikle olay terimin İngilizce karşılığı olan "event"in kısaltılması olan `e` ile adlandırılırlar. Bu nesneyi kullanarak olay hakkındaki detaylara erişebilirsiniz.
 
-That event object also lets you stop the propagation. If you want to prevent an event from reaching parent components, you need to call `e.stopPropagation()` like this `Button` component does:
+Olay nesnesi ayrıca yayılımı durdurmanıza da imkan sağlar. Bir olayın üst bileşenlere erişmesini engellemek istiyorsanız, örnekteki `Button` bileşeninde olduğu gibi `e.stopPropagation()` çağırmalısınız.
 
 <Sandpack>
 
@@ -380,13 +381,13 @@ function Button({ onClick, children }) {
 export default function Toolbar() {
   return (
     <div className="Toolbar" onClick={() => {
-      alert('You clicked on the toolbar!');
+      alert('Araç çubuğuna tıkladın!');
     }}>
-      <Button onClick={() => alert('Playing!')}>
-        Play Movie
+      <Button onClick={() => alert('Oynatılıyor!')}>
+        Film Oynat
       </Button>
-      <Button onClick={() => alert('Uploading!')}>
-        Upload Image
+      <Button onClick={() => alert('Yükleniyor!')}>
+        Resim Yükle
       </Button>
     </div>
   );
@@ -403,43 +404,43 @@ button { margin: 5px; }
 
 </Sandpack>
 
-When you click on a button:
+Düğmelerden birisine tıkladığınızda:
 
-1. React calls the `onClick` handler passed to `<button>`. 
-2. That handler, defined in `Button`, does the following:
-   * Calls `e.stopPropagation()`, preventing the event from bubbling further.
-   * Calls the `onClick` function, which is a prop passed from the `Toolbar` component.
-3. That function, defined in the `Toolbar` component, displays the button's own alert.
-4. Since the propagation was stopped, the parent `<div>`'s `onClick` handler does *not* run.
+1. React, `<button>`'a iletilen `onClick` yöneticisini çağırır. 
+2. Bu yönetici, `Button` içerisinde tanımlanır ve şunları yapar:
+   *  Olayın daha fazla kabarmasını (bubbling) önlemek için `e.stopPropagation()` metodunu çağırır.
+   * `Toolbar` bileşeninden prop olarak iletilen `onClick` fonksiyonunu çağırır.
+3. Bu fonksiyon `Toolbar` bileşeninde tanımlanır ve düğmenin kendi uyarısını görüntüler.
+4. Yayılım durdurulduğu için üstteki `<div>` elementinin `onClick` yöneticisi *çalışmaz*.
 
-As a result of `e.stopPropagation()`, clicking on the buttons now only shows a single alert (from the `<button>`) rather than the two of them (from the `<button>` and the parent toolbar `<div>`). Clicking a button is not the same thing as clicking the surrounding toolbar, so stopping the propagation makes sense for this UI.
+Düğmeye tıklandığında `<button>` ve `<div>` elementlerinden gelen iki ayrı uyarı gösterilirken `e.stopPropagation()` kullanıldığında yalnızca `<button>` elementinden gelen uyarı gösterilir. Düğmeye tıklamak, fonksiyonellik açısından araç çubuğuna tıklamakla aynı şey değildir. Dolayısıyla da olayın yayılımının durdurulması arayüz açısından oldukça mantıklıdır.
 
 <DeepDive>
 
-#### Capture phase events {/*capture-phase-events*/}
+#### Olay aşamalarını yakalamak {/*capture-phase-events*/}
 
-In rare cases, you might need to catch all events on child elements, *even if they stopped propagation*. For example, maybe you want to log every click to analytics, regardless of the propagation logic. You can do this by adding `Capture` at the end of the event name:
+Nadir durumlarda **yayılımı durdurulmuş** olsa bile alt elemanlardaki olayları yakalamak isteyebilirsiniz. Örneğin, analitik verileri için her tıklamayı kaydetmek istebilirsiniz. Bu yayılım mantığından bağımsızdır. Bunu olay adının sonuna `Capture` ekleyerek yapabilirsiniz:
 
 ```js
-<div onClickCapture={() => { /* this runs first */ }}>
+<div onClickCapture={() => { /* ilk bu çalışır */ }}>
   <button onClick={e => e.stopPropagation()} />
   <button onClick={e => e.stopPropagation()} />
 </div>
 ```
 
-Each event propagates in three phases: 
+Her olay üç aşamada yayılır:
 
-1. It travels down, calling all `onClickCapture` handlers.
-2. It runs the clicked element's `onClick` handler. 
-3. It travels upwards, calling all `onClick` handlers.
+1. Aşağıya doğru ilerleyecek şekilde tüm `onClickCapture` yöneticilerini çalıştırır.
+2. Tıklanan elementin `onClick` yöneticisi çalıştırır. 
+3. Yukarı doğru ilerleyecek şekilde tüm `onClick` yöneticilerini çalıştırır.
 
-Capture events are useful for code like routers or analytics, but you probably won't use them in app code.
+Olayları yakalamak, yönlendirici (router) ya da analitik kodları için faydalıdır ancak muhtemelen uygulamanızda kullanmayacaksınız.
 
 </DeepDive>
 
-### Passing handlers as alternative to propagation {/*passing-handlers-as-alternative-to-propagation*/}
+### Yayılıma alternatif olarak yöneticileri iletmek {/*passing-handlers-as-alternative-to-propagation*/}
 
-Notice how this click handler runs a line of code _and then_ calls the `onClick` prop passed by the parent:
+Örnekteki tıklama yöneticisinin önce bir kod satırını yürüttüğüne, _ardından_ üst bileşenden iletilen `onClick` prop'unu çağırdığına dikkat edin:
 
 ```js {4,5}
 function Button({ onClick, children }) {
@@ -454,22 +455,22 @@ function Button({ onClick, children }) {
 }
 ```
 
-You could add more code to this handler before calling the parent `onClick` event handler, too. This pattern provides an *alternative* to propagation. It lets the child component handle the event, while also letting the parent component specify some additional behavior. Unlike propagation, it's not automatic. But the benefit of this pattern is that you can clearly follow the whole chain of code that executes as a result of some event.
+Bu yöneticiye, üst bileşenin `onClick` olay yöneticisini çağırmadan önce, istediğiniz kadar kod ekleyebilirsiniz. Bu kalıp, yayılıma *alternatif* sağlar. Alt bileşenin olayı yönetmesine izin verirken, üst bileşenin ek davranışları belirlemesine olanak tanır. Yayılımın aksine otomatik değildir. Ancak bu kalıbın faydası, bir olay sonucunda yürütülen kod zincirinin tamamını net bir şekilde takip edebilmenizdir.
 
-If you rely on propagation and it's difficult to trace which handlers execute and why, try this approach instead.
+Eğer yayılıma güvenmiyorsanız ve hangi yöneticlerin neden çalıştığını takip etmekte zorlanıyorsanız bu yaklaşımı deneyin.
 
-### Preventing default behavior {/*preventing-default-behavior*/}
+### Varsayılan davranışı önlemek {/*preventing-default-behavior*/}
 
-Some browser events have default behavior associated with them. For example, a `<form>` submit event, which happens when a button inside of it is clicked, will reload the whole page by default:
+Bazı tarayıcı olayları, kendisine has varsayılan davranışlara sahiptir. Örneğin, `<form>`'un gönderme (submit) olayı, içerisindeki düğmeye tıklandığında varsayılan olarak tüm sayfanın yeniden yüklenmesine neden olur:
 
 <Sandpack>
 
 ```js
 export default function Signup() {
   return (
-    <form onSubmit={() => alert('Submitting!')}>
+    <form onSubmit={() => alert('Gönderiliyor!')}>
       <input />
-      <button>Send</button>
+      <button>Gönder</button>
     </form>
   );
 }
@@ -481,7 +482,7 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-You can call `e.preventDefault()` on the event object to stop this from happening:
+Bu durumu önlemek için olay nesnesinden `e.preventDefault()` metodunu çağırabilirsiniz:
 
 <Sandpack>
 
@@ -490,10 +491,10 @@ export default function Signup() {
   return (
     <form onSubmit={e => {
       e.preventDefault();
-      alert('Submitting!');
+      alert('Gönderiliyor!');
     }}>
       <input />
-      <button>Send</button>
+      <button>Gönder</button>
     </form>
   );
 }
@@ -505,28 +506,29 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-Don't confuse `e.stopPropagation()` and `e.preventDefault()`. They are both useful, but are unrelated:
 
-* [`e.stopPropagation()`](https://developer.mozilla.org/docs/Web/API/Event/stopPropagation) stops the event handlers attached to the tags above from firing.
-* [`e.preventDefault()` ](https://developer.mozilla.org/docs/Web/API/Event/preventDefault) prevents the default browser behavior for the few events that have it.
+`e.stopPropagation()` ve `e.preventDefault()` metodlarını birbiriyle karıştırmayın. İkisi de yararlıdır ancak birbiriyle ilişkileri yoktur:
 
-## Can event handlers have side effects? {/*can-event-handlers-have-side-effects*/}
+* [`e.stopPropagation()`](https://developer.mozilla.org/docs/Web/API/Event/stopPropagation), üstündeki etiketlere eklenen olay yöneticilerinin tetiklenmesini önler.
+* [`e.preventDefault()` ](https://developer.mozilla.org/docs/Web/API/Event/preventDefault), bazı olayların sahip olduğu varsayılan tarayıcı davranışını önler.
 
-Absolutely! Event handlers are the best place for side effects.
+## Olay yöneticilerinin yan etkileri olabilir mi? {/*can-event-handlers-have-side-effects*/}
 
-Unlike rendering functions, event handlers don't need to be [pure](/learn/keeping-components-pure), so it's a great place to *change* something—for example, change an input's value in response to typing, or change a list in response to a button press. However, in order to change some information, you first need some way to store it. In React, this is done by using [state, a component's memory.](/learn/state-a-components-memory) You will learn all about it on the next page.
+Kesinlikle! Olay yöneticileri yan etkiler için en iyi yerdir.
+
+Renderlama fonksiyonlarının aksine, olay yöneticilerinin [saf](/learn/keeping-components-pure) olması gerekmez. Bu sebeple bir şeyleri *değiştirmek* için güzel yerlerdir - örneğin, yazma eylemine tepki olarak girdi değerini değiştirmek veya düğmeye basma eylemine tepki olarak listeyi değiştirmek. Ancak, bilgiyi değiştirmek için öncelikle bir yerde saklamak gerekir. React'da bunu yapmak için [state, bileşen hafızası](/learn/state-a-components-memory) kullanabilirsiniz. Bununla ilgili tüm detayları bir sonraki sayfada öğreneceksiniz.
 
 <Recap>
 
-* You can handle events by passing a function as a prop to an element like `<button>`.
-* Event handlers must be passed, **not called!** `onClick={handleClick}`, not `onClick={handleClick()}`.
-* You can define an event handler function separately or inline.
-* Event handlers are defined inside a component, so they can access props.
-* You can declare an event handler in a parent and pass it as a prop to a child.
-* You can define your own event handler props with application-specific names.
-* Events propagate upwards. Call `e.stopPropagation()` on the first argument to prevent that.
-* Events may have unwanted default browser behavior. Call `e.preventDefault()` to prevent that.
-* Explicitly calling an event handler prop from a child handler is a good alternative to propagation.
+* `<button>` gibi elementlere fonksiyonları prop olarak ileterek olayları yönetebilirsiniz.
+* Olay yöneticileri iletilmelidir, **çağırılmamalıdır!** `onClick={handleClick}` doğru kullanımdır, `onClick={handleClick()}` ise yanlış kullanımdır.
+* Olay yönetici fonksiyonunu ayrı yada satır içi tanımlayabilirsiniz.
+* Olay yöneticileri bileşenin içerisinde tanımlanır, bu nedenle prop'lara erişebilirler.
+* Olay yöneticilerini üst bileşende tanımlayıp alt bileşene prop olarak iletebilirsiniz.
+* Uygulamaya özgü isimleri kullanarak kendi olay yönetici prop'larınızı tanımlayabilirsiniz.
+* Olaylar yukarı doğru yayılır. Önlemek için `e.stopPropagation()`'ı yönetici fonksiyonun en üstünde çağırın.
+* Olaylar, istenmeyen varsayılan tarayıcı davranışına sahip olabilir. Önlemek için `e.preventDefault()`'u çağırın.
+* Olay yöneticisi prop'unu alt bileşenin yöneticisinde açıkca çağırmak, yayılıma iyi bir alternatiftir.
 
 </Recap>
 
@@ -534,9 +536,9 @@ Unlike rendering functions, event handlers don't need to be [pure](/learn/keepin
 
 <Challenges>
 
-#### Fix an event handler {/*fix-an-event-handler*/}
+#### Olay yöneticisini düzeltin {/*fix-an-event-handler*/}
 
-Clicking this button is supposed to switch the page background between white and black. However, nothing happens when you click it. Fix the problem. (Don't worry about the logic inside `handleClick`—that part is fine.)
+Örnekteki düğmeye tıklandığında sayfa arka planının beyaz ve siyah arasında geçiş yapması beklenir ancak tıkladığınızda hiçbir şey olmaz. Bu problemi çözün. (`handleClick` içerisindeki mantıkla ilgilenmeyin—o kısım sorunsuzdur.)
 
 <Sandpack>
 
@@ -553,7 +555,7 @@ export default function LightSwitch() {
 
   return (
     <button onClick={handleClick()}>
-      Toggle the lights
+      Işıkları aç/kapat
     </button>
   );
 }
@@ -563,7 +565,7 @@ export default function LightSwitch() {
 
 <Solution>
 
-The problem is that `<button onClick={handleClick()}>` _calls_ the `handleClick` function while rendering instead of _passing_ it. Removing the `()` call so that it's `<button onClick={handleClick}>` fixes the issue:
+Problemin sebebi, `<button onClick={handleClick()}>`'deki `handleClick` fonksiyonunu elemente _iletmek_ yerine _çağırmasıdır_. Çözmek için ilgili koddaki `()` çağrısını kaldırarak `<button onClick={handleClick}>` olarak değiştirmek gerekir:
 
 <Sandpack>
 
@@ -580,7 +582,7 @@ export default function LightSwitch() {
 
   return (
     <button onClick={handleClick}>
-      Toggle the lights
+      Işıkları aç/kapat
     </button>
   );
 }
@@ -588,7 +590,7 @@ export default function LightSwitch() {
 
 </Sandpack>
 
-Alternatively, you could wrap the call into another function, like `<button onClick={() => handleClick()}>`:
+Alternatif olarak çağrıyı anonim fonksiyona sarabilirsiniz, örneğin `<button onClick={() => handleClick()}>`:
 
 <Sandpack>
 
@@ -605,7 +607,7 @@ export default function LightSwitch() {
 
   return (
     <button onClick={() => handleClick()}>
-      Toggle the lights
+      Işıkları aç/kapat
     </button>
   );
 }
@@ -615,11 +617,11 @@ export default function LightSwitch() {
 
 </Solution>
 
-#### Wire up the events {/*wire-up-the-events*/}
+#### Olayları bağlayın {/*wire-up-the-events*/}
 
-This `ColorSwitch` component renders a button. It's supposed to change the page color. Wire it up to the `onChangeColor` event handler prop it receives from the parent so that clicking the button changes the color.
+`ColorSwitch` bileşeni bir düğme render eder ve tıklandığında sayfa rengini değiştirmesi beklenir. Düğmeye tıklandığında renk değiştirmek için üst bileşenden aldığınız `onChangeColor` olay yönetici prop'unu bileşene bağlayın.
 
-After you do this, notice that clicking the button also increments the page click counter. Your colleague who wrote the parent component insists that `onChangeColor` does not increment any counters. What else might be happening? Fix it so that clicking the button *only* changes the color, and does _not_ increment the counter.
+Düzeltmeyi yaptıktan sonra düğmeye yapılan tıklamaların beklenmedik şekilde sayfa tıklama sayacını da arttırdığına dikkat edin. Üst bileşeni yazan ekip arkadaşınız `onChangeColor` kodunda sayacın arttırılmadığı konusunda ısrar ediyor. Problemin sebebi başka ne olabilir? Düğmeye tıkladığınızda sayacın _artmaması_ için gerekli düzeltme yapın. Düğmenin *yalnızca* arkaplan rengini değiştirmesi beklenir.
 
 <Sandpack>
 
@@ -629,7 +631,7 @@ export default function ColorSwitch({
 }) {
   return (
     <button>
-      Change color
+      Rengi değiştir
     </button>
   );
 }
@@ -663,7 +665,7 @@ export default function App() {
       <ColorSwitch onChangeColor={handleChangeColor} />
       <br />
       <br />
-      <h2>Clicks on the page: {clicks}</h2>
+      <h2>Sayfanın tıklanma sayısı: {clicks}</h2>
     </div>
   );
 }
@@ -673,9 +675,9 @@ export default function App() {
 
 <Solution>
 
-First, you need to add the event handler, like `<button onClick={onChangeColor}>`.
+Öncelikle, `<button onClick={onChangeColor}>` şeklinde olay yöneticisi eklemeniz gerekir.
 
-However, this introduces the problem of the incrementing counter. If `onChangeColor` does not do this, as your colleague insists, then the problem is that this event propagates up, and some handler above does it. To solve this problem, you need to stop the propagation. But don't forget that you should still call `onChangeColor`.
+Ancak yöneticiyi eklediğinizde sayacın da arttığını görebilirsiniz. Ekip arkadaşınızın belirttiği gibi `onChangeColor` fonksiyonu sayacı arttırmıyorsa, problemin sebebi olayın yukarı doğru yayılması ve üstteki yöneticinin bunu gerçekleştirmesidir. Sorunu çözmek için yayılımı durdurmanız gerekir. Ancak `onChangeColor`'ı çağırmayı unutmamalısınız.
 
 <Sandpack>
 
@@ -688,7 +690,7 @@ export default function ColorSwitch({
       e.stopPropagation();
       onChangeColor();
     }}>
-      Change color
+      Rengi değiştir
     </button>
   );
 }
@@ -722,7 +724,7 @@ export default function App() {
       <ColorSwitch onChangeColor={handleChangeColor} />
       <br />
       <br />
-      <h2>Clicks on the page: {clicks}</h2>
+      <h2>Sayfa tıklanma sayısı: {clicks}</h2>
     </div>
   );
 }
