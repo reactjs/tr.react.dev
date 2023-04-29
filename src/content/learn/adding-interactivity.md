@@ -22,7 +22,7 @@ Some things on the screen update in response to user input. For example, clickin
 
 ## Olaylara tepki verme {/*responding-to-events*/}
 
-React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri (event handler); tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan kendi fonksiyonlarınızdır.
+React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri (event handler); tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan sahip olduğunuz fonksiyonlardır.
 
 `<button>` gibi yerleşik bileşenler yalnızca `onClick` gibi yerleşik tarayıcı olaylarını destekler. Ancak kendi bileşenlerinizi oluşturabilir ve olay yöneticisini ileteceğiniz prop'lara uygulamanıza özgü isimler verebilirsiniz.
 
@@ -68,7 +68,7 @@ button { margin-right: 10px; }
 
 <LearnMore path="/learn/responding-to-events">
 
-Olay yöneticilerinin nasıl ekleneceğini öğrenmek için **[Olaylara Tepki Vermek](/learn/responding-to-events)** bölümünü okuyun.
+Olay yöneticilerinin nasıl ekleneceğini öğrenmek için **[Olaylara Tepki Verme](/learn/responding-to-events)** bölümünü okuyun.
 
 </LearnMore>
 

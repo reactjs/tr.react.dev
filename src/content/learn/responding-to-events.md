@@ -4,7 +4,7 @@ title: Olaylara Tepki Verme
 
 <Intro>
 
-React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri (event handler); tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan kendi fonksiyonlarınızdır.
+React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri; tıklamak, fareyle üzerine gelmek ve form girdilerine odaklanmak gibi kullanıcı aksiyonlarına tepki verirken tetiklenecek olan fonksiyonlarınızdır.
 
 </Intro>
 
@@ -16,9 +16,9 @@ React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri
 
 </YouWillLearn>
 
-## Olay yöneticileri eklemek {/*adding-event-handlers*/}
+## Olay yöneticileri oluşturmak {/*adding-event-handlers*/}
 
-Olay yöneticisi eklemek için öncelikle bir fonksiyon tanımlarsınız ve uygun JSX etiketine [prop olarak iletirsiniz](/learn/passing-props-to-a-component). Örneğin, hiçbir şey yapmayan bir düğmeyi ele alalım:
+Olay yöneticisi (event handler) oluşturmak için bir fonksiyon tanımlayıp uygun JSX etiketine [prop olarak iletirsiniz](/learn/passing-props-to-a-component). Örneğin, hiçbir şey yapmayan bir düğmeyi ele alalım:
 
 <Sandpack>
 
@@ -34,7 +34,7 @@ export default function Button() {
 
 </Sandpack>
 
-Kullanıcı düğmeye tıkladığında bir mesaj göstermek için aşağıdaki üç adımı izleyebilirsiniz:
+Kullanıcı düğmeye tıkladığında bir mesaj göstermek için aşağıdaki adımları izleyebilirsiniz:
 
 1. `Button` bileşeninizin *içerisinde* `handleClick` isimli bir fonksiyon tanımlayın.
 2. Tanımladığınız fonksiyonun içerisinde mantığınızı oluşturun (mesaj göstermek için `alert` kullanın).
@@ -62,7 +62,7 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-`handleClick` fonksiyonunu tanımladınız ve ardından `<button>`'a [prop olarak ilettiniz](/learn/passing-props-to-a-component). `handleClick`, bir **olay yöneticisi**dir (event handler). Olay yönetici fonksiyonları:
+`handleClick` fonksiyonunu tanımladınız ve ardından `<button>`'a [prop olarak ilettiniz](/learn/passing-props-to-a-component). `handleClick`, bir **olay yöneticisi (event handler)**'dir. Olay yönetici fonksiyonları:
 
 * Genellikle bileşenlerinizin *içerisinde* tanımlanır.
 * `handle` ile başlayıp olayın ismiyle devam edecek formatta isimlendirilirler.
@@ -126,7 +126,7 @@ Her iki durumda da iletmek istediğimiz şey fonksiyondur:
 * `<button onClick={handleClick}>` ifadesinde `handleClick` fonksiyonu iletilir.
 * `<button onClick={() => alert('...')}>` ifadesinde `() => alert('...')` fonksiyonu iletilir.
 
-[Ok fonksiyonları hakkında daha fazla bilgi edinin.](https://tr.javascript.info/arrow-functions-basics)
+[Ok fonksiyonları (arrow functions) hakkında daha fazla bilgi edinin.](https://tr.javascript.info/arrow-functions-basics)
 
 </Pitfall>
 
@@ -169,9 +169,9 @@ Bu iki düğmenin farklı mesaj gösterebilmesine olanak sağlar. Bileşenlere i
 
 ### Olay yöneticilerini prop olarak iletmek {/*passing-event-handlers-as-props*/}
 
-Sıklıkla bileşenlerin alt bileşenlerindeki olay yöneticilerini belirlemesini istersiniz. Düğmeleri düşünelim: bileşeninin nerede kullanıldığına bağlı olarak farklı işlevler yerine getirmesini isteyebilirsiniz - mesela biri film oynatırken diğeri resim yükleyebilir.
+Sıklıkla bileşenlerin alt bileşenlerindeki (child component) olay yöneticilerini belirlemesini istersiniz. Düğmeleri düşünelim: bileşeninin nerede kullanıldığına bağlı olarak farklı işlevler yerine getirmesini isteyebilirsiniz - mesela biri film oynatırken diğeri resim yükleyebilir.
 
-Bunun için, üst bileşenden prop olarak alınan fonksiyon olay yöneticisi olarak kullanılabilir:
+Bunun için, üst bileşenden (parent component) prop olarak alınan fonksiyon olay yöneticisi olarak kullanılabilir:
 
 <Sandpack>
 
@@ -228,7 +228,7 @@ button { margin-right: 10px; }
 
 Son olarak, `Button` bileşeniniz `onClick` prop'unu kabul eder ve doğrudan `onClick={onClick}` şeklinde yerleşik `<button>` elementine aktarır. Böylece React, düğmeye tıkladıkça ilettiğiniz fonksiyonu çağırır.
 
-Bu durum [tasarım sistemlerinde](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) yaygınca kullanılır. Tasarım sistemi bileşenleri varsayılan stillendirmelere sahiptirler ancak davranış tanımlamazlar. Böylece `PlayButton` ve `UploadButton` bileşenlerinde olduğu gibi, olay yöneticileri iletilerek davranış belirlenir.
+Bu durum [tasarım sistemlerinde (design system)](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) yaygınca kullanılır. Tasarım sistemi bileşenleri varsayılan stillendirmelere sahiptirler ancak davranış tanımlamazlar. Böylece `PlayButton` ve `UploadButton` bileşenlerinde olduğu gibi, olay yöneticileri iletilerek davranış belirlenir.
 
 ### Olay yönetici prop'larını adlandırmak {/*naming-event-handler-props*/}
 
@@ -360,7 +360,7 @@ React'ta `onScroll` haricindeki tüm olaylar yayılır. `onScroll` ise sadece ek
 
 ### Yayılımı durdurmak {/*stopping-propagation*/}
 
-Olay yöneticileri argüman olarak yalnızca bir **olay nesnesi** alır. Genellikle olay terimin İngilizce karşılığı olan "event"in kısaltılması olan `e` ile adlandırılırlar. Bu nesneyi kullanarak olay hakkındaki detaylara erişebilirsiniz.
+Olay yöneticileri argüman olarak yalnızca bir **olay nesnesi (event object)** alır. Genellikle olay teriminin İngilizce karşılığı "event"in kısaltılması olan `e` ile adlandırılırlar. Bu nesneyi kullanarak olay hakkındaki detaylara erişebilirsiniz.
 
 Olay nesnesi ayrıca yayılımı durdurmanıza da imkan sağlar. Bir olayın üst bileşenlere erişmesini engellemek istiyorsanız, örnekteki `Button` bileşeninde olduğu gibi `e.stopPropagation()` çağırmalısınız.
 
@@ -419,7 +419,7 @@ Düğmeye tıklandığında `<button>` ve `<div>` elementlerinden gelen iki ayr�
 
 #### Olay aşamalarını yakalamak {/*capture-phase-events*/}
 
-Nadir durumlarda **yayılımı durdurulmuş** olsa bile alt elemanlardaki olayları yakalamak isteyebilirsiniz. Örneğin, analitik verileri için her tıklamayı kaydetmek istebilirsiniz. Bu yayılım mantığından bağımsızdır. Bunu olay adının sonuna `Capture` ekleyerek yapabilirsiniz:
+Nadir durumlarda **yayılması durdurulmuş** olsa bile alt elemanlardaki olayları yakalamak isteyebilirsiniz. Örneğin, analitik verileri için her tıklamayı kaydetmek istebilirsiniz. Bu yayılım mantığından bağımsızdır. Bunu olay adının sonuna `Capture` ekleyerek yapabilirsiniz:
 
 ```js
 <div onClickCapture={() => { /* ilk bu çalışır */ }}>
@@ -514,9 +514,9 @@ button { margin-left: 5px; }
 
 ## Olay yöneticilerinin yan etkileri olabilir mi? {/*can-event-handlers-have-side-effects*/}
 
-Kesinlikle! Olay yöneticileri yan etkiler için en iyi yerdir.
+Kesinlikle! Olay yöneticileri yan etkiler (side effect) için en iyi yerdir.
 
-Renderlama fonksiyonlarının aksine, olay yöneticilerinin [saf](/learn/keeping-components-pure) olması gerekmez. Bu sebeple bir şeyleri *değiştirmek* için güzel yerlerdir - örneğin, yazma eylemine tepki olarak girdi değerini değiştirmek veya düğmeye basma eylemine tepki olarak listeyi değiştirmek. Ancak, bilgiyi değiştirmek için öncelikle bir yerde saklamak gerekir. React'da bunu yapmak için [state, bileşen hafızası](/learn/state-a-components-memory) kullanabilirsiniz. Bununla ilgili tüm detayları bir sonraki sayfada öğreneceksiniz.
+Renderlama fonksiyonlarının aksine, olay yöneticilerinin [saf (pure)](/learn/keeping-components-pure) olması gerekmez. Bu sebeple bir şeyleri *değiştirmek* için güzel yerlerdir - örneğin, yazma eylemine tepki olarak girdi değerini değiştirmek veya düğmeye basma eylemine tepki olarak listeyi değiştirmek. Ancak, bilgiyi değiştirmek için öncelikle bir yerde saklamak gerekir. React'da bunu yapmak için [state, bileşen hafızası](/learn/state-a-components-memory) kullanabilirsiniz. Bununla ilgili tüm detayları bir sonraki sayfada öğreneceksiniz.
 
 <Recap>
 
