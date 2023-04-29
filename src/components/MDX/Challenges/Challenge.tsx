@@ -116,7 +116,7 @@ export function Challenge({
                 )}
                 onClick={handleClickNextChallenge}
                 active>
-                Sonraki problem
+                Sonraki Problem
                 <IconArrowSmall
                   displayDirection="right"
                   className="block ml-1.5"
