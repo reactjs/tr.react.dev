@@ -1082,7 +1082,7 @@ export const recipes = [{
 
 Burada, `<Recipe {...recipe} key={recipe.id} />` syntax'ı `recipe` objesinin tüm özelliklerini `Recipe` bileşenine prop olarak aktarmanın kısa bir yoludur. Ayrıca her bir prop'u açıkça şu şekilde yazabilirsiniz: `<Recipe id={recipe.id} name={recipe.name} ingredients={recipe.ingredients} key={recipe.id} />`.
 
-**`key`'in (`anahtar`) `Recipe`'den döndürülen root `<div>` yerine `<Recipe>` üzerinde kullanıldığına dikkat edin.** Bunun nedeni, `anahtar`'ın doğrudan çevreleyen dizi bağlamında gerekli olmasıdır. Önceden, bir `<div>` diziniz vardı, dolayısıyla her birinin bir ``anahtar`'a ihtiyacı vardı. Ancak artık bir `<Recipe>` diziniz var. Diğer bir deyişle, yeni bir bileşen çıkarttığınız zaman, `anahtar`'ı kopyalayıp yapıştırdığınız JSX'in dışında bırakmayı unutmayın.
+**`key`'in (`anahtar`) `Recipe`'den döndürülen root `<div>` yerine `<Recipe>` üzerinde kullanıldığına dikkat edin.** Bunun nedeni, `anahtar`'ın doğrudan çevreleyen dizi bağlamında gerekli olmasıdır. Önceden, bir `<div>` diziniz vardı, dolayısıyla her birinin bir `anahtar`'a ihtiyacı vardı. Ancak artık bir `<Recipe>` diziniz var. Diğer bir deyişle, yeni bir bileşen çıkarttığınız zaman, `anahtar`'ı kopyalayıp yapıştırdığınız JSX'in dışında bırakmayı unutmayın.
 
 </Solution>
 
