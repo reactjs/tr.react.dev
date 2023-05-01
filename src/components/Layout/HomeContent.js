@@ -131,7 +131,7 @@ export function HomeContent() {
             React
           </h1>
           <p className="text-4xl font-display max-w-lg md:max-w-full py-1 text-center text-secondary dark:text-primary-dark leading-snug self-center">
-            Web ve yerel kullanıcı arayüzü için kütüphane
+            Web ve yerel (native) kullanıcı arayüzü için kütüphane
           </p>
           <div className="mt-5 self-center flex gap-2 w-full sm:w-auto flex-col sm:flex-row">
             <ButtonLink
@@ -268,11 +268,11 @@ export function HomeContent() {
             <div className="mx-auto max-w-4xl lg:text-center items-center px-5 flex flex-col">
               <Header>Her platformdan en iyisini kullanın</Header>
               <Para>
-                İnsanlar web ve yerel uygulamaları farklı nedenlerden seviyor.
-                React, aynı becerileri kullanarak hem web uygulamaları hem de
-                yerel uygulamalar oluşturmanıza olanak tanır. Her platformun
-                benzersiz güçlerine dayanarak, arayüzlerinizin her platformda
-                doğru hissettirmesine izin verir.
+                İnsanlar web ve yerel (native) uygulamaları farklı nedenlerden
+                dolayı seviyor. React, aynı becerileri kullanarak hem web
+                uygulamaları hem de yerel (native) uygulamalar oluşturmanıza
+                olanak tanır. Her platformun benzersiz güçlerine dayanarak,
+                arayüzlerinizin her platformda doğru hissettirmesine izin verir.
               </Para>
             </div>
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row mt-16 mb-20 lg:mb-28 px-5 gap-20 lg:gap-5">
@@ -373,22 +373,23 @@ export function HomeContent() {
                       </div>
                       <div className="flex flex-col items-start justify-center pt-0 gap-3 px-2.5 lg:pt-8 lg:px-8">
                         <h4 className="leading-tight text-primary dark:text-primary-dark font-semibold text-3xl lg:text-4xl">
-                          Gerçekten yerel olun.
+                          Gerçekten yerel (native) olun.
                         </h4>
                         <p className="h-full lg:text-xl text-secondary dark:text-secondary-dark leading-normal">
-                          İnsanlar yerel uygulamaların kendi platformları gibi
-                          görünüp hisettirmelerini bekliyorlar.{' '}
+                          İnsanlar yerel (native) uygulamaların kendi
+                          platformları gibi görünüp hisettirmelerini
+                          bekliyorlar.{' '}
                           <Link href="https://reactnative.dev">
                             React Native
                           </Link>{' '}
                           ve{' '}
                           <Link href="https://github.com/expo/expo">Expo</Link>,
                           React ile Android, iOS ve daha fazlası için uygulama
-                          oluşturmanıza olanak tanır. Arayüzleri gerçekten yerel
-                          olduğu için yerel gözüküyor ve hissettiriyorlar. Bu
-                          bir web görünümü değil. React bileşenleriniz, platform
-                          tarafından sağlanan gerçek Android ve iOS
-                          görünümlerini renderlar.
+                          oluşturmanıza olanak tanır. Arayüzleri yerel (native)
+                          gibi gözüküyor ve hissetiriyor, çünkü gerçekten
+                          öyleler. Bu bir web görünümü değil. React
+                          bileşenleriniz, platform tarafından sağlanan gerçek
+                          Android ve iOS görünümlerini renderlar.
                         </p>
                       </div>
                     </div>
@@ -398,15 +399,15 @@ export function HomeContent() {
             </div>
             <div className="px-5 lg:px-0 max-w-4xl mx-auto lg:text-center text-secondary dark:text-secondary-dark">
               <Para>
-                React ile web ve yerel geliştirici olabilirsiniz. Takımınız,
-                kullanıcı deneyimini feda etmeden birçok platforma uygulama
-                yapabilir. Organizasyonunuz, platform farklılıklarını
+                React ile web ve yerel (native) geliştirici olabilirsiniz.
+                Takımınız, kullanıcı deneyimini feda etmeden birçok platforma
+                uygulama yapabilir. Organizasyonunuz, platform farklılıklarını
                 bağdaştırabilir ve baştan sona tüm özelliklere sahip olan
                 takımlar oluşturabilir.
               </Para>
               <div className="flex justify-start w-full lg:justify-center">
                 <CTA color="gray" icon="native" href="https://reactnative.dev/">
-                  Yerel platformlar için oluşturun
+                  Yerel (native) platformlar için oluşturun
                 </CTA>
               </div>
             </div>
