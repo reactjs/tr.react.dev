@@ -453,9 +453,9 @@ Eğer JavaScript diline aşina değilseniz, bu çeşitli syntax'ler ilk başta k
 
 <Challenges>
 
-#### Show an icon for incomplete items with `? :` {/*show-an-icon-for-incomplete-items-with--*/}
+#### Bavula konmamış eşyalar için `? :` syntax'i kullanarak bir ikon göster {/*show-an-icon-for-incomplete-items-with--*/}
 
-Use the conditional operator (`cond ? a : b`) to render a ❌ if `isPacked` isn’t `true`.
+Koşul operatörünü (`cond ? a : b`) kullanarak eğer `isPacked` prop'u `true` (`doğru`) değilse ❌ render et.
 
 <Sandpack>
 
@@ -533,15 +533,15 @@ export default function PackingList() {
 
 </Solution>
 
-#### Show the item importance with `&&` {/*show-the-item-importance-with-*/}
+#### Eşyanın önemini `&&` ile göster {/*show-the-item-importance-with-*/}
 
-In this example, each `Item` receives a numerical `importance` prop. Use the `&&` operator to render "_(Importance: X)_" in italics, but only for items that have non-zero importance. Your item list should end up looking like this:
+Bu örnekte, herbir `Item` sayısal bir `importance` prop'u almaktadır. `&&` operatörünü kullanarak "importance" (önem) değeri 0'dan büyük olanların yanında italik olarak "_(Importance: X)_" render edebilirsiniz. Eşyalarınızın listesinin son hali şu şekilde olmalıdır:
 
 * Space suit _(Importance: 9)_
 * Helmet with a golden leaf
 * Photo of Tam _(Importance: 6)_
 
-Don't forget to add a space between the two labels!
+İki label (etiket) arasına boşluk koymayı unutmayın!
 
 <Sandpack>
 
@@ -581,7 +581,7 @@ export default function PackingList() {
 
 <Solution>
 
-This should do the trick:
+Şu şekilde boşluk bırakabilirsiniz:
 
 <Sandpack>
 
@@ -623,15 +623,15 @@ export default function PackingList() {
 
 </Sandpack>
 
-Note that you must write `importance > 0 && ...` rather than `importance && ...` so that if the `importance` is `0`, `0` isn't rendered as the result!
+`importance && ...` yerine `importance > 0 && ...` yazmanız gerektiğini unutmayın. Böylelikle `importance` prop'u `0` olanlar render edilmemiş olacaktır.
 
-In this solution, two separate conditions are used to insert a space between then name and the importance label. Alternatively, you could use a fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
+Bu çözümde, eşyanın ismi ve importance yazısı arasına boşluk koyabilmek için iki farklı koşul kullanılmalıdır. Alternatif olarak, zaten boşluğu olan bir fragment `importance > 0 && <> <i>...</i></>` kullanabilir ya da `<i>` içine bir boşluk ekleyebilirsiniz `importance > 0 && <i> ...</i>`.
 
 </Solution>
 
-#### Refactor a series of `? :` to `if` and variables {/*refactor-a-series-of---to-if-and-variables*/}
+#### Bir dizi `? :` ifadesini `if` syntax'i ve değişkenler ile değiştir {/*refactor-a-series-of---to-if-and-variables*/}
 
-This `Drink` component uses a series of `? :` conditions to show different information depending on whether the `name` prop is `"tea"` or `"coffee"`. The problem is that the information about each drink is spread across multiple conditions. Refactor this code to use a single `if` statement instead of three `? :` conditions.
+`Drink` bileşeni, `name` prop'unun `"tea"` ya da `"coffee"` olduğuna bağlı olarak farklı bilgiler göstermek için bir dizi ? : koşulunu kullanır. Buradaki sorun her içecek hakkındaki bilgilerin birden fazla koşula bağlı olmasıdır. Bu kodu üç tane `? :` koşulu yerine tek bir `if` ifadesi kullanacak şekilde yeniden düzenleyin.
 
 <Sandpack>
 
@@ -664,11 +664,11 @@ export default function DrinkList() {
 
 </Sandpack>
 
-Once you've refactored the code to use `if`, do you have further ideas on how to simplify it?
+Kodunuzu `if` ifadesini kullanacak şekilde düzenledikten sonra bu kodu nasıl daha da basitleştirebileceğiniz konusunda bir fikriniz var mı?
 
 <Solution>
 
-There are multiple ways you could go about this, but here is one starting point:
+Bunu yapmak için birden fazla yolunuz var ama başlangıç olarak şuna bakalım:
 
 <Sandpack>
 
@@ -711,9 +711,9 @@ export default function DrinkList() {
 
 </Sandpack>
 
-Here the information about each drink is grouped together instead of being spread across multiple conditions. This makes it easier to add more drinks in the future.
+Burada, her içecek hakkındaki bilgiler birden fazla koşul yerine bir araya toplanmıştır. Böylelikle gelecekte daha fazla içecek eklemeniz daha kolay bir hale gelecektir
 
-Another solution would be to remove the condition altogether by moving the information into objects:
+Diğer bir çözüm ise tüm koşullu ifadeleri kaldırıp içeceklerle alakalı tüm bilgileri bir JavaScript objesi içine koymaktır:
 
 <Sandpack>
 
