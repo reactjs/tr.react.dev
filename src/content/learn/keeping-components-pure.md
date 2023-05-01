@@ -4,19 +4,19 @@ title: Bileşenleri Saf Tutmak
 
 <Intro>
 
-Bazı JavaScript fonksiyonları *saf* olarak adlandırılır.Saf fonksiyonlar sadece bir hesaplama yaparlar ve başka bir işlem gerçekleştirmezler. Bileşenlerinizi sadece saf fonksiyonlar olarak yazarak, kod tabanınız büyüdükçe ortaya çıkabilecek birçok karmaşık hatayı ve öngörülemeyen davranışları önleyebilirsiniz. Ancak, bu faydaları elde etmek için bazı kurallara uymalısınız.
+Bazı JavaScript fonksiyonları *saf* olarak adlandırılır. Saf fonksiyonlar sadece bir hesaplama yaparlar ve başka bir işlem gerçekleştirmezler. Bileşenlerinizi sadece saf fonksiyonlar olarak yazarak, kod tabanınız büyüdükçe ortaya çıkabilecek birçok karmaşık hatayı ve öngörülemeyen davranışları önleyebilirsiniz. Ancak, bu faydaları elde etmek için bazı kurallara uymalısınız.
 
 </Intro>
 
 <YouWillLearn>
 
-* Sadelik nedir ve hatalardan kaçınmanıza nasıl yardımcı olur,
-* Değişiklikleri render aşaması dışında tutarak bileşenleri nasıl sade tutabileceğiniz,
+* Saflık nedir ve hatalardan kaçınmanıza nasıl yardımcı olur,
+* Değişiklikleri render aşaması dışında tutarak bileşenleri nasıl saf tutabileceğiniz,
 * Bileşenlerinizdeki hataları bulmak için Strict Modu'u nasıl kullanacağınız.
 
 </YouWillLearn>
 
-## Sadelik: Formüller olarak bileşenler {/*purity-components-as-formulas*/}
+## Saflık: Formüller olarak bileşenler {/*purity-components-as-formulas*/}
 
 Bilgisayar biliminde (ve özellikle fonksiyonel programlama dünyasında), [saf bir fonksiyon](https://wikipedia.org/wiki/Pure_function) aşağıdaki özelliklere sahip fonksiyonlardır: 
 
@@ -88,7 +88,7 @@ Bileşenlerinizi de bir tarif gibi düşünebilirsiniz: bunları takip eder ve p
 
 ## Yan Etkileri: isten(mey)en sonuçlar {/*side-effects-unintended-consequences*/}
 
-React'in render işlemi her zaman sade olmalıdır. Bileşenler yalnızca JSX'lerini *döndürmeli,* ve render işleminden önce var olan herhangi bir nesne veya değişkeni *değiştirmemelidir* - aksi takdirde bileşenler saf olmaktan çıkar!
+React'in render işlemi her zaman saf olmalıdır. Bileşenler yalnızca JSX'lerini *döndürmeli,* ve render işleminden önce var olan herhangi bir nesne veya değişkeni *değiştirmemelidir* - aksi takdirde bileşenler saf olmaktan çıkar!
 
 İşte bu kuralı ihlal eden bir bileşen örneği:
 
@@ -142,7 +142,7 @@ export default function TeaSet() {
 
 </Sandpack>
 
-Artık bileşeniniz sade bir durumda, çünkü döndürdüğü JSX yalnızca `misafir` prop’una bağlı.
+Artık bileşeniniz saf bir durumda, çünkü döndürdüğü JSX yalnızca `misafir` prop’una bağlı.
 
  Genel olarak, bileşenlerinizin belirli bir sırada işlenmesiniz beklememelisiniz. <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>'i, <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>'ten önce veya sonra çağırmanız farketmez: Her iki formül de birbirinden bağımsız olarak çözülecektir. Aynı şekilde, her bileşen yalnızca "kendi için düşünmeli" ve render işlemi sırasında diğer bileşenlerle koordine etmeye veya onlara bağımlı olmaya çalışmamalıdır. Render işlemi bir okul sınavı gibi: her bileşen kendi JSX'ini hesaplamalıdır!
 
