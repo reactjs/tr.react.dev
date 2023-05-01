@@ -1,41 +1,41 @@
 ---
-title: Keeping Components Pure
+title: Bileşenleri Saf Tutmak 
 ---
 
 <Intro>
 
-Some JavaScript functions are *pure.* Pure functions only perform a calculation and nothing more. By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. To get these benefits, though, there are a few rules you must follow.
+Bazı JavaScript fonksiyonları *saf* olarak adlandırılır.Saf fonksiyonlar sadece bir hesaplama yaparlar ve başka bir işlem gerçekleştirmezler. Bileşenlerinizi sadece saf fonksiyonlar olarak yazarak, kod tabanınız büyüdükçe ortaya çıkabilecek birçok karmaşık hatayı ve öngörülemeyen davranışları önleyebilirsiniz. Ancak, bu faydaları elde etmek için bazı kurallara uymalısınız.
 
 </Intro>
 
 <YouWillLearn>
 
-* What purity is and how it helps you avoid bugs
-* How to keep components pure by keeping changes out of the render phase
-* How to use Strict Mode to find mistakes in your components
+* Sadelik nedir ve hatalardan kaçınmanıza nasıl yardımcı olur,
+* Değişiklikleri render aşaması dışında tutarak bileşenleri nasıl sade tutabileceğiniz,
+* Bileşenlerinizdeki hataları bulmak için Strict Modu'u nasıl kullanacağınız.
 
 </YouWillLearn>
 
-## Purity: Components as formulas {/*purity-components-as-formulas*/}
+## Sadelik: Formüller olarak bileşenler {/*purity-components-as-formulas*/}
 
-In computer science (and especially the world of functional programming), [a pure function](https://wikipedia.org/wiki/Pure_function) is a function with the following characteristics:
+Bilgisayar biliminde (ve özellikle fonksiyonel programlama dünyasında), [saf bir fonksiyon](https://wikipedia.org/wiki/Pure_function) aşağıdaki özelliklere sahip fonksiyonlardır: 
 
-* **It minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **Kendi işine bakar.** Çağrılmadan önce var olan herhangi bir nesneyi ve objeyi değiştirmez.
+* **Aynı girdi, aynı çıktı.** Aynı girdiler verildiğinde, saf bir fonksiyon her zaman aynı sonucu döndürmelidir.
 
-You might already be familiar with one example of pure functions: formulas in math.
+Saf fonksiyonların bir örneğini zaten biliyor olabilirsiniz: matematikteki formüller.
 
-Consider this math formula: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
+Bu formülü ele alalım: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-If <Math><MathI>x</MathI> = 2</Math> then <Math><MathI>y</MathI> = 4</Math>. Always. 
+Eğer <Math><MathI>x</MathI> = 2</Math> ise <Math><MathI>y</MathI> = 4</Math>'tür. Her zaman. 
 
-If <Math><MathI>x</MathI> = 3</Math> then <Math><MathI>y</MathI> = 6</Math>. Always. 
+Eğer <Math><MathI>x</MathI> = 3</Math> ise <Math><MathI>y</MathI> = 6</Math>'dır. Her zaman. 
 
-If <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> won't sometimes be <Math>9</Math> or <Math>–1</Math> or <Math>2.5</Math> depending on the time of day or the state of the stock market. 
+Eğer <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> günün zamanına veya borsanın durumuna bağlı olarak bazen <Math>9</Math> ya da <Math>–1</Math> veya <Math>2.5</Math> olmaz. 
 
-If <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> and <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> will _always_ be <Math>6</Math>. 
+Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> will _always_ be <Math>6</Math>'dır. 
 
-If we made this into a JavaScript function, it would look like this:
+Eğer bunu bir JavaScript fonksiyonuna çevirseydik, şöyle görünürdü:
 
 ```js
 function double(number) {
@@ -43,9 +43,9 @@ function double(number) {
 }
 ```
 
-In the above example, `double` is a **pure function.** If you pass it `3`, it will return `6`. Always.
+Yukardaki örnekte, `double` **saf bir fonksiyondur.** Fonksiyona `3` parametresini geçerseniz, `6'yı` döndürür. Her zaman.
 
-React is designed around this concept. **React assumes that every component you write is a pure function.** This means that React components you write must always return the same JSX given the same inputs:
+React bu konseptin etrafında tasarlanmıştır. **React yazdığınız her bileşenin saf bir fonksiyon olduğunu varsayar.** Bu, yazdığınız React bileşenlerinin, aynı girdiler verildiğinde her zaman aynı JSX'i döndürmesi gerektiği anlamına gelir:
 
 <Sandpack>
 
@@ -75,21 +75,22 @@ export default function App() {
 
 </Sandpack>
 
-When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always. 
+`Drinkers` parametresine `{2}` değerini verip, `Recipe'ye` geçerseniz, `2 bardak su` içeren JSX'i döndürür. Her zaman.
 
-If you pass `drinkers={4}`, it will return JSX containing `4 cups of water`. Always.
+`Drinkers` parametresine `{4}` değerini verip, `4 bardak su` içeren JSX’i döndürür. Her zaman.
 
-Just like a math formula. 
 
-You could think of your components as recipes: if you follow them and don't introduce new ingredients during the cooking process, you will get the same dish every time. That "dish" is the JSX that the component serves to React to [render.](/learn/render-and-commit)
+Tıpkı bir matematik formülü gibi.
+
+Bileşenlerinizi de bir tarif gibi düşünebilirsiniz: bunları takip eder ve pişirme esnasında yeni malzemeler eklemezseniz, her zaman aynı yemeği yaparsınız. Bu “yemek”, bileşenin React’e [render](/learn/render-and-commit) için sağladığı JSX’tir. 
 
 <Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add x spoons of tea and 0.5x spoons of spices, and 0.5x cups of milk" />
 
-## Side Effects: (un)intended consequences {/*side-effects-unintended-consequences*/}
+## Yan Etkileri: isten(mey)en sonuçlar {/*side-effects-unintended-consequences*/}
 
-React's rendering process must always be pure. Components should only *return* their JSX, and not *change* any objects or variables that existed before rendering—that would make them impure!
+React'in render işlemi her zaman sade olmalıdır. Bileşenler yalnızca JSX'lerini *döndürmeli,* ve render işleminden önce var olan herhangi bir nesne veya değişkeni *değiştirmemelidir* - aksi takdirde bileşenler saf olmaktan çıkar!
 
-Here is a component that breaks this rule:
+İşte bu kuralı ihlal eden bir bileşen örneği:
 
 <Sandpack>
 
@@ -115,11 +116,11 @@ export default function TeaSet() {
 
 </Sandpack>
 
-This component is reading and writing a `guest` variable declared outside of it. This means that **calling this component multiple times will produce different JSX!** And what's more, if _other_ components read `guest`, they will produce different JSX, too, depending on when they were rendered! That's not predictable.
+Bu bileşen, kendisi dışında tanımlanmış bir `misafir` değişkenini okuyup yazıyor. Bu, bu bileşenin **birden fazla kez çağrılması farklı JSX üreteceği anlamına gelir!**  Ve daha da fazlası, _diğer_ bileşenler de `misafir` değişkenini okursa, ne zaman render edildiklerine bağlı olarak farklı JSX üreteceklerdir! Bu tahmin edilebilir değil.
 
-Going back to our formula <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>, now even if <Math><MathI>x</MathI> = 2</Math>, we cannot trust that <Math><MathI>y</MathI> = 4</Math>. Our tests could fail, our users would be baffled, planes would fall out of the sky—you can see how this would lead to confusing bugs!
+<Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>  formülümüze geri dönersek, şimdi <Math><MathI>x</MathI> = 2</Math> olsa bile, <Math><MathI>y</MathI> = 4</Math>'e güvenemeyiz. Testlerimiz başarısız olabilir, kullanıcılarımız şaşkına dönebilir, uçaklar düşebilir - nasıl karışık hatalara neden olacağını görebilirsiniz!
 
-You can fix this component by [passing `guest` as a prop instead](/learn/passing-props-to-a-component):
+[Bunun yerine, `misafiri` bir prop olarak geçerek](/learn/passing-props-to-a-component) bu bileşeni düzeltebilirsiniz:
 
 <Sandpack>
 
@@ -141,31 +142,31 @@ export default function TeaSet() {
 
 </Sandpack>
 
-Now your component is pure, as the JSX it returns only depends on the `guest` prop.
+Artık bileşeniniz sade bir durumda, çünkü döndürdüğü JSX yalnızca `misafir` prop’una bağlı.
 
-In general, you should not expect your components to be rendered in any particular order. It doesn't matter if you call <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> before or after <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>: both formulas will resolve independently of each other. In the same way, each component should only "think for itself", and not attempt to coordinate with or depend upon others during rendering. Rendering is like a school exam: each component should calculate JSX on their own!
+ Genel olarak, bileşenlerinizin belirli bir sırada işlenmesiniz beklememelisiniz. <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>'i, <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>'ten önce veya sonra çağırmanız farketmez: Her iki formül de birbirinden bağımsız olarak çözülecektir. Aynı şekilde, her bileşen yalnızca "kendi için düşünmeli" ve render işlemi sırasında diğer bileşenlerle koordine etmeye veya onlara bağımlı olmaya çalışmamalıdır. Render işlemi bir okul sınavı gibi: her bileşen kendi JSX'ini hesaplamalıdır!
 
 <DeepDive>
 
-#### Detecting impure calculations with StrictMode {/*detecting-impure-calculations-with-strict-mode*/}
+#### StrictMode ile saf olmayan hesaplamaları algılama {/*detecting-impure-calculations-with-strict-mode*/}
 
-Although you might not have used them all yet, in React there are three kinds of inputs that you can read while rendering: [props](/learn/passing-props-to-a-component), [state](/learn/state-a-components-memory), and [context.](/learn/passing-data-deeply-with-context) You should always treat these inputs as read-only.
+Henüz hepsini kullanmamış olsanız da, React'te işleme sırasında okuyabileceğiniz üç tür girdi vardır: [props](/learn/passing-props-to-a-component), [state](/learn/state-a-components-memory), and [context.](/learn/passing-data-deeply-with-context) Bu girişleri her zaman salt okunur olarak değerlendirmelisiniz.
 
-When you want to *change* something in response to user input, you should [set state](/learn/state-a-components-memory) instead of writing to a variable. You should never change preexisting variables or objects while your component is rendering.
+Kullanıcı girişine yanıt olarak bir şeyi *değiştirmek* istediğinizde, bir değişkene yazmak yerine, [state oluşturmalısınız.](/learn/state-a-components-memory) Bileşeniniz render edilirken önceden var olan değişkenleri veya nesneleri asla değiştirmemelisiniz.
 
-React offers a "Strict Mode" in which it calls each component's function twice during development. **By calling the component functions twice, Strict Mode helps find components that break these rules.**
+React, geliştirme sırasında her bileşenin işlevini iki kez çağırdığı bir “Strict Mode” sunar. **Strict Mode, bileşen işlevlerini iki kez çağırarak, bu kuralları çiğneyen bileşenlerin bulunmasına yardımcı olur.**
 
-Notice how the original example displayed "Guest #2", "Guest #4", and "Guest #6" instead of "Guest #1", "Guest #2", and "Guest #3". The original function was impure, so calling it twice broke it. But the fixed pure version works even if the function is called twice every time. **Pure functions only calculate, so calling them twice won't change anything**--just like calling `double(2)` twice doesn't change what's returned, and solving <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> twice doesn't change what <MathI>y</MathI> is. Same inputs, same outputs. Always.
+Orijinal örneğin "Guest #2", "Guest #4" ve "Guest #6" yerine "Guest #1", "Guest #2" ve "Guest #3" yerine nasıl görüntülendiğine dikkat edin. Orijinal fonksiyon saf değildi, bu yüzden onu iki kez çağırmak onu bozdu. Ancak sabit saf fonksiyon, işlev her seferinde iki kez çağrılsa bile çalışır. **Saf fonksiyonlar yalnızca hesaplama yapar, bu yüzden onları iki kez çağırmak hiçbir şeyi değiştirmez** -- tıpkı `double(2)`'yi iki kez çağırmanın döndürülen şeyi değiştirmemesi, <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>'i iki kez çözmenin <MathI>y</MathI>'yi değiştirmemesi gibi. Aynı girdiler, aynı çıktılar. Her zaman.
 
-Strict Mode has no effect in production, so it won't slow down the app for your users. To opt into Strict Mode, you can wrap your root component into `<React.StrictMode>`. Some frameworks do this by default.
+Strict Mode'un üretimde hiçbir etkisi yoktur, bu nedenle kullanıcılarınız için uygulamayı yavaşlatmaz. Strict Mode'u etkinleştirmek için kök bileşeninizi `<React.StrictMode>` içine sarabilirsiniz. Bazı kütüphaneler bunu varsayılan olarak yapar.
 
 </DeepDive>
 
-### Local mutation: Your component's little secret {/*local-mutation-your-components-little-secret*/}
+### Yerel Mutasyon: Yerel bileşeninizin küçük sırrı {/*local-mutation-your-components-little-secret*/}
 
-In the above example, the problem was that the component changed a *preexisting* variable while rendering. This is often called a **"mutation"** to make it sound a bit scarier. Pure functions don't mutate variables outside of the function's scope or objects that were created before the call—that makes them impure!
+Yukarıdaki örnekteki sorun, bileşenin render edilirken önceden var olan bir değişkeni değiştirmesiydi. Bu genellikle biraz korkutucu görünmesi için **mutasyon** olarak adlandırılır. Saf fonksiyonlar, fonksiyonun kapsamı dışındaki değişkenleri veya çağrıdan önce oluşturulmuş nesneleri değiştirmez - bu onları saf olmayan fonksiyonlar yapar!
 
-However, **it's completely fine to change variables and objects that you've *just* created while rendering.** In this example, you create an `[]` array, assign it to a `cups` variable, and then `push` a dozen cups into it:
+Ancak, **render işlemi *sırasında* oluşturduğunuz değişkenleri ve nesneleri değiştirmek tamamen normaldir.** Bu örnekte, `[]` bir dizi oluşturur, bunu bir `cups` değişkenine atar ve ardından içine bir düzine fincan `eklersiniz`:
 
 <Sandpack>
 
@@ -185,43 +186,43 @@ export default function TeaGathering() {
 
 </Sandpack>
 
-If the `cups` variable or the `[]` array were created outside the `TeaGathering` function, this would be a huge problem! You would be changing a *preexisting* object by pushing items into that array.
+Eğer cups değişkeni veya `[]` dizisi `TeaGathering` fonksiyonunun dışında oluşturulmuş olsaydı, bu büyük bir sorun olurdu! Bu dizinin içine öğeler ekleyerek *önceden var olan* bir nesneyi değiştiriyor olacaktınız.
 
-However, it's fine because you've created them *during the same render*, inside `TeaGathering`. No code outside of `TeaGathering` will ever know that this happened. This is called **"local mutation"**—it's like your component's little secret.
+Ancak, `TeaGathering` içindeki aynı *render işlemi sırasında* oluşturduğunuz için bu tamamen normaldir. `TeaGathering` dışındaki hiçbir kod bunun olduğunu asla bilemeyecektir. Buna **"yerel mutasyon"** denir - bileşeninizin küçük bir sırrı gibi.
 
-## Where you _can_ cause side effects {/*where-you-_can_-cause-side-effects*/}
+## Yan etkilere neden olabileceğiniz yerler {/*where-you-_can_-cause-side-effects*/}
 
-While functional programming relies heavily on purity, at some point, somewhere, _something_ has to change. That's kind of the point of programming! These changes—updating the screen, starting an animation, changing the data—are called **side effects.** They're things that happen _"on the side"_, not during rendering.
+Fonksiyonel programlama, büyük ölçüde saflığa dayanırken, bir noktada, bir yerde, bir şeyin değişmesi gerekir. Bu, programlamanın bir nevi amacıdır!  Ekranın güncellenmesi, bir animasyonun başlatılması, verilerin değiştirilmesi gibi değişikliklere **yan etkiler** denir. Bunlar, render işlemi sırasında değil, _"yan tarafta"_ meydana gelen şeylerdir.
 
-In React, **side effects usually belong inside [event handlers.](/learn/responding-to-events)** Event handlers are functions that React runs when you perform some action—for example, when you click a button. Even though event handlers are defined *inside* your component, they don't run *during* rendering! **So event handlers don't need to be pure.**
+React'te, **yan etkiler genellikle [event handlers.](/learn/responding-to-events) içine yazılır**. Event Handlerlar, bir işlem gerçekleştirdiğinizde (örneğin, bir düğmeye tıkladığınızda) React'ın çalıştırdığı fonksiyonlardır. Event Handlerları bileşeninizin *içinde* tanımlanmış olsa da, bunlar işleme *sırasında* çalışmazlar! **Bu nedenle olay işleyicilerinin saf olması gerekmez.**
 
-If you've exhausted all other options and can't find the right event handler for your side effect, you can still attach it to your returned JSX with a [`useEffect`](/reference/react/useEffect) call in your component. This tells React to execute it later, after rendering, when side effects are allowed. **However, this approach should be your last resort.**
+Diğer tüm seçenekleri tükettiyseniz ve yan etkiniz için doğru event handler’ı bulamıyorsanız, bileşeninizde bir[`useEffect`](/reference/react/useEffect) çağrısı ile onu döndürülen JSX'inize hâlâ ekleyebilirsiniz. Bu, React'e onu renderdan yani işlemeden sonra, yan etkilere izin verildiğinde çalıştırmasını söyler. **Ancak, bu yaklaşım son çareniz olmalıdır.**
 
-When possible, try to express your logic with rendering alone. You'll be surprised how far this can take you!
+Mümkün olduğunda, mantığınızı yalnızca render ile ifade etmeye çalışın. Bunun sizi ne kadar ileri götürebileceğine şaşıracaksınız!
 
 <DeepDive>
 
-#### Why does React care about purity? {/*why-does-react-care-about-purity*/}
+#### React neden saflığı önemsiyor? {/*why-does-react-care-about-purity*/}
 
-Writing pure functions takes some habit and discipline. But it also unlocks marvelous opportunities:
+Saf işlevler yazmak biraz alışkanlık ve disiplin gerektirir. Ama aynı zamanda harika fırsatların da kapısını açar:
 
-* Your components could run in a different environment—for example, on the server! Since they return the same result for the same inputs, one component can serve many user requests.
-* You can improve performance by [skipping rendering](/reference/react/memo) components whose inputs have not changed. This is safe because pure functions always return the same results, so they are safe to cache.
-* If some data changes in the middle of rendering a deep component tree, React can restart rendering without wasting time to finish the outdated render. Purity makes it safe to stop calculating at any time.
+* Bileşenleriniz farklı bir ortamda, örneğin sunucuda çalışabilir! Aynı girdiler için aynı sonucu döndürdüklerinden, bir bileşen birçok kullanıcı isteğine hizmet edebilir.
+* Girişleri değişmeyen bleşenleri [render etmeyi atlayarak](/reference/react/memo) performansı artırabilirsiniz. Bu güvenlidir çünkü saf işlevler her zaman aynı sonuçları döndürür, bu nedenle önbelleğe alınmaları güvenlidir.
+* Derin bir bileşen ağacı render edilirken ortasında bazı veriler değişirse, React, zaman aşımına uğramış enderi bitirmek için zaman kaybetmeden işlemeyi yeniden başlatabilir. Saflık, herhangi bir zamanda hesaplamayı durdurmayı güvenli hale getirir.
 
-Every new React feature we're building takes advantage of purity. From data fetching to animations to performance, keeping components pure unlocks the power of the React paradigm.
+İnşa ettiğimiz her yeni React özelliği, saflıktan yararlanır. Veri toplamadan animasyonlara ve performansa kadar, bileşenleri saf tutmak React paradigmasının gücünü açığa çıkarır.
 
 </DeepDive>
 
 <Recap>
 
-* A component must be pure, meaning:
-  * **It minds its own business.** It should not change any objects or variables that existed before rendering.
-  * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. 
-* Rendering can happen at any time, so components should not depend on each others' rendering sequence.
-* You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](/learn/state-a-components-memory) instead of mutating preexisting objects.
-* Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
-* Writing pure functions takes a bit of practice, but it unlocks the power of React's paradigm.
+* Bir bileşen saf olmalıdır, yani:
+  * **Kendi işine bakar.** İşlemeden önce var olan hiçbir nesneyi veya değişkeni değiştirmemelidir.
+  * **Aynı girdiler, aynı çıktılar.** Aynı girdiler verildiğinde, bir bileşen her zaman aynı JSX'i döndürmelidir. 
+* Oluşturma herhangi bir zamanda gerçekleşebilir, bu nedenle bileşenler birbirinin oluşturma sırasına bağlı olmamalıdır.
+* Bileşenlerinizin render için kullandığı girdilerin hiçbirini mutasyona uğratmamalısınız. Buna props, state ve context dahildir. Ekranı güncellemek için, önceden var olan nesneleri değiştirmek yerine [state "oluşturun".](/learn/state-a-components-memory)
+* Döndürdüğünüz JSX'te bileşeninizin mantığını ifade etmeye çalışın. "Bir şeyleri değiştirmeniz" gerektiğinde, bunu genellikle bir event handler’a yapmak isteyeceksiniz. Son çare olarak, `useEffect`'i kullanabilirsiniz.
+* Saf fonksiyonlar yazmak biraz pratik gerektirir, ancak React'in paradigmasının gücünü açığa çıkarır.
 
 </Recap>
 
@@ -229,15 +230,15 @@ Every new React feature we're building takes advantage of purity. From data fetc
   
 <Challenges>
 
-#### Fix a broken clock {/*fix-a-broken-clock*/}
+#### Bozuk bir saati düzelt {/*fix-a-broken-clock*/}
 
-This component tries to set the `<h1>`'s CSS class to `"night"` during the time from midnight to six hours in the morning, and `"day"` at all other times. However, it doesn't work. Can you fix this component?
+Bu bileşen, `<h1>`'in CSS class'ını gün esnasında, gece yarısından sabah 6'ya kadar `"night"` ve diğer tüm zamanlarda ise `"day"` olarak ayarlamaya çalışıyor. Ancak, bu işe yaramıyor. Bu bileşeni düzeltebilir misiniz?
 
-You can verify whether your solution works by temporarily changing the computer's timezone. When the current time is between midnight and six in the morning, the clock should have inverted colors!
+Bilgisayarın saat dilimini geçici olarak değiştirerek çözümünüzün çalışıp çalışmadığını doğrulayabilirsiniz. Geçerli saat gece yarısı ile sabah altı arasında olduğunda, saat ters renklere sahip olmalıdır!
 
 <Hint>
 
-Rendering is a *calculation*, it shouldn't try to "do" things. Can you express the same idea differently?
+Render etmek bir *hesaplamadır.*, bir şeyler "yapmaya" çalışmamalı. Aynı fikri farklı şekilde ifade edebilir misiniz?
 
 </Hint>
 
@@ -301,7 +302,7 @@ body > * {
 
 <Solution>
 
-You can fix this component by calculating the `className` and including it in the render output:
+Bu bileşeni, `className` değerini hesaplayarak ve bunu render çıktısına dahil ederek düzeltebilirsiniz:
 
 <Sandpack>
 
@@ -362,19 +363,19 @@ body > * {
 
 </Sandpack>
 
-In this example, the side effect (modifying the DOM) was not necessary at all. You only needed to return JSX.
+Bu örnekte, yan etki (DOM'u değiştirmek) hiç gerekli değildi. Yalnızca JSX'i döndürmeniz gerekiyordu.
 
 </Solution>
 
-#### Fix a broken profile {/*fix-a-broken-profile*/}
+#### Bozuk bir profili düzelt {/*fix-a-broken-profile*/}
 
-Two `Profile` components are rendered side by side with different data. Press "Collapse" on the first profile, and then "Expand" it. You'll notice that both profiles now show the same person. This is a bug.
+İki `Profile` bileşeni, farklı verilerle yan yana oluşturulur. İlk profilde "Daralt"a ve ardından "Genişlet"e basın. Artık her iki profilin de aynı kişiyi gösterdiğini fark edeceksiniz. Bu bir hata.
 
-Find the cause of the bug and fix it.
+Hatanın nedenini bulun ve düzeltin.
 
 <Hint>
 
-The buggy code is in `Profile.js`. Make sure you read it all from top to bottom!
+Hatalı kod `Profile.js`'in içindedir. Hepsini yukarıdan aşağıya okuduğunuzdan emin olun!
 
 </Hint>
 
@@ -475,9 +476,9 @@ h1 { margin: 5px; font-size: 18px; }
 
 <Solution>
 
-The problem is that the `Profile` component writes to a preexisting variable called `currentPerson`, and the `Header` and `Avatar` components read from it. This makes *all three of them* impure and difficult to predict.
+Sorun `Profile` bileşeninin `currentPerson` adlı önceden var olan bir değişkene yazması, ve `Header` and `Avatar` bileşenlerinin bundan okumasıdır. Bu, *üçünü de* kirli yapar ve tahmin etmeyi zorlaştırır.
 
-To fix the bug, remove the `currentPerson` variable. Instead, pass all information from `Profile` to `Header` and `Avatar` via props. You'll need to add a `person` prop to both components and pass it all the way down.
+Hatayı düzeltmek için, `currentPerson` değişkenini kaldırın. Bunun yerine, tüm bilgileri `Profile`'den `Header`'a ve `Avatar`'a props aracılığıyla iletin. Her iki bileşene de bir `person` prop'u eklemeniz ve bunu sonuna kadar geçmeniz gerekecek.
 
 <Sandpack>
 
@@ -571,15 +572,15 @@ h1 { margin: 5px; font-size: 18px; }
 
 </Sandpack>
 
-Remember that React does not guarantee that component functions will execute in any particular order, so you can't communicate between them by setting variables. All communication must happen through props.
+React'in bileşen fonksiyonlarının belirli bir sırada yürütüleceğini garanti etmediğini unutmayın, bu nedenle değişkenleri ayarlayarak bunlar arasında iletişim kuramazsınız. Tüm iletişim, proplar aracılığıyla gerçekleşmelidir.
 
 </Solution>
 
-#### Fix a broken story tray {/*fix-a-broken-story-tray*/}
+#### Bozuk bir hikaye bölümünü düzelt {/*fix-a-broken-story-tray*/}
 
-The CEO of your company is asking you to add "stories" to your online clock app, and you can't say no. You've written a `StoryTray` component that accepts a list of `stories`, followed by a "Create Story" placeholder.
+Şirketinizin CEO'su sizden çevrimiçi saat uygulamanıza "hikayeler" eklemenizi istiyor ve siz hayır diyemiyorsunuz. `stories` listesini kabul eden bir `StoryTray` bileşeni ve ardından bir "Create Story" placeholder'ını yazdınız.
 
-You implemented the "Create Story" placeholder by pushing one more fake story at the end of the `stories` array that you receive as a prop. But for some reason, "Create Story" appears more than once. Fix the issue.
+Prop olarak aldığınız `stories` dizisinin sonuna bir sahte hikaye daha iterek "Create Story" placeholder'ını uyguladınız. Ancak nedense "Create Story" birden çok kez görünüyor. Sorunu düzeltin.
 
 <Sandpack>
 
@@ -615,8 +616,8 @@ export default function App() {
   let [stories, setStories] = useState([...initialStories])
   let time = useTime();
 
-  // HACK: Prevent the memory from growing forever while you read docs.
-  // We're breaking our own rules here.
+  // İPUCU: Belgeleri okurken hafızanın sonsuza kadar büyümesini önleyin.
+  // Burada kendi kurallarımızı çiğniyoruz.
   if (stories.length > 100) {
     stories.length = 100;
   }
@@ -675,11 +676,11 @@ li {
 
 <Solution>
 
-Notice how whenever the clock updates, "Create Story" is added *twice*. This serves as a hint that we have a mutation during rendering--Strict Mode calls components twice to make these issues more noticeable.
+Saat her güncellendiğinde, "Create Story"nin *iki kez* nasıl eklendiğine dikkat edin.  Bu, oluşturma sırasında bir mutasyona sahip olduğumuza dair bir ipucu görevi görür -- StrictMode, bu sorunları daha belirgin hale getirmek için bileşenleri iki kez çağırır.
 
-`StoryTray` function is not pure. By calling `push` on the received `stories` array (a prop!), it is mutating an object that was created *before* `StoryTray` started rendering. This makes it buggy and very difficult to predict.
+`StoryTray` fonksiyonu saf değil. Alınan `stories` dizisinde (bir prop!) `push`'u çağırarak, oluşturmaya başlamadan *önce*, `StoryTray` oluşturulmuş bir nesneyi değiştiriyor. Bu, onu hatalı kılar ve tahmin etmeyi çok zorlaştırır.
 
-The simplest fix is to not touch the array at all, and render "Create Story" separately:
+En basit düzeltme, diziye hiç dokunmamak ve "Create Story"i ayrı ayrı oluşturmaktır:
 
 <Sandpack>
 
@@ -711,8 +712,8 @@ export default function App() {
   let [stories, setStories] = useState([...initialStories])
   let time = useTime();
 
-  // HACK: Prevent the memory from growing forever while you read docs.
-  // We're breaking our own rules here.
+  // İPUCU: Belgeleri okurken hafızanın sonsuza kadar büyümesini önleyin.
+  // Burada kendi kurallarımızı çiğniyoruz.
   if (stories.length > 100) {
     stories.length = 100;
   }
@@ -763,16 +764,16 @@ li {
 
 </Sandpack>
 
-Alternatively, you could create a _new_ array (by copying the existing one) before you push an item into it:
+Alternatif olarak, içine bir öğe göndermeden önce (mevcut olanı kopyalayarak) bir _new_ dizisi oluşturabilirsiniz:
 
 <Sandpack>
 
 ```js StoryTray.js active
 export default function StoryTray({ stories }) {
-  // Copy the array!
+  // Diziyi kopyalayın!
   let storiesToDisplay = stories.slice();
 
-  // Does not affect the original array:
+  // Orijinal diziyi etkilemez:
   storiesToDisplay.push({
     id: 'create',
     label: 'Create Story'
@@ -803,8 +804,8 @@ export default function App() {
   let [stories, setStories] = useState([...initialStories])
   let time = useTime();
 
-  // HACK: Prevent the memory from growing forever while you read docs.
-  // We're breaking our own rules here.
+  // İPUCU: Belgeleri okurken hafızanın sonsuza kadar büyümesini önleyin.
+  // Burada kendi kurallarımızı çiğniyoruz.
   if (stories.length > 100) {
     stories.length = 100;
   }
@@ -855,9 +856,9 @@ li {
 
 </Sandpack>
 
-This keeps your mutation local and your rendering function pure. However, you still need to be careful: for example, if you tried to change any of the array's existing items, you'd have to clone those items too.
+Bu, mutasyonunuzu yerel ve render eden fonksiyonunuzu saf tutar. Ancak yine de dikkatli olmanız gerekir: örneğin, dizinin mevcut öğelerinden herhangi birini değiştirmeye çalışırsanız, bu öğeleri de klonlamanız gerekir.
 
-It is useful to remember which operations on arrays mutate them, and which don't. For example, `push`, `pop`, `reverse`, and `sort` will mutate the original array, but `slice`, `filter`, and `map` will create a new one.
+Dizilerdeki hangi işlemlerin onları değiştirdiğini ve hangilerinin değiştirmediğini hatırlamakta fayda var. Örneğin, `push`, `pop`, `reverse`, ve `sort` orijinal diziyi değiştirir, ancak `slice`, `filter`, ve `map` yeni bir dizi oluşturur.
 
 </Solution>
 
