@@ -216,7 +216,7 @@ function Avatar({ person, size = 100 }) {
 
 Şimdi, `<Avatar person={...} />` `size` prop'u belirtilmeden render edilirse, `size` `100` olarak ayarlanacaktır.
 
-Varsayılan değer, `size` prop'u eksikse veya `size={undefined}` olarak geçirilirse yalnızca kullanılır. Ancak `size={null}` veya `size={0}` olarak geçirirseniz, varsayılan değer **kullanılmaz**.
+Varsayılan değer yalnızca, `size` prop'u eksikse veya `size={undefined}` olarak geçirilirse kullanılır. Ancak `size={null}` veya `size={0}` olarak geçirirseniz, varsayılan değer **kullanılmaz**.
 
 ## JSX yayılım sözdizimiyle prop'ları iletmek {/*forwarding-props-with-the-jsx-spread-syntax*/}
 
@@ -237,7 +237,7 @@ function Profile({ person, size, isSepia, thickBorder }) {
 }
 ```
 
-Tekrarlayan kod ile herhangi bir sorun yoktur - daha okunaklı olabilir. Ancak bazen özlüğe önem verirsiniz. Bazı bileşenler, bu `Profile` bileşeninin `Avatar` ile yaptığı gibi, tüm prop'larını alt elemanlarına iletirler. Doğrudan hiçbir prop kullanmadıklarından, daha özlü "yayılma (spread)" sözdizimi kullanmak mantıklı olabilir:
+Tekrarlayan kodda yanlış olan bir şey yoktur. Daha okunaklı olabilir. Ancak bazen kısa ve öz olmaya önem verirsiniz. Bazı bileşenler, bu `Profile` bileşeninin `Avatar` ile yaptığı gibi, tüm prop'larını alt elemanlarına iletirler. Doğrudan hiçbir prop kullanmadıklarından, daha özlü "yayılma (spread)" sözdizimi kullanmak mantıklı olabilir:
 
 ```js
 function Profile(props) {
@@ -271,7 +271,7 @@ Bazen kendi bileşenlerinizi aynı şekilde iç içe yerleştirmek istersiniz:
 </Card>
 ```
 
-Bir JSX etiketi içine içerik yerleştirdiğinizde, üst eleman, `children` adı verilen bir prop'u bu içeriği alacaktır. Örneğin, aşağıdaki `Card` bileşeni, `<Avatar />` olarak ayarlanmış bir `children` prop'u alacak ve bunu bir sarma divinde render edilecektir:
+Bir JSX etiketi içine içerik yerleştirdiğinizde, üst eleman, `children` adında bir prop'un içinde bu içeriği alacaktır. Örneğin, aşağıdaki `Card` bileşeni, `<Avatar />` olarak ayarlanmış bir `children` prop'u alacak ve bunu bir sarma divinde render edilecektir:
 
 <Sandpack>
 
