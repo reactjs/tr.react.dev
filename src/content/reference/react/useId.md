@@ -4,7 +4,7 @@ title: useId
 
 <Intro>
 
-`useId` is a React Hook for generating unique IDs that can be passed to accessibility attributes.
+`useId`, erişilebilirlik özniteliklerine iletmek üzere benzersiz kimlikler üreten React Hook'udur.
 
 ```js
 const id = useId()
@@ -16,11 +16,11 @@ const id = useId()
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `useId()` {/*useid*/}
 
-Call `useId` at the top level of your component to generate a unique ID:
+Benzersiz bir kimlik oluşturmak için `useId`'yi bileşeninizin kök kapsamında çağırın:
 
 ```js
 import { useId } from 'react';
@@ -30,35 +30,35 @@ function PasswordField() {
   // ...
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-`useId` does not take any parameters.
+Herhangi bir parametre almaz.
 
-#### Returns {/*returns*/}
+#### Dönüş Değerleri {/*returns*/}
 
-`useId` returns a unique ID string associated with this particular `useId` call in this particular component.
+Çağrıldığı bileşene özel olarak her bir `useId` çağrısı için _karakter dizisi (string)_ tipinde benzersiz kimlik döner.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `useId` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+* `useId` bir Hook olduğundan, yalnızca **bileşeninizin kök kapsamında** ya da kendi Hook'larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve state'i ona taşıyın.
 
-* `useId` **should not be used to generate keys** in a list. [Keys should be generated from your data.](/learn/rendering-lists#where-to-get-your-key)
+* Liste elemanlarına **anahtar üretmek için kullanılmamalıdır**. [Anahtarlar elinizdeki veriden üretilmelidir.](/learn/rendering-lists#where-to-get-your-key)
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
 <Pitfall>
 
-**Do not call `useId` to generate keys in a list.** [Keys should be generated from your data.](/learn/rendering-lists#where-to-get-your-key)
+**Anahtar üretmek için `useId` kullanmayın**. [Anahtarlar elinizdeki veriden üretilmelidir.](/learn/rendering-lists#where-to-get-your-key)
 
 </Pitfall>
 
-### Generating unique IDs for accessibility attributes {/*generating-unique-ids-for-accessibility-attributes*/}
+### Erişilebilirlik öznitelikleri için benzersiz kimlikler üretmek {/*generating-unique-ids-for-accessibility-attributes*/}
 
-Call `useId` at the top level of your component to generate a unique ID:
+Bileşeninizin kök kapsamında benzersiz kimlikler üretmek için `useId`'yi çağırın:
 
 ```js [[1, 4, "passwordHintId"]]
 import { useId } from 'react';
@@ -68,7 +68,7 @@ function PasswordField() {
   // ...
 ```
 
-You can then pass the <CodeStep step={1}>generated ID</CodeStep> to different attributes:
+Daha sonra <CodeStep step={1}>oluşturulan kimliği</CodeStep> farklı özniteliklere iletebilirsiniz:
 
 ```js [[1, 2, "passwordHintId"], [1, 3, "passwordHintId"]]
 <>
@@ -77,26 +77,26 @@ You can then pass the <CodeStep step={1}>generated ID</CodeStep> to different at
 </>
 ```
 
-**Let's walk through an example to see when this is useful.**
+**Bunun ne zaman faydalı olabileceğini görmek için bir örnek üzerinden ilerleyelim.**
 
-[HTML accessibility attributes](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) like [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) let you specify that two tags are related to each other. For example, you can specify that an element (like an input) is described by another element (like a paragraph).
+[`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) gibi [HTML erişilebilirlik öznitelikleri](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA), iki etiketin birbirine bağlı olduğunu belirtmenizi sağlar. Örneğin, bir elementin (mesela `<input>`) başka bir element (mesela `<p>`) tarafından tanımlandığını belirtebilirsiniz.
 
-In regular HTML, you would write it like this:
+Saf HTML'de bunu şu şekilde yazarsınız:
 
 ```html {5,8}
 <label>
-  Password:
+  Şifre:
   <input
     type="password"
     aria-describedby="password-hint"
   />
 </label>
 <p id="password-hint">
-  The password should contain at least 18 characters
+  Şifre en az 18 karakter içermelidir
 </p>
 ```
 
-However, hardcoding IDs like this is not a good practice in React. A component may be rendered more than once on the page--but IDs have to be unique! Instead of hardcoding an ID, generate a unique ID with `useId`:
+Ancak, doğrudan koda yazılan kimlikler React'ta iyi bir pratik değildir. Bir bileşen sayfada birden fazla kez render edilebilir--ancak kimlikler benzersiz olmalıdır! Bunun yerine `useId` ile benzersiz bir kimlik oluşturun:
 
 ```js {4,11,14}
 import { useId } from 'react';
@@ -106,21 +106,21 @@ function PasswordField() {
   return (
     <>
       <label>
-        Password:
+        Şifre:
         <input
           type="password"
           aria-describedby={passwordHintId}
         />
       </label>
       <p id={passwordHintId}>
-        The password should contain at least 18 characters
+        Şifre en az 18 karakter içermelidir
       </p>
     </>
   );
 }
 ```
 
-Now, even if `PasswordField` appears multiple times on the screen, the generated IDs won't clash.
+Artık `PasswordField` ekranda birden fazla kez görünse bile üretilen kimlikler çakışmaz.
 
 <Sandpack>
 
@@ -132,14 +132,14 @@ function PasswordField() {
   return (
     <>
       <label>
-        Password:
+        Şifre:
         <input
           type="password"
           aria-describedby={passwordHintId}
         />
       </label>
       <p id={passwordHintId}>
-        The password should contain at least 18 characters
+        Şifre en az 18 karakter içermelidir
       </p>
     </>
   );
@@ -148,9 +148,9 @@ function PasswordField() {
 export default function App() {
   return (
     <>
-      <h2>Choose password</h2>
+      <h2>Şifreni seç</h2>
       <PasswordField />
-      <h2>Confirm password</h2>
+      <h2>Şifreni doğrula</h2>
       <PasswordField />
     </>
   );
@@ -163,33 +163,33 @@ input { margin: 5px; }
 
 </Sandpack>
 
-[Watch this video](https://www.youtube.com/watch?v=0dNzNcuEuOo) to see the difference in the user experience with assistive technologies.
+Yardımcı teknolojiler ile edinilen kullanıcı deneyiminde yarattığı farkı görmek için [bu videoyu izleyin](https://www.youtube.com/watch?v=0dNzNcuEuOo).
 
 <Pitfall>
 
-With [server rendering](/reference/react-dom/server), **`useId` requires an identical component tree on the server and the client**. If the trees you render on the server and the client don't match exactly, the generated IDs won't match.
+[Sunucu taraflı render](/reference/react-dom/server) ile birlikte kullanılan **`useId`, sunucu ve istemci tarafında özdeş bileşen ağacına gereksinim duyar**. Sunucu ve istemcide render edilen ağaçlar birebir eşleşmezse, oluşan kimlikler de eşleşmeyecektir.
 
 </Pitfall>
 
 <DeepDive>
 
-#### Why is useId better than an incrementing counter? {/*why-is-useid-better-than-an-incrementing-counter*/}
+#### Neden useId kullanmak artan bir sayaca nazaran daha iyidir? {/*why-is-useid-better-than-an-incrementing-counter*/}
 
-You might be wondering why `useId` is better than incrementing a global variable like `nextId++`.
+`useId`'nin `nextId++` gibi global bir değişkeni arttırmaktan neden daha iyi olduğunu merak ediyor olabilirsiniz.
 
-The primary benefit of `useId` is that React ensures that it works with [server rendering.](/reference/react-dom/server) During server rendering, your components generate HTML output. Later, on the client, [hydration](/reference/react-dom/client/hydrateRoot) attaches your event handlers to the generated HTML. For hydration to work, the client output must match the server HTML.
+Temel avantajı, React'ın [sunucu taraflı render](/reference/react-dom/server) ile çalışacağını garanti etmesidir. Bileşenleriniz sunucu taraflı render ensasında HTML çıktısı üretir. Ardından istemcide, üretilen HTML'e [hidratlama](/reference/react-dom/client/hydrateRoot) (hydration) sırasında olay yöneticileri eklenir. Hidratlamanın çalışması için, istemci çıktısının sunucu HTML'iyle eşleşmesi gerekir.
 
-This is very difficult to guarantee with an incrementing counter because the order in which the client components are hydrated may not match the order in which the server HTML was emitted. By calling `useId`, you ensure that hydration will work, and the output will match between the server and the client.
+Artan sayaç kullanarak bunu garanti etmek çok zordur. İstemci bileşenlerinin hidratlanma sırası ile sunucu HTML'inin tarayıcıya gönderilme sırası eşleşmeyebilir. `useId`'yi çağırmak; hidratlamanın çalışacağından, sunucu ve istemci arasındaki çıktının özdeş olacağından emin olmanızı sağlar.
 
-Inside React, `useId` is generated from the "parent path" of the calling component. This is why, if the client and the server tree are the same, the "parent path" will match up regardless of rendering order.
+React'ta `useId`'nin değeri, çağrıldığı bileşenin ağaç içindeki hiyerarşik yolundan (parent path) üretilir. Dolayısıyla sunucu ve istemci ağaçları aynıysa, ürettikleri değerler render sırasına bakılmaksızın eşleşecektir.
 
 </DeepDive>
 
 ---
 
-### Generating IDs for several related elements {/*generating-ids-for-several-related-elements*/}
+### Birkaç ilişkili element için kimlik üretmek {/*generating-ids-for-several-related-elements*/}
 
-If you need to give IDs to multiple related elements, you can call `useId` to generate a shared prefix for them: 
+Bir takım ilişkili elemente kimlik vermeniz gerekiyorsa, `useId`'yi çağırarak ürettiğiniz kimliği sonekler ile özelleştirebilirsiniz:
 
 <Sandpack>
 
@@ -200,10 +200,10 @@ export default function Form() {
   const id = useId();
   return (
     <form>
-      <label htmlFor={id + '-firstName'}>First Name:</label>
+      <label htmlFor={id + '-firstName'}>İsim:</label>
       <input id={id + '-firstName'} type="text" />
       <hr />
-      <label htmlFor={id + '-lastName'}>Last Name:</label>
+      <label htmlFor={id + '-lastName'}>Soyisim:</label>
       <input id={id + '-lastName'} type="text" />
     </form>
   );
@@ -216,13 +216,14 @@ input { margin: 5px; }
 
 </Sandpack>
 
-This lets you avoid calling `useId` for every single element that needs a unique ID.
+Bu kullanım, benzersiz kimliğe ihtiyaç duyan her bir element için `useId`'yi çağırmaktan kaçınmanızı sağlar.
 
 ---
 
-### Specifying a shared prefix for all generated IDs {/*specifying-a-shared-prefix-for-all-generated-ids*/}
+### Üretilen tüm kimlikler için önek belirlemek {/*specifying-a-shared-prefix-for-all-generated-ids*/}
 
-If you render multiple independent React applications on a single page, pass `identifierPrefix` as an option to your [`createRoot`](/reference/react-dom/client/createRoot#parameters) or [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) calls. This ensures that the IDs generated by the two different apps never clash because every identifier generated with `useId` will start with the distinct prefix you've specified.
+
+Tek bir sayfada birden fazla bağımsız React uygulaması render ederseniz, [`createRoot`](/reference/react-dom/client/createRoot#parameters) veya [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) metodlarına iletebileceğiniz `identifierPrefix` parametresini kullanın. Bu sayede `useId` ile oluşturulan her bir kimlik benzersiz bir önek ile başlayacağından, iki farklı uygulama tarafından oluşturulan kimlikler asla çakışmaz.
 
 <Sandpack>
 
@@ -246,14 +247,14 @@ function PasswordField() {
   return (
     <>
       <label>
-        Password:
+        Şifre:
         <input
           type="password"
           aria-describedby={passwordHintId}
         />
       </label>
       <p id={passwordHintId}>
-        The password should contain at least 18 characters
+        Şifre en az 18 karakter içermelidir
       </p>
     </>
   );
@@ -262,7 +263,7 @@ function PasswordField() {
 export default function App() {
   return (
     <>
-      <h2>Choose password</h2>
+      <h2>Şifreni seç</h2>
       <PasswordField />
     </>
   );
