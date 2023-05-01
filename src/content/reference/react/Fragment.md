@@ -43,7 +43,7 @@ isteğe bağlı `anahtar`: Açık <Fragment> sözdizimiyle tanımlanan Fragment'
 
 ### Birden Fazla Eleman Döndürme {/*returning-multiple-elements*/}
 
-Use `Fragment`, or the equivalent `<>...</>` syntax, to group multiple elements together. You can use it to put multiple elements in any place where a single element can go. For example, a component can only return one element, but by using a Fragment you can group multiple elements together and then return them as a group:
+`Fragment` veya, `<>...</>` sözdizimini kullanmak birden fazla elemanı bir araya getirir. Tek bir elemanın gidebileceği herhangi bir yere birden fazla eleman koymak için kullanabilirsiniz. Örneğin, bir bileşen sadece bir eleman döndürebilir, ancak Fragment kullanarak birden fazla elemanı bir araya getirebilir ve onları bir grup olarak döndürebilirsiniz:
 
 ```js {3,6}
 function Post() {
@@ -56,7 +56,7 @@ function Post() {
 }
 ```
 
-Fragments are useful because grouping elements with a Fragment has no effect on layout or styles, unlike if you wrapped the elements in another container like a DOM element. If you inspect this example with the browser tools, you'll see that all `<h1>` and `<p>` DOM nodes appear as siblings without wrappers around them:
+Fragmanlar kullanışlıdır çünkü bir Fragment ile elemanları gruplamak, elemanları bir DOM elemanı gibi başka bir konteynerde sarmak gibi düzeni veya stilleri etkilemez. Tarayıcı araçlarıyla bu örneği incelediğinizde, tüm `<h1>` ve `<p>` DOM düğümlerinin etrafında sarmalayıcı olmadan kardeşler olarak görünecektir.
 
 <Sandpack>
 
@@ -96,9 +96,10 @@ function PostBody({ body }) {
 
 <DeepDive>
 
-#### How to write a Fragment without the special syntax? {/*how-to-write-a-fragment-without-the-special-syntax*/}
+#### Özel sözdizimi olmadan bir Fragment nasıl yazılır? {/*how-to-write-a-fragment-without-the-special-syntax*/}
 
-The example above is equivalent to importing `Fragment` from React:
+Yukarıdaki örnek, React'ten `Fragment` içe aktarmaya eşdeğerdir:
+
 
 ```js {1,5,8}
 import { Fragment } from 'react';
@@ -113,15 +114,15 @@ function Post() {
 }
 ```
 
-Usually you won't need this unless you need to [pass a `key` to your `Fragment`.](#rendering-a-list-of-fragments)
+Genellikle bunun gibi bir şeye ihtiyaç duymazsınız, ancak [`Fragment`'a `key` eklemek] istediğinizde kullanabilirsiniz.(#rendering-a-list-of-fragments)
 
 </DeepDive>
 
 ---
 
-### Assigning multiple elements to a variable {/*assigning-multiple-elements-to-a-variable*/}
+### Bir değişkene birden fazla eleman atama {/*assigning-multiple-elements-to-a-variable*/}
 
-Like any other element, you can assign Fragment elements to variables, pass them as props, and so on:
+Diğer tüm elemanlar gibi, Fragment elemanlarını değişkenlere atayabilir, bunları props olarak iletebilir ve benzeri işlemler yapabilirsiniz:
 
 ```js
 function CloseDialog() {
@@ -141,9 +142,10 @@ function CloseDialog() {
 
 ---
 
-### Grouping elements with text {/*grouping-elements-with-text*/}
+### Metinle elemanları gruplama {/*grouping-elements-with-text*/}
 
-You can use `Fragment` to group text together with components:
+`Fragment` ile, metni bileşenlerle bir araya getirmek için kullanabilirsiniz:
+
 
 ```js
 function DateRangePicker({ start, end }) {
@@ -160,9 +162,10 @@ function DateRangePicker({ start, end }) {
 
 ---
 
-### Rendering a list of Fragments {/*rendering-a-list-of-fragments*/}
+### Fragment'lar listesini oluşturma: {/*rendering-a-list-of-fragments*/}
 
-Here's a situation where you need to write `Fragment` explicitly instead of using the `<></>` syntax. When you [render multiple elements in a loop](/learn/rendering-lists), you need to assign a `key` to each element. If the elements within the loop are Fragments, you need to use the normal JSX element syntax in order to provide the `key` attribute:
+İşte `<></>` sözdizimini yerine `Fragment` yazmanız gereken bir durum.  Bir [döngüde birden fazla elemanı oluşturduğunuzda](/learn/rendering-lists), her elemana bir `key` atamanız gerekmektedir. Eğer döngü içindeki elemanlar `Fragment` ise, `key` özelliğini sağlamak için normal JSX eleman sözdizimini kullanmanız gerekir:
+
 
 ```js {3,6}
 function Blog() {
@@ -175,7 +178,7 @@ function Blog() {
 }
 ```
 
-You can inspect the DOM to verify that there are no wrapper elements around the Fragment children:
+DOM'u inceleyerek Fragment alteleman etrafında herhangi bir sarmalayıcı öğe olmadığını doğrulayabilirsiniz:
 
 <Sandpack>
 
