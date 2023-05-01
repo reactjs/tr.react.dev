@@ -126,7 +126,7 @@
       "tags": ["intermediate"],
       "routes": [
         {
-          "title": "Reacting to Input with State",
+          "title": "Girdiye State ile Reaksiyon Verme",
           "path": "/learn/reacting-to-input-with-state"
         },
         {
