@@ -132,7 +132,7 @@ Her iki durumda da iletmek istediğimiz şey fonksiyondur:
 
 ### Olay yöneticilerinde prop'ları okumak {/*reading-props-in-event-handlers*/}
 
-Olay yöneticileri, bileşenlerin içerisinde tanımlandığından prop'lara erişebilirler. Tıklandığında `message` prop'unun değerini içeren bir uyarı gösteren bir düğme örneğine bakalım:
+Olay yöneticileri, bileşenlerin içerisinde tanımlandığından prop'lara erişebilirler. Tıklandığında `message` prop'unun değerini içeren bir uyarı gösteren bir buton örneğine bakalım:
 
 <Sandpack>
 
