@@ -113,7 +113,7 @@ Satır içi yazılan bu gibi kodlar, tıklama esnasında tetiklenmez—bileşeni
 <button onClick={alert('Bana tıkladın!')}>
 ```
 
-Olay yöneticinizi satır içi tanımlamak isterseniz anonim işleve sarabilirsiniz:
+Olay yöneticinizi satır içi tanımlamak isterseniz ok fonksiyon ile sarabilirsiniz:
 
 ```jsx
 <button onClick={() => alert('Bana tıkladın!')}>
