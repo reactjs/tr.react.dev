@@ -4,7 +4,7 @@ title: useContext
 
 <Intro>
 
-`useContext` is a React Hook that lets you read and subscribe to [context](/learn/passing-data-deeply-with-context) from your component.
+`useContext`, bileşeninizden [context](/learn/passing-data-deeply-with-context) okumanıza ve buna abone olmanıza izin veren bir React Hook'tur.
 
 ```js
 const value = useContext(SomeContext)
@@ -16,11 +16,12 @@ const value = useContext(SomeContext)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `useContext(SomeContext)` {/*usecontext*/}
 
-Call `useContext` at the top level of your component to read and subscribe to [context.](/learn/passing-data-deeply-with-context)
+Bileşeninizde [context](/learn/passing-data-deeply-with-context) okumak ve buna abone olmak için `useContext`'i bileşeninizin üst düzeyinde çağırın.
+
 
 ```js
 import { useContext } from 'react';
@@ -30,30 +31,30 @@ function MyComponent() {
   // ...
 ```
 
-[See more examples below.](#usage)
+[Aşağıda daha fazla örneğe bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `SomeContext`: The context that you've previously created with [`createContext`](/reference/react/createContext). The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
+* `SomeContext`: Daha önce [`createContext`](/tr/referans/react/createContext) ile oluşturduğunuz context. Context kendisi bilgiyi tutmaz, sadece bileşenlere sağlayabileceğiniz veya okuyabileceğiniz bilgi türünü temsil eder.
 
-#### Returns {/*returns*/}
+#### Dönüşler {/*returns*/}
 
-`useContext` returns the context value for the calling component. It is determined as the `value` passed to the closest `SomeContext.Provider` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` you have passed to [`createContext`](/reference/react/createContext) for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+`useContext`, çağrılan bileşen için Context değerini döndürür. Bu değer, ağaçtaki çağrılan bileşenden önceki en yakın `SomeContext.Provider`'a iletilen `value` olarak belirlenir. Böyle bir sağlayıcı yoksa, döndürülen değer o Context için [`createContext`](/tr/referans/react/createContext) ile belirlediğiniz `defaultValue` olacaktır. Döndürülen değer her zaman günceldir. Eğer bir Context değişirse, React otomatik olarak bu Context'i kullanan bileşenleri yeniden render eder.
 
-#### Caveats {/*caveats*/}
+#### Dikkat Edilmesi Gerekenler {/*caveats*/}
 
-* `useContext()` call in a component is not affected by providers returned from the *same* component. The corresponding `<Context.Provider>` **needs to be *above*** the component doing the `useContext()` call.
-* React **automatically re-renders** all the children that use a particular context starting from the provider that receives a different `value`. The previous and the next values are compared with the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Skipping re-renders with [`memo`](/reference/react/memo) does not prevent the children receiving fresh context values.
-* If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if `SomeContext` that you use to provide context and `SomeContext` that you use to read it are ***exactly* the same object**, as determined by a `===` comparison.
+* Bir bileşende yapılan `useContext()` çağrısı, aynı bileşenden döndürülen sağlayıcılardan etkilenmez. İlgili `<Context.Provider>` **kullanılan bileşenin üstünde olmalıdır.**
+* React, farklı bir `value` alan sağlayıcıdan başlayarak, belirli bir Context'i kullanan tüm alt bileşenleri **otomatik olarak yeniden render** eder. Önceki ve sonraki değerler [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile karşılaştırılır. [`memo`](/tr/referans/react/memo) ile yeniden renderları atlamak, alt bileşenlerin taze Context değerleri almasını engellemez.
+* Yapı sistemimiz çıktıda modüllerin kopyalarını oluşturursa (sembolik bağlantılarla olabilir), bu Context'i bozabilir. Bir şeyi Context aracılığıyla geçirmek, Context sağlamak ve okumak için **tamamen aynı nesne** olan `SomeContext`'ın, `===` karşılaştırması ile belirlendiği durumlarda çalışır.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
 
-### Passing data deeply into the tree {/*passing-data-deeply-into-the-tree*/}
+### Veri geçişini ağaca derinlemesine sağlama {/*passing-data-deeply-into-the-tree*/}
 
-Call `useContext` at the top level of your component to read and subscribe to [context.](/learn/passing-data-deeply-with-context)
+Bileşeninizin üst düzeyinde `useContext`'i çağırarak [Context](/learn/passing-data-deeply-with-context)'a erişebilir ve abone olabilirsiniz:
 
 ```js [[2, 4, "theme"], [1, 4, "ThemeContext"]]
 import { useContext } from 'react';
@@ -63,9 +64,9 @@ function Button() {
   // ... 
 ```
 
-`useContext` returns the <CodeStep step={2}>context value</CodeStep> for the <CodeStep step={1}>context</CodeStep> you passed. To determine the context value, React searches the component tree and finds **the closest context provider above** for that particular context.
+`useContext`, geçtiğiniz <CodeStep step={1}>Context</CodeStep> için <CodeStep step={2}>Context değerini</CodeStep> döndürür. Context değerini belirlemek için, React bileşen ağacını tarar ve o belirli context için **en yakın Context sağlayıcısını** bulur.
 
-To pass context to a `Button`, wrap it or one of its parent components into the corresponding context provider:
+`Button` bileşenine Context geçmek için, ilgili Context sağlayıcısını bu bileşenin veya üst bileşeninin içine yerleştirin:
 
 ```js [[1, 3, "ThemeContext"], [2, 3, "\\"dark\\""], [1, 5, "ThemeContext"]]
 function MyPage() {
@@ -81,11 +82,11 @@ function Form() {
 }
 ```
 
-It doesn't matter how many layers of components there are between the provider and the `Button`. When a `Button` *anywhere* inside of `Form` calls `useContext(ThemeContext)`, it will receive `"dark"` as the value.
+`Button`'ın içinde olduğu herhangi bir yerde `useContext(ThemeContext)` çağrıldığında, `Form`'un içindeki `ThemeContext.Provider` bileşenine en yakın olanın `"dark"` değeri alınır.
 
 <Pitfall>
 
-`useContext()` always looks for the closest provider *above* the component that calls it. It searches upwards and **does not** consider providers in the component from which you're calling `useContext()`.
+`useContext()`, onu çağıran bileşenden yukarı doğru arama yapar ve arama sırasında `useContext()`'i çağırdığınız bileşen içindeki sağlayıcıları dikkate **almaz**.
 
 </Pitfall>
 
@@ -175,9 +176,9 @@ function Button({ children }) {
 
 ---
 
-### Updating data passed via context {/*updating-data-passed-via-context*/}
+### Context üzerinden geçirilen verileri güncelleme {/*updating-data-passed-via-context*/}
 
-Often, you'll want the context to change over time. To update context, combine it with [state.](/reference/react/useState) Declare a state variable in the parent component, and pass the current state down as the <CodeStep step={2}>context value</CodeStep> to the provider.
+Genellikle, context'in zaman içinde değişmesini istersiniz. Context'i güncellemek için, [state](/tr/referans/react/useState) ile birleştirin. Ana bileşende bir durum değişkeni bildirin ve geçerli durumu sağlayıcının <CodeStep step={2}>context değeri</CodeStep> olarak aşağıya geçirin.
 
 ```js {2} [[1, 4, "ThemeContext"], [2, 4, "theme"], [1, 11, "ThemeContext"]]
 function MyPage() {
@@ -195,13 +196,13 @@ function MyPage() {
 }
 ```
 
-Now any `Button` inside of the provider will receive the current `theme` value. If you call `setTheme` to update the `theme` value that you pass to the provider, all `Button` components will re-render with the new `'light'` value.
+Şimdi sağlayıcı içindeki herhangi bir `Button`, mevcut `theme` değerini alacaktır. `setTheme`i çağırarak sağlayıcıya iletilen `theme` değerini güncellerseniz, tüm `Button` bileşenleri yeni `'light'` değeriyle yeniden render olacaktır.
 
-<Recipes titleText="Examples of updating context" titleId="examples-basic">
+<Recipes titleText="Context güncelleme örnekleri" titleId="examples-basic">
 
-#### Updating a value via context {/*updating-a-value-via-context*/}
+#### Context aracılığıyla bir değerin güncellenmesi {/*updating-a-value-via-context*/}
 
-In this example, the `MyApp` component holds a state variable which is then passed to the `ThemeContext` provider. Checking the "Dark mode" checkbox updates the state. Changing the provided value re-renders all the components using that context.
+Bu örnekte, `MyApp` bileşeni bir durum değişkenini tutar ve daha sonra `ThemeContext` sağlayıcısına iletilir. "Karanlık mod" onay kutusunu işaretlemek, durumu günceller. Sağlanan değerin değiştirilmesi, bu context'i kullanan tüm bileşenlerin yeniden render edilmesine neden olur.
 
 <Sandpack>
 
@@ -299,13 +300,13 @@ function Button({ children }) {
 
 </Sandpack>
 
-Note that `value="dark"` passes the `"dark"` string, but `value={theme}` passes the value of the JavaScript `theme` variable with [JSX curly braces.](/learn/javascript-in-jsx-with-curly-braces) Curly braces also let you pass context values that aren't strings.
+`value="dark"` ifadesi `"dark"` string değerini geçerken, `value={theme}` ifadesi JavaScript `theme` değişkeninin değerini JSX curly braces (`{}`) ile geçirir. Curly braces ayrıca, string olmayan context değerlerini geçirmenize de olanak tanır.
 
 <Solution />
 
-#### Updating an object via context {/*updating-an-object-via-context*/}
+#### Bir objeyi context aracılığıyla güncelleme {/*updating-an-object-via-context*/}
 
-In this example, there is a `currentUser` state variable which holds an object. You combine `{ currentUser, setCurrentUser }` into a single object and pass it down through the context inside the `value={}`. This lets any component below, such as `LoginButton`, read both `currentUser` and `setCurrentUser`, and then call `setCurrentUser` when needed.
+Bu örnekte, bir nesneyi tutan `currentUser` isimli bir durum değişkeni vardır. Bu, `{ currentUser, setCurrentUser }` değişkenlerinin birleştirildiği ve bunların `value={}` içinden context yoluyla aşağıdaki tüm bileşenler tarafından okunabilmesini sağlar. Örneğin, `LoginButton` bileşeni, `currentUser` ve `setCurrentUser`'ı okuyabilir ve ihtiyaç duyulduğunda `setCurrentUser`'ı çağırabilir.
 
 <Sandpack>
 
@@ -395,9 +396,9 @@ label {
 
 <Solution />
 
-#### Multiple contexts {/*multiple-contexts*/}
+#### Birden fazla context {/*multiple-contexts*/}
 
-In this example, there are two independent contexts. `ThemeContext` provides the current theme, which is a string, while `CurrentUserContext` holds the object representing the current user.
+Bu örnekte iki bağımsız context var. `ThemeContext`, mevcut temayı sağlar, bu bir dizedir, `CurrentUserContext` ise mevcut kullanıcıyı temsil eden bir nesneyi tutar.
 
 <Sandpack>
 
@@ -562,9 +563,9 @@ label {
 
 <Solution />
 
-#### Extracting providers to a component {/*extracting-providers-to-a-component*/}
+#### Sağlayıcıları bir bileşene çıkarma {/*extracting-providers-to-a-component*/}
 
-As your app grows, it is expected that you'll have a "pyramid" of contexts closer to the root of your app. There is nothing wrong with that. However, if you dislike the nesting aesthetically, you can extract the providers into a single component. In this example, `MyProviders` hides the "plumbing" and renders the children passed to it inside the necessary providers. Note that the `theme` and `setTheme` state is needed in `MyApp` itself, so `MyApp` still owns that piece of the state.
+Uygulamanız büyüdükçe, context "piramidi"ni uygulamanızın köküne doğru yaklaşan bir şekilde sahip olmanız beklenir. Bununla bir sorun yok. Ancak, görsel olarak yuvalamayı sevmiyorsanız, sağlayıcıları tek bir bileşene çıkarabilirsiniz. Bu örnekte, `MyProviders` "plumbing"i gizler ve çocukları içinde gerekli sağlayıcıların render eder. `tema` ve `setTheme` durumu `MyApp`te kendisi için gereklidir, bu nedenle `MyApp` hala bu parçaya sahiptir.
 
 <Sandpack>
 
@@ -737,11 +738,11 @@ label {
 
 <Solution />
 
-#### Scaling up with context and a reducer {/*scaling-up-with-context-and-a-reducer*/}
+#### Context ve bir azaltıcıyı (reducer) kullanarak ölçeklendirme {/*context-ve-bir-azaltıcı-reducer-kullanarak-ölçeklendirme*/}
 
-In larger apps, it is common to combine context with a [reducer](/reference/react/useReducer) to extract the logic related to some state out of components. In this example, all the "wiring" is hidden in the `TasksContext.js`, which contains a reducer and two separate contexts.
+Daha büyük uygulamalarda, bazı durumlarla ilgili mantığı bileşenlerden ayıklamak için context ile [bir azaltıcıyı (reducer)](/tr/referans/react/useReducer) birleştirmek yaygındır. Bu örnekte, tüm "bağlantı" işlemleri, bir azaltıcı ve iki ayrı context içeren `TasksContext.js` dosyasında gizlenmiştir.
 
-Read a [full walkthrough](/learn/scaling-up-with-reducer-and-context) of this example.
+Bu örneğin [tam bir açıklamasını burada](/tr/learn/scaling-up-with-reducer-and-context) bulabilirsiniz.
 
 <Sandpack>
 
@@ -947,25 +948,25 @@ ul, li { margin: 0; padding: 0; }
 
 ---
 
-### Specifying a fallback default value {/*specifying-a-fallback-default-value*/}
+### Varsayılan geri dönüş değerini belirleme {/*specifying-a-fallback-default-value*/}
 
-If React can't find any providers of that particular <CodeStep step={1}>context</CodeStep> in the parent tree, the context value returned by `useContext()` will be equal to the <CodeStep step={3}>default value</CodeStep> that you specified when you [created that context](/reference/react/createContext):
+Eğer React, üst ağaçta o belirli <CodeStep step={1}>context</CodeStep> sağlayan bir sağlayıcı bulamazsa, `useContext()` tarafından döndürülen context değeri, o context [oluşturduğunuzda belirttiğiniz varsayılan değer](/reference/react/createContext) ile aynı olacaktır:
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "null"]]
 const ThemeContext = createContext(null);
 ```
 
-The default value **never changes**. If you want to update context, use it with state as [described above.](#updating-data-passed-via-context)
+Varsayılan değer **asla değişmez**. Eğer context'i güncellemek istiyorsanız, yukarıda açıklandığı gibi durumu kullanın.
 
-Often, instead of `null`, there is some more meaningful value you can use as a default, for example:
+Genellikle `null` yerine varsayılan olarak kullanabileceğiniz bir değer vardır örneğin:
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "light"]]
 const ThemeContext = createContext('light');
 ```
 
-This way, if you accidentally render some component without a corresponding provider, it won't break. This also helps your components work well in a test environment without setting up a lot of providers in the tests.
+Bu şekilde, yanlışlıkla uygun bir sağlayıcı olmadan bazı bileşenleri oluşturursanız, kırılmaz. Ayrıca, bileşenlerinizin test ortamında birçok sağlayıcı ayarlamadan iyi çalışmasına yardımcı olur.
 
-In the example below, the "Toggle theme" button is always light because it's **outside any theme context provider** and the default context theme value is `'light'`. Try editing the default theme to be `'dark'`.
+Aşağıdaki örnekte "Temayı değiştir" butonu her zaman açık renkli olarak görüntülenir çünkü herhangi bir tema context'i sağlayıcısı **dışında** yer alır ve varsayılan context teması değeri `'açık'`tır. Varsayılan temayı `'koyu'` olarak düzenlemeyi deneyin.
 
 <Sandpack>
 
@@ -1062,9 +1063,9 @@ function Button({ children, onClick }) {
 
 ---
 
-### Overriding context for a part of the tree {/*overriding-context-for-a-part-of-the-tree*/}
+### Ağacın bir kısmında context'i geçersiz kılma {/*overriding-context-for-a-part-of-the-tree*/}
 
-You can override the context for a part of the tree by wrapping that part in a provider with a different value.
+Ağacın bir kısmı için context'i farklı bir değerle sağlayan bir sağlayıcıya sararak, context'i değiştirebilirsiniz.
 
 ```js {3,5}
 <ThemeContext.Provider value="dark">
@@ -1076,13 +1077,13 @@ You can override the context for a part of the tree by wrapping that part in a p
 </ThemeContext.Provider>
 ```
 
-You can nest and override providers as many times as you need.
+İhtiyacınız olan kadar sağlayıcıları iç içe yerleştirip geçersiz kılabilirsiniz.
 
-<Recipes title="Examples of overriding context">
+<Recipes title="Context'in geçersiz kılınması örnekleri">
 
-#### Overriding a theme {/*overriding-a-theme*/}
+#### Temanın geçersiz kılınması {/*overriding-a-theme*/}
 
-Here, the button *inside* the `Footer` receives a different context value (`"light"`) than the buttons outside (`"dark"`).
+Burada `Footer` içindeki buton, dışındaki butonlardan (`"dark"`) farklı bir context değeri (`"light"`) alır.
 
 <Sandpack>
 
@@ -1186,11 +1187,11 @@ footer {
 
 <Solution />
 
-#### Automatically nested headings {/*automatically-nested-headings*/}
+#### Otomatik olarak iç içe başlıklar {/*automatically-nested-headings*/}
 
-You can "accumulate" information when you nest context providers. In this example, the `Section` component keeps track of the `LevelContext` which specifies the depth of the section nesting. It reads the `LevelContext` from the parent section, and provides the `LevelContext` number increased by one to its children. As a result, the `Heading` component can automatically decide which of the `<h1>`, `<h2>`, `<h3>`, ..., tags to use based on how many `Section` components it is nested inside of.
+İç içe geçmiş contextleri yuvalayarak bilgi biriktirebilirsiniz. Bu örnekte, `Section` bileşeni `LevelContext`i tutar, bu belirtir alt bölüm yuvalama derinliğini. Alt bölümden `LevelContext` okur ve bu numarayı bir artırmış olarak alt elemanlarına sağlar. Sonuç olarak, `Heading` bileşeni, iç içe kaç `Section` bileşenine sahip olduğuna bağlı olarak hangi `<h1>`,`<h2>`,`<h3>`,`...` etiketlerinin kullanılacağını otomatik olarak karar verebilir.
 
-Read a [detailed walkthrough](/learn/passing-data-deeply-with-context) of this example.
+Bu örneğin [ayrıntılı bir açıklamasını](/learn/passing-data-deeply-with-context) okuyun.
 
 <Sandpack>
 
@@ -1288,9 +1289,9 @@ export const LevelContext = createContext(0);
 
 ---
 
-### Optimizing re-renders when passing objects and functions {/*optimizing-re-renders-when-passing-objects-and-functions*/}
+### Nesneler ve fonksiyonları geçirirken tekrar render işlemlerini optimize etmek {/*nesneler-ve-fonksiyonları-geçirirken-tekrar-render-işlemlerini-optimize-etmek*/}
 
-You can pass any values via context, including objects and functions.
+Herhangi bir değeri, nesne veya fonksiyon dahil, context aracılığıyla iletebilirsiniz. 
 
 ```js [[2, 10, "{ currentUser, login }"]] 
 function MyApp() {
@@ -1309,9 +1310,9 @@ function MyApp() {
 }
 ```
 
-Here, the <CodeStep step={2}>context value</CodeStep> is a JavaScript object with two properties, one of which is a function. Whenever `MyApp` re-renders (for example, on a route update), this will be a *different* object pointing at a *different* function, so React will also have to re-render all components deep in the tree that call `useContext(AuthContext)`.
+Burada, <CodeStep step={2}>context değeri</CodeStep> iki özellikli bir JavaScript nesnesidir ve bunlardan biri bir fonksiyondur. `MyApp` yeniden render edildiğinde (örneğin, bir rota güncellendiğinde) bu, *farklı* bir fonksiyona işaret eden *farklı* bir nesne olacaktır, bu nedenle derin ağaçta `useContext(AuthContext)` çağıran tüm bileşenlerin de yeniden render edilmesi gerekecektir.
 
-In smaller apps, this is not a problem. However, there is no need to re-render them if the underlying data, like `currentUser`, has not changed. To help React take advantage of that fact, you may wrap the `login` function with [`useCallback`](/reference/react/useCallback) and wrap the object creation into [`useMemo`](/reference/react/useMemo). This is a performance optimization:
+Daha küçük uygulamalarda, bu bir sorun değildir. Ancak, `currentUser` gibi altta yatan veriler değişmediyse, bunları yeniden render etmek gerekli değildir. React'ın bu gerçekten faydalanabilmesine yardımcı olmak için, `login` fonksiyonunu [`useCallback`](/reference/react/useCallback) ile sarmalayabilir ve nesne oluşturmayı [`useMemo`](/reference/react/useMemo) ile sarmalayabilirsiniz. Bu bir performans optimizasyonudur:
 
 ```js {6,9,11,14,17}
 import { useCallback, useMemo } from 'react';
@@ -1337,51 +1338,53 @@ function MyApp() {
 }
 ```
 
-As a result of this change, even if `MyApp` needs to re-render, the components calling `useContext(AuthContext)` won't need to re-render unless `currentUser` has changed.
+Bu değişiklik sonucunda, `MyApp` yeniden render edilse bile, `useContext(AuthContext)` çağıran bileşenler, `currentUser` değişmediği sürece yeniden render edilmeyecektir.
 
-Read more about [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) and [`useCallback`.](/reference/react/useCallback#skipping-re-rendering-of-components)
+[`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) ve [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) hakkında daha fazla bilgi edinin.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun Giderme {/*troubleshooting*/}
 
-### My component doesn't see the value from my provider {/*my-component-doesnt-see-the-value-from-my-provider*/}
+### Bileşenim sağlayıcının değerini görmüyor {/*my-component-doesnt-see-the-value-from-my-provider*/}
 
-There are a few common ways that this can happen:
+Bunun birkaç yaygın sebebi vardır:
 
-1. You're rendering `<SomeContext.Provider>` in the same component (or below) as where you're calling `useContext()`. Move `<SomeContext.Provider>` *above and outside* the component calling `useContext()`.
-2. You may have forgotten to wrap your component with `<SomeContext.Provider>`, or you might have put it in a different part of the tree than you thought. Check whether the hierarchy is right using [React DevTools.](/learn/react-developer-tools)
-3. You might be running into some build issue with your tooling that causes `SomeContext` as seen from the providing component and `SomeContext` as seen by the reading component to be two different objects. This can happen if you use symlinks, for example. You can verify this by assigning them to globals like `window.SomeContext1` and `window.SomeContext2` and then checking whether `window.SomeContext1 === window.SomeContext2` in the console. If they're not the same, fix that issue on the build tool level.
+1. `useContext()`'i çağırdığınız bileşenle aynı bileşende `<SomeContext.Provider>`bu bileşeni render ediyorsunuz. `SomeContext.Provider`'ı `useContext()` çağıran bileşenin üstüne ve dışına taşıyın.
+2. Bileşeninizi `SomeContext.Provider` ile sarmalamayı unuttunuz veya düşündüğünüzden farklı bir yerde yerleştirdiniz. [React DevTools](/learn/react-developer-tools) kullanarak hiyerarşinin doğru olup olmadığını kontrol edin.
+3. Sembolik bağlantılar kullanıyorsanız veya başka bir nedenle sağlayan bileşenin gördüğü `SomeContext`'ın, okuyan bileşenin gördüğü `SomeContext`'tan farklı olmasına neden olan bir yapılandırma sorunu ile karşılaşabilirsiniz. Bu, `window.SomeContext1` ve `window.SomeContext2` gibi global değişkenlere atayarak ve ardından konsolda `window.SomeContext1 === window.SomeContext2` gibi bir kontrol yaparak doğrulayabilirsiniz. Eğer aynı değillerse, yapılandırma sorununu düzeltin.
 
-### I am always getting `undefined` from my context although the default value is different {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
+### Default değer farklı olsa da her zaman context'den `undefined` değerini alıyorum {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
-You might have a provider without a `value` in the tree:
+Ağacınızda `value` belirtmeksizin bir sağlayıcı olabilir:
 
-```js {1,2}
-// 🚩 Doesn't work: no value prop
-<ThemeContext.Provider>
-   <Button />
-</ThemeContext.Provider>
+```js {4}
+const MyContext = React.createContext('default');
+
+function MyComponent() {
+  const value = useContext(MyContext);
+  // ...
+}
 ```
 
-If you forget to specify `value`, it's like passing `value={undefined}`.
+`value` belirtmeyi unutursanız, sanki `value={undefined}` geçirmişsiniz gibi davranılır.
 
-You may have also mistakingly used a different prop name by mistake:
+Ayrıca, farklı bir özellik adı yanlışlıkla kullanmış da olabilirsiniz:
 
 ```js {1,2}
-// 🚩 Doesn't work: prop should be called "value"
+// 🚩 Çalışmaz: özellik "value" olarak adlandırılmalı
 <ThemeContext.Provider theme={theme}>
    <Button />
 </ThemeContext.Provider>
 ```
 
-In both of these cases you should see a warning from React in the console. To fix them, call the prop `value`:
+Bu durumlarda, React tarafından konsolda bir uyarı görmeniz gerektiğini unutmayın. Bunları düzeltmek için özelliği `value` olarak adlandırın:
 
 ```js {1,2}
-// ✅ Passing the value prop
+// ✅ value özelliğini kullanarak geçirme
 <ThemeContext.Provider value={theme}>
    <Button />
 </ThemeContext.Provider>
 ```
 
-Note that the [default value from your `createContext(defaultValue)` call](#specifying-a-fallback-default-value) is only used **if there is no matching provider above at all.** If there is a `<SomeContext.Provider value={undefined}>` component somewhere in the parent tree, the component calling `useContext(SomeContext)` *will* receive `undefined` as the context value.
+Önemli bir not olarak, [varsayılan değerinizin (`createContext` çağrısındaki `defaultValue`)](#specifying-a-fallback-default-value) yalnızca **hiçbir eşleşen sağlayıcı yoksa** kullanılacağına dikkat edin. Alt ağaçta bir `<SomeContext.Provider value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen `undefined` olarak context değerini alacaktır.
