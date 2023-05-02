@@ -51,7 +51,7 @@ function Tooltip() {
  
 * **isteğe bağlı** `dependencies`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
 
-#### Dönüş Değerleri {/*returns*/}
+#### Dönüş değerleri {/*returns*/}
 
 `useLayoutEffect`, `undefined` döndürür.
 
@@ -710,7 +710,7 @@ Yukarıdaki kodu `useLayoutEffect` kullanacak şekilde düzenleyin ve rendering 
 
 ---
 
-## Sorun Giderme {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
 ### "`useLayoutEffect` does nothing on the server" hatası alıyorum {/*im-getting-an-error-uselayouteffect-does-nothing-on-the-server*/}
 
