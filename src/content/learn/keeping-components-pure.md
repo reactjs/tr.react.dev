@@ -158,7 +158,7 @@ React, geliştirme sırasında her bileşenin işlevini iki kez çağırdığı 
 
 Orijinal örneğin "Guest #2", "Guest #4" ve "Guest #6" yerine "Guest #1", "Guest #2" ve "Guest #3" yerine nasıl görüntülendiğine dikkat edin. Orijinal fonksiyon saf değildi, bu yüzden onu iki kez çağırmak onu bozdu. Ancak sabit saf fonksiyon, işlev her seferinde iki kez çağrılsa bile çalışır. **Saf fonksiyonlar yalnızca hesaplama yapar, bu yüzden onları iki kez çağırmak hiçbir şeyi değiştirmez** -- tıpkı `double(2)`'yi iki kez çağırmanın döndürülen şeyi değiştirmemesi, <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>'i iki kez çözmenin <MathI>y</MathI>'yi değiştirmemesi gibi. Aynı girdiler, aynı çıktılar. Her zaman.
 
-Strict Mode'un üretimde hiçbir etkisi yoktur, bu nedenle kullanıcılarınız için uygulamayı yavaşlatmaz. Strict Mode'u etkinleştirmek için kök bileşeninizi `<React.StrictMode>` içine sarabilirsiniz. Bazı kütüphaneler bunu varsayılan olarak yapar.
+Strict Mode'un canlıda hiçbir etkisi yoktur, bu nedenle kullanıcılarınız için uygulamayı yavaşlatmaz. Strict Mode'u etkinleştirmek için kök bileşeninizi `<React.StrictMode>` içine sarabilirsiniz. Bazı kütüphaneler bunu varsayılan olarak yapar.
 
 </DeepDive>
 
@@ -194,9 +194,9 @@ Ancak, `TeaGathering` içindeki aynı *render işlemi sırasında* oluşturduğu
 
 Fonksiyonel programlama, büyük ölçüde saflığa dayanırken, bir noktada, bir yerde, bir şeyin değişmesi gerekir. Bu, programlamanın bir nevi amacıdır!  Ekranın güncellenmesi, bir animasyonun başlatılması, verilerin değiştirilmesi gibi değişikliklere **yan etkiler** denir. Bunlar, render işlemi sırasında değil, _"yan tarafta"_ meydana gelen şeylerdir.
 
-React'te, **yan etkiler genellikle [event handlers.](/learn/responding-to-events) içine yazılır**. Event Handlerlar, bir işlem gerçekleştirdiğinizde (örneğin, bir düğmeye tıkladığınızda) React'ın çalıştırdığı fonksiyonlardır. Event Handlerları bileşeninizin *içinde* tanımlanmış olsa da, bunlar işleme *sırasında* çalışmazlar! **Bu nedenle olay işleyicilerinin saf olması gerekmez.**
+React'te, **yan etkiler genellikle [olay yöneticileri](/learn/responding-to-events) içine yazılır**. Olay Yöneticileri, bir işlem gerçekleştirdiğinizde (örneğin, bir düğmeye tıkladığınızda) React'ın çalıştırdığı fonksiyonlardır. Olay Yöneticileri bileşeninizin *içinde* tanımlanmış olsa da, bunlar işleme *sırasında* çalışmazlar! **Bu nedenle olay işleyicilerinin saf olması gerekmez.**
 
-Diğer tüm seçenekleri tükettiyseniz ve yan etkiniz için doğru event handler’ı bulamıyorsanız, bileşeninizde bir[`useEffect`](/reference/react/useEffect) çağrısı ile onu döndürülen JSX'inize hâlâ ekleyebilirsiniz. Bu, React'e onu renderdan yani işlemeden sonra, yan etkilere izin verildiğinde çalıştırmasını söyler. **Ancak, bu yaklaşım son çareniz olmalıdır.**
+Diğer tüm seçenekleri tükettiyseniz ve yan etkiniz için doğru olay yöneticilieri’ni bulamıyorsanız, bileşeninizde bir[`useEffect`](/reference/react/useEffect) çağrısı ile onu döndürülen JSX'inize hâlâ ekleyebilirsiniz. Bu, React'e onu renderdan yani işlemeden sonra, yan etkilere izin verildiğinde çalıştırmasını söyler. **Ancak, bu yaklaşım son çareniz olmalıdır.**
 
 Mümkün olduğunda, mantığınızı yalnızca render ile ifade etmeye çalışın. Bunun sizi ne kadar ileri götürebileceğine şaşıracaksınız!
 
@@ -221,7 +221,7 @@ Saf işlevler yazmak biraz alışkanlık ve disiplin gerektirir. Ama aynı zaman
   * **Aynı girdiler, aynı çıktılar.** Aynı girdiler verildiğinde, bir bileşen her zaman aynı JSX'i döndürmelidir. 
 * Oluşturma herhangi bir zamanda gerçekleşebilir, bu nedenle bileşenler birbirinin oluşturma sırasına bağlı olmamalıdır.
 * Bileşenlerinizin render için kullandığı girdilerin hiçbirini mutasyona uğratmamalısınız. Buna props, state ve context dahildir. Ekranı güncellemek için, önceden var olan nesneleri değiştirmek yerine [state "oluşturun".](/learn/state-a-components-memory)
-* Döndürdüğünüz JSX'te bileşeninizin mantığını ifade etmeye çalışın. "Bir şeyleri değiştirmeniz" gerektiğinde, bunu genellikle bir event handler’a yapmak isteyeceksiniz. Son çare olarak, `useEffect`'i kullanabilirsiniz.
+* Döndürdüğünüz JSX'te bileşeninizin mantığını ifade etmeye çalışın. "Bir şeyleri değiştirmeniz" gerektiğinde, bunu genellikle bir olay yöneticilerinde yapmak isteyeceksiniz. Son çare olarak, `useEffect`'i kullanabilirsiniz.
 * Saf fonksiyonlar yazmak biraz pratik gerektirir, ancak React'in paradigmasının gücünü açığa çıkarır.
 
 </Recap>
