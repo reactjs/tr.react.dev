@@ -97,7 +97,7 @@ Olay yöneticilerine iletilen fonksiyonlar çağırılmamalıdır, yalnızca ile
 
 Aradaki farkı farkedebilmek zor olabilir. İlk örnekte, `handleClick` fonksiyonu `onClick` olay yöneticisi olarak iletilir. Bu sayede React, fonksiyonu hatırlar ve yalnızca kullanıcı butona tıkladığında çağırır.
 
-İkinci örnekte, `handleClick()` ifadesinin sonundaki parantezler yüzünden [rendering](/learn/render-and-commit) esnasında herhangi bir tıklama olmaksızın fonksiyon doğrudan tetiklenir. Sebebi ise [JSX'de `{` ve `}`](/learn/javascript-in-jsx-with-curly-braces) arasındaki JavaScript kodlarının anında yürütülmesidir.
+İkinci örnekte, `handleClick()` ifadesinin sonundaki parantezler yüzünden [render etme](/learn/render-and-commit) esnasında herhangi bir tıklama olmaksızın fonksiyon doğrudan tetiklenir. Sebebi ise [JSX'de `{` ve `}`](/learn/javascript-in-jsx-with-curly-braces) arasındaki JavaScript kodlarının anında yürütülmesidir.
 
 Satır içi kod yazarken aynı tuzak farklı bir biçimde ortaya çıkar:
 
