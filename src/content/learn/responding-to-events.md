@@ -18,7 +18,7 @@ React, JSX'inize olay yöneticileri eklemenize olanak tanır. Olay yöneticileri
 
 ## Olay yöneticileri oluşturmak {/*adding-event-handlers*/}
 
-Olay yöneticisi (event handler) oluşturmak için bir fonksiyon tanımlayıp uygun JSX etiketine [prop olarak iletirsiniz](/learn/passing-props-to-a-component). Örneğin, hiçbir şey yapmayan bir düğmeyi ele alalım:
+Olay yöneticisi (event handler) oluşturmak için bir fonksiyon tanımlayıp uygun JSX etiketine [prop olarak iletirsiniz](/learn/passing-props-to-a-component). Örneğin, hiçbir şey yapmayan bir butonu ele alalım:
 
 <Sandpack>
 
