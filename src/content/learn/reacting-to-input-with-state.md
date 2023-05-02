@@ -1,37 +1,37 @@
 ---
-title: Reacting to Input with State
+title: Girdiye State ile Reaksiyon Verme
 ---
 
 <Intro>
 
-React provides a declarative way to manipulate the UI. Instead of manipulating individual pieces of the UI directly, you describe the different states that your component can be in, and switch between them in response to the user input. This is similar to how designers think about the UI.
+React, UI'ı manipüle etmek için bildirimsel bir yol sağlar. UI'ın her bir parçasını doğrudan manipüle etmek yerine, bileşeninizin içinde bulunabileceği farklı durumları (state'leri) tanımlar ve kullanıcı girdisine karşılık bunlar arasında geçiş yaparsınız. Bu, tasarımcıların UI hakkındaki düşüncelerine benzer.
 
 </Intro>
 
 <YouWillLearn>
 
-* How declarative UI programming differs from imperative UI programming
-* How to enumerate the different visual states your component can be in
-* How to trigger the changes between the different visual states from code
+* Bildirimsel UI programlamanın, zorunlu UI programlamadan nasıl ayrıştığını
+* Bileşeninizin içinde bulunabileceği farklı görsel state'lerin nasıl sıralanabileceğini
+* Farklı görsel state'ler arasındaki değişimin koddan nasıl tetiklenebileceğini
 
 </YouWillLearn>
 
-## How declarative UI compares to imperative {/*how-declarative-ui-compares-to-imperative*/}
+## Bildirimsel ve zorunlu UI'ın karşılaştırması {/*how-declarative-ui-compares-to-imperative*/}
 
-When you design UI interactions, you probably think about how the UI *changes* in response to user actions. Consider a form that lets the user submit an answer:
+UI etkileşimleri tasarlarken, UI'ın kullanıcı aksiyonlarına karşılık nasıl *değiştiği* hakkında muhtemelen düşünürsünüz. Kullanıcının bir cevap gönderdiği bir form düşünelim:
 
-* When you type something into the form, the "Submit" button **becomes enabled.**
-* When you press "Submit", both the form and the button **become disabled,** and a spinner **appears.**
-* If the network request succeeds, the form **gets hidden,** and the "Thank you" message **appears.**
-* If the network request fails, an error message **appears,** and the form **becomes enabled** again.
+* Formun içine bir şey yazdığınızda, "Gönder" butonu **etkinleşir.**
+* "Gönder" butonuna bastığınızda, hem form hem de buton **devre dışı kalır** ve bir spinner **görünür.**
+* Eğer ağ isteği başarılı olursa, form **görünmez hale gelir** ve "Teşekkürler" mesajı **görünür.**
+* Eğer ağ isteği başarısız olursa, bir hata mesajı **görünür** ve form tekrar **etkinleşir.**
 
-In **imperative programming,** the above corresponds directly to how you implement interaction. You have to write the exact instructions to manipulate the UI depending on what just happened. Here's another way to think about this: imagine riding next to someone in a car and telling them turn by turn where to go.
+**Zorunlu programlama**da yukarıdakiler, etkileşimi nasıl uyguladığınıza doğrudan karşılık gelir. Az önce ne olduğuna bağlı olarak UI'ı manipüle etmek için tam talimatları yazmanız gerekir. Bunu düşünmenin başka bir yolu da şudur: Arabada birinin yanına bindiğinizi ve ona adım adım nereye gideceğini söylediğinizi hayal edin.
 
-<Illustration src="/images/docs/illustrations/i_imperative-ui-programming.png"  alt="In a car driven by an anxious-looking person representing JavaScript, a passenger orders the driver to execute a sequence of complicated turn by turn navigations." />
+<Illustration src="/images/docs/illustrations/i_imperative-ui-programming.png"  alt="JavaScript'i temsil eden endişeli görünümlü bir kişi tarafından sürülen bir arabada, bir yolcu sürücüye bir dizi karmaşık dönüşü gerçekleştirmesini emreder." />
 
-They don't know where you want to go, they just follow your commands. (And if you get the directions wrong, you end up in the wrong place!) It's called *imperative* because you have to "command" each element, from the spinner to the button, telling the computer *how* to update the UI.
+Nereye gitmek istediğinizi bilmiyor, sadece talimatlarınızı takip ediyor. (Ve eğer yanlış yönlendirirseniz, kendinizi yanlış yerde bulursunuz!) Buna *zorunlu* denir çünkü, bilgisayara UI'yı *nasıl* güncellemesi gerektiğini, spinner'dan butona her eleman için "talimat vermeniz" gerekir.
 
-In this example of imperative UI programming, the form is built *without* React. It only uses the browser [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model):
+Zorunlu UI programlamanın bu örneğinde form, React *kullanmadan* oluşturulmuştur. Sadece tarayıcı [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)'unu kullanır:
 
 <Sandpack>
 
@@ -81,13 +81,13 @@ function disable(el) {
 }
 
 function submitForm(answer) {
-  // Pretend it's hitting the network.
+  // Ağa istek atıyormuş gibi yapalım.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (answer.toLowerCase() == 'istanbul') {
         resolve();
       } else {
-        reject(new Error('Good guess but a wrong answer. Try again!'));
+        reject(new Error('İyi tahmin ama yanlış cevap. Tekrar dene!'));
       }
     }, 1500);
   });
@@ -111,17 +111,17 @@ textarea.oninput = handleTextareaChange;
 
 ```html public/index.html
 <form id="form">
-  <h2>City quiz</h2>
+  <h2>Şehir sorusu</h2>
   <p>
-    What city is located on two continents?
+    İki kıta üzerinde konumlanmış şehir hangisidir?
   </p>
   <textarea id="textarea"></textarea>
   <br />
-  <button id="button" disabled>Submit</button>
-  <p id="loading" style="display: none">Loading...</p>
+  <button id="button" disabled>Gönder</button>
+  <p id="loading" style="display: none">Yükleniyor...</p>
   <p id="error" style="display: none; color: red;"></p>
 </form>
-<h1 id="success" style="display: none">That's right!</h1>
+<h1 id="success" style="display: none">Doğru cevap!</h1>
 
 <style>
 * { box-sizing: border-box; }
@@ -131,37 +131,37 @@ body { font-family: sans-serif; margin: 20px; padding: 0; }
 
 </Sandpack>
 
-Manipulating the UI imperatively works well enough for isolated examples, but it gets exponentially more difficult to manage in more complex systems. Imagine updating a page full of different forms like this one. Adding a new UI element or a new interaction would require carefully checking all existing code to make sure you haven't introduced a bug (for example, forgetting to show or hide something).
+UI'yı zorunlu bir şekilde manipüle etmek izole örneklerde yeterince işe yarar, fakat bunun daha karmaşık sistemlerde yönetilmesi katlanarak zorlaşır. Bunun gibi farklı formlarla dolu bir sayfayı güncellediğinizi hayal edin. Yeni bir UI elemanı veya yeni bir etkileşim eklemek, bir hata (örneğin, bir şeyi göstermeyi veya gizlemeyi unutmak) eklemediğinizden emin olmak için mevcut tüm kodun dikkatlice kontrol edilmesini gerektirir.
 
-React was built to solve this problem.
+React, bu sorunu çözmek için geliştirilmiştir.
 
-In React, you don't directly manipulate the UI--meaning you don't enable, disable, show, or hide components directly. Instead, you **declare what you want to show,** and React figures out how to update the UI. Think of getting into a taxi and telling the driver where you want to go instead of telling them exactly where to turn. It's the driver's job to get you there, and they might even know some shortcuts you haven't considered!
+React'ta, UI'yı doğrudan manipüle etmezsiniz--yani bileşenleri doğrudan etkinleştirmez, devre dışı bırakmaz, göstermez veya gizlemezsiniz. Bunun yerine, **göstermek istediğiniz şeyi belirtirsiniz** ve React, UI'yı nasıl güncelleyeceğini çözer. Bir taksiye bindiğinizi ve şoföre nereden döneceğini söylemek yerine nereye gitmek istediğinizi söylediğinizi düşünün. Sizi oraya götürmek şoförün işidir ve hatta belki de sizin aklınıza gelmeyen kestirme yollar biliyordur.
 
 <Illustration src="/images/docs/illustrations/i_declarative-ui-programming.png" alt="In a car driven by React, a passenger asks to be taken to a specific place on the map. React figures out how to do that." />
 
-## Thinking about UI declaratively {/*thinking-about-ui-declaratively*/}
+## UI'ı bildirimsel olarak düşünmek {/*thinking-about-ui-declaratively*/}
 
-You've seen how to implement a form imperatively above. To better understand how to think in React, you'll walk through reimplementing this UI in React below:
+Yukarıda bir formun zorunlu olarak nasıl uygulanacağını gördünüz. React'ta nasıl düşüneceğinizi daha iyi anlamak için, aşağıda bu UI'ı React'ta tekrar uygulayacaksınız:
 
-1. **Identify** your component's different visual states
-2. **Determine** what triggers those state changes
-3. **Represent** the state in memory using `useState`
-4. **Remove** any non-essential state variables
-5. **Connect** the event handlers to set the state
+1. Bileşeninizin farklı görsel state'lerini **tanımlayın**
+2. Bu state değişikliklerini neyin tetiklediğini **belirleyin**
+3. State'i `useState` ile bellekte **gösterin**
+4. Gereksiz tüm state değişkenlerini **kaldırın**
+5. State'i ayarlamak için olay yöneticilerini **bağlayın**
 
-### Step 1: Identify your component's different visual states {/*step-1-identify-your-components-different-visual-states*/}
+### Adım 1: Bileşeninizin farklı görsel state'lerini tanımlayın {/*step-1-identify-your-components-different-visual-states*/}
 
-In computer science, you may hear about a ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) being in one of several “states”. If you work with a designer, you may have seen mockups for different "visual states". React stands at the intersection of design and computer science, so both of these ideas are sources of inspiration.
+Bilgisayar biliminde, bir ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine)in birçok "state"ten birinde olduğunu duyabilirsiniz. Eğer bir tasarımcı ile çalışıyorsanız, farklı "görsel state"ler için modeller görmüş olabilirsiniz. React, tasarım ve bilgisayar biliminin kesiştiği noktada durmaktadır, bu nedenle bu fikirlerin her ikisi de ilham kaynağıdır.
 
-First, you need to visualize all the different "states" of the UI the user might see:
+Öncelikle, UI'ın kullanıcının görebileceği tüm farklı "state"lerini görselleştirmeniz gerekir:
 
-* **Empty**: Form has a disabled "Submit" button.
-* **Typing**: Form has an enabled "Submit" button.
-* **Submitting**: Form is completely disabled. Spinner is shown.
-* **Success**: "Thank you" message is shown instead of a form.
-* **Error**: Same as Typing state, but with an extra error message.
+* **Empty**: Formda devre dışı bırakılmış bir "Gönder" butonu var.
+* **Typing**: Formda etkinleştirilmiş bir "Gönder" butonu var.
+* **Submitting**: Form tamamen devre dışı bırakılmış. Spinner gösterilir.
+* **Success**: Form yerine "Teşekkürler" mesajı gösterilir.
+* **Error**: Typing state'i ile aynı ama ekstra bir hata mesajı ile.
 
-Just like a designer, you'll want to "mock up" or create "mocks" for the different states before you add logic. For example, here is a mock for just the visual part of the form. This mock is controlled by a prop called `status` with a default value of `'empty'`:
+Tıpkı bir tasarımcı gibi, mantık eklemeden önce farklı state'ler için modeller oluşturmak isteyeceksiniz. Örneğin, burada formun sadece görsel kısmı için bir model bulunmaktadır. Bu model, varsayılan değeri `'empty'` olan `status` adlı bir prop tarafından kontrol edilir:
 
 <Sandpack>
 
@@ -170,19 +170,19 @@ export default function Form({
   status = 'empty'
 }) {
   if (status === 'success') {
-    return <h1>That's right!</h1>
+    return <h1>Doğru cevap!</h1>
   }
   return (
     <>
-      <h2>City quiz</h2>
+      <h2>Şehir sorusu</h2>
       <p>
-        In which city is there a billboard that turns air into drinkable water?
+        Havayı içilebilir suya çeviren reklam tabelası hangi şehirdedir?
       </p>
       <form>
         <textarea />
         <br />
         <button>
-          Submit
+          Gönder
         </button>
       </form>
     </>
@@ -192,23 +192,23 @@ export default function Form({
 
 </Sandpack>
 
-You could call that prop anything you like, the naming is not important. Try editing `status = 'empty'` to `status = 'success'` to see the success message appear. Mocking lets you quickly iterate on the UI before you wire up any logic. Here is a more fleshed out prototype of the same component, still "controlled" by the `status` prop:
+Bu prop'u istediğiniz gibi isimlendirebilirsiniz, isimlendirme önemli değil. Başarı mesajını görmek için `status = 'empty'`'yi `status = 'success'`'e değiştirmeyi deneyin. Modelleme, herhangi bir mantığı bağlamadan önce UI'ın üzerinden hızlıca tekrar geçmenizi sağlar. İşte aynı bileşenin hala `status` prop'u tarafından "kontrol edilen" daha ayrıntılı bir prototipi:
 
 <Sandpack>
 
 ```js
 export default function Form({
-  // Try 'submitting', 'error', 'success':
+  // Şunları deneyin: 'submitting', 'error', 'success':
   status = 'empty'
 }) {
   if (status === 'success') {
-    return <h1>That's right!</h1>
+    return <h1>Doğru cevap!</h1>
   }
   return (
     <>
-      <h2>City quiz</h2>
+      <h2>Şehir sorusu</h2>
       <p>
-        In which city is there a billboard that turns air into drinkable water?
+        Havayı içilebilir suya çeviren reklam tabelası hangi şehirdedir?
       </p>
       <form>
         <textarea disabled={
@@ -219,11 +219,11 @@ export default function Form({
           status === 'empty' ||
           status === 'submitting'
         }>
-          Submit
+          Gönder
         </button>
         {status === 'error' &&
           <p className="Error">
-            Good guess but a wrong answer. Try again!
+            İyi tahmin ama yanlış cevap. Tekrar dene!
           </p>
         }
       </form>
@@ -240,9 +240,9 @@ export default function Form({
 
 <DeepDive>
 
-#### Displaying many visual states at once {/*displaying-many-visual-states-at-once*/}
+#### Birden fazla görsel state'i tek seferde görüntüleme {/*displaying-many-visual-states-at-once*/}
 
-If a component has a lot of visual states, it can be convenient to show them all on one page:
+Eğer bir bileşenin birçok görsel state'i varsa, hepsini tek bir sayfada göstermek uygun olabilir:
 
 <Sandpack>
 
@@ -274,7 +274,7 @@ export default function App() {
 ```js Form.js
 export default function Form({ status }) {
   if (status === 'success') {
-    return <h1>That's right!</h1>
+    return <h1>Doğru cevap!</h1>
   }
   return (
     <form>
@@ -286,11 +286,11 @@ export default function Form({ status }) {
         status === 'empty' ||
         status === 'submitting'
       }>
-        Submit
+        Gönder
       </button>
       {status === 'error' &&
         <p className="Error">
-          Good guess but a wrong answer. Try again!
+          İyi tahmin ama yanlış cevap. Tekrar dene!
         </p>
       }
     </form>
@@ -307,61 +307,61 @@ body { margin: 0; }
 
 </Sandpack>
 
-Pages like this are often called "living styleguides" or "storybooks".
+Böyle sayfalar sıklıkla "yaşayan stil rehberi" veya "hikaye kitabı" diye adlandırılır.
 
 </DeepDive>
 
-### Step 2: Determine what triggers those state changes {/*step-2-determine-what-triggers-those-state-changes*/}
+### Adım 2: State değişikliklerini neyin tetiklediğini belirleyin {/*step-2-determine-what-triggers-those-state-changes*/}
 
-You can trigger state updates in response to two kinds of inputs:
+State güncellemelerini iki girdi çeşidine karşılık tetikleyebilirsiniz:
 
-* **Human inputs,** like clicking a button, typing in a field, navigating a link.
-* **Computer inputs,** like a network response arriving, a timeout completing, an image loading.
+* **İnsan girdileri:** bir butona tıklama, bir alana yazma, bir bağlantıya gitme vb.
+* **Bilgisayar girdileri:** bir ağ yanıtının ulaşması, bir zamanaşımının tamamlanması, bir görüntünün yüklenmesi vb.
 
 <IllustrationBlock>
-  <Illustration caption="Human inputs" alt="A finger." src="/images/docs/illustrations/i_inputs1.png" />
-  <Illustration caption="Computer inputs" alt="Ones and zeroes." src="/images/docs/illustrations/i_inputs2.png" />
+  <Illustration caption="İnsan girdileri" alt="Bir parmak." src="/images/docs/illustrations/i_inputs1.png" />
+  <Illustration caption="Bilgisayar girdileri" alt="Birler ve sıfırlar." src="/images/docs/illustrations/i_inputs2.png" />
 </IllustrationBlock>
 
-In both cases, **you must set [state variables](/learn/state-a-components-memory#anatomy-of-usestate) to update the UI.** For the form you're developing, you will need to change state in response to a few different inputs:
+Her iki durumda da **UI'ı güncellemek için [state değişkenlerini](/learn/state-a-components-memory#anatomy-of-usestate) ayarlamak zorundasınız.** Geliştirdiğiniz form için, birkaç farklı girdiye karşılık state değiştirmeniz gerekecek:
 
-* **Changing the text input** (human) should switch it from the *Empty* state to the *Typing* state or back, depending on whether the text box is empty or not.
-* **Clicking the Submit button** (human) should switch it to the *Submitting* state.
-* **Successful network response** (computer) should switch it to the *Success* state.
-* **Failed network response** (computer) should switch it to the *Error* state with the matching error message.
+* **Metin girdisini değiştirmek** (insan) metin kutusunun boş olup olmadığına bağlı olmak üzere, state'i *Empty*'den *Typing*'e ya da tam tersine çevirmeli.
+* **Gönder butonuna tıklamak** (insan) state'i *Submitting*'e çevirmeli.
+* **Başarılı ağ yanıtı** (bilgisayar) state'i *Success*'e çevirmeli.
+* **Başarısız ağ yanıtı** (bilgisayar) state'i ilgili hata mesajı ile birlikte *Error*'a çevirmeli.
 
 <Note>
 
-Notice that human inputs often require [event handlers](/learn/responding-to-events)!
+İnsan girdilerinin sıklıkla [olay yöneticilerini](/learn/responding-to-events) gerektirdiğine dikkat ediniz!
 
 </Note>
 
-To help visualize this flow, try drawing each state on paper as a labeled circle, and each change between two states as an arrow. You can sketch out many flows this way and sort out bugs long before implementation.
+Bu akışı görselleştirmeye yardımcı olması için, kağıt üzerinde her bir state'i etiketli bir daire olarak ve iki state arasındaki her bir değişikliği bir ok olarak çizmeyi deneyin. Bu şekilde birçok akışı taslak olarak çizebilir ve uygulamadan çok önce hataları ayıklayabilirsiniz.
 
 <DiagramGroup>
 
-<Diagram name="responding_to_input_flow" height={350} width={688} alt="Flow chart moving left to right with 5 nodes. The first node labeled 'empty' has one edge labeled 'start typing' connected to a node labeled 'typing'. That node has one edge labeled 'press submit' connected to a node labeled 'submitting', which has two edges. The left edge is labeled 'network error' connecting to a node labeled 'error'. The right edge is labeled 'network success' connecting to a node labeled 'success'.">
+<Diagram name="responding_to_input_flow" height={350} width={688} alt="Soldan sağa doğru 5 düğümle ilerleyen akış şeması. 'empty' olarak etiketlenen ilk düğümün 'start typing' olarak etiketlenen ve 'typing' olarak etiketlenen bir düğüme bağlı bir kenarı vardır. Bu düğümün iki kenarı olan 'submitting' etiketli bir düğüme bağlı 'press submit' etiketli bir kenarı vardır. Sol kenar 'error' etiketli bir düğüme bağlanan 'network error' olarak etiketlenmiştir. Sağ kenar ise 'success' etiketli bir düğüme bağlanan 'network success' olarak etiketlenmiştir.">
 
-Form states
+Form state'leri
 
 </Diagram>
 
 </DiagramGroup>
 
-### Step 3: Represent the state in memory with `useState` {/*step-3-represent-the-state-in-memory-with-usestate*/}
+### Adım 3: State'i `useState` ile bellekte gösterin {/*step-3-represent-the-state-in-memory-with-usestate*/}
 
-Next you'll need to represent the visual states of your component in memory with [`useState`.](/reference/react/useState) Simplicity is key: each piece of state is a "moving piece", and **you want as few "moving pieces" as possible.** More complexity leads to more bugs!
+Şimdi bileşeninizin görsel state'lerini [`useState`](/reference/react/useState) ile bellekte göstermeniz gerekecek. Kilit nokta sadelik: state'in her bir parçası birer "hareketli parça"dır, ve **mümkün olduğunca az "hareketli parça" istersiniz.** Daha fazla karmaşıklık daha fazla hataya yol açar!
 
-Start with the state that *absolutely must* be there. For example, you'll need to store the `answer` for the input, and the `error` (if it exists) to store the last error:
+*Kesinlikle bulunması gereken* state ile başlayın. Örneğin, girdi için `answer` ve (eğer varsa) son hata için `error`ı depolamanız gerekecek.
 
 ```js
 const [answer, setAnswer] = useState('');
 const [error, setError] = useState(null);
 ```
 
-Then, you'll need a state variable representing which one of the visual states that you want to display. There's usually more than a single way to represent that in memory, so you'll need to experiment with it.
+Sonrasında, göstermek istediğiniz görsel state'i temsil eden bir state değişkenine ihtiyacınız olacak. Bunu bellekte temsil etmenin genellikle birden fazla yolu vardır, bu nedenle denemeler yapmanız gerekecek.
 
-If you struggle to think of the best way immediately, start by adding enough state that you're *definitely* sure that all the possible visual states are covered:
+Hemen en iyi yolu bulmakta zorlanırsanız, tüm muhtemel görsel state'leri kapsandığından *kesinlikle* emin olacağınız kadar state ekleyerek başlayın:
 
 ```js
 const [isEmpty, setIsEmpty] = useState(true);
@@ -371,39 +371,39 @@ const [isSuccess, setIsSuccess] = useState(false);
 const [isError, setIsError] = useState(false);
 ```
 
-Your first idea likely won't be the best, but that's ok--refactoring state is a part of the process!
+İlk fikriniz muhtemelen en iyisi olmayacaktır, ancak sorun değil--state'i yeniden düzenlemek sürecin bir parçasıdır!
 
-### Step 4: Remove any non-essential state variables {/*step-4-remove-any-non-essential-state-variables*/}
+### Adım 4: Gereksiz tüm state değişkenlerini kaldırın {/*step-4-remove-any-non-essential-state-variables*/}
 
-You want to avoid duplication in the state content so you're only tracking what is essential. Spending a little time on refactoring your state structure will make your components easier to understand, reduce duplication, and avoid unintended meanings. Your goal is to **prevent the cases where the state in memory doesn't represent any valid UI that you'd want a user to see.** (For example, you never want to show an error message and disable the input at the same time, or the user won't be able to correct the error!)
+State içeriğinde kopyalardan kaçınmak istersiniz ve bu yüzden yalnızca gerekli olanların takibini yaparsınız. State yapınızı yeniden düzenlemek için biraz zaman harcamak bileşenlerinizin anlaşılmasını kolaylaştıracak, tekrarları azaltacak ve istenmeyen anlamları önleyecektir. Amacınız **bellekteki state'in kullanıcının görmesini isteyeceğiniz geçerli bir UI'ı temsil etmediği durumları önlemektir.** (Örneğin, asla bir hata mesajı göstermek ve aynı zamanda girişi devre dışı bırakmak istemezsiniz, aksi takdirde kullanıcı hatayı düzeltemez!)
 
-Here are some questions you can ask about your state variables:
+İşte state değişkenleriniz hakkında sorabileceğiniz bazı sorular:
 
-* **Does this state cause a paradox?** For example, `isTyping` and `isSubmitting` can't both be `true`. A paradox usually means that the state is not constrained enough. There are four possible combinations of two booleans, but only three correspond to valid states. To remove the "impossible" state, you can combine these into a `status` that must be one of three values: `'typing'`, `'submitting'`, or `'success'`.
-* **Is the same information available in another state variable already?** Another paradox: `isEmpty` and `isTyping` can't be `true` at the same time. By making them separate state variables, you risk them going out of sync and causing bugs. Fortunately, you can remove `isEmpty` and instead check `answer.length === 0`.
-* **Can you get the same information from the inverse of another state variable?** `isError` is not needed because you can check `error !== null` instead.
+* **Bu state bir paradoksa sebep oluyor mu?** Örneğin, hem `isTyping` hem de `isSubmitting`, `true` olamaz. Paradoks genellikle state'in yeterince kısıtlanmadığı anlamına gelir. İki boolean'ın dört muhtemelen kombinasyonu vardır, ancak sadece üç tanesi geçerli state'e karşılık gelir. "İmkansız" state'i kaldırmak için bunları, değeri `'typing'`, `'submitting'`, veya `'success'`'ten biri olması gereken `status` içinde birleştirebilirsiniz 
+* **Aynı bilgi başka bir state değişkeninde zaten mevcut mu?** Bir diğer paradoks: `isEmpty` ve `isTyping` aynı anda `true` olamazlar. Bunları ayrı state değişkenleri haline getirerek, senkronize olmamaları ve hatalara neden olmaları riskini alırsınız. Neyse ki, `isEmpty`'yi kaldırıp yerine `answer.length === 0`'ı kontrol edebilirsiniz.
+* **Aynı bilgiye bir başka state değişkeninin tersini alarak erişebiliyor musunuz?** `error !== null` kontrolünü yapabildiğiniz için `isError`'a ihtiyacınız yok.
 
-After this clean-up, you're left with 3 (down from 7!) *essential* state variables:
+Bu temizlikten sonra, 3 tane (7'den düştü!) *gerekli* state değişkeniniz kalıyor:
 
 ```js
 const [answer, setAnswer] = useState('');
 const [error, setError] = useState(null);
-const [status, setStatus] = useState('typing'); // 'typing', 'submitting', or 'success'
+const [status, setStatus] = useState('typing'); // 'typing', 'submitting', veya 'success'
 ```
 
-You know they are essential, because you can't remove any of them without breaking the functionality.
+Bunların gerekli olduğunu biliyorsunuz, çünkü işlevselliği bozmadan hiçbirini kaldıramazsınız.
 
 <DeepDive>
 
-#### Eliminating “impossible” states with a reducer {/*eliminating-impossible-states-with-a-reducer*/}
+#### “İmkansız" state'leri bir reducer ile elimine etme {/*eliminating-impossible-states-with-a-reducer*/}
 
-These three variables are a good enough representation of this form's state. However, there are still some intermediate states that don't fully make sense. For example, a non-null `error` doesn't make sense when `status` is `'success'`. To model the state more precisely, you can [extract it into a reducer.](/learn/extracting-state-logic-into-a-reducer) Reducers let you unify multiple state variables into a single object and consolidate all the related logic!
+Bu üç değişken, bu formun state'ini yeterince iyi bir şekilde temsil ediyor. Ancak, hala tam olarak anlam ifade etmeyen ara state'ler var. Örneğin, `status` `'success'` olduğunda null olmayan bir `error` bir anlam ifade etmez. State'i daha kesin bir şekilde modellemek için, [onu bir reducer'a çıkarabilirsiniz](/learn/extracting-state-logic-into-a-reducer). Reducer'lar, birden fazla state değişkenini tek bir nesnede birleştirmenize ve ilgili tüm mantığı bir araya getirmenize olanak tanır!
 
 </DeepDive>
 
-### Step 5: Connect the event handlers to set state {/*step-5-connect-the-event-handlers-to-set-state*/}
+### Adım 5: State'i ayarlamak için olay yöneticilerini bağlayın {/*step-5-connect-the-event-handlers-to-set-state*/}
 
-Lastly, create event handlers that update the state. Below is the final form, with all event handlers wired up:
+Son olarak, state'i güncelleyen olay yöneticileri oluşturun. Aşağıda, tüm olay yöneticilerinin bağlandığı formun son hali yer almaktadır:
 
 <Sandpack>
 
@@ -416,7 +416,7 @@ export default function Form() {
   const [status, setStatus] = useState('typing');
 
   if (status === 'success') {
-    return <h1>That's right!</h1>
+    return <h1>Doğru cevap!</h1>
   }
 
   async function handleSubmit(e) {
@@ -437,9 +437,9 @@ export default function Form() {
 
   return (
     <>
-      <h2>City quiz</h2>
+      <h2>Şehir sorusu</h2>
       <p>
-        In which city is there a billboard that turns air into drinkable water?
+        Havayı içilebilir suya çeviren reklam tabelası hangi şehirdedir?
       </p>
       <form onSubmit={handleSubmit}>
         <textarea
@@ -452,7 +452,7 @@ export default function Form() {
           answer.length === 0 ||
           status === 'submitting'
         }>
-          Submit
+          Gönder
         </button>
         {error !== null &&
           <p className="Error">
@@ -465,12 +465,12 @@ export default function Form() {
 }
 
 function submitForm(answer) {
-  // Pretend it's hitting the network.
+  // Ağa istek atıyormuş gibi yapalım.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       let shouldError = answer.toLowerCase() !== 'lima'
       if (shouldError) {
-        reject(new Error('Good guess but a wrong answer. Try again!'));
+        reject(new Error('İyi tahmin ama yanlış cevap. Tekrar dene!'));
       } else {
         resolve();
       }
@@ -485,17 +485,17 @@ function submitForm(answer) {
 
 </Sandpack>
 
-Although this code is longer than the original imperative example, it is much less fragile. Expressing all interactions as state changes lets you later introduce new visual states without breaking existing ones. It also lets you change what should be displayed in each state without changing the logic of the interaction itself.
+Bu kod orijinal bildirimsel örnekten daha uzun olmasına rağmen, çok daha az kırılgandır. Tüm etkileşimleri state değişiklikleri olarak ifade etmek, daha sonra mevcut state'leri bozmadan yeni görsel state'ler eklemenizi sağlar. Ayrıca, etkileşimin kendi mantığını değiştirmeden her bir state'te neyin görüntülenmesi gerektiğini değiştirmenize de olanak tanır.
 
 <Recap>
 
-* Declarative programming means describing the UI for each visual state rather than micromanaging the UI (imperative).
-* When developing a component:
-  1. Identify all its visual states.
-  2. Determine the human and computer triggers for state changes.
-  3. Model the state with `useState`.
-  4. Remove non-essential state to avoid bugs and paradoxes.
-  5. Connect the event handlers to set state.
+* Bildirimsel programlama, UI'ın mikro yönetimi (zorunlu) yerine, UI'ı her bir görsel state için tarif etmek anlamına gelir.
+* Bir bileşen geliştirirken:
+  1. Tüm görsel state'lerini tanımlayın.
+  2. State değişiklikleri için insan ve bilgisayar tetikleyicilerini belirleyin.
+  3. State'i, `useState` ile modelleyin.
+  4. Hataları ve paradoksları önlemek için gereksiz state'i kaldırın.
+  5. State'i ayarlamak için olay yöneticilerini bağlayın.
 
 </Recap>
 
@@ -503,11 +503,11 @@ Although this code is longer than the original imperative example, it is much le
 
 <Challenges>
 
-#### Add and remove a CSS class {/*add-and-remove-a-css-class*/}
+#### Bir CSS sınıfı ekleyin ve çıkarın {/*add-and-remove-a-css-class*/}
 
-Make it so that clicking on the picture *removes* the `background--active` CSS class from the outer `<div>`, but *adds* the `picture--active` class to the `<img>`. Clicking the background again should restore the original CSS classes.
+Problemi, resme tıklandığında dış `<div>`'den `background--active` CSS sınıfını *kaldıracak*, ancak `<img>`'ye `picture--active` sınıfını *ekleyecek* şekilde çözün. Arka plana tekrar tıklandığında orijinal CSS sınıfları geri yüklenmeli.
 
-Visually, you should expect that clicking on the picture removes the purple background and highlights the picture border. Clicking outside the picture highlights the background, but removes the picture border highlight.
+Görsel olarak, resmin üzerine tıkladığınızda mor arka planın kaldırılmasını ve resim kenarlığının vurgulanmasını beklemelisiniz. Resmin dışına tıklamak arka planı vurgular, ancak resim kenarlığı vurgusunu kaldırır.
 
 <Sandpack>
 
@@ -517,7 +517,7 @@ export default function Picture() {
     <div className="background background--active">
       <img
         className="picture"
-        alt="Rainbow houses in Kampung Pelangi, Indonesia"
+        alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
         src="https://i.imgur.com/5qwVYb1.jpeg"
       />
     </div>
@@ -556,14 +556,14 @@ body { margin: 0; padding: 0; height: 250px; }
 
 <Solution>
 
-This component has two visual states: when the image is active, and when the image is inactive:
+Bu bileşenin iki görsel state'i vardır: resim aktifken ve resim aktif değilken:
 
-* When the image is active, the CSS classes are `background` and `picture picture--active`.
-* When the image is inactive, the CSS classes are `background background--active` and `picture`.
+* Resim aktifken, CSS sınıfları `background` ve `picture picture--active`'dir.
+* Resim aktif değilken, CSS sınıfları `background background--active` ve `picture`'dır.
 
-A single boolean state variable is enough to remember whether the image is active. The original task was to remove or add CSS classes. However, in React you need to *describe* what you want to see rather than *manipulate* the UI elements. So you need to calculate both CSS classes based on the current state. You also need to [stop the propagation](/learn/responding-to-events#stopping-propagation) so that clicking the image doesn't register as a click on the background.
+Görüntünün aktif olup olmadığına bakmak için tek bir boolean state değişkeni yeterlidir. Asıl görev CSS sınıflarını kaldırmak ya da eklemekti. Ancak React'ta UI öğelerini *manipüle* etmek yerine görmek istediğinizi *tanımlamanız* gerekir. Bu nedenle, mevcut state'e göre her iki CSS sınıfını da hesaplamanız gerekir. Ayrıca, resme tıklamanın arka plana tıklama olarak kaydedilmemesi için [ilerlemeyi durdurmanız](/learn/responding-to-events#stopping-propagation) gerekir.
 
-Verify that this version works by clicking the image and then outside of it:
+Bu sürümün çalıştığını resmin üstüne ve sonra dışına tıklayarak doğrulayın:
 
 <Sandpack>
 
@@ -592,7 +592,7 @@ export default function Picture() {
           setIsActive(true);
         }}
         className={pictureClassName}
-        alt="Rainbow houses in Kampung Pelangi, Indonesia"
+        alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
         src="https://i.imgur.com/5qwVYb1.jpeg"
       />
     </div>
@@ -630,7 +630,7 @@ body { margin: 0; padding: 0; height: 250px; }
 
 </Sandpack>
 
-Alternatively, you could return two separate chunks of JSX:
+Alternatif olarak, iki ayrı JSX bloğu döndürebilirsiniz:
 
 <Sandpack>
 
@@ -647,7 +647,7 @@ export default function Picture() {
       >
         <img
           className="picture picture--active"
-          alt="Rainbow houses in Kampung Pelangi, Indonesia"
+          alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
           src="https://i.imgur.com/5qwVYb1.jpeg"
           onClick={e => e.stopPropagation()}
         />
@@ -658,7 +658,7 @@ export default function Picture() {
     <div className="background background--active">
       <img
         className="picture"
-        alt="Rainbow houses in Kampung Pelangi, Indonesia"
+        alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
         src="https://i.imgur.com/5qwVYb1.jpeg"
         onClick={() => setIsActive(true)}
       />
@@ -697,27 +697,27 @@ body { margin: 0; padding: 0; height: 250px; }
 
 </Sandpack>
 
-Keep in mind that if two different JSX chunks describe the same tree, their nesting (first `<div>` → first `<img>`) has to line up. Otherwise, toggling `isActive` would recreate the whole tree below and [reset its state.](/learn/preserving-and-resetting-state) This is why, if a similar JSX tree gets returned in both cases, it is better to write them as a single piece of JSX.
+İki farklı JSX bloğunun aynı ağacı tanımlaması durumunda, iç içe geçmelerinin (ilk `<div>` → ilk `<img>`) aynı hizada olması gerektiğini unutmayın. Aksi takdirde, `isActive` değerini değiştirmek ağacın aşağıda kalan her yerini yeniden oluşturacak ve [state'i sıfırlayacaktır.](/learn/preserving-and-resetting-state) Bu nedenle, her iki durumda da benzer bir JSX ağacı döndürülecekse, bunları tek bir JSX parçası olarak yazmak daha iyidir.
 
 </Solution>
 
-#### Profile editor {/*profile-editor*/}
+#### Profil düzenleyici {/*profile-editor*/}
 
-Here is a small form implemented with plain JavaScript and DOM. Play with it to understand its behavior:
+İşte sade JavaScript ve DOM ile oluşturulmuş küçük bir form. Davranışını anlamak için onunla biraz oynayın:
 
 <Sandpack>
 
 ```js index.js active
 function handleFormSubmit(e) {
   e.preventDefault();
-  if (editButton.textContent === 'Edit Profile') {
-    editButton.textContent = 'Save Profile';
+  if (editButton.textContent === 'Profili Düzenle') {
+    editButton.textContent = 'Profili Kaydet';
     hide(firstNameText);
     hide(lastNameText);
     show(firstNameInput);
     show(lastNameInput);
   } else {
-    editButton.textContent = 'Edit Profile';
+    editButton.textContent = 'Profili Düzenle';
     hide(firstNameInput);
     hide(lastNameInput);
     show(firstNameText);
@@ -728,7 +728,7 @@ function handleFormSubmit(e) {
 function handleFirstNameChange() {
   firstNameText.textContent = firstNameInput.value;
   helloText.textContent = (
-    'Hello ' +
+    'Merhaba ' +
     firstNameInput.value + ' ' +
     lastNameInput.value + '!'
   );
@@ -737,7 +737,7 @@ function handleFirstNameChange() {
 function handleLastNameChange() {
   lastNameText.textContent = lastNameInput.value;
   helloText.textContent = (
-    'Hello ' +
+    'Merhaba ' +
     firstNameInput.value + ' ' +
     lastNameInput.value + '!'
   );
@@ -772,23 +772,23 @@ lastNameInput.oninput = handleLastNameChange;
 ```html public/index.html
 <form id="form">
   <label>
-    First name:
-    <b id="firstNameText">Jane</b>
+    Ad:
+    <b id="firstNameText">Vedat</b>
     <input
       id="firstNameInput"
-      value="Jane"
+      value="Vedat"
       style="display: none">
   </label>
   <label>
-    Last name:
-    <b id="lastNameText">Jacobs</b>
+    Soyad:
+    <b id="lastNameText">Milor</b>
     <input
       id="lastNameInput"
-      value="Jacobs"
+      value="Milor"
       style="display: none">
   </label>
-  <button type="submit" id="editButton">Edit Profile</button>
-  <p><i id="helloText">Hello, Jane Jacobs!</i></p>
+  <button type="submit" id="editButton">Profili Düzenle</button>
+  <p><i id="helloText">Merhaba, Vedat Milor!</i></p>
 </form>
 
 <style>
@@ -800,11 +800,11 @@ label { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-This form switches between two modes: in the editing mode, you see the inputs, and in the viewing mode, you only see the result. The button label changes between "Edit" and "Save" depending on the mode you're in. When you change the inputs, the welcome message at the bottom updates in real time.
+Bu form iki mod arasında geçiş yapar: düzenleme modunda girdileri görürsünüz ve görüntüleme modunda sadece sonucu görürsünüz. Buton etiketi, içinde bulunduğunuz moda bağlı olarak "Düzenle" ve "Kaydet" arasında değişir. Girdileri değiştirdiğinizde, alttaki karşılama mesajı gerçek zamanlı olarak güncellenir.
 
-Your task is to reimplement it in React in the sandbox below. For your convenience, the markup was already converted to JSX, but you'll need to make it show and hide the inputs like the original does.
+Sizin göreviniz bunu, aşağıdaki sandbox'ın içinde React'ta yeniden uygulamaktır. Size kolaylık sağlamak için, biçimlendirme çoktan JSX'e dönüştürüldü, ancak orijinalinde olduğu gibi girdileri gösterip gizlemeniz gerekecek.
 
-Make sure that it updates the text at the bottom, too!
+Alttaki metni de güncellediğinden emin olun!
 
 <Sandpack>
 
@@ -813,19 +813,19 @@ export default function EditProfile() {
   return (
     <form>
       <label>
-        First name:{' '}
-        <b>Jane</b>
+        Ad:{' '}
+        <b>Vedat</b>
         <input />
       </label>
       <label>
-        Last name:{' '}
-        <b>Jacobs</b>
+        Soyad:{' '}
+        <b>Milor</b>
         <input />
       </label>
       <button type="submit">
-        Edit Profile
+        Profili Düzenle
       </button>
-      <p><i>Hello, Jane Jacobs!</i></p>
+      <p><i>Merhaba, Vedat Milor!</i></p>
     </form>
   );
 }
@@ -839,9 +839,9 @@ label { display: block; margin-bottom: 20px; }
 
 <Solution>
 
-You will need two state variables to hold the input values: `firstName` and `lastName`. You're also going to need an `isEditing` state variable that holds whether to display the inputs or not. You should _not_ need a `fullName` variable because the full name can always be calculated from the `firstName` and the `lastName`.
+Girdi değerlerini tutmak için iki tane state değişkenine ihtiyacınız olacak: `firstName` ve `lastName`. Ayrıca, girdinin gösterilip gösterilmeyeceğinin bilgisini tutan bir `isEditing` state değişkenine de ihtiyacınız olacak. Tam ad (ad ve soyad), `firstName` ve `lastName` kullanılarak hesaplanabileceği için, tam ad için ayrıyeten bir `fullName` değişkenine _ihtiyaç duymamalısınız._
 
-Finally, you should use [conditional rendering](/learn/conditional-rendering) to show or hide the inputs depending on `isEditing`.
+Son olarak, `isEditing`'e bağlı olan girdileri göstermek veya gizlemek için [koşullu render etmeyi](/learn/conditional-rendering) kullanmalısınız.
 
 <Sandpack>
 
@@ -850,8 +850,8 @@ import { useState } from 'react';
 
 export default function EditProfile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [firstName, setFirstName] = useState('Jane');
-  const [lastName, setLastName] = useState('Jacobs');
+  const [firstName, setFirstName] = useState('Vedat');
+  const [lastName, setLastName] = useState('Milor');
 
   return (
     <form onSubmit={e => {
@@ -859,7 +859,7 @@ export default function EditProfile() {
       setIsEditing(!isEditing);
     }}>
       <label>
-        First name:{' '}
+        Ad:{' '}
         {isEditing ? (
           <input
             value={firstName}
@@ -872,7 +872,7 @@ export default function EditProfile() {
         )}
       </label>
       <label>
-        Last name:{' '}
+        Soyad:{' '}
         {isEditing ? (
           <input
             value={lastName}
@@ -885,9 +885,9 @@ export default function EditProfile() {
         )}
       </label>
       <button type="submit">
-        {isEditing ? 'Save' : 'Edit'} Profile
+        Profili {isEditing ? 'Kaydet' : 'Düzenle'}
       </button>
-      <p><i>Hello, {firstName} {lastName}!</i></p>
+      <p><i>Merhaba, {firstName} {lastName}!</i></p>
     </form>
   );
 }
@@ -899,27 +899,27 @@ label { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Compare this solution to the original imperative code. How are they different?
+Bu çözüm ile orijinal zorunlu kodu karşılaştırın. Aralarındaki farklar neler?
 
 </Solution>
 
-#### Refactor the imperative solution without React {/*refactor-the-imperative-solution-without-react*/}
+#### Zorunlu çözümü React olmadan yeniden düzenleyin {/*refactor-the-imperative-solution-without-react*/}
 
-Here is the original sandbox from the previous challenge, written imperatively without React:
+İşte önceki problemdeki, React olmadan zorunlu bir şekilde yazılmış orijinal sandbox:
 
 <Sandpack>
 
 ```js index.js active
 function handleFormSubmit(e) {
   e.preventDefault();
-  if (editButton.textContent === 'Edit Profile') {
-    editButton.textContent = 'Save Profile';
+  if (editButton.textContent === 'Profili Düzenle') {
+    editButton.textContent = 'Profili Kaydet';
     hide(firstNameText);
     hide(lastNameText);
     show(firstNameInput);
     show(lastNameInput);
   } else {
-    editButton.textContent = 'Edit Profile';
+    editButton.textContent = 'Profili Düzenle';
     hide(firstNameInput);
     hide(lastNameInput);
     show(firstNameText);
@@ -930,7 +930,7 @@ function handleFormSubmit(e) {
 function handleFirstNameChange() {
   firstNameText.textContent = firstNameInput.value;
   helloText.textContent = (
-    'Hello ' +
+    'Merhaba ' +
     firstNameInput.value + ' ' +
     lastNameInput.value + '!'
   );
@@ -939,7 +939,7 @@ function handleFirstNameChange() {
 function handleLastNameChange() {
   lastNameText.textContent = lastNameInput.value;
   helloText.textContent = (
-    'Hello ' +
+    'Merhaba ' +
     firstNameInput.value + ' ' +
     lastNameInput.value + '!'
   );
@@ -974,23 +974,23 @@ lastNameInput.oninput = handleLastNameChange;
 ```html public/index.html
 <form id="form">
   <label>
-    First name:
-    <b id="firstNameText">Jane</b>
+    Ad:
+    <b id="firstNameText">Vedat</b>
     <input
       id="firstNameInput"
-      value="Jane"
+      value="Vedat"
       style="display: none">
   </label>
   <label>
-    Last name:
-    <b id="lastNameText">Jacobs</b>
+    Soyad:
+    <b id="lastNameText">Milor</b>
     <input
       id="lastNameInput"
-      value="Jacobs"
+      value="Milor"
       style="display: none">
   </label>
-  <button type="submit" id="editButton">Edit Profile</button>
-  <p><i id="helloText">Hello, Jane Jacobs!</i></p>
+  <button type="submit" id="editButton">Profili Düzenle</button>
+  <p><i id="helloText">Merhaba, Vedat Milor!</i></p>
 </form>
 
 <style>
@@ -1002,15 +1002,15 @@ label { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Imagine React didn't exist. Can you refactor this code in a way that makes the logic less fragile and more similar to the React version? What would it look like if the state was explicit, like in React?
+React'ın var olmadığını hayal edin. Bu kodu, mantığı daha az kırılgan ve React sürümüne daha benzer hale getirecek şekilde yeniden düzenleyebilir misiniz? State, React'taki gibi açık olsaydı nasıl görünürdü?
 
-If you're struggling to think where to start, the stub below already has most of the structure in place. If you start here, fill in the missing logic in the `updateDOM` function. (Refer to the original code where needed.)
+Nereden başlayacağınızı düşünmekte zorlanıyorsanız, aşağıdaki taslakta yapının çoğu mevcut. Buradan başlarsanız, `updateDOM` işlevindeki eksik mantığı doldurun. (Gerektiğinde orijinal koda başvurun.)
 
 <Sandpack>
 
 ```js index.js active
-let firstName = 'Jane';
-let lastName = 'Jacobs';
+let firstName = 'Vedat';
+let lastName = 'Milor';
 let isEditing = false;
 
 function handleFormSubmit(e) {
@@ -1043,13 +1043,13 @@ function setIsEditing(value) {
 
 function updateDOM() {
   if (isEditing) {
-    editButton.textContent = 'Save Profile';
-    // TODO: show inputs, hide content
+    editButton.textContent = 'Profili Kaydet';
+    // YAPILACAK: girdileri göster, içeriği gizle
   } else {
-    editButton.textContent = 'Edit Profile';
-    // TODO: hide inputs, show content
+    editButton.textContent = 'Profili Düzenle';
+    // YAPILACAK: girdileri gizle, içeriği göster
   }
-  // TODO: update text labels
+  // YAPILACAK: metin etiketlerini güncelle
 }
 
 function hide(el) {
@@ -1081,23 +1081,23 @@ lastNameInput.oninput = handleLastNameChange;
 ```html public/index.html
 <form id="form">
   <label>
-    First name:
-    <b id="firstNameText">Jane</b>
+    Ad:
+    <b id="firstNameText">Vedat</b>
     <input
       id="firstNameInput"
-      value="Jane"
+      value="Vedat"
       style="display: none">
   </label>
   <label>
-    Last name:
-    <b id="lastNameText">Jacobs</b>
+    Soyad:
+    <b id="lastNameText">Milor</b>
     <input
       id="lastNameInput"
-      value="Jacobs"
+      value="Milor"
       style="display: none">
   </label>
-  <button type="submit" id="editButton">Edit Profile</button>
-  <p><i id="helloText">Hello, Jane Jacobs!</i></p>
+  <button type="submit" id="editButton">Profili Düzenle</button>
+  <p><i id="helloText">Merhaba, Vedat Milor!</i></p>
 </form>
 
 <style>
@@ -1111,13 +1111,13 @@ label { display: block; margin-bottom: 20px; }
 
 <Solution>
 
-The missing logic included toggling the display of inputs and content, and updating the labels:
+Eksik mantık, girişlerin ve içeriğin görüntülenmesinin değiştirilmesini ve etiketlerin güncellenmesini içeriyordu:
 
 <Sandpack>
 
 ```js index.js active
-let firstName = 'Jane';
-let lastName = 'Jacobs';
+let firstName = 'Vedat';
+let lastName = 'Milor';
 let isEditing = false;
 
 function handleFormSubmit(e) {
@@ -1150,13 +1150,13 @@ function setIsEditing(value) {
 
 function updateDOM() {
   if (isEditing) {
-    editButton.textContent = 'Save Profile';
+    editButton.textContent = 'Profili Kaydet';
     hide(firstNameText);
     hide(lastNameText);
     show(firstNameInput);
     show(lastNameInput);
   } else {
-    editButton.textContent = 'Edit Profile';
+    editButton.textContent = 'Profili Düzenle';
     hide(firstNameInput);
     hide(lastNameInput);
     show(firstNameText);
@@ -1165,7 +1165,7 @@ function updateDOM() {
   firstNameText.textContent = firstName;
   lastNameText.textContent = lastName;
   helloText.textContent = (
-    'Hello ' +
+    'Merhaba ' +
     firstName + ' ' +
     lastName + '!'
   );
@@ -1200,23 +1200,23 @@ lastNameInput.oninput = handleLastNameChange;
 ```html public/index.html
 <form id="form">
   <label>
-    First name:
-    <b id="firstNameText">Jane</b>
+    Ad:
+    <b id="firstNameText">Vedat</b>
     <input
       id="firstNameInput"
-      value="Jane"
+      value="Vedat"
       style="display: none">
   </label>
   <label>
-    Last name:
-    <b id="lastNameText">Jacobs</b>
+    Soyad:
+    <b id="lastNameText">Milor</b>
     <input
       id="lastNameInput"
-      value="Jacobs"
+      value="Milor"
       style="display: none">
   </label>
-  <button type="submit" id="editButton">Edit Profile</button>
-  <p><i id="helloText">Hello, Jane Jacobs!</i></p>
+  <button type="submit" id="editButton">Profili Düzenle</button>
+  <p><i id="helloText">Merhaba, Vedat Milor!</i></p>
 </form>
 
 <style>
@@ -1228,7 +1228,7 @@ label { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-The `updateDOM` function you wrote shows what React does under the hood when you set the state. (However, React also avoids touching the DOM for properties that have not changed since the last time they were set.)
+Yazdığınız `updateDOM` fonksiyonu, state'i ayarladığınızda React'ın temelde ne yaptığını gösterir. (Bununla birlikte React, son ayarlandıkları zamandan beri değişmeyen özellikler için DOM'a dokunmaktan da kaçınır).
 
 </Solution>
 
