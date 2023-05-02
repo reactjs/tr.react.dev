@@ -69,7 +69,7 @@ button { margin-right: 10px; }
 
 Geleneksel olarak olay yöneticilerinin isimlerinin `handle` ile başlaması yaygındır. İncelediğiniz projelerde `onClick={handleClick}` ve `onMouseEnter={handleMouseEnter}` gibi kulanımları sıkça görürsünüz.
 
-Alternatif olarak, olay yöneticilerini JSX'de satır içi tanımlayabilirsiniz:
+Alternatif olarak, olay yöneticilerini JSX içinde tanımlayabilirsiniz:
 
 ```jsx
 <button onClick={function handleClick() {
