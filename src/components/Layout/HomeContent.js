@@ -418,23 +418,25 @@ export function HomeContent() {
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row px-5">
             <div className="max-w-3xl lg:max-w-7xl gap-5 flex flex-col lg:flex-row lg:px-5">
               <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:pl-5 lg:pr-10">
-                <Header>Upgrade when the future is ready</Header>
+                <Header>Gelecek hazır olduğunda yükseltin</Header>
                 <Para>
-                  React approaches changes with care. Every React commit is
-                  tested on business-critical surfaces with over a billion
-                  users. Over 100,000 React components at Meta help validate
-                  every migration strategy.
+                  React değişikliklere dikkatle yaklaşır. Her React
+                  güncellemesi, milyarlarca kullanıcısı olan iş kritik
+                  yüzeylerde test edilir. Meta&apos;daki 100.000&apos;den fazla
+                  React bileşeni, her geçiş stratejisini doğrulamaya yardımcı
+                  olur.
                 </Para>
                 <div className="order-last pt-5">
                   <Para>
-                    The React team is always researching how to improve React.
-                    Some research takes years to pay off. React has a high bar
-                    for taking a research idea into production. Only proven
-                    approaches become a part of React.
+                    React ekibi her zaman React&apos;i geliştirmek için
+                    araştırmalar yapıyor. Bazı araştırmaların sonucu yıllar
+                    sonra fayda sağlar. React&apos;in araştırma fikirlerinin
+                    üretim ortamına taşınma olasılığı düşüktür. Sadece
+                    kanıtlanmış yaklaşımlar React&apos;in bir parçası olur.
                   </Para>
                   <div className="hidden lg:flex justify-start w-full">
                     <CTA color="gray" icon="news" href="/blog">
-                      Read more React news
+                      Daha fazla React haberi okuyun
                     </CTA>
                   </div>
                 </div>
@@ -442,7 +444,7 @@ export function HomeContent() {
               <div className="w-full lg:w-6/12">
                 <p className="uppercase tracking-wide font-bold text-sm text-tertiary dark:text-tertiary-dark flex flex-row gap-2 items-center mt-5 lg:-mt-2 w-full">
                   <IconChevron />
-                  Latest React News
+                  Son React Haberleri
                 </p>
                 <div className="flex-col sm:flex-row flex-wrap flex gap-5 text-left my-5">
                   <div className="flex-1 min-w-[40%]">
@@ -460,7 +462,7 @@ export function HomeContent() {
                 </div>
                 <div className="flex lg:hidden justify-start w-full">
                   <CTA color="gray" icon="news" href="/blog">
-                    Read more React news
+                    Daha fazla React haberi okuyun
                   </CTA>
                 </div>
               </div>
@@ -472,14 +474,11 @@ export function HomeContent() {
           <div className="w-full">
             <div className="mx-auto flex flex-col max-w-4xl">
               <Center>
-                <Header>
-                  Join a community <br className="hidden lg:inline" />
-                  of millions
-                </Header>
+                <Header>Milyonlarca kişilik bir topluluğa katılın</Header>
                 <Para>
-                  You’re not alone. Two million developers from all over the
-                  world visit the React docs every month. React is something
-                  that people and teams can agree on.
+                  Yalnız değilsiniz. Dünya genelinden her ay iki milyondan fazla
+                  geliştirici React dokümantasyonunu ziyaret ediyor. React,
+                  insanların ve takımların hemfikir olabileceği bir şeydir.
                 </Para>
               </Center>
             </div>
@@ -487,13 +486,15 @@ export function HomeContent() {
             <div className="mx-auto flex flex-col max-w-4xl">
               <Center>
                 <Para>
-                  This is why React is more than a library, an architecture, or
-                  even an ecosystem. React is a community. It’s a place where
-                  you can ask for help, find opportunities, and meet new
-                  friends. You will meet both developers and designers,
-                  beginners and experts, researchers and artists, teachers and
-                  students. Our backgrounds may be very different, but React
-                  lets us all create user interfaces together.
+                  Bu yüzden React bir kütüphane, bir mimari veya hatta bir
+                  ekosistemden daha fazlasıdır. React, bir topluluktur. Yardım
+                  isteyebileceğiniz, fırsatlar bulabileceğiniz ve yeni
+                  arkadaşlar edinebileceğiniz bir yerdir. Burada hem
+                  geliştiricilerle hem de tasarımcılarla, acemilerle ve
+                  uzmanlarla, araştırmacılarla ve sanatçılarla, öğretmenlerle ve
+                  öğrencilerle tanışacaksınız. Arka planlarımız çok farklı
+                  olabilir, ancak React, hepimizin birlikte kullanıcı arayüzleri
+                  oluşturmasına olanak tanır.
                 </Para>
               </Center>
             </div>
@@ -502,15 +503,15 @@ export function HomeContent() {
           <div className="mt-20 px-5 lg:px-0 mb-6 max-w-4xl text-center text-opacity-80">
             <Logo className="text-link dark:text-link-dark w-24 lg:w-28 mb-10 lg:mb-8 mt-12 h-auto mx-auto self-start" />
             <Header>
-              Welcome to the <br className="" />
-              React community
+              React topluluğuna <br className="" />
+              hoş geldiniz
             </Header>
             <ButtonLink
               href={'/learn'}
               type="primary"
               size="lg"
               label="Take the Tutorial">
-              Get Started
+              Başlayın
             </ButtonLink>
           </div>
         </Section>
