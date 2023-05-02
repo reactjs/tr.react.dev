@@ -1,26 +1,26 @@
 ---
-title: Passing Props to a Component
+title: Bileşenlere Prop'ları Aktarma
 ---
 
 <Intro>
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions.
+React bileşenleri, birbirleriyle iletişim kurmak için *prop'ları* kullanır. Her üst eleman, alt elemanlarına prop'lar vererek onlarla bilgi paylaşabilir. Prop'lar, size HTML özelliklerini hatırlatabilir, ancak onların aracılığıyla nesneler, diziler ve fonksiyonlar da dahil olmak üzere herhangi bir JavaScript değeri aktarabilirsiniz.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to pass props to a component
-* How to read props from a component
-* How to specify default values for props
-* How to pass some JSX to a component
-* How props change over time
+* Bileşene prop nasıl aktarılır
+* Bir bileşenden prop nasıl okunur
+* Prop'lar için varsayılan değerler nasıl belirlenir
+* Bir bileşene JSX nasıl aktarılır
+* Prop'ların zamanla nasıl değiştiği
 
 </YouWillLearn>
 
-## Familiar props {/*familiar-props*/}
+## Tanıdık Prop'lar {/*familiar-props*/}
 
-Props are the information that you pass to a JSX tag. For example, `className`, `src`, `alt`, `width`, and `height` are some of the props you can pass to an `<img>`:
+Prop'lar, JSX etiketine ilettiğiniz bilgilerdir. Örneğin, `className`, `src`, `alt`, `width` ve `height`, bir `<img>`'ye aktarabileceğiniz prop'lardan bazılarıdır:
 
 <Sandpack>
 
@@ -51,11 +51,11 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-The props you can pass to an `<img>` tag are predefined (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). But you can pass any props to *your own* components, such as `<Avatar>`, to customize them. Here's how!
+Bir `<img>` etiketine aktarabileceğiniz prop'lar önceden tanımlanmıştır (ReactDOM, [HTML standardına](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element) uygundur). Ancak, özelleştirmek için `<Avatar>` gibi *kendi* bileşenlerinize herhangi bir özellik aktarabilirsiniz. İşte nasıl!
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## Bileşene prop'lar aktarma {/*passing-props-to-a-component*/}
 
-In this code, the `Profile` component isn't passing any props to its child component, `Avatar`:
+Bu kodda, `Profile` bileşeni, `Avatar` adlı alt bileşenine herhangi bir prop aktarmıyor:
 
 ```js
 export default function Profile() {
@@ -65,11 +65,11 @@ export default function Profile() {
 }
 ```
 
-You can give `Avatar` some props in two steps.
+`Avatar`'a iki adımda prop'lar ekleyebilirsiniz.
 
-### Step 1: Pass props to the child component {/*step-1-pass-props-to-the-child-component*/}
+### Adım 1: Alt bileşene prop'lar aktarma {/*step-1-pass-props-to-the-child-component*/}
 
-First, pass some props to `Avatar`. For example, let's pass two props: `person` (an object), and `size` (a number):
+Öncelikle, `Avatar`'a bazı prop'lar ekleyin. Örneğin, iki prop ekleyelim: `person` (bir nesne) ve `size` (bir sayı):
 
 ```js
 export default function Profile() {
@@ -84,25 +84,25 @@ export default function Profile() {
 
 <Note>
 
-If double curly braces after `person=` confuse you, recall [they're merely an object](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) inside the JSX curlies.
+Eğer `person=` sonrasındaki çift süslü parantezler sizi şaşırtırsa, bunların JSX süslü parantezlerinin içinde sadece [bir nesne olduklarını](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) hatırlayın.
 
 </Note>
 
-Now you can read these props inside the `Avatar` component.
+Şimdi bu prop'ları `Avatar` bileşeni içinde okuyabilirsiniz.
 
-### Step 2: Read props inside the child component {/*step-2-read-props-inside-the-child-component*/}
+### Adım 2: Alt eleman içinde prop'ları okuma {/*step-2-read-props-inside-the-child-component*/}
 
-You can read these props by listing their names `person, size` separated by the commas inside `({` and `})` directly after `function Avatar`. This lets you use them inside the `Avatar` code, like you would with a variable.
+Bu prop'ları, `function Avatar`'dan hemen sonra `({` ve `})` içinde virgülle ayrılan `person, size` isimlerini yazarak okuyabilirsiniz. Bu, onları `Avatar` kodunun içinde bir değişken gibi kullanmanıza olanak tanır.
 
 ```js
 function Avatar({ person, size }) {
-  // person and size are available here
+  // burada person ve size kullanılabilir
 }
 ```
 
-Add some logic to `Avatar` that uses the `person` and `size` props for rendering, and you're done.
+`Avatar`'a, `person` ve `size` prop'larını kullanarak render etmek için biraz mantık ekleyin ve hazırsınız.
 
-Now you can configure `Avatar` to render in many different ways with different props. Try tweaking the values!
+Artık `Avatar`'ı farklı prop'larla birçok farklı şekilde render etmek için yapılandırabilirsiniz. Değerler ile oynamayı deneyin!
 
 <Sandpack>
 
@@ -168,9 +168,9 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-Props let you think about parent and child components independently. For example, you can change the `person` or the `size` props inside `Profile` without having to think about how `Avatar` uses them. Similarly, you can change how the `Avatar` uses these props, without looking at the `Profile`.
+Prop'lar, üst ve alt bileşenleri bağımsız olarak düşünmenize olanak tanır. Örneğin, `Avatar`'ın bunları nasıl kullandığını düşünmeden, `Profile` içindeki `person` veya `size` prop'larını değiştirebilirsiniz. Benzer şekilde, `Profile`'a bakmadan, `Avatar`'ın bu prop'ları nasıl kullandığını değiştirebilirsiniz.
 
-You can think of props like "knobs" that you can adjust. They serve the same role as arguments serve for functions—in fact, props _are_ the only argument to your component! React component functions accept a single argument, a `props` object:
+Prop'ları ayarlayabileceğiniz "düğmeler" gibi düşünebilirsiniz. Aslında, prop'lar fonksiyonlara sağlanan argümanlarla aynı rolü üstlenirler - aslında, prop'lar bileşeniniz için tek argümanlardır! React bileşen fonksiyonları, bir `props` nesnesi olarak tek bir argümanı kabul ederler:
 
 ```js
 function Avatar(props) {
@@ -180,11 +180,11 @@ function Avatar(props) {
 }
 ```
 
-Usually you don't need the whole `props` object itself, so you destructure it into individual props.
+Genellikle tüm `props` nesnesine ihtiyacınız olmaz, bu yüzden onu bireysel prop'lara ayırarak yapıyı çözmeniz gerekir.
 
 <Pitfall>
 
-**Don't miss the pair of `{` and `}` curlies** inside of `(` and `)` when declaring props:
+Prop'ları tanımlarken `(` ve `)` içindeki `{` ve `}` süslü parantez çiftini **unutmayın**:
 
 ```js
 function Avatar({ person, size }) {
@@ -192,7 +192,7 @@ function Avatar({ person, size }) {
 }
 ```
 
-This syntax is called ["destructuring"](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter) and is equivalent to reading properties from a function parameter:
+Bu sözdizimi ["yapı çözme"](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter) olarak adlandırılır ve bir fonksiyon parametresinden prop'ları okumaya eşdeğerdir:
 
 ```js
 function Avatar(props) {
@@ -204,9 +204,9 @@ function Avatar(props) {
 
 </Pitfall>
 
-## Specifying a default value for a prop {/*specifying-a-default-value-for-a-prop*/}
+## Bir prop için varsayılan değeri belirleme {/*specifying-a-default-value-for-a-prop*/}
 
-If you want to give a prop a default value to fall back on when no value is specified, you can do it with the destructuring by putting `=` and the default value right after the parameter:
+Bir prop'a, belirtilen değer olmadığında geri dönecek varsayılan bir değer vermek isterseniz, parametreden hemen sonra `=` ve varsayılan değeri koyarak yapı çözmeyle yapabilirsiniz:
 
 ```js
 function Avatar({ person, size = 100 }) {
@@ -214,13 +214,13 @@ function Avatar({ person, size = 100 }) {
 }
 ```
 
-Now, if `<Avatar person={...} />` is rendered with no `size` prop, the `size` will be set to `100`.
+Şimdi, `<Avatar person={...} />` `size` prop'u belirtilmeden render edilirse, `size` `100` olarak ayarlanacaktır.
 
-The default value is only used if the `size` prop is missing or if you pass `size={undefined}`. But if you pass `size={null}` or `size={0}`, the default value will **not** be used.
+Varsayılan değer yalnızca, `size` prop'u eksikse veya `size={undefined}` olarak geçirilirse kullanılır. Ancak `size={null}` veya `size={0}` olarak geçirirseniz, varsayılan değer **kullanılmaz**.
 
-## Forwarding props with the JSX spread syntax {/*forwarding-props-with-the-jsx-spread-syntax*/}
+## JSX yayılım sözdizimiyle prop'ları iletmek {/*forwarding-props-with-the-jsx-spread-syntax*/}
 
-Sometimes, passing props gets very repetitive:
+Bazı durumlarda, prop'ları aktarmak çok tekrar edici olabilir:
 
 ```js
 function Profile({ person, size, isSepia, thickBorder }) {
@@ -237,7 +237,7 @@ function Profile({ person, size, isSepia, thickBorder }) {
 }
 ```
 
-There's nothing wrong with repetitive code—it can be more legible. But at times you may value conciseness. Some components forward all of their props to their children, like how this `Profile` does with `Avatar`. Because they don't use any of their props directly, it can make sense to use a more concise "spread" syntax:
+Tekrarlayan kodda yanlış olan bir şey yoktur. Daha okunaklı olabilir. Ancak bazen kısa ve öz olmaya önem verirsiniz. Bazı bileşenler, bu `Profile` bileşeninin `Avatar` ile yaptığı gibi, tüm prop'larını alt elemanlarına iletirler. Doğrudan hiçbir prop kullanmadıklarından, daha özlü "yayılma (spread)" sözdizimi kullanmak mantıklı olabilir:
 
 ```js
 function Profile(props) {
@@ -249,13 +249,13 @@ function Profile(props) {
 }
 ```
 
-This forwards all of `Profile`'s props to the `Avatar` without listing each of their names.
+Bu, her birinin adını listeleyerek `Profile`'ın tüm prop'larını `Avatar`'a iletiyor.
 
-**Use spread syntax with restraint.** If you're using it in every other component, something is wrong. Often, it indicates that you should split your components and pass children as JSX. More on that next!
+**Spread sözdizimini ölçülü bir şekilde kullanın.** Her diğer bileşende bunu kullanıyorsanız, bir şeyler yanlış demektir. Çoğu zaman, bileşenlerinizi ayırmanız ve alt elemanları JSX olarak iletilmesi gerektiği anlamına gelir. Sonraki adımda daha fazlası var!
 
-## Passing JSX as children {/*passing-jsx-as-children*/}
+## JSX'i alt eleman olarak aktarma {/*passing-jsx-as-children*/}
 
-It is common to nest built-in browser tags:
+Dahili tarayıcı etiketlerini iç içe geçirmek yaygındır:
 
 ```js
 <div>
@@ -263,7 +263,7 @@ It is common to nest built-in browser tags:
 </div>
 ```
 
-Sometimes you'll want to nest your own components the same way:
+Bazen kendi bileşenlerinizi aynı şekilde iç içe yerleştirmek istersiniz:
 
 ```js
 <Card>
@@ -271,7 +271,7 @@ Sometimes you'll want to nest your own components the same way:
 </Card>
 ```
 
-When you nest content inside a JSX tag, the parent component will receive that content in a prop called `children`. For example, the `Card` component below will receive a `children` prop set to `<Avatar />` and render it in a wrapper div:
+Bir JSX etiketi içine içerik yerleştirdiğinizde, üst eleman, `children` adında bir prop'un içinde bu içeriği alacaktır. Örneğin, aşağıdaki `Card` bileşeni, `<Avatar />` olarak ayarlanmış bir `children` prop'u alacak ve bunu bir sarma divinde render edilecektir:
 
 <Sandpack>
 
@@ -347,17 +347,15 @@ export function getImageUrl(person, size = 's') {
 
 </Sandpack>
 
-Try replacing the `<Avatar>` inside `<Card>` with some text to see how the `Card` component can wrap any nested content. It doesn't need to "know" what's being rendered inside of it. You will see this flexible pattern in many places.
+`<Card>` içindeki `<Avatar>`'ı bir metinle değiştirerek, `Card` bileşeninin herhangi bir iç içe içeriği sarmalayabileceğini görmek için deneyebilirsiniz. İçinde neyin render edildiğini "bilmesi" gerekmez. Bu esnek kalıbı birçok yerde göreceksiniz.
 
-You can think of a component with a `children` prop as having a "hole" that can be "filled in" by its parent components with arbitrary JSX. You will often use the `children` prop for visual wrappers: panels, grids, etc.
+Bir `children` prop'una sahip bir bileşeni, üst elemanların istediği JSX ile "doldurabileceği" bir "delik" olarak düşünebilirsiniz. Sıklıkla, görsel sarmalayıcılar için (`panel`, `grid` vb.) `children` prop'u kullanacaksınız.
 
-<Illustration src="/images/docs/illustrations/i_children-prop.png" alt='A puzzle-like Card tile with a slot for "children" pieces like text and Avatar' />
+<Illustration src="/images/docs/illustrations/i_children-prop.png" alt='Metin ve Avatar gibi "alt" parçaları için bir yer olan, bir bulmaca kartı benzeri bir Card örneği' />
 
-## How props change over time {/*how-props-change-over-time*/}
+Aşağıdaki `Clock` bileşeni, üst elemandan iki prop alır: `color` ve `time`. (Üst elemanın kodu, henüz incelemeyeceğimiz [durum (state)](/learn/state-a-components-memory) kullandığı için atlanmıştır.)
 
-The `Clock` component below receives two props from its parent component: `color` and `time`. (The parent component's code is omitted because it uses [state](/learn/state-a-components-memory), which we won't dive into just yet.)
-
-Try changing the color in the select box below:
+Aşağıdaki seçim kutusunda rengi değiştirmeyi deneyin:
 
 <Sandpack>
 
@@ -407,21 +405,21 @@ export default function App() {
 
 </Sandpack>
 
-This example illustrates that **a component may receive different props over time.** Props are not always static! Here, the `time` prop changes every second, and the `color` prop changes when you select another color. Props reflect a component's data at any point in time, rather than only in the beginning.
+Bu örnek, **bir bileşenin zamanla farklı prop'lar alabileceğini** gösterir. Prop'lar her zaman statik değildir! Burada `time` prop'u her saniyede bir değişir ve `color` prop'u başka bir renk seçtiğinizde değişir. Prop'lar, bir bileşenin verilerini sadece başlangıçta değil, herhangi bir zamandaki durumunu yansıtır.
 
-However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)—a term from computer science meaning "unchangeable". When a component needs to change its props (for example, in response to a user interaction or new data), it will have to "ask" its parent component to pass it _different props_—a new object! Its old props will then be cast aside, and eventually the JavaScript engine will reclaim the memory taken by them.
+Ancak, prop'lar [immutable](https://en.wikipedia.org/wiki/Immutable_object) (değiştirilemez) özelliktedir - bilgisayar bilimlerinde "değiştirilemez" anlamına gelen bir terimdir. Bir bileşen, prop'larını değiştirmesi gerektiğinde (örneğin, bir kullanıcı etkileşimine veya yeni verilere yanıt olarak), farklı bir nesne olan _farklı prop'ları_ geçmesi için _üst elemanından_ "istemek" zorunda kalacaktır! Eski prop'ları atılacak ve sonunda JavaScript motoru tarafından bunların işgal ettiği bellek geri alınacaktır.
 
-**Don't try to "change props".** When you need to respond to the user input (like changing the selected color), you will need to "set state", which you can learn about in [State: A Component's Memory.](/learn/state-a-components-memory)
+**Prop'ları "değiştirmeye" çalışmayın.** Kullanıcı girdisine yanıt vermeniz gerektiğinde (seçilen rengi değiştirme gibi), [State: Bir Bileşenin Belleği](/learn/state-a-components-memory) konusunda öğrenebileceğiniz şekilde "state ayarı" yapmanız gerekecektir.
 
 <Recap>
 
-* To pass props, add them to the JSX, just like you would with HTML attributes.
-* To read props, use the `function Avatar({ person, size })` destructuring syntax.
-* You can specify a default value like `size = 100`, which is used for missing and `undefined` props.
-* You can forward all props with `<Avatar {...props} />` JSX spread syntax, but don't overuse it!
-* Nested JSX like `<Card><Avatar /></Card>` will appear as `Card` component's `children` prop.
-* Props are read-only snapshots in time: every render receives a new version of props.
-* You can't change props. When you need interactivity, you'll need to set state.
+* Prop'ları geçmek için, HTML özniteliklerini geçirdiğiniz gibi JSX'e ekleyin.
+* Prop'ları okumak için, `function Avatar({ person, size })` yapısını kullanın.
+* Eksik veya tanımlanmamış prop'lar için kullanılan `size = 100` gibi varsayılan bir değer belirleyebilirsiniz.
+* Tüm prop'ları `<Avatar {...props} />` JSX spread sözdizimi ile iletebilirsiniz, ancak bunu abartmayın!
+* `<Card><Avatar /></Card>` gibi iç içe JSX, `Card` bileşeninin `children` prop'u olarak görüntülenecektir.
+* Prop'lar, her render işlemi bir prop'ların yeni bir sürümünü aldığı için okunur ve değiştirilemez.
+* Prop'ları değiştiremezsiniz. Etkileşimli bir bileşen için, state ayarlaması yapmanız gerekecektir.
 
 </Recap>
 
@@ -429,9 +427,9 @@ However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)�
 
 <Challenges>
 
-#### Extract a component {/*extract-a-component*/}
+#### Bileşen Ayıklama {/*extract-a-component*/}
 
-This `Gallery` component contains some very similar markup for two profiles. Extract a `Profile` component out of it to reduce the duplication. You'll need to choose what props to pass to it.
+Bu `Gallery` bileşeni, iki profille ilgili çok benzer bir işaretleme içerir. Yinelemeyi azaltmak için bunun dışında bir `Profile` bileşeni çıkarın. Hangi prop'ların geçirileceğine karar vermeniz gerekecektir.
 
 <Sandpack>
 
@@ -441,7 +439,7 @@ import { getImageUrl } from './utils.js';
 export default function Gallery() {
   return (
     <div>
-      <h1>Notable Scientists</h1>
+      <h1>Önemli Bilim İnsanları</h1>
       <section className="profile">
         <h2>Maria Skłodowska-Curie</h2>
         <img
@@ -453,16 +451,16 @@ export default function Gallery() {
         />
         <ul>
           <li>
-            <b>Profession: </b> 
-            physicist and chemist
+            <b>Meslek: </b> 
+            fizikçi ve kimyager
           </li>
           <li>
-            <b>Awards: 4 </b> 
-            (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)
+            <b>Ödüller: 4 </b> 
+            (Fizik Nobel Ödülü, Kimya Nobel Ödülü, Davy Madalyası, Matteucci Madalyası)
           </li>
           <li>
-            <b>Discovered: </b>
-            polonium (element)
+            <b>Keşfedilenler: </b>
+            polonyum (element)
           </li>
         </ul>
       </section>
@@ -477,16 +475,16 @@ export default function Gallery() {
         />
         <ul>
           <li>
-            <b>Profession: </b> 
-            geochemist
+            <b>Meslek: </b> 
+            jeokimyager
           </li>
           <li>
-            <b>Awards: 2 </b> 
-            (Miyake Prize for geochemistry, Tanaka Prize)
+            <b>Ödüller: 2 </b> 
+            (Miyake Ödülü (jeokimya), Tanaka Ödülü)
           </li>
           <li>
-            <b>Discovered: </b>
-            a method for measuring carbon dioxide in seawater
+            <b>Keşfedilenler: </b>
+            deniz suyundaki karbondioksit ölçüm yöntemi
           </li>
         </ul>
       </section>
@@ -524,15 +522,15 @@ li { margin: 5px; }
 
 <Hint>
 
-Start by extracting the markup for one of the scientists. Then find the pieces that don't match it in the second example, and make them configurable by props.
+İlk olarak, bilim insanlarından birinin işaretlemesini ayıklayın. Daha sonra, ikinci örnekte eşleşmeyen parçaları bulun ve bunları prop'larla yapılandırılabilir hâle getirin.
 
 </Hint>
 
 <Solution>
 
-In this solution, the `Profile` component accepts multiple props: `imageId` (a string), `name` (a string), `profession` (a string), `awards` (an array of strings), `discovery` (a string), and `imageSize` (a number).
+Bu çözümde, `Profile` bileşeni birden çok prop kabul eder: `imageId` (bir string), `name` (bir string), `profession` (bir string), `awards` (bir string dizisi), `discovery` (bir string) ve `imageSize` (bir sayı).
 
-Note that the `imageSize` prop has a default value, which is why we don't pass it to the component.
+`imageSize` prop'unun varsayılan bir değeri olduğu için bileşene aktarmıyoruz.
 
 <Sandpack>
 
@@ -558,13 +556,13 @@ function Profile({
         height={imageSize}
       />
       <ul>
-        <li><b>Profession:</b> {profession}</li>
+        <li><b>Meslek:</b> {profession}</li>
         <li>
-          <b>Awards: {awards.length} </b>
+          <b>Ödüller: {awards.length} </b>
           ({awards.join(', ')})
         </li>
         <li>
-          <b>Discovered: </b>
+          <b>Keşfedilenler: </b>
           {discovery}
         </li>
       </ul>
@@ -575,27 +573,27 @@ function Profile({
 export default function Gallery() {
   return (
     <div>
-      <h1>Notable Scientists</h1>
+      <h1>Önemli Bilim İnsanları</h1>
       <Profile
         imageId="szV5sdG"
         name="Maria Skłodowska-Curie"
-        profession="physicist and chemist"
-        discovery="polonium (chemical element)"
+        profession="fizikçi ve kimyager"
+        discovery="polonyum (kimyasal element)"
         awards={[
-          'Nobel Prize in Physics',
-          'Nobel Prize in Chemistry',
-          'Davy Medal',
-          'Matteucci Medal'
+          'Fizik Nobel Ödülü',
+          'Kimya Nobel Ödülü',
+          'Davy Madalyası',
+          'Matteucci Madalyası'
         ]}
       />
       <Profile
         imageId='YfeOqp2'
         name='Katsuko Saruhashi'
-        profession='geochemist'
-        discovery="a method for measuring carbon dioxide in seawater"
+        profession='jeokimyager'
+        discovery="deniz suyundaki karbondioksiti ölçmek için bir yöntem"
         awards={[
-          'Miyake Prize for geochemistry',
-          'Tanaka Prize'
+          'Miyake Ödülü (jeokimya)',
+          'Tanaka Ödülü'
         ]}
       />
     </div>
@@ -630,9 +628,9 @@ li { margin: 5px; }
 
 </Sandpack>
 
-Note how you don't need a separate `awardCount` prop if `awards` is an array. Then you can use `awards.length` to count the number of awards. Remember that props can take any values, and that includes arrays too!
+Eğer `awards` bir dizi ise ayrı bir `awardCount` prop'una ihtiyacınız olmadığına dikkat edin. Ardından, ödül sayısını saymak için `awards.length` kullanabilirsiniz. Prop'ların her türlü değeri kabul edebildiğini, bunların arasında dizilerin de olduğunu unutmayın!
 
-Another solution, which is more similar to the earlier examples on this page, is to group all information about a person in a single object, and pass that object as one prop:
+Bu sayfadaki önceki örneklerle daha benzer olan başka bir çözüm, bir kişi hakkındaki tüm bilgileri tek bir nesnede gruplamak ve bu nesneyi tek bir prop olarak geçirmektir:
 
 <Sandpack>
 
@@ -654,14 +652,14 @@ function Profile({ person, imageSize = 70 }) {
       />
       <ul>
         <li>
-          <b>Profession:</b> {person.profession}
+          <b>Meslek:</b> {person.profession}
         </li>
         <li>
-          <b>Awards: {person.awards.length} </b>
+          <b>Ödüller: {person.awards.length} </b>
           ({person.awards.join(', ')})
         </li>
         <li>
-          <b>Discovered: </b>
+          <b>Keşfedilenler: </b>
           {person.discovery}
         </li>
       </ul>
@@ -672,27 +670,27 @@ function Profile({ person, imageSize = 70 }) {
 export default function Gallery() {
   return (
     <div>
-      <h1>Notable Scientists</h1>
+      <h1>Önemli Bilim İnsanları</h1>
       <Profile person={{
         imageId: 'szV5sdG',
         name: 'Maria Skłodowska-Curie',
-        profession: 'physicist and chemist',
-        discovery: 'polonium (chemical element)',
+        profession: 'fizikçi ve kimyager',
+        discovery: 'polonyum (kimyasal element)',
         awards: [
-          'Nobel Prize in Physics',
-          'Nobel Prize in Chemistry',
-          'Davy Medal',
-          'Matteucci Medal'
+          'Fizik Nobel Ödülü',
+          'Kimya Nobel Ödülü',
+          'Davy Madalyası',
+          'Matteucci Madalyası'
         ],
       }} />
       <Profile person={{
         imageId: 'YfeOqp2',
         name: 'Katsuko Saruhashi',
-        profession: 'geochemist',
-        discovery: 'a method for measuring carbon dioxide in seawater',
+        profession: 'jeokimyager',
+        discovery: 'okyanus suyundaki karbondioksiti ölçmek için bir yöntem',
         awards: [
-          'Miyake Prize for geochemistry',
-          'Tanaka Prize'
+          'Jeokimya alanında Miyake Ödülü', 
+          'Tanaka Ödülü'
         ],
       }} />
     </div>
@@ -727,15 +725,15 @@ li { margin: 5px; }
 
 </Sandpack>
 
-Although the syntax looks slightly different because you're describing properties of a JavaScript object rather than a collection of JSX attributes, these examples are mostly equivalent, and you can pick either approach.
+Sözdizimi biraz farklı görünüyor çünkü bir JavaScript nesnesinin özelliklerini tanımlıyorsunuz, JSX özelliklerinin bir koleksiyonunu tanımlamıyorsunuz. Ancak, bu örnekler büyük ölçüde eşdeğerdir ve istediğiniz yaklaşımı seçebilirsiniz.
 
 </Solution>
 
-#### Adjust the image size based on a prop {/*adjust-the-image-size-based-on-a-prop*/}
+#### Bir prop'a dayanarak resim boyutunu ayarlayın {/*adjust-the-image-size-based-on-a-prop*/}
 
-In this example, `Avatar` receives a numeric `size` prop which determines the `<img>` width and height. The `size` prop is set to `40` in this example. However, if you open the image in a new tab, you'll notice that the image itself is larger (`160` pixels). The real image size is determined by which thumbnail size you're requesting.
+İlgili örnekte, `Avatar` bileşeni, `<img>` genişliği ve yüksekliğini belirleyen sayısal bir `size` prop'u alır. Bu örnekte `size` prop'u `40` olarak ayarlanmıştır. Ancak, resmi yeni bir sekmede açarsanız, resmin kendisinin daha büyük (`160` piksel) olduğunu fark edeceksiniz. Gerçek resim boyutu, hangi küçük resim boyutunun talep edildiğine bağlıdır.
 
-Change the `Avatar` component to request the closest image size based on the `size` prop. Specifically, if the `size` is less than `90`, pass `'s'` ("small") rather than `'b'` ("big") to the `getImageUrl` function. Verify that your changes work by rendering avatars with different values of the `size` prop and opening images in a new tab.
+`Avatar` bileşenini, `size` prop'u temelinde en yakın resim boyutunu isteyecek şekilde değiştirin. Özellikle, `size` 90'dan küçükse, `getImageUrl` işlevine `'b'` ("büyük") yerine `'s'` ("küçük") geçirin. `size` prop'unun farklı değerleriyle avatarları render ederek ve resimleri yeni bir sekmede açarak değişikliklerinizin işleyip işlemediğini doğrulayın.
 
 <Sandpack>
 
@@ -786,7 +784,7 @@ export function getImageUrl(person, size) {
 
 <Solution>
 
-Here is how you could go about it:
+İşte bunu nasıl yapabilirsiniz:
 
 <Sandpack>
 
@@ -848,7 +846,7 @@ export function getImageUrl(person, size) {
 
 </Sandpack>
 
-You could also show a sharper image for high DPI screens by taking [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) into account:
+Ayrıca [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) özelliğini dikkate alarak yüksek DPI ekranlar için daha keskin bir resim gösterebilirsiniz:
 
 <Sandpack>
 
@@ -919,13 +917,13 @@ export function getImageUrl(person, size) {
 
 </Sandpack>
 
-Props let you encapsulate logic like this inside the `Avatar` component (and change it later if needed) so that everyone can use the `<Avatar>` component without thinking about how the images are requested and resized.
+Prop'lar, bu şekilde mantığı `Avatar` bileşeni içine kapsayarak (ve ihtiyaç duyulursa daha sonra değiştirerek), resimlerin nasıl talep edildiği ve yeniden boyutlandırıldığı hakkında düşünmeden herkesin `<Avatar>` bileşenini kullanabilmesini sağlar.
 
 </Solution>
 
-#### Passing JSX in a `children` prop {/*passing-jsx-in-a-children-prop*/}
+#### Bir `children` prop'u içinde JSX geçirmek. {/*passing-jsx-in-a-children-prop*/}
 
-Extract a `Card` component from the markup below, and use the `children` prop to pass different JSX to it:
+Aşağıdaki yapıdan bir `Card` bileşeni çıkarın ve farklı JSX geçirmek için `children` prop'unu kullanın:
 
 <Sandpack>
 
@@ -947,8 +945,8 @@ export default function Profile() {
       </div>
       <div className="card">
         <div className="card-content">
-          <h1>About</h1>
-          <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+          <h1>Hakkında</h1>
+          <p>Aklilu Lemma, şistosomiyazis için doğal bir tedavi keşfeden saygın bir Etiyopyalı bilim adamıydı.</p>
         </div>
       </div>
     </div>
@@ -983,13 +981,13 @@ h1 {
 
 <Hint>
 
-Any JSX you put inside of a component's tag will be passed as the `children` prop to that component.
+Bir bileşenin etiketi içine yerleştirdiğiniz herhangi bir JSX, bu bileşene `children` prop'u olarak iletilir.
 
 </Hint>
 
 <Solution>
 
-This is how you can use the `Card` component in both places:
+İşte `Card` bileşenini her iki yerde de nasıl kullanabileceğinize dair örnek:
 
 <Sandpack>
 
@@ -1018,8 +1016,8 @@ export default function Profile() {
         />
       </Card>
       <Card>
-        <h1>About</h1>
-        <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+        <h1>Hakkında</h1>
+        <p>İyi bilinen bir Etiyopyalı bilim adamı olan Aklilu Lemma, şistosomiyazis için doğal bir tedavi bulmuştur.</p>
       </Card>
     </div>
   );
@@ -1051,7 +1049,7 @@ h1 {
 
 </Sandpack>
 
-You can also make `title` a separate prop if you want every `Card` to always have a title:
+Her `Card`'ın her zaman bir başlığa sahip olmasını isterseniz, `title`'ı ayrı bir prop olarak da kullanabilirsiniz:
 
 <Sandpack>
 
@@ -1070,7 +1068,7 @@ function Card({ children, title }) {
 export default function Profile() {
   return (
     <div>
-      <Card title="Photo">
+      <Card title="Fotoğraf">
         <img
           className="avatar"
           src="https://i.imgur.com/OKS67lhm.jpg"
@@ -1079,8 +1077,8 @@ export default function Profile() {
           height={100}
         />
       </Card>
-      <Card title="About">
-        <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+      <Card title="Hakkında">
+        <p>Aklilu Lemma, şistosomiyazis için doğal bir tedavi keşfeden saygın bir Etiyopyalı bilim adamıydı.</p>
       </Card>
     </div>
   );
