@@ -4,7 +4,7 @@ title: lazy
 
 <Intro>
 
-`lazy` lets you defer loading component's code until it is rendered for the first time.
+`lazy`,  bileşen kodunun ilk kez render edilene kadar yüklenmesini ertelemek için kullanılır.
 
 ```js
 const SomeComponent = lazy(load)
@@ -16,11 +16,11 @@ const SomeComponent = lazy(load)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `lazy(load)` {/*lazy*/}
 
-Call `lazy` outside your components to declare a lazy-loaded React component:
+Lazy yüklenen React bileşeni tanımlamak için bileşenlerinizin dışında `lazy`'yi çağırın:
 
 ```js
 import { lazy } from 'react';
@@ -28,41 +28,42 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another *thenable* (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
+* `load`: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya başka bir *thenable* (`then` metoduna sahip Promise benzeri bir nesne) döndürmeniz gerekir. React, dönen bileşeni ilk kez render etmeye yeltenene kadar `load`'ı çağırmaz. React `load`'ı ilk çağırdığında, çözümlenene (resolve) kadar bekler, ardından çözümlenmiş değeri React bileşeni olarak render eder. Hem Promise hem de Promise'in çözümlenmiş değeri ön belleğe (cache) alınacağından, React `load`'ı birden fazla kez çağırmaz. Promise reddedilirse (reject), React reddetme nedenini ele alması için `throw` ile en yakındaki Error Boundary'ye gönderir.
 
-#### Returns {/*returns*/}
+#### Dönüş değerleri {/*returns*/}
 
-`lazy` returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will *suspend.* Use [`<Suspense>`](/reference/react/Suspense) to display a loading indicator while it's loading.
+`lazy`, ağacınıza render edebileceğiniz bir React bileşeni döndürür. Lazy bileşenin kodu yüklenirken, render etme işlemi *askıya alınır.* Yükleme esnasında yükleniyor göstergesi görüntülemek için [`<Suspense>`](/reference/react/Suspense) kullanın.
 
----
-
-### `load` function {/*load*/}
-
-#### Parameters {/*load-parameters*/}
-
-`load` receives no parameters.
-
-#### Returns {/*load-returns*/}
-
-You need to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or some other *thenable* (a Promise-like object with a `then` method). It needs to eventually resolve to a valid React component type, such as a function, [`memo`](/reference/react/memo), or a [`forwardRef`](/reference/react/forwardRef) component.
 
 ---
 
-## Usage {/*usage*/}
+### `load` fonksiyonu {/*load*/}
 
-### Lazy-loading components with Suspense {/*suspense-for-code-splitting*/}
+#### Parametreler {/*load-parameters*/}
 
-Usually, you import components with the static [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) declaration:
+`load` parametre almaz.
+
+#### Dönüş değerleri {/*load-returns*/}
+
+[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya başka bir *thenable* (`then` metoduna sahip Promise benzeri bir nesne) döndürmeniz gerekir. Bu nesne; fonksiyon, [`memo`](/reference/react/memo) ya da [`forwardRef`](/reference/react/forwardRef)'de olduğu gibi geçerli bir React bileşen tipine çözülmelidir.
+
+---
+
+## Kullanım {/*usage*/}
+
+### Suspense ile lazy yüklenen bileşenler {/*suspense-for-code-splitting*/}
+
+Bileşenlerinizi çoğunlukla statik [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) tanımıyla içe aktarırsınız:
 
 ```js
 import MarkdownPreview from './MarkdownPreview.js';
 ```
 
-To defer loading this component's code until it's rendered for the first time, replace this import with:
+Bileşen kodunun yüklenmesini ilk render'a  kadar ertelemek istiyorsanız, şu içe aktarmayla değiştirin:
 
 ```js
 import { lazy } from 'react';
@@ -70,18 +71,18 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-This code relies on [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) which might require support from your bundler or framework.
+Bu kod, [dinamik `import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)'a dayanır. Kullanmak için paketleyicinizin (bundler) veya framework'ünüzün desteklemesi gerekir.
 
-Now that your component's code loads on demand, you also need to specify what should be displayed while it is loading. You can do this by wrapping the lazy component or any of its parents into a [`<Suspense>`](/reference/react/Suspense) boundary:
+Artık bileşeninizin kodları talep edildiğinde (on demand) yüklendiğine göre, yüklenme aşamasında yerine neyin görüntüleneceğini belirtmeniz gerekir. Bunu, lazy bileşeni ya da üst bileşenlerinden birini [`<Suspense>`](/reference/react/Suspense) sınırına (boundary) sararak yapabilirsiniz:
 
 ```js {1,4}
 <Suspense fallback={<Loading />}>
-  <h2>Preview</h2>
+  <h2>Ön İzleme</h2>
   <MarkdownPreview />
  </Suspense>
 ```
 
-In this example, the code for `MarkdownPreview` won't be loaded until you attempt to render it. If `MarkdownPreview` hasn't loaded yet, `Loading` will be shown in its place. Try ticking the checkbox:
+Bu örnekte, `MarkdownPreview`'ın kodu render edilene kadar yüklenmez. `MarkdownPreview` yüklenene kadar yerine `Loading` gösterilir. Onay kutusunu işaretlemeyi deneyin:
 
 <Sandpack>
 
@@ -93,18 +94,18 @@ const MarkdownPreview = lazy(() => delayForDemo(import('./MarkdownPreview.js')))
 
 export default function MarkdownEditor() {
   const [showPreview, setShowPreview] = useState(false);
-  const [markdown, setMarkdown] = useState('Hello, **world**!');
+  const [markdown, setMarkdown] = useState('Merhaba, **dünya**!');
   return (
     <>
       <textarea value={markdown} onChange={e => setMarkdown(e.target.value)} />
       <label>
         <input type="checkbox" checked={showPreview} onChange={e => setShowPreview(e.target.checked)} />
-        Show preview
+        Ön izlemeyi göster
       </label>
       <hr />
       {showPreview && (
         <Suspense fallback={<Loading />}>
-          <h2>Preview</h2>
+          <h2>Ön İzleme</h2>
           <MarkdownPreview markdown={markdown} />
         </Suspense>
       )}
@@ -112,7 +113,7 @@ export default function MarkdownEditor() {
   );
 }
 
-// Add a fixed delay so you can see the loading state
+// Yükleniyor durumunu görebilmeniz için sabit bir gecikme ekleyin
 function delayForDemo(promise) {
   return new Promise(resolve => {
     setTimeout(resolve, 2000);
@@ -122,7 +123,7 @@ function delayForDemo(promise) {
 
 ```js Loading.js
 export default function Loading() {
-  return <p><i>Loading...</i></p>;
+  return <p><i>Yükleniyor...</i></p>;
 }
 ```
 
@@ -175,34 +176,34 @@ body {
 
 </Sandpack>
 
-This demo loads with an artificial delay. The next time you untick and tick the checkbox, `Preview` will be cached, so there will be no loading state. To see the loading state again, click "Reset" on the sandbox.
+Bu demo, yapay bir gecikmeyle yüklenir. Bileşen yüklendikten sonras işareti kaldırıp yeniden işaretlediğinizde `Preview` ön belleğe alındığı için yükleniyor durumu olmaz.  Yükleniyor durumunu yeniden görmek isterseniz, sandbox'daki "Sıfırla" butonuna tıklayın.
 
-[Learn more about managing loading states with Suspense.](/reference/react/Suspense)
+[Suspense ile yükleniyor durumlarını yönetmek hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### My `lazy` component's state gets reset unexpectedly {/*my-lazy-components-state-gets-reset-unexpectedly*/}
+### `lazy` bileşenimdeki state'ler beklenmedik şekilde sıfırlanıyor {/*my-lazy-components-state-gets-reset-unexpectedly*/}
 
-Do not declare `lazy` components *inside* other components:
+`lazy` bileşenleri diğer bileşenlerin *içerisinde* tanımlamayın:
 
 ```js {4-5}
 import { lazy } from 'react';
 
 function Editor() {
-  // 🔴 Bad: This will cause all state to be reset on re-renders
+  // 🔴 Kötü: Bu yeniden render'larda tüm state'lerin sıfırlanmasına neden olur
   const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
   // ...
 }
 ```
 
-Instead, always declare them at the top level of your module:
+Bunun yerine daima modülünüzün en üst kapsamında tanımlayın:
 
 ```js {3-4}
 import { lazy } from 'react';
 
-// ✅ Good: Declare lazy components outside of your components
+// ✅ Güzel: Lazy bileşenleri bileşenlerinizin dışında tanımlayın
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 function Editor() {
