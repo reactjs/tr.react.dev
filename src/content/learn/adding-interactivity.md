@@ -20,11 +20,11 @@ Some things on the screen update in response to user input. For example, clickin
 
 </YouWillLearn>
 
-## Responding to events {/*responding-to-events*/}
+## Olaylara tepki verme {/*responding-to-events*/}
 
-React lets you add *event handlers* to your JSX. Event handlers are your own functions that will be triggered in response to user interactions like clicking, hovering, focusing on form inputs, and so on.
+React, JSX'inize *olay yöneticileri* eklemenize olanak tanır. Olay yöneticileri (event handler); tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan sahip olduğunuz fonksiyonlardır.
 
-Built-in components like `<button>` only support built-in browser events like `onClick`. However, you can also create your own components, and give their event handler props any application-specific names that you like.
+`<button>` gibi yerleşik bileşenler yalnızca `onClick` gibi yerleşik tarayıcı olaylarını destekler. Ancak kendi bileşenlerinizi oluşturabilir ve olay yöneticisini ileteceğiniz prop'lara uygulamanıza özgü isimler verebilirsiniz.
 
 <Sandpack>
 
@@ -32,8 +32,8 @@ Built-in components like `<button>` only support built-in browser events like `o
 export default function App() {
   return (
     <Toolbar
-      onPlayMovie={() => alert('Playing!')}
-      onUploadImage={() => alert('Uploading!')}
+      onPlayMovie={() => alert('Oynatılıyor!')}
+      onUploadImage={() => alert('Yükleniyor!')}
     />
   );
 }
@@ -42,10 +42,10 @@ function Toolbar({ onPlayMovie, onUploadImage }) {
   return (
     <div>
       <Button onClick={onPlayMovie}>
-        Play Movie
+        Film Oynat
       </Button>
       <Button onClick={onUploadImage}>
-        Upload Image
+        Resim Yükle
       </Button>
     </div>
   );
@@ -68,7 +68,7 @@ button { margin-right: 10px; }
 
 <LearnMore path="/learn/responding-to-events">
 
-Read **[Responding to Events](/learn/responding-to-events)** to learn how to add event handlers.
+Olay yöneticilerinin nasıl ekleneceğini öğrenmek için **[Olaylara Tepki Verme](/learn/responding-to-events)** bölümünü okuyun.
 
 </LearnMore>
 
