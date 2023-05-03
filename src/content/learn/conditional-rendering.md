@@ -4,7 +4,7 @@ title: Koşullu Olarak Render Etmek
 
 <Intro>
 
-React bileşenlerinizde çoğu zaman farklı koşullar altında farklı şeyler render etmek isteyeceksiniz. React'de, `if` ifadesi, `&&`, ve `? :` gibi JavaScript syntax'ine ait operatörleri kullanarak koşullu olarak JSX render edebilirsiniz.
+React bileşenlerinizde çoğu zaman farklı koşullar altında farklı şeyler render etmek isteyeceksiniz. React'te, `if` ifadesi, `&&`, ve `? :` gibi JavaScript sözdizimine (syntax) ait operatörleri kullanarak koşullu olarak JSX render edebilirsiniz.
 
 </Intro>
 
@@ -12,13 +12,13 @@ React bileşenlerinizde çoğu zaman farklı koşullar altında farklı şeyler 
 
 * Bir koşula bağlı olarak farklı JSX nasıl döndürülür
 * Koşullu olarak bir JSX parçası nasıl dahil edilir veya hariç tutulur
-* React kod tabanında karşınıza çıkacak yaygın kullanılan kısayol koşul syntax'leri
+* React kod tabanında karşınıza çıkacak yaygın kullanılan kısayol koşul sözdizimleri 
 
 </YouWillLearn>
 
 ## Koşullu olarak JSX döndürmek {/*conditionally-returning-jsx*/}
 
-Diyelim ki elinizde birden çok `Item` render eden bir `PackingList` bileşeni var, ve `Item`'lar bavula konulup konulmadıklarına göre işaret almışlar:
+Diyelim ki elinizde bir `PackingList` bileşeni var. Bu bilesen, bavula konulup konulmadıklarına göre işaretlenebilen, `Item`' bileşeninden birkaç tane render ediyor:
 
 <Sandpack>
 
@@ -168,7 +168,7 @@ bu iki ifade birbirine çok benzemekte
 <li className="item">{name}</li>
 ```
 
-Her iki koşulda `<li className="item">...</li>` ifadesini döndürmekte:
+Her iki koşul da `<li className="item">...</li>` ifadesini döndürmekte:
 
 ```js
 if (isPacked) {
@@ -181,7 +181,7 @@ Bu tekrarlamalar zararlı olmasa bile yazdığınız kodu idame ettirmek zorlaş
 
 ### Koşullu (ternary) operatörü (`? :`) {/*conditional-ternary-operator--*/}
 
-JavaScript, koşullu bir ifade yazmak için kompakt bir syntax'e sahiptir -- [koşullu operatör](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) ya da  "ternary operatörü".
+JavaScript, koşullu bir ifade yazmak için kompakt bir sözdizimine sahiptir -- [koşullu operatör](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) ya da  "ternary operatörü".
 
 Böyle yazmak yerine:
 
@@ -202,13 +202,13 @@ return (
 );
 ```
 
- Bu kodu şöyle okuyabilirsiniz: *"eğer `isPacked` prop'u true (doğru) ise, o zaman (`?`) `name + ' ✔'` render et, aksi halde (`:`) `name` render et"*.
+Bu kodu şöyle okuyabilirsiniz: *"eğer `isPacked` prop'u true (doğru) ise, o zaman (`?`) `name + ' ✔'` render et, aksi halde (`:`) `name` render et"*.
 
 <DeepDive>
 
 #### Bu iki örnek tamamen eşdeğer mi? {/*are-these-two-examples-fully-equivalent*/}
 
-Obje tabanlı bir programlama geçmişiniz varsa, yukarıdaki iki örneğin biraz farklı olduğunu çünkü birinin iki farklı `<li>` kopyası oluşturabileceğini düşünebilirsiniz. Ancak JSX öğeleri herhangi bir dahili state'e sahip olmadıkları ve gerçek DOM node'u olmadıkları için bir "kopya" değildir. JSX öğeleri aynı blueprint'ler (kılavuz) gibi tanımlardır. Yani bu iki örnek birbiriyle **tamamen** aynıdır. [State'i korumak ve sıfırlamak](/learn/preserving-and-resetting-state) bunun nasıl çalıştığını ayrıntılı bir şekilde anlatmaktadır.
+Nesne yönelimli programlama geçmişiniz varsa, yukarıdaki iki örneğin biraz farklı olduğunu çünkü birinin iki farklı `<li>` kopyası oluşturabileceğini düşünebilirsiniz. Ancak JSX öğeleri herhangi bir dahili state'e sahip olmadıkları ve gerçek DOM node'u olmadıkları için bir "kopya" değildir. JSX öğeleri aynı blueprint'ler (kılavuz) gibi tanımlardır. Yani bu iki örnek birbiriyle **tamamen** aynıdır. [State'i korumak ve sıfırlamak](/learn/preserving-and-resetting-state) bunun nasıl çalıştığını ayrıntılı bir şekilde anlatmaktadır.
 
 </DeepDive>
 
@@ -348,7 +348,7 @@ if (isPacked) {
 </li>
 ```
 
-Bu syntax en ayrıntılı ama aynı zamanda en esnek olanıdır. Aşağıda nasıl çalıştığını görebilirsiniz:
+Bu yöntem en ayrıntılı ama aynı zamanda en esnek olanıdır. Aşağıda nasıl çalıştığını görebilirsiniz:
 
 <Sandpack>
 
@@ -436,7 +436,7 @@ export default function PackingList() {
 
 </Sandpack>
 
-Eğer JavaScript diline aşina değilseniz, bu çeşitli syntax'ler ilk başta kafa karıştırıcı olabilir. Ancak bunları öğrenmek, sadece React bileşenleri değil, herhangi bir JavaScript kodunu okumanıza ve yazmanıza yardımcı olacaktır! Başlangıçta tercih ettiğiniz syntax ile devam edin ve diğer syntax'lerin nasıl çalıştığını unuttuğunuzda bu sayfadan örneklere bakabilirsiniz.
+Eğer JavaScript diline aşina değilseniz, bu yöntem çeşitliliği ilk başta kafa karıştırıcı olabilir. Ancak bunları öğrenmek, sadece React bileşenleri değil, herhangi bir JavaScript kodunu okumanıza ve yazmanıza yardımcı olacaktır! Başlangıçta tercih ettiğiniz sözdizimi ile devam ederek, diğer sözdizimlerin nasıl çalıştığını unuttuğunuz zaman bu sayfayı referans olarak kullanabilirsiniz.
 
 <Recap>
 
@@ -453,7 +453,7 @@ Eğer JavaScript diline aşina değilseniz, bu çeşitli syntax'ler ilk başta k
 
 <Challenges>
 
-#### Bavula konmamış eşyalar için `? :` syntax'i kullanarak bir ikon göster {/*show-an-icon-for-incomplete-items-with--*/}
+#### Bavula konmamış eşyalar için `? :` sözdizimini kullanarak bir ikon göster {/*show-an-icon-for-incomplete-items-with--*/}
 
 Koşul operatörünü (`cond ? a : b`) kullanarak eğer `isPacked` prop'u `true` (`doğru`) değilse ❌ render et.
 
@@ -535,7 +535,7 @@ export default function PackingList() {
 
 #### Eşyanın importance (önemini) `&&` operatörü ile göster {/*show-the-item-importance-with-*/}
 
-Bu örnekte, herbir `Item` sayısal bir `importance` prop'u almaktadır. `&&` operatörünü kullanarak "importance" (önem) değeri 0'dan büyük olanların yanında italik olarak "_(Importance: X)_" render edebilirsiniz. Eşyalarınızın listesinin son hali şu şekilde olmalıdır:
+Bu örnekte, her bir `Item` sayısal bir `importance` prop'u almaktadır. `&&` operatörünü kullanarak "importance" (önem) değeri 0'dan büyük olanların yanında italik olarak "_(Importance: X)_" render edebilirsiniz. Eşyalarınızın listesinin son hali şu şekilde olmalıdır:
 
 * Space suit _(Importance: 9)_
 * Helmet with a golden leaf
@@ -629,7 +629,7 @@ Bu çözümde, eşyanın ismi ve importance (önem) yazısı arasına boşluk ko
 
 </Solution>
 
-#### Bir dizi `? :` operatörünü `if` ifadesi ve değişkenler ile değiştir {/*refactor-a-series-of---to-if-and-variables*/}
+#### Bir dizi `? :` sözdizimini `if` ifadesi ve değişkenler ile değiştir {/*refactor-a-series-of---to-if-and-variables*/}
 
 `Drink` bileşeni, `name` prop'unun `"tea"` ya da `"coffee"` olduğuna bağlı olarak farklı bilgiler göstermek için bir dizi ? : koşulunu kullanır. Buradaki sorun her içecek hakkındaki bilgilerin birden fazla koşula bağlı olmasıdır. Bu kodu üç tane `? :` koşulu yerine tek bir `if` ifadesi kullanacak şekilde yeniden düzenleyin.
 
