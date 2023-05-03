@@ -13,7 +13,7 @@ title: useLayoutEffect
 `useLayoutEffect`, tarayıcı bileşeni ekrana çizmeden önce tetiklenen bir [`useEffect`](/reference/react/useEffect) çeşididir.
 
 ```js
-useLayoutEffect(setup, dependencies?)
+useLayoutEffect(kurulum, bağımlılıklar?)
 ```
 
 </Intro>
@@ -24,7 +24,7 @@ useLayoutEffect(setup, dependencies?)
 
 ## Referans {/*reference*/}
 
-### `useLayoutEffect(setup, dependencies?)` {/*useinsertioneffect*/}
+### `useLayoutEffect(kurulum, bağımlılıklar?)` {/*useinsertioneffect*/}
 
 `useLayoutEffect`, tarayıcının ekrana yeniden çizme işleminden (repainting) önce yerleşim (layout) ölçümlerini gerçekleştirmek için çağrılır:
 
@@ -47,9 +47,9 @@ function Tooltip() {
 
 #### Parametereler {/*parameters*/}
 
-* `setup`: Efekt kodunu barındıran fonksiyondur. Kurulum fonksiyonunuz ayrıca isteğe bağlı *temizleme (cleanup)* fonksiyonu döndürebilir. React, bileşeninizi DOM'a eklemeden önce kurulum fonksiyonunuzu çalıştırır. Bağımlılıkların değişmesiyle tetiklenen render'ların ardından öncelikle eski değerlerle birlikte temizleme fonksiyonunuzu (varsa) çalıştırılır ve ardından yeni değerlerle birlikte kurulum fonksiyonuzu çalıştırılır. Bileşen DOM'dan kaldırılmadan önce, React son kez temizleme fonksiyonunuzu çalıştırır.
+* `kurulum (setup)`: Efekt kodunu barındıran fonksiyondur. Kurulum fonksiyonunuz ayrıca isteğe bağlı *temizleme (cleanup)* fonksiyonu döndürebilir. React, bileşeninizi DOM'a eklemeden önce kurulum fonksiyonunuzu çalıştırır. Bağımlılıkların değişmesiyle tetiklenen render'ların ardından öncelikle eski değerlerle birlikte temizleme fonksiyonunuzu (varsa) çalıştırılır ve ardından yeni değerlerle birlikte kurulum fonksiyonuzu çalıştırılır. Bileşen DOM'dan kaldırılmadan önce, React son kez temizleme fonksiyonunuzu çalıştırır.
  
-* **isteğe bağlı** `dependencies`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
+* **isteğe bağlı** `bağımlılıklar (dependencies)`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
 
 #### Dönüş değerleri {/*returns*/}
 
