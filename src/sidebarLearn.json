@@ -60,7 +60,7 @@
           "path": "/learn/importing-and-exporting-components"
         },
         {
-          "title": "Writing Markup with JSX",
+          "title": "JSX ile İşaretleme (Markup) Yazma",
           "path": "/learn/writing-markup-with-jsx"
         },
         {
@@ -123,7 +123,9 @@
     {
       "title": "Managing State",
       "path": "/learn/managing-state",
-      "tags": ["intermediate"],
+      "tags": [
+        "intermediate"
+      ],
       "routes": [
         {
           "title": "Girdiye State ile Reaksiyon Verme",
@@ -158,7 +160,9 @@
     {
       "title": "Escape Hatches",
       "path": "/learn/escape-hatches",
-      "tags": ["advanced"],
+      "tags": [
+        "advanced"
+      ],
       "routes": [
         {
           "title": "Referencing Values with Refs",
@@ -186,7 +190,7 @@
         },
         {
           "title": "Removing Effect Dependencies",
-          "path": "/learn/removing-effect-dependencies"              
+          "path": "/learn/removing-effect-dependencies"
         },
         {
           "title": "Reusing Logic with Custom Hooks",
