@@ -4,7 +4,7 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-<Fragment>, genellikle <>...</> sözdizimiyle birlikte kullanılır ve bir kaplayıcı düğüm olmadan elemanları gruplamaya olanak tanır.
+`<Fragment>`, genellikle `<>...</>` sözdizimiyle birlikte kullanılır ve bir kaplayıcı düğüm olmadan elemanları gruplamaya olanak tanır.
 
 ```js
 <>
@@ -27,7 +27,7 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları <Fragment> içine a
 
 #### Prop'lar {/*props*/}
 
-isteğe bağlı `anahtar`: Açık <Fragment> sözdizimiyle tanımlanan Fragment'ler syntax may have [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
+isteğe bağlı `anahtar`: Açık `<Fragment>` sözdizimiyle tanımlanan Fragment'ler  [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
 
 #### Uyarılar {/*caveats*/}
 
