@@ -1,29 +1,30 @@
 ---
-title: Quick Start
+title: Giriş
 ---
 
 <Intro>
 
-Welcome to the React documentation! This page will give you an introduction to the 80% of React concepts that you will use on a daily basis.
+React dökümantasyonuna hoş geldiniz! Bu sayfa sizin günlük olarak kullanacağınız React kavramlarının %80'ine giriş yapacaktır.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to create and nest components
-- How to add markup and styles
-- How to display data
-- How to render conditions and lists
-- How to respond to events and update the screen
-- How to share data between components
+- Bileşenleri nasıl oluşturup iç içe yerleştireceğinizi
+- Markup ve stilleri nasıl ekleyeceğinizi
+- Verileri nasıl görüntüleyeceğinizi
+- Koşulları ve listeleri nasıl oluşturacağınızı
+- Olaylara nasıl yanıt vereceğinizi ve ekranı nasıl güncelleyeceğinizi
+- Bileşenler arasında nasıl veri paylaşacağınızı
 
 </YouWillLearn>
 
-## Creating and nesting components {/*components*/}
+## Bileşenleri oluşturma ve iç içe yerleştirme {/*components*/}
 
-React apps are made out of *components*. A component is a piece of the UI (user interface) that has its own logic and appearance. A component can be as small as a button, or as large as an entire page.
+React uygulamaları *bileşenler*'den oluşmaktadır. Bileşen, kendi mantığı ve görünümü olan UI (kullanıcı arayüzü) parçasıdır. Bileşen bir buton kadar küçük veya bir sayfa kadar büyük olabilir.
 
-React components are JavaScript functions that return markup:
+
+React bileşenleri, markup döndüren JavaScript fonksiyonlarıdır:
 
 ```js
 function MyButton() {
@@ -33,7 +34,7 @@ function MyButton() {
 }
 ```
 
-Now that you've declared `MyButton`, you can nest it into another component:
+Şimdi, `MyButton`'ı oluşturduğunuza göre, onu başka bir bileşenin içine yerleştirebilirsiniz:
 
 ```js {5}
 export default function MyApp() {
@@ -46,9 +47,9 @@ export default function MyApp() {
 }
 ```
 
-Notice that `<MyButton />` starts with a capital letter. That's how you know it's a React component. React component names must always start with a capital letter, while HTML tags must be lowercase.
+Dikkat ettiyseniz `<MyButton />` büyük harfle başlıyor. Bu, onun bir React bileşeni olduğunu anlamanızı sağlar. React bileşen isimleri her zaman büyük harfle başlamalıdır, HTML etiketleri ise küçük harfle başlamalıdır.
 
-Have a look at the result:
+Sonuca bir göz atın:
 
 <Sandpack>
 
@@ -73,13 +74,13 @@ export default function MyApp() {
 
 </Sandpack>
 
-The `export default` keywords specify the main component in the file. If you're not familiar with some piece of JavaScript syntax, [MDN](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) and [javascript.info](https://javascript.info/import-export) have great references.
+`export default` anahtar sözcüğü dosyadaki ana bileşeni belirtir. Eğer JavaScript söz dizimi hakkında bilginiz yoksa, [MDN](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) ve [javascript.info](https://javascript.info/import-export) harika referanslara sahiptir.
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## JSX ile markup yazma {/*writing-markup-with-jsx*/}
 
-The markup syntax you've seen above is called *JSX*. It is optional, but most React projects use JSX for its convenience. All of the [tools we recommend for local development](/learn/installation) support JSX out of the box.
+Yukarıda gördüğünüz markup söz dizilimi *JSX* olarak adlandırılmaktadır. Bu isteğe bağlıdır, ancak çoğu React projesi JSX'i kolaylığından dolayı kullanmaktadır. [Yerel geliştirme için önerdiğimiz tüm araçlar](/learn/installation) JSX'i kutudan çıkarılmış olarak desteklemektedir.
 
-JSX is stricter than HTML. You have to close tags like `<br />`. Your component also can't return multiple JSX tags. You have to wrap them into a shared parent, like a `<div>...</div>` or an empty `<>...</>` wrapper:
+JSX, HTML'den daha katıdır. `<br />` gibi etiketleri kapatmanız gerekir. Bileşeniniz ayrıca birden fazla JSX etiketi döndüremez. Onları `<div>...</div>` veya boş `<>...</>` sarmalayıcısı gibi ortak bir üst öğeye sarmalamanız gerekir:
 
 ```js {3,6}
 function AboutPage() {
@@ -92,30 +93,30 @@ function AboutPage() {
 }
 ```
 
-If you have a lot of HTML to port to JSX, you can use an [online converter.](https://transform.tools/html-to-jsx)
+Eğer JSX'e dönüştüreceğiniz çok fazla HTML'iniz varsa, [çevrimiçi bir dönüştürücü](https://transform.tools/html-to-jsx) kullanabilirsiniz.
 
-## Adding styles {/*adding-styles*/}
+## Stil ekleme {/*adding-styles*/}
 
-In React, you specify a CSS class with `className`. It works the same way as the HTML [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) attribute:
+React'de, bir CSS sınıfını `className` ile belirtirsiniz. Bu, HTML'deki [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) özniteliğiyle aynı şekilde çalışır:
 
 ```js
 <img className="avatar" />
 ```
 
-Then you write the CSS rules for it in a separate CSS file:
+Ardından, CSS kurallarını ayrı bir CSS dosyasında yazarsınız:
 
 ```css
-/* In your CSS */
+/* CSS'inizin içerisinde */
 .avatar {
   border-radius: 50%;
 }
 ```
 
-React does not prescribe how you add CSS files. In the simplest case, you'll add a [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag to your HTML. If you use a build tool or a framework, consult its documentation to learn how to add a CSS file to your project.
+React CSS dosyalarını nasıl ekleyeceğinizi önden belirtmez. En basit durumda, HTML'nize bir [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) etiketi ekleyeceksiniz. Eğer bir build aracı veya bir framework kullanıyorsanız, projenize bir CSS dosyası nasıl ekleyeceğinizi öğrenmek için dökümantasyonuna bakın.
 
-## Displaying data {/*displaying-data*/}
+## Veri görüntüleme {/*displaying-data*/}
 
-JSX lets you put markup into JavaScript. Curly braces let you "escape back" into JavaScript so that you can embed some variable from your code and display it to the user. For example, this will display `user.name`:
+JSX, Javascript içerisine markup eklemenizi olanaklı kılar. Süslü parantezler, Javascript'e "geri dönmenizi" sağlar, böylece kodunuzdan bir değişkeni gömüp kullanıcıya gösterebilirsiniz. Örneğin, bu `user.name`'i gösterecektir:
 
 ```js {3}
 return (
