@@ -159,7 +159,7 @@ button {
 Yeni verilerle bir bileşeni güncellemek için, iki şeyin yapılması gerekir:
 
 1. Renderlar arasında verileri **korumak**.
-2. React'in bileşeni yeni verilerle yeniden render etmesi için **tetiklemek**.
+2. Bileşeni yeni verilerle yeniden render etmesi için React'i **tetiklemek**.
 
 [`useState`](/reference/react/useState) Hook'u bu iki şeyi sağlar:
 
