@@ -16,7 +16,7 @@ Tüm yerleşik tarayıcı bileşenleri bazı prop'ları ve event'leri destekler.
 
 * [Ortak bileşenler (örn. `<div>`)](/reference/react-dom/components/common)
 
-Bu `ref` ve `dangerouslySetInnerHTML` gibi React'a özgü prop'ları içerir.
+Bu `ref` ve `dangerouslySetInnerHTML` gibi React'e özgü prop'ları içerir.
 
 ---
 
@@ -28,7 +28,7 @@ Aşağıdaki yerleşik tarayıcı bileşenleri kullanıcı girdilerini alır:
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
 
-React'ta bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edilebilir](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)* hale geldikleri için özel bir yere sahiptirler.
+React'te bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edilebilir](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)* hale geldikleri için özel bir yere sahiptirler.
 
 ---
 
@@ -148,7 +148,7 @@ React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içe
 
 ### Özel HTML elemanları {/*custom-html-elements*/}
 
-Eğer `<my-element>` gibi tire içeren bir etiket oluşturursanız, React bir [özel HTML elemanı](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayacaktır. React'ta özel elemanların render edilmesi, yerleşik tarayıcı etiketlerinin render edilmesinden daha farklı şekilde çalışır:
+Eğer `<my-element>` gibi tire içeren bir etiket oluşturursanız, React bir [özel HTML elemanı](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayacaktır. React'te özel elemanların render edilmesi, yerleşik tarayıcı etiketlerinin render edilmesinden daha farklı şekilde çalışır:
 
 - Tüm özel eleman prop'ları string olarak serileştirilir ve her zaman öznitelikler kullanılarak ayarlanır.
 - Özel elemanlar `class` yerine `className`, `for` yerine `htmlFor` kabul eder.
