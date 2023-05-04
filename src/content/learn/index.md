@@ -4,7 +4,7 @@ title: Giriş
 
 <Intro>
 
-React dökümantasyonuna hoş geldiniz! Bu sayfa sizin günlük olarak kullanacağınız React kavramlarının %80'ine giriş yapacaktır.
+React dokümantasyonuna hoş geldiniz! Bu sayfa sizin günlük olarak kullanacağınız React kavramlarının %80'ine giriş yapacaktır.
 
 </Intro>
 
@@ -112,7 +112,7 @@ Ardından, CSS kurallarını ayrı bir CSS dosyasında yazarsınız:
 }
 ```
 
-React CSS dosyalarını nasıl ekleyeceğinizi önden belirtmez. En basit durumda, HTML'nize bir [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) etiketi ekleyeceksiniz. Eğer bir build aracı veya bir framework kullanıyorsanız, projenize bir CSS dosyası nasıl ekleyeceğinizi öğrenmek için dökümantasyonuna bakın.
+React CSS dosyalarını nasıl ekleyeceğinizi önden belirtmez. En basit durumda, HTML'nize bir [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) etiketi ekleyeceksiniz. Eğer bir build aracı veya bir framework kullanıyorsanız, projenize bir CSS dosyası nasıl ekleyeceğinizi öğrenmek için dokümantasyonuna bakın.
 
 ## Veri görüntüleme {/*displaying-data*/}
 
@@ -126,7 +126,7 @@ return (
 );
 ```
 
-You can also "escape into JavaScript" from JSX attributes, but you have to use curly braces *instead of* quotes. For example, `className="avatar"` passes the `"avatar"` string as the CSS class, but `src={user.imageUrl}` reads the JavaScript `user.imageUrl` variable value, and then passes that value as the `src` attribute:
+Aynı zamanda, JSX özniteliklerinde de Javascript'e "geri dönme" yapabilirsiniz, ancak bunun için tırnak yerine süslü parantez kullanmanız gerekir. Örneğin, `className="avatar"` `"avatar"` stringini CSS sınıfı olarak geçer, ancak `src={user.imageUrl}` Javascript `user.imageUrl` değişken değerini okur ve bu değeri `src` özniteliği olarak geçer:
 
 ```js {3,4}
 return (
@@ -137,7 +137,7 @@ return (
 );
 ```
 
-You can put more complex expressions inside the JSX curly braces too, for example, [string concatenation](https://javascript.info/operators#string-concatenation-with-binary):
+JSX süslü parantezlerinin içerisine daha karmaşık ifadeler de yerleştirebilirsiniz, örneğin [string birleştirme](https://javascript.info/operators#string-concatenation-with-binary):
 
 <Sandpack>
 
@@ -178,11 +178,11 @@ export default function Profile() {
 
 </Sandpack>
 
-In the above example, `style={{}}` is not a special syntax, but a regular `{}` object inside the `style={ }` JSX curly braces. You can use the `style` attribute when your styles depend on JavaScript variables.
+Yukarıdaki örnekte, `style={{}}` özel bir sözdizimi değil, `style={ }` JSX süslü parantezlerinin içerisindeki sıradan bir `{}` nesnesidir. Stilleriniz Javascript değişkenlerine bağlı olduğunda `style` özniteliğini kullanabilirsiniz.
 
-## Conditional rendering {/*conditional-rendering*/}
+## Koşullu işleme {/*conditional-rendering*/}
 
-In React, there is no special syntax for writing conditions. Instead, you'll use the same techniques as you use when writing regular JavaScript code. For example, you can use an [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) statement to conditionally include JSX:
+React'de, koşulları yazmak için özel bir sözdizimi yoktur. Onun yerine, sıradan JavaScript kodu yazarken kullandığınız teknikleri kullanacaksınız. Örneğin, JSX'i koşullu olarak dahil etmek için bir [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) ifadesi kullanabilirsiniz:
 
 ```js
 let content;
@@ -198,7 +198,7 @@ return (
 );
 ```
 
-If you prefer more compact code, you can use the [conditional `?` operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) Unlike `if`, it works inside JSX:
+Eğer daha kompakt bir kod tercih ediyorsanız, [koşullu `?` operatörünü](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) kullanabilirsiniz. `if`'in aksine, JSX içerisinde çalışır:
 
 ```js
 <div>
@@ -210,7 +210,7 @@ If you prefer more compact code, you can use the [conditional `?` operator.](htt
 </div>
 ```
 
-When you don't need the `else` branch, you can also use a shorter [logical `&&` syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation):
+`else` dalına ihtiyacınız olmadığında, daha kısa olan [mantıksal `&&` sözdizimini](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation) kullanabilirsiniz:
 
 ```js
 <div>
@@ -218,13 +218,13 @@ When you don't need the `else` branch, you can also use a shorter [logical `&&` 
 </div>
 ```
 
-All of these approaches also work for conditionally specifying attributes. If you're unfamiliar with some of this JavaScript syntax, you can start by always using `if...else`.
+Tüm bu yaklaşımlar ayrıca öznitelikler koşullu olarak belirtilmek istendiğinde de çalışır. Eğer bu JavaScript sözdizimlerinden bazıları size yabancıysa, `if...else` kullanarak başlayabilirsiniz.
 
-## Rendering lists {/*rendering-lists*/}
+## Listeleri işleme {/*rendering-lists*/}
 
-You will rely on JavaScript features like [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) and the [array `map()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) to render lists of components.
+Bileşenlerden oluşan listeleri işlemek için [`for` döngüsü](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) ve [dizi `map()` fonksiyonu](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) gibi JavaScript özelliklerine ihtiyacınız olacak.
 
-For example, let's say you have an array of products:
+Örneğin, bir ürün (products) diziniz olduğunu varsayalım:
 
 ```js
 const products = [
@@ -234,7 +234,7 @@ const products = [
 ];
 ```
 
-Inside your component, use the `map()` function to transform an array of products into an array of `<li>` items:
+Bileşeniniz içerisinde, `map()` fonksiyonunu kullanıp ürünler dizisini `<li>` öğeleri dizisine dönüştürün:
 
 ```js
 const listItems = products.map(product =>
@@ -248,7 +248,7 @@ return (
 );
 ```
 
-Notice how `<li>` has a `key` attribute. For each item in a list, you should pass a string or a number that uniquely identifies that item among its siblings. Usually, a key should be coming from your data, such as a database ID. React uses your keys to know what happened if you later insert, delete, or reorder the items.
+`<li>` etiketinin bir `key` özniteliği olduğuna dikkat edin. Bir listedeki her öğe için, o öğeyi kardeşleri arasında benzersiz bir şekilde tanımlayan bir string veya sayı geçirmelisiniz. Genellikle, bir anahtar (`key`) verilerinizden gelmelidir (Örneğin veritabanındaki ID). React, daha sonra öğeleri eklediğinizde, sildiğinizde veya yeniden sıraladığınızda ne olduğunu bilmek için anahtarlarınızı kullanır.
 
 <Sandpack>
 
@@ -279,9 +279,9 @@ export default function ShoppingList() {
 
 </Sandpack>
 
-## Responding to events {/*responding-to-events*/}
+## Olaylara yanıt verme {/*responding-to-events*/}
 
-You can respond to events by declaring *event handler* functions inside your components:
+Bileşenleriniz içerisinde *olay işleyici* fonksiyonlar tanımlayarak olaylara yanıt verebilirsiniz:
 
 ```js {2-4,7}
 function MyButton() {
