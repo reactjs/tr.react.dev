@@ -20,7 +20,7 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 ### `useReducer(reducer, initialArg, init?)` {/*usereducer*/}
 
-Bileşeninizin durumunu bir [reducer](/learn/extracting-state-logic-into-a-reducer) ile yönetmek için bileşeninizin üst düzeyinde `useReducer` çağrısı yapın.
+Bileşeninizin state'ini bir [reducer](/learn/extracting-state-logic-into-a-reducer) ile yönetmek için bileşeninizin üst düzeyinde `useReducer` çağrısı yapın.
 
 ```js
 import { useReducer } from 'react';
@@ -40,7 +40,7 @@ function MyComponent() {
 
 * `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf olmalıdır, state'i ve işlemi argüman olarak almalıdır ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
 * `initialArg`: Başlangıç state'inin hesaplandığı değerdir. Herhangi bir türden bir değer olabilir. Başlangıç state'inin nasıl hesaplandığı, sonraki `init` argümanına bağlıdır.
-* **isteğe bağlı** `init`: Başlangıç state'ini döndürmesi gereken başlatıcı fonksiyondur. Belirtilmezse, başlangıç durumu `initialArg` olarak ayarlanır. Aksi takdirde, başlangıç state'i `init(initialArg)` çağrısının sonucuna ayarlanır.
+* **isteğe bağlı** `init`: Başlangıç state'ini döndürmesi gereken başlatıcı fonksiyondur. Belirtilmezse, başlangıç state'i `initialArg` olarak ayarlanır. Aksi takdirde, başlangıç state'i `init(initialArg)` çağrısının sonucuna ayarlanır.
 
 #### Return'ler {/*returns*/}
 
@@ -972,7 +972,7 @@ console.log(nextState); // { age: 43 }
 
 ### Bir işlem yaptım, ancak ekran güncellenmiyor {/*ive-dispatched-an-action-but-the-screen-doesnt-update*/}
 
-React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile belirlendiği gibi bir sonraki durum önceki durumla eşitse, güncellemenizi **yok sayar**. Bu genellikle doğrudan state içinde bir nesne veya bir dizi değiştirdiğinizde olur:
+React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile belirlendiği gibi bir sonraki state önceki state ile eşitse, güncellemenizi **yok sayar**. Bu genellikle doğrudan state içinde bir nesne veya bir dizi değiştirdiğinizde olur:
 
 ```js {4-5,9-10}
 function reducer(state, action) {
@@ -1040,7 +1040,7 @@ Yukarıdaki `...state` olmadan, döndürülen yeni state yalnızca `age` alanın
 
 ### Dispatch işleminden sonra tüm reducer state'i tanımsız (undefined) oluyor. {/*my-entire-reducer-state-becomes-undefined-after-dispatching*/}
 
-Eğer state beklenmedik şekilde `undefined` olursa, muhtemelen `case` state'lerinden birinde durum döndürmeyi unutuyorsunuz veya eylem türünüz herhangi bir `case` ifadesine uymuyor. Bunun sebebini bulmak için, anahtar kelime `switch`'in dışında bir hata yaratın:
+Eğer state beklenmedik şekilde `undefined` olursa, muhtemelen `case` state'lerinden birinde state döndürmeyi unutuyorsunuz veya eylem türünüz herhangi bir `case` ifadesine uymuyor. Bunun sebebini bulmak için, anahtar kelime `switch`'in dışında bir hata yaratın:
 
 ```js {10}
 function reducer(state, action) {
