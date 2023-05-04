@@ -1,25 +1,25 @@
 ---
-title: 'Tutorial: Tic-Tac-Toe'
+title: 'Öğretici: X-O-X'
 ---
 
 <Intro>
 
-You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowledge. The techniques you'll learn in the tutorial are fundamental to building any React app, and fully understanding it will give you a deep understanding of React.
+Bu öğretici ile küçük bir x-o-x oyunu tasarlayacağız. Bu öğretici mevcut herhangi bir React bilgisini gerektirmez. Öğreticide öğreneceğiniz teknikler, herhangi bir React uygulaması oluşturmak için temeldir ve bunu tam olarak anlamak, size React hakkında derin bir anlayış sağlayacaktır.
 
 </Intro>
 
 <Note>
 
-This tutorial is designed for people who prefer to **learn by doing** and want to quickly try making something tangible. If you prefer learning each concept step by step, start with [Describing the UI.](/learn/describing-the-ui)
+Bu öğretici **yaparak öğrenmeyi** tercih eden ve bir şeyi somut hale getirmeyi hızlıca denemek isteyen kişiler için tasarlanmıştır. Eğer her kavramı adım adım öğrenmeyi tercih ediyorsanız, [Kullanıcı Arayüzünü Tanımlama](/learn/describing-the-ui) ile başlayın.
 
 </Note>
 
-The tutorial is divided into several sections:
+Bu öğretici birkaç bölüme ayrılmıştır:
 
-- [Setup for the tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-- [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-- [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
-- [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+- [Öğretici için kurulum](#setup-for-the-tutorial) öğreticiyi takip etmeniz için size bir **başlangıç noktası** verecektir.
+- [Genel Bakış](#overview) size React'in **temellerini** öğretecek: bileşenler (components), özellikler (props) ve durum (state).
+- [Oyunu tamamlama](#completing-the-game) size React geliştirme sürecindeki **en yaygın teknikleri** öğretecek.
+- [Zamanda yolculuk ekleme](#adding-time-travel) React'in benzersiz güçlerine daha **derin bir bakış açısı** sağlayacaktır.
 
 ### What are you building? {/*what-are-you-building*/}
 
