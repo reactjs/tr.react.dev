@@ -4,7 +4,7 @@ title: "<progress>"
 
 <Intro>
 
-[Tarayıcı'da dahili olarak gelen `<progress>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress), bir ilerleme göstergesi oluşturmanızı sağlar.
+[Tarayıcıda yerleşik olarak gelen `<progress>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress), bir ilerleme göstergesi oluşturmanızı sağlar.
 
 ```js
 <progress value={0.5} />
@@ -20,7 +20,7 @@ title: "<progress>"
 
 ### `<progress>` {/*progress*/}
 
-Bir ilerleme göstergesi göstermek için [dahili tarayıcı bileşeni `<progress>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress)'i render edin.
+Ekranda bir ilerleme göstergesi göstermek için [yerleşik tarayıcı bileşeni `<progress>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress)'i render edin.
 
 ```js
 <progress value={0.5} />
@@ -41,7 +41,7 @@ Ek olarak, `<progress>` bu prop'ları destekler:
 
 ## Kullanım {/*usage*/}
 
-### Bir ilerleme göstergesini kotrol etme {/*controlling-a-progress-indicator*/}
+### Bir ilerleme göstergesini kontrol etme {/*controlling-a-progress-indicator*/}
 
 Ekranda bir ilerleme göstergesi göstermek için, `<progress>` bileşenini render edin. `0` ve belirlediğiniz `max` değeri arasında bir `value` sayısı girebilirsiniz. Eğer `max` değerini belirtmezseniz, varsayılan değer `1` olarak kabul edilir.
 
