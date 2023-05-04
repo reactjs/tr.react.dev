@@ -297,19 +297,19 @@ function MyButton() {
 }
 ```
 
-Notice how `onClick={handleClick}` has no parentheses at the end! Do not _call_ the event handler function: you only need to *pass it down*. React will call your event handler when the user clicks the button.
+Fark ettiyseniz `onClick={handleClick}` sonunda herhangi bir parantez barındırmıyor! Olay işleyici fonksiyonunuzu _çağırmayın_: onun sadece referansını *geçirmeniz* gerekir. React kullanıcı butona tıkladığında olay işleyicinizi çağıracaktır.
 
-## Updating the screen {/*updating-the-screen*/}
+## Ekranı güncelleme {/*updating-the-screen*/}
 
-Often, you'll want your component to "remember" some information and display it. For example, maybe you want to count the number of times a button is clicked. To do this, add *state* to your component.
+Bazen, bileşeninizin bazı bilgileri "hatırlamasını" ve bunları görüntülemesini istersiniz. Örneğin, belki bir butona kaç kez tıklandığını saymak istersiniz. Bunu yapmak için, bileşeninize *state* ekleyin.
 
-First, import [`useState`](/reference/react/useState) from React:
+Önce, React'ten [`useState`](/reference/react/useState)'i içe aktarın:
 
 ```js
 import { useState } from 'react';
 ```
 
-Now you can declare a *state variable* inside your component:
+Şimdi bileşeniniz içerisinde bir *state değişkeni* oluşturabilirsiniz:
 
 ```js
 function MyButton() {
@@ -317,9 +317,9 @@ function MyButton() {
   // ...
 ```
 
-You’ll get two things from `useState`: the current state (`count`), and the function that lets you update it (`setCount`). You can give them any names, but the convention is to write `[something, setSomething]`.
+`useState`'den iki şey alacaksınız: mevcut durum (`count`) ve onu güncellemenizi sağlayan fonksiyon (`setCount`). Onlara herhangi bir isim verebilirsiniz, ancak genel düzen `[birşey, setBirşey]` şeklinde yazmaktır.
 
-The first time the button is displayed, `count` will be `0` because you passed `0` to `useState()`. When you want to change state, call `setCount()` and pass the new value to it. Clicking this button will increment the counter:
+Buton ilk kez görüntülendiğinde, `count` `0` olacaktır çünkü `useState()`'e `0` geçirdiniz. State'i değiştirmek istediğinizde, `setCount()`'u çağırın ve ona yeni değeri geçirin. Bu butona tıklamak sayacı artıracaktır:
 
 ```js {5}
 function MyButton() {
@@ -337,9 +337,9 @@ function MyButton() {
 }
 ```
 
-React will call your component function again. This time, `count` will be `1`. Then it will be `2`. And so on.
+React bileşen fonksiyonunuzu tekrar çağıracaktır. Bu sefer `count` `1` olacaktır. Ondan sonra `2` olacaktır. Ve böyle devam edecektir.
 
-If you render the same component multiple times, each will get its own state. Click each button separately:
+Eğer aynı bileşeni birden fazla kez işlemek istiyorsanız, her biri kendi state'ini alacaktır. Her bir butona ayrı ayrı tıklayın:
 
 <Sandpack>
 
