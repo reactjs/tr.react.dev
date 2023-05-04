@@ -23,17 +23,17 @@ title: <Fragment> (<>...</>)
 
 ### `<Fragment>` {/*fragment*/}
 
-Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları <Fragment> içine alarak onları bir araya getirebilirsiniz. Fragment içinde elemanları gruplamak, sonuç DOM üzerinde herhangi bir etkiye sahip değildir; sanki elemanlar gruplanmamış gibi aynı kalır. Boş JSX etiketi <></> çoğu durumda <Fragment></Fragment> için kısaltmadır.
+Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine alarak onları bir araya getirebilirsiniz. Fragment içinde elemanları gruplamak, sonuç DOM üzerinde herhangi bir etkiye sahip değildir; sanki elemanlar gruplanmamış gibi aynı kalır. Boş JSX etiketi `<></>` çoğu durumda `<Fragment></Fragment>` için kısaltmadır.
 
 #### Prop'lar {/*props*/}
 
-isteğe bağlı `anahtar`: Açık `<Fragment>` sözdizimiyle tanımlanan Fragment'ler  [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
+**isteğe bağlı** `anahtar`: Açık `<Fragment>` sözdizimiyle tanımlanan Fragment'ler  [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
 
 #### Uyarılar {/*caveats*/}
 
-- Eğer bir Fragment'a key değeri geçirmek istiyorsanız, <>...</> sözdizimini kullanamazsınız. 'React'ten Fragment'ı içe aktarmanız ve <Fragment key={anahtar}>...</Fragment> şeklinde render etmeniz gerekmektedir.
+- Eğer bir Fragment'a key değeri geçirmek istiyorsanız, <>...</> sözdizimini kullanamazsınız. 'React'ten Fragment'ı içe aktarmanız ve `<Fragment key={anahtar}>...</Fragment>` şeklinde render etmeniz gerekmektedir.
 
-- React, <><AltEleman /></>'dan [<AltEleman />]'a veya geriye dönerken, ya da <><AltEleman /></>'dan <AltEleman />'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, <><><AltEleman /></></>'dan <AltEleman />'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
+- React, `<><AltEleman /></>`'dan `<AltEleman />`'a veya geriye dönerken, ya da `<><AltEleman /></>`'dan `<AltEleman />`'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, `<><><AltEleman /></></>`'dan `<AltEleman />`'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
 
 
 
@@ -178,7 +178,7 @@ function Blog() {
 }
 ```
 
-DOM'u inceleyerek Fragment alteleman etrafında herhangi bir sarmalayıcı öğe olmadığını doğrulayabilirsiniz:
+DOM'u, Fragment alt elemanlarının etrafında sarmalayıcı öğe olmadığını doğrulamak için inceleyebilirsiniz:
 
 <Sandpack>
 
