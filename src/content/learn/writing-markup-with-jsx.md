@@ -11,14 +11,14 @@ title: JSX ile İşaretleme (Markup) Yazma
 <YouWillLearn>
 
 * React neden biçimlendirmeyi, render ile birleştirir?
-* JSX' in HTML' den farkı nedir?
+* JSX'in HTML'den farkı nedir?
 * JSX ile veri nasıl gösterilir?
 
 </YouWillLearn>
 
-## JSX: Biçimlendirmeyi JavaScript' e dönüştürme {/*jsx-putting-markup-into-javascript*/}
+## JSX: Biçimlendirmeyi JavaScript'e dönüştürme {/*jsx-putting-markup-into-javascript*/}
 
-Web; HTML, CSS ve JavaScript üzerine inşa edilmiştir. Uzun yıllar boyunca web geliştiricileri, içeriği HTML' de, tasarımı CSS' te ve mantığı JavaScript' te -genellikle ayrı dosyalarda- tuttular! İçerik, HTML içinde tanımlanırken sayfanın mantığı, JavaScript' te ayrı olarak saklanıyordu:
+Web; HTML, CSS ve JavaScript üzerine inşa edilmiştir. Uzun yıllar boyunca web geliştiricileri, içeriği HTML'de, tasarımı CSS'te ve mantığı JavaScript'te -genellikle ayrı dosyalarda- tuttular! İçerik, HTML içinde tanımlanırken sayfanın mantığı, JavaScript'te ayrı olarak saklanıyordu:
 
 <DiagramGroup>
 
@@ -36,17 +36,17 @@ JavaScript
 
 </DiagramGroup>
 
-Ancak Web daha etkileşimli hale geldikçe mantık, içeriğin önüne geçti. HTML' den JavaScript sorumluydu! İşte bu nedenle **React' ta render mantığı ve biçimlendirme aynı yerde (bileşenlerde) birlikte bulunur.**
+Ancak Web daha etkileşimli hale geldikçe mantık, içeriğin önüne geçti. HTML'den JavaScript sorumluydu! İşte bu nedenle **React'te render mantığı ve biçimlendirme aynı yerde (bileşenlerde) birlikte bulunur.**
 
 <DiagramGroup>
 
-<Diagram name="writing_jsx_sidebar" height={330} width={325} alt="Önceki HTML ve JavaScript örneklerinin birlikte kullanıldığı React bileşeni. isLoggedIn fonksiyonunu çağıran sarı ile vurgulanan bölüm Sidebar fonksiyonudur . Mor renkle vurgulanan işlevin içinde, daha önceki p etiketi ve bir sonraki şemada gösterilen bileşene referans veren bir Form etiketi bulunur.">
+<Diagram name="writing_jsx_sidebar" height={330} width={325} alt="Önceki HTML ve JavaScript örneklerinin birlikte kullanıldığı React bileşeni. isLoggedIn fonksiyonunu çağıran sarı ile vurgulanan bölüm Sidebar fonksiyonudur. Mor renkle vurgulanan işlevin içinde, daha önceki p etiketi ve bir sonraki şemada gösterilen bileşene referans veren bir Form etiketi bulunur.">
 
 `Sidebar.js` React bileşeni
 
 </Diagram>
 
-<Diagram name="writing_jsx_form" height={330} width={325} alt="Önceki HTML ve JavaScript örneklerinin birlikte kullanıldığı React bileşeni. Sarı renkle vurgulanmış onClick ve onSubmit yöneticilerini içeren bölüm, Form fonksiyonudur. Bu fonksiyondan sonra, mor renkle vurgulanmış HTML gelir. HTML, her biri onClick prop' una sahip girdilerden oluşan bir form öğesini içerir.">
+<Diagram name="writing_jsx_form" height={330} width={325} alt="Önceki HTML ve JavaScript örneklerinin birlikte kullanıldığı React bileşeni. Sarı renkle vurgulanmış onClick ve onSubmit yöneticilerini içeren bölüm, Form fonksiyonudur. Bu fonksiyondan sonra, mor renkle vurgulanmış HTML gelir. HTML, her biri onClick prop'una sahip girdilerden oluşan bir form öğesini içerir.">
 
 `Form.js` React bileşeni
 
@@ -56,7 +56,7 @@ Ancak Web daha etkileşimli hale geldikçe mantık, içeriğin önüne geçti. H
 
 Bir butonun render mantığını ve biçimlendirmesini bir arada tutmak, her değişiklikte birbirleriyle senkronize kalmalarını sağlar. Aksine, butonun biçimlendirmesi ve kenar çubuğunun biçimlendirmesi gibi birbiriyle ilgisi olmayan ayrıntılar, birbirinden izole edilir. Böylece herhangi birinin tek başına değiştirilmesi daha güvenli hale gelir.
 
-Her React bileşeni; React' ın, tarayıcıda render ettiği bazı işaretlemeler içerebilen bir JavaScript fonksiyonudur. React bileşenleri, bu işaretlemeyi temsil etmek için JSX adı verilen bir söz dizimi uzantısı kullanır. JSX, HTML' e çok benzer ancak biraz daha katı kurallara shiptir ve dinamik verileri gösterebilir. Bunu anlamanın en iyi yolu, bazı HTML biçimlendirmelerini JSX biçimlendirmesine dönüştürmektir.
+Her React bileşeni; React'ın, tarayıcıda render ettiği bazı işaretlemeler içerebilen bir JavaScript fonksiyonudur. React bileşenleri, bu işaretlemeyi temsil etmek için JSX adı verilen bir söz dizimi uzantısı kullanır. JSX, HTML'e çok benzer ancak biraz daha katı kurallara sahiptir ve dinamik verileri gösterebilir. Bu konuyu anlamanın en etkili yolu, birkaç HTML'i JSX'e dönüştürerek uygulamalı olarak pratik yapmaktır.
 
 <Note>
 
@@ -64,7 +64,7 @@ JSX ve React, iki ayrı kavramdır. Bunlar çoğunlukla birlikte kullanılır. A
 
 </Note>
 
-## HTML' i JSX' e Dönüştürme {/*converting-html-to-jsx*/}
+## HTML'i JSX'e Dönüştürme {/*converting-html-to-jsx*/}
 
 Elinizde (tamamen geçerli) bir HTML olduğunu varsayalım:
 
@@ -122,11 +122,11 @@ img { height: 90px }
 
 </Sandpack>
 
-Bunun nedeni JSX' in HTML’ den daha katı ve fazla kurala sahip olmasıdır! Yukarıdaki hata mesajları, biçimlendirmeyi düzeltmeniz için size yol gösterecektir. Hatayı çözmek için aşağıdaki kılavuzu da takip edebilirsiniz.
+Bunun nedeni JSX'in HTML'den daha katı ve fazla kurala sahip olmasıdır! Yukarıdaki hata mesajları, biçimlendirmeyi düzeltmeniz için size yol gösterecektir. Hatayı çözmek için aşağıdaki kılavuzu da takip edebilirsiniz.
 
 <Note>
 
-Çoğu zaman, React' ın ekrandaki hata mesajları, sorunun nerede olduğunu bulmanıza yardımcı olacaktır. Takıldığınız yerde onları okuyun!
+Çoğu zaman, React'ın ekrandaki hata mesajları, sorunun nerede olduğunu bulmanıza yardımcı olacaktır. Takıldığınız yerde onları okuyun!
 
 </Note>
 
@@ -169,7 +169,7 @@ Eğer fazladan bir `<div>` eklemek istemezseniz `<>` and `</>` kullanabilirsiniz
 </>
 ```
 
-Bu boş etiket, *[Fragment](/reference/react/Fragment)* olarak adlandırılır.  Fragment' lar, tarayıcı HTML ağacında, herhangi bir iz bırakmadan, öğeleri gruplandırmanıza olanak tanır.
+Bu boş etiket, *[Fragment](/reference/react/Fragment)* olarak adlandırılır. Fragment'lar, tarayıcı HTML ağacında, herhangi bir iz bırakmadan, öğeleri gruplandırmanıza olanak tanır.
 
 <DeepDive>
 
@@ -181,9 +181,9 @@ JSX, HTML gibi görünür ancak arka planda JavaScript nesnelerine dönüştür�
 
 ### 2. Tüm etiketleri kapatın {/*2-close-all-the-tags*/}
 
-JSX, etiketlerin açıkça kapatılmasını gerektirir: `<img>` gibi kendiliğinden kapanan etiketler, `<img />` bu şekilde kapatılmalıdır.`<li>oranges` gibi etiketler`<li>oranges</li>` şeklinde sarmalanmalıdır.
+JSX, etiketlerin bariz bir şekilde kapatılmasını gerektirir: `<img>` gibi kendiliğinden kapanan etiketler, `<img />` bu şekilde kapatılmalıdır.`<li>oranges` gibi etiketler`<li>oranges</li>` şeklinde sarmalanmalıdır.
 
-Hedy Lamarr' ın fotoğraf ve liste öğeleri bu şekilde kapatılmıştır:
+Hedy Lamarr'ın fotoğraf ve liste öğeleri bu şekilde kapatılmıştır:
 
 ```js {2-6,8-10}
 <>
@@ -202,9 +202,9 @@ Hedy Lamarr' ın fotoğraf ve liste öğeleri bu şekilde kapatılmıştır:
 
 ### 3. camelCase <s>her şey</s> çoğu şey! {/*3-camelcase-salls-most-of-the-things*/}
 
-JSX, JavaScript' e dönüşür ve JSX' te yazılan özellikler JavaScript nesnelerinin anahtarları haline gelir. Kendi bileşenlerinizde, genellikle bu özellikleri, değişken olarak okumak isteyeceksiniz. Ancak JavaScript' in değişken adları konusunda sınırlamaları vardır. Örneğin, adları tire içeremez veya `class` gibi rezerve edilmiş sözcükler olamaz.
+JSX, JavaScript'e dönüşür ve JSX'te yazılan özellikler JavaScript nesnelerinin anahtarları haline gelir. Kendi bileşenlerinizde, genellikle bu özellikleri, değişken olarak okumak isteyeceksiniz. Ancak JavaScript'in değişken adları konusunda sınırlamaları vardır. Örneğin, adları tire içeremez veya `class` gibi rezerve edilmiş sözcükler olamaz.
 
-Bu nedenle, React' ta, birçok HTML ve SVG özellikleri camelCase ile yazılır. Örneğin, `stroke-width` yerine `strokeWidth`. `class` rezerve edilmiş sözcük olduğu için React' ta, bunun yerine [ilgili DOM özelliğinden](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) sonra `className` yazarsınız:
+Bu nedenle, React'te, birçok HTML ve SVG özellikleri camelCase ile yazılır. Örneğin, `stroke-width` yerine `strokeWidth`. `class` rezerve edilmiş sözcük olduğu için React'te, bunun yerine [ilgili DOM özelliğinden](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) sonra `className` yazarsınız:
 
 ```js {4}
 <img
@@ -218,13 +218,13 @@ Bu nedenle, React' ta, birçok HTML ve SVG özellikleri camelCase ile yazılır.
 
 <Pitfall>
 
-Tarihi nedenlerden dolayı, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) ve [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) özellikleri HTML' de olduğu gibi tire ile yazılır.
+Tarihi nedenlerden dolayı, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) ve [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) özellikleri HTML'de olduğu gibi tire ile yazılır.
 
 </Pitfall>
 
 ### Uzman Tavsiyesi: JSX Dönüştürücü Kullanın {/*pro-tip-use-a-jsx-converter*/}
 
-Mevcut biçimlendirmede, tüm bu özellikleri dönüştürmek can sıkıcı olabilir! Mevcut HTML ve SVG' nizi JSX' e çevirmek için bir [dönüştürücü](https://transform.tools/html-to-jsx) kullanmanızı öneririz. Dönüştürücüler pratikte çok kullanışlıdır. Yine de kendi başınıza rahatça JSX yazabilmeniz için neler olup bittiğini anlamakta fayda vardır.
+Mevcut biçimlendirmede, tüm bu özellikleri dönüştürmek can sıkıcı olabilir! Mevcut HTML ve SVG'nizi JSX'e çevirmek için bir [dönüştürücü](https://transform.tools/html-to-jsx) kullanmanızı öneririz. Dönüştürücüler pratikte çok kullanışlıdır. Yine de kendi başınıza rahatça JSX yazabilmeniz için neler olup bittiğini anlamakta fayda vardır.
 
 İşte final sonucunuz:
 
@@ -258,10 +258,10 @@ img { height: 90px }
 
 <Recap>
 
-Artık JSX' in neden var olduğunu ve bileşenlerde nasıl kullanılacağını biliyorsunuz:
+Artık JSX'in neden var olduğunu ve bileşenlerde nasıl kullanılacağını biliyorsunuz:
 
 * React bileşenleri, birbirleriyle ilişkili oldukları için render mantığını biçimlendirme ile birlikte gruplandırır.
-* JSX, birkaç farkla HTML' e benzer. Eğer ihtiyacınız olursa [dönüştürücü](https://transform.tools/html-to-jsx) kullanabilirsiniz.
+* JSX, birkaç farkla HTML'e benzer. Eğer ihtiyacınız olursa [dönüştürücü](https://transform.tools/html-to-jsx) kullanabilirsiniz.
 * Hata mesajları, genellikle biçimlendirmenizi düzeltmeniz için size doğru yolu gösterecektir.
 
 </Recap>
@@ -270,7 +270,7 @@ Artık JSX' in neden var olduğunu ve bileşenlerde nasıl kullanılacağını b
 
 <Challenges>
 
-#### Bazı HTML' leri JSX' e dönüştürün {/*convert-some-html-to-jsx*/}
+#### Aşağıdaki HTML'i JSX'e dönüştürün {/*convert-some-html-to-jsx*/}
 
 Bu HTML bir bileşene eklenmiş ancak geçerli bir JSX değildir. Bunu düzeltiniz:
 
