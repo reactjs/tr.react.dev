@@ -29,7 +29,7 @@ React bileşenleri, markup döndüren JavaScript fonksiyonlarıdır:
 ```js
 function MyButton() {
   return (
-    <button>I'm a button</button>
+    <button>Ben bir butonum</button>
   );
 }
 ```
@@ -40,7 +40,7 @@ function MyButton() {
 export default function MyApp() {
   return (
     <div>
-      <h1>Welcome to my app</h1>
+      <h1>Uygulamama hoş geldiniz</h1>
       <MyButton />
     </div>
   );
@@ -57,7 +57,7 @@ Sonuca bir göz atın:
 function MyButton() {
   return (
     <button>
-      I'm a button
+      Ben bir butonum
     </button>
   );
 }
@@ -65,7 +65,7 @@ function MyButton() {
 export default function MyApp() {
   return (
     <div>
-      <h1>Welcome to my app</h1>
+      <h1>Uygulamama hoş geldiniz</h1>
       <MyButton />
     </div>
   );
@@ -86,8 +86,8 @@ JSX, HTML'den daha katıdır. `<br />` gibi etiketleri kapatmanız gerekir. Bile
 function AboutPage() {
   return (
     <>
-      <h1>About</h1>
-      <p>Hello there.<br />How do you do?</p>
+      <h1>Hakkında</h1>
+      <p>Merhaba.<br />Nasılsınız?</p>
     </>
   );
 }
@@ -224,13 +224,13 @@ Tüm bu yaklaşımlar ayrıca öznitelikler koşullu olarak belirtilmek istendi�
 
 Bileşenlerden oluşan listeleri işlemek için [`for` döngüsü](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) ve [dizi `map()` fonksiyonu](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) gibi JavaScript özelliklerine ihtiyacınız olacak.
 
-Örneğin, bir ürün (products) diziniz olduğunu varsayalım:
+Örneğin, bir ürünler (products) diziniz olduğunu varsayalım:
 
 ```js
 const products = [
-  { title: 'Cabbage', id: 1 },
-  { title: 'Garlic', id: 2 },
-  { title: 'Apple', id: 3 },
+  { title: 'Lahana', id: 1 },
+  { title: 'Sarımsak', id: 2 },
+  { title: 'Elma', id: 3 },
 ];
 ```
 
@@ -254,9 +254,9 @@ return (
 
 ```js
 const products = [
-  { title: 'Cabbage', isFruit: false, id: 1 },
-  { title: 'Garlic', isFruit: false, id: 2 },
-  { title: 'Apple', isFruit: true, id: 3 },
+  { title: 'Lahana', isFruit: false, id: 1 },
+  { title: 'Sarımsak', isFruit: false, id: 2 },
+  { title: 'Elma', isFruit: true, id: 3 },
 ];
 
 export default function ShoppingList() {
@@ -349,7 +349,7 @@ import { useState } from 'react';
 export default function MyApp() {
   return (
     <div>
-      <h1>Counters that update separately</h1>
+      <h1>Sayaçlar ayrı ayrı güncellenecektir</h1>
       <MyButton />
       <MyButton />
     </div>
@@ -365,7 +365,7 @@ function MyButton() {
 
   return (
     <button onClick={handleClick}>
-      Clicked {count} times
+      {count} kere tıklandı
     </button>
   );
 }
@@ -380,59 +380,59 @@ button {
 
 </Sandpack>
 
-Notice how each button "remembers" its own `count` state and doesn't affect other buttons.
+Fark ettiyseniz her buton kendi `count` state'ini "hatırlıyor" ve diğer butonları etkilemiyor.
 
-## Using Hooks {/*using-hooks*/}
+## Hook'ları kullanma {/*using-hooks*/}
 
-Functions starting with `use` are called *Hooks*. `useState` is a built-in Hook provided by React. You can find other built-in Hooks in the [API reference.](/reference/react) You can also write your own Hooks by combining the existing ones.
+`use` ile başlayan fonksiyonlar *Hook'lar* olarak adlandırılır. `useState` React tarafından sağlanan yerleşik bir Hook'tur. Diğer yerleşik Hook'ları [API referansında](/reference/react) bulabilirsiniz. Ayrıca, mevcut olanları birleştirerek kendi Hook'larınızı da yazabilirsiniz.
 
-Hooks are more restrictive than other functions. You can only call Hooks *at the top* of your components (or other Hooks). If you want to use `useState` in a condition or a loop, extract a new component and put it there.
+Hook'lar diğer fonksiyonlardan daha kısıtlayıcıdır. Hook'ları yalnızca bileşenlerinizin *en üstünde* çağırabilirsiniz (ua da diğer Hook'ların). Eğer bir koşul veya döngü içerisinde `useState` kullanmak istiyorsanız, yeni bir bileşen oluşturup onu oraya yerleştirin.
 
-## Sharing data between components {/*sharing-data-between-components*/}
+## Bileşenler arasında veri paylaşma {/*sharing-data-between-components*/}
 
-In the previous example, each `MyButton` had its own independent `count`, and when each button was clicked, only the `count` for the button clicked changed:
+Bir önceki örnekte, her `MyButton` bileşeni kendi bağımsız `count`'una sahipti ve her butona tıklandığında, yalnızca tıklanan butonun `count`'u değişti:
 
 <DiagramGroup>
 
 <Diagram name="sharing_data_child" height={367} width={407} alt="Diagram showing a tree of three components, one parent labeled MyApp and two children labeled MyButton. Both MyButton components contain a count with value zero.">
 
-Initially, each `MyButton`'s `count` state is `0`
+Başlangıçta, her `MyButton`'un `count` state'i `0`'dır
 
 </Diagram>
 
 <Diagram name="sharing_data_child_clicked" height={367} width={407} alt="The same diagram as the previous, with the count of the first child MyButton component highlighted indicating a click with the count value incremented to one. The second MyButton component still contains value zero." >
 
-The first `MyButton` updates its `count` to `1`
+İlk `MyButton` `count`'unu `1` olarak günceller
 
 </Diagram>
 
 </DiagramGroup>
 
-However, often you'll need components to *share data and always update together*.
+Ancak, bazen bileşenlerin *veri paylaşması ve her zaman birlikte güncellenmesi* gerekecektir.
 
-To make both `MyButton` components display the same `count` and update together, you need to move the state from the individual buttons "upwards" to the closest component containing all of them.
+İki `MyButton` bileşeninin de aynı `count` state'ini göstermesi ve her zaman birlikte güncellenmesi için, state'i tek tek butonlardan "yukarıya" tüm butonları içeren en yakın bileşene taşımanız gerekir.
 
-In this example, it is `MyApp`:
+Bu örnekte, o bileşen `MyApp`'tir:
 
 <DiagramGroup>
 
 <Diagram name="sharing_data_parent" height={385} width={410} alt="Diagram showing a tree of three components, one parent labeled MyApp and two children labeled MyButton. MyApp contains a count value of zero which is passed down to both of the MyButton components, which also show value zero." >
 
-Initially, `MyApp`'s `count` state is `0` and is passed down to both children
+Başlangıçta, `MyApp`'in `count` state'i `0`'dır ve her iki çocuğa da geçirilir
 
 </Diagram>
 
 <Diagram name="sharing_data_parent_clicked" height={385} width={410} alt="The same diagram as the previous, with the count of the parent MyApp component highlighted indicating a click with the value incremented to one. The flow to both of the children MyButton components is also highlighted, and the count value in each child is set to one indicating the value was passed down." >
 
-On click, `MyApp` updates its `count` state to `1` and passes it down to both children
+Tıklandığında, `MyApp` `count` state'ini `1` olarak günceller ve her iki çocuğa da geçirir
 
 </Diagram>
 
 </DiagramGroup>
 
-Now when you click either button, the `count` in `MyApp` will change, which will change both of the counts in `MyButton`. Here's how you can express this in code.
+Şimdi, eğer butonlardan herhangi birine tıklarsanız, `MyApp`'in içerisindeki `count` değişecektir, bu da her iki `MyButton`'ın `count`'unu değiştirecektir. Bunu kod içerisinde nasıl ifade edeceğinize bakalım.
 
-First, *move the state up* from `MyButton` into `MyApp`:
+Öncelikle, `MyButton`'dan `MyApp`'e *state'i yukarıya taşıyın*:
 
 ```js {2-6,18}
 export default function MyApp() {
@@ -444,7 +444,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update separately</h1>
+      <h1>Ayrı ayrı güncellenen sayaçlar</h1>
       <MyButton />
       <MyButton />
     </div>
@@ -452,12 +452,12 @@ export default function MyApp() {
 }
 
 function MyButton() {
-  // ... we're moving code from here ...
+  // ... kodu buradan taşıyoruz ...
 }
 
 ```
 
-Then, *pass the state down* from `MyApp` to each `MyButton`, together with the shared click handler. You can pass information to `MyButton` using the JSX curly braces, just like you previously did with built-in tags like `<img>`:
+Sonrasında, `MyApp`'den her `MyButton`'a doğru tıklama olay işleyicisi ile birlikte *state'i aşağı geçirin*. `MyButton`'a bilgiyi JSX süslü parantezleri kullanarak geçirebilirsiniz, yukarıda `<img>` gibi yerleşik etiketlerle yaptığınız gibi:
 
 ```js {11-12}
 export default function MyApp() {
@@ -469,7 +469,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update together</h1>
+      <h1>Birlikte güncellenen sayaçlar</h1>
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
@@ -477,21 +477,21 @@ export default function MyApp() {
 }
 ```
 
-The information you pass down like this is called _props_. Now the `MyApp` component contains the `count` state and the `handleClick` event handler, and *passes both of them down as props* to each of the buttons.
+Aşağıya geçirdiğiniz bilgiye _prop'lar_ denir. Şimdi `MyApp` bileşeni `count` state'ini ve `handleClick` olay işleyicisini içeriyor ve her ikisini de butonlara *prop'lar olarak geçiriyor*.
 
-Finally, change `MyButton` to *read* the props you have passed from its parent component:
+Son olarak, `MyButton`'ı, bir üst bileşeninden geçirdiğiniz prop'ları *okumak* için değiştirin:
 
 ```js {1,3}
 function MyButton({ count, onClick }) {
   return (
     <button onClick={onClick}>
-      Clicked {count} times
+      {count} kere tıklandı
     </button>
   );
 }
 ```
 
-When you click the button, the `onClick` handler fires. Each button's `onClick` prop was set to the `handleClick` function inside `MyApp`, so the code inside of it runs. That code calls `setCount(count + 1)`, incrementing the `count` state variable. The new `count` value is passed as a prop to each button, so they all show the new value. This is called "lifting state up". By moving state up, you've shared it between components.
+Butona tıkladığınızda, `onClick` olay işleyicisi tetiklenir. Her butonun `onClick` prop'u `MyApp` içerisindeki `handleClick` fonksiyonuna işaret ediyor, yani o fonksiyonun içerisindeki kod yürütülüyor. Bu kod `setCount(count + 1)`'i çağırıyor, bununla `count` state değişkenini artırıyor. Yeni `count` değeri her butona bir prop olarak geçiriliyor, bununla birlikte hepsi yeni değeri gösteriyor. Buna "state'i yukarı taşımak" denir. State'i yukarı taşıyarak, onu bileşenler arasında paylaştınız.
 
 <Sandpack>
 
@@ -507,7 +507,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update together</h1>
+      <h1>Birlikte güncellenen sayaçlar</h1>
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
@@ -517,7 +517,7 @@ export default function MyApp() {
 function MyButton({ count, onClick }) {
   return (
     <button onClick={onClick}>
-      Clicked {count} times
+      {count} kere tıklandı
     </button>
   );
 }
@@ -532,8 +532,8 @@ button {
 
 </Sandpack>
 
-## Next Steps {/*next-steps*/}
+## Sonraki adımlar {/*next-steps*/}
 
-By now, you know the basics of how to write React code!
+Şimdi, React kodu yazmanın temellerini biliyorsunuz!
 
-Check out the [Tutorial](/learn/tutorial-tic-tac-toe) to put them into practice and build your first mini-app with React.
+Öğrendiklerinizi pratiğe dökmek ve React ile ilk mini-uygulamanızı oluşturmak için [Öğretici](/learn/tutorial-tic-tac-toe)'ye göz atın.
