@@ -13,7 +13,7 @@ title: useLayoutEffect
 `useLayoutEffect`, tarayıcı bileşeni ekrana çizmeden önce tetiklenen bir [`useEffect`](/reference/react/useEffect) çeşididir.
 
 ```js
-useLayoutEffect(kurulum, bağımlılıklar?)
+useLayoutEffect(setup, dependencies?)
 ```
 
 </Intro>
@@ -24,7 +24,7 @@ useLayoutEffect(kurulum, bağımlılıklar?)
 
 ## Referans {/*reference*/}
 
-### `useLayoutEffect(kurulum, bağımlılıklar?)` {/*useinsertioneffect*/}
+### `useLayoutEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
 `useLayoutEffect`, tarayıcının ekrana yeniden çizme işleminden (repainting) önce yerleşim (layout) ölçümlerini gerçekleştirmek için çağrılır:
 
