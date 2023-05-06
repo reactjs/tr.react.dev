@@ -4,7 +4,7 @@ title: <Suspense>
 
 <Intro>
 
-`<Suspense>` lets you display a fallback until its children have finished loading.
+`<Suspense>` alt elemanları yüklenene kadar bir alternatif (fallback) göstermenize olanak sağlar.
 
 
 ```js
@@ -19,20 +19,21 @@ title: <Suspense>
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<Suspense>` {/*suspense*/}
 
-#### Props {/*props*/}
-* `children`: The actual UI you intend to render. If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
-* `fallback`: An alternate UI to render in place of the actual UI if it has not finished loading. Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton. Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready. If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
+#### Prop'lar {/*props*/}
+* `children`: Render etmek istediğiniz asıl kullanıcı arayüzüdür. Eğer `children` render edilirken askıya alınırsa, Suspense sınırı `fallback`i render etmeye geçer.
+* `fallback`: Eğer asıl kullanıcı arayüzünün yüklemesi tamamlanmamışsa, onun yerine render edilecek alternatif bir kullanıcı arayüzüdür. Herhangi geçerli React düğümü kabul edilir, ancak pratikte, bir fallback hafif bir yer tutucu görünümdür, örneğin bir yükleniyor göstergesi ya da iskelet. Suspense, `children` askıya alındığında otomatik olarak `fallback`e geçer ve veri hazır olduğunda `children`e geri döner. Eğer `fallback` render edilirken askıya alınırsa, en yakın üst Suspense sınırını etkinleştirir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-- React does not preserve any state for renders that got suspended before they were able to mount for the first time. When the component has loaded, React will retry rendering the suspended tree from scratch.
-- If Suspense was displaying content for the tree, but then it suspended again, the `fallback` will be shown again unless the update causing it was caused by [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
-- If React needs to hide the already visible content because it suspended again, it will clean up [layout Effects](/reference/react/useLayoutEffect) in the content tree. When the content is ready to be shown again, React will fire the layout Effects again. This ensures that Effects measuring the DOM layout don't try to do this while the content is hidden.
+- React ilk kez yüklenemeden önce askıya alınan renderlar için herhangi bir state saklamaz. Bileşen yüklendikten sonra, React askıya alınmış ağacı sıfırdan yeniden render etmeye çalışacaktır.
+- Eğer suspense ağaç için içerik gösteriyorduysa, ama sonrasında tekrar askıya alındıysa, askıya alınmayı tetikleyen güncelleme [`startTransition`](/reference/react/startTransition) veya [`useDeferredValue`](/reference/react/useDeferredValue) tarafından tetiklenmediyse, `fallback` tekrar gösterilecektir.
+- Eğer React halihazırda gösterilen bir içeriği tekrar askıya alındığı için gizlemek zorunda kalırsa, içerik ağacındaki [layout Effect'lerini](/reference/react/useLayoutEffect) temizleyecektir. İçerik tekrar gösterilmeye hazır olduğunda, React layout Effect'leri tekrar tetikleyecektir. Bu, DOM layout'unu ölçen Effect'lerin içerik gizliyken bunu yapmaya çalışmamasını sağlar.
 - React includes under-the-hood optimizations like *Streaming Server Rendering* and *Selective Hydration* that are integrated with Suspense. Read [an architectural overview](https://github.com/reactwg/react-18/discussions/37) and watch [a technical talk](https://www.youtube.com/watch?v=pj5N-Khihgc) to learn more.
+- React *Server Render'ını Stream etme* ve *Selektif Hydrate Etme* gibi Suspense ile entegre olan altta yatan optimizasyonlar içerir. Daha fazla bilgi almak için [mimari bir bakışı](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik bir konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 
 ---
 
