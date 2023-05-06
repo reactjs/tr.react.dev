@@ -281,7 +281,7 @@ Varsayılan olarak, Suspense içindeki tüm ağaç tek bir birim olarak ele alı
 
 Sonrasında, hepsi görüntülenmeye hazır olduğunda, hepsi birlikte tek seferde açığa çıkacaktır.
 
-Aşağıdaki örnekte, hem `Biography` hem `Albums` data fetch etmekte. Ancak, tek bir Suspense sınırı altında gruplandıkları için, bu bileşenler her zaman aynı anda "açığa çıkıyor".
+Aşağıdaki örnekte, hem `Biography` hem `Albums` veri fetch etmekte. Ancak, tek bir Suspense sınırı altında gruplandıkları için, bu bileşenler her zaman aynı anda "açığa çıkıyor".
 
 <Sandpack>
 
@@ -563,7 +563,7 @@ async function getAlbums() {
 
 </Sandpack>
 
-Components that load data don't have to be direct children of the Suspense boundary. For example, you can move `Biography` and `Albums` into a new `Details` component. This doesn't change the behavior. `Biography` and `Albums` share the same closest parent Suspense boundary, so their reveal is coordinated together.
+Veri yükleyen bileşenler Suspense sınırının doğrudan alt elemanı olmak zorunda değildir. Örneğin, `Biography` ve `Albums`'ü yeni bir `Details` bileşenine taşıyabilirsiniz. Bu davranışı değiştirmez. `Biography` ve `Albums` en yakın ebeveyn Suspense sınırını paylaştığı için, açığa çıkışları birlikte koordine edilir.
 
 ```js {2,8-11}
 <Suspense fallback={<Loading />}>
@@ -584,9 +584,9 @@ function Details({ artistId }) {
 
 ---
 
-### Revealing nested content as it loads {/*revealing-nested-content-as-it-loads*/}
+### İç içe içeriği yüklendikçe açığa çıkarma {/*revealing-nested-content-as-it-loads*/}
 
-When a component suspends, the closest parent Suspense component shows the fallback. This lets you nest multiple Suspense components to create a loading sequence. Each Suspense boundary's fallback will be filled in as the next level of content becomes available. For example, you can give the album list its own fallback:
+Bir bileşen askıya alındığında, en yakın üst Suspense sınırı fallback'i gösterir. Bu, bir yükleme sekansı oluşturmak için birden fazla Suspense sınırını iç içe geçirebilmenizi sağlar. Her Suspense sınırının fallback'i, bir sonraki içerik seviyesi kullanılabilir hale geldikçe doldurulur. Örneğin, albüm listesine kendi fallback'ini verebilirsiniz:
 
 ```js {3,7}
 <Suspense fallback={<BigSpinner />}>
@@ -599,14 +599,14 @@ When a component suspends, the closest parent Suspense component shows the fallb
 </Suspense>
 ```
 
-With this change, displaying the `Biography` doesn't need to "wait" for the `Albums` to load.
+Bu değişiklikle birlikte, `Biography`'i göstermek `Albums`'ün yüklenmesini "beklemek" zorunda değildir.
 
-The sequence will be:
+Sekans şu şekilde olacaktır:
 
-1. If `Biography` hasn't loaded yet, `BigSpinner` is shown in place of the entire content area.
-1. Once `Biography` finishes loading, `BigSpinner` is replaced by the content.
-1. If `Albums` hasn't loaded yet, `AlbumsGlimmer` is shown in place of `Albums` and its parent `Panel`.
-1. Finally, once `Albums` finishes loading, it replaces `AlbumsGlimmer`.
+1. Eğer `Biography` henüz yüklenmediyse, `BigSpinner` tüm içerik alanının yerine gösterilir.
+1. `Biography` yüklenmeyi tamamladığında, `BigSpinner` içerik ile değiştirilir.
+1. Eğer `Albums` henüz yüklenmediyse, `AlbumsGlimmer` `Albums` ve üst elemanı `Panel`'in yerine gösterilir.
+1. Son olarak, `Albums` yüklenmeyi tamamladığında, `AlbumsGlimmer`'ın yerine geçer.
 
 <Sandpack>
 
@@ -643,7 +643,7 @@ export default function App() {
   } else {
     return (
       <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
+        The Beatles sanatçı sayfasını aç
       </button>
     );
   }
@@ -673,7 +673,7 @@ export default function ArtistPage({ artist }) {
 }
 
 function BigSpinner() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 
 function AlbumsGlimmer() {
@@ -819,10 +819,10 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu,`;
 }
 
 async function getAlbums() {
@@ -917,9 +917,9 @@ async function getAlbums() {
 
 </Sandpack>
 
-Suspense boundaries let you coordinate which parts of your UI should always "pop in" together at the same time, and which parts should progressively reveal more content in a sequence of loading states. You can add, move, or delete Suspense boundaries in any place in the tree without affecting the rest of your app's behavior.
+Suspense sınırları kullanıcı arayüzünüzün hangi parçalarının her zaman birlikte "açığa çıkması" gerektiğini ve hangi parçaların yükleme durumları sekansı içerisinde progresif olarak daha fazla içerik açığa çıkarması gerektiğini koordine etmenizi sağlar. Suspense sınırlarını uygulamanızın geri kalanını etkilemeden ağaç içerisinde herhangi bir yere ekleyebilir, taşıyabilir ya da silebilirsiniz.
 
-Don't put a Suspense boundary around every component. Suspense boundaries should not be more granular than the loading sequence that you want the user to experience. If you work with a designer, ask them where the loading states should be placed--it's likely that they've already included them in their design wireframes.
+Her bileşenin etrafına bir Suspense sınırı koymayın. Suspense sınırları kullanıcıların deneyimlemesini istediğiniz yükleme sekansından daha tanecikli olmamalıdır. Eğer bir tasarımcı ile çalışıyorsanız, yükleme durumlarının nereye konulması gerektiğini sorun--muhtemelen zaten tasarım wireframe'lerine dahil etmişlerdir.
 
 ---
 
