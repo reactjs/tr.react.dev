@@ -24,8 +24,8 @@ title: <Suspense>
 ### `<Suspense>` {/*suspense*/}
 
 #### Prop'lar {/*props*/}
-* `children`: Render etmek istediğiniz asıl kullanıcı arayüzüdür. Eğer `children` render edilirken askıya alınırsa, Suspense sınırı `fallback`i render etmeye geçer.
-* `fallback`: Eğer asıl kullanıcı arayüzünün yüklemesi tamamlanmamışsa, onun yerine render edilecek alternatif bir kullanıcı arayüzüdür. Herhangi geçerli React düğümü kabul edilir, ancak pratikte, bir fallback hafif bir yer tutucu görünümdür, örneğin bir yükleniyor göstergesi ya da iskelet. Suspense, `children` askıya alındığında otomatik olarak `fallback`e geçer ve veri hazır olduğunda `children`e geri döner. Eğer `fallback` render edilirken askıya alınırsa, en yakın üst Suspense sınırını etkinleştirir.
+* `children`: Render etmek istediğiniz asıl kullanıcı arayüzüdür. Eğer `children` render edilirken askıya alınırsa, Suspense sınırı `fallback`'i render etmeye geçer.
+* `fallback`: Eğer asıl kullanıcı arayüzünün yüklemesi tamamlanmamışsa, onun yerine render edilecek alternatif bir kullanıcı arayüzüdür. Herhangi geçerli React düğümü kabul edilir, ancak pratikte, bir fallback hafif bir yer tutucu görünümdür, örneğin bir yükleniyor göstergesi ya da iskelet. Suspense, `children` askıya alındığında otomatik olarak `fallback`'e geçer ve veri hazır olduğunda `children`'a geri döner. Eğer `fallback` render edilirken askıya alınırsa, en yakın üst Suspense sınırını etkinleştirir.
 
 #### Uyarılar {/*caveats*/}
 
@@ -37,11 +37,11 @@ title: <Suspense>
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Displaying a fallback while content is loading {/*displaying-a-fallback-while-content-is-loading*/}
+### İçerik yüklenirken bir fallback gösterme {/*displaying-a-fallback-while-content-is-loading*/}
 
-You can wrap any part of your application with a Suspense boundary:
+Uygulamanızın herhangi bir parçasını bir Suspense sınırıyla sarabilirsiniz:
 
 ```js [[1, 1, "<Loading />"], [2, 2, "<Albums />"]]
 <Suspense fallback={<Loading />}>
@@ -49,9 +49,9 @@ You can wrap any part of your application with a Suspense boundary:
 </Suspense>
 ```
 
-React will display your <CodeStep step={1}>loading fallback</CodeStep> until all the code and data needed by <CodeStep step={2}>the children</CodeStep> has been loaded.
+React <CodeStep step={1}>yükleniyor fallback'inizi</CodeStep> <CodeStep step={2}>alt elemanların</CodeStep> ihtiyaç duyduğu tüm kod ve veriler yüklenene kadar gösterecektir.
 
-In the example below, the `Albums` component *suspends* while fetching the list of albums. Until it's ready to render, React switches the closest Suspense boundary above to show the fallback--your `Loading` component. Then, when the data loads, React hides the `Loading` fallback and renders the `Albums` component with data.
+Aşağıdaki örnekte, `Albums` bileşeni albümler listesini fetch ederken *askıya alınır*. Render etmeye hazır olana kadar, React fallback'i --sizin `Loading` bileşeniniz-- göstermek için en yakın Suspense sınırını etkinleştirir. Sonra, veri yüklendiğinde, React `Loading` fallback'ini gizler ve `Albums` bileşenini verilerle render eder.
 
 <Sandpack>
 
@@ -88,7 +88,7 @@ export default function App() {
   } else {
     return (
       <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
+        The Beatles sanatçı sayfasını aç
       </button>
     );
   }
@@ -111,7 +111,7 @@ export default function ArtistPage({ artist }) {
 }
 
 function Loading() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
