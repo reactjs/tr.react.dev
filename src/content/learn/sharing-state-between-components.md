@@ -1,31 +1,31 @@
 ---
-title: Sharing State Between Components
+title: Bileşenler Arasında Durum Paylaşımı
 ---
 
 <Intro>
 
-Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as *lifting state up,* and it's one of the most common things you will do writing React code.
+Bazen, iki bileşenin durumunun her zaman birlikte değişmesini istersiniz. Bunu yapmak için, her iki bileşenden durumu kaldırın, en yakın ortak üst elemana taşıyın ve ardından onlara proplar aracılığıyla iletin. Bu, *state'i (durumu) yukarı kaldırma* olarak bilinir ve React kodu yazarken yapacağınız en yaygın şeylerden biridir.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to share state between components by lifting it up
-- What are controlled and uncontrolled components
+- Yukarı kaldırarak bileşenler arasında state (durum) paylaşımı nasıl yapılır?
+- Kontrollü ve kontrolsüz bileşenler nedir?
 
 </YouWillLearn>
 
-## Lifting state up by example {/*lifting-state-up-by-example*/}
+## Örnek ile state'in yukarı kaldırılması {/*lifting-state-up-by-example*/}
 
-In this example, a parent `Accordion` component renders two separate `Panel`s:
+Bu örnekte, bir üst `Accordion` bileşeni iki ayrı `Panel` bileşenini render eder:
 
 * `Accordion`
   - `Panel`
   - `Panel`
 
-Each `Panel` component has a boolean `isActive` state that determines whether its content is visible.
+Her `Panel` bileşeninin içeriğinin görünürlüğünü belirleyen bir boolean `isActive` durumu vardır.
 
-Press the Show button for both panels:
+Her iki panel için de Göster düğmesine basın:
 
 <Sandpack>
 
@@ -41,7 +41,7 @@ function Panel({ title, children }) {
         <p>{children}</p>
       ) : (
         <button onClick={() => setIsActive(true)}>
-          Show
+          Göster
         </button>
       )}
     </section>
@@ -51,12 +51,12 @@ function Panel({ title, children }) {
 export default function Accordion() {
   return (
     <>
-      <h2>Almaty, Kazakhstan</h2>
-      <Panel title="About">
-        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      <h2>Ankara, Türkiye</h2>
+      <Panel title="Hakkında">
+        Ankara, Türkiye'nin başkenti ve İstanbul'dan sonra en kalabalık ikinci ilidir.
       </Panel>
-      <Panel title="Etymology">
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      <Panel title="Etimoloji">
+        Belgelere dayanmayan ve günümüze kadar gelen söylentilere göre tarihte bahsedilen ilk adı Galatlar tarafından verilen ve Yunanca "çapa" anlamına gelen <i lang="el">Ankyra</i>'dır. Bu isim zamanla değişerek Ancyre, Engüriye, Engürü, Angara, Angora ve nihayet Ankara olmuştur.
       </Panel>
     </>
   );
@@ -73,29 +73,29 @@ h3, p { margin: 5px 0px; }
 
 </Sandpack>
 
-Notice how pressing one panel's button does not affect the other panel--they are independent.
+Dikkat edin, bir panelin düğmesine basmak diğer paneli etkilemez. Bağımsızdırlar.
 
 <DiagramGroup>
 
-<Diagram name="sharing_state_child" height={367} width={477} alt="Diagram showing a tree of three components, one parent labeled Accordion and two children labeled Panel. Both Panel components contain isActive with value false.">
+<Diagram name="sharing_state_child" height={367} width={477} alt="Üç bileşenin ağacını gösteren bir diyagram, biri Accordion olarak adlandırılan üst eleman ve iki çocuk bileşeni Panel olarak etiketlenmiştir. Her iki Panel bileşeni de false değerine sahip isActive içerir.">
 
-Initially, each `Panel`'s `isActive` state is `false`, so they both appear collapsed
+Başlangıçta, her `Panel`'in `isActive` durumu `false` olduğundan, ikisi de kapalı görünür.
 
 </Diagram>
 
-<Diagram name="sharing_state_child_clicked" height={367} width={480} alt="The same diagram as the previous, with the isActive of the first child Panel component highlighted indicating a click with the isActive value set to true. The second Panel component still contains value false." >
+<Diagram name="sharing_state_child_clicked" height={367} width={480} alt="Öncekiyle aynı diyagram, ancak ilk çocuk Panel bileşeninin isActive değeri true olarak ayarlanmış bir tıklama ile vurgulanıyor. İkinci Panel bileşeni hala false değerini içeriyor." >
 
-Clicking either `Panel`'s button will only update that `Panel`'s `isActive` state alone
+Herhangi bir `Panel`'in düğmesine tıklamak, yalnızca o `Panel`'in `isActive` durumunu günceller.
 
 </Diagram>
 
 </DiagramGroup>
 
-**But now let's say you want to change it so that only one panel is expanded at any given time.** With that design, expanding the second panel should collapse the first one. How would you do that?
+**Ancak şimdi sadece bir panelin herhangi bir anda genişletilmesini istediğinizi varsayalım.** Bu tasarımla, ikinci paneli genişletmek, birincisini daraltmalıdır. Bunu nasıl yapardın?
 
-To coordinate these two panels, you need to "lift their state up" to a parent component in three steps:
+Bu iki paneli koordine etmek için, üç adımda "state'in yukarı kaldırılması" gerekiyor:
 
-1. **Remove** state from the child components.
+1. Alt elemandan state'i **kaldırın.**
 2. **Pass** hardcoded data from the common parent.
 3. **Add** state to the common parent and pass it down together with the event handlers.
 
