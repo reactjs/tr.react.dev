@@ -4,7 +4,7 @@ title: memo
 
 <Intro>
 
-`memo`, bileşenin prop'ları değişmediğinde yeniden render'lamayı atlamanıza izin verir.
+`memo`, bileşenin prop'ları değişmediğinde yeniden render edilmesini önlemenize izin verir.
 
 ```
 const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
@@ -20,7 +20,7 @@ const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
 
 ### `memo(Component, arePropsEqual?)` {/*memo*/}
 
-Bir bileşenin *önbelleğe alınmış (memoized)* versiyonunu edinmek için ilgili bileşeni `memo`'ya sarın. Bileşeninizin önbelleğe alınmış bu versiyon, üst bileşen render olsa bile prop'ları değişmediği sürece genellikle yeniden render edilmez. Fakat React hala render edebilir: önbelleğe alma (memoization) render'ı engelleme garantisi değil, performans optimizasyonudur.
+Bir bileşenin *önbelleğe alınmış (memoized)* versiyonunu edinmek için ilgili bileşeni `memo`'ya sarmalayın. Bileşeninizin önbelleğe alınmış olan bu versiyon, üst bileşen render olsa dahi prop'ları değişmediği sürece genellikle yeniden render edilmez. Genellikle demenin sebebi React'ın yine de render edebilmesidir: önbelleğe alma (memoization) render'ı engellemenin garantisi değil, performans optimizasyonudur.
 
 ```js
 import { memo } from 'react';
@@ -34,14 +34,13 @@ const SomeComponent = memo(function SomeComponent(props) {
 
 #### Parametreler {/*parameters*/}
 
-* `Component`: Önbelleğe almak istediğiniz bileşendir. `memo` bileşeni değiştirmez, önbelleğe alınmış yeni bileşen döndürür. Fonksiyon ve [`forwardRef`](/reference/react/forwardRef) dahil olmak üzere geçerli bir React bileşeni kabul eder.
+* `Component`: Önbelleğe almak istediğiniz bileşendir. `memo` bileşenin kendisini değiştirmez, önbelleğe alınmış yeni bir bileşen döndürür. Fonksiyon ve [`forwardRef`](/reference/react/forwardRef) dahil olmak üzere geçerli bir React bileşenini kabul eder.
 
-* **isteğe bağlı** `arePropsEqual`: İki argüman kabul eden bir fonksiyondur: bileşenin eski ve yeni prop'ları. Eski ve yeni değerler aynıysa, bileşen yeni prop'lar ile eski prop'lardakiyle aynı çıktıyı üretecekse, `true` döndürmelidir. Aksi takdirde `false` döndürmelidir. Çoğu zaman bu fonksiyonu belirtmezsiniz. React, prop'ları varsayılan olarak [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ile karşılaştırır.
+* **isteğe bağlı** `arePropsEqual`: Bileşenin eski ve yeni prop'ları olmak üzere iki argüman kabul eden ve değişiklik olup olmadığını kontrol eden fonksiyondur. Eski ve yeni değerler aynıysa, bileşen yeni prop'lar ile eski prop'lardakiyle aynı çıktıyı üretecekse, `true` döndürmelidir. Aksi takdirde `false` döndürmelidir. Çoğu zaman bu fonksiyonu belirtmezsiniz. Varsayılan olarak React, karşılaştırırken [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanır.
 
 #### Dönüş değerleri {/*returns*/}
 
-`memo` returns a new React component. It behaves the same as the component provided to `memo` except that React will not always re-render it when its parent is being re-rendered unless its props have changed.
-`memo` yeni bir React bileşeni döndürür. `memo`'ya sağlanan bileşenle aynı davranır ancak istisna olarak üst bileşen render edildiğinde prop'ları değişmemişse yeniden render edilmez.
+`memo`, yeni bir React bileşeni döndürür. Bu bileşen `memo`'ya verilen bileşenle aynı davranır ancak üst bileşen render edildiğinde kendi prop'ları değişmemişse yeniden render edilmez.
 
 ---
 
@@ -49,7 +48,7 @@ const SomeComponent = memo(function SomeComponent(props) {
 
 ### Prop'lar değişmediğinde yeniden render'ı önlemek {/*skipping-re-rendering-when-props-are-unchanged*/}
 
-React, normalde üst bileşen yeniden render edildiğinde altındaki bileşenleri de render eder. `memo` ile birlikte yeni prop'lar eskisiyle aynı olduğu sürece render edilmeyecek bileşen oluşturabilirsiniz. Bu tarz bileşenler, *önbelleğe alınmış* olarak nitelendirilir.
+React, normalde üst bileşen yeniden render edildiğinde altındaki bileşenleri de render eder. `memo` ile birlikte yeni prop'lar eskisiyle aynı olduğu sürece render edilmeyecek bileşenler oluşturabilirsiniz. Bu bileşenler, *önbelleğe alınmış* olarak nitelendirilir.
 
 Bir bileşeni önbelleğe almak için, `memo`'ya sarmalayın ve döndürdüğü değeri orjinal bileşeninizin yerine kullanın:
 
@@ -61,9 +60,9 @@ const Greeting = memo(function Greeting({ name }) {
 export default Greeting;
 ```
 
-React bileşeni her zaman [pure render mantığına](/learn/keeping-components-pure) sahip olmalıdır. Yani prop'ları, state'i ve context'i değişmediği sürece aynı çıktıyı vermesi beklenir. `memo` kullanarak React'a bu gerekliliğe uymasını söylersiniz. Prop'ları değişmediği takdirde React'ın yeniden render etmesine gerek yoktur. Bileşenin state'i ya da context'i değişirse `memo` ile sarılmış olsa bile yeniden render olur.
+React bileşeni her zaman [saf (pure) render mantığına](/learn/keeping-components-pure) sahip olmalıdır. Yani prop'u, state'i ve context'i değişmediği sürece aynı çıktıyı vermesi beklenir. `memo` kullanarak React'a bu gerekliliğe uymasını söylersiniz. Prop'ları değişmediği takdirde React'ın render tetiklemesine gerek yoktur. Bileşenin state'i ya da context'i değişirse `memo` ile sarılmış olsa bile yeniden render olur.
 
-Bu örnekte, `Greeting` bileşeni `name` değiştiğinde yeniden render olduğuna (çünkü prop'larından biri), ancak `address` değiştiğinde olmadığına dikkat edin (çünkü `Greeting`'in prop'u değil):
+Bu örnekte, `Greeting` bileşenin `name` değiştiğinde yeniden render olduğuna (çünkü prop'larından biridir), ancak `address` değiştiğinde olmadığına dikkat edin (çünkü `Greeting`'in prop'u değildir):
 
 <Sandpack>
 
@@ -105,7 +104,7 @@ label {
 
 <Note>
 
-**`memo`'ya yalnızca performans optimizasyonu olarak bakmalısınız.** Kodunuz onsuz çalışmıyorsa, öncelikle temel problemi bulun ve çözün. Ardından performansı iyileştirmek için `memo` ekleyebilirsiniz.
+**`memo`'ya yalnızca performans optimizasyonu olarak bakmalısınız.** Kodunuz onsuz çalışmıyorsa, öncelikle temel problemi bulun ve çözün. Ardından, performansı iyileştirmek için `memo` ekleyebilirsiniz.
 
 </Note>
 
@@ -113,22 +112,21 @@ label {
 
 #### Bulduğunuz her yere memo eklemeli misiniz? {/*should-you-add-memo-everywhere*/}
 
-Eğer uygulamanız bu site gibiyse ve çoğunlukla kaba etkileşimler içeriyorsa (sayfayı ve bölümü değiştirmek gibi), önbelleğe almak genellikle gereksizdir. Öte yandan, uygulamanız çizim editörü gibi daha küçük etkileşimler içeriyorsa (örneğin şekilleri taşıma gibi), önbelleğe almak çok faydalı olabilir.
+Eğer uygulamanız bu site gibiyse ve çoğunlukla kaba etkileşimler içeriyorsa (sayfayı ve bölümü değiştirmek gibi), önbelleğe almak genellikle gereksizdir. Öte yandan, uygulamanız çizim editörü gibi daha mikro etkileşimler içeriyorsa (şekilleri taşımak gibi), önbelleğe almak çok faydalı olabilir.
 
-`memo` ile yapılan optimizasyon, yalnızca bileşeniniz sıkça aynı prop'larla yeniden render oluyorsa ve render mantığı pahallıysa değerlidir. Bileşeniniz yeniden render edildiğinde fark edilebilir bir gecikme yoksa önbelleğe almak gereksizdir. Unutmayın ki bileşene her *seferinde farklı* prop'lar (render esnasında tanımlanan fonksiyon veya nesne gibi) geçiyorsanız, `memo` tamamen gereksizdir. Bu nedenle `memo` ile birlikte [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) ve [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components)'e ihtiyacınız olacaktır.
+`memo` ile yapılan optimizasyon, yalnızca bileşeniniz sıkça aynı prop'larla yeniden render oluyorsa ve render mantığı pahallıysa değerlidir. Bileşeniniz yeniden render edildiğinde fark edilebilir bir gecikme yoksa önbelleğe almak gereksizdir. Bileşene her *seferinde farklı* prop (render esnasında tanımlanan fonksiyon veya nesne gibi) geçiyorsanız, `memo` tamamen gereksizdir. Bu nedenle `memo` ile birlikte genellikle [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) ve [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components)'e ihtiyacınız olacaktır.
 
-Diğer durumlarda bileşeni `memo` ile sarmalamanın faydası yoktur. Bunu yapmanın da önemli bir zararı yoktur, bu yüzden bazı ekipler durumları tek tek düşünmeyip mümkün olduğunca önbelleğe almayı tercih ederler. Bu yaklaşımın dezavantajı, kodun daha az okunabilir hale gelmesidir. Ayrıca tüm önbelleğe alma işlemleri etkili değildir: "her zaman yeni" olan tek bir değer tüm bileşenin önbelleğe alınmasını engellemeye yeterlidir.
+Diğer durumlarda bileşeni `memo` ile sarmalamanın faydası yoktur ancak önemli bir zararı da yoktur. Bu yüzden bazı ekipler üzerinde çok düşünmeden mümkün olduğunca önbelleğe almayı tercih ederler. Bu yaklaşımın dezavantajı, kodun daha az okunabilir hale gelmesidir. Ayrıca tüm önbelleğe alma işlemleri etkili değildir: "her zaman farklı" olan tek bir değer tüm bileşenin önbelleğe alınmasını engellemeye yeterlidir.
 
 **Pratikte birkaç prensibi takip ederek çoğu önbelleğe alma işlemini gereksiz hale getirebilirsiniz:**
 
-1. Bir bileşen diğer bileşenleri görsel olarak sarmalıyorsa, [JSX'i alt eleman olarak kabul etmesine](/learn/passing-props-to-a-component#passing-jsx-as-children) izin verin. Böylece sarmalayan bileşen kendi state'ini güncellediğinde, React alt bileşenlerin yeniden render edilmesinin gerekli olmadığını bilir.
+1. Bir bileşen diğer bileşenleri görsel olarak sarmalıyorsa, [JSX'i alt eleman olarak kabul etmesine](/learn/passing-props-to-a-component#passing-jsx-as-children) izin verin. Böylece sarmalayan bileşenin kendi state'i güncellendiğinde, React alt bileşenlerin yeniden render edilmesinin gerekli olmadığını bilir.
 1. Mümkün olduğunca yerel state kullanın ve state'i gerektiğinden fazla [yukarıya taşımayın](/learn/sharing-state-between-components). Örneğin, form gibi geçici state'leri veya fareyle bir öğenin üzerine gelindiği bilgisini ağacınızın en üstünde ya da global state kütüphanenizde tutmayın.
 1. [Render mantığınızı saf tutun.](/learn/keeping-components-pure) Bileşeninizin render edilmesi bir soruna neden oluyorsa veya belirgin görsel farklılık oluşturuyorsa, bileşeninizde bir bug vardır! Önbelleğe almak yerine bug'ı çözün.
 1. [State güncelleyen gereksiz efektlerden kaçının.](/learn/you-might-not-need-an-effect) React' uygulamalarındaki çoğu performans sorunu, bileşenlerinizin defalarca render olmasına neden olan efekt zincirlerinden kaynaklanır.
 1. [Efektlerinizden gereksiz bağımlılıkları kaldırmayı deneyin.](/learn/removing-effect-dependencies) Örneğin, efekt içerisindeki bazı nesne ve fonksiyonları bileşen dışarısına çıkarmak ön belleğe almaktan daha basittir.
 
-Eğer spesifik bir etkileşim hala gecikmeli geliyorsa, [React Developer Tools profiler kullanarak](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) hangi bileşenlerin önbelleğe alındığında fayda sağlayacağını belirleyin ve ihtiyaç duyulan bileşenleri önbelleğe alın. 
-These principles make your components easier to debug and understand, so it's good to follow them in any case. In the long term, we're researching [doing granular memoization automatically](https://www.youtube.com/watch?v=lGEMwh32soc) to solve this once and for all.???
+Eğer spesifik bir etkileşim hala gecikmeli geliyorsa, [React Developer Tools'un profiler'ını kullanarak](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) önbelleğe alındığında fayda sağlayacak bileşenleri belirleyin ve tespit ettiklerinizi önbelleğe alın. Bu prensipler bileşenlerinizde hataların ayıklanmasını ve farkedilmesini kolaylaştırır. Bu nedenle durum farketmeksizin adımları takip etmekte yarar vardır. Gelecekte bunu herkes için kökten çözmek adına [önbelleğe almayı nasıl otomatik hale getirebileceğimizi](https://www.youtube.com/watch?v=lGEMwh32soc) araştırıyoruz.
 
 </DeepDive>
 
@@ -136,7 +134,7 @@ These principles make your components easier to debug and understand, so it's go
 
 ### Ön belleğe alınmış (memoized) bileşeni state kullanarak güncelleme {/*updating-a-memoized-component-using-state*/}
 
-Bir bileşen önbelleğe alınmış olsa bile kendi state'leri değiştiğinde yeniden render edilecektir. Önbelleğe almak, bileşene üst bileşenden iletilen yalnızca prop'larla ilgilidir.
+Bir bileşen önbelleğe alınmış olsa bile kendi state'leri değiştiğinde yeniden render edilecektir. Önbelleğe almak, yalnızca bileşene üst bileşenden iletilen prop'larla ilgilidir.
 
 <Sandpack>
 
@@ -205,13 +203,13 @@ label {
 
 </Sandpack>
 
-Bir state değişkenini mevcut değerine yeniden ayarlarsanız, React `memo` olmasa bile bileşeninizin yeniden render'ını atlar. Bileşen fonlsiyonunuzun fazladan çağırıldığını görebilirsiniz ancak sonuç gözardı edilir.
+Bir state değişkenine mevcut değerini yeniden atarsanız, React bileşeninizi `memo`'ya sarmalanmış olmasa bile yeniden render etmez. Bileşen fonksiyonunuzun fazladan çağırıldığını görebilirsiniz ancak çıktı gözardı edilir.
 
 ---
 
 ### Ön belleğe alınmış (memoized) bileşeni bağlam (context) kullanarak güncelleme {/*updating-a-memoized-component-using-a-context*/}
 
-Bir bileşen önbelleğe alındığında bile, kullandığı context değiştiğinde yeniden render olur. Önbelleğe almak, bileşene üst bileşenden iletilen yalnızca prop'larla ilgilidir.
+Bir bileşen önbelleğe alındığında bile, kullandığı context değiştiğinde yeniden render olur. Önbelleğe almak, yalnızca bileşene üst bileşenden iletilen prop'larla ilgilidir.
 
 <Sandpack>
 
@@ -265,16 +263,16 @@ label {
 
 </Sandpack>
 
-Bileşeninizin yalnızca context'in bazı _öğeleri_ değiştiğinde yeniden render edilmesini sağlamak için bileşeni ikiye bölün. Dış bileşendeki context'den ihtiyacınız olanı okuyun ve önbelleğe alınmış alt bileşene prop olarak iletin.
+Bileşeninizin yalnızca context'in bazı _öğeleri_ değiştiğinde render edilmesini isterseniz iki parçaya bölün. Dış bileşendeki context'den ihtiyacınız olanı okuyun ve önbelleğe alınmış alt bileşene prop olarak iletin.
 
 ---
 
-### Prop değişikliklerini en aza indirme {/*minimizing-props-changes*/}
+### Prop değişiklik miktarını minimuma indirme {/*minimizing-props-changes*/}
 
-`memo` kullandığınızda, herhangi bir prop önceki değerine *sığ olarak eşit (shallowly equal)* değilse bileşeniniz yeniden render edilir. React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak bileşeninizdeki her prop'u önceki değeriyle karşılaştırır. `Object.is(3, 3)` sonucunun `true`, `Object.is({}, {})` sonucunun `false` olduğuna dikkat edin.
+`memo` kullandığınızda, herhangi bir prop önceki değerine *sığ olarak eşit (shallowly equal)* değilse bileşeniniz yeniden render edilir. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bileşeninizdeki her prop'u önceki değeriyle karşılaştırır. `Object.is(3, 3)` sonucunun `true`, `Object.is({}, {})` sonucunun `false` olduğuna dikkat edin.
 
 
-`memo`'dan en iyi şekilde yararlanmak için, prop'ların değişme sayısını en aza indirin. Örneğin, prop bir nesne ise [`useMemo`](/reference/react/useMemo) kullanarak üst bileşenin her seferinde nesneyi yeniden oluşturmasını önleyebilirsiniz.
+`memo`'dan en iyi şekilde yararlanmak için prop'ların değişme miktarını minimuma indirin. Örneğin, prop bir nesne ise [`useMemo`](/reference/react/useMemo) kullanarak üst bileşenin her seferinde nesneyi yeniden oluşturmasını önleyebilirsiniz.
 
 ```js {5-8}
 function Page() {
@@ -294,7 +292,7 @@ const Profile = memo(function Profile({ person }) {
 });
 ```
 
-Prop değişikliklerini en aza indirmenin daha iyi bir yolu, gereken minimum bilgiyi prop olarak kabul ettiğinden emin olmaktır. Örneğin, bütün nesne yerine değerleri tek tek kabul edebilir:
+Prop değişikliklerini minimuma indirmenin daha iyi bir yolu, gereksiz bilgileri prop olarak beklemediğinden emin olmaktır. Örneğin, bütün nesne yerine değerleri tek tek kabul edebilir:
 
 ```js {4,7}
 function Page() {
@@ -321,13 +319,13 @@ const CallToAction = memo(function CallToAction({ hasGroups }) {
 });
 ```
 
-Önbelleğe alınan bileşene fonksiyon iletmeniz gerektiğinde, hiçbir zaman değişmemesi için bileşen dışında tanımlayın veya render'lar arasında tanımı önbelleğe almak için [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) kullanın.
+Önbelleğe alınan bileşene fonksiyon iletmeniz gerekirse, hiçbir zaman değişmemesini sağlamak için bileşenin dışında tanımlayın veya render'lar arasında yeniden tanımlanmaması için [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) kullanarak önbelleğe alın.
 
 ---
 
 ### Özel karşılaştırma fonksiyonu belirtme {/*specifying-a-custom-comparison-function*/}
 
-Önbelleğe alınan bileşenin prop değişikliklerini en aza indirmek bazen mümkün olmayabilir. Bu durumda sığ eşitliği kullanmak yerine (shallow equality) eski ve yeni prop'ları karşılaştırmak için özel bir karşılaştırma fonksiyonu sağlayabilirsiniz. Bu fonksiyon, `memo`'ya ikinci argüman olarak iletilir. Yalnızca yeni prop'ların eskileri ile aynı çıktıyı verdiği durumlarda `true`, aksi takdirde `false` döndürmelidir.
+Önbelleğe alınan bileşenin prop değişikliklerini minimuma indirmek bazen mümkün olmayabilir. Bu durumda sığ eşitliği kullanmak yerine (shallow equality) eski ve yeni prop'ları karşılaştırmak için özel bir karşılaştırma fonksiyonu sağlayabilirsiniz. Bu fonksiyon, `memo`'ya ikinci argüman olarak iletilir. Yalnızca yeni prop'ların eskileri ile aynı çıktıyı verdiği durumlarda `true`, aksi takdirde `false` döndürmelidir.
 
 ```js {3}
 const Chart = memo(function Chart({ dataPoints }) {
@@ -345,14 +343,13 @@ function arePropsEqual(oldProps, newProps) {
 }
 ```
 
-Bunu kullanırsanız karşılaştırma fonksiyonunun yeniden render etmeden daha hızlı olup olmadığını kontrol etmek için tarayıcınızın geliştirici araçlarındaki Performans panelini kullanın. Süpriz yaşayabilirsiniz.
+Özel fonksiyon kullanırsanız, karşılaştırma fonksiyonunun yeniden render etmekten daha performanslı olup olmadığını kontrol etmek için tarayıcınızın geliştirici araçlarındaki Performans panelini kullanın. Süprizler yaşayabilirsiniz.
 
 Performans ölçümleri yaparken, React'ın canlı ortam (production) modunda çalıştığından emin olun.
 
 <Pitfall>
 
-Özel bir `arePropsEqual` implementasyonu sağlarsanız, **fonksiyonlar dahil her prop'u karşılaştırmanız gerekir.** Fonksiyonlar genellikle ana bileşenin prop'larını ve state'lerini [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) mantığıyla hafızada tutar. `oldProps.onClick !== newProps.onClick` olduğunda `true` döndürürseniz, bileşeniniz `onClick` fonksiyonu içerisinde önceki render'dan kalan prop ve state'leri görmeye devam edecek ve kafa karıştırıcı hatalara yok açacaktır.
-
+Özel bir `arePropsEqual` implementasyonu sağlarsanız, **fonksiyonlar dahil her prop'u karşılaştırmanız gerekir.** Fonksiyonlar, ana bileşenin prop'larını ve state'lerini [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) mantığıyla hafızada tutar. `oldProps.onClick !== newProps.onClick` olduğunda `true` döndürürseniz, `onClick` fonksiyonu içerisinde önceki render'dan kalan prop ve state'leri görmeye devam edecek ve kafa karıştırıcı hatalara yok açacaktır.
 
 Kullandığınız veri yapısının sınırlı derinliğe sahip olduğundan emin değilseniz `arePropsEqual` içerisinde derin eşitlik (deep equality) kontrolü yapmaktan kaçının. **Derin eşitlik kontrolleri son derece yavaş olabilir** ve veri yapısı değiştirildiğinde uygulamanızı birkaç saniye boyunca dondurabilir.
 
@@ -361,6 +358,6 @@ Kullandığınız veri yapısının sınırlı derinliğe sahip olduğundan emin
 ---
 
 ## Sorun giderme {/*troubleshooting*/}
-### Prop bir nesne, dizi veya fonksiyon olduğunda bileşenim yeniden render'lanıyor {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
+### Prop bir nesne, dizi veya fonksiyon olduğunda bileşenim daima yeniden render'lanıyor {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
 
-React eski ve yeni prop'ları sığ karşılaştırma ile kıyaslar: her yeni prop'un eski prop'a referans olarak eşit olup olmadığına bakar. Eğer üst eleman her render olduğu zaman eskisiyle birebir aynı olan yeni bir nesne veya dizi oluşturuyorsanız, React değiştirildiğini düşünür. Benzer şekilde, üst bileşen render edildiğinde yeni bir fonksiyon oluşturuyorsanız, React aynı tanıma sahip olsa dahi değiştiğini düşünür. Bunu önlemek için, [prop'ları basitleştirin veya üst bileşendeki prop'ları önbelleğe alın](#minimizing-props-changes).
+React eski ve yeni prop'ları sığ karşılaştırma ile kıyaslar: her yeni prop'un eski prop'a referans olarak eşit olup olmadığına bakar. Eğer üst eleman render olduğunda eskisiyle birebir aynı olan yeni bir nesne veya dizi oluşturuyorsanız, React değiştirildiğini düşünür. Benzer şekilde, üst bileşen render edildiğinde yeni fonksiyon oluşturuyorsanız, React aynı tanıma sahip olsa dahi değiştiğini düşünür. Bunu önlemek için [prop'ları basitleştirin veya üst bileşendeki prop'ları önbelleğe alın](#minimizing-props-changes).
