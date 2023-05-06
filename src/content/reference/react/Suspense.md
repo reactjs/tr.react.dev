@@ -251,24 +251,24 @@ async function getAlbums() {
 
 <Note>
 
-**Only Suspense-enabled data sources will activate the Suspense component.** They include:
+**Sadece suspense etkin veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/advanced-features/react-18)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/advanced-features/react-18) gibi Suspense etkin framework'lerle veri fetch etme.
+- [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
 
-Suspense **does not** detect when data is fetched inside an Effect or event handler.
+Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
 
-The exact way you would load data in the `Albums` component above depends on your framework. If you use a Suspense-enabled framework, you'll find the details in its data fetching documentation.
+Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense etkin bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React. 
+Kanaat sahibi bir framework olmadan Suspense etkin veri fetch etme henüz desteklenmiyor. Suspense etkin bir veri kaynağı implement etmenin gereksinimleri henüz düzensiz ve belgelenmemiş durumda. Veri kaynaklarını Suspense ile entegre etmek için resmi bir API, React'in gelecek sürümlerinde yayınlanacaktır. 
 
 </Note>
 
 ---
 
-### Revealing content together at once {/*revealing-content-together-at-once*/}
+### İçeriği tek seferde birlikte gösterme {/*revealing-content-together-at-once*/}
 
-By default, the whole tree inside Suspense is treated as a single unit. For example, even if *only one* of these components suspends waiting for some data, *all* of them together will be replaced by the loading indicator:
+Varsayılan olarak, Suspense içindeki tüm ağaç tek bir birim olarak ele alınır. Örneğin, eğer bu bileşenlerden *sadece biri* veri beklemek için askıya alınırsa, *tümü* birlikte yükleniyor göstergesiyle değiştirilecektir:
 
 ```js {2-5}
 <Suspense fallback={<Loading />}>
@@ -279,9 +279,9 @@ By default, the whole tree inside Suspense is treated as a single unit. For exam
 </Suspense>
 ```
 
-Then, after all of them are ready to be displayed, they will all appear together at once.
+Sonrasında, hepsi görüntülenmeye hazır olduğunda, hepsi birlikte tek seferde açığa çıkacaktır.
 
-In the example below, both `Biography` and `Albums` fetch some data. However, because they are grouped under a single Suspense boundary, these components always "pop in" together at the same time.
+Aşağıdaki örnekte, hem `Biography` hem `Albums` data fetch etmekte. Ancak, tek bir Suspense sınırı altında gruplandıkları için, bu bileşenler her zaman aynı anda "açığa çıkıyor".
 
 <Sandpack>
 
@@ -318,7 +318,7 @@ export default function App() {
   } else {
     return (
       <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
+        The Beatles sanatçı sayfasını aç
       </button>
     );
   }
@@ -346,7 +346,7 @@ export default function ArtistPage({ artist }) {
 }
 
 function Loading() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
@@ -482,10 +482,10 @@ async function getBio() {
     setTimeout(resolve, 1500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu,`;
 }
 
 async function getAlbums() {
