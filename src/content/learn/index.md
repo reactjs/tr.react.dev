@@ -180,7 +180,7 @@ export default function Profile() {
 
 Yukarıdaki örnekte, `style={{}}` özel bir sözdizimi değil, `style={ }` JSX süslü parantezlerinin içerisindeki sıradan bir `{}` nesnesidir. Stilleriniz Javascript değişkenlerine bağlı olduğunda `style` özniteliğini kullanabilirsiniz.
 
-## Koşullu işleme {/*conditional-rendering*/}
+## Koşullu render etme {/*conditional-rendering*/}
 
 React'de, koşulları yazmak için özel bir sözdizimi yoktur. Onun yerine, sıradan JavaScript kodu yazarken kullandığınız teknikleri kullanacaksınız. Örneğin, JSX'i koşullu olarak dahil etmek için bir [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) ifadesi kullanabilirsiniz:
 
@@ -220,9 +220,9 @@ Eğer daha kompakt bir kod tercih ediyorsanız, [koşullu `?` operatörünü](ht
 
 Tüm bu yaklaşımlar ayrıca öznitelikler koşullu olarak belirtilmek istendiğinde de çalışır. Eğer bu JavaScript sözdizimlerinden bazıları size yabancıysa, `if...else` kullanarak başlayabilirsiniz.
 
-## Listeleri işleme {/*rendering-lists*/}
+## Listeleri render etme {/*rendering-lists*/}
 
-Bileşenlerden oluşan listeleri işlemek için [`for` döngüsü](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) ve [dizi `map()` fonksiyonu](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) gibi JavaScript özelliklerine ihtiyacınız olacak.
+Bileşenlerden oluşan listeleri render etmek için [`for` döngüsü](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) ve [dizi `map()` fonksiyonu](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) gibi JavaScript özelliklerine ihtiyacınız olacak.
 
 Örneğin, bir ürünler (products) diziniz olduğunu varsayalım:
 
@@ -339,7 +339,7 @@ function MyButton() {
 
 React bileşen fonksiyonunuzu tekrar çağıracaktır. Bu sefer `count` `1` olacaktır. Ondan sonra `2` olacaktır. Ve böyle devam edecektir.
 
-Eğer aynı bileşeni birden fazla kez işlemek istiyorsanız, her biri kendi state'ini alacaktır. Her bir butona ayrı ayrı tıklayın:
+Eğer aynı bileşeni birden fazla kez render etmek istiyorsanız, her biri kendi state'ini alacaktır. Her bir butona ayrı ayrı tıklayın:
 
 <Sandpack>
 
