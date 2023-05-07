@@ -2549,7 +2549,7 @@ Bunun olmasını engellemek için, [güncellemeyi `startTransition` ile acil olm
 
 ```js {2-3,5}
 function handleNextPageClick() {
-  // If this update suspends, don't hide the already displayed content
+  // Eğer bu güncelleme askıya alınırsa, zaten görünen içeriği gizleme
   startTransition(() => {
     setCurrentPage(currentPage + 1);
   });
