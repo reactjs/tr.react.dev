@@ -1,5 +1,5 @@
 ---
-title: Render Etmek ve DOM'u Değiştirmek
+title: Render Et ve İşle
 ---
 
 <Intro>
@@ -21,12 +21,12 @@ Bileşenlerinizin mutfakta, malzemelerden lezzetli yemekler pişiren aşçılar 
 
 1. Bir render **tetiklemek** (müşterinin siparişinin mutfaktaki aşçıya iletilmesi)
 2. Bileşeni **render etmek**  (siparişin mutfakta hazırlanması)
-3. DOM'u **değiştirmek** (siparişin masaya götürülmesi)
+3. DOM'a **işlemek** (siparişin masaya götürülmesi)
 
 <IllustrationBlock sequential>
-  <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
-  <Illustration caption="Render" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
-  <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
+  <Illustration caption="Tetikle" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
+  <Illustration caption="Render Et" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
+  <Illustration caption="İşle" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
 ## 1. Adım: Bir render tetiklemek {/*step-1-trigger-a-render*/}
@@ -70,9 +70,9 @@ export default function Image() {
 Bir bileşen ilk defa render edildikten sonra, [`set` fonksiyonu](/reference/react/useState#setstate) ile state'i güncelleyerek bileşenin tekrar render edilmesini sağlayabilirsiniz. Bileşeninizin state'ini güncellemek otomatik olarak sıraya bir render almaktadır. (Bunu restorandaki bir müşterinin susuzluk ve açlık durumuna göre ilk siparişini verdikten sonra çay, tatlı ve benzeri şeyleri sipariş etmesi gibi düşünebilirsiniz.)
 
 <IllustrationBlock sequential>
-  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
-  <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
-  <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
+  <Illustration caption="State'i güncelle..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="...tetikle..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
+  <Illustration caption="...render et!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
 
 ## 2. Adım: React bileşeninizi render eder {/*step-2-react-renders-your-components*/}
@@ -125,7 +125,7 @@ img { margin: 0 10px 10px 0; }
 </Sandpack>
 
 * **İlk render esnasında** React, `<section>`, `<h1>`, ve üç `<img>` elementi için [DOM node'larını oluşturacaktır.](https://developer.mozilla.org/docs/Web/API/Document/createElement)
-* **Yeniden render esnasında** React, eğer varsa önceki render'dan bu yana hangi özelliklerin değiştiğini hesaplayacaktır. Bir sonraki adım olan DOM'un değiştirilme safhasına kadar bu bilgilerle hiçbir şey yapmayacaktır.
+* **Yeniden render esnasında** React, eğer varsa önceki render'dan bu yana hangi özelliklerin değiştiğini hesaplayacaktır. Bir sonraki adım olan değişikliklerin DOM'a işlenmesi safhasına kadar bu bilgilerle hiçbir şey yapmayacaktır.
 
 <Pitfall>
 
@@ -146,7 +146,7 @@ Eğer güncellenen bileşen ağaçta çok yüksekteyse (üst bir eleman ise), g�
 
 </DeepDive>
 
-## 3. Adım: React değişiklikleri DOM'a uygular {/*step-3-react-commits-changes-to-the-dom*/}
+## 3. Adım: React değişiklikleri DOM'a işler {/*step-3-react-commits-changes-to-the-dom*/}
 
 Bileşenleriniz render edildikten (çağırıldıktan) sonra React, DOM'u değiştirir. 
 
@@ -204,9 +204,9 @@ Render tamamlandıktan ve React DOM'u güncelledikten sonra, tarayıcı ekranı 
 <Recap>
 
 * Bir React uygulamasında herhangi bir ekran güncellemesi üç adımda olur: 
-  1. Render tetiklemek
-  2. Render etmek
-  3. DOM'u değiştirmek
+  1. Tetikle
+  2. Render et
+  3. İşle
 * Strict mode'u kullanarak bileşenlerinizdeki hataları bulabilirsiniz
 * Render'ın sonucu geçen seferki render ile aynıysa, React DOM'a dokunmaz
 
