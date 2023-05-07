@@ -2541,7 +2541,7 @@ Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniy
 
 ## Hata ayıklama {/*troubleshooting*/}
 
-## Kullanıcı arayüzünün bir güncelleme sırasında bir fallback ile değiştirilmesini nasıl engellerim? {/*preventing-unwanted-fallbacks*/}
+### Kullanıcı arayüzünün bir güncelleme sırasında bir fallback ile değiştirilmesini nasıl engellerim? {/*preventing-unwanted-fallbacks*/}
 
 Görünür bir kullanıcı arayüzünü bir fallback ile değiştirmek, uyumsuz bir kullanıcı deneyimine sebep olur.  Bu, bir güncelleme bir bileşenin askıya alınmasına sebep olduğunda ve en yakın Suspense sınırı zaten kullanıcıya içerik gösteriyorsa olabilir.
 
