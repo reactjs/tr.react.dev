@@ -1,44 +1,44 @@
 ---
-title: Render and Commit
+title: Render Et ve İşle
 ---
 
 <Intro>
 
-Before your components are displayed on screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+Bileşenleriniz ekranda görüntülenmeden önce React tarafından render edilmek zorundadırlar. Bu süreçteki her bir adımı anlamak, kodunuzun nasıl çalıştığı hakkında düşünmenize ve davranışını açıklamanıza yardımcı olacaktır.
 
 </Intro>
 
 <YouWillLearn>
 
-* What rendering means in React
-* When and why React renders a component
-* The steps involved in displaying a component on screen
-* Why rendering does not always produce a DOM update
+* React'te render etmek ne demektir
+* React ne zaman ve niye bir bileşeni render eder
+* Bir bileşenin ekranda görüntülenmesi için gerçekleşen adımlar nelerdir
+* Render etmek niye her zaman bir DOM güncellemesine neden olmaz
 
 </YouWillLearn>
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+Bileşenlerinizin mutfakta, malzemelerden lezzetli yemekler pişiren aşçılar olduğunu hayal edin. Bu senaryoda React, müşterilerin siparişlerini alan ve müşterilere siparişlerini teslim eden garsondur. UI'ı (kullanıcı arayüzü) isteme ve servis etme süreci üç adımdan oluşur:
 
-1. **Triggering** a render (delivering the guest's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+1. Bir render **tetiklemek** (müşterinin siparişinin mutfaktaki aşçıya iletilmesi)
+2. Bileşeni **render etmek**  (siparişin mutfakta hazırlanması)
+3. DOM'a **işlemek** (siparişin masaya götürülmesi)
 
 <IllustrationBlock sequential>
-  <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
-  <Illustration caption="Render" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
-  <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
+  <Illustration caption="Tetikle" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
+  <Illustration caption="Render Et" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
+  <Illustration caption="İşle" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
-## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
+## 1. Adım: Bir render tetiklemek {/*step-1-trigger-a-render*/}
 
-There are two reasons for a component to render:
+Bir bileşenin render edilmesi için iki sebep vardır:
 
-1. It's the component's **initial render.**
-2. The component's (or one of its ancestors') **state has been updated.**
+1. İlk sebep bileşenin **ilk defa render edilmesidir.**
+2. İkinci sebep ise bileşenin (ya da üst bir bileşenin) **state'inin güncellenmesidir.**
 
-### Initial render {/*initial-render*/}
+### İlk render {/*initial-render*/}
 
-When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it's done by calling [`createRoot`](/reference/react-dom/client/createRoot) with the target DOM node, and then calling its `render` method with your component:
+Uygulamanız başladığında, ilk render'ı tetiklemeniz gerekmektedir. Çatılar ve sandbox'lar bazen bu kodu gizlerler ancak bu, hedef DOM node'unun [`createRoot`](/reference/react-dom/client/createRoot) ile çağrılması ve ardından bileşeninizle o DOM node'unun `render` metodu çağrılarak ilk render tetiklenir:
 
 <Sandpack>
 
@@ -63,28 +63,28 @@ export default function Image() {
 
 </Sandpack>
 
-Try commenting out the `root.render()` call and see the component disappear!
+`root.render()` ifadesini yorum satırı ("//") içine alın ve bileşeninizin kaybolduğunu görün!
 
-### Re-renders when state updates {/*re-renders-when-state-updates*/}
+### State güncellendiği zaman yeniden render etmek {/*re-renders-when-state-updates*/}
 
-Once the component has been initially rendered, you can trigger further renders by updating its state with the [`set` function.](/reference/react/useState#setstate) Updating your component's state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
+Bir bileşen ilk defa render edildikten sonra, [`set` fonksiyonu](/reference/react/useState#setstate) ile state'i güncelleyerek bileşenin tekrar render edilmesini sağlayabilirsiniz. Bileşeninizin state'ini güncellemek otomatik olarak sıraya bir render almaktadır. (Bunu restorandaki bir müşterinin susuzluk ve açlık durumuna göre ilk siparişini verdikten sonra çay, tatlı ve benzeri şeyleri sipariş etmesi gibi düşünebilirsiniz.)
 
 <IllustrationBlock sequential>
-  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
-  <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
-  <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
+  <Illustration caption="State'i güncelle..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="...tetikle..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
+  <Illustration caption="...render et!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
 
-## Step 2: React renders your components {/*step-2-react-renders-your-components*/}
+## 2. Adım: React bileşeninizi render eder {/*step-2-react-renders-your-components*/}
 
-After you trigger a render, React calls your components to figure out what to display on screen. **"Rendering" is React calling your components.**
+Bir render tetiklediğiniz zaman React, ekranda neyin görüntüleneceğini belirlemek için bileşenlerinizi çağırır. **"Render etmek" React'in bileşenlerinizi çağırması demektir.**
 
-* **On initial render,** React will call the root component.
-* **For subsequent renders,** React will call the function component whose state update triggered the render.
+* **İlk render etme sırasında** React, root (kök) bileşeni çağırır.
+* **Daha sonraki renderlar için** React, render'ı tetikleyen state güncellemesinin yapıldığı bileşeni çağırır.
 
-This process is recursive: if the updated component returns some other component, React will render _that_ component next, and if that component also returns something, it will render _that_ component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
+Bu süreç recursive'dir (özyinelemeli): eğer güncellenmiş bileşen başka bir bileşen döndürüyorsa React bir sonra _o_ bileşeni render edecek, o bileşen de bir şey döndürüyorsa React bir sonra _o_ bileşeni render edecektir. Bu süreç daha fazla iç içe geçmiş bileşen kalmayıncaya ve React ekranda neyin görüntülenmesi gerektiğini bilene kadar deveam edecektir.
 
-In the following example, React will call `Gallery()` and  `Image()` several times:
+Aşağıdaki örnekte React, `Gallery()` ve  `Image()` bileşenlerini birkaç kez çağıracaktır:
 
 <Sandpack>
 
@@ -124,36 +124,36 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
-* **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags. 
-* **During a re-render,** React will calculate which of their properties, if any, have changed since the previous render. It won't do anything with that information until the next step, the commit phase.
+* **İlk render esnasında** React, `<section>`, `<h1>`, ve üç `<img>` elementi için [DOM node'larını oluşturacaktır.](https://developer.mozilla.org/docs/Web/API/Document/createElement)
+* **Yeniden render esnasında** React, eğer varsa önceki render'dan bu yana hangi özelliklerin değiştiğini hesaplayacaktır. Bir sonraki adım olan değişikliklerin DOM'a işlenmesi safhasına kadar bu bilgilerle hiçbir şey yapmayacaktır.
 
 <Pitfall>
 
-Rendering must always be a [pure calculation](/learn/keeping-components-pure):
+Render etmek her zaman [saf hesaplama](/learn/keeping-components-pure) olmalıdır:
 
-* **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
-* **It minds its own business.** It should not change any objects or variables that existed before rendering. (One order should not change anyone else's order.)
+* **Aynı girdi, aynı çıktı.** Aynı girdiler verildiğinde, saf bir fonksiyon her zaman aynı JSX'i döndürmelidir. (Bir müşteri domatesli salata sipariş ettiği zaman soğanlı bir salata almamalıdır!)
+* **Kendi işine bakar.** Render edilmeden önce var olan herhangi bir nesneyi ve objeyi değiştirmemelidir. (Bir müşterinin siparişi diğer bir müşterinin siparişini değiştirmemelidir.)
 
-Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in "Strict Mode", React calls each component's function twice, which can help surface mistakes caused by impure functions.
+Aksi takdirde, kod tabanınız daha karmaşık bir hale geldikçe kafa karıştırıcı ve tahmin edilemeyen hatalarla karşı karşıya kalabilirsiniz. "Strict Mode" ile geliştirme yaparken React, her bileşenin fonksiyonunu iki kez çağırarak saf olmayan fonksiyonlardan kaynaklanabilecek hataların ortaya çıkmasına yardımcı olabilir.
 
 </Pitfall>
 
 <DeepDive>
 
-#### Optimizing performance {/*optimizing-performance*/}
+#### Performansı optimize etmek {/*optimizing-performance*/}
 
-The default behavior of rendering all components nested within the updated component is not optimal for performance if the updated component is very high in the tree. If you run into a performance issue, there are several opt-in ways to solve it described in the [Performance](https://reactjs.org/docs/optimizing-performance.html) section. **Don't optimize prematurely!**
+Eğer güncellenen bileşen ağaçta çok yüksekteyse (üst bir eleman ise), güncellenen bileşen içinde render edilen iç içe geçmiş tüm bileşenleri de render etmek performans açısından ideal değildir. Eğer performans sorunlarıyla karşılaşıyorsanız, [Performance](https://reactjs.org/docs/optimizing-performance.html) bölümünde bu sorunu çözmenin birkaç yolu anlatılmaktadır. **Vaktinden önce optimize etmeye çalışmayın!**
 
 </DeepDive>
 
-## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+## 3. Adım: React değişiklikleri DOM'a işler {/*step-3-react-commits-changes-to-the-dom*/}
 
-After rendering (calling) your components, React will modify the DOM. 
+Bileşenleriniz render edildikten (çağırıldıktan) sonra React, DOM'u değiştirir. 
 
-* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen. 
-* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+* **İlk render için** React, [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API'nı kullanarak tüm DOM node'larını ekranda görüntüler. 
+* **Yeniden renderler için** React, DOM'un son render'daki çıktıyla eşleşmesi için gerekli olan asgari hesaplamaları (render edilme esnasında hesaplanmış!) yapar.
 
-**React only changes the DOM nodes if there's a difference between renders.** For example, here is a component that re-renders with different props passed from its parent every second. Notice how you can add some text into the `<input>`, updating its `value`, but the text doesn't disappear when the component re-renders:
+**React DOM node'larını sadece render'lar arasında farklılık varsa değiştirir.** Örneğin aşağıda, üst bileşeninden her saniye aldığı farklı prop'lar ile yeniden render edilen bir bileşen var. `<input>` elementine yazı yazmanıza ve `değerini` güncellemenize rağmen yeniden render edilen bileşende yazdığınız yazının kaybolmadığına dikkat edin:
 
 <Sandpack>
 
@@ -193,21 +193,22 @@ export default function App() {
 
 </Sandpack>
 
-This works because during this last step, React only updates the content of `<h1>` with the new `time`. It sees that the `<input>` appears in the JSX in the same place as last time, so React doesn't touch the `<input>`—or its `value`!
-## Epilogue: Browser paint {/*epilogue-browser-paint*/}
+Bu, son adımda React'in sadece `<h1>` elementinin içeriğini yeni `time` ile güncellediği için çalışmaktadır. React `<input>` elementinin JSX'te geçen seferki yerinde olduğunu görür ve `<input>` elementine ya da onun `değerine` dokunmaz!
 
-After rendering is done and React updated the DOM, the browser will repaint the screen. Although this process is known as "browser rendering", we'll refer to it as "painting" to avoid confusion throughout the docs.
+## Sonsöz: Tarayıcının boyanması {/*epilogue-browser-paint*/}
+
+Render tamamlandıktan ve React DOM'u güncelledikten sonra, tarayıcı ekranı yeniden boyayacaktır. Bu süreç "tarayıcının render etmesi" olarak bilinsede, bu dökümantasyon boyunca kafa karışıklığını engellemk için biz ona "boyama" diyeceğiz. 
 
 <Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Any screen update in a React app happens in three steps:
-  1. Trigger
-  2. Render
-  3. Commit
-* You can use Strict Mode to find mistakes in your components
-* React does not touch the DOM if the rendering result is the same as last time
+* Bir React uygulamasında herhangi bir ekran güncellemesi üç adımda olur: 
+  1. Tetikle
+  2. Render et
+  3. İşle
+* Strict mode'u kullanarak bileşenlerinizdeki hataları bulabilirsiniz
+* Render'ın sonucu geçen seferki render ile aynıysa, React DOM'a dokunmaz
 
 </Recap>
 
