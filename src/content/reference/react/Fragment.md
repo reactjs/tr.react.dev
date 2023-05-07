@@ -23,7 +23,7 @@ title: <Fragment> (<>...</>)
 
 ### `<Fragment>` {/*fragment*/}
 
-Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine alarak onları bir araya getirebilirsiniz. Fragment içinde elemanları gruplamak, sonuç DOM üzerinde herhangi bir etkiye sahip değildir; sanki elemanlar gruplanmamış gibi aynı kalır. Boş JSX etiketi <></> çoğu durumda `<Fragment>` için kısaltmadır.
+Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine alarak onları bir araya getirebilirsiniz. Fragment içinde elemanları gruplamak, sonuç DOM üzerinde herhangi bir etkiye sahip değildir; sanki elemanlar gruplanmamış gibi aynı kalır. Boş JSX etiketi `<></>` çoğu durumda `<Fragment>` için kısaltmadır.
 
 #### Prop'lar {/*props*/}
 
