@@ -20,7 +20,7 @@ const id = useId()
 
 ### `useId()` {/*useid*/}
 
-Benzersiz bir kimlik oluşturmak için `useId`'yi bileşeninizin kök kapsamında çağırın:
+Benzersiz bir kimlik oluşturmak için `useId`'yi bileşeninizin en üst kapsamında çağırın:
 
 ```js
 import { useId } from 'react';
@@ -36,13 +36,13 @@ function PasswordField() {
 
 Herhangi bir parametre almaz.
 
-#### Dönüş Değerleri {/*returns*/}
+#### Dönüş değerleri {/*returns*/}
 
 Çağrıldığı bileşene özel olarak her bir `useId` çağrısı için _karakter dizisi (string)_ tipinde benzersiz kimlik döner.
 
 #### Uyarılar {/*caveats*/}
 
-* `useId` bir Hook olduğundan, yalnızca **bileşeninizin kök kapsamında** ya da kendi Hook'larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve state'i ona taşıyın.
+* `useId` bir Hook olduğundan, yalnızca **bileşeninizin en üst kapsamında** ya da kendi Hook'larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve state'i ona taşıyın.
 
 * Liste elemanlarına **anahtar üretmek için kullanılmamalıdır**. [Anahtarlar elinizdeki veriden üretilmelidir.](/learn/rendering-lists#where-to-get-your-key)
 
@@ -58,7 +58,7 @@ Herhangi bir parametre almaz.
 
 ### Erişilebilirlik öznitelikleri için benzersiz kimlikler üretmek {/*generating-unique-ids-for-accessibility-attributes*/}
 
-Bileşeninizin kök kapsamında benzersiz kimlikler üretmek için `useId`'yi çağırın:
+Benzersiz kimlikler üretmek için bileşeninizin en üst kapsamında `useId`'yi çağırın:
 
 ```js [[1, 4, "passwordHintId"]]
 import { useId } from 'react';

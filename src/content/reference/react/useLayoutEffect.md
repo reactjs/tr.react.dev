@@ -4,13 +4,13 @@ title: useLayoutEffect
 
 <Pitfall>
 
-`useLayoutEffect` can hurt performance. Prefer [`useEffect`](/reference/react/useEffect) when possible.
+`useLayoutEffect` performansı kötü etkileyebilir. Mümkün olduğunca [`useEffect`](/reference/react/useEffect)'i tercih edin.
 
 </Pitfall>
 
 <Intro>
 
-`useLayoutEffect` is a version of [`useEffect`](/reference/react/useEffect) that fires before the browser repaints the screen.
+`useLayoutEffect`, tarayıcı bileşeni ekrana çizmeden önce tetiklenen bir [`useEffect`](/reference/react/useEffect) çeşididir.
 
 ```js
 useLayoutEffect(setup, dependencies?)
@@ -22,11 +22,11 @@ useLayoutEffect(setup, dependencies?)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `useLayoutEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-Call `useLayoutEffect` perform the layout measurements before the browser repaints the screen:
+`useLayoutEffect`, tarayıcının ekrana yeniden çizme işleminden (repainting) önce yerleşim (layout) ölçümlerini gerçekleştirmek için çağrılır:
 
 ```js
 import { useState, useRef, useLayoutEffect } from 'react';
@@ -43,71 +43,71 @@ function Tooltip() {
 ```
 
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametereler {/*parameters*/}
 
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. Before your component is first added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function one last time.
+* `kurulum (setup)`: Efekt kodunu barındıran fonksiyondur. Kurulum fonksiyonunuz ayrıca isteğe bağlı *temizleme (cleanup)* fonksiyonu döndürebilir. React, bileşeninizi DOM'a eklemeden önce kurulum fonksiyonunuzu çalıştırır. Bağımlılıkların değişmesiyle tetiklenen render'ların ardından öncelikle eski değerlerle birlikte temizleme fonksiyonunuzu (varsa) çalıştırılır ve ardından yeni değerlerle birlikte kurulum fonksiyonuzu çalıştırılır. Bileşen DOM'dan kaldırılmadan önce, React son kez temizleme fonksiyonunuzu çalıştırır.
  
-* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If you omit this argument, your Effect will re-run after every re-render of the component.
+* **isteğe bağlı** `bağımlılıklar (dependencies)`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
 
-#### Returns {/*returns*/}
+#### Dönüş değerleri {/*returns*/}
 
-`useLayoutEffect` returns `undefined`.
+`useLayoutEffect`, `undefined` döndürür.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `useLayoutEffect` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a component and move the Effect there.
+* `useLayoutEffect` bir Hook olduğundan, yalnızca **bileşeninizin en üst kapsamında** ya da kendi Hook’larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve efekti oraya taşıyın.
 
-* When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, [implement the cleanup function.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+* Katı Mod (Strict Mode) açık olduğunda React, ilk kurulumdan önce **yalnızca geliştirme ortamında olmak üzere ekstra bir kurulum+temizleme döngüsü çalıştırır**. Bu, temizleme mantığının kurulum mantığını "yansıtmasını" ve kurulumun yaptığı her şeyi durdurmasını veya geri almasını sağlayan bir stres testidir. Eğer bir probleme neden olursa [temizleme fonksiyonunu implemente edin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-* If some of your dependencies are objects or functions defined inside the component, there is a risk that they will **cause the Effect to re-run more often than needed.** To fix this, remove unnecessary [object](/reference/react/useEffect#removing-unnecessary-object-dependencies) and [function](/reference/react/useEffect#removing-unnecessary-function-dependencies) dependencies. You can also [extract state updates](/reference/react/useEffect#updating-state-based-on-previous-state-from-an-effect) and [non-reactive logic](/reference/react/useEffect#reading-the-latest-props-and-state-from-an-effect) outside of your Effect.
+* Bileşen içerisinde tanımlanıp bağımlılıklarınıza eklenmiş bazı [nesneler](/reference/react/useEffect#removing-unnecessary-object-dependencies) ve [fonksiyonlar](/reference/react/useEffect#removing-unnecessary-function-dependencies), **efektin gereksiz yere yeniden çalışmasına neden olabilir**. Bu sorunu çözmek için gereksiz nesne ve fonksiyon bağımlılıklarını kaldırabilirsiniz. Ayrıca [state güncellemelerini](/reference/react/useEffect#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan kodları](/reference/react/useEffect#reading-the-latest-props-and-state-from-an-effect) efekt dışına çıkarabilirsiniz.
 
-* Effects **only run on the client.** They don't run during server rendering.
+* Efektler **yalnızca istemcide (client) çalışır.** Sunucu taraflı renderlama (server-side rendering) esnasında çalışmaz.
 
-* The code inside `useLayoutEffect` and all state updates scheduled from it **block the browser from repainting the screen.** When used excessively, this makes your app slow. When possible, prefer [`useEffect`.](/reference/react/useEffect)
+* `useLayoutEffect` fonksiyonunun kodu ve içerisinde planlanan state güncellemeleri, **tarayıcının ekrana yeniden çizme işlemini bloklar**. Aynı zamanda gereğinden fazla kullanılması durumunda uygulamanızı yavaşlatabilir. Mümkün olduğunca [`useEffect`](/reference/react/useEffect)'i tercih edin.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Measuring layout before the browser repaints the screen {/*measuring-layout-before-the-browser-repaints-the-screen*/}
+### Tarayıcı ekrana çizmeden önce yerleşimi ölçmek {/*measuring-layout-before-the-browser-repaints-the-screen*/}
 
-Most components don't need to know their position and size on the screen to decide what to render. They only return some JSX. Then the browser calculates their *layout* (position and size) and repaints the screen.
+Çoğu bileşen, render edeceği elementlere karar vermek için ekrandaki konumlarını ve boyutlarını bilmeye ihtiyaç duymaz. Sadece JSX döndürürler. Sonrasında tarayıcı, *yerleşimlerini* (konum ve boyut) hesaplar ve ekrana çizer.
 
-Sometimes, that's not enough. Imagine a tooltip that appears next to some element on hover. If there's enough space, the tooltip should appear above the element, but if it doesn't fit, it should appear below. In order to render the tooltip at the right final position, you need to know its height (i.e. whether it fits at the top).
+Bazen bu yeterli olmaz. Bir elementin üzerine gelindiğinde yanında görünen bir ipucu kutusunu (tooltip) düşünün. Yeterli alan mevcutsa öğenin üstünde, yoksa altında görünmelidir. Doğru konumda render edilmesi için kutunun yüksekliğini bilmeye ihtiyacınız (üstteki boşluğa sığdığından emin olmak adına) vardır.
 
-To do this, you need to render in two passes:
+Bunu yapmak için çift dikiş renderlamaya ihtiyacınız vardır:
 
-1. Render the tooltip anywhere (even with a wrong position).
-2. Measure its height and decide where to place the tooltip.
-3. Render the tooltip *again* in the correct place.
+1. İpucunu herhangi bir yerde render edin (konumu farketmez).
+2. Yüksekliğini ölçün ve ipucunu yerleştireceğiniz yere karar verin.
+3. İpucunu doğru yerde yeniden render edin.
 
-**All of this needs to happen before the browser repaints the screen.** You don't want the user to see the tooltip moving. Call `useLayoutEffect` to perform the layout measurements before the browser repaints the screen:
+**Tüm bunlar tarayıcı ekrana yeniden çizmeden önce yaşanmalıdır**. Kullanıcının kutunun konum değiştirme hareketini görmesini istemezsiniz. Yerleşim ölçümlerini yapmak için `useLayoutEffect`'i çağırın:
 
 ```js {5-8}
 function Tooltip() {
   const ref = useRef(null);
-  const [tooltipHeight, setTooltipHeight] = useState(0); // You don't know real height yet
+  const [tooltipHeight, setTooltipHeight] = useState(0); // Henüz yüksekliğini bilmiyorsunuz
 
   useLayoutEffect(() => {
     const { height } = ref.current.getBoundingClientRect();
-    setTooltipHeight(height); // Re-render now that you know the real height
+    setTooltipHeight(height); // Gerçek yüksekliği öğrendikten sonra yeniden render edin
   }, []);
 
-  // ...use tooltipHeight in the rendering logic below...
+  // ...aşağıda bulunan rendering mantığında tooltipHeight'i kullanın...
 }
 ```
 
-Here's how this works step by step:
+İşleyişi adım adım şu şekilde açıklanabilir:
 
-1. `Tooltip` renders with the initial `tooltipHeight = 0`  (so the tooltip may be wrongly positioned).
-2. React places it in the DOM and runs the code in `useLayoutEffect`.
-3. Your `useLayoutEffect` [measures the height](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) of the tooltip content and triggers an immediate re-render.
-4. `Tooltip` renders again with the real `tooltipHeight` (so the tooltip is correctly positioned).
-5. React updates it in the DOM, and the browser finally displays the tooltip.
+1. `Tooltip`, başlangıçta `tooltipHeight = 0` olarak render edilir (kutu yanlış konumlandırılabilir).
+2. React, DOM'a yerleştirir ve `useLayoutEffect`'teki kodu çalıştırır.
+3. `useLayoutEffect`, ipucu kutusunun [yüksekliğini ölçer](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) ve anında yeniden render'ı tetikler.
+4. `Tooltip`, gerçek `tooltipHeight` ile yeniden render edilir (kutu doğru konumlandırılır).
+5. React, DOM'u günceller ve tarayıcı ipucu kutusunu nihayet görüntüler.
 
-Hover over the buttons below and see how the tooltip adjusts its position depending on whether it fits:
+Aşağıdaki düğmelerin üzerine gelip ipucu kutusunun sığıp sığmadığına bağlı olarak nasıl konumlandırılacağını görün:
 
 <Sandpack>
 
@@ -120,29 +120,29 @@ export default function App() {
       <ButtonWithTooltip
         tooltipContent={
           <div>
-            This tooltip does not fit above the button.
+            Bu ipucu kutusu düğmenin üstüne sığmaz.
             <br />
-            This is why it's displayed below instead!
+            Bu yüzden altında görüntülenir!
           </div>
         }
       >
-        Hover over me (tooltip above)
+        Fareyle üstüme gel (ipucu kutusu aşağıda)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (ipucu kutusu yukarıda)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (ipucu kutusu yukarıda)
       </ButtonWithTooltip>
     </div>
   );
@@ -197,7 +197,7 @@ export default function Tooltip({ children, targetRect }) {
   useLayoutEffect(() => {
     const { height } = ref.current.getBoundingClientRect();
     setTooltipHeight(height);
-    console.log('Measured tooltip height: ' + height);
+    console.log('Ölçülen ipucu kutusu yüksekliği: ' + height);
   }, []);
 
   let tooltipX = 0;
@@ -206,7 +206,7 @@ export default function Tooltip({ children, targetRect }) {
     tooltipX = targetRect.left;
     tooltipY = targetRect.top - tooltipHeight;
     if (tooltipY < 0) {
-      // It doesn't fit above, so place below.
+      // Yukarıya sığmadığı için altına yerleştirilir
       tooltipY = targetRect.bottom;
     }
   }
@@ -251,13 +251,13 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 </Sandpack>
 
-Notice that even though the `Tooltip` component has to render in two passes (first, with `tooltipHeight` initialized to `0` and then with the real measured height), you only see the final result. This is why you need `useLayoutEffect` instead of [`useEffect`](/reference/react/useEffect) for this example. Let's look at the difference in detail below.
+Dikkat edin, `Tooltip` bileşeni çift dikiş (önce `tooltipHeight = 0` olarak, ardından ölçülen yükseklikle) render edilmesine rağmen, yalnızca nihai sonucu görürsünüz. Elbette bunun için örnekteki gibi [`useEffect`](/reference/react/useEffect) yerine `useLayoutEffect` kullanmanız gerekir. Farkı detaylıca inceleyelim.
 
 <Recipes titleText="useLayoutEffect vs useEffect" titleId="examples">
 
-#### `useLayoutEffect` blocks the browser from repainting {/*uselayouteffect-blocks-the-browser-from-repainting*/}
+#### `useLayoutEffect` tarayıcının ekrana çizme işlemini bloklar {/*uselayouteffect-blocks-the-browser-from-repainting*/}
 
-React guarantees that the code inside `useLayoutEffect` and any state updates scheduled inside it will be processed **before the browser repaints the screen.** This lets you render the tooltip, measure it, and re-render the tooltip again without the user noticing the first extra render. In other words, `useLayoutEffect` blocks the browser from painting.
+React; `useLayoutEffect` kodunun ve içerisinde planlanan durum güncellemelerinin, **tarayıcı ekranı yeniden çizmeden önce** işleme alınacağının garantisini verir. Bu da kullanıcı ilk render'ı fark edemeden tooltip'i ölçmenize ve tekrar render etmenize olanak tanır. Başka bir deyişle, `useLayoutEffect` tarayıcının ekrana çizmesini engeller.
 
 <Sandpack>
 
@@ -270,29 +270,29 @@ export default function App() {
       <ButtonWithTooltip
         tooltipContent={
           <div>
-            This tooltip does not fit above the button.
+            Bu ipucu kutusu düğmenin üstüne sığmaz.
             <br />
-            This is why it's displayed below instead!
+            Bu yüzden altında görüntülenir!
           </div>
         }
       >
-        Hover over me (tooltip above)
+        Fareyle üstüme gel (ipucu kutusu yukarda)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (tooltip below)
       </ButtonWithTooltip>
     </div>
   );
@@ -355,7 +355,7 @@ export default function Tooltip({ children, targetRect }) {
     tooltipX = targetRect.left;
     tooltipY = targetRect.top - tooltipHeight;
     if (tooltipY < 0) {
-      // It doesn't fit above, so place below.
+      // Yukarıya sığmadığı için altına yerleştirilir
       tooltipY = targetRect.bottom;
     }
   }
@@ -402,9 +402,9 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 <Solution />
 
-#### `useEffect` does not block the browser {/*useeffect-does-not-block-the-browser*/}
+#### `useEffect` tarayıcıyı bloklamaz {/*useeffect-does-not-block-the-browser*/}
 
-Here is the same example, but with [`useEffect`](/reference/react/useEffect) instead of `useLayoutEffect`. If you're on a slower device, you might notice that sometimes the tooltip "flickers" and you briefly see its initial position before the corrected position.
+Aynı örneğe [`useEffect`](/reference/react/useEffect) ile bakalım. Daha yavaş bir cihaz kullanıyorsanız, ipucu kutusunun bazen "titrediğini" ve gerçek konumundan önce kısa süreliğine başlangıç konumunda göründüğünü fark edebilirsiniz.
 
 <Sandpack>
 
@@ -417,29 +417,29 @@ export default function App() {
       <ButtonWithTooltip
         tooltipContent={
           <div>
-            This tooltip does not fit above the button.
+            Bu ipucu kutusu düğmenin üstüne sığmaz.
             <br />
-            This is why it's displayed below instead!
+            Bu yüzden altında görüntülenir!
           </div>
         }
       >
-        Hover over me (tooltip above)
+        Fareyle üstüme gel (ipucu kutusu yukarda)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (tooltip below)
       </ButtonWithTooltip>
     </div>
   );
@@ -502,7 +502,7 @@ export default function Tooltip({ children, targetRect }) {
     tooltipX = targetRect.left;
     tooltipY = targetRect.top - tooltipHeight;
     if (tooltipY < 0) {
-      // It doesn't fit above, so place below.
+      // Yukarıya sığmadığı için altına yerleştirilir
       tooltipY = targetRect.bottom;
     }
   }
@@ -547,7 +547,7 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 </Sandpack>
 
-To make the bug easier to reproduce, this version adds an artificial delay during rendering. React will let the browser paint the screen before it processes the state update inside `useEffect`. As a result, the tooltip flickers:
+Farkın net bir şekilde  anlaşılabilmesi için aşağıdaki örnekte render gecikmesi olarak yapay bir gecikme eklenir. React, `useEffect` içindeki state güncellemesini işlemeden önce, tarayıcının ekranı yeniden çizmesine izin verecektir. Sonuç olarak, ipucu kutusu titrer:
 
 <Sandpack>
 
@@ -560,29 +560,29 @@ export default function App() {
       <ButtonWithTooltip
         tooltipContent={
           <div>
-            This tooltip does not fit above the button.
+            Bu ipucu kutusu düğmenin üstüne sığmaz.
             <br />
-            This is why it's displayed below instead!
+            Bu yüzden altında görüntülenir!
           </div>
         }
       >
-        Hover over me (tooltip above)
+        Fareyle üstüme gel (ipucu kutusu yukarda)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
         tooltipContent={
-          <div>This tooltip fits above the button</div>
+          <div>Bu ipucu kutusu düğmenin üstüne sığar.</div>
         }
       >
-        Hover over me (tooltip below)
+        Fareyle üstüme gel (tooltip below)
       </ButtonWithTooltip>
     </div>
   );
@@ -634,10 +634,10 @@ export default function Tooltip({ children, targetRect }) {
   const ref = useRef(null);
   const [tooltipHeight, setTooltipHeight] = useState(0);
 
-  // This artificially slows down rendering
+  // Bu yapay olarak rendering işlemini yavaşlatır
   let now = performance.now();
   while (performance.now() - now < 100) {
-    // Do nothing for a bit...
+    // Kısa süre bekler...
   }
 
   useEffect(() => {
@@ -651,7 +651,7 @@ export default function Tooltip({ children, targetRect }) {
     tooltipX = targetRect.left;
     tooltipY = targetRect.top - tooltipHeight;
     if (tooltipY < 0) {
-      // It doesn't fit above, so place below.
+      // Yukarıya sığmadığı için altına yerleştirilir
       tooltipY = targetRect.bottom;
     }
   }
@@ -696,7 +696,7 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 </Sandpack>
 
-Edit this example to `useLayoutEffect` and observe that it blocks the paint even if rendering is slowed down.
+Yukarıdaki kodu `useLayoutEffect` kullanacak şekilde düzenleyin ve rendering yavaşlatıldığında bile ekrana çizme işlemini engellediğini gözlemleyin.
 
 <Solution />
 
@@ -704,40 +704,36 @@ Edit this example to `useLayoutEffect` and observe that it blocks the paint even
 
 <Note>
 
-Rendering in two passes and blocking the browser hurts performance. Try to avoid this when you can.
+İki aşamalı render'lama ve tarayıcıyı bloklama performansı düşürür. Yapabildiğinizce bundan kaçınmaya çalışın.
 
 </Note>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### I'm getting an error: "`useLayoutEffect` does nothing on the server" {/*im-getting-an-error-uselayouteffect-does-nothing-on-the-server*/}
+### "`useLayoutEffect` does nothing on the server" hatası alıyorum {/*im-getting-an-error-uselayouteffect-does-nothing-on-the-server*/}
 
-The purpose of `useLayoutEffect` is to let your component [use layout information for rendering:](#measuring-layout-before-the-browser-repaints-the-screen)
+`useLayoutEffect`'in amacı, bileşeninizin [render anında yerleşim bilgisini kullanmasına](#measuring-layout-before-the-browser-repaints-the-screen) izin vermektir:
 
-1. Render the initial content.
-2. Measure the layout *before the browser repaints the screen.*
-3. Render the final content using the layout information you've read.
+1. Başlangıç içeriğini render edin.
+2. Tarayıcı ekranı çizmeden önce yerleşimi ölçün.
+3. Okuduğunuz yerleşim bilgisini kullanarak nihai içeriği render edin.
 
-When you or your framework uses [server rendering](/reference/react-dom/server), your React app renders to HTML on the server for the initial render. This lets you show the initial HTML before the JavaScript code loads.
+Siz veya framework'ünüz [sunucu taraflı render'lama](/reference/react-dom/server) kullanıyorsa, React uygulamanız ilk render için sunucuda HTML render eder. Bu da JavaScript kodu yüklenmeden önce HTML'ini göstermenize sebep olur.
 
-The problem is that on the server, there is no layout information.
+Sorunun kaynağı sunucuda yerleşim (layout) bilgisinin bulunmamasıdır.
 
-In the [earlier example](#measuring-layout-before-the-browser-repaints-the-screen), the `useLayoutEffect` call in the `Tooltip` component lets it position itself correctly (either above or below content) depending on the content height. If you tried to render `Tooltip` as a part of the initial server HTML, this would be impossible to determine. On the server, there is no layout yet! So, even if you rendered it on the server, its position would "jump" on the client after the JavaScript loads and runs.
+[Önceki örneklerde](#measuring-layout-before-the-browser-repaints-the-screen) bahsedilen `Tooltip` bileşenindeki `useLayoutEffect` çağrısı, içeriğin yüksekliğine bağlı olarak doğru konuma yerleşmesine izin veriyordu (içeriğin üstünde veya altında). `Tooltip`'i sunucu HTML'inin bir parçası olarak render etmeye çalışırsanız, konumu belirlemek imkansız olur. Sunucuda yerleşim yoktur! Bu nedenle, sunucuda render edilen bileşeniniz JavaScript yüklenip çalıştırıldıktan sonra nihai konumuna "zıplar".
 
-Usually, components that rely on layout information don't need to render on the server anyway. For example, it probably doesn't make sense to show a `Tooltip` during the initial render. It is triggered by a client interaction.
+Genellikle yerleşim bilgisine ihtiyaç duyan bileşenlerin sunucuda render edilmesi gereksizdir. Örneğin, ilk render'da `Tooltip` göstermek çoğu zaman mantıklı değildir. İstemci etkileşimiyle tetiklenmelidir.
 
-However, if you're running into this problem, you have a few different options:
+Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç farklı seçenek vardır:
 
-- Replace `useLayoutEffect` with [`useEffect`.](/reference/react/useEffect) This tells React that it's okay to display the initial render result without blocking the paint (because the original HTML will become visible before your Effect runs).
+- `useLayoutEffect`'i [`useEffect`](/reference/react/useEffect) ile değiştirin. Bu, React'a ekrana çizme işlemini bloke etmesine gerek olmadan ilk render sonucunu görüntüleyebileceğini söyler (çünkü efektiniz çalışmadan önce HTML render edilmiş olacaktır).
 
-- Alternatively, [mark your component as client-only.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) This tells React to replace its content up to the closest [`<Suspense>`](/reference/react/Suspense) boundary with a loading fallback (for example, a spinner or a glimmer) during server rendering.
+- Alternatif olarak, [bileşeninizi yalnızca istemci taraflı render olacak şekilde işaretleyin](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content). Böylece bileşen sunucu tarafında render edilirken en yakındaki [`<Suspense>`](/reference/react/Suspense) sınırına (boundary) yüklenme fallback'i olarak verilen bileşen (örneğin, spinner veya glimmer) ile değiştirilir.
 
-- Alternatively, you can render a component with `useLayoutEffect` only after hydration. Keep a boolean `isMounted` state that's initialized to `false`, and set it to `true` inside a `useEffect` call. Your rendering logic can then be like `return isMounted ? <RealContent /> : <FallbackContent />`. On the server and during the hydration, the user will see `FallbackContent` which should not call `useLayoutEffect`. Then React will replace it with `RealContent` which runs on the client only and can include `useLayoutEffect` calls.
+- Alternatif olarak, `useLayoutEffect` kullanan bileşeni hidratlama sonrasında render ettirebilirsiniz. Başlangıç değeri `false` olan `isMounted` isminde bir state oluşturun ve `useEffect` içerisinde `true` olarak ayarlayın. Render ederken lojiğiniz şöyle olabilir: `return isMounted ? <RealContent /> : <FallbackContent />`. Sunucudayken veya hidratlama sırasında, kullanıcı `useLayoutEffect` çağırılmayan `FallbackContent`'i görür. İstemci tarafında React, içeriği `RealContent` ile değiştirir.
 
-- If you synchronize your component with an external data store and rely on `useLayoutEffect` for different reasons than measuring layout, consider [`useSyncExternalStore`](/reference/react/useSyncExternalStore) instead which [supports server rendering.](/reference/react/useSyncExternalStore#adding-support-for-server-rendering)
-
-
-
-
+- Bileşeninizi harici bir veri deposu (data store) ile senkron tutuyorsanız ve `useEffect`'i yerleşimi ölçmek yerine başka sebeplerle kullanıyorsanız, bunun yerine [sunucu taraflı render'ı destekleyen](/reference/react/useSyncExternalStore#adding-support-for-server-rendering) [`useSyncExternalStore`](/reference/react/useSyncExternalStore)'u kullanmayı düşünün.

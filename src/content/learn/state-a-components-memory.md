@@ -1,25 +1,25 @@
 ---
-title: "State: A Component's Memory"
+title: "State: Bir Bileşenin Hafızası"
 ---
 
 <Intro>
 
-Components often need to change what's on the screen as a result of an interaction. Typing into the form should update the input field, clicking "next" on an image carousel should change which image is displayed, clicking "buy" should put a product in the shopping cart. Components need to "remember" things: the current input value, the current image, the shopping cart. In React, this kind of component-specific memory is called *state*.
+Bileşenler, etkileşimin bir sonucu olarak ekranda olanı değiştirmeye sıklıkla ihtiyaç duyarlar. Forma yazı yazmak, giriş alanını güncellemelidir, resim karuselinde "sonraki"ye tıklamak gösterilen resmi değiştirmelidir, "satın al" düğmesine tıklamak bir ürünü alışveriş sepetine koymalıdır. Bileşenler şeyleri "hatırlamalıdır": mevcut girdi değeri, mevcut resim, alışveriş sepeti. React'te, bileşene özgü bu tür bellek *state* olarak adlandırılır.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to add a state variable with the [`useState`](/reference/react/useState) Hook
-* What pair of values the `useState` Hook returns
-* How to add more than one state variable
-* Why state is called local
+* [`useState`](/reference/react/useState) Hook'u ile state değişkeni nasıl eklenir
+* `useState` Hook'unun döndürdüğü değer çifti
+* Birden fazla state değişkeni nasıl eklenir
+* Neden state'in yerel olarak adlandırıldığı
 
 </YouWillLearn>
 
-## When a regular variable isn’t enough {/*when-a-regular-variable-isnt-enough*/}
+## Normal bir değişken yeterli olmadığında {/*when-a-regular-variable-isnt-enough*/}
 
-Here's a component that renders a sculpture image. Clicking the "Next" button should show the next sculpture by changing the `index` to `1`, then `2`, and so on. However, this **won't work** (you can try it!):
+İşte bir heykel resmini oluşturan bir bileşen. "Sonraki" düğmesine tıklanarak `index` değişkeni `1`, ardından `2` ve benzeri şekilde değiştirilerek bir sonraki heykel gösterilmelidir. Ancak bu **çalışmayacaktır** (deneyebilirsiniz!):
 
 <Sandpack>
 
@@ -37,11 +37,11 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleClick}>
-        Next
+        Sonraki
       </button>
       <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
+        <i>{sculpture.name}, </i>
+        {sculpture.artist}
       </h2>
       <h3>  
         ({index + 1} of {sculptureList.length})
@@ -62,75 +62,75 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlık özünün temel ve manevi nitelikleriyle ilgilendiği için tanınmaktadır. Bu devasa (7ft. veya 2,13m) bronz, "evrensel insanlık duygusuyla zenginleştirilmiş sembolik bir Siyah varlığı" olarak tanımladığı şeyi temsil etmektedir.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 ```
 
@@ -151,46 +151,47 @@ button {
 
 </Sandpack>
 
-The `handleClick` event handler is updating a local variable, `index`. But two things prevent that change from being visible:
+`handleClick` olay yöneticisi bir yerel değişken olan `index`'i güncelliyor. Ancak, iki şey bu değişikliğin görünür olmasını engelliyor:
 
-1. **Local variables don't persist between renders.** When React renders this component a second time, it renders it from scratch—it doesn't consider any changes to the local variables.
-2. **Changes to local variables won't trigger renders.** React doesn't realize it needs to render the component again with the new data.
+1. **Yerel değişkenler renderlar arasında kalıcı değildir.** React bu bileşeni ikinci kez renderladığında, herhangi bir yerel değişiklik göz önünde bulundurulmaz ve bileşen sıfırdan yeniden renderlanır.
+2. **Yerel değişkenlere yapılan değişiklikler renderı tetiklemez.** React, bileşeni yeni verilerle yeniden render etmesi gerektiğini fark etmez.
 
-To update a component with new data, two things need to happen:
+Yeni verilerle bir bileşeni güncellemek için, iki şeyin yapılması gerekir:
 
-1. **Retain** the data between renders.
-2. **Trigger** React to render the component with new data (re-rendering).
+1. Renderlar arasında verileri **korumak**.
+2. Bileşeni yeni verilerle yeniden render etmesi için React'i **tetiklemek**.
 
-The [`useState`](/reference/react/useState) Hook provides those two things:
+[`useState`](/reference/react/useState) Hook'u bu iki şeyi sağlar:
 
-1. A **state variable** to retain the data between renders.
-2. A **state setter function** to update the variable and trigger React to render the component again.
+1. Renderlar arasında verileri saklamak için bir **state değişkeni**.
+2. Değişkeni güncellemek ve React'in bileşeni tekrar render etmesini tetiklemek için bir **state setter fonksiyonu**.
 
-## Adding a state variable {/*adding-a-state-variable*/}
+## State değişkeni ekleme {/*adding-a-state-variable*/}
 
-To add a state variable, import `useState` from React at the top of the file:
+Bir state değişkeni eklemek için, dosyanın üst kısmında React'ten `useState` öğesini içe aktarın:
 
 ```js
 import { useState } from 'react';
 ```
 
-Then, replace this line:
+Ardından, bu satırı:
 
 ```js
 let index = 0;
 ```
 
-with
+bununla değiştirin
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-`index` is a state variable and `setIndex` is the setter function.
+`index` bir state değişkeni ve `setIndex` ise bir setter fonksiyonudur.
 
-> The `[` and `]` syntax here is called [array destructuring](https://javascript.info/destructuring-assignment) and it lets you read values from an array. The array returned by `useState` always has exactly two items.
+> Buradaki `[` ve `]` sözdizimine [array destructuring](https://thrkardak.medium.com/javascript-harikalar%C4%B1-3-destructuring-assignment-64cbb9fe3355) denir ve bir diziden değerleri okumanızı sağlar. `useState` tarafından döndürülen dizi her zaman tam olarak iki öğeye sahiptir.
 
-This is how they work together in `handleClick`:
+
+`handleClick` içinde birlikte bu şekilde çalışırlar:
 
 ```js
 function handleClick() {
@@ -198,7 +199,7 @@ function handleClick() {
 }
 ```
 
-Now clicking the "Next" button switches the current sculpture:
+Artık "Sonraki" düğmesine tıklamak mevcut heykeli değiştirir:
 
 <Sandpack>
 
@@ -217,11 +218,11 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleClick}>
-        Next
+        Sonraki
       </button>
-      <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
+       <h2>
+        <i>{sculpture.name}, </i>
+        {sculpture.artist}
       </h2>
       <h3>  
         ({index + 1} of {sculptureList.length})
@@ -242,75 +243,75 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlığın temel ve ruhsal nitelikleriyle ilgilenmesiyle tanınıyordu. Bu devasa (7 fit veya 2,13 m) bronz, "evrensel insanlık duygusu ile dolu sembolik bir Siyah varlığı" olarak nitelendirdiği şeyi temsil eder.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 ```
 
@@ -331,57 +332,56 @@ button {
 
 </Sandpack>
 
-### Meet your first Hook {/*meet-your-first-hook*/}
+### İlk Hook'unuz ile tanışın {/*meet-your-first-hook*/}
 
-In React, `useState`, as well as any other function starting with "`use`", is called a Hook.
+React'te, `useState` ve "`use`" ile başlayan diğer tüm fonksiyonlar Hook olarak adlandırılır.
 
-*Hooks* are special functions that are only available while React is [rendering](/learn/render-and-commit#step-1-trigger-a-render) (which we'll get into in more detail on the next page). They let you "hook into" different React features.
+*Hook'lar* yalnızca React [rendering](/learn/render-and-commit#step-1-trigger-a-render) işlemi sırasında kullanılabilen özel fonksiyonlardır (bir sonraki sayfada daha ayrıntılı olarak ele alacağız). Bunlar farklı React özelliklerini "bağlamaya" izin verirler.
 
-State is just one of those features, but you will meet the other Hooks later.
+State bu özelliklerden sadece biri, ancak diğer Hook'larla daha sonra tanışacaksınız.
 
 <Pitfall>
 
-**Hooks—functions starting with `use`—can only be called at the top level of your components or [your own Hooks.](/learn/reusing-logic-with-custom-hooks)** You can't call Hooks inside conditions, loops, or other nested functions. Hooks are functions, but it's helpful to think of them as unconditional declarations about your component's needs. You "use" React features at the top of your component similar to how you "import" modules at the top of your file.
+**Hook'lar (`use` ile başlayan fonksiyonlar) yalnızca bileşenlerinizin en üst seviyesinde veya [kendi Hook'larınızda](/learn/reusing-logic-with-custom-hooks) çağrılabilir.** Hook'ları koşullar, döngüler veya diğer iç içe geçmiş fonksiyonlar içinde çağıramazsınız. Hook'lar fonksiyonlar olsa da, bileşeninizin ihtiyaçları hakkında koşulsuz deklarasyonlar olarak düşünmek faydalıdır. React özelliklerini bileşeninizin başında "use" edersiniz, tıpkı dosyanızın başında modülleri "import" etmeniz gibi.
 
 </Pitfall>
 
-### Anatomy of `useState` {/*anatomy-of-usestate*/}
+### `useState`'in' anatomisi {/*anatomy-of-usestate*/}
 
-When you call [`useState`](/reference/react/useState), you are telling React that you want this component to remember something:
+[`useState`](/reference/react/useState) fonksiyonunu çağırdığınızda, React'e bu bileşenin bir şeyleri hatırlamasını istediğinizi söylüyorsunuz:
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-In this case, you want React to remember `index`.
+Bu örnekte, React'in `index`i hatırlamasını istiyorsunuz.
 
 <Note>
 
-The convention is to name this pair like `const [something, setSomething]`. You could name it anything you like, but conventions make things easier to understand across projects.
+Bu çifti `const [birOge, setBirOge]` gibi adlandırmak geleneksel bir yöntemdir. İstediğiniz herhangi bir isim verebilirsiniz, ancak gelenekleşmiş yöntemler farklı projeler arasında şeylerin daha kolay anlaşılmasını sağlar.
 
 </Note>
 
-The only argument to `useState` is the **initial value** of your state variable. In this example, the `index`'s initial value is set to `0` with `useState(0)`. 
+`useState` için tek argüman state değişkeninizin **başlangıç değeridir**. Bu örnekte, `index`in başlangıç değeri `useState(0)` ile `0` olarak ayarlanmıştır. 
 
-Every time your component renders, `useState` gives you an array containing two values:
+Bileşeniniz her render edildiğinde, `useState` size iki değer içeren bir dizi verir:
 
-1. The **state variable** (`index`) with the value you stored.
-2. The **state setter function** (`setIndex`) which can update the state variable and trigger React to render the component again.
+1. Değerinizi saklayan **state değişkeni** (`index`).
+2. State değişkenini güncelleyebilen ve React'in bileşeni yeniden renderlaması için tetikleyen **state setter fonksiyonu** (`setIndex`).
 
-Here's how that happens in action:
+İşte bunun işleyişi:
 
 ```js
 const [index, setIndex] = useState(0);
 ```
+1. **Bileşeniniz ilk kez render edilir.** `useState`'e `index` başlangıç değeri olarak  `0` geçtiğinizden, `[0, setIndex]` olarak geri dönecektir. React, `0` değerinin en son state değeri olduğunu hatırlar.
+2. **State'i güncellersiniz.** Bir kullanıcı butona tıkladığında, `setIndex(index + 1)` çağırır. `index` değeri `0` olduğu için `setIndex(1)` çağrılır. Bu, React'e `index`'in artık `1` olduğunu hatırlamasını söyler ve başka bir render işlemini tetikler.
+3. **Bileşeninizin ikinci render edilişi.** React hala `useState(0)`'ı görür, ancak React `index`'in artık `1` olarak ayarlandığını *hatırladığıdan*, `[1, setIndex]` olarak geri döner.
+4. Ve böyle devam eder!
 
-1. **Your component renders the first time.** Because you passed `0` to `useState` as the initial value for `index`, it will return `[0, setIndex]`. React remembers `0` is the latest state value.
-2. **You update the state.** When a user clicks the button, it calls `setIndex(index + 1)`. `index` is `0`, so it's `setIndex(1)`. This tells React to remember `index` is `1` now and triggers another render.
-3. **Your component's second render.** React still sees `useState(0)`, but because React *remembers* that you set `index` to `1`, it returns `[1, setIndex]` instead.
-4. And so on!
+## Bir bileşene birden fazla state değişkeni verme {/*giving-a-component-multiple-state-variables*/}
 
-## Giving a component multiple state variables {/*giving-a-component-multiple-state-variables*/}
-
-You can have as many state variables of as many types as you like in one component. This component has two state variables, a number `index` and a boolean `showMore` that's toggled when you click "Show details":
+Bir bileşende istediğiniz kadar çok sayıda farklı tipte state değişkeni olabilir. Bu bileşende, bir `index` sayısı ve "Detayları göster"e tıkladığınızda değiştirilen bir boolean `showMore` değeri:
 
 <Sandpack>
 
@@ -405,17 +405,17 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleNextClick}>
-        Next
+        Sonraki
       </button>
-      <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
+       <h2>
+        <i>{sculpture.name}, </i>
+        {sculpture.artist}
       </h2>
       <h3>  
         ({index + 1} of {sculptureList.length})
       </h3>
       <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
+        Detayları {showMore ? 'Gizle' : 'Göster'}
       </button>
       {showMore && <p>{sculpture.description}</p>}
       <img 
@@ -431,75 +431,75 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlığın temel ve ruhsal nitelikleriyle ilgilenmesiyle tanınıyordu. Bu devasa (7 fit veya 2,13 m) bronz, "evrensel insanlık duygusu ile dolu sembolik bir Siyah varlığı" olarak nitelendirdiği şeyi temsil eder.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 ```
 
@@ -520,19 +520,19 @@ button {
 
 </Sandpack>
 
-It is a good idea to have multiple state variables if their state is unrelated, like `index` and `showMore` in this example. But if you find that you often change two state variables together, it might be easier to combine them into one. For example, if you have a form with many fields, it's more convenient to have a single state variable that holds an object than state variable per field. Read [Choosing the State Structure](/learn/choosing-the-state-structure) for more tips.
+Bu örnekte olduğu gibi `index` ve `showMore` gibi state'ler birbirleriyle ilişkisiz olduğunda, birden fazla state değişkenine sahip olmak iyi bir fikirdir. Ancak iki state değişkenini sık sık birlikte değiştirdiğinizi fark ederseniz, bunları tek bir değişkende birleştirmek daha pratik olabilir. Örneğin, çok sayıda alana sahip bir formunuz varsa, alan başına state değişkeni yerine bir nesneyi tutan tek bir state değişkenine sahip olmak daha uygundur. Daha fazla ipucu için [Choosing the State Structure](/learn/choosing-the-state-structure) bölümünü okuyun.
 
 <DeepDive>
 
-#### How does React know which state to return? {/*how-does-react-know-which-state-to-return*/}
+#### React hangi state'in geri döneceğini nasıl bilir? {/*how-does-react-know-which-state-to-return*/}
 
-You might have noticed that the `useState` call does not receive any information about *which* state variable it refers to. There is no "identifier" that is passed to `useState`, so how does it know which of the state variables to return? Does it rely on some magic like parsing your functions? The answer is no.
+`useState` çağrısının *hangi* state değişkenine referans verdiği hakkında herhangi bir bilgi almadığını fark etmiş olabilirsiniz. `useState`'e geçilen bir "tanımlayıcı" yoktur, peki hangi state değişkenini döndüreceğini nasıl bilir? Fonksiyonlarınızı ayrıştırmak gibi bir sihre mi güveniyor? Cevap hayır.
 
-Instead, to enable their concise syntax, Hooks **rely on a stable call order on every render of the same component.** This works well in practice because if you follow the rule above ("only call Hooks at the top level"), Hooks will always be called in the same order. Additionally, a [linter plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) catches most mistakes.
+Bunun yerine, kısa sözdizimlerini etkinleştirmek için Hook'lar **aynı bileşenin her render edilişinde sabit bir çağrı sırasına dayanır.** Bu pratikte iyi çalışır, çünkü yukarıdaki kuralı izlerseniz ("Hook'ları yalnızca en üst düzeyde çağırın"), Hook'lar her zaman aynı sırada çağrılacaktır. Ek olarak bir [linter eklentisi](https://www.npmjs.com/package/eslint-plugin-react-hooks) çoğu hatayı yakalar.
 
-Internally, React holds an array of state pairs for every component. It also maintains the current pair index, which is set to `0` before rendering. Each time you call `useState`, React gives you the next state pair and increments the index. You can read more about this mechanism in [React Hooks: Not Magic, Just Arrays.](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e)
+Dahili olarak, React her bileşen için bir state çifti dizisi tutar. Ayrıca, render edilmeden önce `0` olarak ayarlanan mevcut çift indeksini de tutar. Her `useState`'i çağırdığınızda, React size bir sonraki state çiftini verir ve indeksi artırır. Bu mekanizma hakkında daha fazla bilgi için [React Hooks: Not Magic, Just Arrays](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e) yazısını okuyabilirsiniz.
 
-This example **doesn't use React** but it gives you an idea of how `useState` works internally:
+Bu örnekte **React** kullanılmıyor ancak `useState`in dahili olarak nasıl çalıştığı hakkında bir fikir verir:
 
 <Sandpack>
 
@@ -540,37 +540,37 @@ This example **doesn't use React** but it gives you an idea of how `useState` wo
 let componentHooks = [];
 let currentHookIndex = 0;
 
-// How useState works inside React (simplified).
+// useState'nın React içinde nasıl çalıştığı (basitleştirilmiş).
 function useState(initialState) {
   let pair = componentHooks[currentHookIndex];
   if (pair) {
-    // This is not the first render,
-    // so the state pair already exists.
-    // Return it and prepare for next Hook call.
+    // Bu ilk render değil,
+    // dolayısıyla state çifti zaten var.
+    // Onu döndür ve bir sonraki Hook çağrısı için hazırla.
     currentHookIndex++;
     return pair;
   }
 
-  // This is the first time we're rendering,
-  // so create a state pair and store it.
+  // Bu ilk render,
+  // state çifti oluştur ve depola.
   pair = [initialState, setState];
 
   function setState(nextState) {
-    // When the user requests a state change,
-    // put the new value into the pair.
+    // Kullanıcı state değişikliği talep ettiğinde,
+    // yeni değeri çiftin içine yerleştir.
     pair[0] = nextState;
     updateDOM();
   }
 
-  // Store the pair for future renders
-  // and prepare for the next Hook call.
+  // Gelecekteki renderlar için çifti depola
+  // ve bir sonraki Hook çağrısı için hazırla.
   componentHooks[currentHookIndex] = pair;
   currentHookIndex++;
   return pair;
 }
 
 function Gallery() {
-  // Each useState() call will get the next pair.
+  // Her useState() çağrısı bir sonraki çifti alacaktır.
   const [index, setIndex] = useState(0);
   const [showMore, setShowMore] = useState(false);
 
@@ -583,14 +583,14 @@ function Gallery() {
   }
 
   let sculpture = sculptureList[index];
-  // This example doesn't use React, so
-  // return an output object instead of JSX.
+  // Bu örnek React kullanmadığından
+  // JSX yerine bir çıktı nesnesi geri döndürür.
   return {
     onNextClick: handleNextClick,
     onMoreClick: handleMoreClick,
     header: `${sculpture.name} by ${sculpture.artist}`,
     counter: `${index + 1} of ${sculptureList.length}`,
-    more: `${showMore ? 'Hide' : 'Show'} details`,
+    more: `$Detayları {showMore ? 'Gizle' : 'Göster'}`,
     description: showMore ? sculpture.description : null,
     imageSrc: sculpture.url,
     imageAlt: sculpture.alt
@@ -598,13 +598,13 @@ function Gallery() {
 }
 
 function updateDOM() {
-  // Reset the current Hook index
-  // before rendering the component.
+  // Bileşeni oluşturmadan önce
+  // mevcut Hook dizinini sıfırla.
   currentHookIndex = 0;
   let output = Gallery();
 
-  // Update the DOM to match the output.
-  // This is the part React does for you.
+  // Çıktıya uygun olarak DOM'u güncelle.
+  // Bu kısım React tarafından sizin için yapılır.
   nextButton.onclick = output.onNextClick;
   header.textContent = output.header;
   moreButton.onclick = output.onMoreClick;
@@ -627,84 +627,84 @@ let image = document.getElementById('image');
 let sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlığın temel ve ruhsal nitelikleriyle ilgilenmesiyle tanınıyordu. Bu devasa (7 fit veya 2,13 m) bronz, "evrensel insanlık duygusu ile dolu sembolik bir Siyah varlığı" olarak nitelendirdiği şeyi temsil eder.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 
-// Make UI match the initial state.
+// Kullanıcı arayüzünü ilk state ile eşleştir.
 updateDOM();
 ```
 
 ```html public/index.html
 <button id="nextButton">
-  Next
+  Sonraki
 </button>
 <h3 id="header"></h3>
 <button id="moreButton"></button>
@@ -724,15 +724,15 @@ button { display: block; margin-bottom: 10px; }
 
 </Sandpack>
 
-You don't have to understand it to use React, but you might find this a helpful mental model.
+React'i kullanmak için bunu anlamak zorunda değilsiniz, ancak bu sizin için yararlı bir zihinsel model olabilir.
 
 </DeepDive>
 
-## State is isolated and private {/*state-is-isolated-and-private*/}
+## State izole edilmiştir ve özeldir {/*state-is-isolated-and-private*/}
 
-State is local to a component instance on the screen. In other words, **if you render the same component twice, each copy will have completely isolated state!** Changing one of them will not affect the other.
+State, ekrandaki bir bileşen örneği için yereldir. Başka bir deyişle, **aynı bileşeni iki kez render ederseniz, her bir kopya tamamen izole edilmiş state'e sahip olacaktır** Birini değiştirmek diğerini etkilemeyecektir.
 
-In this example, the `Gallery` component from earlier is rendered twice with no changes to its logic. Try clicking the buttons inside each of the galleries. Notice that their state is independent:
+Bu örnekte, önceki örnekteki `Gallery` bileşeni çalışma mantığı değiştirilmeden iki kez render edilir. Galerilerin her birinin içindeki düğmelere tıklamayı deneyin. State'lerinin bağımsız olduğuna dikkat edin:
 
 <Sandpack>
 
@@ -770,17 +770,17 @@ export default function Gallery() {
   return (
     <section>
       <button onClick={handleNextClick}>
-        Next
+        Sonraki
       </button>
-      <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
+       <h2>
+        <i>{sculpture.name}, </i>
+        {sculpture.artist}
       </h2>
       <h3>  
         ({index + 1} of {sculptureList.length})
       </h3>
       <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
+        Detayları {showMore ? 'Gizle' : 'Göster'}
       </button>
       {showMore && <p>{sculpture.description}</p>}
       <img 
@@ -796,75 +796,75 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlığın temel ve ruhsal nitelikleriyle ilgilenmesiyle tanınıyordu. Bu devasa (7 fit veya 2,13 m) bronz, "evrensel insanlık duygusu ile dolu sembolik bir Siyah varlığı" olarak nitelendirdiği şeyi temsil eder.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 ```
 
@@ -891,21 +891,21 @@ button {
 
 </Sandpack>
 
-This is what makes state different from regular variables that you might declare at the top of your module. State is not tied to a particular function call or a place in the code, but it's "local" to the specific place on the screen. You rendered two `<Gallery />` components, so their state is stored separately.
+Bu, state'i modülünüzün en üstünde bildirebileceğiniz normal değişkenlerden farklı kılan şeydir. State belirli bir fonksiyon çağrısına veya koddaki bir yere bağlı değildir, ancak ekrandaki belirli bir yere "yereldir". İki `<Gallery />` bileşeni oluşturdunuz, bu nedenle state'leri ayrı ayrı saklanır.
 
-Also notice how the `Page` component doesn't "know" anything about the `Gallery` state or even whether it has any. Unlike props, **state is fully private to the component declaring it.** The parent component can't change it. This lets you add state to any component or remove it without impacting the rest of the components.
+Ayrıca `Page` bileşeninin `Gallery` state'i hakkında hiçbir şey "bilmediğine" ve hatta herhangi bir state'e sahip olup olmadığına dikkat edin. Prop'ların aksine, **state, onu bildiren bileşene tamamen özeldir.** Üst bileşen onu değiştiremez. Bu, bileşenlerin geri kalanını etkilemeden herhangi bir bileşene state eklemenize veya kaldırmanıza olanak tanır.
 
-What if you wanted both galleries to keep their states in sync? The right way to do it in React is to *remove* state from child components and add it to their closest shared parent. The next few pages will focus on organizing state of a single component, but we will return to this topic in [Sharing State Between Components.](/learn/sharing-state-between-components)
+Peki ya her iki galerinin de state'lerinin senkronize olmasını istiyorsanız? React'te bunu yapmanın doğru yolu, alt bileşenlerden state'i *kaldırmak* ve en yakın paylaşılan ebeveynlerine eklemektir. Sonraki birkaç sayfa tek bir bileşenin state'ini düzenlemeye odaklanacak, ancak bu konuya [Sharing State Between Components](/learn/sharing-state-between-components) bölümünde geri döneceğiz.
 
 <Recap>
 
-* Use a state variable when a component needs to "remember" some information between renders.
-* State variables are declared by calling the `useState` Hook.
-* Hooks are special functions that start with `use`. They let you "hook into" React features like state.
-* Hooks might remind you of imports: they need to be called unconditionally. Calling Hooks, including `useState`, is only valid at the top level of a component or another Hook.
-* The `useState` Hook returns a pair of values: the current state and the function to update it.
-* You can have more than one state variable. Internally, React matches them up by their order.
-* State is private to the component. If you render it in two places, each copy gets its own state.
+* Bir bileşenin render işlemleri arasında bazı bilgileri "hatırlaması" gerektiğinde bir state değişkeni kullanın.
+* State değişkenleri `useState` Hook`u çağrılarak bildirilir.
+* Hook'lar `use` ile başlayan özel fonksiyonlardır. State gibi React özelliklerine "bağlanmanızı (hook into)" sağlarlar.
+* Hook'lar, size import'ları hatırlatabilir: koşulsuz olarak çağrılmalıdırlar. `useState` de dahil Hook'ları çağırmak, yalnızca bir bileşenin üst seviyesinde veya başka bir Hook'ta geçerlidir.
+* `useState` Hook'u bir çift değer döndürür: mevcut state ve onu güncelleyecek fonksiyon.
+* Birden fazla state değişkeniniz olabilir. Dahili olarak, React bunları sıralarına göre eşleştirir.
+* State bileşene özeldir. Eğer iki yerde render ederseniz, her kopya kendi state'ini oluşturur.
 
 </Recap>
 
@@ -913,11 +913,11 @@ What if you wanted both galleries to keep their states in sync? The right way to
 
 <Challenges>
 
-#### Complete the gallery {/*complete-the-gallery*/}
+#### Galeriyi tamamlayın {/*complete-the-gallery*/}
 
-When you press "Next" on the last sculpture, the code crashes. Fix the logic to prevent the crash. You may do this by adding extra logic to event handler or by disabling the button when the action is not possible.
+Son heykelde "Sonraki" tuşuna bastığınızda kod çöküyor. Çökmeyi önlemek için mantığı düzeltin. Bunu olay yöneticisine ekstra mantık ekleyerek veya işlem mümkün olmadığında düğmeyi devre dışı bırakarak yapabilirsiniz.
 
-After fixing the crash, add a "Previous" button that shows the previous sculpture. It shouldn't crash on the first sculpture.
+Çökmeyi düzelttikten sonra, bir önceki heykeli gösteren "Önceki" düğmesi ekleyin. İlk heykelde çökmemesi gerekir.
 
 <Sandpack>
 
@@ -941,17 +941,17 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleNextClick}>
-        Next
+        Sonraki
       </button>
-      <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
+       <h2>
+        <i>{sculpture.name}, </i>
+        {sculpture.artist}
       </h2>
       <h3>  
         ({index + 1} of {sculptureList.length})
       </h3>
       <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
+        Detayları {showMore ? 'Gizle' : 'Göster'}
       </button>
       {showMore && <p>{sculpture.description}</p>}
       <img 
@@ -967,75 +967,75 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlığın temel ve ruhsal nitelikleriyle ilgilenmesiyle tanınıyordu. Bu devasa (7 fit veya 2,13 m) bronz, "evrensel insanlık duygusu ile dolu sembolik bir Siyah varlığı" olarak nitelendirdiği şeyi temsil eder.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 ```
 
@@ -1059,7 +1059,7 @@ img { width: 120px; height: 120px; }
 
 <Solution>
 
-This adds a guarding condition inside both event handlers and disables the buttons when needed:
+Bu, her iki olay yöneticisinin içine bir koruma koşulu eklemek ve gerektiğinde düğmeleri devre dışı bırakmak:
 
 <Sandpack>
 
@@ -1097,23 +1097,23 @@ export default function Gallery() {
         onClick={handlePrevClick}
         disabled={!hasPrev}
       >
-        Previous
+        Önceki
       </button>
       <button
         onClick={handleNextClick}
         disabled={!hasNext}
       >
-        Next
+        Sonraki
       </button>
-      <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
+       <h2>
+        <i>{sculpture.name}, </i>
+        {sculpture.artist}
       </h2>
       <h3>  
         ({index + 1} of {sculptureList.length})
       </h3>
       <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
+        Detayları {showMore ? 'Gizle' : 'Göster'}
       </button>
       {showMore && <p>{sculpture.description}</p>}
       <img 
@@ -1125,79 +1125,79 @@ export default function Gallery() {
 }
 ```
 
-```js data.js hidden
+```js data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: "Colvin'in öncelikle pre-Hispanik sembollere gönderme yapan soyut temalarıyla tanınmasına rağmen, nöroşirurjiye bir saygı niteliğindeki bu devasa heykel, en tanınmış halka açık sanat eserlerinden biridir.",
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'  
+  alt: 'Parmak uçlarında insan beynini nazikçe tutan iki çapraz ellerden oluşan bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Buenos Aires'te bulunan bu devasa (75 ft. veya 23 m) gümüş çiçek, akşamları veya güçlü rüzgarlar estiğinde yapraklarını kapatarak ve sabahları açarak hareket etmek üzere tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Ayna gibi yansıtıcı yaprakları ve güçlü erkek organları olan devasa bir metal çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson, eşitlik, sosyal adalet ve insanlığın temel ve ruhsal nitelikleriyle ilgilenmesiyle tanınıyordu. Bu devasa (7 fit veya 2,13 m) bronz, "evrensel insanlık duygusu ile dolu sembolik bir Siyah varlığı" olarak nitelendirdiği şeyi temsil eder.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman varmış gibi görünüyor ve hüzünlü. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Paskalya Adası'nda bulunan, erken Rapa Nui halkı tarafından yaratılmış 1.000 moai veya devasa anıtsal heykelden oluşan bir koleksiyondur ve bazıları tanrılaştırılmış ataları temsil ettiğine inanıyor.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Somut ifadeleriyle orantısız büyük başlara sahip üç devasa taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nanalar muzaffer yaratıklar, kadınlık ve annelik sembolleridir. Saint Phalle, Nanalar için başlangıçta kumaş ve buluntu nesneler kullanmış, daha sonra daha canlı bir etki elde etmek için polyester kullanmıştır.',
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Neşe saçan renkli kostümüyle dans eden tuhaf bir kadın figürünün büyük bir mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini yaratmak yerine, insanlardan ve manzaralardan esinlenen soyut formlar geliştirmeyi tercih etmiştir.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'İnsan figürünü anımsatan, birbiri üzerine yığılmış üç unsurdan oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşaktır ahşap oymacılığı yapan Fakeye'nin eserleri geleneksel ve çağdaş Yoruba temalarını harmanlıyor.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle bezenmiş bir atın üzerinde odaklanmış bir yüze sahip bir savaşçının karmaşık bir ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine bir metafor olarak parçalanmış bedenlerin heykelleriyle tanınır. Bu heykel, birbirine yığılmış iki çok gerçekçi büyük karın kasını tasvir eder, her biri yaklaşık beş ayak (1,5m) yüksekliğindedir.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan kıvrımlardan oluşan bir çağlayanı andırıyor.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden bir terracotta heykel koleksiyonudur. Ordu 8.000'den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri benzersiz bir yüz ifadesine ve zırha sahip, vakur savaşçıların 12 pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, New York'un enkazından topladığı ve daha sonra anıtsal yapılarda bir araya getireceği nesnelerle tanınıyordu. Bu eserinde yatak direği, hokkabaz iğnesi ve koltuk parçası gibi birbirinden farklı parçaları kullanmış, bunları çivileyip yapıştırarak Kübizm'in geometrik mekân ve biçim soyutlamasının etkisini yansıtan kutular haline getirmiştir.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ve modern olanı, doğal ve endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de figüratif olarak zorlayıcı, yerçekimine meydan okuyan ve "beklenmedik malzemelerin iyi bir sentezi" olarak tanımlanmıştır.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafif görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan su aygırlarının yer aldığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Bir grup bronz su aygırı heykeli sanki yüzüyormuş gibi kaldırımdan çıkıyor.'
 }];
 ```
 
@@ -1219,13 +1219,13 @@ img { width: 120px; height: 120px; }
 
 </Sandpack>
 
-Notice how `hasPrev` and `hasNext` are used *both* for the returned JSX and inside the event handlers! This handy pattern works because event handler functions ["close over"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) any variables declared while rendering.
+`hasPrev` ve `hasNext`'in *hem* döndürülen JSX için *hem* de olay yöneticilerinin içinde nasıl kullanıldığına dikkat edin! Bu kullanışlı model işe yaramaktadır çünkü olay yöneticisi fonksiyonları ["close over"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) render sırasında bildirilen tüm değişkenleri kapatmaktadır.
 
 </Solution>
 
-#### Fix stuck form inputs {/*fix-stuck-form-inputs*/}
+#### Sıkışmış form girdilerini düzeltin {/*fix-stuck-form-inputs*/}
 
-When you type into the input fields, nothing appears. It's like the input values are "stuck" with empty strings. The `value` of the first `<input>` is set to always match the `firstName` variable, and the `value` for the second `<input>` is set to always match the `lastName` variable. This is correct. Both inputs have `onChange` event handlers, which try to update the variables based on the latest user input (`e.target.value`). However, the variables don't seem to "remember" their values between re-renders. Fix this by using state variables instead.
+Girdi alanlarına yazdığınızda hiçbir şey görünmüyor. İlk `<input>`'un `value` değeri her zaman `firstName` değişkeniyle eşleştirilir ve ikinci `<input>`'un `value` değeri her zaman `lastName` değişkeniyle eşleştirilir. Bu doğrudur. Her iki girdi de onChange olay yöneticilerine sahiptir, bu olay yöneticileri, son kullanıcı girişi (`e.target.value`) temelinde değişkenleri güncellemeye çalışır. Ancak, değişkenler yeniden renderlanırken değerlerini "hatırlamıyor" gibi görünüyorlar. Bunun yerine state değişkenlerini kullanarak bunu düzeltin.
 
 <Sandpack>
 
@@ -1250,17 +1250,17 @@ export default function Form() {
   return (
     <form onSubmit={e => e.preventDefault()}>
       <input
-        placeholder="First name"
+        placeholder="İsim"
         value={firstName}
         onChange={handleFirstNameChange}
       />
       <input
-        placeholder="Last name"
+        placeholder="Soyisim"
         value={lastName}
         onChange={handleLastNameChange}
       />
-      <h1>Hi, {firstName} {lastName}</h1>
-      <button onClick={handleReset}>Reset</button>
+      <h1>Merhaba, {firstName} {lastName}</h1>
+      <button onClick={handleReset}>Sıfırla</button>
     </form>
   );
 }
@@ -1274,7 +1274,7 @@ h1 { margin-top: 10px; }
 
 <Solution>
 
-First, import `useState` from React. Then replace `firstName` and `lastName` with state variables declared by calling `useState`. Finally, replace every `firstName = ...` assignment with `setFirstName(...)`, and do the same for `lastName`. Don't forget to update `handleReset` too so that the reset button works.
+İlk olarak React'ten `useState` öğesini içe aktarın. Ardından `firstName` ve `lastName` yerine `useState` çağrısı ile bildirilen state değişkenlerini yerleştirin. Son olarak, her `firstName = ...` atamasını `setFirstName(...)` ile değiştirin ve aynısını `lastName` için de yapın. Sıfırlama düğmesinin çalışması için `handleReset`i de güncellemeyi unutmayın.
 
 <Sandpack>
 
@@ -1301,17 +1301,17 @@ export default function Form() {
   return (
     <form onSubmit={e => e.preventDefault()}>
       <input
-        placeholder="First name"
+        placeholder="İsim"
         value={firstName}
         onChange={handleFirstNameChange}
       />
       <input
-        placeholder="Last name"
+        placeholder="Soyisim"
         value={lastName}
         onChange={handleLastNameChange}
       />
-      <h1>Hi, {firstName} {lastName}</h1>
-      <button onClick={handleReset}>Reset</button>
+      <h1>Merhaba, {firstName} {lastName}</h1>
+      <button onClick={handleReset}>Sıfırla</button>
     </form>
   );
 }
@@ -1325,13 +1325,13 @@ h1 { margin-top: 10px; }
 
 </Solution>
 
-#### Fix a crash {/*fix-a-crash*/}
+#### Bir çökmeyi düzeltin {/*fix-a-crash*/}
 
-Here is a small form that is supposed to let the user leave some feedback. When the feedback is submitted, it's supposed to display a thank-you message. However, it crashes with an error message saying "Rendered fewer hooks than expected". Can you spot the mistake and fix it?
+Burada kullanıcının geri bildirim bırakmasına izin vermesi amaçlanan küçük bir form bulunmaktadır. Geri bildirim gönderildiğinde, bir teşekkür mesajının görüntülenmesi gerekiyordu. Ancak, "Rendered fewer hooks than expected." (Beklenenden daha az hook render edildi.) şeklinde bir hata mesajı ile çöküyor. Hatanın nedenini bulabilir ve düzeltebilir misiniz?
 
 <Hint>
 
-Are there any limitations on _where_ Hooks may be called? Does this component break any rules? Check if there are any comments disabling the linter checks--this is where the bugs often hide!
+Hook'ların _nerede_ çağrılabileceği konusunda herhangi bir sınırlama var mı? Bu bileşen herhangi bir kuralı ihlal ediyor mu? Linter kontrollerini devre dışı bırakan herhangi bir yorum olup olmadığını kontrol edin hataların genellikle saklandığı yer burasıdır!
 
 </Hint>
 
@@ -1343,7 +1343,7 @@ import { useState } from 'react';
 export default function FeedbackForm() {
   const [isSent, setIsSent] = useState(false);
   if (isSent) {
-    return <h1>Thank you!</h1>;
+    return <h1>Teşekkürler!</h1>;
   } else {
     // eslint-disable-next-line
     const [message, setMessage] = useState('');
@@ -1354,12 +1354,12 @@ export default function FeedbackForm() {
         setIsSent(true);
       }}>
         <textarea
-          placeholder="Message"
+          placeholder="Mesaj"
           value={message}
           onChange={e => setMessage(e.target.value)}
         />
         <br />
-        <button type="submit">Send</button>
+        <button type="submit">Gönder</button>
       </form>
     );
   }
@@ -1370,9 +1370,9 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Hooks can only be called at the top level of the component function. Here, the first `isSent` definition follows this rule, but the `message` definition is nested in a condition.
+Hook'lar yalnızca bileşen fonksiyonunun en üst seviyesinde çağrılabilir. Burada, ilk `isSent` tanımı bu kurala uymaktadır, ancak `message` tanımı bir koşulun içine yerleştirilmiştir.
 
-Move it out of the condition to fix the issue:
+Sorunu çözmek için bunu koşulun dışına taşıyın:
 
 <Sandpack>
 
@@ -1384,7 +1384,7 @@ export default function FeedbackForm() {
   const [message, setMessage] = useState('');
 
   if (isSent) {
-    return <h1>Thank you!</h1>;
+    return <h1>Teşekkürler!</h1>;
   } else {
     return (
       <form onSubmit={e => {
@@ -1393,12 +1393,12 @@ export default function FeedbackForm() {
         setIsSent(true);
       }}>
         <textarea
-          placeholder="Message"
+          placeholder="Mesaj"
           value={message}
           onChange={e => setMessage(e.target.value)}
         />
         <br />
-        <button type="submit">Send</button>
+        <button type="submit">Gönder</button>
       </form>
     );
   }
@@ -1407,9 +1407,9 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-Remember, Hooks must be called unconditionally and always in the same order!
+Unutmayın, Hook'lar koşulsuz olarak ve her zaman aynı sırada çağrılmalıdır!
 
-You could also remove the unnecessary `else` branch to reduce the nesting. However, it's still important that all calls to Hooks happen *before* the first `return`.
+İç içe geçmeyi azaltmak için gereksiz `else` dalını da kaldırabilirsiniz. Ancak, Hook'lara yapılan tüm çağrıların ilk `return'den *önce* gerçekleşmesi hala önemlidir.
 
 <Sandpack>
 
@@ -1421,7 +1421,7 @@ export default function FeedbackForm() {
   const [message, setMessage] = useState('');
 
   if (isSent) {
-    return <h1>Thank you!</h1>;
+    return <h1>Teşekkürler!</h1>;
   }
 
   return (
@@ -1431,12 +1431,12 @@ export default function FeedbackForm() {
       setIsSent(true);
     }}>
       <textarea
-        placeholder="Message"
+        placeholder="Mesaj"
         value={message}
         onChange={e => setMessage(e.target.value)}
       />
       <br />
-      <button type="submit">Send</button>
+      <button type="submit">Gönder</button>
     </form>
   );
 }
@@ -1444,19 +1444,19 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-Try moving the second `useState` call after the `if` condition and notice how this breaks it again.
+İkinci `useState` çağrısını `if` koşulundan sonra taşımayı deneyin ve bunun nasıl tekrar bozulduğuna dikkat edin.
 
-If your linter is [configured for React](/learn/editor-setup#linting), you should see a lint error when you make a mistake like this. If you don't see an error when you try the faulty code locally, you need to set up linting for your project. 
+Eğer linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), böyle bir hata yaptığınızda bir lint hatası görmelisiniz. Hatalı kodu yerel olarak denediğinizde bir hata görmüyorsanız, projeniz için linting'i ayarlamanız gerekir.
 
 </Solution>
 
-#### Remove unnecessary state {/*remove-unnecessary-state*/}
+#### Gereksiz state'i kaldırın {/*remove-unnecessary-state*/}
 
-When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason it always shows "Hello, !".
+Bu örnekte düğme tıklandığında kullanıcının adını istemesi ve ardından onları selamlayan bir uyarı görüntülemesi gerekiyordu. İsim bilgisini tutmak için state kullanmaya çalıştınız, ancak her zaman "Merhaba, !" şeklinde görüntüleniyor.
 
-To fix this code, remove the unnecessary state variable. (We will discuss about [why this didn't work](/learn/state-as-a-snapshot) later.)
+Bu kodu düzeltmek için gereksiz state değişkenini kaldırın. ([Bunun neden işe yaramadığını](/learn/state-as-a-snapshot) daha sonra tartışacağız.)
 
-Can you explain why this state variable was unnecessary?
+Bu state değişkeninin neden gereksiz olduğunu açıklayabilir misiniz?
 
 <Sandpack>
 
@@ -1467,13 +1467,13 @@ export default function FeedbackForm() {
   const [name, setName] = useState('');
 
   function handleClick() {
-    setName(prompt('What is your name?'));
-    alert(`Hello, ${name}!`);
+    setName(prompt('İsminiz nedir?'));
+    alert(`Merhaba, ${name}!`);
   }
 
   return (
     <button onClick={handleClick}>
-      Greet
+      Selamla
     </button>
   );
 }
@@ -1483,7 +1483,7 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Here is a fixed version that uses a regular `name` variable declared in the function that needs it:
+Burada, ihtiyaç duyulan fonksiyonda deklare edilen normal bir `name` değişkenini kullanan düzeltilmiş bir versiyon bulunmaktadır:
 
 <Sandpack>
 
@@ -1492,13 +1492,13 @@ import { useState } from 'react';
 
 export default function FeedbackForm() {
   function handleClick() {
-    const name = prompt('What is your name?');
-    alert(`Hello, ${name}!`);
+    const name = prompt('İsminiz nedir?');
+    alert(`Merhaba, ${name}!`);
   }
 
   return (
     <button onClick={handleClick}>
-      Greet
+      Selamla
     </button>
   );
 }
@@ -1506,7 +1506,7 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-A state variable is only necessary to keep information between re-renders of a component. Within a single event handler, a regular variable will do fine. Don't introduce state variables when a regular variable works well.
+Bir state değişkeni, bir bileşenin yeniden render edilmesi arasında bilgiyi korumak için gereklidir. Tek bir olay yöneticisi içinde, normal bir değişken de gayet çalışacaktır. Bu yüzden normal bir değişkenin iyi çalıştığı durumlarda state değişkenlerini kullanmayın.
 
 </Solution>
 

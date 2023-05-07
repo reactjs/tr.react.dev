@@ -1,24 +1,24 @@
 ---
-title: Conditional Rendering
+title: Koşullu Olarak Render Etmek
 ---
 
 <Intro>
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+React bileşenlerinizde çoğu zaman farklı koşullar altında farklı şeyler render etmek isteyeceksiniz. React'te, `if` ifadesi, `&&`, ve `? :` gibi JavaScript sözdizimine (syntax) ait operatörleri kullanarak koşullu olarak JSX render edebilirsiniz.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to return different JSX depending on a condition
-* How to conditionally include or exclude a piece of JSX
-* Common conditional syntax shortcuts you’ll encounter in React codebases
+* Bir koşula bağlı olarak farklı JSX nasıl döndürülür
+* Koşullu olarak bir JSX parçası nasıl dahil edilir veya hariç tutulur
+* React kod tabanında karşınıza çıkacak yaygın kullanılan kısayol koşul sözdizimleri 
 
 </YouWillLearn>
 
-## Conditionally returning JSX {/*conditionally-returning-jsx*/}
+## Koşullu olarak JSX döndürmek {/*conditionally-returning-jsx*/}
 
-Let’s say you have a `PackingList` component rendering several `Item`s, which can be marked as packed or not:
+Diyelim ki elinizde bir `PackingList` bileşeni var. Bu bilesen, bavula konulup konulmadıklarına göre işaretlenebilen, `Item`' bileşeninden birkaç tane render ediyor:
 
 <Sandpack>
 
@@ -52,9 +52,9 @@ export default function PackingList() {
 
 </Sandpack>
 
-Notice that some of the `Item` components have their `isPacked` prop set to `true` instead of `false`. You want to add a checkmark (✔) to packed items if `isPacked={true}`.
+Bazı `Item` bileşenlerinin `isPacked` prop'unun `false` (`yanlış`) yerine `true` (`doğru`) olduğuna dikkat edin. Eğer bileşen prop'u `isPacked={true}` ise eşyaların yanında bir tik (✔) işareti olmalı. 
 
-You can write this as an [`if`/`else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) like so:
+Bunu bir [`if`/`else` ifadesi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) olarak şöyle yazabilirsiniz:
 
 ```js
 if (isPacked) {
@@ -63,7 +63,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-If the `isPacked` prop is `true`, this code **returns a different JSX tree.** With this change, some of the items get a checkmark at the end:
+Eğer `isPacked` prop'u `true` ise, bu kod **farklı bir JSX ağacı döndürür.** Bu değişiklikle birlikte, bazı eşya isimlerinin yanına tik işareti gelir:
 
 <Sandpack>
 
@@ -100,13 +100,13 @@ export default function PackingList() {
 
 </Sandpack>
 
-Try editing what gets returned in either case, and see how the result changes!
+Her iki durumda da döndürülenleri düzenlemeyi deneyin ve sonucun nasıl değiştiğini görün!
 
-Notice how you're creating branching logic with JavaScript's `if` and `return` statements. In React, control flow (like conditions) is handled by JavaScript.
+JavaScript'in `if` ve `return` ifadeleriyle nasıl branching (dallanma) mantığı yarattığınıza dikkat edin. React'te kontrol akışı (koşullar gibi) JavaScript tarafından gerçekleştirilir.
 
-### Conditionally returning nothing with `null` {/*conditionally-returning-nothing-with-null*/}
+### `null` ile koşullu olarak hiçbir şey döndürmemek {/*conditionally-returning-nothing-with-null*/}
 
-In some situations, you won't want to render anything at all. For example, say you don't want to show packed items at all. A component must return something. In this case, you can return `null`:
+Bazı durumlarda hiçbir şey render etmemek isteyebilirsiniz. Örneğin, bavula konmuş eşyaların listenizde görünmesini istemiyorsunuz ancak bir bileşen bir şey döndürmek zorundadır. Bu durumda `null` döndürebilirsiniz:
 
 ```js
 if (isPacked) {
@@ -115,7 +115,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-If `isPacked` is true, the component will return nothing, `null`. Otherwise, it will return JSX to render.
+ Eğer `isPacked` prop'u true (doğru) ise, bileşen hiçbir şey yani `null` döndürecektir. Aksi takdirde, render etmek için JSX'i döndürecektir.
 
 <Sandpack>
 
@@ -152,23 +152,23 @@ export default function PackingList() {
 
 </Sandpack>
 
-In practice, returning `null` from a component isn't common because it might surprise a developer trying to render it. More often, you would conditionally include or exclude the component in the parent component's JSX. Here's how to do that!
+Uygulamada, bir bileşenin `null` döndürmesi yaygın olarak kullanılan bir şey değildir çünkü bileşeni render etmek isteyen başka bir geliştiriciyi şaşırtabilir. Daha sık olarak, bir bileşeni üst bileşeninin JSX'ine koşullu olarak dahil eder veya hariç tutarsınız. Şimdi bunu nasıl yapacağımızı öğrenelim!
 
-## Conditionally including JSX {/*conditionally-including-jsx*/}
+## JSX'i koşullu olarak dahil etmek {/*conditionally-including-jsx*/}
 
-In the previous example, you controlled which (if any!) JSX tree would be returned by the component. You may already have noticed some duplication in the render output:
+Önceki örnekte bileşen tarafından (eğer varsa!) hangi JSX ağacının döndüreleceğini belirlediniz. Render edilen çıktıda bazı tekrarlamalar olduğunu farketmişsinizdir:
 
 ```js
 <li className="item">{name} ✔</li>
 ```
 
-is very similar to
+bu iki ifade birbirine çok benzemekte
 
 ```js
 <li className="item">{name}</li>
 ```
 
-Both of the conditional branches return `<li className="item">...</li>`:
+Her iki koşul da `<li className="item">...</li>` ifadesini döndürmekte:
 
 ```js
 if (isPacked) {
@@ -177,13 +177,13 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-While this duplication isn't harmful, it could make your code harder to maintain. What if you want to change the `className`? You'd have to do it in two places in your code! In such a situation, you could conditionally include a little JSX to make your code more [DRY.](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+Bu tekrarlamalar zararlı olmasa bile yazdığınız kodu idame ettirmek zorlaşacaktır. Ya `className`'i değiştirmek isterseniz? Bu işlemi kodunuzda iki yerde yapmak zorundasınız! Bu gibi durumlarda, kodunuz daha [DRY.](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (Tekrar Etme Kendini - TEK) hale getirmek için koşullu olarak küçük bir JSX ekleyebilirsiniz.
 
-### Conditional (ternary) operator (`? :`) {/*conditional-ternary-operator--*/}
+### Koşullu (ternary) operatörü (`? :`) {/*conditional-ternary-operator--*/}
 
-JavaScript has a compact syntax for writing a conditional expression -- the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) or "ternary operator".
+JavaScript, koşullu bir ifade yazmak için kompakt bir sözdizimine sahiptir -- [koşullu operatör](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) ya da  "ternary operatörü".
 
-Instead of this:
+Böyle yazmak yerine:
 
 ```js
 if (isPacked) {
@@ -192,7 +192,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-You can write this:
+Şöyle yazabilirsiniz:
 
 ```js
 return (
@@ -202,17 +202,17 @@ return (
 );
 ```
 
-You can read it as *"if `isPacked` is true, then (`?`) render `name + ' ✔'`, otherwise (`:`) render `name`"*.
+Bu kodu şöyle okuyabilirsiniz: *"eğer `isPacked` prop'u true (doğru) ise, o zaman (`?`) `name + ' ✔'` render et, aksi halde (`:`) `name` render et"*.
 
 <DeepDive>
 
-#### Are these two examples fully equivalent? {/*are-these-two-examples-fully-equivalent*/}
+#### Bu iki örnek tamamen eşdeğer mi? {/*are-these-two-examples-fully-equivalent*/}
 
-If you're coming from an object-oriented programming background, you might assume that the two examples above are subtly different because one of them may create two different "instances" of `<li>`. But JSX elements aren't "instances" because they don't hold any internal state and aren't real DOM nodes. They're lightweight descriptions, like blueprints. So these two examples, in fact, *are* completely equivalent. [Preserving and Resetting State](/learn/preserving-and-resetting-state) goes into detail about how this works.
+Nesne yönelimli programlama geçmişiniz varsa, yukarıdaki iki örneğin biraz farklı olduğunu çünkü birinin iki farklı `<li>` kopyası oluşturabileceğini düşünebilirsiniz. Ancak JSX öğeleri herhangi bir dahili state'e sahip olmadıkları ve gerçek DOM node'u olmadıkları için bir "kopya" değildir. JSX öğeleri aynı blueprint'ler (kılavuz) gibi tanımlardır. Yani bu iki örnek birbiriyle **tamamen** aynıdır. [State'i korumak ve sıfırlamak](/learn/preserving-and-resetting-state) bunun nasıl çalıştığını ayrıntılı bir şekilde anlatmaktadır.
 
 </DeepDive>
 
-Now let's say you want to wrap the completed item's text into another HTML tag, like `<del>` to strike it out. You can add even more newlines and parentheses so that it's easier to nest more JSX in each of the cases:
+Şimdi, bavula konmuş eşyanının isminin üstünü listenizde çizmek için `<del>` HTML elementini kullanmak istiyorsunuz. Her durumda da daha fazla JSX'i iç içe yerleştirmeyi kolaylaştırmak için daha fazla yeni satır ve parantez ekleyebilirsiniz:
 
 <Sandpack>
 
@@ -256,11 +256,11 @@ export default function PackingList() {
 
 </Sandpack>
 
-This style works well for simple conditions, but use it in moderation. If your components get messy with too much nested conditional markup, consider extracting child components to clean things up. In React, markup is a part of your code, so you can use tools like variables and functions to tidy up complex expressions.
+Kodunuzu bu şekilde yazmak basit koşullu ifadeler için güzel çalışmakta ancak dikkatli kullanmakta fayda vardır.  Eğer bileşenleriniz iç içe geçmiş çok fazla koşullu ifadeden oluşuyorsa, ifadeyi temizlemek için yeni bir alt bileşen oluşturabilirsiniz. React'te, biçimlendirme kodunuzun bir parçasıdır dolayısıyla karmaşık ifadeleri düzenlemek için değişkenler ve fonksiyonlar gibi araçları kullanabilirsiniz.
 
-### Logical AND operator (`&&`) {/*logical-and-operator-*/}
+### Mantıksal AND (VE) operatörü (`&&`) {/*logical-and-operator-*/}
 
-Another common shortcut you'll encounter is the [JavaScript logical AND (`&&`) operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#:~:text=The%20logical%20AND%20(%20%26%26%20)%20operator,it%20returns%20a%20Boolean%20value.) Inside React components, it often comes up when you want to render some JSX when the condition is true, **or render nothing otherwise.** With `&&`, you could conditionally render the checkmark only if `isPacked` is `true`:
+Karşınıza sıkça çıkacak bir diğer kısayol ise [JavaScript mantıksal AND (VE) (`&&`) operatörüdür.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#:~:text=The%20logical%20AND%20(%20%26%26%20)%20operator,it%20returns%20a%20Boolean%20value.) Bu operatör React bileşeni içinde genellikle koşul doğru olduğunda bir kısım JSX'i render etmek **aksi halde hiçbir şey render etmemek** istediğiniz durumlarda kullanılır. `&&` ifadesi ile, yalnızca `isPacked` prop'u `true (doğru)` ise tik işaretini eşyanın isminin yanına koyabilirsiniz.
 
 ```js
 return (
@@ -270,9 +270,9 @@ return (
 );
 ```
 
-You can read this as *"if `isPacked`, then (`&&`) render the checkmark, otherwise, render nothing"*.
+Bu kodu şu şekilde okuyabilirsiniz: *"eğer `isPacked` prop'u true (doğru) ise, o zaman (`&&`) tik işaretini render et, yoksa render etme"*.
 
-Here it is in action:
+Aşağıda nasıl çalıştığını görebilirsiniz:
 
 <Sandpack>
 
@@ -310,30 +310,29 @@ export default function PackingList() {
 
 </Sandpack>
 
-A [JavaScript && expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) returns the value of its right side (in our case, the checkmark) if the left side (our condition) is `true`. But if the condition is `false`, the whole expression becomes `false`. React considers `false` as a "hole" in the JSX tree, just like `null` or `undefined`, and doesn't render anything in its place.
-
+[JavaScript && operatörü](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) eğer ifademizin sol tarafı (koşulumuz) `true (doğru)`ise ifadenin sağ tarafındaki değeri döndürür. Ama koşulumuz `false (yanlış)` ise, bütün ifademiz `false (yanlış)` olur. React, `false`'u JSX ağacında tıpkı `null` ya da `undefined` gibi bir "delik" olarak kabul eder ve geriye hiçbir şey döndürmez.
 
 <Pitfall>
 
-**Don't put numbers on the left side of `&&`.**
+**`&&` operatörünün sol tarafına numara koymayın.**
 
-To test the condition, JavaScript converts the left side to a boolean automatically. However, if the left side is `0`, then the whole expression gets that value (`0`), and React will happily render `0` rather than nothing.
+JavaScript koşulu test etmek için operatörün sol tarafını otomatik olarak boole (true-false) dönüştürür. Bununla birlikte, eğer sol taraf `0` rakamı ise, ifadenin tamamı `0` değerini alır ve React, hiçbir şey döndürmemek yerine mutlu bir şekilde `0` render edecektir.
 
-For example, a common mistake is to write code like `messageCount && <p>New messages</p>`. It's easy to assume that it renders nothing when `messageCount` is `0`, but it really renders the `0` itself!
+Örneğin, `messageCount && <p>New messages</p>` gibi bir kod yazmak yaygın bir hatadır. `messageCount` `0` olduğunda hiçbir şey render etmediğini varsaymak kolaydır ancak React gerçekte `0` render etmektedir.
 
-To fix it, make the left side a boolean: `messageCount > 0 && <p>New messages</p>`.
+Bu durumu düzeltmek için sol tarafı boolean'a (boole) çevirmek gereklidir: `messageCount > 0 && <p>New messages</p>`.
 
 </Pitfall>
 
-### Conditionally assigning JSX to a variable {/*conditionally-assigning-jsx-to-a-variable*/}
+### Bir değişkene koşullu olarak JSX atamak {/*conditionally-assigning-jsx-to-a-variable*/}
 
-When the shortcuts get in the way of writing plain code, try using an `if` statement and a variable. You can reassign variables defined with [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), so start by providing the default content you want to display, the name:
+Kısayollar düz kod yazmanın önüne geçtiği zaman, bir `if` ifadesi ve bir değişken kullanmayı deneyebilirsiniz. [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) ile tanımlanmış değişkenlere başka değerler atayabilirsiniz, bu nedenle ilk olarak görüntülemek istediğimiz varsayılan değer olan name'i atayalım:
 
 ```js
 let itemContent = name;
 ```
 
-Use an `if` statement to reassign a JSX expression to `itemContent` if `isPacked` is `true`:
+Eğer `isPacked` `true (doğru)` ise, bir JSX ifadesini `itemContent`'e tekrardan atamak için bir `if` ifadesi kullanın:
 
 ```js
 if (isPacked) {
@@ -341,7 +340,7 @@ if (isPacked) {
 }
 ```
 
-[Curly braces open the "window into JavaScript".](/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world) Embed the variable with curly braces in the returned JSX tree, nesting the previously calculated expression inside of JSX:
+[Süslü parantezler "JavaScript'e bir pencere" açar.](/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world) Önceden hesaplanmış olan değişkeni süslü parantez içinde şu şekilde JSX içinde kullanabilirsiniz:
 
 ```js
 <li className="item">
@@ -349,7 +348,7 @@ if (isPacked) {
 </li>
 ```
 
-This style is the most verbose, but it's also the most flexible. Here it is in action:
+Bu yöntem en ayrıntılı ama aynı zamanda en esnek olanıdır. Aşağıda nasıl çalıştığını görebilirsiniz:
 
 <Sandpack>
 
@@ -391,7 +390,7 @@ export default function PackingList() {
 
 </Sandpack>
 
-Like before, this works not only for text, but for arbitrary JSX too:
+Daha önce olduğu gibi bu yalnızca metin için değil, koşullu JSX için de çalışır:
 
 <Sandpack>
 
@@ -437,16 +436,16 @@ export default function PackingList() {
 
 </Sandpack>
 
-If you're not familiar with JavaScript, this variety of styles might seem overwhelming at first. However, learning them will help you read and write any JavaScript code -- and not just React components! Pick the one you prefer for a start, and then consult this reference again if you forget how the other ones work.
+Eğer JavaScript diline aşina değilseniz, bu yöntem çeşitliliği ilk başta kafa karıştırıcı olabilir. Ancak bunları öğrenmek, sadece React bileşenleri değil, herhangi bir JavaScript kodunu okumanıza ve yazmanıza yardımcı olacaktır! Başlangıçta tercih ettiğiniz sözdizimi ile devam ederek, diğer sözdizimlerin nasıl çalıştığını unuttuğunuz zaman bu sayfayı referans olarak kullanabilirsiniz.
 
 <Recap>
 
-* In React, you control branching logic with JavaScript.
-* You can return a JSX expression conditionally with an `if` statement.
-* You can conditionally save some JSX to a variable and then include it inside other JSX by using the curly braces.
-* In JSX, `{cond ? <A /> : <B />}` means *"if `cond`, render `<A />`, otherwise `<B />`"*.
-* In JSX, `{cond && <A />}` means *"if `cond`, render `<A />`, otherwise nothing"*.
-* The shortcuts are common, but you don't have to use them if you prefer plain `if`.
+* React'te, branching (dallanma) mantığını JavaScript ile kontrol edersiniz.
+* `if` ifadesini kullanarak koşullu olarak bir JSX ifadesi döndürebilirsiniz.
+* Bir JSX ifadesini koşullu olarak bir değişkene atayabilir ve süslü parantez kullanarak ("{}") başka bir JSX'in içine dahil edebilirsiniz.
+* JSX'te, `{cond ? <A /> : <B />}` ifadesi şu anlama gelmektedir: *"eğer `cond` varsa, `<A />`'yı render et, aksi halde `<B />`'yi render et"*.
+* JSX'te, `{cond && <A />}` ifadesi şu anlama gelmektedir: *"eğer `cond` varsa, `<A />`'yı render et, aksi halde hiçbir şey render etme"*.
+* Kod tabanlarında bu kısayolları görmek yaygındır, ancak kendiniz düz `if` ifadesini tercih edebilirsiniz. 
 
 </Recap>
 
@@ -454,9 +453,9 @@ If you're not familiar with JavaScript, this variety of styles might seem overwh
 
 <Challenges>
 
-#### Show an icon for incomplete items with `? :` {/*show-an-icon-for-incomplete-items-with--*/}
+#### Bavula konmamış eşyalar için `? :` sözdizimini kullanarak bir ikon göster {/*show-an-icon-for-incomplete-items-with--*/}
 
-Use the conditional operator (`cond ? a : b`) to render a ❌ if `isPacked` isn’t `true`.
+Koşul operatörünü (`cond ? a : b`) kullanarak eğer `isPacked` prop'u `true` (`doğru`) değilse ❌ render et.
 
 <Sandpack>
 
@@ -534,15 +533,15 @@ export default function PackingList() {
 
 </Solution>
 
-#### Show the item importance with `&&` {/*show-the-item-importance-with-*/}
+#### Eşyanın importance (önemini) `&&` operatörü ile göster {/*show-the-item-importance-with-*/}
 
-In this example, each `Item` receives a numerical `importance` prop. Use the `&&` operator to render "_(Importance: X)_" in italics, but only for items that have non-zero importance. Your item list should end up looking like this:
+Bu örnekte, her bir `Item` sayısal bir `importance` prop'u almaktadır. `&&` operatörünü kullanarak "importance" (önem) değeri 0'dan büyük olanların yanında italik olarak "_(Importance: X)_" render edebilirsiniz. Eşyalarınızın listesinin son hali şu şekilde olmalıdır:
 
 * Space suit _(Importance: 9)_
 * Helmet with a golden leaf
 * Photo of Tam _(Importance: 6)_
 
-Don't forget to add a space between the two labels!
+İkisi arasına boşluk koymayı unutmayın!
 
 <Sandpack>
 
@@ -582,7 +581,7 @@ export default function PackingList() {
 
 <Solution>
 
-This should do the trick:
+Şu şekilde boşluk bırakabilirsiniz:
 
 <Sandpack>
 
@@ -624,15 +623,15 @@ export default function PackingList() {
 
 </Sandpack>
 
-Note that you must write `importance > 0 && ...` rather than `importance && ...` so that if the `importance` is `0`, `0` isn't rendered as the result!
+`importance && ...` yerine `importance > 0 && ...` yazmanız gerektiğini unutmayın. Böylelikle `importance` prop'u `0` olanlar render edilmemiş olacaktır.
 
-In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
+Bu çözümde, eşyanın ismi ve importance (önem) yazısı arasına boşluk koyabilmek için iki farklı koşul kullanılmalıdır. Alternatif olarak, zaten boşluğu olan bir fragment `importance > 0 && <> <i>...</i></>` kullanabilir ya da `<i>` içine bir boşluk ekleyebilirsiniz `importance > 0 && <i> ...</i>`.
 
 </Solution>
 
-#### Refactor a series of `? :` to `if` and variables {/*refactor-a-series-of---to-if-and-variables*/}
+#### Bir dizi `? :` sözdizimini `if` ifadesi ve değişkenler ile değiştir {/*refactor-a-series-of---to-if-and-variables*/}
 
-This `Drink` component uses a series of `? :` conditions to show different information depending on whether the `name` prop is `"tea"` or `"coffee"`. The problem is that the information about each drink is spread across multiple conditions. Refactor this code to use a single `if` statement instead of three `? :` conditions.
+`Drink` bileşeni, `name` prop'unun `"tea"` ya da `"coffee"` olduğuna bağlı olarak farklı bilgiler göstermek için bir dizi ? : koşulunu kullanır. Buradaki sorun her içecek hakkındaki bilgilerin birden fazla koşula bağlı olmasıdır. Bu kodu üç tane `? :` koşulu yerine tek bir `if` ifadesi kullanacak şekilde yeniden düzenleyin.
 
 <Sandpack>
 
@@ -665,11 +664,11 @@ export default function DrinkList() {
 
 </Sandpack>
 
-Once you've refactored the code to use `if`, do you have further ideas on how to simplify it?
+Kodunuzu `if` ifadesini kullanacak şekilde düzenledikten sonra bu kodu nasıl daha da basitleştirebileceğiniz konusunda bir fikriniz var mı?
 
 <Solution>
 
-There are multiple ways you could go about this, but here is one starting point:
+Bunu yapmak için birden fazla yolunuz var ama başlangıç olarak şuna bakalım:
 
 <Sandpack>
 
@@ -712,9 +711,9 @@ export default function DrinkList() {
 
 </Sandpack>
 
-Here the information about each drink is grouped together instead of being spread across multiple conditions. This makes it easier to add more drinks in the future.
+Burada, her içecek hakkındaki bilgiler birden fazla koşul yerine bir araya toplanmıştır. Böylelikle gelecekte daha fazla içecek eklemeniz daha kolay bir hale gelecektir
 
-Another solution would be to remove the condition altogether by moving the information into objects:
+Diğer bir çözüm ise tüm koşullu ifadeleri kaldırıp içeceklerle alakalı tüm bilgileri bir JavaScript objesi içine koymaktır:
 
 <Sandpack>
 

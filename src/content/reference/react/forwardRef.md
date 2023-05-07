@@ -4,7 +4,7 @@ title: forwardRef
 
 <Intro>
 
-`forwardRef` lets your component expose a DOM node to parent component with a [ref.](/learn/manipulating-the-dom-with-refs)
+`forwardRef`, bileşeninizin bir DOM elemanını, üst bileşene [ref](/learn/manipulating-the-dom-with-refs) (referans) ile iletmenize olanak sağlar.
 
 ```js
 const SomeComponent = forwardRef(render)
@@ -16,11 +16,11 @@ const SomeComponent = forwardRef(render)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `forwardRef(render)` {/*forwardref*/}
 
-Call `forwardRef()` to let your component receive a ref and forward it to a child component:
+Bileşeninizin bir ref alması ve bunu alt bileşene iletmesi için `forwardRef()`'i çağırın:
 
 ```js
 import { forwardRef } from 'react';
@@ -30,26 +30,26 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `render`: The render function for your component. React calls this function with the props and `ref` that your component received from its parent. The JSX you return will be the output of your component.
+* `render`: Bileşeniniz için render fonksiyonu. React, bu fonksiyonu üst bileşenden aldığı props ve `ref` ile çağırır. Döndürdüğünüz JSX, bileşeninizin çıktısı olacaktır.
 
-#### Returns {/*returns*/}
+#### Döndürülen değer {/*returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, a component returned by `forwardRef` is also able to receive a `ref` prop.
+* `forwardRef`, JSX'te render edebileceğiniz bir React bileşeni döndürür. Düz fonksiyonlar olarak tanımlanan React bileşenlerinin aksine, `forwardRef` ile döndürülen bileşen de `ref` prop'u da bulunur.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
+* Katı Mod (Strict Mode) ile, React render fonksiyonunuzu **iki kez çağırarak** [istemeden yapılan hataları bulmanızı kolaylaştırır](#my-initializer-or-updater-function-runs-twice). Bu, yalnızca geliştirme ortamı davranışıdır ve canlı ortamı etkilemez. Eğer render fonksiyonunuz saf (olması gerektiği gibi) ise, bu bileşenin işleyişine zarar vermemelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
 
 
 ---
 
-### `render` function {/*render-function*/}
+### `render` fonksiyonu {/*render-function*/}
 
-`forwardRef` accepts a render function as an argument. React calls this function with `props` and `ref`:
+`forwardRef`, render fonksiyonunu argüman olarak kabul eder. React, bu fonksiyonu `props` ve `ref` ile çağırır:
 
 ```js
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -62,23 +62,23 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-#### Parameters {/*render-parameters*/}
+#### Parametreler {/*render-parameters*/}
 
-* `props`: The props passed by the parent component.
+* `props`: Üst bileşen tarafından iletilen proplar.
 
-* `ref`:  The `ref` attribute passed by the parent component. The `ref` can be an object or a function. If the parent component has not passed a ref, it will be `null`. You should either pass the `ref` you receive to another component, or pass it to [`useImperativeHandle`.](/reference/react/useImperativeHandle)
+* `ref`:  Üst bileşenden iletilen `ref` özelliği nesne veya fonksiyon olabilir. Eğer üst bileşen bir `ref` iletmemişse, bu değer `null` olur. Aldığınız `ref`'i başka bir bileşene ya da [`useImperativeHandle`](/reference/react/useImperativeHandle) fonksiyonuna aktarmanız gerekir.
 
-#### Returns {/*render-returns*/}
+#### Döndürülen değer {/*render-returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, the component returned by `forwardRef` is able to take a `ref` prop.
+* `forwardRef`, JSX'te render edebileceğiniz bir React bileşeni döndürür. Düz fonksiyonlar olarak tanımlanan React bileşenlerinin aksine, `forwardRef` tarafından döndürülen bileşen `ref` prop'u alabilir.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Exposing a DOM node to the parent component {/*exposing-a-dom-node-to-the-parent-component*/}
+### Üst bileşene DOM erişimi sağlama {/*exposing-a-dom-node-to-the-parent-component*/}
 
-By default, each component's DOM nodes are private. However, sometimes it's useful to expose a DOM node to the parent--for example, to allow focusing it. To opt in, wrap your component definition into `forwardRef()`:
+Her bileşenin DOM elemanları varsayılan olarak özeldir. Ancak, bazen bir DOM elemanını üst bileşene erişilebilir kılmak yararlı olabilir; örneğin, odaklanma (focus) sağlamak amacıyla. Bunu yapmak için, bileşen tanımınızı `forwardRef()` ile sarmalayarak kullanın:
 
 ```js {3,11}
 import { forwardRef } from 'react';
@@ -94,7 +94,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-You will receive a <CodeStep step={1}>ref</CodeStep> as the second argument after props. Pass it to the DOM node that you want to expose:
+Props'tan sonra ikinci argüman olarak bir <CodeStep step={1}>ref</CodeStep> alacaksınız. Üst bileşenin erişim sağlamasını istediğiniz DOM elemanına bu ref'i aktarın:
 
 ```js {8} [[1, 3, "ref"], [1, 8, "ref", 30]]
 import { forwardRef } from 'react';
@@ -110,7 +110,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-This lets the parent `Form` component access the <CodeStep step={2}>`<input>` DOM node</CodeStep> exposed by `MyInput`:
+Üst `Form` bileşeninin, `MyInput` tarafından sağlanan <CodeStep step={2}>`<input>` DOM elemanına</CodeStep> erişimine izin verir:
 
 ```js [[1, 2, "ref"], [1, 10, "ref", 41], [2, 5, "ref.current"]]
 function Form() {
@@ -131,15 +131,15 @@ function Form() {
 }
 ```
 
-This `Form` component [passes a ref](/reference/react/useRef#manipulating-the-dom-with-a-ref) to `MyInput`. The `MyInput` component *forwards* that ref to the `<input>` browser tag. As a result, the `Form` component can access that `<input>` DOM node and call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on it.
+Bu `Form` bileşeni, `MyInput`'a [bir ref gönderir](/reference/react/useRef#manipulating-the-dom-with-a-ref). `MyInput` bileşeni, bu ref'i tarayıcıdaki `<input>` etiketine *iletir*. Sonuç olarak, `Form` bileşeni, `<input>` DOM elemanına erişebilir ve üzerinde [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) işlemini çağırabilir.
 
-Keep in mind that exposing a ref to the DOM node inside your component makes it harder to change your component's internals later. You will typically expose DOM nodes from reusable low-level components like buttons or text inputs, but you won't do it for application-level components like an avatar or a comment.
+Unutmayın ki, bileşeninizin içindeki DOM elemanına bir ref sağlamak, daha sonra bileşeninizin iç yapısını değiştirmeyi zorlaştırır. Genellikle, butonlar (`<button>`) veya metin girişleri (`<input>`) gibi yeniden kullanılabilir temel bileşenlerden DOM elemanları sağlarsınız, ancak bunu avatar veya yorum gibi uygulama seviyesi bileşenler için yapmamalısınız.
 
 <Recipes title="Examples of forwarding a ref">
 
-#### Focusing a text input {/*focusing-a-text-input*/}
+#### `<input>` elamanına odaklanma (focus) {/*focusing-a-text-input*/}
 
-Clicking the button will focus the input. The `Form` component defines a ref and passes it to the `MyInput` component. The `MyInput` component forwards that ref to the browser `<input>`. This lets the `Form` component focus the `<input>`.
+Bu kod parçasında, `<button>` elemanına tıklanınca `<input>`'a odaklanılıyor. `Form` bileşeni, bir ref tanımlayarak `MyInput` bileşenine iletiyor. `MyInput` bileşeni, tanımlanan ref’i tarayıcının `<input>` etiketine aktarıyor. Böylece `Form` bileşeni, `<input>` üzerinde odaklanabilir hale geliyor.
 
 <Sandpack>
 
@@ -191,9 +191,9 @@ input {
 
 <Solution />
 
-#### Playing and pausing a video {/*playing-and-pausing-a-video*/}
+#### Video oynatma ve duraklatma {/*playing-and-pausing-a-video*/}
 
-Clicking the button will call [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) on a `<video>` DOM node. The `App` component defines a ref and passes it to the `MyVideoPlayer` component. The `MyVideoPlayer` component forwards that ref to the browser `<video>` node. This lets the `App` component play and pause the `<video>`.
+Bu kod parçasında, bir `<button>` elemanına tıklanınca `<video>` DOM elemanında [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) ve [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) fonksiyonları çağrılıyor. `App` bileşeni, bir ref tanımlayarak `MyVideoPlayer` bileşenine iletiyor. `MyVideoPlayer` bileşeni, ref’i tarayıcıdaki `<video>` elemanına aktarıyor. Bu sayede, `App` bileşeni `<video>` oynatma ve duraklatma işlemlerini gerçekleştirebiliyor.
 
 <Sandpack>
 
@@ -252,9 +252,9 @@ button { margin-bottom: 10px; margin-right: 10px; }
 
 ---
 
-### Forwarding a ref through multiple components {/*forwarding-a-ref-through-multiple-components*/}
+### Birden fazla bileşen aracılığıyla ref iletmek {/*forwarding-a-ref-through-multiple-components*/}
 
-Instead of forwarding a `ref` to a DOM node, you can forward it to your own component like `MyInput`:
+Bir DOM elemanına `ref` aktarmak yerine, `MyInput` gibi kendi bileşeninize aktarabilirsiniz:
 
 ```js {1,5}
 const FormField = forwardRef(function FormField(props, ref) {
@@ -268,7 +268,8 @@ const FormField = forwardRef(function FormField(props, ref) {
 });
 ```
 
-If that `MyInput` component forwards a ref to its `<input>`, a ref to `FormField` will give you that `<input>`:
+Eğer `MyInput` bileşeni, `<input>` elemanına ref'i aktarırsa, `FormField` bileşeninden gönderilen ref, o `<input>` elemanına erişmenizi sağlar.
+
 
 ```js {2,5,10}
 function Form() {
@@ -289,8 +290,7 @@ function Form() {
 }
 ```
 
-The `Form` component defines a ref and passes it to `FormField`. The `FormField` component forwards that ref to `MyInput`, which forwards it to a browser `<input>` DOM node. This is how `Form` accesses that DOM node.
-
+Aşağıdaki kod parçasında, `Form` bileşeni bir ref tanımlar ve `FormField`'e iletir. `FormField` bileşeni, ref'i `MyInput`'a ileterek tarayıcıdaki `<input>` DOM elemanına erişim sağlar. Bu sayede `Form` bileşeni, istenilen DOM elemanına erişebilir.
 
 <Sandpack>
 
@@ -366,10 +366,11 @@ input, button {
 </Sandpack>
 
 ---
+### DOM elemanı yerine, kontrolör (imperative handle) kullanma.  {/*dom-elemanı-yerine-kontrolör-imperative-handle-kullanma*/}
+{/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
 
-### Exposing an imperative handle instead of a DOM node {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
+Tüm DOM elemanlarını erişime açmak yerine, daha kısıtlı yöntem setine sahip özel bir nesne olan *kontrolör* (imperative handle)  kullanabilirsiniz. Bu işlem için, DOM elemanını belirtmek amaçlı ayrı bir ref tanımlamanız gereklidir:
 
-Instead of exposing an entire DOM node, you can expose a custom object, called an *imperative handle,* with a more constrained set of methods. To do this, you'd need to define a separate ref to hold the DOM node:
 
 ```js {2,6}
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -381,7 +382,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-Pass the `ref` you received to [`useImperativeHandle`](/reference/react/useImperativeHandle) and specify the value you want to expose to the `ref`:
+Aldığınız `ref`'i [`useImperativeHandle`](/reference/react/useImperativeHandle) fonksiyonuna iletin ve erişilmesini istediğiniz değeri verin:
 
 ```js {6-15}
 import { forwardRef, useRef, useImperativeHandle } from 'react';
@@ -404,7 +405,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-If some component gets a ref to `MyInput`, it will only receive your `{ focus, scrollIntoView }` object instead of the DOM node. This lets you limit the information you expose about your DOM node to the minimum.
+Bir bileşen `MyInput` üzerinden ref'e erişmek istediğinde, DOM elemanı yerine `{focus, scrollIntoView}` nesnesini elde eder. Bu sayede, DOM elemanı hakkında paylaşılan bilgi minimum düzeyde tutulabilir.
 
 <Sandpack>
 
@@ -417,7 +418,7 @@ export default function Form() {
 
   function handleClick() {
     ref.current.focus();
-    // This won't work because the DOM node isn't exposed:
+    // Bu çalışmayacak çünkü DOM elemanı erişilebilir değil:
     // ref.current.style.opacity = 0.5;
   }
 
@@ -463,25 +464,25 @@ input {
 
 </Sandpack>
 
-[Read more about using imperative handles.](/reference/react/useImperativeHandle)
+[Kontrolör (imperative handle) hakkında daha fazla bilgi edinin.](/reference/react/useImperativeHandle)
 
 <Pitfall>
 
-**Do not overuse refs.** You should only use refs for *imperative* behaviors that you can't express as props: for example, scrolling to a node, focusing a node, triggering an animation, selecting text, and so on.
+**Ref'leri aşırı kullanmaktan kaçınmalısınız.** Yalnızca prop'lar ile ifade edilemeyen zorunlu davranışlar için kullanmalısınız. Örneğin, bir DOM elemanında kaydırma, odaklama, animasyon tetikleme veya metin seçme gibi işlemler için.
 
-**If you can express something as a prop, you should not use a ref.** For example, instead of exposing an imperative handle like `{ open, close }` from a `Modal` component, it is better to take `isOpen` as a prop like `<Modal isOpen={isOpen} />`. [Effects](/learn/synchronizing-with-effects) can help you expose imperative behaviors via props.
+**Bir şeyi bir prop olarak ifade edebiliyorsanız, ref kullanmamalısınız.** Örneğin, bir `Modal` bileşeninde `{ open, close }` gibi kontrolör (imperative handle) oluşturmak yerine, `isOpen` prop'unu `<Modal isOpen={isOpen} />` şeklinde kullanmak daha iyidir. [Efektler](/learn/synchronizing-with-effects), kontrollü davranışları prop'lar aracılığıyla sağlamanıza yardımcı olabilir.
 
 </Pitfall>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun Giderme {/*troubleshooting*/}
 
-### My component is wrapped in `forwardRef`, but the `ref` to it is always `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
+### Bileşenim `forwardRef` ile sarılı ama `ref` değeri sürekli `null` oluyor. {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
 
-This usually means that you forgot to actually use the `ref` that you received.
+Bu, genellikle aldığınız `ref`'i kullanmayı unuttuğunuz anlamına gelir.
 
-For example, this component doesn't do anything with its `ref`:
+Örneğin, bu bileşen aldığı `ref`’i hiçbir şekilde kullanmamaktadır:
 
 ```js {1}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -494,7 +495,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-To fix it, pass the `ref` down to a DOM node or another component that can accept a ref:
+Bu problemi çözmek adına, `ref`'i bir DOM elementine veya ref alabilen başka bir bileşene iletmelisiniz.
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -507,7 +508,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-The `ref` to `MyInput` could also be `null` if some of the logic is conditional:
+Eğer belirli koşullara bağlı olarak işlemler yapılıyorsa, `MyInput` bileşenine atanan ref değeri `null` olabilir.
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
@@ -520,7 +521,7 @@ const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
 });
 ```
 
-If `showInput` is `false`, then the ref won't be forwarded to any node, and a ref to `MyInput` will remain empty. This is particularly easy to miss if the condition is hidden inside another component, like `Panel` in this example:
+Eğer `showInput` değeri false olursa, ref hiçbir elemana iletilmeyecek ve `MyInput` bileşenine atanan ref boş olacaktır. Özellikle, eğer bu durum bir bileşenin içinde saklanıyorsa, örneğin bu örnekteki `Panel` gibi, bu durum kolaylıkla gözden kaçabilir:
 
 ```js {5,7}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {

@@ -1,24 +1,24 @@
 ---
-title: Writing Markup with JSX
+title: JSX ile İşaretleme (Markup) Yazma
 ---
 
 <Intro>
 
-*JSX* is a syntax extension for JavaScript that lets you write HTML-like markup inside a JavaScript file. Although there are other ways to write components, most React developers prefer the conciseness of JSX, and most codebases use it.
+*JSX*, bir JavaScript dosyası içinde HTML benzeri biçimlendirme (markup) yazmanıza olanak tanıyan bir JavaScript söz dizimi uzantısıdır. Bileşen yazmanın başka yolları olsa da çoğu React geliştiricisi, JSX'in sağladığı kolaylığı tercih eder ve çoğu kod tabanı (codebase) bunu kullanır.
 
 </Intro>
 
 <YouWillLearn>
 
-* Why React mixes markup with rendering logic
-* How JSX is different from HTML
-* How to display information with JSX
+* React neden biçimlendirmeyi, render ile birleştirir?
+* JSX'in HTML'den farkı nedir?
+* JSX ile veri nasıl gösterilir?
 
 </YouWillLearn>
 
-## JSX: Putting markup into JavaScript {/*jsx-putting-markup-into-javascript*/}
+## JSX: Biçimlendirmeyi JavaScript'e dönüştürme {/*jsx-putting-markup-into-javascript*/}
 
-The Web has been built on HTML, CSS, and JavaScript. For many years, web developers kept content in HTML, design in CSS, and logic in JavaScript—often in separate files! Content was marked up inside HTML while the page's logic lived separately in JavaScript:
+Web; HTML, CSS ve JavaScript üzerine inşa edilmiştir. Uzun yıllar boyunca web geliştiricileri, içeriği HTML'de, tasarımı CSS'te ve mantığı JavaScript'te -genellikle ayrı dosyalarda- tuttular! İçerik, HTML içinde tanımlanırken sayfanın mantığı, JavaScript'te ayrı olarak saklanıyordu:
 
 <DiagramGroup>
 
@@ -36,43 +36,43 @@ JavaScript
 
 </DiagramGroup>
 
-But as the Web became more interactive, logic increasingly determined content. JavaScript was in charge of the HTML! This is why **in React, rendering logic and markup live together in the same place—components.**
+Ancak Web daha etkileşimli hale geldikçe mantık, içeriğin önüne geçti. HTML'den JavaScript sorumluydu! İşte bu nedenle **React'te render mantığı ve biçimlendirme aynı yerde (bileşenlerde) birlikte bulunur.**
 
 <DiagramGroup>
 
-<Diagram name="writing_jsx_sidebar" height={330} width={325} alt="React component with HTML and JavaScript from previous examples mixed. Function name is Sidebar which calls the function isLoggedIn, highlighted in yellow. Nested inside the function highlighted in purple is the p tag from before, and a Form tag referencing the component shown in the next diagram.">
+<Diagram name="writing_jsx_sidebar" height={330} width={325} alt="Önceki HTML ve JavaScript örneklerinin birlikte kullanıldığı React bileşeni. isLoggedIn fonksiyonunu çağıran sarı ile vurgulanan bölüm Sidebar fonksiyonudur. Mor renkle vurgulanan işlevin içinde, daha önceki p etiketi ve bir sonraki şemada gösterilen bileşene referans veren bir Form etiketi bulunur.">
 
-`Sidebar.js` React component
+`Sidebar.js` React bileşeni
 
 </Diagram>
 
-<Diagram name="writing_jsx_form" height={330} width={325} alt="React component with HTML and JavaScript from previous examples mixed. Function name is Form containing two handlers onClick and onSubmit highlighted in yellow. Following the handlers is HTML highlighted in purple. The HTML contains a form element with a nested input element, each with an onClick prop.">
+<Diagram name="writing_jsx_form" height={330} width={325} alt="Önceki HTML ve JavaScript örneklerinin birlikte kullanıldığı React bileşeni. Sarı renkle vurgulanmış onClick ve onSubmit yöneticilerini içeren bölüm, Form fonksiyonudur. Bu fonksiyondan sonra, mor renkle vurgulanmış HTML gelir. HTML, her biri onClick prop'una sahip girdilerden oluşan bir form öğesini içerir.">
 
-`Form.js` React component
+`Form.js` React bileşeni
 
 </Diagram>
 
 </DiagramGroup>
 
-Keeping a button's rendering logic and markup together ensures that they stay in sync with each other on every edit. Conversely, details that are unrelated, such as the button's markup and a sidebar's markup, are isolated from each other, making it safer to change either of them on their own.
+Bir butonun render mantığını ve biçimlendirmesini bir arada tutmak, her değişiklikte birbirleriyle senkronize kalmalarını sağlar. Aksine, butonun biçimlendirmesi ve kenar çubuğunun biçimlendirmesi gibi birbiriyle ilgisi olmayan ayrıntılar, birbirinden izole edilir. Böylece herhangi birinin tek başına değiştirilmesi daha güvenli hale gelir.
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information. The best way to understand this is to convert some HTML markup to JSX markup.
+Her React bileşeni; React'ın, tarayıcıda render ettiği bazı işaretlemeler içerebilen bir JavaScript fonksiyonudur. React bileşenleri, bu işaretlemeyi temsil etmek için JSX adı verilen bir söz dizimi uzantısı kullanır. JSX, HTML'e çok benzer ancak biraz daha katı kurallara sahiptir ve dinamik verileri gösterebilir. Bu konuyu anlamanın en etkili yolu, birkaç HTML'i JSX'e dönüştürerek uygulamalı olarak pratik yapmaktır.
 
 <Note>
 
-JSX and React are two separate things. They're often used together, but you *can* [use them independently](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform) of each other. JSX is a syntax extension, while React is a JavaScript library.
+JSX ve React, iki ayrı kavramdır. Bunlar çoğunlukla birlikte kullanılır. Ancak, [bunları bağımsız olarak da](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform) *kullanabilirsiniz*. JSX bir söz dizimi uzantısıdır, React ise bir JavaScript kütüphanesidir.
 
 </Note>
 
-## Converting HTML to JSX {/*converting-html-to-jsx*/}
+## HTML'i JSX'e Dönüştürme {/*converting-html-to-jsx*/}
 
-Suppose that you have some (perfectly valid) HTML:
+Elinizde (tamamen geçerli) bir HTML olduğunu varsayalım:
 
 ```html
 <h1>Hedy Lamarr's Todos</h1>
-<img 
-  src="https://i.imgur.com/yXOvdOSs.jpg" 
-  alt="Hedy Lamarr" 
+<img
+  src="https://i.imgur.com/yXOvdOSs.jpg"
+  alt="Hedy Lamarr"
   class="photo"
 >
 <ul>
@@ -82,7 +82,7 @@ Suppose that you have some (perfectly valid) HTML:
 </ul>
 ```
 
-And you want to put it into your component:
+Ve bunu bileşeninize koymak istiyorsunuz:
 
 ```js
 export default function TodoList() {
@@ -92,7 +92,7 @@ export default function TodoList() {
 }
 ```
 
-If you copy and paste it as is, it will not work:
+Olduğu gibi kopyalayıp yapıştırırsanız çalışmayacaktır:
 
 
 <Sandpack>
@@ -102,9 +102,9 @@ export default function TodoList() {
   return (
     // This doesn't quite work!
     <h1>Hedy Lamarr's Todos</h1>
-    <img 
-      src="https://i.imgur.com/yXOvdOSs.jpg" 
-      alt="Hedy Lamarr" 
+    <img
+      src="https://i.imgur.com/yXOvdOSs.jpg"
+      alt="Hedy Lamarr"
       class="photo"
     >
     <ul>
@@ -122,28 +122,28 @@ img { height: 90px }
 
 </Sandpack>
 
-This is because JSX is stricter and has a few more rules than HTML! If you read the error messages above, they'll guide you to fix the markup, or you can follow the guide below.
+Bunun nedeni JSX'in HTML'den daha katı ve fazla kurala sahip olmasıdır! Yukarıdaki hata mesajları, biçimlendirmeyi düzeltmeniz için size yol gösterecektir. Hatayı çözmek için aşağıdaki kılavuzu da takip edebilirsiniz.
 
 <Note>
 
-Most of the time, React's on-screen error messages will help you find where the problem is. Give them a read if you get stuck!
+Çoğu zaman, React'ın ekrandaki hata mesajları, sorunun nerede olduğunu bulmanıza yardımcı olacaktır. Takıldığınız yerde onları okuyun!
 
 </Note>
 
-## The Rules of JSX {/*the-rules-of-jsx*/}
+## JSX Kuralları {/*the-rules-of-jsx*/}
 
-### 1. Return a single root element {/*1-return-a-single-root-element*/}
+### 1. Tek bir kök eleman döndürür {/*1-return-a-single-root-element*/}
 
-To return multiple elements from a component, **wrap them with a single parent tag.**
+Bileşenden birden fazla öğe döndürmek için **bunları, tek bir ana etiketle sarın**
 
-For example, you can use a `<div>`:
+Örneğin, `<div>` kullanabilirsiniz:
 
 ```js {1,11}
 <div>
   <h1>Hedy Lamarr's Todos</h1>
-  <img 
-    src="https://i.imgur.com/yXOvdOSs.jpg" 
-    alt="Hedy Lamarr" 
+  <img
+    src="https://i.imgur.com/yXOvdOSs.jpg"
+    alt="Hedy Lamarr"
     class="photo"
   >
   <ul>
@@ -153,14 +153,14 @@ For example, you can use a `<div>`:
 ```
 
 
-If you don't want to add an extra `<div>` to your markup, you can write `<>` and `</>` instead:
+Eğer fazladan bir `<div>` eklemek istemezseniz `<>` and `</>` kullanabilirsiniz:
 
 ```js {1,11}
 <>
   <h1>Hedy Lamarr's Todos</h1>
-  <img 
-    src="https://i.imgur.com/yXOvdOSs.jpg" 
-    alt="Hedy Lamarr" 
+  <img
+    src="https://i.imgur.com/yXOvdOSs.jpg"
+    alt="Hedy Lamarr"
     class="photo"
   >
   <ul>
@@ -169,27 +169,27 @@ If you don't want to add an extra `<div>` to your markup, you can write `<>` and
 </>
 ```
 
-This empty tag is called a *[Fragment.](/reference/react/Fragment)* Fragments let you group things without leaving any trace in the browser HTML tree.
+Bu boş etiket, *[Fragment](/reference/react/Fragment)* olarak adlandırılır. Fragment'lar, tarayıcı HTML ağacında, herhangi bir iz bırakmadan, öğeleri gruplandırmanıza olanak tanır.
 
 <DeepDive>
 
-#### Why do multiple JSX tags need to be wrapped? {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
+#### Neden birden fazla JSX etiketinin sarılması gerekiyor? {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
 
-JSX looks like HTML, but under the hood it is transformed into plain JavaScript objects. You can't return two objects from a function without wrapping them into an array. This explains why you also can't return two JSX tags without wrapping them into another tag or a Fragment.
+JSX, HTML gibi görünür ancak arka planda JavaScript nesnelerine dönüştürülür. Bir fonksiyondan iki nesneyi, bir diziye sarmadan döndüremezsiniz. Bu, iki JSX etiketini başka bir etikete veya bir Fragment'e sarmadan neden döndüremediğinizi de açıklar.
 
 </DeepDive>
 
-### 2. Close all the tags {/*2-close-all-the-tags*/}
+### 2. Tüm etiketleri kapatın {/*2-close-all-the-tags*/}
 
-JSX requires tags to be explicitly closed: self-closing tags like `<img>` must become `<img />`, and wrapping tags like `<li>oranges` must be written as `<li>oranges</li>`.
+JSX, etiketlerin bariz bir şekilde kapatılmasını gerektirir: `<img>` gibi kendiliğinden kapanan etiketler, `<img />` bu şekilde kapatılmalıdır.`<li>oranges` gibi etiketler`<li>oranges</li>` şeklinde sarmalanmalıdır.
 
-This is how Hedy Lamarr's image and list items look closed:
+Hedy Lamarr'ın fotoğraf ve liste öğeleri bu şekilde kapatılmıştır:
 
 ```js {2-6,8-10}
 <>
-  <img 
-    src="https://i.imgur.com/yXOvdOSs.jpg" 
-    alt="Hedy Lamarr" 
+  <img
+    src="https://i.imgur.com/yXOvdOSs.jpg"
+    alt="Hedy Lamarr"
     class="photo"
    />
   <ul>
@@ -200,33 +200,33 @@ This is how Hedy Lamarr's image and list items look closed:
 </>
 ```
 
-### 3. camelCase <s>all</s> most of the things! {/*3-camelcase-salls-most-of-the-things*/}
+### 3. camelCase <s>her şey</s> çoğu şey! {/*3-camelcase-salls-most-of-the-things*/}
 
-JSX turns into JavaScript and attributes written in JSX become keys of JavaScript objects. In your own components, you will often want to read those attributes into variables. But JavaScript has limitations on variable names. For example, their names can't contain dashes or be reserved words like `class`.
+JSX, JavaScript'e dönüşür ve JSX'te yazılan özellikler JavaScript nesnelerinin anahtarları haline gelir. Kendi bileşenlerinizde, genellikle bu özellikleri, değişken olarak okumak isteyeceksiniz. Ancak JavaScript'in değişken adları konusunda sınırlamaları vardır. Örneğin, adları tire içeremez veya `class` gibi rezerve edilmiş sözcükler olamaz.
 
-This is why, in React, many HTML and SVG attributes are written in camelCase. For example, instead of `stroke-width` you use `strokeWidth`. Since `class` is a reserved word, in React you write `className` instead, named after the [corresponding DOM property](https://developer.mozilla.org/en-US/docs/Web/API/Element/className):
+Bu nedenle, React'te, birçok HTML ve SVG özellikleri camelCase ile yazılır. Örneğin, `stroke-width` yerine `strokeWidth`. `class` rezerve edilmiş sözcük olduğu için React'te, bunun yerine [ilgili DOM özelliğinden](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) sonra `className` yazarsınız:
 
 ```js {4}
-<img 
-  src="https://i.imgur.com/yXOvdOSs.jpg" 
-  alt="Hedy Lamarr" 
+<img
+  src="https://i.imgur.com/yXOvdOSs.jpg"
+  alt="Hedy Lamarr"
   className="photo"
 />
 ```
 
-You can [find all these attributes in the list of DOM component props.](/reference/react-dom/components/common) If you get one wrong, don't worry—React will print a message with a possible correction to the [browser console.](https://developer.mozilla.org/docs/Tools/Browser_Console)
+[Tüm bu nitelikleri DOM bileşeni prop'ları listesinde](/reference/react-dom/components/common) bulabilirsiniz. Eğer yanlış yaparsanız endişelenmeyin-React [tarayıcı konsoluna](https://developer.mozilla.org/docs/Tools/Browser_Console), yanlışınızı düzeltmeniz için bir mesaj yazdıracaktır.
 
 <Pitfall>
 
-For historical reasons, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) and [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) attributes are written as in HTML with dashes.
+Tarihi nedenlerden dolayı, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) ve [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) özellikleri HTML'de olduğu gibi tire ile yazılır.
 
 </Pitfall>
 
-### Pro-tip: Use a JSX Converter {/*pro-tip-use-a-jsx-converter*/}
+### Uzman Tavsiyesi: JSX Dönüştürücü Kullanın {/*pro-tip-use-a-jsx-converter*/}
 
-Converting all these attributes in existing markup can be tedious! We recommend using a [converter](https://transform.tools/html-to-jsx) to translate your existing HTML and SVG to JSX. Converters are very useful in practice, but it's still worth understanding what is going on so that you can comfortably write JSX on your own.
+Mevcut biçimlendirmede, tüm bu özellikleri dönüştürmek can sıkıcı olabilir! Mevcut HTML ve SVG'nizi JSX'e çevirmek için bir [dönüştürücü](https://transform.tools/html-to-jsx) kullanmanızı öneririz. Dönüştürücüler pratikte çok kullanışlıdır. Yine de kendi başınıza rahatça JSX yazabilmeniz için neler olup bittiğini anlamakta fayda vardır.
 
-Here is your final result:
+İşte final sonucunuz:
 
 <Sandpack>
 
@@ -235,10 +235,10 @@ export default function TodoList() {
   return (
     <>
       <h1>Hedy Lamarr's Todos</h1>
-      <img 
-        src="https://i.imgur.com/yXOvdOSs.jpg" 
-        alt="Hedy Lamarr" 
-        className="photo" 
+      <img
+        src="https://i.imgur.com/yXOvdOSs.jpg"
+        alt="Hedy Lamarr"
+        className="photo"
       />
       <ul>
         <li>Invent new traffic lights</li>
@@ -258,11 +258,11 @@ img { height: 90px }
 
 <Recap>
 
-Now you know why JSX exists and how to use it in components:
+Artık JSX'in neden var olduğunu ve bileşenlerde nasıl kullanılacağını biliyorsunuz:
 
-* React components group rendering logic together with markup because they are related.
-* JSX is similar to HTML, with a few differences. You can use a [converter](https://transform.tools/html-to-jsx) if you need to.
-* Error messages will often point you in the right direction to fixing your markup.
+* React bileşenleri, birbirleriyle ilişkili oldukları için render mantığını biçimlendirme ile birlikte gruplandırır.
+* JSX, birkaç farkla HTML'e benzer. Eğer ihtiyacınız olursa [dönüştürücü](https://transform.tools/html-to-jsx) kullanabilirsiniz.
+* Hata mesajları, genellikle biçimlendirmenizi düzeltmeniz için size doğru yolu gösterecektir.
 
 </Recap>
 
@@ -270,9 +270,9 @@ Now you know why JSX exists and how to use it in components:
 
 <Challenges>
 
-#### Convert some HTML to JSX {/*convert-some-html-to-jsx*/}
+#### Aşağıdaki HTML'i JSX'e dönüştürün {/*convert-some-html-to-jsx*/}
 
-This HTML was pasted into a component, but it's not valid JSX. Fix it:
+Bu HTML bir bileşene eklenmiş ancak geçerli bir JSX değildir. Bunu düzeltiniz:
 
 <Sandpack>
 
@@ -308,7 +308,7 @@ export default function Bio() {
 
 </Sandpack>
 
-Whether to do it by hand or using the converter is up to you!
+Elle mi yoksa dönüştürücü kullanarak mı yapacağınız size kalmış!
 
 <Solution>
 
