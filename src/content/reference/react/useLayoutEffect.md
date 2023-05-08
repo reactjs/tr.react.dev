@@ -47,11 +47,7 @@ function Tooltip() {
 
 #### Parametereler {/*parameters*/}
 
-<<<<<<< HEAD
 * `kurulum (setup)`: Efekt kodunu barındıran fonksiyondur. Kurulum fonksiyonunuz ayrıca isteğe bağlı *temizleme (cleanup)* fonksiyonu döndürebilir. React, bileşeninizi DOM'a eklemeden önce kurulum fonksiyonunuzu çalıştırır. Bağımlılıkların değişmesiyle tetiklenen render'ların ardından öncelikle eski değerlerle birlikte temizleme fonksiyonunuzu (varsa) çalıştırılır ve ardından yeni değerlerle birlikte kurulum fonksiyonuzu çalıştırılır. Bileşen DOM'dan kaldırılmadan önce, React son kez temizleme fonksiyonunuzu çalıştırır.
-=======
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. Before your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
->>>>>>> da93812c7802e916d75bbb293889fda42c8d06aa
  
 * **isteğe bağlı** `bağımlılıklar (dependencies)`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
 
