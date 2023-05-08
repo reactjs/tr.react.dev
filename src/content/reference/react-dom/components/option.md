@@ -4,7 +4,7 @@ title: "<option>"
 
 <Intro>
 
-[Web Tarayıcısının`<option>` bileşeni](m5bilisim.com/webokulu/etiketler/etiket-option.php) [`<select>`](/reference/react-dom/components/select) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
+[Web Tarayıcısının`<option>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
 
 ```js
 <select>
