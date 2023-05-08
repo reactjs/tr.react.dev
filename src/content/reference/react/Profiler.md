@@ -33,7 +33,7 @@ Bir bileşen ağacını `<Profiler>` ile sarmalayarak render performansını öl
 #### Prop'lar {/*props*/}
 
 * `id`: Kullanıcı arayüzünün ölçtüğünüz bölümünü tanımlayan bir string.
-* `onRender`: Profilleme yapılan ağaçtaki bileşenler her güncellendiğinde React [`onRender` callback](#onrender-callback)'ini çağırır. Hangi bileşenlerin yeniden render edildiği ve ne kadar sürede render edildiği bilgilerini alır.
+* `onRender`: Profilleme yapılan ağaçtaki bileşenler her güncellendiğinde React [`onRender` callback](#onrender-callback)'ini çağırır. Hangi bileşenlerin render edildiği ve ne kadar sürede render edildiği bilgilerini alır.
 
 #### Uyarılar {/*caveats*/}
 
