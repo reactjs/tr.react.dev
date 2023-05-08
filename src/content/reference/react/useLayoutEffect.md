@@ -728,7 +728,6 @@ Sorunun kaynağı sunucuda yerleşim (layout) bilgisinin bulunmamasıdır.
 
 Genellikle yerleşim bilgisine ihtiyaç duyan bileşenlerin sunucuda render edilmesi gereksizdir. Örneğin, ilk render'da `Tooltip` göstermek çoğu zaman mantıklı değildir. İstemci etkileşimiyle tetiklenmelidir.
 
-<<<<<<< HEAD
 Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç farklı seçenek vardır:
 
 - `useLayoutEffect`'i [`useEffect`](/reference/react/useEffect) ile değiştirin. Bu, React'a ekrana çizme işlemini bloke etmesine gerek olmadan ilk render sonucunu görüntüleyebileceğini söyler (çünkü efektiniz çalışmadan önce HTML render edilmiş olacaktır).
@@ -738,14 +737,3 @@ Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç f
 - Alternatif olarak, `useLayoutEffect` kullanan bileşeni hidratlama sonrasında render ettirebilirsiniz. Başlangıç değeri `false` olan `isMounted` isminde bir state oluşturun ve `useEffect` içerisinde `true` olarak ayarlayın. Render ederken lojiğiniz şöyle olabilir: `return isMounted ? <RealContent /> : <FallbackContent />`. Sunucudayken veya hidratlama sırasında, kullanıcı `useLayoutEffect` çağırılmayan `FallbackContent`'i görür. İstemci tarafında React, içeriği `RealContent` ile değiştirir.
 
 - Bileşeninizi harici bir veri deposu (data store) ile senkron tutuyorsanız ve `useEffect`'i yerleşimi ölçmek yerine başka sebeplerle kullanıyorsanız, bunun yerine [sunucu taraflı render'ı destekleyen](/reference/react/useSyncExternalStore#adding-support-for-server-rendering) [`useSyncExternalStore`](/reference/react/useSyncExternalStore)'u kullanmayı düşünün.
-=======
-However, if you're running into this problem, you have a few different options:
-
-- Replace `useLayoutEffect` with [`useEffect`.](/reference/react/useEffect) This tells React that it's okay to display the initial render result without blocking the paint (because the original HTML will become visible before your Effect runs).
-
-- Alternatively, [mark your component as client-only.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) This tells React to replace its content up to the closest [`<Suspense>`](/reference/react/Suspense) boundary with a loading fallback (for example, a spinner or a glimmer) during server rendering.
-
-- Alternatively, you can render a component with `useLayoutEffect` only after hydration. Keep a boolean `isMounted` state that's initialized to `false`, and set it to `true` inside a `useEffect` call. Your rendering logic can then be like `return isMounted ? <RealContent /> : <FallbackContent />`. On the server and during the hydration, the user will see `FallbackContent` which should not call `useLayoutEffect`. Then React will replace it with `RealContent` which runs on the client only and can include `useLayoutEffect` calls.
-
-- If you synchronize your component with an external data store and rely on `useLayoutEffect` for different reasons than measuring layout, consider [`useSyncExternalStore`](/reference/react/useSyncExternalStore) instead which [supports server rendering.](/reference/react/useSyncExternalStore#adding-support-for-server-rendering)
->>>>>>> da93812c7802e916d75bbb293889fda42c8d06aa
