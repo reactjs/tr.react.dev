@@ -1,40 +1,40 @@
 ---
-title: "React DOM Components"
+title: "React DOM Bileşenleri"
 ---
 
 <Intro>
 
-React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
+React tarayıcının tüm yerleşik [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) ve [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) bileşenlerini destekler.
 
 </Intro>
 
 ---
 
-## Common components {/*common-components*/}
+## Ortak Bileşenler {/*common-components*/}
 
-All of the built-in browser components support some props and events.
+Tüm yerleşik tarayıcı bileşenleri bazı prop'ları ve event'leri destekler.
 
-* [Common components (e.g. `<div>`)](/reference/react-dom/components/common)
+* [Ortak bileşenler (örn. `<div>`)](/reference/react-dom/components/common)
 
-This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
+Bu `ref` ve `dangerouslySetInnerHTML` gibi React'e özgü prop'ları içerir.
 
 ---
 
-## Form components {/*form-components*/}
+## Form bileşenleri {/*form-components*/}
 
-These built-in browser components accept user input:
+Aşağıdaki yerleşik tarayıcı bileşenleri kullanıcı girdilerini alır:
 
 * [`<input>`](/reference/react-dom/components/input)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
 
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
+React'te bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edilebilir](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)* hale geldikleri için özel bir yere sahiptirler.
 
 ---
 
-## All HTML components {/*all-html-components*/}
+## Tüm HTML bileşenleri {/*all-html-components*/}
 
-React supports all built-in browser HTML components. This includes:
+React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içerir:
 
 * [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)
 * [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
@@ -140,38 +140,38 @@ React supports all built-in browser HTML components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+[DOM standardıyla](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) benzer şekilde, React prop isimleri için `camelCase` kuralını kullanır. Örneğin `tabindex` yerine `tabIndex` yazacaksınız. Mevcut HTML'inizi JSX'e dönüştürmek için bir [çevrimiçi dönüştürücü](https://transform.tools/html-to-jsx) kullanabilirsiniz.
 
 </Note>
 
 ---
 
-### Custom HTML elements {/*custom-html-elements*/}
+### Özel HTML elemanları {/*custom-html-elements*/}
 
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) In React, rendering custom elements works differently from rendering built-in browser tags:
+Eğer `<my-element>` gibi tire içeren bir etiket oluşturursanız, React bir [özel HTML elemanı](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayacaktır. React'te özel elemanların render edilmesi, yerleşik tarayıcı etiketlerinin render edilmesinden daha farklı şekilde çalışır:
 
-- All custom element props are serialized to strings and are always set using attributes.
-- Custom elements accept `class` rather than `className`, and `for` rather than `htmlFor`.
+- Tüm özel eleman prop'ları string olarak serileştirilir ve her zaman öznitelikler kullanılarak ayarlanır.
+- Özel elemanlar `class` yerine `className`, `for` yerine `htmlFor` kabul eder.
 
-If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
+Yerleşik bir tarayıcı HTML elemanını [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) özniteliğiyle oluşturursanız, bu eleman da özel bir eleman olarak ele alınacaktır.
 
 <Note>
 
-[A future version of React will include more comprehensive support for custom elements.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+[React'in gelecekteki bir sürümü daha kapsamlı özel eleman desteği içerecektir.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
 
-You can try it by upgrading React packages to the most recent experimental version:
+En son deneysel sürüme React paketlerini yükselterek deneyebilirsiniz:
 
 - `react@experimental`
 - `react-dom@experimental`
 
-Experimental versions of React may contain bugs. Don't use them in production.
+React'in deneysel sürümleri hatalar içerebilir. Bunları canlı ortamda kullanmayın.
 
 </Note>
 ---
 
-## All SVG components {/*all-svg-components*/}
+## Tüm SVG bileşenleri {/*all-svg-components*/}
 
-React supports all built-in browser SVG components. This includes:
+React, tüm yerleşik tarayıcı SVG bileşenlerini destekler. Bu şunları içerir:
 
 * [`<a>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/a)
 * [`<animate>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animate)
@@ -242,9 +242,7 @@ React supports all built-in browser SVG components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing SVG to JSX with an [online converter.](https://transform.tools/)
-
-Namespaced attributes also have to be written without the colon:
+[DOM standardına](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) benzer şekilde, React prop adları için  `camelCase` kuralını kullanır. Örneğin, `tabindex` yerine `tabIndex` yazacaksınız. Mevcut SVG'nizi JSX'e dönüştürmek için bir [çevrimiçi dönüştürücü](https://transform.tools/) kullanabilirsiniz.
 
 * `xlink:actuate` becomes `xlinkActuate`.
 * `xlink:arcrole` becomes `xlinkArcrole`.

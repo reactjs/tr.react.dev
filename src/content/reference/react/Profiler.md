@@ -4,7 +4,7 @@ title: <Profiler>
 
 <Intro>
 
-`<Profiler>` lets you measure rendering performance of a React tree programmatically.
+`<Profiler>` programatik olarak bir React ağacınının performansını ölçmenizi sağlar.
 
 ```js
 <Profiler id="App" onRender={onRender}>
@@ -18,11 +18,11 @@ title: <Profiler>
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<Profiler>` {/*profiler*/}
 
-Wrap a component tree in a `<Profiler>` to measure its rendering performance.
+Bir bileşen ağacını `<Profiler>` ile sarmalayarak render performansını ölçebilirsiniz.
 
 ```js
 <Profiler id="App" onRender={onRender}>
@@ -30,43 +30,43 @@ Wrap a component tree in a `<Profiler>` to measure its rendering performance.
 </Profiler>
 ```
 
-#### Props {/*props*/}
+#### Prop'lar {/*props*/}
 
-* `id`: A string identifying the part of the UI you are measuring.
-* `onRender`: An [`onRender` callback](#onrender-callback) that React calls it every time components within the profiled tree update. It receives information about what was rendered and how much time it took.
+* `id`: Kullanıcı arayüzünün ölçtüğünüz bölümünü tanımlayan bir string.
+* `onRender`: Profilleme yapılan ağaçtaki bileşenler her güncellendiğinde React [`onRender` callback](#onrender-callback)'ini çağırır. Hangi bileşenlerin yeniden render edildiği ve ne kadar sürede render edildiği bilgilerini alır.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
+* Profilleme, ekstra bir yük getirdiği için **varsayılan olarak canlı ortamda devre dışı bırakılmıştır.** Canlı ortamda profilleme yapmak için [profilleme özelliklerinin etkin olduğu özel bir canlı ortam sürümünü etkinleştirmeniz gerekmektedir.](https://fb.me/react-profiling)
 
 ---
 
-### `onRender` callback {/*onrender-callback*/}
+### `onRender` callback'i {/*onrender-callback*/}
 
-React will call your `onRender` callback with information about what was rendered.
+React `onRender` callback`inizi neyin render edildiği bilgisi ile çağıracaktır.
 
 ```js
 function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime) {
-  // Aggregate or log render timings...
+  // Render zamanlamalarını topla veya log'la...
 }
 ```
 
-#### Parameters {/*onrender-parameters*/}
+#### Parametreler {/*onrender-parameters*/}
 
-* `id`: The string `id` prop of the `<Profiler>` tree that has just committed. This lets you identify which part of the tree was committed if you are using multiple profilers.
-* `phase`: `"mount"`, `"update"` or `"nested-update"`. This lets you know whether the tree has just been mounted for the first time or re-rendered due to a change in props, state, or hooks.
-* `actualDuration`: The number of milliseconds spent rendering the `<Profiler>` and its descendants for the current update. This indicates how well the subtree makes use of memoization (e.g. [`memo`](/reference/react/memo) and [`useMemo`](/reference/react/useMemo)). Ideally this value should decrease significantly after the initial mount as many of the descendants will only need to re-render if their specific props change.
-* `baseDuration`: The number of milliseconds estimating how much time it would take to re-render the entire `<Profiler>` subtree without any optimizations. It is calculated by summing up the most recent render durations of each component in the tree. This value estimates a worst-case cost of rendering (e.g. the initial mount or a tree with no memoization). Compare `actualDuration` against it to see if memoization is working.
-* `startTime`: A numeric timestamp for when React began rendering the current update.
-* `endTime`: A numeric timestamp for when React committed the current update. This value is shared between all profilers in a commit, enabling them to be grouped if desirable.
+* `id`: Yeni commit edilmiş `<Profiler>` ağacının `id` string prop'u. Bu, birden fazla profilleyici kullanıyorsanız ağacın hangi bölümünün commit edildiğini belirlemenizi sağlar.
+* `phase`: `"mount"`, `"update"` or `"nested-update"`. Bu, ağacın ilk kez mi yüklendiğini yoksa prop, state veya hook'lardaki bir değişiklik nedeniyle mi yeniden render edildiğini bilmenizi sağlar.
+* `actualDuration`: Mevcut güncelleme için `<Profiler>` ve onun alt öğelerini render etmek için harcanan milisaniye sayısı. Bu, alt ağacın memoizasyondan ne kadar iyi yararlandığını gösterir (örneğin [`memo`](/reference/react/memo) ve [`useMemo`](/reference/react/useMemo)). İdeal olarak, bu değer ilk yüklemeden sonra önemli ölçüde azalmalıdır, çünkü alt öğelerin birçoğu yalnızca belirli prop'ları değiştiğinde yeniden render edilmedir.
+* `baseDuration`: Herhangi bir optimizasyon olmadan tüm `<Profiler>` alt ağacını yeniden render etmenin ne kadar zaman alacağını tahmin eden milisaniye sayısı. Ağaçtaki her bileşenin en son render süreleri toplanarak hesaplanır. Bu değer, render işleminin en kötü senaryo maliyetini tahmin eder (örn. ilk yükleme işlemi veya memoizasyon olmayan bir ağaç). Memoizasyonun çalışıp çalışmadığını görmek için `actualDuration` ile karşılaştırın.
+* `startTime`: React'in mevcut güncellemeyi ne zaman render etmeye başladığını gösteren sayısal bir zaman damgası.
+* `endTime`: React'in geçerli güncellemeyi ne zaman commit ettiğini gösteren sayısal bir zaman damgası. Bu değer, istenirse gruplandırılabilmeleri için bir committeki tüm profilleyiciler arasında paylaşılır.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Measuring rendering performance programmatically {/*measuring-rendering-performance-programmatically*/}
+### Render performansının programatik olarak ölçülmesi {/*measuring-rendering-performance-programmatically*/}
 
-Wrap the `<Profiler>` component around a React tree to measure its rendering performance.
+Render performansını ölçmek için `<Profiler>` bileşenini bir React ağacının etrafına sarın.
 
 ```js {2,4}
 <App>
@@ -77,25 +77,25 @@ Wrap the `<Profiler>` component around a React tree to measure its rendering per
 </App>
 ```
 
-It requires two props: an `id` (string) and an `onRender` callback (function) which React calls any time a component within the tree "commits" an update.
+`<Profiler>` iki prop alır: bir `id` (string) ve React'in ağaç içinde bir bileşen her güncelleme "commit" ettiğinde çağırdığı `onRender` callback'i (fonksiyon). 
 
 <Pitfall>
 
-Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
+Profilleme, ekstra bir yük getirdiği için **varsayılan olarak canlı ortamda devre dışı bırakılmıştır.** Canlı ortamda profilleme yapmak için [profilleme özelliklerinin etkin olduğu özel bir canlı ortam sürümünü etkinleştirmeniz gerekmektedir.](https://fb.me/react-profiling)
 
 </Pitfall>
 
 <Note>
 
-`<Profiler>` lets you gather measurements programmatically. If you're looking for an interactive profiler, try the Profiler tab in [React Developer Tools](/learn/react-developer-tools). It exposes similar functionality as a browser extension.
+`<Profiler>`, ölçümleri programatik olarak toplamanızı sağlar. Etkileşimli bir profilleyici arıyorsanız, [React Developer Tools](/learn/react-developer-tools) içindeki Profiler sekmesini deneyin. Benzer işlevselliği bir tarayıcı uzantısı olarak sunar.
 
 </Note>
 
 ---
 
-### Measuring different parts of the application {/*measuring-different-parts-of-the-application*/}
+### Uygulamanın farklı bölümlerinin ölçülmesi {/*measuring-different-parts-of-the-application*/}
 
-You can use multiple `<Profiler>` components to measure different parts of your application:
+Uygulamanızın farklı bölümlerini ölçmek için birden fazla `<Profiler>` bileşeni kullanabilirsiniz:
 
 ```js {5,7}
 <App>
@@ -108,7 +108,7 @@ You can use multiple `<Profiler>` components to measure different parts of your 
 </App>
 ```
 
-You can also nest `<Profiler>` components:
+Ayrıca `<Profiler>` bileşenlerini iç içe geçirebilirsiniz:
 
 ```js {5,7,9,12}
 <App>
@@ -126,7 +126,7 @@ You can also nest `<Profiler>` components:
 </App>
 ```
 
-Although `<Profiler>` is a lightweight component, it should be used only when necessary. Each use adds some CPU and memory overhead to an application.
+`<Profiler>` bileşeni hafif bir bileşen olsa da, sadece gerektiği zaman kullanılmalıdır. Her kullanım uygulamaya CPU ve bellek yükü ekler.
 
 ---
 
