@@ -4,7 +4,7 @@ title: <Suspense>
 
 <Intro>
 
-`<Suspense>` lets you display a fallback until its children have finished loading.
+`<Suspense>` alt elemanları yüklenene kadar bir alternatif (fallback) göstermenize olanak sağlar.
 
 
 ```js
@@ -19,28 +19,29 @@ title: <Suspense>
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<Suspense>` {/*suspense*/}
 
-#### Props {/*props*/}
-* `children`: The actual UI you intend to render. If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
-* `fallback`: An alternate UI to render in place of the actual UI if it has not finished loading. Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton. Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready. If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
+#### Prop'lar {/*props*/}
+* `children`: Render etmek istediğiniz asıl kullanıcı arayüzüdür. Eğer `children` render edilirken askıya alınırsa, Suspense sınırı `fallback`'i render etmeye geçer.
+* `fallback`: Eğer asıl kullanıcı arayüzünün yüklemesi tamamlanmamışsa, onun yerine render edilecek alternatif bir kullanıcı arayüzüdür. Herhangi geçerli React düğümü kabul edilir, ancak pratikte, bir fallback hafif bir yer tutucu görünümdür, örneğin bir yükleniyor göstergesi ya da iskelet. Suspense, `children` askıya alındığında otomatik olarak `fallback`'e geçer ve veri hazır olduğunda `children`'a geri döner. Eğer `fallback` render edilirken askıya alınırsa, en yakın üst Suspense sınırını etkinleştirir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-- React does not preserve any state for renders that got suspended before they were able to mount for the first time. When the component has loaded, React will retry rendering the suspended tree from scratch.
-- If Suspense was displaying content for the tree, but then it suspended again, the `fallback` will be shown again unless the update causing it was caused by [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
-- If React needs to hide the already visible content because it suspended again, it will clean up [layout Effects](/reference/react/useLayoutEffect) in the content tree. When the content is ready to be shown again, React will fire the layout Effects again. This ensures that Effects measuring the DOM layout don't try to do this while the content is hidden.
+- React ilk kez yüklenemeden önce askıya alınan renderlar için herhangi bir state saklamaz. Bileşen yüklendikten sonra, React askıya alınmış ağacı sıfırdan yeniden render etmeye çalışacaktır.
+- Eğer suspense ağaç için içerik gösteriyorduysa, ama sonrasında tekrar askıya alındıysa, askıya alınmayı tetikleyen güncelleme [`startTransition`](/reference/react/startTransition) veya [`useDeferredValue`](/reference/react/useDeferredValue) tarafından tetiklenmediyse, `fallback` tekrar gösterilecektir.
+- Eğer React halihazırda gösterilen bir içeriği tekrar askıya alındığı için gizlemek zorunda kalırsa, içerik ağacındaki [layout Effect'lerini](/reference/react/useLayoutEffect) temizleyecektir. İçerik tekrar gösterilmeye hazır olduğunda, React layout Effect'leri tekrar tetikleyecektir. Bu, DOM layout'unu ölçen Effect'lerin içerik gizliyken bunu yapmaya çalışmamasını sağlar.
 - React includes under-the-hood optimizations like *Streaming Server Rendering* and *Selective Hydration* that are integrated with Suspense. Read [an architectural overview](https://github.com/reactwg/react-18/discussions/37) and watch [a technical talk](https://www.youtube.com/watch?v=pj5N-Khihgc) to learn more.
+- React *Server Render'ını Stream etme* ve *Selektif Hydrate Etme* gibi Suspense ile entegre olan altta yatan optimizasyonlar içerir. Daha fazla bilgi almak için [mimari bir bakışı](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik bir konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Displaying a fallback while content is loading {/*displaying-a-fallback-while-content-is-loading*/}
+### İçerik yüklenirken bir fallback gösterme {/*displaying-a-fallback-while-content-is-loading*/}
 
-You can wrap any part of your application with a Suspense boundary:
+Uygulamanızın herhangi bir parçasını bir Suspense sınırıyla sarabilirsiniz:
 
 ```js [[1, 1, "<Loading />"], [2, 2, "<Albums />"]]
 <Suspense fallback={<Loading />}>
@@ -48,9 +49,9 @@ You can wrap any part of your application with a Suspense boundary:
 </Suspense>
 ```
 
-React will display your <CodeStep step={1}>loading fallback</CodeStep> until all the code and data needed by <CodeStep step={2}>the children</CodeStep> has been loaded.
+React <CodeStep step={1}>yükleniyor fallback'inizi</CodeStep> <CodeStep step={2}>alt elemanların</CodeStep> ihtiyaç duyduğu tüm kod ve veriler yüklenene kadar gösterecektir.
 
-In the example below, the `Albums` component *suspends* while fetching the list of albums. Until it's ready to render, React switches the closest Suspense boundary above to show the fallback--your `Loading` component. Then, when the data loads, React hides the `Loading` fallback and renders the `Albums` component with data.
+Aşağıdaki örnekte, `Albums` bileşeni albümler listesini fetch ederken *askıya alınır*. Render etmeye hazır olana kadar, React fallback'i --sizin `Loading` bileşeniniz-- göstermek için en yakın Suspense sınırını etkinleştirir. Sonra, veri yüklendiğinde, React `Loading` fallback'ini gizler ve `Albums` bileşenini verilerle render eder.
 
 <Sandpack>
 
@@ -87,7 +88,7 @@ export default function App() {
   } else {
     return (
       <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
+        The Beatles sanatçı sayfasını aç
       </button>
     );
   }
@@ -110,7 +111,7 @@ export default function ArtistPage({ artist }) {
 }
 
 function Loading() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
@@ -250,24 +251,24 @@ async function getAlbums() {
 
 <Note>
 
-**Only Suspense-enabled data sources will activate the Suspense component.** They include:
+**Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/advanced-features/react-18)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/advanced-features/react-18) gibi Suspense özellikli framework'lerle veri fetch etme.
+- [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
 
-Suspense **does not** detect when data is fetched inside an Effect or event handler.
+Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
 
-The exact way you would load data in the `Albums` component above depends on your framework. If you use a Suspense-enabled framework, you'll find the details in its data fetching documentation.
+Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React. 
+Kanaat sahibi bir framework olmadan Suspense özellikli veri fetch etme henüz desteklenmiyor. Suspense özellikli bir veri kaynağı implement etmenin gereksinimleri henüz düzensiz ve belgelenmemiş durumda. Veri kaynaklarını Suspense ile entegre etmek için resmi bir API, React'in gelecek sürümlerinde yayınlanacaktır. 
 
 </Note>
 
 ---
 
-### Revealing content together at once {/*revealing-content-together-at-once*/}
+### İçeriği tek seferde birlikte gösterme {/*revealing-content-together-at-once*/}
 
-By default, the whole tree inside Suspense is treated as a single unit. For example, even if *only one* of these components suspends waiting for some data, *all* of them together will be replaced by the loading indicator:
+Varsayılan olarak, Suspense içindeki tüm ağaç tek bir birim olarak ele alınır. Örneğin, eğer bu bileşenlerden *sadece biri* veri beklemek için askıya alınırsa, *tümü* birlikte yükleniyor göstergesiyle değiştirilecektir:
 
 ```js {2-5}
 <Suspense fallback={<Loading />}>
@@ -278,9 +279,9 @@ By default, the whole tree inside Suspense is treated as a single unit. For exam
 </Suspense>
 ```
 
-Then, after all of them are ready to be displayed, they will all appear together at once.
+Sonrasında, hepsi görüntülenmeye hazır olduğunda, hepsi birlikte tek seferde açığa çıkacaktır.
 
-In the example below, both `Biography` and `Albums` fetch some data. However, because they are grouped under a single Suspense boundary, these components always "pop in" together at the same time.
+Aşağıdaki örnekte, hem `Biography` hem `Albums` veri fetch etmekte. Ancak, tek bir Suspense sınırı altında gruplandıkları için, bu bileşenler her zaman aynı anda "açığa çıkıyor".
 
 <Sandpack>
 
@@ -317,7 +318,7 @@ export default function App() {
   } else {
     return (
       <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
+        The Beatles sanatçı sayfasını aç
       </button>
     );
   }
@@ -345,7 +346,7 @@ export default function ArtistPage({ artist }) {
 }
 
 function Loading() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
@@ -481,10 +482,10 @@ async function getBio() {
     setTimeout(resolve, 1500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -562,7 +563,7 @@ async function getAlbums() {
 
 </Sandpack>
 
-Components that load data don't have to be direct children of the Suspense boundary. For example, you can move `Biography` and `Albums` into a new `Details` component. This doesn't change the behavior. `Biography` and `Albums` share the same closest parent Suspense boundary, so their reveal is coordinated together.
+Veri yükleyen bileşenler Suspense sınırının doğrudan alt elemanı olmak zorunda değildir. Örneğin, `Biography` ve `Albums`'ü yeni bir `Details` bileşenine taşıyabilirsiniz. Bu davranışı değiştirmez. `Biography` ve `Albums` en yakın ebeveyn Suspense sınırını paylaştığı için, açığa çıkışları birlikte koordine edilir.
 
 ```js {2,8-11}
 <Suspense fallback={<Loading />}>
@@ -583,9 +584,9 @@ function Details({ artistId }) {
 
 ---
 
-### Revealing nested content as it loads {/*revealing-nested-content-as-it-loads*/}
+### İç içe içeriği yüklendikçe açığa çıkarma {/*revealing-nested-content-as-it-loads*/}
 
-When a component suspends, the closest parent Suspense component shows the fallback. This lets you nest multiple Suspense components to create a loading sequence. Each Suspense boundary's fallback will be filled in as the next level of content becomes available. For example, you can give the album list its own fallback:
+Bir bileşen askıya alındığında, en yakın üst Suspense sınırı fallback'i gösterir. Bu, bir yükleme sekansı oluşturmak için birden fazla Suspense sınırını iç içe geçirebilmenizi sağlar. Her Suspense sınırının fallback'i, bir sonraki içerik seviyesi kullanılabilir hale geldikçe doldurulur. Örneğin, albüm listesine kendi fallback'ini verebilirsiniz:
 
 ```js {3,7}
 <Suspense fallback={<BigSpinner />}>
@@ -598,14 +599,14 @@ When a component suspends, the closest parent Suspense component shows the fallb
 </Suspense>
 ```
 
-With this change, displaying the `Biography` doesn't need to "wait" for the `Albums` to load.
+Bu değişiklikle birlikte, `Biography`'i göstermek `Albums`'ün yüklenmesini "beklemek" zorunda değildir.
 
-The sequence will be:
+Sekans şu şekilde olacaktır:
 
-1. If `Biography` hasn't loaded yet, `BigSpinner` is shown in place of the entire content area.
-1. Once `Biography` finishes loading, `BigSpinner` is replaced by the content.
-1. If `Albums` hasn't loaded yet, `AlbumsGlimmer` is shown in place of `Albums` and its parent `Panel`.
-1. Finally, once `Albums` finishes loading, it replaces `AlbumsGlimmer`.
+1. Eğer `Biography` henüz yüklenmediyse, `BigSpinner` tüm içerik alanının yerine gösterilir.
+1. `Biography` yüklenmeyi tamamladığında, `BigSpinner` içerik ile değiştirilir.
+1. Eğer `Albums` henüz yüklenmediyse, `AlbumsGlimmer` `Albums` ve üst elemanı `Panel`'in yerine gösterilir.
+1. Son olarak, `Albums` yüklenmeyi tamamladığında, `AlbumsGlimmer`'ın yerine geçer.
 
 <Sandpack>
 
@@ -642,7 +643,7 @@ export default function App() {
   } else {
     return (
       <button onClick={() => setShow(true)}>
-        Open The Beatles artist page
+        The Beatles sanatçı sayfasını aç
       </button>
     );
   }
@@ -672,7 +673,7 @@ export default function ArtistPage({ artist }) {
 }
 
 function BigSpinner() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 
 function AlbumsGlimmer() {
@@ -818,10 +819,10 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -916,15 +917,15 @@ async function getAlbums() {
 
 </Sandpack>
 
-Suspense boundaries let you coordinate which parts of your UI should always "pop in" together at the same time, and which parts should progressively reveal more content in a sequence of loading states. You can add, move, or delete Suspense boundaries in any place in the tree without affecting the rest of your app's behavior.
+Suspense sınırları kullanıcı arayüzünüzün hangi parçalarının her zaman birlikte "açığa çıkması" gerektiğini ve hangi parçaların yükleme durumları sekansı içerisinde progresif olarak daha fazla içerik açığa çıkarması gerektiğini koordine etmenizi sağlar. Suspense sınırlarını uygulamanızın geri kalanını etkilemeden ağaç içerisinde herhangi bir yere ekleyebilir, taşıyabilir ya da silebilirsiniz.
 
-Don't put a Suspense boundary around every component. Suspense boundaries should not be more granular than the loading sequence that you want the user to experience. If you work with a designer, ask them where the loading states should be placed--it's likely that they've already included them in their design wireframes.
+Her bileşenin etrafına bir Suspense sınırı koymayın. Suspense sınırları kullanıcıların deneyimlemesini istediğiniz yükleme sekansından daha tanecikli olmamalıdır. Eğer bir tasarımcı ile çalışıyorsanız, yükleme durumlarının nereye konulması gerektiğini sorun--muhtemelen zaten tasarım wireframe'lerine dahil etmişlerdir.
 
 ---
 
-### Showing stale content while fresh content is loading {/*showing-stale-content-while-fresh-content-is-loading*/}
+### Yeni içerik yüklenirken eski içeriği gösterme {/*showing-stale-content-while-fresh-content-is-loading*/}
 
-In this example, the `SearchResults` component suspends while fetching the search results. Type `"a"`, wait for the results, and then edit it to `"ab"`. The results for `"a"` will get replaced by the loading fallback.
+Bu örnekte, `SearchResults` bileşeni arama sonuçlarını fetch ederken askıya alınır. `"a"` Yazın, sonuçları bekleyin ve daha sonra yazıyı `"ab"` olarak düzenleyin. `"a"` için gelen sonuçlar yükleme fallback'i ile değiştirilecektir.
 
 <Sandpack>
 
@@ -952,10 +953,10 @@ export default function App() {
   return (
     <>
       <label>
-        Search albums:
+        Albümleri ara:
         <input value={query} onChange={e => setQuery(e.target.value)} />
       </label>
-      <Suspense fallback={<h2>Loading...</h2>}>
+      <Suspense fallback={<h2>Yükleniyor...</h2>}>
         <SearchResults query={query} />
       </Suspense>
     </>
@@ -978,7 +979,7 @@ export default function SearchResults({ query }) {
   }
   const albums = use(fetchData(`/search?q=${query}`));
   if (albums.length === 0) {
-    return <p>No matches for <i>"{query}"</i></p>;
+    return <p><i>"{query}"</i> için sonuç bulunamadı</p>;
   }
   return (
     <ul>
@@ -1116,7 +1117,7 @@ input { margin: 10px; }
 
 </Sandpack>
 
-A common alternative UI pattern is to *defer* updating the list and to keep showing the previous results until the new results are ready. The [`useDeferredValue`](/reference/react/useDeferredValue) Hook lets you pass a deferred version of the query down: 
+Yaygın bir alternatif kullanıcı arayüzü modeli listeyi güncellemeyi *ertelemek* ve yeni sonuçlar hazır olana kadar önceki sonuçları göstermeye devam etmektir. [`useDeferredValue`](/reference/react/useDeferredValue) Hook'u sorgunun ertelenmiş bir sürümünü aşağıya geçirmenizi sağlar:
 
 ```js {3,11}
 export default function App() {
@@ -1125,10 +1126,10 @@ export default function App() {
   return (
     <>
       <label>
-        Search albums:
+        Albümleri ara:
         <input value={query} onChange={e => setQuery(e.target.value)} />
       </label>
-      <Suspense fallback={<h2>Loading...</h2>}>
+      <Suspense fallback={<h2>Yükleniyor...</h2>}>
         <SearchResults query={deferredQuery} />
       </Suspense>
     </>
@@ -1136,9 +1137,9 @@ export default function App() {
 }
 ```
 
-The `query` will update immediately, so the input will display the new value. However, the `deferredQuery` will keep its previous value until the data has loaded, so `SearchResults` will show the stale results for a bit.
+`sorgu` (query) hemen güncellenecektir, bu yüzden girdi yeni değeri gösterecektir. Ancak, `deferredQuery` veri yüklenene kadar önceki değerini koruyacaktır, bu yüzden `SearchResults` bir süreliğine eski sonuçları gösterecektir.
 
-To make it more obvious to the user, you can add a visual indication when the stale result list is displayed:
+Kullanıcıya daha belli etmek için, eski sonuç listesinin gösterildiği zamanlarda görsel bir gösterge ekleyebilirsiniz:
 
 ```js {2}
 <div style={{
@@ -1148,7 +1149,7 @@ To make it more obvious to the user, you can add a visual indication when the st
 </div>
 ```
 
-Enter `"a"` in the example below, wait for the results to load, and then edit the input to `"ab"`. Notice how instead of the Suspense fallback, you now see the dimmed stale result list until the new results have loaded:
+Aşağıdaki örneğe `"a"` yazın, sonuçların yüklenmesini bekleyin, sonrasında girdiyi `"ab"` olarak değiştirin. Yeni sonuçlar yüklenene kadar Suspense fallback'i yerine soluklaşmış eski sonuç listesini gördüğünüze dikkat edin:
 
 
 <Sandpack>
@@ -1179,10 +1180,10 @@ export default function App() {
   return (
     <>
       <label>
-        Search albums:
+        Albümleri ara:
         <input value={query} onChange={e => setQuery(e.target.value)} />
       </label>
-      <Suspense fallback={<h2>Loading...</h2>}>
+      <Suspense fallback={<h2>Yükleniyor...</h2>}>
         <div style={{ opacity: isStale ? 0.5 : 1 }}>
           <SearchResults query={deferredQuery} />
         </div>
@@ -1207,7 +1208,7 @@ export default function SearchResults({ query }) {
   }
   const albums = use(fetchData(`/search?q=${query}`));
   if (albums.length === 0) {
-    return <p>No matches for <i>"{query}"</i></p>;
+    return <p><i>"{query}" için bir sonuç bulunamadı</i></p>;
   }
   return (
     <ul>
@@ -1347,15 +1348,15 @@ input { margin: 10px; }
 
 <Note>
 
-Both deferred values and [transitions](#preventing-already-revealed-content-from-hiding) let you avoid showing Suspense fallback in favor of inline indicators. Transitions mark the whole update as non-urgent so they are typically used by frameworks and router libraries for navigation. Deferred values, on the other hand, are mostly useful in application code where you want to mark a part of UI as non-urgent and let it "lag behind" the rest of the UI.
+Hem geciktirilmiş değerler hem de [transition'lar](#preventing-already-revealed-content-from-hiding) satır içi göstergeler lehine Suspense fallback'inden kaçınmanızı sağlar. Transition'lar tüm güncellemeyi acil olmayan olarak işaretlerler, bu yüzden genellikle framework'ler ve router kütüphaneleri tarafından navigasyon için kullanılırlar. Diğer yandan, geciktirilmiş değerler, genellikle bir kullanıcı arayüzü parçasını acil olmayan olarak işaretlemek ve onu kullanıcı arayüzünün geri kalanından "geride bırakmak" için uygulama kodunda kullanışlıdır.
 
 </Note>
 
 ---
 
-### Preventing already revealed content from hiding {/*preventing-already-revealed-content-from-hiding*/}
+### Zaten açığa çıkmış içeriğin gizlenmesini önleme {/*preventing-already-revealed-content-from-hiding*/}
 
-When a component suspends, the closest parent Suspense boundary switches to showing the fallback. This can lead to a jarring user experience if it was already displaying some content. Try pressing this button:
+Bir bileşen askıya alındığında, en yakın Suspense sınırı fallback'i göstermeye geçer. Bu, zaten bir içerik gösteriliyorsa uyumsuz bir kullanıcı deneyimine yol açabilir. Bu düğmeye basmayı deneyin:
 
 <Sandpack>
 
@@ -1418,7 +1419,7 @@ function Router() {
 }
 
 function BigSpinner() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
@@ -1427,7 +1428,7 @@ export default function Layout({ children }) {
   return (
     <div className="layout">
       <section className="header">
-        Music Browser
+        Müzik Tarayıcısı
       </section>
       <main>
         {children}
@@ -1441,7 +1442,7 @@ export default function Layout({ children }) {
 export default function IndexPage({ navigate }) {
   return (
     <button onClick={() => navigate('/the-beatles')}>
-      Open The Beatles artist page
+      The Beatles sanatçı sayfasını aç
     </button>
   );
 }
@@ -1610,10 +1611,10 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -1724,9 +1725,9 @@ main {
 
 </Sandpack>
 
-When you pressed the button, the `Router` component rendered `ArtistPage` instead of `IndexPage`. A component inside `ArtistPage` suspended, so the closest Suspense boundary started showing the fallback. The closest Suspense boundary was near the root, so the whole site layout got replaced by `BigSpinner`.
+Butona bastığınızda `Router` bileşeni `ArtistPage` sayfası yerine `IndexPage` sayfasını render etti. `ArtistPage` içerisindeki bir bileşen askıya alındı, bu yüzden en yakın Suspense sınırı fallback'i göstermeye başladı. En yakın Suspense sınırı köke yakındı, bu yüzden tüm site layout'u `BigSpinner` ile değiştirildi.
 
-To prevent this, you can mark the navigation state update as a *transition* with [`startTransition`:](/reference/react/startTransition)
+Bunu engellemek için, navigasyon state'ini bir *geçiş* (transition) olarak [`startTransition`:](/reference/react/startTransition) ile işaretleyebilirsiniz:
 
 ```js {5,7}
 function Router() {
@@ -1740,7 +1741,7 @@ function Router() {
   // ...
 ```
 
-This tells React that the state transition is not urgent, and it's better to keep showing the previous page instead of hiding any already revealed content. Now clicking the button "waits" for the `Biography` to load:
+Bu, React'e state transition'ının acil olmadığını, ve zaten açığa çıkmış içeriği gizlemek yerine önceki sayfayı göstermeye devam etmenin daha iyi olduğunu söyler. Şimdi butona basmak `Biography`'nin yüklenmesini "bekler":
 
 <Sandpack>
 
@@ -1805,7 +1806,7 @@ function Router() {
 }
 
 function BigSpinner() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
@@ -1814,7 +1815,7 @@ export default function Layout({ children }) {
   return (
     <div className="layout">
       <section className="header">
-        Music Browser
+        Müzik Tarayıcısı
       </section>
       <main>
         {children}
@@ -1828,7 +1829,7 @@ export default function Layout({ children }) {
 export default function IndexPage({ navigate }) {
   return (
     <button onClick={() => navigate('/the-beatles')}>
-      Open The Beatles artist page
+      The Beatles sanatçı sayfasını aç
     </button>
   );
 }
@@ -1997,10 +1998,10 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -2111,19 +2112,19 @@ main {
 
 </Sandpack>
 
-A transition doesn't wait for *all* content to load. It only waits long enough to avoid hiding already revealed content. For example, the website `Layout` was already revealed, so it would be bad to hide it behind a loading spinner. However, the nested `Suspense` boundary around `Albums` is new, so the transition doesn't wait for it.
+Bir transition *tüm* içeriğin yüklenmesini beklemez. Zaten açığa çıkmış içeriği gizlemekten kaçınmak için ne kadar beklemesi gerekiyorsa o kadar bekler. Örneğin, web sitesinin `Layout`'u zaten açığa çıkmıştı, bu yüzden onu bir yükleniyor çarkının arkasına saklamak kötü olurdu. Bununla birlikte, `Albums`'ün etrafındaki iç içe geçmiş `Suspense` sınırı yeni olduğundan, transition onu beklemiyor.
 
 <Note>
 
-Suspense-enabled routers are expected to wrap the navigation updates into transitions by default.
+Suspense özellikli router'lar varsayılan olarak navigasyon güncellemelerini transition'lara sararlar.
 
 </Note>
 
 ---
 
-### Indicating that a transition is happening {/*indicating-that-a-transition-is-happening*/}
+### Transition'ın gerçekleştiğini gösterme {/*indicating-that-a-transition-is-happening*/}
 
-In the above example, once you click the button, there is no visual indication that a navigation is in progress. To add an indicator, you can replace [`startTransition`](/reference/react/startTransition) with [`useTransition`](/reference/react/useTransition) which gives you a boolean `isPending` value. In the example below, it's used to change the website header styling while a transition is happening:
+Yukarıdaki örnekte, butona bastığınızda navigasyonun gerçekleştiğini gösteren bir görsel gösterge bulunmamakta. Bir gösterge eklemek için, [`startTransition`'ı](/reference/react/startTransition) [`useTransition`](/reference/react/useTransition) ile değiştirebilirsiniz, bu size bir boolean olan `isPending` değerini verecektir. Aşağıdaki örnekte, transition'ın gerçekleştiği sırada web sitesi başlığı stilini değiştirmek için `useTransition` kullanılmıştır:
 
 <Sandpack>
 
@@ -2189,7 +2190,7 @@ function Router() {
 }
 
 function BigSpinner() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>🌀 Yükleniyor...</h2>;
 }
 ```
 
@@ -2200,7 +2201,7 @@ export default function Layout({ children, isPending }) {
       <section className="header" style={{
         opacity: isPending ? 0.7 : 1
       }}>
-        Music Browser
+        Müzik Tarayıcısı
       </section>
       <main>
         {children}
@@ -2214,7 +2215,7 @@ export default function Layout({ children, isPending }) {
 export default function IndexPage({ navigate }) {
   return (
     <button onClick={() => navigate('/the-beatles')}>
-      Open The Beatles artist page
+      The Beatles sanatçı sayfasını aç
     </button>
   );
 }
@@ -2383,10 +2384,10 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
-    and Ringo Starr.`;
+  return `The Beatles, Liverpool'da 1960'da 
+    kurulmuş, John Lennon, Paul McCartney, 
+    George Harrison ve Ringo Starr'dan oluşan
+    bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -2499,27 +2500,27 @@ main {
 
 ---
 
-### Resetting Suspense boundaries on navigation {/*resetting-suspense-boundaries-on-navigation*/}
+### Navigasyon sırasında Suspense sınırlarını sıfırlama {/*resetting-suspense-boundaries-on-navigation*/}
 
-During a transition, React will avoid hiding already revealed content. However, if you navigate to a route with different parameters, you might want to tell React it is *different* content. You can express this with a `key`:
+Bir transition sırasında, React açığa çıkarılmış içeriği gizlemekten kaçınır. Ancak, farklı parametrelere sahip bir rotaya geçerseniz, React'e bunun *farklı* içerik olduğunu söylemek isteyebilirsiniz. Bunu bir `key` ile ifade edebilirsiniz:
 
 ```js
 <ProfilePage key={queryParams.id} />
 ```
 
-Imagine you're navigating within a user's profile page, and something suspends. If that update is wrapped in a transition, it will not trigger the fallback for already visible content. That's the expected behavior.
+Bir kullanıcının profil sayfasına gitmeye çalıştığınızı hayal edin, ve bir şey askıya alınsın. Eğer bu güncelleme bir transition ile sarılırsa, zaten görünen içerik için fallback tetiklenmeyecektir. Bu beklenen davranıştır.
 
-However, now imagine you're navigating between two different user profiles. In that case, it makes sense to show the fallback. For example, one user's timeline is *different content* from another user's timeline. By specifying a `key`, you ensure that React treats different users' profiles as different components, and resets the Suspense boundaries during navigation. Suspense-integrated routers should do this automatically.
+Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalıştığınızı düşünün. Bu durumda, fallback'i göstermek mantıklı olacaktır. Örneğin, bir kullanıcının zaman çizelgesi başka bir kullanıcının zaman çizelgesinden *farklı içerik*'tir. Bir `key` belirterek, React'e farklı kullanıcıların profillerini farklı bileşenler olarak ele almasını ve navigasyon sırasında Suspense sınırlarını sıfırlamasını sağlarsınız. Suspense entegreli router'lar bunu otomatik olarak yapmalıdır. 
 
 ---
 
-### Providing a fallback for server errors and server-only content {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
+### Sunucu hataları ve sadece sunucuda olan içerik için bir fallback sağlama {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
 
-If you use one of the [streaming server rendering APIs](/reference/react-dom/server) (or a framework that relies on them), React will also use your `<Suspense>` boundaries to handle errors on the server. If a component throws an error on the server, React will not abort the server render. Instead, it will find the closest `<Suspense>` component above it and include its fallback (such as a spinner) into the generated server HTML. The user will see a spinner at first.
+Eğer [stream'leyen sunucu render etme API'leri](/reference/react-dom/server)nden birini (ya da onlara bağlı bir framework) kullanıyorsanız, React sunucuda hataları ele almak için `<Suspense>` sınırlarınızı kullanacaktır. Eğer bir bileşen sunucuda bir hata throw ederse, React sunucu render'ını iptal etmeyecektir. Bunun yerine, onun üzerindeki en yakın `<Suspense>` bileşenini bulacak ve oluşturulan sunucu HTML'ine bileşenin fallback'ini (örneğin bir yükleniyor çarkı) dahil edecektir. Kullanıcı ilk olarak bir yükleniyor çarkı görecektir.
 
-On the client, React will attempt to render the same component again. If it errors on the client too, React will throw the error and display the closest [error boundary.](/reference/react/Component#static-getderivedstatefromerror) However, if it does not error on the client, React will not display the error to the user since the content was eventually displayed successfully.
+İstemci tarafında, React aynı bileşeni tekrar render etmeyi deneyecektir. Eğer istemcide de hata verirse, React hatayı throw edip en yakın [hata sınırını](/reference/react/Component#static-getderivedstatefromerror) gösterecektir. Ancak, istemcide hata vermezse, React içeriği nihayetinde başarıyla görüntülediği için hatayı kullanıcıya göstermeyecektir.
 
-You can use this to opt out some components from rendering on the server. To do this, throw an error in the server environment and then wrap them in a `<Suspense>` boundary to replace their HTML with fallbacks:
+Bunu bazı bileşenlerin sunucuda yüklenmemesini sağlamak için kullanabilirsiniz. Bunu yapmak için, sunucu ortamında bir hata throw edin ve ardından HTML'lerini fallback'lerle değiştirmek için `<Suspense>` sınırı içine alın:
 
 ```js
 <Suspense fallback={<Loading />}>
@@ -2528,35 +2529,35 @@ You can use this to opt out some components from rendering on the server. To do 
 
 function Chat() {
   if (typeof window === 'undefined') {
-    throw Error('Chat should only render on the client.');
+    throw Error('Chat bileşeni sadece istemcide render edilmelidir.');
   }
   // ...
 }
 ```
 
-The server HTML will include the loading indicator. It will be replaced by the `Chat` component on the client.
+Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniyor çarkı `Chat` bileşeni ile değiştirilecektir.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Hata ayıklama {/*troubleshooting*/}
 
-### How do I prevent the UI from being replaced by a fallback during an update? {/*preventing-unwanted-fallbacks*/}
+### Kullanıcı arayüzünün bir güncelleme sırasında bir fallback ile değiştirilmesini nasıl engellerim? {/*preventing-unwanted-fallbacks*/}
 
-Replacing visible UI with a fallback creates a jarring user experience. This can happen when an update causes a component to suspend, and the nearest Suspense boundary is already showing content to the user.
+Görünür bir kullanıcı arayüzünü bir fallback ile değiştirmek, uyumsuz bir kullanıcı deneyimine sebep olur.  Bu, bir güncelleme bir bileşenin askıya alınmasına sebep olduğunda ve en yakın Suspense sınırı zaten kullanıcıya içerik gösteriyorsa olabilir.
 
-To prevent this from happening, [mark the update as non-urgent using `startTransition`](#preventing-already-revealed-content-from-hiding). During a transition, React will wait until enough data has loaded to prevent an unwanted fallback from appearing:
+Bunun olmasını engellemek için, [güncellemeyi `startTransition` ile acil olmayan olarak işaretleyin](#preventing-already-revealed-content-from-hiding). Bir transition sırasında, React istenmeyen bir fallback'in görünmesini engellemek için yeterli veri yüklenene kadar bekleyecektir:
 
 ```js {2-3,5}
 function handleNextPageClick() {
-  // If this update suspends, don't hide the already displayed content
+  // Eğer bu güncelleme askıya alınırsa, zaten görünen içeriği gizleme
   startTransition(() => {
     setCurrentPage(currentPage + 1);
   });
 }
 ```
 
-This will avoid hiding existing content. However, any newly rendered `Suspense` boundaries will still immediately display fallbacks to avoid blocking the UI and let the user see the content as it becomes available.
+Bu, varolan içeriği gizlemeyi önleyecektir. Ancak, yeni render edilen `Suspense` sınırları hala kullanıcı arayüzünü bloke etmemek ve kullanıcının içeriği hazır hale geldikçe görmesini sağlamak için hemen fallback gösterecektir.
 
-**React will only prevent unwanted fallbacks during non-urgent updates**. It will not delay a render if it's the result of an urgent update. You must opt in with an API like [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
+**React sadece istenmeyen fallback'leri acil olmayan güncellemeler sırasında engeller**. Eğer acil bir güncelleme sonucunda gerçekleşiyorsa, bir render'ı geciktirmeyecektir. [`startTransition`](/reference/react/startTransition) veya [`useDeferredValue`](/reference/react/useDeferredValue) gibi bir API tercih etmeniz gerekecektir.
 
-If your router is integrated with Suspense, it should wrap its updates into [`startTransition`](/reference/react/startTransition) automatically.
+Eğer router'ınız Suspense ile entegre ise, güncellemelerini [`startTransition`'ın](/reference/react/startTransition) içerisine otomatik olarak sarması gerekmektedir.
