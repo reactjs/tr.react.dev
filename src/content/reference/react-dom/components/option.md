@@ -52,7 +52,7 @@ Ayrıca, `<option>` bu özellikleri de destekler:
 
 ## Kullanım {/*usage*/}
 
-### Seçenekler İçeren Bir Seçim Kutusu Gösterme {/*displaying-a-select-box-with-options*/}
+### Seçenekler içeren bir seçim kutusu gösterme {/*displaying-a-select-box-with-options*/}
 
 Seçim kutusu oluşturmak için, içerisinde `<option>` bileşenleri bulunan `<select>` öğesi kullanın. Her bir `<option>` bileşenine, form ile gönderilecek verileri temsil eden bir `value` değeri atayın.
 
