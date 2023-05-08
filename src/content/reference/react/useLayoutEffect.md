@@ -47,7 +47,11 @@ function Tooltip() {
 
 #### Parametereler {/*parameters*/}
 
+<<<<<<< HEAD
 * `kurulum (setup)`: Efekt kodunu barındıran fonksiyondur. Kurulum fonksiyonunuz ayrıca isteğe bağlı *temizleme (cleanup)* fonksiyonu döndürebilir. React, bileşeninizi DOM'a eklemeden önce kurulum fonksiyonunuzu çalıştırır. Bağımlılıkların değişmesiyle tetiklenen render'ların ardından öncelikle eski değerlerle birlikte temizleme fonksiyonunuzu (varsa) çalıştırılır ve ardından yeni değerlerle birlikte kurulum fonksiyonuzu çalıştırılır. Bileşen DOM'dan kaldırılmadan önce, React son kez temizleme fonksiyonunuzu çalıştırır.
+=======
+* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. Before your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
+>>>>>>> da93812c7802e916d75bbb293889fda42c8d06aa
  
 * **isteğe bağlı** `bağımlılıklar (dependencies)`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
 
@@ -728,6 +732,7 @@ Sorunun kaynağı sunucuda yerleşim (layout) bilgisinin bulunmamasıdır.
 
 Genellikle yerleşim bilgisine ihtiyaç duyan bileşenlerin sunucuda render edilmesi gereksizdir. Örneğin, ilk render'da `Tooltip` göstermek çoğu zaman mantıklı değildir. İstemci etkileşimiyle tetiklenmelidir.
 
+<<<<<<< HEAD
 Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç farklı seçenek vardır:
 
 - `useLayoutEffect`'i [`useEffect`](/reference/react/useEffect) ile değiştirin. Bu, React'a ekrana çizme işlemini bloke etmesine gerek olmadan ilk render sonucunu görüntüleyebileceğini söyler (çünkü efektiniz çalışmadan önce HTML render edilmiş olacaktır).
@@ -737,3 +742,14 @@ Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç f
 - Alternatif olarak, `useLayoutEffect` kullanan bileşeni hidratlama sonrasında render ettirebilirsiniz. Başlangıç değeri `false` olan `isMounted` isminde bir state oluşturun ve `useEffect` içerisinde `true` olarak ayarlayın. Render ederken lojiğiniz şöyle olabilir: `return isMounted ? <RealContent /> : <FallbackContent />`. Sunucudayken veya hidratlama sırasında, kullanıcı `useLayoutEffect` çağırılmayan `FallbackContent`'i görür. İstemci tarafında React, içeriği `RealContent` ile değiştirir.
 
 - Bileşeninizi harici bir veri deposu (data store) ile senkron tutuyorsanız ve `useEffect`'i yerleşimi ölçmek yerine başka sebeplerle kullanıyorsanız, bunun yerine [sunucu taraflı render'ı destekleyen](/reference/react/useSyncExternalStore#adding-support-for-server-rendering) [`useSyncExternalStore`](/reference/react/useSyncExternalStore)'u kullanmayı düşünün.
+=======
+However, if you're running into this problem, you have a few different options:
+
+- Replace `useLayoutEffect` with [`useEffect`.](/reference/react/useEffect) This tells React that it's okay to display the initial render result without blocking the paint (because the original HTML will become visible before your Effect runs).
+
+- Alternatively, [mark your component as client-only.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) This tells React to replace its content up to the closest [`<Suspense>`](/reference/react/Suspense) boundary with a loading fallback (for example, a spinner or a glimmer) during server rendering.
+
+- Alternatively, you can render a component with `useLayoutEffect` only after hydration. Keep a boolean `isMounted` state that's initialized to `false`, and set it to `true` inside a `useEffect` call. Your rendering logic can then be like `return isMounted ? <RealContent /> : <FallbackContent />`. On the server and during the hydration, the user will see `FallbackContent` which should not call `useLayoutEffect`. Then React will replace it with `RealContent` which runs on the client only and can include `useLayoutEffect` calls.
+
+- If you synchronize your component with an external data store and rely on `useLayoutEffect` for different reasons than measuring layout, consider [`useSyncExternalStore`](/reference/react/useSyncExternalStore) instead which [supports server rendering.](/reference/react/useSyncExternalStore#adding-support-for-server-rendering)
+>>>>>>> da93812c7802e916d75bbb293889fda42c8d06aa

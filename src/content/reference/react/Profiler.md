@@ -32,8 +32,13 @@ Bir bileşen ağacını `<Profiler>` ile sarmalayarak render performansını öl
 
 #### Prop'lar {/*props*/}
 
+<<<<<<< HEAD
 * `id`: Kullanıcı arayüzünün ölçtüğünüz bölümünü tanımlayan bir string.
 * `onRender`: Profilleme yapılan ağaçtaki bileşenler her güncellendiğinde React [`onRender` callback](#onrender-callback)'ini çağırır. Hangi bileşenlerin yeniden render edildiği ve ne kadar sürede render edildiği bilgilerini alır.
+=======
+* `id`: A string identifying the part of the UI you are measuring.
+* `onRender`: An [`onRender` callback](#onrender-callback) that React calls every time components within the profiled tree update. It receives information about what was rendered and how much time it took.
+>>>>>>> da93812c7802e916d75bbb293889fda42c8d06aa
 
 #### Uyarılar {/*caveats*/}
 
