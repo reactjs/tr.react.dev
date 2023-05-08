@@ -251,16 +251,16 @@ async function getAlbums() {
 
 <Note>
 
-**Sadece suspense etkin veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
+**Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/advanced-features/react-18) gibi Suspense etkin framework'lerle veri fetch etme.
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/advanced-features/react-18) gibi Suspense özellikli framework'lerle veri fetch etme.
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
 
 Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
 
-Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense etkin bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
+Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
-Kanaat sahibi bir framework olmadan Suspense etkin veri fetch etme henüz desteklenmiyor. Suspense etkin bir veri kaynağı implement etmenin gereksinimleri henüz düzensiz ve belgelenmemiş durumda. Veri kaynaklarını Suspense ile entegre etmek için resmi bir API, React'in gelecek sürümlerinde yayınlanacaktır. 
+Kanaat sahibi bir framework olmadan Suspense özellikli veri fetch etme henüz desteklenmiyor. Suspense özellikli bir veri kaynağı implement etmenin gereksinimleri henüz düzensiz ve belgelenmemiş durumda. Veri kaynaklarını Suspense ile entegre etmek için resmi bir API, React'in gelecek sürümlerinde yayınlanacaktır. 
 
 </Note>
 
@@ -2116,7 +2116,7 @@ Bir transition *tüm* içeriğin yüklenmesini beklemez. Zaten açığa çıkmı
 
 <Note>
 
-Suspense etkin router'lar varsayılan olarak navigasyon güncellemelerini transition'lara sararlar.
+Suspense özellikli router'lar varsayılan olarak navigasyon güncellemelerini transition'lara sararlar.
 
 </Note>
 
