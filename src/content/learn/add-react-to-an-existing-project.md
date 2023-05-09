@@ -16,21 +16,21 @@ Mevcut projenize biraz etkileşim eklemek istiyorsanız, onu React'te yeniden ya
 
 ## Mevcut web sitenizin tüm alt yolu için React kullanımı {/*using-react-for-an-entire-subroute-of-your-existing-website*/}
 
-Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluşturulmuş mevcut bir web uygulamanız var ve `example.com/some-app/` ile başlayan tüm rotaları tamamen React ile uygulamak istiyorsunuz.
+Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluşturulmuş mevcut bir web uygulamanız var ve `example.com/some-app/` ile başlayan tüm rotaları tamamen React ile oluşturmak istiyorsunuz.
 
 Kurulumu şu şekilde yapmanızı öneririz:
 
 1. [React tabanlı kütüphanelerden](/learn/start-a-new-react-project) birini kullanarak **uygulamanızın React bölümünü oluşturun**.
-2. **Kütüphanenizin yapılandırılmasında *temel yol* olarak `/some-app`'i belirtin.** (şu şekilde: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+2. **Kütüphanenizin yapılandırılmasında *base path* olarak `/some-app`'i belirtin.** (şu şekilde: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
 3. `/some-app/` altındaki tüm isteklerin React uygulamanız tarafından işlenmesi için **sunucunuzu veya bir proxy'yi yapılandırın.** 
 
 Bu, uygulamanızın React bölümünün bu kütüphanelerde oluşturulmuş [en iyi uygulamalardan yararlanabilmesini sağlar](/learn/start-a-new-react-project#can-i-use-react-without-a-framework).
 
-Birçok React tabanlı kütüphaneler, ön ve arka yüz geliştirir ve React uygulamanızın sunucudan yararlanmasına izin verir. Ancak, sunucuda JavaScript çalıştıramasanız veya istemeseniz bile aynı yaklaşımı kullanabilirsiniz. Bu durumda HTML/CSS/JS dışa aktarımını (Next.js için [`next export` çıktısı](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby için varsayılan) bunun yerine `/some-app/` konumunda sunun.
+Birçok React tabanlı kütüphaneler, ön ve arka yüz geliştirmede kullanılabilir ve React uygulamanızın sunucudan yararlanmasına izin verir. Ancak, sunucuda JavaScript çalıştıramasanız veya istemeseniz bile aynı yaklaşımı kullanabilirsiniz. Bu durumda HTML/CSS/JS dışa aktarımını (Next.js için [`next export` çıktısı](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby için varsayılan) bunun yerine `/some-app/` konumunda sunun.
 
 ## Mevcut sayfanızın bir bölümü için React kullanımı {/*using-react-for-a-part-of-your-existing-page*/}
 
-Diyelim ki başka bir teknoloji (Rails gibi bir sunucu veya Backbone gibi bir istemci) ile oluşturulmuş mevcut bir sayfanız var ve o sayfada bir yerde etkileşimli React bileşenleri render etmek istiyorsunuz. Bu, React'i entegre etmenin yaygın bir yoludur - aslında, çoğu React kullanımının yıllarca Meta'ya bakma şekli bu!
+Diyelim ki başka bir teknoloji (Rails gibi bir sunucu veya Backbone gibi bir istemci) ile oluşturulmuş mevcut bir sayfanız var ve o sayfada bir yerde etkileşimli React bileşenleri render etmek istiyorsunuz. Bu, React'i entegre etmenin yaygın bir yoludur - aslında, Meta'daki çoğu React kullanımı yıllarca bu şekilde görünüyordu!
 
 Bunu iki adımda yapabilirsiniz:
 
@@ -135,7 +135,7 @@ Bu, [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {
-  // YAPILACAK: Bir navigasyon barı uygulayın
+  // YAPILACAK: Bir navigasyon barı oluşturun
   return <h1>Hello from React!</h1>;
 }
 
