@@ -33,7 +33,7 @@ Eğer <Math><MathI>x</MathI> = 3</Math> ise <Math><MathI>y</MathI> = 6</Math>'d�
 
 Eğer <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> günün zamanına veya borsanın durumuna bağlı olarak bazen <Math>9</Math> ya da <Math>–1</Math> veya <Math>2.5</Math> olmaz. 
 
-Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> will _always_ be <Math>6</Math>'dır. 
+Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> _her zaman_ <Math>6</Math>'dır. 
 
 Eğer bunu bir JavaScript fonksiyonuna çevirseydik, şöyle görünürdü:
 

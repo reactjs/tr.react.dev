@@ -1,59 +1,59 @@
 ---
-title: Add React to an Existing Project
+title: Var Olan Bir Projeye React Eklemek
 ---
 
 <Intro>
 
-If you want to add some interactivity to your existing project, you don't have to rewrite it in React. Add React to your existing stack, and render interactive React components anywhere.
+Mevcut projenize biraz etkileşim eklemek istiyorsanız, onu React'te yeniden yazmak zorunda değilsiniz. React'i mevcut yığınınıza ekleyin ve etkileşimli React bileşenlerini istediğiniz yerde render edin.
 
 </Intro>
 
 <Note>
 
-**You need to install [Node.js](https://nodejs.org/en/) for local development.** Although you can [try React](/learn/installation#try-react) online or with a simple HTML page, realistically most JavaScript tooling you'll want to use for development requires Node.js.
+**Yerel geliştirme ortamınız için [Node.js](https://nodejs.org/en/) yüklemeniz gerekmektedir.** React'i çevrimiçi olarak veya basit bir HTML sayfası ile [deneyebilseniz de](/learn/installation#try-react), gerçekte geliştirme için kullanmak isteyeceğiniz JavaScript araçlarının çoğu Node.js gerektirir.
 
 </Note>
 
-## Using React for an entire subroute of your existing website {/*using-react-for-an-entire-subroute-of-your-existing-website*/}
+## Mevcut web sitenizin tüm alt yolu için React kullanımı {/*using-react-for-an-entire-subroute-of-your-existing-website*/}
 
-Let's say you have an existing web app at `example.com` built with another server technology (like Rails), and you want to implement all routes starting with `example.com/some-app/` fully with React.
+Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluşturulmuş mevcut bir web uygulamanız var ve `example.com/some-app/` ile başlayan tüm rotaları tamamen React ile oluşturmak istiyorsunuz.
 
-Here's how we recommend to set it up:
+Kurulumu şu şekilde yapmanızı öneririz:
 
-1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
-2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+1. [React tabanlı kütüphanelerden](/learn/start-a-new-react-project) birini kullanarak **uygulamanızın React bölümünü oluşturun**.
+2. **Kütüphanenizin yapılandırılmasında *base path* olarak `/some-app`'i belirtin.** (şu şekilde: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. `/some-app/` altındaki tüm isteklerin React uygulamanız tarafından işlenmesi için **sunucunuzu veya bir proxy'yi yapılandırın.** 
 
-This ensures the React part of your app can [benefit from the best practices](/learn/start-a-new-react-project#can-i-use-react-without-a-framework) baked into those frameworks.
+Bu, uygulamanızın React bölümünün bu kütüphanelerde oluşturulmuş [en iyi uygulamalardan yararlanabilmesini sağlar](/learn/start-a-new-react-project#can-i-use-react-without-a-framework).
 
-Many React-based frameworks are full-stack and let your React app take advantage of the server. However, you can use the same approach even if you can't or don't want to run JavaScript on the server. In that case, serve the HTML/CSS/JS export ([`next export` output](https://nextjs.org/docs/advanced-features/static-html-export) for Next.js, default for Gatsby) at `/some-app/` instead.
+Birçok React tabanlı kütüphaneler, ön ve arka yüz geliştirmede kullanılabilir ve React uygulamanızın sunucudan yararlanmasına izin verir. Ancak, sunucuda JavaScript çalıştıramasanız veya istemeseniz bile aynı yaklaşımı kullanabilirsiniz. Bu durumda HTML/CSS/JS dışa aktarımını (Next.js için [`next export` çıktısı](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby için varsayılan) bunun yerine `/some-app/` konumunda sunun.
 
-## Using React for a part of your existing page {/*using-react-for-a-part-of-your-existing-page*/}
+## Mevcut sayfanızın bir bölümü için React kullanımı {/*using-react-for-a-part-of-your-existing-page*/}
 
-Let's say you have an existing page built with another technology (either a server one like Rails, or a client one like Backbone), and you want to render interactive React components somewhere on that page. That's a common way to integrate React--in fact, it's how most React usage looked at Meta for many years!
+Diyelim ki başka bir teknoloji (Rails gibi bir sunucu veya Backbone gibi bir istemci) ile oluşturulmuş mevcut bir sayfanız var ve o sayfada bir yerde etkileşimli React bileşenleri render etmek istiyorsunuz. Bu, React'i entegre etmenin yaygın bir yoludur - aslında, Meta'daki çoğu React kullanımı yıllarca bu şekilde görünüyordu!
 
-You can do this in two steps:
+Bunu iki adımda yapabilirsiniz:
 
-1. **Set up a JavaScript environment** that lets you use the [JSX syntax](/learn/writing-markup-with-jsx), split your code into modules with the [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) / [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) syntax, and use packages (for example, React) from the [npm](https://www.npmjs.com/) package registry.
-2. **Render your React components** where you want to see them on the page.
+1. [JSX syntax'inizi](/learn/writing-markup-with-jsx) kullanmanıza, kodunuzu [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) / [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) syntax'i ile modüllere ayırmanıza ve [npm](https://www.npmjs.com/) paket kayıt defterinden paketleri (örneğin, React) kullanmanıza izin veren  **bir JavaScript ortamı kurun**.
+2. React bileşenlerinizi sayfada görmek istediğiniz yerde **render edin**.
 
-The exact approach depends on your existing page setup, so let's walk through some details.
+Kesin yaklaşımınız, mevcut sayfa kurulumunuza bağlıdır, bu nedenle bazı ayrıntılara göz atalım.
 
-### Step 1: Set up a modular JavaScript environment {/*step-1-set-up-a-modular-javascript-environment*/}
+### 1. Adım: Modüler bir JavaScript ortamı kurun {/*step-1-set-up-a-modular-javascript-environment*/}
 
-A modular JavaScript environment lets you write your React components in individual files, as opposed to writing all of your code in a single file. It also lets you use all the wonderful packages published by other developers on the [npm](https://www.npmjs.com/) registry--including React itself! How you do this depends on your existing setup:
+Modüler bir JavaScript ortamı, tüm kodunuzu tek bir dosyaya yazmak yerine, React bileşenlerinizi ayrı ayrı dosyalara yazmanıza olanak tanır. Ayrıca, diğer geliştiriciler tarafından [npm](https://www.npmjs.com/) kayıt defterinde yayınlanan tüm harika paketleri, React'in kendisi de dahil olmak üzere kullanmanızı sağlar! Bunu nasıl yapacağınız mevcut kurulumunuza bağlıdır:
 
-* **If your app is already split into files that use `import` statements,** try to use the setup you already have. Check whether writing `<div />` in your JS code causes a syntax error. If it causes a syntax error, you might need to [transform your JavaScript code with Babel](https://babeljs.io/setup), and enable the [Babel React preset](https://babeljs.io/docs/babel-preset-react) to use JSX.
+* **Uygulamanız zaten `import` ifadelerini kullanan dosyalara bölünmüşse,** mevcut kurulumunuzu kullanmayı deneyin. JS kodunuza `<div />` yazmanın bir syntax hatasına neden olup olmadığını kontrol edin. Bir syntax hatasına neden olursa, [JavaScript kodunuzu Babel ile dönüştürmeniz](https://babeljs.io/setup), ve JSX kullanmak için [Babel React ön ayarını](https://babeljs.io/docs/babel-preset-react) etkinleştirmeniz gerekebilir.
 
-* **If your app doesn't have an existing setup for compiling JavaScript modules,** set it up with [Vite](https://vitejs.dev/). The Vite community maintains [many integrations with backend frameworks](https://github.com/vitejs/awesome-vite#integrations-with-backends), including Rails, Django, and Laravel. If your backend framework is not listed, [follow this guide](https://vitejs.dev/guide/backend-integration.html) to manually integrate Vite builds with your backend.
+* **Uygulamanızın JavaScript modüllerini derlemek için mevcut bir kurulumu yoksa,** [Vite](https://vitejs.dev/) ile kurun.  Vite topluluğu, Rails, Django ve Laravel dahil olmak üzere [backend kütüphaneleri ile birçok entegrasyonu](https://github.com/vitejs/awesome-vite#integrations-with-backends) sürdürür. Backend kütüphaneniz listelenmemişse, Vite yapılarını arka ucunuzla manuel olarak entegre etmek için [bu kılavuzu izleyin](https://vitejs.dev/guide/backend-integration.html).
 
-To check whether your setup works, run this command in your project folder:
+Kurulumunuzun çalışıp çalışmadığını kontrol etmek için proje klasörünüzde şu komutu çalıştırın:
 
 <TerminalBlock>
 npm install react react-dom
 </TerminalBlock>
 
-Then add these lines of code at the top of your main JavaScript file (it might be called `index.js` or `main.js`):
+Ardından, ana JavaScript dosyanızın en üstüne şu kod satırlarını ekleyin (buna `index.js` veya `main.js` adı verilebilir):
 
 <Sandpack>
 
@@ -62,7 +62,7 @@ Then add these lines of code at the top of your main JavaScript file (it might b
 <html>
   <head><title>My app</title></head>
   <body>
-    <!-- Your existing page content (in this example, it gets replaced) -->
+    <!-- Mevcut sayfa içeriğiniz (bu örnekte, değiştiriliyor) -->
   </body>
 </html>
 ```
@@ -70,52 +70,52 @@ Then add these lines of code at the top of your main JavaScript file (it might b
 ```js index.js active
 import { createRoot } from 'react-dom/client';
 
-// Clear the existing HTML content
+// Var olan HTM içeriğini temizleyin
 document.body.innerHTML = '<div id="app"></div>';
 
-// Render your React component instead
+// Bunun yerine React bileşeninizi render edin
 const root = createRoot(document.getElementById('app'));
 root.render(<h1>Hello, world</h1>);
 ```
 
 </Sandpack>
 
-If the entire content of your page was replaced by a "Hello, world!", everything worked! Keep reading.
+Sayfanızın tüm içeriği “Merhaba dünya!” ile değiştirildiyse, her şey yolunda gitti! Okumaya devam edin.
 
 <Note>
 
-Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vitejs.dev/).
+Modüler bir JavaScript ortamını mevcut bir projeye ilk kez entegre etmek gözünüzü korkutabilir ama buna değer! Takılırsanız, [topluluk kaynaklarımızı](/community) ya da [Vite Chat'imizi](https://chat.vitejs.dev/) deneyin.
 
 </Note>
 
-### Step 2: Render React components anywhere on the page {/*step-2-render-react-components-anywhere-on-the-page*/}
+### 2. Adım: React bileşenlerini sayfanın herhangi bir yerinde render edin {/*step-2-render-react-components-anywhere-on-the-page*/}
 
-In the previous step, you put this code at the top of your main file:
+Önceki adımda, bu kodu ana dosyanızın en üstüne koyarsnız:
 
 ```js
 import { createRoot } from 'react-dom/client';
 
-// Clear the existing HTML content
+// Var olan HTM içeriğini temizleyin
 document.body.innerHTML = '<div id="app"></div>';
 
-// Render your React component instead
+// Bunun yerine React bileşeninizi render edin
 const root = createRoot(document.getElementById('app'));
 root.render(<h1>Hello, world</h1>);
 ```
 
-Of course, you don't actually want to clear the existing HTML content!
+Tabii ki, aslında mevcut HTML içeriğini temizlemek istemezsiniz!
 
-Delete this code.
+Bu kodu silin.
 
-Instead, you probably want to render your React components in specific places in your HTML. Open your HTML page (or the server templates that generate it) and add a unique [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute to any tag, for example:
+Bunun yerine, muhtemelen React bileşenlerinizi HTML'nizin belirli yerlerinde oluşturmak istiyorsunuz. HTML sayfanızı (veya onu oluşturan sunucu şablonlarını) açın ve herhangi bir etikete benzersiz bir [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) niteliği ekleyin, örneğin:
 
 ```html
-<!-- ... somewhere in your html ... -->
+<!-- ... html'inizin herhangi bir yeri ... -->
 <nav id="navigation"></nav>
-<!-- ... more html ... -->
+<!-- ... daha fazla html ... -->
 ```
 
-This lets you find that HTML element with [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) and pass it to [`createRoot`](/reference/react-dom/client/createRoot) so that you can render your own React component inside:
+Bu, [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) ile o HTML öğesini bulmanızı ve içinde kendi React bileşeninizi render edebilmeniz için onu [`createRoot'a`](/reference/react-dom/client/createRoot) geçirmenizi sağlar:
 
 <Sandpack>
 
@@ -135,7 +135,7 @@ This lets you find that HTML element with [`document.getElementById`](https://de
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {
-  // TODO: Actually implement a navigation bar
+  // YAPILACAK: Bir navigasyon barı oluşturun
   return <h1>Hello from React!</h1>;
 }
 
@@ -146,10 +146,10 @@ root.render(<NavigationBar />);
 
 </Sandpack>
 
-Notice how the original HTML content from `index.html` is preserved, but your own `NavigationBar` React component now appears inside the `<nav id="navigation">` from your HTML. Read the [`createRoot` usage documentation](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) to learn more about rendering React components inside an existing HTML page.
+`index.html'deki` orijinal HTML içeriğinin nasıl korunduğuna dikkat edin, ancak kendi `NavigationBar` React bileşeniniz artık HTML'nizden `<nav id="navigation">` içinde görünüyor. React bileşenlerini mevcut bir HTML sayfasında render etme hakkında daha fazla bilgi edinmek için [`createRoot` dökümantasyonunu](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) okuyun.
 
-When you adopt React in an existing project, it's common to start with small interactive components (like buttons), and then gradually keep "moving upwards" until eventually your entire page is built with React. If you ever reach that point, we recommend migrating to [a React framework](/learn/start-a-new-react-project) right after to get the most out of React.
+Mevcut bir projede React'i kullandığınızda, küçük etkileşimli bileşenlerle (butonlar gibi) başlamak ve ardından, sonunda tüm sayfanız React ile oluşturulana kadar yavaş yavaş "yukarı doğru ilerlemeye" devam etmek yaygındır. Bu noktaya ulaşırsanız, React'ten en iyi şekilde yararlanmak için hemen ardından bir [bir React kütüphanesine](/learn/start-a-new-react-project) geçmenizi öneririz.
 
-## Using React Native in an existing native mobile app {/*using-react-native-in-an-existing-native-mobile-app*/}
+## React Native'i mevcut bir yerel mobil uygulamada kullanma {/*using-react-native-in-an-existing-native-mobile-app*/}
 
-[React Native](https://reactnative.dev/) can also be integrated into existing native apps incrementally. If you have an existing native app for Android (Java or Kotlin) or iOS (Objective-C or Swift), [follow this guide](https://reactnative.dev/docs/integration-with-existing-apps) to add a React Native screen to it.
+[React Native](https://reactnative.dev/) ayrıca mevcut yerel uygulamalara kademeli olarak entegre edilebilir. Android (Java veya Kotlin) veya iOS (Objective-C veya Swift) için mevcut bir yerel uygulamanız varsa, ona bir React Native ekranı eklemek için [bu kılavuzu inceleyin](https://reactnative.dev/docs/integration-with-existing-apps).
