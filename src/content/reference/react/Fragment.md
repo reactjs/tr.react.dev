@@ -33,9 +33,7 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 - Eğer bir Fragment'a key değeri geçirmek istiyorsanız, <>...</> sözdizimini kullanamazsınız. 'React'ten Fragment'ı içe aktarmanız ve `<Fragment key={anahtar}>...</Fragment>` şeklinde render etmeniz gerekmektedir.
 
-- React, `<><AltEleman /></>`'dan `<AltEleman />`'a veya geriye dönerken, ya da `<><AltEleman /></>`'dan `<AltEleman />`'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, `<><><AltEleman /></></>`'dan `<AltEleman />`'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
-
-
+- React, `<><AltEleman /></>`'dan `[<AltEleman />]`'a veya geriye dönerken, ya da `<><AltEleman /></>`'dan `<AltEleman />`'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, `<><><AltEleman /></></>`'dan `<AltEleman />`'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
 
 ---
 
@@ -99,7 +97,6 @@ function PostBody({ body }) {
 #### Özel sözdizimi olmadan bir Fragment nasıl yazılır? {/*how-to-write-a-fragment-without-the-special-syntax*/}
 
 Yukarıdaki örnek, React'ten `Fragment` içe aktarmaya eşdeğerdir:
-
 
 ```js {1,5,8}
 import { Fragment } from 'react';

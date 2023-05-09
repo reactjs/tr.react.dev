@@ -4,12 +4,12 @@ title: "<option>"
 
 <Intro>
 
-The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) lets you render an option inside a [`<select>`](/reference/react-dom/components/select) box.
+[Web Tarayıcısının `<option>` bileşeni](https://developer.mozilla.org/tr/docs/Web/HTML/Element/option), [`<select>`](/reference/react-dom/components/select) kutusu içinde bir seçenek sunmanıza olanak tanır.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+   <option value="birSecenek">Bir seçenek</option>
+   <option value="digerSecenek">Diğer seçenek</option>
 </select>
 ```
 
@@ -19,56 +19,57 @@ The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `<option>` {/*option*/}
 
-The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) lets you render an option inside a [`<select>`](/reference/react-dom/components/select) box.
+[Web Tarayıcısının `<option>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) [`<select>`](/reference/react-dom/components/select) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+   <option value="birSecenek">Bir seçenek</option>
+   <option value="digerSecenek">Diğer seçenek</option>
 </select>
 ```
 
-[See more examples below.](#usage)
+[Buradan daha fazla örnek görebilirsiniz.](#usage)
 
-#### Props {/*props*/}
+#### Prop'lar {/*props*/}
 
-`<option>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<option>`, tüm [genel öğe özelliklerini](/reference/react-dom/components/common#props) destekler.
 
-Additionally, `<option>` supports these props:
+Ayrıca, `<option>` bu özellikleri de destekler:
 
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): A boolean. If `true`, the option will not be selectable and will appear dimmed.
-* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): A string. Specifies the meaning of the option. If not specified, the text inside the option is used.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): The value to be used [when submitting the parent `<select>` in a form](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) if this option is selected.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): Boolean. Eğer `true` ise, seçenek seçilemez ve soluk görünür.
+* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): Dize. Seçeneğin anlamını belirtir. Eğer dahil edilmezse, seçenek içindeki metin kullanılır.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): Eğer bu seçenek seçilirse, [üst eleman `<select>` öğesini bir formda gönderirken](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) kullanılacak değeri belirtir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* React does not support the `selected` attribute on `<option>`. Instead, pass this option's `value` to the parent [`<select defaultValue>`](/reference/react-dom/components/select#providing-an-initially-selected-option) for an uncontrolled select box, or [`<select value>`](/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable) for a controlled select.
+* React, `<option>` öğesinde `selected` özelliğini desteklemez. Bunun yerine, bu seçeneğin `value` değerini ebeveyn [`<select defaultValue>`](/reference/react-dom/components/select#providing-an-initially-selected-option) öğesine aktararak kontrolsüz bir seçim kutusu oluşturun veya [`<select value>`](/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable) öğesine aktararak kontrollü bir seçim kutusu oluşturun.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Displaying a select box with options {/*displaying-a-select-box-with-options*/}
+### Seçenekler içeren bir seçim kutusu gösterme {/*displaying-a-select-box-with-options*/}
 
-Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
+Seçim kutusu oluşturmak için, içerisinde `<option>` bileşenleri bulunan `<select>` öğesi kullanın. Her bir `<option>` bileşenine, form ile gönderilecek verileri temsil eden bir `value` değeri atayın.
 
-[Read more about displaying a `<select>` with a list of `<option>` components.](/reference/react-dom/components/select)
+[İçerisinde `<option>` bileşenleri bulunan bir `<select>` öğesini göstermek hakkında daha fazla bilgi edinin.](/reference/react-dom/components/select)
+
 
 <Sandpack>
 
 ```js
-export default function FruitPicker() {
+export default function MeyveSecici() {
   return (
     <label>
-      Pick a fruit:
-      <select name="selectedFruit">
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+      Bir meyve seçin:
+      <select name="secilenMeyve">
+        <option value="apple">Elma</option>
+        <option value="banana">Muz</option>
+        <option value="orange">Portakal</option>
       </select>
     </label>
   );
