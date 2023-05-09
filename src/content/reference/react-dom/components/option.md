@@ -4,7 +4,7 @@ title: "<option>"
 
 <Intro>
 
-[Web Tarayıcısının`<option>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
+[Web Tarayıcısının `<option>` bileşeni](https://developer.mozilla.org/tr/docs/Web/HTML/Element/option), [`<select>`](/reference/react-dom/components/select) kutusu içinde bir seçenek sunmanıza olanak tanır.
 
 ```js
 <select>
@@ -23,7 +23,7 @@ title: "<option>"
 
 ### `<option>` {/*option*/}
 
-[Web Tarayıcısının `<option>` bileşeni](m5bilisim.com/webokulu/etiketler/etiket-option.php) [`<select>`](/reference/react-dom/components/select) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
+[Web Tarayıcısının `<option>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) [`<select>`](/reference/react-dom/components/select) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
 
 ```js
 <select>
@@ -40,9 +40,9 @@ title: "<option>"
 
 Ayrıca, `<option>` bu özellikleri de destekler:
 
-* [`disabled`](https://www.m5bilisim.com/webokulu/etiketler/ozellik-button-disabled.php): Boolean. Eğer `true` ise, seçenek seçilemez ve soluk görünür.
-* [`label`](https://www.m5bilisim.com/webokulu/etiketler/etiket-label.php): Dize. Seçeneğin anlamını belirtir. Eğer dahil edilmezse, seçenek içindeki metin kullanılır.
-* [`value`](https://www.m5bilisim.com/webokulu/etiketler/ozellik-option-value.php): Eğer bu seçenek seçilirse, [üst eleman `<select>` öğesini bir formda gönderirken](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) kullanılacak değeri belirtir.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): Boolean. Eğer `true` ise, seçenek seçilemez ve soluk görünür.
+* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): Dize. Seçeneğin anlamını belirtir. Eğer dahil edilmezse, seçenek içindeki metin kullanılır.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): Eğer bu seçenek seçilirse, [üst eleman `<select>` öğesini bir formda gönderirken](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) kullanılacak değeri belirtir.
 
 #### Uyarılar {/*caveats*/}
 
