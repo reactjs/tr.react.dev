@@ -4,7 +4,7 @@ title: useContext
 
 <Intro>
 
-`useContext`, bileşeninizden [context](/learn/passing-data-deeply-with-context) okumanıza ve buna abone olmanıza izin veren bir React Hook'tur.
+`useContext`, bileşeninizden [context](/learn/passing-data-deeply-with-context)'e abone olmanıza ve değerini okumanıza izin veren React Hook'udur.
 
 ```js
 const value = useContext(SomeContext)
@@ -20,8 +20,7 @@ const value = useContext(SomeContext)
 
 ### `useContext(SomeContext)` {/*usecontext*/}
 
-Bileşeninizde [context](/learn/passing-data-deeply-with-context) okumak ve buna abone olmak için `useContext`'i bileşeninizin üst düzeyinde çağırın.
-
+[context](/learn/passing-data-deeply-with-context)'e abone olmak ve değerini okumak için `useContext`'i bileşeninizin üst düzeyinde çağırın.
 
 ```js
 import { useContext } from 'react';
@@ -31,13 +30,13 @@ function MyComponent() {
   // ...
 ```
 
-[Aşağıda daha fazla örneğe bakın.](#usage)
+[Daha fazla örnek için aşağıya bakın.](#usage)
 
 #### Parametreler {/*parameters*/}
 
-* `SomeContext`: Daha önce [`createContext`](/tr/referans/react/createContext) ile oluşturduğunuz context. Context kendisi bilgiyi tutmaz, sadece bileşenlere sağlayabileceğiniz veya okuyabileceğiniz bilgi türünü temsil eder.
+* `SomeContext`: Daha önce [`createContext`](/tr/referans/react/createContext) ile oluşturduğunuz context. Context'in kendisi bilgileri tutmaz, yalnızca tedarik edeceğiniz ya da bileşenlerden okuyacağınız bilginin türünü temsil eder.
 
-#### Dönüşler {/*returns*/}
+#### Dönüş değerleri {/*returns*/}
 
 `useContext`, çağrılan bileşen için Context değerini döndürür. Bu değer, ağaçtaki çağrılan bileşenden önceki en yakın `SomeContext.Provider`'a iletilen `value` olarak belirlenir. Böyle bir sağlayıcı yoksa, döndürülen değer o Context için [`createContext`](/tr/referans/react/createContext) ile belirlediğiniz `defaultValue` olacaktır. Döndürülen değer her zaman günceldir. Eğer bir Context değişirse, React otomatik olarak bu Context'i kullanan bileşenleri yeniden render eder.
 
@@ -54,7 +53,7 @@ function MyComponent() {
 
 ### Veri geçişini ağaca derinlemesine sağlama {/*passing-data-deeply-into-the-tree*/}
 
-Bileşeninizin üst düzeyinde `useContext`'i çağırarak [Context](/learn/passing-data-deeply-with-context)'a erişebilir ve abone olabilirsiniz:
+Bileşeninizin üst düzeyinde `useContext`'i çağırarak [context](/learn/passing-data-deeply-with-context)'e abone olabilir ve değerini okuyabilirsiniz:
 
 ```js [[2, 4, "theme"], [1, 4, "ThemeContext"]]
 import { useContext } from 'react';
@@ -64,9 +63,9 @@ function Button() {
   // ... 
 ```
 
-`useContext`, geçtiğiniz <CodeStep step={1}>Context</CodeStep> için <CodeStep step={2}>Context değerini</CodeStep> döndürür. Context değerini belirlemek için, React bileşen ağacını tarar ve o belirli context için **en yakın Context sağlayıcısını** bulur.
+`useContext`, parametre olarak geçtiğiniz <CodeStep step={1}>context</CodeStep> için <CodeStep step={2}>context değerini</CodeStep> döndürür. Context değerini belirlemek için, React bileşen ağacını tarar ve context'e özgü **en yakındaki context sağlayıcısını** bulur.
 
-`Button` bileşenine Context geçmek için, ilgili Context sağlayıcısını bu bileşenin veya üst bileşeninin içine yerleştirin:
+`Button` bileşenine context geçmek için, bileşeni veya üst bileşenlerinden birini ilgili context sağlayıcısına sarın:
 
 ```js [[1, 3, "ThemeContext"], [2, 3, "\\"dark\\""], [1, 5, "ThemeContext"]]
 function MyPage() {
@@ -82,11 +81,11 @@ function Form() {
 }
 ```
 
-`Button`'ın içinde olduğu herhangi bir yerde `useContext(ThemeContext)` çağrıldığında, `Form`'un içindeki `ThemeContext.Provider` bileşenine en yakın olanın `"dark"` değeri alınır.
+`Button` ile sağlayıcı arasında ne kadar katman olduğu önemsizdir. `Form`'un *herhangi* bir yerindeki `Button`'da `useContext(ThemeContext)` çağırıldığında `"dark"` değerini alacaktır.
 
 <Pitfall>
 
-`useContext()`, onu çağıran bileşenden yukarı doğru arama yapar ve arama sırasında `useContext()`'i çağırdığınız bileşen içindeki sağlayıcıları dikkate **almaz**.
+`useContext()`, her zaman çağırıldığı bileşenin *üstündeki* en yakın sağlayıcıyı arar. Yukarı doğru arama yapar ve `useContext()`'i çağırdığınız bileşen içindeki sağlayıcıları **dikkate almaz**.
 
 </Pitfall>
 
@@ -178,7 +177,7 @@ function Button({ children }) {
 
 ### Context üzerinden geçirilen verileri güncelleme {/*updating-data-passed-via-context*/}
 
-Genellikle, context'in zaman içinde değişmesini istersiniz. Context'i güncellemek için, [state](/tr/referans/react/useState) ile birleştirin. Ana bileşende bir durum değişkeni bildirin ve geçerli durumu sağlayıcının <CodeStep step={2}>context değeri</CodeStep> olarak aşağıya geçirin.
+Genellikle, context'in zaman içinde değişmesini istersiniz. Context'i güncellemek için, [state](/tr/referans/react/useState) ile birlikte kullanın. Üst bileşende bir state değişkeni tanımlayın ve state'i sağlayıcının <CodeStep step={2}>context değeri</CodeStep> olarak aşağıya geçirin.
 
 ```js {2} [[1, 4, "ThemeContext"], [2, 4, "theme"], [1, 11, "ThemeContext"]]
 function MyPage() {
@@ -196,13 +195,13 @@ function MyPage() {
 }
 ```
 
-Şimdi sağlayıcı içindeki herhangi bir `Button`, mevcut `theme` değerini alacaktır. `setTheme`i çağırarak sağlayıcıya iletilen `theme` değerini güncellerseniz, tüm `Button` bileşenleri yeni `'light'` değeriyle yeniden render olacaktır.
+Artık sağlayıcı içerisindeki herhangi bir `Button`, güncel `theme` değerini alacaktır. `setTheme`i çağırarak sağlayıcıya iletilen `theme` değerini güncellerseniz, tüm `Button` bileşenleri yeni `'light'` değeriyle yeniden render olacaktır.
 
 <Recipes titleText="Context güncelleme örnekleri" titleId="examples-basic">
 
 #### Context aracılığıyla bir değerin güncellenmesi {/*updating-a-value-via-context*/}
 
-Bu örnekte, `MyApp` bileşeni bir durum değişkenini tutar ve daha sonra `ThemeContext` sağlayıcısına iletilir. "Karanlık mod" onay kutusunu işaretlemek, durumu günceller. Sağlanan değerin değiştirilmesi, bu context'i kullanan tüm bileşenlerin yeniden render edilmesine neden olur.
+Bu örnekte, `MyApp` bileşeni, daha sonra `ThemeContext` sağlayıcısına iletilecek olan bir state değişkenine sahiptir. "Karanlık mod" onay kutusunu işaretlemek, state'i günceller. Sağlanan değerin değiştirilmesi, o context'i kullanan tüm bileşenlerin yeniden render edilmesine neden olur.
 
 <Sandpack>
 
@@ -300,13 +299,13 @@ function Button({ children }) {
 
 </Sandpack>
 
-`value="dark"` ifadesi `"dark"` string değerini geçerken, `value={theme}` ifadesi JavaScript `theme` değişkeninin değerini JSX curly braces (`{}`) ile geçirir. Curly braces ayrıca, string olmayan context değerlerini geçirmenize de olanak tanır.
+`value="dark"` ifadesinin `"dark"` dizisini ilettiğini, `value={theme}` ifadesinin JavaScript `theme` değişkeninin değerini [JSX süslü parantezi](/learn/javascript-in-jsx-with-curly-braces) ile ilettiğini unutmayın. Süslü parantezler aynı zamanda dizi olmayan değerleri iletmenize olanak tanır.
 
 <Solution />
 
 #### Bir objeyi context aracılığıyla güncelleme {/*updating-an-object-via-context*/}
 
-Bu örnekte, bir nesneyi tutan `currentUser` isimli bir durum değişkeni vardır. Bu, `{ currentUser, setCurrentUser }` değişkenlerinin birleştirildiği ve bunların `value={}` içinden context yoluyla aşağıdaki tüm bileşenler tarafından okunabilmesini sağlar. Örneğin, `LoginButton` bileşeni, `currentUser` ve `setCurrentUser`'ı okuyabilir ve ihtiyaç duyulduğunda `setCurrentUser`'ı çağırabilir.
+Bu örnekte, nesne tutan `currentUser` isimli bir state değişkeni vardır. Bu state'i `{ currentUser, setCurrentUser }` şeklinde tek bir nesnede birleştirip `value={}` içerisinde context ile aşağıya iletirsiniz. Örneğin `LoginButton` bileşeni, `currentUser` ve `setCurrentUser`'ı okuyabilir ve ihtiyaç duyulduğunda `setCurrentUser`'ı çağırabilir.
 
 <Sandpack>
 
@@ -398,7 +397,7 @@ label {
 
 #### Birden fazla context {/*multiple-contexts*/}
 
-Bu örnekte iki bağımsız context var. `ThemeContext`, mevcut temayı sağlar, bu bir dizedir, `CurrentUserContext` ise mevcut kullanıcıyı temsil eden bir nesneyi tutar.
+Bu örnekte, iki bağımsız context vardır. `ThemeContext` bir dizi olan mevcut tema değerini sağlar. `CurrentUserContext` ise aktif kullanıcıyı temsil eden nesneyi tutar.
 
 <Sandpack>
 
@@ -563,9 +562,9 @@ label {
 
 <Solution />
 
-#### Sağlayıcıları bir bileşene çıkarma {/*extracting-providers-to-a-component*/}
+#### Sağlayıcıları bileşene çıkarma {/*extracting-providers-to-a-component*/}
 
-Uygulamanız büyüdükçe, context "piramidi"ni uygulamanızın köküne doğru yaklaşan bir şekilde sahip olmanız beklenir. Bununla bir sorun yok. Ancak, görsel olarak yuvalamayı sevmiyorsanız, sağlayıcıları tek bir bileşene çıkarabilirsiniz. Bu örnekte, `MyProviders` "plumbing"i gizler ve çocukları içinde gerekli sağlayıcıların render eder. `tema` ve `setTheme` durumu `MyApp`te kendisi için gereklidir, bu nedenle `MyApp` hala bu parçaya sahiptir.
+Uygulamanız büyüdükçe, beklendiği gibi uygulama köküne yakın bir yerde context "piramidi"ni sahip olursunuz. Bunda bir sorun yoktur. Bununla birlikte görsel olarak yuvalamayı sevmiyorsanız sağlayıcıları tek bir bileşene çıkarabilirsiniz. Bu örnekte, `MyProviders` bileşeni tesisatı gizler ve alt bileşenler için gerekli olan sağlayıcıları render eder. `theme` ve `setTheme` state'i `MyApp`'in kendisi için gereklidir ve bu nedenle `MyApp` hala kendi state parçasına sahiptir.
 
 <Sandpack>
 
@@ -738,11 +737,11 @@ label {
 
 <Solution />
 
-#### Context ve bir azaltıcıyı (reducer) kullanarak ölçeklendirme {/*context-ve-bir-azaltıcı-reducer-kullanarak-ölçeklendirme*/}
+#### Context ve reducer kullanarak ölçeklendirme {/*scaling-up-with-context-and-a-reducer*/}
 
-Daha büyük uygulamalarda, bazı durumlarla ilgili mantığı bileşenlerden ayıklamak için context ile [bir azaltıcıyı (reducer)](/tr/referans/react/useReducer) birleştirmek yaygındır. Bu örnekte, tüm "bağlantı" işlemleri, bir azaltıcı ve iki ayrı context içeren `TasksContext.js` dosyasında gizlenmiştir.
+Daha büyük uygulamalarda, bileşenlerden bazı state'lerle ilgili mantığı çıkarmak için context ile [reducer](/tr/referans/react/useReducer)'ı birlikte kullanmak yaygındır. Bu örnekte, tüm "kablolama" bir reducer ve iki ayrı context içeren `TasksContext.js`'de gizlenmiştir.
 
-Bu örneğin [tam bir açıklamasını burada](/tr/learn/scaling-up-with-reducer-and-context) bulabilirsiniz.
+Bu örneğin [kapsamlı açıklamasını](/learn/scaling-up-with-reducer-and-context) okuyun.
 
 <Sandpack>
 
@@ -948,25 +947,25 @@ ul, li { margin: 0; padding: 0; }
 
 ---
 
-### Varsayılan geri dönüş değerini belirleme {/*specifying-a-fallback-default-value*/}
+### Varsayılan fallback değeri belirtme {/*specifying-a-fallback-default-value*/}
 
-Eğer React, üst ağaçta o belirli <CodeStep step={1}>context</CodeStep> sağlayan bir sağlayıcı bulamazsa, `useContext()` tarafından döndürülen context değeri, o context [oluşturduğunuzda belirttiğiniz varsayılan değer](/reference/react/createContext) ile aynı olacaktır:
+React, üst ağaçta söz konusu <CodeStep step={1}>context</CodeStep>'in sağlayıcısını bulamazsa, `useContext()` tarafından döndürülen değer [context'i oluştururken](/reference/react/createContext) belirttiğiniz varsayılan değer olacaktır:
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "null"]]
 const ThemeContext = createContext(null);
 ```
 
-Varsayılan değer **asla değişmez**. Eğer context'i güncellemek istiyorsanız, yukarıda açıklandığı gibi durumu kullanın.
+Varsayılan değer **asla değişmez**. Eğer context'i güncelleyebilmek istiyorsanız, [yukarıda açıklandığı gibi](#updating-data-passed-via-context) state ile birlikte kullanın.
 
-Genellikle `null` yerine varsayılan olarak kullanabileceğiniz bir değer vardır örneğin:
+Genellikle varsayılan değer olarak `null` yerine kullanabileceğiniz daha anlamlı bir değer vardır, örneğin:
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "light"]]
 const ThemeContext = createContext('light');
 ```
 
-Bu şekilde, yanlışlıkla uygun bir sağlayıcı olmadan bazı bileşenleri oluşturursanız, kırılmaz. Ayrıca, bileşenlerinizin test ortamında birçok sağlayıcı ayarlamadan iyi çalışmasına yardımcı olur.
+Bu sayede, kazara sağlayıcı tanımlamadan bazı bileşenleri render ederseniz, kod kırılmaz. Ayrıca, bileşenlerinizin bir sürü sağlayıcı ayarlanmadan test ortamında iyi çalışmasını sağlar.
 
-Aşağıdaki örnekte "Temayı değiştir" butonu her zaman açık renkli olarak görüntülenir çünkü herhangi bir tema context'i sağlayıcısı **dışında** yer alır ve varsayılan context teması değeri `'açık'`tır. Varsayılan temayı `'koyu'` olarak düzenlemeyi deneyin.
+Aşağıdaki örnekte, "Temayı değiştir" butonu her zaman açık renkli olarak görüntülenir çünkü **tema context'i sağlayıcısının dışında** yer alır ve varsayılan context değeri `'açık'`tır. Varsayılan temayı `'koyu'` olarak düzenlemeyi deneyin.
 
 <Sandpack>
 
@@ -1065,7 +1064,7 @@ function Button({ children, onClick }) {
 
 ### Ağacın bir kısmında context'i geçersiz kılma {/*overriding-context-for-a-part-of-the-tree*/}
 
-Ağacın bir kısmı için context'i farklı bir değerle sağlayan bir sağlayıcıya sararak, context'i değiştirebilirsiniz.
+Ağacın bir bölümünü farklı bir değere sahip sağlayıcıyla sarmalayarak context'i geçersiz kılabilirsiniz.
 
 ```js {3,5}
 <ThemeContext.Provider value="dark">
@@ -1077,13 +1076,13 @@ Ağacın bir kısmı için context'i farklı bir değerle sağlayan bir sağlay�
 </ThemeContext.Provider>
 ```
 
-İhtiyacınız olan kadar sağlayıcıları iç içe yerleştirip geçersiz kılabilirsiniz.
+İhtiyacınız olduğu kadar çok sağlayıcıyı iç içe yerleştirebilir ve geçersiz kılabilirsiniz.
 
-<Recipes title="Context'in geçersiz kılınması örnekleri">
+<Recipes title="Context'i geçersiz kılınma örnekleri">
 
 #### Temanın geçersiz kılınması {/*overriding-a-theme*/}
 
-Burada `Footer` içindeki buton, dışındaki butonlardan (`"dark"`) farklı bir context değeri (`"light"`) alır.
+Burada `Footer` *içerisindeki* buton, dışındaki butonlardan (`"dark"`) farklı bir context değeri (`"light"`) alır.
 
 <Sandpack>
 
@@ -1187,11 +1186,11 @@ footer {
 
 <Solution />
 
-#### Otomatik olarak iç içe başlıklar {/*automatically-nested-headings*/}
+#### Otomatik olarak iç içe yuvalanan başlıklar {/*automatically-nested-headings*/}
 
 İç içe geçmiş contextleri yuvalayarak bilgi biriktirebilirsiniz. Bu örnekte, `Section` bileşeni `LevelContext`i tutar, bu belirtir alt bölüm yuvalama derinliğini. Alt bölümden `LevelContext` okur ve bu numarayı bir artırmış olarak alt elemanlarına sağlar. Sonuç olarak, `Heading` bileşeni, iç içe kaç `Section` bileşenine sahip olduğuna bağlı olarak hangi `<h1>`,`<h2>`,`<h3>`,`...` etiketlerinin kullanılacağını otomatik olarak karar verebilir.
 
-Bu örneğin [ayrıntılı bir açıklamasını](/learn/passing-data-deeply-with-context) okuyun.
+Bu örneğin [kapsamlı açıklamasını](/learn/scaling-up-with-reducer-and-context) okuyun.
 
 <Sandpack>
 
@@ -1310,9 +1309,9 @@ function MyApp() {
 }
 ```
 
-Burada, <CodeStep step={2}>context değeri</CodeStep> iki özellikli bir JavaScript nesnesidir ve bunlardan biri bir fonksiyondur. `MyApp` yeniden render edildiğinde (örneğin, bir rota güncellendiğinde) bu, *farklı* bir fonksiyona işaret eden *farklı* bir nesne olacaktır, bu nedenle derin ağaçta `useContext(AuthContext)` çağıran tüm bileşenlerin de yeniden render edilmesi gerekecektir.
+Burada, <CodeStep step={2}>context değeri</CodeStep> iki özellikli JavaScript nesnesidir ve bunlardan biri fonksiyondur. `MyApp` yeniden render edildiğinde (örneğin, bir rota güncellendiğinde), *farklı* fonksiyona işaret eden *farklı* bir nesne olur. Bu nedenle React, ağaçtaki `useContext(AuthContext)` çağrılan tüm bileşenlerin yeniden render etmek zorunda kalır.
 
-Daha küçük uygulamalarda, bu bir sorun değildir. Ancak, `currentUser` gibi altta yatan veriler değişmediyse, bunları yeniden render etmek gerekli değildir. React'ın bu gerçekten faydalanabilmesine yardımcı olmak için, `login` fonksiyonunu [`useCallback`](/reference/react/useCallback) ile sarmalayabilir ve nesne oluşturmayı [`useMemo`](/reference/react/useMemo) ile sarmalayabilirsiniz. Bu bir performans optimizasyonudur:
+Daha küçük uygulamalarda bu bir sorun değildir. Ancak, `currentUser` gibi altında yatan veriler değişmediyse, bunları yeniden render etmek gerekli değildir. React'ın bu gerçeği kullanmasına yardımcı olmak için, `login` fonksiyonunu [`useCallback`](/reference/react/useCallback) ve nesne oluşturmayı [`useMemo`](/reference/react/useMemo) ile sarmalayabilirsiniz. Bu bir performans optimizasyonudur:
 
 ```js {6,9,11,14,17}
 import { useCallback, useMemo } from 'react';
@@ -1344,19 +1343,19 @@ Bu değişiklik sonucunda, `MyApp` yeniden render edilse bile, `useContext(AuthC
 
 ---
 
-## Sorun Giderme {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
 ### Bileşenim sağlayıcının değerini görmüyor {/*my-component-doesnt-see-the-value-from-my-provider*/}
 
 Bunun birkaç yaygın sebebi vardır:
 
-1. `useContext()`'i çağırdığınız bileşenle aynı bileşende `<SomeContext.Provider>`bu bileşeni render ediyorsunuz. `SomeContext.Provider`'ı `useContext()` çağıran bileşenin üstüne ve dışına taşıyın.
-2. Bileşeninizi `SomeContext.Provider` ile sarmalamayı unuttunuz veya düşündüğünüzden farklı bir yerde yerleştirdiniz. [React DevTools](/learn/react-developer-tools) kullanarak hiyerarşinin doğru olup olmadığını kontrol edin.
-3. Sembolik bağlantılar kullanıyorsanız veya başka bir nedenle sağlayan bileşenin gördüğü `SomeContext`'ın, okuyan bileşenin gördüğü `SomeContext`'tan farklı olmasına neden olan bir yapılandırma sorunu ile karşılaşabilirsiniz. Bu, `window.SomeContext1` ve `window.SomeContext2` gibi global değişkenlere atayarak ve ardından konsolda `window.SomeContext1 === window.SomeContext2` gibi bir kontrol yaparak doğrulayabilirsiniz. Eğer aynı değillerse, yapılandırma sorununu düzeltin.
+1. `useContext()`'i çağırdığınız bileşenle aynı bileşende `<SomeContext.Provider>` render ediyorsunuz. `<SomeContext.Provider>`'ı `useContext()` çağıran bileşenin *üstüne ve dışına* taşıyın.
+2. Bileşeninizi `SomeContext.Provider` ile sarmalamayı unutmuş ya da ağacın istem dışı bir yerine yerleştirmiş olabilirsiniz. [React DevTools](/learn/react-developer-tools) kullanarak hiyerarşinin doğru olup olmadığını kontrol edin.
+3. Kullandığınız araçlardan kaynaklı, sağlayan bileşen tarafından görülen SomeContext ile okuyan bileşen tarafından görülen SomeContext nesnesinin iki farklı nesne olmasına neden olan derleme sorunlarıyla karşılaşabilirsiniz. Örneğin, sembolik bağlantılar kullanıyorsanız bu yaşanabilir. Bu durumu, `window.SomeContext1` ve `window.SomeContext2` gibi global değişkenlere atayıp konsolda `window.SomeContext1 === window.SomeContext2` kontrolü yaparak doğrulayabilirsiniz. Eğer aynı değillerse, derleme aracı seviyesinde sorunu düzeltin.
 
-### Default değer farklı olsa da her zaman context'den `undefined` değerini alıyorum {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
+### Varsayılan değer farklı olsa bile context'den her zaman `undefined` alıyorum {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
-Ağacınızda `value` belirtmeksizin bir sağlayıcı olabilir:
+Ağaçta `value` verilmemiş bir sağlayıcı olabilir:
 
 ```js {4}
 const MyContext = React.createContext('default');
@@ -1367,9 +1366,9 @@ function MyComponent() {
 }
 ```
 
-`value` belirtmeyi unutursanız, sanki `value={undefined}` geçirmişsiniz gibi davranılır.
+`value` belirtmeyi unutursanız, `value={undefined}` geçmiş gibi davranır .
 
-Ayrıca, farklı bir özellik adı yanlışlıkla kullanmış da olabilirsiniz:
+Yanlışlıkla farklı bir özellik adı kullanmış da olabilirsiniz:
 
 ```js {1,2}
 // 🚩 Çalışmaz: özellik "value" olarak adlandırılmalı
@@ -1378,13 +1377,13 @@ Ayrıca, farklı bir özellik adı yanlışlıkla kullanmış da olabilirsiniz:
 </ThemeContext.Provider>
 ```
 
-Bu durumlarda, React tarafından konsolda bir uyarı görmeniz gerektiğini unutmayın. Bunları düzeltmek için özelliği `value` olarak adlandırın:
+Her iki durumda da konsolda React uyarısı görmelisiniz. Bunları düzeltmek için prop'u `value` olarak adlandırın:
 
 ```js {1,2}
-// ✅ value özelliğini kullanarak geçirme
+// ✅ value prop'unu geçirme
 <ThemeContext.Provider value={theme}>
    <Button />
 </ThemeContext.Provider>
 ```
 
-Önemli bir not olarak, [varsayılan değerinizin (`createContext` çağrısındaki `defaultValue`)](#specifying-a-fallback-default-value) yalnızca **hiçbir eşleşen sağlayıcı yoksa** kullanılacağına dikkat edin. Alt ağaçta bir `<SomeContext.Provider value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen `undefined` olarak context değerini alacaktır.
+Unutmayın, [`createContext(defaultValue)` çağrınızdaki varsayılan değer](#specifying-a-fallback-default-value) yalnızca **eşleşen hiçbir sağlayıcı yoksa** kullanılır. Alt ağaçta bir yerde `<SomeContext.Provider value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen context değeri olarak `undefined` *alacaktır*.
