@@ -1,57 +1,55 @@
 ---
-title: Updating Objects in State
+title: State içerisindeki nesneleri güncelleme
 ---
 
 <Intro>
 
-State can hold any kind of JavaScript value, including objects. But you shouldn't change objects that you hold in the React state directly. Instead, when you want to update an object, you need to create a new one (or make a copy of an existing one), and then set the state to use that copy.
+State, nesneler dahil olmak üzere herhangi bir JavaScript değerini tutabilir. Ancak React state içerisinde tuttuğunuz nesneleri direkt olarak değiştirmemelisiniz. Bunun yerine bir nesneyi güncellemek istediğinizde, yeni bir nesne oluşturmanız gerekmektedir (veya varolan bir nesnenin kopyasını oluşturmalısınız) daha sonra state'i kopyaladığınız nesneyi kullanması için ayarlamalısınız. 
 
 </Intro>
 
 <YouWillLearn>
 
-- How to correctly update an object in React state
-- How to update a nested object without mutating it
-- What immutability is, and how not to break it
-- How to make object copying less repetitive with Immer
+- React state'i içerisinde bir nesneyi doğru şekilde güncelleyebileceksiniz.
+- İç içe bir nesneyi mutasyona uğratmadan güncelleyebileceksiniz.
+- Değişmezlik nedir, ve onu nasıl bozmadan sürdürebileceğinizi.
+- Immer ile nesne kopyalamayı daha kolay şekilde yapabileceksiniz.
 
 </YouWillLearn>
 
-## What's a mutation? {/*whats-a-mutation*/}
+## Mutasyon nedir? {/*whats-a-mutation*/}
 
-You can store any kind of JavaScript value in state.
-
+State içerisinde herhangi bir JavaScript değerini tutabilirsiniz.
 ```js
 const [x, setX] = useState(0);
 ```
 
-So far you've been working with numbers, strings, and booleans. These kinds of JavaScript values are "immutable", meaning unchangeable or "read-only". You can trigger a re-render to _replace_ a value:
+Şimdiye kadar sayılarla, stringlerle ve booleanlarla çalıştınız. Bu JavaScript değerleri "değişmez" veya "salt okunur" anlamına gelir.
+Bir değeri _değiştirmek_ için yeniden render işlemi yapabilirsiniz. 
 
 ```js
 setX(5);
 ```
+`x` state'i `0`'ken `5` ile değiştirildi, ama _`0` sayısının kendisi_ değişmedi. JavaScript'te, sayılar, stringler ve booleanlar gibi yerleşik temel veri tiplerinde herhangi bir değişiklik yapmak mümkün değildir. 
 
-The `x` state changed from `0` to `5`, but the _number `0` itself_ did not change. It's not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.
-
-Now consider an object in state:
+Şimdi state içerisinde bir nesne düşünün:
 
 ```js
 const [position, setPosition] = useState({ x: 0, y: 0 });
 ```
-
-Technically, it is possible to change the contents of _the object itself_. **This is called a mutation:**
+Teknik olarak, _nesnenin kendisinin_ içeriğini değiştirmek mümkündür. **Buna mutasyon denir:** 
 
 ```js
 position.x = 5;
 ```
 
-However, although objects in React state are technically mutable, you should treat them **as if** they were immutable--like numbers, booleans, and strings. Instead of mutating them, you should always replace them.
+Ancak, React state içerisindeki nesneler teknik olarak değiştirilebilir olsalar da, sayılar, booleans ve dizeler **sözde** değişmezmiş gibi muamele edilmelidir. Onları mutasyona uğratmak yerine, her zaman yenilerini oluşturmalısınız.
 
-## Treat state as read-only {/*treat-state-as-read-only*/}
+## State'i salt okunur olarak ele alın {/*treat-state-as-read-only*/}
 
-In other words, you should **treat any JavaScript object that you put into state as read-only.**
+Başka bir deyişle, **State içerisine koyduğunuz herhangi bir JavaScript nesnesini salt okunur olarak ele almalısınız.**
 
-This example holds an object in state to represent the current pointer position. The red dot is supposed to move when you touch or move the cursor over the preview area. But the dot stays in the initial position:
+Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tutar. Kırmızı nokta, siz önizleme alanına dokunduğunuzda veya imleci üzerinde hareket ettirdiğinizde hareket etmesi gerekir. Ancak nokta başlangıç pozisyonunda kalıyor. 
 
 <Sandpack>
 
@@ -94,7 +92,7 @@ body { margin: 0; padding: 0; height: 250px; }
 
 </Sandpack>
 
-The problem is with this bit of code.
+Problem bu kod parçacığıyla ilgili.
 
 ```js
 onPointerMove={e => {
@@ -103,9 +101,9 @@ onPointerMove={e => {
 }}
 ```
 
-This code modifies the object assigned to `position` from [the previous render.](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) But without using the state setting function, React has no idea that object has changed. So React does not do anything in response. It's like trying to change the order after you've already eaten the meal. While mutating state can work in some cases, we don't recommend it. You should treat the state value you have access to in a render as read-only.
+Bu kod, [önceki render](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) işleminden `position` değişkenine atanmış nesneyi değiştirir. Ancak state ayarlama fonksiyonunu kullanmadan, React bu nesnenin değiştiğini bilmez. Bu nedenle, React herhangi bir tepki vermez. Bu, yemeği yedikten sonra siparişin değiştirilmeye çalışılması gibi bir şeydir. State'in mutasyona uğratılması bazı durumlarda çalışabilir, ancak önermiyoruz. Render işleminde erişebildiğiniz state değerini salt okunur olarak ele almanız gerekir.
 
-To actually [trigger a re-render](/learn/state-as-a-snapshot#setting-state-triggers-renders) in this case, **create a *new* object and pass it to the state setting function:**
+Bu durumda, gerçekten [yeniden render işlemini tetiklemek](/learn/state-as-a-snapshot#setting-state-triggers-renders) için, ***yeni* bir nesne oluşturun ve onu state ayarlama fonksiyonuna geçirin:**
 
 ```js
 onPointerMove={e => {
@@ -116,12 +114,12 @@ onPointerMove={e => {
 }}
 ```
 
-With `setPosition`, you're telling React:
+`setPosition` ile, React'a şunu söylüyorsunuz:
 
-* Replace `position` with this new object
-* And render this component again
+* Bu yeni nesne ile `position`'ı değiştir
+* Ve bu bileşeni tekrar render et
 
-Notice how the red dot now follows your pointer when you touch or hover over the preview area:
+Dikkat edin, kırmızı nokta şimdi önizleme alanına dokunduğunuzda veya üzerine geldiğinizde imlecinizi takip ediyor:
 
 <Sandpack>
 
@@ -168,16 +166,16 @@ body { margin: 0; padding: 0; height: 250px; }
 
 <DeepDive>
 
-#### Local mutation is fine {/*local-mutation-is-fine*/}
+#### Yerel mutasyon sorun değildir {/*local-mutation-is-fine*/}
 
-Code like this is a problem because it modifies an *existing* object in state:
+Bu şekildeki kod, state içerisinde *varolan* bir nesneyi değiştirdiği için bir problemdir. 
 
 ```js
 position.x = e.clientX;
 position.y = e.clientY;
 ```
 
-But code like this is **absolutely fine** because you're mutating a fresh object you have *just created*:
+Ancak bu şekildeki kod **kesinlikle sorunsuzdur** çünkü *yeni oluşturduğunuz* bir nesneyi değiştiriyorsunuz;
 
 ```js
 const nextPosition = {};
@@ -186,7 +184,7 @@ nextPosition.y = e.clientY;
 setPosition(nextPosition);
 ````
 
-In fact, it is completely equivalent to writing this:
+Aslında, bunu yazmakla tamamen aynı anlama geliyor:
 
 ```js
 setPosition({
@@ -195,15 +193,15 @@ setPosition({
 });
 ```
 
-Mutation is only a problem when you change *existing* objects that are already in state. Mutating an object you've just created is okay because *no other code references it yet.* Changing it isn't going to accidentally impact something that depends on it. This is called a "local mutation". You can even do local mutation [while rendering.](/learn/keeping-components-pure#local-mutation-your-components-little-secret) Very convenient and completely okay!
+Mutasyon sadece state içerisinde zaten *mevcut olan* nesneleri değiştirdiğinizde bir problem oluşturur. Yeni oluşturduğunuz bir nesneyi değiştirmek *bu nesneye henüz başka bir kod referans vermediği* için tamamen sorunsuzdur. Nesneyi değiştirmek, nesneye bağlı olan bir şeyi yanlışlıkla etkileme olasılığını ortadan kaldıracaktır. Buna "yerel mutasyon" denir.
 
 </DeepDive>  
 
-## Copying objects with the spread syntax {/*copying-objects-with-the-spread-syntax*/}
+## Spread sözdizimi ile nesnelerin kopyalanması {/*copying-objects-with-the-spread-syntax*/}
 
-In the previous example, the `position` object is always created fresh from the current cursor position. But often, you will want to include *existing* data as a part of the new object you're creating. For example, you may want to update *only one* field in a form, but keep the previous values for all other fields.
+Önceki örnekte, `position` nesnesi her zaman mevcut imlec konumuna göre yeniden oluşturulur. Ama çoğu zaman, yeni oluşturduğunuz nesnenin bir parçası olarak *mevcut* verileri de dahil etmek isteyebilirsiniz. Örneğin, bir formda *sadece tek* bir alanı güncellemek ve diğer form alanlarının önceki değerlerini korumak isteyebilirsiniz
 
-These input fields don't work because the `onChange` handlers mutate the state:
+Bu input alanları, `onChange` yöneticileri state'in mutate olmasına neden oldukları için çalışmazlar:
 
 <Sandpack>
 
@@ -232,14 +230,14 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        Ad:
         <input
           value={person.firstName}
           onChange={handleFirstNameChange}
         />
       </label>
       <label>
-        Last name:
+        Soyad:
         <input
           value={person.lastName}
           onChange={handleLastNameChange}
@@ -269,13 +267,13 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-For example, this line mutates the state from a past render:
+Örneğin, bu satır önceki bir render'dan state'i değiştirir.
 
 ```js
 person.firstName = e.target.value;
 ```
 
-The reliable way to get the behavior you're looking for is to create a new object and pass it to `setPerson`. But here, you want to also **copy the existing data into it** because only one of the fields has changed:
+Aradığınız davranışı elde etmek için güvenilir yol, yeni bir nesne oluşturmak ve onu `setPerson` fonksiyonuna geçirmektir. Ancak burada, ayrıca alanlardan yalnızca biri değiştiği için **mevcut verileri içine kopyalamak** istiyorsunuz:
 
 ```js
 setPerson({
@@ -285,7 +283,7 @@ setPerson({
 });
 ```
 
-You can use the `...` [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals) syntax so that you don't need to copy every property separately.
+Her bir özelliği ayrı ayrı kopyalamak zorunda kalmadan `...` [nesne spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals) sözdizimini kullanabilirsiniz.
 
 ```js
 setPerson({
@@ -294,9 +292,9 @@ setPerson({
 });
 ```
 
-Now the form works! 
+Form şimdi çalışıyor!
 
-Notice how you didn't declare a separate state variable for each input field. For large forms, keeping all data grouped in an object is very convenient--as long as you update it correctly!
+Her input alanı için nasıl ayrı bir state değişkeni bildirmediğinize dikkat edin. Büyük formlar için, tüm verileri bir nesnede gruplanmış halde tutmak doğru bir şekilde güncellediğiniz sürece--çok uygundur!
 
 <Sandpack>
 
@@ -334,14 +332,14 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        Ad:
         <input
           value={person.firstName}
           onChange={handleFirstNameChange}
         />
       </label>
       <label>
-        Last name:
+        Soyad:
         <input
           value={person.lastName}
           onChange={handleLastNameChange}
@@ -371,13 +369,13 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once. 
+Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmasıdır--yalnızca bir seviye derinliğe kadar kopyalar. Bu kopyalama işlemini hızlı yapar, ancak iç içe geçmiş bir özelliği güncellemek istiyorsanız, birden fazla kez kullanmanız gerekecektir.
 
 <DeepDive>
 
-#### Using a single event handler for multiple fields {/*using-a-single-event-handler-for-multiple-fields*/}
+#### Birden çok alan için tek bir olay yöneticisi kullanma {/*using-a-single-event-handler-for-multiple-fields*/}
 
-You can also use the `[` and `]` braces inside your object definition to specify a property with dynamic name. Here is the same example, but with a single event handler instead of three different ones:
+Ayrıca obje tanımınızda `[` and `]` ayraçlarını kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
 
 <Sandpack>
 
@@ -401,7 +399,7 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        Ad:
         <input
           name="firstName"
           value={person.firstName}
@@ -409,7 +407,7 @@ export default function Form() {
         />
       </label>
       <label>
-        Last name:
+        Soyad:
         <input
           name="lastName"
           value={person.lastName}
@@ -441,13 +439,13 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-Here, `e.target.name` refers to the `name` property given to the `<input>` DOM element.
+Burada `e.target.name`, `<input>` DOM ögesine verilen `name` özelliğine atıfta bulunur. 
 
 </DeepDive>
 
-## Updating a nested object {/*updating-a-nested-object*/}
+## İç içe nesneleri güncelleme {/*updating-a-nested-object*/}
 
-Consider a nested object structure like this:
+Bu şekilde iç içe bir nesne yapısı düşünün:
 
 ```js
 const [person, setPerson] = useState({
@@ -460,13 +458,13 @@ const [person, setPerson] = useState({
 });
 ```
 
-If you wanted to update `person.artwork.city`, it's clear how to do it with mutation:
+Eğer `person.artwork.city` ifadesini güncellemek istiyorsanız, mutasyon ile nasıl yapılacağı açıktır:
 
 ```js
 person.artwork.city = 'New Delhi';
 ```
 
-But in React, you treat state as immutable! In order to change `city`, you would first need to produce the new `artwork` object (pre-populated with data from the previous one), and then produce the new `person` object which points at the new `artwork`:
+Ancak React'ta, state'leri değiştirilemez olarak ele alırsınız! `city`'i değiştirmek için, ve ardından yeni `artwork`'e işaret eden yeni `person` nesnesi oluşturmanız gerekir:
 
 ```js
 const nextArtwork = { ...person.artwork, city: 'New Delhi' };
@@ -474,7 +472,7 @@ const nextPerson = { ...person, artwork: nextArtwork };
 setPerson(nextPerson);
 ```
 
-Or, written as a single function call:
+Veya, tek bir fonksiyon çağrısı olarak yazılır:
 
 ```js
 setPerson({
@@ -486,7 +484,7 @@ setPerson({
 });
 ```
 
-This gets a bit wordy, but it works fine for many cases:
+Bu biraz uzun bir ifade, ancak birçok durum için gayet işe yarar:
 
 <Sandpack>
 
@@ -543,28 +541,28 @@ export default function Form() {
   return (
     <>
       <label>
-        Name:
+        İsim:
         <input
           value={person.name}
           onChange={handleNameChange}
         />
       </label>
       <label>
-        Title:
+        Başlık:
         <input
           value={person.artwork.title}
           onChange={handleTitleChange}
         />
       </label>
       <label>
-        City:
+        Şehir:
         <input
           value={person.artwork.city}
           onChange={handleCityChange}
         />
       </label>
       <label>
-        Image:
+        Resim:
         <input
           value={person.artwork.image}
           onChange={handleImageChange}
@@ -572,10 +570,10 @@ export default function Form() {
       </label>
       <p>
         <i>{person.artwork.title}</i>
-        {' by '}
+        ({person.artwork.city} şehrinde yaşayan)
         {person.name}
+        {' tarafından '}
         <br />
-        (located in {person.artwork.city})
       </p>
       <img 
         src={person.artwork.image} 
@@ -596,9 +594,9 @@ img { width: 200px; height: 200px; }
 
 <DeepDive>
 
-#### Objects are not really nested {/*objects-are-not-really-nested*/}
+#### Nesneler aslında iç içe değillerdir {/*objects-are-not-really-nested*/}
 
-An object like this appears "nested" in code:
+Bu şekilde bir nesne kodda "iç içe" gibi gözükür: 
 
 ```js
 let obj = {
@@ -611,7 +609,7 @@ let obj = {
 };
 ```
 
-However, "nesting" is an inaccurate way to think about how objects behave. When the code executes, there is no such thing as a "nested" object. You are really looking at two different objects:
+Ancak, "iç içe yerleştirme" nesnelerin nasıl davrandığını düşünmenin yanlış bir yoludur. Kod çalıştığında, "iç içe" geçmiş nesne diye bir şey yoktur. Aslında iki farklı nesneye bakıyorsunuz:
 
 ```js
 let obj1 = {
@@ -626,7 +624,7 @@ let obj2 = {
 };
 ```
 
-The `obj1` object is not "inside" `obj2`. For example, `obj3` could "point" at `obj1` too:
+`obj1` nesnesi `obj2`'nin "içinde" değil. Örneğin, `obj3`'de `obj1`'e "işaret edebilir":
 
 ```js
 let obj1 = {
@@ -646,13 +644,13 @@ let obj3 = {
 };
 ```
 
-If you were to mutate `obj3.artwork.city`, it would affect both `obj2.artwork.city` and `obj1.city`. This is because `obj3.artwork`, `obj2.artwork`, and `obj1` are the same object. This is difficult to see when you think of objects as "nested". Instead, they are separate objects "pointing" at each other with properties.
+`obj3.artwork.city`'i mutasyona uğratırsanız, hem `obj2.artwork.city` hem de `obj1.city` etkilenecektir. Bu, `obj3.artwork`, `obj2.artwork` ve `obj1`'in aynı nesne olduğu anlamına gelir. Nesnelerin "iç içe geçmiş" olarak düşünüldüğü zaman bu zor görülebilir. Aslında, nesneler birbirine özelliklerle "işaret eden" ayrı nesnelerdir.
 
 </DeepDive>  
 
-### Write concise update logic with Immer {/*write-concise-update-logic-with-immer*/}
+### Immer ile kısa güncelleme mantığı yazın {/*write-concise-update-logic-with-immer*/}
 
-If your state is deeply nested, you might want to consider [flattening it.](/learn/choosing-the-state-structure#avoid-deeply-nested-state) But, if you don't want to change your state structure, you might prefer a shortcut to nested spreads. [Immer](https://github.com/immerjs/use-immer) is a popular library that lets you write using the convenient but mutating syntax and takes care of producing the copies for you. With Immer, the code you write looks like you are "breaking the rules" and mutating an object:
+Eğer durumunuz derinlemesine iç içe ise, [onu düzleştirmeyi](/learn/choosing-the-state-structure#avoid-deeply-nested-state) düşünebilirsiniz. Ancak, state yapınızı değiştirmek istemiyorsanız, iç içe geçmiş spreadlere bir kısayol tercih edebilirsiniz. [Immer](https://github.com/immerjs/use-immer) popüler bir kütüphanedir ve size kolaylaştırılmış ancak mutasyona neden olan sözdizimini kullanarak yazmanıza izin verir ve kopyaları sizin için üretir. Immer ile yazdığınız kod, "kuralları yoksayıyormuş" gibi görünür, ancak aslında Immer, değişikliklerinizi tespit eder ve tamamen yeni bir nesne üretir:
 
 ```js
 updatePerson(draft => {
@@ -660,22 +658,22 @@ updatePerson(draft => {
 });
 ```
 
-But unlike a regular mutation, it doesn't overwrite the past state!
+Ancak normal bir mutasyonun aksine, geçmiş state'i üzerine yazmaz!
 
 <DeepDive>
 
-#### How does Immer work? {/*how-does-immer-work*/}
+#### Immer nasıl çalışır? {/*how-does-immer-work*/}
 
-The `draft` provided by Immer is a special type of object, called a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy), that "records" what you do with it. This is why you can mutate it freely as much as you like! Under the hood, Immer figures out which parts of the `draft` have been changed, and produces a completely new object that contains your edits.
+Immer tarafından sağlanan `draft`, [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) olarak adlandırılan özel bir nesne türüdür, onunla yaptıklarınızı "kaydeder". Bu nedenle, istediğiniz kadar serbestçe mutasyona uğratabilirsiniz! Arka planda, Immer, taslağınızın hangi kısımlarının `draft` edildiğini bulur ve düzenlemelerinizi içeren tamamen yeni bir nesne oluşturur.
 
 </DeepDive>
 
-To try Immer:
+Immer'i denemek için:
 
-1. Run `npm install use-immer` to add Immer as a dependency
-2. Then replace `import { useState } from 'react'` with `import { useImmer } from 'use-immer'`
+1. Immer'i bir bağımlılık olarak eklemek için `npm install use-immer` komutunu çalıştırın
+2. Daha sonra `import { useState } from 'react'` satırını `import { useImmer } from 'use-immer'` ile değiştirin
 
-Here is the above example converted to Immer:
+Yukarıdaki örneğin Immere çevrilmiş hali şöyledir:
 
 <Sandpack>
 
@@ -719,28 +717,28 @@ export default function Form() {
   return (
     <>
       <label>
-        Name:
+        İsim:
         <input
           value={person.name}
           onChange={handleNameChange}
         />
       </label>
       <label>
-        Title:
+        Başlık:
         <input
           value={person.artwork.title}
           onChange={handleTitleChange}
         />
       </label>
       <label>
-        City:
+        Şehir:
         <input
           value={person.artwork.city}
           onChange={handleCityChange}
         />
       </label>
       <label>
-        Image:
+        Resim:
         <input
           value={person.artwork.image}
           onChange={handleImageChange}
@@ -788,33 +786,33 @@ img { width: 200px; height: 200px; }
 
 </Sandpack>
 
-Notice how much more concise the event handlers have become. You can mix and match `useState` and `useImmer` in a single component as much as you like. Immer is a great way to keep the update handlers concise, especially if there's nesting in your state, and copying objects leads to repetitive code.
+Dikkat edin, olay işleyicileri ne kadar daha kısa hale geldi. `useState` ve `useImmer`'i tek bir bileşende istediğiniz kadar karıştırabilirsiniz. Immer, özellikle state içerisinde iç içe geçme varsa ve nesnelerin kopyalanması tekrarlayan kodlara neden oluyorsa, olay işleyicilerini kısa tutmanın harika bir yoludur.
 
 <DeepDive>
 
-#### Why is mutating state not recommended in React? {/*why-is-mutating-state-not-recommended-in-react*/}
+#### React'te state'i mutasyona uğratmak neden önerilmez? {/*why-is-mutating-state-not-recommended-in-react*/}
 
-There are a few reasons:
+Birkaç nedeni var:
 
-* **Debugging:** If you use `console.log` and don't mutate state, your past logs won't get clobbered by the more recent state changes. So you can clearly see how state has changed between renders.
-* **Optimizations:** Common React [optimization strategies](/reference/react/memo) rely on skipping work if previous props or state are the same as the next ones. If you never mutate state, it is very fast to check whether there were any changes. If `prevObj === obj`, you can be sure that nothing could have changed inside of it.
-* **New Features:** The new React features we're building rely on state being [treated like a snapshot.](/learn/state-as-a-snapshot) If you're mutating past versions of state, that may prevent you from using the new features.
-* **Requirement Changes:** Some application features, like implementing Undo/Redo, showing a history of changes, or letting the user reset a form to earlier values, are easier to do when nothing is mutated. This is because you can keep past copies of state in memory, and reuse them when appropriate. If you start with a mutative approach, features like this can be difficult to add later on.
-* **Simpler Implementation:** Because React does not rely on mutation, it does not need to do anything special with your objects. It does not need to hijack their properties, always wrap them into Proxies, or do other work at initialization as many "reactive" solutions do. This is also why React lets you put any object into state--no matter how large--without additional performance or correctness pitfalls.
+* **Hata Ayıklama:** Eğer `console.log` kullanır ve state'i mutasyona uğratmazsanız, önceki loglarınız daha yeni state değişiklikleri tarafından silinmeyecektir. Bu sayede, renderlar arasındaki state değişimlerini açıkça görebilirsiniz.
+* **Optimizasyonlar:** React'ta yaygın olarak kullanılan [optimizasyon stratejileri](/reference/react/memo), önceki props veya state ile sonraki props veya state'in aynı olması durumunda işlemleri atlamaya dayanır. Eğer state'in içeriğini hiç mutasyona uğratmazsanız, değişikliklerin olup olmadığını kontrol etmek çok hızlı olacaktır. Eğer `prevObj === obj ise`, nesne içinde hiçbir şeyin değişemeyeceğinden emin olabilirsiniz.
+* **Yeni Özellikler:** Yeni React özelliklerinin kullanımı, state'in bir [anlık görüntü gibi davranması](/learn/state-as-a-snapshot) gibi işlem görmesiyle ilgilidir. Eğer state'in geçmiş versiyonlarını mutasyona uğratıyorsanız, bu yeni özellikleri kullanmanızı engelleyebilir.
+* **Gerekli Değişiklikler:** Geri/İleri işlevleri, değişikliklerin geçmişini gösterme veya kullanıcının bir formu önceki değerlere sıfırlama gibi bazı uygulama özellikleri, hiçbir şeyin mutasyona uğramadığı zaman daha kolay uygulanabilir. Bu, geçmişteki state kopyalarını hafızada tutup uygun olduğunda yeniden kullanabilmenizden kaynaklanır. Değiştirici bir yaklaşımla başlarsanız, bu gibi özellikleri sonradan eklemek zor olabilir.
+* **Daha Basit Uygulama:** React, nesnelerin mutasyonuna bağlı olmadığı için, nesnelerinizle özel bir işlem yapmak zorunda kalmaz.  Özelliklerini ele geçirmek, her zaman Proxilere sarmak veya diğer "reaktif" çözümler gibi başlangıçta başka işler yapmak zorunda değildir. Bu aynı zamanda, React'in ek performans veya doğruluk sorunları olmadan herhangi bir--büyüklüğü önemsiz--nesneyi state içine yerleştirmenize olanak sağladığı için,  React'in büyük nesneleri de dahil olmak üzere herhangi bir nesneyi state içine yerleştirmenize izin verdiği anlamına gelir.
 
-In practice, you can often "get away" with mutating state in React, but we strongly advise you not to do that so that you can use new React features developed with this approach in mind. Future contributors and perhaps even your future self will thank you!
+Pratikte, React'ta state'leri mutasyona uğratarak genellikle problemlerden "kurtulabilirsiniz", ancak bu yaklaşım göz önünde bulundurularak geliştirilen yeni React özelliklerini kullanabilmeniz için bunu yapmamanızı şiddetle tavsiye ederiz.Gelecekteki katkı sağlayıcılar ve hatta belki siz bile gelecekteki kendinize teşekkür edeceksiniz!
 
 </DeepDive>
 
 <Recap>
 
-* Treat all state in React as immutable.
-* When you store objects in state, mutating them will not trigger renders and will change the state in previous render "snapshots".
-* Instead of mutating an object, create a *new* version of it, and trigger a re-render by setting state to it.
-* You can use the `{...obj, something: 'newValue'}` object spread syntax to create copies of objects.
-* Spread syntax is shallow: it only copies one level deep.
-* To update a nested object, you need to create copies all the way up from the place you're updating.
-* To reduce repetitive copying code, use Immer.
+* React içerisindeki bütün state'leri değiştirilemez olarak ele alın.
+* React'ta nesneleri state içinde sakladığınızda, nesneleri mutasyona uğratmak yeniden render işlemini tetiklemez ve önceki render "anlık görüntülerindeki" state'i değiştirir.
+* Bir nesneyi mutasyona uğratmak yerine, nesnenin *yeni* bir versiyonunu oluşturun, ve state'i nesneye ayarlayarak bir yeniden render oluşturun.
+* Nesnenin kopyasını oluşturmak için `{...obj, something: 'newValue'}` nesne spread sözdizimini kullanabilirsiniz.
+* Spread sözdizimi yüzeyseldir: yalnızca bir seviye derinliğe kadar kopyalar.
+* İç içe bir nesneyi güncellemek için, güncellediğiniz yerden itibaren başlayarak bütün her şeyi kopyalamalısınız.
+* Tekrarlayan kopyalama kodlarını azaltmak için Immer kullanın.
 
 </Recap>
 
@@ -822,11 +820,11 @@ In practice, you can often "get away" with mutating state in React, but we stron
 
 <Challenges>
 
-#### Fix incorrect state updates {/*fix-incorrect-state-updates*/}
+#### Hatalı state güncellemelerini düzeltin {/*fix-incorrect-state-updates*/}
 
-This form has a few bugs. Click the button that increases the score a few times. Notice that it does not increase. Then edit the first name, and notice that the score has suddenly "caught up" with your changes. Finally, edit the last name, and notice that the score has disappeared completely.
+Bu formda birkaç hata var. Skoru arttıran butona birkaç kez tıklayın. Artmadığını fark edeceksiniz. Sonra adı düzenleyin ve skorun aniden değişikliklerinize "yetiştiğini" fark edeceksiniz. Son olarak, soyadını düzenleyin ve skorun tamamen kaybolduğunu fark edeceksiniz.
 
-Your task is to fix all of these bugs. As you fix them, explain why each of them happens.
+Göreviniz tüm bu hataları düzeltmektir. Hataları düzeltirken, bu hataların neden meydana geldiğini açıklayın.
 
 <Sandpack>
 
@@ -860,21 +858,21 @@ export default function Scoreboard() {
   return (
     <>
       <label>
-        Score: <b>{player.score}</b>
+        Skor: <b>{player.score}</b>
         {' '}
         <button onClick={handlePlusClick}>
           +1
         </button>
       </label>
       <label>
-        First name:
+        Ad:
         <input
           value={player.firstName}
           onChange={handleFirstNameChange}
         />
       </label>
       <label>
-        Last name:
+        Soyad:
         <input
           value={player.lastName}
           onChange={handleLastNameChange}
@@ -894,7 +892,7 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 <Solution>
 
-Here is a version with both bugs fixed:
+Her iki hatanın da düzeltildiği bir sürüm şu şekildedir:
 
 <Sandpack>
 
@@ -932,21 +930,21 @@ export default function Scoreboard() {
   return (
     <>
       <label>
-        Score: <b>{player.score}</b>
+        Skor: <b>{player.score}</b>
         {' '}
         <button onClick={handlePlusClick}>
           +1
         </button>
       </label>
       <label>
-        First name:
+        Ad:
         <input
           value={player.firstName}
           onChange={handleFirstNameChange}
         />
       </label>
       <label>
-        Last name:
+        Soyad:
         <input
           value={player.lastName}
           onChange={handleLastNameChange}
@@ -964,23 +962,23 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-The problem with `handlePlusClick` was that it mutated the `player` object. As a result, React did not know that there's a reason to re-render, and did not update the score on the screen. This is why, when you edited the first name, the state got updated, triggering a re-render which _also_ updated the score on the screen.
+`handlePlusClick` fonksiyonundaki sorun, `player` nesnesini mutasyona uğratmasıydı. Sonuç olarak, React, yeniden render için bir neden olduğunu bilmediği için, ekrandaki skoru güncellemedi. Bu nedenle, adı düzenlediğinizde, state güncellendi ve bir yeniden render tetiklendi, bu da _aynı zamanda_ ekran üzerindeki skoru güncelledi.
 
-The problem with `handleLastNameChange` was that it did not copy the existing `...player` fields into the new object. This is why the score got lost after you edited the last name.
+`handleLastNameChange` fonksiyonundaki sorun, mevcut `...player` alanlarını yeni nesneye kopyalamamasıydı. Bu nedenle, soyadını düzenledikten sonra puan kaybedildi.
 
 </Solution>
 
-#### Find and fix the mutation {/*find-and-fix-the-mutation*/}
+#### Mutasyonu bulun ve düzeltin {/*find-and-fix-the-mutation*/}
 
-There is a draggable box on a static background. You can change the box's color using the select input.
+Sabit bir arka plan üzerinde sürüklenebilir bir kutu bulunmaktadır. Select input kullanarak kutunun rengini değiştirebilirsiniz.
 
-But there is a bug. If you move the box first, and then change its color, the background (which isn't supposed to move!) will "jump" to the box position. But this should not happen: the `Background`'s `position` prop is set to `initialPosition`, which is `{ x: 0, y: 0 }`. Why is the background moving after the color change?
+Ancak bir hata var. İlk olarak kutuyu hareket ettirirseniz, ve sonra rengini değiştirirseniz, arka plan (hareket etmemesi gereken!) kutunun pozisyonuna "atlayacak". Ancak bu olmamalıdır: `Background` bileşeninin `{ x: 0, y: 0 }` olan `position` propu `initialPosition` olarak ayarlanmıştır. Neden renk değişikliğinden sonra arka plan hareket ediyor? 
 
-Find the bug and fix it.
+Hatayı bulun ve düzeltin.
 
 <Hint>
 
-If something unexpected changes, there is a mutation. Find the mutation in `App.js` and fix it.
+Herhangi beklenmedik değişiklik durumunda mutasyon gerçekleşir. `App.js` dosyasında mutasyonu bulun ve düzeltin.
 
 </Hint>
 
@@ -1032,7 +1030,7 @@ export default function Canvas() {
         position={shape.position}
         onMove={handleMove}
       >
-        Drag me!
+        Beni sürükle!
       </Box>
     </>
   );
@@ -1130,9 +1128,9 @@ select { margin-bottom: 10px; }
 
 <Solution>
 
-The problem was in the mutation inside `handleMove`. It mutated `shape.position`, but that's the same object that `initialPosition` points at. This is why both the shape and the background move. (It's a mutation, so the change doesn't reflect on the screen until an unrelated update--the color change--triggers a re-render.)
+Sorun, `handleMove` içerisindeki mutasyondaydı. Bu, `shape.position`'ı mutasyona uğrattı, ancak bu, `initialPosition`'ın işaret ettiği aynı nesne olduğu anlamına geliyor. Şekil ve arka planın hareket etme nedeni bu sebepledir. (Bu bir mutasyon olduğundan, başka bir güncelleme--renk değişikliği--yeniden render edilinceye kadar değişiklik ekran üzerine yansımaz)
 
-The fix is to remove the mutation from `handleMove`, and use the spread syntax to copy the shape. Note that `+=` is a mutation, so you need to rewrite it to use a regular `+` operation.
+`handleMove` fonksiyonundaki mutasyonu kaldırarak ve spread sözdizimini kullanarak şekli kopyalamanız gerekiyor. `+=` bir mutasyon olduğu için, bunu düzenli `+` ifadesini kullanarak yeniden yazmanız gerekmektedir. 
 
 <Sandpack>
 
@@ -1187,7 +1185,7 @@ export default function Canvas() {
         position={shape.position}
         onMove={handleMove}
       >
-        Drag me!
+        Beni sürükle!
       </Box>
     </>
   );
@@ -1285,9 +1283,9 @@ select { margin-bottom: 10px; }
 
 </Solution>
 
-#### Update an object with Immer {/*update-an-object-with-immer*/}
+#### Bir nesneyi Immer ile güncelle {/*update-an-object-with-immer*/}
 
-This is the same buggy example as in the previous challenge. This time, fix the mutation by using Immer. For your convenience, `useImmer` is already imported, so you need to change the `shape` state variable to use it.
+Bu, önceki meydan okumadaki hatalı örnek ile aynıdır. Bu sefer, mutasyonu Immer kullanarak düzeltin. Kolaylık sağlaması için, `useImmer` sizin için içe aktarılmıştır, bu nedenle `shape` state değişkenini kullanmak için onu değiştirmelisiniz.
 
 <Sandpack>
 
@@ -1338,7 +1336,7 @@ export default function Canvas() {
         position={shape.position}
         onMove={handleMove}
       >
-        Drag me!
+        Beni sürükle!
       </Box>
     </>
   );
@@ -1454,7 +1452,7 @@ select { margin-bottom: 10px; }
 
 <Solution>
 
-This is the solution rewritten with Immer. Notice how the event handlers are written in a mutating fashion, but the bug does not occur. This is because under the hood, Immer never mutates the existing objects.
+Bu, Immer ile yeniden yazılmış çözümdür. Olay yöneticilerinin değişmiş şekilde yazıldığına dikkat edin, ancak hata meydana gelmez. Bu, Immer'in arka planda mevcut nesneleri asla değiştirmediği için gerçekleşir.
 
 <Sandpack>
 
@@ -1505,7 +1503,7 @@ export default function Canvas() {
         position={shape.position}
         onMove={handleMove}
       >
-        Drag me!
+        Beni sürükle!
       </Box>
     </>
   );
