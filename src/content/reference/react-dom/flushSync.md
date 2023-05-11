@@ -4,13 +4,13 @@ title: flushSync
 
 <Pitfall>
 
-Using `flushSync` is uncommon and can hurt the performance of your app.
+`flushSync` kullanımı yaygın değildir ve uygulamanızın performansına zarar verebilir.
 
 </Pitfall>
 
 <Intro>
 
-`flushSync` lets you force React to flush any updates inside the provided callback synchronously. This ensures that the DOM is updated immediately.
+`flushSync`, sağlanan callback içindeki herhangi bir güncellemeyi zorla ve senkronize bir şekilde işlemeye olanak sağlar. Bu, DOM'u anında güncelleyecektir.
 
 ```js
 flushSync(callback)
@@ -22,11 +22,12 @@ flushSync(callback)
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `flushSync(callback)` {/*flushsync*/}
 
-Call `flushSync` to force React to flush any pending work and update the DOM synchronously.
+Bekleyen tüm işlemleri boşaltmak ve DOM'u hemen güncellemek için `flushSync` fonksiyonunu kullanın.
+
 
 ```js
 import { flushSync } from 'react-dom';
@@ -36,24 +37,24 @@ flushSync(() => {
 });
 ```
 
-Most of the time, `flushSync` can be avoided. Use `flushSync` as last resort.
+Çoğunlukla, `flushSync` kullanmanıza gerek yoktur. `flushSync`'i sadece son çareniz olduğunda kullanın.
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıdaki linki tıklayın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
 
-* `callback`: A function. React will immediately call this callback and flush any updates it contains synchronously. It may also flush any pending updates, or Effects, or updates inside of Effects. If an update suspends as a result of this `flushSync` call, the fallbacks may be re-shown.
+* `callback`: Bir fonksiyon. React, bu callback'i hemen çağırır ve içerdiği tüm güncellemeleri senkronize bir şekilde gerçekleştirir. Aynı zamanda bekleyen güncellemeleri, Effect'leri veya Effect'ler içindeki güncellemeleri de gerçekleştirebilir. Eğer `flushSync` çağrısı sonucunda bir güncelleme duraklatılırsa, fallback'ler tekrar görünebilir.
 
-#### Returns {/*returns*/}
+#### Geri Döndürür {/*returns*/}
 
-`flushSync` returns `undefined`.
+`flushSync` `undefined` geri döndürür.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `flushSync` can significantly hurt performance. Use sparingly.
-* `flushSync` may force pending Suspense boundaries to show their `fallback` state.
-* `flushSync` may run pending effects and synchronously apply any updates they contain before returning.
+* `flushSync` performansı önemli ölçüde düşürebilir. Sınırlı şekilde kullanın.
+* `flushSync`bekleyen Suspense sınırlarını `fallback` durumunu göstermeye mecbur bırakabilir.
+* `flushSync` bekleyen effect'leri tetikleyebilir ve içerdikleri güncellemeleri döndürmeden önce senkron bir şekilde uygulayabilir.
 * `flushSync` may flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
 
 ---
