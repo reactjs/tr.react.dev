@@ -43,7 +43,7 @@ Teknik olarak, _nesnenin kendisinin_ içeriğini değiştirmek mümkündür. **B
 position.x = 5;
 ```
 
-Ancak, React state içerisindeki nesneler teknik olarak değiştirilebilir olsalar da, sayılar, booleans ve dizeler **sözde** değişmezmiş gibi muamele edilmelidir. Onları mutasyona uğratmak yerine, her zaman yenilerini oluşturmalısınız.
+Ancak, React state içerisindeki nesneler teknik olarak değiştirilebilir olsalar da, sayılar, booleans ve dizeler gibi **sözde** değişmezmiş gibi muamele edilmelidir. Onları mutasyona uğratmak yerine, her zaman yenilerini oluşturmalısınız.
 
 ## State'i salt okunur olarak ele alın {/*treat-state-as-read-only*/}
 
@@ -658,7 +658,7 @@ updatePerson(draft => {
 });
 ```
 
-Ancak normal bir mutasyonun aksine, geçmiş state'i üzerine yazmaz!
+Ancak normal bir mutasyonun aksine, geçmiş state'in üzerine yazmaz!
 
 <DeepDive>
 
