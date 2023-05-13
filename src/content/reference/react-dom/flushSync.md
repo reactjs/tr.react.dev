@@ -55,7 +55,8 @@ flushSync(() => {
 * `flushSync` performansı önemli ölçüde düşürebilir. Sınırlı şekilde kullanın.
 * `flushSync`bekleyen Suspense sınırlarını `fallback` durumunu göstermeye mecbur bırakabilir.
 * `flushSync` bekleyen effect'leri tetikleyebilir ve içerdikleri güncellemeleri döndürmeden önce senkron bir şekilde uygulayabilir.
-* `flushSync` may flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
+* `flushSync` callback içindeki güncellemeleri işlemek gerektiğinde, callback dışındaki güncellemeleri işleyebilir. Örneğin, bir tıklama sonucu bekleyen güncellemeler varsa, React bu güncellemeleri callback içindeki güncellemeleri işlemeden önce işleyebilir.
+
 
 ---
 
