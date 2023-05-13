@@ -4,7 +4,7 @@ title: JSX içinde Süslü Parantezlerle JavaScript
 
 <Intro>
 
-JSX , render etme mantığını ve içeriği aynı yerde tutarak, bir JavaScript dosyası içinde HTML benzeri işaretleme (markup) yazmanızı sağlar.Bazı durumlarda, o işaretlemenin içine biraz JavaScript mantığı eklemek veya dinamik bir özelliğe referans vermek isteyeceksiniz.
+JSX , render etme mantığını ve içeriği aynı yerde tutarak, bir JavaScript dosyası içinde HTML benzeri işaretleme (markup) yazmanızı sağlar. Bazı durumlarda, o işaretlemenin içine biraz JavaScript mantığı eklemek veya dinamik bir özelliğe referans vermek isteyeceksiniz.
 Bu durumda, JSX içinde süslü parantezleri kullanarak, JavaScript'e bir pencere açabilirsiniz.
 
 </Intro>
@@ -134,7 +134,7 @@ export default function TodoList() {
       backgroundColor: 'black',
       color: 'pink'
     }}>
-      <li>Görüntülü telefon geliştir</li>
+      <li>Görüntülü telefonu geliştir</li>
       <li>Havacılık derslerini hazırla</li>
       <li>Alkolle çalışan motor üzerinde çalış</li>
     </ul>
@@ -195,7 +195,7 @@ export default function TodoList() {
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -248,7 +248,7 @@ Artık JSX hakkında neredeyse her şeyi biliyorsunuz:
 
 #### Hatayı Düzelt {/*fix-the-mistake*/}
 
-Bu kod, `Nesneler bir React alt öğesi olarak geçerli değil` şeklinde bir hata veriyor:
+Bu kod, `Objects are not valid as a React child`(Nesneler bir React alt öğesi olarak geçerli değildir) şeklinde bir hata veriyor:
 
 <Sandpack>
 
@@ -271,7 +271,7 @@ export default function TodoList() {
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -294,8 +294,7 @@ Sorunu bulabilir misin ?
 
 <Solution>
 
-Bu durum, örnek olarak bir obje kendisi yerine bir stringi markup içine aktarmaya çalışması nedeniyle oluşuyor: `<h1>{person}'s Todos</h1>` person objesinin tamamını aktarmaya çalışıyor! Including raw objects as text content throws an error because React doesn't know how you want to display them.
-
+Bunun nedeni, bu örneğin bir string yerine *direkt olarak bir objenin kendisini* markup içine aktarmasıdır. Nesneler metin içeriği olarak dahil edildiğinde, React onları nasıl görüntülemek istediğinizi bilmediğinden hata verecektir.
  Sorunu çözmek için, `<h1>{person}'nın Yapılacakları</h1>` ifadesini `<h1>{person.name}'nın Yapılacakları</h1>` ile değiştirin:".
 
 <Sandpack>
@@ -319,7 +318,7 @@ export default function TodoList() {
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -363,7 +362,7 @@ export default function TodoList() {
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -406,7 +405,7 @@ export default function TodoList() {
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -458,7 +457,7 @@ export default function TodoList() {
         alt={person.name}
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -509,7 +508,7 @@ export default function TodoList() {
         alt={person.name}
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
@@ -553,7 +552,7 @@ export default function TodoList() {
         alt={person.name}
       />
       <ul>
-        <li>Görüntülü telefon geliştir</li>
+        <li>Görüntülü telefonu geliştir</li>
         <li>Havacılık derslerini hazırla</li>
         <li>Alkolle çalışan motor üzerinde çalış</li>
       </ul>
