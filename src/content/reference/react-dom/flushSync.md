@@ -60,17 +60,17 @@ flushSync(() => {
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Flushing updates for third-party integrations {/*flushing-updates-for-third-party-integrations*/}
+### Üçüncü Parti Entegrasyonlar için Güncellemeleri İşleme {/*flushing-updates-for-third-party-integrations*/}
 
-When integrating with third-party code such as browser APIs or UI libraries, it may be necessary to force React to flush updates. Use `flushSync` to force React to flush any <CodeStep step={1}>state updates</CodeStep> inside the callback synchronously:
+Tarayıcı API'leri veya UI kütüphaneleri gibi üçüncü parti kodlarıyla entegrasyon sağlarken, React'in güncellemeleri zorla işlemesi gerekebilir. Callback içerisindeki herhangi bir <CodeStep step={1}>durum güncellemesi</CodeStep>'ni senkron bir şekilde işlemek için `flushSync` kullanın:
 
 ```js [[1, 2, "setSomething(123)"]]
 flushSync(() => {
   setSomething(123);
 });
-// By this line, the DOM is updated.
+// Bu satıra gelindiğinde, DOM güncellenmiştir.
 ```
 
 This ensures that, by the time the next line of code runs, React has already updated the DOM.
