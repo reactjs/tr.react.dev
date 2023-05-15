@@ -4,7 +4,7 @@ title: useMemo
 
 <Intro>
 
-`useMemo` is a React Hook that lets you cache the result of a calculation between re-renders.
+`useMemo` yeniden render işlemleri arasında bir hesaplamanın sonucunu önbelleğe almanızı sağlayan bir React Hook'udur.
 
 ```js
 const cachedValue = useMemo(calculateValue, dependencies)
@@ -16,11 +16,11 @@ const cachedValue = useMemo(calculateValue, dependencies)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `useMemo(calculateValue, dependencies)` {/*usememo*/}
 
-Call `useMemo` at the top level of your component to cache a calculation between re-renders:
+Yeniden render işlemleri arasında bir hesaplamayı önbelleğe almak için bileşeninizin en üst seviyesinde `useMemo`'yu çağırın:
 
 ```js
 import { useMemo } from 'react';
@@ -34,39 +34,39 @@ function TodoList({ todos, tab }) {
 }
 ```
 
-[See more examples below.](#usage)
+[Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `calculateValue`: The function calculating the value that you want to cache. It should be pure, should take no arguments, and should return a value of any type. React will call your function during the initial render. On next renders, React will return the same value again if the `dependencies` have not changed since the last render. Otherwise, it will call `calculateValue`, return its result, and store it so it can be reused later.
+* `calculateValue`: Önbelleğe almak istediğiniz değeri hesaplayan fonksiyon. Saf fonksiyon olmalı, argüman almamalı ve herhangi bir türde bir değer döndürmelidir. React ilk render sırasında fonksiyonunuzu çağıracaktır. Sonraki render'larda, bağımlılıklar (`dependencies`) son render'dan bu yana değişmediyse React aynı değeri tekrar döndürecektir. Aksi takdirde, `calculateValue`'yu çağıracak, sonucunu döndürecek ve daha sonra tekrar kullanılabilmesi için saklayacaktır.
 
-* `dependencies`: The list of all reactive values referenced inside of the `calculateValue` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison.
+* `dependencies`: `calculateValue` kodu içinde referans edilen tüm reaktif değerlerin listesidir. Reaktif değerler; prop'ları, state'i ve doğrudan bileşen gövdenizin içinde tanımlanan tüm değişkenleri ve fonksiyonları içerir. Eğer linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin bir bağımlılık olarak doğru şekilde belirtildiğini doğrulayacaktır. Bağımlılıklar listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` gibi satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak her bağımlılığı önceki değeriyle karşılaştıracaktır.
 
-#### Returns {/*returns*/}
+#### Döndürülen Değerler {/*returns*/}
 
-On the initial render, `useMemo` returns the result of calling `calculateValue` with no arguments.
+İlk render işleminde `useMemo`, `calculateValue` çağrısının sonucunu hiçbir argüman olmadan döndürür.
 
-During next renders, it will either return an already stored value from the last render (if the dependencies haven't changed), or call `calculateValue` again, and return the result that `calculateValue` has returned.
+Sonraki render işlemleri sırasında, ya son render işleminde depolanmış olan değeri döndürür (bağımlılıklar değişmediyse) ya da `calculateValue` fonksiyonunu tekrar çağırır ve `calculateValue` 'nun döndürdüğü sonucu döndürür.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `useMemo` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
-* In Strict Mode, React will **call your calculation function twice** in order to [help you find accidental impurities.](#my-calculation-runs-twice-on-every-re-render) This is development-only behavior and does not affect production. If your calculation function is pure (as it should be), this should not affect your logic. The result from one of the calls will be ignored.
-* React **will not throw away the cached value unless there is a specific reason to do that.** For example, in development, React throws away the cache when you edit the file of your component. Both in development and in production, React will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache--for example, if React adds built-in support for virtualized lists in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should be fine if you rely on `useMemo` solely as a performance optimization. Otherwise, a [state variable](/reference/react/useState#avoiding-recreating-the-initial-state) or a [ref](/reference/react/useRef#avoiding-recreating-the-ref-contents) may be more appropriate.
+* useMemo` bir Hook'tur, bu nedenle onu yalnızca **bileşeninizin en üst seviyesinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngülerin veya koşulların içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen çıkarın ve durumu içine taşıyın.
+* Strict Mod'da React, [yanlışlıkla oluşan safsızlıkları bulmanıza yardımcı olmak](#my-calculation-runs-twice-on-every-re-render) için **hesaplama fonksiyonunuzu iki kez çağıracaktır**. Bu yalnızca geliştirmeye yönelik bir davranıştır ve canlı ortamı etkilemez. Hesaplama fonksiyonunuz safsa (olması gerektiği gibi), bu durum mantığınızı etkilememelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
+* React **özel bir neden olmadıkça önbelleğe alınan değeri atmayacaktır.** Örneğin, geliştirme sırasında, bileşeninizin dosyasını düzenlediğinizde React önbelleği atar. Hem geliştirme hem de canlı ortamda, bileşeniniz ilk mount sırasında askıya alınırsa React önbelleği atacaktır. Gelecekte React, önbelleğin atılmasından yararlanan daha fazla özellik ekleyebilir - örneğin, React gelecekte sanallaştırılmış listeler için yerleşik destek eklerse, sanallaştırılmış tablo görünüm alanından dışarı kaydırılan öğeler için önbelleği atmak mantıklı olacaktır. Eğer `useMemo`'ya sadece bir performans optimizasyonu olarak güveniyorsanız bu bir sorun olmayacaktır. Aksi takdirde, bir [state değişkeni](/reference/react/useState#avoiding-recreating-the-initial-state) veya bir [ref](/reference/react/useRef#avoiding-recreating-the-ref-contents) daha uygun olabilir.
 
 <Note>
 
-Caching return values like this is also known as [*memoization*,](https://en.wikipedia.org/wiki/Memoization) which is why this Hook is called `useMemo`.
+Dönüş değerlerinin bu şekilde önbelleğe alınması [*memoization*](https://en.wikipedia.org/wiki/Memoization) olarak da bilinir, bu yüzden bu Hook `useMemo` olarak adlandırılmıştır.
 
 </Note>
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Skipping expensive recalculations {/*skipping-expensive-recalculations*/}
+### Maliyetli yeniden hesaplamaların atlanması {/*skipping-expensive-recalculations*/}
 
-To cache a calculation between re-renders, wrap it in a `useMemo` call at the top level of your component:
+Bir hesaplamayı yeniden render işlemleri arasında önbelleğe almak için, bileşeninizin en üst seviyesinde bir `useMemo` çağrısına sarın:
 
 ```js [[3, 4, "visibleTodos"], [1, 4, "() => filterTodos(todos, tab)"], [2, 4, "[todos, tab]"]]
 import { useMemo } from 'react';
@@ -77,20 +77,20 @@ function TodoList({ todos, tab, theme }) {
 }
 ```
 
-You need to pass two things to `useMemo`:
+`useMemo`'ya iki parametre geçmeniz gerekir:
 
-1. A <CodeStep step={1}>calculation function</CodeStep> that takes no arguments, like `() =>`, and returns what you wanted to calculate.
-2. A <CodeStep step={2}>list of dependencies</CodeStep> including every value within your component that's used inside your calculation.
+1. `() =>` gibi hiçbir argüman almayan ve hesaplamak istediğiniz şeyi döndüren bir <CodeStep step={1}>hesaplama fonksiyonu</CodeStep>.
+2. Bileşeniniz içinde hesaplamanızda kullanılan her değeri içeren bir <CodeStep step={2}>bağımlılıklar listesi</CodeStep>.
 
-On the initial render, the <CodeStep step={3}>value</CodeStep> you'll get from `useMemo` will be the result of calling your <CodeStep step={1}>calculation</CodeStep>.
+İlk render işleminde `useMemo`'dan alacağınız <CodeStep step={3}>değer</CodeStep>, <CodeStep step={1}>hesaplamanızın</CodeStep> çağrılmasının sonucu olacaktır.
 
-On every subsequent render, React will compare the <CodeStep step={2}>dependencies</CodeStep> with the dependencies you passed during the last render. If none of the dependencies have changed (compared with [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)), `useMemo` will return the value you already calculated before. Otherwise, React will re-run your calculation and return the new value.
+Sonraki her render işleminde React, bağımlılıkları son render sırasında ilettiğiniz bağımlılıklarla karşılaştıracaktır. Bağımlılıkların hiçbiri ([`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ile karşılaştırıldığında) değişmediyse, `useMemo` daha önce hesapladığınız değeri döndürür. Aksi takdirde, React hesaplamanızı yeniden çalıştıracak ve yeni değeri döndürecektir.
 
-In other words, `useMemo` caches a calculation result between re-renders until its dependencies change.
+Başka bir deyişle, `useMemo`, bağımlılıkları değişene kadar bir hesaplama sonucunu yeniden render işlemleri arasında önbelleğe alır.
 
-**Let's walk through an example to see when this is useful.**
+**Bunun ne zaman yararlı olduğunu görmek için bir örnek üzerinden gidelim.**
 
-By default, React will re-run the entire body of your component every time that it re-renders. For example, if this `TodoList` updates its state or receives new props from its parent, the `filterTodos` function will re-run:
+Varsayılan olarak, React her yeniden render edildiğinde bileşeninizin tüm gövdesini yeniden çalıştıracaktır. Örneğin, `TodoList` state'ini güncellerse veya üstünden yeni prop'lar alırsa, `filterTodos` fonksiyonu yeniden çalışacaktır:
 
 ```js {2}
 function TodoList({ todos, tab, theme }) {
@@ -99,21 +99,21 @@ function TodoList({ todos, tab, theme }) {
 }
 ```
 
-Usually, this isn't a problem because most calculations are very fast. However, if you're filtering or transforming a large array, or doing some expensive computation, you might want to skip doing it again if data hasn't changed. If both `todos` and `tab` are the same as they were during the last render, wrapping the calculation in `useMemo` like earlier lets you reuse `visibleTodos` you've already calculated before.
+Genelde çoğu hesaplama çok hızlı olduğu için bu bir sorun teşkil etmez. Ancak, büyük bir diziyi filtreliyor veya dönüştürüyorsanız ya da maliyetli bir hesaplama yapıyorsanız, veriler değişmediyse tekrar hesaplamayı atlamak isteyebilirsiniz. Hem `todos` hem de  `tab` son render sırasında olduğu gibi aynıysa, hesaplamayı `useMemo`'ya sarmak, daha önce hesapladığınız `visibleTodos`'u yeniden kullanmanızı sağlar.
 
-This type of caching is called *[memoization.](https://en.wikipedia.org/wiki/Memoization)*
+Bu tür önbelleğe alma işlemine *[memoization](https://en.wikipedia.org/wiki/Memoization)* adı verilir.
 
 <Note>
 
-**You should only rely on `useMemo` as a performance optimization.** If your code doesn't work without it, find the underlying problem and fix it first. Then you may add `useMemo` to improve performance.
+**`useMemo`'ya yalnızca bir performans optimizasyonu olarak güvenmelisiniz.** Kodunuz onsuz çalışmıyorsa, önce altta yatan sorunu bulun ve düzeltin. Daha sonra performansı artırmak için `useMemo` ekleyebilirsiniz.
 
 </Note>
 
 <DeepDive>
 
-#### How to tell if a calculation is expensive? {/*how-to-tell-if-a-calculation-is-expensive*/}
+#### Bir hesaplamanın maliyetli olup olmadığı nasıl anlaşılır? {/*how-to-tell-if-a-calculation-is-expensive*/}
 
-In general, unless you're creating or looping over thousands of objects, it's probably not expensive. If you want to get more confidence, you can add a console log to measure the time spent in a piece of code:
+Genel olarak, binlerce nesne oluşturmadığınız veya üzerinde döngü yapmadığınız sürece, hesaplama muhtemelen maliyetli değildir. Emin olmak istiyorsanız, bir kod parçasında harcanan zamanı ölçmek için bir console log ekleyebilirsiniz:
 
 ```js {1,3}
 console.time('filter array');
@@ -121,59 +121,59 @@ const visibleTodos = filterTodos(todos, tab);
 console.timeEnd('filter array');
 ```
 
-Perform the interaction you're measuring (for example, typing into the input). You will then see logs like `filter array: 0.15ms` in your console. If the overall logged time adds up to a significant amount (say, `1ms` or more), it might make sense to memoize that calculation. As an experiment, you can then wrap the calculation in `useMemo` to verify whether the total logged time has decreased for that interaction or not:
+Ölçtüğünüz etkileşimi gerçekleştirin (örneğin, input'a yazmak). Daha sonra konsolunuzda `filter array: 0.15ms` gibi kayıtlar göreceksiniz. Kaydedilen toplam süre önemli bir miktara ulaşıyorsa (örneğin, `1ms` veya daha fazla), bu hesaplamayı hafızaya almak mantıklı olabilir. Bir deneme olarak, bu etkileşimde toplam kaydedilen sürenin azalıp azalmadığını doğrulamak için hesaplamayı `useMemo` içine sarabilirsiniz:
 
 ```js
 console.time('filter array');
 const visibleTodos = useMemo(() => {
-  return filterTodos(todos, tab); // Skipped if todos and tab haven't changed
+  return filterTodos(todos, tab); // Todos ve tab değişmediyse atlanır
 }, [todos, tab]);
 console.timeEnd('filter array');
 ```
 
-`useMemo` won't make the *first* render faster. It only helps you skip unnecessary work on updates.
+`useMemo` *ilk* render işlemini hızlandırmaz. Sadece güncellemeler üzerindeki gereksiz çalışmaları atlamanıza yardımcı olur.
 
-Keep in mind that your machine is probably faster than your users' so it's a good idea to test the performance with an artificial slowdown. For example, Chrome offers a [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) option for this.
+Makinenizin muhtemelen kullanıcılarınızınkinden daha hızlı olduğunu unutmayın, bu nedenle performansı yapay bir yavaşlatma ile test etmek iyi bir fikirdir. Örneğin, Chrome bunun için bir [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) seçeneği sunar.
 
-Also note that measuring performance in development will not give you the most accurate results. (For example, when [Strict Mode](/reference/react/StrictMode) is on, you will see each component render twice rather than once.) To get the most accurate timings, build your app for production and test it on a device like your users have.
+Ayrıca, geliştirme sırasında performans ölçümünün size en doğru sonuçları vermeyeceğini unutmayın. (Örneğin, [Strict Mod](/reference/react/StrictMode) açık olduğunda, her bileşenin bir yerine iki kez işlendiğini göreceksiniz). En doğru zamanlamaları elde etmek için uygulamanızı canlı ortam için oluşturun ve kullanıcılarınızın sahip olduğu gibi bir cihazda test edin.
 
 </DeepDive>
 
 <DeepDive>
 
-#### Should you add useMemo everywhere? {/*should-you-add-usememo-everywhere*/}
+#### Her yere useMemo'yu  eklemeli misiniz? {/*should-you-add-usememo-everywhere*/}
 
-If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful. 
+Uygulamanız bu site gibiyse ve etkileşimler detaylı değilse (bir sayfayı veya tüm bir bölümü değiştirmek gibi), memoization genellikle gereksizdir. Öte yandan, uygulamanız daha çok bir çizim editörüne benziyorsa ve etkileşimlerin çoğu ayrıntılı ise (şekilleri taşımak gibi), o zaman memoization'ı çok yararlı bulabilirsiniz.
 
-Optimizing with `useMemo`  is only valuable in a few cases:
+`useMemo` ile optimizasyon sadece birkaç durumda değerlidir:
 
-- The calculation you're putting in `useMemo` is noticeably slow, and its dependencies rarely change.
-- You pass it as a prop to a component wrapped in [`memo`.](/reference/react/memo) You want to skip re-rendering if the value hasn't changed. Memoization lets your component re-render only when dependencies aren't the same.
-- The value you're passing is later used as a dependency of some Hook. For example, maybe another `useMemo` calculation value depends on it. Or maybe you are depending on this value from [`useEffect.`](/reference/react/useEffect)
+- `useMemo`'ya koyduğunuz hesaplama fark edilir derecede yavaştır ve bağımlılıkları nadiren değişiyordur.
+- Bunu [`memo`](/reference/react/memo) içine sarılmış bir bileşene prop olarak geçersiniz. Değer değişmediyse yeniden render işlemini atlamak istersiniz. Memoization, bileşeninizin yalnızca bağımlılıklar aynı olmadığında yeniden render'lanmasını sağlar.
+- Geçtiğiniz değer daha sonra bazı Hook'ların bağımlılığı olarak kullanılır. Örneğin, belki başka bir `useMemo` hesaplama değeri bu değere bağlıdır. Ya da bu değere [`useEffect`](/reference/react/useEffect) ile bağlısınızdır.
 
-There is no benefit to wrapping a calculation in `useMemo` in other cases. There is no significant harm to doing that either, so some teams choose to not think about individual cases, and memoize as much as possible. The downside of this approach is that code becomes less readable. Also, not all memoization is effective: a single value that's "always new" is enough to break memoization for an entire component.
+Diğer durumlarda bir hesaplamayı `useMemo` içine sarmanın hiçbir faydası yoktur. Bunu yapmanın önemli bir zararı da yoktur, bu nedenle bazı ekipler her durumu düşünmemeyi ve mümkün olduğunca çok belleğe almayı tercih eder. Bu yaklaşımın dezavantajı, kodun daha az okunabilir hale gelmesidir. Ayrıca, her belleğe alma işlemi etkili değildir: "her zaman yeni" olan tek bir değer, tüm bir bileşen için memoizasyonu kırmak için yeterlidir.
 
-**In practice, you can make a lot of memoization unnecessary by following a few principles:**
+**Pratikte, birkaç ilkeyi izleyerek çok sayıda belleğe alma işlemini gereksiz hale getirebilirsiniz:**
 
-1. When a component visually wraps other components, let it [accept JSX as children.](/learn/passing-props-to-a-component#passing-jsx-as-children) This way, when the wrapper component updates its own state, React knows that its children don't need to re-render.
-1. Prefer local state and don't [lift state up](/learn/sharing-state-between-components) any further than necessary. For example, don't keep transient state like forms and whether an item is hovered at the top of your tree or in a global state library.
-1. Keep your [rendering logic pure.](/learn/keeping-components-pure) If re-rendering a component causes a problem or produces some noticeable visual artifact, it's a bug in your component! Fix the bug instead of adding memoization.
-1. Avoid [unnecessary Effects that update state.](/learn/you-might-not-need-an-effect) Most performance problems in React apps are caused by chains of updates originating from Effects that cause your components to render over and over.
-1. Try to [remove unnecessary dependencies from your Effects.](/learn/removing-effect-dependencies) For example, instead of memoization, it's often simpler to move some object or a function inside an Effect or outside the component.
+1. Bir bileşen diğer bileşenleri görsel olarak sardığında, [JSX'i alt bileşen olarak kabul etmesine izin verin.](/learn/passing-props-to-a-component#passing-jsx-as-children) Bu sayede, kapsayıcı bileşen kendi durumunu güncellediğinde, React alt bileşenlerinin yeniden render edilmesine gerek olmadığını bilir.
+1. Yerel durumu tercih edin ve durumu gereğinden daha [yukarı kaldırma](/learn/sharing-state-between-components)yın. Örneğin, formlar gibi geçici durumları ve bir öğenin üzerine gelindiğinde ağacınızın tepesinde veya global bir durum kütüphanesinde mi olduğunu saklamayın.
+1. [Render mantığı](/learn/keeping-components-pure)nızı saf tutun. Bir bileşenin yeniden render edilmesi bir soruna neden oluyorsa veya göze çarpan bir görsel yapaylık oluşturuyorsa, bileşeninizde bir hata var demektir! Memoizasyon eklemek yerine hatayı düzeltin.
+1. [Durumu güncelleyen gereksiz Efektlerden kaçının.](/learn/you-might-need-an-effect) React uygulamalarındaki performans sorunlarının çoğu, bileşenlerinizin tekrar tekrar render edilmesine neden olan Efektlerden kaynaklanan güncelleme zincirlerinden kaynaklanır.
+1.[Efektlerinizden gereksiz bağımlılıkları kaldırmaya çalışın](/learn/removing-effect-dependencies) Örneğin, memoization yerine, bir nesneyi veya bir işlevi bir Efektin içine veya bileşenin dışına taşımak genellikle daha basittir.
 
-If a specific interaction still feels laggy, [use the React Developer Tools profiler](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) to see which components would benefit the most from memoization, and add memoization where needed. These principles make your components easier to debug and understand, so it's good to follow them in any case. In the long term, we're researching [doing granular memoization automatically](https://www.youtube.com/watch?v=lGEMwh32soc) to solve this once and for all.
+Belirli bir etkileşim hala gecikmeli geliyorsa, [React Developer Tools profilleyicisini kullanın](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) ve hangi bileşenlerin memoizasyondan en çok yararlanacağını görün ve gerektiğinde memoizasyon ekleyin. Bu ilkeler bileşenlerinizin hata ayıklamasını ve anlaşılmasını kolaylaştırır, bu nedenle her durumda bunları takip etmek iyidir. Uzun vadede, bunu kesin olarak çözmek için [otomatik olarak granüler memoization yapmayı](https://www.youtube.com/watch?v=lGEMwh32soc) araştırıyoruz.
 
 </DeepDive>
 
-<Recipes titleText="The difference between useMemo and calculating a value directly" titleId="examples-recalculation">
+<Recipes titleText="useMemo ile bir değeri doğrudan hesaplama arasındaki fark" titleId="examples-recalculation">
 
-#### Skipping recalculation with `useMemo` {/*skipping-recalculation-with-usememo*/}
+#### `useMemo` ile yeniden hesaplamayı atlama {/*skipping-recalculation-with-usememo*/}
 
-In this example, the `filterTodos` implementation is **artificially slowed down** so that you can see what happens when some JavaScript function you're calling during rendering is genuinely slow. Try switching the tabs and toggling the theme.
+Bu örnekte, `filterTodos` uygulaması **yapay olarak yavaşlatılmıştır**, böylece işleme sırasında çağırdığınız bazı JavaScript işlevleri gerçekten yavaş olduğunda ne olduğunu görebilirsiniz. Sekmeleri değiştirmeyi ve temayı değiştirmeyi deneyin.
 
-Switching the tabs feels slow because it forces the slowed down `filterTodos` to re-execute. That's expected because the `tab` has changed, and so the entire calculation *needs* to re-run. (If you're curious why it runs twice, it's explained [here.](#my-calculation-runs-twice-on-every-re-render))
+Sekmeleri değiştirmek yavaş hissettirir çünkü yavaşlatılmış `filterTodos`u yeniden çalıştırmaya zorlar. Bu beklenen bir durumdur çünkü `tab` değişmiştir ve bu nedenle tüm hesaplamanın *yeniden çalıştırılması* gerekir. (Neden iki kez çalıştığını merak ediyorsanız, [burada](#my-calculation-runs-twice-on-every-re-render) açıklanmıştır.)
 
-Toggle the theme. **Thanks to `useMemo`, it's fast despite the artificial slowdown!** The slow `filterTodos` call was skipped because both `todos` and `tab` (which you pass as dependencies to `useMemo`) haven't changed since the last render.
+Temayı değiştir. **Yapay yavaşlamaya rağmen `useMemo` sayesinde hızlıdır.** Yavaş `filterTodos` çağrısı atlandı çünkü hem `todos` hem de `tab` (`useMemo`ya bağımlılık olarak ilettiğiniz değişkenler) son render'dan bu yana değişmedi.
 
 <Sandpack>
 
@@ -263,7 +263,7 @@ export function filterTodos(todos, tab) {
   console.log('[ARTIFICIALLY SLOW] Filtering ' + todos.length + ' todos for "' + tab + '" tab.');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Do nothing for 500 ms to emulate extremely slow code
+    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return todos.filter(todo => {
@@ -299,11 +299,11 @@ label {
 
 <Solution />
 
-#### Always recalculating a value {/*always-recalculating-a-value*/}
+#### Bir değeri her zaman yeniden hesaplama {/*always-recalculating-a-value*/}
 
-In this example, the `filterTodos` implementation is also **artificially slowed down** so that you can see what happens when some JavaScript function you're calling during rendering is genuinely slow. Try switching the tabs and toggling the theme.
+Bu örnekte, `filterTodos` uygulaması da **yapay olarak yavaşlatılmıştır**, böylece işlem sırasında çağırdığınız bazı JavaScript işlevleri gerçekten yavaş olduğunda ne olduğunu görebilirsiniz. Sekmeleri değiştirmeyi ve temayı değiştirmeyi deneyin.
 
-Unlike in the previous example, toggling the theme is also slow now! This is because **there is no `useMemo` call in this version,** so the artificially slowed down `filterTodos` gets called on every re-render. It is called even if only `theme` has changed.
+Önceki örnekten farklı olarak, temayı değiştirmek de artık yavaş! Bunun nedeni **bu sürümde `useMemo` çağrısı olmamasıdır,** bu nedenle yapay olarak yavaşlatılmış `filterTodos` her yeniden oluşturmada çağrılır. Sadece `theme` değişmiş olsa bile çağrılır.
 
 <Sandpack>
 
@@ -389,7 +389,7 @@ export function filterTodos(todos, tab) {
   console.log('[ARTIFICIALLY SLOW] Filtering ' + todos.length + ' todos for "' + tab + '" tab.');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Do nothing for 500 ms to emulate extremely slow code
+    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return todos.filter(todo => {
@@ -423,7 +423,7 @@ label {
 
 </Sandpack>
 
-However, here is the same code **with the artificial slowdown removed.** Does the lack of `useMemo` feel noticeable or not?
+Burada **yapay yavaşlatma kaldırılmış olarak** aynı kodu inceleyebiliriz. `useMemo` eksikliği fark edilir derecede mi, değil mi?
 
 <Sandpack>
 
@@ -538,9 +538,9 @@ label {
 
 </Sandpack>
 
-Quite often, code without memoization works fine. If your interactions are fast enough, you might not need memoization.
+Çoğu zaman, memoizasyon olmadan kod iyi çalışır. Etkileşimleriniz yeterince hızlıysa, memoizasyona ihtiyacınız olmayabilir.
 
-You can try increasing the number of todo items in `utils.js` and see how the behavior changes. This particular calculation wasn't very expensive to begin with, but if the number of todos grows significantly, most of the overhead will be in re-rendering rather than in the filtering. Keep reading below to see how you can optimize re-rendering with `useMemo`.
+`utils.js`deki todo öğelerinin sayısını artırmayı deneyebilir ve davranışın nasıl değiştiğini görebilirsiniz. Bu özel hesaplama başlangıçta çok maliyetli değildi, ancak `todos` sayısı önemli ölçüde artarsa, ek yükün çoğu filtrelemeden ziyade yeniden oluşturmada olacaktır. Yeniden oluşturma işlemini `useMemo` ile nasıl optimize edebileceğinizi görmek için aşağıda okumaya devam edin.
 
 <Solution />
 
@@ -548,9 +548,9 @@ You can try increasing the number of todo items in `utils.js` and see how the be
 
 ---
 
-### Skipping re-rendering of components {/*skipping-re-rendering-of-components*/}
+### Bileşenlerin yeniden oluşturulmasını atlama {/*skipping-re-rendering-of-components*/}
 
-In some cases, `useMemo` can also help you optimize performance of re-rendering child components. To illustrate this, let's say this `TodoList` component passes the `visibleTodos` as a prop to the child `List` component:
+Bazı durumlarda, `useMemo` alt bileşenleri yeniden oluşturma performansını optimize etmenize de yardımcı olabilir. Bunu göstermek için, bu `TodoList` bileşeninin `visibleTodos` öğesini alt bileşen `List` öğesine bir prop olarak aktardığını varsayalım:
 
 ```js {5}
 export default function TodoList({ todos, tab, theme }) {
@@ -563,9 +563,9 @@ export default function TodoList({ todos, tab, theme }) {
 }
 ```
 
-You've noticed that toggling the `theme` prop freezes the app for a moment, but if you remove `<List />` from your JSX, it feels fast. This tells you that it's worth trying to optimize the `List` component.
+`Tema` prop'unu değiştirmenin uygulamayı bir anlığına dondurduğunu fark ettiniz, ancak JSX'inizden `<List />` öğesini kaldırırsanız, hızlı hissedersiniz. Bu size `List` bileşenini optimize etmeyi denemeye değer olduğunu söyler.
 
-**By default, when a component re-renders, React re-renders all of its children recursively.** This is why, when `TodoList` re-renders with a different `theme`, the `List` component *also* re-renders. This is fine for components that don't require much calculation to re-render. But if you've verified that a re-render is slow, you can tell `List` to skip re-rendering when its props are the same as on last render by wrapping it in [`memo`:](/reference/react/memo)
+**Varsayılan olarak, bir bileşen yeniden render edildiğinde, React tüm alt bileşenlerini özyinelemeli olarak yeniden render eder.** Bu nedenle, `TodoList` farklı bir `tema` ile yeniden oluşturulduğunda, `List` bileşeni de *aynı şekilde* yeniden oluşturulur. Bu, yeniden render için fazla hesaplama gerektirmeyen bileşenler için uygundur. Ancak, yeniden render işleminin yavaş olduğunu doğruladıysanız, `List`e, prop'lar son render ile aynı olduğunda [`memo`](/reference/react/memo) içine sararak yeniden oluşturmayı atlamasını söyleyebilirsiniz:
 
 ```js {3,5}
 import { memo } from 'react';
@@ -575,33 +575,33 @@ const List = memo(function List({ items }) {
 });
 ```
 
-**With this change, `List` will skip re-rendering if all of its props are the *same* as on the last render.** This is where caching the calculation becomes important! Imagine that you calculated `visibleTodos` without `useMemo`:
+**Bu değişiklikle `List`, tüm prop'lar son render işlemindeki ile *aynı* ise yeniden render işlemini atlayacaktır.** İşte bu noktada hesaplamayı önbelleğe almak önemli hale geliyor! `visibleTodos`u `useMemo` olmadan hesapladığınızı düşünün:
 
 ```js {2-3,6-7}
 export default function TodoList({ todos, tab, theme }) {
-  // Every time the theme changes, this will be a different array...
+  // Tema her değiştiğinde, bu farklı bir dizi olacak...
   const visibleTodos = filterTodos(todos, tab);
   return (
     <div className={theme}>
-      {/* ... so List's props will never be the same, and it will re-render every time */}
+      {/* ... böylece List'in prop'ları asla aynı olmayacak ve her seferinde yeniden oluşturulacaktır */}
       <List items={visibleTodos} />
     </div>
   );
 }
 ```
 
-**In the above example, the `filterTodos` function always creates a *different* array,** similar to how the `{}` object literal always creates a new object. Normally, this wouldn't be a problem, but it means that `List` props will never be the same, and your [`memo`](/reference/react/memo) optimization won't work. This is where `useMemo` comes in handy:
+Yukarıdaki örnekte, `{}` nesne literali'nin her zaman yeni bir nesne oluşturmasına benzer şekilde, **`filterTodos` fonksiyonu her zaman *farklı* bir dizi oluşturur**. Normalde bu bir sorun teşkil etmez, ancak `List` prop'larının asla aynı olmayacağı ve [`memo`](/reference/react/memo) optimizasyonunuzun çalışmayacağı anlamına gelir. İşte bu noktada `useMemo` kullanışlı hale gelir:
 
 ```js {2-3,5,9-10}
 export default function TodoList({ todos, tab, theme }) {
-  // Tell React to cache your calculation between re-renders...
+  // React'e yeniden oluşturmalar arasında hesaplamanızı önbelleğe almasını söyleyin...
   const visibleTodos = useMemo(
     () => filterTodos(todos, tab),
-    [todos, tab] // ...so as long as these dependencies don't change...
+    [todos, tab] // ...yani bu bağımlılıklar değişmediği sürece...
   );
   return (
     <div className={theme}>
-      {/* ...List will receive the same props and can skip re-rendering */}
+      {/* ...List, aynı prop'ları alacak ve yeniden oluşturmayı atlayabilecektir */}
       <List items={visibleTodos} />
     </div>
   );
@@ -609,13 +609,13 @@ export default function TodoList({ todos, tab, theme }) {
 ```
 
 
-**By wrapping the `visibleTodos` calculation in `useMemo`, you ensure that it has the *same* value between the re-renders** (until dependencies change). You don't *have to* wrap a calculation in `useMemo` unless you do it for some specific reason. In this example, the reason is that you pass it to a component wrapped in [`memo`,](/reference/react/memo) and this lets it skip re-rendering. There are a few other reasons to add `useMemo` which are described further on this page.
+**`visibleTodos` hesaplamasını `useMemo` içine sararak, yeniden render'lar arasında (bağımlılıklar değişene kadar) *aynı* değere sahip olmasını sağlarsınız.** Belirli bir nedenle yapmadığınız sürece bir hesaplamayı `useMemo` içine sarmak *zorunda* değilsiniz. Bu örnekteki nedeni [`memo`,](/reference/react/memo) içine sarılmış bir bileşene aktarmanız ve bunun yeniden oluşturmayı (render'ı) atlamasına izin vermesidir. Bu sayfada `useMemo`'yu kullanmak için birkaç neden daha anlatılmaktadır.
 
 <DeepDive>
 
-#### Memoizing individual JSX nodes {/*memoizing-individual-jsx-nodes*/}
+#### Bireysel JSX node'larını memoize etme {/*memoizing-individual-jsx-nodes*/}
 
-Instead of wrapping `List` in [`memo`](/reference/react/memo), you could wrap the `<List />` JSX node itself in `useMemo`:
+`List`'i [`memo`](/reference/react/memo) içine sarmak yerine, `<List />` JSX node'unu kendisini `useMemo` içine sarabilirsiniz:
 
 ```js {3,6}
 export default function TodoList({ todos, tab, theme }) {
@@ -629,25 +629,25 @@ export default function TodoList({ todos, tab, theme }) {
 }
 ```
 
-The behavior would be the same. If the `visibleTodos` haven't changed, `List` won't be re-rendered.
+Davranış aynı olacaktır. Eğer `visibleTodos` değişmediyse, `List` yeniden oluşturulmayacaktır.
 
-A JSX node like `<List items={visibleTodos} />` is an object like `{ type: List, props: { items: visibleTodos } }`. Creating this object is very cheap, but React doesn't know whether its contents is the same as last time or not. This is why by default, React will re-render the `List` component.
+`<List items={visibleTodos}  />`  gibi bir JSX node'u `{ type: List, props: { items: visibleTodos } }` gibi bir nesnedir. Bu nesneyi oluşturmanın maliyeti çok ucuzdur, ancak React, içeriğin son seferle aynı olup olmadığını bilmez. Bu yüzden React varsayılan olarak `List` bileşenini yeniden oluşturacaktır.
 
-However, if React sees the same exact JSX as during the previous render, it won't try to re-render your component. This is because JSX nodes are [immutable.](https://en.wikipedia.org/wiki/Immutable_object) A JSX node object could not have changed over time, so React knows it's safe to skip a re-render. However, for this to work, the node has to *actually be the same object*, not merely look the same in code. This is what `useMemo` does in this example.
+Ancak, React önceki render sırasında aynı JSX'i görürse, bileşeninizi yeniden render etmeye çalışmaz. Bunun nedeni JSX node'larının [değişmez (immutable)](https://en.wikipedia.org/wiki/Immutable_object) olmasıdır. Bir JSX node nesnesi zaman içinde değişmemiş olabilir, bu nedenle React yeniden oluşturmayı atlamanın güvenli olduğunu bilir. Ancak bunun işe yaraması için node'un yalnızca kodda aynı görünmesi değil, *gerçekte aynı nesne* olması gerekir. Bu örnekte `useMemo`'nun yaptığı şey budur.
 
-Manually wrapping JSX nodes into `useMemo` is not convenient. For example, you can't do this conditionally. This is usually why you would wrap components with [`memo`](/reference/react/memo) instead of wrapping JSX nodes.
+JSX node'larını `useMemo` içine manuel olarak sarmak uygun değildir. Örneğin, bunu koşullu olarak yapamazsınız. Genellikle bu nedenle bileşenleri JSX node'larını sarmak yerine [`memo`](/reference/react/memo) ile sararsınız.
 
 </DeepDive>
 
-<Recipes titleText="The difference between skipping re-renders and always re-rendering" titleId="examples-rerendering">
+<Recipes titleText="Yeniden oluşturmayı atlamak ile her zaman yeniden oluşturmak arasındaki fark" titleId="examples-rerendering">
 
-#### Skipping re-rendering with `useMemo` and `memo` {/*skipping-re-rendering-with-usememo-and-memo*/}
+#### `useMemo` ve `memo` ile yeniden oluşturmayı atlama {/*skipping-re-rendering-with-usememo-and-memo*/}
 
-In this example, the `List` component is **artificially slowed down** so that you can see what happens when a React component you're rendering is genuinely slow. Try switching the tabs and toggling the theme.
+Bu örnekte, `List` bileşeni **yapay olarak yavaşlatılmıştır**, böylece render'ladığınız bir React bileşeni gerçekten yavaş olduğunda ne olduğunu görebilirsiniz. Sekmeleri değiştirmeyi ve temayı değiştirmeyi deneyin.
 
-Switching the tabs feels slow because it forces the slowed down `List` to re-render. That's expected because the `tab` has changed, and so you need to reflect the user's new choice on the screen.
+Sekmeleri değiştirmek yavaş hissettiriyor çünkü yavaşlatılmış `List` bileşinini yeniden oluşturmaya zorluyor. Bu beklenen bir durumdur çünkü `tab` değişmiştir ve bu nedenle kullanıcının yeni seçimini ekrana yansıtmanız gerekir.
 
-Next, try toggling the theme. **Thanks to `useMemo` together with [`memo`](/reference/react/memo), it’s fast despite the artificial slowdown!** The `List` skipped re-rendering because the `visibleItems` array has not changed since the last render. The `visibleItems` array has not changed because both `todos` and `tab` (which you pass as dependencies to `useMemo`) haven't changed since the last render.
+Şimdi, temayı değiştirmeyi deneyin. **`useMemo` ile birlikte [`memo`](/reference/react/memo) sayesinde, yapay yavaşlamaya rağmen hızlıdır!** `List` yeniden render edilmeyi atladı çünkü `visibleItems` dizisi son render işleminden bu yana değişmedi. `useMemo`ya bağımlılık olarak aktardığınız hem `todos` hem de `tab` son render işleminden bu yana değişmediği için `visibleItems` dizisi değişmedi.
 
 <Sandpack>
 
@@ -718,7 +718,7 @@ const List = memo(function List({ items }) {
   console.log('[ARTIFICIALLY SLOW] Rendering <List /> with ' + items.length + ' items');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Do nothing for 500 ms to emulate extremely slow code
+    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return (
@@ -785,11 +785,11 @@ label {
 
 <Solution />
 
-#### Always re-rendering a component {/*always-re-rendering-a-component*/}
+#### Bir bileşeni her zaman yeniden oluşturma {/*always-re-rendering-a-component*/}
 
-In this example, the `List` implementation is also **artificially slowed down** so that you can see what happens when some React component you're rendering is genuinely slow. Try switching the tabs and toggling the theme.
+Bu örnekteki `List` implementasyonu da **yapay olarak yavaşlatılmıştır**, böylece işlediğiniz bazı React bileşenleri gerçekten yavaş olduğunda ne olduğunu görebilirsiniz. Sekmeleri ve temayı değiştirmeyi deneyin.
 
-Unlike in the previous example, toggling the theme is also slow now! This is because **there is no `useMemo` call in this version,** so the `visibleTodos` is always a different array, and the slowed down `List` component can't skip re-rendering.
+Önceki örnekten farklı olarak, temayı değiştirmek de artık yavaş! Bunun nedeni **bu sürümde `useMemo` çağrısı olmamasıdır,** bu nedenle `visibleTodos` her zaman farklı bir dizidir ve yavaşlatılmış `List` bileşeni yeniden oluşturmayı atlayamaz.
 
 <Sandpack>
 
@@ -856,7 +856,7 @@ const List = memo(function List({ items }) {
   console.log('[ARTIFICIALLY SLOW] Rendering <List /> with ' + items.length + ' items');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Do nothing for 500 ms to emulate extremely slow code
+    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return (
@@ -921,7 +921,7 @@ label {
 
 </Sandpack>
 
-However, here is the same code **with the artificial slowdown removed.** Does the lack of `useMemo` feel noticeable or not?
+Ancak, aynı kodu **yapay yavaşlatma kaldırılmış halde** inceleyelim. `useMemo`nun eksikliği fark ediliyor mu, edilmiyor mu?
 
 <Sandpack>
 
@@ -1046,9 +1046,9 @@ label {
 
 </Sandpack>
 
-Quite often, code without memoization works fine. If your interactions are fast enough, you don't need memoization.
+Çoğu zaman, memoization olmadan kod iyi çalışır. Etkileşimleriniz yeterince hızlıysa, memoizasyona ihtiyacınız yoktur.
 
-Keep in mind that you need to run React in production mode, disable [React Developer Tools](/learn/react-developer-tools), and use devices similar to the ones your app's users have in order to get a realistic sense of what's actually slowing down your app.
+Uygulamanızı gerçekte neyin yavaşlattığına dair gerçekçi bir fikir edinmek için React'i üretim (production) modunda çalıştırmanız, [React Developer Tools](/learn/react-developer-tools) özelliğini devre dışı bırakmanız ve uygulamanızın kullanıcılarının sahip olduklarına benzer cihazlar kullanmanız gerektiğini unutmayın.
 
 <Solution />
 
@@ -1056,9 +1056,9 @@ Keep in mind that you need to run React in production mode, disable [React Devel
 
 ---
 
-### Memoizing a dependency of another Hook {/*memoizing-a-dependency-of-another-hook*/}
+### Başka bir Hook'un bağımlılığını memoize etme {/*memoizing-a-dependency-of-another-hook*/}
 
-Suppose you have a calculation that depends on an object created directly in the component body:
+Doğrudan bileşen gövdesinde oluşturulan bir nesneye bağlı olan bir hesaplamanız olduğunu varsayalım:
 
 ```js {2}
 function Dropdown({ allItems, text }) {
@@ -1066,44 +1066,44 @@ function Dropdown({ allItems, text }) {
 
   const visibleItems = useMemo(() => {
     return searchItems(allItems, searchOptions);
-  }, [allItems, searchOptions]); // 🚩 Caution: Dependency on an object created in the component body
+  }, [allItems, searchOptions]); // 🚩 Dikkat: Bileşen gövdesinde oluşturulan bir nesneye bağımlılık
   // ...
 ```
 
-Depending on an object like this defeats the point of memoization. When a component re-renders, all of the code directly inside the component body runs again. **The lines of code creating the `searchOptions` object will also run on every re-render.** Since `searchOptions` is a dependency of your `useMemo` call, and it's different every time, React knows the dependencies are different, and recalculate `searchItems` every time.
+Bu şekilde bir nesneye bağlı olmak, belleğe alma (memoizasyon) işleminin amacını ortadan kaldırır. Bir bileşen yeniden oluşturulduğunda, doğrudan bileşen gövdesinin içindeki tüm kod yeniden çalışır. **`SearchOptions` nesnesini oluşturan kod satırları da her yeniden oluşturmada çalışacaktır.** `searchOptions`, `useMemo` çağrınızın bir bağımlılığı olduğundan ve her seferinde farklı olduğundan, React bağımlılıkların farklı olduğunu bilir ve `searchItems`ı her seferinde yeniden hesaplar.
 
-To fix this, you could memoize the `searchOptions` object *itself* before passing it as a dependency:
+Bunu düzeltmek için, `searchOptions` nesnesini bir bağımlılık olarak geçirmeden önce *kendisini* memoize edebilirsiniz:
 
 ```js {2-4}
 function Dropdown({ allItems, text }) {
   const searchOptions = useMemo(() => {
     return { matchMode: 'whole-word', text };
-  }, [text]); // ✅ Only changes when text changes
+  }, [text]); // ✅ Yalnızca text değiştiğinde değişir
 
   const visibleItems = useMemo(() => {
     return searchItems(allItems, searchOptions);
-  }, [allItems, searchOptions]); // ✅ Only changes when allItems or searchOptions changes
+  }, [allItems, searchOptions]); // ✅ Yalnızca allItems veya searchOptions değiştiğinde değişir
   // ...
 ```
 
-In the example above, if the `text` did not change, the `searchOptions` object also won't change. However, an even better fix is to move the `searchOptions` object declaration *inside* of the `useMemo` calculation function:
+Yukarıdaki örnekte, `text` değişmediyse, `searchOptions` nesnesi de değişmeyecektir. Ancak, daha da iyi bir çözüm `searchOptions` nesne bildirimini `useMemo` hesaplama fonksiyonunun *içine* taşımaktır:
 
 ```js {3}
 function Dropdown({ allItems, text }) {
   const visibleItems = useMemo(() => {
     const searchOptions = { matchMode: 'whole-word', text };
     return searchItems(allItems, searchOptions);
-  }, [allItems, text]); // ✅ Only changes when allItems or text changes
+  }, [allItems, text]); // ✅ Yalnızca allItems veya text değiştiğinde değişir
   // ...
 ```
 
-Now your calculation depends on `text` directly (which is a string and can't "accidentally" become different).
+Şimdi hesaplamanız doğrudan `text`'e bağlıdır (bu bir string'dir ve "yanlışlıkla" farklı hale gelemez).
 
 ---
 
-### Memoizing a function {/*memoizing-a-function*/}
+### Bir fonksiyonu memoize etme {/*memoizing-a-function*/}
 
-Suppose the `Form` component is wrapped in [`memo`.](/reference/react/memo) You want to pass a function to it as a prop:
+`Form` bileşeninin [`memo`](/reference/react/memo) içine sarıldığını varsayalım. Bir fonksiyonu prop olarak iletmek istiyorsunuz:
 
 ```js {2-7}
 export default function ProductPage({ productId, referrer }) {
@@ -1118,15 +1118,15 @@ export default function ProductPage({ productId, referrer }) {
 }
 ```
 
-Just as `{}` creates a different object, function declarations like `function() {}` and expressions like `() => {}` produce a *different* function on every re-render. By itself, creating a new function is not a problem. This is not something to avoid! However, if the `Form` component is memoized, presumably you want to skip re-rendering it when no props have changed. A prop that is *always* different would defeat the point of memoization.
+Nasıl `{}` farklı bir nesne yaratıyorsa, `function() {}` gibi fonksiyon bildirimleri ve `() => {}` gibi ifadeler de her yeniden oluşturmada *farklı* bir fonksiyon üretir. Yeni bir fonksiyon oluşturmak tek başına bir sorun değildir. Bu kaçınılması gereken bir şey değildir! Ancak, `Form` bileşeni memoize edilmişse, muhtemelen hiçbir prop değişmediğinde yeniden oluşturmayı atlamak istersiniz. Her zaman *farklı* olan bir prop, memoizasyonun amacını ortadan kaldıracaktır.
 
-To memoize a function with `useMemo`, your calculation function would have to return another function:
+Bir fonksiyonu `useMemo` ile memoize etmek için, hesaplama fonksiyonunuzun başka bir fonksiyon döndürmesi gerekir:
 
 ```js {2-3,8-9}
 export default function Page({ productId, referrer }) {
   const handleSubmit = useMemo(() => {
     return (orderDetails) => {
-      post('/product/' + productId + '/buy', {
+      post('/product/' + product.id + '/buy', {
         referrer,
         orderDetails
       });
@@ -1137,12 +1137,12 @@ export default function Page({ productId, referrer }) {
 }
 ```
 
-This looks clunky! **Memoizing functions is common enough that React has a built-in Hook specifically for that. Wrap your functions into [`useCallback`](/reference/react/useCallback) instead of `useMemo`** to avoid having to write an extra nested function:
+Bu hantal görünüyor! **Fonksiyonları memoize etmek o kadar yaygındır ki, React özellikle bunun için yerleşik bir Hook'a sahiptir.** Ekstra iç içe fonksiyon yazmak zorunda kalmamak için **fonksiyonlarınızı `useMemo` yerine [`useCallback`](/reference/react/useCallback) içine sarın:**
 
 ```js {2,7}
 export default function Page({ productId, referrer }) {
   const handleSubmit = useCallback((orderDetails) => {
-    post('/product/' + productId + '/buy', {
+    post('/product/' + product.id + '/buy', {
       referrer,
       orderDetails
     });
@@ -1152,88 +1152,88 @@ export default function Page({ productId, referrer }) {
 }
 ```
 
-The two examples above are completely equivalent. The only benefit to `useCallback` is that it lets you avoid writing an extra nested function inside. It doesn't do anything else. [Read more about `useCallback`.](/reference/react/useCallback)
+Yukarıdaki iki örnek tamamen eşdeğerdir. `useCallback`in tek faydası, fazladan bir iç içe fonksiyon yazmaktan kaçınmanızı sağlamasıdır. Başka bir şey yapmaz. [`useCallback`](/reference/react/useCallback) hakkında daha fazla bilgi edinin.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### My calculation runs twice on every re-render {/*my-calculation-runs-twice-on-every-re-render*/}
+### Hesaplamam her yeniden oluşturmada iki kez çalışıyor {/*my-calculation-runs-twice-on-every-re-render*/}
 
-In [Strict Mode](/reference/react/StrictMode), React will call some of your functions twice instead of once:
+[Strict Mod]'da (/reference/react/StrictMode), React bazı fonksiyonlarınızı bir yerine iki kez çağıracaktır:
 
 ```js {2,5,6}
 function TodoList({ todos, tab }) {
-  // This component function will run twice for every render.
+  // Bu bileşen fonksiyonu her render için iki kez çalışacaktır.
 
   const visibleTodos = useMemo(() => {
-    // This calculation will run twice if any of the dependencies change.
+    // Bağımlılıklardan herhangi biri değişirse bu hesaplama iki kez çalışacaktır.
     return filterTodos(todos, tab);
   }, [todos, tab]);
 
   // ...
 ```
 
-This is expected and shouldn't break your code.
+Bu beklenen bir durumdur ve kodunuzu bozmamalıdır.
 
-This **development-only** behavior helps you [keep components pure.](/learn/keeping-components-pure) React uses the result of one of the calls, and ignores the result of the other call. As long as your component and calculation functions are pure, this shouldn't affect your logic. However, if they are accidentally impure, this helps you notice and fix the mistake.
+Bu **sadece geliştirme amaçlı** davranış, [bileşenleri saf tutmanıza](/learn/keeping-components-pure) yardımcı olur. React, çağrılardan birinin sonucunu kullanır ve diğer çağrının sonucunu yok sayar. Bileşeniniz ve hesaplama işlevleriniz saf olduğu sürece, bu durum mantığınızı etkilememelidir. Ancak, saf olmadıkları takdirde, bu durum hatayı fark etmenize ve düzeltmenize yardımcı olur.
 
-For example, this impure calculation function mutates an array you received as a prop:
+Örneğin, bu saf olmayan hesaplama fonksiyonu, prop olarak aldığınız bir diziyi mutasyona uğratır:
 
 ```js {2-3}
   const visibleTodos = useMemo(() => {
-    // 🚩 Mistake: mutating a prop
+    // 🚩 Hata: bir prop'u mutasyona uğratmak
     todos.push({ id: 'last', text: 'Go for a walk!' });
     const filtered = filterTodos(todos, tab);
     return filtered;
   }, [todos, tab]);
 ```
 
-React calls your function twice, so you'd notice the todo is added twice. Your calculation shouldn't change any existing objects, but it's okay to change any *new* objects you created during the calculation. For example, if the `filterTodos` function always returns a *different* array, you can mutate *that* array instead:
+React fonksiyonunuzu iki kez çağırır, böylece todo'nun iki kez eklendiğini fark edersiniz. Hesaplamanız mevcut nesneleri değiştirmemelidir, ancak hesaplama sırasında oluşturduğunuz *yeni* nesneleri değiştirmenizde bir sakınca yoktur. Örneğin, `filterTodos` fonksiyonu her zaman *farklı* bir dizi döndürüyorsa, bunun yerine *döndürülen* diziyi değiştirebilirsiniz:
 
 ```js {3,4}
   const visibleTodos = useMemo(() => {
     const filtered = filterTodos(todos, tab);
-    // ✅ Correct: mutating an object you created during the calculation
+    // ✅ Doğru: hesaplama sırasında oluşturduğunuz bir nesnenin mutasyona uğratılması
     filtered.push({ id: 'last', text: 'Go for a walk!' });
     return filtered;
   }, [todos, tab]);
 ```
 
-Read [keeping components pure](/learn/keeping-components-pure) to learn more about purity.
+Saflık hakkında daha fazla bilgi edinmek için [keeping components pure](/learn/keeping-components-pure) bölümünü okuyun.
 
-Also, check out the guides on [updating objects](/learn/updating-objects-in-state) and [updating arrays](/learn/updating-arrays-in-state) without mutation.
+Ayrıca, mutasyon olmadan [nesneleri güncelleme](/learn/updating-objects-in-state) ve [dizileri güncelleme](/learn/updating-arrays-in-state) kılavuzlarına göz atın.
 
 ---
 
-### My `useMemo` call is supposed to return an object, but returns undefined {/*my-usememo-call-is-supposed-to-return-an-object-but-returns-undefined*/}
+### Benim `useMemo` çağrımın bir nesne döndürmesi gerekiyor, ancak undefined döndürüyor {/*my-usememo-call-is-supposed-to-return-an-object-but-returns-undefined*/}
 
-This code doesn't work:
+Buradaki kod çalışmıyor:
 
 ```js {1-2,5}
-  // 🔴 You can't return an object from an arrow function with () => {
+  // 🔴 () => { ile bir ok fonksiyonundan bir nesne döndüremezsiniz 
   const searchOptions = useMemo(() => {
     matchMode: 'whole-word',
     text: text
   }, [text]);
 ```
 
-In JavaScript, `() => {` starts the arrow function body, so the `{` brace is not a part of your object. This is why it doesn't return an object, and leads to mistakes. You could fix it by adding parentheses like `({` and `})`:
+JavaScript'te, `() => {` ok fonksiyonu gövdesini başlatır, bu nedenle `{` ayracı nesnenizin bir parçası değildir. Bu yüzden bir nesne döndürmez ve hatalara yol açar. Bunu `({` ve `})` gibi parantezler ekleyerek düzeltebilirsiniz:
 
 ```js {1-2,5}
-  // This works, but is easy for someone to break again
+  // Bu işe yarar, ancak birinin tekrar bozması kolaydır
   const searchOptions = useMemo(() => ({
     matchMode: 'whole-word',
     text: text
   }), [text]);
 ```
 
-However, this is still confusing and too easy for someone to break by removing the parentheses.
+Ancak, bu yine de kafa karıştırıcıdır ve birinin parantezleri kaldırarak bozması çok kolaydır.
 
-To avoid this mistake, write a `return` statement explicitly:
+Bu hatadan kaçınmak için, açık bir şekilde `return` deyimi yazın:
 
 ```js {1-3,6-7}
-  // ✅ This works and is explicit
+  // ✅ Bu işe yarar ve açıktır
   const searchOptions = useMemo(() => {
     return {
       matchMode: 'whole-word',
@@ -1244,57 +1244,57 @@ To avoid this mistake, write a `return` statement explicitly:
 
 ---
 
-### Every time my component renders, the calculation in `useMemo` re-runs {/*every-time-my-component-renders-the-calculation-in-usememo-re-runs*/}
+### Bileşenim her render olduğunda, `useMemo` içindeki hesaplama yeniden çalışıyor {/*every-time-my-component-renders-the-calculation-in-usememo-re-runs*/}
 
-Make sure you've specified the dependency array as a second argument!
+Bağımlılık dizisini ikinci bir bağımsız değişken olarak belirttiğinizden emin olun!
 
-If you forget the dependency array, `useMemo` will re-run the calculation every time:
+Bağımlılık dizisini unutursanız, `useMemo` her seferinde hesaplamayı yeniden çalıştıracaktır:
 
 ```js {2-3}
 function TodoList({ todos, tab }) {
-  // 🔴 Recalculates every time: no dependency array
+  // 🔴 Her seferinde yeniden hesaplar: bağımlılık dizisi yok
   const visibleTodos = useMemo(() => filterTodos(todos, tab));
   // ...
 ```
 
-This is the corrected version passing the dependency array as a second argument:
+Bu da, bağımlılık dizisini ikinci bir bağımsız değişken olarak geçiren düzeltilmiş versiyonudur:
 
 ```js {2-3}
 function TodoList({ todos, tab }) {
-  // ✅ Does not recalculate unnecessarily
+  // ✅ Gereksiz yere yeniden hesaplama yapmaz
   const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
   // ...
 ```
 
-If this doesn't help, then the problem is that at least one of your dependencies is different from the previous render. You can debug this problem by manually logging your dependencies to the console:
+Bu işe yaramazsa, sorun bağımlılıklarınızdan en az birinin önceki render işleminden farklı olmasıdır. Bağımlılıklarınızı konsola manuel olarak kaydederek bu sorunu ayıklayabilirsiniz:
 
 ```js
   const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
   console.log([todos, tab]);
 ```
 
-You can then right-click on the arrays from different re-renders in the console and select "Store as a global variable" for both of them. Assuming the first one got saved as `temp1` and the second one got saved as `temp2`, you can then use the browser console to check whether each dependency in both arrays is the same:
+Daha sonra konsolda farklı yeniden oluşturmalardan dizilere sağ tıklayabilir ve her ikisi için de "Genel değişken olarak sakla"yı seçebilirsiniz. İlkinin `temp1` ve ikincisinin `temp2` olarak kaydedildiğini varsayarsak, her iki dizideki her bir bağımlılığın aynı olup olmadığını kontrol etmek için tarayıcı konsolunu kullanabilirsiniz:
 
 ```js
-Object.is(temp1[0], temp2[0]); // Is the first dependency the same between the arrays?
-Object.is(temp1[1], temp2[1]); // Is the second dependency the same between the arrays?
-Object.is(temp1[2], temp2[2]); // ... and so on for every dependency ...
+Object.is(temp1[0], temp2[0]); // İlk bağımlılık. diziler arasında aynı mı?
+Object.is(temp1[1], temp2[1]); // İkinci bağımlılık, diziler arasında aynı mı?
+Object.is(temp1[2], temp2[2]); // ... ve her bağımlılık için böyle devam eder ...
 ```
 
-When you find which dependency breaks memoization, either find a way to remove it, or [memoize it as well.](#memoizing-a-dependency-of-another-hook)
+Hangi bağımlılığın memoizasyonu bozduğunu bulduğunuzda, ya onu kaldırmanın bir yolunu bulun ya da [onu da memoize edin.](#memoizing-a-dependency-of-another-hook)
 
 ---
 
-### I need to call `useMemo` for each list item in a loop, but it's not allowed {/*i-need-to-call-usememo-for-each-list-item-in-a-loop-but-its-not-allowed*/}
+### Bir döngü içinde her liste öğesi için `useMemo` çağırmam gerekiyor, ancak buna izin verilmiyor {/*i-need-to-call-usememo-for-each-list-item-in-a-loop-but-its-not-allowed*/}
 
-Suppose the `Chart` component is wrapped in [`memo`](/reference/react/memo). You want to skip re-rendering every `Chart` in the list when the `ReportList` component re-renders. However, you can't call `useMemo` in a loop:
+Diyelim ki `Chart` bileşeni [`memo`](/reference/react/memo) içine sarılmış olsun. `ReportList` bileşeni yeniden oluşturulduğunda listedeki her `Chart`'ın yeniden oluşturulmasını atlamak istiyorsunuz. Ancak, `useMemo` öğesini bir döngü içinde çağıramazsınız:
 
 ```js {5-11}
 function ReportList({ items }) {
   return (
     <article>
       {items.map(item => {
-        // 🔴 You can't call useMemo in a loop like this:
+        // 🔴 useMemo'yu bu şekilde bir döngü içinde çağıramazsınız:
         const data = useMemo(() => calculateReport(item), [item]);
         return (
           <figure key={item.id}>
@@ -1307,7 +1307,7 @@ function ReportList({ items }) {
 }
 ```
 
-Instead, extract a component for each item and memoize data for individual items:
+Bunun yerine, her bir öğe için bir bileşen çıkarın ve tek tek öğeler için verileri not edin:
 
 ```js {5,12-18}
 function ReportList({ items }) {
@@ -1321,7 +1321,7 @@ function ReportList({ items }) {
 }
 
 function Report({ item }) {
-  // ✅ Call useMemo at the top level:
+  // ✅ En üst seviyede useMemo'yu çağırın:
   const data = useMemo(() => calculateReport(item), [item]);
   return (
     <figure>
@@ -1331,7 +1331,7 @@ function Report({ item }) {
 }
 ```
 
-Alternatively, you could remove `useMemo` and instead wrap `Report` itself in [`memo`.](/reference/react/memo) If the `item` prop does not change, `Report` will skip re-rendering, so `Chart` will skip re-rendering too:
+Alternatif olarak, `useMemo` seçeneğini kaldırabilir ve bunun yerine `Report` seçeneğinin kendisini [`memo`](/reference/react/memo) ile sarabilirsiniz. Eğer `item` prop'u değişmezse, `Report` yeniden oluşturmayı atlayacaktır, dolayısıyla `Chart` da yeniden oluşturmayı atlayacaktır:
 
 ```js {5,6,12}
 function ReportList({ items }) {
