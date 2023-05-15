@@ -4,7 +4,7 @@ title: useTransition
 
 <Intro>
 
-`useTransition` is a React Hook that lets you update the state without blocking the UI.
+`useTransition`, kullanıcı arayüzü (UI) işlemlerini engellemeden state güncellemelerini gerçekleştirebilmenizi sağlayan bir React Hook'tur.
 
 ```js
 const [isPending, startTransition] = useTransition()
@@ -16,11 +16,11 @@ const [isPending, startTransition] = useTransition()
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `useTransition()` {/*usetransition*/}
 
-Call `useTransition` at the top level of your component to mark some state updates as transitions.
+Bazı state güncellemelerini transition (ertelenen güncelleme) olarak işaretlemek için, bileşeninizin en üst seviyesinde `useTransition`'ı çağırın.
 
 ```js
 import { useTransition } from 'react';
@@ -31,24 +31,27 @@ function TabContainer() {
 }
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-`useTransition` does not take any parameters.
+`useTransition` parametre almaz.
 
-#### Returns {/*returns*/}
+#### Dönen değerler {/*returns*/}
 
-`useTransition` returns an array with exactly two items:
+`useTransition`, tam olarak iki elemanlı dizi döndürür:
 
-1. The `isPending` flag that tells you whether there is a pending transition.
-2. The [`startTransition` function](#starttransition) that lets you mark a state update as a transition.
+1. Transition işleminin beklenip beklenmediğini söyleyen `isPending` belirteci.
+2. State güncellemesini transition olarak işaretlemenizi sağlayan [`startTransition` fonksiyonu.](#starttransition)
+
 
 ---
 
-### `startTransition` function {/*starttransition*/}
+### `startTransition` fonksiyonu {/*starttransition*/}
 
-The `startTransition` function returned by `useTransition` lets you mark a state update as a transition.
+`useTransition` tarafından döndürülen `startTransition` fonksiyonu, bir state güncellemesini transition (ertelenen güncelleme) olarak işaretlemenize olanak tanır.
+
+
 
 ```js {6,8}
 function TabContainer() {
@@ -64,35 +67,36 @@ function TabContainer() {
 }
 ```
 
-#### Parameters {/*starttransition-parameters*/}
+#### Parametreler {/*starttransition-parameters*/}
 
-* `scope`: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no parameters and marks all state updates scheduled synchronously during the `scope` function call as transitions. They will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](#preventing-unwanted-loading-indicators)
+* `scope`: Bir veya birden fazla set fonksiyonu kullanarak bazı state’leri güncelleyen bir fonksiyondur. React, scope fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın scope‘u hemen çalıştırır. Bu güncellemeler engelleme yapmaz (non-blocking) ve gereksiz yükleme animasyonları göstermez.
 
-#### Returns {/*starttransition-returns*/}
+#### Dönen değerler {/*starttransition-returns*/}
 
-`startTransition` does not return anything.
+`startTransition` herhangi bir şey geri döndürmez.
 
-#### Caveats {/*starttransition-caveats*/}
+#### Uyarılar {/*starttransition-caveats*/}
 
-* `useTransition` is a Hook, so it can only be called inside components or custom Hooks. If you need to start a transition somewhere else (for example, from a data library), call the standalone [`startTransition`](/reference/react/startTransition) instead.
+* `useTransition` bir Hook olduğu için yalnızca bileşenlerin içinde veya özel Hook'ların içinde çağrılabilir. Eğer bir transition işlemini başka bir yerden başlatmanız gerekiyorsa (örneğin, bir veri kütüphanesinden), bunun yerine bağımsız [`startTransition`](/reference/react/startTransition)'ı çağırın.
 
-* You can wrap an update into a transition only if you have access to the `set` function of that state. If you want to start a transition in response to some prop or a custom Hook value, try [`useDeferredValue`](/reference/react/useDeferredValue) instead.
+* Bir güncellemeyi transition olarak kullanmak için, ilgili state’in `set` fonksiyonuna erişebilmeniz gerekiyor. Eğer bir prop veya özel bir Hook dönüş değerine yanıt olarak transition başlatmak isterseniz, bunun yerine [`useDeferredValue`](/reference/react/useDeferredValue) özelliğini kullanmayı deneyebilirsiniz.
 
-* The function you pass to `startTransition` must be synchronous. React immediately executes this function, marking all state updates that happen while it executes as transitions. If you try to perform more state updates later (for example, in a timeout), they won't be marked as transitions.
 
-* A state update marked as a transition will be interrupted by other state updates. For example, if you update a chart component inside a transition, but then start typing into an input while the chart is in the middle of a re-render, React will restart the rendering work on the chart component after handling the input update.
+* `startTransition`‘a ilettiğiniz fonksiyon, eşzamanlı olarak çalışabilecek bir fonksiyon olmalıdır. React, bu fonksiyonu hemen çalıştırır ve çalışırken gerçekleşen tüm state güncellemelerini transition olarak işaretler. Sonrasında daha fazla state güncellemesi yapmaya çalışırsanız (örneğin, bir zaman aşımında), bunlar transition olarak işaretlenmezler.
 
-* Transition updates can't be used to control text inputs.
+* Bir state güncelleme işlemi transition olarak işaretlendiğinde, diğer güncelleme işlemleri bu işlemi kesintiye uğratabilir. Örneğin, bir grafik bileşenini güncelleyen transition işlemi sırasında, grafik bileşeni tekrar render işlemi devam ederken bir giriş alanına yazmaya başlarsanız, React, giriş alanındaki güncellemeyi işledikten sonra tekrar render işlemini başlatır.
 
-* If there are multiple ongoing transitions, React currently batches them together. This is a limitation that will likely be removed in a future release.
+* Transition güncellemeleri, metin girişlerini kontrol etmek için kullanılamaz.
+
+* Eğer birden fazla transition işlemi devam ediyorsa, React şu an için bu güncellemeleri birleştirir. Ancak bu durum, ileride kaldırılması beklenen bir kısıtlamadır.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Marking a state update as a non-blocking transition {/*marking-a-state-update-as-a-non-blocking-transition*/}
+### Bir state güncellemesini, gecikmeye neden olmayan transition olarak işaretlemek. {/*marking-a-state-update-as-a-non-blocking-transition*/}
 
-Call `useTransition` at the top level of your component to mark state updates as non-blocking *transitions*.
+State güncellemelerini *transition* olarak işaretlemek için, bileşeninizin en üst seviyesinde `useTransition`‘ı çağırın.
 
 ```js [[1, 4, "isPending"], [2, 4, "startTransition"]]
 import { useState, useTransition } from 'react';
@@ -103,12 +107,13 @@ function TabContainer() {
 }
 ```
 
-`useTransition` returns an array with exactly two items:
+`useTransition`, tam olarak iki elemanlı dizi döndürür:
 
-1. The <CodeStep step={1}>`isPending` flag</CodeStep> that tells you whether there is a pending transition.
-2. The <CodeStep step={2}>`startTransition` function</CodeStep> that lets you mark a state update as a transition.
+1. Transition işleminin beklenip beklenmediğini söyleyen <CodeStep step={1}>`isPending` belirteci.</CodeStep> 
+2. State güncellemesini transition olarak işaretlemenizi sağlayan <CodeStep step={2}>`startTransition` fonksiyonu.</CodeStep>
 
-You can then mark a state update as a transition like this:
+Sonra state güncellemesini bu şekilde transition olarak işaretleyebilirsiniz:
+
 
 ```js {6,8}
 function TabContainer() {
@@ -124,17 +129,18 @@ function TabContainer() {
 }
 ```
 
-Transitions let you keep the user interface updates responsive even on slow devices.
+Transition’lar, kullanıcı arayüzü güncellemelerini yavaş cihazlarda bile hızlı ve duyarlı tutmanıza olanak tanır.
 
-With a transition, your UI stays responsive in the middle of a re-render. For example, if the user clicks a tab but then change their mind and click another tab, they can do that without waiting for the first re-render to finish.
+Transition’lar ile, kullanıcı arayüzü yeniden render sırasında bile duyarlı kalır. Örneğin, kullanıcı bir sekmeye tıklar, ancak sonra fikrini değiştirir ve başka bir sekmeye tıklarsa, bunu birinci tekrar render işleminin tamamlanmasını beklemeden yapabilir.
 
-<Recipes titleText="The difference between useTransition and regular state updates" titleId="examples">
+<Recipes titleText="useTransition ve standart state güncellemeleri arasındaki fark" titleId="examples">
 
-#### Updating the current tab in a transition {/*updating-the-current-tab-in-a-transition*/}
+#### Transition ile aktif sekmeyi güncelleme {/*updating-the-current-tab-in-a-transition*/}
 
-In this example, the "Posts" tab is **artificially slowed down** so that it takes at least a second to render.
+Bu örnekte, "Posts" sekmesi **bilinçli olarak yavaşlatılmıştır**, böylece render işleminin tamamlanması en az bir saniye sürecektir.
 
-Click "Posts" and then immediately click "Contact". Notice that this interrupts the slow render of "Posts". The "Contact" tab shows immediately. Because this state update is marked as a transition, a slow re-render did not freeze the user interface.
+
+"Posts" sekmesine tıkladıktan sonra hemen "Contact" sekmesine tıklarsanız, yavaş olan "Posts" sekmesinin render işleminin durduğunu fark edeceksiniz. "Contact" sekmesi hemen gösterilir. State güncellemesi transition olarak işaretlendiği için, yavaş bir yeniden render işlemi kullanıcı arayüzünü dondurmadı.
 
 <Sandpack>
 
@@ -214,7 +220,7 @@ export default function AboutTab() {
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
-  // Log once. The actual slowdown is inside SlowPost.
+  // Bir kez log kaydı yapın. Gerçek yavaşlama SlowPost içerisindedir.
   console.log('[ARTIFICIALLY SLOW] Rendering 500 <SlowPost />');
 
   let items = [];
@@ -231,7 +237,7 @@ const PostsTab = memo(function PostsTab() {
 function SlowPost({ index }) {
   let startTime = performance.now();
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+    // Her bir öğe için 1 ms süresince hiçbir işlem yapmaz, bu da son derece yavaş bir kodu simüle eder.
   }
 
   return (
@@ -269,11 +275,11 @@ b { display: inline-block; margin-right: 10px; }
 
 <Solution />
 
-#### Updating the current tab without a transition {/*updating-the-current-tab-without-a-transition*/}
+#### Transition kullanmadan aktif sekmeyi güncelleme {/*updating-the-current-tab-without-a-transition*/}
 
-In this example, the "Posts" tab is also **artificially slowed down** so that it takes at least a second to render. Unlike in the previous example, this state update is **not a transition.**
+Bu örnekte de, "Posts" sekmesi **bilinçli olarak yavaşlatılmıştır**, böylece render işleminin tamamlanması en az bir saniye sürecektir. Önceki örnekten farklı olarak, state güncellemesi transition değil. 
 
-Click "Posts" and then immediately click "Contact". Notice that the app freezes while rendering the slowed down tab, and the UI becomes unresponsive. This state update is not a transition, so a slow re-render freezed the user interface.
+"Posts" sekmesine tıkladıktan sonra hemen "Contact" sekmesine tıklarsanız, uygulamanın yavaşlatılmış sekmeyi render ederken donduğunu ve kullanıcı arayüzünün (UI) yanıt veremez hale geldiğini fark edersiniz. State güncellemesi transition olmadığı için, yavaş bir yeniden render işlemi kullanıcı arayüzünü dondurdu.
 
 <Sandpack>
 
@@ -350,7 +356,7 @@ export default function AboutTab() {
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
-  // Log once. The actual slowdown is inside SlowPost.
+  // Bir kez log kaydı yapın. Gerçek yavaşlama SlowPost içerisindedir.
   console.log('[ARTIFICIALLY SLOW] Rendering 500 <SlowPost />');
 
   let items = [];
@@ -367,7 +373,7 @@ const PostsTab = memo(function PostsTab() {
 function SlowPost({ index }) {
   let startTime = performance.now();
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+    // Her bir öğe için 1 ms süresince hiçbir işlem yapmaz, bu da son derece yavaş bir kodu simüle eder.
   }
 
   return (
@@ -409,9 +415,9 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Updating the parent component in a transition {/*updating-the-parent-component-in-a-transition*/}
+### Transition kullanarak, üst bileşenin güncellenmesi. {/*updating-the-parent-component-in-a-transition*/}
 
-You can update a parent component's state from the `useTransition` call, too. For example, this `TabButton` component wraps its `onClick` logic in a transition:
+`useTransition` çağrısı ile birlikte, bir üst bileşenin state'ini de güncelleyebilirsiniz. Örneğin, `TabButton` bileşeni, `onClick` işlemini transition içine alır:
 
 ```js {8-10}
 export default function TabButton({ children, isActive, onClick }) {
@@ -431,7 +437,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-Because the parent component updates its state inside the `onClick` event handler, that state update gets marked as a transition. This is why, like in the earlier example, you can click on "Posts" and then immediately click "Contact". Updating the selected tab is marked as a transition, so it does not block user interactions.
+Üst bileşen, `onClick` olay işleyicisi (event handler) içinde state'i güncellediği için, state güncellemesi transition olarak işaretlenir. Bu sayede, daha önceki örnekte olduğu gibi, "Posts" sekmesine tıklayabilir ve hemen ardından "Contact"a tıklayabilirsiniz. Seçili sekmenin güncellenmesi transition olarak işaretlendiğinden kullanıcı etkileşimleri engellenmez.
 
 <Sandpack>
 
@@ -505,7 +511,7 @@ export default function AboutTab() {
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
-  // Log once. The actual slowdown is inside SlowPost.
+  // Bir kez log kaydı yapın. Gerçek yavaşlama SlowPost içerisindedir.
   console.log('[ARTIFICIALLY SLOW] Rendering 500 <SlowPost />');
 
   let items = [];
@@ -522,7 +528,7 @@ const PostsTab = memo(function PostsTab() {
 function SlowPost({ index }) {
   let startTime = performance.now();
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+    // Her bir öğe için 1 ms süresince hiçbir işlem yapmaz, bu da son derece yavaş bir kodu simüle eder.
   }
 
   return (
@@ -560,9 +566,9 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Displaying a pending visual state during the transition {/*displaying-a-pending-visual-state-during-the-transition*/}
+### Transition sırasında beklenen görsel state'in gösterimi {/*displaying-a-pending-visual-state-during-the-transition*/}
 
-You can use the `isPending` boolean value returned by `useTransition` to indicate to the user that a transition is in progress. For example, the tab button can have a special "pending" visual state:
+`useTransition` tarafından döndürülen `isPending` boolean değerini kullanarak, bir transition işleminin hala devam ettiğini kullanıcıya gösterebilirsiniz. Örneğin, sekme düğmesi özel bir "pending" (beklemede) görsel state'ine sahip olabilir:
 
 ```js {4-6}
 function TabButton({ children, isActive, onClick }) {
@@ -574,7 +580,7 @@ function TabButton({ children, isActive, onClick }) {
   // ...
 ```
 
-Notice how clicking "Posts" now feels more responsive because the tab button itself updates right away:
+"Posts"a tıkladığınızda, sekme düğmesinin anında güncellenmesi sebebiyle daha hızlı bir yanıt verdiğini göreceksiniz:
 
 <Sandpack>
 
@@ -651,7 +657,7 @@ export default function AboutTab() {
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
-  // Log once. The actual slowdown is inside SlowPost.
+  // Bir kez log kaydı yapın. Gerçek yavaşlama SlowPost içerisindedir.
   console.log('[ARTIFICIALLY SLOW] Rendering 500 <SlowPost />');
 
   let items = [];
@@ -668,7 +674,7 @@ const PostsTab = memo(function PostsTab() {
 function SlowPost({ index }) {
   let startTime = performance.now();
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+    // Her bir öğe için 1 ms süresince hiçbir işlem yapmaz, bu da son derece yavaş bir kodu simüle eder.
   }
 
   return (
@@ -707,9 +713,9 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Preventing unwanted loading indicators {/*preventing-unwanted-loading-indicators*/}
+### İstenmeyen yükleme göstergelerinin engellenmesi {/*preventing-unwanted-loading-indicators*/}
 
-In this example, the `PostsTab` component fetches some data using a [Suspense-enabled](/reference/react/Suspense) data source. When you click the "Posts" tab, the `PostsTab` component *suspends*, causing the closest loading fallback to appear:
+Bu örnekte, `PostsTab` bileşeni, [Suspense özelliği etkinleştirilmiş](/reference/react/Suspense) bir veri kaynağını kullanarak bazı verileri getirir. "Posts" sekmesine tıkladığınızda, `PostsTab` bileşeni *askıya alınır* (suspends) ve en yakın yükleme (loading) yedeklemesinin görünmesine neden olur.
 
 <Sandpack>
 
@@ -893,9 +899,9 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-Hiding the entire tab container to show a loading indicator leads to a jarring user experience. If you add `useTransition` to `TabButton`, you can instead indicate display the pending state in the tab button instead.
+Tüm sekme içeriğini gizlemek ve bir yüklenme göstergesi göstermek, kullanıcı deneyiminde rahatsız edici bir etkiye neden olabilir. `TabButton`'a `useTransition` eklerseniz, bunun yerine bekleyen state'i sekme düğmesinde gösterebilirsiniz.
 
-Notice that clicking "Posts" no longer replaces the entire tab container with a spinner:
+Artık "Posts"a tıklamanın tüm sekme konteynırını bir döndürücüyle (spinner) değiştirmediğini fark edeceksiniz:
 
 <Sandpack>
 
@@ -1087,19 +1093,19 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-[Read more about using transitions with Suspense.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
+[Suspense ile transition kullanımı hakkında daha fazla bilgi edinin.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
 
 <Note>
 
-Transitions will only "wait" long enough to avoid hiding *already revealed* content (like the tab container). If the Posts tab had a [nested `<Suspense>` boundary,](/reference/react/Suspense#revealing-nested-content-as-it-loads) the transition would not "wait" for it.
+Transition'lar, *zaten görünen* içeriği (örneğin sekme kutusu gibi) gizlememek için yeterli süre boyunca "bekler". Eğer "Posts" sekmesinde [iç içe geçmiş `<Suspense>` sınırlaması](/reference/react/Suspense#revealing-nested-content-as-it-loads) bulunuyorsa, transition onun için "bekleme" yapmaz.
 
 </Note>
 
 ---
 
-### Building a Suspense-enabled router {/*building-a-suspense-enabled-router*/}
+### Suspense özelliği etkinleştirilmiş yönlendirici oluşturma {/*building-a-suspense-enabled-router*/}
 
-If you're building a React framework or a router, we recommend marking page navigations as transitions.
+Eğer bir React çatısı (framework) veya yönlendirici oluşturuyorsanız, sayfa gezinmelerini transition'lar olarak işaretlemenizi öneririz.
 
 ```js {3,6,8}
 function Router() {
@@ -1114,12 +1120,14 @@ function Router() {
   // ...
 ```
 
-This is recommended for two reasons:
+Bu, iki nedenden dolayı önerilir:
 
-- [Transitions are interruptible,](#marking-a-state-update-as-a-non-blocking-transition) which lets the user click away without waiting for the re-render to complete.
-- [Transitions prevent unwanted loading indicators,](#preventing-unwanted-loading-indicators) which lets the user avoid jarring jumps on navigation.
+- [Transition'lar kesilebilir](#marking-a-state-update-as-a-non-blocking-transition) olduğundan, kullanıcı yeniden render işleminin tamamlanmasını beklemeden tıklamayı bırakabilir.
 
-Here is a tiny simplified router example using transitions for navigations.
+- [Transition'lar istenmeyen yükleme göstergelerini engeller,](#preventing-unwanted-loading-indicators) bu da kullanıcının gezinme sırasında rahatsız edici sıçramalardan kaçınmasını sağlar.
+
+İşte, gezinmeler için transitionlar kullanarak yapılmış küçük bir basitleştirilmiş yönlendirici örneği.
+
 
 <Sandpack>
 
@@ -1495,23 +1503,23 @@ main {
 
 <Note>
 
-[Suspense-enabled](/reference/react/Suspense) routers are expected to wrap the navigation updates into transitions by default.
+[Suspense özelliği etkinleştirilmiş](/reference/react/Suspense) yönlendiricilerin, varsayılan olarak gezinme güncellemelerini transitionlara dahil etmeleri beklenir.
 
 </Note>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun Giderme {/*troubleshooting*/}
 
-### Updating an input in a transition doesn't work {/*updating-an-input-in-a-transition-doesnt-work*/}
+### Transition içinde bir input (giriş) alanını güncelleme işlemi çalışmaz {/*updating-an-input-in-a-transition-doesnt-work*/}
 
-You can't use a transition for a state variable that controls an input:
+Bir input alanını kontrol eden state değişkeni için transition kullanamazsınız:
 
 ```js {4,10}
 const [text, setText] = useState('');
 // ...
 function handleChange(e) {
-  // ❌ Can't use transitions for controlled input state
+  // ❌ Kontrollü input state'i için transitionlar kullanılamaz
   startTransition(() => {
     setText(e.target.value);
   });
@@ -1520,49 +1528,50 @@ function handleChange(e) {
 return <input value={text} onChange={handleChange} />;
 ```
 
-This is because transitions are non-blocking, but updating an input in response to the change event should happen synchronously. If you want to run a transition in response to typing, you have two options:
+Bunun nedeni, transition işlemlerinin bloklamayan bir yapıda olmalarıdır, ancak bir değişiklik olayına yanıt olarak input alanını güncellemek eşzamanlı olarak gerçekleşmelidir. Yazma işlemine yanıt olarak transition çalıştırmak isterseniz, iki seçeneğiniz vardır:
 
-1. You can declare two separate state variables: one for the input state (which always updates synchronously), and one that you will update in a transition. This lets you control the input using the synchronous state, and pass the transition state variable (which will "lag behind" the input) to the rest of your rendering logic.
-2. Alternatively, you can have one state variable, and add [`useDeferredValue`](/reference/react/useDeferredValue) which will "lag behind" the real value. It will trigger non-blocking re-renders to "catch up" with the new value automatically.
+1. İki ayrı state değişkeni tanımlayabilirsiniz: biri input state'i için (her zaman eşzamanlı olarak güncellenir), diğeri de bir transition güncelleyeceğiniz değişken. Bu şekilde, girişi eşzamanlı state kullanarak kontrol etmenizi ve transition state değişkenini (girişin "gerisinde kalacak" olan) render işleminize aktarmanızı sağlar.
+
+2. Alternatif olarak, bir state değişkeniniz olabilir ve gerçek değerin "gerisinde kalacak" olan [`useDeferredValue`](/reference/react/useDeferredValue)  ekleyebilirsiniz. Bu, yeni değeri otomatik olarak "yakalamak" için bloklamayan yeniden render işlemini tetikler.
 
 ---
 
-### React doesn't treat my state update as a transition {/*react-doesnt-treat-my-state-update-as-a-transition*/}
+### React, state güncellememi bir transition olarak işlemiyor {/*react-doesnt-treat-my-state-update-as-a-transition*/}
 
-When you wrap a state update in a transition, make sure that it happens *during* the `startTransition` call:
+State güncellemesini bir transition içine aldığınızda, bunun `startTransition` çağrısı *esnasında* gerçekleştiğinden emin olun:
 
 ```js
 startTransition(() => {
-  // ✅ Setting state *during* startTransition call
+  // ✅ State'in startTransition çağrısı *esnasında* ayarlanması
   setPage('/about');
 });
 ```
 
-The function you pass to `startTransition` must be synchronous.
+`startTransition`'a ilettiğiniz fonksiyon senkron olmalıdır.
 
-You can't mark an update as a transition like this:
+Bir güncellemeyi bu şekilde transition olarak işaretleyemezsiniz:
 
 ```js
 startTransition(() => {
-  // ❌ Setting state *after* startTransition call
+  // ❌ startTransition çağrısından *sonra* state'in ayarlanması
   setTimeout(() => {
     setPage('/about');
   }, 1000);
 });
 ```
 
-Instead, you could do this:
+Onun yerine, bunu yapabilirsiniz:
 
 ```js
 setTimeout(() => {
   startTransition(() => {
-    // ✅ Setting state *during* startTransition call
+    // ✅ startTransition çağrısı *esnasında* state'in ayarlanması
     setPage('/about');
   });
 }, 1000);
 ```
 
-Similarly, you can't mark an update as a transition like this:
+Benzer şekilde, bu şekilde bir güncellemeyi transition olarak işaretleyemezsiniz:
 
 ```js
 startTransition(async () => {
@@ -1572,27 +1581,28 @@ startTransition(async () => {
 });
 ```
 
-However, this works instead:
+Ancak, aşağıdaki şekilde işe yarar:
 
 ```js
 await someAsyncFunction();
 startTransition(() => {
-  // ✅ Setting state *during* startTransition call
+  // ✅ startTransition çağrısı *esnasında* state'in ayarlanması
   setPage('/about');
 });
 ```
 
 ---
 
-### I want to call `useTransition` from outside a component {/*i-want-to-call-usetransition-from-outside-a-component*/}
+### Bileşenin dışından `useTransition`'u çağırmak istiyorum {/*i-want-to-call-usetransition-from-outside-a-component*/}
 
-You can't call `useTransition` outside a component because it's a Hook. In this case, use the standalone [`startTransition`](/reference/react/startTransition) method instead. It works the same way, but it doesn't provide the `isPending` indicator.
+`useTransition`, bir Hook olduğu için bileşenin dışından çağrılamaz. Bu durumlarda, [`startTransition`](/reference/react/startTransition) adlı bağımsız bir metod kullanabilirsiniz. Bu yöntem aynı şekilde çalışır, ancak `isPending` belirteçini sağlamaz.
+
 
 ---
 
-### The function I pass to `startTransition` executes immediately {/*the-function-i-pass-to-starttransition-executes-immediately*/}
+### `startTransition`'a ilettiğim fonksiyon hemen çalışıyor {/*the-function-i-pass-to-starttransition-executes-immediately*/}
 
-If you run this code, it will print 1, 2, 3:
+Bu kodu çalıştırırsanız, 1, 2, 3 yazdırır:
 
 ```js {1,3,6}
 console.log(1);
@@ -1603,10 +1613,10 @@ startTransition(() => {
 console.log(3);
 ```
 
-**It is expected to print 1, 2, 3.** The function you pass to `startTransition` does not get delayed. Unlike with the browser `setTimeout`, it does not run the callback later. React executes your function immediately, but any state updates scheduled *while it is running* are marked as transitions. You can imagine that it works like this:
+**1, 2, 3 yazdırması beklenir.** `startTransition`'a ilettiğiniz fonksiyon gecikmez. Tarayıcının `setTimeout` metodu aksine, callback'i daha sonra çalıştırmaz. React, fonksiyonunuzu hemen çalıştırır, ancak *çalışırken* planlanan herhangi bir state güncellemesi transition olarak işaretlenir. Bunu nasıl çalıştığını aşağıdaki gibi düşünebilirsiniz:
 
 ```js
-// A simplified version of how React works
+// React'in nasıl çalıştığına dair basitleştirilmiş bir versiyon
 
 let isInsideTransition = false;
 
@@ -1618,9 +1628,9 @@ function startTransition(scope) {
 
 function setState() {
   if (isInsideTransition) {
-    // ... schedule a transition state update ...
+    // ... bir transition state güncellemesi planla ...
   } else {
-    // ... schedule an urgent state update ...
+    // ... acil bir state güncellemesi planla ...
   }
 }
 ```
