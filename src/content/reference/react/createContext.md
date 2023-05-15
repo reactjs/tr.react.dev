@@ -168,7 +168,7 @@ import { createContext } from 'react';
 
 export const ThemeContext = createContext('light');
 export const AuthContext = createContext(null);
-````
+```
 
 Diğer dosyalarda tanımlanan bileşenler, bu contexti okumak veya sağlamak için [`import`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/import) ifadesini kullanabilir:
 
