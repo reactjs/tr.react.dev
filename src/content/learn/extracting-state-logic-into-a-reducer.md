@@ -183,11 +183,11 @@ Her bir olay yöneticisi state'i güncellemek için `setTasks`'ı çağırır. B
 
 Reducer'lar, state'i ele almanın farklı bir yöntemidir. `useState`'ten `useReducer`'a şu üç adımda geçebilirsiniz:
 
-1. State ayarlamak yerine işlemleri dağıtmaya (dispatching) **geçme**.
+1. State ayarlamak yerine işlemleri göndermek (dispatching) **geçme**.
 2. Bir reducer fonksiyonu **yazma**.
 3. Bileşeninizden gelen “reducer”ı **kullanma**.
 
-### Step 1: State ayarlamak yerine işlemleri dağıtmaya (dispatching) geçme {/*step-1-move-from-setting-state-to-dispatching-actions*/}
+### Step 1: State ayarlamak yerine işlemleri göndermek (dispatching) geçme {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
 Olay yöneticileriniz şu aşamada _ne yapılacağını_ state ayarlayarak belirler:
 
@@ -226,7 +226,7 @@ Tüm state ayarlama mantığını kaldırın. Geriye üç olay yöneticisi kalac
 - `handleChangeTask(task)` kullanıcı bir görevi açıp kapattığında veya "Kaydet" butonuna bastığında çağrılır.
 - `handleDeleteTask(taskId)` kullanıcı "Sil" butonuna bastığında çağrılır.
 
-Reducer'lar ile state yönetimi doğrudan state'i ayarlama işleminden biraz farklıdır. State ayarlayarak React'e "ne yapılacağını" belirtmek yerine, olay yöneticilerinden "işlemler" dağıtarak "kullanıcının ne yaptığını" belirtirsiniz. (State güncelleme mantığı başka bir yerde yaşayacaktır!) Yani bir olay yöneticisi aracılığıyla "görevleri ayarlamak" yerine, "görev eklendi/değiştirildi/silindi" şeklinde bir işlem gönderirsiniz. Bu kullanıcının isteğini daha açık hale getirir.
+Reducer'lar ile state yönetimi doğrudan state'i ayarlama işleminden biraz farklıdır. State ayarlayarak React'e "ne yapılacağını" belirtmek yerine, olay yöneticilerinden "işlemler" göndererek "kullanıcının ne yaptığını" belirtirsiniz. (State güncelleme mantığı başka bir yerde yaşayacaktır!) Yani bir olay yöneticisi aracılığıyla "görevleri ayarlamak" yerine, "görev eklendi/değiştirildi/silindi" şeklinde bir işlem gönderirsiniz. Bu kullanıcının isteğini daha açık hale getirir.
 
 
 ```js
@@ -487,7 +487,7 @@ const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 Ve şunları geri döndürür:
 
 1. State bilgisi içeren bir değer
-2. Bir dispatch fonksiyonu (kullanıcı işlemleri reducer'a "dağıtmak" için)
+2. Bir dispatch fonksiyonu (kullanıcı işlemleri reducer'a "göndermek" için)
 
 Artık tüm bağlantılar kurulmuş halde! Reducer burada bileşen dosyasının en altında tanımlanmıştır:
 
@@ -862,7 +862,7 @@ li {
 
 </Sandpack>
 
-Bileşen mantığını bu şekilde ayırmak okunarlığı daha kolay hale getirebilir. Artık olay yöneticileri işlemleri dağıtarak yalnızca _ne olduğunu_ belirler ve reducer fonksiyonu bunlara yanıt olarak _state'in nasıl güncelleneceği_ kararını verir.
+Bileşen mantığını bu şekilde ayırmak okunarlığı daha kolay hale getirebilir. Artık olay yöneticileri işlemleri göndererek yalnızca _ne olduğunu_ belirler ve reducer fonksiyonu bunlara yanıt olarak _state'in nasıl güncelleneceği_ kararını verir.
 
 ## `useState` ve `useReducer` karışılaştırması {/*comparing-usestate-and-usereducer*/}
 
@@ -881,7 +881,7 @@ Bazı bileşenlerde yanlış state güncellemeleri nedeniyle sık sık hatalarla
 Reducer yazarken şu iki ipucunu aklınızda bulundurun:
 
 - **Reducer'lar saf olmalıdır.** [State güncelleme fonksiyonları](/learn/queueing-a-series-of-state-updates) gibi, reducer'lar da render sırasında çalışır! (İşlemler bir sonraki render işlemine kadar sıraya alınır.) Bunun anlamı reducer'ların [saf olması gerektiğidir](/learn/keeping-components-pure); aynı girdiler her zaman aynı çıktıyla sonuçlanır. Bunlar istek göndermemeli, zaman aşımı planlamamalı veya herhangi bir yan etki (bileşenin dışındaki şeyleri etkileyen faaliyetler) gerçekleştirmemelidir. [Nesneleri](/learn/updating-objects-in-state) ve [dizileri](/learn/updating-arrays-in-state) mutasyon (değişinim) olmadan güncellemelidirler.
-- **Her işlem verilerde birden fazla değişikliğe yol açsa bile tek bir kullanıcı etkileşimini ifade eder.** Örneğin, bir reducer tarafından yönetilen beş alana sahip bir formda bir kullanıcı "Sıfırla" düğmesine bastığında, beş ayrı `set_field` işlemi yerine tek bir `reset_form` işlemini dağıtmak daha mantıklıdır. Bir reducer'daki her işlemi loglarsanız, bu log hangi etkileşimlerin veya yanıtların hangi sırayla gerçekleştiğini yeniden yapılandırmanız için yeterince açık olmalıdır. Bu, hata ayıklamaya yardımcı olur!
+- **Her işlem verilerde birden fazla değişikliğe yol açsa bile tek bir kullanıcı etkileşimini ifade eder.** Örneğin, bir reducer tarafından yönetilen beş alana sahip bir formda bir kullanıcı "Sıfırla" düğmesine bastığında, beş ayrı `set_field` işlemi yerine tek bir `reset_form` işlemini göndermek daha mantıklıdır. Bir reducer'daki her işlemi loglarsanız, bu log hangi etkileşimlerin veya yanıtların hangi sırayla gerçekleştiğini yeniden yapılandırmanız için yeterince açık olmalıdır. Bu, hata ayıklamaya yardımcı olur!
 
 ## Immer ile kısa reducer'lar yazma {/*writing-concise-reducers-with-immer*/}
 
@@ -1087,7 +1087,7 @@ Reducer'lar saf olmalıdır, dolayısıyla state'i değiştirmemelidirler. Ancak
 <Recap>
 
 - `useState`'ten `useReducer`'a geçmek için:
-  1. İşlemlerinizi olay yöneticilerinden dağıtın.
+  1. İşlemlerinizi olay yöneticilerinden gönderin.
   2. Belirli bir state ve action için bir sonraki state'i döndüren bir reducer fonksiyonu yazın.
   3. `useState`'i `useReducer` ile değiştirin.
 - Reducer'lar biraz daha fazla kod yazmanızı gerektirse de hata ayıklama ve test etme konusunda yardımcı olurlar.
@@ -1099,11 +1099,11 @@ Reducer'lar saf olmalıdır, dolayısıyla state'i değiştirmemelidirler. Ancak
 
 <Challenges>
 
-#### İşlemleri olay yöneticinden dağıtın {/*dispatch-actions-from-event-handlers*/}
+#### İşlemleri olay yöneticisinden gönderin {/*dispatch-actions-from-event-handlers*/}
 
 Şu anda, `ContactList.js` ve `Chat.js` içindeki olay yöneticilerinde `// TODO` yorumları var. Bu nedenle yazı alanına yazma özelliği çalışmıyor ve düğmelere tıklamak seçilen alıcı kişiyi değiştirmiyor.
 
-Bu iki `// TODO`'yu ilgili işlemleri (actions) `dispatch` edecek kodla değiştirin. İşlemlerin beklenen şeklini ve türünü görmek için `messengerReducer.js` dosyasındaki reducer'u kontrol edin. Reducer hali hazırda yazılmıştır, bu yüzden değiştirmenize gerek yoktur. Yalnızca `ContactList.js` ve `Chat.js` içindeki işlemleri dağıtmanız (dispatch) gerekir.
+Bu iki `// TODO`'yu ilgili işlemleri (actions) `dispatch` edecek kodla değiştirin. İşlemlerin beklenen şeklini ve türünü görmek için `messengerReducer.js` dosyasındaki reducer'u kontrol edin. Reducer hali hazırda yazılmıştır, bu yüzden değiştirmenize gerek yoktur. Yalnızca `ContactList.js` ve `Chat.js` içindeki işlemleri göndermeniz (dispatch) gerekir.
 
 <Hint>
 
@@ -1272,7 +1272,7 @@ dispatch({
 });
 ```
 
-İşte ilgili mesajları dağıtmak için güncellenmiş örnek:
+İşte ilgili mesajları göndermek için güncellenmiş örnek:
 
 <Sandpack>
 
@@ -1555,7 +1555,7 @@ textarea {
 
 <Solution>
 
-Bunu "Gönder" düğmesi olay yöneticisinde yapmanın birkaç yolu vardır. Bir yaklaşım, bir uyarı göstermek ve ardından boş bir `mesaj` ile bir `edited_message` işlemini dağıtmaktır:
+Bunu "Gönder" düğmesi olay yöneticisinde yapmanın birkaç yolu vardır. Bir yaklaşım, bir uyarı göstermek ve ardından boş bir `mesaj` ile bir `edited_message` işlemini göndermektir:
 
 <Sandpack>
 
@@ -2439,7 +2439,7 @@ textarea {
 
 <Solution>
 
-Bir işlem dağıtıldığında (dispatching), mevcut state ve işlemle birlikte bir reducer çağrılır ve sonuç bir sonraki state olarak saklanır. Kod olarak böyle görünür:
+Bir işlem gönderildiğinde (dispatching), mevcut state ve işlemle birlikte bir reducer çağrılır ve sonuç bir sonraki state olarak saklanır. Kod olarak böyle görünür:
 
 <Sandpack>
 
@@ -2622,7 +2622,7 @@ function dispatch(action) {
 }
 ```
 
-Bunun nedeni, dağıtılan işlemlerin [güncelleyici işlevlerine benzer şekilde](/learn/queueing-a-series-of-state-updates) olduğu gibi bir sonraki render işlemine kadar kuyrukta bekletilmesidir.
+Bunun nedeni, gönderilen işlemlerin [güncelleyici işlevlerine benzer şekilde](/learn/queueing-a-series-of-state-updates) olduğu gibi bir sonraki render işlemine kadar kuyrukta bekletilmesidir.
 
 </Solution>
 
