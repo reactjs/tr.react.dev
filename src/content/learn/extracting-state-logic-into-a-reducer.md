@@ -183,11 +183,11 @@ Her bir olay yöneticisi state'i güncellemek için `setTasks`'ı çağırır. B
 
 Reducer'lar, state'i ele almanın farklı bir yöntemidir. `useState`'ten `useReducer`'a şu üç adımda geçebilirsiniz:
 
-1. State ayarlamak yerine işlemleri göndermek (dispatching) **geçme**.
+1. State ayarlamak yerine işlemleri göndermeye (dispatching) **geçme**.
 2. Bir reducer fonksiyonu **yazma**.
 3. Bileşeninizden gelen “reducer”ı **kullanma**.
 
-### Step 1: State ayarlamak yerine işlemleri göndermek (dispatching) geçme {/*step-1-move-from-setting-state-to-dispatching-actions*/}
+### Step 1: State ayarlamak yerine işlemleri göndermeye (dispatching) geçme {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
 Olay yöneticileriniz şu aşamada _ne yapılacağını_ state ayarlayarak belirler:
 
