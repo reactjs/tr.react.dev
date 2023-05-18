@@ -50,7 +50,7 @@ Sonraki render işlemleri sırasında, ya son render işleminde depolanmış ola
 
 #### Uyarılar {/*caveats*/}
 
-* useMemo` bir Hook'tur, bu nedenle onu yalnızca **bileşeninizin en üst seviyesinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngülerin veya koşulların içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen çıkarın ve durumu içine taşıyın.
+* useMemo` bir Hook'tur, bu nedenle onu yalnızca **bileşeninizin en üst seviyesinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngülerin veya koşulların içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen çıkarın ve state'i içine taşıyın.
 * Strict Mod'da React, [yanlışlıkla oluşan safsızlıkları bulmanıza yardımcı olmak](#my-calculation-runs-twice-on-every-re-render) için **hesaplama fonksiyonunuzu iki kez çağıracaktır**. Bu yalnızca geliştirmeye yönelik bir davranıştır ve canlı ortamı etkilemez. Hesaplama fonksiyonunuz safsa (olması gerektiği gibi), bu durum mantığınızı etkilememelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
 * React **özel bir neden olmadıkça önbelleğe alınan değeri atmayacaktır.** Örneğin, geliştirme sırasında, bileşeninizin dosyasını düzenlediğinizde React önbelleği atar. Hem geliştirme hem de canlı ortamda, bileşeniniz ilk mount sırasında askıya alınırsa React önbelleği atacaktır. Gelecekte React, önbelleğin atılmasından yararlanan daha fazla özellik ekleyebilir - örneğin, React gelecekte sanallaştırılmış listeler için yerleşik destek eklerse, sanallaştırılmış tablo görünüm alanından dışarı kaydırılan öğeler için önbelleği atmak mantıklı olacaktır. Eğer `useMemo`'ya sadece bir performans optimizasyonu olarak güveniyorsanız bu bir sorun olmayacaktır. Aksi takdirde, bir [state değişkeni](/reference/react/useState#avoiding-recreating-the-initial-state) veya bir [ref](/reference/react/useRef#avoiding-recreating-the-ref-contents) daha uygun olabilir.
 
@@ -155,10 +155,10 @@ Diğer durumlarda bir hesaplamayı `useMemo` içine sarmanın hiçbir faydası y
 
 **Pratikte, birkaç ilkeyi izleyerek çok sayıda belleğe alma işlemini gereksiz hale getirebilirsiniz:**
 
-1. Bir bileşen diğer bileşenleri görsel olarak sardığında, [JSX'i alt bileşen olarak kabul etmesine izin verin.](/learn/passing-props-to-a-component#passing-jsx-as-children) Bu sayede, kapsayıcı bileşen kendi durumunu güncellediğinde, React alt bileşenlerinin yeniden render edilmesine gerek olmadığını bilir.
-1. Yerel durumu tercih edin ve durumu gereğinden daha [yukarı kaldırma](/learn/sharing-state-between-components)yın. Örneğin, formlar gibi geçici durumları ve bir öğenin üzerine gelindiğinde ağacınızın tepesinde veya global bir durum kütüphanesinde mi olduğunu saklamayın.
+1. Bir bileşen diğer bileşenleri görsel olarak sardığında, [JSX'i alt bileşen olarak kabul etmesine izin verin.](/learn/passing-props-to-a-component#passing-jsx-as-children) Bu sayede, kapsayıcı bileşen kendi state'ini güncellediğinde, React alt bileşenlerinin yeniden render edilmesine gerek olmadığını bilir.
+1. Yerel state'i tercih edin ve state'i gereğinden daha [yukarı kaldırma](/learn/sharing-state-between-components)yın. Örneğin, formlar gibi geçici state'leri ve bir öğenin üzerine gelindiğinde ağacınızın tepesinde veya global bir state kütüphanesinde mi olduğunu saklamayın.
 1. [Render mantığı](/learn/keeping-components-pure)nızı saf tutun. Bir bileşenin yeniden render edilmesi bir soruna neden oluyorsa veya göze çarpan bir görsel yapaylık oluşturuyorsa, bileşeninizde bir hata var demektir! Memoizasyon eklemek yerine hatayı düzeltin.
-1. [Durumu güncelleyen gereksiz Efektlerden kaçının.](/learn/you-might-need-an-effect) React uygulamalarındaki performans sorunlarının çoğu, bileşenlerinizin tekrar tekrar render edilmesine neden olan Efektlerden kaynaklanan güncelleme zincirlerinden kaynaklanır.
+1. [State'i güncelleyen gereksiz Efektlerden kaçının.](/learn/you-might-need-an-effect) React uygulamalarındaki performans sorunlarının çoğu, bileşenlerinizin tekrar tekrar render edilmesine neden olan Efektlerden kaynaklanan güncelleme zincirlerinden kaynaklanır.
 1.[Efektlerinizden gereksiz bağımlılıkları kaldırmaya çalışın](/learn/removing-effect-dependencies) Örneğin, memoization yerine, bir nesneyi veya bir işlevi bir Efektin içine veya bileşenin dışına taşımak genellikle daha basittir.
 
 Belirli bir etkileşim hala gecikmeli geliyorsa, [React Developer Tools profilleyicisini kullanın](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) ve hangi bileşenlerin memoizasyondan en çok yararlanacağını görün ve gerektiğinde memoizasyon ekleyin. Bu ilkeler bileşenlerinizin hata ayıklamasını ve anlaşılmasını kolaylaştırır, bu nedenle her durumda bunları takip etmek iyidir. Uzun vadede, bunu kesin olarak çözmek için [otomatik olarak granüler memoization yapmayı](https://www.youtube.com/watch?v=lGEMwh32soc) araştırıyoruz.
@@ -263,7 +263,7 @@ export function filterTodos(todos, tab) {
   console.log('[ARTIFICIALLY SLOW] Filtering ' + todos.length + ' todos for "' + tab + '" tab.');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
+    // Aşırı yavaş kodu simüle etmek için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return todos.filter(todo => {
@@ -389,7 +389,7 @@ export function filterTodos(todos, tab) {
   console.log('[ARTIFICIALLY SLOW] Filtering ' + todos.length + ' todos for "' + tab + '" tab.');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
+    // Aşırı yavaş kodu simüle etmek için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return todos.filter(todo => {
@@ -718,7 +718,7 @@ const List = memo(function List({ items }) {
   console.log('[ARTIFICIALLY SLOW] Rendering <List /> with ' + items.length + ' items');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
+    // Aşırı yavaş kodu simüle etmek için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return (
@@ -856,7 +856,7 @@ const List = memo(function List({ items }) {
   console.log('[ARTIFICIALLY SLOW] Rendering <List /> with ' + items.length + ' items');
   let startTime = performance.now();
   while (performance.now() - startTime < 500) {
-    // Aşırı yavaş kodu simüle için 500 ms boyunca hiçbir şey yapmayın
+    // Aşırı yavaş kodu simüle etmek için 500 ms boyunca hiçbir şey yapmayın
   }
 
   return (
@@ -1276,7 +1276,7 @@ Bu işe yaramazsa, sorun bağımlılıklarınızdan en az birinin önceki render
 Daha sonra konsolda farklı yeniden oluşturmalardan dizilere sağ tıklayabilir ve her ikisi için de "Genel değişken olarak sakla"yı seçebilirsiniz. İlkinin `temp1` ve ikincisinin `temp2` olarak kaydedildiğini varsayarsak, her iki dizideki her bir bağımlılığın aynı olup olmadığını kontrol etmek için tarayıcı konsolunu kullanabilirsiniz:
 
 ```js
-Object.is(temp1[0], temp2[0]); // İlk bağımlılık. diziler arasında aynı mı?
+Object.is(temp1[0], temp2[0]); // İlk bağımlılık, diziler arasında aynı mı?
 Object.is(temp1[1], temp2[1]); // İkinci bağımlılık, diziler arasında aynı mı?
 Object.is(temp1[2], temp2[2]); // ... ve her bağımlılık için böyle devam eder ...
 ```
