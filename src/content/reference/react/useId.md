@@ -36,11 +36,11 @@ function PasswordField() {
 
 Herhangi bir parametre almaz.
 
-#### Dönüş değerleri {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
 Çağrıldığı bileşene özel olarak her bir `useId` çağrısı için _karakter dizisi (string)_ tipinde benzersiz kimlik döner.
 
-#### Uyarılar {/*caveats*/}
+#### Dikkat edilmesi gerekenler {/*caveats*/}
 
 * `useId` bir Hook olduğundan, yalnızca **bileşeninizin en üst kapsamında** ya da kendi Hook'larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve state'i ona taşıyın.
 

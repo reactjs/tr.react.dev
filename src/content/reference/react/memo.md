@@ -38,7 +38,7 @@ const SomeComponent = memo(function SomeComponent(props) {
 
 * **isteğe bağlı** `arePropsEqual`: Bileşenin eski ve yeni prop'ları olmak üzere iki argüman kabul eden ve değişiklik olup olmadığını kontrol eden fonksiyondur. Eski ve yeni değerler aynıysa, bileşen yeni prop'lar ile eski prop'lardakiyle aynı çıktıyı üretecekse, `true` döndürmelidir. Aksi takdirde `false` döndürmelidir. Çoğu zaman bu fonksiyonu belirtmezsiniz. Varsayılan olarak React, karşılaştırırken [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanır.
 
-#### Dönüş değerleri {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
 `memo`, yeni bir React bileşeni döndürür. Bu bileşen `memo`'ya verilen bileşenle aynı davranır ancak üst bileşen render edildiğinde kendi prop'ları değişmemişse yeniden render edilmez.
 

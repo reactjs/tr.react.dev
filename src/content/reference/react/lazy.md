@@ -34,7 +34,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 * `load`: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya başka bir *thenable* (`then` metoduna sahip Promise benzeri bir nesne) döndürmeniz gerekir. React, dönen bileşeni ilk kez render etmeye yeltenene kadar `load`'ı çağırmaz. React `load`'ı ilk çağırdığında, çözümlenene (resolve) kadar bekler, ardından çözümlenmiş değeri React bileşeni olarak render eder. Hem Promise hem de Promise'in çözümlenmiş değeri ön belleğe (cache) alınacağından, React `load`'ı birden fazla kez çağırmaz. Promise reddedilirse (reject), React reddetme nedenini ele alması için `throw` ile en yakındaki Error Boundary'ye gönderir.
 
-#### Dönüş değerleri {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
 `lazy`, ağacınıza render edebileceğiniz bir React bileşeni döndürür. Lazy bileşenin kodu yüklenirken, render etme işlemi *askıya alınır.* Yükleme esnasında yükleniyor göstergesi görüntülemek için [`<Suspense>`](/reference/react/Suspense) kullanın.
 
