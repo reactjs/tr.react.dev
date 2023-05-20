@@ -38,7 +38,7 @@ function MyComponent() {
 
 #### Parametreler {/*parameters*/}
 
-* `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf hâlde olmalı, state'i ve işlemi(action) argüman olarak almalı ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
+* `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf hâlde (pure) olmalı, state'i ve işlemi(action) argüman olarak almalı ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
 * `initialArg`: Başlangıç state'inin hesaplandığı değerdir. Herhangi bir türden bir değer olabilir. Başlangıç state'inin nasıl hesaplandığı, sonraki `init` argümanına bağlıdır.
 * **isteğe bağlı** `init`: Başlangıç state'ini döndürmesi gereken başlatıcı fonksiyondur. Belirtilmezse, başlangıç state'i `initialArg` olarak ayarlanır. Aksi takdirde, başlangıç state'i `init(initialArg)` çağrısının sonucuna ayarlanır.
 
@@ -52,7 +52,7 @@ function MyComponent() {
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
 * `useReducer`, bir Hook olduğundan, yalnızca bileşeninizin **üst düzeyinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullar içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen oluşturun ve state'i taşıyın.
-* Strict Mode'da, React, [tesadüfi karışıklıkları bulmanıza yardımcı olmak için](#my-reducer-or-initializer-function-runs-twice) reducer ve başlatıcı fonksiyonunuzu **iki kez çağırır**. Bu, yalnızca geliştirme amaçlı bir davranıştır ve canlı ortama etki etmez. Reducer ve başlatıcı fonksiyonlarınız saf halde ise (olmaları gerektiği gibi), bu mantığınızı etkilememelidir. Çağrılardan birinin sonucu yoksayılır.
+* Strict Mode'da, React, [tesadüfi karışıklıkları bulmanıza yardımcı olmak için](#my-reducer-or-initializer-function-runs-twice) reducer ve başlatıcı fonksiyonunuzu **iki kez çağırır**. Bu, yalnızca geliştirme amaçlı bir davranıştır ve canlı ortamı etkilemez. Reducer ve başlatıcı fonksiyonlarınız saf halde ise (olmaları gerektiği gibi), bu mantığınızı etkilememelidir. Çağrılardan birinin sonucu yoksayılır.
 
 ---
 
