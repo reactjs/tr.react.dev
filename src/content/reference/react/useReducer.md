@@ -34,29 +34,29 @@ function MyComponent() {
   // ...
 ```
 
-[Aşağıda daha fazla örneğe bakın.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-#### Parametereler {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf olmalıdır, state'i ve işlemi argüman olarak almalıdır ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
+* `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf hâlde olmalı, state'i ve işlemi(action) argüman olarak almalı ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
 * `initialArg`: Başlangıç state'inin hesaplandığı değerdir. Herhangi bir türden bir değer olabilir. Başlangıç state'inin nasıl hesaplandığı, sonraki `init` argümanına bağlıdır.
 * **isteğe bağlı** `init`: Başlangıç state'ini döndürmesi gereken başlatıcı fonksiyondur. Belirtilmezse, başlangıç state'i `initialArg` olarak ayarlanır. Aksi takdirde, başlangıç state'i `init(initialArg)` çağrısının sonucuna ayarlanır.
 
-#### Return'ler {/*returns*/}
+#### Dönüş değerleri {/*returns*/}
 
 `useReducer`, tam olarak iki değer içeren bir dizi döndürür:
 
-1. Mevcut state. İlk render sırasında, `init(initialArg)` veya `init` yoksa `initialArg` olarak ayarlanır.
+1. Mevcut state. İlk render sırasında, `init(initialArg)` veya `initialArg` (`init` olmadığında) olarak ayarlanır.
 2. State'i farklı bir değere güncellemenizi ve yeniden render tetiklemenizi sağlayan [`dispatch`](#dispatch) fonksiyonu.
 
-#### Dikkat Edilmesi Gerekenler {/*caveats*/}
+#### Dikkat edilmesi gerekenler {/*caveats*/}
 
 * `useReducer`, bir Hook olduğundan, yalnızca bileşeninizin **üst düzeyinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullar içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen oluşturun ve state'i taşıyın.
 * Strict Mode'da, React, [tesadüfi karışıklıkları bulmanıza yardımcı olmak için](#my-reducer-or-initializer-function-runs-twice) reducer ve başlatıcı fonksiyonunuzu **iki kez çağırır**. Bu, yalnızca geliştirme amaçlı bir davranıştır ve canlı ortama etki etmez. Reducer ve başlatıcı fonksiyonlarınız saf halde ise (olmaları gerektiği gibi), bu mantığınızı etkilememelidir. Çağrılardan birinin sonucu yoksayılır.
 
 ---
 
-### `dispatch` Fonksiyonu {/*dispatch*/}
+### `dispatch` fonksiyonu {/*dispatch*/}
 
 `useReducer` tarafından döndürülen `dispatch` fonksiyonu, state'i farklı bir değere güncellemenizi ve yeniden render tetiklemenizi sağlar. `dispatch` işlevine tek argüman olarak eylemi iletmelisiniz:
 
@@ -74,25 +74,25 @@ React, `dispatch` fonksiyonuna ilettiğiniz eylemi ve geçerli `state` ile çağ
 
 * `action`: Kullanıcı tarafından gerçekleştirilen eylem. Herhangi bir türde bir değer olabilir. Genellikle bir eylem, kendisini tanımlayan bir `type` özelliği ve isteğe bağlı olarak ek bilgi içeren diğer özellikler olan bir nesne olarak temsil edilir.
 
-#### Returns {/*dispatch-returns*/}
+#### Dönüş değerleri {/*dispatch-returns*/}
 
 `dispatch` fonksiyonları bir dönüş değeri içermez.
 
-#### Dikkat Edilmesi Gereken Noktalar {/*setstate-caveats*/}
+#### Dikkat edilmesi gereken noktalar {/*setstate-caveats*/}
 
 * `dispatch` fonksiyonu, sadece **bir sonraki** render işlemi için state değişkenini günceller. Eğer `dispatch` fonksiyonunu çağırdıktan sonra state değişkenini okursanız, [çağrı öncesinde ekranda olan eski değeri](#ive-dispatched-an-action-but-logging-gives-me-the-old-state-value) elde edersiniz.
 
-* Eğer sağladığınız yeni değer, bir [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile belirlendiği gibi, mevcut `state` ile aynı ise, React elemanı ve alt elamanlarının yeniden render edilmesini **atlar.** Bu bir optimizasyondur. React, sonucu yok saymadan önce bileşeninizi çağırmaya hâlâ ihtiyaç duyabilir, ancak kodunuzu etkilememelidir.
+* Eğer sağladığınız yeni değer, bir [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile belirlendiği gibi, mevcut `state` ile aynı ise React elemanı ve alt elemanlarının yeniden render edilmesini **atlar.** Bu bir optimizasyonudur. React, sonucu yok saymadan önce yine de bileşeninizi çağırması gerekebilir ancak bu kodunuzu etkilememelidir.
 
-* React, state güncellemelerini **toplu halde işler**. Tüm olay yöneticileri çalıştırıldıktan ve kendi `set` fonksiyonlarını çağırdıktan **sonra ekranı günceller.** Bu, tek bir olay sırasında birden fazla yeniden render işlemini önler. DOM'a erişmek için örneğin ekranı daha önce güncellemek zorunda kalmanız gereken nadir durumlarda kullanabilirsiniz. [`flushSync`](/reference/react-dom/flushSync)
+* React, state güncellemelerini **toplu halde işler**. Tüm olay yöneticileri çalıştırıldıktan ve kendi `set` fonksiyonlarını çağırdıktan **sonra ekranı günceller.** Bu, tek bir olay sırasında birden fazla yeniden render işlemini önler. React'ı ekranı güncellemeye zorlamanız gereken nadir durumlarda, örneğin DOM'a erişmek için, [`flushSync`](/reference/react-dom/flushSync) kullanabilirsiniz.
 
 ---
 
 ## Kullanım {/*usage*/}
 
-### Bir Bileşene Reducer Eklemek {/*adding-a-reducer-to-a-component*/}
+### Bir bileşene reducer eklemek {/*adding-a-reducer-to-a-component*/}
 
-Bileşenizin state'ini [reducer](/learn/extracting-state-logic-into-a-reducer) ile yönetmek için, `useReducer` fonksiyonunu bileşeninizin en üst düzeyinde çağırın.
+Bileşeninizin state'ini [reducer](/learn/extracting-state-logic-into-a-reducer) ile yönetmek için, `useReducer`'ı bileşeninizin en üst düzeyinde çağırın.
 
 ```js [[1, 8, "state"], [2, 8, "dispatch"], [4, 8, "reducer"], [3, 8, "{ age: 42 }"]]
 import { useReducer } from 'react';
@@ -161,7 +161,7 @@ button { display: block; margin-top: 10px; }
 
 ---
 
-### Reducer Fonksiyonunu Yazmak {/*writing-the-reducer-function*/}
+### Reducer fonksiyonu yazmak {/*writing-the-reducer-function*/}
 
 Reducer fonksiyonu şöyle tanımlanır:
 
@@ -316,7 +316,7 @@ button { display: block; margin-top: 10px; }
 
 <Solution />
 
-#### Yapılacaklar Listesi (dizi) {/*todo-list-array*/}
+#### Yapılacaklar listesi (dizi) {/*todo-list-array*/}
 
 Bu örnekte, reducer bir görevler dizisini yönetir. Dizi [mutasyonsuz bir şekilde](/learn/updating-arrays-in-state) güncellenmesi gerekiyor.
 
@@ -509,7 +509,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution />
 
-#### Immer ile Özlü Güncelleme Mantığı Yazmak {/*writing-concise-update-logic-with-immer*/}
+#### Immer ile özlü güncelleme mantığı yazmak {/*writing-concise-update-logic-with-immer*/}
 
 Mutasyonsuz olarak dizileri ve nesneleri güncelleştirmek sıkıcı geliyorsa, [Immer](https://github.com/immerjs/use-immer#useimmerreducer) gibi bir kütüphane kullanarak tekrarlayan kodu azaltabilirsiniz. Immer, nesneleri değiştiriyor gibi özlü kod yazmanıza olanak tanır, ancak işin altında değişmez güncellemeler gerçekleştirir:
 
@@ -723,7 +723,7 @@ ul, li { margin: 0; padding: 0; }
 
 ---
 
-### Başlangıç State'ini Yeniden Oluşturmayı Önleme {/*avoiding-recreating-the-initial-state*/}
+### Başlangıç state'ini yeniden oluşturmayı önleme {/*avoiding-recreating-the-initial-state*/}
 
 React, başlangıç state'ini bir kez kaydeder ve sonraki render işlemlerinde bunu görmezden gelir.
 
@@ -757,7 +757,7 @@ Dikkat edin ki, `createInitialState` **kendisi** olan *fonksiyonu* geçiriyorsun
 
 <Recipes titleText="Başlatıcı fonksiyonu geçirmenin ve başlangıç state'ini doğrudan geçirmenin farkı" titleId="examples-initializer">
 
-#### Başlatıcı Fonksiyonunu Geçirme {/*passing-the-initializer-function*/}
+#### Başlatıcı fonksiyonunu geçirme {/*passing-the-initializer-function*/}
 
 Bu örnek başlatıcı fonksiyonunu geçirir, bu nedenle `createInitialState` fonksiyonu yalnızca başlatma sırasında çalışır. Girdiye yazdığınız gibi, bileşen yeniden render olduğunda çalışmaz.
 
@@ -845,7 +845,7 @@ export default function TodoList({ username }) {
 
 <Solution />
 
-#### Başlangıç State'ini Doğrudan Geçirme {/*passing-the-initial-state-directly*/}
+#### Başlangıç state'ini doğrudan geçirme {/*passing-the-initial-state-directly*/}
 
 Bu örnek başlatıcı fonksiyonu geçirmez, bu nedenle `createInitialState` fonksiyonu girdiye yazdığınız gibi her yeniden render olduğunda çalışır. Davranışta gözle görülür bir fark yoktur, ancak bu kod daha az verimlidir.
 
@@ -936,9 +936,9 @@ export default function TodoList({ username }) {
 
 ---
 
-## Sorun Giderme {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### Bir işlem yaptım, ancak günlüklemede bana eski state değerini veriyor {/*ive-dispatched-an-action-but-logging-gives-me-the-old-state-value*/}
+### Bir işlem yaptım, ancak state'i yazdırdığımda eski değerini veriyor {/*ive-dispatched-an-action-but-logging-gives-me-the-old-state-value*/}
 
 `dispatch` fonksiyonunu çağırmak **çalışan kodda state'i değiştirmez**:
 
@@ -1079,7 +1079,7 @@ Bu hatanın nedenini bulamazsanız, konsoldaki hatanın yanındaki ok'a tıklay�
 
 ---
 
-### Reducer veya Başlatıcı (initializer) Fonksiyonlarım İki Kez Çalışıyor. {/*my-reducer-or-initializer-function-runs-twice*/}
+### Reducer veya başlatıcı (initializer) fonksiyonlarım iki kez çalışıyor. {/*my-reducer-or-initializer-function-runs-twice*/}
 
 [Strict Mode](/reference/react/StrictMode) içinde, React reducer ve başlatıcı (initializer) fonksiyonlarınızı iki kez çağırır. Bu, kodunuzu bozmamalıdır.
 
