@@ -36,8 +36,8 @@ function useOnlineStatus() {
 
 #### Parametreler {/*parameters*/}
 
-* `value`: React Geliştirici Araçları'nda görüntülemek istediğiniz değer. Herhangi bir tür olabilir.
-* **isteğe bağlı** `format`: Biçimlendirme fonksiyonu. Bileşen denetlendiğinde, React Geliştirici Araçları, biçimlendirme fonksiyonunu `value` ile birlikte çağırır ve ardından döndürülen biçimlendirilmiş değeri (herhangi bir türde olabilir) görüntüler. Biçimlendirme fonksiyonunu belirtmezseniz, orijinal `value` kendisi görüntülenir.
+* `value`: React Geliştirici Araçları'nda görüntülemek istediğiniz değer. Herhangi bir tip olabilir.
+* **isteğe bağlı** `format`: Biçimlendirme fonksiyonu. Bileşen denetlendiğinde, React Geliştirici Araçları, biçimlendirme fonksiyonunu `value` ile birlikte çağırır ve ardından döndürülen biçimlendirilmiş değeri (herhangi bir tipte olabilir) görüntüler. Biçimlendirme fonksiyonunu belirtmezseniz, orijinal `value` kendisi görüntülenir.
 
 #### Dönüş değerleri {/*returns*/}
 
@@ -103,7 +103,7 @@ function subscribe(callback) {
 
 <Note>
 
-Her özel Hook'a hata ayıklama değeri eklemeyin. En değerli olanı, paylaşılan kütüphanelerde bulunan ve incelenmesi zor olan karmaşık bir iç veri yapısına sahip olan özel Hook'lar için geçerlidir.
+Her özel Hook'a hata ayıklama değeri eklemeyin. Paylaşılan kütüphanelerde bulunan ve incelenmesi zor olan karmaşık bir iç veri yapısına sahip olan özel Hook'lar için kullanıldığında daha faydalıdır. 
 
 </Note>
 
