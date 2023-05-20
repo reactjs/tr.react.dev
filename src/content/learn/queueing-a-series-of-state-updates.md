@@ -1,23 +1,23 @@
 ---
-title: Bir Seri State Güncellemesini Kuyruğa Almak
+title: State Güncellemelerinin Kuyruğa Alınması
 ---
 
 <Intro>
 
-Bir state değişkenini değiştirmek, başka bir render'ı kuyruğa alacaktır. Ancak bazen bir sonraki render'ı kuyruğa almadan önce değer üzerinde birden çok işlem gerçekleştirmek isteyebilirsiniz. Bunu yapmakta, React'in batch state güncellemelerini nasıl yaptığını anlamak yardımcı olacaktır.
+Bir state değişkenini değiştirmek, başka bir render'ı kuyruğa alacaktır. Ancak bazen sıradaki render'ı kuyruğa almadan önce değer üzerinde birden çok işlem gerçekleştirmek isteyebilirsiniz. Bunu yapmakta, React'in toplu state güncellemelerini nasıl ele aldığını anlamak, bunu yapmak için yardımcı olacaktır.
 
 </Intro>
 
 <YouWillLearn>
 
-* "Batching (Toplu işleme)" ne demektir ve React bunu birden fazla state güncellemesini yapmak için nasıl kullanır
+* "Batching (Toplu işleme)" nedir ve birden fazla state güncellemesi yapmak için React tarafından nasıl kullanılır
 * Aynı state değişkenine art arda birden fazla güncelleme nasıl yapılır
 
 </YouWillLearn>
 
 ## React state güncellemesini toplu halde (batching) yapar {/*react-batches-state-updates*/}
 
-"+3" butonuna basmanın sayacı üç defa artıracağını çünkü `setNumber(number + 1)` fonksiyonunu üç kez çağıracağını düşünebilirsiz:
+"+3" butonuna tıkladığınızda,`setNumber(number + 1)` üç kez çağırıldığından dolayı, sayacın üç kez artırılacağını düşünebilirsiz:
 
 <Sandpack>
 
@@ -47,7 +47,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Ancak önceki bölümden hatırlayabileceğiniz gibi [her render'ın state değeri sabittir](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), yani `setNumber(1)` fonksiyonunu kaç defa çağırırsanız çağırın ilk render'ın olay yöneticisindeki `number` değeri her zaman `0`'dır:
+Bununla birlikte, önceki bölümden hatırlayabileceğiniz gibi [her render'ın state değerleri sabittir](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), yani `setNumber(1)` fonksiyonunu kaç defa çağırırsanız çağırın ilk render'da olay yöneticisindeki `number` değeri her zaman `0`'dır:
 
 ```js
 setNumber(0 + 1);
@@ -55,19 +55,19 @@ setNumber(0 + 1);
 setNumber(0 + 1);
 ```
 
-Ancak göze alınması gereken başka bir faktör daha vardır. **React, state güncellemelerini yapmadan önce olay yönetecilerindeki *tüm* kodun çalışmasını bekler.** Yeniden render etmenin yalnızca tüm `setNumber()` çağrılarından *sonra* gerçekleşmesinin nedeni budur.
+Ancak göze alınması gereken başka bir faktör daha vardır. **React, state güncellemelerini yapmadan önce olay yöneticilerindeki *tüm* kodun çalışmasını bekler.** Bu nedenle yeniden render işlemi yalnızca tüm bu `setNumber()` çağrılarından *sonra* gerçekleşir.
 
 Bu size restoranda sipariş alan bir garsonu hatırlatabilir. Garson siparişinizi alırken ilk yemeğinizi söylediğiniz zaman mutfağa koşmaz! Bunun yerine, siparişinizi tamamlamanıza, üzerinde değişiklik yapmanıza izin verirler. Hatta masadaki diğer insanların da siparişini alırlar.
 
 <Illustration src="/images/docs/illustrations/i_react-batching.png"  alt="An elegant cursor at a restaurant places and order multiple times with React, playing the part of the waiter. After she calls setState() multiple times, the waiter writes down the last one she requested as her final order." />
 
-Bu, [yeniden render'lar](/learn/render-and-commit#re-renders-when-state-updates) tetiklemeden birden çok state değişkenini (birden çok bileşende bile) güncellemenizi sağlar. Ancak bu aynı zamanda, kullanıcı arayüzünün (UI) olay yöneteciniz ve içindeki herhangi bir kod _tamamlanana kadar_ güncellenmeyeceği anlamına gelmektedir. **Batching (toplu halde)** olarak da bilinen bu davranış, React uygulamanızın çok daha hızlı çalışmasını sağlar. Ayrıca React, yalnızca bazı değişkenlerin güncellendiği kafa karıştırıcı "yarı tamamlanmış" render'larla uğraşmaktan da kaçınır.
+Bu, [yeniden render](/learn/render-and-commit#re-renders-when-state-updates) tetiklemeden birden çok state değişkenini (birden çok bileşende bile) güncellemenizi sağlar. Ancak bu aynı zamanda, kullanıcı arayüzünün (UI) olay yöneticiniz ve içindeki kodlar _tamamlanana kadar_ güncellenmeyeceği anlamına gelmektedir. **Batching (toplu halde)** olarak da bilinen bu davranış, React uygulamanızın çok daha hızlı çalışmasını sağlar. Ayrıca React, yalnızca bazı değişkenlerin güncellendiği kafa karıştırıcı "yarı tamamlanmış" render'larla uğraşmaktan da kaçınır.
 
-**React tıklama gibi kasıtlı yapılmış *birden fazla* olayı toplu olarak işlemez** her tıklama ayrı olarak işlenir. React'in bu gruplamayı genel olarak yalnızca güvenli olduğunu düşündüğü durumlarda yaptığından emin olabilirsiniz. Böylelikle örneğin, eğer bir butona tıklamak formu devre dışı bırakıyor ise, butona ikinci defa tıklamak formu tekrar göndermez.
+**React, tıklama gibi kasıtlı yapılmış *birden fazla* olayı toplu olarak işlemez**- her tıklama ayrı olarak işlenir. React'in bu gruplamayı genel olarak yalnızca güvenli olduğunu düşündüğü durumlarda yaptığından emin olabilirsiniz. Böylelikle, örneğin, butona ilk defa tıklamak formu devre dışı bırakıyor ise, butona ikinci defa tıklamak formu bir daha göndermez.
 
-## Bir sonraki render'dan önce aynı state'i birden çok defa güncellemek {/*updating-the-same-state-multiple-times-before-the-next-render*/}
+## Aynı state'i bir sonraki render öncesinde birden fazla kez güncelleme {/*updating-the-same-state-multiple-times-before-the-next-render*/}
 
-Şimdi vereceğimiz örnek pek alışılmadık bir durumdur ancak aynı state değişkenini bir sonraki render'dan önce birden çok defa güncellemek isterseniz, `setNumber(number + 1)` gibi *sonraki state değerini* iletmek yerine `setNumber(n => n + 1)` gibi bir sonraki state'i kuyruktaki önceki değere göre hesaplayan bir *fonksiyon* iletebilirsiniz. Böylelikle React'e state değerini değiştirmek yerine "state değeri ile bir şey yap" diyebilirsiniz.
+Bu yaygın olmayan bir kullanım durumudur ancak aynı state değişkenini bir sonraki render'dan önce birden fazla kez güncellemek isterseniz, `setNumber(number + 1)` gibi *sonraki state değerini* iletmek yerine `setNumber(n => n + 1)` gibi kuyrukta önceki değerine dayanarak sıradaki değeri hesaplayan bir *fonksiyon* iletebilirsiniz. Böylelikle React'e state değerini değiştirmek yerine "state değeri ile bir şey yap" diyebilirsiniz.
 
 Şimdi sayacı tekrar artırmayı deneyin:
 
@@ -99,7 +99,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Burada, `n => n + 1` ifadesi **güncelleyici fonksiyon** olarak adlandırılır. Bu fonksiyonu bir state setter'a ilettiğiniz zaman:
+Burada, `n => n + 1` ifadesi **güncelleyici (updater) fonksiyon** olarak adlandırılır. Bu fonksiyonu bir state setter'a ilettiğiniz zaman:
 
 1. React, bu fonksiyonu olay yöneticisindeki tüm kodlar çalıştıktan sonra işlemek üzere kuyruğa alır.
 2. Bir sonraki render esnasında React, kuyruktaki tüm işlemleri yapar ve size güncellenmiş son state'i verir.
@@ -110,7 +110,7 @@ setNumber(n => n + 1);
 setNumber(n => n + 1);
 ```
 
-React'in olay yönetecisini yürütürken bu kod satırlarında nasıl çalıştığını aşağıdaki gibi anlatabiliriz:
+Olay yöneticisi yürütülürken React bu kod satırlarını aşağıdaki şekilde ele alır:
 
 1. `setNumber(n => n + 1)`: `n => n + 1` ifadesi bir fonksiyondur. React bu ifadeyi kuyruğa alır.
 1. `setNumber(n => n + 1)`: `n => n + 1` ifadesi bir fonksiyondur. React bu ifadeyi kuyruğa alır.
@@ -124,12 +124,12 @@ Sonraki render'da `useState`'i çağırdığınız zaman React, kuyruktaki işle
 | `n => n + 1` | `1` | `1 + 1 = 2` |
 | `n => n + 1` | `2` | `2 + 1 = 3` |
 
-React `3` değerini son sonuç olarak saklar ve `useState`'den döndürür.
+React `3` değerini nihai sonuç olarak saklar ve `useState`'den döndürür.
 
 Bu yüzden yukarıdaki örnekte "+3" butonuna tıklamak, değeri doğru şekilde 3 artıracaktır.
 ### State'i değiştirdikten sonra güncellerseniz ne olur {/*what-happens-if-you-update-state-after-replacing-it*/}
 
-Peki ya olay yöneticisi? `number`'ın değeri sonraki render'da ne olacaktır?
+Peki ya bu olay yöneticisi hakkında ne düşünüyorsunuz? `number`'ın değeri sonraki render'da ne olur?
 
 ```js
 <button onClick={() => {
@@ -152,7 +152,7 @@ export default function Counter() {
       <button onClick={() => {
         setNumber(number + 5);
         setNumber(n => n + 1);
-      }}>Increase the number</button>
+      }}>Numarayı artır</button>
     </>
   )
 }
@@ -165,16 +165,16 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Aşağıda bu olay yönetecisinin React'e ne yapması gerektiğini söylediğini görebilirsiniz:
+Bu olay yöneticisinin React'e yapmasını söylediği adımlar şu şekildedir:
 
 1. `setNumber(number + 5)`: `number`ın değeri `0`'dır, yani `setNumber(0 + 5)`. React kuyruğa *"`5` ile değiştir"* ifadesini alır.
 2. `setNumber(n => n + 1)`: `n => n + 1` ifadesi bir güncelleyici fonksiyondur. React *o fonksiyonu* kuyruğa alır.
 
-Sonraki render esnasında React, state kuyruğundan geçer:
+Sonraki render esnasında React, state kuyruğunu ilerletir:
 
 |   kuyruktaki güncelleme       | `n` | döndürülen değer |
 |--------------|---------|-----|
-| "replace with `5`" | `0` (unused) | `5` |
+| " `5` ile değiştir" | `0` (kullanılmamış) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
 React `6` değerini son sonuç olarak saklar ve `useState`'den döndürür.
@@ -212,7 +212,7 @@ export default function Counter() {
         setNumber(number + 5);
         setNumber(n => n + 1);
         setNumber(42);
-      }}>Increase the number</button>
+      }}>Numarayı artır</button>
     </>
   )
 }
@@ -225,32 +225,32 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Bu olay yönetecisi çalışırken React'in kod satırlarında nasıl çalıştığını aşağıda görebilirsiniz:
+Olay yönetecisi yürütülürken React bu kod satırlarını aşağıdaki şekilde ele alır:
 
 1. `setNumber(number + 5)`: `number`'ın değeri `0`'dır, yani `setNumber(0 + 5)`. React kuyruğa *"`5` ile değiştir"* ifadesini alır.
 2. `setNumber(n => n + 1)`: `n => n + 1` ifadesi bir güncelleyici fonksiyondur. React *o fonksiyonu* kuyruğa alır.
 3. `setNumber(42)`: React kuyruğa *"`42` ile değiştir"* ifadesini alır.
 
-Sonraki render esnasında React, state kuyruğundan geçer:
+Sonraki render esnasında React, state kuyruğunu ilerletir:
 
 |   kuyruktaki güncelleme       | `n` | döndürülen değer |
 |--------------|---------|-----|
-| "replace with `5`" | `0` (unused) | `5` |
+| "`5` ile değiştir" | `0` (kullanılmamış) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
-| "replace with `42`" | `6` (unused) | `42` |
+| "`42` ile değiştir" | `6` (kullanılmamış) | `42` |
 
-React `42` değerini son sonuç olarak saklar ve `useState`'den döndürür.
+React `42` değerini nihai sonuç olarak saklar ve `useState`'den döndürür.
 
 Özetlemek gerekirse, state setter olan `setNumber`'a ne ilettiğinizi şu şekilde düşünebilirsiniz:
 
 * **Bir güncelleyici fonksiyon** (örneğin `n => n + 1`) kuyruğa eklenir.
 * **Herhangi başka bir değer** (örneğin number `5`) zaten kuyrukta olanları yok sayarak kuyruğa "`5` ile değiştir" ifadesini ekler.
 
-Olay yöneticisi tamamlandıktan sonra, React yeniden bir render tetikleyecektir. Yeniden render esnasında, React kuyruktaki işlemleri yapacaktır. Güncelleyici fonksiyonlar render etme esnasında çalışırlar yani  **güncelleyici fonksiyonlar [saf](/learn/keeping-components-pure)** olmalıdır ve sadece sonucu *döndürmelidirler.* Güncelleyici fonksiyonlar içinde state'i değiştirmeyi ya da başka yan etkiler çalıştırmayın. Strict Mode'da React, hataları bulmanıza yardımcı olmak için her güncelleyici fonksiyonu iki defa çalıştırır (ancak ikinci sonucu göz ardı eder).
+Olay yöneticisi tamamlandıktan sonra, React yeniden render'ı tetikleyecektir. Render esnasında, React kuyruktaki işlemleri yapacaktır. Güncelleyici fonksiyonlar render etme esnasında çalışırlar yani  **güncelleyici fonksiyonlar [saf](/learn/keeping-components-pure)** olmalıdır ve sadece sonucu *döndürmelidirler.* Güncelleyici fonksiyonların içinde state'i değiştirmeyin ya da farklı yan etkiler çalıştırmayın. Strict Mode'da React, hataları bulmanıza yardımcı olmak için her güncelleyici fonksiyonu iki defa çalıştırır (ancak ikinci sonucu göz ardı eder).
 
 ### Sık kullanılan adlandırmalar {/*naming-conventions*/}
 
-Güncelleyici fonksiyon değişkenini, karşılık gelen state değişkeninin ilk harfleriyle adlandırmak yaygın olarak kullanılır:
+Güncelleyici fonksiyon argümanını ilgili durum değişkeninin ilk harflerine göre adlandırmak yaygın olarak kullanılmaktadır:
 
 ```js
 setEnabled(e => !e);
@@ -263,8 +263,8 @@ Daha ayrıntılı bir kod yapısını tercih ediyorsanız, başka bir yaygın ku
 <Recap>
 
 * State'i değiştirmek mevcut render'daki değişkeni değiştirmez, yeni bir render talep eder.
-* React, olay yönetecileri çalışmayı bitirdikten sonra state güncellemelerini yapar. Bu duruma batching (toplu halde) denir.
-* Bir olayda bazı state'leri birden çok defa güncellemek için `setNumber(n => n + 1)` güncelleyici fonksiyonu kullanılır.
+* React, olay yönetecileri çalışmayı bitirdikten sonra state güncellemelerini yapar. Bu duruma batching (toplu işleme) denir.
+* Bir olayda bazı state'leri birden çok defa güncellemek için `setNumber(n => n + 1)` güncelleyici fonksiyonunu kullanabilirsiniz.
 
 </Recap>
 
@@ -272,13 +272,13 @@ Daha ayrıntılı bir kod yapısını tercih ediyorsanız, başka bir yaygın ku
 
 <Challenges>
 
-#### Sayaçları düzeltin {/*fix-a-request-counter*/}
+#### İstek sayacını düzeltin {/*fix-a-request-counter*/}
 
-Kullanıcının aynı anda bir sanat eseri için birden çok sipariş göndermesine olanak sağlayan bir sanat marketi üzerinde çalışıyorsunuz. Kullanıcı her "Buy (Satın al)" butonuna bastığında, "Pending (Bekleniyor)" sayacı bir artmalıdır. Üç saniye sonra "Pending (Bekleniyor)" sayacı bir azalmalı ve "Completed (Tamamlandı)" sayacı bir artmalıdır.
+Kullanıcının bir sanat eseri için aynı anda birden fazla sipariş vermesine olanak sağlayan bir sanat marketi uygulaması üzerinde çalışıyorsunuz. Kullanıcı her "Buy (Satın al)" butonuna bastığında, "Pending (Bekleniyor)" sayacı bir artmalıdır. Üç saniye sonra "Pending (Bekleniyor)" sayacı bir azalmalı ve "Completed (Tamamlandı)" sayacı bir artmalıdır.
 
-Ancak "Pending" sayacı çalışması gerektiği gibi çalışmamaktadır. "Buy" butonuna basıldığında, sayaç `-1` olmaktadır (ki bu imkansızdır!). Aynı zamanda butona iki defa hızlıca tıklarsanız, iki sayaç da tahmin edilemeyecek bir şekilde çalışmaktadır.
+Ancak "Bekleniyor" sayacı amaçlandığı gibi davranmaz. "Satın Al" butonuna basıldığında, sayaç `-1` olur (ki bu imkansızdır!). Aynı zamanda butona iki defa hızlıca tıklarsanız, her iki sayaç da tahmin edilemeyecek bir şekilde davranır.
 
-Sizce bu niye olmakta? İki sayacı da düzeltin.
+Sizce buna ne sebep olmakta? İki sayacı da düzeltin.
 
 <Sandpack>
 
@@ -299,13 +299,13 @@ export default function RequestTracker() {
   return (
     <>
       <h3>
-        Pending: {pending}
+        Bekleniyor: {pending}
       </h3>
       <h3>
-        Completed: {completed}
+        Tamamlandı: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Satın Al     
       </button>
     </>
   );
@@ -343,13 +343,13 @@ export default function RequestTracker() {
   return (
     <>
       <h3>
-        Pending: {pending}
+        Bekleniyor: {pending}
       </h3>
       <h3>
-        Completed: {completed}
+        Tamamlandı: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Satın Al     
       </button>
     </>
   );
@@ -372,7 +372,7 @@ Böylelikle bir sayacı artırdığınızda ya da azalttığınızda, bunu tıkl
 
 Bu örnekte React'in küçük bir bölümünü kendiniz yapacaksınız! Korkmayın sanıldığı kadar zor değil.
 
-Önce sandbox'u bir inceleyin. **Dört test durumu** gösterdiğine dikkat edin. Bu sayfada daha önce gördüğünüz örneklere karşılık gelmektedirler. Sizin göreviniz, her test için doğru sonucu döndürecek şekilde `getFinalState` fonksiyonunu yazmaktır. Eğer bu işlemi doğru yaparsanız, testlerin tamamını geçeceksiniz.
+Önce sandbox'u bir inceleyin. **Dört test durumu** gösterdiğine dikkat edin. Bunlar, bu sayfada daha önce gördüğünüz örneklere karşılık gelirler. Göreviniz, her test için doğru sonucu döndürecek şekilde `getFinalState` fonksiyonunu yazmaktır. Fonksiyonu doğru şekilde uygularsanız, dört testin tamamı geçmelidir.
 
 Fonksiyonunuz iki değişken alacaktır: `baseState` başlangıç state'i (`0` gibi), `queue (kuyruk)` farklı sayılar (`5` gibi) ve güncelleyici fonksiyonları (`n => n + 1` gibi) eklenme sıralarına göre içeren bir dizidir.
 
@@ -388,9 +388,9 @@ export function getFinalState(baseState, queue) {
 
   for (let update of queue) {
     if (typeof update === 'function') {
-      // TODO: apply the updater function
+      // TODO: güncelleyici fonksiyonu uygulayın
     } else {
-      // TODO: replace the state
+      // TODO: state'i değiştirin
     }
   }
 
@@ -408,7 +408,7 @@ Boş satırları doldurun!
 export function getFinalState(baseState, queue) {
   let finalState = baseState;
 
-  // TODO: do something with the queue...
+  // TODO: kuyrukla bir şeyler yapın...
 
   return finalState;
 }
@@ -471,15 +471,15 @@ function TestCase({
   const actual = getFinalState(baseState, queue);
   return (
     <>
-      <p>Base state: <b>{baseState}</b></p>
-      <p>Queue: <b>[{queue.join(', ')}]</b></p>
-      <p>Expected result: <b>{expected}</b></p>
+      <p>Başlangıç state'i: <b>{baseState}</b></p>
+      <p>Kuyruk: <b>[{queue.join(', ')}]</b></p>
+      <p>Beklenen sonuç: <b>{expected}</b></p>
       <p style={{
         color: actual === expected ?
           'green' :
           'red'
       }}>
-        Your result: <b>{actual}</b>
+        Sonucunuz: <b>{actual}</b>
         {' '}
         ({actual === expected ?
           'correct' :
@@ -495,7 +495,7 @@ function TestCase({
 
 <Solution>
 
-Bu sayfada açıklanan algoritma, React'in son state'i hesaplamak için kullandığı algoritmadır:
+Bu sayfada açıklanan algoritma, React'in nihai state'i hesaplamak için kullandığı algoritmadır:
 
 <Sandpack>
 
@@ -505,10 +505,10 @@ export function getFinalState(baseState, queue) {
 
   for (let update of queue) {
     if (typeof update === 'function') {
-      // Apply the updater function.
+      // Güncelleyici fonksiyonu uygulayın.
       finalState = update(finalState);
     } else {
-      // Replace the next state.
+      // Sonraki state'i değiştirin
       finalState = update;
     }
   }
@@ -574,15 +574,15 @@ function TestCase({
   const actual = getFinalState(baseState, queue);
   return (
     <>
-      <p>Base state: <b>{baseState}</b></p>
-      <p>Queue: <b>[{queue.join(', ')}]</b></p>
-      <p>Expected result: <b>{expected}</b></p>
+      <p>Başlangıç state'i: <b>{baseState}</b></p>
+      <p>Kuyruk: <b>[{queue.join(', ')}]</b></p>
+      <p>Beklenen sonuç: <b>{expected}</b></p>
       <p style={{
         color: actual === expected ?
           'green' :
           'red'
       }}>
-        Your result: <b>{actual}</b>
+        Sonucunuz: <b>{actual}</b>
         {' '}
         ({actual === expected ?
           'correct' :
