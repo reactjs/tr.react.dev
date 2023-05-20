@@ -26,7 +26,7 @@ flushSync(callback)
 
 ### `flushSync(callback)` {/*flushsync*/}
 
-Bekleyen tüm işlemleri boşaltmak ve DOM'u hemen güncellemek için `flushSync` fonksiyonunu kullanın.
+Bekleyen tüm islemleri aninda calistirmak ve DOM'u hemen güncellemek için `flushSync` fonksiyonunu kullanın.
 
 
 ```js
@@ -53,7 +53,7 @@ flushSync(() => {
 #### Uyarılar {/*caveats*/}
 
 * `flushSync` performansı önemli ölçüde düşürebilir. Sınırlı şekilde kullanın.
-* `flushSync`bekleyen Suspense sınırlarını `fallback` durumunu göstermeye mecbur bırakabilir.
+* `flushSync` bekleyen Suspense sınırlarını `fallback` durumunu göstermeye mecbur bırakabilir.
 * `flushSync` bekleyen effect'leri tetikleyebilir ve içerdikleri güncellemeleri döndürmeden önce senkron bir şekilde uygulayabilir.
 * `flushSync` callback içindeki güncellemeleri işlemek gerektiğinde, callback dışındaki güncellemeleri işleyebilir. Örneğin, bir tıklama sonucu bekleyen güncellemeler varsa, React bu güncellemeleri callback içindeki güncellemeleri işlemeden önce işleyebilir.
 
