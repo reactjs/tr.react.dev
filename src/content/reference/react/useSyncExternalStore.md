@@ -4,7 +4,7 @@ title: useSyncExternalStore
 
 <Intro>
 
-`useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
+`useSyncExternalStore`, harici veri depolarına (store) abone olmanızı sağlayan React Hook'udur.
 
 ```js
 const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
@@ -16,11 +16,13 @@ const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?
 
 ---
 
-## Reference {/*reference*/}
+- Store nasıl çevrilecek?
+
+## Referans {/*reference*/}
 
 ### `useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)` {/*usesyncexternalstore*/}
 
-Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
+Harici veri deposundan değer okumak için bileşeninizin en üst kapsamında `useSyncExternalStore`'u çağırın.
 
 ```js
 import { useSyncExternalStore } from 'react';
@@ -32,43 +34,43 @@ function TodosApp() {
 }
 ```
 
-It returns the snapshot of the data in the store. You need to pass two functions as arguments:
+Depodaki verinin anlık görüntüsünü döndürür. Argüman olarak iki fonksiyon geçmeniz gerekir:
 
-1. The `subscribe` function should subscribe to the store and return a function that unsubscribes.
-2. The `getSnapshot` function should read a snapshot of the data from the store.
+1. `subscribe` fonksiyonu, depoya (data store) abone olmalı (subscribe) ve abonelikten çıkmak için fonksiyon döndürmelidir.
+2. `getSnapshot` fonksiyonu, depodaki verinin anlık görüntüsünü okumalıdır.
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `subscribe`: A function that takes a single `callback` argument and subscribes it to the store. When the store changes, it should invoke the provided `callback`. This will cause the component to re-render. The `subscribe` function should return a function that cleans up the subscription.
+* `subscribe`: Bir `callback` argümanı alan ve depoya abone olan fonksiyondur. Depo değiştiğinde, iletilen `callback` çalıştırılır. Bu, bileşenin yeniden render edilmesine neden olur. `subscribe` fonksiyonu, aboneliği temizleyen bir fonksiyon döndürmelidir.
 
-* `getSnapshot`: A function that returns a snapshot of the data in the store that's needed by the component. While the store has not changed, repeated calls to `getSnapshot` must return the same value. If the store changes and the returned value is different (as compared by [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)), React re-renders the component.
+* `getSnapshot`: Bileşenin ihtiyaç duyduğu depodaki verilerin anlık görüntüsünü döndüren fonksiyondur. Veri deposu değişmemişse, `getSnapshot`'a yapılan çağrılar aynı değeri döndürmelidir. Depo değişirse ve döndürülen değer farklıysa ([`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ile karşılaştırıldığında), bileşen yeniden render edilir.
 
-* **optional** `getServerSnapshot`: A function that returns the initial snapshot of the data in the store. It will be used only during server rendering and during hydration of server-rendered content on the client. The server snapshot must be the same between the client and the server, and is usually serialized and passed from the server to the client. If you omit this argument, rendering the component on the server will throw an error.
+* **isteğe bağlı** `getServerSnapshot`: Depodaki verilerin başlangıçtaki anlık görüntüsünü döndüren fonksiyondur. Yalnızca sunucu taraflı render ya da istemcide render edilmiş çıktının hidratlanması sırasında çalıştırılır. Serileştirilerek sunucudan istemciye iletilen sunucu anlık görüntüsü, istemci ile aynı olmalıdır. Bu argümanı iletirseniz, bileşen sunucu tarafında render edilirken hata fırlatır.
 
-#### Returns {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
-The current snapshot of the store which you can use in your rendering logic.
+Render mantığınızda kullanabileceğiniz deponun o anki anlık görüntüsüdür.
 
-#### Caveats {/*caveats*/}
+#### Dikkat edilmesi gerekenler {/*caveats*/}
 
-* The store snapshot returned by `getSnapshot` must be immutable. If the underlying store has mutable data, return a new immutable snapshot if the data has changed. Otherwise, return a cached last snapshot.
+* `getSnapshot` tarafından döndürülen depo anlık görüntüsü değiştirilemez (immutable) olmalıdır. Depoda değiştirilebilir veri varsa veriler değiştiğinde yeni bir anlık görüntü döndürün. Aksi takdirde, önbelleğe alınmış en son anlık görüntüyü döndürün.
 
-* If a different `subscribe` function is passed during a re-render, React will re-subscribe to the store using the newly passed `subscribe` function. You can prevent this by declaring `subscribe` outside the component.
+* Yeniden render esnasında farklı bir `subscribe` fonksiyonu geçildiğinde React, yeni geçilen `subscribe` fonksiyonu ile depoya yeniden abone olur. `subscribe`'ı bileşenin dışında tanımlayarak bunu önleyebilirsiniz.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Subscribing to an external store {/*subscribing-to-an-external-store*/}
+### Harici depoya abone olma {/*subscribing-to-an-external-store*/}
 
-Most of your React components will only read data from their [props,](/learn/passing-props-to-a-component) [state,](/reference/react/useState) and [context.](/reference/react/useContext) However, sometimes a component needs to read some data from some store outside of React that changes over time. This includes:
+React bileşenlerinizin çoğu veriyi yalnızca [prop](/learn/passing-props-to-a-component), [state](/reference/react/useState) ve [context](/reference/react/useContext)'den okur. Ancak bileşenler, bazı verileri React dışındaki bir depodan (store) okuma ihtiyacı duyabilir. Aşağıdaki durumlar buna örnektir:
 
-* Third-party state management libraries that hold state outside of React.
-* Browser APIs that expose a mutable value and events to subscribe to its changes.
+* React dışında state tutan üçüncü parti state yönetim kütüphaneleri.
+* Değiştirebilir değer ve değişikliklere abone olmak için olaylar (event) sunan tarayıcı API'leri.
 
-Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
+Harici veri deposundan bir değer okumak için bileşeninizin en üst kapsamında `useSyncExternalStore`'u çağırın.
 
 ```js [[1, 5, "todosStore.subscribe"], [2, 5, "todosStore.getSnapshot"], [3, 5, "todos", 0]]
 import { useSyncExternalStore } from 'react';
@@ -80,14 +82,14 @@ function TodosApp() {
 }
 ```
 
-It returns the <CodeStep step={3}>snapshot</CodeStep> of the data in the store. You need to pass two functions as arguments:
+Veri deposundaki verilerin <CodeStep step={3}>anlık görüntüsünü</CodeStep> döndürür. Argüman olarak iki fonksiyon geçmeniz gerekir:
 
-1. The <CodeStep step={1}>`subscribe` function</CodeStep> should subscribe to the store and return a function that unsubscribes.
-2. The <CodeStep step={2}>`getSnapshot` function</CodeStep> should read a snapshot of the data from the store.
+1. <CodeStep step={1}>`subscribe` fonksiyonu</CodeStep>, depoya abone olmalı ve aboneliği sonlandıran fonksiyon döndürmelidir.
+2. <CodeStep step={2}>`getSnapshot` fonksiyonu</CodeStep>, depodan veriyi anlık görüntüsünü okumalıdır.
 
-React will use these functions to keep your component subscribed to the store and re-render it on changes.
+React, bu fonksiyonları kullanarak bileşeninizi depoya abone tutar ve değişikliklerde yeniden render eder.
 
-For example, in the sandbox below, `todosStore` is implemented as an external store that stores data outside of React. The `TodosApp` component connects to that external store with the `useSyncExternalStore` Hook. 
+Aşağıdaki örnekte `todosStore`, React'ın dışında veri tutan harici bir depo olacak şekilde implemente edilmiştir. `TodosApp` bileşeni `useSyncExternalStore` Hook'u ile harici depo ile bağlantı kurar. 
 
 <Sandpack>
 
@@ -99,7 +101,7 @@ export default function TodosApp() {
   const todos = useSyncExternalStore(todosStore.subscribe, todosStore.getSnapshot);
   return (
     <>
-      <button onClick={() => todosStore.addTodo()}>Add todo</button>
+      <button onClick={() => todosStore.addTodo()}>Yapılacak iş ekle</button>
       <hr />
       <ul>
         {todos.map(todo => (
@@ -112,19 +114,19 @@ export default function TodosApp() {
 ```
 
 ```js todoStore.js
-// This is an example of a third-party store
-// that you might need to integrate with React.
+// Bu dosya, React ile entegre etmeniz gerekebilecek
+// üçüncü taraf bir depo örneğidir.
 
-// If your app is fully built with React,
-// we recommend using React state instead.
+// Uygulamanızın tamamı React ile oluşturulduysa,
+// React state'i kullanmanızı öneririz.
 
 let nextId = 0;
-let todos = [{ id: nextId++, text: 'Todo #1' }];
+let todos = [{ id: nextId++, text: 'Yapılacak iş #1' }];
 let listeners = [];
 
 export const todosStore = {
   addTodo() {
-    todos = [...todos, { id: nextId++, text: 'Todo #' + nextId }]
+    todos = [...todos, { id: nextId++, text: 'Yapılacak iş #' + nextId }]
     emitChange();
   },
   subscribe(listener) {
@@ -149,17 +151,17 @@ function emitChange() {
 
 <Note>
 
-When possible, we recommend using built-in React state with [`useState`](/reference/react/useState) and [`useReducer`](/reference/react/useReducer) instead. The `useSyncExternalStore` API is mostly useful if you need to integrate with existing non-React code.
+Mümkün mertebe [`useState`](/reference/react/useState) ve [`useReducer`](/reference/react/useReducer) aracılığıyla yerleşik React state'ini kullanmanızı öneririz. `useSyncExternalStore` API'si, bileşenlerinizi React olmayan kodlarınızla entegre etmeniz gerektiğinde kullanışlıdır.
 
 </Note>
 
 ---
 
-### Subscribing to a browser API {/*subscribing-to-a-browser-api*/}
+### Tarayıcı API'sine abone olma {/*subscribing-to-a-browser-api*/}
 
-Another reason to add `useSyncExternalStore` is when you want to subscribe to some value exposed by the browser that changes over time. For example, suppose that you want your component to display whether the network connection is active. The browser exposes this information via a property called [`navigator.onLine`.](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine)
+`useSyncExternalStore` kullanmak için başka bir neden, tarayıcı tarafından sunulan ve zamanla değişen değerlere abone olmaktır. Örneğin, bileşeninizde ağ bağlantısının etkin olup olmadığını göstermek istiyorsunuzdur. Tarayıcı, bu bilgiyi [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) özelliği aracılığıyla sunar.
 
-This value can change without React's knowledge, so you should read it with `useSyncExternalStore`.
+Bu değer React'ın bilgisi dışında değişebilir ve bu sebeple `useSyncExternalStore` ile okumanız gerekir.
 
 ```js
 import { useSyncExternalStore } from 'react';
@@ -170,7 +172,7 @@ function ChatIndicator() {
 }
 ```
 
-To implement the `getSnapshot` function, read the current value from the browser API:
+`getSnapshot` fonksiyonunu implemente etmek için tarayıcı API'sinden geçerli değeri okuyun:
 
 ```js
 function getSnapshot() {
@@ -178,7 +180,7 @@ function getSnapshot() {
 }
 ```
 
-Next, you need to implement the `subscribe` function. For example, when `navigator.onLine` changes, the browser fires the [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) and [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) events on the `window` object. You need to subscribe the `callback` argument to the corresponding events, and then return a function that cleans up the subscriptions:
+Ardından, `subscribe` fonksiyonunu implemente etmeniz gerekir. Örneğin, `navigator.onLine` değiştiğinde `window` nesnesi üzerinden [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) ve [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) olayları tetiklenir. `callback` argümanıyla bu olaylara abone olmanız ve abonelikleri temizleyen bir fonksiyon döndürmeniz gerekir.
 
 ```js
 function subscribe(callback) {
@@ -191,7 +193,7 @@ function subscribe(callback) {
 }
 ```
 
-Now React knows how to read the value from the external `navigator.onLine` API and how to subscribe to its changes. Disconnect your device from the network and notice that the component re-renders in response:
+Artık React, harici `navigator.onLine` API'sinin değerini nasıl okuyacağını ve değişikliklere nasıl abone olacağını bilir. Cihazınızın ağ bağlantısı kesin ve bileşenin buna karşılık yeniden render'ı tetiklediğine dikkat edin:
 
 <Sandpack>
 
@@ -200,7 +202,7 @@ import { useSyncExternalStore } from 'react';
 
 export default function ChatIndicator() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimiçi' : '❌ Bağlantı kesildi'}</h1>;
 }
 
 function getSnapshot() {
@@ -221,11 +223,16 @@ function subscribe(callback) {
 
 ---
 
-### Extracting the logic to a custom Hook {/*extracting-the-logic-to-a-custom-hook*/}
+### Mantığı özel bir hook'a çıkarma {/*extracting-the-logic-to-a-custom-hook*/}
 
 Usually you won't write `useSyncExternalStore` directly in your components. Instead, you'll typically call it from your own custom Hook. This lets you use the same external store from different components.
 
 For example, this custom `useOnlineStatus` Hook tracks whether the network is online:
+
+Genellikle `useSyncExternalStore`'u bileşenlerinizde doğrudan kullanmazsınız. Bunun yerine kendi özel Hook'unuzda çağırırsınız. 
+Böylece aynı harici depoyu farklı bileşenlerden de kullanabilirsiniz.
+
+Örneğin, örnekteki özel `useOnlineStatus` Hook'u ağın çevrimiçi olup olmadığını takip eder:
 
 ```js {3,6}
 import { useSyncExternalStore } from 'react';
@@ -244,7 +251,7 @@ function subscribe(callback) {
 }
 ```
 
-Now different components can call `useOnlineStatus` without repeating the underlying implementation:
+Artık farklı bileşenler, implementasyonu sürekli tekrarlamadan `useOnlineStatus` çağırabilir:
 
 <Sandpack>
 
@@ -253,19 +260,19 @@ import { useOnlineStatus } from './useOnlineStatus.js';
 
 function StatusBar() {
   const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimiçi' : '❌ Bağlantı kesildi'}</h1>;
 }
 
 function SaveButton() {
   const isOnline = useOnlineStatus();
 
   function handleSaveClick() {
-    console.log('✅ Progress saved');
+    console.log('✅ İlerleme kaydedildi');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? 'Save progress' : 'Reconnecting...'}
+      {isOnline ? 'İlerlemeyi kaydet' : 'Yeniden bağlanılıyor...'}
     </button>
   );
 }
@@ -306,14 +313,16 @@ function subscribe(callback) {
 
 ---
 
-### Adding support for server rendering {/*adding-support-for-server-rendering*/}
+### Sunucu taraflı render desteği ekleme {/*adding-support-for-server-rendering*/}
 
-If your React app uses [server rendering,](/reference/react-dom/server) your React components will also run outside the browser environment to generate the initial HTML. This creates a few challenges when connecting to an external store:
+React uygulamanız [sunucu taraflı render'lama](/reference/react-dom/server) kullanıyorsa, React bileşenleriniz başlangıç HTML'ini üretmek için tarayıcı ortamının dışında da çalışacaktır. Bu durum, harici depoya bağlanırken bazı zorlukları beraberinde getirir:
 
-- If you're connecting to a browser-only API, it won't work because it does not exist on the server.
-- If you're connecting to a third-party data store, you'll need its data to match between the server and client.
+- Yalnızca tarayıcıda bulunan bir API'ye bağlanıyorsanız, çalışmayacaktır çünkü sunucuda mevcut değildir.
+- Üçüncü taraf bir veri deposuna bağlanıyorsanız, sunucu ve istemci arasında verilerin eşleşmesi gerekmektedir.
 
-To solve these issues, pass a `getServerSnapshot` function as the third argument to `useSyncExternalStore`:
+
+Bu sorunları çözmek için, `useSyncExternalStore`'a üçüncü argüman olarak `getServerSnapshot` fonksiyonunu iletin:
+
 
 ```js {4,12-14}
 import { useSyncExternalStore } from 'react';
@@ -328,7 +337,7 @@ function getSnapshot() {
 }
 
 function getServerSnapshot() {
-  return true; // Always show "Online" for server-generated HTML
+  return true; // Sunucu tarafında oluşturulan HTML için her zaman "Online" gösterir
 }
 
 function subscribe(callback) {
@@ -336,60 +345,60 @@ function subscribe(callback) {
 }
 ```
 
-The `getServerSnapshot` function is similar to `getSnapshot`, but it runs only in two situations:
+`getServerSnapshot` fonksiyonu `getSnapshot`'a benzer ancak yalnızca iki durumda çalışır:
 
-- It runs on the server when generating the HTML.
-- It runs on the client during [hydration](/reference/react-dom/client/hydrateRoot), i.e. when React takes the server HTML and makes it interactive.
+- HTML oluşturulurken sunucuda çalışır.
+- React'ın sunucu HTML'ini alıp etkileşimli haline getirirken yani [hidratlama](/reference/react-dom/client/hydrateRoot) yaparken istemcide çalışır.
 
-This lets you provide the initial snapshot value which will be used before the app becomes interactive. If there is no meaningful initial value for the server rendering, omit this argument to [force rendering on the client.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
+Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) için bu argümanı atlayın.
 
 <Note>
 
-Make sure that `getServerSnapshot` returns the same exact data on the initial client render as it returned on the server. For example, if `getServerSnapshot` returned some prepopulated store content on the server, you need to transfer this content to the client. One way to do this is to emit a `<script>` tag during server rendering that sets a global like `window.MY_STORE_DATA`, and read from that global on the client in `getServerSnapshot`. Your external store should provide instructions on how to do that.
+`getServerSnapshot`'ın istemci tarafındaki ilk render'da sahip olduğu verilerin, sunucudan döndürdüğü verilerle birebir aynı olduğundan emin olun. Örneğin `getServerSnapshot` sunucuda doldurulmuş olarak gelen depo içeriği döndürdüyse, bu içeriği istemciye aktarmanız gerekir. Bunun yapmanın bir yolu, sunucu taraflı render esnasında `window.MY_STORE_DATA` gibi bir global tanımlayan `<script>` etiketi kullanmak ve ardından istemcide `getServerSnapshot` içinden bu global değişkeni okumaktır. Harici deponuz bunu nasıl yapacağınıza ilişkin talimatlar sağlamalıdır.
 
 </Note>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### I'm getting an error: "The result of `getSnapshot` should be cached" {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
+### "The result of `getSnapshot` should be cached" hatası alıyorum {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
 
-This error means your `getSnapshot` function returns a new object every time it's called, for example:
+Bu hata, `getSnapshot` fonksiyonunuzun her çağırıldığında yeni bir nesne döndürdüğü anlamına gelir, örneğin:
 
 ```js {2-5}
 function getSnapshot() {
-  // 🔴 Do not return always different objects from getSnapshot
+  // 🔴 getSnapshot'dan her seferinde farklı nesne döndürmeyin
   return {
     todos: myStore.todos
   };
 }
 ```
 
-React will re-render the component if `getSnapshot` return value is different from the last time. This is why, if you always return a different value, you will enter an infinite loop and get this error.
+`getSnapshot` son seferkinden farklı bir değer döndürdüğünde, React bileşeni yeniden render eder. Dolayısıyla her seferinde farklı sonuç döndürdüğünüzde sonsuz döngüye girer ve hata alırsınız.
 
-Your `getSnapshot` object should only return a different object if something has actually changed. If your store contains immutable data, you can return that data directly:
+`getSnapshot` nesneniz yalnızca gerçekten değiştiğinde farklı bir nesne döndürür. Deponuz değişmez (immutable) veri içeriyorsa, bu verileri doğrudan döndürebilirsiniz:
 
 ```js {2-3}
 function getSnapshot() {
-  // ✅ You can return immutable data
+  // ✅ Değişmez verileri döndürebilirsiniz
   return myStore.todos;
 }
 ```
 
-If your store data is mutable, your `getSnapshot` function should return an immutable snapshot of it. This means it *does* need to create new objects, but it shouldn't do this for every single call. Instead, it should store the last calculated snapshot, and return the same snapshot as the last time if the data in the store has not changed. How you determine whether mutable data has changed depends on your mutable store.
+Deponuzdaki veri değişken (mutable) ise `getSnapshot` fonksiyonunuz değişmez anlık görüntüsünü döndürmelidir. Yani her çağrıldığında farklı nesne oluşturması gerektiği anlamına gelir. Bunun yerine, son hesaplanan anlık görüntüyü depolamalı ve depodaki veri değişmediyse bir önceki anlık görüntüyü döndürmelidir. Değişken verilerin değişip değişmediğini nasıl belirleyeceğiniz deponuza bağlıdır.
 
 ---
 
-### My `subscribe` function gets called after every re-render {/*my-subscribe-function-gets-called-after-every-re-render*/}
+### `subscribe` fonksiyonum her render'dan sonra çağırılıyor {/*my-subscribe-function-gets-called-after-every-re-render*/}
 
-This `subscribe` function is defined *inside* a component so it is different on every re-render:
+Örnekteki `subscribe` fonksiyonu bileşenin *içinde* tanımlanmıştır ve bu nedenle her render'da farklıdır:
 
 ```js {4-7}
 function ChatIndicator() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
   
-  // 🚩 Always a different function, so React will resubscribe on every re-render
+  // 🚩 Her zaman farklı fonksiyondur, React her render'da yeniden abone olur
   function subscribe() {
     // ...
   }
@@ -397,8 +406,7 @@ function ChatIndicator() {
   // ...
 }
 ```
-  
-React will resubscribe to your store if you pass a different `subscribe` function between re-renders. If this causes performance issues and you'd like to avoid resubscribing, move the `subscribe` function outside:
+Yeniden render'lar arasında farklı bir `subscribe` fonksiyonu iletirseniz, React deponuza yeniden abone olur. Bu durum performans sorunlarına neden oluyorsa ve sürekli abone olmaktan kaçınmak istiyorsanız, `subscribe` fonksiyonunu bileşen dışına taşıyın:
 
 ```js {6-9}
 function ChatIndicator() {
@@ -406,19 +414,19 @@ function ChatIndicator() {
   // ...
 }
 
-// ✅ Always the same function, so React won't need to resubscribe
+// ✅ Her zaman aynı fonksiyondur, React yeniden abone olmaz
 function subscribe() {
   // ...
 }
 ```
 
-Alternatively, wrap `subscribe` into [`useCallback`](/reference/react/useCallback) to only resubscribe when some argument changes:
+Alternatif olarak, yalnızca bir takım argümanlar değiştiğinde yeniden abone olmak için `subscribe` fonksiyonunu [`useCallback`](/reference/react/useCallback) Hook'una sarın:
 
 ```js {4-8}
 function ChatIndicator({ userId }) {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
   
-  // ✅ Same function as long as userId doesn't change
+  // ✅ userId değişmediği sürece aynı fonksiyondur
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);
