@@ -4,13 +4,13 @@ title: flushSync
 
 <Pitfall>
 
-Using `flushSync` is uncommon and can hurt the performance of your app.
+`flushSync` kullanımı yaygın değildir ve uygulamanızın performansına zarar verebilir.
 
 </Pitfall>
 
 <Intro>
 
-`flushSync` lets you force React to flush any updates inside the provided callback synchronously. This ensures that the DOM is updated immediately.
+`flushSync`, sağlanan callback içindeki herhangi bir güncellemeyi zorla ve senkronize bir şekilde işlemeye olanak sağlar. Bu, DOM'u anında güncelleyecektir.
 
 ```js
 flushSync(callback)
@@ -22,11 +22,12 @@ flushSync(callback)
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `flushSync(callback)` {/*flushsync*/}
 
-Call `flushSync` to force React to flush any pending work and update the DOM synchronously.
+Bekleyen tüm islemleri aninda calistirmak ve DOM'u hemen güncellemek için `flushSync` fonksiyonunu kullanın.
+
 
 ```js
 import { flushSync } from 'react-dom';
@@ -36,50 +37,51 @@ flushSync(() => {
 });
 ```
 
-Most of the time, `flushSync` can be avoided. Use `flushSync` as last resort.
+Çoğunlukla, `flushSync` kullanmanıza gerek yoktur. `flushSync`'i sadece son çareniz olduğunda kullanın.
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıdaki linki tıklayın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
 
-* `callback`: A function. React will immediately call this callback and flush any updates it contains synchronously. It may also flush any pending updates, or Effects, or updates inside of Effects. If an update suspends as a result of this `flushSync` call, the fallbacks may be re-shown.
+* `callback`: Bir fonksiyon. React, bu callback'i hemen çağırır ve içerdiği tüm güncellemeleri senkronize bir şekilde gerçekleştirir. Aynı zamanda bekleyen güncellemeleri, Effect'leri veya Effect'ler içindeki güncellemeleri de gerçekleştirebilir. Eğer `flushSync` çağrısı sonucunda bir güncelleme duraklatılırsa, fallback'ler tekrar görünebilir.
 
-#### Returns {/*returns*/}
+#### Geri Döndürür {/*returns*/}
 
-`flushSync` returns `undefined`.
+`flushSync` `undefined` geri döndürür.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `flushSync` can significantly hurt performance. Use sparingly.
-* `flushSync` may force pending Suspense boundaries to show their `fallback` state.
-* `flushSync` may run pending effects and synchronously apply any updates they contain before returning.
-* `flushSync` may flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
+* `flushSync` performansı önemli ölçüde düşürebilir. Sınırlı şekilde kullanın.
+* `flushSync` bekleyen Suspense sınırlarını `fallback` durumunu göstermeye mecbur bırakabilir.
+* `flushSync` bekleyen effect'leri tetikleyebilir ve içerdikleri güncellemeleri döndürmeden önce senkron bir şekilde uygulayabilir.
+* `flushSync` callback içindeki güncellemeleri işlemek gerektiğinde, callback dışındaki güncellemeleri işleyebilir. Örneğin, bir tıklama sonucu bekleyen güncellemeler varsa, React bu güncellemeleri callback içindeki güncellemeleri işlemeden önce işleyebilir.
+
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Flushing updates for third-party integrations {/*flushing-updates-for-third-party-integrations*/}
+### Üçüncü Parti Entegrasyonlar için Güncellemeleri İşleme {/*flushing-updates-for-third-party-integrations*/}
 
-When integrating with third-party code such as browser APIs or UI libraries, it may be necessary to force React to flush updates. Use `flushSync` to force React to flush any <CodeStep step={1}>state updates</CodeStep> inside the callback synchronously:
+Tarayıcı API'leri veya UI kütüphaneleri gibi üçüncü parti kodlarıyla entegrasyon sağlarken, React'in güncellemeleri zorla işlemesi gerekebilir. Callback içerisindeki herhangi bir <CodeStep step={1}>durum güncellemesi</CodeStep>'ni senkron bir şekilde işlemek için `flushSync` kullanın:
 
 ```js [[1, 2, "setSomething(123)"]]
 flushSync(() => {
   setSomething(123);
 });
-// By this line, the DOM is updated.
+// Bu satıra gelindiğinde, DOM güncellenmiştir.
 ```
 
-This ensures that, by the time the next line of code runs, React has already updated the DOM.
+Bir sonraki kod satırı çalıştığında, React'in zaten DOM'u güncellediğini garanti eder.
 
-**Using `flushSync` is uncommon, and using it often can significantly hurt the performance of your app.** If your app only uses React APIs, and does not integrate with third-party libraries, `flushSync` should be unnecessary.
+**`flushSync` kullanımı yaygın değildir ve sık kullanımı uygulamanızın performansını büyük ölçüde düşürebilir.** Eğer uygulamanız sadece React API'lerini kullanıyorsa ve üçüncü parti kütüphanelerle entegre değilse, `flushSync`'e ihtiyaç duyumamalıdır.
 
-However, it can be helpful for integrating with third-party code like browser APIs.
+Ancak, tarayıcı API'leri gibi üçüncü parti kodlarla entegrasyon yapmak için kullanışlı olabilir.
 
-Some browser APIs expect results inside of callbacks to be written to the DOM synchronously, by the end of the callback, so the browser can do something with the rendered DOM. In most cases, React handles this for you automatically. But in some cases it may be necessary to force a synchronous update.
+Bazı tarayıcı API'leri, callback içindeki sonuçların callback'in sonuna kadar DOM'a senkron bir şekilde yazılmasını bekler, böylece tarayıcı, oluşturulan DOM ile bir şeyler yapabilir. Çoğu durumda, React bunu sizin için otomatik olarak halleder. Ancak bazı durumlarda senkron bir güncellemeyi zorlamak gerekebilir.
 
-For example, the browser `onbeforeprint` API allows you to change the page immediately before the print dialog opens. This is useful for applying custom print styles that allow the document to display better for printing. In the example below, you use `flushSync` inside of the `onbeforeprint` callback to immediately "flush" the React state to the DOM. Then, by the time the print dialog opens, `isPrinting` displays "yes":
+Örneğin, tarayıcının `onbeforeprint` API'si, yazdırma iletişim kutusu açılmadan hemen önce sayfayı değiştirmenize olanak sağlar. Bu, belgenin yazdırma için daha iyi bir şekilde görüntülenmesine olanak sağlayan özel yazdırma stillerinin uygulanması için yararlıdır. Aşağıdaki örnekte, `onbeforeprint` callback'inde `flushSync`'i hemen React durumunu DOM'a "güncellemek" için kullanıyorsunuz. Böylece, yazdırma penceresi açıldığında, `isPrinting` "yes" olarak görünür:
 
 <Sandpack>
 
@@ -122,12 +124,12 @@ export default function PrintApp() {
 
 </Sandpack>
 
-Without `flushSync`, when the print dialog will display `isPrinting` as "no". This is because React batches the updates asynchronously and the print dialog is displayed before the state is updated.
+`flushSync` olmadığında, yazdırma diyalogu `isPrinting`'i "hayır" olarak gösterir. Bunun sebebi, React'in güncellemeleri asenkron bir şekilde biriktirmesi ve yazdırma diyalogunun durum güncellenmeden önce görüntülenmesidir.
 
 <Pitfall>
 
-`flushSync` can significantly hurt performance, and may unexpectedly force pending Suspense boundaries to show their fallback state.
+`flushSync`, performansı önemli ölçüde etkileyebilir ve bekleyen Suspense sınırlarını beklenmedik şekilde fallback durumlarını göstermeye zorlayabilir.
 
-Most of the time, `flushSync` can be avoided, so use `flushSync` as a last resort.
+Çoğu zaman, `flushSync`'in kullanılımına gerek yoktur, dolayısıyla `flushSync`'i son çare olarak kullanın.
 
 </Pitfall>
