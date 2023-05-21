@@ -1,53 +1,53 @@
 ---
-title: Choosing the State Structure
+title: State Yapısını Seçme
 ---
 
 <Intro>
 
-Structuring state well can make a difference between a component that is pleasant to modify and debug, and one that is a constant source of bugs. Here are some tips you should consider when structuring state.
+Bir bileşenin state'ini iyi yapılandırmak, değişiklik yapılması ve hata ayıklaması kolay bir bileşen ile sürekli hatalara sebep olan bir bileşen arasındaki farkı yaratabilir. Bu sayfada state'i yapılandırırken göz önünde bulundurmanız gereken ipuçlarını bulabilirsiniz.
 
 </Intro>
 
 <YouWillLearn>
 
-* When to use a single vs multiple state variables
-* What to avoid when organizing state
-* How to fix common issues with the state structure
+* Ne zaman tek veya birden çok state değişkeni kullanmalısınız
+* State'i düzenlerken nelerden kaçınılmalıdır
+* State yapısındaki yaygın sorunlar nasıl giderilir
 
 </YouWillLearn>
 
-## Principles for structuring state {/*principles-for-structuring-state*/}
+## State'i yapılandırmanın prensipleri {/*principles-for-structuring-state*/}
 
-When you write a component that holds some state, you'll have to make choices about how many state variables to use and what the shape of their data should be. While it's possible to write correct programs even with a suboptimal state structure, there are a few principles that can guide you to make better choices:
+İçinde state barındıran bir bileşen yazdığınızda, bu bileşende kaç tane state değişkeni olması gerektiği veya bu değişkenlerin verilerini nasıl şekillendirmeniz gerektiği hakkında kararlar vermeniz gerekecektir. Optimalden uzak state yapısıyla dahi doğru şekilde çalışan programlar yazabilmeniz mümkün olsa da, sizi daha iyi kararlar vermeye yönlendirecek bazı prensipler aşağıdaki gibidir:
 
-1. **Group related state.** If you always update two or more state variables at the same time, consider merging them into a single state variable.
-2. **Avoid contradictions in state.** When the state is structured in a way that several pieces of state may contradict and "disagree" with each other, you leave room for mistakes. Try to avoid this.
-3. **Avoid redundant state.** If you can calculate some information from the component's props or its existing state variables during rendering, you should not put that information into that component's state.
-4. **Avoid duplication in state.** When the same data is duplicated between multiple state variables, or within nested objects, it is difficult to keep them in sync. Reduce duplication when you can.
-5. **Avoid deeply nested state.** Deeply hierarchical state is not very convenient to update. When possible, prefer to structure state in a flat way.
+1. **Bağlantılı state değişkenlerini gruplayın.** Eğer birden fazla state değişkenini hep aynı anda güncelliyorsanız, bu değişkenleri tek bir state değişkeninde birleştirmeyi değerlendirin.
+2. **State çelişkilerinden kaçının.** Eğer bir bileşenin state değişkenleri birbiriyle çelişecek ya da uyuşmayacak şekilde tasarlanırsa hatalara açık kapı bırakmış olursunuz. Bu durumdan kaçının.
+3. **Gereksiz state oluşturmaktan kaçının.** Eğer bileşeni render ederken, bileşenin prop'larından ya da varolan state değişkenlerinden ihtiyacınız olan bilgiyi hesaplayabiliyorsanız bu bilgiyi bileşenin state'inde tutmamalısınız.
+4. **Yinelenen state değişkenlerinden kaçının.** Aynı veri, farklı state değişkenleri ya da iç içe nesneler içinde yinelendiğinde senkronizasyonu sağlamak zorlaşabilir. Buna benzer tekrarları en aza indirgemeye çalışın.
+5. **Derinlemesine iç içe olan bir state yapısından kaçının.** Derinlemesine hiyerarşik yapıya sahip olan state'i güncellemek çok da pratik bir değildir. State'i daha düz bir yapıda şekillendirmeye çalışın.
 
-The goal behind these principles is to *make state easy to update without introducing mistakes*. Removing redundant and duplicate data from state helps ensure that all its pieces stay in sync. This is similar to how a database engineer might want to ["normalize" the database structure](https://docs.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description) to reduce the chance of bugs. To paraphrase Albert Einstein, **"Make your state as simple as it can be--but no simpler."**
+Bu prensiplerin asıl amacı, *state'i hatalara sebep olmadan kolayca güncelleyebilmektir*. State'ten gereksiz ve yinelenen veriyi temizlemek tüm parçaların birbiriyle senkronize kalmasına yardımcı olur. Bu durum, bir veritabanı mühendisinin hata ihtimalini azaltmak için [veritabanı yapısını "normalleştirmek"](https://learn.microsoft.com/tr-tr/office/troubleshoot/access/database-normalization-description) istemesine benzetilebilir. Albert Einstein'ın sözleriyle yorumlamak gerekirse, **"State mümkün olabildiğince basit olmalı, sadece basit değil."**
 
-Now let's see how these principles apply in action.
+Haydi şimdi bu prensiplerin nasıl uygulandığını görelim.
 
-## Group related state {/*group-related-state*/}
+## Bağlantılı state değişkenlerini gruplayın {/*group-related-state*/}
 
-You might sometimes be unsure between using a single or multiple state variables.
+Bazen tek bir state değişkeni mi yoksa birden fazla state değişkeni mi kullanmanız gerektiği hakkında emin olmayabilirsiniz.
 
-Should you do this?
+Bu şekilde mi yapmalısınız?
 
 ```js
 const [x, setX] = useState(0);
 const [y, setY] = useState(0);
 ```
 
-Or this?
+Yoksa bu şekilde mi?
 
 ```js
 const [position, setPosition] = useState({ x: 0, y: 0 });
 ```
 
-Technically, you can use either of these approaches. But **if some two state variables always change together, it might be a good idea to unify them into a single state variable.** Then you won't forget to always keep them in sync, like in this example where moving the cursor updates both coordinates of the red dot:
+Teknik olarak ikisini de kullanabilirsiniz. Fakat **iki farklı state değişkeni hep aynı anda değişiyorsa bunları tek bir state değişkeninde birleştirmek iyi bir fikir olabilir.** Böylece, imleci oynatmanın her iki koordinatı da tek seferde güncellediği örnekte olduğu gibi onları sürekli senkronize tutmayı unutmazsınız:
 
 <Sandpack>
 
@@ -93,17 +93,17 @@ body { margin: 0; padding: 0; height: 250px; }
 
 </Sandpack>
 
-Another case where you'll group data into an object or an array is when you don't know how many pieces of state you'll need. For example, it's helpful when you have a form where the user can add custom fields.
+Veriyi bir nesnede ya da dizide gruplayacağınız diğer bir örnek ise kaç farklı state parçasına ihtiyacınız olacağını bilemediğiniz durumlardır. Örneğin, kullanıcının özel alanlar ekleyebildiği bir form oluşturmanız gerektiğinde bu prensip size yardımcı olacaktır.
 
 <Pitfall>
 
-If your state variable is an object, remember that [you can't update only one field in it](/learn/updating-objects-in-state) without explicitly copying the other fields. For example, you can't do `setPosition({ x: 100 })` in the above example because it would not have the `y` property at all! Instead, if you wanted to set `x` alone, you would either do `setPosition({ ...position, x: 100 })`, or split them into two state variables and do `setX(100)`.
+Eğer state değişkeniniz bir nesne ise diğer tüm alanları açıkça kopyalamadan [tek bir alanı kopyalayamayacağınızı](/learn/updating-objects-in-state) unutmayın. Örneğin, yukarıdaki örnekte `setPosition({ x: 100 })` şeklinde güncelleyemezsiniz çünkü bu durumda state değişkeni `y` özelliğini hiç içermemiş olur! Bunun yerine, sadece `x`'i değiştirmek istediğinizde ya `setPosition({ ...position, x: 100 })` şeklinde ya da bunları iki farklı state değişkenine bölüp `setX(100)` şeklinde değiştirmelisiniz.
 
 </Pitfall>
 
-## Avoid contradictions in state {/*avoid-contradictions-in-state*/}
+## State çelişkilerinden kaçının {/*avoid-contradictions-in-state*/}
 
-Here is a hotel feedback form with `isSending` and `isSent` state variables:
+İşte `isSending` ve `isSent` state değişkenlerine sahip olan bir otel geri bildirim formu:
 
 <Sandpack>
 
@@ -147,7 +147,7 @@ export default function FeedbackForm() {
   );
 }
 
-// Pretend to send a message.
+// Mesajı gönderiyormuş gibi yap.
 function sendMessage(text) {
   return new Promise(resolve => {
     setTimeout(resolve, 2000);
@@ -157,9 +157,9 @@ function sendMessage(text) {
 
 </Sandpack>
 
-While this code works, it leaves the door open for "impossible" states. For example, if you forget to call `setIsSent` and `setIsSending` together, you may end up in a situation where both `isSending` and `isSent` are `true` at the same time. The more complex your component is, the harder it is to understand what happened.
+Bu kod her ne kadar çalışıyor olsa da "imkansız" state'lere açık kapı bırakıyor. Örneğin, `setIsSent` ve `setIsSending`'i birlikte çağırmayı unutursanız, `isSending` ve `isSent` değişkenlerinin aynı anda `true` olduğu bir durumla karşı karşıya kalabilirsiniz. Bileşeniniz ne kadar karmaşık olursa neler olduğunu anlamanız da aynı oranda zorlaşacaktır.
 
-**Since `isSending` and `isSent` should never be `true` at the same time, it is better to replace them with one `status` state variable that may take one of *three* valid states:** `'typing'` (initial), `'sending'`, and `'sent'`:
+**`isSending` ve `isSent` değişkenlerinin hiçbir zaman aynı anda `true` olmaması gerektiğinden bunları** `'typing'` (başlangıç değeri), `'sending'` ve `'sent'` **durumlarından birini alabilen `status` adında tek bir state değişkenine dönüştürmek daha iyi olur**:
 
 <Sandpack>
 
@@ -204,7 +204,7 @@ export default function FeedbackForm() {
   );
 }
 
-// Pretend to send a message.
+// Mesajı gönderiyormuş gibi yap.
 function sendMessage(text) {
   return new Promise(resolve => {
     setTimeout(resolve, 2000);
@@ -214,20 +214,20 @@ function sendMessage(text) {
 
 </Sandpack>
 
-You can still declare some constants for readability:
+Okunabilirlik için hala sabit değişkenler oluşturabilirsiniz.
 
 ```js
 const isSending = status === 'sending';
 const isSent = status === 'sent';
 ```
 
-But they're not state variables, so you don't need to worry about them getting out of sync with each other.
+Fakat onlar state değişkenleri olmadığı için birbirleriyle senkronize kalıp kalmamaları hakkında endişelenmenize gerek yok.
 
-## Avoid redundant state {/*avoid-redundant-state*/}
+## Gereksiz state oluşturmaktan kaçının {/*avoid-redundant-state*/}
 
-If you can calculate some information from the component's props or its existing state variables during rendering, you **should not** put that information into that component's state.
+Eğer bileşeni render ederken bileşenin prop'larından ya da varolan state değişkenlerinden ihtiyacınız olan bilgiyi hesaplayabiliyorsanız bu bilgiyi bileşenin state'inde **tutmamalısınız**.
 
-For example, take this form. It works, but can you find any redundant state in it?
+Örneğin bu formu ele alın. Bu form çalışıyor fakat içinde gereksiz bir state bulabilir misiniz?
 
 <Sandpack>
 
@@ -280,9 +280,9 @@ label { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-This form has three state variables: `firstName`, `lastName`, and `fullName`. However, `fullName` is redundant. **You can always calculate `fullName` from `firstName` and `lastName` during render, so remove it from state.**
+Bu form üç state değişkeni içeriyor: `firstName`, `lastName` ve `fullName`. Fakat `fullName` gereksiz bir state değişkeni. **`fullName` değişkeninin değerini her zaman `firstName` ve `lastName` değişkenlerinin değerlerini kullanarak render esnasında hesaplayabilirsiniz, bu yüzden state'ten kaldırmalısınız.**
 
-This is how you can do it:
+Bu işlemi şu şekilde yapabilirsiniz:
 
 <Sandpack>
 
@@ -334,50 +334,50 @@ label { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-Here, `fullName` is *not* a state variable. Instead, it's calculated during render:
+Burada `fullName` bir state değişkeni *değil*. Bunun yerine bileşen render edilirken hesaplanıyor:
 
 ```js
 const fullName = firstName + ' ' + lastName;
 ```
 
-As a result, the change handlers don't need to do anything special to update it. When you call `setFirstName` or `setLastName`, you trigger a re-render, and then the next `fullName` will be calculated from the fresh data.
+Sonuç olarak, değişiklik yöneticilerinin bu değeri güncellemek için özel bir şey yapmasına gerek kalmıyor. `setFirstName` ve `setLastName` fonksiyonlarını çağırdığınızda bileşenin tekrar render edilmesini tetiklemiş olursunuz, sonrasında da `fullName` değişkeninin yeni değeri güncel veri kullanılarak hesaplanacaktır.
 
 <DeepDive>
 
-#### Don't mirror props in state {/*don-t-mirror-props-in-state*/}
+#### Prop'ları state'e yansıtmayın {/*don-t-mirror-props-in-state*/}
 
-A common example of redundant state is code like this:
+Gereksiz state'in yaygın bir örneği aşağıdaki gibidir:
 
 ```js
 function Message({ messageColor }) {
   const [color, setColor] = useState(messageColor);
 ```
 
-Here, a `color` state variable is initialized to the `messageColor` prop. The problem is that **if the parent component passes a different value of `messageColor` later (for example, `'red'` instead of `'blue'`), the `color` *state variable* would not be updated!** The state is only initialized during the first render.
+Bu örnekte `color`, `messageColor` prop'u ile başlangıç değeri tanımlanan bir state değişkeni. Sorun şu ki **üst bileşen daha sonra farklı bir `messageColor` değeri (örneğin, `'blue'` yerine `'red'`) gönderdiğinde `color` *state değişkeni* güncellenmeyecek!** Çünkü state yalnızca ilk render esnasında başlangıç değerini alır.
 
-This is why "mirroring" some prop in a state variable can lead to confusion. Instead, use the `messageColor` prop directly in your code. If you want to give it a shorter name, use a constant:
+Bu sebeple bir prop'u state değişkenine "yansıtmak" kafa karışıklığına sebep olabilir. Bunun yerine, `messageColor` prop'unu direkt olarak kod içinde kullanın. Eğer daha kısa bir isim vermek istiyorsanız sabit değişken kullanın:
 
 ```js
 function Message({ messageColor }) {
   const color = messageColor;
 ```
 
-This way it won't get out of sync with the prop passed from the parent component.
+Böylece üst bileşenden gönderilen prop ile senkronizasyon sorunu oluşmayacaktır.
 
-"Mirroring" props into state only makes sense when you *want* to ignore all updates for a specific prop. By convention, start the prop name with `initial` or `default` to clarify that its new values are ignored:
+Prop'ları state'e "yansıtmak", yalnızca belirli bir prop'a ait tüm güncellemeleri *yok saymak* istediğinizde mantıklı bir kullanımdır. Bu durumda, genel kabul olarak, gönderilecek yeni değerlerin yok sayıldığını belirtmek için prop adını `initial` veya `default` ön ekiyle başlatın:
 
 ```js
 function Message({ initialColor }) {
-  // The `color` state variable holds the *first* value of `initialColor`.
-  // Further changes to the `initialColor` prop are ignored.
+  // `color` state değişkeni `initialColor`'ın *ilk* değerini tutar.
+  // `initialColor`'a ait sonraki tüm değişiklikler yok sayılır.
   const [color, setColor] = useState(initialColor);
 ```
 
 </DeepDive>
 
-## Avoid duplication in state {/*avoid-duplication-in-state*/}
+## Yinelenen state değişkenlerinden kaçının {/*avoid-duplication-in-state*/}
 
-This menu list component lets you choose a single travel snack out of several:
+Aşağıdaki menü listesi bileşeni birden fazla atıştırmalık içinden birini seçmenizi sağlar:
 
 <Sandpack>
 
@@ -422,9 +422,9 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
-Currently, it stores the selected item as an object in the `selectedItem` state variable. However, this is not great: **the contents of the `selectedItem` is the same object as one of the items inside the `items` list.** This means that the information about the item itself is duplicated in two places.
+Mevcut durumda, seçilen öğe `selectedItem` state değişkeninde nesne olarak saklanır. Ancak bu durum pek de iyi değil çünkü **`selectedItem`'ın içeriği `items` listesinde tutulan nesne ile aynı.** Bu durum, öğe hakkındaki bilginin iki farklı yerde yinelenerek tutulduğu anlamına gelir.
 
-Why is this a problem? Let's make each item editable:
+Peki bu neden bir sorun? Haydi her öğeyi düzenlenebilir yapalım:
 
 <Sandpack>
 
@@ -487,9 +487,9 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
-Notice how if you first click "Choose" on an item and *then* edit it, **the input updates but the label at the bottom does not reflect the edits.** This is because you have duplicated state, and you forgot to update `selectedItem`.
+Dikkat ederseniz önce bir öğeye ait "Choose" butonuna tıklar ve sonrasında o öğeyi düzenlerseniz **girdi güncellenecektir fakat aşağıdaki öğe adı yapılan değişikliği yansıtmayacaktır.** Bu yinelenen bir state'e sahip olmanızdan kaynaklanır ve `selectedItem`'ı güncellemeyi unuttuğunuz anlamına gelir.
 
-Although you could update `selectedItem` too, an easier fix is to remove duplication. In this example, instead of a `selectedItem` object (which creates a duplication with objects inside `items`), you hold the `selectedId` in state, and *then* get the `selectedItem` by searching the `items` array for an item with that ID:
+`selectedItem`'ı güncelleyebilecek olsanız dahi, daha basit bir çözüm yinelemeyi ortadan kaldırmaktır. Bu örnekte `selectedItem` nesnesi (`items` içindeki nesnelerle yineleme durumunu yaratan nesne) yerine state'te `selectedId` değerini tutup sonrasında `items` dizisinde bu ID'ye sahip olan `selectedItem`'ı bulabilirsiniz:
 
 <Sandpack>
 
@@ -554,25 +554,25 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
-(Alternatively, you may hold the selected index in state.)
+(Alternatif olarak seçilen indeksi state'te tutabilirsiniz.)
 
-The state used to be duplicated like this:
+State aşağıdaki gibi yineleniyordu:
 
 * `items = [{ id: 0, title: 'pretzels'}, ...]`
 * `selectedItem = {id: 0, title: 'pretzels'}`
 
-But after the change it's like this:
+Fakat değişiklik sonrasında aşağıdaki gibi oldu:
 
 * `items = [{ id: 0, title: 'pretzels'}, ...]`
 * `selectedId = 0`
 
-The duplication is gone, and you only keep the essential state!
+Yineleme durumu ortadan kalktı ve yalnızca gerekli olan state'i tutuyorsunuz!
 
-Now if you edit the *selected* item, the message below will update immediately. This is because `setItems` triggers a re-render, and `items.find(...)` would find the item with the updated title. You didn't need to hold *the selected item* in state, because only the *selected ID* is essential. The rest could be calculated during render.
+Artık *seçili* öğeyi düzenlediğinizde altındaki mesaj anında güncellenecektir. Bunun sebebi `setItems`'ın bileşenin tekrar render edilmesine sebep olması ve `items.find(...)`'ın başlığı güncellenen öğeyi bulmasıdır. Yani *seçili öğeyi* tutmanıza gerek yoktur çünkü sadece *seçili ID* gereklidir. Geri kalan bilgi render esnasında hesaplanabilir.
 
-## Avoid deeply nested state {/*avoid-deeply-nested-state*/}
+## Derinlemesine iç içe olan bir state yapısından kaçının {/*avoid-deeply-nested-state*/}
 
-Imagine a travel plan consisting of planets, continents, and countries. You might be tempted to structure its state using nested objects and arrays, like in this example:
+Gezegenleri, kıtaları ve ülkeleri içeren bir seyahat planı hayal edin. Bu durumda state yapısını, iç içe nesne ve dizilerden oluşacak şekilde tasarlamak sizi cezbedebilir:
 
 <Sandpack>
 
@@ -818,11 +818,11 @@ export const initialTravelPlan = {
 
 </Sandpack>
 
-Now let's say you want to add a button to delete a place you've already visited. How would you go about it? [Updating nested state](/learn/updating-objects-in-state#updating-a-nested-object) involves making copies of objects all the way up from the part that changed. Deleting a deeply nested place would involve copying its entire parent place chain. Such code can be very verbose.
+Hali hazırda ziyaret ettiğiniz bir lokasyonu silmeye yarayan bir buton eklemek istediğinizi varsayalım. Nasıl yapardınız? [İç içe yapılandırılmış state'i güncellemek](/learn/updating-objects-in-state#updating-a-nested-object) için değiştiği yere kadar olan tüm nesnelerin kopyalarını yaratmak gerekir. Derinlemesine iç içe geçmiş bir lokasyonu silmek için ise tüm üst lokasyon zincirini kopyalamak gerekir. Böyle bir kod gereğinden daha uzun olabilir.
 
-**If the state is too nested to update easily, consider making it "flat".** Here is one way you can restructure this data. Instead of a tree-like structure where each `place` has an array of *its child places*, you can have each place hold an array of *its child place IDs*. Then store a mapping from each place ID to the corresponding place.
+**Eğer state güncellemek için gereğinden daha fazla iç içe geçmiş bir halde ise onu daha düz bir yapıya getirmeyi değerlendirin.** İşte bu veriyi yeniden yapılandırmanız için bir yol. Eğer her `place` (lokasyon) *alt lokasyonları* için ağaç yapısında bir diziye sahipse her `place`'in (lokasyonun) *alt lokasyonlarının IDlerini* tuttuğu bir diziye sahip olmasını sağlayabilirsiniz. Sonrasında da her bir lokasyon ID'sine karşılık gelen lokasyonun eşlemesini tutabilirsiniz.
 
-This data restructuring might remind you of seeing a database table:
+Veriyi aşağıdaki gibi yeniden yapılandırmak size bir veritabanı tablosunu hatırlatabilir:
 
 <Sandpack>
 
@@ -1129,14 +1129,14 @@ export const initialTravelPlan = {
 
 </Sandpack>
 
-**Now that the state is "flat" (also known as "normalized"), updating nested items becomes easier.**
+**Artık state "düz" ("normalleştirilmiş" olarak da bilinir), iç içe öğeleri güncellemek daha kolay.**
 
-In order to remove a place now, you only need to update two levels of state:
+Artık bir lokasyonu kaldırmak için state'in yalnızca iki seviyesini güncellemeniz gerekiyor.
 
-- The updated version of its *parent* place should exclude the removed ID from its `childIds` array.
-- The updated version of the root "table" object should include the updated version of the parent place.
+- *Üst* lokasyonunun güncellenmiş sürümü kaldırılan ID'yi `childIds` dizisinden çıkarmalı.
+- Kök "tablo" nesnesinin güncellenmiş sürümü üst lokasyonun güncellenmiş halini içermeli.
 
-Here is an example of how you could go about it:
+İşte bunu nasıl yapabileceğinizin bir örneği:
 
 <Sandpack>
 
@@ -1149,17 +1149,17 @@ export default function TravelPlan() {
 
   function handleComplete(parentId, childId) {
     const parent = plan[parentId];
-    // Create a new version of the parent place
-    // that doesn't include this child ID.
+    // Üst lokasyonun, bu alt ID'yi içermeyen
+    // yeni bir sürümünü oluştur
     const nextParent = {
       ...parent,
       childIds: parent.childIds
         .filter(id => id !== childId)
     };
-    // Update the root state object...
+    // Kök state nesnesini güncelle...
     setPlan({
       ...plan,
-      // ...so that it has the updated parent.
+      // ...böylece güncellenen üst öğeye sahip olsun.
       [parentId]: nextParent
     });
   }
@@ -1474,13 +1474,13 @@ button { margin: 10px; }
 
 </Sandpack>
 
-You can nest state as much as you like, but making it "flat" can solve numerous problems. It makes state easier to update, and it helps ensure you don't have duplication in different parts of a nested object.
+State'i istediğiniz kadar iç içe olacak şekilde yapılandırabilirsiniz. Fakat "düz" yapılandırmak birçok sorunu çözebilir. Hem state'i güncellemeyi kolaylaştırır hem de iç içe nesnenin farklı bölümlerinde yinelenme ihtimalini ortadan kaldırmaya yardımcı olur.
 
 <DeepDive>
 
-#### Improving memory usage {/*improving-memory-usage*/}
+#### Bellek kullanımını iyileştirmek {/*improving-memory-usage*/}
 
-Ideally, you would also remove the deleted items (and their children!) from the "table" object to improve memory usage. This version does that. It also [uses Immer](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) to make the update logic more concise.
+İdeal olarak, bellek kullanımını iyileştirmek için silinen öğeleri (ve alt öğelerini!) "tablo" nesnesinden kaldırmalısınız. Bu sürüm bunu gerçekleştirir. Aynı zamanda güncelleme mantığını daha kısa ve öz hale getirmek için [Immer](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) kullanır.
 
 <Sandpack>
 
@@ -1493,12 +1493,12 @@ export default function TravelPlan() {
 
   function handleComplete(parentId, childId) {
     updatePlan(draft => {
-      // Remove from the parent place's child IDs.
+      // Üst lokasyonun alt IDlerinden kaldır.
       const parent = draft[parentId];
       parent.childIds = parent.childIds
         .filter(id => id !== childId);
 
-      // Forget this place and all its subtree.
+      // Bu lokasyonu ve tüm alt ağacını unut.
       deleteAllChildren(childId);
       function deleteAllChildren(id) {
         const place = draft[id];
@@ -1838,25 +1838,25 @@ button { margin: 10px; }
 
 </DeepDive>
 
-Sometimes, you can also reduce state nesting by moving some of the nested state into the child components. This works well for ephemeral UI state that doesn't need to be stored, like whether an item is hovered.
+Bazı durumlarda iç içe state'in bazı parçalarını alt bileşenlere taşıyarak state'i iç içe yapılandırmayı azaltabilirsiniz. Bu durum çok kısa süren, saklanması gerekmeyen, UI state'lerinde işe yarar, örneğin bir öğenin üzerine gelindiğinde (hover edildiğinde).
 
 <Recap>
 
-* If two state variables always update together, consider merging them into one. 
-* Choose your state variables carefully to avoid creating "impossible" states.
-* Structure your state in a way that reduces the chances that you'll make a mistake updating it.
-* Avoid redundant and duplicate state so that you don't need to keep it in sync.
-* Don't put props *into* state unless you specifically want to prevent updates.
-* For UI patterns like selection, keep ID or index in state instead of the object itself.
-* If updating deeply nested state is complicated, try flattening it.
+* Eğer iki farklı state değişkeni hep aynı anda güncelleniyorsa bunları tek bir state değişkeninde birleştirmeyi değerlendirin.
+* "İmkansız" state'ler oluşturmaktan kaçınmak için state değişkenlerini dikkatle seçin.
+* State'inizi, onu güncellerken hata yapma ihtimalini en aza indirgeyecek şekilde yapılandırın.
+* State'inizi senkronize tutmaya çalışmak yerine gereksiz ve yinelenen şekilde yapılandırmaktan kaçının.
+* Güncellemeleri engellemek istediğiniz durumlar haricinde prop'ları state *içine* koymayın.
+* Seçim (selection) gibi UI kalıpları için state'te objenin kendisi yerine IDsini ya da indeksini tutun.
+* Eğer derinlemesine iç içe geçmiş state'i güncellemek karmaşıksa onu düz bir yapıya getirmeye çalışın.
 
 </Recap>
 
 <Challenges>
 
-#### Fix a component that's not updating {/*fix-a-component-thats-not-updating*/}
+#### Güncellenmeyen bir bileşeni düzeltin {/*fix-a-component-thats-not-updating*/}
 
-This `Clock` component receives two props: `color` and `time`. When you select a different color in the select box, the `Clock` component receives a different `color` prop from its parent component. However, for some reason, the displayed color doesn't update. Why? Fix the problem.
+`Clock` bileşeni iki prop alır: `color` ve `time`. Seçim kutusunda farklı bir renk seçtiğinizde, `Clock` bileşeni üst bileşeninden farklı bir `color` prop'u alır. Fakat, bir sebepten ötürü gösterilen renk güncellenmiyor. Neden? Bu sorunu çözün.
 
 <Sandpack>
 
@@ -1911,7 +1911,7 @@ export default function App() {
 
 <Solution>
 
-The issue is that this component has `color` state initialized with the initial value of the `color` prop. But when the `color` prop changes, this does not affect the state variable! So they get out of sync. To fix this issue, remove the state variable altogether, and use the `color` prop directly.
+Sorun şu ki bu bileşen `color` prop'unun başlangıç değerinin öndeğer olarak atandığı `color` state'ine sahip. Fakat `color` prop'u değiştiğinde bu state değişkenini etkilemiyor! Böylece uyumsuz hale geliyorlar. Bu sorunu çözmek için state değişkenini tamamen kaldırın ve direkt olarak `color` prop'unu kullanın.
 
 <Sandpack>
 
@@ -1963,7 +1963,7 @@ export default function App() {
 
 </Sandpack>
 
-Or, using the destructuring syntax:
+Veya destructuring söz dizimini kullanarak:
 
 <Sandpack>
 
@@ -2017,13 +2017,13 @@ export default function App() {
 
 </Solution>
 
-#### Fix a broken packing list {/*fix-a-broken-packing-list*/}
+#### Bozuk ambalaj listesini düzeltin {/*fix-a-broken-packing-list*/}
 
-This packing list has a footer that shows how many items are packed, and how many items there are overall. It seems to work at first, but it is buggy. For example, if you mark an item as packed and then delete it, the counter will not be updated correctly. Fix the counter so that it's always correct.
+Bu ambalaj listesi kaç öğenin ambalajlandığını ve toplamda kaç öğe olduğunu gösteren bir altbilgiye sahip. İlk başta çalışıyor gibi gözüküyor fakat hatalı. Örneğin bir öğeyi ambalajlandı olarak işaretlerseniz ve sonrasında silerseniz sayaç düzgün şekilde güncellenmiyor. Sayacı her zaman doğru gösterecek şekilde düzeltin.
 
 <Hint>
 
-Is any state in this example redundant?
+Bu örnekte gereksiz olan bir state var mı?
 
 </Hint>
 
@@ -2164,7 +2164,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution>
 
-Although you could carefully change each event handler to update the `total` and `packed` counters correctly, the root problem is that these state variables exist at all. They are redundant because you can always calculate the number of items (packed or total) from the `items` array itself. Remove the redundant state to fix the bug:
+Her bir olay yöneticisini `total` ve `packed` sayaçlarını sorunsuzca güncelleyecek şekilde dikkatlice düzeltebilecek olsanız dahi asıl sorun bu state değişkenlerinin var olması. Öğelerin sayısını (ambalajlanmış ya da toplam) her zaman `items` dizisini kullanarak hesaplayabileceğiniz için bu state değişkenleri gereksiz. Hatayı gidermek için gereksiz state'i kaldırın:
 
 <Sandpack>
 
@@ -2297,15 +2297,15 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-Notice how the event handlers are only concerned with calling `setItems` after this change. The item counts are now calculated during the next render from `items`, so they are always up-to-date.
+Bu değişiklik sonrasında olay yöneticilerinin nasıl sadece `setItems`'ı çağırmakla ilgilendiğine dikkat edin. Öğelerin sayısı artık sonraki render esnasında `items` kullanılarak hesaplanıyor, yani her zaman güncel.
 
 </Solution>
 
-#### Fix the disappearing selection {/*fix-the-disappearing-selection*/}
+#### Kaybolan seçimi düzeltin {/*fix-the-disappearing-selection*/}
 
-There is a list of `letters` in state. When you hover or focus a particular letter, it gets highlighted. The currently highlighted letter is stored in the `highlightedLetter` state variable. You can "star" and "unstar" individual letters, which updates the `letters` array in state.
+State'te `letters`'ın (mesajlar) bir listesi var. Bir mesajın üzerine geldiğinizde (hover) ya da odaklandığınızda (focus) vurgulanıyor. Güncel olarak vurgulanan mesaj `highlightedLetter` state değişkeninde saklanıyor. Bir mesajı "favorileyebilir" (star) ya da "favorilerden çıkarabilirsiniz" (unstar), bu durum state'teki `letters` dizisini günceller.
 
-This code works, but there is a minor UI glitch. When you press "Star" or "Unstar", the highlighting disappears for a moment. However, it reappears as soon as you move your pointer or switch to another letter with keyboard. Why is this happening? Fix it so that the highlighting doesn't disappear after the button click.
+Kod çalışıyor ama küçük bir UI kusuru var. "Star" ya da "Unstar" butonuna tıkladığınızda, vurgu kısa bir süreliğine kayboluyor. Ancak imleci hareket ettirdiğinizde ya da klayve ile başka bir mesaja geçtiğinizde tekrar gözüküyor. Bunun sebebi ne? Hatayı, vurgunun butona tıkladıktan sonra kaybolmayacağı şekilde düzeltin.
 
 <Sandpack>
 
@@ -2412,9 +2412,9 @@ li { border-radius: 5px; }
 
 <Solution>
 
-The problem is that you're holding the letter object in `highlightedLetter`. But you're also holding the same information in the `letters` array. So your state has duplication! When you update the `letters` array after the button click, you create a new letter object which is different from `highlightedLetter`. This is why `highlightedLetter === letter` check becomes `false`, and the highlight disappears. It reappears the next time you call `setHighlightedLetter` when the pointer moves.
+Sorun şu ki mesaj nesnesini `highlightedLetter` içerisinde tutuyorsunuz. Fakat aynı bilgiyi `letters` dizisinin içinde de tutuyorsunuz. Yani state'iniz yineleniyor! Butona tıklayarak `letters` dizisini güncellediğinizde `highlightedLetter`'dan farklı yeni bir mesaj nesnesi oluşturmuş oluyorsunuz. Bu yüzden `highlightedLetter === letter` kontrolü `false` oluyor ve vurgu kayboluyor. İmleci hareket ettirerek `setHighlightedLetter`'ı çağırdığınızda da vurgu tekrar gözüküyor.
 
-To fix the issue, remove the duplication from state. Instead of storing *the letter itself* in two places, store the `highlightedId` instead. Then you can check `isHighlighted` for each letter with `letter.id === highlightedId`, which will work even if the `letter` object has changed since the last render.
+Sorunu çözmek için yineleme durumunu ortadan kaldırın. *Mesajın kendisini* iki farklı yerde saklamak yerine `highlightedId` değerini saklayın. Böylece her mesaj için `isHighlighted`'ı kontrol edebilirsiniz ve `letter` (mesaj) nesnesi bileşen son render edildiğinden beri değişmiş olsa bile sorunsuzca çalışmasını sağlayabilirsiniz.
 
 <Sandpack>
 
@@ -2521,15 +2521,15 @@ li { border-radius: 5px; }
 
 </Solution>
 
-#### Implement multiple selection {/*implement-multiple-selection*/}
+#### Çoklu seçim yapmayı sağlayın {/*implement-multiple-selection*/}
 
-In this example, each `Letter` has an `isSelected` prop and an `onToggle` handler that marks it as selected. This works, but the state is stored as a `selectedId` (either `null` or an ID), so only one letter can get selected at any given time.
+Bu örnekte her bir `Letter` (mesaj) kendini seçili olarak işaretlemeye yarayan `isSelected` prop'una ve `onToggle` yöneticisine sahip. Bu haliyle çalışıyor fakat state `selectedId` (`null` ya da bir ID) olarak saklanıyor, yani aynı anda yalnızca tek bir mesaj seçilebilir durumda.
 
-Change the state structure to support multiple selection. (How would you structure it? Think about this before writing the code.) Each checkbox should become independent from the others. Clicking a selected letter should uncheck it. Finally, the footer should show the correct number of the selected items.
+State yapısını çoklu seçimi destekleyecek şekilde değiştirin. (Nasıl yapılandırırsınız? Kodu yazmadan önce bunun hakkında düşünün.) Her bir işaret kutucuğu birbirinden bağımsız olmalı. Seçili bir mesaja tıklamak onu seçilmemiş hale getirmeli. Son olarak, altbilgi seçili öğe sayısını doğru şekilde göstermeli.
 
 <Hint>
 
-Instead of a single selected ID, you might want to hold an array or a [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) of selected IDs in state.
+State'te tek bir seçili ID yerine seçili IDleri içeren bir dizi veya [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) tutmak isteyebilirsiniz.
 
 </Hint>
 
@@ -2543,11 +2543,11 @@ import Letter from './Letter.js';
 export default function MailClient() {
   const [selectedId, setSelectedId] = useState(null);
 
-  // TODO: allow multiple selection
+  // TODO: çoklu seçime izin ver
   const selectedCount = 1;
 
   function handleToggle(toggledId) {
-    // TODO: allow multiple selection
+    // TODO: çoklu seçime izin ver
     setSelectedId(toggledId);
   }
 
@@ -2560,7 +2560,7 @@ export default function MailClient() {
             key={letter.id}
             letter={letter}
             isSelected={
-              // TODO: allow multiple selection
+              // TODO: çoklu seçime izin ver
               letter.id === selectedId
             }
             onToggle={handleToggle}
@@ -2630,7 +2630,7 @@ label { width: 100%; padding: 5px; display: inline-block; }
 
 <Solution>
 
-Instead of a single `selectedId`, keep a `selectedIds` *array* in state. For example, if you select the first and the last letter, it would contain `[0, 2]`. When nothing is selected, it would be an empty `[]` array:
+State'te tek bir `selectedId` yerine seçili IDleri içeren bir `selectedIds` *dizisi* tutun. Örneğin ilk ve son mesajları seçerseniz bu dizi `[0, 2]` değerlerini içerir. Hiçbir şey seçili değil ise boş bir `[]` dizisi olur:
 
 <Sandpack>
 
@@ -2645,14 +2645,14 @@ export default function MailClient() {
   const selectedCount = selectedIds.length;
 
   function handleToggle(toggledId) {
-    // Was it previously selected?
+    // Daha önceden seçili miydi?
     if (selectedIds.includes(toggledId)) {
-      // Then remove this ID from the array.
+      // Öyleyse bu ID'yi diziden kaldır.
       setSelectedIds(selectedIds.filter(id =>
         id !== toggledId
       ));
     } else {
-      // Otherwise, add this ID to the array.
+      // Aksi halde diziye ekle.
       setSelectedIds([
         ...selectedIds,
         toggledId
@@ -2736,9 +2736,9 @@ label { width: 100%; padding: 5px; display: inline-block; }
 
 </Sandpack>
 
-One minor downside of using an array is that for each item, you're calling `selectedIds.includes(letter.id)` to check whether it's selected. If the array is very large, this can become a performance problem because array search with [`includes()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) takes linear time, and you're doing this search for each individual item.
+Dizi kullandığımızda her bir öğenin seçili olup olmadığını kontrol etmek için `selectedIds.includes(letter.id)` fonksiyonunu çağırıyoruz, bu durum dizi kullanmanın küçük bir kusuru olarak değerlendirilebilir. Eğer dizi çok büyükse diziyi [`includes()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) fonksiyonuyla aramak doğrusal zaman aldığından ve bu aramayı her bir öğe için yaptığınızdan performans sorunlarıyla karşılabilirsiniz.
 
-To fix this, you can hold a [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) in state instead, which provides a fast [`has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) operation:
+Bu sorunu çözmek için state'te hızlı bir [has()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) operasyonuna sahip olan [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) tutabilirsiniz:
 
 <Sandpack>
 
@@ -2755,7 +2755,7 @@ export default function MailClient() {
   const selectedCount = selectedIds.size;
 
   function handleToggle(toggledId) {
-    // Create a copy (to avoid mutation).
+    // Kopya oluştur (mutasyonu engellemek için).
     const nextIds = new Set(selectedIds);
     if (nextIds.has(toggledId)) {
       nextIds.delete(toggledId);
@@ -2841,9 +2841,9 @@ label { width: 100%; padding: 5px; display: inline-block; }
 
 </Sandpack>
 
-Now each item does a `selectedIds.has(letter.id)` check, which is very fast.
+Artık her öğe oldukça hızlı olan `selectedIds.has(letter.id)` kontrolünü yapıyor.
 
-Keep in mind that you [should not mutate objects in state](/learn/updating-objects-in-state), and that includes Sets, too. This is why the `handleToggle` function creates a *copy* of the Set first, and then updates that copy.
+[State'te nesneleri direkt olarak değiştirmekten kaçınmanız](/learn/updating-objects-in-state) gerektiğini unutmayın, bu Set'leri de kapsıyor. Bu yüzden `handleToggle` fonksiyonu önce Set'in bir kopyasını yaratıyor ve ardından bu kopyayı güncelliyor.
 
 </Solution>
 
