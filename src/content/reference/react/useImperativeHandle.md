@@ -4,7 +4,7 @@ title: useImperativeHandle
 
 <Intro>
 
-`useImperativeHandle`, bir [ref](/learn/manipulating-the-dom-with-refs) olarak açığa çıkarılan işaretçiyi özelleştirmenizi sağlayan bir React Hook'udur.
+`useImperativeHandle`, bir [ref](/learn/manipulating-the-dom-with-refs) olarak açığa çıkarılan tanıtıcıyı özelleştirmenizi sağlayan bir React Hook'udur.
 
 ```js
 useImperativeHandle(ref, createHandle, dependencies?)
@@ -40,9 +40,9 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 * `ref`: [`forwardRef`](/reference/react/forwardRef#render-function) render fonksiyonunun ikinci argümanı olarak aldığınız `ref`.
 
-* `createHandle`: Herhangi bir argüman almayan ve açığa çıkarmak istediğiniz ref işaretçesini döndüren bir fonksiyon. Bu ref işaretçesi herhangi bir tipte olabilir. Genellikle, açığa çıkarmak istediğiniz metotların bulunduğu bir nesne döndürürsünüz.
+* `createHandle`: Herhangi bir argüman almayan ve açığa çıkarmak istediğiniz ref tanıtıcısını döndüren bir fonksiyondur. Bu ref tanıtıcısı herhangi bir tipte olabilir. Genellikle, açığa çıkarmak istediğiniz metotların bulunduğu bir nesne döndürürsünüz.
 
-* **isteğe bağlı** `dependencies`: `createHandle` kodu içinde referans alınan tüm tepkisel değerlerin listesi. Tepkisel değerler, prop'lar, state ve bileşeninizin doğrudan içerisinde bildirilen tüm değişkenler ve fonskiyonlar gibi değerleri içerir. Eğer linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her tepkisel değerin doğru bir şekilde bağımlılık(dependency) olarak belirtildiğini doğrular. Bağımlılık listesi, sabit bir sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` gibi iç içe yazılmalıdır. React, her bir bağımlılığı önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak karşılaştırır. Eğer bir yeniden render'lama, bazı bağımlılıklarda değişikliğe neden olduysa veya bu argümanı atladıysanız, `createHandle` fonksiyonunuz yeniden çalıştırılır ve yeni oluşturulan işaretçe ref'e atanır.
+* **isteğe bağlı** `dependencies`: `createHandle` kodu içinde referans alınan tüm tepkisel değerlerin listesidir. Tepkisel değerler, prop'lar, state ve bileşeninizin doğrudan içerisinde bildirilen tüm değişkenler ve fonskiyonlar gibi değerleri içerir. Eğer linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her tepkisel değerin doğru bir şekilde bağımlılık(dependency) olarak belirtildiğini doğrular. Bağımlılık listesi, sabit bir sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` gibi iç içe yazılmalıdır. React, her bir bağımlılığı önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak karşılaştırır. Eğer bir yeniden render'lama, bazı bağımlılıklarda değişikliğe neden olduysa veya bu argümanı atladıysanız, `createHandle` fonksiyonunuz yeniden çalıştırılır ve yeni oluşturulan tanıtıcı ref'e atanır.
 
 #### Dönüş değerleri {/*returns*/}
 
@@ -52,7 +52,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 ## Kullanım {/*usage*/}
 
-### Özel bir ref işaretçesini üst elemana açığa çıkarma {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
+### Özel bir ref tanıtıcısını üst elemana açığa çıkarma {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
 
 Bileşenler DOM düğümlerini varsayılan olarak üst elemana açığa çıkarmazlar. Örneğin, `MyInput` bileşeninin üst elemanın `<input>` DOM düğümüne [erişmesini](/learn/manipulating-the-dom-with-refs) istiyorsanız, [`forwardRef`](/reference/react/forwardRef) ile tercih etmelisiniz.
 
@@ -64,7 +64,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-Yukarıdaki kodla [bir `MyInput` bileşenine ait ref, `<input>` DOM düğümünü alacaktır.](/reference/react/forwardRef#exposing-a-dom-node-to-the-parent-component) Ancak, isteğe bağlı olarak özel bir değer de açığa çıkarabilirsiniz. Açığa çıkarılan işaretçiyi özelleştirmek için bileşeninizin üst düzeyinde `useImperativeHandle`'ı çağırın.
+Yukarıdaki kodla [bir `MyInput` bileşenine ait ref, `<input>` DOM düğümünü alacaktır.](/reference/react/forwardRef#exposing-a-dom-node-to-the-parent-component) Ancak, isteğe bağlı olarak özel bir değer de açığa çıkarabilirsiniz. Açığa çıkarılan tanıtıcıyı özelleştirmek için bileşeninizin üst düzeyinde `useImperativeHandle`'ı çağırın.
 
 ```js {4-8}
 import { forwardRef, useImperativeHandle } from 'react';
@@ -82,7 +82,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 Yukarıdaki koda dikkat ettiğinizde, `ref` artık `<input>` bileşenine iletilmediğini fark edeceksiniz.
 
-Örneğin, `<input>` DOM düğümünün tamamını açığa çıkarmak istemiyorsunuz, ancak `focus` ve `scrollIntoView` gibi iki metodu açığa çıkarmak istiyorsunuz. Bunun için gerçek tarayıcı DOM'unu ayrı bir ref içinde tutun. Ardından, yalnızca üst elemanın çağırmasını istediğiniz metotlara sahip bir işaretçiyi açığa çıkarmak için `useImperativeHandle`'ı kullanın:
+Örneğin, `<input>` DOM düğümünün tamamını açığa çıkarmak istemiyorsunuz, ancak `focus` ve `scrollIntoView` gibi iki metodu açığa çıkarmak istiyorsunuz. Bunun için gerçek tarayıcı DOM'unu ayrı bir ref içinde tutun. Ardından, yalnızca üst elemanın çağırmasını istediğiniz metotlara sahip bir tanıtıcıyı açığa çıkarmak için `useImperativeHandle`'ı kullanın:
 
 ```js {7-14}
 import { forwardRef, useRef, useImperativeHandle } from 'react';
