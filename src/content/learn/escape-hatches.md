@@ -1,35 +1,35 @@
 ---
-title: Escape Hatches
+title: Kaçış Yolları
 ---
 
 <Intro>
 
-Some of your components may need to control and synchronize with systems outside of React. For example, you might need to focus an input using the browser API, play and pause a video player implemented without React, or connect and listen to messages from a remote server. In this chapter, you'll learn the escape hatches that let you "step outside" React and connect to external systems. Most of your application logic and data flow should not rely on these features.
+Bazı bileşenleriniz, React'in dışarısında bulunan bileşenleri kontrol etmek ya da onlarla senkronize olmaya ihtiyaç duyabilir. Örneğin, tarayıcı API'sini kullanarak bir girdi alanına odaklanmanız, React olmadan yazılmış bir video oynatıcıyı durdurup başlatmanız ya da uzak bir sunucuya bağlanıp mesajları dinlemeniz gerekebilir. Bu bölümde, dış sistemlere bağlanmak için React'in "dışına çıkmanızı" sağlayacak kaçış yollarını öğreneceksiniz. Uygulama mantığınızın ve veri akışınızın çoğu bu özelliklere bağlı olmamalıdır.
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to "remember" information without re-rendering](/learn/referencing-values-with-refs)
-* [How to access DOM elements managed by React](/learn/manipulating-the-dom-with-refs)
-* [How to synchronize components with external systems](/learn/synchronizing-with-effects)
-* [How to remove unnecessary Effects from your components](/learn/you-might-not-need-an-effect)
-* [How an Effect's lifecycle is different from a component's](/learn/lifecycle-of-reactive-effects)
-* [How to prevent some values from re-triggering Effects](/learn/separating-events-from-effects)
-* [How to make your Effect re-run less often](/learn/removing-effect-dependencies)
-* [How to share logic between components](/learn/reusing-logic-with-custom-hooks)
+* [Yeniden render etmeden bilgiyi nasıl "hatırlayacağınızı"](/learn/referencing-values-with-refs)
+* [React tarafından yönetilen DOM elemanlarına nasıl ulaşacağınızı](/learn/manipulating-the-dom-with-refs)
+* [Bileşenleri nasıl dış sistemlerle senkronize edeceğinizi](/learn/synchronizing-with-effects)
+* [Bileşenlerinizden gereksiz Effect'leri nasıl kaldıracağınızı](/learn/you-might-not-need-an-effect)
+* [Bir Effect'in yaşam döngüsünün bir bileşenin yaşam döngüsünden nasıl farklı olduğunu](/learn/lifecycle-of-reactive-effects)
+* [Bazı değerlerin Effect'leri yeniden tetiklemesini nasıl engelleyeceğinizi](/learn/separating-events-from-effects)
+* [Effect'inizin daha az sıklıkla yeniden çalışmasını nasıl sağlayabileceğinizi](/learn/removing-effect-dependencies)
+* [Bileşenler arasında mantık paylaşımı nasıl yapacağınızı](/learn/reusing-logic-with-custom-hooks)
 
 </YouWillLearn>
 
-## Referencing values with refs {/*referencing-values-with-refs*/}
+## Ref'ler ile değerleri referans etmek {/*referencing-values-with-refs*/}
 
-When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*:
+Bileşeninizin bir bilgiyi "hatırlamasını" istediğinizde, ancak bu bilginin [yeni render'lar tetiklemesini](/learn/render-and-commit) istemediğinizde, bir *ref* kullanabilirsiniz:
 
 ```js
 const ref = useRef(0);
 ```
 
-Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not! You can access the current value of that ref through the `ref.current` property.
+State gibi, ref'ler de React tarafından yeniden render'lar arasında saklanır. Ancak, bir state'i değiştirmek bileşeni yeniden render eder. Bir ref'i değiştirmek etmez! Ref'in o anki değerine `ref.current` özelliği üzerinden erişebilirsiniz.
 
 <Sandpack>
 
@@ -41,12 +41,12 @@ export default function Counter() {
 
   function handleClick() {
     ref.current = ref.current + 1;
-    alert('You clicked ' + ref.current + ' times!');
+    alert(ref.current + ' kez tıkladınız!');
   }
 
   return (
     <button onClick={handleClick}>
-      Click me!
+      Bana tıkla!
     </button>
   );
 }
