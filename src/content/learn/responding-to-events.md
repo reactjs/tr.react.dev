@@ -314,6 +314,12 @@ button { margin-right: 10px; }
 </Sandpack>
 
 Dikkat ederseniz `App` bileşeni, `Toolbar` bileşeninin `onPlayMovie` veya `onUploadImage` ile *ne* yapacağını bilmek zorunda değildir. Bu `Toolbar` bileşeninin implementasyon detayıdır. `Toolbar`, bu prop'ları `Button`'larına `onClick` olay yöneticisi olarak iletir. İleriki zamanlarda tıklama yerine klavye kısayoluyla da tetikletmek isteyebilirsiniz. Bileşenlerinizin prop'larını `onPlayMovie` gibi uygulamaya özgü etkileşimlere göre adlandırmak ileride kullanım biçimlerini değiştirme esnekliği sağlar.
+  
+<Note>
+
+Olay yöneticileriniz için uygun HTML etiketleri kullandığınızdan emin olun. Örneğin, tıklamaları işlemek için `<div onClick={handleClick}>` yerine [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) kullanın. Gerçek taraycı `<button>` u kullanmak klavye navigasyonu gibi yerleşik tarayıcı davranışlarını etkinleştirir. Eğer bir butonun varsayılan tarayıcı stilini beğenmiyorsanız ya da onu bir bağlantı ya da başka bir UI elemanı gibi göstermek istiyorsanız CSS kullanabilirsiniz. [Erişilebilir işaretleme yazmak hakkında daha fazla bilgi edinin.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+
+</Note>
 
 ## Olayların yayılması {/*event-propagation*/}
 
