@@ -26,7 +26,7 @@ Bir bileşenin state'ini iyi yapılandırmak, değişiklik yapılması ve hata a
 4. **Yinelenen state değişkenlerinden kaçının.** Aynı veri, farklı state değişkenleri ya da iç içe nesneler içinde yinelendiğinde senkronizasyonu sağlamak zorlaşabilir. Buna benzer tekrarları en aza indirgemeye çalışın.
 5. **Derinlemesine iç içe olan bir state yapısından kaçının.** Derinlemesine hiyerarşik yapıya sahip olan state'i güncellemek çok da pratik bir değildir. State'i daha düz bir yapıda şekillendirmeye çalışın.
 
-Bu prensiplerin asıl amacı, *state'i hatalara sebep olmadan kolayca güncelleyebilmektir*. State'ten gereksiz ve yinelenen veriyi temizlemek tüm parçaların birbiriyle senkronize kalmasına yardımcı olur. Bu durum, bir veritabanı mühendisinin hata ihtimalini azaltmak için [veritabanı yapısını "normalleştirmek"](https://learn.microsoft.com/tr-tr/office/troubleshoot/access/database-normalization-description) istemesine benzetilebilir. Albert Einstein'ın sözleriyle yorumlamak gerekirse, **"State mümkün olabildiğince basit olmalı, sadece basit değil."**
+Bu prensiplerin asıl amacı, *state'i hatalara sebep olmadan kolayca güncelleyebilmektir*. State'ten gereksiz ve yinelenen veriyi temizlemek tüm parçaların birbiriyle senkronize kalmasına yardımcı olur. Bu durum, bir veritabanı mühendisinin hata ihtimalini azaltmak için [veritabanı yapısını "normalleştirmek"](https://learn.microsoft.com/tr-tr/office/troubleshoot/access/database-normalization-description) istemesine benzetilebilir. Albert Einstein'ın sözleriyle yorumlamak gerekirse, **"State'i olabildiğince basit hale getirin; ama çok da basit olmasın."**
 
 Haydi şimdi bu prensiplerin nasıl uygulandığını görelim.
 
