@@ -1,31 +1,31 @@
 ---
-title: Sharing State Between Components
+title: Bileşenler Arasında Durum Paylaşımı
 ---
 
 <Intro>
 
-Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as *lifting state up,* and it's one of the most common things you will do writing React code.
+Bazen, iki bileşenin durumunun her zaman birlikte değişmesini istersiniz. Bunu yapmak için, her iki bileşenden durumu kaldırın, en yakın ortak üst elemana taşıyın ve ardından onlara proplar aracılığıyla iletin. Bu, *state'i yukarı kaldırma* olarak bilinir ve React kodu yazarken yapacağınız en yaygın şeylerden biridir.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to share state between components by lifting it up
-- What are controlled and uncontrolled components
+- Yukarı kaldırarak bileşenler arasında state paylaşımı nasıl yapılır?
+- Kontrollü ve kontrolsüz bileşenler nedir?
 
 </YouWillLearn>
 
-## Lifting state up by example {/*lifting-state-up-by-example*/}
+## Örnek ile state'in yukarı kaldırılması {/*lifting-state-up-by-example*/}
 
-In this example, a parent `Accordion` component renders two separate `Panel`s:
+Bu örnekte, bir üst `Accordion` bileşeni iki ayrı `Panel` bileşenini render eder:
 
 * `Accordion`
   - `Panel`
   - `Panel`
 
-Each `Panel` component has a boolean `isActive` state that determines whether its content is visible.
+Her `Panel` bileşeninin içeriğinin görünürlüğünü belirleyen bir boolean `isActive` durumu vardır.
 
-Press the Show button for both panels:
+Her iki panel için de Göster düğmesine basın:
 
 <Sandpack>
 
@@ -41,7 +41,7 @@ function Panel({ title, children }) {
         <p>{children}</p>
       ) : (
         <button onClick={() => setIsActive(true)}>
-          Show
+          Göster
         </button>
       )}
     </section>
@@ -51,12 +51,12 @@ function Panel({ title, children }) {
 export default function Accordion() {
   return (
     <>
-      <h2>Almaty, Kazakhstan</h2>
-      <Panel title="About">
-        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      <h2>Ankara, Türkiye</h2>
+      <Panel title="Hakkında">
+        Ankara, Türkiye'nin başkenti ve İstanbul'dan sonra en kalabalık ikinci ilidir.
       </Panel>
-      <Panel title="Etymology">
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      <Panel title="Etimoloji">
+        Belgelere dayanmayan ve günümüze kadar gelen söylentilere göre tarihte bahsedilen ilk adı Galatlar tarafından verilen ve Yunanca "çapa" anlamına gelen <i lang="el">Ankyra</i>'dır. Bu isim zamanla değişerek Ancyre, Engüriye, Engürü, Angara, Angora ve nihayet Ankara olmuştur.
       </Panel>
     </>
   );
@@ -73,59 +73,59 @@ h3, p { margin: 5px 0px; }
 
 </Sandpack>
 
-Notice how pressing one panel's button does not affect the other panel--they are independent.
+Dikkat edin, bir panelin düğmesine basmak diğer paneli etkilemez. Bağımsızdırlar.
 
 <DiagramGroup>
 
-<Diagram name="sharing_state_child" height={367} width={477} alt="Diagram showing a tree of three components, one parent labeled Accordion and two children labeled Panel. Both Panel components contain isActive with value false.">
+<Diagram name="sharing_state_child" height={367} width={477} alt="Üç bileşenin ağacını gösteren bir diyagram, biri Accordion olarak adlandırılan üst eleman ve iki çocuk bileşeni Panel olarak etiketlenmiştir. Her iki Panel bileşeni de false değerine sahip isActive içerir.">
 
-Initially, each `Panel`'s `isActive` state is `false`, so they both appear collapsed
+Başlangıçta, her `Panel`'in `isActive` durumu `false` olduğundan, ikisi de kapalı görünür.
 
 </Diagram>
 
-<Diagram name="sharing_state_child_clicked" height={367} width={480} alt="The same diagram as the previous, with the isActive of the first child Panel component highlighted indicating a click with the isActive value set to true. The second Panel component still contains value false." >
+<Diagram name="sharing_state_child_clicked" height={367} width={480} alt="Öncekiyle aynı diyagram, ancak ilk çocuk Panel bileşeninin isActive değeri true olarak ayarlanmış bir tıklama ile vurgulanıyor. İkinci Panel bileşeni hala false değerini içeriyor." >
 
-Clicking either `Panel`'s button will only update that `Panel`'s `isActive` state alone
+Herhangi bir `Panel`'in düğmesine tıklamak, yalnızca o `Panel`'in `isActive` durumunu günceller.
 
 </Diagram>
 
 </DiagramGroup>
 
-**But now let's say you want to change it so that only one panel is expanded at any given time.** With that design, expanding the second panel should collapse the first one. How would you do that?
+**Ancak şimdi sadece bir panelin herhangi bir anda genişletilmesini istediğinizi varsayalım.** Bu tasarımla, ikinci paneli genişletmek, birincisini daraltmalıdır. Bunu nasıl yapardın?
 
-To coordinate these two panels, you need to "lift their state up" to a parent component in three steps:
+Bu iki paneli koordine etmek için, üç adımda "state'in yukarı kaldırılması" gerekiyor:
 
-1. **Remove** state from the child components.
-2. **Pass** hardcoded data from the common parent.
-3. **Add** state to the common parent and pass it down together with the event handlers.
+1. Alt elemandan state'i **kaldırın.**
+2. Ortak ebeveynden hardcoded veriyi **iletin.**
+3. Ortak ebeveyne state **ekle** ve olay işleyicileriyle birlikte aşağıya geçir.
 
-This will allow the `Accordion` component to coordinate both `Panel`s and only expand one at a time.
+Bu `Accordion` bileşeninin her iki `Panel`'i koordine etmesine ve her seferinde yalnızca birini genişletmesine izin verecektir.
 
-### Step 1: Remove state from the child components {/*step-1-remove-state-from-the-child-components*/}
+### Adım 1: Alt elemandan state'i kaldırın. {/*step-1-remove-state-from-the-child-components*/}
 
-You will give control of the `Panel`'s `isActive` to its parent component. This means that the parent component will pass `isActive` to `Panel` as a prop instead. Start by **removing this line** from the `Panel` component:
+`Panel`'in `isActive` kontrolünü üst elemanına vereceksiniz. Bu, üst elemanı `isActive`'i `Panel`'e prop olarak geçireceği anlamına gelir. `Panel` bileşeninden **bu satırı kaldırarak** başlayın:
 
 ```js
 const [isActive, setIsActive] = useState(false);
 ```
 
-And instead, add `isActive` to the `Panel`'s list of props:
+Bunun yerine, `isActive`'i `Panel`'in prop listesine ekleyin:
 
 ```js
 function Panel({ title, children, isActive }) {
 ```
 
-Now the `Panel`'s parent component can *control* `isActive` by [passing it down as a prop.](/learn/passing-props-to-a-component) Conversely, the `Panel` component now has *no control* over the value of `isActive`--it's now up to the parent component!
+Şimdi, `Panel`'in üst bileşeni `isActive`'i [bileşenlere prop'ları aktarma](/learn/passing-props-to-a-component) yöntemiyle kontrol edebilir. Tersine, `Panel` bileşeninin artık `isActive`'in değerini kontrol etme *yetkisi yoktur* -- bu, artık üst bileşene bağlıdır!
 
-### Step 2: Pass hardcoded data from the common parent {/*step-2-pass-hardcoded-data-from-the-common-parent*/}
+### Adım 2: Ortak ebeveynden hardcoded veriyi iletin. {/*step-2-pass-hardcoded-data-from-the-common-parent*/}
 
-To lift state up, you must locate the closest common parent component of *both* of the child components that you want to coordinate:
+State'i yukarı taşımak için, koordine etmek istediğiniz *her iki* alt bileşenin en yakın ortak üst bileşenini bulmanız gerekir:
 
-* `Accordion` *(closest common parent)*
+* `Accordion` *(en yakın üst eleman)*
   - `Panel`
   - `Panel`
 
-In this example, it's the `Accordion` component. Since it's above both panels and can control their props, it will become the "source of truth" for which panel is currently active. Make the `Accordion` component pass a hardcoded value of `isActive` (for example, `true`) to both panels:
+Bu örnekte, `Accordion` bileşenidir. Her iki panelin üzerinde ve prop'larını kontrol edebildiği için, o anda aktif olan panelin "gerçeklik kaynağı" olacaktır. `Accordion` bileşeninin her iki panele de `isActive`'in hardcoded bir değerini (örneğin `true`) geçirmesini sağlayın:
 
 <Sandpack>
 
@@ -135,12 +135,12 @@ import { useState } from 'react';
 export default function Accordion() {
   return (
     <>
-      <h2>Almaty, Kazakhstan</h2>
-      <Panel title="About" isActive={true}>
-        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      <h2>Ankara, Türkiye</h2>
+      <Panel title="Hakkında" isActive={true}>
+        Ankara, Türkiye'nin başkenti ve İstanbul'dan sonra en kalabalık ikinci ilidir.
       </Panel>
-      <Panel title="Etymology" isActive={true}>
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      <Panel title="Etimoloji" isActive={true}>
+        Belgelere dayanmayan ve günümüze kadar gelen söylentilere göre tarihte bahsedilen ilk adı Galatlar tarafından verilen ve Yunanca "çapa" anlamına gelen <i lang="el">Ankyra</i>'dır. Bu isim zamanla değişerek Ancyre, Engüriye, Engürü, Angara, Angora ve nihayet Ankara olmuştur.
       </Panel>
     </>
   );
@@ -154,7 +154,7 @@ function Panel({ title, children, isActive }) {
         <p>{children}</p>
       ) : (
         <button onClick={() => setIsActive(true)}>
-          Show
+          Göster
         </button>
       )}
     </section>
@@ -172,21 +172,21 @@ h3, p { margin: 5px 0px; }
 
 </Sandpack>
 
-Try editing the hardcoded `isActive` values in the `Accordion` component and see the result on the screen.
+`Accordion` bileşenindeki hardcoded `isActive` değerlerini düzenlemeyi deneyin ve sonucu ekranda görün.
 
-### Step 3: Add state to the common parent {/*step-3-add-state-to-the-common-parent*/}
+### Adım 3: Ortak ebeveyne state ekleyin. {/*step-3-add-state-to-the-common-parent*/}
 
-Lifting state up often changes the nature of what you're storing as state.
+State'i yukarı taşımak genellikle depoladığınız state'in doğasını değiştirir.
 
-In this case, only one panel should be active at a time. This means that the `Accordion` common parent component needs to keep track of *which* panel is the active one. Instead of a `boolean` value, it could use a number as the index of the active `Panel` for the state variable:
+Bu durumda, aynı anda yalnızca bir panel aktif olmalıdır. Bu, `Accordion` ortak üst bileşeninin *hangi* panelin aktif olduğunu takip etmesi gerektiği anlamına gelir. Bir `boolean` değeri yerine, aktif `Panel`'in state değişkeni için bir sayı kullanabilir:
 
 ```js
 const [activeIndex, setActiveIndex] = useState(0);
 ```
 
-When the `activeIndex` is `0`, the first panel is active, and when it's `1`, it's the second one.
+`activeIndex` `0` olduğunda, ilk panel aktiftir ve `1` olduğunda ikincisi aktif olur.
 
-Clicking the "Show" button in either `Panel` needs to change the active index in `Accordion`. A `Panel` can't set the `activeIndex` state directly because it's defined inside the `Accordion`. The `Accordion` component needs to *explicitly allow* the `Panel` component to change its state by [passing an event handler down as a prop](/learn/responding-to-events#passing-event-handlers-as-props):
+Herhangi `Panel` içindeki "Göster" düğmesine tıklamak, `Accordion` içindeki aktif indexi değiştirmelidir. `Panel` doğrudan `activeIndex` state'ini ayarlayamaz çünkü `Accordion` içinde tanımlanmıştır. `Accordion` bileşenin `Panel` bileşeninin state'ini değiştirmesine *izin vermesi için* [bir olay yöneticisini prop olarak aşağıya geçirmesi](/learn/responding-to-events#passing-event-handlers-as-props) gerekir:
 
 ```js
 <>
@@ -205,7 +205,7 @@ Clicking the "Show" button in either `Panel` needs to change the active index in
 </>
 ```
 
-The `<button>` inside the `Panel` will now use the `onShow` prop as its click event handler:
+`Panel` içindeki `<button>` artık tıklama olayı yöneticisi olarak `onShow` prop'unu kullanacaktır:
 
 <Sandpack>
 
@@ -216,20 +216,20 @@ export default function Accordion() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <>
-      <h2>Almaty, Kazakhstan</h2>
+      <h2>Ankara, Türkiye</h2>
       <Panel
-        title="About"
+        title="Hakkında"
         isActive={activeIndex === 0}
         onShow={() => setActiveIndex(0)}
       >
-        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+        Ankara, Türkiye'nin başkenti ve İstanbul'dan sonra en kalabalık ikinci ilidir.
       </Panel>
       <Panel
-        title="Etymology"
+        title="Etimoloji"
         isActive={activeIndex === 1}
         onShow={() => setActiveIndex(1)}
       >
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+        Belgelere dayanmayan ve günümüze kadar gelen söylentilere göre tarihte bahsedilen ilk adı Galatlar tarafından verilen ve Yunanca "çapa" anlamına gelen <i lang="el">Ankyra</i>'dır. Bu isim zamanla değişerek Ancyre, Engüriye, Engürü, Angara, Angora ve nihayet Ankara olmuştur.
       </Panel>
     </>
   );
@@ -248,7 +248,7 @@ function Panel({
         <p>{children}</p>
       ) : (
         <button onClick={onShow}>
-          Show
+          Göster
         </button>
       )}
     </section>
@@ -266,19 +266,19 @@ h3, p { margin: 5px 0px; }
 
 </Sandpack>
 
-This completes lifting state up! Moving state into the common parent component allowed you to coordinate the two panels. Using the active index instead of two "is shown" flags ensured that only one panel is active at a given time. And passing down the event handler to the child allowed the child to change the parent's state.
+Bu state'i yukarı taşıma işlemini tamamlar! State'i ortak üst bileşene taşımak, iki paneli koordine etmenizi sağladı. "isShown" bayrakları yerine aktif index kullanmak, aynı anda yalnızca bir panelin aktif olmasını sağladı. Ve olay yöneticisini alt bileşene geçirmek, alt bileşenin üst bileşenin state'ini değiştirmesine izin verdi.
 
 <DiagramGroup>
 
-<Diagram name="sharing_state_parent" height={385} width={487} alt="Diagram showing a tree of three components, one parent labeled Accordion and two children labeled Panel. Accordion contains an activeIndex value of zero which turns into isActive value of true passed to the first Panel, and isActive value of false passed to the second Panel." >
+<Diagram name="sharing_state_parent" height={385} width={487} alt="Diyagram, üç bileşenli bir ağacı gösteriyor. Bir ebeveyn olan Accordion ve iki çocuk olan Panel. Accordion, sıfır olan activeIndex değerine sahiptir ve bu değer, ilk Panel'e geçerken true olan isActive değerine dönüşür, ikinci Panel'e geçerken ise false olan isActive değerine dönüşür." >
 
-Initially, `Accordion`'s `activeIndex` is `0`, so the first `Panel` receives `isActive = true`
+Başlangıçta, `Accordion`'un `activeIndex` değeri `0` olduğundan, ilk `Panel` `isActive = true` değerini alır
 
 </Diagram>
 
 <Diagram name="sharing_state_parent_clicked" height={385} width={521} alt="The same diagram as the previous, with the activeIndex value of the parent Accordion component highlighted indicating a click with the value changed to one. The flow to both of the children Panel components is also highlighted, and the isActive value passed to each child is set to the opposite: false for the first Panel and true for the second one." >
 
-When `Accordion`'s `activeIndex` state changes to `1`, the second `Panel` receives `isActive = true` instead
+`Accordion`'un `activeIndex` değeri `1` olduğunda, ikinci `Panel` `isActive = true` değerini alır'
 
 </Diagram>
 
