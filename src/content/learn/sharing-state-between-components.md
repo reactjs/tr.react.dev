@@ -1,10 +1,10 @@
 ---
-title: Bileşenler Arasında Durum Paylaşımı
+title: Bileşenler Arasında State Paylaşımı
 ---
 
 <Intro>
 
-Bazen, iki bileşenin durumunun her zaman birlikte değişmesini istersiniz. Bunu yapmak için, her iki bileşenden durumu kaldırın, en yakın ortak üst elemana taşıyın ve ardından onlara proplar aracılığıyla iletin. Bu, *state'i yukarı kaldırma* olarak bilinir ve React kodu yazarken yapacağınız en yaygın şeylerden biridir.
+Bazen, iki bileşenin state'inin her zaman birlikte değişmesini istersiniz. Bunu yapmak için, her iki bileşenden state'i kaldırın, en yakın ortak üst elemana taşıyın ve ardından onlara proplar aracılığıyla iletin. Bu, *state'i yukarı kaldırma* olarak bilinir ve React kodu yazarken yapacağınız en yaygın şeylerden biridir.
 
 </Intro>
 
@@ -23,7 +23,7 @@ Bu örnekte, bir üst `Accordion` bileşeni iki ayrı `Panel` bileşenini render
   - `Panel`
   - `Panel`
 
-Her `Panel` bileşeninin içeriğinin görünürlüğünü belirleyen bir boolean `isActive` durumu vardır.
+Her `Panel` bileşeninin içeriğinin görünürlüğünü belirleyen bir boolean `isActive` state'i vardır.
 
 Her iki panel için de Göster düğmesine basın:
 
@@ -79,13 +79,13 @@ Dikkat edin, bir panelin düğmesine basmak diğer paneli etkilemez. Bağımsız
 
 <Diagram name="sharing_state_child" height={367} width={477} alt="Üç bileşenin ağacını gösteren bir diyagram, biri Accordion olarak adlandırılan üst eleman ve iki çocuk bileşeni Panel olarak etiketlenmiştir. Her iki Panel bileşeni de false değerine sahip isActive içerir.">
 
-Başlangıçta, her `Panel`'in `isActive` durumu `false` olduğundan, ikisi de kapalı görünür.
+Başlangıçta, her `Panel`'in `isActive` state'i `false` olduğundan, ikisi de kapalı görünür.
 
 </Diagram>
 
 <Diagram name="sharing_state_child_clicked" height={367} width={480} alt="Öncekiyle aynı diyagram, ancak ilk çocuk Panel bileşeninin isActive değeri true olarak ayarlanmış bir tıklama ile vurgulanıyor. İkinci Panel bileşeni hala false değerini içeriyor." >
 
-Herhangi bir `Panel`'in düğmesine tıklamak, yalnızca o `Panel`'in `isActive` durumunu günceller.
+Herhangi bir `Panel`'in düğmesine tıklamak, yalnızca o `Panel`'in `isActive` state'ini günceller.
 
 </Diagram>
 
@@ -96,8 +96,8 @@ Herhangi bir `Panel`'in düğmesine tıklamak, yalnızca o `Panel`'in `isActive`
 Bu iki paneli koordine etmek için, üç adımda "state'in yukarı kaldırılması" gerekiyor:
 
 1. Alt elemandan state'i **kaldırın.**
-2. Ortak ebeveynden hardcoded veriyi **iletin.**
-3. Ortak ebeveyne state **ekle** ve olay işleyicileriyle birlikte aşağıya geçir.
+2. Ortak üst elemandan hardcoded veriyi **iletin.**
+3. Ortak üst elemana state **ekleyin** ve olay işleyicileriyle birlikte aşağıya geçirin.
 
 Bu `Accordion` bileşeninin her iki `Panel`'i koordine etmesine ve her seferinde yalnızca birini genişletmesine izin verecektir.
 
@@ -117,7 +117,7 @@ function Panel({ title, children, isActive }) {
 
 Şimdi, `Panel`'in üst bileşeni `isActive`'i [bileşenlere prop'ları aktarma](/learn/passing-props-to-a-component) yöntemiyle kontrol edebilir. Tersine, `Panel` bileşeninin artık `isActive`'in değerini kontrol etme *yetkisi yoktur* -- bu, artık üst bileşene bağlıdır!
 
-### Adım 2: Ortak ebeveynden hardcoded veriyi iletin. {/*step-2-pass-hardcoded-data-from-the-common-parent*/}
+### Adım 2: Ortak üst elemandan hardcoded veriyi iletin. {/*step-2-pass-hardcoded-data-from-the-common-parent*/}
 
 State'i yukarı taşımak için, koordine etmek istediğiniz *her iki* alt bileşenin en yakın ortak üst bileşenini bulmanız gerekir:
 
@@ -174,7 +174,7 @@ h3, p { margin: 5px 0px; }
 
 `Accordion` bileşenindeki hardcoded `isActive` değerlerini düzenlemeyi deneyin ve sonucu ekranda görün.
 
-### Adım 3: Ortak ebeveyne state ekleyin. {/*step-3-add-state-to-the-common-parent*/}
+### Adım 3: Ortak üst elemana state ekleyin. {/*step-3-add-state-to-the-common-parent*/}
 
 State'i yukarı taşımak genellikle depoladığınız state'in doğasını değiştirir.
 
@@ -270,7 +270,7 @@ Bu state'i yukarı taşıma işlemini tamamlar! State'i ortak üst bileşene ta�
 
 <DiagramGroup>
 
-<Diagram name="sharing_state_parent" height={385} width={487} alt="Diyagram, üç bileşenli bir ağacı gösteriyor. Bir ebeveyn olan Accordion ve iki çocuk olan Panel. Accordion, sıfır olan activeIndex değerine sahiptir ve bu değer, ilk Panel'e geçerken true olan isActive değerine dönüşür, ikinci Panel'e geçerken ise false olan isActive değerine dönüşür." >
+<Diagram name="sharing_state_parent" height={385} width={487} alt="Diyagram, üç bileşenli bir ağacı gösteriyor. Bir üst eleman olan Accordion ve iki çocuk olan Panel. Accordion, sıfır olan activeIndex değerine sahiptir ve bu değer, ilk Panel'e geçerken true olan isActive değerine dönüşür, ikinci Panel'e geçerken ise false olan isActive değerine dönüşür." >
 
 Başlangıçta, `Accordion`'un `activeIndex` değeri `0` olduğundan, ilk `Panel` `isActive = true` değerini alır
 
