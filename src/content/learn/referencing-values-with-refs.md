@@ -17,7 +17,7 @@ Bir bileşenin "hatırlamasını" istediğiniz bilgi varsa, ancak bu bilginin [y
 
 </YouWillLearn>
 
-## Bir bileşene ref eklemek {/*adding-a-ref-to-a-component*/}
+## Bir bileşene ref eklemek {/*adding-a-ref-to-your-component*/}
 
 Bileşeninize bir ref eklemek için, `useRef` Hook'unu React'ten içe aktarın:
 
@@ -98,7 +98,7 @@ export default function Stopwatch() {
     setNow(Date.now());
 
     setInterval(() => {
-      // "now" state değişkenini her 10ms'de günceller. 
+      // Şuanki zamanı her 10ms'de bir güncelle.
       setNow(Date.now());
     }, 10);
   }
@@ -171,9 +171,9 @@ export default function Stopwatch() {
 
 Ne zaman bir bilgi render etmek için kullanılırsa, onu state'te tutun. Bir bilgi parçası yalnızca olay işleyicileri için gerekiyorsa ve değiştirmek bir yeniden render gerektirmiyorsa, bir ref kullanmak daha verimli olabilir.
 
-## Ref ve State arasındaki farklar {/*differences-between-refs-and-state*/}
+## Ref ve state arasındaki farklar {/*differences-between-refs-and-state*/}
 
-Muhtemelen ref'lerin state'ten daha "esnek" olduğunu düşünüyorsunuz. Örneğin, ref'leri state ayarlama fonksiyonu olmadan değiştirebilirsiniz. Ama çoğu zaman state kullanmak isteyeceksiniz. Ref'ler bir "kaçış noktası"dır ve bunlara çok fazla güvenmemelisiniz. State ve ref'ler arasındaki farkları görelim:
+Muhtemelen ref'lerin state'ten daha "esnek" olduğunu düşünüyorsunuz. Örneğin, ref'leri state ayarlama fonksiyonu olmadan değiştirebilirsiniz. Ama çoğu zaman state kullanmak isteyeceksiniz. Ref'ler çoğunlukla ihtiyacınız olmayan bir "kaçış noktası"dır. State ve ref'ler arasındaki farkları görelim:
 
 
 
@@ -184,7 +184,7 @@ Muhtemelen ref'lerin state'ten daha "esnek" olduğunu düşünüyorsunuz. Örne�
 | Değiştirilebilir; `current` değerini render işlemi dışında da değiştirilebilir ve güncelleyebilirsiniz.  | Değiştirilemez; yeniden render tetiklemek için state değiştirme fonksiyonunu kullanmalısınız.              |
 | Render işlemi sırasında `current` değerini okumamalısınız (veya yazmamalısınız). | State'i her zaman okuyabilirsiniz. Ancak, her render'ın değişmeyen kendi [anlık görüntüsü](/learn/state-as-a-snapshot) vardır.     |
 
-State kullanılarak oluşturulmuş bir sayaç düğmesi:
+State kullanılarak oluşturulmuş bir sayaç buton'u:
 
 <Sandpack>
 
@@ -254,13 +254,13 @@ function useRef(initialValue) {
 
 İlk render sırasında, `useRef` `{ current: initialValue }` döndürür. Bu nesne React tarafından saklanır, bu yüzden bir sonraki render sırasında aynı nesne döndürülür. Bu örnekte state ayarlama fonksiyonunun kullanılmadığına dikkat edin. Her zaman aynı nesneyi döndürmesi gerektiği için gereksizdir!
 
-React `useRef`'i içinde sağladığı için, pratikte yeterince yaygındır. Fakat onu bir ayarlayıcı olmadan normal bir state değişkeni olarak düşünebilirsiniz. Nesne yönelimli programlamaya aşinaysanız, ref'ler size nesne değişkenlerini hatırlatabilir - fakat `this.something` yerine `somethingRef.current` yazarsınız.
+Pratikte yeterince yaygın olduğu için, React `useRef`'i içinde sağlar. Fakat onu bir ayarlayıcı olmadan normal bir state değişkeni olarak düşünebilirsiniz. Nesne yönelimli programlamaya aşinaysanız, ref'ler size nesne değişkenlerini hatırlatabilir - fakat `this.something` yerine `somethingRef.current` yazarsınız.
 
 </DeepDive>
 
 ## Ref'ler ne zaman kullanılmalıdır? {/*when-to-use-refs*/}
 
-Genellikle, bileşeninizin React dışına çıkması ve harici API'lar (genellikle bileşenin görünümünü etkilemeyen bir tarayıcı API'si olabilir) ile iletişim kurması gerektiğinde bir ref kullanırsınız.
+Genellikle, bileşeninizin React "dışına çıkması" ve harici API'lar (genellikle bileşenin görünümünü etkilemeyen bir tarayıcı API'si olabilir) ile iletişim kurması gerektiğinde bir ref kullanırsınız. İşte bu nadir durumlara birkaç örnek:
 
 - [timeout ID'lerini](https://developer.mozilla.org/docs/Web/API/setTimeout) saklamak
 - [DOM elemanlarını](https://developer.mozilla.org/docs/Web/API/Element) saklamak ve manipüle etmek. Bunu [bir sonraki sayfada](/learn/manipulating-the-dom-with-refs) ele alacağız.
@@ -268,7 +268,7 @@ Genellikle, bileşeninizin React dışına çıkması ve harici API'lar (genelli
 
 Eğer bileşeninizin bir değeri saklaması gerekiyorsa, ancak render mantığını etkilemiyorsa, ref'leri seçin.
 
-## Ref'ler için en iyi uygulamalar {/*refler-için-en-iyi-uygulamalar*/}
+## Ref'ler için en iyi pratikler {/*best-practices-for-refs*/}
 
 Bu prensipleri takip etmek bileşenlerinizi daha öngörülebilir hale getirecektir:
 
@@ -283,7 +283,7 @@ ref.current = 5;
 console.log(ref.current); // 5
 ```
 
-Bunun nedeni **ref'in kendisi normal bir JavaScript nesnesi olması** ve öyle davranılmasıdır.  
+Bunun nedeni **ref'in kendisi normal bir JavaScript nesnesi olması** ve öyle davranılmasıdır.
 
  
 Ayrıca bir ref ile çalışırken [mutasyondan kaçınmaya](/learn/updating-objects-in-state) gerek yoktur. Mutasyona uğrayan nesne render işlemi için kullanılmıyorsa, React ref veya içeriğiyle ne yaptığınızı umursamaz.
@@ -307,9 +307,9 @@ Bir ref'i herhangi bir değere işaret edecek şekilde ayarlayabilirsiniz. Fakat
 
 <Challenges>
 
-#### Bozuk sohbet inputunu düzelt {/*fix-a-broken-chat-input*/}
+#### Bozuk bir sohbet inputunu düzelt {/*fix-a-broken-chat-input*/}
 
-Bir mesaj yazın ve "Gönder" düğmesine basın. "Gönderildi!" uyarısını görmek için üç saniye beklemeniz gerektiğini fark edeceksiniz. Bu gecikme sırasında "Geri Al" düğmesini görebilirsiniz. Ona tıklayın. Bu "Geri Al" düğmesinin "Gönderildi!" mesajının görünmesini durdurması gerekiyor. "Geri Al" düğmesi tıklandığında `handleSend` sırasında kaydedilen timeout ID ile [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) çağrısı yapıyor. Ancak, "Geri Al" tıklandıktan sonra bile "Gönderildi!" mesajı hala görünüyor. Neden çalışmadığını bulun ve düzeltin.
+Bir mesaj yazın ve "Gönder" butonunna basın. "Gönderildi!" uyarısını görmek için üç saniye beklemeniz gerektiğini fark edeceksiniz. Bu gecikme sırasında "Geri Al" butonunu görebilirsiniz. Ona tıklayın. Bu "Geri Al" butonunun "Gönderildi!" mesajının görünmesini durdurması gerekiyor. "Geri Al" butonuna tıklandığında `handleSend` sırasında kaydedilen timeout ID ile [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) çağrısı yapıyor. Ancak, "Geri Al" tıklandıktan sonra bile "Gönderildi!" mesajı hala görünüyor. Neden çalışmadığını bulun ve düzeltin.
 
 <Hint>
 
@@ -420,7 +420,7 @@ export default function Chat() {
 
 #### Yeniden render edilemeyen bileşeni düzelt {/*fix-a-component-failing-to-re-render*/}
 
-Bu düğme "Açık" ve "Kapalı" arasında geçiş yapmalıdır. Ancak her zaman "Kapalı" olarak gözüküyor. Bu kodda ne yanlış? Düzeltin.
+Bu buton "Açık" ve "Kapalı" arasında geçiş yapmalıdır. Ancak her zaman "Kapalı" olarak gözüküyor. Bu kodda ne yanlış? Düzeltin.
 
 <Sandpack>
 
@@ -444,7 +444,7 @@ export default function Toggle() {
 
 <Solution>
 
-Bu örnekte bir ref'in geçerli değeri render çıktısını hesaplamak için kullanılıyor: `{isOnRef.current ? 'Açık' : 'Kapalı'}`. Bu, bu bilginin bir ref'te olmaması gerektiğinin ve bunun yerine state'e konması gerektiğinin bir işaretidir. Düzeltmek için ref'i kaldırın ve yerine state kullanın:
+Bu örnekte bir ref'in geçerli değeri render çıktısını hesaplamak için kullanılıyor: `{isOnRef.current ? 'Açık' : 'Kapalı'}`. Bu, ilgili bilginin bir ref'te olmaması gerektiğinin ve bunun yerine state'e konması gerektiğinin bir işaretidir. Düzeltmek için ref'i kaldırın ve yerine state kullanın:
 
 <Sandpack>
 
@@ -470,15 +470,15 @@ export default function Toggle() {
 
 #### Debouncing'i düzeltin {/*fix-debouncing*/}
 
-Bu örnekte tüm düğme tıklama işleyicileri ["debounced"](https://redd.one/blog/debounce-vs-throttle). Bu ne anlama geldiğini görmek için bir düğmeye basın. Mesajın bir saniye sonra göründüğünü fark edeceksiniz. Mesajı beklerken düğmeye basarsanız, zamanlayıcı sıfırlanır. Yani aynı düğmeye hızlıca birkaç kez tıklamaya devam ederseniz, mesaj tıklamayı bıraktıktan bir saniye sonra görünecektir. Debouncing, kullanıcının "bir şeyler yapmayı durdurana kadar" bazı eylemleri geciktirmenizi sağlar.
+Bu örnekte tüm buton tıklama işleyicileri ["debounce edilmiştir"](https://redd.one/blog/debounce-vs-throttle). Bunun ne anlama geldiğini görmek için bir butona basın. Mesajın bir saniye sonra göründüğünü fark edeceksiniz. Mesajı beklerken düğmeye basarsanız, zamanlayıcı sıfırlanır. Yani aynı düğmeye hızlıca birkaç kez tıklamaya devam ederseniz, mesaj tıklamayı bıraktıktan bir saniye sonra görünecektir. Debouncing, kullanıcının "bir şeyler yapmayı durdurana kadar" bazı eylemleri geciktirmenizi sağlar.
 
-Örnek çalışıyor fakat tam olarak istenildiği gibi değil. Düğmeler bağımsız değil. Problemi görmek için bir düğmeye basın ve hemen başka bir düğmeye basın. Biraz bekledikten sonra her iki düğmenin de mesajını görmeyi beklersiniz. Fakat sadece son düğmenin mesajı görünüyor. İlk basılan düğmenin mesajı kayboluyor.
+Örnek çalışıyor, fakat tam olarak istenildiği gibi değil. Butonlar birbirinden bağımsız değil. Problemi görmek için bir butona basın ve ardından hemen başka bir butona basın. Biraz bekledikten sonra her iki butonun de mesajını görmeyi beklersiniz. Fakat sadece son butonun mesajı görünüyor. İlk basılan butonun mesajı kayboluyor.
 
-Neden düğmeler birbirlerine karışıyor? Sorunu bulun ve düzeltin.
+Neden butonlar birbirini etkiliyor? Sorunu bulun ve düzeltin.
 
 <Hint>
 
-Son timout ID değişkeni tüm `DebouncedButton` bileşenleri arasında paylaşılıyor. Bu yüzden bir düğmeye basmak başka bir düğmenin zamanlayıcısını sıfırlıyor. Her düğmede ayrı bir timeout ID değişkeni saklayabilir misiniz?
+Son timout ID değişkeni tüm `DebouncedButton` bileşenleri arasında paylaşılıyor. Bu yüzden bir butona basmak başka bir butonun zamanlayıcısını sıfırlıyor. Her butonda ayrı bir timeout ID değişkeni saklayabilir misiniz?
 
 </Hint>
 
@@ -531,7 +531,7 @@ button { display: block; margin: 10px; }
 
 <Solution>
 
-`timeoutId` değişkeni tüm bileşenler arasında paylaşılıyor. Bu yüzden ikinci düğmeye basmak ilk düğmenin bekleyen zamanlayıcısını sıfırlıyor. Bu sorunu çözmek için zamanlayıcıyı ref'te tutmalıyız. Her düğmenin kendi ref'i olacak, böylece birbirleriyle çakışmayacaklar. İki düğmeye hızlıca basarsanız, her ikisinin de mesajını göreceksiniz.
+`timeoutId` değişkeni tüm bileşenler arasında paylaşılıyor. Bu yüzden ikinci butona basmak ilk butonun bekleyen zamanlayıcısını sıfırlıyor. Bu sorunu çözmek için zamanlayıcıyı ref'te tutmalıyız. Her butonun kendi ref'i olacak, böylece birbirleriyle çakışmayacaklar. Dikkat ederseniz, iki butona hızlıca basmak her ikisinin de mesajını gösterecektir.
 
 <Sandpack>
 
