@@ -283,7 +283,7 @@ ref.current = 5;
 console.log(ref.current); // 5
 ```
 
-Bunun nedeni **ref'in kendisi normal bir JavaScript nesnesi olması** ve öyle davranılmasıdır.
+Bunun nedeni **ref'in kendisinin normal bir JavaScript nesnesi olması** ve öyle davranılmasıdır.
 
  
 Ayrıca bir ref ile çalışırken [mutasyondan kaçınmaya](/learn/updating-objects-in-state) gerek yoktur. Mutasyona uğrayan nesne render işlemi için kullanılmıyorsa, React ref veya içeriğiyle ne yaptığınızı umursamaz.
@@ -309,7 +309,7 @@ Bir ref'i herhangi bir değere işaret edecek şekilde ayarlayabilirsiniz. Fakat
 
 #### Bozuk bir sohbet inputunu düzelt {/*fix-a-broken-chat-input*/}
 
-Bir mesaj yazın ve "Gönder" butonunna basın. "Gönderildi!" uyarısını görmek için üç saniye beklemeniz gerektiğini fark edeceksiniz. Bu gecikme sırasında "Geri Al" butonunu görebilirsiniz. Ona tıklayın. Bu "Geri Al" butonunun "Gönderildi!" mesajının görünmesini durdurması gerekiyor. "Geri Al" butonuna tıklandığında `handleSend` sırasında kaydedilen timeout ID ile [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) çağrısı yapıyor. Ancak, "Geri Al" tıklandıktan sonra bile "Gönderildi!" mesajı hala görünüyor. Neden çalışmadığını bulun ve düzeltin.
+Bir mesaj yazın ve "Gönder" butonuna basın. "Gönderildi!" uyarısını görmek için üç saniye beklemeniz gerektiğini fark edeceksiniz. Bu gecikme sırasında "Geri Al" butonunu görebilirsiniz. Ona tıklayın. Bu "Geri Al" butonunun "Gönderildi!" mesajının görünmesini durdurması gerekiyor. "Geri Al" butonuna tıklandığında `handleSend` sırasında kaydedilen timeout ID ile [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) çağrısı yapıyor. Ancak, "Geri Al" tıklandıktan sonra bile "Gönderildi!" mesajı hala görünüyor. Neden çalışmadığını bulun ve düzeltin.
 
 <Hint>
 
