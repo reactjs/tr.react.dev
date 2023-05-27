@@ -198,7 +198,7 @@ export default function List() {
 
 </Sandpack>
 
-"Sil" butonuna bir kaç kez tıklayın ve tıklama yöneticisine bakın.
+"Sil" butonuna birkaç kez tıklayın ve tıklama yöneticisine bakın.
 
 ```js
 setArtists(
@@ -206,11 +206,11 @@ setArtists(
 );
 ```
 
-Burada `artists.filter(a => a.id !== artist.id)` ifadesi "ID'leri `artist.id`'den farklı olan `artists`'den oluşan yeni bir dizi oluştur" anlamına gelmektedir. Diğer bir deyişle, her bir artist'e karşılık gelen "Sil" butonu o artist'i diziden filtreleyecek ve nihai dizi ile yeniden render isteği gönderecektir. `filter` metodu orijinal diziyi değiştirmez.
+Burada `artists.filter(a => a.id !== artist.id)` ifadesi "ID'leri `artist.id`'den farklı olan `artists`'den oluşan yeni bir dizi oluştur" anlamına gelmektedir. Diğer bir deyişle, her bir artist'e karşılık gelen "Sil" butonu o artist'i diziden filtreleyecek ve nihai dizi ile yeniden render isteği gönderecektir. `filter` metodunun orijinal diziyi değiştirmediğini unutmayın.
 
 ### Bir diziyi dönüştürmek {/*transforming-an-array*/}
 
-Eğer dizideki bazı ya da tüm öğeleri değiştirmek isterseniz **yeni** bir dizi oluşturmak için `map()` metodunu kullanabilirsiniz. `map`'e ileteceğiniz fonksiyon, verisine ya da indeksine (veya her ikisine) dayalı olarak her bir öğeyle ne yapacağınızı belirler.
+Eğer dizideki bazı ya da tüm öğeleri değiştirmek isterseniz **yeni** bir dizi oluşturmak için `map()` metodunu kullanabilirsiniz. `map`'e ileteceğiniz fonksiyon, verisine veya indeksine (veya her ikisine) dayalı olarak her bir öğeyle ne yapacağınızı belirler.
 
 Bu örnekte dizi, iki daire ve bir karenin koordinatlarını içermektedir. Butona tıkladığınız zaman sadece daireler 50 piksel aşağı hareket etmektedir. Bunu, `map()` metodunu kullanıp yeni bir veri dizisi oluşturarak yapar:
 
@@ -236,7 +236,7 @@ export default function ShapeEditor() {
         // Değişiklik yok
         return shape;
       } else {
-        // 50 piksel aşağıda yeni bir daire döndür
+        // 50 piksel aşağıda yeni bir daire döndürür
         return {
           ...shape,
           y: shape.y + 50,
@@ -442,9 +442,9 @@ export default function List() {
 
 </Sandpack>
 
-Burada `[...list]` spread sözdizimi kullanılarak orijinal dizinin bir kopyası oluşturulur. Artık bir kopyanız olduğuna göre `nextList.reverse()` ya da `nextList.sort()` gibi mutasyona sebep olan metodları kullanabilir, hatta `nextList[0] = "something"` ile öğeleri tek tek yeni değerlerine atayabilirsiniz.
+Burada `[...list]` spread sözdizimi kullanılarak orijinal dizinin bir kopyası oluşturulur. Artık bir kopyanız olduğuna göre `nextList.reverse()` ya da `nextList.sort()` gibi mutasyona sebep olan metodlar kullanabilir, hatta `nextList[0] = "something"` ile öğeleri tek tek yeni değerlerine atayabilirsiniz.
 
-Ancak, **bir diziyi kopyalasanız bile dizinin  _içindeki_ öğeleri doğrudan mutasyona uğratamazsınız.** Bunun nedeni yaptığınız kopyalamanın yüzeysel (shallow) olmasıdır yani yeni dizi, orijinal diziyle aynı öğeleri içermektedir. Dolayısıyla, kopyalanan dizinin içindeki bir nesneyi değiştirdiğiniz zaman mevcut state'i de mutasyona uğratmış olursunuz. Örneğin, aşağıdaki gibi bir kod sorunludur. 
+Ancak, **bir diziyi kopyalasanız bile dizinin  _içindeki_ öğeleri doğrudan mutasyona uğratamazsınız.** Bunun nedeni yaptığınız kopyalamanın yüzeysel (shallow) olmasıdır. Yani yeni dizi, orijinal diziyle aynı öğeleri içermektedir. Dolayısıyla, kopyalanan dizinin içindeki bir nesneyi değiştirdiğiniz zaman mevcut state'i de mutasyona uğratmış olursunuz. Örneğin, aşağıdaki gibi bir kod sorunludur. 
 
 ```js
 const nextList = [...list];
@@ -452,15 +452,15 @@ nextList[0].seen = true; // Sorun: list[0]'ı mutasyona uğratır
 setList(nextList);
 ```
 
-`nextList` ve `list` iki farklı dizi olmasına rağmen, **`nextList[0]` ve `list[0]` ifadeleri aynı nesneyi işaret eder.** Yani `nextList[0].seen` ifadesini değiştirirseniz, aynı zamanda `list[0].seen` ifadesini de değiştirmiş olursunuz. Bu, state'i mutasyona uğratmaktır ki bundan kaçınmalısınız! Bu sorunu [iç içe JavaScript nesnelerini güncelleme](/learn/updating-objects-in-state#updating-a-nested-object) yöntemine benzer şekilde, değiştirmek istediğiniz öğeleri mutasyona uğratmak yerine tek tek kopyalayarak çözebilirsiniz. Nasıl yapıldığını görelim.
+`nextList` ve `list` iki farklı dizi olmasına rağmen, **`nextList[0]` ve `list[0]` ifadeleri aynı nesneyi işaret eder.** Yani `nextList[0].seen` değerini değiştirirseniz, aynı zamanda `list[0].seen` değerini de değiştirmiş olursunuz. Bu, state'i mutasyona uğratmaktır ki bundan kaçınmalısınız! Bu sorunu [iç içe JavaScript nesnelerini güncelleme](/learn/updating-objects-in-state#updating-a-nested-object) yöntemine benzer şekilde, değiştirmek istediğiniz öğeleri mutasyona uğratmak yerine tek tek kopyalayarak çözebilirsiniz. Nasıl yapıldığını görelim.
 
 ## Dizi içindeki nesneleri güncelleme {/*updating-objects-inside-arrays*/}
 
-Nesneler dizilerin  _gerçekten_ "içinde" değillerdir. Yazdığınız kodda "içeride" olarak görünebilir ancak bir dizideki her nesne, dizinin "işaret ettiği" ayrı bir değerdir. Bu yüzden `list[0]` gibi iç içe ifadeleri değiştirirken dikkatli olmalısınız. Başka bir kişinin eser listesi (artwork list), dizinin aynı öğesine işaret edebilir!
+Nesneler dizilerin  _gerçekten_ "içinde" değillerdir. Yazdığınız kodda "içeride" olarak görünebilir ancak bir dizideki her nesne, dizinin "işaret ettiği" ayrı bir değerdir. Bu yüzden `list[0]` gibi iç içe ifadeleri değiştirirken dikkatli olmalısınız. Başka bir kişinin sanat eseri listesi (artwork list), dizinin aynı öğesine işaret edebilir!
 
 **İç içe geçmiş state'i güncellerken, güncellemek istediğiniz noktadan en üst düzeye kadar kopyalar oluşturmanız gerekir.** Şimdi bunun nasıl olduğunu görelim.
 
-Bu örnekte, iki farklı eser listesi aynı ilk state'e (initialList) sahiptir. Bu listelerin izole olmaları gerekirdi ancak bir mutasyon nedeniyle yanlışlıkla state'leri paylaşmaktadırlar ve listedeki bir kutuyu işaretlemek diğer listedeki kutuları da etkilemektedir:
+Bu örnekte, iki farklı sanat eseri listesi aynı ilk state'e (initialList) sahiptir. Bu listelerin izole olmaları gerekirdi ancak bir mutasyon nedeniyle yanlışlıkla state'leri paylaşmaktadırlar ve listedeki bir kutuyu işaretlemek diğer listedeki kutuları da etkilemektedir:
 
 <Sandpack>
 
@@ -501,11 +501,11 @@ export default function BucketList() {
   return (
     <>
       <h1>Görülecek Sanat Eserleri Listesi</h1>
-      <h2>Görmek istediğim sanatlar listesi:</h2>
+      <h2>Görmek istediğim eserler listesi:</h2>
       <ItemList
         artworks={myList}
         onToggle={handleToggleMyList} />
-      <h2>Senin görmek istediğin sanatlar listesi:</h2>
+      <h2>Senin görmek istediğin eserler listesi:</h2>
       <ItemList
         artworks={yourList}
         onToggle={handleToggleYourList} />
@@ -614,11 +614,11 @@ export default function BucketList() {
   return (
     <>
       <h1>Görülecek Sanat Eserleri Listesi</h1>
-      <h2>Görmek istediğim sanatlar listesi:</h2>
+      <h2>Görmek istediğim eserler listesi:</h2>
       <ItemList
         artworks={myList}
         onToggle={handleToggleMyList} />
-      <h2>Senin görmek istediğin sanatlar listesi:</h2>
+      <h2>Senin görmek istediğin eserler listesi:</h2>
       <ItemList
         artworks={yourList}
         onToggle={handleToggleYourList} />
@@ -763,7 +763,7 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-Immer ile **`artwork.seen = nextSeen` gibi mutasyonlar artık sorun çıkarmadığına dikkat edin:**
+Immer ile **`artwork.seen = nextSeen` gibi mutasyonların artık sorun çıkarmadığına dikkat edin:**
 
 ```js
 updateMyTodos(draft => {
@@ -772,7 +772,7 @@ updateMyTodos(draft => {
 });
 ```
 
-Bunun nedeni, _orijinal_ state'i mutasyona uğratmamanızdır. Burada Immer tarafından sağlanan özel bir `draft` nesnesini mutasyona uğratmaktayız. Benzer şekilde, `draft` nesnesinde `push()` ve `pop()` gibi mutasyona neden olan metodları da uygulayabilirsiniz.
+Bunun nedeni, _orijinal_ state'i mutasyona uğratmamanızdır. Burada Immer tarafından sağlanan özel bir `draft` nesnesini mutasyona uğratmaktayız. Benzer şekilde, `draft` nesnesine `push()` ve `pop()` gibi mutasyona neden olan metodları da uygulayabilirsiniz.
 
 Arka planda Immer, `draft`'a yaptığınız değişikliklere göre her zaman bir sonraki state'i sıfırdan oluşturur. Bu, olay yönetecilerinizi, state'i hiç mutasyona uğratmadan kısa ve öz olarak tutar.
 
@@ -1080,7 +1080,7 @@ button { margin: 5px; }
 
 #### Mutasyona uğratmayan metodlar kullanarak mutasyonları düzeltin {/*fix-the-mutations-using-non-mutative-methods*/}
 
-Bu örnekte, `App.js` dosyasındaki tüm olay yönetecileri dizileri mutasyona uğratacak metodlar kullanmaktadır. Bu nedenle, yapılacaklar listesini düzenlemek ve silmek çalışmamaktadır. `handleAddTodo`, `handleChangeTodo`, ve `handleDeleteTodo` fonksiyonlarını mutasyona uğratmayan metodlar kullanarak tekrar yazın:
+Bu örnekte, `App.js` dosyasındaki tüm olay yönetecileri dizileri mutasyona uğratacak metodlar kullanmaktadır. Bu nedenle, yapılacaklar listesindekileri düzenlemek ve silmek çalışmamaktadır. `handleAddTodo`, `handleChangeTodo`, ve `handleDeleteTodo` fonksiyonlarını mutasyona uğratmayan metodlar kullanarak tekrar yazın:
 
 <Sandpack>
 
@@ -1783,7 +1783,7 @@ ul, li { margin: 0; padding: 0; }
 
 Immer ile mutasyona uğratan ve uğratmayan yaklaşımları beraber kullanabilirsiniz.
 
-Örneğin, bu sürümde `handleAddTodo` fonksiyonu Immer `draft`'ı mutasyona uğratacak şekilde yazılırken, `handleChangeTodo` ve `handleDeleteTodo` fonksiyonları mutasyona uğratmayan `map` ve `filter` metodları ile yazılmıştır:
+Örneğin, burada `handleAddTodo` fonksiyonu Immer `draft`'ı mutasyona uğratacak şekilde yazılırken, `handleChangeTodo` ve `handleDeleteTodo` fonksiyonları mutasyona uğratmayan `map` ve `filter` metodları ile yazılmıştır:
 
 <Sandpack>
 
