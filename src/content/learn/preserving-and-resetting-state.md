@@ -1551,7 +1551,7 @@ label { display: block; margin: 10px 0; }
 
 #### Bilgi formunu sıfırla {/*reset-a-detail-form*/}
 
-Bu düzenlenebilir bir kişi listesidir. Seçtiğiniz kişinin bilgilerini düzenleyip "Kaydet" tuşu ile kaydedebilir ya da "Sıfırla" tuşu ile değişiklikleri geri alabilirsiniz.
+Bu düzenlenebilir bir kişi listesidir. Seçtiğiniz kişinin bilgilerini düzenleyip "Kaydet" butonu ile kaydedebilir ya da "Sıfırla" butonu ile değişiklikleri geri alabilirsiniz.
 
 Farklı bir kişi seçtiğiniz zaman (örneğin Alice), state güncellenmektedir ancak form bir önceki kişinin bilgilerini göstermektedir. Seçilen kişi değiştiği zaman formun sıfırlanmasını sağlayacak şekilde düzeltin.
 
@@ -1858,13 +1858,13 @@ button {
 
 </Solution>
 
-#### Clear an image while it's loading {/*clear-an-image-while-its-loading*/}
+#### Bir görüntüyü yüklenirken temizle {/*clear-an-image-while-its-loading*/}
 
-When you press "Next", the browser starts loading the next image. However, because it's displayed in the same `<img>` tag, by default you would still see the previous image until the next one loads. This may be undesirable if it's important for the text to always match the image. Change it so that the moment you press "Next", the previous image immediately clears.
+"Sonraki" butonuna bastığınızda, tarayıcı sonraki görüntüyü yüklemeye başalar. Ancak, aynı `<img>` tag'inde görüntülendiğinden dolayı, varsayılan olarak bir sonraki görüntü yüklenene kadar önceki görüntüyü görmeye devam edersiniz. Metnin her zaman görüntüyle eşleşmesi önemliyse bu istenmeyen bir durum olabilir. "Sonraki" butonuna bastığınız anda bir önceki görüntünün temizlenmesini sağlayacak şekilde düzenleyin.
 
 <Hint>
 
-Is there a way to tell React to re-create the DOM instead of reusing it?
+React'e DOM'u tekrar kullanmak yerine yeniden oluşturmasını söylemenin bir yolu var mı?
 
 </Hint>
 
@@ -1889,10 +1889,10 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleClick}>
-        Next
+        Sonraki
       </button>
       <h3>
-        Image {index + 1} of {images.length}
+        Görüntü {index + 1} / {images.length}
       </h3>
       <img src={image.src} />
       <p>
@@ -1934,7 +1934,7 @@ img { width: 150px; height: 150px; }
 
 <Solution>
 
-You can provide a `key` to the `<img>` tag. When that `key` changes, React will re-create the `<img>` DOM node from scratch. This causes a brief flash when each image loads, so it's not something you'd want to do for every image in your app. But it makes sense if you want to ensure the image always matches the text.
+`<img>` tag'ine `anahtar` (`key`) iletebilirsiniz. O `key` değiştiği zaman, React `<img>` DOM node'unu sıfırdan tekrar oluşturacaktır. Bu, her görüntü yüklendiğinde kısa bir flaşa neden olur, dolayısıyla uygulamanızdaki her görüntü için yapmak isteyeceğiniz bir şey değildir. Ancak görüntünün her zaman metinle eşleşmesini sağlamak istiyorsanız mantıklı bir yoldur.
 
 <Sandpack>
 
@@ -1957,10 +1957,10 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleClick}>
-        Next
+        Sonraki
       </button>
       <h3>
-        Image {index + 1} of {images.length}
+        Görüntü {index + 1} / {images.length}
       </h3>
       <img key={image.src} src={image.src} />
       <p>
