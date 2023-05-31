@@ -1264,9 +1264,9 @@ Hangi stratejiyi seçerseniz seçin, _Alice ile_ sohbet, _Bob ile_ sohbetten kav
 
 <Challenges>
 
-#### Fix disappearing input text {/*fix-disappearing-input-text*/}
+#### Kaybolan input metnini düzeltin {/*fix-disappearing-input-text*/}
 
-This example shows a message when you press the button. However, pressing the button also accidentally resets the input. Why does this happen? Fix it so that pressing the button does not reset the input text.
+Bu örnek butona tıkladığınız zaman bir mesaj göstermektedir. Ancak, butona tıkalamak aynı zamanda input'u da sıfırlamaktadır. Sizce bu niye olmakta? Butona tıklamanın input metnini sıfırlamayacağı şekilde düzeltin.
 
 <Sandpack>
 
@@ -1278,11 +1278,11 @@ export default function App() {
   if (showHint) {
     return (
       <div>
-        <p><i>Hint: Your favorite city?</i></p>
+        <p><i>İpucu: Favori şehriniz?</i></p>
         <Form />
         <button onClick={() => {
           setShowHint(false);
-        }}>Hide hint</button>
+        }}>İpucunu gizle</button>
       </div>
     );
   }
@@ -1291,7 +1291,7 @@ export default function App() {
       <Form />
       <button onClick={() => {
         setShowHint(true);
-      }}>Show hint</button>
+      }}>İpucunu göster</button>
     </div>
   );
 }
@@ -1315,9 +1315,9 @@ textarea { display: block; margin: 10px 0; }
 
 <Solution>
 
-The problem is that `Form` is rendered in different positions. In the `if` branch, it is the second child of the `<div>`, but in the `else` branch, it is the first child. Therefore, the component type in each position changes. The first position changes between holding a `p` and a `Form`, while the second position changes between holding a `Form` and a `button`. React resets the state every time the component type changes.
+Burdaki sorun `Form'un` farklı konumlarda render edilmesidir. `if` dalında `<div>`'in ikinci alt elemanıdır, ancak `else` dalında ilk alt elemanıdır. Bu nedenle, her konumdaki bileşen tipi değişir. Birinci konum `p` ve `Form` arasında değişirken, ikinci konum `Form` ve `button` arasında değişir. React, bileşen tipi her değiştiğinde state'i sıfırlar.
 
-The easiest solution is to unify the branches so that `Form` always renders in the same position:
+En kolay çözüm, `Form'un` her zaman aynı konumda render edilmesi için dalları birleştirmektir:
 
 <Sandpack>
 
@@ -1329,17 +1329,17 @@ export default function App() {
   return (
     <div>
       {showHint &&
-        <p><i>Hint: Your favorite city?</i></p>
+        <p><i>İpucu: Favori şehriniz?</i></p>
       }
       <Form />
       {showHint ? (
         <button onClick={() => {
           setShowHint(false);
-        }}>Hide hint</button>
+        }}>İpucunu gizle</button>
       ) : (
         <button onClick={() => {
           setShowHint(true);
-        }}>Show hint</button>
+        }}>İpucunu göster</button>
       )}
     </div>
   );
@@ -1363,7 +1363,7 @@ textarea { display: block; margin: 10px 0; }
 </Sandpack>
 
 
-Technically, you could also add `null` before `<Form />` in the `else` branch to match the `if` branch structure:
+Teknik olarak, `if` dal yapısıyla eşleşmesi için `else` dalındaki `<Form />'dan` önce `null` ekleyebilirsiniz:
 
 <Sandpack>
 
@@ -1375,11 +1375,11 @@ export default function App() {
   if (showHint) {
     return (
       <div>
-        <p><i>Hint: Your favorite city?</i></p>
+        <p><i>İpucu: Favori şehriniz?</i></p>
         <Form />
         <button onClick={() => {
           setShowHint(false);
-        }}>Hide hint</button>
+        }}>İpucunu gizle</button>
       </div>
     );
   }
@@ -1389,7 +1389,7 @@ export default function App() {
       <Form />
       <button onClick={() => {
         setShowHint(true);
-      }}>Show hint</button>
+      }}>İpucunu göster</button>
     </div>
   );
 }
@@ -1411,7 +1411,7 @@ textarea { display: block; margin: 10px 0; }
 
 </Sandpack>
 
-This way, `Form` is always the second child, so it stays in the same position and keeps its state. But this approach is much less obvious and introduces a risk that someone else will remove that `null`.
+Bu şekilde `Form` her zaman ikinci alt elemandır yani her zaman aynı konumdadır ve state'i korur. Ancak bu yaklaşım daha az belirgindir ve başka birinin bu `null'u` silmesi riskini beraberinde getirir.
 
 </Solution>
 
