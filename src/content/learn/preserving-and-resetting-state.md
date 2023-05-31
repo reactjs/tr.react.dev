@@ -1415,15 +1415,15 @@ Bu şekilde `Form` her zaman ikinci alt elemandır yani her zaman aynı konumdad
 
 </Solution>
 
-#### Swap two form fields {/*swap-two-form-fields*/}
+#### İki form alanını değiştir {/*swap-two-form-fields*/}
 
-This form lets you enter first and last name. It also has a checkbox controlling which field goes first. When you tick the checkbox, the "Last name" field will appear before the "First name" field.
+Bu form ad ve soyadınızı girmenize izin verir. Aynı zamanda hangi alanın daha önce geleceğini kontrol eden kutucuk vardır. Kutucuğu işaretlediğiniz zaman "Soyad" alanı "Ad" alanından önce gelecektir.
 
-It almost works, but there is a bug. If you fill in the "First name" input and tick the checkbox, the text will stay in the first input (which is now "Last name"). Fix it so that the input text *also* moves when you reverse the order.
+Neredeyse çalışmakta ancak bir hata var. Eğer "Ad" input'unu doldurup kutucuğu işaretlerseniz, adınız ilk input'ta kalacaktır (artık "Soyad" olan input). Sırayı değiştirdiğinzde input metninin de değişeceği şekilde düzenleyin.
 
 <Hint>
 
-It seems like for these fields, their position within the parent is not enough. Is there some way to tell React how to match up the state between re-renders?
+Görünüşe göre bu alanlar için üst eleman içindeki konumları yeterli değildir. React'e yeniden render'lar arasında state'leri nasıl eşleştireceğini söylemenin bir yolu var mı?
 
 </Hint>
 
@@ -1441,22 +1441,22 @@ export default function App() {
         checked={reverse}
         onChange={e => setReverse(e.target.checked)}
       />
-      Reverse order
+      Sırayı terse çevir
     </label>
   );
   if (reverse) {
     return (
       <>
-        <Field label="Last name" /> 
-        <Field label="First name" />
+        <Field label="Ad" /> 
+        <Field label="Soyad" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field label="First name" /> 
-        <Field label="Last name" />
+        <Field label="Ad" /> 
+        <Field label="Soyad" />
         {checkbox}
       </>
     );    
@@ -1487,7 +1487,7 @@ label { display: block; margin: 10px 0; }
 
 <Solution>
 
-Give a `key` to both `<Field>` components in both `if` and `else` branches. This tells React how to "match up" the correct state for either `<Field>` even if their order within the parent changes:
+`if` ve `else` dallarındaki her iki `<Field>` bileşenine `anahtar` (`key`) verin. Bu, React'e her iki `<Field>` bileşeni için üst elemandaki sıraları değişse bile doğru state'i nasıl "eşleştireceğini" söyler.
 
 <Sandpack>
 
@@ -1503,22 +1503,22 @@ export default function App() {
         checked={reverse}
         onChange={e => setReverse(e.target.checked)}
       />
-      Reverse order
+      Sırayı ters çevir
     </label>
   );
   if (reverse) {
     return (
       <>
-        <Field key="lastName" label="Last name" /> 
-        <Field key="firstName" label="First name" />
+        <Field key="lastName" label="Ad" /> 
+        <Field key="firstName" label="Soyad" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field key="firstName" label="First name" /> 
-        <Field key="lastName" label="Last name" />
+        <Field key="firstName" label="Ad" /> 
+        <Field key="lastName" label="Soyad" />
         {checkbox}
       </>
     );    
