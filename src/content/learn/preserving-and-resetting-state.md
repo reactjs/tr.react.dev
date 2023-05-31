@@ -1549,11 +1549,11 @@ label { display: block; margin: 10px 0; }
 
 </Solution>
 
-#### Reset a detail form {/*reset-a-detail-form*/}
+#### Bilgi formunu sıfırla {/*reset-a-detail-form*/}
 
-This is an editable contact list. You can edit the selected contact's details and then either press "Save" to update it, or "Reset" to undo your changes.
+Bu düzenlenebilir bir kişi listesidir. Seçtiğiniz kişinin bilgilerini düzenleyip "Kaydet" tuşu ile kaydedebilir ya da "Sıfırla" tuşu ile değişiklikleri geri alabilirsiniz.
 
-When you select a different contact (for example, Alice), the state updates but the form keeps showing the previous contact's details. Fix it so that the form gets reset when the selected contact changes.
+Farklı bir kişi seçtiğiniz zaman (örneğin Alice), state güncellenmektedir ancak form bir önceki kişinin bilgilerini göstermektedir. Seçilen kişi değiştiği zaman formun sıfırlanmasını sağlayacak şekilde düzeltin.
 
 <Sandpack>
 
@@ -1645,7 +1645,7 @@ export default function EditContact({ initialData, onSave }) {
   return (
     <section>
       <label>
-        Name:{' '}
+        Adı:{' '}
         <input
           type="text"
           value={name}
@@ -1668,13 +1668,13 @@ export default function EditContact({ initialData, onSave }) {
         };
         onSave(updatedData);
       }}>
-        Save
+        Kaydet
       </button>
       <button onClick={() => {
         setName(initialData.name);
         setEmail(initialData.email);
       }}>
-        Reset
+        Sıfırla
       </button>
     </section>
   );
@@ -1705,7 +1705,7 @@ button {
 
 <Solution>
 
-Give `key={selectedId}` to the `EditContact` component. This way, switching between different contacts will reset the form:
+`key={selectedId}` prop'unu `EditContact` bileşenine iletin. Bu şekilde, seçilen kişiyi değiştirmek formu sıfırlayacaktır:
 
 <Sandpack>
 
@@ -1798,7 +1798,7 @@ export default function EditContact({ initialData, onSave }) {
   return (
     <section>
       <label>
-        Name:{' '}
+        Adı:{' '}
         <input
           type="text"
           value={name}
@@ -1821,13 +1821,13 @@ export default function EditContact({ initialData, onSave }) {
         };
         onSave(updatedData);
       }}>
-        Save
+        Kaydet
       </button>
       <button onClick={() => {
         setName(initialData.name);
         setEmail(initialData.email);
       }}>
-        Reset
+        Sıfırla
       </button>
     </section>
   );
