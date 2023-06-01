@@ -2002,11 +2002,11 @@ img { width: 150px; height: 150px; }
 
 </Solution>
 
-#### Fix misplaced state in the list {/*fix-misplaced-state-in-the-list*/}
+#### Listedeki yanlış yerleştirilmiş state'i düzeltin {/*fix-misplaced-state-in-the-list*/}
 
-In this list, each `Contact` has state that determines whether "Show email" has been pressed for it. Press "Show email" for Alice, and then tick the "Show in reverse order" checkbox. You will notice that it's _Taylor's_ email that is expanded now, but Alice's--which has moved to the bottom--appears collapsed.
+Bu listede, her `Contact` bileşeni "E-postayı göster" butonunun kendisi için basılıp basılmadığını belirleyen bir state'e sahiptir. Alice için "E-postayı göster" butonuna basın, ve "Ters sıralanmış halde göster" kutucuğunu işaretleyin. Şimdi genişletilmiş halde _Taylor'ın_ e-postasını görüyoruz ama en alt sıraya giden Alice'in e-postasını görmemekteyiz.
 
-Fix it so that the expanded state is associated with each contact, regardless of the chosen ordering.
+Genişletilmiş state'in, seçilen sıralamadan bağımsız olarak ilgili kişiyle ilişkendirilecek şekilde düzeltin.
 
 <Sandpack>
 
@@ -2032,7 +2032,7 @@ export default function ContactList() {
             setReverse(e.target.checked)
           }}
         />{' '}
-        Show in reverse order
+        Ters sıralanmış halde göster
       </label>
       <ul>
         {displayedContacts.map((contact, i) =>
@@ -2066,7 +2066,7 @@ export default function Contact({ contact }) {
       <button onClick={() => {
         setExpanded(!expanded);
       }}>
-        {expanded ? 'Hide' : 'Show'} email
+        {expanded ? 'Hide' : 'Show'} e-posta
       </button>
     </>
   );
@@ -2096,16 +2096,16 @@ button {
 
 <Solution>
 
-The problem is that this example was using index as a `key`:
+Bu örnekteki problem indeks olarak `key` (`anahtar`)  kullanılmasıdır:
 
 ```js
 {displayedContacts.map((contact, i) =>
   <li key={i}>
 ```
 
-However, you want the state to be associated with _each particular contact_.
+Ancak, state'in _her bir kişi_ ile ilişkilendirilmesi istiyoruz.
 
-Using the contact ID as a `key` instead fixes the issue:
+`key` olarak indek yerine kişinin ID'sini kullanmak sorunu çözer:
 
 <Sandpack>
 
@@ -2131,7 +2131,7 @@ export default function ContactList() {
             setReverse(e.target.checked)
           }}
         />{' '}
-        Show in reverse order
+        Ters sıralanmış halde göster
       </label>
       <ul>
         {displayedContacts.map(contact =>
@@ -2165,7 +2165,7 @@ export default function Contact({ contact }) {
       <button onClick={() => {
         setExpanded(!expanded);
       }}>
-        {expanded ? 'Hide' : 'Show'} email
+        {expanded ? 'Hide' : 'Show'} e-posta
       </button>
     </>
   );
@@ -2193,7 +2193,7 @@ button {
 
 </Sandpack>
 
-State is associated with the tree position. A `key` lets you specify a named position instead of relying on order.
+State, ağaç konumu ile ilişkilidir. `key`, sıralamaya bağlı kalmak yerine adlandırılmış bir konum belirlemenizi sağlar.
 
 </Solution>
 
