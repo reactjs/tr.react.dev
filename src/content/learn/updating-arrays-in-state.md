@@ -4,21 +4,21 @@ title: State İçerisindeki Dizileri Güncelleme
 
 <Intro>
 
-JavaScript'te diziler mutasyona uğratılabilir (mutable) ancak siz state'te sakladığınız dizileri mutasyona uğratılamaz (immutable) olarak görmelisiniz. Tıpkı nesnelerde olduğu gibi, state'te saklanan bir diziyi güncellemek istediğiniz zaman yeni bir dizi oluşturmanız (veya var olanın bir kopyasını oluşturmanız) ve ardından yeni oluşturduğunuz diziyi kullanmak için state'i güncellemeniz gerekmektedir.
+Diziler JavaScript'te değiştirilebilirdir, ancak bunları state içinde depolarken değiştirilemez olarak ele almalısınız. Tıpkı nesnelerde olduğu gibi, state'te depolanan bir diziyi güncellemek istediğinizde yeni bir dizi oluşturmanız (veya var olanın bir kopyasını oluşturmanız) ve ardından yeni oluşturduğunuz diziyi kullanmak için state'i güncellemeniz gerekir.
 
 </Intro>
 
 <YouWillLearn>
 
 - React state'indeki bir diziye öğeler nasıl eklenir, çıkarılır ya da değiştirilir
-- Bir dizi içindeki nesne nasıl güncellenir
+- Dizi içindeki nesne nasıl güncellenir
 - Immer kullanarak dizi kopyalama işlemi daha az tekrarla nasıl yapılır
 
 </YouWillLearn>
 
-## Dizileri mutasyona uğratmadan güncelleme {/*updating-arrays-without-mutation*/}
+## Dizileri değiştirmeden güncelleme {/*updating-arrays-without-mutation*/}
 
-JavaScript'te diziler de bir tür nesnedir. [Nesnelerde olduğu gibi](/learn/updating-objects-in-state), **React state'indeki dizileri salt okunur olarak görmelisiniz.** Bu, `arr[0] = 'bird'` şeklinde bir dizi içindeki öğeleri başka değerlere yeniden atamamanız, ayrıca `push()` ve `pop()` gibi dizileri mutasyona uğratan JavaScript metodlarını kullanmamanız gerektiği anlamına gelir.
+JavaScript'te diziler bir nesne türüdür. [Nesnelerde olduğu gibi](/learn/updating-objects-in-state), **React state'indeki dizileri salt okunur olarak görmelisiniz.** Bu, `arr[0] = 'bird'` şeklinde bir dizi içindeki öğeleri başka değerlere yeniden atamamanız, ayrıca `push()` ve `pop()` gibi dizileri mutasyona uğratan JavaScript metodlarını kullanmamanız gerektiği anlamına gelir.
 
 Bu metodları kullanmak yerine, bir diziyi her güncellemek istediğinizde state setter fonksiyonunuza *yeni* bir dizi iletmelisiniz. Bunu yapmak için, `filter()` ve `map()` gibi diziyi mutasyona uğratmayan JavaScript metodlarını kullanarak orijinal diziden yeni bir dizi oluşturabilirsiniz. Ardından, state'inizi kopyaladığınız dizi olarak güncelleyebilirsiniz.
 
@@ -44,9 +44,9 @@ React'te, `slice` (`p` yok!) metodunu daha sık kullanacaksınız çünkü state
 
 </Pitfall>
 
-### Bir diziye eklemek {/*adding-to-an-array*/}
+### Diziye öğe eklemek {/*adding-to-an-array*/}
 
-`push()` metodu diziyi mutasyona uğratacaktır ancak biz bunu istemiyoruz.
+`push()` metodu diziyi mutasyona uğratacaktır, ki bunu istemezsiniz:
 
 <Sandpack>
 
@@ -88,13 +88,13 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-Bunun yerine, mevcut öğeleri *ve* dizinin son elemanı olarak yeni öğeyi içeren *yeni* diziyi oluşturun. Bunu yapmanın birden çok yolu vardır ancak en kolay yol `...` [dizi spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals) sözdizimini kullanmaktır:
+Bunun yerine, mevcut öğeleri *ve* son eleman olarak yeni öğeyi içeren *yeni* diziyi oluşturun. Bunu yapmanın birden çok yolu vardır ancak en kolay yol `...` [dizi spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals) sözdizimini kullanmaktır:
 
 ```js
 setArtists( // State'i yeni bir dizi 
   [ // ile değiştirin
-    ...artists, // bu eski öğelerin hepsini içerir
-    { id: nextId++, name: name } // ve dizinin sonuna eklenecek yeni öğe
+    ...artists, // bu eski öğelerin tümünü
+    { id: nextId++, name: name } // ve sona eklenecek yeni öğeyi içerir.
   ]
 );
 ```
@@ -152,9 +152,9 @@ setArtists([
 
 Bu şekilde, spread sözdizimi `push()` (öğeyi dizinin sonuna eklemek) ve `unshift()` (öğeyi dizinin başına eklemek) metodlarının görevini yapabilir. Yukarıdaki sandbox'ta deneyebilirsiniz!
 
-### Bir diziden çıkartmak {/*removing-from-an-array*/}
+### Diziden öğe çıkartma {/*removing-from-an-array*/}
 
-Diziden bir öğeyi çıkartmanın en kolay yolu o öğeyi *filtrelemek'tir.* Bir başka deyişle, o öğeyi içermeyen yeni bir dizi oluşturmaktır. Bunu yapmak için `filter` metodunu kullanabilirsiniz. Örneğin:
+Diziden bir öğeyi çıkartmanın en kolay yolu o öğeyi *filtrelemektir.* Bir başka deyişle, o öğeyi içermeyen yeni bir dizi oluşturmaktır. Bunu yapmak için `filter` metodunu kullanabilirsiniz. Örneğin:
 
 <Sandpack>
 
@@ -206,11 +206,11 @@ setArtists(
 );
 ```
 
-Burada `artists.filter(a => a.id !== artist.id)` ifadesi "ID'leri `artist.id`'den farklı olan `artists`'den oluşan yeni bir dizi oluştur" anlamına gelmektedir. Diğer bir deyişle, her bir artist'e karşılık gelen "Sil" butonu o artist'i diziden filtreleyecek ve nihai dizi ile yeniden render isteği gönderecektir. `filter` metodunun orijinal diziyi değiştirmediğini unutmayın.
+Burada `artists.filter(a => a.id !== artist.id)` ifadesi "`artist` dizisini kullanarak ID'leri `artist.id`'den farklı olan öğelerle yeni bir dizi oluştur" anlamına gelmektedir. Diğer bir deyişle, her bir artist'e karşılık gelen "Sil" butonu o artist'i diziden filtreleyecek ve nihai dizi ile yeniden render isteği gönderecektir. `filter` metodunun orijinal diziyi değiştirmediğini unutmayın.
 
-### Bir diziyi dönüştürmek {/*transforming-an-array*/}
+### Diziyi dönüştürme {/*transforming-an-array*/}
 
-Eğer dizideki bazı ya da tüm öğeleri değiştirmek isterseniz **yeni** bir dizi oluşturmak için `map()` metodunu kullanabilirsiniz. `map`'e ileteceğiniz fonksiyon, verisine veya indeksine (veya her ikisine) dayalı olarak her bir öğeyle ne yapacağınızı belirler.
+Dizideki bazı ya da tüm öğeleri değiştirmek isterseniz **yeni** bir dizi oluşturmak için `map()` metodunu kullanabilirsiniz. `map`'e ileteceğiniz fonksiyon, verisine veya indeksine (veya her ikisine) bağlı olarak her bir öğeyle ne yapacağınızı belirler.
 
 Bu örnekte dizi, iki daire ve bir karenin koordinatlarını içermektedir. Butona tıkladığınız zaman sadece daireler 50 piksel aşağı hareket etmektedir. Bunu, `map()` metodunu kullanıp yeni bir veri dizisi oluşturarak yapar:
 
@@ -278,7 +278,7 @@ body { height: 300px; }
 
 </Sandpack>
 
-### Bir dizideki öğeleri değiştirmek {/*replacing-items-in-an-array*/}
+### Dizideki öğeleri değiştirme {/*replacing-items-in-an-array*/}
 
 Bir dizideki bir veya daha fazla öğeyi değiştirmek oldukça sık istenmektedir. `arr[0] = 'bird'` gibi atamalar yapmak orijinal diziyi mutasyona uğrattığı için burada da `map` metodunu kullanmak mantıklı olacaktır.
 
@@ -332,11 +332,11 @@ button { margin: 5px; }
 
 </Sandpack>
 
-### Dizide belli bir konuma eklemek {/*inserting-into-an-array*/}
+### Dizide belli bir konuma öğe ekleme {/*inserting-into-an-array*/}
 
-Bazen bir öğeyi ne dizinin başına ne de dizinin sonuna değil de belirlediğiniz başka bir konuma eklemek isteyebilirsiniz. Bunu yapmak için, `...` dizi spread sözdizimini `slice()` metodu ile beraber kullanabilirsiniz. `slice()` metodu diziden bir "dilim (slice)" almanızı sağlar. Yeni öğeyi eklemek için, eklemek istediğiniz konumdan önceki dilimden spread sözdizimi ile yeni bir dizi oluşturacak, ardından yeni öğeyi ekleyecek ve son olarak da orijinal dizinin geri kalanını ekleyeceksiniz.
+Bazen bir öğeyi dizinin başına ya da sonuna değil de belirli bir konuma eklemek isteyebilirsiniz. Bunu yapmak için, `...` dizi spread sözdizimini `slice()` metodu ile beraber kullanabilirsiniz. `slice()` metodu diziden bir "dilim (slice)" almanızı sağlar. Yeni öğeyi eklemek için, eklemek istediğiniz konumdan önceki dilimden spread sözdizimi ile yeni bir dizi oluşturacak, ardından yeni öğeyi ekleyecek ve son olarak da orijinal dizinin geri kalanını ekleyeceksiniz.
 
-Bu örnekte, Ekle butonu her zaman `1` indeksinde ekler:
+Bu örnekte, Ekle butonu her zaman `1.` indekse ekler:
 
 <Sandpack>
 
@@ -396,9 +396,9 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-### Bir dizide başka değişiklikler yapmak {/*making-other-changes-to-an-array*/}
+### Dizide başka değişiklikler yapma {/*making-other-changes-to-an-array*/}
 
-Spread sözdizimi, `map()` ve `filter()` metodları gibi diziyi mutasyona uğratmayan yöntemlerle yapamayacağınız bazı şeyler vardır. Örneğin, bir diziyi sıralamak veya dizi öğelerini ters çevirmek isteyebilirsiniz. JavaScript'in `reverse()` ve `sort()` metodları orijinal diziyi mutasyona uğrattığından dolayı direkt olarak bu metodları kullanamazsınız.
+Spread sözdizimi veya `map()` ve `filter()` gibi diziyi mutasyona uğratmayan metodlarla yapamayacağınız bazı şeyler vardır. Örneğin, bir diziyi sıralamak veya dizi öğelerini ters çevirmek isteyebilirsiniz. JavaScript'in `reverse()` ve `sort()` metodları orijinal diziyi değiştirir, bu nedenle doğrudan bu metodları kullanamazsınız.
 
 **Ancak, önce diziyi kopyalayabilir ve sonra o dizi üzerinde değişiklikler yapabilirsiniz.**
 
@@ -454,13 +454,13 @@ setList(nextList);
 
 `nextList` ve `list` iki farklı dizi olmasına rağmen, **`nextList[0]` ve `list[0]` ifadeleri aynı nesneyi işaret eder.** Yani `nextList[0].seen` değerini değiştirirseniz, aynı zamanda `list[0].seen` değerini de değiştirmiş olursunuz. Bu, state'i mutasyona uğratmaktır ki bundan kaçınmalısınız! Bu sorunu [iç içe JavaScript nesnelerini güncelleme](/learn/updating-objects-in-state#updating-a-nested-object) yöntemine benzer şekilde, değiştirmek istediğiniz öğeleri mutasyona uğratmak yerine tek tek kopyalayarak çözebilirsiniz. Nasıl yapıldığını görelim.
 
-## Dizi içindeki nesneleri güncelleme {/*updating-objects-inside-arrays*/}
+## Dizideki nesneleri güncelleme {/*updating-objects-inside-arrays*/}
 
-Nesneler dizilerin  _gerçekten_ "içinde" değillerdir. Yazdığınız kodda "içeride" olarak görünebilir ancak bir dizideki her nesne, dizinin "işaret ettiği" ayrı bir değerdir. Bu yüzden `list[0]` gibi iç içe ifadeleri değiştirirken dikkatli olmalısınız. Başka bir kişinin sanat eseri listesi (artwork list), dizinin aynı öğesine işaret edebilir!
+Nesneler  _gerçekte_ dizilerin "içinde" yer almazlar. Yazdığınız kodda "içinde" gibi görünebilir ancak bir dizideki her nesne, dizinin "işaret ettiği" ayrı bir değerdir. Bu yüzden `list[0]` gibi iç içe ifadeleri değiştirirken dikkatli olmalısınız. Başka bir kişinin sanat eseri listesi (artwork list), dizinin aynı öğesine işaret edebilir!
 
 **İç içe geçmiş state'i güncellerken, güncellemek istediğiniz noktadan en üst düzeye kadar kopyalar oluşturmanız gerekir.** Şimdi bunun nasıl olduğunu görelim.
 
-Bu örnekte, iki farklı sanat eseri listesi aynı ilk state'e (initialList) sahiptir. Bu listelerin izole olmaları gerekirdi ancak bir mutasyon nedeniyle yanlışlıkla state'leri paylaşmaktadırlar ve listedeki bir kutuyu işaretlemek diğer listedeki kutuları da etkilemektedir:
+Bu örnekte, iki farklı sanat eseri listesi aynı başlangıç state'ine sahiptir. Bu listelerin izole olmaları gerekirdi ancak bir mutasyon nedeniyle yanlışlıkla state'leri paylaşmaktadırlar ve listedeki bir kutuyu işaretlemek diğer listeyi de etkilemektedir:
 
 <Sandpack>
 
@@ -792,7 +792,7 @@ Arka planda Immer, `draft`'a yaptığınız değişikliklere göre her zaman bir
 
 #### Alışveriş sepetindeki ürünü güncelleyin {/*update-an-item-in-the-shopping-cart*/}
 
-`handleIncreaseClick` fonksiyonunun mantığını yazın ki "+" butonuna tıklandığında ürünün sepetteki sayısı artsın:
+"+" butonuna tıklandığında ilgili sayının artması için `handleIncreaseClick` mantığını doldurun:
 
 <Sandpack>
 
@@ -1413,7 +1413,7 @@ ul, li { margin: 0; padding: 0; }
 
 #### Immer kullanarak mutasyonları düzeltin {/*fix-the-mutations-using-immer*/}
 
-Bu örnekle bir önceki örnek aynıdır. Bu sefer mutasyonları Immer kullanarak düzelteceğiz. `useImmer` halihazırda import edilmiştir, yani kullanmak için `todos` state değişkenini değiştirmeniz gerekmektedir.
+Bu örnekle bir önceki örnek aynıdır. Bu sefer Immer kullanarak mutasyonları düzeltin. Kolaylık sağlaması için, `useImmer` halihazırda içeri aktarılmıştır. Bunu kullanarak `todos` state değişkenini değiştirmeniz gerekir.
 
 <Sandpack>
 
