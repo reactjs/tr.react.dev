@@ -4,7 +4,7 @@ title: State'i Korumak ve Sıfırlamak
 
 <Intro>
 
-State bileşenler arasında izole bir şekildedir. React, kullanıcı arayüzü (UI) ağacındaki yerlerine göre hangi state'in hangi bileşene ait olduğunu takip eder. Yeniden renderlar arasında state'in ne zaman korunacağını ve ne zaman sıfırlanacağını kontrol edebilirsiniz.
+State bileşenler arasında izole edilmiştir. React, kullanıcı arayüzü (UI) ağacındaki yerlerine göre hangi state'in hangi bileşene ait olduğunu takip eder. Yeniden render'lar arasında state'in ne zaman korunacağını ve ne zaman sıfırlanacağını kontrol edebilirsiniz.
 
 </Intro>
 
@@ -25,7 +25,7 @@ React, oluşturduğunuz kullanıcı arayüzünü yönetmek ve modellek için de 
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Yatay olarak düzenlenmiş üç bölümden oluşan diyagram. İlk bölümde, 'A Bileşeni', 'B bileşeni' ve 'C Bileşeni' etiketli dikey olarak istiflenmiş üç dikdörtgen vardır. Bir sonraki bölüme geçişi gösteren 'React' etiketli ve üstünde React logosu olan bir ok vardır. Orta bölümde bir bileşen ağacı vardır. Kök 'A' olarak ve iki alt eleman 'B' ve 'C' olarak etiketlidir. Bir sonraki bölüme geçiş yine 'React' etiketli ve üstüne React logosu olan bir okla gösterilmiştir. Üçüncü ve son bölüm ise yalnızca bir alt kümenin vurgulandığı (orta bölümden alt ağacı gösteren) 8 node'dan oluşan bir ağaç gösteren tarayıcı wireframe'idir.">
+<Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Yatay olarak düzenlenmiş üç bölümden oluşan diyagram. İlk bölümde, 'A Bileşeni', 'B bileşeni' ve 'C Bileşeni' etiketli dikey olarak istiflenmiş üç dikdörtgen vardır. Bir sonraki bölüme geçişi gösteren 'React' etiketli ve üstünde React logosu olan bir ok vardır. Orta bölümde bir bileşen ağacı vardır. Kök 'A' olarak ve iki alt eleman 'B' ve 'C' etiketlidir. Bir sonraki bölüme geçiş yine 'React' etiketli ve üstüne React logosu olan bir okla gösterilmiştir. Üçüncü ve son bölüm ise yalnızca bir alt kümenin vurgulandığı (orta bölümden alt ağacı gösteren) 8 node'dan oluşan bir ağaç gösteren tarayıcı wireframe'idir.">
 
 React, bileşenlerden, React DOM'un DOM'u render etmek için kullandığı bir kullanıcı arayüzü (UI) ağacı oluşturur
 
@@ -35,10 +35,10 @@ React, bileşenlerden, React DOM'un DOM'u render etmek için kullandığı bir k
 
 ## State ağaçtaki bir konuma bağlıdır {/*state-is-tied-to-a-position-in-the-tree*/}
 
-Bir bileşene state verdiğiniz zaman state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
+Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
 
 
-Örneğin burada yalnızca bir `<Counter />` JSX etiketi vardır, ancak bu etiket iki farklı konumda render edilir:
+Örneğin burada yalnızca bir `<Counter />` JSX elemanı vardır, ancak bu eleman iki farklı konumda render edilir:
 
 <Sandpack>
 
@@ -102,7 +102,7 @@ label {
 
 </Sandpack>
 
-Aşağıdaki diyagramda ağaç olarak görülmektedir:     
+Bunlar ağaç olarak nasıl görünüyor:
 
 <DiagramGroup>
 
@@ -181,7 +181,7 @@ Gördüğünüz gibi, bir sayaç güncellendiği zaman sadece o bileşenin state
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_increment" height={248} width={441} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahip. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman 'Counter' etiketli ve 1 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt elemanın state baloncuğu, değerinin güncellendiğini belirtmek için sarı renkle vurgulanmış.">
+<Diagram name="preserving_state_increment" height={248} width={441} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahiptir. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman 'Counter' etiketli ve 1 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt elemanın state baloncuğu, değerinin güncellendiğini belirtmek için sarı renkle vurgulanmış.">
 
 State güncelleniyor
 
@@ -292,7 +292,7 @@ Bileşen ekleniyor
 
 ## Aynı konumdaki aynı bileşen state'i korur {/*same-component-at-the-same-position-preserves-state*/}
 
-Bu örnekte iki farklı `<Counter />` etiketi var:
+Bu örnekte iki farklı `<Counter />` elemanı var:
 
 <Sandpack>
 
@@ -381,7 +381,7 @@ Kutucuğu işaretlediğinizde veya işareti kaldırdığınızda, sayacın state
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_same_component" height={461} width={600} alt="Aralarındaki bir okla ayrılmış iki bölümden oluşan diyagram. Her bölüm, isFancy etiketli bir state baloncuğu içeren 'App' etiketli bir üst elemana sahip bir bileşen düzeni içerir. Bu bileşenin 'div' etiketli bir alt elemanı vardır ve bu tek alt elemana aktarılan isFancy değerini (mor renkle vurgulanmış) içeren bir prop baloncuğu içerir. Son alt eleman 'Counter' etiketli ve her iki diyagramda da 3 değerine eşit 'counter' etiketli bir state baloncuğu içerir. Diyagramın sol bölümünde hiçbir şey vurgulanmamış ve isFancy üst eleman state değeri false'tur. Diyagramın sağ bölümünde, isFancy üst eleman state değeri true olarak değişmiş ve sarı renkle vurgulanmıştır. Aynı zamanda isFancy değeri değişen prop baloncuğu da sarı renkle vurgulanmıştır.">
+<Diagram name="preserving_state_same_component" height={461} width={600} alt="Aralarındaki bir okla ayrılmış iki bölümden oluşan diyagram. Her bölüm, isFancy etiketli bir state baloncuğu içeren 'App' etiketli bir üst elemana sahip bileşen düzeni içerir. Bu bileşenin 'div' etiketli bir alt elemanı vardır ve bu tek alt elemana aktarılan isFancy değerini (mor renkle vurgulanmış) içeren bir prop baloncuğu içerir. Son alt eleman 'Counter' etiketli ve her iki diyagramda da 3 değerine eşit 'counter' etiketli bir state baloncuğu içerir. Diyagramın sol bölümünde hiçbir şey vurgulanmamış ve isFancy üst eleman state değeri false'tur. Diyagramın sağ bölümünde, isFancy üst eleman state değeri true olarak değişmiş ve sarı renkle vurgulanmıştır. Aynı zamanda isFancy değeri değişen prop baloncuğu da sarı renkle vurgulanmıştır.">
 
 `App` state'inin güncellenmesi `Counter`'ı sıfırlamaz çünkü `Counter` aynı konumda kalmaktadır
 
@@ -390,11 +390,11 @@ Kutucuğu işaretlediğinizde veya işareti kaldırdığınızda, sayacın state
 </DiagramGroup>
 
 
-Bu, aynı konumdaki aynı bileşendir. Bu nedenle React'in bakış açısından aynı sayaçtır.
+Bu bileşen, aynı konumdaki aynı bileşendir. Bu nedenle React'in bakış açısından aynı sayaçtır.
 
 <Pitfall>
 
-**React için önemli olanın JSX işaretlemesindeki (markup) değil, kullanıcı arayüzü ağacındaki konumun olduğunu unutmayın!** Bu bileşen isFancy state değerine göre, `if` koşulu ile farklı `<Counter />` bileşenleri döndürmektedir:
+**React için önemli olanın JSX işaretlemesindeki (markup) değil, kullanıcı arayüzü ağacındaki konumun olduğunu unutmayın!** Bu bileşen, `if` koşulu içinde ve dışında farklı `<Counter />` JSX elemanlarıyla iki farklı `return` ifadesine sahiptir:
 
 <Sandpack>
 
@@ -492,9 +492,9 @@ label {
 
 </Sandpack>
 
-Kutucuğa tıkladığınız zaman state'in sıfırlanmasını bekliyor olabilirsiniz ancak state sıfırlanmıyor! Bunun nedeni **her iki `<Counter />` etiketi de aynı konumda render edilmektedir.** React, fonksiyonunuzda koşullu ifadeleri nereye koyduğunuzu bilmez. React'in tüm "gördüğü" döndürdüğünüz ağaçtır.
+Kutucuğa tıkladığınız zaman state'in sıfırlanmasını bekliyor olabilirsiniz ancak state sıfırlanmıyor! Bunun nedeni **her iki `<Counter />` elemanı da aynı konumda render edilmektedir.** React, fonksiyonunuzda koşullu ifadeleri nereye koyduğunuzu bilmez. React'in tüm "gördüğü" döndürdüğünüz ağaçtır.
 
-Her iki durumda da, `App` bileşeni ilk alt eleman olarak `<Counter />` bileşenini içeren bir `<div>` döndürür. React'e göre, bu iki sayaç da aynı "adrese" sahiptir: kökün ilk alt elemanının ilk alt elemanı. React, mantığınızı nasıl yapılandırdığınıza bakmaksızın bunları önceki ve sonraki renderlar arasında bu şekilde eşleştirir.
+Her iki durumda da, `App` bileşeni ilk alt eleman olarak `<Counter />` bileşenini içeren bir `<div>` döndürür. React'e göre, bu iki sayaç da aynı "adrese" sahiptir: kökün ilk alt elemanının ilk alt elemanı. React, mantığınızı nasıl yapılandırdığınıza bakmaksızın bunları önceki ve sonraki render'lar arasında bu şekilde eşleştirir.
 
 </Pitfall>
 
@@ -577,13 +577,13 @@ label {
 
 </Sandpack>
 
-Burada, aynı konumda _farklı_ bileşen tipleri arasında geçiş yapmaktayız. Başlangıçta, `<div>` elementinin ilk alt elemanı bir `Counter` içermekteydi. Ancak bunu bir `p` ile değiştirdiğiniz zaman React `Counter`'ı kullanıcı arayüzünden kaldırır ve state'ini yok eder.
+Burada, aynı konumda _farklı_ bileşen tipleri arasında geçiş yapmaktayız. Başlangıçta, `<div>` elementinin ilk alt elemanı bir `Counter` içermekteydi. Ancak bunu bir `p` ile değiştirdiğinizde React, `Counter`'ı kullanıcı arayüzü ağacından kaldırır ve state'ini yok eder.
 
 <DiagramGroup>
 
 <Diagram name="preserving_state_diff_pt1" height={290} width={753} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 3 değerine sahip 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahip 'div' etiketli bir React bileşeni içerir. Orta bölüm aynı 'div' üst elemanına sahiptir ancak alt bileşen silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölümde de aynı 'div' üst elemanı vardır ama sarı renkle vurgulanmış 'p' etiketli yeni bir alt eleman içermektedir.">
 
-`Counter`, `p` ile değiştiği zaman, `Counter` silinir ve `p` eklenir
+`Counter`, `p` ile değiştiğinde, `Counter` silinir ve `p` eklenir
 
 </Diagram>
 
@@ -688,13 +688,13 @@ label {
 
 </Sandpack>
 
-Sayaç state'i kutucuğa tıkladığınız zaman sıfırlanır. Bir `Counter` render etmenize rağmen, `div`'in ilk alt elemanı `div`'den `section`'a dönüşür. Alt eleman olan `div` DOM'dan kaldırıldığında, altındaki ağacın tamamı da (`Counter` ve state'i de dahil olmak üzere) yok edilir.
+Sayaç state'i kutucuğa tıkladığınız zaman sıfırlanır. `Counter` render etmenize rağmen, `div`'in ilk alt elemanı `div`'den `section`'a dönüşür. Alt eleman olan `div` DOM'dan kaldırıldığında, altındaki ağacın tamamı da (`Counter` ve state'i de dahil olmak üzere) yok edilir.
 
 <DiagramGroup>
 
 <Diagram name="preserving_state_diff_same_pt1" height={350} width={794} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 'section' etiketli tek bir alt elemana sahip 'div' etkietli bir React bileşeni içerir. Bu bileşen 3 değerine eşit 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahiptir. Orta bölüm aynı 'div' üst elemanına sahiptir, ancak alt bileşenler silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölüm de aynı 'div'  üst elemanına sahiptir, 'div' etiketli yeni alt eleman sarı renkle vurgulanmış ve ayrıca 'Counter' etiketli yeni alt eleman 0 değerine eşit 'count' etiketli bir state baloncuğuna sahiptir ve hepsi sarı ile vurgulanmıştır.">
 
-`section`, `div`'le değiştiği zaman `section` silinir ve yerine yeni `div` eklenir
+`section`, `div`'le değiştiğinde, `section` silinir ve yerine yeni `div` eklenir
 
 </Diagram>
 
@@ -702,7 +702,7 @@ Sayaç state'i kutucuğa tıkladığınız zaman sıfırlanır. Bir `Counter` re
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_same_pt2" height={350} width={794} alt="DÜç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 'div' etiketli tek bir alt elemana sahip 'div' etiketli bir React bileşeni içerir. Bu bileşen, 0 değerine eşit 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahiptir. Orta bölüm aynı 'div' üst elemanına sahiptir, ancak alt bileşenler silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölüm yine aynı 'div' üst elemanına sahiptir, 0 değerine eşit 'count' etiketli state baloncuğu içeren 'Counter' etiketli bir alt eleman içeren 'section' etiketli bir alt elemana sahiptir ve hepsi sarı ile vurgulanmıştır.">
+<Diagram name="preserving_state_diff_same_pt2" height={350} width={794} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 'div' etiketli tek bir alt elemana sahip 'div' etiketli bir React bileşeni içerir. Bu bileşen, 0 değerine eşit 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahiptir. Orta bölüm aynı 'div' üst elemanına sahiptir, ancak alt bileşenler silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölüm yine aynı 'div' üst elemanına sahiptir ve şimdi 0 değerine eşit 'count' etiketli state baloncuğu içeren 'Counter' etiketli bir alt eleman içeren 'section' etiketli bir alt elemana sahiptir ve hepsi sarı ile vurgulanmıştır.">
 
 Geri geçiş yaparken, `div` silinir ve `section` eklenir
 
@@ -710,7 +710,7 @@ Geri geçiş yaparken, `div` silinir ve `section` eklenir
 
 </DiagramGroup>
 
-Genel bir kural olarak, **yeniden renderler arasında state'i korumak istiyorsanız, ağacınızın yapısının renderlar arasında "eşleşmesi"** gerekmektedir. Eğer yapı farklıysa, state yok edilecektir çünkü React bir bileşeni ağaçtan çıkardığı zaman o bileşenin state'ini yok eder.
+Genel bir kural olarak, **yeniden render'lar arasında state'i korumak istiyorsanız, ağacınızın yapısının render'lar arasında "eşleşmesi"** gerekmektedir. Eğer yapı farklıysa, state yok edilecektir çünkü React bileşeni ağaçtan çıkardığında o bileşenin state'ini yok eder.
 
 <Pitfall>
 
@@ -751,7 +751,7 @@ export default function MyComponent() {
 </Sandpack>
 
 
-Butona her tıkladığınızda, input state'i kaybolmaktadır! Bunu nedeni, `MyComponent` bileşeni her render edildiğinde *farklı* bir `MyTextField` fonksiyonu oluşturulmaktadır. Aynı konumda *farklı* bir bileşen oluşturuyorsunuz, bu nedenle React aşağıdaki tüm state'leri sıfırlar. Bu durum, hatalara ve performans sorunlarına yol açar. Bu problemden kaçınmak için, **bileşen fonksiyonlarını en üstte tanımlayın ve tanımları iç içe yapmayın.**
+Butona her tıkladığınızda, input elemanının state'i kaybolmaktadır! Bunun nedeni, `MyComponent` bileşeni her render edildiğinde *farklı* bir `MyTextField` fonksiyonu oluşturulmaktadır. Aynı konumda *farklı* bir bileşen oluşturuyorsunuz, bu nedenle React altındaki tüm state'leri sıfırlar. Bu durum, hatalara ve performans sorunlarına yol açar. Bu problemden kaçınmak için, **bileşen fonksiyonlarını en üstte tanımlayın ve tanımları iç içe yapmayın.**
 
 </Pitfall>
 
@@ -827,9 +827,9 @@ h1 {
 
 </Sandpack>
 
-Şu anda, oyuncuyu değiştirdiğiniz zaman state korunmaktadır. Her iki `Counter` bileşeni de aynı konumdadır bu yüzden React, `person` prop'u değişmiş *aynı* `Counter` bileşeni olarak görür.
+Şu anda, oyuncuyu değiştirdiğinizde state korunmaktadır. Her iki `Counter` bileşeni de aynı konumdadır ve bu yüzden React bunları, `person` prop'u değişmiş *aynı* `Counter` bileşeni olarak görür.
 
-Ancak konsept olarak bu uygulamada iki farklı sayaç olmalıdır. Kullanıcı arayüzüünde aynı konumda görülebilirler ama bir sayaç Taylor için diğer sayaç da Sarah için olmalıdır.
+Ancak konsept olarak bu uygulamada iki farklı sayaç olmalıdır. Kullanıcı arayüzünde aynı konumda görünebilirler ama bir sayaç Taylor için diğer sayaç da Sarah için olmalıdır.
 
 İki sayaç arasında geçiş yaparken state'i sıfırlamanın iki yolu vardır:
 
@@ -915,13 +915,13 @@ h1 {
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_position_p1" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'true' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. Tek alt eleman olan 'Counter' sol taraftadır ve 0 değerine eşit 'count' etiketli state baloncuğuna sahiptir. Soldaki tüm alt eleman eklendiğini belli edecek şekilde sarı ile vurgulanmıştır.">
+<Diagram name="preserving_state_diff_position_p1" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'true' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. Tek alt eleman olan 'Counter' sol taraftadır ve 0 değerine eşit 'count' etiketli state baloncuğuna sahiptir. Soldaki alt elemanın tümü eklendiğini belli edecek şekilde sarı ile vurgulanmıştır.">
 
 Başlangıç state'i
 
 </Diagram>
 
-<Diagram name="preserving_state_diff_position_p2" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'false' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. State baloncuğu state'in değiştiğini belirtmek için sarı ile vurgulanmıştır. Soldaki alt eleman, silindiğini belirten sarı 'puf' resmiyle değiştirilmiş ve sağ taraftaki yeni alt eleman eklendiğini belirtecek şekilde sarı renkle vurgulanmıştır. Yeni alt eleman 'Counter' etiketli ve değeri 0'a eşit 'count' etiketli state baloncuğu içerir.">
+<Diagram name="preserving_state_diff_position_p2" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'false' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. State baloncuğu state'in değiştiğini belirtmek için sarı ile vurgulanmıştır. Soldaki alt eleman, silindiğini belirten sarı 'puf' resmiyle değiştirilmiş ve sağ taraftaki yeni alt eleman eklendiğini belirtecek şekilde sarı renkle vurgulanmıştır. Yeni alt eleman 'Counter' etiketlidir ve değeri 0'a eşit 'count' etiketli state baloncuğu içerir.">
 
 "sonraki"'ne tıklamak
 
@@ -1015,7 +1015,7 @@ h1 {
 
 </Sandpack>
 
-Taylor ve Sarah arasında geçiş yapmak state'i korumamaktadır. Çünkü onlara **farklı key prop'u (anahtar) verdiniz:**
+Taylor ve Sarah arasında geçiş yapmak state'i korumamaktadır. Çünkü onlara **farklı key'ler (anahtar) verdiniz:**
 
 ```js
 {isPlayerA ? (
@@ -1025,7 +1025,7 @@ Taylor ve Sarah arasında geçiş yapmak state'i korumamaktadır. Çünkü onlar
 )}
 ```
 
-Bir `key` (`anahtar`) belirtmek, React'e üst elemandaki sıraları yerine `key`'i konum olarak kullanmasını söyler. Bu nedenle, bileşenleri JSX'te aynı yerde render etseniz bile React onları iki farklı sayaç olarak görecektir ve state'lerini asla paylaşmayacaklardır. Bir sayaç ekranda göründüğü her sefer state'i oluşturulur. Sayaç her silindiğinde ise state'i yok edilir. Aralarında geçiş yapmak, state'lerini tekrar tekrar sıfırlar.
+`key` (`anahtar`) belirtmek, React'e üst elemandaki sıraları yerine `key`'in kendisini konum olarak kullanmasını söyler. Bu nedenle, bileşenleri JSX'te aynı yerde render etseniz bile React onları iki farklı sayaç olarak görecektir ve state'lerini asla paylaşmayacaklardır. Bir sayaç ekranda göründüğü her sefer state'i oluşturulur. Sayaç her silindiğinde ise state'i yok edilir. Aralarında geçiş yapmak, state'lerini tekrar tekrar sıfırlar.
 
 <Note>
 
@@ -1142,7 +1142,7 @@ Input'a bir şey yazmayı deneyin ve ardından farklı bir alıcı seçmek için
 
 Bu, farklı bir alıcı seçtiğinizde `Chat` bileşeninin, altındaki ağaçtaki herhangi bir state de dahil olmak üzere sıfırdan yeniden oluşturulmasını sağlar. React ayrıca DOM elementlerini tekrar kullanmak yerine yeniden oluşturur.
 
-Şimdi alıcıyı değiştirmek girilen mesajı temizleyecektir:
+Şimdi alıcıyı değiştirmek yazılan mesajı temizleyecektir:
 
 <Sandpack>
 
@@ -1245,7 +1245,7 @@ Gerçek bir sohbet uygulamasında, kullanıcı önceki alıcıyı tekrar seçti�
 
 - Yalnızca geçerli sohbeti göstermek yerine _tüm_ sohbetleri render edebilir ve kullanmadıklarınızı CSS ile saklayabilirsiniz. Sohbetler ağaçtan silinmezler yani lokal state'leri korunmuş olur. Basit kullanıcı arayüzleri için iyi çalışan bir çözümdür. Ancak gizli ağaçlar büyükse ve çok sayıda DOM node'u içeriyorsa uygulamayı çok yavaşlatabilir.
 - [State'i yukarı kaldırabilir](/learn/sharing-state-between-components) ve her alıcı için bekleyen mesajı üst bileşeninde tutabilirsiniz. Bu şekilde, alt bileşenlerin silinmesi önemli değildir çünkü önemli bilgileri tutan üst bileşendir. Bu en çok kullanılan çözümdür.
-- React state'ine ek olarak başka bir kaynak da kullanabilirsiniz. Örneğin, kullanıcı yanlışlıkla sayfayı kapatsa bile mesaj taslağının korunmasını isteyebilirsiniz. Bunu yapmak için, `Chat` bileşeninin state'ini [`localStorage'dan`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) okuyabilir ve taslakları da localStorage'a kaydedebilirsiniz.
+- React state'ine ek olarak başka bir kaynak da kullanabilirsiniz. Örneğin, kullanıcı yanlışlıkla sayfayı kapatsa bile mesaj taslağının korunmasını isteyebilirsiniz. Bunu yapmak için, `Chat` bileşeninin state'ini [`localStorage'dan`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) okuyabilir ve taslakları da oraya kaydedebilirsiniz.
 
 Hangi stratejiyi seçerseniz seçin, _Alice ile_ sohbet, _Bob ile_ sohbetten kavramsal olarak farklıdır. Bu nedele, `<Chat>` ağacına mevcut alıcıya göre bir `key` (`anahtar`) vermek mantıklıdır.
 
@@ -1254,7 +1254,7 @@ Hangi stratejiyi seçerseniz seçin, _Alice ile_ sohbet, _Bob ile_ sohbetten kav
 <Recap>
 
 - React, aynı bileşen aynı konumda render edildiği sürece state'i koruyacaktır.
-- State, JSX etiketlerinde tutulmaz. JSX'i koyduğunuz ağaç konumu ile alakalıdır.
+- State, JSX elemanlarında tutulmaz. State, JSX'i koyduğunuz ağaç konumu ile alakalıdır.
 - Bir alt ağaca farklı bir anahtar vererek state'ini sıfırlamaya zorlayabilirsiniz.
 - Bileşen tanımlarını iç içe yapmayın, aksi takdirde yanlışlıkla state'i sıfırlarsınız.
 
@@ -1266,7 +1266,7 @@ Hangi stratejiyi seçerseniz seçin, _Alice ile_ sohbet, _Bob ile_ sohbetten kav
 
 #### Kaybolan input metnini düzeltin {/*fix-disappearing-input-text*/}
 
-Bu örnek butona tıkladığınız zaman bir mesaj göstermektedir. Ancak, butona tıkalamak aynı zamanda input'u da sıfırlamaktadır. Sizce bu niye olmakta? Butona tıklamanın input metnini sıfırlamayacağı şekilde düzeltin.
+Bu örnek butona tıkladığınız zaman bir mesaj göstermektedir. Ancak, butona tıklamak aynı zamanda input'u da sıfırlamaktadır. Bu niye olmakta? Butona tıklamanın input metnini sıfırlamayacağı şekilde düzeltin.
 
 <Sandpack>
 
@@ -1315,7 +1315,7 @@ textarea { display: block; margin: 10px 0; }
 
 <Solution>
 
-Buradaki sorun `Form` bileşeninin farklı konumlarda render edilmesidir. `if` dalında `<div>`'in ikinci alt elemanıdır, ancak `else` dalında ilk alt elemanıdır. Bu nedenle, her konumdaki bileşen tipi değişir. Birinci konum `p` ve `Form` arasında değişirken, ikinci konum `Form` ve `button` arasında değişir. React, bileşen tipi her değiştiğinde state'i sıfırlar.
+Buradaki sorun `Form` bileşeninin farklı konumlarda render edilmesidir. `if` dalında `<div>`'in ikinci alt elemanıdır, ancak `else` dalında ilk alt elemanıdır. Bu nedenle, her konumdaki bileşen tipi değişir. Birinci konum `p` ve `Form` tutmak arasında değişirken, ikinci konum `Form` ve `button` tutmak arasında değişir. React, bileşen tipi her değiştiğinde state'i sıfırlar.
 
 En kolay çözüm, `Form'un` her zaman aynı konumda render edilmesi için koşulları birleştirmektir:
 
@@ -1419,7 +1419,7 @@ Bu şekilde `Form` her zaman ikinci alt elemandır yani her zaman aynı konumdad
 
 Bu form ad ve soyadınızı girmeniz sağlar. Aynı zamanda hangi form alanının daha önce geleceğini kontrol eden kutucuk içerir. Kutucuğu işaretlediğiniz zaman "Soyad" alanı "Ad" alanından önce gelecektir.
 
-Kodumuz neredeyse çalışmakta ancak bir hata var. Eğer "Ad" input'unu doldurup kutucuğu işaretlerseniz, adınız ilk input'ta kalacaktır (artık "Soyad" olan input). Sırayı değiştirdiğinizde input metninin de değişeceği şekilde düzenleyin.
+Kodumuz neredeyse çalışmakta ancak bir hata var. Eğer "Ad" input alanını doldurup kutucuğu işaretlerseniz, adınız ilk input alanınnda kalacaktır (artık "Soyad" olan alan). Sırayı değiştirdiğinizde input metninin de değişeceği şekilde düzenleyin.
 
 <Hint>
 
@@ -1487,7 +1487,7 @@ label { display: block; margin: 10px 0; }
 
 <Solution>
 
-`if` ve `else` dallarındaki her iki `<Field>` bileşenine `anahtar` (`key`) verin. Bu, React'e her iki `<Field>` bileşeni için üst elemandaki sıraları değişse bile doğru state'i nasıl "eşleştireceğini" söyler.
+`if` ve `else` dallarındaki her iki `<Field>` bileşenine `key` (`anahtar`) verin. Bu, React'e her iki `<Field>` bileşeni için üst elemandaki sıraları değişse bile doğru state'i nasıl "eşleştireceğini" söyler.
 
 <Sandpack>
 
@@ -1551,7 +1551,7 @@ label { display: block; margin: 10px 0; }
 
 #### Bilgi formunu sıfırla {/*reset-a-detail-form*/}
 
-Bu düzenlenebilir bir kişi listesidir. Seçtiğiniz kişinin bilgilerini düzenleyip "Kaydet" butonu ile kaydedebilir ya da "Sıfırla" butonu ile değişiklikleri geri alabilirsiniz.
+Bu düzenlenebilir bir kişi listesidir. Seçtiğiniz kişinin bilgilerini düzenleyip "Kaydet" butonu ile kaydedebilir ya da "Sıfırla" butonu ile yaptığınız değişiklikleri geri alabilirsiniz.
 
 Farklı bir kişi seçtiğiniz zaman (örneğin Alice), state güncellenmektedir ancak form bir önceki kişinin bilgilerini göstermektedir. Seçilen kişi değiştiği zaman formun sıfırlanmasını sağlayacak şekilde düzeltin.
 
@@ -1858,9 +1858,9 @@ button {
 
 </Solution>
 
-#### Bir görüntüyü yüklenirken temizle {/*clear-an-image-while-its-loading*/}
+#### Görüntüyü yüklenirken temizleyin {/*clear-an-image-while-its-loading*/}
 
-"Sonraki" butonuna tıkladığınızda, tarayıcı sonraki görüntüyü yüklemeye başlar. Ancak, aynı `<img>` etiketinde görüntülendiğinden dolayı, varsayılan olarak bir sonraki görüntü yüklenene kadar önceki görüntüyü görmeye devam edersiniz. Metnin her zaman görüntüyle eşleşmesi önemliyse bu istenmeyen bir durum olabilir. "Sonraki" butonuna tıkladığınızda bir önceki görüntünün temizlenmesini sağlayacak şekilde düzenleyin.
+"Sonraki" butonuna tıkladığınızda, tarayıcı sonraki görüntüyü yüklemeye başlar. Ancak, aynı `<img>` elemanında görüntülendiğinden dolayı, varsayılan olarak bir sonraki görüntü yüklenene kadar önceki görüntüyü görmeye devam edersiniz. Metnin her zaman görüntüyle eşleşmesi önemliyse bu istenmeyen bir durum olabilir. "Sonraki" butonuna tıkladığınızda bir önceki görüntünün temizlenmesini sağlayacak şekilde düzenleyin.
 
 <Hint>
 
@@ -1934,7 +1934,7 @@ img { width: 150px; height: 150px; }
 
 <Solution>
 
-`<img>` etiketine `anahtar` (`key`) iletebilirsiniz. O `key` değiştiği zaman, React `<img>` DOM node'unu sıfırdan tekrar oluşturacaktır. Bu, her görüntü yüklendiğinde kısa bir flaşa neden olur, dolayısıyla uygulamanızdaki her görüntü için yapmak isteyeceğiniz bir şey değildir. Ancak görüntünün her zaman metinle eşleşmesini sağlamak istiyorsanız mantıklı bir yoldur.
+`<img>` elemanına `key` (`anahtar`) iletebilirsiniz. O `key` değiştiğinde, React `<img>` DOM node'unu sıfırdan tekrar oluşturacaktır. Bu, her bir görüntü yüklendiğinde kısa bir flaşa neden olur, dolayısıyla uygulamanızdaki her görüntü için yapmak isteyeceğiniz bir şey değildir. Ancak görüntünün her zaman metinle eşleşmesini sağlamak istiyorsanız mantıklı bir yoldur.
 
 <Sandpack>
 
@@ -2004,7 +2004,7 @@ img { width: 150px; height: 150px; }
 
 #### Listedeki yanlış yerleştirilmiş state'i düzeltin {/*fix-misplaced-state-in-the-list*/}
 
-Bu listede, her `Contact` bileşeni "E-postayı göster" butonunun kendisi için tıklanıp tıklanmadığını belirleyen bir state'e sahiptir. Alice için "E-postayı göster" butonuna basın, ve "Ters sıralanmış halde göster" kutucuğunu işaretleyin. Şimdi genişletilmiş halde _Taylor'ın_ e-postasını görmekteyiz ama en alt sıraya giden Alice'in e-postasını görmemekteyiz.
+Bu listede, her `Contact` bileşeni "E-postayı göster" butonunun kendisi için tıklanıp tıklanmadığını belirleyen bir state'e sahiptir. Alice için "E-postayı göster" butonuna tıklayın, ve "Ters sıralanmış halde göster" kutucuğunu işaretleyin. Şimdi genişletilmiş halde _Taylor'ın_ e-postasını görmekteyiz ama en alt sıraya giden Alice'in e-postasını görmemekteyiz.
 
 Genişletilmiş state'in, sıralamadan bağımsız olarak ilgili kişiyle ilişkendirilecek şekilde düzeltin.
 
@@ -2103,7 +2103,7 @@ Bu örnekteki problem indeks olarak `key` (`anahtar`)  kullanılmasıdır:
   <li key={i}>
 ```
 
-Ancak, state'in _her bir kişi_ ile ilişkilendirilmesi istiyoruz.
+Ancak, state'in _her belirli kişi_ ile ilişkilendirilmesi istiyoruz.
 
 `key` olarak indeks yerine kişinin ID'sini kullanmak sorunu çözecektir:
 
