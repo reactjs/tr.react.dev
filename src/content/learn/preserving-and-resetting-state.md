@@ -183,7 +183,7 @@ Gördüğünüz gibi, bir sayaç güncellendiği zaman sadece o bileşenin state
 
 <Diagram name="preserving_state_increment" height={248} width={441} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahiptir. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman 'Counter' etiketli ve 1 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt elemanın state baloncuğu, değerinin güncellendiğini belirtmek için sarı renkle vurgulanmış.">
 
-State güncelleniyor
+State'i güncelleme
 
 </Diagram>
 
@@ -270,7 +270,7 @@ label {
 
 <Diagram name="preserving_state_remove_component" height={253} width={422} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahip. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman eksik ve onun yerine, ağaçtan silinmekte olan bileşeni gösteren sarı bir 'puf' resmi var.">
 
-Bileşen siliniyor
+Bileşeni silme
 
 </Diagram>
 
@@ -282,7 +282,7 @@ Bileşen siliniyor
 
 <Diagram name="preserving_state_add_component" height={258} width={500} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahip. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman node'unun tamamı, ağaca yeni eklendiğini göstermek için sarı renkle vurgulanmış.">
 
-Bileşen ekleniyor
+Bileşen ekleme
 
 </Diagram>
 
