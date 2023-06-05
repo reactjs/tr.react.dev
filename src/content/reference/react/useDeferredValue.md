@@ -84,13 +84,8 @@ Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en s
 
 Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığınız varsayılmaktadır:
 
-<<<<<<< HEAD
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/advanced-features/react-18) gibi Suspense etkinleştirilmiş çatılar vasıtasıyla veri çekilmesi
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense etkinleştirilmiş çatılar vasıtasıyla veri çekilmesi
 - [`lazy`](/reference/react/lazy) ile bileşen kodunun lazy yüklenmesi
-=======
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
->>>>>>> ca93140eb98a7ff4364a719075fccea980c55b55
 
 [Suspense ve sınırlamaları hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 
