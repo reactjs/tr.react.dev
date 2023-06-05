@@ -253,7 +253,7 @@ async function getAlbums() {
 
 **Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/advanced-features/react-18) gibi Suspense özellikli framework'lerle veri fetch etme.
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özellikli framework'lerle veri fetch etme.
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
 
 Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.

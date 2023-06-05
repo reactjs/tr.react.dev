@@ -23,7 +23,7 @@ title: "<option>"
 
 ### `<option>` {/*option*/}
 
-[Web Tarayıcısının `<option>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) [`<select>`](/reference/react-dom/components/select) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
+[Web Tarayıcısının `<option>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) [`<select>`](/reference/react-dom/components/select) kutusunun içinde bir seçenek oluşturmanıza olanak tanır.
 
 ```js
 <select>
