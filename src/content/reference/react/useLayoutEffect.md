@@ -26,7 +26,11 @@ useLayoutEffect(setup, dependencies?)
 
 ### `useLayoutEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
+<<<<<<< HEAD
 `useLayoutEffect`, tarayıcının ekrana yeniden çizme işleminden (repainting) önce yerleşim (layout) ölçümlerini gerçekleştirmek için çağrılır:
+=======
+Call `useLayoutEffect` to perform the layout measurements before the browser repaints the screen:
+>>>>>>> ca93140eb98a7ff4364a719075fccea980c55b55
 
 ```js
 import { useState, useRef, useLayoutEffect } from 'react';
