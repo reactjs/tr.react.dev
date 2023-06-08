@@ -40,7 +40,7 @@ Ekranda bir seçim kutusu göstermek için, [tarayıcının yerleşik bileşeni 
 
 `value` prop'u ileterek [seçim kutusunu kontrollü hale](#controlling-a-select-box-with-a-state-variable) getirebilirsiniz:
 
-* `value`: String (ya da [`multiple={true}`] için string'lerden oluşan bir dizi (#enabling-multiple-selection)). Hangi seçeneğin seçildiğini kontrol eder. Her value (değer) string'i, `<select>` içindeki `<option>`'ların `value` değeri ile eşleşir.
+* `value`: String (ya da [`multiple={true}`] için string'lerden oluşan bir dizi (#enabling-multiple-selection)). Hangi seçeneğin seçildiğini kontrol eder. Her value string'i, `<select>` içindeki `<option>`'ların `value` değeri ile eşleşir.
 
 `value` değeri ilettiğinizde, iletilen değeri güncelleyen bir `onChange` olay yöneticisi de iletmeniz gerekmektedir.
 
@@ -57,12 +57,12 @@ Bu `<select>` prop'ları hem kontrollü hem de kontrolsüz seçim kutuları içi
 * [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-form): String. Seçim kutusunun ait olduğu `<form>`'un `id`'sini belirtir. Eğer belirtilmezse, ağaçtaki en yakın üst form'dur.
 * [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-multiple): Boolean. Eğer `true` ise, tarayıcı [çoklu seçime](#enabling-multiple-selection) izin verir.
 * [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-name): String. [Form ile birlikte gönderilen](#reading-the-select-box-value-when-submitting-a-form) seçim kutusunun adını belirtir.
-* `onChange`: [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. [Kontrollü seçim kutuları] (#controlling-a-select-box-with-a-state-variable) için gereklidir. Kullanıcı farklı bir seçenek seçer seçmez tetiklenir. Tarayıcı [`input` olayı](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi davranır.
-* `onChangeCapture`: `onChange`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) tetiklenen sürümüdür.
-* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Kullanıcı değeri değiştirir değiştirmez tetiklenir. Tarihsel nedenlerden dolayı, React'te benzer şekilde çalışan `onChange`'i kullanmak yaygındır.
-* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) tetiklenen sürümüdür.
-* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Bir girdi, form gönderilirken doğrulamayı geçemezse tetiklenir. Yerleşik `invalid` olayının aksine, React `onInvalid` olayı kabarcıklanır (bubbles).
-* `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) tetiklenen sürümüdür.
+* `onChange`: [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. [Kontrollü seçim kutuları] (#controlling-a-select-box-with-a-state-variable) için gereklidir. Kullanıcı farklı bir seçenek seçer seçmez çalıştırılır. Tarayıcı [`input` olayı](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi davranır.
+* `onChangeCapture`: `onChange`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan sürümüdür.
+* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Kullanıcı değeri değiştirir değiştirmez çalıştırılır. Tarihsel nedenlerden dolayı, React'te benzer şekilde çalışan `onChange`'i kullanmak yaygındır.
+* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan sürümüdür.
+* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Bir girdi, form gönderilirken doğrulamayı geçemezse çalıştırılır. Yerleşik `invalid` olayının aksine, React `onInvalid` olayı kabarcıklanır (bubbles).
+* `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan sürümüdür.
 * [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-required): Boolean. Eğer `true` ise, formun gönderilmesi için bir değer sağlanmalıdır.
 * [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-size): Sayı. `multiple={true}` seçenekleri için, başlangıçta görüntülenmesi tercih edilen öğe sayısını belirtir.
 
