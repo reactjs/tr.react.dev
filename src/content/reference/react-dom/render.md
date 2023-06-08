@@ -4,15 +4,15 @@ title: render
 
 <Deprecated>
 
-Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır.
+Bu API, React'in gelecekteki bir ana sürümünde kaldırılacak.
 
-React 18'de `render`, [`createRoot`.](/reference/react-dom/client/createRoot) ile değiştirildi. React 18'de `render` kullanmak, uygulamanızın React 17 gibi davranacağı uyarısını verecektir. Daha fazla bilgi için [buraya](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis) bakın.
+React 18'de `render`, [`createRoot`](/reference/react-dom/client/createRoot) ile değiştirilmiştir. React 18'de `render` kullanmak, uygulamanızın React 17 gibi davranacağı uyarısını verecektir. Daha fazla bilgi için [buraya](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis) bakınız.
 
 </Deprecated>
 
 <Intro>
 
-`render` bir [JSX](/learn/writing-markup-with-jsx) ("React düğümü") parçasını tarayıcı DOM düğümüne render eder.
+`render`, bir [JSX](/learn/writing-markup-with-jsx) ("React düğümü") parçasını tarayıcı DOM düğümüne render eder.
 
 ```js
 render(reactNode, domNode, callback?)
@@ -28,7 +28,7 @@ render(reactNode, domNode, callback?)
 
 ### `render(reactNode, domNode, callback?)` {/*render*/}
 
-Bir tarayıcı DOM düğümünün içinde, bir React bileşeni görüntülemek için `render`'ı çağırın.
+Bir tarayıcı DOM düğümünün içerisinde bir React bileşeni göstermek için `render`'ı çağırın.
 
 ```js
 import { render } from 'react-dom';
@@ -37,33 +37,33 @@ const domNode = document.getElementById('root');
 render(<App />, domNode);
 ```
 
-React `<App />`'i `domNode` içinde görüntüleyecek ve içindeki DOM'u yönetmeye başlayacaktır.
+React, `<App />` bileşenini `domNode` içinde görüntüleyecek ve içindeki DOM'u yönetmeye başlayacaktır.
 
-Tamamen React ile oluşturulmuş bir uygulama genellikle kök(root) bileşeni ile yalnızca bir `render` çağrısına sahip olacaktır. Sayfanın bazı bölümleri için React "sprinkles" kullanan bir sayfada, gerektiği kadar çok `render` çağrısına sahip olabilir.
+Tamamen React ile oluşturulmuş bir uygulama genellikle sadece bir `render` çağrısıyla kök (root) bileşene sahip olur. Sayfanın bazı bölümleri için React "serpinti" kullanılan bir sayfada, ihtiyaç duyulan kadar çok `render` çağrısı bulunabilir.
 
 [Daha fazla örnek için aşağıya bakın.](#usage)
 
 #### Parametreler {/*parameters*/}
 
-* `reactNode`: Görüntülemek istediğiniz *React düğümü*. Bu genellikle `<App />` gibi bir JSX parçası olacaktır, ancak [`createElement()`](/reference/react/createElement) ile oluşturulmuş bir React elemanına, bir dize, bir sayı, `null` veya `undefined` da geçirebilirsiniz.
+* `reactNode`: Görüntülemek istediğiniz *React düğümü*. Bu genellikle `<App />` gibi bir JSX parçası olacaktır; ancak bir React elemanını [`createElement()`](/reference/react/createElement) ile oluşturabilir, bir dize, bir sayı, `null` veya `undefined` de geçirebilirsiniz.
 
-* `domNode`: [DOM elemanı.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React, geçtiğiniz `reactNode`'u bu DOM elemanının içinde görüntüleyecektir. Bu andan itibaren, React `domNode` içindeki DOM'u yönetecek ve React ağacınız (React tree) değiştiğinde güncelleyecektir.
+* `domNode`: [DOM elemanı.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React, verdiğiniz `reactNode`'u bu DOM elemanının içinde gösterecektir. Bu andan itibaren, React `domNode` içindeki DOM'u yönetir ve React ağacınız (React tree) değiştiğinde güncellenir.
 
-* **optional** `callback`: Fonksiyon. Geçilirse, React bileşeniniz DOM'a yerleştirildikten sonra onu çağıracaktır.
+* **optional** `callback`: Fonksiyon. Geçilirse, React bileşeniniz DOM'a yerleştirildikten sonra bu fonksiyon çağrılır.
 
 #### Dönüş değerleri {/*returns*/}
 
-`render` genellikle `null` döndürür. Ancak, geçtiğiniz `reactNode` bir *sınıf bileşeni* ise, o zaman bileşenin bir örneğini döndürecektir.
+`render` genellikle `null` döndürür. Ancak, verdiğiniz `reactNode` bir *sınıf bileşeni* ise, bu durumda bileşenin bir örneğini döndürecektir.
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
-* React 18'de `render` [`createRoot`.](/reference/react-dom/client/createRoot) ile değiştirildi. Lütfen React 18 ve sonrası için `createRoot` kullanın.
+* React 18'de `render`, [`createRoot`](/reference/react-dom/client/createRoot) ile değiştirilmiştir. Lütfen React 18 ve sonrası için `createRoot` kullanınız.
 
-* İlk `render` çağrısında, React, React bileşenini render etmek için `domNode` içindeki tüm mevcut HTML içeriğini temizleyecektir. `domNode`'unuz, sunucu veya derleme sırasında React tarafından oluşturulan HTML içeriyorsa, bunun yerine var olan HTML'e olay işleyicilerini ekleyen [`hydrate()`](/reference/react-dom/hydrate) kullanın.
+* İlk `render` çağrısında, React, React bileşenini render etmek için `domNode` içindeki tüm mevcut HTML içeriğini siler. Eğer `domNode`'unuz, sunucu ya da derleme sürecinde React tarafından oluşturulan HTML içeriyorsa, mevcut HTML'e olay yöneticilerini (event handler) ekleyen [`hydrate()`](/reference/react-dom/hydrate) fonksiyonunu kullanınız.
 
-* Eğer aynı `domNode` üzerinde birden fazla `render` çağrısı yaparsanız, React, geçtiğiniz son JSX'i yansıtmak için gerektiğinde DOM'u güncelleyecektir. React, DOM'un hangi kısımlarının yeniden kullanılabileceğine ve hangilerinin önceki ağaçla(tree) ["eşleştirilerek"](/learn/preserving-and-resetting-state) yeniden oluşturulması gerektiğine karar verecektir. Aynı `domNode` üzerinde `render` çağrısı yapmak, kök bileşen (root component) üzerinde [`set` fonksiyonunu](/reference/react/useState#setstate) çağırmaya benzer: React gereksiz DOM güncellemelerinden kaçınır.
+* Eğer aynı `domNode` üzerinde birden fazla `render` çağrısı yaparsanız, React, verdiğiniz son JSX'i yansıtmak için gerektiğinde DOM'u güncelleyecektir. React, DOM'un hangi kısımlarının yeniden kullanılabileceğine ve hangilerinin önceki ağaç (tree) ile ["eşleştirilerek"](/learn/preserving-and-resetting-state) yeniden oluşturulması gerektiğine karar verir. Aynı `domNode` üzerinde `render` çağrısı yapmak, kök bileşen (root component) üzerinde [`set` fonksiyonunu](/reference/react/useState#setstate) çağırmaya benzer: React gereksiz DOM güncellemelerinden kaçınır.
 
-* Eğer uygulamanız tamamen React ile oluşturulmuşsa, uygulamanızda muhtemelen yalnızca bir `render` çağrısı olacaktır. (Bir çatı(framework) kullanıyorsanız, bunu sizin için yapabilir.) JSX'in bir parçasını bileşeninizin bir alt öğesi olmayan DOM ağacının farklı bir yerinde görüntülemek istediğinizde (örneğin, bir modal veya bir tooltip), `render` yerine [`createPortal`](/reference/react-dom/createPortal) kullanın.
+* Eğer uygulamanız tamamen React ile oluşturulmuşsa, uygulamanızda muhtemelen yalnızca bir `render` çağrısı olacaktır. (Bir çatı(framework) kullanıyorsanız, bunu sizin için yapabilir.) JSX'in bir parçasını bileşeninizin bir alt elemanı (child component) olmayan DOM ağacının farklı bir yerinde görüntülemek istediğinizde (örneğin, bir modal veya bir tooltip), `render` yerine [`createPortal`](/reference/react-dom/createPortal) kullanınız.
 
 ---
 
@@ -80,7 +80,7 @@ render(<App />, document.getElementById('root'));
 
 ### Kök bileşeni render etmek {/*rendering-the-root-component*/}
 
-Tamamen React ile oluşturulmuş uygulamalarda, **genellikle bunu yalnızca başlangıçta bir kez yapacaksınız** - "kök" bileşenini render etmek için.
+Tamamen React ile oluşturulmuş uygulamalarda, **genellikle bunu sadece başlangıçta bir kez yaparsınız** - "kök" bileşenini (root component) render etmek için.
 
 <Sandpack>
 
@@ -100,20 +100,20 @@ export default function App() {
 
 </Sandpack>
 
-Genellikle `render`'ı tekrar çağırmanıza veya daha fazla yere çağırmanıza gerek yoktur. Bu noktadan itibaren, React uygulamanızın DOM'unu yönetmeye başlayacaktır. Kullanıcı arayüzünü güncellemek için bileşenleriniz [state](/reference/react/useState) kullanacak.
+Genellikle `render`'ı tekrar çağırmanıza veya başka yerlere çağırmanıza gerek yoktur. Bu noktadan itibaren, React uygulamanızın DOM'unu yönetmeye başlar. Kullanıcı arayüzünü güncellemek için bileşenleriniz [state](/reference/react/useState) kullanır.
 
 ---
 
 ### Birden çok kök oluşturma {/*rendering-multiple-roots*/}
 
-Eğer sayfanız [tamamen React ile oluşturulmamışsa](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React tarafından yönetilen her bir üst düzey UI parçası için `render`'ı çağırın.
+Eğer sayfanız [tamamen React ile oluşturulmamışsa](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React tarafından yönetilen her bir üst düzey kullanıcı arayüzü (UI) parçası için `render`'ı çağırınız.
 
 <Sandpack>
 
 ```html public/index.html
 <nav id="navigation"></nav>
 <main>
-  <p>Bu paragraf React tarafından render edilmiyor (doğrulamak için index.html'i açın).</p>
+  <p>Bu paragraf React tarafından render edilmiyor (doğrulamak için index.html dosyasını açın).</p>
   <section id="comments"></section>
 </main>
 ```
@@ -176,13 +176,13 @@ nav ul li { display: inline-block; margin-right: 20px; }
 
 </Sandpack>
 
-[`unmountComponentAtNode()`](/reference/react-dom/unmountComponentAtNode) ile render edilmiş ağaçları(trees) yok edebilirsiniz.
+Render edilmiş ağaçları (trees) [`unmountComponentAtNode()`](/reference/react-dom/unmountComponentAtNode) ile yok edebilirsiniz.
 
 ---
 
 ### Render edilmiş ağaçları güncelleme {/*updating-the-rendered-tree*/}
 
-Aynı DOM düğümü üzerinde `render`'ı birden fazla kez çağırabilirsiniz. Bileşen ağacı yapısı önceki render edilmiş olanla eşleştiği sürece, React [durumu koruyacaktır.](/learn/preserving-and-resetting-state) Tekrarlanan `render` çağrılarından her saniye gelen güncellemelerin yıkıcı olmadığını gösteren girişe yazı yazabileceğinize dikkat edin:
+Aynı DOM düğümünde `render` işlevini birden fazla kez çağırabilirsiniz. Bileşen ağacının yapısı önceden oluşturulanla eşleştiği sürece, React [durumu korur](/learn/preserving-and-resetting-state). Giriş alanına yazı yazabilmeniz, her saniyede tekrarlanan `render` çağrılarının yıkıcı(destructive) olmadığını gösterir:
 
 <Sandpack>
 
@@ -214,4 +214,4 @@ export default function App({counter}) {
 
 </Sandpack>
 
-Bu şekilde birden fazla kez `render` çağırmak nadirdir. Genellikle, bunun yerine bileşenlerinizin içinde [state'i güncellersiniz.](/reference/react/useState)
+Bu şekilde birden fazla kez `render` çağırmak nadiren gerçekleşir. Genellikle, bunun yerine bileşenlerinizin (component) içinde [state'i güncellersiniz.](/reference/react/useState)
