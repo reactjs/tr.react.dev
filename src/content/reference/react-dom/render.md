@@ -4,7 +4,7 @@ title: render
 
 <Deprecated>
 
-Bu API, React'in gelecekteki bir ana sürümünde kaldırılacak.
+Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır.
 
 React 18'de `render`, [`createRoot`](/reference/react-dom/client/createRoot) ile değiştirilmiştir. React 18'de `render` kullanmak, uygulamanızın React 17 gibi davranacağı uyarısını verecektir. Daha fazla bilgi için [buraya](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis) bakınız.
 
@@ -39,7 +39,7 @@ render(<App />, domNode);
 
 React, `<App />` bileşenini `domNode` içinde görüntüleyecek ve içindeki DOM'u yönetmeye başlayacaktır.
 
-Tamamen React ile oluşturulmuş bir uygulama genellikle sadece bir `render` çağrısıyla kök (root) bileşene sahip olur. Sayfanın bazı bölümleri için React "serpinti" kullanılan bir sayfada, ihtiyaç duyulan kadar çok `render` çağrısı bulunabilir.
+Tamamen React ile oluşturulmuş bir uygulama genellikle sadece bir `render` çağrısıyla kök (root) bileşene sahip olur. Sayfanın bazı bölümleri için React "sprinkles" (serpme) kullanılan bir sayfada, ihtiyaç duyulan kadar çok `render` çağrısı bulunabilir.
 
 [Daha fazla örnek için aşağıya bakın.](#usage)
 
@@ -63,7 +63,7 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle sadece bir `render` ça
 
 * Eğer aynı `domNode` üzerinde birden fazla `render` çağrısı yaparsanız, React, verdiğiniz son JSX'i yansıtmak için gerektiğinde DOM'u güncelleyecektir. React, DOM'un hangi kısımlarının yeniden kullanılabileceğine ve hangilerinin önceki ağaç (tree) ile ["eşleştirilerek"](/learn/preserving-and-resetting-state) yeniden oluşturulması gerektiğine karar verir. Aynı `domNode` üzerinde `render` çağrısı yapmak, kök bileşen (root component) üzerinde [`set` fonksiyonunu](/reference/react/useState#setstate) çağırmaya benzer: React gereksiz DOM güncellemelerinden kaçınır.
 
-* Eğer uygulamanız tamamen React ile oluşturulmuşsa, uygulamanızda muhtemelen yalnızca bir `render` çağrısı olacaktır. (Bir çatı(framework) kullanıyorsanız, bunu sizin için yapabilir.) JSX'in bir parçasını bileşeninizin bir alt elemanı (child component) olmayan DOM ağacının farklı bir yerinde görüntülemek istediğinizde (örneğin, bir modal veya bir tooltip), `render` yerine [`createPortal`](/reference/react-dom/createPortal) kullanınız.
+* Eğer uygulamanız tamamen React ile oluşturulmuşsa, uygulamanızda muhtemelen yalnızca bir `render` çağrısı olacaktır. (Bir çatı (framework) kullanıyorsanız, bunu sizin için yapabilir.) JSX'in bir parçasını bileşeninizin bir alt elemanı (child component) olmayan DOM ağacının farklı bir yerinde görüntülemek istediğinizde (örneğin, bir modal veya bir tooltip), `render` yerine [`createPortal`](/reference/react-dom/createPortal) kullanınız.
 
 ---
 
@@ -182,7 +182,7 @@ Render edilmiş ağaçları (trees) [`unmountComponentAtNode()`](/reference/reac
 
 ### Render edilmiş ağaçları güncelleme {/*updating-the-rendered-tree*/}
 
-Aynı DOM düğümünde `render` işlevini birden fazla kez çağırabilirsiniz. Bileşen ağacının yapısı önceden oluşturulanla eşleştiği sürece, React [durumu korur](/learn/preserving-and-resetting-state). Giriş alanına yazı yazabilmeniz, her saniyede tekrarlanan `render` çağrılarının yıkıcı(destructive) olmadığını gösterir:
+Aynı DOM düğümünde `render` fonksiyonunu birden fazla kez çağırabilirsiniz. Bileşen ağacının yapısı önceden oluşturulanla eşleştiği sürece, React [durumu korur](/learn/preserving-and-resetting-state). Giriş alanına yazı yazabilmeniz, her saniyede tekrarlanan `render` çağrılarının yıkıcı(destructive) olmadığını gösterir:
 
 <Sandpack>
 
