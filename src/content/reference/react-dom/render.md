@@ -6,13 +6,13 @@ title: render
 
 Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır.
 
-React 18'de `render` [`createRoot`.](/reference/react-dom/client/createRoot) ile değiştirildi. React 18'de `render` kullanmak, uygulamanızın React 17 gibi davranacağı uyarısını verecektir. Daha fazla bilgi için [buraya](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis) bakın.
+React 18'de `render`, [`createRoot`.](/reference/react-dom/client/createRoot) ile değiştirildi. React 18'de `render` kullanmak, uygulamanızın React 17 gibi davranacağı uyarısını verecektir. Daha fazla bilgi için [buraya](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis) bakın.
 
 </Deprecated>
 
 <Intro>
 
-`render` bir [JSX](/learn/writing-markup-with-jsx) ("React düğümü") parçasını tarayıcı DOM düğümüne işler.
+`render` bir [JSX](/learn/writing-markup-with-jsx) ("React düğümü") parçasını tarayıcı DOM düğümüne render eder.
 
 ```js
 render(reactNode, domNode, callback?)
@@ -28,7 +28,7 @@ render(reactNode, domNode, callback?)
 
 ### `render(reactNode, domNode, callback?)` {/*render*/}
 
-Bir React bileşenini tarayıcı DOM düğümüne işlemek için `render`'ı çağırın.
+Bir tarayıcı DOM düğümünün içinde, bir React bileşeni görüntülemek için `render`'ı çağırın.
 
 ```js
 import { render } from 'react-dom';
@@ -36,8 +36,6 @@ import { render } from 'react-dom';
 const domNode = document.getElementById('root');
 render(<App />, domNode);
 ```
-
-React will display `<App />` in the `domNode`, and take over managing the DOM inside it.
 
 React `<App />`'i `domNode` içinde görüntüleyecek ve içindeki DOM'u yönetmeye başlayacaktır.
 
@@ -47,17 +45,13 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle kök(root) bileşeni il
 
 #### Parametreler {/*parameters*/}
 
-* `reactNode`: A *React node* that you want to display. This will usually be a piece of JSX like `<App />`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`. 
-
 * `reactNode`: Görüntülemek istediğiniz *React düğümü*. Bu genellikle `<App />` gibi bir JSX parçası olacaktır, ancak [`createElement()`](/reference/react/createElement) ile oluşturulmuş bir React elemanına, bir dize, bir sayı, `null` veya `undefined` da geçirebilirsiniz.
 
-* `domNode`: [DOM elemanı.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React, geçtiğiniz `reactNode`'u bu DOM elemanının içinde görüntüleyecektir. Bu andan itibaren, React `domNode` içindeki DOM'u yönetecek ve React ağacınız değiştiğinde güncelleyecektir.
+* `domNode`: [DOM elemanı.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React, geçtiğiniz `reactNode`'u bu DOM elemanının içinde görüntüleyecektir. Bu andan itibaren, React `domNode` içindeki DOM'u yönetecek ve React ağacınız (React tree) değiştiğinde güncelleyecektir.
 
 * **optional** `callback`: Fonksiyon. Geçilirse, React bileşeniniz DOM'a yerleştirildikten sonra onu çağıracaktır.
 
 #### Dönüş değerleri {/*returns*/}
-
-`render` usually returns `null`. However, if the `reactNode` you pass is a *class component*, then it will return an instance of that component.
 
 `render` genellikle `null` döndürür. Ancak, geçtiğiniz `reactNode` bir *sınıf bileşeni* ise, o zaman bileşenin bir örneğini döndürecektir.
 
@@ -85,8 +79,6 @@ render(<App />, document.getElementById('root'));
 ```
 
 ### Kök bileşeni render etmek {/*rendering-the-root-component*/}
-
-In apps fully built with React, **you will usually only do this once at startup**--to render the "root" component.
 
 Tamamen React ile oluşturulmuş uygulamalarda, **genellikle bunu yalnızca başlangıçta bir kez yapacaksınız** - "kök" bileşenini render etmek için.
 
@@ -189,8 +181,6 @@ nav ul li { display: inline-block; margin-right: 20px; }
 ---
 
 ### Render edilmiş ağaçları güncelleme {/*updating-the-rendered-tree*/}
-
-You can call `render` more than once on the same DOM node. As long as the component tree structure matches up with what was previously rendered, React will [preserve the state.](/learn/preserving-and-resetting-state) Notice how you can type in the input, which means that the updates from repeated `render` calls every second are not destructive:
 
 Aynı DOM düğümü üzerinde `render`'ı birden fazla kez çağırabilirsiniz. Bileşen ağacı yapısı önceki render edilmiş olanla eşleştiği sürece, React [durumu koruyacaktır.](/learn/preserving-and-resetting-state) Tekrarlanan `render` çağrılarından her saniye gelen güncellemelerin yıkıcı olmadığını gösteren girişe yazı yazabileceğinize dikkat edin:
 
