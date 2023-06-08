@@ -4,12 +4,12 @@ title: "<select>"
 
 <Intro>
 
-The [built-in browser `<select>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) lets you render a select box with options.
+[Tarayıcıya yerleşik `<select>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select), bir seçim kutusu render etmenizi sağlar.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="birSecenek">Bir seçenek</option>
+  <option value="digerSecenek">Diğer seçenek</option>
 </select>
 ```
 
@@ -19,68 +19,68 @@ The [built-in browser `<select>` component](https://developer.mozilla.org/en-US/
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<select>` {/*select*/}
 
-To display a select box, render the [built-in browser `<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) component.
+Ekranda bir seçim kutusu göstermek için, [tarayıcının yerleşik bileşeni olan `<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)'i render edin.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="birSecenek">Bir seçenek</option>
+  <option value="digerSecenek">Diğer seçenek</option>
 </select>
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-#### Props {/*props*/}
+#### Prop'lar {/*props*/}
 
-`<select>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<select>` tüm [ortak eleman prop'larını](/reference/react-dom/components/common#props) destekler.
 
-You can [make a select box controlled](#controlling-a-select-box-with-a-state-variable) by passing a `value` prop:
+`value` prop'u ileterek [seçim kutusunu kontrollü hale](#controlling-a-select-box-with-a-state-variable) getirebilirsiniz:
 
-* `value`: A string (or an array of strings for [`multiple={true}`](#enabling-multiple-selection)). Controls which option is selected. Every value string match the `value` of some `<option>` nested inside the `<select>`.
+* `value`: String (ya da [`multiple={true}`] için string'lerden oluşan bir dizi (#enabling-multiple-selection)). Hangi seçeneğin seçildiğini kontrol eder. Her value (değer) string'i, `<select>` içindeki `<option>`'ların `value` değeri ile eşleşir.
 
-When you pass `value`, you must also pass an `onChange` handler that updates the passed value.
+`value` değeri ilettiğinizde, iletilen değeri güncelleyen bir `onChange` olay yöneticisi de iletmeniz gerekmektedir.
 
-If your `<select>` is uncontrolled, you may pass the `defaultValue` prop instead:
+Eğer `<select>` bileşeniniz kontrolsüz ise, onun yerine `defaultValue` prop'unu iletebilirsiniz:
 
-* `defaultValue`: A string (or an array of strings for [`multiple={true}`](#enabling-multiple-selection)). Specifies [the initially selected option.](#providing-an-initially-selected-option)
+* `defaultValue`: String (ya da [`multiple={true}`] için string'lerden oluşan bir dizi (#enabling-multiple-selection)). [Başlangıçta seçili seçeneği](#providing-an-initially-selected-option) belirtir.
 
-These `<select>` props are relevant both for uncontrolled and controlled select boxes:
+Bu `<select>` prop'ları hem kontrollü hem de kontrolsüz seçim kutuları için geçerlidir:
 
-* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-autocomplete): A string. Specifies one of the possible [autocomplete behaviors.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
-* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-autofocus): A boolean. If `true`, React will focus the element on mount.
-* `children`: `<select>` accepts [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup), and [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup) components as children. You can also pass your own components as long as they eventually render one of the allowed components. If you pass your own components that eventually render `<option>` tags, each `<option>` you render must have a `value`.
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-disabled): A boolean. If `true`, the select box will not be interactive and will appear dimmed.
-* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-form): A string. Specifies the `id` of the `<form>` this select box belongs to. If omitted, it's the closest parent form.
-* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-multiple): A boolean. If `true`, the browser allows [multiple selection.](#enabling-multiple-selection)
-* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-name): A string. Specifies the name for this select box that's [submitted with the form.](#reading-the-select-box-value-when-submitting-a-form)
-* `onChange`: An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Required for [controlled select boxes.](#controlling-a-select-box-with-a-state-variable) Fires immediately when the user picks a different option. Behaves like the browser [`input` event.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event)
-* `onChangeCapture`: A version of `onChange` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires immediately when the value is changed by the user. For historical reasons, in React it is idiomatic to use `onChange` instead which works similarly.
-* `onInputCapture`: A version of `onInput` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires if an input fails validation on form submit. Unlike the built-in `invalid` event, the React `onInvalid` event bubbles.
-* `onInvalidCapture`: A version of `onInvalid` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-required): A boolean. If `true`, the value must be provided for the form to submit.
-* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-size): A number. For `multiple={true}` selects, specifies the preferred number of initially visible items.
+* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-autocomplete): String. Olası [otomatik tamamlama davranışlarından](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values) birini belirtir.
+* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-autofocus): Boolean. Eğer `true` ise, React, eleman DOM'a eklendikten sonra o elemana odaklanacaktır.
+* `children`: `<select>` elemanı [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup) ve [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup) bileşenlerini alt eleman olarak kabul eder. Bu bileşenlerden birini render ettiği sürece kendi bileşenlerinizi de iletebilirsiniz. Sonucunda `<option>` elemanını render eden kendi bileşenlerinizi iletirseniz, render ettiğiniz her `<option>` bir `value` değerine sahip olmalıdır.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-disabled): Boolean. Eğer `true` ise, seçim kutusu etkileşimli olmayacak ve soluk renkte görünecektir.
+* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-form): String. Seçim kutusunun ait olduğu `<form>`'un `id`'sini belirtir. Eğer belirtilmezse, ağaçtaki en yakın üst form'dur.
+* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-multiple): Boolean. Eğer `true` ise, tarayıcı [çoklu seçime](#enabling-multiple-selection) izin verir.
+* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-name): String. [Form ile birlikte gönderilen](#reading-the-select-box-value-when-submitting-a-form) seçim kutusunun adını belirtir.
+* `onChange`: [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. [Kontrollü seçim kutuları] (#controlling-a-select-box-with-a-state-variable) için gereklidir. Kullanıcı farklı bir seçenek seçer seçmez tetiklenir. Tarayıcı [`input` olayı](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi davranır.
+* `onChangeCapture`: `onChange`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) tetiklenen sürümüdür.
+* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Kullanıcı değeri değiştirir değiştirmez tetiklenir. Tarihsel nedenlerden dolayı, React'te benzer şekilde çalışan `onChange`'i kullanmak yaygındır.
+* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) tetiklenen sürümüdür.
+* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Bir girdi, form gönderilirken doğrulamayı geçemezse tetiklenir. Yerleşik `invalid` olayının aksine, React `onInvalid` olayı kabarcıklanır (bubbles).
+* `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) tetiklenen sürümüdür.
+* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-required): Boolean. Eğer `true` ise, formun gönderilmesi için bir değer sağlanmalıdır.
+* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#attr-size): Sayı. `multiple={true}` seçenekleri için, başlangıçta görüntülenmesi tercih edilen öğe sayısını belirtir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-- Unlike in HTML, passing a `selected` attribute to `<option>` is not supported. Instead, use [`<select defaultValue>`](#providing-an-initially-selected-option) for uncontrolled select boxes and [`<select value>`](#controlling-a-select-box-with-a-state-variable) for controlled select boxes.
-- If a select box receives a `value` prop, it will be [treated as controlled.](#controlling-a-select-box-with-a-state-variable)
-- A select box can't be both controlled and uncontrolled at the same time.
-- A select box cannot switch between being controlled or uncontrolled over its lifetime.
-- Every controlled select box needs an `onChange` event handler that synchronously updates its backing value.
+- HTML'den farklı olarak, `<option>`'a `selected` özelliği iletmek desteklenmemektedir. Bunun yerine, kontrolsüz seçim kutuları için [`<select defaultValue>`](#providing-an-initially-selected-option), kontrollü seçim kutuları için [`<select value>`](#controlling-a-select-box-with-a-state-variable) ifadelerini kullanın.
+- Eğer bir seçim kutusu `value` prop'u alıyorsa, [kontrollü olarak ele alınacaktır.](#controlling-a-select-box-with-a-state-variable)
+- Bir seçim kutusu aynı anda hemde kontrollü hem de kontrolsüz olamaz.
+- Bir seçim kutusu yaşam döngüsü boyunca kontrollü ve ya kontrolsüz olma arasında geçiş yapamaz.
+- Kontrollü her seçim kutusu, değerini senkronize olarak güncelleyen bir `onChange` olay yöneticisine ihtiyaç duyar.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Displaying a select box with options {/*displaying-a-select-box-with-options*/}
+### Seçenekler içeren bir seçim kutusu gösterme {/*displaying-a-select-box-with-options*/}
 
-Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
+Bir seçim kutusu görüntülemek için içinde `<option>` bileşenlerinin listesini içeren bir `<select>` render edin. Her `<option>`'a, form ile gönderilecek verileri temsil eden bir `value` değeri verin.
 
 <Sandpack>
 
@@ -88,11 +88,11 @@ Render a `<select>` with a list of `<option>` components inside to display a sel
 export default function FruitPicker() {
   return (
     <label>
-      Pick a fruit:
-      <select name="selectedFruit">
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+      Bir meyve seçin:
+      <select name="secilenMeyve">
+        <option value="elma">Elma</option>
+        <option value="muz">Muz</option>
+        <option value="portakal">Portakal</option>
       </select>
     </label>
   );
@@ -107,11 +107,11 @@ select { margin: 5px; }
 
 ---
 
-### Providing a label for a select box {/*providing-a-label-for-a-select-box*/}
+### Seçim kutusuna etiket verme {/*providing-a-label-for-a-select-box*/}
 
-Typically, you will place every `<select>` inside a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tag. This tells the browser that this label is associated with that select box. When the user clicks the label, the browser will automatically focus the select box. It's also essential for accessibility: a screen reader will announce the label caption when the user focuses the select box.
+Genel olarak, her `<select>` elemanını bir [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) elemanı içine yerleştirirsiniz. Bu, tarayıcıya bu etiketin o seçim kutusuyla ilişkili olduğunu söyler. Kullanıcı etikete tıkladığında tarayıcı otomatik olarak seçim kutusuna odaklanacaktır. Bu durum erişilebilirlik için de önemlidir: kullanıcı seçim kutusuna odaklandığında ekran okuyucu bu etiketi okuyacaktır.
 
-If you can't nest `<select>` into a `<label>`, associate them by passing the same ID to `<select id>` and [`<label htmlFor>`.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) To avoid conflicts between multiple instances of one component, generate such an ID with [`useId`.](/reference/react/useId)
+`<select>` elemanını bir `<label>` içine yerleştiremezseniz, `<select id>` ve [`<label htmlFor>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) elemanlarına aynı ID'yi ileterek bu elemanları ilişkilendirebilirsiniz. Bir bileşenin birden çok örneği arasındaki çakışmaları önlemek için [`useId`](/reference/react/useId) ile bir ID üretebilirsiniz.
 
 <Sandpack>
 
@@ -123,21 +123,21 @@ export default function Form() {
   return (
     <>
       <label>
-        Pick a fruit:
-        <select name="selectedFruit">
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
+        Bir meyve seçin:
+        <select name="secilenMeyve">
+          <option value="elma">Elma</option>
+          <option value="muz">Muz</option>
+          <option value="portakal">Portakal</option>
         </select>
       </label>
       <hr />
       <label htmlFor={vegetableSelectId}>
-        Pick a vegetable:
+        Bir sebze seçin:
       </label>
-      <select id={vegetableSelectId} name="selectedVegetable">
-        <option value="cucumber">Cucumber</option>
-        <option value="corn">Corn</option>
-        <option value="tomato">Tomato</option>
+      <select id={vegetableSelectId} name="secilenSebze">
+        <option value="salatalik">Salatalık</option>
+        <option value="misir">Mısır</option>
+        <option value="domates">Domates</option>
       </select>
     </>
   );
@@ -153,9 +153,9 @@ select { margin: 5px; }
 
 ---
 
-### Providing an initially selected option {/*providing-an-initially-selected-option*/}
+### Başlangıçta seçili bir seçenek sağlama {/*providing-an-initially-selected-option*/}
 
-By default, the browser will select the first `<option>` in the list. To select a different option by default, pass that `<option>`'s `value` as the `defaultValue` to the `<select>` element.
+Varsayılan olarak, tarayıcı listedeki ilk `<option>`'ı seçecektir. Varsayılan olarak başka bir seçeneği seçmek için o `<option>`'ın `value` değerini `defaultValue` olarak `<select>` elemanına iletin.
 
 <Sandpack>
 
@@ -163,11 +163,11 @@ By default, the browser will select the first `<option>` in the list. To select 
 export default function FruitPicker() {
   return (
     <label>
-      Pick a fruit:
-      <select name="selectedFruit" defaultValue="orange">
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+      Bir meyve seçin:
+      <select name="secilenMeyve" defaultValue="portakal">
+        <option value="elma">Elma</option>
+        <option value="muz">Muz</option>
+        <option value="portakal">Portakal</option>
       </select>
     </label>
   );
@@ -182,15 +182,15 @@ select { margin: 5px; }
 
 <Pitfall>
 
-Unlike in HTML, passing a `selected` attribute to an individual `<option>` is not supported.
+HTML'den farklı olarak, tek bir `<option>`'a `selected` özelliği iletmek desteklenmemektedir.
 
 </Pitfall>
 
 ---
 
-### Enabling multiple selection {/*enabling-multiple-selection*/}
+### Çoklu seçime izin verme {/*enabling-multiple-selection*/}
 
-Pass `multiple={true}` to the `<select>` to let the user select multiple options. In that case, if you also specify `defaultValue` to choose the initially selected options, it must be an array.
+Kullanıcının çok seçenek seçmesine izin vermek için `multiple={true}` ifadesini `<select>` elemanına iletin. Bu durumda, eğer başlangıçta seçili seçenekler için `defaultValue` belirtirseniz, bu bir dizi olmalıdır.
 
 <Sandpack>
 
@@ -198,15 +198,15 @@ Pass `multiple={true}` to the `<select>` to let the user select multiple options
 export default function FruitPicker() {
   return (
     <label>
-      Pick some fruits:
+      Bazı meyveleri seçin:
       <select
-        name="selectedFruit"
-        defaultValue={['orange', 'banana']}
+        name="secilenMeyve"
+        defaultValue={['portakal', 'muz']}
         multiple={true}
       >
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+        <option value="elma">Elma</option>
+        <option value="muz">Muz</option>
+        <option value="portakal">Portakal</option>
       </select>
     </label>
   );
@@ -221,55 +221,55 @@ select { display: block; margin-top: 10px; width: 200px; }
 
 ---
 
-### Reading the select box value when submitting a form {/*reading-the-select-box-value-when-submitting-a-form*/}
+### Form'u gönderirken seçim kutusunun değerini okuma {/*reading-the-select-box-value-when-submitting-a-form*/}
 
-Add a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) around your select box with a [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) inside. It will call your `<form onSubmit>` event handler. By default, the browser will send the form data to the current URL and refresh the page. You can override that behavior by calling `e.preventDefault()`. Read the form data with [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+Seçim kutusu ve [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) içeren bir [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) elemanı render edin. Bu buton `<form onSubmit>` olay yönetecinizi çağıracaktır. Varsayılan olarak, tarayıcı form verilerini bulunduğunuz URL'e gönderecek ve sayfayı yenileyecektir. Bu davranışı engellemek için `e.preventDefault()` ifadesini çağırabilirsiniz. Form verisini [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) ile okuyabilirsiniz.
 <Sandpack>
 
 ```js
 export default function EditPost() {
   function handleSubmit(e) {
-    // Prevent the browser from reloading the page
+    // Tarayıcının sayfayı yenilemesini engelleyin
     e.preventDefault();
-    // Read the form data
+    // Form verisini okuyun
     const form = e.target;
     const formData = new FormData(form);
-    // You can pass formData as a fetch body directly:
+    // formData'yı fetch gövdesi olarak iletebilirsiniz:
     fetch('/some-api', { method: form.method, body: formData });
-    // You can generate a URL out of it, as the browser does by default:
+    // Tarayıcının varsayılan olarak yaptığı gibi, bir URL oluşturabilirsiniz:
     console.log(new URLSearchParams(formData).toString());
-    // You can work with it as a plain object.
+    // Düz bir nesne gibi çalışabilirsiniz.
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson); // (!) This doesn't include multiple select values
-    // Or you can get an array of name-value pairs.
+    console.log(formJson); // (!) Bu, çoklu seçim değerlerini içermez
+    // Ya da bir dizi ad-değer çifti alabilirsiniz.
     console.log([...formData.entries()]);
   }
 
   return (
     <form method="post" onSubmit={handleSubmit}>
       <label>
-        Pick your favorite fruit:
-        <select name="selectedFruit" defaultValue="orange">
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
+        Favori meyvenizi seçin:
+        <select name="secilenMeyve" defaultValue="portakal">
+          <option value="elma">Elma</option>
+          <option value="muz">Muz</option>
+          <option value="portakal">Portakal</option>
         </select>
       </label>
       <label>
-        Pick all your favorite vegetables:
+        Tüm favori sebzelerinizi seçin:
         <select
-          name="selectedVegetables"
+          name="secilenSebzeler"
           multiple={true}
-          defaultValue={['corn', 'tomato']}
+          defaultValue={['misir', 'domates']}
         >
-          <option value="cucumber">Cucumber</option>
-          <option value="corn">Corn</option>
-          <option value="tomato">Tomato</option>
+          <option value="salatalik">Salatalık</option>
+          <option value="misir">Mısır</option>
+          <option value="domates">Domates</option>
         </select>
       </label>
       <hr />
-      <button type="reset">Reset</button>
-      <button type="submit">Submit</button>
+      <button type="sifirla">Sıfırla</button>
+      <button type="gonder">Gönder</button>
     </form>
   );
 }
@@ -284,44 +284,44 @@ label { margin-bottom: 20px; }
 
 <Note>
 
-Give a `name` to your `<select>`, for example `<select name="selectedFruit" />`. The `name` you specified will be used as a key in the form data, for example `{ selectedFruit: "orange" }`.
+`<select>` elemanınıza bir `name` değeri verin, örneğin `<select name="selectedFruit" />`. Verdiğiniz `name` değeri form verisinde anahtar olarak kullanılacaktır, örneğin `{ selectedFruit: "orange" }`.
 
-If you use `<select multiple={true}>`, the [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) you'll read from the form will include each selected value as a separate name-value pair. Look closely at the console logs in the example above.
+Eğer çoklu seçim için `<select multiple={true}>` ifadesini kullanırsanız, form'dan okuyacağınız [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData), seçilen her değeri ayrı bir ad-değer çifti olarak içerecektir. Yukarıdaki örnekteki konsola yakından bakın.
 
 </Note>
 
 <Pitfall>
 
-By default, *any* `<button>` inside a `<form>` will submit it. This can be surprising! If you have your own custom `Button` React component, consider returning [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) instead of `<button>`. Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+Varsayılan olarak, `<form>` elemanı içindeki *herhangi bir* `<button>` elemanı formu gönderecektir. Bu şaşırtıcı olabilir! Kendi özel `Button` React bileşeniniz varsa, `<button>` yerine [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) döndürmeyi düşünün. Daha açık olmak için, formu göndermesi gereken *butonlar* için `<button type="submit">` ifadesini kullanın.
 
 </Pitfall>
 
 ---
 
-### Controlling a select box with a state variable {/*controlling-a-select-box-with-a-state-variable*/}
+### State değişkeni ile seçim kutusunu kontrol etme {/*controlling-a-select-box-with-a-state-variable*/}
 
-A select box like `<select />` is *uncontrolled.* Even if you [pass an initially selected value](#providing-an-initially-selected-option) like `<select defaultValue="orange" />`, your JSX only specifies the initial value, not the value right now.
+`<select />` gibi bir seçim kutusu *kontrolsüzdür.* `<select defaultValue="orange" />` gibi [başlangıçta seçili bir değer iletseniz](#providing-an-initially-selected-option) bile, JSX'iniz şu anki değeri değil, yalnızca başlangıç değerini belirtir.
 
-**To render a _controlled_ select box, pass the `value` prop to it.** React will force the select box to always have the `value` you passed. Typically, you will control a select box by declaring a [state variable:](/reference/react/useState)
+**_Kontrollü_ seçim kutusu render etmek için ona `value` prop'u iletin.** React, seçim kutusunu her zaman ilettiğiniz `value` değerine sahip olmaya zorlar. Genellikle, bir [state değişkeni](/reference/react/useState) kullanarak seçim kutusunu kontrol edeceksiniz:
 
 ```js {2,6,7}
 function FruitPicker() {
-  const [selectedFruit, setSelectedFruit] = useState('orange'); // Declare a state variable...
+  const [secilenMeyve, setSecilenMeyve] = useState('portakal'); // State değişkeni bildirin...
   // ...
   return (
     <select
-      value={selectedFruit} // ...force the select's value to match the state variable...
-      onChange={e => setSelectedFruit(e.target.value)} // ... and update the state variable on any change!
+      value={secilenMeyve} // ...seçilenin değerini state değişkeniyle eşleşmeye zorla...
+      onChange={e => setSecilenMeyve(e.target.value)} // ... ve her bir değişimde state değişkenini güncelle!
     >
-      <option value="apple">Apple</option>
-      <option value="banana">Banana</option>
-      <option value="orange">Orange</option>
+      <option value="elma">Elma</option>
+      <option value="muz">Muz</option>
+      <option value="portakal">Portakal</option>
     </select>
   );
 }
 ```
 
-This is useful if you want to re-render some part of the UI in response to every selection.
+Bu, her yapılan seçime tepki olarak kullanıcı arayüzünün bazı bölümlerini yeniden render etmek istediğiniz zaman kullanışlıdır.
 
 <Sandpack>
 
@@ -329,41 +329,41 @@ This is useful if you want to re-render some part of the UI in response to every
 import { useState } from 'react';
 
 export default function FruitPicker() {
-  const [selectedFruit, setSelectedFruit] = useState('orange');
-  const [selectedVegs, setSelectedVegs] = useState(['corn', 'tomato']);
+  const [secilenMeyve, setSecilenMeyve] = useState('portakal');
+  const [secilenSebzeler, setSecilenSebzeler] = useState(['misir', 'domates']);
   return (
     <>
       <label>
-        Pick a fruit:
+        Bir meyve seç:
         <select
-          value={selectedFruit}
-          onChange={e => setSelectedFruit(e.target.value)}
+          value={secilenMeyve}
+          onChange={e => setSecilenMeyve(e.target.value)}
         >
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
+          <option value="elma">Elma</option>
+          <option value="muz">Muz</option>
+          <option value="portakal">Portakal</option>
         </select>
       </label>
       <hr />
       <label>
-        Pick all your favorite vegetables:
+        Tüm favori sebzelerinizi seçin:
         <select
           multiple={true}
-          value={selectedVegs}
+          value={secilenSebzeler}
           onChange={e => {
             const options = [...e.target.selectedOptions];
             const values = options.map(option => option.value);
-            setSelectedVegs(values);
+            setSecilenSebzeler(values);
           }}
         >
-          <option value="cucumber">Cucumber</option>
-          <option value="corn">Corn</option>
-          <option value="tomato">Tomato</option>
+          <option value="salatalik">Salatalık</option>
+          <option value="misir">Mısır</option>
+          <option value="domates">Domates</option>
         </select>
       </label>
       <hr />
-      <p>Your favorite fruit: {selectedFruit}</p>
-      <p>Your favorite vegetables: {selectedVegs.join(', ')}</p>
+      <p>Favori meyveniz: {secilenMeyve}</p>
+      <p>Favori sebzeleriniz: {secilenSebzeler.join(', ')}</p>
     </>
   );
 }
@@ -377,8 +377,8 @@ select { margin-bottom: 10px; display: block; }
 
 <Pitfall>
 
-**If you pass `value` without `onChange`, it will be impossible to select an option.** When you control a select box by passing some `value` to it, you *force* it to always have the value you passed. So if you pass a state variable as a `value` but forget to update that state variable synchronously during the `onChange` event handler, React will revert the select box after every keystroke back to the `value` that you specified.
+**Eğer `onChange` fonksiyonu olmadan `value` değeri iletirseniz, bir seçenek seçmek imkansız olacaktır.** Seçim kutusuna `value` değeri ileterek kontrol ettiğinizde, seçim kutusunu her zaman ilettiğiniz değere sahip olmaya *zorlarsınız.* Bu nedenle, bir state değişkenini `value` olarak iletirseniz ancak `onChange` olay yöneticisi sırasında bu state değişkenini eşzamanlı olarak güncellemeyi unutursanız, React, her tuşa tıkladığınızda seçim kutusunu belirttiğiniz `value` değerine geri döndürecektir.
 
-Unlike in HTML, passing a `selected` attribute to an individual `<option>` is not supported.
+HTML'den farklı olarak, tek bir `<option>`'a `selected` özelliği iletmek desteklenmemektedir.
 
 </Pitfall>
