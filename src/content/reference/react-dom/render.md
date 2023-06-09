@@ -155,9 +155,9 @@ function NavLink({ href, children }) {
 export function Comments() {
   return (
     <>
-      <h2>Comments</h2>
-      <Comment text="Merhaba!" author="Sophie" />
-      <Comment text="Nasılsın?" author="Sunil" />
+      <h2>Yorumlar</h2>
+      <Comment text="Merhaba!" author="Gökçe" />
+      <Comment text="Nasılsın?" author="Burak" />
     </>
   );
 }
