@@ -1,44 +1,44 @@
 ---
-title: Preserving and Resetting State
+title: State'i Korumak ve Sıfırlamak
 ---
 
 <Intro>
 
-State is isolated between components. React keeps track of which state belongs to which component based on their place in the UI tree. You can control when to preserve state and when to reset it between re-renders.
+State bileşenler arasında izole edilmiştir. React, kullanıcı arayüzü (UI) ağacındaki yerlerine göre hangi state'in hangi bileşene ait olduğunu takip eder. Yeniden render'lar arasında state'in ne zaman korunacağını ve ne zaman sıfırlanacağını kontrol edebilirsiniz.
 
 </Intro>
 
 <YouWillLearn>
 
-* How React "sees" component structures
-* When React chooses to preserve or reset the state
-* How to force React to reset component's state
-* How keys and types affect whether the state is preserved
+* React bileşen yapılarını nasıl "görür"
+* React state'i korumayı ya da sıfırlamaya ne zaman seçer
+* React bileşenin state'ini sıfırlamaya nasıl zorlanır
+* Anahtarlar ve tipler state'in korunup korunmamasını nasıl etkiler
 
 </YouWillLearn>
 
-## The UI tree {/*the-ui-tree*/}
+## Kullanıcı arayüzü (UI) ağacı {/*the-ui-tree*/}
 
-Browsers use many tree structures to model UI. The [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) represents HTML elements, the [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) does the same for CSS. There's even an [Accessibility tree](https://developer.mozilla.org/docs/Glossary/Accessibility_tree)!
+Tarayıcılar, kullanıcı arayüzünü modellemek için pek çok ağaç yapısı kullanırlar. [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) HTML elementlerini temsil eder, [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) aynı şeyi CSS için yapar. Bir [Erişilebilirlik ağacı](https://developer.mozilla.org/docs/Glossary/Accessibility_tree) bile var!
 
-React also uses tree structures to manage and model the UI you make. React makes **UI trees** from your JSX. Then React DOM updates the browser DOM elements to match that UI tree. (React Native translates these trees into elements specific to mobile platforms.)
+React, oluşturduğunuz kullanıcı arayüzünü yönetmek ve modellek için de ağaç yapılarını kullanır. React, JSX'inizden **kullanıcı arayüzü ağaçları** oluşturur. Ardından React DOM, tarayıcı DOM elementlerini güncelleyerek kullanıcı arayüzü ağacı ile eşleşmesini sağlar. (React Native bu ağaçları mobil platformlara özgü elementlere çevirir.)
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Diagram with three sections arranged horizontally. In the first section, there are three rectangles stacked vertically, with labels 'Component A', 'Component B', and 'Component C'. Transitioning to the next pane is an arrow with the React logo on top labeled 'React'. The middle section contains a tree of components, with the root labeled 'A' and two children labeled 'B' and 'C'. The next section is again transitioned using an arrow with the React logo on top labeled 'React'. The third and final section is a wireframe of a browser, containing a tree of 8 nodes, which has only a subset highlighted (indicating the subtree from the middle section).">
+<Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Yatay olarak düzenlenmiş üç bölümden oluşan diyagram. İlk bölümde, 'A Bileşeni', 'B bileşeni' ve 'C Bileşeni' etiketli dikey olarak istiflenmiş üç dikdörtgen vardır. Bir sonraki bölüme geçişi gösteren 'React' etiketli ve üstünde React logosu olan bir ok vardır. Orta bölümde bir bileşen ağacı vardır. Kök 'A' olarak ve iki alt eleman 'B' ve 'C' etiketlidir. Bir sonraki bölüme geçiş yine 'React' etiketli ve üstüne React logosu olan bir okla gösterilmiştir. Üçüncü ve son bölüm ise yalnızca bir alt kümenin vurgulandığı (orta bölümden alt ağacı gösteren) 8 node'dan oluşan bir ağaç gösteren tarayıcı wireframe'idir.">
 
-From components, React creates a UI tree which React DOM uses to render the DOM
+React, bileşenlerden, React DOM'un DOM'u render etmek için kullandığı bir kullanıcı arayüzü (UI) ağacı oluşturur
 
 </Diagram>
 
 </DiagramGroup>
 
-## State is tied to a position in the tree {/*state-is-tied-to-a-position-in-the-tree*/}
+## State ağaçtaki bir konuma bağlıdır {/*state-is-tied-to-a-position-in-the-tree*/}
 
-When you give a component state, you might think the state "lives" inside the component. But the state is actually held inside React. React associates each piece of state it's holding with the correct component by where that component sits in the UI tree.
+Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
 
 
-Here, there is only one `<Counter />` JSX tag, but it's rendered at two different positions:
+Örneğin burada yalnızca bir `<Counter />` JSX elemanı vardır, ancak bu eleman iki farklı konumda render edilir:
 
 <Sandpack>
 
@@ -72,7 +72,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle 
       </button>
     </div>
   );
@@ -102,23 +102,23 @@ label {
 
 </Sandpack>
 
-Here's how these look as a tree:    
+Bunlar ağaç olarak nasıl görünüyor:
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_tree" height={248} width={395} alt="Diagram of a tree of React components. The root node is labeled 'div' and has two children. Each of the children are labeled 'Counter' and both contain a state bubble labeled 'count' with value 0.">
+<Diagram name="preserving_state_tree" height={248} width={395} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahip. Alt elemanların her ikisi de 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir.">
 
-React tree
+React ağacı
 
 </Diagram>
 
 </DiagramGroup>
 
-**These are two separate counters because each is rendered at its own position in the tree.** You don't usually have to think about these positions to use React, but it can be useful to understand how it works.
+**Bu sayaçlar iki farklı sayaçtır çünkü her ikisi de ağaçta kendi konumunda render edilir.** Genellikle React'i kullanmak için bu konumları düşünmeniz gerekmez, ancak çalışma mantığını anlamak faydalı olabilir.
 
-In React, each component on the screen has fully isolated state. For example, if you render two `Counter` components side by side, each of them will get its own, independent, `score` and `hover` states.
+React'te, ekrandaki her bileşenin içindeki state'ler izole bir şekildedir. Örneğin, iki `Counter` bileşenini yan yana render ederseniz, her birinin kendi bağımsız `score` ve `hover` state'leri olacaktır.
 
-Try clicking both counters and notice they don't affect each other:
+Her iki sayaca da tıklayın ve birbirlerini etkilemediklerini görün:
 
 <Sandpack>
 
@@ -151,7 +151,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle 
       </button>
     </div>
   );
@@ -176,21 +176,21 @@ function Counter() {
 
 </Sandpack>
 
-As you can see, when one counter is updated, only the state for that component is updated:
+Gördüğünüz gibi, bir sayaç güncellendiği zaman sadece o bileşenin state'i güncellenmektedir:
 
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_increment" height={248} width={441} alt="Diagram of a tree of React components. The root node is labeled 'div' and has two children. The left child is labeled 'Counter' and contains a state bubble labeled 'count' with value 0. The right child is labeled 'Counter' and contains a state bubble labeled 'count' with value 1. The state bubble of the right child is highlighted in yellow to indicate its value has updated.">
+<Diagram name="preserving_state_increment" height={248} width={441} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahiptir. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman 'Counter' etiketli ve 1 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt elemanın state baloncuğu, değerinin güncellendiğini belirtmek için sarı renkle vurgulanmış.">
 
-Updating state
+State'i güncelleme
 
 </Diagram>
 
 </DiagramGroup>
 
 
-React will keep the state around for as long as you render the same component at the same position. To see this, increment both counters, then remove the second component by unchecking "Render the second counter" checkbox, and then add it back by ticking it again:
+React, aynı bileşeni aynı konumda render ettiğiniz sürece state'i koruyacaktır. Bunu görmek için her iki sayacı da artırın, ardından "İkinci sayacı render et" kutucuğunun işaretini kaldırarak ikinci bileşeni render etmeyi bırakın ve ardından kutucuğu tekrar işaretleyerek bileşeni yeniden render edin:
 
 <Sandpack>
 
@@ -211,7 +211,7 @@ export default function App() {
             setShowB(e.target.checked)
           }}
         />
-        Render the second counter
+        İkinci sayacı render et
       </label>
     </div>
   );
@@ -234,7 +234,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -264,35 +264,35 @@ label {
 
 </Sandpack>
 
-Notice how the moment you stop rendering the second counter, its state disappears completely. That's because when React removes a component, it destroys its state.
+İkinci sayacı render etmeyi bıraktığınız anda state'in nasıl tamamen kaybolduğuna dikkat edin. Bunun nedeni, React'in bir bileşeni render etmeyi bıraktığı zaman o bileşenin state'ini yok etmesidir.
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_remove_component" height={253} width={422} alt="Diagram of a tree of React components. The root node is labeled 'div' and has two children. The left child is labeled 'Counter' and contains a state bubble labeled 'count' with value 0. The right child is missing, and in its place is a yellow 'poof' image, highlighting the component being deleted from the tree.">
+<Diagram name="preserving_state_remove_component" height={253} width={422} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahip. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman eksik ve onun yerine, ağaçtan silinmekte olan bileşeni gösteren sarı bir 'puf' resmi var.">
 
-Deleting a component
+Bileşeni silme
 
 </Diagram>
 
 </DiagramGroup>
 
-When you tick "Render the second counter", a second `Counter` and its state are initialized from scratch (`score = 0`) and added to the DOM.
+"İkinci sayacı render et" kutucuğunu işaretlediğinizde, ikinci bir `Counter` bileşeni ve state'i sıfırdan oluşturulur (`score = 0`) ve DOM'a eklenir.
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_add_component" height={258} width={500} alt="Diagram of a tree of React components. The root node is labeled 'div' and has two children. The left child is labeled 'Counter' and contains a state bubble labeled 'count' with value 0. The right child is labeled 'Counter' and contains a state bubble labeled 'count' with value 0. The entire right child node is highlighted in yellow, indicating that it was just added to the tree.">
+<Diagram name="preserving_state_add_component" height={258} width={500} alt="React bileşenleri ağacının diyagramı. Kök node 'div' etiketli ve iki alt elemana sahip. Soldaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman 'Counter' etiketli ve 0 değerine eşit 'count' etiketli bir state baloncuğu içerir. Sağdaki alt eleman node'unun tamamı, ağaca yeni eklendiğini göstermek için sarı renkle vurgulanmış.">
 
-Adding a component
+Bileşen ekleme
 
 </Diagram>
 
 </DiagramGroup>
 
-**React preserves a component's state for as long as it's being rendered at its position in the UI tree.** If it gets removed, or a different component gets rendered at the same position, React discards its state.
+**React, aynı bileşeni kullanıcı arayüzü ağacında aynı konumda render ettiğiniz sürece state'i koruyacaktır.** Bileşen kaldırılırsa ya da aynı konumda başka bir bileşen render edilirse, React state'i yok edecektir.
 
-## Same component at the same position preserves state {/*same-component-at-the-same-position-preserves-state*/}
+## Aynı konumdaki aynı bileşen state'i korur {/*same-component-at-the-same-position-preserves-state*/}
 
-In this example, there are two different `<Counter />` tags:
+Bu örnekte iki farklı `<Counter />` elemanı var:
 
 <Sandpack>
 
@@ -316,7 +316,7 @@ export default function App() {
             setIsFancy(e.target.checked)
           }}
         />
-        Use fancy styling
+        Süslü (fancy) stili kullan
       </label>
     </div>
   );
@@ -342,7 +342,7 @@ function Counter({ isFancy }) {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -377,24 +377,24 @@ label {
 
 </Sandpack>
 
-When you tick or clear the checkbox, the counter state does not get reset. Whether `isFancy` is `true` or `false`, you always have a `<Counter />` as the first child of the `div` returned from the root `App` component:
+Kutucuğu işaretlediğinizde veya işareti kaldırdığınızda, sayacın state'i sıfırlanmaz. `isFancy` ister `true` ister `false` olsun, kök `App` bileşeninden döndürülen `div`'in ilk alt elemanı her zaman bir `<Counter />` bileşenidir:
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_same_component" height={461} width={600} alt="Diagram with two sections separated by an arrow transitioning between them. Each section contains a layout of components with a parent labeled 'App' containing a state bubble labeled isFancy. This component has one child labeled 'div', which leads to a prop bubble containing isFancy (highlighted in purple) passed down to the only child. The last child is labeled 'Counter' and contains a state bubble with label 'count' and value 3 in both diagrams. In the left section of the diagram, nothing is highlighted and the isFancy parent state value is false. In the right section of the diagram, the isFancy parent state value has changed to true and it is highlighted in yellow, and so is the props bubble below, which has also changed its isFancy value to true.">
+<Diagram name="preserving_state_same_component" height={461} width={600} alt="Aralarındaki bir okla ayrılmış iki bölümden oluşan diyagram. Her bölüm, isFancy etiketli bir state baloncuğu içeren 'App' etiketli bir üst elemana sahip bileşen düzeni içerir. Bu bileşenin 'div' etiketli bir alt elemanı vardır ve bu tek alt elemana aktarılan isFancy değerini (mor renkle vurgulanmış) içeren bir prop baloncuğu içerir. Son alt eleman 'Counter' etiketli ve her iki diyagramda da 3 değerine eşit 'counter' etiketli bir state baloncuğu içerir. Diyagramın sol bölümünde hiçbir şey vurgulanmamış ve isFancy üst eleman state değeri false'tur. Diyagramın sağ bölümünde, isFancy üst eleman state değeri true olarak değişmiş ve sarı renkle vurgulanmıştır. Aynı zamanda isFancy değeri değişen prop baloncuğu da sarı renkle vurgulanmıştır.">
 
-Updating the `App` state does not reset the `Counter` because `Counter` stays in the same position
+`App` state'inin güncellenmesi `Counter`'ı sıfırlamaz çünkü `Counter` aynı konumda kalmaktadır
 
 </Diagram>
 
 </DiagramGroup>
 
 
-It's the same component at the same position, so from React's perspective, it's the same counter.
+Bu bileşen, aynı konumdaki aynı bileşendir. Bu nedenle React'in bakış açısından aynı sayaçtır.
 
 <Pitfall>
 
-Remember that **it's the position in the UI tree--not in the JSX markup--that matters to React!** This component has two `return` clauses with different `<Counter />` JSX tags inside and outside the `if`:
+**React için önemli olanın JSX işaretlemesindeki (markup) değil, kullanıcı arayüzü ağacındaki konumun olduğunu unutmayın!** Bu bileşen, `if` koşulu içinde ve dışında farklı `<Counter />` JSX elemanlarıyla iki farklı `return` ifadesine sahiptir:
 
 <Sandpack>
 
@@ -415,7 +415,7 @@ export default function App() {
               setIsFancy(e.target.checked)
             }}
           />
-          Use fancy styling
+          Süslü (fancy) stili kullan
         </label>
       </div>
     );
@@ -431,7 +431,7 @@ export default function App() {
             setIsFancy(e.target.checked)
           }}
         />
-        Use fancy styling
+        Süslü (fancy) stili kullan
       </label>
     </div>
   );
@@ -457,7 +457,7 @@ function Counter({ isFancy }) {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -492,15 +492,15 @@ label {
 
 </Sandpack>
 
-You might expect the state to reset when you tick checkbox, but it doesn't! This is because **both of these `<Counter />` tags are rendered at the same position.** React doesn't know where you place the conditions in your function. All it "sees" is the tree you return.
+Kutucuğa tıkladığınız zaman state'in sıfırlanmasını bekliyor olabilirsiniz ancak state sıfırlanmıyor! Bunun nedeni **her iki `<Counter />` elemanı da aynı konumda render edilmektedir.** React, fonksiyonunuzda koşullu ifadeleri nereye koyduğunuzu bilmez. React'in tüm "gördüğü" döndürdüğünüz ağaçtır.
 
-In both cases, the `App` component returns a `<div>` with `<Counter />` as a first child. To React, these two counters have the same "address": the first child of the first child of the root. This is how React matches them up between the previous and next renders, regardless of how you structure your logic.
+Her iki durumda da, `App` bileşeni ilk alt eleman olarak `<Counter />` bileşenini içeren bir `<div>` döndürür. React'e göre, bu iki sayaç da aynı "adrese" sahiptir: kökün ilk alt elemanının ilk alt elemanı. React, mantığınızı nasıl yapılandırdığınıza bakmaksızın bunları önceki ve sonraki render'lar arasında bu şekilde eşleştirir.
 
 </Pitfall>
 
-## Different components at the same position reset state {/*different-components-at-the-same-position-reset-state*/}
+## Aynı konumdaki farklı bileşenler state'i sıfırlar {/*different-components-at-the-same-position-reset-state*/}
 
-In this example, ticking the checkbox will replace `<Counter>` with a `<p>`:
+Bu örnekte kutucuğa tıkalamak, `<Counter>` bileşenini `<p>` ile değiştirecektir:
 
 <Sandpack>
 
@@ -512,7 +512,7 @@ export default function App() {
   return (
     <div>
       {isPaused ? (
-        <p>See you later!</p> 
+        <p>Sonra görüşürüz!</p> 
       ) : (
         <Counter /> 
       )}
@@ -524,7 +524,7 @@ export default function App() {
             setIsPaused(e.target.checked)
           }}
         />
-        Take a break
+        Mola ver
       </label>
     </div>
   );
@@ -547,7 +547,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -577,13 +577,13 @@ label {
 
 </Sandpack>
 
-Here, you switch between _different_ component types at the same position. Initially, the first child of the `<div>` contained a `Counter`. But when you swapped in a `p`, React removed the `Counter` from the UI tree and destroyed its state.
+Burada, aynı konumda _farklı_ bileşen tipleri arasında geçiş yapmaktayız. Başlangıçta, `<div>` elementinin ilk alt elemanı bir `Counter` içermekteydi. Ancak bunu bir `p` ile değiştirdiğinizde React, `Counter`'ı kullanıcı arayüzü ağacından kaldırır ve state'ini yok eder.
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_pt1" height={290} width={753} alt="Diagram with three sections, with an arrow transitioning each section in between. The first section contains a React component labeled 'div' with a single child labeled 'Counter' containing a state bubble labeled 'count' with value 3. The middle section has the same 'div' parent, but the child component has now been deleted, indicated by a yellow 'proof' image. The third section has the same 'div' parent again, now with a new child labeled 'p', highlighted in yellow.">
+<Diagram name="preserving_state_diff_pt1" height={290} width={753} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 3 değerine sahip 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahip 'div' etiketli bir React bileşeni içerir. Orta bölüm aynı 'div' üst elemanına sahiptir ancak alt bileşen silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölümde de aynı 'div' üst elemanı vardır ama sarı renkle vurgulanmış 'p' etiketli yeni bir alt eleman içermektedir.">
 
-When `Counter` changes to `p`, the `Counter` is deleted and the `p` is added
+`Counter`, `p` ile değiştiğinde, `Counter` silinir ve `p` eklenir
 
 </Diagram>
 
@@ -591,15 +591,15 @@ When `Counter` changes to `p`, the `Counter` is deleted and the `p` is added
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_pt2" height={290} width={753} alt="Diagram with three sections, with an arrow transitioning each section in between. The first section contains a React component labeled 'p'. The middle section has the same 'div' parent, but the child component has now been deleted, indicated by a yellow 'proof' image. The third section has the same 'div' parent again, now with a new child labeled 'Counter' containing a state bubble labeled 'count' with value 0, highlighted in yellow.">
+<Diagram name="preserving_state_diff_pt2" height={290} width={753} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm 'p' etiketli bir React bileşeni içerir. Orta bölüm aynı 'div' üst elemanına sahiptir ancak alt bileşen silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölüm yine aynı 'div' üst elemanına sahiptir ancak şimdi sarı ile vurgulanmış 0 değerine sahip 'count' etiketli state baloncuğu içeren 'Counter' etikletli yeni bir alt eleman içerir.">
 
-When switching back, the `p` is deleted and the `Counter` is added
+Geri geçiş yaparken, `p` silinir ve `Counter` eklenir
 
 </Diagram>
 
 </DiagramGroup>
 
-Also, **when you render a different component in the same position, it resets the state of its entire subtree.** To see how this works, increment the counter and then tick the checkbox:
+Aynı zamanda, **aynı konumda farklı bir bileşen render ettiğinizde, tüm alt ağacın (subtree) state'ini sıfırlar.** Nasıl çalıştığını görmek için sayacı artırın ve kutucuğu işaretleyin:
 
 <Sandpack>
 
@@ -627,7 +627,7 @@ export default function App() {
             setIsFancy(e.target.checked)
           }}
         />
-        Use fancy styling
+        Süslü (fancy) stili kullan
       </label>
     </div>
   );
@@ -653,7 +653,7 @@ function Counter({ isFancy }) {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -688,13 +688,13 @@ label {
 
 </Sandpack>
 
-The counter state gets reset when you click the checkbox. Although you render a `Counter`, the first child of the `div` changes from a `div` to a `section`. When the child `div` was removed from the DOM, the whole tree below it (including the `Counter` and its state) was destroyed as well.
+Sayaç state'i kutucuğa tıkladığınız zaman sıfırlanır. `Counter` render etmenize rağmen, `div`'in ilk alt elemanı `div`'den `section`'a dönüşür. Alt eleman olan `div` DOM'dan kaldırıldığında, altındaki ağacın tamamı da (`Counter` ve state'i de dahil olmak üzere) yok edilir.
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_same_pt1" height={350} width={794} alt="Diagram with three sections, with an arrow transitioning each section in between. The first section contains a React component labeled 'div' with a single child labeled 'section', which has a single child labeled 'Counter' containing a state bubble labeled 'count' with value 3. The middle section has the same 'div' parent, but the child components have now been deleted, indicated by a yellow 'proof' image. The third section has the same 'div' parent again, now with a new child labeled 'div', highlighted in yellow, also with a new child labeled 'Counter' containing a state bubble labeled 'count' with value 0, all highlighted in yellow.">
+<Diagram name="preserving_state_diff_same_pt1" height={350} width={794} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 'section' etiketli tek bir alt elemana sahip 'div' etkietli bir React bileşeni içerir. Bu bileşen 3 değerine eşit 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahiptir. Orta bölüm aynı 'div' üst elemanına sahiptir, ancak alt bileşenler silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölüm de aynı 'div'  üst elemanına sahiptir, 'div' etiketli yeni alt eleman sarı renkle vurgulanmış ve ayrıca 'Counter' etiketli yeni alt eleman 0 değerine eşit 'count' etiketli bir state baloncuğuna sahiptir ve hepsi sarı ile vurgulanmıştır.">
 
-When `section` changes to `div`, the `section` is deleted and the new `div` is added
+`section`, `div`'le değiştiğinde, `section` silinir ve yerine yeni `div` eklenir
 
 </Diagram>
 
@@ -702,21 +702,21 @@ When `section` changes to `div`, the `section` is deleted and the new `div` is a
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_same_pt2" height={350} width={794} alt="Diagram with three sections, with an arrow transitioning each section in between. The first section contains a React component labeled 'div' with a single child labeled 'div', which has a single child labeled 'Counter' containing a state bubble labeled 'count' with value 0. The middle section has the same 'div' parent, but the child components have now been deleted, indicated by a yellow 'proof' image. The third section has the same 'div' parent again, now with a new child labeled 'section', highlighted in yellow, also with a new child labeled 'Counter' containing a state bubble labeled 'count' with value 0, all highlighted in yellow.">
+<Diagram name="preserving_state_diff_same_pt2" height={350} width={794} alt="Üç bölümden oluşan ve bölümler arasında okla geçişi gösteren bir diyagram. İlk bölüm, 'div' etiketli tek bir alt elemana sahip 'div' etiketli bir React bileşeni içerir. Bu bileşen, 0 değerine eşit 'count' etiketli bir state baloncuğu içeren 'Counter' etiketli tek bir alt elemana sahiptir. Orta bölüm aynı 'div' üst elemanına sahiptir, ancak alt bileşenler silinmiştir ve sarı bir 'puf' resmiyle gösterilmiştir. Üçüncü bölüm yine aynı 'div' üst elemanına sahiptir ve şimdi 0 değerine eşit 'count' etiketli state baloncuğu içeren 'Counter' etiketli bir alt eleman içeren 'section' etiketli bir alt elemana sahiptir ve hepsi sarı ile vurgulanmıştır.">
 
-When switching back, the `div` is deleted and the new `section` is added
+Geri geçiş yaparken, `div` silinir ve `section` eklenir
 
 </Diagram>
 
 </DiagramGroup>
 
-As a rule of thumb, **if you want to preserve the state between re-renders, the structure of your tree needs to "match up"** from one render to another. If the structure is different, the state gets destroyed because React destroys state when it removes a component from the tree.
+Genel bir kural olarak, **yeniden render'lar arasında state'i korumak istiyorsanız, ağacınızın yapısının render'lar arasında "eşleşmesi"** gerekmektedir. Eğer yapı farklıysa, state yok edilecektir çünkü React bileşeni ağaçtan çıkardığında o bileşenin state'ini yok eder.
 
 <Pitfall>
 
-This is why you should not nest component function definitions.
+Bu nedenle bileşen fonksiyonu tanımlarını iç içe yapmamalısınız.
 
-Here, the `MyTextField` component function is defined *inside* `MyComponent`:
+Burada, `MyTextField` bileşen fonksiyonu `MyComponent` *içinde* tanımlanmıştır:
 
 <Sandpack>
 
@@ -742,7 +742,7 @@ export default function MyComponent() {
       <MyTextField />
       <button onClick={() => {
         setCounter(counter + 1)
-      }}>Clicked {counter} times</button>
+      }}>{counter} defa tıklandı</button>
     </>
   );
 }
@@ -751,13 +751,13 @@ export default function MyComponent() {
 </Sandpack>
 
 
-Every time you click the button, the input state disappears! This is because a *different* `MyTextField` function is created for every render of `MyComponent`. You're rendering a *different* component in the same position, so React resets all state below. This leads to bugs and performance problems. To avoid this problem, **always declare component functions at the top level, and don't nest their definitions.**
+Butona her tıkladığınızda, input elemanının state'i kaybolmaktadır! Bunun nedeni, `MyComponent` bileşeni her render edildiğinde *farklı* bir `MyTextField` fonksiyonu oluşturulmaktadır. Aynı konumda *farklı* bir bileşen oluşturuyorsunuz, bu nedenle React altındaki tüm state'leri sıfırlar. Bu durum, hatalara ve performans sorunlarına yol açar. Bu problemden kaçınmak için, **bileşen fonksiyonlarını en üstte tanımlayın ve tanımları iç içe yapmayın.**
 
 </Pitfall>
 
-## Resetting state at the same position {/*resetting-state-at-the-same-position*/}
+## Aynı konumda state'i sıfırlamak {/*resetting-state-at-the-same-position*/}
 
-By default, React preserves state of a component while it stays at the same position. Usually, this is exactly what you want, so it makes sense as the default behavior. But sometimes, you may want to reset a component's state. Consider this app that lets two players keep track of their scores during each turn:
+Varsayılan olarak React, aynı konumda kalan bir bileşenin state'ini korur. Genellikle istediğimiz davranış budur ve bu yüzden varsayılan olarak böyle davranmaktadır. Ancak bazen bir bileşenin state'ini sıfırlamak isteyebilirsiniz. İki oyuncunun her turdaki puanlarını takip etmesine izin veren bu uygulamayı ele alalım:
 
 <Sandpack>
 
@@ -776,7 +776,7 @@ export default function Scoreboard() {
       <button onClick={() => {
         setIsPlayerA(!isPlayerA);
       }}>
-        Next player!
+        Sonraki oyuncu!
       </button>
     </div>
   );
@@ -797,9 +797,9 @@ function Counter({ person }) {
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <h1>{person}'s score: {score}</h1>
+      <h1>{person}'ın skoru: {score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -827,19 +827,19 @@ h1 {
 
 </Sandpack>
 
-Currently, when you change the player, the score is preserved. The two `Counter`s appear in the same position, so React sees them as *the same* `Counter` whose `person` prop has changed.
+Şu anda, oyuncuyu değiştirdiğinizde state korunmaktadır. Her iki `Counter` bileşeni de aynı konumdadır ve bu yüzden React bunları, `person` prop'u değişmiş *aynı* `Counter` bileşeni olarak görür.
 
-But conceptually, in this app they should be two separate counters. They might appear in the same place in the UI, but one is a counter for Taylor, and another is a counter for Sarah.
+Ancak konsept olarak bu uygulamada iki farklı sayaç olmalıdır. Kullanıcı arayüzünde aynı konumda görünebilirler ama bir sayaç Taylor için diğer sayaç da Sarah için olmalıdır.
 
-There are two ways to reset state when switching between them:
+İki sayaç arasında geçiş yaparken state'i sıfırlamanın iki yolu vardır:
 
-1. Render components in different positions
-2. Give each component an explicit identity with `key`
+1. Bileşenleri farklı konumlarda render edin
+2. Her bileşene bir `key` (`anahtar`) prop'u verin
 
 
-### Option 1: Rendering a component in different positions {/*option-1-rendering-a-component-in-different-positions*/}
+### 1. Seçenek: Bileşeni farklı bir konumda render etmek {/*option-1-rendering-a-component-in-different-positions*/}
 
-If you want these two `Counter`s to be independent, you can render them in two different positions:
+Eğer bu iki `Counter` bileşeninin bağımsız olmasını istiyorsanız, iki bileşeni farklı konumda render edebilirsiniz:
 
 <Sandpack>
 
@@ -859,7 +859,7 @@ export default function Scoreboard() {
       <button onClick={() => {
         setIsPlayerA(!isPlayerA);
       }}>
-        Next player!
+        Sonraki oyuncu!
       </button>
     </div>
   );
@@ -880,9 +880,9 @@ function Counter({ person }) {
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <h1>{person}'s score: {score}</h1>
+      <h1>{person}'ın skoru: {score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -910,42 +910,42 @@ h1 {
 
 </Sandpack>
 
-* Initially, `isPlayerA` is `true`. So the first position contains `Counter` state, and the second one is empty.
-* When you click the "Next player" button the first position clears but the second one now contains a `Counter`.
+* Başlangıçta `isPlayerA` state'i `true`'dur. Yani ilk konum `Counter` state'ini içerir ve ikincisi  boştur.
+* "Sonraki oyuncu" butonuna tıkladığınzda ilk konum temizlenir ancak şimdi ikinci konum `Counter`'ı içerir.
 
 <DiagramGroup>
 
-<Diagram name="preserving_state_diff_position_p1" height={375} width={504} alt="Diagram with a tree of React components. The parent is labeled 'Scoreboard' with a state bubble labeled isPlayerA with value 'true'. The only child, arranged to the left, is labeled Counter with a state bubble labeled 'count' and value 0. All of the left child is highlighted in yellow, indicating it was added.">
+<Diagram name="preserving_state_diff_position_p1" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'true' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. Tek alt eleman olan 'Counter' sol taraftadır ve 0 değerine eşit 'count' etiketli state baloncuğuna sahiptir. Soldaki alt elemanın tümü eklendiğini belli edecek şekilde sarı ile vurgulanmıştır.">
 
-Initial state
-
-</Diagram>
-
-<Diagram name="preserving_state_diff_position_p2" height={375} width={504} alt="Diagram with a tree of React components. The parent is labeled 'Scoreboard' with a state bubble labeled isPlayerA with value 'false'. The state bubble is highlighted in yellow, indicating that it has changed. The left child is replaced with a yellow 'poof' image indicating that it has been deleted and there is a new child on the right, highlighted in yellow indicating that it was added. The new child is labeled 'Counter' and contains a state bubble labeled 'count' with value 0.">
-
-Clicking "next"
+Başlangıç state'i
 
 </Diagram>
 
-<Diagram name="preserving_state_diff_position_p3" height={375} width={504} alt="Diagram with a tree of React components. The parent is labeled 'Scoreboard' with a state bubble labeled isPlayerA with value 'true'. The state bubble is highlighted in yellow, indicating that it has changed. There is a new child on the left, highlighted in yellow indicating that it was added. The new child is labeled 'Counter' and contains a state bubble labeled 'count' with value 0. The right child is replaced with a yellow 'poof' image indicating that it has been deleted.">
+<Diagram name="preserving_state_diff_position_p2" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'false' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. State baloncuğu state'in değiştiğini belirtmek için sarı ile vurgulanmıştır. Soldaki alt eleman, silindiğini belirten sarı 'puf' resmiyle değiştirilmiş ve sağ taraftaki yeni alt eleman eklendiğini belirtecek şekilde sarı renkle vurgulanmıştır. Yeni alt eleman 'Counter' etiketlidir ve değeri 0'a eşit 'count' etiketli state baloncuğu içerir.">
 
-Clicking "next" again
+"sonraki"'ne tıklamak
+
+</Diagram>
+
+<Diagram name="preserving_state_diff_position_p3" height={375} width={504} alt="React bileşenlerinin ağacını içeren diyagram. Üst eleman 'Scoreboard' etiketli ve 'true' değerine eşit 'isPlayerA' etiketli state baloncuğuna sahiptir. State baloncuğu state'in değiştiğini belirtmek için sarı ile vurgulanmıştır. Sol taraftaki alt eleman yeni eklendiğini belirtecek şekilde sarı ile vurgulanmıştır. Yeni alt eleman 'Counter' etiketlidir ve değeri 0'a eşit 'count' etiketli state baloncuğu içerir. Sağdaki alt eleman silindiğini belirtecek şekilde sarı 'puf' resmiyle gösterilmiştir.">
+
+Tekrar "sonraki"'ne tıklamak
 
 </Diagram>
 
 </DiagramGroup>
 
-Each `Counter`'s state gets destroyed each time its removed from the DOM. This is why they reset every time you click the button.
+`Counter` bileşeni DOM'dan her silindiğinde state'i de yok edilir. Bu yüzden butona her tıkladığınızda sıfırlanırlar.
 
-This solution is convenient when you only have a few independent components rendered in the same place. In this example, you only have two, so it's not a hassle to render both separately in the JSX.
+Bu çözüm, aynı konumda render edilen birkaç bağımsız bileşeniniz olduğunda kullanışlıdır. Bu örnekte yalnızca iki bileşeniniz var bu yüzden ikisini de JSX'te ayrı ayrı render etmek zor değildir.
 
-### Option 2: Resetting state with a key {/*option-2-resetting-state-with-a-key*/}
+### 2. Seçenek: State'i anahtar ile sıfırlamak {/*option-2-resetting-state-with-a-key*/}
 
-There is also another, more generic, way to reset a component's state.
+Bir bileşenin state'ini sıfırlamanın daha genel başka bir yolu da vardır.
 
-You might have seen `key`s when [rendering lists.](/learn/rendering-lists#keeping-list-items-in-order-with-key) Keys aren't just for lists! You can use keys to make React distinguish between any components. By default, React uses order within the parent ("first counter", "second counter") to discern between components. But keys let you tell React that this is not just a *first* counter, or a *second* counter, but a specific counter--for example, *Taylor's* counter. This way, React will know *Taylor's* counter wherever it appears in the tree!
+[Listeleri Render Etmek](/learn/rendering-lists#keeping-list-items-in-order-with-key) sayfasında `anahtar` kullanımını görmüş olabilirsiniz. Anahtarlar sadece listeler için değildir! React'in herhangi bir bileşeni ayırt etmesini sağlamak için de anahtarları kullanabilirsiniz. Varsayılan olarak React, bileşenleri ayırt etmek için üst elemandaki sırayı ("ilk sayaç", "ikinci sayaç") kullanır. Ancak anahtarlar, React'e bunun yalnızca *ilk* sayaç veya *ikinci* sayaç değil de belirli bir sayaç olduğunu, örneğin *Taylor'ın* sayacı olduğunu söylemenizi sağlar. Bu şekilde React, ağaçta nerede olursa olsun *Taylor'ın* sayacı olduğunu bilecektir!
 
-In this example, the two `<Counter />`s don't share state even though they appear in the same place in JSX:
+Bu örnekte, iki `<Counter />` bileşeni JSX'te aynı yerde olsalar bile aynı state'i paylaşmamaktadırlar.
 
 <Sandpack>
 
@@ -964,7 +964,7 @@ export default function Scoreboard() {
       <button onClick={() => {
         setIsPlayerA(!isPlayerA);
       }}>
-        Next player!
+        Sonraki oyuncu!
       </button>
     </div>
   );
@@ -985,9 +985,9 @@ function Counter({ person }) {
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <h1>{person}'s score: {score}</h1>
+      <h1>{person}'ın skoru: {score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Add one
+        Bir ekle
       </button>
     </div>
   );
@@ -1015,7 +1015,7 @@ h1 {
 
 </Sandpack>
 
-Switching between Taylor and Sarah does not preserve the state. This is because **you gave them different `key`s:**
+Taylor ve Sarah arasında geçiş yapmak state'i korumamaktadır. Çünkü onlara **farklı key'ler (anahtar) verdiniz:**
 
 ```js
 {isPlayerA ? (
@@ -1025,19 +1025,19 @@ Switching between Taylor and Sarah does not preserve the state. This is because 
 )}
 ```
 
-Specifying a `key` tells React to use the `key` itself as part of the position, instead of their order within the parent. This is why, even though you render them in the same place in JSX, React sees them as two different counters, and so they will never share state. Every time a counter appears on the screen, its state is created. Every time it is removed, its state is destroyed. Toggling between them resets their state over and over.
+`key` (`anahtar`) belirtmek, React'e üst elemandaki sıraları yerine `key`'in kendisini konum olarak kullanmasını söyler. Bu nedenle, bileşenleri JSX'te aynı yerde render etseniz bile React onları iki farklı sayaç olarak görecektir ve state'lerini asla paylaşmayacaklardır. Bir sayaç ekranda göründüğü her sefer state'i oluşturulur. Sayaç her silindiğinde ise state'i yok edilir. Aralarında geçiş yapmak, state'lerini tekrar tekrar sıfırlar.
 
 <Note>
 
-Remember that keys are not globally unique. They only specify the position *within the parent*.
+Anahtarların global olarak eşsiz olmadığını unutmayın. Yalnızca *üst eleman içindeki* konumu belirtirler.
 
 </Note>
 
-### Resetting a form with a key {/*resetting-a-form-with-a-key*/}
+### Formu anahtar ile sıfırlamak {/*resetting-a-form-with-a-key*/}
 
-Resetting state with a key is particularly useful when dealing with forms.
+State'i anahtar ile sıfırlamak formlarla uğraşırken çok kullanışlıdır.
 
-In this chat app, the `<Chat>` component contains the text input state:
+Bu sohbet uygulamasında, `<Chat>` bileşeni mesaj input state'ini içermektedir:
 
 <Sandpack>
 
@@ -1104,7 +1104,7 @@ export default function Chat({ contact }) {
         onChange={e => setText(e.target.value)}
       />
       <br />
-      <button>Send to {contact.email}</button>
+      <button>{contact.email} adresine gönder</button>
     </section>
   );
 }
@@ -1132,17 +1132,17 @@ textarea {
 
 </Sandpack>
 
-Try entering something into the input, and then press "Alice" or "Bob" to choose a different recipient. You will notice that the input state is preserved because the `<Chat>` is rendered at the same position in the tree.
+Input'a bir şey yazmayı deneyin ve ardından farklı bir alıcı seçmek için "Alice" veya "Bob" butonuna tıklayın. `<Chat>` bileşeni ağaçta aynı konumda render edildiği için input state'inin korunduğunu göreceksiniz.
 
-**In many apps, this may be the desired behavior, but not in a chat app!** You don't want to let the user send a message they already typed to a wrong person due to an accidental click. To fix it, add a `key`:
+**Bir çok uygulamada bu istenen davranış olabilir ancak bu uygulamada değil!** Kullanıcının zaten yazdığı bir mesajı yanlış bir tıklama nedeniyle yanlış bir kişiye göndermesine izin vermek istemezsiniz. Bunu düzeltmek için `key` (`anahtar`) prop'u ekleyin:
 
 ```js
 <Chat key={to.id} contact={to} />
 ```
 
-This ensures that when you select a different recipient, the `Chat` component will be recreated from scratch, including any state in the tree below it. React will also re-create the DOM elements instead of reusing them.
+Bu, farklı bir alıcı seçtiğinizde `Chat` bileşeninin, altındaki ağaçtaki herhangi bir state de dahil olmak üzere sıfırdan yeniden oluşturulmasını sağlar. React ayrıca DOM elementlerini tekrar kullanmak yerine yeniden oluşturur.
 
-Now switching the recipient always clears the text field:
+Şimdi alıcıyı değiştirmek yazılan mesajı temizleyecektir:
 
 <Sandpack>
 
@@ -1209,7 +1209,7 @@ export default function Chat({ contact }) {
         onChange={e => setText(e.target.value)}
       />
       <br />
-      <button>Send to {contact.email}</button>
+      <button>{contact.email} adresine gönder</button>
     </section>
   );
 }
@@ -1239,24 +1239,24 @@ textarea {
 
 <DeepDive>
 
-#### Preserving state for removed components {/*preserving-state-for-removed-components*/}
+#### Silinen bileşenler için state'i korumak {/*preserving-state-for-removed-components*/}
 
-In a real chat app, you'd probably want to recover the input state when the user selects the previous recipient again. There are a few ways to keep the state "alive" for a component that's no longer visible:
+Gerçek bir sohbet uygulamasında, kullanıcı önceki alıcıyı tekrar seçtiğinde input state'ini kurtarmak istersiniz. Artık görünmeyen bir bileşenin state'ini "canlı" tutmanın birkaç yolu vardır:
 
-- You could render _all_ chats instead of just the current one, but hide all the others with CSS. The chats would not get removed from the tree, so their local state would be preserved. This solution works great for simple UIs. But it can get very slow if the hidden trees are large and contain a lot of DOM nodes.
-- You could [lift the state up](/learn/sharing-state-between-components) and hold the pending message for each recipient in the parent component. This way, when the child components get removed, it doesn't matter, because it's the parent that keeps the important information. This is the most common solution.
-- You might also use a different source in addition to React state. For example, you probably want a message draft to persist even if the user accidentally closes the page. To implement this, you could have the `Chat` component initialize its state by reading from the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), and save the drafts there too.
+- Yalnızca geçerli sohbeti göstermek yerine _tüm_ sohbetleri render edebilir ve kullanmadıklarınızı CSS ile saklayabilirsiniz. Sohbetler ağaçtan silinmezler yani lokal state'leri korunmuş olur. Basit kullanıcı arayüzleri için iyi çalışan bir çözümdür. Ancak gizli ağaçlar büyükse ve çok sayıda DOM node'u içeriyorsa uygulamayı çok yavaşlatabilir.
+- [State'i yukarı kaldırabilir](/learn/sharing-state-between-components) ve her alıcı için bekleyen mesajı üst bileşeninde tutabilirsiniz. Bu şekilde, alt bileşenlerin silinmesi önemli değildir çünkü önemli bilgileri tutan üst bileşendir. Bu en çok kullanılan çözümdür.
+- React state'ine ek olarak başka bir kaynak da kullanabilirsiniz. Örneğin, kullanıcı yanlışlıkla sayfayı kapatsa bile mesaj taslağının korunmasını isteyebilirsiniz. Bunu yapmak için, `Chat` bileşeninin state'ini [`localStorage'dan`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) okuyabilir ve taslakları da oraya kaydedebilirsiniz.
 
-No matter which strategy you pick, a chat _with Alice_ is conceptually distinct from a chat _with Bob_, so it makes sense to give a `key` to the `<Chat>` tree based on the current recipient.
+Hangi stratejiyi seçerseniz seçin, _Alice ile_ sohbet, _Bob ile_ sohbetten kavramsal olarak farklıdır. Bu nedele, `<Chat>` ağacına mevcut alıcıya göre bir `key` (`anahtar`) vermek mantıklıdır.
 
 </DeepDive>
 
 <Recap>
 
-- React keeps state for as long as the same component is rendered at the same position.
-- State is not kept in JSX tags. It's associated with the tree position in which you put that JSX.
-- You can force a subtree to reset its state by giving it a different key.
-- Don't nest component definitions, or you'll reset state by accident.
+- React, aynı bileşen aynı konumda render edildiği sürece state'i koruyacaktır.
+- State, JSX elemanlarında tutulmaz. State, JSX'i koyduğunuz ağaç konumu ile alakalıdır.
+- Bir alt ağaca farklı bir anahtar vererek state'ini sıfırlamaya zorlayabilirsiniz.
+- Bileşen tanımlarını iç içe yapmayın, aksi takdirde yanlışlıkla state'i sıfırlarsınız.
 
 </Recap>
 
@@ -1264,9 +1264,9 @@ No matter which strategy you pick, a chat _with Alice_ is conceptually distinct 
 
 <Challenges>
 
-#### Fix disappearing input text {/*fix-disappearing-input-text*/}
+#### Kaybolan input metnini düzeltin {/*fix-disappearing-input-text*/}
 
-This example shows a message when you press the button. However, pressing the button also accidentally resets the input. Why does this happen? Fix it so that pressing the button does not reset the input text.
+Bu örnek butona tıkladığınız zaman bir mesaj göstermektedir. Ancak, butona tıklamak aynı zamanda input'u da sıfırlamaktadır. Bu niye olmakta? Butona tıklamanın input metnini sıfırlamayacağı şekilde düzeltin.
 
 <Sandpack>
 
@@ -1278,11 +1278,11 @@ export default function App() {
   if (showHint) {
     return (
       <div>
-        <p><i>Hint: Your favorite city?</i></p>
+        <p><i>İpucu: Favori şehriniz?</i></p>
         <Form />
         <button onClick={() => {
           setShowHint(false);
-        }}>Hide hint</button>
+        }}>İpucunu gizle</button>
       </div>
     );
   }
@@ -1291,7 +1291,7 @@ export default function App() {
       <Form />
       <button onClick={() => {
         setShowHint(true);
-      }}>Show hint</button>
+      }}>İpucunu göster</button>
     </div>
   );
 }
@@ -1315,9 +1315,9 @@ textarea { display: block; margin: 10px 0; }
 
 <Solution>
 
-The problem is that `Form` is rendered in different positions. In the `if` branch, it is the second child of the `<div>`, but in the `else` branch, it is the first child. Therefore, the component type in each position changes. The first position changes between holding a `p` and a `Form`, while the second position changes between holding a `Form` and a `button`. React resets the state every time the component type changes.
+Buradaki sorun `Form` bileşeninin farklı konumlarda render edilmesidir. `if` dalında `<div>`'in ikinci alt elemanıdır, ancak `else` dalında ilk alt elemanıdır. Bu nedenle, her konumdaki bileşen tipi değişir. Birinci konum `p` ve `Form` tutmak arasında değişirken, ikinci konum `Form` ve `button` tutmak arasında değişir. React, bileşen tipi her değiştiğinde state'i sıfırlar.
 
-The easiest solution is to unify the branches so that `Form` always renders in the same position:
+En kolay çözüm, `Form'un` her zaman aynı konumda render edilmesi için koşulları birleştirmektir:
 
 <Sandpack>
 
@@ -1329,17 +1329,17 @@ export default function App() {
   return (
     <div>
       {showHint &&
-        <p><i>Hint: Your favorite city?</i></p>
+        <p><i>İpucu: Favori şehriniz?</i></p>
       }
       <Form />
       {showHint ? (
         <button onClick={() => {
           setShowHint(false);
-        }}>Hide hint</button>
+        }}>İpucunu gizle</button>
       ) : (
         <button onClick={() => {
           setShowHint(true);
-        }}>Show hint</button>
+        }}>İpucunu göster</button>
       )}
     </div>
   );
@@ -1363,7 +1363,7 @@ textarea { display: block; margin: 10px 0; }
 </Sandpack>
 
 
-Technically, you could also add `null` before `<Form />` in the `else` branch to match the `if` branch structure:
+Teknik olarak, `if` dal yapısıyla eşleşmesi için `else` dalındaki `<Form />` bileşeninden önce `null` ekleyebilirsiniz:
 
 <Sandpack>
 
@@ -1375,11 +1375,11 @@ export default function App() {
   if (showHint) {
     return (
       <div>
-        <p><i>Hint: Your favorite city?</i></p>
+        <p><i>İpucu: Favori şehriniz?</i></p>
         <Form />
         <button onClick={() => {
           setShowHint(false);
-        }}>Hide hint</button>
+        }}>İpucunu gizle</button>
       </div>
     );
   }
@@ -1389,7 +1389,7 @@ export default function App() {
       <Form />
       <button onClick={() => {
         setShowHint(true);
-      }}>Show hint</button>
+      }}>İpucunu göster</button>
     </div>
   );
 }
@@ -1411,19 +1411,19 @@ textarea { display: block; margin: 10px 0; }
 
 </Sandpack>
 
-This way, `Form` is always the second child, so it stays in the same position and keeps its state. But this approach is much less obvious and introduces a risk that someone else will remove that `null`.
+Bu şekilde `Form` her zaman ikinci alt elemandır yani her zaman aynı konumdadır ve state'i korur. Ancak bu yaklaşım apaçık ortada değildir ve başka birinin `null` ifadesini silmesi riskini beraberinde getirir.
 
 </Solution>
 
-#### Swap two form fields {/*swap-two-form-fields*/}
+#### İki form alanını değiştir {/*swap-two-form-fields*/}
 
-This form lets you enter first and last name. It also has a checkbox controlling which field goes first. When you tick the checkbox, the "Last name" field will appear before the "First name" field.
+Bu form ad ve soyadınızı girmeniz sağlar. Aynı zamanda hangi form alanının daha önce geleceğini kontrol eden kutucuk içerir. Kutucuğu işaretlediğiniz zaman "Soyad" alanı "Ad" alanından önce gelecektir.
 
-It almost works, but there is a bug. If you fill in the "First name" input and tick the checkbox, the text will stay in the first input (which is now "Last name"). Fix it so that the input text *also* moves when you reverse the order.
+Kodumuz neredeyse çalışmakta ancak bir hata var. Eğer "Ad" input alanını doldurup kutucuğu işaretlerseniz, adınız ilk input alanınnda kalacaktır (artık "Soyad" olan alan). Sırayı değiştirdiğinizde input metninin de değişeceği şekilde düzenleyin.
 
 <Hint>
 
-It seems like for these fields, their position within the parent is not enough. Is there some way to tell React how to match up the state between re-renders?
+Görünüşe göre bu alanlar için üst eleman içindeki konumları yeterli değildir. React'e yeniden render'lar arasında state'leri nasıl eşleştireceğini söylemenin bir yolu var mı?
 
 </Hint>
 
@@ -1441,22 +1441,22 @@ export default function App() {
         checked={reverse}
         onChange={e => setReverse(e.target.checked)}
       />
-      Reverse order
+      Sırayı terse çevir
     </label>
   );
   if (reverse) {
     return (
       <>
-        <Field label="Last name" /> 
-        <Field label="First name" />
+        <Field label="Ad" /> 
+        <Field label="Soyad" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field label="First name" /> 
-        <Field label="Last name" />
+        <Field label="Ad" /> 
+        <Field label="Soyad" />
         {checkbox}
       </>
     );    
@@ -1487,7 +1487,7 @@ label { display: block; margin: 10px 0; }
 
 <Solution>
 
-Give a `key` to both `<Field>` components in both `if` and `else` branches. This tells React how to "match up" the correct state for either `<Field>` even if their order within the parent changes:
+`if` ve `else` dallarındaki her iki `<Field>` bileşenine `key` (`anahtar`) verin. Bu, React'e her iki `<Field>` bileşeni için üst elemandaki sıraları değişse bile doğru state'i nasıl "eşleştireceğini" söyler.
 
 <Sandpack>
 
@@ -1503,22 +1503,22 @@ export default function App() {
         checked={reverse}
         onChange={e => setReverse(e.target.checked)}
       />
-      Reverse order
+      Sırayı ters çevir
     </label>
   );
   if (reverse) {
     return (
       <>
-        <Field key="lastName" label="Last name" /> 
-        <Field key="firstName" label="First name" />
+        <Field key="lastName" label="Ad" /> 
+        <Field key="firstName" label="Soyad" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field key="firstName" label="First name" /> 
-        <Field key="lastName" label="Last name" />
+        <Field key="firstName" label="Ad" /> 
+        <Field key="lastName" label="Soyad" />
         {checkbox}
       </>
     );    
@@ -1549,11 +1549,11 @@ label { display: block; margin: 10px 0; }
 
 </Solution>
 
-#### Reset a detail form {/*reset-a-detail-form*/}
+#### Bilgi formunu sıfırla {/*reset-a-detail-form*/}
 
-This is an editable contact list. You can edit the selected contact's details and then either press "Save" to update it, or "Reset" to undo your changes.
+Bu düzenlenebilir bir kişi listesidir. Seçtiğiniz kişinin bilgilerini düzenleyip "Kaydet" butonu ile kaydedebilir ya da "Sıfırla" butonu ile yaptığınız değişiklikleri geri alabilirsiniz.
 
-When you select a different contact (for example, Alice), the state updates but the form keeps showing the previous contact's details. Fix it so that the form gets reset when the selected contact changes.
+Farklı bir kişi seçtiğiniz zaman (örneğin Alice), state güncellenmektedir ancak form bir önceki kişinin bilgilerini göstermektedir. Seçilen kişi değiştiği zaman formun sıfırlanmasını sağlayacak şekilde düzeltin.
 
 <Sandpack>
 
@@ -1645,7 +1645,7 @@ export default function EditContact({ initialData, onSave }) {
   return (
     <section>
       <label>
-        Name:{' '}
+        Ad:{' '}
         <input
           type="text"
           value={name}
@@ -1653,7 +1653,7 @@ export default function EditContact({ initialData, onSave }) {
         />
       </label>
       <label>
-        Email:{' '}
+        E-posta:{' '}
         <input
           type="email"
           value={email}
@@ -1668,13 +1668,13 @@ export default function EditContact({ initialData, onSave }) {
         };
         onSave(updatedData);
       }}>
-        Save
+        Kaydet
       </button>
       <button onClick={() => {
         setName(initialData.name);
         setEmail(initialData.email);
       }}>
-        Reset
+        Sıfırla
       </button>
     </section>
   );
@@ -1705,7 +1705,7 @@ button {
 
 <Solution>
 
-Give `key={selectedId}` to the `EditContact` component. This way, switching between different contacts will reset the form:
+`key={selectedId}` prop'unu `EditContact` bileşenine iletin. Bu şekilde, seçilen kişiyi değiştirmek formu sıfırlayacaktır:
 
 <Sandpack>
 
@@ -1798,7 +1798,7 @@ export default function EditContact({ initialData, onSave }) {
   return (
     <section>
       <label>
-        Name:{' '}
+        Ad:{' '}
         <input
           type="text"
           value={name}
@@ -1806,7 +1806,7 @@ export default function EditContact({ initialData, onSave }) {
         />
       </label>
       <label>
-        Email:{' '}
+        E-posta:{' '}
         <input
           type="email"
           value={email}
@@ -1821,13 +1821,13 @@ export default function EditContact({ initialData, onSave }) {
         };
         onSave(updatedData);
       }}>
-        Save
+        Kaydet
       </button>
       <button onClick={() => {
         setName(initialData.name);
         setEmail(initialData.email);
       }}>
-        Reset
+        Sıfırla
       </button>
     </section>
   );
@@ -1858,13 +1858,13 @@ button {
 
 </Solution>
 
-#### Clear an image while it's loading {/*clear-an-image-while-its-loading*/}
+#### Görüntüyü yüklenirken temizleyin {/*clear-an-image-while-its-loading*/}
 
-When you press "Next", the browser starts loading the next image. However, because it's displayed in the same `<img>` tag, by default you would still see the previous image until the next one loads. This may be undesirable if it's important for the text to always match the image. Change it so that the moment you press "Next", the previous image immediately clears.
+"Sonraki" butonuna tıkladığınızda, tarayıcı sonraki görüntüyü yüklemeye başlar. Ancak, aynı `<img>` elemanında görüntülendiğinden dolayı, varsayılan olarak bir sonraki görüntü yüklenene kadar önceki görüntüyü görmeye devam edersiniz. Metnin her zaman görüntüyle eşleşmesi önemliyse bu istenmeyen bir durum olabilir. "Sonraki" butonuna tıkladığınızda bir önceki görüntünün temizlenmesini sağlayacak şekilde düzenleyin.
 
 <Hint>
 
-Is there a way to tell React to re-create the DOM instead of reusing it?
+React'e DOM'u tekrar kullanmak yerine yeniden oluşturmasını söylemenin bir yolu var mı?
 
 </Hint>
 
@@ -1889,10 +1889,10 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleClick}>
-        Next
+        Sonraki
       </button>
       <h3>
-        Image {index + 1} of {images.length}
+        Görüntü {index + 1} / {images.length}
       </h3>
       <img src={image.src} />
       <p>
@@ -1934,7 +1934,7 @@ img { width: 150px; height: 150px; }
 
 <Solution>
 
-You can provide a `key` to the `<img>` tag. When that `key` changes, React will re-create the `<img>` DOM node from scratch. This causes a brief flash when each image loads, so it's not something you'd want to do for every image in your app. But it makes sense if you want to ensure the image always matches the text.
+`<img>` elemanına `key` (`anahtar`) iletebilirsiniz. O `key` değiştiğinde, React `<img>` DOM node'unu sıfırdan tekrar oluşturacaktır. Bu, her bir görüntü yüklendiğinde kısa bir flaşa neden olur, dolayısıyla uygulamanızdaki her görüntü için yapmak isteyeceğiniz bir şey değildir. Ancak görüntünün her zaman metinle eşleşmesini sağlamak istiyorsanız mantıklı bir yoldur.
 
 <Sandpack>
 
@@ -1957,10 +1957,10 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleClick}>
-        Next
+        Sonraki
       </button>
       <h3>
-        Image {index + 1} of {images.length}
+        Görüntü {index + 1} / {images.length}
       </h3>
       <img key={image.src} src={image.src} />
       <p>
@@ -2002,11 +2002,11 @@ img { width: 150px; height: 150px; }
 
 </Solution>
 
-#### Fix misplaced state in the list {/*fix-misplaced-state-in-the-list*/}
+#### Listedeki yanlış yerleştirilmiş state'i düzeltin {/*fix-misplaced-state-in-the-list*/}
 
-In this list, each `Contact` has state that determines whether "Show email" has been pressed for it. Press "Show email" for Alice, and then tick the "Show in reverse order" checkbox. You will notice that it's _Taylor's_ email that is expanded now, but Alice's--which has moved to the bottom--appears collapsed.
+Bu listede, her `Contact` bileşeni "E-postayı göster" butonunun kendisi için tıklanıp tıklanmadığını belirleyen bir state'e sahiptir. Alice için "E-postayı göster" butonuna tıklayın, ve "Ters sıralanmış halde göster" kutucuğunu işaretleyin. Şimdi genişletilmiş halde _Taylor'ın_ e-postasını görmekteyiz ama en alt sıraya giden Alice'in e-postasını görmemekteyiz.
 
-Fix it so that the expanded state is associated with each contact, regardless of the chosen ordering.
+Genişletilmiş state'in, sıralamadan bağımsız olarak ilgili kişiyle ilişkendirilecek şekilde düzeltin.
 
 <Sandpack>
 
@@ -2032,7 +2032,7 @@ export default function ContactList() {
             setReverse(e.target.checked)
           }}
         />{' '}
-        Show in reverse order
+        Ters sıralanmış halde göster
       </label>
       <ul>
         {displayedContacts.map((contact, i) =>
@@ -2066,7 +2066,7 @@ export default function Contact({ contact }) {
       <button onClick={() => {
         setExpanded(!expanded);
       }}>
-        {expanded ? 'Hide' : 'Show'} email
+        E-postayı {expanded ? 'sakla' : 'göster'} 
       </button>
     </>
   );
@@ -2096,16 +2096,16 @@ button {
 
 <Solution>
 
-The problem is that this example was using index as a `key`:
+Bu örnekteki problem indeks olarak `key` (`anahtar`)  kullanılmasıdır:
 
 ```js
 {displayedContacts.map((contact, i) =>
   <li key={i}>
 ```
 
-However, you want the state to be associated with _each particular contact_.
+Ancak, state'in _her belirli kişi_ ile ilişkilendirilmesi istiyoruz.
 
-Using the contact ID as a `key` instead fixes the issue:
+`key` olarak indeks yerine kişinin ID'sini kullanmak sorunu çözecektir:
 
 <Sandpack>
 
@@ -2131,7 +2131,7 @@ export default function ContactList() {
             setReverse(e.target.checked)
           }}
         />{' '}
-        Show in reverse order
+        Ters sıralanmış halde göster
       </label>
       <ul>
         {displayedContacts.map(contact =>
@@ -2165,7 +2165,7 @@ export default function Contact({ contact }) {
       <button onClick={() => {
         setExpanded(!expanded);
       }}>
-        {expanded ? 'Hide' : 'Show'} email
+        E-postayı {expanded ? 'sakla' : 'göster'}
       </button>
     </>
   );
@@ -2193,7 +2193,7 @@ button {
 
 </Sandpack>
 
-State is associated with the tree position. A `key` lets you specify a named position instead of relying on order.
+State, ağaç konumu ile ilişkilidir. `key`, sıralamaya bağlı kalmak yerine adlandırılmış bir konum belirlemenizi sağlar.
 
 </Solution>
 
