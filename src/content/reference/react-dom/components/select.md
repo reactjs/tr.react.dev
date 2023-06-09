@@ -70,7 +70,7 @@ Bu `<select>` prop'ları hem kontrollü hem de kontrolsüz seçim kutuları içi
 
 - HTML'den farklı olarak, `<option>`'a `selected` özelliği iletmek desteklenmemektedir. Bunun yerine, kontrolsüz seçim kutuları için [`<select defaultValue>`](#providing-an-initially-selected-option), kontrollü seçim kutuları için [`<select value>`](#controlling-a-select-box-with-a-state-variable) ifadelerini kullanın.
 - Eğer bir seçim kutusu `value` prop'u alıyorsa, [kontrollü olarak ele alınacaktır.](#controlling-a-select-box-with-a-state-variable)
-- Bir seçim kutusu aynı anda hemde kontrollü hem de kontrolsüz olamaz.
+- Bir seçim kutusu aynı anda hem kontrollü hem de kontrolsüz olamaz.
 - Bir seçim kutusu yaşam döngüsü boyunca kontrollü ve ya kontrolsüz olma arasında geçiş yapamaz.
 - Kontrollü her seçim kutusu, değerini senkronize olarak güncelleyen bir `onChange` olay yöneticisine ihtiyaç duyar.
 
