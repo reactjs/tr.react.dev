@@ -92,7 +92,7 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-Genellikle, bu kod iyidir! Ama belki `getFilteredTodos()` yavaş veya bir sürü `todos`'a sahipsindir. Bu durumda, `newTodo` gibi alakasız bir state değişkeni değiştiyse, `getFilteredTodos()`'un yeniden hesaplama yapmasını istemezsin
+Genellikle, bu kod iyidir! Ama belki `getFilteredTodos()` fonksiyonu yavaştır veya bir sürü `todos`'a sahipsindir. Bu durumda, `newTodo` gibi alakasız bir state değişkeni değiştiyse, `getFilteredTodos()`'un yeniden hesaplama yapmasını istemezsin
 
 Maliyetli bir hesaplamayı [`useMemo`](/reference/react/useMemo) Hook'una sarmalayarak önbelleğe alabilirsiniz (veya ["memoize"](https://en.wikipedia.org/wiki/Memoization)):
 
