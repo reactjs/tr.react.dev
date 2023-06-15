@@ -1,45 +1,45 @@
 ---
-title: 'You Might Not Need an Effect'
+title: 'Bir Efekte İhtiyacınız Olmayabilir'
 ---
 
 <Intro>
 
-Effects are an escape hatch from the React paradigm. They let you "step outside" of React and synchronize your components with some external system like a non-React widget, network, or the browser DOM. If there is no external system involved (for example, if you want to update a component's state when some props or state change), you shouldn't need an Effect. Removing unnecessary Effects will make your code easier to follow, faster to run, and less error-prone.
+Efektler, React paradigmasından bir kaçış yoludur. Bu kaçış yolları size React'tan "dışarı çıkmanıza" ve React ile alakalı olmayan React araçlarıyla, ağ veya tarayıcı DOM'u gibi bazı harici sistemlerle bileşenlerinizi senkronize etmenize izin verir. Eğer harici bir sistem yoksa (örneğin, bir bileşenin state'ini bazı props veya state değişikliklerinde güncellemek istiyorsanız), bir Efekte ihtiyacınız olmamalıdır. Gereksiz Efektleri ortadan kaldırmak kodunuzun takip edilmesini kolaylaştıracak, çalışmasını hızlandıracak ve hataya daha az açık hale getirecektir.
 
 </Intro>
 
 <YouWillLearn>
 
-* Why and how to remove unnecessary Effects from your components
-* How to cache expensive computations without Effects
-* How to reset and adjust component state without Effects
-* How to share logic between event handlers
-* Which logic should be moved to event handlers
-* How to notify parent components about changes
+* Gereksiz Efektleri bileşenlerinizden neden ve nasıl ortadan kaldırabileceğinizi 
+* Masraflı hesaplamaları Efektler olmadan nasıl önbelleğe alabileceğinizi
+* Efektler olmadan bileşen state'ini nasıl ayarlayıp ve sıfırlayabileceğinizi
+* Olay yöneticileri arasında mantığı nasıl paylaşabileceğinizi
+* Hangi mantık olay yöneticilerine taşınmalı
+* Üst bileşenlere değişiklikler hakkında nasıl bildirimde bulunulacağını
 
 </YouWillLearn>
 
-## How to remove unnecessary Effects {/*how-to-remove-unnecessary-effects*/}
+## Gereksiz Efektler nasıl ortadan kaldırılır {/*how-to-remove-unnecessary-effects*/}
 
-There are two common cases in which you don't need Effects:
+Efektlere ihtiyaç duymadığınız iki yaygın durum vardır:
 
-* **You don't need Effects to transform data for rendering.** For example, let's say you want to filter a list before displaying it. You might feel tempted to write an Effect that updates a state variable when the list changes. However, this is inefficient. When you update the state, React will first call your component functions to calculate what should be on the screen. Then React will ["commit"](/learn/render-and-commit) these changes to the DOM, updating the screen. Then React will run your Effects. If your Effect *also* immediately updates the state, this restarts the whole process from scratch! To avoid the unnecessary render passes, transform all the data at the top level of your components. That code will automatically re-run whenever your props or state change.
-* **You don't need Effects to handle user events.** For example, let's say you want to send an `/api/buy` POST request and show a notification when the user buys a product. In the Buy button click event handler, you know exactly what happened. By the time an Effect runs, you don't know *what* the user did (for example, which button was clicked). This is why you'll usually handle user events in the corresponding event handlers.
+* **Verileri işlemek üzere dönüştürmek için Efektlere ihtiyacınız yoktur.** Örneğin, bir listeyi göstermeden önce o listeyi filtrelemek istediğinizi varsayalım. Liste değiştiğinde bir state değişkenini güncelleyen bir Efekt yazmak cazip hissettirebilir. Ancak, bu yöntem verimsizdir. State'i güncellediğinizde, React ilk olarak ekranda ne gözükeceğini hesaplamak için öncelikle bileşen fonksiyonlarınızı çağırır. Daha sonra React ekranı güncelleyerek bu değişiklikleri DOM'a ["işleyecektir"](/learn/render-and-commit). Ardından React Efektlerinizi çalıştıracaktır. Efektiniz *ayrıca* state'i anında güncelliyorsa, bu tüm süreci yeniden sıfırdan başlatır! Gereksiz render geçişlerini önlemek için bileşenlerinizin en üst düzeyindeki tüm verileri dönüştürün. Bu kod propslarınız veya stateleriniz değiştiğinde otomatik olarak yeniden çalışacaktır.
+* **Kulanıcı olaylarını yönetmek için Efektlere ihtiyacınız yoktur.** Örneğin, `/api/buy` POST isteği göndermek ve kullanıcı bir ürün satın aldığında bir bildirim göstermek istediğinizi varsayalım. Satın Al buton olay yöneticisi içerisinde, kesinlikle ne olacağını bilirsiniz. Efekt çalıştığında, kullanınıcının *ne* yaptığını bilemezsiniz (örneğin, hangi butona tıklandığını). Bu sebeple, genellikle kullanıcı olaylarını karşılık gelen olay yöneticileri içerisinde ele alacaksınız.
 
-You *do* need Effects to [synchronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) with external systems. For example, you can write an Effect that keeps a jQuery widget synchronized with the React state. You can also fetch data with Effects: for example, you can synchronize the search results with the current search query. Keep in mind that modern [frameworks](/learn/start-a-new-react-project#production-grade-react-frameworks) provide more efficient built-in data fetching mechanisms than writing Effects directly in your components.
+Dış sistemlerle [senkronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) olmak için Efektleri *kullanmanız* gerekmektedir. Örneğin, bir jQuery bileşenini React state'i ile senkronize eden bir Efekt yazabilirsiniz. Ayrıca Efektler ile data çekebilirsiniz: Örneğin, mevcut arama sorgusuyla arama sonuçlarını senkronize edebilirsiniz. Unutmayın ki modern [frameworkler](/learn/start-a-new-react-project#production-grade-react-frameworks) bileşenlerinizde doğrudan Efektler yazmak yerine daha verimli ve entegre veri çekme mekanizmaları sunarlar.
 
-To help you gain the right intuition, let's look at some common concrete examples!
+Doğru sezgiyi kazanmanıza yardımcı olmak için, hadi bazı yaygın somut örneklere göz atalım!
 
-### Updating state based on props or state {/*updating-state-based-on-props-or-state*/}
+### State veya propslara göre state'i güncelleme {/*updating-state-based-on-props-or-state*/}
 
-Suppose you have a component with two state variables: `firstName` and `lastName`. You want to calculate a `fullName` from them by concatenating them. Moreover, you'd like `fullName` to update whenever `firstName` or `lastName` change. Your first instinct might be to add a `fullName` state variable and update it in an Effect:
+İki state değişkenine sahip bir bileşeniniz olduğunu varsayalım: `firstName` ve `lastName`. `firstName` ve `lastName`'i birleştirerek onlardan bir `fullName` elde etmek istiyorsunuz. Ayrıca, `firstName` veya `lastName` her değiştiğinde `fullName`'i güncellemek istiyorsunuz. İlk olarak aklınıza `fullName` state değişkeni oluşturmak ve onu bir Efekt içerisinde güncellemek olabilir:
 
 ```js {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
 
-  // 🔴 Avoid: redundant state and unnecessary Effect
+  // 🔴 Gereksiz state ve Efektlerden uzak durun.
   const [fullName, setFullName] = useState('');
   useEffect(() => {
     setFullName(firstName + ' ' + lastName);
@@ -48,29 +48,30 @@ function Form() {
 }
 ```
 
-This is more complicated than necessary. It is inefficient too: it does an entire render pass with a stale value for `fullName`, then immediately re-renders with the updated value. Remove the state variable and the Effect:
+Bu gerektiğinden daha karmaşıktır. Aynı zamanda verimsizdir: `fullName`  için geçersiz bir değerle tam bir yeniden render işlemi gerçekleştirir ve hemen ardından güncellenmiş değerle tekrar yeniden render eder. State değişkenini ve Efektini kaldırın:
 
 ```js {4-5}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
-  // ✅ Good: calculated during rendering
+  // ✅ Render işlemi sırasında hesaplanması iyidir.
   const fullName = firstName + ' ' + lastName;
   // ...
 }
 ```
 
-**When something can be calculated from the existing props or state, [don't put it in state.](/learn/choosing-the-state-structure#avoid-redundant-state) Instead, calculate it during rendering.** This makes your code faster (you avoid the extra "cascading" updates), simpler (you remove some code), and less error-prone (you avoid bugs caused by different state variables getting out of sync with each other). If this approach feels new to you, [Thinking in React](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) explains what should go into state.
+**Mevcut props veya state'den birşey hesaplanabilirken [hesaplanabilen değeri state içerisine koymayın.](/learn/choosing-the-state-structure#avoid-redundant-state) Bunun yerine, render işlemi sırasında hesaplayın.** Bu şekilde kodunuz hızlı (Ekstra "kademeli" güncellemelerden kaçınırsınız), daha basit (bazı kodları ortadan kaldırırsınız), ve daha az hata eğilimlidir (birbiriyle senkronize olmayan farklı state değişkenlerinin neden olduğu hatalardan kaçınırsınız). Bu yaklaşım size yeni geliyorsa, [React'ta düşünmek](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) state içerisine nelerin girmesi gerektiğini açıklar. 
 
-### Caching expensive calculations {/*caching-expensive-calculations*/}
+### Maliyetli hesaplamaları önbelleğe almak {/*caching-expensive-calculations*/}
 
-This component computes `visibleTodos` by taking the `todos` it receives by props and filtering them according to the `filter` prop. You might feel tempted to store the result in state and update it from an Effect:
+Bu bileşen gelen `todos` propunu `filter` propsuna göre filtreleme işlemi yaparak `visibleTodos` değerini hesaplar. Sonuçları state içerisinde depolamak ve bir Efektten güncellemek isteyebilirsiniz:
+
 
 ```js {4-8}
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
 
-  // 🔴 Avoid: redundant state and unnecessary Effect
+  // 🔴 Gereksiz state ve Efektlerden uzak durun.
   const [visibleTodos, setVisibleTodos] = useState([]);
   useEffect(() => {
     setVisibleTodos(getFilteredTodos(todos, filter));
@@ -80,20 +81,21 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-Like in the earlier example, this is both unnecessary and inefficient. First, remove the state and the Effect:
+Önceki örnekte olduğu gibi, bu gereksiz ve verimsizdir. İlk olarak, state ve Efekti kaldırın:
 
 ```js {3-4}
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
-  // ✅ This is fine if getFilteredTodos() is not slow.
+  // ✅ getFilteredTodos() yavaş değilse bu problem değildir.
   const visibleTodos = getFilteredTodos(todos, filter);
   // ...
 }
 ```
 
-Usually, this code is fine! But maybe `getFilteredTodos()` is slow or you have a lot of `todos`. In that case you don't want to recalculate `getFilteredTodos()` if some unrelated state variable like `newTodo` has changed.
+Genellikle, bu kod iyidir! Ama belki `getFilteredTodos()` yavaş veya bir sürü `todos`'a sahipsindir. Bu durumda, `newTodo` gibi alakasız bir state değişkeni değiştiyse, `getFilteredTodos()`'un yeniden hesaplama yapmasını istemezsin
 
-You can cache (or ["memoize"](https://en.wikipedia.org/wiki/Memoization)) an expensive calculation by wrapping it in a [`useMemo`](/reference/react/useMemo) Hook:
+Maliyetli bir hesaplamayı [`useMemo`](/reference/react/useMemo) Hook'una sarmalayarak önbelleğe alabilirsiniz (veya ["memoize"](https://en.wikipedia.org/wiki/Memoization)):
+
 
 ```js {5-8}
 import { useMemo, useState } from 'react';
@@ -101,35 +103,36 @@ import { useMemo, useState } from 'react';
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
   const visibleTodos = useMemo(() => {
-    // ✅ Does not re-run unless todos or filter change
+    // ✅ todos veya filter değişmeden yeniden çalıştırmayın.
     return getFilteredTodos(todos, filter);
   }, [todos, filter]);
   // ...
 }
 ```
 
-Or, written as a single line:
+Veya, tek bir satır olarak yazılır: 
 
 ```js {5-6}
 import { useMemo, useState } from 'react';
 
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
-  // ✅ Does not re-run getFilteredTodos() unless todos or filter change
+  // ✅  getFilteredTodos() fonksiyonunu todos veya filter değişmeden yeniden çalıştırmayın.
   const visibleTodos = useMemo(() => getFilteredTodos(todos, filter), [todos, filter]);
   // ...
 }
 ```
 
-**This tells React that you don't want the inner function to re-run unless either `todos` or `filter` have changed.** React will remember the return value of `getFilteredTodos()` during the initial render. During the next renders, it will check if `todos` or `filter` are different. If they're the same as last time, `useMemo` will return the last result it has stored. But if they are different, React will call the inner function again (and store its result).
+**Bu React'a `todos` veya `filter` değişmedikçe iç fonksiyonun yeniden çalışmasını istemediğinizi söyler.**
+** React `getFilteredTodos()`'un başlangıç render işlemindeki dönüş değerini hatırlayacaktır. React sonraki render işlemlerinde ise, `todos` veya `filter`'ın değişip değişmediğini kontrol edecektir. Eğer bunlar son seferdekiyle aynı ise, `useMemo` depoladığı son sonucu döndürecektir. Ancak eğer bunlar farklı ise, React iç fonksiyonu tekrar çağıracaktır (ve sonucunu depolayacaktır). 
 
-The function you wrap in [`useMemo`](/reference/react/useMemo) runs during rendering, so this only works for [pure calculations.](/learn/keeping-components-pure)
+[`useMemo`](/reference/react/useMemo) içerisine sarmaladığınız fonksiyon render işlemi sırasında çalışır, dolayısıyla bu sadece [saf hesaplamalar](/learn/keeping-components-pure) için çalışır.
 
 <DeepDive>
 
-#### How to tell if a calculation is expensive? {/*how-to-tell-if-a-calculation-is-expensive*/}
+#### Bir hesaplamanın maliyetli olup olmadığı nasıl anlaşılır? {/*how-to-tell-if-a-calculation-is-expensive*/}
 
-In general, unless you're creating or looping over thousands of objects, it's probably not expensive. If you want to get more confidence, you can add a console log to measure the time spent in a piece of code:
+Genel olarak, binlerce nesne oluşturmadıkça veya üzerinde döngü yapmadıkça, bu muhtemelen maliyetli değildir. Daha fazla güven sağlamak isterseniz, bir kod parçasında geçen süreyi ölçmek için bir konsol ekleyebilirsiniz. 
 
 ```js {1,3}
 console.time('filter array');
@@ -137,33 +140,33 @@ const visibleTodos = getFilteredTodos(todos, filter);
 console.timeEnd('filter array');
 ```
 
-Perform the interaction you're measuring (for example, typing into the input). You will then see logs like `filter array: 0.15ms` in your console. If the overall logged time adds up to a significant amount (say, `1ms` or more), it might make sense to memoize that calculation. As an experiment, you can then wrap the calculation in `useMemo` to verify whether the total logged time has decreased for that interaction or not:
+Ölçüm yaptığınız etkileşimi gerçekleştirin (örneğin, giriş kutusuna yazma işlemi yapın). Daha sonra konsolunuzda `filter array: 0.15ms` gibi loglar göreceksiniz. Toplamda kaydedilen süre miktarı (örneğin, `1ms` veya daha fazlası) geçiyorsa, o hesaplamanın önbelleğe alınması mantıklı olabilir. Denemek için, hesaplamayı `useMemo` ile sarmalayabilir ve bu etkileşim için loglanan toplam sürenin azaldığını doğrulayabilirsiniz:
 
 ```js
 console.time('filter array');
 const visibleTodos = useMemo(() => {
-  return getFilteredTodos(todos, filter); // Skipped if todos and filter haven't changed
+  return getFilteredTodos(todos, filter); // todos ve filter değişmediyse atlanır.
 }, [todos, filter]);
 console.timeEnd('filter array');
 ```
 
-`useMemo` won't make the *first* render faster. It only helps you skip unnecessary work on updates.
+`useMemo` *ilk* render işlemini daha hızlı yapmaz. Sadece güncellemelerle ilgili gereksiz çalışmaları atlamanıza yardımcı olur. 
 
-Keep in mind that your machine is probably faster than your users' so it's a good idea to test the performance with an artificial slowdown. For example, Chrome offers a [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) option for this.
+Makinenizin kullanıcılarınızdan daha hızlı olduğunu aklınızda bulundurun bu nedenle performansınızı yapay bir yavaşlık ile test etmek daha iyi bir fikirdir. Örneğin, Chrome bunun için [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) seçeneği sunuyor.
 
-Also note that measuring performance in development will not give you the most accurate results. (For example, when [Strict Mode](/reference/react/StrictMode) is on, you will see each component render twice rather than once.) To get the most accurate timings, build your app for production and test it on a device like your users have.
+Ayrıca geliştirme içerisinde performans ölçümü yapılması size en doğru sonuçları vermeyeceğini unutmayın. (Örneğin, [Strict mod](/reference/react/StrictMode) açıkken, her bileşenin bir yerine iki kez render olduğunu göreceksiniz.) En doğru ölçümleri elde etmek için, uygulamanızı üretim için derleyin ve kullanıcılarınızın sahip olduğu gibi bir cihazda test edin.
 
 </DeepDive>
 
-### Resetting all state when a prop changes {/*resetting-all-state-when-a-prop-changes*/}
+### Bir prop değiştiğinde tüm state'i sıfırlama {/*resetting-all-state-when-a-prop-changes*/}
 
-This `ProfilePage` component receives a `userId` prop. The page contains a comment input, and you use a `comment` state variable to hold its value. One day, you notice a problem: when you navigate from one profile to another, the `comment` state does not get reset. As a result, it's easy to accidentally post a comment on a wrong user's profile. To fix the issue, you want to clear out the `comment` state variable whenever the `userId` changes:
+Bu `ProfilePage` bileşeni bir `userId` propu alır. Sayfa bir yorum inputu içeriyor ve bu değeri tutması için bir `comment` state değişkeni kullanıyorsunuz. Bir gün, bir problem olduğunu farkedeceksiniz: bir profilden diğerine geçiş yaptığınızda, `comment` state'inin sıfırlanmamasıdır. Sonuç olarak, yanlış bir kullanıcının profiline istemediğiniz bir yorum yapmak oldukça kolay olabilir. Bu sorunu çözmek için, `userId` her değiştiğinde `comment` state değişkeninin temizlenmesini istersiniz:
 
 ```js {4-7}
 export default function ProfilePage({ userId }) {
   const [comment, setComment] = useState('');
 
-  // 🔴 Avoid: Resetting state on prop change in an Effect
+  // 🔴 Bir Efekt içerisinde prop değiştiğinde state'i sıfırlamaktan kaçının.
   useEffect(() => {
     setComment('');
   }, [userId]);
@@ -171,9 +174,9 @@ export default function ProfilePage({ userId }) {
 }
 ```
 
-This is inefficient because `ProfilePage` and its children will first render with the stale value, and then render again. It is also complicated because you'd need to do this in *every* component that has some state inside `ProfilePage`. For example, if the comment UI is nested, you'd want to clear out nested comment state too.
+Bu verimlilik açısından etkisizdir çünkü `ProfilePage` ve içerisindeki childrenlar ilk olarak eski değerle birlike render edilecek, ve daha sonra tekrar render edilecektir. Ayrıca bu karmaşıktır çünkü `ProfilePage` içerisindeki her bileşende bu işlemi yapmanız gerekecektir. Örneğin yorum arayüzü iç içe ise, iç içe yorum state'ini de temizlemek istersiniz.
 
-Instead, you can tell React that each user's profile is conceptually a _different_ profile by giving it an explicit key. Split your component in two and pass a `key` attribute from the outer component to the inner one:
+Bunun yerine, her kullanıcının profiline belirli bir key vererek React'a her kullanıcı profilinin kavramsal olarak _farklı_ bir profil olduğunu bildirebilirsiniz. Bileşeninizi ikiye bölün ve dış bileşenden iç bileşene `key` özniteliği iletin:
 
 ```js {5,11-12}
 export default function ProfilePage({ userId }) {
@@ -186,28 +189,28 @@ export default function ProfilePage({ userId }) {
 }
 
 function Profile({ userId }) {
-  // ✅ This and any other state below will reset on key change automatically
+  // ✅ Bu ve aşağıdaki herhangi bir state key değişikliğinde otomatik olarak sıfırlanacaktır.
   const [comment, setComment] = useState('');
   // ...
 }
 ```
 
-Normally, React preserves the state when the same component is rendered in the same spot. **By passing `userId` as a `key` to the `Profile` component, you're asking React to treat two `Profile` components with different `userId` as two different components that should not share any state.** Whenever the key (which you've set to `userId`) changes, React will recreate the DOM and [reset the state](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key) of the `Profile` component and all of its children. Now the `comment` field will clear out automatically when navigating between profiles.
+Normalde, React aynı bileşen aynı noktada render edildiğinde state'i korur. **`Profile` bileşenine bir `key` olarak `userId` ileterek, React'tan farklı `userId`'li iki `Profile` bileşenine herhangi bir state'i paylaşmaması gereken iki farklı bileşen olarak muamele etmesini istiyorsunuz.** Key her değiştiğinde (`userId` olarak ayarladığınız), React DOM'u tekrar oluşturacak ve  `Profile` bileşeninin ve tüm alt öğelerinin [state'lerini sıfırlar](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key). Artık profiller arasında gezinirken `comment` alanı otomatik olarak temizlenecektir
 
-Note that in this example, only the outer `ProfilePage` component is exported and visible to other files in the project. Components rendering `ProfilePage` don't need to pass the key to it: they pass `userId` as a regular prop. The fact `ProfilePage` passes it as a `key` to the inner `Profile` component is an implementation detail.
+Bu örnekte, sadece dış `ProfilePage` bileşeninin dışa aktarıldığını ve projedeki diğer dosyalarda gözüktüğünü unutmayın. `ProfilePage`'i oluşturan bileşenlerin `ProfilePage`e key iletmesi gerekmez: Bunun yerine `userId`'yi normal bir prop olarak iletirler. `ProfilePage` bileşeninin içindeki `Profile` bileşenine key olarak iletilmesi, bir uygulama ayrıntısıdır.
 
-### Adjusting some state when a prop changes {/*adjusting-some-state-when-a-prop-changes*/}
+### Bir prop değişikliğinde bazı state'lerin ayarlanması {/*adjusting-some-state-when-a-prop-changes*/}
 
-Sometimes, you might want to reset or adjust a part of the state on a prop change, but not all of it.
+Bazen, bir prop değişikliğinde state'in bazı noktalarını sıfırlamak veya ayarlamak isteyebilirsiniz.
 
-This `List` component receives a list of `items` as a prop, and maintains the selected item in the `selection` state variable. You want to reset the `selection` to `null` whenever the `items` prop receives a different array:
+Buradaki `List` bileşeni props olarak `items` listesini alır, ve seçilen öğeyi `selection` state değişkeni içerisinde tutar. `items` propsu farklı bir array aldığında `selection` state değişkenini sıfırlamak isteyebilirsiniz:
 
 ```js {5-8}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selection, setSelection] = useState(null);
 
-  // 🔴 Avoid: Adjusting state on prop change in an Effect
+  // 🔴 Bir Efekt içerisinde prop değişikliğinde state ayarlamaktan kaçının.
   useEffect(() => {
     setSelection(null);
   }, [items]);
@@ -215,16 +218,16 @@ function List({ items }) {
 }
 ```
 
-This, too, is not ideal. Every time the `items` change, the `List` and its child components will render with a stale `selection` value at first. Then React will update the DOM and run the Effects. Finally, the `setSelection(null)` call will cause another re-render of the `List` and its child components, restarting this whole process again.
+Bu ideal bir çözüm değildir. `items` her değiştiğinde, `List` ve onun child bileşeni ilk başta eski `selection` değeri ile render olacaktır. Daha sonra React DOM'u güncelleyecek ve Efektleri çalıştıracaktır. Son olarak, `setSelection(null)` çağrısı `List` ve onun child bileşenlerinin yeniden render işlemine sebebiyet verecektir, ve bu süreci yeniden başlatacaktır.
 
-Start by deleting the Effect. Instead, adjust the state directly during rendering:
+Öncelikle, Efekti silin. Bunun yerine state'i doğrudan render işlemi sırasında ayarlayın:
 
 ```js {5-11}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selection, setSelection] = useState(null);
 
-  // Better: Adjust the state while rendering
+  // Render işlemi sırasında state ayarlamak daha iyi bir yöntemdir.
   const [prevItems, setPrevItems] = useState(items);
   if (items !== prevItems) {
     setPrevItems(items);
@@ -234,31 +237,31 @@ function List({ items }) {
 }
 ```
 
-[Storing information from previous renders](/reference/react/useState#storing-information-from-previous-renders) like this can be hard to understand, but it’s better than updating the same state in an Effect. In the above example, `setSelection` is called directly during a render. React will re-render the `List` *immediately* after it exits with a `return` statement. React has not rendered the `List` children or updated the DOM yet, so this lets the `List` children skip rendering the stale `selection` value.
+Bu şekilde, [önceki render işlemindeki bilgiyi depolamak](/reference/react/useState#storing-information-from-previous-renders) anlamayı zorlaştırabilir, ama bu aynı state'i bir Efekt içerisinde güncellemekten daha iyidir. Yukarıdaki örnekte, `setSelection` direkt olarak render işlemi sırasında çağrılır. React `List` bileşenini `return` ifadesi ile *hemen* çıkış yaptıktan sonra yeniden render edecektir. React henüz `List` bileşeninin childrenını render etmemiştir veya DOM henüz güncellenmemiştir, bu sebeple, `List` bileşen childrenları eski `selection` değeri ile render edilir.
 
-When you update a component during rendering, React throws away the returned JSX and immediately retries rendering. To avoid very slow cascading retries, React only lets you update the *same* component's state during a render. If you update another component's state during a render, you'll see an error. A condition like `items !== prevItems` is necessary to avoid loops. You may adjust state like this, but any other side effects (like changing the DOM or setting timeouts) should stay in event handlers or Effects to [keep components pure.](/learn/keeping-components-pure)
+Bir bileşeni render işlemi sırasında güncellediğinizde, React, döndürülen JSX'i yoksayar ve hemen yeniden render işlemini tekrarlar. Çok yavaş kademeli yeniden denemeleri önlemek için, React render işlemi sırasında size sadece *aynı* bileşenin state'ini güncellemenize izin verir. Eğer, render işlemi sırasında başka bir bileşenin state'ini güncellerseniz, bir hata ile karşılaşırsınız. Döngülerden kaçınmak için `items !== prevItems` gibi bir koşul ifadesi gereklidir. State'i bı şekilde ayarlayabilirsiniz, ama diğer yan efektler (DOM'u değiştirmek veya zaman aşımlarını ayarlamak gibi) [bileşeni saf tutmak](/learn/keeping-components-pure) için olay yöneticilerinin veya Efektlerin içerisinde kalmalıdır.
 
-**Although this pattern is more efficient than an Effect, most components shouldn't need it either.** No matter how you do it, adjusting state based on props or other state makes your data flow more difficult to understand and debug. Always check whether you can [reset all state with a key](#resetting-all-state-when-a-prop-changes) or [calculate everything during rendering](#updating-state-based-on-props-or-state) instead. For example, instead of storing (and resetting) the selected *item*, you can store the selected *item ID:*
+**Bu kalıp bir Efektten daha verimli olmasına rağmen, çoğu bileşenin buna da ihtiyacı olmamalıdır.** Ne şekilde yaparsanız yapın, state'i props'lara veya diğer state'lere göre ayarlamak, veri akışınızı anlamanızı ve hata ayıklama yapmanızı daha zor hale getirecektir. Her zaman [tüm state'i bir key ile sıfırlamayı](#resetting-all-state-when-a-prop-changes) veya [herşeyi render işlemi sırasında hesaplamayı](#updating-state-based-on-props-or-state) yapıp yapamayacağınızı kontrol edin. Örneğin, seçilen *itemi* depolamak (ve sıfırlamak) yerine, seçili *item kimliğini* saklayabilirsiniz: 
 
 ```js {3-5}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  // ✅ Best: Calculate everything during rendering
+  // ✅ Herşeyi render işlemi sırasında hesaplamak en iyi yöntemdir.
   const selection = items.find(item => item.id === selectedId) ?? null;
   // ...
 }
 ```
 
-Now there is no need to "adjust" the state at all. If the item with the selected ID is in the list, it remains selected. If it's not, the `selection` calculated during rendering will be `null` because no matching item was found. This behavior is different, but arguably better because most changes to `items` preserve the selection.
+Şuan burada state'i "ayarlamanıza" ihtiyacınız yoktur. Seçilmiş ID'li item liste içerisindeyse, seçili olarak kalır. Eğer değilse, `selection` render işlemi esnasında eşleşen item bulunmadığından dolayı `null` olarak hesaplanacaktır. Bu davranış farklıdır, ama `items` seçilen değişiklikleri koruduğu için kısmen daha iyidir. 
 
-### Sharing logic between event handlers {/*sharing-logic-between-event-handlers*/}
+### Olay yöneticileri arasında mantık paylaşmak {/*sharing-logic-between-event-handlers*/}
 
-Let's say you have a product page with two buttons (Buy and Checkout) that both let you buy that product. You want to show a notification whenever the user puts the product in the cart. Calling `showNotification()` in both buttons' click handlers feels repetitive so you might be tempted to place this logic in an Effect:
+İstediğiniz ürünü satın alamınıza izin veren iki butonlu (Satın Al ve Öde) bir ürün sayfanızın olduğunu varsayalım. Kullanıcı ürünü sepete eklediğinde bir bildirim göstermek istiyorsunuz. Her iki butonun `showNotification()` fonksiyonunu çağırması tekrar eden bir işlem gibi gelebilir, bu yüzden bu mantığı bir Efekte yerleştirmek isteyebilirsiniz:
 
 ```js {2-7}
 function ProductPage({ product, addToCart }) {
-  // 🔴 Avoid: Event-specific logic inside an Effect
+  // 🔴 Bir Efekt içerisinde olaya-özgü bir mantık bulundurmaktan kaçının. 
   useEffect(() => {
     if (product.isInCart) {
       showNotification(`Added ${product.name} to the shopping cart!`);
@@ -277,13 +280,13 @@ function ProductPage({ product, addToCart }) {
 }
 ```
 
-This Effect is unnecessary. It will also most likely cause bugs. For example, let's say that your app "remembers" the shopping cart between the page reloads. If you add a product to the cart once and refresh the page, the notification will appear again. It will keep appearing every time you refresh that product's page. This is because `product.isInCart` will already be `true` on the page load, so the Effect above will call `showNotification()`.
+Bu Efekt gereksizdir. Muhtemelen bir soruna sebebiyet verecektir. Örneğin, uygulamanızın sayfa yeniden yüklemelerinde alışveris sepetinizi "hatırladığını" varsayalım. Sepetinize ürünü birkez ekleyip ardından sayfayı yeniden yüklerseniz, bildirim tekrar görünecektir. Bu ürünün sayfasını her yenilediğinizde gözükmeye devam edecektir. Bunun sebebi, `product.isInCart` değeri sayfa yüklenirken zaten `true` olmasıdır, bu sebeple Efekt tekrar `showNotification()` fonksiyonunu çağıracaktır. 
 
-**When you're not sure whether some code should be in an Effect or in an event handler, ask yourself *why* this code needs to run. Use Effects only for code that should run *because* the component was displayed to the user.** In this example, the notification should appear because the user *pressed the button*, not because the page was displayed! Delete the Effect and put the shared logic into a function called from both event handlers:
+**Bazı kod bloklarının bir Efekt veya olay yöneticisi içerisinde olup olmaması gerektiğinden emin değilseniz, bu kod bloğunun *neden* çalışması gerektiğini kendinize sorun. Sadece bileşenin kullanıcıya gösterildiği durumlarda çalışması gereken kodlar için Efektleri kullanın.** Bu örnekte, bildirim sayfa görüntülendiği için değil, kullanıcı *butona bastığı* için gözükmelidir! Efekti silin ve paylaşılan mantığı, her iki olay işleyicisinden çağrılan bir fonksiyon içine yerleştirin:
 
 ```js {2-6,9,13}
 function ProductPage({ product, addToCart }) {
-  // ✅ Good: Event-specific logic is called from event handlers
+  // ✅ Olaya özgü mantık, olay işleyicilerden çağrılması daha iyi bir seçimdir.
   function buyProduct() {
     addToCart(product);
     showNotification(`Added ${product.name} to the shopping cart!`);
@@ -301,23 +304,23 @@ function ProductPage({ product, addToCart }) {
 }
 ```
 
-This both removes the unnecessary Effect and fixes the bug.
+Bu hem gereksiz Efektleri ortadan kaldırır hem de hataları düzeltir.
 
-### Sending a POST request {/*sending-a-post-request*/}
+### Bir POST isteği göndermek {/*sending-a-post-request*/}
 
-This `Form` component sends two kinds of POST requests. It sends an analytics event when it mounts. When you fill in the form and click the Submit button, it will send a POST request to the `/api/register` endpoint:
+Bu `Form` bileşeni iki tür POST isteği gönderir. Bileşen yüklendiğinde bir analitik olay gönderir. Formu doldurup Gönder butonuna tıkladığınızda ise `/api/register` noktasına bir POST isteği gönderir.
 
 ```js {5-8,10-16}
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // ✅ Good: This logic should run because the component was displayed
+  // ✅ Bileşen görüntülendiği için bu mantık çalışır.
   useEffect(() => {
     post('/analytics/event', { eventName: 'visit_form' });
   }, []);
 
-  // 🔴 Avoid: Event-specific logic inside an Effect
+  // 🔴 Bir Efekt içerisinde olaya-özgü bir mantık bulundurmaktan kaçının.
   const [jsonToSubmit, setJsonToSubmit] = useState(null);
   useEffect(() => {
     if (jsonToSubmit !== null) {
@@ -333,36 +336,36 @@ function Form() {
 }
 ```
 
-Let's apply the same criteria as in the example before.
+Bir önceki örnekte olduğu gibi aynı kriterleri uygulayalım.
 
-The analytics POST request should remain in an Effect. This is because the _reason_ to send the analytics event is that the form was displayed. (It would fire twice in development, but [see here](/learn/synchronizing-with-effects#sending-analytics) for how to deal with that.)
+Analitik POST isteği bir Efekt içerisinde kalmalıdır. Çünkü, analitik olayının gönderilme _nedeni_ formun görünür olmasıdır. (Bu geliştirme aşamasında iki kez tetiklenebilir, ancak bu durumla başa çıkmak için [buraya bakabilirsiniz](/learn/synchronizing-with-effects#sending-analytics).)
 
-However, the `/api/register` POST request is not caused by the form being _displayed_. You only want to send the request at one specific moment in time: when the user presses the button. It should only ever happen _on that particular interaction_. Delete the second Effect and move that POST request into the event handler:
+Ancak, `/api/register` POST isteği form _görünür_ olduğu için gönderilmez. Bu isteği yalnızca kullanıcı butona bastığı anda göndermek istersiniz. Bu işlem sadece _belirli etkileşimlerde_ meydana gelmelidir. İkinci Efekti silin ve POST isteğini olay yöneticisine taşıyın:
 
 ```js {12-13}
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // ✅ Good: This logic runs because the component was displayed
+  // ✅ Bileşen görüntülendiği için bu mantık çalışır.
   useEffect(() => {
     post('/analytics/event', { eventName: 'visit_form' });
   }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    // ✅ Good: Event-specific logic is in the event handler
+    // ✅ Olaya özgü mantık, olay işleyicilerden çağrılması daha iyi bir seçimdir.
     post('/api/register', { firstName, lastName });
   }
   // ...
 }
 ```
 
-When you choose whether to put some logic into an event handler or an Effect, the main question you need to answer is _what kind of logic_ it is from the user's perspective. If this logic is caused by a particular interaction, keep it in the event handler. If it's caused by the user _seeing_ the component on the screen, keep it in the Effect.
+Bir olay yöneticisi veya bir Efekt içine hangi mantığı yerleştireceğinizi seçerken, kullanıcının perspektifinden _hangi tür mantık_ olduğu sorusuna cevap bulmanız gerekmektedir. Eğer bu mantık belirli bir etkileşimden kaynaklanıyorsa, olay işleyicisinde tutun. Eğer kullanıcının bileşeni ekran üzerinde _görme_ eylemiyle ilişkili ise, o zaman Efekt içinde tutun.
 
-### Chains of computations {/*chains-of-computations*/}
+### Hesaplama zincirleri {/*chains-of-computations*/}
 
-Sometimes you might feel tempted to chain Effects that each adjust a piece of state based on other state:
+Bazen her biri diğer bir state'e dayalı olarak state'in bir parçasını ayarlayan Efektleri zincirlemek isteyebilirsiniz.
 
 ```js {7-29}
 function Game() {
@@ -371,7 +374,7 @@ function Game() {
   const [round, setRound] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  // 🔴 Avoid: Chains of Effects that adjust the state solely to trigger each other
+  // 🔴 State'i yalnızca birbirini tetikleyecek şekilde ayarlayan Etki Zincirlerinden kaçının.
   useEffect(() => {
     if (card !== null && card.gold) {
       setGoldCardCount(c => c + 1);
@@ -406,13 +409,11 @@ function Game() {
   // ...
 ```
 
-There are two problems with this code.
+Bir problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun childrenlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt bileşen ağacında üç gereksiz yeniden render işlemi gerçekleşir.
 
-One problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+Hatta hızlı olmasa bile, kodunuz geliştikçe yeni gereksinimlere uygun olmayan durumlarla karşılaşabilirsiniz. Örneğin, oyun hareketlerinin geçmişini adım adım izlemek için bir yol eklemek istediğinizi düşünün. Her bir state değişkenini geçmişteki bir değere güncelleyerek bunu yapardınız. Ancak, `card` state'ini geçmişteki bir değere ayarlamak, Efekt zincirini tekrar tetikler ve gösterilen verileri değiştirir. Bu tür bir kod genellikle sert ve kırılgan olabilir.
 
-Even if it weren't slow, as your code evolves, you will run into cases where the "chain" you wrote doesn't fit the new requirements. Imagine you are adding a way to step through the history of the game moves. You'd do it by updating each state variable to a value from the past. However, setting the `card` state to a value from the past would trigger the Effect chain again and change the data you're showing. Such code is often rigid and fragile.
-
-In this case, it's better to calculate what you can during rendering, and adjust the state in the event handler:
+Bu durumda, yapabileceğiniz hesaplamaları render işlemi sırasında gerçekleştirmek ve durumu olay yöneticisinde ayarlamak daha iyidir.
 
 ```js {6-7,14-26}
 function Game() {
@@ -420,7 +421,7 @@ function Game() {
   const [goldCardCount, setGoldCardCount] = useState(0);
   const [round, setRound] = useState(1);
 
-  // ✅ Calculate what you can during rendering
+  // ✅ Mümkün olduğunca render işlemi sırasında hesaplama yapın.
   const isGameOver = round > 5;
 
   function handlePlaceCard(nextCard) {
@@ -428,7 +429,7 @@ function Game() {
       throw Error('Game already ended.');
     }
 
-    // ✅ Calculate all the next state in the event handler
+    // ✅ Sonraki state'i olay yöneticisi içerisinde hesaplayın
     setCard(nextCard);
     if (nextCard.gold) {
       if (goldCardCount <= 3) {
@@ -446,21 +447,20 @@ function Game() {
   // ...
 ```
 
-This is a lot more efficient. Also, if you implement a way to view game history, now you will be able to set each state variable to a move from the past without triggering the Effect chain that adjusts every other value. If you need to reuse logic between several event handlers, you can [extract a function](#sharing-logic-between-event-handlers) and call it from those handlers.
+Bu yöntem çok daha verimli olacaktır. Ayrıca, oyun geçmişini görüntülemek için bir yol uygularsanız, artık her bir state değişkenini diğer tüm değerleri ayarlayan Efekt zincirini tetiklemeden geçmişten bir hamleye ayarlayabileceksiniz. Birden fazla olay yöneticisi arasında mantığı yeniden kullanmanız gerekiyorsa, [bir fonksiyon çıkarabilir](#sharing-logic-between-event-handlers) ve bu yönticilerden çağırabilirsiniz.
 
-Remember that inside event handlers, [state behaves like a snapshot.](/learn/state-as-a-snapshot) For example, even after you call `setRound(round + 1)`, the `round` variable will reflect the value at the time the user clicked the button. If you need to use the next value for calculations, define it manually like `const nextRound = round + 1`.
+Olay yöneticilerinin içinde, [durum bir anlık görüntü gibi davranır](/learn/state-as-a-snapshot). Örneğin, `setRound(round + 1)` çağrıldıktan sonra bile, `round` değişkeni kullanıcının butona bastığı anda sahip olduğu değeri yansıtır. Hesaplamalar için bir sonraki değeri kullanmanız gerekiyorsa, `const nextRound = round + 1` gibi manuel olarak tanımlama yapmalısınız.
 
-In some cases, you *can't* calculate the next state directly in the event handler. For example, imagine a form with multiple dropdowns where the options of the next dropdown depend on the selected value of the previous dropdown. Then, a chain of Effects is appropriate because you are synchronizing with network.
-
-### Initializing the application {/*initializing-the-application*/}
+Bazı durumlarda, bir sonraki state'i bir olay yöneticisi içerisinden direkt olarak *hesaplayamazsınız*. Örneğin, birbirine bağlı çoklu açılır menülerin bulunduğu bir form düşünelim. Bir sonraki açılır menünün seçilen değeri önceki açılır menünün seçilen değerine bağlıdır. Bu durumda, bir Efekt zinciri uygun olabilir çünkü ağ bağlantısı ile senkronizasyon yapmanız gerekmektedir.
+### Uygulamayı başlatma {/*initializing-the-application*/}
 
 Some logic should only run once when the app loads.
 
-You might be tempted to place it in an Effect in the top-level component:
+Bu işlemi genellikle üst-seviye bileşendeki bir Efekt içine yerleştirmek isteyebilirsiniz.
 
 ```js {2-6}
 function App() {
-  // 🔴 Avoid: Effects with logic that should only ever run once
+  // 🔴 Yalnızca bir kez çalışması gereken mantığa sahip olan Efektlerden kaçının.
   useEffect(() => {
     loadDataFromLocalStorage();
     checkAuthToken();
@@ -469,9 +469,9 @@ function App() {
 }
 ```
 
-However, you'll quickly discover that it [runs twice in development.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) This can cause issues--for example, maybe it invalidates the authentication token because the function wasn't designed to be called twice. In general, your components should be resilient to being remounted. This includes your top-level `App` component.
+Ancak, bu işlemin [geliştirme ortamında iki kere çalıştırıldığını](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) keşfedeceksiniz. Bu durum sorunlara neden olabilir--örneğin, fonksiyonun iki kez çağrılması düşünülmeden tasarlandığı için kimlik doğrulama tokeni geçersiz hale gelebilir. Genel olarak, bileşenleriniz yeniden yerleştirilmeye karşı dayanıklı olmalıdır. Bu, üst-seviye `App` bileşeniniz için de geçerlidir.
 
-Although it may not ever get remounted in practice in production, following the same constraints in all components makes it easier to move and reuse code. If some logic must run *once per app load* rather than *once per component mount*, add a top-level variable to track whether it has already executed:
+Üretim ortamında pratikte yeniden monte edilmese bile, tüm bileşenlerde aynı kısıtlamalara uymak, kodun taşınmasını ve yeniden kullanılmasını kolaylaştırır. Eğer belirli bir mantığın *bileşen başına bir kez değil*, *uygulama yüklemesi başına bir kez çalışması* gerekiyorsa, bu durumu takip etmek için bir üst-seviye değişken ekleyebilirsiniz.
 
 ```js {1,5-6,10}
 let didInit = false;
@@ -480,7 +480,7 @@ function App() {
   useEffect(() => {
     if (!didInit) {
       didInit = true;
-      // ✅ Only runs once per app load
+      // ✅ Uygulama her yüklendiğinde yalnızca bir kez çalışır.
       loadDataFromLocalStorage();
       checkAuthToken();
     }
@@ -489,11 +489,11 @@ function App() {
 }
 ```
 
-You can also run it during module initialization and before the app renders:
+Modül başlatma sırasında ve uygulama render edilmeden önce de çalıştırabilirsiniz:
 
 ```js {1,5}
-if (typeof window !== 'undefined') { // Check if we're running in the browser.
-   // ✅ Only runs once per app load
+if (typeof window !== 'undefined') { // Tarayıcıda çalışıp çalışmadığınızı kontrol edin.
+   // ✅ Uygulama her yüklendiğinde yalnızca bir kez çalışır
   checkAuthToken();
   loadDataFromLocalStorage();
 }
@@ -503,17 +503,17 @@ function App() {
 }
 ```
 
-Code at the top level runs once when your component is imported--even if it doesn't end up being rendered. To avoid slowdown or surprising behavior when importing arbitrary components, don't overuse this pattern. Keep app-wide initialization logic to root component modules like `App.js` or in your application's entry point.
+Bileşeninizi içe aktardığınızda, bileşenin sonunda render edilmezse bile üst seviyedeki kod bir kez çalışır. Rastgele bileşenler içe aktarılırken yavaşlama veya beklenmeyen davranışlardan kaçınmak için bu yöntemi aşırı kullanmamaya özen gösterin. Uygulama genelindeki başlatma mantığınızı, `App.js` gibi kök bileşen modüllerinde veya uygulamanızın giriş noktasında tutun.
 
-### Notifying parent components about state changes {/*notifying-parent-components-about-state-changes*/}
+### Parent bileşenlerini state değişiklikleri hakkında bilgilendirmek {/*notifying-parent-components-about-state-changes*/}
 
-Let's say you're writing a `Toggle` component with an internal `isOn` state which can be either `true` or `false`. There are a few different ways to toggle it (by clicking or dragging). You want to notify the parent component whenever the `Toggle` internal state changes, so you expose an `onChange` event and call it from an Effect:
+`isOn` state'i `true` veya `false` değerlerini alabilen bir `Toggle` bileşeni yazdığınızı düşünelim. Geçiş efektini sağlaması için birkaç farklı yol vardır (tıklayarak veya sürükleyerek). `Toggle` dahili durumu her değiştiğinde parent bileşene bildirimde bulunmak istiyorsunuz, böylece bir `onChange` olayını bir Efektten çağırıyorsunuz:
 
 ```js {4-7}
 function Toggle({ onChange }) {
   const [isOn, setIsOn] = useState(false);
 
-  // 🔴 Avoid: The onChange handler runs too late
+  // 🔴 onChange işleyicisi çok geç çalıştırılmasından kaçının.
   useEffect(() => {
     onChange(isOn);
   }, [isOn, onChange])
@@ -534,16 +534,16 @@ function Toggle({ onChange }) {
 }
 ```
 
-Like earlier, this is not ideal. The `Toggle` updates its state first, and React updates the screen. Then React runs the Effect, which calls the `onChange` function passed from a parent component. Now the parent component will update its own state, starting another render pass. It would be better to do everything in a single pass.
+Daha önce olduğu gibi, bu ideal değil. İlk olarak `Toggle` kendi state'ini günceller, ve React ekranı günceller. Ardından React, parent bileşenden iletilen `onChange` fonksiyonunu  çağıran Effect'i çalıştırır. Şimdi parent bileşen, başka bir render geçişi başlatarak kendi state'ini güncelleyecektir. Her şeyi tek geçişte yapmak daha iyi olur.
 
-Delete the Effect and instead update the state of *both* components within the same event handler:
+Efekti silin ve bunun yerine aynı olay yöneticisi içindeki *her iki* bileşenin durumunu güncelleyin:
 
 ```js {5-7,11,16,18}
 function Toggle({ onChange }) {
   const [isOn, setIsOn] = useState(false);
 
   function updateToggle(nextIsOn) {
-    // ✅ Good: Perform all updates during the event that caused them
+    // ✅ Tüm güncellemeleri onları tetikleyen olay sırasında gerçekleştirin.
     setIsOn(nextIsOn);
     onChange(nextIsOn);
   }
@@ -564,12 +564,12 @@ function Toggle({ onChange }) {
 }
 ```
 
-With this approach, both the `Toggle` component and its parent component update their state during the event. React [batches updates](/learn/queueing-a-series-of-state-updates) from different components together, so there will only be one render pass.
+Bu yaklaşımla, hem `Toggle` bileşeni hem de onun parent bileşeni, olay sırasında state değişkenlerini günceller. React farklı bileşenlerden [güncellemeleri toplu olarak](/learn/queuing-a-series-of-state-updates) gerçekleştirir, böylece yalnızca bir render geçişi olacaktır.
 
-You might also be able to remove the state altogether, and instead receive `isOn` from the parent component:
+Ayrıca state'i tamamen kaldırabilir ve bunun yerine parent bileşenden `isOn` değerini alabilirsiniz:
 
 ```js {1,2}
-// ✅ Also good: the component is fully controlled by its parent
+// ✅ Also good: the component is fully controlled by its parent Bileşenin, kendi parent bileşeni tarafından kontrol edilmesi daha iyidir
 function Toggle({ isOn, onChange }) {
   function handleClick() {
     onChange(!isOn);
@@ -587,11 +587,11 @@ function Toggle({ isOn, onChange }) {
 }
 ```
 
-["Lifting state up"](/learn/sharing-state-between-components) lets the parent component fully control the `Toggle` by toggling the parent's own state. This means the parent component will have to contain more logic, but there will be less state overall to worry about. Whenever you try to keep two different state variables synchronized, try lifting state up instead!
+["State'i yukarı taşımak"](/learn/sharing-state-between-components) parent bileşenin kendi state'ini değiştirerek, parent bileşenin `Toggle`'ı tamamen kontrol etmesine olanak tanır. Bu, parent bileşenin daha fazla mantık içermesi gerektiği anlamına gelir, ancak genel olarak endişelenmeniz gereken daha az durum olur. Farklı iki state değişkenini senkronize tutmaya çalıştığınızda, bunun yerine state'i yukarı taşımaya çalışın!
 
-### Passing data to the parent {/*passing-data-to-the-parent*/}
+### Parent'a veri aktarma {/*passing-data-to-the-parent*/}
 
-This `Child` component fetches some data and then passes it to the `Parent` component in an Effect:
+Bu `Child` bileşeni bazı verileri çeker ve ardından `Parent` bileşenine bir Efekt içerisinde bu veriyi aktarır: 
 
 ```js {9-14}
 function Parent() {
@@ -602,7 +602,7 @@ function Parent() {
 
 function Child({ onFetched }) {
   const data = useSomeAPI();
-  // 🔴 Avoid: Passing data to the parent in an Effect
+  // 🔴  Verileri bir Efekt içinde parent bileşene iletmekten kaçının.
   useEffect(() => {
     if (data) {
       onFetched(data);
@@ -612,13 +612,13 @@ function Child({ onFetched }) {
 }
 ```
 
-In React, data flows from the parent components to their children. When you see something wrong on the screen, you can trace where the information comes from by going up the component chain until you find which component passes the wrong prop or has the wrong state. When child components update the state of their parent components in Effects, the data flow becomes very difficult to trace. Since both the child and the parent need the same data, let the parent component fetch that data, and *pass it down* to the child instead:
+React içerisinde, veri akışı parent bileşenlerinin children'larına doğru akar. Ekranda yanlış bir şey gördüğünüzde, yanlış bilgiyi nereden aldığınızı bulmak için bileşen hiyerarşisini yukarı doğru takip edebilirsiniz. Yanlış prop ileten veya yanlış state'e sahip olan bileşeni bulana kadar bileşen zincirinde yukarı doğru ilerleyebilirsiniz. Bu şekilde, sorunun kaynağını tespit edebilir ve düzeltmeler yapabilirsiniz. Child bileşenler, parent bileşenlerinin state'ini Efektler içerisinde güncellediği durumlarda, veri akışını takip etmek zorlaşabilir. Parent ve child bileşeninin aynı veriye ihtiyacı olduğunda, parent bileşeninin ihtiyaç duyduğunuz veriyi çekmesini sağlayın ve child bileşenlerine doğru *veriyi aşağıya iletin*: 
 
 ```js {4-5}
 function Parent() {
   const data = useSomeAPI();
   // ...
-  // ✅ Good: Passing data down to the child
+  // ✅ Veriyi aşağı doğru childrenlara iletmek daha iyidir.
   return <Child data={data} />;
 }
 
@@ -628,14 +628,15 @@ function Child({ data }) {
 ```
 
 This is simpler and keeps the data flow predictable: the data flows down from the parent to the child.
+: veri akışı 
 
-### Subscribing to an external store {/*subscribing-to-an-external-store*/}
+### Harici veri depolarını takip etme {/*subscribing-to-an-external-store*/}
 
-Sometimes, your components may need to subscribe to some data outside of the React state. This data could be from a third-party library or a built-in browser API. Since this data can change without React's knowledge, you need to manually subscribe your components to it. This is often done with an Effect, for example:
+Bazen bileşeninizin, React state dışındaki bazı verileri takip etmesi gerekebilir. Bu veriler, 3.parti bir kütüphaneden veya yerleşik tarayıcı API'leri olabilir. Bu veriler, React'ın bilgisi olmadan değişebileceğinden, manuel olarak bu verileri takip etmeniz gerekmektedir. Bu genellikle bir Efekt ile yapılır, örneğin:
 
 ```js {2-17}
 function useOnlineStatus() {
-  // Not ideal: Manual store subscription in an Effect
+  // Bir Efekt içinde manuel veri deposu takip edilmesi ideal değildir.
   const [isOnline, setIsOnline] = useState(true);
   useEffect(() => {
     function updateState() {
@@ -660,9 +661,9 @@ function ChatIndicator() {
 }
 ```
 
-Here, the component subscribes to an external data store (in this case, the browser `navigator.onLine` API). Since this API does not exist on the server (so it can't be used for the initial HTML), initially the state is set to `true`. Whenever the value of that data store changes in the browser, the component updates its state.
+Bu örnekte, bileşen harici bir veri deposunu (burada, tarayıcının `navigator.onLine` API'sini) takip eder. Bu API sunucuda mevcut olmamasından dolayı (bu sebeple, başlangıç HTML'i için kullanılamaz), başlangıçta state `true` olarak ayarlanacaktır. Tarayıcı içerisindeki veri deposunun değeri her değiştiğinde, bileşen state'ini günceller.
 
-Although it's common to use Effects for this, React has a purpose-built Hook for subscribing to an external store that is preferred instead. Delete the Effect and replace it with a call to [`useSyncExternalStore`](/reference/react/useSyncExternalStore):
+Bu olay için Efektler kullanmak yaygın olsa da, React'in tercih edilen şekilde kullanılan harici bir veri deposunu takip etmek için özel olarak tasarlanmış bir Hook'u bulunmaktadır.  Efekti silin ve [`useSyncExternalStore`](/reference/react/useSyncExternalStore) ile değiştirin:
 
 ```js {11-16}
 function subscribe(callback) {
@@ -675,11 +676,11 @@ function subscribe(callback) {
 }
 
 function useOnlineStatus() {
-  // ✅ Good: Subscribing to an external store with a built-in Hook
+  // ✅ Harici veri depolarını yerleşik Hooklar ile takip etmek daha iyidir.
   return useSyncExternalStore(
-    subscribe, // React won't resubscribe for as long as you pass the same function
-    () => navigator.onLine, // How to get the value on the client
-    () => true // How to get the value on the server
+    subscribe, // React, aynı fonksiyonu geçtiğin sürece yeniden takip etmeyecek
+    () => navigator.onLine, // İstemcideki değer bu şekilde alınır
+    () => true // Sunucudaki değer bu şekilde alınır
   );
 }
 
@@ -689,11 +690,11 @@ function ChatIndicator() {
 }
 ```
 
-This approach is less error-prone than manually syncing mutable data to React state with an Effect. Typically, you'll write a custom Hook like `useOnlineStatus()` above so that you don't need to repeat this code in the individual components. [Read more about subscribing to external stores from React components.](/reference/react/useSyncExternalStore)
+Bu yaklaşım, bir Efekt ile değiştirilebilir React state'ini manuel olarak senkronize etme işlemine göre daha az hataya sebep olur. Genellikle, yukarıdaki `useOnlineStatus()` gibi özelleştrilmiş bir Hook yazacağınızdan dolayı, ayrı ayrı her bileşende bu işlemi tekrar etmenize gerek yoktur. [React bileşenlerinden harici veri depolarını takip etme hakkında daha fazla bilgi edinebilirsiniz.](/reference/react/useSyncExternalStore)
 
-### Fetching data {/*fetching-data*/}
+### Veri çekme {/*fetching-data*/}
 
-Many apps use Effects to kick off data fetching. It is quite common to write a data fetching Effect like this:
+Birçok uygulama veri çekme işlemi için Efektleri kullanır. Şu şekilde veri çekme Efekti yazmak oldukça yaygındır:
 
 ```js {5-10}
 function SearchResults({ query }) {
@@ -701,7 +702,7 @@ function SearchResults({ query }) {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    // 🔴 Avoid: Fetching without cleanup logic
+    // 🔴 Temizleme mantığı olmadan veri çekmekten kaçının.
     fetchResults(query, page).then(json => {
       setResults(json);
     });
@@ -714,15 +715,15 @@ function SearchResults({ query }) {
 }
 ```
 
-You *don't* need to move this fetch to an event handler.
+Bu veri çekme işlemini bir olay yöneticisine taşımanıza gerek *yoktur*.
 
-This might seem like a contradiction with the earlier examples where you needed to put the logic into the event handlers! However, consider that it's not *the typing event* that's the main reason to fetch. Search inputs are often prepopulated from the URL, and the user might navigate Back and Forward without touching the input.
+Bu, daha önceki örneklerle çelişkili gibi görünebilir, çünkü mantığı olay yöneticilerine koymak gerekiyordu! Bununla birlikte, düşünün ki veri çekmenin ana neden *yazma olayı* değildir. Arama inputları genellikle URL'den önceden doldurulur ve kullanıcı, inputa dokunmadan Back ve Forward butonlarını kullanarak gezinebilir.
 
-It doesn't matter where `page` and `query` come from. While this component is visible, you want to keep `results` [synchronized](/learn/synchronizing-with-effects) with data from the network for the current `page` and `query`. This is why it's an Effect.
+`page` ve `query`'nin nereden geldiğini önemli değildir. Bu bileşen görünürken, mevcut `page` ve `query` değerlerine göre ağdaki verilerle `results`'ı [senkronize](/learn/synchronizing-with-effects) etmek istersiniz. Bu nedenle, bunu bir Efekt olarak kullanırsınız.
 
-However, the code above has a bug. Imagine you type `"hello"` fast. Then the `query` will change from `"h"`, to `"he"`, `"hel"`, `"hell"`, and `"hello"`. This will kick off separate fetches, but there is no guarantee about which order the responses will arrive in. For example, the `"hell"` response may arrive *after* the `"hello"` response. Since it will call `setResults()` last, you will be displaying the wrong search results. This is called a ["race condition"](https://en.wikipedia.org/wiki/Race_condition): two different requests "raced" against each other and came in a different order than you expected.
+Ancak, yukarıdaki kodda bir hata bulunmaktadır. Hızlıca `"hello"` yazdığınızı hayal edin. Ardından `query` değeri `"h"`'den, `"he"`, `"hel"`, `"hell"` ve `"hello"` şeklinde değişecektir. Bu ayrı ayrı veri çekme işlemleri başlatacaktır, ancak yanıtların hangi sırayla geleceği konusunda garanti verilmemektedir. Örneğin, `"hell"` yanıtı `"hello"` yanıtından sonra gelebilir. `setResults()` çağrısı en son yapıldığından dolayı, yanlış arama sonuçlarını görüntülemiş olacaksınız. Buna ["race condition"](https://en.wikipedia.org/wiki/Race_condition) denir: İki farklı istek birbirleriyle "yarıştı" ve beklediğinizden farklı bir sırayla geldi. 
 
-**To fix the race condition, you need to [add a cleanup function](/learn/synchronizing-with-effects#fetching-data) to ignore stale responses:**
+**Race condition sorununu düzeltmek, eski yanıtları görmezden gelmek için  [bir temizleme fonksiyonu eklemeniz](/learn/synchronizing-with-effects#fetching-data) gerekmektedir:**
 
 ```js {5,7,9,11-13}
 function SearchResults({ query }) {
@@ -747,13 +748,13 @@ function SearchResults({ query }) {
 }
 ```
 
-This ensures that when your Effect fetches data, all responses except the last requested one will be ignored.
+Bu, Efektiniz veri çektiğinde, en son istenen isteğin haricindeki tüm yanıtların görmezden gelinmesini sağlar.
 
-Handling race conditions is not the only difficulty with implementing data fetching. You might also want to think about caching responses (so that the user can click Back and see the previous screen instantly), how to fetch data on the server (so that the initial server-rendered HTML contains the fetched content instead of a spinner), and how to avoid network waterfalls (so that a child can fetch data without waiting for every parent).
+Race conditionları yönetmek, veri çekme işlemini uygularken karşılaşılan tek zorluk değildir. Ayrıca yanıtların önbelleğe alınması (kullanıcının Back butonuna tıkladığında önceki ekranı anında görebilmesi için), sunucuda veri çekme işleminin nasıl gerçekleştirileceği (ilk sunucu tarafından oluşturulan HTML'in spinner yerine çekilen içeriği içermesi için) ve ağ gecikmelerinden kaçınma yöntemleri (bir alt bileşenin her üst bileşenin tamamlanmasını beklemeksizin veri çekme işlemi yapabilmesi) gibi düşüncelerde bulunmanız gerekebilir.
 
-**These issues apply to any UI library, not just React. Solving them is not trivial, which is why modern [frameworks](/learn/start-a-new-react-project#production-grade-react-frameworks) provide more efficient built-in data fetching mechanisms than fetching data in Effects.**
+**Bu sorunlar sadece React için değil, herhangi bir UI kütüphanesi için geçerlidir. Bunları çözmek kolay değildir, bu yüzden modern [frameworkler](/learn/start-a-new-react-project#production-grade-react-frameworks) verileri Efektlerin içerisinden çekmek yerine daha verimli yerleşik veri çekme mekanizmaları sunar.**
 
-If you don't use a framework (and don't want to build your own) but would like to make data fetching from Effects more ergonomic, consider extracting your fetching logic into a custom Hook like in this example:
+Eğer bir framework kullanmadıysanız (ve kendiniz oluşturmak istemiyorsanız) ama Efektlerden veri çekme işlemini daha kolay şekilde yapmak istiyorsanız, kendi veri çekme mantığınızı bu örnekteki gibi özel bir Hook'a çevirin:
 
 ```js {4}
 function SearchResults({ query }) {
@@ -786,30 +787,30 @@ function useData(url) {
 }
 ```
 
-You'll likely also want to add some logic for error handling and to track whether the content is loading. You can build a Hook like this yourself or use one of the many solutions already available in the React ecosystem. **Although this alone won't be as efficient as using a framework's built-in data fetching mechanism, moving the data fetching logic into a custom Hook will make it easier to adopt an efficient data fetching strategy later.**
+Muhtemelen hata yönetimi için bazı mantık ve içeriğin yüklenip yüklenmediğini takip etmek için bir mantık eklemek isteyebilirsiniz. Bu şekilde kendiniz bir Hook oluşturabilir veya React ekosisteminde mevcut olan birçok çözümden birini kullanabilirsiniz. **Bunun tek başına, bir framework'ün yerleşik veri çekme mekanizmasını kullanmak kadar verimli olmayabilir, ancak veri çekme mantığını özel bir Hook'a taşımak, daha sonra verimli bir veri çekme stratejisini benimsemeyi kolaylaştıracaktır.**
 
-In general, whenever you have to resort to writing Effects, keep an eye out for when you can extract a piece of functionality into a custom Hook with a more declarative and purpose-built API like `useData` above. The fewer raw `useEffect` calls you have in your components, the easier you will find to maintain your application.
+Genelde, ne zaman Efektleri yazmak zorunda kaldığınızda, `useData` gibi daha deklaratif ve amaç odaklı bir API'ye sahip olan özel bir Hook'a bir işlevselliği çıkarabileceğiniz durumları gözlemleyin. Bileşenlerinizde daha az sayıda `useEffect` çağrısı olduğunda, uygulamanızın bakımını daha rahat yapabileceksiniz. 
 
 <Recap>
 
-- If you can calculate something during render, you don't need an Effect.
-- To cache expensive calculations, add `useMemo` instead of `useEffect`.
-- To reset the state of an entire component tree, pass a different `key` to it.
-- To reset a particular bit of state in response to a prop change, set it during rendering.
-- Code that runs because a component was *displayed* should be in Effects, the rest should be in events.
-- If you need to update the state of several components, it's better to do it during a single event.
-- Whenever you try to synchronize state variables in different components, consider lifting state up.
-- You can fetch data with Effects, but you need to implement cleanup to avoid race conditions.
+- Eğer render işlemi sırasında hesaplama yapabiliyorsanız, bir Efekte ihtiyacınız yoktur.
+- Masraflı hesaplamaları önbelleğe almak için, `useEffect` yerine `useMemo` kullanın.
+- Bir bileşen ağacının durumunu sıfırlamak için ona farklı bir `key` iletin.
+- Bir özelliğin değişimi sonucunda belirli bir state'in sıfırlanması için, bunu render sırasında ayarlayın.
+- Bir bileşen görüntülendiğinde çalışan kod, Efektlerde olmalıdır, geri kalan kodlar ise olaylarda yer almalıdır.
+- Eğer birkaç bileşenin state'ini güncellemeniz gerekiyorsa, bunu tek bir olay anında yapmak daha iyidir.
+- Farklı bileşenlerdeki state değişkenlerini senkronize etmeye çalıştığınızda, state'i yukarı taşımayı düşünün. 
+- Veri çekmek için Effect'leri kullanabilirsiniz, ancak race conditionları önlemek için temizleme işlemini de uygulamanız gerekmektedir.
 
 </Recap>
 
 <Challenges>
 
-#### Transform data without Effects {/*transform-data-without-effects*/}
+#### Veriyi Efektler kullanmadan dönüştürün. {/*transform-data-without-effects*/}
 
-The `TodoList` below displays a list of todos. When the "Show only active todos" checkbox is ticked, completed todos are not displayed in the list. Regardless of which todos are visible, the footer displays the count of todos that are not yet completed.
+Aşağıdaki `TodoList` todoların bir listesini gösterir. "Show only active todos" checkbox'ı işaretlendiğinde, tamamlanmış todolar listede gösterilmez. Hangi todoların görünür olduğuna bakmaksızın, footer henüz tamamlanmayan todoların sayısını gösterir.
 
-Simplify this component by removing all the unnecessary state and Effects.
+Bu bileşeni tüm gereksiz state ve Efektleri ortadan kalırarak basitleştirin.
 
 <Sandpack>
 
@@ -909,15 +910,16 @@ input { margin-top: 10px; }
 
 <Hint>
 
-If you can calculate something during rendering, you don't need state or an Effect that updates it.
+Eğer bir şeyi render işlemi sırasında hesaplayabiliyorsanız, state veya güncelleme işlemi gerektiren bir Efekt 
+kullanmanıza gerek yoktur.
 
 </Hint>
 
 <Solution>
 
-There are only two essential pieces of state in this example: the list of `todos` and the `showActive` state variable which represents whether the checkbox is ticked. All of the other state variables are [redundant](/learn/choosing-the-state-structure#avoid-redundant-state) and can be calculated during rendering instead. This includes the `footer` which you can move directly into the surrounding JSX.
+Bu örnekte state'in sadece iki önemli parçası var: `todos` listesi ve checkbox'ın işaretlenip işaretlenmediğini temsil eden `showActive` state değişkenidir. Diğer tüm state değişkenleri [gereksiz](/learn/choosing-the-state-structure#avoid-redundant-state) ve render işlemi sırasında yeniden hesaplanabilir. Bu kısma `footer`da dahildir, bu kısmı doğrudan çevreleyen JSX içine taşıyabilirsiniz.
 
-Your result should end up looking like this:
+Sonucunuz şu şekilde gözükmeli:
 
 <Sandpack>
 
@@ -1002,15 +1004,15 @@ input { margin-top: 10px; }
 
 </Solution>
 
-#### Cache a calculation without Effects {/*cache-a-calculation-without-effects*/}
+#### Efektler olmadan bir hesaplamayı önbelleğe alın {/*cache-a-calculation-without-effects*/}
 
-In this example, filtering the todos was extracted into a separate function called `getVisibleTodos()`. This function contains a `console.log()` call inside of it which helps you notice when it's being called. Toggle "Show only active todos" and notice that it causes `getVisibleTodos()` to re-run. This is expected because visible todos change when you toggle which ones to display.
+Bu örnekte, todoların filtrelenmesi ayrı bir fonksiyon olan `getVisibleTodos()` içerisine taşındı. Bu fonksiyon içerisinde,sizin fonksiyonu ne zaman çağırdığınızı farketmenize yardımcı olması için bir `console.log()` çağrısı bulunur. "Show only active todos" seçeneğini değiştirin ve bunun `getVisibleTodos()` fonksiyonunun yeniden çalışmasına sebep olduğunu farkedeceksiniz. Bu beklenen bir durumdur, çünkü görünen todolar, hangilerini görüntüleyeceğinizi değiştirdiğinizde değişir.
 
-Your task is to remove the Effect that recomputes the `visibleTodos` list in the `TodoList` component. However, you need to make sure that `getVisibleTodos()` does *not* re-run (and so does not print any logs) when you type into the input.
+Göreviniz, `TodoList` bileşeni içerisindeki `visibleTodos` listesini yeniden hesaplayan Efekti ortadan kaldırmaktır. Ancak, input içerisine yazarken `getVisibleTodos()` fonksiyonunun tekrar *çalışmayacağından* (dolayısıyla herhangi bir log yazdırmayacağından) emin olmalısınız.
 
 <Hint>
 
-One solution is to add a `useMemo` call to cache the visible todos. There is also another, less obvious solution.
+Çözümlerden biri, görünür todoları önbelleğe almak için `useMemo` çağrısı ekleyin. Ayrıca, daha az göze çarpan çözüm de mevcuttur. 
 
 </Hint>
 
@@ -1096,7 +1098,7 @@ input { margin-top: 10px; }
 
 <Solution>
 
-Remove the state variable and the Effect, and instead add a `useMemo` call to cache the result of calling `getVisibleTodos()`:
+State değişkenini ve Efekti kaldırın, bunun yerine `getVisibleTodos()` çağrısının sonuçlarını önbelleğe alması için bir `useMemo` çağrısı ekleyin:
 
 <Sandpack>
 
@@ -1177,9 +1179,9 @@ input { margin-top: 10px; }
 
 </Sandpack>
 
-With this change, `getVisibleTodos()` will be called only if `todos` or `showActive` change. Typing into the input only changes the `text` state variable, so it does not trigger a call to `getVisibleTodos()`.
+Bu değişikliklerle, `getVisibleTodos()` sadece `todos` veya `showActive` değiştiğinde çağrılacaktır. Input içerisine yazmak sadece `text` state değişkenini değiştirir, dolayısıyla bu bir `getVisibleTodos()` çağrısını tetiklemez.
 
-There is also another solution which does not need `useMemo`. Since the `text` state variable can't possibly affect the list of todos, you can extract the `NewTodo` form into a separate component, and move the `text` state variable inside of it:
+`useMemo`'ya ihtiyaç duyulmayan bir başka çözüm de vardır. `text` state değişkeni todoları etkilemeyeceğinden, `NewTodo` formunu ayrı bir bileşene çıkarabilir, ve `text` state değişkenini bunun içerisine taşıyabilirsiniz;
 
 <Sandpack>
 
@@ -1266,15 +1268,15 @@ input { margin-top: 10px; }
 
 </Sandpack>
 
-This approach satisfies the requirements too. When you type into the input, only the `text` state variable updates. Since the `text` state variable is in the child `NewTodo` component, the parent `TodoList` component won't get re-rendered. This is why `getVisibleTodos()` doesn't get called when you type. (It would still be called if the `TodoList` re-renders for another reason.)
+Input içerisine yazdığınızda, sadece `text` state değişkeni güncellenir. `text` state değişkeni alt `NewTodo` bileşeninin içerisinde olduğundan, üst `TodoList` bileşeni yeniden render olmaz. Bu nedenle, siz yazmaya devam ederken `getVisibleTodos()` çağrılmaz. (`TodoList` bir başka nedenle yeniden render olduğunda `getVisibleTodos()` çağrılmaya devam edecektir.)
 
 </Solution>
 
-#### Reset state without Effects {/*reset-state-without-effects*/}
+#### Efektler olmadan state'i sıfırla {/*reset-state-without-effects*/}
 
-This `EditContact` component receives a contact object shaped like `{ id, name, email }` as the `savedContact` prop. Try editing the name and email input fields. When you press Save, the contact's button above the form updates to the edited name. When you press Reset, any pending changes in the form are discarded. Play around with this UI to get a feel for it.
+Bu `EditContact` bileşeni, `savedContact` propu olarak `{ id, name, email }` şeklindeki bir kişi nesnesini alır. İsim ve email input alanlarını düzenlemeyi deneyin. Save butonuna bastığınızda, formun üzerindeki kişinin butonu düzenlenen adla güncellenir. Reset düğmesine bastığınızda ise formdaki bekleyen değişiklikler iptal edilir. Bir fikir edinmek için bu kullanıcı arayüzü ile oynayın.
 
-When you select a contact with the buttons at the top, the form resets to reflect that contact's details. This is done with an Effect inside `EditContact.js`. Remove this Effect. Find another way to reset the form when `savedContact.id` changes.
+Üstteki butonlarla bir kişi seçtiğinizde, form kişinin detaylarına göre sıfırlanır. Bu `EditContact.js` içerisindeki bir Efekt ile yapılır. Bu Efekti kaldırın. `savedContact.id` değiştiğinde formu resetlemek için farklı bir yol bulun. 
 
 <Sandpack>
 
@@ -1432,13 +1434,13 @@ button {
 
 <Hint>
 
-It would be nice if there was a way to tell React that when `savedContact.id` is different, the `EditContact` form is conceptually a _different contact's form_ and should not preserve state. Do you recall any such way?
+React'a `savedContact.id` farklı olduğunda, `EditContact` formu kavramsal olarak _farklı  bir kullanıcının formu_ olduğunu ve state'i korumaması gerektiğini söylemenin bir yolu olsaydı güzel olurdu. Böyle bir yol hatırlıyor musun?
 
 </Hint>
 
 <Solution>
 
-Split the `EditContact` component in two. Move all the form state into the inner `EditForm` component. Export the outer `EditContact` component, and make it pass `savedContact.id` as the `key` to the inner `EditContact` component. As a result, the inner `EditForm` component resets all of the form state and recreates the DOM whenever you select a different contact.
+`EditContact` bileşenini iki parçaya ayırın. Bütün form state'ini iç `EditForm` bileşenine taşıyın. Dış `EditContact` bileşenini dışa aktarın, ve `savedContact.id`'yi iç `EditContact` bileşenine `key` olarak gönderilmesini sağlayın. Sonuç olarak, iç `EditForm` bileşeni bütün form state'ini sıfırlar ve farklı bir kişi seçtiğinizde DOM'u yeniden oluşturur.
 
 <Sandpack>
 
@@ -1600,17 +1602,17 @@ button {
 
 </Solution>
 
-#### Submit a form without Effects {/*submit-a-form-without-effects*/}
+#### Efektler olmadan bir form gönderin {/*submit-a-form-without-effects*/}
 
-This `Form` component lets you send a message to a friend. When you submit the form, the `showForm` state variable is set to `false`. This triggers an Effect calling `sendMessage(message)`, which sends the message (you can see it in the console). After the message is sent, you see a "Thank you" dialog with an "Open chat" button that lets you get back to the form.
+Bu `Form` bileşeni bir arkadaşınıza mesaj göndermenize izin verir. Formu gönderdiğinizde, `showForm` state değişkeni `false` olarak değişir. Bu `sendMessage(message)` adında  mesaj gönderen bir Efekt tetikler (mesajı konsolda görebilirsiniz). Mesaj gönderildikten sonra, forma geri dönmenizi sağlayan "Open chat" butonu olan bir "Thank you" iletişim kutusunu görürsünüz.
 
-Your app's users are sending way too many messages. To make chatting a little bit more difficult, you've decided to show the "Thank you" dialog *first* rather than the form. Change the `showForm` state variable to initialize to `false` instead of `true`. As soon as you make that change, the console will show that an empty message was sent. Something in this logic is wrong!
+Uygulamanızın kullanıcıları çok fazla mesaj gönderiyor. Sohbet etmeyi biraz daha zorlaştırmak için, form yerine *önce* "Thank you" iletişim kutusunu göstermeye karar verdiniz. Bunun için `showForm` state değişkenini `true` yerine `false` ile başlatacak şekilde değiştirin. Bu değişikliği yaptığınız anda konsol boş bir mesajın gönderildiğini gösterecektir. Bu mantıkta bir şeyler yanlış!
 
-What's the root cause of this problem? And how can you fix it?
+Bu hatanın ana kaynağı nedir? Ve bunu nasıl düzeltebilirsiniz?
 
 <Hint>
 
-Should the message be sent _because_ the user saw the "Thank you" dialog? Or is it the other way around?
+Kullanıcının "Thank you" iletişim kutusunu görmesi _nedeniyle_ mesaj gönderilmeli mi? Yoksa tam tersi mi geçerlidir?
 
 </Hint>
 
@@ -1675,7 +1677,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 <Solution>
 
-The `showForm` state variable determines whether to show the form or the "Thank you" dialog. However, you aren't sending the message because the "Thank you" dialog was _displayed_. You want to send the message because the user has _submitted the form._ Delete the misleading Effect and move the `sendMessage` call inside the `handleSubmit` event handler:
+`showForm` state değişkeni formun veya "Thank you" iletişim kutusunun gösteriliğ gösterilmeyeceğine karar verir. Ancak "Thank you" iletişim kutusu _görüntülendiği_ için mesajı gönderemiyorsunuz. Kullanıcının  _formu göndermesi_ nedeniyle mesajı göndermek istiyorsunuz. Yanıltıcı Efekti silin ve `sendMessage` çağrısını `handleSubmit` olay yöneticisi içerisine taşıyın:
 
 <Sandpack>
 
@@ -1731,7 +1733,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-Notice how in this version, only _submitting the form_ (which is an event) causes the message to be sent. It works equally well regardless of whether `showForm` is initially set to `true` or `false`. (Set it to `false` and notice no extra console messages.)
+Bu versiyonda, sadece _formun gönderilmesi_ (bu bir olaydır) durumunda mesaj gönderilir. `showForm` başlangıçta `true` veya `false` olarak ayarlanmış olsa da işleyiş aynı şekilde eşit derecede iyi çalışır. (`showForm`'u `false` olarak değiştirin ve fazladan konsol mesajı olmadığını farkedin.)
 
 </Solution>
 
