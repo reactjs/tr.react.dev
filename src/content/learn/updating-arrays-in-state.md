@@ -1,52 +1,52 @@
 ---
-title: Updating Arrays in State
+title: State İçerisindeki Dizileri Güncelleme
 ---
 
 <Intro>
 
-Arrays are mutable in JavaScript, but you should treat them as immutable when you store them in state. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array.
+Diziler JavaScript'te değiştirilebilirdir, ancak bunları state içinde depolarken değiştirilemez olarak ele almalısınız. Tıpkı nesnelerde olduğu gibi, state'te depolanan bir diziyi güncellemek istediğinizde yeni bir dizi oluşturmanız (veya var olanın bir kopyasını oluşturmanız) ve ardından yeni oluşturduğunuz diziyi kullanmak için state'i güncellemeniz gerekir.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to add, remove, or change items in an array in React state
-- How to update an object inside of an array
-- How to make array copying less repetitive with Immer
+- React state'indeki bir diziye öğeler nasıl eklenir, çıkarılır ya da değiştirilir
+- Dizi içindeki nesne nasıl güncellenir
+- Immer kullanarak dizi kopyalama işlemi daha az tekrarla nasıl yapılır
 
 </YouWillLearn>
 
-## Updating arrays without mutation {/*updating-arrays-without-mutation*/}
+## Dizileri değiştirmeden güncelleme {/*updating-arrays-without-mutation*/}
 
-In JavaScript, arrays are just another kind of object. [Like with objects](/learn/updating-objects-in-state), **you should treat arrays in React state as read-only.** This means that you shouldn't reassign items inside an array like `arr[0] = 'bird'`, and you also shouldn't use methods that mutate the array, such as `push()` and `pop()`.
+JavaScript'te diziler bir nesne türüdür. [Nesnelerde olduğu gibi](/learn/updating-objects-in-state), **React state'indeki dizileri salt okunur olarak görmelisiniz.** Bu, `arr[0] = 'bird'` şeklinde bir dizi içindeki öğeleri başka değerlere yeniden atamamanız, ayrıca `push()` ve `pop()` gibi dizileri mutasyona uğratan JavaScript metodlarını kullanmamanız gerektiği anlamına gelir.
 
-Instead, every time you want to update an array, you'll want to pass a *new* array to your state setting function. To do that, you can create a new array from the original array in your state by calling its non-mutating methods like `filter()` and `map()`. Then you can set your state to the resulting new array.
+Bu metodları kullanmak yerine, bir diziyi her güncellemek istediğinizde state setter fonksiyonunuza *yeni* bir dizi iletmelisiniz. Bunu yapmak için, `filter()` ve `map()` gibi diziyi mutasyona uğratmayan JavaScript metodlarını kullanarak orijinal diziden yeni bir dizi oluşturabilirsiniz. Ardından, state'inizi kopyaladığınız dizi olarak güncelleyebilirsiniz.
 
-Here is a reference table of common array operations. When dealing with arrays inside React state, you will need to avoid the methods in the left column, and instead prefer the methods in the right column:
+Aşağıda sık kullanılan dizi metodları tablo halinde gösterilmiştir. React state'indeki dizilerle çalışırken sol sütundaki metodları kullanmaktan kaçınarak sağ sütundaki metodları tercih etmelisiniz.
 
-|           | avoid (mutates the array)           | prefer (returns a new array)                                        |
+|           | kaçınılacaklar (diziyi mutasyona uğratır)           |  tercih edilecekler (yeni bir dizi döndürür)                                        |
 | --------- | ----------------------------------- | ------------------------------------------------------------------- |
-| adding    | `push`, `unshift`                   | `concat`, `[...arr]` spread syntax ([example](#adding-to-an-array)) |
-| removing  | `pop`, `shift`, `splice`            | `filter`, `slice` ([example](#removing-from-an-array))              |
-| replacing | `splice`, `arr[i] = ...` assignment | `map` ([example](#replacing-items-in-an-array))                     |
-| sorting   | `reverse`, `sort`                   | copy the array first ([example](#making-other-changes-to-an-array)) |
+| eklemek    | `push`, `unshift`                   | `concat`, `[...arr]` spread sözdizimi ([örnek](#adding-to-an-array)) |
+| çıkartmak  | `pop`, `shift`, `splice`            | `filter`, `slice` ([örnek](#removing-from-an-array))              |
+| değiştirmek | `splice`, `arr[i] = ...` ataması | `map` ([örnek](#replacing-items-in-an-array))                     |
+| sıralamak   | `reverse`, `sort`                   | ilk önce diziyi kopyalayın ([örnek](#making-other-changes-to-an-array)) |
 
-Alternatively, you can [use Immer](#write-concise-update-logic-with-immer) which lets you use methods from both columns.
+Alternatif olarak, her iki sütundaki metodları kullanmanıza izin veren [Immer'ı] (#write-concise-update-logic-with-immer) tercih edebilirsiniz.
 
 <Pitfall>
 
-Unfortunately, [`slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) and [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) are named similarly but are very different:
+Ne yazık ki, [`slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) ve [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) metodları isim olarak benzeseler bile birbirlerinden çok farklıdırlar.
 
-* `slice` lets you copy an array or a part of it.
-* `splice` **mutates** the array (to insert or delete items).
+* `slice` metodu dizinin bir parçasını veya tamamını kopyalamınızı sağlar.
+* `splice` diziyi **mutasyona uğratır** (diziye yeni öğe eklemek ya da var olanı çıkartmak için kullanılır).
 
-In React, you will be using `slice` (no `p`!) a lot more often because you don't want to mutate objects or arrays in state. [Updating Objects](/learn/updating-objects-in-state) explains what mutation is and why it's not recommended for state.
+React'te, `slice` (`p` yok!) metodunu daha sık kullanacaksınız çünkü state'teki nesneleri veya dizileri mutasyona uğratmak istemezsiniz. [Nesneleri Güncelleme](/learn/updating-objects-in-state) sayfasında mutasyon nedir ve state için neden kullanılmamalıdır öğrenebilirsiniz.
 
 </Pitfall>
 
-### Adding to an array {/*adding-to-an-array*/}
+### Diziye öğe eklemek {/*adding-to-an-array*/}
 
-`push()` will mutate an array, which you don't want:
+`push()` metodu diziyi mutasyona uğratacaktır, ki bunu istemezsiniz:
 
 <Sandpack>
 
@@ -61,7 +61,7 @@ export default function List() {
 
   return (
     <>
-      <h1>Inspiring sculptors:</h1>
+      <h1>İlham verici heykeltıraşlar:</h1>
       <input
         value={name}
         onChange={e => setName(e.target.value)}
@@ -71,7 +71,7 @@ export default function List() {
           id: nextId++,
           name: name,
         });
-      }}>Add</button>
+      }}>Ekle</button>
       <ul>
         {artists.map(artist => (
           <li key={artist.id}>{artist.name}</li>
@@ -88,18 +88,18 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-Instead, create a *new* array which contains the existing items *and* a new item at the end. There are multiple ways to do this, but the easiest one is to use the `...` [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals) syntax:
+Bunun yerine, mevcut öğeleri *ve* son eleman olarak yeni öğeyi içeren *yeni* diziyi oluşturun. Bunu yapmanın birden çok yolu vardır ancak en kolay yol `...` [dizi spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals) sözdizimini kullanmaktır:
 
 ```js
-setArtists( // Replace the state
-  [ // with a new array
-    ...artists, // that contains all the old items
-    { id: nextId++, name: name } // and one new item at the end
+setArtists( // State'i yeni bir dizi 
+  [ // ile değiştirin
+    ...artists, // bu eski öğelerin tümünü
+    { id: nextId++, name: name } // ve sona eklenecek yeni öğeyi içerir.
   ]
 );
 ```
 
-Now it works correctly:
+Şimdi doğru şekilde çalışmakta:
 
 <Sandpack>
 
@@ -114,7 +114,7 @@ export default function List() {
 
   return (
     <>
-      <h1>Inspiring sculptors:</h1>
+      <h1>İlham verici heykeltıraşlar:</h1>
       <input
         value={name}
         onChange={e => setName(e.target.value)}
@@ -124,7 +124,7 @@ export default function List() {
           ...artists,
           { id: nextId++, name: name }
         ]);
-      }}>Add</button>
+      }}>Ekle</button>
       <ul>
         {artists.map(artist => (
           <li key={artist.id}>{artist.name}</li>
@@ -141,20 +141,20 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-The array spread syntax also lets you prepend an item by placing it *before* the original `...artists`:
+Dizi spread sözdizimi yeni öğeyi orijinal `...artists`'den *önceye* yerleştirerek dizinin başına eklemenizi de sağlar:
 
 ```js
 setArtists([
   { id: nextId++, name: name },
-  ...artists // Put old items at the end
+  ...artists // Eski öğeleri dizinin sonuna yerleştir
 ]);
 ```
 
-In this way, spread can do the job of both `push()` by adding to the end of an array and `unshift()` by adding to the beginning of an array. Try it in the sandbox above!
+Bu şekilde, spread sözdizimi `push()` (öğeyi dizinin sonuna eklemek) ve `unshift()` (öğeyi dizinin başına eklemek) metodlarının görevini yapabilir. Yukarıdaki sandbox'ta deneyebilirsiniz!
 
-### Removing from an array {/*removing-from-an-array*/}
+### Diziden öğe çıkartma {/*removing-from-an-array*/}
 
-The easiest way to remove an item from an array is to *filter it out*. In other words, you will produce a new array that will not contain that item. To do this, use the `filter` method, for example:
+Diziden bir öğeyi çıkartmanın en kolay yolu o öğeyi *filtrelemektir.* Bir başka deyişle, o öğeyi içermeyen yeni bir dizi oluşturmaktır. Bunu yapmak için `filter` metodunu kullanabilirsiniz. Örneğin:
 
 <Sandpack>
 
@@ -174,7 +174,7 @@ export default function List() {
 
   return (
     <>
-      <h1>Inspiring sculptors:</h1>
+      <h1>İlham verici heykeltıraşlar:</h1>
       <ul>
         {artists.map(artist => (
           <li key={artist.id}>
@@ -186,7 +186,7 @@ export default function List() {
                 )
               );
             }}>
-              Delete
+              Sil
             </button>
           </li>
         ))}
@@ -198,7 +198,7 @@ export default function List() {
 
 </Sandpack>
 
-Click the "Delete" button a few times, and look at its click handler.
+"Sil" butonuna birkaç kez tıklayın ve tıklama yöneticisine bakın.
 
 ```js
 setArtists(
@@ -206,13 +206,13 @@ setArtists(
 );
 ```
 
-Here, `artists.filter(a => a.id !== artist.id)` means "create an array that consists of those `artists` whose IDs are different from `artist.id`". In other words, each artist's "Delete" button will filter _that_ artist out of the array, and then request a re-render with the resulting array. Note that `filter` does not modify the original array.
+Burada `artists.filter(a => a.id !== artist.id)` ifadesi "`artist` dizisini kullanarak ID'leri `artist.id`'den farklı olan öğelerle yeni bir dizi oluştur" anlamına gelmektedir. Diğer bir deyişle, her bir artist'e karşılık gelen "Sil" butonu o artist'i diziden filtreleyecek ve nihai dizi ile yeniden render isteği gönderecektir. `filter` metodunun orijinal diziyi değiştirmediğini unutmayın.
 
-### Transforming an array {/*transforming-an-array*/}
+### Diziyi dönüştürme {/*transforming-an-array*/}
 
-If you want to change some or all items of the array, you can use `map()` to create a **new** array. The function you will pass to `map` can decide what to do with each item, based on its data or its index (or both).
+Dizideki bazı ya da tüm öğeleri değiştirmek isterseniz **yeni** bir dizi oluşturmak için `map()` metodunu kullanabilirsiniz. `map`'e ileteceğiniz fonksiyon, verisine veya indeksine (veya her ikisine) bağlı olarak her bir öğeyle ne yapacağınızı belirler.
 
-In this example, an array holds coordinates of two circles and a square. When you press the button, it moves only the circles down by 50 pixels. It does this by producing a new array of data using `map()`:
+Bu örnekte dizi, iki daire ve bir karenin koordinatlarını içermektedir. Butona tıkladığınız zaman sadece daireler 50 piksel aşağı hareket etmektedir. Bunu, `map()` metodunu kullanıp yeni bir veri dizisi oluşturarak yapar:
 
 <Sandpack>
 
@@ -233,24 +233,24 @@ export default function ShapeEditor() {
   function handleClick() {
     const nextShapes = shapes.map(shape => {
       if (shape.type === 'square') {
-        // No change
+        // Değişiklik yok
         return shape;
       } else {
-        // Return a new circle 50px below
+        // 50 piksel aşağıda yeni bir daire döndürür
         return {
           ...shape,
           y: shape.y + 50,
         };
       }
     });
-    // Re-render with the new array
+    // Yeni dizi ile yeniden render et
     setShapes(nextShapes);
   }
 
   return (
     <>
       <button onClick={handleClick}>
-        Move circles down!
+        Daireleri aşağı hareket ettir!
       </button>
       {shapes.map(shape => (
         <div
@@ -278,11 +278,11 @@ body { height: 300px; }
 
 </Sandpack>
 
-### Replacing items in an array {/*replacing-items-in-an-array*/}
+### Dizideki öğeleri değiştirme {/*replacing-items-in-an-array*/}
 
-It is particularly common to want to replace one or more items in an array. Assignments like `arr[0] = 'bird'` are mutating the original array, so instead you'll want to use `map` for this as well.
+Bir dizideki bir veya daha fazla öğeyi değiştirmek oldukça sık istenmektedir. `arr[0] = 'bird'` gibi atamalar yapmak orijinal diziyi mutasyona uğrattığı için burada da `map` metodunu kullanmak mantıklı olacaktır.
 
-To replace an item, create a new array with `map`. Inside your `map` call, you will receive the item index as the second argument. Use it to decide whether to return the original item (the first argument) or something else:
+Bir öğeyi değiştirmek için `map` ile yeni bir dizi oluşturun. `map` metodu içinde, ikinci argüman olarak öğenin indeksini alacaksınız. Bu indeksi orijinal öğeyi (fonksiyonun ilk argümanı) veya başka bir öğeyi döndürüp döndürmeyeceğinize karar vermek için kullanın:
 
 <Sandpack>
 
@@ -301,10 +301,10 @@ export default function CounterList() {
   function handleIncrementClick(index) {
     const nextCounters = counters.map((c, i) => {
       if (i === index) {
-        // Increment the clicked counter
+        // Tıklanan sayacı artır
         return c + 1;
       } else {
-        // The rest haven't changed
+        // Geri kalan değişmez
         return c;
       }
     });
@@ -332,11 +332,11 @@ button { margin: 5px; }
 
 </Sandpack>
 
-### Inserting into an array {/*inserting-into-an-array*/}
+### Dizide belli bir konuma öğe ekleme {/*inserting-into-an-array*/}
 
-Sometimes, you may want to insert an item at a particular position that's neither at the beginning nor at the end. To do this, you can use the `...` array spread syntax together with the `slice()` method. The `slice()` method lets you cut a "slice" of the array. To insert an item, you will create an array that spreads the slice _before_ the insertion point, then the new item, and then the rest of the original array.
+Bazen bir öğeyi dizinin başına ya da sonuna değil de belirli bir konuma eklemek isteyebilirsiniz. Bunu yapmak için, `...` dizi spread sözdizimini `slice()` metodu ile beraber kullanabilirsiniz. `slice()` metodu diziden bir "dilim (slice)" almanızı sağlar. Yeni öğeyi eklemek için, eklemek istediğiniz konumdan önceki dilimden spread sözdizimi ile yeni bir dizi oluşturacak, ardından yeni öğeyi ekleyecek ve son olarak da orijinal dizinin geri kalanını ekleyeceksiniz.
 
-In this example, the Insert button always inserts at the index `1`:
+Bu örnekte, Ekle butonu her zaman `1.` indekse ekler:
 
 <Sandpack>
 
@@ -357,13 +357,13 @@ export default function List() {
   );
 
   function handleClick() {
-    const insertAt = 1; // Could be any index
+    const insertAt = 1; // Herhangi bir indeks olabilir
     const nextArtists = [
-      // Items before the insertion point:
+      // Eklemek istediğiniz konumdan önceki öğeler:
       ...artists.slice(0, insertAt),
-      // New item:
+      // Yeni öğe:
       { id: nextId++, name: name },
-      // Items after the insertion point:
+      // Eklemek istediğiniz konumdan sonraki öğeler:
       ...artists.slice(insertAt)
     ];
     setArtists(nextArtists);
@@ -372,13 +372,13 @@ export default function List() {
 
   return (
     <>
-      <h1>Inspiring sculptors:</h1>
+      <h1>İlham verici heykeltıraşlar:</h1>
       <input
         value={name}
         onChange={e => setName(e.target.value)}
       />
       <button onClick={handleClick}>
-        Insert
+        Ekle
       </button>
       <ul>
         {artists.map(artist => (
@@ -396,13 +396,13 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-### Making other changes to an array {/*making-other-changes-to-an-array*/}
+### Dizide başka değişiklikler yapma {/*making-other-changes-to-an-array*/}
 
-There are some things you can't do with the spread syntax and non-mutating methods like `map()` and `filter()` alone. For example, you may want to reverse or sort an array. The JavaScript `reverse()` and `sort()` methods are mutating the original array, so you can't use them directly.
+Spread sözdizimi veya `map()` ve `filter()` gibi diziyi mutasyona uğratmayan metodlarla yapamayacağınız bazı şeyler vardır. Örneğin, bir diziyi sıralamak veya dizi öğelerini ters çevirmek isteyebilirsiniz. JavaScript'in `reverse()` ve `sort()` metodları orijinal diziyi değiştirir, bu nedenle doğrudan bu metodları kullanamazsınız.
 
-**However, you can copy the array first, and then make changes to it.**
+**Ancak, önce diziyi kopyalayabilir ve sonra o dizi üzerinde değişiklikler yapabilirsiniz.**
 
-For example:
+Örneğin:
 
 <Sandpack>
 
@@ -428,7 +428,7 @@ export default function List() {
   return (
     <>
       <button onClick={handleClick}>
-        Reverse
+        Ters Çevir
       </button>
       <ul>
         {list.map(artwork => (
@@ -442,25 +442,25 @@ export default function List() {
 
 </Sandpack>
 
-Here, you use the `[...list]` spread syntax to create a copy of the original array first. Now that you have a copy, you can use mutating methods like `nextList.reverse()` or `nextList.sort()`, or even assign individual items with `nextList[0] = "something"`.
+Burada `[...list]` spread sözdizimi kullanılarak orijinal dizinin bir kopyası oluşturulur. Artık bir kopyanız olduğuna göre `nextList.reverse()` ya da `nextList.sort()` gibi mutasyona sebep olan metodlar kullanabilir, hatta `nextList[0] = "something"` ile öğeleri tek tek yeni değerlerine atayabilirsiniz.
 
-However, **even if you copy an array, you can't mutate existing items _inside_ of it directly.** This is because copying is shallow--the new array will contain the same items as the original one. So if you modify an object inside the copied array, you are mutating the existing state. For example, code like this is a problem.
+Ancak, **bir diziyi kopyalasanız bile dizinin  _içindeki_ öğeleri doğrudan mutasyona uğratamazsınız.** Bunun nedeni yaptığınız kopyalamanın yüzeysel (shallow) olmasıdır. Yani yeni dizi, orijinal diziyle aynı öğeleri içermektedir. Dolayısıyla, kopyalanan dizinin içindeki bir nesneyi değiştirdiğiniz zaman mevcut state'i de mutasyona uğratmış olursunuz. Örneğin, aşağıdaki gibi bir kod sorunludur. 
 
 ```js
 const nextList = [...list];
-nextList[0].seen = true; // Problem: mutates list[0]
+nextList[0].seen = true; // Sorun: list[0]'ı mutasyona uğratır
 setList(nextList);
 ```
 
-Although `nextList` and `list` are two different arrays, **`nextList[0]` and `list[0]` point to the same object.** So by changing `nextList[0].seen`, you are also changing `list[0].seen`. This is a state mutation, which you should avoid! You can solve this issue in a similar way to [updating nested JavaScript objects](/learn/updating-objects-in-state#updating-a-nested-object)--by copying individual items you want to change instead of mutating them. Here's how.
+`nextList` ve `list` iki farklı dizi olmasına rağmen, **`nextList[0]` ve `list[0]` ifadeleri aynı nesneyi işaret eder.** Yani `nextList[0].seen` değerini değiştirirseniz, aynı zamanda `list[0].seen` değerini de değiştirmiş olursunuz. Bu, state'i mutasyona uğratmaktır ki bundan kaçınmalısınız! Bu sorunu [iç içe JavaScript nesnelerini güncelleme](/learn/updating-objects-in-state#updating-a-nested-object) yöntemine benzer şekilde, değiştirmek istediğiniz öğeleri mutasyona uğratmak yerine tek tek kopyalayarak çözebilirsiniz. Nasıl yapıldığını görelim.
 
-## Updating objects inside arrays {/*updating-objects-inside-arrays*/}
+## Dizideki nesneleri güncelleme {/*updating-objects-inside-arrays*/}
 
-Objects are not _really_ located "inside" arrays. They might appear to be "inside" in code, but each object in an array is a separate value, to which the array "points". This is why you need to be careful when changing nested fields like `list[0]`. Another person's artwork list may point to the same element of the array!
+Nesneler  _gerçekte_ dizilerin "içinde" yer almazlar. Yazdığınız kodda "içinde" gibi görünebilir ancak bir dizideki her nesne, dizinin "işaret ettiği" ayrı bir değerdir. Bu yüzden `list[0]` gibi iç içe ifadeleri değiştirirken dikkatli olmalısınız. Başka bir kişinin sanat eseri listesi (artwork list), dizinin aynı öğesine işaret edebilir!
 
-**When updating nested state, you need to create copies from the point where you want to update, and all the way up to the top level.** Let's see how this works.
+**İç içe geçmiş state'i güncellerken, güncellemek istediğiniz noktadan en üst düzeye kadar kopyalar oluşturmanız gerekir.** Şimdi bunun nasıl olduğunu görelim.
 
-In this example, two separate artwork lists have the same initial state. They are supposed to be isolated, but because of a mutation, their state is accidentally shared, and checking a box in one list affects the other list:
+Bu örnekte, iki farklı sanat eseri listesi aynı başlangıç state'ine sahiptir. Bu listelerin izole olmaları gerekirdi ancak bir mutasyon nedeniyle yanlışlıkla state'leri paylaşmaktadırlar ve listedeki bir kutuyu işaretlemek diğer listeyi de etkilemektedir:
 
 <Sandpack>
 
@@ -500,12 +500,12 @@ export default function BucketList() {
 
   return (
     <>
-      <h1>Art Bucket List</h1>
-      <h2>My list of art to see:</h2>
+      <h1>Görülecek Sanat Eserleri Listesi</h1>
+      <h2>Görmek istediğim eserler listesi:</h2>
       <ItemList
         artworks={myList}
         onToggle={handleToggleMyList} />
-      <h2>Your list of art to see:</h2>
+      <h2>Senin görmek istediğin eserler listesi:</h2>
       <ItemList
         artworks={yourList}
         onToggle={handleToggleYourList} />
@@ -540,34 +540,34 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-The problem is in code like this:
+Bu koddaki sorun şudur:
 
 ```js
 const myNextList = [...myList];
 const artwork = myNextList.find(a => a.id === artworkId);
-artwork.seen = nextSeen; // Problem: mutates an existing item
+artwork.seen = nextSeen; // Sorun: mevcut öğeyi mutasyona uğratır
 setMyList(myNextList);
 ```
 
-Although the `myNextList` array itself is new, the *items themselves* are the same as in the original `myList` array. So changing `artwork.seen` changes the *original* artwork item. That artwork item is also in `yourList`, which causes the bug. Bugs like this can be difficult to think about, but thankfully they disappear if you avoid mutating state.
+`myNextList` dizisi yeni bir dizi olmasına rağmen, *dizi içindeki öğeler* orijinal `myList` dizisindeki öğeler ile aynıdır. Yani `artwork.seen`'i değiştirmek *orijinal* sanat eserini de değiştirir. Bu sanat eseri `yourList` dizisinde de olduğu için hata burdan kaynaklanmaktadır. Bunun gibi hataları düşünmek zor olabilir, ancak state'i mutasyona uğratmaktan kaçınırsanız bu hatalar ortadan kalkacaktır.
 
-**You can use `map` to substitute an old item with its updated version without mutation.**
+**Eski bir öğeyi mutasyon olmadan güncellenmiş sürümüyle değiştirmek için `map` metodunu kullanabilirsiniz.**
 
 ```js
 setMyList(myList.map(artwork => {
   if (artwork.id === artworkId) {
-    // Create a *new* object with changes
+    // Değişikliklerle *yeni* bir nesne oluştur
     return { ...artwork, seen: nextSeen };
   } else {
-    // No changes
+    // Değişiklik yok
     return artwork;
   }
 }));
 ```
 
-Here, `...` is the object spread syntax used to [create a copy of an object.](/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax)
+Burada `...`, [bir nesnenin kopyasını oluşturmak](/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax) için kullanılan nesne spread sözdizimidir.
 
-With this approach, none of the existing state items are being mutated, and the bug is fixed:
+Bu yaklaşımla, mevcut state öğelerinin hiçbiri mutasyona uğramamış olur ve hata düzeltilir:
 
 <Sandpack>
 
@@ -590,10 +590,10 @@ export default function BucketList() {
   function handleToggleMyList(artworkId, nextSeen) {
     setMyList(myList.map(artwork => {
       if (artwork.id === artworkId) {
-        // Create a *new* object with changes
+        // Değişikliklerle *yeni* bir nesne oluştur
         return { ...artwork, seen: nextSeen };
       } else {
-        // No changes
+        // Değişiklik yok
         return artwork;
       }
     }));
@@ -602,10 +602,10 @@ export default function BucketList() {
   function handleToggleYourList(artworkId, nextSeen) {
     setYourList(yourList.map(artwork => {
       if (artwork.id === artworkId) {
-        // Create a *new* object with changes
+        // Değişikliklerle *yeni* bir nesne oluştur
         return { ...artwork, seen: nextSeen };
       } else {
-        // No changes
+        // Değişiklik yok
         return artwork;
       }
     }));
@@ -613,12 +613,12 @@ export default function BucketList() {
 
   return (
     <>
-      <h1>Art Bucket List</h1>
-      <h2>My list of art to see:</h2>
+      <h1>Görülecek Sanat Eserleri Listesi</h1>
+      <h2>Görmek istediğim eserler listesi:</h2>
       <ItemList
         artworks={myList}
         onToggle={handleToggleMyList} />
-      <h2>Your list of art to see:</h2>
+      <h2>Senin görmek istediğin eserler listesi:</h2>
       <ItemList
         artworks={yourList}
         onToggle={handleToggleYourList} />
@@ -653,16 +653,16 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-In general, **you should only mutate objects that you have just created.** If you were inserting a *new* artwork, you could mutate it, but if you're dealing with something that's already in state, you need to make a copy.
+Genel olarak, **yalnızca az önce oluşturduğunuz nesneleri mutasyona uğratmalısınız.** *Yeni* bir sanat eseri ekliyorsanız, onu mutasyona uğratabilirsiniz, ancak zaten state'te olan bir eserde bir değişiklik yapıyorsanız, bir kopya oluşturmanız gerekmektedir.
 
-### Write concise update logic with Immer {/*write-concise-update-logic-with-immer*/}
+### Immer kullanarak kısa ve öz güncelleme mantığı yazmak {/*write-concise-update-logic-with-immer*/}
 
-Updating nested arrays without mutation can get a little bit repetitive. [Just as with objects](/learn/updating-objects-in-state#write-concise-update-logic-with-immer):
+İç içe dizileri mutasyona uğratmadan güncellemek [tıpkı nesnelerde olduğu gibi](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) biraz tekrara binebilir:
 
-- Generally, you shouldn't need to update state more than a couple of levels deep. If your state objects are very deep, you might want to [restructure them differently](/learn/choosing-the-state-structure#avoid-deeply-nested-state) so that they are flat.
-- If you don't want to change your state structure, you might prefer to use [Immer](https://github.com/immerjs/use-immer), which lets you write using the convenient but mutating syntax and takes care of producing the copies for you.
+- Genel olarak, state'i birkaç seviyeden daha derine güncellemeniz gerekmez. Ancak state nesneleriniz çok derinse, düz (flat) olmaları için [onları farklı şekilde yeniden yapılandırmak](/learn/choosing-the-state-structure#avoid-deeply-nested-state) isteyebilirsiniz.
+- Eğer state yapınızı değiştirmek istemiyorsanız, [Immer](https://github.com/immerjs/use-immer) kullanmak isteyebilirsiniz. Immer, diziyi mutasyona uğratacak sözdizimlerini kullanmanıza izin vererek, kopyalama işlemlerini sizin yerinize kendisi yapar.
 
-Here is the Art Bucket List example rewritten with Immer:
+Immer ile yazılmış örneği aşağıda görebilirsiniz:
 
 <Sandpack>
 
@@ -705,12 +705,12 @@ export default function BucketList() {
 
   return (
     <>
-      <h1>Art Bucket List</h1>
-      <h2>My list of art to see:</h2>
+      <h1>Görülecek Sanat Eserleri Listesi</h1>
+      <h2>Görmek istediğim eserler listesi:</h2>
       <ItemList
         artworks={myList}
         onToggle={handleToggleMyList} />
-      <h2>Your list of art to see:</h2>
+      <h2>Senin görmek istediğin eserler listesi:</h2>
       <ItemList
         artworks={yourList}
         onToggle={handleToggleYourList} />
@@ -763,7 +763,7 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-Note how with Immer, **mutation like `artwork.seen = nextSeen` is now okay:**
+Immer ile **`artwork.seen = nextSeen` gibi mutasyonların artık sorun çıkarmadığına dikkat edin:**
 
 ```js
 updateMyTodos(draft => {
@@ -772,17 +772,17 @@ updateMyTodos(draft => {
 });
 ```
 
-This is because you're not mutating the _original_ state, but you're mutating a special `draft` object provided by Immer. Similarly, you can apply mutating methods like `push()` and `pop()` to the content of the `draft`.
+Bunun nedeni, _orijinal_ state'i mutasyona uğratmamanızdır. Burada Immer tarafından sağlanan özel bir `draft` nesnesini mutasyona uğratmaktayız. Benzer şekilde, `draft` nesnesine `push()` ve `pop()` gibi mutasyona neden olan metodları da uygulayabilirsiniz.
 
-Behind the scenes, Immer always constructs the next state from scratch according to the changes that you've done to the `draft`. This keeps your event handlers very concise without ever mutating state.
+Arka planda Immer, `draft`'a yaptığınız değişikliklere göre her zaman bir sonraki state'i sıfırdan oluşturur. Bu, olay yönetecilerinizi, state'i hiç mutasyona uğratmadan kısa ve öz olarak tutar.
 
 <Recap>
 
-- You can put arrays into state, but you can't change them.
-- Instead of mutating an array, create a *new* version of it, and update the state to it.
-- You can use the `[...arr, newItem]` array spread syntax to create arrays with new items.
-- You can use `filter()` and `map()` to create new arrays with filtered or transformed items.
-- You can use Immer to keep your code concise.
+- State'e dizi koyabilirsiniz ancak değiştiremezsiniz.
+- Bir diziyi mutasyona uğratmak yerine o dizinin *yeni* bir sürümünü oluşturun ve state'i buna göre güncelleyin.
+- `[...arr, newItem]` dizi spread sözdizimini kullanarak yeni öğelerle bir dizi oluşturabilirsiniz
+- `filter()` ve `map()` metodlarını kullanarak filtrelenmiş ya da dönüştürülmüş yeni diziler oluşturabilirsiniz.
+- Kodunuzu kısa ve öz tutmak için Immer'ı kullanabilirsiniz.
 
 </Recap>
 
@@ -790,9 +790,9 @@ Behind the scenes, Immer always constructs the next state from scratch according
 
 <Challenges>
 
-#### Update an item in the shopping cart {/*update-an-item-in-the-shopping-cart*/}
+#### Alışveriş sepetindeki ürünü güncelleyin {/*update-an-item-in-the-shopping-cart*/}
 
-Fill in the `handleIncreaseClick` logic so that pressing "+" increases the corresponding number:
+"+" butonuna tıklandığında ilgili sayının artması için `handleIncreaseClick` mantığını doldurun:
 
 <Sandpack>
 
@@ -850,7 +850,7 @@ button { margin: 5px; }
 
 <Solution>
 
-You can use the `map` function to create a new array, and then use the `...` object spread syntax to create a copy of the changed object for the new array:
+Yeni bir dizi oluşturmak için `map` fonksiyonunu kullanabilir ve ardından `...` nesne spread sözdizimini kullanarak yeni dizi için değiştirilmiş nesnenin bir kopyasını oluşturabilirsiniz:
 
 <Sandpack>
 
@@ -917,9 +917,9 @@ button { margin: 5px; }
 
 </Solution>
 
-#### Remove an item from the shopping cart {/*remove-an-item-from-the-shopping-cart*/}
+#### Alışveriş sepetinden bir ürünü çıkarın {/*remove-an-item-from-the-shopping-cart*/}
 
-This shopping cart has a working "+" button, but the "–" button doesn't do anything. You need to add an event handler to it so that pressing it decreases the `count` of the corresponding product. If you press "–" when the count is 1, the product should automatically get removed from the cart. Make sure it never shows 0.
+Bu alışveriş sepetinde "+" butonu çalışmaktadır ancak "–" butonu çalışmamaktadır. Bu butona bir olay yöneticisi ekleyerek ürüne karşılık gelen butona tıklandığında `count` sayacının azalmasını sağlayın. Eğer sayaç 1 ise "–" butonuna tıklandığında ürün sepetten otomatik olarak çıkarılmalıdır. Sayacın asla 0 göstermemesine dikkat edin.
 
 <Sandpack>
 
@@ -989,7 +989,7 @@ button { margin: 5px; }
 
 <Solution>
 
-You can first use `map` to produce a new array, and then `filter` to remove products with a `count` set to `0`:
+İlk önce `map` metodu ile yeni bir dizi oluşturabilir daha sonra `count` sayacı `0` olan ürünler `filter` metodu ile sepetten çıkartılabilir:
 
 <Sandpack>
 
@@ -1078,9 +1078,9 @@ button { margin: 5px; }
 
 </Solution>
 
-#### Fix the mutations using non-mutative methods {/*fix-the-mutations-using-non-mutative-methods*/}
+#### Mutasyona uğratmayan metodlar kullanarak mutasyonları düzeltin {/*fix-the-mutations-using-non-mutative-methods*/}
 
-In this example, all of the event handlers in `App.js` use mutation. As a result, editing and deleting todos doesn't work. Rewrite `handleAddTodo`, `handleChangeTodo`, and `handleDeleteTodo` to use the non-mutative methods:
+Bu örnekte, `App.js` dosyasındaki tüm olay yönetecileri dizileri mutasyona uğratacak metodlar kullanmaktadır. Bu nedenle, yapılacaklar listesindekileri düzenlemek ve silmek çalışmamaktadır. `handleAddTodo`, `handleChangeTodo`, ve `handleDeleteTodo` fonksiyonlarını mutasyona uğratmayan metodlar kullanarak tekrar yazın:
 
 <Sandpack>
 
@@ -1147,14 +1147,14 @@ export default function AddTodo({ onAddTodo }) {
   return (
     <>
       <input
-        placeholder="Add todo"
+        placeholder="Yapılacak bir şey ekleyin"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <button onClick={() => {
         setTitle('');
         onAddTodo(title);
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   )
 }
@@ -1198,7 +1198,7 @@ function Task({ todo, onChange, onDelete }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -1207,7 +1207,7 @@ function Task({ todo, onChange, onDelete }) {
       <>
         {todo.title}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -1226,7 +1226,7 @@ function Task({ todo, onChange, onDelete }) {
       />
       {todoContent}
       <button onClick={() => onDelete(todo.id)}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -1243,7 +1243,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution>
 
-In `handleAddTodo`, you can use the array spread syntax. In `handleChangeTodo`, you can create a new array with `map`. In `handleDeleteTodo`, you can create a new array with `filter`. Now the list works correctly:
+`handleAddTodo` fonksiyonunda dizi spread sözdizimini kullanabilirsiniz. `handleChangeTodo` fonksiyonunda `map` metodu ile yeni bir dizi oluşturabilirsiniz. `handleDeleteTodo` fonksiyonunda `filter` metodu ile yeni bir dizi oluşturabilirsiniz. Şimdi liste doğru bir şekilde çalışmaktadır:
 
 <Sandpack>
 
@@ -1314,14 +1314,14 @@ export default function AddTodo({ onAddTodo }) {
   return (
     <>
       <input
-        placeholder="Add todo"
+        placeholder="Yapılacak bir şey ekleyin"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <button onClick={() => {
         setTitle('');
         onAddTodo(title);
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   )
 }
@@ -1365,7 +1365,7 @@ function Task({ todo, onChange, onDelete }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -1374,7 +1374,7 @@ function Task({ todo, onChange, onDelete }) {
       <>
         {todo.title}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -1393,7 +1393,7 @@ function Task({ todo, onChange, onDelete }) {
       />
       {todoContent}
       <button onClick={() => onDelete(todo.id)}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -1411,9 +1411,9 @@ ul, li { margin: 0; padding: 0; }
 </Solution>
 
 
-#### Fix the mutations using Immer {/*fix-the-mutations-using-immer*/}
+#### Immer kullanarak mutasyonları düzeltin {/*fix-the-mutations-using-immer*/}
 
-This is the same example as in the previous challenge. This time, fix the mutations by using Immer. For your convenience, `useImmer` is already imported, so you need to change the `todos` state variable to use it.
+Bu örnekle bir önceki örnek aynıdır. Bu sefer Immer kullanarak mutasyonları düzeltin. Kolaylık sağlaması için, `useImmer` halihazırda içeri aktarılmıştır. Bunu kullanarak `todos` state değişkenini değiştirmeniz gerekir.
 
 <Sandpack>
 
@@ -1481,14 +1481,14 @@ export default function AddTodo({ onAddTodo }) {
   return (
     <>
       <input
-        placeholder="Add todo"
+        placeholder="Yapılacak bir şey ekleyin"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <button onClick={() => {
         setTitle('');
         onAddTodo(title);
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   )
 }
@@ -1532,7 +1532,7 @@ function Task({ todo, onChange, onDelete }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -1541,7 +1541,7 @@ function Task({ todo, onChange, onDelete }) {
       <>
         {todo.title}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -1560,7 +1560,7 @@ function Task({ todo, onChange, onDelete }) {
       />
       {todoContent}
       <button onClick={() => onDelete(todo.id)}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -1595,7 +1595,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution>
 
-With Immer, you can write code in the mutative fashion, as long as you're only mutating parts of the `draft` that Immer gives you. Here, all mutations are performed on the `draft` so the code works:
+Immer ile, Immer'ın size verdiği `draft`'ın yalnızca bazı kısımlarını mutasyona uğrattığınız sürece mutasyon metodlarını kullanabilirsiniz. Burada tüm mutasyonlar `draft` üzerinde gerçekleştirildiği için kod çalışmaktadır:
 
 <Sandpack>
 
@@ -1669,14 +1669,14 @@ export default function AddTodo({ onAddTodo }) {
   return (
     <>
       <input
-        placeholder="Add todo"
+        placeholder="Yapılacak bir şey ekleyin"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <button onClick={() => {
         setTitle('');
         onAddTodo(title);
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   )
 }
@@ -1720,7 +1720,7 @@ function Task({ todo, onChange, onDelete }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -1729,7 +1729,7 @@ function Task({ todo, onChange, onDelete }) {
       <>
         {todo.title}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -1748,7 +1748,7 @@ function Task({ todo, onChange, onDelete }) {
       />
       {todoContent}
       <button onClick={() => onDelete(todo.id)}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -1781,9 +1781,9 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-You can also mix and match the mutative and non-mutative approaches with Immer.
+Immer ile mutasyona uğratan ve uğratmayan yaklaşımları beraber kullanabilirsiniz.
 
-For example, in this version `handleAddTodo` is implemented by mutating the Immer `draft`, while `handleChangeTodo` and `handleDeleteTodo` use the non-mutative `map` and `filter` methods:
+Örneğin, burada `handleAddTodo` fonksiyonu Immer `draft`'ı mutasyona uğratacak şekilde yazılırken, `handleChangeTodo` ve `handleDeleteTodo` fonksiyonları mutasyona uğratmayan `map` ve `filter` metodları ile yazılmıştır:
 
 <Sandpack>
 
@@ -1854,14 +1854,14 @@ export default function AddTodo({ onAddTodo }) {
   return (
     <>
       <input
-        placeholder="Add todo"
+        placeholder="Yapılacak bir şey ekleyin"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <button onClick={() => {
         setTitle('');
         onAddTodo(title);
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   )
 }
@@ -1905,7 +1905,7 @@ function Task({ todo, onChange, onDelete }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -1914,7 +1914,7 @@ function Task({ todo, onChange, onDelete }) {
       <>
         {todo.title}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -1933,7 +1933,7 @@ function Task({ todo, onChange, onDelete }) {
       />
       {todoContent}
       <button onClick={() => onDelete(todo.id)}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -1966,7 +1966,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-With Immer, you can pick the style that feels the most natural for each separate case.
+Immer ile her bir durum için size en doğal gelen yöntemi seçebilirsiniz.
 
 </Solution>
 
