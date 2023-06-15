@@ -20,7 +20,7 @@ State değişkenleri okuma ve yazma yapabildiğiniz sıradan Javascript değişk
 
 ## State'i ayarlamak render'ı tetikler {/*setting-state-triggers-renders*/}
 
-Kullanıcı arayüzünün, bir tıklama gibi kullanıcı olayına doğrudan yanıt olarak değiştiğini düşünebilirsiniz. React içinde bu bu mental modelden biraz farklı çalışır. Bir önceki sayfada React’te bunu gördünüz. [Durumu değiştirmek bir yeniden render isteği oluşturur](/learn/render-and-commit#step-1-trigger-a-render) Bu bir arayüzün olaya tepki vermesi için *state’i güncellemeniz* gerektiği anlamına gelir.
+Kullanıcı arayüzünün, bir tıklama gibi kullanıcı olayına doğrudan yanıt olarak değiştiğini düşünebilirsiniz. React içinde bu bu mental modelden biraz farklı çalışır. Bir önceki sayfada React’te bunu gördünüz. [State'i değiştirmek bir yeniden render isteği oluşturur](/learn/render-and-commit#step-1-trigger-a-render) Bu bir arayüzün olaya tepki vermesi için *state’i güncellemeniz* gerektiği anlamına gelir.
 
 Bu örnekte “Gönder”e bastığınızda  `setIsSent(true)` React'e kullanıcı arayüzünü yeniden render etmesini söyler:
 
