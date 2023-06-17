@@ -4,7 +4,7 @@ title: 'Bir Efekte İhtiyacınız Olmayabilir'
 
 <Intro>
 
-Efektler, React paradigmasından bir kaçış yoludur. Bu kaçış yolları size React'tan "dışarı çıkmanıza" ve React ile alakalı olmayan React araçlarıyla, ağ veya tarayıcı DOM'u gibi bazı harici sistemlerle bileşenlerinizi senkronize etmenize izin verir. Eğer harici bir sistem yoksa (örneğin, bir bileşenin state'ini bazı props veya state değişikliklerinde güncellemek istiyorsanız), bir Efekte ihtiyacınız olmamalıdır. Gereksiz Efektleri ortadan kaldırmak kodunuzun takip edilmesini kolaylaştıracak, çalışmasını hızlandıracak ve hataya daha az açık hale getirecektir.
+Efektler, React paradigmasından bir kaçış yoludur. Bu kaçış yolları size React'ten "dışarı çıkmanıza" ve React ile alakalı olmayan React araçlarıyla, ağ veya tarayıcı DOM'u gibi bazı harici sistemlerle bileşenlerinizi senkronize etmenize izin verir. Eğer harici bir sistem yoksa (örneğin, bir bileşenin state'ini bazı props veya state değişikliklerinde güncellemek istiyorsanız), bir Efekte ihtiyacınız olmamalıdır. Gereksiz Efektleri ortadan kaldırmak kodunuzun takip edilmesini kolaylaştıracak, çalışmasını hızlandıracak ve hataya daha az açık hale getirecektir.
 
 </Intro>
 
@@ -14,8 +14,8 @@ Efektler, React paradigmasından bir kaçış yoludur. Bu kaçış yolları size
 * Masraflı hesaplamaları Efektler olmadan nasıl önbelleğe alabileceğinizi
 * Efektler olmadan bileşen state'ini nasıl ayarlayıp ve sıfırlayabileceğinizi
 * Olay yöneticileri arasında mantığı nasıl paylaşabileceğinizi
-* Hangi mantık olay yöneticilerine taşınmalı
-* Üst bileşenlere değişiklikler hakkında nasıl bildirimde bulunulacağını
+* Ne tür mantık kodlarının olay yöneticilerine taşınabileceğini
+* Üst elemanlara değişiklikler hakkında nasıl bildirimde bulunulacağını
 
 </YouWillLearn>
 
@@ -60,7 +60,7 @@ function Form() {
 }
 ```
 
-**Mevcut props veya state'den birşey hesaplanabilirken [hesaplanabilen değeri state içerisine koymayın.](/learn/choosing-the-state-structure#avoid-redundant-state) Bunun yerine, render işlemi sırasında hesaplayın.** Bu şekilde kodunuz hızlı (Ekstra "kademeli" güncellemelerden kaçınırsınız), daha basit (bazı kodları ortadan kaldırırsınız), ve daha az hata eğilimlidir (birbiriyle senkronize olmayan farklı state değişkenlerinin neden olduğu hatalardan kaçınırsınız). Bu yaklaşım size yeni geliyorsa, [React'ta düşünmek](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) state içerisine nelerin girmesi gerektiğini açıklar. 
+**Mevcut props veya state'ten birşey hesaplanabilirken [hesaplanabilen değeri state içerisine koymayın.](/learn/choosing-the-state-structure#avoid-redundant-state) Bunun yerine, render işlemi sırasında hesaplayın.** Bu şekilde kodunuz hızlı (Ekstra "kademeli" güncellemelerden kaçınırsınız), daha basit (bazı kodları ortadan kaldırırsınız), ve daha az hata eğilimlidir (birbiriyle senkronize olmayan farklı state değişkenlerinin neden olduğu hatalardan kaçınırsınız). Bu yaklaşım size yeni geliyorsa, [React'ta düşünmek](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) state içerisine nelerin girmesi gerektiğini açıklar. 
 
 ### Maliyetli hesaplamaları önbelleğe almak {/*caching-expensive-calculations*/}
 
@@ -94,7 +94,7 @@ function TodoList({ todos, filter }) {
 
 Genellikle, bu kod iyidir! Ama belki `getFilteredTodos()` fonksiyonu yavaştır veya bir sürü `todos`'a sahipsindir. Bu durumda, `newTodo` gibi alakasız bir state değişkeni değiştiyse, `getFilteredTodos()`'un yeniden hesaplama yapmasını istemezsin
 
-Maliyetli bir hesaplamayı [`useMemo`](/reference/react/useMemo) Hook'una sarmalayarak önbelleğe alabilirsiniz (veya ["memoize"](https://en.wikipedia.org/wiki/Memoization)):
+Maliyetli bir hesaplamayı [`useMemo`](/reference/react/useMemo) Hook'una sarmalayarak önbelleğe alabilirsiniz (veya ["memoize edebilirsiniz"](https://en.wikipedia.org/wiki/Memoization)):
 
 
 ```js {5-8}
@@ -103,7 +103,7 @@ import { useMemo, useState } from 'react';
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
   const visibleTodos = useMemo(() => {
-    // ✅ todos veya filter değişmeden yeniden çalıştırmayın.
+    // ✅ todos veya filter değişmeden yeniden çalışmaz.
     return getFilteredTodos(todos, filter);
   }, [todos, filter]);
   // ...
@@ -117,7 +117,7 @@ import { useMemo, useState } from 'react';
 
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
-  // ✅  getFilteredTodos() fonksiyonunu todos veya filter değişmeden yeniden çalıştırmayın.
+  // ✅  todos veya filtre değiştirilmedikçe getFilteredTodos()'u yeniden çalışmaz.
   const visibleTodos = useMemo(() => getFilteredTodos(todos, filter), [todos, filter]);
   // ...
 }
@@ -154,7 +154,7 @@ console.timeEnd('filter array');
 
 Makinenizin kullanıcılarınızdan daha hızlı olduğunu aklınızda bulundurun bu nedenle performansınızı yapay bir yavaşlık ile test etmek daha iyi bir fikirdir. Örneğin, Chrome bunun için [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) seçeneği sunuyor.
 
-Ayrıca geliştirme içerisinde performans ölçümü yapılması size en doğru sonuçları vermeyeceğini unutmayın. (Örneğin, [Strict mod](/reference/react/StrictMode) açıkken, her bileşenin bir yerine iki kez render olduğunu göreceksiniz.) En doğru ölçümleri elde etmek için, uygulamanızı üretim için derleyin ve kullanıcılarınızın sahip olduğu gibi bir cihazda test edin.
+Ayrıca geliştirme ortamı içerisinde performans ölçümü yapılması size en doğru sonuçları vermeyeceğini unutmayın. (Örneğin, [Strict mod](/reference/react/StrictMode) açıkken, her bileşenin bir yerine iki kez render olduğunu göreceksiniz.) En doğru ölçümleri elde etmek için, uygulamanızı üretim için derleyin ve kullanıcılarınızın sahip olduğu gibi bir cihazda test edin.
 
 </DeepDive>
 
@@ -174,7 +174,7 @@ export default function ProfilePage({ userId }) {
 }
 ```
 
-Bu verimlilik açısından etkisizdir çünkü `ProfilePage` ve içerisindeki childrenlar ilk olarak eski değerle birlike render edilecek, ve daha sonra tekrar render edilecektir. Ayrıca bu karmaşıktır çünkü `ProfilePage` içerisindeki her bileşende bu işlemi yapmanız gerekecektir. Örneğin yorum arayüzü iç içe ise, iç içe yorum state'ini de temizlemek istersiniz.
+Bu verimlilik açısından etkisizdir çünkü `ProfilePage` ve içerisindeki alt elemanlar ilk olarak eski değerle birlike render edilecek, ve daha sonra tekrar render edilecektir. Ayrıca bu karmaşıktır çünkü `ProfilePage` içerisindeki her bileşende bu işlemi yapmanız gerekecektir. Örneğin yorum arayüzü iç içe ise, iç içe yorum state'ini de temizlemek istersiniz.
 
 Bunun yerine, her kullanıcının profiline belirli bir key vererek React'a her kullanıcı profilinin kavramsal olarak _farklı_ bir profil olduğunu bildirebilirsiniz. Bileşeninizi ikiye bölün ve dış bileşenden iç bileşene `key` özniteliği iletin:
 
@@ -189,13 +189,13 @@ export default function ProfilePage({ userId }) {
 }
 
 function Profile({ userId }) {
-  // ✅ Bu ve aşağıdaki herhangi bir state key değişikliğinde otomatik olarak sıfırlanacaktır.
+  // ✅ Bu ve aşağıdaki herhangi bir state key değişikliğinde otomatik olarak sıfırlanır.
   const [comment, setComment] = useState('');
   // ...
 }
 ```
 
-Normalde, React aynı bileşen aynı noktada render edildiğinde state'i korur. **`Profile` bileşenine bir `key` olarak `userId` ileterek, React'tan farklı `userId`'li iki `Profile` bileşenine herhangi bir state'i paylaşmaması gereken iki farklı bileşen olarak muamele etmesini istiyorsunuz.** Key her değiştiğinde (`userId` olarak ayarladığınız), React DOM'u tekrar oluşturacak ve  `Profile` bileşeninin ve tüm alt öğelerinin [state'lerini sıfırlar](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key). Artık profiller arasında gezinirken `comment` alanı otomatik olarak temizlenecektir
+Normalde, React aynı bileşen aynı noktada render edildiğinde state'i korur. **`Profile` bileşenine bir `key` olarak `userId` ileterek, React'ten farklı `userId`'li iki `Profile` bileşenine herhangi bir state'i paylaşmaması gereken iki farklı bileşen olarak muamele etmesini istiyorsunuz.** Key her değiştiğinde (`userId` olarak ayarladığınız), React DOM'u tekrar oluşturacak ve  `Profile` bileşeninin ve tüm alt öğelerinin [state'lerini sıfırlar](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key). Artık profiller arasında gezinirken `comment` alanı otomatik olarak temizlenecektir.
 
 Bu örnekte, sadece dış `ProfilePage` bileşeninin dışa aktarıldığını ve projedeki diğer dosyalarda gözüktüğünü unutmayın. `ProfilePage`'i oluşturan bileşenlerin `ProfilePage`e key iletmesi gerekmez: Bunun yerine `userId`'yi normal bir prop olarak iletirler. `ProfilePage` bileşeninin içindeki `Profile` bileşenine key olarak iletilmesi, bir uygulama ayrıntısıdır.
 
@@ -218,7 +218,7 @@ function List({ items }) {
 }
 ```
 
-Bu ideal bir çözüm değildir. `items` her değiştiğinde, `List` ve onun child bileşeni ilk başta eski `selection` değeri ile render olacaktır. Daha sonra React DOM'u güncelleyecek ve Efektleri çalıştıracaktır. Son olarak, `setSelection(null)` çağrısı `List` ve onun child bileşenlerinin yeniden render işlemine sebebiyet verecektir, ve bu süreci yeniden başlatacaktır.
+Bu ideal bir çözüm değildir. `items` her değiştiğinde, `List` ve onun alt elemanı ilk başta eski `selection` değeri ile render olacaktır. Daha sonra React DOM'u güncelleyecek ve Efektleri çalıştıracaktır. Son olarak, `setSelection(null)` çağrısı `List` ve onun alt elemanlarının yeniden render işlemine sebebiyet verecektir, ve bu süreci yeniden başlatacaktır.
 
 Öncelikle, Efekti silin. Bunun yerine state'i doğrudan render işlemi sırasında ayarlayın:
 
@@ -237,11 +237,11 @@ function List({ items }) {
 }
 ```
 
-Bu şekilde, [önceki render işlemindeki bilgiyi depolamak](/reference/react/useState#storing-information-from-previous-renders) anlamayı zorlaştırabilir, ama bu aynı state'i bir Efekt içerisinde güncellemekten daha iyidir. Yukarıdaki örnekte, `setSelection` direkt olarak render işlemi sırasında çağrılır. React `List` bileşenini `return` ifadesi ile *hemen* çıkış yaptıktan sonra yeniden render edecektir. React henüz `List` bileşeninin childrenını render etmemiştir veya DOM henüz güncellenmemiştir, bu sebeple, `List` bileşen childrenları eski `selection` değeri ile render edilir.
+Bu şekilde, [önceki render işlemindeki bilgiyi depolamak](/reference/react/useState#storing-information-from-previous-renders) anlamayı zorlaştırabilir, ama bu aynı state'i bir Efekt içerisinde güncellemekten daha iyidir. Yukarıdaki örnekte, `setSelection` direkt olarak render işlemi sırasında çağrılır. React `List` bileşenini `return` ifadesi ile *hemen* çıkış yaptıktan sonra yeniden render edecektir. React `List` bileşeninin alt elemanlarını henüz render etmemiştir veya DOM henüz güncellenmemiştir, bu sebeple, `List` bileşeninin alt elemanları eski `selection` değeri ile render edilir.
 
 Bir bileşeni render işlemi sırasında güncellediğinizde, React, döndürülen JSX'i yoksayar ve hemen yeniden render işlemini tekrarlar. Çok yavaş kademeli yeniden denemeleri önlemek için, React render işlemi sırasında size sadece *aynı* bileşenin state'ini güncellemenize izin verir. Eğer, render işlemi sırasında başka bir bileşenin state'ini güncellerseniz, bir hata ile karşılaşırsınız. Döngülerden kaçınmak için `items !== prevItems` gibi bir koşul ifadesi gereklidir. State'i bı şekilde ayarlayabilirsiniz, ama diğer yan efektler (DOM'u değiştirmek veya zaman aşımlarını ayarlamak gibi) [bileşeni saf tutmak](/learn/keeping-components-pure) için olay yöneticilerinin veya Efektlerin içerisinde kalmalıdır.
 
-**Bu kalıp bir Efektten daha verimli olmasına rağmen, çoğu bileşenin buna da ihtiyacı olmamalıdır.** Ne şekilde yaparsanız yapın, state'i props'lara veya diğer state'lere göre ayarlamak, veri akışınızı anlamanızı ve hata ayıklama yapmanızı daha zor hale getirecektir. Her zaman [tüm state'i bir key ile sıfırlamayı](#resetting-all-state-when-a-prop-changes) veya [herşeyi render işlemi sırasında hesaplamayı](#updating-state-based-on-props-or-state) yapıp yapamayacağınızı kontrol edin. Örneğin, seçilen *itemi* depolamak (ve sıfırlamak) yerine, seçili *item kimliğini* saklayabilirsiniz: 
+**Bu kalıp bir Efektten daha verimli olmasına rağmen, çoğu bileşenin buna da ihtiyacı olmamalıdır.** Ne şekilde yaparsanız yapın, state'i props'lara veya diğer state'lere göre ayarlamak, veri akışınızı anlamanızı ve hata ayıklama yapmanızı daha zor hale getirecektir. Her zaman [tüm state'i bir key ile sıfırlamayı](#resetting-all-state-when-a-prop-changes) veya [herşeyi render işlemi sırasında hesaplamayı](#updating-state-based-on-props-or-state) yapıp yapamayacağınızı kontrol edin. Örneğin, seçilen *itemi* depolamak (ve sıfırlamak) yerine, seçili *item kimliğini(item ID)* saklayabilirsiniz: 
 
 ```js {3-5}
 function List({ items }) {
@@ -255,13 +255,13 @@ function List({ items }) {
 
 Şuan burada state'i "ayarlamanıza" ihtiyacınız yoktur. Seçilmiş ID'li item liste içerisindeyse, seçili olarak kalır. Eğer değilse, `selection` render işlemi esnasında eşleşen item bulunmadığından dolayı `null` olarak hesaplanacaktır. Bu davranış farklıdır, ama `items` seçilen değişiklikleri koruduğu için kısmen daha iyidir. 
 
-### Olay yöneticileri arasında mantık paylaşmak {/*sharing-logic-between-event-handlers*/}
+### Olay yöneticileri arasında mantık kodları paylaşmak {/*sharing-logic-between-event-handlers*/}
 
 İstediğiniz ürünü satın alamınıza izin veren iki butonlu (Satın Al ve Öde) bir ürün sayfanızın olduğunu varsayalım. Kullanıcı ürünü sepete eklediğinde bir bildirim göstermek istiyorsunuz. Her iki butonun `showNotification()` fonksiyonunu çağırması tekrar eden bir işlem gibi gelebilir, bu yüzden bu mantığı bir Efekte yerleştirmek isteyebilirsiniz:
 
 ```js {2-7}
 function ProductPage({ product, addToCart }) {
-  // 🔴 Bir Efekt içerisinde olaya-özgü bir mantık bulundurmaktan kaçının. 
+  // 🔴 Bir Efekt içerisinde olaya-özgü bir mantık kodu bulundurmaktan kaçının. 
   useEffect(() => {
     if (product.isInCart) {
       showNotification(`Added ${product.name} to the shopping cart!`);
@@ -282,11 +282,11 @@ function ProductPage({ product, addToCart }) {
 
 Bu Efekt gereksizdir. Muhtemelen bir soruna sebebiyet verecektir. Örneğin, uygulamanızın sayfa yeniden yüklemelerinde alışveris sepetinizi "hatırladığını" varsayalım. Sepetinize ürünü birkez ekleyip ardından sayfayı yeniden yüklerseniz, bildirim tekrar görünecektir. Bu ürünün sayfasını her yenilediğinizde gözükmeye devam edecektir. Bunun sebebi, `product.isInCart` değeri sayfa yüklenirken zaten `true` olmasıdır, bu sebeple Efekt tekrar `showNotification()` fonksiyonunu çağıracaktır. 
 
-**Bazı kod bloklarının bir Efekt veya olay yöneticisi içerisinde olup olmaması gerektiğinden emin değilseniz, bu kod bloğunun *neden* çalışması gerektiğini kendinize sorun. Sadece bileşenin kullanıcıya gösterildiği durumlarda çalışması gereken kodlar için Efektleri kullanın.** Bu örnekte, bildirim sayfa görüntülendiği için değil, kullanıcı *butona bastığı* için gözükmelidir! Efekti silin ve paylaşılan mantığı, her iki olay işleyicisinden çağrılan bir fonksiyon içine yerleştirin:
+**Bazı kod bloklarının bir Efekt veya olay yöneticisi içerisinde olup olmaması gerektiğinden emin değilseniz, bu kod bloğunun *neden* çalışması gerektiğini kendinize sorun. Sadece bileşenin kullanıcıya gösterildiği durumlarda çalışması gereken kodlar için Efektleri kullanın.** Bu örnekte, bildirim sayfa görüntülendiği için değil, kullanıcı *butona bastığı* için gözükmelidir! Efekti silin ve paylaşılan mantığı, her iki olay yöneticinden çağrılan bir fonksiyon içine yerleştirin:
 
 ```js {2-6,9,13}
 function ProductPage({ product, addToCart }) {
-  // ✅ Olaya özgü mantık, olay işleyicilerden çağrılması daha iyi bir seçimdir.
+  // ✅ Olaya özgü mantık kodunun, olay yöneticilerinden çağrılması daha iyi bir seçimdir.
   function buyProduct() {
     addToCart(product);
     showNotification(`Added ${product.name} to the shopping cart!`);
@@ -320,7 +320,7 @@ function Form() {
     post('/analytics/event', { eventName: 'visit_form' });
   }, []);
 
-  // 🔴 Bir Efekt içerisinde olaya-özgü bir mantık bulundurmaktan kaçının.
+  // 🔴 Bir Efekt içerisinde olaya-özgü bir mantık kodu bulundurmaktan kaçının.
   const [jsonToSubmit, setJsonToSubmit] = useState(null);
   useEffect(() => {
     if (jsonToSubmit !== null) {
@@ -354,14 +354,14 @@ function Form() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // ✅ Olaya özgü mantık, olay işleyicilerden çağrılması daha iyi bir seçimdir.
+    // ✅ Olaya özgü mantık kodunun, olay yöneticilerinden çağrılması daha iyi bir seçimdir.
     post('/api/register', { firstName, lastName });
   }
   // ...
 }
 ```
 
-Bir olay yöneticisi veya bir Efekt içine hangi mantığı yerleştireceğinizi seçerken, kullanıcının perspektifinden _hangi tür mantık_ olduğu sorusuna cevap bulmanız gerekmektedir. Eğer bu mantık belirli bir etkileşimden kaynaklanıyorsa, olay işleyicisinde tutun. Eğer kullanıcının bileşeni ekran üzerinde _görme_ eylemiyle ilişkili ise, o zaman Efekt içinde tutun.
+Bir olay yöneticisi veya bir Efekt içine hangi mantığı yerleştireceğinizi seçerken, kullanıcının perspektifinden _hangi tür mantık_ olduğu sorusuna cevap bulmanız gerekmektedir. Eğer bu mantık belirli bir etkileşimden kaynaklanıyorsa, olay yöneticisnde tutun. Eğer kullanıcının bileşeni ekran üzerinde _görme_ eylemiyle ilişkili ise, o zaman Efekt içinde tutun.
 
 ### Hesaplama zincirleri {/*chains-of-computations*/}
 
@@ -374,7 +374,7 @@ function Game() {
   const [round, setRound] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  // 🔴 State'i yalnızca birbirini tetikleyecek şekilde ayarlayan Etki Zincirlerinden kaçının.
+  // 🔴 State'i yalnızca birbirini tetikleyecek şekilde ayarlayan Efekt Zincirlerinden kaçının.
   useEffect(() => {
     if (card !== null && card.gold) {
       setGoldCardCount(c => c + 1);
@@ -409,7 +409,7 @@ function Game() {
   // ...
 ```
 
-Bir problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun childrenlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt bileşen ağacında üç gereksiz yeniden render işlemi gerçekleşir.
+Bir problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun alt elemanlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt eleman ağacında üç gereksiz yeniden render işlemi gerçekleşir.
 
 Hatta hızlı olmasa bile, kodunuz geliştikçe yeni gereksinimlere uygun olmayan durumlarla karşılaşabilirsiniz. Örneğin, oyun hareketlerinin geçmişini adım adım izlemek için bir yol eklemek istediğinizi düşünün. Her bir state değişkenini geçmişteki bir değere güncelleyerek bunu yapardınız. Ancak, `card` state'ini geçmişteki bir değere ayarlamak, Efekt zincirini tekrar tetikler ve gösterilen verileri değiştirir. Bu tür bir kod genellikle sert ve kırılgan olabilir.
 
@@ -429,7 +429,7 @@ function Game() {
       throw Error('Game already ended.');
     }
 
-    // ✅ Sonraki state'i olay yöneticisi içerisinde hesaplayın
+    // ✅ Sonraki state'i olay yöneticisi içerisinde hesaplayın.
     setCard(nextCard);
     if (nextCard.gold) {
       if (goldCardCount <= 3) {
@@ -447,14 +447,16 @@ function Game() {
   // ...
 ```
 
-Bu yöntem çok daha verimli olacaktır. Ayrıca, oyun geçmişini görüntülemek için bir yol uygularsanız, artık her bir state değişkenini diğer tüm değerleri ayarlayan Efekt zincirini tetiklemeden geçmişten bir hamleye ayarlayabileceksiniz. Birden fazla olay yöneticisi arasında mantığı yeniden kullanmanız gerekiyorsa, [bir fonksiyon çıkarabilir](#sharing-logic-between-event-handlers) ve bu yönticilerden çağırabilirsiniz.
+Bu yöntem çok daha verimli olacaktır. Ayrıca, oyun geçmişini görüntülemek için bir yol uygularsanız, artık her bir state değişkenini diğer tüm değerleri ayarlayan Efekt zincirini tetiklemeden geçmişten bir hamleye ayarlayabileceksiniz. Birden fazla olay yöneticisi arasında mantığı yeniden kullanmanız gerekiyorsa, [bir fonksiyon çıkarabilir](#sharing-logic-between-event-handlers) ve bu fonksiyonu o olay yöneticilerinden çağırabilirsiniz.
 
 Olay yöneticilerinin içinde, [durum bir anlık görüntü gibi davranır](/learn/state-as-a-snapshot). Örneğin, `setRound(round + 1)` çağrıldıktan sonra bile, `round` değişkeni kullanıcının butona bastığı anda sahip olduğu değeri yansıtır. Hesaplamalar için bir sonraki değeri kullanmanız gerekiyorsa, `const nextRound = round + 1` gibi manuel olarak tanımlama yapmalısınız.
 
 Bazı durumlarda, bir sonraki state'i bir olay yöneticisi içerisinden direkt olarak *hesaplayamazsınız*. Örneğin, birbirine bağlı çoklu açılır menülerin bulunduğu bir form düşünelim. Bir sonraki açılır menünün seçilen değeri önceki açılır menünün seçilen değerine bağlıdır. Bu durumda, bir Efekt zinciri uygun olabilir çünkü ağ bağlantısı ile senkronizasyon yapmanız gerekmektedir.
+
 ### Uygulamayı başlatma {/*initializing-the-application*/}
 
-Some logic should only run once when the app loads.
+Bazı mantık kodları, uygulama yüklendiğinde yalnızca bir kez çalışmalıdır.
+
 
 Bu işlemi genellikle üst-seviye bileşendeki bir Efekt içine yerleştirmek isteyebilirsiniz.
 
@@ -469,7 +471,7 @@ function App() {
 }
 ```
 
-Ancak, bu işlemin [geliştirme ortamında iki kere çalıştırıldığını](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) keşfedeceksiniz. Bu durum sorunlara neden olabilir--örneğin, fonksiyonun iki kez çağrılması düşünülmeden tasarlandığı için kimlik doğrulama tokeni geçersiz hale gelebilir. Genel olarak, bileşenleriniz yeniden yerleştirilmeye karşı dayanıklı olmalıdır. Bu, üst-seviye `App` bileşeniniz için de geçerlidir.
+Ancak, bu işlemin [canli ortamda iki kere çalıştırıldığını](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) keşfedeceksiniz. Bu durum sorunlara neden olabilir--örneğin, fonksiyonun iki kez çağrılması düşünülmeden tasarlandığı için kimlik doğrulama tokeni geçersiz hale gelebilir. Genel olarak, bileşenleriniz yeniden yerleştirilmeye karşı dayanıklı olmalıdır. Bu, üst-seviye `App` bileşeniniz için de geçerlidir.
 
 Üretim ortamında pratikte yeniden monte edilmese bile, tüm bileşenlerde aynı kısıtlamalara uymak, kodun taşınmasını ve yeniden kullanılmasını kolaylaştırır. Eğer belirli bir mantığın *bileşen başına bir kez değil*, *uygulama yüklemesi başına bir kez çalışması* gerekiyorsa, bu durumu takip etmek için bir üst-seviye değişken ekleyebilirsiniz.
 
@@ -493,7 +495,7 @@ Modül başlatma sırasında ve uygulama render edilmeden önce de çalıştıra
 
 ```js {1,5}
 if (typeof window !== 'undefined') { // Tarayıcıda çalışıp çalışmadığınızı kontrol edin.
-   // ✅ Uygulama her yüklendiğinde yalnızca bir kez çalışır
+   // ✅ Uygulama her yüklendiğinde yalnızca bir kez çalışır.
   checkAuthToken();
   loadDataFromLocalStorage();
 }
@@ -505,15 +507,15 @@ function App() {
 
 Bileşeninizi içe aktardığınızda, bileşenin sonunda render edilmezse bile üst seviyedeki kod bir kez çalışır. Rastgele bileşenler içe aktarılırken yavaşlama veya beklenmeyen davranışlardan kaçınmak için bu yöntemi aşırı kullanmamaya özen gösterin. Uygulama genelindeki başlatma mantığınızı, `App.js` gibi kök bileşen modüllerinde veya uygulamanızın giriş noktasında tutun.
 
-### Parent bileşenlerini state değişiklikleri hakkında bilgilendirmek {/*notifying-parent-components-about-state-changes*/}
+### Üst elemanları state değişiklikleri hakkında bilgilendirmek {/*notifying-parent-components-about-state-changes*/}
 
-`isOn` state'i `true` veya `false` değerlerini alabilen bir `Toggle` bileşeni yazdığınızı düşünelim. Geçiş efektini sağlaması için birkaç farklı yol vardır (tıklayarak veya sürükleyerek). `Toggle` dahili durumu her değiştiğinde parent bileşene bildirimde bulunmak istiyorsunuz, böylece bir `onChange` olayını bir Efektten çağırıyorsunuz:
+`isOn` state'i `true` veya `false` değerlerini alabilen bir `Toggle` bileşeni yazdığınızı düşünelim. Geçiş efektini sağlaması için birkaç farklı yol vardır (tıklayarak veya sürükleyerek). `Toggle` dahili durumu her değiştiğinde üst elemana bildirimde bulunmak istiyorsunuz, böylece bir `onChange` olayını bir Efektten çağırıyorsunuz:
 
 ```js {4-7}
 function Toggle({ onChange }) {
   const [isOn, setIsOn] = useState(false);
 
-  // 🔴 onChange işleyicisi çok geç çalıştırılmasından kaçının.
+  // 🔴 onChange işleyicisinin çok geç çalıştırılmasından kaçının.
   useEffect(() => {
     onChange(isOn);
   }, [isOn, onChange])
@@ -534,9 +536,9 @@ function Toggle({ onChange }) {
 }
 ```
 
-Daha önce olduğu gibi, bu ideal değil. İlk olarak `Toggle` kendi state'ini günceller, ve React ekranı günceller. Ardından React, parent bileşenden iletilen `onChange` fonksiyonunu  çağıran Effect'i çalıştırır. Şimdi parent bileşen, başka bir render geçişi başlatarak kendi state'ini güncelleyecektir. Her şeyi tek geçişte yapmak daha iyi olur.
+Daha önce olduğu gibi, bu ideal değil. İlk olarak `Toggle` kendi state'ini günceller, ve React ekranı günceller. Ardından React, üst elemandan iletilen `onChange` fonksiyonunu  çağıran Effect'i çalıştırır. Şimdi üst eleman, başka bir render geçişi başlatarak kendi state'ini güncelleyecektir. Her şeyi tek geçişte yapmak daha iyi olur.
 
-Efekti silin ve bunun yerine aynı olay yöneticisi içindeki *her iki* bileşenin durumunu güncelleyin:
+Efekti silin ve bunun yerine aynı olay yöneticisi içinde *her iki* bileşenin durumunu güncelleyin:
 
 ```js {5-7,11,16,18}
 function Toggle({ onChange }) {
@@ -564,12 +566,12 @@ function Toggle({ onChange }) {
 }
 ```
 
-Bu yaklaşımla, hem `Toggle` bileşeni hem de onun parent bileşeni, olay sırasında state değişkenlerini günceller. React farklı bileşenlerden [güncellemeleri toplu olarak](/learn/queuing-a-series-of-state-updates) gerçekleştirir, böylece yalnızca bir render geçişi olacaktır.
+Bu yaklaşımla, hem `Toggle` bileşeni hem de onun üst elemanı, olay sırasında state değişkenlerini günceller. React farklı bileşenlerden [güncellemeleri toplu olarak](/learn/queuing-a-series-of-state-updates) gerçekleştirir, böylece yalnızca bir render geçişi olacaktır.
 
-Ayrıca state'i tamamen kaldırabilir ve bunun yerine parent bileşenden `isOn` değerini alabilirsiniz:
+Ayrıca state'i tamamen kaldırabilir ve bunun yerine üst elemandan `isOn` değerini alabilirsiniz:
 
 ```js {1,2}
-// ✅ Also good: the component is fully controlled by its parent Bileşenin, kendi parent bileşeni tarafından kontrol edilmesi daha iyidir
+// ✅ Bileşenin, kendi üst elemanı tarafından kontrol edilmesi daha iyidir.
 function Toggle({ isOn, onChange }) {
   function handleClick() {
     onChange(!isOn);
@@ -587,9 +589,9 @@ function Toggle({ isOn, onChange }) {
 }
 ```
 
-["State'i yukarı taşımak"](/learn/sharing-state-between-components) parent bileşenin kendi state'ini değiştirerek, parent bileşenin `Toggle`'ı tamamen kontrol etmesine olanak tanır. Bu, parent bileşenin daha fazla mantık içermesi gerektiği anlamına gelir, ancak genel olarak endişelenmeniz gereken daha az durum olur. Farklı iki state değişkenini senkronize tutmaya çalıştığınızda, bunun yerine state'i yukarı taşımaya çalışın!
+["State'i yukarı taşımak"](/learn/sharing-state-between-components) üst elemanın kendi state'ini değiştirerek, `Toggle`'ı tamamen kontrol etmesine olanak tanır. Bu, üst elemanın daha fazla mantık içermesi gerektiği anlamına gelir, ancak genel olarak endişelenmeniz gereken daha az durum olur. Farklı iki state değişkenini senkronize tutmaya çalıştığınızda, bunun yerine state'i yukarı taşımaya çalışın!
 
-### Parent'a veri aktarma {/*passing-data-to-the-parent*/}
+### Üst elemana veri aktarma {/*passing-data-to-the-parent*/}
 
 Bu `Child` bileşeni bazı verileri çeker ve ardından `Parent` bileşenine bir Efekt içerisinde bu veriyi aktarır: 
 
@@ -602,7 +604,7 @@ function Parent() {
 
 function Child({ onFetched }) {
   const data = useSomeAPI();
-  // 🔴  Verileri bir Efekt içinde parent bileşene iletmekten kaçının.
+  // 🔴 Verileri bir Efekt içinde üst elemana iletmekten kaçının.
   useEffect(() => {
     if (data) {
       onFetched(data);
@@ -612,13 +614,13 @@ function Child({ onFetched }) {
 }
 ```
 
-React içerisinde, veri akışı parent bileşenlerinin children'larına doğru akar. Ekranda yanlış bir şey gördüğünüzde, yanlış bilgiyi nereden aldığınızı bulmak için bileşen hiyerarşisini yukarı doğru takip edebilirsiniz. Yanlış prop ileten veya yanlış state'e sahip olan bileşeni bulana kadar bileşen zincirinde yukarı doğru ilerleyebilirsiniz. Bu şekilde, sorunun kaynağını tespit edebilir ve düzeltmeler yapabilirsiniz. Child bileşenler, parent bileşenlerinin state'ini Efektler içerisinde güncellediği durumlarda, veri akışını takip etmek zorlaşabilir. Parent ve child bileşeninin aynı veriye ihtiyacı olduğunda, parent bileşeninin ihtiyaç duyduğunuz veriyi çekmesini sağlayın ve child bileşenlerine doğru *veriyi aşağıya iletin*: 
+React içerisinde, veri akışı üst elemanlardan alt elemanlara doğru akar. Ekranda yanlış bir şey gördüğünüzde, yanlış bilgiyi nereden aldığınızı bulmak için bileşen hiyerarşisini yukarı doğru takip edebilirsiniz. Yanlış prop ileten veya yanlış state'e sahip olan bileşeni bulana kadar bileşen zincirinde yukarı doğru ilerleyebilirsiniz. Bu şekilde, sorunun kaynağını tespit edebilir ve düzeltmeler yapabilirsiniz. Alt elemanlar, üst elemanlarının state'ini Efektler içerisinde güncellediği durumlarda, veri akışını takip etmek zorlaşabilir. Üst ve alt elemanın aynı veriye ihtiyacı olduğunda, üst elemanın ihtiyaç duyduğunuz veriyi çekmesini sağlayın ve alt elemanlarına doğru *veriyi aşağıya iletin*: 
 
 ```js {4-5}
 function Parent() {
   const data = useSomeAPI();
   // ...
-  // ✅ Veriyi aşağı doğru childrenlara iletmek daha iyidir.
+  // ✅ Veriyi aşağı doğru alt elemanlara iletmek daha iyidir.
   return <Child data={data} />;
 }
 
@@ -627,12 +629,11 @@ function Child({ data }) {
 }
 ```
 
-This is simpler and keeps the data flow predictable: the data flows down from the parent to the child.
-: veri akışı 
+Veri akışının üst elemandan alt elemana doğru olması veri akışının tahmin edilmesini basitleştirir ve daha anlaşılır olmasını sağlar. 
 
 ### Harici veri depolarını takip etme {/*subscribing-to-an-external-store*/}
 
-Bazen bileşeninizin, React state dışındaki bazı verileri takip etmesi gerekebilir. Bu veriler, 3.parti bir kütüphaneden veya yerleşik tarayıcı API'leri olabilir. Bu veriler, React'ın bilgisi olmadan değişebileceğinden, manuel olarak bu verileri takip etmeniz gerekmektedir. Bu genellikle bir Efekt ile yapılır, örneğin:
+Bazen, bileşenlerinizin React state'inin dışındaki bazı verilere abone olması gerebilir. Bu veriler, 3.parti bir kütüphaneden veya yerleşik tarayıcı API'leri olabilir. Bu veriler, React'ın bilgisi olmadan değişebileceğinden, manuel olarak bu verileri takip etmeniz gerekmektedir. Bu genellikle bir Efekt ile yapılır, örneğin:
 
 ```js {2-17}
 function useOnlineStatus() {
@@ -750,7 +751,7 @@ function SearchResults({ query }) {
 
 Bu, Efektiniz veri çektiğinde, en son istenen isteğin haricindeki tüm yanıtların görmezden gelinmesini sağlar.
 
-Race conditionları yönetmek, veri çekme işlemini uygularken karşılaşılan tek zorluk değildir. Ayrıca yanıtların önbelleğe alınması (kullanıcının Back butonuna tıkladığında önceki ekranı anında görebilmesi için), sunucuda veri çekme işleminin nasıl gerçekleştirileceği (ilk sunucu tarafından oluşturulan HTML'in spinner yerine çekilen içeriği içermesi için) ve ağ gecikmelerinden kaçınma yöntemleri (bir alt bileşenin her üst bileşenin tamamlanmasını beklemeksizin veri çekme işlemi yapabilmesi) gibi düşüncelerde bulunmanız gerekebilir.
+Race conditionları yönetmek, veri çekme işlemini uygularken karşılaşılan tek zorluk değildir. Ayrıca yanıtların önbelleğe alınması (kullanıcının Back butonuna tıkladığında önceki ekranı anında görebilmesi için), sunucuda veri çekme işleminin nasıl gerçekleştirileceği (ilk sunucu tarafından oluşturulan HTML'in spinner yerine çekilen içeriği içermesi için) ve ağ gecikmelerinden kaçınma yöntemleri (bir alt elemanın, üst elemanların tamamlanmasını beklemeksizin veri çekme işlemi yapabilmesi) gibi düşüncelerde bulunmanız gerekebilir.
 
 **Bu sorunlar sadece React için değil, herhangi bir UI kütüphanesi için geçerlidir. Bunları çözmek kolay değildir, bu yüzden modern [frameworkler](/learn/start-a-new-react-project#production-grade-react-frameworks) verileri Efektlerin içerisinden çekmek yerine daha verimli yerleşik veri çekme mekanizmaları sunar.**
 
@@ -787,9 +788,9 @@ function useData(url) {
 }
 ```
 
-Muhtemelen hata yönetimi için bazı mantık ve içeriğin yüklenip yüklenmediğini takip etmek için bir mantık eklemek isteyebilirsiniz. Bu şekilde kendiniz bir Hook oluşturabilir veya React ekosisteminde mevcut olan birçok çözümden birini kullanabilirsiniz. **Bunun tek başına, bir framework'ün yerleşik veri çekme mekanizmasını kullanmak kadar verimli olmayabilir, ancak veri çekme mantığını özel bir Hook'a taşımak, daha sonra verimli bir veri çekme stratejisini benimsemeyi kolaylaştıracaktır.**
+Muhtemelen hata yönetimi ve içeriğin yüklenip yüklenmediğini takip etmek için muhtemelen biraz mantık eklemek isteyeceksiniz. Bu şekilde kendiniz bir Hook oluşturabilir veya React ekosisteminde mevcut olan birçok çözümden birini kullanabilirsiniz. **Bu tek başına, bir framework'ün yerleşik veri çekme mekanizmasını kullanmak kadar verimli olmayabilir, ancak veri çekme mantığını özel bir Hook'a taşımak, daha sonra verimli bir veri çekme stratejisini benimsemeyi kolaylaştıracaktır.**
 
-Genelde, ne zaman Efektleri yazmak zorunda kaldığınızda, `useData` gibi daha deklaratif ve amaç odaklı bir API'ye sahip olan özel bir Hook'a bir işlevselliği çıkarabileceğiniz durumları gözlemleyin. Bileşenlerinizde daha az sayıda `useEffect` çağrısı olduğunda, uygulamanızın bakımını daha rahat yapabileceksiniz. 
+Genelde, ne zaman Efekt yazmak zorunda kalsanız, `useData` gibi daha deklaratif ve amaç odaklı bir API'ye sahip olan özel bir Hook'a bir işlevselliği çıkarabileceğiniz durumları gözlemleyin. Bileşenlerinizde daha az sayıda `useEffect` çağrısı olduğunda, uygulamanızın bakımını daha rahat yapabileceksiniz. 
 
 <Recap>
 
@@ -1272,7 +1273,7 @@ Input içerisine yazdığınızda, sadece `text` state değişkeni güncellenir.
 
 </Solution>
 
-#### Efektler olmadan state'i sıfırla {/*reset-state-without-effects*/}
+#### Efektler olmadan state'i sıfırlayın {/*reset-state-without-effects*/}
 
 Bu `EditContact` bileşeni, `savedContact` propu olarak `{ id, name, email }` şeklindeki bir kişi nesnesini alır. İsim ve email input alanlarını düzenlemeyi deneyin. Save butonuna bastığınızda, formun üzerindeki kişinin butonu düzenlenen adla güncellenir. Reset düğmesine bastığınızda ise formdaki bekleyen değişiklikler iptal edilir. Bir fikir edinmek için bu kullanıcı arayüzü ile oynayın.
 
@@ -1604,15 +1605,15 @@ button {
 
 #### Efektler olmadan bir form gönderin {/*submit-a-form-without-effects*/}
 
-Bu `Form` bileşeni bir arkadaşınıza mesaj göndermenize izin verir. Formu gönderdiğinizde, `showForm` state değişkeni `false` olarak değişir. Bu `sendMessage(message)` adında  mesaj gönderen bir Efekt tetikler (mesajı konsolda görebilirsiniz). Mesaj gönderildikten sonra, forma geri dönmenizi sağlayan "Open chat" butonu olan bir "Thank you" iletişim kutusunu görürsünüz.
+Bu `Form` bileşeni bir arkadaşınıza mesaj göndermenize izin verir. Formu gönderdiğinizde, `showForm` state değişkeni `false` olarak değişir. Bu `sendMessage(message)` adında  mesaj gönderen bir Efekt tetikler (mesajı konsolda görebilirsiniz). Mesaj gönderildikten sonra, forma geri dönmenizi sağlayan "Open chat" butonu olan bir "Thank you" bildirim mesajını görürsünüz.
 
-Uygulamanızın kullanıcıları çok fazla mesaj gönderiyor. Sohbet etmeyi biraz daha zorlaştırmak için, form yerine *önce* "Thank you" iletişim kutusunu göstermeye karar verdiniz. Bunun için `showForm` state değişkenini `true` yerine `false` ile başlatacak şekilde değiştirin. Bu değişikliği yaptığınız anda konsol boş bir mesajın gönderildiğini gösterecektir. Bu mantıkta bir şeyler yanlış!
+Uygulamanızın kullanıcıları çok fazla mesaj gönderiyor. Sohbet etmeyi biraz daha zorlaştırmak için, form yerine *önce* "Thank you" bildirim mesajını göstermeye karar verdiniz. Bunun için `showForm` state değişkenini `true` yerine `false` ile başlatacak şekilde değiştirin. Bu değişikliği yaptığınız anda konsol boş bir mesajın gönderildiğini gösterecektir. Bu mantıkta bir şeyler yanlış!
 
 Bu hatanın ana kaynağı nedir? Ve bunu nasıl düzeltebilirsiniz?
 
 <Hint>
 
-Kullanıcının "Thank you" iletişim kutusunu görmesi _nedeniyle_ mesaj gönderilmeli mi? Yoksa tam tersi mi geçerlidir?
+Kullanıcı "Thank you" mesajını _gördüğü için_ mi mesaj gönderilmeli? Yoksa tam tersi, mesajı gönderdiği için mi "Thank You" mesajını görmeli?
 
 </Hint>
 
@@ -1677,7 +1678,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 <Solution>
 
-`showForm` state değişkeni formun veya "Thank you" iletişim kutusunun gösteriliğ gösterilmeyeceğine karar verir. Ancak "Thank you" iletişim kutusu _görüntülendiği_ için mesajı gönderemiyorsunuz. Kullanıcının  _formu göndermesi_ nedeniyle mesajı göndermek istiyorsunuz. Yanıltıcı Efekti silin ve `sendMessage` çağrısını `handleSubmit` olay yöneticisi içerisine taşıyın:
+showForm state değişkeni, formun mu yoksa "Thank you" mesajının mı gösterileceğini belirler. Ancak "Thank you" iletişim kutusu _görüntülendiği_ için mesajı göndermiyorsunuz. Kullanıcının  _formu göndermesi_ nedeniyle mesajı göndermek istiyorsunuz. Yanıltıcı Efekti silin ve `sendMessage` çağrısını `handleSubmit` olay yöneticisi içerisine taşıyın:
 
 <Sandpack>
 
