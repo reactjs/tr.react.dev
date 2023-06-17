@@ -54,17 +54,19 @@ export default function Counter() {
 
 </Sandpack>
 
-A ref is like a secret pocket of your component that React doesn't track. For example, you can use refs to store [timeout IDs](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elements](https://developer.mozilla.org/en-US/docs/Web/API/Element), and other objects that don't impact the component's rendering output.
+Bir ref, bileşeninize ait, React'in takip etmediği gizli bir cep gibidir. Örneğin, ref'leri [zaman aşımı ID'lerini](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elemanlarını](https://developer.mozilla.org/en-US/docs/Web/API/Element) ve bileşenin render çıktısını etkilemeyen diğer nesneleri saklamak için kullanabilirsiniz.
 
 <LearnMore path="/learn/referencing-values-with-refs">
 
 Read **[Referencing Values with Refs](/learn/referencing-values-with-refs)** to learn how to use refs to remember information.
 
+Ref'leri kullanarak nasıl bilgi saklayacağınızı öğrenmek için **[Ref'ler ile değerleri referans etme](/learn/referencing-values-with-refs)** bölümünü okuyun.
+
 </LearnMore>
 
-## Manipulating the DOM with refs {/*manipulating-the-dom-with-refs*/}
+## DOM'u ref'ler ile manipüle etmek {/*manipulating-the-dom-with-refs*/}
 
-React automatically updates the DOM to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React—for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a ref to the DOM node. For example, clicking the button will focus the input using a ref:
+React, render çıktınızla eşleşmesi için DOM'u otomatik olarak günceller, bunun sayesinde bileşenleriniz genellikle DOM'u manipüle etme ihtiyacı duymaz. Ancak, bazen React tarafından yönetilen DOM elemanlarına erişmeniz gerekebilir - örneğin, bir düğüme odaklanmak, ona scroll'lamak veya boyutunu ve konumunu ölçmek için. React'te bunları yapmak için gömülü bir yöntem yoktur, bu yüzden DOM düğümüne bir ref'e ihtiyacınız olacaktır. Örneğin, aşağıdaki örnekteki gibi, bir düğmeye tıklandığında bir ref kullanarak input'a odaklanabilirsiniz:
 
 <Sandpack>
 
@@ -82,7 +84,7 @@ export default function Form() {
     <>
       <input ref={inputRef} />
       <button onClick={handleClick}>
-        Focus the input
+        Girdiye odaklan
       </button>
     </>
   );
@@ -93,15 +95,16 @@ export default function Form() {
 
 <LearnMore path="/learn/manipulating-the-dom-with-refs">
 
-Read **[Manipulating the DOM with Refs](/learn/manipulating-the-dom-with-refs)** to learn how to access DOM elements managed by React.
+React tarafından yönetilen DOM elemanlarına nasıl erişeceğinizi öğrenmek için **[DOM'u ref'ler ile manipüle etme](/learn/manipulating-the-dom-with-refs)** bölümünü okuyun.
 
 </LearnMore>
 
-## Synchronizing with Effects {/*synchronizing-with-effects*/}
+## Efektler ile senkronize etme {/*synchronizing-with-effects*/}
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. Unlike event handlers, which let you handle particular events, *Effects* let you run some code after rendering. Use them to synchronize your component with a system outside of React.
 
-Press Play/Pause a few times and see how the video player stays synchronized to the `isPlaying` prop value:
+Bazı bileşenlerin dış sistemler ile senkronize olmazı gerekmektedir. Örneğin, bir sunucu bağlantısı kurmak için veya bir bileşen ekranda gözüktüğünde analitik logu göndermek için bir React-dışı bileşeni React state'ine göre kontrol etmek isteyebilirsiniz. *Efektler*, belirli olayları ele almanızı sağlayan olay yöneticilerinin aksine, sizin render'dan sonra bazı kodları çalıştırmanızı sağlar. Bileşeninizi React dışı bir sistem ile senkronize etmek için efektleri kullanın.
+
+Başlat/Durdur butonuna birkaç kez basın ve video oynatıcının `isPlaying` prop değerine senkronize kaldığını görün:
 
 <Sandpack>
 
@@ -127,7 +130,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Durdur' : 'Başlat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
