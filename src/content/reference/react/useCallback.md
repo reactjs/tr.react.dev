@@ -4,7 +4,7 @@ title: useCallback
 
 <Intro>
 
-`useCallback` is a React Hook that lets you cache a function definition between re-renders.
+`useCallback` render'lar arasında bir fonksiyonun tanımını önbelleğe almanızı sağlayan React Hook'udur.
 
 ```js
 const cachedFn = useCallback(fn, dependencies)
@@ -16,11 +16,11 @@ const cachedFn = useCallback(fn, dependencies)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `useCallback(fn, dependencies)` {/*usecallback*/}
 
-Call `useCallback` at the top level of your component to cache a function definition between re-renders:
+Render'lar arasında bir fonksiyon tanımını önbelleğe almak için bileşeninizin en üst kapsamında `useCallback`'i çağırın:
 
 ```js {4,9}
 import { useCallback } from 'react';
@@ -34,24 +34,25 @@ export default function ProductPage({ productId, referrer, theme }) {
   }, [productId, referrer]);
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `fn`: The function value that you want to cache. It can take any arguments and return any values. React will return (not call!) your function back to you during the initial render. On next renders, React will give you the same function again if the `dependencies` have not changed since the last render. Otherwise, it will give you the function that you have passed during the current render, and store it in case it can be reused later. React will not call your function. The function is returned to you so you can decide when and whether to call it.
+* `fn`: Önbelleğe almak istediğiniz fonksiyondur. Herhangi bir argüman alıp herhangi bir değer döndürebilir. React, fonksiyonunuzu ilk render sırasında size geri döndürür (çağırmaz!). Sonraki render'larda, `dependencies` son render'dan bu yana değişmediyse aynı fonksiyonu tekrar verir. Aksi halde, mevcut render sırasında ilettiğiniz işlevi size verir ve tekrar kullanılabilmek için saklar. React, fonksiyonunuzu çağırmaz. Fonksiyon size geri döndürülür ve böylece onu ne zaman çağırıp çağırmayacağınıza karar verebilirsiniz.
 
-* `dependencies`: The list of all reactive values referenced inside of the `fn` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithm.
+* `dependencies`: `fn` kodu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop, state ve doğrudan bileşeninizin gövdesinde bildirilen tüm değişkenleri ve fonksiyonları içerir. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her eaktif değerin bağımlılık olarak doğru bir şekilde belirtildiğini denetler. Bağımlılık listesi sabit sayıda öğe içermeli ve `[dep1, dep2, dep3]` doğrudan yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırma algoritmasını kullanarak her bir bağımlılığı önceki değeriyle karşılaştırır.
 
-#### Returns {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
-On the initial render, `useCallback` returns the `fn` function you have passed.
+İlk render'da, kendisine ilettiğiniz `fn` fonksiyonunu döndürür.
 
-During subsequent renders, it will either return an already stored `fn`  function from the last render (if the dependencies haven't changed), or return the `fn` function you have passed during this render.
+Sonraki render'larda, ya son render'dan önce kaydedilmiş (bağımlılıkları değişmediyse) `fn` fonksiyonunu ya da bu render'da ilettiğiniz `fn` fonksiyonunu döndürür.
 
-#### Caveats {/*caveats*/}
 
-* `useCallback` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
-* React **will not throw away the cached function unless there is a specific reason to do that.** For example, in development, React throws away the cache when you edit the file of your component. Both in development and in production, React will throw away the cache if your component suspends during the initial mount. In the future, React may add more features that take advantage of throwing away the cache--for example, if React adds built-in support for virtualized lists in the future, it would make sense to throw away the cache for items that scroll out of the virtualized table viewport. This should match your expectations if you rely on `useCallback` as a performance optimization. Otherwise, a [state variable](/reference/react/useState#im-trying-to-set-state-to-a-function-but-it-gets-called-instead) or a [ref](/reference/react/useRef#avoiding-recreating-the-ref-contents) may be more appropriate.
+#### Dikkat edilmesi gerekenler {/*caveats*/}
+
+* `useCallback` bir Hook olduğundan, yalnızca **bileşeninizin en üst kapsamında** ya da kendi Hook'larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve state'i ona taşıyın.
+* React, **özel bir nedeni olmadıkça önbelleğe alınan fonksiyonu çöpe atmaz.** Örneğin, geliştirme aşamasında, bileşeninizin dosyasını düzenlediğinizde React önbelleği temizler. Hem geliştirme hem de üretim aşamasında, ilk render sırasında bileşeniniz askıya alınırsa React önbelleği temizler. Gelecekte, önbelleğin temizlenmesinden yararlanan daha fazla özellik ekleyebilir--örneğin, sanallaştırılmış listeler için yerleşik destek eklenirse, sanallaştırılmış tablonun görünün alanından dışarı kaydırılan öğeler için önbelleği temizlemek mantıklı olacaktır. `useCallback` Hook'una performans optimizasyonu olarak güveniyorsanız bu beklentilerinizi karşılamalıdır. Aksi durumlar için [state değişkeni](/reference/react/useState#im-trying-to-set-state-to-a-function-but-it-gets-called-instead) veya [ref](/reference/react/useRef#avoiding-recreating-the-ref-contents) daha uygun olabilir.
 
 ---
 
