@@ -1498,7 +1498,7 @@ function ChatRoom({ roomId }) {
   // ...
 ```
 
-Render esnasında oluşturulan bir nesneyi bağımlılık olarak kullanmaktan kaçının. Bunun yerine nesneyi Effect içinded oluşturun:
+Render esnasında oluşturulan bir nesneyi bağımlılık olarak kullanmaktan kaçının. Bunun yerine nesneyi Effect içinde oluşturun:
 
 <Sandpack>
 
@@ -1682,32 +1682,32 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Şimdi `createOptions`fonksiyonunu Effect içinde bildirdiğimizden, Effect sadece `roomId` string'ine bağlıdır. Böylelikle input'u değiştirmek sohbete tekrar bağlanmayacaktır. Unlike a function which gets re-created, a string like `roomId` doesn't change unless you set it to another value. [Read more about removing dependencies.](/learn/removing-effect-dependencies)
+Şimdi `createOptions`fonksiyonunu Effect içinde bildirdiğimizden, Effect sadece `roomId` string'ine bağlıdır. Böylelikle input'u değiştirmek sohbete tekrar bağlanmayacaktır. Her render'da yeniden oluşturulan fonksiyon yerine, `roomId` gibi bir string siz onu başka değere eşitlemediğiniz sürece değişmez. [Bağımlılıkları kaldırmak hakkında daha fazlasını okuyun.](/learn/removing-effect-dependencies)
 
 ---
 
-### Reading the latest props and state from an Effect {/*reading-the-latest-props-and-state-from-an-effect*/}
+### Effect'te nihai prop'ları ve state'i okuma {/*reading-the-latest-props-and-state-from-an-effect*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölümde, React'in stabil sürümünde **henüz yayınlanmamış deneysel bir API** anlatılmaktadır.
 
 </Wip>
 
-By default, when you read a reactive value from an Effect, you have to add it as a dependency. This ensures that your Effect "reacts" to every change of that value. For most dependencies, that's the behavior you want.
+Varsayılan olarak, Effect'ten reaktif bir değer okuduğunuz zaman bu değeri bağımlılık olarak eklemeniz gerekmektedir. Bu, Effect'inizin o değer her değiştiğinde "tepki" vermesini sağlar. Çoğu bağımlılık için istediğiniz davranış budur.
 
-**However, sometimes you'll want to read the *latest* props and state from an Effect without "reacting" to them.** For example, imagine you want to log the number of the items in the shopping cart for every page visit:
+**Ancak bazen, *nihai* prop'ları ve state'i Effect bunlara "tepki" vermeden okumak isteyeceksiniz.** Örneğin, her sayfa ziyareti için alışveriş sepetindeki ürünlerin sayısını kaydetmek istediğinizi hayal edin:
 
 ```js {3}
 function Page({ url, shoppingCart }) {
   useEffect(() => {
     logVisit(url, shoppingCart.length);
-  }, [url, shoppingCart]); // ✅ All dependencies declared
+  }, [url, shoppingCart]); // ✅ Tüm bağımlılıklar bildirilmiş
   // ...
 }
 ```
 
-**What if you want to log a new page visit after every `url` change, but *not* if only the `shoppingCart` changes?** You can't exclude `shoppingCart` from dependencies without breaking the [reactivity rules.](#specifying-reactive-dependencies) However, you can express that you *don't want* a piece of code to "react" to changes even though it is called from inside an Effect. [Declare an *Effect Event*](/learn/separating-events-from-effects#declaring-an-effect-event) with the [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook, and move the code reading `shoppingCart` inside of it:
+**What if you want to log a new page visit after every `url` change, but *not* if only the `shoppingCart` changes?** [Reaktivite kurallarını](#specifying-reactive-dependencies) çiğnemeden `shoppingCart`'ı bağımlılıklardan çıkartamazsınız. Ancak, Effect içinden çağırılsa bile bir kod parçasının yapılan değişikliklere "tepki" vermesini *istemediğinizi* ifade edebilirsiniz. [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook'u ile [*Effect Olayı* bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve and `shoppingCart`'ı okuyan kodu onun içine taşıyın:
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {
@@ -1717,23 +1717,23 @@ function Page({ url, shoppingCart }) {
 
   useEffect(() => {
     onVisit(url);
-  }, [url]); // ✅ All dependencies declared
+  }, [url]); // ✅ Tüm bağımlılıklar bildirilmiş
   // ...
 }
 ```
 
-**Effect Events are not reactive and must always be omitted from dependencies of your Effect.** This is what lets you put non-reactive code (where you can read the latest value of some props and state) inside of them. By reading `shoppingCart` inside of `onVisit`, you ensure that `shoppingCart` won't re-run your Effect.
+**Effect Olayları reaktif değillerdir ve Effect'inizin bağımlılıklarından kaldırılmalıdırlar.** Bu, reaktif olmayan kodunuzu (prop'ların ve state'in nihai değerini okuyabildiğiniz) Effect'in içine koymanızı sağlar. `shoppingCart`'ı `onVisit` içinde okuyarak, `shoppingCart`'ın Effect'inizi yeniden çalıştırmamasını sağlarsınız.
 
-[Read more about how Effect Events let you separate reactive and non-reactive code.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+[Effect Olaylarının reaktif ve reaktif olmayan kodu ayırmasını nasıl sağladığı hakkında daha fazla bilgi edinin.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
 
 
 ---
 
-### Displaying different content on the server and the client {/*displaying-different-content-on-the-server-and-the-client*/}
+### Sunucu ve istemcide farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
-If your app uses server rendering (either [directly](/reference/react-dom/server) or via a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks)), your component will render in two different environments. On the server, it will render to produce the initial HTML. On the client, React will run the rendering code again so that it can attach your event handlers to that HTML. This is why, for [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) to work, your initial render output must be identical on the client and the server.
+Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [çatı kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamada render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. İstemcide, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın istemci ve sunucuda aynı olması gerekir.
 
-In rare cases, you might need to display different content on the client. For example, if your app reads some data from [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), it can't possibly do that on the server. Here is how you could implement this:
+Bazı nadir durumlarda, istemcide farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 
 ```js
 function MyComponent() {
@@ -1744,44 +1744,44 @@ function MyComponent() {
   }, []);
 
   if (didMount) {
-    // ... return client-only JSX ...
+    // ... yalnızca istemci JSX'i döndür ...
   }  else {
-    // ... return initial JSX ...
+    // ... ilk JSX'i döndür ...
   }
 }
 ```
 
-While the app is loading, the user will see the initial render output. Then, when it's loaded and hydrated, your Effect will run and set `didMount` to `true`, triggering a re-render. This will switch to the client-only render output. Effects don't run on the server, so this is why `didMount` was `false` during the initial server render.
+Uygulama yüklenirken, kullanıcı ilk render çıktısını görecektir. Daha sonra, uygulama yüklendiğinde ve hidrasyon olduğunda, Effect'iniz çalışarak `didMount` state'ini `true` yapacak ve yeniden render tetikleyecektir. Bu istemci-taraflı (client-side) render çıktısıyla değişecektir. Effect'ler sunucuda çalışmazlar, bu yüzden ilk server render'ı sırasında `didMount` state'i `false`'a eşitti.
 
-Use this pattern sparingly. Keep in mind that users with a slow connection will see the initial content for quite a bit of time--potentially, many seconds--so you don't want to make jarring changes to your component's appearance. In many cases, you can avoid the need for this by conditionally showing different things with CSS.
-
----
-
-## Troubleshooting {/*troubleshooting*/}
-
-### My Effect runs twice when the component mounts {/*my-effect-runs-twice-when-the-component-mounts*/}
-
-When Strict Mode is on, in development, React runs setup and cleanup one extra time before the actual setup.
-
-This is a stress-test that verifies your Effect’s logic is implemented correctly. If this causes visible issues, your cleanup function is missing some logic. The cleanup function should stop or undo whatever the setup function was doing. The rule of thumb is that the user shouldn’t be able to distinguish between the setup being called once (as in production) and a setup → cleanup → setup sequence (as in development).
-
-Read more about [how this helps find bugs](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) and [how to fix your logic.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+Bu modeli idareli kullanın. Yavaş bir bağlantıya sahip kullanıcıların ilk içeriği oldukça uzun bir süre (potansiyel olarak saniyelerce) göreceğinden, bileşeninizin görünüşünde büyük değişiklikler yapmak istemezsiniz. Çoğu durumda, CSS ile koşullu olarak farklı şeyler göstererek buna ihtiyaç duymazsınız.
 
 ---
 
-### My Effect runs after every re-render {/*my-effect-runs-after-every-re-render*/}
+## Sorun giderme {/*troubleshooting*/}
 
-First, check that you haven't forgotten to specify the dependency array:
+### Bileşen DOM'a eklendiğinde Effect'im iki kere çalışıyor {/*my-effect-runs-twice-when-the-component-mounts*/}
+
+Geliştirmede Strict modu açıkken, React setup (kurulum) ve cleanup (temizleme) işlemini asıl setup'dan önce bir kere fazladan çalıştırır.
+
+Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres testidir. Eğer bu gözle görülebilir sorunlara neden oluyorsa, cleanup (temizleme) fonksiyonunuzda mantık hatası vardır. Cleanup fonksiyonu, setup fonksiyonunun yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çağrılan setup (kurulum) (son üründe olduğu gibi) ile *setup* → *cleanup* → *setup* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
+
+[Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin. 
+
+---
+
+### Effect'im her yeniden render'dan sonra çalışıyor {/*my-effect-runs-after-every-re-render*/}
+
+İlk olarak bağımlılık dizisini belirtmeyi unutup unutmadığınızı kontrol edin:
 
 ```js {3}
 useEffect(() => {
   // ...
-}); // 🚩 No dependency array: re-runs after every render!
+}); // 🚩 Bağımlılık dizisi yok: her yeniden render'dan sonra yeniden çalışır!
 ```
 
-If you've specified the dependency array but your Effect still re-runs in a loop, it's because one of your dependencies is different on every re-render.
+Bağımlılık dizisini belirttiyseniz ancak Effect'iniz hala bir döngüde yeniden çalışyorsa, bunun nedeni bağımlılıklarınızdan birinin her yeniden render'da farklı olmasıdır.
 
-You can debug this problem by manually logging your dependencies to the console:
+Bağımlılıkları konsola manuel olarak yazdırarak bu hatayı ayıklayabilirsiniz:
 
 ```js {5}
   useEffect(() => {
@@ -1791,58 +1791,58 @@ You can debug this problem by manually logging your dependencies to the console:
   console.log([serverUrl, roomId]);
 ```
 
-You can then right-click on the arrays from different re-renders in the console and select "Store as a global variable" for both of them. Assuming the first one got saved as `temp1` and the second one got saved as `temp2`, you can then use the browser console to check whether each dependency in both arrays is the same:
+Daha sonra konsoldaki farklı yeniden render'ların dizilerine sağ tıklayıp her ikisi için de "Global değişken olarak sakla"'yı seçebilirsiniz. İlkinin `temp1` olarak ve ikincinin `temp2` olarak kaydedildiğini varsayarsak, her iki dizideki her bir bağımlılığın aynı olup olmadığını kontrol etmek için tarayıcı konsolunu kullanabilirsiniz:
 
 ```js
-Object.is(temp1[0], temp2[0]); // Is the first dependency the same between the arrays?
-Object.is(temp1[1], temp2[1]); // Is the second dependency the same between the arrays?
-Object.is(temp1[2], temp2[2]); // ... and so on for every dependency ...
+Object.is(temp1[0], temp2[0]); // İlk bağımlılık diziler arasında aynı mı?
+Object.is(temp1[1], temp2[1]); // İkinci bağımlılık diziler arasında aynı mı?
+Object.is(temp1[2], temp2[2]); // ... ve diğer bağımlılıklar için ...
 ```
 
-When you find the dependency that is different on every re-render, you can usually fix it in one of these ways:
+Her yeniden render'da farklı olan bağımlılığı bulduğunzda, genellikle şu yollardan biriyle düzeltebilirsiniz:
 
-- [Updating state based on previous state from an Effect](#updating-state-based-on-previous-state-from-an-effect)
-- [Removing unnecessary object dependencies](#removing-unnecessary-object-dependencies)
-- [Removing unnecessary function dependencies](#removing-unnecessary-function-dependencies)
-- [Reading the latest props and state from an Effect](#reading-the-latest-props-and-state-from-an-effect)
+- [Effect'teki önceki state'e göre state'i güncelleme](#updating-state-based-on-previous-state-from-an-effect)
+- [Gereksiz nesne bağımlılıklarını kaldırmak](#removing-unnecessary-object-dependencies)
+- [Gereksiz fonksiyon bağımlılıklarını kaldırmak](#removing-unnecessary-function-dependencies)
+- [Effect'te nihai prop'ları ve state'i okuma](#reading-the-latest-props-and-state-from-an-effect)
 
-As a last resort (if these methods didn't help), wrap its creation with [`useMemo`](/reference/react/useMemo#memoizing-a-dependency-of-another-hook) or [`useCallback`](/reference/react/useCallback#preventing-an-effect-from-firing-too-often) (for functions).
-
----
-
-### My Effect keeps re-running in an infinite cycle {/*my-effect-keeps-re-running-in-an-infinite-cycle*/}
-
-If your Effect runs in an infinite cycle, these two things must be true:
-
-- Your Effect is updating some state.
-- That state leads to a re-render, which causes the Effect's dependencies to change.
-
-Before you start fixing the problem, ask yourself whether your Effect is connecting to some external system (like DOM, network, a third-party widget, and so on). Why does your Effect need to set state? Does it synchronize with that external system? Or are you trying to manage your application's data flow with it?
-
-If there is no external system, consider whether [removing the Effect altogether](/learn/you-might-not-need-an-effect) would simplify your logic.
-
-If you're genuinely synchronizing with some external system, think about why and under what conditions your Effect should update the state. Has something changed that affects your component's visual output? If you need to keep track of some data that isn't used by rendering, a [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (which doesn't trigger re-renders) might be more appropriate. Verify your Effect doesn't update the state (and trigger re-renders) more than needed.
-
-Finally, if your Effect is updating the state at the right time, but there is still a loop, it's because that state update leads to one of the Effect's dependencies changing. [Read how to debug dependency changes.](/reference/react/useEffect#my-effect-runs-after-every-re-render)
+Son çare olarak (bu yöntemler yardımcı olmadıysa), [`useMemo`](/reference/react/useMemo#memoizing-a-dependency-of-another-hook) veya [`useCallback`](/reference/react/useCallback#preventing-an-effect-from-firing-too-often) (fonksiyonlar için) kullanın.
 
 ---
 
-### My cleanup logic runs even though my component didn't unmount {/*my-cleanup-logic-runs-even-though-my-component-didnt-unmount*/}
+### Effect'im sonsuz bir döngüde sürekli çalışıyor {/*my-effect-keeps-re-running-in-an-infinite-cycle*/}
 
-The cleanup function runs not only during unmount, but before every re-render with changed dependencies. Additionally, in development, React [runs setup+cleanup one extra time immediately after component mounts.](#my-effect-runs-twice-when-the-component-mounts)
+Effect'iniz sonsuz bir döngüde çalışıyorsa, şu iki şey doğru olmak zorundadır:
 
-If you have cleanup code without corresponding setup code, it's usually a code smell:
+- Effect'iniz bir state'i güncelliyor.
+- O state Effect'in bağımlılıklarının değişmesine neden olan bir yeniden render tetikliyordur.
+
+Sorunu çözmeye başlamadan önce, Effect'inizin harici bir sisteme (DOM, ağ, üçüncü parti widget gibi) bağlanıp bağlanmadığını kendinize sorun. Effect'iniz neden state'i değiştiriyor? Harici sistem ile senkronizasyon mu yapıyor? Yoksa uygulamanızın veri akışını Effect ile mi yönetmeye çalışıyorsunuz?
+
+Harici bir sistem yoksa, [Effect'i tamamen kaldırmanın](/learn/you-might-not-need-an-effect) mantığınızı basitleştirip basitleştirmeyeceğine bakın.
+
+Eğer gerçekten harici bir sistem ile senkronizasyon yapıyorsanız, Effect'inizin neden ve hangi koşullarda state'i güncellemesi gerektiğini düşünün. Bileşeninizin görsel çıktısını etkileyen bir değişiklik mi oldu? Render sırasında kullanılmayan bazı verileri takip etmeniz gerekiyorsa, [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (yeniden render tetiklemez) daha uygun olabilir. Effect'inizin state'i gereğinden fazla güncellemediğini (ve yeniden render'lar tetiklemediğini) doğrulayın. 
+
+Son olarak, Effect'iniz state'i doğru zamanda güncelliyorsa ancak yine de bir döngü söz konusuysa, bunun nedeni, state güncellemesinin Effect'in bağımlılıklarından birinin değişmesine neden olmasıdır. [Bağımlılık değişikliklerinden kaynaklı hataların nasıl ayıklanacağını okuyun.](/reference/react/useEffect#my-effect-runs-after-every-re-render)
+
+---
+
+### Cleanup (temizleme) mantığım bileşenim DOM'dan kaldırılmasa bile çalışıyor {/*my-cleanup-logic-runs-even-though-my-component-didnt-unmount*/}
+
+Cleanup fonksiyonu sadece DOM'dan kaldırılma sırasında değil, değişen bağımlılıklarla her yeniden render'dan önce de çalışır. Ek olarak, geliştirme aşamasında, React [setup+cleanup fonksiyonlarını bileşen DOM'a eklendikten hemen sonra bir kez daha çalıştırır.](#my-effect-runs-twice-when-the-component-mounts)
+
+Bir cleanup kodunuz var ancak setup kodunuz yoksa, bu genellike kötü kokan bir koddur (code smell):
 
 ```js {2-5}
 useEffect(() => {
-  // 🔴 Avoid: Cleanup logic without corresponding setup logic
+  // 🔴 Kaçın: Setup mantığı olmadan cleanup mantığı var
   return () => {
     doSomething();
   };
 }, []);
 ```
 
-Your cleanup logic should be "symmetrical" to the setup logic, and should stop or undo whatever setup did:
+Temizleme mantığınız kurulum mantığıyla "simetrik" olmalı ve setup'ın yaptığı her şeyi durdurmalı veya geri almalıdır:
 
 ```js {2-3,5}
   useEffect(() => {
@@ -1854,10 +1854,10 @@ Your cleanup logic should be "symmetrical" to the setup logic, and should stop o
   }, [serverUrl, roomId]);
 ```
 
-[Learn how the Effect lifecycle is different from the component's lifecycle.](/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect)
+[Effect yaşam döngüsünün bileşenin yaşam döngüsünden ne kadar farklı olduğunu öğrenin.](/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect)
 
 ---
 
-### My Effect does something visual, and I see a flicker before it runs {/*my-effect-does-something-visual-and-i-see-a-flicker-before-it-runs*/}
+### Effect'im görsel bir şey yapıyor ve çalışmadan önce bir titreme görüyorum {/*my-effect-does-something-visual-and-i-see-a-flicker-before-it-runs*/}
 
-If your Effect must block the browser from [painting the screen,](/learn/render-and-commit#epilogue-browser-paint) replace `useEffect` with [`useLayoutEffect`](/reference/react/useLayoutEffect). Note that **this shouldn't be needed for the vast majority of Effects.** You'll only need this if it's crucial to run your Effect before the browser paint: for example, to measure and position a tooltip before the user sees it.
+Effect'iniz tarayıcının [ekranı boyamasını](/learn/render-and-commit#epilogue-browser-paint) engelliyorsa, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin. Bunu yapmaya **Effect'lerin büyük çoğunluğu için ihtiyaç duyulmaması gerektiğini unutmayın.** Buna yalnızca Effect'inizi tarayıcı ekranı boyamadan önce çalıştırmanız çok önemliyse ihtiyacanız olacak: örneğin, bir tooltip'ini kullanıcı görmeden önce ölçmek ve konumlandırmak için.
