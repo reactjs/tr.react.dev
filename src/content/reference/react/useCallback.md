@@ -805,26 +805,13 @@ This ensures that the consumers of your Hook can optimize their own code when ne
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### Every time my component renders, `useCallback` returns a different function {/*every-time-my-component-renders-usecallback-returns-a-different-function*/}
+### Bileşenim her render olduğunda, `useCallback` farklı bir fonksiyon döndürüyor {/*every-time-my-component-renders-usecallback-returns-a-different-function*/}
 
-Make sure you've specified the dependency array as a second argument!
+Bağımlılık dizisini ikinci argüman olarak belirttiğinizden emin olun!
 
-If you forget the dependency array, `useCallback` will return a new function every time:
-
-```js {7}
-function ProductPage({ productId, referrer }) {
-  const handleSubmit = useCallback((orderDetails) => {
-    post('/product/' + productId + '/buy', {
-      referrer,
-      orderDetails,
-    });
-  }); // 🔴 Returns a new function every time: no dependency array
-  // ...
-```
-
-This is the corrected version passing the dependency array as a second argument:
+Bağımlılık dizisini unutursanız `useCallback` her seferinde yeni bir fonksiyon döndürür:
 
 ```js {7}
 function ProductPage({ productId, referrer }) {
@@ -833,11 +820,24 @@ function ProductPage({ productId, referrer }) {
       referrer,
       orderDetails,
     });
-  }, [productId, referrer]); // ✅ Does not return a new function unnecessarily
+  }); // 🔴 Her seferinde yeni fonksiyon döndürür: bağımlılık dizisi yok
   // ...
 ```
 
-If this doesn't help, then the problem is that at least one of your dependencies is different from the previous render. You can debug this problem by manually logging your dependencies to the console:
+Bağımlılık dizisinin ikinci argüman olarak iletildiği düzeltilmiş hali şu şekildedir:
+
+```js {7}
+function ProductPage({ productId, referrer }) {
+  const handleSubmit = useCallback((orderDetails) => {
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }, [productId, referrer]); // ✅ Gereksiz yere yeni bir fonksiyon döndürmez
+  // ...
+```
+
+Bu işe yaramazsa, sorun bağımlılıklarınızdan en az birinin önceki render işleminden farklı olmasıdır. Bağımlılıklarınızı manuel olarak konsola yazdırırsanız sorunun sebebini tespit edebilirsiniz:
 
 ```js {5}
   const handleSubmit = useCallback((orderDetails) => {
@@ -847,28 +847,28 @@ If this doesn't help, then the problem is that at least one of your dependencies
   console.log([productId, referrer]);
 ```
 
-You can then right-click on the arrays from different re-renders in the console and select "Store as a global variable" for both of them. Assuming the first one got saved as `temp1` and the second one got saved as `temp2`, you can then use the browser console to check whether each dependency in both arrays is the same:
+Daha sonra konsolda farklı render'larda yazdırılan dizilere sağ tıklayıp her ikisi için de "Store as a global variable"'ı seçebilirsiniz. `temp1` ve `temp2` olarak kaydedildiklerini varsayarsak, her iki dizide bulunan bağımlılıkların aynı olup olmadığını kontrol etmek için tarayıcı konsolunu kullanabilirsiniz:
 
 ```js
-Object.is(temp1[0], temp2[0]); // Is the first dependency the same between the arrays?
-Object.is(temp1[1], temp2[1]); // Is the second dependency the same between the arrays?
-Object.is(temp1[2], temp2[2]); // ... and so on for every dependency ...
+Object.is(temp1[0], temp2[0]); // İlk bağımlılık diziler arasında aynı mı?
+Object.is(temp1[1], temp2[1]); // İkinci bağımlılık diziler arasında aynı mı?
+Object.is(temp1[2], temp2[2]); // ... her bağımlılık için devam eder ...
 ```
 
-When you find which dependency is breaking memoization, either find a way to remove it, or [memoize it as well.](/reference/react/useMemo#memoizing-a-dependency-of-another-hook)
+Önbellek mekanizmasını kıran bağımlılığı bulduğunuzda, ya bir yolunu bulup silin ya da [önbelleğe alın.](/reference/react/useMemo#memoizing-a-dependency-of-another-hook)
 
 ---
 
-### I need to call `useCallback` for each list item in a loop, but it's not allowed {/*i-need-to-call-usememo-for-each-list-item-in-a-loop-but-its-not-allowed*/}
+### Bir döngüdeki her liste öğesi için `useCallback`'i çağırmam gerekiyor ama yapmama izin vermiyor {/*i-need-to-call-usememo-for-each-list-item-in-a-loop-but-its-not-allowed*/}
 
-Suppose the `Chart` component is wrapped in [`memo`](/reference/react/memo). You want to skip re-rendering every `Chart` in the list when the `ReportList` component re-renders. However, you can't call `useCallback` in a loop:
+`Chart` bileşeninin [`memo`](/reference/react/memo) içine sarıldığını varsayalım. `ReportList` bileşeni yeniden render edildiğinde listedeki her `Chart`'ın yeniden render işlemi atlamak istiyorsunuz. Ancak, döngü içerisinde `useCallback` çağıramazsınız:
 
 ```js {5-14}
 function ReportList({ items }) {
   return (
     <article>
       {items.map(item => {
-        // 🔴 You can't call useCallback in a loop like this:
+        // 🔴 `useCallback`i bu şekilde döngüde çağıramazsınız:
         const handleClick = useCallback(() => {
           sendReport(item)
         }, [item]);
@@ -884,7 +884,7 @@ function ReportList({ items }) {
 }
 ```
 
-Instead, extract a component for an individual item, and put `useCallback` there:
+Bunun yerine, her öğeyi bileşene çıkarın ve `useCallback`'i bu bileşene yerleştirin:
 
 ```js {5,12-21}
 function ReportList({ items }) {
@@ -898,7 +898,7 @@ function ReportList({ items }) {
 }
 
 function Report({ item }) {
-  // ✅ Call useCallback at the top level:
+  // ✅ useCallback'i en üst kapsamda çağırın:
   const handleClick = useCallback(() => {
     sendReport(item)
   }, [item]);
@@ -911,7 +911,7 @@ function Report({ item }) {
 }
 ```
 
-Alternatively, you could remove `useCallback` in the last snippet and instead wrap `Report` itself in [`memo`.](/reference/react/memo) If the `item` prop does not change, `Report` will skip re-rendering, so `Chart` will skip re-rendering too:
+Alternatif olarak, son kod parçasındaki `useCallback`'i kaldırabilir ve yerine `Report` bileşeninin kendisini [`memo`](/reference/react/memo)'ya sarabilirsiniz. `item` prop'u değişmezse, `Report` yeniden render'ı atlar. Bu nedenle `Chart`'da yeniden render edilmez:
 
 ```js {5,6-8,15}
 function ReportList({ items }) {
