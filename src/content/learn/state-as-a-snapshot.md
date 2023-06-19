@@ -4,25 +4,25 @@ title: Anlık Görüntü Olarak State
 
 <Intro>
 
-State değişkenleri okuma ve yazma yapabildiğiniz sıradan Javascript değişkenlerine benzeyebilir. Ancak, State daha çok anlık görüntü gibi çalışır. Onu ayarlamak zaten sahip olduğunuz State değişkenini değiştirmez, bunun yerine yeniden render işlemini tetikler.
+State değişkenleri okuma ve yazma yapabildiğiniz sıradan Javascript değişkenlerine benzeyebilir. Ancak, State daha çok anlık görüntü gibi çalışır. Değerini ayarlamak halihazırda sahip olduğunuz State değişkenini değiştirmez, bunun yerine yeniden render işlemini tetikler.
 
 
 </Intro>
 
 <YouWillLearn>
 
-* State'i ayarlamak nasıl yeniden render alınmasını tetikler
+* State'i ayarlamak yeniden render alınmasını nasıl tetikler
 * State güncellemeleri ne zaman ve nasıl yapılır 
-* State'i ayarladıktan sonra neden hemen güncellenmiyor
-* Olay yöneticileri state'in "Anlık Görüntüsüne" nasıl erişiyor
+* State neden ayarlandıktan hemen sonra güncellenmez
+* Olay yöneticileri state'in "anlık görüntüsü"ne nasıl erişir
 
 </YouWillLearn>
 
-## State'i ayarlamak render'ı tetikler {/*setting-state-triggers-renders*/}
+## State'i ayarlamak render tetikler {/*setting-state-triggers-renders*/}
 
-Kullanıcı arayüzünün, bir tıklama gibi kullanıcı olayına doğrudan yanıt olarak değiştiğini düşünebilirsiniz. React içinde bu bu mental modelden biraz farklı çalışır. Bir önceki sayfada React’te bunu gördünüz. [State'i değiştirmek bir yeniden render isteği oluşturur](/learn/render-and-commit#step-1-trigger-a-render) Bu bir arayüzün olaya tepki vermesi için *state’i güncellemeniz* gerektiği anlamına gelir.
+Tıklama gibi kullanıcı olaylarına yanıt olarak kullanıcı arayüzünüzün doğrudan değiştiğini düşünebilirsiniz. React bu zihinsel modelden biraz farklı çalışır. Bir önceki sayfada, [state'i değiştirmenin yeniden render isteği oluşturduğunu](/learn/render-and-commit#step-1-trigger-a-render) gördünüz. Bu durum, arayüzün olaya tepki vermesi için *state’i güncellemeniz* gerektiği anlamına gelir.
 
-Bu örnekte “Gönder”e bastığınızda  `setIsSent(true)` React'e kullanıcı arayüzünü yeniden render etmesini söyler:
+Bu örnekte, “Gönder”e bastığınızda, `setIsSent(true)` ifadesi React'e kullanıcı arayüzünü yeniden render etmesini söyler:
 
 <Sandpack>
 
@@ -31,7 +31,7 @@ import { useState } from 'react';
 
 export default function Form() {
   const [isSent, setIsSent] = useState(false);
-  const [message, setMessage] = useState('Hi!');
+  const [message, setMessage] = useState('Selam!');
   if (isSent) {
     return <h1>Mesajınız yolda!</h1>
   }
@@ -65,40 +65,40 @@ label, textarea { margin-bottom: 10px; display: block; }
 Butona tıkladığınızda şu işlemler gerçekleşir:
 
 1. `onSubmit` olay yöneticisi çalıştırılır.
-2. `setIsSent(true)`, `isSent` değerini `true` olarak ayarlar ve yeni bir render işlemi için kuyruğa alır.
-3. React, yeni `isSent` değerine göre bileşeni yeniden render eder.
+2. `setIsSent(true)`, `isSent` değerini `true` olarak ayarlar ve yeni bir render işlemini kuyruğa alır.
+3. React, `isSent`'in yeni değerine göre bileşeni yeniden render eder.
 
-Hadi state ve render işlemi arasındaki ilişkiye yakından bakalım.
+Şimdi state ve render arasındaki ilişkiye daha yakından bakalım.
 
-## Render işlemi, bir anlık görüntü alır. {/*rendering-takes-a-snapshot-in-time*/}
+## Render işlemi anlık görüntü alır {/*rendering-takes-a-snapshot-in-time*/}
 
-["Render Etmek"](/learn/render-and-commit#step-2-react-renders-your-components) bir fonksiyon olan bileşeninizi çağırdığı anlamına gelir. Bu fonksiyondan döndürdüğünüz JSX, kullanıcı arayüzünün  bir anlık görüntüsü olarak düşünülebilir. Bu JSX’in içinde prop’lar olay yöneticileri ve yerel değişkenleri hepsi **render anında state kullanılarak**  hesaplanmış durumdadır. 
+["Render Etmek"](/learn/render-and-commit#step-2-react-renders-your-components), React'ın bir fonksiyon olan bileşeninizi çağırdığı anlamına gelir. Bu fonksiyondan döndürdüğünüz JSX, kullanıcı arayüzünün zaman içindeki anlık görüntüsü olarak düşünülebilir. Bileşenin prop’ları, olay yöneticileri ve yerel değişkenleri **render anında state kullanılarak**  hesaplanmıştır. 
 
-Bir fotoğraf veya film karesinin aksine, döndürdüğünüz kullanıcı arayüzü "anlık görüntü" etkileşimlidir. Bu, girdilere yanıt olarak neyin gerçekleşeceğini belirten olay yöneticileri gibi mantık içerir. React, ekranı bu anlık görüntüyle eşleştirmek ve olay yöneticilerini bağlamak için güncelleme yapar. Sonuç olarak, bir butona basmak JSX'inizdeki tıklama yöneticisini tetikleyecektir.
+Bir fotoğraf veya film karesinin aksine, döndürdüğünüz kullanıcı arayüzünün "anlık görüntüsü" etkileşimlidir. Girdilere yanıt olarak neyin gerçekleşeceğini belirten olay yöneticileri gibi mantık içerir. React, ekranı bu anlık görüntüyle eşleşecek şekilde günceller ve olay işleyicilerini bağlar. Sonuç olarak, bir butona basmak JSX'inizdeki tıklama yöneticisini tetikleyecektir.
 
 React bir bileşeni yeniden render ettiğinde: 
 
 1. React fonksiyonunuzu yeniden çağırır.
 2. Fonksiyonunuz yeni bir JSX anlık görüntüsü döner.
-3. React ardından, döndürdüğünüz anlık görüntüye göre ekranı günceller
+3. Ardından React, döndürdüğünüz anlık görüntüye göre ekranı günceller.
 
 <IllustrationBlock sequential>
-    <Illustration caption="React fonksiyonu çalıştırıyor" src="/images/docs/illustrations/i_render1.png" />
-    <Illustration caption="Anlık görüntüyü hesaplıyor" src="/images/docs/illustrations/i_render2.png" />
-    <Illustration caption="DOM ağacını güncelliyor" src="/images/docs/illustrations/i_render3.png" />
+    <Illustration caption="React fonksiyonu çalıştırır" src="/images/docs/illustrations/i_render1.png" />
+    <Illustration caption="Anlık görüntüyü hesaplar" src="/images/docs/illustrations/i_render2.png" />
+    <Illustration caption="DOM ağacını günceller" src="/images/docs/illustrations/i_render3.png" />
 </IllustrationBlock>
 
-Bir bileşenin hafızası olarak, state fonksiyonunuz döndüğünde ortadan kaybolan sıradan bir değişken değildir. State aslında fonksiyonunuzun dışında React’in içinde yaşar sanki bir rafta duruyormuş gibi. React bileşeninizi çağırdığında o belirli render için durumun bir anlık görüntüsünü size verir. Bileşeniniz JSX içinde hesaplanmış taze bir takım prop ve olay yöneticileriyle birlikte **o render için state değerlerini kullanarak** kullanıcı arayüzünün bir anlık görüntüsünü döndürür.
+Bir bileşenin hafızası olarak state, fonksiyonunuzun yürütülmesi sona erdiğinde ortadan kaybolan sıradan bir değişken değildir. State sanki bir rafta duruyormuşçasına fonksiyonunuzun dışında  React’in kendi içinde yaşar. React bileşeninizi çağırdığında, söz konusu render için state'in anlık görüntüsünü verir. Bileşeniniz, **ilgili render'daki state değeri kullanılarak** hesaplanmış JSX'indeki yeni prop'lar ve olay yöneticileriyle birlikte kullanıcı arayüzünüzün anlık görüntüsünü döndürür.
 
 <IllustrationBlock sequential>
-  <Illustration caption="React'a state'i güncellemesini söylersiniz." src="/images/docs/illustrations/i_state-snapshot1.png" />
-  <Illustration caption="React, state değerini günceller." src="/images/docs/illustrations/i_state-snapshot2.png" />
-  <Illustration caption="React, bileşene state değerinin bir anlık görüntüsünü aktarır." src="/images/docs/illustrations/i_state-snapshot3.png" />
+  <Illustration caption="React'e state'i güncellemesini söylersiniz" src="/images/docs/illustrations/i_state-snapshot1.png" />
+  <Illustration caption="React state değerini günceller" src="/images/docs/illustrations/i_state-snapshot2.png" />
+  <Illustration caption="React bileşene state değerinin anlık görüntüsünü aktarır" src="/images/docs/illustrations/i_state-snapshot3.png" />
 </IllustrationBlock>
 
-İşleyişin nasıl çalıştığını göstermek için küçük bir deney yapalım. Bu örnekte, "+3" butonuna tıkladığınızda `setNumber(number + 1)` üç kez çağrıldığı için sayaçın üç kez artmasını bekleyebilirsiniz. 
+İşte size bunun nasıl çalıştığını gösteren küçük bir deney. Bu örnekte, "+3" butonuna tıkladığınızda `setNumber(number + 1)` üç kez çağrıldığı için sayacın üç kez artmasını bekleyebilirsiniz. 
 
-“+3” butonuna tıkladığınızda ne olduğunu görelim
+"+3" butonuna tıkladığınızda ne olduğunu görün:
 
 <Sandpack>
 
@@ -130,7 +130,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 `number` değerinin her tıklamada bir kez arttığına dikkat edin!
 
-**State’i ayarlamak sadece *sonraki* render işlemi için değiştirir.** İlk render sırasında, `number` değeri `0` idi. Bu yüzden, o render'ın `onClick` işleyicisinde `setNumber(number + 1)` çağrıldıktan sonra bile, `number` değeri hala `0` olarak kalır.
+**State’i ayarlamak yalnızca *sonraki* render işlemi için değerini değiştirir.** İlk render sırasında, `number` değeri `0` idi. Bu yüzden, *o render'ın* `onClick` işleyicisinde `setNumber(number + 1)` çağrıldıktan sonra bile `number` değeri değişmez ve `0` olarak kalır.
 
 ```js
 <button onClick={() => {
@@ -140,7 +140,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 }}>+3</button>
 ```
 
-İşte bu butonun tıklama yöneticisine React'e ne yapması gerektiğini söylediği:
+Bu butonun tıklama işleyicisinin React'e yapmasını söylediği şey aşağıdaki gibidir:
 
 1. `setNumber(number + 1)`: `number` değeri `0` olduğu için `setNumber(0 + 1)` olarak çağrılır.
     - React, bir sonraki render işleminde number değerini 1 olarak değiştirmek için hazırlık yapar.
@@ -175,7 +175,7 @@ Bu nedenle, düğmeye tekrar tıkladığınızda sayaç önce `2` olarak ayarlan
 
 ## Zaman içerisinde state {/*state-over-time*/}
 
-Bu eğlenceliydi. Bu düğmeye tıklamanın ne uyarı vereceğini tahmin etmeye çalışın:
+Pekala, bu eğlenceliydi. Bu düğmeye tıklamanın ne uyarı vereceğini tahmin etmeye çalışın:
 
 <Sandpack>
 
@@ -211,7 +211,7 @@ setNumber(0 + 5);
 alert(0);
 ```
 
-Eğer uyarıya bir zamanlayıcı ekler ve bu zamanlayıcı yalnızca bileşen yeniden render edildikten _sonra_ tetiklenirse ne olur ? “0” mı yoksa “5” mi der? Bir tahminde bulunun!
+Peki ya uyarıya bir zamanlayıcı koyarsanız ve yalnızca bileşen yeniden render edildikten _sonra_ tetiklenirse ne olur? “0” mı yoksa “5” mi der? Bir tahminde bulunun!
 
 <Sandpack>
 
@@ -253,12 +253,12 @@ setTimeout(() => {
 
 React'te depolanan state, uyarı çalıştığında değişmiş olabilir, ancak kullanıcının etkileşimde bulunduğu zamandaki durumun bir anlık görüntüsü kullanılarak zamanlanmıştır.
 
-*Bir state değişkeninin değeri bir render işlemi içinde asla değişmez,** hatta yöneticisinin kodu asenkron olsa bile. İçindeki *o render’ın*  onClick yöneticisinde, `setNumber(number + 5)` çağrılmış olsa bile, `number`'ın değeri hala `0` olarak kalır. `Number`'ın değeri React bileşeninizi çağırarak kullanıcı arayüzü'nün "anlık görüntüsü'nü" alırken "sabitlenmiştir".
+**Bir state değişkeninin değeri render işlemi içinde asla değişmez,** hatta olay yöneticisinin kodu asenkron olsa bile. *O render’ın*  onClick yöneticisinde, `setNumber(number + 5)` çağrılmış olsa bile `number`'ın değeri `0` olarak kalır. State değeri React bileşeninizi çağırdığında kullanıcı arayüzünün "anlık görüntüsünü" alırken "sabitlenmiştir".
 
 İşte bu durumun olay yöneticilerinizi zamanlama hatalarına karşı daha yatkın hale getiren bir örneği. Aşağıda, beş saniyelik bir gecikmeyle mesaj gönderen bir form bulunmaktadır. Bu senaryoyu hayal edin:
 
-1. “Send” butonuna basarak “Hello” mesajını Alice’e gönderiyorsunuz
-2. Beş saniyelik gecikme bitmeden önce, “To” alanının değerini “Bob” olarak değiştiriyorsunuz.
+1. “Send” butonuna basarak “Merhaba” mesajını Alice’e gönderiyorsunuz
+2. Beş saniyelik gecikme bitmeden “Kime” alanının değerini “Bob” olarak değiştiriyorsunuz.
 
 `alert`'in ne görüntüleyeceğini bekliyorsunuz? "You said Hello to Alice" mı yoksa "You said Hello to Bob" mı? Bildiklerinizden yola çıkarak bir tahminde bulunun ve deneyin:
 
@@ -306,19 +306,19 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-**React, bir render içindeki olay yöneticilerindeki state değerlerini “sabit” tutar.** Kod çalışırken durumun değişip değişmediği konusunda endişelenmenize gerek yoktur.
+**React, state değerlerini render'ın olay yöneticileri içinde “sabit” tutar.** Kod çalışırken durumun değişip değişmediği konusunda endişelenmeniz gerekmez.
 
 Ancak bir yeniden render alma öncesi en son state’i okumak isterseniz ne yapabilirsiniz? Bir sonraki sayfada ele alınan [state güncelleme fonksiyonu](/learn/queueing-a-series-of-state-updates)'nu kullanmak isteyeceksiniz!
 
 <Recap>
 
-* State’i ayarlanması yeni bir render ister.
-* React State’i bileşeninizin dışında, sanki bir raf üzerinde depolar.
-* `useState` hook'unu çağırdığınızda, React *o render* için state'in bir anlık görüntüsünü verir.
-* Değişkenler ve olay yöneticileri yeniden render alınmasıyla “kurtulamazlar”. Her render’ın kendi olayı yöneticileri vardır.
-* Her render (ve içindeki fonksiyonlar), her zaman React’in *o* render’a verdiği state’in anlık görüntüsünü görecektir.
-* Renderlanmış JSX hakkında ne düşündüğünüze benzer bir şekilde, zihinsel olarak olay yöneticileri içinde state’i yerine koyabilirsiniz, 
-* Geçmişte oluşturulmuş olay yöneticileri, oluşturuldukları render’ın state değerine sahiptirler.
+* State’in ayarlanması yeni bir render isteği yapar.
+* React state’i bileşeninizin dışında, sanki bir raftaymış gibi, depolar.
+* `useState`'i çağırdığınızda, React *o render* için state'in anlık görüntüsünü verir.
+* Değişkenler ve olay yöneticileri yeniden render işlemi esnasında “hayatta kalmazlar”. Her render’ın kendi olayı yöneticileri vardır.
+* Tüm render'lar (ve içindeki fonksiyonlar), daima React’in *o* render’a verdiği state anlık görüntüsünü görür.
+* Renderlanmış JSX hakkında düşündüğünüze benzer şekilde, zihinsel olarak olay yöneticileri için de state’i yerine koyabilirsiniz.
+* Geçmişte oluşturulmuş olay yöneticileri, oluşturuldukları render'ın state değerine sahiptir.
 
 </Recap>
 
@@ -328,7 +328,7 @@ Ancak bir yeniden render alma öncesi en son state’i okumak isterseniz ne yapa
 
 #### Bir trafik ışığı uygulayın {/*implement-a-traffic-light*/}
 
-İşte butona basıldığında yaya geçidi ışığını açıp kapatan bir bileşen:
+İşte butona basıldığında geçiş yapan bir yaya geçidi ışık bileşeni:
 
 <Sandpack>
 
@@ -363,13 +363,13 @@ h1 { margin-top: 20px; }
 
 </Sandpack>
 
-İlgili tıklama yöneticisine bir `Alarm` ekleyelim. Yeşil ışık yanıyorsa ve `Walk` yazıyorsa, butona tıklanıldığında `Walk is Next` demesi gerekiyor. Kırmızı ışık yanıyorsa ve “Dur” yazıyorsa, butona tıklandığında `Walk is Next` demesi gerekiyor.
+Tıklama yöneticisine bir `alert` ekleyin. Yeşil ışık yanıyor ve `Yürü` yazıyorsa, butona tıklamak `Sıradaki: Dur` demelidir. Kırmızı ışık yanıyor ve “Dur” yazıyorsa, butona tıklamak `Sıradaki: Yürü` demelidir.
 
-`Alarm`'ı `setWalk` çağrısının öncesine veya sonrasına koymak arasında bir fark oluşturur mu?
+`alert`'i `setWalk` çağrısından önce veya sonra koymanız bir fark yaratır mı?
 
 <Solution>
 
-`Alarmınız` şu şekilde görünmeli:
+`alert`ünüz şu şekilde görünmelidir:
 
 <Sandpack>
 
@@ -405,17 +405,17 @@ h1 { margin-top: 20px; }
 
 </Sandpack>
 
-`setWalk` çağrısının öncesinde veya sonrasında olması fark etmez. walk'un render işlemi sırasındaki değeri sabittir. setWalk çağrısı, sadece *sonraki* render işlemi için değeri değiştirir, ancak önceki render işlemi için olay yöneticisini etkilemez.
+`setWalk` çağrısının öncesinde veya sonrasında olması fark etmez. `walk`'un render sırasındaki değeri sabittir. `setWalk` çağrısı, yalnızca *sonraki* render için değeri değiştirir ancak önceki render'daki olay yöneticisini etkilemez.
 
 Bu satır ilk başta mantıksız görünebilir:
 
 ```js
-alert(walk ? 'Stop is next' : 'Walk is next');
+alert(walk ? 'Sıradaki: Dur' : 'Sıradaki: Yürü');
 ```
 
-Ancak, "Eğer trafik lambası 'Walk now' gösteriyorsa, mesaj 'Stop is next' demelidir." şeklinde okursanız, mantıklı olur. Olay yöneticinizdeki walk değişkeni, ilgili render'in walk değeriyle eşleşir ve değişmez.
+Ancak şu şekilde okursanız mantıklı olur: "Trafik ışığı 'Yürü' gösteriyorsa, mesaj 'Sıradaki: Dur' demelidir." Olay işleyicinizdeki `walk` değişkeni, render'ın `walk` değeriyle eşleşir ve değişmez.
 
-Bu doğru olduğunu doğrulamak için yerine koyma yöntemini uygulayarak kontrol edebilirsiniz. walk değeri true olduğunda şunu elde edersiniz:
+Bunun doğruluğunu yerini koyma yöntemini uygulayarak kontrol edebilirsiniz. 'walk''ın değeri 'true' olduğunda şunu elde edersiniz:
 
 ```js
 <button onClick={() => {
@@ -429,7 +429,7 @@ Bu doğru olduğunu doğrulamak için yerine koyma yöntemini uygulayarak kontro
 </h1>
 ```
 
-"Change to Stop" butonuna tıklamak, walk değeri false olarak ayarlanmış bir render'ı sıraya alır ve "Stop is next" uyarısını verir.
+Yani "Dur Olarak Değiştir" butonuna tıklamak, `walk`'ın `false` olarak ayarlandığı render işlemini kuyruğa alır ve "Sıradaki: Dur" uyarısını verir.
 
 </Solution>
 
