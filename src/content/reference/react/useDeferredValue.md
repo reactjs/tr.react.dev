@@ -78,7 +78,7 @@ function SearchPage() {
 
 Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en son <CodeStep step={1}>değerin</CodeStep> "gerisinde" kalır. React ilk seferde ertelenmiş değeri *güncellemeden* render eder, ardından yeni değerle arka planda yeniden render işlemi planlar.
 
-**Bunun ne zaman yararlı olduğunu görmek için bir örnek üzerinden gidelim.**
+**Bunun ne zaman faydalı olabileceğini görmek için bir örnek üzerinden ilerleyelim.**
 
 <Note>
 
