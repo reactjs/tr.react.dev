@@ -4,7 +4,7 @@ title: useEffect
 
 <Intro>
 
-`useEffect`, [bir bileşeni harici sistem ile senkronize](/learn/synchronizing-with-effects) etmenizi sağlar.
+`useEffect`, [bir bileşeni harici bir sistem ile senkronize](/learn/synchronizing-with-effects) etmenizi sağlayan React Hook'udur.
 
 ```js
 useEffect(setup, dependencies?)
@@ -44,9 +44,9 @@ function ChatRoom({ roomId }) {
 
 #### Parametreler {/*parameters*/}
 
-* `setup`: Effect'inizin mantığını içeren fonksiyon. Setup (kurulum) fonksiyonunuz isteğe bağlı olarak *temizleme (cleanup)* fonksiyonu da döndürebilir. Bileşeniniz DOM'a eklendiğinde, React setup (kurulum) fonksiyonunuzu çalıştıracaktır. Değişen bağımlılıklar ile her yeniden render işleminden sonra, React önce temizleme fonksiyonunu (eğer sağladıysanız) eski değerlerle çalıştıracak ve ardından setup (kurulum) fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldıktan sonra, React temizleme fonksiyonunuzu çalıştıracaktır.
+* `setup`: Effect'inizin mantığını içeren fonksiyon. Kurulum (setup) fonksiyonunuz isteğe bağlı olarak *temizleme (cleanup)* fonksiyonu da döndürebilir. Bileşeniniz DOM'a eklendiğinde, React kurulum fonksiyonunuzu çalıştıracaktır. Değişen bağımlılıklar ile her yeniden render işleminden sonra, React önce temizleme fonksiyonunu (eğer sağladıysanız) eski değerlerle çalıştıracak ve ardından kurulum fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldıktan sonra, React temizleme fonksiyonunuzu çalıştıracaktır.
  
-* **Opsiyonel** `bağımlılıklar`: `setup` (`kurulum`) kodunun içinde referansı olan tüm reaktif değerlerin listesi. Reaktif değerler prop'ları, state'i ve bileşeninizin gövdesi içinde bildirilen tüm değişkenleri ve fonksiyonları içerir. Linter'ınız [React için yapılandırılmış](/learn/editor-setup#linting) ise, her reaktif değerin bağımlılık olarak doğru bir şekilde belirtildiğini doğrulayacaktır. Bağımlılık listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` şeklinde satır içinde yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak her bağımlılığı öncek değeri ile karşılaştırır. Eğer bağımlılık listesini boş bırakırsanız, Effect'iniz her yeniden render'dan sonra tekrar çalışacaktır. [Bağımlılık dizisi iletmenin, boş dizi iletmenin ve hiç bağımlılık olmaması arasındaki farkı görün.](#examples-dependencies)
+* **Opsiyonel** `bağımlılıklar`: `kurulum` (`setup`) kodunun içinde referansı olan tüm reaktif değerlerin listesi. Reaktif değerler prop'ları, state'i ve bileşeninizin gövdesi içinde bildirilen tüm değişkenleri ve fonksiyonları içerir. Linter'ınız [React için yapılandırılmış](/learn/editor-setup#linting) ise, her reaktif değerin bağımlılık olarak doğru bir şekilde belirtildiğini doğrulayacaktır. Bağımlılık listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` şeklinde satır içinde yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak her bağımlılığı önceki değeri ile karşılaştırır. Eğer bağımlılık listesini boş bırakırsanız, Effect'iniz her yeniden render'dan sonra tekrar çalışacaktır. [Bağımlılık dizisi iletmenin, boş dizi iletmenin ve hiç bağımlılık olmaması arasındaki farkı inceleyin.](#examples-dependencies)
 
 #### Döndürülenler {/*returns*/}
 
@@ -54,25 +54,25 @@ function ChatRoom({ roomId }) {
 
 #### Uyarılar {/*caveats*/}
 
-* `useEffect` bir Hook'tur, dolayısıyla bu Hook'u yalnızca **bileşeninizin en üst seviyesinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullu ifadeler içinde çağıramazsınız. Eğer çağırmak istiyorsanız, yeni bir bileşen çıkarın ve state'i içine taşıyın.
+* `useEffect` bir Hook'tur, dolayısıyla bu Hook'u yalnızca **bileşeninizin en üst seviyesinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullu ifadeler içinde çağıramazsınız. Eğer çağırmak istiyorsanız, yeni bir bileşen oluşturun ve state'i onun içine taşıyın.
 
 * Eğer **harici sistemle senkronize etmeye çalışmıyorsanız,** [büyük ihtimalle Effect'e ihtiyacınız yoktur.](/learn/you-might-not-need-an-effect)
 
 * Strict Modu kullanırken, React ilk gerçek kurulumdan önce **sadece geliştirme sırasında olmak üzere ekstra bir kurulum+temizleme döngüsü** çalıştırır. Bu, temizleme mantığınızın kurulum mantığınızı "yansıtmasını" ve kurulumun yaptığı her şeyi durdurmasını ya da geri almasını sağlayan bir stres testidir. Eğer bu bir sorun yaratıyorsa, [temizleme fonksiyonunu uygulayın.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-* Eğer bağımlılıklarınızdan bazıları nesneler veya bileşeniniz içinde tanımlanmış fonksiyonlar ise, bu bağımlılıkların **Effect'in gerekenden daha sık yeniden çalışmasına neden olma riski vardır.** Bu durumu düzeltmek için, gereksiz [nesne](#removing-unnecessary-object-dependencies) ve [fonksiyon](#removing-unnecessary-function-dependencies) bağımlılıklarını silin. Ayrıca [state güncellemelerinizi](#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan mantıüı](#reading-the-latest-props-and-state-from-an-effect) Effect dışına alabilirsiniz.
+* Eğer bağımlılıklarınızdan bazıları nesneler veya bileşeniniz içinde tanımlanmış fonksiyonlar ise, bu bağımlılıkların **Effect'in gerekenden daha sık yeniden çalışmasına neden olma riski vardır.** Bu durumu düzeltmek için, gereksiz [nesne](#removing-unnecessary-object-dependencies) ve [fonksiyon](#removing-unnecessary-function-dependencies) bağımlılıklarını silin. Ayrıca [state güncellemelerinizi](#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan mantığı](#reading-the-latest-props-and-state-from-an-effect) Effect dışına taşıyabilirsiniz.
 
-* Eğer Effect'inize bir etkileşim (tıklama gibi) neden olmuyorsa, React tarayıcının **Effect'inizi çalıştırmadan önce güncellenen ekranı boyamasına izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
+* Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React tarayıcının **Effect'inizi çalıştırmadan önce güncellenen ekranı boyamasına izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
 
-* Effect'inize bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı, Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden boyayabilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden boyamasını engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
+* Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden boyayabilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden boyamasını engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
 
-* Effect'ler **sadece client (kullanıcı) tarafında çalışır.** Server render etme sırasında çalışmazlar.
+* Effect'ler **sadece kullanıcı (client) tarafında çalışır.** Sunucu render etme sırasında çalışmazlar.
 
 ---
 
 ## Kullanım {/*usage*/}
 
-### Harici sisteme bağlanma {/*connecting-to-an-external-system*/}
+### Harici bir sisteme bağlanma {/*connecting-to-an-external-system*/}
 
 Bazı bileşenlerin sayfada görüntülenebilmesi için ağa, bazı tarayıcı API'larına ya da üçüncü parti kütüphanelere bağlı kalması gerekir. Bu sistemler React tarafından kontrol edilmezler, bu yüzden *harici* olarak adlandırılırlar.
 
@@ -98,32 +98,32 @@ function ChatRoom({ roomId }) {
 
 `useEffect`'e iki argüman iletmeniz gerekmektedir:
 
-1. Bu sisteme bağlanan <CodeStep step={1}>setup (kurulum) kodu</CodeStep> içeren bir *setup fonksiyonu*.
-   - Bu sistemle bağlantıyı kesen <CodeStep step={2}>clenaup (temizleme) kodu</CodeStep> içeren bir *temizleme fonksiyonu* döndürmeli.
-2. Bileşeninizden bu fonksiyonların içinde kullanılan her değeri içeren bir <CodeStep step={3}>bağımlılıklar listesi</CodeStep>.
+1. Bu sisteme bağlanan <CodeStep step={1}>kurulum (setup) kodu</CodeStep> içeren bir *kurulum fonksiyonu*.
+   - Bu sistemle olan bağlantıyı kesen <CodeStep step={2}>temizleme (cleanup) kodu</CodeStep> içeren bir *temizleme fonksiyonu* döndürmeli.
+2. Bileşeninizden bu fonksiyonların içinde kullanılan her bir değeri içeren <CodeStep step={3}>bağımlılıklar listesi</CodeStep>.
 
-**React, setup (kurulum) ve cleanup (temizleme) fonksiyonlarınızı gerektiğinde birden çok defa çağırılabilecek şekilde çağırır:**
+**React, kurulum ve temizleme fonksiyonlarınızı gerektiğinde birden çok kez olabilecek şekilde çağırır:**
 
-1. <CodeStep step={1}>setup kodunuz</CodeStep> bileşeniniz sayfaya eklendiğinde çalışır *(DOM'a eklendiğinde)*.
+1. <CodeStep step={1}>Kurulum kodunuz</CodeStep> bileşeniniz sayfaya eklendiğinde çalışır *(DOM'a eklendiğinde)*.
 2. Bileşeninizin <CodeStep step={3}>bağımlılıklarının</CodeStep> değiştiği her yeniden render etmeden sonra:
-   - İlk olarak, <CodeStep step={2}>cleanup (temizleme) kodunuz</CodeStep> eski prop'lar ve state ile çalışır.
-   - Daha sonra, <CodeStep step={1}>setup (kurulum) kodunuz</CodeStep> yeni prop'lar ve state ile çalışır.
-3. <CodeStep step={2}>cleanup (temizleme) kodunuz</CodeStep> son kez bileşeniniz sayfadan kaldırıldığında çalışır *(DOM'dan çıkarıldığında).*
+   - İlk olarak, <CodeStep step={2}>temizleme kodunuz</CodeStep> eski prop'lar ve state ile çalışır.
+   - Daha sonra, <CodeStep step={1}>kurulum kodunuz</CodeStep> yeni prop'lar ve state ile çalışır.
+3. <CodeStep step={2}>temizleme kodunuz</CodeStep> son kez bileşeniniz sayfadan kaldırıldığında çalışır *(DOM'dan kaldırıldığında).*
 
 **Yukarıdaki örneği biraz açıklayalım.**  
 
 Yukarıdaki `ChatRoom` bileşeni sayfaya eklendiğinde, başlangıç `serverUrl` ve `roomId` ile sohbet odasına bağlanacaktır. Eğer `serverUrl` veya `roomId`'den biri yeniden render yüzünden değişirse (diyelim ki kullanıcı başka bir sohbet odasını seçerse), Effect'iniz önceki odayla *bağlantısını kesecek ve bir sonraki odaya bağlanacaktır.* `ChatRoom` bileşeniniz sayfadan kaldırıldığında, Effect'iniz son bir defa bağlantıyı kesecektir.
 
-**Geliştirme sırasında [hataları bulmanıza yardımcı olmak](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) için React, <CodeStep step={1}>setup(kurulum)</CodeStep> ve <CodeStep step={2}>cleanup(temizleme)</CodeStep>'yi <CodeStep step={1}>setup(kurulum)</CodeStep>'dan önce son kez çalıştırır.** Bu, Effect mantığınızın doğru uygulandığını doğrulayan bir stres testidir. Bu, gözle görünür sorunlara neden oluyorsa, cleanup (temizleme) fonksiyonunuzda bazı mantık hataları vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı ya da geri almalıdır. Temel kural, kullanıcı bir kez çağrılan setup (kurulum) (son üründe olduğu gibi) ile *setup* → *cleanup* → *setup* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir. [Sık kullanılan çözümlere göz gezdirin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+**Geliştirme sırasında [hataları bulmanıza yardımcı olmak](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) için React, <CodeStep step={1}>kurulum</CodeStep> ve <CodeStep step={2}>temizleme</CodeStep> kodunu <CodeStep step={1}>kurulum</CodeStep>'dan önce son kez çalıştırır.** Bu, Effect mantığınızın doğru uygulandığını doğrulayan bir stres testidir. Bu, gözle görünür sorunlara neden oluyorsa, temizleme fonksiyonunuzda bazı mantık hataları vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı ya da geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir. [Sık kullanılan çözümlere göz gezdirin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-**[Her Effect'i bağımsız bir süreç olarak yazmayı](/learn/lifecycle-of-reactive-effects#each-effect-represents-a-separate-synchronization-process) ve [her seferinde tek setup(kurulum)/cleanup(temizleme) döngüsü düşünmeyi](/learn/lifecycle-of-reactive-effects#thinking-from-the-effects-perspective) deneyin.** Bileşeninizin DOM'a ekleniyor/çıkarılıyor ya da güncelleniyor olması fark etmemelidir. Temizleme mantığınız kurulum mantığını doğru bir şekilde "yansıttığında", Effect'iniz kurulum ve temizlemeyi gerektiği sıklıkta çalıştıracaktır.
+**[Her Effect'i bağımsız bir süreç olarak yazmayı](/learn/lifecycle-of-reactive-effects#each-effect-represents-a-separate-synchronization-process) ve [her seferinde tek kurulum/temizleme döngüsü düşünmeyi](/learn/lifecycle-of-reactive-effects#thinking-from-the-effects-perspective) deneyin.** Bileşeninizin DOM'a ekleniyor/çıkarılıyor ya da güncelleniyor olması fark etmemelidir. Temizleme mantığınız kurulum mantığını doğru bir şekilde "yansıttığında", Effect'iniz kurulum ve temizlemeyi gerektiği sıklıkta çalıştıracaktır.
 
 <Note>
 
 Effect, [bileşeninizi harici bir sistemle senkronize tutmanızı](/learn/synchronizing-with-effects) (sohbet servisi gibi) sağlar. Burada *harici sistem*, React tarafından kontrol edilmeyen herhangi bir kod parçası demektir. Örneğin:
 
-* <CodeStep step={1}>[`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)</CodeStep> ve <CodeStep step={2}>[`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval)</CodeStep> ile yönetilen bir zamanlayıcı.
-* <CodeStep step={1}>[`window.addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)</CodeStep> ve <CodeStep step={2}>[`window.removeEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)</CodeStep> kullanan bir olay aboneliği.
+* <CodeStep step={1}>[`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)</CodeStep> ve <CodeStep step={2}>[`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval)</CodeStep> ile yönetilen bir kronometre.
+* <CodeStep step={1}>[`window.addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)</CodeStep> ve <CodeStep step={2}>[`window.removeEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)</CodeStep> kullanan bir olay aboneliği (subscription).
 * <CodeStep step={1}>`animation.start()`</CodeStep> ve <CodeStep step={2}>`animation.reset()`</CodeStep> gibi bir API içeren üçüncü parti animasyon kütüphanesi.
 
 **Eğer herhangi bir harici sisteme bağlanmıyorsanız, [büyük ihtimalle Effect'e ihtiyacınız yoktur.](/learn/you-might-not-need-an-effect)**
@@ -134,7 +134,7 @@ Effect, [bileşeninizi harici bir sistemle senkronize tutmanızı](/learn/synchr
 
 #### Sohbet sunucusuna bağlanma {/*connecting-to-a-chat-server*/}
 
-Bu örnekte, `ChatRoom` bileşeni `chat.js`'de bildirilen harici sisteme bağlı kalmak için Effect'i kullanmaktadır. "Sohbeti aç" butonuna tıklayarak `ChatRoom` bileşenini render edin. Bu sandbox geliştirme modunda çalışmaktadır, bu yüzden fazladan bir bağlan ve bağlantıyı kes döngüsü [burada açıklandığı gibi](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) vardır. `roomId` ve `serverUrl`'yi aşağı doğru açılan menüyü (dropdown) kullanarak değiştirin ve Effect'in nasıl tekrardan sohbete bağlandığını görün. "Sohbeti kapat" butonuna tıklayarak Effect'in son kez bağlantıyı kesmesini görün.
+Bu örnekte, `ChatRoom` bileşeni `chat.js`'de bildirilen harici sisteme bağlı kalmak için Effect'i kullanmaktadır. "Sohbeti aç" butonuna tıklayarak `ChatRoom` bileşenini render edin. Bu sandbox geliştirme modunda çalışmaktadır, bu yüzden fazladan bir bağlan ve bağlantıyı kes döngüsü [burada açıklandığı gibi](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) vardır. `roomId` ve `serverUrl`'yi aşağı doğru açılan menüyü (dropdown) ve input'u kullanarak değiştirin ve Effect'in nasıl tekrardan sohbete bağlandığını görün. "Sohbeti kapat" butonuna tıklayarak Effect'in son kez bağlantıyı kesmesini görün.
 
 <Sandpack>
 
@@ -178,7 +178,7 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">Genel</option>
+          <option value="genel">Genel</option>
           <option value="seyahat">Seyahat</option>
           <option value="muzik">Müzik</option>
         </select>
@@ -195,13 +195,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // Gerçek bir uygulama aslında sunucuya bağlanır
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -265,9 +265,9 @@ body {
 
 <Solution />
 
-#### Animasyon tetikleme {/*triggering-an-animation*/}
+#### Animasyonu tetikleme {/*triggering-an-animation*/}
 
-Bu örnekteki harici sistem, `animation.js` dosyasındaki animasyon kütüphanesidir. Bu, DOM node'unu argüman olarak alan ve animasyonu kontrol etmek için `start()` ve `stop()` metodlarını kullanıma sunan `FadeInAnimation` adlı JavaScript sınıfı sağlar. Bu bileşen alttaki DOM node'una ulaşmak için [ref'i kullanır.](/learn/manipulating-the-dom-with-refs) Effect, DOM node'unu ref'ten okur ve bileşen render edildiğinde o node için animasyonu otomatik olarak başlatır.
+Bu örnekteki harici sistem, `animation.js` dosyasındaki animasyon kütüphanesidir. Bu, DOM node'unu argüman olarak alan ve animasyonu kontrol etmek için `start()` ve `stop()` metodlarını kullanıma sunan `FadeInAnimation` adlı JavaScript sınıfını sağlar. Bu bileşen alttaki DOM node'una ulaşmak için [ref'i kullanır.](/learn/manipulating-the-dom-with-refs) Effect, DOM node'unu ref'ten okur ve bileşen render edildiğinde o node için animasyonu otomatik olarak başlatır.
 
 <Sandpack>
 
@@ -366,7 +366,7 @@ html, body { min-height: 300px; }
 
 #### Modal dialog'unu kontrol etme {/*controlling-a-modal-dialog*/}
 
-Bu örnekte harici sistem, tarayıcı DOM'udur. `ModalDialog` bileşeni bir [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) elemanı render eder. `isOpen` prop'unu [`showModal()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) ve [`close()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/close) metod çağrıları ile senkronize etmek için Effect'i kullanır.
+Bu örnekteki harici sistem, tarayıcı DOM'udur. `ModalDialog` bileşeni bir [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) elemanı render eder. `isOpen` prop'unu [`showModal()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) ve [`close()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/close) metod çağrıları ile senkronize etmek için Effect'i kullanır.
 
 <Sandpack>
 
@@ -426,7 +426,7 @@ body {
 
 #### Elemanın görünebilirliğini takip etme {/*tracking-element-visibility*/}
 
-Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekran göründüğünde sizi bilgilendirecektir.
+Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste, sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı doğru kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekran göründüğünde sizi bilgilendirecektir.
 
 <Sandpack>
 
@@ -502,7 +502,7 @@ export default function Box() {
 
 ### Effect'leri özel Hook'larla sarma {/*wrapping-effects-in-custom-hooks*/}
 
-Effect'ler ["kaçış kapaklarıdır":](/learn/escape-hatches) Effect'leri "React'in dışına çıkmanız" gerektiğinde ve kullanım durumunuz için daha iyi yerleşik bir çözüm olmadığunda kullanırsınız. Kendinizi sık sık Effect'leri mauel olarak yazma durumunda buluyorsanız, bu genellikle bileşenlerinizin dayandığı yaygın davranışlar için [özel Hook'lar](/learn/reusing-logic-with-custom-hooks) yazmanız gerektiği anlamına gelir.
+Effect'ler ["kaçış kapaklarıdır":](/learn/escape-hatches) Effect'leri "React'in dışına çıkmanız" gerektiğinde ve kullanım durumunuz için daha iyi yerleşik bir çözüm olmadığunda kullanırsınız. Kendinizi Effect'leri sık sık manuel olarak yazma durumunda buluyorsanız, bu genellikle bileşenlerinizin dayandığı yaygın davranışlar için [özel Hook'lar](/learn/reusing-logic-with-custom-hooks) yazmanız gerektiği anlamına gelir.
 
 Örneğin, bu `useChatRoom` özel Hook'u, Effect'inizin mantığını daha bildirimsel (declarative) bir API'ın arkasına "gizler":
 
@@ -541,7 +541,7 @@ Ayrıca React ekosisteminde her amaca uygun çok sayıda mükemmel özel Hook'la
 
 #### Özel `useChatRoom` Hook'u {/*custom-usechatroom-hook*/}
 
-Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a çıkartılmıştır.
+Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a yazılmıştır.
 
 <Sandpack>
 
@@ -617,10 +617,10 @@ export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -637,7 +637,7 @@ button { margin-left: 10px; }
 
 #### Özel `useWindowListener` Hook'u {/*custom-usewindowlistener-hook*/}
 
-Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a çıkartılmıştır.
+Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a yazılmıştır.
 
 <Sandpack>
 
@@ -694,7 +694,7 @@ body {
 
 #### Özel `useIntersectionObserver` Hook'u {/*custom-useintersectionobserver-hook*/}
 
-Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a çıkartılmıştır.
+Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a yazılmıştır.
 
 <Sandpack>
 
@@ -888,15 +888,15 @@ button { margin: 5px; }
 
 </Sandpack>
 
-Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yönettiği için bir temizleme fonksiyonu gerekli değildir. `Map` React bileşen ağaçtan kaldırıldıktan sonra, hem DOM node'u hem de `MapWidget` sınıf örneği, tarayıcı JavaScript motoru tarafından otomatik olarak temizlenecektir.
+Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yönettiği için bir temizleme fonksiyonu gerekli değildir. `Map` React bileşeni ağaçtan kaldırıldıktan sonra, hem DOM node'u hem de `MapWidget` sınıf örneği, tarayıcı JavaScript motoru tarafından otomatik olarak temizlenecektir.
 
 ---
 
-### Effect'ler ile veri fetch etme {/*fetching-data-with-effects*/}
+### Effect'ler ile veri getirme (fetching) {/*fetching-data-with-effects*/}
 
-Bileşeninize veri fetch etmek için Effect'i kullanabilirsiniz. [Eper bir çatı kullanıyorsanız,](/learn/start-a-new-react-project#production-grade-react-frameworks) çatının veri fetch etme mekanizmasını kullanmanın Effect'i manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
+Bileşeninize veri getirmek için Effect'i kullanabilirsiniz. [Eğer bir çatı kullanıyorsanız,](/learn/start-a-new-react-project#production-grade-react-frameworks) çatının veri getirme mekanizmasını kullanmanın Effect'i manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
 
-Eğer manuel olarak Effect ile veri fetch etmek istiyorsanız, kodunuz şöyle görünebilir:
+Eğer manuel olarak Effect ile veri getirmek istiyorsanız, kodunuz şöyle görünebilir:
 
 ```js
 import { useState, useEffect } from 'react';
@@ -922,7 +922,7 @@ export default function Page() {
   // ...
 ```
 
-Başlangıçta `false` olan ve cleanup (temizleme) sırasında `true` olan `ignore` değişkenine dikkat edin. Bu, [kodunuzun "yarış koşullarından" zarar görmemesini sağlar:](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) ağdan gelen yanıtlar sizin onları gönderdiğiniz sıradan farklı olabilir.
+Başlangıçta `false` olan ve temizleme sırasında `true` olan `ignore` değişkenine dikkat edin. Bu, [kodunuzun "yarış koşullarından" zarar görmemesini sağlar:](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) ağdan gelen yanıtlar sizin onları gönderdiğiniz sıradan farklı olabilir.
 
 <Sandpack>
 
@@ -975,7 +975,7 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-[`async` / `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) sözdizimini kullanarak da yeniden yazabilirsiniz, ancak yine de bir cleanup (temizleme) fonksiyonu sağlamanız gerekmektedir:
+[`async` / `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) sözdizimini kullanarak da yeniden yazabilirsiniz, ancak yine de bir temizleme fonksiyonu sağlamanız gerekmektedir:
 
 <Sandpack>
 
@@ -1031,25 +1031,25 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-Direkt olarak Effect ile veri fetch etmeyi yazmak tekrarlı hale gelir ve önbelleğe alma ve sunucudan render etme gibi optimizasyonların eklenmesini zorlaştırır. [Kendiniz veya topluluk tarafından sağlanan özel bir Hook kullanmak daha kolaydır.](/learn/reusing-logic-with-custom-hooks#when-to-use-custom-hooks)
+Direkt olarak Effect ile veri getirmek tekrarlı hale gelir ve önbelleğe alma ve sunucudan render etme gibi optimizasyonların eklenmesini zorlaştırır. [Kendiniz veya topluluk tarafından sağlanan özel bir Hook kullanmak daha kolaydır.](/learn/reusing-logic-with-custom-hooks#when-to-use-custom-hooks)
 
 <DeepDive>
 
-#### Effect'ler ile veri fetch etmeye iyi alternatifler nelerdir? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Effect'ler ile veri getirmeye iyi alternatifler nelerdir? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Effect'ler içinide `fetch` çağrıları yapmak, özellikle tamamen client-side uygulamalarda [veri fetch etmenin popüler bir yoludur](https://www.robinwieruch.de/react-hooks-fetch-data/). Ancak bu, çok manuel bir yaklaşımdır ve önemli dezavantajları vardır:
+Effect'ler içinide `fetch` çağrıları yapmak, özellikle tamamen kullanıcı taraflı uygulamalarda [veri getirmenin popüler bir yoludur](https://www.robinwieruch.de/react-hooks-fetch-data/). Ancak bu, çok manuel bir yaklaşımdır ve önemli dezavantajları vardır:
 
-- **Effect'ler sunucuda çalışmazlar.** Bu, sunucu tarafından render edilen ilk HTML'in yalnızca veri içermeyen bir yükleme state'ini içereceği anlamına gelir. Kullanıcı bilgisayarının tüm bu JavaScript'i indirmesi ve uygulamanızı yalnızca şimdi verileri yüklemesi gerektiğini keşfetmesi için render etmesi gerekecektir. Bu çok verimli bir yol değildir.
-- **Dpğrudan Effect ile fetch etmek, "ağ şelaleleri (waterfalls) oluşturmayı kolaylaştırır."** Üst bileşeni render edersiniz, o bileşen veri fetch eder, alt bileşenleri render eder, daha sonra o bileşenler kendi verilerini fetch etmeye başlarlar. Eğer internet bağlantınız hızlı değilse, verileri paralel olarak fetch etmeye göre önemli derecede yavaştır.
-- **Doğrudan Effect ile veri fetch etme, genellikle verileri önceden yüklememeniz veya önbelleğe almamanız anlamına gelir.** Örneğin, bileşen DOM'dan kaldırılır ve sonra tekrar DOM'a eklenirse, bileşen aynı veriyi tekrar fetch etmek zorundadır.
+- **Effect'ler sunucuda çalışmazlar.** Bu, sunucu tarafından render edilen ilk HTML'in veri içermeyen bir yükleme state'ini içereceği anlamına gelir. Kullanıcı bilgisayarının tüm bu JavaScript'i indirmesi ve uygulamanızın şimdi verileri yüklemesi gerektiğini keşfetmesi için render etmesi gerekecektir. Bu çok verimli bir yol değildir.
+- **Dpğrudan Effect ile veri getirmek, "ağ şelaleleri (waterfalls) oluşturmayı kolaylaştırır."** Üst bileşeni render edersiniz, o bileşen veri getirir, alt bileşenleri render eder, daha sonra o bileşenler kendi verilerini getirmeye başlarlar. Eğer internet bağlantınız hızlı değilse, verileri paralel olarak getirmeye göre önemli derecede yavaştır.
+- **Doğrudan Effect ile veri getirme, genellikle verileri önceden yüklememeniz veya önbelleğe almamanız anlamına gelir.** Örneğin, bileşen DOM'dan kaldırılır ve sonra tekrar DOM'a eklenirse, bileşen aynı veriyi tekrar getirmek zorundadır.
 - **Ergonomik değildir.** [Yarış koşulları](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) gibi hatalardan zarar görmeyecek şekilde `fetch` çağrıları yaparken oldukça fazla genel hatlarıyla kod yazmanız gerekmektedir.
 
-Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri fetch etme için geçerlidir. Routing de olduğu gibi, veri fetch etmenin iyi yapılması önemsiz değildir, bu nedenle aşağıdaki yaklaşımları önermekteyiz:
+Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşi veri fetch etme mekanizmasını kullanın.** Modern React çatıları verimli veri fetch etme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
-- **Aksi halde, client-side cache kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz, Effect'leri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak için (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
+- **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşik veri getirme mekanizmasını kullanın.** Modern React çatıları verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
+- **Aksi halde, kullanıcı taraflı önbelleğe almayı kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü yaparsanız, Effect'leri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
 
-Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri fetch etmeye devam edebilirsiniz.
+Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
 
 </DeepDive>
 
@@ -1089,7 +1089,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-**Bağımlılığı kaldırmak için, [linter'a bunun bir bağımlıklık olmasına gerek olmadığını "kanıtlamanız"](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)** gerekmektedir. Örneğin, reaktif omadığını ve yeniden render'lar ile değişmeyeceğini kanıtlamak için `serverUrl`'i bileşeninizin dışına taşıyabilirsiniz:
+**Bağımlılığı kaldırmak için, [linter'a bunun bir bağımlıklık olmasına gerek olmadığını "kanıtlamanız"](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)** gerekmektedir. Örneğin, reaktif olmadığını ve yeniden render'lar ile değişmeyeceğini kanıtlamak için `serverUrl`'i bileşeninizin dışına taşıyabilirsiniz:
 
 ```js {1,8}
 const serverUrl = 'https://localhost:1234'; // Artık reaktif bir değişken değil
@@ -1104,7 +1104,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Artık `serverUrl` reaktif bir değer olmadığına göre (ve yeniden render'lar ile değişmeyeceğine göre), bağımlılık olmasına gerek yoktur. **IEğer Effect kodunuz herhangi bir reaktif değer kullanmıyorsa, bağımlılık listesi boş  (`[]`) olmalıdır:**
+Artık `serverUrl` reaktif bir değer olmadığına göre (ve yeniden render'lar ile değişmeyeceğine göre), bağımlılık olmasına gerek yoktur. **Eğer Effect kodunuz herhangi bir reaktif değer kullanmıyorsa, bağımlılık listesi boş  (`[]`) olmalıdır:**
 
 ```js {1,2,9}
 const serverUrl = 'https://localhost:1234'; // Artık reaktif bir değer değil
@@ -1134,11 +1134,11 @@ useEffect(() => {
 }, []);
 ```
 
-**Bağımlılıklar kod ile eşleşmediğinde, hata getirme riski yüksektir.** Linter'ı bu şekilde yok sayarak React'e, Effect'inizin bağımlı olduğu değerler konusunda "yalan" söylemiş olursunuz. [Bunun yerine gereksiz olduklarını kanıtlayın.](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)
+**Bağımlılıklar kod ile eşleşmediğinde, hata meydana gelme riski yüksektir.** Linter'ı bu şekilde yok sayarak React'e, Effect'inizin bağımlı olduğu değerler konusunda "yalan" söylemiş olursunuz. [Bunun yerine gereksiz olduklarını kanıtlayın.](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)
 
 </Pitfall>
 
-<Recipes titleText="Reaktif bağımlılıklar iletme örnekleri" titleId="examples-dependencies">
+<Recipes titleText="Reaktif bağımlılıkları iletme örnekleri" titleId="examples-dependencies">
 
 #### Bağımlılık dizisi iletme {/*passing-a-dependency-array*/}
 
@@ -1216,13 +1216,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // Gerçek bir uygulama aslında sunucuya bağlanır
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1247,10 +1247,10 @@ useEffect(() => {
 }, []); // Yeniden çalışmaz (geliştirmedeyken hariç)
 ```
 
-**Boş bağımlılıklar ile bile, setup (kurulum) ve cleanup (temizleme) hataları bulmanıza yardımcı olmak için [geliştirmedeyken bir kere fazladan çalışacaktır.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)**
+**Boş bağımlılıklar ile bile, kurulum ve temizleme hataları bulmanıza yardımcı olmak için [geliştirmedeyken bir kere fazladan çalışacaktır.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)**
 
 
-Bu örnekte, hem `serverUrl` hem de `roomId` kodlanmıştır. Bu değerler bileşenin dışında bildirildiği için reaktif değerler değillerdir ve bu nedenle bağımlılık değillerdir. Bağımlılık listesi boştur ve bu yüzden Effect yeniden render'larda yeniden çalışmaz.
+Bu örnekte, hem `serverUrl` hem de `roomId` doğrudan koda yazılmıştır. Bu değerler bileşenin dışında bildirildiği için reaktif değerler değillerdir ve bu nedenle bağımlılık değillerdir. Bağımlılık listesi boştur ve bu yüzden Effect yeniden render'larda yeniden çalışmaz.
 
 <Sandpack>
 
@@ -1297,13 +1297,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // Gerçek bir uygulama aslında sunucuya bağlanır
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1390,13 +1390,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // Gerçek uygulama aslında sunucuya bağlanırdı
+  // Gerçek uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1415,9 +1415,9 @@ button { margin-left: 5px; }
 
 ---
 
-### Effect'teki önceki state'e göre state'i güncelleme {/*updating-state-based-on-previous-state-from-an-effect*/}
+### Effect'ten önceki state'e göre state'i güncelleme {/*updating-state-based-on-previous-state-from-an-effect*/}
 
-Effect'teki önceki state'e göre state'i güncellemek istediğinizde, bir sorunla karşılaşabilirsiniz:
+Effect'ten önceki state'e göre state'i güncellemek istediğinizde, bir sorunla karşılaşabilirsiniz:
 
 ```js {6,9}
 function Counter() {
@@ -1425,7 +1425,7 @@ function Counter() {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCount(count + 1); // Sayacaı saniyede bir artırmak istiyorsunuz...
+      setCount(count + 1); // Sayacı saniyede bir artırmak istiyorsunuz...
     }, 1000)
     return () => clearInterval(intervalId);
   }, [count]); // 🚩 ... ancak `count`'u bağımlılık olarak belirtmek interval'i sıfırlayacaktır.
@@ -1433,7 +1433,7 @@ function Counter() {
 }
 ```
 
-`count` reaktif bir değer olduğundan, bağımlılık listesinde belirtilmek zorundadır. Ancak bu durum, Effect'in her `count` değiştiğinde cleanup (temizleme) ve setup (kurulum) yapmasına neden olur. Bu ideal bir durum değildir.
+`count` reaktif bir değer olduğundan, bağımlılık listesinde belirtilmek zorundadır. Ancak bu durum, Effect'in her `count` değiştiğinde temizleme kurulum yapmasına neden olur. Bu ideal bir durum değildir.
 
 Bunu düzeltmek için, [`c => c + 1` state güncelleyecisini](/reference/react/useState#updating-state-based-on-the-previous-state) `setCount`'a iletin:
 
@@ -1470,14 +1470,14 @@ body {
 
 </Sandpack>
 
-Artık `count + 1` yerine `c => c + 1` ilettiğimiz için, [Effect'inizin `count`'a bağımlı olması gerekmemektedir.](/learn/removing-effect-dependencies#are-you-reading-some-state-to-calculate-the-next-state) Bu çözümün sonucu olarak, Effect'iniz `count` her değiştiğinde cleanup (temizleme) ve setup (kurulum) yapmasına gerek yoktur.
+Artık `count + 1` yerine `c => c + 1` ilettiğimiz için, [Effect'inizin `count`'a bağımlı olmasına gerek yoktur.](/learn/removing-effect-dependencies#are-you-reading-some-state-to-calculate-the-next-state) Bu çözümün sonucu olarak, Effect'iniz `count` her değiştiğinde temizleme ve kurulum yapmasına gerek yoktur.
 
 ---
 
 
-### Gereksiz nesne bağımlılıklarını kaldırmak {/*removing-unnecessary-object-dependencies*/}
+### Gereksiz nesne bağımlılıklarını kaldırma {/*removing-unnecessary-object-dependencies*/}
 
-Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `options` nesnesi [her render için farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden bağlanır:
+Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `options` nesnesi [her render için farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden sohbete bağlanır:
 
 ```js {6-9,12,15}
 const serverUrl = 'https://localhost:1234';
@@ -1553,13 +1553,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // Gerçek bir uygulama aslında sunucuya bağlanırdı
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1574,13 +1574,13 @@ button { margin-left: 10px; }
 
 Şimdi `options` nesnesini Effect içinde oluşturduğumuzdan, Effect sadece `roomId` string'ine bağımlıdır.
 
-Bu çözümle birlikte, input'a yazmak sohbete tekrar bağlanmayacaktır. Her render'da yeniden oluşturulan nesne aksine, `roomId` gibi bir string siz onu başka bir değere eşitlemediğiniz sürece değişmez. [Bağımlılıları kaldırmak hakkında daha fazlasını okuyun.](/learn/removing-effect-dependencies)
+Bu çözümle birlikte, input'a yazmak sohbete tekrar bağlanmayacaktır. Her render'da yeniden oluşturulan nesne aksine, `roomId` gibi bir string siz onu başka bir değere eşitlemediğiniz sürece değişmez. [Bağımlılıkları kaldırmak hakkında daha fazlasını okuyun.](/learn/removing-effect-dependencies)
 
 ---
 
-### Gereksiz fonksiyon bağımlılıklarını kaldırmak {/*removing-unnecessary-function-dependencies*/}
+### Gereksiz fonksiyon bağımlılıklarını kaldırma {/*removing-unnecessary-function-dependencies*/}
 
-Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `createOptions` fonksiyonu [her render'da farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden bağlanır:
+Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `createOptions` fonksiyonu [her render'da farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden sohbete bağlanır:
 
 ```js {4-9,12,16}
 function ChatRoom({ roomId }) {
@@ -1663,13 +1663,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // Gerçek bir uygulama aslında sunucuya bağlanırdı
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1707,7 +1707,7 @@ function Page({ url, shoppingCart }) {
 }
 ```
 
-**What if you want to log a new page visit after every `url` change, but *not* if only the `shoppingCart` changes?** [Reaktivite kurallarını](#specifying-reactive-dependencies) çiğnemeden `shoppingCart`'ı bağımlılıklardan çıkartamazsınız. Ancak, Effect içinden çağırılsa bile bir kod parçasının yapılan değişikliklere "tepki" vermesini *istemediğinizi* ifade edebilirsiniz. [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook'u ile [*Effect Olayı* bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve and `shoppingCart`'ı okuyan kodu onun içine taşıyın:
+**Ya `url` her değiştiğinde yeni bir sayfa ziyareti kaydetmek istiyorsanız ancak sadece `shoppingCart` değiştiğinde kaydetmek istemiyorsanız?** [Reaktivite kurallarını](#specifying-reactive-dependencies) çiğnemeden `shoppingCart`'ı bağımlılıklardan çıkartamazsınız. Ancak, Effect içinden çağırılsa bile bir kod parçasının yapılan değişikliklere "tepki" vermesini *istemediğinizi* ifade edebilirsiniz. [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook'u ile [*Effect Olayı* bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`'ı okuyan kodu onun içine taşıyın:
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {
@@ -1724,16 +1724,16 @@ function Page({ url, shoppingCart }) {
 
 **Effect Olayları reaktif değillerdir ve Effect'inizin bağımlılıklarından kaldırılmalıdırlar.** Bu, reaktif olmayan kodunuzu (prop'ların ve state'in nihai değerini okuyabildiğiniz) Effect'in içine koymanızı sağlar. `shoppingCart`'ı `onVisit` içinde okuyarak, `shoppingCart`'ın Effect'inizi yeniden çalıştırmamasını sağlarsınız.
 
-[Effect Olaylarının reaktif ve reaktif olmayan kodu ayırmasını nasıl sağladığı hakkında daha fazla bilgi edinin.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+[Effect Olaylarının reaktif ve reaktif olmayan kodu ayırmanızı nasıl sağladığı hakkında daha fazla bilgi edinin.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
 
 
 ---
 
-### Sunucu ve istemcide farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
+### Sunucu ve kullanıcıda farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
-Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [çatı kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamada render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. İstemcide, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın istemci ve sunucuda aynı olması gerekir.
+Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [çatı kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamda render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. Kullanıcıda, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın kullanıcı ve sunucuda aynı olması gerekir.
 
-Bazı nadir durumlarda, istemcide farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
+Bazı nadir durumlarda, kullanıcıda farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 
 ```js
 function MyComponent() {
@@ -1744,16 +1744,16 @@ function MyComponent() {
   }, []);
 
   if (didMount) {
-    // ... yalnızca istemci JSX'i döndür ...
+    // ... yalnızca kullanıcı JSX'i döndür ...
   }  else {
     // ... ilk JSX'i döndür ...
   }
 }
 ```
 
-Uygulama yüklenirken, kullanıcı ilk render çıktısını görecektir. Daha sonra, uygulama yüklendiğinde ve hidrasyon olduğunda, Effect'iniz çalışarak `didMount` state'ini `true` yapacak ve yeniden render tetikleyecektir. Bu istemci-taraflı (client-side) render çıktısıyla değişecektir. Effect'ler sunucuda çalışmazlar, bu yüzden ilk server render'ı sırasında `didMount` state'i `false`'a eşitti.
+Uygulama yüklenirken, kullanıcı ilk render çıktısını görecektir. Daha sonra, uygulama yüklendiğinde ve hidrasyon olduğunda, Effect'iniz çalışarak `didMount` state'ini `true` yapacak ve yeniden render tetikleyecektir. Bu kullanıcı-taraflı (client-side) render çıktısıyla değişecektir. Effect'ler sunucuda çalışmazlar, bu yüzden ilk server render'ı sırasında `didMount` state'i `false`'a eşittir.
 
-Bu modeli idareli kullanın. Yavaş bir bağlantıya sahip kullanıcıların ilk içeriği oldukça uzun bir süre (potansiyel olarak saniyelerce) göreceğinden, bileşeninizin görünüşünde büyük değişiklikler yapmak istemezsiniz. Çoğu durumda, CSS ile koşullu olarak farklı şeyler göstererek buna ihtiyaç duymazsınız.
+Bu modeli idareli kullanın. Yavaş bir bağlantıya sahip kullanıcılar ilk içeriği oldukça uzun bir süre (potansiyel olarak saniyelerce) göreceğinden, bileşeninizin görünüşünde büyük değişiklikler yapmak istemezsiniz. Çoğu durumda, CSS ile koşullu olarak farklı şeyler göstererek buna ihtiyaç duymazsınız.
 
 ---
 
@@ -1761,9 +1761,9 @@ Bu modeli idareli kullanın. Yavaş bir bağlantıya sahip kullanıcıların ilk
 
 ### Bileşen DOM'a eklendiğinde Effect'im iki kere çalışıyor {/*my-effect-runs-twice-when-the-component-mounts*/}
 
-Geliştirmede Strict modu açıkken, React setup (kurulum) ve cleanup (temizleme) işlemini asıl setup'dan önce bir kere fazladan çalıştırır.
+Geliştirmede Strict modu açıkken, React kurulum ve temizleme işlemini asıl kurulumdan önce bir kere fazladan çalıştırır.
 
-Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres testidir. Eğer bu gözle görülebilir sorunlara neden oluyorsa, cleanup (temizleme) fonksiyonunuzda mantık hatası vardır. Cleanup fonksiyonu, setup fonksiyonunun yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çağrılan setup (kurulum) (son üründe olduğu gibi) ile *setup* → *cleanup* → *setup* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
+Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres testidir. Eğer bu, gözle görülebilir sorunlara neden oluyorsa, temizleme fonksiyonunuzda mantık hatası vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
 
 [Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin. 
 
@@ -1779,7 +1779,7 @@ useEffect(() => {
 }); // 🚩 Bağımlılık dizisi yok: her yeniden render'dan sonra yeniden çalışır!
 ```
 
-Bağımlılık dizisini belirttiyseniz ancak Effect'iniz hala bir döngüde yeniden çalışyorsa, bunun nedeni bağımlılıklarınızdan birinin her yeniden render'da farklı olmasıdır.
+Bağımlılık dizisini belirttiyseniz ancak Effect'iniz hala döngüde yeniden çalışyorsa, bunun nedeni bağımlılıklarınızdan birinin her yeniden render'da farklı olmasıdır.
 
 Bağımlılıkları konsola manuel olarak yazdırarak bu hatayı ayıklayabilirsiniz:
 
@@ -1801,9 +1801,9 @@ Object.is(temp1[2], temp2[2]); // ... ve diğer bağımlılıklar için ...
 
 Her yeniden render'da farklı olan bağımlılığı bulduğunzda, genellikle şu yollardan biriyle düzeltebilirsiniz:
 
-- [Effect'teki önceki state'e göre state'i güncelleme](#updating-state-based-on-previous-state-from-an-effect)
-- [Gereksiz nesne bağımlılıklarını kaldırmak](#removing-unnecessary-object-dependencies)
-- [Gereksiz fonksiyon bağımlılıklarını kaldırmak](#removing-unnecessary-function-dependencies)
+- [Effect'ten önceki state'e göre state'i güncelleme](#updating-state-based-on-previous-state-from-an-effect)
+- [Gereksiz nesne bağımlılıklarını kaldırma](#removing-unnecessary-object-dependencies)
+- [Gereksiz fonksiyon bağımlılıklarını kaldırma](#removing-unnecessary-function-dependencies)
 - [Effect'te nihai prop'ları ve state'i okuma](#reading-the-latest-props-and-state-from-an-effect)
 
 Son çare olarak (bu yöntemler yardımcı olmadıysa), [`useMemo`](/reference/react/useMemo#memoizing-a-dependency-of-another-hook) veya [`useCallback`](/reference/react/useCallback#preventing-an-effect-from-firing-too-often) (fonksiyonlar için) kullanın.
@@ -1815,9 +1815,9 @@ Son çare olarak (bu yöntemler yardımcı olmadıysa), [`useMemo`](/reference/r
 Effect'iniz sonsuz bir döngüde çalışıyorsa, şu iki şey doğru olmak zorundadır:
 
 - Effect'iniz bir state'i güncelliyor.
-- O state Effect'in bağımlılıklarının değişmesine neden olan bir yeniden render tetikliyordur.
+- O state, Effect'in bağımlılıklarının değişmesine neden olan bir yeniden render tetikliyor.
 
-Sorunu çözmeye başlamadan önce, Effect'inizin harici bir sisteme (DOM, ağ, üçüncü parti widget gibi) bağlanıp bağlanmadığını kendinize sorun. Effect'iniz neden state'i değiştiriyor? Harici sistem ile senkronizasyon mu yapıyor? Yoksa uygulamanızın veri akışını Effect ile mi yönetmeye çalışıyorsunuz?
+Sorunu çözmeye başlamadan önce, Effect'inizin harici bir sisteme (DOM, ağ veya üçüncü parti widget gibi) bağlanıp bağlanmadığını kendinize sorun. Effect'iniz neden state'i değiştiriyor? Harici sistem ile senkronizasyon mu yapıyor? Yoksa uygulamanızın veri akışını Effect ile mi yönetmeye çalışıyorsunuz?
 
 Harici bir sistem yoksa, [Effect'i tamamen kaldırmanın](/learn/you-might-not-need-an-effect) mantığınızı basitleştirip basitleştirmeyeceğine bakın.
 
@@ -1827,22 +1827,22 @@ Son olarak, Effect'iniz state'i doğru zamanda güncelliyorsa ancak yine de bir 
 
 ---
 
-### Cleanup (temizleme) mantığım bileşenim DOM'dan kaldırılmasa bile çalışıyor {/*my-cleanup-logic-runs-even-though-my-component-didnt-unmount*/}
+### Temizleme mantığım bileşenim DOM'dan kaldırılmasa bile çalışıyor {/*my-cleanup-logic-runs-even-though-my-component-didnt-unmount*/}
 
-Cleanup fonksiyonu sadece DOM'dan kaldırılma sırasında değil, değişen bağımlılıklarla her yeniden render'dan önce de çalışır. Ek olarak, geliştirme aşamasında, React [setup+cleanup fonksiyonlarını bileşen DOM'a eklendikten hemen sonra bir kez daha çalıştırır.](#my-effect-runs-twice-when-the-component-mounts)
+Temizleme fonksiyonu sadece DOM'dan kaldırılma sırasında değil, değişen bağımlılıklarla her yeniden render'dan önce de çalışır. Ek olarak, geliştirme aşamasında, React [kurulum+temizleme fonksiyonlarını bileşen DOM'a eklendikten hemen sonra bir kez daha çalıştırır.](#my-effect-runs-twice-when-the-component-mounts)
 
-Bir cleanup kodunuz var ancak setup kodunuz yoksa, bu genellike kötü kokan bir koddur (code smell):
+Bir temizleme kodunuz var ancak kurulum kodunuz yoksa, bu genellike kötü kokan bir koddur (code smell):
 
 ```js {2-5}
 useEffect(() => {
-  // 🔴 Kaçın: Setup mantığı olmadan cleanup mantığı var
+  // 🔴 Kaçının: Kurulum mantığı olmadan temizleme mantığı var
   return () => {
     doSomething();
   };
 }, []);
 ```
 
-Temizleme mantığınız kurulum mantığıyla "simetrik" olmalı ve setup'ın yaptığı her şeyi durdurmalı veya geri almalıdır:
+Temizleme mantığınız kurulum mantığıyla "simetrik" olmalı ve kurulumun yaptığı her şeyi durdurmalı veya geri almalıdır:
 
 ```js {2-3,5}
   useEffect(() => {
