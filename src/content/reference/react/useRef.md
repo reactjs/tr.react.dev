@@ -228,11 +228,7 @@ function MyComponent() {
 
 Eğer render sırasında bir şey okumak [veya yazmak](/reference/react/useState#storing-information-from-previous-renders) *zorunda* kalırsanız, bunun yerine [state kullanın](/reference/react/useState).
 
-<<<<<<< HEAD
-Bu kuralları ihlal ettiğinizde, bileşeniniz hala çalışabilir, ancak React'e eklediğimiz yeni özelliklerin çoğu bu beklentilere bağlı olacaktır. [Bileşenlerinizi saf tutma](/learn/keeping-components-pure#where-you-can-cause-side-effects) hakkında daha fazla bilgi edinin.
-=======
-When you break these rules, your component might still work, but most of the newer features we're adding to React will rely on these expectations. Read more about [keeping your components pure.](/learn/keeping-components-pure#where-you-_can_-cause-side-effects)
->>>>>>> 292534e97563f13e66fe7c9f004a637c97ca51b9
+Bu kuralları ihlal ettiğinizde, bileşeniniz hala çalışabilir, ancak React'e eklediğimiz yeni özelliklerin çoğu bu beklentilere bağlı olacaktır. [Bileşenlerinizi saf tutma](/learn/keeping-components-pure#where-you-_can_-cause-side-effects) hakkında daha fazla bilgi edinin.
 
 </Pitfall>
 
