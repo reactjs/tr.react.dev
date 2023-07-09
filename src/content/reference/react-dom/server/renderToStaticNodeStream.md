@@ -4,7 +4,7 @@ title: renderToStaticNodeStream
 
 <Intro>
 
-`renderToStaticNodeStream` interaktif olmayan bir React ağacını [Okunabilir Node.js Akımına](https://nodejs.org/api/stream.html#readable-streams) render etmenize olanak tanır.
+`renderToStaticNodeStream` interaktif olmayan bir React ağacını [Okunabilir Node.js Akışına](https://nodejs.org/api/stream.html#readable-streams) render etmenize olanak tanır.
 
 ```js
 const stream = renderToStaticNodeStream(reactNode)
@@ -31,23 +31,23 @@ stream.pipe(response);
 
 [Buradan daha fazla örnek görebilirsiniz.](#usage)
 
-Akım, React bileşenlerinizin etkileşimli olmayan HTML çıktılarını üretecektir.
+Akış, React bileşenlerinizin etkileşimli olmayan HTML çıktılarını üretecektir.
 
 #### Parametreler {/*parameters*/}
 
 * `reactNode`: HTML'e render etmek istediğiniz bir React düğümü. Örneğin, `<Sayfa />` gibi bir JSX elemanı.
 
-#### Geri Döndürür {/*returns*/}
+#### Dönüş Değeri {/*returns*/}
 
-HTML string'i döndüren bir [Okunabilir Node.js Akımı](https://nodejs.org/api/stream.html#readable-streams) döndürür. Ortaya çıkan HTML istemcide sulanamaz.
+HTML string'i döndüren bir [Okunabilir Node.js Akışı](https://nodejs.org/api/stream.html#readable-streams) döndürür. Ortaya çıkan HTML istemcide sulanamaz.
 
 #### Uyarılar {/*caveats*/}
 
 * `renderToStaticNodeStream` çıktısı sulanamaz.
 
-* Bu yöntem, herhangi bir çıktı döndürmeden önce tüm [Askıya alma sınırlarının](/reference/react/Suspense) tamamlanmasını bekler.
+* Bu yöntem, herhangi bir çıktı döndürmeden önce tüm [Suspense sınırlarının](/reference/react/Suspense) tamamlanmasını bekler.
 
-* React 18'den itibaren, bu yöntem tüm çıktısını tamponlar, aslında bu nedenle herhangi bir akış avantajı sağlamaz.
+* React 18'den itibaren, bu yöntem tüm çıktısını ara belleğe alır, aslında bu nedenle herhangi bir akış avantajı sağlamaz.
 
 * Döndürülen akış utf-8 olarak kodlanmış bir byte akışıdır. Başka bir kodlamada akışa ihtiyacınız varsa, metni dönüştürmek için dönüştürme akışları sağlayan [iconv-lite](https://www.npmjs.com/package/iconv-lite) gibi bir projeye göz atabilirsiniz.
 
@@ -57,7 +57,7 @@ HTML string'i döndüren bir [Okunabilir Node.js Akımı](https://nodejs.org/api
 
 ### Bir React ağacını statik HTML olarak Okunabilir Node.js Akışına dönüştürme {/*rendering-a-react-tree-as-static-html-to-a-nodejs-readable-stream*/}
 
-Sunucu yanıtınıza aktarabileceğiniz bir [Okunabilir Node.js Akımı](https://nodejs.org/api/stream.html#readable-streams) elde etmek için `renderToStaticNodeStream` fonksiyonunu çağırabilirsiniz:
+Sunucu yanıtınıza aktarabileceğiniz bir [Okunabilir Node.js Akışı](https://nodejs.org/api/stream.html#readable-streams) elde etmek için `renderToStaticNodeStream` fonksiyonunu çağırabilirsiniz:
 
 ```js {5-6}
 import { renderToStaticNodeStream } from 'react-dom/server';
@@ -69,7 +69,7 @@ app.use('/', (request, response) => {
 });
 ```
 
-Akım, React bileşenlerinizin etkileşimli olmayan ilk HTML çıktısını üretecektir.
+Akış, React bileşenlerinizin etkileşimli olmayan ilk HTML çıktısını üretecektir.
 
 <Pitfall>
 
