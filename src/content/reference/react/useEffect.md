@@ -4,7 +4,7 @@ title: useEffect
 
 <Intro>
 
-`useEffect` is a React Hook that lets you [synchronize a component with an external system.](/learn/synchronizing-with-effects)
+`useEffect`, [bir bileşeni harici bir sistem ile senkronize](/learn/synchronizing-with-effects) etmenizi sağlayan React Hook'udur.
 
 ```js
 useEffect(setup, dependencies?)
@@ -16,11 +16,11 @@ useEffect(setup, dependencies?)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `useEffect(setup, dependencies?)` {/*useeffect*/}
 
-Call `useEffect` at the top level of your component to declare an Effect:
+Bir Effect bildirmek için bileşeninizin en üst düzeyinde `useEffect`'i çağırın:
 
 ```js
 import { useEffect } from 'react';
@@ -40,43 +40,43 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek görmek için aşağıya bakınız.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function.
+* `setup`: Effect'inizin mantığını içeren fonksiyon. Kurulum (setup) fonksiyonunuz isteğe bağlı olarak *temizleme (cleanup)* fonksiyonu da döndürebilir. Bileşeniniz DOM'a eklendiğinde, React kurulum fonksiyonunuzu çalıştıracaktır. Değişen bağımlılıklar ile her yeniden render işleminden sonra, React önce temizleme fonksiyonunu (eğer sağladıysanız) eski değerlerle çalıştıracak ve ardından kurulum fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldıktan sonra, React temizleme fonksiyonunuzu çalıştıracaktır.
  
-* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If you omit this argument, your Effect will re-run after every re-render of the component. [See the difference between passing an array of dependencies, an empty array, and no dependencies at all.](#examples-dependencies)
+* **Opsiyonel** `bağımlılıklar`: `kurulum` (`setup`) kodunun içinde referansı olan tüm reaktif değerlerin listesi. Reaktif değerler prop'ları, state'i ve bileşeninizin gövdesi içinde bildirilen tüm değişkenleri ve fonksiyonları içerir. Linter'ınız [React için yapılandırılmış](/learn/editor-setup#linting) ise, her reaktif değerin bağımlılık olarak doğru bir şekilde belirtildiğini doğrulayacaktır. Bağımlılık listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` şeklinde satır içinde yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak her bağımlılığı önceki değeri ile karşılaştırır. Eğer bağımlılık listesini boş bırakırsanız, Effect'iniz her yeniden render'dan sonra tekrar çalışacaktır. [Bağımlılık dizisi iletmenin, boş dizi iletmenin ve hiç bağımlılık olmaması arasındaki farkı inceleyin.](#examples-dependencies)
 
-#### Returns {/*returns*/}
+#### Dönüş Değeri {/*returns*/}
 
-`useEffect` returns `undefined`.
+`useEffect`, `undefined` döndürür.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `useEffect` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+* `useEffect` bir Hook'tur, dolayısıyla bu Hook'u yalnızca **bileşeninizin en üst seviyesinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullu ifadeler içinde çağıramazsınız. Eğer çağırmak istiyorsanız, yeni bir bileşen oluşturun ve state'i onun içine taşıyın.
 
-* If you're **not trying to synchronize with some external system,** [you probably don't need an Effect.](/learn/you-might-not-need-an-effect)
+* Eğer **harici sistemle senkronize etmeye çalışmıyorsanız,** [büyük ihtimalle Effect'e ihtiyacınız yoktur.](/learn/you-might-not-need-an-effect)
 
-* When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, [implement the cleanup function.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+* Strict Modu kullanırken, React ilk gerçek kurulumdan önce **sadece geliştirme sırasında olmak üzere ekstra bir kurulum+temizleme döngüsü** çalıştırır. Bu, temizleme mantığınızın kurulum mantığınızı "yansıtmasını" ve kurulumun yaptığı her şeyi durdurmasını ya da geri almasını sağlayan bir stres testidir. Eğer bu bir sorun yaratıyorsa, [temizleme fonksiyonunu uygulayın.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-* If some of your dependencies are objects or functions defined inside the component, there is a risk that they will **cause the Effect to re-run more often than needed.** To fix this, remove unnecessary [object](#removing-unnecessary-object-dependencies) and [function](#removing-unnecessary-function-dependencies) dependencies. You can also [extract state updates](#updating-state-based-on-previous-state-from-an-effect) and [non-reactive logic](#reading-the-latest-props-and-state-from-an-effect) outside of your Effect.
+* Eğer bağımlılıklarınızdan bazıları nesneler veya bileşeniniz içinde tanımlanmış fonksiyonlar ise, bu bağımlılıkların **Effect'in gerekenden daha sık yeniden çalışmasına neden olma riski vardır.** Bu durumu düzeltmek için, gereksiz [nesne](#removing-unnecessary-object-dependencies) ve [fonksiyon](#removing-unnecessary-function-dependencies) bağımlılıklarını silin. Ayrıca [state güncellemelerinizi](#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan mantığı](#reading-the-latest-props-and-state-from-an-effect) Effect dışına taşıyabilirsiniz.
 
-* If your Effect wasn't caused by an interaction (like a click), React will let the browser **paint the updated screen first before running your Effect.** If your Effect is doing something visual (for example, positioning a tooltip), and the delay is noticeable (for example, it flickers), replace `useEffect` with [`useLayoutEffect`.](/reference/react/useLayoutEffect)
+* Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React, Effect'inizi çalıştırmadan önce **tarayıcının güncellenen ekranı çizmesine izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
 
-* Even if your Effect was caused by an interaction (like a click), **the browser may repaint the screen before processing the state updates inside your Effect.** Usually, that's what you want. However, if you must block the browser from repainting the screen, you need to replace `useEffect` with [`useLayoutEffect`.](/reference/react/useLayoutEffect)
+* Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden çizebilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden çizmesini engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
 
-* Effects **only run on the client.** They don't run during server rendering.
+* Effect'ler **sadece kullanıcı (client) tarafında çalışır.** Sunucu render etme sırasında çalışmazlar.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Connecting to an external system {/*connecting-to-an-external-system*/}
+### Harici bir sisteme bağlanma {/*connecting-to-an-external-system*/}
 
-Some components need to stay connected to the network, some browser API, or a third-party library, while they are displayed on the page. These systems aren't controlled by React, so they are called *external.*
+Bazı bileşenlerin sayfada görüntülenebilmesi için ağa, bazı tarayıcı API'larına ya da üçüncü parti kütüphanelere bağlı kalması gerekir. Bu sistemler React tarafından kontrol edilmezler, bu yüzden *harici* olarak adlandırılırlar.
 
-To [connect your component to some external system,](/learn/synchronizing-with-effects) call `useEffect` at the top level of your component:
+[Bileşeninizi harici bir sisteme bağlamak için](/learn/synchronizing-with-effects), bileşeninizin en üst düzeyinde `useEffect`'i çağırın:
 
 ```js [[1, 8, "const connection = createConnection(serverUrl, roomId);"], [1, 9, "connection.connect();"], [2, 11, "connection.disconnect();"], [3, 13, "[serverUrl, roomId]"]]
 import { useEffect } from 'react';
@@ -96,45 +96,45 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-You need to pass two arguments to `useEffect`:
+`useEffect`'e iki argüman iletmeniz gerekmektedir:
 
-1. A *setup function* with <CodeStep step={1}>setup code</CodeStep> that connects to that system.
-   - It should return a *cleanup function* with <CodeStep step={2}>cleanup code</CodeStep> that disconnects from that system.
-2. A <CodeStep step={3}>list of dependencies</CodeStep> including every value from your component used inside of those functions.
+1. Bu sisteme bağlanan <CodeStep step={1}>kurulum (setup) kodu</CodeStep> içeren bir *kurulum fonksiyonu*.
+   - Bu sistemle olan bağlantıyı kesen <CodeStep step={2}>temizleme (cleanup) kodu</CodeStep> içeren bir *temizleme fonksiyonu* döndürmeli.
+2. Bileşeninizden bu fonksiyonların içinde kullanılan her bir değeri içeren <CodeStep step={3}>bağımlılıklar listesi</CodeStep>.
 
-**React calls your setup and cleanup functions whenever it's necessary, which may happen multiple times:**
+**React, kurulum ve temizleme fonksiyonlarınızı gerektiğinde birden çok kez olabilecek şekilde çağırır:**
 
-1. Your <CodeStep step={1}>setup code</CodeStep> runs when your component is added to the page *(mounts)*.
-2. After every re-render of your component where the <CodeStep step={3}>dependencies</CodeStep> have changed:
-   - First, your <CodeStep step={2}>cleanup code</CodeStep> runs with the old props and state.
-   - Then, your <CodeStep step={1}>setup code</CodeStep> runs with the new props and state.
-3. Your <CodeStep step={2}>cleanup code</CodeStep> runs one final time after your component is removed from the page *(unmounts).*
+1. <CodeStep step={1}>Kurulum kodunuz</CodeStep> bileşeniniz sayfaya eklendiğinde çalışır *(DOM'a eklendiğinde)*.
+2. Bileşeninizin <CodeStep step={3}>bağımlılıklarının</CodeStep> değiştiği her yeniden render etmeden sonra:
+   - İlk olarak, <CodeStep step={2}>temizleme kodunuz</CodeStep> eski prop'lar ve state ile çalışır.
+   - Daha sonra, <CodeStep step={1}>kurulum kodunuz</CodeStep> yeni prop'lar ve state ile çalışır.
+3. <CodeStep step={2}>temizleme kodunuz</CodeStep> son kez bileşeniniz sayfadan kaldırıldığında çalışır *(DOM'dan kaldırıldığında).*
 
-**Let's illustrate this sequence for the example above.**  
+**Yukarıdaki örneği biraz açıklayalım.**  
 
-When the `ChatRoom` component above gets added to the page, it will connect to the chat room with the initial `serverUrl` and `roomId`. If either `serverUrl` or `roomId` change as a result of a re-render (say, if the user picks a different chat room in a dropdown), your Effect will *disconnect from the previous room, and connect to the next one.* When the `ChatRoom` component is removed from the page, your Effect will disconnect one last time.
+Yukarıdaki `ChatRoom` bileşeni sayfaya eklendiğinde, başlangıç `serverUrl` ve `roomId` ile sohbet odasına bağlanacaktır. Eğer `serverUrl` veya `roomId`'den biri yeniden render yüzünden değişirse (diyelim ki kullanıcı başka bir sohbet odasını seçerse), Effect'iniz önceki odayla *bağlantısını kesecek ve bir sonraki odaya bağlanacaktır.* `ChatRoom` bileşeniniz sayfadan kaldırıldığında, Effect'iniz son bir defa bağlantıyı kesecektir.
 
-**To [help you find bugs,](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) in development React runs <CodeStep step={1}>setup</CodeStep> and <CodeStep step={2}>cleanup</CodeStep> one extra time before the <CodeStep step={1}>setup</CodeStep>.** This is a stress-test that verifies your Effect's logic is implemented correctly. If this causes visible issues, your cleanup function is missing some logic. The cleanup function should stop or undo whatever the setup function was doing. The rule of thumb is that the user shouldn't be able to distinguish between the setup being called once (as in production) and a *setup* → *cleanup* → *setup* sequence (as in development). [See common solutions.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+**Geliştirme sırasında [hataları bulmanıza yardımcı olmak](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) için React, <CodeStep step={1}>kurulum</CodeStep> ve <CodeStep step={2}>temizleme</CodeStep> kodunu <CodeStep step={1}>kurulum</CodeStep>'dan önce son kez çalıştırır.** Bu, Effect mantığınızın doğru uygulandığını doğrulayan bir stres testidir. Bu, gözle görünür sorunlara neden oluyorsa, temizleme fonksiyonunuzda bazı mantık hataları vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı ya da geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir. [Sık kullanılan çözümlere göz gezdirin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-**Try to [write every Effect as an independent process](/learn/lifecycle-of-reactive-effects#each-effect-represents-a-separate-synchronization-process) and [think about a single setup/cleanup cycle at a time.](/learn/lifecycle-of-reactive-effects#thinking-from-the-effects-perspective)** It shouldn't matter whether your component is mounting, updating, or unmounting. When your cleanup logic correctly "mirrors" the setup logic, your Effect is resilient to running setup and cleanup as often as needed.
+**[Her Effect'i bağımsız bir süreç olarak yazmayı](/learn/lifecycle-of-reactive-effects#each-effect-represents-a-separate-synchronization-process) ve [her seferinde tek kurulum/temizleme döngüsü düşünmeyi](/learn/lifecycle-of-reactive-effects#thinking-from-the-effects-perspective) deneyin.** Bileşeninizin DOM'a ekleniyor/çıkarılıyor ya da güncelleniyor olması fark etmemelidir. Temizleme mantığınız kurulum mantığını doğru bir şekilde "yansıttığında", Effect'iniz kurulum ve temizlemeyi gerektiği sıklıkta çalıştıracaktır.
 
 <Note>
 
-An Effect lets you [keep your component synchronized](/learn/synchronizing-with-effects) with some external system (like a chat service). Here, *external system* means any piece of code that's not controlled by React, such as:
+Effect, [bileşeninizi harici bir sistemle senkronize tutmanızı](/learn/synchronizing-with-effects) (sohbet servisi gibi) sağlar. Burada *harici sistem*, React tarafından kontrol edilmeyen herhangi bir kod parçası demektir. Örneğin:
 
-* A timer managed with <CodeStep step={1}>[`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)</CodeStep> and <CodeStep step={2}>[`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval)</CodeStep>.
-* An event subscription using <CodeStep step={1}>[`window.addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)</CodeStep> and <CodeStep step={2}>[`window.removeEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)</CodeStep>.
-* A third-party animation library with an API like <CodeStep step={1}>`animation.start()`</CodeStep> and <CodeStep step={2}>`animation.reset()`</CodeStep>.
+* <CodeStep step={1}>[`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)</CodeStep> ve <CodeStep step={2}>[`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval)</CodeStep> ile yönetilen bir kronometre.
+* <CodeStep step={1}>[`window.addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)</CodeStep> ve <CodeStep step={2}>[`window.removeEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)</CodeStep> kullanan bir olay aboneliği (subscription).
+* <CodeStep step={1}>`animation.start()`</CodeStep> ve <CodeStep step={2}>`animation.reset()`</CodeStep> gibi bir API içeren üçüncü parti animasyon kütüphanesi.
 
-**If you're not connecting to any external system, [you probably don't need an Effect.](/learn/you-might-not-need-an-effect)**
+**Eğer herhangi bir harici sisteme bağlanmıyorsanız, [büyük ihtimalle Effect'e ihtiyacınız yoktur.](/learn/you-might-not-need-an-effect)**
 
 </Note>
 
-<Recipes titleText="Examples of connecting to an external system" titleId="examples-connecting">
+<Recipes titleText="Harici bir sisteme bağlanma örnekleri" titleId="examples-connecting">
 
-#### Connecting to a chat server {/*connecting-to-a-chat-server*/}
+#### Sohbet sunucusuna bağlanma {/*connecting-to-a-chat-server*/}
 
-In this example, the `ChatRoom` component uses an Effect to stay connected to an external system defined in `chat.js`. Press "Open chat" to make the `ChatRoom` component appear. This sandbox runs in development mode, so there is an extra connect-and-disconnect cycle, as [explained here.](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) Try changing the `roomId` and `serverUrl` using the dropdown and the input, and see how the Effect re-connects to the chat. Press "Close chat" to see the Effect disconnect one last time.
+Bu örnekte, `ChatRoom` bileşeni `chat.js`'de bildirilen harici sisteme bağlı kalmak için Effect'i kullanmaktadır. "Sohbeti aç" butonuna tıklayarak `ChatRoom` bileşenini render edin. Bu sandbox geliştirme modunda çalışmaktadır, bu yüzden fazladan bir bağlan ve bağlantıyı kes döngüsü [burada açıklandığı gibi](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) vardır. `roomId` ve `serverUrl`'yi aşağı doğru açılan menüyü (dropdown) ve input'u kullanarak değiştirin ve Effect'in nasıl tekrardan sohbete bağlandığını görün. "Sohbeti kapat" butonuna tıklayarak Effect'in son kez bağlantıyı kesmesini görün.
 
 <Sandpack>
 
@@ -156,13 +156,13 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
     </>
   );
 }
@@ -173,18 +173,18 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyahat">Seyahat</option>
+          <option value="muzik">Müzik</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -195,13 +195,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -216,9 +216,9 @@ button { margin-left: 10px; }
 
 <Solution />
 
-#### Listening to a global browser event {/*listening-to-a-global-browser-event*/}
+#### Global tarayıcı olayını dinleme {/*listening-to-a-global-browser-event*/}
 
-In this example, the external system is the browser DOM itself. Normally, you'd specify event listeners with JSX, but you can't listen to the global [`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window) object this way. An Effect lets you connect to the `window` object and listen to its events. Listening to the `pointermove` event lets you track the cursor (or finger) position and update the red dot to move with it.
+Bu örnekte, harici sistem tarayıcı DOM'unun kendisidir. Normalde, olay dinleyicilerini JSX ile belirtirsiniz ancak global [`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window) nesnesini bu şekilde dinleyemezsiniz. Effect, `window` nesnesine bağlanmanızı ve olaylarını dinlemenizi sağlar. `pointermove` olayını dinlemek, imlecin (ya da parmağın) konumunu izlemenize ve kırmızı noktayı o konumda hareket edecek şekilde güncellemenizi sağlar.
 
 <Sandpack>
 
@@ -265,9 +265,9 @@ body {
 
 <Solution />
 
-#### Triggering an animation {/*triggering-an-animation*/}
+#### Bir animasyonu tetikleme {/*triggering-an-animation*/}
 
-In this example, the external system is the animation library in `animation.js`. It provides a JavaScript class called `FadeInAnimation` that takes a DOM node as an argument and exposes `start()` and `stop()` methods to control the animation. This component [uses a ref](/learn/manipulating-the-dom-with-refs) to access the underlying DOM node. The Effect reads the DOM node from the ref and automatically starts the animation for that node when the component appears.
+Bu örnekteki harici sistem, `animation.js` dosyasındaki animasyon kütüphanesidir. Bu, DOM node'unu argüman olarak alan ve animasyonu kontrol etmek için `start()` ve `stop()` metodlarını kullanıma sunan `FadeInAnimation` adlı JavaScript sınıfını sağlar. Bu bileşen alttaki DOM node'una ulaşmak için [ref'i kullanır.](/learn/manipulating-the-dom-with-refs) Effect, DOM node'unu ref'ten okur ve bileşen render edildiğinde o node için animasyonu otomatik olarak başlatır.
 
 <Sandpack>
 
@@ -298,7 +298,7 @@ function Welcome() {
         backgroundImage: 'radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)'
       }}
     >
-      Welcome
+      Hoş geldin
     </h1>
   );
 }
@@ -308,7 +308,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome />}
@@ -325,11 +325,11 @@ export class FadeInAnimation {
   start(duration) {
     this.duration = duration;
     if (this.duration === 0) {
-      // Jump to end immediately
+      // hemen sona atla
       this.onProgress(1);
     } else {
       this.onProgress(0);
-      // Start animating
+      // Animasyonu başlat
       this.startTime = performance.now();
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
@@ -339,7 +339,7 @@ export class FadeInAnimation {
     const progress = Math.min(timePassed / this.duration, 1);
     this.onProgress(progress);
     if (progress < 1) {
-      // We still have more frames to paint
+      // Hala çizilmesi gereken kareler (frames) var
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
   }
@@ -364,9 +364,9 @@ html, body { min-height: 300px; }
 
 <Solution />
 
-#### Controlling a modal dialog {/*controlling-a-modal-dialog*/}
+#### Modal dialog'unu kontrol etme {/*controlling-a-modal-dialog*/}
 
-In this example, the external system is the browser DOM. The `ModalDialog` component renders a [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element. It uses an Effect to synchronize the `isOpen` prop to the [`showModal()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) and [`close()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/close) method calls.
+Bu örnekteki harici sistem, tarayıcı DOM'udur. `ModalDialog` bileşeni bir [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) elemanı render eder. `isOpen` prop'unu [`showModal()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) ve [`close()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/close) metod çağrıları ile senkronize etmek için Effect'i kullanır.
 
 <Sandpack>
 
@@ -379,14 +379,14 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(true)}>
-        Open dialog
+        Dialog'u aç
       </button>
       <ModalDialog isOpen={show}>
-        Hello there!
+        Selamlar!
         <br />
         <button onClick={() => {
           setShow(false);
-        }}>Close</button>
+        }}>Kapat</button>
       </ModalDialog>
     </>
   );
@@ -424,9 +424,9 @@ body {
 
 <Solution />
 
-#### Tracking element visibility {/*tracking-element-visibility*/}
+#### Elemanın görünebilirliğini takip etme {/*tracking-element-visibility*/}
 
-In this example, the external system is again the browser DOM. The `App` component displays a long list, then a `Box` component, and then another long list. Scroll the list down. Notice that when the `Box` component appears in the viewport, the background color changes to black. To implement this, the `Box` component uses an Effect to manage an [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). This browser API notifies you when the DOM element is visible in the viewport.
+Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste, sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı doğru kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekran göründüğünde sizi bilgilendirecektir.
 
 <Sandpack>
 
@@ -448,7 +448,7 @@ export default function App() {
 function LongSection() {
   const items = [];
   for (let i = 0; i < 50; i++) {
-    items.push(<li key={i}>Item #{i} (keep scrolling)</li>);
+    items.push(<li key={i}>Öğe #{i} (kaydırmaya devam et)</li>);
   }
   return <ul>{items}</ul>
 }
@@ -500,11 +500,11 @@ export default function Box() {
 
 ---
 
-### Wrapping Effects in custom Hooks {/*wrapping-effects-in-custom-hooks*/}
+### Effect'leri özel Hook'larla sarma {/*wrapping-effects-in-custom-hooks*/}
 
-Effects are an ["escape hatch":](/learn/escape-hatches) you use them when you need to "step outside React" and when there is no better built-in solution for your use case. If you find yourself often needing to manually write Effects, it's usually a sign that you need to extract some [custom Hooks](/learn/reusing-logic-with-custom-hooks) for common behaviors your components rely on.
+Effect'ler ["kaçış kapaklarıdır":](/learn/escape-hatches) Effect'leri "React'in dışına çıkmanız" gerektiğinde ve kullanım durumunuz için daha iyi yerleşik bir çözüm olmadığunda kullanırsınız. Kendinizi Effect'leri sık sık manuel olarak yazma durumunda buluyorsanız, bu genellikle bileşenlerinizin dayandığı yaygın davranışlar için [özel Hook'lar](/learn/reusing-logic-with-custom-hooks) yazmanız gerektiği anlamına gelir.
 
-For example, this `useChatRoom` custom Hook "hides" the logic of your Effect behind a more declarative API:
+Örneğin, bu `useChatRoom` özel Hook'u, Effect'inizin mantığını daha bildirimsel (declarative) bir API'ın arkasına "gizler":
 
 ```js {1,11}
 function useChatRoom({ serverUrl, roomId }) {
@@ -520,7 +520,7 @@ function useChatRoom({ serverUrl, roomId }) {
 }
 ```
 
-Then you can use it from any component like this:
+Yazdığınız bu Hook'u herhangi başka bir bileşenden de şöyle kullanabilirsiniz:
 
 ```js {4-7}
 function ChatRoom({ roomId }) {
@@ -533,15 +533,15 @@ function ChatRoom({ roomId }) {
   // ...
 ```
 
-There are also many excellent custom Hooks for every purpose available in the React ecosystem.
+Ayrıca React ekosisteminde her amaca uygun çok sayıda mükemmel özel Hook'lar mevcuttur.
 
-[Learn more about wrapping Effects in custom Hooks.](/learn/reusing-logic-with-custom-hooks)
+[Effect'leri özel Hook'larla sarma konusunda daha fazla bilgi edinin.](/learn/reusing-logic-with-custom-hooks)
 
-<Recipes titleText="Examples of wrapping Effects in custom Hooks" titleId="examples-custom-hooks">
+<Recipes titleText="Effect'leri özel Hook'larla sarmaya örnekler" titleId="examples-custom-hooks">
 
-#### Custom `useChatRoom` Hook {/*custom-usechatroom-hook*/}
+#### Özel `useChatRoom` Hook'u {/*custom-usechatroom-hook*/}
 
-This example is identical to one of the [earlier examples,](#examples-connecting) but the logic is extracted to a custom Hook.
+Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a yazılmıştır.
 
 <Sandpack>
 
@@ -560,13 +560,13 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
     </>
   );
 }
@@ -577,18 +577,18 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyahat">Seyahat</option>
+          <option value="muzik">Müzik</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -614,13 +614,13 @@ export function useChatRoom({ serverUrl, roomId }) {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -635,9 +635,9 @@ button { margin-left: 10px; }
 
 <Solution />
 
-#### Custom `useWindowListener` Hook {/*custom-usewindowlistener-hook*/}
+#### Özel `useWindowListener` Hook'u {/*custom-usewindowlistener-hook*/}
 
-This example is identical to one of the [earlier examples,](#examples-connecting) but the logic is extracted to a custom Hook.
+Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a yazılmıştır.
 
 <Sandpack>
 
@@ -692,9 +692,9 @@ body {
 
 <Solution />
 
-#### Custom `useIntersectionObserver` Hook {/*custom-useintersectionobserver-hook*/}
+#### Özel `useIntersectionObserver` Hook'u {/*custom-useintersectionobserver-hook*/}
 
-This example is identical to one of the [earlier examples,](#examples-connecting) but the logic is partially extracted to a custom Hook.
+Bu örnek [daha önceki örneklerden](#examples-connecting) biriyle benzerdir ancak mantık özel bir Hook'a yazılmıştır.
 
 <Sandpack>
 
@@ -716,7 +716,7 @@ export default function App() {
 function LongSection() {
   const items = [];
   for (let i = 0; i < 50; i++) {
-    items.push(<li key={i}>Item #{i} (keep scrolling)</li>);
+    items.push(<li key={i}>Öğe #{i} (kaydırmaya devam et)</li>);
   }
   return <ul>{items}</ul>
 }
@@ -784,11 +784,11 @@ export function useIntersectionObserver(ref) {
 
 ---
 
-### Controlling a non-React widget {/*controlling-a-non-react-widget*/}
+### React olmayan widget'ı kontrol etme {/*controlling-a-non-react-widget*/}
 
-Sometimes, you want to keep an external system synchronized to some prop or state of your component.
+Bazen, harici bir sistemi bileşeninizin bazı prop'larına ya da state'ine göre senkronize etmek istersiniz.
 
-For example, if you have a third-party map widget or a video player component written without React, you can use an Effect to call methods on it that make its state match the current state of your React component. This Effect creates an instance of a `MapWidget` class defined in `map-widget.js`. When you change the `zoomLevel` prop of the `Map` component, the Effect calls the `setZoom()` on the class instance to keep it synchronized:
+Örneğin, React olmadan yazılmış bir üçünü parti harita widget'ınız veya bir video oynatıcı bileşeniniz varsa, o bileşenin state'ini React bileşeninizin şu anki state'iyle eşleştiren metodları çağırmak için Effect'i kullanabilirsiniz. Bu Effect, `map-widget.js` içinde tanımlanan bir `MapWidget` sınıfı örneği oluşturur. `Map` bileşeninin `zoomLevel` prop'unu değiştirdiğizde, Effect sınıf örneğini senkronize tutmak için `setZoom()` fonksiyonunu çağırır:
 
 <Sandpack>
 
@@ -818,7 +818,7 @@ export default function App() {
   const [zoomLevel, setZoomLevel] = useState(0);
   return (
     <>
-      Zoom level: {zoomLevel}x
+      Yakınlaştırma seviyesi: {zoomLevel}x
       <button onClick={() => setZoomLevel(zoomLevel + 1)}>+</button>
       <button onClick={() => setZoomLevel(zoomLevel - 1)}>-</button>
       <hr />
@@ -888,15 +888,15 @@ button { margin: 5px; }
 
 </Sandpack>
 
-In this example, a cleanup function is not needed because the `MapWidget` class manages only the DOM node that was passed to it. After the `Map` React component is removed from the tree, both the DOM node and the `MapWidget` class instance will be automatically garbage-collected by the browser JavaScript engine.
+Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yönettiği için bir temizleme fonksiyonu gerekli değildir. `Map` React bileşeni ağaçtan kaldırıldıktan sonra, hem DOM node'u hem de `MapWidget` sınıf örneği, tarayıcı JavaScript motoru tarafından otomatik olarak temizlenecektir.
 
 ---
 
-### Fetching data with Effects {/*fetching-data-with-effects*/}
+### Effect'ler ile veri getirme (fetching) {/*fetching-data-with-effects*/}
 
-You can use an Effect to fetch data for your component. Note that [if you use a framework,](/learn/start-a-new-react-project#production-grade-react-frameworks) using your framework's data fetching mechanism will be a lot more efficient than writing Effects manually.
+Bileşeninize veri getirmek için Effect'i kullanabilirsiniz. [Eğer bir çatı kullanıyorsanız,](/learn/start-a-new-react-project#production-grade-react-frameworks) çatının veri getirme mekanizmasını kullanmanın Effect'i manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
 
-If you want to fetch data from an Effect manually, your code might look like this:
+Eğer manuel olarak Effect ile veri getirmek istiyorsanız, kodunuz şöyle görünebilir:
 
 ```js
 import { useState, useEffect } from 'react';
@@ -922,7 +922,7 @@ export default function Page() {
   // ...
 ```
 
-Note the `ignore` variable which is initialized to `false`, and is set to `true` during cleanup. This ensures [your code doesn't suffer from "race conditions":](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) network responses may arrive in a different order than you sent them.
+Başlangıçta `false` olan ve temizleme sırasında `true` olan `ignore` değişkenine dikkat edin. Bu, [kodunuzun "yarış koşullarından" zarar görmemesini sağlar:](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) ağdan gelen yanıtlar sizin onları gönderdiğiniz sıradan farklı olabilir.
 
 <Sandpack>
 
@@ -956,7 +956,7 @@ export default function Page() {
         <option value="Taylor">Taylor</option>
       </select>
       <hr />
-      <p><i>{bio ?? 'Loading...'}</i></p>
+      <p><i>{bio ?? 'Yükleniyor...'}</i></p>
     </>
   );
 }
@@ -967,7 +967,7 @@ export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve('This is ' + person + '’s bio.');
+      resolve('Bu ' + person + '’un biyosu.');
     }, delay);
   })
 }
@@ -975,7 +975,7 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-You can also rewrite using the [`async` / `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax, but you still need to provide a cleanup function:
+[`async` / `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) sözdizimini kullanarak da yeniden yazabilirsiniz, ancak yine de bir temizleme fonksiyonu sağlamanız gerekmektedir:
 
 <Sandpack>
 
@@ -1012,7 +1012,7 @@ export default function Page() {
         <option value="Taylor">Taylor</option>
       </select>
       <hr />
-      <p><i>{bio ?? 'Loading...'}</i></p>
+      <p><i>{bio ?? 'Yükleniyor...'}</i></p>
     </>
   );
 }
@@ -1023,7 +1023,7 @@ export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve('This is ' + person + '’s bio.');
+      resolve('Bu ' + person + '’un biyosu.');
     }, delay);
   })
 }
@@ -1031,50 +1031,50 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-Writing data fetching directly in Effects gets repetitive and makes it difficult to add optimizations like caching and server rendering later. [It's easier to use a custom Hook--either your own or maintained by the community.](/learn/reusing-logic-with-custom-hooks#when-to-use-custom-hooks)
+Direkt olarak Effect ile veri getirmek tekrarlı hale gelir ve önbelleğe alma ve sunucudan render etme gibi optimizasyonların eklenmesini zorlaştırır. [Kendiniz veya topluluk tarafından sağlanan özel bir Hook kullanmak daha kolaydır.](/learn/reusing-logic-with-custom-hooks#when-to-use-custom-hooks)
 
 <DeepDive>
 
-#### What are good alternatives to data fetching in Effects? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Effect'ler ile veri getirmeye iyi alternatifler nelerdir? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Writing `fetch` calls inside Effects is a [popular way to fetch data](https://www.robinwieruch.de/react-hooks-fetch-data/), especially in fully client-side apps. This is, however, a very manual approach and it has significant downsides:
+Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı taraflı uygulamalarda [veri getirmenin popüler bir yoludur](https://www.robinwieruch.de/react-hooks-fetch-data/). Ancak bu, çok manuel bir yaklaşımdır ve önemli dezavantajları vardır:
 
-- **Effects don't run on the server.** This means that the initial server-rendered HTML will only include a loading state with no data. The client computer will have to download all JavaScript and render your app only to discover that now it needs to load the data. This is not very efficient.
-- **Fetching directly in Effects makes it easy to create "network waterfalls".** You render the parent component, it fetches some data, renders the child components, and then they start fetching their data. If the network is not very fast, this is significantly slower than fetching all data in parallel.
-- **Fetching directly in Effects usually means you don't preload or cache data.** For example, if the component unmounts and then mounts again, it would have to fetch the data again.
-- **It's not very ergonomic.** There's quite a bit of boilerplate code involved when writing `fetch` calls in a way that doesn't suffer from bugs like [race conditions.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- **Effect'ler sunucuda çalışmazlar.** Bu, sunucu tarafından render edilen ilk HTML'in veri içermeyen bir yükleme state'ini içereceği anlamına gelir. Kullanıcı bilgisayarının tüm bu JavaScript'i indirmesi ve uygulamanızın şimdi verileri yüklemesi gerektiğini keşfetmesi için render etmesi gerekecektir. Bu çok verimli bir yol değildir.
+- **Doğrudan Effect ile veri getirmek, "ağ şelaleleri (waterfalls) oluşturmayı kolaylaştırır."** Üst bileşeni render edersiniz, o bileşen veri getirir, alt bileşenleri render eder, daha sonra o bileşenler kendi verilerini getirmeye başlarlar. Eğer internet bağlantınız hızlı değilse, verileri paralel olarak getirmeye göre önemli derecede yavaştır.
+- **Doğrudan Effect ile veri getirme, genellikle verileri önceden yüklememeniz veya önbelleğe almamanız anlamına gelir.** Örneğin, bileşen DOM'dan kaldırılır ve sonra tekrar DOM'a eklenirse, bileşen aynı veriyi tekrar getirmek zorundadır.
+- **Ergonomik değildir.** [Yarış koşulları](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) gibi hatalardan zarar görmeyecek şekilde `fetch` çağrıları yaparken oldukça fazla genel hatlarıyla kod yazmanız gerekmektedir.
 
-This list of downsides is not specific to React. It applies to fetching data on mount with any library. Like with routing, data fetching is not trivial to do well, so we recommend the following approaches:
+Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **If you use a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood but also add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+- **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşik veri getirme mekanizmasını kullanın.** Modern React çatıları verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
+- **Aksi halde, kullanıcı taraflı önbelleğe almayı kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü yaparsanız, Effect'leri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
 
-You can continue fetching data directly in Effects if neither of these approaches suit you.
+Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
 
 </DeepDive>
 
 ---
 
-### Specifying reactive dependencies {/*specifying-reactive-dependencies*/}
+### Reaktif bağımlılıkları belirleme {/*specifying-reactive-dependencies*/}
 
-**Notice that you can't "choose" the dependencies of your Effect.** Every <CodeStep step={2}>reactive value</CodeStep> used by your Effect's code must be declared as a dependency. Your Effect's dependency list is determined by the surrounding code:
+**Effect'inizin bağımlılıklarını "seçemeyeceğinize" dikkat edin.** Effect'iniz tarafından kullanılan her <CodeStep step={2}>reaktif değer</CodeStep> bağımlılık olarak bildirilmelidir. Effect'inizin bağımlılık listesi çevreleyen kod tarafından belirlenir:
 
 ```js [[2, 1, "roomId"], [2, 2, "serverUrl"], [2, 5, "serverUrl"], [2, 5, "roomId"], [2, 8, "serverUrl"], [2, 8, "roomId"]]
-function ChatRoom({ roomId }) { // This is a reactive value
-  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // This is a reactive value too
+function ChatRoom({ roomId }) { // Bu reaktif bir değerdir
+  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // Bu da reaktif bir değerdir
 
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // This Effect reads these reactive values
+    const connection = createConnection(serverUrl, roomId); // Effect bu reaktif değerleri okur
     connection.connect();
     return () => connection.disconnect();
-  }, [serverUrl, roomId]); // ✅ So you must specify them as dependencies of your Effect
+  }, [serverUrl, roomId]); // ✅ Bu yüzden Effect'inizin bağımlılık listesinde belirtmeniz gerekmektedir
   // ...
 }
 ```
 
-If either `serverUrl` or `roomId` change, your Effect will reconnect to the chat using the new values.
+`serverUrl` veya `roomId`'den herhangi biri değişirse, Effect'iniz yeni değerleri kullanarak sohbete yeniden bağlanacaktır.
 
-**[Reactive values](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) include props and all variables and functions declared directly inside of your component.** Since `roomId` and `serverUrl` are reactive values, you can't remove them from the dependencies. If you try to omit them and [your linter is correctly configured for React,](/learn/editor-setup#linting) the linter will flag this as a mistake you need to fix:
+**[Reaktif değerler,](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) prop'ları ve doğrudan bileşeniniz içinde bildirilen tüm değişkenleri ve fonksiyonları içerir.** `roomId` ve `serverUrl` reaktif değerler olduğundan dolayı, bu değerleri bağımlılıktan kaldıramazsınız. Eğer kaldırmaya kalkarsanız ve [linter'ınız React için ayarlanmışsa,](/learn/editor-setup#linting) linter bunu düzeltmeniz gereken bir hata olarak işaretleyecektir:
 
 ```js {8}
 function ChatRoom({ roomId }) {
@@ -1084,73 +1084,73 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // 🔴 React Hook useEffect has missing dependencies: 'roomId' and 'serverUrl'
+  }, []); // 🔴 React Hook'u useEffect'te eksik bağımlılıklar var: 'roomId' and 'serverUrl'
   // ...
 }
 ```
 
-**To remove a dependency, you need to ["prove" to the linter that it *doesn't need* to be a dependency.](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)** For example, you can move `serverUrl` out of your component to prove that it's not reactive and won't change on re-renders:
+**Bağımlılığı kaldırmak için, [linter'a bunun bir bağımlıklık olmasına gerek olmadığını "kanıtlamanız"](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)** gerekmektedir. Örneğin, reaktif olmadığını ve yeniden render'lar ile değişmeyeceğini kanıtlamak için `serverUrl`'i bileşeninizin dışına taşıyabilirsiniz:
 
 ```js {1,8}
-const serverUrl = 'https://localhost:1234'; // Not a reactive value anymore
+const serverUrl = 'https://localhost:1234'; // Artık reaktif bir değişken değil
 
 function ChatRoom({ roomId }) {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirilmiş
   // ...
 }
 ```
 
-Now that `serverUrl` is not a reactive value (and can't change on a re-render), it doesn't need to be a dependency. **If your Effect's code doesn't use any reactive values, its dependency list should be empty (`[]`):**
+Artık `serverUrl` reaktif bir değer olmadığına göre (ve yeniden render'lar ile değişmeyeceğine göre), bağımlılık olmasına gerek yoktur. **Eğer Effect kodunuz herhangi bir reaktif değer kullanmıyorsa, bağımlılık listesi boş  (`[]`) olmalıdır:**
 
 ```js {1,2,9}
-const serverUrl = 'https://localhost:1234'; // Not a reactive value anymore
-const roomId = 'music'; // Not a reactive value anymore
+const serverUrl = 'https://localhost:1234'; // Artık reaktif bir değer değil
+const roomId = 'muzik'; // Artık reaktif bir değer değil
 
 function ChatRoom() {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Bütün bağımlılıklar bildirilmiş
   // ...
 }
 ```
 
-[An Effect with empty dependencies](/learn/lifecycle-of-reactive-effects#what-an-effect-with-empty-dependencies-means) doesn't re-run when any of your component's props or state change.
+[Boş bağımlılık listesi olan bir Effect](/learn/lifecycle-of-reactive-effects#what-an-effect-with-empty-dependencies-means) herhangi bir bileşeninizin prop'ları ya da state'i değiştiğinde yeniden çalıştırılmaz.
 
 <Pitfall>
 
-If you have an existing codebase, you might have some Effects that suppress the linter like this:
+Eğer var olan bir kod tabanınız varsa, linter'ı şu şekilde yok sayan bazı Effect'leriniz olabilir:
 
 ```js {3-4}
 useEffect(() => {
   // ...
-  // 🔴 Avoid suppressing the linter like this:
+  // 🔴 Linter'ı bu şekilde yok saymaktan kaçının
   // eslint-ignore-next-line react-hooks/exhaustive-deps
 }, []);
 ```
 
-**When dependencies don't match the code, there is a high risk of introducing bugs.** By suppressing the linter, you "lie" to React about the values your Effect depends on. [Instead, prove they're unnecessary.](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)
+**Bağımlılıklar kod ile eşleşmediğinde, hata meydana gelme riski yüksektir.** Linter'ı bu şekilde yok sayarak React'e, Effect'inizin bağımlı olduğu değerler konusunda "yalan" söylemiş olursunuz. [Bunun yerine gereksiz olduklarını kanıtlayın.](/learn/removing-effect-dependencies#removing-unnecessary-dependencies)
 
 </Pitfall>
 
-<Recipes titleText="Examples of passing reactive dependencies" titleId="examples-dependencies">
+<Recipes titleText="Reaktif bağımlılıkları iletme örnekleri" titleId="examples-dependencies">
 
-#### Passing a dependency array {/*passing-a-dependency-array*/}
+#### Bağımlılık dizisi iletme {/*passing-a-dependency-array*/}
 
-If you specify the dependencies, your Effect runs **after the initial render _and_ after re-renders with changed dependencies.**
+Eğer bağımlılıkları belirtirseniz, Effect'iniz **ilk render'dan _ve_ değişen bağlımlılıklarla yeniden render'lardan sonra çalışacaktır.**
 
 ```js {3}
 useEffect(() => {
   // ...
-}, [a, b]); // Runs again if a or b are different
+}, [a, b]); // a veya b farklıysa yeniden çalışır
 ```
 
-In the below example, `serverUrl` and `roomId` are [reactive values,](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) so they both must be specified as dependencies. As a result, selecting a different room in the dropdown or editing the server URL input causes the chat to re-connect. However, since `message` isn't used in the Effect (and so it isn't a dependency), editing the message doesn't re-connect to the chat.
+Aşağıdaki örnekte, `serverUrl` ve `roomId` [reaktif değerlerdir.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Bu yüzden her ikisi de bağımlılık olarak belirtilmelidir. Sonuç olarak, aşağı doğru açılan menüden farklı bir oda seçmek ya da sunucu URL'ini değiştirmek sohbete yeniden bağlanılmasına neden olur. Ancak, `message` Effect'te kullanılmadığından (ve bu yüzden bağımlılık da değil), mesajı düzenlemek sohbete yeniden bağlanmaya neden olmaz.
 
 <Sandpack>
 
@@ -1173,15 +1173,15 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <label>
-        Your message:{' '}
+        Mesajınız:{' '}
         <input value={message} onChange={e => setMessage(e.target.value)} />
       </label>
     </>
@@ -1190,21 +1190,21 @@ function ChatRoom({ roomId }) {
 
 export default function App() {
   const [show, setShow] = useState(false);
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyahat">Seyahat</option>
+          <option value="muzik">Müzik</option>
         </select>
         <button onClick={() => setShow(!show)}>
-          {show ? 'Close chat' : 'Open chat'}
+          {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
         </button>
       </label>
       {show && <hr />}
@@ -1216,13 +1216,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1237,20 +1237,20 @@ button { margin-left: 5px; }
 
 <Solution />
 
-#### Passing an empty dependency array {/*passing-an-empty-dependency-array*/}
+#### Boş bağımlılık dizisi iletmek {/*passing-an-empty-dependency-array*/}
 
-If your Effect truly doesn't use any reactive values, it will only run **after the initial render.**
+Effect'iniz gerçekten reaktif değerler kullanmıyorsa, Effect'iniz sadece **ilk render'dan sonra** çalışacaktır.
 
 ```js {3}
 useEffect(() => {
   // ...
-}, []); // Does not run again (except once in development)
+}, []); // Yeniden çalışmaz (geliştirmedeyken hariç)
 ```
 
-**Even with empty dependencies, setup and cleanup will [run one extra time in development](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) to help you find bugs.**
+**Boş bağımlılıklar ile bile, kurulum ve temizleme hataları bulmanıza yardımcı olmak için [geliştirmedeyken bir kere fazladan çalışacaktır.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)**
 
 
-In this example, both `serverUrl` and `roomId` are hardcoded. Since they're declared outside the component, they are not reactive values, and so they aren't dependencies. The dependency list is empty, so the Effect doesn't re-run on re-renders.
+Bu örnekte, hem `serverUrl` hem de `roomId` doğrudan koda yazılmıştır. Bu değerler bileşenin dışında bildirildiği için reaktif değerler değillerdir ve bu nedenle bağımlılık değillerdir. Bağımlılık listesi boştur ve bu yüzden Effect yeniden render'larda yeniden çalışmaz.
 
 <Sandpack>
 
@@ -1259,7 +1259,7 @@ import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
 const serverUrl = 'https://localhost:1234';
-const roomId = 'music';
+const roomId = 'muzik';
 
 function ChatRoom() {
   const [message, setMessage] = useState('');
@@ -1272,9 +1272,9 @@ function ChatRoom() {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <label>
-        Your message:{' '}
+        Mesajınız:{' '}
         <input value={message} onChange={e => setMessage(e.target.value)} />
       </label>
     </>
@@ -1286,7 +1286,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom />}
@@ -1297,13 +1297,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1314,17 +1314,17 @@ export function createConnection(serverUrl, roomId) {
 <Solution />
 
 
-#### Passing no dependency array at all {/*passing-no-dependency-array-at-all*/}
+#### Hiçbir bağımlılık dizisi iletmemek {/*passing-no-dependency-array-at-all*/}
 
-If you pass no dependency array at all, your Effect runs **after every single render (and re-render)** of your component.
+Hiçbir bağımlılık dizisi iletmezseniz, Effect'iniz bileşeninizin **herbir render'ından (ve yeniden render'ından)** sonra çalışacaktır.
 
 ```js {3}
 useEffect(() => {
   // ...
-}); // Always runs again
+}); // Her zaman tekrardan çalışır
 ```
 
-In this example, the Effect re-runs when you change `serverUrl` and `roomId`, which is sensible. However, it *also* re-runs when you change the `message`, which is probably undesirable. This is why usually you'll specify the dependency array.
+Bu örnekte, mantıklı olan Effect'in `serverUrl` ve `roomId` değiştiğinde yeniden çalışmasıdır. Ancak, `message`'ı değiştirdiğinizde, muhtemelen istenmeyen bir durum olarak Effect *yine* çalışacaktır. Bu nedenle genellikle bağımlılık dizisini belirtiriz.
 
 <Sandpack>
 
@@ -1342,20 +1342,20 @@ function ChatRoom({ roomId }) {
     return () => {
       connection.disconnect();
     };
-  }); // No dependency array at all
+  }); // Hiçbir bağımlılık dizisi yok
 
   return (
     <>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <label>
-        Your message:{' '}
+        Mesajınız:{' '}
         <input value={message} onChange={e => setMessage(e.target.value)} />
       </label>
     </>
@@ -1364,21 +1364,21 @@ function ChatRoom({ roomId }) {
 
 export default function App() {
   const [show, setShow] = useState(false);
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin::{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">Seyahat</option>
+          <option value="muzik">Müzik</option>
         </select>
         <button onClick={() => setShow(!show)}>
-          {show ? 'Close chat' : 'Open chat'}
+          {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
         </button>
       </label>
       {show && <hr />}
@@ -1390,13 +1390,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1415,9 +1415,9 @@ button { margin-left: 5px; }
 
 ---
 
-### Updating state based on previous state from an Effect {/*updating-state-based-on-previous-state-from-an-effect*/}
+### Effect'ten önceki state'e göre state'i güncelleme {/*updating-state-based-on-previous-state-from-an-effect*/}
 
-When you want to update state based on previous state from an Effect, you might run into a problem:
+Effect'ten önceki state'e göre state'i güncellemek istediğinizde, bir sorunla karşılaşabilirsiniz:
 
 ```js {6,9}
 function Counter() {
@@ -1425,17 +1425,17 @@ function Counter() {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCount(count + 1); // You want to increment the counter every second...
+      setCount(count + 1); // Sayacı saniyede bir artırmak istiyorsunuz...
     }, 1000)
     return () => clearInterval(intervalId);
-  }, [count]); // 🚩 ... but specifying `count` as a dependency always resets the interval.
+  }, [count]); // 🚩 ... ancak `count`'u bağımlılık olarak belirtmek interval'i sıfırlayacaktır.
   // ...
 }
 ```
 
-Since `count` is a reactive value, it must be specified in the list of dependencies. However, that causes the Effect to cleanup and setup again every time the `count` changes. This is not ideal. 
+`count` reaktif bir değer olduğundan, bağımlılık listesinde belirtilmek zorundadır. Ancak bu durum, Effect'in her `count` değiştiğinde temizleme kurulum yapmasına neden olur. Bu ideal bir durum değildir.
 
-To fix this, [pass the `c => c + 1` state updater](/reference/react/useState#updating-state-based-on-the-previous-state) to `setCount`:
+Bunu düzeltmek için, [`c => c + 1` state güncelleyecisini](/reference/react/useState#updating-state-based-on-the-previous-state) `setCount`'a iletin:
 
 <Sandpack>
 
@@ -1447,10 +1447,10 @@ export default function Counter() {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCount(c => c + 1); // ✅ Pass a state updater
+      setCount(c => c + 1); // ✅ State güncelleyicisi iletin
     }, 1000);
     return () => clearInterval(intervalId);
-  }, []); // ✅ Now count is not a dependency
+  }, []); // ✅ Artık count bir bağımlılık değildir
 
   return <h1>{count}</h1>;
 }
@@ -1470,14 +1470,14 @@ body {
 
 </Sandpack>
 
-Now that you're passing `c => c + 1` instead of `count + 1`, [your Effect no longer needs to depend on `count`.](/learn/removing-effect-dependencies#are-you-reading-some-state-to-calculate-the-next-state) As a result of this fix, it won't need to cleanup and setup the interval again every time the `count` changes.
+Artık `count + 1` yerine `c => c + 1` ilettiğimiz için, [Effect'inizin `count`'a bağımlı olmasına gerek yoktur.](/learn/removing-effect-dependencies#are-you-reading-some-state-to-calculate-the-next-state) Bu çözümün sonucu olarak, Effect'iniz `count` her değiştiğinde temizleme ve kurulum yapmasına gerek yoktur.
 
 ---
 
 
-### Removing unnecessary object dependencies {/*removing-unnecessary-object-dependencies*/}
+### Gereksiz nesne bağımlılıklarını kaldırma {/*removing-unnecessary-object-dependencies*/}
 
-If your Effect depends on an object or a function created during rendering, it might run too often. For example, this Effect re-connects after every render because the `options` object is [different for every render:](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally)
+Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `options` nesnesi [her render için farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden sohbete bağlanır:
 
 ```js {6-9,12,15}
 const serverUrl = 'https://localhost:1234';
@@ -1485,20 +1485,20 @@ const serverUrl = 'https://localhost:1234';
 function ChatRoom({ roomId }) {
   const [message, setMessage] = useState('');
 
-  const options = { // 🚩 This object is created from scratch on every re-render
+  const options = { // 🚩 Bu nesne her yeniden render'dan sonra tekrar oluşturulur
     serverUrl: serverUrl,
     roomId: roomId
   };
 
   useEffect(() => {
-    const connection = createConnection(options); // It's used inside the Effect
+    const connection = createConnection(options); // Effect içinde kullanılır
     connection.connect();
     return () => connection.disconnect();
-  }, [options]); // 🚩 As a result, these dependencies are always different on a re-render
+  }, [options]); // 🚩 Bunun neticesinde, bu bağımlılıklar yeniden render'da her zaman farklıdır
   // ...
 ```
 
-Avoid using an object created during rendering as a dependency. Instead, create the object inside the Effect:
+Render esnasında oluşturulan bir nesneyi bağımlılık olarak kullanmaktan kaçının. Bunun yerine nesneyi Effect içinde oluşturun:
 
 <Sandpack>
 
@@ -1523,25 +1523,25 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <input value={message} onChange={e => setMessage(e.target.value)} />
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyahat">Seyahat</option>
+          <option value="muzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -1553,13 +1553,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1572,21 +1572,21 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Now that you create the `options` object inside the Effect, the Effect itself only depends on the `roomId` string.
+Şimdi `options` nesnesini Effect içinde oluşturduğumuzdan, Effect sadece `roomId` string'ine bağımlıdır.
 
-With this fix, typing into the input doesn't reconnect the chat. Unlike an object which gets re-created, a string like `roomId` doesn't change unless you set it to another value. [Read more about removing dependencies.](/learn/removing-effect-dependencies)
+Bu çözümle birlikte, input'a yazmak sohbete tekrar bağlanmayacaktır. Her render'da yeniden oluşturulan nesne aksine, `roomId` gibi bir string siz onu başka bir değere eşitlemediğiniz sürece değişmez. [Bağımlılıkları kaldırmak hakkında daha fazlasını okuyun.](/learn/removing-effect-dependencies)
 
 ---
 
-### Removing unnecessary function dependencies {/*removing-unnecessary-function-dependencies*/}
+### Gereksiz fonksiyon bağımlılıklarını kaldırma {/*removing-unnecessary-function-dependencies*/}
 
-If your Effect depends on an object or a function created during rendering, it might run too often. For example, this Effect re-connects after every render because the `createOptions` function is [different for every render:](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally)
+Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `createOptions` fonksiyonu [her render'da farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden sohbete bağlanır:
 
 ```js {4-9,12,16}
 function ChatRoom({ roomId }) {
   const [message, setMessage] = useState('');
 
-  function createOptions() { // 🚩 This function is created from scratch on every re-render
+  function createOptions() { // 🚩 Bu fonksiyon her yeniden render'dan sonra sıfırdan tekrar oluşturulur
     return {
       serverUrl: serverUrl,
       roomId: roomId
@@ -1594,17 +1594,17 @@ function ChatRoom({ roomId }) {
   }
 
   useEffect(() => {
-    const options = createOptions(); // It's used inside the Effect
+    const options = createOptions(); // Effect içinde kullanılır
     const connection = createConnection();
     connection.connect();
     return () => connection.disconnect();
-  }, [createOptions]); // 🚩 As a result, these dependencies are always different on a re-render
+  }, [createOptions]); // 🚩 Bunun neticesinde, bu bağımlılıklar yeniden render'da her zaman farklıdır
   // ...
 ```
 
-By itself, creating a function from scratch on every re-render is not a problem. You don't need to optimize that. However, if you use it as a dependency of your Effect, it will cause your Effect to re-run after every re-render.
+Her yeniden render'da sıfırdan bir fonksiyon oluşturmak kendi başına bir sorun değildir. Bunu optimize etmenize gerek yoktur. Ancak fonksiyonu Effect'inizin bağımlılığı olarak kullanırsanız, Effect'inizin her yeniden render'dan sonra yeniden çalışmasına neden olacaktır.
 
-Avoid using a function created during rendering as a dependency. Instead, declare it inside the Effect:
+Render esnasında oluşturulan bir fonksiyonu bağımlılık olarak kullanmaktan kaçının. Bunun yerine Effect içinde bildirin:
 
 <Sandpack>
 
@@ -1633,25 +1633,25 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <input value={message} onChange={e => setMessage(e.target.value)} />
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyahat">Seyahat</option>
+          <option value="muzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -1663,13 +1663,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl +  + roomId +  ' odasına bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ ' + serverUrl  + roomId + ' odasından bağlantı kesildi');
     }
   };
 }
@@ -1682,32 +1682,32 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Now that you define the `createOptions` function inside the Effect, the Effect itself only depends on the `roomId` string. With this fix, typing into the input doesn't reconnect the chat. Unlike a function which gets re-created, a string like `roomId` doesn't change unless you set it to another value. [Read more about removing dependencies.](/learn/removing-effect-dependencies)
+Şimdi `createOptions`fonksiyonunu Effect içinde bildirdiğimizden, Effect sadece `roomId` string'ine bağlıdır. Böylelikle input'u değiştirmek sohbete tekrar bağlanmayacaktır. Her render'da yeniden oluşturulan fonksiyon yerine, `roomId` gibi bir string siz onu başka değere eşitlemediğiniz sürece değişmez. [Bağımlılıkları kaldırmak hakkında daha fazlasını okuyun.](/learn/removing-effect-dependencies)
 
 ---
 
-### Reading the latest props and state from an Effect {/*reading-the-latest-props-and-state-from-an-effect*/}
+### Effect'te nihai prop'ları ve state'i okuma {/*reading-the-latest-props-and-state-from-an-effect*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölümde, React'in stabil sürümünde **henüz yayınlanmamış deneysel bir API** anlatılmaktadır.
 
 </Wip>
 
-By default, when you read a reactive value from an Effect, you have to add it as a dependency. This ensures that your Effect "reacts" to every change of that value. For most dependencies, that's the behavior you want.
+Varsayılan olarak, Effect'ten reaktif bir değer okuduğunuz zaman bu değeri bağımlılık olarak eklemeniz gerekmektedir. Bu, Effect'inizin o değer her değiştiğinde "tepki" vermesini sağlar. Çoğu bağımlılık için istediğiniz davranış budur.
 
-**However, sometimes you'll want to read the *latest* props and state from an Effect without "reacting" to them.** For example, imagine you want to log the number of the items in the shopping cart for every page visit:
+**Ancak bazen, *nihai* prop'ları ve state'i Effect bunlara "tepki" vermeden okumak isteyeceksiniz.** Örneğin, her sayfa ziyareti için alışveriş sepetindeki ürünlerin sayısını kaydetmek istediğinizi hayal edin:
 
 ```js {3}
 function Page({ url, shoppingCart }) {
   useEffect(() => {
     logVisit(url, shoppingCart.length);
-  }, [url, shoppingCart]); // ✅ All dependencies declared
+  }, [url, shoppingCart]); // ✅ Tüm bağımlılıklar bildirilmiş
   // ...
 }
 ```
 
-**What if you want to log a new page visit after every `url` change, but *not* if only the `shoppingCart` changes?** You can't exclude `shoppingCart` from dependencies without breaking the [reactivity rules.](#specifying-reactive-dependencies) However, you can express that you *don't want* a piece of code to "react" to changes even though it is called from inside an Effect. [Declare an *Effect Event*](/learn/separating-events-from-effects#declaring-an-effect-event) with the [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook, and move the code reading `shoppingCart` inside of it:
+**Ya `url` her değiştiğinde yeni bir sayfa ziyareti kaydetmek istiyorsanız ancak sadece `shoppingCart` değiştiğinde kaydetmek istemiyorsanız?** [Reaktivite kurallarını](#specifying-reactive-dependencies) çiğnemeden `shoppingCart`'ı bağımlılıklardan çıkartamazsınız. Ancak, Effect içinden çağırılsa bile bir kod parçasının yapılan değişikliklere "tepki" vermesini *istemediğinizi* ifade edebilirsiniz. [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook'u ile [*Effect Olayı* bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`'ı okuyan kodu onun içine taşıyın:
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {
@@ -1717,23 +1717,23 @@ function Page({ url, shoppingCart }) {
 
   useEffect(() => {
     onVisit(url);
-  }, [url]); // ✅ All dependencies declared
+  }, [url]); // ✅ Tüm bağımlılıklar bildirilmiş
   // ...
 }
 ```
 
-**Effect Events are not reactive and must always be omitted from dependencies of your Effect.** This is what lets you put non-reactive code (where you can read the latest value of some props and state) inside of them. By reading `shoppingCart` inside of `onVisit`, you ensure that `shoppingCart` won't re-run your Effect.
+**Effect Olayları reaktif değillerdir ve Effect'inizin bağımlılıklarından kaldırılmalıdırlar.** Bu, reaktif olmayan kodunuzu (prop'ların ve state'in nihai değerini okuyabildiğiniz) Effect'in içine koymanızı sağlar. `shoppingCart`'ı `onVisit` içinde okuyarak, `shoppingCart`'ın Effect'inizi yeniden çalıştırmamasını sağlarsınız.
 
-[Read more about how Effect Events let you separate reactive and non-reactive code.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+[Effect Olaylarının reaktif ve reaktif olmayan kodu ayırmanızı nasıl sağladığı hakkında daha fazla bilgi edinin.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
 
 
 ---
 
-### Displaying different content on the server and the client {/*displaying-different-content-on-the-server-and-the-client*/}
+### Sunucu ve kullanıcıda farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
-If your app uses server rendering (either [directly](/reference/react-dom/server) or via a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks)), your component will render in two different environments. On the server, it will render to produce the initial HTML. On the client, React will run the rendering code again so that it can attach your event handlers to that HTML. This is why, for [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) to work, your initial render output must be identical on the client and the server.
+Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [çatı kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamda render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. Kullanıcıda, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın kullanıcı ve sunucuda aynı olması gerekir.
 
-In rare cases, you might need to display different content on the client. For example, if your app reads some data from [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), it can't possibly do that on the server. Here is how you could implement this:
+Bazı nadir durumlarda, kullanıcıda farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 
 ```js
 function MyComponent() {
@@ -1744,44 +1744,44 @@ function MyComponent() {
   }, []);
 
   if (didMount) {
-    // ... return client-only JSX ...
+    // ... yalnızca kullanıcı JSX'i döndür ...
   }  else {
-    // ... return initial JSX ...
+    // ... ilk JSX'i döndür ...
   }
 }
 ```
 
-While the app is loading, the user will see the initial render output. Then, when it's loaded and hydrated, your Effect will run and set `didMount` to `true`, triggering a re-render. This will switch to the client-only render output. Effects don't run on the server, so this is why `didMount` was `false` during the initial server render.
+Uygulama yüklenirken, kullanıcı ilk render çıktısını görecektir. Daha sonra, uygulama yüklendiğinde ve hidrasyon olduğunda, Effect'iniz çalışarak `didMount` state'ini `true` yapacak ve yeniden render tetikleyecektir. Bu kullanıcı-taraflı (client-side) render çıktısıyla değişecektir. Effect'ler sunucuda çalışmazlar, bu yüzden ilk server render'ı sırasında `didMount` state'i `false`'a eşittir.
 
-Use this pattern sparingly. Keep in mind that users with a slow connection will see the initial content for quite a bit of time--potentially, many seconds--so you don't want to make jarring changes to your component's appearance. In many cases, you can avoid the need for this by conditionally showing different things with CSS.
-
----
-
-## Troubleshooting {/*troubleshooting*/}
-
-### My Effect runs twice when the component mounts {/*my-effect-runs-twice-when-the-component-mounts*/}
-
-When Strict Mode is on, in development, React runs setup and cleanup one extra time before the actual setup.
-
-This is a stress-test that verifies your Effect’s logic is implemented correctly. If this causes visible issues, your cleanup function is missing some logic. The cleanup function should stop or undo whatever the setup function was doing. The rule of thumb is that the user shouldn’t be able to distinguish between the setup being called once (as in production) and a setup → cleanup → setup sequence (as in development).
-
-Read more about [how this helps find bugs](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) and [how to fix your logic.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+Bu modeli idareli kullanın. Yavaş bir bağlantıya sahip kullanıcılar ilk içeriği oldukça uzun bir süre (potansiyel olarak saniyelerce) göreceğinden, bileşeninizin görünüşünde büyük değişiklikler yapmak istemezsiniz. Çoğu durumda, CSS ile koşullu olarak farklı şeyler göstererek buna ihtiyaç duymazsınız.
 
 ---
 
-### My Effect runs after every re-render {/*my-effect-runs-after-every-re-render*/}
+## Sorun giderme {/*troubleshooting*/}
 
-First, check that you haven't forgotten to specify the dependency array:
+### Bileşen DOM'a eklendiğinde Effect'im iki kere çalışıyor {/*my-effect-runs-twice-when-the-component-mounts*/}
+
+Geliştirmede Strict modu açıkken, React kurulum ve temizleme işlemini asıl kurulumdan önce bir kere fazladan çalıştırır.
+
+Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres testidir. Eğer bu, gözle görülebilir sorunlara neden oluyorsa, temizleme fonksiyonunuzda mantık hatası vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
+
+[Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin. 
+
+---
+
+### Effect'im her yeniden render'dan sonra çalışıyor {/*my-effect-runs-after-every-re-render*/}
+
+İlk olarak bağımlılık dizisini belirtmeyi unutup unutmadığınızı kontrol edin:
 
 ```js {3}
 useEffect(() => {
   // ...
-}); // 🚩 No dependency array: re-runs after every render!
+}); // 🚩 Bağımlılık dizisi yok: her yeniden render'dan sonra yeniden çalışır!
 ```
 
-If you've specified the dependency array but your Effect still re-runs in a loop, it's because one of your dependencies is different on every re-render.
+Bağımlılık dizisini belirttiyseniz ancak Effect'iniz hala döngüde yeniden çalışyorsa, bunun nedeni bağımlılıklarınızdan birinin her yeniden render'da farklı olmasıdır.
 
-You can debug this problem by manually logging your dependencies to the console:
+Bağımlılıkları konsola manuel olarak yazdırarak bu hatayı ayıklayabilirsiniz:
 
 ```js {5}
   useEffect(() => {
@@ -1791,58 +1791,58 @@ You can debug this problem by manually logging your dependencies to the console:
   console.log([serverUrl, roomId]);
 ```
 
-You can then right-click on the arrays from different re-renders in the console and select "Store as a global variable" for both of them. Assuming the first one got saved as `temp1` and the second one got saved as `temp2`, you can then use the browser console to check whether each dependency in both arrays is the same:
+Daha sonra konsoldaki farklı yeniden render'ların dizilerine sağ tıklayıp her ikisi için de "Global değişken olarak sakla"'yı seçebilirsiniz. İlkinin `temp1` olarak ve ikincinin `temp2` olarak kaydedildiğini varsayarsak, her iki dizideki her bir bağımlılığın aynı olup olmadığını kontrol etmek için tarayıcı konsolunu kullanabilirsiniz:
 
 ```js
-Object.is(temp1[0], temp2[0]); // Is the first dependency the same between the arrays?
-Object.is(temp1[1], temp2[1]); // Is the second dependency the same between the arrays?
-Object.is(temp1[2], temp2[2]); // ... and so on for every dependency ...
+Object.is(temp1[0], temp2[0]); // İlk bağımlılık diziler arasında aynı mı?
+Object.is(temp1[1], temp2[1]); // İkinci bağımlılık diziler arasında aynı mı?
+Object.is(temp1[2], temp2[2]); // ... ve diğer bağımlılıklar için ...
 ```
 
-When you find the dependency that is different on every re-render, you can usually fix it in one of these ways:
+Her yeniden render'da farklı olan bağımlılığı bulduğunzda, genellikle şu yollardan biriyle düzeltebilirsiniz:
 
-- [Updating state based on previous state from an Effect](#updating-state-based-on-previous-state-from-an-effect)
-- [Removing unnecessary object dependencies](#removing-unnecessary-object-dependencies)
-- [Removing unnecessary function dependencies](#removing-unnecessary-function-dependencies)
-- [Reading the latest props and state from an Effect](#reading-the-latest-props-and-state-from-an-effect)
+- [Effect'ten önceki state'e göre state'i güncelleme](#updating-state-based-on-previous-state-from-an-effect)
+- [Gereksiz nesne bağımlılıklarını kaldırma](#removing-unnecessary-object-dependencies)
+- [Gereksiz fonksiyon bağımlılıklarını kaldırma](#removing-unnecessary-function-dependencies)
+- [Effect'te nihai prop'ları ve state'i okuma](#reading-the-latest-props-and-state-from-an-effect)
 
-As a last resort (if these methods didn't help), wrap its creation with [`useMemo`](/reference/react/useMemo#memoizing-a-dependency-of-another-hook) or [`useCallback`](/reference/react/useCallback#preventing-an-effect-from-firing-too-often) (for functions).
-
----
-
-### My Effect keeps re-running in an infinite cycle {/*my-effect-keeps-re-running-in-an-infinite-cycle*/}
-
-If your Effect runs in an infinite cycle, these two things must be true:
-
-- Your Effect is updating some state.
-- That state leads to a re-render, which causes the Effect's dependencies to change.
-
-Before you start fixing the problem, ask yourself whether your Effect is connecting to some external system (like DOM, network, a third-party widget, and so on). Why does your Effect need to set state? Does it synchronize with that external system? Or are you trying to manage your application's data flow with it?
-
-If there is no external system, consider whether [removing the Effect altogether](/learn/you-might-not-need-an-effect) would simplify your logic.
-
-If you're genuinely synchronizing with some external system, think about why and under what conditions your Effect should update the state. Has something changed that affects your component's visual output? If you need to keep track of some data that isn't used by rendering, a [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (which doesn't trigger re-renders) might be more appropriate. Verify your Effect doesn't update the state (and trigger re-renders) more than needed.
-
-Finally, if your Effect is updating the state at the right time, but there is still a loop, it's because that state update leads to one of the Effect's dependencies changing. [Read how to debug dependency changes.](/reference/react/useEffect#my-effect-runs-after-every-re-render)
+Son çare olarak (bu yöntemler yardımcı olmadıysa), [`useMemo`](/reference/react/useMemo#memoizing-a-dependency-of-another-hook) veya [`useCallback`](/reference/react/useCallback#preventing-an-effect-from-firing-too-often) (fonksiyonlar için) kullanın.
 
 ---
 
-### My cleanup logic runs even though my component didn't unmount {/*my-cleanup-logic-runs-even-though-my-component-didnt-unmount*/}
+### Effect'im sonsuz bir döngüde sürekli çalışıyor {/*my-effect-keeps-re-running-in-an-infinite-cycle*/}
 
-The cleanup function runs not only during unmount, but before every re-render with changed dependencies. Additionally, in development, React [runs setup+cleanup one extra time immediately after component mounts.](#my-effect-runs-twice-when-the-component-mounts)
+Effect'iniz sonsuz bir döngüde çalışıyorsa, şu iki şey doğru olmak zorundadır:
 
-If you have cleanup code without corresponding setup code, it's usually a code smell:
+- Effect'iniz bir state'i güncelliyor.
+- O state, Effect'in bağımlılıklarının değişmesine neden olan bir yeniden render tetikliyor.
+
+Sorunu çözmeye başlamadan önce, Effect'inizin harici bir sisteme (DOM, ağ veya üçüncü parti widget gibi) bağlanıp bağlanmadığını kendinize sorun. Effect'iniz neden state'i değiştiriyor? Harici sistem ile senkronizasyon mu yapıyor? Yoksa uygulamanızın veri akışını Effect ile mi yönetmeye çalışıyorsunuz?
+
+Harici bir sistem yoksa, [Effect'i tamamen kaldırmanın](/learn/you-might-not-need-an-effect) mantığınızı basitleştirip basitleştirmeyeceğine bakın.
+
+Eğer gerçekten harici bir sistem ile senkronizasyon yapıyorsanız, Effect'inizin neden ve hangi koşullarda state'i güncellemesi gerektiğini düşünün. Bileşeninizin görsel çıktısını etkileyen bir değişiklik mi oldu? Render sırasında kullanılmayan bazı verileri takip etmeniz gerekiyorsa, [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (yeniden render tetiklemez) daha uygun olabilir. Effect'inizin state'i gereğinden fazla güncellemediğini (ve yeniden render'lar tetiklemediğini) doğrulayın. 
+
+Son olarak, Effect'iniz state'i doğru zamanda güncelliyorsa ancak yine de bir döngü söz konusuysa, bunun nedeni, state güncellemesinin Effect'in bağımlılıklarından birinin değişmesine neden olmasıdır. [Bağımlılık değişikliklerinden kaynaklı hataların nasıl ayıklanacağını okuyun.](/reference/react/useEffect#my-effect-runs-after-every-re-render)
+
+---
+
+### Temizleme mantığım bileşenim DOM'dan kaldırılmasa bile çalışıyor {/*my-cleanup-logic-runs-even-though-my-component-didnt-unmount*/}
+
+Temizleme fonksiyonu sadece DOM'dan kaldırılma sırasında değil, değişen bağımlılıklarla her yeniden render'dan önce de çalışır. Ek olarak, geliştirme aşamasında, React [kurulum+temizleme fonksiyonlarını bileşen DOM'a eklendikten hemen sonra bir kez daha çalıştırır.](#my-effect-runs-twice-when-the-component-mounts)
+
+Bir temizleme kodunuz var ancak kurulum kodunuz yoksa, bu genellike kötü kokan bir koddur (code smell):
 
 ```js {2-5}
 useEffect(() => {
-  // 🔴 Avoid: Cleanup logic without corresponding setup logic
+  // 🔴 Kaçının: Kurulum mantığı olmadan temizleme mantığı var
   return () => {
     doSomething();
   };
 }, []);
 ```
 
-Your cleanup logic should be "symmetrical" to the setup logic, and should stop or undo whatever setup did:
+Temizleme mantığınız kurulum mantığıyla "simetrik" olmalı ve kurulumun yaptığı her şeyi durdurmalı veya geri almalıdır:
 
 ```js {2-3,5}
   useEffect(() => {
@@ -1854,10 +1854,10 @@ Your cleanup logic should be "symmetrical" to the setup logic, and should stop o
   }, [serverUrl, roomId]);
 ```
 
-[Learn how the Effect lifecycle is different from the component's lifecycle.](/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect)
+[Effect yaşam döngüsünün bileşenin yaşam döngüsünden ne kadar farklı olduğunu öğrenin.](/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect)
 
 ---
 
-### My Effect does something visual, and I see a flicker before it runs {/*my-effect-does-something-visual-and-i-see-a-flicker-before-it-runs*/}
+### Effect'im görsel bir şey yapıyor ve çalışmadan önce bir titreme görüyorum {/*my-effect-does-something-visual-and-i-see-a-flicker-before-it-runs*/}
 
-If your Effect must block the browser from [painting the screen,](/learn/render-and-commit#epilogue-browser-paint) replace `useEffect` with [`useLayoutEffect`](/reference/react/useLayoutEffect). Note that **this shouldn't be needed for the vast majority of Effects.** You'll only need this if it's crucial to run your Effect before the browser paint: for example, to measure and position a tooltip before the user sees it.
+Effect'iniz tarayıcının [ekranı çizmesini](/learn/render-and-commit#epilogue-browser-paint) engelliyorsa, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin. Bunu yapmaya **Effect'lerin büyük çoğunluğu için ihtiyaç duyulmaması gerektiğini unutmayın.** Buna yalnızca Effect'inizi tarayıcı ekranı çizmeden önce çalıştırmanız çok önemliyse ihtiyacanız olacak: örneğin, bir tooltip'ini kullanıcı görmeden önce ölçmek ve konumlandırmak için.
