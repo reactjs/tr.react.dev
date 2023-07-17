@@ -48,7 +48,7 @@ function ChatRoom({ roomId }) {
  
 * **Opsiyonel** `bağımlılıklar`: `kurulum` (`setup`) kodunun içinde referansı olan tüm reaktif değerlerin listesi. Reaktif değerler prop'ları, state'i ve bileşeninizin gövdesi içinde bildirilen tüm değişkenleri ve fonksiyonları içerir. Linter'ınız [React için yapılandırılmış](/learn/editor-setup#linting) ise, her reaktif değerin bağımlılık olarak doğru bir şekilde belirtildiğini doğrulayacaktır. Bağımlılık listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` şeklinde satır içinde yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak her bağımlılığı önceki değeri ile karşılaştırır. Eğer bağımlılık listesini boş bırakırsanız, Effect'iniz her yeniden render'dan sonra tekrar çalışacaktır. [Bağımlılık dizisi iletmenin, boş dizi iletmenin ve hiç bağımlılık olmaması arasındaki farkı inceleyin.](#examples-dependencies)
 
-#### Döndürülenler {/*returns*/}
+#### Dönüş Değeri {/*returns*/}
 
 `useEffect`, `undefined` döndürür.
 
@@ -62,9 +62,9 @@ function ChatRoom({ roomId }) {
 
 * Eğer bağımlılıklarınızdan bazıları nesneler veya bileşeniniz içinde tanımlanmış fonksiyonlar ise, bu bağımlılıkların **Effect'in gerekenden daha sık yeniden çalışmasına neden olma riski vardır.** Bu durumu düzeltmek için, gereksiz [nesne](#removing-unnecessary-object-dependencies) ve [fonksiyon](#removing-unnecessary-function-dependencies) bağımlılıklarını silin. Ayrıca [state güncellemelerinizi](#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan mantığı](#reading-the-latest-props-and-state-from-an-effect) Effect dışına taşıyabilirsiniz.
 
-* Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React tarayıcının **Effect'inizi çalıştırmadan önce güncellenen ekranı boyamasına izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
+* Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React, Effect'inizi çalıştırmadan önce **tarayıcının güncellenen ekranı çizmesine izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
 
-* Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden boyayabilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden boyamasını engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
+* Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden çizebilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden çizmesini engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
 
 * Effect'ler **sadece kullanıcı (client) tarafında çalışır.** Sunucu render etme sırasında çalışmazlar.
 
@@ -265,7 +265,7 @@ body {
 
 <Solution />
 
-#### Animasyonu tetikleme {/*triggering-an-animation*/}
+#### Bir animasyonu tetikleme {/*triggering-an-animation*/}
 
 Bu örnekteki harici sistem, `animation.js` dosyasındaki animasyon kütüphanesidir. Bu, DOM node'unu argüman olarak alan ve animasyonu kontrol etmek için `start()` ve `stop()` metodlarını kullanıma sunan `FadeInAnimation` adlı JavaScript sınıfını sağlar. Bu bileşen alttaki DOM node'una ulaşmak için [ref'i kullanır.](/learn/manipulating-the-dom-with-refs) Effect, DOM node'unu ref'ten okur ve bileşen render edildiğinde o node için animasyonu otomatik olarak başlatır.
 
@@ -325,7 +325,7 @@ export class FadeInAnimation {
   start(duration) {
     this.duration = duration;
     if (this.duration === 0) {
-      // hgmen sona atla
+      // hemen sona atla
       this.onProgress(1);
     } else {
       this.onProgress(0);
@@ -339,7 +339,7 @@ export class FadeInAnimation {
     const progress = Math.min(timePassed / this.duration, 1);
     this.onProgress(progress);
     if (progress < 1) {
-      // Hala boyanması gereken kareler (frames) var
+      // Hala çizilmesi gereken kareler (frames) var
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
   }
@@ -1037,10 +1037,10 @@ Direkt olarak Effect ile veri getirmek tekrarlı hale gelir ve önbelleğe alma 
 
 #### Effect'ler ile veri getirmeye iyi alternatifler nelerdir? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Effect'ler içinide `fetch` çağrıları yapmak, özellikle tamamen kullanıcı taraflı uygulamalarda [veri getirmenin popüler bir yoludur](https://www.robinwieruch.de/react-hooks-fetch-data/). Ancak bu, çok manuel bir yaklaşımdır ve önemli dezavantajları vardır:
+Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı taraflı uygulamalarda [veri getirmenin popüler bir yoludur](https://www.robinwieruch.de/react-hooks-fetch-data/). Ancak bu, çok manuel bir yaklaşımdır ve önemli dezavantajları vardır:
 
 - **Effect'ler sunucuda çalışmazlar.** Bu, sunucu tarafından render edilen ilk HTML'in veri içermeyen bir yükleme state'ini içereceği anlamına gelir. Kullanıcı bilgisayarının tüm bu JavaScript'i indirmesi ve uygulamanızın şimdi verileri yüklemesi gerektiğini keşfetmesi için render etmesi gerekecektir. Bu çok verimli bir yol değildir.
-- **Dpğrudan Effect ile veri getirmek, "ağ şelaleleri (waterfalls) oluşturmayı kolaylaştırır."** Üst bileşeni render edersiniz, o bileşen veri getirir, alt bileşenleri render eder, daha sonra o bileşenler kendi verilerini getirmeye başlarlar. Eğer internet bağlantınız hızlı değilse, verileri paralel olarak getirmeye göre önemli derecede yavaştır.
+- **Doğrudan Effect ile veri getirmek, "ağ şelaleleri (waterfalls) oluşturmayı kolaylaştırır."** Üst bileşeni render edersiniz, o bileşen veri getirir, alt bileşenleri render eder, daha sonra o bileşenler kendi verilerini getirmeye başlarlar. Eğer internet bağlantınız hızlı değilse, verileri paralel olarak getirmeye göre önemli derecede yavaştır.
 - **Doğrudan Effect ile veri getirme, genellikle verileri önceden yüklememeniz veya önbelleğe almamanız anlamına gelir.** Örneğin, bileşen DOM'dan kaldırılır ve sonra tekrar DOM'a eklenirse, bileşen aynı veriyi tekrar getirmek zorundadır.
 - **Ergonomik değildir.** [Yarış koşulları](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) gibi hatalardan zarar görmeyecek şekilde `fetch` çağrıları yaparken oldukça fazla genel hatlarıyla kod yazmanız gerekmektedir.
 
@@ -1860,4 +1860,4 @@ Temizleme mantığınız kurulum mantığıyla "simetrik" olmalı ve kurulumun y
 
 ### Effect'im görsel bir şey yapıyor ve çalışmadan önce bir titreme görüyorum {/*my-effect-does-something-visual-and-i-see-a-flicker-before-it-runs*/}
 
-Effect'iniz tarayıcının [ekranı boyamasını](/learn/render-and-commit#epilogue-browser-paint) engelliyorsa, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin. Bunu yapmaya **Effect'lerin büyük çoğunluğu için ihtiyaç duyulmaması gerektiğini unutmayın.** Buna yalnızca Effect'inizi tarayıcı ekranı boyamadan önce çalıştırmanız çok önemliyse ihtiyacanız olacak: örneğin, bir tooltip'ini kullanıcı görmeden önce ölçmek ve konumlandırmak için.
+Effect'iniz tarayıcının [ekranı çizmesini](/learn/render-and-commit#epilogue-browser-paint) engelliyorsa, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin. Bunu yapmaya **Effect'lerin büyük çoğunluğu için ihtiyaç duyulmaması gerektiğini unutmayın.** Buna yalnızca Effect'inizi tarayıcı ekranı çizmeden önce çalıştırmanız çok önemliyse ihtiyacanız olacak: örneğin, bir tooltip'ini kullanıcı görmeden önce ölçmek ve konumlandırmak için.
