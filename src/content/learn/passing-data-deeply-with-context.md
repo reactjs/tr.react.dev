@@ -4,24 +4,24 @@ title: Context ile Veriyi Derinlemesine Aktarma
 
 <Intro>
 
-Genellikle, bilgiyi üst elemandan alt elemana doğru, prop'lar ile aktarırsınız. Ancak, prop'ları aktarırken aşağıya doğru çok fazla ortanca eleman varsa veya geçirdiğiniz bilgiyi uygulamanızda birçok elemanda kullanacaksanız prop'ları aşağıya aktarmak zahmetli ve uygunsuz olur. *Context*, üst elemanın, bilgiyi kendi altındaki herhangi bir elemana tek tek prop'lar ile aktarmadan erişilebilir olmasını sağlar.
+Bilgiyi genelde prop'lar vasıtasıyla üst elemandan alt elemana doğru aktarırsınız. Ancak, aktarmanız gereken bileşen ulaşana kadar birçok ara bileşene iletmeniz veya birden çok bileşene aktarmanız gerekiyorsa prop kullanmak zahmetli ve karmaşık hale gelir. *Context*, bilgiyi üst bileşenden ihtiyaç duyan alt bileşenlere (derinliğine bakılmaksızın) prop olarak açıkça belirtmeden iletmenizi sağlar.
 
 </Intro>
 
 <YouWillLearn>
 
-- "Prop sondajlaması" nedir
-- Art arda tekrarlanan prop aktarımını context ile değiştirmek
-- Context'in genel kullanım yöntemleri
-- Context'in alternatifleri
+- "Prop drilling" nedir
+- Birden fazla kez alt elemana aktarılan prop'u context ile değiştirmek
+- Context'in yaygın kullanım durumları
+- Context'in yaygın alternatifleri
 
 </YouWillLearn>
 
 ## Prop'ları aktarmanın yarattığı sorun {/*the-problem-with-passing-props*/}
 
-[Prop'ları aktarmak,](/learn/passing-props-to-a-component)veriyi UI ağacınız üzerinde ilgili bileşenlere aktarmanın harika bir yoludur.
+[Prop'ları aktarmak](/learn/passing-props-to-a-component), UI ağacınızdaki bileşenlere kullanacağı verileri iletmenin harika bir yoludur.
 
-Ancak, bir prop'u ağacın derinliklerine aktarmak gerektiğinde veya birçok elemanın aynı prop'a ihtiyaç duyduğu durumlarda, prop'ları aktarmak zahmetli ve uygunsuz hale gelebilir. Veriye ihtiyaç duyan elemanları ile en yakın ortak ata arasındaki mesafe uzun olabilir ve bu durum, [state'i yukarı taşımanın](/learn/sharing-state-between-components) getireceği "prop sondajı" adı verilen duruma yol açabilir.
+Ancak, bir prop'u ağacın derinliklerine aktarmak gerektiğinde veya birçok elemanın aynı prop'a ihtiyaç duyduğu durumlarda zahmetli ve uygunsuz hale gelebilir. Veriye ihtiyaç duyan elemanlar ile en yakın ortak üst bileşen arasındaki mesafe uzun olabilir ve [state'i yukarı taşımak](/learn/sharing-state-between-components) "prop drilling" adı verilen duruma yol açabilir.
 
 <DiagramGroup>
 
@@ -30,19 +30,19 @@ Ancak, bir prop'u ağacın derinliklerine aktarmak gerektiğinde veya birçok el
 State'i yukarı taşımak
 
 </Diagram>
-<Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="On boğum noktasına sahip ağaç diyagramı. Her bir boğum noktasının iki veya daha az alt elemanı var. Kök boğum, bir değeri temsil eden mor bir baloncuk içerir. Bu değer iki alt elemana doğru akar, her biri değeri aktarır fakat içinde barındırmaz. Sol alt eleman, bu değeri, mor ile gösterilmiş iki alt elemana doğru aktarır. Kökün sağ alt elemanı, bu değeri, iki alt elemanından birine aktarır - sağda bulunan, mor ile gösterilmiş. O alt eleman değeri kendi tek alt elemanına aktarır, bu alt eleman da değeri mor ile gösterilmiş kendi iki alt elemanına aktarır.">
+<Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="Her düğümün iki veya daha az çocuğu olan on düğümlü bir ağaç diyagramı. Kök düğüm, mor renkle vurgulanmış bir değeri temsil eden bir balon içerir. Değer, her biri değeri geçiren ancak kullanmayan iki çocuktan aşağı doğru akar. Soldaki çocuk, değeri her ikisi de mor renkle vurgulanmış olan iki çocuğa aktarır. Sağdaki çocuk ise değeri mor renkle vurgulanmış sağ çocuğa aktarır. Bu çocuk değeri tek çocuğuna aktarır, o da mor renkle vurgulanan iki çocuğuna aktarır.">
 
-Prop sondajlaması
+Prop drilling
 
 </Diagram>
 
 </DiagramGroup>
 
-Prop'ları aktarmadan veriyi ağaçtaki bileşenlere "ışınlamannın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün! 
+Veriyi prop'lar ile aktarmadan ağaçtaki bileşenlere "ışınlamanın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün! 
 
 ## Context: prop'ları aktarmanın alternatif bir yolu {/*context-an-alternative-to-passing-props*/}
 
-Context üst elemanın altındaki tüm ağaca veri sağlamasına olanak tanır. Context'in bir çok kullanım alanı vardır. İşte bir örnek. Boyutu için `level` kabul eden bu `Heading` elemanını ele alalım:
+Context, üst bileşenin altındaki tüm ağaca veri sağlamasına olanak tanır. Bir çok kullanım alanı vardır. İşte bir örnek. Boyutu için `level` kabul eden bu `Heading` elemanını ele alalım:
 
 <Sandpack>
 
@@ -106,7 +106,7 @@ export default function Heading({ level, children }) {
 
 </Sandpack>
 
-Diyelim ki aynı `Section` içerisinde aynı boyuta sahip birden fazla başlık kullanmak istiyorsunuz:
+Diyelim ki aynı `Section` içerisinde birden fazla başlığın her zaman aynı boyutta olmasını istiyorsunuz:
 
 <Sandpack>
 
@@ -190,7 +190,7 @@ export default function Heading({ level, children }) {
 </Section>
 ```
 
- `level` prop'unu `<Section>` elemanına direkt aktarıp, `<Heading>` için bu prop'u tek tek tanımlamamak daha iyi olurdu. Böylece bir "section" içindeki bütün "headingler" aynı boyuta sahip olurdu:
+Bunun yerine  `level` prop'unu `<Section>` bileşenine aktarıp `<Heading>`'den kaldırabilseydiniz daha iyi olurdu. Böylece aynı bölümdeki tüm başlıkların aynı boyuta sahip olmasını sağlayabilirsiniz:
 
 ```js
 <Section level={3}>
@@ -200,15 +200,15 @@ export default function Heading({ level, children }) {
 </Section>
 ```
 
-Peki `<Heading>` elemanı kendine en yakın `<Section>` elemanının "level" boyutunu nasıl bilebilir? **Bunun için alt elemanın bir şekilde ağacın üst kısmına veriyi "sorması" gerekir.**
+Peki `<Heading>` elemanı kendine en yakın `<Section>` elemanının seviyesini nasıl bilebilir? **Bunun için alt bileşenin yukarıdaki bir yerden veri "istemesi" gerekir.**
 
-Bunu sadece prop'lar ile yapamazsınız. Context işte burada devreye girer. Üç adımda bu işi yapabilirsiniz:
+Bunu sadece prop'lar ile yapamazsınız. Context burada devreye girer. Bunu üç adımda yaparsınız:
 
-1. **Oluştur:** context'i oluşturun. (`LevelContext`, olarak oluşturabilirsiniz, "heading" level'ı olarak kullanılacağı için.)
-2. **Kullan:** context'i veriye ihtiyacı olan elemanda kullanın. (`Heading` `LevelContext`'i kullanacak.)
-3. **Sağla:** veriyi tanımlayacak olan elemandan, context'i aktar. (`Section` `LevelContext`'i sağlayın, yani aktarın.)
+1. Context **oluşturun**. (Başlık seviyesi için olduğundan `LevelContext` olarak isimlendirebilirsiniz.)
+2. Context'i veriye ihtiyacı olan bileşende **kullanın**. (`Heading`, `LevelContext`'i kullanacak.)
+3. Veriyi tanımlayacak bileşenden context'i **sağlayın**. (`Section`, `LevelContext`'i sağlayacak.)
 
-Context üst elemanın--çok uzak olsa bile!--içindeki tüm ağaca veri aktarmasını sağlar.
+Context, üst bileşenin--uzakta olsa bile!--içindeki tüm ağaca veri aktarmasını sağlar.
 
 <DiagramGroup>
 
@@ -226,9 +226,9 @@ Context'i uzak bir alt elemanda kullanmak
 
 </DiagramGroup>
 
-### Step 1: Context'i oluştur {/*step-1-create-the-context*/}
+### Adım 1: Context'i oluşturun {/*step-1-create-the-context*/}
 
-Öncelikle, context'i oluşturup onu bir dosyadan "export" etmeniz gerekir ki diğer elemanlar onu kullanabilsin:
+Öncelikle context'i oluşturmanız gerekir. Bileşenlerinizin kullanabilmesi için bunu **bir dosyadan dışa aktarmalısınız**:
 
 <Sandpack>
 
@@ -308,11 +308,11 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-`createContext`'e verilen tek argüman _default_ değeridir. Burada, `1` en büyük başlık seviyesine karşılık gelir, ancak buraya isterseniz herhangi bir değer girebilirsiniz(obje bile). Default değerin önemini bir sonraki adımda daha iyi göreceksiniz.
+`createContext`'e verilen tek argüman _varsayılan_ değeridir. Burada, `1` en büyük başlık seviyesine karşılık gelir ancak herhangi bir değer (hatta obje) verebilirsiniz. Varsayılan değerin önemini bir sonraki adımda göreceksiniz.
 
-### Step 2: Context'i kullanın {/*step-2-use-the-context*/}
+### Adım 2: Context'i kullanın {/*step-2-use-the-context*/}
 
-`useContext` hook'unu React'tan ve kendi context'inizi tanımladığınız yerden "import" edin:
+ React'tın `useContext` hook'unu ve context'inizi içe aktarın:
 
 ```js
 import { useContext } from 'react';
@@ -327,7 +327,7 @@ export default function Heading({ level, children }) {
 }
 ```
 
-Bunu yerine, `level` prop'unu kaldırın ve değeri az önce import ettiğiniz `LevelContext`'ten okuyun:
+Bunu yerine, `level` prop'unu kaldırın ve değeri az önce içe aktardığınız context'ten (`LevelContext`) okuyun:
 
 ```js {2}
 export default function Heading({ children }) {
@@ -336,9 +336,9 @@ export default function Heading({ children }) {
 }
 ```
 
-`useContext`, `useState` ve `useReducer` gibi bir Hook'tur. Hook'ları sadece React elemanlarının içinde çağırabilirsiniz (dögülerin veya kondisyonel içerisinde çağıramazsınız.) **`useContext` React'a `Heading`'in `LevelContext`'i okumak istediğini söyler.**
+`useContext` bir Hook'tur. Tıpkı `useState` ve `useReducer` gibi, yalnızca React bileşeninin üst kapsamında çağırabilirsiniz (döngülerin veya koşulların içinde çağıramazsınız). **`useContext`, React'e `Heading` bileşeninin `LevelContext`'i okumak istediğini söyler.**
 
-Şimdi `Heading` elemanının `level` prop'u olmadığına göre, level prop'unu `Heading`'e aşağıdaki JSX'te olduğu gibi geçirmenize gerek yoktur:
+Artık `Heading` bileşeninin `level` prop'u olmadığına göre `Heading`'e aşağıdaki JSX'te olduğu gibi aktarmanıza da gerek yoktur:
 
 ```js
 <Section>
@@ -348,7 +348,7 @@ export default function Heading({ children }) {
 </Section>
 ```
 
-JSX'i `Section` level prop'unu alacak şekilde güncelleyin:
+Bunun yerine JSX'i `Section`'ın `level` prop'unu alacağı şekilde güncelleyin:
 
 ```jsx
 <Section level={4}>
@@ -358,7 +358,7 @@ JSX'i `Section` level prop'unu alacak şekilde güncelleyin:
 </Section>
 ```
 
-Hatırlatma olarak, üzerinde elde etmeye çalıştığınız işaretleme bu:
+Hatırlatmak gerekirse, yapmaya çalıştığınız biçimlendirme budur:
 
 <Sandpack>
 
@@ -442,13 +442,13 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-Farkettiyseniz bu örnek şu anlık tam olarak çalışmıyor. Bütün başlıkların boyutu aynı **context'i *kullanmanıza* rağmen, daha onu *sağlamadınız.*** React bunu nereden alacağını bilmiyor!
+Bu örneğin henüz tam olarak çalışmadığına dikkat edin! Tüm başlıklar aynı boyuta sahip. **Context'i *kullanıyorsunuz* ancak henüz *sağlamadınız*.** React nereden alacağını bilmiyor!
 
-Eğer context'i sağlamazsanız, React bir önceki adımda tanımladığınız default değeri kullanacaktır. Bu örnekte, `1` argümanını `createContext` için belirlediniz, dolayısıyla `useContext(LevelContext)`  `1` değerini döndürür, ve bütün başlıkları `<h1>` olarak ayarlar. Bu sorunu çözmek için her `Section` için kendi context'ini sağlamasına yardımcı olalım.
+Context'i sağlamazsanız, React önceki adımda belirttiğiniz varsayılan değeri kullanır. Bu örnekte, `createContext`'e argüman olarak `1` belirttiniz. Bu nedenle `useContext(LevelContext)` ifadesi `1` döndürür ve tüm bu başlıkları `<h1>` olarak ayarlar. Her `Section`'ın kendi context'ini sağlamasını ayarlayarak bu sorunu çözelim.
 
-### Step 3: Context'i sağla {/*step-3-provide-the-context*/}
+### Adım 3: Context'i sağlayın {/*step-3-provide-the-context*/}
 
-`Section` elemanı alt elemanlarını şuanlık şu şekilde render ediyor:
+`Section` bileşeni şu anda alt bileşenlerini render eder:
 
 ```js
 export default function Section({ children }) {
@@ -460,7 +460,7 @@ export default function Section({ children }) {
 }
 ```
 
-**Bunları context provider ile sarın** böylece `LevelContext`'i sağlayabilirsiniz:
+Alt bileşenlerine `LevelContext` sağlamak için **context provider ile sarın**:
 
 ```js {1,6,8}
 import { LevelContext } from './LevelContext.js';
@@ -476,7 +476,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-Bu React'a şöyle söyler: "`<Section>` içindeki herhangi bir eleman,`LevelContext`'i istediğinde, ona bu `level` değerini ver." Bu eleman UI ağacında kendisine en yakın `<LevelContext.Provider>` değerini kullanacaktır.
+Bu React'a şunu söyler: "`<Section>` içindeki herhangi bir eleman,`LevelContext`'i istediğinde, ona bu `level` değerini ver." Bileşen, üzerindeki UI ağacında bulunan en yakın `<LevelContext.Provider>` değerini kullanır.
 
 <Sandpack>
 
@@ -564,15 +564,15 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-Sonuç ilk başta yazdığınız kod ile aynı, fakat her bir Heading elemanına level prop'unu tek tek aktarmanız gerekmedi! Bunun yerine, her bir Heading elemanı, başlık boyutunu kendisine en yakın Section'a sorarak "anlıyor":
+Orijinal kodla aynı sonucu elde edersiniz, ancak her `Heading` bileşenine `level` prop'unu aktarmanız gerekmez! Bunun yerine, üstündeki en yakın `Section` bileşenine sorarak başlık seviyesini "bulur":
 
-1. `level` prop'unu `<Section>`'a aktarıyorsunuz.
-2. `Section` alt elemanlarını `<LevelContext.Provider value={level}>` ile çevreliyor.
-3. `Heading` kendisine en yakın `LevelContext` değerini `useContext(LevelContext)` ile sorguluyor.
+1. `level` prop'unu `<Section>`'a aktarırsınız.
+2. `Section` alt bileşenlerini `<LevelContext.Provider value={level}>` sarmalar.
+3. `Heading`, `useContext(LevelContext)` ile birlikte yukarıdaki en yakın `LevelContext`'e değerini sorar.
 
-## Context'i aynı elemandan kullanmak ve sağlamak {/*using-and-providing-context-from-the-same-component*/}
+## Context değerini provider'ının tanımlandığı bileşende okuma {/*using-and-providing-context-from-the-same-component*/}
 
-Halen her "section" için `level`' ı manuel olarak belirtiyorsunuz:
+Şu anda hala her bölümün `level`'ını manuel olarak belirlemeniz gerekir:
 
 ```js
 export default function Page() {
@@ -585,7 +585,7 @@ export default function Page() {
           ...
 ```
 
-Context bir üst elemandan bilgi almanızı sağlar, her `Section` `level` değerini bir üst `Section`'dan okuyabilir ve `level + 1` değerini otomatik olarak aşağıya aktarabilir. Bunu nasıl yapabileceğinize dair bir örnek:
+Context, üstteki bileşenlerden bilgi okumanıza izin verdiğinden, her `Section` üstündeki `Section`'dan `level` değerini okuyarak `level + 1` değerini otomatik olarak aşağıya aktarabilir. Bunu nasıl yapabileceğinize dair bir örnek:
 
 ```js Section.js {5,8}
 import { useContext } from 'react';
@@ -603,7 +603,7 @@ export default function Section({ children }) {
 }
 ```
 
-Bu değişiklik ile, artık `level` prop'unu *hem* `<Section>`'a *hem de* `<Heading>`' e tanımlamanıza gerek kalmaz:
+Bu değişiklik ile birlikte artık `level` prop'unu *ne* `<Section>`'a *ne de* `<Heading>`' e aktarmanıza gerek kalmaz:
 
 <Sandpack>
 
@@ -699,15 +699,16 @@ export const LevelContext = createContext(0);
 
 <Note>
 
-Bu örneğin, başlık boyutlarını kullanma sebebi, iç içe geçmiş elemanların context'i nasıl geçersiz kıldığını görsel olarak göstermesidir. Ancak context'in bir çok başka kullanım alanı mevcuttur. Alt ağaçtaki bütün elemanların ihtiyaç duyduğu her türlü bilgiyi aktarabilirsiniz: mevcut renk teması, şu anda oturum açmış kullanıcı vb.
+Bu örnekte başlık seviyeleri kullanılmasının sebebi, iç içe geçmiş bileşenlerin context'i nasıl ezebileceğini görselleştirmektir. Ancak context diğer birçok kullanım durumu için de yararlıdır. Tüm alt ağacın ihtiyaç duyduğu her türlü bilgiyi aktarabilirsiniz: geçerli renk teması, o anda oturum açmış kullanıcı vb.
 
 </Note>
 
-## Context'in ortanca elemanlardan aktarılması {/*context-passes-through-intermediate-components*/}
+## Context'in ara bileşenlerden aktarılması {/*context-passes-through-intermediate-components*/}
 
-Context'i kullanan eleman ile context'i sağlayan eleman arasına istediğiniz kadar eleman koyabilirsiniz. Mesela `<div>` gibi önceden tanımlı elemanlar ve kendi tanımladığınız elemanlar.
+Context'i sağlayan ve kullanan bileşenlerin arasına istediğiniz kadar bileşen ekleyebilirsiniz. Bu, hem `<div>` gibi yerleşik bileşenleri hem de kendi bileşenleriniz olabilir.
 
 Bu örnekte, `Post` elemanı (çizgili çerçevesi olan) iki farklı derinlikte render ediliyor. Dikkat ederseniz içindeki `<Heading>` elemanı boyutunu otomatik olarak kendisine en yakın olan `<Section>`'dan alıyor:
+Bu örnekte, aynı `Post` bileşeni (kesikli kenarlıklı) iki farklı derinlikte render edilmiştir. İçindeki `<Heading>`'in seviyesini otomatik olarak en yakın `<Section>`'dan aldığına dikkat edin:
 
 <Sandpack>
 
@@ -718,9 +719,9 @@ import Section from './Section.js';
 export default function ProfilePage() {
   return (
     <Section>
-      <Heading>My Profile</Heading>
+      <Heading>Profilim</Heading>
       <Post
-        title="Merhaba, Gezgin!"
+        title="Merhaba gezgin!"
         body="Maceralarımı oku."
       />
       <AllPosts />
@@ -740,10 +741,10 @@ function AllPosts() {
 function RecentPosts() {
   return (
     <Section>
-      <Heading>Recent Posts</Heading>
+      <Heading>Son Yazılarım</Heading>
       <Post
         title="Lizbon'un lezzetleri"
-        body="...enfes pastéis de nata!"
+        body="Enfes Portekiz tatlısı!"
       />
       <Post
         title="Tango ritminde Buenos Aires"
@@ -832,58 +833,61 @@ export const LevelContext = createContext(0);
 
 </Sandpack>
 
-Bunun çalışması için herhangi özel bir şey yapmadınız. `Section` içinde bulunduğu ağaç için context'i belirler, yani `<Heading>`'i istediğiniz yerde kullanabilirsiniz, ve her zaman doğru boyut da olacaktır. Yukarıdaki sandbox'ta deneyiniz!
+Bunun çalışması için herhangi özel bir şey yapmadınız. `Section` içinde bulunduğu ağaç için context'i belirler. `<Heading>`'i istediğiniz yerde kullanabilirsiniz ve her zaman doğru boyut da olacaktır. Yukarıdaki sandbox'ta deneyin!
 
-**Context "etrafına adapte olan" elemanlar yazmanıza olanak sağlar ve  _nerede_ (yada, _hangi context'te_) oldukarına göre render'lanırlar.**
+**Context "çevresine adapte olan" ve _nerede_ (başka bir deyişle _hangi context'te_)  render edildiklerine bağlı olarak farklı şekilde gözüken bileşenler yazmanıza olanak sağlar.**
 
-Context'in çalışma şekli size şunu hatırlatabilir: [CSS property inheritance.](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) CSS kullanırken, bir `<div>` için ve onun altındaki DOM boğumları için şöyle bir tanım yapabilirsiniz: `color: blue`, ne kadar derinde olurlarsa olsunlar, elemanlar renk özelliğini "inherit" eder. Eğer ortada bulunan farklı bir DOM boğumu `color: green` tanımlarsa "inherit" edilen renk geçersiz kılınır. Aynı şekilde, React kullanırken, yukarıdan gelen context'i geçersiz kılmanın tek yolu, alt elemanları farklı bir context sağlayıcısı ile sarmaktır.
+Context'in çalışma şekli size [CSS özellik kalıtımını](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) andırabilir. CSS'de bir `<div>` için `color: blue` belirttiğinizde içindeki herhangi bir DOM düğümü `color: green` ile ezmediği sürece tüm elemanlar bu rengi kalıtır. Benzer şekilde, React'te yukarıdan gelen context'i ezmenin tek yolu alt bileşeni farklı bir değere sahip bir context provider'a sarmalamaktır.
 
 CSS kullanırken, birbirinden farklı özellikler mesela, `color` ve `background-color` birbirini geçersiz kılmaz. Bütün bir `<div>`'in `color` özelliğini `background-color`'ı etkilemeden değiştirebilirsiniz. Aynı şekilde, **farklı React context'leri birbirini geçersiz kılmaz.** `createContext()` ile yarattığınız bütün context'ler birbirinden tamamen ayrıdır, ve her biri *kendi* context'i ile o context'i kullanan elemanları etkiler. Bir eleman birden çok context kullanabilir ve sağlayabilir, bu bir sorun teşkil etmez.
 
+CSS'de `color` ve `background-color` gibi farklı özellikler birbirini ezmez. Arka plan rengini etkilemeden tüm `<div>`'lerin metin rengini kırmızı olarak ayarlayabilirsiniz. Benzer şekilde, farklı React context'leri birbirini ezmez. `createContext()` ile oluşturduğunuz her context diğerlerinden tamamen ayrıdır ve o context'i kullanan ve sağlayan bileşenleri birbirine bağlar. Bileşenler birden fazla farklı context'i sorunsuzca kullanabilir.
+
 ## Context'i kullanmadan önce {/*before-you-use-context*/}
 
-Context'i kullanmak çok çekici gelebilir! Bu yüzden, onu gereksiz ve fazla kullanabilirsiniz. **Prop'ları birkaç eleman derine indirmeniz gerekiyorsa, bu context kullanmalısınız anlamına gelmez.**
+Context'i kullanmak çok caziptir! Bu yüzden, gereksiz ve fazla kullanabilirsiniz. **Prop'ları birkaç eleman derine indirmeniz gerekiyorsa, bu context kullanmalısınız anlamına gelmez.**
+Context'i kullanmak çok caziptir! Ancak, bu aynı zamanda gereğinden fazla kullanmanın da çok kolay olduğu anlamına gelir. Bazı prop'ları birkaç seviye derine aktarmanızın gerekmesi, bu bilgiler için context kullanmanız gerektiği anlamına gelmez.
 
 Context kullanmadan önce düşünmeniz için bir kaç alternatif:
 
-1. **Öncelikle [prop'ları aktararak.](/learn/passing-props-to-a-component) başlayın** Eğer elemanlarınız elzem değilse, bir düzine elemana bir düzine prop aktarmak alışılmadık bir durum değildir. Bu durum zahmetli gibi görünebilir, ancak hangi elemanların hangi veriyi kullandığını çok net bir şekilde gösterir! Kodunuzun bakımını yapan kişi, veri akışını prop'lar ile açık bir şekilde belirttiğiniz için size minnettar olacaktır.
-2. **Elemanları çıkarın ve [JSX'i alt eleman olarak aktarın](/learn/passing-props-to-a-component#passing-jsx-as-children) to them.** Eğer bir veriyi, onu kullanmayan bir kaç katmandan (ortanca elemanlar) geçiriyorsanız, genellikle bunun nedeni, bazı elemanları çıkarmayı unutmuş olabileceğiniz anlamına gelir. Örneğin, belki de `posts` gibi veri prop'larını o veriyi direkt olarak kullanmayan bazı görsel elemanlara aktarıyor olabilirsiniz, mesela `<Layout posts={posts} />`. Bunun yerine, `Layout`'un alt elemanı (`children`) prop olarak almasını sağlayın, ve şu şekilde render edin `<Layout><Posts posts={posts} /></Layout>`. Böylece veriyi belirleyen ve kullanan elemanlar arasındaki katman sayısını azaltmış olursunuz.
+1. **[Prop olarak aktararak](/learn/passing-props-to-a-component) başlayın.** Eğer küçük bileşenleriniz yoksa, bir düzine bileşen için bir düzine prop aktarmak olağandışı bir durum değildir. Zahmetli gibi görünebilir ancak hangi bileşenlerin hangi veriyi kullandığını çok net bir şekilde gösterir! Kodunuzun bakımını yapan kişi, veri akışını prop'lar ile açık bir şekilde belirttiğiniz için size minnettar olacaktır.
+2. **Bileşenlere ayırın ve [JSX'i `children` olarak aktarın](/learn/passing-props-to-a-component#passing-jsx-as-children).** Bazı verileri, bu veriyi kullanmayan (yalnızca aşağıya aktaran) birçok ara bileşen katmanından geçirmeniz gerekiyorsa, genellikle bileşene çıkarmayı unutmuş unttuğunuz kodlarınızın olduğu anlamına gelir. Örneğin, `posts` gibi veri prop'larını o veriyi direkt kullanmayan görsel bileşenlere aktarıyor olabilirsiniz, mesela `<Layout posts={posts} />`. Bunun yerine, `Layout`'un alt bileşenini `children` olarak almasını sağlayın ve `<Layout><Posts posts={posts} /></Layout>` olarak render edin. Bu kullanım, veriyi sağlayan ile veriye ihtiyaç duyan bileşenler arasındaki katman sayısını azaltır.
 
 Eğer bu yaklaşımların ikiside işinize yaramıyor ise, o zaman context'i kullanmayı düşünebilirsiniz.
 
-## Context'in kullanum alanları {/*use-cases-for-context*/}
+## Context'in kullanım alanları {/*use-cases-for-context*/}
 
-* **Tema:** Eğer uygulamanız kullanıcıya görünümü değiştirme olanağı veriyorsa (mesela karanlık mod), uygulamanızın en tepesine, context sağlayıcı yerleştirebilirsiniz, ve bu context'i görünümlerini değiştirecek olan elemanlarda kullanabilirsiniz.
-* **Çevrimiçi hesap:** Bir çok eleman o an çevrimiçi olan hesap hakkında işlem yapıyor olabilir. Bu bilgiyi context'e koymak uygulamanızın herhangi bir yerinden ona ulaşmanız için kolaylık sağlar. Bazı uygulamalar birden fazla hesap ile işlem yapmanıza olanak sağlayabilir (örneğin farklı bir kullanıcı ile yorum yapma). Bu durumlarda, kullanıcı arayüzünün (UI) bir kısmını iç içe geçmiş farklı hesap sağlayıcıları ile sarabilirsiniz.
-* **Routing:** Çoğu "router", mevcut rotayı tutmak için içeriden context kullanır. Bu şekilde, linkler aktif olup olmadığını "bilir". Eğer kendi router sisteminizi oluşturuyorsanız, siz de bunu yapmak isteyebilirsiniz.
-* **State yönetimi:** Uygulamanız büyüdükçe, state'lerinizin birçoğu uygulamanızın üst kısmında kalabilir. Altta bulunan uzak elemanlar bu state'leri değiştirmek isteyebilir. Bu tür durumlarda [context ile birlikte reducer kullanmak](/learn/scaling-up-with-reducer-and-context) karmaşık state'leri yönetmek ve zahmetsiz bir şekilde aşağıya aktarmak için yaygın bir çözümdür.
+* **Tema:** Uygulamanız kullanıcının görünümü değiştirmesine izin veriyorsa (mesela karanlık mod), uygulamanızın en üstüne bir context provider koyabilir ve bu context'i görsel görünümlerini değiştirmesi gereken bileşenlerde kullanabilirsiniz.
+* **Çevrimiçi hesap:** Bir çok bileşenin o anda oturum açmış olan kullanıcıyı bilmesi gerekebilir. Bunu bir context'e yerleştirmek, ağacın herhangi bir yerinde okumayı kolaylaştırır. Bazı uygulamalar aynı anda birden fazla hesabı çalıştırmanıza da izin verir (örneğin, farklı bir kullanıcı olarak yorum bırakmak için). Bu gibi durumlarda, kullanıcı arayüzünün bir kısmını farklı geçerli kullanıcıya sahip provider'a sarmalamak uygun olabilir.
+* **Routing:** Çoğu routing çözümü, geçerli yolu tutmak için dahili olarak context kullanır. Linkler aktif olup olmadığını bu şekilde "bilir". Kendi yönlendiricinizi oluşturuyorsanız, siz de bunu yapmak isteyebilirsiniz.
+* **State yönetimi:** Uygulamanız büyüdükçe, uygulamanızın üst kısmına yakın çok sayıda state ile karşılaşabilirsiniz. Farklı derinlikteki birçok bileşen bunları değiştirmek isteyebilir. Karmaşık state'leri yönetmek ve çok fazla güçlük çekmeden uzaktaki bileşenlere aktarmak için [context ile birlikte bir reducer kullanmak](/learn/scaling-up-with-reducer-and-context) yaygındır.
   
-Context kullanımı statik değerler ile sınırlı değildir. Eğer bir sonraki render işlemi sırasında farklı bir değer aktarırsanız, React bu değeri okuyan bütün elemanları günceller! Bu nedenle context genelde state ile birlikte kullanılır.
+Context kullanımı, statik değerlerle sınırlı değildir. Bir sonraki render'da farklı bir değer iletirseniz, React onu okuyan tüm bileşenleri günceller! Bu yüzden context genellikle state ile birlikte kullanılır.
 
-Genellikle, eğer bir bilgiye ağacın farklı yerlerinde bulunan uzak elemanlar tarafından ihtiyaç duyuluyorsa, bu durum context'in işinize yarayacağına dair güzel bir göstergedir.
+Genellikle, bazı bilgilere ağacın farklı bölümlerindeki bileşenler tarafından ihtiyaç duyulması, context'in işinize yarayacağına dair güzel bir göstergedir.
 
 <Recap>
 
-* Context bir elemanın altındaki tüm ağaca bilgi aktarmasını sağlar.
+* Context, bir elemanın altındaki tüm ağaca bilgi aktarmasını sağlar.
 * Context'i aktarmak için:
-  1. Şu şekilde oluşturun ve export edin: `export const MyContext = createContext(defaultValue)`.
-  2. `useContext(MyContext)` Hook'unu kullanarak, ne kadar derinde olursa olsun, herhangi bir alt elemanda context'i okuyabilirsiniz..
-  3. Üst elemandan onu aktarmak için, alt elemanları şu şekilde sarın: `<MyContext.Provider value={...}>`.
-* Context ortada bulunan herhangi bir elamandan "geçer".
-* Context, "çevresine uyum sağlayabilen" elemanlar yazmanıza olanak sağlar.
-* Context kullanmadan önce, prop'ları aktarmayı veya JSX'i `children` olarak aktarmayı deneyin.
+  1. `export const MyContext = createContext(defaultValue)` ile oluşturun ve dışa aktarın.
+  2. Farklı derinlikteki herhangi bir alt bileşenden okumak için `useContext(MyContext)` Hook'una aktarın.
+  3. Üst bileşenden değer sağlamak için, alt bileşenleri `<MyContext.Provider value={...}>` içine sarın.
+* Context ortada bulunan herhangi bir elamandan aktarılır.
+* Context, "çevresine adapte olan" bileşenler yazmanıza olanak sağlar.
+* Context kullanmadan önce, prop olarak aktarmayı veya JSX'i `children` olarak iletmeyi deneyin.
 
 </Recap>
 
 <Challenges>
 
-#### Context'i prop sondajlaması yerine kullanmak {/*replace-prop-drilling-with-context*/}
+#### Prop drilling yerine context kullanmak {/*replace-prop-drilling-with-context*/}
 
-Bu örnekte, onay kutusunun (checkbox) işaretini değiştirmek, her bir `<PlaceImage>` elemanına aktarılan imageSize prop'unu değiştirir. Onay kutusunun state'i en üst seviye `App` elemanında tutulur, ancak her bir `<PlaceImage>` bu state'i bilmelidir.
+Bu örnekte, onay kutusunun (checkbox) işaretini değiştirmek, her `<PlaceImage>` bileşenine aktarılan `imageSize` prop'unu değiştirir. Onay kutusunun state'i en üst kapsam olan `App` bileşeninde tutulur her `<PlaceImage>`'ın bundan haberdar olması gerekir.
 
-Şuan, `App` `imageSize` prop'unu `List` elemanına aktarıyor, oradan `Place` elemanına aktarılıyor, oradan `PlaceImage` elemanına aktarılıyor. `imageSize` prop'unu kaldırın, bunun yerine `App` elemanından direkt olarak `PlaceImage` elemanına aktarın.
+Şu anda, `App` `imageSize` değerini `List`'e, `List` de `PlaceImage`'a aktarmaktadır. `imageSize` prop'unu kaldırın ve bunun yerine `App` bileşeninden doğrudan `PlaceImage`'a aktarın.
 
-Context tanımını şurada yapabilirsiniz: `Context.js`.
+Context tanımını `Context.js` dosyasında yapabilirsiniz.
 
 <Sandpack>
 
@@ -905,7 +909,7 @@ export default function App() {
             setIsLarge(e.target.checked);
           }}
         />
-        Büyük resim kullan
+        Büyük resimleri kullan
       </label>
       <hr />
       <List imageSize={imageSize} />
@@ -1020,7 +1024,7 @@ li {
 
 <Solution>
 
-`imageSize` prop'unu bütün elemanlardan kaldırın.
+`imageSize` prop'unu bütün bileşenlerden kaldırın.
 
 `Context.js`'den `ImageSizeContext`'i oluşturun ve export edin. Ardından değeri aşağı aktarmak için List'i `<ImageSizeContext.Provider value={imageSize}>` tarafından sarın, ve `useContext(ImageSizeContext)` kullanarak `PlaceImage`'de değeri okuyun:
 
@@ -1157,7 +1161,7 @@ li {
 
 </Sandpack>
 
-Not: Artık ortanca elemanların `imageSize` prop'unu aktarmasına gerek yok.
+Not: Artık ara bileşenlere `imageSize` prop'unu iletmeye gerek olmadığına dikkat edin.
 
 </Solution>
 
