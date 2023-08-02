@@ -1026,7 +1026,7 @@ li {
 
 `imageSize` prop'unu bütün bileşenlerden kaldırın.
 
-`Context.js`'den `ImageSizeContext`'i oluşturun ve export edin. Ardından değeri aşağı aktarmak için List'i `<ImageSizeContext.Provider value={imageSize}>` tarafından sarın, ve `useContext(ImageSizeContext)` kullanarak `PlaceImage`'de değeri okuyun:
+`Context.js` dosyasında `ImageSizeContext`'i oluşturun ve dışa aktarın. Ardından değeri aşağı aktarmak için `List`'i `<ImageSizeContext.Provider value={imageSize}>` ile sarın ve `useContext(ImageSizeContext)` kullanarak `PlaceImage` bileşeninde değerini okuyun:
 
 <Sandpack>
 
