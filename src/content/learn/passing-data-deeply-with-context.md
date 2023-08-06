@@ -1,36 +1,36 @@
 ---
-title: Passing Data Deeply with Context
+title: Context ile Veriyi Derinlemesine Aktarma
 ---
 
 <Intro>
 
-Usually, you will pass information from a parent component to a child component via props. But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or if many components in your app need the same information. *Context* lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props.
+Bilgiyi genelde prop'lar vasıtasıyla üst elemandan alt elemana doğru aktarırsınız. Ancak, aktarmanız gereken bileşen ulaşana kadar birçok ara bileşene iletmeniz veya birden çok bileşene aktarmanız gerekiyorsa prop kullanmak zahmetli ve karmaşık hale gelir. *Context*, bilgiyi üst bileşenden ihtiyaç duyan alt bileşenlere (derinliğine bakılmaksızın) prop olarak açıkça belirtmeden iletmenizi sağlar.
 
 </Intro>
 
 <YouWillLearn>
 
-- What "prop drilling" is
-- How to replace repetitive prop passing with context
-- Common use cases for context
-- Common alternatives to context
+- "Prop drilling" nedir
+- Birden fazla kez alt elemana aktarılan prop'u context ile değiştirmek
+- Context'in yaygın kullanım durumları
+- Context'in yaygın alternatifleri
 
 </YouWillLearn>
 
-## The problem with passing props {/*the-problem-with-passing-props*/}
+## Prop'ları aktarmanın yarattığı sorun {/*the-problem-with-passing-props*/}
 
-[Passing props](/learn/passing-props-to-a-component) is a great way to explicitly pipe data through your UI tree to the components that use it.
+[Prop'ları aktarmak](/learn/passing-props-to-a-component), UI ağacınızdaki bileşenlere kullanacağı verileri iletmenin harika bir yoludur.
 
-But passing props can become verbose and inconvenient when you need to pass some prop deeply through the tree, or if many components need the same prop. The nearest common ancestor could be far removed from the components that need data, and [lifting state up](/learn/sharing-state-between-components) that high can lead to a situation called "prop drilling".
+Ancak, bir prop'u ağacın derinliklerine aktarmak gerektiğinde veya birçok elemanın aynı prop'a ihtiyaç duyduğu durumlarda zahmetli ve uygunsuz hale gelebilir. Veriye ihtiyaç duyan elemanlar ile en yakın ortak üst bileşen arasındaki mesafe uzun olabilir ve [state'i yukarı taşımak](/learn/sharing-state-between-components) "prop drilling" adı verilen duruma yol açabilir.
 
 <DiagramGroup>
 
-<Diagram name="passing_data_lifting_state" height={160} width={608} captionPosition="top" alt="Diagram with a tree of three components. The parent contains a bubble representing a value highlighted in purple. The value flows down to each of the two children, both highlighted in purple." >
+<Diagram name="passing_data_lifting_state" height={160} width={608} captionPosition="top" alt="Üç elemanın olduğu ağaç diyagramı. Üst eleman bir değeri temsil eden mor bir baloncuk içerir. Bu değer mor ile gösterilmiş iki alt elemana doğru akar." >
 
-Lifting state up
+State'i yukarı taşımak
 
 </Diagram>
-<Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="Diagram with a tree of ten nodes, each node with two children or less. The root node contains a bubble representing a value highlighted in purple. The value flows down through the two children, each of which pass the value but do not contain it. The left child passes the value down to two children which are both highlighted purple. The right child of the root passes the value through to one of its two children - the right one, which is highlighted purple. That child passed the value through its single child, which passes it down to both of its two children, which are highlighted purple.">
+<Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="Her düğümün iki veya daha az çocuğu olan on düğümlü bir ağaç diyagramı. Kök düğüm, mor renkle vurgulanmış bir değeri temsil eden bir balon içerir. Değer, her biri değeri geçiren ancak kullanmayan iki çocuktan aşağı doğru akar. Soldaki çocuk, değeri her ikisi de mor renkle vurgulanmış olan iki çocuğa aktarır. Sağdaki çocuk ise değeri mor renkle vurgulanmış sağ çocuğa aktarır. Bu çocuk değeri tek çocuğuna aktarır, o da mor renkle vurgulanan iki çocuğuna aktarır.">
 
 Prop drilling
 
@@ -38,11 +38,11 @@ Prop drilling
 
 </DiagramGroup>
 
-Wouldn't it be great if there were a way to "teleport" data to the components in the tree that need it without passing props? With React's context feature, there is!
+Veriyi prop'lar ile aktarmadan ağaçtaki bileşenlere "ışınlamanın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün! 
 
-## Context: an alternative to passing props {/*context-an-alternative-to-passing-props*/}
+## Context: prop'ları aktarmanın alternatif bir yolu {/*context-an-alternative-to-passing-props*/}
 
-Context lets a parent component provide data to the entire tree below it. There are many uses for context. Here is one example. Consider this `Heading` component that accepts a `level` for its size:
+Context, üst bileşenin altındaki tüm ağaca veri sağlamasına olanak tanır. Bir çok kullanım alanı vardır. İşte bir örnek. Boyutu için `level` kabul eden bu `Heading` elemanını ele alalım:
 
 <Sandpack>
 
@@ -53,12 +53,12 @@ import Section from './Section.js';
 export default function Page() {
   return (
     <Section>
-      <Heading level={1}>Title</Heading>
-      <Heading level={2}>Heading</Heading>
-      <Heading level={3}>Sub-heading</Heading>
-      <Heading level={4}>Sub-sub-heading</Heading>
-      <Heading level={5}>Sub-sub-sub-heading</Heading>
-      <Heading level={6}>Sub-sub-sub-sub-heading</Heading>
+      <Heading level={1}>Üst Başlık</Heading>
+      <Heading level={2}>Başlık</Heading>
+      <Heading level={3}>Alt-başlık</Heading>
+      <Heading level={4}>Alt-alt-başlık</Heading>
+      <Heading level={5}>Alt-alt-alt-başlık</Heading>
+      <Heading level={6}>Alt-alt-alt-alt-başlık</Heading>
     </Section>
   );
 }
@@ -106,7 +106,7 @@ export default function Heading({ level, children }) {
 
 </Sandpack>
 
-Let's say you want multiple headings within the same `Section` to always have the same size:
+Diyelim ki aynı `Section` içerisinde birden fazla başlığın her zaman aynı boyutta olmasını istiyorsunuz:
 
 <Sandpack>
 
@@ -117,19 +117,19 @@ import Section from './Section.js';
 export default function Page() {
   return (
     <Section>
-      <Heading level={1}>Title</Heading>
+      <Heading level={1}>Üst Başlık</Heading>
       <Section>
-        <Heading level={2}>Heading</Heading>
-        <Heading level={2}>Heading</Heading>
-        <Heading level={2}>Heading</Heading>
+        <Heading level={2}>Başlık</Heading>
+        <Heading level={2}>Başlık</Heading>
+        <Heading level={2}>Başlık</Heading>
         <Section>
-          <Heading level={3}>Sub-heading</Heading>
-          <Heading level={3}>Sub-heading</Heading>
-          <Heading level={3}>Sub-heading</Heading>
+          <Heading level={3}>Alt-başlık</Heading>
+          <Heading level={3}>Alt-başlık</Heading>
+          <Heading level={3}>Alt-başlık</Heading>
           <Section>
-            <Heading level={4}>Sub-sub-heading</Heading>
-            <Heading level={4}>Sub-sub-heading</Heading>
-            <Heading level={4}>Sub-sub-heading</Heading>
+            <Heading level={4}>Alt-alt-başlık</Heading>
+            <Heading level={4}>Alt-alt-başlık</Heading>
+            <Heading level={4}>Alt-alt-başlık</Heading>
           </Section>
         </Section>
       </Section>
@@ -180,55 +180,55 @@ export default function Heading({ level, children }) {
 
 </Sandpack>
 
-Currently, you pass the `level` prop to each `<Heading>` separately:
+Şu ana kadar, `level` prop'unu her `<Heading>` için tek tek tanımladınız:
 
 ```js
 <Section>
-  <Heading level={3}>About</Heading>
-  <Heading level={3}>Photos</Heading>
-  <Heading level={3}>Videos</Heading>
+  <Heading level={3}>Hakkında</Heading>
+  <Heading level={3}>Fotoğraflar</Heading>
+  <Heading level={3}>Videolar</Heading>
 </Section>
 ```
 
-It would be nice if you could pass the `level` prop to the `<Section>` component instead and remove it from the `<Heading>`. This way you could enforce that all headings in the same section have the same size:
+Bunun yerine  `level` prop'unu `<Section>` bileşenine aktarıp `<Heading>`'den kaldırabilseydiniz daha iyi olurdu. Böylece aynı bölümdeki tüm başlıkların aynı boyuta sahip olmasını sağlayabilirsiniz:
 
 ```js
 <Section level={3}>
-  <Heading>About</Heading>
-  <Heading>Photos</Heading>
-  <Heading>Videos</Heading>
+  <Heading>Hakkında</Heading>
+  <Heading>Fotoğraflar</Heading>
+  <Heading>Videolar</Heading>
 </Section>
 ```
 
-But how can the `<Heading>` component know the level of its closest `<Section>`? **That would require some way for a child to "ask" for data from somewhere above in the tree.**
+Peki `<Heading>` elemanı kendine en yakın `<Section>` elemanının seviyesini nasıl bilebilir? **Bunun için alt bileşenin yukarıdaki bir yerden veri "istemesi" gerekir.**
 
-You can't do it with props alone. This is where context comes into play. You will do it in three steps:
+Bunu sadece prop'lar ile yapamazsınız. Context burada devreye girer. Bunu üç adımda yaparsınız:
 
-1. **Create** a context. (You can call it `LevelContext`, since it's for the heading level.)
-2. **Use** that context from the component that needs the data. (`Heading` will use `LevelContext`.)
-3. **Provide** that context from the component that specifies the data. (`Section` will provide `LevelContext`.)
+1. Context **oluşturun**. (Başlık seviyesi için olduğundan `LevelContext` olarak isimlendirebilirsiniz.)
+2. Context'i veriye ihtiyacı olan bileşende **kullanın**. (`Heading`, `LevelContext`'i kullanacak.)
+3. Veriyi tanımlayacak bileşenden context'i **sağlayın**. (`Section`, `LevelContext`'i sağlayacak.)
 
-Context lets a parent--even a distant one!--provide some data to the entire tree inside of it.
+Context, üst bileşenin--uzakta olsa bile!--içindeki tüm ağaca veri aktarmasını sağlar.
 
 <DiagramGroup>
 
-<Diagram name="passing_data_context_close" height={160} width={608} captionPosition="top" alt="Diagram with a tree of three components. The parent contains a bubble representing a value highlighted in orange which projects down to the two children, each highlighted in orange." >
+<Diagram name="passing_data_context_close" height={160} width={608} captionPosition="top" alt="Üç elemandan oluşan ağaç diyagramı. Üst eleman turuncu ile belirtilmiş bir değeri gösteren baloncuk içerir. Değer ordan turuncu ile gösterilmiş iki alt elemanına geçer." >
 
-Using context in close children
+Context'i alt elemanda kullanmak
 
 </Diagram>
 
-<Diagram name="passing_data_context_far" height={430} width={608} captionPosition="top" alt="Diagram with a tree of ten nodes, each node with two children or less. The root parent node contains a bubble representing a value highlighted in orange. The value projects down directly to four leaves and one intermediate component in the tree, which are all highlighted in orange. None of the other intermediate components are highlighted.">
+<Diagram name="passing_data_context_far" height={430} width={608} captionPosition="top" alt="On boğum noktasına sahip ağaç diyagramı. Her bir boğum noktasının iki veya daha az alt elemanı var. Kök boğum, bir değeri temsil eden turuncu bir baloncuk içerir. Bu değer direkt olarak hepsi turuncu ile belirtilmiş dört yaprağa ve bir ortanca elemana doğru yansır. Diğer ortanca elemanlardan hiçbiri bir renkle belirtilmemiştir.">
 
-Using context in distant children
+Context'i uzak bir alt elemanda kullanmak
 
 </Diagram>
 
 </DiagramGroup>
 
-### Step 1: Create the context {/*step-1-create-the-context*/}
+### Adım 1: Context'i oluşturun {/*step-1-create-the-context*/}
 
-First, you need to create the context. You'll need to **export it from a file** so that your components can use it:
+Öncelikle context'i oluşturmanız gerekir. Bileşenlerinizin kullanabilmesi için bunu **bir dosyadan dışa aktarmalısınız**:
 
 <Sandpack>
 
@@ -239,19 +239,19 @@ import Section from './Section.js';
 export default function Page() {
   return (
     <Section>
-      <Heading level={1}>Title</Heading>
+      <Heading level={1}>Üst Başlık</Heading>
       <Section>
-        <Heading level={2}>Heading</Heading>
-        <Heading level={2}>Heading</Heading>
-        <Heading level={2}>Heading</Heading>
+        <Heading level={2}>Başlık</Heading>
+        <Heading level={2}>Başlık</Heading>
+        <Heading level={2}>Başlık</Heading>
         <Section>
-          <Heading level={3}>Sub-heading</Heading>
-          <Heading level={3}>Sub-heading</Heading>
-          <Heading level={3}>Sub-heading</Heading>
+          <Heading level={3}>Alt-başlık</Heading>
+          <Heading level={3}>Alt-başlık</Heading>
+          <Heading level={3}>Alt-başlık</Heading>
           <Section>
-            <Heading level={4}>Sub-sub-heading</Heading>
-            <Heading level={4}>Sub-sub-heading</Heading>
-            <Heading level={4}>Sub-sub-heading</Heading>
+            <Heading level={4}>Alt-alt-başlık</Heading>
+            <Heading level={4}>Alt-alt-başlık</Heading>
+            <Heading level={4}>Alt-alt-başlık</Heading>
           </Section>
         </Section>
       </Section>
@@ -308,18 +308,18 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-The only argument to `createContext` is the _default_ value. Here, `1` refers to the biggest heading level, but you could pass any kind of value (even an object). You will see the significance of the default value in the next step.
+`createContext`'e verilen tek argüman _varsayılan_ değeridir. Burada, `1` en büyük başlık seviyesine karşılık gelir ancak herhangi bir değer (hatta obje) verebilirsiniz. Varsayılan değerin önemini bir sonraki adımda göreceksiniz.
 
-### Step 2: Use the context {/*step-2-use-the-context*/}
+### Adım 2: Context'i kullanın {/*step-2-use-the-context*/}
 
-Import the `useContext` Hook from React and your context:
+ React'tın `useContext` hook'unu ve context'inizi içe aktarın:
 
 ```js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 ```
 
-Currently, the `Heading` component reads `level` from props:
+Şuanda, `Heading` elemanı `level`'ı prop'lardan okur:
 
 ```js
 export default function Heading({ level, children }) {
@@ -327,7 +327,7 @@ export default function Heading({ level, children }) {
 }
 ```
 
-Instead, remove the `level` prop and read the value from the context you just imported, `LevelContext`:
+Bunu yerine, `level` prop'unu kaldırın ve değeri az önce içe aktardığınız context'ten (`LevelContext`) okuyun:
 
 ```js {2}
 export default function Heading({ children }) {
@@ -336,29 +336,29 @@ export default function Heading({ children }) {
 }
 ```
 
-`useContext` is a Hook. Just like `useState` and `useReducer`, you can only call a Hook immediately inside a React component (not inside loops or conditions). **`useContext` tells React that the `Heading` component wants to read the `LevelContext`.**
+`useContext` bir Hook'tur. Tıpkı `useState` ve `useReducer` gibi, yalnızca React bileşeninin üst kapsamında çağırabilirsiniz (döngülerin veya koşulların içinde çağıramazsınız). **`useContext`, React'e `Heading` bileşeninin `LevelContext`'i okumak istediğini söyler.**
 
-Now that the `Heading` component doesn't have a `level` prop, you don't need to pass the level prop to `Heading` in your JSX like this anymore:
+Artık `Heading` bileşeninin `level` prop'u olmadığına göre `Heading`'e aşağıdaki JSX'te olduğu gibi aktarmanıza da gerek yoktur:
 
 ```js
 <Section>
-  <Heading level={4}>Sub-sub-heading</Heading>
-  <Heading level={4}>Sub-sub-heading</Heading>
-  <Heading level={4}>Sub-sub-heading</Heading>
+  <Heading level={4}>Alt-alt-başlık</Heading>
+  <Heading level={4}>Alt-alt-başlık</Heading>
+  <Heading level={4}>Alt-alt-başlık</Heading>
 </Section>
 ```
 
-Update the JSX so that it's the `Section` that receives it instead:
+Bunun yerine JSX'i `Section`'ın `level` prop'unu alacağı şekilde güncelleyin:
 
 ```jsx
 <Section level={4}>
-  <Heading>Sub-sub-heading</Heading>
-  <Heading>Sub-sub-heading</Heading>
-  <Heading>Sub-sub-heading</Heading>
+  <Heading>Alt-alt-başlık</Heading>
+  <Heading>Alt-alt-başlık</Heading>
+  <Heading>Alt-alt-başlık</Heading>
 </Section>
 ```
 
-As a reminder, this is the markup that you were trying to get working:
+Hatırlatmak gerekirse, yapmaya çalıştığınız biçimlendirme budur:
 
 <Sandpack>
 
@@ -369,19 +369,19 @@ import Section from './Section.js';
 export default function Page() {
   return (
     <Section level={1}>
-      <Heading>Title</Heading>
+      <Heading>Üst Başlık</Heading>
       <Section level={2}>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
         <Section level={3}>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
           <Section level={4}>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
           </Section>
         </Section>
       </Section>
@@ -442,13 +442,13 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-Notice this example doesn't quite work, yet! All the headings have the same size because **even though you're *using* the context, you have not *provided* it yet.** React doesn't know where to get it!
+Bu örneğin henüz tam olarak çalışmadığına dikkat edin! Tüm başlıklar aynı boyuta sahip. **Context'i *kullanıyorsunuz* ancak henüz *sağlamadınız*.** React nereden alacağını bilmiyor!
 
-If you don't provide the context, React will use the default value you've specified in the previous step. In this example, you specified `1` as the argument to `createContext`, so `useContext(LevelContext)` returns `1`, setting all those headings to `<h1>`. Let's fix this problem by having each `Section` provide its own context.
+Context'i sağlamazsanız, React önceki adımda belirttiğiniz varsayılan değeri kullanır. Bu örnekte, `createContext`'e argüman olarak `1` belirttiniz. Bu nedenle `useContext(LevelContext)` ifadesi `1` döndürür ve tüm bu başlıkları `<h1>` olarak ayarlar. Her `Section`'ın kendi context'ini sağlamasını ayarlayarak bu sorunu çözelim.
 
-### Step 3: Provide the context {/*step-3-provide-the-context*/}
+### Adım 3: Context'i sağlayın {/*step-3-provide-the-context*/}
 
-The `Section` component currently renders its children:
+`Section` bileşeni şu anda alt bileşenlerini render eder:
 
 ```js
 export default function Section({ children }) {
@@ -460,7 +460,7 @@ export default function Section({ children }) {
 }
 ```
 
-**Wrap them with a context provider** to provide the `LevelContext` to them:
+Alt bileşenlerine `LevelContext` sağlamak için **context provider ile sarın**:
 
 ```js {1,6,8}
 import { LevelContext } from './LevelContext.js';
@@ -476,7 +476,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-This tells React: "if any component inside this `<Section>` asks for `LevelContext`, give them this `level`." The component will use the value of the nearest `<LevelContext.Provider>` in the UI tree above it.
+Bu React'a şunu söyler: "`<Section>` içindeki herhangi bir eleman,`LevelContext`'i istediğinde, ona bu `level` değerini ver." Bileşen, üzerindeki UI ağacında bulunan en yakın `<LevelContext.Provider>` değerini kullanır.
 
 <Sandpack>
 
@@ -489,17 +489,17 @@ export default function Page() {
     <Section level={1}>
       <Heading>Title</Heading>
       <Section level={2}>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
         <Section level={3}>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
           <Section level={4}>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
           </Section>
         </Section>
       </Section>
@@ -564,15 +564,15 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-It's the same result as the original code, but you did not need to pass the `level` prop to each `Heading` component! Instead, it "figures out" its heading level by asking the closest `Section` above:
+Orijinal kodla aynı sonucu elde edersiniz, ancak her `Heading` bileşenine `level` prop'unu aktarmanız gerekmez! Bunun yerine, üstündeki en yakın `Section` bileşenine sorarak başlık seviyesini "bulur":
 
-1. You pass a `level` prop to the `<Section>`.
-2. `Section` wraps its children into `<LevelContext.Provider value={level}>`.
-3. `Heading` asks the closest value of `LevelContext` above with `useContext(LevelContext)`.
+1. `level` prop'unu `<Section>`'a aktarırsınız.
+2. `Section` alt bileşenlerini `<LevelContext.Provider value={level}>` sarmalar.
+3. `Heading`, `useContext(LevelContext)` ile birlikte yukarıdaki en yakın `LevelContext`'e değerini sorar.
 
-## Using and providing context from the same component {/*using-and-providing-context-from-the-same-component*/}
+## Context değerini provider'ının tanımlandığı bileşende okuma {/*using-and-providing-context-from-the-same-component*/}
 
-Currently, you still have to specify each section's `level` manually:
+Şu anda hala her bölümün `level`'ını manuel olarak belirlemeniz gerekir:
 
 ```js
 export default function Page() {
@@ -585,7 +585,7 @@ export default function Page() {
           ...
 ```
 
-Since context lets you read information from a component above, each `Section` could read the `level` from the `Section` above, and pass `level + 1` down automatically. Here is how you could do it:
+Context, üstteki bileşenlerden bilgi okumanıza izin verdiğinden, her `Section` üstündeki `Section`'dan `level` değerini okuyarak `level + 1` değerini otomatik olarak aşağıya aktarabilir. Bunu nasıl yapabileceğinize dair bir örnek:
 
 ```js Section.js {5,8}
 import { useContext } from 'react';
@@ -603,7 +603,7 @@ export default function Section({ children }) {
 }
 ```
 
-With this change, you don't need to pass the `level` prop *either* to the `<Section>` or to the `<Heading>`:
+Bu değişiklik ile birlikte artık `level` prop'unu *ne* `<Section>`'a *ne de* `<Heading>`' e aktarmanıza gerek kalmaz:
 
 <Sandpack>
 
@@ -614,19 +614,19 @@ import Section from './Section.js';
 export default function Page() {
   return (
     <Section>
-      <Heading>Title</Heading>
+      <Heading>Üst Başlık</Heading>
       <Section>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
         <Section>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
           <Section>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
           </Section>
         </Section>
       </Section>
@@ -695,19 +695,20 @@ export const LevelContext = createContext(0);
 
 </Sandpack>
 
-Now both `Heading` and `Section` read the `LevelContext` to figure out how "deep" they are. And the `Section` wraps its children into the `LevelContext` to specify that anything inside of it is at a "deeper" level.
+Şimdi hem `Heading` hem de `Section` `LevelContext` değerini okuyarak ne kadar "derinde" olduklarını anlayabilir. Ve `Section` içinde bulunan her şeyin daha "derin" bir seviyede olduğunu belirtmek için çocuk elemanlarını `LevelContext` ile sarıyor.
 
 <Note>
 
-This example uses heading levels because they show visually how nested components can override context. But context is useful for many other use cases too. You can pass down any information needed by the entire subtree: the current color theme, the currently logged in user, and so on.
+Bu örnekte başlık seviyeleri kullanılmasının sebebi, iç içe geçmiş bileşenlerin context'i nasıl ezebileceğini görselleştirmektir. Ancak context diğer birçok kullanım durumu için de yararlıdır. Tüm alt ağacın ihtiyaç duyduğu her türlü bilgiyi aktarabilirsiniz: geçerli renk teması, o anda oturum açmış kullanıcı vb.
 
 </Note>
 
-## Context passes through intermediate components {/*context-passes-through-intermediate-components*/}
+## Context'in ara bileşenlerden aktarılması {/*context-passes-through-intermediate-components*/}
 
-You can insert as many components as you like between the component that provides context and the one that uses it. This includes both built-in components like `<div>` and components you might build yourself.
+Context'i sağlayan ve kullanan bileşenlerin arasına istediğiniz kadar bileşen ekleyebilirsiniz. Bu, hem `<div>` gibi yerleşik bileşenleri hem de kendi bileşenleriniz olabilir.
 
-In this example, the same `Post` component (with a dashed border) is rendered at two different nesting levels. Notice that the `<Heading>` inside of it gets its level automatically from the closest `<Section>`:
+Bu örnekte, `Post` elemanı (çizgili çerçevesi olan) iki farklı derinlikte render ediliyor. Dikkat ederseniz içindeki `<Heading>` elemanı boyutunu otomatik olarak kendisine en yakın olan `<Section>`'dan alıyor:
+Bu örnekte, aynı `Post` bileşeni (kesikli kenarlıklı) iki farklı derinlikte render edilmiştir. İçindeki `<Heading>`'in seviyesini otomatik olarak en yakın `<Section>`'dan aldığına dikkat edin:
 
 <Sandpack>
 
@@ -718,10 +719,10 @@ import Section from './Section.js';
 export default function ProfilePage() {
   return (
     <Section>
-      <Heading>My Profile</Heading>
+      <Heading>Profilim</Heading>
       <Post
-        title="Hello traveller!"
-        body="Read about my adventures."
+        title="Merhaba gezgin!"
+        body="Maceralarımı oku."
       />
       <AllPosts />
     </Section>
@@ -740,14 +741,14 @@ function AllPosts() {
 function RecentPosts() {
   return (
     <Section>
-      <Heading>Recent Posts</Heading>
+      <Heading>Son Yazılarım</Heading>
       <Post
-        title="Flavors of Lisbon"
-        body="...those pastéis de nata!"
+        title="Lizbon'un lezzetleri"
+        body="Enfes Portekiz tatlısı!"
       />
       <Post
-        title="Buenos Aires in the rhythm of tango"
-        body="I loved it!"
+        title="Tango ritminde Buenos Aires"
+        body="Bayıldım!"
       />
     </Section>
   );
@@ -832,58 +833,61 @@ export const LevelContext = createContext(0);
 
 </Sandpack>
 
-You didn't do anything special for this to work. A `Section` specifies the context for the tree inside it, so you can insert a `<Heading>` anywhere, and it will have the correct size. Try it in the sandbox above!
+Bunun çalışması için herhangi özel bir şey yapmadınız. `Section` içinde bulunduğu ağaç için context'i belirler. `<Heading>`'i istediğiniz yerde kullanabilirsiniz ve her zaman doğru boyut da olacaktır. Yukarıdaki sandbox'ta deneyin!
 
-**Context lets you write components that "adapt to their surroundings" and display themselves differently depending on _where_ (or, in other words, _in which context_) they are being rendered.**
+**Context "çevresine adapte olan" ve _nerede_ (başka bir deyişle _hangi context'te_)  render edildiklerine bağlı olarak farklı şekilde gözüken bileşenler yazmanıza olanak sağlar.**
 
-How context works might remind you of [CSS property inheritance.](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) In CSS, you can specify `color: blue` for a `<div>`, and any DOM node inside of it, no matter how deep, will inherit that color unless some other DOM node in the middle overrides it with `color: green`. Similarly, in React, the only way to override some context coming from above is to wrap children into a context provider with a different value.
+Context'in çalışma şekli size [CSS özellik kalıtımını](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) andırabilir. CSS'de bir `<div>` için `color: blue` belirttiğinizde içindeki herhangi bir DOM düğümü `color: green` ile ezmediği sürece tüm elemanlar bu rengi kalıtır. Benzer şekilde, React'te yukarıdan gelen context'i ezmenin tek yolu alt bileşeni farklı bir değere sahip bir context provider'a sarmalamaktır.
 
-In CSS, different properties like `color` and `background-color` don't override each other. You can set all  `<div>`'s `color` to red without impacting `background-color`. Similarly, **different React contexts don't override each other.** Each context that you make with `createContext()` is completely separate from other ones, and ties together components using and providing *that particular* context. One component may use or provide many different contexts without a problem.
+CSS kullanırken, birbirinden farklı özellikler mesela, `color` ve `background-color` birbirini geçersiz kılmaz. Bütün bir `<div>`'in `color` özelliğini `background-color`'ı etkilemeden değiştirebilirsiniz. Aynı şekilde, **farklı React context'leri birbirini geçersiz kılmaz.** `createContext()` ile yarattığınız bütün context'ler birbirinden tamamen ayrıdır, ve her biri *kendi* context'i ile o context'i kullanan elemanları etkiler. Bir eleman birden çok context kullanabilir ve sağlayabilir, bu bir sorun teşkil etmez.
 
-## Before you use context {/*before-you-use-context*/}
+CSS'de `color` ve `background-color` gibi farklı özellikler birbirini ezmez. Arka plan rengini etkilemeden tüm `<div>`'lerin metin rengini kırmızı olarak ayarlayabilirsiniz. Benzer şekilde, farklı React context'leri birbirini ezmez. `createContext()` ile oluşturduğunuz her context diğerlerinden tamamen ayrıdır ve o context'i kullanan ve sağlayan bileşenleri birbirine bağlar. Bileşenler birden fazla farklı context'i sorunsuzca kullanabilir.
 
-Context is very tempting to use! However, this also means it's too easy to overuse it. **Just because you need to pass some props several levels deep doesn't mean you should put that information into context.**
+## Context'i kullanmadan önce {/*before-you-use-context*/}
 
-Here's a few alternatives you should consider before using context:
+Context'i kullanmak çok caziptir! Bu yüzden, gereksiz ve fazla kullanabilirsiniz. **Prop'ları birkaç eleman derine indirmeniz gerekiyorsa, bu context kullanmalısınız anlamına gelmez.**
+Context'i kullanmak çok caziptir! Ancak, bu aynı zamanda gereğinden fazla kullanmanın da çok kolay olduğu anlamına gelir. Bazı prop'ları birkaç seviye derine aktarmanızın gerekmesi, bu bilgiler için context kullanmanız gerektiği anlamına gelmez.
 
-1. **Start by [passing props.](/learn/passing-props-to-a-component)** If your components are not trivial, it's not unusual to pass a dozen props down through a dozen components. It may feel like a slog, but it makes it very clear which components use which data! The person maintaining your code will be glad you've made the data flow explicit with props.
-2. **Extract components and [pass JSX as `children`](/learn/passing-props-to-a-component#passing-jsx-as-children) to them.** If you pass some data through many layers of intermediate components that don't use that data (and only pass it further down), this often means that you forgot to extract some components along the way. For example, maybe you pass data props like `posts` to visual components that don't use them directly, like `<Layout posts={posts} />`. Instead, make `Layout` take `children` as a prop, and render `<Layout><Posts posts={posts} /></Layout>`. This reduces the number of layers between the component specifying the data and the one that needs it.
+Context kullanmadan önce düşünmeniz için bir kaç alternatif:
 
-If neither of these approaches works well for you, consider context.
+1. **[Prop olarak aktararak](/learn/passing-props-to-a-component) başlayın.** Eğer küçük bileşenleriniz yoksa, bir düzine bileşen için bir düzine prop aktarmak olağandışı bir durum değildir. Zahmetli gibi görünebilir ancak hangi bileşenlerin hangi veriyi kullandığını çok net bir şekilde gösterir! Kodunuzun bakımını yapan kişi, veri akışını prop'lar ile açık bir şekilde belirttiğiniz için size minnettar olacaktır.
+2. **Bileşenlere ayırın ve [JSX'i `children` olarak aktarın](/learn/passing-props-to-a-component#passing-jsx-as-children).** Bazı verileri, bu veriyi kullanmayan (yalnızca aşağıya aktaran) birçok ara bileşen katmanından geçirmeniz gerekiyorsa, genellikle bileşene çıkarmayı unutmuş unttuğunuz kodlarınızın olduğu anlamına gelir. Örneğin, `posts` gibi veri prop'larını o veriyi direkt kullanmayan görsel bileşenlere aktarıyor olabilirsiniz, mesela `<Layout posts={posts} />`. Bunun yerine, `Layout`'un alt bileşenini `children` olarak almasını sağlayın ve `<Layout><Posts posts={posts} /></Layout>` olarak render edin. Bu kullanım, veriyi sağlayan ile veriye ihtiyaç duyan bileşenler arasındaki katman sayısını azaltır.
 
-## Use cases for context {/*use-cases-for-context*/}
+Eğer bu yaklaşımların ikiside işinize yaramıyor ise, o zaman context'i kullanmayı düşünebilirsiniz.
 
-* **Theming:** If your app lets the user change its appearance (e.g. dark mode), you can put a context provider at the top of your app, and use that context in components that need to adjust their visual look.
-* **Current account:** Many components might need to know the currently logged in user. Putting it in context makes it convenient to read it anywhere in the tree. Some apps also let you operate multiple accounts at the same time (e.g. to leave a comment as a different user). In those cases, it can be convenient to wrap a part of the UI into a nested provider with a different current account value.
-* **Routing:** Most routing solutions use context internally to hold the current route. This is how every link "knows" whether it's active or not. If you build your own router, you might want to do it too.
-* **Managing state:** As your app grows, you might end up with a lot of state closer to the top of your app. Many distant components below may want to change it. It is common to [use a reducer together with context](/learn/scaling-up-with-reducer-and-context) to manage complex state and pass it down to distant components without too much hassle.
+## Context'in kullanım alanları {/*use-cases-for-context*/}
+
+* **Tema:** Uygulamanız kullanıcının görünümü değiştirmesine izin veriyorsa (mesela karanlık mod), uygulamanızın en üstüne bir context provider koyabilir ve bu context'i görsel görünümlerini değiştirmesi gereken bileşenlerde kullanabilirsiniz.
+* **Çevrimiçi hesap:** Bir çok bileşenin o anda oturum açmış olan kullanıcıyı bilmesi gerekebilir. Bunu bir context'e yerleştirmek, ağacın herhangi bir yerinde okumayı kolaylaştırır. Bazı uygulamalar aynı anda birden fazla hesabı çalıştırmanıza da izin verir (örneğin, farklı bir kullanıcı olarak yorum bırakmak için). Bu gibi durumlarda, kullanıcı arayüzünün bir kısmını farklı geçerli kullanıcıya sahip provider'a sarmalamak uygun olabilir.
+* **Routing:** Çoğu routing çözümü, geçerli yolu tutmak için dahili olarak context kullanır. Linkler aktif olup olmadığını bu şekilde "bilir". Kendi yönlendiricinizi oluşturuyorsanız, siz de bunu yapmak isteyebilirsiniz.
+* **State yönetimi:** Uygulamanız büyüdükçe, uygulamanızın üst kısmına yakın çok sayıda state ile karşılaşabilirsiniz. Farklı derinlikteki birçok bileşen bunları değiştirmek isteyebilir. Karmaşık state'leri yönetmek ve çok fazla güçlük çekmeden uzaktaki bileşenlere aktarmak için [context ile birlikte bir reducer kullanmak](/learn/scaling-up-with-reducer-and-context) yaygındır.
   
-Context is not limited to static values. If you pass a different value on the next render, React will update all the components reading it below! This is why context is often used in combination with state.
+Context kullanımı, statik değerlerle sınırlı değildir. Bir sonraki render'da farklı bir değer iletirseniz, React onu okuyan tüm bileşenleri günceller! Bu yüzden context genellikle state ile birlikte kullanılır.
 
-In general, if some information is needed by distant components in different parts of the tree, it's a good indication that context will help you.
+Genellikle, bazı bilgilere ağacın farklı bölümlerindeki bileşenler tarafından ihtiyaç duyulması, context'in işinize yarayacağına dair güzel bir göstergedir.
 
 <Recap>
 
-* Context lets a component provide some information to the entire tree below it.
-* To pass context:
-  1. Create and export it with `export const MyContext = createContext(defaultValue)`.
-  2. Pass it to the `useContext(MyContext)` Hook to read it in any child component, no matter how deep.
-  3. Wrap children into `<MyContext.Provider value={...}>` to provide it from a parent.
-* Context passes through any components in the middle.
-* Context lets you write components that "adapt to their surroundings".
-* Before you use context, try passing props or passing JSX as `children`.
+* Context, bir elemanın altındaki tüm ağaca bilgi aktarmasını sağlar.
+* Context'i aktarmak için:
+  1. `export const MyContext = createContext(defaultValue)` ile oluşturun ve dışa aktarın.
+  2. Farklı derinlikteki herhangi bir alt bileşenden okumak için `useContext(MyContext)` Hook'una aktarın.
+  3. Üst bileşenden değer sağlamak için, alt bileşenleri `<MyContext.Provider value={...}>` içine sarın.
+* Context ortada bulunan herhangi bir elamandan aktarılır.
+* Context, "çevresine adapte olan" bileşenler yazmanıza olanak sağlar.
+* Context kullanmadan önce, prop olarak aktarmayı veya JSX'i `children` olarak iletmeyi deneyin.
 
 </Recap>
 
 <Challenges>
 
-#### Replace prop drilling with context {/*replace-prop-drilling-with-context*/}
+#### Prop drilling yerine context kullanmak {/*replace-prop-drilling-with-context*/}
 
-In this example, toggling the checkbox changes the `imageSize` prop passed to each `<PlaceImage>`. The checkbox state is held in the top-level `App` component, but each `<PlaceImage>` needs to be aware of it.
+Bu örnekte, onay kutusunun (checkbox) işaretini değiştirmek, her `<PlaceImage>` bileşenine aktarılan `imageSize` prop'unu değiştirir. Onay kutusunun state'i en üst kapsam olan `App` bileşeninde tutulur her `<PlaceImage>`'ın bundan haberdar olması gerekir.
 
-Currently, `App` passes `imageSize` to `List`, which passes it to each `Place`, which passes it to the `PlaceImage`. Remove the `imageSize` prop, and instead pass it from the `App` component directly to `PlaceImage`.
+Şu anda, `App` `imageSize` değerini `List`'e, `List` de `PlaceImage`'a aktarmaktadır. `imageSize` prop'unu kaldırın ve bunun yerine `App` bileşeninden doğrudan `PlaceImage`'a aktarın.
 
-You can declare context in `Context.js`.
+Context tanımını `Context.js` dosyasında yapabilirsiniz.
 
 <Sandpack>
 
@@ -905,7 +909,7 @@ export default function App() {
             setIsLarge(e.target.checked);
           }}
         />
-        Use large images
+        Büyük resimleri kullan
       </label>
       <hr />
       <List imageSize={imageSize} />
@@ -959,38 +963,38 @@ function PlaceImage({ place, imageSize }) {
 ```js data.js
 export const places = [{
   id: 0,
-  name: 'Bo-Kaap in Cape Town, South Africa',
-  description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
+  name: 'Cape Town, Güney Afrika\'da Bo-Kaap',
+  description: 'Evler için parlak renkler seçme geleneği 20. yüzyılın sonlarında başlamıştır.',
   imageId: 'K9HVAGH'
 }, {
   id: 1, 
-  name: 'Rainbow Village in Taichung, Taiwan',
-  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
+  name: 'Taichung, Tayvan\'da Gökkuşağı Köyü',
+  description: 'Evleri yıkımdan kurtarmak için, yerel bir sakin olan Huang Yung-Fu, 1924 yılında hepsini boyamıştır.',
   imageId: '9EAYZrt'
 }, {
   id: 2, 
-  name: 'Macromural de Pachuca, Mexico',
-  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
+  name: 'Pachuca, Meksika\'da Macromural',
+  description: 'Dünyanın en büyük duvar resimlerinden biri, bir tepe mahallesindeki evleri kaplar.',
   imageId: 'DgXHVwu'
 }, {
   id: 3, 
-  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
-  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people."',
+  name: 'Rio de Janeiro, Brezilya\'da Selarón Merdivenleri',
+  description: 'Bu simge yapı, Şilili sanatçı Jorge Selarón tarafından "Brezilya halkına bir övgü" olarak yaratıldı.',
   imageId: 'aeO3rpI'
 }, {
   id: 4, 
-  name: 'Burano, Italy',
-  description: 'The houses are painted following a specific color system dating back to 16th century.',
+  name: 'Burano, İtalya',
+  description: 'Evler, 16. yüzyıla dayanan belirli bir renk sistemi izlenerek boyanmıştır.',
   imageId: 'kxsph5C'
 }, {
   id: 5, 
-  name: 'Chefchaouen, Marocco',
-  description: 'There are a few theories on why the houses are painted blue, including that the color repells mosquitos or that it symbolizes sky and heaven.',
+  name: 'Chefchaouen, Fas',
+  description: 'Evlerin neden mavi boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
   imageId: 'rTqKo46'
 }, {
   id: 6,
-  name: 'Gamcheon Culture Village in Busan, South Korea',
-  description: 'In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.',
+  name: 'Busan, Güney Kore\'de Gamcheon Kültür Köyü',
+  description: '2009 yılında köy, evleri boyayanak, sergiler ve sanat gösterileri düzenlenerek bir kültür merkezi haline getirildi.',
   imageId: 'ZfQOOzf'
 }];
 ```
@@ -1020,9 +1024,9 @@ li {
 
 <Solution>
 
-Remove `imageSize` prop from all the components.
+`imageSize` prop'unu bütün bileşenlerden kaldırın.
 
-Create and export `ImageSizeContext` from `Context.js`. Then wrap the List into `<ImageSizeContext.Provider value={imageSize}>` to pass the value down, and `useContext(ImageSizeContext)` to read it in the `PlaceImage`:
+`Context.js` dosyasında `ImageSizeContext`'i oluşturun ve dışa aktarın. Ardından değeri aşağı aktarmak için `List`'i `<ImageSizeContext.Provider value={imageSize}>` ile sarın ve `useContext(ImageSizeContext)` kullanarak `PlaceImage` bileşeninde değerini okuyun:
 
 <Sandpack>
 
@@ -1098,38 +1102,38 @@ export const ImageSizeContext = createContext(500);
 ```js data.js
 export const places = [{
   id: 0,
-  name: 'Bo-Kaap in Cape Town, South Africa',
-  description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
+  name: 'Cape Town, Güney Afrika\'da Bo-Kaap',
+  description: 'Evler için parlak renkler seçme geleneği 20. yüzyılın sonlarında başlamıştır.',
   imageId: 'K9HVAGH'
 }, {
   id: 1, 
-  name: 'Rainbow Village in Taichung, Taiwan',
-  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
+  name: 'Taichung, Tayvan\'da Gökkuşağı Köyü',
+  description: 'Evleri yıkımdan kurtarmak için, yerel bir sakin olan Huang Yung-Fu, 1924 yılında hepsini boyamıştır.',
   imageId: '9EAYZrt'
 }, {
   id: 2, 
-  name: 'Macromural de Pachuca, Mexico',
-  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
+  name: 'Pachuca, Meksika\'da Macromural',
+  description: 'Dünyanın en büyük duvar resimlerinden biri, bir tepe mahallesindeki evleri kaplar.',
   imageId: 'DgXHVwu'
 }, {
   id: 3, 
-  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
-  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
+  name: 'Rio de Janeiro, Brezilya\'da Selarón Merdivenleri',
+  description: 'Bu simge yapı, Şilili sanatçı Jorge Selarón tarafından "Brezilya halkına bir övgü" olarak yaratıldı.',
   imageId: 'aeO3rpI'
 }, {
   id: 4, 
-  name: 'Burano, Italy',
-  description: 'The houses are painted following a specific color system dating back to 16th century.',
+  name: 'Burano, İtalya',
+  description: 'Evler, 16. yüzyıla dayanan belirli bir renk sistemi izlenerek boyanmıştır.',
   imageId: 'kxsph5C'
 }, {
   id: 5, 
-  name: 'Chefchaouen, Marocco',
-  description: 'There are a few theories on why the houses are painted blue, including that the color repells mosquitos or that it symbolizes sky and heaven.',
+  name: 'Chefchaouen, Fas',
+  description: 'Evlerin neden mavi boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
   imageId: 'rTqKo46'
 }, {
   id: 6,
-  name: 'Gamcheon Culture Village in Busan, South Korea',
-  description: 'In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.',
+  name: 'Busan, Güney Kore\'de Gamcheon Kültür Köyü',
+  description: '2009 yılında köy, evleri boyayanak, sergiler ve sanat gösterileri düzenlenerek bir kültür merkezi haline getirildi.',
   imageId: 'ZfQOOzf'
 }];
 ```
@@ -1157,7 +1161,7 @@ li {
 
 </Sandpack>
 
-Note how components in the middle don't need to pass `imageSize` anymore.
+Not: Artık ara bileşenlere `imageSize` prop'unu iletmeye gerek olmadığına dikkat edin.
 
 </Solution>
 
