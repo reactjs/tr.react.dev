@@ -65,7 +65,7 @@ Bu `<textarea>` propları hem kontrollü hem de kotrolsüz metin alanları için
 * [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-readonly): Boolean. Eğer `true` ise, metin alanı kullanıcı tarafından düzenlenemez.
 * [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-required): Boolean. Eğer `true` ise, formun gönderilebilmesi için değer sağlanmalıdır.
 * [`rows`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-rows): Sayı. Ortalama karakter yüksekliklerinde, varsayılan yüksekliği belirler. Varsayılan değeri `2`dir.
-* [`wrap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap): `'hard'`, `'soft'`, ya da `'off'` değerlerini alabilir. Form gönderiliker, metnin nasıl sarmalanacağını belirler.
+* [`wrap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap): `'hard'`, `'soft'`, ya da `'off'` değerlerini alabilir. Form gönderiliken metnin nasıl sarmalanacağını belirler.
 
 #### Uyarılar {/*caveats*/}
 
@@ -108,7 +108,7 @@ label, textarea { display: block; }
 
 ### Metin alanı için etiket verme {/*providing-a-label-for-a-text-area*/}
 
-Genel olarak, her `<textarea>` elemanını bir `<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) elemanı içine yerleştirirsiniz. Bu, tarayıcıya  bu etiketin o metin alanıyla ilişkili olduğunu söyler. Kullanıcısı bu etikete tıkladığında, tarayıcı o metin alanına odaklanır. Bu durum ayrıca erişebilirlik için de önemlidir: kullanıcı metin alanına tıkladığında ekran okuyucu bu etiketi okuyacaktır.
+Genel olarak, her `<textarea>` elemanını bir `<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) elemanı içine yerleştirirsiniz. Bu, tarayıcıya  bu etiketin o metin alanıyla ilişkili olduğunu söyler. Kullanıcı bu etikete tıkladığında, tarayıcı o metin alanına odaklanır. Bu durum ayrıca erişebilirlik için de önemlidir: kullanıcı metin alanına tıkladığında ekran okuyucu bu etiketi okuyacaktır.
 
 Eğer `<textarea>` bir `<label>` elemanının içine yerleştiremezseniz, `<textarea id>` ve [`<label htmlFor>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) elemanlarına aynı ID'yi ileterek bu elemanları ilişkilendirebilirsiniz. Bir bileşenin birden fazla örnekleri arasındaki çakışmaları önlemek için [`useId`](/reference/react/useId) ile ID üretebilirsiniz.
 
@@ -145,7 +145,7 @@ input { margin: 5px; }
 
 ### Metin alanına başlangıç değeri verme {/*providing-an-initial-value-for-a-text-area*/}
 
-`defaultValue` değerini string olarak ileterek metin alanına isteğe bağlı başlangıç değeri verebilirsiniz. 
+`defaultValue` değerini string olarak ileterek metin alanına başlangıç değeri verebilirsiniz. 
 <Sandpack>
 
 ```js
@@ -175,7 +175,7 @@ label, textarea { display: block; }
 
 <Pitfall>
 
-HTML'de olduğunun aksine, `<textarea>Bazı içerikler</textarea>` şeklinde yerleşik metin gönderimi desteklenmemektedir.
+HTML'in aksine, `<textarea>Bazı içerikler</textarea>` şeklinde yerleşik metin gönderimi desteklenmemektedir.
 
 </Pitfall>
 
@@ -196,7 +196,7 @@ export default function EditPost() {
     const form = e.target;
     const formData = new FormData(form);
 
-    // formDatayı fecth gövdesi olarak iletebilirsiniz:
+    // formDatayı fetch gövdesi olarak iletebilirsiniz:
     fetch('/some-api', { method: form.method, body: formData });
 
     // formDatayı Düz nesne gibi de kullanabilirsiniz 
@@ -251,7 +251,7 @@ Varsayılan olarak `<form>` içindeki *herhangi bir* `<button>` elemanı formu g
 
 `<textarea />` şeklindeki metin alanları *kontrolsüzdür.* `<textarea defaultValue="Başlangıç metni" />` gibi [başlangıç değeri](#providing-an-initial-value-for-a-text-area) iletseniz bile, JSX'iniz şu anki değeri değil, yalnızca başlangıç değerini belirtir.
 
-**_kontrollü_ metin alanını render etmek için, metin alanına `value` propunu iletin.** React, her zaman metin alanı değerinin sizin ilettiğiniz `value` değeri olması için zorlayacaktır. Genelde, [durum değişkeni:](/reference/react/useState) tanımlayarak metin alanınızı kontrol edeceksiniz.
+**_Kontrollü_ metin alanını render etmek için, metin alanına `value` propunu iletin.** React, her zaman metin alanı değerinin sizin ilettiğiniz `value` değeri olması için zorlayacaktır. Genelde, [durum değişkeni:](/reference/react/useState) tanımlayarak metin alanınızı kontrol edeceksiniz.
 
 ```js {2,6,7}
 function NewPost() {
@@ -396,7 +396,7 @@ function handleChange(e) {
 }
 ```
 
-Kodunuzu düzeltmek için, senkron bir şekilde `e.target.value`değeriyle güncelleyiniz:
+Kodunuzu düzeltmek için, senkron bir şekilde `e.target.value` değeriyle güncelleyiniz:
 
 ```js
 function handleChange(e) {
@@ -405,7 +405,7 @@ function handleChange(e) {
 }
 ```
 
-Eğer bunlar sorununuzu çözmezse, metin alanınızın her klavye girişinde DOM'dan silinip geri ekleniyor olabilir. Bu durum, her yeniden renderda [durumu sıfırlama](/learn/preserving-and-resetting-state)'dan kaynaklı olabilir. Örneğin, metin alanı ya da onun üstündeki elemanlar sürekli farklı `key` niteliği alıyor olabilir veya bileşen tanımlarını iç içe yerleştirmenizden kaynaklı olabilir (React'ta iç içe yerleştirmelere izin verilmez ve "içteki" bileşen her renderda yeniden bağlanır.)
+Eğer bunlar sorununuzu çözmezse, metin alanınız her klavye girişinde DOM'dan silinip geri ekleniyor olabilir. Bu durum, her yeniden renderda [durumu sıfırlama](/learn/preserving-and-resetting-state)'dan kaynaklı olabilir. Örneğin, metin alanı ya da onun üstündeki elemanlar sürekli farklı `key` niteliği alıyor olabilir veya bileşen tanımlarını iç içe yerleştirmenizden kaynaklı olabilir. (React'ta iç içe yerleştirmelere izin verilmez ve "içteki" bileşen her renderda yeniden bağlanır.)
 
 ---
 
@@ -416,4 +416,4 @@ Bileşeninize `value` değeri verdiyseniz, yaşam döngüsü boyunca string olar
 
 Önce `value={undefined}` olarak değer iletip daha sonra `value="some string"` şeklinde değer iletemezsiniz çünkü React, kontrollü bileşen mi kontrolsüz bileşen mi bunu bilemez. Kontrollü bileşen her zaman `value` değeri olarak string almalıdır, `null` ya da `undefined` almamalıdır.
 
-`value` değeriniz API'den veya durum değişkeninden geliyorsa, başta `null` veya `undefined` olarak tanımlanmış olabilir. Bu durumda boş bir string olarak (`''`) tanımlayabilirsiniz veya `value={someValue ?? ''}` olarak iletip `value` değerinin string olduğuna emin olabilirsiniz.
+`value` değeriniz API'den veya durum değişkeninden geliyorsa, başta `null` veya `undefined` olarak tanımlanmış olabilir. Bu durumda boş bir string olarak (`''`) tanımlayabilirsiniz veya `value={someValue ?? ''}` olarak iletip `value` değerinin string olup olmadığına emin olabilirsiniz.
