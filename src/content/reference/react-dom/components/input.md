@@ -49,7 +49,7 @@ Aşağıdaki `<input>` propları sadece kontrolsüz girdilerle ilgilidir:
 Aşağıdaki `<input>` proplar hem kontrollü hem de kontrolsüz girdilerle ilgilidir:
 
 * [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#accept): String. Tipi `type="file"` olan girdiler için hangi dosya tiplerinin kabul edilebilir olduğunu belirler.
-* [`alt`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#alt): String. Tipi `type="image"` olan girdiler için alternatif görüntü möetnini belirler.
+* [`alt`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#alt): String. Tipi `type="image"` olan girdiler için alternatif görüntü metnini belirler.
 * [`capture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#capture): String. Tipi `type="file"` olan girdiler için yakalanan medyayı (mikrofon, video ya da kamera) belirler.
 * [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete): String. Olası [otomatik tamamlama davranışları](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)'ndan birini belirler.
 * [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autofocus): Boolean. Eğer `true` ise, React, eleman DOM'a eklendikten sonra o elemana odaklanacaktır.
