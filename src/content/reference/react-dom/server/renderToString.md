@@ -4,13 +4,13 @@ title: renderToString
 
 <Pitfall>
 
-`renderToString` does not support streaming or waiting for data. [See the alternatives.](#alternatives)
+`renderToString` akışı veya veri beklemeyi desteklemez. [Alternatiflere göz atınız.](#alternatives)
 
 </Pitfall>
 
 <Intro>
 
-`renderToString` renders a React tree to an HTML string.
+`renderToString` bir React ağacını bir HTML string'ine dönüştürür.
 
 ```js
 const html = renderToString(reactNode)
@@ -22,11 +22,11 @@ const html = renderToString(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `renderToString(reactNode)` {/*rendertostring*/}
 
-On the server, call `renderToString` to render your app to HTML.
+Sunucuda, uygulamanızı HTML'ye dönüştürmek için `renderToString` çağrısı yapınız.
 
 ```js
 import { renderToString } from 'react-dom/server';
@@ -34,81 +34,81 @@ import { renderToString } from 'react-dom/server';
 const html = renderToString(<App />);
 ```
 
-On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to make the server-generated HTML interactive.
+İstemci üzerinde, sunucu tarafından oluşturulan HTML'yi etkileşimli hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağrısı yapınız.
 
-[See more examples below.](#usage)
+[Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<App />`.
+* `reactNode`: HTML'ye dönüştürmek istediğiniz bir React düğümü. Örneğin, `<App />` gibi bir JSX düğümü.
 
-#### Returns {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
-An HTML string.
+Bir HTML string'i.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `renderToString` has limited Suspense support. If a component suspends, `renderToString` immediately sends its fallback as HTML.
+* `renderToString` sınırlı Suspense desteğine sahiptir. Bir bileşen askıya alınırsa, `renderToString` hemen geri dönüşünü HTML olarak gönderir.
 
-* `renderToString` works in the browser, but using it in the client code is [not recommended.](#removing-rendertostring-from-the-client-code)
+* `renderToString` tarayıcıda çalışır, ancak istemci kodunda kullanılması [tavsiye edilmez.](#removing-rendertostring-from-the-client-code)
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Rendering a React tree as HTML to a string {/*rendering-a-react-tree-as-html-to-a-string*/}
+### Bir React ağacını HTML olarak bir string'e dönüştürme {/*rendering-a-react-tree-as-html-to-a-string*/}
 
-Call `renderToString` to render your app to an HTML string which you can send with your server response:
+Uygulamanızı sunucu yanıtınızla birlikte gönderebileceğiniz bir HTML string'ine dönüştürmek için `renderToString` öğesini çağırınız:
 
 ```js {5-6}
 import { renderToString } from 'react-dom/server';
 
-// The route handler syntax depends on your backend framework
+// Rota işleyici sözdizimi backend çatınıza bağlıdır
 app.use('/', (request, response) => {
   const html = renderToString(<App />);
   response.send(html);
 });
 ```
 
-This will produce the initial non-interactive HTML output of your React components. On the client, you will need to call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to *hydrate* that server-generated HTML and make it interactive.
+Bu, React bileşenlerinizin etkileşimli olmayan ilk HTML çıktısını üretecektir. İstemcide, sunucu tarafından oluşturulan HTML'yi *hydrate* etmek ve etkileşimli hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağırmanız gerekecektir.
 
 
 <Pitfall>
 
-`renderToString` does not support streaming or waiting for data. [See the alternatives.](#alternatives)
+`renderToString` akışı veya veri beklemeyi desteklemez. [Alternatiflere göz atınız.](#alternatives)
 
 </Pitfall>
 
 ---
 
-## Alternatives {/*alternatives*/}
+## Alternatifler {/*alternatives*/}
 
-### Migrating from `renderToString` to a streaming method on the server {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
+### Sunucuda `renderToString`'den bir akış yöntemine geçiş {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
 
-`renderToString` returns a string immediately, so it does not support streaming or waiting for data.
+`renderToString` hemen bir string döndürür, bu nedenle akışı veya veri beklemeyi desteklemez.
 
-When possible, we recommend using these fully-featured alternatives:
+Mümkün olduğunda, bu tam özellikli alternatifleri kullanmanızı öneririz:
 
-* If you use Node.js, use [`renderToPipeableStream`.](/reference/react-dom/server/renderToPipeableStream)
-* If you use Deno or a modern edge runtime with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), use [`renderToReadableStream`.](/reference/react-dom/server/renderToReadableStream)
+* Eğer Node.js kullanıyorsanız, [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) kullanınız.
+* Deno veya [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) ile modern bir edge çalışma zamanı kullanıyorsanız,[`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream)'i kullanabilirsiniz.
 
-You can continue using `renderToString` if your server environment does not support streams.
+Sunucu ortamınız akışları desteklemiyorsa `renderToString` kullanmaya devam edebilirsiniz.
 
 ---
 
-### Removing `renderToString` from the client code {/*removing-rendertostring-from-the-client-code*/}
+### İstemci kodundan `renderToString`'i kaldırma {/*removing-rendertostring-from-the-client-code*/}
 
-Sometimes, `renderToString` is used on the client to convert some component to HTML.
+Bazen, `renderToString` istemcide bazı bileşenleri HTML'ye dönüştürmek için kullanılır.
 
 ```js {1-2}
-// 🚩 Unnecessary: using renderToString on the client
+// 🚩 Gereksiz: istemcide renderToString kullanmak
 import { renderToString } from 'react-dom/server';
 
 const html = renderToString(<MyIcon />);
-console.log(html); // For example, "<svg>...</svg>"
+console.log(html); // Örneğin, "<svg>...</svg>"
 ```
 
-Importing `react-dom/server` **on the client** unnecessarily increases your bundle size and should be avoided. If you need to render some component to HTML in the browser, use [`createRoot`](/reference/react-dom/client/createRoot) and read HTML from the DOM:
+**İstemci üzerinde** `react-dom/server`'ı import etmek paket boyutunuzu gereksiz yere artırır ve bundan kaçınılmalıdır. Bazı bileşenleri tarayıcıda HTML'ye render etmeniz gerekiyorsa, [`createRoot`](/reference/react-dom/client/createRoot) kullanınız ve DOM'dan HTML okuyunuz:
 
 ```js
 import { createRoot } from 'react-dom/client';
@@ -119,20 +119,20 @@ const root = createRoot(div);
 flushSync(() => {
   root.render(<MyIcon />);
 });
-console.log(div.innerHTML); // For example, "<svg>...</svg>"
+console.log(div.innerHTML); // Örneğin, "<svg>...</svg>"
 ```
 
-The [`flushSync`](/reference/react-dom/flushSync) call is necessary so that the DOM is updated before reading its [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) property.
+DOM'un [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) özelliği okunmadan önce güncellenmesi için [`flushSync`](/reference/react-dom/flushSync) çağrısı gereklidir.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### When a component suspends, the HTML always contains a fallback {/*when-a-component-suspends-the-html-always-contains-a-fallback*/}
+### Bir bileşen askıya alındığında, HTML her zaman bir fallback içerir {/*when-a-component-suspends-the-html-always-contains-a-fallback*/}
 
-`renderToString` does not fully support Suspense.
+`renderToString` Suspense'i tam olarak desteklemez.
 
-If some component suspends (for example, because it's defined with [`lazy`](/reference/react/lazy) or fetches data), `renderToString` will not wait for its content to resolve. Instead, `renderToString` will find the closest [`<Suspense>`](/reference/react/Suspense) boundary above it and render its `fallback` prop in the HTML. The content will not appear until the client code loads.
+Bir bileşen askıya alınırsa (örneğin, [`lazy`](/reference/react/lazy) ile tanımlandığı veya veri getirdiği için), `renderToString` içeriğinin çözümlenmesini beklemeyecektir. Bunun yerine, `renderToString` bunun üzerindeki en yakın [`<Suspense>`](/reference/react/Suspense) sınırını bulacak ve HTML'de `fallback` prop'unu render edecektir. İstemci kodu yüklenene kadar içerik görünmeyecektir.
 
-To solve this, use one of the [recommended streaming solutions.](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) They can stream content in chunks as it resolves on the server so that the user sees the page being progressively filled in before the client code loads.
+Bunu çözmek için [önerilen akış çözümlerinden](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) birini kullanın. Sunucuda çözümlendikçe içeriği parçalar halinde yayınlayabilirler, böylece kullanıcı istemci kodu yüklenmeden önce sayfanın aşamalı olarak doldurulduğunu görür.
 
