@@ -26,7 +26,7 @@ const html = renderToString(reactNode)
 
 ### `renderToString(reactNode)` {/*rendertostring*/}
 
-Sunucuda, uygulamanızı HTML'ye dönüştürmek için `renderToString` çağrısı yapınız.
+Sunucuda, uygulamanızı HTML'e dönüştürmek için `renderToString` çağrısı yapınız.
 
 ```js
 import { renderToString } from 'react-dom/server';
@@ -34,13 +34,13 @@ import { renderToString } from 'react-dom/server';
 const html = renderToString(<App />);
 ```
 
-İstemci üzerinde, sunucu tarafından oluşturulan HTML'yi etkileşimli hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağrısı yapınız.
+İstemci üzerinde, sunucu tarafından oluşturulan HTML'i etkileşimli hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağrısı yapınız.
 
 [Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
 #### Parametreler {/*parameters*/}
 
-* `reactNode`: HTML'ye dönüştürmek istediğiniz bir React düğümü. Örneğin, `<App />` gibi bir JSX düğümü.
+* `reactNode`: HTML'e dönüştürmek istediğiniz bir React düğümü. Örneğin, `<App />` gibi bir JSX düğümü.
 
 #### Dönüş değeri {/*returns*/}
 
@@ -48,7 +48,7 @@ Bir HTML string'i.
 
 #### Uyarılar {/*caveats*/}
 
-* `renderToString` sınırlı Suspense desteğine sahiptir. Bir bileşen askıya alınırsa, `renderToString` hemen geri dönüşünü HTML olarak gönderir.
+* `renderToString` sınırlı Suspense desteğine sahiptir. Bir bileşen askıya alınırsa, `renderToString` geri dönüşünü HTML olarak hemen gönderir.
 
 * `renderToString` tarayıcıda çalışır, ancak istemci kodunda kullanılması [tavsiye edilmez.](#removing-rendertostring-from-the-client-code)
 
@@ -70,7 +70,7 @@ app.use('/', (request, response) => {
 });
 ```
 
-Bu, React bileşenlerinizin etkileşimli olmayan ilk HTML çıktısını üretecektir. İstemcide, sunucu tarafından oluşturulan HTML'yi *hydrate* etmek ve etkileşimli hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağırmanız gerekecektir.
+Bu, React bileşenlerinizin etkileşimli olmayan ilk HTML çıktısını üretecektir. İstemcide, sunucu tarafından oluşturulan HTML'i *hydrate* etmek ve etkileşimli hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağırmanız gerekecektir.
 
 
 <Pitfall>
@@ -98,7 +98,7 @@ Sunucu ortamınız akışları desteklemiyorsa `renderToString` kullanmaya devam
 
 ### İstemci kodundan `renderToString`'i kaldırma {/*removing-rendertostring-from-the-client-code*/}
 
-Bazen, `renderToString` istemcide bazı bileşenleri HTML'ye dönüştürmek için kullanılır.
+Bazen, `renderToString` istemcide bazı bileşenleri HTML'e dönüştürmek için kullanılır.
 
 ```js {1-2}
 // 🚩 Gereksiz: istemcide renderToString kullanmak
@@ -108,7 +108,7 @@ const html = renderToString(<MyIcon />);
 console.log(html); // Örneğin, "<svg>...</svg>"
 ```
 
-**İstemci üzerinde** `react-dom/server`'ı import etmek paket boyutunuzu gereksiz yere artırır ve bundan kaçınılmalıdır. Bazı bileşenleri tarayıcıda HTML'ye render etmeniz gerekiyorsa, [`createRoot`](/reference/react-dom/client/createRoot) kullanınız ve DOM'dan HTML okuyunuz:
+**İstemci üzerinde** `react-dom/server`'ı import etmek paket boyutunuzu gereksiz yere artırır ve bundan kaçınılmalıdır. Bazı bileşenleri tarayıcıda HTML'e render etmeniz gerekiyorsa, [`createRoot`](/reference/react-dom/client/createRoot) kullanınız ve DOM'dan HTML okuyunuz:
 
 ```js
 import { createRoot } from 'react-dom/client';
