@@ -2514,7 +2514,7 @@ Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalış
 
 ---
 
-### Sunucu hataları ve sadece sunucuda olan içerik için bir fallback sağlama {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
+### Sunucu hataları ve sadece istemcide olan içerik için bir fallback sağlama {/*providing-a-fallback-for-server-errors-and-client-only-content*/}
 
 Eğer [stream'leyen sunucu render etme API'leri](/reference/react-dom/server)nden birini (ya da onlara bağlı bir framework) kullanıyorsanız, React sunucuda hataları ele almak için `<Suspense>` sınırlarınızı kullanacaktır. Eğer bir bileşen sunucuda bir hata throw ederse, React sunucu render'ını iptal etmeyecektir. Bunun yerine, onun üzerindeki en yakın `<Suspense>` bileşenini bulacak ve oluşturulan sunucu HTML'ine bileşenin fallback'ini (örneğin bir yükleniyor çarkı) dahil edecektir. Kullanıcı ilk olarak bir yükleniyor çarkı görecektir.
 
