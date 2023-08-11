@@ -415,7 +415,7 @@ Girdiyi `value` değeri ileterek kontrol ettiğinizde, girdiyi sürekli olarak o
 
 ---
 
-### Yeniden renderın klavyeye her tıklandığında en iyi hale getirilmesi {/*optimizing-re-rendering-on-every-keystroke*/}
+### Her tuş vuruşunda yeniden render işlemininin iyileştirilmesi {/*optimizing-re-rendering-on-every-keystroke*/}
 
 Kontrollü girdi kullandığınızda, her klavye tıklamasında durumu ayarlarsınız. Durumun bulunduğu bileşeniniz her seferinde büyük bir ağacı yeniden render ederse bu işlem yavaş olabilir. Yeniden render performansınızı en iyi hale getirmek için birkaç yol bulunmaktadır.
 
@@ -588,4 +588,4 @@ Bileşeninize `value` değeri verdiyseniz, yaşam döngüsü boyunca string olar
 
 Önce `value={undefined}` olarak değer iletip daha sonra `value="some string"` şeklinde değer iletemezsiniz çünkü React, kontrollü bileşen mi kontrolsüz bileşen mi bunu bilemez. Kontrollü bileşen her zaman `value` değer olarak string almalıdır, `null` ya da `undefined` almamalıdır.
 
-`value` değeriniz API'den veya durum değişkeninden geliyorsa, başta `null` veya `undefined` olarak tanımlanmış olabilir. Bu durumda boş bir string (`''`) olarak tanımlayabilirsiniz veya `value={someValue == ''}` olarak iletip `value` değerinin string olup olmadığına emin olabilirsiniz.
+`value` değeriniz API'den veya durum değişkeninden geliyorsa, başta `null` veya `undefined` olarak tanımlanmış olabilir. Bu durumda boş bir string (`''`) olarak tanımlayabilirsiniz veya `value={someValue ?? ''}` olarak iletip `value` değerinin string olup olmadığına emin olabilirsiniz.
