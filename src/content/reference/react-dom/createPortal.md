@@ -4,7 +4,7 @@ title: createPortal
 
 <Intro>
 
-`createPortal` lets you render some children into a different part of the DOM.
+`createPortal` bazı alt elemanları DOM'un farklı bir bölümünde render etmenize olanak tanır.
 
 
 ```js
@@ -20,11 +20,11 @@ title: createPortal
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `createPortal(children, domNode, key?)` {/*createportal*/}
 
-To create a portal, call `createPortal`, passing some JSX, and the DOM node where it should be rendered:
+Bir portal oluşturmak için, `createPortal` çağrısını yapınız, bazı JSX'leri ve işlenmesi gereken DOM düğümünü iletiniz:
 
 ```js
 import { createPortal } from 'react-dom';
@@ -40,35 +40,35 @@ import { createPortal } from 'react-dom';
 </div>
 ```
 
-[See more examples below.](#usage)
+[Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
-A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events bubble up from children to parents according to the React tree.
+Bir portal yalnızca DOM düğümünün fiziksel yerleşimini değiştirir. Diğer her şekilde, bir portala render ettiğiniz JSX, onu render eden React bileşeninin alt düğümü gibi davranır. Örneğin, alt eleman üst ağaç tarafından sağlanan bağlama erişebilir ve olaylar React ağacına göre alt elemanlardan üst elemanlara doğru ilerler.
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `children`: Anything that can be rendered with React, such as a piece of JSX (e.g. `<div />` or `<SomeComponent />`), a [Fragment](/reference/react/Fragment) (`<>...</>`), a string or a number, or an array of these.
+* `children`: Bir JSX parçası gibi React ile render edilebilen herhangi bir şey (örneğin `<div />` ya da `<HerhangiBileşen />`), bir [Fragment](/reference/react/Fragment) (`<>...</>`), bir string ya da bir sayı, veya bunlardan oluşan bir dizi.
 
-* `domNode`: Some DOM node, such as those returned by `document.getElementById()`. The node must already exist. Passing a different DOM node during an update will cause the portal content to be recreated.
+* `domNode`: `document.getElementById()` tarafından döndürülen bir DOM düğümü. Düğüm halihazırda mevcut olmalıdır. Güncelleme sırasında farklı bir DOM düğümünün parametre olarak geçilmesi portal içeriğinin yeniden oluşturulmasına neden olacaktır.
 
-* **optional** `key`: A unique string or number to be used as the portal's [key.](/learn/rendering-lists/#keeping-list-items-in-order-with-key)
+* **opsiyonel** `key`: Portalın [anahtarı](/learn/rendering-lists/#keeping-list-items-in-order-with-key) olarak kullanılacak benzersiz bir string veya sayı. 
 
-#### Returns {/*returns*/}
+#### Dönüş değeri {/*returns*/}
 
-`createPortal` returns a React node that can be included into JSX or returned from a React component. If React encounters it in the render output, it will place the provided `children` inside the provided `domNode`.
+`createPortal` JSX'e dahil edilebilen veya bir React bileşeninden döndürülebilen bir React düğümü döndürür. React render çıktısında bununla karşılaşırsa, sağlanan `children`'ı sağlanan `domNode`'un içine yerleştirecektir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* Events from portals propagate according to the React tree rather than the DOM tree. For example, if you click inside a portal, and the portal is wrapped in `<div onClick>`, that `onClick` handler will fire. If this causes issues, either stop the event propagation from inside the portal, or move the portal itself up in the React tree.
+* Portallardan gelen olaylar DOM ağacı yerine React ağacına göre yayılır. Örneğin, bir portalın içine tıklarsanız ve portal `<div onClick>` içine sarılırsa, bu `onClick` yöneticisi tetiklenecektir. Bu sorunlara neden oluyorsa, ya portalın içinden olay yayılımını durdurunuz ya da portalın kendisini React ağacında yukarı taşıyınız.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Rendering to a different part of the DOM {/*rendering-to-a-different-part-of-the-dom*/}
+### DOM'un farklı bir bölümüne render etme {/*rendering-to-a-different-part-of-the-dom*/}
 
-*Portals* let your components render some of their children into a different place in the DOM. This lets a part of your component "escape" from whatever containers it may be in. For example, a component can display a modal dialog or a tooltip that appears above and outside of the rest of the page.
+*Portallar* bileşenlerinizin bazı çocuklarını DOM'da farklı bir yerde render etmenize izin verir. Bu, bileşeninizin bir parçasının içinde bulunduğu konteynerlerden "kaçmasını" sağlar. Örneğin, bir bileşen, sayfanın geri kalanının üstünde ve dışında görünen bir modal iletişim kutusu veya bir araç ipucu görüntüleyebilir.
 
-To create a portal, render the result of `createPortal` with <CodeStep step={1}>some JSX</CodeStep> and the <CodeStep step={2}>DOM node where it should go</CodeStep>:
+Bir portal oluşturmak için, `createPortal` sonucunu <CodeStep step={1}>biraz JSX</CodeStep> ve <CodeStep step={2}>gitmesi gereken DOM düğümü</CodeStep> ile render ediniz:
 
 ```js [[1, 8, "<p>This child is placed in the document body.</p>"], [2, 9, "document.body"]]
 import { createPortal } from 'react-dom';
@@ -86,9 +86,9 @@ function MyComponent() {
 }
 ```
 
-React will put the DOM nodes for <CodeStep step={1}>the JSX you passed</CodeStep> inside of the <CodeStep step={2}>DOM node you provided</CodeStep>.
+React, <CodeStep step={1}>sağladığınız JSX</CodeStep> için DOM düğümlerini <CodeStep step={2}>sağladığınız DOM düğümünün</CodeStep> içine yerleştirecektir.
 
-Without a portal, the second `<p>` would be placed inside the parent `<div>`, but the portal "teleported" it into the [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body)
+Portal olmasaydı, ikinci `<p>` ana `<div>` içine yerleştirilirdi, ancak portal onu [`document.body`](https://developer.mozilla.org/en-US/docs/Web/API/Document/body) içine "ışınladı":
 
 <Sandpack>
 
@@ -110,7 +110,7 @@ export default function MyComponent() {
 
 </Sandpack>
 
-Notice how the second paragraph visually appears outside the parent `<div>` with the border. If you inspect the DOM structure with developer tools, you'll see that the second `<p>` got placed directly into the `<body>`:
+İkinci paragrafın sınırla birlikte görsel olarak ana `<div>`'in dışında nasıl göründüğüne dikkat edin. DOM yapısını geliştirici araçlarıyla incelerseniz, ikinci `<p>`'nin doğrudan `<body>` içine yerleştirildiğini görebilirsiniz:
 
 ```html {4-6,9}
 <body>
@@ -125,15 +125,15 @@ Notice how the second paragraph visually appears outside the parent `<div>` with
 </body>
 ```
 
-A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events still bubble up from children to parents according to the React tree.
+Bir portal, DOM düğümünün yalnızca fiziksel yerleşimini değiştirir. Diğer her şekilde, bir portala render ettiğiniz JSX, onu render eden React bileşeninin alt düğümü gibi davranır. Örneğin, alt eleman ana ağaç tarafından sağlanan bağlama erişebilir ve olaylar React ağacına göre alt elemanlardan üst elemanlara doğru ilerlemeye devam eder.
 
 ---
 
-### Rendering a modal dialog with a portal {/*rendering-a-modal-dialog-with-a-portal*/}
+### Portal ile modal iletişim kutusu render etme {/*rendering-a-modal-dialog-with-a-portal*/}
 
-You can use a portal to create a modal dialog that floats above the rest of the page, even if the component that summons the dialog is inside a container with `overflow: hidden` or other styles that interfere with the dialog.
+Diyaloğu çağıran bileşen `overflow: hidden` veya diyaloğa müdahale eden diğer stillere sahip bir kapsayıcı içinde olsa bile, sayfanın geri kalanının üzerinde bulunan bir modal diyalog penceresi oluşturmak için bir portal kullanabilirsiniz.
 
-In this example, the two containers have styles that disrupt the modal dialog, but the one rendered into a portal is unaffected because, in the DOM, the modal is not contained within the parent JSX elements.
+Bu örnekte, iki kapsayıcı da modal iletişim kutusunu bozan stillere sahiptir, ancak DOM'da modal üst JSX öğeleri içinde yer almadığı için portalda render edilen stil etkilenmez.
 
 <Sandpack>
 
@@ -238,17 +238,17 @@ export default function ModalContent({ onClose }) {
 
 <Pitfall>
 
-It's important to make sure that your app is accessible when using portals. For instance, you may need to manage keyboard focus so that the user can move the focus in and out of the portal in a natural way.
+Portalları kullanırken uygulamanızın erişilebilir olduğundan emin olmanız önemlidir. Örneğin, kullanıcının odağı doğal bir şekilde portalın içine ve dışına taşıyabilmesi için klavye odağını yönetmeniz gerekebilir.
 
-Follow the [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/#dialog_modal) when creating modals. If you use a community package, ensure that it is accessible and follows these guidelines.
+Modal'lar oluştururken [WAI-ARIA Modal Yazma Uygulamaları](https://www.w3.org/WAI/ARIA/apg/#dialog_modal) kılavuzunu izleyiniz. Bir topluluk paketi kullanıyorsanız, erişilebilir olduğundan ve bu yönergeleri izlediğinden emin olun.
 
 </Pitfall>
 
 ---
 
-### Rendering React components into non-React server markup {/*rendering-react-components-into-non-react-server-markup*/}
+### React bileşenlerini React olmayan sunucu biçimlendirmesine render etme {/*rendering-react-components-into-non-react-server-markup*/}
 
-Portals can be useful if your React root is only part of a static or server-rendered page that isn't built with React. For example, if your page is built with a server framework like Rails, you can create areas of interactivity within static areas such as sidebars. Compared with having [multiple separate React roots,](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) portals let you treat the app as a single React tree with shared state even though its parts render to different parts of the DOM.
+Portallar, React kökünüz React ile oluşturulmamış statik veya sunucu tarafından render edilen bir sayfanın parçasıysa yararlı olabilir. Örneğin, sayfanız Rails gibi bir sunucu çatısı ile oluşturulmuşsa, sidebar gibi statik alanlar içinde etkileşim alanları oluşturabilirsiniz. [Birden fazla ayrı React köküne](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) sahip olmakla karşılaştırıldığında, portallar, parçaları DOM'un farklı bölümlerine render edilse bile uygulamayı paylaşılan state'e sahip tek bir React ağacı olarak ele almanızı sağlar.
 
 <Sandpack>
 
@@ -342,15 +342,15 @@ p {
 
 ---
 
-### Rendering React components into non-React DOM nodes {/*rendering-react-components-into-non-react-dom-nodes*/}
+### React bileşenlerini React olmayan DOM düğümlerine render etme {/*rendering-react-components-into-non-react-dom-nodes*/}
 
-You can also use a portal to manage the content of a DOM node that's managed outside of React. For example, suppose you're integrating with a non-React map widget and you want to render React content inside a popup. To do this, declare a `popupContainer` state variable to store the DOM node you're going to render into:
+React dışında yönetilen bir DOM düğümünün içeriğini yönetmek için de bir portal kullanabilirsiniz. Örneğin, React olmayan bir harita widget'ı ile entegre olduğunuzu ve React içeriğini bir açılır pencere içinde redner etmek istediğinizi varsayalım. Bunu yapmak için, içine render edeceğiniz DOM düğümünü saklamak üzere bir `popupContainer` state değişkeni tanımlayabilirsiniz:
 
 ```js
 const [popupContainer, setPopupContainer] = useState(null);
 ```
 
-When you create the third-party widget, store the DOM node returned by the widget so you can render into it:
+Üçüncü parti widget'ı oluşturduğunuzda, widget tarafından döndürülen DOM düğümünü depo edin, böylece içine render edebilirsiniz:
 
 ```js {5-6}
 useEffect(() => {
@@ -363,7 +363,7 @@ useEffect(() => {
 }, []);
 ```
 
-This lets you use `createPortal` to render React content into `popupContainer` once it becomes available:
+Bu, React içeriğini kullanılabilir hale geldiğinde `popupContainer` içine render etmek için `createPortal` kullanmanızı sağlar:
 
 ```js {3-6}
 return (
@@ -376,7 +376,7 @@ return (
 );
 ```
 
-Here is a complete example you can play with:
+İşte düzenleyebileceğiniz eksiksiz bir örnek:
 
 <Sandpack>
 
