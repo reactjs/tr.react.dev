@@ -77,7 +77,7 @@ root.render(
 );
 ```
 
-Özellikle yeni yaratılmış uygulamalarınızda, tüm uygulamayı Strict Modu ile sarmanızı öneririz. Sizin yerinize [`createRoot`](/reference/react-dom/client/createRoot)'u çağıran bir çatı ile çalışıyorsanız, Strict Modun nasıl etkilenştirileceğine çatının dokümantasyonundan bakabilirsiniz.
+Özellikle yeni yaratılmış uygulamalarınızda, tüm uygulamayı Strict Modu ile sarmanızı öneririz. Sizin yerinize [`createRoot`](/reference/react-dom/client/createRoot)'u çağıran bir çatı ile çalışıyorsanız, Strict Modun nasıl etkileştirileceğine çatının dokümantasyonundan bakabilirsiniz.
 
 Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da** size kodunuzda zaten var olan ancak üretim ortamında güvenilir bir şekilde tekrarlanması zor olabilen hataları bulmada yardımcı olurlar. Strict Modu, kullanıcılar farketmeden önce hataları bulmanızı sağlar.
 
@@ -118,7 +118,7 @@ function App() {
 }
 ```
 
-Örnekte gösterildiği üzere, Strict Modu `Header` ve `Footer` bileşenlerinde çalışmayacaktır. Ancak `Sidebar` ve `Content` bileşenleri ve bu bileşenler içindeki alt bileşenlerde, ne kadar olduğu farketmeksizin, çalışacaktır.
+Örnekte gösterildiği üzere, Strict Modu `Header` ve `Footer` bileşenlerinde çalışmayacaktır. Ancak `Sidebar` ve `Content` bileşenleri ve bu bileşenler içindeki alt bileşenlerde, ne kadar derin olduğu farketmeksizin, çalışacaktır.
 ---
 
 ### Geliştirme sırasında çift renderda bulunan hataları düzeltme {/*fixing-bugs-found-by-double-rendering-in-development*/}
@@ -153,8 +153,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit'in Hikayesi" },
-  {id: 1, label: "Taylor'ın Hikayesi" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -176,7 +176,7 @@ export default function App() {
 ```js StoryTray.js active
 export default function StoryTray({ stories }) {
   const items = stories;
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul>
       {items.map(story => (
@@ -230,8 +230,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -256,7 +256,7 @@ import { useState } from 'react';
 export default function StoryTray({ stories }) {
   const [isHover, setIsHover] = useState(false);
   const items = stories;
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul
       onPointerEnter={() => setIsHover(true)}
@@ -304,7 +304,7 @@ Bu sorunu çözmek için, dizinin bir kopyasını oluşturabilirsiniz ve asıl d
 export default function StoryTray({ stories }) {
   const items = stories.slice(); // diziyi kopyalayın
   // ✅ İyi: yeni dizinin içine atın
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
 ```
 
 Bu değişiklik [`StoryTray` fonksiyonunu saflaştıracaktır.](/learn/keeping-components-pure) Fonksiyon her çağırıldığında, sadece kopyalanmış diziyi değiştirecek ve diğer nesne ve değişkenleri etkilemeyecektir. Bu, sorunu çözer, ancak bileşenin davranışında bir sorun olduğunu farketmeden önce bileşeni daha çok yeniden render etmeniz gerekti.
@@ -333,8 +333,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit'in Hikayesi" },
-  {id: 1, label: "Taylor'ın Hikayesi" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -356,7 +356,7 @@ export default function App() {
 ```js StoryTray.js active
 export default function StoryTray({ stories }) {
   const items = stories;
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul>
       {items.map(story => (
@@ -414,8 +414,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -440,7 +440,7 @@ import { useState } from 'react';
 export default function StoryTray({ stories }) {
   const [isHover, setIsHover] = useState(false);
   const items = stories.slice(); // Diziyi kopyala
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul
       onPointerEnter={() => setIsHover(true)}
@@ -820,7 +820,7 @@ React, `<StrictMode>` içindeki herhangi bir bileşende aşağıdaki kullanımda
 
 * [`findDOMNode`](/reference/react-dom/findDOMNode). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
 * [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount) gibi `UNSAFE_` sınıf yaşam döngüsü metodları. [Alternatiflerini inceleyin](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Eski bağlamlar ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), ve [`getChildContext`](/reference/react/Component#getchildcontext)). [Alternatiflerini inceleyin](/reference/react/createContext)
+* Eski context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), ve [`getChildContext`](/reference/react/Component#getchildcontext)). [Alternatiflerini inceleyin](/reference/react/createContext)
 * Eski dizi referansları ([`this.refs`](/reference/react/Component#refs)). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
 
 Bu API'lar özellikle eski [sınıf bileşenlerinde](/reference/react/Component) kullanılırdı o yüzden güncel uygulamalarda nadiren karşınıza çıkar.
