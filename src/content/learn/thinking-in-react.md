@@ -1,49 +1,49 @@
 ---
-title: Thinking in React
+title: React'te Düşünmek
 ---
 
 <Intro>
 
-React can change how you think about the designs you look at and the apps you build. When you build a user interface with React, you will first break it apart into pieces called *components*. Then, you will describe the different visual states for each of your components. Finally, you will connect your components together so that the data flows through them. In this tutorial, we’ll guide you through the thought process of building a searchable product data table with React.
+React baktığınız tasarımlar ve oluşturduğunuz uygulamalar hakkında düşünme şeklinizi değiştirebilir. React ile bir kullanıcı arayüzü oluşturduğunuzda, öncelikle uygulamanızı *bileşenler* adı verilen parçalara ayırırsınız. Ardından, her bileşeniniz için farklı görsel durumlar tanımlarsınız. Son olarak, veri akışını sağlamak için bileşenlerinizi birbirine bağlarsınız. Bu öğreticide, React ile arama özelliği olan bir ürün veri tablosu oluşturmanın düşünce sürecinde size rehberlik edeceğiz.
 
 </Intro>
 
-## Start with the mockup {/*start-with-the-mockup*/}
+## Bir Örnekle Başlayın {/*start-with-the-mockup*/}
 
-Imagine that you already have a JSON API and a mockup from a designer.
+Öncelikle, bir JSON API'mızın ve tasarımcımızdan gelen bir modelimizin olduğunu hayal edin.
 
-The JSON API returns some data that looks like this:
+JSON API şöyle bir veri döndürüyor:
 
 ```json
 [
-  { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
-  { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
-  { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
-  { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
-  { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },
-  { category: "Vegetables", price: "$1", stocked: true, name: "Peas" }
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Elma" },
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Mandalina" },
+  { category: "Meyveler", price: "₺20", stocked: false, name: "Portakal" },
+  { category: "Sebzeler", price: "₺20", stocked: true, name: "Ispanak" },
+  { category: "Sebzeler", price: "₺40", stocked: false, name: "Kabak" },
+  { category: "Sebzeler", price: "₺10", stocked: true, name: "Börülce" }
 ]
 ```
 
-The mockup looks like this:
+Tasarımımız da şöyle:
 
 <img src="/images/docs/s_thinking-in-react_ui.png" width="300" style={{margin: '0 auto'}} />
 
-To implement a UI in React, you will usually follow the same five steps.
+React'te bir kullanıcı arayüzü (UI) oluşturmak için genellikle hep aynı beş adımı izleyeceksiniz.
 
-## Step 1: Break the UI into a component hierarchy {/*step-1-break-the-ui-into-a-component-hierarchy*/}
+## Adım 1: Kullanıcı Arabirimini Bileşen Hiyerarşisine Bölün {/*step-1-break-the-ui-into-a-component-hierarchy*/}
 
-Start by drawing boxes around every component and subcomponent in the mockup and naming them. If you work with a designer, they may have already named these components in their design tool. Ask them!
+Her bileşenin etrafına kutular çizin ve bileşenlerinize isim verin. Bir tasarımcı ile çalışıyorsanız, tasarım aracında bileşenler zaten adlandırmış olabilirler. Onlara sorun!
 
-Depending on your background, you can think about splitting up a design into components in different ways:
+Tecrübenize bağlı olarak, bir tasarımı farklı yöntemlerle bileşenlere ayırmayı düşünebilirsiniz:
 
-* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents. 
-* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
-* **Design**--consider how you would organize the design's layers.
+* **Programlama**--yeni bir fonksiyon veya nesne oluşturup oluşturmayacağınıza karar vermek için aynı teknikleri kullanın. Bu tekniklerden biri [tek sorumluluk ilkesi](https://tr.wikipedia.org/wiki/Tek_sorumluluk_ilkesi)dir, yani bir bileşen ideal olarak sadece bir şey yapmalıdır. Büyümeye başlarsa, daha küçük alt bileşenlere ayrılmalıdır.
+* **CSS**--tek tek neler için sınıf seçiçiler yazacağınızı düşünün. (Bununla birlikte, bileşenler biraz daha az ayrıntılıdır.)
+* **Tasarım**--tasarımın katmanlarını nasıl düzenleyeceğinizi düşünün.
 
-If your JSON is well-structured, you'll often find that it naturally maps to the component structure of your UI. That's because UI and data models often have the same information architecture--that is, the same shape. Separate your UI into components, where each component matches one piece of your data model.
+JSON veriniz iyi yapılandırılmışsa, genellikle arayüzün bileşen yapısıyla doğal bir şekilde eşleştiğini göreceksiniz. Çünkü UI ve veri modelleri genellikle aynı bilgi mimarisine, yani aynı şekle sahiptir. Arayüzünüzü, her bileşenin veri modelinizin bir parçasıyla eşleştiği bileşenlere ayırın.
 
-There are five components on this screen:
+Bu ekranın beş bileşeni var:
 
 <FullWidth>
 
@@ -51,19 +51,19 @@ There are five components on this screen:
 
 <img src="/images/docs/s_thinking-in-react_ui_outline.png" width="500" style={{margin: '0 auto'}} />
 
-1. `FilterableProductTable` (grey) contains the entire app.
-2. `SearchBar` (blue) receives the user input.
-3. `ProductTable` (lavender) displays and filters the list according to the user input.
-4. `ProductCategoryRow` (green) displays a heading for each category.
-5. `ProductRow`	(yellow) displays a row for each product.
+1. `FilterableProductTable` (gri) bütün uygulamayı içerir.
+2. `SearchBar` (mavi) kullanıcıdan arama sorgusunu alır.
+3. `ProductTable` (lavanta) kullanıcının arama sorgusuna göre listeyi filtreleyip görüntüler.
+4. `ProductCategoryRow` (yeşil) her kategorinin başlığını görüntüler.
+5. `ProductRow`	(sarı) her ürün için bir satır görüntüler.
 
 </CodeDiagram>
 
 </FullWidth>
 
-If you look at `ProductTable` (lavender), you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference, and you could go either way. For this example, it is a part of `ProductTable` because it appears inside the `ProductTable`'s list. However, if this header grows to be complex (e.g., if you add sorting), you can move it into its own `ProductTableHeader` component.
+`ProductTable` (lavanta) öğesine bakarsanız, tablo başlığının ("İsim" ve "Fiyat" etiketlerini içeren kısım) kendi bileşeni olmadığını görürsünüz. Bu bir tercih meselesidir ve her iki şekilde de yapılabilir. Bu örnekte, başlık kısmı `ProductTable`'ın bir parçasıdır, çünkü `ProductTable` listesinin içinde görünüyor. Ancak, bu başlık kısmı karmaşık hale gelirse (örneğin, sıralama özelliği eklerseniz), onu kendi `ProductTableHeader` bileşenine taşıyabilirsiniz.
 
-Now that you've identified the components in the mockup, arrange them into a hierarchy. Components that appear within another component in the mockup should appear as a child in the hierarchy:
+Tasarım modelinizdeki bileşenleri tanımladığınıza göre, bunları bir hiyerarşi içinde düzenleyin. Modelde başka bir bileşen içinde görünen bileşenler, hiyerarşide bir alt öğe olarak görünmelidir:
 
 * `FilterableProductTable`
     * `SearchBar`
@@ -71,13 +71,13 @@ Now that you've identified the components in the mockup, arrange them into a hie
         * `ProductCategoryRow`
         * `ProductRow`
 
-## Step 2: Build a static version in React {/*step-2-build-a-static-version-in-react*/}
+## Adım 2: React’te Statik Versiyonunu Oluşturun {/*step-2-build-a-static-version-in-react*/}
 
-Now that you have your component hierarchy, it's time to implement your app. The most straightforward approach is to build a version that renders the UI from your data model without adding any interactivity... yet! It's often easier to build the static version first and add interactivity later. Building a static version requires a lot of typing and no thinking, but adding interactivity requires a lot of thinking and not a lot of typing.
+Artık bileşen hiyerarşisine sahip olduğunuza göre, uygulamanızı hayata geçirme vakti geldi. Bunun en kolay yolu, herhangi bir etkileşim eklemeden (şimdilik!) veri modelinizden kullanıcı arayüzünü oluşturan bir versiyon oluşturmaktır. Statik versiyonu önce oluşturmak ve sonrasında etkileşim eklemek genellikle daha kolaydır. Çünkü statik bir sürüm oluşturmak *daha çok yazma ve daha az düşünme* gerektirirken, etkileşimli (interaktif) versiyonu yazmak *daha çok düşünme ve daha az yazma* gerektirir.
 
-To build a static version of your app that renders your data model, you'll want to build [components](/learn/your-first-component) that reuse other components and pass data using [props.](/learn/passing-props-to-a-component) Props are a way of passing data from parent to child. (If you're familiar with the concept of [state](/learn/state-a-components-memory), don't use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don't need it.)
+Veri modelinizi render eden bir statik versiyonu oluşturmak için, diğer bileşenleri kullanan ve [prop’lar](/learn/passing-props-to-a-component) aracılığıyla veri ileten [bileşenler](/learn/your-first-component) oluşturmak isteyeceksiniz. prop’lar bileşenler arasında yukarıdan aşağıya veri iletmenin bir yoludur. (Eğer [state](/learn/state-a-components-memory) konseptine aşinaysanız, bu statik versiyonu oluşturmak için state’leri hiçbir şekilde kullanmayın. State konsepti sadece etkileşim, yani zaman içinde değişen verilerin olduğu durumlar, için ayrılmıştır. Buna, uygulamanın statik bir sürümünü yaptığınız için, ihtiyacınız yoktur.)
 
-You can either build "top down" by starting with building the components higher up in the hierarchy (like `FilterableProductTable`) or "bottom up" by working from components lower down (like `ProductRow`). In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up.
+Uygulamanızı, hiyerarşide daha yukarıdaki (örneğin, `FilterableProductTable`) bileşenlerden başlayarak, yukarıdan aşağıya (top-down) şeklinde; ya da daha aşağıdaki (`ProductRow`) bileşenler ile başlayarak, aşağıdan yukarıya (bottom-up) şeklinde oluşturabilirsiniz. Daha basit örneklerde, genellikle yukarıdan aşağıya gitmek daha kolaydır. Daha büyük projelerde ise aşağıdan yukarıya gitmek daha kolaydır.
 
 <Sandpack>
 
@@ -130,8 +130,8 @@ function ProductTable({ products }) {
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Price</th>
+          <th>İsim</th>
+          <th>Fiyat</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -142,11 +142,11 @@ function ProductTable({ products }) {
 function SearchBar() {
   return (
     <form>
-      <input type="text" placeholder="Search..." />
+      <input type="text" placeholder="Ara..." />
       <label>
         <input type="checkbox" />
         {' '}
-        Only show products in stock
+       Sadece stokta olan ürünleri göster
       </label>
     </form>
   );
@@ -162,12 +162,12 @@ function FilterableProductTable({ products }) {
 }
 
 const PRODUCTS = [
-  {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
-  {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
-  {category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
-  {category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
-  {category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
-  {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Elma" },
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Mandalina" },
+  { category: "Meyveler", price: "₺20", stocked: false, name: "Portakal" },
+  { category: "Sebzeler", price: "₺20", stocked: true, name: "Ispanak" },
+  { category: "Sebzeler", price: "₺40", stocked: false, name: "Kabak" },
+  { category: "Sebzeler", price: "₺10", stocked: true, name: "Börülce" }
 ];
 
 export default function App() {
@@ -195,13 +195,13 @@ td {
 
 </Sandpack>
 
-(If this code looks intimidating, go through the [Quick Start](/learn/) first!)
+(Eğer bu kod korkutucu geliyorsa, önce [Hızlı Başlangıç](/learn/) bölümünü okuyun!)
 
-After building your components, you'll have a library of reusable components that render your data model. Because this is a static app, the components will only return JSX. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. This is called _one-way data flow_ because the data flows down from the top-level component to the ones at the bottom of the tree.
+Bileşenlerinizi oluşturduktan sonra, veri modelinizi render eden yeniden kullanılabilir bileşenlerden oluşan bir kütüphaneniz olacaktır. Bu statik bir uygulama olduğu için, bileşenler yalnızca JSX döndürecektir. Hiyerarşinin en üstündeki bileşen (`FilterableProductTable`) veri modelinizi bir prop olarak alacaktır. Bu, tek yönlü veri akışı (_one-way data flow_) olarak adlandırılır; çünkü veri, en üstteki bileşenden ağacın en altındaki bileşenlere doğru akar.
 
 <Pitfall>
 
-At this point, you should not be using any state values. That’s for the next step!
+Bu noktada, herhangi bir state değeri kullanmamalısınız. Onun için bir sonraki adımı bekleyin!
 
 </Pitfall>
 
