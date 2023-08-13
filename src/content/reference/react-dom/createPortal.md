@@ -24,7 +24,7 @@ title: createPortal
 
 ### `createPortal(children, domNode, key?)` {/*createportal*/}
 
-Bir portal oluşturmak için, `createPortal` çağrısını yapınız, bazı JSX'leri ve işlenmesi gereken DOM düğümünü iletiniz:
+Bir portal oluşturmak için, biraz JSX ve render edilmesi gereken DOM düğümünü ileterek `createPortal`'ı çağırın:
 
 ```js
 import { createPortal } from 'react-dom';
@@ -42,7 +42,7 @@ import { createPortal } from 'react-dom';
 
 [Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
-Bir portal yalnızca DOM düğümünün fiziksel yerleşimini değiştirir. Diğer her şekilde, bir portala render ettiğiniz JSX, onu render eden React bileşeninin alt düğümü gibi davranır. Örneğin, alt eleman üst ağaç tarafından sağlanan bağlama erişebilir ve olaylar React ağacına göre alt elemanlardan üst elemanlara doğru ilerler.
+Bir portal yalnızca DOM düğümünün fiziksel yerleşimini değiştirir. Diğer her şekilde, bir portala render ettiğiniz JSX, onu render eden React bileşeninin alt düğümü gibi davranır. Örneğin, alt eleman üst ağaç tarafından sağlanan context'e erişebilir ve olaylar React ağacına göre alt elemanlardan üst elemanlara doğru ilerler.
 
 #### Parametreler {/*parameters*/}
 
@@ -66,7 +66,7 @@ Bir portal yalnızca DOM düğümünün fiziksel yerleşimini değiştirir. Diğ
 
 ### DOM'un farklı bir bölümüne render etme {/*rendering-to-a-different-part-of-the-dom*/}
 
-*Portallar* bileşenlerinizin bazı çocuklarını DOM'da farklı bir yerde render etmenize izin verir. Bu, bileşeninizin bir parçasının içinde bulunduğu konteynerlerden "kaçmasını" sağlar. Örneğin, bir bileşen, sayfanın geri kalanının üstünde ve dışında görünen bir modal iletişim kutusu veya bir araç ipucu görüntüleyebilir.
+*Portallar* bileşenlerinizin bazı alt elemanlarını DOM'da farklı bir yerde render etmenize izin verir. Bu, bileşeninizin bir parçasının içinde bulunduğu konteynerlerden "kaçmasını" sağlar. Örneğin, bir bileşen, sayfanın geri kalanının üstünde ve dışında görünen bir modal iletişim kutusu veya bir araç ipucu görüntüleyebilir.
 
 Bir portal oluşturmak için, `createPortal` sonucunu <CodeStep step={1}>biraz JSX</CodeStep> ve <CodeStep step={2}>gitmesi gereken DOM düğümü</CodeStep> ile render ediniz:
 
@@ -110,7 +110,7 @@ export default function MyComponent() {
 
 </Sandpack>
 
-İkinci paragrafın sınırla birlikte görsel olarak ana `<div>`'in dışında nasıl göründüğüne dikkat edin. DOM yapısını geliştirici araçlarıyla incelerseniz, ikinci `<p>`'nin doğrudan `<body>` içine yerleştirildiğini görebilirsiniz:
+İkinci paragrafın kenarla birlikte görsel olarak ana `<div>`'in dışında nasıl göründüğüne dikkat edin. DOM yapısını geliştirici araçlarıyla incelerseniz, ikinci `<p>`'nin doğrudan `<body>` içine yerleştirildiğini görebilirsiniz:
 
 ```html {4-6,9}
 <body>
@@ -376,7 +376,7 @@ return (
 );
 ```
 
-İşte düzenleyebileceğiniz eksiksiz bir örnek:
+İşte kurcalayabileceğiniz eksiksiz bir örnek:
 
 <Sandpack>
 
