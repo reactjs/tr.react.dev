@@ -1078,7 +1078,11 @@ Ağacın bir bölümünü farklı bir değere sahip sağlayıcıyla sarmalayarak
 
 İhtiyacınız olduğu kadar çok sağlayıcıyı iç içe yerleştirebilir ve geçersiz kılabilirsiniz.
 
+<<<<<<< HEAD
 <Recipes title="Context'i geçersiz kılınma örnekleri">
+=======
+<Recipes titleText="Examples of overriding context">
+>>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
 
 #### Temanın geçersiz kılınması {/*overriding-a-theme*/}
 

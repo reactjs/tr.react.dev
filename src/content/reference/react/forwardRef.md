@@ -135,7 +135,7 @@ Bu `Form` bileşeni, `MyInput`'a [bir ref gönderir](/reference/react/useRef#man
 
 Unutmayın ki, bileşeninizin içindeki DOM elemanına bir ref sağlamak, daha sonra bileşeninizin iç yapısını değiştirmeyi zorlaştırır. Genellikle, butonlar (`<button>`) veya metin girişleri (`<input>`) gibi yeniden kullanılabilir temel bileşenlerden DOM elemanları sağlarsınız, ancak bunu avatar veya yorum gibi uygulama seviyesi bileşenler için yapmamalısınız.
 
-<Recipes title="Examples of forwarding a ref">
+<Recipes titleText="Examples of forwarding a ref">
 
 #### `<input>` elamanına odaklanma (focus) {/*focusing-a-text-input*/}
 
