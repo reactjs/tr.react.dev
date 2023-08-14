@@ -103,7 +103,7 @@ ${css}
       onClick={downloadHTML}
       title="Sandbox'ı İndir"
       type="button">
-      <IconDownload className="inline mr-1" /> İndir
+      <IconDownload className="inline me-1" /> İndir
     </button>
   );
 }

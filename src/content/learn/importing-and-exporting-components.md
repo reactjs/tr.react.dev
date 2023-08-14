@@ -55,7 +55,9 @@ Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içe
 
 ## Bileşenleri içe ve dışa aktarma {/*exporting-and-importing-a-component*/}
 
-Eğer açılış ekranını değiştirmek ve bilim kitaplarının bir listesini koymak isterseniz ne olur? Veya tüm profilleri başka bir yere yerleştirmek isterseniz? Bu durumda "Galeri" ve "Profil" bileşenlerini kök bileşen dosyasından çıkarmak mantıklıdır. Bu, onların daha modüler olmasını ve diğer dosyalarda yeniden kullanılabilir olmasını sağlayacaktır. Bir bileşeni üç adımda taşıyabilirsiniz:
+Bu örnekte bileşenler `App.js` adlı bir **kök bileşen dosyasında** bulunmaktadır. Kurulumunuza bağlı olarak, kök bileşeniniz (root component) başka bir dosyada olabilir. Next.js gibi dosya tabanlı yönlendirmeye sahip bir çatı (framework) kullanıyorsanız, kök bileşeniniz her sayfa için farklı olacaktır.
+
+Eğer açılış ekranını değiştirmek ve bilim kitaplarının bir listesini koymak isterseniz ne olur? Veya tüm profilleri başka bir yere yerleştirmek isterseniz? Bu durumda `Galeri` ve `Profil` bileşenlerini kök bileşen dosyasından çıkarmak mantıklıdır. Bu, onların daha modüler olmasını ve diğer dosyalarda yeniden kullanılabilir olmasını sağlayacaktır. Bir bileşeni üç adımda taşıyabilirsiniz:
 
 1. **Yeni** bir JS dosyası oluşturunuz ve bileşeni bunun içine koyunuz.
 2. **Dışa aktarma** işlemini bu dosya içerisindeki fonksiyon bileşenine uygulayınız ([varsayılan](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) olarak yada [adlandırılmış](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) olarak dışa aktarım).

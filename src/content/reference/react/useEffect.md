@@ -426,7 +426,7 @@ body {
 
 #### Elemanın görünebilirliğini takip etme {/*tracking-element-visibility*/}
 
-Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste, sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı doğru kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekran göründüğünde sizi bilgilendirecektir.
+Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste, sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı doğru kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekranda göründüğünde sizi bilgilendirecektir.
 
 <Sandpack>
 
@@ -471,10 +471,10 @@ export default function Box() {
         document.body.style.backgroundColor = 'white';
         document.body.style.color = 'black';
       }
+    }, {
+       threshold: 1.0
     });
-    observer.observe(div, {
-      threshold: 1.0
-    });
+    observer.observe(div);
     return () => {
       observer.disconnect();
     }
@@ -763,10 +763,10 @@ export function useIntersectionObserver(ref) {
     const observer = new IntersectionObserver(entries => {
       const entry = entries[0];
       setIsIntersecting(entry.isIntersecting);
+    }, {
+       threshold: 1.0
     });
-    observer.observe(div, {
-      threshold: 1.0
-    });
+    observer.observe(div);
     return () => {
       observer.disconnect();
     }

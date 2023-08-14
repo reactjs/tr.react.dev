@@ -61,25 +61,25 @@ export function Challenge({
       <div className="flex justify-between items-center mt-4">
         {currentChallenge.hint ? (
           <div>
-            <Button className="mr-2" onClick={toggleHint} active={showHint}>
+            <Button className="me-2" onClick={toggleHint} active={showHint}>
               <IconHint className="mr-1.5" />{' '}
               {showHint ? 'İpucunu gizle' : 'İpucunu göster'}
             </Button>
             <Button
-              className="mr-2"
+              className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-              <IconSolution className="mr-1.5" />{' '}
+              <IconSolution className="me-1.5" />{' '}
               {showSolution ? 'Çözümü gizle' : 'Çözümü göster'}
             </Button>
           </div>
         ) : (
           !isRecipes && (
             <Button
-              className="mr-2"
+              className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-              <IconSolution className="mr-1.5" />{' '}
+              <IconSolution className="me-1.5" />{' '}
               {showSolution ? 'Çözümü gizle' : 'Çözümü göster'}
             </Button>
           )
@@ -95,7 +95,7 @@ export function Challenge({
             onClick={handleClickNextChallenge}
             active>
             Sonraki {isRecipes ? 'Örnek' : 'Problem'}
-            <IconArrowSmall displayDirection="right" className="block ml-1.5" />
+            <IconArrowSmall displayDirection="right" className="block ms-1.5" />
           </Button>
         )}
       </div>
@@ -118,8 +118,8 @@ export function Challenge({
                 active>
                 Sonraki Problem
                 <IconArrowSmall
-                  displayDirection="right"
-                  className="block ml-1.5"
+                  displayDirection="end"
+                  className="block ms-1.5"
                 />
               </Button>
             )}

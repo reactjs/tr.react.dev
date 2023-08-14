@@ -44,14 +44,14 @@ Eğer `<textarea>` bileşeniniz kontrolsüz ise, onun yerine `defaultValue` prop
 
 Bu `<textarea>` propları hem kontrollü hem de kotrolsüz metin alanları için geçerlidir:
 
-* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-autocomplete): `'on'` ya da `'off'`. Otomatik tamamlama davranışlarını belirtir.
-* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-autofocus): Boolean. Eğer `true` ise, React, eleman DOM'a eklendikten sonra o elamana odaklanacaktır.
+* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#autocomplete): `'on'` ya da `'off'`. Otomatik tamamlama davranışlarını belirtir.
+* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#autofocus): Boolean. Eğer `true` ise, React, eleman DOM'a eklendikten sonra o elamana odaklanacaktır.
 * `children`: `<textarea>` alt bileşen kabul etmez. Başlangıç değeri ayarlamak için `defaultValue`  kullanınız.
-* [`cols`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-cols): Sayı. Ortalama karakter genişliklerinde,varsayılan genişliği belirler. Varsayılan değeri `20`dir.
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-disabled): Boolean. Eğer `true` ise, metin alanı etkileşimli olmayacak ve soluk renkli görünecektir.
-* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-form): String. Metin kutusunun ait olduğu `<form>` bileşeninin `id`'sini belirtir. Eğer belirtilmezse, ağaçtaki en yakın üst formdur.
-* [`maxLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-maxlength): Sayı. Metnin maksimum uzunluğunu belirtir.
-* [`minLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-minlength): Sayı. Metnin minimum uzunluğunu belirtir.
+* [`cols`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#cols): Sayı. Ortalama karakter genişliklerinde,varsayılan genişliği belirler. Varsayılan değeri `20`dir.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#disabled): Boolean. Eğer `true` ise, metin alanı etkileşimli olmayacak ve soluk renkli görünecektir.
+* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#form): String. Metin kutusunun ait olduğu `<form>` bileşeninin `id`'sini belirtir. Eğer belirtilmezse, ağaçtaki en yakın üst formdur.
+* [`maxLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#maxlength): Sayı. Metnin maksimum uzunluğunu belirtir.
+* [`minLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#minlength): Sayı. Metnin minimum uzunluğunu belirtir.
 * [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name): String. [Form ile birlikte gönderilen](#reading-the-textarea-value-when-submitting-a-form) metin kutusunun adını belirtir.
 * `onChange`: [`olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu.  [Kontrollü metin alanları](#controlling-a-text-area-with-a-state-variable) için gereklidir. Kullanıcı tarafından, girdi değeri değiştiği anda çalışır (örneğin, klavyede tuşa her basıldığında çalışır). Tarayıcı `input` olayı](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi çalışır.
 * `onChangeCapture`: [Yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan `onChange`'in bir versiyonudur.
@@ -61,11 +61,11 @@ Bu `<textarea>` propları hem kontrollü hem de kotrolsüz metin alanları için
 * `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyionudur.
 * [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/select_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. `<textarea>` içindeki seçilen alanın değişmesiyle tetiklenir. React, `onSelect` olayını boş seçim ve düzenlemelerde de (seçimi etkileyebilir) çalıştırır. 
 * `onSelectCapture`: `onSelect`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyonudur.
-* [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-placeholder): String. Metin alanı boşken ekranda soluk renkte görüntülenir.
-* [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-readonly): Boolean. Eğer `true` ise, metin alanı kullanıcı tarafından düzenlenemez.
-* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-required): Boolean. Eğer `true` ise, formun gönderilebilmesi için değer sağlanmalıdır.
-* [`rows`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-rows): Sayı. Ortalama karakter yüksekliklerinde, varsayılan yüksekliği belirler. Varsayılan değeri `2`dir.
-* [`wrap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap): `'hard'`, `'soft'`, ya da `'off'` değerlerini alabilir. Form gönderiliken metnin nasıl sarmalanacağını belirler.
+* [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#placeholder): String. Metin alanı boşken ekranda soluk renkte görüntülenir.
+* [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#readonly): Boolean. Eğer `true` ise, metin alanı kullanıcı tarafından düzenlenemez.
+* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#required): Boolean. Eğer `true` ise, formun gönderilebilmesi için değer sağlanmalıdır.
+* [`rows`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#rows): Sayı. Ortalama karakter yüksekliklerinde, varsayılan yüksekliği belirler. Varsayılan değeri `2`dir.
+* [`wrap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#wrap): `'hard'`, `'soft'`, ya da `'off'` değerlerini alabilir. Form gönderiliken metnin nasıl sarmalanacağını belirler.
 
 #### Uyarılar {/*caveats*/}
 
