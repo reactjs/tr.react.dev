@@ -379,8 +379,8 @@ export function HomeContent() {
                           <Link href="https://github.com/expo/expo">Expo</Link>,
                           React ile Android, iOS ve daha fazlası için uygulama
                           oluşturmanıza olanak tanır. Arayüzleri yerel (native)
-                          gibi gözükür ve hissettirir, çünkü gerçekten
-                          öyleler. Bu bir web görünümü (webview) değil. React
+                          gibi gözükür ve hissettirir, çünkü gerçekten öyleler.
+                          Bu bir web görünümü (webview) değil. React
                           bileşenleriniz, platform tarafından sağlanan gerçek
                           Android ve iOS viewlarını render eder.
                         </p>
