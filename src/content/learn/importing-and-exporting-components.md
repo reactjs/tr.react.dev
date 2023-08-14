@@ -53,13 +53,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 </Sandpack>
 Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içerisinde barınmaktadır. [Create React App](https://create-react-app.dev/)'de uygulamanız `src/App.js` dosyası içinde barınmaktadır. Fakat kurulumunuza bağlı olarak kök bileşeniniz başka bir dosyanın içerisinde olabilir. Eğer dosya tabanlı yönlendirmesi olan bir çatı kullanıyorsanız, kök bileşeniniz her sayfa için ayrı olacaktır.
 
-<<<<<<< HEAD
 ## Bileşenleri içe ve dışa aktarma {/*exporting-and-importing-a-component*/}
-=======
-These currently live in a **root component file,** named `App.js` in this example. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
 
-Eğer açılış ekranını değiştirmek ve bilim kitaplarının bir listesini koymak isterseniz ne olur? Veya tüm profilleri başka bir yere yerleştirmek isterseniz? Bu durumda "Galeri" ve "Profil" bileşenlerini kök bileşen dosyasından çıkarmak mantıklıdır. Bu, onların daha modüler olmasını ve diğer dosyalarda yeniden kullanılabilir olmasını sağlayacaktır. Bir bileşeni üç adımda taşıyabilirsiniz:
+Bu örnekte bileşenler `App.js` adlı bir **kök bileşen dosyasında** bulunmaktadır. Kurulumunuza bağlı olarak, kök bileşeniniz (root component) başka bir dosyada olabilir. Next.js gibi dosya tabanlı yönlendirmeye sahip bir çatı (framework) kullanıyorsanız, kök bileşeniniz her sayfa için farklı olacaktır.
+
+Eğer açılış ekranını değiştirmek ve bilim kitaplarının bir listesini koymak isterseniz ne olur? Veya tüm profilleri başka bir yere yerleştirmek isterseniz? Bu durumda `Galeri` ve `Profil` bileşenlerini kök bileşen dosyasından çıkarmak mantıklıdır. Bu, onların daha modüler olmasını ve diğer dosyalarda yeniden kullanılabilir olmasını sağlayacaktır. Bir bileşeni üç adımda taşıyabilirsiniz:
 
 1. **Yeni** bir JS dosyası oluşturunuz ve bileşeni bunun içine koyunuz.
 2. **Dışa aktarma** işlemini bu dosya içerisindeki fonksiyon bileşenine uygulayınız ([varsayılan](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) olarak yada [adlandırılmış](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) olarak dışa aktarım).

@@ -15,11 +15,7 @@ export function ResetButton({onReset}: ResetButtonProps) {
       onClick={onReset}
       title="Sandbox'ı Sıfırla"
       type="button">
-<<<<<<< HEAD
-      <IconRestart className="inline ml-1 mr-1 relative" /> Sıfırla
-=======
-      <IconRestart className="inline ms-1 me-1 relative" /> Reset
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+      <IconRestart className="inline ms-1 me-1 relative" /> Sıfırla
     </button>
   );
 }

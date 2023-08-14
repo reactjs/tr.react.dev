@@ -375,24 +375,14 @@ export function HomeContent() {
                           <Link href="https://reactnative.dev">
                             React Native
                           </Link>{' '}
-<<<<<<< HEAD
                           ve{' '}
                           <Link href="https://github.com/expo/expo">Expo</Link>,
                           React ile Android, iOS ve daha fazlası için uygulama
                           oluşturmanıza olanak tanır. Arayüzleri yerel (native)
-                          gibi gözüküyor ve hissetiriyor, çünkü gerçekten
-                          öyleler. Bu bir web görünümü değil. React
+                          gibi gözükür ve hissettirir, çünkü gerçekten
+                          öyleler. Bu bir web görünümü (webview) değil. React
                           bileşenleriniz, platform tarafından sağlanan gerçek
-                          Android ve iOS görünümlerini renderlar.
-=======
-                          and{' '}
-                          <Link href="https://github.com/expo/expo">Expo</Link>{' '}
-                          let you build apps in React for Android, iOS, and
-                          more. They look and feel native because their UIs{' '}
-                          <i>are</i> truly native. It’s not a web view—your
-                          React components render real Android and iOS views
-                          provided by the platform.
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+                          Android ve iOS viewlarını renderlar.
                         </p>
                       </div>
                     </div>
@@ -420,13 +410,8 @@ export function HomeContent() {
         <Section background="right-card">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row px-5">
             <div className="max-w-3xl lg:max-w-7xl gap-5 flex flex-col lg:flex-row lg:px-5">
-<<<<<<< HEAD
-              <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:pl-5 lg:pr-10">
-                <Header>Gelecek hazır olduğunda yükseltin</Header>
-=======
               <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:ps-5 lg:pe-10">
-                <Header>Upgrade when the future is ready</Header>
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+                <Header>Gelecek hazır olduğunda yükseltin</Header>
                 <Para>
                   React değişikliklere dikkatle yaklaşır. Her React
                   güncellemesi, milyarlarca kullanıcısı olan iş kritik
@@ -511,13 +496,8 @@ export function HomeContent() {
           <div className="mt-20 px-5 lg:px-0 mb-6 max-w-4xl text-center text-opacity-80">
             <Logo className="text-link dark:text-link-dark w-24 lg:w-28 mb-10 lg:mb-8 mt-12 h-auto mx-auto self-start" />
             <Header>
-<<<<<<< HEAD
-              React topluluğuna <br className="" />
+              React topluluğuna <br className="hidden lg:inline" />
               hoş geldiniz
-=======
-              Welcome to the <br className="hidden lg:inline" />
-              React community
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
             </Header>
             <ButtonLink
               href={'/learn'}

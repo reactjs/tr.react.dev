@@ -34,13 +34,8 @@ Ekranda bir ilerleme göstergesi göstermek için [yerleşik tarayıcı bileşen
 
 Ek olarak, `<progress>` bu prop'ları destekler:
 
-<<<<<<< HEAD
 * [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#attr-max): Bir sayı. `value` için maksimum değeri belirtir. Varsayılan değeri `1`'dir.
 * [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#attr-value): `0` ve `max` arasında bir sayı, veya belirsiz (ne zaman tamamlanacağı belli olmayan) ilerlemeler için `null`. Yapılan işin ne kadar tamamlandığını belirtir.
-=======
-* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#max): A number. Specifies the maximum `value`. Defaults to `1`.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#value): A number between `0` and `max`, or `null` for indeterminate progress. Specifies how much was done.
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
 
 ---
 

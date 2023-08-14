@@ -126,13 +126,8 @@ function LearnMore({
               label="Devamını Oku"
               href={path}
               type="primary">
-<<<<<<< HEAD
               Devamını Oku
-              <IconNavArrow displayDirection="right" className="inline ml-1" />
-=======
-              Read More
-              <IconNavArrow displayDirection="end" className="inline ms-1" />
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              <IconNavArrow displayDirection="right" className="inline ms-1" />
             </ButtonLink>
           ) : null}
         </div>
