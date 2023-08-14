@@ -382,7 +382,7 @@ export function HomeContent() {
                           gibi gözükür ve hissettirir, çünkü gerçekten
                           öyleler. Bu bir web görünümü (webview) değil. React
                           bileşenleriniz, platform tarafından sağlanan gerçek
-                          Android ve iOS viewlarını renderlar.
+                          Android ve iOS viewlarını render eder.
                         </p>
                       </div>
                     </div>
