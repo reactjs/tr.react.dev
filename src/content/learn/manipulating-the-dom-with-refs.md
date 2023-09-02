@@ -1,10 +1,10 @@
 ---
-title: 'Ref'ler ile DOM Manipülasyonu'
+title: Ref'ler ile DOM Manipülasyonu
 ---
 
 <Intro>
 
-React, [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)'u render edilen çıktıya uyacak şekilde otomatik olarak günceller böylece bileşenlerinizin genellikle onu değiştirmesi gerekmez. Ancak bazen React tarafından yönetilen DOM elemanlarına erişmeye ihtiyaç duyabilirsiniz örneğin bir elemana odaklamak, onu kaydırmak veya boyutunu ve konumunu ölçmek isteyebilirsiniz. React'te bunları yapmanın yerleşik bir yolu yoktur bu yüzden DOM elemanı için *ref*'e ihtiyacınız olacak.
+React, [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)'u render edilen çıktıya uyacak şekilde otomatik olarak günceller. Böylece bileşenlerinizin genellikle onu değiştirmesi gerekmez. Ancak bazen React tarafından yönetilen DOM elemanlarına erişmeye ihtiyaç duyabilirsiniz örneğin bir elemana odaklamak, onu kaydırmak veya boyutunu ve konumunu ölçmek isteyebilirsiniz. React'te bunları yapmanın yerleşik bir yolu yoktur bu yüzden DOM elemanı için *ref*'e ihtiyacınız olacak.
 
 </Intro>
 
@@ -17,7 +17,7 @@ React, [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/In
 
 </YouWillLearn>
 
-## Elemana Ref Alma {/*getting-a-ref-to-the-node*/}
+## Elemana ref alma {/*getting-a-ref-to-the-node*/}
 
 React tarafından yönetilen bir DOM elemanına erişmek için önce `useRef` Hook'unu içe aktarın:
 
@@ -44,7 +44,7 @@ Son olarak DOM elemanını almak istediğiniz JSX etiketine ref özelliği olara
 myRef.current.scrollIntoView();
 ```
 
-### Örnek: Bir Metin Girişine Odaklanma {/*example-focusing-a-text-input*/}
+### Örnek: Bir metin girişine odaklanma {/*example-focusing-a-text-input*/}
 
 Bu örnekte butona tıklamak input alanına odaklayacaktır:
 
@@ -78,11 +78,11 @@ Bunu uygulamak için:
 1. `useRef` Hook'u ile `inputRef`'i bildirin.
 2. `<input ref={inputRef}>` olarak geçin. React'e **bu `<input>`'ta DOM elemanının içine `inputRef.current`'i** koymasını söyler.
 3. `handleClick` fonksiyonunda `inputRef.current`'tan input DOM elemanını okuyun ve [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) ile `inputRef.current.focus()` ögesini çağırın.
-4. `handleClick` olay yöneticisini `onClick` ile `<button>` elementine geçin.
+4. `handleClick` olay yöneticisini `onClick` ile `<button>` elemanına geçin.
 
-DOM manipülasyonu ref için en yaygın kullanım olsa da `useRef` Hook'u, zamanlayıcı ID'ler gibi, React dışında başka şeyleri saklamak için de kullanılabilir. State'e benzer şekilde ref renderlar arasında kalır. Ref, ayarladığınızda yeniden render etmeyi tetiklemeyen state değişkenleri gibidir. Ref hakkında bilgi edinin: [Referencing Values with Refs.](/learn/referencing-values-with-refs)
+DOM manipülasyonu ref için en yaygın kullanım olsa da `useRef` Hook'u, zamanlayıcı ID'ler gibi, React dışında başka şeyleri saklamak için de kullanılabilir. State'e benzer şekilde refler de renderlar arasında kalır. Ref, ayarladığınızda yeniden render etmeyi tetiklemeyen state değişkenleri gibidir. Ref hakkında bilgi edinin: [Referencing Values with Refs.](/learn/referencing-values-with-refs)
 
-### Örnek: Bir Elementi Kaydırma {/*example-scrolling-to-an-element*/}
+### Örnek: Bir öğeye scroll etmek {/*example-scrolling-to-an-element*/}
 
 Bir bileşende birden fazla ref olabilir. Bu örnekte üç resimden oluşan bir carousel vardır. Her buton karşılık gelen ilgili DOM elemanında tarayıcıya [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) metodunu çağırarak resmi ortalar.
 
@@ -193,7 +193,7 @@ li {
 
 <DeepDive>
 
-#### Ref Callback Kullanarak Bir Ref Listesi Nasıl Yönetilir? {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
+#### Ref callback kullanarak bir ref listesi nasıl yönetilir? {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
 
 Yukarıdaki örneklerde önceden tanımlanmış sayıda ref vardır. Ancak bazen listedeki her bir öge için ref'e ihtiyacınız olabilir ve kaç tane olacağını bilemeyebilirsiniz. Böyle bir şey **işe yaramaz**:
 
@@ -207,9 +207,9 @@ Yukarıdaki örneklerde önceden tanımlanmış sayıda ref vardır. Ancak bazen
 </ul>
 ```
 
-Bunun nedeni **Hook'ların bileşeninizin sadece en üstünde çağrılması gerekmesinden kaynaklıdır.** Bir döngüde, koşulda veya `map()`'in içinde `useRef`'i çağıramazsınız.
+Bunun nedeni **Hook'ların bileşeninizin sadece en üst seviyesinde çağrılması gerekmesinden kaynaklıdır.** Bir döngüde, koşulda veya `map()`'in içinde `useRef`'i çağıramazsınız.
 
-Bunun olası bir yolu ana elemente tek bir ref almak ve ardından tek tek alt elemanı bulmak için [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) gibi DOM manipülasyon yöntemlerini kullanmaktır. Ancak bu yöntem tutarsızdır ve DOM yapınız değişirse işlevsiz hale gelebilir.
+Bunun olası bir yolu ana elemana tek bir ref almak ve ardından tek tek alt elemanı bulmak için [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) gibi DOM manipülasyon yöntemlerini kullanmaktır. Ancak bu yöntem tutarsızdır ve DOM yapınız değişirse işlevsiz hale gelebilir.
 
 Başka bir çözüm **bir fonksiyonu `ref` özelliğine iletmektir.** Buna [`ref` callback](/reference/react-dom/components/common#ref-callback) denir. React ref'i ayarlama zamanı geldiğinde callback fonksiyonunu DOM elemanı ile çağıracak ve ref'i temizleme zamanı geldiğinde `null` değeri ile çağıracaktır. Bu, kendi dizinizi veya [Map'inizi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) korumanıza ve indeksine veya  kimliğine göre herhangi bir ref'e erişmenize olanak sağlar.
 
@@ -340,9 +340,9 @@ Bu daha sonra Map'ten tek tek DOM elemanlarını okumamıza olanak tanır.
 
 </DeepDive>
 
-## Başka Bir Bileşenin DOM Elemanlarına Erişme {/*accessing-another-components-dom-nodes*/}
+## Başka bir bileşenin DOM elemanlarına erişme {/*accessing-another-components-dom-nodes*/}
 
-`<input />` gibi bir tarayıcı elementi çıktısı veren yerleşik bir bileşene ref koyduğunuzda React bu ref'in `current` özelliğini karşılık gelen DOM elemanına ayarlar ( tarayıcıdaki asıl `<input />` gibi).
+`<input />` gibi bir tarayıcı elemanı çıktısı veren yerleşik bir bileşene ref koyduğunuzda React bu ref'in `current` özelliğini karşılık gelen DOM elemanına ayarlar ( tarayıcıdaki asıl `<input />` gibi).
 
 Ancak `<MyInput />` gibi **kendi** bileşeninize ref koymaya çalışırsanız varsayılan olarak `null` değeri alırsınız. İşte bunu gösteren bir örnek. Butona tıklamanın input'a nasıl **odaklamadığına** dikkat edin:
 
@@ -393,7 +393,7 @@ const MyInput = forwardRef((props, ref) => {
 });
 ```
 
-Bu nasıl çalışır?
+Çalışma şekli şöyledir:
 
 1. `<MyInput ref={inputRef} />` React'e, karşılık gelen DOM elemanını `inputRef.current`'a koymasını söyler. Ancak bunu seçmek `MyInput` bileşenine bağlıdır. Varsayılan olarak bunu yapmaz.
 2. `MyInput` bileşeni `forwardRef` kullanılarak tanımlanır. `props`'tan sonra bildirilen **ikinci `ref`, parametre olarak yukarıdan `inputRef`'i almayı seçer.**
@@ -434,9 +434,9 @@ Tasarım sistemlerinde button, input gibi düşük seviyeli bileşenlerin ref'le
 
 <DeepDive>
 
-#### İmperatif Bir İşlem Tanımı ile API'nin Bir Alt Kümesini Açığa Çıkarma {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
+#### İmperatif bir işlem tanımı ile API'nin bir alt kümesini açığa çıkarma {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
 
-Yukarıdaki örnekte `MyInput` orijinal DOM input elementini ortaya çıkarır. Bu, üst bileşenin üzerinde `focus()`'u aramasına izin verir. Ancak bu, üst bileşenin başka bir şey yapmasına da izin verir örneğin CSS stillerini değiştirmek. Nadir durumlarda açığa çıkan işlevselliği kısıtlamak isteyebilirsiniz. Bunu `useImperativeHandle` ile yapabilirsiniz:
+Yukarıdaki örnekte `MyInput` orijinal DOM input elemanını ortaya çıkarır. Bu, üst bileşenin üzerinde `focus()`'u aramasına izin verir. Ancak bu, üst bileşenin başka bir şey yapmasına da izin verir örneğin CSS stillerini değiştirmek. Nadir durumlarda açığa çıkan işlevselliği kısıtlamak isteyebilirsiniz. Bunu `useImperativeHandle` ile yapabilirsiniz:
 
 <Sandpack>
 
@@ -482,7 +482,7 @@ Burada `MyInput` içindeki `realInputRef` asıl input DOM elemanını tutar. Bun
 
 </DeepDive>
 
-## React'te Ref'leri Ekleme {/*when-react-attaches-the-refs*/}
+## React refleri ne zaman ekler? {/*when-react-attaches-the-refs*/}
 
 React'te her güncelleme [iki aşamaya](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom) ayrılır:
 
@@ -497,7 +497,7 @@ React commit esnasında `ref.current` ayarını yapar. React DOM'u güncellemede
 
 <DeepDive>
 
-#### flushSync ile Senkronize Durum Güncellemelerini Temizleme {/*flushing-state-updates-synchronously-with-flush-sync*/}
+#### State güncellemelerini flushSync ile senkronize bir şekilde temizleme {/*flushing-state-updates-synchronously-with-flush-sync*/}
 
 Yeni bir yapılacak iş ekleyen ve ekranı listenin son alt ögesine kadar kaydıran bir kod düşünün. Her zaman son eklenenden *hemen önceki* yapılacak işe nasıl kaydırıldığına dikkat edin:
 
@@ -630,7 +630,7 @@ for (let i = 0; i < 20; i++) {
 
 </DeepDive>
 
-## Ref'ler İle DOM Manipülasyonu İçin En İyi Uygulamalar {/*best-practices-for-dom-manipulation-with-refs*/}
+## Ref'ler ile DOM manipülasyonu için en iyi uygulamalar {/*best-practices-for-dom-manipulation-with-refs*/}
 
 Ref'ler kaçış kapısıdır. Bunu sadece "React'in dışına çıkmanız" gerektiğinde kullanmalısınız. Bunun yaygın örnekleri arasında focus yönetimi, kaydırma konumu veya React'in göstermediği tarayıcı API'lerini çağırmak yer alır.
 
@@ -700,7 +700,7 @@ Ancak bu hiç yapamayacağınız anlamına gelmez. Dikkat gerektirir. **React'in
 
 <Challenges>
 
-#### Videoyu Oynat ve Duraklat {/*play-and-pause-the-video*/}
+#### Videoyu oynat ve duraklat {/*play-and-pause-the-video*/}
 
 Bu örnekte buton, yürütme ve duraklatma işlemi arasında geçiş yapmak için state değişkenini değiştirir. Ancak videoyu gerçekten oynatmak ve duraklatmak için state geçişi yeterli değildir. Ayrıca `<video>` için DOM elemanında [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) ve [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) elemanlarını çağırmanız gerekir. Buna bir ref ekleyin ve butonun çalışmasını sağlayın.
 
@@ -796,7 +796,7 @@ Yerleşik tarayıcı kontrollerini yönetmek için `<video>` elemenanına `onPla
 
 </Solution>
 
-#### Arama Alanına Odaklanma {/*focus-the-search-field*/}
+#### Arama alanına odaklanma {/*focus-the-search-field*/}
 
 "Search" butonuna tıklamayı odağı alana getirecek şekilde yapın.
 
@@ -860,7 +860,7 @@ button { display: block; margin-bottom: 10px; }
 
 </Solution>
 
-#### Carousel Kaydırma {/*scrolling-an-image-carousel*/}
+#### Bir resim galerisini kaydırma {/*scrolling-an-image-carousel*/}
 
 Bu carousel de aktif görüntüyü değiştiren bir "Next" butonu bulunur. Galeriyi kaydırdığınızda aktif görüntüyü yatay olarak kaydırır. Aktif görüntünün DOM elemanında [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) elemanını çağırmak isteyeceksiniz:
 
@@ -1086,7 +1086,7 @@ img {
 
 </Solution>
 
-#### Arama Alanını Ayrı Bileşenlerle Odaklama {/*focus-the-search-field-with-separate-components*/}
+#### Arama alanını ayrı bileşenlerle odaklama {/*focus-the-search-field-with-separate-components*/}
 
 "Search" butonuna tıklamayı odağı alana getirecek şekilde yapın. Her bileşenin ayrı bir dosyada tanımlandığını ve dosyanın dışına taşınmaması gerektiğini unutmayın. Bunları nasıl birbirine bağlarsınız?
 
