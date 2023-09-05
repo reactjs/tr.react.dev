@@ -1,19 +1,19 @@
 ---
-title: 'Reaktif Effects Yaşam Döngüsü'
+title: 'Reacktif Efektlerin Yaşam Döngüsü'
 ---
 
 <Intro>
 
-Effects bileşenlerden farklı bir yaşam döngüsü vardır. Bileşenler takılabilir, güncellenebilir veya çıkarılabilir. Bir Effects sadece iki şey yapabilir: bir şeyi senkronize etmeye başlamak için, ve daha sonra senkronizasyonu durdurmak için. Effects zaman içinde değişen sahne ve durumlara bağlıysa bu döngü birden çok kez gerçekleşebilir. React, Effect'inizin bağımlılıklarını doğru belirtip belirtmediğinizi kontrol etmek için bir linter kuralı sağlar. Bu, Efektinizin en son props ve state ile senkronize olmasını sağlar.
+Efektler bileşenlerden farklı bir yaşam döngüsü vardır. Bileşenler takılabilir, güncellenebilir veya çıkarılabilir.Efektler sadece iki şey yapabilir: bir şeyi senkronize etmeye başlamak için, ve daha sonra senkronizasyonu durdurmak için. Efektler zaman içinde değişen sahne ve durumlara bağlıysa bu döngü birden çok kez gerçekleşebilir. React, Efekt'inizin bağımlılıklarını doğru belirtip belirtmediğinizi kontrol etmek için bir linter kuralı sağlar. Bu, Efektinizin en son props ve state ile senkronize olmasını sağlar.
 
 </Intro>
 
 <YouWillLearn>
 
-- Bir Effect’lerin yaşam döngüsü bir bileşenin yaşam döngüsünden nasıl farklıdır
-- Her bir Effect tek başına nasıl düşünülebilir
-- Effect ne zaman ve neden yeniden senkronize edilmesi gerektiği
-- Effect bağımlılıkları nasıl belirlenir?
+  Efektlerin yaşam döngüsü bir bileşenin yaşam döngüsünden nasıl farklıdır
+- Her bir Efekt tek başına nasıl düşünülebilir
+- Efekt ne zaman ve neden yeniden senkronize edilmesi gerektiği
+- Efekt bağımlılıkları nasıl belirlenir?
 - Bir değerin reaktif olması ne anlama gelir
 - Boş bir bağımlılık dizisi ne anlama gelir?
 - React, bir linter ile bağımlılıklarınızın doğru olduğunu nasıl doğrular
