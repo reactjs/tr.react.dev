@@ -1,23 +1,23 @@
 ---
-title: 'Lifecycle of Reactive Effects'
+title: 'Reaktif Effects Yaşam Döngüsü'
 ---
 
 <Intro>
 
-Effects have a different lifecycle from components. Components may mount, update, or unmount. An Effect can only do two things: to start synchronizing something, and later to stop synchronizing it. This cycle can happen multiple times if your Effect depends on props and state that change over time. React provides a linter rule to check that you've specified your Effect's dependencies correctly. This keeps your Effect synchronized to the latest props and state.
+Effects bileşenlerden farklı bir yaşam döngüsü vardır. Bileşenler takılabilir, güncellenebilir veya çıkarılabilir. Bir Effects sadece iki şey yapabilir: bir şeyi senkronize etmeye başlamak için, ve daha sonra senkronizasyonu durdurmak için. Effects zaman içinde değişen sahne ve durumlara bağlıysa bu döngü birden çok kez gerçekleşebilir. React, Effect'inizin bağımlılıklarını doğru belirtip belirtmediğinizi kontrol etmek için bir linter kuralı sağlar. Bu, Efektinizin en son props ve state ile senkronize olmasını sağlar.
 
 </Intro>
 
 <YouWillLearn>
 
-- How an Effect's lifecycle is different from a component's lifecycle
-- How to think about each individual Effect in isolation
-- When your Effect needs to re-synchronize, and why
-- How your Effect's dependencies are determined
-- What it means for a value to be reactive
-- What an empty dependency array means
-- How React verifies your dependencies are correct with a linter
-- What to do when you disagree with the linter
+- Bir Effect’lerin yaşam döngüsü bir bileşenin yaşam döngüsünden nasıl farklıdır
+- Her bir Effect tek başına nasıl düşünülebilir
+- Effect ne zaman ve neden yeniden senkronize edilmesi gerektiği
+- Effect bağımlılıkları nasıl belirlenir?
+- Bir değerin reaktif olması ne anlama gelir
+- Boş bir bağımlılık dizisi ne anlama gelir?
+- React, bir linter ile bağımlılıklarınızın doğru olduğunu nasıl doğrular
+- Linter ile aynı fikirde olmadığınızda ne yapmalısınız
 
 </YouWillLearn>
 
