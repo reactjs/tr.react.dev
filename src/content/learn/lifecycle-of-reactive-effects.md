@@ -129,7 +129,7 @@ Bu noktada, React'in iki şey yapmasını istersiniz:
 
 **Neyse ki, React'e bunların her ikisini de nasıl yapacağını zaten öğrettiniz.** Efektinizin gövdesi senkronizasyonun nasıl başlatılacağını ve temizleme fonksiyonunuz da senkronizasyonun nasıl durdurulacağını belirtir. React'in şimdi yapması gereken tek şey, bunları doğru sırada ve doğru prop ve state ile çağırmaktır. Bunun tam olarak nasıl gerçekleştiğini görelim.
 
-### React Etkinizi Nasıl Yeniden Senkronize Eder? {/*how-react-re-synchronizes-your-effect*/}
+### React Efektinizi Nasıl Yeniden Senkronize Eder? {/*how-react-re-synchronizes-your-effect*/}
 
 Hatırlayın, `ChatRoom` bileşeniniz `roomId` özelliği için yeni bir değer aldı. Eskiden `"general"` idi ve şimdi `"travel"` oldu. React'in sizi farklı bir odaya yeniden bağlamak için Efektinizi yeniden senkronize etmesi gerekiyor.
 
@@ -331,7 +331,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Ancak daha sonra bu Efekte bağlantıyı yeniden kurması gereken başka bir bağımlılık eklediğinizi düşünün. Bu Etki yeniden senkronize olursa, aynı oda için `logVisit(roomId)` çağrısı da yapacaktır, ki bunu istememiştiniz. Ziyaretin günlüğe kaydedilmesi **bağlantıdan ayrı bir süreçtir**. Bunları iki ayrı Efekt olarak yazın:
+Ancak daha sonra bu Efekte bağlantıyı yeniden kurması gereken başka bir bağımlılık eklediğinizi düşünün. Bu Efekt yeniden senkronize olursa, aynı oda için `logVisit(roomId)` çağrısı da yapacaktır, ki bunu istememiştiniz. Ziyaretin günlüğe kaydedilmesi **bağlantıdan ayrı bir süreçtir**. Bunları iki ayrı Efekt olarak yazın:
 
 ```js {2-4}
 function ChatRoom({ roomId }) {
@@ -383,7 +383,7 @@ function ChatRoom({ roomId }) { // Prop'ların zaman içinde değişimi
   const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // State zaman içinde değişebilir
 
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // Etkiniz prop'ları ve state okur
+    const connection = createConnection(serverUrl, roomId); // Efektin prop'ları ve state okur
     connection.connect();
     return () => {
       connection.disconnect();
@@ -493,7 +493,7 @@ function ChatRoom() {
 
 Artık Efektinizin kodu *hiçbir* reaktif değer kullanmadığından bağımlılıkları boş olabilir (`[]`).
 
-Bileşenin bakış açısından düşünürsek, boş `[]` bağımlılık dizisi, bu Etkinin sohbet odasına yalnızca bileşen bağlandığında bağlandığı ve yalnızca bileşen ayrıldığında bağlantıyı kestiği anlamına gelir. (React'in mantığınızı stres testi için geliştirme sırasında [fazladan bir kez daha senkronize edeceğini](#how-react-verifies-that-your-effect-can-re-synchronize) unutmayın).
+Bileşenin bakış açısından düşünürsek, boş `[]` bağımlılık dizisi, bu Efektin sohbet odasına yalnızca bileşen bağlandığında bağlandığı ve yalnızca bileşen ayrıldığında bağlantıyı kestiği anlamına gelir. (React'in mantığınızı stres testi için geliştirme sırasında [fazladan bir kez daha senkronize edeceğini](#how-react-verifies-that-your-effect-can-re-synchronize) unutmayın).
 
 
 <Sandpack>
@@ -530,13 +530,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlantı "' + roomId + '" oda ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
     }
   };
 }
@@ -549,52 +549,52 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-However, if you [think from the Effect's perspective,](#thinking-from-the-effects-perspective) you don't need to think about mounting and unmounting at all. What's important is you've specified what your Effect does to start and stop synchronizing. Today, it has no reactive dependencies. But if you ever want the user to change `roomId` or `serverUrl` over time (and they would become reactive), your Effect's code won't change. You will only need to add them to the dependencies.
+Ancak, [Efektin bakış açısından düşünürseniz](#thinking-from-the-effects-perspective) takma ve çıkarma hakkında düşünmenize hiç gerek yoktur. Önemli olan, Efektinizin senkronizasyonu başlatmak ve durdurmak için ne yaptığını belirtmiş olmanızdır. Bugün, hiçbir reaktif bağımlılığı yoktur. Ancak kullanıcının zaman içinde `roomId` veya `serverUrl` değerlerini değiştirmesini isterseniz (ve bunlar reaktif hale gelirse), Efektinizin kodu değişmeyecektir. Sadece bunları bağımlılıklara eklemeniz gerekecektir.
 
-### All variables declared in the component body are reactive {/*all-variables-declared-in-the-component-body-are-reactive*/}
+### Bileşen gövdesinde bildirilen tüm değişkenler reaktiftir {/*all-variables-declared-in-the-component-body-are-reactive*/}
 
-Props and state aren't the only reactive values. Values that you calculate from them are also reactive. If the props or state change, your component will re-render, and the values calculated from them will also change. This is why all variables from the component body used by the Effect should be in the Effect dependency list.
+Tek reaktif değerler prop'lar ve state değildir. Bunlardan hesapladığınız değerler de reaktiftir. Prop'lar veya state değişirse bileşeniniz yeniden render edilir ve bunlardan hesaplanan değerler de değişir. Bu nedenle, Efekt tarafından kullanılan bileşen gövdesindeki tüm değişkenler Efekt bağımlılık listesinde olmalıdır.
 
-Let's say that the user can pick a chat server in the dropdown, but they can also configure a default server in settings. Suppose you've already put the settings state in a [context](/learn/scaling-up-with-reducer-and-context) so you read the `settings` from that context. Now you calculate the `serverUrl` based on the selected server from props and the default server:
+Diyelim ki kullanıcı açılır menüden bir sohbet sunucusu seçebiliyor, ancak ayarlardan varsayılan bir sunucu da yapılandırabiliyor. Ayarlar durumunu zaten bir [context](/learn/scaling-up-with-reducer-and-context) içine koyduğunuzu ve böylece `ayarlar`i bu bağlamdan okuduğunuzu varsayalım. Şimdi `serverUrl`yi props ve varsayılan sunucudan seçilen sunucuya göre hesaplarsınız:
 
 ```js {3,5,10}
-function ChatRoom({ roomId, selectedServerUrl }) { // roomId is reactive
-  const settings = useContext(SettingsContext); // settings is reactive
-  const serverUrl = selectedServerUrl ?? settings.defaultServerUrl; // serverUrl is reactive
+function ChatRoom({ roomId, selectedServerUrl }) { // roomId reaktiftir
+  const settings = useContext(SettingsContext); // ayarlar reaktiftir
+  const serverUrl = selectedServerUrl ?? settings.defaultServerUrl; // serverUrl reaktiftir
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // Your Effect reads roomId and serverUrl
+    const connection = createConnection(serverUrl, roomId); // Efektiniz roomId ve serverUrl değerlerini okur
     connection.connect();
     return () => {
       connection.disconnect();
     };
-  }, [roomId, serverUrl]); // So it needs to re-synchronize when either of them changes!
+  }, [roomId, serverUrl]); // Bu yüzden bunlardan herhangi biri değiştiğinde yeniden senkronize edilmesi gerekir!
   // ...
 }
 ```
 
-In this example, `serverUrl` is not a prop or a state variable. It's a regular variable that you calculate during rendering. But it's calculated during rendering, so it can change due to a re-render. This is why it's reactive.
+Bu örnekte, `serverUrl` bir prop veya state değişkeni değildir. Render sırasında hesapladığınız normal bir değişkendir. Ancak render sırasında hesaplanır, bu nedenle yeniden render nedeniyle değişebilir. Bu yüzden reaktiftir.
 
-**All values inside the component (including props, state, and variables in your component's body) are reactive. Any reactive value can change on a re-render, so you need to include reactive values as Effect's dependencies.**
+**Bileşen içindeki tüm değerler (prop'lar, durum ve bileşeninizin gövdesindeki değişkenler dahil) reaktiftir. Herhangi bir reaktif değer yeniden işlendiğinde değişebilir, bu nedenle reaktif değerleri Effect'in bağımlılıkları olarak eklemeniz gerekir.**
 
-In other words, Effects "react" to all values from the component body.
+Başka bir deyişle, Efektler bileşen gövdesindeki tüm değerlere "tepki" verir.
 
 <DeepDive>
 
-#### Can global or mutable values be dependencies? {/*can-global-or-mutable-values-be-dependencies*/}
+#### Global veya değiştirilebilir değerler bağımlılık olabilir mi? {/*can-global-or-mutable-values-be-dependencies*/}
 
-Mutable values (including global variables) aren't reactive.
+Değiştirilebilir değerler (global değişkenler dahil) reaktif değildir.
 
-**A mutable value like [`location.pathname`](https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname) can't be a dependency.** It's mutable, so it can change at any time completely outside of the React rendering data flow. Changing it wouldn't trigger a re-render of your component. Therefore, even if you specified it in the dependencies, React *wouldn't know* to re-synchronize the Effect when it changes. This also breaks the rules of React because reading mutable data during rendering (which is when you calculate the dependencies) breaks [purity of rendering.](/learn/keeping-components-pure) Instead, you should read and subscribe to an external mutable value with [`useSyncExternalStore`.](/learn/you-might-not-need-an-effect#subscribing-to-an-external-store)
+**[`location.pathname`](https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname) gibi değişken bir değer bağımlılık olamaz.** Değişkendir, bu nedenle React render veri akışının tamamen dışında herhangi bir zamanda değişebilir. Değiştirilmesi bileşeninizin yeniden render edilmesini tetiklemez. Bu nedenle, bağımlılıklarda belirtmiş olsanız bile, React *değiştiğinde Efekti yeniden senkronize edeceğini bilemez*. Bu aynı zamanda React'in kurallarını da ihlal eder, çünkü render sırasında (bağımlılıkları hesapladığınız zaman) değişebilir verileri okumak [purity of rendering.](/learn/keeping-components-pure) Bunun yerine, [`useSyncExternalStore'](/learn/you-might-not-need-an-effect#subscribing-to-an-external-store) ile harici bir değişebilir değeri okumalı ve abone olmalısınız.
 
-**A mutable value like [`ref.current`](/reference/react/useRef#reference) or things you read from it also can't be a dependency.** The ref object returned by `useRef` itself can be a dependency, but its `current` property is intentionally mutable. It lets you [keep track of something without triggering a re-render.](/learn/referencing-values-with-refs) But since changing it doesn't trigger a re-render, it's not a reactive value, and React won't know to re-run your Effect when it changes.
+**[`ref.current`](/reference/react/useRef#reference) gibi değiştirilebilir bir değer veya ondan okuduğunuz şeyler de bir bağımlılık olamaz.** `useRef` tarafından döndürülen ref nesnesinin kendisi bir bağımlılık olabilir, ancak `current` özelliği kasıtlı olarak değiştirilebilir. [Yeniden oluşturmayı tetiklemeden bir şeyi takip etmenizi sağlar](/learn/referencing-values-with-refs) Ancak onu değiştirmek yeniden oluşturmayı tetiklemediğinden, reaktif bir değer değildir ve React, değiştiğinde Efektinizi yeniden çalıştırmayı bilmez.
 
-As you'll learn below on this page, a linter will check for these issues automatically.
+Bu sayfada aşağıda öğreneceğiniz gibi, bir linter bu sorunları otomatik olarak kontrol edecektir.
 
 </DeepDive>
 
-### React verifies that you specified every reactive value as a dependency {/*react-verifies-that-you-specified-every-reactive-value-as-a-dependency*/}
+### React, her reaktif değeri bir bağımlılık olarak belirttiğinizi doğrular {/*react-verifies-that-you-specified-every-reactive-value-as-a-dependency*/}
 
-If your linter is [configured for React,](/learn/editor-setup#linting) it will check that every reactive value used by your Effect's code is declared as its dependency. For example, this is a lint error because both `roomId` and `serverUrl` are reactive:
+Eğer linter'ınız [React için yapılandırılmışsa,](/learn/editor-setup#linting) Effect'inizin kodu tarafından kullanılan her reaktif değerin bağımlılığı olarak bildirilip bildirilmediğini kontrol edecektir. Örneğin, bu bir lint hatasıdır çünkü hem `roomId` hem de `serverUrl` reaktiftir:
 
 <Sandpack>
 
@@ -602,14 +602,14 @@ If your linter is [configured for React,](/learn/editor-setup#linting) it will c
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
-function ChatRoom({ roomId }) { // roomId is reactive
-  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // serverUrl is reactive
+function ChatRoom({ roomId }) { // roomId reaktiftir
+  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // serverUrl reaktiftir
 
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // <-- Something's wrong here!
+  }, []); // <-- Burada bir sorun var!
 
   return (
     <>
@@ -620,24 +620,24 @@ function ChatRoom({ roomId }) { // roomId is reactive
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
@@ -649,13 +649,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlanmak "' + roomId + '" room at ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" room at ' + serverUrl);
     }
   };
 }
@@ -668,41 +668,41 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-This may look like a React error, but really React is pointing out a bug in your code. Both `roomId` and `serverUrl` may change over time, but you're forgetting to re-synchronize your Effect when they change. You will remain connected to the initial `roomId` and `serverUrl` even after the user picks different values in the UI.
+Bu bir React hatası gibi görünebilir, ancak aslında React kodunuzdaki bir hataya işaret ediyor. Hem `roomId` hem de `serverUrl` zaman içinde değişebilir, ancak bunlar değiştiğinde Efektinizi yeniden senkronize etmeyi unutuyorsunuz. Kullanıcı kullanıcı arayüzünde farklı değerler seçtikten sonra bile ilk `roomId` ve `serverUrl` değerlerine bağlı kalacaksınız.
 
-To fix the bug, follow the linter's suggestion to specify `roomId` and `serverUrl` as dependencies of your Effect:
+Hatayı düzeltmek için, `roomId` ve `serverUrl` değerlerini Efektinizin bağımlılıkları olarak belirtmek için linter'ın önerisini izleyin:
 
 ```js {9}
-function ChatRoom({ roomId }) { // roomId is reactive
-  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // serverUrl is reactive
+function ChatRoom({ roomId }) { // roomId reaktiftir
+  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // serverUrl reaktiftir
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => {
       connection.disconnect();
     };
-  }, [serverUrl, roomId]); // ✅ All dependencies declared
+  }, [serverUrl, roomId]); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 }
 ```
 
-Try this fix in the sandbox above. Verify that the linter error is gone, and the chat re-connects when needed.
+Bu düzeltmeyi yukarıdaki sandbox'ta deneyin. Linter hatasının ortadan kalktığını ve sohbetin gerektiğinde yeniden bağlandığını doğrulayın.
 
 <Note>
 
-In some cases, React *knows* that a value never changes even though it's declared inside the component. For example, the [`set` function](/reference/react/useState#setstate) returned from `useState` and the ref object returned by [`useRef`](/reference/react/useRef) are *stable*--they are guaranteed to not change on a re-render. Stable values aren't reactive, so you may omit them from the list. Including them is allowed: they won't change, so it doesn't matter.
+Bazı durumlarda React, bir değerin bileşen içinde bildirilmiş olmasına rağmen asla değişmediğini *bilmektedir*. Örneğin, `useState`'den döndürülen [`set` fonksiyonu](/reference/react/useState#setstate) ve [`useRef`](/reference/react/useRef) tarafından döndürülen ref nesnesi *stable*'dır - yeniden oluşturmada değişmeyecekleri garanti edilir. Stabil değerler reaktif değildir, bu yüzden onları listeden çıkarabilirsiniz. Bunları dahil etmeye izin verilir: değişmeyeceklerdir, bu yüzden önemli değildir.
 
 </Note>
 
-### What to do when you don't want to re-synchronize {/*what-to-do-when-you-dont-want-to-re-synchronize*/}
+### Yeniden senkronize etmek istemediğinizde ne yapmalısınız? {/*what-to-do-when-you-dont-want-to-re-synchronize*/}
 
-In the previous example, you've fixed the lint error by listing `roomId` and `serverUrl` as dependencies.
+Önceki örnekte, `roomId` ve `serverUrl` değerlerini bağımlılık olarak listeleyerek lint hatasını düzelttiniz.
 
-**However, you could instead "prove" to the linter that these values aren't reactive values,** i.e. that they *can't* change as a result of a re-render. For example, if `serverUrl` and `roomId` don't depend on rendering and always have the same values, you can move them outside the component. Now they don't need to be dependencies:
+**Bununla birlikte, bunun yerine bu değerlerin reaktif değerler olmadığını, yani yeniden oluşturma sonucunda *değişemeyeceklerini** linter'a "kanıtlayabilirsiniz". Örneğin, `serverUrl` ve `roomId` render işlemine bağlı değilse ve her zaman aynı değerlere sahipse, bunları bileşenin dışına taşıyabilirsiniz. Artık bağımlılık olmalarına gerek yoktur:
 
 ```js {1,2,11}
-const serverUrl = 'https://localhost:1234'; // serverUrl is not reactive
-const roomId = 'general'; // roomId is not reactive
+const serverUrl = 'https://localhost:1234'; // serverUrl reaktif değil
+const roomId = 'genel'; // roomId reaktif değil
 
 function ChatRoom() {
   useEffect(() => {
@@ -711,80 +711,80 @@ function ChatRoom() {
     return () => {
       connection.disconnect();
     };
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 }
 ```
 
-You can also move them *inside the Effect.* They aren't calculated during rendering, so they're not reactive:
+Bunları *Efektin içinde* de taşıyabilirsiniz.* Render sırasında hesaplanmazlar, bu nedenle reaktif değildirler:
 
 ```js {3,4,10}
 function ChatRoom() {
   useEffect(() => {
-    const serverUrl = 'https://localhost:1234'; // serverUrl is not reactive
-    const roomId = 'general'; // roomId is not reactive
+    const serverUrl = 'https://localhost:1234'; // serverUrl reaktif değil
+    const roomId = 'genel'; // roomId reaktif değil
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => {
       connection.disconnect();
     };
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 }
 ```
 
-**Effects are reactive blocks of code.** They re-synchronize when the values you read inside of them change. Unlike event handlers, which only run once per interaction, Effects run whenever synchronization is necessary.
+**Efektler reaktif kod bloklarıdır.** İçlerinde okuduğunuz değerler değiştiğinde yeniden senkronize olurlar. Etkileşim başına yalnızca bir kez çalışan olay işleyicilerin aksine, Efektler senkronizasyon gerektiğinde çalışır.
 
-**You can't "choose" your dependencies.** Your dependencies must include every [reactive value](#all-variables-declared-in-the-component-body-are-reactive) you read in the Effect. The linter enforces this. Sometimes this may lead to problems like infinite loops and to your Effect re-synchronizing too often. Don't fix these problems by suppressing the linter! Here's what to try instead:
+**Bağımlılıklarınızı "seçemezsiniz. "** Bağımlılıklarınız, Efektte okuduğunuz her [reaktif değeri](#all-variables-declared-in-the-component-body-are-reactive) içermelidir. Linter bunu zorunlu kılar. Bazen bu, sonsuz döngüler ve Efektinizin çok sık yeniden senkronize edilmesi gibi sorunlara yol açabilir. Bu sorunları linter'ı bastırarak çözmeyin! İşte bunun yerine deneyeceğiniz şey:
 
-* **Check that your Effect represents an independent synchronization process.** If your Effect doesn't synchronize anything, [it might be unnecessary.](/learn/you-might-not-need-an-effect) If it synchronizes several independent things, [split it up.](#each-effect-represents-a-separate-synchronization-process)
+* **Efektinizin bağımsız bir senkronizasyon sürecini temsil edip etmediğini kontrol edin.** Efektiniz hiçbir şeyi senkronize etmiyorsa, [gereksiz olabilir.](/learn/you-might-not-need-an-effect) Birden fazla bağımsız şeyi senkronize ediyorsa, [bölün.](#each-effect-represents-a-separate-synchronization-process)
 
-* **If you want to read the latest value of props or state without "reacting" to it and re-synchronizing the Effect,** you can split your Effect into a reactive part (which you'll keep in the Effect) and a non-reactive part (which you'll extract into something called an _Effect Event_). [Read about separating Events from Effects.](/learn/separating-events-from-effects)
+* **Eğer prop'ların veya state'in en son değerini ona "tepki vermeden" ve Efekti yeniden senkronize etmeden okumak istiyorsanız,** Efektinizi reaktif bir parçaya (Efekt içinde tutacağınız) ve reaktif olmayan bir parçaya (Efekt Olayı_ adı verilen bir şeye çıkaracağınız) bölebilirsiniz. [Olayları Efektlerden ayırma hakkında bilgi edinin](/learn/separating-events-from-effects)
 
-* **Avoid relying on objects and functions as dependencies.** If you create objects and functions during rendering and then read them from an Effect, they will be different on every render. This will cause your Effect to re-synchronize every time. [Read more about removing unnecessary dependencies from Effects.](/learn/removing-effect-dependencies)
+* **Nesnelere ve işlevlere bağımlılık olarak güvenmekten kaçının** Render sırasında nesneler ve işlevler oluşturur ve ardından bunları bir Efektten okursanız, her renderda farklı olurlar. Bu, Efektinizin her seferinde yeniden senkronize olmasına neden olur. [Efektlerden gereksiz bağımlılıkları kaldırma hakkında daha fazla bilgi edinin](/learn/removing-effect-dependencies)
 
 <Pitfall>
 
-The linter is your friend, but its powers are limited. The linter only knows when the dependencies are *wrong*. It doesn't know *the best* way to solve each case. If the linter suggests a dependency, but adding it causes a loop, it doesn't mean the linter should be ignored. You need to change the code inside (or outside) the Effect so that that value isn't reactive and doesn't *need* to be a dependency.
+Linter sizin dostunuzdur, ancak yetkileri sınırlıdır. Linter yalnızca bağımlılıkların ne zaman *yanlış* olduğunu bilir. Her bir durumu çözmenin *en iyi* yolunu bilmez. Linter bir bağımlılık öneriyorsa, ancak bunu eklemek bir döngüye neden oluyorsa, bu linter'ın göz ardı edilmesi gerektiği anlamına gelmez. Efektin içindeki (veya dışındaki) kodu değiştirmeniz gerekir, böylece bu değer reaktif olmaz ve bir bağımlılık olmasına *ihtiyaç* kalmaz.
 
-If you have an existing codebase, you might have some Effects that suppress the linter like this:
+Mevcut bir kod tabanınız varsa, bu şekilde linter'ı bastıran bazı Efektleriniz olabilir:
 
 ```js {3-4}
 useEffect(() => {
   // ...
-  // 🔴 Avoid suppressing the linter like this:
+  // 🔴 Linteri bu şekilde bastırmaktan kaçının:
   // eslint-ignore-next-line react-hooks/exhaustive-deps
 }, []);
 ```
 
-On the [next](/learn/separating-events-from-effects) [pages](/learn/removing-effect-dependencies), you'll learn how to fix this code without breaking the rules. It's always worth fixing!
+[Sonraki](/learn/separating-events-from-effects) [sayfalarda](/learn/removing-effect-dependencies), bu kodu kuralları bozmadan nasıl düzelteceğinizi öğreneceksiniz. Her zaman düzeltmeye değer!
 
 </Pitfall>
 
 <Recap>
 
-- Components can mount, update, and unmount.
-- Each Effect has a separate lifecycle from the surrounding component.
-- Each Effect describes a separate synchronization process that can *start* and *stop*.
-- When you write and read Effects, think from each individual Effect's perspective (how to start and stop synchronization) rather than from the component's perspective (how it mounts, updates, or unmounts).
-- Values declared inside the component body are "reactive".
-- Reactive values should re-synchronize the Effect because they can change over time.
-- The linter verifies that all reactive values used inside the Effect are specified as dependencies.
-- All errors flagged by the linter are legitimate. There's always a way to fix the code to not break the rules.
+- Bileşenler takılabilir, güncellenebilir ve çıkarılabilir.
+- Her Efektin çevresindeki bileşenden ayrı bir yaşam döngüsü vardır.
+- Her bir Efekt, *başlatılabilen* ve *durdurulabilen* ayrı bir senkronizasyon sürecini tanımlar.
+- Efektleri yazarken ve okurken, bileşenin bakış açısından (nasıl bağlandığı, güncellendiği veya kaldırıldığı) ziyade her bir Efektin bakış açısından (senkronizasyonun nasıl başlatılacağı ve durdurulacağı) düşünün.
+- Bileşen gövdesi içinde bildirilen değerler "reaktiftir".
+- Reaktif değerler zaman içinde değişebileceğinden Efekti yeniden senkronize etmelidir.
+- Linter, Efekt içinde kullanılan tüm reaktif değerlerin bağımlılık olarak belirtildiğini doğrular.
+- Linter tarafından işaretlenen tüm hatalar meşrudur. Kuralları ihlal etmemek için kodu düzeltmenin her zaman bir yolu vardır.
 
 </Recap>
 
 <Challenges>
 
-#### Fix reconnecting on every keystroke {/*fix-reconnecting-on-every-keystroke*/}
+#### Her tuş vuruşunda yeniden bağlanmayı düzeltme {/*fix-reconnecting-on-every-keystroke*/}
 
-In this example, the `ChatRoom` component connects to the chat room when the component mounts, disconnects when it unmounts, and reconnects when you select a different chat room. This behavior is correct, so you need to keep it working.
+Bu örnekte, `ChatRoom` bileşeni, bileşen bağlandığında sohbet odasına bağlanır, bağlantıyı kestiğinde bağlantıyı keser ve farklı bir sohbet odası seçtiğinizde yeniden bağlanır. Bu davranış doğrudur, bu nedenle çalışmaya devam etmesi gerekir.
 
-However, there is a problem. Whenever you type into the message box input at the bottom, `ChatRoom` *also* reconnects to the chat. (You can notice this by clearing the console and typing into the input.) Fix the issue so that this doesn't happen.
+Ancak, bir sorun var. Alttaki mesaj kutusu girişine her yazdığınızda, `ChatRoom` *ayrıca* sohbete yeniden bağlanır. (Bunu konsolu temizleyerek ve girdiye yazarak fark edebilirsiniz.) Bunun gerçekleşmemesi için sorunu düzeltin.
 
 <Hint>
 
-You might need to add a dependency array for this Effect. What dependencies should be there?
+Bu Efekt için bir bağımlılık dizisi eklemeniz gerekebilir. Orada hangi bağımlılıklar olmalı?
 
 </Hint>
 
@@ -807,7 +807,7 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <input
         value={message}
         onChange={e => setMessage(e.target.value)}
@@ -817,18 +817,18 @@ function ChatRoom({ roomId }) {
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
@@ -840,13 +840,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
     }
   };
 }
@@ -861,7 +861,7 @@ button { margin-left: 10px; }
 
 <Solution>
 
-This Effect didn't have a dependency array at all, so it re-synchronized after every re-render. First, add a dependency array. Then, make sure that every reactive value used by the Effect is specified in the array. For example, `roomId` is reactive (because it's a prop), so it should be included in the array. This ensures that when the user selects a different room, the chat reconnects. On the other hand, `serverUrl` is defined outside the component. This is why it doesn't need to be in the array.
+Bu Efektin bir bağımlılık dizisi yoktu, bu yüzden her yeniden oluşturmadan sonra yeniden senkronize oluyordu. İlk olarak, bir bağımlılık dizisi ekleyin. Ardından, Efekt tarafından kullanılan her reaktif değerin dizide belirtildiğinden emin olun. Örneğin, `roomId` reaktiftir (çünkü bir prop'tur), bu nedenle diziye dahil edilmelidir. Bu, kullanıcı farklı bir oda seçtiğinde sohbetin yeniden bağlanmasını sağlar. Öte yandan, `serverUrl` bileşenin dışında tanımlanır. Bu yüzden dizide olması gerekmez.
 
 <Sandpack>
 
@@ -882,7 +882,7 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <input
         value={message}
         onChange={e => setMessage(e.target.value)}
@@ -892,7 +892,7 @@ function ChatRoom({ roomId }) {
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
@@ -901,9 +901,9 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
@@ -915,13 +915,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
     }
   };
 }
@@ -936,15 +936,15 @@ button { margin-left: 10px; }
 
 </Solution>
 
-#### Switch synchronization on and off {/*switch-synchronization-on-and-off*/}
+#### Senkronizasyonu açma ve kapatma {/*switch-synchronization-on-and-off*/}
 
-In this example, an Effect subscribes to the window [`pointermove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointermove_event) event to move a pink dot on the screen. Try hovering over the preview area (or touching the screen if you're on a mobile device), and see how the pink dot follows your movement.
+Bu örnekte, bir Efekt ekranda pembe bir noktayı hareket ettirmek için window [`pointermove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointermove_event) olayına abone olur. Önizleme alanının üzerine gelmeyi deneyin (veya mobil bir cihaz kullanıyorsanız ekrana dokunun) ve pembe noktanın hareketinizi nasıl takip ettiğini görün.
 
-There is also a checkbox. Ticking the checkbox toggles the `canMove` state variable, but this state variable is not used anywhere in the code. Your task is to change the code so that when `canMove` is `false` (the checkbox is ticked off), the dot should stop moving. After you toggle the checkbox back on (and set `canMove` to `true`), the box should follow the movement again. In other words, whether the dot can move or not should stay synchronized to whether the checkbox is checked.
+Ayrıca bir onay kutusu da vardır. Onay kutusunun işaretlenmesi `canMove` durum değişkenini değiştirir, ancak bu durum değişkeni kodun hiçbir yerinde kullanılmaz. Sizin göreviniz kodu, `canMove` `false` olduğunda (onay kutusu işaretlendiğinde) noktanın hareket etmeyi durduracağı şekilde değiştirmektir. Onay kutusunu tekrar açtıktan (ve `canMove` öğesini `true` olarak ayarladıktan) sonra, kutu hareketi tekrar takip etmelidir. Başka bir deyişle, noktanın hareket edip edemeyeceği onay kutusunun işaretli olup olmamasıyla senkronize kalmalıdır.
 
 <Hint>
 
-You can't declare an Effect conditionally. However, the code inside the Effect can use conditions!
+Bir Efekti koşullu olarak bildiremezsiniz. Ancak, Efektin içindeki kod koşulları kullanabilir!
 
 </Hint>
 
@@ -972,7 +972,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)} 
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -1002,7 +1002,7 @@ body {
 
 <Solution>
 
-One solution is to wrap the `setPosition` call into an `if (canMove) { ... }` condition:
+Çözümlerden biri `setPosition` çağrısını bir `if (canMove) { ... }` koşuluna sarmaktır:
 
 <Sandpack>
 
@@ -1030,7 +1030,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)} 
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -1058,7 +1058,7 @@ body {
 
 </Sandpack>
 
-Alternatively, you could wrap the *event subscription* logic into an `if (canMove) { ... }` condition:
+Alternatif olarak, *olay aboneliği* mantığını bir `if (canMove) { ... }` koşuluna sarabilirsiniz:
 
 <Sandpack>
 
