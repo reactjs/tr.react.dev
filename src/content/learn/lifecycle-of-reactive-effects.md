@@ -469,11 +469,11 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Whenever you change a reactive value like `roomId` or `serverUrl`, the Effect re-connects to the chat server.
+`roomId` veya `serverUrl` gibi reaktif bir değeri her değiştirdiğinizde, Efekt sohbet sunucusuna yeniden bağlanır.
 
-### What an Effect with empty dependencies means {/*what-an-effect-with-empty-dependencies-means*/}
+### Boş bağımlılıklara sahip bir Efekt ne anlama gelir {/*what-an-effect-with-empty-dependencies-means*/}
 
-What happens if you move both `serverUrl` and `roomId` outside the component?
+Hem `serverUrl` hem de `roomId` öğelerini bileşenin dışına taşırsanız ne olur?
 
 ```js {1,2}
 const serverUrl = 'https://localhost:1234';
@@ -486,14 +486,14 @@ function ChatRoom() {
     return () => {
       connection.disconnect();
     };
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Tüm bağımlılıklar beyan edildi
   // ...
 }
 ```
 
-Now your Effect's code does not use *any* reactive values, so its dependencies can be empty (`[]`).
+Artık Efektinizin kodu *hiçbir* reaktif değer kullanmadığından bağımlılıkları boş olabilir (`[]`).
 
-Thinking from the component's perspective, the empty `[]` dependency array means this Effect connects to the chat room only when the component mounts, and disconnects only when the component unmounts. (Keep in mind that React would still [re-synchronize it an extra time](#how-react-verifies-that-your-effect-can-re-synchronize) in development to stress-test your logic.)
+Bileşenin bakış açısından düşünürsek, boş `[]` bağımlılık dizisi, bu Etkinin sohbet odasına yalnızca bileşen bağlandığında bağlandığı ve yalnızca bileşen ayrıldığında bağlantıyı kestiği anlamına gelir. (React'in mantığınızı stres testi için geliştirme sırasında [fazladan bir kez daha senkronize edeceğini](#how-react-verifies-that-your-effect-can-re-synchronize) unutmayın).
 
 
 <Sandpack>
@@ -511,7 +511,7 @@ function ChatRoom() {
     connection.connect();
     return () => connection.disconnect();
   }, []);
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 
 export default function App() {
@@ -519,7 +519,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom />}
