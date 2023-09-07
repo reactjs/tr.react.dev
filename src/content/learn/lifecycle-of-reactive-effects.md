@@ -131,9 +131,9 @@ Bu noktada, React'in iki şey yapmasını istersiniz:
 
 ### React Efektinizi Nasıl Yeniden Senkronize Eder? {/*how-react-re-synchronizes-your-effect*/}
 
-Hatırlayın, `ChatRoom` bileşeniniz `roomId` özelliği için yeni bir değer aldı. Eskiden `"general"` idi ve şimdi `"travel"` oldu. React'in sizi farklı bir odaya yeniden bağlamak için Efektinizi yeniden senkronize etmesi gerekiyor.
+Hatırlayın, `ChatRoom` bileşeniniz `roomId` özelliği için yeni bir değer aldı. Eskiden `"genel"` idi ve şimdi `"seyahat"` oldu. React'in sizi farklı bir odaya yeniden bağlamak için Efektinizi yeniden senkronize etmesi gerekiyor.
 
-React, **senkronizasyonu durdurmak için,** Efektinizin `"general"` odasına bağlandıktan sonra döndürdüğü temizleme fonksiyonunu çağıracaktır. roomId` `"general"` olduğu için, temizleme fonksiyonu `"general"` odasıyla bağlantıyı keser:
+React, **senkronizasyonu durdurmak için,** Efektinizin `"genel"` odasına bağlandıktan sonra döndürdüğü temizleme fonksiyonunu çağıracaktır. roomId` `"genel"` olduğu için, temizleme fonksiyonu `"genel"` odasıyla bağlantıyı keser:
 
 ```js {6}
 function ChatRoom({ roomId /* "genel" */ }) {
@@ -169,14 +169,14 @@ Son olarak, kullanıcı farklı bir ekrana geçtiğinde, `ChatRoom` bağlantıy�
 1. `ChatRoom` `roomId` `"genel"` olarak ayarlanmış şekilde monte edildi
 1. `ChatRoom`, `roomId` değeri `"seyahat"` olarak ayarlanarak güncellendi
 1. `ChatRoom`, `roomId` değeri `"müzik"` olarak ayarlanarak güncellendi
-1. ChatRoom` bağlanmamış
+1. `ChatRoom` bağlanmamış
 
 Bileşenin yaşam döngüsündeki bu noktaların her biri sırasında, Efektiniz farklı şeyler yaptı:
 
 1. Efektiniz `"genel"` odaya bağlandı
 1. Efektinizin `"genel"` oda ile bağlantısı kesildi ve `"seyahat"` odasına bağlandı
-1. Efektinizin "seyahat" odasıyla bağlantısı kesildi ve "müzik" odasına bağlandı
-1. Efektinizin "müzik" odasıyla bağlantısı kesildi
+1. Efektinizin `"seyahat"` odasıyla bağlantısı kesildi ve `"müzik"` odasına bağlandı
+1. Efektinizin `"müzik"` odasıyla bağlantısı kesildi
 
 Şimdi olanları bir de Efektin kendi perspektifinden düşünelim:
 
@@ -206,7 +206,7 @@ Bu size, JSX oluşturan işleme mantığını yazarken bir bileşenin monte edil
 
 ### React, Efektinizin yeniden senkronize olabileceğini nasıl doğrular {/*how-react-verifies-that-your-effect-can-re-synchronize*/}
 
-İşte oynayabileceğiniz canlı bir örnek. ChatRoom bileşenini bağlamak için "Sohbeti aç" düğmesine basın:
+İşte oynayabileceğiniz canlı bir örnek. `ChatRoom` bileşenini bağlamak için "Sohbeti aç" düğmesine basın:
 
 <Sandpack>
 
@@ -253,7 +253,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
       console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
@@ -303,11 +303,11 @@ function ChatRoom({ roomId }) { // roomId özelliği zaman içinde değişebilir
   // ...
 ```
 
-Here's how this works:
+Şöyle çalışıyor:
 
-1. You knew `roomId` is a prop, which means it can change over time.
-2. You knew that your Effect reads `roomId` (so its logic depends on a value that may change later).
-3. This is why you specified it as your Effect's dependency (so that it re-synchronizes when `roomId` changes).
+1. RoomId`nin bir prop olduğunu biliyordunuz, bu da zaman içinde değişebileceği anlamına gelir.
+2. Efektinizin `roomId`yi okuduğunu biliyordunuz (bu nedenle mantığı daha sonra değişebilecek bir değere bağlıdır).
+3. Bu yüzden onu Efektinizin bağımlılığı olarak belirlediniz (böylece `roomId` değiştiğinde yeniden senkronize olur).
 
 Bileşeniniz yeniden oluşturulduktan sonra React her seferinde geçtiğiniz bağımlılıklar dizisine bakacaktır. Dizideki değerlerden herhangi biri, önceki render sırasında geçtiğiniz aynı noktadaki değerden farklıysa, React Efektinizi yeniden senkronize edecektir.
 
@@ -415,7 +415,7 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:{' '}
+        Sunucu URL'si:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
@@ -436,7 +436,7 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="genel">general</option>
+          <option value="genel">genel</option>
           <option value="seyahat">seyahat</option>
           <option value="müzik">müzik</option>
         </select>
@@ -477,7 +477,7 @@ Hem `serverUrl` hem de `roomId` öğelerini bileşenin dışına taşırsanız n
 
 ```js {1,2}
 const serverUrl = 'https://localhost:1234';
-const roomId = 'general';
+const roomId = 'genel';
 
 function ChatRoom() {
   useEffect(() => {
@@ -503,7 +503,7 @@ import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
 const serverUrl = 'https://localhost:1234';
-const roomId = 'general';
+const roomId = 'genel';
 
 function ChatRoom() {
   useEffect(() => {
@@ -614,7 +614,7 @@ function ChatRoom({ roomId }) { // roomId reaktiftir
   return (
     <>
       <label>
-        Server URL:{' '}
+        Sunucu URL'si:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
@@ -896,7 +896,7 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
@@ -1339,7 +1339,7 @@ import {
 } from './chat.js';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isEncrypted, setIsEncrypted] = useState(false);
   return (
     <>
@@ -1533,7 +1533,7 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
@@ -1649,9 +1649,9 @@ export default function Page() {
     let ignore = false;
     fetchData('/planets').then(result => {
       if (!ignore) {
-        console.log('Fetched a list of planets.');
+        console.log('Gezegenlerin bir listesini getirdi.');
         setPlanetList(result);
-        setPlanetId(result[0].id); // Select the first planet
+        setPlanetId(result[0].id); // İlk gezegeni seçin
       }
     });
     return () => {
@@ -1662,7 +1662,7 @@ export default function Page() {
   return (
     <>
       <label>
-        Pick a planet:{' '}
+        Bir gezegen seçin:{' '}
         <select value={planetId} onChange={e => {
           setPlanetId(e.target.value);
         }}>
@@ -1672,7 +1672,7 @@ export default function Page() {
         </select>
       </label>
       <label>
-        Pick a place:{' '}
+        Bir yer seçin:{' '}
         <select value={placeId} onChange={e => {
           setPlaceId(e.target.value);
         }}>
@@ -1682,7 +1682,7 @@ export default function Page() {
         </select>
       </label>
       <hr />
-      <p>You are going to: {placeId || '???'} on {planetId || '???'} </p>
+      <p>Şuraya gidiyorsun: {placeId || '???'} on {planetId || '???'} </p>
     </>
   );
 }
@@ -1698,7 +1698,7 @@ export function fetchData(url) {
       throw Error('Expected URL like "/planets/earth/places". Received: "' + url + '".');
     }
     return fetchPlaces(match[1]);
-  } else throw Error('Expected URL like "/planets" or "/planets/earth/places". Received: "' + url + '".');
+  } else throw Error('Beklenen URL şöyle "/planets" or "/planets/earth/places". Alındı: "' + url + '".');
 }
 
 async function fetchPlanets() {
@@ -1706,10 +1706,10 @@ async function fetchPlanets() {
     setTimeout(() => {
       resolve([{
         id: 'earth',
-        name: 'Earth'
+        name: 'Dünya'
       }, {
         id: 'venus',
-        name: 'Venus'
+        name: 'Venüs'
       }, {
         id: 'mars',
         name: 'Mars'        
@@ -1721,8 +1721,8 @@ async function fetchPlanets() {
 async function fetchPlaces(planetId) {
   if (typeof planetId !== 'string') {
     throw Error(
-      'fetchPlaces(planetId) expects a string argument. ' +
-      'Instead received: ' + planetId + '.'
+      'fetchPlaces(planetId) bir dize bağımsız değişkeni bekler. ' +
+      'Bunun yerine alındı: ' + planetId + '.'
     );
   }
   return new Promise(resolve => {
@@ -1760,7 +1760,7 @@ async function fetchPlaces(planetId) {
           id: 'vishniac',
           name: 'Vishniac'
         }]);
-      } else throw Error('Unknown planet ID: ' + planetId);
+      } else throw Error('Bilinmeyen gezegen kimliği: ' + planetId);
     }, 1000);
   });
 }
@@ -1774,12 +1774,12 @@ label { display: block; margin-bottom: 10px; }
 
 <Solution>
 
-There are two independent synchronization processes:
+İki bağımsız senkronizasyon işlemi vardır:
 
-- The first select box is synchronized to the remote list of planets.
-- The second select box is synchronized to the remote list of places for the current `planetId`.
+- İlk seçim kutusu uzaktaki gezegenler listesine senkronize edilir.
+- İkinci seçim kutusu, geçerli `planetId` için uzaktaki yerler listesine senkronize edilir.
 
-This is why it makes sense to describe them as two separate Effects. Here's an example of how you could do this:
+Bu nedenle bunları iki ayrı Efekt olarak tanımlamak mantıklıdır. İşte bunu nasıl yapabileceğinize dair bir örnek:
 
 <Sandpack>
 
@@ -1800,7 +1800,7 @@ export default function Page() {
       if (!ignore) {
         console.log('Fetched a list of planets.');
         setPlanetList(result);
-        setPlanetId(result[0].id); // Select the first planet
+        setPlanetId(result[0].id); // İlk gezegeni seçin
       }
     });
     return () => {
@@ -1810,16 +1810,16 @@ export default function Page() {
 
   useEffect(() => {
     if (planetId === '') {
-      // Nothing is selected in the first box yet
+      // İlk kutuda henüz hiçbir şey seçili değil
       return;
     }
 
     let ignore = false;
     fetchData('/planets/' + planetId + '/places').then(result => {
       if (!ignore) {
-        console.log('Fetched a list of places on "' + planetId + '".');
+        console.log('Üzerinde yerlerin bir listesini getirdi "' + planetId + '".');
         setPlaceList(result);
-        setPlaceId(result[0].id); // Select the first place
+        setPlaceId(result[0].id); // İlk yeri seçin
       }
     });
     return () => {
@@ -1830,7 +1830,7 @@ export default function Page() {
   return (
     <>
       <label>
-        Pick a planet:{' '}
+        Bir gezegen seçin:{' '}
         <select value={planetId} onChange={e => {
           setPlanetId(e.target.value);
         }}>
@@ -1840,7 +1840,7 @@ export default function Page() {
         </select>
       </label>
       <label>
-        Pick a place:{' '}
+        Bir yer seçin:{' '}
         <select value={placeId} onChange={e => {
           setPlaceId(e.target.value);
         }}>
@@ -1850,7 +1850,7 @@ export default function Page() {
         </select>
       </label>
       <hr />
-      <p>You are going to: {placeId || '???'} on {planetId || '???'} </p>
+      <p>Sen gidiyorsun: {placeId || '???'} on {planetId || '???'} </p>
     </>
   );
 }
@@ -1863,10 +1863,10 @@ export function fetchData(url) {
   } else if (url.startsWith('/planets/')) {
     const match = url.match(/^\/planets\/([\w-]+)\/places(\/)?$/);
     if (!match || !match[1] || !match[1].length) {
-      throw Error('Expected URL like "/planets/earth/places". Received: "' + url + '".');
+      throw Error('Beklenen URL şöyle "/planets/earth/places". Alındı: "' + url + '".');
     }
     return fetchPlaces(match[1]);
-  } else throw Error('Expected URL like "/planets" or "/planets/earth/places". Received: "' + url + '".');
+  } else throw Error('Beklenen URL şöyle "/planets" or "/planets/earth/places". Alındı: "' + url + '".');
 }
 
 async function fetchPlanets() {
@@ -1874,7 +1874,7 @@ async function fetchPlanets() {
     setTimeout(() => {
       resolve([{
         id: 'earth',
-        name: 'Earth'
+        name: 'Dünya'
       }, {
         id: 'venus',
         name: 'Venus'
@@ -1889,8 +1889,8 @@ async function fetchPlanets() {
 async function fetchPlaces(planetId) {
   if (typeof planetId !== 'string') {
     throw Error(
-      'fetchPlaces(planetId) expects a string argument. ' +
-      'Instead received: ' + planetId + '.'
+      'fetchPlaces(planetId) bir dize bağımsız değişkeni bekler. ' +
+      'Bunun yerine: ' + planetId + '.'
     );
   }
   return new Promise(resolve => {
@@ -1928,7 +1928,7 @@ async function fetchPlaces(planetId) {
           id: 'vishniac',
           name: 'Vishniac'
         }]);
-      } else throw Error('Unknown planet ID: ' + planetId);
+      } else throw Error('Bilinmeyen gezegen kimliği: ' + planetId);
     }, 1000);
   });
 }
@@ -1940,9 +1940,9 @@ label { display: block; margin-bottom: 10px; }
 
 </Sandpack>
 
-This code is a bit repetitive. However, that's not a good reason to combine it into a single Effect! If you did this, you'd have to combine both Effect's dependencies into one list, and then changing the planet would refetch the list of all planets. Effects are not a tool for code reuse.
+Bu kod biraz tekrarlayıcıdır. Ancak, bu tek bir Efektte birleştirmek için iyi bir neden değil! Bunu yapsaydınız, her iki Efektin bağımlılıklarını tek bir listede birleştirmeniz gerekirdi ve ardından gezegeni değiştirmek tüm gezegenlerin listesini yeniden getirirdi. Efektler kodun yeniden kullanımı için bir araç değildir.
 
-Instead, to reduce repetition, you can extract some logic into a custom Hook like `useSelectOptions` below:
+Bunun yerine, tekrarı azaltmak için, bazı mantıkları aşağıdaki `useSelectOptions` gibi özel bir Kancaya çıkarabilirsiniz:
 
 <Sandpack>
 
@@ -1966,7 +1966,7 @@ export default function Page() {
   return (
     <>
       <label>
-        Pick a planet:{' '}
+        Bir gezegen seçin:{' '}
         <select value={planetId} onChange={e => {
           setPlanetId(e.target.value);
         }}>
@@ -1976,7 +1976,7 @@ export default function Page() {
         </select>
       </label>
       <label>
-        Pick a place:{' '}
+        Bir yer seçin:{' '}
         <select value={placeId} onChange={e => {
           setPlaceId(e.target.value);
         }}>
@@ -1986,7 +1986,7 @@ export default function Page() {
         </select>
       </label>
       <hr />
-      <p>You are going to: {placeId || '...'} on {planetId || '...'} </p>
+      <p>Sen gidiyorsun: {placeId || '...'} on {planetId || '...'} </p>
     </>
   );
 }
@@ -2026,10 +2026,10 @@ export function fetchData(url) {
   } else if (url.startsWith('/planets/')) {
     const match = url.match(/^\/planets\/([\w-]+)\/places(\/)?$/);
     if (!match || !match[1] || !match[1].length) {
-      throw Error('Expected URL like "/planets/earth/places". Received: "' + url + '".');
+      throw Error('Beklenen URL şöyle "/planets/earth/places". Alındı: "' + url + '".');
     }
     return fetchPlaces(match[1]);
-  } else throw Error('Expected URL like "/planets" or "/planets/earth/places". Received: "' + url + '".');
+  } else throw Error('Beklenen URL şöyle "/planets" or "/planets/earth/places". Alındı: "' + url + '".');
 }
 
 async function fetchPlanets() {
@@ -2037,7 +2037,7 @@ async function fetchPlanets() {
     setTimeout(() => {
       resolve([{
         id: 'earth',
-        name: 'Earth'
+        name: 'Dünya'
       }, {
         id: 'venus',
         name: 'Venus'
@@ -2052,8 +2052,8 @@ async function fetchPlanets() {
 async function fetchPlaces(planetId) {
   if (typeof planetId !== 'string') {
     throw Error(
-      'fetchPlaces(planetId) expects a string argument. ' +
-      'Instead received: ' + planetId + '.'
+      'fetchPlaces(planetId) bir dize bağımsız değişkeni bekler. ' +
+      'Bunun yerine alındı: ' + planetId + '.'
     );
   }
   return new Promise(resolve => {
@@ -2103,7 +2103,7 @@ label { display: block; margin-bottom: 10px; }
 
 </Sandpack>
 
-Check the `useSelectOptions.js` tab in the sandbox to see how it works. Ideally, most Effects in your application should eventually be replaced by custom Hooks, whether written by you or by the community. Custom Hooks hide the synchronization logic, so the calling component doesn't know about the Effect. As you keep working on your app, you'll develop a palette of Hooks to choose from, and eventually you won't need to write Effects in your components very often.
+Nasıl çalıştığını görmek için sandbox'taki `useSelectOptions.js` sekmesini kontrol edin. İdeal olarak, uygulamanızdaki çoğu Efekt, ister sizin tarafınızdan ister topluluk tarafından yazılmış olsun, eninde sonunda özel Hook'larla değiştirilmelidir. Özel Hook'lar senkronizasyon mantığını gizler, böylece çağıran bileşen Efekt hakkında bilgi sahibi olmaz. Uygulamanız üzerinde çalışmaya devam ettikçe, aralarından seçim yapabileceğiniz bir Hook paleti geliştireceksiniz ve sonunda bileşenlerinize çok sık Efekt yazmanız gerekmeyecek.
 
 </Solution>
 
