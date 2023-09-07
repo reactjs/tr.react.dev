@@ -278,27 +278,28 @@ Bileşen ilk kez bağlandığında üç günlük gördüğünüze dikkat edin:
 1. `❌ "Genel" oda ile bağlantı kesildi https://localhost:1234.` *(sadece geliştirme)*
 1. `✅ Adresinden "genel" odasına bağlanıyor https://localhost:1234...`
 
-The first two logs are development-only. In development, React always remounts each component once.
+İlk iki günlük yalnızca geliştirmeye yöneliktir. Geliştirme aşamasında, React her bileşeni her zaman bir kez yeniden bağlar.
 
-**React verifies that your Effect can re-synchronize by forcing it to do that immediately in development.** This might remind you of opening a door and closing it an extra time to check if the door lock works. React starts and stops your Effect one extra time in development to check [you've implemented its cleanup well.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+**React, Efektinizin yeniden senkronize olup olamayacağını, onu geliştirme aşamasında bunu hemen yapmaya zorlayarak doğrular.** Bu size kapı kilidinin çalışıp çalışmadığını kontrol etmek için bir kapıyı açıp fazladan bir kez kapatmayı hatırlatabilir. React, kontrol etmek için geliştirme sırasında Efektinizi fazladan bir kez başlatır ve durdurur [temizlemeyi iyi uyguladığınızı](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-The main reason your Effect will re-synchronize in practice is if some data it uses has changed. In the sandbox above, change the selected chat room. Notice how, when the `roomId` changes, your Effect re-synchronizes.
+Efektinizin pratikte yeniden senkronize olmasının ana nedeni, kullandığı bazı verilerin değişmiş olmasıdır. Yukarıdaki sanal alanda, seçili sohbet odasını değiştirin. RoomId` değiştiğinde Efektinizin nasıl yeniden senkronize olduğuna dikkat edin.
 
-However, there are also more unusual cases in which re-synchronization is necessary. For example, try editing the `serverUrl` in the sandbox above while the chat is open. Notice how the Effect re-synchronizes in response to your edits to the code. In the future, React may add more features that rely on re-synchronization.
+Ancak, yeniden senkronizasyonun gerekli olduğu daha sıra dışı durumlar da vardır. Örneğin, sohbet açıkken yukarıdaki sanal alanda `sunucuUrl`yi düzenlemeyi deneyin. Kodda yaptığınız düzenlemelere yanıt olarak Efekt'in nasıl yeniden senkronize olduğuna dikkat edin. Gelecekte React, yeniden senkronizasyona dayanan daha fazla özellik ekleyebilir.
 
-### How React knows that it needs to re-synchronize the Effect {/*how-react-knows-that-it-needs-to-re-synchronize-the-effect*/}
+### React, Efekti yeniden senkronize etmesi gerektiğini nasıl anlar {/*how-react-knows-that-it-needs-to-re-synchronize-the-effect*/}
 
-You might be wondering how React knew that your Effect needed to re-synchronize after `roomId` changes. It's because *you told React* that its code depends on `roomId` by including it in the [list of dependencies:](/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)
+React'in `roomId` değiştikten sonra Efektinizin yeniden senkronize edilmesi gerektiğini nasıl bildiğini merak ediyor olabilirsiniz. Çünkü *React'e* kodunun `roomId`'ye bağlı olduğunu [bağımlılıklar listesi:](/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies) içine dahil ederek söylediniz.
+
 
 ```js {1,3,8}
-function ChatRoom({ roomId }) { // The roomId prop may change over time
+function ChatRoom({ roomId }) { // roomId özelliği zaman içinde değişebilir
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // This Effect reads roomId 
+    const connection = createConnection(serverUrl, roomId); // Bu Efektte roomId'yi okur
     connection.connect();
     return () => {
       connection.disconnect();
     };
-  }, [roomId]); // So you tell React that this Effect "depends on" roomId
+  }, [roomId]); // Böylece React'e bu Efektin roomId'ye "bağlı" olduğunu söylersiniz
   // ...
 ```
 
@@ -308,13 +309,13 @@ Here's how this works:
 2. You knew that your Effect reads `roomId` (so its logic depends on a value that may change later).
 3. This is why you specified it as your Effect's dependency (so that it re-synchronizes when `roomId` changes).
 
-Every time after your component re-renders, React will look at the array of dependencies that you have passed. If any of the values in the array is different from the value at the same spot that you passed during the previous render, React will re-synchronize your Effect.
+Bileşeniniz yeniden oluşturulduktan sonra React her seferinde geçtiğiniz bağımlılıklar dizisine bakacaktır. Dizideki değerlerden herhangi biri, önceki render sırasında geçtiğiniz aynı noktadaki değerden farklıysa, React Efektinizi yeniden senkronize edecektir.
 
-For example, if you passed `["general"]` during the initial render, and later you passed `["travel"]` during the next render, React will compare `"general"` and `"travel"`. These are different values (compared with [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)), so React will re-synchronize your Effect. On the other hand, if your component re-renders but `roomId` has not changed, your Effect will remain connected to the same room.
+Örneğin, ilk render sırasında `["genel"]` değerini geçtiyseniz ve daha sonra bir sonraki render sırasında `["seyahat"]` değerini geçtiyseniz, React `"genel"` ve `"seyahat"` değerlerini karşılaştıracaktır. Bunlar farklı değerlerdir ([`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ile karşılaştırıldığında), bu nedenle React Efektinizi yeniden senkronize edecektir. Öte yandan, bileşeniniz yeniden render edilirse ancak `roomId` değişmediyse, Efektiniz aynı odaya bağlı kalacaktır.
 
-### Each Effect represents a separate synchronization process {/*each-effect-represents-a-separate-synchronization-process*/}
+### Her Efekt ayrı bir senkronizasyon sürecini temsil eder {/*each-effect-represents-a-separate-synchronization-process*/}
 
-Resist adding unrelated logic to your Effect only because this logic needs to run at the same time as an Effect you already wrote. For example, let's say you want to send an analytics event when the user visits the room. You already have an Effect that depends on `roomId`, so you might feel tempted to add the analytics call there:
+Yalnızca bu mantığın daha önce yazdığınız bir Efekt ile aynı anda çalışması gerektiği için Efektinize ilgisiz bir mantık eklemekten kaçının. Örneğin, kullanıcı odayı ziyaret ettiğinde bir analiz olayı göndermek istediğinizi varsayalım. Zaten `roomId`ye bağlı bir Efektiniz var, bu nedenle analitik çağrısını oraya eklemek isteyebilirsiniz:
 
 ```js {3}
 function ChatRoom({ roomId }) {
@@ -330,7 +331,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-But imagine you later add another dependency to this Effect that needs to re-establish the connection. If this Effect re-synchronizes, it will also call `logVisit(roomId)` for the same room, which you did not intend. Logging the visit **is a separate process** from connecting. Write them as two separate Effects:
+Ancak daha sonra bu Efekte bağlantıyı yeniden kurması gereken başka bir bağımlılık eklediğinizi düşünün. Bu Etki yeniden senkronize olursa, aynı oda için `logVisit(roomId)` çağrısı da yapacaktır, ki bunu istememiştiniz. Ziyaretin günlüğe kaydedilmesi **bağlantıdan ayrı bir süreçtir**. Bunları iki ayrı Efekt olarak yazın:
 
 ```js {2-4}
 function ChatRoom({ roomId }) {
@@ -346,13 +347,13 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-**Each Effect in your code should represent a separate and independent synchronization process.**
+**Kodunuzdaki her bir Efekt ayrı ve bağımsız bir senkronizasyon sürecini temsil etmelidir.**
 
-In the above example, deleting one Effect wouldn’t break the other Effect's logic. This is a good indication that they synchronize different things, and so it made sense to split them up. On the other hand, if you split up a cohesive piece of logic into separate Effects, the code may look "cleaner" but will be [more difficult to maintain.](/learn/you-might-not-need-an-effect#chains-of-computations) This is why you should think whether the processes are same or separate, not whether the code looks cleaner.
+Yukarıdaki örnekte, bir Efektin silinmesi diğer Efektin mantığını bozmayacaktır. Bu, farklı şeyleri senkronize ettiklerinin iyi bir göstergesidir ve bu nedenle onları ayırmak mantıklıdır. Öte yandan, uyumlu bir mantık parçasını ayrı Efektlere bölerseniz, kod "daha temiz" görünebilir ancak [bakımı daha zor](/learn/you-might-not-need-an-effect#chains-of-computations) olacaktır. Bu nedenle, kodun daha temiz görünüp görünmediğini değil, süreçlerin aynı mı yoksa ayrı mı olduğunu düşünmelisiniz.
 
-## Effects "react" to reactive values {/*effects-react-to-reactive-values*/}
+## Efektler reaktif değerlere "tepki verir" {/*effects-react-to-reactive-values*/}
 
-Your Effect reads two variables (`serverUrl` and `roomId`), but you only specified `roomId` as a dependency:
+Efektiniz iki değişkeni (`serverUrl` ve `roomId`) okuyor, ancak bağımlılık olarak yalnızca `roomId` belirtmişsiniz:
 
 ```js {5,10}
 const serverUrl = 'https://localhost:1234';
@@ -369,32 +370,32 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Why doesn't `serverUrl` need to be a dependency?
+Neden `serverUrl` bir bağımlılık olmak zorunda değil?
 
-This is because the `serverUrl` never changes due to a re-render. It's always the same no matter how many times the component re-renders and why. Since `serverUrl` never changes, it wouldn't make sense to specify it as a dependency. After all, dependencies only do something when they change over time!
+Çünkü `serverUrl` yeniden oluşturma nedeniyle asla değişmez. Bileşen kaç kez yeniden oluşturulursa oluşturulsun ve nedeni ne olursa olsun her zaman aynıdır. SunucuUrl` asla değişmediğinden, bunu bir bağımlılık olarak belirtmek mantıklı olmaz. Sonuçta, bağımlılıklar yalnızca zaman içinde değiştiklerinde bir şey yaparlar!
 
-On the other hand, `roomId` may be different on a re-render. **Props, state, and other values declared inside the component are _reactive_ because they're calculated during rendering and participate in the React data flow.**
+Öte yandan, `roomId` yeniden oluşturmada farklı olabilir. **Bileşen içinde bildirilen prop'lar, state ve diğer değerler _reaktiftir_ çünkü render sırasında hesaplanırlar ve React veri akışına katılırlar.**
 
-If `serverUrl` was a state variable, it would be reactive. Reactive values must be included in dependencies:
+Eğer `serverUrl` bir state değişkeni olsaydı, reaktif olurdu. Reaktif değerler bağımlılıklara dahil edilmelidir:
 
 ```js {2,5,10}
-function ChatRoom({ roomId }) { // Props change over time
-  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // State may change over time
+function ChatRoom({ roomId }) { // Prop'ların zaman içinde değişimi
+  const [serverUrl, setServerUrl] = useState('https://localhost:1234'); // State zaman içinde değişebilir
 
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // Your Effect reads props and state
+    const connection = createConnection(serverUrl, roomId); // Etkiniz prop'ları ve state okur
     connection.connect();
     return () => {
       connection.disconnect();
     };
-  }, [roomId, serverUrl]); // So you tell React that this Effect "depends on" on props and state
+  }, [roomId, serverUrl]); // Böylece React'e bu Efektin proplara ve state "bağlı" olduğunu söylersiniz
   // ...
 }
 ```
 
-By including `serverUrl` as a dependency, you ensure that the Effect re-synchronizes after it changes.
+Sunucu URL`sini bir bağımlılık olarak dahil ederek, Efektin değiştikten sonra yeniden senkronize olmasını sağlarsınız.
 
-Try changing the selected chat room or edit the server URL in this sandbox:
+Seçili sohbet odasını değiştirmeyi deneyin veya bu sanal alanda sunucu URL'sini düzenleyin:
 
 <Sandpack>
 
@@ -420,24 +421,24 @@ function ChatRoom({ roomId }) {
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">general</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
@@ -449,13 +450,13 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
     }
   };
 }
