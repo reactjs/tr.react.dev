@@ -1086,7 +1086,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)} 
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -1114,19 +1114,19 @@ body {
 
 </Sandpack>
 
-In both of these cases, `canMove` is a reactive variable that you read inside the Effect. This is why it must be specified in the list of Effect dependencies. This ensures that the Effect re-synchronizes after every change to its value.
+Bu iki durumda da `canMove`, Efektin içinde okuduğunuz reaktif bir değişkendir. Bu nedenle Efekt bağımlılıkları listesinde belirtilmelidir. Bu, değerinde yapılan her değişiklikten sonra Efektin yeniden senkronize olmasını sağlar.
 
 </Solution>
 
-#### Investigate a stale value bug {/*investigate-a-stale-value-bug*/}
+#### Eski değer hatasını araştırın {/*investigate-a-stale-value-bug*/}
 
-In this example, the pink dot should move when the checkbox is on, and should stop moving when the checkbox is off. The logic for this has already been implemented: the `handleMove` event handler checks the `canMove` state variable.
+Bu örnekte, pembe nokta onay kutusu açık olduğunda hareket etmeli ve onay kutusu kapalı olduğunda hareket etmeyi durdurmalıdır. Bunun mantığı zaten uygulanmıştır: `handleMove` olay işleyicisi `canMove` durum değişkenini kontrol eder.
 
-However, for some reason, the `canMove` state variable inside `handleMove` appears to be "stale": it's always `true`, even after you tick off the checkbox. How is this possible? Find the mistake in the code and fix it.
+Ancak, bazı nedenlerden dolayı, `handleMove` içindeki `canMove` durum değişkeni "eski" gibi görünüyor: onay kutusunu işaretledikten sonra bile her zaman `true`. Bu nasıl mümkün olabilir? Koddaki hatayı bulun ve düzeltin.
 
 <Hint>
 
-If you see a linter rule being suppressed, remove the suppression! That's where the mistakes usually are.
+Bir linter kuralının bastırıldığını görürseniz, bastırmayı kaldırın! Hatalar genellikle burada olur.
 
 </Hint>
 
@@ -1158,7 +1158,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)} 
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -1188,13 +1188,13 @@ body {
 
 <Solution>
 
-The problem with the original code was suppressing the dependency linter. If you remove the suppression, you'll see that this Effect depends on the `handleMove` function. This makes sense: `handleMove` is declared inside the component body, which makes it a reactive value. Every reactive value must be specified as a dependency, or it can potentially get stale over time!
+Orijinal koddaki sorun bağımlılık linterinin bastırılmasıydı. Bastırmayı kaldırırsanız, bu Efektin `handleMove` fonksiyonuna bağlı olduğunu göreceksiniz. Bu mantıklıdır: `handleMove` bileşen gövdesi içinde bildirilir, bu da onu reaktif bir değer yapar. Her reaktif değer bir bağımlılık olarak belirtilmelidir, aksi takdirde zaman içinde eskimesi olasıdır!
 
-The author of the original code has "lied" to React by saying that the Effect does not depend (`[]`) on any reactive values. This is why React did not re-synchronize the Effect after `canMove` has changed (and `handleMove` with it). Because React did not re-synchronize the Effect, the `handleMove` attached as a listener is the `handleMove` function created during the initial render. During the initial render, `canMove` was `true`, which is why `handleMove` from the initial render will forever see that value.
+Orijinal kodun yazarı, Effect'in herhangi bir reaktif değere bağlı olmadığını (`[]`) söyleyerek React'e "yalan söylemiştir". Bu nedenle React, `canMove` değiştikten sonra (ve onunla birlikte `handleMove`) Efekti yeniden senkronize etmedi. React, Efekti yeniden senkronize etmediği için, dinleyici olarak eklenen `handleMove`, ilk render sırasında oluşturulan `handleMove` fonksiyonudur. İlk render sırasında, `canMove` `true` idi, bu yüzden ilk renderdan `handleMove` sonsuza kadar bu değeri görecektir.
 
-**If you never suppress the linter, you will never see problems with stale values.** There are a few different ways to solve this bug, but you should always start by removing the linter suppression. Then change the code to fix the lint error.
+**Bu hatayı çözmenin birkaç farklı yolu vardır, ancak her zaman linter bastırmayı kaldırarak başlamalısınız. Daha sonra lint hatasını düzeltmek için kodu değiştirin.
 
-You can change the Effect dependencies to `[handleMove]`, but since it's going to be a newly defined function for every render, you might as well remove dependencies array altogether. Then the Effect *will* re-synchronize after every re-render:
+Efekt bağımlılıklarını `[handleMove]` olarak değiştirebilirsiniz, ancak her render için yeni tanımlanmış bir işlev olacağından, bağımlılıklar dizisini tamamen kaldırabilirsiniz. Böylece Efekt her yeniden render işleminden sonra yeniden senkronize olur:
 
 <Sandpack>
 
@@ -1223,7 +1223,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)} 
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -1251,9 +1251,9 @@ body {
 
 </Sandpack>
 
-This solution works, but it's not ideal. If you put `console.log('Resubscribing')` inside the Effect, you'll notice that it resubscribes after every re-render. Resubscribing is fast, but it would still be nice to avoid doing it so often.
+Bu çözüm işe yarar, ancak ideal değildir. Effect'in içine `console.log('Resubscribing')` koyarsanız, her yeniden oluşturmadan sonra yeniden abone olduğunu fark edeceksiniz. Yeniden abone olmak hızlıdır, ancak yine de bunu bu kadar sık yapmaktan kaçınmak güzel olurdu.
 
-A better fix would be to move the `handleMove` function *inside* the Effect. Then `handleMove` won't be a reactive value, and so your Effect won't depend on a function. Instead, it will need to depend on `canMove` which your code now reads from inside the Effect. This matches the behavior you wanted, since your Effect will now stay synchronized with the value of `canMove`:
+Daha iyi bir çözüm `handleMove` fonksiyonunu Efektin *içine* taşımak olacaktır. O zaman `handleMove` reaktif bir değer olmayacak ve böylece Efektiniz bir işleve bağlı olmayacaktır. Bunun yerine, kodunuzun artık Efektin içinden okuduğu `canMove` fonksiyonuna bağlı olması gerekecektir. Bu, istediğiniz davranışla eşleşir, çünkü Efektiniz artık `canMove` değeriyle senkronize kalacaktır:
 
 <Sandpack>
 
@@ -1282,7 +1282,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)} 
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -1310,21 +1310,21 @@ body {
 
 </Sandpack>
 
-Try adding `console.log('Resubscribing')` inside the Effect body and notice that now it only resubscribes when you toggle the checkbox (`canMove` changes) or edit the code. This makes it better than the previous approach that always resubscribed.
+Effect gövdesinin içine `console.log('Resubscribing')` eklemeyi deneyin ve artık yalnızca onay kutusunu değiştirdiğinizde (`canMove` değiştiğinde) veya kodu düzenlediğinizde yeniden abone olduğunu fark edin. Bu, her zaman yeniden abone olan önceki yaklaşımdan daha iyi hale getirir.
 
-You'll learn a more general approach to this type of problem in [Separating Events from Effects.](/learn/separating-events-from-effects)
+Bu tür sorunlara daha genel bir yaklaşımı [Olayları Efektlerden Ayırmak](/learn/separating-events-from-effects) bölümünde öğreneceksiniz.
 
 </Solution>
 
-#### Fix a connection switch {/*fix-a-connection-switch*/}
+#### Bir bağlantı anahtarını onarın {/*fix-a-connection-switch*/}
 
-In this example, the chat service in `chat.js` exposes two different APIs: `createEncryptedConnection` and `createUnencryptedConnection`. The root `App` component lets the user choose whether to use encryption or not, and then passes down the corresponding API method to the child `ChatRoom` component as the `createConnection` prop.
+Bu örnekte, `chat.js` içindeki sohbet hizmeti iki farklı API sunar: `createEncryptedConnection` ve `createUnencryptedConnection`. Kök `App` bileşeni kullanıcının şifreleme kullanıp kullanmayacağını seçmesine izin verir ve ardından ilgili API yöntemini `createConnection` prop'u olarak alt `ChatRoom` bileşenine aktarır.
 
-Notice that initially, the console logs say the connection is not encrypted. Try toggling the checkbox on: nothing will happen. However, if you change the selected room after that, then the chat will reconnect *and* enable encryption (as you'll see from the console messages). This is a bug. Fix the bug so that toggling the checkbox *also* causes the chat to reconnect.
+Başlangıçta konsol günlüklerinin bağlantının şifrelenmediğini söylediğine dikkat edin. Onay kutusunu açmayı deneyin: hiçbir şey olmayacaktır. Ancak, bundan sonra seçilen odayı değiştirirseniz, sohbet yeniden bağlanır *ve* şifrelemeyi etkinleştirir (konsol mesajlarından göreceğiniz gibi). Bu bir hata. Hatayı düzeltin, böylece onay kutusunu açmak *aynı zamanda* sohbetin yeniden bağlanmasına neden olur.
 
 <Hint>
 
-Suppressing the linter is always suspicious. Could this be a bug?
+Linteri bastırmak her zaman şüphelidir. Bu bir hata olabilir mi?
 
 </Hint>
 
@@ -1344,14 +1344,14 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -1386,31 +1386,31 @@ export default function ChatRoom({ roomId, createConnection }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 ```
 
 ```js chat.js
 export function createEncryptedConnection(roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ 🔐 Connecting to "' + roomId + '... (encrypted)');
+      console.log('✅ 🔐 Bağlanmak "' + roomId + '... (encrypted)');
     },
     disconnect() {
-      console.log('❌ 🔐 Disconnected from "' + roomId + '" room (encrypted)');
+      console.log('❌ 🔐 Bağlantısı kesildi "' + roomId + '" oda (encrypted)');
     }
   };
 }
 
 export function createUnencryptedConnection(roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '... (unencrypted)');
+      console.log('✅ Bağlanmak "' + roomId + '... (unencrypted)');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room (unencrypted)');
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda (unencrypted)');
     }
   };
 }
@@ -1424,7 +1424,7 @@ label { display: block; margin-bottom: 10px; }
 
 <Solution>
 
-If you remove the linter suppression, you will see a lint error. The problem is that `createConnection` is a prop, so it's a reactive value. It can change over time! (And indeed, it should--when the user ticks the checkbox, the parent component passes a different value of the `createConnection` prop.) This is why it should be a dependency. Include it in the list to fix the bug:
+Eğer linter baskılamasını kaldırırsanız, bir lint hatası göreceksiniz. Sorun şu ki `createConnection` bir prop, yani reaktif bir değer. Zaman içinde değişebilir! (Ve gerçekten de değişmelidir--kullanıcı onay kutusunu işaretlediğinde, ana bileşen `createConnection` prop'unun farklı bir değerini iletir). Bu yüzden bir bağımlılık olmalıdır. Hatayı düzeltmek için listeye ekleyin:
 
 <Sandpack>
 
@@ -1437,19 +1437,19 @@ import {
 } from './chat.js';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isEncrypted, setIsEncrypted] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -1458,7 +1458,7 @@ export default function App() {
           checked={isEncrypted}
           onChange={e => setIsEncrypted(e.target.checked)}
         />
-        Enable encryption
+        Şifrelemeyi etkinleştir
       </label>
       <hr />
       <ChatRoom
@@ -1483,31 +1483,31 @@ export default function ChatRoom({ roomId, createConnection }) {
     return () => connection.disconnect();
   }, [roomId, createConnection]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 ```
 
 ```js chat.js
 export function createEncryptedConnection(roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ 🔐 Connecting to "' + roomId + '... (encrypted)');
+      console.log('✅ 🔐 Bağlanmak "' + roomId + '... (şifrelenmiş)');
     },
     disconnect() {
-      console.log('❌ 🔐 Disconnected from "' + roomId + '" room (encrypted)');
+      console.log('❌ 🔐 Bağlantı kesildi "' + roomId + '" oda (şifrelenmiş)');
     }
   };
 }
 
 export function createUnencryptedConnection(roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '... (unencrypted)');
+      console.log('✅ Bağlanmak "' + roomId + '... (şifrelenmemiş)');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room (unencrypted)');
+      console.log('❌ Bağlantı kesildi "' + roomId + '" oda (şifrelenmemiş)');
     }
   };
 }
@@ -1519,7 +1519,7 @@ label { display: block; margin-bottom: 10px; }
 
 </Sandpack>
 
-It is correct that `createConnection` is a dependency. However, this code is a bit fragile because someone could edit the `App` component to pass an inline function as the value of this prop. In that case, its value would be different every time the `App` component re-renders, so the Effect might re-synchronize too often. To avoid this, you can pass `isEncrypted` down instead:
+`CreateConnection`ın bir bağımlılık olduğu doğrudur. Ancak, bu kod biraz kırılgandır çünkü birisi `App` bileşenini bu prop'un değeri olarak bir satır içi fonksiyon geçirecek şekilde düzenleyebilir. Bu durumda, `App` bileşeni her yeniden oluşturulduğunda değeri farklı olacaktır, bu nedenle Efekt çok sık yeniden senkronize olabilir. Bunu önlemek için, bunun yerine `isEncrypted` değerini aktarabilirsiniz:
 
 <Sandpack>
 
@@ -1528,7 +1528,7 @@ import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isEncrypted, setIsEncrypted] = useState(false);
   return (
     <>
@@ -1538,9 +1538,9 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -1549,7 +1549,7 @@ export default function App() {
           checked={isEncrypted}
           onChange={e => setIsEncrypted(e.target.checked)}
         />
-        Enable encryption
+        Şifrelemeyi etkinleştir
       </label>
       <hr />
       <ChatRoom
@@ -1578,31 +1578,31 @@ export default function ChatRoom({ roomId, isEncrypted }) {
     return () => connection.disconnect();
   }, [roomId, isEncrypted]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 ```
 
 ```js chat.js
 export function createEncryptedConnection(roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ 🔐 Connecting to "' + roomId + '... (encrypted)');
+      console.log('✅ 🔐 Bağlamak "' + roomId + '... (şifrelenmiş)');
     },
     disconnect() {
-      console.log('❌ 🔐 Disconnected from "' + roomId + '" room (encrypted)');
+      console.log('❌ 🔐 Bağlantı kesildi "' + roomId + '" oda (şifrelenmiş)');
     }
   };
 }
 
 export function createUnencryptedConnection(roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '... (unencrypted)');
+      console.log('✅ Bağlamak "' + roomId + '... (şifrelenmemiş)');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room (unencrypted)');
+      console.log('❌ Bağlantı kesildi "' + roomId + '" oda (şifrelenmemiş)');
     }
   };
 }
@@ -1614,21 +1614,21 @@ label { display: block; margin-bottom: 10px; }
 
 </Sandpack>
 
-In this version, the `App` component passes a boolean prop instead of a function. Inside the Effect, you decide which function to use. Since both `createEncryptedConnection` and `createUnencryptedConnection` are declared outside the component, they aren't reactive, and don't need to be dependencies. You'll learn more about this in [Removing Effect Dependencies.](/learn/removing-effect-dependencies)
+Bu versiyonda, `App` bileşeni bir fonksiyon yerine bir boolean prop geçirir. Efekt içinde, hangi fonksiyonun kullanılacağına siz karar verirsiniz. Hem `createEncryptedConnection` hem de `createUnencryptedConnection` bileşen dışında tanımlandığından, reaktif değildirler ve bağımlılık olmaları gerekmez. Bu konuda daha fazla bilgiyi [Etki Bağımlılıklarını Kaldırma](/learn/removing-effect-dependencies) bölümünde bulabilirsiniz.
 
 </Solution>
 
-#### Populate a chain of select boxes {/*populate-a-chain-of-select-boxes*/}
+#### Bir seçim kutuları zincirini doldurun {/*populate-a-chain-of-select-boxes*/}
 
-In this example, there are two select boxes. One select box lets the user pick a planet. Another select box lets the user pick a place *on that planet.* The second box doesn't work yet. Your task is to make it show the places on the chosen planet.
+Bu örnekte, iki seçim kutusu vardır. Bir seçim kutusu kullanıcının bir gezegen seçmesini sağlar. Diğer seçim kutusu kullanıcının o gezegende bir yer seçmesine izin verir.* İkinci kutu henüz çalışmıyor. Sizin göreviniz seçilen gezegendeki yerleri göstermesini sağlamak.
 
-Look at how the first select box works. It populates the `planetList` state with the result from the `"/planets"` API call. The currently selected planet's ID is kept in the `planetId` state variable. You need to find where to add some additional code so that the `placeList` state variable is populated with the result of the `"/planets/" + planetId + "/places"` API call.
+İlk seçim kutusunun nasıl çalıştığına bakın. `"/planets"` API çağrısından gelen sonuçla `planetList` durumunu doldurur. Seçili olan gezegenin kimliği `planetId` state değişkeninde tutulur.` PlaceList` state değişkeninin `"/planets/" + planetId + "/places"` API çağrısının sonucuyla doldurulması için bazı ek kodları nereye ekleyeceğinizi bulmanız gerekir.
 
-If you implement this right, selecting a planet should populate the place list. Changing a planet should change the place list.
+Bunu doğru uygularsanız, bir gezegen seçtiğinizde yer listesi doldurulmalıdır. Bir gezegenin değiştirilmesi yer listesini değiştirmelidir.
 
 <Hint>
 
-If you have two independent synchronization processes, you need to write two separate Effects.
+İki bağımsız senkronizasyon süreciniz varsa, iki ayrı Efekt yazmanız gerekir.
 
 </Hint>
 
