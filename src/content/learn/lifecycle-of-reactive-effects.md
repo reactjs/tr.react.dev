@@ -21,17 +21,17 @@ Efektler bileşenlerden farklı bir yaşam döngüsü vardır. Bileşenler takı
 
 </YouWillLearn>
 
-## The lifecycle of an Effect {/*the-lifecycle-of-an-effect*/}
+## Efektin Yaşam Döngüsü {/*the-lifecycle-of-an-effect*/}
 
-Every React component goes through the same lifecycle:
+Her React bileşeni aynı yaşam döngüsünden geçer:
 
-- A component _mounts_ when it's added to the screen.
-- A component _updates_ when it receives new props or state, usually in response to an interaction.
-- A component _unmounts_ when it's removed from the screen.
+- Bir bileşen ekrana eklendiğinde _monte_ edilir.
+- Bir bileşen, genellikle bir etkileşime yanıt olarak yeni prop'lar veya state aldığında _updates_ yapar.
+- Bir bileşen ekrandan kaldırıldığında _unmounts_ olur.
 
-**It's a good way to think about components, but _not_ about Effects.** Instead, try to think about each Effect independently from your component's lifecycle. An Effect describes how to [synchronize an external system](/learn/synchronizing-with-effects) to the current props and state. As your code changes, synchronization will need to happen more or less often.
+**Bileşenler hakkında düşünmek için iyi bir yol, ancak Efektler hakkında _değildir_.** Bunun yerine, her bir Efekt bileşeninizin yaşam döngüsünden bağımsız olarak düşünmeye çalışın. Bir Efekt [harici bir sistemin](/learn/synchronizing-with-effects) mevcut prop'lara ve state nasıl senkronize edileceğini açıklar. Kodunuz değiştikçe, senkronizasyonun daha sık veya daha seyrek yapılması gerekecektir.
 
-To illustrate this point, consider this Effect connecting your component to a chat server:
+Bu noktayı açıklamak için, bileşeninizi bir sohbet sunucusuna bağlayan bu Efekti düşünün:
 
 ```js
 const serverUrl = 'https://localhost:1234';
@@ -48,7 +48,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Your Effect's body specifies how to **start synchronizing:**
+Efektinizin gövdesi **senkronizasyonun nasıl başlatılacağını belirtir:**
 
 ```js {2-3}
     // ...
@@ -60,7 +60,7 @@ Your Effect's body specifies how to **start synchronizing:**
     // ...
 ```
 
-The cleanup function returned by your Effect specifies how to **stop synchronizing:**
+Efektiniz tarafından döndürülen temizleme işlevi **senkronizasyonun nasıl durdurulacağını belirtir:**
 
 ```js {5}
     // ...
@@ -72,141 +72,141 @@ The cleanup function returned by your Effect specifies how to **stop synchronizi
     // ...
 ```
 
-Intuitively, you might think that React would **start synchronizing** when your component mounts and **stop synchronizing** when your component unmounts. However, this is not the end of the story! Sometimes, it may also be necessary to **start and stop synchronizing multiple times** while the component remains mounted.
+Sezgisel olarak, React'in bileşeniniz bağlandığında **senkronizasyonu başlatacağını** ve bileşeniniz ayrıldığında **senkronizasyonu durduracağını** düşünebilirsiniz. Ancak, bu hikayenin sonu değildir! Bazen, bileşen takılı kalırken **senkronizasyonu birden çok kez başlatmak ve durdurmak** da gerekebilir.
 
-Let's look at _why_ this is necessary, _when_ it happens, and _how_ you can control this behavior.
+Şimdi bunun _neden_ gerekli olduğuna, _ne zaman_ gerçekleştiğine ve _bu davranışı _nasıl_ kontrol edebileceğinize bakalım.
 
 <Note>
 
-Some Effects don't return a cleanup function at all. [More often than not,](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) you'll want to return one--but if you don't, React will behave as if you returned an empty cleanup function.
+Bazı Efektler hiç temizleme fonksiyonu döndürmez. [Çoğu zaman,](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) bir tane döndürmek isteyeceksiniz-ama döndürmezseniz, React boş bir temizleme fonksiyonu döndürmüşsünüz gibi davranacaktır.
 
 </Note>
 
-### Why synchronization may need to happen more than once {/*why-synchronization-may-need-to-happen-more-than-once*/}
+### Senkronizasyonun neden birden fazla kez yapılması gerekebilir {/*why-synchronization-may-need-to-happen-more-than-once*/}
 
-Imagine this `ChatRoom` component receives a `roomId` prop that the user picks in a dropdown. Let's say that initially the user picks the `"general"` room as the `roomId`. Your app displays the `"general"` chat room:
+Bu `ChatRoom` bileşeninin, kullanıcının bir açılır menüden seçtiği bir `roomId` prop'larını aldığını düşünün. Diyelim ki kullanıcı başlangıçta `roomId` olarak `"genel"` odasını seçti. Uygulamanız `"genel"` sohbet odasını görüntüler:
 
 ```js {3}
 const serverUrl = 'https://localhost:1234';
 
-function ChatRoom({ roomId /* "general" */ }) {
+function ChatRoom({ roomId /* "genel" */ }) {
   // ...
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 ```
 
-After the UI is displayed, React will run your Effect to **start synchronizing.** It connects to the `"general"` room:
+UI görüntülendikten sonra, React **senkronizasyonu başlatmak için Efektinizi çalıştıracaktır.** `"genel"` odasına bağlanır:
 
 ```js {3,4}
-function ChatRoom({ roomId /* "general" */ }) {
+function ChatRoom({ roomId /* "genel" */ }) {
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // Connects to the "general" room
+    const connection = createConnection(serverUrl, roomId); // "genel" odaya bağlanır
     connection.connect();
     return () => {
-      connection.disconnect(); // Disconnects from the "general" room
+      connection.disconnect(); // "genel" oda ile bağlantıyı keser
     };
   }, [roomId]);
   // ...
 ```
 
-So far, so good.
+Buraya kadar her şey yolunda.
 
-Later, the user picks a different room in the dropdown (for example, `"travel"`). First, React will update the UI:
+Daha sonra, kullanıcı açılır menüden farklı bir oda seçer (örneğin, `"seyahat"`). İlk olarak, React kullanıcı arayüzünü güncelleyecektir:
 
 ```js {1}
-function ChatRoom({ roomId /* "travel" */ }) {
+function ChatRoom({ roomId /* "seyahat" */ }) {
   // ...
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 ```
 
-Think about what should happen next. The user sees that `"travel"` is the selected chat room in the UI. However, the Effect that ran the last time is still connected to the `"general"` room. **The `roomId` prop has changed, so what your Effect did back then (connecting to the `"general"` room) no longer matches the UI.**
+Bundan sonra ne olması gerektiğini düşünün. Kullanıcı, kullanıcı arayüzünde seçili sohbet odasının `"seyahat"` olduğunu görür. Ancak, son kez çalışan Efekt hala `"genel"` odasına bağlı. **`roomId` prop'u değişti, bu nedenle Efektinizin o zaman yaptığı şey (`"genel"` odasına bağlanmak) artık kullanıcı arayüzüyle eşleşmiyor.**
 
-At this point, you want React to do two things:
+Bu noktada, React'in iki şey yapmasını istersiniz:
 
-1. Stop synchronizing with the old `roomId` (disconnect from the `"general"` room)
-2. Start synchronizing with the new `roomId` (connect to the `"travel"` room)
+1. Eski `roomId` ile senkronizasyonu durdurun (`"genel"` oda ile bağlantıyı kesin)
+2. Yeni `roomId` ile senkronizasyonu başlatın (`"seyahat"` odasına bağlanın)
 
-**Luckily, you've already taught React how to do both of these things!** Your Effect's body specifies how to start synchronizing, and your cleanup function specifies how to stop synchronizing. All that React needs to do now is to call them in the correct order and with the correct props and state. Let's see how exactly that happens.
+**Neyse ki, React'e bunların her ikisini de nasıl yapacağını zaten öğrettiniz.** Efektinizin gövdesi senkronizasyonun nasıl başlatılacağını ve temizleme fonksiyonunuz da senkronizasyonun nasıl durdurulacağını belirtir. React'in şimdi yapması gereken tek şey, bunları doğru sırada ve doğru prop ve state ile çağırmaktır. Bunun tam olarak nasıl gerçekleştiğini görelim.
 
-### How React re-synchronizes your Effect {/*how-react-re-synchronizes-your-effect*/}
+### React Etkinizi Nasıl Yeniden Senkronize Eder? {/*how-react-re-synchronizes-your-effect*/}
 
-Recall that your `ChatRoom` component has received a new value for its `roomId` prop. It used to be `"general"`, and now it is `"travel"`. React needs to re-synchronize your Effect to re-connect you to a different room.
+Hatırlayın, `ChatRoom` bileşeniniz `roomId` özelliği için yeni bir değer aldı. Eskiden `"general"` idi ve şimdi `"travel"` oldu. React'in sizi farklı bir odaya yeniden bağlamak için Efektinizi yeniden senkronize etmesi gerekiyor.
 
-To **stop synchronizing,** React will call the cleanup function that your Effect returned after connecting to the `"general"` room. Since `roomId` was `"general"`, the cleanup function disconnects from the `"general"` room:
+React, **senkronizasyonu durdurmak için,** Efektinizin `"general"` odasına bağlandıktan sonra döndürdüğü temizleme fonksiyonunu çağıracaktır. roomId` `"general"` olduğu için, temizleme fonksiyonu `"general"` odasıyla bağlantıyı keser:
 
 ```js {6}
-function ChatRoom({ roomId /* "general" */ }) {
+function ChatRoom({ roomId /* "genel" */ }) {
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // Connects to the "general" room
+    const connection = createConnection(serverUrl, roomId); // "genel" odaya bağlanır
     connection.connect();
     return () => {
-      connection.disconnect(); // Disconnects from the "general" room
+      connection.disconnect(); // "genel" oda ile bağlantıyı keser
     };
     // ...
 ```
 
-Then React will run the Effect that you've provided during this render. This time, `roomId` is `"travel"` so it will **start synchronizing** to the `"travel"` chat room (until its cleanup function is eventually called too):
+Ardından React, bu render sırasında sağladığınız Efekti çalıştıracaktır. Bu sefer, `roomId` `"seyahat"` olduğundan, `"seyahat"` sohbet odasına **senkronize olmaya** başlayacaktır (sonunda temizleme fonksiyonu da çağrılana kadar):
 
 ```js {3,4}
-function ChatRoom({ roomId /* "travel" */ }) {
+function ChatRoom({ roomId /* "seyahat" */ }) {
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // Connects to the "travel" room
+    const connection = createConnection(serverUrl, roomId); // "seyahat" odasına bağlanır
     connection.connect();
     // ...
 ```
 
-Thanks to this, you're now connected to the same room that the user chose in the UI. Disaster averted!
+Bu sayede, artık kullanıcının kullanıcı arayüzünde seçtiği odaya bağlanmış olursunuz. Felaket önlendi!
 
-Every time after your component re-renders with a different `roomId`, your Effect will re-synchronize. For example, let's say the user changes `roomId` from `"travel"` to `"music"`. React will again **stop synchronizing** your Effect by calling its cleanup function (disconnecting you from the `"travel"` room). Then it will **start synchronizing** again by running its body with the new `roomId` prop (connecting you to the `"music"` room).
+Bileşeniniz farklı bir `roomId` ile yeniden oluşturulduktan sonra her seferinde Efektiniz yeniden senkronize olacaktır. Örneğin, kullanıcı `roomId`yi `"seyahat"`ten `"müzik"`e değiştirdi diyelim. React, temizleme fonksiyonunu çağırarak (sizi `"seyahat"` odasından ayırarak) Efektinizin senkronizasyonunu tekrar **durdurur**. Ardından, gövdesini yeni `roomId` prop ile çalıştırarak (sizi `"müzik"` odasına bağlayarak) tekrar **senkronize etmeye** başlayacaktır.
 
-Finally, when the user goes to a different screen, `ChatRoom` unmounts. Now there is no need to stay connected at all. React will **stop synchronizing** your Effect one last time and disconnect you from the `"music"` chat room.
+Son olarak, kullanıcı farklı bir ekrana geçtiğinde, `ChatRoom` bağlantıyı kaldırır. Artık bağlı kalmaya hiç gerek yok. React, Efektinizi son bir kez **senkronize etmeyi durdurur** ve sizi `"müzik"` sohbet odasından ayırır.
 
-### Thinking from the Effect's perspective {/*thinking-from-the-effects-perspective*/}
+### Efektin bakış açısından düşünmek {/*thinking-from-the-effects-perspective*/}
 
-Let's recap everything that's happened from the `ChatRoom` component's perspective:
+Şimdi `ChatRoom' bileşeninin bakış açısından olan her şeyi özetleyelim:
 
-1. `ChatRoom` mounted with `roomId` set to `"general"`
-1. `ChatRoom` updated with `roomId` set to `"travel"`
-1. `ChatRoom` updated with `roomId` set to `"music"`
-1. `ChatRoom` unmounted
+1. `ChatRoom` `roomId` `"genel"` olarak ayarlanmış şekilde monte edildi
+1. `ChatRoom`, `roomId` değeri `"seyahat"` olarak ayarlanarak güncellendi
+1. `ChatRoom`, `roomId` değeri `"müzik"` olarak ayarlanarak güncellendi
+1. ChatRoom` bağlanmamış
 
-During each of these points in the component's lifecycle, your Effect did different things:
+Bileşenin yaşam döngüsündeki bu noktaların her biri sırasında, Efektiniz farklı şeyler yaptı:
 
-1. Your Effect connected to the `"general"` room
-1. Your Effect disconnected from the `"general"` room and connected to the `"travel"` room
-1. Your Effect disconnected from the `"travel"` room and connected to the `"music"` room
-1. Your Effect disconnected from the `"music"` room
+1. Efektiniz `"genel"` odaya bağlandı
+1. Efektinizin `"genel"` oda ile bağlantısı kesildi ve `"seyahat"` odasına bağlandı
+1. Efektinizin "seyahat" odasıyla bağlantısı kesildi ve "müzik" odasına bağlandı
+1. Efektinizin "müzik" odasıyla bağlantısı kesildi
 
-Now let's think about what happened from the perspective of the Effect itself:
+Şimdi olanları bir de Efektin kendi perspektifinden düşünelim:
 
 ```js
   useEffect(() => {
-    // Your Effect connected to the room specified with roomId...
+    // Efektiniz roomId ile belirtilen odaya bağlandı...
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => {
-      // ...until it disconnected
+      // ...bağlantısı kesilene kadar
       connection.disconnect();
     };
   }, [roomId]);
 ```
 
-This code's structure might inspire you to see what happened as a sequence of non-overlapping time periods:
+Bu kodun yapısı, olanları birbiriyle örtüşmeyen bir dizi zaman dilimi olarak görmeniz için size ilham verebilir:
 
-1. Your Effect connected to the `"general"` room (until it disconnected)
-1. Your Effect connected to the `"travel"` room (until it disconnected)
-1. Your Effect connected to the `"music"` room (until it disconnected)
+1. Efektiniz `"genel"` odaya bağlandı (bağlantısı kesilene kadar)
+1. Efektiniz `"seyahat"` odasına bağlı (bağlantısı kesilene kadar)
+1. Efektiniz `"müzik"` odasına bağlı (bağlantısı kesilene kadar)
 
-Previously, you were thinking from the component's perspective. When you looked from the component's perspective, it was tempting to think of Effects as "callbacks" or "lifecycle events" that fire at a specific time like "after a render" or "before unmount". This way of thinking gets complicated very fast, so it's best to avoid.
+Önceden, bileşenin bakış açısından düşünüyordunuz. Bileşenin perspektifinden baktığınızda, Efektleri "render işleminden sonra" veya "unmount işleminden önce" gibi belirli bir zamanda ateşlenen "geri aramalar" veya "yaşam döngüsü olayları" olarak düşünmek cazip geliyordu. Bu düşünce tarzı çok hızlı bir şekilde karmaşıklaşır, bu nedenle kaçınmak en iyisidir.
 
-**Instead, always focus on a single start/stop cycle at a time. It shouldn't matter whether a component is mounting, updating, or unmounting. All you need to do is to describe how to start synchronization and how to stop it. If you do it well, your Effect will be resilient to being started and stopped as many times as it's needed.**
+**Bunun yerine, her zaman bir seferde tek bir başlatma/durdurma döngüsüne odaklanın. Bir bileşenin takılıyor, güncelleniyor ya da sökülüyor olması önemli olmamalıdır. Yapmanız gereken tek şey senkronizasyonun nasıl başlatılacağını ve nasıl durdurulacağını açıklamaktır. Bunu iyi yaparsanız, Efektiniz ihtiyaç duyulduğu kadar çok kez başlatılmaya ve durdurulmaya dayanıklı olacaktır.**
 
-This might remind you how you don't think whether a component is mounting or updating when you write the rendering logic that creates JSX. You describe what should be on the screen, and React [figures out the rest.](/learn/reacting-to-input-with-state)
+Bu size, JSX oluşturan işleme mantığını yazarken bir bileşenin monte edilip edilmediğini veya güncellenip güncellenmediğini nasıl düşünmediğinizi hatırlatabilir. Siz ekranda ne olması gerektiğini tanımlarsınız ve React [gerisini çözer](/learn/reacting-to-input-with-state)
 
-### How React verifies that your Effect can re-synchronize {/*how-react-verifies-that-your-effect-can-re-synchronize*/}
+### React, Efektinizin yeniden senkronize olabileceğini nasıl doğrular {/*how-react-verifies-that-your-effect-can-re-synchronize*/}
 
-Here is a live example that you can play with. Press "Open chat" to mount the `ChatRoom` component:
+İşte oynayabileceğiniz canlı bir örnek. ChatRoom bileşenini bağlamak için "Sohbeti aç" düğmesine basın:
 
 <Sandpack>
 
@@ -222,27 +222,27 @@ function ChatRoom({ roomId }) {
     connection.connect();
     return () => connection.disconnect();
   }, [roomId]);
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [show, setShow] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -256,10 +256,10 @@ export function createConnection(serverUrl, roomId) {
   // A real implementation would actually connect to the server
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
     }
   };
 }
@@ -272,11 +272,11 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice that when the component mounts for the first time, you see three logs:
+Bileşen ilk kez bağlandığında üç günlük gördüğünüze dikkat edin:
 
-1. `✅ Connecting to "general" room at https://localhost:1234...` *(development-only)*
-1. `❌ Disconnected from "general" room at https://localhost:1234.` *(development-only)*
-1. `✅ Connecting to "general" room at https://localhost:1234...`
+1. `✅ "Genel" odaya bağlanma https://localhost:1234...` *(sadece geliştirme)*
+1. `❌ "Genel" oda ile bağlantı kesildi https://localhost:1234.` *(sadece geliştirme)*
+1. `✅ Adresinden "genel" odasına bağlanıyor https://localhost:1234...`
 
 The first two logs are development-only. In development, React always remounts each component once.
 
