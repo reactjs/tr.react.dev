@@ -618,7 +618,7 @@ function Page({ url }) {
 }
 ```
 
-Now let's say you want to include the number of items in the shopping cart together with every page visit:
+Şimdi diyelim ki her sayfa ziyaretiyle birlikte alışveriş sepetindeki ürün sayısını da dahil etmek istiyorsunuz:
 
 ```js {2-3,6}
 function Page({ url }) {
@@ -627,14 +627,14 @@ function Page({ url }) {
 
   useEffect(() => {
     logVisit(url, numberOfItems);
-  }, [url]); // 🔴 React Hook useEffect has a missing dependency: 'numberOfItems'
+  }, [url]); // 🔴 React Hook useEffect'in eksik bir bağımlılığı var: 'numberOfItems'
   // ...
 }
 ```
 
-You used `numberOfItems` inside the Effect, so the linter asks you to add it as a dependency. However, you *don't* want the `logVisit` call to be reactive with respect to `numberOfItems`. If the user puts something into the shopping cart, and the `numberOfItems` changes, this *does not mean* that the user visited the page again. In other words, *visiting the page* is, in some sense, an "event". It happens at a precise moment in time.
+Effect içinde `numberOfItems` kullandınız, bu nedenle linter sizden bunu bir bağımlılık olarak eklemenizi istiyor. Ancak, `logVisit` çağrısının `numberOfItems` ile ilgili olarak reaktif olmasını *istemezsiniz*. Eğer kullanıcı alışveriş sepetine bir şey koyarsa ve `sayıOfItems` değişirse, bu *kullanıcının sayfayı tekrar ziyaret ettiği anlamına gelmez*. Başka bir deyişle, *sayfayı ziyaret etmek* bir anlamda bir "olaydır". Zaman içinde kesin bir anda gerçekleşir.
 
-Split the code in two parts:
+Kodu iki parçaya bölün:
 
 ```js {5-7,10}
 function Page({ url }) {
@@ -647,20 +647,20 @@ function Page({ url }) {
 
   useEffect(() => {
     onVisit(url);
-  }, [url]); // ✅ All dependencies declared
+  }, [url]); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 }
 ```
 
-Here, `onVisit` is an Effect Event. The code inside it isn't reactive. This is why you can use `numberOfItems` (or any other reactive value!) without worrying that it will cause the surrounding code to re-execute on changes.
+Burada, `onVisit` bir Efekt Olayıdır. İçindeki kod reaktif değildir. Bu nedenle `numberOfItems` (veya başka herhangi bir reaktif değer!) kullanabilir ve bunun çevredeki kodun değişikliklerde yeniden yürütülmesine neden olacağından endişe duymazsınız.
 
-On the other hand, the Effect itself remains reactive. Code inside the Effect uses the `url` prop, so the Effect will re-run after every re-render with a different `url`. This, in turn, will call the `onVisit` Effect Event.
+Öte yandan, Efektin kendisi reaktif kalır. Efekt içindeki kod `url` özelliğini kullanır, bu nedenle Efekt her yeniden oluşturmadan sonra farklı bir `url` ile yeniden çalışacaktır. Bu da `onVisit` Efekt Olayını çağıracaktır.
 
-As a result, you will call `logVisit` for every change to the `url`, and always read the latest `numberOfItems`. However, if `numberOfItems` changes on its own, this will not cause any of the code to re-run.
+Sonuç olarak, `url` öğesindeki her değişiklik için `logVisit` öğesini çağıracak ve her zaman en son `numberOfItems` öğesini okuyacaksınız. Ancak, `numberOfItems` kendi başına değişirse, bu kodun yeniden çalışmasına neden olmaz.
 
 <Note>
 
-You might be wondering if you could call `onVisit()` with no arguments, and read the `url` inside it:
+Hiçbir argüman olmadan `onVisit()` fonksiyonunu çağırıp içindeki `url`yi okuyup okuyamayacağınızı merak ediyor olabilirsiniz:
 
 ```js {2,6}
   const onVisit = useEffectEvent(() => {
@@ -672,7 +672,7 @@ You might be wondering if you could call `onVisit()` with no arguments, and read
   }, [url]);
 ```
 
-This would work, but it's better to pass this `url` to the Effect Event explicitly. **By passing `url` as an argument to your Effect Event, you are saying that visiting a page with a different `url` constitutes a separate "event" from the user's perspective.** The `visitedUrl` is a *part* of the "event" that happened:
+Bu işe yarayabilir, ancak bu `url`yi Efekt Olayına açıkça aktarmak daha iyidir. **Efekt Olayınıza bir argüman olarak `url` geçerek, farklı bir `url` ile bir sayfayı ziyaret etmenin kullanıcının bakış açısından ayrı bir "olay" oluşturduğunu söylemiş olursunuz.** `visitedUrl`, gerçekleşen "olayın" bir *parçasıdı*:
 
 ```js {1-2,6}
   const onVisit = useEffectEvent(visitedUrl => {
@@ -684,9 +684,9 @@ This would work, but it's better to pass this `url` to the Effect Event explicit
   }, [url]);
 ```
 
-Since your Effect Event explicitly "asks" for the `visitedUrl`, now you can't accidentally remove `url` from the Effect's dependencies. If you remove the `url` dependency (causing distinct page visits to be counted as one), the linter will warn you about it. You want `onVisit` to be reactive with regards to the `url`, so instead of reading the `url` inside (where it wouldn't be reactive), you pass it *from* your Effect.
+Efekt Etkinliğiniz `visitedUrl` öğesini açıkça "sorduğu" için, artık `url` öğesini Efektin bağımlılıklarından yanlışlıkla kaldıramazsınız. Eğer `url` bağımlılığını kaldırırsanız (farklı sayfa ziyaretlerinin tek bir ziyaret olarak sayılmasına neden olursanız), linter sizi bu konuda uyaracaktır. `onVisit`in `url` ile ilgili olarak reaktif olmasını istersiniz, bu nedenle `url`yi içeriden okumak yerine (reaktif olmayacağı yerde), Efektinizden *geçirirsiniz.
 
-This becomes especially important if there is some asynchronous logic inside the Effect:
+Bu, özellikle Efekt içinde bazı asenkron mantık varsa önemli hale gelir:
 
 ```js {6,8}
   const onVisit = useEffectEvent(visitedUrl => {
@@ -696,19 +696,19 @@ This becomes especially important if there is some asynchronous logic inside the
   useEffect(() => {
     setTimeout(() => {
       onVisit(url);
-    }, 5000); // Delay logging visits
+    }, 5000); // Gecikmeli kayıt ziyaretleri
   }, [url]);
 ```
 
-Here, `url` inside `onVisit` corresponds to the *latest* `url` (which could have already changed), but `visitedUrl` corresponds to the `url` that originally caused this Effect (and this `onVisit` call) to run.
+Burada, `onVisit` içindeki `url` *en son* `url`ye karşılık gelir (bu zaten değişmiş olabilir), ancak `visitedUrl` başlangıçta bu Efektin (ve bu `onVisit` çağrısının) çalışmasına neden olan `url`ye karşılık gelir.
 
 </Note>
 
 <DeepDive>
 
-#### Is it okay to suppress the dependency linter instead? {/*is-it-okay-to-suppress-the-dependency-linter-instead*/}
+#### Bunun yerine bağımlılık linterini bastırmak doğru olur mu? {/*is-it-okay-to-suppress-the-dependency-linter-instead*/}
 
-In the existing codebases, you may sometimes see the lint rule suppressed like this:
+Mevcut kod tabanlarında bazen lint kuralının bu şekilde bastırıldığını görebilirsiniz:
 
 ```js {7-9}
 function Page({ url }) {
@@ -717,20 +717,20 @@ function Page({ url }) {
 
   useEffect(() => {
     logVisit(url, numberOfItems);
-    // 🔴 Avoid suppressing the linter like this:
+    // 🔴 Linteri bu şekilde bastırmaktan kaçının:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
   // ...
 }
 ```
 
-After `useEffectEvent` becomes a stable part of React, we recommend **never suppressing the linter**.
+`UseEffectEvent` React'in kararlı bir parçası haline geldikten sonra, **kuralın asla bastırılmamasını** öneriyoruz.
 
-The first downside of suppressing the rule is that React will no longer warn you when your Effect needs to "react" to a new reactive dependency you've introduced to your code. In the earlier example, you added `url` to the dependencies *because* React reminded you to do it. You will no longer get such reminders for any future edits to that Effect if you disable the linter. This leads to bugs.
+Kuralı bastırmanın ilk dezavantajı, Efektinizin kodunuza eklediğiniz yeni bir reaktif bağımlılığa "tepki vermesi" gerektiğinde React'in artık sizi uyarmayacak olmasıdır. Önceki örnekte, React size bunu yapmanızı hatırlattığı için bağımlılıklara `url` eklediniz. Linter'ı devre dışı bırakırsanız, bu Efekt üzerinde gelecekte yapacağınız düzenlemeler için artık böyle hatırlatıcılar almayacaksınız. Bu da hatalara yol açar.
 
-Here is an example of a confusing bug caused by suppressing the linter. In this example, the `handleMove` function is supposed to read the current `canMove` state variable value in order to decide whether the dot should follow the cursor. However, `canMove` is always `true` inside `handleMove`.
+Burada, bağlayıcıyı bastırmanın neden olduğu kafa karıştırıcı bir hata örneği verilmiştir. Bu örnekte, `handleMove` fonksiyonunun, noktanın imleci takip edip etmeyeceğine karar vermek için mevcut `canMove` durum değişkeni değerini okuması gerekmektedir. Ancak, `handleMove` içinde `canMove` her zaman `true` değerindedir.
 
-Can you see why?
+Nedenini anlayabiliyor musunuz?
 
 <Sandpack>
 
@@ -760,7 +760,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)}
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -789,13 +789,13 @@ body {
 </Sandpack>
 
 
-The problem with this code is in suppressing the dependency linter. If you remove the suppression, you'll see that this Effect should depend on the `handleMove` function. This makes sense: `handleMove` is declared inside the component body, which makes it a reactive value. Every reactive value must be specified as a dependency, or it can potentially get stale over time!
+Bu kodla ilgili sorun, bağımlılık linterinin bastırılmasıdır. Bastırmayı kaldırırsanız, bu Efektin `handleMove` fonksiyonuna bağlı olması gerektiğini görürsünüz. Bu mantıklıdır: `handleMove` bileşen gövdesi içinde bildirilir, bu da onu reaktif bir değer yapar. Her reaktif değer bir bağımlılık olarak belirtilmelidir, aksi takdirde zaman içinde eskimesi olasıdır!
 
-The author of the original code has "lied" to React by saying that the Effect does not depend (`[]`) on any reactive values. This is why React did not re-synchronize the Effect after `canMove` has changed (and `handleMove` with it). Because React did not re-synchronize the Effect, the `handleMove` attached as a listener is the `handleMove` function created during the initial render. During the initial render, `canMove` was `true`, which is why `handleMove` from the initial render will forever see that value.
+Orijinal kodun yazarı, Effect'in herhangi bir reaktif değere bağlı olmadığını (`[]`) söyleyerek React'e "yalan söylemiştir". Bu nedenle React, `canMove` değiştikten sonra (ve onunla birlikte `handleMove`) Efekti yeniden senkronize etmedi. React, Efekti yeniden senkronize etmediği için, dinleyici olarak eklenen `handleMove`, ilk render sırasında oluşturulan `handleMove` fonksiyonudur. İlk render sırasında `canMove` `true` idi, bu yüzden ilk renderdan `handleMove` sonsuza kadar bu değeri görecektir.
 
-**If you never suppress the linter, you will never see problems with stale values.**
+**Linter'ı asla bastırmazsanız, eski değerlerle ilgili sorunları asla görmezsiniz.**
 
-With `useEffectEvent`, there is no need to "lie" to the linter, and the code works as you would expect:
+`UseEffectEvent` ile linter`a "yalan söylemeye" gerek yoktur ve kod beklediğiniz gibi çalışır:
 
 <Sandpack>
 
@@ -841,7 +841,7 @@ export default function App() {
           checked={canMove}
           onChange={e => setCanMove(e.target.checked)}
         />
-        The dot is allowed to move
+        Noktanın hareket etmesine izin verilir
       </label>
       <hr />
       <div style={{
@@ -869,26 +869,26 @@ body {
 
 </Sandpack>
 
-This doesn't mean that `useEffectEvent` is *always* the correct solution. You should only apply it to the lines of code that you don't want to be reactive. In the above sandbox, you didn't want the Effect's code to be reactive with regards to `canMove`. That's why it made sense to extract an Effect Event.
+Bu, `useEffectEvent`in *her zaman* doğru çözüm olduğu anlamına gelmez. Bunu yalnızca reaktif olmasını istemediğiniz kod satırlarına uygulamalısınız. Yukarıdaki sanal alanda, Efekt kodunun `canMove` ile ilgili olarak reaktif olmasını istemediniz. Bu yüzden bir Efekt Olayı çıkarmak mantıklı oldu.
 
-Read [Removing Effect Dependencies](/learn/removing-effect-dependencies) for other correct alternatives to suppressing the linter.
+Linteri bastırmanın diğer doğru alternatifleri için [Efekt Bağımlılıklarını Kaldırma](/learn/removing-effect-dependencies) bölümünü okuyun.
 
 </DeepDive>
 
-### Limitations of Effect Events {/*limitations-of-effect-events*/}
+### Efekt Olaylarının Sınırlamaları {/*limitations-of-effect-events*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
 
 </Wip>
 
-Effect Events are very limited in how you can use them:
+Efekt Olaylarını nasıl kullanabileceğiniz çok sınırlıdır:
 
-* **Only call them from inside Effects.**
-* **Never pass them to other components or Hooks.**
+* **Sadece Efektlerin içinden çağırın.**
+* **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
 
-For example, don't declare and pass an Effect Event like this:
+Örneğin, bir Efekt Olayını şu şekilde bildirmeyin ve geçirmeyin:
 
 ```js {4-6,8}
 function Timer() {
@@ -898,7 +898,7 @@ function Timer() {
     setCount(count + 1);
   });
 
-  useTimer(onTick, 1000); // 🔴 Avoid: Passing Effect Events
+  useTimer(onTick, 1000); // 🔴 Kaçının: Geçme Efekti Etkinlikleri
 
   return <h1>{count}</h1>
 }
@@ -911,11 +911,11 @@ function useTimer(callback, delay) {
     return () => {
       clearInterval(id);
     };
-  }, [delay, callback]); // Need to specify "callback" in dependencies
+  }, [delay, callback]); // Bağımlılıklarda "geri arama" belirtmeniz gerekiyor
 }
 ```
 
-Instead, always declare Effect Events directly next to the Effects that use them:
+Bunun yerine, her zaman Efekt Olaylarını doğrudan onları kullanan Efektlerin yanında bildirin:
 
 ```js {10-12,16,21}
 function Timer() {
@@ -933,40 +933,40 @@ function useTimer(callback, delay) {
 
   useEffect(() => {
     const id = setInterval(() => {
-      onTick(); // ✅ Good: Only called locally inside an Effect
+      onTick(); // ✅ İyi: Yalnızca bir Efektin içinde yerel olarak çağrılır
     }, delay);
     return () => {
       clearInterval(id);
     };
-  }, [delay]); // No need to specify "onTick" (an Effect Event) as a dependency
+  }, [delay]); // Bağımlılık olarak "onTick" (bir Efekt Olayı) belirtmeye gerek yok
 }
 ```
 
-Effect Events are non-reactive "pieces" of your Effect code. They should be next to the Effect using them.
+Efekt Olayları, Efekt kodunuzun reaktif olmayan "parçalarıdır". Kendilerini kullanan Efektin yanında olmalıdırlar.
 
 <Recap>
 
-- Event handlers run in response to specific interactions.
-- Effects run whenever synchronization is needed.
-- Logic inside event handlers is not reactive.
-- Logic inside Effects is reactive.
-- You can move non-reactive logic from Effects into Effect Events.
-- Only call Effect Events from inside Effects.
-- Don't pass Effect Events to other components or Hooks.
+- Olay işleyicileri belirli etkileşimlere yanıt olarak çalışır.
+- Etkiler, senkronizasyon gerektiğinde çalışır.
+- Olay işleyicilerinin içindeki mantık reaktif değildir.
+- Efektlerin içindeki mantık reaktiftir.
+- Reaktif olmayan mantığı Efektlerden Efekt Olaylarına taşıyabilirsiniz.
+- Efekt Olaylarını yalnızca Efektlerin içinden çağırın.
+- Efekt Olaylarını diğer bileşenlere veya Hook'lara aktarmayın.
 
 </Recap>
 
 <Challenges>
 
-#### Fix a variable that doesn't update {/*fix-a-variable-that-doesnt-update*/}
+#### Güncellenmeyen bir değişkeni düzeltme {/*fix-a-variable-that-doesnt-update*/}
 
-This `Timer` component keeps a `count` state variable which increases every second. The value by which it's increasing is stored in the `increment` state variable. You can control the `increment` variable with the plus and minus buttons.
+Bu `Timer` bileşeni her saniye artan bir `count` durum değişkenini tutar. Artan değer `increment` durum değişkeninde saklanır. Artı ve eksi düğmeleriyle `increment` değişkenini kontrol edebilirsiniz.
 
-However, no matter how many times you click the plus button, the counter is still incremented by one every second. What's wrong with this code? Why is `increment` always equal to `1` inside the Effect's code? Find the mistake and fix it.
+Ancak, artı düğmesine kaç kez tıklarsanız tıklayın, sayaç yine de her saniye bir artar. Bu kodda yanlış olan nedir? Efektin kodu içinde `increment` neden her zaman `1`e eşittir? Hatayı bulun ve düzeltin.
 
 <Hint>
 
-To fix this code, it's enough to follow the rules.
+Bu kodu düzeltmek için kurallara uymak yeterlidir.
 
 </Hint>
 
@@ -992,12 +992,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
+        Sayaç: {count}
         <button onClick={() => setCount(0)}>Reset</button>
       </h1>
       <hr />
       <p>
-        Every second, increment by:
+        Her saniye artıyor:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1019,9 +1019,9 @@ button { margin: 10px; }
 
 <Solution>
 
-As usual, when you're looking for bugs in Effects, start by searching for linter suppressions.
+Her zamanki gibi, Efektlerde hata ararken, linter bastırmalarını arayarak başlayın.
 
-If you remove the suppression comment, React will tell you that this Effect's code depends on `increment`, but you "lied" to React by claiming that this Effect does not depend on any reactive values (`[]`). Add `increment` to the dependency array:
+Suppression yorumunu kaldırırsanız, React size bu Efektin kodunun `increment` değerine bağlı olduğunu söyleyecektir, ancak siz bu Efektin herhangi bir reaktif değere (`[]`) bağlı olmadığını iddia ederek React'e "yalan söylediniz". Bağımlılık dizisine `increment` ekleyin:
 
 <Sandpack>
 
@@ -1044,12 +1044,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
+        Sayaç: {count}
         <button onClick={() => setCount(0)}>Reset</button>
       </h1>
       <hr />
       <p>
-        Every second, increment by:
+        Her saniye artıyor:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1069,19 +1069,19 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Now, when `increment` changes, React will re-synchronize your Effect, which will restart the interval.
+Şimdi, `increment` değiştiğinde, React Efektinizi yeniden senkronize edecek ve bu da aralığı yeniden başlatacakır.
 
 </Solution>
 
-#### Fix a freezing counter {/*fix-a-freezing-counter*/}
+#### Donan bir sayacı düzeltin {/*fix-a-freezing-counter*/}
 
-This `Timer` component keeps a `count` state variable which increases every second. The value by which it's increasing is stored in the `increment` state variable, which you can control it with the plus and minus buttons. For example, try pressing the plus button nine times, and notice that the `count` now increases each second by ten rather than by one.
+Bu `Timer` bileşeni her saniye artan bir `count` durum değişkenini tutar. Artan değer `increment` durum değişkeninde saklanır ve bunu artı ve eksi düğmeleriyle kontrol edebilirsiniz. Örneğin, artı düğmesine dokuz kez basmayı deneyin ve `sayı`nın artık her saniye bir yerine on arttığına dikkat edin.
 
-There is a small issue with this user interface. You might notice that if you keep pressing the plus or minus buttons faster than once per second, the timer itself seems to pause. It only resumes after a second passes since the last time you've pressed either button. Find why this is happening, and fix the issue so that the timer ticks on *every* second without interruptions.
+Bu kullanıcı arayüzü ile ilgili küçük bir sorun var. Artı veya eksi düğmelerine saniyede bir kereden daha hızlı basmaya devam ederseniz, zamanlayıcının kendisinin durakladığını fark edebilirsiniz. Ancak düğmelerden birine son basışınızın üzerinden bir saniye geçtikten sonra devam eder. Bunun neden olduğunu bulun ve sorunu çözerek zamanlayıcının kesintisiz olarak *her* saniye çalışmasını sağlayın.
 
 <Hint>
 
-It seems like the Effect which sets up the timer "reacts" to the `increment` value. Does the line that uses the current `increment` value in order to call `setCount` really need to be reactive?
+Görünüşe göre zamanlayıcıyı kuran Efekt `increment` değerine "tepki" veriyor. `SetCount`u çağırmak için mevcut `increment` değerini kullanan satırın gerçekten reaktif olması gerekiyor mu?
 
 </Hint>
 
@@ -1123,12 +1123,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
+        Sayaç: {count}
         <button onClick={() => setCount(0)}>Reset</button>
       </h1>
       <hr />
       <p>
-        Every second, increment by:
+        Her saniye artıyor:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1150,9 +1150,9 @@ button { margin: 10px; }
 
 <Solution>
 
-The issue is that the code inside the Effect uses the `increment` state variable. Since it's a dependency of your Effect, every change to `increment` causes the Effect to re-synchronize, which causes the interval to clear. If you keep clearing the interval every time before it has a chance to fire, it will appear as if the timer has stalled.
+Sorun, Efekt içindeki kodun `increment` state değişkenini kullanmasıdır. Bu, Efektinizin bir bağımlılığı olduğundan, `increment` durumundaki her değişiklik Efektin yeniden senkronize olmasına neden olur ve bu da aralığın temizlenmesine neden olur. Ateşleme şansı bulmadan önce her seferinde aralığı temizlemeye devam ederseniz, zamanlayıcı durmuş gibi görünecektir.
 
-To solve the issue, extract an `onTick` Effect Event from the Effect:
+Sorunu çözmek için, Efektten bir `onTick` Efekt Olayı çıkarın:
 
 <Sandpack>
 
@@ -1196,12 +1196,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
+        Sayaç: {count}
         <button onClick={() => setCount(0)}>Reset</button>
       </h1>
       <hr />
       <p>
-        Every second, increment by:
+        Her saniye artıyor:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1222,17 +1222,17 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Since `onTick` is an Effect Event, the code inside it isn't reactive. The change to `increment` does not trigger any Effects.
+`onTick` bir Efekt Olayı olduğundan, içindeki kod reaktif değildir. Increment` değişikliği herhangi bir Efekti tetiklemez.
 
 </Solution>
 
-#### Fix a non-adjustable delay {/*fix-a-non-adjustable-delay*/}
+#### Ayarlanamayan bir gecikmeyi düzeltin {/*fix-a-non-adjustable-delay*/}
 
-In this example, you can customize the interval delay. It's stored in a `delay` state variable which is updated by two buttons. However, even if you press the "plus 100 ms" button until the `delay` is 1000 milliseconds (that is, a second), you'll notice that the timer still increments very fast (every 100 ms). It's as if your changes to the `delay` are ignored. Find and fix the bug.
+Bu örnekte, aralık gecikmesini özelleştirebilirsiniz. Bu, iki düğme tarafından güncellenen bir `delay` state değişkeninde saklanır. Ancak, `delay` 1000 milisaniye (yani bir saniye) olana kadar "artı 100 ms" düğmesine bassanız bile, zamanlayıcının hala çok hızlı (her 100 ms'de bir) arttığını fark edeceksiniz. Sanki `delay`'de yaptığınız değişiklikler göz ardı edilmiş gibi. Hatayı bulun ve düzeltin.
 
 <Hint>
 
-Code inside Effect Events is not reactive. Are there cases in which you would _want_ the `setInterval` call to re-run?
+Effect Olayları içindeki kod reaktif değildir. `SetInterval` çağrısının yeniden çalışmasını _istediğiniz_ durumlar var mı?
 
 </Hint>
 
@@ -1283,12 +1283,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
+        Sayaç: {count}
         <button onClick={() => setCount(0)}>Reset</button>
       </h1>
       <hr />
       <p>
-        Increment by:
+        Artış:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1298,7 +1298,7 @@ export default function Timer() {
         }}>+</button>
       </p>
       <p>
-        Increment delay:
+        Artış gecikmesi:
         <button disabled={delay === 100} onClick={() => {
           setDelay(d => d - 100);
         }}>–100 ms</button>
@@ -1321,7 +1321,7 @@ button { margin: 10px; }
 
 <Solution>
 
-The problem with the above example is that it extracted an Effect Event called `onMount` without considering what the code should actually be doing. You should only extract Effect Events for a specific reason: when you want to make a part of your code non-reactive. However, the `setInterval` call *should* be reactive with respect to the `delay` state variable. If the `delay` changes, you want to set up the interval from scratch! To fix this code, pull all the reactive code back inside the Effect:
+Yukarıdaki örnekle ilgili sorun, kodun gerçekte ne yapması gerektiğini düşünmeden `onMount` adlı bir Effect Event çıkarmasıdır. Efekt Olaylarını yalnızca belirli bir nedenle çıkarmalısınız: kodunuzun bir bölümünü reaktif olmayan hale getirmek istediğinizde. Bununla birlikte, `setInterval` çağrısı `delay` durum değişkenine göre reaktif olmalıdır. Eğer `delay` değişirse, aralığı sıfırdan ayarlamak istersiniz! Bu kodu düzeltmek için, tüm reaktif kodu Efektin içine geri çekin:
 
 <Sandpack>
 
@@ -1366,12 +1366,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
+        Sayaç: {count}
         <button onClick={() => setCount(0)}>Reset</button>
       </h1>
       <hr />
       <p>
-        Increment by:
+        Artış:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1381,7 +1381,7 @@ export default function Timer() {
         }}>+</button>
       </p>
       <p>
-        Increment delay:
+        Artış gecikmesi:
         <button disabled={delay === 100} onClick={() => {
           setDelay(d => d - 100);
         }}>–100 ms</button>
@@ -1401,21 +1401,21 @@ button { margin: 10px; }
 
 </Sandpack>
 
-In general, you should be suspicious of functions like `onMount` that focus on the *timing* rather than the *purpose* of a piece of code. It may feel "more descriptive" at first but it obscures your intent. As a rule of thumb, Effect Events should correspond to something that happens from the *user's* perspective. For example, `onMessage`, `onTick`, `onVisit`, or `onConnected` are good Effect Event names. Code inside them would likely not need to be reactive. On the other hand, `onMount`, `onUpdate`, `onUnmount`, or `onAfterRender` are so generic that it's easy to accidentally put code that *should* be reactive into them. This is why you should name your Effect Events after *what the user thinks has happened,* not when some code happened to run.
+Genel olarak, bir kod parçasının *amacından* ziyade *zamanlamasına* odaklanan `onMount` gibi fonksiyonlara şüpheyle yaklaşmalısınız. İlk başta "daha açıklayıcı" gelebilir ancak amacınızı gizler. Genel bir kural olarak, Efekt Olayları *kullanıcının* bakış açısından gerçekleşen bir şeye karşılık gelmelidir. Örneğin, `onMessage`, `onTick`, `onVisit` veya `onConnected` iyi Effect Olay adlarıdır. İçlerindeki kodun muhtemelen reaktif olması gerekmeyecektir. Öte yandan, `onMount`, `onUpdate`, `onUnmount` veya `onAfterRender` o kadar geneldir ki, yanlışlıkla * reaktif olması gereken * kodları bunlara koymak kolaydır. Bu nedenle, Efekt Olaylarınızı bazı kodların ne zaman çalıştığına göre değil, *kullanıcının ne olduğunu düşündüğüne göre* adlandırmalısınız.
 
 </Solution>
 
-#### Fix a delayed notification {/*fix-a-delayed-notification*/}
+#### Geciken bir bildirimi düzeltme {/*fix-a-delayed-notification*/}
 
-When you join a chat room, this component shows a notification. However, it doesn't show the notification immediately. Instead, the notification is artificially delayed by two seconds so that the user has a chance to look around the UI.
+Bir sohbet odasına katıldığınızda, bu bileşen bir bildirim gösterir. Ancak, bildirimi hemen göstermez. Bunun yerine, bildirim yapay olarak iki saniye geciktirilir, böylece kullanıcının kullanıcı arayüzüne bakma şansı olur.
 
-This almost works, but there is a bug. Try changing the dropdown from "general" to "travel" and then to "music" very quickly. If you do it fast enough, you will see two notifications (as expected!) but they will *both* say "Welcome to music".
+Bu neredeyse işe yarıyor, ancak bir hata var. Açılır menüyü "genel "den "seyahat "e ve ardından çok hızlı bir şekilde "müzik "e değiştirmeyi deneyin. Bunu yeterince hızlı yaparsanız, iki bildirim göreceksiniz (beklendiği gibi!) ancak her ikisinde de * "Müziğe hoş geldiniz" yazacaktır.
 
-Fix it so that when you switch from "general" to "travel" and then to "music" very quickly, you see two notifications, the first one being "Welcome to travel" and the second one being "Welcome to music". (For an additional challenge, assuming you've *already* made the notifications show the correct rooms, change the code so that only the latter notification is displayed.)
+"Genel"den "seyahat"e ve ardından çok hızlı bir şekilde "müzik"e geçtiğinizde, ilki "Seyahate hoş geldiniz" ve ikincisi "Müziğe hoş geldiniz" olmak üzere iki bildirim görecek şekilde düzeltin. (Ek bir zorluk için, *zaten* bildirimlerin doğru odaları göstermesini sağladığınızı varsayarak, kodu yalnızca ikinci bildirim görüntülenecek şekilde değiştirin).
 
 <Hint>
 
-Your Effect knows which room it connected to. Is there any information that you might want to pass to your Effect Event?
+Efektiniz hangi odaya bağlı olduğunu bilir. Efekt Etkinliğinize aktarmak isteyebileceğiniz herhangi bir bilgi var mı?
 
 </Hint>
 
@@ -1466,19 +1466,19 @@ function ChatRoom({ roomId, theme }) {
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -1487,7 +1487,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Koyu temayı kullan
       </label>
       <hr />
       <ChatRoom
@@ -1501,7 +1501,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   let connectedCallback;
   let timeout;
   return {
@@ -1514,10 +1514,10 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Only "connected" event is supported.');
+        throw Error('Yalnızca "bağlı" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -1554,11 +1554,11 @@ label { display: block; margin-top: 10px; }
 
 <Solution>
 
-Inside your Effect Event, `roomId` is the value *at the time Effect Event was called.*
+Efekt Olayınızın içinde, `roomId` değeri *Efekt Olayının çağrıldığı andaki değerdir.*
 
-Your Effect Event is called with a two second delay. If you're quickly switching from the travel to the music room, by the time the travel room's notification shows, `roomId` is already `"music"`. This is why both notifications say "Welcome to music".
+Efekt Etkinliğiniz iki saniyelik bir gecikmeyle çağrılır. Seyahat odasından müzik odasına hızlı bir şekilde geçiş yapıyorsanız, seyahat odasının bildirimi gösterildiğinde, `roomId` zaten `"müzik"`tir. Bu yüzden her iki bildirimde de "Müziğe hoş geldiniz" yazıyor.
 
-To fix the issue, instead of reading the *latest* `roomId` inside the Effect Event, make it a parameter of your Effect Event, like `connectedRoomId` below. Then pass `roomId` from your Effect by calling `onConnected(roomId)`:
+Sorunu çözmek için, Efekt Olayı içinde *en son* `roomId`yi okumak yerine, aşağıdaki `connectedRoomId` gibi Efekt Olayınızın bir parametresi haline getirin. Ardından `onConnected(roomId)` çağrısı yaparak `roomId`yi Efektinizden geçirin:
 
 <Sandpack>
 
@@ -1603,23 +1603,23 @@ function ChatRoom({ roomId, theme }) {
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>{roomId} odasına hoş geldiniz!</h1>
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -1628,7 +1628,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Koyu temayı kullan
       </label>
       <hr />
       <ChatRoom
