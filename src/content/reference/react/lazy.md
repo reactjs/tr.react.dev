@@ -32,11 +32,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 #### Parametreler {/*parameters*/}
 
-<<<<<<< HEAD
 * `load`: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya başka bir *thenable* (`then` metoduna sahip Promise benzeri bir nesne) döndürmeniz gerekir. React, dönen bileşeni ilk kez render etmeye yeltenene kadar `load`'ı çağırmaz. React `load`'ı ilk çağırdığında, çözümlenene (resolve) kadar bekler, ardından çözümlenmiş değeri React bileşeni olarak render eder. Hem Promise hem de Promise'in çözümlenmiş değeri ön belleğe (cache) alınacağından, React `load`'ı birden fazla kez çağırmaz. Promise reddedilirse (reject), React reddetme nedenini ele alması için `throw` ile en yakındaki Error Boundary'ye gönderir.
-=======
-* `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another *thenable* (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value's `.default` as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
->>>>>>> 5219d736a7c181a830f7646e616eb97774b43272
 
 #### Dönüş değeri {/*returns*/}
 
