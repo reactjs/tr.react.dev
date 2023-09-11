@@ -5,6 +5,7 @@ title: 'Olayları Efektlerinden Ayırma'
 <Intro>
 
 Olay işleyicileri yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay işleyicilerin aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt. Bu sayfa size bunu nasıl yapacağınızı öğretecek.
+
 </Intro>
 
 <YouWillLearn>
@@ -1836,7 +1837,9 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
+
 Bu, oda değiştirdiğinizde önceden planlanmış (ancak henüz görüntülenmemiş) bildirimlerin iptal edilmesini sağlar.
+
 
 </Solution>
 
