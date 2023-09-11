@@ -124,11 +124,7 @@ export default function PrintApp() {
 
 </Sandpack>
 
-<<<<<<< HEAD
 `flushSync` olmadığında, yazdırma diyalogu `isPrinting`'i "hayır" olarak gösterir. Bunun sebebi, React'in güncellemeleri asenkron bir şekilde biriktirmesi ve yazdırma diyalogunun durum güncellenmeden önce görüntülenmesidir.
-=======
-Without `flushSync`, the print dialog will display `isPrinting` as "no". This is because React batches the updates asynchronously and the print dialog is displayed before the state is updated.
->>>>>>> 5219d736a7c181a830f7646e616eb97774b43272
 
 <Pitfall>
 
