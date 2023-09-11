@@ -188,7 +188,7 @@ Bu farkı göstermek için bir önceki örneğe geri dönelim.
     // ...
 ```
 
-From the user's perspective, **a change to the `message` does _not_ mean that they want to send a message.** It only means that the user is typing. In other words, the logic that sends a message should not be reactive. It should not run again only because the <CodeStep step={2}>reactive value</CodeStep> has changed. That's why it belongs in the event handler:
+Kullanıcının bakış açısından, **`mesaj`'da yapılan bir değişiklik, mesaj göndermek istedikleri anlamına gelmez.** Bu sadece kullanıcının yazmakta olduğu anlamına gelir. Başka bir deyişle, mesaj gönderen mantık reaktif olmamalıdır. Sadece <CodeStep step={2}>reactive value</CodeStep> değiştiği için tekrar çalışmamalıdır. Bu yüzden olay işleyicisine aittir:
 
 ```js {2}
   function handleSendClick() {
@@ -196,11 +196,11 @@ From the user's perspective, **a change to the `message` does _not_ mean that th
   }
 ```
 
-Event handlers aren't reactive, so `sendMessage(message)` will only run when the user clicks the Send button.
+Olay işleyicileri reaktif değildir, bu nedenle `sendMessage(message)` yalnızca kullanıcı Gönder düğmesine tıkladığında çalışacaktır.
 
-### Logic inside Effects is reactive {/*logic-inside-effects-is-reactive*/}
+### Efektlerin içindeki mantık reaktiftir {/*logic-inside-effects-is-reactive*/}
 
-Now let's return to these lines:
+Şimdi bu satırlara geri dönelim:
 
 ```js [[2, 2, "roomId"]]
     // ...
@@ -209,7 +209,7 @@ Now let's return to these lines:
     // ...
 ```
 
-From the user's perspective, **a change to the `roomId` *does* mean that they want to connect to a different room.** In other words, the logic for connecting to the room should be reactive. You *want* these lines of code to "keep up" with the <CodeStep step={2}>reactive value</CodeStep>, and to run again if that value is different. That's why it belongs in an Effect:
+Kullanıcının bakış açısından, **`roomId`'deki bir değişiklik farklı bir odaya bağlanmak istedikleri anlamına gelir.** Başka bir deyişle, odaya bağlanma mantığı reaktif olmalıdır. Bu kod satırlarının <CodeStep step={2}>reaktif değere</CodeStep> "ayak uydurmasını" ve bu değer farklıysa yeniden çalışmasını *istiyorsunuz*. Bu yüzden bir Etkiye aittir:
 
 ```js {2-3}
   useEffect(() => {
@@ -221,13 +221,13 @@ From the user's perspective, **a change to the `roomId` *does* mean that they wa
   }, [roomId]);
 ```
 
-Effects are reactive, so `createConnection(serverUrl, roomId)` and `connection.connect()` will run for every distinct value of `roomId`. Your Effect keeps the chat connection synchronized to the currently selected room.
+Efektler reaktiftir, bu nedenle `createConnection(serverUrl, roomId)` ve `connection.connect()`, `roomId`nin her farklı değeri için çalışacaktır. Efektiniz sohbet bağlantısını o anda seçili olan odayla senkronize tutar.
 
-## Extracting non-reactive logic out of Effects {/*extracting-non-reactive-logic-out-of-effects*/}
+## Reaktif olmayan mantığı Effects'ten çıkarma {/*extracting-non-reactive-logic-out-of-effects*/}
 
-Things get more tricky when you want to mix reactive logic with non-reactive logic.
+Reaktif mantığı reaktif olmayan mantıkla karıştırmak istediğinizde işler daha da zorlaşır.
 
-For example, imagine that you want to show a notification when the user connects to the chat. You read the current theme (dark or light) from the props so that you can show the notification in the correct color:
+Örneğin, kullanıcı sohbete bağlandığında bir bildirim göstermek istediğinizi düşünün. Bildirimi doğru renkte gösterebilmek için mevcut temayı (koyu veya açık) prop'lardan okursunuz:
 
 ```js {1,4-6}
 function ChatRoom({ roomId, theme }) {
@@ -240,24 +240,24 @@ function ChatRoom({ roomId, theme }) {
     // ...
 ```
 
-However, `theme` is a reactive value (it can change as a result of re-rendering), and [every reactive value read by an Effect must be declared as its dependency.](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) Now you have to specify `theme` as a dependency of your Effect:
+Ancak, `theme` reaktif bir değerdir (yeniden oluşturma sonucunda değişebilir) ve [bir Efekt tarafından okunan her reaktif değerin bağımlılığı olarak bildirilmesi gerekir](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) Şimdi `theme` Efektinizin bir bağımlılığı olarak belirtmeniz gerekir:
 
 ```js {5,11}
 function ChatRoom({ roomId, theme }) {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.on('connected', () => {
-      showNotification('Connected!', theme);
+      showNotification('Bağlı!', theme);
     });
     connection.connect();
     return () => {
       connection.disconnect()
     };
-  }, [roomId, theme]); // ✅ All dependencies declared
+  }, [roomId, theme]); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 ```
 
-Play with this example and see if you can spot the problem with this user experience:
+Bu örnekle oynayın ve bu kullanıcı deneyimindeki sorunu tespit edip edemeyeceğinizi görün:
 
 <Sandpack>
 
@@ -289,29 +289,29 @@ function ChatRoom({ roomId, theme }) {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.on('connected', () => {
-      showNotification('Connected!', theme);
+      showNotification('Bağlı!', theme);
     });
     connection.connect();
     return () => connection.disconnect();
   }, [roomId, theme]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>{roomId} odasına hoş geldiniz!</h1>
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -320,7 +320,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Koyu tema kullanın
       </label>
       <hr />
       <ChatRoom
@@ -334,7 +334,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   let connectedCallback;
   let timeout;
   return {
@@ -347,10 +347,10 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Only "connected" event is supported.');
+        throw Error('Yalnızca "bağlı" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -385,46 +385,46 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-When the `roomId` changes, the chat re-connects as you would expect. But since `theme` is also a dependency, the chat *also* re-connects every time you switch between the dark and the light theme. That's not great!
+`RoomId` değiştiğinde, sohbet beklediğiniz gibi yeniden bağlanır. Ancak `theme` de bir bağımlılık olduğundan, koyu ve açık tema arasında her geçiş yaptığınızda sohbet *ayrıca* yeniden bağlanır. Bu hiç de iyi değil!
 
-In other words, you *don't* want this line to be reactive, even though it is inside an Effect (which is reactive):
+Başka bir deyişle, bir Efektin (reaktif olan) içinde olmasına rağmen bu satırın reaktif olmasını *istemezsiniz*:
 
 ```js
       // ...
-      showNotification('Connected!', theme);
+      showNotification('Bağlı!', theme);
       // ...
 ```
 
-You need a way to separate this non-reactive logic from the reactive Effect around it.
+Bu reaktif olmayan mantığı, etrafındaki reaktif Efektten ayırmak için bir yola ihtiyacınız var.
 
-### Declaring an Effect Event {/*declaring-an-effect-event*/}
+### Bir Etki Olayı Bildirme {/*declaring-an-effect-event*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
 
 </Wip>
 
-Use a special Hook called [`useEffectEvent`](/reference/react/experimental_useEffectEvent) to extract this non-reactive logic out of your Effect:
+Bu reaktif olmayan mantığı Efektinizden çıkarmak için [`useEffectEvent`](/reference/react/experimental_useEffectEvent) adlı özel bir Kanca kullanın:
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
 
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Connected!', theme);
+    showNotification('Bağlı!', theme);
   });
   // ...
 ```
 
-Here, `onConnected` is called an *Effect Event.* It's a part of your Effect logic, but it behaves a lot more like an event handler. The logic inside it is not reactive, and it always "sees" the latest values of your props and state.
+Burada, `onConnected` bir *Efekt Olayı olarak adlandırılır.* Efekt mantığınızın bir parçasıdır, ancak daha çok bir olay işleyici gibi davranır. İçindeki mantık reaktif değildir ve her zaman sahne ve durumunuzun en son değerlerini "görür".
 
-Now you can call the `onConnected` Effect Event from inside your Effect:
+Artık `onConnected` Efekt Olayını Efektinizin içinden çağırabilirsiniz:
 
 ```js {2-4,9,13}
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Connected!', theme);
+    showNotification('Bağlı!', theme);
   });
 
   useEffect(() => {
@@ -434,13 +434,13 @@ function ChatRoom({ roomId, theme }) {
     });
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 ```
 
-This solves the problem. Note that you had to *remove* `onConnected` from the list of your Effect's dependencies. **Effect Events are not reactive and must be omitted from dependencies.**
+Bu sorunu çözer. Efektinizin bağımlılıkları listesinden `onConnected` öğesini *kaldırmanız* gerektiğini unutmayın. **Efekt Olayları reaktif değildir ve bağımlılıklardan çıkarılmalıdır.**
 
-Verify that the new behavior works as you would expect:
+Yeni davranışın beklediğiniz gibi çalıştığını doğrulayın:
 
 <Sandpack>
 
@@ -471,7 +471,7 @@ const serverUrl = 'https://localhost:1234';
 
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Connected!', theme);
+    showNotification('Bağlı!', theme);
   });
 
   useEffect(() => {
@@ -483,11 +483,11 @@ function ChatRoom({ roomId, theme }) {
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>{roomId} odasına hoş geldiniz!</h1>
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isDark, setIsDark] = useState(false);
   return (
     <>
@@ -497,9 +497,9 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
