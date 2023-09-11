@@ -935,7 +935,11 @@ Tekrar "sonraki"'ne tıklamak
 
 </DiagramGroup>
 
+<<<<<<< HEAD
 `Counter` bileşeni DOM'dan her silindiğinde state'i de yok edilir. Bu yüzden butona her tıkladığınızda sıfırlanırlar.
+=======
+Each `Counter`'s state gets destroyed each time it's removed from the DOM. This is why they reset every time you click the button.
+>>>>>>> 5219d736a7c181a830f7646e616eb97774b43272
 
 Bu çözüm, aynı konumda render edilen birkaç bağımsız bileşeniniz olduğunda kullanışlıdır. Bu örnekte yalnızca iki bileşeniniz var bu yüzden ikisini de JSX'te ayrı ayrı render etmek zor değildir.
 
