@@ -1,37 +1,36 @@
 ---
-title: 'Separating Events from Effects'
+title: 'Olayları Efektlerinden Ayırma'
 ---
 
 <Intro>
 
-Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if some value they read, like a prop or a state variable, is different from what it was during the last render. Sometimes, you also want a mix of both behaviors: an Effect that re-runs in response to some values but not others. This page will teach you how to do that.
-
+Olay işleyicileri yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay işleyicilerin aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt. Bu sayfa size bunu nasıl yapacağınızı öğretecek.
 </Intro>
 
 <YouWillLearn>
 
-- How to choose between an event handler and an Effect
-- Why Effects are reactive, and event handlers are not
-- What to do when you want a part of your Effect's code to not be reactive
-- What Effect Events are, and how to extract them from your Effects
-- How to read the latest props and state from Effects using Effect Events
+- Bir olay işleyici ile bir Efekt arasında nasıl seçim yapılır?
+- Efektler neden reaktiftir ve olay işleyicileri değildir?
+- Efektinizin kodunun bir bölümünün reaktif olmamasını istediğinizde ne yapmalısınız?
+- Efekt Olaylarının ne olduğu ve Efektlerinizden nasıl çıkarılacağı
+- Efekt Olaylarını kullanarak Efektlerden en son sahne ve durum nasıl okunur?
 
 </YouWillLearn>
 
-## Choosing between event handlers and Effects {/*choosing-between-event-handlers-and-effects*/}
+## Olay işleyicileri ve Efektler arasında seçim yapma {/*choosing-between-event-handlers-and-effects*/}
 
-First, let's recap the difference between event handlers and Effects.
+İlk olarak, olay işleyicileri ve Efektler arasındaki farkı özetleyelim.
 
-Imagine you're implementing a chat room component. Your requirements look like this:
+Bir sohbet odası bileşeni uyguladığınızı düşünün. Gereksinimleriniz şuna benziyor:
 
-1. Your component should automatically connect to the selected chat room.
-1. When you click the "Send" button, it should send a message to the chat.
+1. Bileşeniniz seçilen sohbet odasına otomatik olarak bağlanmalıdır.
+1. "Gönder" düğmesine tıkladığınızda, sohbete bir mesaj göndermelidir.
 
-Let's say you've already implemented the code for them, but you're not sure where to put it. Should you use event handlers or Effects? Every time you need to answer this question, consider [*why* the code needs to run.](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events)
+Diyelim ki bunlar için kodu zaten uyguladınız, ancak nereye koyacağınızdan emin değilsiniz. Olay işleyicileri mi yoksa Efektler mi kullanmalısınız? Bu soruyu her yanıtlamanız gerektiğinde, [*neden* kodun çalışması gerektiğini](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) düşünün.
 
-### Event handlers run in response to specific interactions {/*event-handlers-run-in-response-to-specific-interactions*/}
+### Olay işleyicileri belirli etkileşimlere yanıt olarak çalışır {/*event-handlers-run-in-response-to-specific-interactions*/}
 
-From the user's perspective, sending a message should happen *because* the particular "Send" button was clicked. The user will get rather upset if you send their message at any other time or for any other reason. This is why sending a message should be an event handler. Event handlers let you handle specific interactions:
+Kullanıcının bakış açısına göre, bir mesajın gönderilmesi belirli bir "Gönder" düğmesine tıklandığı için *olmalıdır*. Mesajlarını başka bir zamanda veya başka bir nedenle gönderirseniz kullanıcı oldukça üzülecektir. İşte bu yüzden mesaj gönderme bir olay işleyici olmalıdır. Olay işleyicileri belirli etkileşimleri ele almanızı sağlar:
 
 ```js {4-6}
 function ChatRoom({ roomId }) {
@@ -44,19 +43,19 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <input value={message} onChange={e => setMessage(e.target.value)} />
-      <button onClick={handleSendClick}>Send</button>;
+      <button onClick={handleSendClick}>Gönder</button>;
     </>
   );
 }
 ```
 
-With an event handler, you can be sure that `sendMessage(message)` will *only* run if the user presses the button.
+Bir olay işleyicisi ile `sendMessage(message)`ın *sadece* kullanıcı düğmeye bastığında çalışacağından emin olabilirsiniz.
 
-### Effects run whenever synchronization is needed {/*effects-run-whenever-synchronization-is-needed*/}
+### Senkronizasyon gerektiğinde Efektler çalışır {/*effects-run-whenever-synchronization-is-needed*/}
 
-Recall that you also need to keep the component connected to the chat room. Where does that code go?
+Bileşeni sohbet odasına bağlı tutmanız gerektiğini de hatırlayın. Bu kod nereye gidecek?
 
-The *reason* to run this code is not some particular interaction. It doesn't matter why or how the user navigated to the chat room screen. Now that they're looking at it and could interact with it, the component needs to stay connected to the selected chat server. Even if the chat room component was the initial screen of your app, and the user has not performed any interactions at all, you would *still* need to connect. This is why it's an Effect:
+Bu kodu çalıştırmak için *neden* belirli bir etkileşim değildir. Kullanıcının sohbet odası ekranına neden veya nasıl gittiği önemli değildir. Artık ona baktıklarına ve onunla etkileşime girebildiklerine göre, bileşenin seçilen sohbet sunucusuna bağlı kalması gerekir. Sohbet odası bileşeni uygulamanızın ilk ekranı olsa ve kullanıcı hiçbir etkileşim gerçekleştirmemiş olsa bile, yine de *bağlanmanız* gerekir. İşte bu yüzden bir Efekttir:
 
 ```js {3-9}
 function ChatRoom({ roomId }) {
@@ -72,7 +71,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-With this code, you can be sure that there is always an active connection to the currently selected chat server, *regardless* of the specific interactions performed by the user. Whether the user has only opened your app, selected a different room, or navigated to another screen and back, your Effect ensures that the component will *remain synchronized* with the currently selected room, and will [re-connect whenever it's necessary.](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once)
+Bu kod sayesinde, kullanıcı tarafından gerçekleştirilen belirli etkileşimlerden *bağımsız olarak* seçili sohbet sunucusuyla her zaman aktif bir bağlantı olduğundan emin olabilirsiniz. Kullanıcı ister sadece uygulamanızı açmış, ister farklı bir oda seçmiş ya da başka bir ekrana gidip geri dönmüş olsun, Efektiniz bileşenin o anda seçili olan odayla *senkronize kalmasını* ve [gerektiğinde yeniden bağlanmasını](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once) sağlar.
 
 <Sandpack>
 
@@ -97,31 +96,31 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz!</h1>
       <input value={message} onChange={e => setMessage(e.target.value)} />
-      <button onClick={handleSendClick}>Send</button>
+      <button onClick={handleSendClick}>Gönder</button>
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [show, setShow] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -136,13 +135,13 @@ export function sendMessage(message) {
 }
 
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
     }
   };
 }
@@ -154,13 +153,13 @@ input, select { margin-right: 20px; }
 
 </Sandpack>
 
-## Reactive values and reactive logic {/*reactive-values-and-reactive-logic*/}
+## Reaktif değerler ve reaktif mantık {/*reactive-values-and-reactive-logic*/}
 
-Intuitively, you could say that event handlers are always triggered "manually", for example by clicking a button. Effects, on the other hand, are "automatic": they run and re-run as often as it's needed to stay synchronized.
+Sezgisel olarak, olay işleyicilerinin her zaman "manuel" olarak tetiklendiğini söyleyebilirsiniz, örneğin bir düğmeye tıklayarak. Öte yandan, Efektler "otomatiktir": senkronize kalmak için gerektiği sıklıkta çalışır ve yeniden çalışırlar.
 
-There is a more precise way to think about this.
+Bunu düşünmenin daha kesin bir yolu vardır.
 
-Props, state, and variables declared inside your component's body are called <CodeStep step={2}>reactive values</CodeStep>. In this example, `serverUrl` is not a reactive value, but `roomId` and `message` are. They participate in the rendering data flow:
+Bileşeninizin gövdesi içinde bildirilen prop'lar, durum ve değişkenler <CodeStep step={2}>reaktif değerler</CodeStep> olarak adlandırılır. Bu örnekte, `serverUrl` reaktif bir değer değildir, ancak `roomId` ve `message` reaktif değerlerdir. Oluşturma veri akışına katılırlar:
 
 ```js [[2, 3, "roomId"], [2, 4, "message"]]
 const serverUrl = 'https://localhost:1234';
