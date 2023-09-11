@@ -209,7 +209,7 @@ Olay işleyicileri reaktif değildir, bu nedenle `sendMessage(message)` yalnızc
     // ...
 ```
 
-Kullanıcının bakış açısından, **`roomId`'deki bir değişiklik farklı bir odaya bağlanmak istedikleri anlamına gelir.** Başka bir deyişle, odaya bağlanma mantığı reaktif olmalıdır. Bu kod satırlarının <CodeStep step={2}>reaktif değere</CodeStep> "ayak uydurmasını" ve bu değer farklıysa yeniden çalışmasını *istiyorsunuz*. Bu yüzden bir Etkiye aittir:
+Kullanıcının bakış açısından, **`roomId`'deki bir değişiklik farklı bir odaya bağlanmak istedikleri anlamına gelir.** Başka bir deyişle, odaya bağlanma mantığı reaktif olmalıdır. Bu kod satırlarının <CodeStep step={2}>reaktif değere</CodeStep> "ayak uydurmasını" ve bu değer farklıysa yeniden çalışmasını *istiyorsunuz*. Bu yüzden bir Efekte aittir:
 
 ```js {2-3}
   useEffect(() => {
@@ -397,7 +397,7 @@ Başka bir deyişle, bir Efektin (reaktif olan) içinde olmasına rağmen bu sat
 
 Bu reaktif olmayan mantığı, etrafındaki reaktif Efektten ayırmak için bir yola ihtiyacınız var.
 
-### Bir Etki Olayı Bildirme {/*declaring-an-effect-event*/}
+### Bir Efekt Olayı Bildirme {/*declaring-an-effect-event*/}
 
 <Wip>
 
@@ -947,7 +947,7 @@ Efekt Olayları, Efekt kodunuzun reaktif olmayan "parçalarıdır". Kendilerini 
 <Recap>
 
 - Olay işleyicileri belirli etkileşimlere yanıt olarak çalışır.
-- Etkiler, senkronizasyon gerektiğinde çalışır.
+- Efektler, senkronizasyon gerektiğinde çalışır.
 - Olay işleyicilerinin içindeki mantık reaktif değildir.
 - Efektlerin içindeki mantık reaktiftir.
 - Reaktif olmayan mantığı Efektlerden Efekt Olaylarına taşıyabilirsiniz.
@@ -1642,7 +1642,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   let connectedCallback;
   let timeout;
   return {
@@ -1655,10 +1655,10 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Only "connected" event is supported.');
+        throw Error('Yalnızca "bağlı" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -1693,9 +1693,9 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-The Effect that had `roomId` set to `"travel"` (so it connected to the `"travel"` room) will show the notification for `"travel"`. The Effect that had `roomId` set to `"music"` (so it connected to the `"music"` room) will show the notification for `"music"`. In other words, `connectedRoomId` comes from your Effect (which is reactive), while `theme` always uses the latest value.
+`roomId`nin `"seyahat"` olarak ayarlandığı (yani `"seyahat"` odasına bağlandığı) Efekt, `"seyahat"` için bildirim gösterecektir. `roomId` değeri `"müzik"` olarak ayarlanmış olan (yani `"müzik"` odasına bağlanmış olan) Efekt, `"müzik"` için bildirim gösterecektir. Başka bir deyişle, `connectedRoomId` Efektinizden (reaktif olan) gelirken, `theme` her zaman en son değeri kullanır.
 
-To solve the additional challenge, save the notification timeout ID and clear it in the cleanup function of your Effect:
+Ek zorluğu çözmek için, bildirim zaman aşımı kimliğini kaydedin ve Efektinizin temizleme işlevinde temizleyin:
 
 <Sandpack>
 
@@ -1746,23 +1746,23 @@ function ChatRoom({ roomId, theme }) {
     };
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>{roomId} odasına hoş geldiniz!</h1>
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <label>
@@ -1771,7 +1771,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Koyu temayı kullan
       </label>
       <hr />
       <ChatRoom
@@ -1785,7 +1785,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   let connectedCallback;
   let timeout;
   return {
@@ -1798,10 +1798,10 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Only "connected" event is supported.');
+        throw Error('Yalnızca "bağlı" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -1836,7 +1836,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-This ensures that already scheduled (but not yet displayed) notifications get cancelled when you change rooms.
+Bu, oda değiştirdiğinizde önceden planlanmış (ancak henüz görüntülenmemiş) bildirimlerin iptal edilmesini sağlar.
 
 </Solution>
 
