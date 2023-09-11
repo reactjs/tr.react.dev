@@ -53,11 +53,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 #### Dönüş değerleri {/*load-returns*/}
 
-<<<<<<< HEAD
 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya başka bir *thenable* (`then` metoduna sahip Promise benzeri bir nesne) döndürmeniz gerekir. Bu nesne; fonksiyon, [`memo`](/reference/react/memo) ya da [`forwardRef`](/reference/react/forwardRef)'de olduğu gibi geçerli bir React bileşen tipine çözülmelidir.
-=======
-You need to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or some other *thenable* (a Promise-like object with a `then` method). It needs to eventually resolve to an object whose `.default` property is a valid React component type, such as a function, [`memo`](/reference/react/memo), or a [`forwardRef`](/reference/react/forwardRef) component.
->>>>>>> 5219d736a7c181a830f7646e616eb97774b43272
 
 ---
 
@@ -79,11 +75,7 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-<<<<<<< HEAD
 Bu kod, [dinamik `import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)'a dayanır. Kullanmak için paketleyicinizin (bundler) veya framework'ünüzün desteklemesi gerekir.
-=======
-This code relies on [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) which might require support from your bundler or framework. Using this pattern requires that the lazy component you're importing was exported as the `default` export.
->>>>>>> 5219d736a7c181a830f7646e616eb97774b43272
 
 Artık bileşeninizin kodları talep edildiğinde (on demand) yüklendiğine göre, yüklenme aşamasında yerine neyin görüntüleneceğini belirtmeniz gerekir. Bunu, lazy bileşeni ya da üst bileşenlerinden birini [`<Suspense>`](/reference/react/Suspense) sınırına (boundary) sararak yapabilirsiniz:
 
