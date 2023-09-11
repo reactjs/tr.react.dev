@@ -171,16 +171,16 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Reactive values like these can change due to a re-render. For example, the user may edit the `message` or choose a different `roomId` in a dropdown. Event handlers and Effects respond to changes differently:
+Bunlar gibi reaktif değerler yeniden oluşturma nedeniyle değişebilir. Örneğin, kullanıcı `mesaj`ı düzenleyebilir veya bir açılır menüde farklı bir `odaId` seçebilir. Olay işleyicileri ve Efektler değişikliklere farklı şekilde yanıt verir:
 
-- **Logic inside event handlers is *not reactive.*** It will not run again unless the user performs the same interaction (e.g. a click) again. Event handlers can read reactive values without "reacting" to their changes.
-- **Logic inside Effects is *reactive.*** If your Effect reads a reactive value, [you have to specify it as a dependency.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Then, if a re-render causes that value to change, React will re-run your Effect's logic with the new value.
+- **Olay işleyicilerinin içindeki mantık * reaktif değildir.*** Kullanıcı aynı etkileşimi (örneğin bir tıklama) tekrar gerçekleştirmedikçe tekrar çalışmayacaktır. Olay işleyicileri, değişikliklerine "tepki vermeden" reaktif değerleri okuyabilir.
+- **Efektlerin içindeki mantık *reaktiftir.*** Efektiniz reaktif bir değeri okuyorsa, [bunu bir bağımlılık olarak belirtmeniz gerekir](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Ardından, bir yeniden oluşturma bu değerin değişmesine neden olursa, React, Efektinizin mantığını yeni değerle yeniden çalıştıracaktır.
 
-Let's revisit the previous example to illustrate this difference.
+Bu farkı göstermek için bir önceki örneğe geri dönelim.
 
-### Logic inside event handlers is not reactive {/*logic-inside-event-handlers-is-not-reactive*/}
+### Olay işleyicileri içindeki mantık reaktif değildir {/*logic-inside-event-handlers-is-not-reactive*/}
 
-Take a look at this line of code. Should this logic be reactive or not?
+Şu kod satırına bir göz atın. Bu mantık reaktif olmalı mı olmamalı mı?
 
 ```js [[2, 2, "message"]]
     // ...
