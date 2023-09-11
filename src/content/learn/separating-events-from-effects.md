@@ -492,7 +492,7 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
@@ -508,7 +508,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Koyu tema kullanın
       </label>
       <hr />
       <ChatRoom
@@ -522,7 +522,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   let connectedCallback;
   let timeout;
   return {
@@ -535,10 +535,10 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Only "connected" event is supported.');
+        throw Error('Yalnızca "bağlı" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -573,19 +573,19 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to a user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
+Efekt Olaylarını olay işleyicilerine çok benzer olarak düşünebilirsiniz. Temel fark, olay işleyicilerin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt Olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt Olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
 
-### Reading latest props and state with Effect Events {/*reading-latest-props-and-state-with-effect-events*/}
+### Efekt Olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
 
 </Wip>
 
-Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
+Efekt Olayları, bağımlılık bağlayıcısını bastırmak isteyebileceğiniz birçok modeli düzeltmenize olanak tanır.
 
-For example, say you have an Effect to log the page visits:
+Örneğin, sayfa ziyaretlerini günlüğe kaydetmek için bir Efektiniz olduğunu varsayalım:
 
 ```js
 function Page() {
@@ -596,24 +596,24 @@ function Page() {
 }
 ```
 
-Later, you add multiple routes to your site. Now your `Page` component receives a `url` prop with the current path. You want to pass the `url` as a part of your `logVisit` call, but the dependency linter complains:
+Daha sonra sitenize birden fazla rota eklersiniz. Şimdi `Page` bileşeniniz geçerli yolu içeren bir `url` prop alır. `url`i `logVisit` çağrınızın bir parçası olarak iletmek istiyorsunuz, ancak bağımlılık linter`ı şikayet ediyor:
 
 ```js {1,3}
 function Page({ url }) {
   useEffect(() => {
     logVisit(url);
-  }, []); // 🔴 React Hook useEffect has a missing dependency: 'url'
+  }, []); // 🔴 React Hook useEffect'in eksik bir bağımlılığı var: 'url'
   // ...
 }
 ```
 
-Think about what you want the code to do. You *want* to log a separate visit for different URLs since each URL represents a different page. In other words, this `logVisit` call *should* be reactive with respect to the `url`. This is why, in this case, it makes sense to follow the dependency linter, and add `url` as a dependency:
+Kodun ne yapmasını istediğinizi düşünün. Her URL farklı bir sayfayı temsil ettiğinden, farklı URL'ler için ayrı bir ziyareti günlüğe kaydetmek *istiyorsunuz*. Başka bir deyişle, bu `logVisit` çağrısı *`url`ye göre reaktif olmalıdır*. Bu nedenle, bu durumda, bağımlılık linter'ını takip etmek ve `url` öğesini bir bağımlılık olarak eklemek mantıklıdır:
 
 ```js {4}
 function Page({ url }) {
   useEffect(() => {
     logVisit(url);
-  }, [url]); // ✅ All dependencies declared
+  }, [url]); // ✅ Bildirilen tüm bağımlılıklar
   // ...
 }
 ```
