@@ -4,34 +4,34 @@ title: 'Olayları Efektlerinden Ayırma'
 
 <Intro>
 
-Olay işleyicileri yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay işleyicilerin aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt. Bu sayfa size bunu nasıl yapacağınızı öğretecek.
+Olay yöneticisi yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay yöneticisi aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt. Bu sayfa size bunu nasıl yapacağınızı öğretecek.
 
 </Intro>
 
 <YouWillLearn>
 
-- Bir olay işleyici ile bir Efekt arasında nasıl seçim yapılır?
-- Efektler neden reaktiftir ve olay işleyicileri değildir?
+- Bir Olay yöneticisi ile bir Efekt arasında nasıl seçim yapılır?
+- Efektler neden reaktiftir ve Olay yöneticileri değildir?
 - Efektinizin kodunun bir bölümünün reaktif olmamasını istediğinizde ne yapmalısınız?
 - Efekt Olaylarının ne olduğu ve Efektlerinizden nasıl çıkarılacağı
 - Efekt Olaylarını kullanarak Efektlerden en son sahne ve durum nasıl okunur?
 
 </YouWillLearn>
 
-## Olay işleyicileri ve Efektler arasında seçim yapma {/*choosing-between-event-handlers-and-effects*/}
+## Olay yöneticileri ve Efektler arasında seçim yapma {/*choosing-between-event-handlers-and-effects*/}
 
-İlk olarak, olay işleyicileri ve Efektler arasındaki farkı özetleyelim.
+İlk olarak, olay yöneticileri ve Efektler arasındaki farkı özetleyelim.
 
-Bir sohbet odası bileşeni uyguladığınızı düşünün. Gereksinimleriniz şuna benziyor:
+Bir sohbet odası bileşeni oluşturduğunuzu düşünün. Gereksinimleriniz şuna benziyor:
 
 1. Bileşeniniz seçilen sohbet odasına otomatik olarak bağlanmalıdır.
 1. "Gönder" düğmesine tıkladığınızda, sohbete bir mesaj göndermelidir.
 
-Diyelim ki bunlar için kodu zaten uyguladınız, ancak nereye koyacağınızdan emin değilsiniz. Olay işleyicileri mi yoksa Efektler mi kullanmalısınız? Bu soruyu her yanıtlamanız gerektiğinde, [*neden* kodun çalışması gerektiğini](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) düşünün.
+Diyelim ki bunlar için kodu zaten uyguladınız, ancak nereye koyacağınızdan emin değilsiniz. Olay yöneticileri mi yoksa Efektler mi kullanmalısınız? Bu soruyu her yanıtlamanız gerektiğinde, [*neden* kodun çalışması gerektiğini](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) düşünün.
 
-### Olay işleyicileri belirli etkileşimlere yanıt olarak çalışır {/*event-handlers-run-in-response-to-specific-interactions*/}
+### Olay yöneticileri belirli etkileşimlere yanıt olarak çalışır {/*event-handlers-run-in-response-to-specific-interactions*/}
 
-Kullanıcının bakış açısına göre, bir mesajın gönderilmesi belirli bir "Gönder" düğmesine tıklandığı için *olmalıdır*. Mesajlarını başka bir zamanda veya başka bir nedenle gönderirseniz kullanıcı oldukça üzülecektir. İşte bu yüzden mesaj gönderme bir olay işleyici olmalıdır. Olay işleyicileri belirli etkileşimleri ele almanızı sağlar:
+Kullanıcının bakış açısına göre, bir mesajın gönderilmesi belirli bir "Gönder" düğmesine tıklandığı için *olmalıdır*. Mesajlarını başka bir zamanda veya başka bir nedenle gönderirseniz kullanıcı oldukça üzülecektir. İşte bu yüzden mesaj gönderme bir olay yöneticileri olmalıdır. Olay yöneticileri belirli etkileşimleri ele almanızı sağlar:
 
 ```js {4-6}
 function ChatRoom({ roomId }) {
@@ -50,7 +50,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Bir olay işleyicisi ile `sendMessage(message)`ın *sadece* kullanıcı düğmeye bastığında çalışacağından emin olabilirsiniz.
+Bir olay yöneticileri ile `sendMessage(message)`ın *sadece* kullanıcı düğmeye bastığında çalışacağından emin olabilirsiniz.
 
 ### Senkronizasyon gerektiğinde Efektler çalışır {/*effects-run-whenever-synchronization-is-needed*/}
 
@@ -72,7 +72,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Bu kod sayesinde, kullanıcı tarafından gerçekleştirilen belirli etkileşimlerden *bağımsız olarak* seçili sohbet sunucusuyla her zaman aktif bir bağlantı olduğundan emin olabilirsiniz. Kullanıcı ister sadece uygulamanızı açmış, ister farklı bir oda seçmiş ya da başka bir ekrana gidip geri dönmüş olsun, Efektiniz bileşenin o anda seçili olan odayla *senkronize kalmasını* ve [gerektiğinde yeniden bağlanmasını](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once) sağlar.
+Bu kod sayesinde, kullanıcı tarafından gerçekleştirilen belirli etkileşimlerden *bağımsız olarak*, seçili sohbet sunucusuyla her zaman aktif bir bağlantı olduğundan emin olabilirsiniz. Kullanıcı ister sadece uygulamanızı açmış, ister farklı bir oda seçmiş ya da başka bir ekrana gidip geri dönmüş olsun, Efektiniz bileşenin o anda seçili olan odayla *senkronize kalmasını* ve [gerektiğinde yeniden bağlanmasını](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once) sağlar.
 
 <Sandpack>
 
@@ -139,10 +139,10 @@ export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log('✅ Bağlanmak "' + roomId + '" oda ' + serverUrl + '...');
+      console.log(serverUrl + ' + ✅ adresinde "' + roomId + '" odasina baglaniliyor' + '...');
     },
     disconnect() {
-      console.log('❌ Bağlantısı kesildi "' + roomId + '" oda ' + serverUrl);
+      console.log(serverUrl + '❌ adresinde "' + roomId + '" odasının bağlantısı kesildi ' );
     }
   };
 }
@@ -156,7 +156,7 @@ input, select { margin-right: 20px; }
 
 ## Reaktif değerler ve reaktif mantık {/*reactive-values-and-reactive-logic*/}
 
-Sezgisel olarak, olay işleyicilerinin her zaman "manuel" olarak tetiklendiğini söyleyebilirsiniz, örneğin bir düğmeye tıklayarak. Öte yandan, Efektler "otomatiktir": senkronize kalmak için gerektiği sıklıkta çalışır ve yeniden çalışırlar.
+Sezgisel olarak, olay yöneticilerinin her zaman "manuel" olarak tetiklendiğini söyleyebilirsiniz, örneğin bir düğmeye tıklayarak. Öte yandan, Efektler "otomatiktir": senkronize kalmak için gerektiği sıklıkta çalışır ve yeniden çalışırlar.
 
 Bunu düşünmenin daha kesin bir yolu vardır.
 
@@ -172,14 +172,14 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Bunlar gibi reaktif değerler yeniden oluşturma nedeniyle değişebilir. Örneğin, kullanıcı `mesaj`ı düzenleyebilir veya bir açılır menüde farklı bir `odaId` seçebilir. Olay işleyicileri ve Efektler değişikliklere farklı şekilde yanıt verir:
+Bunlar gibi reaktif değerler yeniden oluşturma nedeniyle değişebilir. Örneğin, kullanıcı `mesaj`ı düzenleyebilir veya bir açılır menüde farklı bir `odaId` seçebilir. Olay yöneticileri ve Efektler değişikliklere farklı şekilde yanıt verir:
 
-- **Olay işleyicilerinin içindeki mantık * reaktif değildir.*** Kullanıcı aynı etkileşimi (örneğin bir tıklama) tekrar gerçekleştirmedikçe tekrar çalışmayacaktır. Olay işleyicileri, değişikliklerine "tepki vermeden" reaktif değerleri okuyabilir.
+- **Olay yöneticilerinin içindeki mantık * reaktif değildir.*** Kullanıcı aynı etkileşimi (örneğin bir tıklama) tekrar gerçekleştirmedikçe tekrar çalışmayacaktır. Olay yöneticileri, değişikliklerine "tepki vermeden" reaktif değerleri okuyabilir.
 - **Efektlerin içindeki mantık *reaktiftir.*** Efektiniz reaktif bir değeri okuyorsa, [bunu bir bağımlılık olarak belirtmeniz gerekir](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Ardından, bir yeniden oluşturma bu değerin değişmesine neden olursa, React, Efektinizin mantığını yeni değerle yeniden çalıştıracaktır.
 
 Bu farkı göstermek için bir önceki örneğe geri dönelim.
 
-### Olay işleyicileri içindeki mantık reaktif değildir {/*logic-inside-event-handlers-is-not-reactive*/}
+### Olay yöneticileri içindeki mantık reaktif değildir {/*logic-inside-event-handlers-is-not-reactive*/}
 
 Şu kod satırına bir göz atın. Bu mantık reaktif olmalı mı olmamalı mı?
 
@@ -189,7 +189,7 @@ Bu farkı göstermek için bir önceki örneğe geri dönelim.
     // ...
 ```
 
-Kullanıcının bakış açısından, **`mesaj`'da yapılan bir değişiklik, mesaj göndermek istedikleri anlamına gelmez.** Bu sadece kullanıcının yazmakta olduğu anlamına gelir. Başka bir deyişle, mesaj gönderen mantık reaktif olmamalıdır. Sadece <CodeStep step={2}>reactive value</CodeStep> değiştiği için tekrar çalışmamalıdır. Bu yüzden olay işleyicisine aittir:
+Kullanıcının bakış açısından, **`mesaj`'da yapılan bir değişiklik, mesaj göndermek istedikleri anlamına gelmez.** Bu sadece kullanıcının yazmakta olduğu anlamına gelir. Başka bir deyişle, mesaj gönderen mantık reaktif olmamalıdır. Sadece <CodeStep step={2}>reactive value</CodeStep> değiştiği için tekrar çalışmamalıdır. Bu yüzden olay yöneticisine aittir:
 
 ```js {2}
   function handleSendClick() {
@@ -197,7 +197,7 @@ Kullanıcının bakış açısından, **`mesaj`'da yapılan bir değişiklik, me
   }
 ```
 
-Olay işleyicileri reaktif değildir, bu nedenle `sendMessage(message)` yalnızca kullanıcı Gönder düğmesine tıkladığında çalışacaktır.
+Olay yöneticileri reaktif değildir, bu nedenle `sendMessage(message)` yalnızca kullanıcı Gönder düğmesine tıkladığında çalışacaktır.
 
 ### Efektlerin içindeki mantık reaktiftir {/*logic-inside-effects-is-reactive*/}
 
@@ -418,7 +418,7 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-Burada, `onConnected` bir *Efekt Olayı olarak adlandırılır.* Efekt mantığınızın bir parçasıdır, ancak daha çok bir olay işleyici gibi davranır. İçindeki mantık reaktif değildir ve her zaman sahne ve durumunuzun en son değerlerini "görür".
+Burada, `onConnected` bir *Efekt Olayı olarak adlandırılır.* Efekt mantığınızın bir parçasıdır, ancak daha çok bir olay yöneticisi gibi davranır. İçindeki mantık reaktif değildir ve her zaman sahne ve durumunuzun en son değerlerini "görür".
 
 Artık `onConnected` Efekt Olayını Efektinizin içinden çağırabilirsiniz:
 
@@ -574,7 +574,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-Efekt Olaylarını olay işleyicilerine çok benzer olarak düşünebilirsiniz. Temel fark, olay işleyicilerin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt Olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt Olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
+Efekt Olaylarını olay yöneticilerine  çok benzer olarak düşünebilirsiniz. Temel fark, olay yöneticilerin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt Olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt Olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
 
 ### Efekt Olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
@@ -685,7 +685,7 @@ Bu işe yarayabilir, ancak bu `url`yi Efekt Olayına açıkça aktarmak daha iyi
   }, [url]);
 ```
 
-Efekt Etkinliğiniz `visitedUrl` öğesini açıkça "sorduğu" için, artık `url` öğesini Efektin bağımlılıklarından yanlışlıkla kaldıramazsınız. Eğer `url` bağımlılığını kaldırırsanız (farklı sayfa ziyaretlerinin tek bir ziyaret olarak sayılmasına neden olursanız), linter sizi bu konuda uyaracaktır. `onVisit`in `url` ile ilgili olarak reaktif olmasını istersiniz, bu nedenle `url`yi içeriden okumak yerine (reaktif olmayacağı yerde), Efektinizden *geçirirsiniz.
+Efekt Olayınızın `visitedUrl` öğesini açıkça "sorduğu" için, artık `url` öğesini Efektin bağımlılıklarından yanlışlıkla kaldıramazsınız. Eğer `url` bağımlılığını kaldırırsanız (farklı sayfa ziyaretlerinin tek bir ziyaret olarak sayılmasına neden olursanız), linter sizi bu konuda uyaracaktır. `onVisit`in `url` ile ilgili olarak reaktif olmasını istersiniz, bu nedenle `url`yi içeriden okumak yerine (reaktif olmayacağı yerde), Efektinizden *geçirirsiniz.
 
 Bu, özellikle Efekt içinde bazı asenkron mantık varsa önemli hale gelir:
 
@@ -899,7 +899,7 @@ function Timer() {
     setCount(count + 1);
   });
 
-  useTimer(onTick, 1000); // 🔴 Kaçının: Geçme Efekti Etkinlikleri
+  useTimer(onTick, 1000); // 🔴 Kaçının: Geçme Efekti Olayları
 
   return <h1>{count}</h1>
 }
@@ -912,7 +912,7 @@ function useTimer(callback, delay) {
     return () => {
       clearInterval(id);
     };
-  }, [delay, callback]); // Bağımlılıklarda "geri arama" belirtmeniz gerekiyor
+  }, [delay, callback]); // Bağımlılıklarda "callback" fonksiyonunu belirtmeniz gerekiyor
 }
 ```
 
@@ -947,9 +947,9 @@ Efekt Olayları, Efekt kodunuzun reaktif olmayan "parçalarıdır". Kendilerini 
 
 <Recap>
 
-- Olay işleyicileri belirli etkileşimlere yanıt olarak çalışır.
+- Olay yöneticileri belirli etkileşimlere yanıt olarak çalışır.
 - Efektler, senkronizasyon gerektiğinde çalışır.
-- Olay işleyicilerinin içindeki mantık reaktif değildir.
+- Olay yöneticilerinin içindeki mantık reaktif değildir.
 - Efektlerin içindeki mantık reaktiftir.
 - Reaktif olmayan mantığı Efektlerden Efekt Olaylarına taşıyabilirsiniz.
 - Efekt Olaylarını yalnızca Efektlerin içinden çağırın.
@@ -998,7 +998,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Her saniye artıyor:
+        Saniyedeki artis miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1050,7 +1050,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Her saniye artıyor:
+        Saniyedeki artis miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1082,7 +1082,7 @@ Bu kullanıcı arayüzü ile ilgili küçük bir sorun var. Artı veya eksi dü�
 
 <Hint>
 
-Görünüşe göre zamanlayıcıyı kuran Efekt `increment` değerine "tepki" veriyor. `SetCount`u çağırmak için mevcut `increment` değerini kullanan satırın gerçekten reaktif olması gerekiyor mu?
+Görünüşe göre zamanlayıcıyı kuran Efekt `increment` değerine "tepki" veriyor. `setCount`u çağırmak için mevcut `increment` değerini kullanan satırın gerçekten reaktif olması gerekiyor mu?
 
 </Hint>
 
@@ -1129,7 +1129,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Her saniye artıyor:
+        Saniyedeki artis miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1202,7 +1202,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Her saniye artıyor:
+        Saniyedeki artis miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1233,7 +1233,7 @@ Bu örnekte, aralık gecikmesini özelleştirebilirsiniz. Bu, iki düğme taraf�
 
 <Hint>
 
-Effect Olayları içindeki kod reaktif değildir. `SetInterval` çağrısının yeniden çalışmasını _istediğiniz_ durumlar var mı?
+Effect Olayları içindeki kod reaktif değildir. `setInterval` çağrısının yeniden çalışmasını _istediğiniz_ durumlar var mı?
 
 </Hint>
 
@@ -1416,7 +1416,7 @@ Bu neredeyse işe yarıyor, ancak bir hata var. Açılır menüyü "genel "den "
 
 <Hint>
 
-Efektiniz hangi odaya bağlı olduğunu bilir. Efekt Etkinliğinize aktarmak isteyebileceğiniz herhangi bir bilgi var mı?
+Efektiniz hangi odaya bağlı olduğunu bilir. Efekt Olayınıza aktarmak isteyebileceğiniz herhangi bir bilgi var mı?
 
 </Hint>
 
@@ -1557,7 +1557,7 @@ label { display: block; margin-top: 10px; }
 
 Efekt Olayınızın içinde, `roomId` değeri *Efekt Olayının çağrıldığı andaki değerdir.*
 
-Efekt Etkinliğiniz iki saniyelik bir gecikmeyle çağrılır. Seyahat odasından müzik odasına hızlı bir şekilde geçiş yapıyorsanız, seyahat odasının bildirimi gösterildiğinde, `roomId` zaten `"müzik"`tir. Bu yüzden her iki bildirimde de "Müziğe hoş geldiniz" yazıyor.
+Efekt Olayınıza iki saniyelik bir gecikmeyle çağrılır. Seyahat odasından müzik odasına hızlı bir şekilde geçiş yapıyorsanız, seyahat odasının bildirimi gösterildiğinde, `roomId` zaten `"müzik"`tir. Bu yüzden her iki bildirimde de "Müziğe hoş geldiniz" yazıyor.
 
 Sorunu çözmek için, Efekt Olayı içinde *en son* `roomId`yi okumak yerine, aşağıdaki `connectedRoomId` gibi Efekt Olayınızın bir parametresi haline getirin. Ardından `onConnected(roomId)` çağrısı yaparak `roomId`yi Efektinizden geçirin:
 
