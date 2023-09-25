@@ -79,7 +79,7 @@ Bir fotoğraf veya film karesinin aksine, döndürdüğünüz kullanıcı arayü
 React bir bileşeni yeniden render ettiğinde: 
 
 1. React fonksiyonunuzu yeniden çağırır.
-2. Fonksiyonunuz yeni bir JSX anlık görüntüsü döner.
+2. Fonksiyonunuz yeni bir JSX anlık görüntüsü (snapshot) döner.
 3. Ardından React, döndürdüğünüz anlık görüntüye göre ekranı günceller.
 
 <IllustrationBlock sequential>

@@ -1488,8 +1488,6 @@ Burada, ihtiyaç duyulan fonksiyonda deklare edilen normal bir `name` değişken
 <Sandpack>
 
 ```js
-import { useState } from 'react';
-
 export default function FeedbackForm() {
   function handleClick() {
     const name = prompt('İsminiz nedir?');
