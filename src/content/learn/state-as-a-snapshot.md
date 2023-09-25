@@ -78,9 +78,15 @@ Bir fotoğraf veya film karesinin aksine, döndürdüğünüz kullanıcı arayü
 
 React bir bileşeni yeniden render ettiğinde: 
 
+<<<<<<< HEAD
 1. React fonksiyonunuzu yeniden çağırır.
 2. Fonksiyonunuz yeni bir JSX anlık görüntüsü döner.
 3. Ardından React, döndürdüğünüz anlık görüntüye göre ekranı günceller.
+=======
+1. React calls your function again.
+2. Your function returns a new JSX snapshot.
+3. React then updates the screen to match the snapshot your function returned.
+>>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
 
 <IllustrationBlock sequential>
     <Illustration caption="React fonksiyonu çalıştırır" src="/images/docs/illustrations/i_render1.png" />

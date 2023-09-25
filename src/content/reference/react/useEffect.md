@@ -62,7 +62,11 @@ function ChatRoom({ roomId }) {
 
 * Eğer bağımlılıklarınızdan bazıları nesneler veya bileşeniniz içinde tanımlanmış fonksiyonlar ise, bu bağımlılıkların **Effect'in gerekenden daha sık yeniden çalışmasına neden olma riski vardır.** Bu durumu düzeltmek için, gereksiz [nesne](#removing-unnecessary-object-dependencies) ve [fonksiyon](#removing-unnecessary-function-dependencies) bağımlılıklarını silin. Ayrıca [state güncellemelerinizi](#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan mantığı](#reading-the-latest-props-and-state-from-an-effect) Effect dışına taşıyabilirsiniz.
 
+<<<<<<< HEAD
 * Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React, Effect'inizi çalıştırmadan önce **tarayıcının güncellenen ekranı çizmesine izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
+=======
+* If your Effect wasn't caused by an interaction (like a click), React will generally let the browser **paint the updated screen first before running your Effect.** If your Effect is doing something visual (for example, positioning a tooltip), and the delay is noticeable (for example, it flickers), replace `useEffect` with [`useLayoutEffect`.](/reference/react/useLayoutEffect)
+>>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
 
 * Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden çizebilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden çizmesini engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
 
