@@ -459,13 +459,8 @@ export default function Gallery() {
             (Fizik Nobel Ödülü, Kimya Nobel Ödülü, Davy Madalyası, Matteucci Madalyası)
           </li>
           <li>
-<<<<<<< HEAD
             <b>Keşfedilenler: </b>
-            polonyum (element)
-=======
-            <b>Discovered: </b>
-            polonium (chemical element)
->>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
+            polonyum (kimyasal element)
           </li>
         </ul>
       </section>
