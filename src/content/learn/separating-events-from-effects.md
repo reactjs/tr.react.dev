@@ -4,17 +4,17 @@ title: 'Olayları Efektlerinden Ayırma'
 
 <Intro>
 
-Olay yöneticisi yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay yöneticisi aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt. Bu sayfa size bunu nasıl yapacağınızı öğretecek.
+Olay yöneticileri yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay yöneticileri aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt. Bu sayfa size bunu nasıl yapacağınızı öğretecek.
 
 </Intro>
 
 <YouWillLearn>
 
-- Bir Olay yöneticisi ile bir Efekt arasında nasıl seçim yapılır?
-- Efektler neden reaktiftir ve Olay yöneticileri değildir?
+- Bir olay yöneticisi ile bir Efekt arasında nasıl seçim yapılır?
+- Efektler neden reaktiftir ve olay yöneticileri değildir?
 - Efektinizin kodunun bir bölümünün reaktif olmamasını istediğinizde ne yapmalısınız?
-- Efekt Olaylarının ne olduğu ve Efektlerinizden nasıl çıkarılacağı
-- Efekt Olaylarını kullanarak Efektlerden en son sahne ve durum nasıl okunur?
+- Efekt olaylarının ne olduğu ve Efektlerinizden nasıl çıkarılacağı
+- Efekt olaylarını kullanarak Efektlerden en son sahne ve durum nasıl okunur?
 
 </YouWillLearn>
 
@@ -132,17 +132,17 @@ export default function App() {
 
 ```js chat.js
 export function sendMessage(message) {
-  console.log('🔵 You sent: ' + message);
+  console.log('🔵 Siz gönderdiniz: ' + message);
 }
 
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
     connect() {
-      console.log(serverUrl + ' + ✅ adresinde "' + roomId + '" odasina baglaniliyor' + '...');
+      console.log('✅ ' + serverUrl + 'adresinde "' + roomId + '" odasina baglaniliyor' + '...');
     },
     disconnect() {
-      console.log(serverUrl + '❌ adresinde "' + roomId + '" odasının bağlantısı kesildi ' );
+      console.log('❌ ' + serverUrl + 'adresinde "' + roomId + '" odasının bağlantısı kesildi ' );
     }
   };
 }
@@ -254,7 +254,7 @@ function ChatRoom({ roomId, theme }) {
     return () => {
       connection.disconnect()
     };
-  }, [roomId, theme]); // ✅ Bildirilen tüm bağımlılıklar
+  }, [roomId, theme]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
@@ -418,9 +418,9 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-Burada, `onConnected` bir *Efekt Olayı olarak adlandırılır.* Efekt mantığınızın bir parçasıdır, ancak daha çok bir olay yöneticisi gibi davranır. İçindeki mantık reaktif değildir ve her zaman sahne ve durumunuzun en son değerlerini "görür".
+Burada, `onConnected` bir *Efekt olayı olarak adlandırılır.* Efekt mantığınızın bir parçasıdır, ancak daha çok bir olay yöneticisi gibi davranır. İçindeki mantık reaktif değildir ve her zaman sahne ve durumunuzun en son değerlerini "görür".
 
-Artık `onConnected` Efekt Olayını Efektinizin içinden çağırabilirsiniz:
+Artık `onConnected` Efekt olayını Efektinizin içinden çağırabilirsiniz:
 
 ```js {2-4,9,13}
 function ChatRoom({ roomId, theme }) {
@@ -435,11 +435,11 @@ function ChatRoom({ roomId, theme }) {
     });
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ Bildirilen tüm bağımlılıklar
+  }, [roomId]); // ✅ Tüm bagimliliklar bildirildi
   // ...
 ```
 
-Bu sorunu çözer. Efektinizin bağımlılıkları listesinden `onConnected` öğesini *kaldırmanız* gerektiğini unutmayın. **Efekt Olayları reaktif değildir ve bağımlılıklardan çıkarılmalıdır.**
+Bu sorunu çözer. Efektinizin bağımlılıkları listesinden `onConnected` öğesini *kaldırmanız* gerektiğini unutmayın. **Efekt olayları reaktif değildir ve bağımlılıklardan çıkarılmalıdır.**
 
 Yeni davranışın beklediğiniz gibi çalıştığını doğrulayın:
 
@@ -574,9 +574,9 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-Efekt Olaylarını olay yöneticilerine  çok benzer olarak düşünebilirsiniz. Temel fark, olay yöneticilerin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt Olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt Olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
+Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. Temel fark, olay yöneticilerin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
 
-### Efekt Olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
+### Efekt olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
 <Wip>
 
@@ -584,7 +584,7 @@ Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deney
 
 </Wip>
 
-Efekt Olayları, bağımlılık bağlayıcısını bastırmak isteyebileceğiniz birçok modeli düzeltmenize olanak tanır.
+Efekt olayları, bağımlılık bağlayıcısını bastırmak isteyebileceğiniz birçok modeli düzeltmenize olanak tanır.
 
 Örneğin, sayfa ziyaretlerini günlüğe kaydetmek için bir Efektiniz olduğunu varsayalım:
 
@@ -614,7 +614,7 @@ Kodun ne yapmasını istediğinizi düşünün. Her URL farklı bir sayfayı tem
 function Page({ url }) {
   useEffect(() => {
     logVisit(url);
-  }, [url]); // ✅ Bildirilen tüm bağımlılıklar
+  }, [url]); // ✅ Tüm bagimliliklar bildirildi
   // ...
 }
 ```
@@ -648,14 +648,14 @@ function Page({ url }) {
 
   useEffect(() => {
     onVisit(url);
-  }, [url]); // ✅ Bildirilen tüm bağımlılıklar
+  }, [url]); // ✅ Tüm bagimliliklar bildirildi
   // ...
 }
 ```
 
-Burada, `onVisit` bir Efekt Olayıdır. İçindeki kod reaktif değildir. Bu nedenle `numberOfItems` (veya başka herhangi bir reaktif değer!) kullanabilir ve bunun çevredeki kodun değişikliklerde yeniden yürütülmesine neden olacağından endişe duymazsınız.
+Burada, `onVisit` bir Efekt olayıdır. İçindeki kod reaktif değildir. Bu nedenle `numberOfItems` (veya başka herhangi bir reaktif değer!) kullanabilir ve bunun çevredeki kodun değişikliklerde yeniden yürütülmesine neden olacağından endişe duymazsınız.
 
-Öte yandan, Efektin kendisi reaktif kalır. Efekt içindeki kod `url` özelliğini kullanır, bu nedenle Efekt her yeniden oluşturmadan sonra farklı bir `url` ile yeniden çalışacaktır. Bu da `onVisit` Efekt Olayını çağıracaktır.
+Öte yandan, Efektin kendisi reaktif kalır. Efekt içindeki kod `url` özelliğini kullanır, bu nedenle Efekt her yeniden oluşturmadan sonra farklı bir `url` ile yeniden çalışacaktır. Bu da `onVisit` Efekt olayını çağıracaktır.
 
 Sonuç olarak, `url` öğesindeki her değişiklik için `logVisit` öğesini çağıracak ve her zaman en son `numberOfItems` öğesini okuyacaksınız. Ancak, `numberOfItems` kendi başına değişirse, bu kodun yeniden çalışmasına neden olmaz.
 
@@ -673,7 +673,7 @@ Hiçbir argüman olmadan `onVisit()` fonksiyonunu çağırıp içindeki `url`yi 
   }, [url]);
 ```
 
-Bu işe yarayabilir, ancak bu `url`yi Efekt Olayına açıkça aktarmak daha iyidir. **Efekt Olayınıza bir argüman olarak `url` geçerek, farklı bir `url` ile bir sayfayı ziyaret etmenin kullanıcının bakış açısından ayrı bir "olay" oluşturduğunu söylemiş olursunuz.** `visitedUrl`, gerçekleşen "olayın" bir *parçasıdı*:
+Bu işe yarayabilir, ancak bu `url`yi Efekt olayına açıkça aktarmak daha iyidir. **Efekt olayınıza bir argüman olarak `url` geçerek, farklı bir `url` ile bir sayfayı ziyaret etmenin kullanıcının bakış açısından ayrı bir "olay" oluşturduğunu söylemiş olursunuz.** `visitedUrl`, gerçekleşen "olayın" bir *parçasıdı*:
 
 ```js {1-2,6}
   const onVisit = useEffectEvent(visitedUrl => {
@@ -685,7 +685,7 @@ Bu işe yarayabilir, ancak bu `url`yi Efekt Olayına açıkça aktarmak daha iyi
   }, [url]);
 ```
 
-Efekt Olayınızın `visitedUrl` öğesini açıkça "sorduğu" için, artık `url` öğesini Efektin bağımlılıklarından yanlışlıkla kaldıramazsınız. Eğer `url` bağımlılığını kaldırırsanız (farklı sayfa ziyaretlerinin tek bir ziyaret olarak sayılmasına neden olursanız), linter sizi bu konuda uyaracaktır. `onVisit`in `url` ile ilgili olarak reaktif olmasını istersiniz, bu nedenle `url`yi içeriden okumak yerine (reaktif olmayacağı yerde), Efektinizden *geçirirsiniz.
+Efekt olayınızın `visitedUrl` öğesini açıkça "sorduğu" için, artık `url` öğesini Efektin bağımlılıklarından yanlışlıkla kaldıramazsınız. Eğer `url` bağımlılığını kaldırırsanız (farklı sayfa ziyaretlerinin tek bir ziyaret olarak sayılmasına neden olursanız), linter sizi bu konuda uyaracaktır. `onVisit`in `url` ile ilgili olarak reaktif olmasını istersiniz, bu nedenle `url`yi içeriden okumak yerine (reaktif olmayacağı yerde), Efektinizden *geçirirsiniz.
 
 Bu, özellikle Efekt içinde bazı asenkron mantık varsa önemli hale gelir:
 
@@ -870,7 +870,7 @@ body {
 
 </Sandpack>
 
-Bu, `useEffectEvent`in *her zaman* doğru çözüm olduğu anlamına gelmez. Bunu yalnızca reaktif olmasını istemediğiniz kod satırlarına uygulamalısınız. Yukarıdaki sanal alanda, Efekt kodunun `canMove` ile ilgili olarak reaktif olmasını istemediniz. Bu yüzden bir Efekt Olayı çıkarmak mantıklı oldu.
+Bu, `useEffectEvent`in *her zaman* doğru çözüm olduğu anlamına gelmez. Bunu yalnızca reaktif olmasını istemediğiniz kod satırlarına uygulamalısınız. Yukarıdaki sanal alanda, Efekt kodunun `canMove` ile ilgili olarak reaktif olmasını istemediniz. Bu yüzden bir Efekt olayı çıkarmak mantıklı oldu.
 
 Linteri bastırmanın diğer doğru alternatifleri için [Efekt Bağımlılıklarını Kaldırma](/learn/removing-effect-dependencies) bölümünü okuyun.
 
@@ -884,12 +884,12 @@ Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deney
 
 </Wip>
 
-Efekt Olaylarını nasıl kullanabileceğiniz çok sınırlıdır:
+Efekt olaylarını nasıl kullanabileceğiniz çok sınırlıdır:
 
 * **Sadece Efektlerin içinden çağırın.**
 * **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
 
-Örneğin, bir Efekt Olayını şu şekilde bildirmeyin ve geçirmeyin:
+Örneğin, bir Efekt olayını şu şekilde bildirmeyin ve geçirmeyin:
 
 ```js {4-6,8}
 function Timer() {
@@ -916,7 +916,7 @@ function useTimer(callback, delay) {
 }
 ```
 
-Bunun yerine, her zaman Efekt Olaylarını doğrudan onları kullanan Efektlerin yanında bildirin:
+Bunun yerine, her zaman Efekt olaylarını doğrudan onları kullanan Efektlerin yanında bildirin:
 
 ```js {10-12,16,21}
 function Timer() {
@@ -939,11 +939,11 @@ function useTimer(callback, delay) {
     return () => {
       clearInterval(id);
     };
-  }, [delay]); // Bağımlılık olarak "onTick" (bir Efekt Olayı) belirtmeye gerek yok
+  }, [delay]); // Bağımlılık olarak "onTick" (bir Efekt olayı) belirtmeye gerek yok
 }
 ```
 
-Efekt Olayları, Efekt kodunuzun reaktif olmayan "parçalarıdır". Kendilerini kullanan Efektin yanında olmalıdırlar.
+Efekt olayları, Efekt kodunuzun reaktif olmayan "parçalarıdır". Kendilerini kullanan Efektin yanında olmalıdırlar.
 
 <Recap>
 
@@ -951,9 +951,9 @@ Efekt Olayları, Efekt kodunuzun reaktif olmayan "parçalarıdır". Kendilerini 
 - Efektler, senkronizasyon gerektiğinde çalışır.
 - Olay yöneticilerinin içindeki mantık reaktif değildir.
 - Efektlerin içindeki mantık reaktiftir.
-- Reaktif olmayan mantığı Efektlerden Efekt Olaylarına taşıyabilirsiniz.
-- Efekt Olaylarını yalnızca Efektlerin içinden çağırın.
-- Efekt Olaylarını diğer bileşenlere veya Hook'lara aktarmayın.
+- Reaktif olmayan mantığı Efektlerden Efekt olaylarına taşıyabilirsiniz.
+- Efekt olaylarını yalnızca Efektlerin içinden çağırın.
+- Efekt olaylarını diğer bileşenlere veya Hook'lara aktarmayın.
 
 </Recap>
 
@@ -998,7 +998,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Saniyedeki artis miktari:
+        Saniyedeki artış miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1050,7 +1050,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Saniyedeki artis miktari:
+        Saniyedeki artış miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1129,7 +1129,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Saniyedeki artis miktari:
+        Saniyedeki artış miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1153,7 +1153,7 @@ button { margin: 10px; }
 
 Sorun, Efekt içindeki kodun `increment` state değişkenini kullanmasıdır. Bu, Efektinizin bir bağımlılığı olduğundan, `increment` durumundaki her değişiklik Efektin yeniden senkronize olmasına neden olur ve bu da aralığın temizlenmesine neden olur. Ateşleme şansı bulmadan önce her seferinde aralığı temizlemeye devam ederseniz, zamanlayıcı durmuş gibi görünecektir.
 
-Sorunu çözmek için, Efektten bir `onTick` Efekt Olayı çıkarın:
+Sorunu çözmek için, Efektten bir `onTick` Efekt olayı çıkarın:
 
 <Sandpack>
 
@@ -1202,7 +1202,7 @@ export default function Timer() {
       </h1>
       <hr />
       <p>
-        Saniyedeki artis miktari:
+        Saniyedeki artış miktari:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -1223,7 +1223,7 @@ button { margin: 10px; }
 
 </Sandpack>
 
-`onTick` bir Efekt Olayı olduğundan, içindeki kod reaktif değildir. Increment` değişikliği herhangi bir Efekti tetiklemez.
+`onTick` bir Efekt olayı olduğundan, içindeki kod reaktif değildir. Increment` değişikliği herhangi bir Efekti tetiklemez.
 
 </Solution>
 
@@ -1233,7 +1233,7 @@ Bu örnekte, aralık gecikmesini özelleştirebilirsiniz. Bu, iki düğme taraf�
 
 <Hint>
 
-Effect Olayları içindeki kod reaktif değildir. `setInterval` çağrısının yeniden çalışmasını _istediğiniz_ durumlar var mı?
+Effect olayları içindeki kod reaktif değildir. `setInterval` çağrısının yeniden çalışmasını _istediğiniz_ durumlar var mı?
 
 </Hint>
 
@@ -1322,7 +1322,7 @@ button { margin: 10px; }
 
 <Solution>
 
-Yukarıdaki örnekle ilgili sorun, kodun gerçekte ne yapması gerektiğini düşünmeden `onMount` adlı bir Effect Event çıkarmasıdır. Efekt Olaylarını yalnızca belirli bir nedenle çıkarmalısınız: kodunuzun bir bölümünü reaktif olmayan hale getirmek istediğinizde. Bununla birlikte, `setInterval` çağrısı `delay` durum değişkenine göre reaktif olmalıdır. Eğer `delay` değişirse, aralığı sıfırdan ayarlamak istersiniz! Bu kodu düzeltmek için, tüm reaktif kodu Efektin içine geri çekin:
+Yukarıdaki örnekle ilgili sorun, kodun gerçekte ne yapması gerektiğini düşünmeden `onMount` adlı bir Effect Event çıkarmasıdır. Efekt olaylarını yalnızca belirli bir nedenle çıkarmalısınız: kodunuzun bir bölümünü reaktif olmayan hale getirmek istediğinizde. Bununla birlikte, `setInterval` çağrısı `delay` durum değişkenine göre reaktif olmalıdır. Eğer `delay` değişirse, aralığı sıfırdan ayarlamak istersiniz! Bu kodu düzeltmek için, tüm reaktif kodu Efektin içine geri çekin:
 
 <Sandpack>
 
@@ -1402,7 +1402,7 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Genel olarak, bir kod parçasının *amacından* ziyade *zamanlamasına* odaklanan `onMount` gibi fonksiyonlara şüpheyle yaklaşmalısınız. İlk başta "daha açıklayıcı" gelebilir ancak amacınızı gizler. Genel bir kural olarak, Efekt Olayları *kullanıcının* bakış açısından gerçekleşen bir şeye karşılık gelmelidir. Örneğin, `onMessage`, `onTick`, `onVisit` veya `onConnected` iyi Effect Olay adlarıdır. İçlerindeki kodun muhtemelen reaktif olması gerekmeyecektir. Öte yandan, `onMount`, `onUpdate`, `onUnmount` veya `onAfterRender` o kadar geneldir ki, yanlışlıkla * reaktif olması gereken * kodları bunlara koymak kolaydır. Bu nedenle, Efekt Olaylarınızı bazı kodların ne zaman çalıştığına göre değil, *kullanıcının ne olduğunu düşündüğüne göre* adlandırmalısınız.
+Genel olarak, bir kod parçasının *amacından* ziyade *zamanlamasına* odaklanan `onMount` gibi fonksiyonlara şüpheyle yaklaşmalısınız. İlk başta "daha açıklayıcı" gelebilir ancak amacınızı gizler. Genel bir kural olarak, Efekt olayları *kullanıcının* bakış açısından gerçekleşen bir şeye karşılık gelmelidir. Örneğin, `onMessage`, `onTick`, `onVisit` veya `onConnected` iyi Effect olay adlarıdır. İçlerindeki kodun muhtemelen reaktif olması gerekmeyecektir. Öte yandan, `onMount`, `onUpdate`, `onUnmount` veya `onAfterRender` o kadar geneldir ki, yanlışlıkla * reaktif olması gereken * kodları bunlara koymak kolaydır. Bu nedenle, Efekt olaylarınızı bazı kodların ne zaman çalıştığına göre değil, *kullanıcının ne olduğunu düşündüğüne göre* adlandırmalısınız.
 
 </Solution>
 
@@ -1555,11 +1555,11 @@ label { display: block; margin-top: 10px; }
 
 <Solution>
 
-Efekt Olayınızın içinde, `roomId` değeri *Efekt Olayının çağrıldığı andaki değerdir.*
+Efekt olayınızın içinde, `roomId` değeri *Efekt olayının çağrıldığı andaki değerdir.*
 
-Efekt Olayınıza iki saniyelik bir gecikmeyle çağrılır. Seyahat odasından müzik odasına hızlı bir şekilde geçiş yapıyorsanız, seyahat odasının bildirimi gösterildiğinde, `roomId` zaten `"müzik"`tir. Bu yüzden her iki bildirimde de "Müziğe hoş geldiniz" yazıyor.
+Efekt olayınıza iki saniyelik bir gecikmeyle çağrılır. Seyahat odasından müzik odasına hızlı bir şekilde geçiş yapıyorsanız, seyahat odasının bildirimi gösterildiğinde, `roomId` zaten `"müzik"`tir. Bu yüzden her iki bildirimde de "Müziğe hoş geldiniz" yazıyor.
 
-Sorunu çözmek için, Efekt Olayı içinde *en son* `roomId`yi okumak yerine, aşağıdaki `connectedRoomId` gibi Efekt Olayınızın bir parametresi haline getirin. Ardından `onConnected(roomId)` çağrısı yaparak `roomId`yi Efektinizden geçirin:
+Sorunu çözmek için, Efekt olayı içinde *en son* `roomId`yi okumak yerine, aşağıdaki `connectedRoomId` gibi Efekt olayınızın bir parametresi haline getirin. Ardından `onConnected(roomId)` çağrısı yaparak `roomId`yi Efektinizden geçirin:
 
 <Sandpack>
 
