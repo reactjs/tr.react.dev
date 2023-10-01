@@ -460,7 +460,7 @@ export default function Gallery() {
           </li>
           <li>
             <b>Keşfedilenler: </b>
-            polonyum (element)
+            polonyum (kimyasal element)
           </li>
         </ul>
       </section>
