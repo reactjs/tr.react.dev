@@ -172,7 +172,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Bunlar gibi reaktif değerler yeniden oluşturma nedeniyle değişebilir. Örneğin, kullanıcı `mesaj`ı düzenleyebilir veya bir açılır menüde farklı bir `odaId` seçebilir. Olay yöneticileri ve Efektler değişikliklere farklı şekilde yanıt verir:
+Bunlar gibi reaktif değerler yeniden oluşturma nedeniyle değişebilir. Örneğin, kullanıcı `message`ı düzenleyebilir veya bir açılır menüde farklı bir `roomId` seçebilir. Olay yöneticileri ve Efektler değişikliklere farklı şekilde yanıt verir:
 
 - **Olay yöneticilerinin içindeki mantık * reaktif değildir.*** Kullanıcı aynı etkileşimi (örneğin bir tıklama) tekrar gerçekleştirmedikçe tekrar çalışmayacaktır. Olay yöneticileri, değişikliklerine "tepki vermeden" reaktif değerleri okuyabilir.
 - **Efektlerin içindeki mantık *reaktiftir.*** Efektiniz reaktif bir değeri okuyorsa, [bunu bir bağımlılık olarak belirtmeniz gerekir](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Ardından, bir yeniden oluşturma bu değerin değişmesine neden olursa, React, Efektinizin mantığını yeni değerle yeniden çalıştıracaktır.
@@ -189,7 +189,7 @@ Bu farkı göstermek için bir önceki örneğe geri dönelim.
     // ...
 ```
 
-Kullanıcının bakış açısından, **`mesaj`'da yapılan bir değişiklik, mesaj göndermek istedikleri anlamına gelmez.** Bu sadece kullanıcının yazmakta olduğu anlamına gelir. Başka bir deyişle, mesaj gönderen mantık reaktif olmamalıdır. Sadece <CodeStep step={2}>reactive value</CodeStep> değiştiği için tekrar çalışmamalıdır. Bu yüzden olay yöneticisine aittir:
+Kullanıcının bakış açısından, **`message`'da yapılan bir değişiklik, mesaj göndermek istedikleri anlamına gelmez.** Bu sadece kullanıcının yazmakta olduğu anlamına gelir. Başka bir deyişle, mesaj gönderen mantık reaktif olmamalıdır. Sadece <CodeStep step={2}>reactive value</CodeStep> değiştiği için tekrar çalışmamalıdır. Bu yüzden olay yöneticisine aittir:
 
 ```js {2}
   function handleSendClick() {
@@ -224,7 +224,7 @@ Kullanıcının bakış açısından, **`roomId`'deki bir değişiklik farklı b
 
 Efektler reaktiftir, bu nedenle `createConnection(serverUrl, roomId)` ve `connection.connect()`, `roomId`nin her farklı değeri için çalışacaktır. Efektiniz sohbet bağlantısını o anda seçili olan odayla senkronize tutar.
 
-## Reaktif olmayan mantığı Effects'ten çıkarma {/*extracting-non-reactive-logic-out-of-effects*/}
+## Reaktif olmayan mantığı Efektlerden çıkarma {/*extracting-non-reactive-logic-out-of-effects*/}
 
 Reaktif mantığı reaktif olmayan mantıkla karıştırmak istediğinizde işler daha da zorlaşır.
 
@@ -248,7 +248,7 @@ function ChatRoom({ roomId, theme }) {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.on('connected', () => {
-      showNotification('Bağlı!', theme);
+      showNotification('Bağlandı!', theme);
     });
     connection.connect();
     return () => {
@@ -290,7 +290,7 @@ function ChatRoom({ roomId, theme }) {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.on('connected', () => {
-      showNotification('Bağlı!', theme);
+      showNotification('Baglandi!', theme);
     });
     connection.connect();
     return () => connection.disconnect();
@@ -351,7 +351,7 @@ export function createConnection(serverUrl, roomId) {
         throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Yalnızca "bağlı" olayı desteklenir.');
+        throw Error('Yalnızca "connected" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -392,7 +392,7 @@ Başka bir deyişle, bir Efektin (reaktif olan) içinde olmasına rağmen bu sat
 
 ```js
       // ...
-      showNotification('Bağlı!', theme);
+      showNotification('Bağlandı!', theme);
       // ...
 ```
 
@@ -406,14 +406,14 @@ Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deney
 
 </Wip>
 
-Bu reaktif olmayan mantığı Efektinizden çıkarmak için [`useEffectEvent`](/reference/react/experimental_useEffectEvent) adlı özel bir Kanca kullanın:
+Bu reaktif olmayan mantığı Efektinizden çıkarmak için [`useEffectEvent`](/reference/react/experimental_useEffectEvent) adlı özel bir Hook kullanın:
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
 
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Bağlı!', theme);
+    showNotification('Baglandi!', theme);
   });
   // ...
 ```
@@ -425,7 +425,7 @@ Artık `onConnected` Efekt olayını Efektinizin içinden çağırabilirsiniz:
 ```js {2-4,9,13}
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Bağlı!', theme);
+    showNotification('Baglandi!', theme);
   });
 
   useEffect(() => {
@@ -472,7 +472,7 @@ const serverUrl = 'https://localhost:1234';
 
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Bağlı!', theme);
+    showNotification('Baglandi!', theme);
   });
 
   useEffect(() => {
@@ -539,7 +539,7 @@ export function createConnection(serverUrl, roomId) {
         throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Yalnızca "bağlı" olayı desteklenir.');
+        throw Error('Yalnızca "connected" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -574,7 +574,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. Temel fark, olay yöneticilerin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
+Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. Temel fark, olay işleyicilerinin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
 
 ### Efekt olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
@@ -697,7 +697,7 @@ Bu, özellikle Efekt içinde bazı asenkron mantık varsa önemli hale gelir:
   useEffect(() => {
     setTimeout(() => {
       onVisit(url);
-    }, 5000); // Gecikmeli kayıt ziyaretleri
+    }, 5000); // Ziyaretleri kaydetmeyi geciktirin
   }, [url]);
 ```
 
@@ -884,7 +884,7 @@ Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deney
 
 </Wip>
 
-Efekt olaylarını nasıl kullanabileceğiniz çok sınırlıdır:
+Efekt Olayları, kullanma şekliniz açısından oldukça sınırlıdır:
 
 * **Sadece Efektlerin içinden çağırın.**
 * **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
@@ -899,7 +899,7 @@ function Timer() {
     setCount(count + 1);
   });
 
-  useTimer(onTick, 1000); // 🔴 Kaçının: Geçme Efekti Olayları
+  useTimer(onTick, 1000); // 🔴 Kaçının: Efekt olaylarini geçmek
 
   return <h1>{count}</h1>
 }
@@ -1518,7 +1518,7 @@ export function createConnection(serverUrl, roomId) {
         throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Yalnızca "bağlı" olayı desteklenir.');
+        throw Error('Yalnızca "connected" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -1659,7 +1659,7 @@ export function createConnection(serverUrl, roomId) {
         throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Yalnızca "bağlı" olayı desteklenir.');
+        throw Error('Yalnızca "connected" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
@@ -1802,7 +1802,7 @@ export function createConnection(serverUrl, roomId) {
         throw Error('İşleyici iki kez eklenemiyor.');
       }
       if (event !== 'connected') {
-        throw Error('Yalnızca "bağlı" olayı desteklenir.');
+        throw Error('Yalnızca "connected" olayı desteklenir.');
       }
       connectedCallback = callback;
     },
