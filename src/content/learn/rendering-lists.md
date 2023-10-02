@@ -1088,7 +1088,11 @@ Burada, `<Recipe {...recipe} key={recipe.id} />` syntax'ı `recipe` objesinin t�
 
 #### Ayraç içeren liste {/*list-with-a-separator*/}
 
+<<<<<<< HEAD
 Bu örnek, Katsushika Hokusai'nin her satırı `<p>` elementi içinde olacak şekilde yazılmış ünlü bir haiku'sunu göstermektedir. Bizim görevimiz, her paragrafın arasına gelecek bir `<hr />` ayırıcı elementi eklemektir. Ortaya şöyle bir yapı çıkmalıdır:
+=======
+This example renders a famous haiku by Tachibana Hokushi, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
+>>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 ```js
 <article>
