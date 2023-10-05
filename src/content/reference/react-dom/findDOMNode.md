@@ -10,7 +10,7 @@ Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır. [Alternati
 
 <Intro>
 
-`findDOMNode`, React bir [sinif bileseni](/reference/react/Component) nesnesine ait tarayıcı DOM düğümünü döndürür.
+`findDOMNode`, bir [sınıf bileşeni](/reference/react/Component) nesnesine ait tarayıcı DOM düğümünü döndürür.
 
 ```js
 const domNode = findDOMNode(componentInstance)
