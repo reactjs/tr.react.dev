@@ -10,7 +10,7 @@ Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır. [Alternati
 
 <Intro>
 
-`findDOMNode`, fonksiyonu React [sınıf bileşenine](/reference/react/Component) ait tarayıcı DOM nesnesini döndürür.
+`findDOMNode`, React bir [sinif bileseni](/reference/react/Component) nesnesine ait tarayıcı DOM düğümünü döndürür.
 
 ```js
 const domNode = findDOMNode(componentInstance)
@@ -26,7 +26,7 @@ const domNode = findDOMNode(componentInstance)
 
 ### `findDOMNode(componentInstance)` {/*finddomnode*/}
 
-Bir React [sınıf bileşenine](/reference/react/Component) ait DOM nesnesini bulmak için `findDOMNode` fonksiyonunu çağırın.
+Bir React [sınıf bileşenine](/reference/react/Component) ait DOM düğümünü bulmak için `findDOMNode` fonksiyonunu çağırın.
 
 ```js
 import { findDOMNode } from 'react-dom';
@@ -43,7 +43,7 @@ const domNode = findDOMNode(componentInstance);
 
 #### Dönüş Değerleri {/*returns*/}
 
-`findDOMNode`, verilen `componentInstance` bileşenini içeren en yakın DOM nesnesini döndürür. Eğer bir bileşen `null` veya `false` olarak render edilirse, `findDOMNode` fonksiyonu `null` değerini döndürür. Eğer bileşen sadece metin içerecek şekilde render edilirse, `findDOMNode`, o değeri içeren bir metin DOM nesnesi döndürür.
+`findDOMNode`, verilen `componentInstance` bileşenini içeren en yakın DOM düğümünü döndürür. Eğer bir bileşen `null` veya `false` olarak render edilirse, `findDOMNode` fonksiyonu `null` değerini döndürür. Eğer bileşen sadece metin içerecek şekilde render edilirse, `findDOMNode`, o değeri içeren bir metin DOM nesnesi döndürür.
 
 #### Uyarılar {/*caveats*/}
 
@@ -61,7 +61,7 @@ const domNode = findDOMNode(componentInstance);
 
 ### Sınıf bileşeninin ana DOM objesinin bulunması {/*finding-the-root-dom-node-of-a-class-component*/}
 
-Render edilmiş DOM nesnesini bulabilmek için `findDOMNode` fonksiyonunu bir React sınıf bileşeni içerisinde çağırın. (React sınıf bileşenine `this` niteliğini kullanarak erişebilirsiniz)
+Render edilmiş DOM düğümünü bulabilmek için `findDOMNode` fonksiyonunu bir React sınıf bileşeni içerisinde çağırın. (React sınıf bileşenine `this` niteliğini kullanarak erişebilirsiniz)
 
 
 ```js {3}
@@ -174,7 +174,7 @@ export default AutoselectingInput;
 
 </Sandpack>
 
-Bu kullanım kodun çalışmasına engel olacaktır. Çünkü `findDOMNode` geriye `<div>` DOM nesnesini döndürecektir fakat kod dönüş değerinin `<input />` DOM nesnesi olmasını bekler.
+Bu kullanım kodun çalışmasına engel olacaktır. Çünkü `findDOMNode` geriye `<div>` DOM düğümünü döndürecektir fakat kod dönüş değerinin `<input />` DOM nesnesi olmasını bekler.
 
 Bu tür problemlerin önüne geçmek spesifik bir DOM nesnesi seçebilen için [`createRef`](/reference/react/createRef) fonksiyonunu kullanın.
 
@@ -274,7 +274,7 @@ export default function AutoselectingInput() {
 
 ### Alt bileşene ait DOM nesnesine forwarded ref aracılığı ile ulaşma {/*reading-a-child-components-dom-node-from-a-forwarded-ref*/}
 
-Bu örnekte, `findDOMNode(this)` ile başka bir bileşene ait DOM nesnesini bulacağız. `AutoselectingInput` bileşeni, `input` elementinin bulunduğu `MyInput` bileşenini render edecek ve `findDOMNode(this)` fonksiyonunu kullanarak `input` elementine ulaşmaya çalışacağız.
+Bu örnekte, `findDOMNode(this)` ile başka bir bileşene ait DOM düğümünü bulacağız. `AutoselectingInput` bileşeni, `input` elementinin bulunduğu `MyInput` bileşenini render edecek ve `findDOMNode(this)` fonksiyonunu kullanarak `input` elementine ulaşmaya çalışacağız.
 
 <Sandpack>
 
