@@ -255,6 +255,7 @@ async function getAlbums() {
 
 - [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özellikli framework'lerle veri fetch etme.
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
+- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
 

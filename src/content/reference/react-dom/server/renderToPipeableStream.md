@@ -288,6 +288,7 @@ Stream işleminin, React'ın tarayıcıya yüklenmesini veya uygulamanızın etk
 
 - [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin çatılarda veri alma 
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu temvel yükleme (lazy-loading).
+- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 Effect veya olay yöneticisi içinde veri alınırken Suspense **tespit edilmez**.
 

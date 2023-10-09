@@ -647,7 +647,7 @@ Bu örnekte, `List` bileşeni **yapay olarak yavaşlatılmıştır**, böylece r
 
 Sekmeleri değiştirmek yavaş hissettiriyor çünkü yavaşlatılmış `List` bileşinini yeniden oluşturmaya zorluyor. Bu beklenen bir durumdur çünkü `tab` değişmiştir ve bu nedenle kullanıcının yeni seçimini ekrana yansıtmanız gerekir.
 
-Şimdi, temayı değiştirmeyi deneyin. **`useMemo` ile birlikte [`memo`](/reference/react/memo) sayesinde, yapay yavaşlamaya rağmen hızlıdır!** `List` yeniden render edilmeyi atladı çünkü `visibleItems` dizisi son render işleminden bu yana değişmedi. `useMemo`ya bağımlılık olarak aktardığınız hem `todos` hem de `tab` son render işleminden bu yana değişmediği için `visibleItems` dizisi değişmedi.
+Şimdi, temayı değiştirmeyi deneyin. Bu işlem **`useMemo` ve [`memo`](/reference/react/memo) sayesinde, yapay yavaşlamaya rağmen, hızlıdır!** `List` yeniden render edilmeyi atladı çünkü `visibleItems` dizisi son render işleminden bu yana değişmedi. `useMemo`ya bağımlılık olarak aktardığınız hem `todos` hem de `tab` son render işleminden bu yana değişmediği için `visibleItems` dizisi değişmedi.
 
 <Sandpack>
 

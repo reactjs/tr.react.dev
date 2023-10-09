@@ -86,6 +86,7 @@ Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığ�
 
 - [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense etkinleştirilmiş çatılar vasıtasıyla veri çekilmesi
 - [`lazy`](/reference/react/lazy) ile bileşen kodunun lazy yüklenmesi
+- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 [Suspense ve sınırlamaları hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 

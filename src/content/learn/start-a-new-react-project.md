@@ -21,12 +21,12 @@ Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyor
 **[Next.js](https://nextjs.org/), tam özellikli bir React çatısıdır.** Çok yönlüdür ve her büyüklükte React uygulaması oluşturmanıza olanak tanır-çoğunlukla statik bir blogdan karmaşık bir dinamik uygulamaya kadar. Yeni bir Next.js projesi oluşturmak için terminalinizde şunu çalıştırın:
 
 <TerminalBlock>
-npx create-next-app
+npx create-next-app@latest
 </TerminalBlock>
 
 Next.js'e yeni başlıyorsanız, [Next.js eğitimi](https://nextjs.org/learn/foundations/about-nextjs)ni takip edebilirsiniz.
 
-Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. [Next.js kurulumunu](https://nextjs.org/docs/deployment) herhangi bir Node.js sunucusuna, sunucusuz barındırmaya veya kendi sunucunuza yapabilirsiniz. [Tümüyle statik Next.js uygulamaları](https://nextjs.org/docs/advanced-features/static-html-export) herhangi bir statik barındırmaya kurulabilir.
+Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. Bir Next.js uygulamasını herhangi bir Node.js sunucusuna, sunucusuz barındırmaya (serverless) veya kendi sunucunuza [yapabilirsiniz](https://nextjs.org/docs/app/building-your-application/deploying). [Tümüyle statik Next.js uygulamaları](https://nextjs.org/docs/advanced-features/static-html-export) herhangi bir statik barındırmaya kurulabilir.
 
 ### Remix {/*remix*/}
 
@@ -88,17 +88,11 @@ React'ı nasıl daha da geliştirebileceğimizi keşfederken, React'ı çatılar
 
 Bu özellikler, her geçen gün canlı ortama hazır olmaya daha da yaklaşıyor ve bunları entegre etme konusunda diğer paketleyici ve çatı geliştiricileriyle görüşmeler yapıyoruz. Umut ediyoruz ki, bir veya iki yıl içinde bu sayfadaki tüm çatılar, bu özelliklere tam desteğe sahip olacak. (Eğer bir çatı yazarı olarak bu özelliklerle deney yapmak için bizimle ortaklık kurmak istiyorsanız, lütfen bize bildirin!)
 
-### Next.js (Uygulama Yönlendirici) {/*nextjs-app-router*/}
+### Next.js (App Router) {/*nextjs-app-router*/}
 
-**[Next.js Uygulama Yönlendiricisi](https://beta.nextjs.org/docs/getting-started), React ekibinin tam yığın mimari vizyonunu gerçekleştirmeyi amaçlayan Next.js API'lerinin yeniden tasarımıdır.** Bu, sunucuda veya hatta derleme sırasında çalışan eşzamansız bileşenlerde veri almanıza olanak tanır.
+**[Next.js App Router (Uygulama Yönlendiricisi)](https://nextjs.org/docs), React ekibinin tam yığın mimari vizyonunu gerçekleştirmeyi amaçlayan Next.js API'lerinin yeniden tasarımıdır.** Bu, sunucuda veya hatta derleme sırasında çalışan eşzamansız bileşenlerde veri almanıza olanak tanır.
 
-Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. [Next.js uygulama kurulumunu](https://nextjs.org/docs/deployment) herhangi bir NodeJS sunucusu, sunucusuz barındırma veya kendi sunucunuza yapabilirsiniz. Next.js ayrıca [statik dışa aktarma](https://beta.nextjs.org/docs/configuring/static-export)yı da destekler ve bu bir sunucu gerektirmez.
-
-<Pitfall>
-
-Next.js'in Uygulama Yönlendiricisi **şu an beta aşamasında ve henüz canlı ortam kullanımı tavsiye edilmemektedir.** (Mart 2023 itibariyle). Var olan bir Next JS uygulamasında test etmek için, [bu geçiş kılavuzunu takip edebilirsiniz.](https://beta.nextjs.org/docs/upgrade-guide#migrating-from-pages-to-app).
-
-</Pitfall>
+Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. Bir Next.js uygulamasını herhangi bir Node.js sunucusuna, sunucusuz barındırmaya (serverless) veya kendi sunucunuza [yapabilirsiniz](https://nextjs.org/docs/app/building-your-application/deploying). [Tümüyle statik Next.js uygulamaları](https://nextjs.org/docs/advanced-features/static-html-export) herhangi bir statik barındırmaya kurulabilir.
 
 <DeepDive>
 
