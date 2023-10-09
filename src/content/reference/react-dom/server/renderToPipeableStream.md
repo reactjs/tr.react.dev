@@ -286,14 +286,9 @@ Stream işleminin, React'ın tarayıcıya yüklenmesini veya uygulamanızın etk
 
 **Sadece Suspense özelliğine sahip veri kaynakları Suspense bileşenini etkinleştirir.** Şunları içerir:
 
-<<<<<<< HEAD
 - [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin çatılarda veri alma 
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu temvel yükleme (lazy-loading).
-=======
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
-- Reading the value of a Promise with [`use`](/reference/react/use)
->>>>>>> 9aa84b19222838f38863ce4bd8f516dbfe193bbc
+- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 Effect veya olay yöneticisi içinde veri alınırken Suspense **tespit edilmez**.
 

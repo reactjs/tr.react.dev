@@ -290,11 +290,7 @@ Ayrıca bir ref ile çalışırken [mutasyondan kaçınmaya](/learn/updating-obj
 
 ## Ref'ler ve DOM {/*refs-and-the-dom*/}
 
-<<<<<<< HEAD
-Bir ref'i herhangi bir değere işaret edecek şekilde ayarlayabilirsiniz. Fakat ref'lerin en yaygın kullanımı DOM elemanlarına erişmektir. Örneğin, bir input'a programatik olarak odaklanmak istiyorsanız bu kullanışlıdır. JSX'te `ref` özelliğine bir ref geçtiğinizde, `<div ref={myRef}>` gibi, React karşılık gelen DOM elemanını `myRef.current`'e koyar. Bunu [Ref'ler ile DOM'u Manipüle etme](/learn/manipulating-the-dom-with-refs) bölümünde daha fazla okuyabilirsiniz.
-=======
-You can point a ref to any value. However, the most common use case for a ref is to access a DOM element. For example, this is handy if you want to focus an input programmatically. When you pass a ref to a `ref` attribute in JSX, like `<div ref={myRef}>`, React will put the corresponding DOM element into `myRef.current`. Once the element is removed from the DOM, React will update `myRef.current` to be `null`. You can read more about this in [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
->>>>>>> 9aa84b19222838f38863ce4bd8f516dbfe193bbc
+Bir ref'i herhangi bir değere işaret edecek şekilde ayarlayabilirsiniz. Fakat ref'lerin en yaygın kullanımı DOM elemanlarına erişmektir. Örneğin, bir input'a programatik olarak odaklanmak istiyorsanız bu kullanışlıdır. JSX'te `ref` özelliğine bir ref geçtiğinizde, `<div ref={myRef}>` gibi, React karşılık gelen DOM elemanını `myRef.current`'e koyar. Bir eleman DOM'dan kaldırıldığı zaman, React `myRef.current` değerini `null` olarak günceller. Bunu [Ref'ler ile DOM'u Manipüle etme](/learn/manipulating-the-dom-with-refs) bölümünde daha fazla okuyabilirsiniz.
 
 <Recap>
 
