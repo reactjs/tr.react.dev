@@ -191,11 +191,7 @@ State'i güncelleme
 </DiagramGroup>
 
 
-<<<<<<< HEAD
 React, aynı bileşeni aynı konumda render ettiğiniz sürece state'i koruyacaktır. Bunu görmek için her iki sayacı da artırın, ardından "İkinci sayacı render et" kutucuğunun işaretini kaldırarak ikinci bileşeni render etmeyi bırakın ve ardından kutucuğu tekrar işaretleyerek bileşeni yeniden render edin:
-=======
-React will keep the state around for as long as you render the same component at the same position in the tree. To see this, increment both counters, then remove the second component by unchecking "Render the second counter" checkbox, and then add it back by ticking it again:
->>>>>>> a0cacd7d3a89375e5689ccfba0461e293bfe9eeb
 
 <Sandpack>
 
