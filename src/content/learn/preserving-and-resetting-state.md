@@ -10,7 +10,6 @@ State bileşenler arasında izole edilmiştir. React, kullanıcı arayüzü (UI)
 
 <YouWillLearn>
 
-<<<<<<< HEAD
 * React bileşen yapılarını nasıl "görür"
 * React state'i korumayı ya da sıfırlamaya ne zaman seçer
 * React bileşenin state'ini sıfırlamaya nasıl zorlanır
@@ -36,20 +35,9 @@ React, bileşenlerden, React DOM'un DOM'u render etmek için kullandığı bir k
 
 ## State ağaçtaki bir konuma bağlıdır {/*state-is-tied-to-a-position-in-the-tree*/}
 
+React arayüzünüzdeki bileşen yapısı için [render ağaçları](learn/understanding-your-ui-as-a-tree#the-render-tree) inşa eder.
+
 Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
-=======
-* When React chooses to preserve or reset the state
-* How to force React to reset component's state
-* How keys and types affect whether the state is preserved
-
-</YouWillLearn>
-
-## State is tied to a position in the render tree {/*state-is-tied-to-a-position-in-the-tree*/}
-
-React builds [render trees](learn/understanding-your-ui-as-a-tree#the-render-tree) for the component structure in your UI.
->>>>>>> a0cacd7d3a89375e5689ccfba0461e293bfe9eeb
-
-When you give a component state, you might think the state "lives" inside the component. But the state is actually held inside React. React associates each piece of state it's holding with the correct component by where that component sits in the render tree.
 
 Örneğin burada yalnızca bir `<Counter />` JSX elemanı vardır, ancak bu eleman iki farklı konumda render edilir:
 
