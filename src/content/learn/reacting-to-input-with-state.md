@@ -84,7 +84,7 @@ function submitForm(answer) {
   // Ağa istek atıyormuş gibi yapalım.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (answer.toLowerCase() == 'istanbul') {
+      if (answer.toLowerCase() === 'istanbul') {
         resolve();
       } else {
         reject(new Error('İyi tahmin ama yanlış cevap. Tekrar dene!'));
