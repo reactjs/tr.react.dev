@@ -45,8 +45,6 @@ JSON veriniz iyi yapılandırılmışsa, genellikle arayüzün bileşen yapısı
 
 Bu ekranın beş bileşeni var:
 
-<FullWidth>
-
 <CodeDiagram flip>
 
 <img src="/images/docs/s_thinking-in-react_ui_outline.png" width="500" style={{margin: '0 auto'}} />
@@ -58,8 +56,6 @@ Bu ekranın beş bileşeni var:
 5. `ProductRow`	(sarı) her ürün için bir satır görüntüler.
 
 </CodeDiagram>
-
-</FullWidth>
 
 `ProductTable` (lavanta) öğesine bakarsanız, tablo başlığının ("İsim" ve "Fiyat" etiketlerini içeren kısım) kendi bileşeni olmadığını görürsünüz. Bu bir tercih meselesidir ve her iki şekilde de yapılabilir. Bu örnekte, başlık kısmı `ProductTable`'ın bir parçasıdır, çünkü `ProductTable` listesinin içinde görünüyor. Ancak, bu başlık kısmı karmaşık hale gelirse (örneğin, sıralama özelliği eklerseniz), onu kendi `ProductTableHeader` bileşenine taşıyabilirsiniz.
 
@@ -205,75 +201,75 @@ Bu noktada, herhangi bir state değeri kullanmamalısınız. Onun için bir sonr
 
 </Pitfall>
 
-## Step 3: Find the minimal but complete representation of UI state {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
+## Step 3: Arayüzün minimal (ancak eksiksiz) halini belirleme {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
 
-To make the UI interactive, you need to let users change your underlying data model. You will use *state* for this.
+Kullanıcı arayüzünüzü etkileşimli hale getirmek için, kullanıcılarınızın temel veri modelinizi değiştirmesine izin vermeniz gerekir. Bunun için *state* kullanacaksınız.
 
-Think of state as the minimal set of changing data that your app needs to remember. The most important principle for structuring state is to keep it [DRY (Don't Repeat Yourself).](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) Figure out the absolute minimal representation of the state your application needs and compute everything else on-demand. For example, if you're building a shopping list, you can store the items as an array in state. If you want to also display the number of items in the list, don't store the number of items as another state value--instead, read the length of your array.
+State'i, uygulamanızın hatırlaması gereken minimum değişen veri kümesi olarak düşünün. State oluşturmanın en önemli ilkesi *Kendinizi Tekrar Etmemektir* ([DRY (Don't Repeat Yourself).](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)). Uygulamanızın ihtiyaç duyduğu state'i belirleyin ve kalan her şeyi sadece ihtiyaç olduğunda hesaplayın. Örneğin, bir alışveriş listesi oluşturuyorsanız; listedeki öğeleri state halinde bir dizi olarak saklayabilirsiniz. Listedeki öğe sayısını da görüntülemek istiyorsanız öğe sayısını başka bir state değeri olarak tutmayın; bunun yerine dizinin uzunluğunu okuyun (length of array).
 
-Now think of all of the pieces of data in this example application:
+Örnek uygulamamızdaki sahip olduğumuz tüm veri parçalarına bakalım:
 
-1. The original list of products
-2. The search text the user has entered
-3. The value of the checkbox
-4. The filtered list of products
+1. Orijinal ürün listesi
+2. Kullanıcının girdiği arama metni
+3. Checkbox’ın değeri
+4. Filtrelenmiş ürün listesi
 
-Which of these are state? Identify the ones that are not:
+Bunlarin hangileri state? State olmayanları belirleyin:
 
-* Does it **remain unchanged** over time? If so, it isn't state.
-* Is it **passed in from a parent** via props? If so, it isn't state.
-* **Can you compute it** based on existing state or props in your component? If so, it *definitely* isn't state!
+* Zaman içinde **değişmeden mi** duruyor? Eğer öyleyse, state değildir.
+* Prop'lar aracılığıyla **üst bileşenden mi geliyor**? Eğer öyleyse, state değildir.
+* Varolan state veya prop'lara dayalı olarak **hesaplayabilir misiniz**? Eğer öyleyse, *kesinlikle* state değildir!
 
-What's left is probably state.
+Geriye kalanlar muhtemelen state'tir.
 
-Let's go through them one by one again:
+Hadi teker teker inceleyelim:
 
-1. The original list of products is **passed in as props, so it's not state.** 
-2. The search text seems to be state since it changes over time and can't be computed from anything.
-3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
-4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
+1. Orijinal ürün listesi **prop olarak iletildiği için state değildir.**
+2. Arama metni zaman içinde değiştiği için ve bir yerden hesaplanamadığı için state'tir.
+3. Checkbox'un değeri zaman içinde değiştiği için ve bir yerden hesaplanamadığı için state'tir.
+4. Filtrelenmiş ürün listesi, orijinal ürün listesini alıp arama metni ve checkbox'ın değerine göre filtreleyip **hesaplanabilir**. Bu yüzden **state değildir**.
 
-This means only the search text and the value of the checkbox are state! Nicely done!
+Demek ki sadece arama metni ve checkbox'ın değeri state'tir! Güzel iş!
 
 <DeepDive>
 
-#### Props vs State {/*props-vs-state*/}
+#### Prop'lar vs State {/*props-vs-state*/}
 
-There are two types of "model" data in React: props and state. The two are very different:
+React'te iki tür "model" veri vardır: prop'lar ve state. İkisi birbirinden çok farklıdır:
 
-* [**Props** are like arguments you pass](/learn/passing-props-to-a-component) to a function. They let a parent component pass data to a child component and customize its appearance. For example, a `Form` can pass a `color` prop to a `Button`.
-* [**State** is like a component’s memory.](/learn/state-a-components-memory) It lets a component keep track of some information and change it in response to interactions. For example, a `Button` might keep track of `isHovered` state.
+* [**Prop'lar** fonksiyonlara ilettiğiniz argümanlara](/learn/passing-props-to-a-component) benzer. Prop'lar, üst bileşenin alt bileşene data iletip, görünümünü özelleştirmesini sağlar. Örneğin, bir `Form` bileşeni bir `Button` bileşenine `color` prop'u iletebilir.
+* [**State** bir bileşenin hafızası gibidir](/learn/state-a-components-memory). Bir bileşenin bazı bilgileri takip etmesini ve gelen etkilşimlere cevap olarak o bilgiyi değiştirmesini sağlar. Örneğin, bir `Button` bileşeni `isHovered` state'ini takip edebilir.
 
-Props and state are different, but they work together. A parent component will often keep some information in state (so that it can change it), and *pass it down* to child components as their props. It's okay if the difference still feels fuzzy on the first read. It takes a bit of practice for it to really stick!
+Prop'lar ve state farklıdır, ancak birlikte çalışırlar. Bir üst bileşen genellikle bazı bilgileri state olarak tutar (değiştirebilmek için) ve bu bilgiyi alt bileşenlere prop olarak *geçirir*. İlk okumada aradaki fark hala belirsiz geliyorsa sorun değil. Gerçekten oturması için biraz pratik gerekiyor!
 
 </DeepDive>
 
-## Step 4: Identify where your state should live {/*step-4-identify-where-your-state-should-live*/}
+## Step 4: State’inizin barınacağı yeri belirleyin {/*step-4-identify-where-your-state-should-live*/}
 
-After identifying your app’s minimal state data, you need to identify which component is responsible for changing this state, or *owns* the state. Remember: React uses one-way data flow, passing data down the component hierarchy from parent to child component. It may not be immediately clear which component should own what state. This can be challenging if you’re new to this concept, but you can figure it out by following these steps!
+Uygulamanızın minimum state verisini belirledikten sonra, bu state'i değiştirmekten sorumlu olan veya state'e *sahip olan* bileşeni belirlemeniz gerekir. Unutmayın: React, veriyi yukarıdan aşağıya doğru tek yönlü olarak (one-way data flow) aktarır. Bu yüzden, hangi bileşenin hangi state'i sahipleneceği hemen net olmayabilir. Bu konseptle yeni tanışıyorsanız bu zor olabilir, ancak aşağıdaki adımları takip ederek çözebilirsiniz!
 
-For each piece of state in your application:
+Uyguamanızdaki her state parçası için:
 
-1. Identify *every* component that renders something based on that state.
-2. Find their closest common parent component--a component above them all in the hierarchy.
-3. Decide where the state should live:
-    1. Often, you can put the state directly into their common parent.
-    2. You can also put the state into some component above their common parent.
-    3. If you can't find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common parent component.
+1. State'e bağlı olarak bir şeyler render eden *her* bileşeni belirleyin.
+2. O bileşenlere en yakın ortak üst bileşeni bulun (Hiyerarşide hepsinin üstünde olan bir bileşen).
+3. State'in barınacağı yere karar verin:
+    1. Genellikle, state'i direkt olarak ortak üst bileşene koyabilirsiniz.
+    2. Ayrıca State'i, ortak üst bileşenlerinin üstündeki bir bileşene de koyabilirsiniz.
+    3. State'i koyabileceğiniz bir bileşen bulamıyorsanız, sadece state'i tutması için yeni bir bileşen oluşturun ve onu ortak üst bileşenlerinin üstündeki bir yere ekleyin.
 
-In the previous step, you found two pieces of state in this application: the search input text, and the value of the checkbox. In this example, they always appear together, so it makes sense to put them into the same place.
+Önceki adımda, bu uygulamadaki iki state parçasını buldunuz: arama inputu ve checkbox'ın değeri. Bu örnekte ikisi daima birlikte görünüyor; bu yüzden aynı yere koymak mantıklıdır.
 
-Now let's run through our strategy for them:
+Şimdi o ikisi için stratejimizi gözden geçirelim:
 
-1. **Identify components that use state:**
-    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
-    * `SearchBar` needs to display that state (search text and checkbox value).
-1. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
-2. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+1. **State kullanan bileşenleri belirleyin:**
+    * `ProductTable` stat'e göre ürün listesini filtrelemesi gerekiyor. (arama metni ve checkbox değeri).
+    * `SearchBar` state'i göstermesi gerekiyor. (arama metni ve checkbox değeri).
+2. **Ortak üst bileşeni bulun:** İki bileşenin de ortak olarak paylaştığı üst bileşen `FilterableProductTable` bileşenidir.
+3. **State'in barınacağı yere karar verin**: Filtre metni ve checkbox için gerekli state değerlerini `FilterableProductTable` bileşeninde tutacağız.
 
-So the state values will live in `FilterableProductTable`. 
+Sonuç olarak state değerleri `FilterableProductTable` bileşeninde barınacak.
 
-Add state to the component with the [`useState()` Hook.](/reference/react/useState) Hooks are special functions that let you "hook into" React. Add two state variables at the top of `FilterableProductTable` and specify their initial state:
+Bileşene state eklemek için [`useState()` Hook'unu](/reference/react/useState) kullanın. Hook'lar React'e "bağlanmanızı" (hook-into) sağlayan özel fonksiyonlardır. `FilterableProductTable` bileşeninin en üstüne iki state değişkeni ekleyin ve başlangıç değerlerini belirtin:
 
 ```js
 function FilterableProductTable({ products }) {
@@ -295,7 +291,7 @@ Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as p
 </div>
 ```
 
-You can start seeing how your application will behave. Edit the `filterText` initial value from `useState('')` to `useState('fruit')` in the sandbox code below. You'll see both the search input text and the table update:
+Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz. Aşağıdaki sandbox'ta, `filterText` başlangıç değerini `useState('')` yerine `useState('elma')` olarak değiştirin. Hem arama inputu hem de tablo güncellenecektir:
 
 <Sandpack>
 
@@ -377,8 +373,8 @@ function ProductTable({ products, filterText, inStockOnly }) {
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Price</th>
+          <th>İsim</th>
+          <th>Fiyat</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -392,25 +388,25 @@ function SearchBar({ filterText, inStockOnly }) {
       <input 
         type="text" 
         value={filterText} 
-        placeholder="Search..."/>
+        placeholder="Ara..."/>
       <label>
         <input 
           type="checkbox" 
           checked={inStockOnly} />
         {' '}
-        Only show products in stock
+        Sadece stoktaki ürünleri göster
       </label>
     </form>
   );
 }
 
 const PRODUCTS = [
-  {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
-  {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
-  {category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
-  {category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
-  {category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
-  {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Elma" },
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Mandalina" },
+  { category: "Meyveler", price: "₺20", stocked: false, name: "Portakal" },
+  { category: "Sebzeler", price: "₺20", stocked: true, name: "Ispanak" },
+  { category: "Sebzeler", price: "₺40", stocked: false, name: "Kabak" },
+  { category: "Sebzeler", price: "₺10", stocked: true, name: "Börülce" }
 ];
 
 export default function App() {
@@ -437,7 +433,7 @@ td {
 
 </Sandpack>
 
-Notice that editing the form doesn't work yet. There is a console error in the sandbox above explaining why:
+Farkettiyseniz, formu düzenlemek henüz çalışmıyor. Yukarıdaki sandbox'ta nedenini açıklayan bir konsol hatası var:
 
 <ConsoleBlock level="error">
 
@@ -445,7 +441,15 @@ You provided a \`value\` prop to a form field without an \`onChange\` handler. T
 
 </ConsoleBlock>
 
-In the sandbox above, `ProductTable` and `SearchBar` read the `filterText` and `inStockOnly` props to render the table, the input, and the checkbox. For example, here is how `SearchBar` populates the input value:
+<ConsoleBlock level="error">
+
+Bir form alanına \`value\` prop'u verdiniz; ancak bir \`onChange\` handler'ı sağlamadınız. Bu salt-okunur bir form alanı oluşturacaktır.
+
+</ConsoleBlock>
+
+
+
+Yukarıdaki sandboxta, `ProductTable` ve `SearchBar`, tabloyu, inputu ve checkbox'ı render etmek için, `filterText` ve `inStockOnly` prop'larını okur. Örneğin, `SearchBar`'ın input değerini nasıl doldurduğuna bakalım:
 
 ```js {1,6}
 function SearchBar({ filterText, inStockOnly }) {
@@ -454,19 +458,18 @@ function SearchBar({ filterText, inStockOnly }) {
       <input 
         type="text" 
         value={filterText} 
-        placeholder="Search..."/>
+        placeholder="Ara..."/>
 ```
 
-However, you haven't added any code to respond to the user actions like typing yet. This will be your final step.
+Ancak henüz kullanıcı eylemlerine (yazmak gibi) yanıt vermek için herhangi bir kod eklemediniz. Bu da son adımınız olacak.
 
+## Step 5: Ters veri akışı ekleyin {/*step-5-add-inverse-data-flow*/}
 
-## Step 5: Add inverse data flow {/*step-5-add-inverse-data-flow*/}
+Uygulumanız şu anda, prop'lar ve state'in hiyerarşi boyunca aşağı doğru akmasıyla, doğru bir şekilde render ediliyor. Ancak kullanıcı girdisine göre state'i değiştirmek için, ters istikametteki veri akışını da desteklenmeniz gerekemktedir. Hiyerarşinin derinliklerindeki form bileşenlerinin `FilterableProductTable` bileşenindeki state'i güncellemesi gerekecek.
 
-Currently your app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input, you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`. 
+React bu veri akışını açıkça yapar, ancak iki-yönlü veri bağlamaya göre biraz daha fazla kod yazmanızı gerektirir. Yukarıdaki örnekte yazı yazmaya veya kutuyu işaretlemeye çalışırsanız, React girdinizi görmezden gelir. Bu kasıtlıdır. `<input value={filterText} />` yazarak, `input`'un `value` prop'unu her zaman `FilterableProductTable`'dan iletilem `filterText` state'ine eşit olarak ayarladınız. `filterText` state'i hiçbir zaman değişmediği için, input hiçbir zaman değişmez.
 
-React makes this data flow explicit, but it requires a little more typing than two-way data binding. If you try to type or check the box in the example above, you'll see that React ignores your input. This is intentional. By writing `<input value={filterText} />`, you've set the `value` prop of the `input` to always be equal to the `filterText` state passed in from `FilterableProductTable`. Since `filterText` state is never set, the input never changes.
-
-You want to make it so whenever the user changes the form inputs, the state updates to reflect those changes. The state is owned by `FilterableProductTable`, so only it can call `setFilterText` and `setInStockOnly`. To let `SearchBar` update the `FilterableProductTable`'s state, you need to pass these functions down to `SearchBar`:
+Kullanıcı form inputlarını değiştirdiğinde, state'in bu değişiklikleri yansıtacak şekilde güncellenmesini istersiniz. State `FilterableProductTable`'a aittir, bu yüzden yalnızca o bileşen `setFilterText` ve `setInStockOnly` fonksiyonlarını çağırabilir. `SearchBar`'ın `FilterableProductTable`'ın state'ini güncellemesine izin vermek için, bu fonksiyonları `SearchBar`'a iletmeniz gerekir:
 
 ```js {2,3,10,11}
 function FilterableProductTable({ products }) {
@@ -482,17 +485,17 @@ function FilterableProductTable({ products }) {
         onInStockOnlyChange={setInStockOnly} />
 ```
 
-Inside the `SearchBar`, you will add the `onChange` event handlers and set the parent state from them:
+`SearchBar`'ın içinde, `onChange` olay yöneticilerini ekleyip, onlar aracılığıyla üst bileşenin state'ini güncelleyeceksiniz:
 
 ```js {5}
 <input 
   type="text" 
   value={filterText} 
-  placeholder="Search..." 
+  placeholder="Ara..." 
   onChange={(e) => onFilterTextChange(e.target.value)} />
 ```
 
-Now the application fully works!
+Uygulama şimdi tamamen çalışıyor!
 
 <Sandpack>
 
@@ -576,8 +579,8 @@ function ProductTable({ products, filterText, inStockOnly }) {
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Price</th>
+          <th>İsim</th>
+          <th>Fiyat</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -595,7 +598,7 @@ function SearchBar({
     <form>
       <input 
         type="text" 
-        value={filterText} placeholder="Search..." 
+        value={filterText} placeholder="Ara..." 
         onChange={(e) => onFilterTextChange(e.target.value)} />
       <label>
         <input 
@@ -603,19 +606,19 @@ function SearchBar({
           checked={inStockOnly} 
           onChange={(e) => onInStockOnlyChange(e.target.checked)} />
         {' '}
-        Only show products in stock
+        Sadece stoktaki ürünleri göster
       </label>
     </form>
   );
 }
 
 const PRODUCTS = [
-  {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
-  {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
-  {category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
-  {category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
-  {category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
-  {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Elma" },
+  { category: "Meyveler", price: "₺10", stocked: true, name: "Mandalina" },
+  { category: "Meyveler", price: "₺20", stocked: false, name: "Portakal" },
+  { category: "Sebzeler", price: "₺20", stocked: true, name: "Ispanak" },
+  { category: "Sebzeler", price: "₺40", stocked: false, name: "Kabak" },
+  { category: "Sebzeler", price: "₺10", stocked: true, name: "Börülce" }
 ];
 
 export default function App() {
@@ -642,8 +645,8 @@ td {
 
 </Sandpack>
 
-You can learn all about handling events and updating state in the [Adding Interactivity](/learn/adding-interactivity) section.
+Olayları yönetmek ve state'i güncellemek hakkında daha fazla bilgi için [Etkileşim Ekleme](/learn/adding-interactivity) bölümüne bakabilirsiniz.
 
-## Where to go from here {/*where-to-go-from-here*/}
+## Bundan sonrası {/*where-to-go-from-here*/}
 
-This was a very brief introduction to how to think about building components and applications with React. You can [start a React project](/learn/installation) right now or [dive deeper on all the syntax](/learn/describing-the-ui) used in this tutorial.
+Bu, bileşenleri ve uyguamaları React ile nasıl oluşturacağınızı düşünmenin çok kısa bir girişiydi. Hemen şimdi [bir React projesi başlatabilirsiniz](/learn/installation) veya bu öğreticide kullanılan tüm sözdizimi hakkında [daha derinlere inebilirsiniz](/learn/describing-the-ui).
