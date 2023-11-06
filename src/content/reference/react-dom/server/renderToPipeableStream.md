@@ -431,7 +431,11 @@ function ProfilePage() {
 }
 ```
 
+<<<<<<< HEAD
 `Posts` bileşeninde veya onun içinde herhangi bir yerde hata oluşursa, React [ondan kurtulmaya çalışacaktır:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
+=======
+If an error happens in the `Posts` component or somewhere inside it, React will [try to recover from it:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
+>>>>>>> a8790ca810c1cebd114db35a433b90eb223dbb04
 
 1. Bu, en yakın `<Suspense>` sınırlayıcısı (`PostsGlimmer`) için yükleme yedeklemesini HTML içinde yayımlayacaktır.
 2. Sunucu içinde `Posts` içeriğini render etmekten "vazgeçecektir."
