@@ -370,7 +370,7 @@ function subscribe(callback) {
 - HTML oluşturulurken sunucuda çalışır.
 - React'ın sunucu HTML'ini alıp etkileşimli haline getirirken yani [hidratlama](/reference/react-dom/client/hydrateRoot) yaparken istemcide çalışır.
 
-Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) için bu argümanı atlayın.
+Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) için bu argümanı atlayın.
 
 <Note>
 

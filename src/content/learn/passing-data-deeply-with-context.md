@@ -989,7 +989,7 @@ export const places = [{
 }, {
   id: 5, 
   name: 'Chefchaouen, Fas',
-  description: 'Evlerin neden mavi boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
+  description: 'Evlerin neden maviye boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
   imageId: 'rTqKo46'
 }, {
   id: 6,
@@ -1127,8 +1127,13 @@ export const places = [{
   imageId: 'kxsph5C'
 }, {
   id: 5, 
+<<<<<<< HEAD
   name: 'Chefchaouen, Fas',
   description: 'Evlerin neden mavi boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
+=======
+  name: 'Chefchaouen, Marocco',
+  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
+>>>>>>> a8790ca810c1cebd114db35a433b90eb223dbb04
   imageId: 'rTqKo46'
 }, {
   id: 6,
