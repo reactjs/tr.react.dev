@@ -1509,10 +1509,7 @@ main {
 
 ---
 
-<<<<<<< HEAD
-## Sorun Giderme {/*troubleshooting*/}
-=======
-### Displaying an error to users with a error boundary {/*displaying-an-error-to-users-with-error-boundary*/}
+### Bir hata sınırı ile kullanıcılara bir hatayı gösterme {/*displaying-an-error-to-users-with-error-boundary*/}
 
 <Canary>
 
@@ -1606,8 +1603,7 @@ root.render(
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
->>>>>>> a8790ca810c1cebd114db35a433b90eb223dbb04
+## Sorun Giderme {/*troubleshooting*/}
 
 ### Transition içinde bir input (giriş) alanını güncelleme işlemi çalışmaz {/*updating-an-input-in-a-transition-doesnt-work*/}
 
