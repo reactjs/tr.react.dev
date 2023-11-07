@@ -288,50 +288,52 @@ export function Footer() {
         </div>
         <div className="flex flex-col">
           <FooterLink href="/learn" isHeader={true}>
-            Learn React
+            React Öğrenin
           </FooterLink>
           <FooterLink href="/learn/">Quick Start</FooterLink>
           <FooterLink href="/learn/installation">Installation</FooterLink>
           <FooterLink href="/learn/describing-the-ui">
-            Describing the UI
+            Kullanıcı Arayüzünü Tanımlama
           </FooterLink>
           <FooterLink href="/learn/adding-interactivity">
-            Adding Interactivity
+            Etkileşim Ekleme
           </FooterLink>
-          <FooterLink href="/learn/managing-state">Managing State</FooterLink>
-          <FooterLink href="/learn/escape-hatches">Escape Hatches</FooterLink>
+          <FooterLink href="/learn/managing-state">
+            State&apos;i Yönetmek
+          </FooterLink>
+          <FooterLink href="/learn/escape-hatches">Kaçış Yolları</FooterLink>
         </div>
         <div className="flex flex-col">
           <FooterLink href="/reference/react" isHeader={true}>
-            API Reference
+            API Referansı
           </FooterLink>
           <FooterLink href="/reference/react">React APIs</FooterLink>
           <FooterLink href="/reference/react-dom">React DOM APIs</FooterLink>
         </div>
         <div className="md:col-start-2 xl:col-start-4 flex flex-col">
           <FooterLink href="/community" isHeader={true}>
-            Community
+            Topluluk
           </FooterLink>
           <FooterLink href="https://github.com/facebook/react/blob/main/CODE_OF_CONDUCT.md">
-            Code of Conduct
+            Davranış Kuralları
           </FooterLink>
-          <FooterLink href="/community/team">Meet the Team</FooterLink>
+          <FooterLink href="/community/team">Takımla Tanışın</FooterLink>
           <FooterLink href="/community/docs-contributors">
-            Docs Contributors
+            Dokümantasyona Katkıda Bulunanlar
           </FooterLink>
           <FooterLink href="/community/acknowledgements">
-            Acknowledgements
+            Katkıda Bulunanlar
           </FooterLink>
         </div>
         <div className="flex flex-col">
-          <FooterLink isHeader={true}>More</FooterLink>
+          <FooterLink isHeader={true}>Daha Fazlası</FooterLink>
           <FooterLink href="/blog">Blog</FooterLink>
           <FooterLink href="https://reactnative.dev/">React Native</FooterLink>
           <FooterLink href="https://opensource.facebook.com/legal/privacy">
-            Privacy
+            Gizliik
           </FooterLink>
           <FooterLink href="https://opensource.fb.com/legal/terms/">
-            Terms
+            Şartlar
           </FooterLink>
           <div className="flex flex-row mt-8 gap-x-2">
             <ExternalLink
