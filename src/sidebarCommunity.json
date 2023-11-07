@@ -1,42 +1,42 @@
 {
-  "title": "Community",
+  "title": "Topluluk",
   "path": "/community",
   "routes": [
     {
       "hasSectionHeader": true,
-      "sectionHeader": "GET INVOLVED"
+      "sectionHeader": "Dahil Olun"
     },
     {
-      "title": "Community",
+      "title": "Topluluk",
       "path": "/community",
       "skipBreadcrumb": true,
       "routes": [
         {
-          "title": "React Conferences",
+          "title": "React Konferansları",
           "path": "/community/conferences"
         },
         {
-          "title": "React Meetups",
+          "title": "React Buluşmaları",
           "path": "/community/meetups"
         },
         {
-          "title": "React Videos",
+          "title": "React Videoları",
           "path": "/community/videos"
         },
         {
-          "title": "Meet the Team",
+          "title": "Takımla Tanışın",
           "path": "/community/team"
         },
         {
-          "title": "Docs Contributors",
+          "title": "Dokümantasyon Ekibi",
           "path": "/community/docs-contributors"
         },
         {
-          "title": "Acknowledgements",
+          "title": "Katkıda Bulunanlar",
           "path": "/community/acknowledgements"
         },
         {
-          "title": "Versioning Policy",
+          "title": "Sürüm Politikası",
           "path": "/community/versioning-policy"
         }
       ]

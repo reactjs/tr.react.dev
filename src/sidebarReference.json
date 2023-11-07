@@ -1,5 +1,5 @@
 {
-  "title": "API Reference",
+  "title": "API Referansı",
   "path": "/reference/react",
   "routes": [
     {
@@ -7,11 +7,11 @@
       "sectionHeader": "react@18.2.0"
     },
     {
-      "title": "Overview",
+      "title": "Genel Bakış",
       "path": "/reference/react"
     },
     {
-      "title": "Hooks",
+      "title": "Hook'lar",
       "path": "/reference/react/hooks",
       "routes": [
         {
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "title": "Components",
+      "title": "Bileşenler",
       "path": "/reference/react/components",
       "routes": [
         {
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "title": "APIs",
+      "title": "API'lar",
       "path": "/reference/react/apis",
       "routes": [
         {
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "title": "Directives",
+      "title": "Direktifler",
       "path": "/reference/react/directives",
       "canary": true,
       "routes": [
@@ -172,7 +172,7 @@
       "sectionHeader": "react-dom@18.2.0"
     },
     {
-      "title": "Hooks",
+      "title": "Hook'lar",
       "path": "/reference/react-dom/hooks",
       "routes": [
         {
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "title": "Components",
+      "title": "Bileşenler",
       "path": "/reference/react-dom/components",
       "routes": [
         {
@@ -298,10 +298,10 @@
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "Legacy APIs"
+      "sectionHeader": "Eski API'ları"
     },
     {
-      "title": "Legacy React APIs",
+      "title": "Eski React API'ları",
       "path": "/reference/react/legacy",
       "routes": [
         {
