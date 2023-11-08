@@ -143,4 +143,6 @@ Bu tür teknik belgelerde yaygın olarak kullanılan terimlerin çevirisi için 
 | template literals         | template literal'leri |
 | Try it on CodePen         | CodePen'de deneyin |
 | uncontrolled component    | kontrolsüz bileşen |
-| effect                    | effect |
+| effect                    | efekt `*`|
+
+ * ozel olarak `useEffect` ya da `useLayoutEffect` tarzi hooklardan bahsedilen yerlerde oldugu gibi tutabiliriz. Ama genel olarak konsepte deginildigi yerlerde `efekt` olarak cevirebiliriz.

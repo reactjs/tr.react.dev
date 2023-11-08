@@ -62,7 +62,7 @@ function ChatRoom({ roomId }) {
 
 * Eğer bağımlılıklarınızdan bazıları nesneler veya bileşeniniz içinde tanımlanmış fonksiyonlar ise, bu bağımlılıkların **Effect'in gerekenden daha sık yeniden çalışmasına neden olma riski vardır.** Bu durumu düzeltmek için, gereksiz [nesne](#removing-unnecessary-object-dependencies) ve [fonksiyon](#removing-unnecessary-function-dependencies) bağımlılıklarını silin. Ayrıca [state güncellemelerinizi](#updating-state-based-on-previous-state-from-an-effect) ve [reaktif olmayan mantığı](#reading-the-latest-props-and-state-from-an-effect) Effect dışına taşıyabilirsiniz.
 
-* Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React, Effect'inizi çalıştırmadan önce **tarayıcının güncellenen ekranı çizmesine izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
+* Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React genellikle, Effect'inizi çalıştırmadan önce **tarayıcının güncellenen ekranı çizmesine izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
 
 * Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden çizebilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden çizmesini engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
 
@@ -426,7 +426,7 @@ body {
 
 #### Elemanın görünebilirliğini takip etme {/*tracking-element-visibility*/}
 
-Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste, sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı doğru kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekran göründüğünde sizi bilgilendirecektir.
+Bu örnekte harici sistem yine tarayıcı DOM'udur. `App` bileşeni, uzun bir liste, sonra `Box` bileşeni ve ardından başka bir uzun liste göstermektedir. Listeyi aşağı doğru kaydırın. Ekranda `Box` bileşeni göründüğünde, arka plan renginin siyaha dönüştüğüne dikkat edin. Bu davranışı uygulamak için `Box` bileşeni, [`IntersectionObserver`'ı](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) yönetmek için Effect'i kullanır. Bu tarayıcı API'ı, DOM elemanı ekranda göründüğünde sizi bilgilendirecektir.
 
 <Sandpack>
 
@@ -471,10 +471,10 @@ export default function Box() {
         document.body.style.backgroundColor = 'white';
         document.body.style.color = 'black';
       }
+    }, {
+       threshold: 1.0
     });
-    observer.observe(div, {
-      threshold: 1.0
-    });
+    observer.observe(div);
     return () => {
       observer.disconnect();
     }
@@ -763,10 +763,10 @@ export function useIntersectionObserver(ref) {
     const observer = new IntersectionObserver(entries => {
       const entry = entries[0];
       setIsIntersecting(entry.isIntersecting);
+    }, {
+       threshold: 1.0
     });
-    observer.observe(div, {
-      threshold: 1.0
-    });
+    observer.observe(div);
     return () => {
       observer.disconnect();
     }
@@ -1047,7 +1047,7 @@ Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
 - **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşik veri getirme mekanizmasını kullanın.** Modern React çatıları verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
-- **Aksi halde, kullanıcı taraflı önbelleğe almayı kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü yaparsanız, Effect'leri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
+- **Aksi halde, kullanıcı taraflı bir önbellek çözümü kullanmayı ya da kendiniz oluşturmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü uygularsanız, arka planda Effect'leri kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da ekleyebilirsiniz.
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
 

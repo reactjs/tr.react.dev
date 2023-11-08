@@ -10,7 +10,7 @@ title: useInsertionEffect
 
 <Intro>
 
-`useInsertionEffect` hooku herhangi bir DOM mutasyonundan önce tetiklenen [`useEffect`](/reference/react/useEffect) hook'unun bir versiyonudur.
+`useInsertionEffect`, herhangi bir layout efekti tetiklenmeden önce DOM'a öğe eklenmesine izin verir.
 
 ```js
 useInsertionEffect(setup, dependencies?)
@@ -26,7 +26,7 @@ useInsertionEffect(setup, dependencies?)
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-Herhangi bir DOM mutasyonundan önce stilleri eklemek için `useInsertionEffect` hookunu çağırın:  
+Layout'ı okuma ihtimali olan herhangi bir efekt tetiklenmeden önce stil eklemek için `useInsertionEffect` hookunu çağırın:
 
 ```js
 import { useInsertionEffect } from 'react';
@@ -44,7 +44,7 @@ function useCSS(rule) {
 
 #### Parametreler {/*parameters*/}
 
-* `setup`: Effect mantığınızı içeren fonksiyon. Setup fonksiyonunuz isteğe bağlı olarak bir *temizlik* fonksiyonu döndürebilir.  Bileşeniniz DOM'a eklenmeden önce, React setup fonksiyonunuzu çalışıtıracak. Değişen bağımlılıklarla her yeniden render işleminde, React önce temizlik işlevinizi (varsa) eski değerlerle çalıştıracak, ardından setup fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırılmadan önce, React temizlik fonksiyonunuzu çalıştıracaktır.
+* `setup`: Effect mantığınızı içeren fonksiyon. Setup fonksiyonunuz isteğe bağlı olarak bir *temizlik* fonksiyonu döndürebilir.  Bileşeniniz DOM'a eklenmeden önce, React setup fonksiyonunuzu çalışıtıracak. Değişen bağımlılıklarla her yeniden render işleminde, React önce (varsa) temizlik işlevinizi eski değerlerle çalıştıracak, ardından setup fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldığında, React temizlik fonksiyonunuzu çalıştıracaktır.
 
 * **opsiyonel** `dependencies`: `setup` kodunun içinde referans verilen tüm reaktif değerlerin listesi. Reaktif değerler, props, state ve direkt olarak bileşen içinde belirtilen tüm değişkenleri ve fonksiyonları içerir. Eğer linteriniz [React için yapılandırılmış](/learn/editor-setup#linting), her reaktif değerin bağımlılık olarak doğru şekilde belirtildiğini doğrulayacaktır. Bağımlılıkların listesi sabit sayıda ögeye sahip olmalı ve `[dep1, dep2, dep3]` gibi sıralı şekilde yazılmalıdır. React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırma algoritmasını kullanarak her bağımlılığı önceki değeriyle karşılaştıracak. Bağımlılıkları hiç belirtmezseniz, Efektiniz bileşenin her yeniden render işleminde tekrar çalışacaktır.
 
@@ -56,7 +56,9 @@ function useCSS(rule) {
 
 * Efektler sadece kullanıcı tarafında çalışır. Sunucu tarafı render işleminde çalışmazlar.
 * `useInsertionEffect` içerisinden state'i güncelleyemezsiniz.
-* `useInsertionEffect` çalıştığı sırada, referanslar henüz eklenmemiş ve DOM henüz güncellenmemiştir.
+* `useInsertionEffect` çalıştığı sırada, referanslar (refler) henüz eklenmemiştir.
+* `useInsertionEffect` DOM güncellendikten önce ya da sonra çalışabilir. DOM'un belirli bir zamanda güncelleniyor olmasına güvenmemelisiniz.
+* Her efekt için temizleme (cleanup) ve kurulum (setup) fonksiyonlarını çalıştıran diğer efekt tiplerinin aksine, `useInsertionEffect` her seferinde tek bir bileşen için hem temizleme hem de kurulum fonksiyonlarını çalıştırır. Bu, temizleme ve kurulum fonksiyonlarının araya girmesine sebep olur. 
 ---
 
 ## Kullanım {/*usage*/}
@@ -86,7 +88,7 @@ CSS-in-JS kullanıyorsanız, genellikle ilk iki yaklaşımın (Statik stiller i�
 
 İlk problem çözülemezken, ama `useInsertionEffect` hooku ikinci problemi çözmenize yardımcı olur.
 
-Herhangi bir DOM mutasyonundan önce çağırın stilleri eklemek için `useInsertionEffect` hookunu çağırın: 
+Herhangi bir layout efektinden önce stilleri eklemek için `useInsertionEffect` hookunu çağırın: 
 
 ```js {4-11}
 // Inside your CSS-in-JS library

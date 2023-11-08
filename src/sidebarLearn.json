@@ -1,53 +1,57 @@
 {
-  "title": "Learn React",
+  "title": "React Öğrenin",
   "path": "/learn",
   "routes": [
     {
       "hasSectionHeader": true,
-      "sectionHeader": "GET STARTED"
+      "sectionHeader": "BAŞLARKEN"
     },
     {
-      "title": "Quick Start",
+      "title": "Hızlı Başlangıç",
       "path": "/learn",
       "routes": [
         {
-          "title": "Tutorial: Tic-Tac-Toe",
+          "title": "Öğretici: Tic-Tac-Toe",
           "path": "/learn/tutorial-tic-tac-toe"
         },
         {
-          "title": "Thinking in React",
+          "title": "React'te Düşünmek",
           "path": "/learn/thinking-in-react"
         }
       ]
     },
     {
-      "title": "Installation",
+      "title": "Kurulum",
       "path": "/learn/installation",
       "routes": [
         {
-          "title": "Start a New React Project",
+          "title": "Yeni Bir React Projesi Başlatma",
           "path": "/learn/start-a-new-react-project"
         },
         {
-          "title": "Add React to an Existing Project",
+          "title": "Varolan Bir Projeye React Eklemek",
           "path": "/learn/add-react-to-an-existing-project"
         },
         {
-          "title": "Editor Setup",
+          "title": "Editor Kurulumu",
           "path": "/learn/editor-setup"
         },
         {
-          "title": "React Developer Tools",
+          "title": "TypeScript Kullanımı",
+          "path": "/learn/typescript"
+        },
+        {
+          "title": "React Geliştirici Araçları",
           "path": "/learn/react-developer-tools"
         }
       ]
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "LEARN REACT"
+      "sectionHeader": "REACT ÖĞRENİN"
     },
     {
-      "title": "Describing the UI",
+      "title": "Kullanıcı Arayüzünü Tanımlama",
       "tags": [],
       "path": "/learn/describing-the-ui",
       "routes": [
@@ -72,21 +76,25 @@
           "path": "/learn/passing-props-to-a-component"
         },
         {
-          "title": "Conditional Rendering",
+          "title": "Koşullu Olarak Render Etmek",
           "path": "/learn/conditional-rendering"
         },
         {
-          "title": "Rendering Lists",
+          "title": "Listeleri Render Etmek",
           "path": "/learn/rendering-lists"
         },
         {
-          "title": "Keeping Components Pure",
+          "title": "Bileşenleri Saf Tutmak",
           "path": "/learn/keeping-components-pure"
+        },
+        {
+          "title": "Your UI as a Tree",
+          "path": "/learn/understanding-your-ui-as-a-tree"
         }
       ]
     },
     {
-      "title": "Adding Interactivity",
+      "title": "Etkileşim Eklemek",
       "path": "/learn/adding-interactivity",
       "tags": [],
       "routes": [
@@ -95,33 +103,33 @@
           "path": "/learn/responding-to-events"
         },
         {
-          "title": "State: A Component's Memory",
+          "title": "State: Bir Bileşenin Hafızası",
           "path": "/learn/state-a-components-memory"
         },
         {
-          "title": "Render and Commit",
+          "title": "Render Et ve İşle",
           "path": "/learn/render-and-commit"
         },
         {
-          "title": "State as a Snapshot",
+          "title": "Anlık Görüntü Olarak State",
           "path": "/learn/state-as-a-snapshot"
         },
         {
-          "title": "Queueing a Series of State Updates",
+          "title": "State Güncellemelerinin Kuyruğa Alınması",
           "path": "/learn/queueing-a-series-of-state-updates"
         },
         {
-          "title": "Updating Objects in State",
+          "title": "State İçerisindeki Nesneleri Güncelleme",
           "path": "/learn/updating-objects-in-state"
         },
         {
-          "title": "Updating Arrays in State",
+          "title": "State İçerisindeki Dizileri Güncelleme",
           "path": "/learn/updating-arrays-in-state"
         }
       ]
     },
     {
-      "title": "Managing State",
+      "title": "State'i Yönetmek",
       "path": "/learn/managing-state",
       "tags": [
         "intermediate"
@@ -136,19 +144,19 @@
           "path": "/learn/choosing-the-state-structure"
         },
         {
-          "title": "Sharing State Between Components",
+          "title": "Bileşenler Arasında State Paylaşımı",
           "path": "/learn/sharing-state-between-components"
         },
         {
-          "title": "Preserving and Resetting State",
+          "title": "State'i Korumak ve Sıfırlamak",
           "path": "/learn/preserving-and-resetting-state"
         },
         {
-          "title": "Extracting State Logic into a Reducer",
+          "title": "State Mantığını Bir Reducer'a Aktarma",
           "path": "/learn/extracting-state-logic-into-a-reducer"
         },
         {
-          "title": "Passing Data Deeply with Context",
+          "title": "Context ile Veriyi Derinlemesine Aktarma",
           "path": "/learn/passing-data-deeply-with-context"
         },
         {
@@ -158,18 +166,18 @@
       ]
     },
     {
-      "title": "Escape Hatches",
+      "title": "Kaçış Yolları",
       "path": "/learn/escape-hatches",
       "tags": [
         "advanced"
       ],
       "routes": [
         {
-          "title": "Referencing Values with Refs",
+          "title": "Ref ile Değerlere Referans Verme",
           "path": "/learn/referencing-values-with-refs"
         },
         {
-          "title": "Manipulating the DOM with Refs",
+          "title": "Ref'ler ile DOM Manipülasyonu",
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
@@ -177,15 +185,15 @@
           "path": "/learn/synchronizing-with-effects"
         },
         {
-          "title": "You Might Not Need an Effect",
+          "title": "Bir Efekte İhtiyacınız Olmayabilir",
           "path": "/learn/you-might-not-need-an-effect"
         },
         {
-          "title": "Lifecycle of Reactive Effects",
+          "title": "Reacktif Efektlerin Yaşam Döngüsü",
           "path": "/learn/lifecycle-of-reactive-effects"
         },
         {
-          "title": "Separating Events from Effects",
+          "title": "Olayları Efektlerinden Ayırma",
           "path": "/learn/separating-events-from-effects"
         },
         {

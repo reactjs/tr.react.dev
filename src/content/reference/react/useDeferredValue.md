@@ -78,7 +78,7 @@ function SearchPage() {
 
 Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en son <CodeStep step={1}>değerin</CodeStep> "gerisinde" kalır. React ilk seferde ertelenmiş değeri *güncellemeden* render eder, ardından yeni değerle arka planda yeniden render işlemi planlar.
 
-**Bunun ne zaman yararlı olduğunu görmek için bir örnek üzerinden gidelim.**
+**Bunun ne zaman faydalı olabileceğini görmek için bir örnek üzerinden ilerleyelim.**
 
 <Note>
 
@@ -86,6 +86,7 @@ Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığ�
 
 - [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense etkinleştirilmiş çatılar vasıtasıyla veri çekilmesi
 - [`lazy`](/reference/react/lazy) ile bileşen kodunun lazy yüklenmesi
+- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 [Suspense ve sınırlamaları hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 

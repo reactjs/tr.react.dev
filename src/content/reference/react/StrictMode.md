@@ -5,7 +5,7 @@ title: <StrictMode>
 
 <Intro>
 
-`<StrictMode>` lets you find common bugs in your components early during development.
+`<StrictMode>` geliştirmeleriniz sırasında bileşenlerinizdeki genel hataları erkenden bulmanızı sağlar.
 
 
 ```js
@@ -20,11 +20,11 @@ title: <StrictMode>
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<StrictMode>` {/*strictmode*/}
 
-Use `StrictMode` to enable additional development behaviors and warnings for the component tree inside:
+`StrictMode`'unu bileşen ağaçları içinde ek geliştirme davranışları ve uyarılar için kullanınız:
 
 ```js
 import { StrictMode } from 'react';
@@ -38,32 +38,32 @@ root.render(
 );
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-Strict Mode enables the following development-only behaviors:
+Strict Modu aşağıdaki geliştirici davranışlarını etkinleştirir:
 
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- Bileşenleriniz, saf olmayan renderdan kaynaklanan hataları bulmak için [ekstra bir sürede yeniden render edilecektir.](#fixing-bugs-found-by-double-rendering-in-development)
+- Bileşenleriniz eksik Efekt temizlemesinin neden olduğu hataları bulmak için [ekstra bir sürede Efektleri yeniden çalıştıracaktır.](#fixing-bugs-found-by-re-running-effects-in-development)
+- Bileşenleriniz [kullanımdan kaldırılan API kullanımı için kontrol edilecektir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
 
-#### Props {/*props*/}
+#### Prop'lar {/*props*/}
 
-`StrictMode` accepts no props.
+`StrictMode` herhangi bir prop kabul etmez.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* There is no way to opt out of Strict Mode inside a tree wrapped in `<StrictMode>`. This gives you confidence that all components inside `<StrictMode>` are checked. If two teams working on a product disagree whether they find the checks valuable, they need to either reach consensus or move `<StrictMode>` down in the tree.
+* `<StrictMode>` ile sarılmış ağaçta Strict Modundan çıkmanın bir yolu yoktur. Bu size `<StrictMode>`'un altındaki tüm bileşenlerinizin kontrol edildiğinin güvencesini verir. Bir ürün üzerinde çalışan iki takım kontrolleri değerli bulup bulmadığı konusunda anlaşamazsa, uzlaşmak zorundalar ya da `<StrictMode>` etiketini ağaçta aşağı doğru taşımaları gerekir.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Enabling Strict Mode for entire app {/*enabling-strict-mode-for-entire-app*/}
+### Strict Modunu tüm uygulamada etkinleştirme {/*enabling-strict-mode-for-entire-app*/}
 
-Strict Mode enables extra development-only checks for the entire component tree inside the `<StrictMode>` component. These checks help you find common bugs in your components early in the development process.
+Strict Modu, `<StrictMode>` bileşeni altındaki tüm bileşenler için yalnızca geliştirme amaçlı ekstra kontroller sağlar. Bu kontroller, bileşenlerinizdeki hataları erkenden bulmanıza yardımcı olur.
 
 
-To enable Strict Mode for your entire app, wrap your root component with `<StrictMode>` when you render it:
+Tüm projenizde Strict Modu etkilenştirmek için, render sırasında kök bileşeninizi `<StrictMode>` bileşeni ile sarın. 
 
 ```js {6,8}
 import { StrictMode } from 'react';
@@ -77,27 +77,27 @@ root.render(
 );
 ```
 
-We recommend wrapping your entire app in Strict Mode, especially for newly created apps. If you use a framework that calls [`createRoot`](/reference/react-dom/client/createRoot) for you, check its documentation for how to enable Strict Mode.
+Özellikle yeni yaratılmış uygulamalarınızda, tüm uygulamayı Strict Modu ile sarmanızı öneririz. Sizin yerinize [`createRoot`](/reference/react-dom/client/createRoot)'u çağıran bir çatı ile çalışıyorsanız, Strict Modun nasıl etkileştirileceğine çatının dokümantasyonundan bakabilirsiniz.
 
-Although the Strict Mode checks **only run in development,** they help you find bugs that already exist in your code but can be tricky to reliably reproduce in production. Strict Mode lets you fix bugs before your users report them.
+Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da** size kodunuzda zaten var olan ancak üretim ortamında güvenilir bir şekilde tekrarlanması zor olabilen hataları bulmada yardımcı olurlar. Strict Modu, kullanıcılar farketmeden önce hataları bulmanızı sağlar.
 
 <Note>
 
-Strict Mode enables the following checks in development:
+Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- Bileşenleriniz, saf olmayan renderdan kaynaklanan hataları bulmak için [ekstra bir sürede yeniden render edilecektir.](#fixing-bugs-found-by-double-rendering-in-development)
+- Bileşenleriniz eksik Efekt temizlemesinin neden olduğu hataları bulmak için [ekstra bir sürede Efektleri yeniden çalıştıracaktır.](#fixing-bugs-found-by-re-running-effects-in-development)
+- Bileşenleriniz [kullanımdan kaldırılan API kullanımı içiin kontrol edilecektir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
 
-**All of these checks are development-only and do not impact the production build.**
+**Tüm bu kontroller yalnızca geliştirme sırasında çalıştırılar ve canlıda herhangi bir etkisi yoktur.**
 
 </Note>
 
 ---
 
-### Enabling strict mode for a part of the app {/*enabling-strict-mode-for-a-part-of-the-app*/}
+### Strict modu uygulamanın bir parçası için etkinleştirme {/*enabling-strict-mode-for-a-part-of-the-app*/}
 
-You can also enable Strict Mode for any part of your application:
+Strict Modu uygulamanızın herhangi bir parçası için de etkinleştirebilirsiniz: 
 
 ```js {7,12}
 import { StrictMode } from 'react';
@@ -118,25 +118,23 @@ function App() {
 }
 ```
 
-In this example, Strict Mode checks will not run against the `Header` and `Footer` components. However, they will run on `Sidebar` and `Content`, as well as all of the components inside them, no matter how deep.
-
+Örnekte gösterildiği üzere, Strict Modu `Header` ve `Footer` bileşenlerinde çalışmayacaktır. Ancak `Sidebar` ve `Content` bileşenleri ve bu bileşenler içindeki alt bileşenlerde, ne kadar derin olduğu farketmeksizin, çalışacaktır.
 ---
 
-### Fixing bugs found by double rendering in development {/*fixing-bugs-found-by-double-rendering-in-development*/}
+### Geliştirme sırasında çift renderda bulunan hataları düzeltme {/*fixing-bugs-found-by-double-rendering-in-development*/}
 
-[React assumes that every component you write is a pure function.](/learn/keeping-components-pure) This means that React components you write must always return the same JSX given the same inputs (props, state, and context).
+[React yazdığınız her bileşeni saf fonksiyon olarak kabul eder.](/learn/keeping-components-pure) Bu, yazdığınız bileşenlerin aynı girdiler (proplar, durum ve bağlam) verildiğinde her zaman aynı JSX'i döndürmesi gerektiği anlamına gelir.
 
-Components breaking this rule behave unpredictably and cause bugs. To help you find accidentally impure code, Strict Mode calls some of your functions (only the ones that should be pure) **twice in development.** This includes:
+Bu kuralı çiğneyen bileşenler öngörülemeyecek şekilde davranırlar ve hatalara sebep olur. Saf olmayan kodları bulmanıza yardımcı olmak için, Strict Modu bazı fonksiyonlarınınızı (sadece saf olması gerekenleri) **geliştirme sırasında iki kez çağırır.** Bu durum aşağıdakileri içerir:
+- Fonksiyon bileşen gövdeleri (sadece üst düzey mantıktakiler, o yüzden olay yöneticieri içindeki kodları içermez)
+- [`useState`](/reference/react/useState), [`set` fonksiyonları](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), ya da [`useReducer`](/reference/react/useReducer)'a iletilen fonksiyonlar.
+- [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([tüm listeye göz atınt](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)) gibi bazı sınıf bileşeni metodları
 
-- Your component function body (only top-level logic, so this doesn't include code inside event handlers)
-- Functions that you pass to [`useState`](/reference/react/useState), [`set` functions](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), or [`useReducer`](/reference/react/useReducer)
-- Some class component methods like [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([see the whole list](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects))
+Eğer saf bir fonksiyonsa, iki kez çalıştırmak hiçbir şeyi değiştirmez çünkü saf fonksiyonlar her zaman aynı sonucu üretir. Ancak, saf olmayan bir fonksiyonsa (örneğin, aldığı veriyi değiştiriyorsa), iki kez çalıştırmak farkedilir olma eğilimindedir (zaten bu sebepten saf değil) Bu durum hatayı erkenden farketmenize ve çözmenize yardımcı olur. 
 
-If a function is pure, running it twice does not change its behavior because a pure function produces the same result every time. However, if a function is impure (for example, it mutates the data it receives), running it twice tends to be noticeable (that's what makes it impure!) This helps you spot and fix the bug early.
+**Strict Modunda iki kez render etmenin hataları erkenden nasıl bulduğuna dair bir örnek:**
 
-**Here is an example to illustrate how double rendering in Strict Mode helps you find bugs early.**
-
-This `StoryTray` component takes an array of `stories` and adds one last "Create Story" item at the end:
+Aşağıdaki `StoryTray` bileşeni bir `stories` dizisini alır ve sonuna "Create Story" elemanını ekler:
 
 <Sandpack>
 
@@ -155,8 +153,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -178,7 +176,7 @@ export default function App() {
 ```js StoryTray.js active
 export default function StoryTray({ stories }) {
   const items = stories;
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul>
       {items.map(story => (
@@ -212,10 +210,9 @@ li {
 
 </Sandpack>
 
-There is a mistake in the code above. However, it is easy to miss because the initial output appears correct.
+Yukardaki kodda ilk çıktı doğru olduğu için gözden kaçırmanın çok kolay olduğu bir hata bulunmaktadır.
 
-This mistake will become more noticeable if the `StoryTray` component re-renders multiple times. For example, let's make the `StoryTray` re-render with a different background color whenever you hover over it: 
-
+Bu hata `StoryTray` bileşeni birden fazla kez render edilirse daha çok göze çarpar. Örneğin, `StoryTray`'i imleç ile üzerine geldiğinizde arka plan rengi değişecek şekilde yeniden render edelim: 
 <Sandpack>
 
 ```js index.js
@@ -233,8 +230,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -259,7 +256,7 @@ import { useState } from 'react';
 export default function StoryTray({ stories }) {
   const [isHover, setIsHover] = useState(false);
   const items = stories;
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul
       onPointerEnter={() => setIsHover(true)}
@@ -299,20 +296,20 @@ li {
 
 </Sandpack>
 
-Notice how every time you hover over the `StoryTray` component, "Create Story" gets added to the list again. The intention of the code was to add it once at the end. But `StoryTray` directly modifies the `stories` array from the props. Every time `StoryTray` renders, it adds "Create Story" again at the end of the same array. In other words, `StoryTray` is not a pure function--running it multiple times produces different results.
+`StoryTray` bileşeninin üzerine her gelişinizde listeye "Create Story" eklediğini göreceksiniz. Kodun asıl amacı listenin sonuna bir kez eklemesiydi. Ancak `StoryTray`, `stories` dizisini proplar aracılığıyla değiştiriyor. `StoryTray` her render edildiğinde, aynı diziye "Create Story"'i ekliyor. Yani başka bir deyişle, `StoryTray` birden fazla kez çalıştırıldığında farklı sonuçlar ürettiği için saf bir fonksiyon değil.
 
-To fix this problem, you can make a copy of the array, and modify that copy instead of the original one:
+Bu sorunu çözmek için, dizinin bir kopyasını oluşturabilirsiniz ve asıl dizi yerine bu kopyayı güncelleyebilirsiniz:
 
 ```js {2}
 export default function StoryTray({ stories }) {
-  const items = stories.slice(); // Clone the array
-  // ✅ Good: Pushing into a new array
-  items.push({ id: 'create', label: 'Create Story' });
+  const items = stories.slice(); // diziyi kopyalayın
+  // ✅ İyi: yeni dizinin içine atın
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
 ```
 
-This would [make the `StoryTray` function pure.](/learn/keeping-components-pure) Each time it is called, it would only modify a new copy of the array, and would not affect any external objects or variables. This solves the bug, but you had to make the component re-render more often before it became obvious that something is wrong with its behavior.
+Bu değişiklik [`StoryTray` fonksiyonunu saflaştıracaktır.](/learn/keeping-components-pure) Fonksiyon her çağırıldığında, sadece kopyalanmış diziyi değiştirecek ve diğer nesne ve değişkenleri etkilemeyecektir. Bu, sorunu çözer, ancak bileşenin davranışında bir sorun olduğunu farketmeden önce bileşeni daha çok yeniden render etmeniz gerekti.
 
-**In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
+**Asıl örnekte, hata göze batmıyordu. Şimdi orijinal (hatalı) kodu `<StrictMode>` ile saralım:**
 
 <Sandpack>
 
@@ -336,8 +333,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -359,7 +356,7 @@ export default function App() {
 ```js StoryTray.js active
 export default function StoryTray({ stories }) {
   const items = stories;
-  items.push({ id: 'create', label: 'Create Story' });
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul>
       {items.map(story => (
@@ -393,7 +390,7 @@ li {
 
 </Sandpack>
 
-**Strict Mode *always* calls your rendering function twice, so you can see the mistake right away** ("Create Story" appears twice). This lets you notice such mistakes early in the process. When you fix your component to render in Strict Mode, you *also* fix many possible future production bugs like the hover functionality from before:
+**Strict Modu *her zaman* render fonksiyonlarınızı iki kez çağırır, bu sayede hatayı direkt olarak görebilirsiniz** ("Create Story" iki kez eklendi). Bu, hatayı daha erken farketmenizi sağladı. Bileşeninizdeki hataları düzeltirken, Strict Modunda render ederseniz, imleç ile bileşen üzerine gelme işlevselliğinde olduğu gibi oluşabilecek *diğer* hataları düzeltirsiniz:
 
 <Sandpack>
 
@@ -417,8 +414,8 @@ import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
 let initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  {id: 0, label: "Ali'in Hikayesi" },
+  {id: 1, label: "Can'ın Hikayesi" },
 ];
 
 export default function App() {
@@ -442,8 +439,8 @@ import { useState } from 'react';
 
 export default function StoryTray({ stories }) {
   const [isHover, setIsHover] = useState(false);
-  const items = stories.slice(); // Clone the array
-  items.push({ id: 'create', label: 'Create Story' });
+  const items = stories.slice(); // Diziyi kopyala
+  items.push({ id: 'create', label: 'Hikaye Oluştur' });
   return (
     <ul
       onPointerEnter={() => setIsHover(true)}
@@ -483,29 +480,29 @@ li {
 
 </Sandpack>
 
-Without Strict Mode, it was easy to miss the bug until you added more re-renders. Strict Mode made the same bug appear right away. Strict Mode helps you find bugs before you push them to your team and to your users.
+StrictModu olmadan, yeniden render sayısını arttırana kadar hataları gözden kaçırmanız çok kolaydır. Strict Modu aynı hatayı hemen gösterir. Strict Modu kodlarınızı takımınıza ya da kullanıcılarınza göndermenden önce hataları bulmanıza yardımcı olur.
 
-[Read more about keeping components pure.](/learn/keeping-components-pure)
+[Bileşenleri saflaştırmak için daha fazlasına göz atın.](/learn/keeping-components-pure)
 
 <Note>
 
-If you have [React DevTools](/learn/react-developer-tools) installed, any `console.log` calls during the second render call will appear slightly dimmed. React DevTools also offers a setting (off by default) to suppress them completely.
+[React DevTools](/learn/react-developer-tools) yüklüyse, herhangi bir `console.log` çağrısı ikinci renderdan sonra yavaşça soluklaşmaya başlayacaktır. Ayrıca React Devtools tamamını göz ardı edecek ayara (varsayılan olarak kapalı) sahiptir.
 
 </Note>
 
 ---
 
-### Fixing bugs found by re-running Effects in development {/*fixing-bugs-found-by-re-running-effects-in-development*/}
+### Efektlerin yeniden çalıştırılması sırasında tespit edilen hataları giderme {/*fixing-bugs-found-by-re-running-effects-in-development*/}
 
-Strict Mode can also help find bugs in [Effects.](/learn/synchronizing-with-effects)
+Strict Modu, [Efektler](/learn/synchronizing-with-effects)'de oluşan hataları da bulmanıza yardımcı olur.
 
-Every Effect has some setup code and may have some cleanup code. Normally, React calls setup when the component *mounts* (is added to the screen) and calls cleanup when the component *unmounts* (is removed from the screen). React then calls cleanup and setup again if its dependencies changed since the last render.
+Her Efekt, kurulum kodları ve bazı temizleme kodlarına sahiptir. Normalde, React bileşen *DOM'a eklenirken* kurulum kodlarını çağırır ve bileşen *DOM'dan silinirken* (ekrandan kaldırılır) temizleme kodlarını çağırır. Daha sonra React, bağımlılıklar son renderdan itibaren değiştiyse temizleme ve kurulum kodlarını yeniden çağırır.
 
-When Strict Mode is on, React will also run **one extra setup+cleanup cycle in development for every Effect.** This may feel surprising, but it helps reveal subtle bugs that are hard to catch manually.
+Ayrıca React, Strict Modun aktifken **her Efekt için geliştirme sırasında ekstra bir kurulum+temizleme döngüsüne girecektir.** Şaşırtıcı olabilir ancak bu durum göze çarpmayan yakalaması zor hataları ortaya çıkarır.
 
-**Here is an example to illustrate how re-running Effects in Strict Mode helps you find bugs early.**
+**Strict Modunda Efektlerin yeniden çalışmasıyla hataların erkenden tespit edilmesiyle ilgili bir örnek**
 
-Consider this example that connects a component to a chat:
+Bir bileşeni sohbete bağlayan bu örneği ele alalım:
 
 <Sandpack>
 
@@ -539,17 +536,17 @@ export default function ChatRoom() {
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir implementasyon sunucuya gerçekten bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅' + serverUrl + "'deki" + roomId + "'li odaya bağlanılıyor...");
       connections++;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌' + serverUrl + "'deki" + roomId + "'li odanın bağlantısı kesildi");
       connections--;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     }
   };
 }
@@ -562,9 +559,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-There is an issue with this code, but it might not be immediately clear.
+Hemen göze çarpmasa da yukarıdaki kodda bir hata var.
 
-To make the issue more obvious, let's implement a feature. In the example below, `roomId` is not hardcoded. Instead, the user can select the `roomId` that they want to connect to from a dropdown. Click "Open chat" and then select different chat rooms one by one. Keep track of the number of active connections in the console:
+Hatayı daha bariz yapmak için bazı özellikler ekleyelim. Aşağıdaki örnekte, `roomId` sabit olarak ayarlanmış. Bunun yerine, kullanıcı açılır listeler ile bağlanmak istedikleri `roomId`'yi kendileri seçebilmeleri gerekiyor. "Sohbeti aç"'a tıklayın ve farklı sohbet odalarını tek tek seçin. Konsoldaki aktif bağlantı sayısını takip edin:
 
 <Sandpack>
 
@@ -590,7 +587,7 @@ function ChatRoom({ roomId }) {
     connection.connect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoşgeldiniz!</h1>;
 }
 
 export default function App() {
@@ -599,18 +596,18 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="general">genel</option>
+          <option value="travel">seyahat</option>
+          <option value="music">müzik</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -623,17 +620,17 @@ export default function App() {
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir implementasyon sunucuya gerçekten bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅' + serverUrl + "'deki" + roomId + "'li odaya bağlanılıyor...");
       connections++;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌' + serverUrl + "'deki" + roomId + "'li odanın bağlantısı kesildi");
       connections--;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     }
   };
 }
@@ -646,7 +643,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-You'll notice that the number of open connections always keeps growing. In a real app, this would cause performance and network problems. The issue is that [your Effect is missing a cleanup function:](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed)
+Açık olan bağlantı sayısının sürekli arttığını göreceksiniz. Bu durum gerçek bir uygulamada, performans ve internet sorunlarına yol açacaktır. Buradaki sorun [Efektinizde temizleme fonksiyonu eksik:](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed)
 
 ```js {4}
   useEffect(() => {
@@ -655,10 +652,9 @@ You'll notice that the number of open connections always keeps growing. In a rea
     return () => connection.disconnect();
   }, [roomId]);
 ```
+Efektiniz artık kendi kendini "temizlediği" ve süresi dolan bağlantıları kestiği için, sızıntı çözüldü. Ancak bu sorun birden fazla özellik (seçim kutusu) ekleyene kadar göze çarpmamıştı
 
-Now that your Effect "cleans up" after itself and destroys the outdated connections, the leak is solved. However, notice that the problem did not become visible until you've added more features (the select box).
-
-**In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
+**Asıl örnekte, hata göze batmıyordu. Şimdi orijinal (hatalı) kodu `<StrictMode>` ile saralım:**
 
 <Sandpack>
 
@@ -689,7 +685,7 @@ export default function ChatRoom() {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
   }, []);
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoşgeldiniz!</h1>;
 }
 ```
 
@@ -697,17 +693,17 @@ export default function ChatRoom() {
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir implementasyon sunucuya gerçekten bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅' + serverUrl + "'deki" + roomId + "'li odaya bağlanılıyor...");
       connections++;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌' + serverUrl + "'deki" + roomId + "'li odanın bağlantısı kesildi");
       connections--;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     }
   };
 }
@@ -720,9 +716,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-**With Strict Mode, you immediately see that there is a problem** (the number of active connections jumps to 2). Strict Mode runs an extra setup+cleanup cycle for every Effect. This Effect has no cleanup logic, so it creates an extra connection but doesn't destroy it. This is a hint that you're missing a cleanup function.
+**Strict Modu ile sorun olduğunu hemen farkedersiniz** (aktif bağlantı sayısı 2ye çıktı). Strict Modu, her Efekt için fazladan kurulum+temizleme döngüsü başlatır. Bu Efektin temizlik mantığı yok o yüzden de fazladan bağlantı oluşturabiliyor ancak bağlantıyı kesmiyor. Bu, temizleme fonksiyonunu unuttuğunuza dair bir ipucu.
 
-Strict Mode lets you notice such mistakes early in the process. When you fix your Effect by adding a cleanup function in Strict Mode, you *also* fix many possible future production bugs like the select box from before:
+Strict Modu bunun gibi hataları daha erken farketmenizi sağlar. Efektinizi, Strict Modunda temizleme fonksiyonu ekleyerek düzelttiğinizde, seçim kutusunda olduğu gibi oluşabilecek *diğer* hataları düzeltirsiniz:
 
 <Sandpack>
 
@@ -754,7 +750,7 @@ function ChatRoom({ roomId }) {
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoşgeldiniz!</h1>;
 }
 
 export default function App() {
@@ -763,18 +759,18 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odası seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="general">genel</option>
+          <option value="travel">seyahat</option>
+          <option value="music">müzik</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? 'Sohbeti kapat' : 'Sohbeti aç'}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -787,17 +783,17 @@ export default function App() {
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir implementasyon sunucuya gerçekten bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅' + serverUrl + "'deki" + roomId + "'li odaya bağlanılıyor...");
       connections++;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌' + serverUrl + "'deki" + roomId + "'li odanın bağlantısı kesildi");
       connections--;
-      console.log('Active connections: ' + connections);
+      console.log('Aktif bağlantılar: ' + connections);
     }
   };
 }
@@ -810,21 +806,21 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how the active connection count in the console doesn't keep growing anymore.
+Konsoldaki aktif bağlantı sayısının artık artmadığını farkettiniz mi?
 
-Without Strict Mode, it was easy to miss that your Effect needed cleanup. By running *setup → cleanup → setup* instead of *setup* for your Effect in development, Strict Mode made the missing cleanup logic more noticeable.
+Strict Modu olmadan, Efektinizde temizleme işlevinin eksik olduğunu gözden kaçırmanız çok kolay. Strict Modu, geliştirme aşamasındaki Efektiniz için *kurulum* yerine *kurulum → temizleme → kurulum* adımlarını çalıştırarak, eksik olan temizleme adımının eksik olduğunu gösterdi.
 
-[Read more about implementing Effect cleanup.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+[Efekt temizleme işlevini uygulama hakkında daha fazla bilgi edinin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
 ---
 
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
+### Strict Modunda kullanımdan kaldırılan özelliklerle ilgili hataların düzeltilmesi {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
-React warns if some component anywhere inside a `<StrictMode>` tree uses one of these deprecated APIs:
+React, `<StrictMode>` içindeki herhangi bir bileşende aşağıdaki kullanımdan kaldırılan API'lardan biri kullanılıyorsa sizi uyarır:
 
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [See alternatives.](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [See alternatives.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Legacy context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), and [`getChildContext`](/reference/react/Component#getchildcontext)). [See alternatives.](/reference/react/createContext)
-* Legacy string refs ([`this.refs`](/reference/react/Component#refs)). [See alternatives.](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
+* [`findDOMNode`](/reference/react-dom/findDOMNode). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
+* [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount) gibi `UNSAFE_` sınıf yaşam döngüsü metodları. [Alternatiflerini inceleyin](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
+* Eski context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), ve [`getChildContext`](/reference/react/Component#getchildcontext)). [Alternatiflerini inceleyin](/reference/react/createContext)
+* Eski dizi referansları ([`this.refs`](/reference/react/Component#refs)). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
 
-These APIs are primarily used in older [class components](/reference/react/Component) so they rarely appear in modern apps.
+Bu API'lar özellikle eski [sınıf bileşenlerinde](/reference/react/Component) kullanılırdı o yüzden güncel uygulamalarda nadiren karşınıza çıkar.

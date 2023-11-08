@@ -59,6 +59,26 @@ Render mantığınızda kullanabileceğiniz deponun o anki anlık görüntüsüd
 
 * Yeniden render esnasında farklı bir `subscribe` fonksiyonu geçildiğinde React, yeni geçilen `subscribe` fonksiyonu ile depoya yeniden abone olur. `subscribe`'ı bileşenin dışında tanımlayarak bunu önleyebilirsiniz.
 
+* If the store is mutated during a [non-blocking transition update](/reference/react/useTransition), React will fall back to performing that update as blocking. Specifically, React will call `getSnapshot` a second time just before applying changes to the DOM. If it returns a different value than when it was called originally, React will restart the transition update from scratch, this time applying it as a blocking update, to ensure that every component on screen is reflecting the same version of the store.
+
+* It's not recommended to _suspend_ a render based on a store value returned by `useSyncExternalStore`. The reason is that mutations to the external store cannot be [marked as non-blocking transition updates](/reference/react/useTransition), so they will trigger the nearest [`Suspense` fallback](/reference/react/Suspense), replacing already-rendered content on screen with a loading spinner, which typically makes a poor UX.
+
+  For example, the following are discouraged:
+
+  ```js
+  const LazyProductDetailPage = lazy(() => import('./ProductDetailPage.js'));
+
+  function ShoppingApp() {
+    const selectedProductId = useSyncExternalStore(...);
+
+    // ❌ Calling `use` with a Promise dependent on `selectedProductId`
+    const data = use(fetchItem(selectedProductId))
+
+    // ❌ Conditionally rendering a lazy component based on `selectedProductId`
+    return selectedProductId != null ? <LazyProductDetailPage /> : <FeaturedProducts />;
+  }
+  ```
+
 ---
 
 ## Kullanım {/*usage*/}
@@ -350,7 +370,7 @@ function subscribe(callback) {
 - HTML oluşturulurken sunucuda çalışır.
 - React'ın sunucu HTML'ini alıp etkileşimli haline getirirken yani [hidratlama](/reference/react-dom/client/hydrateRoot) yaparken istemcide çalışır.
 
-Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) için bu argümanı atlayın.
+Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) için bu argümanı atlayın.
 
 <Note>
 

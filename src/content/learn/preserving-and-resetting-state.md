@@ -35,8 +35,9 @@ React, bileşenlerden, React DOM'un DOM'u render etmek için kullandığı bir k
 
 ## State ağaçtaki bir konuma bağlıdır {/*state-is-tied-to-a-position-in-the-tree*/}
 
-Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
+React arayüzünüzdeki bileşen yapısı için [render ağaçları](learn/understanding-your-ui-as-a-tree#the-render-tree) inşa eder.
 
+Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
 
 Örneğin burada yalnızca bir `<Counter />` JSX elemanı vardır, ancak bu eleman iki farklı konumda render edilir:
 

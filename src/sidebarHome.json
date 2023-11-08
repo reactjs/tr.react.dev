@@ -1,37 +1,37 @@
 {
-  "title": "React Docs",
+  "title": "React Dokümantasyonu",
   "path": "/",
   "routes": [
     {
       "hasSectionHeader": true,
-      "sectionHeader": "GET STARTED"
+      "sectionHeader": "Başlangıç"
     },
     {
-      "title": "Quick Start",
+      "title": "Hızlı Başlangıç",
       "path": "/learn"
     },
     {
-      "title": "Installation",
+      "title": "Kurulum",
       "path": "/learn/installation"
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "LEARN REACT"
+      "sectionHeader": "REACT ÖĞRENİN"
     },
     {
-      "title": "Describing the UI",
+      "title": "Kullanıcı Arayüzünü Tanımlama",
       "path": "/learn/describing-the-ui"
     },
     {
-      "title": "Adding Interactivity",
+      "title": "Etkileşim Ekleme",
       "path": "/learn/adding-interactivity"
     },
     {
-      "title": "Managing State",
+      "title": "State Yönetimi",
       "path": "/learn/managing-state"
     },
     {
-      "title": "Escape Hatches",
+      "title": "Kaçış Yolları",
       "path": "/learn/escape-hatches"
     },
     {
@@ -39,19 +39,19 @@
       "sectionHeader": "REACT API"
     },
     {
-      "title": "Hooks",
+      "title": "Hook'lar",
       "path": "/reference/react"
     },
     {
-      "title": "Components",
+      "title": "Bileşenler",
       "path": "/reference/react/components"
     },
     {
-      "title": "APIs",
+      "title": "API'lar",
       "path": "/reference/react/apis"
     },
     {
-      "title": "Legacy APIs",
+      "title": "Eski API'lar",
       "path": "/reference/react/legacy"
     },
     {
@@ -59,27 +59,27 @@
       "sectionHeader": "REACT DOM API"
     },
     {
-      "title": "Components",
+      "title": "Bileşenler",
       "path": "/reference/react-dom/components"
     },
     {
-      "title": "APIs",
+      "title": "API'lar",
       "path": "/reference/react-dom"
     },
     {
-      "title": "Client APIs",
+      "title": "Client API'ları",
       "path": "/reference/react-dom/client"
     },
     {
-      "title": "Server APIs",
+      "title": "Server API'ları",
       "path": "/reference/react-dom/server"
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "GET INVOLVED"
+      "sectionHeader": "DAHİL OLUN"
     },
     {
-      "title": "React Community",
+      "title": "React Topluluğu",
       "path": "/community"
     },
     {
