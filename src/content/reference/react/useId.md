@@ -179,11 +179,7 @@ Yardımcı teknolojiler ile edinilen kullanıcı deneyiminde yarattığı farkı
 
 Temel avantajı, React'ın [sunucu taraflı render](/reference/react-dom/server) ile çalışacağını garanti etmesidir. Bileşenleriniz sunucu taraflı render ensasında HTML çıktısı üretir. Ardından istemcide, üretilen HTML'e [hidratlama](/reference/react-dom/client/hydrateRoot) (hydration) sırasında olay yöneticileri eklenir. Hidratlamanın çalışması için, istemci çıktısının sunucu HTML'iyle eşleşmesi gerekir.
 
-<<<<<<< HEAD
 Artan sayaç kullanarak bunu garanti etmek çok zordur. İstemci bileşenlerinin hidratlanma sırası ile sunucu HTML'inin tarayıcıya gönderilme sırası eşleşmeyebilir. `useId`'yi çağırmak; hidratlamanın çalışacağından, sunucu ve istemci arasındaki çıktının özdeş olacağından emin olmanızı sağlar.
-=======
-This is very difficult to guarantee with an incrementing counter because the order in which the Client Components are hydrated may not match the order in which the server HTML was emitted. By calling `useId`, you ensure that hydration will work, and the output will match between the server and the client.
->>>>>>> fcd00068bd1bdd4eb37e3e0ab0488a9d093670bc
 
 React'ta `useId`'nin değeri, çağrıldığı bileşenin ağaç içindeki hiyerarşik yolundan (parent path) üretilir. Dolayısıyla sunucu ve istemci ağaçları aynıysa, ürettikleri değerler render sırasına bakılmaksızın eşleşecektir.
 
