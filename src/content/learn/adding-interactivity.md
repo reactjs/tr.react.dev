@@ -4,7 +4,7 @@ title: Adding Interactivity
 
 <Intro>
 
-Some things on the screen update in response to user input. For example, clicking an image gallery switches the active image. In React, data that changes over time is called *state.* You can add state to any component, and update it as needed. In this chapter, you'll learn how to write components that handle interactions, update their state, and display different output over time.
+Ekrandaki bazı şeyler kullanıcı girdisine yanıt olarak güncellenir. Örneğin, bir resim galerisine tıklamak aktif resmi değiştirir. React'te, zaman içinde değişen verilere *state* denir. Herhangi bir bileşene state ekleyebilir ve gerektiğinde güncelleyebilirsiniz. Bu bölümde, etkileşimleri işleyen, durumlarını güncelleyen ve zaman içinde farklı çıktılar görüntüleyen bileşenleri nasıl yazacağınızı öğreneceksiniz.
 
 </Intro>
 
@@ -74,7 +74,7 @@ Olay yöneticilerinin nasıl ekleneceğini öğrenmek için **[Olaylara Tepki Ve
 
 ## State: a component's memory {/*state-a-components-memory*/}
 
-Components often need to change what's on the screen as a result of an interaction. Typing into the form should update the input field, clicking "next" on an image carousel should change which image is displayed, clicking "buy" puts a product in the shopping cart. Components need to "remember" things: the current input value, the current image, the shopping cart. In React, this kind of component-specific memory is called *state.*
+Bileşenlerin, genellikle bir etkileşim sonucunda ekrandakileri değiştirmesi gerekir. Forma yazı yazmak girdi alanını güncellemeli, bir resim slaytında "ileri" tıklamak hangi resmin görüntüleneceğini değiştirmeli, "satın al" a tıklamak bir ürünü alışveriş sepetine koymalıdır. Bileşenlerin; mevcut girdi değeri, seçili görsel, alışveriş sepeti gibi şeyleri "hatırlaması" gerekir. React'te bu tür bileşene özgü bellekler *state* olarak adlandırılır.
 
 You can add state to a component with a [`useState`](/reference/react/useState) Hook. *Hooks* are special functions that let your components use React features (state is one of those features). The `useState` Hook lets you declare a state variable. It takes the initial state and returns a pair of values: the current state, and a state setter function that lets you update it.
 
