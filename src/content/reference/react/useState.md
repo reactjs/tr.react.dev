@@ -4,7 +4,7 @@ title: useState
 
 <Intro>
 
-`useState` bileşeninize [state değişkeni](/learn/state-a-components-memory) eklemenizi sağlayan bir React Hook'udur.
+`useState`, bileşeninize [state değişkeni](/learn/state-a-components-memory) eklemenizi sağlayan bir React Hook'udur.
 
 ```js
 const [state, setState] = useState(initialState);
@@ -20,7 +20,7 @@ const [state, setState] = useState(initialState);
 
 ### `useState(initialState)` {/*usestate*/}
 
-Bir [state değişkeni](/learn/state-a-components-memory) bildirmek için bileşeninizin en üstünde  `useState` çağırın.
+Bir [state değişkeni](/learn/state-a-components-memory) bildirmek için bileşeninizin en üstünde `useState` çağırın.
 
 ```js
 import { useState } from 'react';
@@ -32,7 +32,7 @@ function MyComponent() {
   // ...
 ```
 
-Gelenek, [dizi yapı çözmeyi (array destructuring)](https://javascript.info/destructuring-assignment) kullanarak state değişkenlerini `[something, setSomething]` olarak adlandırmaktır.
+Ortak düşünce, [dizi yapı çözmeyi (array destructuring)](https://javascript.info/destructuring-assignment) kullanarak state değişkenlerini `[something, setSomething]` olarak adlandırmaktır.
 
 [Aşağıda daha fazla örnek bulabilirsiniz.](#usage)
 
@@ -106,7 +106,7 @@ function MyComponent() {
   // ...
 ```
 
-Geleneksel olarak, [dizi yapı çözmeyi (destructuring)](https://javascript.info/destructuring-assignment) kullanarak state değişkenlerini `[something, setSomething]` olarak adlandırmaktayız.
+Ortak düşünce, [dizi yapı çözmeyi (destructuring)](https://javascript.info/destructuring-assignment) kullanarak state değişkenlerini `[something, setSomething]` olarak adlandırmaktır.
 
 `useState` her zaman iki değere sahip bir dizi döndürür:
 
@@ -310,7 +310,7 @@ React güncelleyici fonksiyonlarınızı [sıraya](/learn/queueing-a-series-of-s
 
 Sırada bekleyen başka güncelleme olmadığından dolayı React `45` sayısını güncel state olarak saklayacaktır.
 
-Geleneksel olarak, bekleyen state argümanını state değişkeni adının ilk harfi olarak adlandırmak yaygındır; örneğin `age` için `a` kullanmak. Ancak, daha açıklayıcı olmasını istiyorsanız `prevAge` ya da başka bir şey kullanabilirsiniz.
+Ortak düşünce, bekleyen state argümanını state değişkeni adının ilk harfi olarak adlandırmaktır; örneğin `age` için `a` kullanmak. Ancak, daha açıklayıcı olmasını istiyorsanız `prevAge` ya da başka bir şey kullanabilirsiniz.
 
 React, geliştirme sırasında güncelleyici fonksiyonlarınızın [saf](/learn/keeping-components-pure) olduğunu doğrulamak için [onları iki defa çağırır.](#my-initializer-or-updater-function-runs-twice)
 
@@ -1204,13 +1204,13 @@ setObj({
 
 ```js {1-2}
 // 🚩 Yanlış: yöneticiyi render esnasında çağırır
-return <button onClick={handleClick()}>Click me</button>
+return <button onClick={handleClick()}>Bana tıkla</button>
 
 // ✅ Doğru: olay yöneticisini iletir
-return <button onClick={handleClick}>Click me</button>
+return <button onClick={handleClick}>Bana tıkla</button>
 
 // ✅ Doğru: satır içi fonksiyon iletir
-return <button onClick={(e) => handleClick(e)}>Click me</button>
+return <button onClick={(e) => handleClick(e)}>Bana tıkla</button>
 ```
 
 Eğer hatanın nedenini bulamıyorsanız, konsolda hatanın yanındaki ok tuşuna basın ve hataya neden olan `set` fonksiyonu çağrısını JavaScript içinde bulun.
