@@ -35,7 +35,7 @@ Ekranda bir girdi göstermek için, [tarayıcıya yerleşik `<input>`](https://d
 
 <Canary>
 
-React's extensions to the `formAction` prop are currently only available in React's canary and experimental channels. In stable releases of React `formAction` works only as a [built-in browser HTML component](https://react.dev/reference/react-dom/components#all-html-components). Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
+React's extensions to the `formAction` prop are currently only available in React's Canary and experimental channels. In stable releases of React `formAction` works only as a [built-in browser HTML component](https://react.dev/reference/react-dom/components#all-html-components). Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
 </Canary>
 
 [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): String ya da fonksiyon. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form action>` üst bileşenini geçersiz kılar. `action`'a bir URL geçildiği zaman form, standart bir HTML formu gibi davranacaktır. Bir fonksiyon iletildiğinde ise form gönderimini o fonksiyon halledecektir. Daha fazla bilgi için [`<form action>`](/reference/react-dom/components/form#props) kısmına bakın.

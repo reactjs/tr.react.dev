@@ -1147,7 +1147,11 @@ hr {
 
 <Hint>
 
+<<<<<<< HEAD
 Burada `map` metodu yerine manuel bir döngü kullanmanız ya da bir fragment kullanmanız gerekmektedir.
+=======
+You'll either need to convert `map` to a manual loop, or use a Fragment.
+>>>>>>> 4f9e9a56611c7a56b9506cf0a7ca84ab409824bc
 
 </Hint>
 
@@ -1210,7 +1214,11 @@ hr {
 
 Şiirin satır indeksini `key` (`anahtar`) olarak kullanmak artık işe yaramayacaktır çünkü artık her ayraç ve paragraf aynı dizide bulunmakta. Ancak, bir sonek kullanarak her birine ayrı bir anahtar verebilirsiniz, örneğin `key={i + '-text'}`.
 
+<<<<<<< HEAD
 Alternatif olarak, `<hr />` ve `<p>...</p>` elementlerini içeren fragmentler render edebilirsiniz. Ancak, `<>...</>` kısa syntax'i anahtarları prop olarak alamaz bu yüzden `<Fragment>` olarak kullanmanız gerekmektedir:
+=======
+Alternatively, you could render a collection of Fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+>>>>>>> 4f9e9a56611c7a56b9506cf0a7ca84ab409824bc
 
 <Sandpack>
 
@@ -1256,7 +1264,11 @@ hr {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Şunu unutmayın, fragmentler (`<> </>` şeklinde yazılır) fazladan `<div>`ler kullanmadan JSX node'larını gruplamanıza izin verirler.
+=======
+Remember, Fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+>>>>>>> 4f9e9a56611c7a56b9506cf0a7ca84ab409824bc
 
 </Solution>
 
