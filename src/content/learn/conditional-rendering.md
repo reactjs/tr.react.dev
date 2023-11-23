@@ -625,11 +625,7 @@ export default function PackingList() {
 
 `importance && ...` yerine `importance > 0 && ...` yazmanız gerektiğini unutmayın. Böylelikle `importance` prop'u `0` olanlar render edilmemiş olacaktır.
 
-<<<<<<< HEAD
-Bu çözümde, eşyanın ismi ve importance (önem) yazısı arasına boşluk koyabilmek için iki farklı koşul kullanılmalıdır. Alternatif olarak, zaten boşluğu olan bir fragment `importance > 0 && <> <i>...</i></>` kullanabilir ya da `<i>` içine bir boşluk ekleyebilirsiniz `importance > 0 && <i> ...</i>`.
-=======
-In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
->>>>>>> 4f9e9a56611c7a56b9506cf0a7ca84ab409824bc
+Bu çözümde, eşyanın ismi ve importance (önem) yazısı arasına boşluk koyabilmek için iki farklı koşul kullanılmalıdır. Alternatif olarak, zaten boşluğu olan bir Fragment `importance > 0 && <> <i>...</i></>` kullanabilir ya da `<i>` içine bir boşluk ekleyebilirsiniz `importance > 0 && <i> ...</i>`.
 
 </Solution>
 
