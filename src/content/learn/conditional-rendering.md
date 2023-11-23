@@ -625,7 +625,7 @@ export default function PackingList() {
 
 `importance && ...` yerine `importance > 0 && ...` yazmanız gerektiğini unutmayın. Böylelikle `importance` prop'u `0` olanlar render edilmemiş olacaktır.
 
-Bu çözümde, eşyanın ismi ve importance (önem) yazısı arasına boşluk koyabilmek için iki farklı koşul kullanılmalıdır. Alternatif olarak, zaten boşluğu olan bir fragment `importance > 0 && <> <i>...</i></>` kullanabilir ya da `<i>` içine bir boşluk ekleyebilirsiniz `importance > 0 && <i> ...</i>`.
+Bu çözümde, eşyanın ismi ve importance (önem) yazısı arasına boşluk koyabilmek için iki farklı koşul kullanılmalıdır. Alternatif olarak, zaten boşluğu olan bir Fragment `importance > 0 && <> <i>...</i></>` kullanabilir ya da `<i>` içine bir boşluk ekleyebilirsiniz `importance > 0 && <i> ...</i>`.
 
 </Solution>
 

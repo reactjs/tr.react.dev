@@ -1147,7 +1147,7 @@ hr {
 
 <Hint>
 
-Burada `map` metodu yerine manuel bir döngü kullanmanız ya da bir fragment kullanmanız gerekmektedir.
+Burada `map` metodu yerine manuel bir döngü kullanmanız ya da bir Fragment kullanmanız gerekmektedir.
 
 </Hint>
 
@@ -1210,7 +1210,7 @@ hr {
 
 Şiirin satır indeksini `key` (`anahtar`) olarak kullanmak artık işe yaramayacaktır çünkü artık her ayraç ve paragraf aynı dizide bulunmakta. Ancak, bir sonek kullanarak her birine ayrı bir anahtar verebilirsiniz, örneğin `key={i + '-text'}`.
 
-Alternatif olarak, `<hr />` ve `<p>...</p>` elementlerini içeren fragmentler render edebilirsiniz. Ancak, `<>...</>` kısa syntax'i anahtarları prop olarak alamaz bu yüzden `<Fragment>` olarak kullanmanız gerekmektedir:
+Alternatif olarak, `<hr />` ve `<p>...</p>` elementlerini içeren Fragment'ler render edebilirsiniz. Ancak, `<>...</>` kısa syntax'i anahtarları prop olarak alamaz bu yüzden `<Fragment>` olarak kullanmanız gerekmektedir:
 
 <Sandpack>
 
@@ -1256,7 +1256,7 @@ hr {
 
 </Sandpack>
 
-Şunu unutmayın, fragmentler (`<> </>` şeklinde yazılır) fazladan `<div>`ler kullanmadan JSX node'larını gruplamanıza izin verirler.
+Şunu unutmayın, Fragment'ler (`<> </>` şeklinde yazılır) fazladan `<div>`ler kullanmadan JSX node'larını gruplamanıza izin verirler.
 
 </Solution>
 
