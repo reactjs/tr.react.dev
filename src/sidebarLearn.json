@@ -56,7 +56,7 @@
       "path": "/learn/describing-the-ui",
       "routes": [
         {
-          "title": "Your First Component",
+          "title": "İlk Bileşeniniz",
           "path": "/learn/your-first-component"
         },
         {
@@ -68,11 +68,11 @@
           "path": "/learn/writing-markup-with-jsx"
         },
         {
-          "title": "JavaScript in JSX with Curly Braces",
+          "title": "JSX içinde Süslü Parantezlerle JavaScript",
           "path": "/learn/javascript-in-jsx-with-curly-braces"
         },
         {
-          "title": "Passing Props to a Component",
+          "title": "Bileşenlere Prop'ları Aktarma",
           "path": "/learn/passing-props-to-a-component"
         },
         {
@@ -94,7 +94,7 @@
       ]
     },
     {
-      "title": "Etkileşim Eklemek",
+      "title": "Etkileşim Ekleme",
       "path": "/learn/adding-interactivity",
       "tags": [],
       "routes": [
