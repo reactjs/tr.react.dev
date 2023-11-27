@@ -1,5 +1,5 @@
 ---
-title: Adding Interactivity
+title: Etkileşim Ekleme
 ---
 
 <Intro>
@@ -10,19 +10,19 @@ Ekrandaki bazı şeyler kullanıcı girdisine yanıt olarak güncellenir. Örne�
 
 <YouWillLearn isChapter={true}>
 
-* [How to handle user-initiated events](/learn/responding-to-events)
-* [How to make components "remember" information with state](/learn/state-a-components-memory)
-* [How React updates the UI in two phases](/learn/render-and-commit)
-* [Why state doesn't update right after you change it](/learn/state-as-a-snapshot)
-* [How to queue multiple state updates](/learn/queueing-a-series-of-state-updates)
-* [How to update an object in state](/learn/updating-objects-in-state)
-* [How to update an array in state](/learn/updating-arrays-in-state)
+* [Kullanıcı tarafından başlatılan olaylar nasıl ele alınır](/learn/responding-to-events)
+* [State kullanılarak bileşenlerin bilgiyi "hatırlaması" nasıl sağlanır](/learn/state-a-components-memory)
+* [React kullanıcı arayüzünü iki aşamada nasıl günceller](/learn/render-and-commit)
+* [State neden onu değiştirdiğiniz anda güncellenmez](/learn/state-as-a-snapshot)
+* [Birden çok state güncellemesi sıraya nasıl alınır](/learn/queueing-a-series-of-state-updates)
+* [State içerisindeki nesne nasıl güncellenir](/learn/updating-objects-in-state)
+* [State içerisindeki dizi nasıl güncellenir](/learn/updating-arrays-in-state)
 
 </YouWillLearn>
 
 ## Olaylara tepki verme {/*responding-to-events*/}
 
-React, JSX'inize *olay yöneticileri* eklemenize olanak tanır. Olay yöneticileri (event handler); tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan sahip olduğunuz fonksiyonlardır.
+React, JSX'inize *olay yöneticileri* eklemenize olanak tanır. Olay yöneticileri; tıklama, üzerine gelme (hover), form girdilerine odaklanma gibi kullanıcı aksiyonlarına tepki vermek için tetiklenecek olan fonksiyonlarınızdır.
 
 `<button>` gibi yerleşik bileşenler yalnızca `onClick` gibi yerleşik tarayıcı olaylarını destekler. Ancak kendi bileşenlerinizi oluşturabilir ve olay yöneticisini ileteceğiniz prop'lara uygulamanıza özgü isimler verebilirsiniz.
 
@@ -42,7 +42,7 @@ function Toolbar({ onPlayMovie, onUploadImage }) {
   return (
     <div>
       <Button onClick={onPlayMovie}>
-        Film Oynat
+        Filmi Oynat
       </Button>
       <Button onClick={onUploadImage}>
         Resim Yükle
@@ -72,18 +72,18 @@ Olay yöneticilerinin nasıl ekleneceğini öğrenmek için **[Olaylara Tepki Ve
 
 </LearnMore>
 
-## State: a component's memory {/*state-a-components-memory*/}
+## State: bir bileşenin hafızası {/*state-a-components-memory*/}
 
 Bileşenlerin, genellikle bir etkileşim sonucunda ekrandakileri değiştirmesi gerekir. Forma yazı yazmak girdi alanını güncellemeli, bir resim slaytında "ileri" tıklamak hangi resmin görüntüleneceğini değiştirmeli, "satın al" a tıklamak bir ürünü alışveriş sepetine koymalıdır. Bileşenlerin; mevcut girdi değeri, seçili görsel, alışveriş sepeti gibi şeyleri "hatırlaması" gerekir. React'te bu tür bileşene özgü bellekler *state* olarak adlandırılır.
 
-You can add state to a component with a [`useState`](/reference/react/useState) Hook. *Hooks* are special functions that let your components use React features (state is one of those features). The `useState` Hook lets you declare a state variable. It takes the initial state and returns a pair of values: the current state, and a state setter function that lets you update it.
+[`useState`](/reference/react/useState) Hook'u ile bir bileşene state ekleyebilirsiniz. *Hook'lar*, bileşenlerinizde React özelliklerini kullanmanızı sağlayan özel fonksiyonlardır (state bu özelliklerden biridir). `useState` Hook'u, bir state değişkeni bildirmenizi sağlar. Bu Hook başlangıç state'ini alır ve bir çift değer döndürür: mevcut state ve state'i güncellemenizi sağlayan bir fonksiyon.
 
 ```js
 const [index, setIndex] = useState(0);
 const [showMore, setShowMore] = useState(false);
 ```
 
-Here is how an image gallery uses and updates state on click:
+Aşağıda resim galerisinin state'i nasıl kullandığını ve state'i tıklama ile nasıl güncellendiğini görebilirsiniz:
 
 <Sandpack>
 
@@ -112,17 +112,17 @@ export default function Gallery() {
   return (
     <>
       <button onClick={handleNextClick}>
-        Next
+        Sonraki
       </button>
       <h2>
+        {sculpture.artist}'den
         <i>{sculpture.name} </i>
-        by {sculpture.artist}
       </h2>
       <h3>
-        ({index + 1} of {sculptureList.length})
+        ({index + 1}/{sculptureList.length})
       </h3>
       <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
+        Detayları {showMore ? 'Sakla' : 'Göster'}
       </button>
       {showMore && <p>{sculpture.description}</p>}
       <img
@@ -138,75 +138,75 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
+  description: 'Colvin ağırlıklı olarak İspanyol öncesi sembollere gönderme yapan soyut temalarla bilinmesine rağmen, beyin cerrahisine saygı duruşu niteliğindeki bu devasa heykel onun en tanınmış sanat eserlerinden biridir.',
   url: 'https://i.imgur.com/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'Parmak uçlarında insan beynini zarif bir şekilde tutan çapraz iki elin yer aldığı bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: "Bu muazzam (75 ft. veya 23m) gümüş çiçek Buenos Aires'te bulunuyor. Akşamları veya kuvvetli rüzgarlar estiğinde yapraklarını kapatarak sabahları açarak hareket edecek şekilde tasarlanmıştır.",
   url: 'https://i.imgur.com/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı ayna benzeri yaprakları ve güçlü organları ile devasa metalik çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson eşitlik ve sosyal adaletin yanı sıra insanlığın temel ve manevi niteliklerine olan ilgisiyle biliniyordu. Bu devasa (7 ft. veya 2,13 m) bronz, kendisinin "evrensel insanlık duygusuyla aşılanmış sembolik bir Siyah varlığı" olarak tanımladığı şeyi temsil ediyor.',
   url: 'https://i.imgur.com/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'İnsan kafasını tasvir eden heykel her zaman mevcut ve ciddi görünüyor. Sakinlik ve dinginlik yayar.'
 }, {
   name: 'Moai',
   artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  description: "Paskalya Adası'nda, ilk Rapa Nui halkı tarafından yapılmış ve bazılarının tanrılaştırılmış ataları temsil ettiğine inanılan 1000 moai veya günümüze ulaşan anıtsal heykeller bulunmaktadır.",
   url: 'https://i.imgur.com/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Başları orantısız derecede büyük ve kasvetli yüzlere sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: "Nanalar muzaffer yaratıklardır, kadınlık ve analığın simgeleridir. Başlangıçta Saint Phalle, Nana'lar için kumaş kullanmış ve nesneler bulmuş, daha sonra daha canlı bir etki elde etmek için polyesteri kullanmıştır.",
   url: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Sevinç yayan renkli bir kostüm içinde tuhaf dans eden bir kadın figürünün büyük mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: "Bu soyut bronz heykel, Yorkshire Heykel Parkı'nda bulunan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın gerçek temsillerini yaratmayı değil, insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.",
   url: 'https://i.imgur.com/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Bir insan figürünü anımsatan, üst üste dizilmiş üç öğeden oluşan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört nesildir ahşap oymacılığı yapan Fakeye'nin çalışmaları geleneksel ve çağdaş Yoruba temalarını harmanlıyordu.",
   url: 'https://i.imgur.com/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş, ata odaklanmış bir yüze sahip bir savaşçının karmaşık ahşap heykeli.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, gençliğin ve güzelliğin kırılganlığı ve geçiciliğine dair bir metafor olarak parçalanmış beden heykelleriyle tanınıyor. Bu heykel, her biri yaklaşık 1,5 metre yüksekliğinde, üst üste dizilmiş, çok gerçekçi iki büyük karnı tasvir ediyor.",
   url: 'https://i.imgur.com/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki karınlardan oldukça farklı olarak bir dizi kıvrımı andırıyor.'
 }, {
   name: 'Terracotta Army',
   artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  description: "Terracotta Ordusu, Çin'in ilk İmparatoru Qin Shi Huang'ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu 8.000'den fazla asker, 520 atlı, 130 savaş arabası ve 150 süvari atından oluşuyordu.",
   url: 'https://i.imgur.com/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: '12 tane her biri benzersiz bir yüz ifadesine ve zırha sahip, ciddi savaşçıların pişmiş toprak heykeli.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: "Nevelson, daha sonra anıtsal yapılara dönüştüreceği New York şehrinin enkazından nesneleri temizlemesiyle tanınıyordu. Bu eserinde karyola direği, hokkabazlık iğnesi ve koltuk parçası gibi farklı parçaları kullanarak Kübizm'in geometrik mekan ve biçim soyutlamasının etkisini yansıtan kutulara çivileyip yapıştırdı.",
   url: 'https://i.imgur.com/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Bireysel unsurların başlangıçta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal ile endüstriyel olanı birleştiriyor. Sanatı insan ve doğa arasındaki ilişkiye odaklanıyor. Çalışmaları hem soyut hem de mecazi olarak ilgi çekici, yerçekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanıyor.',
   url: 'https://i.imgur.com/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve yere inen soluk tel benzeri bir heykel. Hafifmiş gibi görünüyor.'
 }, {
   name: 'Hippos',
   artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  description: 'Taipei Hayvanat Bahçesi, su altındaki su aygırlarının oyun oynadığı bir Su Aygırı Meydanı yaptırdı.',
   url: 'https://i.imgur.com/6o5Vuyu.jpg',
-  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
+  alt: 'Setin kaldırımından sanki yüzüyormuş gibi çıkan bir grup bronz su aygırı heykeli.'
 }];
 ```
 
@@ -229,43 +229,43 @@ button {
 
 <LearnMore path="/learn/state-a-components-memory">
 
-Read **[State: A Component's Memory](/learn/state-a-components-memory)** to learn how to remember a value and update it on interaction.
+**[State: Bir Bileşenin Hafızası](/learn/state-a-components-memory)** sayfasını okuyarak bir değeri nasıl hatırlayacağınızı ve etkileşim ile o değeri nasıl güncelleyeceğinizi öğrenin.
 
 </LearnMore>
 
-## Render and commit {/*render-and-commit*/}
+## Render et ve işle {/*render-and-commit*/}
 
-Before your components are displayed on the screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+Bileşenleriniz ekranda gösterilmeden önce, React tarafından render edilmek zorundadırlar. Bu işlemdeki adımları anlamak, kodunuzun nasıl çalıştığını düşünmenize ve davranışını açıklamanıza yardımcı olacaktır.
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+Bileşenlerinizin mutfakta malzemelerden lezzetli yemekler hazırlayan aşçılar olduğunu hayal edin. Bu senaryoda React, müşterilerin siparişlerini alan ve bu siparişleri sunan garsondur. Kullanıcı arayüzünü isteme ve sunma sürecinin üç aşaması vardır:
 
-1. **Triggering** a render (delivering the diner's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+1. Bir render **tetiklemek** (müşterinin siparişinin mutfaktaki aşçıya iletilmesi)
+2. Bileşeni **render etmek** (siparişin mutfakta hazırlanması)
+3. DOM'a **işlemek** (siparişin masaya götürülmesi)
 
 <IllustrationBlock sequential>
-  <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
-  <Illustration caption="Render" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
-  <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
+  <Illustration caption="Tetikle" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
+  <Illustration caption="Render et" alt="The Card Chef gives React a fresh Card component." src="/images/docs/illustrations/i_render-and-commit2.png" />
+  <Illustration caption="İşle" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
 <LearnMore path="/learn/render-and-commit">
 
-Read **[Render and Commit](/learn/render-and-commit)** to learn the lifecycle of a UI update.
+**[Render et ve İşle](/learn/render-and-commit)** sayfasını okuyarak kullanıcı arayüzü güncellemesinin yaşam döngüsünü öğrenin.
 
 </LearnMore>
 
-## State as a snapshot {/*state-as-a-snapshot*/}
+## Anlık görüntü olarak state {/*state-as-a-snapshot*/}
 
-Unlike regular JavaScript variables, React state behaves more like a snapshot. Setting it does not change the state variable you already have, but instead triggers a re-render. This can be surprising at first!
+Sıradan JavaScript değişkenlerinin yanı sıra, React state'i daha çok anlık bir görüntü olarak davranır. Bu değişkeni ayarlamak zaten mevcut state değişkenini değiştirmez onun yerine yeniden render tetikler. Bu ilk başta şaşırtıcı gelebilir!
 
 ```js
 console.log(count);  // 0
-setCount(count + 1); // Request a re-render with 1
-console.log(count);  // Still 0!
+setCount(count + 1); // 1 ile yeniden render iste
+console.log(count);  // Hala 0!
 ```
 
-This behavior help you avoid subtle bugs. Here is a little chat app. Try to guess what happens if you press "Send" first and *then* change the recipient to Bob. Whose name will appear in the `alert` five seconds later?
+Bu davranış, ince hatalardan kaçınmanıza yardımcı olur. Aşağıda küçük bir mesajlaşma uygulaması vardır. "Gönder" butonuna tıkladıktan *sonra* alıcıyı Bob ile değiştirin ve ne olacağını tahmin etmeye çalışın. 5 saniye sonra kimin ismi `alert` kutusunda çıkacaktır?
 
 <Sandpack>
 
@@ -274,19 +274,19 @@ import { useState } from 'react';
 
 export default function Form() {
   const [to, setTo] = useState('Alice');
-  const [message, setMessage] = useState('Hello');
+  const [message, setMessage] = useState('Merhaba');
 
   function handleSubmit(e) {
     e.preventDefault();
     setTimeout(() => {
-      alert(`You said ${message} to ${to}`);
+      alert(`${to}'a ${message} dediniz`);
     }, 5000);
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        To:{' '}
+        Alıcı:{' '}
         <select
           value={to}
           onChange={e => setTo(e.target.value)}>
@@ -295,11 +295,11 @@ export default function Form() {
         </select>
       </label>
       <textarea
-        placeholder="Message"
+        placeholder="Mesaj"
         value={message}
         onChange={e => setMessage(e.target.value)}
       />
-      <button type="submit">Send</button>
+      <button type="submit">Gönder</button>
     </form>
   );
 }
@@ -314,13 +314,13 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 <LearnMore path="/learn/state-as-a-snapshot">
 
-Read **[State as a Snapshot](/learn/state-as-a-snapshot)** to learn why state appears "fixed" and unchanging inside the event handlers.
+**[Anlık Görüntü Olarak State](/learn/state-as-a-snapshot)** sayfasını okuyarak olay yönetecilerinde state'in neden "sabit" ve değişmez göründüğünü öğrenin.
 
 </LearnMore>
 
-## Queueing a series of state updates {/*queueing-a-series-of-state-updates*/}
+## State güncellemelerinin kuyruğa alınması {/*queueing-a-series-of-state-updates*/}
 
-This component is buggy: clicking "+3" increments the score only once.
+Bu bileşen hatalıdır: "+3" butonuna tıklamak skoru sadece bir artırmaktadır.
 
 <Sandpack>
 
@@ -342,7 +342,7 @@ export default function Counter() {
         increment();
         increment();
       }}>+3</button>
-      <h1>Score: {score}</h1>
+      <h1>Skor: {score}</h1>
     </>
   )
 }
@@ -354,7 +354,7 @@ button { display: inline-block; margin: 10px; font-size: 20px; }
 
 </Sandpack>
 
-[State as a Snapshot](/learn/state-as-a-snapshot) explains why this is happening. Setting state requests a new re-render, but does not change it in the already running code. So `score` continues to be `0` right after you call `setScore(score + 1)`.
+[Anlık Görüntü Olarak State](/learn/state-as-a-snapshot) sayfası bu duruma neyin neden olduğunu açıklamaktadır. State'i değiştirmek yeni bir yeniden render isteyecektir ama hali hazırda çalışan koddaki state'i değiştirmeyecektir. Yani `score` değeri `setScore(score + 1)` çağırıldıktan hemen sonra `0` olmaya devam edecektir.
 
 ```js
 console.log(score);  // 0
@@ -366,7 +366,7 @@ setScore(score + 1); // setScore(0 + 1);
 console.log(score);  // 0
 ```
 
-You can fix this by passing an *updater function* when setting state. Notice how replacing `setScore(score + 1)` with `setScore(s => s + 1)` fixes the "+3" button. This lets you queue multiple state updates.
+Bu sorunu, state'i değiştirirken *güncelleyici fonksiyon* ileterek düzeltebilirsiniz. `setScore(score + 1)` yerine `setScore(s => s + 1)` kullanmanın "+3" butonunu nasıl düzelttiğine dikkat edin. Bu, birden çok state güncellemesini kuyruğa almanızı sağlar.
 
 <Sandpack>
 
@@ -388,7 +388,7 @@ export default function Counter() {
         increment();
         increment();
       }}>+3</button>
-      <h1>Score: {score}</h1>
+      <h1>Skor: {score}</h1>
     </>
   )
 }
@@ -402,15 +402,15 @@ button { display: inline-block; margin: 10px; font-size: 20px; }
 
 <LearnMore path="/learn/queueing-a-series-of-state-updates">
 
-Read **[Queueing a Series of State Updates](/learn/queueing-a-series-of-state-updates)** to learn how to queue a sequence of state updates.
+**[State Güncellemelerinin Kuyruğa Alınması](/learn/queueing-a-series-of-state-updates)** sayfasını okuyarak state güncellemelerini nasıl kuyruğa alacağınızı öğrenin.
 
 </LearnMore>
 
-## Updating objects in state {/*updating-objects-in-state*/}
+## State içerisindeki nesneleri güncelleme {/*updating-objects-in-state*/}
 
-State can hold any kind of JavaScript value, including objects. But you shouldn't change objects and arrays that you hold in the React state directly. Instead, when you want to update an object and array, you need to create a new one (or make a copy of an existing one), and then update the state to use that copy.
+State, nesneler de dahil olmak üzere herhangi bir JavaScript değerini tutabilir. Ancak, React state'inde tuttuğunuz nesneleri ve dizileri direkt olarak değiştirmemelisiniz. Onun yerine, nesneleri ve dizileri güncellemek istediğinizde, yeni bir tane yaratmanız gerekmektedir (ya da mevcut olanın kopyasını alın) ve daha sonra state'i o kopyayı kullanacak şekilde güncelleyin.
 
-Usually, you will use the `...` spread syntax to copy objects and arrays that you want to change. For example, updating a nested object could look like this:
+Genel olarak, değiştirmek istediğiniz nesneleri ve dizileri kopyalamak için `...` spread sözdimini kullanacaksınız. Örneğin, iç içe nesneleri güncellemek şöyle gözükecektir:
 
 <Sandpack>
 
@@ -467,28 +467,28 @@ export default function Form() {
   return (
     <>
       <label>
-        Name:
+        İsim:
         <input
           value={person.name}
           onChange={handleNameChange}
         />
       </label>
       <label>
-        Title:
+        Başlık:
         <input
           value={person.artwork.title}
           onChange={handleTitleChange}
         />
       </label>
       <label>
-        City:
+        Şehir:
         <input
           value={person.artwork.city}
           onChange={handleCityChange}
         />
       </label>
       <label>
-        Image:
+        Resim:
         <input
           value={person.artwork.image}
           onChange={handleImageChange}
@@ -496,10 +496,10 @@ export default function Form() {
       </label>
       <p>
         <i>{person.artwork.title}</i>
-        {' by '}
+        ({person.artwork.city} şehrinde yaşayan)
         {person.name}
+        {' tarafından '}
         <br />
-        (located in {person.artwork.city})
       </p>
       <img
         src={person.artwork.image}
@@ -518,7 +518,7 @@ img { width: 200px; height: 200px; }
 
 </Sandpack>
 
-If copying objects in code gets tedious, you can use a library like [Immer](https://github.com/immerjs/use-immer) to reduce repetitive code:
+Eğer objeleri kopyalamak zor bir hale geldiyse, tekrarlı hale gelen kodu azaltmak için [Immer](https://github.com/immerjs/use-immer) gibi bir kütüphane kullanabilirsiniz:
 
 <Sandpack>
 
@@ -562,28 +562,28 @@ export default function Form() {
   return (
     <>
       <label>
-        Name:
+        İsim:
         <input
           value={person.name}
           onChange={handleNameChange}
         />
       </label>
       <label>
-        Title:
+        Başlık:
         <input
           value={person.artwork.title}
           onChange={handleTitleChange}
         />
       </label>
       <label>
-        City:
+        Şehir:
         <input
           value={person.artwork.city}
           onChange={handleCityChange}
         />
       </label>
       <label>
-        Image:
+        Resim:
         <input
           value={person.artwork.image}
           onChange={handleImageChange}
@@ -591,10 +591,10 @@ export default function Form() {
       </label>
       <p>
         <i>{person.artwork.title}</i>
-        {' by '}
+        ({person.artwork.city} şehrinde yaşayan)
         {person.name}
+        {' tarafından '}
         <br />
-        (located in {person.artwork.city})
       </p>
       <img
         src={person.artwork.image}
@@ -633,13 +633,13 @@ img { width: 200px; height: 200px; }
 
 <LearnMore path="/learn/updating-objects-in-state">
 
-Read **[Updating Objects in State](/learn/updating-objects-in-state)** to learn how to update objects correctly.
+**[State İçerisindeki Nesneleri Güncelleme](/learn/updating-objects-in-state)** sayfasını okuyarak nesneleri nasıl doğru şekilde güncellemeniz gerektiğini öğrenin.
 
 </LearnMore>
 
-## Updating arrays in state {/*updating-arrays-in-state*/}
+## State içerisindeki dizileri güncelleme {/*updating-arrays-in-state*/}
 
-Arrays are another type of mutable JavaScript objects you can store in state and should treat as read-only. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array:
+State içerisinde saklayabileceğiniz bir diğer değiştirilebilir JavaScript nesnesi dizilerdir ve dizilere salt okunur olarak davranılmalıdır. Nesnelerde olduğu gibi, state'te saklı diziyi güncellemek istediğinizde, yeni bir tane yaratmanız gerekmektedir (ya da mevcut olanın bir kopyasını alın) ve daha sonra yeni diziyi kullanacak şekilde state'i ayarlayın:
 
 <Sandpack>
 
@@ -670,8 +670,8 @@ export default function BucketList() {
 
   return (
     <>
-      <h1>Art Bucket List</h1>
-      <h2>My list of art to see:</h2>
+      <h1>Görülecek Sanat Eserleri Listesi</h1>
+      <h2>Görmek istediğim eserler listesi:</h2>
       <ItemList
         artworks={list}
         onToggle={handleToggle} />
@@ -706,7 +706,7 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-If copying arrays in code gets tedious, you can use a library like [Immer](https://github.com/immerjs/use-immer) to reduce repetitive code:
+Eğer dizileri kopyalamak zor bir hale geldiyse, tekrarlı hale gelen kodu azaltmak için [Immer](https://github.com/immerjs/use-immer) gibi bir kütüphane kullanabilirsiniz:
 
 <Sandpack>
 
@@ -735,8 +735,8 @@ export default function BucketList() {
 
   return (
     <>
-      <h1>Art Bucket List</h1>
-      <h2>My list of art to see:</h2>
+      <h1>Görülecek Sanat Eserleri Listesi</h1>
+      <h2>Görmek istediğim sanat eserleri listesi:</h2>
       <ItemList
         artworks={list}
         onToggle={handleToggle} />
@@ -791,12 +791,12 @@ function ItemList({ artworks, onToggle }) {
 
 <LearnMore path="/learn/updating-arrays-in-state">
 
-Read **[Updating Arrays in State](/learn/updating-arrays-in-state)** to learn how to update arrays correctly.
+**[State İçerisindeki Dizileri Güncelleme](/learn/updating-arrays-in-state)** sayfasını okuyarak dizileri nasıl doğru şekilde güncellemeniz gerektiğini öğrenin.
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## Sırada ne var? {/*whats-next*/}
 
-Head over to [Responding to Events](/learn/responding-to-events) to start reading this chapter page by page!
+[Olaylara Tepki Verme](/learn/responding-to-events) sayfasına gidin ve bu bölümü sayfa sayfa okumaya başlayın!
 
-Or, if you're already familiar with these topics, why not read about [Managing State](/learn/managing-state)?
+Bu konulara zaten aşina iseniz, neden [State'i Yönetme](/learn/managing-state) sayfasını okumuyorsunuz?
