@@ -95,11 +95,7 @@ Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
 ---
 
-<<<<<<< HEAD
-### Strict modu uygulamanın bir parçası için etkinleştirme {/*enabling-strict-mode-for-a-part-of-the-app*/}
-=======
-### Enabling Strict Mode for a part of the app {/*enabling-strict-mode-for-a-part-of-the-app*/}
->>>>>>> 943e3ce4e52be56bcd75b679448847302f557da1
+### Strict Modu uygulamanın bir parçası için etkinleştirme {/*enabling-strict-mode-for-a-part-of-the-app*/}
 
 Strict Modu uygulamanızın herhangi bir parçası için de etkinleştirebilirsiniz: 
 
