@@ -404,7 +404,7 @@ Boş satırları doldurun!
 
 <Sandpack>
 
-```js processQueue.js active
+```js src/processQueue.js active
 export function getFinalState(baseState, queue) {
   let finalState = baseState;
 
@@ -414,7 +414,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import { getFinalState } from './processQueue.js';
 
 function increment(n) {
@@ -499,7 +499,7 @@ Bu sayfada açıklanan algoritma, React'in nihai state'i hesaplamak için kullan
 
 <Sandpack>
 
-```js processQueue.js active
+```js src/processQueue.js active
 export function getFinalState(baseState, queue) {
   let finalState = baseState;
 
@@ -517,7 +517,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import { getFinalState } from './processQueue.js';
 
 function increment(n) {

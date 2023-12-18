@@ -67,7 +67,7 @@ Ardından, ana JavaScript dosyanızın en üstüne şu kod satırlarını ekleyi
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 // Var olan HTM içeriğini temizleyin
@@ -131,7 +131,7 @@ Bu, [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {

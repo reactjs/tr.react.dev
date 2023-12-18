@@ -190,7 +190,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js
+```js src/TabButton.js
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -208,7 +208,7 @@ export default function TabButton({ children, isActive, onClick }) {
 
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -216,7 +216,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -250,7 +250,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -326,7 +326,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js
+```js src/TabButton.js
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -344,7 +344,7 @@ export default function TabButton({ children, isActive, onClick }) {
 
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -352,7 +352,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -386,7 +386,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -479,7 +479,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js active
+```js src/TabButton.js active
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -499,7 +499,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -507,7 +507,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -541,7 +541,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -622,7 +622,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js active
+```js src/TabButton.js active
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -645,7 +645,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -653,7 +653,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -687,7 +687,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -757,7 +757,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js
+```js src/TabButton.js
 export default function TabButton({ children, isActive, onClick }) {
   if (isActive) {
     return <b>{children}</b>
@@ -772,7 +772,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js hidden
+```js src/AboutTab.js hidden
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -780,7 +780,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js hidden
+```js src/PostsTab.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -836,7 +836,7 @@ function use(promise) {
 }
 ```
 
-```js ContactTab.js hidden
+```js src/ContactTab.js hidden
 export default function ContactTab() {
   return (
     <>
@@ -853,7 +853,7 @@ export default function ContactTab() {
 ```
 
 
-```js data.js hidden
+```js src/data.js hidden
 // Note: the way you would do data fetching depends on
 // the framework that you use together with Suspense.
 // Normally, the caching logic would be inside a framework.
@@ -943,7 +943,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js active
+```js src/TabButton.js active
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -966,7 +966,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js hidden
+```js src/AboutTab.js hidden
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -974,7 +974,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js hidden
+```js src/PostsTab.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -1030,7 +1030,7 @@ function use(promise) {
 }
 ```
 
-```js ContactTab.js hidden
+```js src/ContactTab.js hidden
 export default function ContactTab() {
   return (
     <>
@@ -1047,7 +1047,7 @@ export default function ContactTab() {
 ```
 
 
-```js data.js hidden
+```js src/data.js hidden
 // Note: the way you would do data fetching depends on
 // the framework that you use together with Suspense.
 // Normally, the caching logic would be inside a framework.
@@ -1146,7 +1146,7 @@ Bu, iki nedenden dolayı önerilir:
 }
 ```
 
-```js App.js
+```js src/App.js
 import { Suspense, useState, useTransition } from 'react';
 import IndexPage from './IndexPage.js';
 import ArtistPage from './ArtistPage.js';
@@ -1197,7 +1197,7 @@ function BigSpinner() {
 }
 ```
 
-```js Layout.js
+```js src/Layout.js
 export default function Layout({ children, isPending }) {
   return (
     <div className="layout">
@@ -1214,7 +1214,7 @@ export default function Layout({ children, isPending }) {
 }
 ```
 
-```js IndexPage.js
+```js src/IndexPage.js
 export default function IndexPage({ navigate }) {
   return (
     <button onClick={() => navigate('/the-beatles')}>
@@ -1224,7 +1224,7 @@ export default function IndexPage({ navigate }) {
 }
 ```
 
-```js ArtistPage.js
+```js src/ArtistPage.js
 import { Suspense } from 'react';
 import Albums from './Albums.js';
 import Biography from './Biography.js';
@@ -1255,7 +1255,7 @@ function AlbumsGlimmer() {
 }
 ```
 
-```js Albums.js hidden
+```js src/Albums.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -1303,7 +1303,7 @@ function use(promise) {
 }
 ```
 
-```js Biography.js hidden
+```js src/Biography.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -1347,7 +1347,7 @@ function use(promise) {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 export default function Panel({ children }) {
   return (
     <section className="panel">
@@ -1357,7 +1357,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js data.js hidden
+```js src/data.js hidden
 // Note: the way you would do data fetching depends on
 // the framework that you use together with Suspense.
 // Normally, the caching logic would be inside a framework.
@@ -1521,7 +1521,7 @@ If a function passed to `startTransition` throws an error, you can display an er
 
 <Sandpack>
 
-```js AddCommentContainer.js active
+```js src/AddCommentContainer.js active
 import { useTransition } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -1559,7 +1559,7 @@ function AddCommentButton() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { AddCommentContainer } from "./AddCommentContainer.js";
 
 export default function App() {
@@ -1567,7 +1567,7 @@ export default function App() {
 }
 ```
 
-```js index.js hidden
+```js src/index.js hidden
 // TODO: update to import from stable
 // react instead of canary once the `use`
 // Hook is in a stable release of React
