@@ -291,7 +291,7 @@ export default function MarkdownEditor() {
 }
 ```
 
-```js MarkdownPreview.js
+```js src/MarkdownPreview.js
 import { Remarkable } from 'remarkable';
 
 const md = new Remarkable();

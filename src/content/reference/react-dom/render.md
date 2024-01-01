@@ -84,7 +84,7 @@ Tamamen React ile oluşturulmuş uygulamalarda, **genellikle bunu sadece başlan
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 import './styles.css';
 import { render } from 'react-dom';
 import App from './App.js';
@@ -92,7 +92,7 @@ import App from './App.js';
 render(<App />, document.getElementById('root'));
 ```
 
-```js App.js
+```js src/App.js
 export default function App() {
   return <h1>Merhaba Dünya!</h1>;
 }
@@ -118,7 +118,7 @@ Eğer sayfanız [tamamen React ile oluşturulmamışsa](/learn/add-react-to-an-e
 </main>
 ```
 
-```js index.js active
+```js src/index.js active
 import './styles.css';
 import { render } from 'react-dom';
 import { Comments, Navigation } from './Components.js';
@@ -134,7 +134,7 @@ render(
 );
 ```
 
-```js Components.js
+```js src/Components.js
 export function Navigation() {
   return (
     <ul>
@@ -186,7 +186,7 @@ Aynı DOM düğümünde `render` fonksiyonunu birden fazla kez çağırabilirsin
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 import { render } from 'react-dom';
 import './styles.css';
 import App from './App.js';
@@ -201,7 +201,7 @@ setInterval(() => {
 }, 1000);
 ```
 
-```js App.js
+```js src/App.js
 export default function App({counter}) {
   return (
     <>
