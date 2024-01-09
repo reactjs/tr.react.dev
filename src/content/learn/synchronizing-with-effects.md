@@ -502,7 +502,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
@@ -560,7 +560,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
@@ -971,7 +971,7 @@ Input'un [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElemen
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -990,7 +990,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1055,7 +1055,7 @@ Hatayı düzeltmek için, `ref.current.focus()` çağrısını bildirdiğiniz bi
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -1075,7 +1075,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1139,7 +1139,7 @@ Diyelim ki ilk alana odaklanmak istiyorsunuz. Şimdi ilk `MyInput` bileşeni bir
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1160,7 +1160,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1229,7 +1229,7 @@ Koşullu ifadeyi Efekt içine koyun. `shouldFocus`'u bağımlılık olarak bildi
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1251,7 +1251,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1322,7 +1322,7 @@ Ancak, sayaç saniyede bir artmak yerine iki artmaktadır. Neden böyle? Hatanı
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1340,7 +1340,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1381,7 +1381,7 @@ Bu kodu düzeltmek için `setInterval` tarafından döndürülen ID'yi kaydedin 
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1400,7 +1400,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1441,7 +1441,7 @@ Bu bileşen seçilen kişinin biyografisini göstermektedir. Biyografiyi, bileş
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1472,7 +1472,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
@@ -1514,7 +1514,7 @@ Yarış koşullarını düzeltmek için bir temizleme fonksiyonu ekleyin:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1550,7 +1550,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {

@@ -35,7 +35,7 @@ Zorunlu UI programlamanın bu örneğinde form, React *kullanmadan* oluşturulmu
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 async function handleFormSubmit(e) {
   e.preventDefault();
   disable(textarea);
@@ -246,7 +246,7 @@ Eğer bir bileşenin birçok görsel state'i varsa, hepsini tek bir sayfada gös
 
 <Sandpack>
 
-```js App.js active
+```js src/App.js active
 import Form from './Form.js';
 
 let statuses = [
@@ -271,7 +271,7 @@ export default function App() {
 }
 ```
 
-```js Form.js
+```js src/Form.js
 export default function Form({ status }) {
   if (status === 'success') {
     return <h1>Doğru cevap!</h1>
@@ -707,7 +707,7 @@ body { margin: 0; padding: 0; height: 250px; }
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 function handleFormSubmit(e) {
   e.preventDefault();
   if (editButton.textContent === 'Profili Düzenle') {
@@ -909,7 +909,7 @@ Bu çözüm ile orijinal zorunlu kodu karşılaştırın. Aralarındaki farklar 
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 function handleFormSubmit(e) {
   e.preventDefault();
   if (editButton.textContent === 'Profili Düzenle') {
@@ -1008,7 +1008,7 @@ Nereden başlayacağınızı düşünmekte zorlanıyorsanız, aşağıdaki tasla
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 let firstName = 'Vedat';
 let lastName = 'Milor';
 let isEditing = false;
@@ -1115,7 +1115,7 @@ Eksik mantık, girişlerin ve içeriğin görüntülenmesinin değiştirilmesini
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 let firstName = 'Vedat';
 let lastName = 'Milor';
 let isEditing = false;

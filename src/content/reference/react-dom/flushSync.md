@@ -85,7 +85,7 @@ Bazı tarayıcı API'leri, callback içindeki sonuçların callback'in sonuna ka
 
 <Sandpack>
 
-```js App.js active
+```js src/App.js active
 import { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 

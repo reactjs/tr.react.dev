@@ -86,7 +86,7 @@ Bu örnekte, `MarkdownPreview`'ın kodu render edilene kadar yüklenmez. `Markdo
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, Suspense, lazy } from 'react';
 import Loading from './Loading.js';
 
@@ -121,13 +121,13 @@ function delayForDemo(promise) {
 }
 ```
 
-```js Loading.js
+```js src/Loading.js
 export default function Loading() {
   return <p><i>Yükleniyor...</i></p>;
 }
 ```
 
-```js MarkdownPreview.js
+```js src/MarkdownPreview.js
 import { Remarkable } from 'remarkable';
 
 const md = new Remarkable();

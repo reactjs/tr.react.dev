@@ -77,7 +77,7 @@ Uygulamanızı, hiyerarşide daha yukarıdaki (örneğin, `FilterableProductTabl
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 function ProductCategoryRow({ category }) {
   return (
     <tr>
@@ -295,7 +295,7 @@ Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz. Aşağıdak
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 import { useState } from 'react';
 
 function FilterableProductTable({ products }) {
@@ -499,7 +499,7 @@ Uygulama şimdi tamamen çalışıyor!
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 import { useState } from 'react';
 
 function FilterableProductTable({ products }) {

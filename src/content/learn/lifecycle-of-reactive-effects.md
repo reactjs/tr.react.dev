@@ -251,7 +251,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -448,7 +448,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
@@ -528,7 +528,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -647,7 +647,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -838,7 +838,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -913,7 +913,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -1330,7 +1330,7 @@ Linteri bastırmak her zaman şüphelidir. Bu bir hata olabilir mi?
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1375,7 +1375,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 
 export default function ChatRoom({ roomId, createConnection }) {
@@ -1390,7 +1390,7 @@ export default function ChatRoom({ roomId, createConnection }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -1428,7 +1428,7 @@ Eğer linter baskılamasını kaldırırsanız, bir lint hatası göreceksiniz. 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1473,7 +1473,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 
 export default function ChatRoom({ roomId, createConnection }) {
@@ -1487,7 +1487,7 @@ export default function ChatRoom({ roomId, createConnection }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -1523,7 +1523,7 @@ label { display: block; margin-bottom: 10px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1561,7 +1561,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import {
   createEncryptedConnection,
@@ -1582,7 +1582,7 @@ export default function ChatRoom({ roomId, isEncrypted }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Gerçek bir uygulama sunucuya gerçekten bağlanır
   return {
@@ -1634,7 +1634,7 @@ Bunu doğru uygularsanız, bir gezegen seçtiğinizde yer listesi doldurulmalıd
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -1688,7 +1688,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -1783,7 +1783,7 @@ Bu nedenle bunları iki ayrı Efekt olarak tanımlamak mantıklıdır. İşte bu
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -1856,7 +1856,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -1946,7 +1946,7 @@ Bunun yerine, tekrarı azaltmak için, bazı mantıkları aşağıdaki `useSelec
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useSelectOptions } from './useSelectOptions.js';
 
@@ -1992,7 +1992,7 @@ export default function Page() {
 }
 ```
 
-```js useSelectOptions.js
+```js src/useSelectOptions.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -2019,7 +2019,7 @@ export function useSelectOptions(url) {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
