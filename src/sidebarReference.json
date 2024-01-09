@@ -191,7 +191,7 @@
       "path": "/reference/react-dom/components",
       "routes": [
         {
-          "title": "Common (e.g. <div>)",
+          "title": "Ortak (örn. <div>)",
           "path": "/reference/react-dom/components/common"
         },
         {
