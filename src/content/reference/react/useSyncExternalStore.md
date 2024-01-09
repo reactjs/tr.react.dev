@@ -133,15 +133,9 @@ export default function TodosApp() {
 }
 ```
 
-<<<<<<< HEAD
-```js todoStore.js
+```js src/todoStore.js
 // Bu dosya, React ile entegre etmeniz gerekebilecek
 // üçüncü taraf bir depo örneğidir.
-=======
-```js src/todoStore.js
-// This is an example of a third-party store
-// that you might need to integrate with React.
->>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
 
 // Uygulamanızın tamamı React ile oluşturulduysa,
 // React state'i kullanmanızı öneririz.

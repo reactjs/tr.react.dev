@@ -24,11 +24,7 @@ Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyor
 npx create-next-app@latest
 </TerminalBlock>
 
-<<<<<<< HEAD
-Next.js'e yeni başlıyorsanız, [Next.js eğitimi](https://nextjs.org/learn/foundations/about-nextjs)ni takip edebilirsiniz.
-=======
-If you're new to Next.js, check out the [learn Next.js course.](https://nextjs.org/learn)
->>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
+Next.js'e yeni başlıyorsanız, [Next.js eğitimini](https://nextjs.org/learn/) takip edebilirsiniz.
 
 Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. Bir Next.js uygulamasını herhangi bir Node.js sunucusuna, sunucusuz barındırmaya (serverless) veya kendi sunucunuza [yapabilirsiniz](https://nextjs.org/docs/app/building-your-application/deploying). [Tümüyle statik Next.js uygulamaları](https://nextjs.org/docs/advanced-features/static-html-export) herhangi bir statik barındırmaya kurulabilir.
 

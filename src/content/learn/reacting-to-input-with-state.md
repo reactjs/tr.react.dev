@@ -1008,15 +1008,9 @@ Nereden başlayacağınızı düşünmekte zorlanıyorsanız, aşağıdaki tasla
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js index.js active
+```js src/index.js active
 let firstName = 'Vedat';
 let lastName = 'Milor';
-=======
-```js src/index.js active
-let firstName = 'Jane';
-let lastName = 'Jacobs';
->>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
 let isEditing = false;
 
 function handleFormSubmit(e) {
@@ -1121,15 +1115,9 @@ Eksik mantık, girişlerin ve içeriğin görüntülenmesinin değiştirilmesini
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js index.js active
+```js src/index.js active
 let firstName = 'Vedat';
 let lastName = 'Milor';
-=======
-```js src/index.js active
-let firstName = 'Jane';
-let lastName = 'Jacobs';
->>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
 let isEditing = false;
 
 function handleFormSubmit(e) {
