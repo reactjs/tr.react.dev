@@ -7,7 +7,7 @@ title: useState
 `useState`, bileşeninize [state değişkeni](/learn/state-a-components-memory) eklemenizi sağlayan bir React Hook'udur.
 
 ```js
-const [state, setState] = useState(initialState);
+const [state, setState] = useState(initialState)
 ```
 
 </Intro>

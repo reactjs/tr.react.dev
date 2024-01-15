@@ -46,12 +46,19 @@ function MyComponent() {
 
 Sonraki render işlemlerinde, `useRef` aynı nesneyi döndürecektir.
 
+<<<<<<< HEAD
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
 * `ref.current` özelliğini değiştirebilirsiniz. State'in aksine, bu değiştirilebilirdir. Ancak, render için kullanılan bir nesne tutuyorsa (örneğin, State'inizin bir parçası), o nesneyi değiştirmemelisiniz.
 * `ref.current` özelliğini değiştirdiğinizde, React bileşeninizi yeniden render etmez. Ref, düz JavaScript bir nesne olduğundan, ne zaman değiştirdiğinizi React fark etmez.
 * Bileşeninizin davranışını öngörülemez hale getireceğinden render işlemi sırasında, `ref.current`'e yazmayın veya okumayın. Ancak [başlangıçta](#avoiding-recreating-the-ref-contents) yapabilirsiniz.
 * Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu, davranışı etkilememelidir
+=======
+* You can mutate the `ref.current` property. Unlike state, it is mutable. However, if it holds an object that is used for rendering (for example, a piece of your state), then you shouldn't mutate that object.
+* When you change the `ref.current` property, React does not re-render your component. React is not aware of when you change it because a ref is a plain JavaScript object.
+* Do not write _or read_ `ref.current` during rendering, except for [initialization.](#avoiding-recreating-the-ref-contents) This makes your component's behavior unpredictable.
+* In Strict Mode, React will **call your component function twice** in order to [help you find accidental impurities.](/reference/react/useState#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. Each ref object will be created twice, but one of the versions will be discarded. If your component function is pure (as it should be), this should not affect the behavior.
+>>>>>>> 6bfde58c109ec86fd6c5767421404cb679ffba9a
 
 ---
 
