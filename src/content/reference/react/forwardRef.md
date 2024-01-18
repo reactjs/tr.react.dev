@@ -42,12 +42,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### Uyarılar {/*caveats*/}
 
-<<<<<<< HEAD
-* Katı Mod (Strict Mode) ile, React render fonksiyonunuzu **iki kez çağırarak** [istemeden yapılan hataları bulmanızı kolaylaştırır](#my-initializer-or-updater-function-runs-twice). Bu, yalnızca geliştirme ortamı davranışıdır ve canlı ortamı etkilemez. Eğer render fonksiyonunuz saf (olması gerektiği gibi) ise, bu bileşenin işleyişine zarar vermemelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
-=======
-* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](/reference/react/useState#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
->>>>>>> 6bfde58c109ec86fd6c5767421404cb679ffba9a
-
+* Katı Mod (Strict Mode) ile, React render fonksiyonunuzu **iki kez çağırarak** [istemeden yapılan hataları bulmanızı kolaylaştırır](/reference/react/useState#my-initializer-or-updater-function-runs-twice). Bu, yalnızca geliştirme ortamı davranışıdır ve canlı ortamı etkilemez. Eğer render fonksiyonunuz saf (olması gerektiği gibi) ise, bu bileşenin işleyişine zarar vermemelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
 
 ---
 
