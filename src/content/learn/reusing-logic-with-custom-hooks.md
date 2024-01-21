@@ -1,23 +1,23 @@
 ---
-title: 'Reusing Logic with Custom Hooks'
+title: 'Özel Hooklar ile Mantığı Tekrar Kullanma'
 ---
 
 <Intro>
 
-React comes with several built-in Hooks like `useState`, `useContext`, and `useEffect`. Sometimes, you'll wish that there was a Hook for some more specific purpose: for example, to fetch data, to keep track of whether the user is online, or to connect to a chat room. You might not find these Hooks in React, but you can create your own Hooks for your application's needs.
+React, `useState`, `useContext`, ve `useEffect` gibi birkaç yerleşik Hook ile birlikte gelir. Bazen, bazı daha spesifik amaçlar için bir Hook olmasını isteyeceksiniz: örneğin, veri çekmek için, kullanıcının çevrimiçi olup olmadığını takip etmek için veya bir sohbet odasına bağlanmak için. Bu Hook'ları React'te bulamayabilirsiniz, ancak uygulamanızın ihtiyaçları için kendi Hook'larınızı oluşturabilirsiniz. 
 
 </Intro>
 
 <YouWillLearn>
 
-- What custom Hooks are, and how to write your own
-- How to reuse logic between components
-- How to name and structure your custom Hooks
-- When and why to extract custom Hooks
+- Özel Hook'ların ne olduğunu ve kendi özel Hook'larınızı nasıl yazacağınızı
+- Bileşenler arasında mantığı nasıl yeniden kullanacağınızı
+- Özel Hook'larınızı nasıl adlandıracağınızı ve yapılandıracağınızı
+- Özel Hook'ları ne zaman ve neden çıkaracağınızı
 
 </YouWillLearn>
 
-## Custom Hooks: Sharing logic between components {/*custom-hooks-sharing-logic-between-components*/}
+## Özel Hook'lar: Bileşenler arasında mantığı paylaşma {/*custom-hooks-sharing-logic-between-components*/}
 
 Imagine you're developing an app that heavily relies on the network (as most apps do). You want to warn the user if their network connection has accidentally gone off while they were using your app. How would you go about it? It seems like you'll need two things in your component:
 
