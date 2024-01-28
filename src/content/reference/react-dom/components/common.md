@@ -34,28 +34,28 @@ title: "Ortak bileşenler (örn. <div>)"
 
 * `suppressContentEditableWarning`: Bir boolean. Eğer `true` ise, hem `children` hem de `contentEditable={true}` prop'larına sahip olan elemanlarda (ki bunlar normalde birlikte çalışmazlar) React'ın gösterdiği uyarıları baskılar. Bunu, `contentEditable` içeriğini manuel olarak yöneten bir metin girdisi kütüphanesi geliştiriyorsanız kullanın.
 
-* `suppressHydrationWarning`: Bir boolen. Eğer [sunucu tarafı render'lama](/reference/react-dom/server) kullanıyorsanız, sunucu ve istemci farklı içerikleri render ettiğinde normalde bir uyarı görürsünüz. Bazı ender durumlarda (zaman damgası gibi) ise birebir eşleşmeyi sağamak çok zor veya imkansızdır. Eğer `suppressHydrationWarning`'i `true` olarak ayarlarsanız, React o elemanın içeriği ve niteliklerindeki yanış eşleşmelerle ilgili bir uyarı vermeyecektir. Yalnızca bir kademe derinde çalışır ve bir kaçış yolu olarak kullanılması amaçlanmıştır. Gereğinden fazla kullanmayınız. [Hydration hatalarını baskılamayla ilgili daha fazlasını okuyun.](/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors)
+* `suppressHydrationWarning`: Bir boolean. Eğer [sunucu taraflı render'lama](/reference/react-dom/server) kullanıyorsanız, sunucu ve istemci farklı içerikleri render ettiğinde normalde bir uyarı görürsünüz. Bazı ender durumlarda (zaman damgası gibi) ise birebir eşleşmeyi sağlamak çok zor veya imkansızdır. Eğer `suppressHydrationWarning`'i `true` olarak ayarlarsanız, React o elemanın içeriği ve niteliklerindeki yanlış eşleşmelerle ilgili bir uyarı vermeyecektir. Yalnızca bir kademe derinde çalışır ve bir kaçış yolu olarak kullanılması amaçlanmıştır. Gereğinden fazla kullanmayınız. [Hydration hatalarını baskılamayla ilgili daha fazlasını okuyun.](/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors)
 
 * `style`: CSS biçimlerini taşıyan bir nesne, örneğin `{ fontWeight: 'bold', margin: 20 }`. DOM'un [`style`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) özelliğine benzer olarak, CSS özellik isimleri `camelCase` olarak yazılmalıdır, örneğin `font-weight` yerine `fontWeight`. Değerleri string veya sayı olarak verebilirsiniz. `width: 100` şeklinde bir sayı verdiğinizde, eğer [birimsiz özellik](https://github.com/facebook/react/blob/81d4ee9ca5c405dce62f64e61506b8e155f38d8d/packages/react-dom-bindings/src/shared/CSSProperty.js#L8-L57) değilse, React bu sayıya otomatik olarak `px` ("piksel")'i ekler. `style`'ı yalnızca, biçim değerlerini önceden bilmediğiniz dinamik biçimler için kullanmanızı tavsiye ediyoruz. Diğer durumlarda ise `className` ile düz CSS sınıfları uygulamak daha verimli. [`className` and `style` ile ilgili daha fazlasını okuyun.](#applying-css-styles)
 
 Şu standart DOM prop'ları da tüm yerleşik bileşenlerde desteklenir:
 
-* [`accessKey`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey): Bir string. Eleman için bir klavye kısayolu belirler. [Genellikle tavsiye edilmez.](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#accessibility_concerns)
+* [`accessKey`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey): Bir string. Eleman için bir klavye kısayolu belirtir. [Genellikle tavsiye edilmez.](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#accessibility_concerns)
 * [`aria-*`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes): ARIA nitelikleri, bu elemanın erişilebilirlik ağacı bilgisini belirlemenize olanak sağlar. Eksiksiz bir referans için [ARIA niteliklerine](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes) bakınız. React'taki tüm ARIA nitelik isimleri HTML'dekilerle birebir aynıdır.
-* [`autoCapitalize`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize): Bir string. Kullanıcı girdisinin büyük harfe dönüştürülüp dönüştürülmeyeceğini, eğer dönüştürülecekse nasıl dönüştürüleceğini belirler.
-* [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className): Bir string. Elemanın CSS sınıf ismini belirler. [CSS biçimlerini uygulamayla ilgili daha fazlasını okuyun.](#applying-css-styles)
+* [`autoCapitalize`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize): Bir string. Kullanıcı girdisinin büyük harfe dönüştürülüp dönüştürülmeyeceğini, eğer dönüştürülecekse nasıl dönüştürüleceğini belirtir.
+* [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className): Bir string. Elemanın CSS sınıf ismini belirtir. [CSS biçimlerini uygulamayla ilgili daha fazlasını okuyun.](#applying-css-styles)
 * [`contentEditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable): Bir boolean. Eğer `true` ise tarayıcı, kullanıcının render edilmiş elemanı direkt olarak düzenlemesine olanak sağlar. [Lexical](https://lexical.dev/) gibi zengin metin girdisi kütüphanelerini uygulamak için kullanılabilir. Eğer `contentEditable={true}` prop'una sahip bir elemana React alt elemanları vermeye çalışırsanız React sizi uyarır, çünkü React kullanıcı düzenleme yaptıktan sonra içeriğini güncelleyemeyecektir.
 * [`data-*`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*): Data nitelikleri, elemana herhangi bir string verisi bağlamanıza olanak sağlar, örneğin `data-meyve="armut"`. Bunlar React'ta yaygın şekilde kullanılmazlar çünkü veriler daha çok prop'lardan veya state'ten okunur.
-* [`dir`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir): `'ltr'` veya `'rtl'`. Elemanın metin yönü belirler.
-* [`draggable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable): Bir boolean. Elemanın sürüklenebilir olup olmadığını belirler. [HTML Sürükle ve Bırak API'sinin](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) bir parçasıdır.
-* [`enterKeyHint`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/enterKeyHint): Bir string. Sanal klavyelerde enter tuşu için hangi aksiyonun gösterilmesi gerektiğini belirler.
+* [`dir`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir): `'ltr'` veya `'rtl'`. Elemanın metin yönü belirtir.
+* [`draggable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable): Bir boolean. Elemanın sürüklenebilir olup olmadığını belirtir. [HTML Sürükle ve Bırak API'sinin](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) bir parçasıdır.
+* [`enterKeyHint`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/enterKeyHint): Bir string. Sanal klavyelerde enter tuşu için hangi aksiyonun gösterilmesi gerektiğini belirtir.
 * [`htmlFor`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor): Bir string. [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) ve [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output) kullanırken [etiket üzerinde bazı kontrollere sahip olmanıza](/reference/react-dom/components/input#providing-a-label-for-an-input) olanak sağlar. [HTML `for` niteliğiyle](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) aynı. React, HTML nitelik isimleri yerine standart DOM özellik isimlerini (`htmlFor`) kullanır.
-* [`hidden`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden): Bir boolean veya bir string. Elemanın gizli olup olmaması gerektiğini belirler.
-* [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id): Bir string. Elemanı daha sonra bulmaya veya elemanı başka elemanlarla bağlamaya yarayan bir benzersiz tanımlayıcı belirler. Aynı bileşenin birden fazla nesnelerinin çakışmasını önlemek için [`useId`](/reference/react/useId) ile oluşturun.
+* [`hidden`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden): Bir boolean veya bir string. Elemanın gizli olup olmaması gerektiğini belirtir.
+* [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id): Bir string. Elemanı daha sonra bulmaya veya elemanı başka elemanlarla bağlamaya yarayan bir benzersiz tanımlayıcı belirtir. Aynı bileşenin birden fazla nesnelerinin çakışmasını önlemek için [`useId`](/reference/react/useId) ile oluşturun.
 * [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is): Bir string. Eğer belirtilmişse, bileşen bir [özel eleman](/reference/react-dom/components#custom-html-elements) gibi davranacaktır. 
-* [`inputMode`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode): Bir string. Ne tür bir klavye görüntüleneceğini belirler (örneğin metin, sayı veya telefon).
-* [`itemProp`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/itemprop): Bir string. Elemanın, web arama robotları için hangi özelliği temsil ettiğini belirler.
-* [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang): Bir string. Elemanın dilini belirler.
+* [`inputMode`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode): Bir string. Ne tür bir klavye görüntüleneceğini belirtir (örneğin metin, sayı veya telefon).
+* [`itemProp`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/itemprop): Bir string. Elemanın, web arama robotları için hangi özelliği temsil ettiğini belirtir.
+* [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang): Bir string. Elemanın dilini belirtir.
 * [`onAnimationEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event): Bir [`AnimationEvent` yönetici](#animationevent-handler) fonksiyonu. Bir CSS animasyonu tamamlandığında çalışır.
 * `onAnimationEndCapture`: `onAnimationEnd`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onAnimationIteration`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event): Bir [`AnimationEvent` yönetici](#animationevent-handler) fonksiyonu. Bir CSS animasyonu iterasyonu bitip, bir diğeri başladığında çalışır.
@@ -70,9 +70,9 @@ title: "Ortak bileşenler (örn. <div>)"
 * `onBlurCapture`: `onBlur`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event): Bir [`MouseEvent` yönetici](#mouseevent-handler) fonksiyonu. İmleç cihazındaki birincil tuşa tıklanıldığında çalışır.
 * `onClickCapture`: `onClick`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
-* [`onCompositionStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event): Bir [`CompositionEvent` yönetici](#compositionevent-handler) fonksiyonu. Bir [girdi metodu düzenleyicisi](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor), yeni bir birleştirme oturumu başlattığında çalışır.
+* [`onCompositionStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event): Bir [`CompositionEvent` yönetici](#compositionevent-handler) fonksiyonu. Bir [girdi metodu düzenleyicisi](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) yeni bir birleştirme oturumu başlattığında çalışır.
 * `onCompositionStartCapture`: `onCompositionStart`'ın [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
-* [`onCompositionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event): Bir [`CompositionEvent` yönetici](#compositionevent-handler) fonksiyonu. Bir [girdi metodu düzenleyicisi](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor), bir birleştirme oturumunu tamamlayınca veya iptal edince çalışır.
+* [`onCompositionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event): Bir [`CompositionEvent` yönetici](#compositionevent-handler) fonksiyonu. Bir [girdi metodu düzenleyicisi](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) bir birleştirme oturumunu tamamlayınca veya iptal edince çalışır.
 * `onCompositionEndCapture`: `onCompositionEnd`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onCompositionUpdate`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionupdate_event): Bir [`CompositionEvent` yönetici](#compositionevent-handler) fonksiyonu. Bir [girdi metodu düzenleyicisi'ne](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) yeni bir karakter girildiğinde çalışır.
 * `onCompositionUpdateCapture`: `onCompositionUpdate`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
@@ -134,7 +134,7 @@ title: "Ortak bileşenler (örn. <div>)"
 * `onPasteCapture`: `onPaste`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onScroll`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Bir eleman kaydırılınca çalışır. Bu olay kabarmaz.
 * `onScrollCapture`: `onScroll`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
-* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Girdi gibi düzenlenebilir bir elemanın içindeki seçim değişince çalışır. React `onSelect` olayını, `contentEditable={true}` elemanlar için de çalışacak şekilde genişletir. Ek olarak, React bunu boş seçimlerde ve düzenlemelerde (ki bunlar seçimi etkileyebilir) çalışacak şekilde genişletir.
+* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Girdi gibi düzenlenebilir bir elemanın içindeki seçim değişince çalışır. React `onSelect` olayını, `contentEditable={true}` elemanları için de çalışacak şekilde genişletir. Ek olarak, React bunu boş seçimlerde ve düzenlemelerde (ki bunlar seçimi etkileyebilir) çalışacak şekilde genişletir.
 * `onSelectCapture`: `onSelect`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onTouchCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchcancel_event): Bir [`TouchEvent` yönetici](#touchevent-handler) fonksiyonu. Tarayıcı bir dokunma etkileşimini iptal edince çalışır.
 * `onTouchCancelCapture`: `onTouchCancel`'ın [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
@@ -148,11 +148,11 @@ title: "Ortak bileşenler (örn. <div>)"
 * `onTransitionEndCapture`: `onTransitionEnd`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onWheel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event): Bir [`WheelEvent` yönetici](#wheelevent-handler) fonksiyonu. Kullanıcı fare tekerleğini döndürünce çalışır.
 * `onWheelCapture`: `onWheel`'ın [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
-* [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Yardımcı teknolojiler için elemanın rolünü açık bir şekilde belirler.
-* [`slot`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Shadow DOM'u kullanırken slot ismini belirler. React'ta buna denk bir kalıp genellikle JSX'i prop olarak vererek ulaşılabilir. Örneğin, `<Layout left={<Sidebar />} right={<Content />} />`.
+* [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Yardımcı teknolojiler için elemanın rolünü açık bir şekilde belirtir.
+* [`slot`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Shadow DOM'u kullanırken slot ismini belirtir. React'ta buna denk bir model genellikle JSX'in prop olarak iletilmesiyle elde edilir. Örneğin, `<Layout left={<Sidebar />} right={<Content />} />`.
 * [`spellCheck`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck): Bir boolean veya boş. Eğer açık bir şekilde `true` veya `false` olarak ayarlanırsa yazım denetimini etkinleştirir veya devre dışı bırakır.
 * [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex): Bir sayı. Varsayılan Tab tuşu davranışını geçersiz kılar. [`-1` ve `0` dışında değerleri kullanmaktan kaçının.](https://www.tpgi.com/using-the-tabindex-attribute/)
-* [`title`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title): Bir string. Elemanın araç ipucu metnini belirler.
+* [`title`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title): Bir string. Elemanın araç ipucu metnini belirtir.
 * [`translate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/translate): `'yes'` veya `'no'`. `'no'` değerini vermek eleman içeriğinin çevrilmesini engeller.
 
 Prop olarak özel nitelikler de verebilirsiniz, örneğin `ozelprop="herhangiBirDeger"`. Bu, üçüncü parti kütüphaneleri entegre ederken işinize yarayabilir. Özel nitelik isimlerinin küçük harflerle yazılması ve `on` ile başlamaması gerekmektedir. Değer bir stringe dönüştürülecek. Eğer `null` veya `undefined` verirseniz bu özel nitelik kaldırılacaktır.
@@ -229,12 +229,12 @@ Prop olarak özel nitelikler de verebilirsiniz, örneğin `ozelprop="herhangiBir
 * `onSuspendCapture`: `onSuspend`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onTimeUpdate`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/timeupdate_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Mevcut oynatma zamanı güncellenince çalışır.
 * `onTimeUpdateCapture`: `onTimeUpdate`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
-* [`onVolumeChange`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/volumechange_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Hacim değişince çalışır.
+* [`onVolumeChange`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/volumechange_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Videonun sesi değişince çalışır.
 * `onVolumeChangeCapture`: `onVolumeChange`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 * [`onWaiting`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/waiting_event): Bir [`Event` yönetici](#event-handler) fonksiyonu. Oynatma geçici veri eksikliğinden dolayı durunca çalışır.
 * `onWaitingCapture`: `onWaiting`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan versiyonu.
 
-#### Dikkat Edilmesi Gerekenler {/*common-caveats*/}
+#### Uyarılar {/*common-caveats*/}
 
 - Aynı anda hem `children` hem de `dangerouslySetInnerHTML` kullanamazsınız.
 - Bazı olaylar (`onAbort` ve `onLoad` gibi) tarayıcıda kabarmaz ama React'ta kabarır.
@@ -253,13 +253,13 @@ Prop olarak özel nitelikler de verebilirsiniz, örneğin `ozelprop="herhangiBir
 
 React, `<div>` DOM düğümü ekrana eklendiğinde, `ref` callback'inizi argümanda DOM düğümü (`node`) olacak şekilde çağıracaktır. Bu `<div>` DOM düğümü kaldırıldığında ise React, `ref` callback'inizi `null` ile çağıracaktır.
 
-Ayrıca React, siz *farklı* bir `ref` callback'i verir vermez `ref` callback'inizi çağıracaktır. Yukarıdaki örnekteki `(node) => { ... }`, her render'da farklı bir fonksiyondur. Bileşeniniz tekrar render edildiğinde *önceki* fonkisyon argümanında `null` ile, *sonraki* fonkisyon ise DOM düğümüyle çağırılacaktır.
+Ayrıca React, siz *farklı* bir `ref` callback'i verir vermez `ref` callback'inizi çağıracaktır. Yukarıdaki örnekteki `(node) => { ... }`, her render'da farklı bir fonksiyondur. Bileşeniniz tekrar render edildiğinde *önceki* fonksiyon argümanında `null` ile, *sonraki* fonkisyon ise DOM düğümüyle çağırılacaktır.
 
 #### Parametreler {/*ref-callback-parameters*/}
 
 * `node`: Bir DOM düğümü veya `null`. React, ref bağlanınca size DOM düğümü, bağlantı kesilince ise `null` verecektir. Eğer ki her render'da `ref` callback'i için aynı fonksiyon referansını vermezseniz, callback'in geçici olarak bağlantısı kesilecek ve bileşenin her yeniden render'lanması sırasında tekrar bağlanacaktır.
 
-#### Geri dönüş {/*returns*/}
+#### Döndürülenler {/*returns*/}
 
 `ref` callback'i herhangi bir şey geri döndürmez.
 
@@ -277,24 +277,24 @@ Olay yöneticileriniz bir *React olay nesnesi* alacaktır. Buna bazen "sentetik 
 
 Altta yatan DOM olaylarıyla aynı standartlara uyar ama bazı tarayıcı tutarsızlıklarına çözüm sağlar.
 
-Bazı React olayları tarayacının yerel olaylarıyla bire bir eşleşmez. Örneğin `onMouseLeave`'de `e.nativeEvent` bir `mouseout` olayına işaret edecektir. Birebir eşleşme açık API'ye dahil değildir ve gelecekte değişebilir. Eğer herhangi bir sebeple altta yatan tarayıcı olayına ihtiyacınız varsa `e.nativeEvent`'ten ulaşabilirsiniz.
+Bazı React olayları tarayıcının yerel olaylarıyla birebir eşleşmez. Örneğin `onMouseLeave`'de `e.nativeEvent` bir `mouseout` olayına işaret edecektir. Birebir eşleşme açık API'ye dahil değildir ve gelecekte değişebilir. Eğer herhangi bir sebeple altta yatan tarayıcı olayına ihtiyacınız varsa `e.nativeEvent`'ten ulaşabilirsiniz.
 
 #### Özellikler {/*react-event-object-properties*/}
 
 React olay nesneleri bazı standart [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) özelliklerini uygular:
 
-* [`bubbles`](https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles): Bir boolean. Olayın DOM boyunca kabarıp kabarmadığını döner.
-* [`cancelable`](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable): Bir boolean. Olayın iptal edip edilemediğini döner.
-* [`currentTarget`](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget): Bir DOM düğümü. Mevcut yöneticinin React ağacında bağlı olduğu düğümü döner.
-* [`defaultPrevented`](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented): Bir boolean. `preventDefault`'un çağırılıp çağırılmadığını döner.
-* [`eventPhase`](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase): Bir sayı. Olayın halihazırda bulunduğu aşamayı döner.
-* [`isTrusted`](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted): Bir boolean. Olayın kullanıcı tarafından oluşturulup oluşturulmadığını döner.
-* [`target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target): Bir DOM düğümü. Olayın gerçekleştiği düğümü döner (uzak bir alt eleman olabilir).
-* [`timeStamp`](https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp): Bir sayı. Olayın gerçekleştiği zamanı döner.
+* [`bubbles`](https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles): Bir boolean. Olayın DOM boyunca kabarıp kabarmadığını döndürür.
+* [`cancelable`](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable): Bir boolean. Olayın iptal edip edilemediğini döndürür.
+* [`currentTarget`](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget): Bir DOM düğümü. Mevcut yöneticinin React ağacında bağlı olduğu düğümü döndürür.
+* [`defaultPrevented`](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented): Bir boolean. `preventDefault`'un çağırılıp çağırılmadığını döndürür.
+* [`eventPhase`](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase): Bir sayı. Olayın halihazırda bulunduğu aşamayı döndürür.
+* [`isTrusted`](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted): Bir boolean. Olayın kullanıcı tarafından oluşturulup oluşturulmadığını döndürür.
+* [`target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target): Bir DOM düğümü. Olayın gerçekleştiği düğümü döndürür (uzak bir alt eleman olabilir).
+* [`timeStamp`](https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp): Bir sayı. Olayın gerçekleştiği zamanı döndürür.
 
 Ek olarak, React olay nesneleri şu özellikleri de sağlar:
 
-* `nativeEvent`: A DOM [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event). The original browser event object.
+* `nativeEvent`: Bir DOM [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event)'i. Orijinal tarayıcı olay nesnesidir.
 
 #### Metotlar {/*react-event-object-methods*/}
 
@@ -305,12 +305,12 @@ React olay nesneleri bazı standart [`Event`](https://developer.mozilla.org/en-U
 
 Ek olarak, React olay nesneleri şu metotları da sağlar:
 
-* `isDefaultPrevented()`: `preventDefault`'un çağırılıp çağırılmadığını gösteren bir boolean döner.
-* `isPropagationStopped()`: `stopPropagation`'ın çağırılıp çağırılmadığını gösteren bir boolean döner.
+* `isDefaultPrevented()`: `preventDefault`'un çağırılıp çağırılmadığını gösteren bir boolean döndürür.
+* `isPropagationStopped()`: `stopPropagation`'ın çağırılıp çağırılmadığını gösteren bir boolean döndürür.
 * `persist()`: React DOM'uyla kullanılmaz. React Native'de, olaydan sonra olayın özelliklerine ulaşmak için bunu çağırın.
-* `isPersistent()`: React DOM'uyla kullanılmaz. React Native'de, `persist`'in çağırılıp çağırılmadığını döner.
+* `isPersistent()`: React DOM'uyla kullanılmaz. React Native'de, `persist`'in çağırılıp çağırılmadığını döndürür.
 
-#### Dikkat Edilmesi Gerekenler {/*react-event-object-caveats*/}
+#### Uyarılar {/*react-event-object-caveats*/}
 
 * `currentTarget`, `eventPhase`, `target`, ve `type`'ın değerleri React kodunuzun beklediği değerleri yansıtır. React aslında olay yöneticilerini kökte bağlar ama bu React'ın olay nesnelerine yansıtılmaz. Örneğin, `e.currentTarget` altta yatan `e.nativeEvent.currentTarget` ile aynı olmayabilir. Polyfill yapılmış olaylarda `e.type` (React olay tipi), `e.nativeEvent.type`'tan (altta yatan tip) farklı olabilir.
 
@@ -459,7 +459,7 @@ Odaklanma olayları için bir olay yöneticisi tipi.
 
 ### `Event` yönetici fonksiyonu {/*event-handler*/}
 
-Jenerik olaylar için bir olay yöneticisi tipi.
+Genel olaylar için bir olay yöneticisi tipi.
 
 #### Parametreler {/*event-handler-parameters*/}
 
@@ -672,7 +672,7 @@ CSS geçiş olayları için bir olay yöneticisi tipi.
 
 ### `UIEvent` yönetici fonksiyonu {/*uievent-handler*/}
 
-Jenerik UI olayları için bir olay yöneticisi tipi.
+Genel UI olayları için bir olay yöneticisi tipi.
 
 ```js
 <div
@@ -735,7 +735,7 @@ Jenerik UI olayları için bir olay yöneticisi tipi.
 
 ## Kullanım {/*usage*/}
 
-### CSS biçimlerinin uygulanması {/*applying-css-styles*/}
+### CSS stillerinin uygulanması {/*applying-css-styles*/}
 
 React'ta bir CSS sınıfını [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) kullanarak belirtirsiniz. HTML'deki `class` niteliği gibi çalışır:
 
@@ -754,7 +754,7 @@ Sonra bu sınıf için CSS kurallarını ayrı bir CSS dosyasına yazarsınız:
 
 React, CSS dosyalarını nasıl ekleyeceğinizle ilgili sıkı kurallar koymaz. En basit yol, HTML'inize bir[`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) etiketi eklemektir. Eğer bir derleme aracı veya bir çatı kullanırsanız, projenize nasıl CSS dosyası ekleyeceğinizi öğrenmek için ilgili dokümantasyona danışabilirsiniz.
 
-Bazen biçim değerleri veriye bağlıdır. Dinamik bir şekilde biçimlendirmek için `style` niteliğini kullanın:
+Bazen stil değerleri veriye bağlıdır. Dinamik bir şekilde stillendirmek için `style` niteliğini kullanın:
 
 ```js {3-6}
 <img
@@ -767,7 +767,7 @@ Bazen biçim değerleri veriye bağlıdır. Dinamik bir şekilde biçimlendirmek
 ```
 
 
-Yukarıdaki örnekteki `style={{}}` özel bir söz dizimi değil, `style={ }` [JSX süslü parantezleri](/learn/javascript-in-jsx-with-curly-braces) içinde yer alan sıradan bir `{}` nesnesidir. Biçimleriniz JavaScript değişkenlerine bağlı olduğunda yalnızca `style` kullanmanızı öneriyoruz.
+Yukarıdaki örnekteki `style={{}}` özel bir söz dizimi değil, `style={ }` [JSX süslü parantezleri](/learn/javascript-in-jsx-with-curly-braces) içinde yer alan sıradan bir `{}` nesnesidir. Stilleriniz JavaScript değişkenlerine bağlı olduğunda yalnızca `style` kullanmanızı öneriyoruz.
 
 <Sandpack>
 
@@ -815,7 +815,7 @@ export default function Avatar({ user }) {
 
 CSS sınıflarını koşulsal olarak uygulamak için `className` string'ini JavaScript'i kullanarak kendiniz üretmeniz gerekiyor.
 
-Örneğin,  `className={'row ' + (isSelected ? 'selected': '')}`, `isSelected`'ın `true` olup olmamasına göre `className="row"` veya `className="row selected"` üretecektir. 
+Örneğin, `className={'row ' + (isSelected ? 'selected': '')}`, `isSelected`'ın `true` olup olmamasına göre `className="row"` veya `className="row selected"` üretecektir. 
 
 Bunu daha okunaklı hale getirmek için [`classnames`](https://github.com/JedWatson/classnames) gibi minik yardımcı bir kütüphane kullanabilirsiniz:
 
@@ -914,7 +914,7 @@ return <div dangerouslySetInnerHTML={markup} />;
 
 **Bu tehlikelidir. Altta yatan DOM'un [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) özelliğinde olduğu gibi, son derece dikkatli kullanmanız gerekir. Eğer ki biçimlendirme (markup) çok güvenilir bir kaynaktan gelmiyorsa, bu şekilde bir [XSS](https://tr.wikipedia.org/wiki/Siteler_aras%C4%B1_betik_%C3%A7al%C4%B1%C5%9Ft%C4%B1rma) zayıflığı oluşturmak gereksizdir.**
 
-Örneğin, eğer Markdown'ı HTML'e dönüştüren bir Markdown kütüphanesi kullanıyorsanız, ayrıştırıcısında herhangi bir hata olmadığına güveniyorsanız ve kullanıcı yalnızca kendi girdisini görüyorsa, sonuçta oluşan HTML'i şöyle görebilirsiniz:
+Örneğin, eğer Markdown'ı HTML'e dönüştüren bir Markdown kütüphanesi kullanıyorsanız, ayrıştırıcısında herhangi bir hata olmadığına güveniyorsanız ve kullanıcı yalnızca kendi girdisini görüyorsa, sonuçta oluşan HTML'i şöyle görüntüleyebilirsiniz:
 
 <Sandpack>
 
@@ -998,7 +998,7 @@ export default function MarkdownPreview() {
 }
 ```
 
-HTML'de gömülü olan kod çalışacak. Bir hacker, bu güvenlik açığını kullanıcı bilgilerini çalmak veya kendi çıkarlarına eylemler yapmak için kullanabilir. **`dangerouslySetInnerHTML`'i yalnızca güvenilir ve temizlenmiş verilerle kullanın.**
+HTML'de gömülü olan kod çalışacak. Bir hacker, bu güvenlik açığını kullanıcı bilgilerini çalmak veya kendi çıkarları için kullanabilir. **`dangerouslySetInnerHTML`'i yalnızca güvenilir ve temizlenmiş verilerle kullanın.**
 
 ---
 
