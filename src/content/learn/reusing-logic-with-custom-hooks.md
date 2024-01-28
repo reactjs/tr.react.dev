@@ -19,12 +19,12 @@ React, `useState`, `useContext`, ve `useEffect` gibi birkaç yerleşik Hook ile 
 
 ## Özel Hook'lar: Bileşenler arasında mantığı paylaşma {/*custom-hooks-sharing-logic-between-components*/}
 
-Imagine you're developing an app that heavily relies on the network (as most apps do). You want to warn the user if their network connection has accidentally gone off while they were using your app. How would you go about it? It seems like you'll need two things in your component:
+Ağ'a ağır bir şekilde bağlı olan bir uygulama geliştirdiğinizi hayal edin (çoğu uygulamanın bağlı olduğu gibi). Kullanıcıyı, uygulamanızı kullanırken ağ bağlantısının yanlışlıkla kapandığı durumlarda uyarmak istersiniz. Bunu nasıl yapardınız? Bileşeninizde iki şeye ihtiyacınız olduğu gibi görünüyor:
 
-1. A piece of state that tracks whether the network is online.
-2. An Effect that subscribes to the global [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) and [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) events, and updates that state.
+1. Ağınızın çevrimiçi olup olmadığını izleyen bir state parçası.
+2. Global [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) ve [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) olaylarına abone olan ve bu state'i güncelleyen bir Effect.
 
-This will keep your component [synchronized](/learn/synchronizing-with-effects) with the network status. You might start with something like this:
+Bu sizin bileşeninizi ağ durumu ile [senkronize](/learn/synchronizing-with-effects) tutacaktır. Şöyle bir şeyle başlayabilirsiniz:
 
 <Sandpack>
 
@@ -48,17 +48,17 @@ export default function StatusBar() {
     };
   }, []);
 
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimiçi' : '❌ Bağlantı kopmuş'}</h1>;
 }
 ```
 
 </Sandpack>
 
-Try turning your network on and off, and notice how this `StatusBar` updates in response to your actions.
+Ağınızı kapatıp açmayı deneyin ve bu `StatusBar`'ın tepki olarak nasıl güncellendiğini fark edin.
 
-Now imagine you *also* want to use the same logic in a different component. You want to implement a Save button that will become disabled and show "Reconnecting..." instead of "Save" while the network is off.
+Şimdi *ek olarak* aynı mantığı farklı bir bileşende kullanmak istediğinizi hayal edin. Ağ kapalıyken "Kaydet" yerine "Yeniden bağlanıyor..." yazan ve devre dışı bırakılan bir Kaydet düğmesi uygulamak istiyorsunuz.
 
-To start, you can copy and paste the `isOnline` state and the Effect into `SaveButton`:
+Başlangıç olarak, `isOnline` state'ini ve Effect'i `SaveButton`'a kopyalayabilirsiniz:
 
 <Sandpack>
 
@@ -83,12 +83,12 @@ export default function SaveButton() {
   }, []);
 
   function handleSaveClick() {
-    console.log('✅ Progress saved');
+    console.log('✅ İlerleme kaydedildi');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? 'Save progress' : 'Reconnecting...'}
+      {isOnline ? 'İlerlemeyi kaydet' : 'Yeniden bağlanılıyor...'}
     </button>
   );
 }
@@ -96,36 +96,36 @@ export default function SaveButton() {
 
 </Sandpack>
 
-Verify that, if you turn off the network, the button will change its appearance.
+Ağı kapatırsanız, düğmenin görünümünün değiştiğini doğrulayın.
 
-These two components work fine, but the duplication in logic between them is unfortunate. It seems like even though they have different *visual appearance,* you want to reuse the logic between them.
+Bu iki bileşen iyi çalışıyor, ancak aralarındaki mantık tekrarı talihsiz. Görünen o ki farklı *görsel görünüme* sahip olsalar da, aralarındaki mantığı yeniden kullanmak istiyorsunuz.
 
-### Extracting your own custom Hook from a component {/*extracting-your-own-custom-hook-from-a-component*/}
+### Kendi özel Hook'unuzu bir bileşenden çıkarma {/*extracting-your-own-custom-hook-from-a-component*/}
 
-Imagine for a moment that, similar to [`useState`](/reference/react/useState) and [`useEffect`](/reference/react/useEffect), there was a built-in `useOnlineStatus` Hook. Then both of these components could be simplified and you could remove the duplication between them:
+Bir an için hayal edin, [`useState`](/reference/react/useState) ve [`useEffect`](/reference/react/useEffect) gibi, yerleşik bir `useOnlineStatus` Hook'u olsaydı. O zaman bu iki bileşen de basitleştirilebilir ve aralarındaki tekrarı kaldırabilirsiniz:
 
 ```js {2,7}
 function StatusBar() {
   const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimici' : '❌ Bağlantı kopmuş'}</h1>;
 }
 
 function SaveButton() {
   const isOnline = useOnlineStatus();
 
   function handleSaveClick() {
-    console.log('✅ Progress saved');
+    console.log('✅ İlerleme kaydedildi');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? 'Save progress' : 'Reconnecting...'}
+      {isOnline ? 'İlerlemeyi kaydet' : 'Yeniden bağlanılıyor...'}
     </button>
   );
 }
 ```
 
-Although there is no such built-in Hook, you can write it yourself. Declare a function called `useOnlineStatus` and move all the duplicated code into it from the components you wrote earlier:
+Yerleşik bir Hook bulunmasa da, kendiniz yazabilirsiniz. `useOnlineStatus` adında bir fonksiyon oluşturun ve daha önce yazdığınız bileşenlerdeki tekrarlanan kodu içine taşıyın:
 
 ```js {2-16}
 function useOnlineStatus() {
@@ -148,7 +148,7 @@ function useOnlineStatus() {
 }
 ```
 
-At the end of the function, return `isOnline`. This lets your components read that value:
+Fonksiyonun sonunda `isOnline`'ı döndürün. Bu, bileşenlerinizin bu değeri okumasına olanak sağlar:
 
 <Sandpack>
 
@@ -157,19 +157,19 @@ import { useOnlineStatus } from './useOnlineStatus.js';
 
 function StatusBar() {
   const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimiçi' : '❌ Bağlantı kopmuş'}</h1>;
 }
 
 function SaveButton() {
   const isOnline = useOnlineStatus();
 
   function handleSaveClick() {
-    console.log('✅ Progress saved');
+    console.log('✅ İlerleme kaydedildi');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? 'Save progress' : 'Reconnecting...'}
+      {isOnline ? 'İlerlemeyi kaydet' : 'Yeniden bağlanılıyor...'}
     </button>
   );
 }
@@ -209,62 +209,62 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-Verify that switching the network on and off updates both components.
+Ağı kapatıp açmanın iki bileşeni de güncellediğini doğrulayın.
 
-Now your components don't have as much repetitive logic. **More importantly, the code inside them describes *what they want to do* (use the online status!) rather than *how to do it* (by subscribing to the browser events).**
+Şimdi bileşenleriniz çok tekrarlı mantığa sahip değil. **Daha da önemlisi, içlerindeki kod, *nasıl yapacakları*ndan (tarayıcı olaylarına abone olarak) ziyade *ne yapmak istedikleri*ni (çevrimiçi durumu kullanın!) açıklıyor.**
 
-When you extract logic into custom Hooks, you can hide the gnarly details of how you deal with some external system or a browser API. The code of your components expresses your intent, not the implementation.
+Mantığı özel Hook'lara çıkarttığınızda, bir harici sistem ya da tarayıcı API'si ile nasıl başa çıktığınızın zorlu ayrıntılarını gizleyebilirsiniz. Bileşenlerinizin kodu, uygulamanızın nasıl yerine getirdiğinden ziyade ne yapmak istediğinizi açıklar.
 
-### Hook names always start with `use` {/*hook-names-always-start-with-use*/}
+### Hook isimleri her zaman `use` ile başlar {/*hook-names-always-start-with-use*/}
 
-React applications are built from components. Components are built from Hooks, whether built-in or custom. You'll likely often use custom Hooks created by others, but occasionally you might write one yourself!
+React uygulamaları bileşenlerden oluşur. Bileşenler yerleşik veya özel olsun, Hook'lardan oluşur. Muhtemelen sıklıkla başkaları tarafından oluşturulan özel Hook'ları kullanacaksınız, ancak arada bir kendiniz de yazabilirsiniz!
 
-You must follow these naming conventions:
+Bu isimlendirme kurallarına uymalısınız:
 
-1. **React component names must start with a capital letter,** like `StatusBar` and `SaveButton`. React components also need to return something that React knows how to display, like a piece of JSX.
-2. **Hook names must start with `use` followed by a capital letter,** like [`useState`](/reference/react/useState) (built-in) or `useOnlineStatus` (custom, like earlier on the page). Hooks may return arbitrary values.
+1. **React bileşenleri büyük harfle başlamalıdır,** `StatusBar` ve `SaveButton` gibi. React bileşenleri ayrıca, JSX gibi, React'in nasıl görüntüleyeceğini bildiği bir şey döndürmelidir.
+2. **Hook isimleri `use` ile başlayıp büyük harfle devam etmelidir,** [`useState`](/reference/react/useState) (yerleşik) veya `useOnlineStatus` (özel, yukarıdaki örnekte olduğu gibi). Hook'lar keyfi değerler döndürebilir.
 
-This convention guarantees that you can always look at a component and know where its state, Effects, and other React features might "hide". For example, if you see a `getColor()` function call inside your component, you can be sure that it can't possibly contain React state inside because its name doesn't start with `use`. However, a function call like `useOnlineStatus()` will most likely contain calls to other Hooks inside!
+Bu kural, sizin bir bileşene her baktığınızda onun state, efektleri ve diğer React özelliklerinin nerede "saklanabileceğini" bilmenizi garanti eder. Örneğin, bileşeninizde `getColor()` fonksiyonu çağrısı görürseniz, adının `use` ile başlamadığı için içinde React state'i içeremeyeceğinden emin olabilirsiniz. Ancak, `useOnlineStatus()` gibi bir fonksiyon çağrısı büyük olasılıkla içinde başka Hook'lara çağrı içerecektir!
 
 <Note>
 
-If your linter is [configured for React,](/learn/editor-setup#linting) it will enforce this naming convention. Scroll up to the sandbox above and rename `useOnlineStatus` to `getOnlineStatus`. Notice that the linter won't allow you to call `useState` or `useEffect` inside of it anymore. Only Hooks and components can call other Hooks!
+Eğer linter'ınız [React için yapılandırılmışsa,](/learn/editor-setup#linting) her zaman bu isimlendirme kuralını zorlayacaktır. Yukarıdaki sandbox'ta `useOnlineStatus`'u `getOnlineStatus` olarak yeniden adlandırın. Linter'ınızın artık onun içinde `useState` veya `useEffect` çağırmaya izin vermediğini fark edin. Sadece Hook'lar ve bileşenler diğer Hook'ları çağırabilir!
 
 </Note>
 
 <DeepDive>
 
-#### Should all functions called during rendering start with the use prefix? {/*should-all-functions-called-during-rendering-start-with-the-use-prefix*/}
+#### Render sırasında çağrılan tüm fonksiyonlar `use` ön eki ile mi başlamalıdır? {/*should-all-functions-called-during-rendering-start-with-the-use-prefix*/}
 
-No. Functions that don't *call* Hooks don't need to *be* Hooks.
+Hayır. Hook'ları *çağırmayan* fonksiyonlar Hook *olmak* zorunda değildir.
 
-If your function doesn't call any Hooks, avoid the `use` prefix. Instead, write it as a regular function *without* the `use` prefix. For example, `useSorted` below doesn't call Hooks, so call it `getSorted` instead:
+Eğer fonksiyonunuz herhangi bir Hook çağırmıyorsa, `use` ön eki kullanmayın. Bunun yerine onu `use` ön eki *bulunmayan* bir sıradan fonksiyon olarak yazın. Örneğin, aşağıdaki `useSorted`  Hook çağırmadığından, onu `getSorted` olarak çağırın:
 
 ```js
-// 🔴 Avoid: A Hook that doesn't use Hooks
+// 🔴 Kaçının: Hook kullanmayan bir Hook
 function useSorted(items) {
   return items.slice().sort();
 }
 
-// ✅ Good: A regular function that doesn't use Hooks
+// ✅ İyi: Hook kullanmayan bir sıradan fonksiyon
 function getSorted(items) {
   return items.slice().sort();
 }
 ```
 
-This ensures that your code can call this regular function anywhere, including conditions:
+Bu, kodunuzun bu sıradan fonksiyonu, koşullar dahil olmak üzere herhangi bir yerde çağırabileceğinden emin olur:
 
 ```js
 function List({ items, shouldSort }) {
   let displayedItems = items;
   if (shouldSort) {
-    // ✅ It's ok to call getSorted() conditionally because it's not a Hook
+    // ✅ Koşullu olarak getSorted() çağırmak sorun değil çünkü o bir Hook değil
     displayedItems = getSorted(items);
   }
   // ...
 }
 ```
-
+// TODO: Continue from here
 You should give `use` prefix to a function (and thus make it a Hook) if it uses at least one Hook inside of it:
 
 ```js
