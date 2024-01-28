@@ -264,34 +264,34 @@ function List({ items, shouldSort }) {
   // ...
 }
 ```
-// TODO: Continue from here
-You should give `use` prefix to a function (and thus make it a Hook) if it uses at least one Hook inside of it:
+
+Bir fonksiyon eğer bir ya da daha fazla Hook'u içeriyorsa, ona `use` ön eki vermelisiniz:
 
 ```js
-// ✅ Good: A Hook that uses other Hooks
+// ✅ İyi: Diğer Hook'ları kullanan bir Hook
 function useAuth() {
   return useContext(Auth);
 }
 ```
 
-Technically, this isn't enforced by React. In principle, you could make a Hook that doesn't call other Hooks. This is often confusing and limiting so it's best to avoid that pattern. However, there may be rare cases where it is helpful. For example, maybe your function doesn't use any Hooks right now, but you plan to add some Hook calls to it in the future. Then it makes sense to name it with the `use` prefix:
+Teknik olarak, bu React tarafından zorunlu kılınmıyor. Prensipte, başka Hook'ları çağırmayan bir Hook yapabilirsiniz. Bu genellikle kafa karıştırıcı ve limitleyicidir, bu yüzden bu örüntüden uzak durmak en iyisidir. Ancak, işe yarayacağı nadir durumlar bulunabilir. Örneğin, belki fonksiyonunu şu anda hiçbir Hook'u kullanmıyor, ancak gelecekte ona bazı Hook çağrıları eklemeyi düşünüyorsunuz. O zaman onu `use` ön eki ile adlandırmak mantıklı olur: 
 
 ```js {3-4}
-// ✅ Good: A Hook that will likely use some other Hooks later
+// ✅ İyi: Gelecekte muhtemelen başka Hook'ları kullanacak bir Hook
 function useAuth() {
-  // TODO: Replace with this line when authentication is implemented:
+  // TODO: Authentication tamamlanınca bu satırı değiştir:
   // return useContext(Auth);
   return TEST_USER;
 }
 ```
 
-Then components won't be able to call it conditionally. This will become important when you actually add Hook calls inside. If you don't plan to use Hooks inside it (now or later), don't make it a Hook.
+Bu şekilde bileşenler onu koşullu olarak çağıramayacaktır. Bu, içine Hook çağrıları eklediğinizde önemli olacaktır. Eğer onun içinde Hook kullanmayı (şimdi ya da gelecekte) planlamıyorsanız, onu bir Hook yapmayın.
 
 </DeepDive>
 
-### Custom Hooks let you share stateful logic, not state itself {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
+### Özel Hook'lar stateli mantığı paylaşmanızı sağlar, state'in kendisini değil {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
 
-In the earlier example, when you turned the network on and off, both components updated together. However, it's wrong to think that a single `isOnline` state variable is shared between them. Look at this code:
+Daha önceki bir örnekte, ağı açıp kapattığınızda, her iki bileşen de birlikte güncellendi. Ancak, onların arasında tek bir `isOnline` state değişkeninin paylaşıldığını düşünmek yanlış olur. Bu kodu inceleyin:
 
 ```js {2,7}
 function StatusBar() {
@@ -305,7 +305,7 @@ function SaveButton() {
 }
 ```
 
-It works the same way as before you extracted the duplication:
+Bu, tekrarı çıkartmanızdan önceki hali gibi çalışır:
 
 ```js {2-5,10-13}
 function StatusBar() {
@@ -325,9 +325,9 @@ function SaveButton() {
 }
 ```
 
-These are two completely independent state variables and Effects! They happened to have the same value at the same time because you synchronized them with the same external value (whether the network is on).
+Bunlar tamamen bağımsız iki state değişkenleri ve efektlerdir! Onlar rastlantısal olarak aynı anda aynı değere sahip oldular çünkü onları aynı harici değerle (ağın açık olup olmaması) senkronize ettiniz.
 
-To better illustrate this, we'll need a different example. Consider this `Form` component:
+Bunu daha iyi canlandırabilmek adına, farklı bir örnek kullanacağız. Bu `Form` bileşenini ele alın:
 
 <Sandpack>
 
@@ -349,14 +349,14 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        İsim:
         <input value={firstName} onChange={handleFirstNameChange} />
       </label>
       <label>
-        Last name:
+        Soyisim:
         <input value={lastName} onChange={handleLastNameChange} />
       </label>
-      <p><b>Good morning, {firstName} {lastName}.</b></p>
+      <p><b>Günaydınlar, {firstName} {lastName}.</b></p>
     </>
   );
 }
@@ -369,13 +369,13 @@ input { margin-left: 10px; }
 
 </Sandpack>
 
-There's some repetitive logic for each form field:
+Her form alanı için tekrarlayan bir mantık var:
 
-1. There's a piece of state (`firstName` and `lastName`).
-1. There's a change handler (`handleFirstNameChange` and `handleLastNameChange`).
-1. There's a piece of JSX that specifies the `value` and `onChange` attributes for that input.
+1. Bir parça state bulunuyor (`firstName` ve `lastName`).
+2. Bir değişim yöneticisi bulunuyor (`handleFirstNameChange` ve `handleLastNameChange`).
+3. O girdi için `value` ve `onChange` özniteliklerini belirleyen bir parça JSX bulunuyor.
 
-You can extract the repetitive logic into this `useFormInput` custom Hook:
+Bu tekrarlayan mantığı `useFormInput` özel Hook'una çıkartabilirsiniz:
 
 <Sandpack>
 
@@ -389,14 +389,14 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        İsim:
         <input {...firstNameProps} />
       </label>
       <label>
-        Last name:
+        Soyisim:
         <input {...lastNameProps} />
       </label>
-      <p><b>Good morning, {firstNameProps.value} {lastNameProps.value}.</b></p>
+      <p><b>Günaydınlar, {firstNameProps.value} {lastNameProps.value}.</b></p>
     </>
   );
 }
@@ -428,9 +428,9 @@ input { margin-left: 10px; }
 
 </Sandpack>
 
-Notice that it only declares *one* state variable called `value`.
+`value` adında sadece *bir* state değişkeni oluşturduğuna dikkat edin.
 
-However, the `Form` component calls `useFormInput` *two times:*
+Yine de, `Form` bileşeni `useFormInput`'u *iki kez* çağırıyor:
 
 ```js
 function Form() {
@@ -439,17 +439,17 @@ function Form() {
   // ...
 ```
 
-This is why it works like declaring two separate state variables!
+Bu yüzden iki ayrı state değişkeni oluşturmuş gibi çalışıyor!
 
-**Custom Hooks let you share *stateful logic* but not *state itself.* Each call to a Hook is completely independent from every other call to the same Hook.** This is why the two sandboxes above are completely equivalent. If you'd like, scroll back up and compare them. The behavior before and after extracting a custom Hook is identical.
+**Özel Hook'lar sizin *stateli mantık* paylaşmanıza olanak sağlar, *state'in kendinisi*ni değil. Bir Hook'a yapılan her çağrı aynı Hook'a yapılan tüm çağrılardan bağımsızdır.** Bu nedenle yukarıdaki iki kod alanı tamamen eşdeğerdir. İsterseniz, yukarı kayarak onları karşılaştırın. Özel bir Hook çıkartmadan önceki ve sonraki davranış tamamen aynıdır.
 
-When you need to share the state itself between multiple components, [lift it up and pass it down](/learn/sharing-state-between-components) instead.
+State'i birden fazla bileşen arasında paylaşmak istediğinizde, bunun yerine onu [yukarı kaldırın ve aşağı geçirin](/learn/sharing-state-between-components).
 
-## Passing reactive values between Hooks {/*passing-reactive-values-between-hooks*/}
+## Hook'lar arasında reaktif değerler geçirme {/*passing-reactive-values-between-hooks*/}
 
-The code inside your custom Hooks will re-run during every re-render of your component. This is why, like components, custom Hooks [need to be pure.](/learn/keeping-components-pure) Think of custom Hooks' code as part of your component's body!
+Özel Hook'larınızın içindeki kod, bileşeniniz her yeniden render edildiğinde yeniden yürütülecektir. Bu nedenle, bileşenler gibi, özel Hook'lar da [saf olmalıdır.](/learn/keeping-components-pure) Özel Hook'larınızın kodunu bileşeninizin bir parçası olarak düşünün!
 
-Because custom Hooks re-render together with your component, they always receive the latest props and state. To see what this means, consider this chat room example. Change the server URL or the chat room:
+Özel Hook'lar bileşeninizle birlikte yeniden render edildiğinden, her zaman en son prop'ları ve state'i alırlar. Bunun ne anlama geldiğini görmek için, bu sohbet odası örneğini ele alın. Sunucu URL'sini veya sohbet odasını değiştirin:
 
 <Sandpack>
 
@@ -462,14 +462,14 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="general">genel</option>
+          <option value="travel">seyahat</option>
+          <option value="music">müzik</option>
         </select>
       </label>
       <hr />
@@ -496,7 +496,7 @@ export default function ChatRoom({ roomId }) {
     };
     const connection = createConnection(options);
     connection.on('message', (msg) => {
-      showNotification('New message: ' + msg);
+      showNotification('Yeni mesaj: ' + msg);
     });
     connection.connect();
     return () => connection.disconnect();
@@ -505,15 +505,15 @@ export default function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:
+        Sunucu URL'i:
         <input value={serverUrl} onChange={e => setServerUrl(e.target.value)} />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoşgeldiniz!</h1>
     </>
   );
 }
 ```
-
+// TODO: continue from here
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
