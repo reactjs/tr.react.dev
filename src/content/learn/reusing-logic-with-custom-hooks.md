@@ -527,7 +527,7 @@ export function createConnection({ serverUrl, roomId }) {
   let messageCallback;
   return {
     connect() {
-      console.log('✅ ' + serverUrl + `'deki` + roomId + ' odasına bağlanılıyor...')
+      console.log('✅ ' + serverUrl + `'deki ` + roomId + ' odasına bağlanılıyor...')
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
@@ -542,7 +542,7 @@ export function createConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ ' + serverUrl + `'deki` + roomId + ' odasından ayrılındı')
+      console.log('❌ ' + serverUrl + `'deki ` + roomId + ' odasından ayrılındı')
     },
     on(event, callback) {
       if (messageCallback) {
@@ -735,7 +735,7 @@ export function createConnection({ serverUrl, roomId }) {
   let messageCallback;
   return {
     connect() {
-      console.log('✅ ' + serverUrl + `'deki` + roomId + ' odasına bağlanılıyor...')
+      console.log('✅ ' + serverUrl + `'deki ` + roomId + ' odasına bağlanılıyor...')
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
@@ -750,7 +750,7 @@ export function createConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ ' + serverUrl + `'deki` + roomId + ' odasından ayrılındı')
+      console.log('❌ ' + serverUrl + `'deki ` + roomId + ' odasından ayrılındı')
     },
     on(event, callback) {
       if (messageCallback) {
