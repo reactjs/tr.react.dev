@@ -289,7 +289,7 @@ Bu şekilde bileşenler onu koşullu olarak çağıramayacaktır. Bu, içine Hoo
 
 </DeepDive>
 
-### Özel Hook'lar stateli mantığı paylaşmanızı sağlar, state'in kendisini değil {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
+### Özel Hook'lar state'li mantığı paylaşmanızı sağlar, state'in kendisini değil {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
 
 Daha önceki bir örnekte, ağı açıp kapattığınızda, her iki bileşen de birlikte güncellendi. Ancak, onların arasında tek bir `isOnline` state değişkeninin paylaşıldığını düşünmek yanlış olur. Bu kodu inceleyin:
 
@@ -441,7 +441,7 @@ function Form() {
 
 Bu yüzden iki ayrı state değişkeni oluşturmuş gibi çalışıyor!
 
-**Özel Hook'lar sizin *stateli mantık* paylaşmanıza olanak sağlar, *state'in kendinisi*ni değil. Bir Hook'a yapılan her çağrı aynı Hook'a yapılan tüm çağrılardan bağımsızdır.** Bu nedenle yukarıdaki iki kod alanı tamamen eşdeğerdir. İsterseniz, yukarı kayarak onları karşılaştırın. Özel bir Hook çıkartmadan önceki ve sonraki davranış tamamen aynıdır.
+**Özel Hook'lar sizin *state'li mantık* paylaşmanıza olanak sağlar, *state'in kendinisi*ni değil. Bir Hook'a yapılan her çağrı aynı Hook'a yapılan tüm çağrılardan bağımsızdır.** Bu nedenle yukarıdaki iki kod alanı tamamen eşdeğerdir. İsterseniz, yukarı kayarak onları karşılaştırın. Özel bir Hook çıkartmadan önceki ve sonraki davranış tamamen aynıdır.
 
 State'i birden fazla bileşen arasında paylaşmak istediğinizde, bunun yerine onu [yukarı kaldırın ve aşağı geçirin](/learn/sharing-state-between-components).
 
