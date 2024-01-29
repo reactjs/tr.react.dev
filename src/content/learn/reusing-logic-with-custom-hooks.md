@@ -513,28 +513,28 @@ export default function ChatRoom({ roomId }) {
   );
 }
 ```
-// TODO: continue from here
+
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanacaktır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error(`serverUrl'in bir string olması bekleniyordu. Alınan: ` + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error(`roomId'nin bir string olması bekleniyordu. Alınan: ` + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl + `'deki` + roomId + ' odasına bağlanılıyor...')
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
           if (Math.random() > 0.5) {
             messageCallback('hey')
           } else {
-            messageCallback('lol');
+            messageCallback('acayip komik');
           }
         }
       }, 3000);
@@ -542,14 +542,14 @@ export function createConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl + '');
+      console.log('❌ ' + serverUrl + `'deki` + roomId + ' odasından ayrılındı')
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İki kez yönetici eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Sadece "message" olayı destekleniyor.');
       }
       messageCallback = callback;
     },
@@ -599,9 +599,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-When you change `serverUrl` or `roomId`, the Effect ["reacts" to your changes](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) and re-synchronizes. You can tell by the console messages that the chat re-connects every time that you change your Effect's dependencies.
+`serverUrl` ya da `roomId`'yi değiştirdiğinizde, efekt [değişikliklerinize "tepki verir"](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) ve yeniden senkronize olur. Konsol mesajlarından, efekt'in bağlı olduğu değerleri her değiştirdiğinizde sohbetin yeniden bağlandığını görebilirsiniz.
 
-Now move the Effect's code into a custom Hook:
+Şimdi efekt'in kodunu özel bir Hook'a taşıyın:
 
 ```js {2-13}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -613,14 +613,14 @@ export function useChatRoom({ serverUrl, roomId }) {
     const connection = createConnection(options);
     connection.connect();
     connection.on('message', (msg) => {
-      showNotification('New message: ' + msg);
+      showNotification('Yeni mesaj: ' + msg);
     });
     return () => connection.disconnect();
   }, [roomId, serverUrl]);
 }
 ```
 
-This lets your `ChatRoom` component call your custom Hook without worrying about how it works inside:
+Bu `ChatRoom` bileşeninizin özel Hook'unuzun içinde nasıl çalıştığıyla ilgilenmeden onu çağırmasına olanak sağlar:
 
 ```js {4-7}
 export default function ChatRoom({ roomId }) {
@@ -634,18 +634,18 @@ export default function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:
+        Sunucu URL'i:
         <input value={serverUrl} onChange={e => setServerUrl(e.target.value)} />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoşgeldiniz!</h1>
     </>
   );
 }
 ```
 
-This looks much simpler! (But it does the same thing.)
+Bu çok daha basit görünüyor! (Ama aynı şeyi yapıyor.)
 
-Notice that the logic *still responds* to prop and state changes. Try editing the server URL or the selected room:
+Mantığın prop ve state değişikliklerine *hala tepki verdiğine* dikkat edin. Sunucu URL'sini veya seçilen odayı düzenlemeyi deneyin:
 
 <Sandpack>
 
@@ -658,14 +658,14 @@ export default function App() {
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="general">genel</option>
+          <option value="travel">seyahat</option>
+          <option value="music">müzik</option>
         </select>
       </label>
       <hr />
@@ -692,10 +692,10 @@ export default function ChatRoom({ roomId }) {
   return (
     <>
       <label>
-        Server URL:
+        Sunucu URL'i:
         <input value={serverUrl} onChange={e => setServerUrl(e.target.value)} />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoşgeldiniz!</h1>
     </>
   );
 }
@@ -715,7 +715,7 @@ export function useChatRoom({ serverUrl, roomId }) {
     const connection = createConnection(options);
     connection.connect();
     connection.on('message', (msg) => {
-      showNotification('New message: ' + msg);
+      showNotification('Yeni mesaj: ' + msg);
     });
     return () => connection.disconnect();
   }, [roomId, serverUrl]);
@@ -724,25 +724,25 @@ export function useChatRoom({ serverUrl, roomId }) {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanacaktır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error(`serverUrl'in bir string olması bekleniyordu. Alınan: ` + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error(`roomId'nin bir string olması bekleniyordu. Alınan: ` + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ ' + serverUrl + `'deki` + roomId + ' odasına bağlanılıyor...')
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
           if (Math.random() > 0.5) {
             messageCallback('hey')
           } else {
-            messageCallback('lol');
+            messageCallback('acayip komik');
           }
         }
       }, 3000);
@@ -750,14 +750,14 @@ export function createConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl + '');
+      console.log('❌ ' + serverUrl + `'deki` + roomId + ' odasından ayrılındı')
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İki kez yönetici eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Sadece "message" olayı destekleniyor.');
       }
       messageCallback = callback;
     },
@@ -806,7 +806,7 @@ button { margin-left: 10px; }
 ```
 
 </Sandpack>
-
+// TODO: Continue from here
 Notice how you're taking the return value of one Hook:
 
 ```js {2}
