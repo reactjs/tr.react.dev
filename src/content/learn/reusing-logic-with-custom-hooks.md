@@ -458,7 +458,7 @@ import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
@@ -467,9 +467,9 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">genel</option>
-          <option value="travel">seyahat</option>
-          <option value="music">müzik</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
@@ -654,7 +654,7 @@ import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
@@ -663,9 +663,9 @@ export default function App() {
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">genel</option>
-          <option value="travel">seyahat</option>
-          <option value="music">müzik</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
