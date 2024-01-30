@@ -487,14 +487,6 @@ function FilterableProductTable({ products }) {
 
 `SearchBar`'ın içinde, `onChange` olay yöneticilerini ekleyip, onlar aracılığıyla üst bileşenin state'ini güncelleyeceksiniz:
 
-<<<<<<< HEAD
-```js {5}
-<input 
-  type="text" 
-  value={filterText} 
-  placeholder="Ara..." 
-  onChange={(e) => onFilterTextChange(e.target.value)} />
-=======
 ```js {4,5,13,19}
 function SearchBar({
   filterText,
@@ -507,7 +499,7 @@ function SearchBar({
       <input
         type="text"
         value={filterText}
-        placeholder="Search..."
+        placeholder="Ara..."
         onChange={(e) => onFilterTextChange(e.target.value)}
       />
       <label>
@@ -515,7 +507,6 @@ function SearchBar({
           type="checkbox"
           checked={inStockOnly}
           onChange={(e) => onInStockOnlyChange(e.target.checked)}
->>>>>>> 5d2f7105bd6374e465b8bdce8efceaeb8f01c937
 ```
 
 Uygulama şimdi tamamen çalışıyor!
