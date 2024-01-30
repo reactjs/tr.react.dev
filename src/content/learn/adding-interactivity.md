@@ -646,7 +646,6 @@ State içerisinde saklayabileceğiniz bir diğer değiştirilebilir JavaScript n
 ```js
 import { useState } from 'react';
 
-let nextId = 3;
 const initialList = [
   { id: 0, title: 'Big Bellies', seen: false },
   { id: 1, title: 'Lunar Landscape', seen: false },
@@ -714,7 +713,6 @@ Eğer dizileri kopyalamak zor bir hale geldiyse, tekrarlı hale gelen kodu azalt
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 
-let nextId = 3;
 const initialList = [
   { id: 0, title: 'Big Bellies', seen: false },
   { id: 1, title: 'Lunar Landscape', seen: false },
