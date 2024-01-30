@@ -51,7 +51,7 @@ Sonraki render işlemlerinde, `useRef` aynı nesneyi döndürecektir.
 * `ref.current` özelliğini değiştirebilirsiniz. State'in aksine, bu değiştirilebilirdir. Ancak, render için kullanılan bir nesne tutuyorsa (örneğin, State'inizin bir parçası), o nesneyi değiştirmemelisiniz.
 * `ref.current` özelliğini değiştirdiğinizde, React bileşeninizi yeniden render etmez. Ref, düz JavaScript bir nesne olduğundan, ne zaman değiştirdiğinizi React fark etmez.
 * Bileşeninizin davranışını öngörülemez hale getireceğinden render işlemi sırasında, `ref.current`'e yazmayın veya okumayın. Ancak [başlangıçta](#avoiding-recreating-the-ref-contents) yapabilirsiniz.
-* Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu, davranışı etkilememelidir
+* Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](/reference/react/useState#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu, davranışı etkilememelidir
 
 ---
 

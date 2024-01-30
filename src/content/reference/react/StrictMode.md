@@ -138,7 +138,7 @@ Aşağıdaki `StoryTray` bileşeni bir `stories` dizisini alır ve sonuna "Creat
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -148,7 +148,7 @@ const root = createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
@@ -173,7 +173,7 @@ export default function App() {
 }
 ```
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   const items = stories;
   items.push({ id: 'create', label: 'Hikaye Oluştur' });
@@ -215,7 +215,7 @@ Yukardaki kodda ilk çıktı doğru olduğu için gözden kaçırmanın çok kol
 Bu hata `StoryTray` bileşeni birden fazla kez render edilirse daha çok göze çarpar. Örneğin, `StoryTray`'i imleç ile üzerine geldiğinizde arka plan rengi değişecek şekilde yeniden render edelim: 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -225,7 +225,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
@@ -250,7 +250,7 @@ export default function App() {
 }
 ```
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 import { useState } from 'react';
 
 export default function StoryTray({ stories }) {
@@ -313,7 +313,7 @@ Bu değişiklik [`StoryTray` fonksiyonunu saflaştıracaktır.](/learn/keeping-c
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -328,7 +328,7 @@ root.render(
 );
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
@@ -353,7 +353,7 @@ export default function App() {
 }
 ```
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   const items = stories;
   items.push({ id: 'create', label: 'Hikaye Oluştur' });
@@ -394,7 +394,7 @@ li {
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -409,7 +409,7 @@ root.render(
 );
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import StoryTray from './StoryTray.js';
 
@@ -434,7 +434,7 @@ export default function App() {
 }
 ```
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 import { useState } from 'react';
 
 export default function StoryTray({ stories }) {
@@ -506,7 +506,7 @@ Bir bileşeni sohbete bağlayan bu örneği ele alalım:
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -532,7 +532,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
@@ -565,7 +565,7 @@ Hatayı daha bariz yapmak için bazı özellikler ekleyelim. Aşağıdaki örnek
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -616,7 +616,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
@@ -658,7 +658,7 @@ Efektiniz artık kendi kendini "temizlediği" ve süresi dolan bağlantıları k
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -689,7 +689,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {
@@ -722,7 +722,7 @@ Strict Modu bunun gibi hataları daha erken farketmenizi sağlar. Efektinizi, St
 
 <Sandpack>
 
-```js index.js
+```js src/index.js
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -779,7 +779,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 let connections = 0;
 
 export function createConnection(serverUrl, roomId) {

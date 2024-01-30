@@ -77,7 +77,7 @@ Uygulamanızı, hiyerarşide daha yukarıdaki (örneğin, `FilterableProductTabl
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 function ProductCategoryRow({ category }) {
   return (
     <tr>
@@ -295,7 +295,7 @@ Uygulamanızın nasıl davranacağını görmeye başlayabilirsiniz. Aşağıdak
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 import { useState } from 'react';
 
 function FilterableProductTable({ products }) {
@@ -487,19 +487,33 @@ function FilterableProductTable({ products }) {
 
 `SearchBar`'ın içinde, `onChange` olay yöneticilerini ekleyip, onlar aracılığıyla üst bileşenin state'ini güncelleyeceksiniz:
 
-```js {5}
-<input 
-  type="text" 
-  value={filterText} 
-  placeholder="Ara..." 
-  onChange={(e) => onFilterTextChange(e.target.value)} />
+```js {4,5,13,19}
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Ara..."
+        onChange={(e) => onFilterTextChange(e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(e) => onInStockOnlyChange(e.target.checked)}
 ```
 
 Uygulama şimdi tamamen çalışıyor!
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 import { useState } from 'react';
 
 function FilterableProductTable({ products }) {

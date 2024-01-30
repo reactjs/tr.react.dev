@@ -771,7 +771,7 @@ Yukarıdaki örnekteki `style={{}}` özel bir söz dizimi değil, `style={ }` [J
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Avatar from './Avatar.js';
 
 const user = {
@@ -785,7 +785,7 @@ export default function App() {
 }
 ```
 
-```js Avatar.js active
+```js src/Avatar.js active
 export default function Avatar({ user }) {
   return (
     <img
@@ -801,7 +801,7 @@ export default function Avatar({ user }) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 .avatar {
   border-radius: 50%;
 }
@@ -940,7 +940,7 @@ export default function MarkdownEditor() {
 }
 ```
 
-```js MarkdownPreview.js active
+```js src/MarkdownPreview.js active
 import { Remarkable } from 'remarkable';
 
 const md = new Remarkable();
@@ -982,6 +982,8 @@ textarea { display: block; margin-top: 5px; margin-bottom: 10px; }
 ```
 
 </Sandpack>
+
+`{__html}` nesnesi, yukarıdaki örnekte `renderMarkdownToHTML` olduğu gibi, HTML'nin oluşturulduğu yere mümkün olduğunca yakın oluşturulmalıdır. Bu, kodunuzda kullanılan tüm ham HTML'nin açıkça bu şekilde işaretlenmesini ve yalnızca HTML içermesini beklediğiniz değişkenlerin `dangerouslySetInnerHTML`'ye iletilmesini sağlar. Nesnenin satır içi olarak `<div dangerouslySetInnerHTML={{__html: markup}} />` gibi oluşturulması önerilmez.
 
 Gelişigüzel HTML'i render etmenin neden tehlikeli olduğunu görmek için yukarıdaki kod yerine şunu koyun:
 

@@ -64,7 +64,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -74,7 +74,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 export default function Heading({ level, children }) {
   switch (level) {
     case 1:
@@ -138,7 +138,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -148,7 +148,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 export default function Heading({ level, children }) {
   switch (level) {
     case 1:
@@ -260,7 +260,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -270,7 +270,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 export default function Heading({ level, children }) {
   switch (level) {
     case 1:
@@ -291,7 +291,7 @@ export default function Heading({ level, children }) {
 }
 ```
 
-```js LevelContext.js active
+```js src/LevelContext.js active
 import { createContext } from 'react';
 
 export const LevelContext = createContext(1);
@@ -390,7 +390,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -400,7 +400,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -425,7 +425,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(1);
@@ -508,7 +508,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 import { LevelContext } from './LevelContext.js';
 
 export default function Section({ level, children }) {
@@ -522,7 +522,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -547,7 +547,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(1);
@@ -587,7 +587,7 @@ export default function Page() {
 
 Context, üstteki bileşenlerden bilgi okumanıza izin verdiğinden, her `Section` üstündeki `Section`'dan `level` değerini okuyarak `level + 1` değerini otomatik olarak aşağıya aktarabilir. Bunu nasıl yapabileceğinize dair bir örnek:
 
-```js Section.js {5,8}
+```js src/Section.js {5,8}
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -635,7 +635,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -651,7 +651,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -678,7 +678,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(0);
@@ -766,7 +766,7 @@ function Post({ title, body }) {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -785,7 +785,7 @@ export default function Section({ children, isFancy }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -812,7 +812,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(0);
@@ -891,7 +891,7 @@ Context tanımını `Context.js` dosyasında yapabilirsiniz.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { places } from './data.js';
 import { getImageUrl } from './utils.js';
@@ -956,11 +956,11 @@ function PlaceImage({ place, imageSize }) {
 }
 ```
 
-```js Context.js
+```js src/Context.js
 
 ```
 
-```js data.js
+```js src/data.js
 export const places = [{
   id: 0,
   name: 'Cape Town, Güney Afrika\'da Bo-Kaap',
@@ -999,7 +999,7 @@ export const places = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(place) {
   return (
     'https://i.imgur.com/' +
@@ -1030,7 +1030,7 @@ li {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useContext } from 'react';
 import { places } from './data.js';
 import { getImageUrl } from './utils.js';
@@ -1093,13 +1093,13 @@ function PlaceImage({ place }) {
 }
 ```
 
-```js Context.js
+```js src/Context.js
 import { createContext } from 'react';
 
 export const ImageSizeContext = createContext(500);
 ```
 
-```js data.js
+```js src/data.js
 export const places = [{
   id: 0,
   name: 'Cape Town, Güney Afrika\'da Bo-Kaap',
@@ -1143,7 +1143,7 @@ export const places = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(place) {
   return (
     'https://i.imgur.com/' +

@@ -42,8 +42,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### Uyarılar {/*caveats*/}
 
-* Katı Mod (Strict Mode) ile, React render fonksiyonunuzu **iki kez çağırarak** [istemeden yapılan hataları bulmanızı kolaylaştırır](#my-initializer-or-updater-function-runs-twice). Bu, yalnızca geliştirme ortamı davranışıdır ve canlı ortamı etkilemez. Eğer render fonksiyonunuz saf (olması gerektiği gibi) ise, bu bileşenin işleyişine zarar vermemelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
-
+* Katı Mod (Strict Mode) ile, React render fonksiyonunuzu **iki kez çağırarak** [istemeden yapılan hataları bulmanızı kolaylaştırır](/reference/react/useState#my-initializer-or-updater-function-runs-twice). Bu, yalnızca geliştirme ortamı davranışıdır ve canlı ortamı etkilemez. Eğer render fonksiyonunuz saf (olması gerektiği gibi) ise, bu bileşenin işleyişine zarar vermemelidir. Çağrılardan birinin sonucu göz ardı edilecektir.
 
 ---
 
@@ -165,7 +164,7 @@ export default function Form() {
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -223,7 +222,7 @@ export default function App() {
 }
 ```
 
-```js MyVideoPlayer.js
+```js src/MyVideoPlayer.js
 import { forwardRef } from 'react';
 
 const VideoPlayer = forwardRef(function VideoPlayer({ src, type, width }, ref) {
@@ -316,7 +315,7 @@ export default function Form() {
 }
 ```
 
-```js FormField.js
+```js src/FormField.js
 import { forwardRef, useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -341,7 +340,7 @@ export default FormField;
 ```
 
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef((props, ref) => {
@@ -433,7 +432,7 @@ export default function Form() {
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef, useRef, useImperativeHandle } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
