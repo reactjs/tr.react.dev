@@ -462,7 +462,7 @@ export default function App() {
   return (
     <>
       <label>
-        Sohbet odasını seçin:{' '}
+        Sohbet odasını seçiniz:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
@@ -658,7 +658,7 @@ export default function App() {
   return (
     <>
       <label>
-        Sohbet odasını seçin:{' '}
+        Sohbet odasını seçiniz:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
@@ -806,8 +806,8 @@ button { margin-left: 10px; }
 ```
 
 </Sandpack>
-// TODO: Continue from here
-Notice how you're taking the return value of one Hook:
+
+Bir Hook'un dönüş değerini alıp:
 
 ```js {2}
 export default function ChatRoom({ roomId }) {
@@ -820,7 +820,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-and pass it as an input to another Hook:
+başka bir Hook'a girdi olarak nasıl verdiğinizi farkedin:
 
 ```js {6}
 export default function ChatRoom({ roomId }) {
@@ -833,17 +833,17 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-Every time your `ChatRoom` component re-renders, it passes the latest `roomId` and `serverUrl` to your Hook. This is why your Effect re-connects to the chat whenever their values are different after a re-render. (If you ever worked with audio or video processing software, chaining Hooks like this might remind you of chaining visual or audio effects. It's as if the output of `useState` "feeds into" the input of the `useChatRoom`.)
+`ChatRoom` bileşeniniz her yeniden render edildiğinde, `roomId` ve `serverUrl`'in son hallerini Hook'unuza verir. Bu, bir yeniden render'dan sonra değerleri her değiştikten sonra Efekt'inizin sohbete yeniden bağlanmasının nedenidir. (Eğer önceden ses ya da video işleme yazılımı ile uğraştıysanız, Hook'ları bu şekilde zincirlemek size görsel ya da ses efektlerini zincirlemeyi hatırlatabilir. Adeta `useState`'in çıktısı `useChatRoom`'un girdisine "besleniyor" gibi.)
 
-### Passing event handlers to custom Hooks {/*passing-event-handlers-to-custom-hooks*/}
+### Olay yöneticilerini özel Hook'lara geçirme {/*passing-event-handlers-to-custom-hooks*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölüm **henüz kararlı bir sürümde yayınlanmamış olan deneysel bir API'yi** açıklar.
 
 </Wip>
 
-As you start using `useChatRoom` in more components, you might want to let components customize its behavior. For example, currently, the logic for what to do when a message arrives is hardcoded inside the Hook:
+`useChatRoom`'u daha fazla bileşende kullanmaya başladıkça, bileşenlerin onun davranışını özelleştirmesine izin vermek isteyebilirsiniz. Örneğin, şu anda, bir mesaj geldiğinde ne yapılacağının mantığı Hook'un içine sabit kodlanmış durumda:
 
 ```js {9-11}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -855,14 +855,14 @@ export function useChatRoom({ serverUrl, roomId }) {
     const connection = createConnection(options);
     connection.connect();
     connection.on('message', (msg) => {
-      showNotification('New message: ' + msg);
+      showNotification('Yeni mesaj: ' + msg);
     });
     return () => connection.disconnect();
   }, [roomId, serverUrl]);
 }
 ```
 
-Let's say you want to move this logic back to your component:
+Diyelim ki bu mantığı bileşeninize geri taşımak istiyorsunuz:
 
 ```js {7-9}
 export default function ChatRoom({ roomId }) {
@@ -872,13 +872,13 @@ export default function ChatRoom({ roomId }) {
     roomId: roomId,
     serverUrl: serverUrl,
     onReceiveMessage(msg) {
-      showNotification('New message: ' + msg);
+      showNotification('Yeni mesaj: ' + msg);
     }
   });
   // ...
 ```
 
-To make this work, change your custom Hook to take `onReceiveMessage` as one of its named options:
+Bunun çalışmasını sağlamak için, özel Hook'unuzu adlandırılmış seçeneklerinden biri olarak `onReceiveMessage`'ı alacak şekilde değiştirin:
 
 ```js {1,10,13}
 export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
@@ -893,13 +893,13 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
       onReceiveMessage(msg);
     });
     return () => connection.disconnect();
-  }, [roomId, serverUrl, onReceiveMessage]); // ✅ All dependencies declared
+  }, [roomId, serverUrl, onReceiveMessage]); // ✅ Tüm bağımlılıklar bildirildi
 }
 ```
 
-This will work, but there's one more improvement you can do when your custom Hook accepts event handlers.
+Bu çalışacaktır, ancak özel Hook'unuz olay yöneticilerini kabul ediyorsa yapabileceğiniz bir geliştirme daha var.
 
-Adding a dependency on `onReceiveMessage` is not ideal because it will cause the chat to re-connect every time the component re-renders. [Wrap this event handler into an Effect Event to remove it from the dependencies:](/learn/removing-effect-dependencies#wrapping-an-event-handler-from-the-props)
+`onReceiveMessage`'a bir bağımlılık eklemek ideal değildir çünkü bileşen her yeniden render edildiğinde sohbetin yeniden bağlanmasına neden olacaktır. [Bu olay yöneticisini bağımlılıklardan çıkartmak için bir Efekt Olayı'na sarın:](/learn/removing-effect-dependencies#wrapping-an-event-handler-from-the-props)
 
 ```js {1,4,5,15,18}
 import { useEffect, useEffectEvent } from 'react';
@@ -919,11 +919,11 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
       onMessage(msg);
     });
     return () => connection.disconnect();
-  }, [roomId, serverUrl]); // ✅ All dependencies declared
+  }, [roomId, serverUrl]); // ✅ Tüm bağımlılıklar bildirildi
 }
 ```
 
-Now the chat won't re-connect every time that the `ChatRoom` component re-renders. Here is a fully working demo of passing an event handler to a custom Hook that you can play with:
+Şimdi sohbet, `ChatRoom` bileşeni her yeniden render edildiğinde yeniden bağlanmayacaktır. Burada özel bir Hook'a bir olay yöneticisi geçirmekle ilgili oynayabileceğiniz tamamen çalışan bir demo var:
 
 <Sandpack>
 
@@ -932,18 +932,18 @@ import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçiniz:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">genel</option>
+          <option value="seyahat">seyahat</option>
+          <option value="müzik">müzik</option>
         </select>
       </label>
       <hr />
@@ -967,17 +967,17 @@ export default function ChatRoom({ roomId }) {
     roomId: roomId,
     serverUrl: serverUrl,
     onReceiveMessage(msg) {
-      showNotification('New message: ' + msg);
+      showNotification('Yeni mesaj: ' + msg);
     }
   });
 
   return (
     <>
       <label>
-        Server URL:
+        Sunucu URL'i:
         <input value={serverUrl} onChange={e => setServerUrl(e.target.value)} />
       </label>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoşgeldiniz!</h1>
     </>
   );
 }
