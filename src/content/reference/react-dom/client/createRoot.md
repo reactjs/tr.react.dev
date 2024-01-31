@@ -20,7 +20,7 @@ const root = createRoot(domNode, options?)
 
 ### `createRoot(domNode, options?)` {/*createroot*/}
 
-İçeriği bir tarayıcı DOM öğesi içinde görüntülemek üzere bir React kökü oluşturmak için `createRoot` çağrısı yapın.
+İçeriği bir tarayıcı DOM elemanı içinde görüntülemek üzere bir React kökü oluşturmak için `createRoot` çağrısı yapın.
 
 ```js
 import { createRoot } from 'react-dom/client';
@@ -54,8 +54,8 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle kök bileşeni için ya
 
 #### Uyarılar {/*caveats*/}
 * Uygulamanız sunucu tarafından oluşturulmuşsa, `createRoot()` kullanımı desteklenmez. Bunun yerine [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) kullanın.
-* Uygulamanızda muhtemelen yalnızca bir `createRoot` çağrısı olacaktır. Eğer bir framework kullanıyorsanız, bu çağrıyı sizin için yapabilir.
-* Bileşeninizin alt öğesi olmayan DOM ağacının farklı bir bölümünde bir JSX parçası oluşturmak istediğinizde (örneğin, bir modal veya bir araç ipucu), `createRoot` yerine [`createPortal`](/reference/react-dom/createPortal) kullanın.
+* Uygulamanızda muhtemelen yalnızca bir `createRoot` çağrısı olacaktır. Eğer bir çatı kullanıyorsanız, bu çağrıyı sizin için yapabilir.
+* Bileşeninizin alt öğesi olmayan DOM ağacının farklı bir bölümünde bir JSX parçası render etmek istediğinizde (örneğin, bir modal veya bir araç ipucu), `createRoot` yerine [`createPortal`](/reference/react-dom/createPortal) kullanın.
 
 ---
 
@@ -73,7 +73,7 @@ React, `root` içinde `<App />` gösterecek ve içindeki DOM'un yönetimini üst
 
 #### Parametreler {/*root-render-parameters*/}
 
-* Parametreler`reactNode`: Görüntülemek istediğiniz bir *React düğümü*. Bu genellikle `<App />` gibi bir JSX parçası olacaktır, ancak [`createElement()`](/reference/react/createElement) ile oluşturulmuş bir React öğesi, bir dize, bir sayı, `null` veya `undefined` da iletebilirsiniz.
+* `reactNode`: Görüntülemek istediğiniz bir *React düğümü*. Bu genellikle `<App />` gibi bir JSX parçası olacaktır, ancak [`createElement()`](/reference/react/createElement) ile oluşturulmuş bir React elemanı, bir string, bir sayı, `null` veya `undefined` da iletebilirsiniz.
 
 
 #### Döndürülenler {/*root-render-returns*/}
@@ -82,27 +82,27 @@ React, `root` içinde `<App />` gösterecek ve içindeki DOM'un yönetimini üst
 
 #### Uyarılar {/*root-render-caveats*/}
 
-* İlk kez `root.render` fonksiyonunu çağırdığınız zaman. React, React bileşenini içine render etmeden önce React kökü içindeki mevcut tüm HTML içeriğini temizleyecektir.
+* İlk kez `root.render` fonksiyonunu çağırdığınız zaman React, React bileşenini render etmeden önce React kökü içindeki mevcut tüm HTML içeriğini temizleyecektir.
 
-* Kök DOM düğümünüz sunucuda veya derleme sırasında React tarafından oluşturulan HTML içeriyorsa, bunun yerine olay işleyicilerini mevcut HTML'ye ekleyen [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) işlevini kullanın.
+* Kök DOM düğümünüz sunucuda veya derleme sırasında React tarafından oluşturulan HTML içeriyorsa, bunun yerine olay işleyicilerini mevcut HTML'ye ekleyen [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) fonksiyonunu kullanın.
 
-* Aynı kök üzerinde birden fazla kez `render` çağrısı yaparsanız, React ilettiğiniz en son JSX'i yansıtmak için DOM'u gerektiği gibi güncelleyecektir. React, DOM'un hangi bölümlerinin yeniden kullanılabileceğine ve hangilerinin yeniden oluşturulması gerektiğine ["eşleştirerek"](/learn/preserving-and-resetting-state) daha önce oluşturulmuş ağaçla karar verecektir. Aynı kök üzerinde `render` fonksiyonunu tekrar çağırmak, kök bileşen üzerinde [`set` fonksiyonunu](/reference/react/useState#setstate) çağırmaya benzer: React gereksiz DOM güncellemelerinden kaçınır.
+* Aynı kök üzerinde birden fazla kez `render` çağrısı yaparsanız, React ilettiğiniz en son JSX'i yansıtmak için DOM'u gerektiği gibi güncelleyecektir. React, DOM'un hangi bölümlerinin yeniden kullanılabileceğine ve hangilerinin yeniden oluşturulması gerektiğine daha önce oluşturulmuş ağaçla ["eşleştirerek"](/learn/preserving-and-resetting-state) daha önce oluşturulmuş ağaçla karar verecektir. Aynı kök üzerinde `render` fonksiyonunu tekrar çağırmak, kök bileşen üzerinde [`set` fonksiyonunu](/reference/react/useState#setstate) çağırmaya benzer: React gereksiz DOM güncellemelerinden kaçınır.
 
 ---
 
 ### `root.unmount()` {/*root-unmount*/}
 
-React kökü içindeki işlenmiş bir ağacı yok etmek için `root.unmount` çağırın.
+React kökü içinde render edilmiş bir ağacı yok etmek için `root.unmount` çağırın.
 
 ```js
 root.unmount();
 ```
 
-Tamamen React ile oluşturulan bir uygulamada genellikle `root.unmount` için herhangi bir çağrıya gerek olmayacaktır.
+Tamamen React ile oluşturulan bir uygulamada genellikle `root.unmount` çağrısı olmayacaktır.
 
 Bu, çoğunlukla React kök DOM düğümünüzün (veya atalarından herhangi birinin) başka bir kod tarafından DOM'dan kaldırılabileceği durumlarda kullanışlıdır. Örneğin, etkin olmayan sekmeleri DOM'dan kaldıran bir jQuery sekme paneli düşünün. Bir sekme kaldırılırsa, içindeki her şey (içindeki React kökleri de dahil olmak üzere) DOM'dan da kaldırılacaktır. Bu durumda, React'e `root.unmount` çağrısı yaparak kaldırılan kökün içeriğini yönetmeyi "durdurmasını" söylemeniz gerekir. Aksi takdirde, kaldırılan kökün içindeki bileşenler, abonelikler gibi global kaynakları temizlemeyi ve boşaltmayı bilemez.
 
-`root.unmount` çağrısı, ağaçtaki tüm olay işleyicilerini veya durumu kaldırmak da dahil olmak üzere, kökteki tüm bileşenlerin bağlantısını kaldıracak ve React'i kök DOM düğümünden "ayıracaktır".
+`root.unmount` çağrısı, ağaçtaki tüm olay yöneticilerini veya state'i kaldırmak da dahil olmak üzere, kökteki tüm bileşenleri DOM'dan kaldıracak ve React'i kök DOM düğümünden "ayıracaktır".
 
 
 #### Parametreler {/*root-unmount-parameters*/}
@@ -116,7 +116,7 @@ Bu, çoğunlukla React kök DOM düğümünüzün (veya atalarından herhangi bi
 
 #### Uyarılar {/*root-unmount-caveats*/}
 
-* `root.unmount` çağrısı, ağaçtaki tüm bileşenlerin bağlantısını kaldıracak ve React'i kök DOM düğümünden "ayıracaktır".
+* `root.unmount` çağrısı, ağaçtaki tüm bileşenleri DOM'dan kaldıracak ve React'i kök DOM düğümünden "ayıracaktır".
 
 * Bir kez `root.unmount` çağrısı yaptığınızda, aynı kök üzerinde tekrar `root.render` çağrısı yapamazsınız. Bağlanmamış bir kök üzerinde `root.render` çağrılmaya çalışıldığında "Bağlanmamış bir kök güncellenemiyor" hatası verilir. Ancak, aynı DOM düğümü için önceki kökün bağlantısı kaldırıldıktan sonra yeni bir kök oluşturabilirsiniz.
 
@@ -186,7 +186,7 @@ function Counter() {
 
 </Sandpack>
 
-**Eğer Uygulamanız tamamen React ile oluşturulmuşsa, daha fazla kök oluşturmanız veya [`root.render`](#root-render)'ı tekrar çağırmanız gerekmez.** 
+**Eğer uygulamanız tamamen React ile oluşturulmuşsa, daha fazla kök oluşturmanız veya [`root.render`](#root-render)'ı tekrar çağırmanız gerekmez.** 
 
 Bu noktadan itibaren React tüm uygulamanızın DOM'unu yönetecektir. Daha fazla bileşen eklemek için, [bunları `App` bileşeninin içine yerleştirin.](/learn/importing-and-exporting-components) Kullanıcı arayüzünü güncellemeniz gerektiğinde, bileşenlerinizin her biri bunu [state kullanarak yapabilir.](/reference/react/useState) DOM düğümünün dışında bir modal veya araç ipucu gibi ekstra içerik görüntülemeniz gerektiğinde, [bunu bir portal ile oluşturun.](/reference/react-dom/createPortal)
 
@@ -198,13 +198,13 @@ HTML'niz boş olduğunda, uygulamanın JavaScript kodu yüklenip çalışana kad
 <div id="root"></div>
 ```
 
-Bu çok yavaş hissettirebilir! Bunu çözmek için, bileşenlerinizden [sunucuda veya derleme sırasında] ilk HTML'yi oluşturabilirsiniz (/reference/react-dom/server) Ardından ziyaretçileriniz JavaScript kodunun herhangi biri yüklenmeden önce metin okuyabilir, resimleri görebilir ve bağlantıları tıklayabilir. Bu optimizasyonu otomatik olarak yapan [bir framework kullanmanızı](/learn/start-a-new-react-project#production-grade-react-frameworks) öneririz. Ne zaman çalıştığına bağlı olarak buna *sunucu tarafı oluşturma (SSR)* veya *statik site oluşturma (SSG)* denir.
+Bu çok yavaş hissettirebilir! Bunu çözmek için, bileşenlerinizden [sunucuda veya derleme sırasında] ilk HTML'yi oluşturabilirsiniz. (/reference/react-dom/server) Ardından ziyaretçileriniz JavaScript kodunun herhangi biri yüklenmeden önce metin okuyabilir, resimleri görebilir ve bağlantılara tıklayabilir. Bu optimizasyonu otomatik olarak yapan [bir framework kullanmanızı](/learn/start-a-new-react-project#production-grade-react-frameworks) öneririz. Ne zaman çalıştığına bağlı olarak buna *sunucu taraflı render etme (SSR)* veya *statik site oluşturma (SSG)* denir.
 
 </Note>
 
 <Pitfall>
 
-**Sunucu oluşturma veya statik oluşturma kullanan uygulamalar `createRoot` yerine [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağırmalıdır.** React daha sonra DOM düğümlerini HTML'nizden yok etmek ve yeniden oluşturmak yerine *hydrate* edecektir (yeniden kullanacaktır).
+**Sunucu taraflı render veya statik oluşturma kullanan uygulamalar `createRoot` yerine [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağırmalıdır.** React daha sonra DOM düğümlerini HTML'nizden yok etmek ve yeniden oluşturmak yerine *hydrate* edecektir (yeniden kullanacaktır).
 
 </Pitfall>
 
@@ -212,7 +212,7 @@ Bu çok yavaş hissettirebilir! Bunu çözmek için, bileşenlerinizden [sunucud
 
 ### Kısmen React ile oluşturulan bir sayfa render etmek {/*rendering-a-page-partially-built-with-react*/}
 
-Sayfanız [React ile tamamen oluşturulmamışsa](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React tarafından yönetilen her bir üst düzey kullanıcı arayüzü parçası için bir kök oluşturmak üzere `createRoot` öğesini birden çok kez çağırabilirsiniz. Her kökte [`root.render`](#root-render) çağrısı yaparak farklı içerikler görüntüleyebilirsiniz.
+Sayfanız [tamamen React ile oluşturulmamışsa](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React tarafından yönetilen her bir üst düzey kullanıcı arayüzü parçası için bir kök oluşturmak üzere `createRoot` öğesini birden çok kez çağırabilirsiniz. Her kökte [`root.render`](#root-render) çağrısı yaparak her kökte farklı içerikler görüntüleyebilirsiniz.
 
 Burada, index.html dosyasında tanımlanan iki farklı DOM düğümüne iki farklı React bileşeni render edilmiştir:
 
@@ -225,7 +225,7 @@ Burada, index.html dosyasında tanımlanan iki farklı DOM düğümüne iki fark
   <body>
     <nav id="navigation"></nav>
     <main>
-      <p>Bu paragraf React tarafından işlenmez (doğrulamak için index.html dosyasını açın).</p>
+      <p>Bu paragraf React tarafından render edilmez (doğrulamak için index.html dosyasını açın).</p>
       <section id="comments"></section>
     </main>
   </body>
@@ -288,13 +288,13 @@ nav ul li { display: inline-block; margin-right: 20px; }
 
 </Sandpack>
 
-Ayrıca [`document.createElement()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) ile yeni bir DOM düğümü oluşturabilir ve bunu belgeye manuel olarak ekleyebilirsiniz.
+Ayrıca [`document.createElement()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) ile yeni bir DOM düğümü oluşturabilir ve bunu dokümana manuel olarak ekleyebilirsiniz.
 
 ```js
 const domNode = document.createElement('div');
 const root = createRoot(domNode);
 root.render(<Comment />);
-document.body.appendChild(domNode); // Belgenin herhangi bir yerine ekleyebilirsiniz
+document.body.appendChild(domNode); // Dokümanın herhangi bir yerine ekleyebilirsiniz
 ```
 
 React ağacını DOM düğümünden kaldırmak ve onun tarafından kullanılan tüm kaynakları temizlemek için [`root.unmount`.](#root-unmount) çağırın.
@@ -303,13 +303,13 @@ React ağacını DOM düğümünden kaldırmak ve onun tarafından kullanılan t
 root.unmount();
 ```
 
-Bu, çoğunlukla React bileşenleriniz farklı bir frameworkte yazılmış bir uygulamanın içindeyse kullanışlıdır.
+Bu, çoğunlukla React bileşenleriniz farklı bir çatıda yazılmış bir uygulamanın içindeyse kullanışlıdır.
 
 ---
 
 ### Bir kök bileşenin güncellenmesi {/*updating-a-root-component*/}
 
-Aynı kök üzerinde `render` fonksiyonunu birden fazla kez çağırabilirsiniz. Önceki render etme işlemi ile ağaç yapısı eşleştiği sürece, React [durumu koruyacaktır.](/learn/preserving-and-resetting-state). Bu örnekte her saniyede tekrarlanan `render` çağrılarından kaynaklanan güncellemelerin yıkıcı olmadığına dikkat edin, örneğin giriş kutusuna yazı yazabilirsiniz:
+Aynı kök üzerinde `render` fonksiyonunu birden fazla kez çağırabilirsiniz. Önceki render edilen ile bileşen ağaç yapısı eşleştiği sürece, React [state'i koruyacaktır.](/learn/preserving-and-resetting-state). Bu örnekte her saniyede tekrarlanan `render` çağrılarından kaynaklanan güncellemelerin yıkıcı olmadığına dikkat edin. Örneğin girdi kutusuna yazı yazıyorsunuz:
 
 <Sandpack>
 
@@ -340,7 +340,7 @@ export default function App({counter}) {
 
 </Sandpack>
 
-Birden fazla kez `render` çağrısı yapmak nadirdir. Genellikle bileşenleriniz bunun yerine [durum güncellemesi](/reference/react/useState) yapacaktır.
+Birden fazla kez `render` çağrısı yapmak nadirdir. Genellikle bileşenleriniz bunun yerine [state güncellemesi](/reference/react/useState) yapacaktır.
 
 ---
 ## Sorun Giderme {/*troubleshooting*/}
@@ -365,7 +365,7 @@ Bunu yapana kadar hiçbir şey görüntülenmez.
 
 Bu hata, `createRoot` öğesine aktardığınız şeyin bir DOM düğümü olmadığı anlamına gelir.
 
-Ne olduğundan emin değilseniz, günlüğe kaydetmeyi deneyin:
+Ne olduğundan emin değilseniz, yazdırmayı(log) deneyin:
 
 ```js {2}
 const domNode = document.getElementById('root');
@@ -374,7 +374,7 @@ const root = createRoot(domNode);
 root.render(<App />);
 ```
 
-Örneğin, `domNode` `null` ise, [`getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) `null` döndürmüş demektir. Bu, çağrınız sırasında belgede verilen kimliğe sahip bir düğüm yoksa gerçekleşir. Bunun birkaç nedeni olabilir:
+Örneğin, `domNode` `null` ise, [`getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) `null` döndürmüş demektir. Bu, çağrınız sırasında dokümanda verilen kimliğe sahip bir düğüm yoksa gerçekleşir. Bunun birkaç nedeni olabilir:
 
 1. Aradığınız ID, HTML dosyasında kullandığınız ID'den farklı olabilir. Yazım hatalarını kontrol edin!
 2. Paketinizin `<script>` etiketi, HTML'de kendisinden *sonra* görünen herhangi bir DOM düğümünü "göremez".
@@ -383,21 +383,21 @@ Bu hatayı almanın bir başka yaygın yolu da `createRoot(domNode)` yerine `cre
 
 ---
 
-### Bir hata alıyorum: "Fonksiyonlar bir React alt öğesi olarak geçerli değildir." {/*im-getting-an-error-functions-are-not-valid-as-a-react-child*/}
+### Bir hata alıyorum: "Fonksiyonlar bir React alt elemanı olarak geçerli değildir." {/*im-getting-an-error-functions-are-not-valid-as-a-react-child*/}
 
 Bu hata, `root.render`a aktardığınız şeyin bir React bileşeni olmadığı anlamına gelir.
 
 Bu, `root.render` öğesini `<Component />` yerine `Component` ile çağırırsanız meydana gelebilir:
 
 ```js {2,5}
-// 🚩 Yanlış: Uygulama bir fonksiyondur, Bileşen değildir.
+// 🚩 Yanlış: App bir fonksiyondur, Bileşen değildir.
 root.render(App);
 
 // ✅ Doğru: <App /> bir bileşendir.
 root.render(<App />);
 ```
 
-Veya onu çağlamanın sonucu yerine, bir fonksiyonu root.render'a geçirirseniz:
+Veya `root.render`'a fonksiyonu çağırmanın sonucu yerine fonksiyonun kendisini iletirseniz:
 
 ```js {2,5}
 // 🚩 Yanlış: createApp bir fonksiyondur, bileşen değildir.
@@ -409,11 +409,11 @@ root.render(createApp());
 
 ---
 
-### Sunucu tarafından oluşturulan HTML'im sıfırdan yeniden oluşturuluyor {/*my-server-rendered-html-gets-re-created-from-scratch*/}
+### Sunucu tarafından render edilen HTML'im sıfırdan yeniden oluşturuluyor {/*my-server-rendered-html-gets-re-created-from-scratch*/}
 
-Uygulamanız sunucu tarafından oluşturulmuşsa ve React tarafından oluşturulan ilk HTML'yi içeriyorsa, bir kök oluşturmanın ve `root.render` çağrısının tüm bu HTML'yi sildiğini ve ardından tüm DOM düğümlerini sıfırdan yeniden oluşturduğunu fark edebilirsiniz. Bu daha yavaş olabilir, odak ve kaydırma konumlarını sıfırlayabilir ve diğer kullanıcı girdilerini kaybedebilir.
+Uygulamanız sunucu tarafından render ediliyorsa ve React tarafından oluşturulan ilk HTML'yi içeriyorsa, bir kök oluşturmanın ve `root.render` çağrısının tüm bu HTML'yi sildiğini ve ardından tüm DOM düğümlerini sıfırdan yeniden oluşturduğunu fark edebilirsiniz. Bu daha yavaş olabilir, odak ve kaydırma konumlarını sıfırlayabilir ve diğer kullanıcı girdilerini kaybedebilir.
 
-Sunucu tarafından oluşturulan uygulamalar `createRoot` yerine [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) kullanmalıdır:
+Sunucu tarafından render edilen uygulamalar `createRoot` yerine [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) kullanmalıdır:
 
 ```js {1,4-7}
 import { hydrateRoot } from 'react-dom/client';
