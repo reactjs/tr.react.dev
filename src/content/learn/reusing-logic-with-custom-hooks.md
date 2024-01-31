@@ -1010,23 +1010,23 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
 export function createConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error(`serverUrl'in bir string olması bekleniyordu. Alınan: ` + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error(`roomId'nin bir string olması bekleniyordu. Alınan: ` + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅' + serverUrl + `'deki ` + roomId + ' odasına bağlanılıyor...');
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
           if (Math.random() > 0.5) {
             messageCallback('hey')
           } else {
-            messageCallback('lol');
+            messageCallback('acayip komik');
           }
         }
       }, 3000);
@@ -1034,14 +1034,14 @@ export function createConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl + '');
+      console.log('❌ ' + serverUrl + `'deki ` + roomId + ' odasından ayrılındı')
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('İki kez yönetici eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Sadece "message" olayı destekleniyor.');
       }
       messageCallback = callback;
     },
@@ -1091,20 +1091,20 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how you no longer need to know *how* `useChatRoom` works in order to use it. You could add it to any other component, pass any other options, and it would work the same way. That's the power of custom Hooks.
+`useChatRoom`'un nasıl çalıştığını artık bilmenize gerek olmadığını farkedin. Onu herhangi bir başka bileşene ekleyebilir, herhangi başka seçenekler geçirebilirsiniz, aynı şekilde çalışacaktır. Bu özel Hook'ların gücüdür.
 
-## When to use custom Hooks {/*when-to-use-custom-hooks*/}
+## Özel Hook'lar ne zaman kullanılmalıdır {/*when-to-use-custom-hooks*/}
 
-You don't need to extract a custom Hook for every little duplicated bit of code. Some duplication is fine. For example, extracting a `useFormInput` Hook to wrap a single `useState` call like earlier is probably unnecessary.
+Her ufak tekrarlanan kod parçası için bir özel Hook çıkarmanıza gerek yok. Bazı tekrarlanmalar sorun değildir. Örneğin, yukarıdaki gibi tek bir `useState` çağrısını saran bir `useFormInput` Hook'u çıkartmak muhtemelen gereksizdir.
 
-However, whenever you write an Effect, consider whether it would be clearer to also wrap it in a custom Hook. [You shouldn't need Effects very often,](/learn/you-might-not-need-an-effect) so if you're writing one, it means that you need to "step outside React" to synchronize with some external system or to do something that React doesn't have a built-in API for. Wrapping it into a custom Hook lets you precisely communicate your intent and how the data flows through it.
+Ancak, her Efekt yazdığınızda, onu özel bir Hook'a sarmanın daha net olup olmayacağını düşünün. [Efekt'lere çok sık ihtiyacınız olmamalı](/learn/you-might-not-need-an-effect) yani eğer bir Efekt yazıyorsanız, bu "React'ten dışarı çıkmak" ve bazı harici sistemlerle senkronize olmanız ya da React'in dahili bir API'sinin sağlamadığı bir şeyi yapmanız gerektiği anlamına gelir. Onu özel bir Hook'a sararak, niyetinizi ve verinin onun içinden nasıl aktığına dair bilgiyi net bir şekilde iletebilirsiniz.
 
-For example, consider a `ShippingForm` component that displays two dropdowns: one shows the list of cities, and another shows the list of areas in the selected city. You might start with some code that looks like this:
+Örneğin, iki açılır menü bileşenini gösteren bir `ShippingForm` bileşenini ele alın: birisi şehirlerin listesini, diğeri seçilen şehirdeki alanların listesini göstersin. Şöyle bir kodla başlayabilirsiniz:
 
 ```js {3-16,20-35}
 function ShippingForm({ country }) {
   const [cities, setCities] = useState(null);
-  // This Effect fetches cities for a country
+  // Bu Efekt bir ülke için şehirleri çeker
   useEffect(() => {
     let ignore = false;
     fetch(`/api/cities?country=${country}`)
@@ -1121,7 +1121,7 @@ function ShippingForm({ country }) {
 
   const [city, setCity] = useState(null);
   const [areas, setAreas] = useState(null);
-  // This Effect fetches areas for the selected city
+  // Bu Efekt seçilen şehir için alanları çeker
   useEffect(() => {
     if (city) {
       let ignore = false;
@@ -1141,7 +1141,7 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-Although this code is quite repetitive, [it's correct to keep these Effects separate from each other.](/learn/removing-effect-dependencies#is-your-effect-doing-several-unrelated-things) They synchronize two different things, so you shouldn't merge them into one Effect. Instead, you can simplify the `ShippingForm` component above by extracting the common logic between them into your own `useData` Hook:
+Bu kod biraz tekrarlayıcı olsa da, [bu Efekt'leri birbirinden ayrı tutmak doğrudur.](/learn/removing-effect-dependencies#is-your-effect-doing-several-unrelated-things) İki farklı şeyi senkronize ediyorlar, bu yüzden onları tek bir Efekt'e birleştirmemelisiniz. Bunun yerine, yukarıdaki `ShippingForm` bileşenini aralarındaki ortak mantığı kendi `useData` Hook'unuza çıkartarak basitleştirebilirsiniz:
 
 ```js {2-18}
 function useData(url) {
@@ -1165,7 +1165,7 @@ function useData(url) {
 }
 ```
 
-Now you can replace both Effects in the `ShippingForm` components with calls to `useData`:
+Şimdi `ShippingForm` içindeki her iki Efekt'i de `useData`'nın çağrılarıyla değiştirebilirsiniz:
 
 ```js {2,4}
 function ShippingForm({ country }) {
@@ -1175,21 +1175,21 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-Extracting a custom Hook makes the data flow explicit. You feed the `url` in and you get the `data` out. By "hiding" your Effect inside `useData`, you also prevent someone working on the `ShippingForm` component from adding [unnecessary dependencies](/learn/removing-effect-dependencies) to it. With time, most of your app's Effects will be in custom Hooks.
+Bir özel Hook çıkarmak veri akışını aşikâr hale getirir. `url`'i içeri beslersiniz ve `data`'yı dışarı alırsınız. Efekt'inizi `useData`'nın içine "gizleyerek", `ShippingForm` bileşeninde çalışan birinin ona [gereksiz bağımlılıklar](/learn/removing-effect-dependencies) eklemesini de engellersiniz. Zamanla, uygulamanızın çoğu Efekti özel Hook'larda olacaktır.
 
 <DeepDive>
 
-#### Keep your custom Hooks focused on concrete high-level use cases {/*keep-your-custom-hooks-focused-on-concrete-high-level-use-cases*/}
+#### Özel Hook'larınızı somut yüksek seviyeli kullanım durumlarına odaklı tutun {/*keep-your-custom-hooks-focused-on-concrete-high-level-use-cases*/}
 
-Start by choosing your custom Hook's name. If you struggle to pick a clear name, it might mean that your Effect is too coupled to the rest of your component's logic, and is not yet ready to be extracted.
+Özel Hook'unuzun adını seçerek başlayın. Eğer net bir isim seçmekte zorlanıyorsanız, bu Efek'inizin bileşeninizin geri kalan mantığına çok bağlı olduğu ve henüz çıkartılmaya hazır olmadığı anlamına gelebilir.
 
-Ideally, your custom Hook's name should be clear enough that even a person who doesn't write code often could have a good guess about what your custom Hook does, what it takes, and what it returns:
+İdeal olarak, özel Hook'unuzun adı kod yazmayan bir kişinin bile ne yaptığını, ne aldığını ve ne döndürdüğünü tahmin edebileceği kadar açık olmalıdır:
 
 * ✅ `useData(url)`
 * ✅ `useImpressionLog(eventName, extraData)`
 * ✅ `useChatRoom(options)`
 
-When you synchronize with an external system, your custom Hook name may be more technical and use jargon specific to that system. It's good as long as it would be clear to a person familiar with that system:
+Dış bir sistemle senkronize olduğunuzda, özel Hook adınız daha teknik olabilir ve o sisteme özel jargon kullanabilir. Bu, o sisteme aşina bir kişi için açık olduğu sürece sorun değildir:
 
 * ✅ `useMediaQuery(query)`
 * ✅ `useSocket(url)`
@@ -1197,17 +1197,19 @@ When you synchronize with an external system, your custom Hook name may be more 
 
 **Keep custom Hooks focused on concrete high-level use cases.** Avoid creating and using custom "lifecycle" Hooks that act as alternatives and convenience wrappers for the `useEffect` API itself:
 
+**Özel Hook'larınızı somut yüksek seviyeli kullanım durumlarına odaklı tutun.** `useEffect` API'sinin kendisi için alternatifler ve kolaylık sarıcıları olan özel "lifecycle" Hook'ları oluşturmayın ve kullanmayın:
+
 * 🔴 `useMount(fn)`
 * 🔴 `useEffectOnce(fn)`
 * 🔴 `useUpdateEffect(fn)`
 
-For example, this `useMount` Hook tries to ensure some code only runs "on mount":
+Örneğin, bu `useMount` Hook'u bazı kodun sadece "mount" sırasında çalışmasını sağlamaya çalışır:
 
 ```js {4-5,14-15}
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // 🔴 Avoid: using custom "lifecycle" Hooks
+  // 🔴 Kaçının: özel "lifecycle" Hook'ları kullanmak
   useMount(() => {
     const connection = createConnection({ roomId, serverUrl });
     connection.connect();
@@ -1217,23 +1219,23 @@ function ChatRoom({ roomId }) {
   // ...
 }
 
-// 🔴 Avoid: creating custom "lifecycle" Hooks
+// 🔴 Kaçının: özel "lifecycle" Hook'ları oluşturmak
 function useMount(fn) {
   useEffect(() => {
     fn();
-  }, []); // 🔴 React Hook useEffect has a missing dependency: 'fn'
+  }, []); // 🔴 React Hook'u useEffect'in bir bağımlılığı eksik: 'fn'
 }
 ```
 
-**Custom "lifecycle" Hooks like `useMount` don't fit well into the React paradigm.** For example, this code example has a mistake (it doesn't "react" to `roomId` or `serverUrl` changes), but the linter won't warn you about it because the linter only checks direct `useEffect` calls. It won't know about your Hook.
+**`useMount` gibi özel "lifecycle" Hook'ları React paradigmasına pek iyi uymaz.** Örneğin, bu kod örneğinde bir hata var (`roomId` ya da `serverUrl`'deki değişikliklere "tepki" vermiyor), ama linter sizi bunun hakkında uyarmayacaktır, çünkü linter sadece doğrudan `useEffect` çağrılarını kontrol eder. Hook'unuz hakkında bilgisi olmayacaktır.
 
-If you're writing an Effect, start by using the React API directly:
+Eğer bir Efekt yazıyorsanız, React API'sini doğrudan kullanarak başlayın:
 
 ```js
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // ✅ Good: two raw Effects separated by purpose
+  // ✅ İyi: amaçlarına göre ayrılmış iki saf Efekt
 
   useEffect(() => {
     const connection = createConnection({ serverUrl, roomId });
@@ -1249,13 +1251,13 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Then, you can (but don't have to) extract custom Hooks for different high-level use cases:
+Sonra, farklı yüksek seviyeli kullanım durumları için özel Hook'lar çıkartabilirsiniz (ama çıkartmak zorunda değilsiniz):
 
 ```js
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // ✅ Great: custom Hooks named after their purpose
+  // ✅ İyi: amaçlarına göre adlandırılmış özel Hook'lar
   useChatRoom({ serverUrl, roomId });
   useImpressionLog('visit_chat', { roomId });
   // ...
