@@ -16,7 +16,7 @@ const root = createRoot(domNode, options?)
 
 ---
 
-## Başvuru dokümanı {/*reference*/}
+## Referans {/*reference*/}
 
 ### `createRoot(domNode, options?)` {/*createroot*/}
 
