@@ -41,11 +41,11 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle kök bileşeni için ya
 
 #### Parametreler {/*parameters*/}
 
-* `domNode`: React bu [DOM elemanı](https://developer.mozilla.org/en-US/docs/Web/API/Element) için bir kök oluşturacak ve işlenmiş React içeriğini görüntülemek için `render` gibi kök üzerinde fonksiyonlar çağırmanıza izin verecektir.
+* `domNode`: Bir [DOM elemanı.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React bu DOM elemanı için bir kök oluşturacak ve `render` gibi render edilmiş React içeriğini görüntülemek için kök üzerinde fonksiyonlar çağırmanıza izin verecektir.
 
 * **opsiyonel** `options`: Bu React kökü için seçenekler içeren bir nesne.
 
-  * **opsiyonel** `onRecoverableError`: React'in hatalardan otomatik olarak kurtulduğunda çağrılan geri arama fonksiyonu.
+  * **opsiyonel** `onRecoverableError`: React'in hatalardan otomatik olarak kurtulduğunda çağrılan callback fonksiyonu.
   * **opsiyonel** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'in kullandığı bir dize öneki. Aynı sayfada birden fazla kök kullanırken çakışmaları önlemek için kullanışlıdır.
 
 #### Geri dönüşler {/*returns*/}
