@@ -48,7 +48,7 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle kök bileşeni için ya
   * **opsiyonel** `onRecoverableError`: React'in hatalardan otomatik olarak kurtulduğunda çağrılan callback fonksiyonu.
   * **opsiyonel** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'in kullandığı bir dize öneki. Aynı sayfada birden fazla kök kullanırken çakışmaları önlemek için kullanışlıdır.
 
-#### Geri dönüşler {/*returns*/}
+#### Döndürülenler {/*returns*/}
 
 `createRoot` [`render`](#root-render) ve [`unmount`](#root-unmount) olmak üzere iki yöntem içeren bir nesne döndürür.
 
@@ -76,7 +76,7 @@ React, `root` içinde `<App />` gösterecek ve içindeki DOM'un yönetimini üst
 * Parametreler`reactNode`: Görüntülemek istediğiniz bir *React düğümü*. Bu genellikle `<App />` gibi bir JSX parçası olacaktır, ancak [`createElement()`](/reference/react/createElement) ile oluşturulmuş bir React öğesi, bir dize, bir sayı, `null` veya `undefined` da iletebilirsiniz.
 
 
-#### Geri dönüşler {/*root-render-returns*/}
+#### Döndürülenler {/*root-render-returns*/}
 
 `root.render` `undefined` değerini döndürür.
 
@@ -110,7 +110,7 @@ Bu, çoğunlukla React kök DOM düğümünüzün (veya atalarından herhangi bi
 `root.unmount` herhangi bir parametre kabul etmez.
 
 
-#### Returns {/*root-unmount-returns*/}
+#### Döndürülenler {/*root-unmount-returns*/}
 
 `root.unmount` `undefined` döndürür.
 
