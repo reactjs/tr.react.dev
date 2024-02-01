@@ -1,11 +1,9 @@
 ---
-title: Editor Setup
+title: Editör Kurulumu
 ---
 
 <Intro>
 
-A properly configured editor can make code clearer to read and faster to write. It can even help you catch bugs as you write them! If this is your first time setting up an editor or you're looking to tune up your current editor, we have a few recommendations.
-  
 Doğru şekilde yapılandırılmış bir editör, kodun daha kolay okunmasını ve daha hızlı yazılmasını sağlayabilir. Hatta yazarken hataları tespit etmenize bile yardımcı olabilir! İlk kez bir editör kuruyorsanız veya mevcut editörünüzü iyileştirmek istiyorsanız, birkaç önerimiz var.
 
 </Intro>
