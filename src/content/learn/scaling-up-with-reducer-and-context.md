@@ -4,7 +4,7 @@ title: 'Reducer ve Context ile Ölçeklendirme'
 
 <Intro>
 
-Reducer'lar bir bileşenin state güncelleme mantığını bir araya getirmenizi sağlar. Context, bilgileri diğer bileşenlere derinlemesine iletmeye olanak tanır. Reducer'ları ve context'i bir araya getirerek karmaşık bir ekranın state'ini yönetebilirsiniz
+Reducer'lar bir bileşenin state güncelleme mantığını bir araya getirmenizi sağlar. Context, bilgileri diğer bileşenlere derinlemesine iletmeye olanak tanır. Reducer'ları ve context'i bir araya getirerek karmaşık bir ekranın state'ini yönetebilirsiniz.
 
 </Intro>
 
@@ -943,7 +943,7 @@ import { TasksProvider } from './TasksContext.js';
 export default function TaskApp() {
   return (
     <TasksProvider>
-      <h1>Kyoto'dabir gün</h1>
+      <h1>Kyoto'da bir gün</h1>
       <AddTask />
       <TaskList />
     </TasksProvider>
@@ -1347,7 +1347,7 @@ ul, li { margin: 0; padding: 0; }
 `useTasks` ve `useTasksDispatch` gibi fonksiyonlara *[Özel Hook'lar](/learn/reusing-logic-with-custom-hooks)* denir. Bir fonksiyonunuzun adı `use` ile başlıyorsa fonksiyonunuz bir özel hook olarak kabul edilir. Bu, içinde `useContext` gibi diğer hook`ları kullanmanızı sağlar.
 </Note>
 
-Uygulamanız büyüdükçe, bunun gibi birçok context-reducer çiftine sahip olabilirsiniz. Bu, uygulamanızı ölçeklendirmenin ve hiyerarşinin derinliklerindeki verilere erişmek istediğinizde çok fazla iş yapmadan [state'leri azaltmanın](/learn/sharing-state-between-components) güçlü bir yoludur.
+Uygulamanız büyüdükçe, bunun gibi birçok context-reducer çiftine sahip olabilirsiniz. Bu, uygulamanızı ölçeklendirmenin ve hiyerarşinin derinliklerindeki verilere erişmek istediğinizde çok fazla iş yapmadan [state'i yükseltmenin](/learn/sharing-state-between-components) güçlü bir yoludur.
 
 <Recap>
 
