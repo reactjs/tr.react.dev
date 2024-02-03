@@ -57,7 +57,7 @@ export default function TaskApp() {
 
   return (
     <>
-      <h1>Kyoto'da bir gün</h1>
+      <h1>İstanbul'da bir gün</h1>
       <AddTask
         onAddTask={handleAddTask}
       />
@@ -99,9 +99,9 @@ function tasksReducer(tasks, action) {
 
 let nextId = 3;
 const initialTasks = [
-  { id: 0, text: 'Filozofun Yolu.', done: true },
-  { id: 1, text: 'Tapınağı Ziyaret Et.', done: false },
-  { id: 2, text: 'Matcha iç.', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü.', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti.', done: false },
+  { id: 2, text: 'Türk kahvesi iç.', done: false }
 ];
 ```
 
@@ -292,7 +292,7 @@ export default function TaskApp() {
 
   return (
     <>
-      <h1>Kyoto'da bir gün</h1>
+      <h1>İstanbul'da bir gün</h1>
       <AddTask
         onAddTask={handleAddTask}
       />
@@ -334,9 +334,9 @@ function tasksReducer(tasks, action) {
 
 let nextId = 3;
 const initialTasks = [
-  { id: 0, text: 'Filozofun Yolu', done: true },
-  { id: 1, text: 'Tapınağı Ziyaret Et', done: false },
-  { id: 2, text: 'Matcha iç.', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü.', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti.', done: false },
+  { id: 2, text: 'Türk kahvesi iç.', done: false }
 ];
 ```
 
@@ -512,7 +512,7 @@ export default function TaskApp() {
   return (
     <TasksContext.Provider value={tasks}>
       <TasksDispatchContext.Provider value={dispatch}>
-        <h1>Kyoto'da bir gün</h1>
+        <h1>İstanbul'da bir gün</h1>
         <AddTask
           onAddTask={handleAddTask}
         />
@@ -555,9 +555,9 @@ function tasksReducer(tasks, action) {
 
 let nextId = 3;
 const initialTasks = [
-  { id: 0, text: 'Filozofun Yolu', done: true },
-  { id: 1, text: 'Tapınağı Ziyaret Et', done: false },
-  { id: 2, text: 'Matcha iç', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü.', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti.', done: false },
+  { id: 2, text: 'Türk kahvesi iç.', done: false }
 ];
 ```
 
@@ -679,7 +679,7 @@ Artık görevlerin listesini veya olay yöneticilerini hiyerarşi boyunca iletme
 ```js {4-5}
 <TasksContext.Provider value={tasks}>
   <TasksDispatchContext.Provider value={dispatch}>
-    <h1>Kyoto'da bir gün</h1>
+    <h1>İstanbul'da bir gün</h1>
     <AddTask />
     <TaskList />
   </TasksDispatchContext.Provider>
@@ -733,7 +733,7 @@ export default function TaskApp() {
   return (
     <TasksContext.Provider value={tasks}>
       <TasksDispatchContext.Provider value={dispatch}>
-        <h1>Kyoto'da bir gün</h1>
+        <h1>İstanbul'da bir gün</h1>
         <AddTask />
         <TaskList />
       </TasksDispatchContext.Provider>
@@ -769,9 +769,9 @@ function tasksReducer(tasks, action) {
 }
 
 const initialTasks = [
-  { id: 0, text: 'Filozofun Yolu', done: true },
-  { id: 1, text: 'Tapınağı Ziyaret Et', done: false },
-  { id: 2, text: 'Matcha iç', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü.', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti.', done: false },
+  { id: 2, text: 'Türk kahvesi iç.', done: false }
 ];
 ```
 
@@ -943,7 +943,7 @@ import { TasksProvider } from './TasksContext.js';
 export default function TaskApp() {
   return (
     <TasksProvider>
-      <h1>Kyoto'da bir gün</h1>
+      <h1>İstanbul'da bir gün</h1>
       <AddTask />
       <TaskList />
     </TasksProvider>
@@ -1000,9 +1000,9 @@ function tasksReducer(tasks, action) {
 }
 
 const initialTasks = [
-  { id: 0, text: 'Filozofun Yolu', done: true },
-  { id: 1, text: 'Tapınağı Ziyaret Et', done: false },
-  { id: 2, text: 'Matcha iç', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü.', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti.', done: false },
+  { id: 2, text: 'Türk kahvesi iç.', done: false }
 ];
 ```
 
@@ -1153,7 +1153,7 @@ import { TasksProvider } from './TasksContext.js';
 export default function TaskApp() {
   return (
     <TasksProvider>
-      <h1>Kyoto'da bir gün</h1>
+      <h1>İstanbul'da bir gün</h1>
       <AddTask />
       <TaskList />
     </TasksProvider>
@@ -1219,9 +1219,9 @@ function tasksReducer(tasks, action) {
 }
 
 const initialTasks = [
-  { id: 0, text: 'Filozofun Yolu', done: true },
-  { id: 1, text: 'Tapınağı Ziyaret Et', done: false },
-  { id: 2, text: 'Matcha iç', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü.', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti.', done: false },
+  { id: 2, text: 'Türk kahvesi iç.', done: false }
 ];
 ```
 
