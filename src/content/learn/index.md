@@ -456,7 +456,7 @@ function MyButton() {
 
 ```
 
-Daha sonra, state'i `MyApp` bileşeninden her bir `MyButton` bileşenine ortak tıklama yönetecisi ile birlikte *aşağı doğru iletin.* `MyButton` bileşenine bilgiyi JSX süslü parantezleri ile iletebilirsiniz, tıpkı yerleşik `<img>` elementlerinde yaptığımız gibi:
+Daha sonra, state'i `MyApp` bileşeninden her bir `MyButton` bileşenine ortak tıklama yönetecisi ile birlikte *aşağı doğru iletin.* `MyButton` bileşenine tıpkı yerleşik `<img>` elementinde yaptığımız gibi, bilgiyi JSX süslü parantezleri ile iletebilirsiniz:
 
 ```js {11-12}
 export default function MyApp() {
@@ -490,7 +490,7 @@ function MyButton({ count, onClick }) {
 }
 ```
 
-Butona tıkladığınız zaman, `onClick` yöneticisi çalışır. Her bir butonun `onClick` prop'u `MyApp` bileşeni içindeki `handleClick` fonksiyonuna ayarlanmıştır ve fonksiyon içindeki kod çalışır. Bu kod `setCount(count + 1)` ifadesini çağırır ve `count` state değişkenini artırır. Yeni `count` değeri her bir butona prop olarak iletilir, böylelikle hepsi yeni değeri gösterir. Buna "state'in yukarı kaldırılması" denir. State'i yukarı kaldırarak, bileşenler arasında paylaşmış oldunuz.
+Butona tıkladığınız zaman, `onClick` yöneticisi çalışır. Her bir butonun `onClick` prop'una `MyApp` bileşeni içindeki `handleClick` fonksiyonu iletilmiştir ve butona tıklandığında fonksiyon içindeki kod çalışır. Bu kod `setCount(count + 1)` ifadesini çağırır ve `count` state değişkenini artırır. Yeni `count` değeri her bir butona prop olarak iletilir, böylelikle hepsi yeni değeri gösterir. Buna "state'in yukarı kaldırılması" denir. State'i yukarı kaldırarak, bileşenler arasında paylaşmış oldunuz.
 
 <Sandpack>
 
@@ -531,8 +531,8 @@ button {
 
 </Sandpack>
 
-## Next Steps {/*next-steps*/}
+## Sonraki Adımlar {/*next-steps*/}
 
 Artık React kodunu yazmanın temellerini biliyorsunuz!
 
-[Tutorial](/learn/tutorial-tic-tac-toe) sayfasına giderek öğrendiklerinizi pratik edebilir ve ilk mini React uygulamanızı yapabilirsiniz.
+[Öğretici](/learn/tutorial-tic-tac-toe) sayfasına giderek öğrendiklerinizi pratik yapabilir ve ilk mini React uygulamanızı yapabilirsiniz.
