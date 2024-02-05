@@ -1,30 +1,30 @@
 ---
-title: Describing the UI
+title: Kullanıcı Arayüzünü Tanımlama
 ---
 
 <Intro>
 
-React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable *components.* From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you'll learn to create, customize, and conditionally display React components.
+React, kullanıcı arayüzleri (UI) oluşturmak için kullanılan bir JavaScript kütüphanesidir. Kullanıcı arayüzü butonlar, metinler ve resimler gibi küçük birimlerden oluşur. React bunları yeniden kullanılabilir, iç içe yerleştirilebilir *bileşenler* halinde birleştirmenize olanak tanır. Web sitelerinden telefon uygulamalarına kadar ekrandaki her şey bileşenlere ayrılabilir. Bu bölümde, React bileşenlerini oluşturmayı, özelleştirmeyi ve koşullu olarak görüntülemeyi öğreneceksiniz.
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to write your first React component](/learn/your-first-component)
-* [When and how to create multi-component files](/learn/importing-and-exporting-components)
-* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
-* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
-* [How to configure components with props](/learn/passing-props-to-a-component)
-* [How to conditionally render components](/learn/conditional-rendering)
-* [How to render multiple components at a time](/learn/rendering-lists)
-* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
-* [Why understanding your UI as trees is useful](/learn/understanding-your-ui-as-a-tree)
+* [İlk React bileşeninizi nasıl yazarsınız](/learn/your-first-component)
+* [Çok bileşenli dosyalar ne zaman ve nasıl oluşturulur](/learn/importing-and-exporting-components)
+* [JSX ile JavaScript'e işaretleme nasıl eklenir](/learn/writing-markup-with-jsx)
+* [Bileşenlerinizden JavaScript fonksiyonlarına erişmek için JSX ile süslü parantezler nasıl kullanılır](/learn/javascript-in-jsx-with-curly-braces)
+* [Bileşenler prop'lar ile nasıl yapılandırılır](/learn/passing-props-to-a-component)
+* [Bileşenleri koşullu olarak nasıl render edebilirim](/learn/conditional-rendering)
+* [Birden çok bileşeni aynı anda nasıl render edebilirim](/learn/rendering-lists)
+* [Bileşenleri saf tutarak kafa karışıklığına neden olan hatalardan nasıl kaçınılır](/learn/keeping-components-pure)
+* [Kullanıcı arayüzünüzü ağaçlar olarak anlamak neden yararlıdır](/learn/understanding-your-ui-as-a-tree) 
 
 </YouWillLearn>
 
-## Your first component {/*your-first-component*/}
+## İlk bileşeniniz {/*your-first-component*/}
 
-React applications are built from isolated pieces of UI called *components*. A React component is a JavaScript function that you can sprinkle with markup. Components can be as small as a button, or as large as an entire page. Here is a `Gallery` component rendering three `Profile` components:
+React uygulamaları, *bileşenler* adı verilen izole kullanıcı arayüzü parçalarından oluşturulur. Bir React bileşeni, işaretleme ile serpiştirebileceğiniz bir JavaScript fonksiyonudur. Bileşenler bir buton kadar küçük veya tüm bir sayfa kadar büyük olabilir. İşte üç adet `Profil` bileşeni oluşturan bir `Galeri` bileşeni:
 
 <Sandpack>
 
@@ -41,7 +41,7 @@ function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem Bilim İnsanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -58,13 +58,13 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <LearnMore path="/learn/your-first-component">
 
-Read **[Your First Component](/learn/your-first-component)** to learn how to declare and use React components.
+React bileşenlerini bildirmeyi ve kullanmayı öğrenmek için **[İlk bileşeniniz](/learn/your-first-component)** bölümünü okuyun.
 
 </LearnMore>
 
-## Importing and exporting components {/*importing-and-exporting-components*/}
+## Bileşenlerin içe ve dışa aktarılması {/*importing-and-exporting-components*/}
 
-You can declare many components in one file, but large files can get difficult to navigate. To solve this, you can *export* a component into its own file, and then *import* that component from another file:
+Bu durumda, bir dosyada birçok bileşen bildirebilirsiniz, ancak büyük dosyaları navigate etmek zor olabilir. Bu sorunu çözmek için, bir bileşeni kendi dosyasında dışa aktarabilir (export), ardından başka bir dosyadan o bileşeni içe aktarabilirsiniz (import):
 
 
 <Sandpack>
@@ -85,7 +85,7 @@ import Profile from './Profile.js';
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>Muhteşem Bilim İnsanları</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -113,32 +113,32 @@ img { margin: 0 10px 10px 0; }
 
 <LearnMore path="/learn/importing-and-exporting-components">
 
-Read **[Importing and Exporting Components](/learn/importing-and-exporting-components)** to learn how to split components into their own files.
+Bileşenleri kendi dosyalarına nasıl ayıracağınızı öğrenmek için **[Bileşenleri İçe ve Dışa Aktarma](/learn/importing-and-exporting-components)** bölümünü okuyun.
 
 </LearnMore>
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## JSX ile işaretleme (markup) yazma {/*writing-markup-with-jsx*/}
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information.
+Her React bileşeni, React'in tarayıcıda render ettiği bazı işaretlemeler (markuplar) içerebilecek bir JavaScript fonksiyonudur. React bileşenleri, bu işaretlemeyi temsil etmek için JSX adı verilen bir sözdizimi uzantısını kullanır. JSX, HTML'ye çok benzer, ancak biraz daha katıdır ve dinamik bilgileri görüntüleyebilir.
 
-If we paste existing HTML markup into a React component, it won't always work:
+Mevcut HTML işaretlemesini bir React bileşenine yapıştırırsak, bu her zaman çalışmayacaktır:
 
 <Sandpack>
 
 ```js
 export default function TodoList() {
   return (
-    // This doesn't quite work!
-    <h1>Hedy Lamarr's Todos</h1>
+    // Bu tam olarak işe yaramaz!
+    <h1>Hedy Lamarr'ın Yapılacakları</h1>
     <img
       src="https://i.imgur.com/yXOvdOSs.jpg"
       alt="Hedy Lamarr"
       class="photo"
     >
     <ul>
-      <li>Invent new traffic lights
-      <li>Rehearse a movie scene
-      <li>Improve spectrum technology
+      <li>Yeni trafik ışıkları icat etmek
+      <li>Bir film sahnesinin provasını yapmak
+      <li>Spektrum teknolojisini geliştirmek
     </ul>
   );
 }
@@ -150,7 +150,7 @@ img { height: 90px; }
 
 </Sandpack>
 
-If you have existing HTML like this, you can fix it using a [converter](https://transform.tools/html-to-jsx):
+Eğer böyle bir HTML'iniz varsa, [dönüştürücü](https://transform.tools/html-to-jsx) kullanarak düzeltebilirsiniz:
 
 <Sandpack>
 
@@ -158,16 +158,16 @@ If you have existing HTML like this, you can fix it using a [converter](https://
 export default function TodoList() {
   return (
     <>
-      <h1>Hedy Lamarr's Todos</h1>
+      <h1>Hedy Lamarr'ın Yapılacakları</h1>
       <img
         src="https://i.imgur.com/yXOvdOSs.jpg"
         alt="Hedy Lamarr"
         className="photo"
       />
       <ul>
-        <li>Invent new traffic lights</li>
-        <li>Rehearse a movie scene</li>
-        <li>Improve spectrum technology</li>
+        <li>Yeni trafik ışıkları icat etmek</li>
+        <li>Bir film sahnesinin provasını yapmak</li>
+        <li>Spektrum teknolojisini geliştirmek</li>
       </ul>
     </>
   );
@@ -182,13 +182,13 @@ img { height: 90px; }
 
 <LearnMore path="/learn/writing-markup-with-jsx">
 
-Read **[Writing Markup with JSX](/learn/writing-markup-with-jsx)** to learn how to write valid JSX.
+Doğru JSX yazmayı öğrenmek için **[JSX ile İşaretleme (Markup) Yazma](/learn/writing-markup-with-jsx)** bölümünü okuyun.
 
 </LearnMore>
 
-## JavaScript in JSX with curly braces {/*javascript-in-jsx-with-curly-braces*/}
+## JSX içinde JavaScript kodunu süslü parantezlerle kullanma {/*javascript-in-jsx-with-curly-braces*/}
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to "open a window" to JavaScript:
+JSX, JavaScript dosyası içinde HTML benzeri işaretleme yazmanıza olanak tanır ve renderlama mantığını ile içeriği aynı yerde tutar. Bazı durumlarda, bu işaretlemenin içine biraz JavaScript mantığı eklemek veya dinamik bir özelliğe başvurmak isteyebilirsiniz. Bu durumda, JSX içinde süslü parantez kullanarak JavaScript'e bir "pencere açabilirsiniz".
 
 <Sandpack>
 
@@ -204,16 +204,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>{person.name}'nın Yapılacaklası</h1>
       <img
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>Görüntülü telefonu geliştirmek</li>
+        <li>Havacılık derslerini hazırlamak</li>
+        <li>Alkol yakıtlı motor üzerinde çalışmak</li>
       </ul>
     </div>
   );
@@ -230,13 +230,13 @@ body > div > div { padding: 20px; }
 
 <LearnMore path="/learn/javascript-in-jsx-with-curly-braces">
 
-Read **[JavaScript in JSX with Curly Braces](/learn/javascript-in-jsx-with-curly-braces)** to learn how to access JavaScript data from JSX.
+JSX'ten JavaScript verilerine nasıl erişileceğini öğrenmek için **[JSX içinde Süslü Parantezlerle JavaScript](/learn/javascript-in-jsx-with-curly-braces)** bölümünü okuyun.
 
 </LearnMore>
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## Bileşenlere Prop'ları Aktarma {/*passing-props-to-a-component*/}
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, functions, and even JSX!
+React bileşenleri birbirleriyle iletişim kurmak için *props* kullanırlar. Her ana bileşen, alt bileşenlerine prop'lar vererek onlara bazı bilgiler aktarabilir. Prop'lar size HTML niteliklerini hatırlatabilir, ancak nesneler, diziler, fonksiyonlar ve hatta JSX dahil olmak üzere herhangi bir JavaScript değerini bunlar aracılığıyla iletebilirsiniz!
 
 <Sandpack>
 
@@ -311,15 +311,15 @@ export function getImageUrl(person, size = 's') {
 
 <LearnMore path="/learn/passing-props-to-a-component">
 
-Read **[Passing Props to a Component](/learn/passing-props-to-a-component)** to learn how to pass and read props.
+Prop'ların nasıl aktarılacağını ve okunacağını öğrenmek için **[Bileşenlere Prop'ları Aktarma](/learn/passing-props-to-a-component)** bölümünü okuyun.
 
 </LearnMore>
 
-## Conditional rendering {/*conditional-rendering*/}
+## Koşullu olarak render etme {/*conditional-rendering*/}
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+Bileşenlerinizin genellikle farklı koşullara bağlı olarak farklı şeyler göstermesi gerekecektir. React'te, `if` ifadeleri, `&&` ve `? :` operatörleri gibi JavaScript sözdizimlerini kullanarak JSX'i koşullu olarak oluşturabilirsiniz.
 
-In this example, the JavaScript `&&` operator is used to conditionally render a checkmark:
+Bu örnekte, bir onay işaretini (checkmark) koşullu olarak oluşturmak için JavaScriptdeki `&&` operatörü kullanılmıştır:
 
 <Sandpack>
 
@@ -335,19 +335,19 @@ function Item({ name, isPacked }) {
 export default function PackingList() {
   return (
     <section>
-      <h1>Sally Ride's Packing List</h1>
+      <h1>Sally Ride'ın Bavul Listesi</h1>
       <ul>
         <Item
           isPacked={true}
-          name="Space suit"
+          name="Uzay giysisi"
         />
         <Item
           isPacked={true}
-          name="Helmet with a golden leaf"
+          name="Altın yapraklı kask"
         />
         <Item
           isPacked={false}
-          name="Photo of Tam"
+          name="Tam'in fotoğrafı"
         />
       </ul>
     </section>
@@ -359,15 +359,15 @@ export default function PackingList() {
 
 <LearnMore path="/learn/conditional-rendering">
 
-Read **[Conditional Rendering](/learn/conditional-rendering)** to learn the different ways to render content conditionally.
+İçeriği koşullu olarak oluşturmanın farklı yollarını öğrenmek için **[Koşullu Olarak Render Etmek](/learn/conditional-rendering)** bölümünü okuyun.
 
 </LearnMore>
 
-## Rendering lists {/*rendering-lists*/}
+## Listeleri render etmek {/*rendering-lists*/}
 
-You will often want to display multiple similar components from a collection of data. You can use JavaScript's `filter()` and `map()` with React to filter and transform your array of data into an array of components.
+Genellikle bir veri koleksiyonundan birden fazla benzer bileşeni görüntülemek istersiniz. Veri dizinizi filtrelemek ve bir bileşen dizisine dönüştürmek için JavaScript'in `filter()` ve `map()` fonksiyonlarını React ile kullanabilirsiniz.
 
-For each array item, you will need to specify a `key`. Usually, you will want to use an ID from the database as a `key`. Keys let React keep track of each item's place in the list even if the list changes.
+Her dizi öğesi için bir `key` belirtmeniz gerekecektir. Genellikle, veritabanından bir ID'yi `key` olarak kullanmak isteyeceksiniz. Key'ler, liste değişse bile React'in her öğenin listedeki yerini takip etmesini sağlar.
 
 <Sandpack>
 
@@ -385,13 +385,13 @@ export default function List() {
       <p>
         <b>{person.name}:</b>
         {' ' + person.profession + ' '}
-        known for {person.accomplishment}
+        bilinen çalışması: {person.accomplishment}
       </p>
     </li>
   );
   return (
     <article>
-      <h1>Scientists</h1>
+      <h1>Bilim insanları</h1>
       <ul>{listItems}</ul>
     </article>
   );
@@ -402,32 +402,32 @@ export default function List() {
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
-  profession: 'mathematician',
-  accomplishment: 'spaceflight calculations',
+  profession: 'matematikçi',
+  accomplishment: 'uzay uçuşu hesaplamaları',
   imageId: 'MK3eW3A'
 }, {
   id: 1,
   name: 'Mario José Molina-Pasquel Henríquez',
-  profession: 'chemist',
-  accomplishment: 'discovery of Arctic ozone hole',
+  profession: 'kimyager',
+  accomplishment: 'Arktik ozon deliğinin keşfi',
   imageId: 'mynHUSa'
 }, {
   id: 2,
   name: 'Mohammad Abdus Salam',
-  profession: 'physicist',
-  accomplishment: 'electromagnetism theory',
+  profession: 'fizikçi',
+  accomplishment: 'elektromanyeti̇zma teori̇si̇',
   imageId: 'bE7W1ji'
 }, {
   id: 3,
   name: 'Percy Lavon Julian',
-  profession: 'chemist',
-  accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
+  profession: 'kimyager',
+  accomplishment: 'kortizon ilaçları, steroidler ve doğum kontrol haplarına öncülük etmek',
   imageId: 'IOjWm71'
 }, {
   id: 4,
   name: 'Subrahmanyan Chandrasekhar',
-  profession: 'astrophysicist',
-  accomplishment: 'white dwarf star mass calculations',
+  profession: 'astrofizikçi',
+  accomplishment: 'beyaz cüce yıldız kütle hesaplamaları',
   imageId: 'lrWQx8l'
 }];
 ```
@@ -459,18 +459,18 @@ h2 { font-size: 20px; }
 
 <LearnMore path="/learn/rendering-lists">
 
-Read **[Rendering Lists](/learn/rendering-lists)** to learn how to render a list of components, and how to choose a key.
+Bir bileşen listesinin nasıl oluşturulacağını ve bir anahtarın nasıl seçileceğini öğrenmek için **[Listeleri Render Etmek](/learn/rendering-lists)** bölümünü okuyun.
 
 </LearnMore>
 
-## Keeping components pure {/*keeping-components-pure*/}
+## Bileşenleri saf tutmak {/*keeping-components-pure*/}
 
-Some JavaScript functions are *pure.* A pure function:
+Bazı JavaScript fonksiyonları *saftır.* Saf bir fonksiyon:
 
-* **Minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **Kendi işine bakar.** Çağrılmadan önce var olan hiçbir nesneyi veya değişkeni değiştirmez.
+* **Aynı girdiler, aynı çıktılar.** Aynı girdiler verildiğinde, saf bir fonksiyon her zaman aynı sonucu döndürmelidir.
 
-By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. Here is an example of an impure component:
+Bileşenlerinizi yalnızca saf fonksiyonlar olarak yazarsanız, kod tabanınız büyüdükçe şaşırtıcı hatalardan ve öngörülemeyen davranışlardan kaçınabilirsiniz. İşte saf olmayan bir bileşen örneği:
 
 <Sandpack>
 
@@ -480,7 +480,7 @@ let guest = 0;
 function Cup() {
   // Bad: changing a preexisting variable!
   guest = guest + 1;
-  return <h2>Tea cup for guest #{guest}</h2>;
+  return <h2>Misafir #{guest} için çay bardağı</h2>;
 }
 
 export default function TeaSet() {
@@ -496,13 +496,13 @@ export default function TeaSet() {
 
 </Sandpack>
 
-You can make this component pure by passing a prop instead of modifying a preexisting variable:
+Önceden var olan bir değişkeni değiştirmek yerine bir prop geçirerek bu bileşeni saf hale getirebilirsiniz:
 
 <Sandpack>
 
 ```js
 function Cup({ guest }) {
-  return <h2>Tea cup for guest #{guest}</h2>;
+  return <h2>Misafir #{guest} için çay bardağı</h2>;
 }
 
 export default function TeaSet() {
@@ -520,43 +520,44 @@ export default function TeaSet() {
 
 <LearnMore path="/learn/keeping-components-pure">
 
-Read **[Keeping Components Pure](/learn/keeping-components-pure)** to learn how to write components as pure, predictable functions.
+Bileşenlerin saf, öngörülebilir fonksiyonlar olarak nasıl yazılacağını öğrenmek için **[Bileşenleri Saf Tutmak](/learn/keeping-components-pure)** bölümünü okuyun.
 
 </LearnMore>
 
-## Your UI as a tree {/*your-ui-as-a-tree*/}
+## Arayüzünüzü bir ağaç olarak düşünün {/*your-ui-as-a-tree*/}
 
-React uses trees to model the relationships between components and modules. 
+React, bileşenler ve modüller arasındaki ilişkileri modellemek için ağaçları kullanır.
 
-A React render tree is a representation of the parent and child relationship between components. 
+React render ağacı, bileşenler arasındaki ebeveyn ve çocuk ilişkisinin bir temsilidir.
 
 <Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">
 
-An example React render tree.
+Örnek bir React render ağacı.
 
 </Diagram>
 
-Components near the top of the tree, near the root component, are considered top-level components. Components with no child components are leaf components. This categorization of components is useful for understanding data flow and rendering performance.
+Ağacın tepesine yakın, kök bileşene yakın bileşenler üst düzey bileşenler olarak kabul edilir. Alt bileşeni olmayan bileşenler yaprak bileşenlerdir. Bileşenlerin bu şekilde kategorize edilmesi, veri akışını ve işleme performansını anlamak için kullanışlıdır.
 
-Modelling the relationship between JavaScript modules is another useful way to understand your app. We refer to it as a module dependency tree. 
+
+JavaScript modülleri arasındaki ilişkiyi modellemek, uygulamanızı anlamanın bir başka yararlı yoludur. Bunu modül bağımlılık ağacı olarak adlandırıyoruz.
 
 <Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">
 
-An example module dependency tree.
+Örnek bir modül bağımlılık ağacı.
 
 </Diagram>
 
-A dependency tree is often used by build tools to bundle all the relevant JavaScript code for the client to download and render. A large bundle size regresses user experience for React apps. Understanding the module dependency tree is helpful to debug such issues. 
+Bağımlılık ağacı genellikle derleme araçları tarafından istemcinin indirmesi ve renderlaması için ilgili tüm JavaScript kodunu paketlemek için kullanılır. Büyük bir paket boyutu, React uygulamaları için kullanıcı deneyimini geriletir. Modül bağımlılık ağacını anlamak, bu tür sorunları ayıklamak için yardımcı olur.
 
 <LearnMore path="/learn/understanding-your-ui-as-a-tree">
 
-Read **[Your UI as a Tree](/learn/understanding-your-ui-as-a-tree)** to learn how to create a render and module dependency trees for a React app and how they're useful mental models for improving user experience and performance.
+Bir React uygulaması için render ve modül bağımlılık ağaçlarının nasıl oluşturulacağını ve bunların kullanıcı deneyimini ve performansı iyileştirmek için nasıl yararlı zihinsel modeller olduğunu öğrenmek için **[Arayüzünüzü Bir Ağaç Olarak Anlamak](/learn/understanding-your-ui-as-a-tree)** bölümünü okuyun.
 
 </LearnMore>
 
 
-## What's next? {/*whats-next*/}
+## Sırada ne var? {/*whats-next*/}
 
-Head over to [Your First Component](/learn/your-first-component) to start reading this chapter page by page!
+Bu bölümü sayfa sayfa okumaya başlamak için [İlk Bileşeniniz](/learn/your-first-component) bölümüne gidin!
 
-Or, if you're already familiar with these topics, why not read about [Adding Interactivity](/learn/adding-interactivity)?
+Ya da bu konulara zaten aşinaysanız, neden [Etkileşim Ekleme](/learn/adding-interactivity) hakkında okumuyorsunuz?
