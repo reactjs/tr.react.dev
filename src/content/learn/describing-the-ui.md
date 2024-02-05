@@ -236,7 +236,7 @@ JSX'ten JavaScript verilerine nasıl erişileceğini öğrenmek için **[JSX iç
 
 ## Bileşenlere Prop'ları Aktarma {/*passing-props-to-a-component*/}
 
-React bileşenleri birbirleriyle iletişim kurmak için *props* kullanırlar. Her ana bileşen, alt bileşenlerine prop'lar vererek onlara bazı bilgiler aktarabilir. Prop'lar size HTML niteliklerini hatırlatabilir, ancak nesneler, diziler, fonksiyonlar ve hatta JSX dahil olmak üzere herhangi bir JavaScript değerini bunlar aracılığıyla iletebilirsiniz!
+React bileşenleri birbirleriyle iletişim kurmak için *props* kullanırlar. Her ana bileşen, alt bileşenlerine prop'lar vererek onlara bazı bilgiler aktarabilir. Prop'lar size HTML özelliklerini hatırlatabilir, ancak nesneler, diziler, fonksiyonlar ve hatta JSX dahil olmak üzere herhangi bir JavaScript değerini bunlar aracılığıyla iletebilirsiniz!
 
 <Sandpack>
 
@@ -536,7 +536,7 @@ React render ağacı, bileşenler arasındaki ebeveyn ve çocuk ilişkisinin bir
 
 </Diagram>
 
-Ağacın tepesine yakın, kök bileşene yakın bileşenler üst düzey bileşenler olarak kabul edilir. Alt bileşeni olmayan bileşenler yaprak bileşenlerdir. Bileşenlerin bu şekilde kategorize edilmesi, veri akışını ve işleme performansını anlamak için kullanışlıdır.
+Ağacın tepesine , kök bileşene yakın bileşenler üst düzey bileşenler olarak kabul edilir. Alt elemanı olmayan bileşenler yaprak bileşenlerdir. Bileşenlerin bu şekilde kategorize edilmesi, veri akışını ve işleme performansını anlamak için kullanışlıdır.
 
 
 JavaScript modülleri arasındaki ilişkiyi modellemek, uygulamanızı anlamanın bir başka yararlı yoludur. Bunu modül bağımlılık ağacı olarak adlandırıyoruz.
