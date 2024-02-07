@@ -4,7 +4,7 @@ title: Kullanıcı Arayüzünü Tanımlama
 
 <Intro>
 
-React, kullanıcı arayüzleri (UI) oluşturmak için kullanılan bir JavaScript kütüphanesidir. Kullanıcı arayüzü butonlar, metinler ve resimler gibi küçük birimlerden oluşur. React bunları yeniden kullanılabilir, iç içe yerleştirilebilir *bileşenler* halinde birleştirmenize olanak tanır. Web sitelerinden telefon uygulamalarına kadar ekrandaki her şey bileşenlere ayrılabilir. Bu bölümde, React bileşenlerini oluşturmayı, özelleştirmeyi ve koşullu olarak görüntülemeyi öğreneceksiniz.
+React, kullanıcı arayüzleri (UI) render etmek için kullanılan bir JavaScript kütüphanesidir. Kullanıcı arayüzü butonlar, metinler ve resimler gibi küçük birimlerden oluşur. React bunları yeniden kullanılabilir, iç içe yerleştirilebilir *bileşenler* halinde birleştirmenize olanak tanır. Web sitelerinden telefon uygulamalarına kadar ekrandaki her şey bileşenlere ayrılabilir. Bu bölümde, React bileşenlerini oluşturmayı, özelleştirmeyi ve koşullu olarak görüntülemeyi öğreneceksiniz.
 
 </Intro>
 
@@ -188,7 +188,7 @@ Doğru JSX yazmayı öğrenmek için **[JSX ile İşaretleme (Markup) Yazma](/le
 
 ## JSX içinde JavaScript kodunu süslü parantezlerle kullanma {/*javascript-in-jsx-with-curly-braces*/}
 
-JSX, JavaScript dosyası içinde HTML benzeri işaretleme yazmanıza olanak tanır ve renderlama mantığını ile içeriği aynı yerde tutar. Bazı durumlarda, bu işaretlemenin içine biraz JavaScript mantığı eklemek veya dinamik bir özelliğe başvurmak isteyebilirsiniz. Bu durumda, JSX içinde süslü parantez kullanarak JavaScript'e bir "pencere açabilirsiniz".
+JSX, renderlama mantığını ve içeriği aynı yerde tutarak bir JavaScript dosyası içinde HTML benzeri biçimlendirme yazmanıza olanak tanır. Bazen bu işaretlemenin içine küçük bir JavaScript mantığı eklemek veya dinamik bir özelliğe başvurmak isteyebilirsiniz. Bu durumda, JavaScript'e "bir pencere açmak" için JSX'inizde süslü parantezleri kullanabilirsiniz:
 
 <Sandpack>
 
@@ -317,9 +317,9 @@ Prop'ların nasıl aktarılacağını ve okunacağını öğrenmek için **[Bile
 
 ## Koşullu olarak render etme {/*conditional-rendering*/}
 
-Bileşenlerinizin genellikle farklı koşullara bağlı olarak farklı şeyler göstermesi gerekecektir. React'te, `if` ifadeleri, `&&` ve `? :` operatörleri gibi JavaScript sözdizimlerini kullanarak JSX'i koşullu olarak oluşturabilirsiniz.
+Bileşenlerinizin genellikle farklı koşullara bağlı olarak farklı şeyler göstermesi gerekecektir. React'te, `if` ifadeleri, `&&` ve `? :` operatörleri gibi JavaScript sözdizimlerini kullanarak JSX'i koşullu olarak render edebilirsiniz.
 
-Bu örnekte, bir onay işaretini (checkmark) koşullu olarak oluşturmak için JavaScriptdeki `&&` operatörü kullanılmıştır:
+Bu örnekte, bir onay işaretini (checkmark) koşullu olarak render etmek için JavaScriptdeki `&&` operatörü kullanılmıştır:
 
 <Sandpack>
 
@@ -359,7 +359,7 @@ export default function PackingList() {
 
 <LearnMore path="/learn/conditional-rendering">
 
-İçeriği koşullu olarak oluşturmanın farklı yollarını öğrenmek için **[Koşullu Olarak Render Etmek](/learn/conditional-rendering)** bölümünü okuyun.
+İçeriği koşullu olarak render etmenin farklı yollarını öğrenmek için **[Koşullu Olarak Render Etmek](/learn/conditional-rendering)** bölümünü okuyun.
 
 </LearnMore>
 
@@ -459,7 +459,7 @@ h2 { font-size: 20px; }
 
 <LearnMore path="/learn/rendering-lists">
 
-Bir bileşen listesinin nasıl oluşturulacağını ve bir anahtarın nasıl seçileceğini öğrenmek için **[Listeleri Render Etmek](/learn/rendering-lists)** bölümünü okuyun.
+Bir bileşen listesinin nasıl render edileceğini ve bir anahtarın nasıl seçileceğini öğrenmek için **[Listeleri Render Etmek](/learn/rendering-lists)** bölümünü okuyun.
 
 </LearnMore>
 
@@ -478,7 +478,7 @@ Bileşenlerinizi yalnızca saf fonksiyonlar olarak yazarsanız, kod tabanınız 
 let guest = 0;
 
 function Cup() {
-  // Bad: changing a preexisting variable!
+  // Kötü: önceden var olan bir değişkeni değiştirir!
   guest = guest + 1;
   return <h2>Misafir #{guest} için çay bardağı</h2>;
 }
@@ -528,20 +528,19 @@ Bileşenlerin saf, öngörülebilir fonksiyonlar olarak nasıl yazılacağını 
 
 React, bileşenler ve modüller arasındaki ilişkileri modellemek için ağaçları kullanır.
 
-React render ağacı, bileşenler arasındaki ebeveyn ve çocuk ilişkisinin bir temsilidir.
+React render ağacı, bileşenler arasındaki üst ve alt ilişkisinin bir temsilidir.
 
-<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">
+<Diagram name="genel_render_ağacı" height={250} width={500} alt="Her bir düğümün bir bileşeni temsil ettiği beş düğümlü bir ağaç grafiği. Kök düğüm ağaç grafiğinin en üstünde yer alır ve 'Kök Bileşen' olarak etiketlenmiştir. 'Bileşen A' ve 'Bileşen C' olarak etiketlenmiş iki düğüme uzanan iki oku vardır. Okların her biri 'render' ile etiketlenmiştir. 'Bileşen A', 'Bileşen B' etiketli bir düğüme giden tek bir 'render' okuna sahiptir. 'C Bileşeni', 'D Bileşeni' etiketli bir düğüme giden tek bir 'render' okuna sahiptir.">
 
 Örnek bir React render ağacı.
 
 </Diagram>
 
-Ağacın tepesine , kök bileşene yakın bileşenler üst düzey bileşenler olarak kabul edilir. Alt elemanı olmayan bileşenler yaprak bileşenlerdir. Bileşenlerin bu şekilde kategorize edilmesi, veri akışını ve işleme performansını anlamak için kullanışlıdır.
-
+Ağacın tepesine, kök bileşene yakın bileşenler üst düzey bileşenler olarak kabul edilir. Alt elemanı olmayan bileşenler yaprak bileşenlerdir. Bileşenlerin bu şekilde kategorize edilmesi, veri akışını ve render etme performansını anlamak için kullanışlıdır.
 
 JavaScript modülleri arasındaki ilişkiyi modellemek, uygulamanızı anlamanın bir başka yararlı yoludur. Bunu modül bağımlılık ağacı olarak adlandırıyoruz.
 
-<Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">
+<Diagram name="genel_bağımlılık_ağacı" height={250} width={500} alt="Beş düğümlü bir ağaç grafiği. Her düğüm bir JavaScript modülünü temsil eder. En üstteki düğüm 'RootModule.js' olarak etiketlenmiştir. Bu düğümün düğümlere uzanan üç oku vardır: 'ModuleA.js', 'ModuleB.js' ve 'ModuleC.js'. Her ok 'imports' olarak etiketlenmiştir. 'ModuleC.js' düğümü, 'ModuleD.js' etiketli bir düğüme işaret eden tek bir 'imports' okuna sahiptir.">
 
 Örnek bir modül bağımlılık ağacı.
 
