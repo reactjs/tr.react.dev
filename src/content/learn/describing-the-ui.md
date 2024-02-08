@@ -530,7 +530,7 @@ React, bileşenler ve modüller arasındaki ilişkileri modellemek için ağaçl
 
 React render ağacı, bileşenler arasındaki üst ve alt ilişkisinin bir temsilidir.
 
-<Diagram name="genel_render_ağacı" height={250} width={500} alt="Her bir düğümün bir bileşeni temsil ettiği beş düğümlü bir ağaç grafiği. Kök düğüm ağaç grafiğinin en üstünde yer alır ve 'Kök Bileşen' olarak etiketlenmiştir. 'Bileşen A' ve 'Bileşen C' olarak etiketlenmiş iki düğüme uzanan iki oku vardır. Okların her biri 'render' ile etiketlenmiştir. 'Bileşen A', 'Bileşen B' etiketli bir düğüme giden tek bir 'render' okuna sahiptir. 'C Bileşeni', 'D Bileşeni' etiketli bir düğüme giden tek bir 'render' okuna sahiptir.">
+<Diagram name="generic_render_tree" height={250} width={500} alt="Her bir düğümün bir bileşeni temsil ettiği beş düğümlü bir ağaç grafiği. Kök düğüm ağaç grafiğinin en üstünde yer alır ve 'Kök Bileşen' olarak etiketlenmiştir. 'Bileşen A' ve 'Bileşen C' olarak etiketlenmiş iki düğüme uzanan iki oku vardır. Okların her biri 'render' ile etiketlenmiştir. 'Bileşen A', 'Bileşen B' etiketli bir düğüme giden tek bir 'render' okuna sahiptir. 'C Bileşeni', 'D Bileşeni' etiketli bir düğüme giden tek bir 'render' okuna sahiptir.">
 
 Örnek bir React render ağacı.
 
@@ -540,7 +540,7 @@ Ağacın tepesine, kök bileşene yakın bileşenler üst düzey bileşenler ola
 
 JavaScript modülleri arasındaki ilişkiyi modellemek, uygulamanızı anlamanın bir başka yararlı yoludur. Bunu modül bağımlılık ağacı olarak adlandırıyoruz.
 
-<Diagram name="genel_bağımlılık_ağacı" height={250} width={500} alt="Beş düğümlü bir ağaç grafiği. Her düğüm bir JavaScript modülünü temsil eder. En üstteki düğüm 'RootModule.js' olarak etiketlenmiştir. Bu düğümün düğümlere uzanan üç oku vardır: 'ModuleA.js', 'ModuleB.js' ve 'ModuleC.js'. Her ok 'imports' olarak etiketlenmiştir. 'ModuleC.js' düğümü, 'ModuleD.js' etiketli bir düğüme işaret eden tek bir 'imports' okuna sahiptir.">
+<Diagram name="generic_dependency_tree" height={250} width={500} alt="Beş düğümlü bir ağaç grafiği. Her düğüm bir JavaScript modülünü temsil eder. En üstteki düğüm 'RootModule.js' olarak etiketlenmiştir. Bu düğümün düğümlere uzanan üç oku vardır: 'ModuleA.js', 'ModuleB.js' ve 'ModuleC.js'. Her ok 'imports' olarak etiketlenmiştir. 'ModuleC.js' düğümü, 'ModuleD.js' etiketli bir düğüme işaret eden tek bir 'imports' okuna sahiptir.">
 
 Örnek bir modül bağımlılık ağacı.
 
