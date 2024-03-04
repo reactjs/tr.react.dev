@@ -1509,7 +1509,11 @@ main {
 
 ---
 
+<<<<<<< HEAD
 ### Bir hata sınırı ile kullanıcılara bir hatayı gösterme {/*displaying-an-error-to-users-with-error-boundary*/}
+=======
+### Displaying an error to users with an error boundary {/*displaying-an-error-to-users-with-error-boundary*/}
+>>>>>>> 265fa26e3b39739f06c956140d9acf618c6b4e6b
 
 <Canary>
 
