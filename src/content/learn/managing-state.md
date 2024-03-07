@@ -1,30 +1,30 @@
 ---
-title: Managing State
+title: State'i Yönetme
 ---
 
 <Intro>
 
-As your application grows, it helps to be more intentional about how your state is organized and how the data flows between your components. Redundant or duplicate state is a common source of bugs. In this chapter, you'll learn how to structure your state well, how to keep your state update logic maintainable, and how to share state between distant components.
+Uygulamanız büyüdükçe, state'inizin nasıl düzenlendiği ve bileşenleriniz arasında veri akışının nasıl olduğu konusunda daha bilinçli olmanız size yardımcı olur. Gereksiz ve yenilenen state, yaygın bir hata kaynağıdır. Bu bölümde, state'inizi nasıl iyi yapılandıracağınızı, state güncelleme mantığınızı nasıl sürdürülebilir tutacağınızı ve uzak bileşenler arasında state'i nasıl paylaşacığınızı öğreneceksiniz.
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to think about UI changes as state changes](/learn/reacting-to-input-with-state)
-* [How to structure state well](/learn/choosing-the-state-structure)
-* [How to "lift state up" to share it between components](/learn/sharing-state-between-components)
-* [How to control whether the state gets preserved or reset](/learn/preserving-and-resetting-state)
-* [How to consolidate complex state logic in a function](/learn/extracting-state-logic-into-a-reducer)
-* [How to pass information without "prop drilling"](/learn/passing-data-deeply-with-context)
-* [How to scale state management as your app grows](/learn/scaling-up-with-reducer-and-context)
+* [UI değişiklikleri nasıl state değişikliği olarak düşünülür](/learn/reacting-to-input-with-state)
+* [State nasıl iyi yapılandırılabilir](/learn/choosing-the-state-structure)
+* [Bileşenler arasında paylaşmak için state nasıl "yukarı kaldırılır"](/learn/sharing-state-between-components)
+* [State'in korunup korunmayacağı ya da sıfırlanıp sıfırlanmayacağı nasıl kontrol edilir](/learn/preserving-and-resetting-state)
+* [Karmaşık state mantığı bir fonksiyonda nasıl birleştirilir](/learn/extracting-state-logic-into-a-reducer)
+* ["Prop drilling" yapmadan bilgi nasıl iletilir](/learn/passing-data-deeply-with-context)
+* [Uygulamanız büyüdükçe state yönetimi nasıl ölçeklenidirilir](/learn/scaling-up-with-reducer-and-context)
 
 </YouWillLearn>
 
-## Reacting to input with state {/*reacting-to-input-with-state*/}
+## State ile girdiye reaksiyon verme {/*reacting-to-input-with-state*/}
 
-With React, you won't modify the UI from code directly. For example, you won't write commands like "disable the button", "enable the button", "show the success message", etc. Instead, you will describe the UI you want to see for the different visual states of your component ("initial state", "typing state", "success state"), and then trigger the state changes in response to user input. This is similar to how designers think about UI.
+React ile kullanıcı arayüzünü direkt olarak koddan modifiye etmeyeceksiniz. Örneğin, "butonu devre dışı bırak", "butonu etkinleştir", "başarılı mesajını göster" gibi komutlar yazmayacaksınız. Onun yerine, bileşeninizin farklı görsel state'leri ("başlangıç state'i", "yazma state'i", "başarı state'i") için görmek istediğiniz kullanıcı arayüzünü tanımlayacak ve ardından kullanıcı girdisine yanıt olarak state değişikliklerini tetikleyeceksiniz. Bu, tasarımcıları kullanıcı arayüzünü nasıl düşündüğüyle benzerdir.
 
-Here is a quiz form built using React. Note how it uses the `status` state variable to determine whether to enable or disable the submit button, and whether to show the success message instead.
+Aşağıda React ile yapılmış bir kısa sınav formu vardır. Gönder butonunun etkinleştirilip etkinleştirilmeyeceğini ve bunun yerine başarı mesajının gösterilip gösterilmeyeceğini belirlemek için `status` durum değişkeninin nasıl kullanıldağına dikkat edin.
 
 <Sandpack>
 
@@ -37,7 +37,7 @@ export default function Form() {
   const [status, setStatus] = useState('typing');
 
   if (status === 'success') {
-    return <h1>That's right!</h1>
+    return <h1>Doğru!</h1>
   }
 
   async function handleSubmit(e) {
@@ -58,9 +58,9 @@ export default function Form() {
 
   return (
     <>
-      <h2>City quiz</h2>
+      <h2>Şehir sorusu</h2>
       <p>
-        In which city is there a billboard that turns air into drinkable water?
+        İki kıta üzerinde konumlanmış şehir hangisidir?
       </p>
       <form onSubmit={handleSubmit}>
         <textarea
@@ -73,7 +73,7 @@ export default function Form() {
           answer.length === 0 ||
           status === 'submitting'
         }>
-          Submit
+          Gönder
         </button>
         {error !== null &&
           <p className="Error">
@@ -86,12 +86,12 @@ export default function Form() {
 }
 
 function submitForm(answer) {
-  // Pretend it's hitting the network.
+  // Ağa istek atıyormuş gibi yapalım.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      let shouldError = answer.toLowerCase() !== 'lima'
+      let shouldError = answer.toLowerCase() !== 'istanbul'
       if (shouldError) {
-        reject(new Error('Good guess but a wrong answer. Try again!'));
+        reject(new Error('İyi tahmin ama yanlış cevap. Tekrar dene!'));
       } else {
         resolve();
       }
@@ -108,15 +108,15 @@ function submitForm(answer) {
 
 <LearnMore path="/learn/reacting-to-input-with-state">
 
-Read **[Reacting to Input with State](/learn/reacting-to-input-with-state)** to learn how to approach interactions with a state-driven mindset.
+**[Girdiye State ile Reaksiyon Verme](/learn/reacting-to-input-with-state)** sayfasını okuyarak etkileşimlere state odaklı zihniyetle nasıl yaklaşılacağını öğrenebilirsiniz.
 
 </LearnMore>
 
-## Choosing the state structure {/*choosing-the-state-structure*/}
+## State yapısını seçme {/*choosing-the-state-structure*/}
 
-Structuring state well can make a difference between a component that is pleasant to modify and debug, and one that is a constant source of bugs. The most important principle is that state shouldn't contain redundant or duplicated information. If there's unnecessary state, it's easy to forget to update it, and introduce bugs!
+State'i iyi yapılandırmak, değiştirmesi ve hata ayıklaması keyfli bir bileşen ile sürekli hata kaynağı olan bir bileşen arasında fark yaratabilir. En önemli ilke, state'in gereksiz veya yinelenen bilgiler içermemesidir. Gereksiz state varsa, güncellemeyi unutmak ve hatalara neden olmak kolaydır!
 
-For example, this form has a **redundant** `fullName` state variable:
+Örneğin, bu form **gereksiz** bir `fullName` state değişkenine sahip:
 
 <Sandpack>
 
@@ -140,23 +140,23 @@ export default function Form() {
 
   return (
     <>
-      <h2>Let’s check you in</h2>
+      <h2>Hadi bilgilerinizi girelim</h2>
       <label>
-        First name:{' '}
+        Adın:{' '}
         <input
           value={firstName}
           onChange={handleFirstNameChange}
         />
       </label>
       <label>
-        Last name:{' '}
+        Soyadın:{' '}
         <input
           value={lastName}
           onChange={handleLastNameChange}
         />
       </label>
       <p>
-        Your ticket will be issued to: <b>{fullName}</b>
+        Biletiniz şu kişiye düzenlenecek: <b>{fullName}</b>
       </p>
     </>
   );
@@ -169,7 +169,7 @@ label { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-You can remove it and simplify the code by calculating `fullName` while the component is rendering:
+Bileşen render edilirken `fullName`'i hesaplayarak state'i kaldırabilir ve kodu basitleştirebilirsiniz:
 
 <Sandpack>
 
@@ -192,23 +192,23 @@ export default function Form() {
 
   return (
     <>
-      <h2>Let’s check you in</h2>
+      <h2>Hadi bilgilerinizi girelim</h2>
       <label>
-        First name:{' '}
+        Adın:{' '}
         <input
           value={firstName}
           onChange={handleFirstNameChange}
         />
       </label>
       <label>
-        Last name:{' '}
+        Soyadın:{' '}
         <input
           value={lastName}
           onChange={handleLastNameChange}
         />
       </label>
       <p>
-        Your ticket will be issued to: <b>{fullName}</b>
+        Biletiniz şu kişiye düzenlenecek: <b>{fullName}</b>
       </p>
     </>
   );
@@ -221,19 +221,19 @@ label { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-This might seem like a small change, but many bugs in React apps are fixed this way.
+Bu küçük bir değişiklik gibi görünebilir ama React uygulamalarındaki bir çok hata bu şekilde düzeltilir.
 
 <LearnMore path="/learn/choosing-the-state-structure">
 
-Read **[Choosing the State Structure](/learn/choosing-the-state-structure)** to learn how to design the state shape to avoid bugs.
+**[State Yapısını Seçme](/learn/choosing-the-state-structure)** sayfasını okuyarak hatalardan kaçınmak için state'i nasıl yapılandıracağınızı öğrenebilirsiniz.
 
 </LearnMore>
 
-## Sharing state between components {/*sharing-state-between-components*/}
+## Bileşenler arasında state'i paylaşma {/*sharing-state-between-components*/}
 
-Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as "lifting state up", and it's one of the most common things you will do writing React code.
+Bazen, iki bileşenin state'inin birlikte değişmesini istersiniz. Bunu yapmak için, her ikisinin de state'ini kaldırın, state'i en yakın ortak üst bileşene taşıyın ve sonra iki bileşene prop'lar ile iletin. Bu "state'i yukarı kaldırmak" olarak bilinir ve React kodu yazarken en çok yapacağınız şeylerden biridir.
 
-In this example, only one panel should be active at a time. To achieve this, instead of keeping the active state inside each individual panel, the parent component holds the state and specifies the props for its children.
+Bu örnekte, aynı anda sadece bir panel aktif olmalıdır. Bunu başarmak için, aktif state'i her bir panelin içinde tutmak yerine, üst bileşen state'i tutar ve alt bileşenler için prop'ları belirler.
 
 <Sandpack>
 
@@ -244,20 +244,20 @@ export default function Accordion() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <>
-      <h2>Almaty, Kazakhstan</h2>
+      <h2>Ankara, Türkiye</h2>
       <Panel
         title="About"
         isActive={activeIndex === 0}
         onShow={() => setActiveIndex(0)}
       >
-        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+        Ankara, Türkiye'nin başkenti ve İstanbul'dan sonra en kalabalık ikinci ilidir.
       </Panel>
       <Panel
         title="Etymology"
         isActive={activeIndex === 1}
         onShow={() => setActiveIndex(1)}
       >
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+        Belgelere dayanmayan ve günümüze kadar gelen söylentilere göre tarihte bahsedilen ilk adı Galatlar tarafından verilen ve Yunanca "çapa" anlamına gelen <i lang="el">Ankyra</i>'dır. Bu isim zamanla değişerek Ancyre, Engüriye, Engürü, Angara, Angora ve nihayet Ankara olmuştur.
       </Panel>
     </>
   );
@@ -276,7 +276,7 @@ function Panel({
         <p>{children}</p>
       ) : (
         <button onClick={onShow}>
-          Show
+          Göster
         </button>
       )}
     </section>
@@ -296,15 +296,15 @@ h3, p { margin: 5px 0px; }
 
 <LearnMore path="/learn/sharing-state-between-components">
 
-Read **[Sharing State Between Components](/learn/sharing-state-between-components)** to learn how to lift state up and keep components in sync.
+**[Bileşenler Arasında State Paylaşımı](/learn/sharing-state-between-components)** sayfasını okuyarak state'i nasıl yukarı kaldıracağınızı ve bileşenleri senkronize tutacağınızı öğrenebilirsiniz.
 
 </LearnMore>
 
-## Preserving and resetting state {/*preserving-and-resetting-state*/}
+## State'i korumak ve resetlemek {/*preserving-and-resetting-state*/}
 
-When you re-render a component, React needs to decide which parts of the tree to keep (and update), and which parts to discard or re-create from scratch. In most cases, React's automatic behavior works well enough. By default, React preserves the parts of the tree that "match up" with the previously rendered component tree.
+Bir bileşeni yeniden render ettiğinizde, React, ağacın hangi kısımlarını tutacağın (ve güncelleyeciğine) ve hangi kısımları atacağına ya da sıfırdan yeniden oluşturacağına karar vermelidir. Pek çok durumda, React'in otomatik davranışı yeterince iyi çalışmaktadır. Varsayılan olarak React, ağacın daha önce render edilmiş bileşen ağacıyla "eşleşen" kısımlarını korur.
 
-However, sometimes this is not what you want. In this chat app, typing a message and then switching the recipient does not reset the input. This can make the user accidentally send a message to the wrong person:
+Ancak, bazen bunu istemezsiniz. Bu sohbet uygulamasında, bir mesaj yazmak ve ardından alıcıyı değiştirmek girdiyi sıfırlamamaktadır. Bu kullanıcının kazara yanlış kişiye mesaj göndermesine neden olabilir:
 
 <Sandpack>
 
@@ -328,9 +328,9 @@ export default function Messenger() {
 }
 
 const contacts = [
-  { name: 'Taylor', email: 'taylor@mail.com' },
-  { name: 'Alice', email: 'alice@mail.com' },
-  { name: 'Bob', email: 'bob@mail.com' }
+  { name: 'Ayşe', email: 'ayse@mail.com' },
+  { name: 'Zeynep', email: 'zeynep@mail.com' },
+  { name: 'Ahmet', email: 'ahmet@mail.com' }
 ];
 ```
 
@@ -367,11 +367,11 @@ export default function Chat({ contact }) {
     <section className="chat">
       <textarea
         value={text}
-        placeholder={'Chat to ' + contact.name}
+        placeholder={contact.name + " ile sohbet et"}
         onChange={e => setText(e.target.value)}
       />
       <br />
-      <button>Send to {contact.email}</button>
+      <button>{contact.email} adresine gönder</button>
     </section>
   );
 }
@@ -399,7 +399,7 @@ textarea {
 
 </Sandpack>
 
-React lets you override the default behavior, and *force* a component to reset its state by passing it a different `key`, like `<Chat key={email} />`. This tells React that if the recipient is different, it should be considered a *different* `Chat` component that needs to be re-created from scratch with the new data (and UI like inputs). Now switching between the recipients resets the input field--even though you render the same component.
+React, varsayılan davranışı geçersiz kılmanıza ve bir bileşene `<Chat key={email} />` gibi farklı bir `key` ileterek state'i sıfırlamaya *zorlamanıza* izin verir. Bu React'e, eğer alıcı farklı ise, yeni verilerle (ve girdiler gibi kullanıcı arayüzüyle) sıfırdan yeniden render edilmesi gereken *farklı* bir `Chat` bileşeni olarak kabul edilmesi gerektiğini söyler. Şimdi alıcılar arasında geçiş yapmak, aynı bileşeni render etseniz bile girdi alanını sıfırlar.
 
 <Sandpack>
 
@@ -423,9 +423,9 @@ export default function Messenger() {
 }
 
 const contacts = [
-  { name: 'Taylor', email: 'taylor@mail.com' },
-  { name: 'Alice', email: 'alice@mail.com' },
-  { name: 'Bob', email: 'bob@mail.com' }
+  { name: 'Ayşe', email: 'ayşe@mail.com' },
+  { name: 'Zeynep', email: 'zeynep@mail.com' },
+  { name: 'Ahmet', email: 'ahmet@mail.com' }
 ];
 ```
 
@@ -462,11 +462,11 @@ export default function Chat({ contact }) {
     <section className="chat">
       <textarea
         value={text}
-        placeholder={'Chat to ' + contact.name}
+        placeholder={contact.name + " ile sohbet et"}
         onChange={e => setText(e.target.value)}
       />
       <br />
-      <button>Send to {contact.email}</button>
+      <button>{contact.email} adresine gönder</button>
     </section>
   );
 }
@@ -496,13 +496,13 @@ textarea {
 
 <LearnMore path="/learn/preserving-and-resetting-state">
 
-Read **[Preserving and Resetting State](/learn/preserving-and-resetting-state)** to learn the lifetime of state and how to control it.
+**[State'i Korumak ve Sıfırlamak](/learn/preserving-and-resetting-state)** sayfasını okuyarak state'in ömrünü ve onu nasıl kontrol edebileceğinizi öğrenebilirsiniz.
 
 </LearnMore>
 
-## Extracting state logic into a reducer {/*extracting-state-logic-into-a-reducer*/}
+## State mantığını bir reducer'a aktarma {/*extracting-state-logic-into-a-reducer*/}
 
-Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called "reducer". Your event handlers become concise because they only specify the user "actions". At the bottom of the file, the reducer function specifies how the state should update in response to each action!
+Birçok olay yöneticisine yayılmış çok fazla sayıda state güncellemesine sahip bileşenler can sıkıcı olabilir. Bu gibi durumlarda tüm state güncelleme mantıklarını "reducer (redüktör)" adı verilen tek bir fonksiyonda birleştirebilirsiniz. Olay yönetecileriniz, yalnızca kullanıcı "eylemlerini" belirttikleri için kısa ve öz hale gelir. Dosyanın en altında, reducer fonksiyonu her bir eyleme yanıt olarak state'in nasıl güncellenmesi gerektiğini belirtir!
 
 <Sandpack>
 
@@ -541,7 +541,7 @@ export default function TaskApp() {
 
   return (
     <>
-      <h1>Prague itinerary</h1>
+      <h1>Prag Gezisi Planı</h1>
       <AddTask
         onAddTask={handleAddTask}
       />
@@ -576,16 +576,16 @@ function tasksReducer(tasks, action) {
       return tasks.filter(t => t.id !== action.id);
     }
     default: {
-      throw Error('Unknown action: ' + action.type);
+      throw Error('Bilinmeyen eylem: ' + action.type);
     }
   }
 }
 
 let nextId = 3;
 const initialTasks = [
-  { id: 0, text: 'Visit Kafka Museum', done: true },
-  { id: 1, text: 'Watch a puppet show', done: false },
-  { id: 2, text: 'Lennon Wall pic', done: false }
+  { id: 0, text: 'Kafka Müzesini ziyaret et', done: true },
+  { id: 1, text: 'Kukla gösterisi izle', done: false },
+  { id: 2, text: "Lennon Duvarı'nda fotoğraf çek", done: false }
 ];
 ```
 
@@ -597,14 +597,14 @@ export default function AddTask({ onAddTask }) {
   return (
     <>
       <input
-        placeholder="Add task"
+        placeholder="Görev ekle"
         value={text}
         onChange={e => setText(e.target.value)}
       />
       <button onClick={() => {
         setText('');
         onAddTask(text);
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   )
 }
@@ -648,7 +648,7 @@ function Task({ task, onChange, onDelete }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -657,7 +657,7 @@ function Task({ task, onChange, onDelete }) {
       <>
         {task.text}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -676,7 +676,7 @@ function Task({ task, onChange, onDelete }) {
       />
       {taskContent}
       <button onClick={() => onDelete(task.id)}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -693,15 +693,15 @@ ul, li { margin: 0; padding: 0; }
 
 <LearnMore path="/learn/extracting-state-logic-into-a-reducer">
 
-Read **[Extracting State Logic into a Reducer](/learn/extracting-state-logic-into-a-reducer)** to learn how to consolidate logic in the reducer function.
+**[State Mantığını Bir Reducer'a Aktarma](/learn/extracting-state-logic-into-a-reducer)** sayfasını okuyarak reducer fonksiyonunda mantığın nasıl birleştirileceğini öğrenebilirsiniz.
 
 </LearnMore>
 
-## Passing data deeply with context {/*passing-data-deeply-with-context*/}
+## Context ile veriyi derinlemesine aktarma {/*passing-data-deeply-with-context*/}
 
-Usually, you will pass information from a parent component to a child component via props. But passing props can become inconvenient if you need to pass some prop through many components, or if many components need the same information. Context lets the parent component make some information available to any component in the tree below it—no matter how deep it is—without passing it explicitly through props.
+Bilgiyi genelde prop’lar vasıtasıyla üst elemandan alt elemana doğru aktarırsınız. Ancak, aktarmanız gereken bileşen ulaşana kadar birçok ara bileşene iletmeniz veya birden çok bileşene aktarmanız gerekiyorsa prop kullanmak zahmetli ve karmaşık hale gelir. Context, bilgiyi üst bileşenden ihtiyaç duyan alt bileşenlere (derinliğine bakılmaksızın) prop olarak açıkça belirtmeden iletmenizi sağlar.
 
-Here, the `Heading` component determines its heading level by "asking" the closest `Section` for its level. Each `Section` tracks its own level by asking the parent `Section` and adding one to it. Every `Section` provides information to all components below it without passing props--it does that through context.
+Burada, `Heading` bileşeni başlık seviyesini en yakın `Section`'a seviyesini "sorarak" belirler. Her `Section`, üst `Section`'a sorarak ve ona bir tane ekleyerek kendi seviyesini takip eder. Her `Section`, tüm alt bileşenlerine prop aktarmadan bilgi sağlar ve bunu context aracılığıyla yapar.
 
 <Sandpack>
 
@@ -712,19 +712,19 @@ import Section from './Section.js';
 export default function Page() {
   return (
     <Section>
-      <Heading>Title</Heading>
+      <Heading>Üst Başlık</Heading>
       <Section>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
-        <Heading>Heading</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
+        <Heading>Başlık</Heading>
         <Section>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
-          <Heading>Sub-heading</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
+          <Heading>Alt-başlık</Heading>
           <Section>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
-            <Heading>Sub-sub-heading</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
+            <Heading>Alt-alt-başlık</Heading>
           </Section>
         </Section>
       </Section>
@@ -757,7 +757,7 @@ export default function Heading({ children }) {
   const level = useContext(LevelContext);
   switch (level) {
     case 0:
-      throw Error('Heading must be inside a Section!');
+      throw Error('Heading bir Section içinde olmak zorundadır!');
     case 1:
       return <h1>{children}</h1>;
     case 2:
@@ -771,7 +771,7 @@ export default function Heading({ children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error('Bilinmeyen seviye: ' + level);
   }
 }
 ```
@@ -795,15 +795,15 @@ export const LevelContext = createContext(0);
 
 <LearnMore path="/learn/passing-data-deeply-with-context">
 
-Read **[Passing Data Deeply with Context](/learn/passing-data-deeply-with-context)** to learn about using context as an alternative to passing props.
+ **[Context ile Veriyi Derinlemesine Aktarma](/learn/passing-data-deeply-with-context)** sayfasını okuyarak prop iletmesine alternatif olarak context'i nasıl kullanacağınızı öğrenebilirsiniz.
 
 </LearnMore>
 
-## Scaling up with reducer and context {/*scaling-up-with-reducer-and-context*/}
+## Reducer ve context ile ölçeklendirme {/*scaling-up-with-reducer-and-context*/}
 
-Reducers let you consolidate a component’s state update logic. Context lets you pass information deep down to other components. You can combine reducers and context together to manage state of a complex screen.
+Reducer’lar bir bileşenin state güncelleme mantığını bir araya getirmenizi sağlar. Context, bilgileri diğer bileşenlere derinlemesine iletmeye olanak tanır. Reducer’ları ve context’i bir araya getirerek karmaşık bir ekranın state’ini yönetebilirsiniz.
 
-With this approach, a parent component with complex state manages it with a reducer. Other components anywhere deep in the tree can read its state via context. They can also dispatch actions to update that state.
+Bu yaklaşımla birlikte, karmaşık state'e sahip bir üst bileşen bunu bir reducer ile yönetir. Ağacın herhangi bir yerindeki diğer bileşenler context aracılığıyla state'i okuyabilir. Ayrıca bu state'i güncellemek için eylemler de dispatch edebilirler.
 
 <Sandpack>
 
@@ -815,7 +815,7 @@ import { TasksProvider } from './TasksContext.js';
 export default function TaskApp() {
   return (
     <TasksProvider>
-      <h1>Day off in Kyoto</h1>
+      <h1>İstanbul'da bir gün</h1>
       <AddTask />
       <TaskList />
     </TasksProvider>
@@ -876,15 +876,15 @@ function tasksReducer(tasks, action) {
       return tasks.filter(t => t.id !== action.id);
     }
     default: {
-      throw Error('Unknown action: ' + action.type);
+      throw Error('Bilinmeyen eylem: ' + action.type);
     }
   }
 }
 
 const initialTasks = [
-  { id: 0, text: 'Philosopher’s Path', done: true },
-  { id: 1, text: 'Visit the temple', done: false },
-  { id: 2, text: 'Drink matcha', done: false }
+  { id: 0, text: 'Tarihi Yarımada Yürüyüşü', done: true },
+  { id: 1, text: 'Galata Kulesi Ziyareti', done: false },
+  { id: 2, text: 'Türk kahvesi iç', done: false }
 ];
 ```
 
@@ -898,7 +898,7 @@ export default function AddTask({ onAddTask }) {
   return (
     <>
       <input
-        placeholder="Add task"
+        placeholder="Görev ekle"
         value={text}
         onChange={e => setText(e.target.value)}
       />
@@ -909,7 +909,7 @@ export default function AddTask({ onAddTask }) {
           id: nextId++,
           text: text,
         });
-      }}>Add</button>
+      }}>Ekle</button>
     </>
   );
 }
@@ -953,7 +953,7 @@ function Task({ task }) {
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
-          Save
+          Kaydet
         </button>
       </>
     );
@@ -962,7 +962,7 @@ function Task({ task }) {
       <>
         {task.text}
         <button onClick={() => setIsEditing(true)}>
-          Edit
+          Düzenle
         </button>
       </>
     );
@@ -989,7 +989,7 @@ function Task({ task }) {
           id: task.id
         });
       }}>
-        Delete
+        Sil
       </button>
     </label>
   );
@@ -1006,12 +1006,12 @@ ul, li { margin: 0; padding: 0; }
 
 <LearnMore path="/learn/scaling-up-with-reducer-and-context">
 
-Read **[Scaling Up with Reducer and Context](/learn/scaling-up-with-reducer-and-context)** to learn how state management scales in a growing app.
+**[Reducer ve Context ile Ölçeklendirme](/learn/scaling-up-with-reducer-and-context)** sayfasını okuyarak büyüyen bir uygulamada state yönetiminin nasıl ölçeklendirildiğini öğrenin.
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## Sırada ne var? {/*whats-next*/}
 
-Head over to [Reacting to Input with State](/learn/reacting-to-input-with-state) to start reading this chapter page by page!
+[Girdiye State ile Reaksiyon Verme](/learn/reacting-to-input-with-state) sayfasına giderek okumaya başlayın!
 
-Or, if you're already familiar with these topics, why not read about [Escape Hatches](/learn/escape-hatches)?
+Ya da, bu konulara zaten aşina iseniz, neden [Kaçış Yolları](/learn/escape-hatches) sayfasını okumuyorsunuz?
