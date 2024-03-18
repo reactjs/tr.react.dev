@@ -554,9 +554,13 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 (Alternatif olarak seçilen indeksi state'te tutabilirsiniz.)
 
 State aşağıdaki gibi yineleniyordu:
+=======
+The state used to be duplicated like this:
+>>>>>>> f55d9487c6648570fc80f1421d7dca0a3b9b94b6
 
 * `items = [{ id: 0, title: 'pretzels'}, ...]`
 * `selectedItem = {id: 0, title: 'pretzels'}`

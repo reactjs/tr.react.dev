@@ -7,7 +7,7 @@ title: renderToStaticNodeStream
 `renderToStaticNodeStream` interaktif olmayan bir React ağacını [Okunabilir Node.js Akışına](https://nodejs.org/api/stream.html#readable-streams) render etmenize olanak tanır.
 
 ```js
-const stream = renderToStaticNodeStream(reactNode)
+const stream = renderToStaticNodeStream(reactNode, options?)
 ```
 
 </Intro>
@@ -18,7 +18,7 @@ const stream = renderToStaticNodeStream(reactNode)
 
 ## Başvuru dokümanı {/*reference*/}
 
-### `renderToStaticNodeStream(reactNode)` {/*rendertostaticnodestream*/}
+### `renderToStaticNodeStream(reactNode, options?)` {/*rendertostaticnodestream*/}
 
 Sunucuda, [Okunabilir Node.js Akışı](https://nodejs.org/api/stream.html#readable-streams) elde etmek için `renderToStaticNodeStream` fonksiyonunu çağırınız.
 

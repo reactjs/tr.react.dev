@@ -263,11 +263,19 @@ body {
 
 Bu öğreticiyi yerel geliştirme ortamınızı kullanarak da takip edebilirsiniz. Bunu yapmak için şu adımlar takip edin:
 
+<<<<<<< HEAD
 1. [Node.js](https://nodejs.org/en/) kurun
 1. CodeSandbox sayfasında menüyü açmak için sol üst köşedeki butona tıklayın ve sonra **File > Export to ZIP** adımlarını izleyerek gerekli arşiv dosyalarını indirin.
 1. Arşivi açın, daha sonra bir terminal açın ve çıkarttığınız dosyaya `cd` ile gidin
 1. `npm install` ile bağımlılıkları yükleyin
 1. `npm start` ile yerel bir sunucu başlatın ve kodu tarayıcıda çalışır halde görmek için adımları takip edin
+=======
+1. Install [Node.js](https://nodejs.org/en/)
+1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **Download Sandbox** in that menu to download an archive of the files locally
+1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
+1. Install the dependencies with `npm install`
+1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+>>>>>>> f55d9487c6648570fc80f1421d7dca0a3b9b94b6
 
 Eğer bir yerde takılırsanız bunun sizi durdurmasına izin vermeyin! Websitesi üzerinde takip etmeye devam edin ve yerel kurulumu sonra tekrardan deneyin.
 
