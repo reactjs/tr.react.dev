@@ -40,7 +40,11 @@ function SearchPage() {
 
 #### Dönüş değeri {/*returns*/}
 
+<<<<<<< HEAD
 İlk render esnasında, döndürülen ertelenmiş değer ile sağladığınız değer aynı olacaktır. Güncellemeler esnasında, React önce eski değerle yeniden render etmeyi dener (bu yüzden eski değeri döndürür) ve ardından arka planda yeni değer ile birlikte yeni bir render başlatır (bu yüzden güncellenmiş değeri döndürür).
+=======
+During the initial render, the returned deferred value will be the same as the value you provided. During updates, React will first attempt a re-render with the old value (so it will return the old value), and then try another re-render in the background with the new value (so it will return the updated value). 
+>>>>>>> 7bdbab144e09d4edf793ff5128080eb1dba79be4
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
@@ -76,7 +80,11 @@ function SearchPage() {
 
 İlk render esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> ile sağladığınız <CodeStep step={1}>değer</CodeStep> aynı olacaktır.
 
+<<<<<<< HEAD
 Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en son <CodeStep step={1}>değerin</CodeStep> "gerisinde" kalır. React ilk seferde ertelenmiş değeri *güncellemeden* render eder, ardından yeni değerle arka planda yeniden render işlemi planlar.
+=======
+During updates, the <CodeStep step={2}>deferred value</CodeStep> will "lag behind" the latest <CodeStep step={1}>value</CodeStep>. In particular, React will first re-render *without* updating the deferred value, and then try to re-render with the newly received value in the background.
+>>>>>>> 7bdbab144e09d4edf793ff5128080eb1dba79be4
 
 **Bunun ne zaman faydalı olabileceğini görmek için bir örnek üzerinden ilerleyelim.**
 
@@ -508,7 +516,11 @@ Bunu iki adımda gerçekleşen bir süreç olarak düşünebilirsiniz:
 
 1. **İlk olarak, React yeni `query` (`"ab"`) ancak eski `deferredQuery` (hala `"a")` ile yeniden render gerçekleştirir.** Sonuç listesine ilettiğiniz `deferredQuery` değeri *ertelenmiştir:* `query` değerinin "gerisindedir".
 
+<<<<<<< HEAD
 2. **Arka planda, React `query` ve `deferredQuery`'nin *her ikisini de* `"ab"` olarak yeniden render etmeye çalışır.** Bu render tamamlandığında, React ekranda gösterir. Ancak askıya alınırsa (`"ab"`'nin sonuçları henüz yüklenmediyse), React render'dan vazgeçer ve veriler yüklendikten sonra tekrar render etmeyi dener. Kullanıcı, veriler hazır olana kadar eski ertelenmiş değeri görmeye devam eder.
+=======
+2. **In the background, React tries to re-render with *both* `query` and `deferredQuery` updated to `"ab"`.** If this re-render completes, React will show it on the screen. However, if it suspends (the results for `"ab"` have not loaded yet), React will abandon this rendering attempt, and retry this re-render again after the data has loaded. The user will keep seeing the stale deferred value until the data is ready.
+>>>>>>> 7bdbab144e09d4edf793ff5128080eb1dba79be4
 
 Ertelenmiş "arkaplan" render işlemi kesintiye uğrayabilir. Örneğin, girdiyi tekrar yazdığınızda React render'dan vazgeçer ve yeni değerle yeniden render etmeyi dener. Daima en son sağlanan değer kullanılır.
 
@@ -952,7 +964,11 @@ Bu teknikler bazı durumlarda yardımcı olsa da, `useDeferredValue` React ile e
 
 Debouncing ve throttling'in aksine herhangi bir sabit gecikme belirlenmesi gerekmez. Kullanıcının cihazı hızlıysa (örneğin güçlü bir dizüstü bilgisayara sahipse), ertelenmiş yeniden render anında gerçekleşir ve fark edilmez. Kullanıcının cihazı yavaşsa, liste cihazın yavaşlığıyla orantılı olarak girdinin "gerisinde" kalır.
 
+<<<<<<< HEAD
 Ayrıca, debouncing ve throttling'in aksine, `useDeferredValue` tarafından yapılan ertelenmiş render işlemi kesintiye uğratılabilir. Büyük bir liste yeniden render edilirken kullanıcı başka tuşa basarsa, React mevcut render'ı iptal eder ve başka bir yeniden render tetikler. Buna karşın, debouncing ve throttling kötü bir deneyim sağlar çünkü yalnızca basılan tuşun render'ı blokladığı anı ertelerler.
+=======
+Also, unlike with debouncing or throttling, deferred re-renders done by `useDeferredValue` are interruptible by default. This means that if React is in the middle of re-rendering a large list, but the user makes another keystroke, React will abandon that re-render, handle the keystroke, and then start rendering in the background again. By contrast, debouncing and throttling still produce a janky experience because they're *blocking:* they merely postpone the moment when rendering blocks the keystroke.
+>>>>>>> 7bdbab144e09d4edf793ff5128080eb1dba79be4
 
 Optimize ettiğiniz iş render esnasında gerçekleşmiyorsa, debouncing ve throttling hala yararlıdır. Örneğin, daha az ağ isteği göndermenizi sağlayabilirler. Bu teknikleri birlikte de kullanabilirsiniz.
 

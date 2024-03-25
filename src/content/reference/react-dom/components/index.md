@@ -32,7 +32,25 @@ React'te bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edileb
 
 ---
 
+<<<<<<< HEAD
 ## Tüm HTML bileşenleri {/*all-html-components*/}
+=======
+## Resource and Metadata Components {/*resource-and-metadata-components*/}
+
+These bulit-in browser components let you load external resources or annotate the document with metadata:
+
+* [`<link>`](/reference/react-dom/components/link)
+* [`<meta>`](/reference/react-dom/components/meta)
+* [`<script>`](/reference/react-dom/components/script)
+* [`<style>`](/reference/react-dom/components/style)
+* [`<title>`](/reference/react-dom/components/title)
+
+They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
+
+---
+
+## All HTML components {/*all-html-components*/}
+>>>>>>> 7bdbab144e09d4edf793ff5128080eb1dba79be4
 
 React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içerir:
 
