@@ -194,6 +194,9 @@ ul {
   margin: 0;
   list-style-type: none;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
 li {
@@ -201,7 +204,6 @@ li {
   border-radius: 6px;
   float: left;
   margin: 5px;
-  margin-bottom: 20px;
   padding: 5px;
   width: 70px;
   height: 100px;
@@ -280,6 +282,9 @@ ul {
   margin: 0;
   list-style-type: none;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
 li {
@@ -287,7 +292,6 @@ li {
   border-radius: 6px;
   float: left;
   margin: 5px;
-  margin-bottom: 20px;
   padding: 5px;
   width: 70px;
   height: 100px;
@@ -374,6 +378,9 @@ ul {
   margin: 0;
   list-style-type: none;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
 li {
@@ -381,7 +388,6 @@ li {
   border-radius: 6px;
   float: left;
   margin: 5px;
-  margin-bottom: 20px;
   padding: 5px;
   width: 70px;
   height: 100px;
@@ -464,6 +470,9 @@ ul {
   margin: 0;
   list-style-type: none;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
 li {
@@ -471,7 +480,6 @@ li {
   border-radius: 6px;
   float: left;
   margin: 5px;
-  margin-bottom: 20px;
   padding: 5px;
   width: 70px;
   height: 100px;

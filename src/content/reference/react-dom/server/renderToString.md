@@ -13,7 +13,7 @@ title: renderToString
 `renderToString` bir React ağacını bir HTML string'ine dönüştürür.
 
 ```js
-const html = renderToString(reactNode)
+const html = renderToString(reactNode, options?)
 ```
 
 </Intro>
@@ -24,7 +24,7 @@ const html = renderToString(reactNode)
 
 ## Başvuru dokümanı {/*reference*/}
 
-### `renderToString(reactNode)` {/*rendertostring*/}
+### `renderToString(reactNode, options?)` {/*rendertostring*/}
 
 Sunucuda, uygulamanızı HTML'e dönüştürmek için `renderToString` çağrısı yapınız.
 
