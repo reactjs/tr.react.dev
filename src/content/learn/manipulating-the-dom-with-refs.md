@@ -493,7 +493,11 @@ Genel olarak render etme esnasında ref'lere erişmek [istemezsiniz](/learn/refe
 
 React commit esnasında `ref.current` ayarını yapar. React DOM'u güncellemeden önce etkilenen `ref.current` değerlerini `null` olarak ayarlar. DOM'u güncelledikten sonra React hemen ilgili DOM elemanını ayarlar.
 
+<<<<<<< HEAD
 **Ref'lere genellikle olay yöneticisinden erişirsiniz.** Ref ile bir şey yapmak istiyorsunuz ancak bunu yapmak için belirli bir olay yoksa bir Effect'e ihtiyacınız olabilir. Sonraki sayfalarda bundan bahsedeceğiz.
+=======
+**Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss Effects on the next pages.
+>>>>>>> 93177e6ceac8ffb5c2a8f3ed4bd1f80b63097078
 
 <DeepDive>
 
