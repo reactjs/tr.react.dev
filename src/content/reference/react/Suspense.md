@@ -1349,7 +1349,11 @@ input { margin: 10px; }
 
 <Note>
 
+<<<<<<< HEAD
 Hem geciktirilmiş değerler hem de [transition'lar](#preventing-already-revealed-content-from-hiding) satır içi göstergeler lehine Suspense fallback'inden kaçınmanızı sağlar. Transition'lar tüm güncellemeyi acil olmayan olarak işaretlerler, bu yüzden genellikle framework'ler ve router kütüphaneleri tarafından navigasyon için kullanılırlar. Diğer yandan, geciktirilmiş değerler, genellikle bir kullanıcı arayüzü parçasını acil olmayan olarak işaretlemek ve onu kullanıcı arayüzünün geri kalanından "geride bırakmak" için uygulama kodunda kullanışlıdır.
+=======
+Both deferred values and [Transitions](#preventing-already-revealed-content-from-hiding) let you avoid showing Suspense fallback in favor of inline indicators. Transitions mark the whole update as non-urgent so they are typically used by frameworks and router libraries for navigation. Deferred values, on the other hand, are mostly useful in application code where you want to mark a part of UI as non-urgent and let it "lag behind" the rest of the UI.
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 </Note>
 
@@ -1728,7 +1732,11 @@ main {
 
 Butona bastığınızda `Router` bileşeni `ArtistPage` sayfası yerine `IndexPage` sayfasını render etti. `ArtistPage` içerisindeki bir bileşen askıya alındı, bu yüzden en yakın Suspense sınırı fallback'i göstermeye başladı. En yakın Suspense sınırı köke yakındı, bu yüzden tüm site layout'u `BigSpinner` ile değiştirildi.
 
+<<<<<<< HEAD
 Bunu engellemek için, navigasyon state'ini bir *geçiş* (transition) olarak [`startTransition`:](/reference/react/startTransition) ile işaretleyebilirsiniz:
+=======
+To prevent this, you can mark the navigation state update as a *Transition* with [`startTransition`:](/reference/react/startTransition)
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 ```js {5,7}
 function Router() {
@@ -2113,19 +2121,33 @@ main {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Bir transition *tüm* içeriğin yüklenmesini beklemez. Zaten açığa çıkmış içeriği gizlemekten kaçınmak için ne kadar beklemesi gerekiyorsa o kadar bekler. Örneğin, web sitesinin `Layout`'u zaten açığa çıkmıştı, bu yüzden onu bir yükleniyor çarkının arkasına saklamak kötü olurdu. Bununla birlikte, `Albums`'ün etrafındaki iç içe geçmiş `Suspense` sınırı yeni olduğundan, transition onu beklemiyor.
 
 <Note>
 
 Suspense özellikli router'lar varsayılan olarak navigasyon güncellemelerini transition'lara sararlar.
+=======
+A Transition doesn't wait for *all* content to load. It only waits long enough to avoid hiding already revealed content. For example, the website `Layout` was already revealed, so it would be bad to hide it behind a loading spinner. However, the nested `Suspense` boundary around `Albums` is new, so the Transition doesn't wait for it.
+
+<Note>
+
+Suspense-enabled routers are expected to wrap the navigation updates into Transitions by default.
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 </Note>
 
 ---
 
+<<<<<<< HEAD
 ### Transition'ın gerçekleştiğini gösterme {/*indicating-that-a-transition-is-happening*/}
 
 Yukarıdaki örnekte, butona bastığınızda navigasyonun gerçekleştiğini gösteren bir görsel gösterge bulunmamakta. Bir gösterge eklemek için, [`startTransition`'ı](/reference/react/startTransition) [`useTransition`](/reference/react/useTransition) ile değiştirebilirsiniz, bu size bir boolean olan `isPending` değerini verecektir. Aşağıdaki örnekte, transition'ın gerçekleştiği sırada web sitesi başlığı stilini değiştirmek için `useTransition` kullanılmıştır:
+=======
+### Indicating that a Transition is happening {/*indicating-that-a-transition-is-happening*/}
+
+In the above example, once you click the button, there is no visual indication that a navigation is in progress. To add an indicator, you can replace [`startTransition`](/reference/react/startTransition) with [`useTransition`](/reference/react/useTransition) which gives you a boolean `isPending` value. In the example below, it's used to change the website header styling while a Transition is happening:
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 <Sandpack>
 
@@ -2503,13 +2525,21 @@ main {
 
 ### Navigasyon sırasında Suspense sınırlarını sıfırlama {/*resetting-suspense-boundaries-on-navigation*/}
 
+<<<<<<< HEAD
 Bir transition sırasında, React açığa çıkarılmış içeriği gizlemekten kaçınır. Ancak, farklı parametrelere sahip bir rotaya geçerseniz, React'e bunun *farklı* içerik olduğunu söylemek isteyebilirsiniz. Bunu bir `key` ile ifade edebilirsiniz:
+=======
+During a Transition, React will avoid hiding already revealed content. However, if you navigate to a route with different parameters, you might want to tell React it is *different* content. You can express this with a `key`:
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 ```js
 <ProfilePage key={queryParams.id} />
 ```
 
+<<<<<<< HEAD
 Bir kullanıcının profil sayfasına gitmeye çalıştığınızı hayal edin, ve bir şey askıya alınsın. Eğer bu güncelleme bir transition ile sarılırsa, zaten görünen içerik için fallback tetiklenmeyecektir. Bu beklenen davranıştır.
+=======
+Imagine you're navigating within a user's profile page, and something suspends. If that update is wrapped in a Transition, it will not trigger the fallback for already visible content. That's the expected behavior.
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalıştığınızı düşünün. Bu durumda, fallback'i göstermek mantıklı olacaktır. Örneğin, bir kullanıcının zaman çizelgesi başka bir kullanıcının zaman çizelgesinden *farklı içerik*'tir. Bir `key` belirterek, React'e farklı kullanıcıların profillerini farklı bileşenler olarak ele almasını ve navigasyon sırasında Suspense sınırlarını sıfırlamasını sağlarsınız. Suspense entegreli router'lar bunu otomatik olarak yapmalıdır. 
 
@@ -2546,7 +2576,11 @@ Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniy
 
 Görünür bir kullanıcı arayüzünü bir fallback ile değiştirmek, uyumsuz bir kullanıcı deneyimine sebep olur.  Bu, bir güncelleme bir bileşenin askıya alınmasına sebep olduğunda ve en yakın Suspense sınırı zaten kullanıcıya içerik gösteriyorsa olabilir.
 
+<<<<<<< HEAD
 Bunun olmasını engellemek için, [güncellemeyi `startTransition` ile acil olmayan olarak işaretleyin](#preventing-already-revealed-content-from-hiding). Bir transition sırasında, React istenmeyen bir fallback'in görünmesini engellemek için yeterli veri yüklenene kadar bekleyecektir:
+=======
+To prevent this from happening, [mark the update as non-urgent using `startTransition`](#preventing-already-revealed-content-from-hiding). During a Transition, React will wait until enough data has loaded to prevent an unwanted fallback from appearing:
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 ```js {2-3,5}
 function handleNextPageClick() {
