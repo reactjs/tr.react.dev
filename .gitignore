@@ -37,5 +37,10 @@ yarn-error.log*
 # external fonts
 public/fonts/**/Optimistic_*.woff2
 
+<<<<<<< HEAD
 # IDE
 .idea
+=======
+# rss
+public/rss.xml
+>>>>>>> 556063bdce0ed00f29824bc628f79dac0a4be9f4

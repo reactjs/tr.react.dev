@@ -57,6 +57,13 @@ flushSync(() => {
 * `flushSync` bekleyen effect'leri tetikleyebilir ve içerdikleri güncellemeleri döndürmeden önce senkron bir şekilde uygulayabilir.
 * `flushSync` callback içindeki güncellemeleri işlemek gerektiğinde, callback dışındaki güncellemeleri işleyebilir. Örneğin, bir tıklama sonucu bekleyen güncellemeler varsa, React bu güncellemeleri callback içindeki güncellemeleri işlemeden önce işleyebilir.
 
+<<<<<<< HEAD
+=======
+* `flushSync` can significantly hurt performance. Use sparingly.
+* `flushSync` may force pending Suspense boundaries to show their `fallback` state.
+* `flushSync` may run pending Effects and synchronously apply any updates they contain before returning.
+* `flushSync` may flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
+>>>>>>> 556063bdce0ed00f29824bc628f79dac0a4be9f4
 
 ---
 
