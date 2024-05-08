@@ -4,7 +4,7 @@ title: renderToStaticMarkup
 
 <Intro>
 
-`renderToStaticMarkup`, etkileşimli olmayan bir React ağacını HTML dizesine dönüştürür.
+`renderToStaticMarkup`, etkileşimli olmayan bir React ağacını HTML string'e dönüştürür.
 
 ```js
 const html = renderToStaticMarkup(reactNode)
@@ -35,11 +35,11 @@ Bu, React bileşenlerinizin etkileşimli olmayan HTML çıktısını üretecekti
 
 * `reactNode`: Bir JSX düğümü gibi HTML'ye dönüştürmek istediğiniz bir React düğümü. Örneğin, şöyle bir JSX düğümü `<Page />`.
 * **isteğe bağlı** `options`: Sunucu renderı için bir obje.
-  * **isteğe bağlı** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'in kullandığı dize ön eki. Aynı sayfada birden fazla kök kullanırken çakışmaları önlemek için kullanışlıdır.
+  * **isteğe bağlı** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'in kullandığı string ön eki. Aynı sayfada birden fazla kök kullanırken çakışmaları önlemek için kullanışlıdır.
 
 #### Dönüş Değeri {/*returns*/}
 
-Bir HTML dizesi.
+Bir HTML string'i.
 
 #### Dikkat Edilmesi Gerekenler {/*caveats*/}
 
@@ -53,13 +53,13 @@ Bir HTML dizesi.
 
 ## Kullanım {/*usage*/}
 
-### Bir etkileşimli olmayan React ağacını HTML olarak dizeye çevirme {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
+### Bir etkileşimli olmayan React ağacını HTML olarak string'e çevirme {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
 
-Sunucu yanıtınızla birlikte gönderebileceğiniz bir HTML dizesi olarak uygulamanızı  `renderToStaticMarkup` ile HTML'ye dönüştürün:
+Sunucu yanıtınızla birlikte gönderebileceğiniz bir HTML string'i olarak uygulamanızı  `renderToStaticMarkup` ile HTML'ye dönüştürün:
 
 ```js {5-6}
 import { renderToStaticMarkup } from 'react-dom/server';
-// Rota işleyicisinin sözdizimi, kullandığınız arka uç çerçevesine bağlıdır
+// Rota işleyicisinin sözdizimi, kullandığınız arka uç çatısına bağlıdır
 app.use('/', (request, response) => {
   const html = renderToStaticMarkup(<Page />);
   response.send(html);
