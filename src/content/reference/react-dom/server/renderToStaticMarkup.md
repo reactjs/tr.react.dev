@@ -16,7 +16,7 @@ const html = renderToStaticMarkup(reactNode)
 
 ---
 
-## Referans {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
 
@@ -29,7 +29,7 @@ const html = renderToStaticMarkup(<Page />);
 
 Bu, React bileşenlerinizin etkileşimli olmayan HTML çıktısını üretecektir.
 
-[Daha fazla örnek için.](#usage)
+[Buradan daha fazla örnek görebilirsiniz.](#usage)
 
 #### Parametreler {/*parameters*/}
 
