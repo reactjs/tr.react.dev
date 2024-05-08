@@ -44,11 +44,11 @@ stream.pipe(response);
 * `reactNode`: HTML'e dönüştürmek istediğiniz bir React düğümü. Örneğin, `<App />` gibi bir JSX öğesi.
 
 * **isteğe bağlı** `options`: Sunucu renderı için bir obje.
-  * **isteğe bağlı** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'ın kullandığı dize ön eki. Aynı sayfada birden çok kök kullanırken çakışmaları önlemek için kullanışlıdır. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters)'e iletilen ön ek ile aynı olmalıdır.
+  * **isteğe bağlı** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'ın kullandığı string ön eki. Aynı sayfada birden çok kök kullanırken çakışmaları önlemek için kullanışlıdır. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters)'e iletilen ön ek ile aynı olmalıdır.
 
 #### Dönüş değeri {/*returns*/}
 
-Bir HTML dizesi üreten bir [Node.js Okunabilir Akışı.](https://nodejs.org/api/stream.html#readable-streams)
+Bir HTML string'i üreten bir [Node.js Okunabilir Akışı.](https://nodejs.org/api/stream.html#readable-streams)
 
 #### Uyarılar {/*caveats*/}
 
@@ -69,7 +69,7 @@ Sunucu yanıtınıza bağlayabileceğiniz [Node.js Okunabilir Akışını](https
 ```js {5-6}
 import { renderToNodeStream } from 'react-dom/server';
 
-// Rota işleyici sözdizimi arka uç çerçevenize bağlı olarak değişir
+// Rota işleyici sözdizimi arka uç çatınıza bağlı olarak değişir
 app.use('/', (request, response) => {
   const stream = renderToNodeStream(<App />);
   stream.pipe(response);
