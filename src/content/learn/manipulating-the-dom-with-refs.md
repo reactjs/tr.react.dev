@@ -218,18 +218,19 @@ Bu örnek uzun bir listede rastgele bir elemana kaydırmak için bu yaklaşımı
 <Sandpack>
 
 ```js
-import { useRef } from 'react';
+import { useRef, useState } from "react";
 
 export default function CatFriends() {
   const itemsRef = useRef(null);
+  const [catList, setCatList] = useState(setupCatList);
 
-  function scrollToId(itemId) {
+  function scrollToCat(cat) {
     const map = getMap();
-    const node = map.get(itemId);
+    const node = map.get(cat);
     node.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
@@ -244,34 +245,25 @@ export default function CatFriends() {
   return (
     <>
       <nav>
-        <button onClick={() => scrollToId(0)}>
-          Tom
-        </button>
-        <button onClick={() => scrollToId(5)}>
-          Maru
-        </button>
-        <button onClick={() => scrollToId(9)}>
-          Jellylorum
-        </button>
+        <button onClick={() => scrollToCat(catList[0])}>Tom</button>
+        <button onClick={() => scrollToCat(catList[5])}>Maru</button>
+        <button onClick={() => scrollToCat(catList[9])}>Jellylorum</button>
       </nav>
       <div>
         <ul>
-          {catList.map(cat => (
+          {catList.map((cat) => (
             <li
-              key={cat.id}
+              key={cat}
               ref={(node) => {
                 const map = getMap();
                 if (node) {
-                  map.set(cat.id, node);
+                  map.set(cat, node);
                 } else {
-                  map.delete(cat.id);
+                  map.delete(cat);
                 }
               }}
             >
-              <img
-                src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
-              />
+              <img src={cat} />
             </li>
           ))}
         </ul>
@@ -280,12 +272,13 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
-    id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push("https://loremflickr.com/320/240/cat?lock=" + i);
+  }
+
+  return catList;
 }
 
 ```
@@ -316,6 +309,16 @@ li {
 }
 ```
 
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "canary",
+    "react-dom": "canary",
+    "react-scripts": "^5.0.0"
+  }
+}
+```
+
 </Sandpack>
 
 Bu örnekte `itemsRef` tek bir DOM elemanını tutmaz. Bunun yerine öge kimliğinden DOM elemanına bir [Map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map) tutar. ([Ref'ler herhangi bir değeri tutabilir!](/learn/referencing-values-with-refs)) Her liste ögesindeki [`ref` callback'i](/reference/react-dom/components/common#ref-callback) Map'i güncellemeye özen gösterir:
@@ -327,16 +330,38 @@ Bu örnekte `itemsRef` tek bir DOM elemanını tutmaz. Bunun yerine öge kimliğ
     const map = getMap();
     if (node) {
       // Add to the Map
-      map.set(cat.id, node);
+      map.set(cat, node);
     } else {
       // Remove from the Map
-      map.delete(cat.id);
+      map.delete(cat);
     }
   }}
 >
 ```
 
 Bu daha sonra Map'ten tek tek DOM elemanlarını okumamıza olanak tanır.
+
+<Canary>
+
+This example shows another approach for managing the Map with a `ref` callback cleanup function.
+
+```js
+<li
+  key={cat.id}
+  ref={node => {
+    const map = getMap();
+    // Add to the Map
+    map.set(cat, node);
+
+    return () => {
+      // Remove from the Map
+      map.delete(cat);
+    };
+  }}
+>
+```
+
+</Canary>
 
 </DeepDive>
 
@@ -493,7 +518,11 @@ Genel olarak render etme esnasında ref'lere erişmek [istemezsiniz](/learn/refe
 
 React commit esnasında `ref.current` ayarını yapar. React DOM'u güncellemeden önce etkilenen `ref.current` değerlerini `null` olarak ayarlar. DOM'u güncelledikten sonra React hemen ilgili DOM elemanını ayarlar.
 
+<<<<<<< HEAD
 **Ref'lere genellikle olay yöneticisinden erişirsiniz.** Ref ile bir şey yapmak istiyorsunuz ancak bunu yapmak için belirli bir olay yoksa bir Effect'e ihtiyacınız olabilir. Sonraki sayfalarda bundan bahsedeceğiz.
+=======
+**Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss Effects on the next pages.
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 <DeepDive>
 

@@ -263,11 +263,19 @@ body {
 
 Bu öğreticiyi yerel geliştirme ortamınızı kullanarak da takip edebilirsiniz. Bunu yapmak için şu adımlar takip edin:
 
+<<<<<<< HEAD
 1. [Node.js](https://nodejs.org/en/) kurun
 1. CodeSandbox sayfasında menüyü açmak için sol üst köşedeki butona tıklayın ve sonra **File > Export to ZIP** adımlarını izleyerek gerekli arşiv dosyalarını indirin.
 1. Arşivi açın, daha sonra bir terminal açın ve çıkarttığınız dosyaya `cd` ile gidin
 1. `npm install` ile bağımlılıkları yükleyin
 1. `npm start` ile yerel bir sunucu başlatın ve kodu tarayıcıda çalışır halde görmek için adımları takip edin
+=======
+1. Install [Node.js](https://nodejs.org/en/)
+1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **Download Sandbox** in that menu to download an archive of the files locally
+1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
+1. Install the dependencies with `npm install`
+1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 Eğer bir yerde takılırsanız bunun sizi durdurmasına izin vermeyin! Websitesi üzerinde takip etmeye devam edin ve yerel kurulumu sonra tekrardan deneyin.
 
@@ -2915,4 +2923,8 @@ Eğer fazladan zamanınız varsa ya da yeni React becerilerinizi geliştirmek is
 1. Biri oyunu kazandığında, kazanmaya sebep olan kareleri başka bir renkle belirtin (kimse kazanmadığında, oyunun berabere bittiğini söyleyen bir mesaj gösterin).
 1. Her hamlenin konumunu hamle geçmişi listesinde (satır, sütun) biçiminde gösterin.
 
+<<<<<<< HEAD
 Bu öğretici boyunca elementler, bileşenler, prop'lar ve state gibi React kavramlarını öğrendiniz. Artık bu kavramların bir oyun yaparken nasıl  çalıştığını gördüğünze göre, aynı React kavramlarının bir uygulamanın kullanıcı arayüzünü yaparken nasıl çalıştığını görmek için [React'te Düşünmek](/learn/thinking-in-react) sayfasına göz atın.
+=======
+Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
