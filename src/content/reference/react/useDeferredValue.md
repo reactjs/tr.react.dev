@@ -18,7 +18,7 @@ const deferredValue = useDeferredValue(value)
 
 ## Referans {/*reference*/}
 
-### `useDeferredValue(value)` {/*usedeferredvalue*/}
+### `useDeferredValue(value, initialValue?)` {/*usedeferredvalue*/}
 
 Belirli bir değerin ertelenmiş (deferred) versiyonunu almak için bileşeninizin en üst kapsamında `useDeferredValue`'ı çağırın.
 
@@ -37,12 +37,22 @@ function SearchPage() {
 #### Parametreler {/*parameters*/}
 
 * `value`: Ertelemek istediğiniz değerdir. Herhangi bir türden olabilir.
+* <CanaryBadge title="This feature is only available in the Canary channel" /> **optional** `initialValue`: A value to use during the initial render of a component. If this option is omitted, `useDeferredValue` will not defer during the initial render, because there's no previous version of `value` that it can render instead.
+
 
 #### Dönüş değeri {/*returns*/}
 
-İlk render esnasında, döndürülen ertelenmiş değer ile sağladığınız değer aynı olacaktır. Güncellemeler esnasında, React önce eski değerle yeniden render etmeyi dener (bu yüzden eski değeri döndürür) ve ardından arka planda yeni değer ile birlikte yeni bir render başlatır (bu yüzden güncellenmiş değeri döndürür).
+- `currentValue`: İlk render esnasında, döndürülen ertelenmiş değer ile sağladığınız değer aynı olacaktır. Güncellemeler esnasında, React önce eski değerle yeniden render etmeyi dener (bu yüzden eski değeri döndürür) ve ardından arka planda yeni değer ile birlikte yeni bir render başlatır (bu yüzden güncellenmiş değeri döndürür).
+
+<Canary>
+
+In the latest React Canary versions, `useDeferredValue` returns the `initialValue` on initial render, and schedules a re-render in the background with the `value` returned.
+
+</Canary>
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
+
+- Bir güncelleme Transition içinde olduğunda, güncelleme zaten ertelendiği için, `useDeferredValue` daima yeni `value` değerini döner ve ertelenmiş bir render oluşturmaz. 
 
 - `useDeferredValue`'ya geçtiğiniz değerler, ilkel değer (örn. string ya da number) veya render dışında oluşturulan nesneler olmalıdır. Render esnasında yeni bir nesne oluşturur ve bunu direkt `useDeferredValue`'ya iletirseniz, her render'da farklı olur. Bu da gereksiz arka plan render'larına neden olacaktır.
 

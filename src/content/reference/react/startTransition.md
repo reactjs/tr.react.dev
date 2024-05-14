@@ -20,7 +20,7 @@ startTransition(scope)
 
 ### `startTransition(scope)` {/*starttransitionscope*/}
 
-`startTransition`, bir state güncellemesini transition (ertelenen güncelleme) olarak işaretlemenize olanak tanır.
+`startTransition` fonksiyonu, bir state güncellemesini transition (geçiş) olarak işaretlemenize olanak tanır.
 
 ```js {7,9}
 import { startTransition } from 'react';
@@ -41,7 +41,7 @@ function TabContainer() {
 
 #### Parametreler {/*parameters*/}
 
-* `scope`: Bir veya birden fazla [`set` fonksiyonu](/reference/react/useState#setstate) kullanarak bazı state'leri güncelleyen bir fonksiyondur. React, `scope` fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın `scope`'u hemen çalıştırır. Bu güncellemeler [engelleme yapmaz](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) (non-blocking) ve [gereksiz yükleme animasyonları göstermez](/reference/react/useTransition#preventing-unwanted-loading-indicators).
+* `scope`: Bir veya birden fazla [`set` fonksiyonu](/reference/react/useState#setstate) kullanarak bazı state'leri güncelleyen bir fonksiyondur. React, `scope` fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın `scope`'u hemen çalıştırır. Bu güncellemeler [engelleme yapmaz](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) (non-blocking) ve [istenmeyen yükleme animasyonları göstermez](/reference/react/useTransition#preventing-unwanted-loading-indicators).
 
 #### Dönen değerler {/*returns*/}
 
@@ -65,7 +65,7 @@ function TabContainer() {
 
 ## Kullanım {/*usage*/}
 
-### Bir state güncellemesini, gecikmeye neden olmayan transition olarak işaretlemek. {/*marking-a-state-update-as-a-non-blocking-transition*/}
+### Bir state güncellemesini, engellemeyen transition olarak işaretlemek. {/*marking-a-state-update-as-a-non-blocking-transition*/}
 
 Bir state güncellemesini `startTransition` çağrısı içine alarak *transition* olarak işaretleyebilirsiniz:
 

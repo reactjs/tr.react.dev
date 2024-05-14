@@ -32,6 +32,20 @@ React'te bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edileb
 
 ---
 
+## Kaynak ve Metadata Bileşenleri {/*resource-and-metadata-components*/}
+
+Bu yerleşik tarayıcı bileşenleri, harici kaynakları yüklemenizi ya da sayfanıza meta verilerle açıklamalar eklemenizi sağlar.
+
+* [`<link>`](/reference/react-dom/components/link)
+* [`<meta>`](/reference/react-dom/components/meta)
+* [`<script>`](/reference/react-dom/components/script)
+* [`<style>`](/reference/react-dom/components/style)
+* [`<title>`](/reference/react-dom/components/title)
+
+They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
+
+---
+
 ## Tüm HTML bileşenleri {/*all-html-components*/}
 
 React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içerir:

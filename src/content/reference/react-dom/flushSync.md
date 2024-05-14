@@ -57,7 +57,6 @@ flushSync(() => {
 * `flushSync` bekleyen effect'leri tetikleyebilir ve içerdikleri güncellemeleri döndürmeden önce senkron bir şekilde uygulayabilir.
 * `flushSync` callback içindeki güncellemeleri işlemek gerektiğinde, callback dışındaki güncellemeleri işleyebilir. Örneğin, bir tıklama sonucu bekleyen güncellemeler varsa, React bu güncellemeleri callback içindeki güncellemeleri işlemeden önce işleyebilir.
 
-
 ---
 
 ## Kullanım {/*usage*/}

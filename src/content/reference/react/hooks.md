@@ -105,24 +105,6 @@ Render etme işlemini önceliklendirmek için bu Hook'lardan birini kullanın:
 
 ---
 
-## Kaynak Hook'ları {/*resource-hooks*/}
-
-*Kaynaklar* bir bileşenin, state'inin bir parçası olmadan da erişebileceği verilerdir. Örneğin, bir bileşen bir Promise'den bir mesajı veya bir context'ten stil bilgilerini okuyabilir.
-
-Bir kaynaktan bir değer okumak için bu Hook'u kullanın:
-
-- [`use`](/reference/react/use) [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynakğın değerini okumanızı sağlar.
-
-```js
-function MessageComponent({ messagePromise }) {
-  const message = use(messagePromise);
-  const theme = use(ThemeContext);
-  // ...
-}
-```
-
----
-
 ## Diğer Hook'lar {/*other-hooks*/}
 
 Bu Hook'lar genellikle kütüphane geliştiricileri için kullanışlıdır ve uygulama kodlarında yaygın olarak kullanılmazlar.
@@ -130,6 +112,7 @@ Bu Hook'lar genellikle kütüphane geliştiricileri için kullanışlıdır ve u
 - [`useDebugValue`](/reference/react/useDebugValue) React DevTools'da, kendi yazdığınız hook için özel bir etiket belirlemenizi sağlar.
 - [`useId`](/reference/react/useId) bir bileşenin kendisiyle benzersiz bir ID ilişkilendirmesini sağlar. Genellikle erişilebilirlik API'ları ile kullanılır.
 - [`useSyncExternalStore`](/reference/react/useSyncExternalStore) bir bileşenin harici bir depoya abone olmasını sağlar.
+- [`useActionState`](/reference/react/useActionState) actionların stateini yönetmenizi sağlar.
 
 ---
 

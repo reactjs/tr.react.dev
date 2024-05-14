@@ -45,7 +45,7 @@ Burada ve daha sonra bu metinde, büyük harflerle yazılan "Efekt", yukarıdaki
 
 Bir Efekt yazmak için aşağıdaki üç adımı takip edin:
 
-1. **Bir Efekt bildirin.** Varsayılan olarak, Efektiniz her render'dan sonra çalışacaktır.
+1. **Bir Efekt bildirin.** Varsayılan olarak, Efektiniz her [işleme](/learn/render-and-commit)'den sonra çalışacaktır.
 2. **Efektin bağımlılıklarını belirtin.** Çoğu Efekt her render yerine yalnızca *gerektiğinde* yeniden çalışmalıdır. Örneğin, bir solma animasyonu yalnızca bileşen göründüğünde tetiklenmelidir. Bir sohbet odasına bağlanmak ya da bağlantıyı koparmak yalnızca bileşen göründüğünde ve kaybolduğunda ya da sohbet odası değiştiğinde olmalıdır. *Bağımlılıkları* belirterek bunu nasıl kontrol edeceğinizi öğreneceksiniz.
 3. **Gerekliyse temizleme (cleanup) ekleyin.** Bazı Efektlerin, yaptıkları her şeyi nasıl durduracaklarını, geri alacaklarını veya temizleyeceklerini belirtmeleri gerekir. Örneğin, "bağlanmak" "bağlantıyı kese" ihtiyaç duyar, "abone ol" "abonelikten çıka" ihtiyaç duyar ve "veri getirme (fetch)" ya "iptal" ya da "görmezden gele" ihtiyaç duyar. Bir *temizleme fonksiyonu* döndürerek bunu nasıl yapacağınızı öğreneceksiniz.
 
@@ -597,6 +597,33 @@ React, son örnekteki gibi hataları bulmak için bileşenlerinizi geliştirme s
 Genellikle doğru cevap, temizleme fonksiyonu eklemektir. Temizleme fonksiyonu, Efektin yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çalışan Efekt (son üründe olduğu gibi) ile _kurulum → temizleme → kurulum_ sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
 
 Yazacağınız Efektlerin çoğu aşağıdaki yaygın kalıplardan birine uyacaktır.
+
+<Pitfall>
+
+#### Effekt'lerin tetiklenmesini önlemek için refleri kullanmayın {/*dont-use-refs-to-prevent-effects-from-firing*/}
+
+A common pitfall for preventing Effects firing twice in development is to use a `ref` to prevent the Effect from running more than once. For example, you could "fix" the above bug with a `useRef`:
+
+```js {1,3-4}
+  const connectionRef = useRef(null);
+  useEffect(() => {
+    // 🚩 This wont fix the bug!!!
+    if (!connectionRef.current) {
+      connectionRef.current = createConnection();
+      connectionRef.current.connect();
+    }
+  }, []);
+```
+
+This makes it so you only see `"✅ Connecting..."` once in development, but it doesn't fix the bug.
+
+When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix". 
+
+To fix the bug, it is not enough to just make the Effect run once. The effect needs to work after re-mounting, which means the connection needs to be cleaned up like in the solution above.
+
+See the examples below for how to handle common patterns.
+
+</Pitfall>
 
 ### React olmayan widget'ları kontrol etmek {/*controlling-non-react-widgets*/}
 

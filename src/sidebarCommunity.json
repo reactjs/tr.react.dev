@@ -32,6 +32,10 @@
           "path": "/community/docs-contributors"
         },
         {
+          "title": "Çeviriler",
+          "path": "/community/translations"
+        },
+        {
           "title": "Katkıda Bulunanlar",
           "path": "/community/acknowledgements"
         },

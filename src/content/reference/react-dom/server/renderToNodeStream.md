@@ -13,7 +13,7 @@ Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır. Bunun yeri
 `renderToNodeStream` bir React ağacını bir [Node.js Okunabilir Akışı](https://nodejs.org/api/stream.html#readable-streams)'na dönüştürür.
 
 ```js
-const stream = renderToNodeStream(reactNode)
+const stream = renderToNodeStream(reactNode, options?)
 ```
 
 </Intro>
@@ -24,7 +24,7 @@ const stream = renderToNodeStream(reactNode)
 
 ## Başvuru dokümanı {/*reference*/}
 
-### `renderToNodeStream(reactNode)` {/*rendertonodestream*/}
+### `renderToNodeStream(reactNode, options?)` {/*rendertonodestream*/}
 
 Sunucuda, yanıtı aktaracağınız bir [Node.js Okunabilir Akışı](https://nodejs.org/api/stream.html#readable-streams) elde etmek için `renderToNodeStream`'i çağırın.
 

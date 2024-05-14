@@ -44,14 +44,11 @@ function TabContainer() {
 1. Transition işleminin beklenip beklenmediğini söyleyen `isPending` belirteci.
 2. State güncellemesini transition olarak işaretlemenizi sağlayan [`startTransition` fonksiyonu.](#starttransition)
 
-
 ---
 
 ### `startTransition` fonksiyonu {/*starttransition*/}
 
 `useTransition` tarafından döndürülen `startTransition` fonksiyonu, bir state güncellemesini transition (ertelenen güncelleme) olarak işaretlemenize olanak tanır.
-
-
 
 ```js {6,8}
 function TabContainer() {
@@ -69,7 +66,7 @@ function TabContainer() {
 
 #### Parametreler {/*starttransition-parameters*/}
 
-* `scope`: Bir veya birden fazla set fonksiyonu kullanarak bazı state’leri güncelleyen bir fonksiyondur. React, scope fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın scope‘u hemen çalıştırır. Bu güncellemeler engelleme yapmaz (non-blocking) ve gereksiz yükleme animasyonları göstermez.
+* `scope`: Bir veya birden fazla [set fonksiyonu](/reference/react/useState#setstate) kullanarak bazı state’leri güncelleyen bir fonksiyondur. React, scope fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın scope‘u hemen çalıştırır. Bu güncellemeler engelleme yapmaz [(non-blocking)](#marking-a-state-update-as-a-non-blocking-transition) ve [gereksiz yükleme animasyonları göstermez](#preventing-unwanted-loading-indicators).
 
 #### Dönen değerler {/*starttransition-returns*/}
 
@@ -80,7 +77,6 @@ function TabContainer() {
 * `useTransition` bir Hook olduğu için yalnızca bileşenlerin içinde veya özel Hook'ların içinde çağrılabilir. Eğer bir transition işlemini başka bir yerden başlatmanız gerekiyorsa (örneğin, bir veri kütüphanesinden), bunun yerine bağımsız [`startTransition`](/reference/react/startTransition)'ı çağırın.
 
 * Bir güncellemeyi transition olarak kullanmak için, ilgili state’in `set` fonksiyonuna erişebilmeniz gerekiyor. Eğer bir prop veya özel bir Hook dönüş değerine yanıt olarak transition başlatmak isterseniz, bunun yerine [`useDeferredValue`](/reference/react/useDeferredValue) özelliğini kullanmayı deneyebilirsiniz.
-
 
 * `startTransition`‘a ilettiğiniz fonksiyon, eşzamanlı olarak çalışabilecek bir fonksiyon olmalıdır. React, bu fonksiyonu hemen çalıştırır ve çalışırken gerçekleşen tüm state güncellemelerini transition olarak işaretler. Sonrasında daha fazla state güncellemesi yapmaya çalışırsanız (örneğin, bir zaman aşımında), bunlar transition olarak işaretlenmezler.
 
@@ -566,7 +562,7 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Transition sırasında beklenen görsel state'in gösterimi {/*displaying-a-pending-visual-state-during-the-transition*/}
+### Transition sırasında beklemeyi ifade eden bir durum gösterimi {/*displaying-a-pending-visual-state-during-the-transition*/}
 
 `useTransition` tarafından döndürülen `isPending` boolean değerini kullanarak, bir transition işleminin hala devam ettiğini kullanıcıya gösterebilirsiniz. Örneğin, sekme düğmesi özel bir "pending" (beklemede) görsel state'ine sahip olabilir:
 
@@ -1093,11 +1089,11 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-[Suspense ile transition kullanımı hakkında daha fazla bilgi edinin.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
+[Suspense ile Transition kullanımı hakkında daha fazla bilgi edinin.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
 
 <Note>
 
-Transition'lar, *zaten görünen* içeriği (örneğin sekme kutusu gibi) gizlememek için yeterli süre boyunca "bekler". Eğer "Posts" sekmesinde [iç içe geçmiş `<Suspense>` sınırlaması](/reference/react/Suspense#revealing-nested-content-as-it-loads) bulunuyorsa, transition onun için "bekleme" yapmaz.
+Transition'lar, sadece *zaten görünen* içeriği (örneğin sekme kutusu gibi) gizlememek için yeteri kadar "bekler". Eğer "Posts" sekmesinde [iç içe geçmiş `<Suspense>` sınırlaması](/reference/react/Suspense#revealing-nested-content-as-it-loads) bulunuyorsa, transition onun için "bekleme" yapmaz.
 
 </Note>
 
@@ -1126,8 +1122,7 @@ Bu, iki nedenden dolayı önerilir:
 
 - [Transition'lar istenmeyen yükleme göstergelerini engeller,](#preventing-unwanted-loading-indicators) bu da kullanıcının gezinme sırasında rahatsız edici sıçramalardan kaçınmasını sağlar.
 
-İşte, gezinmeler için transitionlar kullanarak yapılmış küçük bir basitleştirilmiş yönlendirici örneği.
-
+İşte, gezinmeler için Transition'lar kullanarak yapılmış küçük bir basitleştirilmiş yönlendirici örneği.
 
 <Sandpack>
 
@@ -1606,7 +1601,7 @@ root.render(
 
 ## Sorun Giderme {/*troubleshooting*/}
 
-### Transition içinde bir input (giriş) alanını güncelleme işlemi çalışmaz {/*updating-an-input-in-a-transition-doesnt-work*/}
+### Transition içinde bir inputu (girdiyi) güncelleme işlemi çalışmaz {/*updating-an-input-in-a-transition-doesnt-work*/}
 
 Bir input alanını kontrol eden state değişkeni için transition kullanamazsınız:
 
@@ -1626,8 +1621,7 @@ return <input value={text} onChange={handleChange} />;
 Bunun nedeni, transition işlemlerinin bloklamayan bir yapıda olmalarıdır, ancak bir değişiklik olayına yanıt olarak input alanını güncellemek eşzamanlı olarak gerçekleşmelidir. Yazma işlemine yanıt olarak transition çalıştırmak isterseniz, iki seçeneğiniz vardır:
 
 1. İki ayrı state değişkeni tanımlayabilirsiniz: biri input state'i için (her zaman eşzamanlı olarak güncellenir), diğeri de bir transition güncelleyeceğiniz değişken. Bu şekilde, girişi eşzamanlı state kullanarak kontrol etmenizi ve transition state değişkenini (girişin "gerisinde kalacak" olan) render işleminize aktarmanızı sağlar.
-
-2. Alternatif olarak, bir state değişkeniniz olabilir ve gerçek değerin "gerisinde kalacak" olan [`useDeferredValue`](/reference/react/useDeferredValue)  ekleyebilirsiniz. Bu, yeni değeri otomatik olarak "yakalamak" için bloklamayan yeniden render işlemini tetikler.
+2. Alternatif olarak, bir state değişkeniniz olabilir ve gerçek değerin "gerisinde kalacak" olan [`useDeferredValue`](/reference/react/useDeferredValue) ekleyebilirsiniz. Bu, yeni değeri otomatik olarak "yakalamak" için bloklamayan yeniden render işlemini tetikler.
 
 ---
 
