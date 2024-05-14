@@ -105,42 +105,14 @@ Render etme işlemini önceliklendirmek için bu Hook'lardan birini kullanın:
 
 ---
 
-<<<<<<< HEAD
-## Kaynak Hook'ları {/*resource-hooks*/}
-
-*Kaynaklar* bir bileşenin, state'inin bir parçası olmadan da erişebileceği verilerdir. Örneğin, bir bileşen bir Promise'den bir mesajı veya bir context'ten stil bilgilerini okuyabilir.
-
-Bir kaynaktan bir değer okumak için bu Hook'u kullanın:
-
-- [`use`](/reference/react/use) [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynakğın değerini okumanızı sağlar.
-
-```js
-function MessageComponent({ messagePromise }) {
-  const message = use(messagePromise);
-  const theme = use(ThemeContext);
-  // ...
-}
-```
-
----
-
 ## Diğer Hook'lar {/*other-hooks*/}
-=======
-## Other Hooks {/*other-hooks*/}
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 Bu Hook'lar genellikle kütüphane geliştiricileri için kullanışlıdır ve uygulama kodlarında yaygın olarak kullanılmazlar.
 
-<<<<<<< HEAD
 - [`useDebugValue`](/reference/react/useDebugValue) React DevTools'da, kendi yazdığınız hook için özel bir etiket belirlemenizi sağlar.
 - [`useId`](/reference/react/useId) bir bileşenin kendisiyle benzersiz bir ID ilişkilendirmesini sağlar. Genellikle erişilebilirlik API'ları ile kullanılır.
 - [`useSyncExternalStore`](/reference/react/useSyncExternalStore) bir bileşenin harici bir depoya abone olmasını sağlar.
-=======
-- [`useDebugValue`](/reference/react/useDebugValue) lets you customize the label React DevTools displays for your custom Hook.
-- [`useId`](/reference/react/useId) lets a component associate a unique ID with itself. Typically used with accessibility APIs.
-- [`useSyncExternalStore`](/reference/react/useSyncExternalStore) lets a component subscribe to an external store.
-* [`useActionState`](/reference/react/useActionState) allows you to manage state of actions.
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
+- [`useActionState`](/reference/react/useActionState) actionların stateini yönetmenizi sağlar.
 
 ---
 

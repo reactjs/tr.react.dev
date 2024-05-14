@@ -45,15 +45,9 @@ Burada ve daha sonra bu metinde, büyük harflerle yazılan "Efekt", yukarıdaki
 
 Bir Efekt yazmak için aşağıdaki üç adımı takip edin:
 
-<<<<<<< HEAD
-1. **Bir Efekt bildirin.** Varsayılan olarak, Efektiniz her render'dan sonra çalışacaktır.
+1. **Bir Efekt bildirin.** Varsayılan olarak, Efektiniz her [işleme](/learn/render-and-commit)'den sonra çalışacaktır.
 2. **Efektin bağımlılıklarını belirtin.** Çoğu Efekt her render yerine yalnızca *gerektiğinde* yeniden çalışmalıdır. Örneğin, bir solma animasyonu yalnızca bileşen göründüğünde tetiklenmelidir. Bir sohbet odasına bağlanmak ya da bağlantıyı koparmak yalnızca bileşen göründüğünde ve kaybolduğunda ya da sohbet odası değiştiğinde olmalıdır. *Bağımlılıkları* belirterek bunu nasıl kontrol edeceğinizi öğreneceksiniz.
 3. **Gerekliyse temizleme (cleanup) ekleyin.** Bazı Efektlerin, yaptıkları her şeyi nasıl durduracaklarını, geri alacaklarını veya temizleyeceklerini belirtmeleri gerekir. Örneğin, "bağlanmak" "bağlantıyı kese" ihtiyaç duyar, "abone ol" "abonelikten çıka" ihtiyaç duyar ve "veri getirme (fetch)" ya "iptal" ya da "görmezden gele" ihtiyaç duyar. Bir *temizleme fonksiyonu* döndürerek bunu nasıl yapacağınızı öğreneceksiniz.
-=======
-1. **Declare an Effect.** By default, your Effect will run after every [commit](/learn/render-and-commit).
-2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
-3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 Gelin her bir adıma detaylı bir şekilde bakalım.
 
@@ -604,12 +598,9 @@ Genellikle doğru cevap, temizleme fonksiyonu eklemektir. Temizleme fonksiyonu, 
 
 Yazacağınız Efektlerin çoğu aşağıdaki yaygın kalıplardan birine uyacaktır.
 
-<<<<<<< HEAD
-### React olmayan widget'ları kontrol etmek {/*controlling-non-react-widgets*/}
-=======
 <Pitfall>
 
-#### Don't use refs to prevent Effects from firing {/*dont-use-refs-to-prevent-effects-from-firing*/}
+#### Effekt'lerin tetiklenmesini önlemek için refleri kullanmayın {/*dont-use-refs-to-prevent-effects-from-firing*/}
 
 A common pitfall for preventing Effects firing twice in development is to use a `ref` to prevent the Effect from running more than once. For example, you could "fix" the above bug with a `useRef`:
 
@@ -634,8 +625,7 @@ See the examples below for how to handle common patterns.
 
 </Pitfall>
 
-### Controlling non-React widgets {/*controlling-non-react-widgets*/}
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
+### React olmayan widget'ları kontrol etmek {/*controlling-non-react-widgets*/}
 
 Bazen React'e yazılmamış UI widget'ları eklemek isteyebilirsiniz. Örneğin, sayfanıza bir harita bileşeni ekliyorsunuz. Bu harita `setZoomLevel()` metoduna sahip ve React kodunuzdaki `zoomLevel` state değişkenini yakınlaştırma seviyesi ile senkronize etmek istiyorsunuz. Efektiniz şuna benzeyecektir:
 

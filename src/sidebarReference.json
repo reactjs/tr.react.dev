@@ -155,26 +155,6 @@
       ]
     },
     {
-<<<<<<< HEAD
-      "title": "Direktifler",
-      "path": "/reference/react/directives",
-      "canary": true,
-      "routes": [
-        {
-          "title": "'use client'",
-          "path": "/reference/react/use-client",
-          "canary": true
-        },
-        {
-          "title": "'use server'",
-          "path": "/reference/react/use-server",
-          "canary": true
-        }
-      ]
-    },
-    {
-=======
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
       "hasSectionHeader": true,
       "sectionHeader": "react-dom@{{version}}"
     },
@@ -355,9 +335,6 @@
     },
     {
       "hasSectionHeader": true,
-<<<<<<< HEAD
-      "sectionHeader": "Eski API'ları"
-=======
       "sectionHeader": "Rules of React"
     },
     {
@@ -393,7 +370,7 @@
       "canary": true
     },
     {
-      "title": "Directives",
+      "title": "Direktifler",
       "path": "/reference/rsc/directives",
       "canary": true,
       "routes": [
@@ -411,8 +388,7 @@
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "Legacy APIs"
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
+      "sectionHeader": "Eski API'lar"
     },
     {
       "title": "Eski React API'ları",

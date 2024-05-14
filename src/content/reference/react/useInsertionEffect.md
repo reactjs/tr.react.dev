@@ -10,11 +10,7 @@ title: useInsertionEffect
 
 <Intro>
 
-<<<<<<< HEAD
 `useInsertionEffect`, herhangi bir layout efekti tetiklenmeden önce DOM'a öğe eklenmesine izin verir.
-=======
-`useInsertionEffect` allows inserting elements into the DOM before any layout Effects fire.
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 ```js
 useInsertionEffect(setup, dependencies?)
@@ -30,11 +26,7 @@ useInsertionEffect(setup, dependencies?)
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-<<<<<<< HEAD
 Layout'ı okuma ihtimali olan herhangi bir efekt tetiklenmeden önce stil eklemek için `useInsertionEffect` hookunu çağırın:
-=======
-Call `useInsertionEffect` to insert styles before any Effects fire that may need to read layout:
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 ```js
 import { useInsertionEffect } from 'react';
@@ -52,15 +44,8 @@ function useCSS(rule) {
 
 #### Parametreler {/*parameters*/}
 
-<<<<<<< HEAD
 * `setup`: Effect mantığınızı içeren fonksiyon. Setup fonksiyonunuz isteğe bağlı olarak bir *temizlik* fonksiyonu döndürebilir.  Bileşeniniz DOM'a eklenmeden önce, React setup fonksiyonunuzu çalışıtıracak. Değişen bağımlılıklarla her yeniden render işleminde, React önce (varsa) temizlik işlevinizi eski değerlerle çalıştıracak, ardından setup fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldığında, React temizlik fonksiyonunuzu çalıştıracaktır.
-=======
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your component is added to the DOM, but before any layout Effects fire, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. When your component is removed from the DOM, React will run your cleanup function.
- 
-* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithm. If you don't specify the dependencies at all, your Effect will re-run after every re-render of the component.
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
-
-* **opsiyonel** `dependencies`: `setup` kodunun içinde referans verilen tüm reaktif değerlerin listesi. Reaktif değerler, props, state ve direkt olarak bileşen içinde belirtilen tüm değişkenleri ve fonksiyonları içerir. Eğer linteriniz [React için yapılandırılmış](/learn/editor-setup#linting), her reaktif değerin bağımlılık olarak doğru şekilde belirtildiğini doğrulayacaktır. Bağımlılıkların listesi sabit sayıda ögeye sahip olmalı ve `[dep1, dep2, dep3]` gibi sıralı şekilde yazılmalıdır. React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırma algoritmasını kullanarak her bağımlılığı önceki değeriyle karşılaştıracak. Bağımlılıkları hiç belirtmezseniz, Efektiniz bileşenin her yeniden render işleminde tekrar çalışacaktır.
+* **opsiyonel** `bağımlılıklar`: `setup` kodunun içinde referans verilen tüm reaktif değerlerin listesi. Reaktif değerler, props, state ve direkt olarak bileşen içinde belirtilen tüm değişkenleri ve fonksiyonları içerir. Eğer linteriniz [React için yapılandırılmış](/learn/editor-setup#linting), her reaktif değerin bağımlılık olarak doğru şekilde belirtildiğini doğrulayacaktır. Bağımlılıkların listesi sabit sayıda ögeye sahip olmalı ve `[dep1, dep2, dep3]` gibi sıralı şekilde yazılmalıdır. React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırma algoritmasını kullanarak her bağımlılığı önceki değeriyle karşılaştıracak. Bağımlılıkları hiç belirtmezseniz, Efektiniz bileşenin her yeniden render işleminde tekrar çalışacaktır.
 
 #### Dönüş Değerleri {/*returns*/}
 
@@ -102,11 +87,7 @@ CSS-in-JS kullanıyorsanız, genellikle ilk iki yaklaşımın (Statik stiller i�
 
 İlk problem çözülemezken, ama `useInsertionEffect` hooku ikinci problemi çözmenize yardımcı olur.
 
-<<<<<<< HEAD
 Herhangi bir layout efektinden önce stilleri eklemek için `useInsertionEffect` hookunu çağırın: 
-=======
-Call `useInsertionEffect` to insert the styles before any layout Effects fire:
->>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 ```js {4-11}
 // Inside your CSS-in-JS library
