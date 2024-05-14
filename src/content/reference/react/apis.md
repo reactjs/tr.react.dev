@@ -25,9 +25,11 @@ title: "Yerleşik React API'leri"
 To read a value from a resource, use this API:
 
 * [`use`](/reference/react/use) lets you read the value of a resource like a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
+
 ```js
 function MessageComponent({ messagePromise }) {
   const message = use(messagePromise);
   const theme = use(ThemeContext);
   // ...
 }
+```
