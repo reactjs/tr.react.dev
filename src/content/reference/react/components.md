@@ -11,13 +11,13 @@ React, JSX'lerinizde kullanabileceğiniz birkaç yerleşik bileşeni sunar.
 ---
 
 ## Yerleşik react bileşenleri {/*built-in-components*/}
-* [`<Fragment>`](/reference/react/Fragment), alternatif olarak `<>...</>` şeklinde yazılır ve birden fazla JSX düğümünü bir araya getirmenize olanak tanır.
-* [`<Profiler>`](/reference/react/Profiler), bir React ağacının render performansını programlı olarak ölçmenizi sağlar.
-* [`<Suspense>`](/reference/react/Suspense), alt bileşenler yüklenirken bir yedek içerik görüntülemenizi sağlar.
-* [`<StrictMode>`](/reference/react/StrictMode), hataları erken tespit etmenize yardımcı olan ekstra yalnızca geliştirme amaçlı kontrolleri etkinleştirir.
+* [`<Fragment>`](/reference/react/Fragment) bileşeni, alternatif olarak `<>...</>` şeklinde yazılır ve birden fazla JSX düğümünü bir araya getirmenize olanak tanır.
+* [`<Profiler>`](/reference/react/Profiler) bileşeni, bir React ağacının render performansını programlama yoluyla ölçmenizi sağlar.
+* [`<Suspense>`](/reference/react/Suspense) bileşeni, alt bileşenler yüklenirken bir yedek içerik görüntülemenizi sağlar.
+* [`<StrictMode>`](/reference/react/StrictMode) bileşeni, hataları erken tespit etmenize yardımcı olan ekstra kontrolleri gerçekleştirir. Yalnızca geliştirme ortamında geçerlidir.
 
 ---
 
-## Bireysel bileşenler {/*your-own-components*/}
+## Kendi bileşenleriniz {/*your-own-components*/}
 
-Javascript fonksiyonları olarak [kendi bileşenlerinizi de tanımlayabilirsiniz.](/learn/your-first-component)
+Ayrıca [kendi bileşenlerinizi](/learn/your-first-component) de Javascript fonksiyonları olarak tanımlayabilirsiniz.
