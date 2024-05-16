@@ -5,13 +5,13 @@ canary: true
 
 <Canary>
 
-`use` Hook şu anda sadece React'ın Test Ortamı ve deneysel kanallarında mevcuttur. React'in yayın kanalları hakkında daha fazla bilgi edinmek için [buraya göz atın](/community/versioning-policy#all-release-channels).
+`use` API şu anda sadece React'ın Test Ortamı ve deneysel kanallarında mevcuttur. React'in yayın kanalları hakkında daha fazla bilgi edinmek için [buraya göz atın](/community/versioning-policy#all-release-channels).
 
 </Canary>
 
 <Intro>
 
-`use`, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi bir kaynağın değerini okumanıza olanak sağlayan bir React Hook'tur.
+`use`, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi bir kaynağın değerini okumanıza olanak sağlayan bir React API'ıdır.
 
 ```js
 const value = use(resource);
@@ -27,7 +27,7 @@ const value = use(resource);
 
 ### `use(resource)` {/*use*/}
 
-[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi kaynakların değerini okumak için bileşeninizde `use` Hook'unu çağırabilirsiniz.
+[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi kaynakların değerini okumak için bileşeninizde `use` API'ını çağırabilirsiniz.
 
 ```jsx
 import { use } from 'react';
@@ -39,7 +39,7 @@ function MessageComponent({ messagePromise }) {
 ```
 Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler içerisinde `use` kullanılabilir. Diğer React Hook'lar gibi, `use` kullanan fonksiyon bir Bileşen veya Hook olmalıdır.
 
-Bir Pomise ile çağırıldığında; `use` Hook, [`Suspense`](/reference/react/Suspense) ve [hata sınırları](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre olur. `use`'a iletilen Promise beklenirken, `use` çağrısı yapan bileşen askıya alınır. Eğer `use` çağrısı yapan bileşen Suspense içerisine alınırsa yedek görünüm görüntülenecektir. Promise çözümlendiğinde ise; Suspense yedek görünümü, `use` Hook'u tarafından döndürülen değerleri kullanarak oluşturulan bileşenler ile yer değiştirir. Eğer `use`'a iletilen Promise reddedilir ise, en yakındaki Hata Sınırının yedek görünümü görüntülenecektir.
+Bir Pomise ile çağırıldığında; `use` API, [`Suspense`](/reference/react/Suspense) ve [hata sınırları](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre olur. `use`'a iletilen Promise beklenirken, `use` çağrısı yapan bileşen askıya alınır. Eğer `use` çağrısı yapan bileşen Suspense içerisine alınırsa yedek görünüm görüntülenecektir. Promise çözümlendiğinde ise; Suspense yedek görünümü, `use` API'ı tarafından döndürülen değerleri kullanarak oluşturulan bileşenler ile yer değiştirir. Eğer `use`'a iletilen Promise reddedilir ise, en yakındaki Hata Sınırının yedek görünümü görüntülenecektir.
 
 [Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
@@ -49,11 +49,11 @@ Bir Pomise ile çağırıldığında; `use` Hook, [`Suspense`](/reference/react/
 
 #### Dönüş Değerleri {/*returns*/}
 
-`use` Hook, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynaktan çözümlenen veriyi döndürür.
+`use` API, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynaktan çözümlenen veriyi döndürür.
 
 #### Önemli Hususlar {/*caveats*/}
 
-* `use` Hook, bir bileşen veya bir hook'un içerisinde çağırılmak zorundadır..
+* `use` API, bir bileşen veya bir hook'un içerisinde çağırılmak zorundadır..
 * Bir [Sunucu Bileşeni](/reference/react/use-server) içerisinde veri çekilirken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, oluşturma işlemini `await` ifadesinin çağırıldığı noktadan devam ettirirken; `use`, veri çözümlendikten sonra bileşeni yeniden oluşturur.
 * [Sunucu Bileşeni](/reference/react/use-server) içerisinde Promise oluşturup [İstemci Bileşeni](/reference/react/use-client) içerisine aktarmak yerine Promise'i [İstemci Bileşeni](/reference/react/use-client) içerisinde oluşturmayı tercih edin. İstemci Bileşeni içerisine eklenen Promise'ler her oluşturma işlemi sırasında yeniden oluşturulur. Sunucu Bileşeninden İstemci Bileşenine aktarılan Promise'ler ise yeniden oluşturma işlemleri sırasında sabit kalır. [Bu örneği inceleyin](#streaming-data-from-server-to-client).
 ---
@@ -227,7 +227,7 @@ export default function App() {
 }
 ```
 
-<CodeStep step={2}>İstemci Bileşeni</CodeStep> prop olarak iletilen Promise'i alır ve <CodeStep step={5}>`use`</CodeStep> Hook'a ileterek kullanır. Bu yöntem Sunucu Bileşeni içerisinde oluşturulan <CodeStep step={4}>Promise</CodeStep>'ten alınan verinin <CodeStep step={2}>İstemci Bileşeni</CodeStep> tarafından okunmasına olanak tanır.
+<CodeStep step={2}>İstemci Bileşeni</CodeStep> prop olarak iletilen Promise'i alır ve <CodeStep step={5}>`use`</CodeStep> API'ına ileterek kullanır. Bu yöntem Sunucu Bileşeni içerisinde oluşturulan <CodeStep step={4}>Promise</CodeStep>'ten alınan verinin <CodeStep step={2}>İstemci Bileşeni</CodeStep> tarafından okunmasına olanak tanır.
 
 ```js [[2, 6, "Message"], [4, 6, "messagePromise"], [4, 7, "messagePromise"], [5, 7, "use"]]
 // message.js
@@ -241,7 +241,7 @@ export function Message({ messagePromise }) {
 }
 ```
 
-<CodeStep step={2}>`Message`</CodeStep> bir <CodeStep step={3}>[`Suspense`](/reference/react/Suspense)</CodeStep> içerisinde olduğu için Promise çözümleninceye kadar yedek görünüm görüntülenecektir. Promise çözümlendiğinde değer <CodeStep step={5}>`use`</CodeStep> Hook tarafından okunacak ve <CodeStep step={2}>`Message`</CodeStep> bileşeni Suspense'in yedek görünüm ile yer değiştirecektir.
+<CodeStep step={2}>`Message`</CodeStep> bir <CodeStep step={3}>[`Suspense`](/reference/react/Suspense)</CodeStep> içerisinde olduğu için Promise çözümleninceye kadar yedek görünüm görüntülenecektir. Promise çözümlendiğinde değer <CodeStep step={5}>`use`</CodeStep> API tarafından okunacak ve <CodeStep step={2}>`Message`</CodeStep> bileşeni Suspense'in yedek görünüm ile yer değiştirecektir.
 
 <Sandpack>
 
@@ -291,7 +291,7 @@ export default function App() {
 ```js src/index.js hidden
 // TODO: update to import from stable
 // react instead of canary once the `use`
-// Hook is in a stable release of React
+// API is in a stable release of React
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -332,7 +332,7 @@ Sunucu Bileşeni'nden İstemci Bileşeni'ne Promise aktarıldığında çözüml
 
 #### Promise'i Sunucu Bileşeninde mi yoksa İstemci Bileşeninde mi çözümlemeliyim? {/*resolve-promise-in-server-or-client-component*/}
 
-Promise, Sunucu Bileşeni'nden İstemci Bileşeni'ne aktarılabilir ve İstemci Bileşeni içerisinde `use` Hook kullanarak çözümlenebilir. Yanı sıra istersen Promise'i Sunucu Bileşeni içerisinde `await` kullanarak çözümleyebilir ve gerekli veriyi İstemci Bileşeni içerisine prop olarak iletebilirsin.
+Promise, Sunucu Bileşeni'nden İstemci Bileşeni'ne aktarılabilir ve İstemci Bileşeni içerisinde `use` API kullanarak çözümlenebilir. Yanı sıra istersen Promise'i Sunucu Bileşeni içerisinde `await` kullanarak çözümleyebilir ve gerekli veriyi İstemci Bileşeni içerisine prop olarak iletebilirsin.
 
 ```js
 export default async function App() {
@@ -358,7 +358,7 @@ Bazen `use`'a aktarılan Promise reddedilebilir. Reddedilen Promise'leri şu şe
 
 #### Kullanıcıya hata sınırlayıcısı kullanarak hata göstermek {/*displaying-an-error-to-users-with-error-boundary*/}
 
-Eğer bir Promise reddedildiğinde kullanıcılarına hata göstermek istersen [hata sınırlayıcısını](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) kullanabilirsin. Bir hata sınırlayıcı kullanmak için `use` Hook'unu çağırdığınız bir bileşeni Error Boundary içerisine koyun. Eğer `use`'a iletilen Promise reddedilirse hata sınırlayıcı aracılığı ile yedek görünüm görüntülenecektir.
+Eğer bir Promise reddedildiğinde kullanıcılarına hata göstermek istersen [hata sınırlayıcısını](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) kullanabilirsin. Bir hata sınırlayıcı kullanmak için `use` API'ını çağırdığınız bir bileşeni Error Boundary içerisine koyun. Eğer `use`'a iletilen Promise reddedilirse hata sınırlayıcı aracılığı ile yedek görünüm görüntülenecektir.
 
 <Sandpack>
 
@@ -411,7 +411,7 @@ export default function App() {
 ```js src/index.js hidden
 // TODO: update to import from stable
 // react instead of canary once the `use`
-// Hook is in a stable release of React
+// API is in a stable release of React
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
