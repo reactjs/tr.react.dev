@@ -259,9 +259,30 @@ Ayrıca React, siz *farklı* bir `ref` callback'i verir vermez `ref` callback'in
 
 * `node`: Bir DOM düğümü veya `null`. React, ref bağlanınca size DOM düğümü, bağlantı kesilince ise `null` verecektir. Eğer ki her render'da `ref` callback'i için aynı fonksiyon referansını vermezseniz, callback'in geçici olarak bağlantısı kesilecek ve bileşenin her yeniden render'lanması sırasında tekrar bağlanacaktır.
 
-#### Döndürülenler {/*returns*/}
+<Canary>
 
-`ref` callback'i herhangi bir şey geri döndürmez.
+#### Dönüş Değeri {/*returns*/}
+
+*  **optional** `cleanup function`: When the `ref` is detached, React will call the cleanup function. If a function is not returned by the `ref` callback, React will call the callback again with `null` as the argument when the `ref` gets detached.
+
+```js
+
+<div ref={(node) => {
+  console.log(node);
+
+  return () => {
+    console.log('Clean up', node)
+  }
+}}>
+
+```
+
+#### Uyarılar {/*caveats*/}
+
+* When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, implement the cleanup function.
+* When you pass a *different* `ref` callback, React will call the *previous* callback's cleanup function if provided. If not cleanup function is defined, the `ref` callback will be called with `null` as the argument. The *next* function will be called with the DOM node.
+
+</Canary>
 
 ---
 

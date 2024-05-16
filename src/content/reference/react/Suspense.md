@@ -1728,7 +1728,7 @@ main {
 
 Butona bastığınızda `Router` bileşeni `ArtistPage` sayfası yerine `IndexPage` sayfasını render etti. `ArtistPage` içerisindeki bir bileşen askıya alındı, bu yüzden en yakın Suspense sınırı fallback'i göstermeye başladı. En yakın Suspense sınırı köke yakındı, bu yüzden tüm site layout'u `BigSpinner` ile değiştirildi.
 
-Bunu engellemek için, navigasyon state'ini bir *geçiş* (transition) olarak [`startTransition`:](/reference/react/startTransition) ile işaretleyebilirsiniz:
+Bunu engellemek için, navigasyon state güncellemesini bir *geçiş* (transition) olarak [`startTransition`:](/reference/react/startTransition) ile işaretleyebilirsiniz:
 
 ```js {5,7}
 function Router() {
@@ -2117,7 +2117,7 @@ Bir transition *tüm* içeriğin yüklenmesini beklemez. Zaten açığa çıkmı
 
 <Note>
 
-Suspense özellikli router'lar varsayılan olarak navigasyon güncellemelerini transition'lara sararlar.
+Suspense özellikli router'lar varsayılan olarak navigasyon durumu güncellemelerini transition'lara sararlar.
 
 </Note>
 
@@ -2503,7 +2503,7 @@ main {
 
 ### Navigasyon sırasında Suspense sınırlarını sıfırlama {/*resetting-suspense-boundaries-on-navigation*/}
 
-Bir transition sırasında, React açığa çıkarılmış içeriği gizlemekten kaçınır. Ancak, farklı parametrelere sahip bir rotaya geçerseniz, React'e bunun *farklı* içerik olduğunu söylemek isteyebilirsiniz. Bunu bir `key` ile ifade edebilirsiniz:
+Bir transition sırasında, React açığa çıkarılmış içeriği gizlemekten kaçınır. Ancak, bir sayfaya farklı parametrelerle giderseniz, React'e bunun *farklı* bir içerik olduğunu söylemek isteyebilirsiniz. Bunu bir `key` ile ifade edebilirsiniz:
 
 ```js
 <ProfilePage key={queryParams.id} />

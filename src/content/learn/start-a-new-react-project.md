@@ -4,21 +4,38 @@ title: Yeni bir React Projesi Başlatma
 
 <Intro>
 
-Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyorsanız, toplulukta popüler olan React destekli çatılardan birini seçmenizi öneririz. Çatılar, uygulamaların ve sitelerin eninde sonunda ihtiyaç duyacağı yönlendirme, veri alımı ve HTML oluşturma gibi özellikler sunar.
+Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyorsanız, toplulukta popüler olan React destekli çatılardan birini seçmenizi öneririz.
 
 </Intro>
 
-<Note>
 
-**Yerel geliştirme için [Node.js](https://nodejs.org/en/) yüklemelisiniz.** Node.js i canlı ortamda da kullanmayı tercih edebilirsiniz, fakat kullanmak zorunda değilsiniz. Birçok React çatısı, statik bir HTML/CSS/JS klasörüne dışa aktarmayı destekler.
+React'ı bir çatı (framework) olmadan da kullanabilirsiniz; ancak çoğu uygulamanın ve sitenin sonunda kod bölme, yönlendirme, veri çekme ve HTML oluşturma gibi yaygın sorunlara çözümler ürettiğini gördük. Bu sorunlar yalnızca React için değil, tüm UI kütüphaneleri için ortaktır.
 
-</Note>
+Bir çatıyla başlayarak, React'e hızlı bir başlangıç yapabilir ve sonrasında kendi çatınızı oluşturmaktan kurtulabilirsiniz.
+
+<DeepDive>
+
+#### React'ı bir çatı olmadan kullanabilir miyim? {/*can-i-use-react-without-a-framework*/}
+
+React'i kesinlikle bir çatı (framework) olmadan da kullanabilirsiniz - bu, [Sayfanızın bir bölümü için React'ı kullanın](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) ile açıklanmaktadır **Ancak, tamamen React ile yeni bir uygulama veya site oluşturuyorsanız, bir çatı kullanmanızı öneririz.**
+
+İşte nedeni.
+
+
+Başlangıçta yönlendirme veya veri alımına ihtiyaç duymasanız bile, bunlar için bazı kütüphaneler eklemek isteyeceksinizdir. Yeni özelliklerle birlikte JavaScript paketiniz büyüdükçe, her rota için kodu bireysel olarak nasıl böleceğinizi bulmanız gerekebilir. Veri alımı ihtiyaçlarınız daha karmaşık hale geldikçe, uygulamanızın çok yavaş hissettiren sunucu-istemci ağ şelaleleriyle karşılaşma olasılığı yüksektir. Kitleniz, kötü ağ koşullarına sahip ve düşük uçlu cihazları olan daha fazla kullanıcıyı içerdiğinde, bileşenlerinizden HTML oluşturarak içeriği erken göstermek isteyeceksiniz - ister sunucuda, ister derleme sırasında. Kodunuzun bir kısmını sunucuda veya derleme sırasında çalıştırmak için kurulumunuzu değiştirmek oldukça zor olabilir.
+
+**Bu sorunlar React'a özgü değildir. İşte bu yüzden Svelte'nin SvelteKit'i, Vue'nun Nuxt'ı ve daha fazlası vardır.** Bu sorunları kendi başınıza çözmek için, paketleyicinizi yönlendiricinizle ve veri alımı kütüphanenizle entegre etmeniz gerekecektir. İlk kurulumu çalıştırmak zor değildir, ancak zamanla büyüyen bir uygulamanın hızlı bir şekilde yüklenmesiyle ilgili birçok ince nokta vardır. Sayfanın gereken verilerle paralel olarak, mümkün olan en az uygulama kodunu göndermek isteyeceksiniz, ancak bunu tek bir istemci-sunucu turunda yapacaksınız. Muhtemelen sayfanın, progresif iyileştirmeyi desteklemek için JavaScript kodunuz çalışmadan önce etkileşimli olmasını isteyeceksiniz. Pazarlama sayfalarınız için JavaScript devre dışı bırakılsa bile her yerde barındırılabilen ve çalışabilen tamamen statik HTML dosyaları oluşturmak isteyebilirsiniz. Bu yetenekleri kendiniz oluşturmak gerçekten iş gerektirir.
+
+**Bu sayfadaki React çatıları, bu tür sorunları varsayılan olarak çözer ve sizden ekstra çalışma gerektirmeden bunları yapar.** Sizin için çok hafif başlamalarına ve ardından uygulamanızı ihtiyaçlarınızla birlikte ölçeklendirmelerine izin verirler. Her React çatısının bir topluluğu vardır, bu nedenle sorulara yanıt bulmak ve araçları yükseltmek daha kolaydır. Çatılar ayrıca kodunuza yapı sağlar, böylece siz ve diğerleri farklı projeler arasında bağlam ve becerileri koruyabilirsiniz. Öte yandan, özel bir kurulumla desteklenmeyen bağımlılık sürümlerinde sıkışma olasılığı daha yüksektir ve esasen kendi çatınızı oluşturacaksınız - her ne kadar topluluksuz ve yükseltme yolu olmayan bir çatı olsa da (ve geçmişte yaptığımızlar gibi daha dağınık tasarlanmış).
+
+Eğer hala ikna olmadıysanız veya uygulamanızın bu çatılar tarafından iyi hizmet edilmeyen sıradışı kısıtlamaları varsa ve kendi özel kurulumunuzu oluşturmak istiyorsanız, sizi durduramayız - devam edin! `react` ve `react-dom`'u npm'den alın, [Vite](https://vitejs.dev/) veya [Parcel](https://parceljs.org/) gibi bir paketleyici ile özel derleme sürecinizi ayarlayın ve yönlendirme, statik üretim veya sunucu tarafı işleme ve daha fazlası için ihtiyaç duyduğunuz diğer araçları ekleyin.
+</DeepDive>
 
 ## Canlı ortam seviyesi React Çatıları {/*production-grade-react-frameworks*/}
 
-### Next.js {/*nextjs*/}
+These frameworks support all the features you need to deploy and scale your app in production and are working towards supporting our [full-stack architecture vision](#which-features-make-up-the-react-teams-full-stack-architecture-vision). All of the frameworks we recommend are open source with active communities for support, and can be deployed to your own server or a hosting provider. If you’re a framework author interested in being included on this list, [please let us know](https://github.com/reactjs/react.dev/issues/new?assignees=&labels=type%3A+framework&projects=&template=3-framework.yml&title=%5BFramework%5D%3A+).
 
-**[Next.js](https://nextjs.org/), tam özellikli bir React çatısıdır.** Çok yönlüdür ve her büyüklükte React uygulaması oluşturmanıza olanak tanır-çoğunlukla statik bir blogdan karmaşık bir dinamik uygulamaya kadar. Yeni bir Next.js projesi oluşturmak için terminalinizde şunu çalıştırın:
+**[Next.js](https://nextjs.org/), tam özellikli bir React çatısıdır.** Çok yönlüdür ve çoğunlukla, statik bir blogdan karmaşık bir dinamik uygulamaya kadar, her büyüklükte React uygulaması oluşturmanıza olanak tanır. Yeni bir Next.js projesi oluşturmak için terminalinizde şunu çalıştırın:
 
 <TerminalBlock>
 npx create-next-app@latest
@@ -64,25 +81,7 @@ Expo'ya yeni başlıyorsanız, [Expo eğitimi](https://docs.expo.dev/tutorial/in
 
 Expo [Expo (firma)](https://expo.dev/about) tarafından desteklenmektedir. Expo ile uygulama oluşturmak ücretsizdir ve uygulamalarınızı Google ve Apple uygulama mağazalarına kısıtlama olmaksızın gönderebilirsiniz. Ayrıca Expo, opsiyonel olarak ücretli bulut hizmetleri sunar.
 
-<DeepDive>
-
-#### React'ı bir çatı olmadan kullanabilir miyim? {/*can-i-use-react-without-a-framework*/}
-
-React'i kesinlikle bir çatı (framework) olmadan da kullanabilirsiniz - bu, [Sayfanızın bir bölümü için React'ı kullanın](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) ile açıklanmaktadır **Ancak, tamamen React ile yeni bir uygulama veya site oluşturuyorsanız, bir çatı kullanmanızı öneririz.**
-
-İşte nedeni.
-
-
-Başlangıçta yönlendirme veya veri alımına ihtiyaç duymasanız bile, bunlar için bazı kütüphaneler eklemek isteyeceksinizdir. Yeni özelliklerle birlikte JavaScript paketiniz büyüdükçe, her rota için kodu bireysel olarak nasıl böleceğinizi bulmanız gerekebilir. Veri alımı ihtiyaçlarınız daha karmaşık hale geldikçe, uygulamanızın çok yavaş hissettiren sunucu-istemci ağ şelaleleriyle karşılaşma olasılığı yüksektir. Kitleniz, kötü ağ koşullarına sahip ve düşük uçlu cihazları olan daha fazla kullanıcıyı içerdiğinde, bileşenlerinizden HTML oluşturarak içeriği erken göstermek isteyeceksiniz - ister sunucuda, ister derleme sırasında. Kodunuzun bir kısmını sunucuda veya derleme sırasında çalıştırmak için kurulumunuzu değiştirmek oldukça zor olabilir.
-
-**Bu sorunlar React'a özgü değildir. İşte bu yüzden Svelte'nin SvelteKit'i, Vue'nun Nuxt'ı ve daha fazlası vardır.** Bu sorunları kendi başınıza çözmek için, paketleyicinizi yönlendiricinizle ve veri alımı kütüphanenizle entegre etmeniz gerekecektir. İlk kurulumu çalıştırmak zor değildir, ancak zamanla büyüyen bir uygulamanın hızlı bir şekilde yüklenmesiyle ilgili birçok ince nokta vardır. Sayfanın gereken verilerle paralel olarak, mümkün olan en az uygulama kodunu göndermek isteyeceksiniz, ancak bunu tek bir istemci-sunucu turunda yapacaksınız. Muhtemelen sayfanın, progresif iyileştirmeyi desteklemek için JavaScript kodunuz çalışmadan önce etkileşimli olmasını isteyeceksiniz. Pazarlama sayfalarınız için JavaScript devre dışı bırakılsa bile her yerde barındırılabilen ve çalışabilen tamamen statik HTML dosyaları oluşturmak isteyebilirsiniz. Bu yetenekleri kendiniz oluşturmak gerçekten iş gerektirir.
-
-**Bu sayfadaki React çatıları, bu tür sorunları varsayılan olarak çözer ve sizden ekstra çalışma gerektirmeden bunları yapar.** Sizin için çok hafif başlamalarına ve ardından uygulamanızı ihtiyaçlarınızla birlikte ölçeklendirmelerine izin verirler. Her React çatısının bir topluluğu vardır, bu nedenle sorulara yanıt bulmak ve araçları yükseltmek daha kolaydır. Çatılar ayrıca kodunuza yapı sağlar, böylece siz ve diğerleri farklı projeler arasında bağlam ve becerileri koruyabilirsiniz. Öte yandan, özel bir kurulumla desteklenmeyen bağımlılık sürümlerinde sıkışma olasılığı daha yüksektir ve esasen kendi çatınızı oluşturacaksınız - her ne kadar topluluksuz ve yükseltme yolu olmayan bir çatı olsa da (ve geçmişte yaptığımızlar gibi daha dağınık tasarlanmış).
-
-Eğer hala ikna olmadıysanız veya uygulamanızın bu çatılar tarafından iyi hizmet edilmeyen sıradışı kısıtlamaları varsa ve kendi özel kurulumunuzu oluşturmak istiyorsanız, sizi durduramayız - devam edin! `react` ve `react-dom`'u npm'den alın, [Vite](https://vitejs.dev/) veya [Parcel](https://parceljs.org/) gibi bir paketleyici ile özel derleme sürecinizi ayarlayın ve yönlendirme, statik üretim veya sunucu tarafı işleme ve daha fazlası için ihtiyaç duyduğunuz diğer araçları ekleyin.
-</DeepDive>
-
-## İleri Seviye React Çatıları {/*bleeding-edge-react-frameworks*/}
+## Bleeding-edge React frameworks {/*bleeding-edge-react-frameworks*/}
 
 React'ı nasıl daha da geliştirebileceğimizi keşfederken, React'ı çatılarla (özellikle yönlendirme, paketleme ve sunucu teknolojileriyle) daha yakından entegre etmenin, React kullanıcılarının daha iyi uygulamalar geliştirmelerine yardımcı olmak için en büyük fırsatımız olduğunu fark ettik. Next.js ekibi, [React Sunucu Bileşenleri](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) gibi çatı bağımsız ileri seviye React özelliklerinin araştırılması, geliştirilmesi, entegrasyonu ve test edilmesi konusunda bizimle işbirliği yapmayı kabul etti.
 

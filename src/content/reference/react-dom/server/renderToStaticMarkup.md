@@ -7,7 +7,7 @@ title: renderToStaticMarkup
 `renderToStaticMarkup`, etkileşimli olmayan bir React ağacını HTML string'e dönüştürür.
 
 ```js
-const html = renderToStaticMarkup(reactNode)
+const html = renderToStaticMarkup(reactNode, options?)
 ```
 
 </Intro>
@@ -18,7 +18,7 @@ const html = renderToStaticMarkup(reactNode)
 
 ## Başvuru dokümanı {/*reference*/}
 
-### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
+### `renderToStaticMarkup(reactNode, options?)` {/*rendertostaticmarkup*/}
 
 Sunucuda, uygulamanızı HTML'ye dönüştürmek için `renderToStaticMarkup` yöntemini çağırın.
 

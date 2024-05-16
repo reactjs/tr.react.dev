@@ -58,7 +58,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 * `actualDuration`: Mevcut güncelleme için `<Profiler>` ve onun alt öğelerini render etmek için harcanan milisaniye sayısı. Bu, alt ağacın memoizasyondan ne kadar iyi yararlandığını gösterir (örneğin [`memo`](/reference/react/memo) ve [`useMemo`](/reference/react/useMemo)). İdeal olarak, bu değer ilk yüklemeden sonra önemli ölçüde azalmalıdır, çünkü alt öğelerin birçoğu yalnızca belirli prop'ları değiştiğinde yeniden render edilmedir.
 * `baseDuration`: Herhangi bir optimizasyon olmadan tüm `<Profiler>` alt ağacını yeniden render etmenin ne kadar zaman alacağını tahmin eden milisaniye sayısı. Ağaçtaki her bileşenin en son render süreleri toplanarak hesaplanır. Bu değer, render işleminin en kötü senaryo maliyetini tahmin eder (örn. ilk yükleme işlemi veya memoizasyon olmayan bir ağaç). Memoizasyonun çalışıp çalışmadığını görmek için `actualDuration` ile karşılaştırın.
 * `startTime`: React'in mevcut güncellemeyi ne zaman render etmeye başladığını gösteren sayısal bir zaman damgası.
-* `endTime`: React'in geçerli güncellemeyi ne zaman commit ettiğini gösteren sayısal bir zaman damgası. Bu değer, istenirse gruplandırılabilmeleri için bir committeki tüm profilleyiciler arasında paylaşılır.
+* `commitTime`: React'in geçerli güncellemeyi ne zaman commit ettiğini gösteren sayısal bir zaman damgası. Bu değer, istenirse gruplandırılabilmeleri için bir committeki tüm profilleyiciler arasında paylaşılır.
 
 ---
 
