@@ -1264,13 +1264,13 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-**A good custom Hook makes the calling code more declarative by constraining what it does.** For example, `useChatRoom(options)` can only connect to the chat room, while `useImpressionLog(eventName, extraData)` can only send an impression log to the analytics. If your custom Hook API doesn't constrain the use cases and is very abstract, in the long run it's likely to introduce more problems than it solves.
+**İyi bir özel Hook çağıran kodun ne yaptığını sınırlandırarak daha deklaratif hale getirir.** Örneğin, `useChatRoom(options)` sadece sohbet odasına bağlanabilirken, `useImpressionLog(eventName, extraData)` analitiklere bir izlenim kaydı gönderebilir. Eğer özel Hook API'nız kullanım durumlarını sınırlandırmıyorsa ve çok soyutsa, uzun vadede çözdüğünden daha fazla sorun yaratabilir.
 
 </DeepDive>
 
-### Custom Hooks help you migrate to better patterns {/*custom-hooks-help-you-migrate-to-better-patterns*/}
+### Özel Hook'lar daha iyi kalıplara geçiş yapmanıza yardımcı olur {/*custom-hooks-help-you-migrate-to-better-patterns*/}
 
-Effects are an ["escape hatch"](/learn/escape-hatches): you use them when you need to "step outside React" and when there is no better built-in solution for your use case. With time, the React team's goal is to reduce the number of the Effects in your app to the minimum by providing more specific solutions to more specific problems. Wrapping your Effects in custom Hooks makes it easier to upgrade your code when these solutions become available.
+Efekt'ler bir ["kaçış yolu"](/learn/escape-hatches)'dur: Efekt'leri "React'ten dışarı çıkmak" zorunda kaldığınızda ve daha iyi bir yerleşik çözüm olmadığında kullanırsınız. Zamanla, React ekibinin amacı daha spesifik problemlere daha spesifik çözümler sağlayarak uygulamanızdaki Efekt'lerin sayısını minimuma indirmektir. Efekt'lerinizi özel Hook'larla sarmak, bu çözümler mevcut olduğunda kodunuzu güncellemeyi kolaylaştırır.  
 
 Let's return to this example:
 
@@ -1281,19 +1281,19 @@ import { useOnlineStatus } from './useOnlineStatus.js';
 
 function StatusBar() {
   const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimiçi' : '❌ Bağlantı kopuk'}</h1>;
 }
 
 function SaveButton() {
   const isOnline = useOnlineStatus();
 
   function handleSaveClick() {
-    console.log('✅ Progress saved');
+    console.log('✅ İlerleme kaydedildi');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? 'Save progress' : 'Reconnecting...'}
+      {isOnline ? 'İlerlemeyi kaydet' : 'Tekrar bağlanılıyor...'}
     </button>
   );
 }
