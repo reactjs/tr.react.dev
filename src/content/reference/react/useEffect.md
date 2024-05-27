@@ -64,7 +64,13 @@ function ChatRoom({ roomId }) {
 
 * Eğer Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden olmuyorsa, React genellikle, Effect'inizi çalıştırmadan önce **tarayıcının güncellenen ekranı çizmesine izin verecektir.** Eğer Effect'iniz görsel (örneğin ipucu gösterme) bir şey yapıyorsa ve gecikme gözle görülebilir gibiyse (örneğin titriyorsa), `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirin.
 
+<<<<<<< HEAD
 * Effect'inizin çalışmasına bir etkileşim (tıklama gibi) neden oluyor olsa bile, **tarayıcı Effect'iniz içindeki state güncellemelerini işlemeden önce ekranı yeniden çizebilir.** Genellikle, istediğiniz şey budur. Ancak, tarayıcının ekranı yeniden çizmesini engellemek zorundaysanız, `useEffect`'i [`useLayoutEffect`](/reference/react/useLayoutEffect) ile değiştirmelisiniz.
+=======
+* If your Effect is caused by an interaction (like a click), **React may run your Effect before the browser paints the updated screen**. This ensures that the result of the Effect can be observed by the event system. Usually, this works as expected. However, if you must defer the work until after paint, such as an `alert()`, you can use `setTimeout`. See [reactwg/react-18/128](https://github.com/reactwg/react-18/discussions/128) for more information.
+
+* Even if your Effect was caused by an interaction (like a click), **React may allow the browser to repaint the screen before processing the state updates inside your Effect.** Usually, this works as expected. However, if you must block the browser from repainting the screen, you need to replace `useEffect` with [`useLayoutEffect`.](/reference/react/useLayoutEffect)
+>>>>>>> c3bc5affa0e7452e306c785af11798d16b4f6dd4
 
 * Effect'ler **sadece kullanıcı (client) tarafında çalışır.** Sunucu render etme sırasında çalışmazlar.
 

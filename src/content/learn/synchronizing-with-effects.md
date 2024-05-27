@@ -1600,7 +1600,11 @@ Her render'ın Efekti kendi `ignore` değişkenine sahiptir. İlk olarak, `ignor
 - `'Bob'` verisi getirilir
 - `'Bob'` render'ının Efekti **`ignore` değişkeninin değeri `true` olduğu için hiçbir şey yapmaz**
 
+<<<<<<< HEAD
 Güncelliğini yitirmiş bir API çağrısının sonucunu göz ardı etmenin yanı sıra, artık ihtiyacınız olmayan istekler için[`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) API'ını da kullanabilirsiniz. Ancak bu tek başına yarış koşullarına karşı koruma sağlamak için yeterli değildir. Veri getirme işleminden sonra daha fazla eşzamansız işlem yapılabilir, bu nedenle `ignore` gibi bir değişken kullanmak bu tür sorunları çözmenin en güvenilir yoludur.
+=======
+In addition to ignoring the result of an outdated API call, you can also use [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to cancel the requests that are no longer needed. However, by itself this is not enough to protect against race conditions. More asynchronous steps could be chained after the fetch, so using an explicit flag like `ignore` is the most reliable way to fix this type of problem.
+>>>>>>> c3bc5affa0e7452e306c785af11798d16b4f6dd4
 
 </Solution>
 
