@@ -15,7 +15,7 @@ title: "Yerleşik React API'leri"
 * [`lazy`](/reference/react/lazy), bileşen kodunun yüklenmesini ilk kez render edilene kadar ertelemenizi sağlar.
 * [`memo`](/reference/react/memo), bileşeninizin aynı prop'larla yeniden render edilmesini engellemenizi sağlar. [`useMemo`](/reference/react/useMemo) ve [`useCallback`](/reference/react/useCallback) ile birlikte kullanılır.
 * [`startTransition`](/reference/react/startTransition), state güncellemesini acil olmadığını belirtecek şekilde işaretlemenizi sağlar. [`useTransition`](/reference/react/useTransition)'a benzerdir.
-
+* [`act`](/reference/react/act) doğrulamalarınızı (assertions) yapmadan önce önce güncellemelerin işlendiğinden emin olmak için testlerinizdeki renderları ve etkileşimleri sarmalamanıza olanak tanır.
 ---
 
 ## Kaynak API'ları {/*resource-apis*/}
