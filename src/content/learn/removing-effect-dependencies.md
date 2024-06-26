@@ -1,26 +1,26 @@
 ---
-title: 'Removing Effect Dependencies'
+title: 'Efekt Bağımlılıklarını Kaldırma'
 ---
 
 <Intro>
 
-When you write an Effect, the linter will verify that you've included every reactive value (like props and state) that the Effect reads in the list of your Effect's dependencies. This ensures that your Effect remains synchronized with the latest props and state of your component. Unnecessary dependencies may cause your Effect to run too often, or even create an infinite loop. Follow this guide to review and remove unnecessary dependencies from your Effects.
+Bir Efekt yazdığınızda, linter, Efektin okuduğu her reaktif değeri (props ve state gibi) Efektinizin bağımlılıkları listesine dahil ettiğinizi doğrular. Bu, Efektinizin bileşeninizin en son prop'ları ve state'i ile senkronize kalmasını sağlar. Gereksiz bağımlılıklar, Efektinizin çok sık çalışmasına ve hatta sonsuz bir döngü oluşturmasına neden olabilir. Gereksiz bağımlılıkları gözden geçirmek ve Efektlerinizden kaldırmak için bu kılavuzu izleyin.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to fix infinite Effect dependency loops
-- What to do when you want to remove a dependency
-- How to read a value from your Effect without "reacting" to it
-- How and why to avoid object and function dependencies
-- Why suppressing the dependency linter is dangerous, and what to do instead
+- Sonsuz efekt bağımlılık döngüleri nasıl düzeltilir
+- Bir bağımlılığı kaldırmak istediğinizde ne yapmalısınız
+- Efektinizden bir değeri ona "tepki vermeden" nasıl okuyabilirsiniz
+- Nesne ve fonksiyon bağımlılıklarından nasıl ve neden kaçınılır
+- Bağımlılık linterini bastırmak neden tehlikelidir ve bunun yerine ne yapılmalıdır
 
 </YouWillLearn>
 
-## Dependencies should match the code {/*dependencies-should-match-the-code*/}
+## Bağımlılıklar kod ile eşleşmelidir {/*dependencies-should-match-the-code*/}
 
-When you write an Effect, you first specify how to [start and stop](/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect) whatever you want your Effect to be doing:
+Bir Efekt yazdığınızda, ilk olarak Efektinizin yapmasını istediğiniz şeyi nasıl [başlatacağınızı ve durduracağınızı](/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect) belirtirsiniz:
 
 ```js {5-7}
 const serverUrl = 'https://localhost:1234';
@@ -34,7 +34,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Then, if you leave the Effect dependencies empty (`[]`), the linter will suggest the correct dependencies:
+Ardından, efekt bağımlılıklarını boş bırakırsanız (`[]`), linter doğru bağımlılıkları önerecektir:
 
 <Sandpack>
 
@@ -49,23 +49,23 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // <-- Fix the mistake here!
-  return <h1>Welcome to the {roomId} room!</h1>;
+  }, []); // <-- Buradaki hatayı düzeltin!
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -77,13 +77,13 @@ export default function App() {
 
 ```js src/chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -96,7 +96,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Fill them in according to what the linter says:
+Bunları linterin söylediğine göre doldurun:
 
 ```js {6}
 function ChatRoom({ roomId }) {
@@ -104,12 +104,12 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 }
 ```
 
-[Effects "react" to reactive values.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Since `roomId` is a reactive value (it can change due to a re-render), the linter verifies that you've specified it as a dependency. If `roomId` receives a different value, React will re-synchronize your Effect. This ensures that the chat stays connected to the selected room and "reacts" to the dropdown:
+[Efektler reaktif değerlere "tepki verir"](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) `roomId` reaktif bir değer olduğundan (yeniden renderlama nedeniyle değişebilir), linter bunu bir bağımlılık olarak belirttiğinizi doğrular. Eğer `roomId` farklı bir değer alırsa, React Efektinizi yeniden senkronize edecektir. Bu, sohbetin seçilen odaya bağlı kalmasını ve açılır menüye "tepki vermesini" sağlar:
 
 <Sandpack>
 
@@ -125,22 +125,22 @@ function ChatRoom({ roomId }) {
     connection.connect();
     return () => connection.disconnect();
   }, [roomId]);
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyahat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -152,13 +152,13 @@ export default function App() {
 
 ```js src/chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -171,24 +171,24 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-### To remove a dependency, prove that it's not a dependency {/*to-remove-a-dependency-prove-that-its-not-a-dependency*/}
+### Bir bağımlılığı kaldırmak için, bunun bir bağımlılık olmadığını kanıtlayın {/*to-remove-a-dependency-prove-that-its-not-a-dependency*/}
 
-Notice that you can't "choose" the dependencies of your Effect. Every <CodeStep step={2}>reactive value</CodeStep> used by your Effect's code must be declared in your dependency list. The dependency list is determined by the surrounding code:
+Efektinizin bağımlılıklarını "seçemeyeceğinize" dikkat edin. Efektinizin kodu tarafından kullanılan her <CodeStep step={2}>reaktif değer</CodeStep> bağımlılık listenizde bildirilmelidir. Bağımlılık listesi çevredeki kod tarafından belirlenir:
 
 ```js [[2, 3, "roomId"], [2, 5, "roomId"], [2, 8, "roomId"]]
 const serverUrl = 'https://localhost:1234';
 
-function ChatRoom({ roomId }) { // This is a reactive value
+function ChatRoom({ roomId }) { // Bu reaktif bir değer
   useEffect(() => {
-    const connection = createConnection(serverUrl, roomId); // This Effect reads that reactive value
+    const connection = createConnection(serverUrl, roomId); // Bu efekt o reaktif değeri okur
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ So you must specify that reactive value as a dependency of your Effect
+  }, [roomId]); // ✅ Dolayısıyla, bu reaktif değeri Efektinizin bir bağımlılığı olarak belirtmeniz gerekir
   // ...
 }
 ```
 
-[Reactive values](/learn/lifecycle-of-reactive-effects#all-variables-declared-in-the-component-body-are-reactive) include props and all variables and functions declared directly inside of your component. Since `roomId` is a reactive value, you can't remove it from the dependency list. The linter wouldn't allow it:
+[Reaktif değerler](/learn/lifecycle-of-reactive-effects#all-variables-declared-in-the-component-body-are-reactive) prop'ları ve doğrudan bileşeninizin içinde bildirilen tüm değişkenleri ve fonksiyonları içerir. `roomId` reaktif bir değer olduğundan, bağımlılık listesinden kaldıramazsınız. Linter buna izin vermez:
 
 ```js {8}
 const serverUrl = 'https://localhost:1234';
@@ -198,30 +198,30 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // 🔴 React Hook useEffect has a missing dependency: 'roomId'
+  }, []); // 🔴 React Hook useEffect'in eksik bir bağımlılığı var: 'roomId'
   // ...
 }
 ```
 
-And the linter would be right! Since `roomId` may change over time, this would introduce a bug in your code.
+Ve linter haklı olacaktır! Zaman içinde `roomId` değişebileceğinden, bu durum kodunuzda bir hataya yol açacaktır.
 
-**To remove a dependency, "prove" to the linter that it *doesn't need* to be a dependency.** For example, you can move `roomId` out of your component to prove that it's not reactive and won't change on re-renders:
+**Bir bağımlılığı kaldırmak için, linter'e *bağımlılık olmasına gerek olmadığını* "kanıtlayın."** Örneğin, reaktif olmadığını ve yeniden render edildiğinde değişmeyeceğini kanıtlamak için `roomId`'yi bileşeninizin dışına taşıyabilirsiniz:
 
 ```js {2,9}
 const serverUrl = 'https://localhost:1234';
-const roomId = 'music'; // Not a reactive value anymore
+const roomId = 'music'; // Artık reaktif bir değer değil
 
 function ChatRoom() {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 }
 ```
 
-Now that `roomId` is not a reactive value (and can't change on a re-render), it doesn't need to be a dependency:
+Artık `roomId` reaktif bir değer olmadığından (ve yeniden render edilmede değişemeyeceğinden), bir bağımlılık olmasına gerek yoktur:
 
 <Sandpack>
 
@@ -230,7 +230,7 @@ import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
 const serverUrl = 'https://localhost:1234';
-const roomId = 'music';
+const roomId = 'müzik';
 
 export default function ChatRoom() {
   useEffect(() => {
@@ -238,19 +238,19 @@ export default function ChatRoom() {
     connection.connect();
     return () => connection.disconnect();
   }, []);
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} odasına hoş geldiniz!</h1>;
 }
 ```
 
 ```js src/chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -263,43 +263,43 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-This is why you could now specify an [empty (`[]`) dependency list.](/learn/lifecycle-of-reactive-effects#what-an-effect-with-empty-dependencies-means) Your Effect *really doesn't* depend on any reactive value anymore, so it *really doesn't* need to re-run when any of the component's props or state change.
+Bu nedenle artık [boş (`[]`) bağımlılık listesi](/learn/lifecycle-of-reactive-effects#what-an-effect-with-empty-dependencies-means) belirtebilirsiniz. Efektiniz *gerçekten* artık herhangi bir reaktif değere bağlı değildir, bu nedenle *gerçekten* bileşenin herhangi bir prop'u veya state'i değiştiğinde yeniden çalıştırılması gerekmez.
 
-### To change the dependencies, change the code {/*to-change-the-dependencies-change-the-code*/}
+### Bağımlılıkları değiştirmek için kodu değiştirin {/*to-change-the-dependencies-change-the-code*/}
 
-You might have noticed a pattern in your workflow:
+İş akışınızda bir düzen fark etmiş olabilirsiniz:
 
-1. First, you **change the code** of your Effect or how your reactive values are declared.
-2. Then, you follow the linter and adjust the dependencies to **match the code you have changed.**
-3. If you're not happy with the list of dependencies, you **go back to the first step** (and change the code again).
+1. İlk olarak, Efektinizin kodunu veya reaktif değerlerinizin nasıl beyan edildiğini **değiştirirsiniz**.
+2. Ardından, linter'ı takip eder ve bağımlılıkları **değiştirdiğiniz kodla eşleşecek şekilde ayarlarsınız.**
+3. Bağımlılıklar listesinden memnun değilseniz, **ilk adıma** geri dönersiniz (ve kodu tekrar değiştirirsiniz).
 
-The last part is important. **If you want to change the dependencies, change the surrounding code first.** You can think of the dependency list as [a list of all the reactive values used by your Effect's code.](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) You don't *choose* what to put on that list. The list *describes* your code. To change the dependency list, change the code.
+Son kısım önemlidir. **Bağımlılıkları değiştirmek istiyorsanız, önce çevredeki kodu değiştirin.** Bağımlılık listesini [Efekt kodunuz tarafından kullanılan tüm reaktif değerlerin bir listesi](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) olarak düşünebilirsiniz. Bu listeye ne koyacağınızı *seçmezsiniz*. Liste kodunuzu *tanımlar*. Bağımlılık listesini değiştirmek için kodu değiştirin.
 
-This might feel like solving an equation. You might start with a goal (for example, to remove a dependency), and you need to "find" the code matching that goal. Not everyone finds solving equations fun, and the same thing could be said about writing Effects! Luckily, there is a list of common recipes that you can try below.
+Bu bir denklem çözmek gibi gelebilir. Bir hedefle başlayabilirsiniz (örneğin, bir bağımlılığı kaldırmak için) ve bu hedefle eşleşen kodu "bulmanız" gerekir. Herkes denklem çözmeyi eğlenceli bulmaz ve aynı şey Efekt yazmak için de söylenebilir! Neyse ki, aşağıda deneyebileceğiniz yaygın tariflerin bir listesi var.
 
 <Pitfall>
 
-If you have an existing codebase, you might have some Effects that suppress the linter like this:
+Mevcut bir kod tabanınız varsa, linter'ı bu şekilde bastıran bazı Efektleriniz olabilir:
 
 ```js {3-4}
 useEffect(() => {
   // ...
-  // 🔴 Avoid suppressing the linter like this:
+  // 🔴 Linter'i şu şekilde bastırmaktan kaçının:
   // eslint-ignore-next-line react-hooks/exhaustive-deps
 }, []);
 ```
 
-**When dependencies don't match the code, there is a very high risk of introducing bugs.** By suppressing the linter, you "lie" to React about the values your Effect depends on.
+**Bağımlılıklar kodla eşleşmediğinde, hataların ortaya çıkma riski çok yüksektir.** Linter'ı bastırarak, Efektinizin bağlı olduğu değerler hakkında React'e "yalan söylemiş" olursunuz.
 
-Instead, use the techniques below.
+Bunun yerine aşağıdaki teknikleri kullanın.
 
 </Pitfall>
 
 <DeepDive>
 
-#### Why is suppressing the dependency linter so dangerous? {/*why-is-suppressing-the-dependency-linter-so-dangerous*/}
+#### Bağımlılık linterini bastırmak neden bu kadar tehlikeli? {/*why-is-suppressing-the-dependency-linter-so-dangerous*/}
 
-Suppressing the linter leads to very unintuitive bugs that are hard to find and fix. Here's one example:
+Linteri bastırmak, bulunması ve düzeltilmesi zor olan çok mantıksız hatalara yol açar. İşte bir örnek:
 
 <Sandpack>
 
@@ -323,12 +323,12 @@ export default function Timer() {
   return (
     <>
       <h1>
-        Counter: {count}
-        <button onClick={() => setCount(0)}>Reset</button>
+        Sayaç: {count}
+        <button onClick={() => setCount(0)}>Sıfırla</button>
       </h1>
       <hr />
       <p>
-        Every second, increment by:
+        Her saniye şu kadar artıyor:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
         }}>–</button>
@@ -348,31 +348,31 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Let's say that you wanted to run the Effect "only on mount". You've read that [empty (`[]`) dependencies](/learn/lifecycle-of-reactive-effects#what-an-effect-with-empty-dependencies-means) do that, so you've decided to ignore the linter, and forcefully specified `[]` as the dependencies.
+Diyelim ki Efekti "sadece montajda" çalıştırmak istediniz. [Boş (`[]`) bağımlılıkların](/learn/lifecycle-of-reactive-effects#what-an-effect-with-empty-dependencies-means) bunu yaptığını okudunuz, bu yüzden linter'ı görmezden gelmeye karar verdiniz ve bağımlılıklar olarak zorla `[]` belirttiniz.
 
-This counter was supposed to increment every second by the amount configurable with the two buttons. However, since you "lied" to React that this Effect doesn't depend on anything, React forever keeps using the `onTick` function from the initial render. [During that render,](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `count` was `0` and `increment` was `1`. This is why `onTick` from that render always calls `setCount(0 + 1)` every second, and you always see `1`. Bugs like this are harder to fix when they're spread across multiple components.
+Bu sayacın her saniye iki düğme ile yapılandırılabilen miktar kadar artması gerekiyordu. Ancak, React'e bu Efektin hiçbir şeye bağlı olmadığı konusunda "yalan söylediğiniz" için, React ilk render'dan itibaren `onTick` fonksiyonunu sonsuza kadar kullanmaya devam ediyor. [Bu render sırasında,](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `count` = `0` ve `increment` = `1` idi. Bu nedenle bu render'daki `onTick` her zaman her saniye `setCount(0 + 1)` çağırır ve her zaman `1` görürsünüz. Bunun gibi hatalar birden fazla bileşene yayıldığında düzeltilmesi daha zordur.
 
-There's always a better solution than ignoring the linter! To fix this code, you need to add `onTick` to the dependency list. (To ensure the interval is only setup once, [make `onTick` an Effect Event.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events))
+Her zaman linter'ı görmezden gelmekten daha iyi bir çözüm vardır! Bu kodu düzeltmek için bağımlılık listesine `onTick` eklemeniz gerekir. (Aralığın yalnızca bir kez ayarlandığından emin olmak için, [`onTick`i bir Efekt Olayı yapın.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)) 
 
-**We recommend treating the dependency lint error as a compilation error. If you don't suppress it, you will never see bugs like this.** The rest of this page documents the alternatives for this and other cases.
+**Bağımlılık lint hatasını bir derleme hatası olarak ele almanızı öneririz. Bunu bastırmazsanız, bu gibi hataları asla görmezsiniz.** Bu sayfanın geri kalanı, bu ve diğer durumlar için alternatifleri belgelemektedir.
 
 </DeepDive>
 
-## Removing unnecessary dependencies {/*removing-unnecessary-dependencies*/}
+## Gereksiz bağımlılıkları kaldırma {/*removing-unnecessary-dependencies*/}
 
-Every time you adjust the Effect's dependencies to reflect the code, look at the dependency list. Does it make sense for the Effect to re-run when any of these dependencies change? Sometimes, the answer is "no":
+Efektin bağımlılıklarını kodu yansıtacak şekilde her ayarladığınızda, bağımlılık listesine bakın. Bu bağımlılıklardan herhangi biri değiştiğinde Efektin yeniden çalıştırılması mantıklı mı? Bazen cevap "hayır" olabilir:
 
-* You might want to re-execute *different parts* of your Effect under different conditions.
-* You might want to only read the *latest value* of some dependency instead of "reacting" to its changes.
-* A dependency may change too often *unintentionally* because it's an object or a function.
+* Efektinizin *farklı bölümlerini* farklı koşullar altında yeniden yürütmek isteyebilirsiniz.
+* Değişikliklere "tepki vermek" yerine bazı bağımlılıkların yalnızca *en son değerini* okumak isteyebilirsiniz.
+* Bir bağımlılık, bir nesne ya da fonksiyon olduğu için *kasıtsız olarak* çok sık değişebilir.
 
-To find the right solution, you'll need to answer a few questions about your Effect. Let's walk through them.
+Doğru çözümü bulmak için, Efektiniz hakkında birkaç soruyu yanıtlamanız gerekir. Hadi bunların üzerinden geçelim.
 
-### Should this code move to an event handler? {/*should-this-code-move-to-an-event-handler*/}
+### Bu kod bir olay yöneticisine taşınmalı mı? {/*should-this-code-move-to-an-event-handler*/}
 
-The first thing you should think about is whether this code should be an Effect at all.
+Düşünmeniz gereken ilk şey, bu kodun bir efekt olup olmaması gerektiğidir.
 
-Imagine a form. On submit, you set the `submitted` state variable to `true`. You need to send a POST request and show a notification. You've put this logic inside an Effect that "reacts" to `submitted` being `true`:
+Bir form düşünün. Gönderildiğinde, `submitted` state değişkenini `true` olarak ayarlarsınız. Bir POST isteği göndermeniz ve bir bildirim göstermeniz gerekir. Bu mantığı, `submitted` state'inin `true` olmasına "tepki veren" bir Efektin içine yerleştirirsiniz:
 
 ```js {6-8}
 function Form() {
@@ -380,9 +380,9 @@ function Form() {
 
   useEffect(() => {
     if (submitted) {
-      // 🔴 Avoid: Event-specific logic inside an Effect
+      // 🔴 Kaçının: Bir Efekt içinde olaya özgü mantık
       post('/api/register');
-      showNotification('Successfully registered!');
+      showNotification('Başarıyla Kaydedildi!');
     }
   }, [submitted]);
 
@@ -394,7 +394,7 @@ function Form() {
 }
 ```
 
-Later, you want to style the notification message according to the current theme, so you read the current theme. Since `theme` is declared in the component body, it is a reactive value, so you add it as a dependency:
+Daha sonra, bildirim mesajını mevcut temaya göre şekillendirmek istersiniz, bu nedenle mevcut temayı okursunuz. Bileşen gövdesinde `theme` bildirildiği için reaktif bir değerdir, bu nedenle onu bir bağımlılık olarak eklersiniz:
 
 ```js {3,9,11}
 function Form() {
@@ -403,11 +403,11 @@ function Form() {
 
   useEffect(() => {
     if (submitted) {
-      // 🔴 Avoid: Event-specific logic inside an Effect
+      // 🔴 Kaçının: Bir Efekt içinde olaya özgü mantık
       post('/api/register');
-      showNotification('Successfully registered!', theme);
+      showNotification('Başarıyla Kaydedildi!', theme);
     }
-  }, [submitted, theme]); // ✅ All dependencies declared
+  }, [submitted, theme]); // ✅ Tüm bağımlılıklar bildirildi
 
   function handleSubmit() {
     setSubmitted(true);
@@ -417,31 +417,32 @@ function Form() {
 }
 ```
 
-By doing this, you've introduced a bug. Imagine you submit the form first and then switch between Dark and Light themes. The `theme` will change, the Effect will re-run, and so it will display the same notification again!
+Bunu yaparak bir hatayı ortaya çıkarmış olursunuz. Önce formu gönderdiğinizi ve ardından Koyu ve Açık temalar arasında geçiş yaptığınızı düşünün. Tema değişecek, Efekt yeniden çalışacak ve böylece aynı bildirimi tekrar görüntüleyecektir!
 
-**The problem here is that this shouldn't be an Effect in the first place.** You want to send this POST request and show the notification in response to *submitting the form,* which is a particular interaction. To run some code in response to particular interaction, put that logic directly into the corresponding event handler:
+**Buradaki sorun, bunun ilk etapta bir Efekt olmaması gerektiğidir.** Bu POST isteğini göndermek ve belirli bir etkileşim olan *formun gönderilmesine* yanıt olarak bildirimi göstermek istiyorsunuz. Belirli bir etkileşime yanıt olarak bazı kodları çalıştırmak için, bu mantığı doğrudan ilgili olay yöneticisine yerleştirin:
 
 ```js {6-7}
 function Form() {
   const theme = useContext(ThemeContext);
 
   function handleSubmit() {
-    // ✅ Good: Event-specific logic is called from event handlers
+    // ✅ Güzel: Olaya özgü mantık olay yöneticilerinden çağrılır
     post('/api/register');
-    showNotification('Successfully registered!', theme);
+    showNotification('Başarıyla Kaydedildi!', theme);
   }  
 
   // ...
 }
 ```
 
-Now that the code is in an event handler, it's not reactive--so it will only run when the user submits the form. Read more about [choosing between event handlers and Effects](/learn/separating-events-from-effects#reactive-values-and-reactive-logic) and [how to delete unnecessary Effects.](/learn/you-might-not-need-an-effect)
+Artık kod bir olay yöneticisinde olduğu için reaktif değildir--bu nedenle yalnızca kullanıcı formu gönderdiğinde çalışacaktır. [Olay yöneticileri ve Efektler arasında seçim yapma](/learn/separating-events-from-effects#reactive-values-and-reactive-logic) ve [gereksiz Etkiler nasıl silinir](/learn/you-might-need-an-effect) hakkında daha fazla bilgi edinin
 
-### Is your Effect doing several unrelated things? {/*is-your-effect-doing-several-unrelated-things*/}
+### Efektiniz birbiriyle alakasız birkaç şey mi yapıyor? {/*is-your-effect-doing-several-unrelated-things*/}
 
-The next question you should ask yourself is whether your Effect is doing several unrelated things.
+Kendinize sormanız gereken bir sonraki soru, Efektinizin birbiriyle alakasız birkaç şey yapıp yapmadığıdır.
 
-Imagine you're creating a shipping form where the user needs to choose their city and area. You fetch the list of `cities` from the server according to the selected `country` to show them in a dropdown:
+Kullanıcının şehir ve bölgesini seçmesi gereken bir gönderi formu oluşturduğunuzu düşünün. 
+Seçilen `country`'e göre `cities` listesini sunucudan alıp bir açılır menüde gösteriyorsunuz:
 
 ```js
 function ShippingForm({ country }) {
@@ -460,14 +461,14 @@ function ShippingForm({ country }) {
     return () => {
       ignore = true;
     };
-  }, [country]); // ✅ All dependencies declared
+  }, [country]); // ✅ Tüm bağımlılıklar bildirildi
 
   // ...
 ```
 
-This is a good example of [fetching data in an Effect.](/learn/you-might-not-need-an-effect#fetching-data) You are synchronizing the `cities` state with the network according to the `country` prop. You can't do this in an event handler because you need to fetch as soon as `ShippingForm` is displayed and whenever the `country` changes (no matter which interaction causes it).
+Bu,[bir Efekte veri getirmeye](/learn/you-might-not-need-an-effect#fetching-data) iyi bir örnektir. `cities` state'i `country` prop'una göre ağ ile senkronize ediyorsunuz. Bunu bir olay yöneticisinde yapamazsınız çünkü `ShippingForm` görüntülendiğinde ve `country` değiştiğinde (hangi etkileşim buna neden olursa olsun) getirmeniz gerekir.
 
-Now let's say you're adding a second select box for city areas, which should fetch the `areas` for the currently selected `city`. You might start by adding a second `fetch` call for the list of areas inside the same Effect:
+Şimdi diyelim ki şehir alanları için ikinci bir seçim kutusu ekliyorsunuz, bu da o anda seçili olan `city` için `areas`ı getirmelidir. Aynı Efekt içindeki alanların listesi için ikinci bir `fetch` çağrısı ekleyerek başlayabilirsiniz:
 
 ```js {15-24,28}
 function ShippingForm({ country }) {
@@ -484,7 +485,7 @@ function ShippingForm({ country }) {
           setCities(json);
         }
       });
-    // 🔴 Avoid: A single Effect synchronizes two independent processes
+    // 🔴 Kaçının: Tek bir Efekt iki bağımsız süreci senkronize eder
     if (city) {
       fetch(`/api/areas?city=${city}`)
         .then(response => response.json())
@@ -497,19 +498,19 @@ function ShippingForm({ country }) {
     return () => {
       ignore = true;
     };
-  }, [country, city]); // ✅ All dependencies declared
+  }, [country, city]); // ✅ Tüm bağımlılıklar bildirildi
 
   // ...
 ```
 
-However, since the Effect now uses the `city` state variable, you've had to add `city` to the list of dependencies. That, in turn, introduced a problem: when the user selects a different city, the Effect will re-run and call `fetchCities(country)`. As a result, you will be unnecessarily refetching the list of cities many times.
+Ancak, Efekt artık `city` state değişkenini kullandığından, bağımlılıklar listesine `city` eklemek zorunda kaldınız. Bu da bir sorun ortaya çıkardı: Kullanıcı farklı bir şehir seçtiğinde, Efekt yeniden çalışacak ve `fetchCities(country)` öğesini çağıracaktır. Sonuç olarak, şehir listesini gereksiz yere birçok kez yeniden çağırmış olursunuz.
 
-**The problem with this code is that you're synchronizing two different unrelated things:**
+**Bu koddaki sorun, iki farklı ilgisiz şeyi senkronize ediyor olmanızdır:**
 
-1. You want to synchronize the `cities` state to the network based on the `country` prop.
-1. You want to synchronize the `areas` state to the network based on the `city` state.
+1. `cities` state'ini `country` prop'una göre ağ ile senkronize etmek istiyorsunuz.
+2. `areas` state'ini `city` stateine göre ağ ile senkronize etmek istiyorsunuz.
 
-Split the logic into two Effects, each of which reacts to the prop that it needs to synchronize with:
+Mantığı, her biri senkronize olması gereken prop'a tepki veren iki Efekt'e bölün:
 
 ```js {19-33}
 function ShippingForm({ country }) {
@@ -526,7 +527,7 @@ function ShippingForm({ country }) {
     return () => {
       ignore = true;
     };
-  }, [country]); // ✅ All dependencies declared
+  }, [country]); // ✅ Tüm bağımlılıklar bildirildi
 
   const [city, setCity] = useState(null);
   const [areas, setAreas] = useState(null);
@@ -544,18 +545,18 @@ function ShippingForm({ country }) {
         ignore = true;
       };
     }
-  }, [city]); // ✅ All dependencies declared
+  }, [city]); // ✅ Tüm bağımlılıklar bildirildi
 
   // ...
 ```
 
-Now the first Effect only re-runs if the `country` changes, while the second Effect re-runs when the `city` changes. You've separated them by purpose: two different things are synchronized by two separate Effects. Two separate Effects have two separate dependency lists, so they won't trigger each other unintentionally.
+Şimdi ilk Efekt yalnızca `country` değiştiğinde yeniden çalışırken, ikinci Efekt `city` değiştiğinde yeniden çalışır. Bunları amaçlarına göre ayırdınız: iki farklı şey iki ayrı Efekt tarafından senkronize ediliyor. İki ayrı Efektin iki ayrı bağımlılık listesi vardır, bu nedenle istemeden birbirlerini tetiklemezler.
 
-The final code is longer than the original, but splitting these Effects is still correct. [Each Effect should represent an independent synchronization process.](/learn/lifecycle-of-reactive-effects#each-effect-represents-a-separate-synchronization-process) In this example, deleting one Effect doesn't break the other Effect's logic. This means they *synchronize different things,* and it's good to split them up. If you're concerned about duplication, you can improve this code by [extracting repetitive logic into a custom Hook.](/learn/reusing-logic-with-custom-hooks#when-to-use-custom-hooks)
+Son kod orijinalinden daha uzundur, ancak bu Efektleri bölmek hala doğrudur. [Her Efekt bağımsız bir senkronizasyon sürecini temsil etmelidir](/learn/lifecycle-of-reactive-effects#each-effect-represents-a-separate-synchronization-process) Bu örnekte, bir Efektin silinmesi diğer Efektin mantığını bozmaz. Bu, *farklı şeyleri senkronize ettikleri* ve onları ayırmanın iyi olduğu anlamına gelir. Tekrarlama konusunda endişeleriniz varsa, bu kodu [tekrarlayan mantığı özel bir hook çıkararak](/learn/reusing-logic-with-custom-hooks#when-to-use-custom-hooks) geliştirebilirsiniz.
 
-### Are you reading some state to calculate the next state? {/*are-you-reading-some-state-to-calculate-the-next-state*/}
+### Bir sonraki state'i hesaplamak için bir state mi okuyorsunuz? {/*are-you-reading-some-state-to-calculate-the-next-state*/}
 
-This Effect updates the `messages` state variable with a newly created array every time a new message arrives:
+Bu Efekt, her yeni mesaj geldiğinde `messages` state değişkenini yeni oluşturulan bir dizi ile günceller:
 
 ```js {2,6-8}
 function ChatRoom({ roomId }) {
@@ -569,7 +570,7 @@ function ChatRoom({ roomId }) {
     // ...
 ```
 
-It uses the `messages` variable to [create a new array](/learn/updating-arrays-in-state) starting with all the existing messages and adds the new message at the end. However, since `messages` is a reactive value read by an Effect, it must be a dependency:
+Mevcut tüm mesajlardan başlayarak [yeni bir dizi oluşturmak](/learn/updating-arrays-in-state) için `messages` değişkenini kullanır ve sonuna yeni mesajı ekler. Ancak, `messages` bir Efekt tarafından okunan reaktif bir değer olduğundan, bir bağımlılık olmalıdır:
 
 ```js {7,10}
 function ChatRoom({ roomId }) {
@@ -581,15 +582,15 @@ function ChatRoom({ roomId }) {
       setMessages([...messages, receivedMessage]);
     });
     return () => connection.disconnect();
-  }, [roomId, messages]); // ✅ All dependencies declared
+  }, [roomId, messages]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-And making `messages` a dependency introduces a problem.
+Ve `messages`'ı bir bağımlılık haline getirmek bir sorun yaratır.
 
-Every time you receive a message, `setMessages()` causes the component to re-render with a new `messages` array that includes the received message. However, since this Effect now depends on `messages`, this will *also* re-synchronize the Effect. So every new message will make the chat re-connect. The user would not like that!
+Her mesaj aldığınızda, `setMessages()` bileşenin alınan mesajı içeren yeni bir `messages` dizisiyle yeniden renderlanmasına neden olur. Ancak, bu Efekt artık `messages` dizisine bağlı olduğundan, bu *aynı zamanda* Efekti yeniden senkronize edecektir. Yani her yeni mesaj sohbetin yeniden bağlanmasını sağlayacaktır. Kullanıcı bundan hoşlanmayacaktır!
 
-To fix the issue, don't read `messages` inside the Effect. Instead, pass an [updater function](/reference/react/useState#updating-state-based-on-the-previous-state) to `setMessages`:
+Sorunu çözmek için, `messages`'ı Efekt içinde okumayın. Bunun yerine, `setMessages` öğesine bir [güncelleyici fonksiyon](/reference/react/useState#updating-state-based-on-the-previous-state) iletin:
 
 ```js {7,10}
 function ChatRoom({ roomId }) {
@@ -601,21 +602,21 @@ function ChatRoom({ roomId }) {
       setMessages(msgs => [...msgs, receivedMessage]);
     });
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi.
   // ...
 ```
 
-**Notice how your Effect does not read the `messages` variable at all now.** You only need to pass an updater function like `msgs => [...msgs, receivedMessage]`. React [puts your updater function in a queue](/learn/queueing-a-series-of-state-updates) and will provide the `msgs` argument to it during the next render. This is why the Effect itself doesn't need to depend on `messages` anymore. As a result of this fix, receiving a chat message will no longer make the chat re-connect.
+**Efekt'inizin artık `messages` değişkenini nasıl okumadığına dikkat edin.** Sadece `msgs => [...msgs, receivedMessage]` gibi bir güncelleyici fonksiyonu geçirmeniz gerekir. React [güncelleyici fonksiyonunuzu bir kuyruğa koyar](/learn/queueing-a-series-of-state-updates) ve bir sonraki render sırasında `msgs` argümanını ona sağlayacaktır. Bu nedenle Efektin kendisinin artık `messages`'a bağlı olması gerekmez. Bu düzeltmenin bir sonucu olarak, bir sohbet mesajı almak artık sohbetin yeniden bağlanmasına neden olmayacaktır.
 
-### Do you want to read a value without "reacting" to its changes? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
+### Bir değeri, değişikliklerine "tepki vermeden" okumak mı istiyorsunuz? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
 
 </Wip>
 
-Suppose that you want to play a sound when the user receives a new message unless `isMuted` is `true`:
+Kullanıcı yeni bir mesaj aldığında `isMuted` değeri `true` olmadığı sürece bir ses çalmak istediğinizi varsayalım:
 
 ```js {3,10-12}
 function ChatRoom({ roomId }) {
@@ -634,7 +635,7 @@ function ChatRoom({ roomId }) {
     // ...
 ```
 
-Since your Effect now uses `isMuted` in its code, you have to add it to the dependencies:
+Efektiniz artık kodunda `isMuted` kullandığından, bunu bağımlılıklara eklemeniz gerekir:
 
 ```js {10,15}
 function ChatRoom({ roomId }) {
@@ -651,13 +652,13 @@ function ChatRoom({ roomId }) {
       }
     });
     return () => connection.disconnect();
-  }, [roomId, isMuted]); // ✅ All dependencies declared
+  }, [roomId, isMuted]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-The problem is that every time `isMuted` changes (for example, when the user presses the "Muted" toggle), the Effect will re-synchronize, and reconnect to the chat. This is not the desired user experience! (In this example, even disabling the linter would not work--if you do that, `isMuted` would get "stuck" with its old value.)
+Sorun şu ki, `isMuted` her değiştiğinde (örneğin, kullanıcı "Muted" düğmesine bastığında), Efekt yeniden senkronize olacak ve sohbete yeniden bağlanacaktır. Bu istenen kullanıcı deneyimi değildir! (Bu örnekte, linter'ı devre dışı bırakmak bile işe yaramayacaktır - eğer bunu yaparsanız, `isMuted` eski değerine "takılıp kalacaktır").
 
-To solve this problem, you need to extract the logic that shouldn't be reactive out of the Effect. You don't want this Effect to "react" to the changes in `isMuted`. [Move this non-reactive piece of logic into an Effect Event:](/learn/separating-events-from-effects#declaring-an-effect-event)
+Bu sorunu çözmek için, reaktif olmaması gereken mantığı Efektin dışına çıkarmanız gerekir. Bu Efektin `isMuted` içindeki değişikliklere "tepki vermesini" istemezsiniz. [Bu reaktif olmayan mantık parçasını bir Efekt Olayına taşıyın:](/learn/separating-events-from-effects#declaring-an-effect-event)
 
 ```js {1,7-12,18,21}
 import { useState, useEffect, useEffectEvent } from 'react';
@@ -680,15 +681,15 @@ function ChatRoom({ roomId }) {
       onMessage(receivedMessage);
     });
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-Effect Events let you split an Effect into reactive parts (which should "react" to reactive values like `roomId` and their changes) and non-reactive parts (which only read their latest values, like `onMessage` reads `isMuted`). **Now that you read `isMuted` inside an Effect Event, it doesn't need to be a dependency of your Effect.** As a result, the chat won't re-connect when you toggle the "Muted" setting on and off, solving the original issue!
+Efekt Olayları, bir Efekti reaktif parçalara (`roomId` gibi reaktif değerlere ve bunların değişikliklerine "tepki" vermesi gereken) ve reaktif olmayan parçalara (`onMessage`ın `isMuted`ı okuması gibi yalnızca en son değerlerini okuyan) ayırmanıza olanak tanır. **Artık `isMuted` değerini bir Efekt Olayı içinde okuduğunuz için, Efektinizin bir bağımlılığı olması gerekmez.** Sonuç olarak, "Muted" ayarını açıp kapattığınızda sohbet yeniden bağlanmayacak ve orijinal sorunu çözecektir!
 
-#### Wrapping an event handler from the props {/*wrapping-an-event-handler-from-the-props*/}
+#### Bir olay yöneticisini prop'lardan sarma {/*wrapping-an-event-handler-from-the-props*/}
 
-You might run into a similar problem when your component receives an event handler as a prop:
+Bileşeniniz prop olarak bir olay yöneticisi aldığında da benzer bir sorunla karşılaşabilirsiniz:
 
 ```js {1,8,11}
 function ChatRoom({ roomId, onReceiveMessage }) {
@@ -701,11 +702,11 @@ function ChatRoom({ roomId, onReceiveMessage }) {
       onReceiveMessage(receivedMessage);
     });
     return () => connection.disconnect();
-  }, [roomId, onReceiveMessage]); // ✅ All dependencies declared
+  }, [roomId, onReceiveMessage]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-Suppose that the parent component passes a *different* `onReceiveMessage` function on every render:
+Ana bileşenin her render işleminde *farklı* bir `onReceiveMessage` fonksiyonu geçirdiğini varsayalım:
 
 ```js {3-5}
 <ChatRoom
@@ -716,7 +717,7 @@ Suppose that the parent component passes a *different* `onReceiveMessage` functi
 />
 ```
 
-Since `onReceiveMessage` is a dependency, it would cause the Effect to re-synchronize after every parent re-render. This would make it re-connect to the chat. To solve this, wrap the call in an Effect Event:
+`onReceiveMessage` bir bağımlılık olduğundan, her üst yeniden renderdan sonra Efektin yeniden senkronize olmasına neden olur. Bu da sohbete yeniden bağlanmasına neden olur. Bunu çözmek için, çağrıyı bir Efekt Olayına sarın:
 
 ```js {4-6,12,15}
 function ChatRoom({ roomId, onReceiveMessage }) {
@@ -733,17 +734,17 @@ function ChatRoom({ roomId, onReceiveMessage }) {
       onMessage(receivedMessage);
     });
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-Effect Events aren't reactive, so you don't need to specify them as dependencies. As a result, the chat will no longer re-connect even if the parent component passes a function that's different on every re-render.
+Efekt Olayları reaktif değildir, bu nedenle bunları bağımlılık olarak belirtmeniz gerekmez. Sonuç olarak, ana bileşen her yeniden renderda farklı bir fonksiyon geçirse bile sohbet artık yeniden bağlanmayacaktır.
 
-#### Separating reactive and non-reactive code {/*separating-reactive-and-non-reactive-code*/}
+#### Reaktif ve reaktif olmayan kodu ayırma {/*separating-reactive-and-non-reactive-code*/}
 
-In this example, you want to log a visit every time `roomId` changes. You want to include the current `notificationCount` with every log, but you *don't* want a change to `notificationCount` to trigger a log event.
+Bu örnekte, `roomId` her değiştiğinde bir ziyareti günlüğe kaydetmek istiyorsunuz. Her günlüğe geçerli `notificationCount` değerini dahil etmek istiyorsunuz, ancak `notificationCount` değerindeki bir değişikliğin bir günlük olayını tetiklemesini *istemiyorsunuz*.
 
-The solution is again to split out the non-reactive code into an Effect Event:
+Çözüm yine reaktif olmayan kodu bir Efekt Olayına ayırmaktır:
 
 ```js {2-4,7}
 function Chat({ roomId, notificationCount }) {
@@ -753,16 +754,16 @@ function Chat({ roomId, notificationCount }) {
 
   useEffect(() => {
     onVisit(roomId);
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 }
 ```
 
-You want your logic to be reactive with regards to `roomId`, so you read `roomId` inside of your Effect. However, you don't want a change to `notificationCount` to log an extra visit, so you read `notificationCount` inside of the Effect Event. [Learn more about reading the latest props and state from Effects using Effect Events.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+Mantığınızın `roomId` ile ilgili olarak reaktif olmasını istiyorsunuz, bu nedenle Efektinizin içinde `roomId` değerini okuyorsunuz. Ancak, `notificationCount` değerinde yapılan bir değişikliğin fazladan bir ziyareti günlüğe kaydetmesini istemezsiniz, bu nedenle `notificationCount` değerini Efekt Olayının içinde okursunuz. [Efekt Olaylarını kullanarak Efektlerden en son props ve state'leri okuma hakkında daha fazla bilgi edinin](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
 
-### Does some reactive value change unintentionally? {/*does-some-reactive-value-change-unintentionally*/}
+### Bazı reaktif değerler istemeden değişiyor mu? {/*does-some-reactive-value-change-unintentionally*/}
 
-Sometimes, you *do* want your Effect to "react" to a certain value, but that value changes more often than you'd like--and might not reflect any actual change from the user's perspective. For example, let's say that you create an `options` object in the body of your component, and then read that object from inside of your Effect:
+Bazen, Efektinizin belirli bir değere "tepki vermesini" istersiniz, ancak bu değer istediğinizden daha sık değişir ve kullanıcının bakış açısından herhangi bir gerçek değişikliği yansıtmayabilir. Örneğin, bileşeninizin gövdesinde bir `options` nesnesi oluşturduğunuzu ve daha sonra bu nesneyi Efektinizin içinden okuduğunuzu varsayalım:
 
 ```js {3-6,9}
 function ChatRoom({ roomId }) {
@@ -777,8 +778,7 @@ function ChatRoom({ roomId }) {
     connection.connect();
     // ...
 ```
-
-This object is declared in the component body, so it's a [reactive value.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) When you read a reactive value like this inside an Effect, you declare it as a dependency. This ensures your Effect "reacts" to its changes:
+Bu nesne bileşen gövdesinde bildirilir, bu nedenle bir [reaktif değerdir.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Bunun gibi bir reaktif değeri bir Efekt içinde okuduğunuzda, onu bir bağımlılık olarak bildirirsiniz. Bu, Efektinizin onun değişikliklerine "tepki vermesini" sağlar:
 
 ```js {3,6}
   // ...
@@ -786,11 +786,11 @@ This object is declared in the component body, so it's a [reactive value.](/lear
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
-  }, [options]); // ✅ All dependencies declared
+  }, [options]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-It is important to declare it as a dependency! This ensures, for example, that if the `roomId` changes, your Effect will re-connect to the chat with the new `options`. However, there is also a problem with the code above. To see it, try typing into the input in the sandbox below, and watch what happens in the console:
+Bunu bir bağımlılık olarak bildirmek önemlidir! Bu, örneğin `roomId` değişirse, Efektinizin yeni `seçenekler` ile sohbete yeniden bağlanmasını sağlar. Ancak, yukarıdaki kodda da bir sorun var. Bunu görmek için, aşağıdaki sandbox'taki girdiye yazmayı deneyin ve konsolda ne olduğunu izleyin:
 
 <Sandpack>
 
@@ -803,7 +803,7 @@ const serverUrl = 'https://localhost:1234';
 function ChatRoom({ roomId }) {
   const [message, setMessage] = useState('');
 
-  // Temporarily disable the linter to demonstrate the problem
+  // Sorunu göstermek için linteri geçici olarak devre dışı bırakın
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const options = {
     serverUrl: serverUrl,
@@ -818,25 +818,25 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına Hoş Geldiniz</h1>
       <input value={message} onChange={e => setMessage(e.target.value)} />
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -848,13 +848,13 @@ export default function App() {
 
 ```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -867,30 +867,29 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-In the sandbox above, the input only updates the `message` state variable. From the user's perspective, this should not affect the chat connection. However, every time you update the `message`, your component re-renders. When your component re-renders, the code inside of it runs again from scratch.
+Yukarıdaki sanal alanda, girdi yalnızca `message` state değişkenini günceller. Kullanıcının bakış açısından, bunun sohbet bağlantısını etkilememesi gerekir. Ancak, `message` değişkenini her güncellediğinizde, bileşeniniz yeniden renderlanır. Bileşeniniz yeniden renederlandığında, içindeki kod sıfırdan yeniden çalışır.
 
-A new `options` object is created from scratch on every re-render of the `ChatRoom` component. React sees that the `options` object is a *different object* from the `options` object created during the last render. This is why it re-synchronizes your Effect (which depends on `options`), and the chat re-connects as you type.
+`ChatRoom` bileşeninin her yeniden renderlanmasında sıfırdan yeni bir `options` nesnesi oluşturulur. React, `options` nesnesinin son render sırasında oluşturulan `options` nesnesinden *farklı bir nesne* olduğunu görür. Bu nedenle Efektinizi yeniden senkronize eder (ki bu `options`e bağlıdır) ve sohbet siz yazarken yeniden bağlanır.
 
-**This problem only affects objects and functions. In JavaScript, each newly created object and function is considered distinct from all the others. It doesn't matter that the contents inside of them may be the same!**
+**Bu sorun yalnızca nesneleri ve fonksiyonları etkiler. JavaScript'te, yeni oluşturulan her nesne ve fonksiyon diğerlerinden farklı kabul edilir. İçlerindeki içeriklerin aynı olması önemli değildir!**
 
 ```js {7-8}
-// During the first render
-const options1 = { serverUrl: 'https://localhost:1234', roomId: 'music' };
+// İlk rener sırasında
+const options1 = { serverUrl: 'https://localhost:1234', roomId: 'müzik' };
 
-// During the next render
-const options2 = { serverUrl: 'https://localhost:1234', roomId: 'music' };
+// Sonraki render sırasında
+const options2 = { serverUrl: 'https://localhost:1234', roomId: 'müzik' };
 
-// These are two different objects!
+// Bunlar iki farklı nesne!
 console.log(Object.is(options1, options2)); // false
 ```
+**Nesne ve fonksiyon bağımlılıkları, Efektinizin ihtiyacınız olandan daha sık yeniden senkronize edilmesine neden olabilir.** 
 
-**Object and function dependencies can make your Effect re-synchronize more often than you need.** 
+Bu nedenle, mümkün olduğunca, Efektinizin bağımlılıkları olarak nesnelerden ve fonksiyonlardan kaçınmaya çalışmalısınız. Bunun yerine, bunları bileşenin dışına, Efektin içine taşımayı veya ilkel değerleri bunlardan çıkarmayı deneyin.
 
-This is why, whenever possible, you should try to avoid objects and functions as your Effect's dependencies. Instead, try moving them outside the component, inside the Effect, or extracting primitive values out of them.
+#### Statik nesneleri ve fonksiyonları bileşeninizin dışına taşıma {/*move-static-objects-and-functions-outside-your-component*/}
 
-#### Move static objects and functions outside your component {/*move-static-objects-and-functions-outside-your-component*/}
-
-If the object does not depend on any props and state, you can move that object outside your component:
+Nesne herhangi bir prop ve state'e bağlı değilse, bu nesneyi bileşeninizin dışına taşıyabilirsiniz:
 
 ```js {1-4,13}
 const options = {
@@ -905,13 +904,13 @@ function ChatRoom() {
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-This way, you *prove* to the linter that it's not reactive. It can't change as a result of a re-render, so it doesn't need to be a dependency. Now re-rendering `ChatRoom` won't cause your Effect to re-synchronize.
+Bu şekilde, linter'a reaktif olmadığını *kanıtlamış* olursunuz. Yeniden renderlamanın bir sonucu olarak değişemez, bu nedenle bir bağımlılık olması gerekmez. Şimdi `ChatRoom`un yeniden renderlaması Efektinizin yeniden senkronize edilmesine neden olmaz.
 
-This works for functions too:
+Bu fonksiyonlar için de geçerlidir:
 
 ```js {1-6,12}
 function createOptions() {
@@ -929,15 +928,15 @@ function ChatRoom() {
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
-  }, []); // ✅ All dependencies declared
+  }, []); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-Since `createOptions` is declared outside your component, it's not a reactive value. This is why it doesn't need to be specified in your Effect's dependencies, and why it won't ever cause your Effect to re-synchronize.
+`createOptions` bileşeninizin dışında bildirildiği için reaktif bir değer değildir. Bu nedenle Efektinizin bağımlılıklarında belirtilmesi gerekmez ve bu nedenle Efektinizin yeniden senkronize olmasına neden olmaz.
 
-#### Move dynamic objects and functions inside your Effect {/*move-dynamic-objects-and-functions-inside-your-effect*/}
+#### Dinamik nesneleri ve fonksiyonları Efektinizin içine taşıma {/*move-dynamic-objects-and-functions-inside-your-effect*/}
 
-If your object depends on some reactive value that may change as a result of a re-render, like a `roomId` prop, you can't pull it *outside* your component. You can, however, move its creation *inside* of your Effect's code:
+Nesneniz yeniden renderlaması sonucunda değişebilecek bir reaktif değere bağlıysa, örneğin bir `roomId` prop'u gibi, onu bileşeninizin *dışına* çekemezsiniz. Bununla birlikte, oluşturulmasını Efekt kodunuzun *içine* taşıyabilirsiniz:
 
 ```js {7-10,11,14}
 const serverUrl = 'https://localhost:1234';
@@ -953,24 +952,24 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-Now that `options` is declared inside of your Effect, it is no longer a dependency of your Effect. Instead, the only reactive value used by your Effect is `roomId`. Since `roomId` is not an object or function, you can be sure that it won't be *unintentionally* different. In JavaScript, numbers and strings are compared by their content:
+Artık `options` Efektinizin içinde bildirildiği için, Efektinizin bir bağımlılığı değildir. Bunun yerine, Efektiniz tarafından kullanılan tek reaktif değer `roomId`dir. roomId` bir nesne ya da fonksiyon olmadığından, *kasıtsız olarak* farklı olmayacağından emin olabilirsiniz. JavaScript'te sayılar ve dizeler içeriklerine göre karşılaştırılır:
 
 ```js {7-8}
-// During the first render
-const roomId1 = 'music';
+// İlk render sırasında
+const roomId1 = 'müzik';
 
-// During the next render
-const roomId2 = 'music';
+// Sonraki render sırasında
+const roomId2 = 'müzik';
 
-// These two strings are the same!
+// Bu iki string de aynı!
 console.log(Object.is(roomId1, roomId2)); // true
 ```
 
-Thanks to this fix, the chat no longer re-connects if you edit the input:
+Bu düzeltme sayesinde, girişi düzenlediğinizde sohbet artık yeniden bağlanmıyor:
 
 <Sandpack>
 
@@ -995,25 +994,25 @@ function ChatRoom({ roomId }) {
 
   return (
     <>
-      <h1>Welcome to the {roomId} room!</h1>
+      <h1>{roomId} odasına hoş geldiniz</h1>
       <input value={message} onChange={e => setMessage(e.target.value)} />
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   return (
     <>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odasını seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -1025,13 +1024,13 @@ export default function App() {
 
 ```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -1044,9 +1043,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-However, it *does* re-connect when you change the `roomId` dropdown, as you would expect.
+Ancak, `roomId` açılır menüsünü değiştirdiğinizde, beklediğiniz gibi *yeniden bağlanır*.
 
-This works for functions, too:
+Bu, fonksiyonlar için de geçerlidir:
 
 ```js {7-12,14}
 const serverUrl = 'https://localhost:1234';
@@ -1066,15 +1065,15 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-You can write your own functions to group pieces of logic inside your Effect. As long as you also declare them *inside* your Effect, they're not reactive values, and so they don't need to be dependencies of your Effect.
+Efektinizin içindeki mantık parçalarını gruplamak için kendi fonksiyonlarınızı yazabilirsiniz. Bunları Efektinizin *içinde* de bildirdiğiniz sürece, reaktif değerler değildirler ve bu nedenle Efektinizin bağımlılıkları olmaları gerekmez.
 
-#### Read primitive values from objects {/*read-primitive-values-from-objects*/}
+#### Nesnelerden ilkel değerleri okuma {/*read-primitive-values-from-objects*/}
 
-Sometimes, you may receive an object from props:
+Bazen proplardan bir nesne alabilirsiniz:
 
 ```js {1,5,8}
 function ChatRoom({ options }) {
@@ -1084,11 +1083,11 @@ function ChatRoom({ options }) {
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
-  }, [options]); // ✅ All dependencies declared
+  }, [options]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-The risk here is that the parent component will create the object during rendering:
+Buradaki risk, ana bileşenin renderlanması sırasında nesneyi renderlamasıdır:
 
 ```js {3-6}
 <ChatRoom
@@ -1100,7 +1099,7 @@ The risk here is that the parent component will create the object during renderi
 />
 ```
 
-This would cause your Effect to re-connect every time the parent component re-renders. To fix this, read information from the object *outside* the Effect, and avoid having object and function dependencies:
+Bu, ana bileşen her yeniden renderlandığında Efektinizin yeniden bağlanmasına neden olur. Bunu düzeltmek için, Efektin *dışındaki* nesneden bilgi okuyun ve nesne ve fonksiyon bağımlılıklarına sahip olmaktan kaçının:
 
 ```js {4,7-8,12}
 function ChatRoom({ options }) {
@@ -1114,15 +1113,15 @@ function ChatRoom({ options }) {
     });
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId, serverUrl]); // ✅ All dependencies declared
+  }, [roomId, serverUrl]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-The logic gets a little repetitive (you read some values from an object outside an Effect, and then create an object with the same values inside the Effect). But it makes it very explicit what information your Effect *actually* depends on. If an object is re-created unintentionally by the parent component, the chat would not re-connect. However, if `options.roomId` or `options.serverUrl` really are different, the chat would re-connect.
+Mantık biraz tekrara düşüyor (bir Efektin dışındaki bir nesneden bazı değerleri okuyorsunuz ve ardından Efektin içinde aynı değerlere sahip bir nesne oluşturuyorsunuz). Ancak bu, Efektinizin *gerçekte* hangi bilgilere bağlı olduğunu çok açık hale getirir. Bir nesne ana bileşen tarafından istenmeden yeniden oluşturulursa, sohbet yeniden bağlanmaz. Ancak, `options.roomId` veya `options.serverUrl` gerçekten farklıysa, sohbet yeniden bağlanır.
 
-#### Calculate primitive values from functions {/*calculate-primitive-values-from-functions*/}
+#### Fonksiyonlardan ilkel değerleri hesaplama {/*calculate-primitive-values-from-functions*/}
 
-The same approach can work for functions. For example, suppose the parent component passes a function:
+Aynı yaklaşım fonksiyonlar için de kullanılabilir. Örneğin, ana bileşenin bir fonksiyon geçirdiğini varsayalım:
 
 ```js {3-8}
 <ChatRoom
@@ -1136,7 +1135,7 @@ The same approach can work for functions. For example, suppose the parent compon
 />
 ```
 
-To avoid making it a dependency (and causing it to re-connect on re-renders), call it outside the Effect. This gives you the `roomId` and `serverUrl` values that aren't objects, and that you can read from inside your Effect:
+Bunu bir bağımlılık haline getirmekten (ve yeniden renderlamalarda yeniden bağlanmasına neden olmaktan) kaçınmak için, bunu Efektin dışında çağırın. Bu size nesne olmayan ve Efektinizin içinden okuyabileceğiniz `roomId` ve `serverUrl` değerlerini verir:
 
 ```js {1,4}
 function ChatRoom({ getOptions }) {
@@ -1150,36 +1149,37 @@ function ChatRoom({ getOptions }) {
     });
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId, serverUrl]); // ✅ All dependencies declared
+  }, [roomId, serverUrl]); // ✅ Tüm bağımlılıklar bildirildi
   // ...
 ```
 
-This only works for [pure](/learn/keeping-components-pure) functions because they are safe to call during rendering. If your function is an event handler, but you don't want its changes to re-synchronize your Effect, [wrap it into an Effect Event instead.](#do-you-want-to-read-a-value-without-reacting-to-its-changes)
+Bu sadece[saf halde](/learn/keeping-components-pure) fonksiyonlar için geçerlidir, çünkü render sırasında çağrılmaları güvenlidir. 
+Fonksiyonunuz bir olay yöneticisiyse, ancak değişikliklerinin Efektinizi yeniden senkronize etmesini istemiyorsanız,[bunun yerine bir Efekt Olayına sarın.](#do-y-want-to-read-a-value-without-reacting-to-its-changes)
 
 <Recap>
 
-- Dependencies should always match the code.
-- When you're not happy with your dependencies, what you need to edit is the code.
-- Suppressing the linter leads to very confusing bugs, and you should always avoid it.
-- To remove a dependency, you need to "prove" to the linter that it's not necessary.
-- If some code should run in response to a specific interaction, move that code to an event handler.
-- If different parts of your Effect should re-run for different reasons, split it into several Effects.
-- If you want to update some state based on the previous state, pass an updater function.
-- If you want to read the latest value without "reacting" it, extract an Effect Event from your Effect.
-- In JavaScript, objects and functions are considered different if they were created at different times.
-- Try to avoid object and function dependencies. Move them outside the component or inside the Effect.
+- Bağımlılıklar her zaman kodla eşleşmelidir.
+- Bağımlılıklarınızdan memnun olmadığınızda, düzenlemeniz gereken şey koddur.
+- Linteri bastırmak çok kafa karıştırıcı hatalara yol açar ve bundan her zaman kaçınmalısınız.
+- Bir bağımlılığı kaldırmak için, linter'e bunun gerekli olmadığını "kanıtlamanız" gerekir.
+- Bazı kodların belirli bir etkileşime yanıt olarak çalışması gerekiyorsa, bu kodu bir olay yöneticisine taşıyın.
+- Efektinizin farklı bölümlerinin farklı nedenlerle yeniden çalıştırılması gerekiyorsa, onu birkaç Efekte bölün.
+- Bir önceki durumu temel alarak bazı durumları güncellemek istiyorsanız, bir güncelleyici fonksiyonu geçirin.
+- En son değeri "tepki vermeden" okumak istiyorsanız, Efektinizden bir Efekt Olayı çıkarın.
+- JavaScript'te, nesneler ve fonksiyonlar farklı zamanlarda oluşturulmuşlarsa farklı kabul edilirler.
+- Nesne ve fonksiyon bağımlılıklarından kaçınmaya çalışın. Bunları bileşenin dışına veya Efektin içine taşıyın.
 
 </Recap>
 
 <Challenges>
 
-#### Fix a resetting interval {/*fix-a-resetting-interval*/}
+#### Sıfırlama aralığını düzeltme {/*fix-a-resetting-interval*/}
 
-This Effect sets up an interval that ticks every second. You've noticed something strange happening: it seems like the interval gets destroyed and re-created every time it ticks. Fix the code so that the interval doesn't get constantly re-created.
+Bu Efekt, her saniyede bir işleyen bir aralık oluşturur. Tuhaf bir şeyin olduğunu fark ettiniz: Sanki aralık her tıklandığında yok ediliyor ve yeniden yaratılıyor gibi görünüyor. Kodu, aralığın sürekli olarak yeniden oluşturulmayacağı şekilde düzeltin.
 
 <Hint>
 
-It seems like this Effect's code depends on `count`. Is there some way to not need this dependency? There should be a way to update the `count` state based on its previous value without adding a dependency on that value.
+Bu Efekt'in kodu `count`'a bağlı gibi görünüyor. Bu bağımlılığa ihtiyaç duymamanın bir yolu var mı? Bu değere bir bağımlılık eklemeden `count` state'ini önceki değerine göre güncellemenin bir yolu olmalıdır.
 
 </Hint>
 
@@ -1192,18 +1192,18 @@ export default function Timer() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log('✅ Creating an interval');
+    console.log('✅ Bir aralık oluşturma');
     const id = setInterval(() => {
-      console.log('⏰ Interval tick');
+      console.log('⏰ Aralık işareti');
       setCount(count + 1);
     }, 1000);
     return () => {
-      console.log('❌ Clearing an interval');
+      console.log('❌ Bir aralığı temizleme');
       clearInterval(id);
     };
   }, [count]);
 
-  return <h1>Counter: {count}</h1>
+  return <h1>Sayaç: {count}</h1>
 }
 ```
 
@@ -1211,9 +1211,9 @@ export default function Timer() {
 
 <Solution>
 
-You want to update the `count` state to be `count + 1` from inside the Effect. However, this makes your Effect depend on `count`, which changes with every tick, and that's why your interval gets re-created on every tick.
+Efektin içinden `count` state'ini `count + 1` olacak şekilde güncellemek istiyorsunuz. Ancak bu, Efektinizi her tıklamayla değişen `count`'a bağlı hale getirir ve bu nedenle aralığınız her tıklamada yeniden oluşturulur.
 
-To solve this, use the [updater function](/reference/react/useState#updating-state-based-on-the-previous-state) and write `setCount(c => c + 1)` instead of `setCount(count + 1)`:
+Bunu çözmek için [güncelleyici fonksiyonu](/reference/react/useState#updating-state-based-on-the-previous-state) kullanın ve `setCount(count + 1)` yerine `setCount(c => c + 1)` yazın:
 
 <Sandpack>
 
@@ -1224,36 +1224,36 @@ export default function Timer() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log('✅ Creating an interval');
+    console.log('✅ Bir aralık oluşturma');
     const id = setInterval(() => {
-      console.log('⏰ Interval tick');
+      console.log('⏰ Aralık işareti');
       setCount(c => c + 1);
     }, 1000);
     return () => {
-      console.log('❌ Clearing an interval');
+      console.log('❌ Bir aralığı temizleme');
       clearInterval(id);
     };
   }, []);
 
-  return <h1>Counter: {count}</h1>
+  return <h1>Sayaç: {count}</h1>
 }
 ```
 
 </Sandpack>
 
-Instead of reading `count` inside the Effect, you pass a `c => c + 1` instruction ("increment this number!") to React. React will apply it on the next render. And since you don't need to read the value of `count` inside your Effect anymore, so you can keep your Effect's dependencies empty (`[]`). This prevents your Effect from re-creating the interval on every tick.
+Efekt içinde `count` okumak yerine, React'e bir `c => c + 1` komutu ("bu sayıyı artır!") iletirsiniz. React bunu bir sonraki render'da uygulayacaktır. Ve artık Efektinizin içinde `count` değerini okumanıza gerek olmadığından, Efektinizin bağımlılıklarını boş tutabilirsiniz (`[]`). Bu, Efektinizin her tikte aralığı yeniden oluşturmasını önler.
 
 </Solution>
 
-#### Fix a retriggering animation {/*fix-a-retriggering-animation*/}
+#### Yeniden tetiklenen bir animasyonu düzeltin {/*fix-a-retriggering-animation*/}
 
-In this example, when you press "Show", a welcome message fades in. The animation takes a second. When you press "Remove", the welcome message immediately disappears. The logic for the fade-in animation is implemented in the `animation.js` file as plain JavaScript [animation loop.](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) You don't need to change that logic. You can treat it as a third-party library. Your Effect creates an instance of `FadeInAnimation` for the DOM node, and then calls `start(duration)` or `stop()` to control the animation. The `duration` is controlled by a slider. Adjust the slider and see how the animation changes.
+Bu örnekte, "Göster" düğmesine bastığınızda bir karşılama mesajı belirir. Animasyon bir saniye sürer. "Kaldır" düğmesine bastığınızda, karşılama mesajı hemen kaybolur. Soluk animasyonun mantığı `animation.js` dosyasında düz JavaScript olarak uygulanmıştır [animasyon döngüsü.](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) Bu mantığı değiştirmenize gerek yoktur. Bunu üçüncü taraf bir kütüphane olarak ele alabilirsiniz. Efektiniz, DOM düğümü için bir `FadeInAnimation` örneği oluşturur ve ardından animasyonu kontrol etmek için `start(duration)` veya `stop()` çağırır. `Süre` bir kaydırıcı tarafından kontrol edilir. Kaydırıcıyı ayarlayın ve animasyonun nasıl değiştiğini görün.
 
-This code already works, but there is something you want to change. Currently, when you move the slider that controls the `duration` state variable, it retriggers the animation. Change the behavior so that the Effect does not "react" to the `duration` variable. When you press "Show", the Effect should use the current `duration` on the slider. However, moving the slider itself should not by itself retrigger the animation.
+Bu kod zaten çalışıyor, ancak değiştirmek istediğiniz bir şey var. Şu anda, `duration` state değişkenini kontrol eden kaydırıcıyı hareket ettirdiğinizde, animasyonu yeniden tetikliyor. Efektin `duration` değişkenine "tepki" vermemesi için davranışı değiştirin. "Göster" düğmesine bastığınızda, Efekt kaydırıcıdaki geçerli `duration` değerini kullanmalıdır. Ancak, kaydırıcıyı hareket ettirmek kendi başına animasyonu yeniden tetiklememelidir.
 
 <Hint>
 
-Is there a line of code inside the Effect that should not be reactive? How can you move non-reactive code out of the Effect?
+Efektin içinde reaktif olmaması gereken bir kod satırı var mı? Reaktif olmayan kodu Efektin dışına nasıl taşıyabilirsiniz?
 
 </Hint>
 
@@ -1303,7 +1303,7 @@ function Welcome({ duration }) {
         backgroundImage: 'radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)'
       }}
     >
-      Welcome
+      Hoş Geldiniz
     </h1>
   );
 }
@@ -1323,10 +1323,10 @@ export default function App() {
           onChange={e => setDuration(Number(e.target.value))}
         />
         <br />
-        Fade in duration: {duration} ms
+        Solma süresi: {duration} ms
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome duration={duration} />}
@@ -1343,11 +1343,11 @@ export class FadeInAnimation {
   start(duration) {
     this.duration = duration;
     if (this.duration === 0) {
-      // Jump to end immediately
+      // Hemen sona atla
       this.onProgress(1);
     } else {
       this.onProgress(0);
-      // Start animating
+      // Animasyona başla
       this.startTime = performance.now();
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
@@ -1357,7 +1357,7 @@ export class FadeInAnimation {
     const progress = Math.min(timePassed / this.duration, 1);
     this.onProgress(progress);
     if (progress < 1) {
-      // We still have more frames to paint
+      // Hâlâ boyanacak karelerimiz var.
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
   }
@@ -1382,7 +1382,7 @@ html, body { min-height: 300px; }
 
 <Solution>
 
-Your Effect needs to read the latest value of `duration`, but you don't want it to "react" to changes in `duration`. You use `duration` to start the animation, but starting animation isn't reactive. Extract the non-reactive line of code into an Effect Event, and call that function from your Effect.
+Efektinizin `duration` ın en son değerini okuması gerekir, ancak `duration`daki değişikliklere "tepki" vermesini istemezsiniz. Animasyonu başlatmak için `duration` kullanıyorsunuz, ancak animasyonu başlatmak reaktif değildir. Reaktif olmayan kod satırını bir Efekt Olayı içine alın ve bu işlevi Efektinizden çağırın.
 
 <Sandpack>
 
@@ -1434,7 +1434,7 @@ function Welcome({ duration }) {
         backgroundImage: 'radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)'
       }}
     >
-      Welcome
+      Hoş Geldiniz
     </h1>
   );
 }
@@ -1457,7 +1457,7 @@ export default function App() {
         Fade in duration: {duration} ms
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome duration={duration} />}
@@ -1482,7 +1482,7 @@ export class FadeInAnimation {
     const progress = Math.min(timePassed / this.duration, 1);
     this.onProgress(progress);
     if (progress < 1) {
-      // We still have more frames to paint
+      // Daha boyanacak karelerimiz var.
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
   }
@@ -1505,19 +1505,19 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Effect Events like `onAppear` are not reactive, so you can read `duration` inside without retriggering the animation.
+`onAppear` gibi Efekt Olayları reaktif değildir, bu nedenle animasyonu yeniden tetiklemeden içindeki `duration`ı okuyabilirsiniz.
 
 </Solution>
 
-#### Fix a reconnecting chat {/*fix-a-reconnecting-chat*/}
+#### Yeniden bağlanan bir sohbeti düzeltme {/*fix-a-reconnecting-chat*/}
 
-In this example, every time you press "Toggle theme", the chat re-connects. Why does this happen? Fix the mistake so that the chat re-connects only when you edit the Server URL or choose a different chat room.
+Bu örnekte, "Temayı değiştir" düğmesine her bastığınızda sohbet yeniden bağlanır. Bu neden oluyor? Hatayı düzeltin, böylece sohbet yalnızca Sunucu URL'sini düzenlediğinizde veya farklı bir sohbet odası seçtiğinizde yeniden bağlansın.
 
-Treat `chat.js` as an external third-party library: you can consult it to check its API, but don't edit it.
+`chat.js`'ye harici bir üçüncü taraf kütüphanesi gibi davranın: API'sini kontrol etmek için ona danışabilirsiniz, ancak onu düzenlemeyin.
 
 <Hint>
 
-There's more than one way to fix this, but ultimately you want to avoid having an object as your dependency.
+Bunu düzeltmenin birden fazla yolu vardır, ancak sonuçta bağımlılığınız olarak bir nesneye sahip olmaktan kaçınmak istersiniz.
 
 </Hint>
 
@@ -1529,7 +1529,7 @@ import ChatRoom from './ChatRoom.js';
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
   const options = {
@@ -1540,24 +1540,24 @@ export default function App() {
   return (
     <div className={isDark ? 'dark' : 'light'}>
       <button onClick={() => setIsDark(!isDark)}>
-        Toggle theme
+        Temayı Değiştir
       </button>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odası seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -1578,25 +1578,25 @@ export default function ChatRoom({ options }) {
     return () => connection.disconnect();
   }, [options]);
 
-  return <h1>Welcome to the {options.roomId} room!</h1>;
+  return <h1>{options.roomId} Odasına Hoş Geldiniz!</h1>;
 }
 ```
 
 ```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -1611,9 +1611,9 @@ label, button { display: block; margin-bottom: 5px; }
 
 <Solution>
 
-Your Effect is re-running because it depends on the `options` object. Objects can be re-created unintentionally, you should try to avoid them as dependencies of your Effects whenever possible.
+Efektiniz `options` nesnesine bağlı olduğu için yeniden çalışıyor. Nesneler istemeden yeniden oluşturulabilir, mümkün olduğunca Efektlerinizin bağımlılıkları olarak bunlardan kaçınmaya çalışmalısınız.
 
-The least invasive fix is to read `roomId` and `serverUrl` right outside the Effect, and then make the Effect depend on those primitive values (which can't change unintentionally). Inside the Effect, create an object and pass it to `createConnection`:
+En az bozan çözüm, `roomId` ve `serverUrl` değerlerini Efektin hemen dışında okumak ve ardından Efektin bu ilkel değerlere (istemeden değişemez) bağlı olmasını sağlamaktır. Efektin içinde bir nesne oluşturun ve bunu `createConnection` öğesine aktarın:
 
 <Sandpack>
 
@@ -1623,7 +1623,7 @@ import ChatRoom from './ChatRoom.js';
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
   const options = {
@@ -1634,24 +1634,24 @@ export default function App() {
   return (
     <div className={isDark ? 'dark' : 'light'}>
       <button onClick={() => setIsDark(!isDark)}>
-        Toggle theme
+        Temayı Değiştir
       </button>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odası seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -1676,25 +1676,25 @@ export default function ChatRoom({ options }) {
     return () => connection.disconnect();
   }, [roomId, serverUrl]);
 
-  return <h1>Welcome to the {options.roomId} room!</h1>;
+  return <h1>{options.roomId} Odasına Hoş Geldiniz!</h1>;
 }
 ```
 
 ```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama gerçekten sunucuya bağlanır.
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -1707,7 +1707,7 @@ label, button { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-It would be even better to replace the object `options` prop with the more specific `roomId` and `serverUrl` props:
+Object `options` prop'unu daha spesifik olan `roomId` ve `serverUrl` prop'ları ile değiştirmek daha da iyi olacaktır:
 
 <Sandpack>
 
@@ -1717,30 +1717,30 @@ import ChatRoom from './ChatRoom.js';
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
   return (
     <div className={isDark ? 'dark' : 'light'}>
       <button onClick={() => setIsDark(!isDark)}>
-        Toggle theme
+        Temayı Değiştir
       </button>
       <label>
-        Server URL:{' '}
+        Sunucu URL'i:{' '}
         <input
           value={serverUrl}
           onChange={e => setServerUrl(e.target.value)}
         />
       </label>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odası seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -1767,25 +1767,25 @@ export default function ChatRoom({ roomId, serverUrl }) {
     return () => connection.disconnect();
   }, [roomId, serverUrl]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} Odasına Hoş Geldiniz!</h1>;
 }
 ```
 
 ```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama sunucuya gerçekten bağlanır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log('✅ "' + roomId + '" odasına ' + serverUrl + ' adresinde bağlanılıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
+      console.log('❌ "' + roomId + '" odasından ' + serverUrl + ' adresinden bağlantı kesildi');
     }
   };
 }
@@ -1798,25 +1798,25 @@ label, button { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-Sticking to primitive props where possible makes it easier to optimize your components later.
+Mümkün olduğunca ilkel aksesuarlara bağlı kalmak, bileşenlerinizi daha sonra optimize etmenizi kolaylaştırır.
 
 </Solution>
 
-#### Fix a reconnecting chat, again {/*fix-a-reconnecting-chat-again*/}
+#### Yeniden bağlanan bir sohbeti düzeltin, tekrar {/*fix-a-reconnecting-chat-again*/}
 
-This example connects to the chat either with or without encryption. Toggle the checkbox and notice the different messages in the console when the encryption is on and off. Try changing the room. Then, try toggling the theme. When you're connected to a chat room, you will receive new messages every few seconds. Verify that their color matches the theme you've picked.
+Bu örnek, sohbete şifreleme ile veya şifreleme olmadan bağlanır. Onay kutusunu değiştirin ve şifreleme açık ve kapalı olduğunda konsoldaki farklı mesajlara dikkat edin. Odayı değiştirmeyi deneyin. Ardından, temayı değiştirmeyi deneyin. Bir sohbet odasına bağlandığınızda, her birkaç saniyede bir yeni mesajlar alacaksınız. Renklerinin seçtiğiniz temayla eşleştiğini doğrulayın.
 
-In this example, the chat re-connects every time you try to change the theme. Fix this. After the fix, changing the theme should not re-connect the chat, but toggling encryption settings or changing the room should re-connect.
+Bu örnekte, temayı her değiştirmeye çalıştığınızda sohbet yeniden bağlanıyor. Bunu düzeltin. Düzeltmeden sonra, temayı değiştirmek sohbeti yeniden bağlamamalı, ancak şifreleme ayarlarını değiştirmek veya odayı değiştirmek yeniden bağlamalıdır.
 
-Don't change any code in `chat.js`. Other than that, you can change any code as long as it results in the same behavior. For example, you may find it helpful to change which props are being passed down.
+`chat.js` içindeki hiçbir kodu değiştirmeyin. Bunun dışında, aynı davranışla sonuçlandığı sürece herhangi bir kodu değiştirebilirsiniz. Örneğin, hangi prop'ların aktarıldığını değiştirmeyi yararlı bulabilirsiniz.
 
 <Hint>
 
-You're passing down two functions: `onMessage` and `createConnection`. Both of them are created from scratch every time `App` re-renders. They are considered to be new values every time, which is why they re-trigger your Effect.
+İki adet fonksiyon  aktarıyorsunuz: `onMessage` ve `createConnection`. Her ikisi de `App` tekrardan oluşturulduğunda sıfırdan oluşturulur. Her seferinde yeni değerler olarak kabul edilirler, bu yüzden Efektinizi yeniden tetiklerler.
 
-One of these functions is an event handler. Do you know some way to call an event handler an Effect without "reacting" to the new values of the event handler function? That would come in handy!
+Bu fonksiyonlardan biri bir olay yöneticisi. Olay yöneticisi işlevinin yeni değerlerine "tepki vermeden" bir olay yöneticiyi bir Efekt olarak çağırmanın herhangi bir yolunu biliyor musunuz? Bu çok kullanışlı olurdu!
 
-Another of these functions only exists to pass some state to an imported API method. Is this function really necessary? What is the essential information that's being passed down? You might need to move some imports from `App.js` to `ChatRoom.js`.
+Bu fonksiyonlardan bir diğeri yalnızca içe aktarılan bir API yöntemine bazı durumları iletmek için vardır. Bu fonksiyon gerçekten gerekli mi? Aktarılan temel bilgi nedir? Bazı içe aktarmaları `App.js`den `ChatRoom.js`e taşımanız gerekebilir.
 
 </Hint>
 
@@ -1850,7 +1850,7 @@ import { showNotification } from './notifications.js';
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState('genel');
   const [isEncrypted, setIsEncrypted] = useState(false);
 
   return (
@@ -1861,7 +1861,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Karanlık Tema'yı Kullan
       </label>
       <label>
         <input
@@ -1869,24 +1869,24 @@ export default function App() {
           checked={isEncrypted}
           onChange={e => setIsEncrypted(e.target.checked)}
         />
-        Enable encryption
+        Şifrelemeyi Etkinleştir
       </label>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odası seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
       <ChatRoom
         roomId={roomId}
         onMessage={msg => {
-          showNotification('New message: ' + msg, isDark ? 'dark' : 'light');
+          showNotification('Yeni Mesaj: ' + msg, isDark ? 'Karanlık' : 'Aydınlık');
         }}
         createConnection={() => {
           const options = {
@@ -1917,24 +1917,24 @@ export default function ChatRoom({ roomId, createConnection, onMessage }) {
     return () => connection.disconnect();
   }, [createConnection, onMessage]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} Odasına hoş geldiniz!</h1>;
 }
 ```
 
 ```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ 🔐 Connecting to "' + roomId + '" room... (encrypted)');
+      console.log('✅ 🔐 Şuraya bağlanılıyor "' + roomId + '" odası... (şifrelenmiş)');
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
@@ -1949,14 +1949,14 @@ export function createEncryptedConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ 🔐 Disconnected from "' + roomId + '" room (encrypted)');
+      console.log('❌ 🔐 Şuradan bağlantı kesildi "' + roomId + '" odası (şifrelenmiş)');
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('Yönetici iki kez eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Yalnızca "message" olayı desteklenir.');
       }
       messageCallback = callback;
     },
@@ -1964,18 +1964,18 @@ export function createEncryptedConnection({ serverUrl, roomId }) {
 }
 
 export function createUnencryptedConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi:: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room (unencrypted)...');
+      console.log('✅ Şuraya bağlanılıyor "' + roomId + '" odası (şifrelenmemiş)...');
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
@@ -1990,14 +1990,14 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ Disconnected from "' + roomId + '" room (unencrypted)');
+      console.log('❌ Şuradan bağlantı kesildi "' + roomId + '" odası (şifrelenmemiş)');
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('Yönetici iki kez eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Sadece "message" olayı desteklenir.');
       }
       messageCallback = callback;
     },
@@ -2031,11 +2031,11 @@ label, button { display: block; margin-bottom: 5px; }
 
 <Solution>
 
-There's more than one correct way to solve this, but here is one possible solution.
+Bunu çözmenin birden fazla doğru yolu var, ancak işte olası bir çözüm.
 
-In the original example, toggling the theme caused different `onMessage` and `createConnection` functions to be created and passed down. Since the Effect depended on these functions, the chat would re-connect every time you toggle the theme.
+Orijinal örnekte, temanın değiştirilmesi farklı `onMessage` ve `createConnection` fonksiyonlarının oluşturulmasına ve aşağı aktarılmasına neden oluyordu. Efekt bu fonksiyonlara bağlı olduğundan, temayı her değiştirdiğinizde sohbet yeniden bağlanıyordu.
 
-To fix the problem with `onMessage`, you needed to wrap it into an Effect Event:
+`onMessage` ile ilgili sorunu çözmek için, bunu bir Efekt Olayına sarmanız gerekiyordu:
 
 ```js {1,2,6}
 export default function ChatRoom({ roomId, createConnection, onMessage }) {
@@ -2047,21 +2047,21 @@ export default function ChatRoom({ roomId, createConnection, onMessage }) {
     // ...
 ```
 
-Unlike the `onMessage` prop, the `onReceiveMessage` Effect Event is not reactive. This is why it doesn't need to be a dependency of your Effect. As a result, changes to `onMessage` won't cause the chat to re-connect.
+`onMessage` prop'unun aksine, `onReceiveMessage` Efekt Olayı reaktif değildir. Bu nedenle Efektinizin bir bağımlılığı olması gerekmez. Sonuç olarak, `onMessage`da yapılan değişiklikler sohbetin yeniden bağlanmasına neden olmaz.
 
-You can't do the same with `createConnection` because it *should* be reactive. You *want* the Effect to re-trigger if the user switches between an encrypted and an unencryption connection, or if the user switches the current room. However, because `createConnection` is a function, you can't check whether the information it reads has *actually* changed or not. To solve this, instead of passing `createConnection` down from the `App` component, pass the raw `roomId` and `isEncrypted` values:
+Aynı şeyi `createConnection` ile yapamazsınız çünkü bu *reaktif* olmalıdır. Kullanıcı şifreli ve şifresiz bir bağlantı arasında geçiş yaptığında veya kullanıcı mevcut odayı değiştirdiğinde Efektin yeniden tetiklenmesini *istiyorsunuz*. Ancak, `createConnection` bir fonksiyon olduğu için, okuduğu bilginin *gerçekte* değişip değişmediğini kontrol edemezsiniz. Bunu çözmek için, `createConnection`ı `App` bileşeninden geçirmek yerine, ham `roomId` ve `isEncrypted` değerlerini geçirin:
 
 ```js {2-3}
       <ChatRoom
         roomId={roomId}
         isEncrypted={isEncrypted}
         onMessage={msg => {
-          showNotification('New message: ' + msg, isDark ? 'dark' : 'light');
+          showNotification('Yeni mesaj: ' + msg, isDark ? 'Karanlık' : 'Aydınlık');
         }}
       />
 ```
 
-Now you can move the `createConnection` function *inside* the Effect instead of passing it down from the `App`:
+Artık `createConnection` fonksiyonunu `App` içinden geçirmek yerine Efektin *içine* taşıyabilirsiniz:
 
 ```js {1-4,6,10-20}
 import {
@@ -2087,19 +2087,19 @@ export default function ChatRoom({ roomId, isEncrypted, onMessage }) {
     // ...
 ```
 
-After these two changes, your Effect no longer depends on any function values:
+Bu iki değişiklikten sonra, Efektiniz artık herhangi bir fonksiyon değerine bağlı değildir:
 
 ```js {1,8,10,21}
-export default function ChatRoom({ roomId, isEncrypted, onMessage }) { // Reactive values
-  const onReceiveMessage = useEffectEvent(onMessage); // Not reactive
+export default function ChatRoom({ roomId, isEncrypted, onMessage }) { // Reaktif değerler
+  const onReceiveMessage = useEffectEvent(onMessage); // Reaktif değil
 
   useEffect(() => {
     function createConnection() {
       const options = {
         serverUrl: 'https://localhost:1234',
-        roomId: roomId // Reading a reactive value
+        roomId: roomId // Reaktif bir değer okuma
       };
-      if (isEncrypted) { // Reading a reactive value
+      if (isEncrypted) { // Reaktif bir değer okuma
         return createEncryptedConnection(options);
       } else {
         return createUnencryptedConnection(options);
@@ -2110,10 +2110,10 @@ export default function ChatRoom({ roomId, isEncrypted, onMessage }) { // Reacti
     connection.on('message', (msg) => onReceiveMessage(msg));
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId, isEncrypted]); // ✅ All dependencies declared
+  }, [roomId, isEncrypted]); // ✅ Tüm bağımlılıklar bildirildi
 ```
 
-As a result, the chat re-connects only when something meaningful (`roomId` or `isEncrypted`) changes:
+Sonuç olarak, sohbet yalnızca anlamlı bir şey (`roomId` veya `isEncrypted`) değiştiğinde yeniden bağlanır:
 
 <Sandpack>
 
@@ -2153,7 +2153,7 @@ export default function App() {
           checked={isDark}
           onChange={e => setIsDark(e.target.checked)}
         />
-        Use dark theme
+        Karanlık Tema'yı Kullan
       </label>
       <label>
         <input
@@ -2161,17 +2161,17 @@ export default function App() {
           checked={isEncrypted}
           onChange={e => setIsEncrypted(e.target.checked)}
         />
-        Enable encryption
+        Şifrelemeyi Etkinleştir
       </label>
       <label>
-        Choose the chat room:{' '}
+        Sohbet odası seçin:{' '}
         <select
           value={roomId}
           onChange={e => setRoomId(e.target.value)}
         >
-          <option value="general">general</option>
-          <option value="travel">travel</option>
-          <option value="music">music</option>
+          <option value="genel">Genel</option>
+          <option value="seyehat">Seyehat</option>
+          <option value="müzik">Müzik</option>
         </select>
       </label>
       <hr />
@@ -2179,7 +2179,7 @@ export default function App() {
         roomId={roomId}
         isEncrypted={isEncrypted}
         onMessage={msg => {
-          showNotification('New message: ' + msg, isDark ? 'dark' : 'light');
+          showNotification('Yeni mesaj: ' + msg, isDark ? 'Karanlık' : 'Aydınlık');
         }}
       />
     </>
@@ -2217,24 +2217,24 @@ export default function ChatRoom({ roomId, isEncrypted, onMessage }) {
     return () => connection.disconnect();
   }, [roomId, isEncrypted]);
 
-  return <h1>Welcome to the {roomId} room!</h1>;
+  return <h1>{roomId} Odasına hoş geldiniz!</h1>;
 }
 ```
 
 ```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi:: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ 🔐 Connecting to "' + roomId + '" room... (encrypted)');
+      console.log('✅ 🔐 Şuraya bağlanılıyor "' + roomId + '" odası... (şifrelenmiş)');
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
@@ -2249,14 +2249,14 @@ export function createEncryptedConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ 🔐 Disconnected from "' + roomId + '" room (encrypted)');
+      console.log('❌ 🔐 Şuradan bağlantı kesildi "' + roomId + '" odası (şifrelenmiş)');
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('Yönetici iki kez eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Yalnızca "message" olayı desteklenir.');
       }
       messageCallback = callback;
     },
@@ -2264,18 +2264,18 @@ export function createEncryptedConnection({ serverUrl, roomId }) {
 }
 
 export function createUnencryptedConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanır
   if (typeof serverUrl !== 'string') {
-    throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
+    throw Error('serverUrl inin bir dize olması bekleniyordu. Bu Geldi:: ' + serverUrl);
   }
   if (typeof roomId !== 'string') {
-    throw Error('Expected roomId to be a string. Received: ' + roomId);
+    throw Error('roomId nin string olması gerekiyordu. Bu Geldi: ' + roomId);
   }
   let intervalId;
   let messageCallback;
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room (unencrypted)...');
+      console.log('✅ Şuraya bağlanılıyor "' + roomId + '" odası (şifrelenmemiş)...');
       clearInterval(intervalId);
       intervalId = setInterval(() => {
         if (messageCallback) {
@@ -2290,14 +2290,14 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
     disconnect() {
       clearInterval(intervalId);
       messageCallback = null;
-      console.log('❌ Disconnected from "' + roomId + '" room (unencrypted)');
+      console.log('❌ Şuradan bağlantı kesidi "' + roomId + '" odası (şifrelenmemiş)');
     },
     on(event, callback) {
       if (messageCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error('Yönetici iki kez eklenemez.');
       }
       if (event !== 'message') {
-        throw Error('Only "message" event is supported.');
+        throw Error('Yalnızca "message" olayı desteklenir.');
       }
       messageCallback = callback;
     },
