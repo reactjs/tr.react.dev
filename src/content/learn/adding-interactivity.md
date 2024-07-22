@@ -265,11 +265,7 @@ setCount(count + 1); // 1 ile yeniden render iste
 console.log(count);  // Hala 0!
 ```
 
-<<<<<<< HEAD
 Bu davranış, ince hatalardan kaçınmanıza yardımcı olur. Aşağıda küçük bir mesajlaşma uygulaması vardır. "Gönder" butonuna tıkladıktan *sonra* alıcıyı Bob ile değiştirin ve ne olacağını tahmin etmeye çalışın. 5 saniye sonra kimin ismi `alert` kutusunda çıkacaktır?
-=======
-This behavior helps you avoid subtle bugs. Here is a little chat app. Try to guess what happens if you press "Send" first and *then* change the recipient to Bob. Whose name will appear in the `alert` five seconds later?
->>>>>>> 6274d4faf5afcef74357871d06191558050e23d3
 
 <Sandpack>
 
