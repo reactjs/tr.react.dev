@@ -67,6 +67,8 @@ function Tooltip() {
 
 * `useLayoutEffect` fonksiyonunun kodu ve içerisinde planlanan state güncellemeleri, **tarayıcının ekrana yeniden çizme işlemini bloklar**. Aynı zamanda gereğinden fazla kullanılması durumunda uygulamanızı yavaşlatabilir. Mümkün olduğunca [`useEffect`](/reference/react/useEffect)'i tercih edin.
 
+* If you trigger a state update inside `useLayoutEffect`, React will execute all remaining Effects immediately including `useEffect`.
+
 ---
 
 ## Kullanım {/*usage*/}
