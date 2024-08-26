@@ -411,9 +411,17 @@ function Game() {
 
 Bir problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun alt elemanlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt eleman ağacında üç gereksiz yeniden render işlemi gerçekleşir.
 
+<<<<<<< HEAD
 Hatta hızlı olmasa bile, kodunuz geliştikçe yeni gereksinimlere uygun olmayan durumlarla karşılaşabilirsiniz. Örneğin, oyun hareketlerinin geçmişini adım adım izlemek için bir yol eklemek istediğinizi düşünün. Her bir state değişkenini geçmişteki bir değere güncelleyerek bunu yapardınız. Ancak, `card` state'ini geçmişteki bir değere ayarlamak, Efekt zincirini tekrar tetikler ve gösterilen verileri değiştirir. Bu tür bir kod genellikle sert ve kırılgan olabilir.
 
 Bu durumda, yapabileceğiniz hesaplamaları render işlemi sırasında gerçekleştirmek ve durumu olay yöneticisinde ayarlamak daha iyidir.
+=======
+First problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+
+The second problem is that even if it weren't slow, as your code evolves, you will run into cases where the "chain" you wrote doesn't fit the new requirements. Imagine you are adding a way to step through the history of the game moves. You'd do it by updating each state variable to a value from the past. However, setting the `card` state to a value from the past would trigger the Effect chain again and change the data you're showing. Such code is often rigid and fragile.
+
+In this case, it's better to calculate what you can during rendering, and adjust the state in the event handler:
+>>>>>>> 7d50c3ffd4df2dc7903f4e41069653a456a9c223
 
 ```js {6-7,14-26}
 function Game() {
