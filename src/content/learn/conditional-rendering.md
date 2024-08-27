@@ -52,11 +52,7 @@ export default function PackingList() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-Bazı `Item` bileşenlerinin `isPacked` prop'unun `false` (`yanlış`) yerine `true` (`doğru`) olduğuna dikkat edin. Eğer bileşen prop'u `isPacked={true}` ise eşyaların yanında bir tik (✔) işareti olmalı. 
-=======
-Notice that some of the `Item` components have their `isPacked` prop set to `true` instead of `false`. You want to add a checkmark (✅) to packed items if `isPacked={true}`.
->>>>>>> 7d50c3ffd4df2dc7903f4e41069653a456a9c223
+Bazı `Item` bileşenlerinin `isPacked` prop'unun `false` (`yanlış`) yerine `true` (`doğru`) olduğuna dikkat edin. Eğer bileşen prop'u `isPacked={true}` ise eşyaların yanında bir tik (✅) işareti olmalı. 
 
 Bunu bir [`if`/`else` ifadesi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) olarak şöyle yazabilirsiniz:
 
@@ -206,11 +202,7 @@ return (
 );
 ```
 
-<<<<<<< HEAD
-Bu kodu şöyle okuyabilirsiniz: *"eğer `isPacked` prop'u true (doğru) ise, o zaman (`?`) `name + ' ✔'` render et, aksi halde (`:`) `name` render et"*.
-=======
-You can read it as *"if `isPacked` is true, then (`?`) render `name + ' ✅'`, otherwise (`:`) render `name`"*.
->>>>>>> 7d50c3ffd4df2dc7903f4e41069653a456a9c223
+Bu kodu şöyle okuyabilirsiniz: *"eğer `isPacked` prop'u true (doğru) ise, o zaman (`?`) `name + ' ✅'` render et, aksi halde (`:`) `name` render et"*.
 
 <DeepDive>
 
