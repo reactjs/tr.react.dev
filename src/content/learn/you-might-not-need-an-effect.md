@@ -409,9 +409,9 @@ function Game() {
   // ...
 ```
 
-Bir problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun alt elemanlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt eleman ağacında üç gereksiz yeniden render işlemi gerçekleşir.
+Birinci problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun alt elemanlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt eleman ağacında üç gereksiz yeniden render işlemi gerçekleşir.
 
-Hatta hızlı olmasa bile, kodunuz geliştikçe yeni gereksinimlere uygun olmayan durumlarla karşılaşabilirsiniz. Örneğin, oyun hareketlerinin geçmişini adım adım izlemek için bir yol eklemek istediğinizi düşünün. Her bir state değişkenini geçmişteki bir değere güncelleyerek bunu yapardınız. Ancak, `card` state'ini geçmişteki bir değere ayarlamak, Efekt zincirini tekrar tetikler ve gösterilen verileri değiştirir. Bu tür bir kod genellikle sert ve kırılgan olabilir.
+İkinci problem ise; hızlı olmasa bile, kodunuz geliştikçe yeni gereksinimlere uygun olmayan durumlarla karşılaşabilirsiniz. Örneğin, oyun hareketlerinin geçmişini adım adım izlemek için bir yol eklemek istediğinizi düşünün. Her bir state değişkenini geçmişteki bir değere güncelleyerek bunu yapardınız. Ancak, `card` state'ini geçmişteki bir değere ayarlamak, Efekt zincirini tekrar tetikler ve gösterilen verileri değiştirir. Bu tür bir kod genellikle sert ve kırılgan olabilir.
 
 Bu durumda, yapabileceğiniz hesaplamaları render işlemi sırasında gerçekleştirmek ve durumu olay yöneticisinde ayarlamak daha iyidir.
 
