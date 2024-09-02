@@ -34,11 +34,7 @@ React'te bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edileb
 
 ## Kaynak ve Metadata Bileşenleri {/*resource-and-metadata-components*/}
 
-<<<<<<< HEAD
 Bu yerleşik tarayıcı bileşenleri, harici kaynakları yüklemenizi ya da sayfanıza meta verilerle açıklamalar eklemenizi sağlar.
-=======
-These built-in browser components let you load external resources or annotate the document with metadata:
->>>>>>> c2d61310664cc0d94f89ca21fc1d44e674329799
 
 * [`<link>`](/reference/react-dom/components/link)
 * [`<meta>`](/reference/react-dom/components/meta)
