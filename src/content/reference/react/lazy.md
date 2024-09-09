@@ -79,7 +79,7 @@ Artık bileşeninizin kodları talep edildiğinde (on demand) yüklendiğine gö
 <Suspense fallback={<Loading />}>
   <h2>Ön İzleme</h2>
   <MarkdownPreview />
- </Suspense>
+</Suspense>
 ```
 
 Bu örnekte, `MarkdownPreview`'ın kodu render edilene kadar yüklenmez. `MarkdownPreview` yüklenene kadar yerine `Loading` gösterilir. Onay kutusunu işaretlemeyi deneyin:
