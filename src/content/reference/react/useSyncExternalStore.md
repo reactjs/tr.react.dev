@@ -43,7 +43,7 @@ Depodaki verinin anlık görüntüsünü döndürür. Argüman olarak iki fonksi
 
 #### Parametreler {/*parameters*/}
 
-* `subscribe`: Bir `callback` argümanı alan ve depoya abone olan fonksiyondur. Depo değiştiğinde, iletilen `callback` çalıştırılır. Bu, bileşenin yeniden render edilmesine neden olur. `subscribe` fonksiyonu, aboneliği temizleyen bir fonksiyon döndürmelidir.
+* `subscribe`: Bir `callback` argümanı alan ve depoya abone olan fonksiyondur. Depo değiştiğinde, iletilen `callback` çalıştırılır. Bu, bileşeni yeniden render eder ve (ihtiyac varsa) `getSnapshot` i yeniden cagirir. `subscribe` fonksiyonu, aboneliği temizleyen bir fonksiyon döndürmelidir.
 
 * `getSnapshot`: Bileşenin ihtiyaç duyduğu depodaki verilerin anlık görüntüsünü döndüren fonksiyondur. Veri deposu değişmemişse, `getSnapshot`'a yapılan çağrılar aynı değeri döndürmelidir. Depo değişirse ve döndürülen değer farklıysa ([`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ile karşılaştırıldığında), bileşen yeniden render edilir.
 
