@@ -411,7 +411,11 @@ function Game() {
 
 Birinci problem bu kodun çok verimsiz olmasıdır: bileşenin (ve onun alt elemanlarının) `set` çağrıları arasında her seferinde yeniden render edilmesidir. Yukarıdaki örnekte, en kötü durumda (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) alt eleman ağacında üç gereksiz yeniden render işlemi gerçekleşir.
 
+<<<<<<< HEAD
 İkinci problem ise; hızlı olmasa bile, kodunuz geliştikçe yeni gereksinimlere uygun olmayan durumlarla karşılaşabilirsiniz. Örneğin, oyun hareketlerinin geçmişini adım adım izlemek için bir yol eklemek istediğinizi düşünün. Her bir state değişkenini geçmişteki bir değere güncelleyerek bunu yapardınız. Ancak, `card` state'ini geçmişteki bir değere ayarlamak, Efekt zincirini tekrar tetikler ve gösterilen verileri değiştirir. Bu tür bir kod genellikle sert ve kırılgan olabilir.
+=======
+The first problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+>>>>>>> fe37c42e0b51167d7f3c98593f50de997d666266
 
 Bu durumda, yapabileceğiniz hesaplamaları render işlemi sırasında gerçekleştirmek ve durumu olay yöneticisinde ayarlamak daha iyidir.
 
