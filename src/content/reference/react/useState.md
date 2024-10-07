@@ -85,7 +85,13 @@ function handleClick() {
 
 * React [state güncellemelerini toplu halde(batches) yapar.](/learn/queueing-a-series-of-state-updates) React, ekranı **tüm olay yöneticileri çalıştıktan** ve `set` fonksyionlarını çağırdıktan sonra günceller. Böylelikle tek bir olay sırasında olacak birden fazla yeniden render engellenmiş olur. Nadiren de olsa, örneğin DOM'a erişmek istediğinizde, React'ı ekranı erken güncellemeye zorlamak için [`flushSync`](/reference/react-dom/flushSync) kullanabilirsiniz.
 
+<<<<<<< HEAD
 * *Render sırasında* `set` fonksiyonu yalnızca mevcut render edilen bileşenin içinde çağırılabilir. React, bileşenin çıktısını görmezden gelecektir ve hemen yeni state ile birlikte render etmeyi deneyecektir. Bu modele nadiren ihtiyaç duyulur ama bunu *önceki render'lardan gelen bilgileri saklamak* için kullanabilirsiniz. [Aşağıdaki örneği inceleyin.](#storing-information-from-previous-renders)
+=======
+* The `set` function has a stable identity, so you will often see it omitted from effect dependencies, but including it will not cause the effect to fire. If the linter lets you omit a dependency without errors, it is safe to do. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
+
+* Calling the `set` function *during rendering* is only allowed from within the currently rendering component. React will discard its output and immediately attempt to render it again with the new state. This pattern is rarely needed, but you can use it to **store information from the previous renders**. [See an example below.](#storing-information-from-previous-renders)
+>>>>>>> 1697ae89a3bbafd76998dd7496754e5358bc1e9a
 
 * Strict Modda React, [kazara oluşan saf olmayan şeyleri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **güncelleyici fonksiyonunuzu iki defa** çağıracaktır. Bu sadece geliştirme sırasında görülen bir davranıştır ve son ürünü etkilemez. Eğer güncelleyici fonksiyonunuz saf ise (ki öyle olmalı), bu olması gereken davranışı etkilememelidir. Yapılan çağrılardan birinin sonucu görmezden gelinecektir.
 
