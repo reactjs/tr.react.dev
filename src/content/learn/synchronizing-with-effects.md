@@ -627,7 +627,11 @@ See the examples below for how to handle common patterns.
 
 ### React olmayan widget'ları kontrol etmek {/*controlling-non-react-widgets*/}
 
+<<<<<<< HEAD
 Bazen React'e yazılmamış UI widget'ları eklemek isteyebilirsiniz. Örneğin, sayfanıza bir harita bileşeni ekliyorsunuz. Bu harita `setZoomLevel()` metoduna sahip ve React kodunuzdaki `zoomLevel` state değişkenini yakınlaştırma seviyesi ile senkronize etmek istiyorsunuz. Efektiniz şuna benzeyecektir:
+=======
+Sometimes you need to add UI widgets that aren't written in React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+>>>>>>> 2b2d0f2309f49c82cf5bb88ea62fb2e44661c634
 
 ```js
 useEffect(() => {
