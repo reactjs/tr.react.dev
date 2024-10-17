@@ -55,6 +55,7 @@ Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tu
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -125,6 +126,7 @@ Dikkat edin, kırmızı nokta şimdi önizleme alanına dokunduğunuzda veya üz
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -375,7 +377,11 @@ Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmas�
 
 #### Birden çok alan için tek bir olay yöneticisi kullanma {/*using-a-single-event-handler-for-multiple-fields*/}
 
+<<<<<<< HEAD
 Ayrıca obje tanımınızda `[` and `]` ayraçlarını kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
+=======
+You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
+>>>>>>> 2b2d0f2309f49c82cf5bb88ea62fb2e44661c634
 
 <Sandpack>
 
