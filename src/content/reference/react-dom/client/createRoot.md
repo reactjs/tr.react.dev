@@ -45,9 +45,9 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle kök bileşeni için ya
 
 * **opsiyonel** `options`: Bu React kökü için seçenekler içeren bir nesne.
 
-  * <CanaryBadge title="This feature is only available in the Canary channel" /> **optional** `onCaughtError`: Callback called when React catches an error in an Error Boundary. Called with the `error` caught by the Error Boundary, and an `errorInfo` object containing the `componentStack`.
-  * <CanaryBadge title="This feature is only available in the Canary channel" /> **optional** `onUncaughtError`: Callback called when an error is thrown and not caught by an Error Boundary. Called with the `error` that was thrown, and an `errorInfo` object containing the `componentStack`.
-  * **optional** `onRecoverableError`: React'in hatalardan otomatik olarak kurtulduğunda çağrılan callback fonksiyonu. Called with an `error` React throws, and an `errorInfo` object containing the `componentStack`. Some recoverable errors may include the original error cause as `error.cause`.
+  * <CanaryBadge title="Bu özellik yalnızca Canary kanalında mevcuttur" /> **opsiyonel** `onCaughtError`: React bir Hata yakalayıcı bir hata yakaladığında callback yapılır. Hata yakalayıcı tarafından yakalanan `error` ve `componentStack` içeren bir `errorInfo` nesnesi ile çağrılır.
+  * <CanaryBadge title="This feature is only available in the Canary channel" /> **opsiyonel** Bir hata fırlatıldığında ve bir Hata yakalayıcı tarafından yakalanmadığında callback yapılır. Atılan hata ve `componentStack`'i içeren bir `errorInfo` nesnesi ile çağrılır.
+  * **opsiyonel** `onRecoverableError`: React'in hatalardan otomatik olarak kurtulduğunda çağrılan callback fonksiyonu. React'in attığı bir `error` ve `componentStack` içeren bir `errorInfo` nesnesi ile çağrılır. Bazı kurtarılabilir hatalar, `error.cause` olarak orijinal hata nedenini içerebilir.
   * **opsiyonel** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'in kullandığı bir dize öneki. Aynı sayfada birden fazla kök kullanırken çakışmaları önlemek için kullanışlıdır.
 
 
@@ -345,15 +345,15 @@ export default function App({counter}) {
 
 Birden fazla kez `render` çağrısı yapmak nadirdir. Genellikle bileşenleriniz bunun yerine [state güncellemesi](/reference/react/useState) yapacaktır.
 
-### Show a dialog for uncaught errors {/*show-a-dialog-for-uncaught-errors*/}
+### Yakalanmamış hatalar için bir diyaloğu gösterme {/*show-a-dialog-for-uncaught-errors*/}
 
 <Canary>
 
-`onUncaughtError` is only available in the latest React Canary release.
+`onUncaughtError` sadece en son React Canary sürümünde mevcuttur.
 
 </Canary>
 
-By default, React will log all uncaught errors to the console. To implement your own error reporting, you can provide the optional `onUncaughtError` root option:
+Varsayılan olarak, React tüm yakalanmamış hataları konsola kaydeder. Kendi hata raporlamanızı uygulamak için, isteğe bağlı `onUncaughtError` root seçeneğini sağlayabilirsin:
 
 ```js [[1, 6, "onUncaughtError"], [2, 6, "error", 1], [3, 6, "errorInfo"], [4, 10, "componentStack"]]
 import { createRoot } from 'react-dom/client';
@@ -363,7 +363,7 @@ const root = createRoot(
   {
     onUncaughtError: (error, errorInfo) => {
       console.error(
-        'Uncaught error',
+        'Yakalanmamış hata',
         error,
         errorInfo.componentStack
       );
@@ -373,12 +373,13 @@ const root = createRoot(
 root.render(<App />);
 ```
 
-The <CodeStep step={1}>onUncaughtError</CodeStep> option is a function called with two arguments:
+<CodeStep step={1}>onUncaughtError</CodeStep> seçeneği iki bağımsız değişkenle çağrılan bir fonksiyondur:
 
-1. The <CodeStep step={2}>error</CodeStep> that was thrown.
-2. An <CodeStep step={3}>errorInfo</CodeStep> object that contains the <CodeStep step={4}>componentStack</CodeStep> of the error.
+1. Fırlatılan <CodeStep step={2}>hata</CodeStep>.
 
-You can use the `onUncaughtError` root option to display error dialogs:
+2. Hatanın <CodeStep step={4}>componentStack</CodeStep>'ini içeren bir <CodeStep step={3}>errorInfo</CodeStep> nesnesi.
+
+Hata diyalog pencerelerini görüntülemek için `onUncaughtError` kök seçeneğini kullanabilirsin:
 
 <Sandpack>
 
@@ -386,7 +387,7 @@ You can use the `onUncaughtError` root option to display error dialogs:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My app</title>
+  <title>Benim uygulamam</title>
 </head>
 <body>
 <!--
@@ -401,12 +402,12 @@ You can use the `onUncaughtError` root option to display error dialogs:
   <p>
     <pre id="error-body"></pre>
   </p>
-  <h4 class="-mb-20">This error occurred at:</h4>
+  <h4 class="-mb-20">Meydana gelen hata:</h4>
   <pre id="error-component-stack" class="nowrap"></pre>
-  <h4 class="mb-0">Call stack:</h4>
+  <h4 class="mb-0">Çağrı yığını:</h4>
   <pre id="error-stack" class="nowrap"></pre>
   <div id="error-cause">
-    <h4 class="mb-0">Caused by:</h4>
+    <h4 class="mb-0">Sebep olan:</h4>
     <pre id="error-cause-message"></pre>
     <pre id="error-cause-stack" class="nowrap"></pre>
   </div>
@@ -417,7 +418,7 @@ You can use the `onUncaughtError` root option to display error dialogs:
   >
     Close
   </button>
-  <h3 id="error-not-dismissible">This error is not dismissible.</h3>
+  <h3 id="error-not-dismissible">Bu hata göz ardı edilemez.</h3>
 </div>
 <!-- This is the DOM node -->
 <div id="root"></div>
@@ -526,15 +527,15 @@ function reportError({ title, error, componentStack, dismissable }) {
 }
 
 export function reportCaughtError({error, cause, componentStack}) {
-  reportError({ title: "Caught Error", error, componentStack,  dismissable: true});
+  reportError({ title: "Yakalanan Hata", error, componentStack,  dismissable: true});
 }
 
 export function reportUncaughtError({error, cause, componentStack}) {
-  reportError({ title: "Uncaught Error", error, componentStack, dismissable: false });
+  reportError({ title: "Yakalanmamış Hata", error, componentStack, dismissable: false });
 }
 
 export function reportRecoverableError({error, cause, componentStack}) {
-  reportError({ title: "Recoverable Error", error, componentStack,  dismissable: true });
+  reportError({ title: "Kurtarılabilir Hata", error, componentStack,  dismissable: true });
 }
 ```
 
@@ -570,9 +571,9 @@ export default function App() {
   
   return (
     <div>
-      <span>This error shows the error dialog:</span>
+      <span>Bu hata, hata diyaloğunu gösterir:</span>
       <button onClick={() => setThrowError(true)}>
-        Throw error
+        Hata fırlat
       </button>
     </div>
   );
@@ -593,15 +594,15 @@ export default function App() {
 </Sandpack>
 
 
-### Displaying Error Boundary errors {/*displaying-error-boundary-errors*/}
+### Hata yakalayıcı ile ilgili hataları görüntüleme {/*displaying-error-boundary-errors*/}
 
 <Canary>
 
-`onCaughtError` is only available in the latest React Canary release.
+`onCaughtError` sadece en son React Canary sürümünde mevcuttur.
 
 </Canary>
 
-By default, React will log all errors caught by an Error Boundary to `console.error`. To override this behavior, you can provide the optional `onCaughtError` root option to handle errors caught by an [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary):
+Varsayılan olarak, React bir Hata yakalayıcı tarafından yakalanan tüm hataları `console.error` dosyasına kaydeder. Bu davranışı geçersiz kılmak için, bir Hata yakalayıcı tarafından yakalanan hataları işlemek üzere isteğe bağlı `onCaughtError` kök seçeneğini sağlayabilirsin. [Hata yakalayıcı](/reference/react/Component#catching-rendering-errors-with-an-error-boundary):
 
 ```js [[1, 6, "onCaughtError"], [2, 6, "error", 1], [3, 6, "errorInfo"], [4, 10, "componentStack"]]
 import { createRoot } from 'react-dom/client';
@@ -611,7 +612,7 @@ const root = createRoot(
   {
     onCaughtError: (error, errorInfo) => {
       console.error(
-        'Caught error',
+        'Yakalanan hata',
         error,
         errorInfo.componentStack
       );
@@ -621,12 +622,12 @@ const root = createRoot(
 root.render(<App />);
 ```
 
-The <CodeStep step={1}>onCaughtError</CodeStep> option is a function called with two arguments:
+<CodeStep step={1}>onCaughtError</CodeStep> seçeneği iki bağımsız değişkenle çağrılan bir fonksiyondur:
 
-1. The <CodeStep step={2}>error</CodeStep> that was caught by the boundary.
-2. An <CodeStep step={3}>errorInfo</CodeStep> object that contains the <CodeStep step={4}>componentStack</CodeStep> of the error.
+1. Hata yakalayıcı tarafından yakalanan <CodeStep step={2}>hata</CodeStep>.
+2. Hatanın <CodeStep step={4}>componentStack</CodeStep>'ini içeren bir <CodeStep step={3}>errorInfo</CodeStep> nesnesi.
 
-You can use the `onCaughtError` root option to display error dialogs or filter known errors from logging:
+Hata diyologlarını görüntülemek veya bilinen hataları günlükten filtrelemek için `onCaughtError` kök seçeneğini kullanabilirsin:
 
 <Sandpack>
 
@@ -634,7 +635,7 @@ You can use the `onCaughtError` root option to display error dialogs or filter k
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My app</title>
+  <title>Benim uygulamam</title>
 </head>
 <body>
 <!--
@@ -649,12 +650,12 @@ You can use the `onCaughtError` root option to display error dialogs or filter k
   <p>
     <pre id="error-body"></pre>
   </p>
-  <h4 class="-mb-20">This error occurred at:</h4>
+  <h4 class="-mb-20">Meydana gelen hata:</h4>
   <pre id="error-component-stack" class="nowrap"></pre>
-  <h4 class="mb-0">Call stack:</h4>
+  <h4 class="mb-0">Çağrı yığını:</h4>
   <pre id="error-stack" class="nowrap"></pre>
   <div id="error-cause">
-    <h4 class="mb-0">Caused by:</h4>
+    <h4 class="mb-0">Sebep olan:</h4>
     <pre id="error-cause-message"></pre>
     <pre id="error-cause-stack" class="nowrap"></pre>
   </div>
@@ -665,7 +666,7 @@ You can use the `onCaughtError` root option to display error dialogs or filter k
   >
     Close
   </button>
-  <h3 id="error-not-dismissible">This error is not dismissible.</h3>
+  <h3 id="error-not-dismissible">Bu hata göz ardı edilemez.</h3>
 </div>
 <!-- This is the DOM node -->
 <div id="root"></div>
@@ -774,15 +775,15 @@ function reportError({ title, error, componentStack, dismissable }) {
 }
 
 export function reportCaughtError({error, cause, componentStack}) {
-  reportError({ title: "Caught Error", error, componentStack,  dismissable: true});
+  reportError({ title: "Yakalanan Hata", error, componentStack,  dismissable: true});
 }
 
 export function reportUncaughtError({error, cause, componentStack}) {
-  reportError({ title: "Uncaught Error", error, componentStack, dismissable: false });
+  reportError({ title: "Yakalanmamış Hata", error, componentStack, dismissable: false });
 }
 
 export function reportRecoverableError({error, cause, componentStack}) {
-  reportError({ title: "Recoverable Error", error, componentStack,  dismissable: true });
+  reportError({ title: "Kurtarılabilir Hata", error, componentStack,  dismissable: true });
 }
 ```
 
@@ -830,13 +831,13 @@ export default function App() {
         }}
       >
         {error != null && <Throw error={error} />}
-        <span>This error will not show the error dialog:</span>
+        <span>Bu hata, hata diyaloğunu göstermeyecektir:</span>
         <button onClick={handleKnown}>
-          Throw known error
+          Bilinen hatayı fırlat
         </button>
-        <span>This error will show the error dialog:</span>
+        <span>Bu hata, hata diyoloğunu gösterecektir:</span>
         <button onClick={handleUnknown}>
-          Throw unknown error
+          Bilinmeyen bir hata fırlat
         </button>
       </ErrorBoundary>
       
@@ -847,9 +848,9 @@ export default function App() {
 function fallbackRender({ resetErrorBoundary }) {
   return (
     <div role="alert">
-      <h3>Error Boundary</h3>
-      <p>Something went wrong.</p>
-      <button onClick={resetErrorBoundary}>Reset</button>
+      <h3>Hata Yakalayıcı</h3>
+      <p>Bir şeyler ters gitti.</p>
+      <button onClick={resetErrorBoundary}>Sıfırla</button>
     </div>
   );
 }
@@ -877,9 +878,9 @@ function Throw({error}) {
 
 </Sandpack>
 
-### Displaying a dialog for recoverable errors {/*displaying-a-dialog-for-recoverable-errors*/}
+### Kurtarılabilir hatalar için bir diyoloğu görüntüleme {/*displaying-a-dialog-for-recoverable-errors*/}
 
-React may automatically render a component a second time to attempt to recover from an error thrown in render. If successful, React will log a recoverable error to the console to notify the developer. To override this behavior, you can provide the optional `onRecoverableError` root option:
+React, render etme sırasında atılan bir hatadan kurtulmayı denemek için bir bileşeni otomatik olarak ikinci kez render edebilir. Başarılı olursa, React geliştiriciyi bilgilendirmek için konsola kurtarılabilir bir hata günlüğü kaydeder. Bu davranışı geçersiz kılmak için, isteğe bağlı `onRecoverableError` kök seçeneğini sağlayabilirsin:
 
 ```js [[1, 6, "onRecoverableError"], [2, 6, "error", 1], [3, 10, "error.cause"], [4, 6, "errorInfo"], [5, 11, "componentStack"]]
 import { createRoot } from 'react-dom/client';
@@ -889,7 +890,7 @@ const root = createRoot(
   {
     onRecoverableError: (error, errorInfo) => {
       console.error(
-        'Recoverable error',
+        'Kurtarılabilir hata',
         error,
         error.cause,
         errorInfo.componentStack,
@@ -900,12 +901,13 @@ const root = createRoot(
 root.render(<App />);
 ```
 
-The <CodeStep step={1}>onRecoverableError</CodeStep> option is a function called with two arguments:
+<CodeStep step={1}>onRecoverableError</CodeStep> seçeneği iki bağımsız değişkenle çağrılan bir fonksiyondur:
 
-1. The <CodeStep step={2}>error</CodeStep> that React throws. Some errors may include the original cause as <CodeStep step={3}>error.cause</CodeStep>. 
-2. An <CodeStep step={4}>errorInfo</CodeStep> object that contains the <CodeStep step={5}>componentStack</CodeStep> of the error.
+1. React'in fırlattığı <CodeStep step={2}>hata</CodeStep>. Bazı hatalar, <CodeStep step={3}>error.cause</CodeStep> olarak orijinal nedeni içerebilir.
 
-You can use the `onRecoverableError` root option to display error dialogs:
+2. Hatanın <CodeStep step={5}>componentStack</CodeStep>'ini içeren bir <CodeStep step={4}>errorInfo</CodeStep> nesnesi.
+
+Hata diyaloglarını görüntülemek için `onRecoverableError` kök seçeneğini kullanabilirsin:
 
 <Sandpack>
 
@@ -913,7 +915,7 @@ You can use the `onRecoverableError` root option to display error dialogs:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My app</title>
+  <title>Benim uygulamam</title>
 </head>
 <body>
 <!--
@@ -928,12 +930,12 @@ You can use the `onRecoverableError` root option to display error dialogs:
   <p>
     <pre id="error-body"></pre>
   </p>
-  <h4 class="-mb-20">This error occurred at:</h4>
+  <h4 class="-mb-20">Meydana gelen hata:</h4>
   <pre id="error-component-stack" class="nowrap"></pre>
-  <h4 class="mb-0">Call stack:</h4>
+  <h4 class="mb-0">Çağrı yığını:</h4>
   <pre id="error-stack" class="nowrap"></pre>
   <div id="error-cause">
-    <h4 class="mb-0">Caused by:</h4>
+    <h4 class="mb-0">Sebep olan:</h4>
     <pre id="error-cause-message"></pre>
     <pre id="error-cause-stack" class="nowrap"></pre>
   </div>
@@ -944,7 +946,7 @@ You can use the `onRecoverableError` root option to display error dialogs:
   >
     Close
   </button>
-  <h3 id="error-not-dismissible">This error is not dismissible.</h3>
+  <h3 id="error-not-dismissible">Bu hata göz ardı edilemez.</h3>
 </div>
 <!-- This is the DOM node -->
 <div id="root"></div>
@@ -1053,15 +1055,15 @@ function reportError({ title, error, componentStack, dismissable }) {
 }
 
 export function reportCaughtError({error, cause, componentStack}) {
-  reportError({ title: "Caught Error", error, componentStack,  dismissable: true});
+  reportError({ title: "Yakalanan Hata", error, componentStack,  dismissable: true});
 }
 
 export function reportUncaughtError({error, cause, componentStack}) {
-  reportError({ title: "Uncaught Error", error, componentStack, dismissable: false });
+  reportError({ title: "Yakalanmamış Hata", error, componentStack, dismissable: false });
 }
 
 export function reportRecoverableError({error, cause, componentStack}) {
-  reportError({ title: "Recoverable Error", error, componentStack,  dismissable: true });
+  reportError({ title: "Kurtarılabilir Hata", error, componentStack,  dismissable: true });
 }
 ```
 
@@ -1097,8 +1099,8 @@ export default function App() {
         fallbackRender={fallbackRender}
       >
         {!errorThrown && <Throw />}
-        <p>This component threw an error, but recovered during a second render.</p>
-        <p>Since it recovered, no Error Boundary was shown, but <code>onRecoverableError</code> was used to show an error dialog.</p>
+        <p>Bu bileşen bir hata fırlattı, ancak ikinci bir render etme sırasında düzeldi.</p>
+        <p>Kurtarıldığı için Hata yakalayıcı gösterilmedi, ancak bir hata diyoloğu göstermek için <code>onRecoverableError</code> kullanıldı.</p>
       </ErrorBoundary>
       
     </>
@@ -1108,8 +1110,8 @@ export default function App() {
 function fallbackRender() {
   return (
     <div role="alert">
-      <h3>Error Boundary</h3>
-      <p>Something went wrong.</p>
+      <h3>Hata Yakalayıcı</h3>
+      <p>Bir şeyler ters gitti.</p>
     </div>
   );
 }
@@ -1155,17 +1157,17 @@ Bunu yapana kadar hiçbir şey görüntülenmez.
 
 ---
 
-### I'm getting an error: "You passed a second argument to root.render" {/*im-getting-an-error-you-passed-a-second-argument-to-root-render*/}
+### Bir hata alıyorum: "root.render'a ikinci bir argüman geçtiniz" {/*im-getting-an-error-you-passed-a-second-argument-to-root-render*/}
 
-A common mistake is to pass the options for `createRoot` to `root.render(...)`:
+Sık yapılan bir hata, `createRoot` seçeneklerini `root.render(...)` öğesine aktarmaktır:
 
 <ConsoleBlock level="error">
 
-Warning: You passed a second argument to root.render(...) but it only accepts one argument.
+Uyarı: root.render(...) öğesine ikinci bir bağımsız değişken ilettiniz, ancak bu öğe yalnızca bir bağımsız değişken kabul eder.
 
 </ConsoleBlock>
 
-To fix, pass the root options to `createRoot(...)`, not `root.render(...)`:
+Düzeltmek için, kök seçeneklerini `root.render(...)` yerine `createRoot(...)` öğesine aktarın:
 ```js {2,5}
 // 🚩 Wrong: root.render only takes one argument.
 root.render(App, {onUncaughtError});
