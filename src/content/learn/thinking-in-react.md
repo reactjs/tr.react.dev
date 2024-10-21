@@ -262,7 +262,7 @@ Uyguamanızdaki her state parçası için:
 Şimdi o ikisi için stratejimizi gözden geçirelim:
 
 1. **State kullanan bileşenleri belirleyin:**
-    * `ProductTable` stat'e göre ürün listesini filtrelemesi gerekiyor. (arama metni ve checkbox değeri).
+    * `ProductTable` state'e göre ürün listesini filtrelemesi gerekiyor. (arama metni ve checkbox değeri).
     * `SearchBar` state'i göstermesi gerekiyor. (arama metni ve checkbox değeri).
 2. **Ortak üst bileşeni bulun:** İki bileşenin de ortak olarak paylaştığı üst bileşen `FilterableProductTable` bileşenidir.
 3. **State'in barınacağı yere karar verin**: Filtre metni ve checkbox için gerekli state değerlerini `FilterableProductTable` bileşeninde tutacağız.

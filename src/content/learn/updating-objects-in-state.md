@@ -55,6 +55,7 @@ Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tu
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -125,6 +126,7 @@ Dikkat edin, kırmızı nokta şimdi önizleme alanına dokunduğunuzda veya üz
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -375,7 +377,7 @@ Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmas�
 
 #### Birden çok alan için tek bir olay yöneticisi kullanma {/*using-a-single-event-handler-for-multiple-fields*/}
 
-Ayrıca obje tanımınızda `[` and `]` ayraçlarını kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
+Ayrıca obje tanımınızda `[` and `]` parantezlerini kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
 
 <Sandpack>
 

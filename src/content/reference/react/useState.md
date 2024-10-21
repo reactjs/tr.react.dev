@@ -85,6 +85,8 @@ function handleClick() {
 
 * React [state güncellemelerini toplu halde(batches) yapar.](/learn/queueing-a-series-of-state-updates) React, ekranı **tüm olay yöneticileri çalıştıktan** ve `set` fonksyionlarını çağırdıktan sonra günceller. Böylelikle tek bir olay sırasında olacak birden fazla yeniden render engellenmiş olur. Nadiren de olsa, örneğin DOM'a erişmek istediğinizde, React'ı ekranı erken güncellemeye zorlamak için [`flushSync`](/reference/react-dom/flushSync) kullanabilirsiniz.
 
+* The `set` function has a stable identity, so you will often see it omitted from Effect dependencies, but including it will not cause the Effect to fire. If the linter lets you omit a dependency without errors, it is safe to do. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
+
 * *Render sırasında* `set` fonksiyonu yalnızca mevcut render edilen bileşenin içinde çağırılabilir. React, bileşenin çıktısını görmezden gelecektir ve hemen yeni state ile birlikte render etmeyi deneyecektir. Bu modele nadiren ihtiyaç duyulur ama bunu *önceki render'lardan gelen bilgileri saklamak* için kullanabilirsiniz. [Aşağıdaki örneği inceleyin.](#storing-information-from-previous-renders)
 
 * Strict Modda React, [kazara oluşan saf olmayan şeyleri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **güncelleyici fonksiyonunuzu iki defa** çağıracaktır. Bu sadece geliştirme sırasında görülen bir davranıştır ve son ürünü etkilemez. Eğer güncelleyici fonksiyonunuz saf ise (ki öyle olmalı), bu olması gereken davranışı etkilememelidir. Yapılan çağrılardan birinin sonucu görmezden gelinecektir.

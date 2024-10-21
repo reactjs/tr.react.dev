@@ -52,6 +52,7 @@ function MyComponent() {
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
 * `useReducer`, bir Hook olduğundan, yalnızca bileşeninizin **üst düzeyinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullar içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen oluşturun ve state'i taşıyın.
+* The `dispatch` function has a stable identity, so you will often see it omitted from Effect dependencies, but including it will not cause the Effect to fire. If the linter lets you omit a dependency without errors, it is safe to do. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
 * Strict Mode'da, React, [tesadüfi karışıklıkları bulmanıza yardımcı olmak için](#my-reducer-or-initializer-function-runs-twice) reducer ve başlatıcı fonksiyonunuzu **iki kez çağırır**. Bu, yalnızca geliştirme amaçlı bir davranıştır ve canlı ortamı etkilemez. Reducer ve başlatıcı fonksiyonlarınız saf halde ise (olmaları gerektiği gibi), bu mantığınızı etkilememelidir. Çağrılardan birinin sonucu yoksayılır.
 
 ---
