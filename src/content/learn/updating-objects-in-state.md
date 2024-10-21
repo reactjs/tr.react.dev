@@ -377,11 +377,7 @@ Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmas�
 
 #### Birden çok alan için tek bir olay yöneticisi kullanma {/*using-a-single-event-handler-for-multiple-fields*/}
 
-<<<<<<< HEAD
-Ayrıca obje tanımınızda `[` and `]` ayraçlarını kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
-=======
-You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
->>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
+Ayrıca obje tanımınızda `[` and `]` parantezlerini kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
 
 <Sandpack>
 

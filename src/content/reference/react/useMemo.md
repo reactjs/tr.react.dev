@@ -1056,9 +1056,6 @@ Uygulamanızı gerçekte neyin yavaşlattığına dair gerçekçi bir fikir edin
 
 ---
 
-<<<<<<< HEAD
-### Başka bir Hook'un bağımlılığını memoize etme {/*memoizing-a-dependency-of-another-hook*/}
-=======
 ### Preventing an Effect from firing too often {/*preventing-an-effect-from-firing-too-often*/}
 
 Sometimes, you might want to use a value inside an [Effect:](/learn/synchronizing-with-effects)
@@ -1136,8 +1133,7 @@ function ChatRoom({ roomId }) {
 Now your code is simpler and doesn't need `useMemo`. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
 
 
-### Memoizing a dependency of another Hook {/*memoizing-a-dependency-of-another-hook*/}
->>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
+### Başka bir Hook'un bağımlılığını memoize etme {/*memoizing-a-dependency-of-another-hook*/}
 
 Doğrudan bileşen gövdesinde oluşturulan bir nesneye bağlı olan bir hesaplamanız olduğunu varsayalım:
 

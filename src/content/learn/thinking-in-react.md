@@ -261,19 +261,11 @@ Uyguamanızdaki her state parçası için:
 
 Şimdi o ikisi için stratejimizi gözden geçirelim:
 
-<<<<<<< HEAD
 1. **State kullanan bileşenleri belirleyin:**
-    * `ProductTable` stat'e göre ürün listesini filtrelemesi gerekiyor. (arama metni ve checkbox değeri).
+    * `ProductTable` state'e göre ürün listesini filtrelemesi gerekiyor. (arama metni ve checkbox değeri).
     * `SearchBar` state'i göstermesi gerekiyor. (arama metni ve checkbox değeri).
 2. **Ortak üst bileşeni bulun:** İki bileşenin de ortak olarak paylaştığı üst bileşen `FilterableProductTable` bileşenidir.
 3. **State'in barınacağı yere karar verin**: Filtre metni ve checkbox için gerekli state değerlerini `FilterableProductTable` bileşeninde tutacağız.
-=======
-1. **Identify components that use state:**
-    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
-    * `SearchBar` needs to display that state (search text and checkbox value).
-2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
-3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
->>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
 
 Sonuç olarak state değerleri `FilterableProductTable` bileşeninde barınacak.
 

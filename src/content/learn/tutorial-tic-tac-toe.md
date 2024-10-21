@@ -1133,11 +1133,7 @@ export default function Board() {
 
 <Note>
 
-<<<<<<< HEAD
 JavaScript [closure'ları](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) destekler. Bu da demektir ki bir iç fonksiyon (`handleClick` gibi) bir dış fonksiyonda (`Board` gibi) tanımlanan değişkenlere ve fonksiyonlar ulaşabilir. `handleClick` fonksiyonu `squares` state'ini okuyabilir ve `setSquares` metodunu çağırabilir çünkü her ikisi de `Board` fonksiyonu içinde tanımlanmıştır.
-=======
-JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in an outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
->>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
 
 </Note>
 
