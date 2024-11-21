@@ -186,7 +186,7 @@
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
-          "title": "Synchronizing with Effects",
+          "title": "Efektler ile Senkronize Etme",
           "path": "/learn/synchronizing-with-effects"
         },
         {
@@ -206,7 +206,7 @@
           "path": "/learn/removing-effect-dependencies"
         },
         {
-          "title": "Reusing Logic with Custom Hooks",
+          "title": "Özel Hook'lar Kullanarak Mantığı Yeniden Kullanma",
           "path": "/learn/reusing-logic-with-custom-hooks"
         }
       ]
