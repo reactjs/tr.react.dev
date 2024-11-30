@@ -4,13 +4,13 @@ title: findDOMNode
 
 <Deprecated>
 
-This API will be removed in a future major version of React. [See the alternatives.](#alternatives)
+Bu API, React'in gelecekteki bir ana sürümünde kaldırılacaktır. [Alternatif API'ları görüntüle.](#alternatives)
 
 </Deprecated>
 
 <Intro>
 
-`findDOMNode` finds the browser DOM node for a React [class component](/reference/react/Component) instance.
+`findDOMNode`, bir [sınıf bileşeni](/reference/react/Component) nesnesine ait tarayıcı DOM düğümünü döndürür.
 
 ```js
 const domNode = findDOMNode(componentInstance)
@@ -22,11 +22,11 @@ const domNode = findDOMNode(componentInstance)
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `findDOMNode(componentInstance)` {/*finddomnode*/}
 
-Call `findDOMNode` to find the browser DOM node for a given React [class component](/reference/react/Component) instance.
+Bir React [sınıf bileşenine](/reference/react/Component) ait DOM düğümünü bulmak için `findDOMNode` fonksiyonunu çağırın.
 
 ```js
 import { findDOMNode } from 'react-dom';
@@ -34,34 +34,35 @@ import { findDOMNode } from 'react-dom';
 const domNode = findDOMNode(componentInstance);
 ```
 
-[See more examples below.](#usage)
+[Daha fazla kullanım örneği için buraya tıklayın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `componentInstance`: An instance of the [`Component`](/reference/react/Component) subclass. For example, `this` inside a class component.
+* `componentInstance`: [`Bileşene`](/reference/react/Component) ait nesneyi ifade eder. Örnekle, React sınıf bileşeni içerisinde kullanılan `this` işaretcisi parametre olarak kullanılabilir.
 
 
-#### Returns {/*returns*/}
+#### Dönüş Değerleri {/*returns*/}
 
-`findDOMNode` returns the first closest browser DOM node within the given `componentInstance`. When a component renders to `null`, or renders `false`, `findDOMNode` returns `null`. When a component renders to a string, `findDOMNode` returns a text DOM node containing that value.
+`findDOMNode`, verilen `componentInstance` bileşenini içeren en yakın DOM düğümünü döndürür. Eğer bir bileşen `null` veya `false` olarak render edilirse, `findDOMNode` fonksiyonu `null` değerini döndürür. Eğer bileşen sadece metin içerecek şekilde render edilirse, `findDOMNode`, o değeri içeren bir metin DOM nesnesi döndürür.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* A component may return an array or a [Fragment](/reference/react/Fragment) with multiple children. In that case `findDOMNode`, will return the DOM node corresponding to the first non-empty child.
+* React bileşeni bazı durumlarda bir [Fragment](/reference/react/Fragment) ya da bir dizi içerebilir. Bu durumda `findDOMNode` fonsiyonu içi boş olmayan ilk alt nesneyi döndürecektir.
 
-* `findDOMNode` only works on mounted components (that is, components that have been placed in the DOM). If you try to call this on a component that has not been mounted yet (like calling `findDOMNode()` in `render()` on a component that has yet to be created), an exception will be thrown.
+* `findDOMNode` fonksiyonu sadece render edilmiş bileşenlerde çalışır. (Yani, bir bileşenin DOM üzerinde bir yer edinmiş olması gerekir). Eğer render edilmemiş bir bileşen için `findDOMNode` fonksiyonunu çağırmaya çalışırsanız (Örn: `findDOMNode()` fonksiyonunu, henüz oluşturulmamış bir bileşenin `render()` fonksiyonu içerisinde çağırırsanız) uygulama genelinde bir hata fırlatılır ve uygulama çalışmaz.
 
-* `findDOMNode` only returns the result at the time of your call. If a child component renders a different node later, there is no way for you to be notified of this change.
+* `findDOMNode` fonksiyonu sadece çağırıldığı andaki sonucu döndürür. Eğer alt bileşen daha sonradan farklı bir node render eder ise bu değişimden haberdar olmak mümkün değildir.
 
-* `findDOMNode` accepts a class component instance, so it can't be used with function components.
+* `findDOMNode` sadece React sınıf bileşenleri ile çalışır, React fonksiyon bileşeni yapısı ile kullanılamaz.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Finding the root DOM node of a class component {/*finding-the-root-dom-node-of-a-class-component*/}
+### Sınıf bileşeninin ana DOM objesinin bulunması {/*finding-the-root-dom-node-of-a-class-component*/}
 
-Call `findDOMNode` with a [class component](/reference/react/Component) instance (usually, `this`) to find the DOM node it has rendered.
+Render edilmiş DOM düğümünü bulabilmek için `findDOMNode` fonksiyonunu bir React sınıf bileşeni içerisinde çağırın. (React sınıf bileşenine `this` niteliğini kullanarak erişebilirsiniz)
+
 
 ```js {3}
 class AutoselectingInput extends Component {
@@ -71,16 +72,24 @@ class AutoselectingInput extends Component {
   }
 
   render() {
-    return <input defaultValue="Hello" />
+    return <input defaultValue="Merhaba" />
   }
 }
 ```
 
-Here, the `input` variable will be set to the `<input>` DOM element. This lets you do something with it. For example, when clicking "Show example" below mounts the input, [`input.select()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select) selects all text in the input:
+Yukarıdaki kod parçacığında `ìnput` değişkeni `findDOMNode` fonksiyonu aracılığı ile render metodu içerisindeki `<input>` DOM nesnesine ulaşır.
+
+Şimdi ulaşılan input nesnesiyle bir şeyler yapalım. Bir `show` state'i oluşturalım ve varsayılan değeri `false` olsun. `Göster` buton elementi aracılığı ile state'i güncelleyelim. Güncellenen `show` state'i ile `<AutoSelectingInput />` bileşeni render edilsin.
+
+Alt tarafta gerekli kaynak kodu görüntüleyebilirsiniz, şimdi de neler olduğunu açıklayalım.
+
+`Göster` butonuna tıklandığında `AutoselectingInput` bileşeni render edilir ve tarayıcı ekranında görünür hale gelir. Ardından `findDOMNode` fonksiyonu çağrılarak input nesnesi bulunur.
+
+Bulunan nesnede [`input.select()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select) metodu aracılığı ile içinde yazılı olan `Merhaba` yazısı seçili olarak gösterilir.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -89,7 +98,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(true)}>
-        Show example
+        Göster
       </button>
       <hr />
       {show && <AutoselectingInput />}
@@ -98,7 +107,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
@@ -109,7 +118,7 @@ class AutoselectingInput extends Component {
   }
 
   render() {
-    return <input defaultValue="Hello" />
+    return <input defaultValue="Merhaba" />
   }
 }
 
@@ -120,15 +129,15 @@ export default AutoselectingInput;
 
 ---
 
-## Alternatives {/*alternatives*/}
+## Alternatifler {/*alternatives*/}
 
-### Reading component's own DOM node from a ref {/*reading-components-own-dom-node-from-a-ref*/}
+### Referans değerinden bileşene ait DOM nesnesine ulaşma {/*reading-components-own-dom-node-from-a-ref*/}
 
-Code using `findDOMNode` is fragile because the connection between the JSX node and the code manipulating the corresponding DOM node is not explicit. For example, try wrapping this `<input />` into a `<div>`:
+`findDOMNode` fonksiyonunun kullanıldığı kodlar kırılgan kodlardır. Çünkü JSX nesnesi ile DOM nesnesi arasındaki bağlantı açık bir şekilde ifade edilmemektedir. Örn, kod içerisindeki `<input />` kısmını `<div>` ile sarmayı deneyelim:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -137,7 +146,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(true)}>
-        Show example
+        Göster
       </button>
       <hr />
       {show && <AutoselectingInput />}
@@ -146,7 +155,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
@@ -156,7 +165,7 @@ class AutoselectingInput extends Component {
     input.select()
   }
   render() {
-    return <input defaultValue="Hello" />
+    return <input defaultValue="Merhaba" />
   }
 }
 
@@ -165,13 +174,19 @@ export default AutoselectingInput;
 
 </Sandpack>
 
-This will break the code because now, `findDOMNode(this)` finds the `<div>` DOM node, but the code expects an `<input>` DOM node. To avoid these kinds of problems, use [`createRef`](/reference/react/createRef) to manage a specific DOM node.
+Bu kullanım kodun çalışmasına engel olacaktır. Çünkü `findDOMNode` geriye `<div>` DOM düğümünü döndürecektir fakat kod dönüş değerinin `<input />` DOM nesnesi olmasını bekler.
 
-In this example, `findDOMNode` is no longer used. Instead, `inputRef = createRef(null)` is defined as an instance field on the class. To read the DOM node from it, you can use `this.inputRef.current`. To attach it to the JSX, you render `<input ref={this.inputRef} />`. This connects the code using the DOM node to its JSX:
+Bu tür problemlerin önüne geçmek spesifik bir DOM nesnesi seçebilen için [`createRef`](/reference/react/createRef) fonksiyonunu kullanın.
+
+Alt kısımdaki örnekte `findDOMNode` yerine `createRef`'in nasıl kullanıdğını daha iyi anlayabilirsiniz.
+
+Bu örnekte, `ìnputRef = createRef(null)` kodunda `null` değer tanımlamasına sahip yeni bir referans oluşturduk. Oluşturduğumuz bu referansı `ref={this.inputRef}` niteliği aracılığıyla `input` elementine tanımladık.
+
+Bileşen oluşturulduğunda ise `this.inputRef.current` notasyonu ile DOM nesnesine ulaştık ve `input.select()` metodunu yeniden kullanılabilir hale getirdik.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -189,7 +204,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { createRef, Component } from 'react';
 
 class AutoselectingInput extends Component {
@@ -212,11 +227,13 @@ export default AutoselectingInput;
 
 </Sandpack>
 
-In modern React without class components, the equivalent code would call [`useRef`](/reference/react/useRef) instead:
+Bahsettiğimiz üzere `findDOMNode` fonksiyon bileşenlerini desteklemiyordu. Referans sisteminde sınırlama olmadan fonksiyon bileşenlerinde de kullanabiliyoruz.
+
+Fonksiyon bileşenlerindeki referans kullanımında `createRef` yerini [`useRef`](/reference/react/useRef) hook'u almakta.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -225,7 +242,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(true)}>
-        Show example
+        Göster
       </button>
       <hr />
       {show && <AutoselectingInput />}
@@ -234,7 +251,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { useRef, useEffect } from 'react';
 
 export default function AutoselectingInput() {
@@ -245,23 +262,23 @@ export default function AutoselectingInput() {
     input.select();
   }, []);
 
-  return <input ref={inputRef} defaultValue="Hello" />
+  return <input ref={inputRef} defaultValue="Merhaba" />
 }
 ```
 
 </Sandpack>
 
-[Read more about manipulating the DOM with refs.](/learn/manipulating-the-dom-with-refs)
+[Ref'ler ile DOM manipülasyonu hakkında daha fazla bilgi almak için tıklayın.](/learn/manipulating-the-dom-with-refs)
 
 ---
 
-### Reading a child component's DOM node from a forwarded ref {/*reading-a-child-components-dom-node-from-a-forwarded-ref*/}
+### Alt bileşene ait DOM nesnesine forwarded ref aracılığı ile ulaşma {/*reading-a-child-components-dom-node-from-a-forwarded-ref*/}
 
-In this example, `findDOMNode(this)` finds a DOM node that belongs to another component. The `AutoselectingInput` renders `MyInput`, which is your own component that renders a browser `<input>`.
+Bu örnekte, `findDOMNode(this)` ile başka bir bileşene ait DOM düğümünü bulacağız. `AutoselectingInput` bileşeni, `input` elementinin bulunduğu `MyInput` bileşenini render edecek ve `findDOMNode(this)` fonksiyonunu kullanarak `input` elementine ulaşmaya çalışacağız.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -279,7 +296,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import MyInput from './MyInput.js';
@@ -297,7 +314,7 @@ class AutoselectingInput extends Component {
 export default AutoselectingInput;
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 export default function MyInput() {
   return <input defaultValue="Hello" />;
 }
@@ -305,18 +322,18 @@ export default function MyInput() {
 
 </Sandpack>
 
-Notice that calling `findDOMNode(this)` inside `AutoselectingInput` still gives you the DOM `<input>`--even though the JSX for this `<input>` is hidden inside the `MyInput` component. This seems convenient for the above example, but it leads to fragile code. Imagine that you wanted to edit `MyInput` later and add a wrapper `<div>` around it. This would break the code of `AutoselectingInput` (which expects to find an `<input>`).
+`AutoselectingInput` içindeki `findDOMNode(this)` çağrısının size hala DOM `<input>` verdiğini unutmayın; bu `<input>` için JSX `MyInput` bileşeninin içinde gizli olsa bile. Bu, yukarıdaki örnek için uygun gibi görünse de kodun kırılgan olmasına neden olur. Daha sonra `MyInput`'u düzenlemek ve etrafına bir `<div>` sarmalayıcısı eklemek istediğinizi düşünün. Bu durumda, (bir `<input>` bulmayı bekleyen) `AutoselectingInput` bileşeni doğru çalışmayacaktır.
 
-To replace `findDOMNode` in this example, the two components need to coordinate:
+`findDOMNode` yerine ref kullanabilmemiz için iki bileşende de belirli düzenlemeler yapmalıyız.
 
-1. `AutoSelectingInput` should declare a ref, like [in the earlier example](#reading-components-own-dom-node-from-a-ref), and pass it to `<MyInput>`.
-2. `MyInput` should be declared with [`forwardRef`](/reference/react/forwardRef) to take that ref and forward it down to the `<input>` node.
+1. [Önceki örneklerde](#reading-components-own-dom-node-from-a-ref) işlediğimiz üzere `AutoSelectingInput` içinde bir referans tanımlamalıyız ve bu referansı `MyInput` bileşenine iletmeliyiz.
+2. `MyInput` bileşeni ise [`forwardRef`](/reference/react/forwardRef) aracılığı ile bir referans değer döndürmeli ki ortadaki iki referans değeri birbiriyle eşleşsin ve üst bileşen yapısında `input` elementine ait referansı kullanabilelim.
 
-This version does that, so it no longer needs `findDOMNode`:
+Nihai versiyonda artık `findDOMNode` kullanmadan başka bir bileşen içindeki DOM nesnesine erişebildik:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -325,7 +342,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(true)}>
-        Show example
+        Göster
       </button>
       <hr />
       {show && <AutoselectingInput />}
@@ -334,7 +351,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { createRef, Component } from 'react';
 import MyInput from './MyInput.js';
 
@@ -356,11 +373,11 @@ class AutoselectingInput extends Component {
 export default AutoselectingInput;
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
-  return <input ref={ref} defaultValue="Hello" />;
+  return <input ref={ref} defaultValue="Merhaba" />;
 });
 
 export default MyInput;
@@ -368,11 +385,11 @@ export default MyInput;
 
 </Sandpack>
 
-Here is how this code would look like with function components instead of classes:
+Aşağıdaki örnek bu kodun sınıf bileşeni yerine fonksiyon bileşeninde nasıl kullanılacağını gösteriyor:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AutoselectingInput from './AutoselectingInput.js';
 
@@ -381,7 +398,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(true)}>
-        Show example
+        Göster
       </button>
       <hr />
       {show && <AutoselectingInput />}
@@ -390,7 +407,7 @@ export default function App() {
 }
 ```
 
-```js AutoselectingInput.js active
+```js src/AutoselectingInput.js active
 import { useRef, useEffect } from 'react';
 import MyInput from './MyInput.js';
 
@@ -402,15 +419,15 @@ export default function AutoselectingInput() {
     input.select();
   }, []);
 
-  return <MyInput ref={inputRef} defaultValue="Hello" />
+  return <MyInput ref={inputRef} defaultValue="Merhaba" />
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
-  return <input ref={ref} defaultValue="Hello" />;
+  return <input ref={ref} defaultValue="Merhaba" />;
 });
 
 export default MyInput;
@@ -420,11 +437,13 @@ export default MyInput;
 
 ---
 
-### Adding a wrapper `<div>` element {/*adding-a-wrapper-div-element*/}
+### Kapsayıcı `<div>` elementi ekleme {/*adding-a-wrapper-div-element*/}
 
-Sometimes a component needs to know the position and size of its children. This makes it tempting to find the children with `findDOMNode(this)`, and then use DOM methods like [`getBoundingClientRect`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) for measurements.
+Bazen bir bileşenin alt bileşenlerinin konumunu ve boyutunu bilmesi gerekir. Bu durum, `findDOMNode(this)` ile bulunan nesnelerle ve ardından ölçümler için bu nesnelerin [`getBoundingClientRect`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) gibi DOM yöntemleriyle kullanılmasıyla sonuçlanır.
 
-There is currently no direct equivalent for this use case, which is why `findDOMNode` is deprecated but is not yet removed completely from React. In the meantime, you can try rendering a wrapper `<div>` node around the content as a workaround, and getting a ref to that node. However, extra wrappers can break styling.
+Şu anda bu kullanım için doğrudan bir alternatif yoktur, bu nedenle `findDOMNode` kullanımdan kaldırılmış olsa da henüz React'tan tamamen kaldırılmamıştır.
+
+Bu durumda çözüm olarak içeriği kapasayacak bir `<div>` elementi oluşturabilirsiniz ve oluşturduğunuz `<div>` elementine bir referans tanımlayabilirsiniz. Ancak unutmamak gerekir ki ekstra oluşturduğunuz kapsayıcılar stil bozulmalarına sebep olabilir.
 
 ```js
 <div ref={someRef}>
@@ -432,4 +451,4 @@ There is currently no direct equivalent for this use case, which is why `findDOM
 </div>
 ```
 
-This also applies to focusing and scrolling to arbitrary children.
+Bu aynı zamanda alt bileşenlere `focusing` ve `scrolling` olayları için de geçerlidir.

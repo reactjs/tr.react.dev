@@ -43,7 +43,7 @@ Depodaki verinin anlık görüntüsünü döndürür. Argüman olarak iki fonksi
 
 #### Parametreler {/*parameters*/}
 
-* `subscribe`: Bir `callback` argümanı alan ve depoya abone olan fonksiyondur. Depo değiştiğinde, iletilen `callback` çalıştırılır. Bu, bileşenin yeniden render edilmesine neden olur. `subscribe` fonksiyonu, aboneliği temizleyen bir fonksiyon döndürmelidir.
+* `subscribe`: Bir `callback` argümanı alan ve depoya abone olan fonksiyondur. Depo değiştiğinde, iletilen `callback` çalıştırılır. Bu, bileşeni yeniden render eder ve (ihtiyac varsa) `getSnapshot` i yeniden cagirir. `subscribe` fonksiyonu, aboneliği temizleyen bir fonksiyon döndürmelidir.
 
 * `getSnapshot`: Bileşenin ihtiyaç duyduğu depodaki verilerin anlık görüntüsünü döndüren fonksiyondur. Veri deposu değişmemişse, `getSnapshot`'a yapılan çağrılar aynı değeri döndürmelidir. Depo değişirse ve döndürülen değer farklıysa ([`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ile karşılaştırıldığında), bileşen yeniden render edilir.
 
@@ -58,6 +58,26 @@ Render mantığınızda kullanabileceğiniz deponun o anki anlık görüntüsüd
 * `getSnapshot` tarafından döndürülen depo anlık görüntüsü değiştirilemez (immutable) olmalıdır. Depoda değiştirilebilir veri varsa veriler değiştiğinde yeni bir anlık görüntü döndürün. Aksi takdirde, önbelleğe alınmış en son anlık görüntüyü döndürün.
 
 * Yeniden render esnasında farklı bir `subscribe` fonksiyonu geçildiğinde React, yeni geçilen `subscribe` fonksiyonu ile depoya yeniden abone olur. `subscribe`'ı bileşenin dışında tanımlayarak bunu önleyebilirsiniz.
+
+* If the store is mutated during a [non-blocking Transition update](/reference/react/useTransition), React will fall back to performing that update as blocking. Specifically, for every Transition update, React will call `getSnapshot` a second time just before applying changes to the DOM. If it returns a different value than when it was called originally, React will restart the update from scratch, this time applying it as a blocking update, to ensure that every component on screen is reflecting the same version of the store.
+
+* It's not recommended to _suspend_ a render based on a store value returned by `useSyncExternalStore`. The reason is that mutations to the external store cannot be marked as [non-blocking Transition updates](/reference/react/useTransition), so they will trigger the nearest [`Suspense` fallback](/reference/react/Suspense), replacing already-rendered content on screen with a loading spinner, which typically makes a poor UX.
+
+  For example, the following are discouraged:
+
+  ```js
+  const LazyProductDetailPage = lazy(() => import('./ProductDetailPage.js'));
+
+  function ShoppingApp() {
+    const selectedProductId = useSyncExternalStore(...);
+
+    // ❌ Calling `use` with a Promise dependent on `selectedProductId`
+    const data = use(fetchItem(selectedProductId))
+
+    // ❌ Conditionally rendering a lazy component based on `selectedProductId`
+    return selectedProductId != null ? <LazyProductDetailPage /> : <FeaturedProducts />;
+  }
+  ```
 
 ---
 
@@ -113,7 +133,7 @@ export default function TodosApp() {
 }
 ```
 
-```js todoStore.js
+```js src/todoStore.js
 // Bu dosya, React ile entegre etmeniz gerekebilecek
 // üçüncü taraf bir depo örneğidir.
 
@@ -287,7 +307,7 @@ export default function App() {
 }
 ```
 
-```js useOnlineStatus.js
+```js src/useOnlineStatus.js
 import { useSyncExternalStore } from 'react';
 
 export function useOnlineStatus() {
@@ -350,7 +370,7 @@ function subscribe(callback) {
 - HTML oluşturulurken sunucuda çalışır.
 - React'ın sunucu HTML'ini alıp etkileşimli haline getirirken yani [hidratlama](/reference/react-dom/client/hydrateRoot) yaparken istemcide çalışır.
 
-Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) için bu argümanı atlayın.
+Bu durum, uygulama etkileşimli hale gelmeden önce kullanılacak olan başlangıç anlık görüntü değeri vermenizi sağlar. Sunucu taraflı render için anlamlı bir başlangıç değeriniz yoksa, [istemcide render işlemini zorlamak](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) için bu argümanı atlayın.
 
 <Note>
 

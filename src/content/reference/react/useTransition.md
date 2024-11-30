@@ -44,14 +44,11 @@ function TabContainer() {
 1. Transition işleminin beklenip beklenmediğini söyleyen `isPending` belirteci.
 2. State güncellemesini transition olarak işaretlemenizi sağlayan [`startTransition` fonksiyonu.](#starttransition)
 
-
 ---
 
 ### `startTransition` fonksiyonu {/*starttransition*/}
 
 `useTransition` tarafından döndürülen `startTransition` fonksiyonu, bir state güncellemesini transition (ertelenen güncelleme) olarak işaretlemenize olanak tanır.
-
-
 
 ```js {6,8}
 function TabContainer() {
@@ -69,7 +66,7 @@ function TabContainer() {
 
 #### Parametreler {/*starttransition-parameters*/}
 
-* `scope`: Bir veya birden fazla set fonksiyonu kullanarak bazı state’leri güncelleyen bir fonksiyondur. React, scope fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın scope‘u hemen çalıştırır. Bu güncellemeler engelleme yapmaz (non-blocking) ve gereksiz yükleme animasyonları göstermez.
+* `scope`: Bir veya birden fazla [set fonksiyonu](/reference/react/useState#setstate) kullanarak bazı state’leri güncelleyen bir fonksiyondur. React, scope fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın scope‘u hemen çalıştırır. Bu güncellemeler engelleme yapmaz [(non-blocking)](#marking-a-state-update-as-a-non-blocking-transition) ve [gereksiz yükleme animasyonları göstermez](#preventing-unwanted-loading-indicators).
 
 #### Dönen değerler {/*starttransition-returns*/}
 
@@ -81,8 +78,9 @@ function TabContainer() {
 
 * Bir güncellemeyi transition olarak kullanmak için, ilgili state’in `set` fonksiyonuna erişebilmeniz gerekiyor. Eğer bir prop veya özel bir Hook dönüş değerine yanıt olarak transition başlatmak isterseniz, bunun yerine [`useDeferredValue`](/reference/react/useDeferredValue) özelliğini kullanmayı deneyebilirsiniz.
 
-
 * `startTransition`‘a ilettiğiniz fonksiyon, eşzamanlı olarak çalışabilecek bir fonksiyon olmalıdır. React, bu fonksiyonu hemen çalıştırır ve çalışırken gerçekleşen tüm state güncellemelerini transition olarak işaretler. Sonrasında daha fazla state güncellemesi yapmaya çalışırsanız (örneğin, bir zaman aşımında), bunlar transition olarak işaretlenmezler.
+
+* The `startTransition` function has a stable identity, so you will often see it omitted from Effect dependencies, but including it will not cause the Effect to fire. If the linter lets you omit a dependency without errors, it is safe to do. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
 
 * Bir state güncelleme işlemi transition olarak işaretlendiğinde, diğer güncelleme işlemleri bu işlemi kesintiye uğratabilir. Örneğin, bir grafik bileşenini güncelleyen transition işlemi sırasında, grafik bileşeni tekrar render işlemi devam ederken bir giriş alanına yazmaya başlarsanız, React, giriş alanındaki güncellemeyi işledikten sonra tekrar render işlemini başlatır.
 
@@ -157,7 +155,7 @@ export default function TabContainer() {
 
   function selectTab(nextTab) {
     startTransition(() => {
-      setTab(nextTab);      
+      setTab(nextTab);
     });
   }
 
@@ -190,7 +188,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js
+```js src/TabButton.js
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -208,7 +206,7 @@ export default function TabButton({ children, isActive, onClick }) {
 
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -216,7 +214,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -250,7 +248,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -326,7 +324,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js
+```js src/TabButton.js
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -344,7 +342,7 @@ export default function TabButton({ children, isActive, onClick }) {
 
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -352,7 +350,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -386,7 +384,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -479,7 +477,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js active
+```js src/TabButton.js active
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -499,7 +497,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -507,7 +505,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -541,7 +539,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -566,7 +564,7 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Transition sırasında beklenen görsel state'in gösterimi {/*displaying-a-pending-visual-state-during-the-transition*/}
+### Transition sırasında beklemeyi ifade eden bir durum gösterimi {/*displaying-a-pending-visual-state-during-the-transition*/}
 
 `useTransition` tarafından döndürülen `isPending` boolean değerini kullanarak, bir transition işleminin hala devam ettiğini kullanıcıya gösterebilirsiniz. Örneğin, sekme düğmesi özel bir "pending" (beklemede) görsel state'ine sahip olabilir:
 
@@ -622,7 +620,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js active
+```js src/TabButton.js active
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -645,7 +643,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js
+```js src/AboutTab.js
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -653,7 +651,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js
+```js src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -687,7 +685,7 @@ function SlowPost({ index }) {
 export default PostsTab;
 ```
 
-```js ContactTab.js
+```js src/ContactTab.js
 export default function ContactTab() {
   return (
     <>
@@ -757,7 +755,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js
+```js src/TabButton.js
 export default function TabButton({ children, isActive, onClick }) {
   if (isActive) {
     return <b>{children}</b>
@@ -772,7 +770,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js hidden
+```js src/AboutTab.js hidden
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -780,7 +778,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js hidden
+```js src/PostsTab.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -829,14 +827,14 @@ function use(promise) {
       reason => {
         promise.status = 'rejected';
         promise.reason = reason;
-      },      
+      },
     );
     throw promise;
   }
 }
 ```
 
-```js ContactTab.js hidden
+```js src/ContactTab.js hidden
 export default function ContactTab() {
   return (
     <>
@@ -853,7 +851,7 @@ export default function ContactTab() {
 ```
 
 
-```js data.js hidden
+```js src/data.js hidden
 // Note: the way you would do data fetching depends on
 // the framework that you use together with Suspense.
 // Normally, the caching logic would be inside a framework.
@@ -943,7 +941,7 @@ export default function TabContainer() {
 }
 ```
 
-```js TabButton.js active
+```js src/TabButton.js active
 import { useTransition } from 'react';
 
 export default function TabButton({ children, isActive, onClick }) {
@@ -966,7 +964,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-```js AboutTab.js hidden
+```js src/AboutTab.js hidden
 export default function AboutTab() {
   return (
     <p>Welcome to my profile!</p>
@@ -974,7 +972,7 @@ export default function AboutTab() {
 }
 ```
 
-```js PostsTab.js hidden
+```js src/PostsTab.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -1023,14 +1021,14 @@ function use(promise) {
       reason => {
         promise.status = 'rejected';
         promise.reason = reason;
-      },      
+      },
     );
     throw promise;
   }
 }
 ```
 
-```js ContactTab.js hidden
+```js src/ContactTab.js hidden
 export default function ContactTab() {
   return (
     <>
@@ -1047,7 +1045,7 @@ export default function ContactTab() {
 ```
 
 
-```js data.js hidden
+```js src/data.js hidden
 // Note: the way you would do data fetching depends on
 // the framework that you use together with Suspense.
 // Normally, the caching logic would be inside a framework.
@@ -1093,11 +1091,11 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-[Suspense ile transition kullanımı hakkında daha fazla bilgi edinin.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
+[Suspense ile Transition kullanımı hakkında daha fazla bilgi edinin.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
 
 <Note>
 
-Transition'lar, *zaten görünen* içeriği (örneğin sekme kutusu gibi) gizlememek için yeterli süre boyunca "bekler". Eğer "Posts" sekmesinde [iç içe geçmiş `<Suspense>` sınırlaması](/reference/react/Suspense#revealing-nested-content-as-it-loads) bulunuyorsa, transition onun için "bekleme" yapmaz.
+Transition'lar, sadece *zaten görünen* içeriği (örneğin sekme kutusu gibi) gizlememek için yeteri kadar "bekler". Eğer "Posts" sekmesinde [iç içe geçmiş `<Suspense>` sınırlaması](/reference/react/Suspense#revealing-nested-content-as-it-loads) bulunuyorsa, transition onun için "bekleme" yapmaz.
 
 </Note>
 
@@ -1126,8 +1124,7 @@ Bu, iki nedenden dolayı önerilir:
 
 - [Transition'lar istenmeyen yükleme göstergelerini engeller,](#preventing-unwanted-loading-indicators) bu da kullanıcının gezinme sırasında rahatsız edici sıçramalardan kaçınmasını sağlar.
 
-İşte, gezinmeler için transitionlar kullanarak yapılmış küçük bir basitleştirilmiş yönlendirici örneği.
-
+İşte, gezinmeler için Transition'lar kullanarak yapılmış küçük bir basitleştirilmiş yönlendirici örneği.
 
 <Sandpack>
 
@@ -1146,7 +1143,7 @@ Bu, iki nedenden dolayı önerilir:
 }
 ```
 
-```js App.js
+```js src/App.js
 import { Suspense, useState, useTransition } from 'react';
 import IndexPage from './IndexPage.js';
 import ArtistPage from './ArtistPage.js';
@@ -1197,7 +1194,7 @@ function BigSpinner() {
 }
 ```
 
-```js Layout.js
+```js src/Layout.js
 export default function Layout({ children, isPending }) {
   return (
     <div className="layout">
@@ -1214,7 +1211,7 @@ export default function Layout({ children, isPending }) {
 }
 ```
 
-```js IndexPage.js
+```js src/IndexPage.js
 export default function IndexPage({ navigate }) {
   return (
     <button onClick={() => navigate('/the-beatles')}>
@@ -1224,7 +1221,7 @@ export default function IndexPage({ navigate }) {
 }
 ```
 
-```js ArtistPage.js
+```js src/ArtistPage.js
 import { Suspense } from 'react';
 import Albums from './Albums.js';
 import Biography from './Biography.js';
@@ -1255,7 +1252,7 @@ function AlbumsGlimmer() {
 }
 ```
 
-```js Albums.js hidden
+```js src/Albums.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -1296,14 +1293,14 @@ function use(promise) {
       reason => {
         promise.status = 'rejected';
         promise.reason = reason;
-      },      
+      },
     );
     throw promise;
   }
 }
 ```
 
-```js Biography.js hidden
+```js src/Biography.js hidden
 import { fetchData } from './data.js';
 
 // Note: this component is written using an experimental API
@@ -1340,14 +1337,14 @@ function use(promise) {
       reason => {
         promise.status = 'rejected';
         promise.reason = reason;
-      },      
+      },
     );
     throw promise;
   }
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 export default function Panel({ children }) {
   return (
     <section className="panel">
@@ -1357,7 +1354,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js data.js hidden
+```js src/data.js hidden
 // Note: the way you would do data fetching depends on
 // the framework that you use together with Suspense.
 // Normally, the caching logic would be inside a framework.
@@ -1387,9 +1384,9 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-  return `The Beatles were an English rock band, 
-    formed in Liverpool in 1960, that comprised 
-    John Lennon, Paul McCartney, George Harrison 
+  return `The Beatles were an English rock band,
+    formed in Liverpool in 1960, that comprised
+    John Lennon, Paul McCartney, George Harrison
     and Ringo Starr.`;
 }
 
@@ -1509,9 +1506,104 @@ main {
 
 ---
 
+### Bir hata sınırı ile kullanıcılara bir hatayı gösterme {/*displaying-an-error-to-users-with-error-boundary*/}
+
+<Canary>
+
+Error Boundary for useTransition is currently only available in React's canary and experimental channels. Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
+
+</Canary>
+
+If a function passed to `startTransition` throws an error, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
+
+<Sandpack>
+
+```js src/AddCommentContainer.js active
+import { useTransition } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+
+export function AddCommentContainer() {
+  return (
+    <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
+      <AddCommentButton />
+    </ErrorBoundary>
+  );
+}
+
+function addComment(comment) {
+  // For demonstration purposes to show Error Boundary
+  if (comment == null) {
+    throw new Error("Example Error: An error thrown to trigger error boundary");
+  }
+}
+
+function AddCommentButton() {
+  const [pending, startTransition] = useTransition();
+
+  return (
+    <button
+      disabled={pending}
+      onClick={() => {
+        startTransition(() => {
+          // Intentionally not passing a comment
+          // so error gets thrown
+          addComment();
+        });
+      }}
+    >
+      Add comment
+    </button>
+  );
+}
+```
+
+```js src/App.js hidden
+import { AddCommentContainer } from "./AddCommentContainer.js";
+
+export default function App() {
+  return <AddCommentContainer />;
+}
+```
+
+```js src/index.js hidden
+// TODO: update to import from stable
+// react instead of canary once the `use`
+// Hook is in a stable release of React
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './styles.css';
+
+// TODO: update this example to use
+// the Codesandbox Server Component
+// demo environment once it is created
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "canary",
+    "react-dom": "canary",
+    "react-scripts": "^5.0.0",
+    "react-error-boundary": "4.0.3"
+  },
+  "main": "/index.js"
+}
+```
+</Sandpack>
+
+---
+
 ## Sorun Giderme {/*troubleshooting*/}
 
-### Transition içinde bir input (giriş) alanını güncelleme işlemi çalışmaz {/*updating-an-input-in-a-transition-doesnt-work*/}
+### Transition içinde bir inputu (girdiyi) güncelleme işlemi çalışmaz {/*updating-an-input-in-a-transition-doesnt-work*/}
 
 Bir input alanını kontrol eden state değişkeni için transition kullanamazsınız:
 
@@ -1531,8 +1623,7 @@ return <input value={text} onChange={handleChange} />;
 Bunun nedeni, transition işlemlerinin bloklamayan bir yapıda olmalarıdır, ancak bir değişiklik olayına yanıt olarak input alanını güncellemek eşzamanlı olarak gerçekleşmelidir. Yazma işlemine yanıt olarak transition çalıştırmak isterseniz, iki seçeneğiniz vardır:
 
 1. İki ayrı state değişkeni tanımlayabilirsiniz: biri input state'i için (her zaman eşzamanlı olarak güncellenir), diğeri de bir transition güncelleyeceğiniz değişken. Bu şekilde, girişi eşzamanlı state kullanarak kontrol etmenizi ve transition state değişkenini (girişin "gerisinde kalacak" olan) render işleminize aktarmanızı sağlar.
-
-2. Alternatif olarak, bir state değişkeniniz olabilir ve gerçek değerin "gerisinde kalacak" olan [`useDeferredValue`](/reference/react/useDeferredValue)  ekleyebilirsiniz. Bu, yeni değeri otomatik olarak "yakalamak" için bloklamayan yeniden render işlemini tetikler.
+2. Alternatif olarak, bir state değişkeniniz olabilir ve gerçek değerin "gerisinde kalacak" olan [`useDeferredValue`](/reference/react/useDeferredValue) ekleyebilirsiniz. Bu, yeni değeri otomatik olarak "yakalamak" için bloklamayan yeniden render işlemini tetikler.
 
 ---
 

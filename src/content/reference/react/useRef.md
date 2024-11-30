@@ -51,7 +51,7 @@ Sonraki render işlemlerinde, `useRef` aynı nesneyi döndürecektir.
 * `ref.current` özelliğini değiştirebilirsiniz. State'in aksine, bu değiştirilebilirdir. Ancak, render için kullanılan bir nesne tutuyorsa (örneğin, State'inizin bir parçası), o nesneyi değiştirmemelisiniz.
 * `ref.current` özelliğini değiştirdiğinizde, React bileşeninizi yeniden render etmez. Ref, düz JavaScript bir nesne olduğundan, ne zaman değiştirdiğinizi React fark etmez.
 * Bileşeninizin davranışını öngörülemez hale getireceğinden render işlemi sırasında, `ref.current`'e yazmayın veya okumayın. Ancak [başlangıçta](#avoiding-recreating-the-ref-contents) yapabilirsiniz.
-* Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu, davranışı etkilememelidir
+* Strict Mode'da, React [istenmeyen yan etkileri bulmanıza yardımcı olmak için](/reference/react/useState#my-initializer-or-updater-function-runs-twice) **bileşeninizi iki kez çağıracaktır.** Bu sadece geliştirme ortamı için geçerli bir davranıştır ve canlı ortamı etkilemez. Her bir ref nesnesi iki kez oluşturulacak, ancak bunlardan biri atılacaktır. Eğer bileşen fonksiyonunuz saf ise (olması gerektiği gibi), bu, davranışı etkilememelidir
 
 ---
 
@@ -228,7 +228,7 @@ function MyComponent() {
 
 Eğer render sırasında bir şey okumak [veya yazmak](/reference/react/useState#storing-information-from-previous-renders) *zorunda* kalırsanız, bunun yerine [state kullanın](/reference/react/useState).
 
-Bu kuralları ihlal ettiğinizde, bileşeniniz hala çalışabilir, ancak React'e eklediğimiz yeni özelliklerin çoğu bu beklentilere bağlı olacaktır. [Bileşenlerinizi saf tutma](/learn/keeping-components-pure#where-you-can-cause-side-effects) hakkında daha fazla bilgi edinin.
+Bu kuralları ihlal ettiğinizde, bileşeniniz hala çalışabilir, ancak React'e eklediğimiz yeni özelliklerin çoğu bu beklentilere bağlı olacaktır. [Bileşenlerinizi saf tutma](/learn/keeping-components-pure#where-you-_can_-cause-side-effects) hakkında daha fazla bilgi edinin.
 
 </Pitfall>
 
@@ -327,33 +327,33 @@ export default function CatFriends() {
     <>
       <nav>
         <button onClick={() => scrollToIndex(0)}>
-          Tom
+          Neo
         </button>
         <button onClick={() => scrollToIndex(1)}>
-          Maru
+          Millie
         </button>
         <button onClick={() => scrollToIndex(2)}>
-          Jellylorum
+          Bella
         </button>
       </nav>
       <div>
         <ul ref={listRef}>
           <li>
             <img
-              src="https://placekitten.com/g/200/200"
-              alt="Tom"
+              src="https://placecats.com/neo/300/200"
+              alt="Neo"
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/300/200"
-              alt="Maru"
+              src="https://placecats.com/millie/200/200"
+              alt="Millie"
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/250/200"
-              alt="Jellylorum"
+              src="https://placecats.com/bella/199/200"
+              alt="Bella"
             />
           </li>
         </ul>

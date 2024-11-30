@@ -4,15 +4,15 @@ title: unmountComponentAtNode
 
 <Deprecated>
 
-This API will be removed in a future major version of React.
+Bu API, React'ın gelecekteki majör sürümlerinden birinde kaldırılacaktır.
 
-In React 18, `unmountComponentAtNode` was replaced by [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount).
+`unmountComponentAtNode` React 18 de [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) ile değiştirildi.
 
 </Deprecated>
 
 <Intro>
 
-`unmountComponentAtNode` removes a mounted React component from the DOM.
+`unmountComponentAtNode` DOM'dan monte edilmiş bir React bileşenini kaldırır.
 
 ```js
 unmountComponentAtNode(domNode)
@@ -24,11 +24,11 @@ unmountComponentAtNode(domNode)
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru Dökümanı {/*reference*/}
 
 ### `unmountComponentAtNode(domNode)` {/*unmountcomponentatnode*/}
 
-Call `unmountComponentAtNode` to remove a mounted React component from the DOM and clean up its event handlers and state.
+`unmountComponentAtNode` fonksiyonunu kullanarak, monte edilmiş bir React bileşenini DOM'dan kaldırabilir ve olay yöneticilerini ve state'i temizleyebilirsiniz.
 
 ```js
 import { unmountComponentAtNode } from 'react-dom';
@@ -39,21 +39,21 @@ render(<App />, domNode);
 unmountComponentAtNode(domNode);
 ```
 
-[See more examples below.](#usage)
+[Aşağıda daha fazla örnek görebilirsiniz.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `domNode`: A [DOM element.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React will remove a mounted React component from this element.
+* `domNode`: Bir [DOM elemanı.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React, monte edilmiş bir React bileşenini bu elemandan kaldıracaktır.
 
-#### Returns {/*returns*/}
+#### Geri Dönüş Değeri {/*returns*/}
 
-`unmountComponentAtNode` returns `true` if a component was unmounted and `false` otherwise.
+`unmountComponentAtNode`, bir bileşen kaldırıldıysa `true` döner, aksi takdirde `false` döner.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-Call `unmountComponentAtNode` to remove a <CodeStep step={1}>mounted React component</CodeStep> from a <CodeStep step={2}>browser DOM node</CodeStep> and clean up its event handlers and state.
+<CodeStep step={1}>Monte edilmiş bir React bileşenini</CodeStep> bir <CodeStep step={2}>tarayıcı DOM öğesinden</CodeStep> kaldırmak ve olay yöneticilerini ile state'i temizlemek için `unmountComponentAtNode` fonksiyonunu çağırın.
 
 ```js [[1, 5, "<App />"], [2, 5, "rootNode"], [2, 8, "rootNode"]]
 import { render, unmountComponentAtNode } from 'react-dom';
@@ -66,12 +66,11 @@ render(<App />, rootNode);
 unmountComponentAtNode(rootNode);
 ```
 
+### DOM elemanından bir React uygulaması kaldırmak {/*removing-a-react-app-from-a-dom-element*/}
 
-### Removing a React app from a DOM element {/*removing-a-react-app-from-a-dom-element*/}
+Bazen mevcut bir sayfaya veya tamamen React ile yazılmamış bir sayfaya React'i "serpmek" isteyebilirsiniz. Bunun gibi durumlarda, React uygulamalarını, bütün UI, state ve listener'ları render oldukları DOM öğesinden kaldırarak, React uygulamanızı "durdurmak" isteyebilirsiniz.
 
-Occasionally, you may want to "sprinkle" React on an existing page, or a page that is not fully written in React. In those cases, you may need to "stop" the React app, by removing all of the UI, state, and listeners from the DOM node it was rendered to.
-
-In this example, clicking "Render React App" will render a React app. Click "Unmount React App" to destroy it:
+Bu örnekte "Render React App" butonuna basmak React uygulamasını render edecektir. Yok etmek için "Unmout React App" düğmesine tıklayabilirsiniz.
 
 <Sandpack>
 
@@ -88,7 +87,7 @@ In this example, clicking "Render React App" will render a React app. Click "Unm
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import './styles.css';
 import { render, unmountComponentAtNode } from 'react-dom';
 import App from './App.js';
@@ -104,7 +103,7 @@ document.getElementById('unmount').addEventListener('click', () => {
 });
 ```
 
-```js App.js
+```js src/App.js
 export default function App() {
   return <h1>Hello, world!</h1>;
 }

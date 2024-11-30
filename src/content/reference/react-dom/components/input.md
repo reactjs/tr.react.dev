@@ -4,7 +4,7 @@ title: "<input>"
 
 <Intro>
 
-The [built-in browser `<input>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) lets you render different kinds of form inputs.
+[Tarayıcıya yerleşik `<input>` bileşeni](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) farklı türden form girdileri render etmenizi sağlar.
 
 ```js
 <input />
@@ -16,93 +16,102 @@ The [built-in browser `<input>` component](https://developer.mozilla.org/en-US/d
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `<input>` {/*input*/}
 
-To display an input, render the [built-in browser `<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) component.
+Ekranda bir girdi göstermek için, [tarayıcıya yerleşik `<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) bileşenini render edin.
 
 ```js
 <input name="myInput" />
 ```
 
-[See more examples below.](#usage)
+[Daha fazla örnek için aşağıya bakınız.](#usage)
 
-#### Props {/*props*/}
+#### Prop'lar {/*props*/}
 
-`<input>` supports all [common element props.](/reference/react-dom/components/common#props)
 
-You can [make an input controlled](#controlling-an-input-with-a-state-variable) by passing one of these props:
+`<input>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#props) destekler.
 
-* [`checked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#checked): A boolean. For a checkbox input or a radio button, controls whether it is selected.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value): A string. For a text input, controls its text. (For a radio button, specifies its form data.)
+<Canary>
 
-When you pass either of them, you must also pass an `onChange` handler that updates the passed value.
+React's extensions to the `formAction` prop are currently only available in React's Canary and experimental channels. In stable releases of React, `formAction` works only as a [built-in browser HTML component](/reference/react-dom/components#all-html-components). Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
 
-These `<input>` props are only relevant for uncontrolled inputs:
+</Canary>
 
-* [`defaultChecked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultChecked): A boolean. Specifies [the initial value](#providing-an-initial-value-for-an-input) for `type="checkbox"` and `type="radio"` inputs.
-* [`defaultValue`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultValue): A string. Specifies [the initial value](#providing-an-initial-value-for-an-input) for a text input.
+[`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): String ya da fonksiyon. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form action>` üst bileşenini geçersiz kılar. `action`'a bir URL geçildiği zaman form, standart bir HTML formu gibi davranacaktır. Bir fonksiyon iletildiğinde ise form gönderimini o fonksiyon halledecektir. Daha fazla bilgi için [`<form action>`](/reference/react-dom/components/form#props) kısmına bakın.
 
-These `<input>` props are relevant both for uncontrolled and controlled inputs:
+Aşağıdaki proplardan birini ileterek [girdileri kontrollü hale](#controlling-an-input-with-a-state-variable) getirebilirsiniz:
 
-* [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#accept): A string. Specifies which filetypes are accepted by a `type="file"` input.
-* [`alt`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#alt): A string. Specifies the alternative image text for a `type="image"` input.
-* [`capture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#capture): A string. Specifies the media (microphone, video, or camera) captured by a `type="file"` input.
-* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete): A string. Specifies one of the possible [autocomplete behaviors.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
-* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autofocus): A boolean. If `true`, React will focus the element on mount.
-* [`dirname`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#dirname): A string. Specifies the form field name for the element's directionality.
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled): A boolean. If `true`, the input will not be interactive and will appear dimmed.
-* `children`: `<input>` does not accept children.
-* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#form): A string. Specifies the `id` of the `<form>` this input belongs to. If omitted, it's the closest parent form.
-* [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string. Overrides the parent `<form action>` for `type="submit"` and `type="image"`.
-* [`formEnctype`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formenctype): A string. Overrides the parent `<form enctype>` for `type="submit"` and `type="image"`.
-* [`formMethod`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formmethod): A string. Overrides the parent `<form method>` for `type="submit"` and `type="image"`.
-* [`formNoValidate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formnovalidate): A string. Overrides the parent `<form noValidate>` for `type="submit"` and `type="image"`.
-* [`formTarget`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formtarget): A string. Overrides the parent `<form target>` for `type="submit"` and `type="image"`.
-* [`height`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#height): A string. Specifies the image height for `type="image"`.
-* [`list`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list): A string. Specifies the `id` of the `<datalist>` with the autocomplete options.
-* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max): A number. Specifies the maximum value of numerical and datetime inputs.
-* [`maxLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength): A number. Specifies the maximum length of text and other inputs.
-* [`min`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min): A number. Specifies the minimum value of numerical and datetime inputs.
-* [`minLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength): A number. Specifies the minimum length of text and other inputs.
-* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#multiple): A boolean. Specifies whether multiple values are allowed for `<type="file"` and `type="email"`.
-* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name): A string. Specifies the name for this input that's [submitted with the form.](#reading-the-input-values-when-submitting-a-form)
-* `onChange`: An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Required for [controlled inputs.](#controlling-an-input-with-a-state-variable) Fires immediately when the input's value is changed by the user (for example, it fires on every keystroke). Behaves like the browser [`input` event.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event)
-* `onChangeCapture`: A version of `onChange` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires immediately when the value is changed by the user. For historical reasons, in React it is idiomatic to use `onChange` instead which works similarly.
-* `onInputCapture`: A version of `onInput` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires if an input fails validation on form submit. Unlike the built-in `invalid` event, the React `onInvalid` event bubbles.
-* `onInvalidCapture`: A version of `onInvalid` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires after the selection inside the `<input>` changes. React extends the `onSelect` event to also fire for empty selection and on edits (which may affect the selection).
-* `onSelectCapture`: A version of `onSelect` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`pattern`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#pattern): A string. Specifies the pattern that the `value` must match.
-* [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder): A string. Displayed in a dimmed color when the input value is empty.
-* [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#readonly): A boolean. If `true`, the input is not editable by the user.
-* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#required): A boolean. If `true`, the value must be provided for the form to submit.
-* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#size): A number. Similar to setting width, but the unit depends on the control.
-* [`src`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#src): A string. Specifies the image source for a `type="image"` input.
-* [`step`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step): A positive number or an `'any'` string. Specifies the distance between valid values.
-* [`type`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type): A string. One of the [input types.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
-* [`width`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#width):  A string. Specifies the image width for a `type="image"` input.
+* [`checked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#checked): Boolean. Onay kutusu girdisi ya da radyo butonunun seçilip seçilmediğini kontrol eder.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value): String. Metin kutusunun içindeki metni kontrol eder. (Radyo butonu için, form verisini belirtir.)
 
-#### Caveats {/*caveats*/}
+İki propdan birini ilettiğinizde, iletilen değeri güncelleyen `onChange` olay yöneticisini de iletmeniz gerekmektedir.
 
-- Checkboxes need `checked` (or `defaultChecked`), not `value` (or `defaultValue`).
-- If a text input receives a string `value` prop, it will be [treated as controlled.](#controlling-an-input-with-a-state-variable)
-- If a checkbox or a radio button receives a boolean `checked` prop, it will be [treated as controlled.](#controlling-an-input-with-a-state-variable)
-- An input can't be both controlled and uncontrolled at the same time.
-- An input cannot switch between being controlled or uncontrolled over its lifetime.
-- Every controlled input needs an `onChange` event handler that synchronously updates its backing value.
+Aşağıdaki `<input>` propları sadece kontrolsüz girdilerle ilgilidir:
+
+* [`defaultChecked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultChecked): Boolean. Tipi `type="checkbox"` ve `type="radio"` olan girdiler için [başlangıç değerini](#providing-an-initial-value-for-an-input) belirler.
+
+* [`defaultValue`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultValue): String. Metin girdilerinin [başlangıç değerini](#providing-an-initial-value-for-an-input) belirler.
+
+Aşağıdaki `<input>` proplar hem kontrollü hem de kontrolsüz girdilerle ilgilidir:
+
+* [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#accept): String. Tipi `type="file"` olan girdiler için hangi dosya tiplerinin kabul edilebilir olduğunu belirler.
+* [`alt`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#alt): String. Tipi `type="image"` olan girdiler için alternatif görüntü metnini belirler.
+* [`capture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#capture): String. Tipi `type="file"` olan girdiler için yakalanan medyayı (mikrofon, video ya da kamera) belirler.
+* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete): String. Olası [otomatik tamamlama davranışları](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)'ndan birini belirler.
+* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autofocus): Boolean. Eğer `true` ise, React, eleman DOM'a eklendikten sonra o elemana odaklanacaktır.
+* [`dirname`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#dirname): String. Bileşen yönlendirmesi için form alanı adını belirler.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled): Boolean. Eğer `true` ise, girdi etkileşimli olmayacak ve soluk renkli görünecektir.
+* `children`: `<input>` alt bileşen kabul etmez.
+* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#form): String. Girdinin ait olduğu `<form>`'un `<id>`'sini belirtir. Eğer belirtilmemişse, ağaçtaki en yakın üst formdur.
+* [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): String. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form action>` üst bileşenini geçersiz kılar.
+* [`formEnctype`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formenctype): String. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form enctype>` üst bileşenini geçersiz kılar.
+* [`formMethod`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formmethod): String. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form method>` üst bileşenini geçersiz kılar.
+* [`formNoValidate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formnovalidate): String. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form- noValidate`> üst bileşenini geçersiz kılar.
+* [`formTarget`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formtarget): String. Tipi `type="submit"` and `type="image"` olan girdiler için `<form target>` üst bileşenini geçersiz kılar.
+* [`height`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#height): String. Tipi `type="image"` olan girdiler için görsel yükseliğini belirler.
+* [`list`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list): String. Otomatik tamamlama seçeneği olan `<datalist>` bileşeninin `id`'sini belirler.
+* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max): Numara. Tarih ve nümerik girdilerin maksimumum alabilecekleri değeri belirler.
+* [`maxLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength): Numara. Metin ve diğer girdi tipleri için maksimum uzunluğu belirler.
+* [`min`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min): Numara. Nümerik ve tarih girdilerin minimum alabilecekleri değeri belirler.
+* [`minLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength): Numara. Metin ve diğer girdi tipleri için minimum uzunluğu belirler.
+* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#multiple): Boolean. Tipi `<type="file"` ve `type="email"` olan girdilerin çoklu değere sahip olup olamayacağını belirler.
+* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name): String. [Form ile birlikte gönderilen](#reading-the-input-values-when-submitting-a-form) girdinin adını belirler.
+* `onChange`: [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. [Kontrollü girdiler](#controlling-an-input-with-a-state-variable) için gereklidir. Kullanıcı tarafından girdi değeri değiştiği anda (örneğin, klavyede her tuşa basıldığında) çalışır. [Tarayıcı `input` olayı] (https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi çalışır.
+* `onChangeCapture`: [Yakalama aşamasında] (/learn/responding-to-events#capture-phase-events) çalışan `onChange`'in bir versiyonudur.
+* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Değer, kullanıcı tarafından değiştirildiği anda çalıştırılır. Tarihsel nedenlerden dolayı, React'te benzer şekilde çalışan `onChange`'i kullanmak yaygındır.
+* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan versiyonudur. 
+* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Bir girdi, form gönderiminde doğrulamayı geçemezse çalıştırılır. Yerleşik `invalid` olayının aksine, React `onInvalid` olayı kabarcık şeklinde yayılır (bubbles).
+* `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyionudur.
+* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. `<input>` içindeki seçilen alanın değişmesiyle tetiklenir. React, `onSelect` olayını boş seçim ve düzenlemelerde de (seçimi etkileyebilir) çalıştırır. 
+* `onSelectCapture`: `onSelect`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyonudur.
+* [`pattern`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#pattern): String. `value` değerinin eşleşmesi gereken şablonu belirler.
+* [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder): String. Girdi değeri yokken ekranda soluk renkte görüntülenir.
+* [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#readonly): Boolean. Eğer `true` ise, girdi alanı kullanıcı tarafından düzenlenemez.
+* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#required): Boolean. Eğer `true` ise, formun gönderilebilmesi için değer sağlanmalıdır.
+* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#size): Numara. Genişlik ayarına benzerdir ancak birimin türü kontrole bağlıdır.
+* [`src`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#src): String. Tipi `type="image"` olan girdiler için görsel kaynağını belirler.
+* [`step`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step): Pozitif sayı ya da `'any'` string. Geçerli iki değer araasındaki uzaklığı belirler.
+* [`type`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type): String. [Girdi tipleri](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)'nden biridir.
+* [`width`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#width): String. Tipi `type="image"` olan girdiler için görsel genişliğini belirler.
+
+#### Uyarılar {/*caveats*/}
+
+- Onay kutularının `value` (veya`defaultValue`) yerine`checked` (veya `defaultChecked`) değerine ihtiyacı vardır.
+- Metin girdisi `value` propuna string değer alırsa [kontrollü bileşen](#controlling-an-input-with-a-state-variable) olarak ele alınır.
+- Onay kutusu ya da radyo butonu `checked` propuna boolean değer alırsa [kontrollü bileşen](#controlling-an-input-with-a-state-variable) olarak ele alınır.
+- Bir girdi aynı anda hem kontrollü hem de kontrolsüz olamaz.
+- Bir girdi yaşam döngüsü boyunca kontrollü ve kontrolsüz olma arasında geçiş yapamaz.
+- Kontrollü tüm girdiler, değeri senkronize olarak güncelleyen `onChange` olay yöneticisine ihtiyaç duyar.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Displaying inputs of different types {/*displaying-inputs-of-different-types*/}
+### Farklı tiplerde girdileri gösterme{/*displaying-inputs-of-different-types*/}
 
-To display an input, render an `<input>` component. By default, it will be a text input. You can pass `type="checkbox"` for a checkbox, `type="radio"` for a radio button, [or one of the other input types.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
-
+Ekranda `<input>`'u görülemek için render ediniz. Varsayılan olarak metin girdisi olacaktır. Onay kutusu için `type="checkbox"`, radyo butonu için `type="radio"` [veya diğer girdi tiplerinden birini](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types) gönderebilirsiniz.
 <Sandpack>
 
 ```js
@@ -146,11 +155,11 @@ input { margin: 5px; }
 
 ---
 
-### Providing a label for an input {/*providing-a-label-for-an-input*/}
+### Girdi için etiket verme {/*providing-a-label-for-an-input*/}
 
-Typically, you will place every `<input>` inside a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tag. This tells the browser that this label is associated with that input. When the user clicks the label, the browser will automatically focus the input. It's also essential for accessibility: a screen reader will announce the label caption when the user focuses the associated input.
+Genel olarak her `<input>` elemanını bir, [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) elemanı içine yerleştirirsiniz. Bu, tarayıcıya bu etkietin o metin alanıyla ilişkili olduğunu söyler. Kullanıcı bu etikete tıkladığında, tarayıcı o metin alanına odaklanır. Bu durum ayrıca erişebilirlik için de önemlidir: kullanıcı metin alanına tıkladığında ekran okuyucu bu etiketi okuyacaktır.
 
-If you can't nest `<input>` into a `<label>`, associate them by passing the same ID to `<input id>` and [`<label htmlFor>`.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) To avoid conflicts between multiple instances of one component, generate such an ID with [`useId`.](/reference/react/useId)
+Eğer `<input>` elemanını bir `<label>` elemanının içine yerleştiremezseniz, `<input id>` ve [`<label htmlFor>`.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) elemanlarına aynı ID'yi ileterek bu elemanları ilişkilendirebilirsiniz. Bir bileşenein birden fazla örnekleri arasındaki çakışmaları önlemek için [`useId`](/reference/react/useId) ile ID üretebilirsiniz.
 
 <Sandpack>
 
@@ -162,12 +171,12 @@ export default function Form() {
   return (
     <>
       <label>
-        Your first name:
-        <input name="firstName" />
+        Adınız:
+        <input name="ad" />
       </label>
       <hr />
-      <label htmlFor={ageInputId}>Your age:</label>
-      <input id={ageInputId} name="age" type="number" />
+      <label htmlFor={ageInputId}>Yaşınız:</label>
+      <input id={ageInputId} name="yas" type="number" />
     </>
   );
 }
@@ -181,9 +190,9 @@ input { margin: 5px; }
 
 ---
 
-### Providing an initial value for an input {/*providing-an-initial-value-for-an-input*/}
+### Girdiye başlangıç değeri verme {/*providing-an-initial-value-for-an-input*/}
 
-You can optionally specify the initial value for any input. Pass it as the `defaultValue` string for text inputs. Checkboxes and radio buttons should specify the initial value with the `defaultChecked` boolean instead.
+Her girdi tipi için başlangıç değeri verebilirsiniz. Metin girdileri için string tipinde `defaultValue` değeri iletebilirsiniz. Onay kutusu ve radyo butonları için başlangıç değerlerini boolean tipinde `defaultChecked` değeriyle belirleyebilirsiniz.
 
 <Sandpack>
 
@@ -192,18 +201,18 @@ export default function MyForm() {
   return (
     <>
       <label>
-        Text input: <input name="myInput" defaultValue="Some initial value" />
+        Metin girdisi: <input name="myInput" defaultValue="Some initial value" />
       </label>
       <hr />
       <label>
-        Checkbox: <input type="checkbox" name="myCheckbox" defaultChecked={true} />
+        Onay kutusu: <input type="checkbox" name="myCheckbox" defaultChecked={true} />
       </label>
       <hr />
       <p>
-        Radio buttons:
+        Radyo butonları:
         <label>
           <input type="radio" name="myRadio" value="option1" />
-          Option 1
+          Seçenek 1
         </label>
         <label>
           <input
@@ -212,11 +221,11 @@ export default function MyForm() {
             value="option2"
             defaultChecked={true} 
           />
-          Option 2
+          Seçenek 2
         </label>
         <label>
           <input type="radio" name="myRadio" value="option3" />
-          Option 3
+          Seçenek 3
         </label>
       </p>
     </>
@@ -233,25 +242,25 @@ input { margin: 5px; }
 
 ---
 
-### Reading the input values when submitting a form {/*reading-the-input-values-when-submitting-a-form*/}
+### Formu gönderirken girdi değerlerini okuma{/*reading-the-input-values-when-submitting-a-form*/}
 
-Add a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) around your inputs with a [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) inside. It will call your `<form onSubmit>` event handler. By default, the browser will send the form data to the current URL and refresh the page. You can override that behavior by calling `e.preventDefault()`. Read the form data with [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+[`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) ve girdilerinizi çevreleyen bir [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) ekleyin. Eklediğiniz buton `<form onSubmit>` olay yöneticisini çağıracaktır. Varsayılan olarak, tarayıcı form verilerini bulunduğunuz URL'e gönderecek ve sayfayı yenileyecektir. `e.preventDefault()` ifadesini çağırarak bu işlemi engelleyebilirsiniz. Form verilerini [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) ile okuyabilirsiniz.
 <Sandpack>
 
 ```js
 export default function MyForm() {
   function handleSubmit(e) {
-    // Prevent the browser from reloading the page
+    // Tarayıcının sayfayı yenilemesini engelleyin
     e.preventDefault();
 
-    // Read the form data
+    // Form verisini okuyun
     const form = e.target;
     const formData = new FormData(form);
 
-    // You can pass formData as a fetch body directly:
+    // formDatayı fetch gövdesi olarak iletebilirsiniz:
     fetch('/some-api', { method: form.method, body: formData });
 
-    // Or you can work with it as a plain object:
+    // formDatayı Düz nesne gibi de kullanabilirsiniz 
     const formJson = Object.fromEntries(formData.entries());
     console.log(formJson);
   }
@@ -259,22 +268,22 @@ export default function MyForm() {
   return (
     <form method="post" onSubmit={handleSubmit}>
       <label>
-        Text input: <input name="myInput" defaultValue="Some initial value" />
+        Metin girdisi: <input name="myInput" defaultValue="Some initial value" />
       </label>
       <hr />
       <label>
-        Checkbox: <input type="checkbox" name="myCheckbox" defaultChecked={true} />
+        Onay kutusu: <input type="checkbox" name="myCheckbox" defaultChecked={true} />
       </label>
       <hr />
       <p>
-        Radio buttons:
-        <label><input type="radio" name="myRadio" value="option1" /> Option 1</label>
-        <label><input type="radio" name="myRadio" value="option2" defaultChecked={true} /> Option 2</label>
-        <label><input type="radio" name="myRadio" value="option3" /> Option 3</label>
+        Radyo butonları:
+        <label><input type="radio" name="myRadio" value="option1" /> Seçenek 1</label>
+        <label><input type="radio" name="myRadio" value="option2" defaultChecked={true} /> Seçenek 2</label>
+        <label><input type="radio" name="myRadio" value="option3" /> Seçenek 3</label>
       </p>
       <hr />
-      <button type="reset">Reset form</button>
-      <button type="submit">Submit form</button>
+      <button type="reset">Formu sıfırla</button>
+      <button type="submit">Forumu gönder</button>
     </form>
   );
 }
@@ -289,38 +298,38 @@ input { margin: 5px; }
 
 <Note>
 
-Give a `name` to every `<input>`, for example `<input name="firstName" defaultValue="Taylor" />`. The `name` you specified will be used as a key in the form data, for example `{ firstName: "Taylor" }`.
+Tüm `<input>` elemanlarınıza bir `name` değeri verin, örneğin `<input name="firstName" defaultValue="Taylor">`. Bu `name` değeri form verilerinde anahtar olarak kullanılacaktır, örneğin `{ firstName: "Taylor" }`.
 
 </Note>
 
 <Pitfall>
 
-By default, *any* `<button>` inside a `<form>` will submit it. This can be surprising! If you have your own custom `Button` React component, consider returning [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) instead of `<button>`. Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+Varsayılan olarak `<form>` içindeki *herhangi bir* `<button>` elemanı forumu gönderecektir. Bu biraz şaşırtıcı olabilir, kendinize ait React `Button` elemanınız varsa, `<button>` yerine [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) döndürmeyi düşünebilirsiniz. Daha açık olmak gerekise formu göndermesi gereken *butonlar* için `<button type="submit">` kullanınız.
 
 </Pitfall>
 
 ---
 
-### Controlling an input with a state variable {/*controlling-an-input-with-a-state-variable*/}
+### Durum değişkeniyle girdiyi kontrol etme {/*controlling-an-input-with-a-state-variable*/}
 
-An input like `<input />` is *uncontrolled.* Even if you [pass an initial value](#providing-an-initial-value-for-an-input) like `<input defaultValue="Initial text" />`, your JSX only specifies the initial value. It does not control what the value should be right now.
+`<input />` şeklindeki girdiler *kontrolsüzdür.* `<input defaultValue="Başlangıç değeri" />` gibi [başlangıç değeri](#providing-an-initial-value-for-an-input) iletseniz bile, JSX'iniz şu anki değeri değil, yalnızca başlangıç değerini belirtir.
 
-**To render a _controlled_ input, pass the `value` prop to it (or `checked` for checkboxes and radios).** React will force the input to always have the `value` you passed. Usually, you would do this by declaring a [state variable:](/reference/react/useState)
+**_kontrollü girdi render etmek için, `value` propunu iletin (veya onay kutuları ve radyo butonları için `checked`).** React, her zaman girdi değerinin sizin ilettiğiniz `value` değeri olması için zorlayacaktır. Genelde, [durum değişkeni:](/reference/react/useState) tanımlayarak girdinizi kontrol edersiniz.
 
 ```js {2,6,7}
 function Form() {
-  const [firstName, setFirstName] = useState(''); // Declare a state variable...
+  const [firstName, setFirstName] = useState(''); // Durum değişkeni tanımlayınız...
   // ...
   return (
     <input
-      value={firstName} // ...force the input's value to match the state variable...
-      onChange={e => setFirstName(e.target.value)} // ... and update the state variable on any edits!
+      value={firstName} //.. girdinin değerinin durum değişkeniyle eşleşmesi için zorlayınız...
+      onChange={e => setFirstName(e.target.value)} //...ve her düzenlemede durum değişkenini güncelleyiniz!
     />
   );
 }
 ```
 
-A controlled input makes sense if you needed state anyway--for example, to re-render your UI on every edit:
+Kontrollü bir girdi zaten duruma ihtiyacınız varsa kullanışlıdır, örneğin her düzenlemede arayüzü yeniden render etmek için:
 
 ```js {2,9}
 function Form() {
@@ -328,15 +337,14 @@ function Form() {
   return (
     <>
       <label>
-        First name:
+        Ad:
         <input value={firstName} onChange={e => setFirstName(e.target.value)} />
       </label>
-      {firstName !== '' && <p>Your name is {firstName}.</p>}
+      {firstName !== '' && <p>Adınız {firstName}.</p>}
       ...
 ```
 
-It's also useful if you want to offer multiple ways to adjust the input state (for example, by clicking a button):
-
+Ayrıca birden çok girdi seçeneği vermek isterseniz de kullanışlıdır (butona tıklamak gibi) :
 ```js {3-4,10-11,14}
 function Form() {
   // ...
@@ -345,18 +353,18 @@ function Form() {
   return (
     <>
       <label>
-        Age:
+        Yaş:
         <input
           value={age}
           onChange={e => setAge(e.target.value)}
           type="number"
         />
         <button onClick={() => setAge(ageAsNumber + 10)}>
-          Add 10 years
+          10 yıl ekle
         </button>
 ```
 
-The `value` you pass to controlled components should not be `undefined` or `null`. If you need the initial value to be empty (such as with the `firstName` field below), initialize your state variable to an empty string (`''`).
+Kontrollü bileşenlere ilettiğiniz `value` değeri `undefined` veya `null` olmamalıdır. Başlangıç değerinin boş olması gerekiyorsa (örneğin aşağıdaki `firstName` alanı), durum değişkeninizi boş string (`''`) olarak tanımyabilirsiniz.
 
 <Sandpack>
 
@@ -370,28 +378,28 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        Ad:
         <input
           value={firstName}
           onChange={e => setFirstName(e.target.value)}
         />
       </label>
       <label>
-        Age:
+        Yaş:
         <input
           value={age}
           onChange={e => setAge(e.target.value)}
           type="number"
         />
         <button onClick={() => setAge(ageAsNumber + 10)}>
-          Add 10 years
+          10 yıl ekle
         </button>
       </label>
       {firstName !== '' &&
-        <p>Your name is {firstName}.</p>
+        <p>Adınız {firstName}.</p>
       }
       {ageAsNumber > 0 &&
-        <p>Your age is {ageAsNumber}.</p>
+        <p>Yaşınız {ageAsNumber}.</p>
       }
     </>
   );
@@ -408,17 +416,18 @@ p { font-weight: bold; }
 
 <Pitfall>
 
-**If you pass `value` without `onChange`, it will be impossible to type into the input.** When you control an input by passing some `value` to it, you *force* it to always have the value you passed. So if you pass a state variable as a `value` but forget to update that state variable synchronously during the `onChange` event handler, React will revert the input after every keystroke back to the `value` that you specified.
+**Eğer `onChange` olay yöneticisi olmadan `value` değeri iletirseniz, girdiyi kullanmak imkansız olacaktır** 
+Girdiyi `value` değeri ileterek kontrol ettiğinizde, girdiyi sürekli olarak o değeri kullanmaya *zorlarsınız.* Bu nedenle durum değişkeni olarak `value` değeri ilettiğiniz sırada `onChange` olay yöneticisiyle de senkron olarak bu durum değişkenini güncellemeyi unutursanız, React klavyeye her basıldığında değişiklikleri ageri alıp belirttiğiniz `value` değerine dönecektir.
 
 </Pitfall>
 
 ---
 
-### Optimizing re-rendering on every keystroke {/*optimizing-re-rendering-on-every-keystroke*/}
+### Her tuş vuruşunda yeniden render işlemininin iyileştirilmesi {/*optimizing-re-rendering-on-every-keystroke*/}
 
-When you use a controlled input, you set the state on every keystroke. If the component containing your state re-renders a large tree, this can get slow. There's a few ways you can optimize re-rendering performance.
+Kontrollü girdi kullandığınızda, her klavye tıklamasında durumu ayarlarsınız. Durumun bulunduğu bileşeniniz her seferinde büyük bir ağacı yeniden render ederse bu işlem yavaş olabilir. Yeniden render performansınızı en iyi hale getirmek için birkaç yol bulunmaktadır.
 
-For example, suppose you start with a form that re-renders all page content on every keystroke:
+Örneğin, her klavye girdisinde tüm sayfayı yeniden render eden bir form ile başlayalım:
 
 ```js {5-8}
 function App() {
@@ -434,7 +443,7 @@ function App() {
 }
 ```
 
-Since `<PageContent />` doesn't rely on the input state, you can move the input state into its own component:
+`<PageContent />` girdi durumuna bağlı kalmadığı için girdi durumunu kendi bileşenine taşıyabilirsiniz:
 
 ```js {4,10-17}
 function App() {
@@ -456,140 +465,135 @@ function SignupForm() {
 }
 ```
 
-This significantly improves performance because now only `SignupForm` re-renders on every keystroke.
+Artık sadece `SignupForm` yeniden render edildiği için performans belirgin bir şekilde iyileşecektir.
 
-If there is no way to avoid re-rendering (for example, if `PageContent` depends on the search input's value), [`useDeferredValue`](/reference/react/useDeferredValue#deferring-re-rendering-for-a-part-of-the-ui) lets you keep the controlled input responsive even in the middle of a large re-render.
+Eğer yeniden renderı geçersiz kılacak bir yol yoksa (örneğin, `PageContent` arama girdisindeki değere bağlıysa), [`useDeferredValue`](/reference/react/useDeferredValue#deferring-re-rendering-for-a-part-of-the-ui) kontrollü girdinizi büyük bir yeniden render sırasında bile duyarlı tutar.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### My text input doesn't update when I type into it {/*my-text-input-doesnt-update-when-i-type-into-it*/}
+### Metin girdime yazarken güncellenmiyor {/*my-text-input-doesnt-update-when-i-type-into-it*/}
 
-If you render an input with `value` but no `onChange`, you will see an error in the console:
+Girdinizi `value` değeri ile render ederken `onChange` olay yöneticisi yoksa, konsolda şu hatayı göreceksiniz:
 
 ```js
-// 🔴 Bug: controlled text input with no onChange handler
+// 🔴 Hata: kontrollü metin girdisinin onChange olay yöneticisi yok
 <input value={something} />
 ```
 
 <ConsoleBlock level="error">
 
-You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
+`onChange` yöneticisi olmayaan bir form alanına `value` propunu verdiniz. Bu salt okunur bir alan oluşturacaktır. Alanın değişken olması gerekiyorsa `defaultValue` kullanın. Aksi takdirde `onChange` veya `readOnly` olarak ayarlayın.
 
 </ConsoleBlock>
 
-As the error message suggests, if you only wanted to [specify the *initial* value,](#providing-an-initial-value-for-an-input) pass `defaultValue` instead:
+Hata mesajının önerdiği gibi, sadece [*başlangıç* değeri belirlemek](#providing-an-initial-value-for-an-input) istiyorsanız `defaultValue` kullanın:
 
 ```js
-// ✅ Good: uncontrolled input with an initial value
+// ✅ İyi: başlangıç değeri olan kontrollü girdi
 <input defaultValue={something} />
 ```
-
-If you want [to control this input with a state variable,](#controlling-an-input-with-a-state-variable) specify an `onChange` handler:
+[Girdi alanını durum değişkeni ile kontrol etmek için](#controlling-an-input-with-a-state-variable) `onChange` yöneticisi belirleyin:
 
 ```js
-// ✅ Good: controlled input with onChange
+// ✅ İyi: onChange yöneticisi olan kontrollü girdi
 <input value={something} onChange={e => setSomething(e.target.value)} />
 ```
-
-If the value is intentionally read-only, add a `readOnly` prop to suppress the error:
+Değer bilerek salt okunur ayarlanmak isteniyorsa, hatayı `readOnly` propu ekleyerek önleyebilirsiniz:
 
 ```js
-// ✅ Good: readonly controlled input without on change
+// ✅ İyi: salt okunur onChange olay yöneticisi olmayan kontrollü girdi
 <input value={something} readOnly={true} />
 ```
 
 ---
 
-### My checkbox doesn't update when I click on it {/*my-checkbox-doesnt-update-when-i-click-on-it*/}
+### Onay kutularım onlara tıkladığımda güncellenmiyor {/*my-checkbox-doesnt-update-when-i-click-on-it*/}
 
-If you render a checkbox with `checked` but no `onChange`, you will see an error in the console:
+Onay kutunuzu `onChange` olay yöneticisi olmadan `checked` değeri ile render ederseniz, konsolda şu hatayı göreceksiniz:
 
 ```js
-// 🔴 Bug: controlled checkbox with no onChange handler
+// 🔴 Hata: onChange yöneticisi olmayan kontrollü onay kutusu
 <input type="checkbox" checked={something} />
 ```
 
 <ConsoleBlock level="error">
 
-You provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`.
+`onChange` yöneticisi olmayan bir form alanına `checked` propu verdiniz. Bu, salt okunur bir alan oluşturacaktır. Alanın değişken olması gerekiyorsa `defaultChecked` kullanın. Aksi takdirde `onChange` veya `readOnly` olarak ayarlayın.
 
 </ConsoleBlock>
 
-As the error message suggests, if you only wanted to [specify the *initial* value,](#providing-an-initial-value-for-an-input) pass `defaultChecked` instead:
+Hata mesajında önerildiği üzere, [*başlangıç* değeri belirlemek](#providing-an-initial-value-for-an-input) istiyorsanız `defaultValue` kullanın:
 
 ```js
-// ✅ Good: uncontrolled checkbox with an initial value
+// ✅ İyi: başlangıç değeri olan kontrolsüz girdi
 <input type="checkbox" defaultChecked={something} />
 ```
 
-If you want [to control this checkbox with a state variable,](#controlling-an-input-with-a-state-variable) specify an `onChange` handler:
+
+[Onay kutusunu durum değişkeni ile kontrol etmek için](#controlling-an-input-with-a-state-variable) `onChange` yöneticisi belirleyin:
 
 ```js
-// ✅ Good: controlled checkbox with onChange
+// ✅ İyi: onChange yöneticisi olan kontrollü onay kutusu
 <input type="checkbox" checked={something} onChange={e => setSomething(e.target.checked)} />
 ```
 
 <Pitfall>
 
-You need to read `e.target.checked` rather than `e.target.value` for checkboxes.
+Onay kutularında `e.target.value` yerine `e.target.checked` değerini okumalısınız.
 
 </Pitfall>
 
-If the checkbox is intentionally read-only, add a `readOnly` prop to suppress the error:
+Onay kutusu bilerek salt okunur ayarlanmak isteniyorsa hatayı, `readOnly` propu ekleyerek önleyebilirsiniz:
 
 ```js
-// ✅ Good: readonly controlled input without on change
+// ✅ İyi: salt okunur onChange yöneticisi olan kontrollü girdi
 <input type="checkbox" checked={something} readOnly={true} />
 ```
 
 ---
 
-### My input caret jumps to the beginning on every keystroke {/*my-input-caret-jumps-to-the-beginning-on-every-keystroke*/}
+### Girdideki imlecim klavyeden her girişte en başa atlıyor {/*my-input-caret-jumps-to-the-beginning-on-every-keystroke*/}
 
-If you [control an input,](#controlling-an-input-with-a-state-variable) you must update its state variable to the input's value from the DOM during `onChange`.
+[Bir girdiyi kontrol ediyorsanız](#controlling-an-input-with-a-state-variable) `onChange` sırasında DOM'daki durum değişkeni değerini girdi değerine güncellemelisiniz.
 
-You can't update it to something other than `e.target.value` (or `e.target.checked` for checkboxes):
+`e.target.value` (veya onay kutuları için `e.target.checked`) dışındaki başka bir değerle güncelleyemezsiniz:
 
 ```js
 function handleChange(e) {
-  // 🔴 Bug: updating an input to something other than e.target.value
+  // 🔴 Hata: girdi değerini e.target.value dışında bir şeyle güncelleme
   setFirstName(e.target.value.toUpperCase());
 }
 ```
-
-You also can't update it asynchronously:
+Ayrıca asenkron olarak da güncelleyemezsiniz:
 
 ```js
 function handleChange(e) {
-  // 🔴 Bug: updating an input asynchronously
+  // 🔴 Hata: girdiyi asenkron olarak güncelleme
   setTimeout(() => {
     setFirstName(e.target.value);
   }, 100);
 }
 ```
 
-To fix your code, update it synchronously to `e.target.value`:
+Kodunuzu düzeltmek için, senkron bir şekilde `e.target.value` değeriyle güncelleyiniz:
 
 ```js
 function handleChange(e) {
-  // ✅ Updating a controlled input to e.target.value synchronously
+  // ✅ Kontrollü girdiyi e.target.value değeriyle senkron güncelleme
   setFirstName(e.target.value);
 }
 ```
 
-If this doesn't fix the problem, it's possible that the input gets removed and re-added from the DOM on every keystroke. This can happen if you're accidentally [resetting state](/learn/preserving-and-resetting-state) on every re-render, for example if the input or one of its parents always receives a different `key` attribute, or if you nest component function definitions (which is not supported and causes the "inner" component to always be considered a different tree).
-
+Eğerbunlar sorununuzu çözmezse, girdiniz her klavye girişinde DOM'dan silinip geri ekleniyor olabilir. Bu durum, her yeniden renderda [durumu sıfırlama](/learn/preserving-and-resetting-state)'dan kaynaklı olabilir. Örneğin, eğer girdiniz ya da onun üstündeki elemanlardan biri süreki farklı `key` niteliği alıyor olabilir veya bileşen tanımlarını iç içe yerleştirmenizden kaynaklı olabilir (iç içe yerleştirmeler desteklenmemektedir ve "iç" bileşenin her zaman farklı bir ağaç olarak kabul edilmesine neden olur).
 ---
 
-### I'm getting an error: "A component is changing an uncontrolled input to be controlled" {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
+### "Bir bileşen kontrolsüz girişi kontrol ediyor" hatası alıyorum  {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
 
 
-If you provide a `value` to the component, it must remain a string throughout its lifetime.
+Bileşeninize `value` değeri verdiyseniz, yaşam döngüsü boyunca string olarak kalmalıdır.
 
-You cannot pass `value={undefined}` first and later pass `value="some string"` because React won't know whether you want the component to be uncontrolled or controlled. A controlled component should always receive a string `value`, not `null` or `undefined`.
+Önce `value={undefined}` olarak değer iletip daha sonra `value="some string"` şeklinde değer iletemezsiniz çünkü React, kontrollü bileşen mi kontrolsüz bileşen mi bunu bilemez. Kontrollü bileşen her zaman `value` değer olarak string almalıdır, `null` ya da `undefined` almamalıdır.
 
-If your `value` is coming from an API or a state variable, it might be initialized to `null` or `undefined`. In that case, either set it to an empty string (`''`) initially, or pass `value={someValue ?? ''}` to ensure `value` is a string.
-
-Similarly, if you pass `checked` to a checkbox, ensure it's always a boolean.
+`value` değeriniz API'den veya durum değişkeninden geliyorsa, başta `null` veya `undefined` olarak tanımlanmış olabilir. Bu durumda boş bir string (`''`) olarak tanımlayabilirsiniz veya `value={someValue ?? ''}` olarak iletip `value` değerinin string olup olmadığına emin olabilirsiniz.

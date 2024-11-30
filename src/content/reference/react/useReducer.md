@@ -52,6 +52,7 @@ function MyComponent() {
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
 * `useReducer`, bir Hook olduğundan, yalnızca bileşeninizin **üst düzeyinde** veya kendi Hook'larınızda çağırabilirsiniz. Döngüler veya koşullar içinde çağıramazsınız. Buna ihtiyacınız varsa, yeni bir bileşen oluşturun ve state'i taşıyın.
+* The `dispatch` function has a stable identity, so you will often see it omitted from Effect dependencies, but including it will not cause the Effect to fire. If the linter lets you omit a dependency without errors, it is safe to do. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
 * Strict Mode'da, React, [tesadüfi karışıklıkları bulmanıza yardımcı olmak için](#my-reducer-or-initializer-function-runs-twice) reducer ve başlatıcı fonksiyonunuzu **iki kez çağırır**. Bu, yalnızca geliştirme amaçlı bir davranıştır ve canlı ortamı etkilemez. Reducer ve başlatıcı fonksiyonlarınız saf halde ise (olmaları gerektiği gibi), bu mantığınızı etkilememelidir. Çağrılardan birinin sonucu yoksayılır.
 
 ---
@@ -322,7 +323,7 @@ Bu örnekte, reducer bir görevler dizisini yönetir. Dizi [mutasyonsuz bir şek
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -405,7 +406,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js hidden
+```js src/AddTask.js hidden
 import { useState } from 'react';
 
 export default function AddTask({ onAddTask }) {
@@ -426,7 +427,7 @@ export default function AddTask({ onAddTask }) {
 }
 ```
 
-```js TaskList.js hidden
+```js src/TaskList.js hidden
 import { useState } from 'react';
 
 export default function TaskList({
@@ -515,7 +516,7 @@ Mutasyonsuz olarak dizileri ve nesneleri güncelleştirmek sıkıcı geliyorsa, 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useImmerReducer } from 'use-immer';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -597,7 +598,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js hidden
+```js src/AddTask.js hidden
 import { useState } from 'react';
 
 export default function AddTask({ onAddTask }) {
@@ -618,7 +619,7 @@ export default function AddTask({ onAddTask }) {
 }
 ```
 
-```js TaskList.js hidden
+```js src/TaskList.js hidden
 import { useState } from 'react';
 
 export default function TaskList({
@@ -763,7 +764,7 @@ Bu örnek başlatıcı fonksiyonunu geçirir, bu nedenle `createInitialState` fo
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import TodoList from './TodoList.js';
 
 export default function App() {
@@ -771,7 +772,7 @@ export default function App() {
 }
 ```
 
-```js TodoList.js active
+```js src/TodoList.js active
 import { useReducer } from 'react';
 
 function createInitialState(username) {
@@ -851,7 +852,7 @@ Bu örnek başlatıcı fonksiyonu geçirmez, bu nedenle `createInitialState` fon
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import TodoList from './TodoList.js';
 
 export default function App() {
@@ -859,7 +860,7 @@ export default function App() {
 }
 ```
 
-```js TodoList.js active
+```js src/TodoList.js active
 import { useReducer } from 'react';
 
 function createInitialState(username) {

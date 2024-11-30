@@ -58,7 +58,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -239,7 +239,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -427,7 +427,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -536,7 +536,7 @@ Bu örnekte **React** kullanılmıyor ancak `useState`in dahili olarak nasıl ç
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 let componentHooks = [];
 let currentHookIndex = 0;
 
@@ -750,7 +750,7 @@ export default function Page() {
 
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 import { useState } from 'react';
 import { sculptureList } from './data.js';
 
@@ -792,7 +792,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -963,7 +963,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -1125,7 +1125,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js hidden
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -1488,8 +1488,6 @@ Burada, ihtiyaç duyulan fonksiyonda deklare edilen normal bir `name` değişken
 <Sandpack>
 
 ```js
-import { useState } from 'react';
-
 export default function FeedbackForm() {
   function handleClick() {
     const name = prompt('İsminiz nedir?');

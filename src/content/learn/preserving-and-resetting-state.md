@@ -35,8 +35,9 @@ React, bileşenlerden, React DOM'un DOM'u render etmek için kullandığı bir k
 
 ## State ağaçtaki bir konuma bağlıdır {/*state-is-tied-to-a-position-in-the-tree*/}
 
-Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
+React arayüzünüzdeki bileşen yapısı için [render ağaçları](learn/understanding-your-ui-as-a-tree#the-render-tree) inşa eder.
 
+Bir bileşene state verdiğinizde, state'in bileşen içinde "yaşadığını" düşünebilirsiniz. Aslında state, React içinde tutulur. React tuttuğu her bir state parçasını, bileşenin kullanıcı arayüzü ağacında bulunduğu yere göre doğru bileşenle ilişkilendirir.
 
 Örneğin burada yalnızca bir `<Counter />` JSX elemanı vardır, ancak bu eleman iki farklı konumda render edilir:
 
@@ -1041,7 +1042,7 @@ Bu sohbet uygulamasında, `<Chat>` bileşeni mesaj input state'ini içermektedir
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1067,7 +1068,7 @@ const contacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   selectedContact,
   contacts,
@@ -1091,7 +1092,7 @@ export default function ContactList({
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({ contact }) {
@@ -1146,7 +1147,7 @@ Bu, farklı bir alıcı seçtiğinizde `Chat` bileşeninin, altındaki ağaçtak
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1172,7 +1173,7 @@ const contacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   selectedContact,
   contacts,
@@ -1196,7 +1197,7 @@ export default function ContactList({
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({ contact }) {
@@ -1270,7 +1271,7 @@ Bu örnek butona tıkladığınız zaman bir mesaj göstermektedir. Ancak, buton
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1321,7 +1322,7 @@ En kolay çözüm, `Form'un` her zaman aynı konumda render edilmesi için koşu
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1367,7 +1368,7 @@ Teknik olarak, `if` dal yapısıyla eşleşmesi için `else` dalındaki `<Form /
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1429,7 +1430,7 @@ Görünüşe göre bu alanlar için üst eleman içindeki konumları yeterli de�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1491,7 +1492,7 @@ label { display: block; margin: 10px 0; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1557,7 +1558,7 @@ Farklı bir kişi seçtiğiniz zaman (örneğin Alice), state güncellenmektedir
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1609,7 +1610,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   contacts,
   selectedId,
@@ -1636,7 +1637,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js
+```js src/EditContact.js
 import { useState } from 'react';
 
 export default function EditContact({ initialData, onSave }) {
@@ -1709,7 +1710,7 @@ button {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1762,7 +1763,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   contacts,
   selectedId,
@@ -1789,7 +1790,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js
+```js src/EditContact.js
 import { useState } from 'react';
 
 export default function EditContact({ initialData, onSave }) {
@@ -2010,7 +2011,7 @@ Genişletilmiş state'in, sıralamadan bağımsız olarak ilgili kişiyle ilişk
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Contact from './Contact.js';
 
@@ -2052,7 +2053,7 @@ const contacts = [
 ];
 ```
 
-```js Contact.js
+```js src/Contact.js
 import { useState } from 'react';
 
 export default function Contact({ contact }) {
@@ -2109,7 +2110,7 @@ Ancak, state'in _her belirli kişi_ ile ilişkilendirilmesi istiyoruz.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Contact from './Contact.js';
 
@@ -2151,7 +2152,7 @@ const contacts = [
 ];
 ```
 
-```js Contact.js
+```js src/Contact.js
 import { useState } from 'react';
 
 export default function Contact({ contact }) {

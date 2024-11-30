@@ -55,6 +55,7 @@ Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tu
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -125,6 +126,7 @@ Dikkat edin, kırmızı nokta şimdi önizleme alanına dokunduğunuzda veya üz
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -375,7 +377,7 @@ Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmas�
 
 #### Birden çok alan için tek bir olay yöneticisi kullanma {/*using-a-single-event-handler-for-multiple-fields*/}
 
-Ayrıca obje tanımınızda `[` and `]` ayraçlarını kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
+Ayrıca obje tanımınızda `[` and `]` parantezlerini kullanarak dinamik isme sahip bir özellik belirleyebilirsiniz. İşte üç farklı olay işleyicisi yerine tek bir olay işleyicisi kullanan aynı örnek:
 
 <Sandpack>
 
@@ -984,7 +986,7 @@ Herhangi beklenmedik değişiklik durumunda mutasyon gerçekleşir. `App.js` dos
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Background from './Background.js';
 import Box from './Box.js';
@@ -1037,7 +1039,7 @@ export default function Canvas() {
 }
 ```
 
-```js Box.js
+```js src/Box.js
 import { useState } from 'react';
 
 export default function Box({
@@ -1100,7 +1102,7 @@ export default function Box({
 }
 ```
 
-```js Background.js
+```js src/Background.js
 export default function Background({
   position
 }) {
@@ -1134,7 +1136,7 @@ Sorun, `handleMove` içerisindeki mutasyondaydı. Bu, `shape.position`'ı mutasy
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Background from './Background.js';
 import Box from './Box.js';
@@ -1192,7 +1194,7 @@ export default function Canvas() {
 }
 ```
 
-```js Box.js
+```js src/Box.js
 import { useState } from 'react';
 
 export default function Box({
@@ -1255,7 +1257,7 @@ export default function Box({
 }
 ```
 
-```js Background.js
+```js src/Background.js
 export default function Background({
   position
 }) {
@@ -1289,7 +1291,7 @@ Bu, önceki meydan okumadaki hatalı örnek ile aynıdır. Bu sefer, mutasyonu I
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import Background from './Background.js';
@@ -1343,7 +1345,7 @@ export default function Canvas() {
 }
 ```
 
-```js Box.js
+```js src/Box.js
 import { useState } from 'react';
 
 export default function Box({
@@ -1406,7 +1408,7 @@ export default function Box({
 }
 ```
 
-```js Background.js
+```js src/Background.js
 export default function Background({
   position
 }) {
@@ -1456,7 +1458,7 @@ Bu, Immer ile yeniden yazılmış çözümdür. Olay yöneticilerinin değişmi�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useImmer } from 'use-immer';
 import Background from './Background.js';
 import Box from './Box.js';
@@ -1510,7 +1512,7 @@ export default function Canvas() {
 }
 ```
 
-```js Box.js
+```js src/Box.js
 import { useState } from 'react';
 
 export default function Box({
@@ -1573,7 +1575,7 @@ export default function Box({
 }
 ```
 
-```js Background.js
+```js src/Background.js
 export default function Background({
   position
 }) {

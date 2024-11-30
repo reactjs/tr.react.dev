@@ -1,97 +1,97 @@
 ---
-title: 'Synchronizing with Effects'
+title: "Efektler ile Senkronize Etme"
 ---
 
 <Intro>
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. *Effects* let you run some code after rendering so that you can synchronize your component with some system outside of React.
+Bazı bileşenler harici sistemler ile senkronize olmalıdır. Örneğin, React state'ine göre React olmayan bir bileşeni kontrol etmek, bir sunucu bağlantısı kurmak veya bir bileşen ekranda göründüğünde analiz bilgisi göndermek isteyebilirsiniz. *Efektler*, bileşeninizi bazı React dışı sistemler ile senkronize etmenizi sağlamak için bazı kodları render işleminden sonra çalıştırır.
 
 </Intro>
 
 <YouWillLearn>
 
-- What Effects are
-- How Effects are different from events
-- How to declare an Effect in your component
-- How to skip re-running an Effect unnecessarily
-- Why Effects run twice in development and how to fix them
+- Efektler nelerdir
+- Efektler olaylardan nasıl farklıdır
+- Bileşeninizde nasıl Efekt bildirirsiniz
+- Efekti gereksiz olarak yeniden çalıştırmaktan nasıl kaçınırsınız
+- Efektler geliştirme sırasında neden iki kere çalışır ve bunu nasıl düzeltiriz
 
 </YouWillLearn>
 
-## What are Effects and how are they different from events? {/*what-are-effects-and-how-are-they-different-from-events*/}
+## Efektler nedir ve olaylardan nasıl farklıdırlar? {/*what-are-effects-and-how-are-they-different-from-events*/}
 
-Before getting to Effects, you need to be familiar with two types of logic inside React components:
+Efektlere başlamadan önce React bileşenleri içindeki iki tip mantığa aşina olmalısınız:
 
-- **Rendering code** (introduced in [Describing the UI](/learn/describing-the-ui)) lives at the top level of your component. This is where you take the props and state, transform them, and return the JSX you want to see on the screen. [Rendering code must be pure.](/learn/keeping-components-pure) Like a math formula, it should only _calculate_ the result, but not do anything else.
+- **Kodun render edilmesi** ([Describing the UI](/learn/describing-the-ui) başlığında bahsedildi) bileşeninizin en üst seviyesindedir. Burası prop'ları ve state'i aldığınız, onları dönüştürdüğünüz ve ekranda görmek istediğiniz JSX'i döndürdüğünüz yerdir. [Kodu render etmek saf olmak zorundadır.](/learn/keeping-components-pure) Bir matematik formülünde olduğu gibi sadece sonucu _hesaplamalı_ ve başka hiçbir şey yapmamalıdır.
 
-- **Event handlers** (introduced in [Adding Interactivity](/learn/adding-interactivity)) are nested functions inside your components that *do* things rather than just calculate them. An event handler might update an input field, submit an HTTP POST request to buy a product, or navigate the user to another screen. Event handlers contain ["side effects"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (they change the program's state) caused by a specific user action (for example, a button click or typing).
+- **Olay yöneticileri** ([Adding Interactivity](/learn/adding-interactivity) başlığında bahsedildi) bileşeniniz içinde sadece hesaplama yapmak yerine bir şeyler *yapan* iç içe fonksiyonlardır. Bir olay yöneticisi input alanını güncelleyebilir, bir ürünü satılan almak için HTTP POST isteği gönderebilir ya da kullanıcıyı başka bir ekrana yönlendirebilir. Olay yöneticileri, belirli bir kullanıcı eyleminin (örneğin bir butana tıklamak ya da yazmak) ["yan etkiler"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) içerirler (programın state'ini değiştirirler).
 
-Sometimes this isn't enough. Consider a `ChatRoom` component that must connect to the chat server whenever it's visible on the screen. Connecting to a server is not a pure calculation (it's a side effect) so it can't happen during rendering. However, there is no single particular event like a click that causes `ChatRoom` to be displayed.
+Bazen bu yeterli değildir. Ekranda göründüğünde sohbet sunucusuna bağlanmak zorunda olan bir `ChatRoom` bileşenini ele alalım. Bir sunucuya bağlanmak saf bir hesaplama değildir (bir yan etkidir) bu yüzden render etme sırasında yapılamaz. Ancak, `ChatRoom`'un ekranda görüntülenmesine neden olan tıklama gibi belirli bir olay yoktur.
 
-***Effects* let you specify side effects that are caused by rendering itself, rather than by a particular event.** Sending a message in the chat is an *event* because it is directly caused by the user clicking a specific button. However, setting up a server connection is an *Effect* because it should happen no matter which interaction caused the component to appear. Effects run at the end of a [commit](/learn/render-and-commit) after the screen updates. This is a good time to synchronize the React components with some external system (like network or a third-party library).
+***Efektler*, belirli bir olaydan ziyade render etmenin kendisinden kaynaklanan yan etkileri belirtmenizi sağlar.** Sohbete mesaj göndermek bir *olaydır* çünkü direkt olarak kullanıcının belirli bir butona tıklaması ile gerçekleşir. Ancak, bir sunucu bağlantısı kurmak *Efekttir* çünkü bileşenin ekranda görünmesine neden olan etkileşim ne olursa olsun gerçekleşmesi gerekir. Efektler ekran güncellendikten sonra [işlemenin (commit)](/learn/render-and-commit) sonunda çalışır. Bu, React bileşenlerini bazı harici sistemlerle (ağ veya üçüncü parti kütüphane ile) senkronize etmek için iyi bir zamandır.
 
 <Note>
 
-Here and later in this text, capitalized "Effect" refers to the React-specific definition above, i.e. a side effect caused by rendering. To refer to the broader programming concept, we'll say "side effect".
+Burada ve daha sonra bu metinde, büyük harflerle yazılan "Efekt", yukarıdaki React'e özgü tanıma atıfta bulunur, örneğin render etmenin neden olduğu bir yan etki. Daha geniş programlama konseptine atıfta bulunmak için "yan etki" ifadesini kullanacağız.
 
 </Note>
 
 
-## You might not need an Effect {/*you-might-not-need-an-effect*/}
+## Bir Efekte ihtiyacınız olmayabilir {/*you-might-not-need-an-effect*/}
 
-**Don't rush to add Effects to your components.** Keep in mind that Effects are typically used to "step out" of your React code and synchronize with some *external* system. This includes browser APIs, third-party widgets, network, and so on. If your Effect only adjusts some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+**Bileşenlerinize Efekt eklemekte acele etmeyin.** Efektlerin genel olarak React kodununuzun "dışına çıkmakta" ve bazı *harici* sistemler ile senkronize etmekte kullanıldığı aklınızda olsun. Bu tarayıcı API'larını, üçüncü parti widget'ları, ağları ve diğer şeyleri içerir. Efektiniz yalnızca bazı state'leri başka bir state'e göre ayarlıyorsa, [bir Efekte ihtiyacınız olmayabilir.](/learn/you-might-not-need-an-effect)
 
-## How to write an Effect {/*how-to-write-an-effect*/}
+## Efekt nasıl yazılır {/*how-to-write-an-effect*/}
 
-To write an Effect, follow these three steps:
+Bir Efekt yazmak için aşağıdaki üç adımı takip edin:
 
-1. **Declare an Effect.** By default, your Effect will run after every render.
-2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
-3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
+1. **Bir Efekt bildirin.** Varsayılan olarak, Efektiniz her [işleme](/learn/render-and-commit)'den sonra çalışacaktır.
+2. **Efektin bağımlılıklarını belirtin.** Çoğu Efekt her render yerine yalnızca *gerektiğinde* yeniden çalışmalıdır. Örneğin, bir solma animasyonu yalnızca bileşen göründüğünde tetiklenmelidir. Bir sohbet odasına bağlanmak ya da bağlantıyı koparmak yalnızca bileşen göründüğünde ve kaybolduğunda ya da sohbet odası değiştiğinde olmalıdır. *Bağımlılıkları* belirterek bunu nasıl kontrol edeceğinizi öğreneceksiniz.
+3. **Gerekliyse temizleme (cleanup) ekleyin.** Bazı Efektlerin, yaptıkları her şeyi nasıl durduracaklarını, geri alacaklarını veya temizleyeceklerini belirtmeleri gerekir. Örneğin, "bağlanmak" "bağlantıyı kese" ihtiyaç duyar, "abone ol" "abonelikten çıka" ihtiyaç duyar ve "veri getirme (fetch)" ya "iptal" ya da "görmezden gele" ihtiyaç duyar. Bir *temizleme fonksiyonu* döndürerek bunu nasıl yapacağınızı öğreneceksiniz.
 
-Let's look at each of these steps in detail.
+Gelin her bir adıma detaylı bir şekilde bakalım.
 
-### Step 1: Declare an Effect {/*step-1-declare-an-effect*/}
+### 1. Adım: Bir Efekt bildirin {/*step-1-declare-an-effect*/}
 
-To declare an Effect in your component, import the [`useEffect` Hook](/reference/react/useEffect) from React:
+Bileşeninizde bir Efekt bildirmek için [`useEffect` Hook'unu](/reference/react/useEffect) içe aktarın:
 
 ```js
 import { useEffect } from 'react';
 ```
 
-Then, call it at the top level of your component and put some code inside your Effect:
+Daha sonra, bileşeninizin üst seviyesinde çağırın ve Efektiniz içine kodunuzu yazın:
 
 ```js {2-4}
 function MyComponent() {
   useEffect(() => {
-    // Code here will run after *every* render
+    // Buradaki kod *her* render'dan sonra çalışır
   });
   return <div />;
 }
 ```
 
-Every time your component renders, React will update the screen *and then* run the code inside `useEffect`. In other words, **`useEffect` "delays" a piece of code from running until that render is reflected on the screen.**
+Bileşeniniz her render edildiğinde, React ekranı güncelleyecektir *ve sonra* `useEffect` içindeki kodu çalıştıracaktır. Diğer bir deyişle, **`useEffect` bir kod parçasının çalışmasını o render işlemi ekrana yansıtılana kadar "geciktirir".**
 
-Let's see how you can use an Effect to synchronize with an external system. Consider a `<VideoPlayer>` React component. It would be nice to control whether it's playing or paused by passing an `isPlaying` prop to it:
+Harici bir sistemle senkronize etmek için Efekti nasıl kullanacağımızı görelim. Bir `<VideoPlayer>` React bileşeni düşünün. Bu bileşene `isPlaying` prop'u ileterek videonun çalıyor mu yoksa duraklatılmış mı olduğunu kontrol etmek güzel olurdu:
 
 ```js
 <VideoPlayer isPlaying={isPlaying} />;
 ```
 
-Your custom `VideoPlayer` component renders the built-in browser [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag:
+Özel `VideoPlayer` bileşeniniz tarayıcıya yerleşik [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) elemanını render eder:
 
 ```js
 function VideoPlayer({ src, isPlaying }) {
-  // TODO: do something with isPlaying
+  // YAPILACAK: isPlayinga ile bir şey yap
   return <video src={src} />;
 }
 ```
 
-However, the browser `<video>` tag does not have an `isPlaying` prop. The only way to control it is to manually call the [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) methods on the DOM element. **You need to synchronize the value of `isPlaying` prop, which tells whether the video _should_ currently be playing, with calls like `play()` and `pause()`.**
+Ancak, tarayıcı `<video>` elemanı `isPlaying` prop'una sahip değildir. Kontrol etmenin tek yolu manuel olarak DOM elemanında [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) ve [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) metodlarını çağırmaktır. **Videonun şu anda _oynatılıp oynatılmayacağını_ söyleyen `isPlaying` prop'unun değerini `play()` ve `pause()` gibi çağrıları kullanarak senkronize etmeniz gerekmektedir.**
 
-We'll need to first [get a ref](/learn/manipulating-the-dom-with-refs) to the `<video>` DOM node.
+İlk olarak `<video>` DOM node'una [bir ref verin](/learn/manipulating-the-dom-with-refs).
 
-You might be tempted to try to call `play()` or `pause()` during rendering, but that isn't correct:
+Render etme sırasında `play()` veya `pause()` metodlarını çağırmak isteyebilirsiniz ancak bu doğru bir yöntem değil:
 
 <Sandpack>
 
@@ -102,9 +102,9 @@ function VideoPlayer({ src, isPlaying }) {
   const ref = useRef(null);
 
   if (isPlaying) {
-    ref.current.play();  // Calling these while rendering isn't allowed.
+    ref.current.play();  // Render etme sırasında bunları çağırmaya izin verilmez.
   } else {
-    ref.current.pause(); // Also, this crashes.
+    ref.current.pause(); // Ayrıca bu çöker
   }
 
   return <video ref={ref} src={src} loop playsInline />;
@@ -115,7 +115,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Duraklat' : 'Oynat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
@@ -133,11 +133,11 @@ video { width: 250px; }
 
 </Sandpack>
 
-The reason this code isn't correct is that it tries to do something with the DOM node during rendering. In React, [rendering should be a pure calculation](/learn/keeping-components-pure) of JSX and should not contain side effects like modifying the DOM.
+Bu kodun doğru olmamasının sebebi render etme esnasında DOM node'una bir şeyler yapmaya çalışmasıdır. React'te, [render etme JSX'ın saf bir hesaplaması](/learn/keeping-components-pure) olmalıdır ve DOM'u değiştirme gibi yan etkileri içermemelidir.
 
-Moreover, when `VideoPlayer` is called for the first time, its DOM does not exist yet! There isn't a DOM node yet to call `play()` or `pause()` on, because React doesn't know what DOM to create until you return the JSX.
+Dahası, `VideoPlayer` ilk çağırıldığı zaman, o bileşen henüz DOM'da değildir! Henüz `play()` ve `pause()` metodları çağırılıcak bir DOM node'u yok çünkü React, siz JSX'i döndürene kadar hangi DOM'u oluşturacağını bilmiyor.
 
-The solution here is to **wrap the side effect with `useEffect` to move it out of the rendering calculation:**
+Buradaki çözüm, **yan etkiyi render etme hesaplamasının dışına çıkarmak için useEffect içine taşımaktır:**
 
 ```js {6,12}
 import { useEffect, useRef } from 'react';
@@ -157,11 +157,11 @@ function VideoPlayer({ src, isPlaying }) {
 }
 ```
 
-By wrapping the DOM update in an Effect, you let React update the screen first. Then your Effect runs.
+DOM güncellemesini Efekt içine taşıyarak React'in ilk olarak ekranı güncellemesine izin verirsiniz. Ardından Efektiniz çalışır.
 
-When your `VideoPlayer` component renders (either the first time or if it re-renders), a few things will happen. First, React will update the screen, ensuring the `<video>` tag is in the DOM with the right props. Then React will run your Effect. Finally, your Effect will call `play()` or `pause()` depending on the value of `isPlaying`.
+`VideoPlayer` bileşeniniz render edildiğinde (ya ilk sefer ya da yeniden render'larda), birkaç şey olacaktır. İlk olarak, React ekranı güncelleyecektir, bu `<video>` elemanının DOM'da doğru prop'larla olmasını sağlayacaktır. Ardından React, Efektinizi çalıştıracaktır. Son olarak, Efektiniz `isPlaying` değerine göre `play()` veya `pause()` metodlarını çağıracaktır.
 
-Press Play/Pause multiple times and see how the video player stays synchronized to the `isPlaying` value:
+Oynat/Duraklat butonuna birkaç kez basın ve video oynatıcının `isPlaying` değeriyle nasıl senkronize kaldığını görün:
 
 <Sandpack>
 
@@ -187,7 +187,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Duraklat' : 'Oynat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
@@ -205,13 +205,13 @@ video { width: 250px; }
 
 </Sandpack>
 
-In this example, the "external system" you synchronized to React state was the browser media API. You can use a similar approach to wrap legacy non-React code (like jQuery plugins) into declarative React components.
+Bu örnekte, React state'ine senkronize ettiğiniz "harici sistem" tarayıcı medya API'ıdır. Eski, React olmayan kodu (JQuery eklentileri gibi) bildirim temelli React bileşenlerine sarmak için benzer bir yaklaşım kullanabilirsiniz.
 
-Note that controlling a video player is much more complex in practice. Calling `play()` may fail, the user might play or pause using the built-in browser controls, and so on. This example is very simplified and incomplete.
+Bir video oynatıcısını kontrol etmenin pratikte çok daha kompleks bir şey olduğuna dikkat edin. `play()` metodunu çağırmak başarısız olabilir, kullanıcı tarayıcıya yerleşik kontrolleri kullanarak videoyu oynatıp durdurabilir ve bunun gibi şeyler. Bu örnek çok basitleştirilmiş ve eksiktir.
 
 <Pitfall>
 
-By default, Effects run after *every* render. This is why code like this will **produce an infinite loop:**
+Varsayılan olarak, Efektler *her* render'dan sonra çalışır. Bu yüzden aşağıdaki gibi bir kod **sonsuz bir döngü yaratacaktır:**
 
 ```js
 const [count, setCount] = useState(0);
@@ -220,20 +220,20 @@ useEffect(() => {
 });
 ```
 
-Effects run as a *result* of rendering. Setting state *triggers* rendering. Setting state immediately in an Effect is like plugging a power outlet into itself. The Effect runs, it sets the state, which causes a re-render, which causes the Effect to run, it sets the state again, this causes another re-render, and so on.
+Efektler render işleminin *sonucu* olarak çalışırlar. State'i değiştirmek render'ı *tetikler*. Bir Efekt içinde state'i hemen değiştirmek, bir elektrik prizini kendisine takmaya benzer. Daha sonra Efekt çalışır, state'i değiştirir, bu yeniden render'a neden olur, bu Efektin çalışmasına neden olur, yeniden state'i değiştirir, bu başka bir yeniden render'a neden olur, ve bu böyle devam eder.
 
-Effects should usually synchronize your components with an *external* system. If there's no external system and you only want to adjust some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+Efektleriniz genellikle bileşenlerinizi *harici* bir sistemle senkronize etmelidir. Eğer harici bir sistem yoksa ve sadece state'i başka bir state'e göre ayarlamak istiyorsanız, [bir Efekte ihtiyacınız olmayabilir.](/learn/you-might-not-need-an-effect)
 
 </Pitfall>
 
-### Step 2: Specify the Effect dependencies {/*step-2-specify-the-effect-dependencies*/}
+### 2. Adım: Efekt bağımlılıklarını belirtin {/*step-2-specify-the-effect-dependencies*/}
 
-By default, Effects run after *every* render. Often, this is **not what you want:**
+Varsayılan olarak, Efektler *her* render'dan sonra çalışır. Genellikle bu, **istediğiniz davranış değildir:**
 
-- Sometimes, it's slow. Synchronizing with an external system is not always instant, so you might want to skip doing it unless it's necessary. For example, you don't want to reconnect to the chat server on every keystroke.
-- Sometimes, it's wrong. For example, you don't want to trigger a component fade-in animation on every keystroke. The animation should only play once when the component appears for the first time.
+- Bazen yavaştır. Harici bir sistem ile senkronize etmek anlık bir olay değildir bu yüzden gerekli olmadıkça senkronize etme işlemini atlamak isteyebilirsiniz. Örneğin, her bir tuşa her bastığınızda sohbet sunucusuna tekrar bağlanmak istemezsiniz.
+- Bazen yanlıştır. Örneğin, her bir tuşa her bastığınızda bileşen solma animasyonunu tetiklemek istemezsiniz. Animasyon yalnızca bir kere, bileşen ekranda belirdiği zaman tetiklenmelidir.
 
-To demonstrate the issue, here is the previous example with a few `console.log` calls and a text input that updates the parent component's state. Notice how typing causes the Effect to re-run:
+Sorunu göstermek için, birkaç `console.log` çağrısı ve üst bileşenin state'ini güncelleyen bir input alanı içeren önceki örneği burada bulabilirsiniz. Yazmanın Efektin nasıl yeniden çalışmasına neden olduğuna dikkat edin:
 
 <Sandpack>
 
@@ -245,10 +245,10 @@ function VideoPlayer({ src, isPlaying }) {
 
   useEffect(() => {
     if (isPlaying) {
-      console.log('Calling video.play()');
+      console.log('video.play() çağrılıyor');
       ref.current.play();
     } else {
-      console.log('Calling video.pause()');
+      console.log('video.pause() çağrılıyor');
       ref.current.pause();
     }
   });
@@ -263,7 +263,7 @@ export default function App() {
     <>
       <input value={text} onChange={e => setText(e.target.value)} />
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Duraklat' : 'Oynat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
@@ -281,7 +281,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-You can tell React to **skip unnecessarily re-running the Effect** by specifying an array of *dependencies* as the second argument to the `useEffect` call. Start by adding an empty `[]` array to the above example on line 14:
+`useEffect` çağrısının ikinci argümanı olarak *bağımlılıklar* dizisini belirterek React'e **Efekti gereksiz yere yeniden çalıştırmayı atlamasını** söyleyebilirsiniz. Yukarıdaki örnekteki 14. satıra boş bir `[]` dizi ekleyin:
 
 ```js {3}
   useEffect(() => {
@@ -289,7 +289,7 @@ You can tell React to **skip unnecessarily re-running the Effect** by specifying
   }, []);
 ```
 
-You should see an error saying `React Hook useEffect has a missing dependency: 'isPlaying'`:
+`React Hook'u useEffect'in eksik bir bağımlılığı var: 'isPlaying'` diyen bir hata göreceksiniz:
 
 <Sandpack>
 
@@ -301,13 +301,13 @@ function VideoPlayer({ src, isPlaying }) {
 
   useEffect(() => {
     if (isPlaying) {
-      console.log('Calling video.play()');
+      console.log('video.play() çağrılıyor');
       ref.current.play();
     } else {
-      console.log('Calling video.pause()');
+      console.log('video.pause() çağrılıyor');
       ref.current.pause();
     }
-  }, []); // This causes an error
+  }, []); // Bu bir hataya neden olur
 
   return <video ref={ref} src={src} loop playsInline />;
 }
@@ -319,7 +319,7 @@ export default function App() {
     <>
       <input value={text} onChange={e => setText(e.target.value)} />
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Duraklat' : 'Oynat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
@@ -337,19 +337,19 @@ video { width: 250px; }
 
 </Sandpack>
 
-The problem is that the code inside of your Effect *depends on* the `isPlaying` prop to decide what to do, but this dependency was not explicitly declared. To fix this issue, add `isPlaying` to the dependency array:
+Buradaki problem Efektiniz içindeki kodun ne yapacağı `isPlaying` prop'una *bağlıdır* ancak bu bağımlılık açıkça bildirilmemiştir. Bu sorunu düzeltmek için bağımlılık dizisine `isPlaying` ekleyin:
 
 ```js {2,7}
   useEffect(() => {
-    if (isPlaying) { // It's used here...
+    if (isPlaying) { // Burada kullanılıyor...
       // ...
     } else {
       // ...
     }
-  }, [isPlaying]); // ...so it must be declared here!
+  }, [isPlaying]); // ...yani burada bildirilmeli!
 ```
 
-Now all dependencies are declared, so there is no error. Specifying `[isPlaying]` as the dependency array tells React that it should skip re-running your Effect if `isPlaying` is the same as it was during the previous render. With this change, typing into the input doesn't cause the Effect to re-run, but pressing Play/Pause does:
+Şimdi bütün bağımlılıklar bildirildiği için artık hata mesajı yoktur. `[isPlaying]`'i bağımlılık listesinde belirtmek React'in, eğer `isPlaying` değeri bir önceki render ile aynıysa Efektinizin yeniden çalışmasını atlamasını sağlar. Bu değişiklikle beraber input alanına bir şey yazmak Efektin yeniden çalışmasına neden olmaz ama Oynat/Duraklat butonuna basmak Efekti yeniden çalıştırır:
 
 <Sandpack>
 
@@ -361,10 +361,10 @@ function VideoPlayer({ src, isPlaying }) {
 
   useEffect(() => {
     if (isPlaying) {
-      console.log('Calling video.play()');
+      console.log('video.play() çağrılıyor');
       ref.current.play();
     } else {
-      console.log('Calling video.pause()');
+      console.log('video.pause() çağrılıyor');
       ref.current.pause();
     }
   }, [isPlaying]);
@@ -379,7 +379,7 @@ export default function App() {
     <>
       <input value={text} onChange={e => setText(e.target.value)} />
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Pause' : 'Play'}
+        {isPlaying ? 'Duraklat' : 'Oynat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
@@ -397,37 +397,37 @@ video { width: 250px; }
 
 </Sandpack>
 
-The dependency array can contain multiple dependencies. React will only skip re-running the Effect if *all* of the dependencies you specify have exactly the same values as they had during the previous render. React compares the dependency values using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. See the [`useEffect` reference](/reference/react/useEffect#reference) for details.
+Bağımlılık dizisi birden çok bağımlılık içerebilir. React, yalnızca belirttiğiniz bağımlılıkların *tümünün* önceki render sırasına sahip oldukları değerlerle tamamen aynı değerlere sahip olması durumunda Efekti çalıştırmayı atlayacaktır. React, bağımlılıkların değerlerini [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kıyaslamasını kullanarak karşılaştırır. Detaylar için [`useEffect` referansına](/reference/react/useEffect#reference) göz atın.
 
-**Notice that you can't "choose" your dependencies.** You will get a lint error if the dependencies you specified don't match what React expects based on the code inside your Effect. This helps catch many bugs in your code. If you don't want some code to re-run, [*edit the Effect code itself* to not "need" that dependency.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
+**Bağımlılıklarınızı "seçemediğinize" dikkat edin.** Eğer belirttiğiniz bağımlılıklar React'in Efektiniz içindeki kodunuza göre beklediği bağımlılıklar ile eşleşmiyorsa bir lint hatası alacaksınız. Bu kodunuzdaki pek çok hatayı yakalamanıza yardımcı olur. Eğer bir kodun tekrar çalışmasını istemiyorsanız, [*Efekt kodunun kendisini* o bağımlılığa "ihtiyacı olmayacak" şekilde düzenleyin.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
 
 <Pitfall>
 
-The behaviors without the dependency array and with an *empty* `[]` dependency array are different:
+Bağımlılık dizisinin olmaması ve *boş* `[]` bir bağımlılık dizisinin olması farklı davranışlar göstermektedir:
 
 ```js {3,7,11}
 useEffect(() => {
-  // This runs after every render
+  // Bu her render'dan sonra çalışır
 });
 
 useEffect(() => {
-  // This runs only on mount (when the component appears)
+  // Bu sadece bileşen DOM'a eklendikten sonra çalışır (bileşen ekranda göründüğünde)
 }, []);
 
 useEffect(() => {
-  // This runs on mount *and also* if either a or b have changed since the last render
+  // Bu hem bileşen DOM'a eklendiğinde *hem de* son render'dan itibaren a ya da b değiştiğinde çalışır
 }, [a, b]);
 ```
 
-We'll take a close look at what "mount" means in the next step.
+"DOM'a eklenmenin (mount)" ne demek olduğuna bir sonraki adımda bakacağız.
 
 </Pitfall>
 
 <DeepDive>
 
-#### Why was the ref omitted from the dependency array? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
+#### ref neden bağımlılık dizisinde değildir? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
 
-This Effect uses _both_ `ref` and `isPlaying`, but only `isPlaying` is declared as a dependency:
+Bu Efekt _hem_ `ref` _hem de_ `isPlaying` kullanmaktadır ancak yalnızca `isPlaying` bağımlılık olarak bildirilmiştir:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -441,7 +441,7 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying]);
 ```
 
-This is because the `ref` object has a *stable identity:* React guarantees [you'll always get the same object](/reference/react/useRef#returns) from the same `useRef` call on every render. It never changes, so it will never by itself cause the Effect to re-run. Therefore, it does not matter whether you include it or not. Including it is fine too:
+Bunun nedeni `ref` nesnesi *sabit bir kimliğe* sahiptir: React, her render'da aynı `useRef` çağrısından [her zaman aynı nesneyi alacağınızı](/reference/react/useRef#returns) garanti eder. Nesne hiçbir zaman değişmez bu yüzden nesne Efektin yeniden çalışmasına neden olmaz. Bu yüzden bağımlılık listesine dahil edip etmediğiniz önemli değildir. Dahil etmek de sorun yaratmaz:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -455,17 +455,17 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying, ref]);
 ```
 
-The [`set` functions](/reference/react/useState#setstate) returned by `useState` also have stable identity, so you will often see them omitted from the dependencies too. If the linter lets you omit a dependency without errors, it is safe to do.
+`useState`'den döndürülen [`set` fonksiyonları](/reference/react/useState#setstate) da sabit bir kimliğe sahiptir bu yüzden bağımlılık dizilerine dahil edilmediklerini sık sık görürsünüz. Eğer linter bir bağımlılığı dahil etmediğinizde hata vermiyorsa, dahil etmemeniz güvenlidir.
 
-Omitting always-stable dependencies only works when the linter can "see" that the object is stable. For example, if `ref` was passed from a parent component, you would have to specify it in the dependency array. However, this is good because you can't know whether the parent component always passes the same ref, or passes one of several refs conditionally. So your Effect _would_ depend on which ref is passed.
+Sürekli-sabit olan bağımlılıkları dahil etmemek yalnızca linter nesnenin sabit olduğunu "görebildiğinde" çalışır. Örneğin, eğer `ref` üst bir elemandan iletiliyorsa, onu bağımlılık dizisinde belirtmeniz gerekmektedir. Ancak bu iyidir çünkü üst bileşenin her zaman aynı ref'i mi yoksa koşullu olarak birkaç ref'den birini mi ilettiğini bilemezsiniz. Dolayısıyla, Efektiniz hangi ref'in iletildiğine bağlı _olacaktır_.
 
 </DeepDive>
 
-### Step 3: Add cleanup if needed {/*step-3-add-cleanup-if-needed*/}
+### 3. Adım: Gerekliyse temizleme fonksiyonu ekle {/*step-3-add-cleanup-if-needed*/}
 
-Consider a different example. You're writing a `ChatRoom` component that needs to connect to the chat server when it appears. You are given a `createConnection()` API that returns an object with `connect()` and `disconnect()` methods. How do you keep the component connected while it is displayed to the user?
+Başka bir örneği ele alalım. Ekranda göründüğünde sohbet sunucusuna bağlanması gereken bir `ChatRoom` bileşeni yazıyorsunuz. Elinizde `connect()` ve `disconnect()` metodlarını içeren bir nesne döndüren `createConnection()` API'ı var. Bileşen kullanıcı tarafında görüntülenirken bu bileşeni nasıl bağlı tutarsınız?
 
-Start by writing the Effect logic:
+Efektin mantığını yazarak başlayın:
 
 ```js
 useEffect(() => {
@@ -474,7 +474,7 @@ useEffect(() => {
 });
 ```
 
-It would be slow to connect to the chat after every re-render, so you add the dependency array:
+Her yeniden render'dan sonra tekrar sohbete bağlanmak çok yavaş olurdu bu yüzden bağımlılık dizisi ekleyin:
 
 ```js {4}
 useEffect(() => {
@@ -483,9 +483,9 @@ useEffect(() => {
 }, []);
 ```
 
-**The code inside the Effect does not use any props or state, so your dependency array is `[]` (empty). This tells React to only run this code when the component "mounts", i.e. appears on the screen for the first time.**
+**Efekt içindeki kod herhangi bir prop ya da state kullanmıyor bu yüzden bağımlılık diziniz `[]` (boş) olacaktır. Bu React'e, bu kodu yalnızca bileşen "DOM'a eklendiğinde" çalıştırmasını söyler. Örneğin, bileşen ekranda ilk defa göründüğünde.**
 
-Let's try running this code:
+Bu kodu çalıştırmayı deneyelim:
 
 <Sandpack>
 
@@ -498,19 +498,19 @@ export default function ChatRoom() {
     const connection = createConnection();
     connection.connect();
   }, []);
-  return <h1>Welcome to the chat!</h1>;
+  return <h1>Sohbete hoşgeldiniz!</h1>;
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting...');
+      console.log('✅ Bağlanıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected.');
+      console.log('❌ Bağlantı kesildi.');
     }
   };
 }
@@ -522,15 +522,15 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-This Effect only runs on mount, so you might expect `"✅ Connecting..."` to be printed once in the console. **However, if you check the console, `"✅ Connecting..."` gets printed twice. Why does it happen?**
+Bu Efekt yalnızca bileşen DOM'a eklendiğinde çalışır, bu yüzden `"✅ Bağlanıyor..."` yazısının konsola sadece bir kere yazılmasını bekleyebilirsiniz. **Ancak, eğer konsolu kontrol ederseniz, `"✅ Bağlanıyor..."` iki kere yazılmıştır. Bu niye olmakta?**
 
-Imagine the `ChatRoom` component is a part of a larger app with many different screens. The user starts their journey on the `ChatRoom` page. The component mounts and calls `connection.connect()`. Then imagine the user navigates to another screen--for example, to the Settings page. The `ChatRoom` component unmounts. Finally, the user clicks Back and `ChatRoom` mounts again. This would set up a second connection--but the first connection was never destroyed! As the user navigates across the app, the connections would keep piling up.
+`ChatRoom` bileşeninin birçok farklı ekrana sahip daha büyük bir uygulamanın parçası olduğunu hayal edin. Kullanıcı macerasına `ChatRoom` sayfasına başlıyor. Bileşen DOM'a ekleniyor ve `connection.connect()` fonksiyonunu çağırıyor. Şimdi ise kullanıcının başka bir sayfaya örneğin Ayarlar sayfasına gittiğini düşünün. `ChatRoom` bileşeni DOM'dan kaldırılır. Son olarak, kullanıcı Geri tuşuna basar ve `ChatRoom` bileşeni tekrar DOM'a eklenir. Bu ikinci bir bağlantı kurar ancak ilk bağlantı yok edilmemişti! Kullanıcı uygulama sayfalarında gezdikçe bağlantılar birikecektir.
 
-Bugs like this are easy to miss without extensive manual testing. To help you spot them quickly, in development React remounts every component once immediately after its initial mount.
+Bu gibi hatalar geniş manuel testler olmadan kolayca gözden kaçırılırlar. Bu hataları hızlıcı farketmeniz için geliştirme sırasında React, bileşen ilk defa DOM'a eklendikten hemen sonra o bileşeni bir kere DOM'dan kaldırır.
 
-Seeing the `"✅ Connecting..."` log twice helps you notice the real issue: your code doesn't close the connection when the component unmounts.
+`"✅ Bağlanıyor..."` mesajını iki kere görmek asıl sorunu farketmenize yardımcı olur: kodunuz, bileşen DOM'dan kaldırıldığında bağlantıyı kesmemektedir.
 
-To fix the issue, return a *cleanup function* from your Effect:
+Bu sorunu düzeltmek için, Efektinizde bir *temizleme fonksiyonu* döndürün:
 
 ```js {4-6}
   useEffect(() => {
@@ -542,7 +542,7 @@ To fix the issue, return a *cleanup function* from your Effect:
   }, []);
 ```
 
-React will call your cleanup function each time before the Effect runs again, and one final time when the component unmounts (gets removed). Let's see what happens when the cleanup function is implemented:
+React, Efektiniz yeniden çalışmadan önce her seferinde temizleme fonksiyonunuzu çağıracak ve son olarak bileşen DOM'dan kaldırıldığında çağıracaktır. Temizleme fonksiyonu yazıldığı zaman ne olduğunu görelim:
 
 <Sandpack>
 
@@ -556,19 +556,19 @@ export default function ChatRoom() {
     connection.connect();
     return () => connection.disconnect();
   }, []);
-  return <h1>Welcome to the chat!</h1>;
+  return <h1>Sohbete hoşgeldiniz!</h1>;
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
-  // A real implementation would actually connect to the server
+  // Gerçek bir uygulama aslında sunucuya bağlanacaktır
   return {
     connect() {
-      console.log('✅ Connecting...');
+      console.log('✅ Bağlanıyor...');
     },
     disconnect() {
-      console.log('❌ Disconnected.');
+      console.log('❌ Bağlantı kesildi.');
     }
   };
 }
@@ -580,27 +580,54 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Now you get three console logs in development:
+Şimdi geliştirme sırasında üç mesaj alırsınız:
 
-1. `"✅ Connecting..."`
-2. `"❌ Disconnected."`
-3. `"✅ Connecting..."`
+1. `"✅ Bağlanıyor..."`
+2. `"❌ Bağlantı kesildi."`
+3. `"✅ Bağlanıyor..."`
 
-**This is the correct behavior in development.** By remounting your component, React verifies that navigating away and back would not break your code. Disconnecting and then connecting again is exactly what should happen! When you implement the cleanup well, there should be no user-visible difference between running the Effect once vs running it, cleaning it up, and running it again. There's an extra connect/disconnect call pair because React is probing your code for bugs in development. This is normal--don't try to make it go away!
+**Bu geliştirme sırasındaki doğru davranıştır.** React, bileşeninizi DOM'dan kaldırarak, uygulama sayfalarında ileri ve geri gitmenin kodunuzu bozmayacağını doğrular. Bağlantının kesilmesi ve yeniden bağlanılması tam da olması gerekendir! Temizleme fonksiyonunu doğru uyguladığınız zaman, Efekti bir kere çalıştırma ile çalıştırma, temizleme ve tekrar çalıştırma arasında kullanıcı tarafından görülen bir fark olmamalıdır. Burada fazladan bir bağlan/bağlantıyı kes çağrı çifti vardır çünkü React, geliştirme sırasındaki hatalar için kodunuzu araştırmaktadır. Bu normal davranıştır, ondan kurtulmaya çalışmayın!
 
-**In production, you would only see `"✅ Connecting..."` printed once.** Remounting components only happens in development to help you find Effects that need cleanup. You can turn off [Strict Mode](/reference/react/StrictMode) to opt out of the development behavior, but we recommend keeping it on. This lets you find many bugs like the one above.
+**Son üründe, `"✅ Bağlanıyor..."` mesajını bir kere alırsınız.** Bileşenlerin DOM'dan kaldırılması yalnızca geliştirme sırasında temizleme gerektiren Efektleri bulmanıza yardımcı olmak için vardır. [Strict Modu](/reference/react/StrictMode) kapatarak geliştirme sırasındaki davranışlarından kaçınabilirsiniz ancak biz bunu açık tutmanızı tavsiye ediyoruz. Bu, yukarıdaki gibi bir çok hatayı bulmanızı sağlar.
 
-## How to handle the Effect firing twice in development? {/*how-to-handle-the-effect-firing-twice-in-development*/}
+## Geliştirme sırasında Efektin iki kere çalışması nasıl kullanılır? {/*how-to-handle-the-effect-firing-twice-in-development*/}
 
-React intentionally remounts your components in development to find bugs like in the last example. **The right question isn't "how to run an Effect once", but "how to fix my Effect so that it works after remounting".**
+React, son örnekteki gibi hataları bulmak için bileşenlerinizi geliştirme sırasında kasıtlı olarak DOM'dan kaldırır ve ekler. **Doğru soru "bir Efekt nasıl bir defa çalıştırılır" değil, "Efektimi bileşen DOM'dan kaldırılıp yeniden eklendikten sonra çalışacak şekilde nasıl düzeltirim" olmalıdır.**
 
-Usually, the answer is to implement the cleanup function.  The cleanup function should stop or undo whatever the Effect was doing. The rule of thumb is that the user shouldn't be able to distinguish between the Effect running once (as in production) and a _setup → cleanup → setup_ sequence (as you'd see in development).
+Genellikle doğru cevap, temizleme fonksiyonu eklemektir. Temizleme fonksiyonu, Efektin yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çalışan Efekt (son üründe olduğu gibi) ile _kurulum → temizleme → kurulum_ sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
 
-Most of the Effects you'll write will fit into one of the common patterns below.
+Yazacağınız Efektlerin çoğu aşağıdaki yaygın kalıplardan birine uyacaktır.
 
-### Controlling non-React widgets {/*controlling-non-react-widgets*/}
+<Pitfall>
 
-Sometimes you need to add UI widgets that aren't written to React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+#### Effekt'lerin tetiklenmesini önlemek için refleri kullanmayın {/*dont-use-refs-to-prevent-effects-from-firing*/}
+
+A common pitfall for preventing Effects firing twice in development is to use a `ref` to prevent the Effect from running more than once. For example, you could "fix" the above bug with a `useRef`:
+
+```js {1,3-4}
+  const connectionRef = useRef(null);
+  useEffect(() => {
+    // 🚩 This wont fix the bug!!!
+    if (!connectionRef.current) {
+      connectionRef.current = createConnection();
+      connectionRef.current.connect();
+    }
+  }, []);
+```
+
+This makes it so you only see `"✅ Connecting..."` once in development, but it doesn't fix the bug.
+
+When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix". 
+
+To fix the bug, it is not enough to just make the Effect run once. The effect needs to work after re-mounting, which means the connection needs to be cleaned up like in the solution above.
+
+See the examples below for how to handle common patterns.
+
+</Pitfall>
+
+### React olmayan widget'ları kontrol etmek {/*controlling-non-react-widgets*/}
+
+Bazen React'te yazılmamış UI widget'ları eklemek isteyebilirsiniz. Örneğin, sayfanıza bir harita bileşeni ekliyorsunuz. Bu harita `setZoomLevel()` metoduna sahip ve React kodunuzdaki `zoomLevel` state değişkenini yakınlaştırma seviyesi ile senkronize etmek istiyorsunuz. Efektiniz şuna benzeyecektir:
 
 ```js
 useEffect(() => {
@@ -609,9 +636,9 @@ useEffect(() => {
 }, [zoomLevel]);
 ```
 
-Note that there is no cleanup needed in this case. In development, React will call the Effect twice, but this is not a problem because calling `setZoomLevel` twice with the same value does not do anything. It may be slightly slower, but this doesn't matter because it won't remount needlessly in production.
+Bu durumda temizleme fonksiyonuna ihtiyacınız yoktur. Geliştirme sırasında React, Efekti iki defa çağıracaktır ancak bu bir problem yaratmaz çünkü `setZoomLevel` metodunu aynı değer ile iki defa çağırmak hiçbir şey yapmaz. Bu biraz yavaş olabilir ancak son üründe bileşen gereksiz yere DOM'a eklenip çıkarılmadığından önemli değildir.
 
-Some APIs may not allow you to call them twice in a row. For example, the [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) method of the built-in [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) element throws if you call it twice. Implement the cleanup function and make it close the dialog:
+Bazı API'lar ard arda iki defa çağırmanıza izin vermezler. Örneğin, tarayıcıya yerleşik [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) elemanının [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) metodu iki kez çağırılamaz. Temizleme fonksiyonunu yazarak modal dialog'unu kapatmasını sağlayın:
 
 ```js {4}
 useEffect(() => {
@@ -621,11 +648,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `showModal()`, then immediately `close()`, and then `showModal()` again. This has the same user-visible behavior as calling `showModal()` once, as you would see in production.
+Geliştirme sırasında, Efektiniz `showModal()` fonksiyonunu çağıracaktır, hemen ardından `close()` çağırılacaktır, son olarak yine `showModal()` çağırılacaktır. Bu, son üründe görebileceğiniz gibi, `showModal()`'ın bir kez çağırılmasıyla kullanıcı tarafından görülen aynı davraşına sahiptir.
 
-### Subscribing to events {/*subscribing-to-events*/}
+### Olaylara abone olma {/*subscribing-to-events*/}
 
-If your Effect subscribes to something, the cleanup function should unsubscribe:
+Eğer Efektiniz bir şeye abone oluyorsa (subscribe), temizleme fonksiyonu abonelikten çıkarmalıdır:
 
 ```js {6}
 useEffect(() => {
@@ -637,27 +664,27 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `addEventListener()`, then immediately `removeEventListener()`, and then `addEventListener()` again with the same handler. So there would be only one active subscription at a time. This has the same user-visible behavior as calling `addEventListener()` once, as in production.
+Geliştirme sırasında, Efektiniz `addEventListener()`'ı çağıracaktır, hemen ardından `removeEventListener()` çağırılacaktır, ve ardından aynı yöneticiyle tekrar `addEventListener()` çağırılacaktır. Yani aynı anda yalnızca bir aktif abonelik olacaktır. Bu, son üründe görebileceğiniz gibi, `addEventListener()`'ın bir kez çağırılmasıyla kullanıcı tarafından görülen aynı davranışa sahiptir.
 
-### Triggering animations {/*triggering-animations*/}
+### Animasyonları tetikleme {/*triggering-animations*/}
 
-If your Effect animates something in, the cleanup function should reset the animation to the initial values:
+Efektiniz bir şeye animasyon ekliyorsa, temizleme fonksiyonu o animasyonu başlangıç değerlerine sıfırlamalıdır:
 
 ```js {4-6}
 useEffect(() => {
   const node = ref.current;
-  node.style.opacity = 1; // Trigger the animation
+  node.style.opacity = 1; // Animasyonu tetikler
   return () => {
-    node.style.opacity = 0; // Reset to the initial value
+    node.style.opacity = 0; // Başlangıç değerlerine sıfırlar
   };
 }, []);
 ```
 
-In development, opacity will be set to `1`, then to `0`, and then to `1` again. This should have the same user-visible behavior as setting it to `1` directly, which is what would happen in production. If you use a third-party animation library with support for tweening, your cleanup function should reset the timeline to its initial state.
+Geliştirme sırasında, opaklık (opacity) `1` olacaktır, daha sonra `0`, ardından tekrar `1` olacaktır. Bu, son üründe görebileceğiniz gibi, opaklık değerinin `1`'e eşitlenmesi kullanıcı tarafından görülen aynı davranışa sahiptir. Eğer ara doldurma (tweening) destekli üçüncü parti bir animasyon kütüphanesini kullanıyorsanız, temizleme fonksiyonunuz zaman çizelgesini başlangıç state'ine sıfırlamalıdır.
 
-### Fetching data {/*fetching-data*/}
+### Veri getirme {/*fetching-data*/}
 
-If your Effect fetches something, the cleanup function should either [abort the fetch](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) or ignore its result:
+Efektiniz bir veri getiriyorsa, temizleme fonksiyonunuz ya [veri getirmeye iptal etmeli](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) ya da getirilen sonucu yok saymalıdır:
 
 ```js {2,6,13-15}
 useEffect(() => {
@@ -678,11 +705,11 @@ useEffect(() => {
 }, [userId]);
 ```
 
-You can't "undo" a network request that already happened, but your cleanup function should ensure that the fetch that's _not relevant anymore_ does not keep affecting your application. If the `userId` changes from `'Alice'` to `'Bob'`, cleanup ensures that the `'Alice'` response is ignored even if it arrives after `'Bob'`.
+Çoktan gerçekleştirilmiş bir ağ isteği "geri alınamaz" ama temizleme işleviniz  _artık alakalı olmayan_ bir veri getirme işleminin uygulamanızı etkilemesini engellemelidir. `userId`, `'Alice'`'ten `'Bob'`'a değişirse, temizleme fonksiyonu, `'Alice'` yanıtı `'Bob'`'tan önce gelse bile `'Alice'` yanıtının göz ardı edilmesini sağlar.
 
-**In development, you will see two fetches in the Network tab.** There is nothing wrong with that. With the approach above, the first Effect will immediately get cleaned up so its copy of the `ignore` variable will be set to `true`. So even though there is an extra request, it won't affect the state thanks to the `if (!ignore)` check.
+**Geliştirme sırasında, Network sekmesinde (developer tools) iki veri getirme işlemi göreceksiniz.** Bunda hiçbir sorun yok. Yukarıdaki yaklaşımla, ilk Efekt hemen temizlenecek ve böylece `ignore` değişkeninin kopyası `true` olacaktır. Yani fazladan bir istek olsa bile, `if (!ignore)` ifadesi sayesinde state'i etkilemeyecektir.
 
-**In production, there will only be one request.** If the second request in development is bothering you, the best approach is to use a solution that deduplicates requests and caches their responses between components:
+**Son üründe, sadece tek bir istek olacaktır.** Geliştirme sırasındaki ikinci istek sizi rahatsız ediyorsa, en iyi yaklaşım, istekleri tekilleştiren ve sonuçlarını bileşenler arasında önbelleğe alan bir çözüm kullanmaktır:
 
 ```js
 function TodoList() {
@@ -690,50 +717,50 @@ function TodoList() {
   // ...
 ```
 
-This will not only improve the development experience, but also make your application feel faster. For example, the user pressing the Back button won't have to wait for some data to load again because it will be cached. You can either build such a cache yourself or use one of the many alternatives to manual fetching in Effects.
+Bu sadece geliştirme deneyimini iyileştirmekle kalmaz aynı zamanda uygulamanız daha hızlı çalıştığını hissettirir. Örneğin, Geri butonuna basan bir kullanıcının, önbelleğe alınacağı için bazı verileri beklemesine gerek kalmayacaktır. Böyle bir önbelleği kendiniz yapabilir ya da Efektte manuel olarak veri getirmeye yardımcı olan pek çok alternatiften birini kullanabilirsiniz.
 
 <DeepDive>
 
-#### What are good alternatives to data fetching in Effects? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Efektte veri getirmenin iyi alternatifleri nelerdir? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Writing `fetch` calls inside Effects is a [popular way to fetch data](https://www.robinwieruch.de/react-hooks-fetch-data/), especially in fully client-side apps. This is, however, a very manual approach and it has significant downsides:
+Efektler içinde `veri getirme` çağrıları yazmak özellikle tamamen kullanıcı taraflı uygulamalarda [veri getirmenin popüler bir yoludur](https://www.robinwieruch.de/react-hooks-fetch-data/). Ancak bu, oldukça manuel bir yaklaşımdır ve önemli dezavantajları vardır:
 
-- **Effects don't run on the server.** This means that the initial server-rendered HTML will only include a loading state with no data. The client computer will have to download all JavaScript and render your app only to discover that now it needs to load the data. This is not very efficient.
-- **Fetching directly in Effects makes it easy to create "network waterfalls".** You render the parent component, it fetches some data, renders the child components, and then they start fetching their data. If the network is not very fast, this is significantly slower than fetching all data in parallel.
-- **Fetching directly in Effects usually means you don't preload or cache data.** For example, if the component unmounts and then mounts again, it would have to fetch the data again.
-- **It's not very ergonomic.** There's quite a bit of boilerplate code involved when writing `fetch` calls in a way that doesn't suffer from bugs like [race conditions.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- **Efektler sunucuda çalışmazlar.** Bu, sunucu tarafından render edilen ilk HTML'in veri içermeyen bir yükleme state'ini içereceği anlamına gelir. Kullanıcı bilgisayarının tüm bu JavaScript'i indirmesi ve uygulamanızın verileri yüklemesi gerektiğini keşfetmesi için render etmesi gerekecektir. Bu çok verimli bir yol değildir.
+- **Doğrudan Efekt ile veri getirmek, "ağ şelaleleri (waterfalls) oluşturmayı kolaylaştırır."** Üst bileşeni render edersiniz, o bileşen veri getirir, alt bileşenleri render eder, daha sonra o bileşenler kendi verilerini getirmeye başlarlar. Eğer internet bağlantınız hızlı değilse, verileri paralel olarak getirmeye göre önemli derecede yavaştır.
+- **Doğrudan Efekt ile veri getirmek, genellikle verileri önceden yüklememeniz veya önbelleğe almamanız anlamına gelir.** Örneğin, bileşen DOM'dan kaldırılır ve sonra tekrar DOM'a eklenirse, bileşen aynı veriyi tekrar getirmek zorundadır.
+- **Ergonomik değildir.** [Yarış koşulları](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) gibi hatalardan zarar görmeyecek şekilde `fetch` çağrıları yaparken oldukça fazla genel hatlarıyla (boilerplate) kod yazmanız gerekmektedir.
 
-This list of downsides is not specific to React. It applies to fetching data on mount with any library. Like with routing, data fetching is not trivial to do well, so we recommend the following approaches:
+Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin de başarılı şekilde yapılması kolay değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **If you use a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+- **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşik veri getirme mekanizmasını kullanın.** Modern React çatıları verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
+- **Aksi halde, kullanıcı taraflı önbelleğe almayı kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü yaparsanız, Efektleri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
 
-You can continue fetching data directly in Effects if neither of these approaches suit you.
+Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Efektler içinde veri getirmeye devam edebilirsiniz.
 
 </DeepDive>
 
-### Sending analytics {/*sending-analytics*/}
+### Analizleri gönderme {/*sending-analytics*/}
 
-Consider this code that sends an analytics event on the page visit:
+Sayfa ziyaretinde analiz gönderen bu kodu düşünün:
 
 ```js
 useEffect(() => {
-  logVisit(url); // Sends a POST request
+  logVisit(url); // POST isteği gönderir
 }, [url]);
 ```
 
-In development, `logVisit` will be called twice for every URL, so you might be tempted to try to fix that. **We recommend keeping this code as is.** Like with earlier examples, there is no *user-visible* behavior difference between running it once and running it twice. From a practical point of view, `logVisit` should not do anything in development because you don't want the logs from the development machines to skew the production metrics. Your component remounts every time you save its file, so it logs extra visits in development anyway.
+Geliştirme sırasında, `logVisit` fonksiyonu her URL için iki defa çağrılacaktır, bu yüzden bunu düzeltmeye çalışabilirsiniz. **Bu kodu olduğu gibi bırakmanızı öneririz.** Önceki örneklerde olduğu gibi, bir kez çalıştırmak ile iki kez çalıştırmak arasında *kullanıcının görebileceği* bir davranış farkı yoktur. Pratik açıdan, `logVisit` geliştirme sırasında hiçbir şey yapmamalılıdır çünkü geliştirme makinelerinden gelen bilgilerin son üründeki ölçümleri çarpıtmasını istemezsiniz. Bileşeniniz dosyasını her kaydettiğiniz sefer DOM'dan çıkarılıp/eklenir, bu yüzden zaten geliştirme sırasındaki ekstra ziyaretleri kaydeder.
 
-**In production, there will be no duplicate visit logs.**
+**Son üründe, kopyalanmış ziyaret kayıtları olmayacaktır.**
 
-To debug the analytics events you're sending, you can deploy your app to a staging environment (which runs in production mode) or temporarily opt out of [Strict Mode](/reference/react/StrictMode) and its development-only remounting checks. You may also send analytics from the route change event handlers instead of Effects. For more precise analytics, [intersection observers](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) can help track which components are in the viewport and how long they remain visible.
+Gönderdiğiniz analiz olaylarını debug etmek (hatayı düzeltmek) için, uygulamanızı bir hazırlama ortamına (son ürün modunda çalışan) veya [Strict Mode](/reference/react/StrictMode) ve yalnızca geliştirme sırasındaki DOM'dan çıkarıp/ekleme kontrollerini geçici olarak devre dışı bırakabilirsiniz. Efektler yerine yol (route) değişikliği olay yöneticilerinden de analizleri gönderebilirsiniz. Daha kesin analizler için, [kesişme gözlemcileri (intersection observers)](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), görünüm alanında hangi bileşenlerin olduğunu ve bu bileşenlerin ne kadar süre görünür kaldıklarını izlemeye yardımcı olabilir.
 
-### Not an Effect: Initializing the application {/*not-an-effect-initializing-the-application*/}
+### Efekt değil: Uygulamanın başlatılması {/*not-an-effect-initializing-the-application*/}
 
-Some logic should only run once when the application starts. You can put it outside your components:
+Yazdığınız bazı mantıklar uygulama başlatıldığında yalnızca bir kez çalışmalıdır. Bu mantıkları bileşenlerinizin dışına koyabilirsiniz:
 
 ```js {2-3}
-if (typeof window !== 'undefined') { // Check if we're running in the browser.
+if (typeof window !== 'undefined') { // Tarayıcıda çalışıp çalışmadığımızı kontrol et
   checkAuthToken();
   loadDataFromLocalStorage();
 }
@@ -743,37 +770,37 @@ function App() {
 }
 ```
 
-This guarantees that such logic only runs once after the browser loads the page.
+Bu, böyle bir mantığın, tarayıcı sayfayı yükledikten sonra yalnızca bir defa çalışacağını garanti eder.
 
-### Not an Effect: Buying a product {/*not-an-effect-buying-a-product*/}
+### Efekt değil: Ürün satın alma {/*not-an-effect-buying-a-product*/}
 
-Sometimes, even if you write a cleanup function, there's no way to prevent user-visible consequences of running the Effect twice. For example, maybe your Effect sends a POST request like buying a product:
+Bazen, temizleme fonksiyonu yazsanız bile, Efektin iki kez çalıştırılmasından dolayı kullanıcının görebileceği sonuçları önlemenin bir yolu yoktur. Örneğin, belki Efektiniz ürün satın almak için bir POST isteği gönderiyor:
 
 ```js {2-3}
 useEffect(() => {
-  // 🔴 Wrong: This Effect fires twice in development, exposing a problem in the code.
+  // 🔴 Yanlış: Bu Efekt geliştirme sırasında iki kez çalışır, koddaki bir problemi ortaya çıkarır.
   fetch('/api/buy', { method: 'POST' });
 }, []);
 ```
 
-You wouldn't want to buy the product twice. However, this is also why you shouldn't put this logic in an Effect. What if the user goes to another page and then presses Back? Your Effect would run again. You don't want to buy the product when the user *visits* a page; you want to buy it when the user *clicks* the Buy button.
+Ürünü iki defa almak istemezsiniz. Ancak, bu yüzden de bu mantığı Efektin içine koymamalısınız. Ya kullanıcı başka bir sayfaya giderse ve Geri butonuna basarsa? Efektiniz tekrardan çalışacaktır. Ürünü kullanıcı sayfayı *ziyaret* ettiğinde değil, kullanıcı Satın Al butonuna *bastığında* almak istersiniz.
 
-Buying is not caused by rendering; it's caused by a specific interaction. It should run only when the user presses the button. **Delete the Effect and move your `/api/buy` request into the Buy button event handler:**
+Satın almak render etmekten değil, spesifik bir etkileşimden kaynaklanmaktadır. Yalnızca kullanıcı butona bastığında çalışmalıdır. **Efekti silin ve `/api/buy` isteğini Satın Al butonu olay yöneticisine taşıyın:**
 
 ```js {2-3}
   function handleClick() {
-    // ✅ Buying is an event because it is caused by a particular interaction.
+    // ✅ Satın almak bir olaydır çünkü spesifik bir etkileşimden kaynaklanmaktadır.
     fetch('/api/buy', { method: 'POST' });
   }
 ```
 
-**This illustrates that if remounting breaks the logic of your application, this usually uncovers existing bugs.** From the user's perspective, visiting a page shouldn't be different from visiting it, clicking a link, and pressing Back. React verifies that your components abide by this principle by remounting them once in development.
+**Bu, eğer DOM'dan çıkarıp/eklemek uygulamanızın mantığını bozarsa, bunun genellikle mevcut hataları ortaya çıkaracağını gösterir.** Kullanıcı açısından, bir sayfayı ziyaret etmek, o sayfayı ziyaret etmekten, bir bağlantıya tıklayıp Geri butonuna basmaktan farklı olmamalıdır. React, geliştirme sırasında bileşenleri bir kez DOM'dan çıkarıp/ekleyerek bileşenlerinizin bu prensibe uyduğunu doğrular.
 
-## Putting it all together {/*putting-it-all-together*/}
+## Hepsini bir araya koyma {/*putting-it-all-together*/}
 
-This playground can help you "get a feel" for how Effects work in practice.
+Bu örnek, Efektlerin pratikte nasıl çalıştığına dair "bir fikir edinmenize" yardımcı olabilir.
 
-This example uses [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) to schedule a console log with the input text to appear three seconds after the Effect runs. The cleanup function cancels the pending timeout. Start by pressing "Mount the component":
+Bu örnek, input metinini içeren bir konsol mesajını Efekt çalıştıktan üç saniye sonra görünecek şekilde planlamak için [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) API'ını kullanır. Temizleme fonksiyonu bekleyen zaman aşımını iptal eder. "Bileşeni DOM'a ekle" butonuna basarak başlayın:
 
 <Sandpack>
 
@@ -788,11 +815,11 @@ function Playground() {
       console.log('⏰ ' + text);
     }
 
-    console.log('🔵 Schedule "' + text + '" log');
+    console.log('🔵 "' + text + '" metnini planla');
     const timeoutId = setTimeout(onTimeout, 3000);
 
     return () => {
-      console.log('🟡 Cancel "' + text + '" log');
+      console.log('🟡 "' + text + '" metnini iptal et');
       clearTimeout(timeoutId);
     };
   }, [text]);
@@ -800,7 +827,7 @@ function Playground() {
   return (
     <>
       <label>
-        What to log:{' '}
+        Ne yazılmalı:{' '}
         <input
           value={text}
           onChange={e => setText(e.target.value)}
@@ -816,7 +843,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Unmount' : 'Mount'} the component
+        Bileşeni {show ? "DOM'dan çıkar" : "DOM'a ekle"}
       </button>
       {show && <hr />}
       {show && <Playground />}
@@ -827,21 +854,21 @@ export default function App() {
 
 </Sandpack>
 
-You will see three logs at first: `Schedule "a" log`, `Cancel "a" log`, and `Schedule "a" log` again. Three second later there will also be a log saying `a`. As you learned earlier, the extra schedule/cancel pair is because React remounts the component once in development to verify that you've implemented cleanup well.
+İlk başta üç mesaj göreceksiniz: `"a" mesajını planla`, `"a" mesajını iptal et` ve tekrardan `"a" mesajını planla`. Üç saniye sonra `a` yazan başka bir mesaj olacaktır. Daha önce öğrendiğiniz gibi, fazladan planla/iptal et işlemi, React'in geliştirme sırasında, temizleme fonksiyonunu doğru yazdığınızı kontrol etmek amacıyla bileşeni DOM'dan çıkarıp/eklemesidir.
 
-Now edit the input to say `abc`. If you do it fast enough, you'll see `Schedule "ab" log` immediately followed by `Cancel "ab" log` and `Schedule "abc" log`. **React always cleans up the previous render's Effect before the next render's Effect.** This is why even if you type into the input fast, there is at most one timeout scheduled at a time. Edit the input a few times and watch the console to get a feel for how Effects get cleaned up.
+Input'u `abc` olarak düzenleyin. Eğer bunu yeterince hızlı yaparsanız, `"ab" mesajını planla`'dan hemen sonra `"ab" mesajını iptal et` ve `"abc" mesajını planla` mesajlarını göreceksiniz. **React her zaman bir sonraki render'ın Efektinden önce bir önceki render'ın Efektini temizler.** Bu yüzden input'a hızlı yazsanız bile, aynı anda en fazla bir zaman aşımı planlanmıştır. Efektlerin nasıl temizlendiğini anlayabilmek için input'u düzenleyin ve konsolu inceleyin.
 
-Type something into the input and then immediately press "Unmount the component". Notice how unmounting cleans up the last render's Effect. Here, it clears the last timeout before it has a chance to fire.
+Input'a bir şeyler yazın ve hemen ardından "Bileşeni DOM'dan kaldır" butonuna basın. Bileşeni DOM'dan kaldırmanın nasıl son render'ın Efektini temizlediğine dikkat edin. Burada, tetikleme şansı bulamadan son zaman aşımını temizler.
 
-Finally, edit the component above and comment out the cleanup function so that the timeouts don't get cancelled. Try typing `abcde` fast. What do you expect to happen in three seconds? Will `console.log(text)` inside the timeout print the *latest* `text` and produce five `abcde` logs? Give it a try to check your intuition!
+Son olarak, zaman aşımlarının iptal edilmemesi için yukırdaki bileşeni düzenleyin ve temizleme fonksiyonunu devre dışı bırakın. Hızlı şekilde `abcde` yazmaya çalışın. Üç saniye içinde ne olmasını bekliyorsunuz? Zaman aşımı içindeki `console.log(text)` ifadesi *son* `text`'i ve beş tane `abcde` mesajı mı yazdıracaktır? Bir deneyip ne olacağını görün!
 
-Three seconds later, you should see a sequence of logs (`a`, `ab`, `abc`, `abcd`, and `abcde`) rather than five `abcde` logs. **Each Effect "captures" the `text` value from its corresponding render.**  It doesn't matter that the `text` state changed: an Effect from the render with `text = 'ab'` will always see `'ab'`. In other words, Effects from each render are isolated from each other. If you're curious how this works, you can read about [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
+Üç saniye sonra, beş `abcde` mesajı yerine bir seri (`a`, `ab`, `abc`, `abcd`, ve `abcde`) mesajı göreceksiniz. **Her Efekt, karşılık gelen render'ın `text` değerini *yakalar*.** `text` state'inin değişmesi önemli değildir: `text = 'ab'` ile oluşan render'ın Efekti her zaman `'ab'` ifadesini görecektir. Diğer bir deyişle, her bir render'ın Efekti birbirinden izole bir şekildedir. Eğer bunun nasıl çalıştığını merak ediyorsanız, [closure'ler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) hakkında bilgi alabilirsiniz.
 
 <DeepDive>
 
-#### Each render has its own Effects {/*each-render-has-its-own-effects*/}
+#### Her bir render'ın kendi Efekti vardır {/*each-render-has-its-own-effects*/}
 
-You can think of `useEffect` as "attaching" a piece of behavior to the render output. Consider this Effect:
+`useEffect`'i render çıktısına bir davranış parçasının "iliştirilmesi" olarak düşünebilirsiniz. Bu Efekti düşünün:
 
 ```js
 export default function ChatRoom({ roomId }) {
@@ -851,133 +878,133 @@ export default function ChatRoom({ roomId }) {
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to {roomId}!</h1>;
+  return <h1>{roomId} odasına hoşgeldiniz!</h1>;
 }
 ```
 
-Let's see what exactly happens as the user navigates around the app.
+Kullanıcı uygulama içinde gezindiğinde tam olarak neler olduğunu görelim.
 
-#### Initial render {/*initial-render*/}
+#### İlk render {/*initial-render*/}
 
-The user visits `<ChatRoom roomId="general" />`. Let's [mentally substitute](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` with `'general'`:
+Kullanıcı `<ChatRoom roomId="genel" />` ziyaret eder. Şimdi [mental olarak](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId`'yi `'genel'`olarak değiştirelim:
 
 ```js
-  // JSX for the first render (roomId = "general")
-  return <h1>Welcome to general!</h1>;
+  // İlk render için JSX (roomId = "general")
+  return <h1>Genel odasına hoşgeldiniz!</h1>;
 ```
 
-**The Effect is *also* a part of the rendering output.** The first render's Effect becomes:
+**Efekt *aynı zamanda* render çıktısının bir parçasıdır.** İlk render'ın Efekti şöyle olur:
 
 ```js
-  // Effect for the first render (roomId = "general")
+  // İlk render için Efekt (roomId = "genel")
   () => {
-    const connection = createConnection('general');
+    const connection = createConnection('genel');
     connection.connect();
     return () => connection.disconnect();
   },
-  // Dependencies for the first render (roomId = "general")
-  ['general']
+  // İlk render için bağımlılıklar (roomId = "genel")
+  ['genel']
 ```
 
-React runs this Effect, which connects to the `'general'` chat room.
+React `'genel'` sohbet odasına bağlanan Efekti çalıştırır.
 
-#### Re-render with same dependencies {/*re-render-with-same-dependencies*/}
+#### Aynı bağımlılıklar ile yeniden render etme {/*re-render-with-same-dependencies*/}
 
-Let's say `<ChatRoom roomId="general" />` re-renders. The JSX output is the same:
+Diyelim ki `<ChatRoom roomId="genel" />` yeniden render edilmektedir. JSX çıktısı aynıdır:
 
 ```js
-  // JSX for the second render (roomId = "general")
-  return <h1>Welcome to general!</h1>;
+  // İkinci render için JSX (roomId = "genel")
+  return <h1>Genel odasına hoşgeldiniz!</h1>;
 ```
 
-React sees that the rendering output has not changed, so it doesn't update the DOM.
+React render edilen çıktının değişmediğini görecektir bu yüzden DOM'u güncellemez.
 
-The Effect from the second render looks like this:
+İkinci render'ın Efekti şöyle gözükmektedir:
 
 ```js
-  // Effect for the second render (roomId = "general")
+  // İkinci render için Efekt (roomId = "genel")
   () => {
-    const connection = createConnection('general');
+    const connection = createConnection('genel');
     connection.connect();
     return () => connection.disconnect();
   },
-  // Dependencies for the second render (roomId = "general")
-  ['general']
+  // İkinci render için bağımlılıklar (roomId = "genel")
+  ['genel']
 ```
 
-React compares `['general']` from the second render with `['general']` from the first render. **Because all dependencies are the same, React *ignores* the Effect from the second render.** It never gets called.
+React, ilk render'dan `['genel']` ile ikinci render'dan `['genel']`'i kıyaslar. **Tüm bağımlılıkların aynı olmasından dolayı, React ikinci render'daki Efekti *görmezden gelecektir.*** İkinci olan asla çağırılmaz.
 
-#### Re-render with different dependencies {/*re-render-with-different-dependencies*/}
+#### Farklı bağımlılıklar ile yeniden render etme {/*re-render-with-different-dependencies*/}
 
-Then, the user visits `<ChatRoom roomId="travel" />`. This time, the component returns different JSX:
+Daha sonra, kullanıcı `<ChatRoom roomId="seyahat" />` ziyaret eder. Bu sefer, bileşen başka bir JSX döndürür:
 
 ```js
-  // JSX for the third render (roomId = "travel")
-  return <h1>Welcome to travel!</h1>;
+  // Üçüncü render için JSX (roomId = "seyahat")
+  return <h1>Seyahat odasına hoşgeldiniz!</h1>;
 ```
 
-React updates the DOM to change `"Welcome to general"` into `"Welcome to travel"`.
+React, `"Genel odasına hoşgeldiniz"` yazısını `"Seyahat odasına hoşgeldiniz"` olarak değiştirmek için DOM'u günceller.
 
-The Effect from the third render looks like this:
+Üçüncü render'ın Efekti şu şekilde gözükmektedir:
 
 ```js
-  // Effect for the third render (roomId = "travel")
+  // Üçüncü render için Effect (roomId = "seyahat")
   () => {
-    const connection = createConnection('travel');
+    const connection = createConnection('seyahat');
     connection.connect();
     return () => connection.disconnect();
   },
-  // Dependencies for the third render (roomId = "travel")
-  ['travel']
+  // Üçüncü render için bağımlılıklar (roomId = "seyahat")
+  ['seyahat']
 ```
 
-React compares `['travel']` from the third render with `['general']` from the second render. One dependency is different: `Object.is('travel', 'general')` is `false`. The Effect can't be skipped.
+React, ikinci render'dan `['genel']` ile üçüncü render'dan `['seyahat']`'i kıyaslar. Bir bağımlılık farklı: `Object.is('seyahat', 'genel')` `false` olur. Efekt devreye girer.
 
-**Before React can apply the Effect from the third render, it needs to clean up the last Effect that _did_ run.** The second render's Effect was skipped, so React needs to clean up the first render's Effect. If you scroll up to the first render, you'll see that its cleanup calls `disconnect()` on the connection that was created with `createConnection('general')`. This disconnects the app from the `'general'` chat room.
+**React üçüncü render'daki Efekti uygulamadan önce, en son _çalışan_ Efekti temizlemelidir.** İkinci render'ın Efekti atlandığından dolayı React'in ilk render'ın Efektini temizlemesi gerekmektedir. Eğer ilk render'a bakacak olursanız, ilk render'ın temizleme fonksiyonunun `createConnection('genel')` ile yapılmış olan bağlantıda `disconnect()` fonksiyonunu çağırdığını göreceksiniz. Böylelikle uygulama `'genel'` sohbet odasıyla bağlantıyı koparacaktır.
 
-After that, React runs the third render's Effect. It connects to the `'travel'` chat room.
+Bundan sonra, React üçüncü render'ın Efektini çalıştırır. Uygulama `'seyahat'` sohbet odasına bağlanır.
 
-#### Unmount {/*unmount*/}
+#### DOM'dan kaldırma {/*unmount*/}
 
-Finally, let's say the user navigates away, and the `ChatRoom` component unmounts. React runs the last Effect's cleanup function. The last Effect was from the third render. The third render's cleanup destroys the `createConnection('travel')` connection. So the app disconnects from the `'travel'` room.
+Son olarak, diyelim ki kullanıcı başka sayfaları ziyaret eder ve `ChatRoom` bileşeni DOM'dan kaldırılır. React son Efektin temizleme fonksiyonunu çalıştırır. Son Efekt üçüncü render'ın Efektiydi. Üçüncü render'ın temizleme fonksiyonu `createConnection('seyahat')` bağlantısını koparır. Yani uygulama `'seyahat'` odasıyla bağlantısını koparır.
 
-#### Development-only behaviors {/*development-only-behaviors*/}
+#### Sadece geliştirme sırasında olan davranışlar {/*development-only-behaviors*/}
 
-When [Strict Mode](/reference/react/StrictMode) is on, React remounts every component once after mount (state and DOM are preserved). This [helps you find Effects that need cleanup](#step-3-add-cleanup-if-needed) and exposes bugs like race conditions early. Additionally, React will remount the Effects whenever you save a file in development. Both of these behaviors are development-only.
+[Strict modu](/reference/react/StrictMode) açıkken, React her bir bileşeni DOM'a ekledikten sonra DOM'dan kaldırır (state ve DOM korunur). Bu, [temizleme fonksiyonu gereken Efektleri bulmanıza yardımcı olur](#step-3-add-cleanup-if-needed) ve yarış koşulları gibi hataları erken ortaya çıkarır. Ek olarak, geliştirme sırasında dosyayı her kaydettiğiniz zaman React, Efektleri DOM'dan çıkarıp/ekleyecektir. Bu her iki davranışta sadece geliştirme sırasında olmaktadır.
 
 </DeepDive>
 
 <Recap>
 
-- Unlike events, Effects are caused by rendering itself rather than a particular interaction.
-- Effects let you synchronize a component with some external system (third-party API, network, etc).
-- By default, Effects run after every render (including the initial one).
-- React will skip the Effect if all of its dependencies have the same values as during the last render.
-- You can't "choose" your dependencies. They are determined by the code inside the Effect.
-- Empty dependency array (`[]`) corresponds to the component "mounting", i.e. being added to the screen.
-- In Strict Mode, React mounts components twice (in development only!) to stress-test your Effects.
-- If your Effect breaks because of remounting, you need to implement a cleanup function.
-- React will call your cleanup function before the Effect runs next time, and during the unmount.
+- Olayların aksine, Efektler belirli bir etkileşim sonucu değil de render etmenin kendisinden kaynaklanmaktadır.
+- Efektler bir bileşeni bir harici sistem ile senkronize etmenizi sağlar (üçüncü parti API, ağ vb).
+- Varsayılan olarak, Efektler her render'dan sonra çalışır (ilk render'da dahil).
+- Eğer Efektin bağımlılıklarının değerleri son yapılan render'da değişmemişse React Efekti çalıştırmayacaktır.
+- Bağımlılıklarınızı "seçemezsiniz". Bağımlılıklar Efekt içindeki koda bağlı olarak belirlenir.
+- Boş bağımlılık dizisi (`[]`) bileşen "DOM'a ekleniyor" demektir, örneğin bileşenin ekrana eklenmesi.
+- Strict modundayken, React  bileşenleri DOM'a Efektlerinize stres testi yapmak için iki defa ekler (sadece geliştirme sırasında!).
+- Efektiniz DOM'dan çıkarılıp/eklenme aşamasında uygulamanızı bozuyorsa, bir temizleme fonksiyonu yazmanız gerekmektedir.
+- React temizleme fonksiyonunuzu Efektin bir sonraki çalışmasından önce ve DOM'dan çıkarılma aşamasına çağıracaktır.
 
 </Recap>
 
 <Challenges>
 
-#### Focus a field on mount {/*focus-a-field-on-mount*/}
+#### Bileşen DOM'a eklendiğinde alana odaklanma {/*focus-a-field-on-mount*/}
 
-In this example, the form renders a `<MyInput />` component.
+Bu örnekte, form, `<MyInput />` bileşenini render etmektedir.
 
-Use the input's [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) method to make `MyInput` automatically focus when it appears on the screen. There is already a commented out implementation, but it doesn't quite work. Figure out why it doesn't work, and fix it. (If you're familiar with the `autoFocus` attribute, pretend that it does not exist: we are reimplementing the same functionality from scratch.)
+Input'un [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) metodunu kullanarak `MyInput` bileşeni ekranda göründüğünde input alanına otomatik olarak odaklanmasını sağlayın. Halihazırda yorum satırı içine alınmış bir örnek var ancak tam olarak çalışmamakta. Niye çalışmadığını bulun ve düzeltin. (Eğer `autoFocus`'u biliyorsanız, yokmuş gibi davranın: aynı işlevselliği sıfırdan yeniden yazıyoruz.)
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
   const ref = useRef(null);
 
-  // TODO: This doesn't quite work. Fix it.
+  // YAPILACAK: Bu tam olarak çalışmamakta. Düzeltin.
   // ref.current.focus()    
 
   return (
@@ -990,7 +1017,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1000,13 +1027,13 @@ export default function Form() {
   const [upper, setUpper] = useState(false);
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} form</button>
+      <button onClick={() => setShow(s => !s)}>Formu {show ? 'Gizle' : 'Göster'}</button>
       <br />
       <hr />
       {show && (
         <>
           <label>
-            Enter your name:
+            Adınızı girin:
             <MyInput
               value={name}
               onChange={e => setName(e.target.value)}
@@ -1018,9 +1045,9 @@ export default function Form() {
               checked={upper}
               onChange={e => setUpper(e.target.checked)}
             />
-            Make it uppercase
+            Büyük harf yap
           </label>
-          <p>Hello, <b>{upper ? name.toUpperCase() : name}</b></p>
+          <p>Selam, <b>{upper ? name.toUpperCase() : name}</b></p>
         </>
       )}
     </>
@@ -1043,19 +1070,19 @@ body {
 </Sandpack>
 
 
-To verify that your solution works, press "Show form" and verify that the input receives focus (becomes highlighted and the cursor is placed inside). Press "Hide form" and "Show form" again. Verify the input is highlighted again.
+Çözümünüzün çalıştığını doğrulamak için "Formu göster" butonuna tıklayın ve input'a odaklandığını kontrol edin (input alanı farklı renk alır ve içine imleç yerleştirilir). "Formu gizle" ve "Formu göster" butonuna tıklayın. Input alanına yeniden odaklandığını kontrol edin.
 
-`MyInput` should only focus _on mount_ rather than after every render. To verify that the behavior is right, press "Show form" and then repeatedly press the "Make it uppercase" checkbox. Clicking the checkbox should _not_ focus the input above it.
+`MyInput` her render'dan sonra değil sadece _DOM'a eklendiğinde_ odaklanmalıdır. Bu davranışın çalıştığını doğrulamak için "Formu göster" butonuna tıklayın ve ardından "Büyük harf yap" kutucuğuna birkaç defa tıklayın. Kutucuğa tıklamak yukarıdaki input'a _odaklamamalıdır_.
 
 <Solution>
 
-Calling `ref.current.focus()` during render is wrong because it is a *side effect*. Side effects should either be placed inside an event handler or be declared with `useEffect`. In this case, the side effect is _caused_ by the component appearing rather than by any specific interaction, so it makes sense to put it in an Effect.
+`ref.current.focus()` ifadesini render esnasında çağırmak yanlıştır çünkü bu bir *yan etkidir*. Yan etkiler ya bir olay yöneticisi içinde olmalı ya da `useEffect` ile bildirilmelidir. Bu durumda yan etki, belirli bir etkileşimin aksine bileşenin ekranda gözükmesinden dolayı _kaynaklanmaktadır_ bu yüzden bu kodu Efektin içine koymak mantıklıdır.
 
-To fix the mistake, wrap the `ref.current.focus()` call into an Effect declaration. Then, to ensure that this Effect runs only on mount rather than after every render, add the empty `[]` dependencies to it.
+Hatayı düzeltmek için, `ref.current.focus()` çağrısını bildirdiğiniz bir Efektin içine koyun. Daha sonra, bu Efektin her render'dan sonra değil de sadece DOM'a eklendikten sonra çalışmasını sağlamak için boş `[]` bağımlılık dizisini ekleyin.
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -1075,7 +1102,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1085,13 +1112,13 @@ export default function Form() {
   const [upper, setUpper] = useState(false);
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} form</button>
+      <button onClick={() => setShow(s => !s)}>Formu {show ? 'Gizle' : 'Göster'}</button>
       <br />
       <hr />
       {show && (
         <>
           <label>
-            Enter your name:
+            Adınızı girin:
             <MyInput
               value={name}
               onChange={e => setName(e.target.value)}
@@ -1103,9 +1130,9 @@ export default function Form() {
               checked={upper}
               onChange={e => setUpper(e.target.checked)}
             />
-            Make it uppercase
+            Büyük harf yap
           </label>
-          <p>Hello, <b>{upper ? name.toUpperCase() : name}</b></p>
+          <p>Selam, <b>{upper ? name.toUpperCase() : name}</b></p>
         </>
       )}
     </>
@@ -1129,23 +1156,23 @@ body {
 
 </Solution>
 
-#### Focus a field conditionally {/*focus-a-field-conditionally*/}
+#### Koşullu olarak alana odaklanma {/*focus-a-field-conditionally*/}
 
-This form renders two `<MyInput />` components.
+Bu form iki `<MyInput />` bileşeni render etmektedir.
 
-Press "Show form" and notice that the second field automatically gets focused. This is because both of the `<MyInput />` components try to focus the field inside. When you call `focus()` for two input fields in a row, the last one always "wins".
+"Formu göster" butonuna tıklayın ve ikinci alana otomatik olarak odaklandığını görün. Bunun nedeni, her iki `<MyInput />` bileşeni de alana odaklanmaya çalışmaktadır. İki input alanı için ard arda `focus()` metodunu çağırdığınızda en son yapılan çağrı her zaman "kazanacaktır".
 
-Let's say you want to focus the first field. The first `MyInput` component now receives a boolean `shouldFocus` prop set to `true`. Change the logic so that `focus()` is only called if the `shouldFocus` prop received by `MyInput` is `true`.
+Diyelim ki ilk alana odaklanmak istiyorsunuz. Şimdi ilk `MyInput` bileşeni bir `true` boolean `shouldFocus` prop'u almaktadır. Mantığı, `focus()`'un  yalnızca `MyInput` tarafından alınan `shouldFocus` prop'unun `true` olması durumunda çağrılmasını sağlayacak şekilde değiştirin.
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
   const ref = useRef(null);
 
-  // TODO: call focus() only if shouldFocus is true.
+  // YAPILACAK: focus() metodunu yalnızca shouldFocus "true" ise çağır.
   useEffect(() => {
     ref.current.focus();
   }, []);
@@ -1160,7 +1187,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1172,13 +1199,13 @@ export default function Form() {
   const name = firstName + ' ' + lastName;
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} form</button>
+      <button onClick={() => setShow(s => !s)}>Formu {show ? 'Gizle' : 'Göster'}</button>
       <br />
       <hr />
       {show && (
         <>
           <label>
-            Enter your first name:
+            Adınızı girin:
             <MyInput
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
@@ -1186,14 +1213,14 @@ export default function Form() {
             />
           </label>
           <label>
-            Enter your last name:
+            Soyadınızı girin:
             <MyInput
               value={lastName}
               onChange={e => setLastName(e.target.value)}
               shouldFocus={false}
             />
           </label>
-          <p>Hello, <b>{upper ? name.toUpperCase() : name}</b></p>
+          <p>Selam, <b>{upper ? name.toUpperCase() : name}</b></p>
         </>
       )}
     </>
@@ -1215,21 +1242,21 @@ body {
 
 </Sandpack>
 
-To verify your solution, press "Show form" and "Hide form" repeatedly. When the form appears, only the *first* input should get focused. This is because the parent component renders the first input with `shouldFocus={true}` and the second input with `shouldFocus={false}`. Also check that both inputs still work and you can type into both of them.
+Çözümünüzü doğrulamak için, "Formu göster" ve "Formu gizle" butonlarına tekrar tekrar tıklayın. Form ekranda gözüktüğünde sadece *ilk* input alanına odaklanmalıdır. Bunun nedeni, üst bileşenin ilk input'u `shouldFocus={true}` olarak ve ikinci input'u `shouldFocus={false}` olarak render etmesidir. Ayrıca her iki input alanının da hala çalışıp çalışmadığını ve her ikisine de yazabildiğinizi kontrol edin.
 
 <Hint>
 
-You can't declare an Effect conditionally, but your Effect can include conditional logic.
+Efektiniz koşullu ifadeler içerebilir ancak koşullu olarak bir Efekt bildiremezsiniz.
 
 </Hint>
 
 <Solution>
 
-Put the conditional logic inside the Effect. You will need to specify `shouldFocus` as a dependency because you are using it inside the Effect. (This means that if some input's `shouldFocus` changes from `false` to `true`, it will focus after mount.)
+Koşullu ifadeyi Efekt içine koyun. `shouldFocus`'u bağımlılık olarak bildirmeniz gerekmektedir çünkü Efektiniz içinde bu prop'u kullanmaktasınız. (Bu demektir ki eğer bir input'un `shouldFocus` prop'u `false`'tan `true`'ya değişirse, input DOM'a eklendikten sonra odaklanacaktır.)
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1251,7 +1278,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1263,13 +1290,13 @@ export default function Form() {
   const name = firstName + ' ' + lastName;
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} form</button>
+      <button onClick={() => setShow(s => !s)}>Formu {show ? 'Gizle' : 'Göster'}</button>
       <br />
       <hr />
       {show && (
         <>
           <label>
-            Enter your first name:
+            Adınızı girin:
             <MyInput
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
@@ -1277,14 +1304,14 @@ export default function Form() {
             />
           </label>
           <label>
-            Enter your last name:
+            Soyadınızı girin:
             <MyInput
               value={lastName}
               onChange={e => setLastName(e.target.value)}
               shouldFocus={false}
             />
           </label>
-          <p>Hello, <b>{upper ? name.toUpperCase() : name}</b></p>
+          <p>Selam, <b>{upper ? name.toUpperCase() : name}</b></p>
         </>
       )}
     </>
@@ -1308,21 +1335,21 @@ body {
 
 </Solution>
 
-#### Fix an interval that fires twice {/*fix-an-interval-that-fires-twice*/}
+#### İki kere tetiklenen interval'i düzelt {/*fix-an-interval-that-fires-twice*/}
 
-This `Counter` component displays a counter that should increment every second. On mount, it calls [`setInterval`.](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) This causes `onTick` to run every second. The `onTick` function increments the counter.
+Bu `Counter` bileşeni her saniye artması gereken bir sayaç göstermektedir. DOM'a eklendiğinde [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) çağrılır. Bu `onTick` fonksiyonunun her saniye çalışmasını sağlar. `onTick` fonksiyonu sayacı bir artırır.
 
-However, instead of incrementing once per second, it increments twice. Why is that? Find the cause of the bug and fix it.
+Ancak, sayaç saniyede bir artmak yerine iki artmaktadır. Neden böyle? Hatanın sebebini bulun ve düzeltin.
 
 <Hint>
 
-Keep in mind that `setInterval` returns an interval ID, which you can pass to [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) to stop the interval.
+`setInterval`'in interval'i durdurmak için [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) fonksiyonuna iletebileceğiniz bir interval ID döndürdüğünü unutmayın.
 
 </Hint>
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1340,7 +1367,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1348,7 +1375,7 @@ export default function Form() {
   const [show, setShow] = useState(false);
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} counter</button>
+      <button onClick={() => setShow(s => !s)}>Sayacı {show ? 'Gizle' : 'Göster'}</button>
       <br />
       <hr />
       {show && <Counter />}
@@ -1373,15 +1400,15 @@ body {
 
 <Solution>
 
-When [Strict Mode](/reference/react/StrictMode) is on (like in the sandboxes on this site), React remounts each component once in development. This causes the interval to be set up twice, and this is why each second the counter increments twice.
+[Strict modu](/reference/react/StrictMode) açıkken (bu sitedeki sandbox'lar gibi), React her bileşeni geliştirme sırasında bir defa DOM'dan çıkarıp/ekler. Bu interval'in iki defa kurulmasına neden olur ve her saniye sayaç iki artar.
 
-However, React's behavior is not the *cause* of the bug: the bug already exists in the code. React's behavior makes the bug more noticeable. The real cause is that this Effect starts a process but doesn't provide a way to clean it up.
+Ancak, hatanın kaynağı React'in bu davranışı değildir: hata zaten kodun içindedir. React'in bu davranışı hatayı daha görünür kılar. Hatanın gerçek nedeni Efektin bir süreci başlatması ancak bu süreci temizlemek için bir fonksiyon sunmamasından kaynaklıdır.
 
-To fix this code, save the interval ID returned by `setInterval`, and implement a cleanup function with [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval):
+Bu kodu düzeltmek için `setInterval` tarafından döndürülen ID'yi kaydedin ve [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) fonksiyonunu kullanarak bir temizleme fonksiyonu yazın:
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1400,7 +1427,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1408,7 +1435,7 @@ export default function App() {
   const [show, setShow] = useState(false);
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} counter</button>
+      <button onClick={() => setShow(s => !s)}>Sayacı {show ? 'Gizle' : 'Göster'}</button>
       <br />
       <hr />
       {show && <Counter />}
@@ -1431,17 +1458,17 @@ body {
 
 </Sandpack>
 
-In development, React will still remount your component once to verify that you've implemented cleanup well. So there will be a `setInterval` call, immediately followed by `clearInterval`, and `setInterval` again. In production, there will be only one `setInterval` call. The user-visible behavior in both cases is the same: the counter increments once per second.
+Geliştirme sırasında React, temizleme fonksiyonunu doğru yazıp yazmadığınızı doğrulamak için bileşeninizi DOM'dan çıkarıp/ekleyecektir. Yani bir `setInterval` çağrısı olacak, hemen ardından `clearInterval` ve tekrar `setInterval` çağrısı gelecek. Son üründe ise sadece bir `setInterval` çağrısı olacaktır. Her iki durumda da kullanıcı tarafından görülen davranış aynıdır: sayaç her saniye bir artar.
 
 </Solution>
 
-#### Fix fetching inside an Effect {/*fix-fetching-inside-an-effect*/}
+#### Efekt içinde veri getirmeyi düzeltin {/*fix-fetching-inside-an-effect*/}
 
-This component shows the biography for the selected person. It loads the biography by calling an asynchronous function `fetchBio(person)` on mount and whenever `person` changes. That asynchronous function returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which eventually resolves to a string. When fetching is done, it calls `setBio` to display that string under the select box.
+Bu bileşen seçilen kişinin biyografisini göstermektedir. Biyografiyi, bileşen DOM'a eklendiğinde ve `person` her değiştiğinde eşzamansız (async) bir `fetchBio(person)` fonksiyonu çağırarak yükler. Bu eşzamansız fonksiyon, en sonda bir string'e çözümlenen bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) döndürür. Veri getirme işlemi tamamlandığında, `setBio` fonksiyonu çağrılır ve string seçim kutusunun altında gösterilir.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1466,18 +1493,18 @@ export default function Page() {
         <option value="Taylor">Taylor</option>
       </select>
       <hr />
-      <p><i>{bio ?? 'Loading...'}</i></p>
+      <p><i>{bio ?? 'Yükleniyor...'}</i></p>
     </>
   );
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve('This is ' + person + '’s bio.');
+      resolve('Bu ' + person + '’un biyografisidir.');
     }, delay);
   })
 }
@@ -1487,34 +1514,34 @@ export async function fetchBio(person) {
 </Sandpack>
 
 
-There is a bug in this code. Start by selecting "Alice". Then select "Bob" and then immediately after that select "Taylor". If you do this fast enough, you will notice that bug: Taylor is selected, but the paragraph below says "This is Bob's bio."
+Bu kodda bir hata bulunmaktadır. "Alice" seçerek başlayın. Ardından "Bob" kişisini seçin ve hemen ardında "Taylor" kişisini seçin. Eğer bunu yeterince hızlı yaparsanız, hatayı farkedeceksiniz: Taylor seçiliydi ancak alttaki paragrafta "Bu Bob'un biyografisi." yazmaktadır.
 
-Why does this happen? Fix the bug inside this Effect.
+Bu neden olmakta? Efektin içindeki hatayı düzeltin.
 
 <Hint>
 
-If an Effect fetches something asynchronously, it usually needs cleanup.
+Eğer bir Efekt eşzamansız olarak veri getiriyorsa, çoğu zaman temizleme fonksiyonu gereklidir.
 
 </Hint>
 
 <Solution>
 
-To trigger the bug, things need to happen in this order:
+Hatayı tetiklemek için, her şeyin bu sırayla gerçekleşmesi gereklidir:
 
-- Selecting `'Bob'` triggers `fetchBio('Bob')`
-- Selecting `'Taylor'` triggers `fetchBio('Taylor')`
-- **Fetching `'Taylor'` completes *before* fetching `'Bob'`**
-- The Effect from the `'Taylor'` render calls `setBio('This is Taylor’s bio')`
-- Fetching `'Bob'` completes
-- The Effect from the `'Bob'` render calls `setBio('This is Bob’s bio')`
+- `'Bob'` seçeneğini seçmek `fetchBio('Bob')` fonksiyonunu tetikler
+- `'Taylor'` seçeneğini seçmek `fetchBio('Taylor')` fonksiyonunu tetikler
+- **`'Taylor'` verisi `'Bob'` verisinden *önce* getirilir**
+- `'Taylor'` render'ının Efekti `setBio('Bu Taylor'ın biyografisidir.')` fonksiyonunu çağırır
+- `'Bob'` verisi getirilir
+- `'Bob'` render'ının Efekti `setBio('Bu Bob'un biyografisidir.')` fonksiyonunu çağırır
 
-This is why you see Bob's bio even though Taylor is selected. Bugs like this are called [race conditions](https://en.wikipedia.org/wiki/Race_condition) because two asynchronous operations are "racing" with each other, and they might arrive in an unexpected order.
+Bu yüzden Taylor seçili olmasına rağmen Bob'un biyografisini görürsünüz. Bunun gibi hatalar [yarış koşulları](https://en.wikipedia.org/wiki/Race_condition) olarak adlandırılmaktadır çünkü iki eşzamansız operasyon birbirleriyle "yarışmaktadır" ve beklenmedik bir sırada varabilirler.
 
-To fix this race condition, add a cleanup function:
+Yarış koşullarını düzeltmek için bir temizleme fonksiyonu ekleyin:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1544,18 +1571,18 @@ export default function Page() {
         <option value="Taylor">Taylor</option>
       </select>
       <hr />
-      <p><i>{bio ?? 'Loading...'}</i></p>
+      <p><i>{bio ?? 'Yükleniyor...'}</i></p>
     </>
   );
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve('This is ' + person + '’s bio.');
+      resolve('Bu ' + person + '’un biyografisi.');
     }, delay);
   })
 }
@@ -1564,16 +1591,16 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-Each render's Effect has its own `ignore` variable. Initially, the `ignore` variable is set to `false`. However, if an Effect gets cleaned up (such as when you select a different person), its `ignore` variable becomes `true`. So now it doesn't matter in which order the requests complete. Only the last person's Effect will have `ignore` set to `false`, so it will call `setBio(result)`. Past Effects have been cleaned up, so the `if (!ignore)` check will prevent them from calling `setBio`:
+Her render'ın Efekti kendi `ignore` değişkenine sahiptir. İlk olarak, `ignore` değişkeninin değeri `false` olur. Ancak, Efekt temizlenirse (farklı bir kişi seçtiğiniz zaman), `ignore` değişkeninin değeri `true` olur. Bu yüzden şimdi isteklerin hangi sırada tamamlandığının bir önemi yoktur. Sadece son kişinin Efektinin `ignore` değişkeninin değeri `false` olur, bu yüzden `setBio(result)` fonksiyonu çağırılacaktır. Geçmiş Efektler temizlenmiştir, yani `if (!ignore)` koşulu `setBio` fonksiyonunun çağırılmasını engelleyecektir:
 
-- Selecting `'Bob'` triggers `fetchBio('Bob')`
-- Selecting `'Taylor'` triggers `fetchBio('Taylor')` **and cleans up the previous (Bob's) Effect**
-- Fetching `'Taylor'` completes *before* fetching `'Bob'`
-- The Effect from the `'Taylor'` render calls `setBio('This is Taylor’s bio')`
-- Fetching `'Bob'` completes
-- The Effect from the `'Bob'` render **does not do anything because its `ignore` flag was set to `true`**
+- `'Bob'` kişisini seçmek `fetchBio('Bob')` fonksiyonunu tetikler
+- `'Taylor'` kişisini seçmek `fetchBio('Taylor')` fonksiyonunu tetikler **ve bir önceki Efekti temizler (Bob'un Efekti)**
+- `'Taylor'` verisi `'Bob'` verisinden *önce* getirilir 
+- `'Taylor'` render'ının Efekti `setBio('Bu Taylor'ın biyografisidir.')` fonksiyonunu çağırır
+- `'Bob'` verisi getirilir
+- `'Bob'` render'ının Efekti **`ignore` değişkeninin değeri `true` olduğu için hiçbir şey yapmaz**
 
-In addition to ignoring the result of an outdated API call, you can also use [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to cancel the requests that are no longer needed. However, by itself this is not enough to protect against race conditions. More asynchronous steps could be chained after the fetch, so using an explicit flag like `ignore` is the most reliable way to fix this type of problems.
+Güncelliğini yitirmiş bir API çağrısının sonucunu göz ardı etmenin yanı sıra, artık ihtiyacınız olmayan istekler için[`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) API'ını da kullanabilirsiniz. Ancak bu tek başına yarış koşullarına karşı koruma sağlamak için yeterli değildir. Veri getirme işleminden sonra daha fazla eşzamansız işlem yapılabilir, bu nedenle `ignore` gibi bir değişken kullanmak bu tür sorunları çözmenin en güvenilir yoludur.
 
 </Solution>
 

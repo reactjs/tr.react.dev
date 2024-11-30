@@ -4,10 +4,10 @@ title: renderToStaticMarkup
 
 <Intro>
 
-`renderToStaticMarkup` renders a non-interactive React tree to an HTML string.
+`renderToStaticMarkup`, etkileşimli olmayan bir React ağacını HTML string'e dönüştürür.
 
 ```js
-const html = renderToStaticMarkup(reactNode)
+const html = renderToStaticMarkup(reactNode, options?)
 ```
 
 </Intro>
@@ -16,62 +16,62 @@ const html = renderToStaticMarkup(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
-### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
+### `renderToStaticMarkup(reactNode, options?)` {/*rendertostaticmarkup*/}
 
-On the server, call `renderToStaticMarkup` to render your app to HTML.
+Sunucuda, uygulamanızı HTML'ye dönüştürmek için `renderToStaticMarkup` yöntemini çağırın.
 
 ```js
 import { renderToStaticMarkup } from 'react-dom/server';
-
 const html = renderToStaticMarkup(<Page />);
 ```
 
-It will produce non-interactive HTML output of your React components.
+Bu, React bileşenlerinizin etkileşimli olmayan HTML çıktısını üretecektir.
 
-[See more examples below.](#usage)
+[Buradan daha fazla örnek görebilirsiniz.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<Page />`.
+* `reactNode`: Bir JSX düğümü gibi HTML'ye dönüştürmek istediğiniz bir React düğümü. Örneğin, şöyle bir JSX düğümü `<Page />`.
+* **isteğe bağlı** `options`: Sunucu renderı için bir obje.
+  * **isteğe bağlı** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından oluşturulan kimlikler için React'in kullandığı string ön eki. Aynı sayfada birden fazla kök kullanırken çakışmaları önlemek için kullanışlıdır.
 
-#### Returns {/*returns*/}
+#### Dönüş Değeri {/*returns*/}
 
-An HTML string.
+Bir HTML string'i.
 
-#### Caveats {/*caveats*/}
+#### Dikkat Edilmesi Gerekenler {/*caveats*/}
 
-* `renderToStaticMarkup` output cannot be hydrated.
+* `renderToStaticMarkup` çıktısı "hydrate" edilemez.
 
-* `renderToStaticMarkup` has limited Suspense support. If a component suspends, `renderToStaticMarkup` immediately sends its fallback as HTML.
+* `renderToStaticMarkup` sınırlı Suspense desteğine sahiptir. Bir bileşen askıya alındığında, `renderToStaticMarkup` hemen yedek olarak HTML gönderir.
 
-* `renderToStaticMarkup` works in the browser, but using it in the client code is not recommended. If you need to render a component to HTML in the browser, [get the HTML by rendering it into a DOM node.](/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code)
+* `renderToStaticMarkup` tarayıcıda çalışır, ancak istemci kodunda kullanılması önerilmez. Bir bileşeni tarayıcıda HTML'e dönüştürmeniz gerekiyorsa, [HTML'yi bir DOM düğümüne render ederek alın.](/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code)
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Rendering a non-interactive React tree as HTML to a string {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
+### Bir etkileşimli olmayan React ağacını HTML olarak string'e çevirme {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
 
-Call `renderToStaticMarkup` to render your app to an HTML string which you can send with your server response:
+Sunucu yanıtınızla birlikte gönderebileceğiniz bir HTML string'i olarak uygulamanızı  `renderToStaticMarkup` ile HTML'ye dönüştürün:
 
 ```js {5-6}
 import { renderToStaticMarkup } from 'react-dom/server';
-
-// The route handler syntax depends on your backend framework
+// Rota işleyicisinin sözdizimi, kullandığınız arka uç çatısına bağlıdır
 app.use('/', (request, response) => {
   const html = renderToStaticMarkup(<Page />);
   response.send(html);
 });
 ```
 
-This will produce the initial non-interactive HTML output of your React components.
+Bu, React bileşenlerinizin başlangıç olarak etkileşimsiz HTML çıktısını üretecektir.
 
 <Pitfall>
 
-This method renders **non-interactive HTML that cannot be hydrated.**  This is useful if you want to use React as a simple static page generator, or if you're rendering completely static content like emails.
+Bu yöntem **"hydrate" edilemeyen, etkileşimsiz HTML üretir.** Bu, React'i basit bir statik sayfa oluşturucusu olarak kullanmak istiyorsanız veya tamamen statik içerikler gibi içerikleri oluşturmak için kullanışlıdır.
 
-Interactive apps should use [`renderToString`](/reference/react-dom/server/renderToString) on the server and [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) on the client.
+Etkileşimli uygulamalar sunucuda [`renderToString`](/reference/react-dom/server/renderToString) ve istemci tarafında [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) kullanmalıdır.
 
 </Pitfall>

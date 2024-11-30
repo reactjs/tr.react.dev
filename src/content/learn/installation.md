@@ -35,8 +35,7 @@ export default function App() {
 
 </Sandpack>
 
-Çevrimiçi kod oyun alanlarını bu dokümanlarda eğitim yardımcıları olarak kullanıyoruz. Çevrimiçi kod oyun alanları, React'in nasıl çalıştığını anlamanıza ve React'in sizin için doğru olup olmadığı konusunda karar vermenize yardımcı olabilir. React dokümanlarının dışında, React'i destekleyen birçok çevrimiçi kod oyun alan var: örneğin, [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), veya [CodePen](
-https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb).
+Çevrimiçi kod oyun alanlarını bu dokümanlarda eğitim yardımcıları olarak kullanıyoruz. Çevrimiçi kod oyun alanları, React'in nasıl çalıştığını anlamanıza ve React'in sizin için doğru olup olmadığı konusunda karar vermenize yardımcı olabilir. React dokümanlarının dışında, React'i destekleyen birçok çevrimiçi kod oyun alan var: örneğin, [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), veya [CodePen](https://codepen.io/pen?template=QWYVwWN).
 
 ### React'i kendi bilgisayarınızda deneyin {/*try-react-locally*/}
 
