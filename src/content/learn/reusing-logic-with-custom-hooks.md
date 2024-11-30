@@ -1333,9 +1333,9 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-In the above example, `useOnlineStatus` is implemented with a pair of [`useState`](/reference/react/useState) and [`useEffect`.](/reference/react/useEffect) However, this isn't the best possible solution. There is a number of edge cases it doesn't consider. For example, it assumes that when the component mounts, `isOnline` is already `true`, but this may be wrong if the network already went offline. You can use the browser [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API to check for that, but using it directly would not work on the server for generating the initial HTML. In short, this code could be improved.
+Yukarıdaki örnekte, `useOnlineStatus`, [`useState`](/reference/react/useState) ve [`useEffect`.](/reference/react/useEffect) ikilisi kullanılarak oluşturulmuştur. Ancak, bu en iyi muhtemel çözüm değildir. Dikkate alınmayan birçok uç senaryo vardır. Örneğin, bileşen mount edildiğinde, `isOnline`'ın halihazırda `true` olacağını varsayar, ancak ağ halihazırda çevrimdışı olduğunda bu yanlış olabilir. Bu durumu kontrol etmek için tarayıcının [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API'sini kullanabilirsiniz, ancak bunu doğrudan kullanmak ilk HTML'i sunucuda oluşturmak için çalışmayacaktır. Kısacası, bu kod geliştirilebilir.
 
-Luckily, React 18 includes a dedicated API called [`useSyncExternalStore`](/reference/react/useSyncExternalStore) which takes care of all of these problems for you. Here is how your `useOnlineStatus` Hook, rewritten to take advantage of this new API:
+Şansımıza, React 18 bu sorunların hepsini sizin için çözecek olan [`useSyncExternalStore`](/reference/react/useSyncExternalStore) adında özel bir API içerir. İşte bu yeni API'den faydalanarak yeniden yazılmış `useOnlineStatus` Hook'unuz:
 
 <Sandpack>
 
@@ -1344,19 +1344,19 @@ import { useOnlineStatus } from './useOnlineStatus.js';
 
 function StatusBar() {
   const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+  return <h1>{isOnline ? '✅ Çevrimiçi' : '❌ Bağlantı Kopuk'}</h1>;
 }
 
 function SaveButton() {
   const isOnline = useOnlineStatus();
 
   function handleSaveClick() {
-    console.log('✅ Progress saved');
+    console.log('✅ İlerleme kaydedildi');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? 'Save progress' : 'Reconnecting...'}
+      {isOnline ? 'İlerlemeyi kaydet' : 'Tekrar bağlanılıyor...'}
     </button>
   );
 }
@@ -1386,8 +1386,8 @@ function subscribe(callback) {
 export function useOnlineStatus() {
   return useSyncExternalStore(
     subscribe,
-    () => navigator.onLine, // How to get the value on the client
-    () => true // How to get the value on the server
+    () => navigator.onLine, // İstemci tarafında değerin ne olacağı
+    () => true // Sunucu tarafında değerin ne olacağı
   );
 }
 
@@ -1395,7 +1395,7 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-Notice how **you didn't need to change any of the components** to make this migration:
+Bu değişikliği yapmak için **herhangi bir bileşeni değiştirmeye ihtiyacınız olmadığını** farkedin:
 
 ```js {2,7}
 function StatusBar() {
@@ -1409,22 +1409,22 @@ function SaveButton() {
 }
 ```
 
-This is another reason for why wrapping Effects in custom Hooks is often beneficial:
+Efektleri özel hook'lara sarmanın genellikle faydalı olmasının başka bir nedeni budur:
 
-1. You make the data flow to and from your Effects very explicit.
-2. You let your components focus on the intent rather than on the exact implementation of your Effects.
-3. When React adds new features, you can remove those Effects without changing any of your components.
+1. Efektlerinizin içine ve efektlerinizden dışarı akan veriyi oldukça belirgin hale getirirsiniz.
+2. Bileşenlerinizin, Efektlerinizin nasıl çalıştığından ziyade ne yapmak istediğine odaklanmasını sağlarsınız.
+3. React yeni özellikler eklediğinde, bu efektleri bileşenlerinizde herhangi bir değişiklik yapmadan kaldırabilirsiniz.
 
-Similar to a [design system,](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) you might find it helpful to start extracting common idioms from your app's components into custom Hooks. This will keep your components' code focused on the intent, and let you avoid writing raw Effects very often. Many excellent custom Hooks are maintained by the React community.
+Bir [tasarım sistemine](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) benzer olarak, uygulamanızdaki bileşenlerde bulunan ortak kalıpları özel hook'lara çıkartmaya başlamayı faydalı bulabilirsiniz. Bu, bileşenlerinizin kodunu niyete odaklı tutar ve sık sık ham Efektler yazmaktan kaçınmanızı sağlar. Pek çok muazzam özel hook'lar React topluluğu tarafından sürdürülmektedir.
 
 <DeepDive>
 
-#### Will React provide any built-in solution for data fetching? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
+#### React veri çekme için herhangi bir yerleşik çözüm sağlayacak mı? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
 
-We're still working out the details, but we expect that in the future, you'll write data fetching like this:
+Detaylar üzerine çalışmaya devam ediyoruz, ancak gelecekte veri çekmeyi şu şekilde yazmanızı bekliyoruz:
 
 ```js {1,4,6}
-import { use } from 'react'; // Not available yet!
+import { use } from 'react'; // Henüz mevcut değil!
 
 function ShippingForm({ country }) {
   const cities = use(fetch(`/api/cities?country=${country}`));
@@ -1433,13 +1433,13 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-If you use custom Hooks like `useData` above in your app, it will require fewer changes to migrate to the eventually recommended approach than if you write raw Effects in every component manually. However, the old approach will still work fine, so if you feel happy writing raw Effects, you can continue to do that.
+Eğer `useData` gibi özel hookları uygulamanızda kullanıyorsanız, neticede önerilen yaklaşıma geçiş yapmak için her bileşende manuel olarak ham Efektler yazılan bir yaklaşıma göre daha az değişiklik gerekecektir. Ancak, eski yaklaşım hala sorunsuz çalışacaktır, yani ham Efektler yazmaktan mutluysanız, bunu yapmaya devam edebilirsiniz.
 
 </DeepDive>
 
-### There is more than one way to do it {/*there-is-more-than-one-way-to-do-it*/}
+### Yapmanın birden fazla yolu vardır {/*there-is-more-than-one-way-to-do-it*/}
 
-Let's say you want to implement a fade-in animation *from scratch* using the browser [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API. You might start with an Effect that sets up an animation loop. During each frame of the animation, you could change the opacity of the DOM node you [hold in a ref](/learn/manipulating-the-dom-with-refs) until it reaches `1`. Your code might start like this:
+Diyelim ki tarayıcı [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API'sini kullanarak *sıfırdan* bir fade-in animasyonu yapmak istiyorsunuz. Bir animasyon döngüsü kuracak bir Efekt ile başlayabilirsiniz. Animasyonun her bir karesinde, bir [ref'te](/learn/manipulating-the-dom-with-refs) tuttuğunuz DOM node'unun opaklığını `1` olana kadar değiştirebilirsiniz. Kodunuz şöyle başlayabilir:
 
 <Sandpack>
 
@@ -1461,7 +1461,7 @@ function Welcome() {
       const progress = Math.min(timePassed / duration, 1);
       onProgress(progress);
       if (progress < 1) {
-        // We still have more frames to paint
+        // Hala boyama yapılacak kare var
         frameId = requestAnimationFrame(onFrame);
       }
     }
@@ -1488,7 +1488,7 @@ function Welcome() {
 
   return (
     <h1 className="welcome" ref={ref}>
-      Welcome
+      Hoşgeldiniz
     </h1>
   );
 }
@@ -1498,7 +1498,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome />}
@@ -1522,7 +1522,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-To make the component more readable, you might extract the logic into a `useFadeIn` custom Hook:
+Bileşeni daha okunabilir yapmak adına, mantığı `useFadeIn` adında özel bir Hook'a çıkarabilirsiniz:
 
 <Sandpack>
 
@@ -1537,7 +1537,7 @@ function Welcome() {
 
   return (
     <h1 className="welcome" ref={ref}>
-      Welcome
+      Hoşgeldiniz
     </h1>
   );
 }
@@ -1547,7 +1547,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome />}
@@ -1571,7 +1571,7 @@ export function useFadeIn(ref, duration) {
       const progress = Math.min(timePassed / duration, 1);
       onProgress(progress);
       if (progress < 1) {
-        // We still have more frames to paint
+        // Hala boyama yapılacak kare var
         frameId = requestAnimationFrame(onFrame);
       }
     }
@@ -1613,7 +1613,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-You could keep the `useFadeIn` code as is, but you could also refactor it more. For example, you could extract the logic for setting up the animation loop out of `useFadeIn` into a custom `useAnimationLoop` Hook:
+`useFadeIn` kodunu olduğu gibi bırakabilirsiniz, ancak daha fazla refaktör yapabilirsiniz. Örneğin, animasyon döngüsünü kurma mantığını `useFadeIn`'den çıkarıp özel bir `useAnimationLoop` Hook'a çıkarabilirsiniz:
 
 <Sandpack>
 
@@ -1628,7 +1628,7 @@ function Welcome() {
 
   return (
     <h1 className="welcome" ref={ref}>
-      Welcome
+      Hoşgeldiniz
     </h1>
   );
 }
@@ -1638,7 +1638,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome />}
@@ -1719,6 +1719,8 @@ html, body { min-height: 300px; }
 
 However, you didn't *have to* do that. As with regular functions, ultimately you decide where to draw the boundaries between different parts of your code. You could also take a very different approach. Instead of keeping the logic in the Effect, you could move most of the imperative logic inside a JavaScript [class:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
+Ancak, bunu yapmak *zorunda* değildiniz. Normal fonksiyonlarda olduğu gibi, sonuçta kodunuzun farklı parçaları arasındaki sınırları nerede çizeceğinize siz karar verirsiniz. Çok farklı bir yaklaşım da seçebilirsiniz. Mantığı Efekt'te tutmak yerine, mantığın büyük bir kısmını bir JavaScript [sınıfına](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) taşıyabilirsiniz:
+
 <Sandpack>
 
 ```js
@@ -1732,7 +1734,7 @@ function Welcome() {
 
   return (
     <h1 className="welcome" ref={ref}>
-      Welcome
+      Hoşgeldiniz
     </h1>
   );
 }
@@ -1742,7 +1744,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome />}
@@ -1784,7 +1786,7 @@ export class FadeInAnimation {
     if (progress === 1) {
       this.stop();
     } else {
-      // We still have more frames to paint
+      // Hala boyama yapılacak kare var
       this.frameId = requestAnimationFrame(() => this.onFrame());
     }
   }
@@ -1815,9 +1817,9 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Effects let you connect React to external systems. The more coordination between Effects is needed (for example, to chain multiple animations), the more it makes sense to extract that logic out of Effects and Hooks *completely* like in the sandbox above. Then, the code you extracted *becomes* the "external system". This lets your Effects stay simple because they only need to send messages to the system you've moved outside React.
+Efekt'ler, React'i dış sistemlere bağlamanıza olanak tanır. Daha fazla Efekt koordinasyonu gerektiğinde (örneğin, birder fazla animasyonu zincirlemek için), yukarıdaki örnekte olduğu gibi mantığı Efekt'lerden ve Hook'lardan *tamamen* çıkarmanız daha mantıklı hale gelir. Ardından, çıkarttığınız kod "dış sistem" *haline gelir*. Bu, Efekt'lerinizin sade kalmasını sağlar çünkü sadece React dışına taşıdığınız sisteme mesaj göndermeleri gerekir.
 
-The examples above assume that the fade-in logic needs to be written in JavaScript. However, this particular fade-in animation is both simpler and much more efficient to implement with a plain [CSS Animation:](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+Yukarıdaki örnekler fade-in mantığının JavaScript'te yapılması gerektiğini varsayar. Ancak, bu özel fade-in animasyonunu düz [CSS Animasyonu](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) ile uygulamak hem daha basit hem de çok daha verimlidir:
 
 <Sandpack>
 
@@ -1828,7 +1830,7 @@ import './welcome.css';
 function Welcome() {
   return (
     <h1 className="welcome">
-      Welcome
+      Hoşgeldiniz
     </h1>
   );
 }
@@ -1838,7 +1840,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Remove' : 'Show'}
+        {show ? 'Kaldır' : 'Göster'}
       </button>
       <hr />
       {show && <Welcome />}
@@ -1872,36 +1874,36 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Sometimes, you don't even need a Hook!
+Bazen, bir Hook'a bile ihtiyacınız olmayabilir!
 
 <Recap>
 
-- Custom Hooks let you share logic between components.
-- Custom Hooks must be named starting with `use` followed by a capital letter.
-- Custom Hooks only share stateful logic, not state itself.
-- You can pass reactive values from one Hook to another, and they stay up-to-date.
-- All Hooks re-run every time your component re-renders.
-- The code of your custom Hooks should be pure, like your component's code.
-- Wrap event handlers received by custom Hooks into Effect Events.
-- Don't create custom Hooks like `useMount`. Keep their purpose specific.
-- It's up to you how and where to choose the boundaries of your code.
+- Özel Hook'lar, bileşenler arasında mantığı paylaşmanıza olanak tanır.
+- Özel Hook'lar'ın isimleri `use` ile başlamalı ve bir büyük harfle devam etmelidir.
+- Özel Hook'lar sadece state'li mantığı paylaşır, state'in kendisini değil.
+- Reaktif değerleri bir Hook'tan diğerine paslayabilirsiniz ve bunlar güncel kalırlar.
+- Tüm Hook'lar, bileşeniniz yeniden renderlandığında her zaman yeniden çalışır.
+- Özel Hook'larınızın kodu, bileşeninizin kodu gibi saf olmalıdır.
+- Özel Hook'lar tarafından alınan olay yöneticilerini Efekt olaylarına sarın.
+- `useMount` gibi özel Hook'lar oluşturmayın. Amaçlarınızı belirli tutun.
+- Kodunuzun sınırlarını nasıl ve nerede çizeceğinize siz karar verirsiniz.
 
 </Recap>
 
 <Challenges>
 
-#### Extract a `useCounter` Hook {/*extract-a-usecounter-hook*/}
+#### Bir `useCounter` Hook'u çıkarın {/*extract-a-usecounter-hook*/}
 
-This component uses a state variable and an Effect to display a number that increments every second. Extract this logic into a custom Hook called `useCounter`. Your goal is to make the `Counter` component implementation look exactly like this:
+Bu bileşen bir state değişkeni ve bir Efekt kullanarak her saniye artan bir sayıyı görüntüler. Bu mantığı `useCounter` adında özel bir Hook'a çıkarın. Amacınız `Counter` bileşeninin uygulamasını tam olarak aşağıdaki gibi yapmak olmalıdır:
 
 ```js
 export default function Counter() {
   const count = useCounter();
-  return <h1>Seconds passed: {count}</h1>;
+  return <h1>Geçen saniyeler: {count}</h1>;
 }
 ```
 
-You'll need to write your custom Hook in `useCounter.js` and import it into the `App.js` file.
+Özel Hook'unuzu `useCounter.js`'e yazmanız ve onu `App.js` dosyasına içe aktarmanız gerekecek.
 
 <Sandpack>
 
@@ -1916,19 +1918,19 @@ export default function Counter() {
     }, 1000);
     return () => clearInterval(id);
   }, []);
-  return <h1>Seconds passed: {count}</h1>;
+  return <h1>Geçen saniyeler: {count}</h1>;
 }
 ```
 
 ```js src/useCounter.js
-// Write your custom Hook in this file!
+// Özel Hook'unuzu bu dosyaya yazın!
 ```
 
 </Sandpack>
 
 <Solution>
 
-Your code should look like this:
+Kodunuz şu şekilde gözükmelidir:
 
 <Sandpack>
 
@@ -1937,7 +1939,7 @@ import { useCounter } from './useCounter.js';
 
 export default function Counter() {
   const count = useCounter();
-  return <h1>Seconds passed: {count}</h1>;
+  return <h1>Geçen saniyeler: {count}</h1>;
 }
 ```
 
@@ -1958,13 +1960,13 @@ export function useCounter() {
 
 </Sandpack>
 
-Notice that `App.js` doesn't need to import `useState` or `useEffect` anymore.
+Farkındaysanız, `App.js` artık `useState` veya `useEffect`'i içe aktarmaya ihtiyaç duymuyor.
 
 </Solution>
 
-#### Make the counter delay configurable {/*make-the-counter-delay-configurable*/}
+#### Geri sayım gecikmesini yapılandırılabilir hale getirin {/*make-the-counter-delay-configurable*/}
 
-In this example, there is a `delay` state variable controlled by a slider, but its value is not used. Pass the `delay` value to your custom `useCounter` Hook, and change the `useCounter` Hook to use the passed `delay` instead of hardcoding `1000` ms.
+Bu örnekte, bir slider tarafından kontrol edilen bir `delay` state değişkeni var, ancak değeri kullanılmıyor. Özel `useCounter` Hook'unuza `delay` değerini iletin ve `useCounter` Hook'unuzu sabit `1000` ms yerine iletilen `delay`'i kullanacak şekilde değiştirin.
 
 <Sandpack>
 
@@ -1978,7 +1980,7 @@ export default function Counter() {
   return (
     <>
       <label>
-        Tick duration: {delay} ms
+        Tiktak süresi: {delay} ms
         <br />
         <input
           type="range"
@@ -1989,7 +1991,7 @@ export default function Counter() {
         />
       </label>
       <hr />
-      <h1>Ticks: {count}</h1>
+      <h1>Tiktaklar: {count}</h1>
     </>
   );
 }
@@ -2016,6 +2018,8 @@ export function useCounter() {
 
 Pass the `delay` to your Hook with `useCounter(delay)`. Then, inside the Hook, use `delay` instead of the hardcoded `1000` value. You'll need to add `delay` to your Effect's dependencies. This ensures that a change in `delay` will reset the interval.
 
+`delay`'i `useCounter(delay)` ile Hook'unuza iletin. Ardından, Hook'un içinde, `1000` sabit değeri yerine `delay`'i kullanın. Efektinizin dependency'lerine `delay`'i eklemeniz gerekecek. Bu, `delay`'de meydana gelen bir değişikliğin interval'i sıfırlamasını sağlar.
+
 <Sandpack>
 
 ```js
@@ -2028,7 +2032,7 @@ export default function Counter() {
   return (
     <>
       <label>
-        Tick duration: {delay} ms
+        Tiktak süresi: {delay} ms
         <br />
         <input
           type="range"
@@ -2039,7 +2043,7 @@ export default function Counter() {
         />
       </label>
       <hr />
-      <h1>Ticks: {count}</h1>
+      <h1>Tiktaklar: {count}</h1>
     </>
   );
 }
