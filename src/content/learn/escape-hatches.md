@@ -4,32 +4,32 @@ title: Kaçış Yolları
 
 <Intro>
 
-Bazı bileşenleriniz, React'in dışarısında bulunan bileşenleri kontrol etmek ya da onlarla senkronize olmaya ihtiyaç duyabilir. Örneğin, tarayıcı API'sini kullanarak bir girdi alanına odaklanmanız, React olmadan yazılmış bir video oynatıcıyı durdurup başlatmanız ya da uzak bir sunucuya bağlanıp mesajları dinlemeniz gerekebilir. Bu bölümde, dış sistemlere bağlanmak için React'in "dışına çıkmanızı" sağlayacak kaçış yollarını öğreneceksiniz. Uygulama mantığınızın ve veri akışınızın çoğu bu özelliklere bağlı olmamalıdır.
+Bazı bileşenleriniz React dışındaki sistemleri kontrol etmek ve bu sistemlerle senkronize olmak isteyebilir. Örneğin, tarayıcı API kullanarak bir input alanına odaklanmak, React harici yazılmış bir video oynatıcısını durdurmak ve oynatmak ya da uzaktan bir sunucuya bağlanmak ve mesajları dinlemek isteyebilirsiniz. Bu bölümde, React "dışına çıkmanızı" ve dış sistemlere bağlanmanızı sağlayacak kaçış yollarını öğreneceksiniz. Uygulama mantığınızın ve veri akışınızın çoğu bu özelliklere dayanmamalıdır.
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [Yeniden render etmeden bilgiyi nasıl "hatırlayacağınızı"](/learn/referencing-values-with-refs)
-* [React tarafından yönetilen DOM elemanlarına nasıl ulaşacağınızı](/learn/manipulating-the-dom-with-refs)
-* [Bileşenleri nasıl dış sistemlerle senkronize edeceğinizi](/learn/synchronizing-with-effects)
-* [Bileşenlerinizden gereksiz Effect'leri nasıl kaldıracağınızı](/learn/you-might-not-need-an-effect)
-* [Bir Effect'in yaşam döngüsünün bir bileşenin yaşam döngüsünden nasıl farklı olduğunu](/learn/lifecycle-of-reactive-effects)
-* [Bazı değerlerin Effect'leri yeniden tetiklemesini nasıl engelleyeceğinizi](/learn/separating-events-from-effects)
-* [Effect'inizin daha az sıklıkla yeniden çalışmasını nasıl sağlayabileceğinizi](/learn/removing-effect-dependencies)
-* [Bileşenler arasında mantık paylaşımı nasıl yapacağınızı](/learn/reusing-logic-with-custom-hooks)
+* [Yeniden render etmeden bilgilerin nasıl "hatırlanacağı"](/learn/referencing-values-with-refs)
+* [React ile kontrol edilen DOM elemanlarına nasıl ulaşılacağı](/learn/manipulating-the-dom-with-refs)
+* [Bileşenlerin dış sistemeler ile nasıl senkronize edileceği](/learn/synchronizing-with-effects)
+* [Gereksiz Efektlerin bileşenlerinizden nasıl kaldırılacağı](/learn/you-might-not-need-an-effect)
+* [Bir Efektin yaşam döngüsü bir bileşenden nasıl farklıdır](/learn/lifecycle-of-reactive-effects)
+* [Bazı değelerin Efekti yeniden tetiklemesinin nasıl engelleneceği](/learn/separating-events-from-effects)
+* [Efektinizin daha az sıklıkta yeniden çalışmasının nasıl sağlanacağı](/learn/removing-effect-dependencies)
+* [Bileşenler arasında mantığın nasıl paylaşılacağı](/learn/reusing-logic-with-custom-hooks)
 
 </YouWillLearn>
 
-## Ref'ler ile değerleri referans etmek {/*referencing-values-with-refs*/}
+## Ref ile Değerlere Referans Verme {/*referencing-values-with-refs*/}
 
-Bileşeninizin bir bilgiyi "hatırlamasını" istediğinizde, ancak bu bilginin [yeni render'lar tetiklemesini](/learn/render-and-commit) istemediğinizde, bir *ref* kullanabilirsiniz:
+Bir bileşenin "hatırlamasını" istediğiniz bilgi varsa, ancak bu bilginin [yeni render'lar](/learn/render-and-commit) tetiklemesini istemiyorsanız, bir *ref* kullanabilirsiniz:
 
 ```js
 const ref = useRef(0);
 ```
 
-State gibi, ref'ler de React tarafından yeniden render'lar arasında saklanır. Ancak, bir state'i değiştirmek bileşeni yeniden render eder. Bir ref'i değiştirmek etmez! Ref'in o anki değerine `ref.current` özelliği üzerinden erişebilirsiniz.
+State'te olduğu gibi ref'lerde yeniden renderlar arasında React tarafından tutulur. Ancak, state'i değiştirmek bileşeni yeniden render eder. Bir ref'i değiştirmek yeniden render'a neden olmaz! Bir ref'in mevcut değerine `ref.current` özelleğini kullanarak erişebilirsiniz.
 
 <Sandpack>
 
@@ -41,12 +41,12 @@ export default function Counter() {
 
   function handleClick() {
     ref.current = ref.current + 1;
-    alert(ref.current + ' kez tıkladınız!');
+    alert(ref.current + ' defa tıkladınız!');
   }
 
   return (
     <button onClick={handleClick}>
-      Bana tıkla!
+      Tıkla!
     </button>
   );
 }
@@ -54,19 +54,17 @@ export default function Counter() {
 
 </Sandpack>
 
-Bir ref, bileşeninize ait, React'in takip etmediği gizli bir cep gibidir. Örneğin, ref'leri [zaman aşımı ID'lerini](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elemanlarını](https://developer.mozilla.org/en-US/docs/Web/API/Element) ve bileşenin render çıktısını etkilemeyen diğer nesneleri saklamak için kullanabilirsiniz.
+Ref, bileşeninizin React tarafından takip edilmeyen gizli bir cebi gibidir. Örneğin, ref'leri kullanarak [zamanaşımı ID'lerini](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elemanlarını](https://developer.mozilla.org/en-US/docs/Web/API/Element) ve bileşenin render çıktısını etkilemeyen diğer nesneleri saklayabilirsiniz.
 
 <LearnMore path="/learn/referencing-values-with-refs">
 
 **[Ref ile Değerlere Referans Verme](/learn/referencing-values-with-refs)** sayfasını okuyarak ref'lerin bilgileri hatırlamada nasıl kullanılacağını öğrenebilirsiniz.
 
-Ref'leri kullanarak nasıl bilgi saklayacağınızı öğrenmek için **[Ref'ler ile değerleri referans etme](/learn/referencing-values-with-refs)** bölümünü okuyun.
-
 </LearnMore>
 
-## DOM'u ref'ler ile manipüle etmek {/*manipulating-the-dom-with-refs*/}
+## Ref'ler ile DOM Manipülasyonu {/*manipulating-the-dom-with-refs*/}
 
-React, render çıktınızla eşleşmesi için DOM'u otomatik olarak günceller, bunun sayesinde bileşenleriniz genellikle DOM'u manipüle etme ihtiyacı duymaz. Ancak, bazen React tarafından yönetilen DOM elemanlarına erişmeniz gerekebilir - örneğin, bir düğüme odaklanmak, ona scroll'lamak veya boyutunu ve konumunu ölçmek için. React'te bunları yapmak için gömülü bir yöntem yoktur, bu yüzden DOM düğümüne bir ref'e ihtiyacınız olacaktır. Örneğin, aşağıdaki örnekteki gibi, bir düğmeye tıklandığında bir ref kullanarak input'a odaklanabilirsiniz:
+React, DOM'u render edilen çıktıya uyacak şekilde otomatik olarak günceller. Böylece bileşenlerinizin genellikle onu değiştirmesi gerekmez. Ancak bazen React tarafından yönetilen DOM elemanlarına erişmeye ihtiyaç duyabilirsiniz örneğin bir elemana odaklamak, onu kaydırmak veya boyutunu ve konumunu ölçmek isteyebilirsiniz. React'te bunları yapmanın yerleşik bir yolu yoktur bu yüzden DOM elemanı için *ref*'e ihtiyacınız olacak. Örneğin, butona tıklamak ref'i kullanarak input alanına odaklanmanızı sağlayacaktır:
 
 <Sandpack>
 
@@ -84,7 +82,7 @@ export default function Form() {
     <>
       <input ref={inputRef} />
       <button onClick={handleClick}>
-        Girdiye odaklan
+        İnput alanına odaklan
       </button>
     </>
   );
@@ -95,16 +93,15 @@ export default function Form() {
 
 <LearnMore path="/learn/manipulating-the-dom-with-refs">
 
-React tarafından yönetilen DOM elemanlarına nasıl erişeceğinizi öğrenmek için **[DOM'u ref'ler ile manipüle etme](/learn/manipulating-the-dom-with-refs)** bölümünü okuyun.
+**[Ref'ler ile DOM Manipülasyonu](/learn/manipulating-the-dom-with-refs)** sayfasını okuyarak React tarafından kontrol edilen DOM elemanlarına nasıl erişebileceğinizi öğrenebilirsiniz.
 
 </LearnMore>
 
-## Efektler ile senkronize etme {/*synchronizing-with-effects*/}
+## Efektler ile Senkronize Etme {/*synchronizing-with-effects*/}
 
+Bazı bileşenler harici sistemler ile senkronize olmalıdır. Örneğin, React state'ine göre React olmayan bir bileşeni kontrol etmek, bir sunucu bağlantısı kurmak veya bir bileşen ekranda göründüğünde analiz bilgisi göndermek isteyebilirsiniz. *Efektler*, bileşeninizi bazı React dışı sistemler ile senkronize etmenizi sağlamak için bazı kodları render işleminden sonra çalıştırır. Efektleri, bileşenlerinizi React dışındaki sistemlerle senkronize etmek için kullanın.
 
-Bazı bileşenlerin dış sistemler ile senkronize olmazı gerekmektedir. Örneğin, bir sunucu bağlantısı kurmak için veya bir bileşen ekranda gözüktüğünde analitik logu göndermek için bir React-dışı bileşeni React state'ine göre kontrol etmek isteyebilirsiniz. *Efektler*, belirli olayları ele almanızı sağlayan olay yöneticilerinin aksine, sizin render'dan sonra bazı kodları çalıştırmanızı sağlar. Bileşeninizi React dışı bir sistem ile senkronize etmek için efektleri kullanın.
-
-Başlat/Durdur butonuna birkaç kez basın ve video oynatıcının `isPlaying` prop değerine senkronize kaldığını görün:
+Birkaç kez Oynat/Duraklat düğmesine basın ve video oynatıcısının `isPlaying` prop değeriyle nasıl senkronize kaldığını görün:
 
 <Sandpack>
 
@@ -130,7 +127,7 @@ export default function App() {
   return (
     <>
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Durdur' : 'Başlat'}
+        {isPlaying ? 'Duraklat' : 'Oynat'}
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
