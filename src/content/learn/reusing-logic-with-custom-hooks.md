@@ -224,7 +224,7 @@ Bu isimlendirme kurallarına uymalısınız:
 1. **React bileşenleri büyük harfle başlamalıdır,** `StatusBar` ve `SaveButton` gibi. React bileşenleri ayrıca, JSX gibi, React'in nasıl görüntüleyeceğini bildiği bir şey döndürmelidir.
 2. **Hook isimleri `use` ile başlayıp büyük harfle devam etmelidir,** [`useState`](/reference/react/useState) (yerleşik) veya `useOnlineStatus` (özel, yukarıdaki örnekte olduğu gibi). Hook'lar keyfi değerler döndürebilir.
 
-Bu kural, sizin bir bileşene her baktığınızda onun state, efektleri ve diğer React özelliklerinin nerede "saklanabileceğini" bilmenizi garanti eder. Örneğin, bileşeninizde `getColor()` fonksiyonu çağrısı görürseniz, adının `use` ile başlamadığı için içinde React state'i içeremeyeceğinden emin olabilirsiniz. Ancak, `useOnlineStatus()` gibi bir fonksiyon çağrısı büyük olasılıkla içinde başka Hook'lara çağrı içerecektir!
+Bu kural, sizin bir bileşene her baktığınızda onun state, Efekt'leri ve diğer React özelliklerinin nerede "saklanabileceğini" bilmenizi garanti eder. Örneğin, bileşeninizde `getColor()` fonksiyonu çağrısı görürseniz, adının `use` ile başlamadığı için içinde React state'i içeremeyeceğinden emin olabilirsiniz. Ancak, `useOnlineStatus()` gibi bir fonksiyon çağrısı büyük olasılıkla içinde başka Hook'lara çağrı içerecektir!
 
 <Note>
 
@@ -325,7 +325,7 @@ function SaveButton() {
 }
 ```
 
-Bunlar tamamen bağımsız iki state değişkenleri ve efektlerdir! Onlar rastlantısal olarak aynı anda aynı değere sahip oldular çünkü onları aynı harici değerle (ağın açık olup olmaması) senkronize ettiniz.
+Bunlar tamamen bağımsız iki state değişkenleri ve Efekt'lerdir! Onlar rastlantısal olarak aynı anda aynı değere sahip oldular çünkü onları aynı harici değerle (ağın açık olup olmaması) senkronize ettiniz.
 
 Bunu daha iyi canlandırabilmek adına, farklı bir örnek kullanacağız. Bu `Form` bileşenini ele alın:
 
@@ -599,9 +599,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-`serverUrl` ya da `roomId`'yi değiştirdiğinizde, efekt [değişikliklerinize "tepki verir"](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) ve yeniden senkronize olur. Konsol mesajlarından, efekt'in bağlı olduğu değerleri her değiştirdiğinizde sohbetin yeniden bağlandığını görebilirsiniz.
+`serverUrl` ya da `roomId`'yi değiştirdiğinizde, Efekt [değişikliklerinize "tepki verir"](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) ve yeniden senkronize olur. Konsol mesajlarından, Efekt'in bağlı olduğu değerleri her değiştirdiğinizde sohbetin yeniden bağlandığını görebilirsiniz.
 
-Şimdi efekt'in kodunu özel bir Hook'a taşıyın:
+Şimdi Efekt'in kodunu özel bir Hook'a taşıyın:
 
 ```js {2-13}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -833,7 +833,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-`ChatRoom` bileşeniniz her yeniden render edildiğinde, `roomId` ve `serverUrl`'in son hallerini Hook'unuza verir. Bu, bir yeniden render'dan sonra değerleri her değiştikten sonra Efekt'inizin sohbete yeniden bağlanmasının nedenidir. (Eğer önceden ses ya da video işleme yazılımı ile uğraştıysanız, Hook'ları bu şekilde zincirlemek size görsel ya da ses efektlerini zincirlemeyi hatırlatabilir. Adeta `useState`'in çıktısı `useChatRoom`'un girdisine "besleniyor" gibi.)
+`ChatRoom` bileşeniniz her yeniden render edildiğinde, `roomId` ve `serverUrl`'in son hallerini Hook'unuza verir. Bu, bir yeniden render'dan sonra değerleri her değiştikten sonra Efekt'inizin sohbete yeniden bağlanmasının nedenidir. (Eğer önceden ses ya da video işleme yazılımı ile uğraştıysanız, Hook'ları bu şekilde zincirlemek size görsel ya da ses Efektlerini zincirlemeyi hatırlatabilir. Adeta `useState`'in çıktısı `useChatRoom`'un girdisine "besleniyor" gibi.)
 
 ### Olay yöneticilerini özel Hook'lara geçirme {/*passing-event-handlers-to-custom-hooks*/}
 
@@ -1411,9 +1411,9 @@ function SaveButton() {
 
 Efektleri özel hook'lara sarmanın genellikle faydalı olmasının başka bir nedeni budur:
 
-1. Efektlerinizin içine ve efektlerinizden dışarı akan veriyi oldukça belirgin hale getirirsiniz.
+1. Efektlerinizin içine ve Efekt'lerinizden dışarı akan veriyi oldukça belirgin hale getirirsiniz.
 2. Bileşenlerinizin, Efektlerinizin nasıl çalıştığından ziyade ne yapmak istediğine odaklanmasını sağlarsınız.
-3. React yeni özellikler eklediğinde, bu efektleri bileşenlerinizde herhangi bir değişiklik yapmadan kaldırabilirsiniz.
+3. React yeni özellikler eklediğinde, bu Efekt'leri bileşenlerinizde herhangi bir değişiklik yapmadan kaldırabilirsiniz.
 
 Bir [tasarım sistemine](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) benzer olarak, uygulamanızdaki bileşenlerde bulunan ortak kalıpları özel hook'lara çıkartmaya başlamayı faydalı bulabilirsiniz. Bu, bileşenlerinizin kodunu niyete odaklı tutar ve sık sık ham Efektler yazmaktan kaçınmanızı sağlar. Pek çok muazzam özel hook'lar React topluluğu tarafından sürdürülmektedir.
 
@@ -2068,9 +2068,9 @@ export function useCounter(delay) {
 
 </Solution>
 
-#### Extract `useInterval` out of `useCounter` {/*extract-useinterval-out-of-usecounter*/}
+#### `useInterval`'i `useCounter`'dan çıkarın {/*extract-useinterval-out-of-usecounter*/}
 
-Currently, your `useCounter` Hook does two things. It sets up an interval, and it also increments a state variable on every interval tick. Split out the logic that sets up the interval into a separate Hook called `useInterval`. It should take two arguments: the `onTick` callback, and the `delay`. After this change, your `useCounter` implementation should look like this:
+Şu an, `useCounter` Hook'unuz iki şey yapıyor, bir interval kuruyor ve aynı zamanda her interval tikinde bir state değişkenini artırıyor. Interval'i kuran mantığı `useInterval` adında ayrı bir Hook'a ayırın. Bu Hook, iki argüman almalıdır: `onTick` callback'i ve `delay`. Bu değişiklikten sonra, `useCounter` uygulamanız şu şekilde olmalıdır:
 
 ```js
 export function useCounter(delay) {
@@ -2082,7 +2082,7 @@ export function useCounter(delay) {
 }
 ```
 
-Write `useInterval` in the `useInterval.js` file and import it into the `useCounter.js` file.
+`useInterval`'i `useInterval.js` dosyasının içine yazın ve onu `useCounter.js` dosyasında içe aktarın.
 
 <Sandpack>
 
@@ -2092,7 +2092,7 @@ import { useCounter } from './useCounter.js';
 
 export default function Counter() {
   const count = useCounter(1000);
-  return <h1>Seconds passed: {count}</h1>;
+  return <h1>Geçen saniyeler: {count}</h1>;
 }
 ```
 
@@ -2112,14 +2112,14 @@ export function useCounter(delay) {
 ```
 
 ```js src/useInterval.js
-// Write your Hook here!
+// Hook'unuzu bu dosyaya yazın!
 ```
 
 </Sandpack>
 
 <Solution>
 
-The logic inside `useInterval` should set up and clear the interval. It doesn't need to do anything else.
+`useInterval` içindeki mantık, interval'i kurmalı ve temizlemelidir. Başka bir şey yapmasına gerek yoktur.
 
 <Sandpack>
 
@@ -2128,7 +2128,7 @@ import { useCounter } from './useCounter.js';
 
 export default function Counter() {
   const count = useCounter(1000);
-  return <h1>Seconds passed: {count}</h1>;
+  return <h1>Geçen saniyeler: {count}</h1>;
 }
 ```
 
@@ -2158,36 +2158,38 @@ export function useInterval(onTick, delay) {
 
 </Sandpack>
 
-Note that there is a bit of a problem with this solution, which you'll solve in the next challenge.
+Bu çözümde biraz bir sorun olduğuna dikkat edin, bunu bir sonraki bölümde çözeceksiniz.
 
 </Solution>
 
-#### Fix a resetting interval {/*fix-a-resetting-interval*/}
+#### Interval'i sıfırlamayı çözün {/*fix-a-resetting-interval*/}
 
-In this example, there are *two* separate intervals.
+Bu örnekte, *iki* ayrı interval var.
 
-The `App` component calls `useCounter`, which calls `useInterval` to update the counter every second. But the `App` component *also* calls `useInterval` to randomly update the page background color every two seconds.
+`App` bileşeni `useCounter`'ı çağırıyor, o da sayacı her saniye arttırmak için `useInterval`'i çağırıyor. Ama `App` bileşeni *aynı zamanda* her iki saniyede bir sayfa arka plan rengini rastgele güncellemek için de `useInterval`'i çağırıyor.
 
 For some reason, the callback that updates the page background never runs. Add some logs inside `useInterval`:
 
+Bir sebepten ötürü, sayfa arka planını güncelleyen callback hiç çalışmıyor. `useInterval` içerisine bazı loglar ekleyin:
+
 ```js {2,5}
   useEffect(() => {
-    console.log('✅ Setting up an interval with delay ', delay)
+    console.log('✅ Delayli bir interval kuruluyor ', delay)
     const id = setInterval(onTick, delay);
     return () => {
-      console.log('❌ Clearing an interval with delay ', delay)
+      console.log('❌ Delayli bir interval temizleniyor ', delay)
       clearInterval(id);
     };
   }, [onTick, delay]);
 ```
 
-Do the logs match what you expect to happen? If some of your Effects seem to re-synchronize unnecessarily, can you guess which dependency is causing that to happen? Is there some way to [remove that dependency](/learn/removing-effect-dependencies) from your Effect?
+Log'lar olacağını düşündüğünüz şeyle uyuşuyor mu? Eğer bazı Efekt'leriniz gereksiz yere yeniden senkronize oluyorsa, bunun hangi dependency'den dolayı olduğunu tahmin edebilir misiniz? Efekt'inizden [bu dependency'yi kaldırabileceğiniz](/learn/removing-effect-dependencies) bir yol var mı?
 
-After you fix the issue, you should expect the page background to update every two seconds.
+Bu sorunu çözdükten sonra, sayfa arka planının her iki saniyede bir güncellendiğini görmelisiniz.
 
 <Hint>
 
-It looks like your `useInterval` Hook accepts an event listener as an argument. Can you think of some way to wrap that event listener so that it doesn't need to be a dependency of your Effect?
+Görünen o ki `useInterval` Hook'unuz argüman olarak bir olay dinleyicisi alıyor. Bu olay dinleyicisini Efekt'iniz için bir dependency olmaya ihtiyaç duymadan nasıl sarabileceğinizi düşünebilir misiniz?
 
 </Hint>
 
@@ -2221,7 +2223,7 @@ export default function Counter() {
     document.body.style.backgroundColor = randomColor;
   }, 2000);
 
-  return <h1>Seconds passed: {count}</h1>;
+  return <h1>Geçen saniyeler: {count}</h1>;
 }
 ```
 
@@ -2256,11 +2258,11 @@ export function useInterval(onTick, delay) {
 
 <Solution>
 
-Inside `useInterval`, wrap the tick callback into an Effect Event, as you did [earlier on this page.](/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks)
+`useInterval`'in içerisinde, tik callback'ini bir Efekt olayına [bu sayfada daha önce yaptığınız gibi](/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks) sarın
 
-This will allow you to omit `onTick` from dependencies of your Effect. The Effect won't re-synchronize on every re-render of the component, so the page background color change interval won't get reset every second before it has a chance to fire.
+Bu sizin `onTick`'i Efekt'iniz için bir dependency olmaktan çıkarmanıza olanak tanır. Efekt, bileşeniniz her yeniden renderlandığında tekrar senkronie olmayacak, böylece sayfa arka plan rengi değişim interval'i her saniye çalışmaya şans bulamadan sıfırlanmamış olacak.
 
-With this change, both intervals work as expected and don't interfere with each other:
+Bu değişiklikle birlikte, her iki interval de beklediğiniz gibi çalışır ve birbirleriyle etkileşime girmezler:
 
 <Sandpack>
 
@@ -2327,21 +2329,21 @@ export function useInterval(callback, delay) {
 
 </Solution>
 
-#### Implement a staggering movement {/*implement-a-staggering-movement*/}
+#### Gecikmelendirilmiş bir hareketi uygulayın {/*implement-a-staggered-movement*/}
 
-In this example, the `usePointerPosition()` Hook tracks the current pointer position. Try moving your cursor or your finger over the preview area and see the red dot follow your movement. Its position is saved in the `pos1` variable.
+Bu örnekte, `usePointerPosition()` Hook'u mevcut imleç konumunu takip eder. İmlecinizi veya parmağınızı önizleme alanı üzerinde hareket ettirmeyi deneyin ve kırmızı noktanın hareketinizi takip ettiğini görün. Noktanın konumu `pos1` değişkeninde saklanır.
 
-In fact, there are five (!) different red dots being rendered. You don't see them because currently they all appear at the same position. This is what you need to fix. What you want to implement instead is a "staggered" movement: each dot should "follow" the previous dot's path. For example, if you quickly move your cursor, the first dot should follow it immediately, the second dot should follow the first dot with a small delay, the third dot should follow the second dot, and so on.
+Aslında, render edilen beş (!) farklı kırmızı nokta var. Onları görmüyorsunuz çünkü şu anda hepsi aynı konumda görünüyor. Bu sorunu çözmeniz gerekiyor. Bunun yerine uygulamak istediğiniz şey "gecikmeli" bir hareket: her nokta bir önceki noktanın yolunu "takip" etmeli. Örneğin hızlıca imlecinizi hareket ettirirseniz, ilk nokta onu hemen takip etmeli, ikinci nokta ilk noktayı küçük bir gecikme ile takip etmeli, üçüncü nokta ikinci noktayı takip etmeli ve böyle devam etmeli.
 
-You need to implement the `useDelayedValue` custom Hook. Its current implementation returns the `value` provided to it. Instead, you want to return the value back from `delay` milliseconds ago. You might need some state and an Effect to do this.
+`useDelayedValue` özel Hook'unu yazmanız gerekiyor. Mevcut uygulama, ona sağlanan `value`'yu döndürmekte. Bunun yerine, `delay` kadar milisaniye önceki değeri döndürmek istemektesiniz. Bu işlemi yapmak için biraz state ve bir Efekt'e ihtiyacınız olabilir.
 
-After you implement `useDelayedValue`, you should see the dots move following one another.
+`useDelayedValue`'u yazdıktan sonra, noktaların birbirlerini takip ettiğini görmelisiniz.
 
 <Hint>
 
-You'll need to store the `delayedValue` as a state variable inside your custom Hook. When the `value` changes, you'll want to run an Effect. This Effect should update `delayedValue` after the `delay`. You might find it helpful to call `setTimeout`.
+`delayedValue`'yu bir özel Hook'unuzun içinde bir state değişkeni olarak saklamanız gerekmekte. `value` değiştiğinde, bir Efekt çalıştırmak isteyeceksiniz. Bu Efekt, `delay`'den sonra `delayedValue`'yu güncellemelidir. `setTimeout`'u çağırmak size yardımcı olabilir.
 
-Does this Effect need cleanup? Why or why not?
+Bu Efekt'in cleanup'a ihtiyacı var mı? Varsa neden, yoksa neden?
 
 </Hint>
 
@@ -2351,7 +2353,7 @@ Does this Effect need cleanup? Why or why not?
 import { usePointerPosition } from './usePointerPosition.js';
 
 function useDelayedValue(value, delay) {
-  // TODO: Implement this Hook
+  // TODO: Bu Hook'u yazın
   return value;
 }
 
@@ -2414,7 +2416,7 @@ body { min-height: 300px; }
 
 <Solution>
 
-Here is a working version. You keep the `delayedValue` as a state variable. When `value` updates, your Effect schedules a timeout to update the `delayedValue`. This is why the `delayedValue` always "lags behind" the actual `value`.
+Burada çalışan bir versiyonu var. `delayedValue`'yu bir state değişkeni olarak saklıyorsunuz. `value` güncellendiğinde, Efekt'iniz `delayedValue`'yu güncellemek için bir timeout planlar. Bu yüzden `delayedValue` her zaman gerçek `value`'dan "geride kalır".
 
 <Sandpack>
 
@@ -2491,7 +2493,7 @@ body { min-height: 300px; }
 
 </Sandpack>
 
-Note that this Effect *does not* need cleanup. If you called `clearTimeout` in the cleanup function, then each time the `value` changes, it would reset the already scheduled timeout. To keep the movement continuous, you want all the timeouts to fire.
+Bu Efekt'in cleanup'a ihtiyacı *olmadığını* unutmayın. Eğer cleanup fonksiyonunda `clearTimeout`'u çağırdıysanız, o zaman her `value` değiştiğinde, zaten planlanmış olan timeout'u sıfırlar.  Hareketi sürekli tutmak için, tüm timeout'ların çalışmasını istersiniz.
 
 </Solution>
 
