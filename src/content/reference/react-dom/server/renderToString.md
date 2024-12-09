@@ -86,9 +86,15 @@ Bu, React bileşenlerinizin etkileşimli olmayan ilk HTML çıktısını üretec
 
 ## Alternatifler {/*alternatives*/}
 
+<<<<<<< HEAD
 ### Sunucuda `renderToString`'den bir akış yöntemine geçiş {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
 
 `renderToString` hemen bir string döndürür, bu nedenle akışı veya veri beklemeyi desteklemez.
+=======
+### Migrating from `renderToString` to a streaming render on the server {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
+
+`renderToString` returns a string immediately, so it does not support streaming content as it loads.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 Mümkün olduğunda, bu tam özellikli alternatifleri kullanmanızı öneririz:
 
@@ -99,7 +105,24 @@ Sunucu ortamınız akışları desteklemiyorsa `renderToString` kullanmaya devam
 
 ---
 
+<<<<<<< HEAD
 ### İstemci kodundan `renderToString`'i kaldırma {/*removing-rendertostring-from-the-client-code*/}
+=======
+### Migrating from `renderToString` to a static prerender on the server {/*migrating-from-rendertostring-to-a-static-prerender-on-the-server*/}
+
+`renderToString` returns a string immediately, so it does not support waiting for data to load for static HTML generation.
+
+We recommend using these fully-featured alternatives:
+
+* If you use Node.js, use [`prerenderToNodeStream`.](/reference/react-dom/static/prerenderToNodeStream)
+* If you use Deno or a modern edge runtime with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), use [`prerender`.](/reference/react-dom/static/prerender)
+
+You can continue using `renderToString` if your static site generation environment does not support streams.
+
+---
+
+### Removing `renderToString` from the client code {/*removing-rendertostring-from-the-client-code*/}
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 Bazen, `renderToString` istemcide bazı bileşenleri HTML'e dönüştürmek için kullanılır.
 
@@ -137,5 +160,9 @@ DOM'un [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/in
 
 Bir bileşen askıya alınırsa (örneğin, [`lazy`](/reference/react/lazy) ile tanımlandığı veya veri getirdiği için), `renderToString` içeriğinin çözümlenmesini beklemeyecektir. Bunun yerine, `renderToString` bunun üzerindeki en yakın [`<Suspense>`](/reference/react/Suspense) sınırını bulacak ve HTML'de `fallback` prop'unu render edecektir. İstemci kodu yüklenene kadar içerik görünmeyecektir.
 
+<<<<<<< HEAD
 Bunu çözmek için [önerilen akış çözümlerinden](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) birini kullanın. Sunucuda çözümlendikçe içeriği parçalar halinde yayınlayabilirler, böylece kullanıcı istemci kodu yüklenmeden önce sayfanın aşamalı olarak doldurulduğunu görür.
+=======
+To solve this, use one of the [recommended streaming solutions.](#alternatives) For server side rendering, they can stream content in chunks as it resolves on the server so that the user sees the page being progressively filled in before the client code loads. For static site generation, they can wait for all the content to resolve before generating the static HTML.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
