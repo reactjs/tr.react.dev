@@ -256,11 +256,11 @@ export default function CatFriends() {
               key={cat}
               ref={(node) => {
                 const map = getMap();
-                if (node) {
-                  map.set(cat, node);
-                } else {
+                map.set(cat, node);
+
+                return () => {
                   map.delete(cat);
-                }
+                };
               }}
             >
               <img src={cat} />
@@ -309,16 +309,6 @@ li {
 }
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "^5.0.0"
-  }
-}
-```
-
 </Sandpack>
 
 Bu örnekte `itemsRef` tek bir DOM elemanını tutmaz. Bunun yerine öge kimliğinden DOM elemanına bir [Map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map) tutar. ([Ref'ler herhangi bir değeri tutabilir!](/learn/referencing-values-with-refs)) Her liste ögesindeki [`ref` callback'i](/reference/react-dom/components/common#ref-callback) Map'i güncellemeye özen gösterir:
@@ -328,6 +318,7 @@ Bu örnekte `itemsRef` tek bir DOM elemanını tutmaz. Bunun yerine öge kimliğ
   key={cat.id}
   ref={node => {
     const map = getMap();
+<<<<<<< HEAD
     if (node) {
       // Add to the Map
       map.set(cat, node);
@@ -350,6 +341,8 @@ This example shows another approach for managing the Map with a `ref` callback c
   key={cat.id}
   ref={node => {
     const map = getMap();
+=======
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
     // Add to the Map
     map.set(cat, node);
 
@@ -361,7 +354,15 @@ This example shows another approach for managing the Map with a `ref` callback c
 >
 ```
 
-</Canary>
+This lets you read individual DOM nodes from the Map later.
+
+<Note>
+
+When Strict Mode is enabled, ref callbacks will run twice in development.
+
+Read more about [how this helps find bugs](/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) in callback refs.
+
+</Note>
 
 </DeepDive>
 
