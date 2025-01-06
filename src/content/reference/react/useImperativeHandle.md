@@ -23,9 +23,9 @@ useImperativeHandle(ref, createHandle, dependencies?)
 Açığa çıkarılan ref tanımlayıcısını özelleştirmek için bileşeninizin üst düzeyinde `useImperativeHandle`'ı çağırın:
 
 ```js
-import { forwardRef, useImperativeHandle } from 'react';
+import { useImperativeHandle } from 'react';
 
-const MyInput = forwardRef(function MyInput(props, ref) {
+function MyInput({ ref }) {
   useImperativeHandle(ref, () => {
     return {
       // ... metotlarınız ...
@@ -38,13 +38,27 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### Parametreler {/*parameters*/}
 
+<<<<<<< HEAD
 * `ref`: [`forwardRef`](/reference/react/forwardRef#render-function) render fonksiyonunun ikinci argümanı olarak aldığınız `ref`.
+=======
+* `ref`: The `ref` you received as a prop to the `MyInput` component.
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 * `createHandle`: Herhangi bir argüman almayan ve açığa çıkarmak istediğiniz ref tanımlayıcısını döndüren bir fonksiyondur. Bu ref tanımlayıcısı herhangi bir tipte olabilir. Genellikle, açığa çıkarmak istediğiniz metotların bulunduğu bir nesne döndürürsünüz.
 
 * **isteğe bağlı** `dependencies`: `createHandle` kodu içinde referans alınan tüm tepkisel değerlerin listesidir. Tepkisel değerler, prop'lar, state ve bileşeninizin doğrudan içerisinde bildirilen tüm değişkenler ve fonskiyonlar gibi değerleri içerir. Eğer linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her tepkisel değerin doğru bir şekilde bağımlılık(dependency) olarak belirtildiğini doğrular. Bağımlılık listesi, sabit bir sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` gibi iç içe yazılmalıdır. React, her bir bağımlılığı önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak karşılaştırır. Eğer bir yeniden render'lama, bazı bağımlılıklarda değişikliğe neden olduysa veya bu argümanı atladıysanız, `createHandle` fonksiyonunuz yeniden çalıştırılır ve yeni oluşturulan tanımlayıcı ref'e atanır.
 
+<<<<<<< HEAD
 #### Dönüş değerleri {/*returns*/}
+=======
+<Note>
+
+Starting with React 19, [`ref` is available a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef) 
+
+</Note>
+
+#### Returns {/*returns*/}
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 `useImperativeHandle`, `undefined` döndürür.
 
@@ -54,40 +68,50 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 ### Özel bir ref tanımlayıcısını üst elemana açığa çıkarma {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
 
+<<<<<<< HEAD
 Bileşenler DOM düğümlerini varsayılan olarak üst elemana açığa çıkarmazlar. Örneğin, `MyInput` bileşeninin üst elemanın `<input>` DOM düğümüne [erişmesini](/learn/manipulating-the-dom-with-refs) istiyorsanız, [`forwardRef`](/reference/react/forwardRef) ile tercih etmelisiniz.
+=======
+To expose a DOM node to the parent element, pass in the `ref` prop to the node.
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
-```js {4}
-import { forwardRef } from 'react';
-
-const MyInput = forwardRef(function MyInput(props, ref) {
-  return <input {...props} ref={ref} />;
-});
+```js {2}
+function MyInput({ ref }) {
+  return <input ref={ref} />;
+};
 ```
 
+<<<<<<< HEAD
 Yukarıdaki kodla [bir `MyInput` bileşenine ait ref, `<input>` DOM düğümünü alacaktır.](/reference/react/forwardRef#exposing-a-dom-node-to-the-parent-component) Ancak, isteğe bağlı olarak özel bir değer de açığa çıkarabilirsiniz. Açığa çıkarılan tanımlayıcıyı özelleştirmek için bileşeninizin üst düzeyinde `useImperativeHandle`'ı çağırın.
+=======
+With the code above, [a ref to `MyInput` will receive the `<input>` DOM node.](/learn/manipulating-the-dom-with-refs) However, you can expose a custom value instead. To customize the exposed handle, call `useImperativeHandle` at the top level of your component:
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 ```js {4-8}
-import { forwardRef, useImperativeHandle } from 'react';
+import { useImperativeHandle } from 'react';
 
-const MyInput = forwardRef(function MyInput(props, ref) {
+function MyInput({ ref }) {
   useImperativeHandle(ref, () => {
     return {
       // ... metotlarınız ...
     };
   }, []);
 
-  return <input {...props} />;
-});
+  return <input />;
+};
 ```
 
+<<<<<<< HEAD
 Yukarıdaki koda dikkat ettiğinizde, `ref` artık `<input>` bileşenine iletilmediğini fark edeceksiniz.
+=======
+Note that in the code above, the `ref` is no longer passed to the `<input>`.
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 Örneğin, `<input>` DOM düğümünün tamamını açığa çıkarmak istemiyorsunuz, ancak `focus` ve `scrollIntoView` gibi iki metodu açığa çıkarmak istiyorsunuz. Bunun için gerçek tarayıcı DOM'unu ayrı bir ref içinde tutun. Ardından, yalnızca üst elemanın çağırmasını istediğiniz metotlara sahip bir tanımlayıcıyı açığa çıkarmak için `useImperativeHandle`'ı kullanın:
 
 ```js {7-14}
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 
-const MyInput = forwardRef(function MyInput(props, ref) {
+function MyInput({ ref }) {
   const inputRef = useRef(null);
 
   useImperativeHandle(ref, () => {
@@ -101,8 +125,8 @@ const MyInput = forwardRef(function MyInput(props, ref) {
     };
   }, []);
 
-  return <input {...props} ref={inputRef} />;
-});
+  return <input ref={inputRef} />;
+};
 ```
 
 Artık, eğer üst eleman `MyInput` için bir ref alırsa, onun üzerinde `focus` ve `scrollIntoView` metotlarını çağırabilecektir. Ancak, altında bulunan `<input>` DOM düğümüne tam erişimi olmayacaktır.
@@ -134,9 +158,9 @@ export default function Form() {
 ```
 
 ```js src/MyInput.js
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 
-const MyInput = forwardRef(function MyInput(props, ref) {
+function MyInput({ ref, ...props }) {
   const inputRef = useRef(null);
 
   useImperativeHandle(ref, () => {
@@ -151,7 +175,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
   }, []);
 
   return <input {...props} ref={inputRef} />;
-});
+};
 
 export default MyInput;
 ```
@@ -195,11 +219,11 @@ export default function Page() {
 ```
 
 ```js src/Post.js
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 import CommentList from './CommentList.js';
 import AddComment from './AddComment.js';
 
-const Post = forwardRef((props, ref) => {
+function Post({ ref }) {
   const commentsRef = useRef(null);
   const addCommentRef = useRef(null);
 
@@ -221,16 +245,16 @@ const Post = forwardRef((props, ref) => {
       <AddComment ref={addCommentRef} />
     </>
   );
-});
+};
 
 export default Post;
 ```
 
 
 ```js src/CommentList.js
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 
-const CommentList = forwardRef(function CommentList(props, ref) {
+function CommentList({ ref }) {
   const divRef = useRef(null);
 
   useImperativeHandle(ref, () => {
@@ -252,17 +276,23 @@ const CommentList = forwardRef(function CommentList(props, ref) {
       {comments}
     </div>
   );
-});
+}
 
 export default CommentList;
 ```
 
 ```js src/AddComment.js
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 
+<<<<<<< HEAD
 const AddComment = forwardRef(function AddComment(props, ref) {
   return <input placeholder="Yorum ekle..." ref={ref} />;
 });
+=======
+function AddComment({ ref }) {
+  return <input placeholder="Add comment..." ref={ref} />;
+}
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 export default AddComment;
 ```

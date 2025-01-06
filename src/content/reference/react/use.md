@@ -1,14 +1,16 @@
 ---
 title: use
-canary: true
 ---
 
+<<<<<<< HEAD
 <Canary>
 
 `use` API şu anda sadece React'ın Test Ortamı ve deneysel kanallarında mevcuttur. React'in yayın kanalları hakkında daha fazla bilgi edinmek için [buraya göz atın](/community/versioning-policy#all-release-channels).
 
 </Canary>
 
+=======
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 <Intro>
 
 `use`, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi bir kaynağın değerini okumanıza olanak sağlayan bir React API'ıdır.
@@ -51,7 +53,17 @@ Bir Pomise ile çağırıldığında; `use` API, [`Suspense`](/reference/react/S
 
 `use` API, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynaktan çözümlenen veriyi döndürür.
 
+<<<<<<< HEAD
 #### Önemli Hususlar {/*caveats*/}
+=======
+The `use` API returns the value that was read from the resource like the resolved value of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
+
+#### Caveats {/*caveats*/}
+
+* The `use` API must be called inside a Component or a Hook.
+* When fetching data in a [Server Component](/reference/rsc/server-components), prefer `async` and `await` over `use`. `async` and `await` pick up rendering from the point where `await` was invoked, whereas `use` re-renders the component after the data is resolved.
+* Prefer creating Promises in [Server Components](/reference/rsc/server-components) and passing them to [Client Components](/reference/rsc/use-client) over creating Promises in Client Components. Promises created in Client Components are recreated on every render. Promises passed from a Server Component to a Client Component are stable across re-renders. [See this example](#streaming-data-from-server-to-client).
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 * `use` API, bir bileşen veya bir hook'un içerisinde çağırılmak zorundadır..
 * Bir [Sunucu Bileşeni](/reference/react/use-server) içerisinde veri çekilirken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, oluşturma işlemini `await` ifadesinin çağırıldığı noktadan devam ettirirken; `use`, veri çözümlendikten sonra bileşeni yeniden oluşturur.
@@ -196,17 +208,6 @@ function Button({ show, children }) {
 }
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "18.3.0-canary-9377e1010-20230712",
-    "react-dom": "18.3.0-canary-9377e1010-20230712",
-    "react-scripts": "^5.0.0"
-  },
-  "main": "/index.js"
-}
-```
-
 </Sandpack>
 
 ### Sunucudan istemciye veri aktarımı {/*streaming-data-from-server-to-client*/}
@@ -289,9 +290,6 @@ export default function App() {
 ```
 
 ```js src/index.js hidden
-// TODO: update to import from stable
-// react instead of canary once the `use`
-// API is in a stable release of React
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -309,16 +307,6 @@ root.render(
 );
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "18.3.0-canary-9377e1010-20230712",
-    "react-dom": "18.3.0-canary-9377e1010-20230712",
-    "react-scripts": "^5.0.0"
-  },
-  "main": "/index.js"
-}
-```
 </Sandpack>
 
 <Note>
@@ -409,9 +397,6 @@ export default function App() {
 ```
 
 ```js src/index.js hidden
-// TODO: update to import from stable
-// react instead of canary once the `use`
-// API is in a stable release of React
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
@@ -432,8 +417,8 @@ root.render(
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "18.3.0-canary-9377e1010-20230712",
-    "react-dom": "18.3.0-canary-9377e1010-20230712",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-scripts": "^5.0.0",
     "react-error-boundary": "4.0.3"
   },

@@ -33,6 +33,7 @@ Ekranda bir girdi göstermek için, [tarayıcıya yerleşik `<input>`](https://d
 
 `<input>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#props) destekler.
 
+<<<<<<< HEAD
 <Canary>
 
 React's extensions to the `formAction` prop are currently only available in React's Canary and experimental channels. In stable releases of React, `formAction` works only as a [built-in browser HTML component](/reference/react-dom/components#all-html-components). Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
@@ -40,6 +41,9 @@ React's extensions to the `formAction` prop are currently only available in Reac
 </Canary>
 
 [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): String ya da fonksiyon. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form action>` üst bileşenini geçersiz kılar. `action`'a bir URL geçildiği zaman form, standart bir HTML formu gibi davranacaktır. Bir fonksiyon iletildiğinde ise form gönderimini o fonksiyon halledecektir. Daha fazla bilgi için [`<form action>`](/reference/react-dom/components/form#props) kısmına bakın.
+=======
+- [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 Aşağıdaki proplardan birini ileterek [girdileri kontrollü hale](#controlling-an-input-with-a-state-variable) getirebilirsiniz:
 
