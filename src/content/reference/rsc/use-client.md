@@ -6,13 +6,13 @@ canary: true
 
 <Canary>
 
-`'use client'` is needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+`'use client'` sadece [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
 </Canary>
 
 
 <Intro>
 
-`'use client'` lets you mark what code runs on the client.
+`'use client'` istemcide hangi kodun çalışacağını işaretlemenizi sağlar.
 
 </Intro>
 
@@ -20,11 +20,11 @@ canary: true
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `'use client'` {/*use-client*/}
 
-Add `'use client'` at the top of a file to mark the module and its transitive dependencies as client code.
+Modülü ve geçişli bağımlılıklarını istemci kodu olarak işaretlemek için bir dosyanın başına `'use client'` ekleyin.
 
 ```js {1}
 'use client';
@@ -41,26 +41,26 @@ export default function RichTextEditor({ timestamp, text }) {
 }
 ```
 
-When a file marked with `'use client'` is imported from a Server Component, [compatible bundlers](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) will treat the module import as a boundary between server-run and client-run code.
+Bir Sunucu Bileşeninden `'use client'` ile işaretlenmiş bir dosya içe aktarıldığında, [uyumlu paketleyiciler](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) modül içe aktarımını sunucu tarafından çalıştırılan ve istemci tarafından çalıştırılan kod arasında bir sınır olarak değerlendirecektir.
 
-As dependencies of `RichTextEditor`, `formatDate` and `Button` will also be evaluated on the client regardless of whether their modules contain a `'use client'` directive. Note that a single module may be evaluated on the server when imported from server code and on the client when imported from client code.
+`RichTextEditor` bağımlılıkları olarak, `formatDate` ve `Button` da modüllerinin bir `'use client'` yönergesi içerip içermediğine bakılmaksızın istemcide değerlendirilecektir. Tek bir modülün sunucu kodundan içe aktarıldığında sunucuda, istemci kodundan içe aktarıldığında ise istemcide değerlendirilebileceğini unutmayın.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* `'use client'` must be at the very beginning of a file, above any imports or other code (comments are OK). They must be written with single or double quotes, but not backticks.
-* When a `'use client'` module is imported from another client-rendered module, the directive has no effect.
-* When a component module contains a `'use client'` directive, any usage of that component is guaranteed to be a Client Component. However, a component can still be evaluated on the client even if it does not have a `'use client'` directive.
-	* A component usage is considered a Client Component if it is defined in module with `'use client'` directive or when it is a transitive dependency of a module that contains a `'use client'` directive. Otherwise, it is a Server Component.
-* Code that is marked for client evaluation is not limited to components. All code that is a part of the Client module sub-tree is sent to and run by the client.
-* When a server evaluated module imports values from a `'use client'` module, the values must either be a React component or [supported serializable prop values](#passing-props-from-server-to-client-components) to be passed to a Client Component. Any other use case will throw an exception.
+* `'use client'` bir dosyanın en başında, tüm içe aktarmaların veya diğer kodların üzerinde olmalıdır (yorumlarda sorun yoktur). Tek ya da çift tırnakla yazılmalı, ancak ters tırnak kullanılmamalıdır.
+* Bir `'use client'` modülü istemci tarafından oluşturulan başka bir modülden içe aktarıldığında, direktifin hiçbir etkisi yoktur.
+* Bir bileşen modülü `'use client'` yönergesi içerdiğinde, bu bileşenin her türlü kullanımının bir İstemci Bileşeni olacağı garanti edilir. Ancak bir bileşen `'use client'` yönergesine sahip olmasa bile istemci üzerinde değerlendirilebilir.
+  * Bir bileşen kullanımı, `'use client'` yönergesine sahip bir modülde tanımlanmışsa veya `'use client'` yönergesi içeren bir modülün geçişli bağımlılığı ise İstemci Bileşeni olarak kabul edilir. Aksi takdirde, bir Sunucu Bileşenidir.
+* İstemci değerlendirmesi için işaretlenen kod bileşenlerle sınırlı değildir. İstemci modülü alt ağacının bir parçası olan tüm kodlar istemciye gönderilir ve istemci tarafından çalıştırılır.
+* Sunucu tarafından değerlendirilen bir modül, bir `'use client'` modülünden değerleri içe aktardığında, değerler ya bir React bileşeni olmalı ya da bir İstemci Bileşenine aktarılmak üzere [desteklenen serileştirilebilir prop değerleri](#passing-props-from-server-to-client-components) olmalıdır. Diğer kullanım durumları bir istisna oluşturur.
 
-### How `'use client'` marks client code {/*how-use-client-marks-client-code*/}
+### `'use client'` istemci kodunu nasıl işaretler? {/*how-use-client-marks-client-code*/}
 
-In a React app, components are often split into separate files, or [modules](/learn/importing-and-exporting-components#exporting-and-importing-a-component).
+Bir React uygulamasında bileşenler genellikle ayrı dosyalara veya [modüllere](/learn/importing-and-exporting-components#exporting-and-importing-a-component) ayrılır.
 
-For apps that use React Server Components, the app is server-rendered by default. `'use client'` introduces a server-client boundary in the [module dependency tree](/learn/understanding-your-ui-as-a-tree#the-module-dependency-tree), effectively creating a subtree of Client modules.
+React Sunucu Bileşenleri kullanan uygulamalar için, uygulama varsayılan olarak sunucu tarafından oluşturulur. `'use client'`, [modül bağımlılık ağacında](/learn/understanding-your-ui-as-a-tree#the-module-dependency-tree) bir sunucu-istemci sınırı getirerek etkin bir şekilde İstemci modüllerinin bir alt ağacını oluşturur.
 
-To better illustrate this, consider the following React Server Components app.
+Bunu daha iyi açıklamak için aşağıdaki React Sunucu Bileşenleri uygulamasını düşünün.
 
 <Sandpack>
 
@@ -72,7 +72,7 @@ import Copyright from './Copyright';
 export default function App() {
   return (
     <>
-      <FancyText title text="Get Inspired App" />
+      <FancyText title text="İlham Alma Uygulaması" />
       <InspirationGenerator>
         <Copyright year={2004} />
       </InspirationGenerator>
@@ -104,9 +104,9 @@ export default function InspirationGenerator({children}) {
 
   return (
     <>
-      <p>Your inspirational quote is:</p>
+      <p>İlham verici sözün:</p>
       <FancyText text={quote} />
-      <button onClick={next}>Inspire me again</button>
+      <button onClick={next}>Bana tekrar ilham ver</button>
       {children}
     </>
   );
@@ -121,9 +121,9 @@ export default function Copyright({year}) {
 
 ```js src/inspirations.js
 export default [
-  "Don’t let yesterday take up too much of today.” — Will Rogers",
-  "Ambition is putting a ladder against the sky.",
-  "A joy that's shared is a joy made double.",
+  "Dünün bugünden çok fazla yer kaplamasına izin vermeyin.” — Will Rogers",
+  "Hırs, gökyüzüne karşı bir merdiven koymaktır.",
+  "Paylaşılan bir sevinç, ikiye katlanmış bir sevinçtir.",
 ];
 ```
 
@@ -145,144 +145,144 @@ export default [
 
 </Sandpack>
 
-In the module dependency tree of this example app, the `'use client'` directive in `InspirationGenerator.js` marks that module and all of its transitive dependencies as Client modules. The subtree starting at `InspirationGenerator.js` is now marked as Client modules.
+Bu örnek uygulamanın modül bağımlılık ağacında, `InspirationGenerator.js` içindeki `'use client'` yönergesi bu modülü ve tüm geçişli bağımlılıklarını İstemci modülleri olarak işaretler. `InspirationGenerator.js` ile başlayan alt ağaç artık İstemci modülleri olarak işaretlenmiştir.
 
-<Diagram name="use_client_module_dependency" height={250} width={545} alt="A tree graph with the top node representing the module 'App.js'. 'App.js' has three children: 'Copyright.js', 'FancyText.js', and 'InspirationGenerator.js'. 'InspirationGenerator.js' has two children: 'FancyText.js' and 'inspirations.js'. The nodes under and including 'InspirationGenerator.js' have a yellow background color to signify that this sub-graph is client-rendered due to the 'use client' directive in 'InspirationGenerator.js'.">
-`'use client'` segments the module dependency tree of the React Server Components app, marking `InspirationGenerator.js` and all of its dependencies as client-rendered.
+<Diagram name="use_client_module_dependency" height={250} width={545} alt="'App.js' modülünü temsil eden üst düğümlü bir ağaç grafiği. 'App.js'nin üç çocuğu vardır: 'Copyright.js', 'FancyText.js' ve 'InspirationGenerator.js'. 'InspirationGenerator.js' dosyasının iki çocuğu vardır: 'FancyText.js' ve 'inspirations.js'. 'InspirationGenerator.js' altındaki ve dahilindeki düğümler, 'InspirationGenerator.js' içindeki 'use client' yönergesi nedeniyle bu alt grafiğin istemci tarafından işlendiğini belirtmek için sarı bir arka plan rengine sahiptir.">
+`'use client'` React Server Components uygulamasının modül bağımlılık ağacını segmentlere ayırarak `InspirationGenerator.js` ve tüm bağımlılıklarını istemci tarafından oluşturulmuş olarak işaretler.
 </Diagram>
 
-During render, the framework will server-render the root component and continue through the [render tree](/learn/understanding-your-ui-as-a-tree#the-render-tree), opting-out of evaluating any code imported from client-marked code.
+Render sırasında, framework root bileşeni sunucuda render edecek ve [render ağacı](/learn/understanding-your-ui-as-a-tree#the-render-tree) üzerinden devam ederek istemci tarafından işaretlenmiş koddan alınan herhangi bir kodu değerlendirmeyi tercih etmeyecektir.
 
-The server-rendered portion of the render tree is then sent to the client. The client, with its client code downloaded, then completes rendering the rest of the tree.
+Render ağacının sunucu tarafından render edilen kısmı daha sonra istemciye gönderilir. İstemci, istemci kodunu indirdikten sonra ağacın geri kalanını oluşturmayı tamamlar.
 
-<Diagram name="use_client_render_tree" height={250} width={500} alt="A tree graph where each node represents a component and its children as child components. The top-level node is labelled 'App' and it has two child components 'InspirationGenerator' and 'FancyText'. 'InspirationGenerator' has two child components, 'FancyText' and 'Copyright'. Both 'InspirationGenerator' and its child component 'FancyText' are marked to be client-rendered.">
-The render tree for the React Server Components app. `InspirationGenerator` and its child component `FancyText` are components exported from client-marked code and considered Client Components.
+<Diagram name="use_client_render_tree" height={250} width={500} alt="Her bir düğümün bir bileşeni ve çocuklarının da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey düğüm 'App' olarak etiketlenmiştir ve 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' öğesinin iki alt bileşeni vardır: 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">
+React Sunucu Bileşenleri uygulaması için render ağacı. `InspirationGenerator` ve alt bileşeni `FancyText`, istemci tarafından işaretlenmiş koddan dışa aktarılan bileşenlerdir ve İstemci Bileşenleri olarak kabul edilir.
 </Diagram>
 
-We introduce the following definitions:
+Aşağıdaki tanımları tanıtıyoruz:
 
-* **Client Components** are components in a render tree that are rendered on the client.
-* **Server Components** are components in a render tree that are rendered on the server.
+* **İstemci Bileşenleri** bir render ağacında bulunan ve istemcide render edilen bileşenlerdir
+* **Sunucu Bileşenleri** bir render ağacında bulunan ve sunucuda render edilen bileşenlerdir.
 
-Working through the example app, `App`, `FancyText` and `Copyright` are all server-rendered and considered Server Components. As `InspirationGenerator.js` and its transitive dependencies are marked as client code, the component `InspirationGenerator` and its child component `FancyText` are Client Components.
+Örnek uygulama üzerinde çalışıldığında, `App`, `FancyText` ve `Copyright` sunucu tarafından oluşturulur ve Sunucu Bileşenleri olarak kabul edilir. `InspirationGenerator.js` ve onun geçişli bağımlılıkları istemci kodu olarak işaretlendiğinden, `InspirationGenerator` bileşeni ve onun alt bileşeni `FancyText` İstemci Bileşenleridir.
 
 <DeepDive>
-#### How is `FancyText` both a Server and a Client Component? {/*how-is-fancytext-both-a-server-and-a-client-component*/}
+#### `FancyText` nasıl hem Sunucu hem de İstemci Bileşenidir? {/*how-is-fancytext-both-a-server-and-a-client-component*/}
 
-By the above definitions, the component `FancyText` is both a Server and Client Component, how can that be?
+Yukarıdaki tanımlara göre, `FancyText` bileşeni hem Sunucu hem de İstemci Bileşenidir, bu nasıl olabilir?
 
-First, let's clarify that the term "component" is not very precise. Here are just two ways "component" can be understood:
+Öncelikle “bileşen” teriminin çok kesin olmadığını açıklığa kavuşturalım. Burada “bileşen” kelimesinin anlaşılabileceği sadece iki yol vardır:
 
-1. A "component" can refer to a **component definition**. In most cases this will be a function.
+1. Bir “bileşen” bir **bileşen tanımı** anlamına gelebilir. Çoğu durumda bu bir fonksiyon olacaktır.
 
 ```js
-// This is a definition of a component
+// Bu bir bileşenin tanımıdır
 function MyComponent() {
   return <p>My Component</p>
 }
 ```
 
-2. A "component" can also refer to a **component usage** of its definition.
+2. Bir “bileşen”, tanımının bir **bileşen kullanımına** da atıfta bulunabilir.
 ```js
 import MyComponent from './MyComponent';
 
 function App() {
-  // This is a usage of a component
+  // Bu bir bileşenin kullanımıdır
   return <MyComponent />;
 }
 ```
 
-Often, the imprecision is not important when explaining concepts, but in this case it is.
+Kavramları açıklarken çoğu zaman kesin olmamak önemli değildir, ancak bu durumda önemlidir.
 
-When we talk about Server or Client Components, we are referring to component usages.
+Sunucu veya İstemci Bileşenleri hakkında konuştuğumuzda, bileşen kullanımlarına atıfta bulunuyoruz.
 
-* If the component is defined in a module with a `'use client'` directive, or the component is imported and called in a Client Component, then the component usage is a Client Component.
-* Otherwise, the component usage is a Server Component.
+* Bileşen `'use client'` yönergesine sahip bir modülde tanımlanmışsa veya bileşen bir İstemci Bileşeni içinde içe aktarılmış ve çağrılmışsa, bileşen kullanımı bir İstemci Bileşenidir.
+* Aksi takdirde, bileşen kullanımı bir Sunucu Bileşenidir.
 
 
-<Diagram name="use_client_render_tree" height={150} width={450} alt="A tree graph where each node represents a component and its children as child components. The top-level node is labelled 'App' and it has two child components 'InspirationGenerator' and 'FancyText'. 'InspirationGenerator' has two child components, 'FancyText' and 'Copyright'. Both 'InspirationGenerator' and its child component 'FancyText' are marked to be client-rendered.">A render tree illustrates component usages.</Diagram>
+<Diagram name="use_client_render_tree" height={150} width={450} alt="Her bir node'un bir bileşeni ve çocuklarının da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey node 'App' olarak etiketlenmiştir. 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' iki alt bileşene sahiptir, 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">Bir render ağacı bileşen kullanımlarını gösterir.</Diagram>
 
-Back to the question of `FancyText`, we see that the component definition does _not_ have a `'use client'` directive and it has two usages.
+`FancyText` sorusuna geri dönersek, bileşen tanımının bir `'use client'` yönergesine sahip _olmadığını_ ve iki kullanımı olduğunu görüyoruz.
 
-The usage of `FancyText` as a child of `App`, marks that usage as a Server Component. When `FancyText` is imported and called under `InspirationGenerator`, that usage of `FancyText` is a Client Component as `InspirationGenerator` contains a `'use client'` directive.
+`FancyText`'in `App`'in bir alt öğesi olarak kullanılması, bu kullanımı bir Sunucu Bileşeni olarak işaretler. `FancyText` içe aktarıldığında ve `InspirationGenerator` altında çağrıldığında, `InspirationGenerator` bir `'use client'` yönergesi içerdiğinden, `FancyText` kullanımı bir İstemci Bileşenidir.
 
-This means that the component definition for `FancyText` will both be evaluated on the server and also downloaded by the client to render its Client Component usage.
+`FancyText` için bileşen tanımının hem sunucuda değerlendirileceği hem de İstemci Bileşeni kullanımını oluşturmak için istemci tarafından indirileceği anlamına gelir.
 
 </DeepDive>
 
 <DeepDive>
 
-#### Why is `Copyright` a Server Component? {/*why-is-copyright-a-server-component*/}
+#### `Copyright` neden bir Sunucu Bileşenidir? {/*why-is-copyright-a-server-component*/}
 
-Because `Copyright` is rendered as a child of the Client Component `InspirationGenerator`, you might be surprised that it is a Server Component.
+`Copyright`, `InspirationGenerator` İstemci Bileşeninin bir çocuğu olarak işlendiğinden, bunun bir Sunucu Bileşeni olması sizi şaşırtabilir.
 
-Recall that `'use client'` defines the boundary between server and client code on the _module dependency tree_, not the render tree.
+`'use client'`'ın sunucu ve istemci kodu arasındaki sınırı render ağacında değil _modül bağımlılık ağacında_ tanımladığını hatırlayın.
 
-<Diagram name="use_client_module_dependency" height={200} width={500} alt="A tree graph with the top node representing the module 'App.js'. 'App.js' has three children: 'Copyright.js', 'FancyText.js', and 'InspirationGenerator.js'. 'InspirationGenerator.js' has two children: 'FancyText.js' and 'inspirations.js'. The nodes under and including 'InspirationGenerator.js' have a yellow background color to signify that this sub-graph is client-rendered due to the 'use client' directive in 'InspirationGenerator.js'.">
-`'use client'` defines the boundary between server and client code on the module dependency tree.
+<Diagram name="use_client_module_dependency" height={200} width={500} alt="En üst node 'App.js' modülünü temsil eden bir ağaç grafiği. 'App.js''nin üç çocuğu vardır: 'Copyright.js', 'FancyText.js', ve 'InspirationGenerator.js'. 'InspirationGenerator.js' dosyasının iki çocuğu vardır: 'FancyText.js' ve 'inspirations.js'. 'InspirationGenerator.js' altındaki ve dahilindeki node'lar, 'InspirationGenerator.js' içindeki 'use client' yönergesi nedeniyle bu alt grafiğin istemci tarafından işlendiğini belirtmek için sarı bir arka plan rengine sahiptir.">
+`'use client'` modül bağımlılık ağacında sunucu ve istemci kodu arasındaki sınırı tanımlar.
 </Diagram>
 
-In the module dependency tree, we see that `App.js` imports and calls `Copyright` from the `Copyright.js` module. As `Copyright.js` does not contain a `'use client'` directive, the component usage is rendered on the server. `App` is rendered on the server as it is the root component.
+Modül bağımlılık ağacında, `App.js` modülünün `Copyright.js` modülünden `Copyright` modülünü içe aktardığını ve çağırdığını görüyoruz. `Copyright.js` bir `'use client'` direktifi içermediğinden, bileşen kullanımı sunucuda oluşturulur. Root bileşen olduğu için `App` sunucuda oluşturulur.
 
-Client Components can render Server Components because you can pass JSX as props. In this case, `InspirationGenerator` receives `Copyright` as [children](/learn/passing-props-to-a-component#passing-jsx-as-children). However, the `InspirationGenerator` module never directly imports the `Copyright` module nor calls the component, all of that is done by `App`. In fact, the `Copyright` component is fully executed before `InspirationGenerator` starts rendering.
+JSX'i prop olarak geçirebildiğiniz için İstemci Bileşenleri Sunucu Bileşenlerini oluşturabilir. Bu durumda, `InspirationGenerator` [children](/learn/passing-props-to-a-component#passing-jsx-as-children) olarak `Copyright` alır. Ancak `InspirationGenerator` modülü `Copyright` modülünü asla doğrudan içe aktarmaz veya bileşeni çağırmaz, bunların hepsi `App` tarafından yapılır. Aslında `InspirationGenerator` oluşturmaya başlamadan önce `Copyright` bileşeni tamamen çalıştırılır.
 
-The takeaway is that a parent-child render relationship between components does not guarantee the same render environment.
+Buradan çıkarılacak sonuç, bileşenler arasındaki ebeveyn-çocuk render ilişkisinin aynı render ortamını garanti etmediğidir.
 
 </DeepDive>
 
-### When to use `'use client'` {/*when-to-use-use-client*/}
+### `'use client'` ne zaman kullanılır? {/*when-to-use-use-client*/}
 
-With `'use client'`, you can determine when components are Client Components. As Server Components are default, here is a brief overview of the advantages and limitations to Server Components to determine when you need to mark something as client rendered.
+`'use client'` ile bileşenlerin ne zaman İstemci Bileşeni olduğunu belirleyebilirsiniz. Sunucu Bileşenleri varsayılan olduğundan burada bir şeyi ne zaman istemci tarafından işlenmiş olarak işaretlemeniz gerektiğini belirlemek için Sunucu Bileşenlerinin avantajları ve sınırlamalarına kısa bir genel bakış yer almaktadır.
 
-For simplicity, we talk about Server Components, but the same principles apply to all code in your app that is server run.
+Basit olması için Sunucu Bileşenlerinden bahsediyoruz, ancak aynı ilkeler uygulamanızdaki sunucuda çalışan tüm kodlar için geçerlidir.
 
-#### Advantages of Server Components {/*advantages*/}
-* Server Components can reduce the amount of code sent and run by the client. Only Client modules are bundled and evaluated by the client.
-* Server Components benefit from running on the server. They can access the local filesystem and may experience low latency for data fetches and network requests.
+#### Sunucu Bileşenlerinin Avantajları {/*advantages*/}
+* Sunucu Bileşenleri, istemci tarafından gönderilen ve çalıştırılan kod miktarını azaltabilir. Yalnızca İstemci modülleri paketlenir ve istemci tarafından değerlendirilir.
+* Sunucu Bileşenleri sunucu üzerinde çalışmaktan yararlanır. Yerel dosya sistemine erişebilirler ve veri getirme ve ağ istekleri için düşük gecikme yaşayabilirler.
 
-#### Limitations of Server Components {/*limitations*/}
-* Server Components cannot support interaction as event handlers must be registered and triggered by a client.
-	* For example, event handlers like `onClick` can only be defined in Client Components.
-* Server Components cannot use most Hooks.
-	* When Server Components are rendered, their output is essentially a list of components for the client to render. Server Components do not persist in memory after render and cannot have their own state.
+#### Sunucu Bileşenlerinin Sınırlamaları {/*limitations*/}
+* Olay işleyicilerinin bir istemci tarafından kaydedilmesi ve tetiklenmesi gerektiğinden Sunucu Bileşenleri etkileşimi destekleyemez.
+  * Örneğin, `onClick` gibi olay işleyicileri yalnızca İstemci Bileşenlerinde tanımlanabilir.
+* Sunucu Bileşenleri çoğu Hook'ları kullanamaz.
+  * Sunucu Bileşenleri işlendiğinde, çıktıları esasen istemcinin işlemesi için bileşenlerin bir listesidir. Sunucu Bileşenleri render işleminden sonra bellekte kalıcı değildir ve kendi state'lerine sahip olamazlar.
 
-### Serializable types returned by Server Components {/*serializable-types*/}
+### Sunucu Bileşenleri tarafından döndürülen serileştirilebilir türler {/*serializable-types*/}
 
-As in any React app, parent components pass data to child components. As they are rendered in different environments, passing data from a Server Component to a Client Component requires extra consideration.
+Tüm React uygulamalarında olduğu gibi, üst bileşenler alt bileşenlere veri aktarır. Farklı ortamlarda işlendikleri için, bir Sunucu Bileşeninden bir İstemci Bileşenine veri aktarmak ekstra dikkat gerektirir.
 
-Prop values passed from a Server Component to Client Component must be serializable.
+Bir Sunucu Bileşeninden İstemci Bileşenine aktarılan prop değerleri serileştirilebilir olmalıdır.
 
-Serializable props include:
+Serileştirilebilir prop'lar şunları içerir:
 * Primitives
-	* [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
-	* [number](https://developer.mozilla.org/en-US/docs/Glossary/Number)
-	* [bigint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
-	* [boolean](https://developer.mozilla.org/en-US/docs/Glossary/Boolean)
-	* [undefined](https://developer.mozilla.org/en-US/docs/Glossary/Undefined)
-	* [null](https://developer.mozilla.org/en-US/docs/Glossary/Null)
-	* [symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol), only symbols registered in the global Symbol registry via [`Symbol.for`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/for)
-* Iterables containing serializable values
-	* [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
-	* [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-	* [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
-	* [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
-	* [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
+  * [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
+  * [number](https://developer.mozilla.org/en-US/docs/Glossary/Number)
+  * [bigint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+  * [boolean](https://developer.mozilla.org/en-US/docs/Glossary/Boolean)
+  * [undefined](https://developer.mozilla.org/en-US/docs/Glossary/Undefined)
+  * [null](https://developer.mozilla.org/en-US/docs/Glossary/Null)
+  * [symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol), aracılığıyla yalnızca global Sembol kayıt defterine kayıtlı semboller [`Symbol.for`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/for)
+* Serileştirilebilir değerler içeren yinelenebilir dosyalar
+  * [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+  * [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+  * [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+  * [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+  * [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) ve [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
 * [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
-* Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): those created with [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), with serializable properties
-* Functions that are [Server Actions](/reference/rsc/use-server)
-* Client or Server Component elements (JSX)
+* Düz [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): [nesne başlatıcıları](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) ile oluşturulan, serileştirilebilir özelliklere sahip olanlar
+* [Server Actions](/reference/rsc/use-server) olan işlevler
+* İstemci veya Sunucu Bileşen öğeleri (JSX)
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Notably, these are not supported:
-* [Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function) that are not exported from client-marked modules or marked with [`'use server'`](/reference/rsc/use-server)
+Özellikle, bunlar desteklenmemektedir:
+* İstemci işaretli modüllerden dışa aktarılmayan veya [`'use server'`](/reference/rsc/use-server) ile işaretlenmeyen [Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
 * [Classes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
-* Objects that are instances of any class (other than the built-ins mentioned) or objects with [a null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
-* Symbols not registered globally, ex. `Symbol('my new symbol')`
+* Herhangi bir sınıfın örneği olan nesneler (belirtilen yerleşikler dışında) veya [null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects) nesneler
+* Global olarak kaydedilmemiş semboller, örn. `Symbol('my new symbol')`
 
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Building with interactivity and state {/*building-with-interactivity-and-state*/}
+### Etkileşim ve state ile inşa etme {/*building-with-interactivity-and-state*/}
 
 <Sandpack>
 
@@ -297,7 +297,7 @@ export default function Counter({initialValue = 0}) {
   const decrement = () => setCountValue(countValue - 1);
   return (
     <>
-      <h2>Count Value: {countValue}</h2>
+      <h2>Sayı: {countValue}</h2>
       <button onClick={increment}>+1</button>
       <button onClick={decrement}>-1</button>
     </>
@@ -307,9 +307,9 @@ export default function Counter({initialValue = 0}) {
 
 </Sandpack>
 
-As `Counter` requires both the `useState` Hook and event handlers to increment or decrement the value, this component must be a Client Component and will require a `'use client'` directive at the top.
+`Counter` değeri artırmak ya da azaltmak için hem `useState` Hook'una hem de olay işleyicilerine ihtiyaç duyduğundan, bu bileşen bir İstemci Bileşeni olmalıdır ve en üstte bir `'use client'` yönergesi gerektirecektir.
 
-In contrast, a component that renders UI without interaction will not need to be a Client Component.
+Buna karşılık etkileşim olmadan kullanıcı arayüzü oluşturan bir bileşenin İstemci Bileşeni olması gerekmez.
 
 ```js
 import { readFile } from 'node:fs/promises';
@@ -321,9 +321,9 @@ export default async function CounterContainer() {
 }
 ```
 
-For example, `Counter`'s parent component, `CounterContainer`, does not require `'use client'` as it is not interactive and does not use state. In addition, `CounterContainer` must be a Server Component as it reads from the local file system on the server, which is possible only in a Server Component.
+Örneğin `Counter`ın üst bileşeni olan `CounterContainer` etkileşimli olmadığı ve state kullanmadığı için `'use client'` gerektirmez. Ayrıca `CounterContainer` bir Sunucu Bileşeni olmalıdır, çünkü sunucudaki yerel dosya sisteminden okuma yapar. Bu da yalnızca bir Sunucu Bileşeninde mümkündür.
 
-There are also components that don't use any server or client-only features and can be agnostic to where they render. In our earlier example, `FancyText` is one such component.
+Sunucu veya istemciye özel herhangi bir özellik kullanmayan ve nerede işlendiklerinden bağımsız olabilen bileşenler de vardır. Daha önceki örneğimizde, `FancyText` böyle bir bileşendir.
 
 ```js
 export default function FancyText({title, text}) {
@@ -333,15 +333,15 @@ export default function FancyText({title, text}) {
 }
 ```
 
-In this case, we don't add the `'use client'` directive, resulting in `FancyText`'s _output_ (rather than its source code) to be sent to the browser when referenced from a Server Component. As demonstrated in the earlier Inspirations app example, `FancyText` is used as both a Server or Client Component, depending on where it is imported and used.
+Bu durumda `'use client'` yönergesini eklemiyoruz, bu da `FancyText`'in _output_'unun (kaynak kodu yerine) bir Sunucu Bileşeninden başvurulduğunda tarayıcıya gönderilmesine neden oluyor. Daha önceki Inspirations uygulaması örneğinde gösterildiği gibi `FancyText` içe aktarıldığı ve kullanıldığı yere bağlı olarak hem Sunucu hem de İstemci Bileşeni olarak kullanılır.
 
-But if `FancyText`'s HTML output was large relative to its source code (including dependencies), it might be more efficient to force it to always be a Client Component. Components that return a long SVG path string are one case where it may be more efficient to force a component to be a Client Component.
+Ancak `FancyText`in HTML çıktısı kaynak koduna (bağımlılıklar dahil) göre büyükse, onu her zaman bir İstemci Bileşeni olmaya zorlamak daha verimli olabilir. Uzun bir SVG path'i döndüren bileşenler, bir bileşeni İstemci Bileşeni olmaya zorlamanın daha verimli olabileceği bir durumdur.
 
-### Using client APIs {/*using-client-apis*/}
+### İstemci API'lerini kullanma {/*using-client-apis*/}
 
-Your React app may use client-specific APIs, such as the browser's APIs for web storage, audio and video manipulation, and device hardware, among [others](https://developer.mozilla.org/en-US/docs/Web/API).
+React uygulamanız, [diğerlerinin](https://developer.mozilla.org/en-US/docs/Web/API) yanı sıra tarayıcının web depolama, ses ve video işleme ve cihaz donanımı için API'leri gibi istemciye özel API'ler kullanabilir.
 
-In this example, the component uses [DOM APIs](https://developer.mozilla.org/en-US/docs/Glossary/DOM) to manipulate a [`canvas`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) element. Since those APIs are only available in the browser, it must be marked as a Client Component.
+Bu örnekte bileşen bir [`canvas`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) öğesini işlemek için [DOM API](https://developer.mozilla.org/en-US/docs/Glossary/DOM)'lerini kullanır. Bu API'ler yalnızca tarayıcıda kullanılabildiğinden, İstemci Bileşeni olarak işaretlenmelidir.
 
 ```js
 'use client';
@@ -362,18 +362,18 @@ export default function Circle() {
 }
 ```
 
-### Using third-party libraries {/*using-third-party-libraries*/}
+### Üçüncü taraf kütüphaneleri kullanma {/*using-third-party-libraries*/}
 
-Often in a React app, you'll leverage third-party libraries to handle common UI patterns or logic.
+Genellikle bir React uygulamasında yaygın kullanıcı arayüzü modellerini veya mantığını işlemek için üçüncü taraf kütüphanelerden yararlanırsınız.
 
-These libraries may rely on component Hooks or client APIs. Third-party components that use any of the following React APIs must run on the client:
+Bu kütüphaneler bileşen Hook'larına veya istemci API'lerine dayanabilir. Aşağıdaki React API'lerinden herhangi birini kullanan üçüncü taraf bileşenleri istemci üzerinde çalışmalıdır:
 * [createContext](/reference/react/createContext)
-* [`react`](/reference/react/hooks) and [`react-dom`](/reference/react-dom/hooks) Hooks, excluding [`use`](/reference/react/use) and [`useId`](/reference/react/useId)
+* [`react`](/reference/react/hooks) ve [`react-dom`](/reference/react-dom/hooks) Hooks, [`use`](/reference/react/use) ve [`useId`](/reference/react/useId) hariç
 * [forwardRef](/reference/react/forwardRef)
 * [memo](/reference/react/memo)
 * [startTransition](/reference/react/startTransition)
-* If they use client APIs, ex. DOM insertion or native platform views
+* İstemci API'leri kullanıyorlarsa, örneğin DOM ekleme veya yerel platform görünümleri
 
-If these libraries have been updated to be compatible with React Server Components, then they will already include `'use client'` markers of their own, allowing you to use them directly from your Server Components. If a library hasn't been updated, or if a component needs props like event handlers that can only be specified on the client, you may need to add your own Client Component file in between the third-party Client Component and your Server Component where you'd like to use it.
+Bu kütüphaneler React Server Components ile uyumlu olacak şekilde güncelleştirildiyse, kendi '`'use client' işaretçilerini zaten içerecek ve bunları doğrudan Sunucu Bileşenlerinizden kullanmanıza olanak tanıyacaktır. Bir kütüphane güncellenmemişse veya bir bileşenin yalnızca istemcide belirtilebilen olay işleyicileri gibi desteklere ihtiyacı varsa, üçüncü taraf İstemci Bileşeni ile kullanmak istediğiniz Sunucu Bileşeniniz arasına kendi İstemci Bileşeni dosyanızı eklemeniz gerekebilir.
 
 [TODO]: <> (Troubleshooting - need use-cases)
