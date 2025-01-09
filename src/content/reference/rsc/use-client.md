@@ -151,11 +151,11 @@ Bu örnek uygulamanın modül bağımlılık ağacında, `InspirationGenerator.j
 `'use client'` React Server Components uygulamasının modül bağımlılık ağacını segmentlere ayırarak `InspirationGenerator.js` ve tüm bağımlılıklarını istemci tarafından oluşturulmuş olarak işaretler.
 </Diagram>
 
-Render sırasında, framework root bileşeni sunucuda render edecek ve [render ağacı](/learn/understanding-your-ui-as-a-tree#the-render-tree) üzerinden devam ederek istemci tarafından işaretlenmiş koddan alınan herhangi bir kodu değerlendirmeyi tercih etmeyecektir.
+Render sırasında, çatı root bileşeni sunucuda render edecek ve [render ağacı](/learn/understanding-your-ui-as-a-tree#the-render-tree) üzerinden devam ederek istemci tarafından işaretlenmiş koddan alınan herhangi bir kodu değerlendirmeyi tercih etmeyecektir.
 
 Render ağacının sunucu tarafından render edilen kısmı daha sonra istemciye gönderilir. İstemci, istemci kodunu indirdikten sonra ağacın geri kalanını oluşturmayı tamamlar.
 
-<Diagram name="use_client_render_tree" height={250} width={500} alt="Her bir düğümün bir bileşeni ve çocuklarının da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey düğüm 'App' olarak etiketlenmiştir ve 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' öğesinin iki alt bileşeni vardır: 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">
+<Diagram name="use_client_render_tree" height={250} width={500} alt="Her bir node'un bir bileşeni ve alt elemanların da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey düğüm 'App' olarak etiketlenmiştir ve 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' öğesinin iki alt bileşeni vardır: 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">
 React Sunucu Bileşenleri uygulaması için render ağacı. `InspirationGenerator` ve alt bileşeni `FancyText`, istemci tarafından işaretlenmiş koddan dışa aktarılan bileşenlerdir ve İstemci Bileşenleri olarak kabul edilir.
 </Diagram>
 
@@ -200,7 +200,7 @@ Sunucu veya İstemci Bileşenleri hakkında konuştuğumuzda, bileşen kullanım
 * Aksi takdirde, bileşen kullanımı bir Sunucu Bileşenidir.
 
 
-<Diagram name="use_client_render_tree" height={150} width={450} alt="Her bir node'un bir bileşeni ve çocuklarının da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey node 'App' olarak etiketlenmiştir. 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' iki alt bileşene sahiptir, 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">Bir render ağacı bileşen kullanımlarını gösterir.</Diagram>
+<Diagram name="use_client_render_tree" height={150} width={450} alt="Her bir node'un bir bileşeni ve alt elemanın da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey node 'App' olarak etiketlenmiştir. 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' iki alt bileşene sahiptir, 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">Bir render ağacı bileşen kullanımlarını gösterir.</Diagram>
 
 `FancyText` sorusuna geri dönersek, bileşen tanımının bir `'use client'` yönergesine sahip _olmadığını_ ve iki kullanımı olduğunu görüyoruz.
 
@@ -226,7 +226,7 @@ Modül bağımlılık ağacında, `App.js` modülünün `Copyright.js` modülün
 
 JSX'i prop olarak geçirebildiğiniz için İstemci Bileşenleri Sunucu Bileşenlerini oluşturabilir. Bu durumda, `InspirationGenerator` [children](/learn/passing-props-to-a-component#passing-jsx-as-children) olarak `Copyright` alır. Ancak `InspirationGenerator` modülü `Copyright` modülünü asla doğrudan içe aktarmaz veya bileşeni çağırmaz, bunların hepsi `App` tarafından yapılır. Aslında `InspirationGenerator` oluşturmaya başlamadan önce `Copyright` bileşeni tamamen çalıştırılır.
 
-Buradan çıkarılacak sonuç, bileşenler arasındaki ebeveyn-çocuk render ilişkisinin aynı render ortamını garanti etmediğidir.
+Buradan çıkarılacak sonuç, bileşenler arasındaki üst eleman-alt eleman render ilişkisinin aynı render ortamını garanti etmediğidir.
 
 </DeepDive>
 
@@ -241,8 +241,8 @@ Basit olması için Sunucu Bileşenlerinden bahsediyoruz, ancak aynı ilkeler uy
 * Sunucu Bileşenleri sunucu üzerinde çalışmaktan yararlanır. Yerel dosya sistemine erişebilirler ve veri getirme ve ağ istekleri için düşük gecikme yaşayabilirler.
 
 #### Sunucu Bileşenlerinin Sınırlamaları {/*limitations*/}
-* Olay işleyicilerinin bir istemci tarafından kaydedilmesi ve tetiklenmesi gerektiğinden Sunucu Bileşenleri etkileşimi destekleyemez.
-  * Örneğin, `onClick` gibi olay işleyicileri yalnızca İstemci Bileşenlerinde tanımlanabilir.
+* Olay yöneticilerinin bir istemci tarafından kaydedilmesi ve tetiklenmesi gerektiğinden Sunucu Bileşenleri etkileşimi destekleyemez.
+  * Örneğin, `onClick` gibi olay yöneticileri yalnızca İstemci Bileşenlerinde tanımlanabilir.
 * Sunucu Bileşenleri çoğu Hook'ları kullanamaz.
   * Sunucu Bileşenleri işlendiğinde, çıktıları esasen istemcinin işlemesi için bileşenlerin bir listesidir. Sunucu Bileşenleri render işleminden sonra bellekte kalıcı değildir ve kendi state'lerine sahip olamazlar.
 
@@ -307,7 +307,7 @@ export default function Counter({initialValue = 0}) {
 
 </Sandpack>
 
-`Counter` değeri artırmak ya da azaltmak için hem `useState` Hook'una hem de olay işleyicilerine ihtiyaç duyduğundan, bu bileşen bir İstemci Bileşeni olmalıdır ve en üstte bir `'use client'` yönergesi gerektirecektir.
+`Counter` değeri artırmak ya da azaltmak için hem `useState` Hook'una hem de olay yöneticilerine ihtiyaç duyduğundan, bu bileşen bir İstemci Bileşeni olmalıdır ve en üstte bir `'use client'` yönergesi gerektirecektir.
 
 Buna karşılık etkileşim olmadan kullanıcı arayüzü oluşturan bir bileşenin İstemci Bileşeni olması gerekmez.
 
@@ -374,6 +374,6 @@ Bu kütüphaneler bileşen Hook'larına veya istemci API'lerine dayanabilir. Aş
 * [startTransition](/reference/react/startTransition)
 * İstemci API'leri kullanıyorlarsa, örneğin DOM ekleme veya yerel platform görünümleri
 
-Bu kütüphaneler React Server Components ile uyumlu olacak şekilde güncelleştirildiyse, kendi '`'use client' işaretçilerini zaten içerecek ve bunları doğrudan Sunucu Bileşenlerinizden kullanmanıza olanak tanıyacaktır. Bir kütüphane güncellenmemişse veya bir bileşenin yalnızca istemcide belirtilebilen olay işleyicileri gibi desteklere ihtiyacı varsa, üçüncü taraf İstemci Bileşeni ile kullanmak istediğiniz Sunucu Bileşeniniz arasına kendi İstemci Bileşeni dosyanızı eklemeniz gerekebilir.
+Bu kütüphaneler React Server Components ile uyumlu olacak şekilde güncelleştirildiyse, kendi '`'use client' işaretçilerini zaten içerecek ve bunları doğrudan Sunucu Bileşenlerinizden kullanmanıza olanak tanıyacaktır. Bir kütüphane güncellenmemişse veya bir bileşenin yalnızca istemcide belirtilebilen olay yöneticileri gibi desteklere ihtiyacı varsa, üçüncü taraf İstemci Bileşeni ile kullanmak istediğiniz Sunucu Bileşeniniz arasına kendi İstemci Bileşeni dosyanızı eklemeniz gerekebilir.
 
 [TODO]: <> (Troubleshooting - need use-cases)
