@@ -1,23 +1,23 @@
 ---
-title: "Directives"
+title: "Direktifler"
 canary: true
 ---
 
 <Canary>
 
-These directives are needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+Bu direktifler yalnızca [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
 
 </Canary>
 
 <Intro>
 
-Directives provide instructions to [bundlers compatible with React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+Direktifler [React Sunucu Bileşenleri ile uyumlu paketleyiciler](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) için talimatlar sağlar.
 
 </Intro>
 
 ---
 
-## Source code directives {/*source-code-directives*/}
+## Kaynak kodu direktifleri {/*source-code-directives*/}
 
-* [`'use client'`](/reference/rsc/use-client) lets you mark what code runs on the client.
-* [`'use server'`](/reference/rsc/use-server) marks server-side functions that can be called from client-side code.
+* [`'use client'`](/reference/rsc/use-client) istemcide hangi kodun çalışacağını işaretlemenizi sağlar.
+* [`'use server'`](/reference/rsc/use-server) istemci tarafı kodundan çağrılabilen sunucu tarafı işlevlerini işaretler.
