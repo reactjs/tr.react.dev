@@ -5,28 +5,28 @@ canary: true
 
 <Intro>
 
-Server Components are a new type of Component that renders ahead of time, before bundling, in an environment separate from your client app or SSR server.
+Sunucu Bileşenleri, önceden, paketlemeden önce, istemci uygulamanızdan veya SSR sunucusundan ayrı bir ortamda render edilen yeni bir Bileşen türüdür.
 
 </Intro>
 
-This separate environment is the "server" in React Server Components. Server Components can run once at build time on your CI server, or they can be run for each request using a web server.
+Bu ayrı ortam, React Sunucu Bileşenlerinde "sunucu" olarak adlandırılır. Sunucu Bileşenleri, CI sunucunuzda build zamanı sırasında bir kez çalışabilir veya her istekte bir web sunucusu kullanılarak çalıştırılabilir.
 
 <InlineToc />
 
 <Note>
 
-#### How do I build support for Server Components? {/*how-do-i-build-support-for-server-components*/}
+#### Sunucu Bileşenleri için nasıl destek oluşturulur? {/*how-do-i-build-support-for-server-components*/}
 
-While React Server Components in React 19 are stable and will not break between major versions, the underlying APIs used to implement a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x. 
+React 19'daki React Sunucu Bileşenleri kararlıdır ve büyük sürümler arasında bozulmaz, ancak bir React Sunucu Bileşenleri paketleyicisi veya çatısı uygulamak için kullanılan temel API'ler semver'i takip etmez ve React 19.x sürümleri arasında minor sürümlerde bozulabilir.
 
-To support React Server Components as a bundler or framework, we recommend pinning to a specific React version, or using the Canary release. We will continue working with bundlers and frameworks to stabilize the APIs used to implement React Server Components in the future.
+React Sunucu Bileşenleri'ni bir paketleyici veya çatı olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte, React Sunucu Bileşenleri'ni uygulamak için kullanılan API'leri stabilize etmek amacıyla paketleyiciler ve çatılarla çalışmaya devam edeceğiz.
 
 </Note>
 
-### Server Components without a Server {/*server-components-without-a-server*/}
-Server components can run at build time to read from the filesystem or fetch static content, so a web server is not required. For example, you may want to read static data from a content management system.
+### Sunucu Olmadan Sunucu Bileşenleri {/*server-components-without-a-server*/}
+Sunucu bileşenleri, dosya sisteminden okumak veya statik içerik almak için build zamanı sırasında çalışabilir, bu nedenle bir web sunucusu gerekmez. Örneğin, bir içerik yönetim sisteminden statik veriler okumak isteyebilirsiniz.
 
-Without Server Components, it's common to fetch static data on the client with an Effect:
+Sunucu Bileşenleri olmadan, statik verileri istemcide bir Efekt ile almak yaygındır:
 ```js
 // bundle.js
 import marked from 'marked'; // 35.9K (11.2K gzipped)
@@ -34,7 +34,7 @@ import sanitizeHtml from 'sanitize-html'; // 206K (63.3K gzipped)
 
 function Page({page}) {
   const [content, setContent] = useState('');
-  // NOTE: loads *after* first page render.
+  // NOT: İlk sayfa render'ından *sonra* yüklenir.
   useEffect(() => {
     fetch(`/api/content/${page}`).then((data) => {
       setContent(data.content);
@@ -53,33 +53,33 @@ app.get(`/api/content/:page`, async (req, res) => {
 });
 ```
 
-This pattern means users need to download and parse an additional 75K (gzipped) of libraries, and wait for a second request to fetch the data after the page loads, just to render static content that will not change for the lifetime of the page.
+Bu desen, kullanıcıların ek olarak 75K (gzipped) kütüphane indirip çözümlemeleri gerektiği ve sayfa yüklendikten sonra verileri almak için ikinci bir isteği beklemeleri gerektiği anlamına gelir; sadece sayfa ömrü boyunca değişmeyecek statik içeriği render etmek için.
 
-With Server Components, you can render these components once at build time:
+Sunucu Bileşenleri ile, bu bileşenleri build zamanı sırasında bir kez render edebilirsiniz:
 
 ```js
-import marked from 'marked'; // Not included in bundle
-import sanitizeHtml from 'sanitize-html'; // Not included in bundle
+import marked from 'marked'; // Paket içinde dahil edilmemiş
+import sanitizeHtml from 'sanitize-html'; // Paket içinde dahil edilmemiş
 
 async function Page({page}) {
-  // NOTE: loads *during* render, when the app is built.
+ // NOT: Render sırasında, uygulama build edilirken yüklenir.
   const content = await file.readFile(`${page}.md`);
   
   return <div>{sanitizeHtml(marked(content))}</div>;
 }
 ```
 
-The rendered output can then be server-side rendered (SSR) to HTML and uploaded to a CDN. When the app loads, the client will not see the original `Page` component, or the expensive libraries for rendering the markdown. The client will only see the rendered output:
+Render edilen çıktı daha sonra sunucu tarafında render edilip (SSR) HTML olarak oluşturulabilir ve bir CDN'ye yüklenebilir. Uygulama yüklendiğinde, istemci orijinal `Page` bileşenini veya markdown render'lamak için kullanılan pahalı kütüphaneleri görmez. İstemci yalnızca render edilmiş çıktıyı görür:
 
 ```js
-<div><!-- html for markdown --></div>
+<div><!-- markdown için html --></div>
 ```
 
-This means the content is visible during first page load, and the bundle does not include the expensive libraries needed to render the static content.
+Bu, içeriğin ilk sayfa yüklemesi sırasında görünür olduğu ve paketlemenin statik içeriği render etmek için gereken pahalı kütüphaneleri içermediği anlamına gelir.
 
 <Note>
 
-You may notice that the Server Component above is an async function:
+Yukarıdaki Sunucu Bileşeni'nin bir async fonksiyon olduğunu fark etmiş olabilirsiniz:
 
 ```js
 async function Page({page}) {
@@ -87,22 +87,22 @@ async function Page({page}) {
 }
 ```
 
-Async Components are a new feature of Server Components that allow you to `await` in render.
+Async Bileşenleri, render sırasında `await` yapmanıza olanak tanıyan Sunucu Bileşenleri'nin yeni bir özelliğidir.
 
-See [Async components with Server Components](#async-components-with-server-components) below.
+Aşağıda [Sunucu Bileşenleri ile Async Bileşenleri](#async-components-with-server-components) başlığına bakın.
 
 </Note>
 
-### Server Components with a Server {/*server-components-with-a-server*/}
-Server Components can also run on a web server during a request for a page, letting you access your data layer without having to build an API. They are rendered before your application is bundled, and can pass data and JSX as props to Client Components.
+### Sunucu ile Sunucu Bileşenleri {/*server-components-with-a-server*/}
+Sunucu Bileşenleri, bir sayfa isteği sırasında bir web sunucusunda da çalışabilir, böylece bir API oluşturmanıza gerek kalmadan veri katmanınıza erişmenizi sağlar. Uygulamanız paketlenmeden önce render edilirler ve veri ile JSX'i İstemci Bileşenlerine prop olarak geçirebilirler.
 
-Without Server Components, it's common to fetch dynamic data on the client in an Effect:
+Sunucu Bileşenleri olmadan, dinamik verileri istemcide bir Efekt ile almak yaygındır:
 
 ```js
 // bundle.js
 function Note({id}) {
   const [note, setNote] = useState('');
-  // NOTE: loads *after* first render.
+  // NOT: İlk render'dan *sonra* yüklenir.
   useEffect(() => {
     fetch(`/api/notes/${id}`).then(data => {
       setNote(data.note);
@@ -119,8 +119,8 @@ function Note({id}) {
 
 function Author({id}) {
   const [author, setAuthor] = useState('');
-  // NOTE: loads *after* Note renders.
-  // Causing an expensive client-server waterfall.
+// NOT: Note render'ı *sonra* yüklenir.
+// Pahalı bir istemci-sunucu şelalesine neden olur.
   useEffect(() => {
     fetch(`/api/authors/${id}`).then(data => {
       setAuthor(data.author);
@@ -145,13 +145,13 @@ app.get(`/api/authors/:id`, async (req, res) => {
 });
 ```
 
-With Server Components, you can read the data and render it in the component:
+Sunucu Bileşenleri ile veriyi okuyabilir ve bileşende render edebilirsiniz:
 
 ```js
 import db from './database';
 
 async function Note({id}) {
-  // NOTE: loads *during* render.
+  // NOT: Render sırasında *yüklenir.
   const note = await db.notes.get(id);
   return (
     <div>
@@ -162,42 +162,42 @@ async function Note({id}) {
 }
 
 async function Author({id}) {
-  // NOTE: loads *after* Note,
-  // but is fast if data is co-located.
+ // NOT: Note'dan *sonra* yüklenir,
+ // ancak veri aynı konumda ise hızlıdır.
   const author = await db.authors.get(id);
   return <span>By: {author.name}</span>;
 }
 ```
 
-The bundler then combines the data, rendered Server Components and dynamic Client Components into a bundle. Optionally, that bundle can then be server-side rendered (SSR) to create the initial HTML for the page. When the page loads, the browser does not see the original `Note` and `Author` components; only the rendered output is sent to the client:
+Paketleyici, ardından veriyi, render edilen Sunucu Bileşenlerini ve dinamik İstemci Bileşenlerini bir pakette birleştirir. İsteğe bağlı olarak, bu paket daha sonra sunucu tarafında render edilip (SSR) sayfanın ilk HTML'ini oluşturabilir. Sayfa yüklendiğinde, tarayıcı orijinal `Note` ve `Author` bileşenlerini görmez; yalnızca render edilmiş çıktı istemciye gönderilir:
 
 ```js
 <div>
-  <span>By: The React Team</span>
-  <p>React 19 is...</p>
+  <span>Yazan: React Ekibi</span>
+  <p>React 19...</p>
 </div>
 ```
 
-Server Components can be made dynamic by re-fetching them from a server, where they can access the data and render again. This new application architecture combines the simple “request/response” mental model of server-centric Multi-Page Apps with the seamless interactivity of client-centric Single-Page Apps, giving you the best of both worlds.
+Sunucu Bileşenleri, sunucudan tekrar alınıp veriye erişip yeniden render edilerek dinamik hale getirilebilir. Bu yeni uygulama mimarisi, sunucu odaklı Çok Sayfalı Uygulamalar'ın basit “istek/cevap” zihniyet modelini, istemci odaklı Tek Sayfa Uygulamalarının sorunsuz etkileşimiyle birleştirir ve size her iki dünyanın da en iyisini sunar.
 
-### Adding interactivity to Server Components {/*adding-interactivity-to-server-components*/}
+### Sunucu Bileşenlerine Etkileşim Ekleme {/*adding-interactivity-to-server-components*/}
 
-Server Components are not sent to the browser, so they cannot use interactive APIs like `useState`. To add interactivity to Server Components, you can compose them with Client Component using the `"use client"` directive.
+Sunucu Bileşenleri tarayıcıya gönderilmez, bu yüzden `useState` gibi etkileşimli API'leri kullanamazlar. Sunucu Bileşenlerine etkileşim eklemek için, bunları `"use client"` yönergesini kullanarak İstemci Bileşeni ile birleştirebilirsiniz.
 
 <Note>
 
-#### There is no directive for Server Components. {/*there-is-no-directive-for-server-components*/}
+#### Sunucu Bileşenleri için bir yönerge yoktur. {/*there-is-no-directive-for-server-components*/}
 
-A common misunderstanding is that Server Components are denoted by `"use server"`, but there is no directive for Server Components. The `"use server"` directive is used for Server Actions.
+Yaygın bir yanlış anlama, Sunucu Bileşenlerinin `"use server"` ile belirtildiğidir, ancak Sunucu Bileşenleri için bir yönerge yoktur. `"use server"` yönergesi, Sunucu İşlemleri (Server Actions) için kullanılır.
 
-For more info, see the docs for [Directives](/reference/rsc/directives).
+Daha fazla bilgi için, [Yönergeler](/reference/rsc/directives) dökümantasyonuna bakın.
 
 </Note>
 
 
-In the following example, the `Notes` Server Component imports an `Expandable` Client Component that uses state to toggle its `expanded` state:
+Aşağıdaki örnekte, `Notes` Sunucu Bileşeni, `expanded` state'ini değiştirmek için state kullanan bir `Expandable` İstemci Bileşenini içe aktarır:
 ```js
-// Server Component
+// Sunucu Bileşeni
 import Expandable from './Expandable';
 
 async function Notes() {
@@ -214,7 +214,7 @@ async function Notes() {
 }
 ```
 ```js
-// Client Component
+// İstemci Bileşeni
 "use client"
 
 export default function Expandable({children}) {
@@ -232,46 +232,46 @@ export default function Expandable({children}) {
 }
 ```
 
-This works by first rendering `Notes` as a Server Component, and then instructing the bundler to create a bundle for the Client Component `Expandable`. In the browser, the Client Components will see output of the Server Components passed as props:
+Bu, önce `Notes`'u bir Sunucu Bileşeni olarak render edip, ardından paketleyiciye `Expandable` İstemci Bileşeni için bir paket oluşturması talimatı vererek çalışır. Tarayıcıda, İstemci Bileşenleri, prop olarak geçirilen Sunucu Bileşenlerinin çıktısını görecektir:
 
 ```js
 <head>
-  <!-- the bundle for Client Components -->
+  <!-- İstemci Bileşenleri için paket -->
   <script src="bundle.js" />
 </head>
 <body>
   <div>
     <Expandable key={1}>
-      <p>this is the first note</p>
+      <p>bu ilk nottur</p>
     </Expandable>
     <Expandable key={2}>
-      <p>this is the second note</p>
+      <p>bu ikinci nottur</p>
     </Expandable>
     <!--...-->
   </div> 
 </body>
 ```
 
-### Async components with Server Components {/*async-components-with-server-components*/}
+### Sunucu Bileşenleri ile Async Bileşenleri {/*async-components-with-server-components*/}
 
-Server Components introduce a new way to write Components using async/await. When you `await` in an async component, React will suspend and wait for the promise to resolve before resuming rendering. This works across server/client boundaries with streaming support for Suspense.
+Sunucu Bileşenleri, async/await kullanarak Bileşen yazmanın yeni bir yolunu tanıtır. Bir async bileşen içinde `await` kullandığınızda, React render'lamaya devam etmeden önce promise'in çözülmesini bekler. Bu, sunucu/istemci sınırlarında, Suspense için stream desteğiyle çalışır.
 
-You can even create a promise on the server, and await it on the client:
+Hatta sunucuda bir promise oluşturabilir ve bunu istemcide bekleyebilirsiniz:
 
 ```js
-// Server Component
+// Sunucu Bileşeni
 import db from './database';
 
 async function Page({id}) {
-  // Will suspend the Server Component.
+  // Sunucu Bileşenini askıya alır.
   const note = await db.notes.get(id);
   
-  // NOTE: not awaited, will start here and await on the client. 
+  // NOT: beklenmemiş, burada başlayacak ve istemcide bekleyecek.
   const commentsPromise = db.comments.get(note.id);
   return (
     <div>
       {note}
-      <Suspense fallback={<p>Loading Comments...</p>}>
+      <Suspense fallback={<p>Yorumlar Yükleniyor...</p>}>
         <Comments commentsPromise={commentsPromise} />
       </Suspense>
     </div>
@@ -280,18 +280,18 @@ async function Page({id}) {
 ```
 
 ```js
-// Client Component
+// İstemci Bileşeni
 "use client";
 import {use} from 'react';
 
 function Comments({commentsPromise}) {
-  // NOTE: this will resume the promise from the server.
-  // It will suspend until the data is available.
+  // NOT: Bu, sunucudan gelen promise'i yeniden başlatacak.
+  // Veriler mevcut olana kadar askıya alınacak.
   const comments = use(commentsPromise);
   return comments.map(commment => <p>{comment}</p>);
 }
 ```
 
-The `note` content is important data for the page to render, so we `await` it on the server. The comments are below the fold and lower-priority, so we start the promise on the server, and wait for it on the client with the `use` API. This will Suspend on the client, without blocking the `note` content from rendering.
+`note` içeriği, sayfanın render edilmesi için önemli bir veri olduğu için, sunucuda `await` edilir. Yorumlar ise daha aşağıda ve önceliği düşük olduğundan, promise'i sunucuda başlatırız ve istemcide `use` API'si ile bekleriz. Bu, istemcide askıya alınacak, ancak `note` içeriğinin render edilmesini engellemeyecektir.
 
-Since async components are [not supported on the client](#why-cant-i-use-async-components-on-the-client), we await the promise with `use`.
+Async bileşenler [istemcide desteklenmediği için](#why-cant-i-use-async-components-on-the-client), promise'i `use` ile bekleriz.
