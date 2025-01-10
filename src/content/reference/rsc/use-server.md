@@ -6,14 +6,14 @@ canary: true
 
 <Canary>
 
-`'use server'` is needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+`'use server'` sadece [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
 
 </Canary>
 
 
 <Intro>
 
-`'use server'` marks server-side functions that can be called from client-side code.
+`'use server'` istemci tarafı kodundan çağrılabilen sunucu tarafı işlevlerini işaretler.
 
 </Intro>
 
@@ -21,11 +21,11 @@ canary: true
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru dokümanı {/*reference*/}
 
 ### `'use server'` {/*use-server*/}
 
-Add `'use server'` at the top of an async function body to mark the function as callable by the client. We call these functions _Server Actions_.
+Fonksiyonu istemci tarafından çağrılabilir olarak işaretlemek için bir asenkron fonksiyon gövdesinin başına `'use server'' ekleyin. Bu işlevlere _Sunucu Eylemleri_ adını veriyoruz.
 
 ```js {2}
 async function addToCart(data) {
@@ -34,77 +34,76 @@ async function addToCart(data) {
 }
 ```
 
-When calling a Server Action on the client, it will make a network request to the server that includes a serialized copy of any arguments passed. If the Server Action returns a value, that value will be serialized and returned to the client.
+İstemcide bir Sunucu Eylemi çağrıldığında, sunucuya iletilen tüm bağımsız değişkenlerin serileştirilmiş bir kopyasını içeren bir ağ isteği gönderilir. Sunucu Eylemi bir değer döndürürse, bu değer serileştirilir ve istemciye döndürülür.
 
-Instead of individually marking functions with `'use server'`, you can add the directive to the top of a file to mark all exports within that file as Server Actions that can be used anywhere, including imported in client code.
+İşlevleri tek tek `'use server'` ile işaretlemek yerine, bir dosyanın en üstüne bu yönergeyi ekleyerek o dosyadaki tüm dışa aktarımları, istemci koduna aktarılanlar da dahil olmak üzere her yerde kullanılabilecek Sunucu Eylemleri olarak işaretleyebilirsiniz.
 
-#### Caveats {/*caveats*/}
-* `'use server'` must be at the very beginning of their function or module; above any other code including imports (comments above directives are OK). They must be written with single or double quotes, not backticks.
-* `'use server'` can only be used in server-side files. The resulting Server Actions can be passed to Client Components through props. See supported [types for serialization](#serializable-parameters-and-return-values).
-* To import a Server Action from [client code](/reference/rsc/use-client), the directive must be used on a module level.
-* Because the underlying network calls are always asynchronous, `'use server'` can only be used on async functions.
-* Always treat arguments to Server Actions as untrusted input and authorize any mutations. See [security considerations](#security).
-* Server Actions should be called in a [Transition](/reference/react/useTransition). Server Actions passed to [`<form action>`](/reference/react-dom/components/form#props) or [`formAction`](/reference/react-dom/components/input#props) will automatically be called in a transition.
-* Server Actions are designed for mutations that update server-side state; they are not recommended for data fetching. Accordingly, frameworks implementing Server Actions typically process one action at a time and do not have a way to cache the return value.
+#### Uyarılar {/*caveats*/}
+* `'use server'` fonksiyon veya modüllerinin en başında olmalıdır; içe aktarmalar dahil diğer tüm kodların üzerinde (direktiflerin üzerindeki yorumlar uygundur). Tek ya da çift tırnakla yazılmalıdırlar, ters tırnakla değil.
+* `'use server'` sadece sunucu tarafındaki dosyalarda kullanılabilir. Ortaya çıkan Sunucu Eylemleri prop'lar aracılığıyla İstemci Bileşenlerine aktarılabilir. Desteklenen [serileştirme türleri](#serializable-parameters-and-return-values) bölümüne bakın.
+* Sunucu Eylemini [istemci kodu](/reference/rsc/use-client)'ndan içe aktarmak için yönerge modül düzeyinde kullanılmalıdır
+* Temel ağ çağrıları her zaman asenkron olduğundan, `'use server'` yalnızca asenkron fonksiyonlarda kullanılabilir.
+* Sunucu Eylemlerine yönelik bağımsız değişkenleri her zaman güvenilmeyen girdi olarak değerlendirin ve tüm mutasyonları yetkilendirin. Bkz. [güvenlik hususları](#security).
+* Sunucu Eylemleri bir [Transition](/reference/react/useTransition) içinde çağrılmalıdır. [`<form action>`](/reference/react-dom/components/form#props) veya [`formAction`](/reference/react-dom/components/input#props)'a geçirilen Sunucu Eylemleri otomatik olarak bir geçişte çağrılacaktır.
+* Sunucu Eylemleri sunucu tarafı durumunu güncelleyen mutasyonlar için tasarlanmıştır; veri getirme için önerilmezler. Buna göre, Sunucu Eylemlerini uygulayan çatılar genellikle bir seferde bir eylemi işler ve dönüş değerini önbelleğe almanın bir yolu yoktur.
 
-### Security considerations {/*security*/}
+### Güvenlikle ilgili hususlar {/*security*/}
 
-Arguments to Server Actions are fully client-controlled. For security, always treat them as untrusted input, and make sure to validate and escape arguments as appropriate.
+Sunucu Eylemlerine yönelik bağımsız değişkenler tamamen istemci kontrolündedir. Güvenlik için bunları her zaman güvenilmeyen girdi olarak ele alın ve bağımsız değişkenleri uygun şekilde doğruladığınızdan ve kaçtığınızdan emin olun.
 
-In any Server Action, make sure to validate that the logged-in user is allowed to perform that action.
+Herhangi bir Sunucu Eyleminde, oturum açan kullanıcının bu eylemi gerçekleştirmesine izin verildiğini doğruladığınızdan emin olun.
 
 <Wip>
 
-To prevent sending sensitive data from a Server Action, there are experimental taint APIs to prevent unique values and objects from being passed to client code.
+Bir Sunucu Eyleminden hassas verilerin gönderilmesini önlemek için, benzersiz değerlerin ve nesnelerin istemci koduna aktarılmasını önleyen deneysel taint API'leri vardır.
 
-See [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueValue) and [experimental_taintObjectReference](/reference/react/experimental_taintObjectReference).
+Bkz. [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueValue) ve [experimental_taintObjectReference](/reference/react/experimental_taintObjectReference).
 
 </Wip>
 
-### Serializable arguments and return values {/*serializable-parameters-and-return-values*/}
+### Serileştirilebilir bağımsız değişkenler ve dönüş değerleri {/*serializable-parameters-and-return-values*/}
 
-As client code calls the Server Action over the network, any arguments passed will need to be serializable.
+İstemci kodu Sunucu Eylemini ağ üzerinden çağırdığından, aktarılan tüm argümanların serileştirilebilir olması gerekir.
 
-Here are supported types for Server Action arguments:
+Sunucu Eylemi bağımsız değişkenleri için desteklenen türler şunlardır:
 
 * Primitives
-	* [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
-	* [number](https://developer.mozilla.org/en-US/docs/Glossary/Number)
-	* [bigint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
-	* [boolean](https://developer.mozilla.org/en-US/docs/Glossary/Boolean)
-	* [undefined](https://developer.mozilla.org/en-US/docs/Glossary/Undefined)
-	* [null](https://developer.mozilla.org/en-US/docs/Glossary/Null)
-	* [symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol), only symbols registered in the global Symbol registry via [`Symbol.for`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/for)
-* Iterables containing serializable values
-	* [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
-	* [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-	* [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
-	* [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
-	* [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
+  * [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
+  * [number](https://developer.mozilla.org/en-US/docs/Glossary/Number)
+  * [bigint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+  * [boolean](https://developer.mozilla.org/en-US/docs/Glossary/Boolean)
+  * [undefined](https://developer.mozilla.org/en-US/docs/Glossary/Undefined)
+  * [null](https://developer.mozilla.org/en-US/docs/Glossary/Null)
+  * [symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol), [`Symbol.for`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/for) aracılığıyla yalnızca global Sembol kayıt defterine kayıtlı semboller
+* Serileştirilebilir değerler içeren yinelenebilir dosyalar
+  * [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+  * [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+  * [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+  * [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+  * [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) ve [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
 * [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
-* [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) instances
-* Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): those created with [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), with serializable properties
-* Functions that are Server Actions
+* [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) nesne
+* Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) ile oluşturulmuş olanlar, serileştirilebilir özelliklerle
+* Sunucu Eylemleri Olan İşlevler
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Notably, these are not supported:
-* React elements, or [JSX](/learn/writing-markup-with-jsx)
-* Functions, including component functions or any other function that is not a Server Action
+Özellikle, bunlar desteklenmemektedir:
+* React elemanları, ya da [JSX](/learn/writing-markup-with-jsx)
+* Bileşen işlevleri veya Sunucu Eylemi olmayan diğer işlevler dahil olmak üzere işlevler
 * [Classes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
-* Objects that are instances of any class (other than the built-ins mentioned) or objects with [a null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
-* Symbols not registered globally, ex. `Symbol('my new symbol')`
+* Herhangi bir sınıfın örneği olan nesneler (belirtilen yerleşikler dışında) veya [null prototipli](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
+* Global olarak kaydedilmemiş semboller, örn. `Symbol('yeni sembolüm')`
 
 
-Supported serializable return values are the same as [serializable props](/reference/rsc/use-client#passing-props-from-server-to-client-components) for a boundary Client Component.
+Desteklenen serileştirilebilir dönüş değerleri, bir sınır İstemci Bileşeni için [serileştirilebilir proplar](/reference/rsc/use-client#passing-props-from-server-to-client-components) ile aynıdır.
 
+## Kullanım {/*usage*/}
 
-## Usage {/*usage*/}
+### Formlarda Sunucu Eylemleri {/*server-actions-in-forms*/}
 
-### Server Actions in forms {/*server-actions-in-forms*/}
+Sunucu Eylemlerinin en yaygın kullanım durumu, verileri değiştiren sunucu işlevlerini çağırmak olacaktır. Tarayıcıda, [HTML form elemanı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) kullanıcının bir mutation göndermesi için geleneksel yaklaşımdır. React Sunucu Bileşenleri ile React, [forms](/reference/react-dom/components/form) Sunucu Eylemleri için birinci sınıf destek sunuyor.
 
-The most common use case of Server Actions will be calling server functions that mutate data. On the browser, the [HTML form element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) is the traditional approach for a user to submit a mutation. With React Server Components, React introduces first-class support for Server Actions in [forms](/reference/react-dom/components/form).
-
-Here is a form that allows a user to request a username.
+İşte bir kullanıcının kullanıcı adı talep etmesini sağlayan bir form.
 
 ```js [[1, 3, "formData"]]
 // App.js
@@ -119,21 +118,21 @@ export default function App() {
   return (
     <form action={requestUsername}>
       <input type="text" name="username" />
-      <button type="submit">Request</button>
+      <button type="submit">İstek</button>
     </form>
   );
 }
 ```
 
-In this example `requestUsername` is a Server Action passed to a `<form>`. When a user submits this form, there is a network request to the server function `requestUsername`. When calling a Server Action in a form, React will supply the form's <CodeStep step={1}>[FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)</CodeStep> as the first argument to the Server Action.
+Bu örnekte `requestUsername` bir `<form>`a aktarılan bir Sunucu Eylemidir. Bir kullanıcı bu formu gönderdiğinde, `requestUsername` sunucu işlevine bir ağ isteği gönderilir. Bir formda bir Sunucu Eylemi çağırırken, React formun <CodeStep step={1}>[FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)</CodeStep> öğesini Sunucu Eylemine ilk argüman olarak sağlayacaktır.
 
-By passing a Server Action to the form `action`, React can [progressively enhance](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement) the form. This means that forms can be submitted before the JavaScript bundle is loaded.
+React, `action` formuna bir Sunucu Eylemi geçirerek formu [aşamalı olarak geliştirebilir](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement). Bu, formların JavaScript paketi yüklenmeden önce gönderilebileceği anlamına gelir.
 
-#### Handling return values in forms {/*handling-return-values*/}
+#### Formlarda dönüş değerlerini işleme {/*handling-return-values*/}
 
-In the username request form, there might be the chance that a username is not available. `requestUsername` should tell us if it fails or not.
+Kullanıcı adı istek formunda, bir kullanıcı adının mevcut olmaması ihtimali olabilir. `requestUsername` bize başarısız olup olmadığını söylemelidir.
 
-To update the UI based on the result of a Server Action while supporting progressive enhancement, use [`useActionState`](/reference/react/useActionState).
+Aşamalı geliştirmeyi desteklerken bir Sunucu Eyleminin sonucuna göre kullanıcı arayüzünü güncellemek için [`useActionState`](/reference/react/useActionState) kullanın.
 
 ```js
 // requestUsername.js
@@ -143,9 +142,9 @@ export default async function requestUsername(formData) {
   const username = formData.get('username');
   if (canRequest(username)) {
     // ...
-    return 'successful';
+    return 'başarılı';
   }
-  return 'failed';
+  return 'başarısız oldu';
 }
 ```
 
@@ -163,21 +162,22 @@ function UsernameForm() {
     <>
       <form action={action}>
         <input type="text" name="username" />
-        <button type="submit">Request</button>
+        <button type="submit">İstek</button>
       </form>
-      <p>Last submission request returned: {state}</p>
+      <p>Son gönderim talebi iade edildi: {state}</p>
     </>
   );
 }
 ```
 
 Note that like most Hooks, `useActionState` can only be called in <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep>.
+Çoğu Hook gibi `useActionState`in de yalnızca <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep> içinde çağrılabileceğini unutmayın.
 
-### Calling a Server Action outside of `<form>` {/*calling-a-server-action-outside-of-form*/}
+### Sunucu Eylemini `<form>` dışında çağırma {/*calling-a-server-action-outside-of-form*/}
 
-Server Actions are exposed server endpoints and can be called anywhere in client code.
+Sunucu Eylemleri açık sunucu uç noktalarıdır ve istemci kodunun herhangi bir yerinde çağrılabilir.
 
-When using a Server Action outside of a [form](/reference/react-dom/components/form), call the Server Action in a [Transition](/reference/react/useTransition), which allows you to display a loading indicator, show [optimistic state updates](/reference/react/useOptimistic), and handle unexpected errors. Forms will automatically wrap Server Actions in transitions.
+[Form](/reference/react-dom/components/form) dışında bir Sunucu Eylemi kullanırken, Sunucu Eylemini bir [Transition](/reference/react/useTransition) içinde çağırın; bu sayede bir yükleme göstergesi görüntüleyebilir, [iyimser state güncellemeleri](/reference/react/useOptimistic) gösterebilir ve beklenmedik hataları ele alabilirsiniz
 
 ```js {9-12}
 import incrementLike from './actions';
@@ -196,8 +196,8 @@ function LikeButton() {
 
   return (
     <>
-      <p>Total Likes: {likeCount}</p>
-      <button onClick={onClick} disabled={isPending}>Like</button>;
+      <p>Toplam Beğeni: {likeCount}</p>
+      <button onClick={onClick} disabled={isPending}>Beğen</button>;
     </>
   );
 }
@@ -214,4 +214,4 @@ export default async function incrementLike() {
 }
 ```
 
-To read a Server Action return value, you'll need to `await` the promise returned.
+Bir Sunucu Eylemi dönüş değerini okumak için, döndürülen promise'i `await` etmeniz gerekir.
