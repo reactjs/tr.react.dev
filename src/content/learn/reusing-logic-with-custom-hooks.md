@@ -1,5 +1,5 @@
 ---
-title: 'Özel Hook'lar ile Mantığı Tekrar Kullanma'
+title: 'Özel Hook''lar ile Mantığı Tekrar Kullanma'
 ---
 
 <Intro>
@@ -19,10 +19,10 @@ React, `useState`, `useContext`, ve `useEffect` gibi birkaç yerleşik Hook ile 
 
 ## Özel Hook'lar: Bileşenler arasında mantığı paylaşma {/*custom-hooks-sharing-logic-between-components*/}
 
-Ağ'a ağır bir şekilde bağlı olan bir uygulama geliştirdiğinizi hayal edin (çoğu uygulamanın bağlı olduğu gibi). Kullanıcıyı, uygulamanızı kullanırken ağ bağlantısının yanlışlıkla kapandığı durumlarda uyarmak istersiniz. Bunu nasıl yapardınız? Bileşeninizde iki şeye ihtiyacınız olduğu gibi görünüyor:
+Ağa büyük ölçüde bağımlı bir uygulama geliştirdiğinizi düşünün (çoğu uygulamanın yaptığı gibi). Kullanıcıyı, uygulamanızı kullanırken ağ bağlantısının yanlışlıkla kapandığı durumlarda uyarmak istersiniz. Bunu nasıl yapardınız? Bileşeninizde iki şeye ihtiyacınız olduğu gibi görünüyor:
 
 1. Ağınızın çevrimiçi olup olmadığını izleyen bir state parçası.
-2. Global [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) ve [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) olaylarına abone olan ve bu state'i güncelleyen bir Efekt.
+2. Global [`çevrimiçi`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) ve [`çevrimdışı`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) olaylarına abone olan ve bu state'i güncelleyen bir Efekt.
 
 Bu sizin bileşeninizi ağ durumu ile [senkronize](/learn/synchronizing-with-effects) tutacaktır. Şöyle bir şeyle başlayabilirsiniz:
 
