@@ -228,7 +228,7 @@ Bu kural, sizin bir bileşene her baktığınızda onun state, Efekt'leri ve di�
 
 <Note>
 
-Eğer linter'ınız [React için yapılandırılmışsa,](/learn/editor-setup#linting) her zaman bu isimlendirme kuralını zorlayacaktır. Yukarıdaki sandbox'ta `useOnlineStatus`'u `getOnlineStatus` olarak yeniden adlandırın. Linter'ınızın artık onun içinde `useState` veya `useEffect` çağırmaya izin vermediğini fark edin. Sadece Hook'lar ve bileşenler diğer Hook'ları çağırabilir!
+Eğer linter'ınız [React için yapılandırılmışsa,](/learn/editor-setup#linting) her zaman bu isimlendirme kuralını zorunlu kılacaktır. Yukarıdaki sandbox'ta `useOnlineStatus`'u `getOnlineStatus` olarak yeniden adlandırın. Linter'ınızın artık onun içinde `useState` veya `useEffect` çağırmaya izin vermediğini fark edin. Sadece Hook'lar ve bileşenler diğer Hook'ları çağırabilir!
 
 </Note>
 
@@ -246,7 +246,7 @@ function useSorted(items) {
   return items.slice().sort();
 }
 
-// ✅ İyi: Hook kullanmayan bir sıradan fonksiyon
+// ✅ İyi: Hook kullanmayan normal bir fonksiyon
 function getSorted(items) {
   return items.slice().sort();
 }
@@ -274,7 +274,7 @@ function useAuth() {
 }
 ```
 
-Teknik olarak, bu React tarafından zorunlu kılınmıyor. Prensipte, başka Hook'ları çağırmayan bir Hook yapabilirsiniz. Bu genellikle kafa karıştırıcı ve limitleyicidir, bu yüzden bu örüntüden uzak durmak en iyisidir. Ancak, işe yarayacağı nadir durumlar bulunabilir. Örneğin, belki fonksiyonunu şu anda hiçbir Hook'u kullanmıyor, ancak gelecekte ona bazı Hook çağrıları eklemeyi düşünüyorsunuz. O zaman onu `use` ön eki ile adlandırmak mantıklı olur: 
+Teknik olarak, bu React tarafından zorunlu kılınmıyor. Prensipte, başka Hook'ları çağırmayan bir Hook yapabilirsiniz. Bu genellikle kafa karıştırıcı ve limitleyicidir, bu yüzden bu örüntüden uzak durmak en iyisidir. Ancak, işe yarayacağı nadir durumlar bulunabilir. Örneğin: belki şu anda fonksiyonunuz hiçbir Hook kullanmıyordur, ancak gelecekte ona bazı Hook çağrıları eklemeyi planlıyorsunuzdur. O zaman, fonksiyonu `use` önekiyle adlandırmak mantıklıdır: 
 
 ```js {3-4}
 // ✅ İyi: Gelecekte muhtemelen başka Hook'ları kullanacak bir Hook
@@ -443,7 +443,7 @@ Bu yüzden iki ayrı state değişkeni oluşturmuş gibi çalışıyor!
 
 **Özel Hook'lar sizin *state'li mantık* paylaşmanıza olanak sağlar, *state'in kendinisi*ni değil. Bir Hook'a yapılan her çağrı aynı Hook'a yapılan tüm çağrılardan bağımsızdır.** Bu nedenle yukarıdaki iki kod alanı tamamen eşdeğerdir. İsterseniz, yukarı kayarak onları karşılaştırın. Özel bir Hook çıkartmadan önceki ve sonraki davranış tamamen aynıdır.
 
-State'i birden fazla bileşen arasında paylaşmak istediğinizde, bunun yerine onu [yukarı kaldırın ve aşağı iletin](/learn/sharing-state-between-components).
+State'i birden fazla bileşen arasında paylaşmak istediğinizde, bunun yerine onu [yukarı taşıyın ve aşağı iletin](/learn/sharing-state-between-components).
 
 ## Hook'lar arasında reaktif değerler iletme {/*passing-reactive-values-between-hooks*/}
 
