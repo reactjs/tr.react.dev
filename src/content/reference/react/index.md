@@ -1,42 +1,42 @@
 ---
-title: React Reference Overview
+title: React Başvuru Dökümanına Genel Bakış
 ---
 
 <Intro>
 
-This section provides detailed reference documentation for working with React. For an introduction to React, please visit the [Learn](/learn) section.
+Bu bölüm, React ile çalışmak için ayrıntılı başvuru dökumanı belgeleri sağlar. React'e giriş için lütfen [Öğren](/learn) bölümünü ziyaret edin.
 
 </Intro>
 
-The React reference documentation is broken down into functional subsections:
+React başvuru dökumanı belgeleri işlevsel alt bölümlere ayrılmıştır:
 
 ## React {/*react*/}
 
-Programmatic React features:
+Programatik React özellikleri:
 
-* [Hooks](/reference/react/hooks) - Use different React features from your components.
-* [Components](/reference/react/components) - Built-in components that you can use in your JSX.
-* [APIs](/reference/react/apis) - APIs that are useful for defining components.
-* [Directives](/reference/rsc/directives) - Provide instructions to bundlers compatible with React Server Components.
+* [Hooks](/reference/react/hooks) - Bileşenlerinizdeki farklı React özelliklerini kullanın.
+* [Bileşenler](/reference/react/components) - JSX'inizde kullanabileceğiniz yerleşik bileşenler.
+* [APIs](/reference/react/apis) - Bileşenleri tanımlamak için yararlı olan API'ler.
+* [Direktifler](/reference/rsc/directives) - React Sunucu Bileşenleri ile uyumlu paketleyicilere talimatlar sağlayın.
 
 ## React DOM {/*react-dom*/}
 
-React-dom contains features that are only supported for web applications (which run in the browser DOM environment). This section is broken into the following:
+React-dom, yalnızca web uygulamaları (tarayıcı DOM ortamında çalışan) için desteklenen özellikler içerir. Bu bölüm aşağıdakilere ayrılmıştır:
 
-* [Hooks](/reference/react-dom/hooks) - Hooks for web applications which run in the browser DOM environment.
-* [Components](/reference/react-dom/components) - React supports all of the browser built-in HTML and SVG components.
-* [APIs](/reference/react-dom) - The `react-dom` package contains methods supported only in web applications.
-* [Client APIs](/reference/react-dom/client) - The `react-dom/client` APIs let you render React components on the client (in the browser).
-* [Server APIs](/reference/react-dom/server) - The `react-dom/server` APIs let you render React components to HTML on the server.
+* [Hooks](/reference/react-dom/hooks) - Tarayıcı DOM ortamında çalışan web uygulamaları için hooks.
+* [Bileşenler](/reference/react-dom/components) - React, tarayıcıda yerleşik HTML ve SVG bileşenlerinin tümünü destekler.
+* [APIs](/reference/react-dom) - `react-dom` paketi yalnızca web uygulamalarında desteklenen yöntemleri içerir.
+* [İstemci APIs](/reference/react-dom/client) - `react-dom/client` API'leri, React bileşenlerini istemcide (tarayıcıda) oluşturmanızı sağlar.
+* [Sunucu APIs](/reference/react-dom/server) - `react-dom/server` API'leri React bileşenlerini sunucuda HTML'ye dönüştürmenizi sağlar.
 
-## Rules of React {/*rules-of-react*/}
+## React Kuralları {/*rules-of-react*/}
 
-React has idioms — or rules — for how to express patterns in a way that is easy to understand and yields high-quality applications:
+React, kalıpların anlaşılması kolay ve yüksek kaliteli uygulamalar üretecek şekilde nasıl ifade edileceğine ilişkin deyimlere — veya kurallara — sahiptir:
 
-* [Components and Hooks must be pure](/reference/rules/components-and-hooks-must-be-pure) – Purity makes your code easier to understand, debug, and allows React to automatically optimize your components and hooks correctly.
-* [React calls Components and Hooks](/reference/rules/react-calls-components-and-hooks) – React is responsible for rendering components and hooks when necessary to optimize the user experience.
-* [Rules of Hooks](/reference/rules/rules-of-hooks) – Hooks are defined using JavaScript functions, but they represent a special type of reusable UI logic with restrictions on where they can be called.
+* [Bileşenler ve Hook'lar saf olmalıdır](/reference/rules/components-and-hooks-must-be-pure) – Purity, kodunuzun anlaşılmasını, hata ayıklamasını kolaylaştırır ve React'in bileşenlerinizi ve hook'larınızın otomatik olarak doğru şekilde optimize etmesini sağlar.
+* [React Bileşenleri ve Hook'ları çağırır](/reference/rules/react-calls-components-and-hooks) – React, kullanıcı deneyimini optimize etmek için gerektiğinde bileşenleri ve hook'ları oluşturmaktan sorumludur.
+* [Hook Kuralları](/reference/rules/rules-of-hooks) – Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede çağrılabilecekleri konusunda kısıtlamaları olan özel bir yeniden kullanılabilir UI mantığı türünü temsil ederler.
 
-## Legacy APIs {/*legacy-apis*/}
+## Eski API'ler {/*legacy-apis*/}
 
-* [Legacy APIs](/reference/react/legacy) - Exported from the `react` package, but not recommended for use in newly written code.
+* [Eski API'ler](/reference/react/legacy) - `react` paketinden dışa aktarılır, ancak yeni yazılan kodlarda kullanılması önerilmez.
