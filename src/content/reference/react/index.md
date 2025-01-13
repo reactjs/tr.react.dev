@@ -12,12 +12,12 @@ React başvuru dökumanı belgeleri işlevsel alt bölümlere ayrılmıştır:
 
 ## React {/*react*/}
 
-Programmatic React features:
+Programatik React özellikleri:
 
-* [Hooks](/reference/react/hooks) - Use different React features from your components.
-* [Components](/reference/react/components) - Built-in components that you can use in your JSX.
-* [APIs](/reference/react/apis) - APIs that are useful for defining components.
-* [Directives](/reference/rsc/directives) - Provide instructions to bundlers compatible with React Server Components.
+* [Hooks](/reference/react/hooks) - Bileşenlerinizdeki farklı React özelliklerini kullanın.
+* [Bileşenler](/reference/react/components) - JSX'inizde kullanabileceğiniz yerleşik bileşenler.
+* [APIs](/reference/react/apis) - Bileşenleri tanımlamak için yararlı olan API'ler.
+* [Direktifler](/reference/rsc/directives) - React Sunucu Bileşenleri ile uyumlu paketleyicilere talimatlar sağlayın.
 
 ## React DOM {/*react-dom*/}
 
