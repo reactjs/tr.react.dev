@@ -1,14 +1,14 @@
 ---
-title: React Reference Overview
+title: React Başvuru Dökümanına Genel Bakış
 ---
 
 <Intro>
 
-This section provides detailed reference documentation for working with React. For an introduction to React, please visit the [Learn](/learn) section.
+Bu bölüm, React ile çalışmak için ayrıntılı başvuru dökumanı belgeleri sağlar. React'e giriş için lütfen [Öğren](/learn) bölümünü ziyaret edin.
 
 </Intro>
 
-The React reference documentation is broken down into functional subsections:
+React başvuru dökumanı belgeleri işlevsel alt bölümlere ayrılmıştır:
 
 ## React {/*react*/}
 
