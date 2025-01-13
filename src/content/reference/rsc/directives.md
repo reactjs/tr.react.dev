@@ -1,13 +1,21 @@
 ---
+<<<<<<< HEAD
 title: "Direktifler"
 canary: true
+=======
+title: Directives
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 ---
 
-<Canary>
+<RSC>
 
+<<<<<<< HEAD
 Bu direktifler yalnızca [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
+=======
+Directives are for use in [React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
-</Canary>
+</RSC>
 
 <Intro>
 

@@ -1,7 +1,12 @@
 ---
-title: React Server Components
-canary: true
+title: Server Components
 ---
+
+<RSC>
+
+Server Components are for use in [React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+
+</RSC>
 
 <Intro>
 
@@ -17,7 +22,11 @@ Bu ayrı ortam, React Sunucu Bileşenlerinde "sunucu" olarak adlandırılır. Su
 
 #### Sunucu Bileşenleri için nasıl destek oluşturulur? {/*how-do-i-build-support-for-server-components*/}
 
+<<<<<<< HEAD
 React 19'daki React Sunucu Bileşenleri kararlıdır ve büyük sürümler arasında bozulmaz, ancak bir React Sunucu Bileşenleri paketleyicisi veya çatısı uygulamak için kullanılan temel API'ler semver'i takip etmez ve React 19.x sürümleri arasında minor sürümlerde bozulabilir.
+=======
+While React Server Components in React 19 are stable and will not break between minor versions, the underlying APIs used to implement a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x. 
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 React Sunucu Bileşenleri'ni bir paketleyici veya çatı olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte, React Sunucu Bileşenleri'ni uygulamak için kullanılan API'leri stabilize etmek amacıyla paketleyiciler ve çatılarla çalışmaya devam edeceğiz.
 
@@ -188,7 +197,11 @@ Sunucu Bileşenleri tarayıcıya gönderilmez, bu yüzden `useState` gibi etkile
 
 #### Sunucu Bileşenleri için bir yönerge yoktur. {/*there-is-no-directive-for-server-components*/}
 
+<<<<<<< HEAD
 Yaygın bir yanlış anlama, Sunucu Bileşenlerinin `"use server"` ile belirtildiğidir, ancak Sunucu Bileşenleri için bir yönerge yoktur. `"use server"` yönergesi, Sunucu İşlemleri (Server Actions) için kullanılır.
+=======
+A common misunderstanding is that Server Components are denoted by `"use server"`, but there is no directive for Server Components. The `"use server"` directive is used for Server Functions.
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 Daha fazla bilgi için, [Yönergeler](/reference/rsc/directives) dökümantasyonuna bakın.
 

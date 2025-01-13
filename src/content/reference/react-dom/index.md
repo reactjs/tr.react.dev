@@ -41,6 +41,7 @@ These APIs can be used to make apps faster by pre-loading resources such as scri
 
 ---
 
+<<<<<<< HEAD
 ## Kullanımdan kaldırılmış API'ler {/*deprecated-apis*/}
 
 <Deprecated>
@@ -53,4 +54,15 @@ Bu API'ler React'in gelecekteki bir ana sürümünde kaldırılacaktır.
 * [`hydrate`](/reference/react-dom/hydrate) sunucu HTML'inden oluşturulan DOM'a bir ağaç bağlar. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ile değiştirilmiştir.
 * [`render`](/reference/react-dom/render) bir ağacı DOM'a bağlar. [`createRoot`](/reference/react-dom/client/createRoot) ile değiştirilmiştir.
 * [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode) bir ağacı DOM'dan kaldırır. [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) ile değiştirilmiştir.
+=======
+## Removed APIs {/*removed-apis*/}
 
+These APIs were removed in React 19:
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+
+* [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): see [alternatives](https://18.react.dev/reference/react-dom/findDOMNode#alternatives).
+* [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): use [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) instead.
+* [`render`](https://18.react.dev/reference/react-dom/render): use [`createRoot`](/reference/react-dom/client/createRoot) instead.
+* [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode): use [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) instead.
+* [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
+* [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
