@@ -364,7 +364,7 @@
       "sectionHeader": "React Sunucu Bileşenleri"
     },
     {
-      "title": "Server Components",
+      "title": "Sunucu Bileşenleri",
       "path": "/reference/rsc/server-components",
       "canary": true
     },
