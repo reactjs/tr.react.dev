@@ -20,7 +20,7 @@ canary: true
 
 ---
 
-## Referans {/*reference*/}
+## Başvuru Dokümanı {/*reference*/}
 
 ### `'use client'` {/*use-client*/}
 
