@@ -10,17 +10,17 @@ const {Intro, MaxWidth, p: P, a: A} = MDXComponents;
 
 export default function NotFound() {
   return (
-    <Page toc={[]} meta={{title: 'Not Found'}} routeTree={sidebarLearn}>
+    <Page toc={[]} meta={{title: 'Bulunamadı'}} routeTree={sidebarLearn}>
       <MaxWidth>
         <Intro>
-          <P>This page doesn’t exist.</P>
+          <P>Bu sayfa mevcut değil.</P>
           <P>
-            If this is a mistake{', '}
+            Eğer bu bir hataysa{', '}
             <A href="https://github.com/reactjs/react.dev/issues/new">
-              let us know
+              bize bildirin
             </A>
             {', '}
-            and we will try to fix it!
+            ve düzeltmeye çalışalım!
           </P>
         </Intro>
       </MaxWidth>
