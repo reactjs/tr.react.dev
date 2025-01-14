@@ -13,11 +13,11 @@ Sunucu Eylemleri, İstemci Bileşenlerinin sunucuda yürütülen asenkron işlev
 
 <Note>
 
-#### How do I build support for Server Actions? {/*how-do-i-build-support-for-server-actions*/}
+#### Sunucu Eylemleri için nasıl destek oluşturabilirim? {/*how-do-i-build-support-for-server-actions*/}
 
-While Server Actions in React 19 are stable and will not break between major versions, the underlying APIs used to implement Server Actions in a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x. 
+React 19'daki Sunucu Eylemleri kararlı ve büyük sürümler arasında kırılmayacak olsa da, bir React Sunucu Bileşenleri paketleyicisinde veya çatısında Sunucu Eylemlerini uygulamak için kullanılan temel API'ler semver'ı takip etmez ve React 19.x'teki küçük sürümler arasında kırılabilir. 
 
-To support Server Actions as a bundler or framework, we recommend pinning to a specific React version, or using the Canary release. We will continue working with bundlers and frameworks to stabilize the APIs used to implement Server Actions in the future.
+Sunucu Eylemlerini bir paketleyici veya çerçeve olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte Sunucu Eylemlerini uygulamak için kullanılan API'leri stabilize etmek için paketleyiciler ve çerçevelerle çalışmaya devam edeceğiz.
 
 </Note>
 
