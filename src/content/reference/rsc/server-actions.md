@@ -60,9 +60,9 @@ export default function Button({onClick}) {
 Daha fazlası için [`“use server”`](/reference/rsc/use-server) dokümanlarına bakın.
 
 
-### Importing Server Actions from Client Components {/*importing-server-actions-from-client-components*/}
+### İstemci Bileşenlerinden Sunucu Eylemlerini İçe Aktarma {/*importing-server-actions-from-client-components*/}
 
-Client Components can import Server Actions from files that use the `"use server"` directive:
+İstemci Bileşenleri, `“use server”` direktifini kullanan dosyalardan Sunucu Eylemlerini içe aktarabilir:
 
 ```js [[1, 3, "createNoteAction"]]
 "use server";
@@ -73,7 +73,7 @@ export async function createNoteAction() {
 
 ```
 
-When the bundler builds the `EmptyNote` Client Component, it will create a reference to the `createNoteAction` function in the bundle. When the `button` is clicked, React will send a request to the server to execute the `createNoteAction` function using the reference provided:
+Paketleyici `EmptyNote` İstemci Bileşenini oluşturduğunda, paketteki `createNoteAction` işlevine bir referans oluşturacaktır. Butona tıklandığında React, sağlanan referansı kullanarak `createNoteAction` fonksiyonunu çalıştırmak için sunucuya bir istek gönderecektir:
 
 ```js [[1, 2, "createNoteAction"], [1, 5, "createNoteAction"], [1, 7, "createNoteAction"]]
 "use client";
@@ -86,7 +86,7 @@ function EmptyNote() {
 }
 ```
 
-For more, see the docs for [`"use server"`](/reference/rsc/use-server).
+Daha fazlası için [`“use server”`](/reference/rsc/use-server) dokümanlarına bakın.
 
 ### Composing Server Actions with Actions {/*composing-server-actions-with-actions*/}
 
