@@ -46,9 +46,9 @@ Traditionally, new React features used to only be available at Meta first, and l
 
 </BlogCard>
 
-<BlogCard title="React Labs: What We've Been Working On – March 2023" date="March 22, 2023" url="/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023">
+<BlogCard title="React Labs: Neler Üzerinde Çalışıyoruz - Mart 2023" date="22 Mart 2023" url="/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023">
 
-In React Labs posts, we write about projects in active research and development. Since our last update, we've made significant progress on React Server Components, Asset Loading, Optimizing Compiler, Offscreen Rendering, and Transition Tracing, and we'd like to share what we learned.
+React Labs gönderilerinde, aktif araştırma ve geliştirme aşamasındaki projeler hakkında yazıyoruz. Son güncellememizden bu yana React Sunucu Bileşenleri, Asset Loading, Optimizing Compiler, Offscreen Rendering ve Transition Tracing konularında önemli ilerlemeler kaydettik ve öğrendiklerimizi paylaşmak istiyoruz.
 
 </BlogCard>
 
