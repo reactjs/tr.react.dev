@@ -21,9 +21,9 @@ Sunucu Eylemlerini bir paketleyici veya çerçeve olarak desteklemek için, beli
 
 </Note>
 
-When a Server Action is defined with the `"use server"` directive, your framework will automatically create a reference to the server function, and pass that reference to the Client Component. When that function is called on the client, React will send a request to the server to execute the function, and return the result.
+Bir Sunucu Eylemi `“use server”` direktifi tanımlandığında, çatınız otomatik olarak sunucu işlevine bir referans oluşturacak ve bu referansı İstemci Bileşenine aktaracaktır. Bu işlev istemcide çağrıldığında, React işlevi yürütmek için sunucuya bir istek gönderecek ve sonucu return edecektir.
 
-Server Actions can be created in Server Components and passed as props to Client Components, or they can be imported and used in Client Components.
+Sunucu Eylemleri, Sunucu Bileşenlerinde oluşturulabilir ve İstemci Bileşenlerine destek olarak aktarılabilir veya İstemci Bileşenlerinde içe aktarılabilir ve kullanılabilir
 
 ### Creating a Server Action from a Server Component {/*creating-a-server-action-from-a-server-component*/}
 
