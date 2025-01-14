@@ -68,8 +68,8 @@ React 18'in yapım aşaması yıllar sürdü ve React ekibi için değerli dersl
 React 18 artık npm'de mevcut! Son yazımızda, uygulamanızı React 18'e yükseltmek için adım adım talimatları paylaştık. Bu yazıda, React 18'deki yeniliklere ve bunların gelecek için ne anlama geldiğine genel bir bakış sunacağız...
 </BlogCard>
 
-<BlogCard title="How to Upgrade to React 18" date="March 8, 2022" url="/blog/2022/03/08/react-18-upgrade-guide">
-As we shared in the release post, React 18 introduces features powered by our new concurrent renderer, with a gradual adoption strategy for existing applications. In this post, we will guide you through the steps for upgrading to React 18...
+<BlogCard title="React 18'e Nasıl Yükseltilir" date="8 Mart 2022" url="/blog/2022/03/08/react-18-upgrade-guide">
+Sürüm gönderisinde paylaştığımız gibi, React 18, mevcut uygulamalar için kademeli bir benimseme stratejisi ile yeni eşzamanlı oluşturucumuz tarafından desteklenen özellikler sunuyor. Bu yazıda, React 18'e yükseltme adımları boyunca size rehberlik edeceğiz...
 </BlogCard>
 
 <BlogCard title="React Conf 2021 Recap" date="December 17, 2021" url="/blog/2021/12/17/react-conf-2021-recap">
