@@ -1,11 +1,11 @@
 ---
-title: Server Actions
+title: Sunucu Eylemleri
 canary: true
 ---
 
 <Intro>
 
-Server Actions allow Client Components to call async functions executed on the server.
+Sunucu Eylemleri, İstemci Bileşenlerinin sunucuda yürütülen asenkron işlevleri çağırmasına olanak tanır.
 
 </Intro>
 
