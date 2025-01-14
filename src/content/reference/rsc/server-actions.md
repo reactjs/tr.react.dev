@@ -138,11 +138,11 @@ Bu, Sunucu Eyleminin `isPending` durumuna, istemcideki bir Eyleme sararak erişm
 
 Daha fazlası için [Sunucu Eylemini `<form>` dışında çağırma](/reference/rsc/use-server#calling-a-server-action-outside-of-form) dokümanlarına bakın
 
-### Form Actions with Server Actions {/*form-actions-with-server-actions*/}
+### Sunucu Eylemleri ile Form Eylemleri {/*form-actions-with-server-actions*/}
 
-Server Actions work with the new Form features in React 19.
+Sunucu Eylemleri, React 19'daki yeni Form özellikleri ile çalışır.
 
-You can pass a Server Action to a Form to automatically submit the form to the server:
+Formu otomatik olarak sunucuya göndermek için bir Form'a bir Sunucu Eylemi aktarabilirsiniz:
 
 
 ```js [[1, 3, "updateName"], [1, 7, "updateName"]]
@@ -159,9 +159,9 @@ function UpdateName() {
 }
 ```
 
-When the Form submission succeeds, React will automatically reset the form. You can add `useActionState` to access the pending state, last response, or to support progressive enhancement.
+Form gönderimi başarılı olduğunda, React formu otomatik olarak sıfırlayacaktır. Pending state, son yanıta erişmek veya aşamalı geliştirmeyi desteklemek için `useActionState` ekleyebilirsiniz.
 
-For more, see the docs for [Server Actions in Forms](/reference/rsc/use-server#server-actions-in-forms).
+Daha fazla bilgi için [Formlarda Sunucu Eylemleri](/reference/rsc/use-server#server-actions-in-forms) dokümanlarına bakın.
 
 ### Server Actions with `useActionState` {/*server-actions-with-use-action-state*/}
 
