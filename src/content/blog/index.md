@@ -64,8 +64,8 @@ Bugün React ve dokümantasyonu için yeni bir yuva olan react.dev'i açmanın h
 React 18'in yapım aşaması yıllar sürdü ve React ekibi için değerli dersleri de beraberinde getirdi. Piyasaya sürülmesi, uzun yıllar süren araştırmaların ve birçok yolun keşfedilmesinin sonucuydu. Bu yollardan bazıları başarılıydı; birçoğu ise yeni kavrayışlara yol açan çıkmaz sokaklardı. Öğrendiğimiz derslerden biri, keşfetmekte olduğumuz bu yollar hakkında fikir sahibi olmadan yeni özellikleri beklemenin topluluk için sinir bozucu olduğudur...
 </BlogCard>
 
-<BlogCard title="React v18.0" date="March 29, 2022" url="/blog/2022/03/29/react-v18">
-React 18 is now available on npm! In our last post, we shared step-by-step instructions for upgrading your app to React 18. In this post, we’ll give an overview of what’s new in React 18, and what it means for the future...
+<BlogCard title="React v18.0" date="29 Mart 2022" url="/blog/2022/03/29/react-v18">
+React 18 artık npm'de mevcut! Son yazımızda, uygulamanızı React 18'e yükseltmek için adım adım talimatları paylaştık. Bu yazıda, React 18'deki yeniliklere ve bunların gelecek için ne anlama geldiğine genel bir bakış sunacağız...
 </BlogCard>
 
 <BlogCard title="How to Upgrade to React 18" date="March 8, 2022" url="/blog/2022/03/08/react-18-upgrade-guide">
