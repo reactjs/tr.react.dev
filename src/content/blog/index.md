@@ -4,7 +4,7 @@ title: React Blog
 
 <Intro>
 
-This blog is the official source for the updates from the React team. Anything important, including release notes or deprecation notices, will be posted here first. You can also follow the [@reactjs](https://twitter.com/reactjs) account on Twitter, but you won’t miss anything essential if you only read this blog.
+Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Sürüm notları veya kullanımdan kaldırma bildirimleri de dahil olmak üzere önemli her şey ilk olarak burada yayınlanacaktır. Twitter'da [@reactjs](https://twitter.com/reactjs) hesabını da takip edebilirsiniz, ancak sadece bu blogu okursanız önemli bir şey kaçırmazsınız.
 
 </Intro>
 
