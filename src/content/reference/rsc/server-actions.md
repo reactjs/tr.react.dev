@@ -186,11 +186,11 @@ function UpdateName() {
 
 Sunucu Eylemleri ile `useActionState` kullanıldığında, React ayrıca hidrasyon tamamlanmadan önce girilen form gönderimlerini otomatik olarak yeniden oynatacaktır. Bu, kullanıcıların uygulama hidratlanmadan önce bile uygulamanızla etkileşime girebileceği anlamına gelir.
 
-For more, see the docs for [`useActionState`](/reference/react-dom/hooks/useFormState).
+Daha fazlası için [`useActionState`](/reference/react-dom/hooks/useFormState) dokümanlarına bakın.
 
-### Progressive enhancement with `useActionState` {/*progressive-enhancement-with-useactionstate*/}
+### `UseActionState` ile aşamalı iyileştirme {/*progressive-enhancement-with-useactionstate*/}
 
-Server Actions also support progressive enhancement with the third argument of `useActionState`.
+Sunucu Eylemleri ayrıca `useActionState` üçüncü bağımsız değişkeni ile aşamalı geliştirmeyi de destekler.
 
 ```js [[1, 3, "updateName"], [1, 6, "updateName"], [2, 6, "/name/update"], [3, 6, "submitAction"], [3, 9, "submitAction"]]
 "use client";
@@ -208,6 +208,6 @@ function UpdateName() {
 }
 ```
 
-When the <CodeStep step={2}>permalink</CodeStep> is provided to `useActionState`, React will redirect to the provided URL if the form is submitted before the JavaScript bundle loads.
+<CodeStep step={2}>permalink</CodeStep> `useActionState` için sağlandığında, form JavaScript paketi yüklenmeden önce gönderilirse React sağlanan URL'ye yönlendirecektir.
 
-For more, see the docs for [`useActionState`](/reference/react-dom/hooks/useFormState).
+Daha fazlası için [`useActionState`](/reference/react-dom/hooks/useFormState) dokümanlarına bakın.
