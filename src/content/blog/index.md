@@ -22,9 +22,9 @@ Geçtiğimiz hafta Henderson, Nevada'da iki günlük bir konferans olan React Co
 
 </BlogCard>
 
-<BlogCard title="React 19 RC " date="April 25, 2024" url="/blog/2024/04/25/react-19">
+<BlogCard title="React 19 RC " date="25 Nisan 2024" url="/blog/2024/04/25/react-19">
 
-In the React 19 RC Upgrade Guide, we shared step-by-step instructions for upgrading your app to React 19. In this post, we'll give an overview of the new features in React 19, and how you can adopt them ...
+React 19 RC Yükseltme Kılavuzu'nda, uygulamanızı React 19'a yükseltmek için adım adım talimatlar paylaştık. Bu yazıda, React 19'daki yeni özelliklere ve bunları nasıl benimseyebileceğinize genel bir bakış sunacağız ...
 
 </BlogCard>
 
