@@ -88,16 +88,16 @@ function EmptyNote() {
 
 Daha fazlası için [`“use server”`](/reference/rsc/use-server) dokümanlarına bakın.
 
-### Composing Server Actions with Actions {/*composing-server-actions-with-actions*/}
+### Sunucu Eylemlerini Eylemlerle Oluşturma {/*composing-server-actions-with-actions*/}
 
-Server Actions can be composed with Actions on the client:
+Sunucu Eylemleri, istemci üzerindeki Eylemlerle birlikte oluşturulabilir:
 
 ```js [[1, 3, "updateName"]]
 "use server";
 
 export async function updateName(name) {
   if (!name) {
-    return {error: 'Name is required'};
+    return {error: 'İsim gereklidir'};
   }
   await db.users.updateName(name);
 }
@@ -128,15 +128,15 @@ function UpdateName() {
   return (
     <form action={submitAction}>
       <input type="text" name="name" disabled={isPending}/>
-      {state.error && <span>Failed: {state.error}</span>}
+      {state.error && <span>Başarısız: {state.error}</span>}
     </form>
   )
 }
 ```
 
-This allows you to access the `isPending` state of the Server Action by wrapping it in an Action on the client.
+Bu, Sunucu Eyleminin `isPending` durumuna, istemcideki bir Eyleme sararak erişmenizi sağlar.
 
-For more, see the docs for [Calling a Server Action outside of `<form>`](/reference/rsc/use-server#calling-a-server-action-outside-of-form)
+Daha fazlası için [Sunucu Eylemini `<form>` dışında çağırma](/reference/rsc/use-server#calling-a-server-action-outside-of-form) dokümanlarına bakın
 
 ### Form Actions with Server Actions {/*form-actions-with-server-actions*/}
 
