@@ -163,9 +163,9 @@ Form gönderimi başarılı olduğunda, React formu otomatik olarak sıfırlayac
 
 Daha fazla bilgi için [Formlarda Sunucu Eylemleri](/reference/rsc/use-server#server-actions-in-forms) dokümanlarına bakın.
 
-### Server Actions with `useActionState` {/*server-actions-with-use-action-state*/}
+### `UseActionState` ile Sunucu Eylemleri {/*server-actions-with-use-action-state*/}
 
-You can compose Server Actions with `useActionState` for the common case where you just need access to the action pending state and last returned response:
+Yalnızca pending state'ine ve son döndürülen yanıta erişmeniz gereken yaygın durumlar için Sunucu Eylemlerini `useActionState` ile oluşturabilirsiniz:
 
 ```js [[1, 3, "updateName"], [1, 6, "updateName"], [2, 6, "submitAction"], [2, 9, "submitAction"]]
 "use client";
@@ -178,13 +178,13 @@ function UpdateName() {
   return (
     <form action={submitAction}>
       <input type="text" name="name" disabled={isPending}/>
-      {state.error && <span>Failed: {state.error}</span>}
+      {state.error && <span>Başarısız: {state.error}</span>}
     </form>
   );
 }
 ```
 
-When using `useActionState` with Server Actions, React will also automatically replay form submissions entered before hydration finishes. This means users can interact with your app even before the app has hydrated.
+Sunucu Eylemleri ile `useActionState` kullanıldığında, React ayrıca hidrasyon tamamlanmadan önce girilen form gönderimlerini otomatik olarak yeniden oynatacaktır. Bu, kullanıcıların uygulama hidratlanmadan önce bile uygulamanızla etkileşime girebileceği anlamına gelir.
 
 For more, see the docs for [`useActionState`](/reference/react-dom/hooks/useFormState).
 
