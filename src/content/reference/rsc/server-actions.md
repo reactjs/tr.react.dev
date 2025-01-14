@@ -25,17 +25,17 @@ Bir Sunucu Eylemi `“use server”` direktifi tanımlandığında, çatınız o
 
 Sunucu Eylemleri, Sunucu Bileşenlerinde oluşturulabilir ve İstemci Bileşenlerine destek olarak aktarılabilir veya İstemci Bileşenlerinde içe aktarılabilir ve kullanılabilir
 
-### Creating a Server Action from a Server Component {/*creating-a-server-action-from-a-server-component*/}
+### Sunucu Bileşeninden Sunucu Eylemi Oluşturma {/*creating-a-server-action-from-a-server-component*/}
 
-Server Components can define Server Actions with the `"use server"` directive:
+Sunucu Bileşenleri `“use server”` yönergesi ile Sunucu Eylemleri tanımlayabilir:
 
 ```js [[2, 7, "'use server'"], [1, 5, "createNoteAction"], [1, 12, "createNoteAction"]]
-// Server Component
+// Sunucu Bileşeni
 import Button from './Button';
 
 function EmptyNote () {
   async function createNoteAction() {
-    // Server Action
+    // Sunucu Eylemi
     'use server';
     
     await db.notes.create();
@@ -45,7 +45,7 @@ function EmptyNote () {
 }
 ```
 
-When React renders the `EmptyNote` Server Component, it will create a reference to the `createNoteAction` function, and pass that reference to the `Button` Client Component. When the button is clicked, React will send a request to the server to execute the `createNoteAction` function with the reference provided:
+React, `EmptyNote` Sunucu Bileşenini işlediğinde, `createNoteAction` fonksiyonuna bir referans oluşturacak ve bu referansı `Button` İstemci Bileşenine aktaracaktır. Butona tıklandığında, React, sağlanan referansla `createNoteAction` fonksiyonunu çalıştırmak için sunucuya bir istek gönderecektir:
 
 ```js {5}
 "use client";
@@ -53,11 +53,11 @@ When React renders the `EmptyNote` Server Component, it will create a reference 
 export default function Button({onClick}) { 
   console.log(onClick); 
   // {$$typeof: Symbol.for("react.server.reference"), $$id: 'createNoteAction'}
-  return <button onClick={() => onClick()}>Create Empty Note</button>
+  return <button onClick={() => onClick()}>Boş Not Oluştur</button>
 }
 ```
 
-For more, see the docs for [`"use server"`](/reference/rsc/use-server).
+Daha fazlası için [`“use server”`](/reference/rsc/use-server) dokümanlarına bakın.
 
 
 ### Importing Server Actions from Client Components {/*importing-server-actions-from-client-components*/}
