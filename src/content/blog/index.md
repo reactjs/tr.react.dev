@@ -92,14 +92,14 @@ React ekibi birkaç güncellemeyi paylaşmaktan heyecan duyuyor:
 
 ---
 
-### All release notes {/*all-release-notes*/}
+### Tüm sürüm notları {/*all-release-notes*/}
 
-Not every React release deserves its own blog post, but you can find a detailed changelog for every release in the [`CHANGELOG.md`](https://github.com/facebook/react/blob/main/CHANGELOG.md) file in the React repository, as well as on the [Releases](https://github.com/facebook/react/releases) page.
+Her React sürümü kendi blog yazısını hak etmez, ancak React deposundaki [`CHANGELOG.md`](https://github.com/facebook/react/blob/main/CHANGELOG.md) dosyasında ve [Releases](https://github.com/facebook/react/releases) sayfasında her sürüm için ayrıntılı bir değişiklik günlüğü bulabilirsiniz.
 
 ---
 
-### Older posts {/*older-posts*/}
+### Eski gönderiler {/*older-posts*/}
 
-See the [older posts.](https://reactjs.org/blog/all.html)
+[Eski gönderilere](https://reactjs.org/blog/all.html) bakın.
 
 <div className="h-12"></div>
