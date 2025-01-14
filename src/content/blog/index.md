@@ -28,9 +28,9 @@ React 19 RC Yükseltme Kılavuzu'nda, uygulamanızı React 19'a yükseltmek içi
 
 </BlogCard>
 
-<BlogCard title="React 19 RC Upgrade Guide" date="April 25, 2024" url="/blog/2024/04/25/react-19-upgrade-guide">
+<BlogCard title="React 19 RC Yükseltme Kılavuzu" date="25 Nisan 2024" url="/blog/2024/04/25/react-19-upgrade-guide">
 
-The improvements added to React 19 require some breaking changes, but we've worked to make the upgrade as smooth as possible, and we don't expect the changes to impact most apps. In this post, we will guide you through the steps for upgrading libraries to React 19 ...
+React 19'a eklenen iyileştirmeler bazı kırılma değişiklikleri gerektiriyor, ancak yükseltmeyi olabildiğince sorunsuz hale getirmek için çalıştık ve değişikliklerin çoğu uygulamayı etkilemesini beklemiyoruz. Bu yazıda, kütüphaneleri React 19'a yükseltme adımlarında size rehberlik edeceğiz ...
 
 </BlogCard>
 
