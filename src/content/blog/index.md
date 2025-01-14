@@ -53,9 +53,9 @@ React Labs gönderilerinde, aktif araştırma ve geliştirme aşamasındaki proj
 </BlogCard>
 
 
-<BlogCard title="Introducing react.dev" date="March 16, 2023" url="/blog/2023/03/16/introducing-react-dev">
+<BlogCard title="react.dev ile tanışın" date="16 Mart 2023" url="/blog/2023/03/16/introducing-react-dev">
 
-Today we are thrilled to launch react.dev, the new home for React and its documentation. In this post, we would like to give you a tour of the new site.
+Bugün React ve dokümantasyonu için yeni bir yuva olan react.dev'i açmanın heyecanını yaşıyoruz. Bu yazıda size yeni siteyi gezdirmek istiyoruz.
 
 </BlogCard>
 
