@@ -72,16 +72,16 @@ React 18 artık npm'de mevcut! Son yazımızda, uygulamanızı React 18'e yükse
 Sürüm gönderisinde paylaştığımız gibi, React 18, mevcut uygulamalar için kademeli bir benimseme stratejisi ile yeni eşzamanlı oluşturucumuz tarafından desteklenen özellikler sunuyor. Bu yazıda, React 18'e yükseltme adımları boyunca size rehberlik edeceğiz...
 </BlogCard>
 
-<BlogCard title="React Conf 2021 Recap" date="December 17, 2021" url="/blog/2021/12/17/react-conf-2021-recap">
-Last week we hosted our 6th React Conf.  In previous years, we’ve used the React Conf stage to deliver industry changing announcements such as React Native and React Hooks. This year, we shared our multi-platform vision for React, starting with the release of React 18 and gradual adoption of concurrent features...
+<BlogCard title="React Conf 2021 Özeti" date="17 Aralık 2021" url="/blog/2021/12/17/react-conf-2021-recap">
+Geçtiğimiz hafta 6. React Konferansı'na ev sahipliği yaptık.  Önceki yıllarda React Conf sahnesini React Native ve React Hooks gibi sektörü değiştiren duyurular yapmak için kullandık. Bu yıl, React 18'in piyasaya sürülmesi ve eş zamanlı özelliklerin kademeli olarak benimsenmesiyle başlayarak React için çok platformlu vizyonumuzu paylaştık...
 </BlogCard>
 
-<BlogCard title="The Plan for React 18" date="June 8, 2021" url="/blog/2021/06/08/the-plan-for-react-18">
-The React team is excited to share a few updates:
+<BlogCard title="React 18 için Plan" date="8 Haziran 2021" url="/blog/2021/06/08/the-plan-for-react-18">
+React ekibi birkaç güncellemeyi paylaşmaktan heyecan duyuyor:
 
-- We’ve started work on the React 18 release, which will be our next major version.
-- We’ve created a Working Group to prepare the community for gradual adoption of new features in React 18.
-- We’ve published a React 18 Alpha so that library authors can try it and provide feedback...
+- Bir sonraki major sürümümüz olacak olan React 18 sürümü üzerinde çalışmaya başladık.
+- Topluluğu React 18'deki yeni özelliklerin kademeli olarak benimsenmesine hazırlamak için bir Çalışma Grubu oluşturduk.
+- Kütüphane yazarlarının deneyebilmesi ve geri bildirimde bulunabilmesi için bir React 18 Alpha yayınladık...
 </BlogCard>
 
 <BlogCard title="Introducing Zero-Bundle-Size React Server Components" date="December 21, 2020" url="/blog/2020/12/21/data-fetching-with-react-server-components">
