@@ -84,8 +84,8 @@ React ekibi birkaç güncellemeyi paylaşmaktan heyecan duyuyor:
 - Kütüphane yazarlarının deneyebilmesi ve geri bildirimde bulunabilmesi için bir React 18 Alpha yayınladık...
 </BlogCard>
 
-<BlogCard title="Introducing Zero-Bundle-Size React Server Components" date="December 21, 2020" url="/blog/2020/12/21/data-fetching-with-react-server-components">
-2020 has been a long year. As it comes to an end we wanted to share a special Holiday Update on our research into zero-bundle-size React Server Components. To introduce React Server Components, we have prepared a talk and a demo. If you want, you can check them out during the holidays, or later when work picks back up in the new year...
+<BlogCard title="Sıfır Paket Boyutlu React Sunucu Bileşenleri ile Tanışın" date="21 Aralık 2020" url="/blog/2020/12/21/data-fetching-with-react-server-components">
+2020 uzun bir yıl oldu. Sona yaklaşırken, sıfır paket boyutlu React Sunucu Bileşenlerine yönelik araştırmamızla ilgili özel bir Tatil Güncellemesi paylaşmak istedik. React Sunucu Bileşenlerini tanıtmak için bir konuşma ve bir demo hazırladık. İsterseniz tatillerde ya da yeni yılda işler tekrar başladığında bunları kontrol edebilirsiniz...
 </BlogCard>
 
 </div>
