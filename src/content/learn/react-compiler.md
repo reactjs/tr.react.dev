@@ -7,7 +7,7 @@ Bu sayfa size React Compiler'ı tanıtacak ve nasıl başarılı bir şekilde de
 </Intro>
 
 <Wip>
-These docs are still a work in progress. More documentation is available in the [React Compiler Working Group repo](https://github.com/reactwg/react-compiler/discussions), and will be upstreamed into these docs when they are more stable.
+Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Compiler Çalışma Grubu reposu](https://github.com/reactwg/react-compiler/discussions) adresinde mevcuttur ve daha kararlı hale geldiklerinde bu belgelere eklenecektir.
 </Wip>
 
 <YouWillLearn>
