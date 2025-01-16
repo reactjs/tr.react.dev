@@ -59,10 +59,10 @@ Kod tabanınız zaten çok iyi ezberlenmişse, derleyici ile büyük performans 
 
 React Compiler'ın ilk sürümü öncelikle **güncelleme performansını iyileştirmeye** (mevcut bileşenleri yeniden oluşturma) odaklanmıştır, bu nedenle şu iki kullanım durumuna odaklanmaktadır:
 
-1. **Skipping cascading re-rendering of components**
-    * Re-rendering `<Parent />` causes many components in its component tree to re-render, even though only `<Parent />` has changed
-1. **Skipping expensive calculations from outside of React**
-    * For example, calling `expensivelyProcessAReallyLargeArrayOfObjects()` inside of your component or hook that needs that data
+1. **Bileşenlerin basamaklı olarak yeniden oluşturulması atlanıyor**
+    * `<Parent />` bileşeninin yeniden oluşturulması, yalnızca `<Parent />` değişmiş olsa bile bileşen ağacındaki birçok bileşenin yeniden oluşturulmasına neden olur
+1. **Pahalı hesaplamaları React'in dışından atlama**
+    * Örneğin, bu verilere ihtiyaç duyan bileşeninizin veya kancanızın içinde `expensivelyProcessAReallyLargeArrayOfObjects()` çağrısı yapmak
 
 #### Optimizing Re-renders {/*optimizing-re-renders*/}
 
