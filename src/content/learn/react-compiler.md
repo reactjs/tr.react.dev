@@ -40,11 +40,11 @@ Ya da Yarn kullanıyorsanız:
 yarn add -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
 </TerminalBlock>
 
-If you are not using React 19 yet, please see [the section below](#using-react-compiler-with-react-17-or-18) for further instructions.
+Henüz React 19 kullanmıyorsanız, daha fazla talimat için lütfen [aşağıdaki bölüme](#using-react-compiler-with-react-17-or-18) bakın.
 
-### What does the compiler do? {/*what-does-the-compiler-do*/}
+### Derleyici ne yapar? {/*what-does-the-compiler-do*/}
 
-In order to optimize applications, React Compiler automatically memoizes your code. You may be familiar today with memoization through APIs such as `useMemo`, `useCallback`, and `React.memo`. With these APIs you can tell React that certain parts of your application don't need to recompute if their inputs haven't changed, reducing work on updates. While powerful, it's easy to forget to apply memoization or apply them incorrectly. This can lead to inefficient updates as React has to check parts of your UI that don't have any _meaningful_ changes.
+Uygulamaları optimize etmek için React Compiler kodunuzu otomatik olarak memoize eder. Bugün `useMemo`, `useCallback` ve `React` gibi API'ler aracılığıyla memoizasyona aşina olabilirsiniz.memo`. Bu API'ler ile React'e, girdileri değişmediyse uygulamanızın belirli bölümlerinin yeniden hesaplanmasına gerek olmadığını söyleyebilir, güncellemeler üzerindeki çalışmayı azaltabilirsiniz. Güçlü olmalarına rağmen, memoizasyon uygulamayı unutmak veya yanlış uygulamak kolaydır. React, kullanıcı arayüzünüzün herhangi bir _anlamlı_ değişikliğe sahip olmayan kısımlarını kontrol etmek zorunda olduğundan, bu durum verimsiz güncellemelere yol açabilir.
 
 The compiler uses its knowledge of JavaScript and React's rules to automatically memoize values or groups of values within your components and hooks. If it detects breakages of the rules, it will automatically skip over just those components or hooks, and continue safely compiling other code.
 
