@@ -34,7 +34,7 @@ Derleyici şu anda `beta` olarak yayınlanmaktadır ve React 17+ uygulamaları v
 npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
 </TerminalBlock>
 
-Or, if you're using Yarn:
+Ya da Yarn kullanıyorsanız:
 
 <TerminalBlock>
 yarn add -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
