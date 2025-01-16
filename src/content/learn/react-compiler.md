@@ -55,9 +55,9 @@ React Compiler, React kurallarının ne zaman bozulduğunu statik olarak tespit 
 Kod tabanınız zaten çok iyi ezberlenmişse, derleyici ile büyük performans iyileştirmeleri görmeyi beklemeyebilirsiniz. Ancak, pratikte performans sorunlarına neden olan doğru bağımlılıkları elle not etmek zordur.
 
 <DeepDive>
-#### What kind of memoization does React Compiler add? {/*what-kind-of-memoization-does-react-compiler-add*/}
+#### React Compiler ne tür notlar ekliyor? {/*what-kind-of-memoization-does-react-compiler-add*/}
 
-The initial release of React Compiler is primarily focused on **improving update performance** (re-rendering existing components), so it focuses on these two use cases:
+React Compiler'ın ilk sürümü öncelikle **güncelleme performansını iyileştirmeye** (mevcut bileşenleri yeniden oluşturma) odaklanmıştır, bu nedenle şu iki kullanım durumuna odaklanmaktadır:
 
 1. **Skipping cascading re-rendering of components**
     * Re-rendering `<Parent />` causes many components in its component tree to re-render, even though only `<Parent />` has changed
