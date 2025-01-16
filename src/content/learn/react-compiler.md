@@ -24,7 +24,7 @@ React Compiler, şu anda Beta aşamasında olan ve topluluktan erken geri bildir
 En son Beta sürümü `@beta` etiketiyle, günlük deneysel sürümler ise `@experimental` etiketiyle bulunabilir.
 </Note>
 
-React Compiler is a new compiler that we've open sourced to get early feedback from the community. It is a build-time only tool that automatically optimizes your React app. It works with plain JavaScript, and understands the [Rules of React](/reference/rules), so you don't need to rewrite any code to use it.
+React Compiler, topluluktan erken geri bildirim almak için açık kaynaklı hale getirdiğimiz yeni bir derleyicidir. React uygulamanızı otomatik olarak optimize eden yalnızca derleme zamanlı bir araçtır. Düz JavaScript ile çalışır ve [React Kuralları](/reference/rules)'nı anlar, bu nedenle kullanmak için herhangi bir kodu yeniden yazmanıza gerek yoktur.
 
 The compiler also includes an [ESLint plugin](#installing-eslint-plugin-react-compiler) that surfaces the analysis from the compiler right in your editor. **We strongly recommend everyone use the linter today.** The linter does not require that you have the compiler installed, so you can use it even if you are not ready to try out the compiler.
 
