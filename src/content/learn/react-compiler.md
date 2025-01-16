@@ -26,7 +26,7 @@ En son Beta sürümü `@beta` etiketiyle, günlük deneysel sürümler ise `@exp
 
 React Compiler, topluluktan erken geri bildirim almak için açık kaynaklı hale getirdiğimiz yeni bir derleyicidir. React uygulamanızı otomatik olarak optimize eden yalnızca derleme zamanlı bir araçtır. Düz JavaScript ile çalışır ve [React Kuralları](/reference/rules)'nı anlar, bu nedenle kullanmak için herhangi bir kodu yeniden yazmanıza gerek yoktur.
 
-The compiler also includes an [ESLint plugin](#installing-eslint-plugin-react-compiler) that surfaces the analysis from the compiler right in your editor. **We strongly recommend everyone use the linter today.** The linter does not require that you have the compiler installed, so you can use it even if you are not ready to try out the compiler.
+Derleyici ayrıca, derleyiciden gelen analizi doğrudan düzenleyicinizde ortaya çıkaran bir [ESLint eklentisi](#installing-eslint-plugin-react-compiler) içerir. **Bugün herkesin linter kullanmasını şiddetle tavsiye ediyoruz.** Linter, derleyicinin yüklü olmasını gerektirmez, bu nedenle derleyiciyi denemeye hazır olmasanız bile kullanabilirsiniz.
 
 The compiler is currently released as `beta`, and is available to try out on React 17+ apps and libraries. To install the Beta:
 
