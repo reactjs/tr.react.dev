@@ -49,7 +49,7 @@ Uygulamaları optimize etmek için React Compiler kodunuzu otomatik olarak memoi
 Derleyici, JavaScript ve React'in kuralları hakkındaki bilgisini kullanarak bileşenleriniz ve kancalarınızdaki değerleri veya değer gruplarını otomatik olarak hafızaya alır. Kuralların ihlal edildiğini tespit ederse, otomatik olarak sadece bu bileşenlerin veya kancaların üzerinden atlayacak ve diğer kodu güvenli bir şekilde derlemeye devam edecektir.
 
 <Note>
-React Compiler can statically detect when Rules of React are broken, and safely opt-out of optimizing just the affected components or hooks. It is not necessary for the compiler to optimize 100% of your codebase.
+React Compiler, React kurallarının ne zaman bozulduğunu statik olarak tespit edebilir ve yalnızca etkilenen bileşenleri veya kancaları optimize etmeyi güvenli bir şekilde devre dışı bırakabilir. Derleyicinin kod tabanınızın %100'ünü optimize etmesi gerekli değildir.
 </Note>
 
 If your codebase is already very well-memoized, you might not expect to see major performance improvements with the compiler. However, in practice memoizing the correct dependencies that cause performance issues is tricky to get right by hand.
