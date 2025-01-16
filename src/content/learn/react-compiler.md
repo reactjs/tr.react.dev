@@ -46,7 +46,7 @@ Henüz React 19 kullanmıyorsanız, daha fazla talimat için lütfen [aşağıda
 
 Uygulamaları optimize etmek için React Compiler kodunuzu otomatik olarak memoize eder. Bugün `useMemo`, `useCallback` ve `React` gibi API'ler aracılığıyla memoizasyona aşina olabilirsiniz.memo`. Bu API'ler ile React'e, girdileri değişmediyse uygulamanızın belirli bölümlerinin yeniden hesaplanmasına gerek olmadığını söyleyebilir, güncellemeler üzerindeki çalışmayı azaltabilirsiniz. Güçlü olmalarına rağmen, memoizasyon uygulamayı unutmak veya yanlış uygulamak kolaydır. React, kullanıcı arayüzünüzün herhangi bir _anlamlı_ değişikliğe sahip olmayan kısımlarını kontrol etmek zorunda olduğundan, bu durum verimsiz güncellemelere yol açabilir.
 
-The compiler uses its knowledge of JavaScript and React's rules to automatically memoize values or groups of values within your components and hooks. If it detects breakages of the rules, it will automatically skip over just those components or hooks, and continue safely compiling other code.
+Derleyici, JavaScript ve React'in kuralları hakkındaki bilgisini kullanarak bileşenleriniz ve kancalarınızdaki değerleri veya değer gruplarını otomatik olarak hafızaya alır. Kuralların ihlal edildiğini tespit ederse, otomatik olarak sadece bu bileşenlerin veya kancaların üzerinden atlayacak ve diğer kodu güvenli bir şekilde derlemeye devam edecektir.
 
 <Note>
 React Compiler can statically detect when Rules of React are broken, and safely opt-out of optimizing just the affected components or hooks. It is not necessary for the compiler to optimize 100% of your codebase.
