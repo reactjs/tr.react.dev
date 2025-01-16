@@ -28,7 +28,7 @@ React Compiler, topluluktan erken geri bildirim almak için açık kaynaklı hal
 
 Derleyici ayrıca, derleyiciden gelen analizi doğrudan düzenleyicinizde ortaya çıkaran bir [ESLint eklentisi](#installing-eslint-plugin-react-compiler) içerir. **Bugün herkesin linter kullanmasını şiddetle tavsiye ediyoruz.** Linter, derleyicinin yüklü olmasını gerektirmez, bu nedenle derleyiciyi denemeye hazır olmasanız bile kullanabilirsiniz.
 
-The compiler is currently released as `beta`, and is available to try out on React 17+ apps and libraries. To install the Beta:
+Derleyici şu anda `beta` olarak yayınlanmaktadır ve React 17+ uygulamaları ve kütüphaneleri üzerinde denenebilir. Beta sürümünü yüklemek için:
 
 <TerminalBlock>
 npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
