@@ -52,7 +52,7 @@ Derleyici, JavaScript ve React'in kuralları hakkındaki bilgisini kullanarak bi
 React Compiler, React kurallarının ne zaman bozulduğunu statik olarak tespit edebilir ve yalnızca etkilenen bileşenleri veya kancaları optimize etmeyi güvenli bir şekilde devre dışı bırakabilir. Derleyicinin kod tabanınızın %100'ünü optimize etmesi gerekli değildir.
 </Note>
 
-If your codebase is already very well-memoized, you might not expect to see major performance improvements with the compiler. However, in practice memoizing the correct dependencies that cause performance issues is tricky to get right by hand.
+Kod tabanınız zaten çok iyi ezberlenmişse, derleyici ile büyük performans iyileştirmeleri görmeyi beklemeyebilirsiniz. Ancak, pratikte performans sorunlarına neden olan doğru bağımlılıkları elle not etmek zordur.
 
 <DeepDive>
 #### What kind of memoization does React Compiler add? {/*what-kind-of-memoization-does-react-compiler-add*/}
