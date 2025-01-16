@@ -12,9 +12,9 @@ Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Comp
 
 <YouWillLearn>
 
-* Getting started with the compiler
-* Installing the compiler and ESLint plugin
-* Troubleshooting
+* Derleyici ile çalışmaya başlama
+* Derleyicinin ve ESLint eklentisinin yüklenmesi
+* Sorun Giderme
 
 </YouWillLearn>
 
