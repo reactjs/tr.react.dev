@@ -3,7 +3,7 @@ title: React Compiler
 ---
 
 <Intro>
-This page will give you an introduction to React Compiler and how to try it out successfully.
+Bu sayfa size React Compiler'ı tanıtacak ve nasıl başarılı bir şekilde deneyebileceğinizi gösterecektir.
 </Intro>
 
 <Wip>
