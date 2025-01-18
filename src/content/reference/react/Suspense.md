@@ -119,9 +119,9 @@ export default function Albums({ artistId }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız çatıya bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir çatı içinde yer alır.
 
 let cache = new Map();
 
@@ -141,7 +141,7 @@ async function getData(url) {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+ // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -334,9 +334,9 @@ export default function Albums({ artistId }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız çatıya bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir çatı içinde yer alır.
 
 let cache = new Map();
 
@@ -358,7 +358,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 1500);
   });
@@ -370,7 +370,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+ // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -596,9 +596,9 @@ export default function Albums({ artistId }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -620,7 +620,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -632,7 +632,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -780,9 +780,9 @@ export default function SearchResults({ query }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -802,7 +802,7 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -964,9 +964,9 @@ export default function SearchResults({ query }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -986,7 +986,7 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1223,9 +1223,9 @@ export default function Panel({ children }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1247,7 +1247,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1259,7 +1259,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+// Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -1535,9 +1535,9 @@ export default function Panel({ children }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1559,7 +1559,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+// Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1571,7 +1571,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -1846,9 +1846,9 @@ export default function Panel({ children }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1870,7 +1870,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1882,7 +1882,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
