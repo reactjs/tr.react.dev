@@ -1,11 +1,11 @@
 ---
 title: "'use server'"
-titleForTitleTag: "'use server' directive"
+titleForTitleTag: "'use server' direktif"
 ---
 
 <RSC>
 
-`'use server'` is for use with [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+`'use server'`, [React Sunucu Bileşenleri kullanımı için](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) kullanılır.
 
 </RSC>
 
@@ -24,7 +24,7 @@ titleForTitleTag: "'use server' directive"
 
 ### `'use server'` {/*use-server*/}
 
-Add `'use server'` at the top of an async function body to mark the function as callable by the client. We call these functions [_Server Functions_](/reference/rsc/server-functions).
+Bir async fonksiyonunun başına `'use server'` ekleyerek fonksiyonu istemci tarafından çağrılabilir hale getirin. Bu fonksiyonlara [_Server Functions_](/reference/rsc/server-functions) denir.
 
 ```js {2}
 async function addToCart(data) {
@@ -33,28 +33,28 @@ async function addToCart(data) {
 }
 ```
 
-When calling a Server Function on the client, it will make a network request to the server that includes a serialized copy of any arguments passed. If the Server Function returns a value, that value will be serialized and returned to the client.
+Bir Sunucu Fonksiyon'u istemciden çağırdığınızda, geçilen tüm argümanların serileştirilmiş bir kopyasını içeren bir ağ isteği sunucuya yapılır. Eğer Sunucu Fonksiyon bir değer dönerse, bu değer serileştirilir ve istemciye geri gönderilir.
 
-Instead of individually marking functions with `'use server'`, you can add the directive to the top of a file to mark all exports within that file as Server Functions that can be used anywhere, including imported in client code.
+Fonksiyonları tek tek `'use server'` ile işaretlemek yerine, bir dosyanın başına yönergeyi ekleyebilirsiniz, böylece o dosyadaki tüm export'lar, istemci kodunda da kullanılabilen Sunucu Fonksiyon'lar olarak işaretlenir.
 
-#### Caveats {/*caveats*/}
-* `'use server'` must be at the very beginning of their function or module; above any other code including imports (comments above directives are OK). They must be written with single or double quotes, not backticks.
-* `'use server'` can only be used in server-side files. The resulting Server Functions can be passed to Client Components through props. See supported [types for serialization](#serializable-parameters-and-return-values).
-* To import a Server Functions from [client code](/reference/rsc/use-client), the directive must be used on a module level.
-* Because the underlying network calls are always asynchronous, `'use server'` can only be used on async functions.
-* Always treat arguments to Server Functions as untrusted input and authorize any mutations. See [security considerations](#security).
-* Server Functions should be called in a [Transition](/reference/react/useTransition). Server Functions passed to [`<form action>`](/reference/react-dom/components/form#props) or [`formAction`](/reference/react-dom/components/input#props) will automatically be called in a transition.
-* Server Functions are designed for mutations that update server-side state; they are not recommended for data fetching. Accordingly, frameworks implementing Server Functions typically process one action at a time and do not have a way to cache the return value.
+#### Uyarılar {/*caveats*/}
+* `'use server'` fonksiyonlarının veya modüllerinin başında, diğer kodlardan (imports dahil) önce olmalıdır (yönergelerden önceki yorumlar kabul edilir). Tek tırnak veya çift tırnak ile yazılmalıdır, ters tırnak kullanılamaz.
+* `'use server'` yalnızca sunucu tarafı dosyalarında kullanılabilir. Ortaya çıkan Sunucu Fonksiyon'lar, Sunucu Bileşen'lere prop'lar aracılığıyla iletilebilir. Desteklenen [serileştirme türlerine](#serializable-parameters-and-return-values) bakın.
+* Bir Sunucu Fonksiyon'ı [istemci kodu](/reference/rsc/use-client) içinden içe aktarmak için, yönerge modül seviyesinde kullanılmalıdır.
+* Altta yatan ağ çağrıları her zaman asenkron olduğu için, `'use server'` yalnızca async fonksiyonlarda kullanılabilir.
+* Sunucu Fonksiyon'lara geçirilen argümanları her zaman güvenilmeyen girişler olarak ele alın ve herhangi bir değişiklik yapmadan önce yetkilendirme yapın. [Güvenlik önlemleri](#security) için bakın.
+* Sunucu Fonksiyon'lar bir [Transition](/reference/react/useTransition) içinde çağrılmalıdır. [`<form action>`](/reference/react-dom/components/form#props) veya [`formAction`](/reference/react-dom/components/input#props) ile geçirilen Sunucu Fonksiyon'lar otomatik olarak bir geçiş içinde çağrılacaktır.
+* Sunucu Fonksiyon'lar, sunucu tarafı durumu güncelleyen değişiklikler için tasarlanmıştır; veri çekme işlemleri için önerilmezler. Bu nedenle, Sunucu Fonksiyon'ları uygulayan framework'ler genellikle her seferinde bir işlemi işler ve dönüş değerini önbelleğe almak için bir yöntem sunmazlar.
 
 ### Güvenlikle ilgili hususlar {/*security*/}
 
-Arguments to Server Functions are fully client-controlled. For security, always treat them as untrusted input, and make sure to validate and escape arguments as appropriate.
+Sunucu Fonksiyon'lara geçirilen argümanlar tamamen istemci tarafından kontrol edilir. Güvenlik için, her zaman bunları güvenilmeyen girişler olarak ele alın ve argümanları uygun şekilde doğrulayın ve kaçış işlemi uygulayın.
 
-In any Server Function, make sure to validate that the logged-in user is allowed to perform that action.
+Herhangi bir Sunucu Fonksiyonu içinde, giriş yapmış kullanıcının bu işlemi gerçekleştirmeye yetkili olduğundan emin olun.
 
 <Wip>
 
-To prevent sending sensitive data from a Server Function, there are experimental taint APIs to prevent unique values and objects from being passed to client code.
+Bir Sunucu Fonksiyonun'dan hassas veri gönderimini önlemek için, istemci koduna benzersiz değerlerin ve nesnelerin iletilmesini engellemek amacıyla deneysel taint API'leri mevcuttur.
 
 Bkz. [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueValue) ve [experimental_taintObjectReference](/reference/react/experimental_taintObjectReference).
 
@@ -62,9 +62,9 @@ Bkz. [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueVa
 
 ### Serileştirilebilir bağımsız değişkenler ve dönüş değerleri {/*serializable-parameters-and-return-values*/}
 
-Since client code calls the Server Function over the network, any arguments passed will need to be serializable.
+İstemci kodu, Sunucu Fonksiyon'u ağ üzerinden çağırdığı için, geçirilen tüm argümanların serileştirilebilir olması gerekir.
 
-Here are supported types for Server Function arguments:
+İşte Sunucu Fonksiyon argümanları için desteklenen türler:
 
 * Primitives
   * [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
@@ -83,17 +83,16 @@ Here are supported types for Server Function arguments:
 * [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 * [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) instances
 * Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): those created with [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), with serializable properties
-* Functions that are Server Functions
+* Sunucu Fonksiyon'u olan fonksiyonlar
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Notably, these are not supported:
-* React elements, or [JSX](/learn/writing-markup-with-jsx)
-* Functions, including component functions or any other function that is not a Server Function
-* [Classes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
-* Objects that are instances of any class (other than the built-ins mentioned) or objects with [a null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
-* Symbols not registered globally, ex. `Symbol('my new symbol')`
-* Events from event handlers
-
+Özellikle, bunlar desteklenmez:
+* React elemanları veya [JSX](/learn/writing-markup-with-jsx)
+* Fonksiyonlar, bileşen fonksiyonları veya Sunucu Fonksiyon olmayan diğer tüm fonksiyonlar dahil
+* [Sınıflar](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
+* Herhangi bir sınıfın örnekleri olan nesneler (bahsedilen yerleşik sınıflar dışında) veya [null prototipi olan nesneler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
+* Küresel olarak kaydedilmemiş semboller, örneğin `Symbol('my new symbol')`
+* Olay yöneticilerinden gelen olaylar
 
 Desteklenen serileştirilebilir dönüş değerleri, bir sınır İstemci Bileşeni için [serileştirilebilir proplar](/reference/rsc/use-client#passing-props-from-server-to-client-components) ile aynıdır.
 
@@ -101,11 +100,11 @@ Desteklenen serileştirilebilir dönüş değerleri, bir sınır İstemci Bileş
 
 ### Formlarda Sunucu Eylemleri {/*server-actions-in-forms*/}
 
-### Server Functions in forms {/*server-functions-in-forms*/}
+### Formlardaki Sunucu Fonksiyon'lar {/*server-functions-in-forms*/}
 
-The most common use case of Server Functions will be calling functions that mutate data. On the browser, the [HTML form element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) is the traditional approach for a user to submit a mutation. With React Server Components, React introduces first-class support for Server Functions as Actions in [forms](/reference/react-dom/components/form).
+Sunucu Fonksiyon'ların en yaygın kullanım senaryosu, veri üzerinde değişiklik yapan fonksiyonları çağırmaktır. Tarayıcıda, [HTML form elemanı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form), bir kullanıcının bir değişiklik göndermesi için geleneksel yaklaşımdır. React Sunucu Bileşenleri ile React, [formlarda](/reference/react-dom/components/form) Sunucu Fonksiyon'lar için birinci sınıf destek sunar.
 
-Here is a form that allows a user to request a username.
+İşte bir kullanıcının bir kullanıcı adı talep etmesine izin veren bir form.
 
 ```js [[1, 3, "formData"]]
 // App.js
@@ -126,15 +125,15 @@ export default function App() {
 }
 ```
 
-In this example `requestUsername` is a Server Function passed to a `<form>`. When a user submits this form, there is a network request to the server function `requestUsername`. When calling a Server Function in a form, React will supply the form's <CodeStep step={1}>[FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)</CodeStep> as the first argument to the Server Function.
+Bu örnekte `requestUsername`, bir `<form>`'a geçirilen bir Sunucu Fonksiyon'dır. Bir kullanıcı bu formu gönderdiğinde, `requestUsername` sunucu fonksiyonuna yapılan bir ağ isteği gerçekleşir. Bir Sunucu Fonksiyon'ı form içinde çağırırken, React, formun <CodeStep step={1}>[FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)</CodeStep>'sini birinci argüman olarak Sunucu Fonksiyon'a iletecektir.
 
-By passing a Server Function to the form `action`, React can [progressively enhance](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement) the form. This means that forms can be submitted before the JavaScript bundle is loaded.
+Bir Sunucu Fonksiyon'ı form `action`'ına geçirerek, React formu [kademeli olarak iyileştirebilir](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement). Bu, formların JavaScript paketi yüklenmeden önce gönderilebileceği anlamına gelir.
 
 #### Formlarda dönüş değerlerini işleme {/*handling-return-values*/}
 
 Kullanıcı adı istek formunda, bir kullanıcı adının mevcut olmaması ihtimali olabilir. `requestUsername` bize başarısız olup olmadığını söylemelidir.
 
-To update the UI based on the result of a Server Function while supporting progressive enhancement, use [`useActionState`](/reference/react/useActionState).
+Sunucu Fonksiyonu sonucuna dayalı olarak UI'yı güncellemek ve kademeli iyileştirmeyi desteklemek için, [`useActionState`](/reference/react/useActionState) kullanın.
 
 ```js
 // requestUsername.js
@@ -172,14 +171,13 @@ function UsernameForm() {
 }
 ```
 
-Note that like most Hooks, `useActionState` can only be called in <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep>.
-Çoğu Hook gibi `useActionState`in de yalnızca <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep> içinde çağrılabileceğini unutmayın.
+Not: Diğer çoğu Hook gibi `useActionState`in de yalnızca <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep> içinde çağrılabileceğini unutmayın.
 
-### Calling a Server Function outside of `<form>` {/*calling-a-server-function-outside-of-form*/}
+### `<form>` dışında bir Sunucu Fonksiyon'u çağırma {/*calling-a-server-function-outside-of-form*/}
 
-Server Functions are exposed server endpoints and can be called anywhere in client code.
+Sunucu Fonksiyon'lar, sunucu uç noktalarıdır ve istemci kodunda her yerde çağrılabilir.
 
-When using a Server Function outside a [form](/reference/react-dom/components/form), call the Server Function in a [Transition](/reference/react/useTransition), which allows you to display a loading indicator, show [optimistic state updates](/reference/react/useOptimistic), and handle unexpected errors. Forms will automatically wrap Server Functions in transitions.
+Bir Sunucu Fonksiyon'u bir [form](/reference/react-dom/components/form) dışında kullanırken, Sunucu Fonksiyon'u bir [Transition](/reference/react/useTransition) içinde çağırın, bu sayede yükleme göstergesi gösterebilir, [iyimser durum güncellemeleri](/reference/react/useOptimistic) yapabilir ve beklenmeyen hataları yönetebilirsiniz. Formlar, otomatik olarak Sunucu Fonksiyon'ları geçişler içinde sarar.
 
 ```js {9-12}
 import incrementLike from './actions';
@@ -216,4 +214,4 @@ export default async function incrementLike() {
 }
 ```
 
-To read a Server Function return value, you'll need to `await` the promise returned.
+Bir Sunucu Fonksiyon dönüş değerini okumak için, döndürülen promise'i `await` etmeniz gerekecek.
