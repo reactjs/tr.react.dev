@@ -4,11 +4,7 @@ title: startTransition
 
 <Intro>
 
-<<<<<<< HEAD
-`startTransition`, kullanıcı arayüzünü (UI) bloklamadan state'i güncellemenizi sağlar.
-=======
 `startTransition` lets you render a part of the UI in the background.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 ```js
 startTransition(action)
@@ -45,11 +41,7 @@ function TabContainer() {
 
 #### Parametreler {/*parameters*/}
 
-<<<<<<< HEAD
-* `scope`: Bir veya birden fazla [`set` fonksiyonu](/reference/react/useState#setstate) kullanarak bazı state'leri güncelleyen bir fonksiyondur. React, `scope` fonksiyon çağrısı sırasında eş zamanlı olarak planlanan tüm state güncellemelerini transition olarak işaretler ve herhangi bir parametre olmaksızın `scope`'u hemen çalıştırır. Bu güncellemeler [engelleme yapmaz](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) (non-blocking) ve [istenmeyen yükleme animasyonları göstermez](/reference/react/useTransition#preventing-unwanted-loading-indicators).
-=======
 * `action`: A function that updates some state by calling one or more [`set` functions](/reference/react/useState#setstate). React calls `action` immediately with no parameters and marks all state updates scheduled synchronously during the `action` function call as Transitions. Any async calls awaited in the `action` will be included in the transition, but currently require wrapping any `set` functions after the `await` in an additional `startTransition` (see [Troubleshooting](/reference/react/useTransition#react-doesnt-treat-my-state-update-after-await-as-a-transition)). State updates marked as Transitions will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators).
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 #### Dönen değerler {/*returns*/}
 
@@ -61,23 +53,15 @@ function TabContainer() {
 
 * Bir güncellemeyi transition olarak kullanmak için, ilgili state'in `set` fonksiyonuna erişebilmeniz gerekiyor. Eğer bir prop veya özel bir Hook dönüş değerine yanıt olarak transition başlatmak isterseniz, bunun yerine [`useDeferredValue`](/reference/react/useDeferredValue) özelliğini kullanmayı deneyebilirsiniz.
 
-<<<<<<< HEAD
-* `startTransition`'a ilettiğiniz fonksiyon, eşzamanlı olarak çalışabilecek bir fonksiyon olmalıdır. React, bu fonksiyonu hemen çalıştırır ve çalışırken gerçekleşen tüm state güncellemelerini transition olarak işaretler. Sonrasında daha fazla state güncellemesi yapmaya çalışırsanız (örneğin, bir zaman aşımında), bunlar transition olarak işaretlenmezler.
-=======
 * The function you pass to `startTransition` is called immediately, marking all state updates that happen while it executes as Transitions. If you try to perform state updates in a `setTimeout`, for example, they won't be marked as Transitions.
 
 * You must wrap any state updates after any async requests in another `startTransition` to mark them as Transitions. This is a known limitation that we will fix in the future (see [Troubleshooting](/reference/react/useTransition#react-doesnt-treat-my-state-update-after-await-as-a-transition)).
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 * Bir state güncelleme işlemi transition olarak işaretlendiğinde, diğer güncelleme işlemleri bu işlemi kesintiye uğratabilir. Örneğin, bir grafik bileşenini güncelleyen transition işlemi sırasında, grafik bileşeni tekrar render işlemi devam ederken bir giriş alanına yazmaya başlarsanız, React, giriş alanındaki güncellemeyi işledikten sonra tekrar render işlemini başlatır.
 
 * Transition güncellemeleri, metin girişlerini kontrol etmek için kullanılamaz.
 
-<<<<<<< HEAD
-* Eğer birden fazla transition işlemi devam ediyorsa, React şu an için bu güncellemeleri birleştirir. Ancak bu durum, ileride kaldırılması beklenen bir kısıtlamadır.
-=======
 * If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that may be removed in a future release.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 ---
 

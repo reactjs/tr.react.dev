@@ -4,11 +4,7 @@ title: Hızlı Başlangıç
 
 <Intro>
 
-<<<<<<< HEAD
-React dokümantasyonuna hoşgeldiniz! Bu sayfa, günlük hayatınızda kullanacağınız React konseptlerinin %80'ine bir giriş yapacaktır.
-=======
-Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you will use on a daily basis.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+React dökümantasyonuna hoş geldiniz! Bu sayfa, günlük olarak kullanacağınız React kavramlarının %80'ine giriş yapmanızı sağlayacaktır.
 
 </Intro>
 

@@ -36,28 +36,13 @@ function SearchPage() {
 
 #### Parametreler {/*parameters*/}
 
-<<<<<<< HEAD
-* `value`: Ertelemek istediğiniz değerdir. Herhangi bir türden olabilir.
-* <CanaryBadge title="This feature is only available in the Canary channel" /> **optional** `initialValue`: A value to use during the initial render of a component. If this option is omitted, `useDeferredValue` will not defer during the initial render, because there's no previous version of `value` that it can render instead.
-=======
 * `value`: The value you want to defer. It can have any type.
 * **optional** `initialValue`: A value to use during the initial render of a component. If this option is omitted, `useDeferredValue` will not defer during the initial render, because there's no previous version of `value` that it can render instead.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 
 #### Dönüş değeri {/*returns*/}
 
-<<<<<<< HEAD
-- `currentValue`: İlk render esnasında, döndürülen ertelenmiş değer ile sağladığınız değer aynı olacaktır. Güncellemeler esnasında, React önce eski değerle yeniden render etmeyi dener (bu yüzden eski değeri döndürür) ve ardından arka planda yeni değer ile birlikte yeni bir render başlatır (bu yüzden güncellenmiş değeri döndürür).
-
-<Canary>
-
-In the latest React Canary versions, `useDeferredValue` returns the `initialValue` on initial render, and schedules a re-render in the background with the `value` returned.
-
-</Canary>
-=======
 - `currentValue`: During the initial render, the returned deferred value will be the `initialValue`, or the same as the value you provided. During updates, React will first attempt a re-render with the old value (so it will return the old value), and then try another re-render in the background with the new value (so it will return the updated value).
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 

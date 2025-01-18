@@ -246,69 +246,40 @@ Prop olarak özel nitelikler de verebilirsiniz, örneğin `ozelprop="herhangiBir
 `ref` niteliğine, bir ref nesnesi yerine ([`useRef`](/reference/react/useRef#manipulating-the-dom-with-a-ref) tarafından döndürülen gibi) bir fonksiyon verebilirsiniz.
 
 ```js
-<<<<<<< HEAD
-<div ref={(node) => console.log(node)} />
-```
-
-[`ref` callback'inin örnek kullanımına bakınız.](/learn/manipulating-the-dom-with-refs#how-to-manage-a-list-of-refs-using-a-ref-callback)
-
-React, `<div>` DOM düğümü ekrana eklendiğinde, `ref` callback'inizi argümanda DOM düğümü (`node`) olacak şekilde çağıracaktır. Bu `<div>` DOM düğümü kaldırıldığında ise React, `ref` callback'inizi `null` ile çağıracaktır.
-
-Ayrıca React, siz *farklı* bir `ref` callback'i verir vermez `ref` callback'inizi çağıracaktır. Yukarıdaki örnekteki `(node) => { ... }`, her render'da farklı bir fonksiyondur. Bileşeniniz tekrar render edildiğinde *önceki* fonksiyon argümanında `null` ile, *sonraki* fonkisyon ise DOM düğümüyle çağırılacaktır.
-
-#### Parametreler {/*ref-callback-parameters*/}
-
-* `node`: Bir DOM düğümü veya `null`. React, ref bağlanınca size DOM düğümü, bağlantı kesilince ise `null` verecektir. Eğer ki her render'da `ref` callback'i için aynı fonksiyon referansını vermezseniz, callback'in geçici olarak bağlantısı kesilecek ve bileşenin her yeniden render'lanması sırasında tekrar bağlanacaktır.
-
-<Canary>
-
-#### Dönüş Değeri {/*returns*/}
-
-*  **optional** `cleanup function`: When the `ref` is detached, React will call the cleanup function. If a function is not returned by the `ref` callback, React will call the callback again with `null` as the argument when the `ref` gets detached.
-
-```js
-
-=======
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 <div ref={(node) => {
-  console.log('Attached', node);
+  console.log('Bağlı', node);
 
   return () => {
-    console.log('Clean up', node)
+    console.log('Temizlik', node)
   }
 }}>
 ```
+[`ref` geri çağırma fonksiyonunun kullanım örneğine bakın.](/learn/manipulating-the-dom-with-refs#how-to-manage-a-list-of-refs-using-a-ref-callback)
 
-<<<<<<< HEAD
-#### Uyarılar {/*caveats*/}
-=======
-[See an example of using the `ref` callback.](/learn/manipulating-the-dom-with-refs#how-to-manage-a-list-of-refs-using-a-ref-callback)
+`<div>` DOM düğümü ekrana eklendiğinde, React `ref` geri çağırma fonksiyonunuzu DOM `node` parametresiyle çağıracaktır. O `<div>` DOM düğümü kaldırıldığında, React geri çağırmadan döndürülen temizlik fonksiyonunu çağıracaktır.
 
-When the `<div>` DOM node is added to the screen, React will call your `ref` callback with the DOM `node` as the argument. When that `<div>` DOM node is removed, React will call your the cleanup function returned from the callback.
+React ayrıca, *farklı* bir `ref` geri çağırma fonksiyonu geçtiğinizde de `ref` geri çağırmanızı çağıracaktır. Yukarıdaki örnekte, `(node) => { ... }` her render işleminde farklı bir fonksiyondur. Bileşen yeniden render edildiğinde, *önceki* fonksiyon `null` parametresiyle çağrılacak ve *sonraki* fonksiyon DOM düğümüyle çağrılacaktır.
 
-React will also call your `ref` callback whenever you pass a *different* `ref` callback. In the above example, `(node) => { ... }` is a different function on every render. When your component re-renders, the *previous* function will be called with `null` as the argument, and the *next* function will be called with the DOM node.
+#### Parametreler {/*ref-callback-parameters*/}
 
-#### Parameters {/*ref-callback-parameters*/}
-
-* `node`: A DOM node. React will pass you the DOM node when the ref gets attached. Unless you pass the same function reference for the `ref` callback on every render, the callback will get temporarily cleanup and re-create during every re-render of the component.
+* `node`: Bir DOM düğümü. `ref` eklenirken, React size DOM düğümünü iletecektir. Her render işleminde `ref` geri çağırma fonksiyonu için aynı fonksiyon referansını geçmediğiniz sürece, geri çağırma fonksiyonu her bileşen yeniden render edildiğinde geçici olarak temizlenip yeniden oluşturulacaktır.
 
 <Note>
 
-#### React 19 added cleanup functions for `ref` callbacks. {/*react-19-added-cleanup-functions-for-ref-callbacks*/}
+#### React 19, `ref` geri çağırmaları için temizlik fonksiyonları ekledi. {/*react-19-added-cleanup-functions-for-ref-callbacks*/}
 
-To support backwards compatibility, if a cleanup function is not returned from the `ref` callback, `node` will be called with `null` when the `ref` is detached. This behavior will be removed in a future version.
+Geriye dönük uyumluluğu desteklemek için, `ref` geri çağırmasından bir temizlik fonksiyonu döndürülmezse, `ref` ayrıldığında `node` ile `null` çağrılacaktır. Bu davranış gelecekteki bir sürümde kaldırılacaktır.
 
 </Note>
 
-#### Returns {/*returns*/}
+#### Döndürülenler {/*returns*/}
 
-* **optional** `cleanup function`: When the `ref` is detached, React will call the cleanup function. If a function is not returned by the `ref` callback, React will call the callback again with `null` as the argument when the `ref` gets detached. This behavior will be removed in a future version.
+* **isteğe bağlı** `temizlik fonksiyonu`: `ref` ayrıldığında, React temizlik fonksiyonunu çağıracaktır. Eğer `ref` geri çağırmasından bir fonksiyon döndürülmezse, React, `ref` ayrıldığında geri çağırmayı tekrar `null` parametresiyle çağıracaktır. Bu davranış gelecekteki bir sürümde kaldırılacaktır.
 
-#### Caveats {/*caveats*/}
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+#### Uyarılar {/*caveats*/}
 
-* When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, implement the cleanup function.
-* When you pass a *different* `ref` callback, React will call the *previous* callback's cleanup function if provided. If no cleanup function is defined, the `ref` callback will be called with `null` as the argument. The *next* function will be called with the DOM node.
+* Strict Mode etkinleştirildiğinde, React **ilk gerçek kurululumdan önce bir ekstra sadece geliştirme amaçlı kurulum+temizlik döngüsü çalıştıracaktır**. Bu, temizlik mantığınızın kurulum mantığını "yansıttığını" ve kurulumun yaptığı her şeyi durdurup geri aldığından emin olan bir stres testidir. Bu, bir problem oluşturuyorsa temizlik fonksiyonunu uygulayın.
+* *Farklı* bir `ref` geri çağırma fonksiyonu geçtiğinizde, React, sağlanmışsa *önceki* geri çağırmanın temizlik fonksiyonunu çağıracaktır. Eğer temizlik fonksiyonu tanımlanmazsa, `ref` geri çağırması `null` parametresiyle çağrılacaktır. *Sonraki* fonksiyon ise DOM düğümü ile çağrılacaktır.
 
 ---
 

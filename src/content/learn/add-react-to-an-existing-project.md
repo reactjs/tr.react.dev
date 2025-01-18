@@ -20,15 +20,9 @@ Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluş
 
 Kurulumu şu şekilde yapmanızı öneririz:
 
-<<<<<<< HEAD
-1. [React tabanlı kütüphanelerden](/learn/start-a-new-react-project) birini kullanarak **uygulamanızın React bölümünü oluşturun**.
-2. **Kütüphanenizin yapılandırılmasında *base path* olarak `/some-app`'i belirtin.** (şu şekilde: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. `/some-app/` altındaki tüm isteklerin React uygulamanız tarafından işlenmesi için **sunucunuzu veya bir proxy'yi yapılandırın.** 
-=======
-1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
-2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+1. **Uygulamanızın React kısmını oluşturun** [React tabanlı frameworklerden](/learn/start-a-new-react-project) birini kullanarak.
+2. **/some-app'i *temel yol* olarak belirtin** framework'ünüzün yapılandırmasında (işte nasıl yapılacağı: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Sunucunuzu veya bir proxy'yi yapılandırın** böylece `/some-app/` altındaki tüm istekler React uygulamanız tarafından işlenir.
 
 Bu, uygulamanızın React bölümünün bu kütüphanelerde oluşturulmuş [en iyi uygulamalardan yararlanabilmesini sağlar](/learn/start-a-new-react-project#can-i-use-react-without-a-framework).
 

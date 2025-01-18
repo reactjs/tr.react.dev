@@ -208,17 +208,11 @@ async function getAlbums() {
 
 **Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-<<<<<<< HEAD
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özellikli framework'lerle veri fetch etme.
-- [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
-- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
-=======
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
-- Reading the value of a cached Promise with [`use`](/reference/react/use)
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense) gibi Suspense özellikli çatıları veri getirme
+- Bileşen kodunu [`lazy`](/reference/react/lazy) ile tembel yükleme
+- Önbelleğe alınmış bir Promise değerini [`use`](/reference/react/use) ile okuma
 
-Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
+Suspense, veri bir efekt ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
 
 Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
@@ -490,17 +484,10 @@ Bu değişiklikle birlikte, `Biography`'i göstermek `Albums`'ün yüklenmesini 
 
 Sekans şu şekilde olacaktır:
 
-<<<<<<< HEAD
 1. Eğer `Biography` henüz yüklenmediyse, `BigSpinner` tüm içerik alanının yerine gösterilir.
-1. `Biography` yüklenmeyi tamamladığında, `BigSpinner` içerik ile değiştirilir.
-1. Eğer `Albums` henüz yüklenmediyse, `AlbumsGlimmer` `Albums` ve üst elemanı `Panel`'in yerine gösterilir.
-1. Son olarak, `Albums` yüklenmeyi tamamladığında, `AlbumsGlimmer`'ın yerine geçer.
-=======
-1. If `Biography` hasn't loaded yet, `BigSpinner` is shown in place of the entire content area.
-2. Once `Biography` finishes loading, `BigSpinner` is replaced by the content.
-3. If `Albums` hasn't loaded yet, `AlbumsGlimmer` is shown in place of `Albums` and its parent `Panel`.
-4. Finally, once `Albums` finishes loading, it replaces `AlbumsGlimmer`.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+2. `Biography` yüklemeyi bitirdiğinde, `BigSpinner` içerikle yer değiştirilir.
+3. Eğer `Albums` henüz yüklenmediyse, `AlbumsGlimmer` `Albums` ve onun üst bileşeni `Panel` yerine gösterilir.
+4. Son olarak, `Albums` yüklemeyi bitirdiğinde, `AlbumsGlimmer` yerine geçer.
 
 <Sandpack>
 

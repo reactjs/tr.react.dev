@@ -309,10 +309,10 @@
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "Rules of React"
+      "sectionHeader": "React Kuralları"
     },
     {
-      "title": "Overview",
+      "title": "Genel Bakış",
       "path": "/reference/rules",
       "routes": [
         {
@@ -324,21 +324,21 @@
           "path": "/reference/rules/react-calls-components-and-hooks"
         },
         {
-          "title": "Rules of Hooks",
+          "title": "Hook Kuralları",
           "path": "/reference/rules/rules-of-hooks"
         }
       ]
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "React Server Components"
+      "sectionHeader": "React Sunucu Bileşenleri"
     },
     {
-      "title": "Server Components",
+      "title": "Sunucu Bileşenleri",
       "path": "/reference/rsc/server-components"
     },
     {
-      "title": "Server Functions",
+      "title": "Sunucu Fonksiyonları",
       "path": "/reference/rsc/server-functions"
     },
     {

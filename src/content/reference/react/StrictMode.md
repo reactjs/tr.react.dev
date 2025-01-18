@@ -42,16 +42,10 @@ root.render(
 
 Strict Modu aşağıdaki geliştirici davranışlarını etkinleştirir:
 
-<<<<<<< HEAD
-- Bileşenleriniz, saf olmayan renderdan kaynaklanan hataları bulmak için [ekstra bir sürede yeniden render edilecektir.](#fixing-bugs-found-by-double-rendering-in-development)
-- Bileşenleriniz eksik Efekt temizlemesinin neden olduğu hataları bulmak için [ekstra bir sürede Efektleri yeniden çalıştıracaktır.](#fixing-bugs-found-by-re-running-effects-in-development)
-- Bileşenleriniz [kullanımdan kaldırılan API kullanımı için kontrol edilecektir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
-=======
 - Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
 - Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
 - Your components will [re-run refs callbacks an extra time](#fixing-bugs-found-by-re-running-ref-callbacks-in-development) to find bugs caused by missing ref cleanup.
 - Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 #### Prop'lar {/*props*/}
 
@@ -92,16 +86,10 @@ Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da
 
 Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
-<<<<<<< HEAD
-- Bileşenleriniz, saf olmayan renderdan kaynaklanan hataları bulmak için [ekstra bir sürede yeniden render edilecektir.](#fixing-bugs-found-by-double-rendering-in-development)
-- Bileşenleriniz eksik Efekt temizlemesinin neden olduğu hataları bulmak için [ekstra bir sürede Efektleri yeniden çalıştıracaktır.](#fixing-bugs-found-by-re-running-effects-in-development)
-- Bileşenleriniz [kullanımdan kaldırılan API kullanımı içiin kontrol edilecektir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
-=======
 - Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
 - Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
 - Your components will [re-run ref callbacks an extra time](#fixing-bugs-found-by-cleaning-up-and-re-attaching-dom-refs-in-development) to find bugs caused by missing ref cleanup.
 - Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 **Tüm bu kontroller yalnızca geliştirme sırasında çalıştırılar ve canlıda herhangi bir etkisi yoktur.**
 
@@ -835,18 +823,15 @@ Strict Modu olmadan, Efektinizde temizleme işlevinin eksik olduğunu gözden ka
 [Efekt temizleme işlevini uygulama hakkında daha fazla bilgi edinin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
 ---
-### Fixing bugs found by re-running ref callbacks in development {/*fixing-bugs-found-by-re-running-ref-callbacks-in-development*/}
+### Geliştirmede ref geri çağırmalarını yeniden çalıştırarak bulunan hataları düzeltme {/*fixing-bugs-found-by-re-running-ref-callbacks-in-development*/}
 
-<<<<<<< HEAD
-### Strict Modunda kullanımdan kaldırılan özelliklerle ilgili hataların düzeltilmesi {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
-=======
-Strict Mode can also help find bugs in [callbacks refs.](/learn/manipulating-the-dom-with-refs)
+Strict Mode, [geri çağırma ref'lerinde](/learn/manipulating-the-dom-with-refs) hata bulmanıza da yardımcı olabilir.
 
-Every callback `ref` has some setup code and may have some cleanup code. Normally, React calls setup when the element is *created* (is added to the DOM) and calls cleanup when the element is *removed* (is removed from the DOM).
+Her geri çağırma `ref`'inin bazı kurulum kodları ve temizlik kodları olabilir. Normalde, React, öğe *oluşturulduğunda* (DOM'a eklendiğinde) kurulum yapar ve öğe *kaldırıldığında* (DOM'dan çıkarıldığında) temizlik yapar.
 
-When Strict Mode is on, React will also run **one extra setup+cleanup cycle in development for every callback `ref`.** This may feel surprising, but it helps reveal subtle bugs that are hard to catch manually.
+Strict Mode açıkken, React, **geliştirme sırasında her geri çağırma `ref`'i için bir ekstra kurulum+temizlik döngüsü çalıştırır.** Bu durum şaşırtıcı gelebilir, ancak manuel olarak yakalanması zor olan ince hataları ortaya çıkarmaya yardımcı olur.
 
-Consider this example, which allows you to select an animal and then scroll to one of them. Notice when you switch from "Cats" to "Dogs", the console logs show that the number of animals in the list keeps growing, and the "Scroll to" buttons stop working:
+Bu örneği göz önünde bulundurun, burada bir hayvanı seçip ona kaydırma yapabilirsiniz. "Kediler"den "Köpekler"e geçerken, konsolda hayvan sayısının listede sürekli arttığını ve "Scroll to" butonlarının çalışmayı durdurduğunu fark edeceksiniz:
 
 <Sandpack>
 
@@ -966,9 +951,9 @@ li {
 </Sandpack>
 
 
-**This is a production bug!** Since the ref callback doesn't remove animals from the list in the cleanup, the list of animals keeps growing. This is a memory leak that can cause performance problems in a real app, and breaks the behavior of the app.
+**Bu bir üretim hatasıdır!** Ref geri çağırma fonksiyonu temizlikte hayvanları listeden kaldırmadığı için, hayvan listesi büyümeye devam eder. Bu, gerçek bir uygulamada performans problemlerine yol açabilecek bir bellek sızıntısıdır ve uygulamanın davranışını bozar.
 
-The issue is the ref callback doesn't cleanup after itself:
+Sorun, ref geri çağırma fonksiyonunun kendisini temizlememesidir:
 
 ```js {6-8}
 <li
@@ -1107,9 +1092,9 @@ li {
 
 </Sandpack>
 
-**With Strict Mode, you immediately see that there is a problem**. Strict Mode runs an extra setup+cleanup cycle for every callback ref. This callback ref has no cleanup logic, so it adds refs but doesn't remove them. This is a hint that you're missing a cleanup function.
+**Strict Mode ile, hemen bir problem olduğunu görürsünüz.** Strict Mode, her geri çağırma ref'i için ekstra bir kurulum+temizlik döngüsü çalıştırır. Bu geri çağırma ref'inin temizlik mantığı yoktur, bu yüzden ref'leri ekler ama kaldırmaz. Bu, bir temizlik fonksiyonunu eksik bıraktığınızı gösteren bir ipucudur.
 
-Strict Mode lets you eagerly find mistakes in callback refs. When you fix your callback by adding a cleanup function in Strict Mode, you *also* fix many possible future production bugs like the "Scroll to" bug from before:
+Strict Mode, geri çağırma ref'lerinde hataları erken bir şekilde bulmanıza olanak tanır. Callback fonksiyonunuzu Strict Mode'da bir temizlik fonksiyonu ekleyerek düzelttiğinizde, aynı zamanda önceki "Scroll to" hatası gibi birçok olası gelecekteki üretim hatasını da düzeltmiş oluyorsunuz.
 
 <Sandpack>
 
@@ -1129,7 +1114,7 @@ root.render(
 );
 ```
 
-```js src/App.js active
+```js src/App.js aktif
 import { useRef, useState } from "react";
 
 export default function AnimalFriends() {
@@ -1172,13 +1157,13 @@ export default function AnimalFriends() {
                   const list = itemsRef.current;
                   const item = {animal, node};
                   list.push({animal: animal, node});
-                  console.log(`✅ Adding animal to the map. Total animals: ${list.length}`);
+                  console.log(`✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: ${list.length}`);
                   if (list.length > 10) {
-                    console.log('❌ Too many animals in the list!');
+                    console.log('❌ Listede çok fazla hayvan var!');
                   }
                   return () => {
                     list.splice(list.indexOf(item));
-                    console.log(`❌ Removing animal from the map. Total animals: ${itemsRef.current.length}`);
+                    console.log(`❌ Haritadan hayvan çıkarılıyor. Toplam hayvan sayısı: ${itemsRef.current.length}`);
                   }
                 }}
               >
@@ -1234,34 +1219,26 @@ li {
 
 </Sandpack>
 
-Now on inital mount in StrictMode, the ref callbacks are all setup, cleaned up, and setup again:
+Artık StrictMode'da ilk mount sırasında, ref geri çağırmaları tamamen kurulur, temizlenir ve tekrar kurulur:
 
 ```
 ...
-✅ Adding animal to the map. Total animals: 10
+✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: 10
 ...
-❌ Removing animal from the map. Total animals: 0
+❌ Haritadan hayvan çıkarılıyor. Toplam hayvan sayısı: 0
 ...
-✅ Adding animal to the map. Total animals: 10
+✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: 10
 ```
 
-**This is expected.** Strict Mode confirms that the ref callbacks are cleaned up correctly, so the size never grows above the expected amount. After the fix, there are no memory leaks, and all the features work as expected.
+**Bu beklenen bir durumdur.** Strict Mode, ref geri çağırmalarının doğru bir şekilde temizlendiğini onaylar, böylece boyut hiç beklenen miktarın üzerine çıkmaz. Düzeltmeden sonra, bellek sızıntısı yoktur ve tüm özellikler beklediği gibi çalışır.
 
-Without Strict Mode, it was easy to miss the bug until you clicked around to app to notice broken features. Strict Mode made the bugs appear right away, before you push them to production.
+Strict Mode olmadan, hatayı fark edene kadar uygulamada tıklamadan bozuk özellikleri gözlemlemek zordu. Strict Mode, hataları hemen görünür hale getirdi, böylece bunları üretime göndermeden önce fark edebilirsiniz.
 
 --- 
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+### Strict Mode tarafından etkinleştirilen deprecation uyarılarını düzeltme {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
 React, `<StrictMode>` içindeki herhangi bir bileşende aşağıdaki kullanımdan kaldırılan API'lardan biri kullanılıyorsa sizi uyarır:
 
-<<<<<<< HEAD
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount) gibi `UNSAFE_` sınıf yaşam döngüsü metodları. [Alternatiflerini inceleyin](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Eski context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), ve [`getChildContext`](/reference/react/Component#getchildcontext)). [Alternatiflerini inceleyin](/reference/react/createContext)
-* Eski dizi referansları ([`this.refs`](/reference/react/Component#refs)). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
-=======
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [See alternatives.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles)
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+* `UNSAFE_` sınıf yaşam döngüsü yöntemleri, örneğin [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [Alternatiflere bakın.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles)
 
 Bu API'lar özellikle eski [sınıf bileşenlerinde](/reference/react/Component) kullanılırdı o yüzden güncel uygulamalarda nadiren karşınıza çıkar.

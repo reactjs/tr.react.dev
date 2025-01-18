@@ -1,10 +1,10 @@
 ---
-title: Server Components
+title: Sunucu Bileşenleri
 ---
 
 <RSC>
 
-Server Components are for use in [React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+Sunucu Bileşenleri aşağıdakilerde kullanım içindir [React Sunucu Bileşenleri](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
 
 </RSC>
 
@@ -22,11 +22,7 @@ Bu ayrı ortam, React Sunucu Bileşenlerinde "sunucu" olarak adlandırılır. Su
 
 #### Sunucu Bileşenleri için nasıl destek oluşturulur? {/*how-do-i-build-support-for-server-components*/}
 
-<<<<<<< HEAD
-React 19'daki React Sunucu Bileşenleri kararlıdır ve büyük sürümler arasında bozulmaz, ancak bir React Sunucu Bileşenleri paketleyicisi veya çatısı uygulamak için kullanılan temel API'ler semver'i takip etmez ve React 19.x sürümleri arasında minor sürümlerde bozulabilir.
-=======
-While React Server Components in React 19 are stable and will not break between minor versions, the underlying APIs used to implement a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x. 
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+React 19'daki React Sunucu Bileşenleri kararlı ve alt sürümler arasında kırılmayacak olsa da, bir React Sunucu Bileşenleri paketleyicisini veya çatısını uygulamak için kullanılan temel API'ler semver'ı takip etmez ve React 19.x'teki alt sürümler arasında kırılabilir. 
 
 React Sunucu Bileşenleri'ni bir paketleyici veya çatı olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte, React Sunucu Bileşenleri'ni uygulamak için kullanılan API'leri stabilize etmek amacıyla paketleyiciler ve çatılarla çalışmaya devam edeceğiz.
 
@@ -191,19 +187,15 @@ Sunucu Bileşenleri, sunucudan tekrar alınıp veriye erişip yeniden render edi
 
 ### Sunucu Bileşenlerine Etkileşim Ekleme {/*adding-interactivity-to-server-components*/}
 
-Sunucu Bileşenleri tarayıcıya gönderilmez, bu yüzden `useState` gibi etkileşimli API'leri kullanamazlar. Sunucu Bileşenlerine etkileşim eklemek için, bunları `"use client"` yönergesini kullanarak İstemci Bileşeni ile birleştirebilirsiniz.
+Sunucu Bileşenleri tarayıcıya gönderilmez, bu yüzden `useState` gibi etkileşimli API'leri kullanamazlar. Sunucu Bileşenlerine etkileşim eklemek için, bunları `"use client"` direktifini kullanarak İstemci Bileşeni ile birleştirebilirsiniz.
 
 <Note>
 
-#### Sunucu Bileşenleri için bir yönerge yoktur. {/*there-is-no-directive-for-server-components*/}
+#### Sunucu Bileşenleri için bir direktif yoktur. {/*there-is-no-directive-for-server-components*/}
 
-<<<<<<< HEAD
-Yaygın bir yanlış anlama, Sunucu Bileşenlerinin `"use server"` ile belirtildiğidir, ancak Sunucu Bileşenleri için bir yönerge yoktur. `"use server"` yönergesi, Sunucu İşlemleri (Server Actions) için kullanılır.
-=======
-A common misunderstanding is that Server Components are denoted by `"use server"`, but there is no directive for Server Components. The `"use server"` directive is used for Server Functions.
->>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
+Yaygın bir yanlış anlama, Sunucu Bileşenlerinin `"use server"` ile gösterildiğidir, ancak Sunucu Bileşenleri için bir direktif yoktur. Sunucu İşlevleri için `"use server"` direktifi kullanılır.
 
-Daha fazla bilgi için, [Yönergeler](/reference/rsc/directives) dökümantasyonuna bakın.
+Daha fazla bilgi için, [Direktifler](/reference/rsc/directives) dökümantasyonuna bakın.
 
 </Note>
 

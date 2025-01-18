@@ -373,7 +373,7 @@ input, button {
 </Sandpack>
 
 ---
-### DOM elemanı yerine, kontrolör (imperative handle) kullanma.  {/*dom-elemanı-yerine-kontrolör-imperative-handle-kullanma*/}
+### DOM elemanı yerine, kontrolör (imperative handle) kullanma. {/*dom-elemanı-yerine-kontrolör-imperative-handle-kullanma*/}
 {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
 
 Tüm DOM elemanlarını erişime açmak yerine, daha kısıtlı yöntem setine sahip özel bir nesne olan *kontrolör* (imperative handle)  kullanabilirsiniz. Bu işlem için, DOM elemanını belirtmek amaçlı ayrı bir ref tanımlamanız gereklidir:
