@@ -36,13 +36,13 @@ function SearchPage() {
 
 #### Parametreler {/*parameters*/}
 
-* `value`: The value you want to defer. It can have any type.
-* **optional** `initialValue`: A value to use during the initial render of a component. If this option is omitted, `useDeferredValue` will not defer during the initial render, because there's no previous version of `value` that it can render instead.
+* `value`: Ertelemek istediğiniz değer. Herhangi bir türde olabilir.
+* **isteğe bağlı** `initialValue`: Bir bileşenin ilk render'ı sırasında kullanılacak bir değer. Bu seçenek atlanırsa, `useDeferredValue` ilk render sırasında erteleme yapmaz, çünkü yerine render edebileceği bir önceki `value` versiyonu yoktur.
 
 
 #### Dönüş değeri {/*returns*/}
 
-- `currentValue`: During the initial render, the returned deferred value will be the `initialValue`, or the same as the value you provided. During updates, React will first attempt a re-render with the old value (so it will return the old value), and then try another re-render in the background with the new value (so it will return the updated value).
+- `currentValue`: İlk render sırasında, döndürülen ertelenmiş değer `initialValue` olacaktır veya sağladığınız değerle aynı olur. Güncellemeler sırasında, React önce eski değerle yeniden render yapmayı dener (bu yüzden eski değeri döndürecektir), ardından arka planda yeni değerle bir başka yeniden render yapmayı dener (bu yüzden güncellenmiş değeri döndürecektir).
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
@@ -146,9 +146,9 @@ export default function SearchResults({ query }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -163,12 +163,12 @@ async function getData(url) {
   if (url.startsWith('/search?q=')) {
     return await getSearchResults(url.slice('/search?q='.length));
   } else {
-    throw Error('Not implemented');
+    throw Error('Uygulanmadı');
   }
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 1000);
   });
@@ -316,9 +316,9 @@ export default function SearchResults({ query }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -338,7 +338,7 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+// Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 1000);
   });
@@ -500,9 +500,9 @@ export default function SearchResults({ query }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -522,7 +522,7 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+ // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 1000);
   });
@@ -673,7 +673,7 @@ export default function App() {
 import { memo } from 'react';
 
 const SlowList = memo(function SlowList({ text }) {
-  // Log once. The actual slowdown is inside SlowItem.
+  // Bir kez logla. Gerçek yavaşlama SlowItem içinde.
   console.log('[ARTIFICIALLY SLOW] Rendering 250 <SlowItem />');
 
   let items = [];
@@ -690,7 +690,7 @@ const SlowList = memo(function SlowList({ text }) {
 function SlowItem({ text }) {
   let startTime = performance.now();
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+   // Her öğe için 1 ms hiçbir şey yapma, aşırı yavaş kodu taklit etmek için.
   }
 
   return (
