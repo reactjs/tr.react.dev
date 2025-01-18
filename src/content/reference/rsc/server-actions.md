@@ -1,11 +1,11 @@
 ---
-title: Server Actions
+title: Sunucu Eylemleri
 canary: true
 ---
 
 <Intro>
 
-Server Actions allow Client Components to call async functions executed on the server.
+Sunucu Eylemleri, İstemci Bileşenlerinin sunucuda yürütülen asenkron işlevleri çağırmasına olanak tanır.
 
 </Intro>
 
@@ -13,29 +13,29 @@ Server Actions allow Client Components to call async functions executed on the s
 
 <Note>
 
-#### How do I build support for Server Actions? {/*how-do-i-build-support-for-server-actions*/}
+#### Sunucu Eylemleri için nasıl destek oluşturabilirim? {/*how-do-i-build-support-for-server-actions*/}
 
-While Server Actions in React 19 are stable and will not break between major versions, the underlying APIs used to implement Server Actions in a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x. 
+React 19'daki Sunucu Eylemleri kararlı ve büyük sürümler arasında kırılmayacak olsa da, bir React Sunucu Bileşenleri paketleyicisinde veya çatısında Sunucu Eylemlerini uygulamak için kullanılan temel API'ler semver'ı takip etmez ve React 19.x'teki küçük sürümler arasında kırılabilir. 
 
-To support Server Actions as a bundler or framework, we recommend pinning to a specific React version, or using the Canary release. We will continue working with bundlers and frameworks to stabilize the APIs used to implement Server Actions in the future.
+Sunucu Eylemlerini bir paketleyici veya çerçeve olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte Sunucu Eylemlerini uygulamak için kullanılan API'leri stabilize etmek için paketleyiciler ve çerçevelerle çalışmaya devam edeceğiz.
 
 </Note>
 
-When a Server Action is defined with the `"use server"` directive, your framework will automatically create a reference to the server function, and pass that reference to the Client Component. When that function is called on the client, React will send a request to the server to execute the function, and return the result.
+Bir Sunucu Eylemi `“use server”` direktifi tanımlandığında, çatınız otomatik olarak sunucu işlevine bir referans oluşturacak ve bu referansı İstemci Bileşenine aktaracaktır. Bu işlev istemcide çağrıldığında, React işlevi yürütmek için sunucuya bir istek gönderecek ve sonucu return edecektir.
 
-Server Actions can be created in Server Components and passed as props to Client Components, or they can be imported and used in Client Components.
+Sunucu Eylemleri, Sunucu Bileşenlerinde oluşturulabilir ve İstemci Bileşenlerine destek olarak aktarılabilir veya İstemci Bileşenlerinde içe aktarılabilir ve kullanılabilir
 
-### Creating a Server Action from a Server Component {/*creating-a-server-action-from-a-server-component*/}
+### Sunucu Bileşeninden Sunucu Eylemi Oluşturma {/*creating-a-server-action-from-a-server-component*/}
 
-Server Components can define Server Actions with the `"use server"` directive:
+Sunucu Bileşenleri `“use server”` yönergesi ile Sunucu Eylemleri tanımlayabilir:
 
 ```js [[2, 7, "'use server'"], [1, 5, "createNoteAction"], [1, 12, "createNoteAction"]]
-// Server Component
+// Sunucu Bileşeni
 import Button from './Button';
 
 function EmptyNote () {
   async function createNoteAction() {
-    // Server Action
+    // Sunucu Eylemi
     'use server';
     
     await db.notes.create();
@@ -45,7 +45,7 @@ function EmptyNote () {
 }
 ```
 
-When React renders the `EmptyNote` Server Component, it will create a reference to the `createNoteAction` function, and pass that reference to the `Button` Client Component. When the button is clicked, React will send a request to the server to execute the `createNoteAction` function with the reference provided:
+React, `EmptyNote` Sunucu Bileşenini işlediğinde, `createNoteAction` fonksiyonuna bir referans oluşturacak ve bu referansı `Button` İstemci Bileşenine aktaracaktır. Butona tıklandığında, React, sağlanan referansla `createNoteAction` fonksiyonunu çalıştırmak için sunucuya bir istek gönderecektir:
 
 ```js {5}
 "use client";
@@ -53,16 +53,16 @@ When React renders the `EmptyNote` Server Component, it will create a reference 
 export default function Button({onClick}) { 
   console.log(onClick); 
   // {$$typeof: Symbol.for("react.server.reference"), $$id: 'createNoteAction'}
-  return <button onClick={() => onClick()}>Create Empty Note</button>
+  return <button onClick={() => onClick()}>Boş Not Oluştur</button>
 }
 ```
 
-For more, see the docs for [`"use server"`](/reference/rsc/use-server).
+Daha fazlası için [`“use server”`](/reference/rsc/use-server) dokümanlarına bakın.
 
 
-### Importing Server Actions from Client Components {/*importing-server-actions-from-client-components*/}
+### İstemci Bileşenlerinden Sunucu Eylemlerini İçe Aktarma {/*importing-server-actions-from-client-components*/}
 
-Client Components can import Server Actions from files that use the `"use server"` directive:
+İstemci Bileşenleri, `“use server”` direktifini kullanan dosyalardan Sunucu Eylemlerini içe aktarabilir:
 
 ```js [[1, 3, "createNoteAction"]]
 "use server";
@@ -73,7 +73,7 @@ export async function createNoteAction() {
 
 ```
 
-When the bundler builds the `EmptyNote` Client Component, it will create a reference to the `createNoteAction` function in the bundle. When the `button` is clicked, React will send a request to the server to execute the `createNoteAction` function using the reference provided:
+Paketleyici `EmptyNote` İstemci Bileşenini oluşturduğunda, paketteki `createNoteAction` işlevine bir referans oluşturacaktır. Butona tıklandığında React, sağlanan referansı kullanarak `createNoteAction` fonksiyonunu çalıştırmak için sunucuya bir istek gönderecektir:
 
 ```js [[1, 2, "createNoteAction"], [1, 5, "createNoteAction"], [1, 7, "createNoteAction"]]
 "use client";
@@ -86,18 +86,18 @@ function EmptyNote() {
 }
 ```
 
-For more, see the docs for [`"use server"`](/reference/rsc/use-server).
+Daha fazlası için [`“use server”`](/reference/rsc/use-server) dokümanlarına bakın.
 
-### Composing Server Actions with Actions {/*composing-server-actions-with-actions*/}
+### Sunucu Eylemlerini Eylemlerle Oluşturma {/*composing-server-actions-with-actions*/}
 
-Server Actions can be composed with Actions on the client:
+Sunucu Eylemleri, istemci üzerindeki Eylemlerle birlikte oluşturulabilir:
 
 ```js [[1, 3, "updateName"]]
 "use server";
 
 export async function updateName(name) {
   if (!name) {
-    return {error: 'Name is required'};
+    return {error: 'İsim gereklidir'};
   }
   await db.users.updateName(name);
 }
@@ -128,21 +128,21 @@ function UpdateName() {
   return (
     <form action={submitAction}>
       <input type="text" name="name" disabled={isPending}/>
-      {state.error && <span>Failed: {state.error}</span>}
+      {state.error && <span>Başarısız: {state.error}</span>}
     </form>
   )
 }
 ```
 
-This allows you to access the `isPending` state of the Server Action by wrapping it in an Action on the client.
+Bu, Sunucu Eyleminin `isPending` durumuna, istemcideki bir Eyleme sararak erişmenizi sağlar.
 
-For more, see the docs for [Calling a Server Action outside of `<form>`](/reference/rsc/use-server#calling-a-server-action-outside-of-form)
+Daha fazlası için [Sunucu Eylemini `<form>` dışında çağırma](/reference/rsc/use-server#calling-a-server-action-outside-of-form) dokümanlarına bakın
 
-### Form Actions with Server Actions {/*form-actions-with-server-actions*/}
+### Sunucu Eylemleri ile Form Eylemleri {/*form-actions-with-server-actions*/}
 
-Server Actions work with the new Form features in React 19.
+Sunucu Eylemleri, React 19'daki yeni Form özellikleri ile çalışır.
 
-You can pass a Server Action to a Form to automatically submit the form to the server:
+Formu otomatik olarak sunucuya göndermek için bir Form'a bir Sunucu Eylemi aktarabilirsiniz:
 
 
 ```js [[1, 3, "updateName"], [1, 7, "updateName"]]
@@ -159,13 +159,13 @@ function UpdateName() {
 }
 ```
 
-When the Form submission succeeds, React will automatically reset the form. You can add `useActionState` to access the pending state, last response, or to support progressive enhancement.
+Form gönderimi başarılı olduğunda, React formu otomatik olarak sıfırlayacaktır. Pending state, son yanıta erişmek veya aşamalı geliştirmeyi desteklemek için `useActionState` ekleyebilirsiniz.
 
-For more, see the docs for [Server Actions in Forms](/reference/rsc/use-server#server-actions-in-forms).
+Daha fazla bilgi için [Formlarda Sunucu Eylemleri](/reference/rsc/use-server#server-actions-in-forms) dokümanlarına bakın.
 
-### Server Actions with `useActionState` {/*server-actions-with-use-action-state*/}
+### `UseActionState` ile Sunucu Eylemleri {/*server-actions-with-use-action-state*/}
 
-You can compose Server Actions with `useActionState` for the common case where you just need access to the action pending state and last returned response:
+Yalnızca pending state'ine ve son döndürülen yanıta erişmeniz gereken yaygın durumlar için Sunucu Eylemlerini `useActionState` ile oluşturabilirsiniz:
 
 ```js [[1, 3, "updateName"], [1, 6, "updateName"], [2, 6, "submitAction"], [2, 9, "submitAction"]]
 "use client";
@@ -178,19 +178,19 @@ function UpdateName() {
   return (
     <form action={submitAction}>
       <input type="text" name="name" disabled={isPending}/>
-      {state.error && <span>Failed: {state.error}</span>}
+      {state.error && <span>Başarısız: {state.error}</span>}
     </form>
   );
 }
 ```
 
-When using `useActionState` with Server Actions, React will also automatically replay form submissions entered before hydration finishes. This means users can interact with your app even before the app has hydrated.
+Sunucu Eylemleri ile `useActionState` kullanıldığında, React ayrıca hidrasyon tamamlanmadan önce girilen form gönderimlerini otomatik olarak yeniden oynatacaktır. Bu, kullanıcıların uygulama hidratlanmadan önce bile uygulamanızla etkileşime girebileceği anlamına gelir.
 
-For more, see the docs for [`useActionState`](/reference/react-dom/hooks/useFormState).
+Daha fazlası için [`useActionState`](/reference/react-dom/hooks/useFormState) dokümanlarına bakın.
 
-### Progressive enhancement with `useActionState` {/*progressive-enhancement-with-useactionstate*/}
+### `UseActionState` ile aşamalı iyileştirme {/*progressive-enhancement-with-useactionstate*/}
 
-Server Actions also support progressive enhancement with the third argument of `useActionState`.
+Sunucu Eylemleri ayrıca `useActionState` üçüncü bağımsız değişkeni ile aşamalı geliştirmeyi de destekler.
 
 ```js [[1, 3, "updateName"], [1, 6, "updateName"], [2, 6, "/name/update"], [3, 6, "submitAction"], [3, 9, "submitAction"]]
 "use client";
@@ -208,6 +208,6 @@ function UpdateName() {
 }
 ```
 
-When the <CodeStep step={2}>permalink</CodeStep> is provided to `useActionState`, React will redirect to the provided URL if the form is submitted before the JavaScript bundle loads.
+<CodeStep step={2}>permalink</CodeStep> `useActionState` için sağlandığında, form JavaScript paketi yüklenmeden önce gönderilirse React sağlanan URL'ye yönlendirecektir.
 
-For more, see the docs for [`useActionState`](/reference/react-dom/hooks/useFormState).
+Daha fazlası için [`useActionState`](/reference/react-dom/hooks/useFormState) dokümanlarına bakın.

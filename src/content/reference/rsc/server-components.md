@@ -1,5 +1,5 @@
 ---
-title: React Server Components
+title: React Sunucu Bileşenleri
 canary: true
 ---
 
