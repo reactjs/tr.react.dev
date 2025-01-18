@@ -33,13 +33,7 @@ Ekranda bir girdi göstermek için, [tarayıcıya yerleşik `<input>`](https://d
 
 `<input>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#props) destekler.
 
-<Canary>
-
-React's extensions to the `formAction` prop are currently only available in React's Canary and experimental channels. In stable releases of React, `formAction` works only as a [built-in browser HTML component](/reference/react-dom/components#all-html-components). Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
-
-</Canary>
-
-[`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): String ya da fonksiyon. Tipi `type="submit"` ve `type="image"` olan girdiler için `<form action>` üst bileşenini geçersiz kılar. `action`'a bir URL geçildiği zaman form, standart bir HTML formu gibi davranacaktır. Bir fonksiyon iletildiğinde ise form gönderimini o fonksiyon halledecektir. Daha fazla bilgi için [`<form action>`](/reference/react-dom/components/form#props) kısmına bakın.
+- [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): Bir string veya fonksiyon. `type="submit"` ve `type="image"` için ebeveyn `<form action>`'ı geçersiz kılar. Bir URL `action` parametresine geçtiğinde form, standart bir HTML formu gibi davranır. Bir fonksiyon `formAction` parametresine geçtiğinde, fonksiyon form gönderimini işler. [`<form action>`](/reference/react-dom/components/form#props) bölümüne bakın.
 
 Aşağıdaki proplardan birini ileterek [girdileri kontrollü hale](#controlling-an-input-with-a-state-variable) getirebilirsiniz:
 
@@ -109,7 +103,7 @@ Aşağıdaki `<input>` proplar hem kontrollü hem de kontrolsüz girdilerle ilgi
 
 ## Kullanım {/*usage*/}
 
-### Farklı tiplerde girdileri gösterme{/*displaying-inputs-of-different-types*/}
+### Farklı tiplerde girdileri gösterme {/*displaying-inputs-of-different-types*/}
 
 Ekranda `<input>`'u görülemek için render ediniz. Varsayılan olarak metin girdisi olacaktır. Onay kutusu için `type="checkbox"`, radyo butonu için `type="radio"` [veya diğer girdi tiplerinden birini](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types) gönderebilirsiniz.
 <Sandpack>
@@ -242,7 +236,7 @@ input { margin: 5px; }
 
 ---
 
-### Formu gönderirken girdi değerlerini okuma{/*reading-the-input-values-when-submitting-a-form*/}
+### Formu gönderirken girdi değerlerini okuma {/*reading-the-input-values-when-submitting-a-form*/}
 
 [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) ve girdilerinizi çevreleyen bir [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) ekleyin. Eklediğiniz buton `<form onSubmit>` olay yöneticisini çağıracaktır. Varsayılan olarak, tarayıcı form verilerini bulunduğunuz URL'e gönderecek ve sayfayı yenileyecektir. `e.preventDefault()` ifadesini çağırarak bu işlemi engelleyebilirsiniz. Form verilerini [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) ile okuyabilirsiniz.
 <Sandpack>
@@ -589,7 +583,7 @@ function handleChange(e) {
 Eğerbunlar sorununuzu çözmezse, girdiniz her klavye girişinde DOM'dan silinip geri ekleniyor olabilir. Bu durum, her yeniden renderda [durumu sıfırlama](/learn/preserving-and-resetting-state)'dan kaynaklı olabilir. Örneğin, eğer girdiniz ya da onun üstündeki elemanlardan biri süreki farklı `key` niteliği alıyor olabilir veya bileşen tanımlarını iç içe yerleştirmenizden kaynaklı olabilir (iç içe yerleştirmeler desteklenmemektedir ve "iç" bileşenin her zaman farklı bir ağaç olarak kabul edilmesine neden olur).
 ---
 
-### "Bir bileşen kontrolsüz girişi kontrol ediyor" hatası alıyorum  {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
+### "Bir bileşen kontrolsüz girişi kontrol ediyor" hatası alıyorum {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
 
 
 Bileşeninize `value` değeri verdiyseniz, yaşam döngüsü boyunca string olarak kalmalıdır.

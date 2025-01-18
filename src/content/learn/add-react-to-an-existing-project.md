@@ -20,9 +20,9 @@ Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluş
 
 Kurulumu şu şekilde yapmanızı öneririz:
 
-1. [React tabanlı kütüphanelerden](/learn/start-a-new-react-project) birini kullanarak **uygulamanızın React bölümünü oluşturun**.
-2. **Kütüphanenizin yapılandırılmasında *base path* olarak `/some-app`'i belirtin.** (şu şekilde: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. `/some-app/` altındaki tüm isteklerin React uygulamanız tarafından işlenmesi için **sunucunuzu veya bir proxy'yi yapılandırın.** 
+1. **Uygulamanızın React kısmını oluşturun** [React tabanlı frameworklerden](/learn/start-a-new-react-project) birini kullanarak.
+2. **/some-app'i *temel yol* olarak belirtin** framework'ünüzün yapılandırmasında (işte nasıl yapılacağı: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Sunucunuzu veya bir proxy'yi yapılandırın** böylece `/some-app/` altındaki tüm istekler React uygulamanız tarafından işlenir.
 
 Bu, uygulamanızın React bölümünün bu kütüphanelerde oluşturulmuş [en iyi uygulamalardan yararlanabilmesini sağlar](/learn/start-a-new-react-project#can-i-use-react-without-a-framework).
 

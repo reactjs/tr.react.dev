@@ -85,7 +85,7 @@ function Button() {
 }
 ```
 
-Bu eski yöntem hala çalışıyor olsa da, **yeni yazılan kodun contextini [`useContext()`](/reference/react/useContext) ile okumak daha uygundur:**
+Although this older way still works, **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
 
 ```js
 function Button() {

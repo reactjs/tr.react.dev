@@ -4,7 +4,7 @@ title: Hızlı Başlangıç
 
 <Intro>
 
-React dokümantasyonuna hoşgeldiniz! Bu sayfa, günlük hayatınızda kullanacağınız React konseptlerinin %80'ine bir giriş yapacaktır.
+React dökümantasyonuna hoş geldiniz! Bu sayfa, günlük olarak kullanacağınız React kavramlarının %80'ine giriş yapmanızı sağlayacaktır.
 
 </Intro>
 
