@@ -4,7 +4,7 @@ title: startTransition
 
 <Intro>
 
-`startTransition` lets you render a part of the UI in the background.
+`startTransition`, UI'nin bir kısmını arka planda render etmenizi sağlar.
 
 ```js
 startTransition(action)
@@ -41,7 +41,7 @@ function TabContainer() {
 
 #### Parametreler {/*parameters*/}
 
-* `action`: A function that updates some state by calling one or more [`set` functions](/reference/react/useState#setstate). React calls `action` immediately with no parameters and marks all state updates scheduled synchronously during the `action` function call as Transitions. Any async calls awaited in the `action` will be included in the transition, but currently require wrapping any `set` functions after the `await` in an additional `startTransition` (see [Troubleshooting](/reference/react/useTransition#react-doesnt-treat-my-state-update-after-await-as-a-transition)). State updates marked as Transitions will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators).
+* `action`: Bir veya birden fazla [`set` fonksiyonu](/reference/react/useState#setstate) çağırarak bazı Stateleri güncelleyen bir fonksiyon. React, `action` fonksiyonunu hemen parametresiz olarak çağırır ve `action` fonksiyonu çağrıldığında senkronize olarak planlanan tüm State güncellemelerini Transition olarak işaretler. `action` içinde beklenen herhangi bir async çağrı, geçişe dahil edilecektir, ancak şu anda `await` sonrası herhangi bir `set` fonksiyonunun ek bir `startTransition` içinde sarılması gerekmektedir (bkz. [Sorun Giderme](/reference/react/useTransition#react-doesnt-treat-my-state-update-after-await-as-a-transition)). Transition olarak işaretlenen durum güncellemeleri [bloklanmayan](#marking-a-state-update-as-a-non-blocking-transition) olacak ve [istenmeyen yükleme göstergelerini göstermeyecektir.](/reference/react/useTransition#preventing-unwanted-loading-indicators).
 
 #### Dönen değerler {/*returns*/}
 
@@ -61,7 +61,7 @@ function TabContainer() {
 
 * Transition güncellemeleri, metin girişlerini kontrol etmek için kullanılamaz.
 
-* If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that may be removed in a future release.
+* Birden fazla devam eden Transition varsa, React şu anda bunları birleştirir. Bu, gelecekteki bir sürümde kaldırılabilecek bir sınırlamadır.
 
 ---
 
