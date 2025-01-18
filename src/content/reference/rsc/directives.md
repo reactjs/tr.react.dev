@@ -1,10 +1,10 @@
 ---
-title: Directives
+title: Direktifler
 ---
 
 <RSC>
 
-Directives are for use in [React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+Direktifler, [React Sunucu Bileşenleri](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) içinde kullanılmak içindir.
 
 </RSC>
 
