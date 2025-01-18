@@ -48,13 +48,9 @@ The `use` API returns the value that was read from the resource like the resolve
 
 #### Caveats {/*caveats*/}
 
-* The `use` API must be called inside a Component or a Hook.
-* When fetching data in a [Server Component](/reference/rsc/server-components), prefer `async` and `await` over `use`. `async` and `await` pick up rendering from the point where `await` was invoked, whereas `use` re-renders the component after the data is resolved.
-* Prefer creating Promises in [Server Components](/reference/rsc/server-components) and passing them to [Client Components](/reference/rsc/use-client) over creating Promises in Client Components. Promises created in Client Components are recreated on every render. Promises passed from a Server Component to a Client Component are stable across re-renders. [See this example](#streaming-data-from-server-to-client).
-
-* `use` API, bir bileşen veya bir hook'un içerisinde çağırılmak zorundadır..
-* Bir [Sunucu Bileşeni](/reference/react/use-server) içerisinde veri çekilirken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, oluşturma işlemini `await` ifadesinin çağırıldığı noktadan devam ettirirken; `use`, veri çözümlendikten sonra bileşeni yeniden oluşturur.
-* [Sunucu Bileşeni](/reference/react/use-server) içerisinde Promise oluşturup [İstemci Bileşeni](/reference/react/use-client) içerisine aktarmak yerine Promise'i [İstemci Bileşeni](/reference/react/use-client) içerisinde oluşturmayı tercih edin. İstemci Bileşeni içerisine eklenen Promise'ler her oluşturma işlemi sırasında yeniden oluşturulur. Sunucu Bileşeninden İstemci Bileşenine aktarılan Promise'ler ise yeniden oluşturma işlemleri sırasında sabit kalır. [Bu örneği inceleyin](#streaming-data-from-server-to-client).
+* `use` API'si bir Bileşen veya Hook içinde çağrılmalıdır.
+* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde veri çekerken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, `await` çağrıldığında render'a başlar, oysa `use` veri çözümlandıktan sonra bileşeni yeniden render eder.
+* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde Promise'ler oluşturmayı ve bunları [İstemci Bileşenleri](/reference/rsc/use-client) içine iletmeyi, İstemci Bileşenleri içinde Promise'ler oluşturmaya tercih edin. Client Bileşenleri içinde oluşturulan Promise'ler her render işleminde yeniden oluşturulur. Sunucu Bileşenlerin'den İstemci Bileşenleri'e geçirilen Promise'ler yeniden render'lar arasında sabittir. [Bu örneğe bakın](#streaming-data-from-server-to-client).
 ---
 
 ## Kullanım {/*usage*/}
@@ -281,9 +277,9 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-// TODO: update this example to use
-// the Codesandbox Server Component
-// demo environment once it is created
+// TODO: Bu örneği, 
+// Codesandbox Sunucu Bileşeni
+// demo ortamı oluşturulduğunda güncelleyin
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
@@ -388,9 +384,9 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-// TODO: update this example to use
-// the Codesandbox Sunucu Component
-// demo environment once it is created
+// TODO: Bu örneği, 
+// Codesandbox Sunucu Bileşeni
+// demo ortamı oluşturulduğunda güncelleyin
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
