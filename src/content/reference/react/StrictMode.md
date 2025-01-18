@@ -42,9 +42,10 @@ root.render(
 
 Strict Modu aşağıdaki geliştirici davranışlarını etkinleştirir:
 
-- Bileşenleriniz, saf olmayan renderdan kaynaklanan hataları bulmak için [ekstra bir sürede yeniden render edilecektir.](#fixing-bugs-found-by-double-rendering-in-development)
-- Bileşenleriniz eksik Efekt temizlemesinin neden olduğu hataları bulmak için [ekstra bir sürede Efektleri yeniden çalıştıracaktır.](#fixing-bugs-found-by-re-running-effects-in-development)
-- Bileşenleriniz [kullanımdan kaldırılan API kullanımı için kontrol edilecektir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
+- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
+- Your components will [re-run refs callbacks an extra time](#fixing-bugs-found-by-re-running-ref-callbacks-in-development) to find bugs caused by missing ref cleanup.
+- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
 
 #### Prop'lar {/*props*/}
 
@@ -85,9 +86,10 @@ Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da
 
 Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
-- Bileşenleriniz, saf olmayan renderdan kaynaklanan hataları bulmak için [ekstra bir sürede yeniden render edilecektir.](#fixing-bugs-found-by-double-rendering-in-development)
-- Bileşenleriniz eksik Efekt temizlemesinin neden olduğu hataları bulmak için [ekstra bir sürede Efektleri yeniden çalıştıracaktır.](#fixing-bugs-found-by-re-running-effects-in-development)
-- Bileşenleriniz [kullanımdan kaldırılan API kullanımı içiin kontrol edilecektir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
+- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
+- Your components will [re-run ref callbacks an extra time](#fixing-bugs-found-by-cleaning-up-and-re-attaching-dom-refs-in-development) to find bugs caused by missing ref cleanup.
+- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
 
 **Tüm bu kontroller yalnızca geliştirme sırasında çalıştırılar ve canlıda herhangi bir etkisi yoktur.**
 
@@ -821,14 +823,422 @@ Strict Modu olmadan, Efektinizde temizleme işlevinin eksik olduğunu gözden ka
 [Efekt temizleme işlevini uygulama hakkında daha fazla bilgi edinin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
 ---
+### Geliştirmede ref geri çağırmalarını yeniden çalıştırarak bulunan hataları düzeltme {/*fixing-bugs-found-by-re-running-ref-callbacks-in-development*/}
 
-### Strict Modunda kullanımdan kaldırılan özelliklerle ilgili hataların düzeltilmesi {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
+Strict Mode, [geri çağırma ref'lerinde](/learn/manipulating-the-dom-with-refs) hata bulmanıza da yardımcı olabilir.
+
+Her geri çağırma `ref`'inin bazı kurulum kodları ve temizlik kodları olabilir. Normalde, React, öğe *oluşturulduğunda* (DOM'a eklendiğinde) kurulum yapar ve öğe *kaldırıldığında* (DOM'dan çıkarıldığında) temizlik yapar.
+
+Strict Mode açıkken, React, **geliştirme sırasında her geri çağırma `ref`'i için bir ekstra kurulum+temizlik döngüsü çalıştırır.** Bu durum şaşırtıcı gelebilir, ancak manuel olarak yakalanması zor olan ince hataları ortaya çıkarmaya yardımcı olur.
+
+Bu örneği göz önünde bulundurun, burada bir hayvanı seçip ona kaydırma yapabilirsiniz. "Kediler"den "Köpekler"e geçerken, konsolda hayvan sayısının listede sürekli arttığını ve "Scroll to" butonlarının çalışmayı durdurduğunu fark edeceksiniz:
+
+<Sandpack>
+
+```js src/index.js
+import { createRoot } from 'react-dom/client';
+import './styles.css';
+
+import App from './App';
+
+const root = createRoot(document.getElementById("root"));
+// ❌ Not using StrictMode.
+root.render(<App />);
+```
+
+```js src/App.js active
+import { useRef, useState } from "react";
+
+export default function AnimalFriends() {
+  const itemsRef = useRef([]);
+  const [animalList, setAnimalList] = useState(setupAnimalList);
+  const [animal, setAnimal] = useState('cat');
+
+  function scrollToAnimal(index) {
+    const list = itemsRef.current;
+    const {node} = list[index];
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+  
+  const animals = animalList.filter(a => a.type === animal)
+  
+  return (
+    <>
+      <nav>
+        <button onClick={() => setAnimal('cat')}>Cats</button>
+        <button onClick={() => setAnimal('dog')}>Dogs</button>
+      </nav>
+      <hr />
+      <nav>
+        <span>Scroll to:</span>{animals.map((animal, index) => (
+          <button key={animal.src} onClick={() => scrollToAnimal(index)}>
+            {index}
+          </button>
+        ))}
+      </nav>
+      <div>
+        <ul>
+          {animals.map((animal) => (
+              <li
+                key={animal.src}
+                ref={(node) => {
+                  const list = itemsRef.current;
+                  const item = {animal: animal, node}; 
+                  list.push(item);
+                  console.log(`✅ Adding animal to the map. Total animals: ${list.length}`);
+                  if (list.length > 10) {
+                    console.log('❌ Too many animals in the list!');
+                  }
+                  return () => {
+                    // 🚩 No cleanup, this is a bug!
+                  }
+                }}
+              >
+                <img src={animal.src} />
+              </li>
+            ))}
+          
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupAnimalList() {
+  const animalList = [];
+  for (let i = 0; i < 10; i++) {
+    animalList.push({type: 'cat', src: "https://loremflickr.com/320/240/cat?lock=" + i});
+  }
+  for (let i = 0; i < 10; i++) {
+    animalList.push({type: 'dog', src: "https://loremflickr.com/320/240/dog?lock=" + i});
+  }
+
+  return animalList;
+}
+
+```
+
+```css
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  text-align: center;
+}
+
+button {
+  margin: .25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
+```
+
+</Sandpack>
+
+
+**Bu bir üretim hatasıdır!** Ref geri çağırma fonksiyonu temizlikte hayvanları listeden kaldırmadığı için, hayvan listesi büyümeye devam eder. Bu, gerçek bir uygulamada performans problemlerine yol açabilecek bir bellek sızıntısıdır ve uygulamanın davranışını bozar.
+
+Sorun, ref geri çağırma fonksiyonunun kendisini temizlememesidir:
+
+```js {6-8}
+<li
+  ref={node => {
+    const list = itemsRef.current;
+    const item = {animal, node};
+    list.push(item);
+    return () => {
+      // 🚩 No cleanup, this is a bug!
+    }
+  }}
+</li>
+```
+
+Now let's wrap the original (buggy) code in `<StrictMode>`:
+
+<Sandpack>
+
+```js src/index.js
+import { createRoot } from 'react-dom/client';
+import {StrictMode} from 'react';
+import './styles.css';
+
+import App from './App';
+
+const root = createRoot(document.getElementById("root"));
+// ✅ Using StrictMode.
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+```js src/App.js active
+import { useRef, useState } from "react";
+
+export default function AnimalFriends() {
+  const itemsRef = useRef([]);
+  const [animalList, setAnimalList] = useState(setupAnimalList);
+  const [animal, setAnimal] = useState('cat');
+
+  function scrollToAnimal(index) {
+    const list = itemsRef.current;
+    const {node} = list[index];
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+  
+  const animals = animalList.filter(a => a.type === animal)
+  
+  return (
+    <>
+      <nav>
+        <button onClick={() => setAnimal('cat')}>Cats</button>
+        <button onClick={() => setAnimal('dog')}>Dogs</button>
+      </nav>
+      <hr />
+      <nav>
+        <span>Scroll to:</span>{animals.map((animal, index) => (
+          <button key={animal.src} onClick={() => scrollToAnimal(index)}>
+            {index}
+          </button>
+        ))}
+      </nav>
+      <div>
+        <ul>
+          {animals.map((animal) => (
+              <li
+                key={animal.src}
+                ref={(node) => {
+                  const list = itemsRef.current;
+                  const item = {animal: animal, node} 
+                  list.push(item);
+                  console.log(`✅ Adding animal to the map. Total animals: ${list.length}`);
+                  if (list.length > 10) {
+                    console.log('❌ Too many animals in the list!');
+                  }
+                  return () => {
+                    // 🚩 No cleanup, this is a bug!
+                  }
+                }}
+              >
+                <img src={animal.src} />
+              </li>
+            ))}
+          
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupAnimalList() {
+  const animalList = [];
+  for (let i = 0; i < 10; i++) {
+    animalList.push({type: 'cat', src: "https://loremflickr.com/320/240/cat?lock=" + i});
+  }
+  for (let i = 0; i < 10; i++) {
+    animalList.push({type: 'dog', src: "https://loremflickr.com/320/240/dog?lock=" + i});
+  }
+
+  return animalList;
+}
+
+```
+
+```css
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  text-align: center;
+}
+
+button {
+  margin: .25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
+```
+
+</Sandpack>
+
+**Strict Mode ile, hemen bir problem olduğunu görürsünüz.** Strict Mode, her geri çağırma ref'i için ekstra bir kurulum+temizlik döngüsü çalıştırır. Bu geri çağırma ref'inin temizlik mantığı yoktur, bu yüzden ref'leri ekler ama kaldırmaz. Bu, bir temizlik fonksiyonunu eksik bıraktığınızı gösteren bir ipucudur.
+
+Strict Mode, geri çağırma ref'lerinde hataları erken bir şekilde bulmanıza olanak tanır. Callback fonksiyonunuzu Strict Mode'da bir temizlik fonksiyonu ekleyerek düzelttiğinizde, aynı zamanda önceki "Scroll to" hatası gibi birçok olası gelecekteki üretim hatasını da düzeltmiş oluyorsunuz.
+
+<Sandpack>
+
+```js src/index.js
+import { createRoot } from 'react-dom/client';
+import {StrictMode} from 'react';
+import './styles.css';
+
+import App from './App';
+
+const root = createRoot(document.getElementById("root"));
+// ✅ Using StrictMode.
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+```js src/App.js aktif
+import { useRef, useState } from "react";
+
+export default function AnimalFriends() {
+  const itemsRef = useRef([]);
+  const [animalList, setAnimalList] = useState(setupAnimalList);
+  const [animal, setAnimal] = useState('cat');
+
+  function scrollToAnimal(index) {
+    const list = itemsRef.current;
+    const {node} = list[index];
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+  
+  const animals = animalList.filter(a => a.type === animal)
+  
+  return (
+    <>
+      <nav>
+        <button onClick={() => setAnimal('cat')}>Cats</button>
+        <button onClick={() => setAnimal('dog')}>Dogs</button>
+      </nav>
+      <hr />
+      <nav>
+        <span>Scroll to:</span>{animals.map((animal, index) => (
+          <button key={animal.src} onClick={() => scrollToAnimal(index)}>
+            {index}
+          </button>
+        ))}
+      </nav>
+      <div>
+        <ul>
+          {animals.map((animal) => (
+              <li
+                key={animal.src}
+                ref={(node) => {
+                  const list = itemsRef.current;
+                  const item = {animal, node};
+                  list.push({animal: animal, node});
+                  console.log(`✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: ${list.length}`);
+                  if (list.length > 10) {
+                    console.log('❌ Listede çok fazla hayvan var!');
+                  }
+                  return () => {
+                    list.splice(list.indexOf(item));
+                    console.log(`❌ Haritadan hayvan çıkarılıyor. Toplam hayvan sayısı: ${itemsRef.current.length}`);
+                  }
+                }}
+              >
+                <img src={animal.src} />
+              </li>
+            ))}
+          
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupAnimalList() {
+  const animalList = [];
+  for (let i = 0; i < 10; i++) {
+    animalList.push({type: 'cat', src: "https://loremflickr.com/320/240/cat?lock=" + i});
+  }
+  for (let i = 0; i < 10; i++) {
+    animalList.push({type: 'dog', src: "https://loremflickr.com/320/240/dog?lock=" + i});
+  }
+
+  return animalList;
+}
+
+```
+
+```css
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  text-align: center;
+}
+
+button {
+  margin: .25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
+```
+
+</Sandpack>
+
+Artık StrictMode'da ilk mount sırasında, ref geri çağırmaları tamamen kurulur, temizlenir ve tekrar kurulur:
+
+```
+...
+✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: 10
+...
+❌ Haritadan hayvan çıkarılıyor. Toplam hayvan sayısı: 0
+...
+✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: 10
+```
+
+**Bu beklenen bir durumdur.** Strict Mode, ref geri çağırmalarının doğru bir şekilde temizlendiğini onaylar, böylece boyut hiç beklenen miktarın üzerine çıkmaz. Düzeltmeden sonra, bellek sızıntısı yoktur ve tüm özellikler beklediği gibi çalışır.
+
+Strict Mode olmadan, hatayı fark edene kadar uygulamada tıklamadan bozuk özellikleri gözlemlemek zordu. Strict Mode, hataları hemen görünür hale getirdi, böylece bunları üretime göndermeden önce fark edebilirsiniz.
+
+--- 
+### Strict Mode tarafından etkinleştirilen deprecation uyarılarını düzeltme {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
 React, `<StrictMode>` içindeki herhangi bir bileşende aşağıdaki kullanımdan kaldırılan API'lardan biri kullanılıyorsa sizi uyarır:
 
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount) gibi `UNSAFE_` sınıf yaşam döngüsü metodları. [Alternatiflerini inceleyin](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Eski context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), ve [`getChildContext`](/reference/react/Component#getchildcontext)). [Alternatiflerini inceleyin](/reference/react/createContext)
-* Eski dizi referansları ([`this.refs`](/reference/react/Component#refs)). [Alternatiflerini inceleyin](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
+* `UNSAFE_` sınıf yaşam döngüsü yöntemleri, örneğin [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [Alternatiflere bakın.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles)
 
 Bu API'lar özellikle eski [sınıf bileşenlerinde](/reference/react/Component) kullanılırdı o yüzden güncel uygulamalarda nadiren karşınıza çıkar.

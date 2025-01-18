@@ -1,13 +1,13 @@
 ---
 title: "'use client'"
 titleForTitleTag: "'use client' directive"
-canary: true
 ---
 
-<Canary>
+<RSC>
 
-`'use client'` sadece [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
-</Canary>
+`'use client'` is for use with [React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+
+</RSC>
 
 
 <Intro>
@@ -268,9 +268,9 @@ Serileştirilebilir prop'lar şunları içerir:
   * [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
   * [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) ve [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
 * [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
-* Düz [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): [nesne başlatıcıları](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) ile oluşturulan, serileştirilebilir özelliklere sahip olanlar
-* [Server Actions](/reference/rsc/use-server) olan işlevler
-* İstemci veya Sunucu Bileşen öğeleri (JSX)
+* Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): those created with [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), with serializable properties
+* Functions that are [Server Functions](/reference/rsc/server-functions)
+* Client or Server Component elements (JSX)
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Özellikle, bunlar desteklenmemektedir:

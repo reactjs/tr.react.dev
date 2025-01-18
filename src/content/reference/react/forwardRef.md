@@ -2,6 +2,14 @@
 title: forwardRef
 ---
 
+<Deprecated>
+
+In React 19, `forwardRef` is no longer necessary. Pass `ref` as a prop instead.
+
+`forwardRef` will deprecated in a future release. Learn more [here](/blog/2024/04/25/react-19#ref-as-a-prop).
+
+</Deprecated>
+
 <Intro>
 
 `forwardRef`, bileşeninizin bir DOM elemanını, üst bileşene [ref](/learn/manipulating-the-dom-with-refs) (referans) ile iletmenize olanak sağlar.
@@ -365,7 +373,7 @@ input, button {
 </Sandpack>
 
 ---
-### DOM elemanı yerine, kontrolör (imperative handle) kullanma.  {/*dom-elemanı-yerine-kontrolör-imperative-handle-kullanma*/}
+### DOM elemanı yerine, kontrolör (imperative handle) kullanma. {/*dom-elemanı-yerine-kontrolör-imperative-handle-kullanma*/}
 {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
 
 Tüm DOM elemanlarını erişime açmak yerine, daha kısıtlı yöntem setine sahip özel bir nesne olan *kontrolör* (imperative handle)  kullanabilirsiniz. Bu işlem için, DOM elemanını belirtmek amaçlı ayrı bir ref tanımlamanız gereklidir:
