@@ -61,7 +61,7 @@ function App() {
 }
 ```
 
-#### Props {/*provider-props*/}
+#### Proplar {/*provider-props*/}
 
 * `value`: Ne kadar derin olursa olsun, bu sağlayıcının içindeki contexti okuyan tüm bileşenlere aktarmak istediğiniz değer. Context değeri herhangi bir türde olabilir. Sağlayıcı içinde [`useContext(SomeContext)`](/reference/react/useContext) kullanan bir bileşen,
 üzerindeki en içte bulunan ilgili context sağlayıcısının `value` değerini alır.
@@ -85,7 +85,7 @@ function Button() {
 }
 ```
 
-Although this older way still works, **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+Bu eski yöntem hala çalışsa da, **yeni yazılan kodlar bunun yerine [`useContext()`](/reference/react/useContext) ile context okumalıdır:**
 
 ```js
 function Button() {

@@ -42,10 +42,10 @@ root.render(
 
 Strict Modu aşağıdaki geliştirici davranışlarını etkinleştirir:
 
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [re-run refs callbacks an extra time](#fixing-bugs-found-by-re-running-ref-callbacks-in-development) to find bugs caused by missing ref cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- Bileşenleriniz, saf olmayan render'dan kaynaklanan hataları bulmak için [bir ekstra kez yeniden render edilmiştir](#fixing-bugs-found-by-double-rendering-in-development).
+- Bileşenleriniz, eksik Effect temizliklerinden kaynaklanan hataları bulmak için [bir ekstra kez Efekt'leri yeniden çalıştırır](#fixing-bugs-found-by-re-running-effects-in-development).
+- Bileşenleriniz, eksik ref temizliklerinden kaynaklanan hataları bulmak için [bir ekstra kez ref geri çağırmalarını yeniden çalıştırır](#fixing-bugs-found-by-re-running-ref-callbacks-in-development).
+- Bileşenleriniz, [deprecate edilmiş API'lerin kullanımına karşı kontrol edilir](#fixing-deprecation-warnings-enabled-by-strict-mode).
 
 #### Prop'lar {/*props*/}
 
@@ -86,10 +86,10 @@ Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da
 
 Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [re-run ref callbacks an extra time](#fixing-bugs-found-by-cleaning-up-and-re-attaching-dom-refs-in-development) to find bugs caused by missing ref cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- Bileşenleriniz, saf olmayan render'dan kaynaklanan hataları bulmak için [bir ekstra kez yeniden render edilir](#fixing-bugs-found-by-double-rendering-in-development).
+- Bileşenleriniz, eksik Effect temizliklerinden kaynaklanan hataları bulmak için [bir ekstra kez Effect'leri yeniden çalıştırır](#fixing-bugs-found-by-re-running-effects-in-development).
+- Bileşenleriniz, eksik ref temizliklerinden kaynaklanan hataları bulmak için [bir ekstra kez ref geri çağırmalarını yeniden çalıştırır](#fixing-bugs-found-by-cleaning-up-and-re-attaching-dom-refs-in-development).
+- Bileşenleriniz, [deprecate edilmiş API'lerin kullanımına karşı kontrol edilir](#fixing-deprecation-warnings-enabled-by-strict-mode).
 
 **Tüm bu kontroller yalnızca geliştirme sırasında çalıştırılar ve canlıda herhangi bir etkisi yoktur.**
 
