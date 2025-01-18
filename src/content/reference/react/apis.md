@@ -20,11 +20,11 @@ title: "Yerleşik React API'leri"
 
 ## Kaynak API'ları {/*resource-apis*/}
 
-*Resources* can be accessed by a component without having them as part of their state. For example, a component can read a message from a Promise or read styling information from a context.
+*Kaynaklar*, bir bileşen tarafından durumlarının bir parçası olmadan erişilebilir. Örneğin, bir bileşen, bir Promise'den mesaj okuyabilir veya bir context'ten stil bilgisi alabilir.
 
-To read a value from a resource, use this API:
+Bir kaynaktan değer okumak için bu API'yi kullanın:
 
-* [`use`](/reference/react/use) lets you read the value of a resource like a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
+* [`use`](/reference/react/use), bir kaynağın değerini okumayı sağlar, örneğin bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context).
 
 ```js
 function MessageComponent({ messagePromise }) {
