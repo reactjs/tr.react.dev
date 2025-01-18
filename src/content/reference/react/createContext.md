@@ -61,7 +61,7 @@ function App() {
 }
 ```
 
-#### Props {/*provider-props*/}
+#### Proplar {/*provider-props*/}
 
 * `value`: Ne kadar derin olursa olsun, bu sağlayıcının içindeki contexti okuyan tüm bileşenlere aktarmak istediğiniz değer. Context değeri herhangi bir türde olabilir. Sağlayıcı içinde [`useContext(SomeContext)`](/reference/react/useContext) kullanan bir bileşen,
 üzerindeki en içte bulunan ilgili context sağlayıcısının `value` değerini alır.
