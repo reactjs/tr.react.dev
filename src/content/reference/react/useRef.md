@@ -449,7 +449,7 @@ button { display: block; margin-bottom: 20px; }
 
 #### Kendi bileşeninize bir ref'i açığa çıkarma {/*exposing-a-ref-to-your-own-component*/}
 
-Sometimes, you may want to let the parent component manipulate the DOM inside of your component. For example, maybe you're writing a `MyInput` component, but you want the parent to be able to focus the input (which the parent has no access to). You can create a `ref` in the parent and pass the `ref` as prop to the child component. Read a [detailed walkthrough](/learn/manipulating-the-dom-with-refs#accessing-another-components-dom-nodes) here.
+Bazen, ebeveyn bileşenin, bileşeninizin içindeki DOM'u manipüle etmesine izin vermek isteyebilirsiniz. Örneğin, belki bir `MyInput` bileşeni yazıyorsunuz, ancak ebeveynin input'a odaklanabilmesini (ebeveynin buna erişimi yoktur) istiyorsunuz. Ebeveyn içinde bir `ref` oluşturabilir ve `ref`'i prop olarak çocuk bileşene iletebilirsiniz. [Detaylı bir rehber için buraya bakın.](/learn/manipulating-the-dom-with-refs#accessing-another-components-dom-nodes)
 
 <Sandpack>
 
@@ -556,7 +556,7 @@ Konsolda bir hata alabilirsiniz:
 
 <ConsoleBlock level="error">
 
-TypeError: Cannot read properties of null
+TypeError: Null'un özellikleri okunamıyor
 
 </ConsoleBlock>
 
@@ -575,7 +575,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-And then add `ref` to the list of props your component accepts and pass `ref` as a prop to the relevent child [built-in component](/reference/react-dom/components/common) like this:
+Ve ardından `ref`'i, bileşeninizin kabul ettiği props listesine ekleyin ve `ref`'i ilgili [yerleşik bileşene](/reference/react-dom/components/common) prop olarak iletin, şöyle:
 
 ```js {1,6}
 function MyInput({ value, onChange, ref }) {

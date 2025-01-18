@@ -38,7 +38,7 @@ function MyInput({ ref }) {
 
 #### Parametreler {/*parameters*/}
 
-* `ref`: The `ref` you received as a prop to the `MyInput` component.
+* `ref`: `MyInput` bileşenine prop olarak aldığınız `ref`.
 
 * `createHandle`: Herhangi bir argüman almayan ve açığa çıkarmak istediğiniz ref tanımlayıcısını döndüren bir fonksiyondur. Bu ref tanımlayıcısı herhangi bir tipte olabilir. Genellikle, açığa çıkarmak istediğiniz metotların bulunduğu bir nesne döndürürsünüz.
 
@@ -46,7 +46,7 @@ function MyInput({ ref }) {
 
 <Note>
 
-Starting with React 19, [`ref` is available a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef) 
+React 19 ile birlikte, [`ref` bir prop olarak mevcuttur.](/blog/2024/12/05/react-19#ref-as-a-prop) React 18 ve öncesinde, `ref`'i [`forwardRef`'den](/reference/react/forwardRef) almak gerekiyordu.
 
 </Note>
 
@@ -60,7 +60,7 @@ Starting with React 19, [`ref` is available a prop.](/blog/2024/12/05/react-19#r
 
 ### Özel bir ref tanımlayıcısını üst elemana açığa çıkarma {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
 
-To expose a DOM node to the parent element, pass in the `ref` prop to the node.
+Bir DOM düğümünü ebeveyn elemana açığa çıkarmak için, `ref` prop'unu düğüme iletin.
 
 ```js {2}
 function MyInput({ ref }) {
@@ -68,7 +68,7 @@ function MyInput({ ref }) {
 };
 ```
 
-With the code above, [a ref to `MyInput` will receive the `<input>` DOM node.](/learn/manipulating-the-dom-with-refs) However, you can expose a custom value instead. To customize the exposed handle, call `useImperativeHandle` at the top level of your component:
+Yukarıdaki kodla, [`MyInput`'e ait bir ref, `<input>` DOM düğümünü alacaktır.](/learn/manipulating-the-dom-with-refs) Ancak bunun yerine özel bir değer de açığa çıkarabilirsiniz. Açığa çıkan handle'ı özelleştirmek için, bileşeninizin üst seviyesinde `useImperativeHandle` çağırın:
 
 ```js {4-8}
 import { useImperativeHandle } from 'react';
@@ -84,7 +84,7 @@ function MyInput({ ref }) {
 };
 ```
 
-Note that in the code above, the `ref` is no longer passed to the `<input>`.
+Yukarıdaki kodda, `ref`'in artık `<input>`'a iletilmediğine dikkat edin.
 
 Örneğin, `<input>` DOM düğümünün tamamını açığa çıkarmak istemiyorsunuz, ancak `focus` ve `scrollIntoView` gibi iki metodu açığa çıkarmak istiyorsunuz. Bunun için gerçek tarayıcı DOM'unu ayrı bir ref içinde tutun. Ardından, yalnızca üst elemanın çağırmasını istediğiniz metotlara sahip bir tanımlayıcıyı açığa çıkarmak için `useImperativeHandle`'ı kullanın:
 
