@@ -248,7 +248,7 @@ Modal'lar oluştururken [WAI-ARIA Modal Yazma Uygulamaları](https://www.w3.org/
 
 ### React bileşenlerini React olmayan sunucu biçimlendirmesine render etme {/*rendering-react-components-into-non-react-server-markup*/}
 
-Portallar, React kökünüz React ile oluşturulmamış statik veya sunucu tarafından render edilen bir sayfanın parçasıysa yararlı olabilir. Örneğin, sayfanız Rails gibi bir sunucu çatısı ile oluşturulmuşsa, sidebar gibi statik alanlar içinde etkileşim alanları oluşturabilirsiniz. [Birden fazla ayrı React köküne](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) sahip olmakla karşılaştırıldığında, portallar, parçaları DOM'un farklı bölümlerine render edilse bile uygulamayı paylaşılan state'e sahip tek bir React ağacı olarak ele almanızı sağlar.
+Portallar, React kökünüz React ile oluşturulmamış statik veya sunucu tarafından render edilen bir sayfanın parçasıysa yararlı olabilir. Örneğin, sayfanız Rails gibi bir sunucu framework'ü ile oluşturulmuşsa, sidebar gibi statik alanlar içinde etkileşim alanları oluşturabilirsiniz. [Birden fazla ayrı React köküne](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) sahip olmakla karşılaştırıldığında, portallar, parçaları DOM'un farklı bölümlerine render edilse bile uygulamayı paylaşılan state'e sahip tek bir React ağacı olarak ele almanızı sağlar.
 
 <Sandpack>
 
