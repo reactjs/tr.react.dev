@@ -1,13 +1,6 @@
 ---
 title: use
-canary: true
 ---
-
-<Canary>
-
-`use` API şu anda sadece React'ın Test Ortamı ve deneysel kanallarında mevcuttur. React'in yayın kanalları hakkında daha fazla bilgi edinmek için [buraya göz atın](/community/versioning-policy#all-release-channels).
-
-</Canary>
 
 <Intro>
 
@@ -51,11 +44,13 @@ Bir Pomise ile çağırıldığında; `use` API, [`Suspense`](/reference/react/S
 
 `use` API, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynaktan çözümlenen veriyi döndürür.
 
-#### Önemli Hususlar {/*caveats*/}
+The `use` API returns the value that was read from the resource like the resolved value of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
 
-* `use` API, bir bileşen veya bir hook'un içerisinde çağırılmak zorundadır..
-* Bir [Sunucu Bileşeni](/reference/react/use-server) içerisinde veri çekilirken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, oluşturma işlemini `await` ifadesinin çağırıldığı noktadan devam ettirirken; `use`, veri çözümlendikten sonra bileşeni yeniden oluşturur.
-* [Sunucu Bileşeni](/reference/react/use-server) içerisinde Promise oluşturup [İstemci Bileşeni](/reference/react/use-client) içerisine aktarmak yerine Promise'i [İstemci Bileşeni](/reference/react/use-client) içerisinde oluşturmayı tercih edin. İstemci Bileşeni içerisine eklenen Promise'ler her oluşturma işlemi sırasında yeniden oluşturulur. Sunucu Bileşeninden İstemci Bileşenine aktarılan Promise'ler ise yeniden oluşturma işlemleri sırasında sabit kalır. [Bu örneği inceleyin](#streaming-data-from-server-to-client).
+#### Caveats {/*caveats*/}
+
+* `use` API'si bir Bileşen veya Hook içinde çağrılmalıdır.
+* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde veri çekerken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, `await` çağrıldığında render'a başlar, oysa `use` veri çözümlandıktan sonra bileşeni yeniden render eder.
+* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde Promise'ler oluşturmayı ve bunları [İstemci Bileşenleri](/reference/rsc/use-client) içine iletmeyi, İstemci Bileşenleri içinde Promise'ler oluşturmaya tercih edin. Client Bileşenleri içinde oluşturulan Promise'ler her render işleminde yeniden oluşturulur. Sunucu Bileşenlerin'den İstemci Bileşenleri'e geçirilen Promise'ler yeniden render'lar arasında sabittir. [Bu örneğe bakın](#streaming-data-from-server-to-client).
 ---
 
 ## Kullanım {/*usage*/}
@@ -196,17 +191,6 @@ function Button({ show, children }) {
 }
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "18.3.0-canary-9377e1010-20230712",
-    "react-dom": "18.3.0-canary-9377e1010-20230712",
-    "react-scripts": "^5.0.0"
-  },
-  "main": "/index.js"
-}
-```
-
 </Sandpack>
 
 ### Sunucudan istemciye veri aktarımı {/*streaming-data-from-server-to-client*/}
@@ -289,16 +273,13 @@ export default function App() {
 ```
 
 ```js src/index.js hidden
-// TODO: update to import from stable
-// react instead of canary once the `use`
-// API is in a stable release of React
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-// TODO: update this example to use
-// the Codesandbox Server Component
-// demo environment once it is created
+// TODO: Bu örneği, 
+// Codesandbox Sunucu Bileşeni
+// demo ortamı oluşturulduğunda güncelleyin
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
@@ -309,16 +290,6 @@ root.render(
 );
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "18.3.0-canary-9377e1010-20230712",
-    "react-dom": "18.3.0-canary-9377e1010-20230712",
-    "react-scripts": "^5.0.0"
-  },
-  "main": "/index.js"
-}
-```
 </Sandpack>
 
 <Note>
@@ -409,16 +380,13 @@ export default function App() {
 ```
 
 ```js src/index.js hidden
-// TODO: update to import from stable
-// react instead of canary once the `use`
-// API is in a stable release of React
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-// TODO: update this example to use
-// the Codesandbox Sunucu Component
-// demo environment once it is created
+// TODO: Bu örneği, 
+// Codesandbox Sunucu Bileşeni
+// demo ortamı oluşturulduğunda güncelleyin
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
@@ -432,8 +400,8 @@ root.render(
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "18.3.0-canary-9377e1010-20230712",
-    "react-dom": "18.3.0-canary-9377e1010-20230712",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-scripts": "^5.0.0",
     "react-error-boundary": "4.0.3"
   },

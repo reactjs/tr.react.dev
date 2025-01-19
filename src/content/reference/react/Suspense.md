@@ -55,21 +55,6 @@ Aşağıdaki örnekte, `Albums` bileşeni albümler listesini fetch ederken *ask
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js hidden
 import { useState } from 'react';
 import ArtistPage from './ArtistPage.js';
@@ -115,14 +100,9 @@ function Loading() {
 }
 ```
 
-```js src/Albums.js hidden
+```js src/Albums.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Albums({ artistId }) {
   const albums = use(fetchData(`/${artistId}/albums`));
@@ -136,37 +116,12 @@ export default function Albums({ artistId }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız çatıya bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir çatı içinde yer alır.
 
 let cache = new Map();
 
@@ -186,7 +141,7 @@ async function getData(url) {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+ // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -253,11 +208,11 @@ async function getAlbums() {
 
 **Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özellikli framework'lerle veri fetch etme.
-- [`lazy`](/reference/react/lazy) ile bileşen kodunu tembel yükleme (lazy-loading).
-- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense) gibi Suspense özellikli çatıları veri getirme
+- Bileşen kodunu [`lazy`](/reference/react/lazy) ile tembel yükleme
+- Önbelleğe alınmış bir Promise değerini [`use`](/reference/react/use) ile okuma
 
-Suspense, veri bir effect ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
+Suspense, veri bir efekt ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
 
 Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
@@ -285,21 +240,6 @@ Sonrasında, hepsi görüntülenmeye hazır olduğunda, hepsi birlikte tek sefer
 Aşağıdaki örnekte, hem `Biography` hem `Albums` veri fetch etmekte. Ancak, tek bir Suspense sınırı altında gruplandıkları için, bu bileşenler her zaman aynı anda "açığa çıkıyor".
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js src/App.js hidden
 import { useState } from 'react';
@@ -361,14 +301,9 @@ export default function Panel({ children }) {
 }
 ```
 
-```js src/Biography.js hidden
+```js src/Biography.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Biography({ artistId }) {
   const bio = use(fetchData(`/${artistId}/bio`));
@@ -378,41 +313,11 @@ export default function Biography({ artistId }) {
     </section>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Albums.js hidden
+```js src/Albums.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Albums({ artistId }) {
   const albums = use(fetchData(`/${artistId}/albums`));
@@ -426,37 +331,12 @@ export default function Albums({ artistId }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız çatıya bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir çatı içinde yer alır.
 
 let cache = new Map();
 
@@ -478,7 +358,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 1500);
   });
@@ -490,7 +370,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+ // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -605,26 +485,11 @@ Bu değişiklikle birlikte, `Biography`'i göstermek `Albums`'ün yüklenmesini 
 Sekans şu şekilde olacaktır:
 
 1. Eğer `Biography` henüz yüklenmediyse, `BigSpinner` tüm içerik alanının yerine gösterilir.
-1. `Biography` yüklenmeyi tamamladığında, `BigSpinner` içerik ile değiştirilir.
-1. Eğer `Albums` henüz yüklenmediyse, `AlbumsGlimmer` `Albums` ve üst elemanı `Panel`'in yerine gösterilir.
-1. Son olarak, `Albums` yüklenmeyi tamamladığında, `AlbumsGlimmer`'ın yerine geçer.
+2. `Biography` yüklemeyi bitirdiğinde, `BigSpinner` içerikle yer değiştirilir.
+3. Eğer `Albums` henüz yüklenmediyse, `AlbumsGlimmer` `Albums` ve onun üst bileşeni `Panel` yerine gösterilir.
+4. Son olarak, `Albums` yüklemeyi bitirdiğinde, `AlbumsGlimmer` yerine geçer.
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js src/App.js hidden
 import { useState } from 'react';
@@ -698,14 +563,9 @@ export default function Panel({ children }) {
 }
 ```
 
-```js src/Biography.js hidden
+```js src/Biography.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Biography({ artistId }) {
   const bio = use(fetchData(`/${artistId}/bio`));
@@ -715,41 +575,11 @@ export default function Biography({ artistId }) {
     </section>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Albums.js hidden
+```js src/Albums.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Albums({ artistId }) {
   const albums = use(fetchData(`/${artistId}/albums`));
@@ -763,37 +593,12 @@ export default function Albums({ artistId }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -815,7 +620,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -827,7 +632,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -930,21 +735,6 @@ Bu örnekte, `SearchResults` bileşeni arama sonuçlarını fetch ederken askıy
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, useState } from 'react';
 import SearchResults from './SearchResults.js';
@@ -965,14 +755,9 @@ export default function App() {
 }
 ```
 
-```js src/SearchResults.js hidden
+```js src/SearchResults.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function SearchResults({ query }) {
   if (query === '') {
@@ -992,37 +777,12 @@ export default function SearchResults({ query }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1042,7 +802,7 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1155,21 +915,6 @@ Aşağıdaki örneğe `"a"` yazın, sonuçların yüklenmesini bekleyin, sonras�
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, useState, useDeferredValue } from 'react';
 import SearchResults from './SearchResults.js';
@@ -1195,13 +940,8 @@ export default function App() {
 ```
 
 ```js src/SearchResults.js hidden
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function SearchResults({ query }) {
   if (query === '') {
@@ -1221,37 +961,12 @@ export default function SearchResults({ query }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1271,7 +986,7 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1360,21 +1075,6 @@ Hem geciktirilmiş değerler hem de [transition'lar](#preventing-already-reveale
 Bir bileşen askıya alındığında, en yakın Suspense sınırı fallback'i göstermeye geçer. Bu, zaten bir içerik gösteriliyorsa uyumsuz bir kullanıcı deneyimine yol açabilir. Bu düğmeye basmayı deneyin:
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js src/App.js
 import { Suspense, useState } from 'react';
@@ -1480,14 +1180,9 @@ function AlbumsGlimmer() {
 }
 ```
 
-```js src/Albums.js hidden
+```js src/Albums.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Albums({ artistId }) {
   const albums = use(fetchData(`/${artistId}/albums`));
@@ -1501,41 +1196,11 @@ export default function Albums({ artistId }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Biography.js hidden
+```js src/Biography.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Biography({ artistId }) {
   const bio = use(fetchData(`/${artistId}/bio`));
@@ -1545,34 +1210,9 @@ export default function Biography({ artistId }) {
     </section>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Panel.js hidden
+```js src/Panel.js
 export default function Panel({ children }) {
   return (
     <section className="panel">
@@ -1583,9 +1223,9 @@ export default function Panel({ children }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1607,7 +1247,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -1619,7 +1259,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+// Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -1746,21 +1386,6 @@ Bu, React'e state transition'ının acil olmadığını, ve zaten açığa çık
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, startTransition, useState } from 'react';
 import IndexPage from './IndexPage.js';
@@ -1867,14 +1492,9 @@ function AlbumsGlimmer() {
 }
 ```
 
-```js src/Albums.js hidden
+```js src/Albums.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Albums({ artistId }) {
   const albums = use(fetchData(`/${artistId}/albums`));
@@ -1888,41 +1508,11 @@ export default function Albums({ artistId }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Biography.js hidden
+```js src/Biography.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Biography({ artistId }) {
   const bio = use(fetchData(`/${artistId}/bio`));
@@ -1932,34 +1522,9 @@ export default function Biography({ artistId }) {
     </section>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Panel.js hidden
+```js src/Panel.js
 export default function Panel({ children }) {
   return (
     <section className="panel">
@@ -1970,9 +1535,9 @@ export default function Panel({ children }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -1994,7 +1559,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+// Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -2006,7 +1571,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });
@@ -2129,21 +1694,6 @@ Yukarıdaki örnekte, butona bastığınızda navigasyonun gerçekleştiğini g�
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, useState, useTransition } from 'react';
 import IndexPage from './IndexPage.js';
@@ -2253,14 +1803,9 @@ function AlbumsGlimmer() {
 }
 ```
 
-```js src/Albums.js hidden
+```js src/Albums.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Albums({ artistId }) {
   const albums = use(fetchData(`/${artistId}/albums`));
@@ -2274,41 +1819,11 @@ export default function Albums({ artistId }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Biography.js hidden
+```js src/Biography.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function Biography({ artistId }) {
   const bio = use(fetchData(`/${artistId}/bio`));
@@ -2318,34 +1833,9 @@ export default function Biography({ artistId }) {
     </section>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
-```js src/Panel.js hidden
+```js src/Panel.js
 export default function Panel({ children }) {
   return (
     <section className="panel">
@@ -2356,9 +1846,9 @@ export default function Panel({ children }) {
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -2380,7 +1870,7 @@ async function getData(url) {
 }
 
 async function getBio() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 500);
   });
@@ -2392,7 +1882,7 @@ async function getBio() {
 }
 
 async function getAlbums() {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
     setTimeout(resolve, 3000);
   });

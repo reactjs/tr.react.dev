@@ -256,11 +256,11 @@ export default function CatFriends() {
               key={cat}
               ref={(node) => {
                 const map = getMap();
-                if (node) {
-                  map.set(cat, node);
-                } else {
+                map.set(cat, node);
+
+                return () => {
                   map.delete(cat);
-                }
+                };
               }}
             >
               <img src={cat} />
@@ -309,16 +309,6 @@ li {
 }
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "^5.0.0"
-  }
-}
-```
-
 </Sandpack>
 
 Bu örnekte `itemsRef` tek bir DOM elemanını tutmaz. Bunun yerine öge kimliğinden DOM elemanına bir [Map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map) tutar. ([Ref'ler herhangi bir değeri tutabilir!](/learn/referencing-values-with-refs)) Her liste ögesindeki [`ref` callback'i](/reference/react-dom/components/common#ref-callback) Map'i güncellemeye özen gösterir:
@@ -328,56 +318,61 @@ Bu örnekte `itemsRef` tek bir DOM elemanını tutmaz. Bunun yerine öge kimliğ
   key={cat.id}
   ref={node => {
     const map = getMap();
-    if (node) {
-      // Add to the Map
-      map.set(cat, node);
-    } else {
-      // Remove from the Map
-      map.delete(cat);
-    }
-  }}
->
-```
-
-Bu daha sonra Map'ten tek tek DOM elemanlarını okumamıza olanak tanır.
-
-<Canary>
-
-This example shows another approach for managing the Map with a `ref` callback cleanup function.
-
-```js
-<li
-  key={cat.id}
-  ref={node => {
-    const map = getMap();
-    // Add to the Map
+    // Haritaya ekle
     map.set(cat, node);
 
     return () => {
-      // Remove from the Map
+      // Haritadan çıkar
       map.delete(cat);
     };
   }}
 >
 ```
 
-</Canary>
+Bu, daha sonra Map'ten bireysel DOM düğümlerini okumanızı sağlar.
+
+<Note>
+
+Strict Mode etkinleştirildiğinde, ref geri çağırma fonksiyonları geliştirme aşamasında iki kez çalıştırılacaktır.
+
+[Bu, geri çağırma ref'lerinde bulunan hataları nasıl bulmaya yardımcı olur](/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) hakkında daha fazla bilgi edinin.
+
+</Note>
 
 </DeepDive>
 
 ## Başka bir bileşenin DOM elemanlarına erişme {/*accessing-another-components-dom-nodes*/}
 
-`<input />` gibi bir tarayıcı elemanı çıktısı veren yerleşik bir bileşene ref koyduğunuzda React bu ref'in `current` özelliğini karşılık gelen DOM elemanına ayarlar ( tarayıcıdaki asıl `<input />` gibi).
+<Pitfall>
+Ref'ler bir kaçış mekanizmasıdır. Başka bir bileşenin DOM düğümlerini manuel olarak manipüle etmek, kodunuzu kırılgan hale getirebilir.
+</Pitfall>
 
-Ancak `<MyInput />` gibi **kendi** bileşeninize ref koymaya çalışırsanız varsayılan olarak `null` değeri alırsınız. İşte bunu gösteren bir örnek. Butona tıklamanın input'a nasıl **odaklamadığına** dikkat edin:
+Ref'leri ebeveyn bileşenden çocuk bileşenlere [diğer herhangi bir prop gibi](/learn/passing-props-to-a-component) geçirebilirsiniz.
+
+```js {3-4,9}
+import { useRef } from 'react';
+
+function MyInput({ ref }) {
+  return <input ref={ref} />;
+}
+
+function MyForm() {
+  const inputRef = useRef(null);
+  return <MyInput ref={inputRef} />
+}
+```
+
+Yukarıdaki örnekte, bir ref ebeveyn bileşen olan `MyForm` içinde oluşturulur ve çocuk bileşen olan `MyInput`'a geçirilir. `MyInput` daha sonra ref'i `<input>` öğesine iletir. Çünkü `<input>`, React'in `.current` özelliğini `<input>` DOM elemanına ayarladığı [yerleşik bir bileşendir](/reference/react-dom/components/common).
+
+`MyForm` içinde oluşturulan `inputRef` artık `MyInput` tarafından döndürülen `<input>` DOM elemanına işaret eder. `MyForm` içinde oluşturulan bir tıklama işleyicisi, `inputRef`'e erişebilir ve `focus()` çağrısı yaparak odaklanmayı `<input>`'a ayarlayabilir.
 
 <Sandpack>
 
 ```js
 import { useRef } from 'react';
 
-function MyInput(props) {
-  return <input {...props} />;
+function MyInput({ ref }) {
+  return <input ref={ref} />;
 }
 
 export default function MyForm() {
@@ -391,7 +386,7 @@ export default function MyForm() {
     <>
       <MyInput ref={inputRef} />
       <button onClick={handleClick}>
-        Focus the input
+        İnput'a odaklan
       </button>
     </>
   );
@@ -399,80 +394,19 @@ export default function MyForm() {
 ```
 
 </Sandpack>
-
-Sorunu fark etmenize yardımcı olmak için React ayrıca konsola bir hata yazdırır:
-
-<ConsoleBlock level="error">
-
-Uyarı: Fonksiyon bileşenlerine ref verilemez. Bu ref'e erişme girişimleri başarısız olacaktır. React.forwardRef()'i mi kullanmak istediniz?
-
-</ConsoleBlock>
-
-Bunun nedeni React'in varsayılan olarak bir bileşenin diğer bileşenlerin DOM elemanlarına erişmesine izin vermemesidir. Kendi alt elemanı için bile değil! Bu kasıtlı. Ref, az miktarda kullanılması gereken bir kaçış kapısıdır. _another_ bileşeninin DOM elemanlarını manuel olarak manipüle etmek kodu işlevsiz hale getirebilir.
-
-Bunun yerine DOM elemanlarını açığa çıkarmak isteyen bileşenlerin bu davranışı **seçmesi gerekir**. Bir bileşen ref'in alt elemanlarından birine "forwards" belirtebilir. `MyInput`, `forwardRef` API'sini şu şekilde kullanabilir:
-
-```js
-const MyInput = forwardRef((props, ref) => {
-  return <input {...props} ref={ref} />;
-});
-```
-
-Çalışma şekli şöyledir:
-
-1. `<MyInput ref={inputRef} />` React'e, karşılık gelen DOM elemanını `inputRef.current`'a koymasını söyler. Ancak bunu seçmek `MyInput` bileşenine bağlıdır. Varsayılan olarak bunu yapmaz.
-2. `MyInput` bileşeni `forwardRef` kullanılarak tanımlanır. `props`'tan sonra bildirilen **ikinci `ref`, parametre olarak yukarıdan `inputRef`'i almayı seçer.**
-3. `MyInput` aldığı `ref`'i içindeki `<input>`'a iletir.
-
-Şimdi input'a odaklamak için butona tıklamak işe yarar:
-
-<Sandpack>
-
-```js
-import { forwardRef, useRef } from 'react';
-
-const MyInput = forwardRef((props, ref) => {
-  return <input {...props} ref={ref} />;
-});
-
-export default function Form() {
-  const inputRef = useRef(null);
-
-  function handleClick() {
-    inputRef.current.focus();
-  }
-
-  return (
-    <>
-      <MyInput ref={inputRef} />
-      <button onClick={handleClick}>
-        Focus the input
-      </button>
-    </>
-  );
-}
-```
-
-</Sandpack>
-
-Tasarım sistemlerinde button, input gibi düşük seviyeli bileşenlerin ref'leri DOM elemanlarına iletmeleri yaygın bir modeldir. Öte yandan formlar, listeler veya sayfa bölümleri gibi üst düzey bileşenler DOM yapısına yanlışlıkla eklenen bağımlılıkları önlemek için genellikle DOM elemanlarını göstermez.
 
 <DeepDive>
 
 #### İmperatif bir işlem tanımı ile API'nin bir alt kümesini açığa çıkarma {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
 
-Yukarıdaki örnekte `MyInput` orijinal DOM input elemanını ortaya çıkarır. Bu, üst bileşenin üzerinde `focus()`'u aramasına izin verir. Ancak bu, üst bileşenin başka bir şey yapmasına da izin verir örneğin CSS stillerini değiştirmek. Nadir durumlarda açığa çıkan işlevselliği kısıtlamak isteyebilirsiniz. Bunu `useImperativeHandle` ile yapabilirsiniz:
+Yukarıdaki örnekte, `MyInput`'a geçirilen ref, orijinal DOM input öğesine iletilir. Bu, ebeveyn bileşenin `focus()` çağrısı yapmasına olanak tanır. Ancak, bu aynı zamanda ebeveyn bileşenin başka bir şey yapmasına da izin verir--örneğin, CSS stillerini değiştirmek. Nadir durumlarda, maruz kalan işlevselliği kısıtlamak isteyebilirsiniz. Bunu [`useImperativeHandle`](/reference/react/useImperativeHandle) ile yapabilirsiniz:
 
 <Sandpack>
 
 ```js
-import {
-  forwardRef, 
-  useRef, 
-  useImperativeHandle
-} from 'react';
+import { useRef, useImperativeHandle } from "react";
 
-const MyInput = forwardRef((props, ref) => {
+function MyInput({ ref }) {
   const realInputRef = useRef(null);
   useImperativeHandle(ref, () => ({
     // Sadece focus'u ortaya çıkarın
@@ -480,8 +414,8 @@ const MyInput = forwardRef((props, ref) => {
       realInputRef.current.focus();
     },
   }));
-  return <input {...props} ref={realInputRef} />;
-});
+  return <input ref={realInputRef} />;
+};
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -493,9 +427,7 @@ export default function Form() {
   return (
     <>
       <MyInput ref={inputRef} />
-      <button onClick={handleClick}>
-        Focus the input
-      </button>
+      <button onClick={handleClick}>İnput'a odaklan</button>
     </>
   );
 }
@@ -503,7 +435,7 @@ export default function Form() {
 
 </Sandpack>
 
-Burada `MyInput` içindeki `realInputRef` asıl input DOM elemanını tutar. Bununla birlikte `useImperativeHandle`, React'e üst bileşene bir ref değeri olarak kendi özel nesnenizi sağlamasını söyler. Dolayısıyla `Form` bileşeni içindeki `inputRef.current` sadece `focus` metoduna sahip olacaktır. Bu durumda "handle" ref'i DOM elemanı değildir ancak `useImperativeHandle` çağrısı içinde oluşturduğunuz özel nesnedir.
+Burada, `MyInput` içindeki `realInputRef`, gerçek input DOM düğümünü tutar. Ancak, [`useImperativeHandle`](/reference/react/useImperativeHandle) React'e, ebeveyn bileşene ref'in değeri olarak özel bir nesne sağlamasını söyler. Böylece `Form` bileşeni içindeki `inputRef.current` yalnızca `focus` metoduna sahip olacaktır. Bu durumda, ref "handle"'ı DOM düğümü değil, [`useImperativeHandle`](/reference/react/useImperativeHandle) çağrısı içinde oluşturduğunuz özel nesnedir.
 
 </DeepDive>
 
@@ -615,7 +547,7 @@ export default function TodoList() {
     const newTodo = { id: nextId++, text: text };
     flushSync(() => {
       setText('');
-      setTodos([ ...todos, newTodo]);      
+      setTodos([ ...todos, newTodo]);
     });
     listRef.current.lastChild.scrollIntoView({
       behavior: 'smooth',

@@ -55,22 +55,8 @@ Web sitenizi geliştirici araçlarında görüntülemek sayfayı yenileyin.
 ## Mobil (React Native) {/*mobile-react-native*/}
 React Developer Tools, [React Native](https://reactnative.dev/) ile oluşturulan uygulamaları incelemek için de kullanılabilir.
 
-React Developer Tools'u kullanmanın en kolay yolu, onu global olarak yüklemektir:
-```bash
-# Yarn
-yarn global add react-devtools
+[React Native](https://reactnative.dev/) ile oluşturulmuş uygulamaları incelemek için, React Developer Tools ile derinlemesine entegre olan yerleşik hata ayıklayıcı [React Native DevTools](https://reactnative.dev/docs/react-native-devtools) kullanılabilir. Tüm özellikler, yerel öğe vurgulama ve seçim dahil olmak üzere, tarayıcı uzantısı ile aynı şekilde çalışır.
 
-# Npm
-npm install -g react-devtools
-```
+[React Native'de hata ayıklama hakkında daha fazla bilgi edinin.](https://reactnative.dev/docs/debugging)
 
-Daha sonra, terminalden React Developer Tools'u açın.
-```bash
-react-devtools
-```
-
-Yerelde çalışan herhangi bir React Native uygulamasına bağlanmalıdır.
-
-> Birkaç saniye sonra React Developer Tools bağlanmazsa, uygulamayı yeniden yüklemeyi deneyin.
-
-[React Native'de hata ayıklama hakkında daha fazla bilgi edinmek için.](https://reactnative.dev/docs/debugging)
+> React Native'in 0.76'dan önceki sürümleri için, yukarıdaki [Safari ve diğer tarayıcılar](#safari-and-other-browsers) kılavuzunu takip ederek React DevTools'un bağımsız sürümünü kullanın.

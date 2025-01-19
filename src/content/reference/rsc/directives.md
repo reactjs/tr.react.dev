@@ -1,13 +1,12 @@
 ---
-title: "Direktifler"
-canary: true
+title: Direktifler
 ---
 
-<Canary>
+<RSC>
 
-Bu direktifler yalnızca [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
+Direktifler, [React Sunucu Bileşenleri](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) içinde kullanılmak içindir.
 
-</Canary>
+</RSC>
 
 <Intro>
 

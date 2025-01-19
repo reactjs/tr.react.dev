@@ -1,14 +1,13 @@
 ---
 title: "'use server'"
-titleForTitleTag: "'use server' directive"
-canary: true
+titleForTitleTag: "'use server' direktif"
 ---
 
-<Canary>
+<RSC>
 
-`'use server'` sadece [React Sunucu Bileşenlerini kullanıyorsanız](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) veya bunlarla uyumlu bir kütüphane oluşturuyorsanız gereklidir.
+`'use server'`, [React Sunucu Bileşenleri kullanımı için](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) kullanılır.
 
-</Canary>
+</RSC>
 
 
 <Intro>
@@ -25,7 +24,7 @@ canary: true
 
 ### `'use server'` {/*use-server*/}
 
-Fonksiyonu istemci tarafından çağrılabilir olarak işaretlemek için bir asenkron fonksiyon gövdesinin başına `'use server'' ekleyin. Bu işlevlere _Sunucu Eylemleri_ adını veriyoruz.
+Bir async fonksiyonunun başına `'use server'` ekleyerek fonksiyonu istemci tarafından çağrılabilir hale getirin. Bu fonksiyonlara [_Server Functions_](/reference/rsc/server-functions) denir.
 
 ```js {2}
 async function addToCart(data) {
@@ -34,28 +33,28 @@ async function addToCart(data) {
 }
 ```
 
-İstemcide bir Sunucu Eylemi çağrıldığında, sunucuya iletilen tüm bağımsız değişkenlerin serileştirilmiş bir kopyasını içeren bir ağ isteği gönderilir. Sunucu Eylemi bir değer döndürürse, bu değer serileştirilir ve istemciye döndürülür.
+Bir Sunucu Fonksiyon'u istemciden çağırdığınızda, geçilen tüm argümanların serileştirilmiş bir kopyasını içeren bir ağ isteği sunucuya yapılır. Eğer Sunucu Fonksiyon bir değer dönerse, bu değer serileştirilir ve istemciye geri gönderilir.
 
-İşlevleri tek tek `'use server'` ile işaretlemek yerine, bir dosyanın en üstüne bu yönergeyi ekleyerek o dosyadaki tüm dışa aktarımları, istemci koduna aktarılanlar da dahil olmak üzere her yerde kullanılabilecek Sunucu Eylemleri olarak işaretleyebilirsiniz.
+Fonksiyonları tek tek `'use server'` ile işaretlemek yerine, bir dosyanın başına yönergeyi ekleyebilirsiniz, böylece o dosyadaki tüm export'lar, istemci kodunda da kullanılabilen Sunucu Fonksiyon'lar olarak işaretlenir.
 
 #### Uyarılar {/*caveats*/}
-* `'use server'` fonksiyon veya modüllerinin en başında olmalıdır; içe aktarmalar dahil diğer tüm kodların üzerinde (direktiflerin üzerindeki yorumlar uygundur). Tek ya da çift tırnakla yazılmalıdırlar, ters tırnakla değil.
-* `'use server'` sadece sunucu tarafındaki dosyalarda kullanılabilir. Ortaya çıkan Sunucu Eylemleri prop'lar aracılığıyla İstemci Bileşenlerine aktarılabilir. Desteklenen [serileştirme türleri](#serializable-parameters-and-return-values) bölümüne bakın.
-* Sunucu Eylemini [istemci kodu](/reference/rsc/use-client)'ndan içe aktarmak için yönerge modül düzeyinde kullanılmalıdır
-* Temel ağ çağrıları her zaman asenkron olduğundan, `'use server'` yalnızca asenkron fonksiyonlarda kullanılabilir.
-* Sunucu Eylemlerine yönelik bağımsız değişkenleri her zaman güvenilmeyen girdi olarak değerlendirin ve tüm mutasyonları yetkilendirin. Bkz. [güvenlik hususları](#security).
-* Sunucu Eylemleri bir [Transition](/reference/react/useTransition) içinde çağrılmalıdır. [`<form action>`](/reference/react-dom/components/form#props) veya [`formAction`](/reference/react-dom/components/input#props)'a geçirilen Sunucu Eylemleri otomatik olarak bir geçişte çağrılacaktır.
-* Sunucu Eylemleri sunucu tarafı durumunu güncelleyen mutasyonlar için tasarlanmıştır; veri getirme için önerilmezler. Buna göre, Sunucu Eylemlerini uygulayan çatılar genellikle bir seferde bir eylemi işler ve dönüş değerini önbelleğe almanın bir yolu yoktur.
+* `'use server'` fonksiyonlarının veya modüllerinin başında, diğer kodlardan (imports dahil) önce olmalıdır (yönergelerden önceki yorumlar kabul edilir). Tek tırnak veya çift tırnak ile yazılmalıdır, ters tırnak kullanılamaz.
+* `'use server'` yalnızca sunucu tarafı dosyalarında kullanılabilir. Ortaya çıkan Sunucu Fonksiyon'lar, Sunucu Bileşen'lere prop'lar aracılığıyla iletilebilir. Desteklenen [serileştirme türlerine](#serializable-parameters-and-return-values) bakın.
+* Bir Sunucu Fonksiyon'ı [istemci kodu](/reference/rsc/use-client) içinden içe aktarmak için, yönerge modül seviyesinde kullanılmalıdır.
+* Altta yatan ağ çağrıları her zaman asenkron olduğu için, `'use server'` yalnızca async fonksiyonlarda kullanılabilir.
+* Sunucu Fonksiyon'lara geçirilen argümanları her zaman güvenilmeyen girişler olarak ele alın ve herhangi bir değişiklik yapmadan önce yetkilendirme yapın. [Güvenlik önlemleri](#security) için bakın.
+* Sunucu Fonksiyon'lar bir [Transition](/reference/react/useTransition) içinde çağrılmalıdır. [`<form action>`](/reference/react-dom/components/form#props) veya [`formAction`](/reference/react-dom/components/input#props) ile geçirilen Sunucu Fonksiyon'lar otomatik olarak bir geçiş içinde çağrılacaktır.
+* Sunucu Fonksiyon'lar, sunucu tarafı durumu güncelleyen değişiklikler için tasarlanmıştır; veri çekme işlemleri için önerilmezler. Bu nedenle, Sunucu Fonksiyon'ları uygulayan framework'ler genellikle her seferinde bir işlemi işler ve dönüş değerini önbelleğe almak için bir yöntem sunmazlar.
 
 ### Güvenlikle ilgili hususlar {/*security*/}
 
-Sunucu Eylemlerine yönelik bağımsız değişkenler tamamen istemci kontrolündedir. Güvenlik için bunları her zaman güvenilmeyen girdi olarak ele alın ve bağımsız değişkenleri uygun şekilde doğruladığınızdan ve kaçtığınızdan emin olun.
+Sunucu Fonksiyon'lara geçirilen argümanlar tamamen istemci tarafından kontrol edilir. Güvenlik için, her zaman bunları güvenilmeyen girişler olarak ele alın ve argümanları uygun şekilde doğrulayın ve kaçış işlemi uygulayın.
 
-Herhangi bir Sunucu Eyleminde, oturum açan kullanıcının bu eylemi gerçekleştirmesine izin verildiğini doğruladığınızdan emin olun.
+Herhangi bir Sunucu Fonksiyonu içinde, giriş yapmış kullanıcının bu işlemi gerçekleştirmeye yetkili olduğundan emin olun.
 
 <Wip>
 
-Bir Sunucu Eyleminden hassas verilerin gönderilmesini önlemek için, benzersiz değerlerin ve nesnelerin istemci koduna aktarılmasını önleyen deneysel taint API'leri vardır.
+Bir Sunucu Fonksiyonun'dan hassas veri gönderimini önlemek için, istemci koduna benzersiz değerlerin ve nesnelerin iletilmesini engellemek amacıyla deneysel taint API'leri mevcuttur.
 
 Bkz. [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueValue) ve [experimental_taintObjectReference](/reference/react/experimental_taintObjectReference).
 
@@ -63,9 +62,9 @@ Bkz. [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueVa
 
 ### Serileştirilebilir bağımsız değişkenler ve dönüş değerleri {/*serializable-parameters-and-return-values*/}
 
-İstemci kodu Sunucu Eylemini ağ üzerinden çağırdığından, aktarılan tüm argümanların serileştirilebilir olması gerekir.
+İstemci kodu, Sunucu Fonksiyon'u ağ üzerinden çağırdığı için, geçirilen tüm argümanların serileştirilebilir olması gerekir.
 
-Sunucu Eylemi bağımsız değişkenleri için desteklenen türler şunlardır:
+İşte Sunucu Fonksiyon argümanları için desteklenen türler:
 
 * Primitives
   * [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
@@ -82,18 +81,18 @@ Sunucu Eylemi bağımsız değişkenleri için desteklenen türler şunlardır:
   * [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
   * [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) ve [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
 * [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
-* [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) nesne
-* Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) ile oluşturulmuş olanlar, serileştirilebilir özelliklerle
-* Sunucu Eylemleri Olan İşlevler
+* [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) instances
+* Plain [objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object): those created with [object initializers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), with serializable properties
+* Sunucu Fonksiyon'u olan fonksiyonlar
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Özellikle, bunlar desteklenmemektedir:
-* React elemanları, ya da [JSX](/learn/writing-markup-with-jsx)
-* Bileşen işlevleri veya Sunucu Eylemi olmayan diğer işlevler dahil olmak üzere işlevler
-* [Classes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
-* Herhangi bir sınıfın örneği olan nesneler (belirtilen yerleşikler dışında) veya [null prototipli](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
-* Global olarak kaydedilmemiş semboller, örn. `Symbol('yeni sembolüm')`
-
+Özellikle, bunlar desteklenmez:
+* React elemanları veya [JSX](/learn/writing-markup-with-jsx)
+* Fonksiyonlar, bileşen fonksiyonları veya Sunucu Fonksiyon olmayan diğer tüm fonksiyonlar dahil
+* [Sınıflar](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
+* Herhangi bir sınıfın örnekleri olan nesneler (bahsedilen yerleşik sınıflar dışında) veya [null prototipi olan nesneler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
+* Küresel olarak kaydedilmemiş semboller, örneğin `Symbol('my new symbol')`
+* Olay yöneticilerinden gelen olaylar
 
 Desteklenen serileştirilebilir dönüş değerleri, bir sınır İstemci Bileşeni için [serileştirilebilir proplar](/reference/rsc/use-client#passing-props-from-server-to-client-components) ile aynıdır.
 
@@ -101,9 +100,11 @@ Desteklenen serileştirilebilir dönüş değerleri, bir sınır İstemci Bileş
 
 ### Formlarda Sunucu Eylemleri {/*server-actions-in-forms*/}
 
-Sunucu Eylemlerinin en yaygın kullanım durumu, verileri değiştiren sunucu işlevlerini çağırmak olacaktır. Tarayıcıda, [HTML form elemanı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) kullanıcının bir mutation göndermesi için geleneksel yaklaşımdır. React Sunucu Bileşenleri ile React, [forms](/reference/react-dom/components/form) Sunucu Eylemleri için birinci sınıf destek sunuyor.
+### Formlardaki Sunucu Fonksiyon'lar {/*server-functions-in-forms*/}
 
-İşte bir kullanıcının kullanıcı adı talep etmesini sağlayan bir form.
+Sunucu Fonksiyon'ların en yaygın kullanım senaryosu, veri üzerinde değişiklik yapan fonksiyonları çağırmaktır. Tarayıcıda, [HTML form elemanı](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form), bir kullanıcının bir değişiklik göndermesi için geleneksel yaklaşımdır. React Sunucu Bileşenleri ile React, [formlarda](/reference/react-dom/components/form) Sunucu Fonksiyon'lar için birinci sınıf destek sunar.
+
+İşte bir kullanıcının bir kullanıcı adı talep etmesine izin veren bir form.
 
 ```js [[1, 3, "formData"]]
 // App.js
@@ -124,15 +125,15 @@ export default function App() {
 }
 ```
 
-Bu örnekte `requestUsername` bir `<form>`a aktarılan bir Sunucu Eylemidir. Bir kullanıcı bu formu gönderdiğinde, `requestUsername` sunucu işlevine bir ağ isteği gönderilir. Bir formda bir Sunucu Eylemi çağırırken, React formun <CodeStep step={1}>[FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)</CodeStep> öğesini Sunucu Eylemine ilk argüman olarak sağlayacaktır.
+Bu örnekte `requestUsername`, bir `<form>`'a geçirilen bir Sunucu Fonksiyon'dır. Bir kullanıcı bu formu gönderdiğinde, `requestUsername` sunucu fonksiyonuna yapılan bir ağ isteği gerçekleşir. Bir Sunucu Fonksiyon'ı form içinde çağırırken, React, formun <CodeStep step={1}>[FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)</CodeStep>'sini birinci argüman olarak Sunucu Fonksiyon'a iletecektir.
 
-React, `action` formuna bir Sunucu Eylemi geçirerek formu [aşamalı olarak geliştirebilir](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement). Bu, formların JavaScript paketi yüklenmeden önce gönderilebileceği anlamına gelir.
+Bir Sunucu Fonksiyon'ı form `action`'ına geçirerek, React formu [kademeli olarak iyileştirebilir](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement). Bu, formların JavaScript paketi yüklenmeden önce gönderilebileceği anlamına gelir.
 
 #### Formlarda dönüş değerlerini işleme {/*handling-return-values*/}
 
 Kullanıcı adı istek formunda, bir kullanıcı adının mevcut olmaması ihtimali olabilir. `requestUsername` bize başarısız olup olmadığını söylemelidir.
 
-Aşamalı geliştirmeyi desteklerken bir Sunucu Eyleminin sonucuna göre kullanıcı arayüzünü güncellemek için [`useActionState`](/reference/react/useActionState) kullanın.
+Sunucu Fonksiyonu sonucuna dayalı olarak UI'yı güncellemek ve kademeli iyileştirmeyi desteklemek için, [`useActionState`](/reference/react/useActionState) kullanın.
 
 ```js
 // requestUsername.js
@@ -170,14 +171,13 @@ function UsernameForm() {
 }
 ```
 
-Note that like most Hooks, `useActionState` can only be called in <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep>.
-Çoğu Hook gibi `useActionState`in de yalnızca <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep> içinde çağrılabileceğini unutmayın.
+Not: Diğer çoğu Hook gibi `useActionState`in de yalnızca <CodeStep step={1}>[client code](/reference/rsc/use-client)</CodeStep> içinde çağrılabileceğini unutmayın.
 
-### Sunucu Eylemini `<form>` dışında çağırma {/*calling-a-server-action-outside-of-form*/}
+### `<form>` dışında bir Sunucu Fonksiyon'u çağırma {/*calling-a-server-function-outside-of-form*/}
 
-Sunucu Eylemleri açık sunucu uç noktalarıdır ve istemci kodunun herhangi bir yerinde çağrılabilir.
+Sunucu Fonksiyon'lar, sunucu uç noktalarıdır ve istemci kodunda her yerde çağrılabilir.
 
-[Form](/reference/react-dom/components/form) dışında bir Sunucu Eylemi kullanırken, Sunucu Eylemini bir [Transition](/reference/react/useTransition) içinde çağırın; bu sayede bir yükleme göstergesi görüntüleyebilir, [iyimser state güncellemeleri](/reference/react/useOptimistic) gösterebilir ve beklenmedik hataları ele alabilirsiniz
+Bir Sunucu Fonksiyon'u bir [form](/reference/react-dom/components/form) dışında kullanırken, Sunucu Fonksiyon'u bir [Transition](/reference/react/useTransition) içinde çağırın, bu sayede yükleme göstergesi gösterebilir, [iyimser durum güncellemeleri](/reference/react/useOptimistic) yapabilir ve beklenmeyen hataları yönetebilirsiniz. Formlar, otomatik olarak Sunucu Fonksiyon'ları geçişler içinde sarar.
 
 ```js {9-12}
 import incrementLike from './actions';
@@ -214,4 +214,4 @@ export default async function incrementLike() {
 }
 ```
 
-Bir Sunucu Eylemi dönüş değerini okumak için, döndürülen promise'i `await` etmeniz gerekir.
+Bir Sunucu Fonksiyon dönüş değerini okumak için, döndürülen promise'i `await` etmeniz gerekecek.

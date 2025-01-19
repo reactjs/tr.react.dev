@@ -347,7 +347,7 @@ React Derleyici, React'in birçok kuralını statik olarak doğrulayabilir ve bi
 
 ### Bileşenlerimin optimize edildiğini nasıl bilebilirim? {/*how-do-i-know-my-components-have-been-optimized*/}
 
-[React Devtools](/learn/react-developer-tools) (v5.0+) React Compiler için yerleşik desteğe sahiptir ve derleyici tarafından optimize edilen bileşenlerin yanında bir “Memo ✨” rozeti görüntüleyecektir.
+[React DevTools](/learn/react-developer-tools) (v5.0+) ve [React Native DevTools](https://reactnative.dev/docs/react-native-devtools) React Compiler için yerleşik desteğe sahiptir ve derleyici tarafından optimize edilen bileşenlerin yanında bir “Memo ✨” rozeti görüntüler.
 
 ### Derlemeden sonra bir şey çalışmıyor {/*something-is-not-working-after-compilation*/}
 Eğer eslint-plugin-react-compiler yüklüyse, derleyici React kurallarının herhangi bir ihlalini editörünüzde gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir. **Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz.

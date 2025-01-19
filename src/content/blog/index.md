@@ -10,6 +10,12 @@ Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Sürüm no
 
 <div className="sm:-mx-5 flex flex-col gap-5 mt-12">
 
+<BlogCard title="React v19 " date="5 Aralık, 2024" url="/blog/2024/12/05/react-19">
+
+React 19 Yükseltme Kılavuzu'nda, uygulamanızı React 19'a yükseltmek için adım adım talimatları paylaştık. Bu yazıda, React 19'daki yeni özelliklere ve bunları nasıl benimseyebileceğinize genel bir bakış sunacağız ...
+
+</BlogCard>
+
 <BlogCard title="React Compiler Beta Sürümü" date="21 Ekim 2024" url="/blog/2024/10/21/react-compiler-beta-release">
 
 React Conf 2024'te React Compiler'ın deneysel bir sürümünü duyurmuştuk. O zamandan bu yana çok ilerleme kaydettik ve bu yazıda React Compiler için sırada ne olduğunu paylaşmak istiyoruz ...
@@ -22,27 +28,21 @@ Geçtiğimiz hafta Henderson, Nevada'da iki günlük bir konferans olan React Co
 
 </BlogCard>
 
-<BlogCard title="React 19 RC " date="25 Nisan 2024" url="/blog/2024/04/25/react-19">
-
-React 19 RC Yükseltme Kılavuzu'nda, uygulamanızı React 19'a yükseltmek için adım adım talimatlar paylaştık. Bu yazıda, React 19'daki yeni özelliklere ve bunları nasıl benimseyebileceğinize genel bir bakış sunacağız ...
-
-</BlogCard>
-
-<BlogCard title="React 19 RC Yükseltme Kılavuzu" date="25 Nisan 2024" url="/blog/2024/04/25/react-19-upgrade-guide">
+<BlogCard title="React 19 Yükseltme Kılavuzu" date="25 Nisan, 2024" url="/blog/2024/04/25/react-19-upgrade-guide">
 
 React 19'a eklenen iyileştirmeler bazı kırılma değişiklikleri gerektiriyor, ancak yükseltmeyi olabildiğince sorunsuz hale getirmek için çalıştık ve değişikliklerin çoğu uygulamayı etkilemesini beklemiyoruz. Bu yazıda, kütüphaneleri React 19'a yükseltme adımlarında size rehberlik edeceğiz ...
 
 </BlogCard>
 
-<BlogCard title="React Labs: What We've Been Working On – February 2024" date="February 15, 2024" url="/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024">
+<BlogCard title="React Labs: Neler Üzerinde Çalışıyoruz - Şubat 2024" date="15 Şubat, 2024" url="/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024">
 
-In React Labs posts, we write about projects in active research and development. Since our last update, we've made significant progress on React Compiler, new features, and React 19, and we'd like to share what we learned.
+React Labs yazılarında, aktif araştırma ve geliştirme aşamasındaki projeler hakkında yazıyoruz. Son güncellememizden bu yana React Compiler, yeni özellikler ve React 19 üzerinde önemli ilerlemeler kaydettik ve öğrendiklerimizi paylaşmak istiyoruz.
 
 </BlogCard>
 
-<BlogCard title="React Canaries: Incremental Feature Rollout Outside Meta" date="May 3, 2023" url="/blog/2023/05/03/react-canaries">
+<BlogCard title="React Canaries: Meta Dışında Kademeli Özellik Sunumu" date="3 Mayıs, 2023" url="/blog/2023/05/03/react-canaries">
 
-Traditionally, new React features used to only be available at Meta first, and land in the open source releases later. We'd like to offer the React community an option to adopt individual new features as soon as their design is close to final--similar to how Meta uses React internally. We are introducing a new officially supported Canary release channel. It lets curated setups like frameworks decouple adoption of individual React features from the React release schedule.
+Geleneksel olarak, yeni React özellikleri önce sadece Meta'da kullanılabilir ve daha sonra açık kaynak sürümlerinde yer alırdı. React topluluğuna, Meta'nın React'i dahili olarak kullanmasına benzer şekilde, tasarımları son haline yaklaşır yaklaşmaz bireysel yeni özellikleri benimseme seçeneği sunmak istiyoruz. Resmi olarak desteklenen yeni bir Canary sürüm kanalı sunuyoruz. Bu, çatı'lar gibi küratörlü kurulumların bireysel React özelliklerinin benimsenmesini React sürüm programından ayırmasına olanak tanır.
 
 </BlogCard>
 

@@ -36,19 +36,13 @@ function SearchPage() {
 
 #### Parametreler {/*parameters*/}
 
-* `value`: Ertelemek istediğiniz değerdir. Herhangi bir türden olabilir.
-* <CanaryBadge title="This feature is only available in the Canary channel" /> **optional** `initialValue`: A value to use during the initial render of a component. If this option is omitted, `useDeferredValue` will not defer during the initial render, because there's no previous version of `value` that it can render instead.
+* `value`: Ertelemek istediğiniz değer. Herhangi bir türde olabilir.
+* **isteğe bağlı** `initialValue`: Bir bileşenin ilk render'ı sırasında kullanılacak bir değer. Bu seçenek atlanırsa, `useDeferredValue` ilk render sırasında erteleme yapmaz, çünkü yerine render edebileceği bir önceki `value` versiyonu yoktur.
 
 
 #### Dönüş değeri {/*returns*/}
 
-- `currentValue`: İlk render esnasında, döndürülen ertelenmiş değer ile sağladığınız değer aynı olacaktır. Güncellemeler esnasında, React önce eski değerle yeniden render etmeyi dener (bu yüzden eski değeri döndürür) ve ardından arka planda yeni değer ile birlikte yeni bir render başlatır (bu yüzden güncellenmiş değeri döndürür).
-
-<Canary>
-
-In the latest React Canary versions, `useDeferredValue` returns the `initialValue` on initial render, and schedules a re-render in the background with the `value` returned.
-
-</Canary>
+- `currentValue`: İlk render sırasında, döndürülen ertelenmiş değer `initialValue` olacaktır veya sağladığınız değerle aynı olur. Güncellemeler sırasında, React önce eski değerle yeniden render yapmayı dener (bu yüzden eski değeri döndürecektir), ardından arka planda yeni değerle bir başka yeniden render yapmayı dener (bu yüzden güncellenmiş değeri döndürecektir).
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
@@ -107,21 +101,6 @@ Bu örnekte, `SearchResults` bileşeni arama sonuçları çekilirken [askıya al
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, useState } from 'react';
 import SearchResults from './SearchResults.js';
@@ -142,14 +121,9 @@ export default function App() {
 }
 ```
 
-```js src/SearchResults.js hidden
+```js src/SearchResults.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function SearchResults({ query }) {
   if (query === '') {
@@ -169,37 +143,12 @@ export default function SearchResults({ query }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -214,14 +163,14 @@ async function getData(url) {
   if (url.startsWith('/search?q=')) {
     return await getSearchResults(url.slice('/search?q='.length));
   } else {
-    throw Error('Not implemented');
+    throw Error('Uygulanmadı');
   }
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+  // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
-    setTimeout(resolve, 500);
+    setTimeout(resolve, 1000);
   });
 
   const allAlbums = [{
@@ -321,21 +270,6 @@ Aşağıdaki örnekte `"a"` yazın, sonuçların yüklenmesini bekleyin ve ardı
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, useState, useDeferredValue } from 'react';
 import SearchResults from './SearchResults.js';
@@ -357,14 +291,9 @@ export default function App() {
 }
 ```
 
-```js src/SearchResults.js hidden
+```js src/SearchResults.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function SearchResults({ query }) {
   if (query === '') {
@@ -384,37 +313,12 @@ export default function SearchResults({ query }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -434,9 +338,9 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+// Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
-    setTimeout(resolve, 500);
+    setTimeout(resolve, 1000);
   });
 
   const allAlbums = [{
@@ -544,21 +448,6 @@ Bu değişiklikle birlikte, yazmaya başladığınız anda yeni sonuç listesi y
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js src/App.js
 import { Suspense, useState, useDeferredValue } from 'react';
 import SearchResults from './SearchResults.js';
@@ -586,14 +475,9 @@ export default function App() {
 }
 ```
 
-```js src/SearchResults.js hidden
+```js src/SearchResults.js
+import {use} from 'react';
 import { fetchData } from './data.js';
-
-// Note: this component is written using an experimental API
-// that's not yet available in stable versions of React.
-
-// For a realistic example you can follow today, try a framework
-// that's integrated with Suspense, like Relay or Next.js.
 
 export default function SearchResults({ query }) {
   if (query === '') {
@@ -613,37 +497,12 @@ export default function SearchResults({ query }) {
     </ul>
   );
 }
-
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
-function use(promise) {
-  if (promise.status === 'fulfilled') {
-    return promise.value;
-  } else if (promise.status === 'rejected') {
-    throw promise.reason;
-  } else if (promise.status === 'pending') {
-    throw promise;
-  } else {
-    promise.status = 'pending';
-    promise.then(
-      result => {
-        promise.status = 'fulfilled';
-        promise.value = result;
-      },
-      reason => {
-        promise.status = 'rejected';
-        promise.reason = reason;
-      },      
-    );
-    throw promise;
-  }
-}
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: Veri çekme işlemi, birlikte kullandığınız framework'e bağlıdır
+// ve Suspense ile birlikte çalışır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -663,9 +522,9 @@ async function getData(url) {
 }
 
 async function getSearchResults(query) {
-  // Add a fake delay to make waiting noticeable.
+ // Beklemeyi fark edilebilir hale getirmek için sahte bir gecikme ekleyin.
   await new Promise(resolve => {
-    setTimeout(resolve, 500);
+    setTimeout(resolve, 1000);
   });
 
   const allAlbums = [{
@@ -814,7 +673,7 @@ export default function App() {
 import { memo } from 'react';
 
 const SlowList = memo(function SlowList({ text }) {
-  // Log once. The actual slowdown is inside SlowItem.
+  // Bir kez logla. Gerçek yavaşlama SlowItem içinde.
   console.log('[ARTIFICIALLY SLOW] Rendering 250 <SlowItem />');
 
   let items = [];
@@ -831,7 +690,7 @@ const SlowList = memo(function SlowList({ text }) {
 function SlowItem({ text }) {
   let startTime = performance.now();
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+   // Her öğe için 1 ms hiçbir şey yapma, aşırı yavaş kodu taklit etmek için.
   }
 
   return (
