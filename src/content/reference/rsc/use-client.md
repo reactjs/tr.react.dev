@@ -151,7 +151,7 @@ Bu örnek uygulamanın modül bağımlılık ağacında, `InspirationGenerator.j
 `'use client'` React Server Components uygulamasının modül bağımlılık ağacını segmentlere ayırarak `InspirationGenerator.js` ve tüm bağımlılıklarını istemci tarafından oluşturulmuş olarak işaretler.
 </Diagram>
 
-Render sırasında, çatı root bileşeni sunucuda render edecek ve [render ağacı](/learn/understanding-your-ui-as-a-tree#the-render-tree) üzerinden devam ederek istemci tarafından işaretlenmiş koddan alınan herhangi bir kodu değerlendirmeyi tercih etmeyecektir.
+Render sırasında, framework root bileşeni sunucuda render edecek ve [render ağacı](/learn/understanding-your-ui-as-a-tree#the-render-tree) üzerinden devam ederek istemci tarafından işaretlenmiş koddan alınan herhangi bir kodu değerlendirmeyi tercih etmeyecektir.
 
 Render ağacının sunucu tarafından render edilen kısmı daha sonra istemciye gönderilir. İstemci, istemci kodunu indirdikten sonra ağacın geri kalanını oluşturmayı tamamlar.
 
