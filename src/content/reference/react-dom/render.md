@@ -63,7 +63,7 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle sadece bir `render` ça
 
 * Eğer aynı `domNode` üzerinde birden fazla `render` çağrısı yaparsanız, React, verdiğiniz son JSX'i yansıtmak için gerektiğinde DOM'u güncelleyecektir. React, DOM'un hangi kısımlarının yeniden kullanılabileceğine ve hangilerinin önceki ağaç (tree) ile ["eşleştirilerek"](/learn/preserving-and-resetting-state) yeniden oluşturulması gerektiğine karar verir. Aynı `domNode` üzerinde `render` çağrısı yapmak, kök bileşen (root component) üzerinde [`set` fonksiyonunu](/reference/react/useState#setstate) çağırmaya benzer: React gereksiz DOM güncellemelerinden kaçınır.
 
-* Eğer uygulamanız tamamen React ile oluşturulmuşsa, uygulamanızda muhtemelen yalnızca bir `render` çağrısı olacaktır. (Bir çatı (framework) kullanıyorsanız, bunu sizin için yapabilir.) JSX'in bir parçasını bileşeninizin bir alt elemanı (child component) olmayan DOM ağacının farklı bir yerinde görüntülemek istediğinizde (örneğin, bir modal veya bir tooltip), `render` yerine [`createPortal`](/reference/react-dom/createPortal) kullanınız.
+* Eğer uygulamanız tamamen React ile oluşturulmuşsa, uygulamanızda muhtemelen yalnızca bir `render` çağrısı olacaktır. (Bir framework kullanıyorsanız, bunu sizin için yapabilir.) JSX'in bir parçasını bileşeninizin bir alt elemanı (child component) olmayan DOM ağacının farklı bir yerinde görüntülemek istediğinizde (örneğin, bir modal veya bir tooltip), `render` yerine [`createPortal`](/reference/react-dom/createPortal) kullanınız.
 
 ---
 

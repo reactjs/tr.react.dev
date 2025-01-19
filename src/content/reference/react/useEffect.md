@@ -894,7 +894,7 @@ Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yö
 
 ### Effect'ler ile veri getirme (fetching) {/*fetching-data-with-effects*/}
 
-Bileşeninize veri getirmek için Effect'i kullanabilirsiniz. [Eğer bir çatı kullanıyorsanız,](/learn/start-a-new-react-project#production-grade-react-frameworks) çatının veri getirme mekanizmasını kullanmanın Effect'i manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
+Bileşeninize veri getirmek için Effect'i kullanabilirsiniz. [Eğer bir framework kullanıyorsanız,](/learn/start-a-new-react-project#production-grade-react-frameworks) framework'ün veri getirme mekanizmasını kullanmanın Effect'i manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
 
 Eğer manuel olarak Effect ile veri getirmek istiyorsanız, kodunuz şöyle görünebilir:
 
@@ -1046,7 +1046,7 @@ Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı 
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşik veri getirme mekanizmasını kullanın.** Modern React çatıları verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
+- **Eğer bir [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, framework'ün yerleşik veri getirme mekanizmasını kullanın.** Modern React framework'leri verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
 - **Aksi halde, kullanıcı taraflı bir önbellek çözümü kullanmayı ya da kendiniz oluşturmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü uygularsanız, arka planda Effect'leri kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da ekleyebilirsiniz.
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
@@ -1731,7 +1731,7 @@ function Page({ url, shoppingCart }) {
 
 ### Sunucu ve kullanıcıda farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
-Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [çatı kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamda render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. Kullanıcıda, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın kullanıcı ve sunucuda aynı olması gerekir.
+Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [framework kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamda render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. Kullanıcıda, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın kullanıcı ve sunucuda aynı olması gerekir.
 
 Bazı nadir durumlarda, kullanıcıda farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 

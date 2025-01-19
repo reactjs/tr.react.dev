@@ -119,9 +119,9 @@ export default function Albums({ artistId }) {
 ```
 
 ```js src/data.js hidden
-// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız çatıya bağlıdır
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız framework'e bağlıdır
 // ve Suspense ile birlikte çalışır.
-// Normalde, önbellekleme mantığı bir çatı içinde yer alır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 
@@ -208,7 +208,7 @@ async function getAlbums() {
 
 **Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense) gibi Suspense özellikli çatıları veri getirme
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense) gibi Suspense özellikli framework'leri veri getirme
 - Bileşen kodunu [`lazy`](/reference/react/lazy) ile tembel yükleme
 - Önbelleğe alınmış bir Promise değerini [`use`](/reference/react/use) ile okuma
 
@@ -334,9 +334,9 @@ export default function Albums({ artistId }) {
 ```
 
 ```js src/data.js hidden
-// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız çatıya bağlıdır
+// Not: Veri çekme işlemini yapma şekliniz, birlikte kullandığınız framework'e bağlıdır
 // ve Suspense ile birlikte çalışır.
-// Normalde, önbellekleme mantığı bir çatı içinde yer alır.
+// Normalde, önbellekleme mantığı bir framework içinde yer alır.
 
 let cache = new Map();
 

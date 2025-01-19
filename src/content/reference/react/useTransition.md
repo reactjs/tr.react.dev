@@ -1214,7 +1214,7 @@ Transitions only "wait" long enough to avoid hiding *already revealed* content (
 
 ### Suspense özelliği etkinleştirilmiş yönlendirici oluşturma {/*building-a-suspense-enabled-router*/}
 
-Eğer bir React çatısı (framework) veya yönlendirici oluşturuyorsanız, sayfa gezinmelerini transition'lar olarak işaretlemenizi öneririz.
+Eğer bir React framework'ü veya yönlendirici oluşturuyorsanız, sayfa gezinmelerini transition'lar olarak işaretlemenizi öneririz.
 
 ```js {3,6,8}
 function Router() {

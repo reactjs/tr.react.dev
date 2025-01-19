@@ -4,7 +4,7 @@ title: İstemci React DOM API'leri
 
 <Intro>
 
-`React-dom/client` API'leri, React bileşenlerini istemcide (tarayıcıda) oluşturmanızı sağlar. Bu API’ler genellikle React ağacınızı başlatmak için uygulamanızın en üst seviyesinde kullanılır. Bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) bunları sizin için çağırabilir. Bileşenlerinizin çoğu, bunları içe aktarmaya veya kullanmaya ihtiyaç duymaz.
+`React-dom/client` API'leri, React bileşenlerini istemcide (tarayıcıda) oluşturmanızı sağlar. Bu API’ler genellikle React ağacınızı başlatmak için uygulamanızın en üst seviyesinde kullanılır. Bir [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) bunları sizin için çağırabilir. Bileşenlerinizin çoğu, bunları içe aktarmaya veya kullanmaya ihtiyaç duymaz.
 
 </Intro>
 

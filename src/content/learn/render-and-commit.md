@@ -38,7 +38,7 @@ Bir bileşenin render edilmesi için iki sebep vardır:
 
 ### İlk render {/*initial-render*/}
 
-Uygulamanız başladığında, ilk render'ı tetiklemeniz gerekmektedir. Çatılar ve sandbox'lar bazen bu kodu gizlerler ancak bu, hedef DOM node'unun [`createRoot`](/reference/react-dom/client/createRoot) ile çağrılması ve ardından bileşeninizle o DOM node'unun `render` metodu çağrılarak ilk render tetiklenir:
+Uygulamanız başladığında, ilk render'ı tetiklemeniz gerekmektedir. Framework'ler ve sandbox'lar bazen bu kodu gizlerler ancak bu, hedef DOM node'unun [`createRoot`](/reference/react-dom/client/createRoot) ile çağrılması ve ardından bileşeninizle o DOM node'unun `render` metodu çağrılarak ilk render tetiklenir:
 
 <Sandpack>
 

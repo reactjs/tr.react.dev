@@ -22,9 +22,9 @@ Bu ayrı ortam, React Sunucu Bileşenlerinde "sunucu" olarak adlandırılır. Su
 
 #### Sunucu Bileşenleri için nasıl destek oluşturulur? {/*how-do-i-build-support-for-server-components*/}
 
-React 19'daki React Sunucu Bileşenleri kararlı ve alt sürümler arasında kırılmayacak olsa da, bir React Sunucu Bileşenleri paketleyicisini veya çatısını uygulamak için kullanılan temel API'ler semver'ı takip etmez ve React 19.x'teki alt sürümler arasında kırılabilir. 
+React 19'daki React Sunucu Bileşenleri kararlı ve alt sürümler arasında kırılmayacak olsa da, bir React Sunucu Bileşenleri paketleyicisini veya framework'ünü uygulamak için kullanılan temel API'ler semver'ı takip etmez ve React 19.x'teki alt sürümler arasında kırılabilir. 
 
-React Sunucu Bileşenleri'ni bir paketleyici veya çatı olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte, React Sunucu Bileşenleri'ni uygulamak için kullanılan API'leri stabilize etmek amacıyla paketleyiciler ve çatılarla çalışmaya devam edeceğiz.
+React Sunucu Bileşenleri'ni bir paketleyici veya framework olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte, React Sunucu Bileşenleri'ni uygulamak için kullanılan API'leri stabilize etmek amacıyla paketleyiciler ve framework'lerle çalışmaya devam edeceğiz.
 
 </Note>
 

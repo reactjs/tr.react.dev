@@ -55,7 +55,7 @@ React, `domNode` içinde var olan HTML'ye bağlanacak ve içindeki DOM'u yönetm
 #### Uyarılar {/*caveats*/}
 * `hydrate`, render edilmiş içeriğin sunucu tarafından render edilen içerikle aynı olmasını bekler. React, metin içeriğindeki farklılıkları düzeltebilir, ancak uyumsuzlukları hatalar olarak görmeli ve düzeltmelisiniz.
 * Geliştirme modunda, React, hydrate işlemi sırasında uyumsuzluklar hakkında uyarır. Uyumsuzluk durumunda özellik farklılıklarının düzeltileceği garantisi yoktur. Bu, performans nedenleriyle önemlidir çünkü çoğu uygulamada, uyumsuzluklar nadirdir ve bu nedenle tüm işaretlemeyi doğrulamak aşırı derecede pahalı olurdu.
-* Uygulamanızda muhtemelen yalnızca bir `hydrate` çağrısı olacaktır. Bir çatı kullanıyorsanız, bu çağrıyı sizin için yapabilir.
+* Uygulamanızda muhtemelen yalnızca bir `hydrate` çağrısı olacaktır. Bir framework kullanıyorsanız, bu çağrıyı sizin için yapabilir.
 * Uygulamanızda önceden render edilmiş HTML olmadan yalnızca istemci tarafından render edilmişse, `hydrate()` kullanımı desteklenmez. Bunun yerine [render()](/reference/react-dom/render) (React 17 ve altı için) veya [createRoot()](/reference/react-dom/client/createRoot) (React 18+ için) kullanın.
 
 ---

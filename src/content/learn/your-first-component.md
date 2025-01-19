@@ -211,11 +211,11 @@ Alt bileşen, üst bileşenden gelecek bir veriye ihtiyaç duyduğunda, tanımla
 
 #### Baştan aşağı bileşenler {/*components-all-the-way-down*/}
 
-React uygulamanız "kök" bileşeninde başlar. Bu bileşen genel olarak yeni bir proje başlattığınızda otomatik olarak oluşturulur. Örneğin, [CodeSandbox](https://codesandbox.io/) ya da [Next.js](https://nextjs.org/) çatısını kullanırsanız, kök bileşeni `pages/index.js` sayfasında tanımlanmıştır. Bu örneklerde, kök bileşenlerini dışa aktarıyoruz.
+React uygulamanız "kök" bileşeninde başlar. Bu bileşen genel olarak yeni bir proje başlattığınızda otomatik olarak oluşturulur. Örneğin, [CodeSandbox](https://codesandbox.io/) ya da [Next.js](https://nextjs.org/) framework'ünü kullanırsanız, kök bileşeni `pages/index.js` sayfasında tanımlanmıştır. Bu örneklerde, kök bileşenlerini dışa aktarıyoruz.
 
 Çoğu React uygulaması baştan aşağı bileşenleri kullanır. Bu, bileşenleri yalnızca butonlar gibi yeniden kullanılabilir parçalar için değil, aynı zamanda kenar çubukları, listeler ve hatta sayfanın bütünü için de kullanabileceğiniz anlamına gelir! Bileşenler, bazıları yalnızca bir defa kullanılsa bile kullanıcı arayüzü kodunu ve biçimlendirmeyi düzenlemenin kullanışlı bir yoludur.
 
-[React tabanlı çatılar](/learn/start-a-new-react-project) bunu bir adım ileri götürürler. Boş bir HTML sayfası kullanmak ve React'in sayfayı JavaScript ile kontrol etmesine "izin vermek" yerine, bu çatılar *aynı zamanda* React bileşenlerinizden otomatik olarak HTML üretirler. Bu, JavaScript kodu yüklenmeden önce bazı içerikleri kullanıcıya göstermenize izin verir.
+[React tabanlı framework'ler](/learn/start-a-new-react-project) bunu bir adım ileri götürürler. Boş bir HTML sayfası kullanmak ve React'in sayfayı JavaScript ile kontrol etmesine "izin vermek" yerine, bu framework'ler *aynı zamanda* React bileşenlerinizden otomatik olarak HTML üretirler. Bu, JavaScript kodu yüklenmeden önce bazı içerikleri kullanıcıya göstermenize izin verir.
 
 Yine de pek çok site, React'i sadece [halihazırda olan HTML sayfalarına etkileşim eklemek için](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) kullanır. Sayfanın tamamı için tek bir tane yerine birçok kök bileşeni vardır. İhtiyacınız olan kadar çok veya az React kullanabilirsiniz.
 

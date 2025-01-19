@@ -57,7 +57,7 @@ Tamamen React ile oluşturulmuş bir uygulama genellikle kök bileşeni için ya
 
 #### Uyarılar {/*caveats*/}
 * Uygulamanız sunucu tarafından oluşturulmuşsa, `createRoot()` kullanımı desteklenmez. Bunun yerine [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) kullanın.
-* Uygulamanızda muhtemelen yalnızca bir `createRoot` çağrısı olacaktır. Eğer bir çatı kullanıyorsanız, bu çağrıyı sizin için yapabilir.
+* Uygulamanızda muhtemelen yalnızca bir `createRoot` çağrısı olacaktır. Eğer bir framework kullanıyorsanız, bu çağrıyı sizin için yapabilir.
 * Bileşeninizin alt öğesi olmayan DOM ağacının farklı bir bölümünde bir JSX parçası render etmek istediğinizde (örneğin, bir modal veya bir araç ipucu), `createRoot` yerine [`createPortal`](/reference/react-dom/createPortal) kullanın.
 
 ---
@@ -306,7 +306,7 @@ React ağacını DOM düğümünden kaldırmak ve onun tarafından kullanılan t
 root.unmount();
 ```
 
-Bu, çoğunlukla React bileşenleriniz farklı bir çatıda yazılmış bir uygulamanın içindeyse kullanışlıdır.
+Bu, çoğunlukla React bileşenleriniz farklı bir framework'de yazılmış bir uygulamanın içindeyse kullanışlıdır.
 
 ---
 

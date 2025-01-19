@@ -65,7 +65,7 @@ Sunucu yanıtınıza aktarabileceğiniz bir [Okunabilir Node.js Akışı](https:
 ```js {5-6}
 import { renderToStaticNodeStream } from 'react-dom/server';
 
-// Route handler syntax backend çatınıza bağlıdır
+// Route handler syntax backend framework'üne bağlıdır
 app.use('/', (request, response) => {
   const stream = renderToStaticNodeStream(<Page />);
   stream.pipe(response);

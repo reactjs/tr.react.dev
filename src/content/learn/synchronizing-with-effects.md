@@ -732,7 +732,7 @@ Efektler içinde `veri getirme` çağrıları yazmak özellikle tamamen kullanı
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin de başarılı şekilde yapılması kolay değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **Eğer bir [çatı](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, çatının yerleşik veri getirme mekanizmasını kullanın.** Modern React çatıları verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
+- **Eğer bir [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, framework'ün yerleşik veri getirme mekanizmasını kullanın.** Modern React framework'leri verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
 - **Aksi halde, kullanıcı taraflı önbelleğe almayı kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü yaparsanız, Efektleri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Efektler içinde veri getirmeye devam edebilirsiniz.

@@ -47,7 +47,7 @@ Mevcut bir site üzerinde çalışıyorsanız ve biraz React eklemeniz gerekiyor
 
 ## Bir React projesi oluşturun {/*start-a-react-project*/}
 
-Eğer [bağımsız bir React projesine](/learn/start-a-new-react-project) başlamaya hazırsanız, tatlı bir geliştirici deneyimi için minimal bir araç zinciri kurabilirsiniz. Ayrıca, halihazırda sizin için birçok karar veren bir çatı ile de başlayabilirsiniz.
+Eğer [bağımsız bir React projesine](/learn/start-a-new-react-project) başlamaya hazırsanız, tatlı bir geliştirici deneyimi için minimal bir araç zinciri kurabilirsiniz. Ayrıca, halihazırda sizin için birçok karar veren bir framework ile de başlayabilirsiniz.
 
 ## Sonraki adımlar {/*next-steps*/}
 

@@ -51,11 +51,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 ```
 
 </Sandpack>
-Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içerisinde barınmaktadır. [Create React App](https://create-react-app.dev/)'de uygulamanız `src/App.js` dosyası içinde barınmaktadır. Fakat kurulumunuza bağlı olarak kök bileşeniniz başka bir dosyanın içerisinde olabilir. Eğer dosya tabanlı yönlendirmesi olan bir çatı kullanıyorsanız, kök bileşeniniz her sayfa için ayrı olacaktır.
+Bu örnekte, bileşenler `App.js` adlı bir **kök bileşen dosyası**'nın içerisinde barınmaktadır. [Create React App](https://create-react-app.dev/)'de uygulamanız `src/App.js` dosyası içinde barınmaktadır. Fakat kurulumunuza bağlı olarak kök bileşeniniz başka bir dosyanın içerisinde olabilir. Eğer dosya tabanlı yönlendirmesi olan bir framework kullanıyorsanız, kök bileşeniniz her sayfa için ayrı olacaktır.
 
 ## Bileşenleri içe ve dışa aktarma {/*exporting-and-importing-a-component*/}
 
-Bu örnekte bileşenler `App.js` adlı bir **kök bileşen dosyasında** bulunmaktadır. Kurulumunuza bağlı olarak, kök bileşeniniz (root component) başka bir dosyada olabilir. Next.js gibi dosya tabanlı yönlendirmeye sahip bir çatı (framework) kullanıyorsanız, kök bileşeniniz her sayfa için farklı olacaktır.
+Bu örnekte bileşenler `App.js` adlı bir **kök bileşen dosyasında** bulunmaktadır. Kurulumunuza bağlı olarak, kök bileşeniniz (root component) başka bir dosyada olabilir. Next.js gibi dosya tabanlı yönlendirmeye sahip bir framework kullanıyorsanız, kök bileşeniniz her sayfa için farklı olacaktır.
 
 Eğer açılış ekranını değiştirmek ve bilim kitaplarının bir listesini koymak isterseniz ne olur? Veya tüm profilleri başka bir yere yerleştirmek isterseniz? Bu durumda `Galeri` ve `Profil` bileşenlerini kök bileşen dosyasından çıkarmak mantıklıdır. Bu, onların daha modüler olmasını ve diğer dosyalarda yeniden kullanılabilir olmasını sağlayacaktır. Bir bileşeni üç adımda taşıyabilirsiniz:
 

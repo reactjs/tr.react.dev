@@ -111,7 +111,7 @@ Daha sonra CSS kurallarını ayrı bir CSS dosyasında yazarsınız:
 }
 ```
 
-React, CSS dosyalarınız nasıl ekleyeceğinizi belirtmez. En basit durumda, HTML'inize bir [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) elemanı eklersiniz. Bir derleme aracı veya çatı kullanıyorsanız, projenize nasıl CSS dosyası ekleyeceğinizi öğrenmek için dokümantasyonlara başvurun.
+React, CSS dosyalarınız nasıl ekleyeceğinizi belirtmez. En basit durumda, HTML'inize bir [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) elemanı eklersiniz. Bir derleme aracı veya framework kullanıyorsanız, projenize nasıl CSS dosyası ekleyeceğinizi öğrenmek için dokümantasyonlara başvurun.
 
 ## Veri gösterme {/*displaying-data*/}
 

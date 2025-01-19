@@ -42,7 +42,7 @@ React Labs yazılarında, aktif araştırma ve geliştirme aşamasındaki projel
 
 <BlogCard title="React Canaries: Meta Dışında Kademeli Özellik Sunumu" date="3 Mayıs, 2023" url="/blog/2023/05/03/react-canaries">
 
-Geleneksel olarak, yeni React özellikleri önce sadece Meta'da kullanılabilir ve daha sonra açık kaynak sürümlerinde yer alırdı. React topluluğuna, Meta'nın React'i dahili olarak kullanmasına benzer şekilde, tasarımları son haline yaklaşır yaklaşmaz bireysel yeni özellikleri benimseme seçeneği sunmak istiyoruz. Resmi olarak desteklenen yeni bir Canary sürüm kanalı sunuyoruz. Bu, çatı'lar gibi küratörlü kurulumların bireysel React özelliklerinin benimsenmesini React sürüm programından ayırmasına olanak tanır.
+Geleneksel olarak, yeni React özellikleri önce sadece Meta'da kullanılabilir ve daha sonra açık kaynak sürümlerinde yer alırdı. React topluluğuna, Meta'nın React'i dahili olarak kullanmasına benzer şekilde, tasarımları son haline yaklaşır yaklaşmaz bireysel yeni özellikleri benimseme seçeneği sunmak istiyoruz. Resmi olarak desteklenen yeni bir Canary sürüm kanalı sunuyoruz. Bu, framework'ler gibi küratörlü kurulumların bireysel React özelliklerinin benimsenmesini React sürüm programından ayırmasına olanak tanır.
 
 </BlogCard>
 
