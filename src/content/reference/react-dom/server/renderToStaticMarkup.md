@@ -59,7 +59,7 @@ Sunucu yanıtınızla birlikte gönderebileceğiniz bir HTML string'i olarak uyg
 
 ```js {5-6}
 import { renderToStaticMarkup } from 'react-dom/server';
-// Rota işleyicisinin sözdizimi, kullandığınız arka uç çatısına bağlıdır
+// Rota işleyicisinin sözdizimi, kullandığınız arka uç framework'üne bağlıdır
 app.use('/', (request, response) => {
   const html = renderToStaticMarkup(<Page />);
   response.send(html);
