@@ -352,13 +352,13 @@ React Derleyici, React'in birçok kuralını statik olarak doğrulayabilir ve bi
 ### Derlemeden sonra bir şey çalışmıyor {/*something-is-not-working-after-compilation*/}
 Eğer eslint-plugin-react-compiler yüklüyse, derleyici React kurallarının herhangi bir ihlalini editörünüzde gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir. **Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz.
 
-Ancak JavaScript'in esnek ve dinamik yapısı nedeniyle, tüm vakaları kapsamlı bir şekilde tespit etmek mümkün değildir. Bugs and undefined behavior such as infinite loops may occur in those cases.
+Ancak JavaScript'in esnek ve dinamik yapısı nedeniyle, tüm vakaları kapsamlı bir şekilde tespit etmek mümkün değildir. Bu durumlarda hatalar ve sonsuz döngüler gibi tanımlanmamış davranışlar meydana gelebilir.
 
-If your app doesn't work properly after compilation and you aren't seeing any ESLint errors, the compiler may be incorrectly compiling your code. To confirm this, try to make the issue go away by aggressively opting out any component or hook you think might be related via the [`"use no memo"` directive](#opt-out-of-the-compiler-for-a-component).
+Uygulamanız derlendikten sonra düzgün çalışmıyorsa ve herhangi bir ESLint hatası görmüyorsanız, derleyici kodunuzu yanlış derliyor olabilir. Bunu doğrulamak için, [`“use no memo”` yönergesi](#opt-out-of-the-compiler-for-a-component) aracılığıyla ilgili olabileceğini düşündüğünüz herhangi bir bileşeni veya hook'u agresif bir şekilde devre dışı bırakarak sorunun ortadan kalkmasını sağlamaya çalışın.
 
 ```js {2}
 function SuspiciousComponent() {
-  "use no memo"; // opts out this component from being compiled by React Compiler
+  "use no memo"; // bu bileşenin React Compiler tarafından derlenmesini engeller
   // ...
 }
 ```
