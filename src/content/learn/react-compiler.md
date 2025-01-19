@@ -339,11 +339,11 @@ Ayrıca üye olmak için başvurarak React Derleyici Çalışma Grubu'nda geri b
 
 React Compiler kodunuzun olduğunu varsayar:
 
-1. Is valid, semantic JavaScript.
-2. Tests that nullable/optional values and properties are defined before accessing them (for example, by enabling [`strictNullChecks`](https://www.typescriptlang.org/tsconfig/#strictNullChecks) if using TypeScript), i.e., `if (object.nullableProperty) { object.nullableProperty.foo }` or with optional-chaining `object.nullableProperty?.foo`.
-3. Follows the [Rules of React](https://react.dev/reference/rules).
+1. Geçerli, semantik JavaScript'tir.
+2. Nullable/opsiyonel değerlerin ve özelliklerin bunlara erişmeden önce tanımlandığını test eder (örneğin, TypeScript kullanılıyorsa [`strictNullChecks`](https://www.typescriptlang.org/tsconfig/#strictNullChecks) etkinleştirilerek), yani `if (object.nullableProperty) { object.nullableProperty.foo }` veya opsiyonel zincirleme `object.nullableProperty?.foo` ile.
+3. [React Kuralları](https://react.dev/reference/rules)'nı takip eder.
 
-React Compiler can verify many of the Rules of React statically, and will safely skip compilation when it detects an error. To see the errors we recommend also installing [eslint-plugin-react-compiler](https://www.npmjs.com/package/eslint-plugin-react-compiler).
+React Derleyici, React'in birçok kuralını statik olarak doğrulayabilir ve bir hata tespit ettiğinde derlemeyi güvenli bir şekilde atlayacaktır. Hataları görmek için ayrıca [eslint-plugin-react-compiler](https://www.npmjs.com/package/eslint-plugin-react-compiler) yüklemenizi öneririz.
 
 ### How do I know my components have been optimized? {/*how-do-i-know-my-components-have-been-optimized*/}
 
