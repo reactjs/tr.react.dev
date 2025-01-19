@@ -80,7 +80,7 @@ React ağacını HTML olarak [Node.js Stream](https://nodejs.org/api/stream.html
 ```js [[1, 5, "<App />"], [2, 6, "['/main.js']"]]
 import { renderToPipeableStream } from 'react-dom/server';
 
-// Route handler syntax backend çatınıza bağlıdır
+// Route handler syntax backend framework'ünüze bağlıdır
 app.use('/', (request, response) => {
   const { pipe } = renderToPipeableStream(<App />, {
     bootstrapScripts: ['/main.js'],
@@ -286,15 +286,15 @@ Stream işleminin, React'ın tarayıcıya yüklenmesini veya uygulamanızın etk
 
 **Sadece Suspense özelliğine sahip veri kaynakları Suspense bileşenini etkinleştirir.** Şunları içerir:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin çatılarda veri alma 
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin framework'lerde veri getirme 
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu temvel yükleme (lazy-loading).
 - [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 Effect veya olay yöneticisi içinde veri alınırken Suspense **tespit edilmez**.
 
-Yukarıdaki `Posts` bileşenininde veri almanın tam yolu çatınıza bağlıdır. Suspense özelliği etkin bir çatı kullanırsanız, detayları çatınızın veri alma dokümantasyonunun içinde bulabilirsiniz.
+Yukarıdaki `Posts` bileşenininde veri getirmenin tam yolu framework'ünüze bağlıdır. Suspense özelliği etkin bir framework kullanırsanız, detayları framework'ünüzün veri getirme dokümantasyonunun içinde bulabilirsiniz.
 
-Kanaat sahibi bir çatı (opinionated framework) olmadan Suspense özelliği etkin veri çekme henüz desteklenmemektedir. Suspense özellikli bir veri kaynağının uygulanmasına yönelik gereksinimler stabil değildir ve dokümantasyonu yoktur. React'ın sonraski sürümlerinde, veri kaynaklarını Suspense ile entegre etmek için resmi bir API yayınlanacaktır.
+Kanaat sahibi bir framework (opinionated framework) olmadan Suspense özelliği etkin veri çekme henüz desteklenmemektedir. Suspense özellikli bir veri kaynağının uygulanmasına yönelik gereksinimler stabil değildir ve dokümantasyonu yoktur. React'ın sonraski sürümlerinde, veri kaynaklarını Suspense ile entegre etmek için resmi bir API yayınlanacaktır.
 
 </Note>
 
@@ -546,7 +546,7 @@ Shelli yayımladığınızda ve stream işlemine başladığınızda durum kodun
 
 ---
 
-### Tarayıcılar ve statik oluşturma için tüm içerikleri bekleme  {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
+### Tarayıcılar ve statik oluşturma için tüm içerikleri bekleme {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
 
 Stream işlemi daha iyi bi kullanıcı deneyimi sunar çünkü kullanıcı, içerik olur olmaz içeriği görebilir.
 
