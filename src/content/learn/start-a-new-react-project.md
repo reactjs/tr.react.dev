@@ -4,20 +4,20 @@ title: Yeni bir React Projesi Başlatma
 
 <Intro>
 
-Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyorsanız, toplulukta popüler olan React destekli çatılardan birini seçmenizi öneririz.
+Yeni bir uygulama veya tamamen React ile yeni bir web sitesi oluşturmak istiyorsanız, toplulukta popüler olan React destekli framework'lerden birini seçmenizi öneririz.
 
 </Intro>
 
 
-React'ı bir çatı (framework) olmadan da kullanabilirsiniz; ancak çoğu uygulamanın ve sitenin sonunda kod bölme, yönlendirme, veri çekme ve HTML oluşturma gibi yaygın sorunlara çözümler ürettiğini gördük. Bu sorunlar yalnızca React için değil, tüm UI kütüphaneleri için ortaktır.
+React'ı bir framework olmadan da kullanabilirsiniz; ancak çoğu uygulamanın ve sitenin sonunda kod bölme, yönlendirme, veri çekme ve HTML oluşturma gibi yaygın sorunlara çözümler ürettiğini gördük. Bu sorunlar yalnızca React için değil, tüm UI kütüphaneleri için ortaktır.
 
-Bir çatıyla başlayarak, React'e hızlı bir başlangıç yapabilir ve sonrasında kendi çatınızı oluşturmaktan kurtulabilirsiniz.
+Bir framework'le başlayarak, React'e hızlı bir başlangıç yapabilir ve sonrasında kendi framework'ünüzü oluşturmaktan kurtulabilirsiniz.
 
 <DeepDive>
 
-#### React'ı bir çatı olmadan kullanabilir miyim? {/*can-i-use-react-without-a-framework*/}
+#### React'ı bir framework olmadan kullanabilir miyim? {/*can-i-use-react-without-a-framework*/}
 
-React'i kesinlikle bir çatı (framework) olmadan da kullanabilirsiniz - bu, [Sayfanızın bir bölümü için React'ı kullanın](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) ile açıklanmaktadır **Ancak, tamamen React ile yeni bir uygulama veya site oluşturuyorsanız, bir çatı kullanmanızı öneririz.**
+React'i kesinlikle bir framework olmadan da kullanabilirsiniz - bu, [Sayfanızın bir bölümü için React'ı kullanın](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) ile açıklanmaktadır **Ancak, tamamen React ile yeni bir uygulama veya site oluşturuyorsanız, bir framework kullanmanızı öneririz.**
 
 İşte nedeni.
 
@@ -26,16 +26,16 @@ Başlangıçta yönlendirme veya veri alımına ihtiyaç duymasanız bile, bunla
 
 **Bu sorunlar React'a özgü değildir. İşte bu yüzden Svelte'nin SvelteKit'i, Vue'nun Nuxt'ı ve daha fazlası vardır.** Bu sorunları kendi başınıza çözmek için, paketleyicinizi yönlendiricinizle ve veri alımı kütüphanenizle entegre etmeniz gerekecektir. İlk kurulumu çalıştırmak zor değildir, ancak zamanla büyüyen bir uygulamanın hızlı bir şekilde yüklenmesiyle ilgili birçok ince nokta vardır. Sayfanın gereken verilerle paralel olarak, mümkün olan en az uygulama kodunu göndermek isteyeceksiniz, ancak bunu tek bir istemci-sunucu turunda yapacaksınız. Muhtemelen sayfanın, progresif iyileştirmeyi desteklemek için JavaScript kodunuz çalışmadan önce etkileşimli olmasını isteyeceksiniz. Pazarlama sayfalarınız için JavaScript devre dışı bırakılsa bile her yerde barındırılabilen ve çalışabilen tamamen statik HTML dosyaları oluşturmak isteyebilirsiniz. Bu yetenekleri kendiniz oluşturmak gerçekten iş gerektirir.
 
-**Bu sayfadaki React çatıları, bu tür sorunları varsayılan olarak çözer ve sizden ekstra çalışma gerektirmeden bunları yapar.** Sizin için çok hafif başlamalarına ve ardından uygulamanızı ihtiyaçlarınızla birlikte ölçeklendirmelerine izin verirler. Her React çatısının bir topluluğu vardır, bu nedenle sorulara yanıt bulmak ve araçları yükseltmek daha kolaydır. Çatılar ayrıca kodunuza yapı sağlar, böylece siz ve diğerleri farklı projeler arasında bağlam ve becerileri koruyabilirsiniz. Öte yandan, özel bir kurulumla desteklenmeyen bağımlılık sürümlerinde sıkışma olasılığı daha yüksektir ve esasen kendi çatınızı oluşturacaksınız - her ne kadar topluluksuz ve yükseltme yolu olmayan bir çatı olsa da (ve geçmişte yaptığımızlar gibi daha dağınık tasarlanmış).
+**Bu sayfadaki React framework'leri, bu tür sorunları varsayılan olarak çözer ve sizden ekstra çalışma gerektirmeden bunları yapar.** Sizin için çok hafif başlamalarına ve ardından uygulamanızı ihtiyaçlarınızla birlikte ölçeklendirmelerine izin verirler. Her React framework'ünün bir topluluğu vardır, bu nedenle sorulara yanıt bulmak ve araçları yükseltmek daha kolaydır. Framework'ler ayrıca kodunuza yapı sağlar, böylece siz ve diğerleri farklı projeler arasında bağlam ve becerileri koruyabilirsiniz. Öte yandan, özel bir kurulumla desteklenmeyen bağımlılık sürümlerinde sıkışma olasılığı daha yüksektir ve esasen kendi framework'ünüzü oluşturacaksınız - her ne kadar topluluksuz ve yükseltme yolu olmayan bir framework olsa da (ve geçmişte yaptığımızlar gibi daha dağınık tasarlanmış).
 
-Eğer hala ikna olmadıysanız veya uygulamanızın bu çatılar tarafından iyi hizmet edilmeyen sıradışı kısıtlamaları varsa ve kendi özel kurulumunuzu oluşturmak istiyorsanız, sizi durduramayız - devam edin! `react` ve `react-dom`'u npm'den alın, [Vite](https://vitejs.dev/) veya [Parcel](https://parceljs.org/) gibi bir paketleyici ile özel derleme sürecinizi ayarlayın ve yönlendirme, statik üretim veya sunucu tarafı işleme ve daha fazlası için ihtiyaç duyduğunuz diğer araçları ekleyin.
+Eğer hala ikna olmadıysanız veya uygulamanızın bu framework'ler tarafından iyi hizmet edilmeyen sıradışı kısıtlamaları varsa ve kendi özel kurulumunuzu oluşturmak istiyorsanız, sizi durduramayız - devam edin! `react` ve `react-dom`'u npm'den alın, [Vite](https://vitejs.dev/) veya [Parcel](https://parceljs.org/) gibi bir paketleyici ile özel derleme sürecinizi ayarlayın ve yönlendirme, statik üretim veya sunucu tarafı işleme ve daha fazlası için ihtiyaç duyduğunuz diğer araçları ekleyin.
 </DeepDive>
 
-## Canlı ortam seviyesi React Çatıları {/*production-grade-react-frameworks*/}
+## Canlı ortam seviyesi React Framework'leri {/*production-grade-react-frameworks*/}
 
 These frameworks support all the features you need to deploy and scale your app in production and are working towards supporting our [full-stack architecture vision](#which-features-make-up-the-react-teams-full-stack-architecture-vision). All of the frameworks we recommend are open source with active communities for support, and can be deployed to your own server or a hosting provider. If you’re a framework author interested in being included on this list, [please let us know](https://github.com/reactjs/react.dev/issues/new?assignees=&labels=type%3A+framework&projects=&template=3-framework.yml&title=%5BFramework%5D%3A+).
 
-**[Next.js](https://nextjs.org/), tam özellikli bir React çatısıdır.** Çok yönlüdür ve çoğunlukla, statik bir blogdan karmaşık bir dinamik uygulamaya kadar, her büyüklükte React uygulaması oluşturmanıza olanak tanır. Yeni bir Next.js projesi oluşturmak için terminalinizde şunu çalıştırın:
+**[Next.js](https://nextjs.org/), tam özellikli bir React framework'üdür.** Çok yönlüdür ve çoğunlukla, statik bir blogdan karmaşık bir dinamik uygulamaya kadar, her büyüklükte React uygulaması oluşturmanıza olanak tanır. Yeni bir Next.js projesi oluşturmak için terminalinizde şunu çalıştırın:
 
 <TerminalBlock>
 npx create-next-app@latest
@@ -47,7 +47,7 @@ Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. Bir Next.js
 
 ### Remix {/*remix*/}
 
-**[Remix](https://remix.run/) iç içe yönlendirmeye sahip tam özellikli bir React çatısıdır.** Uygulamanızı iç içe geçmiş parçalara bölebilmenizi sağlar ve bu parçalar, kullanıcı işlemlerine karşılık olarak paralel olarak veri yükleyebilir ve yenilenebilir. Yeni bir Remix projesi oluşturmak için şunu çalıştırın:
+**[Remix](https://remix.run/) iç içe yönlendirmeye sahip tam özellikli bir React framework'üdür.** Uygulamanızı iç içe geçmiş parçalara bölebilmenizi sağlar ve bu parçalar, kullanıcı işlemlerine karşılık olarak paralel olarak veri yükleyebilir ve yenilenebilir. Yeni bir Remix projesi oluşturmak için şunu çalıştırın:
 
 <TerminalBlock>
 npx create-remix
@@ -59,7 +59,7 @@ Remix [Shopify](https://www.shopify.com/) tarafından desteklenmektedir. Yeni bi
 
 ### Gatsby {/*gatsby*/}
 
-**[Gatsby](https://www.gatsbyjs.com/) hızlı CMS destekli web siteleri için bir React çatısıdır.** Zengin eklenti ekosistemi ve GraphQL veri katmanı, içeriği, API'leri ve hizmetleri tek bir web sitesinde entegre etmeyi basitleştirir. Yeni bir Gatsby projesi oluşturmak için şunu çalıştırın:
+**[Gatsby](https://www.gatsbyjs.com/) hızlı CMS destekli web siteleri için bir React framework'üdür.** Zengin eklenti ekosistemi ve GraphQL veri katmanı, içeriği, API'leri ve hizmetleri tek bir web sitesinde entegre etmeyi basitleştirir. Yeni bir Gatsby projesi oluşturmak için şunu çalıştırın:
 
 <TerminalBlock>
 npx create-gatsby
@@ -71,7 +71,7 @@ Gatsby [Netlify](https://www.netlify.com/) tarafından desteklenmektedir. [Tam s
 
 ### Expo (yerel uygulamalar için) {/*expo*/}
 
-**[Expo](https://expo.dev/), gerçekten yerel kullanıcı arayüzlerine sahip evrensel Android, iOS ve web uygulamaları oluşturmanıza olanak tanıyan bir React çatısıdır.** [React Native](https://reactnative.dev/) için bir SDK sağlar ve yerel parçaların kullanımını kolaylaştırır. Yeni bir Expo projesi oluşturmak için şunu çalıştırın:
+**[Expo](https://expo.dev/), gerçekten yerel kullanıcı arayüzlerine sahip evrensel Android, iOS ve web uygulamaları oluşturmanıza olanak tanıyan bir React framework'üdür.** [React Native](https://reactnative.dev/) için bir SDK sağlar ve yerel parçaların kullanımını kolaylaştırır. Yeni bir Expo projesi oluşturmak için şunu çalıştırın:
 
 <TerminalBlock>
 npx create-expo-app
@@ -83,13 +83,13 @@ Expo [Expo (firma)](https://expo.dev/about) tarafından desteklenmektedir. Expo 
 
 ## Bleeding-edge React frameworks {/*bleeding-edge-react-frameworks*/}
 
-React'ı nasıl daha da geliştirebileceğimizi keşfederken, React'ı çatılarla (özellikle yönlendirme, paketleme ve sunucu teknolojileriyle) daha yakından entegre etmenin, React kullanıcılarının daha iyi uygulamalar geliştirmelerine yardımcı olmak için en büyük fırsatımız olduğunu fark ettik. Next.js ekibi, [React Sunucu Bileşenleri](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) gibi çatı bağımsız ileri seviye React özelliklerinin araştırılması, geliştirilmesi, entegrasyonu ve test edilmesi konusunda bizimle işbirliği yapmayı kabul etti.
+React'ı nasıl daha da geliştirebileceğimizi keşfederken, React'ı framework'lerde (özellikle yönlendirme, paketleme ve sunucu teknolojileriyle) daha yakından entegre etmenin, React kullanıcılarının daha iyi uygulamalar geliştirmelerine yardımcı olmak için en büyük fırsatımız olduğunu fark ettik. Next.js ekibi, [React Sunucu Bileşenleri](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) gibi framework bağımsız ileri seviye React özelliklerinin araştırılması, geliştirilmesi, entegrasyonu ve test edilmesi konusunda bizimle işbirliği yapmayı kabul etti.
 
-Bu özellikler, her geçen gün canlı ortama hazır olmaya daha da yaklaşıyor ve bunları entegre etme konusunda diğer paketleyici ve çatı geliştiricileriyle görüşmeler yapıyoruz. Umut ediyoruz ki, bir veya iki yıl içinde bu sayfadaki tüm çatılar, bu özelliklere tam desteğe sahip olacak. (Eğer bir çatı yazarı olarak bu özelliklerle deney yapmak için bizimle ortaklık kurmak istiyorsanız, lütfen bize bildirin!)
+Bu özellikler, her geçen gün canlı ortama hazır olmaya daha da yaklaşıyor ve bunları entegre etme konusunda diğer paketleyici ve framework geliştiricileriyle görüşmeler yapıyoruz. Umut ediyoruz ki, bir veya iki yıl içinde bu sayfadaki tüm framework'ler, bu özelliklere tam desteğe sahip olacak. (Eğer bir framework yazarı olarak bu özelliklerle deney yapmak için bizimle ortaklık kurmak istiyorsanız, lütfen bize bildirin!)
 
 ### Next.js (App Router) {/*nextjs-app-router*/}
 
-**[Next.js App Router (Uygulama Yönlendiricisi)](https://nextjs.org/docs), React ekibinin tam yığın mimari vizyonunu gerçekleştirmeyi amaçlayan Next.js API'lerinin yeniden tasarımıdır.** Bu, sunucuda veya hatta derleme sırasında çalışan eşzamansız bileşenlerde veri almanıza olanak tanır.
+**[Next.js App Router (Uygulama Yönlendiricisi)](https://nextjs.org/docs), React ekibinin tam yığın mimari vizyonunu gerçekleştirmeyi amaçlayan Next.js API'lerinin yeniden tasarımıdır.** Bu, sunucuda veya hatta derleme sırasında çalışan eşzamansız bileşenlerde veri getirmenize olanak tanır.
 
 Next.js [Vercel](https://vercel.com/) tarafından desteklenmektedir. Bir Next.js uygulamasını herhangi bir Node.js sunucusuna, sunucusuz barındırmaya (serverless) veya kendi sunucunuza [yapabilirsiniz](https://nextjs.org/docs/app/building-your-application/deploying). [Tümüyle statik Next.js uygulamaları](https://nextjs.org/docs/advanced-features/static-html-export) herhangi bir statik barındırmaya kurulabilir.
 
@@ -123,6 +123,6 @@ Next.js'in Uygulama Yönlendiricisi ayrıca [Suspense ile data getirme](/blog/20
 </Suspense>
 ```
 
-Sunucu Bileşenleri ve Suspense, Next.js özelliklerinden ziyade React özellikleridir. Bununla birlikte, bu özellikleri çatı düzeyinde benimsemek, önemli ölçüde uygulama çalışması gerektiren ve destek almayı gerektiren bir süreçtir. Şu anda, Next.js Uygulama Yönlendiricisi en eksiksiz uygulamadır. React ekibi, bu özellikleri bir sonraki nesil çerçevelerde daha kolay uygulanabilir hale getirmek için paketleyici geliştiricileriyle çalışmaktadır.
+Sunucu Bileşenleri ve Suspense, Next.js özelliklerinden ziyade React özellikleridir. Bununla birlikte, bu özellikleri framework düzeyinde benimsemek, önemli ölçüde uygulama çalışması gerektiren ve destek almayı gerektiren bir süreçtir. Şu anda, Next.js Uygulama Yönlendiricisi en eksiksiz uygulamadır. React ekibi, bu özellikleri bir sonraki nesil çerçevelerde daha kolay uygulanabilir hale getirmek için paketleyici geliştiricileriyle çalışmaktadır.
 
 </DeepDive>
