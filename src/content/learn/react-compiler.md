@@ -3,70 +3,70 @@ title: React Compiler
 ---
 
 <Intro>
-This page will give you an introduction to React Compiler and how to try it out successfully.
+Bu sayfa size React Compiler'ı tanıtacak ve nasıl başarılı bir şekilde deneyebileceğinizi gösterecektir.
 </Intro>
 
 <Wip>
-These docs are still a work in progress. More documentation is available in the [React Compiler Working Group repo](https://github.com/reactwg/react-compiler/discussions), and will be upstreamed into these docs when they are more stable.
+Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Compiler Çalışma Grubu reposu](https://github.com/reactwg/react-compiler/discussions) adresinde mevcuttur ve daha kararlı hale geldiklerinde bu belgelere eklenecektir.
 </Wip>
 
 <YouWillLearn>
 
-* Getting started with the compiler
-* Installing the compiler and ESLint plugin
-* Troubleshooting
+* Derleyici ile çalışmaya başlama
+* Derleyicinin ve ESLint eklentisinin yüklenmesi
+* Sorun Giderme
 
 </YouWillLearn>
 
 <Note>
-React Compiler is a new compiler currently in Beta, that we've open sourced to get early feedback from the community. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you’ve followed the [Rules of React](/reference/rules).
+React Compiler, şu anda Beta aşamasında olan ve topluluktan erken geri bildirim almak için açık kaynaklı hale getirdiğimiz yeni bir derleyicidir. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
 
-The latest Beta release can be found with the `@beta` tag, and daily experimental releases with `@experimental`.
+En son Beta sürümü `@beta` etiketiyle, günlük deneysel sürümler ise `@experimental` etiketiyle bulunabilir.
 </Note>
 
-React Compiler is a new compiler that we've open sourced to get early feedback from the community. It is a build-time only tool that automatically optimizes your React app. It works with plain JavaScript, and understands the [Rules of React](/reference/rules), so you don't need to rewrite any code to use it.
+React Compiler, topluluktan erken geri bildirim almak için açık kaynaklı hale getirdiğimiz yeni bir derleyicidir. React uygulamanızı otomatik olarak optimize eden yalnızca derleme zamanlı bir araçtır. Düz JavaScript ile çalışır ve [React Kuralları](/reference/rules)'nı anlar, bu nedenle kullanmak için herhangi bir kodu yeniden yazmanıza gerek yoktur.
 
-The compiler also includes an [ESLint plugin](#installing-eslint-plugin-react-compiler) that surfaces the analysis from the compiler right in your editor. **We strongly recommend everyone use the linter today.** The linter does not require that you have the compiler installed, so you can use it even if you are not ready to try out the compiler.
+Derleyici ayrıca, derleyiciden gelen analizi doğrudan düzenleyicinizde ortaya çıkaran bir [ESLint eklentisi](#installing-eslint-plugin-react-compiler) içerir. **Bugün herkesin linter kullanmasını şiddetle tavsiye ediyoruz.** Linter, derleyicinin yüklü olmasını gerektirmez, bu nedenle derleyiciyi denemeye hazır olmasanız bile kullanabilirsiniz.
 
-The compiler is currently released as `beta`, and is available to try out on React 17+ apps and libraries. To install the Beta:
+Derleyici şu anda `beta` olarak yayınlanmaktadır ve React 17+ uygulamaları ve kütüphaneleri üzerinde denenebilir. Beta sürümünü yüklemek için:
 
 <TerminalBlock>
 npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
 </TerminalBlock>
 
-Or, if you're using Yarn:
+Ya da Yarn kullanıyorsanız:
 
 <TerminalBlock>
 yarn add -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
 </TerminalBlock>
 
-If you are not using React 19 yet, please see [the section below](#using-react-compiler-with-react-17-or-18) for further instructions.
+Henüz React 19 kullanmıyorsanız, daha fazla talimat için lütfen [aşağıdaki bölüme](#using-react-compiler-with-react-17-or-18) bakın.
 
-### What does the compiler do? {/*what-does-the-compiler-do*/}
+### Derleyici ne yapar? {/*what-does-the-compiler-do*/}
 
-In order to optimize applications, React Compiler automatically memoizes your code. You may be familiar today with memoization through APIs such as `useMemo`, `useCallback`, and `React.memo`. With these APIs you can tell React that certain parts of your application don't need to recompute if their inputs haven't changed, reducing work on updates. While powerful, it's easy to forget to apply memoization or apply them incorrectly. This can lead to inefficient updates as React has to check parts of your UI that don't have any _meaningful_ changes.
+Uygulamaları optimize etmek için React Compiler kodunuzu otomatik olarak memoize eder. Bugün `useMemo`, `useCallback` ve `React` gibi API'ler aracılığıyla memoizasyona aşina olabilirsiniz.memo`. Bu API'ler ile React'e, girdileri değişmediyse uygulamanızın belirli bölümlerinin yeniden hesaplanmasına gerek olmadığını söyleyebilir, güncellemeler üzerindeki çalışmayı azaltabilirsiniz. Güçlü olmalarına rağmen, memoizasyon uygulamayı unutmak veya yanlış uygulamak kolaydır. React, kullanıcı arayüzünüzün herhangi bir _anlamlı_ değişikliğe sahip olmayan kısımlarını kontrol etmek zorunda olduğundan, bu durum verimsiz güncellemelere yol açabilir.
 
-The compiler uses its knowledge of JavaScript and React's rules to automatically memoize values or groups of values within your components and hooks. If it detects breakages of the rules, it will automatically skip over just those components or hooks, and continue safely compiling other code.
+Derleyici, JavaScript ve React'in kuralları hakkındaki bilgisini kullanarak bileşenleriniz ve kancalarınızdaki değerleri veya değer gruplarını otomatik olarak hafızaya alır. Kuralların ihlal edildiğini tespit ederse, otomatik olarak sadece bu bileşenlerin veya kancaların üzerinden atlayacak ve diğer kodu güvenli bir şekilde derlemeye devam edecektir.
 
 <Note>
-React Compiler can statically detect when Rules of React are broken, and safely opt-out of optimizing just the affected components or hooks. It is not necessary for the compiler to optimize 100% of your codebase.
+React Compiler, React kurallarının ne zaman bozulduğunu statik olarak tespit edebilir ve yalnızca etkilenen bileşenleri veya kancaları optimize etmeyi güvenli bir şekilde devre dışı bırakabilir. Derleyicinin kod tabanınızın %100'ünü optimize etmesi gerekli değildir.
 </Note>
 
-If your codebase is already very well-memoized, you might not expect to see major performance improvements with the compiler. However, in practice memoizing the correct dependencies that cause performance issues is tricky to get right by hand.
+Kod tabanınız zaten çok iyi ezberlenmişse, derleyici ile büyük performans iyileştirmeleri görmeyi beklemeyebilirsiniz. Ancak, pratikte performans sorunlarına neden olan doğru bağımlılıkları elle not etmek zordur.
 
 <DeepDive>
-#### What kind of memoization does React Compiler add? {/*what-kind-of-memoization-does-react-compiler-add*/}
+#### React Compiler ne tür notlar ekliyor? {/*what-kind-of-memoization-does-react-compiler-add*/}
 
-The initial release of React Compiler is primarily focused on **improving update performance** (re-rendering existing components), so it focuses on these two use cases:
+React Compiler'ın ilk sürümü öncelikle **güncelleme performansını iyileştirmeye** (mevcut bileşenleri yeniden oluşturma) odaklanmıştır, bu nedenle şu iki kullanım durumuna odaklanmaktadır:
 
-1. **Skipping cascading re-rendering of components**
-    * Re-rendering `<Parent />` causes many components in its component tree to re-render, even though only `<Parent />` has changed
-1. **Skipping expensive calculations from outside of React**
-    * For example, calling `expensivelyProcessAReallyLargeArrayOfObjects()` inside of your component or hook that needs that data
+1. **Bileşenlerin basamaklı olarak yeniden oluşturulması atlanıyor**
+    * `<Parent />` bileşeninin yeniden oluşturulması, yalnızca `<Parent />` değişmiş olsa bile bileşen ağacındaki birçok bileşenin yeniden oluşturulmasına neden olur
+1. **Pahalı hesaplamaları React'in dışından atlama**
+    * Örneğin, bu verilere ihtiyaç duyan bileşeninizin veya kancanızın içinde `expensivelyProcessAReallyLargeArrayOfObjects()` çağrısı yapmak
 
-#### Optimizing Re-renders {/*optimizing-re-renders*/}
+#### Yeniden Oluşturmaları Optimize Etme {/*optimizing-re-renders*/}
 
-React lets you express your UI as a function of their current state (more concretely: their props, state, and context). In its current implementation, when a component's state changes, React will re-render that component _and all of its children_ — unless you have applied some form of manual memoization with `useMemo()`, `useCallback()`, or `React.memo()`. For example, in the following example, `<MessageButton>` will re-render whenever `<FriendList>`'s state changes:
+React, kullanıcı arayüzünüzü mevcut durumlarının bir fonksiyonu olarak ifade etmenizi sağlar (daha somut olarak: props, state ve context). Mevcut uygulamasında, bir bileşenin durumu değiştiğinde, React o bileşeni _ve tüm alt bileşenlerini_ yeniden oluşturacaktır - eğer `useMemo()`, `useCallback()` veya `React.memo()` ile bir çeşit manuel memoizasyon uygulamadıysanız. Örneğin, aşağıdaki örnekte `<MessageButton>`, `<FriendList>`'in durumu her değiştiğinde yeniden oluşturulur:
 
 ```javascript
 function FriendList({ friends }) {
@@ -76,7 +76,7 @@ function FriendList({ friends }) {
   }
   return (
     <div>
-      <span>{onlineCount} online</span>
+      <span>{onlineCount} çevrimiçi</span>
       {friends.map((friend) => (
         <FriendListCard key={friend.id} friend={friend} />
       ))}
@@ -85,54 +85,54 @@ function FriendList({ friends }) {
   );
 }
 ```
-[_See this example in the React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
+[_React Compiler Playground'daki bu örneğe bakın_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
 
-React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX _and_ avoid re-rendering `<MessageButton>` as the count changes.
+React Compiler, manuel memoizasyonun eşdeğerini otomatik olarak uygulayarak, bir uygulamanın yalnızca ilgili bölümlerinin durum değiştikçe yeniden oluşturulmasını sağlar; bu bazen “ince taneli reaktivite” olarak adlandırılır. Yukarıdaki örnekte React Compiler, `<FriendListCard />`ın geri dönüş değerinin `friends` değişse bile yeniden kullanılabileceğini belirler ve bu JSX'i yeniden oluşturmaktan _ve_ sayı değiştikçe `<MessageButton>`'ı yeniden oluşturmaktan kaçınabilir.
 
-#### Expensive calculations also get memoized {/*expensive-calculations-also-get-memoized*/}
+#### Pahalı hesaplamalar da hafızaya alınır {/*expensive-calculations-also-get-memoized*/}
 
-The compiler can also automatically memoize for expensive calculations used during rendering:
+Derleyici ayrıca render sırasında kullanılan pahalı hesaplamalar için otomatik olarak memoize edebilir:
 
 ```js
-// **Not** memoized by React Compiler, since this is not a component or hook
+// **Not** Bu bir bileşen veya hook olmadığı için React Compiler tarafından memoized
 function expensivelyProcessAReallyLargeArrayOfObjects() { /* ... */ }
 
-// Memoized by React Compiler since this is a component
+// Bu bir bileşen olduğu için React Compiler tarafından not edilir
 function TableContainer({ items }) {
-  // This function call would be memoized:
+  // Bu fonksiyon çağrısı hafızaya alınacaktır:
   const data = expensivelyProcessAReallyLargeArrayOfObjects(items);
   // ...
 }
 ```
-[_See this example in the React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAejQAgFTYHIQAuumAtgqRAJYBeCAJpgEYCemASggIZyGYDCEUgAcqAGwQwANJjBUAdokyEAFlTCZ1meUUxdMcIcIjyE8vhBiYVECAGsAOvIBmURYSonMCAB7CzcgBuCGIsAAowEIhgYACCnFxioQAyXDAA5gixMDBcLADyzvlMAFYIvGAAFACUmMCYaNiYAHStOFgAvk5OGJgAshTUdIysHNy8AkbikrIKSqpaWvqGIiZmhE6u7p7ymAAqXEwSguZcCpKV9VSEFBodtcBOmAYmYHz0XIT6ALzefgFUYKhCJRBAxeLcJIsVIZLI5PKFYplCqVa63aoAbm6u0wMAQhFguwAPPRAQA+YAfL4dIloUmBMlODogDpAA)
+[_Bu örneğe şuradan bakabilirsiniz React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAejQAgFTYHIQAuumAtgqRAJYBeCAJpgEYCemASggIZyGYDCEUgAcqAGwQwANJjBUAdokyEAFlTCZ1meUUxdMcIcIjyE8vhBiYVECAGsAOvIBmURYSonMCAB7CzcgBuCGIsAAowEIhgYACCnFxioQAyXDAA5gixMDBcLADyzvlMAFYIvGAAFACUmMCYaNiYAHStOFgAvk5OGJgAshTUdIysHNy8AkbikrIKSqpaWvqGIiZmhE6u7p7ymAAqXEwSguZcCpKV9VSEFBodtcBOmAYmYHz0XIT6ALzefgFUYKhCJRBAxeLcJIsVIZLI5PKFYplCqVa63aoAbm6u0wMAQhFguwAPPRAQA+YAfL4dIloUmBMlODogDpAA)
 
-However, if `expensivelyProcessAReallyLargeArrayOfObjects` is truly an expensive function, you may want to consider implementing its own memoization outside of React, because:
+Ancak, `expensivelyProcessAReallyLargeArrayOfObjects` gerçekten pahalı bir işlevse, React dışında kendi memoizasyonunu uygulamayı düşünebilirsiniz, çünkü:
 
-- React Compiler only memoizes React components and hooks, not every function
-- React Compiler's memoization is not shared across multiple components or hooks
+- React Derleyici her işlevi değil, yalnızca React bileşenlerini ve hook'larını belleğe alır
+- React Compiler'ın memoizasyonu birden fazla bileşen veya hook arasında paylaşılmaz
 
-So if `expensivelyProcessAReallyLargeArrayOfObjects` was used in many different components, even if the same exact items were passed down, that expensive calculation would be run repeatedly. We recommend [profiling](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) first to see if it really is that expensive before making code more complicated.
+Dolayısıyla, `expensivelyProcessAReallyLargeArrayOfObjects' birçok farklı bileşende kullanılmışsa, aynı öğeler aşağı aktarılsa bile, bu pahalı hesaplama tekrar tekrar çalıştırılacaktır. Kodu daha karmaşık hale getirmeden önce gerçekten bu kadar pahalı olup olmadığını görmek için önce [profiling](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) öneririz.
 </DeepDive>
 
-### Should I try out the compiler? {/*should-i-try-out-the-compiler*/}
+### Derleyiciyi denemeli miyim? {/*should-i-try-out-the-compiler*/}
 
-Please note that the compiler is still in Beta and has many rough edges. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you've followed the [Rules of React](/reference/rules).
+Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip olduğunu unutmayın. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
 
-**You don't have to rush into using the compiler now. It's okay to wait until it reaches a stable release before adopting it.** However, we do appreciate trying it out in small experiments in your apps so that you can [provide feedback](#reporting-issues) to us to help make the compiler better.
+**Derleyiciyi şimdi kullanmak için acele etmenize gerek yok. Benimsemeden önce kararlı bir sürüme ulaşmasını beklemenizde bir sakınca yoktur.** Bununla birlikte, derleyiciyi daha iyi hale getirmemize yardımcı olmak için bize [geri bildirim](#reporting-issues) sağlayabilmeniz için uygulamalarınızda küçük deneylerle denemekten memnuniyet duyarız.
 
-## Getting Started {/*getting-started*/}
+## Başlarken {/*getting-started*/}
 
-In addition to these docs, we recommend checking the [React Compiler Working Group](https://github.com/reactwg/react-compiler) for additional information and discussion about the compiler.
+Bu dokümanlara ek olarak, derleyici hakkında daha fazla bilgi ve tartışma için [React Compiler Working Group](https://github.com/reactwg/react-compiler) adresini kontrol etmenizi öneririz.
 
-### Installing eslint-plugin-react-compiler {/*installing-eslint-plugin-react-compiler*/}
+### eslint-plugin-react-compiler'ı yükleme {/*installing-eslint-plugin-react-compiler*/}
 
-React Compiler also powers an ESLint plugin. The ESLint plugin can be used **independently** of the compiler, meaning you can use the ESLint plugin even if you don't use the compiler.
+React Compiler ayrıca bir ESLint eklentisine de güç verir. ESLint eklentisi derleyiciden **bağımsız** olarak kullanılabilir, yani derleyiciyi kullanmasanız bile ESLint eklentisini kullanabilirsiniz.
 
 <TerminalBlock>
 npm install -D eslint-plugin-react-compiler@beta
 </TerminalBlock>
 
-Then, add it to your ESLint config:
+Ardından, ESLint yapılandırmanıza ekleyin:
 
 ```js
 import reactCompiler from 'eslint-plugin-react-compiler'
@@ -149,7 +149,7 @@ export default [
 ]
 ```
 
-Or, in the deprecated eslintrc config format:
+Ya da kullanımdan kaldırılmış eslintrc yapılandırma biçiminde:
 
 ```js
 module.exports = {
@@ -162,18 +162,18 @@ module.exports = {
 }
 ```
 
-The ESLint plugin will display any violations of the rules of React in your editor. When it does this, it means that the compiler has skipped over optimizing that component or hook. This is perfectly okay, and the compiler can recover and continue optimizing other components in your codebase.
+ESLint eklentisi, editörünüzde React kurallarının herhangi bir ihlalini gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir.
 
 <Note>
-**You don't have to fix all ESLint violations straight away.** You can address them at your own pace to increase the amount of components and hooks being optimized, but it is not required to fix everything before you can use the compiler.
+**Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz, ancak derleyiciyi kullanmadan önce her şeyi düzeltmeniz gerekmez.
 </Note>
 
-### Rolling out the compiler to your codebase {/*using-the-compiler-effectively*/}
+### Derleyiciyi kod tabanınızda kullanıma sunma {/*using-the-compiler-effectively*/}
 
-#### Existing projects {/*existing-projects*/}
-The compiler is designed to compile functional components and hooks that follow the [Rules of React](/reference/rules). It can also handle code that breaks those rules by bailing out (skipping over) those components or hooks. However, due to the flexible nature of JavaScript, the compiler cannot catch every possible violation and may compile with false negatives: that is, the compiler may accidentally compile a component/hook that breaks the Rules of React which can lead to undefined behavior.
+#### Mevcut projeler {/*existing-projects*/}
+Derleyici, [React Kuralları](/reference/rules)'na uyan işlevsel bileşenleri ve kancaları derlemek için tasarlanmıştır. Ayrıca, bu bileşenleri veya hook'ları atlayarak (üzerinden atlayarak) bu kuralları ihlal eden kodlarla da başa çıkabilir. Ancak JavaScript'in esnek yapısı nedeniyle derleyici olası her ihlali yakalayamaz ve yanlış negatiflerle derleme yapabilir: Yani, derleyici yanlışlıkla React kurallarını ihlal eden bir bileşeni/hook'u derleyebilir ve bu da tanımlanmamış davranışlara yol açabilir.
 
-For this reason, to adopt the compiler successfully on existing projects, we recommend running it on a small directory in your product code first. You can do this by configuring the compiler to only run on a specific set of directories:
+Bu nedenle, derleyiciyi mevcut projelere başarıyla uyarlamak için önce ürün kodunuzdaki küçük bir dizinde çalıştırmanızı öneririz. Bunu, derleyiciyi yalnızca belirli bir dizin kümesinde çalışacak şekilde yapılandırarak yapabilirsiniz:
 
 ```js {3}
 const ReactCompilerConfig = {
@@ -183,21 +183,21 @@ const ReactCompilerConfig = {
 };
 ```
 
-When you have more confidence with rolling out the compiler, you can expand coverage to other directories as well and slowly roll it out to your whole app.
+Derleyiciyi yayma konusunda kendinize daha fazla güvendiğinizde, kapsamı diğer dizinlere de genişletebilir ve yavaş yavaş tüm uygulamanıza yayabilirsiniz.
 
-#### New projects {/*new-projects*/}
+#### Yeni projeler {/*new-projects*/}
 
-If you're starting a new project, you can enable the compiler on your entire codebase, which is the default behavior.
+Yeni bir proje başlatıyorsanız, varsayılan davranış olan kod tabanınızın tamamında derleyiciyi etkinleştirebilirsiniz.
 
-### Using React Compiler with React 17 or 18 {/*using-react-compiler-with-react-17-or-18*/}
+### React Compiler'ı React 17 veya 18 ile Kullanma {/*using-react-compiler-with-react-17-or-18*/}
 
-React Compiler works best with React 19 RC. If you are unable to upgrade, you can install the extra `react-compiler-runtime` package which will allow the compiled code to run on versions prior to 19. However, note that the minimum supported version is 17.
+React Compiler en iyi React 19 RC ile çalışır. Yükseltme yapamıyorsanız, derlenen kodun 19'dan önceki sürümlerde çalışmasına izin verecek ekstra `react-compiler-runtime` paketini yükleyebilirsiniz. Ancak, desteklenen minimum sürümün 17 olduğunu unutmayın.
 
 <TerminalBlock>
 npm install react-compiler-runtime@beta
 </TerminalBlock>
 
-You should also add the correct `target` to your compiler config, where `target` is the major version of React you are targeting:
+Ayrıca derleyici yapılandırmanıza doğru `target`ı eklemelisiniz, burada `target` hedeflediğiniz React'in ana sürümüdür:
 
 ```js {3}
 // babel.config.js
@@ -214,17 +214,17 @@ module.exports = function () {
 };
 ```
 
-### Using the compiler on libraries {/*using-the-compiler-on-libraries*/}
+### Derleyiciyi kütüphaneler üzerinde kullanma {/*using-the-compiler-on-libraries*/}
 
-React Compiler can also be used to compile libraries. Because React Compiler needs to run on the original source code prior to any code transformations, it is not possible for an application's build pipeline to compile the libraries they use. Hence, our recommendation is for library maintainers to independently compile and test their libraries with the compiler, and ship compiled code to npm.
+React Compiler, kütüphaneleri derlemek için de kullanılabilir. React Compiler'ın herhangi bir kod dönüşümünden önce orijinal kaynak kod üzerinde çalışması gerektiğinden, bir uygulamanın derleme hattının kullandıkları kütüphaneleri derlemesi mümkün değildir. Bu nedenle, önerimiz kütüphane sorumlularının kütüphanelerini derleyici ile bağımsız olarak derleyip test etmeleri ve derlenmiş kodu npm'ye göndermeleridir.
 
-Because your code is pre-compiled, users of your library will not need to have the compiler enabled in order to benefit from the automatic memoization applied to your library. If your library targets apps not yet on React 19, specify a minimum [`target` and add `react-compiler-runtime` as a direct dependency](#using-react-compiler-with-react-17-or-18). The runtime package will use the correct implementation of APIs depending on the application's version, and polyfill the missing APIs if necessary.
+Kodunuz önceden derlendiğinden, kütüphanenizin kullanıcılarının kütüphanenize uygulanan otomatik bellekleştirmeden yararlanmak için derleyiciyi etkinleştirmeleri gerekmeyecektir.Kütüphaneniz henüz React 19'da olmayan uygulamaları hedefliyorsa, minimum [`target` belirtin ve doğrudan bağımlılık olarak `react-compiler-runtime` ekleyin](#using-react-compiler-with-react-17-or-18). Çalışma zamanı paketi, uygulamanın sürümüne bağlı olarak API'lerin doğru uygulamasını kullanacak ve gerekirse eksik API'leri çoklu dolduracaktır.
 
-Library code can often require more complex patterns and usage of escape hatches. For this reason, we recommend ensuring that you have sufficient testing in order to identify any issues that might arise from using the compiler on your library. If you identify any issues, you can always opt-out the specific components or hooks with the [`'use no memo'` directive](#something-is-not-working-after-compilation).
+Kütüphane kodu genellikle daha karmaşık kalıplar ve kaçış kapaklarının kullanılmasını gerektirebilir. Bu nedenle, kütüphanenizde derleyiciyi kullanırken ortaya çıkabilecek sorunları tespit etmek için yeterli test yapmanızı öneririz. Herhangi bir sorun tespit ederseniz, [`'use no memo'` yönergesi](#something-is-working-notafter-compilation) ile belirli bileşenleri veya hook'ları her zaman devre dışı bırakabilirsiniz.
 
-Similarly to apps, it is not necessary to fully compile 100% of your components or hooks to see benefits in your library. A good starting point might be to identify the most performance sensitive parts of your library and ensuring that they don't break the [Rules of React](/reference/rules), which you can use `eslint-plugin-react-compiler` to identify.
+Uygulamalara benzer şekilde, kütüphanenizin faydalarını görmek için bileşenlerinizin veya hook'larınızın %100'ünü tamamen derlemeniz gerekmez. İyi bir başlangıç noktası, kütüphanenizin performansa en duyarlı kısımlarını belirlemek ve tanımlamak için `eslint-plugin-react-compiler` kullanabileceğiniz [React Kuralları](/reference/rules)'nı ihlal etmediklerinden emin olmak olabilir.
 
-## Usage {/*installation*/}
+## Kullanım {/*installation*/}
 
 ### Babel {/*usage-with-babel*/}
 
@@ -232,9 +232,9 @@ Similarly to apps, it is not necessary to fully compile 100% of your components 
 npm install babel-plugin-react-compiler@beta
 </TerminalBlock>
 
-The compiler includes a Babel plugin which you can use in your build pipeline to run the compiler.
+Derleyici, derleyiciyi çalıştırmak için derleme hattınızda kullanabileceğiniz bir Babel eklentisi içerir.
 
-After installing, add it to your Babel config. Please note that it's critical that the compiler run **first** in the pipeline:
+Yükledikten sonra Babel yapılandırmanıza ekleyin. Lütfen derleyicinin pipeline'da **ilk** olarak çalışmasının kritik olduğunu unutmayın:
 
 ```js {7}
 // babel.config.js
@@ -243,18 +243,18 @@ const ReactCompilerConfig = { /* ... */ };
 module.exports = function () {
   return {
     plugins: [
-      ['babel-plugin-react-compiler', ReactCompilerConfig], // must run first!
+      ['babel-plugin-react-compiler', ReactCompilerConfig], // önce koşmalı!
       // ...
     ],
   };
 };
 ```
 
-`babel-plugin-react-compiler` should run first before other Babel plugins as the compiler requires the input source information for sound analysis.
+Derleyici ses analizi için girdi kaynak bilgisine ihtiyaç duyduğundan `babel-plugin-react-compiler` diğer Babel eklentilerinden önce çalıştırılmalıdır.
 
 ### Vite {/*usage-with-vite*/}
 
-If you use Vite, you can add the plugin to vite-plugin-react:
+Vite kullanıyorsanız, eklentiyi vite-plugin-react'e ekleyebilirsiniz:
 
 ```js {10}
 // vite.config.js
@@ -278,10 +278,10 @@ export default defineConfig(() => {
 
 ### Next.js {/*usage-with-nextjs*/}
 
-Please refer to the [Next.js docs](https://nextjs.org/docs/app/api-reference/next-config-js/reactCompiler) for more information.
+Daha fazla bilgi için lütfen [Next.js docs](https://nextjs.org/docs/app/api-reference/next-config-js/reactCompiler) adresine bakın.
 
 ### Remix {/*usage-with-remix*/}
-Install `vite-plugin-babel`, and add the compiler's Babel plugin to it:
+`vite-plugin-babel` yükleyin ve derleyicinin Babel eklentisini buna ekleyin:
 
 <TerminalBlock>
 npm install vite-plugin-babel
@@ -299,7 +299,7 @@ export default defineConfig({
     babel({
       filter: /\.[jt]sx?$/,
       babelConfig: {
-        presets: ["@babel/preset-typescript"], // if you use TypeScript
+        presets: ["@babel/preset-typescript"], // TypeScript kullanıyorsanız
         plugins: [
           ["babel-plugin-react-compiler", ReactCompilerConfig],
         ],
@@ -311,54 +311,54 @@ export default defineConfig({
 
 ### Webpack {/*usage-with-webpack*/}
 
-A community Webpack loader is [now available here](https://github.com/SukkaW/react-compiler-webpack).
+Bir topluluk Webpack yükleyicisi [artık burada mevcut](https://github.com/SukkaW/react-compiler-webpack).
 
 ### Expo {/*usage-with-expo*/}
 
-Please refer to [Expo's docs](https://docs.expo.dev/guides/react-compiler/) to enable and use the React Compiler in Expo apps.
+Expo uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lütfen [Expo'nun dokümanlarına](https://docs.expo.dev/guides/react-compiler/) bakın.
 
 ### Metro (React Native) {/*usage-with-react-native-metro*/}
 
-React Native uses Babel via Metro, so refer to the [Usage with Babel](#usage-with-babel) section for installation instructions.
+React Native, Babel'i Metro aracılığıyla kullanır, bu nedenle kurulum talimatları için [Babel ile kullanım](#usage-with-babel) bölümüne bakın.
 
 ### Rspack {/*usage-with-rspack*/}
 
-Please refer to [Rspack's docs](https://rspack.dev/guide/tech/react#react-compiler) to enable and use the React Compiler in Rspack apps.
+Rspack uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lütfen [Rspack's docs](https://rspack.dev/guide/tech/react#react-compiler) adresine bakın.
 
 ### Rsbuild {/*usage-with-rsbuild*/}
 
-Please refer to [Rsbuild's docs](https://rsbuild.dev/guide/framework/react#react-compiler) to enable and use the React Compiler in Rsbuild apps.
+Rsbuild uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lütfen [Rsbuild'in dokümanlarına](https://rsbuild.dev/guide/framework/react#react-compiler) bakın.
 
 ## Troubleshooting {/*troubleshooting*/}
 
-To report issues, please first create a minimal repro on the [React Compiler Playground](https://playground.react.dev/) and include it in your bug report. You can open issues in the [facebook/react](https://github.com/facebook/react/issues) repo.
+Sorunları bildirmek için lütfen önce [React Compiler Playground](https://playground.react.dev/) üzerinde minimal bir repro oluşturun ve bunu hata raporunuza ekleyin. Sorunları [facebook/react](https://github.com/facebook/react/issues) reposunda açabilirsiniz.
 
-You can also provide feedback in the React Compiler Working Group by applying to be a member. Please see [the README for more details on joining](https://github.com/reactwg/react-compiler).
+Ayrıca üye olmak için başvurarak React Derleyici Çalışma Grubu'nda geri bildirim sağlayabilirsiniz. Üyelik hakkında daha fazla bilgi için lütfen [README'ye](https://github.com/reactwg/react-compiler) bakın.
 
-### What does the compiler assume? {/*what-does-the-compiler-assume*/}
+### Derleyici ne varsayıyor? {/*what-does-the-compiler-assume*/}
 
-React Compiler assumes that your code:
+React Compiler kodunuzun olduğunu varsayar:
 
-1. Is valid, semantic JavaScript.
-2. Tests that nullable/optional values and properties are defined before accessing them (for example, by enabling [`strictNullChecks`](https://www.typescriptlang.org/tsconfig/#strictNullChecks) if using TypeScript), i.e., `if (object.nullableProperty) { object.nullableProperty.foo }` or with optional-chaining `object.nullableProperty?.foo`.
-3. Follows the [Rules of React](https://react.dev/reference/rules).
+1. Geçerli, semantik JavaScript'tir.
+2. Nullable/opsiyonel değerlerin ve özelliklerin bunlara erişmeden önce tanımlandığını test eder (örneğin, TypeScript kullanılıyorsa [`strictNullChecks`](https://www.typescriptlang.org/tsconfig/#strictNullChecks) etkinleştirilerek), yani `if (object.nullableProperty) { object.nullableProperty.foo }` veya opsiyonel zincirleme `object.nullableProperty?.foo` ile.
+3. [React Kuralları](https://react.dev/reference/rules)'nı takip eder.
 
-React Compiler can verify many of the Rules of React statically, and will safely skip compilation when it detects an error. To see the errors we recommend also installing [eslint-plugin-react-compiler](https://www.npmjs.com/package/eslint-plugin-react-compiler).
+React Derleyici, React'in birçok kuralını statik olarak doğrulayabilir ve bir hata tespit ettiğinde derlemeyi güvenli bir şekilde atlayacaktır. Hataları görmek için ayrıca [eslint-plugin-react-compiler](https://www.npmjs.com/package/eslint-plugin-react-compiler) yüklemenizi öneririz.
 
-### How do I know my components have been optimized? {/*how-do-i-know-my-components-have-been-optimized*/}
+### Bileşenlerimin optimize edildiğini nasıl bilebilirim? {/*how-do-i-know-my-components-have-been-optimized*/}
 
-[React DevTools](/learn/react-developer-tools) (v5.0+) and [React Native DevTools](https://reactnative.dev/docs/react-native-devtools) have built-in support for React Compiler and will display a "Memo ✨" badge next to components that have been optimized by the compiler.
+[React DevTools](/learn/react-developer-tools) (v5.0+) ve [React Native DevTools](https://reactnative.dev/docs/react-native-devtools) React Compiler için yerleşik desteğe sahiptir ve derleyici tarafından optimize edilen bileşenlerin yanında bir “Memo ✨” rozeti görüntüler.
 
-### Something is not working after compilation {/*something-is-not-working-after-compilation*/}
-If you have eslint-plugin-react-compiler installed, the compiler will display any violations of the rules of React in your editor. When it does this, it means that the compiler has skipped over optimizing that component or hook. This is perfectly okay, and the compiler can recover and continue optimizing other components in your codebase. **You don't have to fix all ESLint violations straight away.** You can address them at your own pace to increase the amount of components and hooks being optimized.
+### Derlemeden sonra bir şey çalışmıyor {/*something-is-not-working-after-compilation*/}
+Eğer eslint-plugin-react-compiler yüklüyse, derleyici React kurallarının herhangi bir ihlalini editörünüzde gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir. **Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz.
 
-Due to the flexible and dynamic nature of JavaScript however, it's not possible to comprehensively detect all cases. Bugs and undefined behavior such as infinite loops may occur in those cases.
+Ancak JavaScript'in esnek ve dinamik yapısı nedeniyle, tüm vakaları kapsamlı bir şekilde tespit etmek mümkün değildir. Bu durumlarda hatalar ve sonsuz döngüler gibi tanımlanmamış davranışlar meydana gelebilir.
 
-If your app doesn't work properly after compilation and you aren't seeing any ESLint errors, the compiler may be incorrectly compiling your code. To confirm this, try to make the issue go away by aggressively opting out any component or hook you think might be related via the [`"use no memo"` directive](#opt-out-of-the-compiler-for-a-component).
+Uygulamanız derlendikten sonra düzgün çalışmıyorsa ve herhangi bir ESLint hatası görmüyorsanız, derleyici kodunuzu yanlış derliyor olabilir. Bunu doğrulamak için, [`“use no memo”` yönergesi](#opt-out-of-the-compiler-for-a-component) aracılığıyla ilgili olabileceğini düşündüğünüz herhangi bir bileşeni veya hook'u agresif bir şekilde devre dışı bırakarak sorunun ortadan kalkmasını sağlamaya çalışın.
 
 ```js {2}
 function SuspiciousComponent() {
-  "use no memo"; // opts out this component from being compiled by React Compiler
+  "use no memo"; // bu bileşenin React Compiler tarafından derlenmesini engeller
   // ...
 }
 ```
@@ -366,13 +366,13 @@ function SuspiciousComponent() {
 <Note>
 #### `"use no memo"` {/*use-no-memo*/}
 
-`"use no memo"` is a _temporary_ escape hatch that lets you opt-out components and hooks from being compiled by the React Compiler. This directive is not meant to be long lived the same way as eg [`"use client"`](/reference/rsc/use-client) is.
+`“use no memo"`, bileşenlerin ve kancaların React Derleyicisi tarafından derlenmesini engellemenizi sağlayan _geçici_ bir kaçış kapısıdır. Bu direftifin, örneğin [`“use client”`](/reference/rsc/use-client) gibi uzun ömürlü olması amaçlanmamıştır.
 
-It is not recommended to reach for this directive unless it's strictly necessary. Once you opt-out a component or hook, it is opted-out forever until the directive is removed. This means that even if you fix the code, the compiler will still skip over compiling it unless you remove the directive.
+Kesinlikle gerekli olmadıkça bu direktife ulaşılması tavsiye edilmez. Bir bileşeni veya hook'u devre dışı bıraktığınızda, direftif kaldırılana kadar sonsuza kadar devre dışı kalır. Bu, kodu düzeltseniz bile, direktifi kaldırmadığınız sürece derleyicinin kodu derlemeyi atlayacağı anlamına gelir.
 </Note>
 
-When you make the error go away, confirm that removing the opt out directive makes the issue come back. Then share a bug report with us (you can try to reduce it to a small repro, or if it's open source code you can also just paste the entire source) using the [React Compiler Playground](https://playground.react.dev) so we can identify and help fix the issue.
+Hatanın ortadan kalkmasını sağladığınızda, devre dışı bırakma yönergesini kaldırmanın sorunu geri getirdiğini doğrulayın. Ardından [React Compiler Playground](https://playground.react.dev) kullanarak bir hata raporunu bizimle paylaşın (küçük bir reproya indirgemeyi deneyebilirsiniz veya açık kaynak koduysa tüm kaynağı da yapıştırabilirsiniz), böylece sorunu belirleyebilir ve düzeltmeye yardımcı olabiliriz.
 
-### Other issues {/*other-issues*/}
+### Diğer konular {/*other-issues*/}
 
-Please see https://github.com/reactwg/react-compiler/discussions/7.
+Lütfen https://github.com/reactwg/react-compiler/discussions/7 adresine bakınız.
