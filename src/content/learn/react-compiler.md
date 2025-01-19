@@ -220,11 +220,11 @@ React Compiler, kütüphaneleri derlemek için de kullanılabilir. React Compile
 
 Kodunuz önceden derlendiğinden, kütüphanenizin kullanıcılarının kütüphanenize uygulanan otomatik bellekleştirmeden yararlanmak için derleyiciyi etkinleştirmeleri gerekmeyecektir.Kütüphaneniz henüz React 19'da olmayan uygulamaları hedefliyorsa, minimum [`target` belirtin ve doğrudan bağımlılık olarak `react-compiler-runtime` ekleyin](#using-react-compiler-with-react-17-or-18). Çalışma zamanı paketi, uygulamanın sürümüne bağlı olarak API'lerin doğru uygulamasını kullanacak ve gerekirse eksik API'leri çoklu dolduracaktır.
 
-Library code can often require more complex patterns and usage of escape hatches. For this reason, we recommend ensuring that you have sufficient testing in order to identify any issues that might arise from using the compiler on your library. If you identify any issues, you can always opt-out the specific components or hooks with the [`'use no memo'` directive](#something-is-not-working-after-compilation).
+Kütüphane kodu genellikle daha karmaşık kalıplar ve kaçış kapaklarının kullanılmasını gerektirebilir. Bu nedenle, kütüphanenizde derleyiciyi kullanırken ortaya çıkabilecek sorunları tespit etmek için yeterli test yapmanızı öneririz. Herhangi bir sorun tespit ederseniz, [`'use no memo'` yönergesi](#something-is-working-notafter-compilation) ile belirli bileşenleri veya hook'ları her zaman devre dışı bırakabilirsiniz.
 
-Similarly to apps, it is not necessary to fully compile 100% of your components or hooks to see benefits in your library. A good starting point might be to identify the most performance sensitive parts of your library and ensuring that they don't break the [Rules of React](/reference/rules), which you can use `eslint-plugin-react-compiler` to identify.
+Uygulamalara benzer şekilde, kütüphanenizin faydalarını görmek için bileşenlerinizin veya hook'larınızın %100'ünü tamamen derlemeniz gerekmez. İyi bir başlangıç noktası, kütüphanenizin performansa en duyarlı kısımlarını belirlemek ve tanımlamak için `eslint-plugin-react-compiler` kullanabileceğiniz [React Kuralları](/reference/rules)'nı ihlal etmediklerinden emin olmak olabilir.
 
-## Usage {/*installation*/}
+## Kullanım {/*installation*/}
 
 ### Babel {/*usage-with-babel*/}
 
@@ -232,9 +232,9 @@ Similarly to apps, it is not necessary to fully compile 100% of your components 
 npm install babel-plugin-react-compiler@beta
 </TerminalBlock>
 
-The compiler includes a Babel plugin which you can use in your build pipeline to run the compiler.
+Derleyici, derleyiciyi çalıştırmak için derleme hattınızda kullanabileceğiniz bir Babel eklentisi içerir.
 
-After installing, add it to your Babel config. Please note that it's critical that the compiler run **first** in the pipeline:
+Yükledikten sonra Babel yapılandırmanıza ekleyin. Lütfen derleyicinin pipeline'da **ilk** olarak çalışmasının kritik olduğunu unutmayın:
 
 ```js {7}
 // babel.config.js
@@ -243,14 +243,14 @@ const ReactCompilerConfig = { /* ... */ };
 module.exports = function () {
   return {
     plugins: [
-      ['babel-plugin-react-compiler', ReactCompilerConfig], // must run first!
+      ['babel-plugin-react-compiler', ReactCompilerConfig], // önce koşmalı!
       // ...
     ],
   };
 };
 ```
 
-`babel-plugin-react-compiler` should run first before other Babel plugins as the compiler requires the input source information for sound analysis.
+Derleyici ses analizi için girdi kaynak bilgisine ihtiyaç duyduğundan `babel-plugin-react-compiler` diğer Babel eklentilerinden önce çalıştırılmalıdır.
 
 ### Vite {/*usage-with-vite*/}
 
