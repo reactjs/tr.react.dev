@@ -66,7 +66,7 @@ Uygulamanızı sunucu yanıtınızla birlikte gönderebileceğiniz bir HTML stri
 ```js {5-6}
 import { renderToString } from 'react-dom/server';
 
-// Rota işleyici sözdizimi backend çatınıza bağlıdır
+// Rota işleyici sözdizimi backend framework'ünüze bağlıdır
 app.use('/', (request, response) => {
   const html = renderToString(<App />);
   response.send(html);
