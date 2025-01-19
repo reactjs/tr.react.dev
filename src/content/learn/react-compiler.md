@@ -124,15 +124,15 @@ Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip 
 
 Bu dokümanlara ek olarak, derleyici hakkında daha fazla bilgi ve tartışma için [React Compiler Working Group](https://github.com/reactwg/react-compiler) adresini kontrol etmenizi öneririz.
 
-### Installing eslint-plugin-react-compiler {/*installing-eslint-plugin-react-compiler*/}
+### eslint-plugin-react-compiler'ı yükleme {/*installing-eslint-plugin-react-compiler*/}
 
-React Compiler also powers an ESLint plugin. The ESLint plugin can be used **independently** of the compiler, meaning you can use the ESLint plugin even if you don't use the compiler.
+React Compiler ayrıca bir ESLint eklentisine de güç verir. ESLint eklentisi derleyiciden **bağımsız** olarak kullanılabilir, yani derleyiciyi kullanmasanız bile ESLint eklentisini kullanabilirsiniz.
 
 <TerminalBlock>
 npm install -D eslint-plugin-react-compiler@beta
 </TerminalBlock>
 
-Then, add it to your ESLint config:
+Ardından, ESLint yapılandırmanıza ekleyin:
 
 ```js
 import reactCompiler from 'eslint-plugin-react-compiler'
