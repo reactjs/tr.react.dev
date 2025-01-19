@@ -108,15 +108,15 @@ function TableContainer({ items }) {
 
 Ancak, `expensivelyProcessAReallyLargeArrayOfObjects` gerçekten pahalı bir işlevse, React dışında kendi memoizasyonunu uygulamayı düşünebilirsiniz, çünkü:
 
-- React Compiler only memoizes React components and hooks, not every function
-- React Compiler's memoization is not shared across multiple components or hooks
+- React Derleyici her işlevi değil, yalnızca React bileşenlerini ve hook'larını belleğe alır
+- React Compiler'ın memoizasyonu birden fazla bileşen veya hook arasında paylaşılmaz
 
-So if `expensivelyProcessAReallyLargeArrayOfObjects` was used in many different components, even if the same exact items were passed down, that expensive calculation would be run repeatedly. We recommend [profiling](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) first to see if it really is that expensive before making code more complicated.
+Dolayısıyla, `expensivelyProcessAReallyLargeArrayOfObjects' birçok farklı bileşende kullanılmışsa, aynı öğeler aşağı aktarılsa bile, bu pahalı hesaplama tekrar tekrar çalıştırılacaktır. Kodu daha karmaşık hale getirmeden önce gerçekten bu kadar pahalı olup olmadığını görmek için önce [profiling](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) öneririz.
 </DeepDive>
 
-### Should I try out the compiler? {/*should-i-try-out-the-compiler*/}
+### Derleyiciyi denemeli miyim? {/*should-i-try-out-the-compiler*/}
 
-Please note that the compiler is still in Beta and has many rough edges. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you've followed the [Rules of React](/reference/rules).
+Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip olduğunu unutmayın. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
 
 **You don't have to rush into using the compiler now. It's okay to wait until it reaches a stable release before adopting it.** However, we do appreciate trying it out in small experiments in your apps so that you can [provide feedback](#reporting-issues) to us to help make the compiler better.
 
