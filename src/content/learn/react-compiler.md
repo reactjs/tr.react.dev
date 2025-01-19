@@ -118,11 +118,11 @@ Dolayısıyla, `expensivelyProcessAReallyLargeArrayOfObjects' birçok farklı bi
 
 Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip olduğunu unutmayın. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
 
-**You don't have to rush into using the compiler now. It's okay to wait until it reaches a stable release before adopting it.** However, we do appreciate trying it out in small experiments in your apps so that you can [provide feedback](#reporting-issues) to us to help make the compiler better.
+**Derleyiciyi şimdi kullanmak için acele etmenize gerek yok. Benimsemeden önce kararlı bir sürüme ulaşmasını beklemenizde bir sakınca yoktur.** Bununla birlikte, derleyiciyi daha iyi hale getirmemize yardımcı olmak için bize [geri bildirim](#reporting-issues) sağlayabilmeniz için uygulamalarınızda küçük deneylerle denemekten memnuniyet duyarız.
 
-## Getting Started {/*getting-started*/}
+## Başlarken {/*getting-started*/}
 
-In addition to these docs, we recommend checking the [React Compiler Working Group](https://github.com/reactwg/react-compiler) for additional information and discussion about the compiler.
+Bu dokümanlara ek olarak, derleyici hakkında daha fazla bilgi ve tartışma için [React Compiler Working Group](https://github.com/reactwg/react-compiler) adresini kontrol etmenizi öneririz.
 
 ### Installing eslint-plugin-react-compiler {/*installing-eslint-plugin-react-compiler*/}
 
