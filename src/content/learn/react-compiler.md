@@ -149,7 +149,7 @@ export default [
 ]
 ```
 
-Or, in the deprecated eslintrc config format:
+Ya da kullanımdan kaldırılmış eslintrc yapılandırma biçiminde:
 
 ```js
 module.exports = {
@@ -162,10 +162,10 @@ module.exports = {
 }
 ```
 
-The ESLint plugin will display any violations of the rules of React in your editor. When it does this, it means that the compiler has skipped over optimizing that component or hook. This is perfectly okay, and the compiler can recover and continue optimizing other components in your codebase.
+ESLint eklentisi, editörünüzde React kurallarının herhangi bir ihlalini gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir.
 
 <Note>
-**You don't have to fix all ESLint violations straight away.** You can address them at your own pace to increase the amount of components and hooks being optimized, but it is not required to fix everything before you can use the compiler.
+**Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz, ancak derleyiciyi kullanmadan önce her şeyi düzeltmeniz gerekmez.
 </Note>
 
 ### Rolling out the compiler to your codebase {/*using-the-compiler-effectively*/}
