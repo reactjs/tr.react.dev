@@ -770,7 +770,7 @@ Sonra bu sınıf için CSS kurallarını ayrı bir CSS dosyasına yazarsınız:
 }
 ```
 
-React, CSS dosyalarını nasıl ekleyeceğinizle ilgili sıkı kurallar koymaz. En basit yol, HTML'inize bir[`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) etiketi eklemektir. Eğer bir derleme aracı veya bir çatı kullanırsanız, projenize nasıl CSS dosyası ekleyeceğinizi öğrenmek için ilgili dokümantasyona danışabilirsiniz.
+React, CSS dosyalarını nasıl ekleyeceğinizle ilgili sıkı kurallar koymaz. En basit yol, HTML'inize bir[`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) etiketi eklemektir. Eğer bir derleme aracı veya bir framework kullanırsanız, projenize nasıl CSS dosyası ekleyeceğinizi öğrenmek için ilgili dokümantasyona danışabilirsiniz.
 
 Bazen stil değerleri veriye bağlıdır. Dinamik bir şekilde stillendirmek için `style` niteliğini kullanın:
 
