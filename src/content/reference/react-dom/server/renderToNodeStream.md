@@ -69,7 +69,7 @@ Sunucu yanıtınıza bağlayabileceğiniz [Node.js Okunabilir Akışını](https
 ```js {5-6}
 import { renderToNodeStream } from 'react-dom/server';
 
-// Rota işleyici sözdizimi arka uç çatınıza bağlı olarak değişir
+// Rota işleyici sözdizimi arka uç framework'ünüze bağlı olarak değişir
 app.use('/', (request, response) => {
   const stream = renderToNodeStream(<App />);
   stream.pipe(response);
