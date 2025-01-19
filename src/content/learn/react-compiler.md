@@ -254,7 +254,7 @@ Derleyici ses analizi için girdi kaynak bilgisine ihtiyaç duyduğundan `babel-
 
 ### Vite {/*usage-with-vite*/}
 
-If you use Vite, you can add the plugin to vite-plugin-react:
+Vite kullanıyorsanız, eklentiyi vite-plugin-react'e ekleyebilirsiniz:
 
 ```js {10}
 // vite.config.js
@@ -278,10 +278,10 @@ export default defineConfig(() => {
 
 ### Next.js {/*usage-with-nextjs*/}
 
-Please refer to the [Next.js docs](https://nextjs.org/docs/app/api-reference/next-config-js/reactCompiler) for more information.
+Daha fazla bilgi için lütfen [Next.js docs](https://nextjs.org/docs/app/api-reference/next-config-js/reactCompiler) adresine bakın.
 
 ### Remix {/*usage-with-remix*/}
-Install `vite-plugin-babel`, and add the compiler's Babel plugin to it:
+`vite-plugin-babel` yükleyin ve derleyicinin Babel eklentisini buna ekleyin:
 
 <TerminalBlock>
 npm install vite-plugin-babel
@@ -299,7 +299,7 @@ export default defineConfig({
     babel({
       filter: /\.[jt]sx?$/,
       babelConfig: {
-        presets: ["@babel/preset-typescript"], // if you use TypeScript
+        presets: ["@babel/preset-typescript"], // TypeScript kullanıyorsanız
         plugins: [
           ["babel-plugin-react-compiler", ReactCompilerConfig],
         ],
@@ -311,11 +311,11 @@ export default defineConfig({
 
 ### Webpack {/*usage-with-webpack*/}
 
-A community Webpack loader is [now available here](https://github.com/SukkaW/react-compiler-webpack).
+Bir topluluk Webpack yükleyicisi [artık burada mevcut](https://github.com/SukkaW/react-compiler-webpack).
 
 ### Expo {/*usage-with-expo*/}
 
-Please refer to [Expo's docs](https://docs.expo.dev/guides/react-compiler/) to enable and use the React Compiler in Expo apps.
+Expo uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lütfen [Expo'nun dokümanlarına](https://docs.expo.dev/guides/react-compiler/) bakın.
 
 ### Metro (React Native) {/*usage-with-react-native-metro*/}
 
