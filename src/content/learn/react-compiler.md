@@ -64,9 +64,9 @@ React Compiler'ın ilk sürümü öncelikle **güncelleme performansını iyile�
 1. **Pahalı hesaplamaları React'in dışından atlama**
     * Örneğin, bu verilere ihtiyaç duyan bileşeninizin veya kancanızın içinde `expensivelyProcessAReallyLargeArrayOfObjects()` çağrısı yapmak
 
-#### Optimizing Re-renders {/*optimizing-re-renders*/}
+#### Yeniden Oluşturmaları Optimize Etme {/*optimizing-re-renders*/}
 
-React lets you express your UI as a function of their current state (more concretely: their props, state, and context). In its current implementation, when a component's state changes, React will re-render that component _and all of its children_ — unless you have applied some form of manual memoization with `useMemo()`, `useCallback()`, or `React.memo()`. For example, in the following example, `<MessageButton>` will re-render whenever `<FriendList>`'s state changes:
+React, kullanıcı arayüzünüzü mevcut durumlarının bir fonksiyonu olarak ifade etmenizi sağlar (daha somut olarak: props, state ve context). Mevcut uygulamasında, bir bileşenin durumu değiştiğinde, React o bileşeni _ve tüm alt bileşenlerini_ yeniden oluşturacaktır - eğer `useMemo()`, `useCallback()` veya `React.memo()` ile bir çeşit manuel memoizasyon uygulamadıysanız. Örneğin, aşağıdaki örnekte `<MessageButton>`, `<FriendList>`'in durumu her değiştiğinde yeniden oluşturulur:
 
 ```javascript
 function FriendList({ friends }) {
@@ -76,7 +76,7 @@ function FriendList({ friends }) {
   }
   return (
     <div>
-      <span>{onlineCount} online</span>
+      <span>{onlineCount} çevrimiçi</span>
       {friends.map((friend) => (
         <FriendListCard key={friend.id} friend={friend} />
       ))}
@@ -85,9 +85,9 @@ function FriendList({ friends }) {
   );
 }
 ```
-[_See this example in the React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
+[_React Compiler Playground'daki bu örneğe bakın_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
 
-React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX _and_ avoid re-rendering `<MessageButton>` as the count changes.
+React Compiler, manuel memoizasyonun eşdeğerini otomatik olarak uygulayarak, bir uygulamanın yalnızca ilgili bölümlerinin durum değiştikçe yeniden oluşturulmasını sağlar; bu bazen “ince taneli reaktivite” olarak adlandırılır. Yukarıdaki örnekte React Compiler, `<FriendListCard />`ın geri dönüş değerinin `friends` değişse bile yeniden kullanılabileceğini belirler ve bu JSX'i yeniden oluşturmaktan _ve_ sayı değiştikçe `<MessageButton>`'ı yeniden oluşturmaktan kaçınabilir.
 
 #### Expensive calculations also get memoized {/*expensive-calculations-also-get-memoized*/}
 
