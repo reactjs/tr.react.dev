@@ -89,17 +89,17 @@ function FriendList({ friends }) {
 
 React Compiler, manuel memoizasyonun eşdeğerini otomatik olarak uygulayarak, bir uygulamanın yalnızca ilgili bölümlerinin durum değiştikçe yeniden oluşturulmasını sağlar; bu bazen “ince taneli reaktivite” olarak adlandırılır. Yukarıdaki örnekte React Compiler, `<FriendListCard />`ın geri dönüş değerinin `friends` değişse bile yeniden kullanılabileceğini belirler ve bu JSX'i yeniden oluşturmaktan _ve_ sayı değiştikçe `<MessageButton>`'ı yeniden oluşturmaktan kaçınabilir.
 
-#### Expensive calculations also get memoized {/*expensive-calculations-also-get-memoized*/}
+#### Pahalı hesaplamalar da hafızaya alınır {/*expensive-calculations-also-get-memoized*/}
 
-The compiler can also automatically memoize for expensive calculations used during rendering:
+Derleyici ayrıca render sırasında kullanılan pahalı hesaplamalar için otomatik olarak memoize edebilir:
 
 ```js
-// **Not** memoized by React Compiler, since this is not a component or hook
+// **Not** Bu bir bileşen veya hook olmadığı için React Compiler tarafından memoized
 function expensivelyProcessAReallyLargeArrayOfObjects() { /* ... */ }
 
-// Memoized by React Compiler since this is a component
+// Bu bir bileşen olduğu için React Compiler tarafından not edilir
 function TableContainer({ items }) {
-  // This function call would be memoized:
+  // Bu fonksiyon çağrısı hafızaya alınacaktır:
   const data = expensivelyProcessAReallyLargeArrayOfObjects(items);
   // ...
 }
