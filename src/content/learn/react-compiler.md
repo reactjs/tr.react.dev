@@ -373,6 +373,6 @@ Kesinlikle gerekli olmadıkça bu direktife ulaşılması tavsiye edilmez. Bir b
 
 Hatanın ortadan kalkmasını sağladığınızda, devre dışı bırakma yönergesini kaldırmanın sorunu geri getirdiğini doğrulayın. Ardından [React Compiler Playground](https://playground.react.dev) kullanarak bir hata raporunu bizimle paylaşın (küçük bir reproya indirgemeyi deneyebilirsiniz veya açık kaynak koduysa tüm kaynağı da yapıştırabilirsiniz), böylece sorunu belirleyebilir ve düzeltmeye yardımcı olabiliriz.
 
-### Other issues {/*other-issues*/}
+### Diğer konular {/*other-issues*/}
 
-Please see https://github.com/reactwg/react-compiler/discussions/7.
+Lütfen https://github.com/reactwg/react-compiler/discussions/7 adresine bakınız.
