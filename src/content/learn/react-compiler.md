@@ -371,7 +371,7 @@ function SuspiciousComponent() {
 Kesinlikle gerekli olmadıkça bu direktife ulaşılması tavsiye edilmez. Bir bileşeni veya hook'u devre dışı bıraktığınızda, direftif kaldırılana kadar sonsuza kadar devre dışı kalır. Bu, kodu düzeltseniz bile, direktifi kaldırmadığınız sürece derleyicinin kodu derlemeyi atlayacağı anlamına gelir.
 </Note>
 
-When you make the error go away, confirm that removing the opt out directive makes the issue come back. Then share a bug report with us (you can try to reduce it to a small repro, or if it's open source code you can also just paste the entire source) using the [React Compiler Playground](https://playground.react.dev) so we can identify and help fix the issue.
+Hatanın ortadan kalkmasını sağladığınızda, devre dışı bırakma yönergesini kaldırmanın sorunu geri getirdiğini doğrulayın. Ardından [React Compiler Playground](https://playground.react.dev) kullanarak bir hata raporunu bizimle paylaşın (küçük bir reproya indirgemeyi deneyebilirsiniz veya açık kaynak koduysa tüm kaynağı da yapıştırabilirsiniz), böylece sorunu belirleyebilir ve düzeltmeye yardımcı olabiliriz.
 
 ### Other issues {/*other-issues*/}
 
