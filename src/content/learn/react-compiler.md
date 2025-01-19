@@ -214,11 +214,11 @@ module.exports = function () {
 };
 ```
 
-### Using the compiler on libraries {/*using-the-compiler-on-libraries*/}
+### Derleyiciyi kütüphaneler üzerinde kullanma {/*using-the-compiler-on-libraries*/}
 
-React Compiler can also be used to compile libraries. Because React Compiler needs to run on the original source code prior to any code transformations, it is not possible for an application's build pipeline to compile the libraries they use. Hence, our recommendation is for library maintainers to independently compile and test their libraries with the compiler, and ship compiled code to npm.
+React Compiler, kütüphaneleri derlemek için de kullanılabilir. React Compiler'ın herhangi bir kod dönüşümünden önce orijinal kaynak kod üzerinde çalışması gerektiğinden, bir uygulamanın derleme hattının kullandıkları kütüphaneleri derlemesi mümkün değildir. Bu nedenle, önerimiz kütüphane sorumlularının kütüphanelerini derleyici ile bağımsız olarak derleyip test etmeleri ve derlenmiş kodu npm'ye göndermeleridir.
 
-Because your code is pre-compiled, users of your library will not need to have the compiler enabled in order to benefit from the automatic memoization applied to your library. If your library targets apps not yet on React 19, specify a minimum [`target` and add `react-compiler-runtime` as a direct dependency](#using-react-compiler-with-react-17-or-18). The runtime package will use the correct implementation of APIs depending on the application's version, and polyfill the missing APIs if necessary.
+Kodunuz önceden derlendiğinden, kütüphanenizin kullanıcılarının kütüphanenize uygulanan otomatik bellekleştirmeden yararlanmak için derleyiciyi etkinleştirmeleri gerekmeyecektir.Kütüphaneniz henüz React 19'da olmayan uygulamaları hedefliyorsa, minimum [`target` belirtin ve doğrudan bağımlılık olarak `react-compiler-runtime` ekleyin](#using-react-compiler-with-react-17-or-18). Çalışma zamanı paketi, uygulamanın sürümüne bağlı olarak API'lerin doğru uygulamasını kullanacak ve gerekirse eksik API'leri çoklu dolduracaktır.
 
 Library code can often require more complex patterns and usage of escape hatches. For this reason, we recommend ensuring that you have sufficient testing in order to identify any issues that might arise from using the compiler on your library. If you identify any issues, you can always opt-out the specific components or hooks with the [`'use no memo'` directive](#something-is-not-working-after-compilation).
 
