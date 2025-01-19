@@ -137,7 +137,7 @@ React render ağacındaki kök düğüm, uygulamanın [kök bileşeni](/learn/im
 
 Yukarıdaki render ağacında, her bileşenin işlediği HTML etiketlerinden bahsedilmediğini fark edeceksiniz. Bunun nedeni, render ağacının yalnızca React [bileşenlerinden](learn/your-first-component#components-ui-building-blocks) oluşmasıdır.
 
-React, bir UI çatısı olarak platformdan bağımsızdır. tr.react.dev'de, UI öğeleri olarak HTML işaretlemesini kullanan web'e işlenen örnekleri sergiliyoruz. Ancak bir React uygulaması, [UIView](https://developer.apple.com/documentation/uikit/uiview) veya [FrameworkElement](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement?view=windowsdesktop-7.0) gibi farklı UI öğelerini kullanabilen bir mobil veya masaüstü platformunda da işlenebilir.
+React, bir UI framework'ü olarak platformdan bağımsızdır. tr.react.dev'de, UI öğeleri olarak HTML işaretlemesini kullanan web'e işlenen örnekleri sergiliyoruz. Ancak bir React uygulaması, [UIView](https://developer.apple.com/documentation/uikit/uiview) veya [FrameworkElement](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement?view=windowsdesktop-7.0) gibi farklı UI öğelerini kullanabilen bir mobil veya masaüstü platformunda da işlenebilir.
 
 Bu platform UI temel öğeleri React'in bir parçası değildir. React render ağaçları, uygulamanızın hangi platformda render edildiğinden bağımsız olarak React uygulamamıza fikir verebilir.
 
