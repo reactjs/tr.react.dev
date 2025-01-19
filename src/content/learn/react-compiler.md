@@ -319,25 +319,25 @@ Expo uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lü
 
 ### Metro (React Native) {/*usage-with-react-native-metro*/}
 
-React Native uses Babel via Metro, so refer to the [Usage with Babel](#usage-with-babel) section for installation instructions.
+React Native, Babel'i Metro aracılığıyla kullanır, bu nedenle kurulum talimatları için [Babel ile kullanım](#usage-with-babel) bölümüne bakın.
 
 ### Rspack {/*usage-with-rspack*/}
 
-Please refer to [Rspack's docs](https://rspack.dev/guide/tech/react#react-compiler) to enable and use the React Compiler in Rspack apps.
+Rspack uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lütfen [Rspack's docs](https://rspack.dev/guide/tech/react#react-compiler) adresine bakın.
 
 ### Rsbuild {/*usage-with-rsbuild*/}
 
-Please refer to [Rsbuild's docs](https://rsbuild.dev/guide/framework/react#react-compiler) to enable and use the React Compiler in Rsbuild apps.
+Rsbuild uygulamalarında React Derleyicisini etkinleştirmek ve kullanmak için lütfen [Rsbuild'in dokümanlarına](https://rsbuild.dev/guide/framework/react#react-compiler) bakın.
 
 ## Troubleshooting {/*troubleshooting*/}
 
-To report issues, please first create a minimal repro on the [React Compiler Playground](https://playground.react.dev/) and include it in your bug report. You can open issues in the [facebook/react](https://github.com/facebook/react/issues) repo.
+Sorunları bildirmek için lütfen önce [React Compiler Playground](https://playground.react.dev/) üzerinde minimal bir repro oluşturun ve bunu hata raporunuza ekleyin. Sorunları [facebook/react](https://github.com/facebook/react/issues) reposunda açabilirsiniz.
 
-You can also provide feedback in the React Compiler Working Group by applying to be a member. Please see [the README for more details on joining](https://github.com/reactwg/react-compiler).
+Ayrıca üye olmak için başvurarak React Derleyici Çalışma Grubu'nda geri bildirim sağlayabilirsiniz. Üyelik hakkında daha fazla bilgi için lütfen [README'ye](https://github.com/reactwg/react-compiler) bakın.
 
-### What does the compiler assume? {/*what-does-the-compiler-assume*/}
+### Derleyici ne varsayıyor? {/*what-does-the-compiler-assume*/}
 
-React Compiler assumes that your code:
+React Compiler kodunuzun olduğunu varsayar:
 
 1. Is valid, semantic JavaScript.
 2. Tests that nullable/optional values and properties are defined before accessing them (for example, by enabling [`strictNullChecks`](https://www.typescriptlang.org/tsconfig/#strictNullChecks) if using TypeScript), i.e., `if (object.nullableProperty) { object.nullableProperty.foo }` or with optional-chaining `object.nullableProperty?.foo`.
