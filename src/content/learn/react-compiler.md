@@ -366,9 +366,9 @@ function SuspiciousComponent() {
 <Note>
 #### `"use no memo"` {/*use-no-memo*/}
 
-`"use no memo"` is a _temporary_ escape hatch that lets you opt-out components and hooks from being compiled by the React Compiler. This directive is not meant to be long lived the same way as eg [`"use client"`](/reference/rsc/use-client) is.
+`“use no memo"`, bileşenlerin ve kancaların React Derleyicisi tarafından derlenmesini engellemenizi sağlayan _geçici_ bir kaçış kapısıdır. Bu direftifin, örneğin [`“use client”`](/reference/rsc/use-client) gibi uzun ömürlü olması amaçlanmamıştır.
 
-It is not recommended to reach for this directive unless it's strictly necessary. Once you opt-out a component or hook, it is opted-out forever until the directive is removed. This means that even if you fix the code, the compiler will still skip over compiling it unless you remove the directive.
+Kesinlikle gerekli olmadıkça bu direktife ulaşılması tavsiye edilmez. Bir bileşeni veya hook'u devre dışı bıraktığınızda, direftif kaldırılana kadar sonsuza kadar devre dışı kalır. Bu, kodu düzeltseniz bile, direktifi kaldırmadığınız sürece derleyicinin kodu derlemeyi atlayacağı anlamına gelir.
 </Note>
 
 When you make the error go away, confirm that removing the opt out directive makes the issue come back. Then share a bug report with us (you can try to reduce it to a small repro, or if it's open source code you can also just paste the entire source) using the [React Compiler Playground](https://playground.react.dev) so we can identify and help fix the issue.
