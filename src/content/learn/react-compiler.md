@@ -345,14 +345,14 @@ React Compiler kodunuzun olduğunu varsayar:
 
 React Derleyici, React'in birçok kuralını statik olarak doğrulayabilir ve bir hata tespit ettiğinde derlemeyi güvenli bir şekilde atlayacaktır. Hataları görmek için ayrıca [eslint-plugin-react-compiler](https://www.npmjs.com/package/eslint-plugin-react-compiler) yüklemenizi öneririz.
 
-### How do I know my components have been optimized? {/*how-do-i-know-my-components-have-been-optimized*/}
+### Bileşenlerimin optimize edildiğini nasıl bilebilirim? {/*how-do-i-know-my-components-have-been-optimized*/}
 
-[React Devtools](/learn/react-developer-tools) (v5.0+) has built-in support for React Compiler and will display a "Memo ✨" badge next to components that have been optimized by the compiler.
+[React Devtools](/learn/react-developer-tools) (v5.0+) React Compiler için yerleşik desteğe sahiptir ve derleyici tarafından optimize edilen bileşenlerin yanında bir “Memo ✨” rozeti görüntüleyecektir.
 
-### Something is not working after compilation {/*something-is-not-working-after-compilation*/}
-If you have eslint-plugin-react-compiler installed, the compiler will display any violations of the rules of React in your editor. When it does this, it means that the compiler has skipped over optimizing that component or hook. This is perfectly okay, and the compiler can recover and continue optimizing other components in your codebase. **You don't have to fix all ESLint violations straight away.** You can address them at your own pace to increase the amount of components and hooks being optimized.
+### Derlemeden sonra bir şey çalışmıyor {/*something-is-not-working-after-compilation*/}
+Eğer eslint-plugin-react-compiler yüklüyse, derleyici React kurallarının herhangi bir ihlalini editörünüzde gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir. **Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz.
 
-Due to the flexible and dynamic nature of JavaScript however, it's not possible to comprehensively detect all cases. Bugs and undefined behavior such as infinite loops may occur in those cases.
+Ancak JavaScript'in esnek ve dinamik yapısı nedeniyle, tüm vakaları kapsamlı bir şekilde tespit etmek mümkün değildir. Bugs and undefined behavior such as infinite loops may occur in those cases.
 
 If your app doesn't work properly after compilation and you aren't seeing any ESLint errors, the compiler may be incorrectly compiling your code. To confirm this, try to make the issue go away by aggressively opting out any component or hook you think might be related via the [`"use no memo"` directive](#opt-out-of-the-compiler-for-a-component).
 
