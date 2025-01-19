@@ -238,14 +238,14 @@ export function HomeContent() {
 
         <Section background="right-card">
           <Center>
-            <Header>Bir çatı ile tam özellikli geliştirmeler yapın</Header>
+            <Header>Bir framework ile tam özellikli geliştirmeler yapın</Header>
             <Para>
               React bir kütüphanedir. Bileşenleri bir araya getirmenize olanak
               sağlar, ancak yönlendirme ve veri çekme gibi konularda nasıl
               yapılacağına dair talimat vermez. React ile tüm bir uygulama
               oluşturmak için <Link href="https://nextjs.org">Next.js</Link>{' '}
               veya <Link href="https://remix.run">Remix</Link> gibi tam
-              özellikli React çatılarını öneriyoruz.
+              özellikli React framework&apos;lerini öneriyoruz.
             </Para>
           </Center>
           <FullBleed>
@@ -253,17 +253,18 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              React aynı zamanda bir mimaridir. Onu kullanan çatılar, sunucuda
-              çalışan asenkron bileşenlerde veya hatta derleme sırasında veri
-              çekmenize olanak tanır. Bir dosyadan veya veritabanından veri
-              okuyun ve bunu interaktif bileşenlerinize aktarın.
+              React aynı zamanda bir mimaridir. Onu kullanan
+              framework&apos;leri, sunucuda çalışan asenkron bileşenlerde veya
+              hatta derleme sırasında veri çekmenize olanak tanır. Bir dosyadan
+              veya veritabanından veri okuyun ve bunu interaktif bileşenlerinize
+              aktarın.
             </Para>
             <div className="flex justify-start w-full lg:justify-center">
               <CTA
                 color="gray"
                 icon="framework"
                 href="/learn/start-a-new-react-project">
-                Bir çatı ile başlayın
+                Bir framework ile başlayın
               </CTA>
             </div>
           </Center>
