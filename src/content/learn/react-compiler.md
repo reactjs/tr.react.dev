@@ -168,12 +168,12 @@ ESLint eklentisi, editörünüzde React kurallarının herhangi bir ihlalini gö
 **Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz, ancak derleyiciyi kullanmadan önce her şeyi düzeltmeniz gerekmez.
 </Note>
 
-### Rolling out the compiler to your codebase {/*using-the-compiler-effectively*/}
+### Derleyiciyi kod tabanınızda kullanıma sunma {/*using-the-compiler-effectively*/}
 
-#### Existing projects {/*existing-projects*/}
-The compiler is designed to compile functional components and hooks that follow the [Rules of React](/reference/rules). It can also handle code that breaks those rules by bailing out (skipping over) those components or hooks. However, due to the flexible nature of JavaScript, the compiler cannot catch every possible violation and may compile with false negatives: that is, the compiler may accidentally compile a component/hook that breaks the Rules of React which can lead to undefined behavior.
+#### Mevcut projeler {/*existing-projects*/}
+Derleyici, [React Kuralları](/reference/rules)'na uyan işlevsel bileşenleri ve kancaları derlemek için tasarlanmıştır. Ayrıca, bu bileşenleri veya hook'ları atlayarak (üzerinden atlayarak) bu kuralları ihlal eden kodlarla da başa çıkabilir. Ancak JavaScript'in esnek yapısı nedeniyle derleyici olası her ihlali yakalayamaz ve yanlış negatiflerle derleme yapabilir: Yani, derleyici yanlışlıkla React kurallarını ihlal eden bir bileşeni/hook'u derleyebilir ve bu da tanımlanmamış davranışlara yol açabilir.
 
-For this reason, to adopt the compiler successfully on existing projects, we recommend running it on a small directory in your product code first. You can do this by configuring the compiler to only run on a specific set of directories:
+Bu nedenle, derleyiciyi mevcut projelere başarıyla uyarlamak için önce ürün kodunuzdaki küçük bir dizinde çalıştırmanızı öneririz. Bunu, derleyiciyi yalnızca belirli bir dizin kümesinde çalışacak şekilde yapılandırarak yapabilirsiniz:
 
 ```js {3}
 const ReactCompilerConfig = {
