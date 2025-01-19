@@ -78,7 +78,7 @@ root.render(
 );
 ```
 
-Özellikle yeni yaratılmış uygulamalarınızda, tüm uygulamayı Strict Modu ile sarmanızı öneririz. Sizin yerinize [`createRoot`](/reference/react-dom/client/createRoot)'u çağıran bir çatı ile çalışıyorsanız, Strict Modun nasıl etkileştirileceğine çatının dokümantasyonundan bakabilirsiniz.
+Özellikle yeni yaratılmış uygulamalarınızda, tüm uygulamayı Strict Modu ile sarmanızı öneririz. Sizin yerinize [`createRoot`](/reference/react-dom/client/createRoot)'u çağıran bir framework ile çalışıyorsanız, Strict Modun nasıl etkileştirileceğine framework'ün dokümantasyonundan bakabilirsiniz.
 
 Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da** size kodunuzda zaten var olan ancak üretim ortamında güvenilir bir şekilde tekrarlanması zor olabilen hataları bulmada yardımcı olurlar. Strict Modu, kullanıcılar farketmeden önce hataları bulmanızı sağlar.
 
