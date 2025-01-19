@@ -183,21 +183,21 @@ const ReactCompilerConfig = {
 };
 ```
 
-When you have more confidence with rolling out the compiler, you can expand coverage to other directories as well and slowly roll it out to your whole app.
+Derleyiciyi yayma konusunda kendinize daha fazla güvendiğinizde, kapsamı diğer dizinlere de genişletebilir ve yavaş yavaş tüm uygulamanıza yayabilirsiniz.
 
-#### New projects {/*new-projects*/}
+#### Yeni projeler {/*new-projects*/}
 
-If you're starting a new project, you can enable the compiler on your entire codebase, which is the default behavior.
+Yeni bir proje başlatıyorsanız, varsayılan davranış olan kod tabanınızın tamamında derleyiciyi etkinleştirebilirsiniz.
 
-### Using React Compiler with React 17 or 18 {/*using-react-compiler-with-react-17-or-18*/}
+### React Compiler'ı React 17 veya 18 ile Kullanma {/*using-react-compiler-with-react-17-or-18*/}
 
-React Compiler works best with React 19 RC. If you are unable to upgrade, you can install the extra `react-compiler-runtime` package which will allow the compiled code to run on versions prior to 19. However, note that the minimum supported version is 17.
+React Compiler en iyi React 19 RC ile çalışır. Yükseltme yapamıyorsanız, derlenen kodun 19'dan önceki sürümlerde çalışmasına izin verecek ekstra `react-compiler-runtime` paketini yükleyebilirsiniz. Ancak, desteklenen minimum sürümün 17 olduğunu unutmayın.
 
 <TerminalBlock>
 npm install react-compiler-runtime@beta
 </TerminalBlock>
 
-You should also add the correct `target` to your compiler config, where `target` is the major version of React you are targeting:
+Ayrıca derleyici yapılandırmanıza doğru `target`ı eklemelisiniz, burada `target` hedeflediğiniz React'in ana sürümüdür:
 
 ```js {3}
 // babel.config.js
