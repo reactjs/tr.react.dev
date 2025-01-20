@@ -92,7 +92,7 @@ function SeparatorList({ children }) {
 
 #### Uyarılar {/*children-foreach-caveats*/}
 
-- Boş node'lar (`null`, `undefined` ve Booleans), string'ler, sayılar ve [React elements](/reference/react/createElement) ayrı node'lar olarak sayılır. Arrays don't count as individual nodes, but their children do. **The traversal does not go deeper than React elements:** they don't get rendered, and their children aren't traversed. [Fragments](/reference/react/Fragment) don't get traversed.
+- Boş node'lar (`null`, `undefined` ve Booleans), string'ler, sayılar ve [React elements](/reference/react/createElement) ayrı node'lar olarak sayılır. Diziler tek tek node'lar olarak sayılmaz, ancak alt elemanları sayılır. **Çaprazlama React öğelerinden daha derine gitmez:** bunlar işlenmez ve alt öğeleri çaprazlanmaz. [Fragments](/referans/react/Fragment) çaprazlanmaz.
 
 ---
 
