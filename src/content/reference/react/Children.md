@@ -1,16 +1,16 @@
 ---
-title: Children
+title: Children (Alt Eleman)
 ---
 
 <Pitfall>
 
-Using `Children` is uncommon and can lead to fragile code. [See common alternatives.](#alternatives)
+`Children` kullanımı nadirdir ve kırılgan koda yol açabilir. [Yaygın alternatiflere bakın.](#alternatives)
 
 </Pitfall>
 
 <Intro>
 
-`Children` lets you manipulate and transform the JSX you received as the [`children` prop.](/learn/passing-props-to-a-component#passing-jsx-as-children)
+`Children`, [`children` prop'u olarak aldığınız JSX'i değiştirmenize ve dönüştürmenize olanak tanır](/learn/passing-props-to-a-component#passing-jsx-as-children)
 
 ```js
 const mappedChildren = Children.map(children, child =>
@@ -27,11 +27,11 @@ const mappedChildren = Children.map(children, child =>
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru Dokümanı {/*reference*/}
 
 ### `Children.count(children)` {/*children-count*/}
 
-Call `Children.count(children)` to count the number of children in the `children` data structure.
+Children veri yapısındaki alt eleman sayısını saymak için `Children.count(children)` öğesini çağırın.
 
 ```js src/RowList.js active
 import { Children } from 'react';
@@ -39,26 +39,26 @@ import { Children } from 'react';
 function RowList({ children }) {
   return (
     <>
-      <h1>Total rows: {Children.count(children)}</h1>
+      <h1>Toplam satır: {Children.count(children)}</h1>
       ...
     </>
   );
 }
 ```
 
-[See more examples below.](#counting-children)
+[Aşağıda daha fazla örneğe bakın.](#counting-children)
 
-#### Parameters {/*children-count-parameters*/}
+#### Parametreler {/*children-count-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 
 #### Returns {/*children-count-returns*/}
 
-The number of nodes inside these `children`.
+Bu `children` içindeki node'ların sayısı.
 
-#### Caveats {/*children-count-caveats*/}
+#### Uyarılar {/*children-count-caveats*/}
 
-- Empty nodes (`null`, `undefined`, and Booleans), strings, numbers, and [React elements](/reference/react/createElement) count as individual nodes. Arrays don't count as individual nodes, but their children do. **The traversal does not go deeper than React elements:** they don't get rendered, and their children aren't traversed. [Fragments](/reference/react/Fragment) don't get traversed.
+- Boş node'lar (`null`, `undefined` ve Booleans), string'ler, sayılar ve [React elemanları](/reference/react/createElement) ayrı node'lar olarak sayılır. Arrays don't count as individual nodes, but their children do. **The traversal does not go deeper than React elements:** they don't get rendered, and their children aren't traversed. [Fragments](/reference/react/Fragment) don't get traversed.
 
 ---
 
