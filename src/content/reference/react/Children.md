@@ -10,7 +10,7 @@ title: Children (Alt Eleman)
 
 <Intro>
 
-`Children`, [`children` prop'u olarak aldığınız JSX'i değiştirmenize ve dönüştürmenize olanak tanır](/learn/passing-props-to-a-component#passing-jsx-as-children)
+`Children`, [`children` prop'u](/learn/passing-props-to-a-component#passing-jsx-as-children) olarak aldığınız JSX'i değiştirmenize ve dönüştürmenize olanak tanır
 
 ```js
 const mappedChildren = Children.map(children, child =>
