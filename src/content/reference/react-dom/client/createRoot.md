@@ -145,7 +145,7 @@ Genellikle bu kodu başlangıçta yalnızca bir kez çalıştırmanız gerekir. 
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>Benim uygulamam</title></head>
@@ -377,7 +377,7 @@ Hata diyalog pencerelerini görüntülemek için `onUncaughtError` kök seçene�
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
 <head>
@@ -608,7 +608,7 @@ Hata diyologlarını görüntülemek veya bilinen hataları günlükten filtrele
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
 <head>
@@ -888,7 +888,7 @@ Hata diyaloglarını görüntülemek için `onRecoverableError` kök seçeneğin
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
 <head>

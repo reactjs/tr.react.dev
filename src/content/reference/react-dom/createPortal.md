@@ -252,7 +252,7 @@ Portallar, React kökünüz React ile oluşturulmamış statik veya sunucu taraf
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>

@@ -57,12 +57,13 @@ Ardından, ana JavaScript dosyanızın en üstüne şu kod satırlarını ekleyi
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
   <body>
     <!-- Mevcut sayfa içeriğiniz (bu örnekte, değiştiriliyor) -->
+    <div id="root"></div>
   </body>
 </html>
 ```
@@ -119,7 +120,7 @@ Bu, [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
