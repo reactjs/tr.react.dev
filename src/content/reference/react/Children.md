@@ -80,10 +80,10 @@ function SeparatorList({ children }) {
 
 [Aşağıda daha fazla örneğe bakın](#running-some-code-for-each-child)
 
-#### Parameters {/*children-foreach-parameters*/}
+#### Parametreler {/*children-foreach-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
-* `fn`: The function you want to run for each child, similar to the [array `forEach` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) callback. It will be called with the child as the first argument and its index as the second argument. The index starts at `0` and increments on each call.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
+* `fn`: Her çocuk için çalıştırmak istediğiniz işlev, [array `forEach` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) callback'e benzer. It will be called with the child as the first argument and its index as the second argument. The index starts at `0` and increments on each call.
 * **optional** `thisArg`: The [`this` value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) with which the `fn` function should be called. If omitted, it's `undefined`.
 
 #### Returns {/*children-foreach-returns*/}
