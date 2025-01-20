@@ -98,7 +98,7 @@ function SeparatorList({ children }) {
 
 ### `Children.map(children, fn, thisArg?)` {/*children-map*/}
 
-Call `Children.map(children, fn, thisArg?)` to map or transform each child in the `children` data structure.
+Alt eleman veri yapısındaki her alt elemani eşlemek veya dönüştürmek için `Children.map(children, fn, thisArg?)` öğesini çağırın.
 
 ```js src/RowList.js active
 import { Children } from 'react';
@@ -116,11 +116,11 @@ function RowList({ children }) {
 }
 ```
 
-[See more examples below.](#transforming-children)
+[Aşağıda daha fazla örneğe bakınız.](#transforming-children)
 
 #### Parameters {/*children-map-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 * `fn`: The mapping function, similar to the [array `map` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) callback. It will be called with the child as the first argument and its index as the second argument. The index starts at `0` and increments on each call. You need to return a React node from this function. This may be an empty node (`null`, `undefined`, or a Boolean), a string, a number, a React element, or an array of other React nodes.
 * **optional** `thisArg`: The [`this` value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) with which the `fn` function should be called. If omitted, it's `undefined`.
 
@@ -149,9 +149,9 @@ function Box({ children }) {
   // ...
 ```
 
-#### Parameters {/*children-only-parameters*/}
+#### Parametreler {/*children-only-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 
 #### Returns {/*children-only-returns*/}
 
@@ -167,7 +167,7 @@ Otherwise, throws an error.
 
 ### `Children.toArray(children)` {/*children-toarray*/}
 
-Call `Children.toArray(children)` to create an array out of the `children` data structure.
+Alt eleman veri yapısından bir dizi oluşturmak için `Children.toArray(çocuklar)` öğesini çağırın.
 
 ```js src/ReversedList.js active
 import { Children } from 'react';
@@ -178,15 +178,15 @@ export default function ReversedList({ children }) {
   // ...
 ```
 
-#### Parameters {/*children-toarray-parameters*/}
+#### Parametreler {/*children-toarray-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 
 #### Returns {/*children-toarray-returns*/}
 
-Returns a flat array of elements in `children`.
+`children` içindeki elemanların düz bir dizisini döndürür.
 
-#### Caveats {/*children-toarray-caveats*/}
+#### Uyarılar {/*children-toarray-caveats*/}
 
 - Empty nodes (`null`, `undefined`, and Booleans) will be omitted in the returned array. **The returned elements' keys will be calculated from the original elements' keys and their level of nesting and position.** This ensures that flattening the array does not introduce changes in behavior.
 
