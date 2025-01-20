@@ -64,7 +64,7 @@ Bu `children` içindeki node'ların sayısı.
 
 ### `Children.forEach(children, fn, thisArg?)` {/*children-foreach*/}
 
-Call `Children.forEach(children, fn, thisArg?)` to run some code for each child in the `children` data structure.
+Children veri yapısındaki her alt eleman için bazı kodlar çalıştırmak üzere `Children.forEach(children, fn, thisArg?)` öğesini çağırın.
 
 ```js src/RowList.js active
 import { Children } from 'react';
@@ -78,7 +78,7 @@ function SeparatorList({ children }) {
   // ...
 ```
 
-[See more examples below.](#running-some-code-for-each-child)
+[Aşağıda daha fazla örneğe bakın](#running-some-code-for-each-child)
 
 #### Parameters {/*children-foreach-parameters*/}
 
