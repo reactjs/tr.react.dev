@@ -62,12 +62,8 @@ Ardından, ana JavaScript dosyanızın en üstüne şu kod satırlarını ekleyi
 <html>
   <head><title>My app</title></head>
   <body>
-<<<<<<< HEAD
     <!-- Mevcut sayfa içeriğiniz (bu örnekte, değiştiriliyor) -->
-=======
-    <!-- Your existing page content (in this example, it gets replaced) -->
     <div id="root"></div>
->>>>>>> b22cbc3fed310b39c99fdd0f01621ac1903d1e8e
   </body>
 </html>
 ```
