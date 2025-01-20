@@ -227,7 +227,7 @@ Tek bir sayfada birden fazla bağımsız React uygulaması render ederseniz, [`c
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
