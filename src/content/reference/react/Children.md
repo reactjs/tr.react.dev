@@ -83,14 +83,14 @@ function SeparatorList({ children }) {
 #### Parametreler {/*children-foreach-parameters*/}
 
 * `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
-* `fn`: Her çocuk için çalıştırmak istediğiniz işlev, [array `forEach` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) callback'e benzer. It will be called with the child as the first argument and its index as the second argument. The index starts at `0` and increments on each call.
-* **optional** `thisArg`: The [`this` value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) with which the `fn` function should be called. If omitted, it's `undefined`.
+* `fn`: Her çocuk için çalıştırmak istediğiniz işlev, [array `forEach` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) callback'e benzer. İlk argüman olarak alt eleman ve ikinci argüman olarak indeksi ile çağrılacaktır. İndeks `0`dan başlar ve her çağrıda artar.
+* **isteğe bağlı** `thisArg`: `fn` fonksiyonunun çağrılması gereken [`this` değeri](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). Atlanırsa, `tanımlanmamış` olur.
 
 #### Returns {/*children-foreach-returns*/}
 
-`Children.forEach` returns `undefined`.
+`Children.forEach` öğesi `undefined` döndürür.
 
-#### Caveats {/*children-foreach-caveats*/}
+#### Uyarılar {/*children-foreach-caveats*/}
 
 - Empty nodes (`null`, `undefined`, and Booleans), strings, numbers, and [React elements](/reference/react/createElement) count as individual nodes. Arrays don't count as individual nodes, but their children do. **The traversal does not go deeper than React elements:** they don't get rendered, and their children aren't traversed. [Fragments](/reference/react/Fragment) don't get traversed.
 
