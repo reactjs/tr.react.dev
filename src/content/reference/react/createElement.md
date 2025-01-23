@@ -180,9 +180,9 @@ Her iki kodlama stilinde de sorun yoktur, bu nedenle projeniz için hangisini te
 
 <DeepDive>
 
-#### What is a React element, exactly? {/*what-is-a-react-element-exactly*/}
+#### React elementi tam olarak nedir? {/*what-is-a-react-element-exactly*/}
 
-An element is a lightweight description of a piece of the user interface. For example, both `<Greeting name="Taylor" />` and `createElement(Greeting, { name: 'Taylor' })` produce an object like this:
+Bir öğe, kullanıcı arayüzünün bir parçasının hafif bir tanımıdır. Örneğin, hem `<Greeting name=“Taylor” />` hem de `createElement(Greeting, { name: 'Taylor' })` aşağıdaki gibi bir nesne üretir:
 
 ```js
 // Slightly simplified
