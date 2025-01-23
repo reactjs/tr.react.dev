@@ -16,11 +16,11 @@ const element = createElement(type, props, ...children)
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru Dokümanı {/*reference*/}
 
 ### `createElement(type, props, ...children)` {/*createelement*/}
 
-Call `createElement` to create a React element with the given `type`, `props`, and `children`.
+Verilen `type`, `props` ve `children` ile bir React elemanı oluşturmak için `createElement` çağrısı yapın.
 
 ```js
 import { createElement } from 'react';
