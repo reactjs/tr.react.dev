@@ -69,9 +69,9 @@ Genellikle, öğeyi bileşeninizden döndürür veya başka bir öğenin alt ele
 
 ### JSX olmadan öğe oluşturma {/*creating-an-element-without-jsx*/}
 
-If you don't like [JSX](/learn/writing-markup-with-jsx) or can't use it in your project, you can use `createElement` as an alternative.
+[JSX](/learn/writing-markup-with-jsx)'i sevmiyorsanız veya projenizde kullanamıyorsanız, alternatif olarak `createElement` kullanabilirsiniz.
 
-To create an element without JSX, call `createElement` with some <CodeStep step={1}>type</CodeStep>, <CodeStep step={2}>props</CodeStep>, and <CodeStep step={3}>children</CodeStep>:
+JSX olmadan bir öğe oluşturmak için, `createElement` öğesini bazı <CodeStep step={1}>type</CodeStep>, <CodeStep step={2}>props</CodeStep> ve <CodeStep step={3}>children</CodeStep> ile çağırın:
 
 ```js [[1, 5, "'h1'"], [2, 6, "{ className: 'greeting' }"], [3, 7, "'Hello ',"], [3, 8, "createElement('i', null, name),"], [3, 9, "'. Welcome!'"]]
 import { createElement } from 'react';
