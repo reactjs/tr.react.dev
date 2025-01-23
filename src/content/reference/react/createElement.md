@@ -55,9 +55,9 @@ function Greeting({ name }) {
 
 Genellikle, öğeyi bileşeninizden döndürür veya başka bir öğenin alt elemanı yaparsınız. Öğenin özelliklerini okuyabilseniz de, en iyisi her öğeyi oluşturulduktan sonra opak olarak ele almak ve yalnızca render etmektir.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
-* You must **treat React elements and their props as [immutable](https://en.wikipedia.org/wiki/Immutable_object)** and never change their contents after creation. In development, React will [freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) the returned element and its `props` property shallowly to enforce this.
+* React öğelerine ve prop'larına [immutable](https://en.wikipedia.org/wiki/Immutable_object)** olarak davranmalı ve oluşturulduktan sonra içeriklerini asla değiştirmemelisiniz. Geliştirme sırasında, React bunu uygulamak için döndürülen öğeyi ve `props` özelliğini sığ bir şekilde [dondurur](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze).
 
 * When you use JSX, **you must start a tag with a capital letter to render your own custom component.** In other words, `<Something />` is equivalent to `createElement(Something)`, but `<something />` (lowercase) is equivalent to `createElement('something')` (note it's a string, so it will be treated as a built-in HTML tag).
 
