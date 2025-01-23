@@ -87,7 +87,7 @@ function Greeting({ name }) {
 }
 ```
 
-The <CodeStep step={3}>children</CodeStep> are optional, and you can pass as many as you need (the example above has three children). This code will display a `<h1>` header with a greeting. For comparison, here is the same example rewritten with JSX:
+<CodeStep step={3}>children</CodeStep> isteğe bağlıdır ve ihtiyaç duyduğunuz kadarını geçebilirsiniz (yukarıdaki örnekte üç alt eleman vardır). Bu kod, bir selamlama içeren bir `<h1>` başlığı görüntüleyecektir. Karşılaştırma için, aynı örnek JSX ile yeniden yazılmıştır:
 
 ```js [[1, 3, "h1"], [2, 3, "className=\\"greeting\\""], [3, 4, "Hello <i>{name}</i>. Welcome!"], [1, 5, "h1"]]
 function Greeting({ name }) {
