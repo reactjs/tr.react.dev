@@ -34,11 +34,11 @@ function Greeting({ name }) {
 }
 ```
 
-[See more examples below.](#usage)
+[Aşağıda daha fazla örneğe bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-* `type`: The `type` argument must be a valid React component type. For example, it could be a tag name string (such as `'div'` or `'span'`), or a React component (a function, a class, or a special component like [`Fragment`](/reference/react/Fragment)).
+* `type`: `type` argümanı geçerli bir React bileşen tipi olmalıdır. Örneğin, bir etiket adı dizesi (`'div'` veya `'span'` gibi) veya bir React bileşeni (bir fonksiyon, bir sınıf veya [`Fragment`](/reference/react/Fragment) gibi özel bir bileşen) olabilir.
 
 * `props`: The `props` argument must either be an object or `null`. If you pass `null`, it will be treated the same as an empty object. React will create an element with props matching the `props` you have passed. Note that `ref` and `key` from your `props` object are special and will *not* be available as `element.props.ref` and `element.props.key` on the returned `element`. They will be available as `element.ref` and `element.key`.
 
