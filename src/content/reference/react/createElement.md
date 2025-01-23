@@ -61,7 +61,7 @@ Genellikle, öğeyi bileşeninizden döndürür veya başka bir öğenin alt ele
 
 * JSX kullandığınızda, **kendi özel bileşeninizi oluşturmak için bir etikete büyük harfle başlamalısınız.** Başka bir deyişle, `<Something />` `createElement(Something)` ile eşdeğerdir, ancak `<something />` (küçük harf) `createElement('something')` ile eşdeğerdir (bunun bir dize olduğuna dikkat edin, bu nedenle yerleşik bir HTML etiketi olarak ele alınacaktır).
 
-* You should only **pass children as multiple arguments to `createElement` if they are all statically known,** like `createElement('h1', {}, child1, child2, child3)`. If your children are dynamic, pass the entire array as the third argument: `createElement('ul', {}, listItems)`. This ensures that React will [warn you about missing `key`s](/learn/rendering-lists#keeping-list-items-in-order-with-key) for any dynamic lists. For static lists this is not necessary because they never reorder.
+* Alt elemanları `createElement` öğesine yalnızca **hepsi statik olarak biliniyorsa** birden fazla argüman olarak geçirmelisiniz, örneğin `createElement('h1', {}, child1, child2, child3)`. Alt elemanlarınız dinamikse, dizinin tamamını üçüncü bağımsız değişken olarak iletin: `createElement('ul', {}, listItems)`. Bu, React'in herhangi bir dinamik liste için [eksik `anahtar`lar hakkında sizi uyarmasını](/learn/rendering-lists#keeping-list-items-in-order-with-key) sağlar. Statik listeler için bu gerekli değildir çünkü asla yeniden sıralanmazlar.
 
 ---
 
