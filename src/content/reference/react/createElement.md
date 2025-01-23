@@ -196,10 +196,10 @@ Bir öğe, kullanıcı arayüzünün bir parçasının hafif bir tanımıdır. �
 }
 ```
 
-**Note that creating this object does not render the `Greeting` component or create any DOM elements.**
+**Bu nesneyi oluşturmanın `Greeting` bileşenini oluşturmadığını veya herhangi bir DOM öğesi yaratmadığını unutmayın.**
 
-A React element is more like a description--an instruction for React to later render the `Greeting` component. By returning this object from your `App` component, you tell React what to do next.
+Bir React öğesi daha çok bir açıklama gibidir - React'in daha sonra `Greeting` bileşenini oluşturması için bir talimat. Bu nesneyi `App` bileşeninizden döndürerek, React'e bundan sonra ne yapacağını söylersiniz.
 
-Creating elements is extremely cheap so you don't need to try to optimize or avoid it.
+Öğeler oluşturmak son derece ucuzdur, bu nedenle optimize etmeye çalışmanıza veya bundan kaçınmanıza gerek yoktur.
 
 </DeepDive>
