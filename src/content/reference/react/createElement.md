@@ -149,7 +149,7 @@ export default function App() {
 
 </Sandpack>
 
-And here is the same example written using JSX:
+Ve işte JSX kullanılarak yazılmış aynı örnek:
 
 <Sandpack>
 
