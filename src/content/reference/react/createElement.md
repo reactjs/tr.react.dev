@@ -176,7 +176,7 @@ export default function App() {
 
 </Sandpack>
 
-Both coding styles are fine, so you can use whichever one you prefer for your project. The main benefit of using JSX compared to `createElement` is that it's easy to see which closing tag corresponds to which opening tag.
+Her iki kodlama stilinde de sorun yoktur, bu nedenle projeniz için hangisini tercih ederseniz onu kullanabilirsiniz. JSX kullanmanın `createElement` ile karşılaştırıldığında ana faydası, hangi kapanış etiketinin hangi açılış etiketine karşılık geldiğini görmenin kolay olmasıdır.
 
 <DeepDive>
 
