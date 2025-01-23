@@ -1,16 +1,16 @@
 ---
-title: Children
+title: Children (Alt Eleman)
 ---
 
 <Pitfall>
 
-Using `Children` is uncommon and can lead to fragile code. [See common alternatives.](#alternatives)
+`Children` kullanımı nadirdir ve kırılgan koda yol açabilir. [Yaygın alternatiflere bakın.](#alternatives)
 
 </Pitfall>
 
 <Intro>
 
-`Children` lets you manipulate and transform the JSX you received as the [`children` prop.](/learn/passing-props-to-a-component#passing-jsx-as-children)
+`Children`, [`children` prop'u](/learn/passing-props-to-a-component#passing-jsx-as-children) olarak aldığınız JSX'i değiştirmenize ve dönüştürmenize olanak tanır
 
 ```js
 const mappedChildren = Children.map(children, child =>
@@ -27,11 +27,11 @@ const mappedChildren = Children.map(children, child =>
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru Dokümanı {/*reference*/}
 
 ### `Children.count(children)` {/*children-count*/}
 
-Call `Children.count(children)` to count the number of children in the `children` data structure.
+Children veri yapısındaki alt eleman sayısını saymak için `Children.count(children)` öğesini çağırın.
 
 ```js src/RowList.js active
 import { Children } from 'react';
@@ -39,32 +39,32 @@ import { Children } from 'react';
 function RowList({ children }) {
   return (
     <>
-      <h1>Total rows: {Children.count(children)}</h1>
+      <h1>Toplam satır: {Children.count(children)}</h1>
       ...
     </>
   );
 }
 ```
 
-[See more examples below.](#counting-children)
+[Aşağıda daha fazla örneğe bakın.](#counting-children)
 
-#### Parameters {/*children-count-parameters*/}
+#### Parametreler {/*children-count-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 
 #### Returns {/*children-count-returns*/}
 
-The number of nodes inside these `children`.
+Bu `children` içindeki node'ların sayısı.
 
-#### Caveats {/*children-count-caveats*/}
+#### Uyarılar {/*children-count-caveats*/}
 
-- Empty nodes (`null`, `undefined`, and Booleans), strings, numbers, and [React elements](/reference/react/createElement) count as individual nodes. Arrays don't count as individual nodes, but their children do. **The traversal does not go deeper than React elements:** they don't get rendered, and their children aren't traversed. [Fragments](/reference/react/Fragment) don't get traversed.
+- Boş node'lar (`null`, `undefined` ve Booleans), string'ler, sayılar ve [React elemanları](/reference/react/createElement) ayrı node'lar olarak sayılır. Diziler tek tek node'lar olarak sayılmaz, ancak alt elemanları sayılır. **Çaprazlama React öğelerinden daha derine gitmez:** bunlar işlenmez ve alt öğeleri çaprazlanmaz. [Fragments](/reference/react/Fragment) geçilmez.
 
 ---
 
 ### `Children.forEach(children, fn, thisArg?)` {/*children-foreach*/}
 
-Call `Children.forEach(children, fn, thisArg?)` to run some code for each child in the `children` data structure.
+Children veri yapısındaki her alt eleman için bazı kodlar çalıştırmak üzere `Children.forEach(children, fn, thisArg?)` öğesini çağırın.
 
 ```js src/RowList.js active
 import { Children } from 'react';
@@ -78,27 +78,27 @@ function SeparatorList({ children }) {
   // ...
 ```
 
-[See more examples below.](#running-some-code-for-each-child)
+[Aşağıda daha fazla örneğe bakın](#running-some-code-for-each-child)
 
-#### Parameters {/*children-foreach-parameters*/}
+#### Parametreler {/*children-foreach-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
-* `fn`: The function you want to run for each child, similar to the [array `forEach` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) callback. It will be called with the child as the first argument and its index as the second argument. The index starts at `0` and increments on each call.
-* **optional** `thisArg`: The [`this` value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) with which the `fn` function should be called. If omitted, it's `undefined`.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
+* `fn`: Her çocuk için çalıştırmak istediğiniz işlev, [array `forEach` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) callback'e benzer. İlk argüman olarak alt eleman ve ikinci argüman olarak indeksi ile çağrılacaktır. İndeks `0`dan başlar ve her çağrıda artar.
+* **isteğe bağlı** `thisArg`: `fn` fonksiyonunun çağrılması gereken [`this` değeri](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). Atlanırsa, `tanımlanmamış` olur.
 
 #### Returns {/*children-foreach-returns*/}
 
-`Children.forEach` returns `undefined`.
+`Children.forEach` öğesi `undefined` döndürür.
 
-#### Caveats {/*children-foreach-caveats*/}
+#### Uyarılar {/*children-foreach-caveats*/}
 
-- Empty nodes (`null`, `undefined`, and Booleans), strings, numbers, and [React elements](/reference/react/createElement) count as individual nodes. Arrays don't count as individual nodes, but their children do. **The traversal does not go deeper than React elements:** they don't get rendered, and their children aren't traversed. [Fragments](/reference/react/Fragment) don't get traversed.
+- Boş node'lar (`null`, `undefined` ve Booleans), string'ler, sayılar ve [React elements](/reference/react/createElement) ayrı node'lar olarak sayılır. Diziler tek tek node'lar olarak sayılmaz, ancak alt elemanları sayılır. **Çaprazlama React öğelerinden daha derine gitmez:** bunlar işlenmez ve alt öğeleri çaprazlanmaz. [Fragments](/referans/react/Fragment) çaprazlanmaz.
 
 ---
 
 ### `Children.map(children, fn, thisArg?)` {/*children-map*/}
 
-Call `Children.map(children, fn, thisArg?)` to map or transform each child in the `children` data structure.
+Alt eleman veri yapısındaki her alt elemani eşlemek veya dönüştürmek için `Children.map(children, fn, thisArg?)` öğesini çağırın.
 
 ```js src/RowList.js active
 import { Children } from 'react';
@@ -116,11 +116,11 @@ function RowList({ children }) {
 }
 ```
 
-[See more examples below.](#transforming-children)
+[Aşağıda daha fazla örneğe bakınız.](#transforming-children)
 
 #### Parameters {/*children-map-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 * `fn`: The mapping function, similar to the [array `map` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) callback. It will be called with the child as the first argument and its index as the second argument. The index starts at `0` and increments on each call. You need to return a React node from this function. This may be an empty node (`null`, `undefined`, or a Boolean), a string, a number, a React element, or an array of other React nodes.
 * **optional** `thisArg`: The [`this` value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) with which the `fn` function should be called. If omitted, it's `undefined`.
 
@@ -141,7 +141,7 @@ Otherwise, returns a flat array consisting of the nodes you've returned from the
 ### `Children.only(children)` {/*children-only*/}
 
 
-Call `Children.only(children)` to assert that `children` represent a single React element.
+Alt elemanların tek bir React öğesini temsil ettiğini doğrulamak için `Children.only(children)` öğesini çağırın.
 
 ```js
 function Box({ children }) {
@@ -149,25 +149,25 @@ function Box({ children }) {
   // ...
 ```
 
-#### Parameters {/*children-only-parameters*/}
+#### Parametreler {/*children-only-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 
 #### Returns {/*children-only-returns*/}
 
-If `children` [is a valid element,](/reference/react/isValidElement) returns that element.
+Eğer `children` [geçerli bir eleman ise,](/reference/react/isValidElement) bu elemanı döndürür.
 
-Otherwise, throws an error.
+Aksi takdirde hata verir.
 
-#### Caveats {/*children-only-caveats*/}
+#### Uyarılar {/*children-only-caveats*/}
 
-- This method always **throws if you pass an array (such as the return value of `Children.map`) as `children`.** In other words, it enforces that `children` is a single React element, not that it's an array with a single element.
+- Bu yöntem **`children` olarak bir dizi (örneğin, `Children.map`'in dönüş değeri) geçirirseniz her zaman hata fırlatır.** Başka bir deyişle, `children`'ın tek bir React öğesi olmasını zorunlu kılar, ancak bu bir öğe içeren bir dizi olması anlamına gelmez.
 
 ---
 
 ### `Children.toArray(children)` {/*children-toarray*/}
 
-Call `Children.toArray(children)` to create an array out of the `children` data structure.
+Alt eleman veri yapısından bir dizi oluşturmak için `Children.toArray(çocuklar)` öğesini çağırın.
 
 ```js src/ReversedList.js active
 import { Children } from 'react';
@@ -178,25 +178,25 @@ export default function ReversedList({ children }) {
   // ...
 ```
 
-#### Parameters {/*children-toarray-parameters*/}
+#### Parametreler {/*children-toarray-parameters*/}
 
-* `children`: The value of the [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) received by your component.
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
 
 #### Returns {/*children-toarray-returns*/}
 
-Returns a flat array of elements in `children`.
+`children` içindeki elemanların düz bir dizisini döndürür.
 
-#### Caveats {/*children-toarray-caveats*/}
+#### Uyarılar {/*children-toarray-caveats*/}
 
-- Empty nodes (`null`, `undefined`, and Booleans) will be omitted in the returned array. **The returned elements' keys will be calculated from the original elements' keys and their level of nesting and position.** This ensures that flattening the array does not introduce changes in behavior.
+- Boş node'lar (`null`, `undefined` ve Booleans) döndürülen dizide atlanacaktır. **Döndürülen öğelerin anahtarları, orijinal öğelerin anahtarlarından, iç içe geçme düzeylerinden ve konumlarından hesaplanacaktır.** Bu, dizinin düzleştirilmesinin davranışta değişikliklere yol açmamasını sağlar.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Transforming children {/*transforming-children*/}
+### Children'ı dönüştürmek {/*transforming-children*/}
 
-To transform the children JSX that your component [receives as the `children` prop,](/learn/passing-props-to-a-component#passing-jsx-as-children) call `Children.map`:
+Bileşeninizin [`children` prop`u olarak aldığı](/learn/passing-props-to-a-component#passing-jsx-as-children)  JSX çocuklarını dönüştürmek için `Children.map` çağrısını yapın:
 
 ```js {6,10}
 import { Children } from 'react';
@@ -214,7 +214,7 @@ function RowList({ children }) {
 }
 ```
 
-In the example above, the `RowList` wraps every child it receives into a `<div className="Row">` container. For example, let's say the parent component passes three `<p>` tags as the `children` prop to `RowList`:
+Yukarıdaki örnekte, `RowList` aldığı her children'ı bir `<div className=“Row”>` konteynerine sarar. Örneğin, ana bileşenin `RowList` öğesine `children` prop'u olarak üç `<p>` etiketi ilettiğini varsayalım:
 
 ```js
 <RowList>
