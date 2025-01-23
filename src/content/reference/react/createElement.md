@@ -59,7 +59,7 @@ Genellikle, öğeyi bileşeninizden döndürür veya başka bir öğenin alt ele
 
 * React öğelerine ve prop'larına [immutable](https://en.wikipedia.org/wiki/Immutable_object)** olarak davranmalı ve oluşturulduktan sonra içeriklerini asla değiştirmemelisiniz. Geliştirme sırasında, React bunu uygulamak için döndürülen öğeyi ve `props` özelliğini sığ bir şekilde [dondurur](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze).
 
-* When you use JSX, **you must start a tag with a capital letter to render your own custom component.** In other words, `<Something />` is equivalent to `createElement(Something)`, but `<something />` (lowercase) is equivalent to `createElement('something')` (note it's a string, so it will be treated as a built-in HTML tag).
+* JSX kullandığınızda, **kendi özel bileşeninizi oluşturmak için bir etikete büyük harfle başlamalısınız.** Başka bir deyişle, `<Something />` `createElement(Something)` ile eşdeğerdir, ancak `<something />` (küçük harf) `createElement('something')` ile eşdeğerdir (bunun bir dize olduğuna dikkat edin, bu nedenle yerleşik bir HTML etiketi olarak ele alınacaktır).
 
 * You should only **pass children as multiple arguments to `createElement` if they are all statically known,** like `createElement('h1', {}, child1, child2, child3)`. If your children are dynamic, pass the entire array as the third argument: `createElement('ul', {}, listItems)`. This ensures that React will [warn you about missing `key`s](/learn/rendering-lists#keeping-list-items-in-order-with-key) for any dynamic lists. For static lists this is not necessary because they never reorder.
 
