@@ -42,7 +42,7 @@ function Greeting({ name }) {
 
 * `props`: `props` bağımsız değişkeni ya bir nesne ya da `null` olmalıdır. Eğer `null` geçerseniz, boş bir nesneyle aynı muameleyi görecektir. React, ilettiğiniz `props` ile eşleşen prop'lara sahip bir eleman oluşturacaktır. `Props` nesnenizdeki `ref` ve `key` öğelerinin özel olduğunu ve döndürülen `element` üzerinde `element.props.ref` ve `element.props.key` olarak kullanılamayacağını *unutmayın. Bunlar `element.ref` ve `element.key` olarak mevcut olacaktır.
 
-* **optional** `...children`: Zero or more child nodes. They can be any React nodes, including React elements, strings, numbers, [portals](/reference/react-dom/createPortal), empty nodes (`null`, `undefined`, `true`, and `false`), and arrays of React nodes.
+* **isteğe bağlı** `...children`: Sıfır veya daha fazla alt node. React öğeleri, strings, numbers, [portallar](/reference/react-dom/createPortal), boş node'lar (`null`, `undefined`, `true` ve `false`) ve React node'larının dizileri dahil olmak üzere herhangi bir React node'u olabilirler.
 
 #### Returns {/*returns*/}
 
