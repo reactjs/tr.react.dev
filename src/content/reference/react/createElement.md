@@ -65,9 +65,9 @@ Genellikle, öğeyi bileşeninizden döndürür veya başka bir öğenin alt ele
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Creating an element without JSX {/*creating-an-element-without-jsx*/}
+### JSX olmadan öğe oluşturma {/*creating-an-element-without-jsx*/}
 
 If you don't like [JSX](/learn/writing-markup-with-jsx) or can't use it in your project, you can use `createElement` as an alternative.
 
