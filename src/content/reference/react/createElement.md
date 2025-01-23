@@ -46,7 +46,7 @@ function Greeting({ name }) {
 
 #### Returns {/*returns*/}
 
-`createElement` returns a React element object with a few properties:
+`createElement`, birkaç özelliğe sahip bir React element nesnesi döndürür:
 
 * `type`: The `type` you have passed.
 * `props`: The `props` you have passed except for `ref` and `key`.
