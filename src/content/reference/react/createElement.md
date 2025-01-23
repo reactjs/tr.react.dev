@@ -48,10 +48,10 @@ function Greeting({ name }) {
 
 `createElement`, birkaç özelliğe sahip bir React element nesnesi döndürür:
 
-* `type`: The `type` you have passed.
-* `props`: The `props` you have passed except for `ref` and `key`.
-* `ref`: The `ref` you have passed. If missing, `null`.
-* `key`: The `key` you have passed, coerced to a string. If missing, `null`.
+* `type`: Geçtiğiniz `tip`.
+* `props`: `ref` ve `key` dışında geçirdiğiniz `props`.
+* `ref`: Geçtiğiniz `ref`. Eksikse, `null`.
+* `key`: İlettiğiniz `anahtar` bir string'e zorlanır. Eksikse, `null`.
 
 Usually, you'll return the element from your component or make it a child of another element. Although you may read the element's properties, it's best to treat every element as opaque after it's created, and only render it.
 
