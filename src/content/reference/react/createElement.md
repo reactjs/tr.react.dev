@@ -107,7 +107,7 @@ export default function App() {
 }
 ```
 
-With JSX, it would look like this:
+JSX ile şu şekilde görünecektir:
 
 ```js [[1, 2, "Greeting"], [2, 2, "name=\\"Taylor\\""]]
 export default function App() {
@@ -115,7 +115,7 @@ export default function App() {
 }
 ```
 
-Here is a complete example written with `createElement`:
+İşte `createElement` ile yazılmış tam bir örnek:
 
 <Sandpack>
 
