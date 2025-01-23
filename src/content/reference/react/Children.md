@@ -141,7 +141,7 @@ Otherwise, returns a flat array consisting of the nodes you've returned from the
 ### `Children.only(children)` {/*children-only*/}
 
 
-Call `Children.only(children)` to assert that `children` represent a single React element.
+Alt elemanların tek bir React öğesini temsil ettiğini doğrulamak için `Children.only(children)` öğesini çağırın.
 
 ```js
 function Box({ children }) {
@@ -155,13 +155,13 @@ function Box({ children }) {
 
 #### Returns {/*children-only-returns*/}
 
-If `children` [is a valid element,](/reference/react/isValidElement) returns that element.
+Eğer `children` [geçerli bir eleman ise,](/reference/react/isValidElement) bu elemanı döndürür.
 
-Otherwise, throws an error.
+Aksi takdirde hata verir.
 
-#### Caveats {/*children-only-caveats*/}
+#### Uyarılar {/*children-only-caveats*/}
 
-- This method always **throws if you pass an array (such as the return value of `Children.map`) as `children`.** In other words, it enforces that `children` is a single React element, not that it's an array with a single element.
+- Bu yöntem **`children` olarak bir dizi (örneğin, `Children.map`'in dönüş değeri) geçirirseniz her zaman hata fırlatır.** Başka bir deyişle, `children`'ın tek bir React öğesi olmasını zorunlu kılar, ancak bu bir öğe içeren bir dizi olması anlamına gelmez.
 
 ---
 
@@ -188,15 +188,15 @@ export default function ReversedList({ children }) {
 
 #### Uyarılar {/*children-toarray-caveats*/}
 
-- Empty nodes (`null`, `undefined`, and Booleans) will be omitted in the returned array. **The returned elements' keys will be calculated from the original elements' keys and their level of nesting and position.** This ensures that flattening the array does not introduce changes in behavior.
+- Boş node'lar (`null`, `undefined` ve Booleans) döndürülen dizide atlanacaktır. **Döndürülen öğelerin anahtarları, orijinal öğelerin anahtarlarından, iç içe geçme düzeylerinden ve konumlarından hesaplanacaktır.** Bu, dizinin düzleştirilmesinin davranışta değişikliklere yol açmamasını sağlar.
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Transforming children {/*transforming-children*/}
+### Children'ı dönüştürmek {/*transforming-children*/}
 
-To transform the children JSX that your component [receives as the `children` prop,](/learn/passing-props-to-a-component#passing-jsx-as-children) call `Children.map`:
+Bileşeninizin [`children` prop`u olarak aldığı](/learn/passing-props-to-a-component#passing-jsx-as-children)  JSX çocuklarını dönüştürmek için `Children.map` çağrısını yapın:
 
 ```js {6,10}
 import { Children } from 'react';
@@ -214,7 +214,7 @@ function RowList({ children }) {
 }
 ```
 
-In the example above, the `RowList` wraps every child it receives into a `<div className="Row">` container. For example, let's say the parent component passes three `<p>` tags as the `children` prop to `RowList`:
+Yukarıdaki örnekte, `RowList` aldığı her children'ı bir `<div className=“Row”>` konteynerine sarar. Örneğin, ana bileşenin `RowList` öğesine `children` prop'u olarak üç `<p>` etiketi ilettiğini varsayalım:
 
 ```js
 <RowList>
