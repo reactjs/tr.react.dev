@@ -185,7 +185,7 @@ Her iki kodlama stilinde de sorun yoktur, bu nedenle projeniz için hangisini te
 Bir öğe, kullanıcı arayüzünün bir parçasının hafif bir tanımıdır. Örneğin, hem `<Greeting name=“Taylor” />` hem de `createElement(Greeting, { name: 'Taylor' })` aşağıdaki gibi bir nesne üretir:
 
 ```js
-// Slightly simplified
+// Biraz basitleştirilmiş
 {
   type: Greeting,
   props: {
