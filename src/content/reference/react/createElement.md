@@ -99,7 +99,7 @@ function Greeting({ name }) {
 }
 ```
 
-To render your own React component, pass a function like `Greeting` as the <CodeStep step={1}>type</CodeStep> instead of a string like `'h1'`:
+Kendi React bileşeninizi oluşturmak için, `'h1'` gibi bir string yerine <CodeStep step={1}>type</CodeStep> olarak `Greeting` gibi bir fonksiyon geçirin:
 
 ```js [[1, 2, "Greeting"], [2, 2, "{ name: 'Taylor' }"]]
 export default function App() {
