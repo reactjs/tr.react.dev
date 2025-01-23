@@ -53,7 +53,7 @@ function Greeting({ name }) {
 * `ref`: Geçtiğiniz `ref`. Eksikse, `null`.
 * `key`: İlettiğiniz `anahtar` bir string'e zorlanır. Eksikse, `null`.
 
-Usually, you'll return the element from your component or make it a child of another element. Although you may read the element's properties, it's best to treat every element as opaque after it's created, and only render it.
+Genellikle, öğeyi bileşeninizden döndürür veya başka bir öğenin alt elemanı yaparsınız. Öğenin özelliklerini okuyabilseniz de, en iyisi her öğeyi oluşturulduktan sonra opak olarak ele almak ve yalnızca render etmektir.
 
 #### Caveats {/*caveats*/}
 
