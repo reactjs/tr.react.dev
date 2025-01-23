@@ -40,7 +40,7 @@ function Greeting({ name }) {
 
 * `type`: `type` argümanı geçerli bir React bileşen tipi olmalıdır. Örneğin, bir etiket adı dizesi (`'div'` veya `'span'` gibi) veya bir React bileşeni (bir fonksiyon, bir sınıf veya [`Fragment`](/reference/react/Fragment) gibi özel bir bileşen) olabilir.
 
-* `props`: The `props` argument must either be an object or `null`. If you pass `null`, it will be treated the same as an empty object. React will create an element with props matching the `props` you have passed. Note that `ref` and `key` from your `props` object are special and will *not* be available as `element.props.ref` and `element.props.key` on the returned `element`. They will be available as `element.ref` and `element.key`.
+* `props`: `props` bağımsız değişkeni ya bir nesne ya da `null` olmalıdır. Eğer `null` geçerseniz, boş bir nesneyle aynı muameleyi görecektir. React, ilettiğiniz `props` ile eşleşen prop'lara sahip bir eleman oluşturacaktır. `Props` nesnenizdeki `ref` ve `key` öğelerinin özel olduğunu ve döndürülen `element` üzerinde `element.props.ref` ve `element.props.key` olarak kullanılamayacağını *unutmayın. Bunlar `element.ref` ve `element.key` olarak mevcut olacaktır.
 
 * **optional** `...children`: Zero or more child nodes. They can be any React nodes, including React elements, strings, numbers, [portals](/reference/react-dom/createPortal), empty nodes (`null`, `undefined`, `true`, and `false`), and arrays of React nodes.
 
