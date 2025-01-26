@@ -25,7 +25,7 @@ class MyInput extends Component {
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru Dokümanı {/*reference*/}
 
 ### `createRef()` {/*createref*/}
 
