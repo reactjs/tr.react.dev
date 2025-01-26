@@ -52,7 +52,7 @@ class MyComponent extends Component {
 
 * `current`: Başlangıçta `null` olarak ayarlanır. Daha sonra başka bir şeye ayarlayabilirsiniz. Ref nesnesini React'e bir JSX düğümüne `ref` niteliği olarak iletirseniz, React onun `current` özelliğini ayarlayacaktır.
 
-#### Caveats {/*caveats*/}
+#### Uyarılar {/*caveats*/}
 
 * `createRef` always returns a *different* object. It's equivalent to writing `{ current: null }` yourself.
 * In a function component, you probably want [`useRef`](/reference/react/useRef) instead which always returns the same object.
