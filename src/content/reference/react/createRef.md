@@ -60,11 +60,11 @@ class MyComponent extends Component {
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Declaring a ref in a class component {/*declaring-a-ref-in-a-class-component*/}
+### Bir sınıf bileşeninde ref bildirme {/*declaring-a-ref-in-a-class-component*/}
 
-To declare a ref inside a [class component,](/reference/react/Component) call `createRef` and assign its result to a class field:
+Bir [class component,](/reference/react/Component) içinde bir ref bildirmek için `createRef` çağrısı yapın ve sonucunu bir sınıf alanına atayın:
 
 ```js {4}
 import { Component, createRef } from 'react';
@@ -76,7 +76,7 @@ class Form extends Component {
 }
 ```
 
-If you now pass `ref={this.inputRef}` to an `<input>` in your JSX, React will populate `this.inputRef.current` with the input DOM node. For example, here is how you make a button that focuses the input:
+Şimdi JSX'inizdeki bir `<input>` öğesine `ref={this.inputRef}` iletirseniz, React `this.inputRef.current` öğesini girdi DOM node'u ile dolduracaktır. Örneğin, girişi odaklayan bir node'u şu şekilde yapabilirsiniz:
 
 <Sandpack>
 
@@ -95,7 +95,7 @@ export default class Form extends Component {
       <>
         <input ref={this.inputRef} />
         <button onClick={this.handleClick}>
-          Focus the input
+          Input'a odaklan
         </button>
       </>
     );
@@ -107,7 +107,7 @@ export default class Form extends Component {
 
 <Pitfall>
 
-`createRef` is mostly used for [class components.](/reference/react/Component) Function components typically rely on [`useRef`](/reference/react/useRef) instead.
+`createRef` çoğunlukla [sınıf bileşenleri.](/reference/react/Component) için kullanılır. Fonksiyon bileşenleri genellikle bunun yerine [`useRef`](/reference/react/useRef) kullanır.
 
 </Pitfall>
 
