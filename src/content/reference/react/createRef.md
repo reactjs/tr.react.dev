@@ -56,7 +56,7 @@ class MyComponent extends Component {
 
 * `createRef` her zaman *farklı* bir nesne döndürür. Bu, `{ current: null }` yazmaya eşdeğerdir.
 * Bir fonksiyon bileşeninde, muhtemelen bunun yerine her zaman aynı nesneyi döndüren [`useRef`](/reference/react/useRef) istersiniz.
-* `const ref = useRef()` is equivalent to `const [ref, _] = useState(() => createRef(null))`.
+* `const ref = useRef()` ifadesi `const [ref, _] = useState(() => createRef(null))` ifadesine eşdeğerdir.
 
 ---
 
