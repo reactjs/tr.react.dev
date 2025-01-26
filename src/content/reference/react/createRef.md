@@ -164,7 +164,7 @@ export default function Form() {
     <>
       <input ref={inputRef} />
       <button onClick={handleClick}>
-        Focus the input
+        Input'a odaklan
       </button>
     </>
   );
