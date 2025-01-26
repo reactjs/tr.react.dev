@@ -42,9 +42,9 @@ class MyComponent extends Component {
 
 [Aşağıda daha fazla örneğe bakın.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
-`createRef` takes no parameters.
+`createRef` hiçbir parametre almaz.
 
 #### Returns {/*returns*/}
 
