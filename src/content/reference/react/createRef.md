@@ -113,7 +113,7 @@ export default class Form extends Component {
 
 ---
 
-## Alternatives {/*alternatives*/}
+## Alternatifler {/*alternatives*/}
 
 ### Migrating from a class with `createRef` to a function with `useRef` {/*migrating-from-a-class-with-createref-to-a-function-with-useref*/}
 
