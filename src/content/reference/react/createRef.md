@@ -136,7 +136,7 @@ export default class Form extends Component {
       <>
         <input ref={this.inputRef} />
         <button onClick={this.handleClick}>
-          Focus the input
+          Input'a odaklan
         </button>
       </>
     );
@@ -146,7 +146,7 @@ export default class Form extends Component {
 
 </Sandpack>
 
-When you [convert this component from a class to a function,](/reference/react/Component#alternatives) replace calls to `createRef` with calls to [`useRef`:](/reference/react/useRef)
+[Bu bileşeni bir sınıftan bir fonksiyona dönüştürdüğünüzde,](/reference/react/Component#alternatives) `createRef` çağrılarını [`useRef`:](/reference/react/useRef) çağrılarıyla değiştirin
 
 <Sandpack>
 
