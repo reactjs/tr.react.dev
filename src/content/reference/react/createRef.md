@@ -48,7 +48,7 @@ class MyComponent extends Component {
 
 #### Returns {/*returns*/}
 
-`createRef` returns an object with a single property:
+`createRef` tek bir özelliğe sahip bir nesne döndürür:
 
 * `current`: Initially, it's set to the `null`. You can later set it to something else. If you pass the ref object to React as a `ref` attribute to a JSX node, React will set its `current` property.
 
