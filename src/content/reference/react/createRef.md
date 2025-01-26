@@ -4,7 +4,7 @@ title: createRef
 
 <Pitfall>
 
-`createRef` is mostly used for [class components.](/reference/react/Component) Function components typically rely on [`useRef`](/reference/react/useRef) instead.
+`createRef` çoğunlukla [sınıf bileşenleri.](/reference/react/Component) için kullanılır. Fonksiyon bileşenleri genellikle bunun yerine [`useRef`](/reference/react/useRef) kullanır.
 
 </Pitfall>
 
