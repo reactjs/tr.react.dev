@@ -115,9 +115,9 @@ export default class Form extends Component {
 
 ## Alternatifler {/*alternatives*/}
 
-### Migrating from a class with `createRef` to a function with `useRef` {/*migrating-from-a-class-with-createref-to-a-function-with-useref*/}
+### `createRef` ile bir sınıftan `useRef` ile bir fonksiyona geçiş {/*migrating-from-a-class-with-createref-to-a-function-with-useref*/}
 
-We recommend using function components instead of [class components](/reference/react/Component) in new code. If you have some existing class components using `createRef`, here is how you can convert them. This is the original code:
+Yeni kodda [sınıf bileşenleri](/reference/react/Component) yerine fonksiyon bileşenlerinin kullanılmasını öneriyoruz. Eğer `createRef` kullanan bazı mevcut sınıf bileşenleriniz varsa, bunları nasıl dönüştürebileceğiniz aşağıda açıklanmıştır. Bu orijinal koddur:
 
 <Sandpack>
 
