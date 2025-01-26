@@ -50,7 +50,7 @@ class MyComponent extends Component {
 
 `createRef` tek bir özelliğe sahip bir nesne döndürür:
 
-* `current`: Initially, it's set to the `null`. You can later set it to something else. If you pass the ref object to React as a `ref` attribute to a JSX node, React will set its `current` property.
+* `current`: Başlangıçta `null` olarak ayarlanır. Daha sonra başka bir şeye ayarlayabilirsiniz. Ref nesnesini React'e bir JSX düğümüne `ref` niteliği olarak iletirseniz, React onun `current` özelliğini ayarlayacaktır.
 
 #### Caveats {/*caveats*/}
 
