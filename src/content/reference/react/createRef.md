@@ -29,7 +29,7 @@ class MyInput extends Component {
 
 ### `createRef()` {/*createref*/}
 
-Call `createRef` to declare a [ref](/learn/referencing-values-with-refs) inside a [class component.](/reference/react/Component)
+Bir [sınıf bileşeni](/reference/react/Component) içinde bir [ref](/learn/referencing-values-with-refs) bildirmek için `createRef` çağrısı yapın
 
 ```js
 import { createRef, Component } from 'react';
