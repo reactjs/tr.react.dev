@@ -10,7 +10,7 @@ title: createRef
 
 <Intro>
 
-`createRef` creates a [ref](/learn/referencing-values-with-refs) object which can contain arbitrary value.
+`createRef` rastgele değer içerebilen bir [ref](/learn/referencing-values-with-refs) nesnesi oluşturur.
 
 ```js
 class MyInput extends Component {
