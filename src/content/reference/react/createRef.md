@@ -54,7 +54,7 @@ class MyComponent extends Component {
 
 #### Uyarılar {/*caveats*/}
 
-* `createRef` always returns a *different* object. It's equivalent to writing `{ current: null }` yourself.
+* `createRef` her zaman *farklı* bir nesne döndürür. Bu, `{ current: null }` yazmaya eşdeğerdir.
 * In a function component, you probably want [`useRef`](/reference/react/useRef) instead which always returns the same object.
 * `const ref = useRef()` is equivalent to `const [ref, _] = useState(() => createRef(null))`.
 
