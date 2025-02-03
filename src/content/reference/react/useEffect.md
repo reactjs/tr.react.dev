@@ -23,7 +23,7 @@ useEffect(setup, dependencies?)
 Bir Effect bildirmek için bileşeninizin en üst düzeyinde `useEffect`'i çağırın:
 
 ```js
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
 function ChatRoom({ roomId }) {
@@ -79,7 +79,7 @@ Bazı bileşenlerin sayfada görüntülenebilmesi için ağa, bazı tarayıcı A
 [Bileşeninizi harici bir sisteme bağlamak için](/learn/synchronizing-with-effects), bileşeninizin en üst düzeyinde `useEffect`'i çağırın:
 
 ```js [[1, 8, "const connection = createConnection(serverUrl, roomId);"], [1, 9, "connection.connect();"], [2, 11, "connection.disconnect();"], [3, 13, "[serverUrl, roomId]"]]
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
 function ChatRoom({ roomId }) {
