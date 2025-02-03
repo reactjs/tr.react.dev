@@ -45,7 +45,11 @@ Modüler bir JavaScript ortamı, tüm kodunuzu tek bir dosyaya yazmak yerine, Re
 
 * **Uygulamanız zaten `import` ifadelerini kullanan dosyalara bölünmüşse,** mevcut kurulumunuzu kullanmayı deneyin. JS kodunuza `<div />` yazmanın bir syntax hatasına neden olup olmadığını kontrol edin. Bir syntax hatasına neden olursa, [JavaScript kodunuzu Babel ile dönüştürmeniz](https://babeljs.io/setup), ve JSX kullanmak için [Babel React ön ayarını](https://babeljs.io/docs/babel-preset-react) etkinleştirmeniz gerekebilir.
 
+<<<<<<< HEAD
 * **Uygulamanızın JavaScript modüllerini derlemek için mevcut bir kurulumu yoksa,** [Vite](https://vitejs.dev/) ile kurun.  Vite topluluğu, Rails, Django ve Laravel dahil olmak üzere [backend kütüphaneleri ile birçok entegrasyonu](https://github.com/vitejs/awesome-vite#integrations-with-backends) sürdürür. Backend kütüphaneniz listelenmemişse, Vite yapılarını arka ucunuzla manuel olarak entegre etmek için [bu kılavuzu izleyin](https://vitejs.dev/guide/backend-integration.html).
+=======
+* **If your app doesn't have an existing setup for compiling JavaScript modules,** set it up with [Vite](https://vite.dev/). The Vite community maintains [many integrations with backend frameworks](https://github.com/vitejs/awesome-vite#integrations-with-backends), including Rails, Django, and Laravel. If your backend framework is not listed, [follow this guide](https://vite.dev/guide/backend-integration.html) to manually integrate Vite builds with your backend.
+>>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 Kurulumunuzun çalışıp çalışmadığını kontrol etmek için proje klasörünüzde şu komutu çalıştırın:
 
@@ -85,7 +89,11 @@ Sayfanızın tüm içeriği “Merhaba dünya!” ile değiştirildiyse, her şe
 
 <Note>
 
+<<<<<<< HEAD
 Modüler bir JavaScript ortamını mevcut bir projeye ilk kez entegre etmek gözünüzü korkutabilir ama buna değer! Takılırsanız, [topluluk kaynaklarımızı](/community) ya da [Vite Chat'imizi](https://chat.vitejs.dev/) deneyin.
+=======
+Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vite.dev/).
+>>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 </Note>
 
