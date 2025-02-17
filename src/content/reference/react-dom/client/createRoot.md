@@ -345,6 +345,7 @@ export default function App({counter}) {
 
 Birden fazla kez `render` çağrısı yapmak nadirdir. Genellikle bileşenleriniz bunun yerine [state güncellemesi](/reference/react/useState) yapacaktır.
 
+<<<<<<< HEAD
 ### Yakalanmamış hatalar için bir diyaloğu gösterme {/*show-a-dialog-for-uncaught-errors*/}
 
 Varsayılan olarak, React tüm yakalanmamış hataları konsola kaydeder. Kendi hata raporlama sisteminizi uygulamak için isteğe bağlı `onUncaughtError` kök seçeneğini sağlayabilirsiniz:
@@ -769,16 +770,26 @@ import { createRoot } from "react-dom/client";
 import App from "./App.js";
 import {reportCaughtError} from "./reportError";
 import "./styles.css";
+=======
+### Error logging in production {/*error-logging-in-production*/}
+
+By default, React will log all errors to the console. To implement your own error reporting, you can provide the optional error handler root options `onUncaughtError`, `onCaughtError` and `onRecoverableError`:
+
+```js [[1, 6, "onCaughtError"], [2, 6, "error", 1], [3, 6, "errorInfo"], [4, 10, "componentStack", 15]]
+import { createRoot } from "react-dom/client";
+import { reportCaughtError } from "./reportError";
+>>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
 
 const container = document.getElementById("root");
 const root = createRoot(container, {
   onCaughtError: (error, errorInfo) => {
-    if (error.message !== 'Known error') {
+    if (error.message !== "Known error") {
       reportCaughtError({
-        error, 
+        error,
         componentStack: errorInfo.componentStack,
       });
     }
+<<<<<<< HEAD
   }
 });
 root.render(<App />);
@@ -848,13 +859,15 @@ function Throw({error}) {
     "react-dom": "19.0.0-rc-3edc000d-20240926",
     "react-scripts": "^5.0.0",
     "react-error-boundary": "4.0.3"
+=======
+>>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
   },
-  "main": "/index.js"
-}
+});
 ```
 
-</Sandpack>
+The <CodeStep step={1}>onCaughtError</CodeStep> option is a function called with two arguments:
 
+<<<<<<< HEAD
 ### Kurtarılabilir hatalar için bir diyoloğu görüntüleme {/*displaying-a-dialog-for-recoverable-errors*/}
 
 React, render etme sırasında atılan bir hatadan kurtulmayı denemek için bir bileşeni otomatik olarak ikinci kez render edebilir. Başarılı olursa, React geliştiriciyi bilgilendirmek için konsola kurtarılabilir bir hata günlüğü kaydeder. Bu davranışı geçersiz kılmak için, isteğe bağlı `onRecoverableError` kök seçeneğini sağlayabilirsin:
@@ -946,91 +959,30 @@ html, body { min-height: 300px; }
   opacity: 0.9;
   text-wrap: wrap;
   overflow: scroll;
+=======
+1. The <CodeStep step={2}>error</CodeStep> that was thrown.
+2. An <CodeStep step={3}>errorInfo</CodeStep> object that contains the <CodeStep step={4}>componentStack</CodeStep> of the error.
+
+Together with `onUncaughtError` and `onRecoverableError`, you can can implement your own error reporting system:
+
+<Sandpack>
+
+```js src/reportError.js
+function reportError({ type, error, errorInfo }) {
+  // The specific implementation is up to you.
+  // `console.error()` is only used for demonstration purposes.
+  console.error(type, error, "Component Stack: ");
+  console.error("Component Stack: ", errorInfo.componentStack);
+>>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
 }
 
-.text-red {
-  color: red;
-}
-
-.-mb-20 {
-  margin-bottom: -20px;
-}
-
-.mb-0 {
-  margin-bottom: 0;
-}
-
-.mb-10 {
-  margin-bottom: 10px;
-}
-
-pre {
-  text-wrap: wrap;
-}
-
-pre.nowrap {
-  text-wrap: nowrap;
-}
-
-.hidden {
- display: none;  
-}
-```
-
-```js src/reportError.js hidden
-function reportError({ title, error, componentStack, dismissable }) {
-  const errorDialog = document.getElementById("error-dialog");
-  const errorTitle = document.getElementById("error-title");
-  const errorMessage = document.getElementById("error-message");
-  const errorBody = document.getElementById("error-body");
-  const errorComponentStack = document.getElementById("error-component-stack");
-  const errorStack = document.getElementById("error-stack");
-  const errorClose = document.getElementById("error-close");
-  const errorCause = document.getElementById("error-cause");
-  const errorCauseMessage = document.getElementById("error-cause-message");
-  const errorCauseStack = document.getElementById("error-cause-stack");
-  const errorNotDismissible = document.getElementById("error-not-dismissible");
-
-  // Set the title
-  errorTitle.innerText = title;
-
-  // Display error message and body
-  const [heading, body] = error.message.split(/\n(.*)/s);
-  errorMessage.innerText = heading;
-  if (body) {
-    errorBody.innerText = body;
-  } else {
-    errorBody.innerText = '';
+export function onCaughtErrorProd(error, errorInfo) {
+  if (error.message !== "Known error") {
+    reportError({ type: "Caught", error, errorInfo });
   }
-
-  // Display component stack
-  errorComponentStack.innerText = componentStack;
-
-  // Display the call stack
-  // Since we already displayed the message, strip it, and the first Error: line.
-  errorStack.innerText = error.stack.replace(error.message, '').split(/\n(.*)/s)[1];
-
-  // Display the cause, if available
-  if (error.cause) {
-    errorCauseMessage.innerText = error.cause.message;
-    errorCauseStack.innerText = error.cause.stack;
-    errorCause.classList.remove('hidden');
-  } else {
-    errorCause.classList.add('hidden');
-  }
-  // Display the close button, if dismissible
-  if (dismissable) {
-    errorNotDismissible.classList.add('hidden');
-    errorClose.classList.remove("hidden");
-  } else {
-    errorNotDismissible.classList.remove('hidden');
-    errorClose.classList.add("hidden");
-  }
-
-  // Show the dialog
-  errorDialog.classList.remove("hidden");
 }
 
+<<<<<<< HEAD
 export function reportCaughtError({error, cause, componentStack}) {
   reportError({ title: "Yakalanan Hata", error, componentStack,  dismissable: true});
 }
@@ -1041,37 +993,67 @@ export function reportUncaughtError({error, cause, componentStack}) {
 
 export function reportRecoverableError({error, cause, componentStack}) {
   reportError({ title: "Kurtarılabilir Hata", error, componentStack,  dismissable: true });
+=======
+export function onUncaughtErrorProd(error, errorInfo) {
+  reportError({ type: "Uncaught", error, errorInfo });
+}
+
+export function onRecoverableErrorProd(error, errorInfo) {
+  reportError({ type: "Recoverable", error, errorInfo });
+>>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
 }
 ```
 
 ```js src/index.js active
 import { createRoot } from "react-dom/client";
 import App from "./App.js";
-import {reportRecoverableError} from "./reportError";
-import "./styles.css";
+import {
+  onCaughtErrorProd,
+  onRecoverableErrorProd,
+  onUncaughtErrorProd,
+} from "./reportError";
 
 const container = document.getElementById("root");
 const root = createRoot(container, {
-  onRecoverableError: (error, errorInfo) => {
-    reportRecoverableError({
-      error,
-      cause: error.cause,
-      componentStack: errorInfo.componentStack,
-    });
-  }
+  // Keep in mind to remove these options in development to leverage
+  // React's default handlers or implement your own overlay for development.
+  // The handlers are only specfied unconditionally here for demonstration purposes.
+  onCaughtError: onCaughtErrorProd,
+  onRecoverableError: onRecoverableErrorProd,
+  onUncaughtError: onUncaughtErrorProd,
 });
 root.render(<App />);
 ```
 
 ```js src/App.js
-import { useState } from 'react';
-import { ErrorBoundary } from "react-error-boundary";
+import { Component, useState } from "react";
 
-// 🚩 Bug: Never do this. This will force an error.
-let errorThrown = false;
+function Boom() {
+  foo.bar = "baz";
+}
+
+class ErrorBoundary extends Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
+  const [triggerUncaughtError, settriggerUncaughtError] = useState(false);
+  const [triggerCaughtError, setTriggerCaughtError] = useState(false);
+
   return (
     <>
+<<<<<<< HEAD
       <ErrorBoundary
         fallbackRender={fallbackRender}
       >
@@ -1110,13 +1092,34 @@ function Throw({error}) {
   },
   "main": "/index.js"
 }
+=======
+      <button onClick={() => settriggerUncaughtError(true)}>
+        Trigger uncaught error
+      </button>
+      {triggerUncaughtError && <Boom />}
+      <button onClick={() => setTriggerCaughtError(true)}>
+        Trigger caught error
+      </button>
+      {triggerCaughtError && (
+        <ErrorBoundary>
+          <Boom />
+        </ErrorBoundary>
+      )}
+    </>
+  );
+}
+>>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
 ```
 
 </Sandpack>
 
+<<<<<<< HEAD
 
 ---
 ## Sorun Giderme {/*troubleshooting*/}
+=======
+## Troubleshooting {/*troubleshooting*/}
+>>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
 
 ### Bir kök oluşturdum, fakat hiçbir şey görüntülenmiyor. {/*ive-created-a-root-but-nothing-is-displayed*/}
 
