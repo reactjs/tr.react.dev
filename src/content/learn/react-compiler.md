@@ -311,7 +311,11 @@ export default defineConfig({
 
 ### Webpack {/*usage-with-webpack*/}
 
+<<<<<<< HEAD
 Bir topluluk Webpack yükleyicisi [artık burada mevcut](https://github.com/SukkaW/react-compiler-webpack).
+=======
+A community webpack loader is [now available here](https://github.com/SukkaW/react-compiler-webpack).
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 ### Expo {/*usage-with-expo*/}
 
