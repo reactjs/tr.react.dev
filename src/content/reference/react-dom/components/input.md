@@ -298,7 +298,11 @@ Tüm `<input>` elemanlarınıza bir `name` değeri verin, örneğin `<input name
 
 <Pitfall>
 
+<<<<<<< HEAD
 Varsayılan olarak `<form>` içindeki *herhangi bir* `<button>` elemanı forumu gönderecektir. Bu biraz şaşırtıcı olabilir, kendinize ait React `Button` elemanınız varsa, `<button>` yerine [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) döndürmeyi düşünebilirsiniz. Daha açık olmak gerekise formu göndermesi gereken *butonlar* için `<button type="submit">` kullanınız.
+=======
+By default, a `<button>` inside a `<form>` without a `type` attribute will submit it. This can be surprising! If you have your own custom `Button` React component, consider using [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<button>` (with no type). Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 </Pitfall>
 

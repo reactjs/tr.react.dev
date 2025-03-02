@@ -299,4 +299,8 @@ function Comments({commentsPromise}) {
 
 `note` içeriği, sayfanın render edilmesi için önemli bir veri olduğu için, sunucuda `await` edilir. Yorumlar ise daha aşağıda ve önceliği düşük olduğundan, promise'i sunucuda başlatırız ve istemcide `use` API'si ile bekleriz. Bu, istemcide askıya alınacak, ancak `note` içeriğinin render edilmesini engellemeyecektir.
 
+<<<<<<< HEAD
 Async bileşenler [istemcide desteklenmediği için](#why-cant-i-use-async-components-on-the-client), promise'i `use` ile bekleriz.
+=======
+Since async components are not supported on the client, we await the promise with `use`.
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7

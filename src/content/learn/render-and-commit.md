@@ -70,9 +70,15 @@ export default function Image() {
 Bir bileşen ilk defa render edildikten sonra, [`set` fonksiyonu](/reference/react/useState#setstate) ile state'i güncelleyerek bileşenin tekrar render edilmesini sağlayabilirsiniz. Bileşeninizin state'ini güncellemek otomatik olarak sıraya bir render almaktadır. (Bunu restorandaki bir müşterinin susuzluk ve açlık durumuna göre ilk siparişini verdikten sonra çay, tatlı ve benzeri şeyleri sipariş etmesi gibi düşünebilirsiniz.)
 
 <IllustrationBlock sequential>
+<<<<<<< HEAD
   <Illustration caption="State'i güncelle..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
   <Illustration caption="...tetikle..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
   <Illustration caption="...render et!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
+=======
+  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. The patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
+  <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7
 </IllustrationBlock>
 
 ## 2. Adım: React bileşeninizi render eder {/*step-2-react-renders-your-components*/}
@@ -84,7 +90,11 @@ Bir render tetiklediğiniz zaman React, ekranda neyin görüntüleneceğini beli
 
 Bu süreç recursive'dir (özyinelemeli): eğer güncellenmiş bileşen başka bir bileşen döndürüyorsa React bir sonra _o_ bileşeni render edecek, o bileşen de bir şey döndürüyorsa React bir sonra _o_ bileşeni render edecektir. Bu süreç daha fazla iç içe geçmiş bileşen kalmayıncaya ve React ekranda neyin görüntülenmesi gerektiğini bilene kadar deveam edecektir.
 
+<<<<<<< HEAD
 Aşağıdaki örnekte React, `Gallery()` ve  `Image()` bileşenlerini birkaç kez çağıracaktır:
+=======
+In the following example, React will call `Gallery()` and `Image()` several times:
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 <Sandpack>
 
@@ -148,10 +158,17 @@ Eğer güncellenen bileşen ağaçta çok yüksekteyse (üst bir eleman ise), g�
 
 ## 3. Adım: React değişiklikleri DOM'a işler {/*step-3-react-commits-changes-to-the-dom*/}
 
+<<<<<<< HEAD
 Bileşenleriniz render edildikten (çağırıldıktan) sonra React, DOM'u değiştirir. 
 
 * **İlk render için** React, [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API'nı kullanarak tüm DOM node'larını ekranda görüntüler. 
 * **Yeniden renderler için** React, DOM'un son render'daki çıktıyla eşleşmesi için gerekli olan asgari hesaplamaları (render edilme esnasında hesaplanmış!) yapar.
+=======
+After rendering (calling) your components, React will modify the DOM.
+
+* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen.
+* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 **React DOM node'larını sadece render'lar arasında farklılık varsa değiştirir.** Örneğin aşağıda, üst bileşeninden her saniye aldığı farklı prop'lar ile yeniden render edilen bir bileşen var. `<input>` elementine yazı yazmanıza ve `değerini` güncellemenize rağmen yeniden render edilen bileşende yazdığınız yazının kaybolmadığına dikkat edin:
 

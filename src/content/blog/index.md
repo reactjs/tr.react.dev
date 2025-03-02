@@ -4,29 +4,26 @@ title: React Blog
 
 <Intro>
 
-<<<<<<< HEAD
-Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Sürüm notları veya kullanımdan kaldırma bildirimleri de dahil olmak üzere önemli her şey ilk olarak burada yayınlanacaktır. Twitter'da [@reactjs](https://twitter.com/reactjs) hesabını da takip edebilirsiniz, ancak sadece bu blogu okursanız önemli bir şey kaçırmazsınız.
-=======
+
 This blog is the official source for the updates from the React team. Anything important, including release notes or deprecation notices, will be posted here first. 
 
 You can also follow the [@react.dev](https://bsky.app/profiles/react.js) account on Bluesky, or [@reactjs](https://twitter.com/reactjs) account on Twitter, but you won’t miss anything essential if you only read this blog.
->>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
 
 </Intro>
 
 <div className="sm:-mx-5 flex flex-col gap-5 mt-12">
 
-<<<<<<< HEAD
-<BlogCard title="React v19 " date="5 Aralık, 2024" url="/blog/2024/12/05/react-19">
-=======
+  
 <BlogCard title="Sunsetting Create React App" date="February 13, 2025" url="/blog/2025/02/14/sunsetting-create-react-app">
 
-Today, we’re deprecating Create React App for new apps, and encouraging existing apps to migrate to a framework. We’re also providing docs for when a framework isn’t a good fit for your project, or you prefer to start by building a framework.
+
+Today, we’re deprecating Create React App for new apps, and encouraging existing apps to migrate to a framework, or to migrate to a build tool like Vite, Parcel, or RSBuild. We’re also providing docs for when a framework isn’t a good fit for your project, you want to build your own framework, or you just want to learn how React works by building a React app from scratch ...
+
 
 </BlogCard>
 
-<BlogCard title="React v19 " date="December 5, 2024" url="/blog/2024/12/05/react-19">
->>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
+<BlogCard title="React v19 " date="5 Aralık, 2024" url="/blog/2024/12/05/react-19">
+
 
 React 19 Yükseltme Kılavuzu'nda, uygulamanızı React 19'a yükseltmek için adım adım talimatları paylaştık. Bu yazıda, React 19'daki yeni özelliklere ve bunları nasıl benimseyebileceğinize genel bir bakış sunacağız ...
 

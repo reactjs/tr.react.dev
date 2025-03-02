@@ -20,23 +20,24 @@
         }
       ]
     },
-    {
-      "title": "Kurulum",
+       {
+      "title": "Installation",
       "path": "/learn/installation",
       "routes": [
         {
-<<<<<<< HEAD
-          "title": "Yeni Bir React Projesi Başlatma",
-          "path": "/learn/start-a-new-react-project"
-=======
           "title": "Creating a React App",
           "path": "/learn/creating-a-react-app"
         },
         {
-          "title": "Building a React Framework",
-          "path": "/learn/building-a-react-framework"
->>>>>>> 49284218b1f5c94f930f8a9b305040dbe7d3dd48
+          "title": "Build a React App from Scratch",
+          "path": "/learn/build-a-react-app-from-scratch"
         },
+        {
+          "title": "Add React to an Existing Project",
+          "path": "/learn/add-react-to-an-existing-project"
+        }
+      ]
+    },
         {
           "title": "Varolan Bir Projeye React Eklemek",
           "path": "/learn/add-react-to-an-existing-project"

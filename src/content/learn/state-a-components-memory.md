@@ -1452,7 +1452,11 @@ Eğer linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#lin
 
 #### Gereksiz state'i kaldırın {/*remove-unnecessary-state*/}
 
+<<<<<<< HEAD
 Bu örnekte düğme tıklandığında kullanıcının adını istemesi ve ardından onları selamlayan bir uyarı görüntülemesi gerekiyordu. İsim bilgisini tutmak için state kullanmaya çalıştınız, ancak her zaman "Merhaba, !" şeklinde görüntüleniyor.
+=======
+When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason the first time it shows "Hello, !", and then "Hello, [name]!" with the previous input every time after.
+>>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 Bu kodu düzeltmek için gereksiz state değişkenini kaldırın. ([Bunun neden işe yaramadığını](/learn/state-as-a-snapshot) daha sonra tartışacağız.)
 
