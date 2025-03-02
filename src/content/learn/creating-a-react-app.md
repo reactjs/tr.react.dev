@@ -8,19 +8,23 @@ If you want to build a new app or website with React, we recommend starting with
 
 </Intro>
 
+
 If your app has constraints not well-served by existing frameworks, you prefer to build your own framework, or you just want to learn the basics of a React app, you can [build a React app from scratch](/learn/build-a-react-app-from-scratch).
 
 ## Full-stack frameworks {/*full-stack-frameworks*/}
 
+
 These recommended frameworks support all the features you need to deploy and scale your app in production. They have integrated the latest React features and take advantage of React’s architecture.
 
 <Note>
+
 
 #### Full-stack frameworks do not require a server. {/*react-frameworks-do-not-require-a-server*/}
 
 All the frameworks on this page support client-side rendering ([CSR](https://developer.mozilla.org/en-US/docs/Glossary/CSR)), single-page apps ([SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA)), and static-site generation ([SSG](https://developer.mozilla.org/en-US/docs/Glossary/SSG)). These apps can be deployed to a [CDN](https://developer.mozilla.org/en-US/docs/Glossary/CDN) or static hosting service without a server. Additionally, these frameworks allow you to add server-side rendering on a per-route basis, when it makes sense for your use case.
 
 This allows you to start with a client-only app, and if your needs change later, you can opt-in to using server features on individual routes without rewriting your app. See your framework's documentation for configuring the rendering strategy.
+
 
 </Note>
 
@@ -59,7 +63,9 @@ If you're new to Expo, check out the [Expo tutorial](https://docs.expo.dev/tutor
 Expo is maintained by [Expo (the company)](https://expo.dev/about). Building apps with Expo is free, and you can submit them to the Google and Apple app stores without restrictions. Expo additionally provides opt-in paid cloud services.
 
 
+
 ## Other frameworks {/*other-frameworks*/}
+
 
 There are other up-and-coming frameworks that are working towards our full stack React vision:
 
@@ -100,6 +106,7 @@ Server Components and Suspense are React features rather than Next.js features. 
 
 </DeepDive>
 
+
 ## Start From Scratch {/*start-from-scratch*/}
 
 If your app has constraints not well-served by existing frameworks, you prefer to build your own framework, or you just want to learn the basics of a React app, there are other options available for starting a React project from scratch.
@@ -107,6 +114,7 @@ If your app has constraints not well-served by existing frameworks, you prefer t
 Starting from scratch gives you more flexibility, but does require that you make choices on which tools to use for routing, data fetching, and other common usage patterns.  It's a lot like building your own framework, instead of using a framework that already exists. The [frameworks we recommend](#recommended-react-frameworks) have built-in solutions for these problems.  
 
 If you want to build your own solutions, see our guide to [build a React app from Scratch](/learn/build-a-react-app-from-scratch) for instructions on how to set up a new React project starting with a built tool like [Vite](https://vite.dev/), [Parcel](https://parceljs.org/), or [RSbuild](https://rsbuild.dev/).
+
 
 -----
 

@@ -3,7 +3,9 @@ title: Setup
 ---
 <Intro>
 
+
 React integrates with tools like editors, TypeScript, browser extensions, and compilers. This section will help you get your environment set up.
+
 
 </Intro>
 
