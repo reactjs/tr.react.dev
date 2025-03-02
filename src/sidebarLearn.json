@@ -20,32 +20,26 @@
         }
       ]
     },
-       {
-      "title": "Installation",
+    {
+      "title": "Kurulum",
       "path": "/learn/installation",
       "routes": [
         {
-          "title": "Creating a React App",
+          "title": "React Uygulaması Oluşturma",
           "path": "/learn/creating-a-react-app"
         },
         {
-          "title": "Build a React App from Scratch",
+          "title": "Sıfırdan Bir React Uygulaması Oluşturun",
           "path": "/learn/build-a-react-app-from-scratch"
         },
         {
-          "title": "Add React to an Existing Project",
-          "path": "/learn/add-react-to-an-existing-project"
-        }
-      ]
-    },
-        {
-          "title": "Varolan Bir Projeye React Eklemek",
+          "title": "Mevcut Bir Projeye React Ekleme",
           "path": "/learn/add-react-to-an-existing-project"
         }
       ]
     },
     {
-      "title": "Setup",
+      "title": "Yapılandırma",
       "path": "/learn/setup",
       "routes": [
         {
@@ -152,9 +146,7 @@
     {
       "title": "State'i Yönetmek",
       "path": "/learn/managing-state",
-      "tags": [
-        "intermediate"
-      ],
+      "tags": ["intermediate"],
       "routes": [
         {
           "title": "Girdiye State ile Reaksiyon Verme",
@@ -189,9 +181,7 @@
     {
       "title": "Kaçış Yolları",
       "path": "/learn/escape-hatches",
-      "tags": [
-        "advanced"
-      ],
+      "tags": ["advanced"],
       "routes": [
         {
           "title": "Ref ile Değerlere Referans Verme",
