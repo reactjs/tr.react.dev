@@ -2,7 +2,11 @@ name: Discord Notify
 
 on:
   pull_request_target:
+<<<<<<< HEAD
     types: [ labeled ]
+=======
+    types: [opened, ready_for_review]
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 jobs:
   notify:
