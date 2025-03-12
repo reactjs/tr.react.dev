@@ -88,15 +88,9 @@ Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en s
 
 Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığınız varsayılmaktadır:
 
-<<<<<<< HEAD
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense etkinleştirilmiş framework'ler vasıtasıyla veri çekilmesi
+- Suspense'in etkinleştirildiği çerçevelerle veri çekme [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/getting-started/fetching-data#with-suspense)
 - [`lazy`](/reference/react/lazy) ile bileşen kodunun lazy yüklenmesi
 - [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
-=======
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/app/getting-started/fetching-data#with-suspense)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
-- Reading the value of a Promise with [`use`](/reference/react/use)
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 [Suspense ve sınırlamaları hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 
