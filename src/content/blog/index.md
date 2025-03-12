@@ -5,9 +5,9 @@ title: React Blog
 <Intro>
 
 
-This blog is the official source for the updates from the React team. Anything important, including release notes or deprecation notices, will be posted here first. 
+Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Önemli her şey, sürüm notları veya kullanımdan kaldırma bildirimleri dahil, ilk olarak burada yayınlanacaktır.
 
-You can also follow the [@react.dev](https://bsky.app/profile/react.dev) account on Bluesky, or [@reactjs](https://twitter.com/reactjs) account on Twitter, but you won’t miss anything essential if you only read this blog.
+Bluesky'de [@react.dev](https://bsky.app/profile/react.dev) hesabını veya Twitter'da [@reactjs](https://twitter.com/reactjs) hesabını takip edebilirsiniz, ancak sadece bu blogu okuyarak hiçbir önemli şeyi kaçırmazsınız.
 
 </Intro>
 
@@ -17,7 +17,7 @@ You can also follow the [@react.dev](https://bsky.app/profile/react.dev) account
 <BlogCard title="Sunsetting Create React App" date="February 13, 2025" url="/blog/2025/02/14/sunsetting-create-react-app">
 
 
-Today, we’re deprecating Create React App for new apps, and encouraging existing apps to migrate to a framework, or to migrate to a build tool like Vite, Parcel, or RSBuild. We’re also providing docs for when a framework isn’t a good fit for your project, you want to build your own framework, or you just want to learn how React works by building a React app from scratch ...
+Bugün, yeni uygulamalar için Create React App'i kullanımdan kaldırıyoruz ve mevcut uygulamaları bir framework'e geçmeye veya Vite, Parcel veya RSBuild gibi bir derleme aracına geçmeye teşvik ediyoruz. Ayrıca, bir framework'ün projeniz için uygun olmadığı, kendi framework'ünüzü oluşturmak istediğiniz veya React'in nasıl çalıştığını öğrenmek için sıfırdan bir React uygulaması geliştirmek istediğiniz durumlar için belgeler sağlıyoruz...
 
 
 </BlogCard>
