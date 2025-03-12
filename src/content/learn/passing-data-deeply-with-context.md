@@ -476,7 +476,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-Bu React'e şunu söyler: "Eğer bu `<Section>` içindeki herhangi bir bileşen `LevelContext` talep ederse, onlara bu `level` değerini ver." Bileşen, UI ağacındaki en yakın `<LevelContext>`'in değerini kullanacaktır.
+Bu React'a şunu söyler: "`<Section>` içindeki herhangi bir eleman,`LevelContext`'i istediğinde, ona bu `level` değerini ver." Bileşen, üzerindeki UI ağacında bulunan en yakın `<LevelContext>` değerini kullanır.
 
 <Sandpack>
 
@@ -566,9 +566,9 @@ export const LevelContext = createContext(1);
 
 Orijinal kodla aynı sonucu elde edersiniz, ancak her `Heading` bileşenine `level` prop'unu aktarmanız gerekmez! Bunun yerine, üstündeki en yakın `Section` bileşenine sorarak başlık seviyesini "bulur":
 
-1. `<Section>`'a bir `level` prop'u geçirirsiniz.
-2. `Section`, çocuklarını `<LevelContext value={level}>` içine sarar.
-3. `Heading`, `useContext(LevelContext)` ile yukarıdaki en yakın `LevelContext` değerini talep eder.
+1. `level` prop'unu `<Section>`'a aktarırsınız.
+2. `Section` alt bileşenlerini `<LevelContext value={level}>` sarmalar.
+3. `Heading`, `useContext(LevelContext)` ile birlikte yukarıdaki en yakın `LevelContext`'e değerini sorar.
 
 ## Context değerini provider'ının tanımlandığı bileşende okuma {/*using-and-providing-context-from-the-same-component*/}
 
@@ -869,10 +869,10 @@ Genellikle, bazı bilgilere ağacın farklı bölümlerindeki bileşenler taraf�
 <Recap>
 
 * Context, bir elemanın altındaki tüm ağaca bilgi aktarmasını sağlar.
-* Context geçirme:
+* Context'i aktarmak için:
   1. `export const MyContext = createContext(defaultValue)` ile oluşturun ve dışa aktarın.
-  2. Herhangi bir alt bileşende okumak için `useContext(MyContext)` Hook'unu geçirin.
-  3. Üst bileşenden değer sağlamak için, alt bileşenleri `<MyContext.Provider value={...}>` içine sarın.
+  2. Farklı derinlikteki herhangi bir alt bileşenden okumak için `useContext(MyContext)` Hook'una aktarın.
+  3. Üst bileşenden değer sağlamak için, alt bileşenleri `<MyContext value={...}>` içine sarın.
 * Context ortada bulunan herhangi bir elamandan aktarılır.
 * Context, "çevresine adapte olan" bileşenler yazmanıza olanak sağlar.
 * Context kullanmadan önce, prop olarak aktarmayı veya JSX'i `children` olarak iletmeyi deneyin.
@@ -1026,7 +1026,7 @@ li {
 
 `imageSize` prop'unu bütün bileşenlerden kaldırın.
 
-`Context.js` dosyasında `ImageSizeContext`'i oluşturun ve dışa aktarın. Ardından değeri aşağı aktarmak için `List`'i `<ImageSizeContext.Provider value={imageSize}>` ile sarın ve `useContext(ImageSizeContext)` kullanarak `PlaceImage` bileşeninde değerini okuyun:
+`Context.js` dosyasında `ImageSizeContext`'i oluşturun ve dışa aktarın. Ardından değeri aşağı aktarmak için `List`'i `<ImageSizeContext value={imageSize}>` ile sarın ve `useContext(ImageSizeContext)` kullanarak `PlaceImage` bileşeninde değerini okuyun:
 
 <Sandpack>
 
