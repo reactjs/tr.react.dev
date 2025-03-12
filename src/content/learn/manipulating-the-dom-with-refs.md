@@ -644,21 +644,12 @@ Ancak bu hiç yapamayacağınız anlamına gelmez. Dikkat gerektirir. **React'in
 
 <Recap>
 
-<<<<<<< HEAD
 - Ref'ler genel bir kavramdır ancak çoğu zaman bunları DOM elemanlarını tutmak için kullanırsınız.
 - React'e `<div ref={myRef}>` elemanını geçerek `myRef.current`'a bir DOM elemanı koymasını söylersiniz.
 - Genellikle DOM elemanlarına odaklama, kaydırma veya ölçme gibi zararsız işlevler için ref'leri kullanırsınız.
 - Bir bileşen varsayılan olarak DOM elemanlarını göstermez. `forwardRef` kullanarak ve ikinci `ref` parametresini belirli bir elemana geçirerek bir DOM elemanını göstermeyi seçebilirsiniz.
 - React tarafından yönetilen DOM elemanlarını değiştirmekten kaçının.
 - React tarafından yönetilen DOM elemanlarını değiştirmek isterseniz React'in güncellemek için bir nedeni olmayan kısımlarını değiştirin.
-=======
-- Refs are a generic concept, but most often you'll use them to hold DOM elements.
-- You instruct React to put a DOM node into `myRef.current` by passing `<div ref={myRef}>`.
-- Usually, you will use refs for non-destructive actions like focusing, scrolling, or measuring DOM elements.
-- A component doesn't expose its DOM nodes by default. You can opt into exposing a DOM node by using the `ref` prop.
-- Avoid changing DOM nodes managed by React.
-- If you do modify DOM nodes managed by React, modify parts that React has no reason to update.
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 </Recap>
 
@@ -1058,11 +1049,7 @@ img {
 
 <Hint>
 
-<<<<<<< HEAD
-`SearchInput` gibi kendi bileşeninizden bir DOM elemanı gösterebilmek için `forwardRef`'e ihtiyacınız olacak.
-=======
-You'll need to pass `ref` as a prop to opt into exposing a DOM node from your own component like `SearchInput`.
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
+Kendi bileşeniniz olan `SearchInput` gibi bir bileşenden bir DOM düğümünü dışa açmak için `ref`'i bir prop olarak iletmeniz gerekecek.
 
 </Hint>
 

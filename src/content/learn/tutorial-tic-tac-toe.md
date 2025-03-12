@@ -295,11 +295,7 @@ export default function Square() {
 }
 ```
 
-<<<<<<< HEAD
 _Tarayıcı_ bölümü, içinde X olan bir kare göstermelidir:
-=======
-The _browser_ section should be displaying a square with an X in it like this:
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 ![İçinde x olan kare](../images/tutorial/x-filled-square.png)
 
@@ -1329,11 +1325,7 @@ Bir kullanıcı tahtadaki solt üst kareye bir `X` eklemek için tıkladığınd
 1. `handleClick` fonksiyonu (`0`) argümanını `square` dizisinin ilk elemanını `null`'dan `X`'e güncellemek için kullanır.
 1. `Board` bileşeninin `squares` state'i güncellendi, bundan dolayı `Board` bileşeni ve alt bileşenleri yeniden renderlandı. Bu da `0` indeksli `Square` bileşeninin `value` prop'unun `null`'dan `X`'e değişmesine neden oldu.
 
-<<<<<<< HEAD
 Sonuçta, kullanıcı tıklamayı yaptıktan sonra sol üst karenin `X` ile doldurulduğunu gördü.
-=======
-In the end the user sees that the upper left square has changed from empty to having an `X` after clicking it.
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 <Note>
 
@@ -1414,11 +1406,7 @@ Ama durun, bir sorun var. Aynı kareye birden çok kez tıklamayı deneyin:
 
 `X`'in üzerine bir `O` yazılıyor! Bu oyuna çok ilginç bir değişiklik katacak olsa da, şimdilik orijinal kurallara bağlı kalacağız.
 
-<<<<<<< HEAD
 Bir kareyi `X` veya `O` ile işaretlediğinizde, önce karenin zaten bir `X` veya `O` değerine sahip olup olmadığını kontrol etmiyorsunuz. Bunu *erken döndürerek* düzeltebilirsiniz. Karenin zaten bir `X` veya `O` değerine sahip olup olmadığını kontrol edeceksiniz. Eğer kare zaten doluysa, `handleClick` fonksiyonunda erken `return` yapacaksınız - tahta state'ini güncellemeye çalışmadan önce.
-=======
-When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1568,11 +1556,7 @@ function calculateWinner(squares) {
 
 </Note>
 
-<<<<<<< HEAD
 Bir oyuncunun kazanıp kazanmadığını kontrol etmek için `Board` bileşeninin `handleClick` fonksiyonunda `calculateWinner(squares)` fonksiyonunu çağıracaksınız. Bu kontrolü, kullanıcının zaten `X` veya `O` olan bir kareye tıklayıp tıklamadığını kontrol ederken aynı anda gerçekleştirebilirsiniz. Her iki durumda da erken döndürmek istiyoruz:
-=======
-You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has an `X` or an `O`. We'd like to return early in both cases:
->>>>>>> fc29603434ec04621139738f4740caed89d659a7
 
 ```js {2}
 function handleClick(i) {
