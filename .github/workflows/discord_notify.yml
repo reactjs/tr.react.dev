@@ -7,8 +7,6 @@ on:
 permissions: {}
 
 jobs:
-<<<<<<< HEAD
-=======
   check_maintainer:
     uses: facebook/react/.github/workflows/shared_check_maintainer.yml@main
     permissions:
@@ -18,7 +16,6 @@ jobs:
       actor: ${{ github.event.pull_request.user.login }}
       is_remote: true
 
->>>>>>> f6d762cbbf958ca45bb8d1d011b31e5289e43a3d
   notify:
     if: ${{ github.event.label.name == 'React Core Team' }}
     runs-on: ubuntu-latest
