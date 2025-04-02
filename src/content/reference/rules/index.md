@@ -48,5 +48,5 @@ Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in 
 Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede çağrılabilecekleri konusunda kısıtlamaları olan özel bir yeniden kullanılabilir UI mantığı türünü temsil ederler. Bunları kullanırken [Hook Kuralları](/reference/rules/rules-of-hooks) kurallarına uymanız gerekir.
 
 * [Hook'ları yalnızca en üst seviyede çağırın](/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) - Hook'ları döngüler, koşullar veya iç içe geçmiş fonksiyonlar içinde çağırmayın. Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde, herhangi bir erken dönüşten önce kullanın.
-* [Only call Hooks from React functions](/reference/rules/rules-of-hooks#only-call-hooks-from-react-functions) – Don’t call Hooks from regular JavaScript functions.
+* [Hook'ları sadece React fonksiyonlarından çağırın](/reference/rules/rules-of-hooks#only-call-hooks-from-react-functions) - Hook'ları normal JavaScript fonksiyonlarından çağırmayın.
 
