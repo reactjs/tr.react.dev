@@ -30,7 +30,7 @@ Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in 
 * [Yan etkiler render dışında çalışmalıdır](/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render) - React, mümkün olan en iyi kullanıcı deneyimini oluşturmak için bileşenleri birden çok kez render edebileceğinden, yan etkiler render içinde çalışmamalıdır.
 * [Props and state are immutable](/reference/rules/components-and-hooks-must-be-pure#props-and-state-are-immutable) - Bir bileşenin prop'ları ve state'i tek bir render'a göre değişmez anlık görüntülerdir. Bunları asla doğrudan değiştirmeyin.
 * [Hook'ların dönüş değerleri ve argümanları değişmezdir](/reference/rules/components-and-hooks-must-be-pure#return-values-and-arguments-to-hooks-are-immutable) - Değerler bir Hook'a aktarıldıktan sonra onları değiştirmemelisiniz. JSX'teki prop'lar gibi, değerler bir Hook'a aktarıldığında değişmez hale gelir.
-* [Values are immutable after being passed to JSX](/reference/rules/components-and-hooks-must-be-pure#values-are-immutable-after-being-passed-to-jsx) – Don’t mutate values after they’ve been used in JSX. Move the mutation before the JSX is created.
+* [Değerler JSX'e aktarıldıktan sonra değişmez](/reference/rules/components-and-hooks-must-be-pure#values-are-immutable-after-being-passed-to-jsx) - JSX'te kullanıldıktan sonra değerleri mutasyona uğratmayın. Mutasyonu JSX oluşturulmadan önce taşıyın.
 
 ---
 
