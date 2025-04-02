@@ -22,7 +22,7 @@ Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in 
 
 ---
 
-## Components and Hooks must be pure {/*components-and-hooks-must-be-pure*/}
+## Bileşenler ve Hook'lar saf olmalıdır {/*components-and-hooks-must-be-pure*/}
 
 [Purity in Components and Hooks](/reference/rules/components-and-hooks-must-be-pure) is a key rule of React that makes your app predictable, easy to debug, and allows React to automatically optimize your code.
 
