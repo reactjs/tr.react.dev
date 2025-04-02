@@ -34,7 +34,7 @@ Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in 
 
 ---
 
-## React calls Components and Hooks {/*react-calls-components-and-hooks*/}
+## React Bileşenleri ve Hook'ları çağırır {/*react-calls-components-and-hooks*/}
 
 [React is responsible for rendering components and hooks when necessary to optimize the user experience.](/reference/rules/react-calls-components-and-hooks) It is declarative: you tell React what to render in your component’s logic, and React will figure out how best to display it to your user.
 
