@@ -1,9 +1,9 @@
 ---
-title: Rules of React
+title: React Kuralları
 ---
 
 <Intro>
-Just as different programming languages have their own ways of expressing concepts, React has its own idioms — or rules — for how to express patterns in a way that is easy to understand and yields high-quality applications.
+Farklı programlama dillerinin kavramları ifade etmek için kendi yolları olduğu gibi, React'in de kalıpları anlaşılması kolay ve yüksek kaliteli uygulamalar üretecek şekilde ifade etmek için kendi deyimleri -veya kuralları- vardır.
 </Intro>
 
 <InlineToc />
@@ -11,14 +11,14 @@ Just as different programming languages have their own ways of expressing concep
 ---
 
 <Note>
-To learn more about expressing UIs with React, we recommend reading [Thinking in React](/learn/thinking-in-react).
+React ile kullanıcı arayüzlerini ifade etme hakkında daha fazla bilgi edinmek için [React'te Düşünme](/learn/thinking-in-react) adresini okumanızı öneririz.
 </Note>
 
-This section describes the rules you need to follow to write idiomatic React code. Writing idiomatic React code can help you write well organized, safe, and composable applications. These properties make your app more resilient to changes and makes it easier to work with other developers, libraries, and tools.
+Bu bölümde deyimsel React kodu yazmak için izlemeniz gereken kurallar açıklanmaktadır. İdiyomatik React kodu yazmak, iyi organize edilmiş, güvenli ve birleştirilebilir uygulamalar yazmanıza yardımcı olabilir. Bu özellikler uygulamanızı değişikliklere karşı daha dayanıklı hale getirir ve diğer geliştiricilerle, kütüphanelerle ve araçlarla çalışmayı kolaylaştırır.
 
-These rules are known as the **Rules of React**. They are rules – and not just guidelines – in the sense that if they are broken, your app likely has bugs. Your code also becomes unidiomatic and harder to understand and reason about.
+Bu kurallar **React'in Kuralları** olarak bilinir. Bunlar kuraldır - sadece yönergeler değil - eğer ihlal edilirlerse, uygulamanızda muhtemelen hatalar olacaktır. Ayrıca kodunuz tekdüze hale gelir ve anlaşılması ve mantık yürütülmesi zorlaşır.
 
-We strongly recommend using [Strict Mode](/reference/react/StrictMode) alongside React's [ESLint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) to help your codebase follow the Rules of React. By following the Rules of React, you'll be able to find and address these bugs and keep your application maintainable.
+Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in [ESLint eklentisi](https://www.npmjs.com/package/eslint-plugin-react-hooks) ile birlikte [Strict Mode](/reference/react/StrictMode) kullanmanızı şiddetle tavsiye ederiz. React Kurallarını takip ederek bu hataları bulup giderebilir ve uygulamanızın sürdürülebilirliğini koruyabilirsiniz.
 
 ---
 
