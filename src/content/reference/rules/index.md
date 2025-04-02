@@ -36,9 +36,9 @@ Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in 
 
 ## React Bileşenleri ve Hook'ları çağırır {/*react-calls-components-and-hooks*/}
 
-[React is responsible for rendering components and hooks when necessary to optimize the user experience.](/reference/rules/react-calls-components-and-hooks) It is declarative: you tell React what to render in your component’s logic, and React will figure out how best to display it to your user.
+[React, kullanıcı deneyimini optimize etmek için gerektiğinde bileşenleri ve hook'ları oluşturmaktan sorumludur](/reference/rules/react-calls-components-and-hooks) Bildirimseldir: React'e bileşeninizin mantığında neyi oluşturacağını söylersiniz ve React bunu kullanıcınıza en iyi nasıl göstereceğini bulur.
 
-* [Never call component functions directly](/reference/rules/react-calls-components-and-hooks#never-call-component-functions-directly) – Components should only be used in JSX. Don’t call them as regular functions.
+* [Asla bileşen fonksiyonlarını doğrudan çağırmayın](/reference/rules/react-calls-components-and-hooks#never-call-component-functions-directly) - Bileşenler yalnızca JSX içinde kullanılmalıdır. Onları normal fonksiyonlar olarak çağırmayın.
 * [Never pass around hooks as regular values](/reference/rules/react-calls-components-and-hooks#never-pass-around-hooks-as-regular-values) – Hooks should only be called inside of components. Never pass it around as a regular value.
 
 ---
