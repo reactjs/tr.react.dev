@@ -24,7 +24,7 @@ Kod tabanınızın React Kurallarına uymasına yardımcı olmak için React'in 
 
 ## Bileşenler ve Hook'lar saf olmalıdır {/*components-and-hooks-must-be-pure*/}
 
-[Purity in Components and Hooks](/reference/rules/components-and-hooks-must-be-pure) is a key rule of React that makes your app predictable, easy to debug, and allows React to automatically optimize your code.
+[Bileşenlerde ve Hook'larda Saflık](/reference/rules/components-and-hooks-must-be-pure) React'in uygulamanızı öngörülebilir, hata ayıklaması kolay ve React'in kodunuzu otomatik olarak optimize etmesini sağlayan temel bir kuralıdır.
 
 * [Components must be idempotent](/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent) – React components are assumed to always return the same output with respect to their inputs – props, state, and context.
 * [Side effects must run outside of render](/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render) – Side effects should not run in render, as React can render components multiple times to create the best possible user experience.
