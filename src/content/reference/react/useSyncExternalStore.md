@@ -416,13 +416,7 @@ Deponuzdaki veri değişken (mutable) ise `getSnapshot` fonksiyonunuz değişmez
 
 ```js {2-5}
 function ChatIndicator() {
-<<<<<<< HEAD
-  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
-  
-  // 🚩 Her zaman farklı fonksiyondur, React her render'da yeniden abone olur
-=======
-  // 🚩 Always a different function, so React will resubscribe on every re-render
->>>>>>> 5138e605225b24d25701a1a1f68daa90499122a4
+  // 🚩 Her zaman farklı bir işlev olduğu için, React her yeniden render’da yeniden abone olur.
   function subscribe() {
     // ...
   }
@@ -435,18 +429,13 @@ function ChatIndicator() {
 Yeniden render'lar arasında farklı bir `subscribe` fonksiyonu iletirseniz, React deponuza yeniden abone olur. Bu durum performans sorunlarına neden oluyorsa ve sürekli abone olmaktan kaçınmak istiyorsanız, `subscribe` fonksiyonunu bileşen dışına taşıyın:
 
 ```js {1-4}
-// ✅ Always the same function, so React won't need to resubscribe
+// ✅ Her zaman aynı işlev olduğu için, React yeniden abone olmaya ihtiyaç duymaz.
 function subscribe() {
   // ...
 }
 
-<<<<<<< HEAD
-// ✅ Her zaman aynı fonksiyondur, React yeniden abone olmaz
-function subscribe() {
-=======
 function ChatIndicator() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
->>>>>>> 5138e605225b24d25701a1a1f68daa90499122a4
   // ...
 }
 ```
@@ -455,13 +444,7 @@ Alternatif olarak, yalnızca bir takım argümanlar değiştiğinde yeniden abon
 
 ```js {2-5}
 function ChatIndicator({ userId }) {
-<<<<<<< HEAD
-  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
-  
-  // ✅ userId değişmediği sürece aynı fonksiyondur
-=======
-  // ✅ Same function as long as userId doesn't change
->>>>>>> 5138e605225b24d25701a1a1f68daa90499122a4
+  // ✅ Aynı işlev, kullanıcı kimliği (`userId`) değişmediği sürece geçerlidir.
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);

@@ -2247,11 +2247,7 @@ body {
 
 </Sandpack>
 
-<<<<<<< HEAD
-`map` fonksiyonuna ilettiğiniz `history` dizisi içinde gezerken, `squares` argümanı `history` dizisinin her bir elemanından geçer ve `move` argümanı her bir dizi indeksinden geçer: `0`, `1`, `2`, …. (Çoğu durumda, gerçek dizi elemanlarına ihtiyacınız olacaktır ancak bir hamle listesi oluşturmak için yalnızca indekslere ihtiyacınız olacaktır.)
-=======
-As you iterate through the `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
->>>>>>> 5138e605225b24d25701a1a1f68daa90499122a4
+`map` fonksiyonuna verdiğiniz işlevin içinde `history` dizisi üzerinde yineleme yaparken, `squares` argümanı `history` dizisinin her bir elemanını, `move` argümanı ise dizi indislerini sırayla temsil eder: `0`, `1`, `2`, …. (Çoğu durumda dizi elemanlarının kendisine ihtiyaç duyarsınız, ancak hamleler listesini oluşturmak için yalnızca indeksler yeterlidir.)
 
 Tic-tac-toe oyunundaki her bir hamle için bir buton `<button>` içeren `<li>` elementi oluşturacaksınız. Buton, `jumpTo` (daha yazmadınız) adı verilen fonksiyonu `onClick` yöneticisi ile çağıracaktır.
 
