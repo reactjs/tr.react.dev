@@ -414,42 +414,42 @@ Deponuzdaki veri değişken (mutable) ise `getSnapshot` fonksiyonunuz değişmez
 
 Örnekteki `subscribe` fonksiyonu bileşenin *içinde* tanımlanmıştır ve bu nedenle her render'da farklıdır:
 
-```js {4-7}
+```js {2-5}
 function ChatIndicator() {
-  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
-  
-  // 🚩 Her zaman farklı fonksiyondur, React her render'da yeniden abone olur
+  // 🚩 Her zaman farklı bir işlev olduğu için, React her yeniden render’da yeniden abone olur.
   function subscribe() {
     // ...
   }
+  
+  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
 }
 ```
 Yeniden render'lar arasında farklı bir `subscribe` fonksiyonu iletirseniz, React deponuza yeniden abone olur. Bu durum performans sorunlarına neden oluyorsa ve sürekli abone olmaktan kaçınmak istiyorsanız, `subscribe` fonksiyonunu bileşen dışına taşıyın:
 
-```js {6-9}
-function ChatIndicator() {
-  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
+```js {1-4}
+// ✅ Her zaman aynı işlev olduğu için, React yeniden abone olmaya ihtiyaç duymaz.
+function subscribe() {
   // ...
 }
 
-// ✅ Her zaman aynı fonksiyondur, React yeniden abone olmaz
-function subscribe() {
+function ChatIndicator() {
+  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
   // ...
 }
 ```
 
 Alternatif olarak, yalnızca bir takım argümanlar değiştiğinde yeniden abone olmak için `subscribe` fonksiyonunu [`useCallback`](/reference/react/useCallback) Hook'una sarın:
 
-```js {4-8}
+```js {2-5}
 function ChatIndicator({ userId }) {
-  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
-  
-  // ✅ userId değişmediği sürece aynı fonksiyondur
+  // ✅ Aynı işlev, kullanıcı kimliği (`userId`) değişmediği sürece geçerlidir.
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);
+  
+  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
 }

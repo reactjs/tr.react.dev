@@ -1335,7 +1335,7 @@ export function useOnlineStatus() {
 
 Yukarıdaki örnekte, `useOnlineStatus`, [`useState`](/reference/react/useState) ve [`useEffect`.](/reference/react/useEffect) ikilisi kullanılarak oluşturulmuştur. Ancak, bu en iyi muhtemel çözüm değildir. Dikkate alınmayan birçok uç senaryo vardır. Örneğin, bileşen DOM'a eklendiğinde, `isOnline`'ın halihazırda `true` olacağını varsayar, ancak ağ halihazırda çevrimdışı olduğunda bu yanlış olabilir. Bu durumu kontrol etmek için tarayıcının [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API'sini kullanabilirsiniz, ancak bunu doğrudan kullanmak ilk HTML'i sunucuda oluşturmak için çalışmayacaktır. Kısacası, bu kod geliştirilebilir.
 
-Şansımıza, React 18 bu sorunların hepsini sizin için çözecek olan [`useSyncExternalStore`](/reference/react/useSyncExternalStore) adında özel bir API içerir. İşte bu yeni API'den faydalanarak yeniden yazılmış `useOnlineStatus` Hook'unuz:
+React, tüm bu sorunları sizin için çözen özel bir API olan [`useSyncExternalStore`](/reference/react/useSyncExternalStore) adlı bir yapı sunar. İşte bu yeni API'den faydalanacak şekilde yeniden yazılmış `useOnlineStatus` Hook'u:
 
 <Sandpack>
 

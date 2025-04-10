@@ -86,10 +86,11 @@ Strict Mod kontrolleri **yalnızca geliştirme aşamasında çalıştırılsa da
 
 Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
-- Bileşenleriniz, saf olmayan render'dan kaynaklanan hataları bulmak için [bir ekstra kez yeniden render edilir](#fixing-bugs-found-by-double-rendering-in-development).
-- Bileşenleriniz, eksik Effect temizliklerinden kaynaklanan hataları bulmak için [bir ekstra kez Effect'leri yeniden çalıştırır](#fixing-bugs-found-by-re-running-effects-in-development).
-- Bileşenleriniz, eksik ref temizliklerinden kaynaklanan hataları bulmak için [bir ekstra kez ref geri çağırmalarını yeniden çalıştırır](#fixing-bugs-found-by-cleaning-up-and-re-attaching-dom-refs-in-development).
-- Bileşenleriniz, [deprecate edilmiş API'lerin kullanımına karşı kontrol edilir](#fixing-deprecation-warnings-enabled-by-strict-mode).
+- Bileşenleriniz, saf olmayan render işlemlerinden kaynaklanan hataları bulmak için [bir kez fazladan yeniden render edilir](#fixing-bugs-found-by-double-rendering-in-development).
+- Bileşenleriniz, eksik Efekt temizliğinden kaynaklanan hataları bulmak için [Efektleri bir kez fazladan çalıştırır](#fixing-bugs-found-by-re-running-effects-in-development).
+- Bileşenleriniz, eksik ref temizliğinden kaynaklanan hataları bulmak için [ref callback'lerini bir kez fazladan çalıştırır](#fixing-bugs-found-by-re-running-ref-callbacks-in-development).
+- Bileşenlerinizin [kullanımdan kaldırılmış API’leri kullanıp kullanmadığı kontrol edilir.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+
 
 **Tüm bu kontroller yalnızca geliştirme sırasında çalıştırılar ve canlıda herhangi bir etkisi yoktur.**
 
@@ -120,7 +121,14 @@ function App() {
 }
 ```
 
-Örnekte gösterildiği üzere, Strict Modu `Header` ve `Footer` bileşenlerinde çalışmayacaktır. Ancak `Sidebar` ve `Content` bileşenleri ve bu bileşenler içindeki alt bileşenlerde, ne kadar derin olduğu farketmeksizin, çalışacaktır.
+Bu örnekte, `Strict Mode` kontrolleri `Header` ve `Footer` bileşenleri için çalıştırılmaz. Ancak `Sidebar` ve `Content` ile onların içindeki tüm bileşenlerde, derinlik fark etmeksizin çalıştırılır.
+
+<Note>
+
+Uygulamanın bir bölümü için `StrictMode` etkinleştirildiğinde, React yalnızca üretim ortamında mümkün olan davranışları etkinleştirir. Örneğin, eğer `<StrictMode>` uygulamanın kökünde etkin değilse, ilk yüklemede [Efektleri bir kez daha çalıştırma](#fixing-bugs-found-by-re-running-effects-in-development) davranışı etkin olmaz. Çünkü bu durumda, üretim ortamında gerçekleşmesi mümkün olmayan şekilde, alt efektler ebeveyn efektler olmadan iki kez tetiklenmiş olurdu.
+
+</Note>
+
 ---
 
 ### Geliştirme sırasında çift renderda bulunan hataları düzeltme {/*fixing-bugs-found-by-double-rendering-in-development*/}
