@@ -21,21 +21,21 @@ Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede ça�
 
 ```js{2-3,8-9}
 function Counter() {
-  // ✅ Good: top-level in a function component
+  // ✅ İyi: bir işlev bileşeninde üst düzey
   const [count, setCount] = useState(0);
   // ...
 }
 
 function useWindowWidth() {
-  // ✅ Good: top-level in a custom Hook
+  // ✅ İyi: özel bir Hook içinde üst düzey
   const [width, setWidth] = useState(window.innerWidth);
   // ...
 }
 ```
 
-It’s **not** supported to call Hooks (functions starting with `use`) in any other cases, for example:
+Hook'ları (`use` ile başlayan fonksiyonlar) başka herhangi bir durumda çağırmak **desteklenmez**, örneğin:
 
-* 🔴 Do not call Hooks inside conditions or loops.
+* 🔴 Hook'ları koşulların veya döngülerin içinde çağırmayın.
 * 🔴 Do not call Hooks after a conditional `return` statement.
 * 🔴 Do not call Hooks in event handlers.
 * 🔴 Do not call Hooks in class components.
