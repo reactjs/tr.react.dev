@@ -72,7 +72,7 @@ function Bad({ cond }) {
 
 function Bad() {
   function handleClick() {
-    // 🔴 Bad: inside an event handler (to fix, move it outside!)
+    // 🔴 Kötü: bir olay işleyicisinin içinde (düzeltmek için dışarı taşıyın!)
     const theme = useContext(ThemeContext);
   }
   // ...
