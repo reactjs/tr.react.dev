@@ -17,7 +17,7 @@ Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede ça�
 **Hook'ları döngüler, koşullar, iç içe fonksiyonlar veya `try`/`catch`/`finally` blokları içinde çağırmayın.** Bunun yerine, Hook'ları her zaman React fonksiyonunuzun en üst seviyesinde, herhangi bir erken dönüşten önce kullanın. Hook'ları yalnızca React bir fonksiyon bileşenini işlerken çağırabilirsiniz:
 
 * ✅ Bunları bir [fonksiyon bileşeninin](/learn/your-first-component) gövdesinde en üst seviyede çağırın.
-* ✅ Call them at the top level in the body of a [custom Hook](/learn/reusing-logic-with-custom-hooks).
+* ✅ Bunları bir [özel Hook](/learn/reusing-logic-with-custom-hooks)'un gövdesinde en üst düzeyde çağırın.
 
 ```js{2-3,8-9}
 function Counter() {
