@@ -10,7 +10,7 @@ Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede ça�
 
 ---
 
-##  Only call Hooks at the top level {/*only-call-hooks-at-the-top-level*/}
+##  Hook'ları yalnızca en üst düzeyde çağırın {/*only-call-hooks-at-the-top-level*/}
 
 Functions whose names start with `use` are called [*Hooks*](/reference/react) in React.
 
