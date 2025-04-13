@@ -1,5 +1,5 @@
 ---
-title: Rules of Hooks
+title: Hook'ların Kuralları
 ---
 
 <Intro>
