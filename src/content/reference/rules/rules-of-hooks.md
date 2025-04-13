@@ -12,7 +12,7 @@ Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede ça�
 
 ##  Hook'ları yalnızca en üst düzeyde çağırın {/*only-call-hooks-at-the-top-level*/}
 
-Functions whose names start with `use` are called [*Hooks*](/reference/react) in React.
+İsimleri `use` ile başlayan fonksiyonlar React'te [*Hooks*](/reference/react) olarak adlandırılır.
 
 **Don’t call Hooks inside loops, conditions, nested functions, or `try`/`catch`/`finally` blocks.** Instead, always use Hooks at the top level of your React function, before any early returns. You can only call Hooks while React is rendering a function component:
 
