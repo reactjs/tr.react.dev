@@ -36,7 +36,7 @@ function useWindowWidth() {
 Hook'ları (`use` ile başlayan fonksiyonlar) başka herhangi bir durumda çağırmak **desteklenmez**, örneğin:
 
 * 🔴 Hook'ları koşulların veya döngülerin içinde çağırmayın.
-* 🔴 Do not call Hooks after a conditional `return` statement.
+* 🔴 Hook'ları koşullu bir `return` ifadesinden sonra çağırmayın.
 * 🔴 Do not call Hooks in event handlers.
 * 🔴 Do not call Hooks in class components.
 * 🔴 Do not call Hooks inside functions passed to `useMemo`, `useReducer`, or `useEffect`.
