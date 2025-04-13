@@ -3,7 +3,7 @@ title: Hook'ların Kuralları
 ---
 
 <Intro>
-Hooks are defined using JavaScript functions, but they represent a special type of reusable UI logic with restrictions on where they can be called.
+Hook'lar JavaScript fonksiyonları kullanılarak tanımlanır, ancak nerede çağrılabilecekleri konusunda kısıtlamaları olan özel bir yeniden kullanılabilir UI mantığı türünü temsil ederler.
 </Intro>
 
 <InlineToc />
