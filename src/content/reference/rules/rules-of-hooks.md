@@ -38,7 +38,7 @@ Hook'ları (`use` ile başlayan fonksiyonlar) başka herhangi bir durumda çağ�
 * 🔴 Hook'ları koşulların veya döngülerin içinde çağırmayın.
 * 🔴 Hook'ları koşullu bir `return` ifadesinden sonra çağırmayın.
 * 🔴 Hook'ları olay işleyicilerinde çağırmayın.
-* 🔴 Do not call Hooks in class components.
+* 🔴 Hook'ları sınıf bileşenlerinde çağırmayın.
 * 🔴 Do not call Hooks inside functions passed to `useMemo`, `useReducer`, or `useEffect`.
 * 🔴 Do not call Hooks inside `try`/`catch`/`finally` blocks.
 
