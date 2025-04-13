@@ -55,7 +55,7 @@ function Bad({ cond }) {
 
 function Bad() {
   for (let i = 0; i < 10; i++) {
-    // 🔴 Bad: inside a loop (to fix, move it outside!)
+    // 🔴 Kötü: bir döngünün içinde (düzeltmek için dışarı taşıyın!)
     const theme = useContext(ThemeContext);
   }
   // ...
@@ -65,7 +65,7 @@ function Bad({ cond }) {
   if (cond) {
     return;
   }
-  // 🔴 Bad: after a conditional return (to fix, move it before the return!)
+  // 🔴 Kötü: koşullu dönüşten sonra (düzeltmek için dönüşten önce taşıyın!)
   const theme = useContext(ThemeContext);
   // ...
 }
