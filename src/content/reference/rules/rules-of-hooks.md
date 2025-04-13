@@ -117,7 +117,7 @@ Bu hataları yakalamak için [`eslint-plugin-react-hooks` eklentisini](https://w
 
 ## Hook'ları yalnızca React fonksiyonlarından çağırın {/*only-call-hooks-from-react-functions*/}
 
-Don’t call Hooks from regular JavaScript functions. Instead, you can:
+Hook'ları normal JavaScript fonksiyonlarından çağırmayın. Bunun yerine şunları yapabilirsiniz:
 
 ✅ Call Hooks from React function components.
 ✅ Call Hooks from [custom Hooks](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component).
