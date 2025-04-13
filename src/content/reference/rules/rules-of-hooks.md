@@ -80,7 +80,7 @@ function Bad() {
 
 function Bad() {
   const style = useMemo(() => {
-    // 🔴 Bad: inside useMemo (to fix, move it outside!)
+    // 🔴 Kötü: useMemo'nun içinde (düzeltmek için dışarı taşıyın!)
     const theme = useContext(ThemeContext);
     return createStyle(theme);
   });
