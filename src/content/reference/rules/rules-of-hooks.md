@@ -129,7 +129,7 @@ function FriendList() {
   const [onlineStatus, setOnlineStatus] = useOnlineStatus(); // ✅
 }
 
-function setOnlineStatus() { // ❌ Not a component or custom Hook!
+function setOnlineStatus() { // ❌ Bir bileşen veya özel Hook değil!
   const [onlineStatus, setOnlineStatus] = useOnlineStatus();
 }
 ```
