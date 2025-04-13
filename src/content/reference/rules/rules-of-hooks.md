@@ -97,7 +97,7 @@ class Bad extends React.Component {
 
 function Bad() {
   try {
-    // 🔴 Bad: inside try/catch/finally block (to fix, move it outside!)
+    // 🔴 Kötü: try/catch/finally bloğu içinde (düzeltmek için dışarı taşıyın!)
     const [x, setX] = useState(0);
   } catch {
     const [x, setX] = useState(1);
