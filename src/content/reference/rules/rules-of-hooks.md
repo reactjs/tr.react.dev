@@ -105,11 +105,11 @@ function Bad() {
 }
 ```
 
-You can use the [`eslint-plugin-react-hooks` plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) to catch these mistakes.
+Bu hataları yakalamak için [`eslint-plugin-react-hooks` eklentisini](https://www.npmjs.com/package/eslint-plugin-react-hooks) kullanabilirsiniz.
 
 <Note>
 
-[Custom Hooks](/learn/reusing-logic-with-custom-hooks) *may* call other Hooks (that's their whole purpose). This works because custom Hooks are also supposed to only be called while a function component is rendering.
+[Özel Hook'lar](/learn/reusing-logic-with-custom-hooks) *diğer Hook'ları çağırabilir* (tüm amaçları budur). Bu işe yarar çünkü özel Hook'ların da yalnızca bir işlev bileşeni işlenirken çağrılması gerekir.
 
 </Note>
 
