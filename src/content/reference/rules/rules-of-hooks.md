@@ -89,7 +89,7 @@ function Bad() {
 
 class Bad extends React.Component {
   render() {
-    // 🔴 Bad: inside a class component (to fix, write a function component instead of a class!)
+    // 🔴 Kötü: bir sınıf bileşeninin içinde (düzeltmek için, sınıf yerine bir fonksiyon bileşeni yazın!)
     useEffect(() => {})
     // ...
   }
