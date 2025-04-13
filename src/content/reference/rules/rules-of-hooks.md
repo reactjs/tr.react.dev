@@ -42,12 +42,12 @@ Hook'ları (`use` ile başlayan fonksiyonlar) başka herhangi bir durumda çağ�
 * 🔴 Hook'ları `useMemo`, `useReducer` veya `useEffect`'e geçirilen fonksiyonların içinde çağırmayın.
 * 🔴 Hook'ları `try`/`catch`/`finally` blokları içinde çağırmayın.
 
-If you break these rules, you might see this error.
+Bu kuralları ihlal ederseniz, bu hatayı görebilirsiniz.
 
 ```js{3-4,11-12,20-21}
 function Bad({ cond }) {
   if (cond) {
-    // 🔴 Bad: inside a condition (to fix, move it outside!)
+    // 🔴 Kötü: bir durumun içinde (düzeltmek için, dışarı taşıyın!)
     const theme = useContext(ThemeContext);
   }
   // ...
