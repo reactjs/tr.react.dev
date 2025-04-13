@@ -122,7 +122,7 @@ Hook'ları normal JavaScript fonksiyonlarından çağırmayın. Bunun yerine şu
 ✅ React fonksiyon bileşenlerinden Hook'ları çağırın.
 ✅ Hook'ları [özel Hook'lar](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component)'dan çağırın.
 
-By following this rule, you ensure that all stateful logic in a component is clearly visible from its source code.
+Bu kuralı izleyerek, bir bileşendeki tüm durum mantığının kaynak kodundan açıkça görülebilmesini sağlarsınız.
 
 ```js {2,5}
 function FriendList() {
