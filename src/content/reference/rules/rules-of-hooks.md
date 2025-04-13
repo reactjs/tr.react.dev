@@ -119,8 +119,8 @@ Bu hataları yakalamak için [`eslint-plugin-react-hooks` eklentisini](https://w
 
 Hook'ları normal JavaScript fonksiyonlarından çağırmayın. Bunun yerine şunları yapabilirsiniz:
 
-✅ Call Hooks from React function components.
-✅ Call Hooks from [custom Hooks](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component).
+✅ React fonksiyon bileşenlerinden Hook'ları çağırın.
+✅ Hook'ları [özel Hook'lar](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component)'dan çağırın.
 
 By following this rule, you ensure that all stateful logic in a component is clearly visible from its source code.
 
