@@ -46,6 +46,8 @@ Herhangi bir parametre almaz.
 
 * Liste elemanlarına **anahtar üretmek için kullanılmamalıdır**. [Anahtarlar elinizdeki veriden üretilmelidir.](/learn/rendering-lists#where-to-get-your-key)
 
+* `useId` currently cannot be used in [async Server Components](/reference/rsc/server-components#async-components-with-server-components).
+
 ---
 
 ## Kullanım {/*usage*/}
