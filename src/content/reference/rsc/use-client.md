@@ -5,7 +5,11 @@ titleForTitleTag: "'use client' directive"
 
 <RSC>
 
+<<<<<<< HEAD
 `'use client'`, [React Sunucu Bileşenleri](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) ile kullanmak içindir.
+=======
+`'use client'` is for use with [React Server Components](/reference/rsc/server-components).
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 </RSC>
 
