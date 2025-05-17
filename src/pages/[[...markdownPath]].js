@@ -109,18 +109,30 @@ export async function getStaticProps(context) {
   try {
     mdx = fs.readFileSync(rootDir + path + '.md', 'utf8');
   } catch {
-    mdx = fs.readFileSync(rootDir + path + '/index.md', 'utf8');
+    try {
+      mdx = fs.readFileSync(rootDir + path + '/index.md', 'utf8');
+    } catch {
+      return {
+        notFound: true,
+      };
+    }
   }
 
-  const {toc, content, meta, languages} = await compileMDX(mdx, path, {});
-  return {
-    props: {
-      toc,
-      content,
-      meta,
-      languages,
-    },
-  };
+  try {
+    const {toc, content, meta, languages} = await compileMDX(mdx, path, {});
+    return {
+      props: {
+        toc,
+        content,
+        meta,
+        languages,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 // Collect all MDX files for static generation.
@@ -172,8 +184,14 @@ export async function getStaticPaths() {
     },
   }));
 
+  // Filter out paths that start with 'errors'
+  const filteredPaths = paths.filter((path) => {
+    const segments = path.params.markdownPath;
+    return !segments || segments[0] !== 'errors';
+  });
+
   return {
-    paths: paths,
+    paths: filteredPaths,
     fallback: false,
   };
 }
