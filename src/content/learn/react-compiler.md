@@ -6,13 +6,10 @@ title: React Compiler
 Bu sayfa size React Compiler'ı tanıtacak ve nasıl başarılı bir şekilde deneyebileceğinizi gösterecektir.
 </Intro>
 
-<<<<<<< HEAD
 <Wip>
 Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Compiler Çalışma Grubu reposu](https://github.com/reactwg/react-compiler/discussions) adresinde mevcuttur ve daha kararlı hale geldiklerinde bu belgelere eklenecektir.
 </Wip>
 
-=======
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 <YouWillLearn>
 
 * Derleyici ile çalışmaya başlama
@@ -22,7 +19,6 @@ Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Comp
 </YouWillLearn>
 
 <Note>
-<<<<<<< HEAD
 React Compiler, şu anda Beta aşamasında olan ve topluluktan erken geri bildirim almak için açık kaynaklı hale getirdiğimiz yeni bir derleyicidir. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
 
 En son Beta sürümü `@beta` etiketiyle, günlük deneysel sürümler ise `@experimental` etiketiyle bulunabilir.
@@ -33,18 +29,6 @@ React Compiler, topluluktan erken geri bildirim almak için açık kaynaklı hal
 Derleyici ayrıca, derleyiciden gelen analizi doğrudan düzenleyicinizde ortaya çıkaran bir [ESLint eklentisi](#installing-eslint-plugin-react-compiler) içerir. **Bugün herkesin linter kullanmasını şiddetle tavsiye ediyoruz.** Linter, derleyicinin yüklü olmasını gerektirmez, bu nedenle derleyiciyi denemeye hazır olmasanız bile kullanabilirsiniz.
 
 Derleyici şu anda `beta` olarak yayınlanmaktadır ve React 17+ uygulamaları ve kütüphaneleri üzerinde denenebilir. Beta sürümünü yüklemek için:
-=======
-React Compiler is a new compiler currently in RC, that we've open sourced to get feedback from the community. We now recommend everyone to try the compiler and provide feedback.
-
-The latest RC release can be found with the `@rc` tag, and daily experimental releases with `@experimental`.
-</Note>
-
-React Compiler is a new compiler that we've open sourced to get feedback from the community. It is a build-time only tool that automatically optimizes your React app. It works with plain JavaScript, and understands the [Rules of React](/reference/rules), so you don't need to rewrite any code to use it.
-
-eslint-plugin-react-hooks also includes an [ESLint rule](#installing-eslint-plugin-react-compiler) that surfaces the analysis from the compiler right in your editor. **We strongly recommend everyone use the linter today.** The linter does not require that you have the compiler installed, so you can use it even if you are not ready to try out the compiler.
-
-The compiler is currently released as `rc`, and is available to try out on React 17+ apps and libraries. To install the RC:
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 <TerminalBlock>
 {`npm install -D babel-plugin-react-compiler@rc eslint-plugin-react-hooks@^6.0.0-rc.1`}
@@ -103,7 +87,7 @@ function FriendList({ friends }) {
 ```
 [_React Compiler Playground'daki bu örneğe bakın_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
 
-React Compiler, manuel memoizasyonun eşdeğerini otomatik olarak uygulayarak, bir uygulamanın yalnızca ilgili bölümlerinin durum değiştikçe yeniden oluşturulmasını sağlar; bu bazen “ince taneli reaktivite” olarak adlandırılır. Yukarıdaki örnekte React Compiler, `<FriendListCard />`ın geri dönüş değerinin `friends` değişse bile yeniden kullanılabileceğini belirler ve bu JSX'i yeniden oluşturmaktan _ve_ sayı değiştikçe `<MessageButton>`'ı yeniden oluşturmaktan kaçınabilir.
+React Compiler, manuel memoizasyonun eşdeğerini otomatik olarak uygulayarak, bir uygulamanın yalnızca ilgili bölümlerinin durum değiştikçe yeniden oluşturulmasını sağlar; bu bazen "ince taneli reaktivite" olarak adlandırılır. Yukarıdaki örnekte React Compiler, `<FriendListCard />`ın geri dönüş değerinin `friends` değişse bile yeniden kullanılabileceğini belirler ve bu JSX'i yeniden oluşturmaktan _ve_ sayı değiştikçe `<MessageButton>`'ı yeniden oluşturmaktan kaçınabilir.
 
 #### Pahalı hesaplamalar da hafızaya alınır {/*expensive-calculations-also-get-memoized*/}
 
@@ -132,11 +116,7 @@ Dolayısıyla, `expensivelyProcessAReallyLargeArrayOfObjects' birçok farklı bi
 
 ### Derleyiciyi denemeli miyim? {/*should-i-try-out-the-compiler*/}
 
-<<<<<<< HEAD
 Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip olduğunu unutmayın. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
-=======
-The compiler is now in RC and has been tested extensively in production. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you've followed the [Rules of React](/reference/rules).
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 **Derleyiciyi şimdi kullanmak için acele etmenize gerek yok. Benimsemeden önce kararlı bir sürüme ulaşmasını beklemenizde bir sakınca yoktur.** Bununla birlikte, derleyiciyi daha iyi hale getirmemize yardımcı olmak için bize [geri bildirim](#reporting-issues) sağlayabilmeniz için uygulamalarınızda küçük deneylerle denemekten memnuniyet duyarız.
 
@@ -144,21 +124,14 @@ The compiler is now in RC and has been tested extensively in production. While i
 
 Bu dokümanlara ek olarak, derleyici hakkında daha fazla bilgi ve tartışma için [React Compiler Working Group](https://github.com/reactwg/react-compiler) adresini kontrol etmenizi öneririz.
 
-<<<<<<< HEAD
 ### eslint-plugin-react-compiler'ı yükleme {/*installing-eslint-plugin-react-compiler*/}
 
 React Compiler ayrıca bir ESLint eklentisine de güç verir. ESLint eklentisi derleyiciden **bağımsız** olarak kullanılabilir, yani derleyiciyi kullanmasanız bile ESLint eklentisini kullanabilirsiniz.
-=======
-### Installing eslint-plugin-react-hooks {/*installing-eslint-plugin-react-compiler*/}
-
-React Compiler also powers an ESLint plugin. You can try it out by installing eslint-plugin-react-hooks@^6.0.0-rc.1.
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 <TerminalBlock>
 {`npm install -D eslint-plugin-react-hooks@^6.0.0-rc.1`}
 </TerminalBlock>
 
-<<<<<<< HEAD
 Ardından, ESLint yapılandırmanıza ekleyin:
 
 ```js
@@ -188,9 +161,6 @@ module.exports = {
   },
 }
 ```
-=======
-See our [editor setup](/learn/editor-setup#linting) guide for more details.
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 ESLint eklentisi, editörünüzde React kurallarının herhangi bir ihlalini gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir.
 
@@ -273,8 +243,7 @@ const ReactCompilerConfig = { /* ... */ };
 module.exports = function () {
   return {
     plugins: [
-      ['babel-plugin-react-compiler', ReactCompilerConfig], // önce koşmalı!
-      // ...
+      ['babel-plugin-react-compiler', ReactCompilerConfig],
     ],
   };
 };
@@ -377,14 +346,14 @@ React Derleyici, React'in birçok kuralını statik olarak doğrulayabilir ve bi
 
 ### Bileşenlerimin optimize edildiğini nasıl bilebilirim? {/*how-do-i-know-my-components-have-been-optimized*/}
 
-[React DevTools](/learn/react-developer-tools) (v5.0+) ve [React Native DevTools](https://reactnative.dev/docs/react-native-devtools) React Compiler için yerleşik desteğe sahiptir ve derleyici tarafından optimize edilen bileşenlerin yanında bir “Memo ✨” rozeti görüntüler.
+[React DevTools](/learn/react-developer-tools) (v5.0+) ve [React Native DevTools](https://reactnative.dev/docs/react-native-devtools) React Compiler için yerleşik desteğe sahiptir ve derleyici tarafından optimize edilen bileşenlerin yanında bir "Memo ✨" rozeti görüntüler.
 
 ### Derlemeden sonra bir şey çalışmıyor {/*something-is-not-working-after-compilation*/}
 Eğer eslint-plugin-react-compiler yüklüyse, derleyici React kurallarının herhangi bir ihlalini editörünüzde gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir. **Tüm ESLint ihlallerini hemen düzeltmek zorunda değilsiniz.** Optimize edilen bileşen ve hook miktarını artırmak için bunları kendi hızınızda ele alabilirsiniz.
 
 Ancak JavaScript'in esnek ve dinamik yapısı nedeniyle, tüm vakaları kapsamlı bir şekilde tespit etmek mümkün değildir. Bu durumlarda hatalar ve sonsuz döngüler gibi tanımlanmamış davranışlar meydana gelebilir.
 
-Uygulamanız derlendikten sonra düzgün çalışmıyorsa ve herhangi bir ESLint hatası görmüyorsanız, derleyici kodunuzu yanlış derliyor olabilir. Bunu doğrulamak için, [`“use no memo”` yönergesi](#opt-out-of-the-compiler-for-a-component) aracılığıyla ilgili olabileceğini düşündüğünüz herhangi bir bileşeni veya hook'u agresif bir şekilde devre dışı bırakarak sorunun ortadan kalkmasını sağlamaya çalışın.
+Uygulamanız derlendikten sonra düzgün çalışmıyorsa ve herhangi bir ESLint hatası görmüyorsanız, derleyici kodunuzu yanlış derliyor olabilir. Bunu doğrulamak için, [`"use no memo"` yönergesi](#opt-out-of-the-compiler-for-a-component) aracılığıyla ilgili olabileceğini düşündüğünüz herhangi bir bileşeni veya hook'u agresif bir şekilde devre dışı bırakarak sorunun ortadan kalkmasını sağlamaya çalışın.
 
 ```js {2}
 function SuspiciousComponent() {
@@ -396,7 +365,7 @@ function SuspiciousComponent() {
 <Note>
 #### `"use no memo"` {/*use-no-memo*/}
 
-`“use no memo"`, bileşenlerin ve kancaların React Derleyicisi tarafından derlenmesini engellemenizi sağlayan _geçici_ bir kaçış kapısıdır. Bu direftifin, örneğin [`“use client”`](/reference/rsc/use-client) gibi uzun ömürlü olması amaçlanmamıştır.
+`"use no memo"`, bileşenlerin ve kancaların React Derleyicisi tarafından derlenmesini engellemenizi sağlayan _geçici_ bir kaçış kapısıdır. Bu direftifin, örneğin [`"use client"`](/reference/rsc/use-client) gibi uzun ömürlü olması amaçlanmamıştır.
 
 Kesinlikle gerekli olmadıkça bu direktife ulaşılması tavsiye edilmez. Bir bileşeni veya hook'u devre dışı bıraktığınızda, direftif kaldırılana kadar sonsuza kadar devre dışı kalır. Bu, kodu düzeltseniz bile, direktifi kaldırmadığınız sürece derleyicinin kodu derlemeyi atlayacağı anlamına gelir.
 </Note>
