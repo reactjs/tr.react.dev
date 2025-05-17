@@ -4,6 +4,10 @@ title: React Blog
 
 <Intro>
 
+<<<<<<< HEAD
+=======
+This blog is the official source for the updates from the React team. Anything important, including release notes or deprecation notices, will be posted here first.
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Önemli her şey, sürüm notları veya kullanımdan kaldırma bildirimleri dahil, ilk olarak burada yayınlanacaktır.
 
@@ -13,8 +17,24 @@ Bluesky'de [@react.dev](https://bsky.app/profile/react.dev) hesabını veya Twit
 
 <div className="sm:-mx-5 flex flex-col gap-5 mt-12">
 
+<<<<<<< HEAD
   
 <BlogCard title="Sunsetting Create React App" date="February 13, 2025" url="/blog/2025/02/14/sunsetting-create-react-app">
+=======
+<BlogCard title="React Labs: View Transitions, Activity, and more" date="April 23, 2025" url="/blog/2025/04/23/react-labs-view-transitions-activity-and-more">
+
+In React Labs posts, we write about projects in active research and development. In this post, we're sharing two new experimental features that are ready to try today, and sharing other areas we're working on now ...
+
+</BlogCard>
+
+<BlogCard title="React Compiler RC" date="April 21, 2025" url="/blog/2025/04/21/react-compiler-rc">
+
+We are releasing the compiler's first Release Candidate (RC) today.
+
+</BlogCard>
+
+<BlogCard title="Sunsetting Create React App" date="February 14, 2025" url="/blog/2025/02/14/sunsetting-create-react-app">
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 
 Bugün, yeni uygulamalar için Create React App'i kullanımdan kaldırıyoruz ve mevcut uygulamaları bir framework'e geçmeye veya Vite, Parcel veya RSBuild gibi bir derleme aracına geçmeye teşvik ediyoruz. Ayrıca, bir framework'ün projeniz için uygun olmadığı, kendi framework'ünüzü oluşturmak istediğiniz veya React'in nasıl çalıştığını öğrenmek için sıfırdan bir React uygulaması geliştirmek istediğiniz durumlar için belgeler sağlıyoruz...

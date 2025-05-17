@@ -6,10 +6,13 @@ title: React Compiler
 Bu sayfa size React Compiler'ı tanıtacak ve nasıl başarılı bir şekilde deneyebileceğinizi gösterecektir.
 </Intro>
 
+<<<<<<< HEAD
 <Wip>
 Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Compiler Çalışma Grubu reposu](https://github.com/reactwg/react-compiler/discussions) adresinde mevcuttur ve daha kararlı hale geldiklerinde bu belgelere eklenecektir.
 </Wip>
 
+=======
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 <YouWillLearn>
 
 * Derleyici ile çalışmaya başlama
@@ -19,6 +22,7 @@ Bu dokümanlar üzerinde hala çalışılmaktadır. Daha fazla belge [React Comp
 </YouWillLearn>
 
 <Note>
+<<<<<<< HEAD
 React Compiler, şu anda Beta aşamasında olan ve topluluktan erken geri bildirim almak için açık kaynaklı hale getirdiğimiz yeni bir derleyicidir. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
 
 En son Beta sürümü `@beta` etiketiyle, günlük deneysel sürümler ise `@experimental` etiketiyle bulunabilir.
@@ -29,15 +33,27 @@ React Compiler, topluluktan erken geri bildirim almak için açık kaynaklı hal
 Derleyici ayrıca, derleyiciden gelen analizi doğrudan düzenleyicinizde ortaya çıkaran bir [ESLint eklentisi](#installing-eslint-plugin-react-compiler) içerir. **Bugün herkesin linter kullanmasını şiddetle tavsiye ediyoruz.** Linter, derleyicinin yüklü olmasını gerektirmez, bu nedenle derleyiciyi denemeye hazır olmasanız bile kullanabilirsiniz.
 
 Derleyici şu anda `beta` olarak yayınlanmaktadır ve React 17+ uygulamaları ve kütüphaneleri üzerinde denenebilir. Beta sürümünü yüklemek için:
+=======
+React Compiler is a new compiler currently in RC, that we've open sourced to get feedback from the community. We now recommend everyone to try the compiler and provide feedback.
+
+The latest RC release can be found with the `@rc` tag, and daily experimental releases with `@experimental`.
+</Note>
+
+React Compiler is a new compiler that we've open sourced to get feedback from the community. It is a build-time only tool that automatically optimizes your React app. It works with plain JavaScript, and understands the [Rules of React](/reference/rules), so you don't need to rewrite any code to use it.
+
+eslint-plugin-react-hooks also includes an [ESLint rule](#installing-eslint-plugin-react-compiler) that surfaces the analysis from the compiler right in your editor. **We strongly recommend everyone use the linter today.** The linter does not require that you have the compiler installed, so you can use it even if you are not ready to try out the compiler.
+
+The compiler is currently released as `rc`, and is available to try out on React 17+ apps and libraries. To install the RC:
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 <TerminalBlock>
-npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
+{`npm install -D babel-plugin-react-compiler@rc eslint-plugin-react-hooks@^6.0.0-rc.1`}
 </TerminalBlock>
 
 Ya da Yarn kullanıyorsanız:
 
 <TerminalBlock>
-yarn add -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta
+{`yarn add -D babel-plugin-react-compiler@rc eslint-plugin-react-hooks@^6.0.0-rc.1`}
 </TerminalBlock>
 
 Henüz React 19 kullanmıyorsanız, daha fazla talimat için lütfen [aşağıdaki bölüme](#using-react-compiler-with-react-17-or-18) bakın.
@@ -116,7 +132,11 @@ Dolayısıyla, `expensivelyProcessAReallyLargeArrayOfObjects' birçok farklı bi
 
 ### Derleyiciyi denemeli miyim? {/*should-i-try-out-the-compiler*/}
 
+<<<<<<< HEAD
 Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip olduğunu unutmayın. Meta gibi şirketlerde üretimde kullanılmış olsa da, derleyiciyi uygulamanız için üretime almak kod tabanınızın sağlığına ve [React Kuralları](/reference/rules)'nı ne kadar iyi takip ettiğinize bağlı olacaktır.
+=======
+The compiler is now in RC and has been tested extensively in production. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you've followed the [Rules of React](/reference/rules).
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 **Derleyiciyi şimdi kullanmak için acele etmenize gerek yok. Benimsemeden önce kararlı bir sürüme ulaşmasını beklemenizde bir sakınca yoktur.** Bununla birlikte, derleyiciyi daha iyi hale getirmemize yardımcı olmak için bize [geri bildirim](#reporting-issues) sağlayabilmeniz için uygulamalarınızda küçük deneylerle denemekten memnuniyet duyarız.
 
@@ -124,14 +144,21 @@ Lütfen derleyicinin hala Beta aşamasında olduğunu ve birçok pürüze sahip 
 
 Bu dokümanlara ek olarak, derleyici hakkında daha fazla bilgi ve tartışma için [React Compiler Working Group](https://github.com/reactwg/react-compiler) adresini kontrol etmenizi öneririz.
 
+<<<<<<< HEAD
 ### eslint-plugin-react-compiler'ı yükleme {/*installing-eslint-plugin-react-compiler*/}
 
 React Compiler ayrıca bir ESLint eklentisine de güç verir. ESLint eklentisi derleyiciden **bağımsız** olarak kullanılabilir, yani derleyiciyi kullanmasanız bile ESLint eklentisini kullanabilirsiniz.
+=======
+### Installing eslint-plugin-react-hooks {/*installing-eslint-plugin-react-compiler*/}
+
+React Compiler also powers an ESLint plugin. You can try it out by installing eslint-plugin-react-hooks@^6.0.0-rc.1.
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 <TerminalBlock>
-npm install -D eslint-plugin-react-compiler@beta
+{`npm install -D eslint-plugin-react-hooks@^6.0.0-rc.1`}
 </TerminalBlock>
 
+<<<<<<< HEAD
 Ardından, ESLint yapılandırmanıza ekleyin:
 
 ```js
@@ -161,6 +188,9 @@ module.exports = {
   },
 }
 ```
+=======
+See our [editor setup](/learn/editor-setup#linting) guide for more details.
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 ESLint eklentisi, editörünüzde React kurallarının herhangi bir ihlalini gösterecektir. Bunu yaptığında, derleyicinin o bileşeni veya hook'u optimize etmeyi atladığı anlamına gelir. Bu tamamen normaldir ve derleyici kod tabanınızdaki diğer bileşenleri kurtarabilir ve optimize etmeye devam edebilir.
 
@@ -194,7 +224,7 @@ Yeni bir proje başlatıyorsanız, varsayılan davranış olan kod tabanınızı
 React Compiler en iyi React 19 RC ile çalışır. Yükseltme yapamıyorsanız, derlenen kodun 19'dan önceki sürümlerde çalışmasına izin verecek ekstra `react-compiler-runtime` paketini yükleyebilirsiniz. Ancak, desteklenen minimum sürümün 17 olduğunu unutmayın.
 
 <TerminalBlock>
-npm install react-compiler-runtime@beta
+{`npm install react-compiler-runtime@rc`}
 </TerminalBlock>
 
 Ayrıca derleyici yapılandırmanıza doğru `target`ı eklemelisiniz, burada `target` hedeflediğiniz React'in ana sürümüdür:
@@ -229,7 +259,7 @@ Uygulamalara benzer şekilde, kütüphanenizin faydalarını görmek için bile�
 ### Babel {/*usage-with-babel*/}
 
 <TerminalBlock>
-npm install babel-plugin-react-compiler@beta
+{`npm install babel-plugin-react-compiler@rc`}
 </TerminalBlock>
 
 Derleyici, derleyiciyi çalıştırmak için derleme hattınızda kullanabileceğiniz bir Babel eklentisi içerir.
@@ -284,7 +314,7 @@ Daha fazla bilgi için lütfen [Next.js docs](https://nextjs.org/docs/app/api-re
 `vite-plugin-babel` yükleyin ve derleyicinin Babel eklentisini buna ekleyin:
 
 <TerminalBlock>
-npm install vite-plugin-babel
+{`npm install vite-plugin-babel`}
 </TerminalBlock>
 
 ```js {2,14}
