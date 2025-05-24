@@ -439,7 +439,7 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-Bu sorunu çözer. Efektinizin bağımlılıkları listesinden `onConnected` öğesini *kaldırmanız* gerektiğini unutmayın. **Efekt olayları reaktif değildir ve bağımlılıklardan çıkarılmalıdır.**
+Bu, problemi çözer. Dikkat etmen gereken nokta, Efekt içinde artık kullanılmadığı için `theme` öğesini bağımlılıklar listesinden *çıkarman* gerektiğidir. Ayrıca `onConnected` öğesini listeye *eklemene* de gerek yoktur çünkü **Efekt Olayları reaktif değildir ve bağımlılıklardan çıkarılmalıdır.**
 
 Yeni davranışın beklediğiniz gibi çalıştığını doğrulayın:
 
@@ -789,7 +789,6 @@ body {
 
 </Sandpack>
 
-
 Bu kodla ilgili sorun, bağımlılık linterinin bastırılmasıdır. Bastırmayı kaldırırsanız, bu Efektin `handleMove` fonksiyonuna bağlı olması gerektiğini görürsünüz. Bu mantıklıdır: `handleMove` bileşen gövdesi içinde bildirilir, bu da onu reaktif bir değer yapar. Her reaktif değer bir bağımlılık olarak belirtilmelidir, aksi takdirde zaman içinde eskimesi olasıdır!
 
 Orijinal kodun yazarı, Effect'in herhangi bir reaktif değere bağlı olmadığını (`[]`) söyleyerek React'e "yalan söylemiştir". Bu nedenle React, `canMove` değiştikten sonra (ve onunla birlikte `handleMove`) Efekti yeniden senkronize etmedi. React, Efekti yeniden senkronize etmediği için, dinleyici olarak eklenen `handleMove`, ilk render sırasında oluşturulan `handleMove` fonksiyonudur. İlk render sırasında `canMove` `true` idi, bu yüzden ilk renderdan `handleMove` sonsuza kadar bu değeri görecektir.
@@ -886,8 +885,8 @@ Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deney
 
 Efekt Olayları, kullanma şekliniz açısından oldukça sınırlıdır:
 
-* **Sadece Efektlerin içinden çağırın.**
-* **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
+- **Sadece Efektlerin içinden çağırın.**
+- **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
 
 Örneğin, bir Efekt olayını şu şekilde bildirmeyin ve geçirmeyin:
 
@@ -1216,7 +1215,6 @@ export default function Timer() {
 }
 ```
 
-
 ```css
 button { margin: 10px; }
 ```
@@ -1233,7 +1231,7 @@ Bu örnekte, aralık gecikmesini özelleştirebilirsiniz. Bu, iki düğme taraf�
 
 <Hint>
 
-Effect olayları içindeki kod reaktif değildir. `setInterval` çağrısının yeniden çalışmasını _istediğiniz_ durumlar var mı?
+Effect olayları içindeki kod reaktif değildir. `setInterval` çağrısının yeniden çalışmasını *istediğiniz* durumlar var mı?
 
 </Hint>
 
@@ -1312,7 +1310,6 @@ export default function Timer() {
   );
 }
 ```
-
 
 ```css
 button { margin: 10px; }
@@ -1402,7 +1399,7 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Genel olarak, bir kod parçasının *amacından* ziyade *zamanlamasına* odaklanan `onMount` gibi fonksiyonlara şüpheyle yaklaşmalısınız. İlk başta "daha açıklayıcı" gelebilir ancak amacınızı gizler. Genel bir kural olarak, Efekt olayları *kullanıcının* bakış açısından gerçekleşen bir şeye karşılık gelmelidir. Örneğin, `onMessage`, `onTick`, `onVisit` veya `onConnected` iyi Effect olay adlarıdır. İçlerindeki kodun muhtemelen reaktif olması gerekmeyecektir. Öte yandan, `onMount`, `onUpdate`, `onUnmount` veya `onAfterRender` o kadar geneldir ki, yanlışlıkla * reaktif olması gereken * kodları bunlara koymak kolaydır. Bu nedenle, Efekt olaylarınızı bazı kodların ne zaman çalıştığına göre değil, *kullanıcının ne olduğunu düşündüğüne göre* adlandırmalısınız.
+Genel olarak, bir kod parçasının *amacından* ziyade *zamanlamasına* odaklanan `onMount` gibi fonksiyonlara şüpheyle yaklaşmalısınız. İlk başta "daha açıklayıcı" gelebilir ancak amacınızı gizler. Genel bir kural olarak, Efekt olayları *kullanıcının* bakış açısından gerçekleşen bir şeye karşılık gelmelidir. Örneğin, `onMessage`, `onTick`, `onVisit` veya `onConnected` iyi Effect olay adlarıdır. İçlerindeki kodun muhtemelen reaktif olması gerekmeyecektir. Öte yandan, `onMount`, `onUpdate`, `onUnmount` veya `onAfterRender` o kadar geneldir ki, yanlışlıkla *reaktif olması gereken* kodları bunlara koymak kolaydır. Bu nedenle, Efekt olaylarınızı bazı kodların ne zaman çalıştığına göre değil, *kullanıcının ne olduğunu düşündüğüne göre* adlandırmalısınız.
 
 </Solution>
 
@@ -1837,9 +1834,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-
 Bu, oda değiştirdiğinizde önceden planlanmış (ancak henüz görüntülenmemiş) bildirimlerin iptal edilmesini sağlar.
-
 
 </Solution>
 

@@ -29,4 +29,4 @@ Her topluluk, binlerce React kullanıcısından oluşur.
 
 ## Haberler {/*news*/}
 
-React ile ilgili en güncel haberler için, [Twitter'da **@reactjs** hesabını](https://twitter.com/reactjs) ve Bu website'de bulunan [React Resmi Blogunu](/blog/) takip edin.
+React ile ilgili en güncel haberler için, [Twitter da **@reactjs** hesabını](https://twitter.com/reactjs), [Bluesky da **@react.dev** hesabını](https://bsky.app/profile/react.dev) ve bu sitedeki [Resmi React blog'unu](/blog/) takip edebilirsiniz.

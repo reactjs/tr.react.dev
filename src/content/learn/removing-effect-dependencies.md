@@ -1241,7 +1241,7 @@ export default function Timer() {
 
 </Sandpack>
 
-Efekt içinde `count` okumak yerine, React'e bir `c => c + 1` komutu ("bu sayıyı artır!") iletirsiniz. React bunu bir sonraki render'da uygulayacaktır. Ve artık Efektinizin içinde `count` değerini okumanıza gerek olmadığından, Efektinizin bağımlılıklarını boş tutabilirsiniz (`[]`). Bu, Efektinizin her tikte aralığı yeniden oluşturmasını önler.
+`count` değerini Efekt içinde okumak yerine, React'e `c => c + 1` talimatını ("bu sayıyı artır!") verirsiniz. React bu işlemi bir sonraki render'da uygular. Artık Efekt'in içinde `count` değerini okumanıza gerek kalmadığı için, Efekt'in bağımlılık dizisini boş (`[]`) bırakabilirsiniz. Bu da, her tikte Efekt'in yeniden oluşturulmasını engeller.
 
 </Solution>
 

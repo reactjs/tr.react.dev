@@ -820,7 +820,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-başka bir Hook'a girdi olarak nasıl illetiğinizi farkedin:
+ve onu başka bir Hook'a girdi olarak vermek:
 
 ```js {6}
 export default function ChatRoom({ roomId }) {
@@ -2087,7 +2087,6 @@ export function useCounter(delay) {
 <Sandpack>
 
 ```js
-import { useState } from 'react';
 import { useCounter } from './useCounter.js';
 
 export default function Counter() {
