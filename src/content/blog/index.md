@@ -4,10 +4,7 @@ title: React Blog
 
 <Intro>
 
-<<<<<<< HEAD
-=======
-This blog is the official source for the updates from the React team. Anything important, including release notes or deprecation notices, will be posted here first.
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
+Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Sürüm notları veya kullanım dışı bırakma duyuruları gibi önemli her şey öncelikle burada paylaşılır.
 
 Bu blog, React ekibinden gelen güncellemeler için resmi kaynaktır. Önemli her şey, sürüm notları veya kullanımdan kaldırma bildirimleri dahil, ilk olarak burada yayınlanacaktır.
 
@@ -17,13 +14,9 @@ Bluesky'de [@react.dev](https://bsky.app/profile/react.dev) hesabını veya Twit
 
 <div className="sm:-mx-5 flex flex-col gap-5 mt-12">
 
-<<<<<<< HEAD
-  
-<BlogCard title="Sunsetting Create React App" date="February 13, 2025" url="/blog/2025/02/14/sunsetting-create-react-app">
-=======
 <BlogCard title="React Labs: View Transitions, Activity, and more" date="April 23, 2025" url="/blog/2025/04/23/react-labs-view-transitions-activity-and-more">
 
-In React Labs posts, we write about projects in active research and development. In this post, we're sharing two new experimental features that are ready to try today, and sharing other areas we're working on now ...
+React Labs gönderilerinde, aktif olarak araştırılan ve geliştirilen projeler hakkında yazarız. Bu yazıda, bugün denemeye hazır iki yeni deneysel özelliği ve şu anda üzerinde çalıştığımız diğer alanları paylaşıyoruz...
 
 </BlogCard>
 
@@ -34,16 +27,12 @@ We are releasing the compiler's first Release Candidate (RC) today.
 </BlogCard>
 
 <BlogCard title="Sunsetting Create React App" date="February 14, 2025" url="/blog/2025/02/14/sunsetting-create-react-app">
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
-
 
 Bugün, yeni uygulamalar için Create React App'i kullanımdan kaldırıyoruz ve mevcut uygulamaları bir framework'e geçmeye veya Vite, Parcel veya RSBuild gibi bir derleme aracına geçmeye teşvik ediyoruz. Ayrıca, bir framework'ün projeniz için uygun olmadığı, kendi framework'ünüzü oluşturmak istediğiniz veya React'in nasıl çalıştığını öğrenmek için sıfırdan bir React uygulaması geliştirmek istediğiniz durumlar için belgeler sağlıyoruz...
-
 
 </BlogCard>
 
 <BlogCard title="React v19 " date="5 Aralık, 2024" url="/blog/2024/12/05/react-19">
-
 
 React 19 Yükseltme Kılavuzu'nda, uygulamanızı React 19'a yükseltmek için adım adım talimatları paylaştık. Bu yazıda, React 19'daki yeni özelliklere ve bunları nasıl benimseyebileceğinize genel bir bakış sunacağız ...
 
@@ -85,13 +74,11 @@ React Labs gönderilerinde, aktif araştırma ve geliştirme aşamasındaki proj
 
 </BlogCard>
 
-
 <BlogCard title="react.dev ile tanışın" date="16 Mart 2023" url="/blog/2023/03/16/introducing-react-dev">
 
 Bugün React ve dokümantasyonu için yeni bir yuva olan react.dev'i açmanın heyecanını yaşıyoruz. Bu yazıda size yeni siteyi gezdirmek istiyoruz.
 
 </BlogCard>
-
 
 <BlogCard title="React Labs: Neler Üzerinde Çalışıyoruz - Haziran 2022" date="15 Haziran 2022" url="/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022">
 React 18'in yapım aşaması yıllar sürdü ve React ekibi için değerli dersleri de beraberinde getirdi. Piyasaya sürülmesi, uzun yıllar süren araştırmaların ve birçok yolun keşfedilmesinin sonucuydu. Bu yollardan bazıları başarılıydı; birçoğu ise yeni kavrayışlara yol açan çıkmaz sokaklardı. Öğrendiğimiz derslerden biri, keşfetmekte olduğumuz bu yollar hakkında fikir sahibi olmadan yeni özellikleri beklemenin topluluk için sinir bozucu olduğudur...
