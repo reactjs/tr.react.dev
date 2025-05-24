@@ -820,11 +820,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-<<<<<<< HEAD
-başka bir Hook'a girdi olarak nasıl illetiğinizi farkedin:
-=======
-and passing it as an input to another Hook:
->>>>>>> 65d297e93b36be5370e58ab7828d022c741ecbe2
+ve onu başka bir Hook'a girdi olarak vermek:
 
 ```js {6}
 export default function ChatRoom({ roomId }) {
