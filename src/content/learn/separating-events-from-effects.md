@@ -972,6 +972,23 @@ Bu kodu düzeltmek için kurallara uymak yeterlidir.
 
 <Sandpack>
 
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "experimental",
+    "react-dom": "experimental",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+
 ```js
 import { useState, useEffect } from 'react';
 
@@ -1024,6 +1041,22 @@ Her zamanki gibi, Efektlerde hata ararken, linter bastırmalarını arayarak ba�
 Suppression yorumunu kaldırırsanız, React size bu Efektin kodunun `increment` değerine bağlı olduğunu söyleyecektir, ancak siz bu Efektin herhangi bir reaktif değere (`[]`) bağlı olmadığını iddia ederek React'e "yalan söylediniz". Bağımlılık dizisine `increment` ekleyin:
 
 <Sandpack>
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "experimental",
+    "react-dom": "experimental",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
 
 ```js
 import { useState, useEffect } from 'react';
