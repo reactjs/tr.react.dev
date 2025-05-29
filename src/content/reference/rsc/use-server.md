@@ -5,11 +5,7 @@ titleForTitleTag: "'use server' direktif"
 
 <RSC>
 
-<<<<<<< HEAD
-`'use server'`, [React Sunucu Bileşenleri kullanımı için](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) kullanılır.
-=======
 `'use server'` is for use with [using React Server Components](/reference/rsc/server-components).
->>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 </RSC>
 

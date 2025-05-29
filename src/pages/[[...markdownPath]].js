@@ -109,30 +109,18 @@ export async function getStaticProps(context) {
   try {
     mdx = fs.readFileSync(rootDir + path + '.md', 'utf8');
   } catch {
-    try {
-      mdx = fs.readFileSync(rootDir + path + '/index.md', 'utf8');
-    } catch {
-      return {
-        notFound: true,
-      };
-    }
+    mdx = fs.readFileSync(rootDir + path + '/index.md', 'utf8');
   }
 
-  try {
-    const {toc, content, meta, languages} = await compileMDX(mdx, path, {});
-    return {
-      props: {
-        toc,
-        content,
-        meta,
-        languages,
-      },
-    };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
-  }
+  const {toc, content, meta, languages} = await compileMDX(mdx, path, {});
+  return {
+    props: {
+      toc,
+      content,
+      meta,
+      languages,
+    },
+  };
 }
 
 // Collect all MDX files for static generation.
