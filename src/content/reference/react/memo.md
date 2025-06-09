@@ -226,12 +226,17 @@ export default function MyApp() {
   }
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <button onClick={handleClick}>
         Temayı değiştir
       </button>
+<<<<<<< HEAD
       <Greeting name="Seher" />
     </ThemeContext.Provider>
+=======
+      <Greeting name="Taylor" />
+    </ThemeContext>
+>>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
   );
 }
 

@@ -38,14 +38,22 @@ const ThemeContext = createContext('light');
 
 `createContext` bir context nesnesi döndürür.
 
+<<<<<<< HEAD
 **Context nesnesinin kendisi herhangi bir bilgi içermez.** Diğer bileşenlerin _hangi_ contexti okuyacağını veya sağlayacağını temsil eder. Genellikle, context değerini belirtmek için bileşenin üstünde [SomeContext.Provider](https://react.dev/reference/react/createContext#provider) kullanır ve bileşenin altında okumak için [useContext(SomeContext)](https://react.dev/reference/react/useContext) çağırırsınız. Context nesnesinin birkaç özelliği vardır:
 
 * `SomeContext.Provider` bilenşenlerin context değerini sağlamanıza olanak tanır.
 * `SomeContext.Consumer` context değerini okumak için nadiren kullanılan alternatif bir yöntemdir.
+=======
+**The context object itself does not hold any information.** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
+
+* `SomeContext` lets you provide the context value to components.
+* `SomeContext.Consumer` is an alternative and rarely used way to read the context value.
+* `SomeContext.Provider` is a legacy way to provide the context value before React 19.
+>>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 ---
 
-### `SomeContext.Provider` {/*provider*/}
+### `SomeContext` Provider {/*provider*/}
 
 Bileşenlerinizi bir context sağlayıcısı ile sarmalayarak içindeki tüm bileşenler için bu contextin değerini belirtin:
 
@@ -54,14 +62,26 @@ function App() {
   const [theme, setTheme] = useState('light');
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Page />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 ```
 
+<<<<<<< HEAD
 #### Proplar {/*provider-props*/}
+=======
+<Note>
+
+Starting in React 19, you can render `<SomeContext>` as a provider. 
+
+In older versions of React, use `<SomeContext.Provider>`.
+
+</Note>
+
+#### Props {/*provider-props*/}
+>>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 * `value`: Ne kadar derin olursa olsun, bu sağlayıcının içindeki contexti okuyan tüm bileşenlere aktarmak istediğiniz değer. Context değeri herhangi bir türde olabilir. Sağlayıcı içinde [`useContext(SomeContext)`](/reference/react/useContext) kullanan bir bileşen,
 üzerindeki en içte bulunan ilgili context sağlayıcısının `value` değerini alır.
@@ -142,11 +162,11 @@ function App() {
   // ...
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -189,11 +209,11 @@ import { ThemeContext, AuthContext } from './Contexts.js';
 function App() {
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -215,5 +235,9 @@ const ThemeContext = createContext('light');
 
 Bu değer asla değişmez. React, yalnızca eşleşen bir sağlayıcı bulamazsa bu değeri bir geri dönüş olarak kullanır.
 
+<<<<<<< HEAD
 Contextin zaman içinde değişmesini sağlamak için, [state ekleyin ve bileşenleri context sağlayıcısıyla sarın.](/reference/react/useContext#updating-data-passed-via-context)
 
+=======
+To make context change over time, [add state and wrap components in a context provider.](/reference/react/useContext#updating-data-passed-via-context)
+>>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91

@@ -258,9 +258,9 @@ export default function MyApp() {
   const [theme, setTheme] = useState<Theme>('light');
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <MyComponent />
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -308,9 +308,9 @@ export default function MyApp() {
   const object = useMemo(() => ({ kind: "complex" }), []);
 
   return (
-    <Context.Provider value={object}>
+    <Context value={object}>
       <MyComponent />
-    </Context.Provider>
+    </Context>
   )
 }
 
