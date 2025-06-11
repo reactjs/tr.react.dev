@@ -689,7 +689,7 @@ label {
 
 </Sandpack>
 
-Sayaç state'i kutucuğa tıkladığınız zaman sıfırlanır. `Counter` render etmenize rağmen, `div`'in ilk alt elemanı `div`'den `section`'a dönüşür. Alt eleman olan `div` DOM'dan kaldırıldığında, altındaki ağacın tamamı da (`Counter` ve state'i de dahil olmak üzere) yok edilir.
+Onay kutusuna tıkladığınızda sayaç durumu sıfırlanır. Bir `Counter` oluşturmanıza rağmen, `div`in ilk alt eleman bir `section`dan bir `div`e dönüşür. Alt `section` DOM'dan kaldırıldığında, altındaki tüm ağaç (`Counter` ve state dahil) da yok edildi.
 
 <DiagramGroup>
 
