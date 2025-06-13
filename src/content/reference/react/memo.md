@@ -230,13 +230,8 @@ export default function MyApp() {
       <button onClick={handleClick}>
         Temayı değiştir
       </button>
-<<<<<<< HEAD
-      <Greeting name="Seher" />
-    </ThemeContext.Provider>
-=======
       <Greeting name="Taylor" />
     </ThemeContext>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
   );
 }
 
@@ -281,7 +276,7 @@ Bileşeninizin yalnızca context'in bazı _öğeleri_ değiştiğinde render edi
 
 ```js {5-8}
 function Page() {
-  const [name, setName] = useState('Seher');
+  const [name, setName] = useState('Anılcan');
   const [age, setAge] = useState(24);
 
   const person = useMemo(
@@ -301,7 +296,7 @@ Prop değişikliklerini minimuma indirmenin daha iyi bir yolu, gereksiz bilgiler
 
 ```js {4,7}
 function Page() {
-  const [name, setName] = useState('Seher');
+  const [name, setName] = useState('Anılcan');
   const [age, setAge] = useState(24);
   return <Profile name={name} age={age} />;
 }

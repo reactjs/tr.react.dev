@@ -770,13 +770,8 @@ Alternatif olarak, içine bir öğe göndermeden önce (mevcut olanı kopyalayar
 
 ```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
-<<<<<<< HEAD
   // Diziyi kopyalayın!
   let storiesToDisplay = stories.slice();
-=======
-  // Copy the array!
-  const storiesToDisplay = stories.slice();
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
   // Orijinal diziyi etkilemez:
   storiesToDisplay.push({

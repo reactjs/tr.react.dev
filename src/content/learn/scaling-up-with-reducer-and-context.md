@@ -510,15 +510,9 @@ export default function TaskApp() {
   }
 
   return (
-<<<<<<< HEAD
     <TasksContext.Provider value={tasks}>
       <TasksDispatchContext.Provider value={dispatch}>
         <h1>İstanbul'da bir gün</h1>
-=======
-    <TasksContext value={tasks}>
-      <TasksDispatchContext value={dispatch}>
-        <h1>Day off in Kyoto</h1>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
         <AddTask
           onAddTask={handleAddTask}
         />
@@ -683,15 +677,9 @@ Bir sonraki adımda, prop geçişini kaldıracaksınız.
 Artık görevlerin listesini veya olay yöneticilerini hiyerarşi boyunca iletmek zorunda değilsiniz:
 
 ```js {4-5}
-<<<<<<< HEAD
 <TasksContext.Provider value={tasks}>
   <TasksDispatchContext.Provider value={dispatch}>
     <h1>İstanbul'da bir gün</h1>
-=======
-<TasksContext value={tasks}>
-  <TasksDispatchContext value={dispatch}>
-    <h1>Day off in Kyoto</h1>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
     <AddTask />
     <TaskList />
   </TasksDispatchContext>
@@ -743,15 +731,9 @@ export default function TaskApp() {
   );
 
   return (
-<<<<<<< HEAD
     <TasksContext.Provider value={tasks}>
       <TasksDispatchContext.Provider value={dispatch}>
         <h1>İstanbul'da bir gün</h1>
-=======
-    <TasksContext value={tasks}>
-      <TasksDispatchContext value={dispatch}>
-        <h1>Day off in Kyoto</h1>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
         <AddTask />
         <TaskList />
       </TasksDispatchContext>

@@ -470,11 +470,7 @@ export default function Toggle() {
 
 #### Debouncing'i düzeltin {/*fix-debouncing*/}
 
-<<<<<<< HEAD
 Bu örnekte tüm buton tıklama işleyicileri ["debounce edilmiştir"](https://redd.one/blog/debounce-vs-throttle). Bunun ne anlama geldiğini görmek için bir butona basın. Mesajın bir saniye sonra göründüğünü fark edeceksiniz. Mesajı beklerken düğmeye basarsanız, zamanlayıcı sıfırlanır. Yani aynı düğmeye hızlıca birkaç kez tıklamaya devam ederseniz, mesaj tıklamayı bıraktıktan bir saniye sonra görünecektir. Debouncing, kullanıcının "bir şeyler yapmayı durdurana kadar" bazı eylemleri geciktirmenizi sağlar.
-=======
-In this example, all button click handlers are ["debounced".](https://kettanaito.com/blog/debounce-vs-throttle) To see what this means, press one of the buttons. Notice how the message appears a second later. If you press the button while waiting for the message, the timer will reset. So if you keep clicking the same button fast many times, the message won't appear until a second *after* you stop clicking. Debouncing lets you delay some action until the user "stops doing things".
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 Örnek çalışıyor, fakat tam olarak istenildiği gibi değil. Butonlar birbirinden bağımsız değil. Problemi görmek için bir butona basın ve ardından hemen başka bir butona basın. Biraz bekledikten sonra her iki butonun de mesajını görmeyi beklersiniz. Fakat sadece son butonun mesajı görünüyor. İlk basılan butonun mesajı kayboluyor.
 

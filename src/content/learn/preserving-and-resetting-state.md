@@ -689,11 +689,9 @@ label {
 
 </Sandpack>
 
-<<<<<<< HEAD
+
 Sayaç state'i kutucuğa tıkladığınız zaman sıfırlanır. `Counter` render etmenize rağmen, `div`'in ilk alt elemanı `div`'den `section`'a dönüşür. Alt eleman olan `div` DOM'dan kaldırıldığında, altındaki ağacın tamamı da (`Counter` ve state'i de dahil olmak üzere) yok edilir.
-=======
-The counter state gets reset when you click the checkbox. Although you render a `Counter`, the first child of the `div` changes from a `section` to a `div`. When the child `section` was removed from the DOM, the whole tree below it (including the `Counter` and its state) was destroyed as well.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+
 
 <DiagramGroup>
 

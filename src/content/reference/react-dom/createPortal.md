@@ -240,11 +240,7 @@ export default function ModalContent({ onClose }) {
 
 Portalları kullanırken uygulamanızın erişilebilir olduğundan emin olmanız önemlidir. Örneğin, kullanıcının odağı doğal bir şekilde portalın içine ve dışına taşıyabilmesi için klavye odağını yönetmeniz gerekebilir.
 
-<<<<<<< HEAD
 Modal'lar oluştururken [WAI-ARIA Modal Yazma Uygulamaları](https://www.w3.org/WAI/ARIA/apg/#dialog_modal) kılavuzunu izleyiniz. Bir topluluk paketi kullanıyorsanız, erişilebilir olduğundan ve bu yönergeleri izlediğinden emin olun.
-=======
-Follow the [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal) when creating modals. If you use a community package, ensure that it is accessible and follows these guidelines.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 </Pitfall>
 

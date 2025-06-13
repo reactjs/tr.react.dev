@@ -38,23 +38,13 @@ function MyComponent() {
 
 #### Dönüş değerleri {/*returns*/}
 
-<<<<<<< HEAD
 `useContext`, çağrılan bileşen için Context değerini döndürür. Bu değer, ağaçtaki çağrılan bileşenden önceki en yakın `SomeContext.Provider`'a iletilen `value` olarak belirlenir. Böyle bir sağlayıcı yoksa, döndürülen değer o Context için [`createContext`](/tr/referans/react/createContext) ile belirlediğiniz `defaultValue` olacaktır. Döndürülen değer her zaman günceldir. Eğer bir Context değişirse, React otomatik olarak bu Context'i kullanan bileşenleri yeniden render eder.
-=======
-`useContext` returns the context value for the calling component. It is determined as the `value` passed to the closest `SomeContext` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` you have passed to [`createContext`](/reference/react/createContext) for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 #### Dikkat Edilmesi Gerekenler {/*caveats*/}
 
-<<<<<<< HEAD
-* Bir bileşende yapılan `useContext()` çağrısı, aynı bileşenden döndürülen sağlayıcılardan etkilenmez. İlgili `<Context.Provider>` **kullanılan bileşenin üstünde olmalıdır.**
-* React, farklı bir `value` alan sağlayıcıdan başlayarak, belirli bir Context'i kullanan tüm alt bileşenleri **otomatik olarak yeniden render** eder. Önceki ve sonraki değerler [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile karşılaştırılır. [`memo`](/tr/referans/react/memo) ile yeniden renderları atlamak, alt bileşenlerin taze Context değerleri almasını engellemez.
-* Yapı sistemimiz çıktıda modüllerin kopyalarını oluşturursa (sembolik bağlantılarla olabilir), bu Context'i bozabilir. Bir şeyi Context aracılığıyla geçirmek, Context sağlamak ve okumak için **tamamen aynı nesne** olan `SomeContext`'ın, `===` karşılaştırması ile belirlendiği durumlarda çalışır.
-=======
-* `useContext()` call in a component is not affected by providers returned from the *same* component. The corresponding `<Context>` **needs to be *above*** the component doing the `useContext()` call.
-* React **automatically re-renders** all the children that use a particular context starting from the provider that receives a different `value`. The previous and the next values are compared with the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Skipping re-renders with [`memo`](/reference/react/memo) does not prevent the children receiving fresh context values.
-* If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if `SomeContext` that you use to provide context and `SomeContext` that you use to read it are ***exactly* the same object**, as determined by a `===` comparison.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+* Bir bileşendeki `useContext()` çağrısı, *aynı* bileşenden dönen sağlayıcılardan etkilenmez. İlgili `<Context>` **useContext()` çağrısını yapan bileşenin *üstünde*** olmalıdır.
+* React, farklı bir `değer` alan sağlayıcıdan başlayarak belirli bir bağlamı kullanan tüm çocukları **otomatik olarak yeniden işler**. Önceki ve sonraki değerler [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile karşılaştırılır. Yeniden oluşturma işlemlerinin [`memo`](/reference/react/memo) ile atlanması, çocukların yeni bağlam değerleri almasını engellemez.
+* Derleme sisteminiz çıktıda yinelenen modüller üretiyorsa (ki bu sembolik bağlantılarda olabilir), bu durum bağlamı bozabilir. Bir şeyi bağlam yoluyla iletmek, yalnızca bağlamı sağlamak için kullandığınız `SomeContext` ve onu okumak için kullandığınız `SomeContext`, `===` karşılaştırmasıyla belirlendiği gibi ***tam olarak* aynı nesne** ise çalışır.
 
 ---
 
@@ -1359,35 +1349,19 @@ Bu değişiklik sonucunda, `MyApp` yeniden render edilse bile, `useContext(AuthC
 
 Bunun birkaç yaygın sebebi vardır:
 
-<<<<<<< HEAD
-1. `useContext()`'i çağırdığınız bileşenle aynı bileşende `<SomeContext.Provider>` render ediyorsunuz. `<SomeContext.Provider>`'ı `useContext()` çağıran bileşenin *üstüne ve dışına* taşıyın.
-2. Bileşeninizi `SomeContext.Provider` ile sarmalamayı unutmuş ya da ağacın istem dışı bir yerine yerleştirmiş olabilirsiniz. [React DevTools](/learn/react-developer-tools) kullanarak hiyerarşinin doğru olup olmadığını kontrol edin.
-3. Kullandığınız araçlardan kaynaklı, sağlayan bileşen tarafından görülen SomeContext ile okuyan bileşen tarafından görülen SomeContext nesnesinin iki farklı nesne olmasına neden olan derleme sorunlarıyla karşılaşabilirsiniz. Örneğin, sembolik bağlantılar kullanıyorsanız bu yaşanabilir. Bu durumu, `window.SomeContext1` ve `window.SomeContext2` gibi global değişkenlere atayıp konsolda `window.SomeContext1 === window.SomeContext2` kontrolü yaparak doğrulayabilirsiniz. Eğer aynı değillerse, derleme aracı seviyesinde sorunu düzeltin.
-=======
-1. You're rendering `<SomeContext>` in the same component (or below) as where you're calling `useContext()`. Move `<SomeContext>` *above and outside* the component calling `useContext()`.
-2. You may have forgotten to wrap your component with `<SomeContext>`, or you might have put it in a different part of the tree than you thought. Check whether the hierarchy is right using [React DevTools.](/learn/react-developer-tools)
-3. You might be running into some build issue with your tooling that causes `SomeContext` as seen from the providing component and `SomeContext` as seen by the reading component to be two different objects. This can happen if you use symlinks, for example. You can verify this by assigning them to globals like `window.SomeContext1` and `window.SomeContext2` and then checking whether `window.SomeContext1 === window.SomeContext2` in the console. If they're not the same, fix that issue on the build tool level.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+1. `<SomeContext>` öğesini `useContext()` öğesini çağırdığınız bileşenle aynı bileşende (veya altında) oluşturuyorsunuz. `<SomeContext>` öğesini `useContext()` öğesini çağıran bileşenin *üstüne ve dışına* taşıyın.
+2. Bileşeninizi `<SomeContext>` ile sarmayı unutmuş ya da ağacın düşündüğünüzden farklı bir bölümüne koymuş olabilirsiniz. Hiyerarşinin doğru olup olmadığını [React DevTools.](/learn/react-developer-tools) kullanarak kontrol edin
+3. Araçlarınızda, sağlayan bileşen tarafından görülen `SomeContext` ile okuyan bileşen tarafından görülen `SomeContext`in iki farklı nesne olmasına neden olan bir derleme sorunuyla karşılaşıyor olabilirsiniz. Örneğin, sembolik bağlantılar kullanıyorsanız bu olabilir. Bunu `window.SomeContext1` ve `window.SomeContext2` gibi globallere atayarak ve ardından konsolda `window.SomeContext1 === window.SomeContext2` olup olmadığını kontrol ederek doğrulayabilirsiniz. Aynı değillerse, bu sorunu derleme aracı düzeyinde düzeltin.
 
 ### Varsayılan değer farklı olsa bile context'den her zaman `undefined` alıyorum {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
 Ağaçta `value` verilmemiş bir sağlayıcı olabilir:
 
-<<<<<<< HEAD
-```js {4}
-const MyContext = React.createContext('default');
-
-function MyComponent() {
-  const value = useContext(MyContext);
-  // ...
-}
-=======
 ```js {1,2}
-// 🚩 Doesn't work: no value prop
+// 🚩 İşe yaramıyor: değer desteği yok
 <ThemeContext>
    <Button />
 </ThemeContext>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 ```
 
 `value` belirtmeyi unutursanız, `value={undefined}` geçmiş gibi davranır .
@@ -1395,13 +1369,8 @@ function MyComponent() {
 Yanlışlıkla farklı bir özellik adı kullanmış da olabilirsiniz:
 
 ```js {1,2}
-<<<<<<< HEAD
-// 🚩 Çalışmaz: özellik "value" olarak adlandırılmalı
-<ThemeContext.Provider theme={theme}>
-=======
-// 🚩 Doesn't work: prop should be called "value"
+// 🚩 Çalışmıyor: prop “değer” olarak adlandırılmalıdır
 <ThemeContext theme={theme}>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
    <Button />
 </ThemeContext>
 ```
@@ -1409,19 +1378,10 @@ Yanlışlıkla farklı bir özellik adı kullanmış da olabilirsiniz:
 Her iki durumda da konsolda React uyarısı görmelisiniz. Bunları düzeltmek için prop'u `value` olarak adlandırın:
 
 ```js {1,2}
-<<<<<<< HEAD
-// ✅ value prop'unu geçirme
-<ThemeContext.Provider value={theme}>
-=======
-// ✅ Passing the value prop
+// ✅ Değer prop'unu geçirme
 <ThemeContext value={theme}>
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
    <Button />
 </ThemeContext>
 ```
 
-<<<<<<< HEAD
-Unutmayın, [`createContext(defaultValue)` çağrınızdaki varsayılan değer](#specifying-a-fallback-default-value) yalnızca **eşleşen hiçbir sağlayıcı yoksa** kullanılır. Alt ağaçta bir yerde `<SomeContext.Provider value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen context değeri olarak `undefined` *alacaktır*.
-=======
-Note that the [default value from your `createContext(defaultValue)` call](#specifying-a-fallback-default-value) is only used **if there is no matching provider above at all.** If there is a `<SomeContext value={undefined}>` component somewhere in the parent tree, the component calling `useContext(SomeContext)` *will* receive `undefined` as the context value.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+`CreateContext(defaultValue)` çağrınızdan gelen [varsayılan değerin] (#specifying-a-fallback-default-value) yalnızca **yukarıda eşleşen bir sağlayıcı yoksa kullanılır.** Üst ağacın herhangi bir yerinde bir `<SomeContext value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen *bağlam değeri olarak `undefined` alır.
