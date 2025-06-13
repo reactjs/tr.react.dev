@@ -45,7 +45,7 @@ const ThemeContext = createContext('light');
 
 ---
 
-### `SomeContext.Provider` {/*provider*/}
+### `SomeContext` Provider {/*provider*/}
 
 Bileşenlerinizi bir context sağlayıcısı ile sarmalayarak içindeki tüm bileşenler için bu contextin değerini belirtin:
 
@@ -54,14 +54,22 @@ function App() {
   const [theme, setTheme] = useState('light');
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Page />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 ```
 
-#### Proplar {/*provider-props*/}
+<Note>
+
+React 19'dan itibaren, `<SomeContext>` öğesini bir sağlayıcı olarak oluşturabilirsiniz.
+
+React'in eski sürümlerinde `<SomeContext.Provider>` kullanın.
+
+</Note>
+
+#### Props {/*provider-props*/}
 
 * `value`: Ne kadar derin olursa olsun, bu sağlayıcının içindeki contexti okuyan tüm bileşenlere aktarmak istediğiniz değer. Context değeri herhangi bir türde olabilir. Sağlayıcı içinde [`useContext(SomeContext)`](/reference/react/useContext) kullanan bir bileşen,
 üzerindeki en içte bulunan ilgili context sağlayıcısının `value` değerini alır.
@@ -142,11 +150,11 @@ function App() {
   // ...
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -189,11 +197,11 @@ import { ThemeContext, AuthContext } from './Contexts.js';
 function App() {
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```

@@ -42,9 +42,9 @@ function MyComponent() {
 
 #### Dikkat Edilmesi Gerekenler {/*caveats*/}
 
-* Bir bileşende yapılan `useContext()` çağrısı, aynı bileşenden döndürülen sağlayıcılardan etkilenmez. İlgili `<Context.Provider>` **kullanılan bileşenin üstünde olmalıdır.**
-* React, farklı bir `value` alan sağlayıcıdan başlayarak, belirli bir Context'i kullanan tüm alt bileşenleri **otomatik olarak yeniden render** eder. Önceki ve sonraki değerler [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile karşılaştırılır. [`memo`](/tr/referans/react/memo) ile yeniden renderları atlamak, alt bileşenlerin taze Context değerleri almasını engellemez.
-* Yapı sistemimiz çıktıda modüllerin kopyalarını oluşturursa (sembolik bağlantılarla olabilir), bu Context'i bozabilir. Bir şeyi Context aracılığıyla geçirmek, Context sağlamak ve okumak için **tamamen aynı nesne** olan `SomeContext`'ın, `===` karşılaştırması ile belirlendiği durumlarda çalışır.
+* Bir bileşendeki `useContext()` çağrısı, *aynı* bileşenden dönen sağlayıcılardan etkilenmez. İlgili `<Context>` **useContext()` çağrısını yapan bileşenin *üstünde*** olmalıdır.
+* React, farklı bir `değer` alan sağlayıcıdan başlayarak belirli bir bağlamı kullanan tüm çocukları **otomatik olarak yeniden işler**. Önceki ve sonraki değerler [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması ile karşılaştırılır. Yeniden oluşturma işlemlerinin [`memo`](/reference/react/memo) ile atlanması, çocukların yeni bağlam değerleri almasını engellemez.
+* Derleme sisteminiz çıktıda yinelenen modüller üretiyorsa (ki bu sembolik bağlantılarda olabilir), bu durum bağlamı bozabilir. Bir şeyi bağlam yoluyla iletmek, yalnızca bağlamı sağlamak için kullandığınız `SomeContext` ve onu okumak için kullandığınız `SomeContext`, `===` karşılaştırmasıyla belirlendiği gibi ***tam olarak* aynı nesne** ise çalışır.
 
 ---
 
@@ -70,9 +70,9 @@ function Button() {
 ```js [[1, 3, "ThemeContext"], [2, 3, "\\"dark\\""], [1, 5, "ThemeContext"]]
 function MyPage() {
   return (
-    <ThemeContext.Provider value="dark">
+    <ThemeContext value="dark">
       <Form />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 
@@ -98,9 +98,9 @@ const ThemeContext = createContext(null);
 
 export default function MyApp() {
   return (
-    <ThemeContext.Provider value="dark">
+    <ThemeContext value="dark">
       <Form />
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -183,14 +183,14 @@ Genellikle, context'in zaman içinde değişmesini istersiniz. Context'i güncel
 function MyPage() {
   const [theme, setTheme] = useState('dark');
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Form />
       <Button onClick={() => {
         setTheme('light');
       }}>
         Switch to light theme
       </Button>
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 ```
@@ -213,7 +213,7 @@ const ThemeContext = createContext(null);
 export default function MyApp() {
   const [theme, setTheme] = useState('light');
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Form />
       <label>
         <input
@@ -225,7 +225,7 @@ export default function MyApp() {
         />
         Use dark mode
       </label>
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -317,14 +317,14 @@ const CurrentUserContext = createContext(null);
 export default function MyApp() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
-    <CurrentUserContext.Provider
+    <CurrentUserContext
       value={{
         currentUser,
         setCurrentUser
       }}
     >
       <Form />
-    </CurrentUserContext.Provider>
+    </CurrentUserContext>
   );
 }
 
@@ -411,8 +411,8 @@ export default function MyApp() {
   const [theme, setTheme] = useState('light');
   const [currentUser, setCurrentUser] = useState(null);
   return (
-    <ThemeContext.Provider value={theme}>
-      <CurrentUserContext.Provider
+    <ThemeContext value={theme}>
+      <CurrentUserContext
         value={{
           currentUser,
           setCurrentUser
@@ -429,8 +429,8 @@ export default function MyApp() {
           />
           Use dark mode
         </label>
-      </CurrentUserContext.Provider>
-    </ThemeContext.Provider>
+      </CurrentUserContext>
+    </ThemeContext>
   )
 }
 
@@ -596,16 +596,16 @@ export default function MyApp() {
 function MyProviders({ children, theme, setTheme }) {
   const [currentUser, setCurrentUser] = useState(null);
   return (
-    <ThemeContext.Provider value={theme}>
-      <CurrentUserContext.Provider
+    <ThemeContext value={theme}>
+      <CurrentUserContext
         value={{
           currentUser,
           setCurrentUser
         }}
       >
         {children}
-      </CurrentUserContext.Provider>
-    </ThemeContext.Provider>
+      </CurrentUserContext>
+    </ThemeContext>
   );
 }
 
@@ -775,11 +775,11 @@ export function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -978,9 +978,9 @@ export default function MyApp() {
   const [theme, setTheme] = useState('light');
   return (
     <>
-      <ThemeContext.Provider value={theme}>
+      <ThemeContext value={theme}>
         <Form />
-      </ThemeContext.Provider>
+      </ThemeContext>
       <Button onClick={() => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
       }}>
@@ -1067,13 +1067,13 @@ function Button({ children, onClick }) {
 Ağacın bir bölümünü farklı bir değere sahip sağlayıcıyla sarmalayarak context'i geçersiz kılabilirsiniz.
 
 ```js {3,5}
-<ThemeContext.Provider value="dark">
+<ThemeContext value="dark">
   ...
-  <ThemeContext.Provider value="light">
+  <ThemeContext value="light">
     <Footer />
-  </ThemeContext.Provider>
+  </ThemeContext>
   ...
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
 İhtiyacınız olduğu kadar çok sağlayıcıyı iç içe yerleştirebilir ve geçersiz kılabilirsiniz.
@@ -1093,9 +1093,9 @@ const ThemeContext = createContext(null);
 
 export default function MyApp() {
   return (
-    <ThemeContext.Provider value="dark">
+    <ThemeContext value="dark">
       <Form />
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -1104,9 +1104,9 @@ function Form() {
     <Panel title="Welcome">
       <Button>Sign up</Button>
       <Button>Log in</Button>
-      <ThemeContext.Provider value="light">
+      <ThemeContext value="light">
         <Footer />
-      </ThemeContext.Provider>
+      </ThemeContext>
     </Panel>
   );
 }
@@ -1230,9 +1230,9 @@ export default function Section({ children }) {
   const level = useContext(LevelContext);
   return (
     <section className="section">
-      <LevelContext.Provider value={level + 1}>
+      <LevelContext value={level + 1}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
@@ -1302,9 +1302,9 @@ function MyApp() {
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, login }}>
+    <AuthContext value={{ currentUser, login }}>
       <Page />
-    </AuthContext.Provider>
+    </AuthContext>
   );
 }
 ```
@@ -1330,9 +1330,9 @@ function MyApp() {
   }), [currentUser, login]);
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext value={contextValue}>
       <Page />
-    </AuthContext.Provider>
+    </AuthContext>
   );
 }
 ```
@@ -1349,21 +1349,19 @@ Bu değişiklik sonucunda, `MyApp` yeniden render edilse bile, `useContext(AuthC
 
 Bunun birkaç yaygın sebebi vardır:
 
-1. `useContext()`'i çağırdığınız bileşenle aynı bileşende `<SomeContext.Provider>` render ediyorsunuz. `<SomeContext.Provider>`'ı `useContext()` çağıran bileşenin *üstüne ve dışına* taşıyın.
-2. Bileşeninizi `SomeContext.Provider` ile sarmalamayı unutmuş ya da ağacın istem dışı bir yerine yerleştirmiş olabilirsiniz. [React DevTools](/learn/react-developer-tools) kullanarak hiyerarşinin doğru olup olmadığını kontrol edin.
-3. Kullandığınız araçlardan kaynaklı, sağlayan bileşen tarafından görülen SomeContext ile okuyan bileşen tarafından görülen SomeContext nesnesinin iki farklı nesne olmasına neden olan derleme sorunlarıyla karşılaşabilirsiniz. Örneğin, sembolik bağlantılar kullanıyorsanız bu yaşanabilir. Bu durumu, `window.SomeContext1` ve `window.SomeContext2` gibi global değişkenlere atayıp konsolda `window.SomeContext1 === window.SomeContext2` kontrolü yaparak doğrulayabilirsiniz. Eğer aynı değillerse, derleme aracı seviyesinde sorunu düzeltin.
+1. `<SomeContext>` öğesini `useContext()` öğesini çağırdığınız bileşenle aynı bileşende (veya altında) oluşturuyorsunuz. `<SomeContext>` öğesini `useContext()` öğesini çağıran bileşenin *üstüne ve dışına* taşıyın.
+2. Bileşeninizi `<SomeContext>` ile sarmayı unutmuş ya da ağacın düşündüğünüzden farklı bir bölümüne koymuş olabilirsiniz. Hiyerarşinin doğru olup olmadığını [React DevTools.](/learn/react-developer-tools) kullanarak kontrol edin
+3. Araçlarınızda, sağlayan bileşen tarafından görülen `SomeContext` ile okuyan bileşen tarafından görülen `SomeContext`in iki farklı nesne olmasına neden olan bir derleme sorunuyla karşılaşıyor olabilirsiniz. Örneğin, sembolik bağlantılar kullanıyorsanız bu olabilir. Bunu `window.SomeContext1` ve `window.SomeContext2` gibi globallere atayarak ve ardından konsolda `window.SomeContext1 === window.SomeContext2` olup olmadığını kontrol ederek doğrulayabilirsiniz. Aynı değillerse, bu sorunu derleme aracı düzeyinde düzeltin.
 
 ### Varsayılan değer farklı olsa bile context'den her zaman `undefined` alıyorum {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
 Ağaçta `value` verilmemiş bir sağlayıcı olabilir:
 
-```js {4}
-const MyContext = React.createContext('default');
-
-function MyComponent() {
-  const value = useContext(MyContext);
-  // ...
-}
+```js {1,2}
+// 🚩 İşe yaramıyor: değer desteği yok
+<ThemeContext>
+   <Button />
+</ThemeContext>
 ```
 
 `value` belirtmeyi unutursanız, `value={undefined}` geçmiş gibi davranır .
@@ -1371,19 +1369,19 @@ function MyComponent() {
 Yanlışlıkla farklı bir özellik adı kullanmış da olabilirsiniz:
 
 ```js {1,2}
-// 🚩 Çalışmaz: özellik "value" olarak adlandırılmalı
-<ThemeContext.Provider theme={theme}>
+// 🚩 Çalışmıyor: prop “değer” olarak adlandırılmalıdır
+<ThemeContext theme={theme}>
    <Button />
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
 Her iki durumda da konsolda React uyarısı görmelisiniz. Bunları düzeltmek için prop'u `value` olarak adlandırın:
 
 ```js {1,2}
-// ✅ value prop'unu geçirme
-<ThemeContext.Provider value={theme}>
+// ✅ Değer prop'unu geçirme
+<ThemeContext value={theme}>
    <Button />
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
-Unutmayın, [`createContext(defaultValue)` çağrınızdaki varsayılan değer](#specifying-a-fallback-default-value) yalnızca **eşleşen hiçbir sağlayıcı yoksa** kullanılır. Alt ağaçta bir yerde `<SomeContext.Provider value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen context değeri olarak `undefined` *alacaktır*.
+`CreateContext(defaultValue)` çağrınızdan gelen [varsayılan değerin] (#specifying-a-fallback-default-value) yalnızca **yukarıda eşleşen bir sağlayıcı yoksa kullanılır.** Üst ağacın herhangi bir yerinde bir `<SomeContext value={undefined}>` bileşeni varsa, `useContext(SomeContext)` çağrısını yapan bileşen *bağlam değeri olarak `undefined` alır.

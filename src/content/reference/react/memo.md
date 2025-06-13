@@ -226,12 +226,12 @@ export default function MyApp() {
   }
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <button onClick={handleClick}>
         Temayı değiştir
       </button>
-      <Greeting name="Seher" />
-    </ThemeContext.Provider>
+      <Greeting name="Taylor" />
+    </ThemeContext>
   );
 }
 
@@ -276,7 +276,7 @@ Bileşeninizin yalnızca context'in bazı _öğeleri_ değiştiğinde render edi
 
 ```js {5-8}
 function Page() {
-  const [name, setName] = useState('Seher');
+  const [name, setName] = useState('Anılcan');
   const [age, setAge] = useState(24);
 
   const person = useMemo(
@@ -296,7 +296,7 @@ Prop değişikliklerini minimuma indirmenin daha iyi bir yolu, gereksiz bilgiler
 
 ```js {4,7}
 function Page() {
-  const [name, setName] = useState('Seher');
+  const [name, setName] = useState('Anılcan');
   const [age, setAge] = useState(24);
   return <Profile name={name} age={age} />;
 }

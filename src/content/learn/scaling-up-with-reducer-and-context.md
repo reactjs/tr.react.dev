@@ -462,11 +462,11 @@ export default function TaskApp() {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
   // ...
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         ...
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 ```
@@ -521,8 +521,8 @@ export default function TaskApp() {
           onChangeTask={handleChangeTask}
           onDeleteTask={handleDeleteTask}
         />
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -682,8 +682,8 @@ Artık görevlerin listesini veya olay yöneticilerini hiyerarşi boyunca iletme
     <h1>İstanbul'da bir gün</h1>
     <AddTask />
     <TaskList />
-  </TasksDispatchContext.Provider>
-</TasksContext.Provider>
+  </TasksDispatchContext>
+</TasksContext>
 ```
 
 Bunun yerine, görev listesine ihtiyaç duyan herhangi bir bileşen bunu `TaskContext`'ten okuyabilir:
@@ -736,8 +736,8 @@ export default function TaskApp() {
         <h1>İstanbul'da bir gün</h1>
         <AddTask />
         <TaskList />
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -922,11 +922,11 @@ export function TasksProvider({ children }) {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 ```
@@ -964,11 +964,11 @@ export function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -1175,11 +1175,11 @@ export function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -1362,4 +1362,3 @@ Uygulamanız büyüdükçe, bunun gibi birçok context-reducer çiftine sahip ol
 - Uygulamanızda bunun gibi birçok context-reducer çiftine sahip olabilirsiniz.
 
 </Recap>
-
