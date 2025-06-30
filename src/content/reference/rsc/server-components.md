@@ -4,7 +4,11 @@ title: Sunucu Bileşenleri
 
 <RSC>
 
+<<<<<<< HEAD
 Sunucu Bileşenleri aşağıdakilerde kullanım içindir [React Sunucu Bileşenleri](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+=======
+Server Components are for use in [React Server Components](/learn/start-a-new-react-project#full-stack-frameworks).
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 </RSC>
 
@@ -22,7 +26,11 @@ Bu ayrı ortam, React Sunucu Bileşenlerinde "sunucu" olarak adlandırılır. Su
 
 #### Sunucu Bileşenleri için nasıl destek oluşturulur? {/*how-do-i-build-support-for-server-components*/}
 
+<<<<<<< HEAD
 React 19'daki React Sunucu Bileşenleri kararlı ve alt sürümler arasında kırılmayacak olsa da, bir React Sunucu Bileşenleri paketleyicisini veya framework'ünü uygulamak için kullanılan temel API'ler semver'ı takip etmez ve React 19.x'teki alt sürümler arasında kırılabilir. 
+=======
+While React Server Components in React 19 are stable and will not break between minor versions, the underlying APIs used to implement a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 React Sunucu Bileşenleri'ni bir paketleyici veya framework olarak desteklemek için, belirli bir React sürümüne sabitlemenizi veya Canary sürümünü kullanmanızı öneririz. Gelecekte, React Sunucu Bileşenleri'ni uygulamak için kullanılan API'leri stabilize etmek amacıyla paketleyiciler ve framework'lerle çalışmaya devam edeceğiz.
 
@@ -45,7 +53,7 @@ function Page({page}) {
       setContent(data.content);
     });
   }, [page]);
-  
+
   return <div>{sanitizeHtml(marked(content))}</div>;
 }
 ```
@@ -69,7 +77,7 @@ import sanitizeHtml from 'sanitize-html'; // Paket içinde dahil edilmemiş
 async function Page({page}) {
  // NOT: Render sırasında, uygulama build edilirken yüklenir.
   const content = await file.readFile(`${page}.md`);
-  
+
   return <div>{sanitizeHtml(marked(content))}</div>;
 }
 ```
@@ -113,7 +121,7 @@ function Note({id}) {
       setNote(data.note);
     });
   }, [id]);
-  
+
   return (
     <div>
       <Author id={note.authorId} />
@@ -253,7 +261,7 @@ Bu, önce `Notes`'u bir Sunucu Bileşeni olarak render edip, ardından paketleyi
       <p>bu ikinci nottur</p>
     </Expandable>
     <!--...-->
-  </div> 
+  </div>
 </body>
 ```
 
@@ -270,8 +278,13 @@ import db from './database';
 async function Page({id}) {
   // Sunucu Bileşenini askıya alır.
   const note = await db.notes.get(id);
+<<<<<<< HEAD
   
   // NOT: beklenmemiş, burada başlayacak ve istemcide bekleyecek.
+=======
+
+  // NOTE: not awaited, will start here and await on the client.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
   const commentsPromise = db.comments.get(note.id);
   return (
     <div>
