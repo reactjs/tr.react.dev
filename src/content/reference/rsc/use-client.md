@@ -9,7 +9,6 @@ titleForTitleTag: "'use client' directive"
 
 </RSC>
 
-
 <Intro>
 
 `'use client'` istemcide hangi kodun çalışacağını işaretlemenizi sağlar.
@@ -41,11 +40,7 @@ export default function RichTextEditor({ timestamp, text }) {
 }
 ```
 
-<<<<<<< HEAD
-Bir Sunucu Bileşeninden `'use client'` ile işaretlenmiş bir dosya içe aktarıldığında, [uyumlu paketleyiciler](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) modül içe aktarımını sunucu tarafından çalıştırılan ve istemci tarafından çalıştırılan kod arasında bir sınır olarak değerlendirecektir.
-=======
-When a file marked with `'use client'` is imported from a Server Component, [compatible bundlers](/learn/start-a-new-react-project#full-stack-frameworks) will treat the module import as a boundary between server-run and client-run code.
->>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
+Bir Sunucu Bileşeninden `'use client'` ile işaretlenmiş bir dosya içe aktarıldığında, [uyumlu paketleyiciler](/learn/start-a-new-react-project#full-stack-frameworks) modül içe aktarımını sunucu tarafından çalıştırılan ve istemci tarafından çalıştırılan kod arasında bir sınır olarak değerlendirecektir.
 
 `RichTextEditor` bağımlılıkları olarak, `formatDate` ve `Button` da modüllerinin bir `'use client'` yönergesi içerip içermediğine bakılmaksızın istemcide değerlendirilecektir. Tek bir modülün sunucu kodundan içe aktarıldığında sunucuda, istemci kodundan içe aktarıldığında ise istemcide değerlendirilebileceğini unutmayın.
 
@@ -187,6 +182,7 @@ function MyComponent() {
 ```
 
 2. Bir “bileşen”, tanımının bir **bileşen kullanımına** da atıfta bulunabilir.
+
 ```js
 import MyComponent from './MyComponent';
 
@@ -203,10 +199,9 @@ Sunucu veya İstemci Bileşenleri hakkında konuştuğumuzda, bileşen kullanım
 * Bileşen `'use client'` yönergesine sahip bir modülde tanımlanmışsa veya bileşen bir İstemci Bileşeni içinde içe aktarılmış ve çağrılmışsa, bileşen kullanımı bir İstemci Bileşenidir.
 * Aksi takdirde, bileşen kullanımı bir Sunucu Bileşenidir.
 
-
 <Diagram name="use_client_render_tree" height={150} width={450} alt="Her bir node'un bir bileşeni ve alt elemanın da alt bileşenleri temsil ettiği bir ağaç grafiği. Üst düzey node 'App' olarak etiketlenmiştir. 'InspirationGenerator' ve 'FancyText' adlı iki alt bileşene sahiptir. 'InspirationGenerator' iki alt bileşene sahiptir, 'FancyText' ve 'Copyright'. Hem 'InspirationGenerator' hem de alt bileşeni 'FancyText' istemci tarafından oluşturulmak üzere işaretlenmiştir.">Bir render ağacı bileşen kullanımlarını gösterir.</Diagram>
 
-`FancyText` sorusuna geri dönersek, bileşen tanımının bir `'use client'` yönergesine sahip _olmadığını_ ve iki kullanımı olduğunu görüyoruz.
+`FancyText` sorusuna geri dönersek, bileşen tanımının bir `'use client'` yönergesine sahip *olmadığını* ve iki kullanımı olduğunu görüyoruz.
 
 `FancyText`'in `App`'in bir alt öğesi olarak kullanılması, bu kullanımı bir Sunucu Bileşeni olarak işaretler. `FancyText` içe aktarıldığında ve `InspirationGenerator` altında çağrıldığında, `InspirationGenerator` bir `'use client'` yönergesi içerdiğinden, `FancyText` kullanımı bir İstemci Bileşenidir.
 
@@ -220,7 +215,7 @@ Sunucu veya İstemci Bileşenleri hakkında konuştuğumuzda, bileşen kullanım
 
 `Copyright`, `InspirationGenerator` İstemci Bileşeninin bir çocuğu olarak işlendiğinden, bunun bir Sunucu Bileşeni olması sizi şaşırtabilir.
 
-`'use client'`'ın sunucu ve istemci kodu arasındaki sınırı render ağacında değil _modül bağımlılık ağacında_ tanımladığını hatırlayın.
+`'use client'`'ın sunucu ve istemci kodu arasındaki sınırı render ağacında değil *modül bağımlılık ağacında* tanımladığını hatırlayın.
 
 <Diagram name="use_client_module_dependency" height={200} width={500} alt="En üst node 'App.js' modülünü temsil eden bir ağaç grafiği. 'App.js''nin üç çocuğu vardır: 'Copyright.js', 'FancyText.js', ve 'InspirationGenerator.js'. 'InspirationGenerator.js' dosyasının iki çocuğu vardır: 'FancyText.js' ve 'inspirations.js'. 'InspirationGenerator.js' altındaki ve dahilindeki node'lar, 'InspirationGenerator.js' içindeki 'use client' yönergesi nedeniyle bu alt grafiğin istemci tarafından işlendiğini belirtmek için sarı bir arka plan rengine sahiptir.">
 `'use client'` modül bağımlılık ağacında sunucu ve istemci kodu arasındaki sınırı tanımlar.
@@ -241,10 +236,12 @@ Buradan çıkarılacak sonuç, bileşenler arasındaki üst eleman-alt eleman re
 Basit olması için Sunucu Bileşenlerinden bahsediyoruz, ancak aynı ilkeler uygulamanızdaki sunucuda çalışan tüm kodlar için geçerlidir.
 
 #### Sunucu Bileşenlerinin Avantajları {/*advantages*/}
+
 * Sunucu Bileşenleri, istemci tarafından gönderilen ve çalıştırılan kod miktarını azaltabilir. Yalnızca İstemci modülleri paketlenir ve istemci tarafından değerlendirilir.
 * Sunucu Bileşenleri sunucu üzerinde çalışmaktan yararlanır. Yerel dosya sistemine erişebilirler ve veri getirme ve ağ istekleri için düşük gecikme yaşayabilirler.
 
 #### Sunucu Bileşenlerinin Sınırlamaları {/*limitations*/}
+
 * Olay yöneticilerinin bir istemci tarafından kaydedilmesi ve tetiklenmesi gerektiğinden Sunucu Bileşenleri etkileşimi destekleyemez.
   * Örneğin, `onClick` gibi olay yöneticileri yalnızca İstemci Bileşenlerinde tanımlanabilir.
 * Sunucu Bileşenleri çoğu Hook'ları kullanamaz.
@@ -257,6 +254,7 @@ Tüm React uygulamalarında olduğu gibi, üst bileşenler alt bileşenlere veri
 Bir Sunucu Bileşeninden İstemci Bileşenine aktarılan prop değerleri serileştirilebilir olmalıdır.
 
 Serileştirilebilir prop'lar şunları içerir:
+
 * Primitives
   * [string](https://developer.mozilla.org/en-US/docs/Glossary/String)
   * [number](https://developer.mozilla.org/en-US/docs/Glossary/Number)
@@ -278,11 +276,11 @@ Serileştirilebilir prop'lar şunları içerir:
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Özellikle, bunlar desteklenmemektedir:
+
 * İstemci işaretli modüllerden dışa aktarılmayan veya [`'use server'`](/reference/rsc/use-server) ile işaretlenmeyen [Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
 * [Classes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
 * Herhangi bir sınıfın örneği olan nesneler (belirtilen yerleşikler dışında) veya [null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects) nesneler
 * Global olarak kaydedilmemiş semboller, örn. `Symbol('my new symbol')`
-
 
 ## Kullanım {/*usage*/}
 
@@ -337,7 +335,7 @@ export default function FancyText({title, text}) {
 }
 ```
 
-Bu durumda `'use client'` yönergesini eklemiyoruz, bu da `FancyText`'in _output_'unun (kaynak kodu yerine) bir Sunucu Bileşeninden başvurulduğunda tarayıcıya gönderilmesine neden oluyor. Daha önceki Inspirations uygulaması örneğinde gösterildiği gibi `FancyText` içe aktarıldığı ve kullanıldığı yere bağlı olarak hem Sunucu hem de İstemci Bileşeni olarak kullanılır.
+Bu durumda `'use client'` yönergesini eklemiyoruz, bu da `FancyText`'in *output*'unun (kaynak kodu yerine) bir Sunucu Bileşeninden başvurulduğunda tarayıcıya gönderilmesine neden oluyor. Daha önceki Inspirations uygulaması örneğinde gösterildiği gibi `FancyText` içe aktarıldığı ve kullanıldığı yere bağlı olarak hem Sunucu hem de İstemci Bileşeni olarak kullanılır.
 
 Ancak `FancyText`in HTML çıktısı kaynak koduna (bağımlılıklar dahil) göre büyükse, onu her zaman bir İstemci Bileşeni olmaya zorlamak daha verimli olabilir. Uzun bir SVG path'i döndüren bileşenler, bir bileşeni İstemci Bileşeni olmaya zorlamanın daha verimli olabileceği bir durumdur.
 
@@ -371,6 +369,7 @@ export default function Circle() {
 Genellikle bir React uygulamasında yaygın kullanıcı arayüzü modellerini veya mantığını işlemek için üçüncü taraf kütüphanelerden yararlanırsınız.
 
 Bu kütüphaneler bileşen Hook'larına veya istemci API'lerine dayanabilir. Aşağıdaki React API'lerinden herhangi birini kullanan üçüncü taraf bileşenleri istemci üzerinde çalışmalıdır:
+
 * [createContext](/reference/react/createContext)
 * [`react`](/reference/react/hooks) ve [`react-dom`](/reference/react-dom/hooks) Hooks, [`use`](/reference/react/use) ve [`useId`](/reference/react/useId) hariç
 * [forwardRef](/reference/react/forwardRef)
@@ -379,5 +378,3 @@ Bu kütüphaneler bileşen Hook'larına veya istemci API'lerine dayanabilir. Aş
 * İstemci API'leri kullanıyorlarsa, örneğin DOM ekleme veya yerel platform görünümleri
 
 Bu kütüphaneler React Server Components ile uyumlu olacak şekilde güncelleştirildiyse, kendi '`'use client' işaretçilerini zaten içerecek ve bunları doğrudan Sunucu Bileşenlerinizden kullanmanıza olanak tanıyacaktır. Bir kütüphane güncellenmemişse veya bir bileşenin yalnızca istemcide belirtilebilen olay yöneticileri gibi desteklere ihtiyacı varsa, üçüncü taraf İstemci Bileşeni ile kullanmak istediğiniz Sunucu Bileşeniniz arasına kendi İstemci Bileşeni dosyanızı eklemeniz gerekebilir.
-
-[TODO]: <> (Troubleshooting - need use-cases)
