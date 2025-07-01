@@ -10,7 +10,7 @@ Directives are for use in [React Server Components](/reference/rsc/server-compon
 
 <Intro>
 
-Direktifler [React Sunucu Bileşenleri ile uyumlu paketleyiciler](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) için talimatlar sağlar.
+Yönergeler, [React Server Components ile uyumlu paketleyicilere](/learn/start-a-new-react-project#full-stack-frameworks) talimatlar sağlar.
 
 </Intro>
 
