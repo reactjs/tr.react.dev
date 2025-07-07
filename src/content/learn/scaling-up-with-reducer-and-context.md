@@ -686,11 +686,7 @@ Artık görevlerin listesini veya olay yöneticilerini hiyerarşi boyunca iletme
 </TasksContext>
 ```
 
-<<<<<<< HEAD
 Bunun yerine, görev listesine ihtiyaç duyan herhangi bir bileşen bunu `TaskContext`'ten okuyabilir:
-=======
-Instead, any component that needs the task list can read it from the `TasksContext`:
->>>>>>> 341c312916e1b657262bbe14b134a6f1779fecf1
 
 ```js {2}
 export default function TaskList() {
