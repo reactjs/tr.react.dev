@@ -30,6 +30,10 @@ Ekranda bir girdi göstermek için, [tarayıcıya yerleşik `<input>`](https://d
 
 #### Prop'lar {/*props*/}
 
+<<<<<<< HEAD
+=======
+`<input>` supports all [common element props.](/reference/react-dom/components/common#common-props)
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 `<input>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#props) destekler.
 

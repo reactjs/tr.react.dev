@@ -732,8 +732,13 @@ Efektler içinde `veri getirme` çağrıları yazmak özellikle tamamen kullanı
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin de başarılı şekilde yapılması kolay değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
+<<<<<<< HEAD
 - **Eğer bir [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, framework'ün yerleşik veri getirme mekanizmasını kullanın.** Modern React framework'leri verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
 - **Aksi halde, kullanıcı taraflı önbelleğe almayı kullanmayı ya da kendiniz kurmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://react-query.tanstack.com/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü yaparsanız, Efektleri arka planda kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da  ekleyebilirsiniz.
+=======
+- **If you use a [framework](/learn/creating-a-react-app#full-stack-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
+- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Efektler içinde veri getirmeye devam edebilirsiniz.
 
