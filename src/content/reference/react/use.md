@@ -312,7 +312,7 @@ export default async function App() {
 }
 ```
 
-Ancak [Sunucu Bileşeni](/reference/react/components#server-components) içerisinde `await` kullanımı, `await` ifadesi tamamlanana kadar oluşturma işlemini engeller. Sunucu Bileşeni'nden İstemci Bileşeni'ne Promise geçirmek Sunucu Bileşeni içerisinde Promise kaynaklı olan oluşturma işleminin engellenmesini önler.
+Ancak bir [Sunucu Bileşeninde](/reference/rsc/server-components) `await` kullanmak, `await` deyimi bitene kadar bileşenin oluşturulmasını engelleyecektir. Bir Sunucu Bileşeninden bir İstemci Bileşenine bir Promise geçirmek, Promise'in Sunucu Bileşeninin oluşturulmasını engellemesini önler.
 
 </DeepDive>
 

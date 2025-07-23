@@ -215,7 +215,7 @@ React uygulamanız "kök" bileşeninde başlar. Bu bileşen genel olarak yeni bi
 
 Çoğu React uygulaması baştan aşağı bileşenleri kullanır. Bu, bileşenleri yalnızca butonlar gibi yeniden kullanılabilir parçalar için değil, aynı zamanda kenar çubukları, listeler ve hatta sayfanın bütünü için de kullanabileceğiniz anlamına gelir! Bileşenler, bazıları yalnızca bir defa kullanılsa bile kullanıcı arayüzü kodunu ve biçimlendirmeyi düzenlemenin kullanışlı bir yoludur.
 
-[React tabanlı framework'ler](/learn/start-a-new-react-project) bunu bir adım ileri götürürler. Boş bir HTML sayfası kullanmak ve React'in sayfayı JavaScript ile kontrol etmesine "izin vermek" yerine, bu framework'ler *aynı zamanda* React bileşenlerinizden otomatik olarak HTML üretirler. Bu, JavaScript kodu yüklenmeden önce bazı içerikleri kullanıcıya göstermenize izin verir.
+[React tabanlı framework'ler](/learn/creating-a-react-app) bunu bir adım daha ileri götürür. Boş bir HTML dosyası kullanmak ve React'in sayfayı JavaScript ile “ele almasına” izin vermek yerine, React bileşenlerinizden otomatik olarak HTML *de* oluştururlar. Bu sayede uygulamanız, JavaScript kodu yüklenmeden önce bazı içerikleri gösterebilir.
 
 Yine de pek çok site, React'i sadece [halihazırda olan HTML sayfalarına etkileşim eklemek için](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) kullanır. Sayfanın tamamı için tek bir tane yerine birçok kök bileşeni vardır. İhtiyacınız olan kadar çok veya az React kullanabilirsiniz.
 

@@ -20,11 +20,11 @@ Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluş
 
 Kurulumu şu şekilde yapmanızı öneririz:
 
-1. **Uygulamanızın React kısmını oluşturun** [React tabanlı frameworklerden](/learn/start-a-new-react-project) birini kullanarak.
-2. **/some-app'i *temel yol* olarak belirtin** framework'ünüzün yapılandırmasında (işte nasıl yapılacağı: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. **Sunucunuzu veya bir proxy'yi yapılandırın** böylece `/some-app/` altındaki tüm istekler React uygulamanız tarafından işlenir.
+1. React tabanlı framework'lerden birini kullanarak **Uygulamanızın React kısmını oluşturun** [React tabanlı framework'ler](/learn/creating-a-react-app).
+2. **Çerçevenizin yapılandırmasında *temel yol*** olarak `/some-app` belirleyin (nasıl olduğu burada: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Sunucunuzu veya bir proxy'yi** `/some-app/' altındaki tüm isteklerin React uygulamanız tarafından işleneceği şekilde yapılandırın.
 
-Bu, uygulamanızın React bölümünün bu kütüphanelerde oluşturulmuş [en iyi uygulamalardan yararlanabilmesini sağlar](/learn/start-a-new-react-project#can-i-use-react-without-a-framework).
+Bu, uygulamanızın React kısmının bu çerçevelerde bulunan [en iyi uygulamalardan](/learn/creating-a-react-app#full-stack-frameworks) yararlanabilmesini sağlar.
 
 Birçok React tabanlı kütüphaneler, ön ve arka yüz geliştirmede kullanılabilir ve React uygulamanızın sunucudan yararlanmasına izin verir. Ancak, sunucuda JavaScript çalıştıramasanız veya istemeseniz bile aynı yaklaşımı kullanabilirsiniz. Bu durumda HTML/CSS/JS dışa aktarımını (Next.js için [`next export` çıktısı](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby için varsayılan) bunun yerine `/some-app/` konumunda sunun.
 
@@ -149,7 +149,7 @@ root.render(<NavigationBar />);
 
 `index.html'deki` orijinal HTML içeriğinin nasıl korunduğuna dikkat edin, ancak kendi `NavigationBar` React bileşeniniz artık HTML'nizden `<nav id="navigation">` içinde görünüyor. React bileşenlerini mevcut bir HTML sayfasında render etme hakkında daha fazla bilgi edinmek için [`createRoot` dökümantasyonunu](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) okuyun.
 
-Mevcut bir projede React'i kullandığınızda, küçük etkileşimli bileşenlerle (butonlar gibi) başlamak ve ardından, sonunda tüm sayfanız React ile oluşturulana kadar yavaş yavaş "yukarı doğru ilerlemeye" devam etmek yaygındır. Bu noktaya ulaşırsanız, React'ten en iyi şekilde yararlanmak için hemen ardından bir [bir React kütüphanesine](/learn/start-a-new-react-project) geçmenizi öneririz.
+Mevcut bir projede React'i benimsediğinizde, küçük etkileşimli bileşenlerle (butonlar gibi) başlamak ve sonunda tüm sayfanız React ile oluşturulana kadar kademeli olarak “yukarı doğru” ilerlemek yaygındır. Bu noktaya ulaşırsanız, React'ten en iyi şekilde yararlanmak için hemen ardından [bir React framework'üne](/learn/creating-a-react-app) geçmenizi öneririz.
 
 ## React Native'i mevcut bir yerel mobil uygulamada kullanma {/*using-react-native-in-an-existing-native-mobile-app*/}
 

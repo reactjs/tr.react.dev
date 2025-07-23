@@ -50,7 +50,7 @@ Bir portal yalnızca DOM düğümünün fiziksel yerleşimini değiştirir. Diğ
 
 * `domNode`: `document.getElementById()` tarafından döndürülen bir DOM düğümü. Düğüm halihazırda mevcut olmalıdır. Güncelleme sırasında farklı bir DOM düğümünün parametre olarak geçilmesi portal içeriğinin yeniden oluşturulmasına neden olacaktır.
 
-* **opsiyonel** `key`: Portalın [anahtarı](/learn/rendering-lists/#keeping-list-items-in-order-with-key) olarak kullanılacak benzersiz bir string veya sayı. 
+* **isteğe bağlı** `key`: Portalın [key](/learn/rendering-lists#keeping-list-items-in-order-with-key) olarak kullanılacak benzersiz bir dize veya sayı
 
 #### Dönüş değeri {/*returns*/}
 

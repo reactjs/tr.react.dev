@@ -36,7 +36,7 @@ Ekranda bir seçim kutusu göstermek için, [tarayıcının yerleşik bileşeni 
 
 #### Prop'lar {/*props*/}
 
-`<select>` tüm [ortak eleman prop'larını](/reference/react-dom/components/common#props) destekler.
+`<select>`, tüm [yaygın element özelliklerini](/reference/react-dom/components/common#common-props) destekler.
 
 `value` prop'u ileterek [seçim kutusunu kontrollü hale](#controlling-a-select-box-with-a-state-variable) getirebilirsiniz:
 

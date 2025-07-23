@@ -40,7 +40,7 @@ export default function RichTextEditor({ timestamp, text }) {
 }
 ```
 
-Bir Sunucu Bileşeninden `'use client'` ile işaretlenmiş bir dosya içe aktarıldığında, [uyumlu paketleyiciler](/learn/start-a-new-react-project#full-stack-frameworks) modül içe aktarımını sunucu tarafından çalıştırılan ve istemci tarafından çalıştırılan kod arasında bir sınır olarak değerlendirecektir.
+`'use client'` ile işaretlenmiş bir dosya, bir Server Component'ten import edildiğinde, [uyumlu paketleyiciler](/learn/creating-a-react-app#full-stack-frameworks) bu modül importunu sunucuda ve istemcide çalışan kod arasında bir sınır olarak değerlendirir.
 
 `RichTextEditor` bağımlılıkları olarak, `formatDate` ve `Button` da modüllerinin bir `'use client'` yönergesi içerip içermediğine bakılmaksızın istemcide değerlendirilecektir. Tek bir modülün sunucu kodundan içe aktarıldığında sunucuda, istemci kodundan içe aktarıldığında ise istemcide değerlendirilebileceğini unutmayın.
 

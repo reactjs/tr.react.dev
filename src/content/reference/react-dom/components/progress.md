@@ -30,7 +30,7 @@ Ekranda bir ilerleme göstergesi göstermek için [yerleşik tarayıcı bileşen
 
 #### Prop'lar {/*props*/}
 
-`<progress>` tüm [ortak eleman prop'larını](/reference/react-dom/components/common#props) destekler.
+`<progress>`, tüm [yaygın element özelliklerini](/reference/react-dom/components/common#common-props) destekler.
 
 Ek olarak, `<progress>` bu prop'ları destekler:
 

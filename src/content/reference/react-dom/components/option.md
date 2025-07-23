@@ -36,7 +36,7 @@ title: "<option>"
 
 #### Prop'lar {/*props*/}
 
-`<option>`, tüm [genel öğe özelliklerini](/reference/react-dom/components/common#props) destekler.
+`<option>`, tüm [yaygın element özelliklerini](/reference/react-dom/components/common#common-props) destekler.
 
 Ayrıca, `<option>` bu özellikleri de destekler:
 
