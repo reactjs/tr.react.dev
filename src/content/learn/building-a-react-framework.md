@@ -4,7 +4,7 @@ title: Building a React Framework
 
 <Intro>
 
-If your app has constraints not well-served by existing frameworks, or you prefer to solve these problems yourself, you can build your own framework.
+Uygulamanızın mevcut framework'ler tarafından iyi karşılanmayan kısıtlamaları varsa veya bu sorunları kendiniz çözmeyi tercih ediyorsanız, kendi framework'ünüzü oluşturabilirsiniz.
 
 </Intro>
 
