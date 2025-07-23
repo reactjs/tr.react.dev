@@ -26,11 +26,7 @@ Efektlere ihtiyaç duymadığınız iki yaygın durum vardır:
 * **Verileri işlemek üzere dönüştürmek için Efektlere ihtiyacınız yoktur.** Örneğin, bir listeyi göstermeden önce o listeyi filtrelemek istediğinizi varsayalım. Liste değiştiğinde bir state değişkenini güncelleyen bir Efekt yazmak cazip hissettirebilir. Ancak, bu yöntem verimsizdir. State'i güncellediğinizde, React ilk olarak ekranda ne gözükeceğini hesaplamak için öncelikle bileşen fonksiyonlarınızı çağırır. Daha sonra React ekranı güncelleyerek bu değişiklikleri DOM'a ["işleyecektir"](/learn/render-and-commit). Ardından React Efektlerinizi çalıştıracaktır. Efektiniz *ayrıca* state'i anında güncelliyorsa, bu tüm süreci yeniden sıfırdan başlatır! Gereksiz render geçişlerini önlemek için bileşenlerinizin en üst düzeyindeki tüm verileri dönüştürün. Bu kod propslarınız veya stateleriniz değiştiğinde otomatik olarak yeniden çalışacaktır.
 * **Kulanıcı olaylarını yönetmek için Efektlere ihtiyacınız yoktur.** Örneğin, `/api/buy` POST isteği göndermek ve kullanıcı bir ürün satın aldığında bir bildirim göstermek istediğinizi varsayalım. Satın Al buton olay yöneticisi içerisinde, kesinlikle ne olacağını bilirsiniz. Efekt çalıştığında, kullanınıcının *ne* yaptığını bilemezsiniz (örneğin, hangi butona tıklandığını). Bu sebeple, genellikle kullanıcı olaylarını karşılık gelen olay yöneticileri içerisinde ele alacaksınız.
 
-<<<<<<< HEAD
-Dış sistemlerle [senkronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) olmak için Efektleri *kullanmanız* gerekmektedir. Örneğin, bir jQuery bileşenini React state'i ile senkronize eden bir Efekt yazabilirsiniz. Ayrıca Efektler ile data çekebilirsiniz: Örneğin, mevcut arama sorgusuyla arama sonuçlarını senkronize edebilirsiniz. Unutmayın ki modern [frameworkler](/learn/start-a-new-react-project#production-grade-react-frameworks) bileşenlerinizde doğrudan Efektler yazmak yerine daha verimli ve entegre veri çekme mekanizmaları sunarlar.
-=======
-You *do* need Effects to [synchronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) with external systems. For example, you can write an Effect that keeps a jQuery widget synchronized with the React state. You can also fetch data with Effects: for example, you can synchronize the search results with the current search query. Keep in mind that modern [frameworks](/learn/creating-a-react-app#full-stack-frameworks) provide more efficient built-in data fetching mechanisms than writing Effects directly in your components.
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Harici sistemlerle [senkronize olmak](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) için *gerçekten* Effects kullanmanız gerekir. Örneğin, bir jQuery bileşenini React state’iyle senkronize tutan bir Effect yazabilirsiniz. Ayrıca veri fetch etmek için de Effects kullanabilirsiniz: örneğin, arama sonuçlarını mevcut arama sorgusuyla senkronize edebilirsiniz. Unutmayın ki modern [framework'ler](/learn/creating-a-react-app#full-stack-frameworks), bileşenlerinizde doğrudan Effect yazmaktan daha verimli yerleşik veri fetch mekanizmaları sunar.
 
 Doğru sezgiyi kazanmanıza yardımcı olmak için, hadi bazı yaygın somut örneklere göz atalım!
 
@@ -757,11 +753,7 @@ Bu, Efektiniz veri çektiğinde, en son istenen isteğin haricindeki tüm yanıt
 
 Race conditionları yönetmek, veri çekme işlemini uygularken karşılaşılan tek zorluk değildir. Ayrıca yanıtların önbelleğe alınması (kullanıcının Back butonuna tıkladığında önceki ekranı anında görebilmesi için), sunucuda veri çekme işleminin nasıl gerçekleştirileceği (ilk sunucu tarafından oluşturulan HTML'in spinner yerine çekilen içeriği içermesi için) ve ağ gecikmelerinden kaçınma yöntemleri (bir alt elemanın, üst elemanların tamamlanmasını beklemeksizin veri çekme işlemi yapabilmesi) gibi düşüncelerde bulunmanız gerekebilir.
 
-<<<<<<< HEAD
-**Bu sorunlar sadece React için değil, herhangi bir UI kütüphanesi için geçerlidir. Bunları çözmek kolay değildir, bu yüzden modern [frameworkler](/learn/start-a-new-react-project#production-grade-react-frameworks) verileri Efektlerin içerisinden çekmek yerine daha verimli yerleşik veri çekme mekanizmaları sunar.**
-=======
-**These issues apply to any UI library, not just React. Solving them is not trivial, which is why modern [frameworks](/learn/creating-a-react-app#full-stack-frameworks) provide more efficient built-in data fetching mechanisms than fetching data in Effects.**
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+**Bu sorunlar yalnızca React için değil, tüm UI kütüphaneleri için geçerlidir. Bunları çözmek kolay değildir; bu yüzden modern [framework'ler](/learn/creating-a-react-app#full-stack-frameworks), veriyi Effects içinde fetch etmekten daha verimli yerleşik veri fetch mekanizmaları sunar.**
 
 Eğer bir framework kullanmadıysanız (ve kendiniz oluşturmak istemiyorsanız) ama Efektlerden veri çekme işlemini daha kolay şekilde yapmak istiyorsanız, kendi veri çekme mantığınızı bu örnekteki gibi özel bir Hook'a çevirin:
 

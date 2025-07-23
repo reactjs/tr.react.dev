@@ -132,11 +132,7 @@ function useCSS(rule) {
 
 #### Bu yöntem, render işlemi veya useLayoutEffect sırasında stil eklemekten nasıl daha iyidir? {/*how-is-this-better-than-injecting-styles-during-rendering-or-uselayouteffect*/}
 
-<<<<<<< HEAD
-Render işlemi sırasında stiller eklerseniz ve React bir [kesintisiz güncelleme](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) işlemi işliyorsa tarayıcı her karede bileşen ağacını yeniden oluştururken stilleri tekrar tekrar hesaplayacaktır ve bu **aşırı yavaş** olabilir.
-=======
-If you insert styles during rendering and React is processing a [non-blocking update,](/reference/react/useTransition#perform-non-blocking-updates-with-actions) the browser will recalculate the styles every single frame while rendering a component tree, which can be **extremely slow.**
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Eğer render sırasında stiller ekliyorsanız ve React bir [bloklamayan güncellemeyi](/reference/react/useTransition#perform-non-blocking-updates-with-actions) işliyorsa, tarayıcı bileşen ağacı render edilirken her karede stilleri tekrar hesaplayacaktır ki bu **son derece yavaş olabilir.**
 
 `useInsertionEffect` hooku stilleri eklemek için [`useLayoutEffect`](/reference/react/useLayoutEffect) veya [`useEffect`](/reference/react/useEffect) hookundan daha iyidir çünkü diğer Efektler bileşenlerinizde çalışırken `<style>` etiketleri zaten eklenmiş olur. Aksi takdirde, layout hesaplamaları normal Efekt'lerde güncel olmayan stiller nedeniyle yanlış olur.
 

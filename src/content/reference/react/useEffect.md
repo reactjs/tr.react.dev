@@ -894,11 +894,7 @@ Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yö
 
 ### Effect'ler ile veri getirme (fetching) {/*fetching-data-with-effects*/}
 
-<<<<<<< HEAD
-Bileşeninize veri getirmek için Effect'i kullanabilirsiniz. [Eğer bir framework kullanıyorsanız,](/learn/start-a-new-react-project#production-grade-react-frameworks) framework'ün veri getirme mekanizmasını kullanmanın Effect'i manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
-=======
-You can use an Effect to fetch data for your component. Note that [if you use a framework,](/learn/creating-a-react-app#full-stack-frameworks) using your framework's data fetching mechanism will be a lot more efficient than writing Effects manually.
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Bileşeniniz için veri almak üzere bir Efekt kullanabilirsiniz. [Bir framework kullanıyorsanız,](/learn/creating-a-react-app#full-stack-frameworks) framework'ünüzün veri getirme mekanizmasını kullanmanın, Efektleri manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
 
 Eğer manuel olarak Effect ile veri getirmek istiyorsanız, kodunuz şöyle görünebilir:
 
@@ -1050,13 +1046,8 @@ Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı 
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-<<<<<<< HEAD
-- **Eğer bir [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) kullanırsanız, framework'ün yerleşik veri getirme mekanizmasını kullanın.** Modern React framework'leri verimli veri getirme mekanizmalarını entegre etmişlerdir ve yukarıdaki tehlikelerden uzak dururlar.
-- **Aksi halde, kullanıcı taraflı bir önbellek çözümü kullanmayı ya da kendiniz oluşturmayı düşünün.** Popüler açık kaynak çözümleri arasında [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) vardır. Kendi çözümlerinizi de oluşturabilirsiniz. Kendi çözümünüzü uygularsanız, arka planda Effect'leri kullanır ancak aynı zamanda istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak) gibi mantıkları da ekleyebilirsiniz.
-=======
-- **If you use a [framework](/learn/creating-a-react-app#full-stack-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood but also add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+- **Eğer bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, onun yerleşik veri getirme mekanizmasını kullanın.** Modern React framework’leri, verimli ve yukarıda belirtilen tuzaklardan muzdarip olmayan entegre veri getirme mekanizmalarına sahiptir.  
+- **Aksi takdirde, istemci taraflı bir cache kullanmayı veya oluşturmayı düşünebilirsiniz.** Popüler açık kaynak çözümler arasında [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) bulunmaktadır. Kendi çözümünüzü de oluşturabilirsiniz; bu durumda kaputun altındaki *Effects*’i kullanır, ancak istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (veriyi önceden yükleyerek veya veri gereksinimlerini rotalara taşıyarak) için mantık eklersiniz.
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
 
@@ -1740,11 +1731,7 @@ function Page({ url, shoppingCart }) {
 
 ### Sunucu ve kullanıcıda farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
-<<<<<<< HEAD
-Uygulamanız sunucu render etme kullanıyorsa (ya [direkt olarak](/reference/react-dom/server) ya da [framework kullanarak](/learn/start-a-new-react-project#production-grade-react-frameworks)), bileşeniniz iki farklı ortamda render edilecektir. Sunucuda, başlangıç HTML'ini oluşturmak için render edecektir. Kullanıcıda, React olay yönetecilerini HTML'e eklemek için render etme kodunu yeniden çalıştıracaktır. Bu nedenle, [hidrasyon](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) işleminin çalışması için, ilk render çıktınızın kullanıcı ve sunucuda aynı olması gerekir.
-=======
-If your app uses server rendering (either [directly](/reference/react-dom/server) or via a [framework](/learn/creating-a-react-app#full-stack-frameworks)), your component will render in two different environments. On the server, it will render to produce the initial HTML. On the client, React will run the rendering code again so that it can attach your event handlers to that HTML. This is why, for [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) to work, your initial render output must be identical on the client and the server.
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Eğer uygulamanız sunucu tarafı render (ya [doğrudan](/reference/react-dom/server) ya da bir [framework](/learn/creating-a-react-app#full-stack-frameworks) aracılığıyla) kullanıyorsa, bileşeniniz iki farklı ortamda render edilir. Sunucuda, ilk HTML’i üretmek için render edilir. İstemcide ise, React event handler’larınızı o HTML’e bağlayabilmek için render kodunu tekrar çalıştırır. Bu yüzden, [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) çalışması için, başlangıç render çıktınızın istemci ve sunucuda tamamen aynı olması gerekir.
 
 Bazı nadir durumlarda, kullanıcıda farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 

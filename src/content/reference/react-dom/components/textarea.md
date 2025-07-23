@@ -30,11 +30,7 @@ Ekranda bir metin alanı göstermek için, [tarayıcıya yerleşik `<textarea>`]
 
 #### Prop'lar {/*props*/}
 
-<<<<<<< HEAD
-`<textarea>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#props) destekler.
-=======
-`<textarea>` supports all [common element props.](/reference/react-dom/components/common#common-props)
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+`<textarea>` tüm [ortak öğe proplarını](/reference/react-dom/components/common#common-props) destekler
 
 `value` propu ileterek [metin alanını kontrollü hale](#controlling-a-text-area-with-a-state-variable) getirebilirsiniz :
 

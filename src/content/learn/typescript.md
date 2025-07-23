@@ -11,27 +11,16 @@ TypeScript, JavaScript kod tabanlarına tip tanımları eklemenin popüler bir y
 
 <YouWillLearn>
 
-<<<<<<< HEAD
-* [React Bileşenleri ile TypeScript](/learn/typescript#typescript-with-react-components)
-* [Hook'larda Tip Kullanımına Örnekler](/learn/typescript#example-hooks)
-* [`@types/react`dan Yaygın Tipler](/learn/typescript/#useful-types)
-* [Ek Kaynaklar](/learn/typescript/#further-learning)
-=======
-* [TypeScript with React Components](/learn/typescript#typescript-with-react-components)
-* [Examples of typing with Hooks](/learn/typescript#example-hooks)
-* [Common types from `@types/react`](/learn/typescript#useful-types)
-* [Further learning locations](/learn/typescript#further-learning)
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+* [React Bileşenlerinde TypeScript kullanımı](/learn/typescript#typescript-with-react-components)
+* [Hook'larla tip tanımlama örnekleri](/learn/typescript#example-hooks)
+* [`@types/react` içindeki yaygın türler](/learn/typescript#useful-types)
+* [İleri seviye öğrenme kaynakları](/learn/typescript#further-learning)
 
 </YouWillLearn>
 
 ## Kurulum {/*installation*/}
 
-<<<<<<< HEAD
-Tüm [canlı ortam düzeyinde React framework’leri](/learn/start-a-new-react-project#production-grade-react-frameworks) TypeScript kullanımı için destek sunar. Kurulum için framework’e özgü kılavuzu takip edin:
-=======
-All [production-grade React frameworks](/learn/creating-a-react-app#full-stack-frameworks) offer support for using TypeScript. Follow the framework specific guide for installation:
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Tüm [üretim düzeyindeki React framework'leri](/learn/creating-a-react-app#full-stack-frameworks), TypeScript kullanımını destekler. Kurulum için framework’e özel kılavuzu takip edin:
 
 - [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/typescript)
 - [Remix](https://remix.run/docs/en/1.19.2/guides/typescript)

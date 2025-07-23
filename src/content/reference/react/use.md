@@ -312,11 +312,7 @@ export default async function App() {
 }
 ```
 
-<<<<<<< HEAD
-Ancak [Sunucu Bileşeni](/reference/react/components#server-components) içerisinde `await` kullanımı, `await` ifadesi tamamlanana kadar oluşturma işlemini engeller. Sunucu Bileşeni'nden İstemci Bileşeni'ne Promise geçirmek Sunucu Bileşeni içerisinde Promise kaynaklı olan oluşturma işleminin engellenmesini önler.
-=======
-But using `await` in a [Server Component](/reference/rsc/server-components) will block its rendering until the `await` statement is finished. Passing a Promise from a Server Component to a Client Component prevents the Promise from blocking the rendering of the Server Component.
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Ancak bir [Sunucu Bileşeninde](/reference/rsc/server-components) `await` kullanmak, `await` deyimi bitene kadar bileşenin oluşturulmasını engelleyecektir. Bir Sunucu Bileşeninden bir İstemci Bileşenine bir Promise geçirmek, Promise'in Sunucu Bileşeninin oluşturulmasını engellemesini önler.
 
 </DeepDive>
 

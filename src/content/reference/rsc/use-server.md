@@ -96,11 +96,7 @@ Bkz. [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueVa
 
 Desteklenen serileştirilebilir dönüş değerleri, bir sınır İstemci Bileşeni için [serileştirilebilir proplar](/reference/rsc/use-client#passing-props-from-server-to-client-components) ile aynıdır.
 
-<<<<<<< HEAD
-## Kullanım {/*usage*/}
-=======
-Supported serializable return values are the same as [serializable props](/reference/rsc/use-client#serializable-types) for a boundary Client Component.
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+Desteklenen serileştirilebilir dönüş değerleri, bir sınır Client Component için [serileştirilebilir props](/reference/rsc/use-client#serializable-types) ile aynıdır.
 
 ### Formlarda Sunucu Eylemleri {/*server-actions-in-forms*/}
 

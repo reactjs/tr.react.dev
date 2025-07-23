@@ -915,11 +915,7 @@ export default function Form() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-[DOM'u ref'lerle manipüle etme](/learn/manipulating-the-dom-with-refs) hakkında daha fazlasını okuyun ve [daha fazla örneğe göz atın.](/reference/react/useRef#examples-dom)
-=======
-Read more about [manipulating DOM with refs](/learn/manipulating-the-dom-with-refs) and [check out more examples.](/reference/react/useRef#usage)
->>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
+[Refs ile DOM manipülasyonu](/learn/manipulating-the-dom-with-refs) hakkında daha fazla bilgi edinin ve [daha fazla örneğe göz atın.](/reference/react/useRef#usage)
 
 Daha ileri düzey kullanım durumları için `ref` niteliği ayrıca bir [callback fonksiyonu](#ref-callback) da kabul eder.
 
