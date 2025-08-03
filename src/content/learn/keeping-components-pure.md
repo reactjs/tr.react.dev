@@ -144,7 +144,7 @@ export default function TeaSet() {
 
 Artık bileşeniniz saf bir durumda, çünkü döndürdüğü JSX yalnızca `misafir` prop’una bağlı.
 
- Genel olarak, bileşenlerinizin belirli bir sırada işlenmesiniz beklememelisiniz. <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>'i, <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>'ten önce veya sonra çağırmanız farketmez: Her iki formül de birbirinden bağımsız olarak çözülecektir. Aynı şekilde, her bileşen yalnızca "kendi için düşünmeli" ve render işlemi sırasında diğer bileşenlerle koordine etmeye veya onlara bağımlı olmaya çalışmamalıdır. Render işlemi bir okul sınavı gibi: her bileşen kendi JSX'ini hesaplamalıdır!
+ Genel olarak, bileşenlerinizin belirli bir sırada işlenmesini beklememelisiniz. <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>'i, <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>'ten önce veya sonra çağırmanız farketmez: Her iki formül de birbirinden bağımsız olarak çözülecektir. Aynı şekilde, her bileşen yalnızca "kendi için düşünmeli" ve render işlemi sırasında diğer bileşenlerle koordine etmeye veya onlara bağımlı olmaya çalışmamalıdır. Render işlemi bir okul sınavı gibi: her bileşen kendi JSX'ini hesaplamalıdır!
 
 <DeepDive>
 
