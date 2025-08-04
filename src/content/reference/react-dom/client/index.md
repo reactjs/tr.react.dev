@@ -4,7 +4,11 @@ title: İstemci React DOM API'leri
 
 <Intro>
 
+<<<<<<< HEAD
 `react-dom/client` API'leri, React bileşenlerini istemci tarafında (tarayıcıda) render etmenizi sağlar. Bu API'ler genellikle uygulamanızın en üst seviyesinde React ağacınızı başlatmak için kullanılır. Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) bunları sizin için çağırabilir. Çoğu bileşeninizin bunları import etmesi veya kullanması gerekmez.
+=======
+The `react-dom/client` APIs let you render React components on the client (in the browser). These APIs are typically used at the top level of your app to initialize your React tree. A [framework](/learn/start-a-new-react-project#full-stack-frameworks) may call them for you. Most of your components don't need to import or use them.
+>>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 </Intro>
 
