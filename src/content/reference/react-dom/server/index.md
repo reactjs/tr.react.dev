@@ -4,7 +4,7 @@ title: Sunucu React DOM API'leri
 
 <Intro>
 
-`react-dom/server` API'leri, React bileşenlerini sunucu tarafında HTML olarak render etmenizi sağlar. Bu API'ler, uygulamanızın en üst seviyesinde ilk HTML'i oluşturmak için sadece sunucuda kullanılır. Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) bunları sizin için çağırabilir. Çoğu bileşeninizin bunları import etmesi veya kullanması gerekmez.
+`react-dom/server` API’leri, React bileşenlerini sunucu tarafında HTML olarak render etmenizi sağlar. Bu API’ler, uygulamanızın en üst seviyesinde ilk HTML’i oluşturmak için sadece sunucuda kullanılır. Bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) bunları sizin için çağırabilir. Çoğu bileşeninizin bunları import etmesi veya kullanması gerekmez.
 
 </Intro>
 

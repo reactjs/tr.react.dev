@@ -29,7 +29,15 @@ React-dom, yalnızca web uygulamaları (tarayıcı DOM ortamında çalışan) i�
 * [İstemci APIs](/reference/react-dom/client) - `react-dom/client` API'leri, React bileşenlerini istemcide (tarayıcıda) oluşturmanızı sağlar.
 * [Sunucu APIs](/reference/react-dom/server) - `react-dom/server` API'leri React bileşenlerini sunucuda HTML'ye dönüştürmenizi sağlar.
 
-## React Kuralları {/*rules-of-react*/}
+## React Compiler {/*react-compiler*/}
+
+React Compiler, React bileşenlerinizi ve değerlerinizi otomatik olarak **memoize** eden bir derleme zamanı optimizasyon aracıdır:
+
+* [Configuration](/reference/react-compiler/configuration) - React Compiler için yapılandırma seçenekleri.
+* [Directives](/reference/react-compiler/directives) - Derlemeyi kontrol etmek için fonksiyon seviyesinde direktifler.
+* [Compiling Libraries](/reference/react-compiler/compiling-libraries) - Önceden derlenmiş kütüphane kodu dağıtımı rehberi.
+
+## Rules of React {/*rules-of-react*/}
 
 React, kalıpların anlaşılması kolay ve yüksek kaliteli uygulamalar üretecek şekilde nasıl ifade edileceğine ilişkin deyimlere — veya kurallara — sahiptir:
 

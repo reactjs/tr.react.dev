@@ -894,7 +894,7 @@ Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yö
 
 ### Effect'ler ile veri getirme (fetching) {/*fetching-data-with-effects*/}
 
-Bileşeniniz için veri almak üzere bir Efekt kullanabilirsiniz. [Bir framework kullanıyorsanız,](/learn/creating-a-react-app#full-stack-frameworks) framework'ünüzün veri getirme mekanizmasını kullanmanın, Efektleri manuel olarak yazmaktan çok daha verimli olacağını unutmayın.
+Bileşeniniz için veri fetch etmek amacıyla bir Effect kullanabilirsiniz. Ancak, [eğer bir framework kullanıyorsanız,](/learn/start-a-new-react-project#full-stack-frameworks) framework’ünüzün veri getirme mekanizmasını kullanmak, Effects’i manuel yazmaktan çok daha verimli olacaktır.
 
 Eğer manuel olarak Effect ile veri getirmek istiyorsanız, kodunuz şöyle görünebilir:
 
@@ -1046,8 +1046,8 @@ Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı 
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **Eğer bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, onun yerleşik veri getirme mekanizmasını kullanın.** Modern React framework’leri, verimli ve yukarıda belirtilen tuzaklardan muzdarip olmayan entegre veri getirme mekanizmalarına sahiptir.  
-- **Aksi takdirde, istemci taraflı bir cache kullanmayı veya oluşturmayı düşünebilirsiniz.** Popüler açık kaynak çözümler arasında [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) bulunmaktadır. Kendi çözümünüzü de oluşturabilirsiniz; bu durumda kaputun altındaki *Effects*’i kullanır, ancak istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (veriyi önceden yükleyerek veya veri gereksinimlerini rotalara taşıyarak) için mantık eklersiniz.
+- **Eğer bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) kullanıyorsanız, onun yerleşik veri getirme mekanizmasını kullanın.** Modern React framework’leri, verimli ve yukarıda belirtilen sorunlardan etkilenmeyen entegre veri getirme mekanizmalarına sahiptir.  
+- **Aksi takdirde, istemci taraflı bir cache kullanmayı veya oluşturmayı düşünebilirsiniz.** Popüler açık kaynak çözümler arasında [React Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) bulunmaktadır. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altındaki *Effects*’i kullanır, ancak istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara taşıyarak) için mantık eklersiniz.
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
 
@@ -1731,7 +1731,7 @@ function Page({ url, shoppingCart }) {
 
 ### Sunucu ve kullanıcıda farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
-Eğer uygulamanız sunucu tarafı render (ya [doğrudan](/reference/react-dom/server) ya da bir [framework](/learn/creating-a-react-app#full-stack-frameworks) aracılığıyla) kullanıyorsa, bileşeniniz iki farklı ortamda render edilir. Sunucuda, ilk HTML’i üretmek için render edilir. İstemcide ise, React event handler’larınızı o HTML’e bağlayabilmek için render kodunu tekrar çalıştırır. Bu yüzden, [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) çalışması için, başlangıç render çıktınızın istemci ve sunucuda tamamen aynı olması gerekir.
+Eğer uygulamanız sunucu tarafı render (ya [doğrudan](/reference/react-dom/server) ya da bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) aracılığıyla) kullanıyorsa, bileşeniniz iki farklı ortamda render edilir. Sunucuda, ilk HTML’i üretmek için render edilir. İstemcide ise React, event handler’larınızı o HTML’e bağlayabilmek için render kodunu tekrar çalıştırır. Bu nedenle, [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) çalışabilmesi için başlangıç render çıktınız istemci ve sunucuda tamamen aynı olmalıdır.
 
 Bazı nadir durumlarda, kullanıcıda farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 

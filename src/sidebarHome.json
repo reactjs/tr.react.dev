@@ -15,6 +15,10 @@
       "path": "/learn/installation"
     },
     {
+      "title": "React Compiler",
+      "path": "/learn/react-compiler"
+    },
+    {
       "hasSectionHeader": true,
       "sectionHeader": "REACT ÖĞRENİN"
     },
@@ -76,7 +80,23 @@
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "DAHİL OLUN"
+      "sectionHeader": "REACT COMPILER API"
+    },
+    {
+      "title": "Yapılandırma",
+      "path": "/reference/react-compiler/configuration"
+    },
+    {
+      "title": "Direktifler",
+      "path": "/reference/react-compiler/directives"
+    },
+    {
+      "title": "Kütüphaneleri Derleme",
+      "path": "/reference/react-compiler/compiling-libraries"
+    },
+    {
+      "hasSectionHeader": true,
+      "sectionHeader": "GET INVOLVED"
     },
     {
       "title": "React Topluluğu",

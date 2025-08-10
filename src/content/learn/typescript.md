@@ -20,7 +20,7 @@ TypeScript, JavaScript kod tabanlarına tip tanımları eklemenin popüler bir y
 
 ## Kurulum {/*installation*/}
 
-Tüm [üretim düzeyindeki React framework'leri](/learn/creating-a-react-app#full-stack-frameworks), TypeScript kullanımını destekler. Kurulum için framework’e özel kılavuzu takip edin:
+Tüm [üretim düzeyindeki React framework'leri](/learn/start-a-new-react-project#full-stack-frameworks), TypeScript kullanımını destekler. Kurulum için framework’e özel kılavuzu takip edin:
 
 - [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/typescript)
 - [Remix](https://remix.run/docs/en/1.19.2/guides/typescript)
@@ -126,7 +126,9 @@ Bileşeninizin props’larını tanımlayan tip, ihtiyaç duyduğunuz kadar basi
 
 `@types/react`'den gelen tip tanımlamaları, yerleşik Hooks için tipleri içerir, böylece bileşenlerinizde ek bir ayar yapmadan kullanabilirsiniz. Bu tipler, bileşeninizde yazdığınız kodu dikkate alacak şekilde tasarlanmıştır, bu nedenle çoğu zaman [çıkarılan tipler](https://www.typescriptlang.org/docs/handbook/type-inference.html)alırsınız ve ideal olarak tipleri sağlama detaylarıyla ilgilenmeniz gerekmez.
 
-Ancak,Hooklar için tipleri nasıl sağlayacağımıza dair birkaç örneğe bakabiliriz.
+`@types/react` paketindeki tip tanımlamaları, yerleşik Hook’lar için tipleri içerir; bu nedenle, bileşenlerinizde ek bir kurulum yapmadan bunları kullanabilirsiniz. Bu tipler, bileşeninizde yazdığınız kodu dikkate alacak şekilde tasarlanmıştır; bu sayede çoğu zaman [çıkarımsal tipler](https://www.typescriptlang.org/docs/handbook/type-inference.html) elde edersiniz ve ideal olarak tipleri manuel olarak belirtmenize gerek kalmaz.
+
+Yine de, Hook’lar için tip sağlamaya dair birkaç örneğe bakabiliriz.
 
 ### `useState` {/*typing-usestate*/}
 
@@ -139,8 +141,8 @@ const [enabled, setEnabled] = useState(false);
 
 Bu, `enabled` değişkenine `boolean` tipini atayacak ve `setEnabled` fonksiyonu ya bir `boolean` argümanı ya da bir boolean döndüren bir fonksiyon alacaktır. Eğer duruma açıkça bir tip sağlamak istiyorsanız, bunu useState çağrısına bir tip argümanı vererek yapabilirsiniz:
 
-```ts 
-// Tipi açıkça "boolean" olarak ayarlayın
+```ts
+// Türü açıkça “boolean” olarak ayarlayın
 const [enabled, setEnabled] = useState<boolean>(false);
 ```
 
@@ -174,7 +176,7 @@ const [requestState, setRequestState] = useState<RequestState>({ status: 'idle' 
 import {useReducer} from 'react';
 
 interface State {
-   count: number 
+   count: number
 };
 
 type CounterAction =
@@ -282,7 +284,7 @@ export default App = AppTSX;
 
 </Sandpack>
 
-Bu teknik, anlamlı bir varsayılan değeriniz olduğunda işe yarar; ancak bazen varsayılan değeriniz olmadığında `null` mantıklı gelebilir. Ancak, tip sisteminin kodunuzu anlaması için, `createContext` üzerinde açıkça `ContextShape | null` ayarlamanız gerekir.
+Bu teknik, mantıklı bir varsayılan değeriniz olduğunda işe yarar — ancak bazen böyle bir değeriniz olmayabilir ve bu durumlarda `null` varsayılan değer olarak mantıklı görünebilir. Ancak, tip sisteminin kodunuzu anlayabilmesi için, `createContext` üzerinde açıkça `ContextShape | null` belirtmeniz gerekir.
 
 Bu, bağlam tüketicileri için tipte `| null`u ortadan kaldırmanız gerektiği sorununu doğurur. Önerimiz, Hook’un varlığını çalışma zamanında kontrol etmesi ve mevcut değilse bir hata fırlatmasıdır:
 
@@ -327,7 +329,14 @@ function MyComponent() {
 
 ### `useMemo` {/*typing-usememo*/}
 
-[`useMemo`](/reference/react/useMemo) Hook’u, bir fonksiyon çağrısından hafızada tutulan bir değeri oluşturur veya yeniden erişir ve yalnızca ikinci parametre olarak geçirilen bağımlılıklar değiştiğinde fonksiyonu tekrar çalıştırır. Hook’un çağrılmasının sonucu, ilk parametredeki fonksiyondan dönen değerden çıkarılır. Hook’a bir tip argümanı sağlayarak daha açık olabilirsiniz.
+<Note>
+
+[React Compiler](/learn/react-compiler) değerleri ve işlevleri otomatik olarak hafızaya alır ve manuel `useMemo` çağrılarına olan ihtiyacı azaltır. Derleyiciyi kullanarak hafızaya almayı otomatik olarak gerçekleştirebilirsiniz.
+
+</Note>
+
+[`useMemo`](/reference/react/useMemo) Hook’u, bir fonksiyon çağrısından elde edilen **önbelleğe alınmış** (*memorized*) bir değeri **oluşturur veya yeniden erişir** ve yalnızca ikinci parametre olarak verilen bağımlılıklar (**dependencies**) değiştiğinde fonksiyonu yeniden çalıştırır. Hook’un dönüş değeri, ilk parametredeki fonksiyonun dönüş değerinden **türetilir** (*inferred*). Daha net olmak için Hook’a bir **type argument** sağlayabilirsiniz.
+
 ```ts
 // visibleTodos’un tipi, filterTodos’un dönen değerinden çıkarılır.
 const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
@@ -335,7 +344,14 @@ const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
 
 ### `useCallback` {/*typing-usecallback*/}
 
-[`useCallback`](/reference/react/useCallback) ikinci parametre olarak geçirilen bağımlılıklar aynı olduğu sürece bir fonksiyona kararlı bir referans sağlar. `useMemo` gibi, fonksiyonun tipi ilk parametredeki fonksiyondan dönen değerden çıkarılır ve Hook’a bir tip argümanı sağlayarak daha açık olabilirsiniz.
+<Note>
+
+[React Compiler](/learn/react-compiler) otomatik olarak değerleri ve fonksiyonları **memoizes** ederek manuel `useCallback` çağrılarına olan ihtiyacı azaltır. Memoizasyonu otomatik olarak yönetmek için compiler’ı kullanabilirsiniz.
+
+</Note>
+
+[`useCallback`](/reference/react/useCallback) ikinci parametreye verilen bağımlılıklar aynı kaldığı sürece bir fonksiyona sabit bir referans sağlar. `useMemo` gibi, fonksiyonun tipi ilk parametredeki fonksiyonun dönüş değerinden türetilir ve Hook’a bir tip argümanı sağlayarak daha açık olabilirsiniz.
+
 
 ```ts
 const handleClick = useCallback(() => {
@@ -345,7 +361,7 @@ const handleClick = useCallback(() => {
 
 TypeScript strict modunda çalışırken, `useCallback` kullanırken geri çağırma fonksiyonunuzun parametreleri için tip eklemeniz gerekir. Bunun nedeni, geri çağırma fonksiyonunun tipinin dönen değerden çıkarılmasıdır ve parametreler olmadan tip tam olarak anlaşılamaz.
 
-Kod stili tercihlerine bağlı olarak, geri çağırmayı tanımlarken aynı anda olay işleyici için tip sağlamak amacıyla React tiplerinden `*EventHandler` fonksiyonlarını kullanabilirsiniz:
+Kod stil tercihinize bağlı olarak, callback’i tanımlarken aynı zamanda event handler için tipi belirtmek üzere React tiplerinden `*EventHandler` fonksiyonlarını kullanabilirsiniz:
 
 ```ts
 import { useState, useCallback } from 'react';
@@ -356,7 +372,7 @@ export default function Form() {
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
     setValue(event.currentTarget.value);
   }, [setValue])
-  
+
   return (
     <>
       <input value={value} onChange={handleChange} />
@@ -428,7 +444,7 @@ interface ModalRendererProps {
 }
 ```
 
-Dikkat edilmesi gereken bir nokta, TypeScript’i kullanarak children’ın belirli bir tipteki JSX öğeleri olduğunu tanımlayamayacağınızdır; bu nedenle yalnızca `<li>` children’ları kabul eden bir bileşeni tanımlamak için tip sistemini kullanamazsınız.
+Not: Çocukların belirli bir JSX türü olduğunu TypeScript ile tanımlayamazsınız; bu nedenle, sadece `<li>` çocuklarını kabul eden bir bileşeni tip sistemiyle tanımlayamazsınız.
 
 `React.ReactNode` ve `React.ReactElement` örneklerini tip denetleyicisi ile birlikte [`bu TypeScript playground`](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSB6CxYmAOmXRgDkIATJOdNJMGAZzgwAFpxAR+8YADswAVwGkZMJFEzpOjDKw4AFHGEEBvUnDhphwADZsi0gFw0mDWjqQBuUgF9yaCNMlENzgAXjgACjADfkctFnYkfQhDAEpQgD44AB42YAA3dKMo5P46C2tbJGkvLIpcgt9-QLi3AEEwMFCItJDMrPTTbIQ3dKywdIB5aU4kKyQQKpha8drhhIGzLLWODbNs3b3s8YAxKBQAcwXpAThMaGWDvbH0gFloGbmrgQfBzYpd1YjQZbEYARkB6zMwO2SHSAAlZlYIBCdtCRkZpHIrFYahQYQD8UYYFA5EhcfjyGYqHAXnJAsIUHlOOUbHYhMIIHJzsI0Qk4P9SLUBuRqXEXEwAKKfRZcNA8PiCfxWACecAAUgBlAAacFm80W-CU11U6h4TgwUv11yShjgJjMLMqDnN9Dilq+nh8pD8AXgCHdMrCkWisVoAet0R6fXqhWKhjKllZVVxMcavpd4Zg7U6Qaj+2hmdG4zeRF10uu-Aeq0LBfLMEe-V+T2L7zLVu+FBWLdLeq+lc7DYFf39deFVOotMCACNOCh1dq219a+30uC8YWoZsRyuEdjkevR8uvoVMdjyTWt4WiSSydXD4NqZP4AymeZE072ZzuUeZQKheQgA)’ında görebilirsiniz.
 

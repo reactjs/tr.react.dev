@@ -12,6 +12,12 @@ const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
 
 </Intro>
 
+<Note>
+
+[React Compiler](/learn/react-compiler) automatically applies the equivalent of `memo` to all components, reducing the need for manual memoization. You can use the compiler to handle component memoization automatically.
+
+</Note>
+
 <InlineToc />
 
 ---
@@ -112,7 +118,7 @@ label {
 
 #### Bulduğunuz her yere memo eklemeli misiniz? {/*should-you-add-memo-everywhere*/}
 
-Eğer uygulamanız bu site gibiyse ve çoğunlukla kaba etkileşimler içeriyorsa (sayfayı ve bölümü değiştirmek gibi), önbelleğe almak genellikle gereksizdir. Öte yandan, uygulamanız çizim editörü gibi daha mikro etkileşimler içeriyorsa (şekilleri taşımak gibi), önbelleğe almak çok faydalı olabilir.
+Uygulamanız bu site gibi ise ve etkileşimlerin çoğu kaba ise (bir sayfayı veya tüm bir bölümü değiştirmek gibi), memoizasyon genellikle gereksizdir. Öte yandan, uygulamanız daha çok bir çizim düzenleyicisi gibiyse ve etkileşimlerin çoğu ayrıntılı ise (şekilleri taşımak gibi), memoizasyon çok yararlı olabilir.
 
 `memo` ile yapılan optimizasyon, yalnızca bileşeniniz sıkça aynı prop'larla yeniden render oluyorsa ve render mantığı pahallıysa değerlidir. Bileşeniniz yeniden render edildiğinde fark edilebilir bir gecikme yoksa önbelleğe almak gereksizdir. Bileşene her *seferinde farklı* prop (render esnasında tanımlanan fonksiyon veya nesne gibi) geçiyorsanız, `memo` tamamen gereksizdir. Bu nedenle `memo` ile birlikte genellikle [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) ve [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components)'e ihtiyacınız olacaktır.
 
@@ -222,7 +228,7 @@ export default function MyApp() {
   const [theme, setTheme] = useState('dark');
 
   function handleClick() {
-    setTheme(theme === 'dark' ? 'light' : 'dark'); 
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   }
 
   return (
@@ -357,7 +363,88 @@ Kullandığınız veri yapısının sınırlı derinliğe sahip olduğundan emin
 
 ---
 
-## Sorun giderme {/*troubleshooting*/}
-### Prop bir nesne, dizi veya fonksiyon olduğunda bileşenim daima yeniden render'lanıyor {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
+### React Compiler kullanıyorsam hâlâ React.memo’ya ihtiyacım var mı? {/*react-compiler-memo*/}
+
+[React Compiler](/learn/react-compiler) etkinleştirildiğinde, genellikle `React.memo` kullanmanıza gerek kalmaz. Compiler, bileşenlerin gereksiz yeniden render edilmesini otomatik olarak optimize eder.
+
+İşte nasıl çalıştığı:
+
+**React Compiler olmadan**, gereksiz yeniden renderları önlemek için `React.memo` kullanmanız gerekir:
+
+```js
+// Parent her saniye yeniden render eder
+function Parent() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(s => s + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      <h1>Seconds: {seconds}</h1>
+      <ExpensiveChild name="John" />
+    </>
+  );
+}
+
+// Without memo, this re-renders every second even though props don't change
+const ExpensiveChild = memo(function ExpensiveChild({ name }) {
+  console.log('ExpensiveChild rendered');
+  return <div>Hello, {name}!</div>;
+});
+```
+
+**With React Compiler enabled**, the same optimization happens automatically:
+
+```js
+// No memo needed - compiler prevents re-renders automatically
+function ExpensiveChild({ name }) {
+  console.log('ExpensiveChild rendered');
+  return <div>Hello, {name}!</div>;
+}
+```
+
+Here's the key part of what the React Compiler generates:
+
+```js {6-12}
+function Parent() {
+  const $ = _c(7);
+  const [seconds, setSeconds] = useState(0);
+  // ... other code ...
+
+  let t3;
+  if ($[4] === Symbol.for("react.memo_cache_sentinel")) {
+    t3 = <ExpensiveChild name="John" />;
+    $[4] = t3;
+  } else {
+    t3 = $[4];
+  }
+  // ... return statement ...
+}
+```
+
+Notice the highlighted lines: The compiler wraps `<ExpensiveChild name="John" />` in a cache check. Since the `name` prop is always `"John"`, this JSX is created once and reused on every parent re-render. This is exactly what `React.memo` does - it prevents the child from re-rendering when its props haven't changed.
+
+The React Compiler automatically:
+1. Tracks that the `name` prop passed to `ExpensiveChild` hasn't changed
+2. Reuses the previously created JSX for `<ExpensiveChild name="John" />`
+3. Skips re-rendering `ExpensiveChild` entirely
+
+This means **you can safely remove `React.memo` from your components when using React Compiler**. The compiler provides the same optimization automatically, making your code cleaner and easier to maintain.
+
+<Note>
+
+The compiler's optimization is actually more comprehensive than `React.memo`. It also memoizes intermediate values and expensive computations within your components, similar to combining `React.memo` with `useMemo` throughout your component tree.
+
+</Note>
+
+---
+
+## Troubleshooting {/*troubleshooting*/}
+### My component re-renders when a prop is an object, array, or function {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
 
 React eski ve yeni prop'ları sığ karşılaştırma ile kıyaslar: her yeni prop'un eski prop'a referans olarak eşit olup olmadığına bakar. Eğer üst eleman render olduğunda eskisiyle birebir aynı olan yeni bir nesne veya dizi oluşturuyorsanız, React değiştirildiğini düşünür. Benzer şekilde, üst bileşen render edildiğinde yeni fonksiyon oluşturuyorsanız, React aynı tanıma sahip olsa dahi değiştiğini düşünür. Bunu önlemek için [prop'ları basitleştirin veya üst bileşendeki prop'ları önbelleğe alın](#minimizing-props-changes).

@@ -10,7 +10,7 @@ Directives are for use in [React Server Components](/reference/rsc/server-compon
 
 <Intro>
 
-Direktifler [React Sunucu Bileşenleri ile uyumlu paketleyiciler](/learn/creating-a-react-app#full-stack-frameworks) için talimatlar sağlar.
+Directives, [React Server Components ile uyumlu bundlerlara](/learn/start-a-new-react-project#full-stack-frameworks) talimatlar sağlar.
 
 </Intro>
 

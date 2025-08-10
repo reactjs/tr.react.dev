@@ -4,7 +4,7 @@ title: Sunucu Bileşenleri
 
 <RSC>
 
-Sunucu Bileşenleri [React Sunucu Bileşenleri](/learn/creating-a-react-app#full-stack-frameworks) içinde kullanım içindir.
+Server Components, [React Server Components](/learn/start-a-new-react-project#full-stack-frameworks) içinde kullanılmak içindir.
 
 </RSC>
 
