@@ -32,7 +32,7 @@ Ekranda bir girdi göstermek için, [tarayıcıya yerleşik `<input>`](https://d
 
 `<input>`, tüm [yaygın element özelliklerini](/reference/react-dom/components/common#common-props) destekler.
 
-`<input>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#props) destekler.
+`<input>` tüm [ortak eleman proplarını](/reference/react-dom/components/common#common-props) destekler.
 
 - [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): Bir string veya fonksiyon. `type="submit"` ve `type="image"` için ebeveyn `<form action>`'ı geçersiz kılar. Bir URL `action` parametresine geçtiğinde form, standart bir HTML formu gibi davranır. Bir fonksiyon `formAction` parametresine geçtiğinde, fonksiyon form gönderimini işler. [`<form action>`](/reference/react-dom/components/form#props) bölümüne bakın.
 

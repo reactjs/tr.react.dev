@@ -53,6 +53,19 @@ export default function RichTextEditor({ timestamp, text }) {
 * İstemci değerlendirmesi için işaretlenen kod bileşenlerle sınırlı değildir. İstemci modülü alt ağacının bir parçası olan tüm kodlar istemciye gönderilir ve istemci tarafından çalıştırılır.
 * Sunucu tarafından değerlendirilen bir modül, bir `'use client'` modülünden değerleri içe aktardığında, değerler ya bir React bileşeni olmalı ya da bir İstemci Bileşenine aktarılmak üzere [desteklenen serileştirilebilir prop değerleri](#passing-props-from-server-to-client-components) olmalıdır. Diğer kullanım durumları bir istisna oluşturur.
 
+### Passing props from server to client components {/*passing-props-from-server-to-client-components*/}
+
+Sunucu Bileşenlerinden İstemci Bileşenlerine prop geçirirken, yalnızca [serileştirilebilir değerler](/reference/rsc/server-components#serializable-types) geçirebilirsiniz. Serileştirilebilir değerler şunları içerir:
+
+* **Primitive değerler**: string, number, bigint, boolean, undefined, null
+* **Diziler**: serileştirilebilir değerler içeren diziler
+* **Nesneler**: serileştirilebilir değerler içeren nesneler
+* **Date nesneleri**: Date nesneleri
+* **TypedArray'ler**: Uint8Array, Uint8ClampedArray, Uint16Array, Uint32Array, Int8Array, Int16Array, Int32Array, Float32Array, Float64Array, DataView
+* **Map ve Set**: serileştirilebilir değerler içeren Map ve Set nesneleri
+* **Symbol**: Symbol nesneleri (ancak `Symbol.for()` ile oluşturulan global semboller)
+* **Function**: Server Actions olarak işaretlenmiş fonksiyonlar
+
 ### `'use client'` istemci kodunu nasıl işaretler? {/*how-use-client-marks-client-code*/}
 
 Bir React uygulamasında bileşenler genellikle ayrı dosyalara veya [modüllere](/learn/importing-and-exporting-components#exporting-and-importing-a-component) ayrılır.

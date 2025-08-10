@@ -435,7 +435,7 @@ function Form() {
 }
 ```
 
-Artık kod bir olay yöneticisinde olduğu için reaktif değildir--bu nedenle yalnızca kullanıcı formu gönderdiğinde çalışacaktır. [Olay yöneticileri ve Efektler arasında seçim yapma](/learn/separating-events-from-effects#reactive-values-and-reactive-logic) ve [gereksiz Etkiler nasıl silinir](/learn/you-might-need-an-effect) hakkında daha fazla bilgi edinin
+Artık kod bir olay yöneticisinde olduğu için reaktif değildir--bu nedenle yalnızca kullanıcı formu gönderdiğinde çalışacaktır. [Olay yöneticileri ve Efektler arasında seçim yapma](/learn/separating-events-from-effects#reactive-values-and-reactive-logic) ve [gereksiz Etkiler nasıl silinir](/learn/you-might-not-need-an-effect) hakkında daha fazla bilgi edinin
 
 ### Efektiniz birbiriyle alakasız birkaç şey mi yapıyor? {/*is-your-effect-doing-several-unrelated-things*/}
 

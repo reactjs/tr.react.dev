@@ -34,11 +34,11 @@ function MyComponent() {
 
 #### Parametreler {/*parameters*/}
 
-* `SomeContext`: Daha önce [`createContext`](/tr/referans/react/createContext) ile oluşturduğunuz context. Context'in kendisi bilgileri tutmaz, yalnızca tedarik edeceğiniz ya da bileşenlerden okuyacağınız bilginin türünü temsil eder.
+* `SomeContext`: Daha önce [`createContext`](/reference/react/createContext) ile oluşturduğunuz context. Context'in kendisi bilgileri tutmaz, yalnızca tedarik edeceğiniz ya da bileşenlerden okuyacağınız bilginin türünü temsil eder.
 
 #### Dönüş değerleri {/*returns*/}
 
-`useContext`, çağrılan bileşen için Context değerini döndürür. Bu değer, ağaçtaki çağrılan bileşenden önceki en yakın `SomeContext.Provider`'a iletilen `value` olarak belirlenir. Böyle bir sağlayıcı yoksa, döndürülen değer o Context için [`createContext`](/tr/referans/react/createContext) ile belirlediğiniz `defaultValue` olacaktır. Döndürülen değer her zaman günceldir. Eğer bir Context değişirse, React otomatik olarak bu Context'i kullanan bileşenleri yeniden render eder.
+`useContext`, çağrılan bileşen için Context değerini döndürür. Bu değer, ağaçtaki çağrılan bileşenden önceki en yakın `SomeContext.Provider`'a iletilen `value` olarak belirlenir. Böyle bir sağlayıcı yoksa, döndürülen değer o Context için [`createContext`](/reference/react/createContext) ile belirlediğiniz `defaultValue` olacaktır. Döndürülen değer her zaman günceldir. Eğer bir Context değişirse, React otomatik olarak bu Context'i kullanan bileşenleri yeniden render eder.
 
 #### Dikkat Edilmesi Gerekenler {/*caveats*/}
 
@@ -177,7 +177,7 @@ function Button({ children }) {
 
 ### Context üzerinden geçirilen verileri güncelleme {/*updating-data-passed-via-context*/}
 
-Genellikle, context'in zaman içinde değişmesini istersiniz. Context'i güncellemek için, [state](/tr/referans/react/useState) ile birlikte kullanın. Üst bileşende bir state değişkeni tanımlayın ve state'i sağlayıcının <CodeStep step={2}>context değeri</CodeStep> olarak aşağıya geçirin.
+Genellikle, context'in zaman içinde değişmesini istersiniz. Context'i güncellemek için, [state](/reference/react/useState) ile birlikte kullanın. Üst bileşende bir state değişkeni tanımlayın ve state'i sağlayıcının <CodeStep step={2}>context değeri</CodeStep> olarak aşağıya geçirin.
 
 ```js {2} [[1, 4, "ThemeContext"], [2, 4, "theme"], [1, 11, "ThemeContext"]]
 function MyPage() {
@@ -739,7 +739,7 @@ label {
 
 #### Context ve reducer kullanarak ölçeklendirme {/*scaling-up-with-context-and-a-reducer*/}
 
-Daha büyük uygulamalarda, bileşenlerden bazı state'lerle ilgili mantığı çıkarmak için context ile [reducer](/tr/referans/react/useReducer)'ı birlikte kullanmak yaygındır. Bu örnekte, tüm "kablolama" bir reducer ve iki ayrı context içeren `TasksContext.js`'de gizlenmiştir.
+Daha büyük uygulamalarda, bileşenlerden bazı state'lerle ilgili mantığı çıkarmak için context ile [reducer](/reference/react/useReducer)'ı birlikte kullanmak yaygındır. Bu örnekte, tüm "kablolama" bir reducer ve iki ayrı context içeren `TasksContext.js`'de gizlenmiştir.
 
 Bu örneğin [kapsamlı açıklamasını](/learn/scaling-up-with-reducer-and-context) okuyun.
 

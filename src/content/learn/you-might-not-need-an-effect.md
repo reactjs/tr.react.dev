@@ -572,7 +572,7 @@ function Toggle({ onChange }) {
 }
 ```
 
-Bu yaklaşımla, hem `Toggle` bileşeni hem de onun üst elemanı, olay sırasında state değişkenlerini günceller. React farklı bileşenlerden [güncellemeleri toplu olarak](/learn/queuing-a-series-of-state-updates) gerçekleştirir, böylece yalnızca bir render geçişi olacaktır.
+Bu yaklaşımla, hem `Toggle` bileşeni hem de onun üst elemanı, olay sırasında state değişkenlerini günceller. React farklı bileşenlerden [güncellemeleri toplu olarak](/learn/queueing-a-series-of-state-updates) gerçekleştirir, böylece yalnızca bir render geçişi olacaktır.
 
 Ayrıca state'i tamamen kaldırabilir ve bunun yerine üst elemandan `isOn` değerini alabilirsiniz:
 
