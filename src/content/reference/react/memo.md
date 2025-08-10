@@ -118,11 +118,7 @@ label {
 
 #### Bulduğunuz her yere memo eklemeli misiniz? {/*should-you-add-memo-everywhere*/}
 
-<<<<<<< HEAD
-Eğer uygulamanız bu site gibiyse ve çoğunlukla kaba etkileşimler içeriyorsa (sayfayı ve bölümü değiştirmek gibi), önbelleğe almak genellikle gereksizdir. Öte yandan, uygulamanız çizim editörü gibi daha mikro etkileşimler içeriyorsa (şekilleri taşımak gibi), önbelleğe almak çok faydalı olabilir.
-=======
-If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful.
->>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
+Uygulamanız bu site gibi ise ve etkileşimlerin çoğu kaba ise (bir sayfayı veya tüm bir bölümü değiştirmek gibi), memoizasyon genellikle gereksizdir. Öte yandan, uygulamanız daha çok bir çizim düzenleyicisi gibiyse ve etkileşimlerin çoğu ayrıntılı ise (şekilleri taşımak gibi), memoizasyon çok yararlı olabilir.
 
 `memo` ile yapılan optimizasyon, yalnızca bileşeniniz sıkça aynı prop'larla yeniden render oluyorsa ve render mantığı pahallıysa değerlidir. Bileşeniniz yeniden render edildiğinde fark edilebilir bir gecikme yoksa önbelleğe almak gereksizdir. Bileşene her *seferinde farklı* prop (render esnasında tanımlanan fonksiyon veya nesne gibi) geçiyorsanız, `memo` tamamen gereksizdir. Bu nedenle `memo` ile birlikte genellikle [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) ve [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components)'e ihtiyacınız olacaktır.
 
@@ -367,20 +363,16 @@ Kullandığınız veri yapısının sınırlı derinliğe sahip olduğundan emin
 
 ---
 
-<<<<<<< HEAD
-## Sorun giderme {/*troubleshooting*/}
-### Prop bir nesne, dizi veya fonksiyon olduğunda bileşenim daima yeniden render'lanıyor {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
-=======
-### Do I still need React.memo if I use React Compiler? {/*react-compiler-memo*/}
+### React Compiler kullanıyorsam hâlâ React.memo’ya ihtiyacım var mı? {/*react-compiler-memo*/}
 
-When you enable [React Compiler](/learn/react-compiler), you typically don't need `React.memo` anymore. The compiler automatically optimizes component re-rendering for you.
+[React Compiler](/learn/react-compiler) etkinleştirildiğinde, genellikle `React.memo` kullanmanıza gerek kalmaz. Compiler, bileşenlerin gereksiz yeniden render edilmesini otomatik olarak optimize eder.
 
-Here's how it works:
+İşte nasıl çalıştığı:
 
-**Without React Compiler**, you need `React.memo` to prevent unnecessary re-renders:
+**React Compiler olmadan**, gereksiz yeniden renderları önlemek için `React.memo` kullanmanız gerekir:
 
 ```js
-// Parent re-renders every second
+// Parent her saniye yeniden render eder
 function Parent() {
   const [seconds, setSeconds] = useState(0);
 
@@ -454,6 +446,5 @@ The compiler's optimization is actually more comprehensive than `React.memo`. It
 
 ## Troubleshooting {/*troubleshooting*/}
 ### My component re-renders when a prop is an object, array, or function {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
->>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 React eski ve yeni prop'ları sığ karşılaştırma ile kıyaslar: her yeni prop'un eski prop'a referans olarak eşit olup olmadığına bakar. Eğer üst eleman render olduğunda eskisiyle birebir aynı olan yeni bir nesne veya dizi oluşturuyorsanız, React değiştirildiğini düşünür. Benzer şekilde, üst bileşen render edildiğinde yeni fonksiyon oluşturuyorsanız, React aynı tanıma sahip olsa dahi değiştiğini düşünür. Bunu önlemek için [prop'ları basitleştirin veya üst bileşendeki prop'ları önbelleğe alın](#minimizing-props-changes).

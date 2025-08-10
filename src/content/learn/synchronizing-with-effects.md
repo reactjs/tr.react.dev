@@ -732,13 +732,8 @@ Efektler içinde `veri getirme` çağrıları yazmak özellikle tamamen kullanı
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin de başarılı şekilde yapılması kolay değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-<<<<<<< HEAD
-- **Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, yerleşik data fetch mekanizmasını kullanın.** Modern React framework'leri, verimli olan ve yukarıdaki tuzaklardan muzdarip olmayan entegre data fetch mekanizmalarına sahiptir.
-- **Aksi takdirde, istemci taraflı bir cache kullanmayı veya oluşturmayı düşünebilirsiniz.** Popüler açık kaynak çözümleri arasında [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) bulunmaktadır. Kendi çözümünüzü de oluşturabilirsiniz, bu durumda kaputun altındaki *Effects*'i kullanırsınız, ancak istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak için mantık eklersiniz (verileri önceden yükleyerek veya veri gereksinimlerini rotalara kaldırarak).
-=======
-- **If you use a [framework](/learn/start-a-new-react-project#full-stack-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
->>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
+- **Eğer bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) kullanıyorsanız, onun yerleşik veri getirme mekanizmasını kullanın.** Modern React framework’leri, verimli ve yukarıda belirtilen sorunlardan etkilenmeyen entegre veri getirme mekanizmalarına sahiptir.  
+- **Aksi takdirde, istemci taraflı bir cache kullanmayı veya oluşturmayı düşünebilirsiniz.** Popüler açık kaynak çözümler arasında [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) bulunmaktadır. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altındaki *Effects*’i kullanır, ancak istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara taşıyarak) için mantık eklersiniz.
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Efektler içinde veri getirmeye devam edebilirsiniz.
 
