@@ -162,14 +162,7 @@ React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içe
 
 ### Özel HTML elemanları {/*custom-html-elements*/}
 
-<<<<<<< HEAD
-Eğer `<my-element>` gibi tire içeren bir etiket oluşturursanız, React bir [özel HTML elemanı](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayacaktır. React'te özel elemanların render edilmesi, yerleşik tarayıcı etiketlerinin render edilmesinden daha farklı şekilde çalışır:
-
-- Tüm özel eleman prop'ları string olarak serileştirilir ve her zaman öznitelikler kullanılarak ayarlanır.
-- Özel elemanlar `class` yerine `className`, `for` yerine `htmlFor` kabul eder.
-=======
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
->>>>>>> 27d86ffe6ec82e3642c6490d2187bae2271020a4
+`<my-element>` gibi bir tire ile bir etiket oluşturursanız, React [özel HTML öğesi](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayar.
 
 Yerleşik bir tarayıcı HTML elemanını [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) özniteliğiyle oluşturursanız, bu eleman da özel bir eleman olarak ele alınacaktır.
 
@@ -292,17 +285,7 @@ export function App() {
 
 <Note>
 
-<<<<<<< HEAD
-[React'in gelecekteki bir sürümü daha kapsamlı özel eleman desteği içerecektir.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
-
-En son deneysel sürüme React paketlerini yükselterek deneyebilirsiniz:
-
-- `react@experimental`
-- `react-dom@experimental`
-
-React'in deneysel sürümleri hatalar içerebilir. Bunları canlı ortamda kullanmayın.
-=======
-Events are case-sensitive and support dashes (`-`). Preserve the casing of the event and include all dashes when listening for custom element's events:
+Olaylar büyük/küçük harfe duyarlıdır ve tire işaretlerini (`-`) destekler. Özel öğenin olaylarını dinlerken olayın büyük/küçük harf yapısını koruyun ve tüm tire işaretlerini dahil edin:
 
 ```jsx
 // Listens for `say-hi` events
@@ -310,7 +293,6 @@ Events are case-sensitive and support dashes (`-`). Preserve the casing of the e
 // Listens for `sayHi` events
 <my-element onsayHi={console.log}></my-element>
 ```
->>>>>>> 27d86ffe6ec82e3642c6490d2187bae2271020a4
 
 </Note>
 ---
