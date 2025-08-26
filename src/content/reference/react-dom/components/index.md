@@ -162,23 +162,137 @@ React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içe
 
 ### Özel HTML elemanları {/*custom-html-elements*/}
 
-Eğer `<my-element>` gibi tire içeren bir etiket oluşturursanız, React bir [özel HTML elemanı](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayacaktır. React'te özel elemanların render edilmesi, yerleşik tarayıcı etiketlerinin render edilmesinden daha farklı şekilde çalışır:
-
-- Tüm özel eleman prop'ları string olarak serileştirilir ve her zaman öznitelikler kullanılarak ayarlanır.
-- Özel elemanlar `class` yerine `className`, `for` yerine `htmlFor` kabul eder.
+`<my-element>` gibi bir tire ile bir etiket oluşturursanız, React [özel HTML öğesi](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) oluşturmak istediğinizi varsayar.
 
 Yerleşik bir tarayıcı HTML elemanını [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) özniteliğiyle oluşturursanız, bu eleman da özel bir eleman olarak ele alınacaktır.
 
+#### Setting values on custom elements {/*attributes-vs-properties*/}
+
+Custom elements have two methods of passing data into them:
+
+1) Attributes: Which are displayed in markup and can only be set to string values
+2) Properties: Which are not displayed in markup and can be set to arbitrary JavaScript values
+
+By default, React will pass values bound in JSX as attributes:
+
+```jsx
+<my-element value="Hello, world!"></my-element>
+```
+
+Non-string JavaScript values passed to custom elements will be serialized by default:
+
+```jsx
+// Will be passed as `"1,2,3"` as the output of `[1,2,3].toString()`
+<my-element value={[1,2,3]}></my-element>
+```
+
+React will, however, recognize an custom element's property as one that it may pass arbitrary values to if the property name shows up on the class during construction:
+
+<Sandpack>
+
+```js src/index.js hidden
+import {MyElement} from './MyElement.js';
+import { createRoot } from 'react-dom/client';
+import {App} from "./App.js";
+
+customElements.define('my-element', MyElement);
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />);
+```
+
+```js src/MyElement.js active
+export class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    // The value here will be overwritten by React 
+    // when initialized as an element
+    this.value = undefined;
+  }
+
+  connectedCallback() {
+    this.innerHTML = this.value.join(", ");
+  }
+}
+```
+
+```js src/App.js
+export function App() {
+  return <my-element value={[1,2,3]}></my-element>
+}
+```
+
+</Sandpack>
+
+#### Listening for events on custom elements {/*custom-element-events*/}
+
+A common pattern when using custom elements is that they may dispatch [`CustomEvent`s](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) rather than accept a function to call when an event occur. You can listen for these events using an `on` prefix when binding to the event via JSX.
+
+<Sandpack>
+
+```js src/index.js hidden
+import {MyElement} from './MyElement.js';
+import { createRoot } from 'react-dom/client';
+import {App} from "./App.js";
+
+customElements.define('my-element', MyElement);
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />);
+```
+
+```javascript src/MyElement.js
+export class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this.test = undefined;
+    this.emitEvent = this._emitEvent.bind(this);
+  }
+
+  _emitEvent() {
+    const event = new CustomEvent('speak', {
+      detail: {
+        message: 'Hello, world!',
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
+  connectedCallback() {
+    this.el = document.createElement('button');
+    this.el.innerText = 'Say hi';
+    this.el.addEventListener('click', this.emitEvent);
+    this.appendChild(this.el);
+  }
+
+  disconnectedCallback() {
+    this.el.removeEventListener('click', this.emitEvent);
+  }
+}
+```
+
+```jsx src/App.js active
+export function App() {
+  return (
+    <my-element
+      onspeak={e => console.log(e.detail.message)}
+    ></my-element>
+  )
+}
+```
+
+</Sandpack>
+
 <Note>
 
-[React'in gelecekteki bir sürümü daha kapsamlı özel eleman desteği içerecektir.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+Olaylar büyük/küçük harfe duyarlıdır ve tire işaretlerini (`-`) destekler. Özel öğenin olaylarını dinlerken olayın büyük/küçük harf yapısını koruyun ve tüm tire işaretlerini dahil edin:
 
-En son deneysel sürüme React paketlerini yükselterek deneyebilirsiniz:
-
-- `react@experimental`
-- `react-dom@experimental`
-
-React'in deneysel sürümleri hatalar içerebilir. Bunları canlı ortamda kullanmayın.
+```jsx
+// Listens for `say-hi` events
+<my-element onsay-hi={console.log}></my-element>
+// Listens for `sayHi` events
+<my-element onsayHi={console.log}></my-element>
+```
 
 </Note>
 ---
