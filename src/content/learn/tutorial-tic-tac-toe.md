@@ -283,9 +283,15 @@ CodeSanbox'ta üç ana bölüm göreceksiniz:
 
 ![Başlangıç kodu ile CodeSandbox](../images/tutorial/react-starter-code-codesandbox.png)
 
+<<<<<<< HEAD
 1. _Files_ bölümünde `App.js`, `index.js`, `styles.css` gibi dosyaların listesi ve `public` dosyası vardır
 1. Seçtiğiniz dosyanın kaynak kodunu göreceğiniz _kod editörü_ bölümü 
 1. Yazdığınız kodun nasıl görüntüleneceğini gösteren _tarayıcı_ bölümü
+=======
+1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` in `src` folder and a folder called `public`
+1. The _code editor_ where you'll see the source code of your selected file
+1. The _browser_ section where you'll see how the code you've written will be displayed
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 _Files_ bölümünde `App.js` dosyası seçili olmalıdır. O dosyanın içeriği _kod editöründe_ şöyle olmalıdır:
 

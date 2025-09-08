@@ -32,15 +32,21 @@ Tüm [üretim düzeyindeki React framework'leri](/learn/start-a-new-react-projec
 React’in tip tanımlamalarının en son sürümünü yüklemek için:
 
 <TerminalBlock>
-npm install @types/react @types/react-dom
+npm install --save-dev @types/react @types/react-dom
 </TerminalBlock>
 
 `tsconfig.json` dosyanızda aşağıdaki derleyici seçeneklerinin ayarlanması gerekir::
 
+<<<<<<< HEAD
 1. `dom`, [`lib`](https://www.typescriptlang.org/tsconfig/#lib)'e dahil edilmelidir  (Not: Eğer `lib` seçeneği belirtilmemişse, `dom` varsayılan olarak dahil edilir).
 1. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx) geçerli seçeneklerden birine ayarlanmalıdır. Çoğu uygulama için  `preserve` yeterli olacaktır.
 Eğer bir kütüphane yayımlıyorsanız, hangi değeri seçeceğiniz konusunda
   If you're publishing a library, consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) başvurun.
+=======
+1. `dom` must be included in [`lib`](https://www.typescriptlang.org/tsconfig/#lib) (Note: If no `lib` option is specified, `dom` is included by default).
+2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx) must be set to one of the valid options. `preserve` should suffice for most applications.
+  If you're publishing a library, consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) on what value to choose.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ## React Bileşenleri ile TypeScript {/*typescript-with-react-components*/}
 
