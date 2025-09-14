@@ -211,11 +211,7 @@ Bunun nedeni **Hook'ların bileşeninizin sadece en üst seviyesinde çağrılma
 
 Bunun olası bir yolu ana elemana tek bir ref almak ve ardından tek tek alt elemanı bulmak için [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) gibi DOM manipülasyon yöntemlerini kullanmaktır. Ancak bu yöntem tutarsızdır ve DOM yapınız değişirse işlevsiz hale gelebilir.
 
-<<<<<<< HEAD
-Başka bir çözüm **bir fonksiyonu `ref` özelliğine iletmektir.** Buna [`ref` callback](/reference/react-dom/components/common#ref-callback) denir. React ref'i ayarlama zamanı geldiğinde callback fonksiyonunu DOM elemanı ile çağıracak ve ref'i temizleme zamanı geldiğinde `null` değeri ile çağıracaktır. Bu, kendi dizinizi veya [Map'inizi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) korumanıza ve indeksine veya  kimliğine göre herhangi bir ref'e erişmenize olanak sağlar.
-=======
 Another solution is to **pass a function to the `ref` attribute.** This is called a [`ref` callback.](/reference/react-dom/components/common#ref-callback) React will call your ref callback with the DOM node when it's time to set the ref, and call the cleanup function returned from the callback when it's time to clear it. This lets you maintain your own array or a [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and access any ref by its index or some kind of ID.
->>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 Bu örnek uzun bir listede rastgele bir elemana kaydırmak için bu yaklaşımı nasıl kullanabileceğimizi gösterir:
 
