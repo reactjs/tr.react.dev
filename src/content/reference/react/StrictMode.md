@@ -222,15 +222,10 @@ li {
 
 </Sandpack>
 
-<<<<<<< HEAD
-Yukardaki kodda ilk çıktı doğru olduğu için gözden kaçırmanın çok kolay olduğu bir hata bulunmaktadır.
-=======
-There is a mistake in the code above. However, it is easy to miss because the initial output appears correct.
+Yukarıdaki kodda bir hata var. Ancak ilk çıktının doğru görünmesi nedeniyle fark etmesi kolay değildir.
 
-This mistake will become more noticeable if the `StoryTray` component re-renders multiple times. For example, let's make the `StoryTray` re-render with a different background color whenever you hover over it:
->>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
+Bu hata, `StoryTray` bileşeni birden fazla kez render edilirse daha çok göze çarpar. Örneğin, `StoryTray`'i imleç ile üzerine geldiğinizde arka plan rengi değişecek şekilde yeniden render edelim:
 
-Bu hata `StoryTray` bileşeni birden fazla kez render edilirse daha çok göze çarpar. Örneğin, `StoryTray`'i imleç ile üzerine geldiğinizde arka plan rengi değişecek şekilde yeniden render edelim: 
 <Sandpack>
 
 ```js src/index.js
@@ -1162,29 +1157,6 @@ export default function CatFriends() {
       </nav>
       <div>
         <ul>
-<<<<<<< HEAD
-          {animals.map((animal) => (
-              <li
-                key={animal.src}
-                ref={(node) => {
-                  const list = itemsRef.current;
-                  const item = {animal, node};
-                  list.push({animal: animal, node});
-                  console.log(`✅ Haritaya hayvan ekleniyor. Toplam hayvan sayısı: ${list.length}`);
-                  if (list.length > 10) {
-                    console.log('❌ Listede çok fazla hayvan var!');
-                  }
-                  return () => {
-                    list.splice(list.indexOf(item));
-                    console.log(`❌ Haritadan hayvan çıkarılıyor. Toplam hayvan sayısı: ${itemsRef.current.length}`);
-                  }
-                }}
-              >
-                <img src={animal.src} />
-              </li>
-            ))}
-          
-=======
           {cats.map((cat) => (
             <li
               key={cat.src}
@@ -1205,7 +1177,6 @@ export default function CatFriends() {
               <img src={cat.src} />
             </li>
           ))}
->>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
         </ul>
       </div>
     </>
@@ -1269,13 +1240,8 @@ Artık StrictMode'da ilk mount sırasında, ref geri çağırmaları tamamen kur
 
 Strict Mode olmadan, hatayı fark edene kadar uygulamada tıklamadan bozuk özellikleri gözlemlemek zordu. Strict Mode, hataları hemen görünür hale getirdi, böylece bunları üretime göndermeden önce fark edebilirsiniz.
 
-<<<<<<< HEAD
---- 
-### Strict Mode tarafından etkinleştirilen deprecation uyarılarını düzeltme {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
-=======
 ---
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
->>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
+### Strict Mode ile etkinleştirilen kullanım dışı (deprecation) uyarılarını düzeltme {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
 React, `<StrictMode>` içindeki herhangi bir bileşende aşağıdaki kullanımdan kaldırılan API'lardan biri kullanılıyorsa sizi uyarır:
 
