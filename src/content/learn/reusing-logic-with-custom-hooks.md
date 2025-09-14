@@ -1421,10 +1421,29 @@ Bir [tasarım sistemine](https://uxdesign.cc/everything-you-need-to-know-about-d
 
 #### React veri getirme için herhangi bir yerleşik çözüm sağlayacak mı? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
 
-Detaylar üzerine çalışmaya devam ediyoruz, ancak gelecekte veri getirmeyi şu şekilde yazmanızı bekliyoruz:
+Bugün, [`use`](/reference/react/use#streaming-data-from-server-to-client) API’si ile, bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) `use`’a geçirilerek render sırasında veri okunabilir:
+
+```js {1,4,11}
+import { use, Suspense } from "react";
+
+function Message({ messagePromise }) {
+  const messageContent = use(messagePromise);
+  return <p>Here is the message: {messageContent}</p>;
+}
+
+export function MessageContainer({ messagePromise }) {
+  return (
+    <Suspense fallback={<p>⌛Downloading message...</p>}>
+      <Message messagePromise={messagePromise} />
+    </Suspense>
+  );
+}
+```
+
+We're still working out the details, but we expect that in the future, you'll write data fetching like this:
 
 ```js {1,4,6}
-import { use } from 'react'; // Henüz mevcut değil!
+import { use } from 'react';
 
 function ShippingForm({ country }) {
   const cities = use(fetch(`/api/cities?country=${country}`));

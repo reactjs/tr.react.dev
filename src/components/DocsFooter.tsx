@@ -80,7 +80,7 @@ function FooterLink({
       />
       <div className="flex flex-col overflow-hidden">
         <span className="text-sm font-bold tracking-wide no-underline uppercase text-secondary dark:text-secondary-dark group-focus:text-link dark:group-focus:text-link-dark group-focus:text-opacity-100">
-          {type}
+          {type === 'Önceki' ? 'Önceki' : 'Sonraki'}
         </span>
         <span className="text-lg break-words group-hover:underline">
           {title}

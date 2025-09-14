@@ -55,7 +55,7 @@ export default function RichTextEditor({ timestamp, text }) {
 
 ### Passing props from server to client components {/*passing-props-from-server-to-client-components*/}
 
-Sunucu Bileşenlerinden İstemci Bileşenlerine prop geçirirken, yalnızca [serileştirilebilir değerler](/reference/rsc/server-components#serializable-types) geçirebilirsiniz. Serileştirilebilir değerler şunları içerir:
+Sunucu Bileşenlerinden İstemci Bileşenlerine prop geçirirken, yalnızca [serileştirilebilir değerler](/reference/rsc/use-server#serializable-parameters-and-return-values) geçirebilirsiniz. Serileştirilebilir değerler şunları içerir:
 
 * **Primitive değerler**: string, number, bigint, boolean, undefined, null
 * **Diziler**: serileştirilebilir değerler içeren diziler
