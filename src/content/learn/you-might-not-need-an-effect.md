@@ -34,7 +34,7 @@ Doğru sezgiyi kazanmanıza yardımcı olmak için, hadi bazı yaygın somut ör
 
 İki state değişkenine sahip bir bileşeniniz olduğunu varsayalım: `firstName` ve `lastName`. `firstName` ve `lastName`'i birleştirerek onlardan bir `fullName` elde etmek istiyorsunuz. Ayrıca, `firstName` veya `lastName` her değiştiğinde `fullName`'i güncellemek istiyorsunuz. İlk olarak aklınıza `fullName` state değişkeni oluşturmak ve onu bir Efekt içerisinde güncellemek olabilir:
 
-```js {5-9}
+```js {expectedErrors: {'react-compiler': [8]}} {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
@@ -67,7 +67,7 @@ function Form() {
 Bu bileşen gelen `todos` propunu `filter` propsuna göre filtreleme işlemi yaparak `visibleTodos` değerini hesaplar. Sonuçları state içerisinde depolamak ve bir Efektten güncellemek isteyebilirsiniz:
 
 
-```js {4-8}
+```js {expectedErrors: {'react-compiler': [7]}} {4-8}
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
 
@@ -168,7 +168,7 @@ Ayrıca geliştirme ortamı içerisinde performans ölçümü yapılması size e
 
 Bu `ProfilePage` bileşeni bir `userId` propu alır. Sayfa bir yorum inputu içeriyor ve bu değeri tutması için bir `comment` state değişkeni kullanıyorsunuz. Bir gün, bir problem olduğunu farkedeceksiniz: bir profilden diğerine geçiş yaptığınızda, `comment` state'inin sıfırlanmamasıdır. Sonuç olarak, yanlış bir kullanıcının profiline istemediğiniz bir yorum yapmak oldukça kolay olabilir. Bu sorunu çözmek için, `userId` her değiştiğinde `comment` state değişkeninin temizlenmesini istersiniz:
 
-```js {4-7}
+```js {expectedErrors: {'react-compiler': [6]}} {4-7}
 export default function ProfilePage({ userId }) {
   const [comment, setComment] = useState('');
 
@@ -211,7 +211,7 @@ Bazen, bir prop değişikliğinde state'in bazı noktalarını sıfırlamak veya
 
 Buradaki `List` bileşeni props olarak `items` listesini alır, ve seçilen öğeyi `selection` state değişkeni içerisinde tutar. `items` propsu farklı bir array aldığında `selection` state değişkenini sıfırlamak isteyebilirsiniz:
 
-```js {5-8}
+```js {expectedErrors: {'react-compiler': [7]}} {5-8}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selection, setSelection] = useState(null);
@@ -821,7 +821,7 @@ Bu bileşeni tüm gereksiz state ve Efektleri ortadan kalırarak basitleştirin.
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [12, 16, 20]}}
 import { useState, useEffect } from 'react';
 import { initialTodos, createTodo } from './todos.js';
 
@@ -1025,7 +1025,7 @@ Göreviniz, `TodoList` bileşeni içerisindeki `visibleTodos` listesini yeniden 
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [11]}}
 import { useState, useEffect } from 'react';
 import { initialTodos, createTodo, getVisibleTodos } from './todos.js';
 
@@ -1109,7 +1109,7 @@ State değişkenini ve Efekti kaldırın, bunun yerine `getVisibleTodos()` çağ
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [8]}}
 import { useState, useMemo } from 'react';
 import { initialTodos, createTodo, getVisibleTodos } from './todos.js';
 
@@ -1366,7 +1366,7 @@ export default function ContactList({
 }
 ```
 
-```js src/EditContact.js active
+```js {expectedErrors: {'react-compiler': [8, 9]}} src/EditContact.js active
 import { useState, useEffect } from 'react';
 
 export default function EditContact({ savedContact, onSave }) {

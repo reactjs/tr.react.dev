@@ -723,7 +723,7 @@ Burada, `MyTextField` bileşen fonksiyonu `MyComponent` *içinde* tanımlanmış
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [7]}}
 import { useState } from 'react';
 
 export default function MyComponent() {

@@ -711,7 +711,7 @@ Burada, `onVisit` içindeki `url` *en son* `url`ye karşılık gelir (bu zaten d
 
 Mevcut kod tabanlarında bazen lint kuralının bu şekilde bastırıldığını görebilirsiniz:
 
-```js {7-9}
+```js {expectedErrors: {'react-compiler': [8]}} {7-9}
 function Page({ url }) {
   const { items } = useContext(ShoppingCartContext);
   const numberOfItems = items.length;
@@ -735,7 +735,7 @@ Nedenini anlayabiliyor musunuz?
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [16]}}
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -989,7 +989,7 @@ Bu kodu düzeltmek için kurallara uymak yeterlidir.
 ```
 
 
-```js
+```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
 export default function Timer() {

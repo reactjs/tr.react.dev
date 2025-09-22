@@ -23,7 +23,7 @@ Bileşenler, etkileşimin bir sonucu olarak ekranda olanı değiştirmeye sıkl�
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [7]}}
 import { sculptureList } from './data.js';
 
 export default function Gallery() {
@@ -1229,7 +1229,7 @@ Girdi alanlarına yazdığınızda hiçbir şey görünmüyor. İlk `<input>`'un
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [6]}}
 export default function Form() {
   let firstName = '';
   let lastName = '';
@@ -1337,7 +1337,7 @@ Hook'ların _nerede_ çağrılabileceği konusunda herhangi bir sınırlama var 
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [9]}}
 import { useState } from 'react';
 
 export default function FeedbackForm() {

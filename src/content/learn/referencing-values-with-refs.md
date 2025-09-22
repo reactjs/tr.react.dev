@@ -214,7 +214,7 @@ Eğer bunu ref kullanarak yapmaya çalışırsanız, React bileşeni yeniden ren
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [13]}}
 import { useRef } from 'react';
 
 export default function Counter() {
@@ -319,7 +319,7 @@ Bir mesaj yazın ve "Gönder" butonuna basın. "Gönderildi!" uyarısını görm
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [10]}}
 import { useState } from 'react';
 
 export default function Chat() {
@@ -424,7 +424,7 @@ Bu buton "Açık" ve "Kapalı" arasında geçiş yapmalıdır. Ancak her zaman "
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [10]}}
 import { useRef } from 'react';
 
 export default function Toggle() {

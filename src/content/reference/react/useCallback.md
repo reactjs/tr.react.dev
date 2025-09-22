@@ -131,7 +131,7 @@ function ProductPage({ productId, referrer, theme }) {
       orderDetails,
     });
   }
-  
+
   return (
     <div className={theme}>
       {/* ... böylece ShippingForm'un prop'ları her zaman farklı olur ve her seferinde yeniden render eder */}
@@ -208,7 +208,7 @@ Aralarındaki fark önbelleğe aldıkları *şeyle* alakalıdır:
 
 [`useMemo`](/reference/react/useMemo)'ya zaten aşinaysanız `useCallback`'i şu şekilde düşünmek yardımcı olabilir:
 
-```js
+```js {expectedErrors: {'react-compiler': [3]}}
 // Simplified implementation (inside React)
 function useCallback(fn, dependencies) {
   return useMemo(() => fn, dependencies);
@@ -223,7 +223,11 @@ function useCallback(fn, dependencies) {
 
 #### useCallback'i her yere eklemeli misiniz? {/*should-you-add-usecallback-everywhere*/}
 
+<<<<<<< HEAD
 Uygulamanız bu site gibiyse ve basit etkileşimler barındırıyorsa (sayfayı veya bir bölümünü tamamen değiştirmek gibi), önbelleğe almak genelde gereksizdir. Ancak uygulamanız daha çok çizim editörüne benziyorsa ve etkileşimlerin çoğu ayrıntılıysa (şekilleri taşımak gibi), son derece faydalı olacaktır. 
+=======
+If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful.
+>>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
 Bir fonksiyonu `useCallback` ile önbelleğe almak yalnızca birkaç durum için faydalıdır:
 
@@ -312,7 +316,7 @@ function post(url, data) {
 }
 ```
 
-```js src/ShippingForm.js
+```js {expectedErrors: {'react-compiler': [7, 8]}} src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -451,7 +455,7 @@ function post(url, data) {
 }
 ```
 
-```js src/ShippingForm.js
+```js {expectedErrors: {'react-compiler': [7, 8]}} src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -867,7 +871,7 @@ Object.is(temp1[2], temp2[2]); // ... her bağımlılık için devam eder ...
 
 `Chart` bileşeninin [`memo`](/reference/react/memo) içine sarıldığını varsayalım. `ReportList` bileşeni yeniden render edildiğinde listedeki her `Chart`'ın yeniden render işlemi atlamak istiyorsunuz. Ancak, döngü içerisinde `useCallback` çağıramazsınız:
 
-```js {5-14}
+```js {expectedErrors: {'react-compiler': [6]}} {5-14}
 function ReportList({ items }) {
   return (
     <article>

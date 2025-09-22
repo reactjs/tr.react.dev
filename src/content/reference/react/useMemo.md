@@ -149,7 +149,11 @@ Ayrıca, geliştirme sırasında performans ölçümünün size en doğru sonuç
 
 #### Her yere useMemo'yu  eklemeli misiniz? {/*should-you-add-usememo-everywhere*/}
 
+<<<<<<< HEAD
 Uygulamanız bu site gibiyse ve etkileşimler detaylı değilse (bir sayfayı veya tüm bir bölümü değiştirmek gibi), memoization genellikle gereksizdir. Öte yandan, uygulamanız daha çok bir çizim editörüne benziyorsa ve etkileşimlerin çoğu ayrıntılı ise (şekilleri taşımak gibi), o zaman memoization'ı çok yararlı bulabilirsiniz.
+=======
+If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful.
+>>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
 `useMemo` ile optimizasyon sadece birkaç durumda değerlidir:
 
@@ -225,7 +229,8 @@ export default function App() {
 
 ```
 
-```js src/TodoList.js active
+{/* TODO(@poteto) - investigate potential false positives in react compiler validation */}
+```js {expectedErrors: {'react-compiler': [5]}} src/TodoList.js active
 import { useMemo } from 'react';
 import { filterTodos } from './utils.js'
 
@@ -717,7 +722,7 @@ export default function TodoList({ todos, theme, tab }) {
 }
 ```
 
-```js src/List.js
+```js {expectedErrors: {'react-compiler': [5, 6]}} src/List.js
 import { memo } from 'react';
 
 const List = memo(function List({ items }) {
@@ -855,7 +860,7 @@ export default function TodoList({ todos, theme, tab }) {
 }
 ```
 
-```js src/List.js
+```js {expectedErrors: {'react-compiler': [5, 6]}} src/List.js
 import { memo } from 'react';
 
 const List = memo(function List({ items }) {
@@ -1127,7 +1132,7 @@ function ChatRoom({ roomId }) {
       serverUrl: 'https://localhost:1234',
       roomId: roomId
     }
-    
+
     const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
@@ -1371,7 +1376,7 @@ Hangi bağımlılığın memoizasyonu bozduğunu bulduğunuzda, ya onu kaldırma
 
 Diyelim ki `Chart` bileşeni [`memo`](/reference/react/memo) içine sarılmış olsun. `ReportList` bileşeni yeniden oluşturulduğunda listedeki her `Chart`'ın yeniden oluşturulmasını atlamak istiyorsunuz. Ancak, `useMemo` öğesini bir döngü içinde çağıramazsınız:
 
-```js {5-11}
+```js {expectedErrors: {'react-compiler': [6]}} {5-11}
 function ReportList({ items }) {
   return (
     <article>
