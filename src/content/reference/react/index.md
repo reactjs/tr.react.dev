@@ -37,6 +37,12 @@ React Compiler, React bileşenlerinizi ve değerlerinizi otomatik olarak **memoi
 * [Directives](/reference/react-compiler/directives) - Derlemeyi kontrol etmek için fonksiyon seviyesinde direktifler.
 * [Compiling Libraries](/reference/react-compiler/compiling-libraries) - Önceden derlenmiş kütüphane kodu dağıtımı rehberi.
 
+## ESLint Plugin React Hooks {/*eslint-plugin-react-hooks*/}
+
+The [ESLint plugin for React Hooks](/reference/eslint-plugin-react-hooks) helps enforce the Rules of React:
+
+* [Lints](/reference/eslint-plugin-react-hooks) - Detailed documentation for each lint with examples.
+
 ## Rules of React {/*rules-of-react*/}
 
 React, kalıpların anlaşılması kolay ve yüksek kaliteli uygulamalar üretecek şekilde nasıl ifade edileceğine ilişkin deyimlere — veya kurallara — sahiptir:

@@ -95,7 +95,7 @@ Render etme sırasında `play()` veya `pause()` metodlarını çağırmak isteye
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [7, 9]}}
 import { useState, useRef, useEffect } from 'react';
 
 function VideoPlayer({ src, isPlaying }) {
@@ -617,7 +617,7 @@ A common pitfall for preventing Effects firing twice in development is to use a 
 
 This makes it so you only see `"✅ Connecting..."` once in development, but it doesn't fix the bug.
 
-When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix". 
+When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix".
 
 To fix the bug, it is not enough to just make the Effect run once. The effect needs to work after re-mounting, which means the connection needs to be cleaned up like in the solution above.
 
@@ -1468,7 +1468,8 @@ Bu bileşen seçilen kişinin biyografisini göstermektedir. Biyografiyi, bileş
 
 <Sandpack>
 
-```js src/App.js
+{/* not the most efficient, but this validation is enabled in the linter only, so it's fine to ignore it here since we know what we're doing */}
+```js {expectedErrors: {'react-compiler': [9]}} src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1541,7 +1542,8 @@ Yarış koşullarını düzeltmek için bir temizleme fonksiyonu ekleyin:
 
 <Sandpack>
 
-```js src/App.js
+{/* not the most efficient, but this validation is enabled in the linter only, so it's fine to ignore it here since we know what we're doing */}
+```js {expectedErrors: {'react-compiler': [9]}} src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1605,4 +1607,3 @@ Güncelliğini yitirmiş bir API çağrısının sonucunu göz ardı etmenin yan
 </Solution>
 
 </Challenges>
-

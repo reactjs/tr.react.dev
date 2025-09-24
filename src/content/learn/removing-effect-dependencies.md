@@ -303,7 +303,7 @@ Linteri bastırmak, bulunması ve düzeltilmesi zor olan çok mantıksız hatala
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
 export default function Timer() {
@@ -794,7 +794,7 @@ Bunu bir bağımlılık olarak bildirmek önemlidir! Bu, örneğin `roomId` değ
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [10]}}
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 

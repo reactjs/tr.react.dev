@@ -53,7 +53,7 @@ Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tu
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [11]}}
 import { useState } from 'react';
 
 export default function MovingDot() {
@@ -207,7 +207,7 @@ Bu input alanları, `onChange` yöneticileri state'in mutate olmasına neden old
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [11, 15, 19]}}
 import { useState } from 'react';
 
 export default function Form() {
@@ -830,7 +830,7 @@ Göreviniz tüm bu hataları düzeltmektir. Hataları düzeltirken, bu hataları
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [11]}}
 import { useState } from 'react';
 
 export default function Scoreboard() {
@@ -986,7 +986,7 @@ Herhangi beklenmedik değişiklik durumunda mutasyon gerçekleşir. `App.js` dos
 
 <Sandpack>
 
-```js src/App.js
+```js {expectedErrors: {'react-compiler': [17]}} src/App.js
 import { useState } from 'react';
 import Background from './Background.js';
 import Box from './Box.js';
@@ -1291,7 +1291,7 @@ Bu, önceki meydan okumadaki hatalı örnek ile aynıdır. Bu sefer, mutasyonu I
 
 <Sandpack>
 
-```js src/App.js
+```js {expectedErrors: {'react-compiler': [18]}} src/App.js
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import Background from './Background.js';

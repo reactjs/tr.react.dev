@@ -47,9 +47,9 @@ function Tooltip() {
 
 #### Parametreler {/*parameters*/}
 
-* `kurulum (setup)`: Efekt kodunu barındıran fonksiyondur. Kurulum fonksiyonunuz ayrıca isteğe bağlı *temizleme (cleanup)* fonksiyonu döndürebilir. React, bileşeninizi DOM'a eklemeden önce kurulum fonksiyonunuzu çalıştırır. Bağımlılıkların değişmesiyle tetiklenen render'ların ardından öncelikle eski değerlerle birlikte temizleme fonksiyonunuzu (varsa) çalıştırılır ve ardından yeni değerlerle birlikte kurulum fonksiyonuzu çalıştırılır. Bileşen DOM'dan kaldırılmadan önce, React son kez temizleme fonksiyonunuzu çalıştırır.
- 
-* **isteğe bağlı** `bağımlılıklar (dependencies)`: Kurulum fonksiyonu içerisinde başvurulan reaktif değerlerin listesidir. Reaktif değerler; prop'lar, state'ler ve de bileşenin içerisinde tanımlanan değişkenler ve fonksiyonlardır. Linter'ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reaktif değerin doğru bir şekilde bağımlılıklara eklendiğini kontrol eder. Bağımlılık listesi, sabit sayıda öğeye sahiptir ve `[dep1, dep2, dep3]` şeklinde satır içi yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) kullanarak bağımlılıkları önceki değerleriyle karşılaştırır. Eğer bu argümanı atlarsanız, bileşen her render edildiğinde efekt çalıştırılır.
+* `setup`: Effect'in mantığını içeren fonksiyondur. `setup` fonksiyonun isteğe bağlı olarak bir *cleanup* fonksiyonu da döndürebilir. Component DOM’a eklenmeden önce React `setup` fonksiyonunu çalıştırır. Değişen dependencies ile her yeniden render sonrasında React önce *cleanup* fonksiyonunu (eğer sağladıysan) eski değerlerle çalıştırır, ardından `setup` fonksiyonunu yeni değerlerle çalıştırır. Component DOM’dan kaldırılmadan önce React *cleanup* fonksiyonunu çalıştırır.
+
+* **optional** `dependencies`: `setup` kodu içinde referans verilen tüm reactive value’ların listesi. Reactive value’lar props, state ve component body’si içinde doğrudan tanımlanan tüm değişkenler ve fonksiyonları kapsar. Eğer linter’in [React için yapılandırıldıysa](/learn/editor-setup#linting), her reactive value’nun doğru şekilde dependency olarak belirtildiğini doğrulayacaktır. Dependencies listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` şeklinde inline yazılmalıdır. React her dependency’yi önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak karşılaştırır. Eğer bu argümanı atarsan, Effect her component re-render işleminden sonra yeniden çalışır.
 
 #### Dönüş değeri {/*returns*/}
 
@@ -87,7 +87,8 @@ Bunu yapmak için çift dikiş renderlamaya ihtiyacınız vardır:
 
 **Tüm bunlar tarayıcı ekrana yeniden çizmeden önce yaşanmalıdır**. Kullanıcının kutunun konum değiştirme hareketini görmesini istemezsiniz. Yerleşim ölçümlerini yapmak için `useLayoutEffect`'i çağırın:
 
-```js {5-8}
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [7]}} {5-8}
 function Tooltip() {
   const ref = useRef(null);
   const [tooltipHeight, setTooltipHeight] = useState(0); // Henüz yüksekliğini bilmiyorsunuz
@@ -187,7 +188,8 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
 import { useRef, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -337,7 +339,8 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
 import { useRef, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -484,7 +487,8 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
 import { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -627,7 +631,7 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+```js {expectedErrors: {'react-compiler': [10, 11]}} src/Tooltip.js active
 import { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';

@@ -197,7 +197,7 @@ React, bileşenin gövdesinin [saf bir fonksiyon gibi davranmasını](/learn/kee
 
 **Render sırasında** bir ref'i okumak veya yazmak bu beklentileri bozar.
 
-```js {3-4,6-7}
+```js {expectedErrors: {'react-compiler': [4]}} {3-4,6-7}
 function MyComponent() {
   // ...
   // 🚩 Render sırasında bir ref'i yazmayın

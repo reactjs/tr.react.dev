@@ -244,7 +244,7 @@ input { margin: 10px; }
 
 </Sandpack>
 
-Buna yaygın bir alternatif olan arayüz modeli, sonuç listesinin güncellenmesini *ertelemek* ve yeni sonuçlar hazır olana kadar öncekini göstermeye devam etmektir. Sorgunun ertelenmiş sürümünü aşağıya aktarmak için `useDeferredValue`'yu çağırın: 
+Yaygın bir alternatif UI pattern, sonuçlar listesini güncellemeyi *defer* etmek ve yeni sonuçlar hazır olana kadar önceki sonuçları göstermeye devam etmektir. `useDeferredValue` çağırarak sorgunun *deferred* bir versiyonunu aşağıya iletebilirsin:
 
 ```js {3,11}
 export default function App() {
@@ -669,7 +669,7 @@ export default function App() {
 }
 ```
 
-```js src/SlowList.js
+```js {expectedErrors: {'react-compiler': [19, 20]}} src/SlowList.js
 import { memo } from 'react';
 
 const SlowList = memo(function SlowList({ text }) {
@@ -746,7 +746,7 @@ export default function App() {
 }
 ```
 
-```js src/SlowList.js
+```js {expectedErrors: {'react-compiler': [19, 20]}} src/SlowList.js
 import { memo } from 'react';
 
 const SlowList = memo(function SlowList({ text }) {

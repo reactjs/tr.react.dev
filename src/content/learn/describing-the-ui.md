@@ -474,7 +474,7 @@ Bileşenlerinizi yalnızca saf fonksiyonlar olarak yazarsanız, kod tabanınız 
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [5]}}
 let guest = 0;
 
 function Cup() {

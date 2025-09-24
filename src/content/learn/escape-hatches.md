@@ -201,7 +201,7 @@ Efekte ihtiyacınızın olmadığı iki sık karşılaşılan durum vardır:
 
 Örneğin, bir state'i başka bir state'e göre ayarlamak için Efekte ihtiyacınız yoktur:
 
-```js {5-9}
+```js {expectedErrors: {'react-compiler': [8]}} {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
