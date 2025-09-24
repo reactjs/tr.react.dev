@@ -179,6 +179,7 @@ export default function App() {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-compiler/react-compiler
     setIsClient(true);
   }, []);
 
