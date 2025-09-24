@@ -176,10 +176,9 @@ hydrate(<App />, document.getElementById('root'));
 import { useState, useEffect } from "react";
 
 export default function App() {
-  const [isClient, setIsClient] = useState(false);
+const [isClient, setIsClient] = useState(() => typeof window !== "undefined");
 
   useEffect(() => {
-    // eslint-disable-next-line react-compiler/react-compiler
     setIsClient(true);
   }, []);
 
