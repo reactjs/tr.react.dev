@@ -223,11 +223,7 @@ function useCallback(fn, dependencies) {
 
 #### useCallback'i her yere eklemeli misiniz? {/*should-you-add-usecallback-everywhere*/}
 
-<<<<<<< HEAD
-Uygulamanız bu site gibiyse ve basit etkileşimler barındırıyorsa (sayfayı veya bir bölümünü tamamen değiştirmek gibi), önbelleğe almak genelde gereksizdir. Ancak uygulamanız daha çok çizim editörüne benziyorsa ve etkileşimlerin çoğu ayrıntılıysa (şekilleri taşımak gibi), son derece faydalı olacaktır. 
-=======
-If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful.
->>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
+Eğer uygulaman sen bu siteye benziyorsa ve etkileşimlerin çoğu kaba (örneğin bir sayfanın veya tüm bir bölümün değiştirilmesi gibi) ise, memoization genellikle gereksizdir. Öte yandan, eğer uygulaman bir çizim editörüne daha çok benziyorsa ve etkileşimlerin çoğu daha ayrıntılı (örneğin şekilleri taşımak gibi) ise, o zaman memoization’ı oldukça faydalı bulabilirsin.
 
 Bir fonksiyonu `useCallback` ile önbelleğe almak yalnızca birkaç durum için faydalıdır:
 

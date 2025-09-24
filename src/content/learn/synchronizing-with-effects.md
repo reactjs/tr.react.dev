@@ -1004,13 +1004,8 @@ import { useEffect, useRef } from 'react';
 export default function MyInput({ value, onChange }) {
   const ref = useRef(null);
 
-<<<<<<< HEAD
   // YAPILACAK: Bu tam olarak çalışmamakta. Düzeltin.
   // ref.current.focus()    
-=======
-  // TODO: This doesn't quite work. Fix it.
-  // ref.current.focus()
->>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
   return (
     <input
