@@ -420,7 +420,11 @@ input { margin: 10px; }
 
 Bunu iki adımda gerçekleşen bir süreç olarak düşünebilirsiniz:
 
+<<<<<<< HEAD
 1. **İlk olarak, React yeni `query` (`"ab"`) ancak eski `deferredQuery` (hala `"a")` ile yeniden render gerçekleştirir.** Sonuç listesine ilettiğiniz `deferredQuery` değeri *ertelenmiştir:* `query` değerinin "gerisindedir".
+=======
+1. **First, React re-renders with the new `query` (`"ab"`) but with the old `deferredQuery` (still `"a"`).** The `deferredQuery` value, which you pass to the result list, is *deferred:* it "lags behind" the `query` value.
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 2. **Arka planda, React `query` ve `deferredQuery`'nin *her ikisini de* `"ab"` olarak yeniden render etmeye çalışır.** Bu render tamamlandığında, React ekranda gösterir. Ancak askıya alınırsa (`"ab"`'nin sonuçları henüz yüklenmediyse), React render'dan vazgeçer ve veriler yüklendikten sonra tekrar render etmeyi dener. Kullanıcı, veriler hazır olana kadar eski ertelenmiş değeri görmeye devam eder.
 

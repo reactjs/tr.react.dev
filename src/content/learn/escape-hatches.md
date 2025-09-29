@@ -455,8 +455,8 @@ Bu ideal değildir. Sohbete yalnızca `roomId` değiştiğinde tekrar bağlanmak
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -471,7 +471,7 @@ Bu ideal değildir. Sohbete yalnızca `roomId` değiştiğinde tekrar bağlanmak
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 

@@ -52,7 +52,11 @@ export default function ProductPage({ productId, referrer, theme }) {
 
 İlk render'da, kendisine ilettiğiniz `fn` fonksiyonunu döndürür.
 
+<<<<<<< HEAD
 Sonraki render'larda, ya son render'dan önce kaydedilmiş (bağımlılıkları değişmediyse) `fn` fonksiyonunu ya da o anki render'da ilettiğiniz `fn` fonksiyonunu döndürür.
+=======
+During subsequent renders, it will either return an already stored `fn` function from the last render (if the dependencies haven't changed), or return the `fn` function you have passed during this render.
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
@@ -225,7 +229,11 @@ function useCallback(fn, dependencies) {
 
 Eğer uygulaman sen bu siteye benziyorsa ve etkileşimlerin çoğu kaba (örneğin bir sayfanın veya tüm bir bölümün değiştirilmesi gibi) ise, memoization genellikle gereksizdir. Öte yandan, eğer uygulaman bir çizim editörüne daha çok benziyorsa ve etkileşimlerin çoğu daha ayrıntılı (örneğin şekilleri taşımak gibi) ise, o zaman memoization’ı oldukça faydalı bulabilirsin.
 
+<<<<<<< HEAD
 Bir fonksiyonu `useCallback` ile önbelleğe almak yalnızca birkaç durum için faydalıdır:
+=======
+Caching a function with `useCallback` is only valuable in a few cases:
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 - [`memo`](/reference/react/memo)'ya sarılmış bir bileşene prop olarak geçersiniz. Değer değişmediyse render'ı atlamak istersiniz. Önbelleğe alma işlemi, yalnızca bağımlılıkları değiştiyse yeniden render tetikler.
 - Geçtiğiniz fonksiyon daha sonra bazı Hook'ların bağımlılığı olarak kullanırsınız. Örneğin, `useCallback`'e sarılmış başka bir fonksiyonun bağımlılığıdır ya da [`useEffect`](/reference/react/useEffect) için bu fonksiyona bağımlısınızdır.

@@ -1689,11 +1689,17 @@ button { margin-left: 10px; }
 
 ### Effect'te nihai prop'ları ve state'i okuma {/*reading-the-latest-props-and-state-from-an-effect*/}
 
-<Wip>
+<Canary>
 
+<<<<<<< HEAD
 Bu bölümde, React'in stabil sürümünde **henüz yayınlanmamış deneysel bir API** anlatılmaktadır.
+=======
+**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
-</Wip>
+[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+
+</Canary>
 
 Varsayılan olarak, Effect'ten reaktif bir değer okuduğunuz zaman bu değeri bağımlılık olarak eklemeniz gerekmektedir. Bu, Effect'inizin o değer her değiştiğinde "tepki" vermesini sağlar. Çoğu bağımlılık için istediğiniz davranış budur.
 
@@ -1708,7 +1714,11 @@ function Page({ url, shoppingCart }) {
 }
 ```
 
+<<<<<<< HEAD
 **Ya `url` her değiştiğinde yeni bir sayfa ziyareti kaydetmek istiyorsanız ancak sadece `shoppingCart` değiştiğinde kaydetmek istemiyorsanız?** [Reaktivite kurallarını](#specifying-reactive-dependencies) çiğnemeden `shoppingCart`'ı bağımlılıklardan çıkartamazsınız. Ancak, Effect içinden çağırılsa bile bir kod parçasının yapılan değişikliklere "tepki" vermesini *istemediğinizi* ifade edebilirsiniz. [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook'u ile [*Effect Olayı* bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`'ı okuyan kodu onun içine taşıyın:
+=======
+<CanaryBadge /> **What if you want to log a new page visit after every `url` change, but *not* if only the `shoppingCart` changes?** You can't exclude `shoppingCart` from dependencies without breaking the [reactivity rules.](#specifying-reactive-dependencies) However, you can express that you *don't want* a piece of code to "react" to changes even though it is called from inside an Effect. [Declare an *Effect Event*](/learn/separating-events-from-effects#declaring-an-effect-event) with the [`useEffectEvent`](/reference/react/useEffectEvent) Hook, and move the code reading `shoppingCart` inside of it:
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {
