@@ -1689,11 +1689,13 @@ button { margin-left: 10px; }
 
 ### Effect'te nihai prop'ları ve state'i okuma {/*reading-the-latest-props-and-state-from-an-effect*/}
 
-<Wip>
+<Canary>
 
-Bu bölümde, React'in stabil sürümünde **henüz yayınlanmamış deneysel bir API** anlatılmaktadır.
+**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında kullanılabilir.**
 
-</Wip>
+[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
+
+</Canary>
 
 Varsayılan olarak, Effect'ten reaktif bir değer okuduğunuz zaman bu değeri bağımlılık olarak eklemeniz gerekmektedir. Bu, Effect'inizin o değer her değiştiğinde "tepki" vermesini sağlar. Çoğu bağımlılık için istediğiniz davranış budur.
 
@@ -1708,7 +1710,7 @@ function Page({ url, shoppingCart }) {
 }
 ```
 
-**Ya `url` her değiştiğinde yeni bir sayfa ziyareti kaydetmek istiyorsanız ancak sadece `shoppingCart` değiştiğinde kaydetmek istemiyorsanız?** [Reaktivite kurallarını](#specifying-reactive-dependencies) çiğnemeden `shoppingCart`'ı bağımlılıklardan çıkartamazsınız. Ancak, Effect içinden çağırılsa bile bir kod parçasının yapılan değişikliklere "tepki" vermesini *istemediğinizi* ifade edebilirsiniz. [`useEffectEvent`](/reference/react/experimental_useEffectEvent) Hook'u ile [*Effect Olayı* bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`'ı okuyan kodu onun içine taşıyın:
+<CanaryBadge /> **Peki ya her `url` değişiminden sonra yeni bir sayfa ziyareti kaydetmek istiyorsunuz ama yalnızca `shoppingCart` değiştiğinde bunu yapmak istemiyorsunuz?** `shoppingCart`’ı bağımlılıklardan çıkarmak, [reaktivite kurallarını](#specifying-reactive-dependencies) bozacağı için mümkün değildir. Ancak bir kod parçasının Effect içinde çağrılsa bile değişimlere "tepki vermemesini" ifade edebilirsiniz. [`useEffectEvent`](/reference/react/useEffectEvent) Hook’u ile bir *Effect Event* [bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`’ı okuyan kodu bunun içine taşıyın:
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {

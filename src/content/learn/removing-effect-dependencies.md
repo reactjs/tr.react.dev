@@ -610,11 +610,13 @@ function ChatRoom({ roomId }) {
 
 ### Bir değeri, değişikliklerine "tepki vermeden" okumak mı istiyorsunuz? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
 
-<Wip>
+<Canary>
 
-Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
+**`useEffectEvent` API’si şu anda yalnızca React’in Canary ve Experimental kanallarında kullanılabilir.**
 
-</Wip>
+[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+
+</Canary>
 
 Kullanıcı yeni bir mesaj aldığında `isMuted` değeri `true` olmadığı sürece bir ses çalmak istediğinizi varsayalım:
 
@@ -1262,8 +1264,8 @@ Efektin içinde reaktif olmaması gereken bir kod satırı var mı? Reaktif olma
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -1277,7 +1279,7 @@ Efektin içinde reaktif olmaması gereken bir kod satırı var mı? Reaktif olma
 
 ```js
 import { useState, useEffect, useRef } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { FadeInAnimation } from './animation.js';
 
 function Welcome({ duration }) {
@@ -1389,8 +1391,8 @@ Efektinizin `duration` ın en son değerini okuması gerekir, ancak `duration`da
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -1405,7 +1407,7 @@ Efektinizin `duration` ın en son değerini okuması gerekir, ancak `duration`da
 ```js
 import { useState, useEffect, useRef } from 'react';
 import { FadeInAnimation } from './animation.js';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 function Welcome({ duration }) {
   const ref = useRef(null);
@@ -1825,8 +1827,8 @@ Bu fonksiyonlardan bir diğeri yalnızca içe aktarılan bir API yöntemine baz�
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1907,7 +1909,7 @@ export default function App() {
 
 ```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function ChatRoom({ roomId, createConnection, onMessage }) {
   useEffect(() => {
@@ -2120,8 +2122,8 @@ Sonuç olarak, sohbet yalnızca anlamlı bir şey (`roomId` veya `isEncrypted`) 
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -2189,7 +2191,7 @@ export default function App() {
 
 ```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import {
   createEncryptedConnection,
   createUnencryptedConnection,

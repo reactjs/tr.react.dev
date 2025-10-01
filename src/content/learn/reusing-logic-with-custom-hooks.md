@@ -837,11 +837,13 @@ export default function ChatRoom({ roomId }) {
 
 ### Olay yöneticilerini özel Hook'lara geçirme {/*passing-event-handlers-to-custom-hooks*/}
 
-<Wip>
+<Canary>
 
-Bu bölüm **henüz kararlı bir sürümde yayınlanmamış olan deneysel bir API'yi** açıklar.
+**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
 
-</Wip>
+[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+
+</Canary>
 
 `useChatRoom`'u daha fazla bileşende kullanmaya başladıkça, bileşenlerin onun davranışını özelleştirmesine izin vermek isteyebilirsiniz. Örneğin, şu anda, bir mesaj geldiğinde ne yapılacağının mantığı Hook'un içine sabit kodlanmış durumda:
 
@@ -985,7 +987,7 @@ export default function ChatRoom({ roomId }) {
 
 ```js src/useChatRoom.js
 import { useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection } from './chat.js';
 
 export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
@@ -1070,8 +1072,8 @@ export function showNotification(message, theme = 'dark') {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1668,7 +1670,7 @@ export default function App() {
 
 ```js src/useFadeIn.js active
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export function useFadeIn(ref, duration) {
   const [isRunning, setIsRunning] = useState(true);
@@ -1721,8 +1723,8 @@ html, body { min-height: 300px; }
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -2216,8 +2218,8 @@ Görünen o ki `useInterval` Hook'unuz argüman olarak bir olay dinleyicisi alı
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -2260,7 +2262,7 @@ export function useCounter(delay) {
 
 ```js src/useInterval.js
 import { useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export function useInterval(onTick, delay) {
   useEffect(() => {
@@ -2287,8 +2289,8 @@ Bu değişiklikle birlikte, her iki interval de beklediğiniz gibi çalışır v
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -2332,7 +2334,7 @@ export function useCounter(delay) {
 
 ```js src/useInterval.js active
 import { useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export function useInterval(callback, delay) {
   const onTick = useEffectEvent(callback);
