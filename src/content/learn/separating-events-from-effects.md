@@ -402,21 +402,13 @@ Bu reaktif olmayan mantığı, etrafındaki reaktif Efektten ayırmak için bir 
 
 <Canary>
 
-<<<<<<< HEAD
-Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
-=======
-**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
->>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
+**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında kullanılabilir.**
 
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
 
-<<<<<<< HEAD
-Bu reaktif olmayan mantığı Efektinizden çıkarmak için [`useEffectEvent`](/reference/react/experimental_useEffectEvent) adlı özel bir Hook kullanın:
-=======
 </Canary>
 
-Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
->>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
+Bu non-reactive mantığı Effect’inden çıkarmak için [`useEffectEvent`](/reference/react/useEffectEvent) adında özel bir Hook kullan:  
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -590,13 +582,9 @@ Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. 
 
 <Canary>
 
-<<<<<<< HEAD
-Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
-=======
-**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
->>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
+**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
 
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
 
 </Canary>
 
@@ -895,13 +883,9 @@ Linteri bastırmanın diğer doğru alternatifleri için [Efekt Bağımlılıkla
 
 <Canary>
 
-<<<<<<< HEAD
-Bu bölümde, React'in kararlı bir sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
-=======
-**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
->>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
+**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
 
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
 
 </Canary>
 
