@@ -837,19 +837,7 @@ export default function ChatRoom({ roomId }) {
 
 ### Olay yöneticilerini özel Hook'lara geçirme {/*passing-event-handlers-to-custom-hooks*/}
 
-<<<<<<< HEAD
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
-
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-`useChatRoom`'u daha fazla bileşende kullanmaya başladıkça, bileşenlerin onun davranışını özelleştirmesine izin vermek isteyebilirsiniz. Örneğin, şu anda, bir mesaj geldiğinde ne yapılacağının mantığı Hook'un içine sabit kodlanmış durumda:
-=======
-As you start using `useChatRoom` in more components, you might want to let components customize its behavior. For example, currently, the logic for what to do when a message arrives is hardcoded inside the Hook:
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+`useChatRoom`'u daha fazla component içinde kullanmaya başladığında, component'ların bu hook'un davranışını özelleştirmesine izin vermek isteyebilirsin. Örneğin, şu anda bir mesaj geldiğinde ne yapılacağına dair mantık Hook içinde sabit (hardcoded) durumda:
 
 ```js {9-11}
 export function useChatRoom({ serverUrl, roomId }) {
