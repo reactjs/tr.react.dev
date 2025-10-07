@@ -4,13 +4,9 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-<<<<<<< HEAD
-`<Fragment>`, genellikle `<>...</>` sözdizimiyle birlikte kullanılır ve bir kaplayıcı düğüm olmadan elemanları gruplamaya olanak tanır.
-=======
-`<Fragment>`, often used via `<>...</>` syntax, lets you group elements without a wrapper node. 
+`<Fragment>`, genellikle `<>...</>` sözdizimiyle kullanılır, öğeleri sarmalayıcı bir düğüm olmadan gruplamanı sağlar.  
 
-<Experimental> Fragments can also accept refs, which enable interacting with underlying DOM nodes without adding wrapper elements. See reference and usage below.</Experimental>
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+<Experimental> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin.</Experimental>
 
 ```js
 <>
@@ -33,38 +29,34 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
-<<<<<<< HEAD
-**isteğe bağlı** `anahtar`: Açık `<Fragment>` sözdizimiyle tanımlanan Fragment'ler  [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
-=======
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
-- <ExperimentalBadge />  **optional** `ref`: A ref object (e.g. from [`useRef`](/reference/react/useRef)) or [callback function](/reference/react-dom/components/common#ref-callback). React provides a `FragmentInstance` as the ref value that implements methods for interacting with the DOM nodes wrapped by the Fragment.
+- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)  
+- <ExperimentalBadge /> **optional** `ref`: Bir ref objesi (ör. [`useRef`](/reference/react/useRef) kullanılarak) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler sunan bir `FragmentInstance` sağlar.
 
 ### <ExperimentalBadge /> FragmentInstance {/*fragmentinstance*/}
 
-When you pass a ref to a fragment, React provides a `FragmentInstance` object with methods for interacting with the DOM nodes wrapped by the fragment:
+Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler içeren bir `FragmentInstance` nesnesi sağlar:
 
-**Event handling methods:**
-- `addEventListener(type, listener, options?)`: Adds an event listener to all first-level DOM children of the Fragment.
-- `removeEventListener(type, listener, options?)`: Removes an event listener from all first-level DOM children of the Fragment.
-- `dispatchEvent(event)`: Dispatches an event to a virtual child of the Fragment to call any added listeners and can bubble to the DOM parent.
+**Olay yönetimi yöntemleri:**
+- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.  
+- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.  
+- `dispatchEvent(event)`: Fragment'in sanal bir çocuğuna bir olay gönderir; eklenen dinleyicileri çağırır ve DOM üstüne kabarcık yapabilir.
 
-**Layout methods:**
-- `compareDocumentPosition(otherNode)`: Compares the document position of the Fragment with another node.
-  - If the Fragment has children, the native `compareDocumentPosition` value is returned. 
-  - Empty Fragments will attempt to compare positioning within the React tree and include `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`.
-  - Elements that have a different relationship in the React tree and DOM tree due to portaling or other insertions are `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`.
-- `getClientRects()`: Returns a flat array of `DOMRect` objects representing the bounding rectangles of all children.
-- `getRootNode()`: Returns the root node containing the Fragment's parent DOM node.
+**Düzen (layout) yöntemleri:**
+- `compareDocumentPosition(otherNode)`: Fragment'in belge konumunu başka bir düğümle karşılaştırır.  
+  - Fragment çocuklara sahipse, native `compareDocumentPosition` değeri döndürülür.  
+  - Boş Fragment'ler, React ağacı içindeki konumu karşılaştırmayı dener ve `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` içerir.  
+  - React ağacı ile DOM ağacı arasında portaling veya diğer eklemeler nedeniyle farklı ilişkiye sahip öğeler `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` olur.  
+- `getClientRects()`: Tüm çocukların sınır dikdörtgenlerini temsil eden düz bir `DOMRect` dizisi döndürür.  
+- `getRootNode()`: Fragment'in üst DOM düğümünü içeren kök düğümü döndürür.
 
-**Focus management methods:**
-- `focus(options?)`: Focuses the first focusable DOM node in the Fragment. Focus is attempted on nested children depth-first.
-- `focusLast(options?)`: Focuses the last focusable DOM node in the Fragment. Focus is attempted on nested children depth-first.
-- `blur()`: Removes focus if `document.activeElement` is within the Fragment.
+**Odak (focus) yönetimi yöntemleri:**
+- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
+- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
+- `blur()`: Eğer `document.activeElement` Fragment içindeyse odak kaldırılır.
 
-**Observer methods:**
-- `observeUsing(observer)`: Starts observing the Fragment's DOM children with an IntersectionObserver or ResizeObserver.
-- `unobserveUsing(observer)`: Stops observing the Fragment's DOM children with the specified observer.
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+**Gözlemleme (observer) yöntemleri:**
+- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.  
+- `unobserveUsing(observer)`: Belirtilen observer ile Fragment'in DOM çocuklarını gözlemlemeyi durdurur.
 
 #### Uyarılar {/*caveats*/}
 
@@ -248,16 +240,13 @@ function PostBody({ body }) {
 }
 ```
 
-<<<<<<< HEAD
-</Sandpack>
-=======
 </Sandpack>
 
 ---
 
-### <ExperimentalBadge /> Using Fragment refs for DOM interaction {/*using-fragment-refs-for-dom-interaction*/}
+### <ExperimentalBadge /> Fragment ref'lerini DOM etkileşimi için kullanma {/*using-fragment-refs-for-dom-interaction*/}
 
-Fragment refs allow you to interact with the DOM nodes wrapped by a Fragment without adding extra wrapper elements. This is useful for event handling, visibility tracking, focus management, and replacing deprecated patterns like `ReactDOM.findDOMNode()`.
+Fragment ref'leri, ekstra sarmalayıcı öğe eklemeden Fragment tarafından sarılan DOM düğümleriyle etkileşimde bulunmanı sağlar. Bu, olay yönetimi, görünürlük takibi, odak yönetimi ve `ReactDOM.findDOMNode()` gibi kullanım dışı kalmış desenlerin yerine geçmek için faydalıdır.
 
 ```js
 import { Fragment } from 'react';
@@ -275,9 +264,9 @@ function ClickableFragment({ children, onClick }) {
 ```
 ---
 
-### <ExperimentalBadge /> Tracking visibility with Fragment refs {/*tracking-visibility-with-fragment-refs*/}
+### <ExperimentalBadge /> Fragment ref'leri ile görünürlüğü izleme {/*tracking-visibility-with-fragment-refs*/}
 
-Fragment refs are useful for visibility tracking and intersection observation. This enables you to monitor when content becomes visible without requiring the child Components to expose refs:
+Fragment ref'leri, görünürlük takibi ve intersection gözlemi için faydalıdır. Bu sayede, alt Component'ların ref açığa çıkarmasına gerek kalmadan içeriğin ne zaman görünür hale geldiğini izleyebilirsin:
 
 ```js {19,21,31-34}
 import { Fragment, useRef, useLayoutEffect } from 'react';
@@ -341,4 +330,3 @@ function FocusFragment({ children }) {
 ```
 
 The `focus()` method focuses the first focusable element within the Fragment, while `focusLast()` focuses the last focusable element.
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
