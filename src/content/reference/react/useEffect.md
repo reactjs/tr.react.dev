@@ -1689,19 +1689,7 @@ button { margin-left: 10px; }
 
 ### Effect'te nihai prop'ları ve state'i okuma {/*reading-the-latest-props-and-state-from-an-effect*/}
 
-<<<<<<< HEAD
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında kullanılabilir.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Varsayılan olarak, Effect'ten reaktif bir değer okuduğunuz zaman bu değeri bağımlılık olarak eklemeniz gerekmektedir. Bu, Effect'inizin o değer her değiştiğinde "tepki" vermesini sağlar. Çoğu bağımlılık için istediğiniz davranış budur.
-=======
-By default, when you read a reactive value from an Effect, you have to add it as a dependency. This ensures that your Effect "reacts" to every change of that value. For most dependencies, that's the behavior you want.
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+Varsayılan olarak, bir Effect'ten reaktif bir değer okuduğunda, onu bir bağımlılık olarak eklemen gerekir. Bu, Effect'in o değerdeki her değişikliğe "tepki vermesini" sağlar. Çoğu bağımlılık için bu, istediğin davranıştır.
 
 **Ancak bazen, *nihai* prop'ları ve state'i Effect bunlara "tepki" vermeden okumak isteyeceksiniz.** Örneğin, her sayfa ziyareti için alışveriş sepetindeki ürünlerin sayısını kaydetmek istediğinizi hayal edin:
 
@@ -1714,11 +1702,7 @@ function Page({ url, shoppingCart }) {
 }
 ```
 
-<<<<<<< HEAD
-<CanaryBadge /> **Peki ya her `url` değişiminden sonra yeni bir sayfa ziyareti kaydetmek istiyorsunuz ama yalnızca `shoppingCart` değiştiğinde bunu yapmak istemiyorsunuz?** `shoppingCart`’ı bağımlılıklardan çıkarmak, [reaktivite kurallarını](#specifying-reactive-dependencies) bozacağı için mümkün değildir. Ancak bir kod parçasının Effect içinde çağrılsa bile değişimlere "tepki vermemesini" ifade edebilirsiniz. [`useEffectEvent`](/reference/react/useEffectEvent) Hook’u ile bir *Effect Event* [bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`’ı okuyan kodu bunun içine taşıyın:
-=======
-**What if you want to log a new page visit after every `url` change, but *not* if only the `shoppingCart` changes?** You can't exclude `shoppingCart` from dependencies without breaking the [reactivity rules.](#specifying-reactive-dependencies) However, you can express that you *don't want* a piece of code to "react" to changes even though it is called from inside an Effect. [Declare an *Effect Event*](/learn/separating-events-from-effects#declaring-an-effect-event) with the [`useEffectEvent`](/reference/react/useEffectEvent) Hook, and move the code reading `shoppingCart` inside of it:
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+**Ya her `url` değişiminde yeni bir sayfa ziyaretini kaydetmek, ancak sadece `shoppingCart` değişirse bunu yapmamak istiyorsan?** `shoppingCart`'ı bağımlılıklardan çıkarmak, [reaktivite kurallarını](#specifying-reactive-dependencies) bozacaktır. Ancak, bir Effect içinde çağrılsa bile, bir kod parçasının değişikliklere "tepki vermesini istemediğini" ifade edebilirsin. [`useEffectEvent`](/reference/react/useEffectEvent) Hook'u ile bir *Effect Event* tanımla ve `shoppingCart` okuyan kodu onun içine taşı:
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {
