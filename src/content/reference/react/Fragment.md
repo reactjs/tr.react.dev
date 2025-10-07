@@ -4,7 +4,9 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-`<Fragment>`, genellikle `<>...</>` sözdizimiyle birlikte kullanılır ve bir kaplayıcı düğüm olmadan elemanları gruplamaya olanak tanır.
+`<Fragment>`, genellikle `<>...</>` sözdizimiyle kullanılır, öğeleri sarmalayıcı bir düğüm olmadan gruplamanı sağlar.  
+
+<Experimental> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin.</Experimental>
 
 ```js
 <>
@@ -27,13 +29,42 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
-**isteğe bağlı** `anahtar`: Açık `<Fragment>` sözdizimiyle tanımlanan Fragment'ler  [anahtara](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
+- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)  
+- <ExperimentalBadge /> **optional** `ref`: Bir ref objesi (ör. [`useRef`](/reference/react/useRef) kullanılarak) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler sunan bir `FragmentInstance` sağlar.
+
+### <ExperimentalBadge /> FragmentInstance {/*fragmentinstance*/}
+
+Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler içeren bir `FragmentInstance` nesnesi sağlar:
+
+**Olay yönetimi yöntemleri:**
+- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.  
+- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.  
+- `dispatchEvent(event)`: Fragment'in sanal bir çocuğuna bir olay gönderir; eklenen dinleyicileri çağırır ve DOM üstüne kabarcık yapabilir.
+
+**Düzen (layout) yöntemleri:**
+- `compareDocumentPosition(otherNode)`: Fragment'in belge konumunu başka bir düğümle karşılaştırır.  
+  - Fragment çocuklara sahipse, native `compareDocumentPosition` değeri döndürülür.  
+  - Boş Fragment'ler, React ağacı içindeki konumu karşılaştırmayı dener ve `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` içerir.  
+  - React ağacı ile DOM ağacı arasında portaling veya diğer eklemeler nedeniyle farklı ilişkiye sahip öğeler `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` olur.  
+- `getClientRects()`: Tüm çocukların sınır dikdörtgenlerini temsil eden düz bir `DOMRect` dizisi döndürür.  
+- `getRootNode()`: Fragment'in üst DOM düğümünü içeren kök düğümü döndürür.
+
+**Odak (focus) yönetimi yöntemleri:**
+- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
+- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
+- `blur()`: Eğer `document.activeElement` Fragment içindeyse odak kaldırılır.
+
+**Gözlemleme (observer) yöntemleri:**
+- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.  
+- `unobserveUsing(observer)`: Belirtilen observer ile Fragment'in DOM çocuklarını gözlemlemeyi durdurur.
 
 #### Uyarılar {/*caveats*/}
 
 - Eğer bir Fragment'a key değeri geçirmek istiyorsanız, <>...</> sözdizimini kullanamazsınız. 'React'ten Fragment'ı içe aktarmanız ve `<Fragment key={anahtar}>...</Fragment>` şeklinde render etmeniz gerekmektedir.
 
 - React, `<><AltEleman /></>`'dan `[<AltEleman />]`'a veya geriye dönerken, ya da `<><AltEleman /></>`'dan `<AltEleman />`'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, `<><><AltEleman /></></>`'dan `<AltEleman />`'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
+
+- <ExperimentalBadge /> If you want to pass `ref` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment ref={yourRef}>...</Fragment>`.
 
 ---
 
@@ -210,3 +241,92 @@ function PostBody({ body }) {
 ```
 
 </Sandpack>
+
+---
+
+### <ExperimentalBadge /> Fragment ref'lerini DOM etkileşimi için kullanma {/*using-fragment-refs-for-dom-interaction*/}
+
+Fragment ref'leri, ekstra sarmalayıcı öğe eklemeden Fragment tarafından sarılan DOM düğümleriyle etkileşimde bulunmanı sağlar. Bu, olay yönetimi, görünürlük takibi, odak yönetimi ve `ReactDOM.findDOMNode()` gibi kullanım dışı kalmış desenlerin yerine geçmek için faydalıdır.
+
+```js
+import { Fragment } from 'react';
+
+function ClickableFragment({ children, onClick }) {
+  return (
+    <Fragment ref={fragmentInstance => {
+      fragmentInstance.addEventListener('click', handleClick);
+      return () => fragmentInstance.removeEventListener('click', handleClick);
+    }}>
+      {children}
+    </Fragment>
+  );
+}
+```
+---
+
+### <ExperimentalBadge /> Fragment ref'leri ile görünürlüğü izleme {/*tracking-visibility-with-fragment-refs*/}
+
+Fragment ref'leri, görünürlük takibi ve intersection gözlemi için faydalıdır. Bu sayede, alt Component'ların ref açığa çıkarmasına gerek kalmadan içeriğin ne zaman görünür hale geldiğini izleyebilirsin:
+
+```js {19,21,31-34}
+import { Fragment, useRef, useLayoutEffect } from 'react';
+
+function VisibilityObserverFragment({ threshold = 0.5, onVisibilityChange, children }) {
+  const fragmentRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        onVisibilityChange(entries.some(entry => entry.isIntersecting))
+      },
+      { threshold }
+    );
+    
+    fragmentRef.current.observeUsing(observer);
+    return () => fragmentRef.current.unobserveUsing(observer);
+  }, [threshold, onVisibilityChange]);
+
+  return (
+    <Fragment ref={fragmentRef}>
+      {children}
+    </Fragment>
+  );
+}
+
+function MyComponent() {
+  const handleVisibilityChange = (isVisible) => {
+    console.log('Component is', isVisible ? 'visible' : 'hidden');
+  };
+
+  return (
+    <VisibilityObserverFragment onVisibilityChange={handleVisibilityChange}>
+      <SomeThirdPartyComponent />
+      <AnotherComponent />
+    </VisibilityObserverFragment>
+  );
+}
+```
+
+This pattern is an alternative to Effect-based visibility logging, which is an anti-pattern in most cases. Relying on Effects alone does not guarantee that the rendered Component is observable by the user.
+
+---
+
+### <ExperimentalBadge /> Focus management with Fragment refs {/*focus-management-with-fragment-refs*/}
+
+Fragment refs provide focus management methods that work across all DOM nodes within the Fragment:
+
+```js
+import { Fragment, useRef } from 'react';
+
+function FocusFragment({ children }) {
+  const fragmentRef = useRef(null);
+
+  return (
+    <Fragment ref={(fragmentInstance) => fragmentInstance?.focus()}>
+      {children}
+    </Fragment>
+  );
+}
+```
+
+The `focus()` method focuses the first focusable element within the Fragment, while `focusLast()` focuses the last focusable element.

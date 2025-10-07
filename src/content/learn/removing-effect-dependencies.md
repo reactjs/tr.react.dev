@@ -610,15 +610,7 @@ function ChatRoom({ roomId }) {
 
 ### Bir değeri, değişikliklerine "tepki vermeden" okumak mı istiyorsunuz? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
 
-<Canary>
-
-**`useEffectEvent` API’si şu anda yalnızca React’in Canary ve Experimental kanallarında kullanılabilir.**
-
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Kullanıcı yeni bir mesaj aldığında `isMuted` değeri `true` olmadığı sürece bir ses çalmak istediğinizi varsayalım:
+Diyelim ki kullanıcı yeni bir mesaj aldığında, eğer `isMuted` değeri `true` değilse bir ses çalmak istiyorsun:
 
 ```js {3,10-12}
 function ChatRoom({ roomId }) {
@@ -1261,22 +1253,6 @@ Efektin içinde reaktif olmaması gereken bir kod satırı var mı? Reaktif olma
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect, useRef } from 'react';
 import { useEffectEvent } from 'react';
@@ -1387,22 +1363,6 @@ html, body { min-height: 300px; }
 Efektinizin `duration` ın en son değerini okuması gerekir, ancak `duration`daki değişikliklere "tepki" vermesini istemezsiniz. Animasyonu başlatmak için `duration` kullanıyorsunuz, ancak animasyonu başlatmak reaktif değildir. Reaktif olmayan kod satırını bir Efekt Olayı içine alın ve bu işlevi Efektinizden çağırın.
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js
 import { useState, useEffect, useRef } from 'react';
@@ -1827,8 +1787,8 @@ Bu fonksiyonlardan bir diğeri yalnızca içe aktarılan bir API yöntemine baz�
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -2122,8 +2082,8 @@ Sonuç olarak, sohbet yalnızca anlamlı bir şey (`roomId` veya `isEncrypted`) 
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },

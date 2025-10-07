@@ -400,15 +400,7 @@ Bu reaktif olmayan mantığı, etrafındaki reaktif Efektten ayırmak için bir 
 
 ### Bir Efekt Olayı Bildirme {/*declaring-an-effect-event*/}
 
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında kullanılabilir.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Bu non-reactive mantığı Effect’inden çıkarmak için [`useEffectEvent`](/reference/react/useEffectEvent) adında özel bir Hook kullan:  
+Bu reaktif olmayan mantığı Effect'ten ayırmak için [`useEffectEvent`](/reference/react/useEffectEvent) adlı özel bir Hook kullan:
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -450,8 +442,8 @@ Yeni davranışın beklediğiniz gibi çalıştığını doğrulayın:
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -580,15 +572,7 @@ Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. 
 
 ### Efekt olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Efekt olayları, bağımlılık bağlayıcısını bastırmak isteyebileceğiniz birçok modeli düzeltmenize olanak tanır.
+Effect Event'ler, dependency linter'ını bastırma eğiliminde olabileceğin birçok deseni düzeltmene olanak tanır.
 
 Örneğin, sayfa ziyaretlerini günlüğe kaydetmek için bir Efektiniz olduğunu varsayalım:
 
@@ -729,7 +713,7 @@ function Page({ url }) {
 }
 ```
 
-`UseEffectEvent` React'in kararlı bir parçası haline geldikten sonra, **kuralın asla bastırılmamasını** öneriyoruz.
+**Linter'ı asla bastırmamanı** tavsiye ediyoruz.
 
 Kuralı bastırmanın ilk dezavantajı, Efektinizin kodunuza eklediğiniz yeni bir reaktif bağımlılığa "tepki vermesi" gerektiğinde React'in artık sizi uyarmayacak olmasıdır. Önceki örnekte, React size bunu yapmanızı hatırlattığı için bağımlılıklara `url` eklediniz. Linter'ı devre dışı bırakırsanız, bu Efekt üzerinde gelecekte yapacağınız düzenlemeler için artık böyle hatırlatıcılar almayacaksınız. Bu da hatalara yol açar.
 
@@ -803,22 +787,6 @@ Orijinal kodun yazarı, Effect'in herhangi bir reaktif değere bağlı olmadığ
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
 import { useEffectEvent } from 'react';
@@ -881,15 +849,7 @@ Linteri bastırmanın diğer doğru alternatifleri için [Efekt Bağımlılıkla
 
 ### Efekt Olaylarının Sınırlamaları {/*limitations-of-effect-events*/}
 
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Efekt Olayları, kullanma şekliniz açısından oldukça sınırlıdır:
+Effect Event'lerin kullanım şekli açısından oldukça sınırlıdır:
 
 - **Sadece Efektlerin içinden çağırın.**
 - **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
@@ -978,23 +938,6 @@ Bu kodu düzeltmek için kurallara uymak yeterlidir.
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
-
 ```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
@@ -1047,22 +990,6 @@ Her zamanki gibi, Efektlerde hata ararken, linter bastırmalarını arayarak ba�
 Suppression yorumunu kaldırırsanız, React size bu Efektin kodunun `increment` değerine bağlı olduğunu söyleyecektir, ancak siz bu Efektin herhangi bir reaktif değere (`[]`) bağlı olmadığını iddia ederek React'e "yalan söylediniz". Bağımlılık dizisine `increment` ekleyin:
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1126,22 +1053,6 @@ Görünüşe göre zamanlayıcıyı kuran Efekt `increment` değerine "tepki" ve
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
 import { useEffectEvent } from 'react';
@@ -1194,22 +1105,6 @@ Sorun, Efekt içindeki kodun `increment` state değişkenini kullanmasıdır. Bu
 Sorunu çözmek için, Efektten bir `onTick` Efekt olayı çıkarın:
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1275,22 +1170,6 @@ Effect olayları içindeki kod reaktif değildir. `setInterval` çağrısının 
 </Hint>
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1361,22 +1240,6 @@ button { margin: 10px; }
 Yukarıdaki örnekle ilgili sorun, kodun gerçekte ne yapması gerektiğini düşünmeden `onMount` adlı bir Effect Event çıkarmasıdır. Efekt olaylarını yalnızca belirli bir nedenle çıkarmalısınız: kodunuzun bir bölümünü reaktif olmayan hale getirmek istediğinizde. Bununla birlikte, `setInterval` çağrısı `delay` durum değişkenine göre reaktif olmalıdır. Eğer `delay` değişirse, aralığı sıfırdan ayarlamak istersiniz! Bu kodu düzeltmek için, tüm reaktif kodu Efektin içine geri çekin:
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1461,8 +1324,8 @@ Efektiniz hangi odaya bağlı olduğunu bilir. Efekt Olayınıza aktarmak isteye
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1602,8 +1465,8 @@ Sorunu çözmek için, Efekt olayı içinde *en son* `roomId`yi okumak yerine, a
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1739,8 +1602,8 @@ Ek zorluğu çözmek için, bildirim zaman aşımı kimliğini kaydedin ve Efekt
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },

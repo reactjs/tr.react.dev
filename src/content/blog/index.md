@@ -14,6 +14,12 @@ Bluesky'de [@react.dev](https://bsky.app/profile/react.dev) hesabını veya Twit
 
 <div className="sm:-mx-5 flex flex-col gap-5 mt-12">
 
+<BlogCard title="React 19.2" date="October 1, 2025" url="/blog/2025/10/01/react-19-2">
+
+React 19.2 adds new features like Activity, React Performance Tracks, useEffectEvent, and more. In this post ...
+
+</BlogCard>
+
 <BlogCard title="React Labs: View Transitions, Activity, and more" date="April 23, 2025" url="/blog/2025/04/23/react-labs-view-transitions-activity-and-more">
 
 React Labs gönderilerinde, aktif olarak araştırılan ve geliştirilen projeler hakkında yazarız. Bu yazıda, bugün denemeye hazır iki yeni deneysel özelliği ve şu anda üzerinde çalıştığımız diğer alanları paylaşıyoruz...

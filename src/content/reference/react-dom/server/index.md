@@ -10,19 +10,27 @@ title: Sunucu React DOM API'leri
 
 ---
 
-## Node.js Stream'leri için sunucu API'leri {/*server-apis-for-nodejs-streams*/}
-
-Bu metodlar yalnızca [Node.js Stream'leri](https://nodejs.org/api/stream.html) içeren ortamlarda kullanılabilir:
-
-* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream), bir React ağacını pipeable bir [Node.js Stream](https://nodejs.org/api/stream.html) olarak render eder.
-
----
-
-## Web Stream'leri için sunucu API'leri {/*server-apis-for-web-streams*/}
+## Web Streams için Sunucu API'leri {/*server-apis-for-web-streams*/}
 
 Bu metodlar sadece tarayıcılar, Deno ve bazı modern edge runtime'ları gibi [Web Stream'leri](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) içeren ortamlarda kullanılabilir:
 
-* [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) bir React ağacını bir [Okunabilir Web Stream'ine](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) render eder.
+* [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream), bir React ağacını [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) olarak render eder.  
+* [`resume`](/reference/react-dom/server/renderToPipeableStream), [`prerender`](/reference/react-dom/static/prerender) işlemini bir [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) olarak devam ettirir.
+
+
+<Note>
+
+Node.js ayrıca uyumluluk için bu yöntemleri de içerir, ancak performansın daha düşük olması nedeniyle önerilmez. Bunun yerine [özel Node.js API'lerini](#server-apis-for-nodejs-streams) kullan.
+
+</Note>
+---
+
+## Node.js Stream'leri için Sunucu API'leri {/*server-apis-for-nodejs-streams*/}
+
+Bu yöntemler yalnızca [Node.js Stream'leri](https://nodejs.org/api/stream.html) olan ortamlarda kullanılabilir:
+
+* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream), bir React ağacını pipe edilebilir bir [Node.js Stream](https://nodejs.org/api/stream.html) olarak render eder.  
+* [`resumeToPipeableStream`](/reference/react-dom/server/renderToPipeableStream), [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream) işlemini pipe edilebilir bir [Node.js Stream](https://nodejs.org/api/stream.html) olarak devam ettirir.
 
 ---
 

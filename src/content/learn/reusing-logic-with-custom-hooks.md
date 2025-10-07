@@ -837,15 +837,7 @@ export default function ChatRoom({ roomId }) {
 
 ### Olay yöneticilerini özel Hook'lara geçirme {/*passing-event-handlers-to-custom-hooks*/}
 
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
-
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-`useChatRoom`'u daha fazla bileşende kullanmaya başladıkça, bileşenlerin onun davranışını özelleştirmesine izin vermek isteyebilirsiniz. Örneğin, şu anda, bir mesaj geldiğinde ne yapılacağının mantığı Hook'un içine sabit kodlanmış durumda:
+`useChatRoom`'u daha fazla component içinde kullanmaya başladığında, component'ların bu hook'un davranışını özelleştirmesine izin vermek isteyebilirsin. Örneğin, şu anda bir mesaj geldiğinde ne yapılacağına dair mantık Hook içinde sabit (hardcoded) durumda:
 
 ```js {9-11}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -1072,8 +1064,8 @@ export function showNotification(message, theme = 'dark') {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1720,22 +1712,6 @@ html, body { min-height: 300px; }
 }
 ```
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 </Sandpack>
 
 Ancak, bunu yapmak *zorunda* değilsiniz. Normal fonksiyonlarda olduğu gibi, kodunuzun farklı bölümleri arasındaki sınırların nerede çizileceğine nihayetinde siz karar verirsiniz.. Çok farklı bir yaklaşım da benimseyebilirsiniz. Mantığı Efekt içinde tutmak yerine, zorunlu mantığın çoğunu bir JavaScript [sınıf:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) içine taşıyabilirsiniz.
@@ -2215,22 +2191,6 @@ Görünen o ki `useInterval` Hook'unuz argüman olarak bir olay dinleyicisi alı
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useCounter } from './useCounter.js';
 import { useInterval } from './useInterval.js';
@@ -2285,22 +2245,6 @@ Bu sizin `onTick`'i Efekt'iniz için bir bağımlılık olmaktan çıkarmanıza 
 Bu değişiklikle birlikte, her iki interval de beklediğiniz gibi çalışır ve birbirleriyle etkileşime girmezler:
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 
 ```js

@@ -1689,15 +1689,7 @@ button { margin-left: 10px; }
 
 ### Effect'te nihai prop'ları ve state'i okuma {/*reading-the-latest-props-and-state-from-an-effect*/}
 
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında kullanılabilir.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Varsayılan olarak, Effect'ten reaktif bir değer okuduğunuz zaman bu değeri bağımlılık olarak eklemeniz gerekmektedir. Bu, Effect'inizin o değer her değiştiğinde "tepki" vermesini sağlar. Çoğu bağımlılık için istediğiniz davranış budur.
+Varsayılan olarak, bir Effect'ten reaktif bir değer okuduğunda, onu bir bağımlılık olarak eklemen gerekir. Bu, Effect'in o değerdeki her değişikliğe "tepki vermesini" sağlar. Çoğu bağımlılık için bu, istediğin davranıştır.
 
 **Ancak bazen, *nihai* prop'ları ve state'i Effect bunlara "tepki" vermeden okumak isteyeceksiniz.** Örneğin, her sayfa ziyareti için alışveriş sepetindeki ürünlerin sayısını kaydetmek istediğinizi hayal edin:
 
@@ -1710,7 +1702,7 @@ function Page({ url, shoppingCart }) {
 }
 ```
 
-<CanaryBadge /> **Peki ya her `url` değişiminden sonra yeni bir sayfa ziyareti kaydetmek istiyorsunuz ama yalnızca `shoppingCart` değiştiğinde bunu yapmak istemiyorsunuz?** `shoppingCart`’ı bağımlılıklardan çıkarmak, [reaktivite kurallarını](#specifying-reactive-dependencies) bozacağı için mümkün değildir. Ancak bir kod parçasının Effect içinde çağrılsa bile değişimlere "tepki vermemesini" ifade edebilirsiniz. [`useEffectEvent`](/reference/react/useEffectEvent) Hook’u ile bir *Effect Event* [bildirin](/learn/separating-events-from-effects#declaring-an-effect-event) ve `shoppingCart`’ı okuyan kodu bunun içine taşıyın:
+**Ya her `url` değişiminde yeni bir sayfa ziyaretini kaydetmek, ancak sadece `shoppingCart` değişirse bunu yapmamak istiyorsan?** `shoppingCart`'ı bağımlılıklardan çıkarmak, [reaktivite kurallarını](#specifying-reactive-dependencies) bozacaktır. Ancak, bir Effect içinde çağrılsa bile, bir kod parçasının değişikliklere "tepki vermesini istemediğini" ifade edebilirsin. [`useEffectEvent`](/reference/react/useEffectEvent) Hook'u ile bir *Effect Event* tanımla ve `shoppingCart` okuyan kodu onun içine taşı:
 
 ```js {2-4,7,8}
 function Page({ url, shoppingCart }) {
