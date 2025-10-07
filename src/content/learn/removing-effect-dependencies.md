@@ -610,19 +610,7 @@ function ChatRoom({ roomId }) {
 
 ### Bir değeri, değişikliklerine "tepki vermeden" okumak mı istiyorsunuz? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
 
-<<<<<<< HEAD
-<Canary>
-
-**`useEffectEvent` API’si şu anda yalnızca React’in Canary ve Experimental kanallarında kullanılabilir.**
-
-[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Kullanıcı yeni bir mesaj aldığında `isMuted` değeri `true` olmadığı sürece bir ses çalmak istediğinizi varsayalım:
-=======
-Suppose that you want to play a sound when the user receives a new message unless `isMuted` is `true`:
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+Diyelim ki kullanıcı yeni bir mesaj aldığında, eğer `isMuted` değeri `true` değilse bir ses çalmak istiyorsun:
 
 ```js {3,10-12}
 function ChatRoom({ roomId }) {
