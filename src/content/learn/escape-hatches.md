@@ -312,17 +312,7 @@ React, Efektinizin bağımlılıklarını doğru belirtip belirtmediğinizi kont
 
 ## Olayları Efektlerden Ayırmak {/*separating-events-from-effects*/}
 
-<<<<<<< HEAD
-<Wip>
-
-Bu bölümde, React'in stabil sürümünde henüz yayınlanmamış **deneysel bir API** açıklanmaktadır.
-
-</Wip>
-
-Olay yöneticileri yalnızca aynı etkileşimi tekrar gerçekleştirdiğinizde yeniden çalışır. Olay yöneticileri aksine, Efektler bir prop veya state değişkeni gibi okudukları bir değerin son render sırasında olduğundan farklı olması durumunda yeniden senkronize olur. Bazen, her iki davranışın bir karışımını da istersiniz: bazı değerlere yanıt olarak yeniden çalışan ancak diğerlerine yanıt vermeyen bir Efekt.
-=======
-Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if any of the values they read, like props or state, are different than during last render. Sometimes, you want a mix of both behaviors: an Effect that re-runs in response to some values but not others.
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+Event handler'lar yalnızca aynı etkileşimi tekrar gerçekleştirdiğinde yeniden çalışır. Unlike event handler'lar, Effect'ler okudukları değerlerden (örneğin props veya state) herhangi biri son render sırasında farklıysa yeniden senkronize olurlar. Bazen, her iki davranışın karışımını istersin: bazı değerlere tepki olarak yeniden çalışan, ancak diğerlerine tepki vermeyen bir Effect.
 
 Efetkler içindeki tüm kodlar *reaktiftir.* Okuduğu bazı reaktif değerler yeniden render edilme nedeniyle değişmişse tekrar çalışacaktır. Örneğin, eğer `roomId` ya da `theme` değişirse bu Efekt sohbete tekrar bağlanacaktır:
 
