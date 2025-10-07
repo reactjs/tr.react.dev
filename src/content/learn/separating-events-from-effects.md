@@ -400,19 +400,7 @@ Bu reaktif olmayan mantığı, etrafındaki reaktif Efektten ayırmak için bir 
 
 ### Bir Efekt Olayı Bildirme {/*declaring-an-effect-event*/}
 
-<<<<<<< HEAD
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında kullanılabilir.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Bu non-reactive mantığı Effect’inden çıkarmak için [`useEffectEvent`](/reference/react/useEffectEvent) adında özel bir Hook kullan:  
-=======
-Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+Bu reaktif olmayan mantığı Effect'ten ayırmak için [`useEffectEvent`](/reference/react/useEffectEvent) adlı özel bir Hook kullan:
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -584,19 +572,7 @@ Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. 
 
 ### Efekt olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
-<<<<<<< HEAD
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Efekt olayları, bağımlılık bağlayıcısını bastırmak isteyebileceğiniz birçok modeli düzeltmenize olanak tanır.
-=======
-Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+Effect Event'ler, dependency linter'ını bastırma eğiliminde olabileceğin birçok deseni düzeltmene olanak tanır.
 
 Örneğin, sayfa ziyaretlerini günlüğe kaydetmek için bir Efektiniz olduğunu varsayalım:
 
@@ -737,11 +713,7 @@ function Page({ url }) {
 }
 ```
 
-<<<<<<< HEAD
-`UseEffectEvent` React'in kararlı bir parçası haline geldikten sonra, **kuralın asla bastırılmamasını** öneriyoruz.
-=======
-We recommend **never suppressing the linter**.
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+**Linter'ı asla bastırmamanı** tavsiye ediyoruz.
 
 Kuralı bastırmanın ilk dezavantajı, Efektinizin kodunuza eklediğiniz yeni bir reaktif bağımlılığa "tepki vermesi" gerektiğinde React'in artık sizi uyarmayacak olmasıdır. Önceki örnekte, React size bunu yapmanızı hatırlattığı için bağımlılıklara `url` eklediniz. Linter'ı devre dışı bırakırsanız, bu Efekt üzerinde gelecekte yapacağınız düzenlemeler için artık böyle hatırlatıcılar almayacaksınız. Bu da hatalara yol açar.
 
@@ -877,19 +849,7 @@ Linteri bastırmanın diğer doğru alternatifleri için [Efekt Bağımlılıkla
 
 ### Efekt Olaylarının Sınırlamaları {/*limitations-of-effect-events*/}
 
-<<<<<<< HEAD
-<Canary>
-
-**`useEffectEvent` API'si şu anda yalnızca React'in Canary ve Experimental kanallarında mevcuttur.**
-
-[React’in release kanalları hakkında daha fazla bilgi edinin.](/community/versioning-policy#all-release-channels)
-
-</Canary>
-
-Efekt Olayları, kullanma şekliniz açısından oldukça sınırlıdır:
-=======
-Effect Events are very limited in how you can use them:
->>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
+Effect Event'lerin kullanım şekli açısından oldukça sınırlıdır:
 
 - **Sadece Efektlerin içinden çağırın.**
 - **Asla diğer bileşenlere veya Hook'lara aktarmayın.**
