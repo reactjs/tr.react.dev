@@ -14,6 +14,18 @@ Bluesky'de [@react.dev](https://bsky.app/profile/react.dev) hesabını veya Twit
 
 <div className="sm:-mx-5 flex flex-col gap-5 mt-12">
 
+<BlogCard title="React Compiler v1.0" date="October 7, 2025" url="/blog/2025/10/07/react-compiler-1">
+
+We're releasing the compiler's first stable release today, plus linting and tooling improvements to make adoption easier.
+
+</BlogCard>
+
+<BlogCard title="Introducing the React Foundation" date="October 7, 2025" url="/blog/2025/10/07/introducing-the-react-foundation">
+
+Today, we're announcing our plans to create the React Foundation and a new technical governance structure ...
+
+</BlogCard>
+
 <BlogCard title="React 19.2" date="October 1, 2025" url="/blog/2025/10/01/react-19-2">
 
 React 19.2 adds new features like Activity, React Performance Tracks, useEffectEvent, and more. In this post ...
@@ -23,12 +35,6 @@ React 19.2 adds new features like Activity, React Performance Tracks, useEffectE
 <BlogCard title="React Labs: View Transitions, Activity, and more" date="April 23, 2025" url="/blog/2025/04/23/react-labs-view-transitions-activity-and-more">
 
 React Labs gönderilerinde, aktif olarak araştırılan ve geliştirilen projeler hakkında yazarız. Bu yazıda, bugün denemeye hazır iki yeni deneysel özelliği ve şu anda üzerinde çalıştığımız diğer alanları paylaşıyoruz...
-
-</BlogCard>
-
-<BlogCard title="React Compiler RC" date="April 21, 2025" url="/blog/2025/04/21/react-compiler-rc">
-
-We are releasing the compiler's first Release Candidate (RC) today.
 
 </BlogCard>
 

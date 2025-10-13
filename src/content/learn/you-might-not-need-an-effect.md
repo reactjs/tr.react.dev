@@ -1109,7 +1109,7 @@ State değişkenini ve Efekti kaldırın, bunun yerine `getVisibleTodos()` çağ
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [8]}}
+```js
 import { useState, useMemo } from 'react';
 import { initialTodos, createTodo, getVisibleTodos } from './todos.js';
 
