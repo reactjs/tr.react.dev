@@ -6,7 +6,7 @@ title: <Fragment> (<>...</>)
 
 `<Fragment>`, genellikle `<>...</>` sözdizimiyle kullanılır, öğeleri sarmalayıcı bir düğüm olmadan gruplamanı sağlar.  
 
-<Canary> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin. <Canary>
+<Canary> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin. </Canary>
 
 ```js
 <>
