@@ -37,7 +37,7 @@ Bir bileşen ağacını `<Profiler>` ile sarmalayarak render performansını öl
 
 #### Uyarılar {/*caveats*/}
 
-* Profilleme, ekstra bir yük getirdiği için **varsayılan olarak canlı ortamda devre dışı bırakılmıştır.** Canlı ortamda profilleme yapmak için [profilleme özelliklerinin etkin olduğu özel bir canlı ortam sürümünü etkinleştirmeniz gerekmektedir.](https://fb.me/react-profiling)
+* Profiling, ek bir işlem yükü (overhead) oluşturur, bu nedenle **üretim (production) derlemesinde varsayılan olarak devre dışıdır.** Üretim ortamında profiling özelliğini kullanmak için, [profiling etkinleştirilmiş özel bir production derlemesini](/reference/dev-tools/react-performance-tracks#using-profiling-builds) etkinleştirmen gerekir.
 
 ---
 
@@ -81,13 +81,16 @@ Render performansını ölçmek için `<Profiler>` bileşenini bir React ağacı
 
 <Pitfall>
 
-Profilleme, ekstra bir yük getirdiği için **varsayılan olarak canlı ortamda devre dışı bırakılmıştır.** Canlı ortamda profilleme yapmak için [profilleme özelliklerinin etkin olduğu özel bir canlı ortam sürümünü etkinleştirmeniz gerekmektedir.](https://fb.me/react-profiling)
+* Profiling, ek bir işlem yükü (overhead) oluşturur, bu nedenle **üretim (production) derlemesinde varsayılan olarak devre dışıdır.** Üretim ortamında profiling özelliğini kullanmak için, [profiling etkinleştirilmiş özel bir production derlemesini](/reference/dev-tools/react-performance-tracks#using-profiling-builds) etkinleştirmen gerekir.
 
 </Pitfall>
 
 <Note>
 
 `<Profiler>`, ölçümleri programatik olarak toplamanızı sağlar. Etkileşimli bir profilleyici arıyorsanız, [React Developer Tools](/learn/react-developer-tools) içindeki Profiler sekmesini deneyin. Benzer işlevselliği bir tarayıcı uzantısı olarak sunar.
+
+Components wrapped in `<Profiler>` will also be marked in the [Component tracks](/reference/dev-tools/react-performance-tracks#components) of React Performance tracks even in profiling builds.
+In development builds, all components are marked in the Components track regardless of whether they're wrapped in `<Profiler>`.
 
 </Note>
 

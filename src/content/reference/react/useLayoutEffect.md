@@ -87,8 +87,7 @@ Bunu yapmak için çift dikiş renderlamaya ihtiyacınız vardır:
 
 **Tüm bunlar tarayıcı ekrana yeniden çizmeden önce yaşanmalıdır**. Kullanıcının kutunun konum değiştirme hareketini görmesini istemezsiniz. Yerleşim ölçümlerini yapmak için `useLayoutEffect`'i çağırın:
 
-{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
-```js {expectedErrors: {'react-compiler': [7]}} {5-8}
+```js {5-8}
 function Tooltip() {
   const ref = useRef(null);
   const [tooltipHeight, setTooltipHeight] = useState(0); // Henüz yüksekliğini bilmiyorsunuz
@@ -188,8 +187,7 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
-```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
+```js src/Tooltip.js active
 import { useRef, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -339,8 +337,7 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
-```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
+```js src/Tooltip.js active
 import { useRef, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -487,8 +484,7 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
-```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
+```js src/Tooltip.js active
 import { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
