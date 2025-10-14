@@ -37,11 +37,7 @@ Bir bileşen ağacını `<Profiler>` ile sarmalayarak render performansını öl
 
 #### Uyarılar {/*caveats*/}
 
-<<<<<<< HEAD
-* Profilleme, ekstra bir yük getirdiği için **varsayılan olarak canlı ortamda devre dışı bırakılmıştır.** Canlı ortamda profilleme yapmak için [profilleme özelliklerinin etkin olduğu özel bir canlı ortam sürümünü etkinleştirmeniz gerekmektedir.](https://fb.me/react-profiling)
-=======
-* Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](/reference/dev-tools/react-performance-tracks#using-profiling-builds)
->>>>>>> 0d05d9b6ef0f115ec0b96a2726ab0699a9ebafe1
+* Profiling, ek bir işlem yükü (overhead) oluşturur, bu nedenle **üretim (production) derlemesinde varsayılan olarak devre dışıdır.** Üretim ortamında profiling özelliğini kullanmak için, [profiling etkinleştirilmiş özel bir production derlemesini](/reference/dev-tools/react-performance-tracks#using-profiling-builds) etkinleştirmen gerekir.
 
 ---
 
@@ -85,11 +81,7 @@ Render performansını ölçmek için `<Profiler>` bileşenini bir React ağacı
 
 <Pitfall>
 
-<<<<<<< HEAD
-Profilleme, ekstra bir yük getirdiği için **varsayılan olarak canlı ortamda devre dışı bırakılmıştır.** Canlı ortamda profilleme yapmak için [profilleme özelliklerinin etkin olduğu özel bir canlı ortam sürümünü etkinleştirmeniz gerekmektedir.](https://fb.me/react-profiling)
-=======
-Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](/reference/dev-tools/react-performance-tracks#using-profiling-builds)
->>>>>>> 0d05d9b6ef0f115ec0b96a2726ab0699a9ebafe1
+* Profiling, ek bir işlem yükü (overhead) oluşturur, bu nedenle **üretim (production) derlemesinde varsayılan olarak devre dışıdır.** Üretim ortamında profiling özelliğini kullanmak için, [profiling etkinleştirilmiş özel bir production derlemesini](/reference/dev-tools/react-performance-tracks#using-profiling-builds) etkinleştirmen gerekir.
 
 </Pitfall>
 
