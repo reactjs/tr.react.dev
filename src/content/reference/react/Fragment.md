@@ -6,11 +6,7 @@ title: <Fragment> (<>...</>)
 
 `<Fragment>`, genellikle `<>...</>` sözdizimiyle kullanılır, öğeleri sarmalayıcı bir düğüm olmadan gruplamanı sağlar.  
 
-<<<<<<< HEAD
-<Experimental> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin.</Experimental>
-=======
-<Canary> Fragments can also accept refs, which enable interacting with underlying DOM nodes without adding wrapper elements. See reference and usage below.</Canary>
->>>>>>> 0d05d9b6ef0f115ec0b96a2726ab0699a9ebafe1
+<Canary> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin. <Canary>
 
 ```js
 <>
@@ -33,13 +29,8 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
-<<<<<<< HEAD
 - **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)  
-- <ExperimentalBadge /> **optional** `ref`: Bir ref objesi (ör. [`useRef`](/reference/react/useRef) kullanılarak) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler sunan bir `FragmentInstance` sağlar.
-=======
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
-- <CanaryBadge />  **optional** `ref`: A ref object (e.g. from [`useRef`](/reference/react/useRef)) or [callback function](/reference/react-dom/components/common#ref-callback). React provides a `FragmentInstance` as the ref value that implements methods for interacting with the DOM nodes wrapped by the Fragment.
->>>>>>> 0d05d9b6ef0f115ec0b96a2726ab0699a9ebafe1
+- <CanaryBadge /> **optional** `ref`: Bir ref objesi (örneğin [`useRef`](/reference/react/useRef) ile oluşturulmuş) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim kurmak için yöntemler içeren bir `FragmentInstance`'ı ref değeri olarak sağlar.
 
 ### <CanaryBadge /> FragmentInstance {/*fragmentinstance*/}
 
@@ -253,11 +244,7 @@ function PostBody({ body }) {
 
 ---
 
-<<<<<<< HEAD
-### <ExperimentalBadge /> Fragment ref'lerini DOM etkileşimi için kullanma {/*using-fragment-refs-for-dom-interaction*/}
-=======
-### <CanaryBadge /> Using Fragment refs for DOM interaction {/*using-fragment-refs-for-dom-interaction*/}
->>>>>>> 0d05d9b6ef0f115ec0b96a2726ab0699a9ebafe1
+### <CanaryBadge /> Fragment ref'lerini DOM etkileşimi için kullanma {/*using-fragment-refs-for-dom-interaction*/}
 
 Fragment ref'leri, ekstra sarmalayıcı öğe eklemeden Fragment tarafından sarılan DOM düğümleriyle etkileşimde bulunmanı sağlar. Bu, olay yönetimi, görünürlük takibi, odak yönetimi ve `ReactDOM.findDOMNode()` gibi kullanım dışı kalmış desenlerin yerine geçmek için faydalıdır.
 
@@ -277,11 +264,7 @@ function ClickableFragment({ children, onClick }) {
 ```
 ---
 
-<<<<<<< HEAD
-### <ExperimentalBadge /> Fragment ref'leri ile görünürlüğü izleme {/*tracking-visibility-with-fragment-refs*/}
-=======
-### <CanaryBadge /> Tracking visibility with Fragment refs {/*tracking-visibility-with-fragment-refs*/}
->>>>>>> 0d05d9b6ef0f115ec0b96a2726ab0699a9ebafe1
+### <CanaryBadge /> Fragment ref'leri ile görünürlüğü izleme {/*tracking-visibility-with-fragment-refs*/}
 
 Fragment ref'leri, görünürlük takibi ve intersection gözlemi için faydalıdır. Bu sayede, alt Component'ların ref açığa çıkarmasına gerek kalmadan içeriğin ne zaman görünür hale geldiğini izleyebilirsin:
 
