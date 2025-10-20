@@ -235,7 +235,15 @@ Diğer durumlarda fonksiyonları `useCallback`'e sarmanın hiçbir faydası olma
 
 `useCallback`'in fonksiyon *oluşturmayı* engellemediğini unutmayın. Her zaman yeni fonksiyon oluşturursunuz (ve bu iyidir), ancak React bunu yok sayarak hiçbir şey değişmediği takdirde önbelleğe alınan fonksiyonu geri verir.
 
+<<<<<<< HEAD
 **Pratikte, birkaç ilkeyi takip ederek önbelleğe alma işlemlerinin çoğunu gereksiz hale getirebilirsiniz:**
+=======
+1. When a component visually wraps other components, let it [accept JSX as children.](/learn/passing-props-to-a-component#passing-jsx-as-children) Then, if the wrapper component updates its own state, React knows that its children don't need to re-render.
+2. Prefer local state and don't [lift state up](/learn/sharing-state-between-components) any further than necessary. Don't keep transient state like forms and whether an item is hovered at the top of your tree or in a global state library.
+3. Keep your [rendering logic pure.](/learn/keeping-components-pure) If re-rendering a component causes a problem or produces some noticeable visual artifact, it's a bug in your component! Fix the bug instead of adding memoization.
+4. Avoid [unnecessary Effects that update state.](/learn/you-might-not-need-an-effect) Most performance problems in React apps are caused by chains of updates originating from Effects that cause your components to render over and over.
+5. Try to [remove unnecessary dependencies from your Effects.](/learn/removing-effect-dependencies) For example, instead of memoization, it's often simpler to move some object or a function inside an Effect or outside the component.
+>>>>>>> f8c81a0f4f8e454c850f0c854ad054b32313345c
 
 1. Bir bileşen diğerlerini görsel olarak sardığında, [JSX'i alt bileşen (children) olarak kabul etmesine](/learn/passing-props-to-a-component#passing-jsx-as-children) izin verin. Böylece sarmalayıcı bileşen kendi state'ini güncellerse, React alt bileşenleri yeniden render etmesine gerek olmadığını bilir.
 1. Yerel state'i tercih edin ve [state'i gereğinden fazla üst bileşene taşımayın.](/learn/sharing-state-between-components) Form gibi geçici state'leri veya bileşenin tıklanma durumunu ağacınızın en üstünde yada global state yönetim kütüphanesinde saklamayın.

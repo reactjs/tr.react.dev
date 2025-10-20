@@ -34,7 +34,11 @@ Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler iç
 
 Bir Pomise ile çağırıldığında; `use` API, [`Suspense`](/reference/react/Suspense) ve [hata sınırları](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre olur. `use`'a iletilen Promise beklenirken, `use` çağrısı yapan bileşen askıya alınır. Eğer `use` çağrısı yapan bileşen Suspense içerisine alınırsa yedek görünüm görüntülenecektir. Promise çözümlendiğinde ise; Suspense yedek görünümü, `use` API'ı tarafından döndürülen değerleri kullanarak oluşturulan bileşenler ile yer değiştirir. Eğer `use`'a iletilen Promise reddedilir ise, en yakındaki Hata Sınırının yedek görünümü görüntülenecektir.
 
+<<<<<<< HEAD
 [Aşağıda daha fazla örnek görebilirsiniz.](#usage)
+=======
+When called with a Promise, the `use` API integrates with [`Suspense`](/reference/react/Suspense) and [Error Boundaries](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). The component calling `use` *suspends* while the Promise passed to `use` is pending. If the component that calls `use` is wrapped in a Suspense boundary, the fallback will be displayed.  Once the Promise is resolved, the Suspense fallback is replaced by the rendered components using the data returned by the `use` API. If the Promise passed to `use` is rejected, the fallback of the nearest Error Boundary will be displayed.
+>>>>>>> f8c81a0f4f8e454c850f0c854ad054b32313345c
 
 #### Parametreler {/*parameters*/}
 
@@ -320,16 +324,27 @@ Ancak bir [Sunucu Bileşeninde](/reference/rsc/server-components) `await` kullan
 
 Bazen `use`'a aktarılan Promise reddedilebilir. Reddedilen Promise'leri şu şekilde yönetebilirsiniz:
 
+<<<<<<< HEAD
 1. [Kullanıcıya hata sınırlayıcısı kullanarak hata göstermek.](#displaying-an-error-to-users-with-error-boundary)
 2. [`Promise.catch` methodunu kullanarak alternatif bir veri sunmak](#providing-an-alternative-value-with-promise-catch)
+=======
+1. [Displaying an error to users with an Error Boundary.](#displaying-an-error-to-users-with-error-boundary)
+2. [Providing an alternative value with `Promise.catch`](#providing-an-alternative-value-with-promise-catch)
+>>>>>>> f8c81a0f4f8e454c850f0c854ad054b32313345c
 
 <Pitfall>
 `use`, try-catch bloğu içerisinde çağırılamaz. Try-catch bloğu yerine [bileşeni Error Boundary içerisine ekleyin](#displaying-an-error-to-users-with-error-boundary), ya da [Promise'in `.catch` methodundan yararlanarak alternatif bir değer sağlayın](#providing-an-alternative-value-with-promise-catch).
 </Pitfall>
 
+<<<<<<< HEAD
 #### Kullanıcıya hata sınırlayıcısı kullanarak hata göstermek {/*displaying-an-error-to-users-with-error-boundary*/}
 
 Eğer bir Promise reddedildiğinde kullanıcılarına hata göstermek istersen [hata sınırlayıcısını](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) kullanabilirsin. Bir hata sınırlayıcı kullanmak için `use` API'ını çağırdığınız bir bileşeni Error Boundary içerisine koyun. Eğer `use`'a iletilen Promise reddedilirse hata sınırlayıcı aracılığı ile yedek görünüm görüntülenecektir.
+=======
+#### Displaying an error to users with an Error Boundary {/*displaying-an-error-to-users-with-error-boundary*/}
+
+If you'd like to display an error to your users when a Promise is rejected, you can use an [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an Error Boundary, wrap the component where you are calling the `use` API in an Error Boundary. If the Promise passed to `use` is rejected the fallback for the Error Boundary will be displayed.
+>>>>>>> f8c81a0f4f8e454c850f0c854ad054b32313345c
 
 <Sandpack>
 
@@ -440,7 +455,11 @@ Promise'in <CodeStep step={1}>`catch`</CodeStep> methodunu kullanmak için Promi
 
 ### "Suspense İstisnası: Bu gerçek bir hata değil!" {/*suspense-exception-error*/}
 
+<<<<<<< HEAD
 `use` ya bir React Bileşeni ya da Hook fonksiyonu dışında veya try-catch bloğu içerisinde çağırılıyor. Eğer try-catch bloğu içerisinde `use` çağırıyorsanız bileşeni hata sınırlandırıcı içerisine koyun veya hata yakalamak ve alternatif değer ile çözümlemek için Promise'in `catch` methodunu çağırın. [Bu örneği inceleyin](#dealing-with-rejected-promises)
+=======
+You are either calling `use` outside of a React Component or Hook function, or calling `use` in a try–catch block. If you are calling `use` inside a try–catch block, wrap your component in an Error Boundary, or call the Promise's `catch` to catch the error and resolve the Promise with another value. [See these examples](#dealing-with-rejected-promises).
+>>>>>>> f8c81a0f4f8e454c850f0c854ad054b32313345c
 
 Eğer `use`'u bir React Bileşeni veya Hook fonksiyonu dışında çağırıyorsanız `use` çağrısını bir React Bileşeni veya Hook fonksiyonu içerisine taşıyın.
 
