@@ -37,15 +37,14 @@ Her bileşenin etrafına kutular çizin ve bileşenlerinize isim verin. Bir tasa
 
 Tecrübenize bağlı olarak, bir tasarımı farklı yöntemlerle bileşenlere ayırmayı düşünebilirsiniz:
 
-<<<<<<< HEAD
-* **Programlama**--yeni bir fonksiyon veya nesne oluşturup oluşturmayacağınıza karar vermek için aynı teknikleri kullanın. Bu tekniklerden biri [tek sorumluluk ilkesi](https://tr.wikipedia.org/wiki/Tek_sorumluluk_ilkesi)dir, yani bir bileşen ideal olarak sadece bir şey yapmalıdır. Büyümeye başlarsa, daha küçük alt bileşenlere ayrılmalıdır.
-* **CSS**--tek tek neler için sınıf seçiçiler yazacağınızı düşünün. (Bununla birlikte, bileşenler biraz daha az ayrıntılıdır.)
-* **Tasarım**--tasarımın katmanlarını nasıl düzenleyeceğinizi düşünün.
-=======
-* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), that is, a component should ideally only be concerned with one thing. If it ends up growing, it should be decomposed into smaller subcomponents. 
-* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
-* **Design**--consider how you would organize the design's layers.
->>>>>>> f8c81a0f4f8e454c850f0c854ad054b32313345c
+* **Programlama** — Yeni bir fonksiyon veya nesne oluşturup oluşturmamaya karar verirken kullandığınız teknikleri burada da uygulayın.  
+  Bu tekniklerden biri [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) (sorumlulukların ayrımı) ilkesidir; yani bir bileşen ideal olarak yalnızca tek bir işle ilgilenmelidir.  
+  Eğer bileşen çok büyürse, daha küçük alt bileşenlere (subcomponents) ayrılmalıdır.
+
+* **CSS** — Hangi yapılar için class selector tanımlayacağınızı düşünün.  
+  (Ancak, bileşenler CSS sınıflarına göre biraz daha az ayrıntılıdır.)
+
+* **Tasarım** — Tasarımın katmanlarını nasıl organize edeceğinizi göz önünde bulundurun.
 
 JSON veriniz iyi yapılandırılmışsa, genellikle arayüzün bileşen yapısıyla doğal bir şekilde eşleştiğini göreceksiniz. Çünkü UI ve veri modelleri genellikle aynı bilgi mimarisine, yani aynı şekle sahiptir. Arayüzünüzü, her bileşenin veri modelinizin bir parçasıyla eşleştiği bileşenlere ayırın.
 
