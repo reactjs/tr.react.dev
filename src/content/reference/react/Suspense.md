@@ -2009,7 +2009,12 @@ Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalış
 
 Eğer [stream'leyen sunucu render etme API'leri](/reference/react-dom/server)nden birini (ya da onlara bağlı bir framework) kullanıyorsanız, React sunucuda hataları ele almak için `<Suspense>` sınırlarınızı kullanacaktır. Eğer bir bileşen sunucuda bir hata throw ederse, React sunucu render'ını iptal etmeyecektir. Bunun yerine, onun üzerindeki en yakın `<Suspense>` bileşenini bulacak ve oluşturulan sunucu HTML'ine bileşenin fallback'ini (örneğin bir yükleniyor çarkı) dahil edecektir. Kullanıcı ilk olarak bir yükleniyor çarkı görecektir.
 
-İstemci tarafında, React aynı bileşeni tekrar render etmeyi deneyecektir. Eğer istemcide de hata verirse, React hatayı throw edip en yakın [hata sınırını](/reference/react/Component#static-getderivedstatefromerror) gösterecektir. Ancak, istemcide hata vermezse, React içeriği nihayetinde başarıyla görüntülediği için hatayı kullanıcıya göstermeyecektir.
+İstemci (client) tarafında, React aynı bileşeni yeniden render etmeye çalışır.  
+Eğer istemci tarafında da hata oluşursa, React bu hatayı fırlatır (**throw**) ve en yakın  
+[Error Boundary](/reference/react/Component#static-getderivedstatefromerror) bileşenini görüntüler.  
+
+Ancak, istemci tarafında hata oluşmazsa, React kullanıcıya hatayı göstermez;  
+çünkü içerik sonuçta başarılı bir şekilde görüntülenmiştir.
 
 Bunu bazı bileşenlerin sunucuda yüklenmemesini sağlamak için kullanabilirsiniz. Bunu yapmak için, sunucu ortamında bir hata throw edin ve ardından HTML'lerini fallback'lerle değiştirmek için `<Suspense>` sınırı içine alın:
 

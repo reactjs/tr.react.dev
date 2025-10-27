@@ -4,7 +4,10 @@ title: "Yerleşik React API'leri"
 
 <Intro>
 
-`react` paketi, [Hook](/reference/react)'ların ve [Bileşen](/reference/react/components)'lerin yanı sıra, bileşen tanımlarken kullanışlı olan birkaç farklı API içerir. Bu sayfa, tüm modern React API'lerini listeler.
+[Hooks](/reference/react/hooks) ve [Components](/reference/react/components)’e ek olarak,  
+`react` paketi bileşen tanımlamak için faydalı olan birkaç başka API daha dışa aktarır (**export eder**).  
+
+Bu sayfa, modern React API’lerinin geri kalanını listelemektedir.
 
 </Intro>
 

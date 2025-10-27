@@ -2,12 +2,6 @@
 title: Sunucu Bileşenleri
 ---
 
-<RSC>
-
-Server Components, [React Server Components](/learn/start-a-new-react-project#full-stack-frameworks) içinde kullanılmak içindir.
-
-</RSC>
-
 <Intro>
 
 Sunucu Bileşenleri, önceden, paketlemeden önce, istemci uygulamanızdan veya SSR sunucusundan ayrı bir ortamda render edilen yeni bir Bileşen türüdür.
@@ -293,7 +287,7 @@ function Comments({commentsPromise}) {
   // NOT: Bu, sunucudan gelen promise'i yeniden başlatacak.
   // Veriler mevcut olana kadar askıya alınacak.
   const comments = use(commentsPromise);
-  return comments.map(commment => <p>{comment}</p>);
+  return comments.map(comment => <p>{comment}</p>);
 }
 ```
 
