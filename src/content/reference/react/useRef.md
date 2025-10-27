@@ -575,7 +575,11 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
+<<<<<<< HEAD
 Ve ardından `ref`'i, bileşeninizin kabul ettiği props listesine ekleyin ve `ref`'i ilgili [yerleşik bileşene](/reference/react-dom/components/common) prop olarak iletin, şöyle:
+=======
+And then add `ref` to the list of props your component accepts and pass `ref` as a prop to the relevant child [built-in component](/reference/react-dom/components/common) like this:
+>>>>>>> 2c7798dcc51fbd07ebe41f49e5ded4839a029f72
 
 ```js {1,6}
 function MyInput({ value, onChange, ref }) {

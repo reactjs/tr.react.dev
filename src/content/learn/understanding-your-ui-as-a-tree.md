@@ -20,7 +20,11 @@ React ve diğer birçok UI kütüphanesi, UI'ı bir ağaç olarak modeller. Uygu
 
 ## Bir ağaç olarak kullanıcı arayüzünüz {/*your-ui-as-a-tree*/}
 
+<<<<<<< HEAD
 Ağaçlar öğeler arasında bir ilişki modelidir ve kullanıcı arayüzü genellikle ağaç yapıları kullanılarak temsil edilir. Örneğin, tarayıcılar HTML ([DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)) ve CSS ([CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model)) modellemek için ağaç yapılarını kullanır. Mobil platformlar da görünüm hiyerarşilerini temsil etmek için ağaçları kullanır.
+=======
+Trees are a relationship model between items. The UI is often represented using tree structures. For example, browsers use tree structures to model HTML ([DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)) and CSS ([CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model)). Mobile platforms also use trees to represent their view hierarchy.
+>>>>>>> 2c7798dcc51fbd07ebe41f49e5ded4839a029f72
 
 <Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Yatay olarak düzenlenmiş üç bölümlü diyagram. İlk bölümde,'Bileşen A', 'Bileşen B' ve 'Bileşen C' etiketleri ile dikey olarak istiflenmiş üç dikdörtgen vardır. Bir sonraki bölmeye geçişte, üzerinde React logosu bulunan ve 'React' etiketli bir ok bulunur. Orta bölüm, 'A' olarak etiketlenmiş kök ve 'B' ve 'C' olarak etiketlenmiş iki alt bileşen ile bir bileşen ağacı içerir. Bir sonraki bölüm yine üzerinde React logosu bulunan ve 'React DOM' olarak etiketlenmiş bir ok kullanılarak geçilir. Üçüncü ve son bölüm, yalnızca bir alt kümesi vurgulanmış (orta bölümdeki alt ağacı gösteren) 8 düğümlü bir ağaç içeren bir tarayıcının şemasıdır.">
 

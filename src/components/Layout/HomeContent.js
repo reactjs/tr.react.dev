@@ -247,12 +247,20 @@ export function HomeContent() {
           <Center>
             <Header>Bir framework ile tam özellikli geliştirmeler yapın</Header>
             <Para>
+<<<<<<< HEAD
               React bir kütüphanedir. Bileşenleri bir araya getirmenize olanak
               sağlar, ancak yönlendirme ve veri çekme gibi konularda nasıl
               yapılacağına dair talimat vermez. React ile tüm bir uygulama
               oluşturmak için <Link href="https://nextjs.org">Next.js</Link>{' '}
               veya <Link href="https://remix.run">Remix</Link> gibi tam
               özellikli React framework&apos;lerini öneriyoruz.
+=======
+              React is a library. It lets you put components together, but it
+              doesn’t prescribe how to do routing and data fetching. To build an
+              entire app with React, we recommend a full-stack React framework
+              like <Link href="https://nextjs.org">Next.js</Link> or{' '}
+              <Link href="https://reactrouter.com">React Router</Link>.
+>>>>>>> 2c7798dcc51fbd07ebe41f49e5ded4839a029f72
             </Para>
           </Center>
           <FullBleed>
