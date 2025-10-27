@@ -247,11 +247,11 @@ export function HomeContent() {
           <Center>
             <Header>Bir framework ile tam özellikli geliştirmeler yapın</Header>
             <Para>
-              React bir kütüphanedir. Bileşenleri (components) bir araya
-              getirmenizi sağlar, ancak routing (yönlendirme) ve data fetching
-              (veri çekme) işlemlerini nasıl yapmanız gerektiğini belirtmez.
-              React ile tam bir uygulama oluşturmak için, tam yığın (full-stack)
-              React framework’ü olarak
+              React bir kütüphanedir. Bileşenleri bir araya getirmenizi sağlar,
+              ancak yönlendirme (routing) ve veri çekme (data fetching)
+              işlemlerini nasıl yapmanız gerektiğini belirlemez. React ile tam
+              bir uygulama oluşturmak için, tam yığın (full-stack) React
+              framework’ü olarak
               <Link href="https://nextjs.org">Next.js</Link> veya{' '}
               <Link href="https://reactrouter.com">React Router</Link>{' '}
               kullanmanızı öneririz.

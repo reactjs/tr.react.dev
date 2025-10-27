@@ -22,10 +22,9 @@ React ve diğer birçok UI kütüphanesi, UI'ı bir ağaç olarak modeller. Uygu
 
 Ağaçlar (Trees), öğeler arasındaki ilişkileri modelleyen yapılardır.  
 Kullanıcı arayüzü (UI) genellikle ağaç yapıları kullanılarak temsil edilir.  
-
 Örneğin, tarayıcılar HTML’yi [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)  
-ve CSS’i [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) aracılığıyla modellemek için ağaç yapıları kullanır.  
-Mobil platformlar da benzer şekilde, kendi **görünüm hiyerarşilerini (view hierarchy)** temsil etmek için ağaç yapılarından yararlanır.
+ve CSS’i [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) ile modellemek için ağaç yapıları kullanır.  
+Mobil platformlar da kendi **görünüm hiyerarşilerini (view hierarchy)** temsil etmek için ağaç yapılarından yararlanır.
 
 <Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Yatay olarak düzenlenmiş üç bölümlü diyagram. İlk bölümde,'Bileşen A', 'Bileşen B' ve 'Bileşen C' etiketleri ile dikey olarak istiflenmiş üç dikdörtgen vardır. Bir sonraki bölmeye geçişte, üzerinde React logosu bulunan ve 'React' etiketli bir ok bulunur. Orta bölüm, 'A' olarak etiketlenmiş kök ve 'B' ve 'C' olarak etiketlenmiş iki alt bileşen ile bir bileşen ağacı içerir. Bir sonraki bölüm yine üzerinde React logosu bulunan ve 'React DOM' olarak etiketlenmiş bir ok kullanılarak geçilir. Üçüncü ve son bölüm, yalnızca bir alt kümesi vurgulanmış (orta bölümdeki alt ağacı gösteren) 8 düğümlü bir ağaç içeren bir tarayıcının şemasıdır.">
 

@@ -37,13 +37,11 @@ Her bileşenin etrafına kutular çizin ve bileşenlerinize isim verin. Bir tasa
 
 Tecrübenize bağlı olarak, bir tasarımı farklı yöntemlerle bileşenlere ayırmayı düşünebilirsiniz:
 
-* **Programlama** — Yeni bir fonksiyon veya nesne oluşturup oluşturmamaya karar verirken kullandığınız teknikleri burada da uygulayın.  
+* **Programlama** — Yeni bir fonksiyon veya nesne oluşturup oluşturmamaya karar verirken aynı teknikleri kullanın.  
   Bu tekniklerden biri [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) (sorumlulukların ayrımı) ilkesidir; yani bir bileşen ideal olarak yalnızca tek bir işle ilgilenmelidir.  
-  Eğer bileşen çok büyürse, daha küçük alt bileşenlere (subcomponents) ayrılmalıdır.
-
+  Eğer bileşen büyürse, daha küçük alt bileşenlere (subcomponents) bölünmelidir.
 * **CSS** — Hangi yapılar için class selector tanımlayacağınızı düşünün.  
-  (Ancak, bileşenler CSS sınıflarına göre biraz daha az ayrıntılıdır.)
-
+  (Ancak bileşenler CSS sınıflarına göre biraz daha az ayrıntılıdır.)
 * **Tasarım** — Tasarımın katmanlarını nasıl organize edeceğinizi göz önünde bulundurun.
 
 JSON veriniz iyi yapılandırılmışsa, genellikle arayüzün bileşen yapısıyla doğal bir şekilde eşleştiğini göreceksiniz. Çünkü UI ve veri modelleri genellikle aynı bilgi mimarisine, yani aynı şekle sahiptir. Arayüzünüzü, her bileşenin veri modelinizin bir parçasıyla eşleştiği bileşenlere ayırın.
