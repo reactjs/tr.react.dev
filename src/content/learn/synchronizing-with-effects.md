@@ -732,8 +732,12 @@ Efektler içinde `veri getirme` çağrıları yazmak özellikle tamamen kullanı
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin de başarılı şekilde yapılması kolay değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **Eğer bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) kullanıyorsanız, onun yerleşik veri getirme mekanizmasını kullanın.** Modern React framework’leri, verimli ve yukarıda belirtilen sorunlardan etkilenmeyen entegre veri getirme mekanizmalarına sahiptir.  
-- **Aksi takdirde, istemci taraflı bir cache kullanmayı veya oluşturmayı düşünebilirsiniz.** Popüler açık kaynak çözümler arasında [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) bulunmaktadır. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altındaki *Effects*’i kullanır, ancak istekleri tekilleştirmek, yanıtları önbelleğe almak ve ağ şelalelerinden kaçınmak (verileri önceden yükleyerek veya veri gereksinimlerini rotalara taşıyarak) için mantık eklersiniz.
+- **Bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) kullanıyorsan, yerleşik veri çekme (data fetching) mekanizmasını kullan.**  
+  Modern React framework’leri, verimli ve yukarıda bahsedilen dezavantajlardan etkilenmeyen entegre veri çekme mekanizmalarına sahiptir.
+
+- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**  
+  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.  
+  Kendi çözümünü de oluşturabilirsin; bu durumda alt seviyede *Effect*’leri kullanırsın, ancak isteklere yinelenmeyi önleme (deduplication), yanıtları önbelleğe alma (caching) ve ağ darboğazlarını (network waterfalls) engelleme gibi mantıkları eklersin (örneğin verileri önceden yükleyerek veya veri gereksinimlerini route seviyesine taşıyarak).
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Efektler içinde veri getirmeye devam edebilirsiniz.
 

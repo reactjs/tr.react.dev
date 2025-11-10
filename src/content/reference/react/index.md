@@ -21,13 +21,15 @@ Programatik React özellikleri:
 
 ## React DOM {/*react-dom*/}
 
-React-dom, yalnızca web uygulamaları (tarayıcı DOM ortamında çalışan) için desteklenen özellikler içerir. Bu bölüm aşağıdakilere ayrılmıştır:
+React DOM, yalnızca web uygulamaları (tarayıcı DOM ortamında çalışan) için desteklenen özellikleri içerir.  
+Bu bölüm aşağıdaki başlıklara ayrılmıştır:
 
-* [Hooks](/reference/react-dom/hooks) - Tarayıcı DOM ortamında çalışan web uygulamaları için hooks.
-* [Bileşenler](/reference/react-dom/components) - React, tarayıcıda yerleşik HTML ve SVG bileşenlerinin tümünü destekler.
-* [APIs](/reference/react-dom) - `react-dom` paketi yalnızca web uygulamalarında desteklenen yöntemleri içerir.
-* [İstemci APIs](/reference/react-dom/client) - `react-dom/client` API'leri, React bileşenlerini istemcide (tarayıcıda) oluşturmanızı sağlar.
-* [Sunucu APIs](/reference/react-dom/server) - `react-dom/server` API'leri React bileşenlerini sunucuda HTML'ye dönüştürmenizi sağlar.
+* [Hooks](/reference/react-dom/hooks) - Tarayıcı DOM ortamında çalışan web uygulamaları için kullanılan Hook’lar.
+* [Components](/reference/react-dom/components) - React, tarayıcıya özgü yerleşik tüm HTML ve SVG bileşenlerini destekler.
+* [APIs](/reference/react-dom) - `react-dom` paketi, yalnızca web uygulamalarında desteklenen metodları içerir.
+* [Client APIs](/reference/react-dom/client) - `react-dom/client` API’leri, React bileşenlerini istemci tarafında (tarayıcıda) render etmeni sağlar.
+* [Server APIs](/reference/react-dom/server) - `react-dom/server` API’leri, React bileşenlerini sunucu tarafında HTML’e dönüştürmene olanak tanır.
+* [Static APIs](/reference/react-dom/static) - `react-dom/static` API’leri, React bileşenlerinden statik HTML üretmeni sağlar.
 
 ## React Compiler {/*react-compiler*/}
 

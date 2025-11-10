@@ -438,7 +438,7 @@ function Game() {
     // ✅ Sonraki state'i olay yöneticisi içerisinde hesaplayın.
     setCard(nextCard);
     if (nextCard.gold) {
-      if (goldCardCount <= 3) {
+      if (goldCardCount < 3) {
         setGoldCardCount(goldCardCount + 1);
       } else {
         setGoldCardCount(0);
