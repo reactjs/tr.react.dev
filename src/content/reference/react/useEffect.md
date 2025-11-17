@@ -894,7 +894,11 @@ Bu örnekte, `MapWidget` sınıfı yalnızca kendisine iletilen DOM node'unu yö
 
 ### Effect'ler ile veri getirme (fetching) {/*fetching-data-with-effects*/}
 
+<<<<<<< HEAD
 Bileşeniniz için veri fetch etmek amacıyla bir Effect kullanabilirsiniz. Ancak, [eğer bir framework kullanıyorsanız,](/learn/start-a-new-react-project#full-stack-frameworks) framework’ünüzün veri getirme mekanizmasını kullanmak, Effects’i manuel yazmaktan çok daha verimli olacaktır.
+=======
+You can use an Effect to fetch data for your component. Note that [if you use a framework,](/learn/creating-a-react-app#full-stack-frameworks) using your framework's data fetching mechanism will be a lot more efficient than writing Effects manually.
+>>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
 
 Eğer manuel olarak Effect ile veri getirmek istiyorsanız, kodunuz şöyle görünebilir:
 
@@ -1047,8 +1051,13 @@ Effect'ler içinde `fetch` çağrıları yapmak, özellikle tamamen kullanıcı 
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin iyi yapılması önemsiz değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
+<<<<<<< HEAD
 - **Bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) kullanıyorsan, onun yerleşik veri çekme (data fetching) mekanizmasını kullan.**  
   Modern React framework’leri, verimli ve yukarıda bahsedilen sorunlardan etkilenmeyen entegre veri çekme mekanizmalarına sahiptir.
+=======
+- **If you use a [framework](/learn/creating-a-react-app#full-stack-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
+- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [TanStack Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood but also add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+>>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
 
 - **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**  
   Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.  
@@ -1730,7 +1739,11 @@ function Page({ url, shoppingCart }) {
 
 ### Sunucu ve kullanıcıda farklı içerikler gösterme {/*displaying-different-content-on-the-server-and-the-client*/}
 
+<<<<<<< HEAD
 Eğer uygulamanız sunucu tarafı render (ya [doğrudan](/reference/react-dom/server) ya da bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) aracılığıyla) kullanıyorsa, bileşeniniz iki farklı ortamda render edilir. Sunucuda, ilk HTML’i üretmek için render edilir. İstemcide ise React, event handler’larınızı o HTML’e bağlayabilmek için render kodunu tekrar çalıştırır. Bu nedenle, [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) çalışabilmesi için başlangıç render çıktınız istemci ve sunucuda tamamen aynı olmalıdır.
+=======
+If your app uses server rendering (either [directly](/reference/react-dom/server) or via a [framework](/learn/creating-a-react-app#full-stack-frameworks)), your component will render in two different environments. On the server, it will render to produce the initial HTML. On the client, React will run the rendering code again so that it can attach your event handlers to that HTML. This is why, for [hydration](/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) to work, your initial render output must be identical on the client and the server.
+>>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
 
 Bazı nadir durumlarda, kullanıcıda farklı içerik göstermek isteyebilirsiniz. Örneğin, uygulamanız [`localStorage`'dan](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) bazı veriler okuyorsa, bu işlemi sunucudan yapamaz. Bunu şu şekilde uygulayabilirsiniz:
 
