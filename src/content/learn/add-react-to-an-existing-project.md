@@ -20,15 +20,9 @@ Diyelim ki `example.com`'da başka bir sunucu teknolojisi (Rails gibi) ile oluş
 
 Kurulumu şu şekilde yapmanızı öneririz:
 
-<<<<<<< HEAD
-1. **Uygulamanızın React kısmını**, [React tabanlı framework'lerden](/learn/start-a-new-react-project) birini kullanarak oluşturun.  
-2. **`/some-app` yolunu *base path* olarak belirtin** framework’ünüzün konfigürasyonunda (işte nasıl yapılır: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).  
-3. **Sunucunuzu veya bir proxy’i yapılandırın** ki `/some-app/` altındaki tüm istekler React uygulamanız tarafından işlenebilsin.
-=======
-1. **Build the React part of your app** using one of the [React-based frameworks](/learn/creating-a-react-app).
-2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
->>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
+1. Uygulamanızın **React kısmını build edin** ve bunu [React tabanlı framework’lerden](/learn/creating-a-react-app) biriyle yapın.
+2. Framework konfigürasyonunuzda **`/some-app` yolunu *base path* olarak belirtin** (nasıl yapılacağı burada: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. Tüm `/some-app/` altındaki isteklerin React uygulamanız tarafından handle edilmesi için **sunucunuzu veya bir proxy’yi konfigüre edin**.
 
 Bu, React uygulamanızın o framework’lere dahil edilmiş [en iyi uygulamalardan yararlanmasını](/learn/build-a-react-app-from-scratch#consider-using-a-framework) sağlar.
 
@@ -155,11 +149,7 @@ root.render(<NavigationBar />);
 
 `index.html'deki` orijinal HTML içeriğinin nasıl korunduğuna dikkat edin, ancak kendi `NavigationBar` React bileşeniniz artık HTML'nizden `<nav id="navigation">` içinde görünüyor. React bileşenlerini mevcut bir HTML sayfasında render etme hakkında daha fazla bilgi edinmek için [`createRoot` dökümantasyonunu](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) okuyun.
 
-<<<<<<< HEAD
-Mevcut bir projeye React eklerken, genellikle küçük etkileşimli bileşenlerle (örneğin butonlar) başlamak ve ardından yavaş yavaş “yukarı doğru ilerleyerek” sonunda tüm sayfanızı React ile oluşturmak yaygındır. Bu noktaya ulaşırsanız, React’ten en iyi şekilde yararlanmak için hemen [bir React framework’üne](/learn/start-a-new-react-project) geçmenizi öneririz.
-=======
-When you adopt React in an existing project, it's common to start with small interactive components (like buttons), and then gradually keep "moving upwards" until eventually your entire page is built with React. If you ever reach that point, we recommend migrating to [a React framework](/learn/creating-a-react-app) right after to get the most out of React.
->>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
+Mevcut bir projeye React eklerken, genellikle küçük interaktif component’lerle (örneğin butonlar) başlamak ve ardından yavaş yavaş “yukarı doğru ilerleyerek” sonunda tüm sayfanın React ile inşa edildiği noktaya gelmek oldukça yaygındır. Bu aşamaya ulaşırsanız, React’ten en iyi şekilde faydalanmak için hemen ardından [bir React framework’üne](/learn/creating-a-react-app) geçmenizi öneririz.
 
 ## React Native'i mevcut bir yerel mobil uygulamada kullanma {/*using-react-native-in-an-existing-native-mobile-app*/}
 
