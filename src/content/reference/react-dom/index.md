@@ -21,11 +21,7 @@ Bu API'ler bileşenlerinizden içe aktarılabilirler. Nadiren kullanılırlar:
 
 Bu API'ler, kaynakların (örneğin, betikler, stil sayfaları ve fontlar) önceden yüklenmesini sağlayarak uygulamaları daha hızlı hale getirmek için kullanılabilir. Örneğin, bu kaynakların kullanılacağı başka bir sayfaya geçmeden önce kaynakları yüklemek için kullanılabilir.
 
-<<<<<<< HEAD
-[React tabanlı framework’ler](/learn/start-a-new-react-project) genellikle kaynak yüklemeyi sizin için yönetir, bu yüzden bu API’leri kendiniz çağırmanız gerekmez. Ayrıntılar için framework dokümantasyonunuza bakın.
-=======
-[React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not have to call these APIs yourself. Consult your framework's documentation for details.
->>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
+[React tabanlı framework’ler](/learn/creating-a-react-app) sık sık resource loading işlemlerini sizin yerinize yönetir, bu nedenle bu API’leri kendiniz çağırmanız gerekmeyebilir. Detaylar için framework’ünüzün dokümantasyonuna bakın.
 
 * [`prefetchDNS`](/reference/react-dom/prefetchDNS), bağlanmayı beklediğiniz bir DNS alan adı adresinin IP adresini önceden yüklemenizi sağlar.
 * [`preconnect`](/reference/react-dom/preconnect), hangi kaynakları kullanacağınızı bilmeseniz bile, kaynak talep etmeyi beklediğiniz bir sunucuya bağlanmanıza olanak tanır.
