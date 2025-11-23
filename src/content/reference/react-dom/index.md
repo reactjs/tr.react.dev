@@ -36,8 +36,8 @@ Bu API'ler, kaynakların (örneğin, betikler, stil sayfaları ve fontlar) önce
 
 `react-dom` paketi iki ek giriş noktası sağlar:
 
-* [`react-dom/client`](/reference/react-dom/client) React bileşenlerini istemcide (tarayıcıda) render etmek için API'ler içerir.
-* [`react-dom/server`](/reference/react-dom/server) React bileşenlerini sunucuda oluşturmak için API'ler içerir.
+* [`react-dom/client`](/reference/react-dom/client) React component'lerini istemcide (tarayıcıda) render etmek için API'ler içerir.
+* [`react-dom/server`](/reference/react-dom/server) React component'lerini sunucuda oluşturmak için API'ler içerir.
 
 ---
 
