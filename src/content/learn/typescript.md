@@ -20,7 +20,7 @@ TypeScript, JavaScript kod tabanlarına tip tanımları eklemenin popüler bir y
 
 ## Kurulum {/*installation*/}
 
-Tüm [üretim düzeyindeki React framework'leri](/learn/start-a-new-react-project#full-stack-frameworks), TypeScript kullanımını destekler. Kurulum için framework’e özel kılavuzu takip edin:
+Tüm [production-grade React framework’leri](/learn/creating-a-react-app#full-stack-frameworks), TypeScript kullanımını destekler. Kurulum için framework’e özel guide’ı takip edin:
 
 - [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/typescript)
 - [Remix](https://remix.run/docs/en/1.19.2/guides/typescript)

@@ -732,8 +732,8 @@ Efektler içinde `veri getirme` çağrıları yazmak özellikle tamamen kullanı
 
 Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane ile DOM'a eklenme sırasında yapılan veri getirme için geçerlidir. Yönlendirme (routing) de olduğu gibi, veri getirmenin de başarılı şekilde yapılması kolay değildir. Bu nedenle aşağıdaki yaklaşımları önermekteyiz:
 
-- **Bir [framework](/learn/start-a-new-react-project#full-stack-frameworks) kullanıyorsan, yerleşik veri çekme (data fetching) mekanizmasını kullan.**  
-  Modern React framework’leri, verimli ve yukarıda bahsedilen dezavantajlardan etkilenmeyen entegre veri çekme mekanizmalarına sahiptir.
+- **Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, onun built-in data fetching mekanizmasını kullanın.** Modern React framework’leri, verimli çalışan ve yukarıdaki sorunlardan etkilenmeyen entegre data fetching mekanizmalarına sahiptir.
+- **Aksi durumda, client-side cache kullanmayı veya kendi cache çözümünüzü geliştirmeyi düşünün.** Yaygın open source çözümler arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altında Effects kullanırsınız ancak istekleri dedupe etmek, response’ları cache’lemek ve network waterfall’larını önlemek (veriyi preload ederek veya data requirement’ları route’lara hoist ederek) için ek logic yazarsınız.
 
 - **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**  
   Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.  

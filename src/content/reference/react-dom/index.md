@@ -21,7 +21,7 @@ Bu API'ler bileşenlerinizden içe aktarılabilirler. Nadiren kullanılırlar:
 
 Bu API'ler, kaynakların (örneğin, betikler, stil sayfaları ve fontlar) önceden yüklenmesini sağlayarak uygulamaları daha hızlı hale getirmek için kullanılabilir. Örneğin, bu kaynakların kullanılacağı başka bir sayfaya geçmeden önce kaynakları yüklemek için kullanılabilir.
 
-[React tabanlı framework’ler](/learn/start-a-new-react-project) genellikle kaynak yüklemeyi sizin için yönetir, bu yüzden bu API’leri kendiniz çağırmanız gerekmez. Ayrıntılar için framework dokümantasyonunuza bakın.
+[React tabanlı framework’ler](/learn/creating-a-react-app) sık sık resource loading işlemlerini sizin yerinize yönetir, bu nedenle bu API’leri kendiniz çağırmanız gerekmeyebilir. Detaylar için framework’ünüzün dokümantasyonuna bakın.
 
 * [`prefetchDNS`](/reference/react-dom/prefetchDNS), bağlanmayı beklediğiniz bir DNS alan adı adresinin IP adresini önceden yüklemenizi sağlar.
 * [`preconnect`](/reference/react-dom/preconnect), hangi kaynakları kullanacağınızı bilmeseniz bile, kaynak talep etmeyi beklediğiniz bir sunucuya bağlanmanıza olanak tanır.
@@ -36,8 +36,8 @@ Bu API'ler, kaynakların (örneğin, betikler, stil sayfaları ve fontlar) önce
 
 `react-dom` paketi iki ek giriş noktası sağlar:
 
-* [`react-dom/client`](/reference/react-dom/client) React bileşenlerini istemcide (tarayıcıda) render etmek için API'ler içerir.
-* [`react-dom/server`](/reference/react-dom/server) React bileşenlerini sunucuda oluşturmak için API'ler içerir.
+* [`react-dom/client`](/reference/react-dom/client) React component'lerini istemcide (tarayıcıda) render etmek için API'ler içerir.
+* [`react-dom/server`](/reference/react-dom/server) React component'lerini sunucuda oluşturmak için API'ler içerir.
 
 ---
 

@@ -4,13 +4,13 @@ title: Direktifler
 
 <RSC>
 
-Directives are for use in [React Server Components](/reference/rsc/server-components).
+Directives, [React Server Components](/reference/rsc/server-components) içinde kullanılmak içindir.
 
 </RSC>
 
 <Intro>
 
-Directives, [React Server Components ile uyumlu bundlerlara](/learn/start-a-new-react-project#full-stack-frameworks) talimatlar sağlar.
+Directives, [React Server Components ile uyumlu bundler’lara](/learn/creating-a-react-app#full-stack-frameworks) talimatlar sağlar.
 
 </Intro>
 

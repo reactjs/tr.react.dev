@@ -272,8 +272,8 @@ export function HomeContent() {
               <CTA
                 color="gray"
                 icon="framework"
-                href="/learn/start-a-new-react-project">
-                Bir framework ile başlayın
+                href="/learn/creating-a-react-app">
+                Bir framework ile başlamayı öğren
               </CTA>
             </div>
           </Center>
