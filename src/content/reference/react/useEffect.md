@@ -44,9 +44,15 @@ function ChatRoom({ roomId }) {
 
 #### Parametreler {/*parameters*/}
 
+<<<<<<< HEAD
 * `setup`: Effect'inizin mantığını içeren fonksiyon. Kurulum (setup) fonksiyonunuz isteğe bağlı olarak *temizleme (cleanup)* fonksiyonu da döndürebilir. Bileşeniniz DOM'a eklendiğinde, React kurulum fonksiyonunuzu çalıştıracaktır. Değişen bağımlılıklar ile her yeniden render işleminden sonra, React önce temizleme fonksiyonunu (eğer sağladıysanız) eski değerlerle çalıştıracak ve ardından kurulum fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldıktan sonra, React temizleme fonksiyonunuzu çalıştıracaktır.
  
 * **Opsiyonel** `bağımlılıklar`: `kurulum` (`setup`) kodunun içinde referansı olan tüm reaktif değerlerin listesi. Reaktif değerler prop'ları, state'i ve bileşeninizin gövdesi içinde bildirilen tüm değişkenleri ve fonksiyonları içerir. Linter'ınız [React için yapılandırılmış](/learn/editor-setup#linting) ise, her reaktif değerin bağımlılık olarak doğru bir şekilde belirtildiğini doğrulayacaktır. Bağımlılık listesi sabit sayıda öğeye sahip olmalı ve `[dep1, dep2, dep3]` şeklinde satır içinde yazılmalıdır. React, [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırmasını kullanarak her bağımlılığı önceki değeri ile karşılaştırır. Eğer bağımlılık listesini boş bırakırsanız, Effect'iniz her yeniden render'dan sonra tekrar çalışacaktır. [Bağımlılık dizisi iletmenin, boş dizi iletmenin ve hiç bağımlılık olmaması arasındaki farkı inceleyin.](#examples-dependencies)
+=======
+* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your [component commits](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React will run your setup function. After every commit with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function.
+ 
+* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If you omit this argument, your Effect will re-run after every commit of the component. [See the difference between passing an array of dependencies, an empty array, and no dependencies at all.](#examples-dependencies)
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 #### Dönüş Değeri {/*returns*/}
 
@@ -104,15 +110,27 @@ function ChatRoom({ roomId }) {
 
 **React, kurulum ve temizleme fonksiyonlarınızı gerektiğinde birden çok kez olabilecek şekilde çağırır:**
 
+<<<<<<< HEAD
 1. <CodeStep step={1}>Kurulum kodunuz</CodeStep> bileşeniniz sayfaya eklendiğinde çalışır *(DOM'a eklendiğinde)*.
 2. Bileşeninizin <CodeStep step={3}>bağımlılıklarının</CodeStep> değiştiği her yeniden render etmeden sonra:
    - İlk olarak, <CodeStep step={2}>temizleme kodunuz</CodeStep> eski prop'lar ve state ile çalışır.
    - Daha sonra, <CodeStep step={1}>kurulum kodunuz</CodeStep> yeni prop'lar ve state ile çalışır.
 3. <CodeStep step={2}>temizleme kodunuz</CodeStep> son kez bileşeniniz sayfadan kaldırıldığında çalışır *(DOM'dan kaldırıldığında).*
+=======
+1. Your <CodeStep step={1}>setup code</CodeStep> runs when your component is added to the page *(mounts)*.
+2. After every commit of your component where the <CodeStep step={3}>dependencies</CodeStep> have changed:
+   - First, your <CodeStep step={2}>cleanup code</CodeStep> runs with the old props and state.
+   - Then, your <CodeStep step={1}>setup code</CodeStep> runs with the new props and state.
+3. Your <CodeStep step={2}>cleanup code</CodeStep> runs one final time after your component is removed from the page *(unmounts).*
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 **Yukarıdaki örneği biraz açıklayalım.**  
 
+<<<<<<< HEAD
 Yukarıdaki `ChatRoom` bileşeni sayfaya eklendiğinde, başlangıç `serverUrl` ve `roomId` ile sohbet odasına bağlanacaktır. Eğer `serverUrl` veya `roomId`'den biri yeniden render yüzünden değişirse (diyelim ki kullanıcı başka bir sohbet odasını seçerse), Effect'iniz önceki odayla *bağlantısını kesecek ve bir sonraki odaya bağlanacaktır.* `ChatRoom` bileşeniniz sayfadan kaldırıldığında, Effect'iniz son bir defa bağlantıyı kesecektir.
+=======
+When the `ChatRoom` component above gets added to the page, it will connect to the chat room with the initial `serverUrl` and `roomId`. If either `serverUrl` or `roomId` change as a result of a commit (say, if the user picks a different chat room in a dropdown), your Effect will *disconnect from the previous room, and connect to the next one.* When the `ChatRoom` component is removed from the page, your Effect will disconnect one last time.
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 **Geliştirme sırasında [hataları bulmanıza yardımcı olmak](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) için React, <CodeStep step={1}>kurulum</CodeStep> ve <CodeStep step={2}>temizleme</CodeStep> kodunu <CodeStep step={1}>kurulum</CodeStep>'dan önce son kez çalıştırır.** Bu, Effect mantığınızın doğru uygulandığını doğrulayan bir stres testidir. Bu, gözle görünür sorunlara neden oluyorsa, temizleme fonksiyonunuzda bazı mantık hataları vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı ya da geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir. [Sık kullanılan çözümlere göz gezdirin.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
@@ -1147,7 +1165,11 @@ useEffect(() => {
 
 #### Bağımlılık dizisi iletme {/*passing-a-dependency-array*/}
 
+<<<<<<< HEAD
 Eğer bağımlılıkları belirtirseniz, Effect'iniz **ilk render'dan _ve_ değişen bağlımlılıklarla yeniden render'lardan sonra çalışacaktır.**
+=======
+If you specify the dependencies, your Effect runs **after the initial commit _and_ after commits with changed dependencies.**
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 ```js {3}
 useEffect(() => {
@@ -1244,7 +1266,11 @@ button { margin-left: 5px; }
 
 #### Boş bağımlılık dizisi iletmek {/*passing-an-empty-dependency-array*/}
 
+<<<<<<< HEAD
 Effect'iniz gerçekten reaktif değerler kullanmıyorsa, Effect'iniz sadece **ilk render'dan sonra** çalışacaktır.
+=======
+If your Effect truly doesn't use any reactive values, it will only run **after the initial commit.**
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 ```js {3}
 useEffect(() => {
@@ -1321,7 +1347,11 @@ export function createConnection(serverUrl, roomId) {
 
 #### Hiçbir bağımlılık dizisi iletmemek {/*passing-no-dependency-array-at-all*/}
 
+<<<<<<< HEAD
 Hiçbir bağımlılık dizisi iletmezseniz, Effect'iniz bileşeninizin **herbir render'ından (ve yeniden render'ından)** sonra çalışacaktır.
+=======
+If you pass no dependency array at all, your Effect runs **after every single commit** of your component.
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 ```js {3}
 useEffect(() => {
@@ -1482,7 +1512,11 @@ Artık `count + 1` yerine `c => c + 1` ilettiğimiz için, [Effect'inizin `count
 
 ### Gereksiz nesne bağımlılıklarını kaldırma {/*removing-unnecessary-object-dependencies*/}
 
+<<<<<<< HEAD
 Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `options` nesnesi [her render için farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden sohbete bağlanır:
+=======
+If your Effect depends on an object or a function created during rendering, it might run too often. For example, this Effect re-connects after every commit because the `options` object is [different for every render:](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally)
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 ```js {6-9,12,15}
 const serverUrl = 'https://localhost:1234';
@@ -1499,7 +1533,11 @@ function ChatRoom({ roomId }) {
     const connection = createConnection(options); // Effect içinde kullanılır
     connection.connect();
     return () => connection.disconnect();
+<<<<<<< HEAD
   }, [options]); // 🚩 Bunun neticesinde, bu bağımlılıklar yeniden render'da her zaman farklıdır
+=======
+  }, [options]); // 🚩 As a result, these dependencies are always different on a commit
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
   // ...
 ```
 
@@ -1585,7 +1623,11 @@ Bu çözümle birlikte, input'a yazmak sohbete tekrar bağlanmayacaktır. Her re
 
 ### Gereksiz fonksiyon bağımlılıklarını kaldırma {/*removing-unnecessary-function-dependencies*/}
 
+<<<<<<< HEAD
 Eğer Effect'iniz render esnasında oluşturulan bir nesneye veya fonksiyona bağımlıysa, Effect çok sık çalışabilir. Örneğin bu Effect, `createOptions` fonksiyonu [her render'da farklı olduğundan](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally) her render'dan sonra yeniden sohbete bağlanır:
+=======
+If your Effect depends on an object or a function created during rendering, it might run too often. For example, this Effect re-connects after every commit because the `createOptions` function is [different for every render:](/learn/removing-effect-dependencies#does-some-reactive-value-change-unintentionally)
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 ```js {4-9,12,16}
 function ChatRoom({ roomId }) {
@@ -1603,11 +1645,19 @@ function ChatRoom({ roomId }) {
     const connection = createConnection();
     connection.connect();
     return () => connection.disconnect();
+<<<<<<< HEAD
   }, [createOptions]); // 🚩 Bunun neticesinde, bu bağımlılıklar yeniden render'da her zaman farklıdır
   // ...
 ```
 
 Her yeniden render'da sıfırdan bir fonksiyon oluşturmak kendi başına bir sorun değildir. Bunu optimize etmenize gerek yoktur. Ancak fonksiyonu Effect'inizin bağımlılığı olarak kullanırsanız, Effect'inizin her yeniden render'dan sonra yeniden çalışmasına neden olacaktır.
+=======
+  }, [createOptions]); // 🚩 As a result, these dependencies are always different on a commit
+  // ...
+```
+
+By itself, creating a function from scratch on every re-render is not a problem. You don't need to optimize that. However, if you use it as a dependency of your Effect, it will cause your Effect to re-run after every commit.
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 Render esnasında oluşturulan bir fonksiyonu bağımlılık olarak kullanmaktan kaçının. Bunun yerine Effect içinde bildirin:
 
@@ -1777,7 +1827,11 @@ Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres t
 ```js {3}
 useEffect(() => {
   // ...
+<<<<<<< HEAD
 }); // 🚩 Bağımlılık dizisi yok: her yeniden render'dan sonra yeniden çalışır!
+=======
+}); // 🚩 No dependency array: re-runs after every commit!
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 ```
 
 Bağımlılık dizisini belirttiyseniz ancak Effect'iniz hala döngüde yeniden çalışyorsa, bunun nedeni bağımlılıklarınızdan birinin her yeniden render'da farklı olmasıdır.
