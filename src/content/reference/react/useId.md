@@ -44,9 +44,11 @@ Herhangi bir parametre almaz.
 
 * `useId` bir Hook olduğundan, yalnızca **bileşeninizin en üst kapsamında** ya da kendi Hook'larınızda çağırabilirsiniz. Döngülerin ve koşulların içinde çağıramazsınız. Eğer çağırmak zorunda kaldıysanız yeni bir bileşene çıkarın ve state'i ona taşıyın.
 
-* Liste elemanlarına **anahtar üretmek için kullanılmamalıdır**. [Anahtarlar elinizdeki veriden üretilmelidir.](/learn/rendering-lists#where-to-get-your-key)
+* `useId`, [use()](/reference/react/use) için **cache key (önbellek anahtarı) üretmek amacıyla kullanılmamalıdır**. ID, bir component mount edildiğinde stabildir; ancak render sırasında değişebilir. Cache key’ler verinizden üretilmelidir.
 
-* `useId` currently cannot be used in [async Server Components](/reference/rsc/server-components#async-components-with-server-components).
+* `useId`, bir listede **key üretmek için kullanılmamalıdır**. [Key’ler verinizden üretilmelidir.](/learn/rendering-lists#where-to-get-your-key)
+
+* `useId`, şu anda [async Server Components](/reference/rsc/server-components#async-components-with-server-components) içinde kullanılamaz.
 
 ---
 
