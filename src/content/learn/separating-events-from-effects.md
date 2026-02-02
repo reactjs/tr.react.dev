@@ -568,7 +568,11 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 Efekt olaylarını olay yöneticilerine çok benzer olarak düşünebilirsiniz. Temel fark, olay işleyicilerinin kullanıcı etkileşimlerine yanıt olarak çalışması, Efekt olaylarının ise sizin tarafınızdan Efektlerden tetiklenmesidir. Efekt olayları, Efektlerin tepkiselliği ile tepkisel olmaması gereken kod arasındaki "zinciri kırmanızı" sağlar.
+=======
+You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
+>>>>>>> 38b52cfdf059b2efc5ee3223a758efe00319fcc7
 
 ### Efekt olayları ile en son propları ve state okuma {/*reading-latest-props-and-state-with-effect-events*/}
 
