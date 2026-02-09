@@ -78,6 +78,9 @@ Zamanlama noktasında farklılıları olan ve nadiren kullanılan iki `useEffect
 * [`useLayoutEffect`](/reference/react/useLayoutEffect) tarayıcı ekrana tekrar çizim yapmadan önce çalışır. Yerleşim (layout) hesaplamalarını burada yapabilirsiniz.
 * [`useInsertionEffect`](/reference/react/useInsertionEffect) React DOM'a değişiklik yapmadan önce çalışır. Kütüphaneler bu noktada dinamik olarak CSS ekleyebilir.
 
+You can also separate events from Effects:
+
+- [`useEffectEvent`](/reference/react/useEffectEvent) creates a non-reactive event to fire from any Effect hook.
 ---
 
 ## Performans Hook'ları {/*performance-hooks*/}
