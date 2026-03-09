@@ -1363,6 +1363,11 @@
   resolved "https://registry.yarnpkg.com/@types/parse-numeric-range/-/parse-numeric-range-0.0.1.tgz#1a807487565a753f486cb3ee4b2145937d49759d"
   integrity sha512-nI3rPGKk8BxedokP2VilnW5JyZHYNjGCUDsAZ2JQgISgDflHNUO0wXMfGYP8CkihrKYDm5tilD52XfGhO/ZFCA==
 
+"@types/prop-types@^15.7.15":
+  version "15.7.15"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.15.tgz#e6e5a86d602beaca71ce5163fadf5f95d70931c7"
+  integrity sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==
+
 "@types/react-dom@^19.2.3":
   version "19.2.3"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.2.3.tgz#c1e305d15a52a3e508d54dca770d202cb63abf2c"
