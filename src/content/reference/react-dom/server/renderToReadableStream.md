@@ -115,7 +115,7 @@ export default function App() {
 }
 ```
 
-React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) and your <CodeStep step={2}>bootstrap `<script>` tags</CodeStep> into the resulting HTML stream:
+React, [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) ve <CodeStep step={2}>bootstrap `<script>` etiketlerini</CodeStep> oluşan HTML stream’ine enjekte edecektir:
 
 ```html [[2, 5, "/main.js"]]
 <!DOCTYPE html>
@@ -125,7 +125,7 @@ React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossar
 <script src="/main.js" async=""></script>
 ```
 
-On the client, your bootstrap script should [hydrate the entire `document` with a call to `hydrateRoot`:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
+Client tarafında, bootstrap script’iniz [tüm `document`’i `hydrateRoot` çağrısı ile hydrate etmelidir:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
 
 ```js [[1, 4, "<App />"]]
 import { hydrateRoot } from 'react-dom/client';
@@ -134,15 +134,15 @@ import App from './App.js';
 hydrateRoot(document, <App />);
 ```
 
-This will attach event listeners to the server-generated HTML and make it interactive.
+Bu server tarafından oluşturulan HTML’e event listener’lar ekleyecek ve HTML’i interaktif hale getirecektir.
 
 <DeepDive>
 
-#### Reading CSS and JS asset paths from the build output {/*reading-css-and-js-asset-paths-from-the-build-output*/}
+#### Build çıktısından CSS ve JS asset yollarını okumak {/*reading-css-and-js-asset-paths-from-the-build-output*/}
 
-The final asset URLs (like JavaScript and CSS files) are often hashed after the build. For example, instead of `styles.css` you might end up with `styles.123456.css`. Hashing static asset filenames guarantees that every distinct build of the same asset will have a different filename. This is useful because it lets you safely enable long-term caching for static assets: a file with a certain name would never change content.
+Final asset URL’leri (JavaScript ve CSS dosyaları gibi) genellikle build sonrası hash’lenir. Örneğin, `styles.css` yerine `styles.123456.css` gibi bir dosya ile karşılaşabilirsiniz. Statik asset dosya adlarını hash’lemek, aynı asset’in her farklı build’inin farklı bir dosya adına sahip olmasını garanti eder. Bu faydalıdır çünkü statik assetler için uzun süreli caching’i güvenle etkinleştirmenizi sağlar: belli bir isimdeki dosyanın içeriği hiçbir zaman değişmez.
 
-However, if you don't know the asset URLs until after the build, there's no way for you to put them in the source code. For example, hardcoding `"/styles.css"` into JSX like earlier wouldn't work. To keep them out of your source code, your root component can read the real filenames from a map passed as a prop:
+Ancak, asset URL’lerini build sonrası öğreniyorsanız, bunları kaynak kodunuza koymanın bir yolu yoktur. Örneğin, daha önce JSX içine hardcode edilmiş `"/styles.css"` çalışmaz. Bunları kaynak kodunuzdan çıkarmak için, root component’iniz gerçek dosya adlarını bir prop olarak geçirilen bir map’ten okuyabilir:
 
 ```js {1,6}
 export default function App({ assetMap }) {
@@ -158,10 +158,10 @@ export default function App({ assetMap }) {
 }
 ```
 
-On the server, render `<App assetMap={assetMap} />` and pass your `assetMap` with the asset URLs:
+Server tarafında, `<App assetMap={assetMap} />` render edin ve asset URL’lerini içeren `assetMap`’inizi geçin:
 
 ```js {1-5,8,9}
-// You'd need to get this JSON from your build tooling, e.g. read it from the build output.
+// Bu JSON’u build aracınızdan almanız gerekir, örneğin build çıktısından okuyabilirsiniz.
 const assetMap = {
   'styles.css': '/styles.123456.css',
   'main.js': '/main.123456.js'
@@ -177,10 +177,10 @@ async function handler(request) {
 }
 ```
 
-Since your server is now rendering `<App assetMap={assetMap} />`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
+Server artık `<App assetMap={assetMap} />` render ettiği için, client tarafında da `assetMap` ile render etmeniz gerekir; aksi takdirde hydration hataları oluşur. `assetMap`’i serialize edip client’a şöyle geçirebilirsiniz:
 
 ```js {9-10}
-// You'd need to get this JSON from your build tooling.
+// Bu JSON’u build aracınızdan almanız gerekir.
 const assetMap = {
   'styles.css': '/styles.123456.css',
   'main.js': '/main.123456.js'
@@ -188,7 +188,7 @@ const assetMap = {
 
 async function handler(request) {
   const stream = await renderToReadableStream(<App assetMap={assetMap} />, {
-    // Careful: It's safe to stringify() this because this data isn't user-generated.
+    // Dikkat: Bunu stringify() ile güvenle dönüştürebilirsiniz çünkü bu veri kullanıcı tarafından üretilmiş değil.
     bootstrapScriptContent: `window.assetMap = ${JSON.stringify(assetMap)};`,
     bootstrapScripts: [assetMap['/main.js']],
   });
