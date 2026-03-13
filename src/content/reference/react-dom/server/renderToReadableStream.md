@@ -198,7 +198,7 @@ async function handler(request) {
 }
 ```
 
-In the example above, the `bootstrapScriptContent` option adds an extra inline `<script>` tag that sets the global `window.assetMap` variable on the client. This lets the client code read the same `assetMap`:
+Yukarıdaki örnekte, `bootstrapScriptContent` seçeneği client tarafında global `window.assetMap` değişkenini ayarlayan ekstra bir inline `<script>` etiketi ekler. Bu sayede client kodu aynı `assetMap`’i okuyabilir:
 
 ```js {4}
 import { hydrateRoot } from 'react-dom/client';
@@ -207,15 +207,15 @@ import App from './App.js';
 hydrateRoot(document, <App assetMap={window.assetMap} />);
 ```
 
-Both client and server render `App` with the same `assetMap` prop, so there are no hydration errors.
+Hem client hem de server, `App`’i aynı `assetMap` prop’u ile render eder; böylece herhangi bir hydration hatası oluşmaz.
 
 </DeepDive>
 
 ---
 
-### Streaming more content as it loads {/*streaming-more-content-as-it-loads*/}
+### İçerik yüklendikçe stream etmek {/*streaming-more-content-as-it-loads*/}
 
-Streaming allows the user to start seeing the content even before all the data has loaded on the server. For example, consider a profile page that shows a cover, a sidebar with friends and photos, and a list of posts:
+Streaming, kullanıcının tüm veri server’da yüklenmeden önce içeriği görmeye başlamasını sağlar. Örneğin, bir profil sayfasını düşünün; burada bir kapak fotoğrafı, arkadaşlar ve fotoğraflar ile dolu bir yan panel ve bir gönderi listesi gösterilmektedir:
 
 ```js
 function ProfilePage() {
@@ -232,7 +232,7 @@ function ProfilePage() {
 }
 ```
 
-Imagine that loading data for `<Posts />` takes some time. Ideally, you'd want to show the rest of the profile page content to the user without waiting for the posts. To do this, [wrap `Posts` in a `<Suspense>` boundary:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
+Diyelim ki `<Posts />` için veri yüklemesi biraz zaman alıyor. İdeal olarak, gönderileri beklemeden kullanıcıya profil sayfasının geri kalanını göstermek istersiniz. Bunu yapmak için, [Posts’i bir `<Suspense>` sınırına sarın:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
 
 ```js {9,11}
 function ProfilePage() {
