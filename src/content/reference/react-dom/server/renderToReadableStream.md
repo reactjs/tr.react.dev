@@ -283,25 +283,25 @@ Streaming, React’in browser’da yüklenmesini veya uygulamanızın interaktif
 
 <Note>
 
-**Only Suspense-enabled data sources will activate the Suspense component.** They include:
+**Sadece Suspense destekli veri kaynakları, Suspense component’ini aktif hale getirir.** Bunlar şunları içerir:
 
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
-- Reading the value of a Promise with [`use`](/reference/react/use)
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense destekli framework’lerle veri çekme  
+- [`lazy`](/reference/react/lazy) ile component kodlarını lazy-load etme  
+- [`use`](/reference/react/use) ile bir Promise’in değerini okuma  
 
-Suspense **does not** detect when data is fetched inside an Effect or event handler.
+Suspense, bir Effect veya event handler içinde veri çekildiğinde **bunu algılamaz**.
 
-The exact way you would load data in the `Posts` component above depends on your framework. If you use a Suspense-enabled framework, you'll find the details in its data fetching documentation.
+Yukarıdaki `Posts` component’inde veriyi nasıl yükleyeceğiniz kullandığınız framework’e bağlıdır. Eğer Suspense destekli bir framework kullanıyorsanız, detaylar veri çekme dokümantasyonunda bulunabilir.
 
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React. 
+Opinionated bir framework kullanmadan Suspense destekli veri çekme henüz desteklenmemektedir. Suspense destekli bir veri kaynağı uygulamak için gerekenler kararsız ve dokümante edilmemiştir. Suspense ile veri kaynaklarını entegre etmek için resmi bir API, React’in gelecekteki bir sürümünde yayınlanacaktır.
 
 </Note>
 
 ---
 
-### Specifying what goes into the shell {/*specifying-what-goes-into-the-shell*/}
+### Shell’e nelerin dahil edileceğini belirtmek {/*specifying-what-goes-into-the-shell*/}
 
-The part of your app outside of any `<Suspense>` boundaries is called *the shell:*
+Herhangi bir `<Suspense>` sınırının dışında kalan uygulama kısmına *shell* denir:
 
 ```js {3-5,13,14}
 function ProfilePage() {
@@ -322,7 +322,7 @@ function ProfilePage() {
 }
 ```
 
-It determines the earliest loading state that the user may see:
+Bu, kullanıcının görebileceği en erken yükleme durumunu belirler:
 
 ```js {3-5,13
 <ProfileLayout>
