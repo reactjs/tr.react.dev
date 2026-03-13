@@ -251,9 +251,9 @@ function ProfilePage() {
 }
 ```
 
-This tells React to start streaming the HTML before `Posts` loads its data. React will send the HTML for the loading fallback (`PostsGlimmer`) first, and then, when `Posts` finishes loading its data, React will send the remaining HTML along with an inline `<script>` tag that replaces the loading fallback with that HTML. From the user's perspective, the page will first appear with the `PostsGlimmer`, later replaced by the `Posts`.
+Bu, React’e `Posts` verilerini yüklemeden önce HTML’i stream etmeye başlamasını söyler. React önce loading fallback (`PostsGlimmer`) için HTML’i gönderir, ardından `Posts` verilerini yüklemeyi bitirdiğinde kalan HTML’i ve loading fallback’i bu HTML ile değiştiren inline bir `<script>` etiketi gönderir. Kullanıcı perspektifinden bakıldığında, sayfa önce `PostsGlimmer` ile görünür, sonra `Posts` ile değiştirilir.
 
-You can further [nest `<Suspense>` boundaries](/reference/react/Suspense#revealing-nested-content-as-it-loads) to create a more granular loading sequence:
+Daha ayrıntılı bir yükleme sırası oluşturmak için [nested `<Suspense>` sınırları](/reference/react/Suspense#revealing-nested-content-as-it-loads) kullanabilirsiniz:
 
 ```js {5,13}
 function ProfilePage() {
@@ -275,11 +275,11 @@ function ProfilePage() {
 ```
 
 
-In this example, React can start streaming the page even earlier. Only `ProfileLayout` and `ProfileCover` must finish rendering first because they are not wrapped in any `<Suspense>` boundary. However, if `Sidebar`, `Friends`, or `Photos` need to load some data, React will send the HTML for the `BigSpinner` fallback instead. Then, as more data becomes available, more content will continue to be revealed until all of it becomes visible.
+Bu örnekte, React sayfayı çok daha erken stream etmeye başlayabilir. Sadece `ProfileLayout` ve `ProfileCover` öncelikle render’ı tamamlamalıdır, çünkü bunlar herhangi bir `<Suspense>` sınırına sarılmamıştır. Ancak, `Sidebar`, `Friends` veya `Photos` veri yüklemesi gerektiriyorsa, React bunun yerine `BigSpinner` fallback HTML’ini gönderir. Daha fazla veri kullanılabilir hale geldikçe, içerik kademeli olarak gösterilmeye devam eder.
 
-Streaming does not need to wait for React itself to load in the browser, or for your app to become interactive. The HTML content from the server will get progressively revealed before any of the `<script>` tags load.
+Streaming, React’in browser’da yüklenmesini veya uygulamanızın interaktif hale gelmesini beklemek zorunda değildir. Server’dan gelen HTML içeriği, herhangi bir `<script>` yüklenmeden önce kademeli olarak açığa çıkar.
 
-[Read more about how streaming HTML works.](https://github.com/reactwg/react-18/discussions/37)
+[Streaming HTML’in nasıl çalıştığı hakkında daha fazla bilgi edinin.](https://github.com/reactwg/react-18/discussions/37)
 
 <Note>
 
