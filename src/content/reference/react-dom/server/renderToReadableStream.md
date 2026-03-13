@@ -4,7 +4,7 @@ title: renderToReadableStream
 
 <Intro>
 
-`renderToReadableStream` renders a React tree to a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+`renderToReadableStream`, bir React tree’yi bir [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) olarak render eder.
 
 ```js
 const stream = await renderToReadableStream(reactNode, options?)
@@ -16,17 +16,17 @@ const stream = await renderToReadableStream(reactNode, options?)
 
 <Note>
 
-This API depends on [Web Streams.](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) For Node.js, use [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) instead.
+Bu API, [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) üzerine bağımlıdır. Node.js için bunun yerine [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) kullanın.
 
 </Note>
 
 ---
 
-## Reference {/*reference*/}
+## Referans {/*reference*/}
 
 ### `renderToReadableStream(reactNode, options?)` {/*rendertoreadablestream*/}
 
-Call `renderToReadableStream` to render your React tree as HTML into a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+`renderToReadableStream` fonksiyonunu çağırarak React tree’nizi HTML olarak bir [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) içine render edebilirsiniz.
 
 ```js
 import { renderToReadableStream } from 'react-dom/server';
@@ -41,11 +41,11 @@ async function handler(request) {
 }
 ```
 
-On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to make the server-generated HTML interactive.
+Client tarafında, server tarafından oluşturulan HTML’i interaktif hale getirmek için [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) fonksiyonunu çağırın.
 
-[See more examples below.](#usage)
+[Daha fazla örneği aşağıda inceleyin.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametreler {/*parameters*/}
 
 * `reactNode`: A React node you want to render to HTML. For example, a JSX element like `<App />`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
 
