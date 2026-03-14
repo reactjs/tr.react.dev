@@ -449,9 +449,9 @@ Eğer client üzerinde `Posts` render’ını yeniden denemek başarılı olursa
 
 ### ### Status kodunu ayarlamak {/*setting-the-status-code*/}
 
-Streaming introduces a tradeoff. You want to start streaming the page as early as possible so that the user can see the content sooner. However, once you start streaming, you can no longer set the response status code.
+Streaming bir takas getirir. Sayfanın içeriğini kullanıcıya daha erken gösterebilmek için mümkün olan en erken zamanda streaming başlatmak istersiniz. Ancak streaming başladıktan sonra response status kodunu artık ayarlayamazsınız.
 
-By [dividing your app](#specifying-what-goes-into-the-shell) into the shell (above all `<Suspense>` boundaries) and the rest of the content, you've already solved a part of this problem. If the shell errors, your `catch` block will run which lets you set the error status code. Otherwise, you know that the app may recover on the client, so you can send "OK".
+Uygulamanızı [shell (tüm `<Suspense>` sınırlarının üstünde) ve kalan içerik](#specifying-what-goes-into-the-shell) olarak böldüğünüzde, bu sorunun bir kısmını çözmüş olursunuz. Eğer shell hata verirse, `catch` bloğunuz çalışır ve hata status kodunu ayarlamanıza imkan tanır. Aksi takdirde, uygulamanın client’ta kurtulabileceğini bildiğiniz için "OK" gönderebilirsiniz.
 
 ```js {11}
 async function handler(request) {
