@@ -594,13 +594,13 @@ async function handler(request) {
 }
 ```
 
-A regular visitor will get a stream of progressively loaded content. A crawler will receive the final HTML output after all the data loads. However, this also means that the crawler will have to wait for *all* data, some of which might be slow to load or error. Depending on your app, you could choose to send the shell to the crawlers too.
+Normal bir ziyaretçi, kademeli olarak yüklenen içeriğin bir stream’ini alır. Bir crawler ise tüm veri yüklendikten sonra final HTML çıktısını alır. Ancak bu, crawler’ın *tüm* veriyi beklemesi gerektiği anlamına gelir; bazıları yavaş yüklenebilir veya hata verebilir. Uygulamanıza bağlı olarak, shell’i crawler’lara da göndermeyi tercih edebilirsiniz.
 
 ---
 
-### Aborting server rendering {/*aborting-server-rendering*/}
+### Server render’ını iptal etmek {/*aborting-server-rendering*/}
 
-You can force the server rendering to "give up" after a timeout:
+Server render’ının belirli bir süre sonra "vazgeçmesini" sağlayabilirsiniz:
 
 ```js {3,4-6,9}
 async function handler(request) {
@@ -622,4 +622,4 @@ async function handler(request) {
     // ...
 ```
 
-React will flush the remaining loading fallbacks as HTML, and will attempt to render the rest on the client.
+React, kalan loading fallback’ları HTML olarak flush eder ve geri kalan içeriği client üzerinde render etmeye çalışır.
