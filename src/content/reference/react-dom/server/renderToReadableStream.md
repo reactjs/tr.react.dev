@@ -331,9 +331,9 @@ Bu, kullanıcının görebileceği en erken yükleme durumunu belirler:
 </ProfileLayout>
 ```
 
-If you wrap the whole app into a `<Suspense>` boundary at the root, the shell will only contain that spinner. However, that's not a pleasant user experience because seeing a big spinner on the screen can feel slower and more annoying than waiting a bit more and seeing the real layout. This is why usually you'll want to place the `<Suspense>` boundaries so that the shell feels *minimal but complete*--like a skeleton of the entire page layout.
+Eğer tüm uygulamayı root’ta bir `<Suspense>` sınırına sararsanız, shell sadece o spinner’ı içerir. Ancak bu hoş bir kullanıcı deneyimi değildir çünkü ekranda büyük bir spinner görmek, biraz daha bekleyip gerçek layout’u görmekten daha yavaş ve can sıkıcı gelebilir. Bu yüzden genellikle `<Suspense>` sınırlarını, shell’in *minimal ama tamamlanmış* hissettirecek şekilde yerleştirirsiniz—tüm sayfa layout’unun bir iskeleti gibi.
 
-The async call to `renderToReadableStream` will resolve to a `stream` as soon as the entire shell has been rendered. Usually, you'll start streaming then by creating and returning a response with that `stream`:
+`renderToReadableStream` asenkron çağrısı, tüm shell render edildikten hemen sonra bir `stream` ile çözülecektir. Genellikle, o zaman streaming’i başlatır ve o `stream` ile bir response oluşturup döndürürsünüz:
 
 ```js {5}
 async function handler(request) {
@@ -346,13 +346,13 @@ async function handler(request) {
 }
 ```
 
-By the time the `stream` is returned, components in nested `<Suspense>` boundaries might still be loading data.
+`stream` döndürüldüğü sırada, iç içe geçmiş `<Suspense>` sınırları içindeki component’ler hâlâ veri yüklüyor olabilir.
 
 ---
 
-### Logging crashes on the server {/*logging-crashes-on-the-server*/}
+### Server’da crash’leri loglamak {/*logging-crashes-on-the-server*/}
 
-By default, all errors on the server are logged to console. You can override this behavior to log crash reports:
+Varsayılan olarak, server’daki tüm hatalar console’a loglanır. Bu davranışı override ederek crash raporlarını loglayabilirsiniz:
 
 ```js {4-7}
 async function handler(request) {
@@ -369,11 +369,11 @@ async function handler(request) {
 }
 ```
 
-If you provide a custom `onError` implementation, don't forget to also log errors to the console like above.
+Özel bir `onError` implementasyonu sağlarsanız, yukarıdaki gibi hataları console’a da loglamayı unutmayın.
 
 ---
 
-### Recovering from errors inside the shell {/*recovering-from-errors-inside-the-shell*/}
+### Shell içindeki hatalardan kurtulmak {/*recovering-from-errors-inside-the-shell*/}
 
 In this example, the shell contains `ProfileLayout`, `ProfileCover`, and `PostsGlimmer`:
 
