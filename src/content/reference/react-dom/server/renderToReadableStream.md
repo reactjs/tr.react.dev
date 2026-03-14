@@ -476,9 +476,9 @@ async function handler(request) {
 }
 ```
 
-If a component *outside* the shell (i.e. inside a `<Suspense>` boundary) throws an error, React will not stop rendering. This means that the `onError` callback will fire, but your code will continue running without getting into the `catch` block. This is because React will try to recover from that error on the client, [as described above.](#recovering-from-errors-outside-the-shell)
+Eğer bir component shell’in *dışında* (yani bir `<Suspense>` sınırı içinde) hata fırlatırsa, React render’ı durdurmaz. Bu, `onError` callback’inin tetikleneceği anlamına gelir, ancak kodunuz `catch` bloğuna girmeden çalışmaya devam eder. Bunun nedeni, React’in bu hatadan client üzerinde kurtulmayı denemesi, [yukarıda açıklandığı gibi](#recovering-from-errors-outside-the-shell).
 
-However, if you'd like, you can use the fact that something has errored to set the status code:
+Ancak isterseniz, bir şeyin hata verdiğini kullanarak status kodunu ayarlayabilirsiniz:
 
 ```js {3,7,13}
 async function handler(request) {
@@ -505,13 +505,13 @@ async function handler(request) {
 }
 ```
 
-This will only catch errors outside the shell that happened while generating the initial shell content, so it's not exhaustive. If knowing whether an error occurred for some content is critical, you can move it up into the shell.
+Bu, yalnızca başlangıç shell içeriği oluşturulurken meydana gelen shell dışındaki hataları yakalar; dolayısıyla kapsamlı değildir. Eğer bazı içerikler için bir hata oluşup oluşmadığını bilmek kritikse, o içeriği shell içine taşıyabilirsiniz.
 
 ---
 
-### Handling different errors in different ways {/*handling-different-errors-in-different-ways*/}
+### ### Farklı hataları farklı şekillerde işlemek {/*handling-different-errors-in-different-ways*/}
 
-You can [create your own `Error` subclasses](https://javascript.info/custom-errors) and use the [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) operator to check which error is thrown. For example, you can define a custom `NotFoundError` and throw it from your component. Then you can save the error in `onError` and do something different before returning the response depending on the error type:
+Kendi [`Error` alt sınıflarınızı](https://javascript.info/custom-errors) oluşturabilir ve hangi hatanın fırlatıldığını kontrol etmek için [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) operatörünü kullanabilirsiniz. Örneğin, özel bir `NotFoundError` tanımlayıp component’inizden fırlatabilirsiniz. Ardından hatayı `onError` içinde kaydedebilir ve hata türüne bağlı olarak response döndürmeden önce farklı bir işlem yapabilirsiniz:
 
 ```js {2-3,5-15,22,28,33}
 async function handler(request) {
@@ -553,17 +553,17 @@ async function handler(request) {
 }
 ```
 
-Keep in mind that once you emit the shell and start streaming, you can't change the status code.
+Unutmayın: Shell’i emit edip streaming’e başladıktan sonra status kodunu değiştiremezsiniz.
 
 ---
 
-### Waiting for all content to load for crawlers and static generation {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
+### ### Crawlers ve statik üretim için tüm içeriğin yüklenmesini beklemek {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
 
-Streaming offers a better user experience because the user can see the content as it becomes available.
+Streaming, kullanıcı içeriği kullanılabilir hale geldikçe görebildiği için daha iyi bir kullanıcı deneyimi sunar.
 
-However, when a crawler visits your page, or if you're generating the pages at the build time, you might want to let all of the content load first and then produce the final HTML output instead of revealing it progressively.
+Ancak, bir crawler sayfanızı ziyaret ettiğinde veya sayfaları build zamanında üretiyorsanız, tüm içeriğin önce yüklenmesini ve ardından final HTML çıktısının üretilmesini isteyebilirsiniz; kademeli olarak açığa çıkarmak yerine.
 
-You can wait for all the content to load by awaiting the `stream.allReady` Promise:
+Tüm içeriğin yüklenmesini, `stream.allReady` Promise’ini await ederek bekleyebilirsiniz:
 
 ```js {12-15}
 async function handler(request) {
