@@ -375,7 +375,7 @@ async function handler(request) {
 
 ### Shell içindeki hatalardan kurtulmak {/*recovering-from-errors-inside-the-shell*/}
 
-In this example, the shell contains `ProfileLayout`, `ProfileCover`, and `PostsGlimmer`:
+Bu örnekte, shell `ProfileLayout`, `ProfileCover` ve `PostsGlimmer` içerir:
 
 ```js {3-5,7-8}
 function ProfilePage() {
@@ -390,7 +390,7 @@ function ProfilePage() {
 }
 ```
 
-If an error occurs while rendering those components, React won't have any meaningful HTML to send to the client. Wrap your `renderToReadableStream` call in a `try...catch` to send a fallback HTML that doesn't rely on server rendering as the last resort:
+Eğer bu component’ler render edilirken bir hata oluşursa, React’in client’a gönderebileceği anlamlı bir HTML olmayacaktır. Son çare olarak server render’a bağlı olmayan bir fallback HTML göndermek için `renderToReadableStream` çağrınızı bir `try...catch` bloğuna sarın:
 
 ```js {2,13-18}
 async function handler(request) {
@@ -414,13 +414,13 @@ async function handler(request) {
 }
 ```
 
-If there is an error while generating the shell, both `onError` and your `catch` block will fire. Use `onError` for error reporting and use the `catch` block to send the fallback HTML document. Your fallback HTML does not have to be an error page. Instead, you may include an alternative shell that renders your app on the client only.
+Eğer shell oluşturulurken bir hata oluşursa, hem `onError` hem de `catch` bloğunuz tetiklenir. Hata raporlaması için `onError`’u, fallback HTML göndermek için ise `catch` bloğunu kullanın. Fallback HTML’inizin bir hata sayfası olması gerekmez. Bunun yerine, uygulamanızı sadece client tarafında render eden alternatif bir shell içerebilirsiniz.
 
 ---
 
-### Recovering from errors outside the shell {/*recovering-from-errors-outside-the-shell*/}
+### ### Shell dışındaki hatalardan kurtulmak {/*recovering-from-errors-outside-the-shell*/}
 
-In this example, the `<Posts />` component is wrapped in `<Suspense>` so it is *not* a part of the shell:
+Bu örnekte, `<Posts />` component’i `<Suspense>` ile sarılmıştır, bu yüzden shell’in bir parçası **değildir**:
 
 ```js {6}
 function ProfilePage() {
@@ -435,19 +435,19 @@ function ProfilePage() {
 }
 ```
 
-If an error happens in the `Posts` component or somewhere inside it, React will [try to recover from it:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
+Eğer `Posts` component’inde veya içindeki bir yerde hata oluşursa, React [bundan kurtulmayı deneyecektir:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
 
-1. It will emit the loading fallback for the closest `<Suspense>` boundary (`PostsGlimmer`) into the HTML.
-2. It will "give up" on trying to render the `Posts` content on the server anymore.
-3. When the JavaScript code loads on the client, React will *retry* rendering `Posts` on the client.
+1. En yakın `<Suspense>` sınırı (`PostsGlimmer`) için loading fallback HTML’e emit edilir.  
+2. Server üzerinde `Posts` içeriğini render etmeye çalışmaktan vazgeçer.  
+3. JavaScript kodu client’ta yüklendiğinde, React `Posts`’i client üzerinde *yeniden deneyecektir*.
 
-If retrying rendering `Posts` on the client *also* fails, React will throw the error on the client. As with all the errors thrown during rendering, the [closest parent error boundary](/reference/react/Component#static-getderivedstatefromerror) determines how to present the error to the user. In practice, this means that the user will see a loading indicator until it is certain that the error is not recoverable.
+Eğer client üzerinde `Posts` render’ını yeniden denemek de başarısız olursa, React hatayı client’ta fırlatır. Render sırasında oluşan tüm hatalarda olduğu gibi, [en yakın parent error boundary](/reference/react/Component#static-getderivedstatefromerror) hatayı kullanıcıya nasıl göstereceğinizi belirler. Pratikte, kullanıcı, hatanın geri döndürülemez olduğundan emin olunana kadar bir loading göstergesi görür.
 
-If retrying rendering `Posts` on the client succeeds, the loading fallback from the server will be replaced with the client rendering output. The user will not know that there was a server error. However, the server `onError` callback and the client [`onRecoverableError`](/reference/react-dom/client/hydrateRoot#hydrateroot) callbacks will fire so that you can get notified about the error.
+Eğer client üzerinde `Posts` render’ını yeniden denemek başarılı olursa, server’dan gelen loading fallback client render çıktısı ile değiştirilir. Kullanıcı server hatasının farkına varmaz. Ancak, server `onError` callback’i ve client [`onRecoverableError`](/reference/react-dom/client/hydrateRoot#hydrateroot) callback’leri tetiklenir, böylece hatadan haberdar olabilirsiniz.
 
 ---
 
-### Setting the status code {/*setting-the-status-code*/}
+### ### Status kodunu ayarlamak {/*setting-the-status-code*/}
 
 Streaming introduces a tradeoff. You want to start streaming the page as early as possible so that the user can see the content sooner. However, once you start streaming, you can no longer set the response status code.
 
