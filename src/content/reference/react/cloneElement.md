@@ -393,12 +393,11 @@ Bu desen, `cloneElement`’e göre tercih edilir çünkü daha açıktır.
 
 ---
 
-### Passing data through context {/*passing-data-through-context*/}
+### Veriyi context üzerinden geçirmek {/*passing-data-through-context*/}
 
-Another alternative to `cloneElement` is to [pass data through context.](/learn/passing-data-deeply-with-context)
+`cloneElement`’e bir diğer alternatif ise veriyi [context üzerinden geçirmektir.](/learn/passing-data-deeply-with-context)
 
-
-For example, you can call [`createContext`](/reference/react/createContext) to define a `HighlightContext`:
+Örneğin, bir `HighlightContext` tanımlamak için [`createContext`](/reference/react/createContext) çağırabilirsiniz:
 
 ```js
 export const HighlightContext = createContext(false);
