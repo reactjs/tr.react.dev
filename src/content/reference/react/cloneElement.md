@@ -137,7 +137,7 @@ Children’larını clone ederek, `List` her bir `Row`’a ekstra bilgi geçireb
 </List>
 ```
 
-Notice how pressing "Next" updates the state of the `List`, and highlights a different row:
+“Next” butonuna basıldığında `List`’in state’inin nasıl güncellendiğine ve farklı bir satırın highlight edildiğine dikkat edin:
 
 <Sandpack>
 
@@ -232,21 +232,21 @@ button {
 
 </Sandpack>
 
-To summarize, the `List` cloned the `<Row />` elements it received and added an extra prop to them.
+Özetle, `List` aldığı `<Row />` elementlerini clone etti ve bunlara ekstra bir prop ekledi.
 
 <Pitfall>
 
-Cloning children makes it hard to tell how the data flows through your app. Try one of the [alternatives.](#alternatives)
+Children’ları clone etmek, veri akışının uygulamanızda nasıl ilerlediğini anlamayı zorlaştırır. [Alternatiflerden](#alternatives) birini denemeyi deneyin.
 
 </Pitfall>
 
 ---
 
-## Alternatives {/*alternatives*/}
+## Alternatifler {/*alternatives*/}
 
-### Passing data with a render prop {/*passing-data-with-a-render-prop*/}
+### Render prop ile veri aktarımı {/*passing-data-with-a-render-prop*/}
 
-Instead of using `cloneElement`, consider accepting a *render prop* like `renderItem`. Here, `List` receives `renderItem` as a prop. `List` calls `renderItem` for every item and passes `isHighlighted` as an argument: 
+`cloneElement` kullanmak yerine, `renderItem` gibi bir *render prop* kabul etmeyi düşünebilirsiniz. Burada `List`, `renderItem`’ı bir prop olarak alır. `List`, her item için `renderItem`’ı çağırır ve `isHighlighted`’ı bir argüman olarak geçirir:
 
 ```js {1,7}
 export default function List({ items, renderItem }) {
@@ -259,7 +259,7 @@ export default function List({ items, renderItem }) {
       })}
 ```
 
-The `renderItem` prop is called a "render prop" because it's a prop that specifies how to render something. For example, you can pass a `renderItem` implementation that renders a `<Row>` with the given `isHighlighted` value:
+`renderItem` prop’una "render prop" denir çünkü bir şeyin nasıl render edileceğini belirten bir prop’tur. Örneğin, verilen `isHighlighted` değeri ile bir `<Row>` render eden bir `renderItem` implementasyonu geçebilirsiniz:
 
 ```js {3,7}
 <List
@@ -274,7 +274,7 @@ The `renderItem` prop is called a "render prop" because it's a prop that specifi
 />
 ```
 
-The end result is the same as with `cloneElement`:
+Sonuç, `cloneElement` kullanımıyla elde edilen ile aynıdır:
 
 ```js {4,8,12}
 <List>
@@ -293,7 +293,7 @@ The end result is the same as with `cloneElement`:
 </List>
 ```
 
-However, you can clearly trace where the `isHighlighted` value is coming from.
+Ancak, `isHighlighted` değerinin nereden geldiğini açıkça takip edebilirsiniz.
 
 <Sandpack>
 
@@ -389,7 +389,7 @@ button {
 
 </Sandpack>
 
-This pattern is preferred to `cloneElement` because it is more explicit.
+Bu desen, `cloneElement`’e göre tercih edilir çünkü daha açıktır.
 
 ---
 
