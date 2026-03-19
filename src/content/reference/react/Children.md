@@ -844,9 +844,9 @@ export default function TabSwitcher({ tabIds, getHeader, renderContent }) {
 
 </Sandpack>
 
-A prop like `renderContent` is called a *render prop* because it is a prop that specifies how to render a piece of the user interface. However, there is nothing special about it: it is a regular prop which happens to be a function.
+`renderContent` gibi bir prop’a *render prop* denir çünkü kullanıcı arayüzünün bir parçasının nasıl render edileceğini belirten bir prop’tur. Ancak bunda özel bir durum yoktur: sadece fonksiyon olan normal bir prop’tur.
 
-Render props are functions, so you can pass information to them. For example, this `RowList` component passes the `id` and the `index` of each row to the `renderRow` render prop, which uses `index` to highlight even rows:
+Render prop’lar fonksiyon olduğu için onlara bilgi de geçebilirsiniz. Örneğin, bu `RowList` bileşeni her row’un `id` ve `index` değerini `renderRow` render prop’una geçirir ve `renderRow` bu `index` değerini kullanarak çift satırları highlight eder:
 
 <Sandpack>
 
@@ -927,15 +927,15 @@ export function Row({ children, isHighlighted }) {
 
 </Sandpack>
 
-This is another example of how parent and child components can cooperate without manipulating the children.
+Bu, parent ve child bileşenlerin children’ları manipulate etmeden birlikte nasıl çalışabileceğine dair başka bir örnektir.
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Sorun giderme {/*troubleshooting*/}
 
-### I pass a custom component, but the `Children` methods don't show its render result {/*i-pass-a-custom-component-but-the-children-methods-dont-show-its-render-result*/}
+### Özel bir bileşen geçiriyorum ama `Children` metodları onun render sonucunu göstermiyor {/*i-pass-a-custom-component-but-the-children-methods-dont-show-its-render-result*/}
 
-Suppose you pass two children to `RowList` like this:
+Diyelim ki `RowList` bileşenine şu şekilde iki child geçiriyorsunuz:
 
 ```js
 <RowList>
