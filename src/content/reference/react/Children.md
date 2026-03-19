@@ -944,6 +944,6 @@ Diyelim ki `RowList` bileşenine şu şekilde iki child geçiriyorsunuz:
 </RowList>
 ```
 
-If you do `Children.count(children)` inside `RowList`, you will get `2`. Even if `MoreRows` renders 10 different items, or if it returns `null`, `Children.count(children)` will still be `2`. From the `RowList`'s perspective, it only "sees" the JSX it has received. It does not "see" the internals of the `MoreRows` component.
+Eğer `RowList` içinde `Children.count(children)` kullanırsanız `2` sonucunu alırsınız. `MoreRows` 10 farklı item render etse bile ya da `null` döndürse bile, `Children.count(children)` yine `2` olur. `RowList` açısından bakıldığında sadece kendisine gelen JSX’i “görür”. `MoreRows` bileşeninin iç detaylarını “göremez”.
 
-The limitation makes it hard to extract a component. This is why [alternatives](#alternatives) are preferred to using `Children`.
+Bu kısıtlama, bir bileşeni extract etmeyi zorlaştırır. Bu yüzden `Children` kullanmak yerine [alternatifler](#alternatives) tercih edilir.
