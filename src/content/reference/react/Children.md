@@ -729,9 +729,9 @@ export function RowList({ rows }) {
 
 </Sandpack>
 
-Since `rows` is a regular JavaScript array, the `RowList` component can use built-in array methods like [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on it.
+`rows` normal bir JavaScript array olduğu için, `RowList` bileşeni üzerinde [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) gibi yerleşik array metodlarını kullanabilir.
 
-This pattern is especially useful when you want to be able to pass more information as structured data together with children. In the below example, the `TabSwitcher` component receives an array of objects as the `tabs` prop:
+Bu pattern, children ile birlikte daha fazla bilgiyi yapılandırılmış veri olarak geçmek istediğiniz durumlarda özellikle kullanışlıdır. Aşağıdaki örnekte, `TabSwitcher` bileşeni `tabs` prop’u olarak object’lerden oluşan bir array alır:
 
 <Sandpack>
 
@@ -789,13 +789,13 @@ export default function TabSwitcher({ tabs }) {
 
 </Sandpack>
 
-Unlike passing the children as JSX, this approach lets you associate some extra data like `header` with each item. Because you are working with the `tabs` directly, and it is an array, you do not need the `Children` methods.
+JSX olarak children geçirmekten farklı olarak, bu yaklaşım her bir öğeye `header` gibi ekstra verileri ilişkilendirmenize izin verir. `tabs` verisiyle doğrudan çalıştığınız ve bu bir array olduğu için `Children` metodlarına ihtiyaç duymazsınız.
 
 ---
 
-### Calling a render prop to customize rendering {/*calling-a-render-prop-to-customize-rendering*/}
+### Render prop çağırarak render’ı özelleştirme {/*calling-a-render-prop-to-customize-rendering*/}
 
-Instead of producing JSX for every single item, you can also pass a function that returns JSX, and call that function when necessary. In this example, the `App` component passes a `renderContent` function to the `TabSwitcher` component. The `TabSwitcher` component calls `renderContent` only for the selected tab:
+Her bir öğe için JSX üretmek yerine, JSX döndüren bir fonksiyon da geçebilir ve bunu gerektiğinde çağırabilirsiniz. Bu örnekte, `App` bileşeni `TabSwitcher` bileşenine bir `renderContent` fonksiyonu geçirir. `TabSwitcher` ise bu fonksiyonu yalnızca seçili tab için çağırır:
 
 <Sandpack>
 
