@@ -403,7 +403,7 @@ Bu desen, `cloneElement`’e göre tercih edilir çünkü daha açıktır.
 export const HighlightContext = createContext(false);
 ```
 
-Your `List` component can wrap every item it renders into a `HighlightContext` provider:
+`List` bileşeniniz, render ettiği her bir öğeyi bir `HighlightContext` sağlayıcısı içine sarabilir:
 
 ```js {8,10}
 export default function List({ items, renderItem }) {
@@ -420,7 +420,7 @@ export default function List({ items, renderItem }) {
       })}
 ```
 
-With this approach, `Row` does not need to receive an `isHighlighted` prop at all. Instead, it reads the context:
+Bu yaklaşımla, `Row` bileşeninin artık bir `isHighlighted` prop’u almasına gerek yoktur. Bunun yerine, context’i okur:
 
 ```js src/Row.js {2}
 export default function Row({ title }) {
@@ -428,7 +428,7 @@ export default function Row({ title }) {
   // ...
 ```
 
-This allows the calling component to not know or worry about passing `isHighlighted` to `<Row>`:
+Bu, çağıran bileşenin `<Row>` bileşenine `isHighlighted` prop’unu geçmek zorunda kalmamasını ve bununla ilgilenmemesini sağlar:
 
 ```js {4}
 <List
@@ -439,7 +439,7 @@ This allows the calling component to not know or worry about passing `isHighligh
 />
 ```
 
-Instead, `List` and `Row` coordinate the highlighting logic through context.
+Bunun yerine, `List` ve `Row`, highlight (vurgulama) mantığını context üzerinden koordine eder:
 
 <Sandpack>
 
@@ -549,13 +549,13 @@ button {
 
 </Sandpack>
 
-[Learn more about passing data through context.](/reference/react/useContext#passing-data-deeply-into-the-tree)
+[Context aracılığıyla veri aktarma hakkında daha fazla bilgi edinin.](/reference/react/useContext#passing-data-deeply-into-the-tree)
 
 ---
 
-### Extracting logic into a custom Hook {/*extracting-logic-into-a-custom-hook*/}
+### Mantığı özel bir Hook içine çıkarma {/*extracting-logic-into-a-custom-hook*/}
 
-Another approach you can try is to extract the "non-visual" logic into your own Hook, and use the information returned by your Hook to decide what to render. For example, you could write a `useList` custom Hook like this:
+Deneyebileceğiniz bir diğer yaklaşım, "görsel olmayan" mantığı kendi Hook’unuza çıkarmak ve Hook’unuzun döndürdüğü bilgilere göre neyin render edileceğine karar vermektir. Örneğin, aşağıdaki gibi bir `useList` özel Hook’u yazabilirsiniz:
 
 ```js
 import { useState } from 'react';
@@ -574,7 +574,7 @@ export default function useList(items) {
 }
 ```
 
-Then you could use it like this:
+Ardından bunu şu şekilde kullanabilirsiniz:
 
 ```js {2,9,13}
 export default function App() {
@@ -597,7 +597,7 @@ export default function App() {
 }
 ```
 
-The data flow is explicit, but the state is inside the `useList` custom Hook that you can use from any component:
+Veri akışı nettir (explicit), ancak state `useList` custom Hook’unun içindedir ve bunu herhangi bir bileşenden kullanabilirsiniz:
 
 <Sandpack>
 
@@ -690,4 +690,4 @@ button {
 
 </Sandpack>
 
-This approach is particularly useful if you want to reuse this logic between different components.
+Bu yaklaşım, bu mantığı farklı bileşenler arasında yeniden kullanmak istediğiniz durumlarda özellikle faydalıdır.
