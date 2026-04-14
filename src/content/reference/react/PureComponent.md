@@ -4,13 +4,13 @@ title: PureComponent
 
 <Pitfall>
 
-We recommend defining components as functions instead of classes. [See how to migrate.](#alternatives)
+Bileşenleri sınıf yerine fonksiyon olarak tanımlamanızı öneririz. [Nasıl taşınacağını görün.](#alternatives)
 
 </Pitfall>
 
 <Intro>
 
-`PureComponent` is similar to [`Component`](/reference/react/Component) but it skips re-renders for same props and state. Class components are still supported by React, but we don't recommend using them in new code.
+`PureComponent`, [`Component`](/reference/react/Component) ile benzerdir ancak aynı prop'lar ve state için yeniden renderlamayı atlar. Sınıf bileşenleri hâlâ React tarafından desteklenmektedir, ancak yeni kodda kullanılmasını önermiyoruz.
 
 ```js
 class Greeting extends PureComponent {
@@ -26,11 +26,11 @@ class Greeting extends PureComponent {
 
 ---
 
-## Reference {/*reference*/}
+## Başvuru Dokümanı {/*reference*/}
 
 ### `PureComponent` {/*purecomponent*/}
 
-To skip re-rendering a class component for same props and state, extend `PureComponent` instead of [`Component`:](/reference/react/Component)
+Aynı prop'lar ve state için bir sınıf bileşeninin yeniden renderlanmasını atlamak istiyorsanız, [`Component`](/reference/react/Component) yerine `PureComponent`'ı genişletin:
 
 ```js
 import { PureComponent } from 'react';
@@ -42,18 +42,17 @@ class Greeting extends PureComponent {
 }
 ```
 
-`PureComponent` is a subclass of `Component` and supports [all the `Component` APIs.](/reference/react/Component#reference) Extending `PureComponent` is equivalent to defining a custom [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) method that shallowly compares props and state.
+`PureComponent`, `Component`'ın bir alt sınıfıdır ve [tüm `Component` API'lerini](/reference/react/Component#reference) destekler. `PureComponent`'ı genişletmek, prop'ları ve state'i yüzeysel (shallow) olarak karşılaştıran özel bir [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) metodu tanımlamakla eşdeğerdir.
 
-
-[See more examples below.](#usage)
+[Aşağıda daha fazla örneğe bakın.](#usage)
 
 ---
 
-## Usage {/*usage*/}
+## Kullanım {/*usage*/}
 
-### Skipping unnecessary re-renders for class components {/*skipping-unnecessary-re-renders-for-class-components*/}
+### Sınıf bileşenlerinde gereksiz yeniden renderlamaları atlama {/*skipping-unnecessary-re-renders-for-class-components*/}
 
-React normally re-renders a component whenever its parent re-renders. As an optimization, you can create a component that React will not re-render when its parent re-renders so long as its new props and state are the same as the old props and state. [Class components](/reference/react/Component) can opt into this behavior by extending `PureComponent`:
+React normalde üst bileşen her yeniden renderlandığında alt bileşeni de yeniden renderlar. Bir optimizasyon olarak, yeni prop'ları ve state'i eski prop'lar ve state ile aynı olduğu sürece üst bileşen yeniden renderlandığında React'in yeniden renderlamayacağı bir bileşen oluşturabilirsiniz. [Sınıf bileşenleri](/reference/react/Component), `PureComponent`'ı genişleterek bu davranışı tercih edebilir:
 
 ```js {1}
 class Greeting extends PureComponent {
@@ -63,9 +62,9 @@ class Greeting extends PureComponent {
 }
 ```
 
-A React component should always have [pure rendering logic.](/learn/keeping-components-pure) This means that it must return the same output if its props, state, and context haven't changed. By using `PureComponent`, you are telling React that your component complies with this requirement, so React doesn't need to re-render as long as its props and state haven't changed. However, your component will still re-render if a context that it's using changes.
+Bir React bileşeni her zaman [saf renderlama mantığına](/learn/keeping-components-pure) sahip olmalıdır. Bu, prop'ları, state'i ve context'i değişmediyse aynı çıktıyı döndürmesi gerektiği anlamına gelir. `PureComponent` kullanarak, React'e bileşeninizin bu gereksinime uyduğunu söylemiş olursunuz; böylece React, prop'ları ve state'i değişmediği sürece yeniden renderlama yapmak zorunda kalmaz. Ancak bileşeniniz, kullandığı bir context değişirse yine de yeniden renderlanır.
 
-In this example, notice that the `Greeting` component re-renders whenever `name` is changed (because that's one of its props), but not when `address` is changed (because it's not passed to `Greeting` as a prop):
+Bu örnekte, `Greeting` bileşeninin `name` değiştiğinde yeniden renderlandığına (çünkü bu, prop'larından biridir), ancak `address` değiştiğinde yeniden renderlanmadığına dikkat edin (çünkü `Greeting`'e prop olarak iletilmemektedir):
 
 <Sandpack>
 
@@ -109,17 +108,17 @@ label {
 
 <Pitfall>
 
-We recommend defining components as functions instead of classes. [See how to migrate.](#alternatives)
+Bileşenleri sınıf yerine fonksiyon olarak tanımlamanızı öneririz. [Nasıl taşınacağını görün.](#alternatives)
 
 </Pitfall>
 
 ---
 
-## Alternatives {/*alternatives*/}
+## Alternatifler {/*alternatives*/}
 
-### Migrating from a `PureComponent` class component to a function {/*migrating-from-a-purecomponent-class-component-to-a-function*/}
+### Bir `PureComponent` sınıf bileşeninden fonksiyona geçiş {/*migrating-from-a-purecomponent-class-component-to-a-function*/}
 
-We recommend using function components instead of [class components](/reference/react/Component) in new code. If you have some existing class components using `PureComponent`, here is how you can convert them. This is the original code:
+Yeni kodda [sınıf bileşenleri](/reference/react/Component) yerine fonksiyon bileşenlerini kullanmanızı öneririz. `PureComponent` kullanan mevcut sınıf bileşenleriniz varsa, bunları nasıl dönüştürebileceğiniz aşağıda açıklanmıştır. İşte orijinal kod:
 
 <Sandpack>
 
@@ -161,7 +160,7 @@ label {
 
 </Sandpack>
 
-When you [convert this component from a class to a function,](/reference/react/Component#alternatives) wrap it in [`memo`:](/reference/react/memo)
+[Bu bileşeni sınıftan fonksiyona dönüştürdüğünüzde,](/reference/react/Component#alternatives) [`memo`](/reference/react/memo) ile sarmalayın:
 
 <Sandpack>
 
@@ -203,6 +202,6 @@ label {
 
 <Note>
 
-Unlike `PureComponent`, [`memo`](/reference/react/memo) does not compare the new and the old state. In function components, calling the [`set` function](/reference/react/useState#setstate) with the same state [already prevents re-renders by default,](/reference/react/memo#updating-a-memoized-component-using-state) even without `memo`.
+`PureComponent`'ın aksine, [`memo`](/reference/react/memo) eski ve yeni state'i karşılaştırmaz. Fonksiyon bileşenlerinde, [`set` fonksiyonunu](/reference/react/useState#setstate) aynı state ile çağırmak, `memo` olmadan bile [varsayılan olarak yeniden renderlamayı önler.](/reference/react/memo#updating-a-memoized-component-using-state)
 
 </Note>
