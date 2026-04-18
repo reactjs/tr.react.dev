@@ -10,7 +10,7 @@ React baktığınız tasarımlar ve oluşturduğunuz uygulamalar hakkında düş
 
 ## Bir Örnekle Başlayın {/*start-with-the-mockup*/}
 
-Öncelikle, bir JSON API'mızın ve tasarımcımızdan gelen bir modelimizin olduğunu hayal edin.
+Öncelikle, bir JSON API'mızın ve tasarımcımızdan gelen bir tasarım taslağımızın olduğunu hayal edin.
 
 JSON API şöyle bir veri döndürüyor:
 
@@ -25,7 +25,7 @@ JSON API şöyle bir veri döndürüyor:
 ]
 ```
 
-Tasarımımız da şöyle:
+Tasarım taslağımız da şöyle:
 
 <img src="/images/docs/s_thinking-in-react_ui.png" width="300" style={{margin: '0 auto'}} />
 
@@ -62,7 +62,7 @@ Bu ekranın beş bileşeni var:
 
 `ProductTable` (lavanta) öğesine bakarsanız, tablo başlığının ("İsim" ve "Fiyat" etiketlerini içeren kısım) kendi bileşeni olmadığını görürsünüz. Bu bir tercih meselesidir ve her iki şekilde de yapılabilir. Bu örnekte, başlık kısmı `ProductTable`'ın bir parçasıdır, çünkü `ProductTable` listesinin içinde görünüyor. Ancak, bu başlık kısmı karmaşık hale gelirse (örneğin, sıralama özelliği eklerseniz), onu kendi `ProductTableHeader` bileşenine taşıyabilirsiniz.
 
-Tasarım modelinizdeki bileşenleri tanımladığınıza göre, bunları bir hiyerarşi içinde düzenleyin. Modelde başka bir bileşen içinde görünen bileşenler, hiyerarşide bir alt öğe olarak görünmelidir:
+Tasarım taslağınızdaki bileşenleri tanımladığınıza göre, bunları bir hiyerarşi içinde düzenleyin. Tasarım taslağında başka bir bileşen içinde görünen bileşenler, hiyerarşide bir alt öğe olarak görünmelidir:
 
 * `FilterableProductTable`
     * `SearchBar`
@@ -204,7 +204,7 @@ Bu noktada, herhangi bir state değeri kullanmamalısınız. Onun için bir sonr
 
 </Pitfall>
 
-## Step 3: Arayüzün minimal (ancak eksiksiz) halini belirleme {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
+## Adım 3: Arayüzün minimal (ancak eksiksiz) halini belirleme {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
 
 Kullanıcı arayüzünüzü etkileşimli hale getirmek için, kullanıcılarınızın temel veri modelinizi değiştirmesine izin vermeniz gerekir. Bunun için *state* kullanacaksınız.
 
@@ -247,11 +247,11 @@ Prop'lar ve state farklıdır, ancak birlikte çalışırlar. Bir üst bileşen 
 
 </DeepDive>
 
-## Step 4: State’inizin barınacağı yeri belirleyin {/*step-4-identify-where-your-state-should-live*/}
+## Adım 4: State’inizin barınacağı yeri belirleyin {/*step-4-identify-where-your-state-should-live*/}
 
 Uygulamanızın minimum state verisini belirledikten sonra, bu state'i değiştirmekten sorumlu olan veya state'e *sahip olan* bileşeni belirlemeniz gerekir. Unutmayın: React, veriyi yukarıdan aşağıya doğru tek yönlü olarak (one-way data flow) aktarır. Bu yüzden, hangi bileşenin hangi state'i sahipleneceği hemen net olmayabilir. Bu konseptle yeni tanışıyorsanız bu zor olabilir, ancak aşağıdaki adımları takip ederek çözebilirsiniz!
 
-Uyguamanızdaki her state parçası için:
+Uygulamanızdaki her state parçası için:
 
 1. State'e bağlı olarak bir şeyler render eden *her* bileşeni belirleyin.
 2. O bileşenlere en yakın ortak üst bileşeni bulun (Hiyerarşide hepsinin üstünde olan bir bileşen).
@@ -446,7 +446,7 @@ You provided a \`value\` prop to a form field without an \`onChange\` handler. T
 
 <ConsoleBlock level="error">
 
-Bir form alanına \`value\` prop'u verdiniz; ancak bir \`onChange\` handler'ı sağlamadınız. Bu salt-okunur bir form alanı oluşturacaktır.
+Bir form alanına \`value\` prop'u verdiniz; ancak bir \`onChange\` işleyicisi sağlamadınız. Bu salt-okunur bir form alanı oluşturacaktır.
 
 </ConsoleBlock>
 
@@ -466,9 +466,9 @@ function SearchBar({ filterText, inStockOnly }) {
 
 Ancak henüz kullanıcı eylemlerine (yazmak gibi) yanıt vermek için herhangi bir kod eklemediniz. Bu da son adımınız olacak.
 
-## Step 5: Ters veri akışı ekleyin {/*step-5-add-inverse-data-flow*/}
+## Adım 5: Ters veri akışı ekleyin {/*step-5-add-inverse-data-flow*/}
 
-Uygulumanız şu anda, prop'lar ve state'in hiyerarşi boyunca aşağı doğru akmasıyla, doğru bir şekilde render ediliyor. Ancak kullanıcı girdisine göre state'i değiştirmek için, ters istikametteki veri akışını da desteklenmeniz gerekemktedir. Hiyerarşinin derinliklerindeki form bileşenlerinin `FilterableProductTable` bileşenindeki state'i güncellemesi gerekecek.
+Uygulamanız şu anda, prop'lar ve state'in hiyerarşi boyunca aşağı doğru akmasıyla, doğru bir şekilde render ediliyor. Ancak kullanıcı girdisine göre state'i değiştirmek için, ters istikametteki veri akışını da desteklemeniz gerekecektir. Hiyerarşinin derinliklerindeki form bileşenlerinin `FilterableProductTable` bileşenindeki state'i güncellemesi gerekecek.
 
 React bu veri akışını açıkça yapar, ancak iki-yönlü veri bağlamaya göre biraz daha fazla kod yazmanızı gerektirir. Yukarıdaki örnekte yazı yazmaya veya kutuyu işaretlemeye çalışırsanız, React girdinizi görmezden gelir. Bu kasıtlıdır. `<input value={filterText} />` yazarak, `input`'un `value` prop'unu her zaman `FilterableProductTable`'dan iletilem `filterText` state'ine eşit olarak ayarladınız. `filterText` state'i hiçbir zaman değişmediği için, input hiçbir zaman değişmez.
 
