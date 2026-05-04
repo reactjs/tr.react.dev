@@ -103,7 +103,11 @@ label {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Bunlar ağaç olarak nasıl görünüyor:
+=======
+Here's how these look as a tree:
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <DiagramGroup>
 
@@ -203,7 +207,7 @@ export default function App() {
   return (
     <div>
       <Counter />
-      {showB && <Counter />} 
+      {showB && <Counter />}
       <label>
         <input
           type="checkbox"
@@ -305,9 +309,9 @@ export default function App() {
   return (
     <div>
       {isFancy ? (
-        <Counter isFancy={true} /> 
+        <Counter isFancy={true} />
       ) : (
-        <Counter isFancy={false} /> 
+        <Counter isFancy={false} />
       )}
       <label>
         <input
@@ -513,9 +517,13 @@ export default function App() {
   return (
     <div>
       {isPaused ? (
+<<<<<<< HEAD
         <p>Sonra görüşürüz!</p> 
+=======
+        <p>See you later!</p>
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
       ) : (
-        <Counter /> 
+        <Counter />
       )}
       <label>
         <input
@@ -613,7 +621,7 @@ export default function App() {
     <div>
       {isFancy ? (
         <div>
-          <Counter isFancy={true} /> 
+          <Counter isFancy={true} />
         </div>
       ) : (
         <section>
@@ -1450,19 +1458,29 @@ export default function App() {
   if (reverse) {
     return (
       <>
+<<<<<<< HEAD
         <Field label="Ad" /> 
         <Field label="Soyad" />
+=======
+        <Field label="Last name" />
+        <Field label="First name" />
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
         {checkbox}
       </>
     );
   } else {
     return (
       <>
+<<<<<<< HEAD
         <Field label="Ad" /> 
         <Field label="Soyad" />
+=======
+        <Field label="First name" />
+        <Field label="Last name" />
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
         {checkbox}
       </>
-    );    
+    );
   }
 }
 
@@ -1512,19 +1530,29 @@ export default function App() {
   if (reverse) {
     return (
       <>
+<<<<<<< HEAD
         <Field key="lastName" label="Ad" /> 
         <Field key="firstName" label="Soyad" />
+=======
+        <Field key="lastName" label="Last name" />
+        <Field key="firstName" label="First name" />
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
         {checkbox}
       </>
     );
   } else {
     return (
       <>
+<<<<<<< HEAD
         <Field key="firstName" label="Ad" /> 
         <Field key="lastName" label="Soyad" />
+=======
+        <Field key="firstName" label="First name" />
+        <Field key="lastName" label="Last name" />
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
         {checkbox}
       </>
-    );    
+    );
   }
 }
 
@@ -1907,25 +1935,25 @@ export default function Gallery() {
 
 let images = [{
   place: 'Penang, Malaysia',
-  src: 'https://i.imgur.com/FJeJR8M.jpg'
+  src: 'https://react.dev/images/docs/scientists/FJeJR8M.jpg'
 }, {
   place: 'Lisbon, Portugal',
-  src: 'https://i.imgur.com/dB2LRbj.jpg'
+  src: 'https://react.dev/images/docs/scientists/dB2LRbj.jpg'
 }, {
   place: 'Bilbao, Spain',
-  src: 'https://i.imgur.com/z08o2TS.jpg'
+  src: 'https://react.dev/images/docs/scientists/z08o2TS.jpg'
 }, {
   place: 'Valparaíso, Chile',
-  src: 'https://i.imgur.com/Y3utgTi.jpg'
+  src: 'https://react.dev/images/docs/scientists/Y3utgTi.jpg'
 }, {
   place: 'Schwyz, Switzerland',
-  src: 'https://i.imgur.com/JBbMpWY.jpg'
+  src: 'https://react.dev/images/docs/scientists/JBbMpWY.jpg'
 }, {
   place: 'Prague, Czechia',
-  src: 'https://i.imgur.com/QwUKKmF.jpg'
+  src: 'https://react.dev/images/docs/scientists/QwUKKmF.jpg'
 }, {
   place: 'Ljubljana, Slovenia',
-  src: 'https://i.imgur.com/3aIiwfm.jpg'
+  src: 'https://react.dev/images/docs/scientists/3aIiwfm.jpg'
 }];
 ```
 
@@ -1975,25 +2003,25 @@ export default function Gallery() {
 
 let images = [{
   place: 'Penang, Malaysia',
-  src: 'https://i.imgur.com/FJeJR8M.jpg'
+  src: 'https://react.dev/images/docs/scientists/FJeJR8M.jpg'
 }, {
   place: 'Lisbon, Portugal',
-  src: 'https://i.imgur.com/dB2LRbj.jpg'
+  src: 'https://react.dev/images/docs/scientists/dB2LRbj.jpg'
 }, {
   place: 'Bilbao, Spain',
-  src: 'https://i.imgur.com/z08o2TS.jpg'
+  src: 'https://react.dev/images/docs/scientists/z08o2TS.jpg'
 }, {
   place: 'Valparaíso, Chile',
-  src: 'https://i.imgur.com/Y3utgTi.jpg'
+  src: 'https://react.dev/images/docs/scientists/Y3utgTi.jpg'
 }, {
   place: 'Schwyz, Switzerland',
-  src: 'https://i.imgur.com/JBbMpWY.jpg'
+  src: 'https://react.dev/images/docs/scientists/JBbMpWY.jpg'
 }, {
   place: 'Prague, Czechia',
-  src: 'https://i.imgur.com/QwUKKmF.jpg'
+  src: 'https://react.dev/images/docs/scientists/QwUKKmF.jpg'
 }, {
   place: 'Ljubljana, Slovenia',
-  src: 'https://i.imgur.com/3aIiwfm.jpg'
+  src: 'https://react.dev/images/docs/scientists/3aIiwfm.jpg'
 }];
 ```
 

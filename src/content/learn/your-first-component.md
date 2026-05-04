@@ -63,7 +63,7 @@ Geleneksel olarak web sayfaları oluşturulurken, web geliştiricileri içerikle
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3Am.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3Am.jpg"
       alt="Katherine Johnson"
     />
   )
@@ -99,7 +99,7 @@ Bu bileşen `src` ve `alt` özelliklerine sahip bir `<img />` elemanı döndürm
 Bileşenin ne döndüreceği aşağıdaki bileşende olduğu gibi tek bir satır halinde yazılabilir:
 
 ```js
-return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
+return <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />;
 ```
 
 Ancak biçimlendirmenizin hepsi `return` kelimesi ile aynı satırda değilse, biçimlendirmenizin parantez içine almak zorundasınız:
@@ -107,7 +107,7 @@ Ancak biçimlendirmenizin hepsi `return` kelimesi ile aynı satırda değilse, b
 ```js
 return (
   <div>
-    <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+    <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
   </div>
 );
 ```
@@ -128,7 +128,7 @@ Artık `Profile` bileşenini tanımladığınıza göre, bu bileşeni başka bil
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3As.jpg"
       alt="Katherine Johnson"
     />
   );
@@ -163,10 +163,17 @@ Hatta `Profile` bileşeni daha da fazla HTML içermektedir:: `<img />`. Sonuçta
 
 ```html
 <section>
+<<<<<<< HEAD
   <h1>Muhteşem bilim insanları</h1>
   <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
   <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
   <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+=======
+  <h1>Amazing scientists</h1>
+  <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
+  <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
+  <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 </section>
 ```
 
@@ -248,7 +255,7 @@ Bu sandbox çalışmamaktadır çünkü kök bileşeni dışarı aktarılmamış
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/lICfvbD.jpg"
+      src="https://react.dev/images/docs/scientists/lICfvbD.jpg"
       alt="Aklilu Lemma"
     />
   );
@@ -273,7 +280,7 @@ img { height: 181px; }
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/lICfvbD.jpg"
+      src="https://react.dev/images/docs/scientists/lICfvbD.jpg"
       alt="Aklilu Lemma"
     />
   );
@@ -306,7 +313,7 @@ Hatayı düzeltmeye çalışırken "Unexpected token" hatası alabilirsiniz. Bu 
 ```js
 export default function Profile() {
   return
-    <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
+    <img src="https://react.dev/images/docs/scientists/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
 }
 ```
 
@@ -324,7 +331,7 @@ Bu bileşeni, return ifadesini tek bir satır halinde yazarak düzeltebilirsiniz
 
 ```js
 export default function Profile() {
-  return <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
+  return <img src="https://react.dev/images/docs/scientists/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
 }
 ```
 
@@ -341,9 +348,9 @@ Ya da döndürülen JSX biçimlendirmesini, `return` ifadesinin hemen ardından 
 ```js
 export default function Profile() {
   return (
-    <img 
-      src="https://i.imgur.com/jA8hHMpm.jpg" 
-      alt="Katsuko Saruhashi" 
+    <img
+      src="https://react.dev/images/docs/scientists/jA8hHMpm.jpg"
+      alt="Katsuko Saruhashi"
     />
   );
 }
@@ -367,7 +374,7 @@ img { height: 180px; }
 function profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -403,7 +410,7 @@ React bileşen isimleri büyük harfle başlamak zorundadır.
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );

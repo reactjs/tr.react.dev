@@ -71,7 +71,11 @@ Elinizde (tamamen geçerli) bir HTML olduğunu varsayalım:
 ```html
 <h1>Hedy Lamarr's Todos</h1>
 <img
+<<<<<<< HEAD
   src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+  src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
   alt="Hedy Lamarr"
   class="photo"
 >
@@ -103,7 +107,11 @@ export default function TodoList() {
     // This doesn't quite work!
     <h1>Hedy Lamarr's Todos</h1>
     <img
+<<<<<<< HEAD
       src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+      src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
       alt="Hedy Lamarr"
       class="photo"
     >
@@ -142,7 +150,11 @@ Bileşenden birden fazla öğe döndürmek için **bunları, tek bir ana etiketl
 <div>
   <h1>Hedy Lamarr's Todos</h1>
   <img
+<<<<<<< HEAD
     src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+    src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
     alt="Hedy Lamarr"
     class="photo"
   >
@@ -159,7 +171,11 @@ Eğer fazladan bir `<div>` eklemek istemezseniz `<>` and `</>` kullanabilirsiniz
 <>
   <h1>Hedy Lamarr's Todos</h1>
   <img
+<<<<<<< HEAD
     src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+    src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
     alt="Hedy Lamarr"
     class="photo"
   >
@@ -188,7 +204,11 @@ Hedy Lamarr'ın fotoğraf ve liste öğeleri bu şekilde kapatılmıştır:
 ```js {2-6,8-10}
 <>
   <img
+<<<<<<< HEAD
     src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+    src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
     alt="Hedy Lamarr"
     class="photo"
    />
@@ -208,7 +228,11 @@ Bu nedenle, React'te, birçok HTML ve SVG özellikleri camelCase ile yazılır. 
 
 ```js {4}
 <img
+<<<<<<< HEAD
   src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+  src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
   alt="Hedy Lamarr"
   className="photo"
 />
@@ -236,7 +260,11 @@ export default function TodoList() {
     <>
       <h1>Hedy Lamarr's Todos</h1>
       <img
+<<<<<<< HEAD
         src="https://i.imgur.com/yXOvdOSs.jpg"
+=======
+        src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
         alt="Hedy Lamarr"
         className="photo"
       />

@@ -197,7 +197,7 @@ setPosition({
 
 Mutasyon sadece state içerisinde zaten *mevcut olan* nesneleri değiştirdiğinizde bir problem oluşturur. Yeni oluşturduğunuz bir nesneyi değiştirmek *bu nesneye henüz başka bir kod referans vermediği* için tamamen sorunsuzdur. Nesneyi değiştirmek, nesneye bağlı olan bir şeyi yanlışlıkla etkileme olasılığını ortadan kaldıracaktır. Buna "yerel mutasyon" denir.
 
-</DeepDive>  
+</DeepDive>
 
 ## Spread sözdizimi ile nesnelerin kopyalanması {/*copying-objects-with-the-spread-syntax*/}
 
@@ -294,7 +294,11 @@ setPerson({
 });
 ```
 
+<<<<<<< HEAD
 Form şimdi çalışıyor!
+=======
+Now the form works!
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Her input alanı için nasıl ayrı bir state değişkeni bildirmediğinize dikkat edin. Büyük formlar için, tüm verileri bir nesnede gruplanmış halde tutmak doğru bir şekilde güncellediğiniz sürece--çok uygundur!
 
@@ -371,7 +375,11 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmasıdır--yalnızca bir seviye derinliğe kadar kopyalar. Bu kopyalama işlemini hızlı yapar, ancak iç içe geçmiş bir özelliği güncellemek istiyorsanız, birden fazla kez kullanmanız gerekecektir.
+=======
+Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <DeepDive>
 
@@ -455,7 +463,7 @@ const [person, setPerson] = useState({
   artwork: {
     title: 'Blue Nana',
     city: 'Hamburg',
-    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+    image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
   }
 });
 ```
@@ -499,7 +507,7 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
     }
   });
 
@@ -577,8 +585,8 @@ export default function Form() {
         {' tarafından '}
         <br />
       </p>
-      <img 
-        src={person.artwork.image} 
+      <img
+        src={person.artwork.image}
         alt={person.artwork.title}
       />
     </>
@@ -606,7 +614,7 @@ let obj = {
   artwork: {
     title: 'Blue Nana',
     city: 'Hamburg',
-    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+    image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
   }
 };
 ```
@@ -617,7 +625,7 @@ Ancak, "iç içe yerleştirme" nesnelerin nasıl davrandığını düşünmenin 
 let obj1 = {
   title: 'Blue Nana',
   city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
 };
 
 let obj2 = {
@@ -632,7 +640,7 @@ let obj2 = {
 let obj1 = {
   title: 'Blue Nana',
   city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
 };
 
 let obj2 = {
@@ -648,7 +656,7 @@ let obj3 = {
 
 `obj3.artwork.city`'i mutasyona uğratırsanız, hem `obj2.artwork.city` hem de `obj1.city` etkilenecektir. Bu, `obj3.artwork`, `obj2.artwork` ve `obj1`'in aynı nesne olduğu anlamına gelir. Nesnelerin "iç içe geçmiş" olarak düşünüldüğü zaman bu zor görülebilir. Aslında, nesneler birbirine özelliklerle "işaret eden" ayrı nesnelerdir.
 
-</DeepDive>  
+</DeepDive>
 
 ### Immer ile kısa güncelleme mantığı yazın {/*write-concise-update-logic-with-immer*/}
 
@@ -688,7 +696,7 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
     }
   });
 
@@ -753,8 +761,8 @@ export default function Form() {
         <br />
         (located in {person.artwork.city})
       </p>
-      <img 
-        src={person.artwork.image} 
+      <img
+        src={person.artwork.image}
         alt={person.artwork.title}
       />
     </>
