@@ -29,7 +29,7 @@ export default function Avatar() {
   return (
     <img
       className="avatar"
-      src="https://i.imgur.com/7vQD0fPs.jpg"
+      src="https://react.dev/images/docs/scientists/7vQD0fPs.jpg"
       alt="Gregorio Y. Zara"
     />
   );
@@ -42,7 +42,11 @@ export default function Avatar() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Burada, `"https://i.imgur.com/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak iletildi.
+=======
+Here, `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Ancak `src` veya `alt` metnini dinamik olarak belirtmek isterseniz ne olur?  **`" `ve` "` yerine `{ `ve` }` ile değiştirerek JavaScript'ten bir değer** kullanabilirsiniz:
 
@@ -50,7 +54,7 @@ Ancak `src` veya `alt` metnini dinamik olarak belirtmek isterseniz ne olur?  **`
 
 ```js
 export default function Avatar() {
-  const avatar = 'https://i.imgur.com/7vQD0fPs.jpg';
+  const avatar = 'https://react.dev/images/docs/scientists/7vQD0fPs.jpg';
   const description = 'Gregorio Y. Zara';
   return (
     <img
@@ -191,7 +195,7 @@ export default function TodoList() {
       <h1>{person.name}'nın Yapılacakları</h1>
       <img
         className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
+        src="https://react.dev/images/docs/scientists/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
@@ -267,7 +271,7 @@ export default function TodoList() {
       <h1>{person}'nın Yapılacakları</h1>
       <img
         className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
+        src="https://react.dev/images/docs/scientists/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
@@ -314,7 +318,7 @@ export default function TodoList() {
       <h1>{person.name}'nın Yapılacakları</h1>
       <img
         className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
+        src="https://react.dev/images/docs/scientists/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
@@ -358,7 +362,7 @@ export default function TodoList() {
       <h1>{person.name}'nın Yapılacakları</h1>
       <img
         className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
+        src="https://react.dev/images/docs/scientists/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
@@ -388,7 +392,7 @@ Resim URL'ini `person.imageUrl` adlı bir özelliğe taşıyın ve süslü paran
 ```js
 const person = {
   name: 'Gregorio Y. Zara',
-  imageUrl: "https://i.imgur.com/7vQD0fPs.jpg",
+  imageUrl: "https://react.dev/images/docs/scientists/7vQD0fPs.jpg",
   theme: {
     backgroundColor: 'black',
     color: 'pink'
@@ -428,7 +432,11 @@ body > div > div { padding: 20px; }
 
 Aşağıdaki objede, tam resim URL'si dört parçaya bölünmüştür: temel URL, `imageId`, `imageSize` ve dosya uzantısı.
 
+<<<<<<< HEAD
 Resim URL'sini bu özellikleri bir araya getirecek şekilde istiyoruz: temel URL (her zaman `'https://i.imgur.com/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve dosya uzantısı (her zaman `'.jpg'`). Ancak, `<img>` etiketinin `srcyi belirtme biçiminde bir sorun var.
+=======
+We want the image URL to combine these attributes together: base URL (always `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`), and file extension (always `'.jpg'`). However, something is wrong with how the `<img>` tag specifies its `src`.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Bu hatayı düzeltebilir misiniz?
 
@@ -436,7 +444,7 @@ Bu hatayı düzeltebilir misiniz?
 
 ```js
 
-const baseUrl = 'https://i.imgur.com/';
+const baseUrl = 'https://react.dev/images/docs/scientists/';
 const person = {
   name: 'Gregorio Y. Zara',
   imageId: '7vQD0fP',
@@ -487,7 +495,7 @@ Yaptığınız düzeltmenin çalıştığını kontrol etmek için `imageSize` d
 <Sandpack>
 
 ```js
-const baseUrl = 'https://i.imgur.com/';
+const baseUrl = 'https://react.dev/images/docs/scientists/';
 const person = {
   name: 'Gregorio Y. Zara',
   imageId: '7vQD0fP',
@@ -564,7 +572,7 @@ export default function TodoList() {
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     person.imageSize +
     '.jpg'

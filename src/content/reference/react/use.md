@@ -65,7 +65,7 @@ import { use } from 'react';
 
 function Button() {
   const theme = use(ThemeContext);
-  // ... 
+  // ...
 ```
 `use`, içerisine aktarmış olduğunuz <CodeStep step={1}>context</CodeStep>'in <CodeStep step={2}>context değerini</CodeStep> döndürür. Context değerini belirlemek için React, bileşen ağacını arar ve ilgili context için **en yakın context sağlayıcısını** bulur.
 
@@ -460,7 +460,11 @@ Bunun yerine, `use` fonksiyonunu herhangi bir bileşen kapanışının dışınd
 
 ```jsx
 function MessageComponent({messagePromise}) {
+<<<<<<< HEAD
   // ✅ `use` bir bileşen içerisine çağırılıyor. 
+=======
+  // ✅ `use` is being called from a component.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
   const message = use(messagePromise);
   // ...
 ```
