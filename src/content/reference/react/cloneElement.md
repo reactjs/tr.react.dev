@@ -103,7 +103,7 @@ export default function List({ children }) {
     <div className="List">
       {Children.map(children, (child, index) =>
         cloneElement(child, {
-          isHighlighted: index === selectedIndex 
+          isHighlighted: index === selectedIndex
         })
       )}
 ```
@@ -124,15 +124,15 @@ Children’larını clone ederek, `List` her bir `Row`’a ekstra bilgi geçireb
 <List>
   <Row
     title="Cabbage"
-    isHighlighted={true} 
+    isHighlighted={true}
   />
   <Row
     title="Garlic"
-    isHighlighted={false} 
+    isHighlighted={false}
   />
   <Row
     title="Apple"
-    isHighlighted={false} 
+    isHighlighted={false}
   />
 </List>
 ```
@@ -152,7 +152,7 @@ export default function App() {
       {products.map(product =>
         <Row
           key={product.id}
-          title={product.title} 
+          title={product.title}
         />
       )}
     </List>
@@ -169,7 +169,7 @@ export default function List({ children }) {
     <div className="List">
       {Children.map(children, (child, index) =>
         cloneElement(child, {
-          isHighlighted: index === selectedIndex 
+          isHighlighted: index === selectedIndex
         })
       )}
       <hr />
@@ -246,7 +246,11 @@ Children’ları clone etmek, veri akışının uygulamanızda nasıl ilerlediğ
 
 ### Render prop ile veri aktarımı {/*passing-data-with-a-render-prop*/}
 
+<<<<<<< HEAD
 `cloneElement` kullanmak yerine, `renderItem` gibi bir *render prop* kabul etmeyi düşünebilirsiniz. Burada `List`, `renderItem`’ı bir prop olarak alır. `List`, her item için `renderItem`’ı çağırır ve `isHighlighted`’ı bir argüman olarak geçirir:
+=======
+Instead of using `cloneElement`, consider accepting a *render prop* like `renderItem`. Here, `List` receives `renderItem` as a prop. `List` calls `renderItem` for every item and passes `isHighlighted` as an argument:
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 ```js {1,7}
 export default function List({ items, renderItem }) {
@@ -280,15 +284,15 @@ Sonuç, `cloneElement` kullanımıyla elde edilen ile aynıdır:
 <List>
   <Row
     title="Cabbage"
-    isHighlighted={true} 
+    isHighlighted={true}
   />
   <Row
     title="Garlic"
-    isHighlighted={false} 
+    isHighlighted={false}
   />
   <Row
     title="Apple"
-    isHighlighted={false} 
+    isHighlighted={false}
   />
 </List>
 ```

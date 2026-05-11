@@ -855,6 +855,7 @@ Context kullanmadan önce düşünmeniz için bir kaç alternatif:
 
 Eğer bu yaklaşımların ikiside işinize yaramıyor ise, o zaman context'i kullanmayı düşünebilirsiniz.
 
+<<<<<<< HEAD
 ## Context'in kullanım alanları {/*use-cases-for-context*/}
 
 * **Tema:** Uygulamanız kullanıcının görünümü değiştirmesine izin veriyorsa (mesela karanlık mod), uygulamanızın en üstüne bir context provider koyabilir ve bu context'i görsel görünümlerini değiştirmesi gereken bileşenlerde kullanabilirsiniz.
@@ -863,6 +864,14 @@ Eğer bu yaklaşımların ikiside işinize yaramıyor ise, o zaman context'i kul
 * **State yönetimi:** Uygulamanız büyüdükçe, uygulamanızın üst kısmına yakın çok sayıda state ile karşılaşabilirsiniz. Farklı derinlikteki birçok bileşen bunları değiştirmek isteyebilir. Karmaşık state'leri yönetmek ve çok fazla güçlük çekmeden uzaktaki bileşenlere aktarmak için [context ile birlikte bir reducer kullanmak](/learn/scaling-up-with-reducer-and-context) yaygındır.
   
 Context kullanımı, statik değerlerle sınırlı değildir. Bir sonraki render'da farklı bir değer iletirseniz, React onu okuyan tüm bileşenleri günceller! Bu yüzden context genellikle state ile birlikte kullanılır.
+=======
+* **Theming:** If your app lets the user change its appearance (e.g. dark mode), you can put a context provider at the top of your app, and use that context in components that need to adjust their visual look.
+* **Current account:** Many components might need to know the currently logged in user. Putting it in context makes it convenient to read it anywhere in the tree. Some apps also let you operate multiple accounts at the same time (e.g. to leave a comment as a different user). In those cases, it can be convenient to wrap a part of the UI into a nested provider with a different current account value.
+* **Routing:** Most routing solutions use context internally to hold the current route. This is how every link "knows" whether it's active or not. If you build your own router, you might want to do it too.
+* **Managing state:** As your app grows, you might end up with a lot of state closer to the top of your app. Many distant components below may want to change it. It is common to [use a reducer together with context](/learn/scaling-up-with-reducer-and-context) to manage complex state and pass it down to distant components without too much hassle.
+
+Context is not limited to static values. If you pass a different value on the next render, React will update all the components reading it below! This is why context is often used in combination with state.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Genellikle, bazı bilgilere ağacın farklı bölümlerindeki bileşenler tarafından ihtiyaç duyulması, context'in işinize yarayacağına dair güzel bir göstergedir.
 
@@ -967,6 +976,7 @@ export const places = [{
   description: 'Evler için parlak renkler seçme geleneği 20. yüzyılın sonlarında başlamıştır.',
   imageId: 'K9HVAGH'
 }, {
+<<<<<<< HEAD
   id: 1, 
   name: 'Taichung, Tayvan\'da Gökkuşağı Köyü',
   description: 'Evleri yıkımdan kurtarmak için, yerel bir sakin olan Huang Yung-Fu, 1924 yılında hepsini boyamıştır.',
@@ -990,6 +1000,31 @@ export const places = [{
   id: 5, 
   name: 'Chefchaouen, Fas',
   description: 'Evlerin neden maviye boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
+=======
+  id: 1,
+  name: 'Rainbow Village in Taichung, Taiwan',
+  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
+  imageId: '9EAYZrt'
+}, {
+  id: 2,
+  name: 'Macromural de Pachuca, Mexico',
+  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
+  imageId: 'DgXHVwu'
+}, {
+  id: 3,
+  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
+  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people."',
+  imageId: 'aeO3rpI'
+}, {
+  id: 4,
+  name: 'Burano, Italy',
+  description: 'The houses are painted following a specific color system dating back to 16th century.',
+  imageId: 'kxsph5C'
+}, {
+  id: 5,
+  name: 'Chefchaouen, Marocco',
+  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
   imageId: 'rTqKo46'
 }, {
   id: 6,
@@ -1002,7 +1037,7 @@ export const places = [{
 ```js src/utils.js
 export function getImageUrl(place) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     place.imageId +
     'l.jpg'
   );
@@ -1011,9 +1046,9 @@ export function getImageUrl(place) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -1106,6 +1141,7 @@ export const places = [{
   description: 'Evler için parlak renkler seçme geleneği 20. yüzyılın sonlarında başlamıştır.',
   imageId: 'K9HVAGH'
 }, {
+<<<<<<< HEAD
   id: 1, 
   name: 'Taichung, Tayvan\'da Gökkuşağı Köyü',
   description: 'Evleri yıkımdan kurtarmak için, yerel bir sakin olan Huang Yung-Fu, 1924 yılında hepsini boyamıştır.',
@@ -1129,6 +1165,31 @@ export const places = [{
   id: 5, 
   name: 'Chefchaouen, Fas',
   description: 'Evlerin neden mavi boyandığına dair birkaç teori var, bunların arasında: rengin sivrisinekleri uzaklaştırıyor olabilmesi veya gökyüzünü ve cenneti simgeliyor olabilmesi var.',
+=======
+  id: 1,
+  name: 'Rainbow Village in Taichung, Taiwan',
+  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
+  imageId: '9EAYZrt'
+}, {
+  id: 2,
+  name: 'Macromural de Pachuca, Mexico',
+  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
+  imageId: 'DgXHVwu'
+}, {
+  id: 3,
+  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
+  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
+  imageId: 'aeO3rpI'
+}, {
+  id: 4,
+  name: 'Burano, Italy',
+  description: 'The houses are painted following a specific color system dating back to 16th century.',
+  imageId: 'kxsph5C'
+}, {
+  id: 5,
+  name: 'Chefchaouen, Marocco',
+  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
   imageId: 'rTqKo46'
 }, {
   id: 6,
@@ -1141,7 +1202,7 @@ export const places = [{
 ```js src/utils.js
 export function getImageUrl(place) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     place.imageId +
     'l.jpg'
   );
@@ -1150,9 +1211,9 @@ export function getImageUrl(place) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;

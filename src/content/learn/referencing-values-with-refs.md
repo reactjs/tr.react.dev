@@ -34,8 +34,13 @@ const ref = useRef(0);
 `useRef` size aşağıdaki gibi bir nesne döndürür:
 
 ```js
+<<<<<<< HEAD
 { 
   current: 0 // useRef'a geçirdiğiniz değer
+=======
+{
+  current: 0 // The value you passed to useRef
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 }
 ```
 

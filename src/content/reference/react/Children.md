@@ -492,7 +492,11 @@ Daha önce de belirtildiği gibi, `children` üzerinde işlem yaparken iç bir b
 
 ### Children’ı array’e dönüştürme {/*converting-children-to-an-array*/}
 
+<<<<<<< HEAD
 `Children.toArray(children)` fonksiyonunu çağırarak `children` veri yapısını normal bir JavaScript array’ine dönüştürebilirsiniz. Bu sayede, [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), [`sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) veya [`reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) gibi yerleşik array metodlarını kullanarak üzerinde işlem yapabilirsiniz.
+=======
+Call `Children.toArray(children)` to turn the `children` data structure into a regular JavaScript array. This lets you manipulate the array with built-in array methods like [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), [`sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), or [`reverse`.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Sandpack>
 
@@ -861,7 +865,7 @@ export default function App() {
         return (
           <Row isHighlighted={index % 2 === 0}>
             <p>This is the {id} item.</p>
-          </Row> 
+          </Row>
         );
       }}
     />

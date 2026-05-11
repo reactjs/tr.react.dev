@@ -411,7 +411,7 @@ function Form() {
 
   function handleSubmit() {
     setSubmitted(true);
-  }  
+  }
 
   // ...
 }
@@ -428,8 +428,13 @@ function Form() {
   function handleSubmit() {
     // ✅ Güzel: Olaya özgü mantık olay yöneticilerinden çağrılır
     post('/api/register');
+<<<<<<< HEAD
     showNotification('Başarıyla Kaydedildi!', theme);
   }  
+=======
+    showNotification('Successfully registered!', theme);
+  }
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
   // ...
 }
@@ -879,7 +884,11 @@ console.log(Object.is(options1, options2)); // false
 ```
 **Nesne ve fonksiyon bağımlılıkları, Efektinizin ihtiyacınız olandan daha sık yeniden senkronize edilmesine neden olabilir.** 
 
+<<<<<<< HEAD
 Bu nedenle, mümkün olduğunca, Efektinizin bağımlılıkları olarak nesnelerden ve fonksiyonlardan kaçınmaya çalışmalısınız. Bunun yerine, bunları bileşenin dışına, Efektin içine taşımayı veya ilkel değerleri bunlardan çıkarmayı deneyin.
+=======
+**Object and function dependencies can make your Effect re-synchronize more often than you need.**
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 #### Statik nesneleri ve fonksiyonları bileşeninizin dışına taşıma {/*move-static-objects-and-functions-outside-your-component*/}
 

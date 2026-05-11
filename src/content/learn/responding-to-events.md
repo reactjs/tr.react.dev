@@ -169,7 +169,11 @@ Bu iki düğmenin farklı mesaj gösterebilmesine olanak sağlar. Bileşenlere i
 
 ### Olay yöneticilerini prop olarak iletmek {/*passing-event-handlers-as-props*/}
 
+<<<<<<< HEAD
 Sıklıkla bileşenlerin alt bileşenlerindeki (child component) olay yöneticilerini belirlemesini istersiniz. Düğmeleri düşünelim: bileşeninin nerede kullanıldığına bağlı olarak farklı işlevler yerine getirmesini isteyebilirsiniz - mesela biri film oynatırken diğeri resim yükleyebilir.
+=======
+Often you'll want the parent component to specify a child's event handler. Consider buttons: depending on where you're using a `Button` component, you might want to execute a different function—perhaps one plays a movie and another uploads an image.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Bunun için, üst bileşenden (parent component) prop olarak alınan fonksiyon olay yöneticisi olarak kullanılabilir:
 
@@ -313,11 +317,19 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 Dikkat ederseniz `App` bileşeni, `Toolbar` bileşeninin `onPlayMovie` veya `onUploadImage` ile *ne* yapacağını bilmek zorunda değildir. Bu `Toolbar` bileşeninin implementasyon detayıdır. `Toolbar`, bu prop'ları `Button`'larına `onClick` olay yöneticisi olarak iletir. İleriki zamanlarda tıklama yerine klavye kısayoluyla da tetikletmek isteyebilirsiniz. Bileşenlerinizin prop'larını `onPlayMovie` gibi uygulamaya özgü etkileşimlere göre adlandırmak ileride kullanım biçimlerini değiştirme esnekliği sağlar.
   
 <Note>
 
 Olay yöneticileriniz için uygun HTML etiketleri kullandığınızdan emin olun. Örneğin, tıklamaları işlemek için `<div onClick={handleClick}>` yerine [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) kullanın. Gerçek taraycı `<button>` u kullanmak klavye navigasyonu gibi yerleşik tarayıcı davranışlarını etkinleştirir. Eğer bir butonun varsayılan tarayıcı stilini beğenmiyorsanız ya da onu bir bağlantı ya da başka bir UI elemanı gibi göstermek istiyorsanız CSS kullanabilirsiniz. [Erişilebilir işaretleme yazmak hakkında daha fazla bilgi edinin.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+=======
+Notice how the `App` component does not need to know *what* `Toolbar` will do with `onPlayMovie` or `onUploadImage`. That's an implementation detail of the `Toolbar`. Here, `Toolbar` passes them down as `onClick` handlers to its `Button`s, but it could later also trigger them on a keyboard shortcut. Naming props after app-specific interactions like `onPlayMovie` gives you the flexibility to change how they're used later.
+
+<Note>
+
+Make sure that you use the appropriate HTML tags for your event handlers. For example, to handle clicks, use [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<div onClick={handleClick}>`. Using a real browser `<button>` enables built-in browser behaviors like keyboard navigation. If you don't like the default browser styling of a button and want to make it look more like a link or a different UI element, you can achieve it with CSS. [Learn more about writing accessible markup.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 </Note>
 
@@ -412,12 +424,21 @@ button { margin: 5px; }
 
 Düğmelerden birisine tıkladığınızda:
 
+<<<<<<< HEAD
 1. React, `<button>`'a iletilen `onClick` yöneticisini çağırır. 
 2. Bu yönetici, `Button` içerisinde tanımlanır ve şunları yapar:
    *  Olayın daha fazla kabarmasını (bubbling) önlemek için `e.stopPropagation()` metodunu çağırır.
    * `Toolbar` bileşeninden prop olarak iletilen `onClick` fonksiyonunu çağırır.
 3. Bu fonksiyon `Toolbar` bileşeninde tanımlanır ve düğmenin kendi uyarısını görüntüler.
 4. Yayılım durdurulduğu için üstteki `<div>` elementinin `onClick` yöneticisi *çalışmaz*.
+=======
+1. React calls the `onClick` handler passed to `<button>`.
+2. That handler, defined in `Button`, does the following:
+   * Calls `e.stopPropagation()`, preventing the event from bubbling further.
+   * Calls the `onClick` function, which is a prop passed from the `Toolbar` component.
+3. That function, defined in the `Toolbar` component, displays the button's own alert.
+4. Since the propagation was stopped, the parent `<div>`'s `onClick` handler does *not* run.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Düğmeye tıklandığında `<button>` ve `<div>` elementlerinden gelen iki ayrı uyarı gösterilirken `e.stopPropagation()` kullanıldığında yalnızca `<button>` elementinden gelen uyarı gösterilir. Düğmeye tıklamak, fonksiyonellik açısından araç çubuğuna tıklamakla aynı şey değildir. Dolayısıyla da olayın yayılımının durdurulması arayüz açısından oldukça mantıklıdır.
 
@@ -434,11 +455,19 @@ Nadir durumlarda **yayılması durdurulmuş** olsa bile alt elemanlardaki olayla
 </div>
 ```
 
+<<<<<<< HEAD
 Her olay üç aşamada yayılır:
 
 1. Aşağıya doğru ilerleyecek şekilde tüm `onClickCapture` yöneticilerini çalıştırır.
 2. Tıklanan elementin `onClick` yöneticisi çalıştırır. 
 3. Yukarı doğru ilerleyecek şekilde tüm `onClick` yöneticilerini çalıştırır.
+=======
+Each event propagates in three phases:
+
+1. It travels down, calling all `onClickCapture` handlers.
+2. It runs the clicked element's `onClick` handler.
+3. It travels upwards, calling all `onClick` handlers.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Olayları yakalamak, yönlendirici (router) ya da analitik kodları için faydalıdır ancak muhtemelen uygulamanızda kullanmayacaksınız.
 

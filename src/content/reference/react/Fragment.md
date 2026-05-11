@@ -4,7 +4,11 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
+<<<<<<< HEAD
 `<Fragment>`, genellikle `<>...</>` sözdizimiyle kullanılır, öğeleri sarmalayıcı bir düğüm olmadan gruplamanı sağlar.  
+=======
+`<Fragment>`, often used via `<>...</>` syntax, lets you group elements without a wrapper node.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Canary> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin. </Canary>
 
@@ -41,6 +45,7 @@ Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğüm
 - `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.  
 - `dispatchEvent(event)`: Fragment'in sanal bir çocuğuna bir olay gönderir; eklenen dinleyicileri çağırır ve DOM üstüne kabarcık yapabilir.
 
+<<<<<<< HEAD
 **Düzen (layout) yöntemleri:**
 - `compareDocumentPosition(otherNode)`: Fragment'in belge konumunu başka bir düğümle karşılaştırır.  
   - Fragment çocuklara sahipse, native `compareDocumentPosition` değeri döndürülür.  
@@ -48,6 +53,15 @@ Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğüm
   - React ağacı ile DOM ağacı arasında portaling veya diğer eklemeler nedeniyle farklı ilişkiye sahip öğeler `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` olur.  
 - `getClientRects()`: Tüm çocukların sınır dikdörtgenlerini temsil eden düz bir `DOMRect` dizisi döndürür.  
 - `getRootNode()`: Fragment'in üst DOM düğümünü içeren kök düğümü döndürür.
+=======
+**Layout methods:**
+- `compareDocumentPosition(otherNode)`: Compares the document position of the Fragment with another node.
+  - If the Fragment has children, the native `compareDocumentPosition` value is returned.
+  - Empty Fragments will attempt to compare positioning within the React tree and include `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`.
+  - Elements that have a different relationship in the React tree and DOM tree due to portaling or other insertions are `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`.
+- `getClientRects()`: Returns a flat array of `DOMRect` objects representing the bounding rectangles of all children.
+- `getRootNode()`: Returns the root node containing the Fragment's parent DOM node.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 **Odak (focus) yönetimi yöntemleri:**
 - `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
@@ -281,7 +295,7 @@ function VisibilityObserverFragment({ threshold = 0.5, onVisibilityChange, child
       },
       { threshold }
     );
-    
+
     fragmentRef.current.observeUsing(observer);
     return () => fragmentRef.current.unobserveUsing(observer);
   }, [threshold, onVisibilityChange]);
