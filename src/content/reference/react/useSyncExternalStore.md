@@ -109,7 +109,11 @@ Veri deposundaki verilerin <CodeStep step={3}>anlık görüntüsünü</CodeStep>
 
 React, bu fonksiyonları kullanarak bileşeninizi depoya abone tutar ve değişikliklerde yeniden render eder.
 
+<<<<<<< HEAD
 Aşağıdaki örnekte `todosStore`, React'ın dışında veri tutan harici bir depo olacak şekilde implemente edilmiştir. `TodosApp` bileşeni `useSyncExternalStore` Hook'u ile harici depo ile bağlantı kurar. 
+=======
+For example, in the sandbox below, `todosStore` is implemented as an external store that stores data outside of React. The `TodosApp` component connects to that external store with the `useSyncExternalStore` Hook.
+>>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
 
 <Sandpack>
 
@@ -420,13 +424,18 @@ function ChatIndicator() {
   function subscribe() {
     // ...
   }
-  
+
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
 }
 ```
+<<<<<<< HEAD
 Yeniden render'lar arasında farklı bir `subscribe` fonksiyonu iletirseniz, React deponuza yeniden abone olur. Bu durum performans sorunlarına neden oluyorsa ve sürekli abone olmaktan kaçınmak istiyorsanız, `subscribe` fonksiyonunu bileşen dışına taşıyın:
+=======
+
+React will resubscribe to your store if you pass a different `subscribe` function between re-renders. If this causes performance issues and you'd like to avoid resubscribing, move the `subscribe` function outside:
+>>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
 
 ```js {1-4}
 // ✅ Her zaman aynı işlev olduğu için, React yeniden abone olmaya ihtiyaç duymaz.
@@ -448,7 +457,7 @@ function ChatIndicator({ userId }) {
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);
-  
+
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...

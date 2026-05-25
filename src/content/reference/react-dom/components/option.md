@@ -80,5 +80,5 @@ export default function MeyveSecici() {
 select { margin: 5px; }
 ```
 
-</Sandpack>  
+</Sandpack>
 
