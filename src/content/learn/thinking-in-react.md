@@ -37,18 +37,9 @@ Her bileşenin etrafına kutular çizin ve bileşenlerinize isim verin. Bir tasa
 
 Tecrübenize bağlı olarak, bir tasarımı farklı yöntemlerle bileşenlere ayırmayı düşünebilirsiniz:
 
-<<<<<<< HEAD
-* **Programlama** — Yeni bir fonksiyon veya nesne oluşturup oluşturmamaya karar verirken aynı teknikleri kullanın.  
-  Bu tekniklerden biri [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) (sorumlulukların ayrımı) ilkesidir; yani bir bileşen ideal olarak yalnızca tek bir işle ilgilenmelidir.  
-  Eğer bileşen büyürse, daha küçük alt bileşenlere (subcomponents) bölünmelidir.
-* **CSS** — Hangi yapılar için class selector tanımlayacağınızı düşünün.  
-  (Ancak bileşenler CSS sınıflarına göre biraz daha az ayrıntılıdır.)
-* **Tasarım** — Tasarımın katmanlarını nasıl organize edeceğinizi göz önünde bulundurun.
-=======
-* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), that is, a component should ideally only be concerned with one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
-* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
-* **Design**--consider how you would organize the design's layers.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+* **Programming**--yeni bir function veya object oluşturmanız gerekip gerekmediğine karar verirken aynı teknikleri kullanın. Bu tekniklerden biri [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) yaklaşımıdır; yani bir component ideal olarak yalnızca tek bir şeyle ilgilenmelidir. Eğer büyümeye başlarsa, daha küçük subcomponent’lere ayrılmalıdır.
+* **CSS**--hangi şeyler için class selector oluşturacağınızı düşünün. (Ancak component’ler biraz daha az granular’dır.)
+* **Design**--design’ın layer’larını nasıl organize edeceğinizi düşünün.
 
 JSON veriniz iyi yapılandırılmışsa, genellikle arayüzün bileşen yapısıyla doğal bir şekilde eşleştiğini göreceksiniz. Çünkü UI ve veri modelleri genellikle aynı bilgi mimarisine, yani aynı şekle sahiptir. Arayüzünüzü, her bileşenin veri modelinizin bir parçasıyla eşleştiği bileşenlere ayırın.
 
@@ -233,17 +224,10 @@ Geriye kalanlar muhtemelen state'tir.
 
 Hadi teker teker inceleyelim:
 
-<<<<<<< HEAD
-1. Orijinal ürün listesi **prop olarak iletildiği için state değildir.**
-2. Arama metni zaman içinde değiştiği için ve bir yerden hesaplanamadığı için state'tir.
-3. Checkbox'un değeri zaman içinde değiştiği için ve bir yerden hesaplanamadığı için state'tir.
-4. Filtrelenmiş ürün listesi, orijinal ürün listesini alıp arama metni ve checkbox'ın değerine göre filtreleyip **hesaplanabilir**. Bu yüzden **state değildir**.
-=======
-1. The original list of products is **passed in as props, so it's not state.**
-2. The search text seems to be state since it changes over time and can't be computed from anything.
-3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
-4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+1. Orijinal product listesi **props olarak pass edilir, bu yüzden state değildir.**
+2. Search text state gibi görünür çünkü zamanla değişir ve başka bir şeyden compute edilemez.
+3. Checkbox’ın value’su state gibi görünür çünkü zamanla değişir ve başka bir şeyden compute edilemez.
+4. Filtered product listesi **state değildir çünkü compute edilebilir**; orijinal product listesi alınarak search text’e ve checkbox’ın value’suna göre filtrelenir.
 
 Demek ki sadece arama metni ve checkbox'ın değeri state'tir! Güzel iş!
 
@@ -277,23 +261,13 @@ Uygulamanızdaki her state parçası için:
 
 Şimdi o ikisi için stratejimizi gözden geçirelim:
 
-<<<<<<< HEAD
-1. **State kullanan bileşenleri belirleyin:**
-    * `ProductTable` state'e göre ürün listesini filtrelemesi gerekiyor. (arama metni ve checkbox değeri).
-    * `SearchBar` state'i göstermesi gerekiyor. (arama metni ve checkbox değeri).
-2. **Ortak üst bileşeni bulun:** İki bileşenin de ortak olarak paylaştığı üst bileşen `FilterableProductTable` bileşenidir.
-3. **State'in barınacağı yere karar verin**: Filtre metni ve checkbox için gerekli state değerlerini `FilterableProductTable` bileşeninde tutacağız.
+1. **State kullanan component’leri belirleyin:**
+    * `ProductTable`, product list’i bu state’e göre filter etmelidir (search text ve checkbox value).
+    * `SearchBar`, bu state’i display etmelidir (search text ve checkbox value).
+2. **Ortak parent’larını bulun:** Her iki component’in de paylaştığı ilk parent component `FilterableProductTable`’dır.
+3. **State’in nerede yaşayacağına karar verin:** Filter text ve checked state value’larını `FilterableProductTable` içinde tutacağız.
 
-Sonuç olarak state değerleri `FilterableProductTable` bileşeninde barınacak.
-=======
-1. **Identify components that use state:**
-    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value).
-    * `SearchBar` needs to display that state (search text and checkbox value).
-2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
-3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
-
-So the state values will live in `FilterableProductTable`.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Yani state value’ları `FilterableProductTable` içinde yaşayacak.
 
 Bileşene state eklemek için [`useState()` Hook'unu](/reference/react/useState) kullanın. Hook'lar React'e "bağlanmanızı" (hook-into) sağlayan özel fonksiyonlardır. `FilterableProductTable` bileşeninin en üstüne iki state değişkeni ekleyin ve başlangıç değerlerini belirtin:
 
@@ -411,17 +385,10 @@ function ProductTable({ products, filterText, inStockOnly }) {
 function SearchBar({ filterText, inStockOnly }) {
   return (
     <form>
-<<<<<<< HEAD
-      <input 
-        type="text" 
-        value={filterText} 
-        placeholder="Ara..."/>
-=======
       <input
         type="text"
         value={filterText}
-        placeholder="Search..."/>
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        placeholder="Ara..."/>
       <label>
         <input
           type="checkbox"
@@ -488,17 +455,10 @@ Yukarıdaki sandboxta, `ProductTable` ve `SearchBar`, tabloyu, inputu ve checkbo
 function SearchBar({ filterText, inStockOnly }) {
   return (
     <form>
-<<<<<<< HEAD
-      <input 
-        type="text" 
-        value={filterText} 
-        placeholder="Ara..."/>
-=======
       <input
         type="text"
         value={filterText}
-        placeholder="Search..."/>
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        placeholder="Ara..."/>
 ```
 
 Ancak henüz kullanıcı eylemlerine (yazmak gibi) yanıt vermek için herhangi bir kod eklemediniz. Bu da son adımınız olacak.
@@ -507,11 +467,7 @@ Ancak henüz kullanıcı eylemlerine (yazmak gibi) yanıt vermek için herhangi 
 
 Uygulamanız şu anda, prop'lar ve state'in hiyerarşi boyunca aşağı doğru akmasıyla, doğru bir şekilde render ediliyor. Ancak kullanıcı girdisine göre state'i değiştirmek için, ters istikametteki veri akışını da desteklemeniz gerekecektir. Hiyerarşinin derinliklerindeki form bileşenlerinin `FilterableProductTable` bileşenindeki state'i güncellemesi gerekecek.
 
-<<<<<<< HEAD
-React bu veri akışını açıkça yapar, ancak iki-yönlü veri bağlamaya göre biraz daha fazla kod yazmanızı gerektirir. Yukarıdaki örnekte yazı yazmaya veya kutuyu işaretlemeye çalışırsanız, React girdinizi görmezden gelir. Bu kasıtlıdır. `<input value={filterText} />` yazarak, `input`'un `value` prop'unu her zaman `FilterableProductTable`'dan iletilem `filterText` state'ine eşit olarak ayarladınız. `filterText` state'i hiçbir zaman değişmediği için, input hiçbir zaman değişmez.
-=======
-Currently your app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input, you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Şu anda app’iniz, props ve state hierarchy boyunca aşağı doğru flow ederek doğru şekilde render ediyor. Ancak state’i user input’a göre değiştirmek için, data’nın diğer yöne doğru flow etmesini desteklemeniz gerekir: hierarchy’nin derinlerindeki form component’leri, `FilterableProductTable` içindeki state’i update etmelidir.
 
 Kullanıcı form inputlarını değiştirdiğinde, state'in bu değişiklikleri yansıtacak şekilde güncellenmesini istersiniz. State `FilterableProductTable`'a aittir, bu yüzden yalnızca o bileşen `setFilterText` ve `setInStockOnly` fonksiyonlarını çağırabilir. `SearchBar`'ın `FilterableProductTable`'ın state'ini güncellemesine izin vermek için, bu fonksiyonları `SearchBar`'a iletmeniz gerekir:
 
@@ -654,15 +610,9 @@ function SearchBar({
 }) {
   return (
     <form>
-<<<<<<< HEAD
-      <input 
-        type="text" 
-        value={filterText} placeholder="Ara..." 
-=======
       <input
         type="text"
-        value={filterText} placeholder="Search..."
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        value={filterText} placeholder="Ara..."
         onChange={(e) => onFilterTextChange(e.target.value)} />
       <label>
         <input

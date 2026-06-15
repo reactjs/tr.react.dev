@@ -103,11 +103,7 @@ label {
 
 </Sandpack>
 
-<<<<<<< HEAD
-Bunlar ağaç olarak nasıl görünüyor:
-=======
-Here's how these look as a tree:
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Bunlar tree olarak şöyle görünür:
 
 <DiagramGroup>
 
@@ -517,11 +513,7 @@ export default function App() {
   return (
     <div>
       {isPaused ? (
-<<<<<<< HEAD
-        <p>Sonra görüşürüz!</p> 
-=======
-        <p>See you later!</p>
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        <p>Görüşürüz!</p>
       ) : (
         <Counter />
       )}
@@ -1458,26 +1450,16 @@ export default function App() {
   if (reverse) {
     return (
       <>
-<<<<<<< HEAD
-        <Field label="Ad" /> 
-        <Field label="Soyad" />
-=======
-        <Field label="Last name" />
-        <Field label="First name" />
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        <Field label="Soyadı" /> 
+        <Field label="Adı" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-<<<<<<< HEAD
-        <Field label="Ad" /> 
-        <Field label="Soyad" />
-=======
-        <Field label="First name" />
-        <Field label="Last name" />
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        <Field label="Soyadı" /> 
+        <Field label="Adı" />
         {checkbox}
       </>
     );
@@ -1530,26 +1512,16 @@ export default function App() {
   if (reverse) {
     return (
       <>
-<<<<<<< HEAD
-        <Field key="lastName" label="Ad" /> 
-        <Field key="firstName" label="Soyad" />
-=======
         <Field key="lastName" label="Last name" />
         <Field key="firstName" label="First name" />
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-<<<<<<< HEAD
-        <Field key="firstName" label="Ad" /> 
-        <Field key="lastName" label="Soyad" />
-=======
-        <Field key="firstName" label="First name" />
-        <Field key="lastName" label="Last name" />
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        <Field key="lastName" label="Soyadı" />
+        <Field key="firstName" label="Adı" />
         {checkbox}
       </>
     );

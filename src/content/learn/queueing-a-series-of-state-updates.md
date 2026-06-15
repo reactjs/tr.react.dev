@@ -177,11 +177,7 @@ Sonraki render esnasında React, state kuyruğunu ilerletir:
 | " `5` ile değiştir" | `0` (kullanılmamış) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
-<<<<<<< HEAD
-React `6` değerini son sonuç olarak saklar ve `useState`'den döndürür.
-=======
-React stores `6` as the final result and returns it from `useState`.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+React, final result olarak `6` değerini store eder ve bunu `useState`’ten return eder.
 
 <Note>
 
@@ -309,11 +305,7 @@ export default function RequestTracker() {
         Tamamlandı: {completed}
       </h3>
       <button onClick={handleClick}>
-<<<<<<< HEAD
-        Satın Al     
-=======
-        Buy
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        Satın al
       </button>
     </>
   );
@@ -357,11 +349,7 @@ export default function RequestTracker() {
         Tamamlandı: {completed}
       </h3>
       <button onClick={handleClick}>
-<<<<<<< HEAD
-        Satın Al     
-=======
-        Buy
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+        Satın al
       </button>
     </>
   );

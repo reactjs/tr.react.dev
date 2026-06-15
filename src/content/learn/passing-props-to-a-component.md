@@ -451,21 +451,12 @@ export default function Gallery() {
         />
         <ul>
           <li>
-<<<<<<< HEAD
-            <b>Meslek: </b> 
+            <b>Meslek: </b>
             fizikçi ve kimyager
           </li>
           <li>
-            <b>Ödüller: 4 </b> 
-            (Fizik Nobel Ödülü, Kimya Nobel Ödülü, Davy Madalyası, Matteucci Madalyası)
-=======
-            <b>Profession: </b>
-            physicist and chemist
-          </li>
-          <li>
-            <b>Awards: 4 </b>
-            (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+            <b>Ödüller: 4 </b>
+            (Nobel Fizik Ödülü, Nobel Kimya Ödülü, Davy Madalyası, Matteucci Madalyası)
           </li>
           <li>
             <b>Keşfedilenler: </b>
@@ -484,21 +475,12 @@ export default function Gallery() {
         />
         <ul>
           <li>
-<<<<<<< HEAD
-            <b>Meslek: </b> 
-            jeokimyager
+            <b>Meslek: </b>
+            jeokimyacı
           </li>
           <li>
-            <b>Ödüller: 2 </b> 
-            (Miyake Ödülü (jeokimya), Tanaka Ödülü)
-=======
-            <b>Profession: </b>
-            geochemist
-          </li>
-          <li>
-            <b>Awards: 2 </b>
-            (Miyake Prize for geochemistry, Tanaka Prize)
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+            <b>Ödüller: 2 </b>
+            (Miyake Jeokimya Ödülü, Tanaka Ödülü)
           </li>
           <li>
             <b>Keşfedilenler: </b>
