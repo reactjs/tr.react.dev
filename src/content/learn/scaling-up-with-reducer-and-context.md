@@ -802,8 +802,13 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
+<<<<<<< HEAD
         }); 
       }}>Ekle</button>
+=======
+        });
+      }}>Add</button>
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
     </>
   );
 }
@@ -1026,8 +1031,13 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
+<<<<<<< HEAD
         }); 
       }}>Ekle</button>
+=======
+        });
+      }}>Add</button>
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
     </>
   );
 }
@@ -1245,8 +1255,13 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
+<<<<<<< HEAD
         }); 
       }}>Ekle</button>
+=======
+        });
+      }}>Add</button>
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
     </>
   );
 }

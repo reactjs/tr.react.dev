@@ -25,6 +25,11 @@ September 10-11,  2026. In-person in Zurich, Switzerland
 
 [Website](https://conf.zurichjs.com?utm_campaign=ZurichJS_Conf&utm_source=referral&utm_content=reactjs_community_conferences) - [Twitter](https://x.com/zurichjs) - [LinkedIn](https://www.linkedin.com/company/zurichjs/)
 
+### React Conf Japan 2027 {/*react-conf-japan-2027*/}
+April 24,  2027. In-person in Tokyo, Japan
+
+[Website](https://reactconf.jp/) - [Twitter](https://x.com/reactconfjp)
+
 ## Past Conferences {/*past-conferences*/}
 
 ### CityJS New Delhi 2026 {/*cityjs-newdelhi-2026*/}
@@ -219,7 +224,7 @@ May 15 - 16, 2024. In-person in Henderson, NV, USA + remote
 [Website](https://conf.react.dev) - [Twitter](https://twitter.com/reactjs)
 
 ### React Native Connection 2024 {/*react-native-connection-2024*/}
-April 23, 2024. In-person in Paris, France 
+April 23, 2024. In-person in Paris, France
 
 [Website](https://reactnativeconnection.io/) - [Twitter](https://twitter.com/ReactNativeConn)
 
@@ -261,7 +266,7 @@ October 20 & 23, 2023. In-person in London, UK + remote first interactivity (hyb
 ### React Brussels 2023 {/*react-brussels-2023*/}
 October 13th 2023. In-person in Brussels, Belgium + Remote (hybrid)
 
-[Website](https://www.react.brussels/) - [Twitter](https://twitter.com/BrusselsReact) - [Videos](https://www.youtube.com/playlist?list=PL53Z0yyYnpWh85KeMomUoVz8_brrmh_aC) 
+[Website](https://www.react.brussels/) - [Twitter](https://twitter.com/BrusselsReact) - [Videos](https://www.youtube.com/playlist?list=PL53Z0yyYnpWh85KeMomUoVz8_brrmh_aC)
 
 ### React India 2023 {/*react-india-2023*/}
 October 5 - 7, 2023. In-person in Goa, India (hybrid event) + Oct 3 2023 - remote day
@@ -284,7 +289,7 @@ September 28 - 30, 2023. Alicante, Spain
 [Website](https://reactalicante.es/) - [Twitter](https://twitter.com/reactalicante)
 
 ### RedwoodJS Conference 2023 {/*redwoodjs-conference-2023*/}
-September 26 - 29, 2023. Grants Pass, Oregon + remote (hybrid event) 
+September 26 - 29, 2023. Grants Pass, Oregon + remote (hybrid event)
 
 [Website](https://www.redwoodjsconf.com/) - [Twitter](https://twitter.com/redwoodjs)
 
