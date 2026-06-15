@@ -44,13 +44,9 @@ function ChatRoom({ roomId }) {
 
 #### Parametreler {/*parameters*/}
 
-<<<<<<< HEAD
-* `setup`: Effect’inizin mantığını içeren fonksiyondur. `setup` fonksiyonunuz isteğe bağlı olarak bir *cleanup* (temizleme) fonksiyonu da döndürebilir. Bileşeniniz [commit edildiğinde](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React `setup` fonksiyonunu çalıştırır. Bağımlılıkları değişen her commit’ten sonra React, önce (varsa) eski değerlerle *cleanup* fonksiyonunu çalıştırır, ardından yeni değerlerle `setup` fonksiyonunu tekrar çalıştırır. Bileşeniniz DOM’dan kaldırıldıktan sonra ise React *cleanup* fonksiyonunu çalıştırır.
-=======
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your [component commits](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React will run your setup function. After every commit with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function.
+* `setup`: Effect’inizin logic’ini içeren function. Setup function’ınız optional olarak bir *cleanup* function da return edebilir. [Component’iniz commit edildiğinde](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React setup function’ınızı çalıştırır. Dependency’leri değişmiş her commit’ten sonra React önce eski value’larla cleanup function’ı çalıştırır (eğer sağladıysanız), ardından yeni value’larla setup function’ınızı çalıştırır. Component’iniz DOM’dan kaldırıldıktan sonra React cleanup function’ınızı çalıştırır.
 
-* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If you omit this argument, your Effect will re-run after every commit of the component. [See the difference between passing an array of dependencies, an empty array, and no dependencies at all.](#examples-dependencies)
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+* **optional** `dependencies`: `setup` code’u içinde referans verilen tüm reactive value’ların listesi. Reactive value’lar props, state ve component body’nizin doğrudan içinde declare edilen tüm variable ve function’ları içerir. Linter’ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reactive value’nun dependency olarak doğru şekilde belirtildiğini verify eder. Dependency listesi sabit sayıda item’a sahip olmalı ve `[dep1, dep2, dep3]` gibi inline yazılmalıdır. React, her dependency’yi previous value’su ile [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison kullanarak karşılaştırır. Bu argument’i omit ederseniz, Effect’iniz component’in her commit’inden sonra yeniden çalışır. [Dependency array’i, empty array ve hiç dependency pass etmeme arasındaki farkı görün.](#examples-dependencies)
 
 * **opsiyonel** `dependencies`: `setup` kodu içinde referans verilen tüm **reactive values**’ların listesidir. Reactive values; props, state ve bileşen gövdesi içinde doğrudan tanımlanan tüm değişkenler ve fonksiyonları kapsar. Eğer linter’ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reactive value’nun dependency olarak doğru şekilde belirtildiğini doğrular. Dependency listesi sabit sayıda öğe içermeli ve `[dep1, dep2, dep3]` şeklinde inline olarak yazılmalıdır. React, her bir dependency’yi önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak kıyaslar. Bu argümanı atladığınızda, Effect’iniz bileşenin her commit’inden sonra yeniden çalışır. [Dependency array verilmesi, boş array verilmesi ve hiç dependency verilmemesi arasındaki farkı inceleyin.](#examples-dependencies)
 
@@ -116,11 +112,7 @@ function ChatRoom({ roomId }) {
    - Ardından, <CodeStep step={1}>setup code</CodeStep> yeni props ve state değerleriyle çalışır.
 3. Bileşeniniz sayfadan kaldırıldıktan *(unmount olduktan)* sonra <CodeStep step={2}>cleanup code</CodeStep> son bir kez daha çalışır.
 
-<<<<<<< HEAD
-**Yukarıdaki örneği biraz açıklayalım.**  
-=======
-**Let's illustrate this sequence for the example above.**
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+**Yukarıdaki örnek için bu sequence’i illustrate edelim.**
 
 Yukarıdaki `ChatRoom` bileşeni sayfaya eklendiğinde, başlangıçtaki `serverUrl` ve `roomId` ile chat odasına bağlanır. Eğer bir commit sonucunda `serverUrl` veya `roomId` değişirse (örneğin kullanıcı bir dropdown üzerinden farklı bir chat odası seçerse), Effect’iniz *önce önceki odadan bağlantıyı keser, ardından yeni odaya bağlanır.* `ChatRoom` bileşeni sayfadan kaldırıldığında ise Effect’iniz son bir kez daha bağlantıyı keser.
 
@@ -1448,11 +1440,7 @@ function Counter() {
 }
 ```
 
-<<<<<<< HEAD
-`count` reaktif bir değer olduğundan, bağımlılık listesinde belirtilmek zorundadır. Ancak bu durum, Effect'in her `count` değiştiğinde temizleme kurulum yapmasına neden olur. Bu ideal bir durum değildir.
-=======
-Since `count` is a reactive value, it must be specified in the list of dependencies. However, that causes the Effect to cleanup and setup again every time the `count` changes. This is not ideal.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+`count` reactive bir value olduğu için, dependencies listesinde belirtilmelidir. Ancak bu, `count` her değiştiğinde Effect’in tekrar cleanup ve setup yapmasına neden olur. Bu ideal değildir.
 
 Bunu düzeltmek için, [`c => c + 1` state güncelleyecisini](/reference/react/useState#updating-state-based-on-the-previous-state) `setCount`'a iletin:
 

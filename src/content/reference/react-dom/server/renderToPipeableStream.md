@@ -294,11 +294,7 @@ Effect veya olay yöneticisi içinde veri alınırken Suspense **tespit edilmez*
 
 Yukarıdaki `Posts` bileşenininde veri getirmenin tam yolu framework'ünüze bağlıdır. Suspense özelliği etkin bir framework kullanırsanız, detayları framework'ünüzün veri getirme dokümantasyonunun içinde bulabilirsiniz.
 
-<<<<<<< HEAD
-Kanaat sahibi bir framework (opinionated framework) olmadan Suspense özelliği etkin veri çekme henüz desteklenmemektedir. Suspense özellikli bir veri kaynağının uygulanmasına yönelik gereksinimler stabil değildir ve dokümantasyonu yoktur. React'ın sonraski sürümlerinde, veri kaynaklarını Suspense ile entegre etmek için resmi bir API yayınlanacaktır.
-=======
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
 
 </Note>
 
@@ -464,11 +460,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-<<<<<<< HEAD
-    response.send('<h1>Bir şey yanlış gitti.</h1>'); 
-=======
-    response.send('<h1>Something went wrong</h1>');
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onError(error) {
     console.error(error);
@@ -494,11 +486,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-<<<<<<< HEAD
-    response.send('<h1>Bir şey yanlış gitti.</h1>'); 
-=======
-    response.send('<h1>Something went wrong</h1>');
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onError(error) {
     didError = true;
@@ -543,11 +531,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
    response.statusCode = getStatusCode();
    response.setHeader('content-type', 'text/html');
-<<<<<<< HEAD
-   response.send('<h1>Bir şey yanlış gitti.</h1>'); 
-=======
-   response.send('<h1>Something went wrong</h1>');
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+   response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onError(error) {
     didError = true;
@@ -587,11 +571,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-<<<<<<< HEAD
-    response.send('<h1>Bir şey ters gitti.</h1>'); 
-=======
-    response.send('<h1>Something went wrong</h1>');
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onAllReady() {
     if (isCrawler) {

@@ -293,11 +293,7 @@ Suspense, bir Effect veya event handler içinde veri çekildiğinde **bunu algı
 
 Yukarıdaki `Posts` component’inde veriyi nasıl yükleyeceğiniz kullandığınız framework’e bağlıdır. Eğer Suspense destekli bir framework kullanıyorsanız, detaylar veri çekme dokümantasyonunda bulunabilir.
 
-<<<<<<< HEAD
-Opinionated bir framework kullanmadan Suspense destekli veri çekme henüz desteklenmemektedir. Suspense destekli bir veri kaynağı uygulamak için gerekenler kararsız ve dokümante edilmemiştir. Suspense ile veri kaynaklarını entegre etmek için resmi bir API, React’in gelecekteki bir sürümünde yayınlanacaktır.
-=======
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
 
 </Note>
 

@@ -216,11 +216,7 @@ Suspense, veri bir efekt ya da olay yöneticisi içinde fetch edildiğinde **tes
 
 Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
-<<<<<<< HEAD
-Kanaat sahibi bir framework olmadan Suspense özellikli veri fetch etme henüz desteklenmiyor. Suspense özellikli bir veri kaynağı implement etmenin gereksinimleri henüz düzensiz ve belgelenmemiş durumda. Veri kaynaklarını Suspense ile entegre etmek için resmi bir API, React'in gelecek sürümlerinde yayınlanacaktır. 
-=======
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React.
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
 
 </Note>
 
@@ -367,17 +363,9 @@ async function getBio() {
     setTimeout(resolve, 1500);
   });
 
-<<<<<<< HEAD
-  return `The Beatles, Liverpool'da 1960'da 
-    kurulmuş, John Lennon, Paul McCartney, 
-    George Harrison ve Ringo Starr'dan oluşan
-    bir İngiliz rock grubuydu.`;
-=======
-  return `The Beatles were an English rock band,
-    formed in Liverpool in 1960, that comprised
+  return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    and Ringo Starr.`;
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -636,17 +624,9 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-<<<<<<< HEAD
-  return `The Beatles, Liverpool'da 1960'da 
-    kurulmuş, John Lennon, Paul McCartney, 
-    George Harrison ve Ringo Starr'dan oluşan
-    bir İngiliz rock grubuydu.`;
-=======
-  return `The Beatles were an English rock band,
-    formed in Liverpool in 1960, that comprised
+  return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    and Ringo Starr.`;
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -896,11 +876,7 @@ input { margin: 10px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
-Yaygın bir alternatif kullanıcı arayüzü modeli listeyi güncellemeyi *ertelemek* ve yeni sonuçlar hazır olana kadar önceki sonuçları göstermeye devam etmektir. [`useDeferredValue`](/reference/react/useDeferredValue) Hook'u sorgunun ertelenmiş bir sürümünü aşağıya geçirmenizi sağlar:
-=======
-A common alternative UI pattern is to *defer* updating the list and to keep showing the previous results until the new results are ready. The [`useDeferredValue`](/reference/react/useDeferredValue) Hook lets you pass a deferred version of the query down:
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+Yaygın bir alternatif UI pattern’i, list’i update etmeyi *defer* etmek ve yeni sonuçlar hazır olana kadar önceki sonuçları göstermeye devam etmektir. [`useDeferredValue`](/reference/react/useDeferredValue) Hook’u, query’nin deferred bir version’ını aşağıya pass etmenizi sağlar:
 
 ```js {3,11}
 export default function App() {
@@ -1274,17 +1250,9 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-<<<<<<< HEAD
-  return `The Beatles, Liverpool'da 1960'da 
-    kurulmuş, John Lennon, Paul McCartney, 
-    George Harrison ve Ringo Starr'dan oluşan
-    bir İngiliz rock grubuydu.`;
-=======
-  return `The Beatles were an English rock band,
-    formed in Liverpool in 1960, that comprised
+  return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    and Ringo Starr.`;
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -1593,17 +1561,9 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-<<<<<<< HEAD
-  return `The Beatles, Liverpool'da 1960'da 
-    kurulmuş, John Lennon, Paul McCartney, 
-    George Harrison ve Ringo Starr'dan oluşan
-    bir İngiliz rock grubuydu.`;
-=======
-  return `The Beatles were an English rock band,
-    formed in Liverpool in 1960, that comprised
+  return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    and Ringo Starr.`;
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -1911,17 +1871,9 @@ async function getBio() {
     setTimeout(resolve, 500);
   });
 
-<<<<<<< HEAD
-  return `The Beatles, Liverpool'da 1960'da 
-    kurulmuş, John Lennon, Paul McCartney, 
-    George Harrison ve Ringo Starr'dan oluşan
-    bir İngiliz rock grubuydu.`;
-=======
-  return `The Beatles were an English rock band,
-    formed in Liverpool in 1960, that comprised
+  return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    and Ringo Starr.`;
->>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
