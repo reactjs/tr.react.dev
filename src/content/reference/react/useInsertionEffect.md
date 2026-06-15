@@ -44,8 +44,9 @@ function useCSS(rule) {
 
 #### Parametreler {/*parameters*/}
 
-* `setup`: Effect mantığınızı içeren fonksiyon. Setup fonksiyonunuz isteğe bağlı olarak bir *temizlik* fonksiyonu döndürebilir.  Bileşeniniz DOM'a eklenmeden önce, React setup fonksiyonunuzu çalışıtıracak. Değişen bağımlılıklarla her yeniden render işleminde, React önce (varsa) temizlik işlevinizi eski değerlerle çalıştıracak, ardından setup fonksiyonunuzu yeni değerlerle çalıştıracaktır. Bileşeniniz DOM'dan kaldırıldığında, React temizlik fonksiyonunuzu çalıştıracaktır.
-* **opsiyonel** `bağımlılıklar`: `setup` kodunun içinde referans verilen tüm reaktif değerlerin listesi. Reaktif değerler, props, state ve direkt olarak bileşen içinde belirtilen tüm değişkenleri ve fonksiyonları içerir. Eğer linteriniz [React için yapılandırılmış](/learn/editor-setup#linting), her reaktif değerin bağımlılık olarak doğru şekilde belirtildiğini doğrulayacaktır. Bağımlılıkların listesi sabit sayıda ögeye sahip olmalı ve `[dep1, dep2, dep3]` gibi sıralı şekilde yazılmalıdır. React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırma algoritmasını kullanarak her bağımlılığı önceki değeriyle karşılaştıracak. Bağımlılıkları hiç belirtmezseniz, Efektiniz bileşenin her yeniden render işleminde tekrar çalışacaktır.
+* `setup`: Effect’inizin logic’ini içeren function. Setup function’ınız optional olarak bir *cleanup* function da return edebilir. Component’iniz DOM’a eklendiğinde, ancak herhangi bir layout Effect fire olmadan önce, React setup function’ınızı çalıştırır. Dependency’leri değişmiş her re-render’dan sonra React önce eski value’larla cleanup function’ı çalıştırır (eğer sağladıysanız), ardından yeni value’larla setup function’ınızı çalıştırır. Component’iniz DOM’dan kaldırıldığında React cleanup function’ınızı çalıştırır.
+
+* **optional** `dependencies`: `setup` code’u içinde referans verilen tüm reactive value’ların listesi. Reactive value’lar props, state ve component body’nizin doğrudan içinde declare edilen tüm variable ve function’ları içerir. Linter’ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reactive value’nun dependency olarak doğru şekilde belirtildiğini verify eder. Dependency listesi sabit sayıda item’a sahip olmalı ve `[dep1, dep2, dep3]` gibi inline yazılmalıdır. React, her dependency’yi previous value’su ile [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithm kullanarak karşılaştırır. Dependency’leri hiç belirtmezseniz, Effect’iniz component’in her re-render’ından sonra yeniden çalışır.
 
 #### Dönüş Değerleri {/*returns*/}
 
@@ -57,14 +58,14 @@ function useCSS(rule) {
 * `useInsertionEffect` içerisinden state'i güncelleyemezsiniz.
 * `useInsertionEffect` çalıştığı sırada, referanslar (refler) henüz eklenmemiştir.
 * `useInsertionEffect` DOM güncellendikten önce ya da sonra çalışabilir. DOM'un belirli bir zamanda güncelleniyor olmasına güvenmemelisiniz.
-* Her efekt için temizleme (cleanup) ve kurulum (setup) fonksiyonlarını çalıştıran diğer efekt tiplerinin aksine, `useInsertionEffect` her seferinde tek bir bileşen için hem temizleme hem de kurulum fonksiyonlarını çalıştırır. Bu, temizleme ve kurulum fonksiyonlarının araya girmesine sebep olur. 
+* Her efekt için temizleme (cleanup) ve kurulum (setup) fonksiyonlarını çalıştıran diğer efekt tiplerinin aksine, `useInsertionEffect` her seferinde tek bir bileşen için hem temizleme hem de kurulum fonksiyonlarını çalıştırır. Bu, temizleme ve kurulum fonksiyonlarının araya girmesine sebep olur.
 ---
 
 ## Kullanım {/*usage*/}
 
 ### CSS-in-JS kütüphanelerinden dinamik stilleri ekleme {/*injecting-dynamic-styles-from-css-in-js-libraries*/}
 
-Geleneksel olarak, React bileşenlerini saf CSS kullanarak stillendirirsiniz. 
+Geleneksel olarak, React bileşenlerini saf CSS kullanarak stillendirirsiniz.
 
 ```js
 // In your JS file:
@@ -83,11 +84,11 @@ Bazı takımlar, CSS dosyaları yazmak yerine stilleri direkt olarak Javascript 
 CSS-in-JS kullanıyorsanız, genellikle ilk iki yaklaşımın (Statik stiller için CSS dosyaları, dinamik stiller için satır içi stiller) bir kombinasyonunu öneriyoruz. **`<style>` etiketi eklenmesini iki sebeple önermiyoruz:**
 
 1. Çalışma zamanı ekleme yapılması tarayıcıları stilleri birçok kez yeniden hesaplama yapması için zorlar.
-2. Çalışma zamanı ekleme yapılması, React yaşam döngüsünde yanlış zamanda gerçekleşirse oldukça yavaş olabilir. 
+2. Çalışma zamanı ekleme yapılması, React yaşam döngüsünde yanlış zamanda gerçekleşirse oldukça yavaş olabilir.
 
 İlk problem çözülemezken, ama `useInsertionEffect` hooku ikinci problemi çözmenize yardımcı olur.
 
-Herhangi bir layout efektinden önce stilleri eklemek için `useInsertionEffect` hookunu çağırın: 
+Herhangi bir layout efektinden önce stilleri eklemek için `useInsertionEffect` hookunu çağırın:
 
 ```js {4-11}
 // Inside your CSS-in-JS library

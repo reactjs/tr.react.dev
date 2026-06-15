@@ -120,8 +120,8 @@ function RowList({ children }) {
 
 #### Parameters {/*children-map-parameters*/}
 
-* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.  
-* `fn`: [array `map` metodu](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) callback’ine benzer eşleme fonksiyonu. İlk argüman olarak child’ı, ikinci argüman olarak indeksini alır. İndeks `0`’dan başlar ve her çağrıda artar. Bu fonksiyondan bir React node döndürmeniz gerekir. Bu; boş bir node (`null`, `undefined` veya Boolean), bir string, bir number, bir React elementi ya da diğer React node’larından oluşan bir array olabilir.  
+* `children`: Bileşeniniz tarafından alınan [`children` prop](/learn/passing-props-to-a-component#passing-jsx-as-children) değeri.
+* `fn`: [array `map` metodu](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) callback’ine benzer eşleme fonksiyonu. İlk argüman olarak child’ı, ikinci argüman olarak indeksini alır. İndeks `0`’dan başlar ve her çağrıda artar. Bu fonksiyondan bir React node döndürmeniz gerekir. Bu; boş bir node (`null`, `undefined` veya Boolean), bir string, bir number, bir React elementi ya da diğer React node’larından oluşan bir array olabilir.
 * **optional** `thisArg`: `fn` fonksiyonunun çağrılacağı [`this` değeri](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). Eğer verilmezse `undefined` olur.
 
 #### Returns {/*children-map-returns*/}
@@ -307,7 +307,7 @@ Pratikte `children` veri yapısı çoğu zaman içeride bir array olarak temsil 
 
 `children` veri yapısı, JSX olarak geçirdiğiniz bileşenlerin **render edilmiş çıktısını içermez**. Aşağıdaki örnekte `RowList` tarafından alınan `children` yalnızca üç değil, iki öğe içerir:
 
-1. `<p>This is the first item.</p>`  
+1. `<p>This is the first item.</p>`
 2. `<MoreRows />`
 
 Bu nedenle bu örnekte yalnızca iki row wrapper oluşturulur:
@@ -492,7 +492,7 @@ Daha önce de belirtildiği gibi, `children` üzerinde işlem yaparken iç bir b
 
 ### Children’ı array’e dönüştürme {/*converting-children-to-an-array*/}
 
-`Children.toArray(children)` fonksiyonunu çağırarak `children` veri yapısını normal bir JavaScript array’ine dönüştürebilirsiniz. Bu sayede, [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), [`sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) veya [`reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) gibi yerleşik array metodlarını kullanarak üzerinde işlem yapabilirsiniz.
+`children` data structure’ını normal bir JavaScript array’e dönüştürmek için `Children.toArray(children)` çağırın. Bu, array’i [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), [`sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) veya [`reverse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) gibi built-in array method’larıyla manipulate etmenizi sağlar.
 
 <Sandpack>
 
@@ -861,7 +861,7 @@ export default function App() {
         return (
           <Row isHighlighted={index % 2 === 0}>
             <p>This is the {id} item.</p>
-          </Row> 
+          </Row>
         );
       }}
     />

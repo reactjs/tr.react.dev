@@ -44,7 +44,9 @@ function ChatRoom({ roomId }) {
 
 #### Parametreler {/*parameters*/}
 
-* `setup`: Effect’inizin mantığını içeren fonksiyondur. `setup` fonksiyonunuz isteğe bağlı olarak bir *cleanup* (temizleme) fonksiyonu da döndürebilir. Bileşeniniz [commit edildiğinde](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React `setup` fonksiyonunu çalıştırır. Bağımlılıkları değişen her commit’ten sonra React, önce (varsa) eski değerlerle *cleanup* fonksiyonunu çalıştırır, ardından yeni değerlerle `setup` fonksiyonunu tekrar çalıştırır. Bileşeniniz DOM’dan kaldırıldıktan sonra ise React *cleanup* fonksiyonunu çalıştırır.
+* `setup`: Effect’inizin logic’ini içeren function. Setup function’ınız optional olarak bir *cleanup* function da return edebilir. [Component’iniz commit edildiğinde](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React setup function’ınızı çalıştırır. Dependency’leri değişmiş her commit’ten sonra React önce eski value’larla cleanup function’ı çalıştırır (eğer sağladıysanız), ardından yeni value’larla setup function’ınızı çalıştırır. Component’iniz DOM’dan kaldırıldıktan sonra React cleanup function’ınızı çalıştırır.
+
+* **optional** `dependencies`: `setup` code’u içinde referans verilen tüm reactive value’ların listesi. Reactive value’lar props, state ve component body’nizin doğrudan içinde declare edilen tüm variable ve function’ları içerir. Linter’ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reactive value’nun dependency olarak doğru şekilde belirtildiğini verify eder. Dependency listesi sabit sayıda item’a sahip olmalı ve `[dep1, dep2, dep3]` gibi inline yazılmalıdır. React, her dependency’yi previous value’su ile [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison kullanarak karşılaştırır. Bu argument’i omit ederseniz, Effect’iniz component’in her commit’inden sonra yeniden çalışır. [Dependency array’i, empty array ve hiç dependency pass etmeme arasındaki farkı görün.](#examples-dependencies)
 
 * **opsiyonel** `dependencies`: `setup` kodu içinde referans verilen tüm **reactive values**’ların listesidir. Reactive values; props, state ve bileşen gövdesi içinde doğrudan tanımlanan tüm değişkenler ve fonksiyonları kapsar. Eğer linter’ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reactive value’nun dependency olarak doğru şekilde belirtildiğini doğrular. Dependency listesi sabit sayıda öğe içermeli ve `[dep1, dep2, dep3]` şeklinde inline olarak yazılmalıdır. React, her bir dependency’yi önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak kıyaslar. Bu argümanı atladığınızda, Effect’iniz bileşenin her commit’inden sonra yeniden çalışır. [Dependency array verilmesi, boş array verilmesi ve hiç dependency verilmemesi arasındaki farkı inceleyin.](#examples-dependencies)
 
@@ -110,7 +112,7 @@ function ChatRoom({ roomId }) {
    - Ardından, <CodeStep step={1}>setup code</CodeStep> yeni props ve state değerleriyle çalışır.
 3. Bileşeniniz sayfadan kaldırıldıktan *(unmount olduktan)* sonra <CodeStep step={2}>cleanup code</CodeStep> son bir kez daha çalışır.
 
-**Yukarıdaki örneği biraz açıklayalım.**  
+**Yukarıdaki örnek için bu sequence’i illustrate edelim.**
 
 Yukarıdaki `ChatRoom` bileşeni sayfaya eklendiğinde, başlangıçtaki `serverUrl` ve `roomId` ile chat odasına bağlanır. Eğer bir commit sonucunda `serverUrl` veya `roomId` değişirse (örneğin kullanıcı bir dropdown üzerinden farklı bir chat odası seçerse), Effect’iniz *önce önceki odadan bağlantıyı keser, ardından yeni odaya bağlanır.* `ChatRoom` bileşeni sayfadan kaldırıldığında ise Effect’iniz son bir kez daha bağlantıyı keser.
 
@@ -1050,8 +1052,8 @@ Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane i
 - **Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, onun built-in data fetching mekanizmasını kullanın.** Modern React framework’leri, verimli çalışan ve yukarıdaki sorunlardan etkilenmeyen entegre data fetching mekanizmalarına sahiptir.
 - **Aksi durumda, client-side cache kullanmayı veya kendi cache çözümünüzü geliştirmeyi düşünün.** Yaygın open source çözümler arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altında Effects kullanırsınız ancak istekleri dedupe etmek, response’ları cache’lemek ve network waterfall’larını önlemek (veriyi preload ederek veya data requirement’ları route’lara hoist ederek) için ek logic yazarsınız.
 
-- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**  
-  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.  
+- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**
+  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.
   Kendi çözümünü de geliştirebilirsin; bu durumda alt seviyede *Effect*’leri kullanırsın, ancak ayrıca istekleri yinelenmeden önleme (deduplication), yanıtları önbelleğe alma (caching) ve ağ darboğazlarını (network waterfalls) önleme gibi mantıkları da eklersin (örneğin verileri önceden yükleyerek veya veri gereksinimlerini route seviyesine taşıyarak).
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
@@ -1084,7 +1086,7 @@ function ChatRoom({ roomId }) { // Bu reaktif bir değerdir
 ```js {8}
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
-  
+
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
@@ -1438,7 +1440,7 @@ function Counter() {
 }
 ```
 
-`count` reaktif bir değer olduğundan, bağımlılık listesinde belirtilmek zorundadır. Ancak bu durum, Effect'in her `count` değiştiğinde temizleme kurulum yapmasına neden olur. Bu ideal bir durum değildir.
+`count` reactive bir value olduğu için, dependencies listesinde belirtilmelidir. Ancak bu, `count` her değiştiğinde Effect’in tekrar cleanup ve setup yapmasına neden olur. Bu ideal değildir.
 
 Bunu düzeltmek için, [`c => c + 1` state güncelleyecisini](/reference/react/useState#updating-state-based-on-the-previous-state) `setCount`'a iletin:
 
@@ -1766,7 +1768,7 @@ Geliştirmede Strict modu açıkken, React kurulum ve temizleme işlemini asıl 
 
 Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres testidir. Eğer bu, gözle görülebilir sorunlara neden oluyorsa, temizleme fonksiyonunuzda mantık hatası vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
 
-[Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin. 
+[Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin.
 
 ---
 
@@ -1822,7 +1824,7 @@ Sorunu çözmeye başlamadan önce, Effect'inizin harici bir sisteme (DOM, ağ v
 
 Harici bir sistem yoksa, [Effect'i tamamen kaldırmanın](/learn/you-might-not-need-an-effect) mantığınızı basitleştirip basitleştirmeyeceğine bakın.
 
-Eğer gerçekten harici bir sistem ile senkronizasyon yapıyorsanız, Effect'inizin neden ve hangi koşullarda state'i güncellemesi gerektiğini düşünün. Bileşeninizin görsel çıktısını etkileyen bir değişiklik mi oldu? Render sırasında kullanılmayan bazı verileri takip etmeniz gerekiyorsa, [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (yeniden render tetiklemez) daha uygun olabilir. Effect'inizin state'i gereğinden fazla güncellemediğini (ve yeniden render'lar tetiklemediğini) doğrulayın. 
+Eğer gerçekten harici bir sistem ile senkronizasyon yapıyorsanız, Effect'inizin neden ve hangi koşullarda state'i güncellemesi gerektiğini düşünün. Bileşeninizin görsel çıktısını etkileyen bir değişiklik mi oldu? Render sırasında kullanılmayan bazı verileri takip etmeniz gerekiyorsa, [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (yeniden render tetiklemez) daha uygun olabilir. Effect'inizin state'i gereğinden fazla güncellemediğini (ve yeniden render'lar tetiklemediğini) doğrulayın.
 
 Son olarak, Effect'iniz state'i doğru zamanda güncelliyorsa ancak yine de bir döngü söz konusuysa, bunun nedeni, state güncellemesinin Effect'in bağımlılıklarından birinin değişmesine neden olmasıdır. [Bağımlılık değişikliklerinden kaynaklı hataların nasıl ayıklanacağını okuyun.](/reference/react/useEffect#my-effect-runs-after-every-re-render)
 

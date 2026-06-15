@@ -65,7 +65,7 @@ import { use } from 'react';
 
 function Button() {
   const theme = use(ThemeContext);
-  // ... 
+  // ...
 ```
 `use`, içerisine aktarmış olduğunuz <CodeStep step={1}>context</CodeStep>'in <CodeStep step={2}>context değerini</CodeStep> döndürür. Context değerini belirlemek için React, bileşen ağacını arar ve ilgili context için **en yakın context sağlayıcısını** bulur.
 
@@ -277,7 +277,7 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-// TODO: Bu örneği, 
+// TODO: Bu örneği,
 // Codesandbox Sunucu Bileşeni
 // demo ortamı oluşturulduğunda güncelleyin
 import App from './App';
@@ -329,8 +329,8 @@ Bazen `use`'a aktarılan Promise reddedilebilir. Reddedilen Promise'leri şu şe
 
 #### Error Boundary ile kullanıcılara hata gösterme {/*displaying-an-error-to-users-with-error-boundary*/}
 
-Bir Promise reddedildiğinde kullanıcıya hata göstermek istiyorsanız, [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) kullanabilirsiniz.  
-Error Boundary kullanmak için, `use` API’sini çağırdığınız bileşeni bir Error Boundary ile sarın.  
+Bir Promise reddedildiğinde kullanıcıya hata göstermek istiyorsanız, [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) kullanabilirsiniz.
+Error Boundary kullanmak için, `use` API’sini çağırdığınız bileşeni bir Error Boundary ile sarın.
 Eğer `use` fonksiyonuna iletilen Promise reddedilirse, Error Boundary için tanımlanan fallback içerik görüntülenecektir.
 
 <Sandpack>
@@ -386,7 +386,7 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-// TODO: Bu örneği, 
+// TODO: Bu örneği,
 // Codesandbox Sunucu Bileşeni
 // demo ortamı oluşturulduğunda güncelleyin
 import App from './App';
@@ -442,8 +442,8 @@ Promise'in <CodeStep step={1}>`catch`</CodeStep> methodunu kullanmak için Promi
 
 ### "Suspense İstisnası: Bu gerçek bir hata değil!" {/*suspense-exception-error*/}
 
-Ya `use` fonksiyonunu bir **React Component** veya **Hook** fonksiyonu dışında çağırıyorsunuz,  
-ya da `use`’u bir **try–catch** bloğu içinde çağırıyorsunuz. Eğer `use`’u bir try–catch bloğu içinde çağırıyorsanız, bileşeninizi bir **Error Boundary** ile sarın,  
+Ya `use` fonksiyonunu bir **React Component** veya **Hook** fonksiyonu dışında çağırıyorsunuz,
+ya da `use`’u bir **try–catch** bloğu içinde çağırıyorsunuz. Eğer `use`’u bir try–catch bloğu içinde çağırıyorsanız, bileşeninizi bir **Error Boundary** ile sarın,
 veya Promise’in `catch` metodunu kullanarak hatayı yakalayın ve Promise’i başka bir değerle çözümleyin (**resolve edin**). [Bu örneklere bakın](#dealing-with-rejected-promises).
 
 Eğer `use`'u bir React Bileşeni veya Hook fonksiyonu dışında çağırıyorsanız `use` çağrısını bir React Bileşeni veya Hook fonksiyonu içerisine taşıyın.
@@ -460,7 +460,7 @@ Bunun yerine, `use` fonksiyonunu herhangi bir bileşen kapanışının dışınd
 
 ```jsx
 function MessageComponent({messagePromise}) {
-  // ✅ `use` bir bileşen içerisine çağırılıyor. 
+  // ✅ `use`, bir component’ten çağrılıyor.
   const message = use(messagePromise);
   // ...
 ```

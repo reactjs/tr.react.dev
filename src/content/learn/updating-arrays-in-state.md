@@ -91,7 +91,7 @@ button { margin-left: 5px; }
 Bunun yerine, mevcut öğeleri *ve* son eleman olarak yeni öğeyi içeren *yeni* diziyi oluşturun. Bunu yapmanın birden çok yolu vardır ancak en kolay yol `...` [dizi spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals) sözdizimini kullanmaktır:
 
 ```js
-setArtists( // State'i yeni bir dizi 
+setArtists( // State'i yeni bir dizi
   [ // ile değiştirin
     ...artists, // bu eski öğelerin tümünü
     { id: nextId++, name: name } // ve sona eklenecek yeni öğeyi içerir.
@@ -443,7 +443,7 @@ export default function List() {
 
 Burada `[...list]` spread sözdizimi kullanılarak orijinal dizinin bir kopyası oluşturulur. Artık bir kopyanız olduğuna göre `nextList.reverse()` ya da `nextList.sort()` gibi mutasyona sebep olan metodlar kullanabilir, hatta `nextList[0] = "something"` ile öğeleri tek tek yeni değerlerine atayabilirsiniz.
 
-Ancak, **bir diziyi kopyalasanız bile dizinin  _içindeki_ öğeleri doğrudan mutasyona uğratamazsınız.** Bunun nedeni yaptığınız kopyalamanın yüzeysel (shallow) olmasıdır. Yani yeni dizi, orijinal diziyle aynı öğeleri içermektedir. Dolayısıyla, kopyalanan dizinin içindeki bir nesneyi değiştirdiğiniz zaman mevcut state'i de mutasyona uğratmış olursunuz. Örneğin, aşağıdaki gibi bir kod sorunludur. 
+Ancak, **bir diziyi kopyalasanız bile dizinin  _içindeki_ öğeleri doğrudan mutasyona uğratamazsınız.** Bunun nedeni yaptığınız kopyalamanın yüzeysel (shallow) olmasıdır. Yani yeni dizi, orijinal diziyle aynı öğeleri içermektedir. Dolayısıyla, kopyalanan dizinin içindeki bir nesneyi değiştirdiğiniz zaman mevcut state'i de mutasyona uğratmış olursunuz. Örneğin, aşağıdaki gibi bir kod sorunludur.
 
 ```js
 const nextList = [...list];

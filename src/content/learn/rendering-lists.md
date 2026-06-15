@@ -10,7 +10,7 @@ Genellikle bir veri topluluğundan birden fazla benzer bileşen göstermek istey
 
 <YouWillLearn>
 
-* Javascript'in `map()` metodunu kullanarak bir diziden nasıl bileşenler oluşturulur? 
+* Javascript'in `map()` metodunu kullanarak bir diziden nasıl bileşenler oluşturulur?
 * Javascript'in `filter()` metodunu kullanarak yalnızca belirli bileşenler nasıl oluşturulur?
 * React anahtarlarını ne zaman ve neden kullanmalıyız?
 
@@ -32,10 +32,10 @@ Aşağıdaki gibi bir listeniz olduğunu düşünelim.
 
 Bu liste öğeleri arasındaki tek fark içerikleri, verileridir. Arayüzler oluştururken farklı veriler kullanan aynı bileşenin birkaç örneğini göstermeniz gerekebilir: yorum listeleri ya da profil resimleri galerileri gibi. Bu gibi durumlarda, gerekli verileri Javascript objeleri ve dizilerinde saklayabilir ve [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ve [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) gibi metodları kullanarak bu verilerden bileşen listeleri oluşturabilirsiniz.
 
-Aşağıdaki kısa örnekte bir diziden nasıl öğe listesi oluşturulduğunu görebilirsiniz. 
+Aşağıdaki kısa örnekte bir diziden nasıl öğe listesi oluşturulduğunu görebilirsiniz.
 
 
-1. Verinizi bir dizi içine **aktarın**: 
+1. Verinizi bir dizi içine **aktarın**:
 
 ```js
 const people = [
@@ -116,7 +116,7 @@ const people = [{
 }, {
   id: 3,
   name: 'Percy Lavon Julian',
-  profession: 'chemist',  
+  profession: 'chemist',
 }, {
   id: 4,
   name: 'Subrahmanyan Chandrasekhar',
@@ -224,7 +224,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -233,9 +233,9 @@ export function getImageUrl(person) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -355,7 +355,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -364,9 +364,9 @@ export function getImageUrl(person) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -436,7 +436,7 @@ Bu sayfada şunları öğrendiniz:
 * Verileri bileşenlerin dışına, diziler ve objeler gibi veri yapılarına taşıma.
 * JavaScript'in `map()` metodu ile benzer bileşen setleri oluşturma.
 * JavaScript'in `filter()` metodu ile filterenmiş öğe dizileri oluşturma.
-* React'in, konumları ya da verileri değişse bile her bir koleksiyondaki her bileşeni takip edebilmesi için `anahtar` neden ve nasıl kullanılır. 
+* React'in, konumları ya da verileri değişse bile her bir koleksiyondaki her bileşeni takip edebilmesi için `anahtar` neden ve nasıl kullanılır.
 
 </Recap>
 
@@ -516,7 +516,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -631,7 +631,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -745,7 +745,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -863,7 +863,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );

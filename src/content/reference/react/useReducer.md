@@ -38,9 +38,9 @@ function MyComponent() {
 
 #### Parametreler {/*parameters*/}
 
-* `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf hâlde (pure) olmalı, state'i ve işlemi(action) argüman olarak almalı ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
-* `initialArg`: Başlangıç state'inin hesaplandığı değerdir. Herhangi bir türden bir değer olabilir. Başlangıç state'inin nasıl hesaplandığı, sonraki `init` argümanına bağlıdır.
-* **isteğe bağlı** `init`: Başlangıç state'ini döndürmesi gereken başlatıcı fonksiyondur. Belirtilmezse, başlangıç state'i `initialArg` olarak ayarlanır. Aksi takdirde, başlangıç state'i `init(initialArg)` çağrısının sonucuna ayarlanır.
+* `reducer`: State’in nasıl update edileceğini belirten reducer function. Pure olmalıdır, state ve action’ı argument olarak almalı ve next state’i return etmelidir. State ve action herhangi bir type’ta olabilir.
+* `initialArg`: Initial state’in hesaplandığı value. Herhangi bir type’ta value olabilir. Initial state’in bundan nasıl hesaplanacağı, sonraki `init` argument’ına bağlıdır.
+* **optional** `init`: Initial state’i return etmesi gereken initializer function. Belirtilmezse, initial state `initialArg` olarak set edilir. Aksi halde, initial state `init(initialArg)` çağrısının result’ı olarak set edilir.
 
 #### Dönüş değerleri {/*returns*/}
 
@@ -199,7 +199,7 @@ Eylemlerin herhangi bir şekli olabilir. Geleneksel olarak, eylemi tanımlayan b
 ```js {5,9-12}
 function Form() {
   const [state, dispatch] = useReducer(reducer, { name: 'Taylor', age: 42 });
-  
+
   function handleButtonClick() {
     dispatch({ type: 'incremented_age' });
   }
@@ -291,7 +291,7 @@ export default function Form() {
     dispatch({
       type: 'changed_name',
       nextName: e.target.value
-    }); 
+    });
   }
 
   return (

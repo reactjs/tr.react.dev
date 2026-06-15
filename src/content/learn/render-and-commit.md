@@ -54,7 +54,7 @@ root.render(<Image />);
 export default function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -103,7 +103,7 @@ export default function Gallery() {
 function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -124,8 +124,8 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
-* **İlk render esnasında** React, `<section>`, `<h1>`, ve üç `<img>` elementi için [DOM node'larını oluşturacaktır.](https://developer.mozilla.org/docs/Web/API/Document/createElement)
-* **Yeniden render esnasında** React, eğer varsa önceki render'dan bu yana hangi özelliklerin değiştiğini hesaplayacaktır. Bir sonraki adım olan değişikliklerin DOM'a işlenmesi safhasına kadar bu bilgilerle hiçbir şey yapmayacaktır.
+* **Initial render sırasında,** React `<section>`, `<h1>` ve üç `<img>` tag’i için [DOM node’larını oluşturur](https://developer.mozilla.org/docs/Web/API/Document/createElement).
+* **Bir re-render sırasında,** React bunların property’lerinden herhangi birinin previous render’dan bu yana değişip değişmediğini hesaplar. Bu bilgiyi bir sonraki step olan commit phase’e kadar kullanmaz.
 
 <Pitfall>
 
@@ -197,13 +197,13 @@ Bu, son adımda React'in sadece `<h1>` elementinin içeriğini yeni `time` ile g
 
 ## Sonsöz: Tarayıcının boyanması {/*epilogue-browser-paint*/}
 
-Render tamamlandıktan ve React DOM'u güncelledikten sonra, tarayıcı ekranı yeniden boyayacaktır. Bu süreç "tarayıcının render etmesi" olarak bilinsede, bu dökümantasyon boyunca kafa karışıklığını engellemk için biz ona "boyama" diyeceğiz. 
+Render tamamlandıktan ve React DOM'u güncelledikten sonra, tarayıcı ekranı yeniden boyayacaktır. Bu süreç "tarayıcının render etmesi" olarak bilinsede, bu dökümantasyon boyunca kafa karışıklığını engellemk için biz ona "boyama" diyeceğiz.
 
 <Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Bir React uygulamasında herhangi bir ekran güncellemesi üç adımda olur: 
+* Bir React uygulamasında herhangi bir ekran güncellemesi üç adımda olur:
   1. Tetikle
   2. Render et
   3. İşle

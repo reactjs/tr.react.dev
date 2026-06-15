@@ -529,7 +529,7 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
     }
   });
 
@@ -607,8 +607,8 @@ export default function Form() {
         <br />
         ({person.artwork.city} şehrinde)
       </p>
-      <img 
-        src={person.artwork.image} 
+      <img
+        src={person.artwork.image}
         alt={person.artwork.title}
       />
     </>
@@ -1156,7 +1156,7 @@ Bu modeli anlaması zor olabilir ve genel olarak bu modelden kaçınılması en 
 function handleClick() {
   console.log(count);  // 0
 
-  setCount(count + 1); // 1 ile yeniden render iste 
+  setCount(count + 1); // 1 ile yeniden render iste
   console.log(count);  // Hala 0!
 
   setTimeout(() => {

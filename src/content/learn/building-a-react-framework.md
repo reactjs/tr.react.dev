@@ -20,7 +20,7 @@ For a list of recommended frameworks, check out [Creating a React App](/learn/cr
 
 Building a framework is a large undertaking that often requires expertise in many different areas. Understanding your goals and requirements before starting to build your own framework can help guide your development process and save a considerable amount of time.
 
-For example, if you need to build a framework that integrates with a specific system or infrastructure, it's important to understand the features and limitations of those systems. Understanding your constraints can help guide your framework development process. 
+For example, if you need to build a framework that integrates with a specific system or infrastructure, it's important to understand the features and limitations of those systems. Understanding your constraints can help guide your framework development process.
 
 If you are building your own framework to learn, using popular tools like Vite and React Router can be a good starting point and let you focus on how to combine different tools to build a framework.
 
@@ -134,4 +134,4 @@ There are many other problems that users need to solve like:
 - Static site generation
 - Server-side rendering
 
-Many of these problems individually can be difficult as each problem is interconnected with the others and can require deep expertise in problem areas you may not be familiar with. If you don't want to solve these problems on your own, you can [get started with a framework](/learn/creating-a-react-app) that provides these features out of the box. 
+Many of these problems individually can be difficult as each problem is interconnected with the others and can require deep expertise in problem areas you may not be familiar with. If you don't want to solve these problems on your own, you can [get started with a framework](/learn/creating-a-react-app) that provides these features out of the box.

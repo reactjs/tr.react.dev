@@ -352,7 +352,7 @@ Diyelim ki Efekti "sadece montajda" çalıştırmak istediniz. [Boş (`[]`) bağ
 
 Bu sayacın her saniye iki düğme ile yapılandırılabilen miktar kadar artması gerekiyordu. Ancak, React'e bu Efektin hiçbir şeye bağlı olmadığı konusunda "yalan söylediğiniz" için, React ilk render'dan itibaren `onTick` fonksiyonunu sonsuza kadar kullanmaya devam ediyor. [Bu render sırasında,](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `count` = `0` ve `increment` = `1` idi. Bu nedenle bu render'daki `onTick` her zaman her saniye `setCount(0 + 1)` çağırır ve her zaman `1` görürsünüz. Bunun gibi hatalar birden fazla bileşene yayıldığında düzeltilmesi daha zordur.
 
-Her zaman linter'ı görmezden gelmekten daha iyi bir çözüm vardır! Bu kodu düzeltmek için bağımlılık listesine `onTick` eklemeniz gerekir. (Aralığın yalnızca bir kez ayarlandığından emin olmak için, [`onTick`i bir Efekt Olayı yapın.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)) 
+Her zaman linter'ı görmezden gelmekten daha iyi bir çözüm vardır! Bu kodu düzeltmek için bağımlılık listesine `onTick` eklemeniz gerekir. (Aralığın yalnızca bir kez ayarlandığından emin olmak için, [`onTick`i bir Efekt Olayı yapın.](/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events))
 
 **Bağımlılık lint hatasını bir derleme hatası olarak ele almanızı öneririz. Bunu bastırmazsanız, bu gibi hataları asla görmezsiniz.** Bu sayfanın geri kalanı, bu ve diğer durumlar için alternatifleri belgelemektedir.
 
@@ -411,7 +411,7 @@ function Form() {
 
   function handleSubmit() {
     setSubmitted(true);
-  }  
+  }
 
   // ...
 }
@@ -428,8 +428,8 @@ function Form() {
   function handleSubmit() {
     // ✅ Güzel: Olaya özgü mantık olay yöneticilerinden çağrılır
     post('/api/register');
-    showNotification('Başarıyla Kaydedildi!', theme);
-  }  
+    showNotification('Kayıt işlemi başarıyla tamamlandı!', theme);
+  }
 
   // ...
 }
@@ -441,7 +441,7 @@ Artık kod bir olay yöneticisinde olduğu için reaktif değildir--bu nedenle y
 
 Kendinize sormanız gereken bir sonraki soru, Efektinizin birbiriyle alakasız birkaç şey yapıp yapmadığıdır.
 
-Kullanıcının şehir ve bölgesini seçmesi gereken bir gönderi formu oluşturduğunuzu düşünün. 
+Kullanıcının şehir ve bölgesini seçmesi gereken bir gönderi formu oluşturduğunuzu düşünün.
 Seçilen `country`'e göre `cities` listesini sunucudan alıp bir açılır menüde gösteriyorsunuz:
 
 ```js
@@ -877,9 +877,9 @@ const options2 = { serverUrl: 'https://localhost:1234', roomId: 'müzik' };
 // Bunlar iki farklı nesne!
 console.log(Object.is(options1, options2)); // false
 ```
-**Nesne ve fonksiyon bağımlılıkları, Efektinizin ihtiyacınız olandan daha sık yeniden senkronize edilmesine neden olabilir.** 
+**Nesne ve fonksiyon bağımlılıkları, Efektinizin ihtiyacınız olandan daha sık yeniden senkronize edilmesine neden olabilir.**
 
-Bu nedenle, mümkün olduğunca, Efektinizin bağımlılıkları olarak nesnelerden ve fonksiyonlardan kaçınmaya çalışmalısınız. Bunun yerine, bunları bileşenin dışına, Efektin içine taşımayı veya ilkel değerleri bunlardan çıkarmayı deneyin.
+**Object ve function dependency’leri, Effect’inizin ihtiyacınız olandan daha sık re-synchronize olmasına neden olabilir.**
 
 #### Statik nesneleri ve fonksiyonları bileşeninizin dışına taşıma {/*move-static-objects-and-functions-outside-your-component*/}
 
@@ -1147,7 +1147,7 @@ function ChatRoom({ getOptions }) {
   // ...
 ```
 
-Bu sadece[saf halde](/learn/keeping-components-pure) fonksiyonlar için geçerlidir, çünkü render sırasında çağrılmaları güvenlidir. 
+Bu sadece[saf halde](/learn/keeping-components-pure) fonksiyonlar için geçerlidir, çünkü render sırasında çağrılmaları güvenlidir.
 Fonksiyonunuz bir olay yöneticisiyse, ancak değişikliklerinin Efektinizi yeniden senkronize etmesini istemiyorsanız,[bunun yerine bir Efekt Olayına sarın.](#do-y-want-to-read-a-value-without-reacting-to-its-changes)
 
 <Recap>

@@ -28,7 +28,7 @@ Bileşenlerin büyüsü yeniden kullanılabilirliklerinde yatar: diğer bileşen
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3As.jpg"
       alt="Katherine Johnson"
     />
   );
@@ -81,7 +81,7 @@ export default function App() {
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -109,7 +109,7 @@ Bu örneğin iki farklı bileşen dosyasına nasıl ayrıldığına dikkat edini
 
 1. `Gallery.js`:
      - Sadece aynı dosya içerisinde kullanılan ve dışa aktarılmayan `Profile` bileşenini tanımlar.
-     - **Varsayılan dışa aktarma** olarak `Gallery` bileşenini dışa aktarır. 
+     - **Varsayılan dışa aktarma** olarak `Gallery` bileşenini dışa aktarır.
 2. `App.js`:
      - `Gallery.js` dosyasından **varsayılan içe aktarma** olarak `Gallery` bileşenini içe aktarır.
      - **Varsayılan dışa aktarma** olarak `App` bileşenini dışa aktarır.
@@ -119,7 +119,7 @@ Bu örneğin iki farklı bileşen dosyasına nasıl ayrıldığına dikkat edini
 
 `.js` dosya uzantısını kullanmayan dosyalarla karşılaşabilirsiniz:
 
-```js 
+```js
 import Gallery from './Gallery';
 ```
 
@@ -199,7 +199,7 @@ export default function App() {
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -238,7 +238,7 @@ Artık varsayılan ve adlandırılmış dışa aktarmaları bir arada kullanıyo
 Bu sayfada öğrendikleriniz:
 
 * Kök bileşeni nedir
-* Bir bileşen içe ve dışa nasıl aktarılır 
+* Bir bileşen içe ve dışa nasıl aktarılır
 * Varsayılan ve adlandırılmış içe ve dışa aktarmalar ne zaman ve nasıl kullanılmalıdır
 * Aynı dosya içerisinden birden fazla bileşen nasıl dışarı aktarılabilir
 
@@ -250,7 +250,7 @@ Bu sayfada öğrendikleriniz:
 
 #### Bileşenleri daha fazla ayırın {/*split-the-components-further*/}
 
-Şu anda Gallery.js, hem `Profile`'i hem de `Gallery`i dışa aktarıyor, bu biraz kafa karıştıcı. 
+Şu anda Gallery.js, hem `Profile`'i hem de `Gallery`i dışa aktarıyor, bu biraz kafa karıştıcı.
 
 `Profile` bileşenini kendi `Profile.js` dosyasına taşıyınız, ve sonrasında `App` bileşenini sırasıyla `<Profile />` ve `<Gallery />` render edecek şekilde değiştiriniz.
 
@@ -288,7 +288,7 @@ export default function App() {
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -356,7 +356,7 @@ export default function Gallery() {
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -406,7 +406,7 @@ export default function Gallery() {
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );

@@ -109,7 +109,7 @@ Veri deposundaki verilerin <CodeStep step={3}>anlık görüntüsünü</CodeStep>
 
 React, bu fonksiyonları kullanarak bileşeninizi depoya abone tutar ve değişikliklerde yeniden render eder.
 
-Aşağıdaki örnekte `todosStore`, React'ın dışında veri tutan harici bir depo olacak şekilde implemente edilmiştir. `TodosApp` bileşeni `useSyncExternalStore` Hook'u ile harici depo ile bağlantı kurar. 
+Örneğin, aşağıdaki sandbox’ta `todosStore`, data’yı React dışında store eden bir external store olarak implement edilmiştir. `TodosApp` component’i, `useSyncExternalStore` Hook’u ile bu external store’a connect olur.
 
 <Sandpack>
 
@@ -249,7 +249,7 @@ Usually you won't write `useSyncExternalStore` directly in your components. Inst
 
 For example, this custom `useOnlineStatus` Hook tracks whether the network is online:
 
-Genellikle `useSyncExternalStore`'u bileşenlerinizde doğrudan kullanmazsınız. Bunun yerine kendi özel Hook'unuzda çağırırsınız. 
+Genellikle `useSyncExternalStore`'u bileşenlerinizde doğrudan kullanmazsınız. Bunun yerine kendi özel Hook'unuzda çağırırsınız.
 Böylece aynı harici depoyu farklı bileşenlerden de kullanabilirsiniz.
 
 Örneğin, örnekteki özel `useOnlineStatus` Hook'u ağın çevrimiçi olup olmadığını takip eder:
@@ -420,13 +420,14 @@ function ChatIndicator() {
   function subscribe() {
     // ...
   }
-  
+
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
 }
 ```
-Yeniden render'lar arasında farklı bir `subscribe` fonksiyonu iletirseniz, React deponuza yeniden abone olur. Bu durum performans sorunlarına neden oluyorsa ve sürekli abone olmaktan kaçınmak istiyorsanız, `subscribe` fonksiyonunu bileşen dışına taşıyın:
+
+Re-render’lar arasında farklı bir `subscribe` function pass ederseniz, React store’unuza yeniden subscribe olur. Bu performance issue’lara neden oluyorsa ve yeniden subscribe olmaktan kaçınmak istiyorsanız, `subscribe` function’ını dışarı taşıyın:
 
 ```js {1-4}
 // ✅ Her zaman aynı işlev olduğu için, React yeniden abone olmaya ihtiyaç duymaz.
@@ -448,7 +449,7 @@ function ChatIndicator({ userId }) {
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);
-  
+
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...

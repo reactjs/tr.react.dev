@@ -60,7 +60,7 @@ import { useContext } from 'react';
 
 function Button() {
   const theme = useContext(ThemeContext);
-  // ... 
+  // ...
 ```
 
 `useContext`, parametre olarak geçtiğiniz <CodeStep step={1}>context</CodeStep> için <CodeStep step={2}>context değerini</CodeStep> döndürür. Context değerini belirlemek için, React bileşen ağacını tarar ve context'e özgü **en yakındaki context sağlayıcısını** bulur.
@@ -845,7 +845,7 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
-        }); 
+        });
       }}>Add</button>
     </>
   );
@@ -1290,9 +1290,9 @@ export const LevelContext = createContext(0);
 
 ### Nesneler ve fonksiyonları geçirirken tekrar render işlemlerini optimize etmek {/*nesneler-ve-fonksiyonları-geçirirken-tekrar-render-işlemlerini-optimize-etmek*/}
 
-Herhangi bir değeri, nesne veya fonksiyon dahil, context aracılığıyla iletebilirsiniz. 
+Herhangi bir değeri, nesne veya fonksiyon dahil, context aracılığıyla iletebilirsiniz.
 
-```js [[2, 10, "{ currentUser, login }"]] 
+```js [[2, 10, "{ currentUser, login }"]]
 function MyApp() {
   const [currentUser, setCurrentUser] = useState(null);
 

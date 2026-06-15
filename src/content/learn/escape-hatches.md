@@ -227,7 +227,7 @@ function Form() {
 }
 ```
 
-Ancak, harici sistemler ile senkronize etmek için Efektlere ihtiyacınız vardır.
+Ancak external system’lerle senkronize olmak için Effect’lere *gerçekten* ihtiyacınız vardır.
 
 <LearnMore path="/learn/you-might-not-need-an-effect">
 
@@ -382,7 +382,7 @@ export default function App() {
       <hr />
       <ChatRoom
         roomId={roomId}
-        theme={isDark ? 'dark' : 'light'} 
+        theme={isDark ? 'dark' : 'light'}
       />
     </>
   );
@@ -515,7 +515,7 @@ export default function App() {
       <hr />
       <ChatRoom
         roomId={roomId}
-        theme={isDark ? 'dark' : 'light'} 
+        theme={isDark ? 'dark' : 'light'}
       />
     </>
   );

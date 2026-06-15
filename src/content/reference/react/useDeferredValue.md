@@ -46,7 +46,7 @@ function SearchPage() {
 
 #### Dikkat edilmesi gerekenler {/*caveats*/}
 
-- Bir güncelleme Transition içinde olduğunda, güncelleme zaten ertelendiği için, `useDeferredValue` daima yeni `value` değerini döner ve ertelenmiş bir render oluşturmaz. 
+- Bir güncelleme Transition içinde olduğunda, güncelleme zaten ertelendiği için, `useDeferredValue` daima yeni `value` değerini döner ve ertelenmiş bir render oluşturmaz.
 
 - `useDeferredValue`'ya geçtiğiniz değerler, ilkel değer (örn. string ya da number) veya render dışında oluşturulan nesneler olmalıdır. Render esnasında yeni bir nesne oluşturur ve bunu direkt `useDeferredValue`'ya iletirseniz, her render'da farklı olur. Bu da gereksiz arka plan render'larına neden olacaktır.
 

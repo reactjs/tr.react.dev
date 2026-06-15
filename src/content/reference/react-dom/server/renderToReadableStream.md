@@ -49,15 +49,15 @@ Client tarafında, server tarafından oluşturulan HTML’i interaktif hale geti
 
 * `reactNode`: HTML’e render etmek istediğiniz bir React node. Örneğin `<App />` gibi bir JSX element’i. Bunun tüm dokümanı temsil etmesi beklenir, bu yüzden `App` component’i `<html>` etiketini render etmelidir.
 
-* **opsiyonel** `options`: Stream için yapılandırma seçeneklerini içeren bir obje.  
-  * **opsiyonel** `bootstrapScriptContent`: Belirtilirse, bu string inline bir `<script>` etiketi içinde yer alır.  
-  * **opsiyonel** `bootstrapScripts`: Sayfada emit edilecek `<script>` etiketleri için string URL’lerden oluşan bir dizi. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) fonksiyonunu çağıran `<script>`’i eklemek için bunu kullanın. React’in client tarafında çalışmasını istemiyorsanız bunu boş bırakın.  
-  * **opsiyonel** `bootstrapModules`: `bootstrapScripts` gibi, ancak [`<script type="module">`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) olarak emit eder.  
-  * **opsiyonel** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından üretilen ID’ler için React’in kullandığı string önek. Aynı sayfada birden fazla root kullanırken çakışmaları önlemek için faydalıdır. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters) ile verilen önek ile aynı olmalıdır.  
-  * **opsiyonel** `namespaceURI`: Stream için root [namespace URI](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS#important_namespace_uris) string’i. Varsayılan olarak normal HTML. SVG için `'http://www.w3.org/2000/svg'` veya MathML için `'http://www.w3.org/1998/Math/MathML'` geçebilirsiniz.  
-  * **opsiyonel** `nonce`: [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) için script’lere izin vermek amacıyla bir [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) string’i.  
-  * **opsiyonel** `onError`: Server’da bir hata oluştuğunda tetiklenen callback. Hata [recoverable](#recovering-from-errors-outside-the-shell) veya [non-recoverable](#recovering-from-errors-inside-the-shell) olabilir. Varsayılan olarak sadece `console.error` çağrılır. Bunu [crash raporlarını loglamak için](#logging-crashes-on-the-server) override ederseniz, yine de `console.error` çağırdığınızdan emin olun. Ayrıca [shell emit edilmeden önce status kodunu ayarlamak](#setting-the-status-code) için de kullanabilirsiniz.  
-  * **opsiyonel** `progressiveChunkSize`: Bir chunk içindeki byte sayısı. [Varsayılan heuristic hakkında daha fazla bilgi.](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)  
+* **opsiyonel** `options`: Stream için yapılandırma seçeneklerini içeren bir obje.
+  * **opsiyonel** `bootstrapScriptContent`: Belirtilirse, bu string inline bir `<script>` etiketi içinde yer alır.
+  * **opsiyonel** `bootstrapScripts`: Sayfada emit edilecek `<script>` etiketleri için string URL’lerden oluşan bir dizi. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) fonksiyonunu çağıran `<script>`’i eklemek için bunu kullanın. React’in client tarafında çalışmasını istemiyorsanız bunu boş bırakın.
+  * **opsiyonel** `bootstrapModules`: `bootstrapScripts` gibi, ancak [`<script type="module">`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) olarak emit eder.
+  * **opsiyonel** `identifierPrefix`: [`useId`](/reference/react/useId) tarafından üretilen ID’ler için React’in kullandığı string önek. Aynı sayfada birden fazla root kullanırken çakışmaları önlemek için faydalıdır. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters) ile verilen önek ile aynı olmalıdır.
+  * **opsiyonel** `namespaceURI`: Stream için root [namespace URI](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS#important_namespace_uris) string’i. Varsayılan olarak normal HTML. SVG için `'http://www.w3.org/2000/svg'` veya MathML için `'http://www.w3.org/1998/Math/MathML'` geçebilirsiniz.
+  * **opsiyonel** `nonce`: [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) için script’lere izin vermek amacıyla bir [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) string’i.
+  * **opsiyonel** `onError`: Server’da bir hata oluştuğunda tetiklenen callback. Hata [recoverable](#recovering-from-errors-outside-the-shell) veya [non-recoverable](#recovering-from-errors-inside-the-shell) olabilir. Varsayılan olarak sadece `console.error` çağrılır. Bunu [crash raporlarını loglamak için](#logging-crashes-on-the-server) override ederseniz, yine de `console.error` çağırdığınızdan emin olun. Ayrıca [shell emit edilmeden önce status kodunu ayarlamak](#setting-the-status-code) için de kullanabilirsiniz.
+  * **opsiyonel** `progressiveChunkSize`: Bir chunk içindeki byte sayısı. [Varsayılan heuristic hakkında daha fazla bilgi.](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
   * **opsiyonel** `signal`: [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) ile server render’ı [abort edebilir](#aborting-server-rendering) ve kalan kısmı client’ta render edebilirsiniz.
 
 
@@ -65,7 +65,7 @@ Client tarafında, server tarafından oluşturulan HTML’i interaktif hale geti
 
 `renderToReadableStream` returns a Promise:
 
-- Eğer [shell](#specifying-what-goes-into-the-shell) render’ı başarılı olursa, bu Promise bir [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) ile çözülür.  
+- Eğer [shell](#specifying-what-goes-into-the-shell) render’ı başarılı olursa, bu Promise bir [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) ile çözülür.
 - Eğer shell render’ı başarısız olursa, Promise reddedilir. [Bunu bir fallback shell göstermek için kullanabilirsiniz.](#recovering-from-errors-inside-the-shell)
 
 Return stream’in ek bir özelliği vardır:
@@ -285,15 +285,15 @@ Streaming, React’in browser’da yüklenmesini veya uygulamanızın interaktif
 
 **Sadece Suspense destekli veri kaynakları, Suspense component’ini aktif hale getirir.** Bunlar şunları içerir:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense destekli framework’lerle veri çekme  
-- [`lazy`](/reference/react/lazy) ile component kodlarını lazy-load etme  
-- [`use`](/reference/react/use) ile bir Promise’in değerini okuma  
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense destekli framework’lerle veri çekme
+- [`lazy`](/reference/react/lazy) ile component kodlarını lazy-load etme
+- [`use`](/reference/react/use) ile bir Promise’in değerini okuma
 
 Suspense, bir Effect veya event handler içinde veri çekildiğinde **bunu algılamaz**.
 
 Yukarıdaki `Posts` component’inde veriyi nasıl yükleyeceğiniz kullandığınız framework’e bağlıdır. Eğer Suspense destekli bir framework kullanıyorsanız, detaylar veri çekme dokümantasyonunda bulunabilir.
 
-Opinionated bir framework kullanmadan Suspense destekli veri çekme henüz desteklenmemektedir. Suspense destekli bir veri kaynağı uygulamak için gerekenler kararsız ve dokümante edilmemiştir. Suspense ile veri kaynaklarını entegre etmek için resmi bir API, React’in gelecekteki bir sürümünde yayınlanacaktır.
+Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
 
 </Note>
 
@@ -437,8 +437,8 @@ function ProfilePage() {
 
 Eğer `Posts` component’inde veya içindeki bir yerde hata oluşursa, React [bundan kurtulmayı deneyecektir:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
 
-1. En yakın `<Suspense>` sınırı (`PostsGlimmer`) için loading fallback HTML’e emit edilir.  
-2. Server üzerinde `Posts` içeriğini render etmeye çalışmaktan vazgeçer.  
+1. En yakın `<Suspense>` sınırı (`PostsGlimmer`) için loading fallback HTML’e emit edilir.
+2. Server üzerinde `Posts` içeriğini render etmeye çalışmaktan vazgeçer.
 3. JavaScript kodu client’ta yüklendiğinde, React `Posts`’i client üzerinde *yeniden deneyecektir*.
 
 Eğer client üzerinde `Posts` render’ını yeniden denemek de başarısız olursa, React hatayı client’ta fırlatır. Render sırasında oluşan tüm hatalarda olduğu gibi, [en yakın parent error boundary](/reference/react/Component#static-getderivedstatefromerror) hatayı kullanıcıya nasıl göstereceğinizi belirler. Pratikte, kullanıcı, hatanın geri döndürülemez olduğundan emin olunana kadar bir loading göstergesi görür.

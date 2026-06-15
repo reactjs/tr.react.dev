@@ -63,7 +63,7 @@ function App() {
 
 <Note>
 
-React 19'dan itibaren, `<SomeContext>` öğesini bir sağlayıcı olarak oluşturabilirsiniz.
+React 19’dan itibaren, `<SomeContext>`’i provider olarak render edebilirsiniz.
 
 React'in eski sürümlerinde `<SomeContext.Provider>` kullanın.
 

@@ -76,10 +76,10 @@ Aşağıdaki `<input>` proplar hem kontrollü hem de kontrolsüz girdilerle ilgi
 * `onChange`: [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. [Kontrollü girdiler](#controlling-an-input-with-a-state-variable) için gereklidir. Kullanıcı tarafından girdi değeri değiştiği anda (örneğin, klavyede her tuşa basıldığında) çalışır. [Tarayıcı `input` olayı] (https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi çalışır.
 * `onChangeCapture`: [Yakalama aşamasında] (/learn/responding-to-events#capture-phase-events) çalışan `onChange`'in bir versiyonudur.
 * [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Değer, kullanıcı tarafından değiştirildiği anda çalıştırılır. Tarihsel nedenlerden dolayı, React'te benzer şekilde çalışan `onChange`'i kullanmak yaygındır.
-* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan versiyonudur. 
+* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan versiyonudur.
 * [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Bir girdi, form gönderiminde doğrulamayı geçemezse çalıştırılır. Yerleşik `invalid` olayının aksine, React `onInvalid` olayı kabarcık şeklinde yayılır (bubbles).
 * `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyionudur.
-* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. `<input>` içindeki seçilen alanın değişmesiyle tetiklenir. React, `onSelect` olayını boş seçim ve düzenlemelerde de (seçimi etkileyebilir) çalıştırır. 
+* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. `<input>` içindeki seçilen alanın değişmesiyle tetiklenir. React, `onSelect` olayını boş seçim ve düzenlemelerde de (seçimi etkileyebilir) çalıştırır.
 * `onSelectCapture`: `onSelect`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyonudur.
 * [`pattern`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#pattern): String. `value` değerinin eşleşmesi gereken şablonu belirler.
 * [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder): String. Girdi değeri yokken ekranda soluk renkte görüntülenir.
@@ -214,7 +214,7 @@ export default function MyForm() {
             type="radio"
             name="myRadio"
             value="option2"
-            defaultChecked={true} 
+            defaultChecked={true}
           />
           Seçenek 2
         </label>
@@ -255,7 +255,7 @@ export default function MyForm() {
     // formDatayı fetch gövdesi olarak iletebilirsiniz:
     fetch('/some-api', { method: form.method, body: formData });
 
-    // formDatayı Düz nesne gibi de kullanabilirsiniz 
+    // formDatayı Düz nesne gibi de kullanabilirsiniz
     const formJson = Object.fromEntries(formData.entries());
     console.log(formJson);
   }
@@ -299,7 +299,7 @@ Tüm `<input>` elemanlarınıza bir `name` değeri verin, örneğin `<input name
 
 <Pitfall>
 
-Varsayılan olarak, `type` niteliği olmayan bir `<form>` içindeki bir `<button>` formu gönderir. Bu şaşırtıcı olabilir! Kendi özel `Button` React bileşeniniz varsa, `<button>` (type belirtilmeden) yerine [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) kullanmayı düşünün. Daha açık olmak için, formu gerçekten *göndermesi gereken* butonlar için `<button type="submit">` kullanın.  
+Varsayılan olarak, `type` niteliği olmayan bir `<form>` içindeki bir `<button>` formu gönderir. Bu şaşırtıcı olabilir! Kendi özel `Button` React bileşeniniz varsa, `<button>` (type belirtilmeden) yerine [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) kullanmayı düşünün. Daha açık olmak için, formu gerçekten *göndermesi gereken* butonlar için `<button type="submit">` kullanın.
 
 </Pitfall>
 
@@ -411,7 +411,7 @@ p { font-weight: bold; }
 
 <Pitfall>
 
-**Eğer `onChange` olay yöneticisi olmadan `value` değeri iletirseniz, girdiyi kullanmak imkansız olacaktır** 
+**Eğer `onChange` olay yöneticisi olmadan `value` değeri iletirseniz, girdiyi kullanmak imkansız olacaktır**
 Girdiyi `value` değeri ileterek kontrol ettiğinizde, girdiyi sürekli olarak o değeri kullanmaya *zorlarsınız.* Bu nedenle durum değişkeni olarak `value` değeri ilettiğiniz sırada `onChange` olay yöneticisiyle de senkron olarak bu durum değişkenini güncellemeyi unutursanız, React klavyeye her basıldığında değişiklikleri ageri alıp belirttiğiniz `value` değerine dönecektir.
 
 </Pitfall>

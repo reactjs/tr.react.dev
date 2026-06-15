@@ -73,7 +73,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Bir ekle 
+        Bir ekle
       </button>
     </div>
   );
@@ -103,7 +103,7 @@ label {
 
 </Sandpack>
 
-Bunlar ağaç olarak nasıl görünüyor:
+Bunlar tree olarak şöyle görünür:
 
 <DiagramGroup>
 
@@ -152,7 +152,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Bir ekle 
+        Bir ekle
       </button>
     </div>
   );
@@ -203,7 +203,7 @@ export default function App() {
   return (
     <div>
       <Counter />
-      {showB && <Counter />} 
+      {showB && <Counter />}
       <label>
         <input
           type="checkbox"
@@ -305,9 +305,9 @@ export default function App() {
   return (
     <div>
       {isFancy ? (
-        <Counter isFancy={true} /> 
+        <Counter isFancy={true} />
       ) : (
-        <Counter isFancy={false} /> 
+        <Counter isFancy={false} />
       )}
       <label>
         <input
@@ -513,9 +513,9 @@ export default function App() {
   return (
     <div>
       {isPaused ? (
-        <p>Sonra görüşürüz!</p> 
+        <p>Görüşürüz!</p>
       ) : (
-        <Counter /> 
+        <Counter />
       )}
       <label>
         <input
@@ -613,7 +613,7 @@ export default function App() {
     <div>
       {isFancy ? (
         <div>
-          <Counter isFancy={true} /> 
+          <Counter isFancy={true} />
         </div>
       ) : (
         <section>
@@ -1450,19 +1450,19 @@ export default function App() {
   if (reverse) {
     return (
       <>
-        <Field label="Ad" /> 
-        <Field label="Soyad" />
+        <Field label="Soyadı" />
+        <Field label="Adı" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field label="Ad" /> 
-        <Field label="Soyad" />
+        <Field label="Soyadı" />
+        <Field label="Adı" />
         {checkbox}
       </>
-    );    
+    );
   }
 }
 
@@ -1512,19 +1512,19 @@ export default function App() {
   if (reverse) {
     return (
       <>
-        <Field key="lastName" label="Ad" /> 
-        <Field key="firstName" label="Soyad" />
+        <Field key="lastName" label="Last name" />
+        <Field key="firstName" label="First name" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field key="firstName" label="Ad" /> 
-        <Field key="lastName" label="Soyad" />
+        <Field key="lastName" label="Soyadı" />
+        <Field key="firstName" label="Adı" />
         {checkbox}
       </>
-    );    
+    );
   }
 }
 
@@ -1907,25 +1907,25 @@ export default function Gallery() {
 
 let images = [{
   place: 'Penang, Malaysia',
-  src: 'https://i.imgur.com/FJeJR8M.jpg'
+  src: 'https://react.dev/images/docs/scientists/FJeJR8M.jpg'
 }, {
   place: 'Lisbon, Portugal',
-  src: 'https://i.imgur.com/dB2LRbj.jpg'
+  src: 'https://react.dev/images/docs/scientists/dB2LRbj.jpg'
 }, {
   place: 'Bilbao, Spain',
-  src: 'https://i.imgur.com/z08o2TS.jpg'
+  src: 'https://react.dev/images/docs/scientists/z08o2TS.jpg'
 }, {
   place: 'Valparaíso, Chile',
-  src: 'https://i.imgur.com/Y3utgTi.jpg'
+  src: 'https://react.dev/images/docs/scientists/Y3utgTi.jpg'
 }, {
   place: 'Schwyz, Switzerland',
-  src: 'https://i.imgur.com/JBbMpWY.jpg'
+  src: 'https://react.dev/images/docs/scientists/JBbMpWY.jpg'
 }, {
   place: 'Prague, Czechia',
-  src: 'https://i.imgur.com/QwUKKmF.jpg'
+  src: 'https://react.dev/images/docs/scientists/QwUKKmF.jpg'
 }, {
   place: 'Ljubljana, Slovenia',
-  src: 'https://i.imgur.com/3aIiwfm.jpg'
+  src: 'https://react.dev/images/docs/scientists/3aIiwfm.jpg'
 }];
 ```
 
@@ -1975,25 +1975,25 @@ export default function Gallery() {
 
 let images = [{
   place: 'Penang, Malaysia',
-  src: 'https://i.imgur.com/FJeJR8M.jpg'
+  src: 'https://react.dev/images/docs/scientists/FJeJR8M.jpg'
 }, {
   place: 'Lisbon, Portugal',
-  src: 'https://i.imgur.com/dB2LRbj.jpg'
+  src: 'https://react.dev/images/docs/scientists/dB2LRbj.jpg'
 }, {
   place: 'Bilbao, Spain',
-  src: 'https://i.imgur.com/z08o2TS.jpg'
+  src: 'https://react.dev/images/docs/scientists/z08o2TS.jpg'
 }, {
   place: 'Valparaíso, Chile',
-  src: 'https://i.imgur.com/Y3utgTi.jpg'
+  src: 'https://react.dev/images/docs/scientists/Y3utgTi.jpg'
 }, {
   place: 'Schwyz, Switzerland',
-  src: 'https://i.imgur.com/JBbMpWY.jpg'
+  src: 'https://react.dev/images/docs/scientists/JBbMpWY.jpg'
 }, {
   place: 'Prague, Czechia',
-  src: 'https://i.imgur.com/QwUKKmF.jpg'
+  src: 'https://react.dev/images/docs/scientists/QwUKKmF.jpg'
 }, {
   place: 'Ljubljana, Slovenia',
-  src: 'https://i.imgur.com/3aIiwfm.jpg'
+  src: 'https://react.dev/images/docs/scientists/3aIiwfm.jpg'
 }];
 ```
 
@@ -2069,7 +2069,7 @@ export default function Contact({ contact }) {
       <button onClick={() => {
         setExpanded(!expanded);
       }}>
-        E-postayı {expanded ? 'sakla' : 'göster'} 
+        E-postayı {expanded ? 'sakla' : 'göster'}
       </button>
     </>
   );

@@ -37,9 +37,9 @@ npm install --save-dev @types/react @types/react-dom
 
 `tsconfig.json` dosyanızda aşağıdaki derleyici seçeneklerinin ayarlanması gerekir::
 
-1. [`lib`](https://www.typescriptlang.org/tsconfig/#lib) içinde `dom` bulunmalıdır (Not: Eğer `lib` seçeneği belirtilmezse, `dom` varsayılan olarak dahildir).  
-2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx), geçerli seçeneklerden birine ayarlanmalıdır. Çoğu uygulama için `preserve` yeterli olacaktır.  
-   Eğer bir kütüphane yayımlıyorsanız, hangi değeri seçeceğinizi öğrenmek için [`jsx` dokümantasyonuna](https://www.typescriptlang.org/tsconfig/#jsx) bakın.  
+1. [`lib`](https://www.typescriptlang.org/tsconfig/#lib) içinde `dom` bulunmalıdır (Not: Eğer `lib` seçeneği belirtilmezse, `dom` varsayılan olarak dahildir).
+2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx), geçerli seçeneklerden birine ayarlanmalıdır. Çoğu uygulama için `preserve` yeterli olacaktır.
+   Eğer bir kütüphane yayımlıyorsanız, hangi değeri seçeceğinizi öğrenmek için [`jsx` dokümantasyonuna](https://www.typescriptlang.org/tsconfig/#jsx) bakın.
 
 ## React Bileşenleri ile TypeScript {/*typescript-with-react-components*/}
 

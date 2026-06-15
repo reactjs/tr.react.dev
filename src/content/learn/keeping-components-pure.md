@@ -1,5 +1,5 @@
 ---
-title: Bileşenleri Saf Tutmak 
+title: Bileşenleri Saf Tutmak
 ---
 
 <Intro>
@@ -18,7 +18,7 @@ Bazı JavaScript fonksiyonları *saf* olarak adlandırılır. Saf fonksiyonlar s
 
 ## Saflık: Formüller olarak bileşenler {/*purity-components-as-formulas*/}
 
-Bilgisayar biliminde (ve özellikle fonksiyonel programlama dünyasında), [saf bir fonksiyon](https://wikipedia.org/wiki/Pure_function) aşağıdaki özelliklere sahip fonksiyonlardır: 
+Bilgisayar biliminde (ve özellikle fonksiyonel programlama dünyasında), [saf bir fonksiyon](https://wikipedia.org/wiki/Pure_function) aşağıdaki özelliklere sahip fonksiyonlardır:
 
 * **Kendi işine bakar.** Çağrılmadan önce var olan herhangi bir nesneyi ve objeyi değiştirmez.
 * **Aynı girdi, aynı çıktı.** Aynı girdiler verildiğinde, saf bir fonksiyon her zaman aynı sonucu döndürmelidir.
@@ -27,13 +27,13 @@ Saf fonksiyonların bir örneğini zaten biliyor olabilirsiniz: matematikteki fo
 
 Bu formülü ele alalım: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-Eğer <Math><MathI>x</MathI> = 2</Math> ise <Math><MathI>y</MathI> = 4</Math>'tür. Her zaman. 
+Eğer <Math><MathI>x</MathI> = 2</Math> ise <Math><MathI>y</MathI> = 4</Math>. Her zaman.
 
-Eğer <Math><MathI>x</MathI> = 3</Math> ise <Math><MathI>y</MathI> = 6</Math>'dır. Her zaman. 
+Eğer <Math><MathI>x</MathI> = 3</Math> ise <Math><MathI>y</MathI> = 6</Math>. Her zaman.
 
-Eğer <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> günün zamanına veya borsanın durumuna bağlı olarak bazen <Math>9</Math> ya da <Math>–1</Math> veya <Math>2.5</Math> olmaz. 
+Eğer <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> günün saatine veya borsanın durumuna bağlı olarak bazen <Math>9</Math>, <Math>–1</Math> ya da <Math>2.5</Math> olmaz.
 
-Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> _her zaman_ <Math>6</Math>'dır. 
+Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> *her zaman* <Math>6</Math> olur.
 
 Eğer bunu bir JavaScript fonksiyonuna çevirseydik, şöyle görünürdü:
 
@@ -52,7 +52,7 @@ React bu konseptin etrafında tasarlanmıştır. **React yazdığınız her bile
 ```js src/App.js
 function Recipe({ drinkers }) {
   return (
-    <ol>    
+    <ol>
       <li>Boil {drinkers} cups of water.</li>
       <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
       <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
@@ -75,14 +75,15 @@ export default function App() {
 
 </Sandpack>
 
-`Drinkers` parametresine `{2}` değerini verip, `Recipe'ye` geçerseniz, `2 bardak su` içeren JSX'i döndürür. Her zaman.
+`Recipe`’ye `drinkers={2}` pass ettiğinizde, `2 cups of water` içeren JSX döndürür. Her zaman.
 
 `Drinkers` parametresine `{4}` değerini verip, `4 bardak su` içeren JSX’i döndürür. Her zaman.
 
+Tıpkı bir math formula gibi.
 
 Tıpkı bir matematik formülü gibi.
 
-Bileşenlerinizi de bir tarif gibi düşünebilirsiniz: bunları takip eder ve pişirme esnasında yeni malzemeler eklemezseniz, her zaman aynı yemeği yaparsınız. Bu “yemek”, bileşenin React’e [render](/learn/render-and-commit) için sağladığı JSX’tir. 
+Bileşenlerinizi de bir tarif gibi düşünebilirsiniz: bunları takip eder ve pişirme esnasında yeni malzemeler eklemezseniz, her zaman aynı yemeği yaparsınız. Bu “yemek”, bileşenin React’e [render](/learn/render-and-commit) için sağladığı JSX’tir.
 
 <Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add x spoons of tea and 0.5x spoons of spices, and 0.5x cups of milk" />
 
@@ -216,18 +217,19 @@ Saf işlevler yazmak biraz alışkanlık ve disiplin gerektirir. Ama aynı zaman
 
 <Recap>
 
-* Bir bileşen saf olmalıdır, yani:
-  * **Kendi işine bakar.** İşlemeden önce var olan hiçbir nesneyi veya değişkeni değiştirmemelidir.
-  * **Aynı girdiler, aynı çıktılar.** Aynı girdiler verildiğinde, bir bileşen her zaman aynı JSX'i döndürmelidir. 
-* Oluşturma herhangi bir zamanda gerçekleşebilir, bu nedenle bileşenler birbirinin oluşturma sırasına bağlı olmamalıdır.
-* Bileşenlerinizin render için kullandığı girdilerin hiçbirini mutasyona uğratmamalısınız. Buna props, state ve context dahildir. Ekranı güncellemek için, önceden var olan nesneleri değiştirmek yerine [state "oluşturun".](/learn/state-a-components-memory)
-* Döndürdüğünüz JSX'te bileşeninizin mantığını ifade etmeye çalışın. "Bir şeyleri değiştirmeniz" gerektiğinde, bunu genellikle bir olay yöneticilerinde yapmak isteyeceksiniz. Son çare olarak, `useEffect`'i kullanabilirsiniz.
-* Saf fonksiyonlar yazmak biraz pratik gerektirir, ancak React'in paradigmasının gücünü açığa çıkarır.
+* Bir component pure olmalıdır, yani:
+
+  * **Kendi işine bakar.** Rendering’den önce var olan hiçbir object’i veya variable’ı değiştirmemelidir.
+  * **Aynı input’lar, aynı output.** Aynı input’lar verildiğinde, bir component her zaman aynı JSX’i return etmelidir.
+* Rendering herhangi bir zamanda gerçekleşebilir, bu yüzden component’ler birbirlerinin rendering sırasına bağlı olmamalıdır.
+* Component’lerinizin rendering için kullandığı input’ların hiçbirini mutate etmemelisiniz. Buna props, state ve context dahildir. Ekranı update etmek için, önceden var olan object’leri mutate etmek yerine ["set" state](/learn/state-a-components-memory) kullanın.
+* Component logic’inizi return ettiğiniz JSX içinde ifade etmeye çalışın. "Bir şeyleri değiştirmek" gerektiğinde, bunu genellikle bir event handler içinde yapmak istersiniz. Son çare olarak `useEffect` kullanabilirsiniz.
+* Pure function yazmak biraz pratik gerektirir, ancak React’in paradigm’ının gücünü ortaya çıkarır.
 
 </Recap>
 
 
-  
+
 <Challenges>
 
 #### Bozuk bir saati düzelt {/*fix-a-broken-clock*/}
@@ -452,7 +454,7 @@ export default function App() {
 ```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -550,7 +552,7 @@ export default function App() {
 ```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'

@@ -12,7 +12,7 @@ Bir bileşenin "hatırlamasını" istediğiniz bilgi varsa, ancak bu bilginin [y
 
 - Bir bileşene ref nasıl eklenir
 - Bir ref'in değerini nasıl güncelleyebilirsiniz
-- Ref'lerin state'ten farkı nedir 
+- Ref'lerin state'ten farkı nedir
 - Ref'leri güvenli bir şekilde nasıl kullanabilirsiniz
 
 </YouWillLearn>
@@ -34,8 +34,8 @@ const ref = useRef(0);
 `useRef` size aşağıdaki gibi bir nesne döndürür:
 
 ```js
-{ 
-  current: 0 // useRef'a geçirdiğiniz değer
+{
+  current: 0 // useRef’e pass ettiğiniz value
 }
 ```
 
@@ -285,7 +285,7 @@ console.log(ref.current); // 5
 
 Bunun nedeni **ref'in kendisinin normal bir JavaScript nesnesi olması** ve öyle davranılmasıdır.
 
- 
+
 Ayrıca bir ref ile çalışırken [mutasyondan kaçınmaya](/learn/updating-objects-in-state) gerek yoktur. Mutasyona uğrayan nesne render işlemi için kullanılmıyorsa, React ref veya içeriğiyle ne yaptığınızı umursamaz.
 
 ## Ref'ler ve DOM {/*refs-and-the-dom*/}
