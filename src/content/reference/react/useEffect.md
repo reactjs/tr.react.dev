@@ -1052,8 +1052,8 @@ Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane i
 - **Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, onun built-in data fetching mekanizmasını kullanın.** Modern React framework’leri, verimli çalışan ve yukarıdaki sorunlardan etkilenmeyen entegre data fetching mekanizmalarına sahiptir.
 - **Aksi durumda, client-side cache kullanmayı veya kendi cache çözümünüzü geliştirmeyi düşünün.** Yaygın open source çözümler arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altında Effects kullanırsınız ancak istekleri dedupe etmek, response’ları cache’lemek ve network waterfall’larını önlemek (veriyi preload ederek veya data requirement’ları route’lara hoist ederek) için ek logic yazarsınız.
 
-- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**  
-  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.  
+- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**
+  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest/), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.
   Kendi çözümünü de geliştirebilirsin; bu durumda alt seviyede *Effect*’leri kullanırsın, ancak ayrıca istekleri yinelenmeden önleme (deduplication), yanıtları önbelleğe alma (caching) ve ağ darboğazlarını (network waterfalls) önleme gibi mantıkları da eklersin (örneğin verileri önceden yükleyerek veya veri gereksinimlerini route seviyesine taşıyarak).
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Effect'ler içinde veri getirmeye devam edebilirsiniz.
@@ -1768,7 +1768,7 @@ Geliştirmede Strict modu açıkken, React kurulum ve temizleme işlemini asıl 
 
 Bu, Effect mantığınızın doğru uygunlanıdığını doğrulayan bir stres testidir. Eğer bu, gözle görülebilir sorunlara neden oluyorsa, temizleme fonksiyonunuzda mantık hatası vardır. Temizleme fonksiyonu, kurulum fonksiyonunun yaptığı her şeyi durdurmalı veya geri almalıdır. Temel kural, kullanıcı bir kez çağrılan kurulum (son üründe olduğu gibi) ile *kurulum* → *temizleme* → *kurulum* sekansı (geliştirme sırasında olduğu gibi) arasındaki farkı ayırt etmemelidir.
 
-[Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin. 
+[Bunun nasıl hataları bulmanıza yardımcı olacağı](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed) ve [mantığınızı nasıl düzelteceğiniz](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) hakkında daha fazla bilgi edinin.
 
 ---
 
@@ -1824,7 +1824,7 @@ Sorunu çözmeye başlamadan önce, Effect'inizin harici bir sisteme (DOM, ağ v
 
 Harici bir sistem yoksa, [Effect'i tamamen kaldırmanın](/learn/you-might-not-need-an-effect) mantığınızı basitleştirip basitleştirmeyeceğine bakın.
 
-Eğer gerçekten harici bir sistem ile senkronizasyon yapıyorsanız, Effect'inizin neden ve hangi koşullarda state'i güncellemesi gerektiğini düşünün. Bileşeninizin görsel çıktısını etkileyen bir değişiklik mi oldu? Render sırasında kullanılmayan bazı verileri takip etmeniz gerekiyorsa, [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (yeniden render tetiklemez) daha uygun olabilir. Effect'inizin state'i gereğinden fazla güncellemediğini (ve yeniden render'lar tetiklemediğini) doğrulayın. 
+Eğer gerçekten harici bir sistem ile senkronizasyon yapıyorsanız, Effect'inizin neden ve hangi koşullarda state'i güncellemesi gerektiğini düşünün. Bileşeninizin görsel çıktısını etkileyen bir değişiklik mi oldu? Render sırasında kullanılmayan bazı verileri takip etmeniz gerekiyorsa, [ref](/reference/react/useRef#referencing-a-value-with-a-ref) (yeniden render tetiklemez) daha uygun olabilir. Effect'inizin state'i gereğinden fazla güncellemediğini (ve yeniden render'lar tetiklemediğini) doğrulayın.
 
 Son olarak, Effect'iniz state'i doğru zamanda güncelliyorsa ancak yine de bir döngü söz konusuysa, bunun nedeni, state güncellemesinin Effect'in bağımlılıklarından birinin değişmesine neden olmasıdır. [Bağımlılık değişikliklerinden kaynaklı hataların nasıl ayıklanacağını okuyun.](/reference/react/useEffect#my-effect-runs-after-every-re-render)
 

@@ -1,5 +1,5 @@
 ---
-title: Bileşenleri Saf Tutmak 
+title: Bileşenleri Saf Tutmak
 ---
 
 <Intro>
@@ -18,7 +18,7 @@ Bazı JavaScript fonksiyonları *saf* olarak adlandırılır. Saf fonksiyonlar s
 
 ## Saflık: Formüller olarak bileşenler {/*purity-components-as-formulas*/}
 
-Bilgisayar biliminde (ve özellikle fonksiyonel programlama dünyasında), [saf bir fonksiyon](https://wikipedia.org/wiki/Pure_function) aşağıdaki özelliklere sahip fonksiyonlardır: 
+Bilgisayar biliminde (ve özellikle fonksiyonel programlama dünyasında), [saf bir fonksiyon](https://wikipedia.org/wiki/Pure_function) aşağıdaki özelliklere sahip fonksiyonlardır:
 
 * **Kendi işine bakar.** Çağrılmadan önce var olan herhangi bir nesneyi ve objeyi değiştirmez.
 * **Aynı girdi, aynı çıktı.** Aynı girdiler verildiğinde, saf bir fonksiyon her zaman aynı sonucu döndürmelidir.
@@ -83,7 +83,7 @@ Tıpkı bir math formula gibi.
 
 Tıpkı bir matematik formülü gibi.
 
-Bileşenlerinizi de bir tarif gibi düşünebilirsiniz: bunları takip eder ve pişirme esnasında yeni malzemeler eklemezseniz, her zaman aynı yemeği yaparsınız. Bu “yemek”, bileşenin React’e [render](/learn/render-and-commit) için sağladığı JSX’tir. 
+Bileşenlerinizi de bir tarif gibi düşünebilirsiniz: bunları takip eder ve pişirme esnasında yeni malzemeler eklemezseniz, her zaman aynı yemeği yaparsınız. Bu “yemek”, bileşenin React’e [render](/learn/render-and-commit) için sağladığı JSX’tir.
 
 <Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add x spoons of tea and 0.5x spoons of spices, and 0.5x cups of milk" />
 

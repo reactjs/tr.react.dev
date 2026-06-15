@@ -38,7 +38,7 @@ Prop drilling
 
 </DiagramGroup>
 
-Veriyi prop'lar ile aktarmadan ağaçtaki bileşenlere "ışınlamanın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün! 
+Veriyi prop'lar ile aktarmadan ağaçtaki bileşenlere "ışınlamanın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün!
 
 ## Context: prop'ları aktarmanın alternatif bir yolu {/*context-an-alternative-to-passing-props*/}
 
@@ -977,17 +977,17 @@ export const places = [{
   imageId: 'DgXHVwu'
 }, {
   id: 3,
-  name: 'Brezilya, Rio de Janeiro’daki Selarón Merdivenleri', 
+  name: 'Brezilya, Rio de Janeiro’daki Selarón Merdivenleri',
   description: 'Bu landmark, Şili doğumlu sanatçı Jorge Selarón tarafından "Brezilya halkına bir saygı duruşu" olarak oluşturuldu.', imageId: 'aeO3rpI'
 }, {
-  id: 4, 
-  name: 'Burano, İtalya', 
-  description: 'Evler, geçmişi 16. yüzyıla dayanan belirli bir color system’e göre boyanmıştır.', 
+  id: 4,
+  name: 'Burano, İtalya',
+  description: 'Evler, geçmişi 16. yüzyıla dayanan belirli bir color system’e göre boyanmıştır.',
   imageId: 'kxsph5C'
 }, {
-  id: 5, 
-  name: 'Chefchaouen, Fas', 
-  description: 'Evlerin neden maviye boyandığına dair birkaç teori vardır; bunlar arasında rengin sivrisinekleri uzaklaştırması veya gökyüzünü ve cenneti sembolize etmesi bulunur.', 
+  id: 5,
+  name: 'Chefchaouen, Fas',
+  description: 'Evlerin neden maviye boyandığına dair birkaç teori vardır; bunlar arasında rengin sivrisinekleri uzaklaştırması veya gökyüzünü ve cenneti sembolize etmesi bulunur.',
   imageId: 'rTqKo46'
 }, {
   id: 6,

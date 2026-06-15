@@ -18,7 +18,7 @@ React, kullanıcı arayüzleri (UI) render etmek için kullanılan bir JavaScrip
 * [Bileşenleri koşullu olarak nasıl render edebilirim](/learn/conditional-rendering)
 * [Birden çok bileşeni aynı anda nasıl render edebilirim](/learn/rendering-lists)
 * [Bileşenleri saf tutarak kafa karışıklığına neden olan hatalardan nasıl kaçınılır](/learn/keeping-components-pure)
-* [Kullanıcı arayüzünüzü ağaçlar olarak anlamak neden yararlıdır](/learn/understanding-your-ui-as-a-tree) 
+* [Kullanıcı arayüzünüzü ağaçlar olarak anlamak neden yararlıdır](/learn/understanding-your-ui-as-a-tree)
 
 </YouWillLearn>
 

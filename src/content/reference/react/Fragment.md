@@ -29,7 +29,7 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
-- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)  
+- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)
 - <CanaryBadge /> **optional** `ref`: Bir ref objesi (örneğin [`useRef`](/reference/react/useRef) ile oluşturulmuş) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim kurmak için yöntemler içeren bir `FragmentInstance`'ı ref değeri olarak sağlar.
 
 ### <CanaryBadge /> FragmentInstance {/*fragmentinstance*/}
@@ -37,8 +37,8 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler içeren bir `FragmentInstance` nesnesi sağlar:
 
 **Olay yönetimi yöntemleri:**
-- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.  
-- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.  
+- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.
+- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.
 - `dispatchEvent(event)`: Fragment'in sanal bir çocuğuna bir olay gönderir; eklenen dinleyicileri çağırır ve DOM üstüne kabarcık yapabilir.
 
 **Layout method’ları:**
@@ -50,12 +50,12 @@ Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğüm
 - `getRootNode()`: Fragment’in parent DOM node’unu içeren root node’u return eder.
 
 **Odak (focus) yönetimi yöntemleri:**
-- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
-- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
+- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.
+- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.
 - `blur()`: Eğer `document.activeElement` Fragment içindeyse odak kaldırılır.
 
 **Gözlemleme (observer) yöntemleri:**
-- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.  
+- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.
 - `unobserveUsing(observer)`: Belirtilen observer ile Fragment'in DOM çocuklarını gözlemlemeyi durdurur.
 
 #### Uyarılar {/*caveats*/}

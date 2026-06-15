@@ -58,14 +58,14 @@ function useCSS(rule) {
 * `useInsertionEffect` içerisinden state'i güncelleyemezsiniz.
 * `useInsertionEffect` çalıştığı sırada, referanslar (refler) henüz eklenmemiştir.
 * `useInsertionEffect` DOM güncellendikten önce ya da sonra çalışabilir. DOM'un belirli bir zamanda güncelleniyor olmasına güvenmemelisiniz.
-* Her efekt için temizleme (cleanup) ve kurulum (setup) fonksiyonlarını çalıştıran diğer efekt tiplerinin aksine, `useInsertionEffect` her seferinde tek bir bileşen için hem temizleme hem de kurulum fonksiyonlarını çalıştırır. Bu, temizleme ve kurulum fonksiyonlarının araya girmesine sebep olur. 
+* Her efekt için temizleme (cleanup) ve kurulum (setup) fonksiyonlarını çalıştıran diğer efekt tiplerinin aksine, `useInsertionEffect` her seferinde tek bir bileşen için hem temizleme hem de kurulum fonksiyonlarını çalıştırır. Bu, temizleme ve kurulum fonksiyonlarının araya girmesine sebep olur.
 ---
 
 ## Kullanım {/*usage*/}
 
 ### CSS-in-JS kütüphanelerinden dinamik stilleri ekleme {/*injecting-dynamic-styles-from-css-in-js-libraries*/}
 
-Geleneksel olarak, React bileşenlerini saf CSS kullanarak stillendirirsiniz. 
+Geleneksel olarak, React bileşenlerini saf CSS kullanarak stillendirirsiniz.
 
 ```js
 // In your JS file:
@@ -84,11 +84,11 @@ Bazı takımlar, CSS dosyaları yazmak yerine stilleri direkt olarak Javascript 
 CSS-in-JS kullanıyorsanız, genellikle ilk iki yaklaşımın (Statik stiller için CSS dosyaları, dinamik stiller için satır içi stiller) bir kombinasyonunu öneriyoruz. **`<style>` etiketi eklenmesini iki sebeple önermiyoruz:**
 
 1. Çalışma zamanı ekleme yapılması tarayıcıları stilleri birçok kez yeniden hesaplama yapması için zorlar.
-2. Çalışma zamanı ekleme yapılması, React yaşam döngüsünde yanlış zamanda gerçekleşirse oldukça yavaş olabilir. 
+2. Çalışma zamanı ekleme yapılması, React yaşam döngüsünde yanlış zamanda gerçekleşirse oldukça yavaş olabilir.
 
 İlk problem çözülemezken, ama `useInsertionEffect` hooku ikinci problemi çözmenize yardımcı olur.
 
-Herhangi bir layout efektinden önce stilleri eklemek için `useInsertionEffect` hookunu çağırın: 
+Herhangi bir layout efektinden önce stilleri eklemek için `useInsertionEffect` hookunu çağırın:
 
 ```js {4-11}
 // Inside your CSS-in-JS library

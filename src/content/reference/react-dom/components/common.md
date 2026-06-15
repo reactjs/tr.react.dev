@@ -833,7 +833,7 @@ export default function Avatar({ user }) {
 
 CSS sınıflarını koşulsal olarak uygulamak için `className` string'ini JavaScript'i kullanarak kendiniz üretmeniz gerekiyor.
 
-Örneğin, `className={'row ' + (isSelected ? 'selected': '')}`, `isSelected`'ın `true` olup olmamasına göre `className="row"` veya `className="row selected"` üretecektir. 
+Örneğin, `className={'row ' + (isSelected ? 'selected': '')}`, `isSelected`'ın `true` olup olmamasına göre `className="row"` veya `className="row selected"` üretecektir.
 
 Bunu daha okunaklı hale getirmek için [`classnames`](https://github.com/JedWatson/classnames) gibi minik yardımcı bir kütüphane kullanabilirsiniz:
 
@@ -965,7 +965,7 @@ const md = new Remarkable();
 
 function renderMarkdownToHTML(markdown) {
   // Bu yöntem, YALNIZCA sonuçta oluşan HTML
-  // aynı kullanıcıya gösterildiği ve Markdown 
+  // aynı kullanıcıya gösterildiği ve Markdown
   // ayrıştırıcısında hata olmadığına
   // emin olduğunuz için güvenlidir.
   const renderedHTML = md.render(markdown);

@@ -231,7 +231,7 @@ Ayrıca `TaskList` olay yöneticilerini `Task`'e aktarır:
 
 Bunun gibi küçük bir örnekte bu yapı iyi çalışır, ancak ortada onlarca veya yüzlerce bileşen varsa, tüm state ve fonksiyonları aktarmak oldukça sinir bozucu olabilir!
 
-Bu nedenle, bunları proplar aracılığıyla aktarmaya alternatif olarak, hem `tasks` state'ini hem de `dispatch` fonksiyonunu [context'e](/learn/passing-data-deeply-with-context) yerleştirmek isteyebilirsiniz. **Bu şekilde, hiyerarşide `TaskApp` altındaki herhangi bir bileşen görevleri okuyabilir ve tekrarlanan "prop drilling" olmadan eylemleri gönderebilir.**  
+Bu nedenle, bunları proplar aracılığıyla aktarmaya alternatif olarak, hem `tasks` state'ini hem de `dispatch` fonksiyonunu [context'e](/learn/passing-data-deeply-with-context) yerleştirmek isteyebilirsiniz. **Bu şekilde, hiyerarşide `TaskApp` altındaki herhangi bir bileşen görevleri okuyabilir ve tekrarlanan "prop drilling" olmadan eylemleri gönderebilir.**
 
 Burada bir reducer'ı context ile nasıl birleştirebileceğiniz anlatılmıştır:
 

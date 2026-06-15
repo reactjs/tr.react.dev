@@ -197,13 +197,13 @@ Bu, son adımda React'in sadece `<h1>` elementinin içeriğini yeni `time` ile g
 
 ## Sonsöz: Tarayıcının boyanması {/*epilogue-browser-paint*/}
 
-Render tamamlandıktan ve React DOM'u güncelledikten sonra, tarayıcı ekranı yeniden boyayacaktır. Bu süreç "tarayıcının render etmesi" olarak bilinsede, bu dökümantasyon boyunca kafa karışıklığını engellemk için biz ona "boyama" diyeceğiz. 
+Render tamamlandıktan ve React DOM'u güncelledikten sonra, tarayıcı ekranı yeniden boyayacaktır. Bu süreç "tarayıcının render etmesi" olarak bilinsede, bu dökümantasyon boyunca kafa karışıklığını engellemk için biz ona "boyama" diyeceğiz.
 
 <Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Bir React uygulamasında herhangi bir ekran güncellemesi üç adımda olur: 
+* Bir React uygulamasında herhangi bir ekran güncellemesi üç adımda olur:
   1. Tetikle
   2. Render et
   3. İşle

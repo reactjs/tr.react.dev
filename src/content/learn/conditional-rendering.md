@@ -12,7 +12,7 @@ React bileşenlerinizde çoğu zaman farklı koşullar altında farklı şeyler 
 
 * Bir koşula bağlı olarak farklı JSX nasıl döndürülür
 * Koşullu olarak bir JSX parçası nasıl dahil edilir veya hariç tutulur
-* React kod tabanında karşınıza çıkacak yaygın kullanılan kısayol koşul sözdizimleri 
+* React kod tabanında karşınıza çıkacak yaygın kullanılan kısayol koşul sözdizimleri
 
 </YouWillLearn>
 
@@ -52,7 +52,7 @@ export default function PackingList() {
 
 </Sandpack>
 
-Bazı `Item` bileşenlerinin `isPacked` prop'unun `false` (`yanlış`) yerine `true` (`doğru`) olduğuna dikkat edin. Eğer bileşen prop'u `isPacked={true}` ise eşyaların yanında bir tik (✅) işareti olmalı. 
+Bazı `Item` bileşenlerinin `isPacked` prop'unun `false` (`yanlış`) yerine `true` (`doğru`) olduğuna dikkat edin. Eğer bileşen prop'u `isPacked={true}` ise eşyaların yanında bir tik (✅) işareti olmalı.
 
 Bunu bir [`if`/`else` ifadesi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) olarak şöyle yazabilirsiniz:
 
@@ -445,7 +445,7 @@ Eğer JavaScript diline aşina değilseniz, bu yöntem çeşitliliği ilk başta
 * Bir JSX ifadesini koşullu olarak bir değişkene atayabilir ve süslü parantez kullanarak ("{}") başka bir JSX'in içine dahil edebilirsiniz.
 * JSX'te, `{cond ? <A /> : <B />}` ifadesi şu anlama gelmektedir: *"eğer `cond` varsa, `<A />`'yı render et, aksi halde `<B />`'yi render et"*.
 * JSX'te, `{cond && <A />}` ifadesi şu anlama gelmektedir: *"eğer `cond` varsa, `<A />`'yı render et, aksi halde hiçbir şey render etme"*.
-* Kod tabanlarında bu kısayolları görmek yaygındır, ancak kendiniz düz `if` ifadesini tercih edebilirsiniz. 
+* Kod tabanlarında bu kısayolları görmek yaygındır, ancak kendiniz düz `if` ifadesini tercih edebilirsiniz.
 
 </Recap>
 

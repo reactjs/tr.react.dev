@@ -288,7 +288,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Sorunu bulabilir misin ? 
+Sorunu bulabilir misin ?
 
 <Hint>Süslü parantezlerin içine ne koyduğumuza bakalım. Oraya doğru şeyi mi koyuyoruz?</Hint>
 

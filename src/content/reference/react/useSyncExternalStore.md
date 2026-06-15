@@ -249,7 +249,7 @@ Usually you won't write `useSyncExternalStore` directly in your components. Inst
 
 For example, this custom `useOnlineStatus` Hook tracks whether the network is online:
 
-Genellikle `useSyncExternalStore`'u bileşenlerinizde doğrudan kullanmazsınız. Bunun yerine kendi özel Hook'unuzda çağırırsınız. 
+Genellikle `useSyncExternalStore`'u bileşenlerinizde doğrudan kullanmazsınız. Bunun yerine kendi özel Hook'unuzda çağırırsınız.
 Böylece aynı harici depoyu farklı bileşenlerden de kullanabilirsiniz.
 
 Örneğin, örnekteki özel `useOnlineStatus` Hook'u ağın çevrimiçi olup olmadığını takip eder:
