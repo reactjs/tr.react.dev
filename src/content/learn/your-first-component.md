@@ -163,17 +163,10 @@ Hatta `Profile` bileşeni daha da fazla HTML içermektedir:: `<img />`. Sonuçta
 
 ```html
 <section>
-<<<<<<< HEAD
-  <h1>Muhteşem bilim insanları</h1>
-  <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
-  <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
-  <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
-=======
-  <h1>Amazing scientists</h1>
+  <h1>Harika bilim insanları</h1>
   <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
   <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
   <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
 </section>
 ```
 
