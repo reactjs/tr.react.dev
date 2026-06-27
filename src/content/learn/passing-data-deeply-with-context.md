@@ -962,7 +962,7 @@ function PlaceImage({ place, imageSize }) {
 ```js src/data.js
 export const places = [{
   id: 0,
-  name: 'Cape Town, Güney Afrika\'da Bo-Kaap',
+  name: 'Güney Afrika, Cape Town’daki Bo-Kaap',
   description: 'Evler için parlak renkler seçme geleneği 20. yüzyılın sonlarında başlamıştır.',
   imageId: 'K9HVAGH'
 }, {
@@ -991,8 +991,8 @@ export const places = [{
   imageId: 'rTqKo46'
 }, {
   id: 6,
-  name: 'Busan, Güney Kore\'de Gamcheon Kültür Köyü',
-  description: '2009 yılında köy, evleri boyayanak, sergiler ve sanat gösterileri düzenlenerek bir kültür merkezi haline getirildi.',
+  name: 'Güney Kore, Busan’daki Gamcheon Kültür Köyü',
+  description: '2009 yılında köy, evler boyanarak, sergiler ve sanat gösterileri düzenlenerek bir kültür merkezi haline getirildi.',
   imageId: 'ZfQOOzf'
 }];
 ```
@@ -1100,28 +1100,28 @@ export const ImageSizeContext = createContext(500);
 ```js src/data.js
 export const places = [{
   id: 0,
-  name: 'Cape Town, Güney Afrika\'da Bo-Kaap',
+  name: 'Güney Afrika, Cape Town’daki Bo-Kaap',
   description: 'Evler için parlak renkler seçme geleneği 20. yüzyılın sonlarında başlamıştır.',
   imageId: 'K9HVAGH'
 }, {
   id: 1,
-  name: 'Rainbow Village in Taichung, Taiwan',
-  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
+  name: 'Tayvan, Taichung’daki Rainbow Village',
+  description: 'Evleri yıkımdan kurtarmak için yerel bir sakin olan Huang Yung-Fu, 1924 yılında bu 1.200 evin tamamını boyadı.',
   imageId: '9EAYZrt'
 }, {
   id: 2,
-  name: 'Macromural de Pachuca, Mexico',
-  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
+  name: 'Meksika, Pachuca’daki Macromural',
+  description: 'Bir yamaç mahallesindeki evleri kaplayan, dünyanın en büyük mural’larından biri.',
   imageId: 'DgXHVwu'
 }, {
   id: 3,
-  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
-  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
+  name: 'Brezilya, Rio de Janeiro’daki Selarón Merdivenleri',
+  description: 'Bu landmark, Şili doğumlu sanatçı Jorge Selarón tarafından "Brezilya halkına bir saygı duruşu" olarak oluşturuldu.',
   imageId: 'aeO3rpI'
 }, {
   id: 4,
-  name: 'Burano, Italy',
-  description: 'The houses are painted following a specific color system dating back to 16th century.',
+  name: 'Burano, İtalya',
+  description: 'Evler, geçmişi 16. yüzyıla dayanan belirli bir color system’e göre boyanmıştır.',
   imageId: 'kxsph5C'
 }, {
   id: 5,
@@ -1130,8 +1130,8 @@ export const places = [{
   imageId: 'rTqKo46'
 }, {
   id: 6,
-  name: 'Busan, Güney Kore\'de Gamcheon Kültür Köyü',
-  description: '2009 yılında köy, evleri boyayanak, sergiler ve sanat gösterileri düzenlenerek bir kültür merkezi haline getirildi.',
+  name: 'Güney Kore, Busan’daki Gamcheon Kültür Köyü',
+  description: '2009 yılında köy, evler boyanarak, sergiler ve sanat gösterileri düzenlenerek bir kültür merkezi haline getirildi.',
   imageId: 'ZfQOOzf'
 }];
 ```

@@ -414,7 +414,6 @@ Düğmelerden birisine tıkladığınızda:
 
 1. React, `<button>`’a pass edilen `onClick` handler’ını çağırır.
 2. `Button` içinde tanımlanan bu handler şunları yapar:
-
    * `e.stopPropagation()` çağırır ve event’in daha fazla bubble etmesini engeller.
    * `Toolbar` component’inden prop olarak pass edilen `onClick` function’ını çağırır.
 3. `Toolbar` component’i içinde tanımlanan bu function, button’ın kendi alert’ini gösterir.

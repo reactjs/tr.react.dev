@@ -245,71 +245,71 @@ export const sculptureList = [{
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: 'Bu devasa (75 ft. veya 23 m) gümüş çiçek Buenos Aires’te yer alır. Akşamları veya güçlü rüzgarlar estiğinde taç yapraklarını kapatacak, sabahları ise açacak şekilde tasarlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı, ayna benzeri taç yaprakları ve güçlü erkek organları olan devasa metalik bir çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson; eşitlik, sosyal adalet ve insanlığın temel ve ruhani nitelikleriyle ilgilenmesiyle biliniyordu. Bu büyük (7 ft. veya 2,13 m) bronz eser, onun "evrensel insanlık duygusuyla harmanlanmış sembolik bir Siyah varlık" olarak tanımladığı şeyi temsil eder.',
   url: 'https://react.dev/images/docs/scientists/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'Bir insan başını tasvir eden heykel, her zaman var olan ve ağırbaşlı bir izlenim verir. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Paskalya Adası’nda bulunan, erken dönem Rapa Nui halkı tarafından oluşturulmuş 1.000 adet moai veya günümüze ulaşmış anıtsal heykel vardır. Bazılarına göre bunlar tanrılaştırılmış ataları temsil ediyordu.',
   url: 'https://react.dev/images/docs/scientists/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Orantısız derecede büyük başlara ve ciddi yüz ifadelerine sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nana’lar, kadınlık ve anneliğin sembolleri olan zafer kazanmış varlıklardır. Başlangıçta Saint Phalle, Nana’lar için kumaş ve buluntu nesneler kullandı; daha sonra daha canlı bir etki elde etmek için polyesteri dahil etti.',
   url: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Renkli bir kostüm içinde neşe saçan, oyunbaz şekilde dans eden büyük bir kadın figürünün mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: 'Bu soyut bronz heykel, Yorkshire Sculpture Park’ta yer alan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini oluşturmak yerine insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.',
   url: 'https://react.dev/images/docs/scientists/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Üst üste yerleştirilmiş üç öğeden oluşan ve bir insan figürünü hatırlatan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşak ahşap oymacısının soyundan gelen Fakeye’nin çalışmaları, geleneksel ve çağdaş Yoruba temalarını harmanladı.",
   url: 'https://react.dev/images/docs/scientists/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş bir atın üzerinde, odaklanmış yüz ifadeli bir savaşçıyı tasvir eden ayrıntılı bir ahşap heykel.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, parçalanmış beden heykellerini gençliğin ve güzelliğin kırılganlığı ile geçiciliğine dair bir metafor olarak kullanmasıyla bilinir. Bu heykel, üst üste yerleştirilmiş iki oldukça gerçekçi büyük göbeği tasvir eder; her biri yaklaşık beş fit (1,5 m) uzunluğundadır.",
   url: 'https://react.dev/images/docs/scientists/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan bir kıvrım şelalesini andırır.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Terracotta Army, Çin’in ilk İmparatoru Qin Shi Huang’ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu; 8.000’den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.',
   url: 'https://react.dev/images/docs/scientists/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri kendine özgü yüz ifadesine ve zırha sahip, ciddi görünümlü savaşçılardan oluşan 12 pişmiş toprak heykel.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: 'Nevelson, New York City enkazından nesneler toplaması ve bunları daha sonra anıtsal yapılara dönüştürmesiyle biliniyordu. Bu eserde; yatak direği, jonglör labutu ve koltuk parçası gibi birbirinden farklı parçaları kullandı, bunları kutuların içine çivileyip yapıştırarak Kübizmin mekan ve form üzerindeki geometrik soyutlama etkisini yansıttı.',
   url: 'https://react.dev/images/docs/scientists/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek öğelerin ilk bakışta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal olan ile endüstriyel olanı birleştirir. Sanatı, insan ve doğa arasındaki ilişkiye odaklanır. Eserleri hem soyut hem figüratif açıdan etkileyici, yer çekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve zemine doğru inen, soluk renkli tel benzeri bir heykel. Hafif görünür.'
 }, {
   name: 'Hippos',
-  artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  artist: 'Taipei Hayvanat Bahçesi',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
   alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
@@ -433,71 +433,71 @@ export const sculptureList = [{
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: 'Bu devasa (75 ft. veya 23 m) gümüş çiçek Buenos Aires’te yer alır. Akşamları veya güçlü rüzgarlar estiğinde taç yapraklarını kapatacak, sabahları ise açacak şekilde tasarlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı, ayna benzeri taç yaprakları ve güçlü erkek organları olan devasa metalik bir çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson; eşitlik, sosyal adalet ve insanlığın temel ve ruhani nitelikleriyle ilgilenmesiyle biliniyordu. Bu büyük (7 ft. veya 2,13 m) bronz eser, onun "evrensel insanlık duygusuyla harmanlanmış sembolik bir Siyah varlık" olarak tanımladığı şeyi temsil eder.',
   url: 'https://react.dev/images/docs/scientists/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'Bir insan başını tasvir eden heykel, her zaman var olan ve ağırbaşlı bir izlenim verir. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Paskalya Adası’nda bulunan, erken dönem Rapa Nui halkı tarafından oluşturulmuş 1.000 adet moai veya günümüze ulaşmış anıtsal heykel vardır. Bazılarına göre bunlar tanrılaştırılmış ataları temsil ediyordu.',
   url: 'https://react.dev/images/docs/scientists/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Orantısız derecede büyük başlara ve ciddi yüz ifadelerine sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nana’lar, kadınlık ve anneliğin sembolleri olan zafer kazanmış varlıklardır. Başlangıçta Saint Phalle, Nana’lar için kumaş ve buluntu nesneler kullandı; daha sonra daha canlı bir etki elde etmek için polyesteri dahil etti.',
   url: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Renkli bir kostüm içinde neşe saçan, oyunbaz şekilde dans eden büyük bir kadın figürünün mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: 'Bu soyut bronz heykel, Yorkshire Sculpture Park’ta yer alan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini oluşturmak yerine insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.',
   url: 'https://react.dev/images/docs/scientists/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Üst üste yerleştirilmiş üç öğeden oluşan ve bir insan figürünü hatırlatan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşak ahşap oymacısının soyundan gelen Fakeye’nin çalışmaları, geleneksel ve çağdaş Yoruba temalarını harmanladı.",
   url: 'https://react.dev/images/docs/scientists/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş bir atın üzerinde, odaklanmış yüz ifadeli bir savaşçıyı tasvir eden ayrıntılı bir ahşap heykel.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, parçalanmış beden heykellerini gençliğin ve güzelliğin kırılganlığı ile geçiciliğine dair bir metafor olarak kullanmasıyla bilinir. Bu heykel, üst üste yerleştirilmiş iki oldukça gerçekçi büyük göbeği tasvir eder; her biri yaklaşık beş fit (1,5 m) uzunluğundadır.",
   url: 'https://react.dev/images/docs/scientists/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan bir kıvrım şelalesini andırır.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Terracotta Army, Çin’in ilk İmparatoru Qin Shi Huang’ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu; 8.000’den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.',
   url: 'https://react.dev/images/docs/scientists/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri kendine özgü yüz ifadesine ve zırha sahip, ciddi görünümlü savaşçılardan oluşan 12 pişmiş toprak heykel.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: 'Nevelson, New York City enkazından nesneler toplaması ve bunları daha sonra anıtsal yapılara dönüştürmesiyle biliniyordu. Bu eserde; yatak direği, jonglör labutu ve koltuk parçası gibi birbirinden farklı parçaları kullandı, bunları kutuların içine çivileyip yapıştırarak Kübizmin mekan ve form üzerindeki geometrik soyutlama etkisini yansıttı.',
   url: 'https://react.dev/images/docs/scientists/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek öğelerin ilk bakışta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal olan ile endüstriyel olanı birleştirir. Sanatı, insan ve doğa arasındaki ilişkiye odaklanır. Eserleri hem soyut hem figüratif açıdan etkileyici, yer çekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve zemine doğru inen, soluk renkli tel benzeri bir heykel. Hafif görünür.'
 }, {
   name: 'Hippos',
-  artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  artist: 'Taipei Hayvanat Bahçesi',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
   alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
@@ -629,71 +629,71 @@ let sculptureList = [{
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: 'Bu devasa (75 ft. veya 23 m) gümüş çiçek Buenos Aires’te yer alır. Akşamları veya güçlü rüzgarlar estiğinde taç yapraklarını kapatacak, sabahları ise açacak şekilde tasarlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı, ayna benzeri taç yaprakları ve güçlü erkek organları olan devasa metalik bir çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson; eşitlik, sosyal adalet ve insanlığın temel ve ruhani nitelikleriyle ilgilenmesiyle biliniyordu. Bu büyük (7 ft. veya 2,13 m) bronz eser, onun "evrensel insanlık duygusuyla harmanlanmış sembolik bir Siyah varlık" olarak tanımladığı şeyi temsil eder.',
   url: 'https://react.dev/images/docs/scientists/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'Bir insan başını tasvir eden heykel, her zaman var olan ve ağırbaşlı bir izlenim verir. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Paskalya Adası’nda bulunan, erken dönem Rapa Nui halkı tarafından oluşturulmuş 1.000 adet moai veya günümüze ulaşmış anıtsal heykel vardır. Bazılarına göre bunlar tanrılaştırılmış ataları temsil ediyordu.',
   url: 'https://react.dev/images/docs/scientists/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Orantısız derecede büyük başlara ve ciddi yüz ifadelerine sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nana’lar, kadınlık ve anneliğin sembolleri olan zafer kazanmış varlıklardır. Başlangıçta Saint Phalle, Nana’lar için kumaş ve buluntu nesneler kullandı; daha sonra daha canlı bir etki elde etmek için polyesteri dahil etti.',
   url: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Renkli bir kostüm içinde neşe saçan, oyunbaz şekilde dans eden büyük bir kadın figürünün mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: 'Bu soyut bronz heykel, Yorkshire Sculpture Park’ta yer alan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini oluşturmak yerine insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.',
   url: 'https://react.dev/images/docs/scientists/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Üst üste yerleştirilmiş üç öğeden oluşan ve bir insan figürünü hatırlatan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşak ahşap oymacısının soyundan gelen Fakeye’nin çalışmaları, geleneksel ve çağdaş Yoruba temalarını harmanladı.",
   url: 'https://react.dev/images/docs/scientists/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş bir atın üzerinde, odaklanmış yüz ifadeli bir savaşçıyı tasvir eden ayrıntılı bir ahşap heykel.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, parçalanmış beden heykellerini gençliğin ve güzelliğin kırılganlığı ile geçiciliğine dair bir metafor olarak kullanmasıyla bilinir. Bu heykel, üst üste yerleştirilmiş iki oldukça gerçekçi büyük göbeği tasvir eder; her biri yaklaşık beş fit (1,5 m) uzunluğundadır.",
   url: 'https://react.dev/images/docs/scientists/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan bir kıvrım şelalesini andırır.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Terracotta Army, Çin’in ilk İmparatoru Qin Shi Huang’ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu; 8.000’den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.',
   url: 'https://react.dev/images/docs/scientists/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri kendine özgü yüz ifadesine ve zırha sahip, ciddi görünümlü savaşçılardan oluşan 12 pişmiş toprak heykel.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: 'Nevelson, New York City enkazından nesneler toplaması ve bunları daha sonra anıtsal yapılara dönüştürmesiyle biliniyordu. Bu eserde; yatak direği, jonglör labutu ve koltuk parçası gibi birbirinden farklı parçaları kullandı, bunları kutuların içine çivileyip yapıştırarak Kübizmin mekan ve form üzerindeki geometrik soyutlama etkisini yansıttı.',
   url: 'https://react.dev/images/docs/scientists/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek öğelerin ilk bakışta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal olan ile endüstriyel olanı birleştirir. Sanatı, insan ve doğa arasındaki ilişkiye odaklanır. Eserleri hem soyut hem figüratif açıdan etkileyici, yer çekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve zemine doğru inen, soluk renkli tel benzeri bir heykel. Hafif görünür.'
 }, {
   name: 'Hippos',
-  artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  artist: 'Taipei Hayvanat Bahçesi',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
   alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
@@ -798,71 +798,71 @@ export const sculptureList = [{
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: 'Bu devasa (75 ft. veya 23 m) gümüş çiçek Buenos Aires’te yer alır. Akşamları veya güçlü rüzgarlar estiğinde taç yapraklarını kapatacak, sabahları ise açacak şekilde tasarlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı, ayna benzeri taç yaprakları ve güçlü erkek organları olan devasa metalik bir çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson; eşitlik, sosyal adalet ve insanlığın temel ve ruhani nitelikleriyle ilgilenmesiyle biliniyordu. Bu büyük (7 ft. veya 2,13 m) bronz eser, onun "evrensel insanlık duygusuyla harmanlanmış sembolik bir Siyah varlık" olarak tanımladığı şeyi temsil eder.',
   url: 'https://react.dev/images/docs/scientists/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'Bir insan başını tasvir eden heykel, her zaman var olan ve ağırbaşlı bir izlenim verir. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Paskalya Adası’nda bulunan, erken dönem Rapa Nui halkı tarafından oluşturulmuş 1.000 adet moai veya günümüze ulaşmış anıtsal heykel vardır. Bazılarına göre bunlar tanrılaştırılmış ataları temsil ediyordu.',
   url: 'https://react.dev/images/docs/scientists/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Orantısız derecede büyük başlara ve ciddi yüz ifadelerine sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nana’lar, kadınlık ve anneliğin sembolleri olan zafer kazanmış varlıklardır. Başlangıçta Saint Phalle, Nana’lar için kumaş ve buluntu nesneler kullandı; daha sonra daha canlı bir etki elde etmek için polyesteri dahil etti.',
   url: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Renkli bir kostüm içinde neşe saçan, oyunbaz şekilde dans eden büyük bir kadın figürünün mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: 'Bu soyut bronz heykel, Yorkshire Sculpture Park’ta yer alan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini oluşturmak yerine insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.',
   url: 'https://react.dev/images/docs/scientists/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Üst üste yerleştirilmiş üç öğeden oluşan ve bir insan figürünü hatırlatan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşak ahşap oymacısının soyundan gelen Fakeye’nin çalışmaları, geleneksel ve çağdaş Yoruba temalarını harmanladı.",
   url: 'https://react.dev/images/docs/scientists/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş bir atın üzerinde, odaklanmış yüz ifadeli bir savaşçıyı tasvir eden ayrıntılı bir ahşap heykel.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, parçalanmış beden heykellerini gençliğin ve güzelliğin kırılganlığı ile geçiciliğine dair bir metafor olarak kullanmasıyla bilinir. Bu heykel, üst üste yerleştirilmiş iki oldukça gerçekçi büyük göbeği tasvir eder; her biri yaklaşık beş fit (1,5 m) uzunluğundadır.",
   url: 'https://react.dev/images/docs/scientists/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan bir kıvrım şelalesini andırır.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Terracotta Army, Çin’in ilk İmparatoru Qin Shi Huang’ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu; 8.000’den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.',
   url: 'https://react.dev/images/docs/scientists/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri kendine özgü yüz ifadesine ve zırha sahip, ciddi görünümlü savaşçılardan oluşan 12 pişmiş toprak heykel.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: 'Nevelson, New York City enkazından nesneler toplaması ve bunları daha sonra anıtsal yapılara dönüştürmesiyle biliniyordu. Bu eserde; yatak direği, jonglör labutu ve koltuk parçası gibi birbirinden farklı parçaları kullandı, bunları kutuların içine çivileyip yapıştırarak Kübizmin mekan ve form üzerindeki geometrik soyutlama etkisini yansıttı.',
   url: 'https://react.dev/images/docs/scientists/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek öğelerin ilk bakışta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal olan ile endüstriyel olanı birleştirir. Sanatı, insan ve doğa arasındaki ilişkiye odaklanır. Eserleri hem soyut hem figüratif açıdan etkileyici, yer çekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve zemine doğru inen, soluk renkli tel benzeri bir heykel. Hafif görünür.'
 }, {
   name: 'Hippos',
-  artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  artist: 'Taipei Hayvanat Bahçesi',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
   alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
@@ -969,71 +969,71 @@ export const sculptureList = [{
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: 'Bu devasa (75 ft. veya 23 m) gümüş çiçek Buenos Aires’te yer alır. Akşamları veya güçlü rüzgarlar estiğinde taç yapraklarını kapatacak, sabahları ise açacak şekilde tasarlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı, ayna benzeri taç yaprakları ve güçlü erkek organları olan devasa metalik bir çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson; eşitlik, sosyal adalet ve insanlığın temel ve ruhani nitelikleriyle ilgilenmesiyle biliniyordu. Bu büyük (7 ft. veya 2,13 m) bronz eser, onun "evrensel insanlık duygusuyla harmanlanmış sembolik bir Siyah varlık" olarak tanımladığı şeyi temsil eder.',
   url: 'https://react.dev/images/docs/scientists/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'Bir insan başını tasvir eden heykel, her zaman var olan ve ağırbaşlı bir izlenim verir. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Paskalya Adası’nda bulunan, erken dönem Rapa Nui halkı tarafından oluşturulmuş 1.000 adet moai veya günümüze ulaşmış anıtsal heykel vardır. Bazılarına göre bunlar tanrılaştırılmış ataları temsil ediyordu.',
   url: 'https://react.dev/images/docs/scientists/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Orantısız derecede büyük başlara ve ciddi yüz ifadelerine sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nana’lar, kadınlık ve anneliğin sembolleri olan zafer kazanmış varlıklardır. Başlangıçta Saint Phalle, Nana’lar için kumaş ve buluntu nesneler kullandı; daha sonra daha canlı bir etki elde etmek için polyesteri dahil etti.',
   url: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Renkli bir kostüm içinde neşe saçan, oyunbaz şekilde dans eden büyük bir kadın figürünün mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: 'Bu soyut bronz heykel, Yorkshire Sculpture Park’ta yer alan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini oluşturmak yerine insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.',
   url: 'https://react.dev/images/docs/scientists/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Üst üste yerleştirilmiş üç öğeden oluşan ve bir insan figürünü hatırlatan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşak ahşap oymacısının soyundan gelen Fakeye’nin çalışmaları, geleneksel ve çağdaş Yoruba temalarını harmanladı.",
   url: 'https://react.dev/images/docs/scientists/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş bir atın üzerinde, odaklanmış yüz ifadeli bir savaşçıyı tasvir eden ayrıntılı bir ahşap heykel.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, parçalanmış beden heykellerini gençliğin ve güzelliğin kırılganlığı ile geçiciliğine dair bir metafor olarak kullanmasıyla bilinir. Bu heykel, üst üste yerleştirilmiş iki oldukça gerçekçi büyük göbeği tasvir eder; her biri yaklaşık beş fit (1,5 m) uzunluğundadır.",
   url: 'https://react.dev/images/docs/scientists/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan bir kıvrım şelalesini andırır.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Terracotta Army, Çin’in ilk İmparatoru Qin Shi Huang’ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu; 8.000’den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.',
   url: 'https://react.dev/images/docs/scientists/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri kendine özgü yüz ifadesine ve zırha sahip, ciddi görünümlü savaşçılardan oluşan 12 pişmiş toprak heykel.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: 'Nevelson, New York City enkazından nesneler toplaması ve bunları daha sonra anıtsal yapılara dönüştürmesiyle biliniyordu. Bu eserde; yatak direği, jonglör labutu ve koltuk parçası gibi birbirinden farklı parçaları kullandı, bunları kutuların içine çivileyip yapıştırarak Kübizmin mekan ve form üzerindeki geometrik soyutlama etkisini yansıttı.',
   url: 'https://react.dev/images/docs/scientists/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek öğelerin ilk bakışta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal olan ile endüstriyel olanı birleştirir. Sanatı, insan ve doğa arasındaki ilişkiye odaklanır. Eserleri hem soyut hem figüratif açıdan etkileyici, yer çekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve zemine doğru inen, soluk renkli tel benzeri bir heykel. Hafif görünür.'
 }, {
   name: 'Hippos',
-  artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  artist: 'Taipei Hayvanat Bahçesi',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
   alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
@@ -1131,71 +1131,71 @@ export const sculptureList = [{
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
-  alt: 'A bronze statue of two crossed hands delicately holding a human brain in their fingertips.'
+  alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
   name: 'Floralis Genérica',
   artist: 'Eduardo Catalano',
-  description: 'This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.',
+  description: 'Bu devasa (75 ft. veya 23 m) gümüş çiçek Buenos Aires’te yer alır. Akşamları veya güçlü rüzgarlar estiğinde taç yapraklarını kapatacak, sabahları ise açacak şekilde tasarlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/ZF6s192m.jpg',
-  alt: 'A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.'
+  alt: 'Yansıtıcı, ayna benzeri taç yaprakları ve güçlü erkek organları olan devasa metalik bir çiçek heykeli.'
 }, {
   name: 'Eternal Presence',
   artist: 'John Woodrow Wilson',
-  description: 'Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as "a symbolic Black presence infused with a sense of universal humanity."',
+  description: 'Wilson; eşitlik, sosyal adalet ve insanlığın temel ve ruhani nitelikleriyle ilgilenmesiyle biliniyordu. Bu büyük (7 ft. veya 2,13 m) bronz eser, onun "evrensel insanlık duygusuyla harmanlanmış sembolik bir Siyah varlık" olarak tanımladığı şeyi temsil eder.',
   url: 'https://react.dev/images/docs/scientists/aTtVpES.jpg',
-  alt: 'The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.'
+  alt: 'Bir insan başını tasvir eden heykel, her zaman var olan ve ağırbaşlı bir izlenim verir. Sakinlik ve huzur yayar.'
 }, {
   name: 'Moai',
-  artist: 'Unknown Artist',
-  description: 'Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Paskalya Adası’nda bulunan, erken dönem Rapa Nui halkı tarafından oluşturulmuş 1.000 adet moai veya günümüze ulaşmış anıtsal heykel vardır. Bazılarına göre bunlar tanrılaştırılmış ataları temsil ediyordu.',
   url: 'https://react.dev/images/docs/scientists/RCwLEoQm.jpg',
-  alt: 'Three monumental stone busts with the heads that are disproportionately large with somber faces.'
+  alt: 'Orantısız derecede büyük başlara ve ciddi yüz ifadelerine sahip üç anıtsal taş büst.'
 }, {
   name: 'Blue Nana',
   artist: 'Niki de Saint Phalle',
-  description: 'The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.',
+  description: 'Nana’lar, kadınlık ve anneliğin sembolleri olan zafer kazanmış varlıklardır. Başlangıçta Saint Phalle, Nana’lar için kumaş ve buluntu nesneler kullandı; daha sonra daha canlı bir etki elde etmek için polyesteri dahil etti.',
   url: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
-  alt: 'A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.'
+  alt: 'Renkli bir kostüm içinde neşe saçan, oyunbaz şekilde dans eden büyük bir kadın figürünün mozaik heykeli.'
 }, {
   name: 'Ultimate Form',
   artist: 'Barbara Hepworth',
-  description: 'This abstract bronze sculpture is a part of The Family of Man series located at Yorkshire Sculpture Park. Hepworth chose not to create literal representations of the world but developed abstract forms inspired by people and landscapes.',
+  description: 'Bu soyut bronz heykel, Yorkshire Sculpture Park’ta yer alan The Family of Man serisinin bir parçasıdır. Hepworth, dünyanın birebir temsillerini oluşturmak yerine insanlardan ve manzaralardan ilham alan soyut formlar geliştirmeyi seçti.',
   url: 'https://react.dev/images/docs/scientists/2heNQDcm.jpg',
-  alt: 'A tall sculpture made of three elements stacked on each other reminding of a human figure.'
+  alt: 'Üst üste yerleştirilmiş üç öğeden oluşan ve bir insan figürünü hatırlatan uzun bir heykel.'
 }, {
   name: 'Cavaliere',
   artist: 'Lamidi Olonade Fakeye',
-  description: "Descended from four generations of woodcarvers, Fakeye's work blended traditional and contemporary Yoruba themes.",
+  description: "Dört kuşak ahşap oymacısının soyundan gelen Fakeye’nin çalışmaları, geleneksel ve çağdaş Yoruba temalarını harmanladı.",
   url: 'https://react.dev/images/docs/scientists/wIdGuZwm.png',
-  alt: 'An intricate wood sculpture of a warrior with a focused face on a horse adorned with patterns.'
+  alt: 'Desenlerle süslenmiş bir atın üzerinde, odaklanmış yüz ifadeli bir savaşçıyı tasvir eden ayrıntılı bir ahşap heykel.'
 }, {
   name: 'Big Bellies',
   artist: 'Alina Szapocznikow',
-  description: "Szapocznikow is known for her sculptures of the fragmented body as a metaphor for the fragility and impermanence of youth and beauty. This sculpture depicts two very realistic large bellies stacked on top of each other, each around five feet (1,5m) tall.",
+  description: "Szapocznikow, parçalanmış beden heykellerini gençliğin ve güzelliğin kırılganlığı ile geçiciliğine dair bir metafor olarak kullanmasıyla bilinir. Bu heykel, üst üste yerleştirilmiş iki oldukça gerçekçi büyük göbeği tasvir eder; her biri yaklaşık beş fit (1,5 m) uzunluğundadır.",
   url: 'https://react.dev/images/docs/scientists/AlHTAdDm.jpg',
-  alt: 'The sculpture reminds a cascade of folds, quite different from bellies in classical sculptures.'
+  alt: 'Heykel, klasik heykellerdeki göbeklerden oldukça farklı olan bir kıvrım şelalesini andırır.'
 }, {
   name: 'Terracotta Army',
-  artist: 'Unknown Artist',
-  description: 'The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. The army consisted of more than 8,000 soldiers, 130 chariots with 520 horses, and 150 cavalry horses.',
+  artist: 'Bilinmeyen Sanatçı',
+  description: 'Terracotta Army, Çin’in ilk İmparatoru Qin Shi Huang’ın ordularını tasvir eden pişmiş toprak heykellerden oluşan bir koleksiyondur. Ordu; 8.000’den fazla asker, 520 atlı 130 savaş arabası ve 150 süvari atından oluşuyordu.',
   url: 'https://react.dev/images/docs/scientists/HMFmH6m.jpg',
-  alt: '12 terracotta sculptures of solemn warriors, each with a unique facial expression and armor.'
+  alt: 'Her biri kendine özgü yüz ifadesine ve zırha sahip, ciddi görünümlü savaşçılardan oluşan 12 pişmiş toprak heykel.'
 }, {
   name: 'Lunar Landscape',
   artist: 'Louise Nevelson',
-  description: 'Nevelson was known for scavenging objects from New York City debris, which she would later assemble into monumental constructions. In this one, she used disparate parts like a bedpost, juggling pin, and seat fragment, nailing and gluing them into boxes that reflect the influence of Cubism’s geometric abstraction of space and form.',
+  description: 'Nevelson, New York City enkazından nesneler toplaması ve bunları daha sonra anıtsal yapılara dönüştürmesiyle biliniyordu. Bu eserde; yatak direği, jonglör labutu ve koltuk parçası gibi birbirinden farklı parçaları kullandı, bunları kutuların içine çivileyip yapıştırarak Kübizmin mekan ve form üzerindeki geometrik soyutlama etkisini yansıttı.',
   url: 'https://react.dev/images/docs/scientists/rN7hY6om.jpg',
-  alt: 'A black matte sculpture where the individual elements are initially indistinguishable.'
+  alt: 'Tek tek öğelerin ilk bakışta ayırt edilemediği siyah mat bir heykel.'
 }, {
   name: 'Aureole',
   artist: 'Ranjani Shettar',
-  description: 'Shettar merges the traditional and the modern, the natural and the industrial. Her art focuses on the relationship between man and nature. Her work was described as compelling both abstractly and figuratively, gravity defying, and a "fine synthesis of unlikely materials."',
+  description: 'Shettar geleneksel ile moderni, doğal olan ile endüstriyel olanı birleştirir. Sanatı, insan ve doğa arasındaki ilişkiye odaklanır. Eserleri hem soyut hem figüratif açıdan etkileyici, yer çekimine meydan okuyan ve "beklenmedik malzemelerin ince bir sentezi" olarak tanımlanmıştır.',
   url: 'https://react.dev/images/docs/scientists/okTpbHhm.jpg',
-  alt: 'A pale wire-like sculpture mounted on concrete wall and descending on the floor. It appears light.'
+  alt: 'Beton duvara monte edilmiş ve zemine doğru inen, soluk renkli tel benzeri bir heykel. Hafif görünür.'
 }, {
   name: 'Hippos',
-  artist: 'Taipei Zoo',
-  description: 'The Taipei Zoo commissioned a Hippo Square featuring submerged hippos at play.',
+  artist: 'Taipei Hayvanat Bahçesi',
+  description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
   alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];

@@ -77,7 +77,7 @@ export default function App() {
 
 `Recipe`’ye `drinkers={2}` pass ettiğinizde, `2 cups of water` içeren JSX döndürür. Her zaman.
 
-`Drinkers` parametresine `{4}` değerini verip, `4 bardak su` içeren JSX’i döndürür. Her zaman.
+`Recipe`’ye `drinkers={4}` pass ettiğinizde, `4 bardak su` içeren JSX return eder. Her zaman.
 
 Tıpkı bir math formula gibi.
 
