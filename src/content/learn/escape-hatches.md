@@ -227,11 +227,7 @@ function Form() {
 }
 ```
 
-<<<<<<< HEAD
-Ancak, harici sistemler ile senkronize etmek için Efektlere ihtiyacınız vardır.
-=======
-However, you *do* need Effects to synchronize with external systems.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Ancak external system’lerle senkronize olmak için Effect’lere *gerçekten* ihtiyacınız vardır.
 
 <LearnMore path="/learn/you-might-not-need-an-effect">
 
