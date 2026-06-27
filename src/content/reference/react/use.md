@@ -460,11 +460,7 @@ Bunun yerine, `use` fonksiyonunu herhangi bir bileşen kapanışının dışınd
 
 ```jsx
 function MessageComponent({messagePromise}) {
-<<<<<<< HEAD
-  // ✅ `use` bir bileşen içerisine çağırılıyor. 
-=======
-  // ✅ `use` is being called from a component.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+  // ✅ `use`, bir component içinden çağrılıyor.
   const message = use(messagePromise);
   // ...
 ```
