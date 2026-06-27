@@ -46,11 +46,7 @@ function MyInput({ ref }) {
 
 <Note>
 
-<<<<<<< HEAD
-React 19 ile birlikte, [`ref` bir prop olarak mevcuttur.](/blog/2024/12/05/react-19#ref-as-a-prop) React 18 ve öncesinde, `ref`'i [`forwardRef`'den](/reference/react/forwardRef) almak gerekiyordu.
-=======
-Starting with React 19, [`ref` is available as a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef)
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+React 19 ile birlikte, [`ref` prop olarak available hale geldi.](/blog/2024/12/05/react-19#ref-as-a-prop) React 18 ve önceki version’larda, `ref`’i [`forwardRef`](/reference/react/forwardRef)’ten almak gerekiyordu.
 
 </Note>
 
