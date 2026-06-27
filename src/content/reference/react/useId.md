@@ -193,7 +193,7 @@ React'ta `useId`'nin değeri, çağrıldığı bileşenin ağaç içindeki hiyer
 
 ### Birkaç ilişkili element için kimlik üretmek {/*generating-ids-for-several-related-elements*/}
 
-Birden fazla related element’e ID vermeniz gerekiyorsa, onlar için shared bir prefix generate etmek üzere `useId` çağırabilirsiniz:
+Birden fazla related element’e ID vermeniz gerekiyorsa, bunlar için shared bir prefix generate etmek üzere `useId` çağırabilirsiniz:
 
 <Sandpack>
 

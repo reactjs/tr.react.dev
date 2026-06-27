@@ -305,7 +305,7 @@ export default function RequestTracker() {
         Tamamlandı: {completed}
       </h3>
       <button onClick={handleClick}>
-        Satın Al
+        Satın al
       </button>
     </>
   );
@@ -349,7 +349,7 @@ export default function RequestTracker() {
         Tamamlandı: {completed}
       </h3>
       <button onClick={handleClick}>
-        Satın Al
+        Satın al
       </button>
     </>
   );

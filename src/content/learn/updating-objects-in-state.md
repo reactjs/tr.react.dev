@@ -4,7 +4,7 @@ title: State içerisindeki nesneleri güncelleme
 
 <Intro>
 
-State, nesneler dahil olmak üzere herhangi bir JavaScript değerini tutabilir. Ancak React state içerisinde tuttuğunuz nesneleri direkt olarak değiştirmemelisiniz. Bunun yerine bir nesneyi güncellemek istediğinizde, yeni bir nesne oluşturmanız gerekmektedir (veya varolan bir nesnenin kopyasını oluşturmalısınız) daha sonra state'i kopyaladığınız nesneyi kullanması için ayarlamalısınız. 
+State, nesneler dahil olmak üzere herhangi bir JavaScript değerini tutabilir. Ancak React state içerisinde tuttuğunuz nesneleri direkt olarak değiştirmemelisiniz. Bunun yerine bir nesneyi güncellemek istediğinizde, yeni bir nesne oluşturmanız gerekmektedir (veya varolan bir nesnenin kopyasını oluşturmalısınız) daha sonra state'i kopyaladığınız nesneyi kullanması için ayarlamalısınız.
 
 </Intro>
 
@@ -25,19 +25,19 @@ const [x, setX] = useState(0);
 ```
 
 Şimdiye kadar sayılarla, stringlerle ve booleanlarla çalıştınız. Bu JavaScript değerleri "değişmez" veya "salt okunur" anlamına gelir.
-Bir değeri _değiştirmek_ için yeniden render işlemi yapabilirsiniz. 
+Bir değeri _değiştirmek_ için yeniden render işlemi yapabilirsiniz.
 
 ```js
 setX(5);
 ```
-`x` state'i `0`'ken `5` ile değiştirildi, ama _`0` sayısının kendisi_ değişmedi. JavaScript'te, sayılar, stringler ve booleanlar gibi yerleşik temel veri tiplerinde herhangi bir değişiklik yapmak mümkün değildir. 
+`x` state'i `0`'ken `5` ile değiştirildi, ama _`0` sayısının kendisi_ değişmedi. JavaScript'te, sayılar, stringler ve booleanlar gibi yerleşik temel veri tiplerinde herhangi bir değişiklik yapmak mümkün değildir.
 
 Şimdi state içerisinde bir nesne düşünün:
 
 ```js
 const [position, setPosition] = useState({ x: 0, y: 0 });
 ```
-Teknik olarak, _nesnenin kendisinin_ içeriğini değiştirmek mümkündür. **Buna mutasyon denir:** 
+Teknik olarak, _nesnenin kendisinin_ içeriğini değiştirmek mümkündür. **Buna mutasyon denir:**
 
 ```js
 position.x = 5;
@@ -49,7 +49,7 @@ Ancak, React state içerisindeki nesneler teknik olarak değiştirilebilir olsal
 
 Başka bir deyişle, **State içerisine koyduğunuz herhangi bir JavaScript nesnesini salt okunur olarak ele almalısınız.**
 
-Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tutar. Kırmızı nokta, siz önizleme alanına dokunduğunuzda veya imleci üzerinde hareket ettirdiğinizde hareket etmesi gerekir. Ancak nokta başlangıç pozisyonunda kalıyor. 
+Bu örnek, mevcut imlec pozisyonunu temsil eden bir nesneyi state içerisinde tutar. Kırmızı nokta, siz önizleme alanına dokunduğunuzda veya imleci üzerinde hareket ettirdiğinizde hareket etmesi gerekir. Ancak nokta başlangıç pozisyonunda kalıyor.
 
 <Sandpack>
 
@@ -170,7 +170,7 @@ body { margin: 0; padding: 0; height: 250px; }
 
 #### Yerel mutasyon sorun değildir {/*local-mutation-is-fine*/}
 
-Bu şekildeki kod, state içerisinde *varolan* bir nesneyi değiştirdiği için bir problemdir. 
+Bu şekildeki kod, state içerisinde *varolan* bir nesneyi değiştirdiği için bir problemdir.
 
 ```js
 position.x = e.clientX;
@@ -371,7 +371,7 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-`...` spread syntax’inin "shallow" olduğunu unutmayın--yalnızca bir level deep kopyalama yapar. Bu onu hızlı yapar, ancak nested property update etmek istiyorsanız bunu birden fazla kez kullanmanız gerektiği anlamına da gelir.
+`...` spread syntax’inin "shallow" olduğuna dikkat edin--yalnızca bir seviye derindeki şeyleri copy eder. Bu onu hızlı yapar, ancak aynı zamanda nested bir property’yi update etmek istiyorsanız, onu birden fazla kez kullanmanız gerekeceği anlamına gelir.
 
 <DeepDive>
 
@@ -441,7 +441,7 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-Burada `e.target.name`, `<input>` DOM ögesine verilen `name` özelliğine atıfta bulunur. 
+Burada `e.target.name`, `<input>` DOM ögesine verilen `name` özelliğine atıfta bulunur.
 
 </DeepDive>
 
@@ -598,7 +598,7 @@ img { width: 200px; height: 200px; }
 
 #### Nesneler aslında iç içe değillerdir {/*objects-are-not-really-nested*/}
 
-Bu şekilde bir nesne kodda "iç içe" gibi gözükür: 
+Bu şekilde bir nesne kodda "iç içe" gibi gözükür:
 
 ```js
 let obj = {
@@ -974,7 +974,7 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 Sabit bir arka plan üzerinde sürüklenebilir bir kutu bulunmaktadır. Select input kullanarak kutunun rengini değiştirebilirsiniz.
 
-Ancak bir hata var. İlk olarak kutuyu hareket ettirirseniz, ve sonra rengini değiştirirseniz, arka plan (hareket etmemesi gereken!) kutunun pozisyonuna "atlayacak". Ancak bu olmamalıdır: `Background` bileşeninin `{ x: 0, y: 0 }` olan `position` propu `initialPosition` olarak ayarlanmıştır. Neden renk değişikliğinden sonra arka plan hareket ediyor? 
+Ancak bir hata var. İlk olarak kutuyu hareket ettirirseniz, ve sonra rengini değiştirirseniz, arka plan (hareket etmemesi gereken!) kutunun pozisyonuna "atlayacak". Ancak bu olmamalıdır: `Background` bileşeninin `{ x: 0, y: 0 }` olan `position` propu `initialPosition` olarak ayarlanmıştır. Neden renk değişikliğinden sonra arka plan hareket ediyor?
 
 Hatayı bulun ve düzeltin.
 
@@ -1132,7 +1132,7 @@ select { margin-bottom: 10px; }
 
 Sorun, `handleMove` içerisindeki mutasyondaydı. Bu, `shape.position`'ı mutasyona uğrattı, ancak bu, `initialPosition`'ın işaret ettiği aynı nesne olduğu anlamına geliyor. Şekil ve arka planın hareket etme nedeni bu sebepledir. (Bu bir mutasyon olduğundan, başka bir güncelleme--renk değişikliği--yeniden render edilinceye kadar değişiklik ekran üzerine yansımaz)
 
-`handleMove` fonksiyonundaki mutasyonu kaldırarak ve spread sözdizimini kullanarak şekli kopyalamanız gerekiyor. `+=` bir mutasyon olduğu için, bunu düzenli `+` ifadesini kullanarak yeniden yazmanız gerekmektedir. 
+`handleMove` fonksiyonundaki mutasyonu kaldırarak ve spread sözdizimini kullanarak şekli kopyalamanız gerekiyor. `+=` bir mutasyon olduğu için, bunu düzenli `+` ifadesini kullanarak yeniden yazmanız gerekmektedir.
 
 <Sandpack>
 

@@ -1823,10 +1823,10 @@ Bazı durumlarda iç içe state'in bazı parçalarını alt bileşenlere taşıy
 
 <Recap>
 
-* İki state variable her zaman birlikte update oluyorsa, bunları tek bir variable’da birleştirmeyi düşünün.
-* "Impossible" state’ler oluşturmamak için state variable’larınızı dikkatli seçin.
+* İki state değişkeni her zaman birlikte update oluyorsa, bunları tek bir değişkende birleştirmeyi düşünün.
+* "Impossible" state’ler oluşturmamak için state değişkenlerinizi dikkatli seçin.
 * State’inizi, update ederken hata yapma ihtimalinizi azaltacak şekilde yapılandırın.
-* Redundant ve duplicate state kullanmaktan kaçının; böylece bunları sync tutmanız gerekmez.
+* Redundant ve duplicate state kullanmaktan kaçının; böylece bunları senkronize tutmanız gerekmez.
 * Update’leri özellikle engellemek istemiyorsanız, props’u state *içine* koymayın.
 * Selection gibi UI pattern’lerinde, object’in kendisi yerine ID veya index’i state’te tutun.
 * Deeply nested state’i update etmek karmaşıksa, onu flatten etmeyi deneyin.

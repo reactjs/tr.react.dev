@@ -42,7 +42,7 @@ export default function Avatar() {
 
 </Sandpack>
 
-Burada `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak pass ediliyor.
+Burada, `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak pass ediliyor.
 
 Ancak `src` veya `alt` metnini dinamik olarak belirtmek isterseniz ne olur?  **`" `ve` "` yerine `{ `ve` }` ile değiştirerek JavaScript'ten bir değer** kullanabilirsiniz:
 
@@ -288,7 +288,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Sorunu bulabilir misin ? 
+Sorunu bulabilir misin ?
 
 <Hint>Süslü parantezlerin içine ne koyduğumuza bakalım. Oraya doğru şeyi mi koyuyoruz?</Hint>
 

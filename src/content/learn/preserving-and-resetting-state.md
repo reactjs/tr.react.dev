@@ -73,7 +73,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Bir ekle 
+        Bir ekle
       </button>
     </div>
   );
@@ -152,7 +152,7 @@ function Counter() {
     >
       <h1>{score}</h1>
       <button onClick={() => setScore(score + 1)}>
-        Bir ekle 
+        Bir ekle
       </button>
     </div>
   );
@@ -513,7 +513,7 @@ export default function App() {
   return (
     <div>
       {isPaused ? (
-        <p>Sonra görüşürüz!</p>
+        <p>Görüşürüz!</p>
       ) : (
         <Counter />
       )}
@@ -1450,16 +1450,16 @@ export default function App() {
   if (reverse) {
     return (
       <>
-        <Field label="Soyad" />
-        <Field label="Ad" />
+        <Field label="Soyadı" />
+        <Field label="Adı" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field label="Ad" />
-        <Field label="Soyad" />
+        <Field label="Soyadı" />
+        <Field label="Adı" />
         {checkbox}
       </>
     );
@@ -1512,16 +1512,16 @@ export default function App() {
   if (reverse) {
     return (
       <>
-        <Field key="lastName" label="Soyad" />
-        <Field key="firstName" label="Ad" />
+        <Field key="lastName" label="Last name" />
+        <Field key="firstName" label="First name" />
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-        <Field key="firstName" label="Ad" />
-        <Field key="lastName" label="Soyad" />
+        <Field key="lastName" label="Soyadı" />
+        <Field key="firstName" label="Adı" />
         {checkbox}
       </>
     );
@@ -2069,7 +2069,7 @@ export default function Contact({ contact }) {
       <button onClick={() => {
         setExpanded(!expanded);
       }}>
-        E-postayı {expanded ? 'sakla' : 'göster'} 
+        E-postayı {expanded ? 'sakla' : 'göster'}
       </button>
     </>
   );

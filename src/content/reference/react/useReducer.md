@@ -40,7 +40,7 @@ function MyComponent() {
 
 * `reducer`: State’in nasıl update edileceğini belirten reducer function. Pure olmalıdır, state ve action’ı argument olarak almalı ve next state’i return etmelidir. State ve action herhangi bir type’ta olabilir.
 * `initialArg`: Initial state’in hesaplandığı value. Herhangi bir type’ta value olabilir. Initial state’in bundan nasıl hesaplanacağı, sonraki `init` argument’ına bağlıdır.
-* **optional** `init`: Initial state’i return etmesi gereken initializer function. Belirtilmezse, initial state `initialArg` olarak set edilir. Aksi halde initial state, `init(initialArg)` çağrısının result’ı olarak set edilir.
+* **optional** `init`: Initial state’i return etmesi gereken initializer function. Belirtilmezse, initial state `initialArg` olarak set edilir. Aksi halde, initial state `init(initialArg)` çağrısının result’ı olarak set edilir.
 
 #### Dönüş değerleri {/*returns*/}
 

@@ -735,8 +735,8 @@ Bu dezavantajlar listesi React'e özel değildir. Bu, herhangi bir kütüphane i
 - **Bir [framework](/learn/creating-a-react-app#full-stack-frameworks) kullanıyorsanız, onun built-in data fetching mekanizmasını kullanın.** Modern React framework’leri, verimli çalışan ve yukarıdaki sorunlardan etkilenmeyen entegre data fetching mekanizmalarına sahiptir.
 - **Aksi durumda, client-side cache kullanmayı veya kendi cache çözümünüzü geliştirmeyi düşünün.** Yaygın open source çözümler arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur. Kendi çözümünüzü de geliştirebilirsiniz; bu durumda kaputun altında Effects kullanırsınız ancak istekleri dedupe etmek, response’ları cache’lemek ve network waterfall’larını önlemek (veriyi preload ederek veya data requirement’ları route’lara hoist ederek) için ek logic yazarsınız.
 
-- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**  
-  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.  
+- **Aksi halde, istemci tarafında (client-side) bir cache kullanmayı veya geliştirmeyi düşün.**
+  Popüler açık kaynak çözümleri arasında [TanStack Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/) ve [React Router 6.4+](https://beta.reactrouter.com/en/main/start/overview) bulunur.
   Kendi çözümünü de oluşturabilirsin; bu durumda alt seviyede *Effect*’leri kullanırsın, ancak isteklere yinelenmeyi önleme (deduplication), yanıtları önbelleğe alma (caching) ve ağ darboğazlarını (network waterfalls) engelleme gibi mantıkları eklersin (örneğin verileri önceden yükleyerek veya veri gereksinimlerini route seviyesine taşıyarak).
 
 Eğer bu yaklaşımlardan hiçbiri size uymuyorsa, Efektler içinde veri getirmeye devam edebilirsiniz.
@@ -1009,7 +1009,7 @@ export default function MyInput({ value, onChange }) {
   const ref = useRef(null);
 
   // YAPILACAK: Bu tam olarak çalışmamakta. Düzeltin.
-  // ref.current.focus()    
+  // ref.current.focus()
 
   return (
     <input
@@ -1601,7 +1601,7 @@ Her render'ın Efekti kendi `ignore` değişkenine sahiptir. İlk olarak, `ignor
 
 - `'Bob'` kişisini seçmek `fetchBio('Bob')` fonksiyonunu tetikler
 - `'Taylor'` kişisini seçmek `fetchBio('Taylor')` fonksiyonunu tetikler **ve bir önceki Efekti temizler (Bob'un Efekti)**
-- `'Taylor'` verisi `'Bob'` verisinden *önce* getirilir 
+- `'Taylor'` verisi `'Bob'` verisinden *önce* getirilir
 - `'Taylor'` render'ının Efekti `setBio('Bu Taylor'ın biyografisidir.')` fonksiyonunu çağırır
 - `'Bob'` verisi getirilir
 - `'Bob'` render'ının Efekti **`ignore` değişkeninin değeri `true` olduğu için hiçbir şey yapmaz**

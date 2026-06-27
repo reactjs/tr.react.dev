@@ -12,7 +12,7 @@ State değişkenleri okuma ve yazma yapabildiğiniz sıradan Javascript değişk
 <YouWillLearn>
 
 * State'i ayarlamak yeniden render alınmasını nasıl tetikler
-* State güncellemeleri ne zaman ve nasıl yapılır 
+* State güncellemeleri ne zaman ve nasıl yapılır
 * State neden ayarlandıktan hemen sonra güncellenmez
 * Olay yöneticileri state'in "anlık görüntüsü"ne nasıl erişir
 
@@ -72,11 +72,11 @@ Butona tıkladığınızda şu işlemler gerçekleşir:
 
 ## Render işlemi anlık görüntü alır {/*rendering-takes-a-snapshot-in-time*/}
 
-["Render Etmek"](/learn/render-and-commit#step-2-react-renders-your-components), React'ın bir fonksiyon olan bileşeninizi çağırdığı anlamına gelir. Bu fonksiyondan döndürdüğünüz JSX, kullanıcı arayüzünün zaman içindeki anlık görüntüsü olarak düşünülebilir. Bileşenin prop’ları, olay yöneticileri ve yerel değişkenleri **render anında state kullanılarak**  hesaplanmıştır. 
+["Render Etmek"](/learn/render-and-commit#step-2-react-renders-your-components), React'ın bir fonksiyon olan bileşeninizi çağırdığı anlamına gelir. Bu fonksiyondan döndürdüğünüz JSX, kullanıcı arayüzünün zaman içindeki anlık görüntüsü olarak düşünülebilir. Bileşenin prop’ları, olay yöneticileri ve yerel değişkenleri **render anında state kullanılarak**  hesaplanmıştır.
 
 Bir fotoğraf veya film karesinin aksine, döndürdüğünüz kullanıcı arayüzünün "anlık görüntüsü" etkileşimlidir. Girdilere yanıt olarak neyin gerçekleşeceğini belirten olay yöneticileri gibi mantık içerir. React, ekranı bu anlık görüntüyle eşleşecek şekilde günceller ve olay işleyicilerini bağlar. Sonuç olarak, bir butona basmak JSX'inizdeki tıklama yöneticisini tetikleyecektir.
 
-React bir bileşeni yeniden render ettiğinde: 
+React bir bileşeni yeniden render ettiğinde:
 
 1. React fonksiyonunuzu yeniden çağırır.
 2. Fonksiyonunuz yeni bir JSX anlık görüntüsü (snapshot) döner.
@@ -96,7 +96,7 @@ Bir bileşenin hafızası olarak state, fonksiyonunuzun yürütülmesi sona erdi
   <Illustration caption="React bileşene state değerinin anlık görüntüsünü aktarır" src="/images/docs/illustrations/i_state-snapshot3.png" />
 </IllustrationBlock>
 
-İşte size bunun nasıl çalıştığını gösteren küçük bir deney. Bu örnekte, "+3" butonuna tıkladığınızda `setNumber(number + 1)` üç kez çağrıldığı için sayacın üç kez artmasını bekleyebilirsiniz. 
+İşte size bunun nasıl çalıştığını gösteren küçük bir deney. Bu örnekte, "+3" butonuna tıkladığınızda `setNumber(number + 1)` üç kez çağrıldığı için sayacın üç kez artmasını bekleyebilirsiniz.
 
 "+3" butonuna tıkladığınızda ne olduğunu görün:
 

@@ -243,7 +243,7 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Colvin ağırlıklı olarak Hispanik öncesi sembollere gönderme yapan soyut temalarıyla bilinse de, nöroşirürjiye bir saygı duruşu olan bu devasa heykel, onun en tanınan kamusal sanat eserlerinden biridir.',
+  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
   alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
@@ -311,7 +311,7 @@ export const sculptureList = [{
   artist: 'Taipei Hayvanat Bahçesi',
   description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
-  alt: 'Sanki yüzüyormuş gibi kaldırımdan çıkan bir grup bronz hipopotam heykeli.'
+  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
 ```
 
@@ -431,7 +431,7 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Colvin ağırlıklı olarak Hispanik öncesi sembollere gönderme yapan soyut temalarıyla bilinse de, nöroşirürjiye bir saygı duruşu olan bu devasa heykel, onun en tanınan kamusal sanat eserlerinden biridir.',
+  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
   alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
@@ -499,7 +499,7 @@ export const sculptureList = [{
   artist: 'Taipei Hayvanat Bahçesi',
   description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
-  alt: 'Sanki yüzüyormuş gibi kaldırımdan çıkan bir grup bronz hipopotam heykeli.'
+  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
 ```
 
@@ -627,7 +627,7 @@ let image = document.getElementById('image');
 let sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Colvin ağırlıklı olarak Hispanik öncesi sembollere gönderme yapan soyut temalarıyla bilinse de, nöroşirürjiye bir saygı duruşu olan bu devasa heykel, onun en tanınan kamusal sanat eserlerinden biridir.',
+  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
   alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
@@ -695,7 +695,7 @@ let sculptureList = [{
   artist: 'Taipei Hayvanat Bahçesi',
   description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
-  alt: 'Sanki yüzüyormuş gibi kaldırımdan çıkan bir grup bronz hipopotam heykeli.'
+  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
 
 // Kullanıcı arayüzünü ilk state ile eşleştir.
@@ -796,7 +796,7 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Colvin ağırlıklı olarak Hispanik öncesi sembollere gönderme yapan soyut temalarıyla bilinse de, nöroşirürjiye bir saygı duruşu olan bu devasa heykel, onun en tanınan kamusal sanat eserlerinden biridir.',
+  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
   alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
@@ -864,7 +864,7 @@ export const sculptureList = [{
   artist: 'Taipei Hayvanat Bahçesi',
   description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
-  alt: 'Sanki yüzüyormuş gibi kaldırımdan çıkan bir grup bronz hipopotam heykeli.'
+  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
 ```
 
@@ -967,7 +967,7 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Colvin ağırlıklı olarak Hispanik öncesi sembollere gönderme yapan soyut temalarıyla bilinse de, nöroşirürjiye bir saygı duruşu olan bu devasa heykel, onun en tanınan kamusal sanat eserlerinden biridir.',
+  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
   alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
@@ -1035,7 +1035,7 @@ export const sculptureList = [{
   artist: 'Taipei Hayvanat Bahçesi',
   description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
-  alt: 'Sanki yüzüyormuş gibi kaldırımdan çıkan bir grup bronz hipopotam heykeli.'
+  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
 ```
 
@@ -1129,7 +1129,7 @@ export default function Gallery() {
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
-  description: 'Colvin ağırlıklı olarak Hispanik öncesi sembollere gönderme yapan soyut temalarıyla bilinse de, nöroşirürjiye bir saygı duruşu olan bu devasa heykel, onun en tanınan kamusal sanat eserlerinden biridir.',
+  description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
   alt: 'İki çapraz elin, parmak uçlarında insan beynini nazikçe tuttuğu bronz bir heykel.'
 }, {
@@ -1197,7 +1197,7 @@ export const sculptureList = [{
   artist: 'Taipei Hayvanat Bahçesi',
   description: 'Taipei Hayvanat Bahçesi, oyun oynayan suya batmış hipopotamları içeren bir Hippo Square yaptırdı.',
   url: 'https://react.dev/images/docs/scientists/6o5Vuyu.jpg',
-  alt: 'Sanki yüzüyormuş gibi kaldırımdan çıkan bir grup bronz hipopotam heykeli.'
+  alt: 'A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.'
 }];
 ```
 

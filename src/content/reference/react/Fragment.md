@@ -4,7 +4,7 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-Genellikle `<>...</>` syntax’ı ile kullanılan `<Fragment>`, element’leri wrapper node olmadan group etmenizi sağlar.
+`<Fragment>`, genellikle `<>...</>` syntax’ı ile kullanılır ve element’leri bir wrapper node olmadan gruplamanızı sağlar.
 
 <Canary> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin. </Canary>
 
@@ -29,7 +29,7 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
-- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)  
+- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)
 - <CanaryBadge /> **optional** `ref`: Bir ref objesi (örneğin [`useRef`](/reference/react/useRef) ile oluşturulmuş) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim kurmak için yöntemler içeren bir `FragmentInstance`'ı ref değeri olarak sağlar.
 
 ### <CanaryBadge /> FragmentInstance {/*fragmentinstance*/}
@@ -37,25 +37,25 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler içeren bir `FragmentInstance` nesnesi sağlar:
 
 **Olay yönetimi yöntemleri:**
-- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.  
-- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.  
+- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.
+- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.
 - `dispatchEvent(event)`: Fragment'in sanal bir çocuğuna bir olay gönderir; eklenen dinleyicileri çağırır ve DOM üstüne kabarcık yapabilir.
 
 **Layout method’ları:**
-- `compareDocumentPosition(otherNode)`: Fragment’in document position’ını başka bir node ile compare eder.
+- `compareDocumentPosition(otherNode)`: Fragment’in document position’ını başka bir node ile karşılaştırır.
   - Fragment’in children’ları varsa, native `compareDocumentPosition` value’su return edilir.
-  - Empty Fragment’ler React tree içinde positioning’i compare etmeye çalışır ve `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` içerir.
+  - Empty Fragment’ler, React tree içindeki positioning’i karşılaştırmayı dener ve `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` içerir.
   - Portaling veya diğer insertion’lar nedeniyle React tree ve DOM tree içinde farklı relationship’e sahip element’ler `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` olur.
 - `getClientRects()`: Tüm children’ların bounding rectangle’larını temsil eden `DOMRect` object’lerinden oluşan flat bir array return eder.
 - `getRootNode()`: Fragment’in parent DOM node’unu içeren root node’u return eder.
 
 **Odak (focus) yönetimi yöntemleri:**
-- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
-- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.  
+- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.
+- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.
 - `blur()`: Eğer `document.activeElement` Fragment içindeyse odak kaldırılır.
 
 **Gözlemleme (observer) yöntemleri:**
-- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.  
+- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.
 - `unobserveUsing(observer)`: Belirtilen observer ile Fragment'in DOM çocuklarını gözlemlemeyi durdurur.
 
 #### Uyarılar {/*caveats*/}

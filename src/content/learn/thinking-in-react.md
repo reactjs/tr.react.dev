@@ -37,7 +37,7 @@ Her bileşenin etrafına kutular çizin ve bileşenlerinize isim verin. Bir tasa
 
 Tecrübenize bağlı olarak, bir tasarımı farklı yöntemlerle bileşenlere ayırmayı düşünebilirsiniz:
 
-* **Programming**--yeni bir function veya object oluşturmanız gerekip gerekmediğine karar vermek için aynı teknikleri kullanın. Bu tekniklerden biri [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns)’dür; yani bir component ideal olarak yalnızca tek bir şeyle ilgilenmelidir. Eğer büyümeye başlarsa, daha küçük subcomponent’lere ayrılmalıdır.
+* **Programming**--yeni bir function veya object oluşturmanız gerekip gerekmediğine karar verirken aynı teknikleri kullanın. Bu tekniklerden biri [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) yaklaşımıdır; yani bir component ideal olarak yalnızca tek bir şeyle ilgilenmelidir. Eğer büyümeye başlarsa, daha küçük subcomponent’lere ayrılmalıdır.
 * **CSS**--hangi şeyler için class selector oluşturacağınızı düşünün. (Ancak component’ler biraz daha az granular’dır.)
 * **Design**--design’ın layer’larını nasıl organize edeceğinizi düşünün.
 
@@ -224,10 +224,10 @@ Geriye kalanlar muhtemelen state'tir.
 
 Hadi teker teker inceleyelim:
 
-1. Product’ların original listesi **props olarak pass edilir, bu yüzden state değildir.**
-2. Search text, zamanla değiştiği ve herhangi bir şeyden compute edilemediği için state gibi görünür.
-3. Checkbox’ın value’su, zamanla değiştiği ve herhangi bir şeyden compute edilemediği için state gibi görünür.
-4. Product’ların filtered listesi **state değildir çünkü compute edilebilir**: product’ların original listesi alınır ve search text ile checkbox’ın value’suna göre filter edilir.
+1. Orijinal product listesi **props olarak pass edilir, bu yüzden state değildir.**
+2. Search text state gibi görünür çünkü zamanla değişir ve başka bir şeyden compute edilemez.
+3. Checkbox’ın value’su state gibi görünür çünkü zamanla değişir ve başka bir şeyden compute edilemez.
+4. Filtered product listesi **state değildir çünkü compute edilebilir**; orijinal product listesi alınarak search text’e ve checkbox’ın value’suna göre filtrelenir.
 
 Demek ki sadece arama metni ve checkbox'ın değeri state'tir! Güzel iş!
 
@@ -262,10 +262,10 @@ Uygulamanızdaki her state parçası için:
 Şimdi o ikisi için stratejimizi gözden geçirelim:
 
 1. **State kullanan component’leri belirleyin:**
-    * `ProductTable`, product list’i bu state’e göre filter etmek zorundadır (search text ve checkbox value).
-    * `SearchBar`, bu state’i display etmek zorundadır (search text ve checkbox value).
-2. **Common parent’larını bulun:** İki component’in de paylaştığı ilk parent component `FilterableProductTable`’dır.
-3. **State’in nerede yaşayacağına karar verin**: Filter text ve checked state value’larını `FilterableProductTable` içinde tutacağız.
+    * `ProductTable`, product list’i bu state’e göre filter etmelidir (search text ve checkbox value).
+    * `SearchBar`, bu state’i display etmelidir (search text ve checkbox value).
+2. **Ortak parent’larını bulun:** Her iki component’in de paylaştığı ilk parent component `FilterableProductTable`’dır.
+3. **State’in nerede yaşayacağına karar verin:** Filter text ve checked state value’larını `FilterableProductTable` içinde tutacağız.
 
 Yani state value’ları `FilterableProductTable` içinde yaşayacak.
 
@@ -467,7 +467,7 @@ Ancak henüz kullanıcı eylemlerine (yazmak gibi) yanıt vermek için herhangi 
 
 Uygulamanız şu anda, prop'lar ve state'in hiyerarşi boyunca aşağı doğru akmasıyla, doğru bir şekilde render ediliyor. Ancak kullanıcı girdisine göre state'i değiştirmek için, ters istikametteki veri akışını da desteklemeniz gerekecektir. Hiyerarşinin derinliklerindeki form bileşenlerinin `FilterableProductTable` bileşenindeki state'i güncellemesi gerekecek.
 
-Şu anda app’iniz props ve state’in hierarchy boyunca aşağı doğru flow etmesiyle doğru şekilde render oluyor. Ancak state’i user input’a göre değiştirmek için data’nın diğer yöne flow etmesini support etmeniz gerekir: hierarchy’nin derinlerindeki form component’leri, `FilterableProductTable` içindeki state’i update etmelidir.
+Şu anda app’iniz, props ve state hierarchy boyunca aşağı doğru flow ederek doğru şekilde render ediyor. Ancak state’i user input’a göre değiştirmek için, data’nın diğer yöne doğru flow etmesini desteklemeniz gerekir: hierarchy’nin derinlerindeki form component’leri, `FilterableProductTable` içindeki state’i update etmelidir.
 
 Kullanıcı form inputlarını değiştirdiğinde, state'in bu değişiklikleri yansıtacak şekilde güncellenmesini istersiniz. State `FilterableProductTable`'a aittir, bu yüzden yalnızca o bileşen `setFilterText` ve `setInStockOnly` fonksiyonlarını çağırabilir. `SearchBar`'ın `FilterableProductTable`'ın state'ini güncellemesine izin vermek için, bu fonksiyonları `SearchBar`'a iletmeniz gerekir:
 

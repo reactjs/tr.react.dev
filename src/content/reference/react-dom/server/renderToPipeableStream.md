@@ -54,7 +54,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   * **isteğe bağlı** `bootstrapModules`: `bootstrapScripts` gibidir, ancak [`<script type="module">`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) çıktısı verir.
   * **isteğe bağlı** `identifierPrefix`: React tarafından [`useId`](/reference/react/useId) ile üretilen ID'ler için kullanılan ön ektir. Aynı sayfada birden fazla kök kullanılıyorsa karışıklıkları önlemek için uygundur. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters)'a gönderilen ön ek ile aynı olmalıdır.
   * **isteğe bağlı** `namespaceURI`: Stream için kök [namespace URI](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS#important_namespace_uris) olan bir stringtir. Standart HTML'de varsayılandır. SVG için `'http://www.w3.org/2000/svg'` ya da MathML için `'http://www.w3.org/1998/Math/MathML'` iletin.
-  * **isteğe bağlı** `nonce`: [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) stringi, [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) scriptlerine izin vermek için kullanılır. 
+  * **isteğe bağlı** `nonce`: [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) stringi, [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) scriptlerine izin vermek için kullanılır.
   * **isteğe bağlı** `onAllReady`: [shell](#specifying-what-goes-into-the-shell) ve tüm ek [content](#streaming-more-content-as-it-loads)'ler de dahil olmak üzerebütün render işlemi tamamlandığında çağırılan callbacktir. `onShellReady` [tarayıcılar ve statik oluşturma için](#waiting-for-all-content-to-load-for-crawlers-and-static-generation) yerine kullanabilirsiniz. Streami buradan başlatırsanız, herhangi bir aşamalı yükleme almayacaksınız. Stream, en son HTML'i içerecektir.
   * **isteğe bağlı** `onError`: [Kurtarılabilir](#recovering-from-errors-outside-the-shell) veya [kurtarılamaz](#recovering-from-errors-inside-the-shell) sunucu hatalarında çağırılan callbacktir. Varsayılan olarak sadece `console.error`'u çağırır. [Günlük kitlenme raporularına](#logging-crashes-on-the-server) olarak geçersiz kılsanız bile `console.error`'u çağırdığınızdan emin olun. Ayrıca shell yayınlanmadan önce [durum kodunu ayarlamak](#setting-the-status-code) için de kullanabilirsiniz.
   * **isteğe bağlı** `onShellReady`: [Başlangıç shell](#specifying-what-goes-into-the-shell)'i render edildikten hemen sonra çağırılan callbacktir.  [Durum kodunu ayarlamak](#setting-the-status-code) ve streami başlatmak için `pipe`'ı çağırabilirsiniz. React shellden sonra [ek contentleri stream](#streaming-more-content-as-it-loads) edecektir ve bu contentleri HTML yükleme fallbacklerini değiştiren `<script>` etiketleriyle birlikte stream edecektir.
@@ -286,7 +286,7 @@ Stream işleminin, React'ın tarayıcıya yüklenmesini veya uygulamanızın etk
 
 **Sadece Suspense özelliğine sahip veri kaynakları Suspense bileşenini etkinleştirir.** Şunları içerir:
 
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin framework'lerde veri getirme 
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin framework'lerde veri getirme
 - [`lazy`](/reference/react/lazy) ile bileşen kodunu temvel yükleme (lazy-loading).
 - [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
@@ -294,7 +294,7 @@ Effect veya olay yöneticisi içinde veri alınırken Suspense **tespit edilmez*
 
 Yukarıdaki `Posts` bileşenininde veri getirmenin tam yolu framework'ünüze bağlıdır. Suspense özelliği etkin bir framework kullanırsanız, detayları framework'ünüzün veri getirme dokümantasyonunun içinde bulabilirsiniz.
 
-Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz support edilmemektedir. Suspense-enabled bir data source implement etmek için gereken requirements unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için official API, React’in future bir version’ında release edilecektir.
+Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
 
 </Note>
 
@@ -460,7 +460,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Bir şey yanlış gitti</h1>');
+    response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onError(error) {
     console.error(error);
@@ -486,7 +486,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Bir şey yanlış gitti</h1>');
+    response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onError(error) {
     didError = true;
@@ -531,7 +531,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
    response.statusCode = getStatusCode();
    response.setHeader('content-type', 'text/html');
-   response.send('<h1>Bir şey yanlış gitti</h1>');
+   response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onError(error) {
     didError = true;
@@ -571,7 +571,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Bir şey yanlış gitti</h1>');
+    response.send('<h1>Bir şey yanlış gitti.</h1>');
   },
   onAllReady() {
     if (isCrawler) {

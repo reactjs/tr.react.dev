@@ -39,120 +39,121 @@ title: "Ortak bileşenler (örn. <div>)"
 * `style`: CSS biçimlerini taşıyan bir nesne, örneğin `{ fontWeight: 'bold', margin: 20 }`. DOM'un [`style`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) özelliğine benzer olarak, CSS özellik isimleri `camelCase` olarak yazılmalıdır, örneğin `font-weight` yerine `fontWeight`. Değerleri string veya sayı olarak verebilirsiniz. `width: 100` şeklinde bir sayı verdiğinizde, eğer [birimsiz özellik](https://github.com/facebook/react/blob/81d4ee9ca5c405dce62f64e61506b8e155f38d8d/packages/react-dom-bindings/src/shared/CSSProperty.js#L8-L57) değilse, React bu sayıya otomatik olarak `px` ("piksel")'i ekler. `style`'ı yalnızca, biçim değerlerini önceden bilmediğiniz dinamik biçimler için kullanmanızı tavsiye ediyoruz. Diğer durumlarda ise `className` ile düz CSS sınıfları uygulamak daha verimli. [`className` and `style` ile ilgili daha fazlasını okuyun.](#applying-css-styles)
 
 Şu standart DOM prop'ları da tüm yerleşik bileşenlerde desteklenir:
+
 * [`accessKey`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey): Bir string. Element için bir keyboard shortcut belirtir. [Genellikle önerilmez.](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#accessibility_concerns)
-* [`aria-*`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes): ARIA attribute’ları, bu element için accessibility tree bilgisini belirtmenizi sağlar. Tam bir reference için [ARIA attributes](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes) bölümüne bakın. React’ta tüm ARIA attribute name’leri HTML’dekiyle tamamen aynıdır.
-* [`autoCapitalize`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize): Bir string. User input’unun capitalize edilip edilmeyeceğini ve nasıl capitalize edileceğini belirtir.
-* [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className): Bir string. Element’in CSS class name’ini belirtir. [CSS style’larını uygulama hakkında daha fazla bilgi edinin.](#applying-css-styles)
-* [`contentEditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable): Bir boolean. `true` ise browser, user’ın render edilen element’i doğrudan edit etmesine izin verir. Bu, [Lexical](https://lexical.dev/) gibi rich text input library’lerini implement etmek için kullanılır. React, `contentEditable={true}` olan bir element’e React children pass etmeye çalışırsanız uyarı verir; çünkü React, user edit’lerinden sonra content’i update edemeyecektir.
-* [`data-*`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*): Data attribute’ları, element’e bazı string data’ları attach etmenizi sağlar; örneğin `data-fruit="banana"`. React’ta bunlar yaygın kullanılmaz çünkü genellikle bunun yerine data’yı props veya state’ten okursunuz.
+* [`aria-*`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes): ARIA attribute’ları, bu element için accessibility tree bilgisini belirtmenizi sağlar. Tam referans için [ARIA attributes](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes) sayfasına bakın. React’te tüm ARIA attribute adları HTML’dekiyle tamamen aynıdır.
+* [`autoCapitalize`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize): Bir string. User input’unun büyük harfe çevrilip çevrilmeyeceğini ve nasıl çevrileceğini belirtir.
+* [`className`](https://developer.mozilla.org/en-US/docs/Web/API/Element/className): Bir string. Element’in CSS class name’ini belirtir. [CSS style uygulama hakkında daha fazla bilgi edinin.](#applying-css-styles)
+* [`contentEditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable): Bir boolean. `true` ise browser, user’ın render edilen element’i doğrudan edit etmesine izin verir. Bu, [Lexical](https://lexical.dev/) gibi rich text input library’lerini implement etmek için kullanılır. React, `contentEditable={true}` olan bir element’e React children pass etmeye çalışırsanız uyarı verir; çünkü React, user edit’lerinden sonra içeriğini update edemeyecektir.
+* [`data-*`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*): Data attribute’ları, element’e bazı string data’lar eklemenizi sağlar; örneğin `data-fruit="banana"`. React’te bunlar yaygın olarak kullanılmaz, çünkü genellikle data’yı bunun yerine props veya state’ten okursunuz.
 * [`dir`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir): `'ltr'` veya `'rtl'`. Element’in text direction’ını belirtir.
 * [`draggable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable): Bir boolean. Element’in draggable olup olmadığını belirtir. [HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)’nin bir parçasıdır.
 * [`enterKeyHint`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/enterKeyHint): Bir string. Virtual keyboard’larda enter key için hangi action’ın gösterileceğini belirtir.
-* [`htmlFor`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor): Bir string. [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) ve [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output) için, [label’ı bir control ile associate etmenizi sağlar.](/reference/react-dom/components/input#providing-a-label-for-an-input) [`for` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) ile aynıdır. React, HTML attribute name’leri yerine standard DOM property name’lerini (`htmlFor`) kullanır.
+* [`htmlFor`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor): Bir string. [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) ve [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output) için, [label’ı bir control ile ilişkilendirmenizi sağlar.](/reference/react-dom/components/input#providing-a-label-for-an-input) [`for` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) ile aynıdır. React, HTML attribute adları yerine standart DOM property adlarını (`htmlFor`) kullanır.
 * [`hidden`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden): Bir boolean veya string. Element’in hidden olup olmayacağını belirtir.
-* [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id): Bir string. Bu element için unique identifier belirtir; daha sonra onu bulmak veya başka element’lerle connect etmek için kullanılabilir. Aynı component’in birden fazla instance’ı arasında clash oluşmasını önlemek için bunu [`useId`](/reference/react/useId) ile generate edin.
+* [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id): Bir string. Bu element için unique identifier belirtir; daha sonra onu bulmak veya başka element’lerle connect etmek için kullanılabilir. Aynı component’in birden fazla instance’ı arasında çakışmaları önlemek için bunu [`useId`](/reference/react/useId) ile generate edin.
 * [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is): Bir string. Belirtilirse, component bir [custom element](/reference/react-dom/components#custom-html-elements) gibi davranır.
 * [`inputMode`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode): Bir string. Hangi tür keyboard’un gösterileceğini belirtir (örneğin text, number veya telephone).
 * [`itemProp`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/itemprop): Bir string. Element’in structured data crawler’ları için hangi property’yi temsil ettiğini belirtir.
-* [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang): Bir string. Element’in language’ini belirtir.
-* [`onAnimationEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event): Bir [`AnimationEvent` handler](#animationevent-handler) function’ı. Bir CSS animation tamamlandığında fire eder.
-* `onAnimationEndCapture`: `onAnimationEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onAnimationIteration`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event): Bir [`AnimationEvent` handler](#animationevent-handler) function’ı. Bir CSS animation iteration’ı bittiğinde ve başka biri başladığında fire eder.
-* `onAnimationIterationCapture`: `onAnimationIteration`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onAnimationStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event): Bir [`AnimationEvent` handler](#animationevent-handler) function’ı. Bir CSS animation başladığında fire eder.
-* `onAnimationStartCapture`: `onAnimationStart`, ancak [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eder.
-* [`onAuxClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointing device üzerindeki primary olmayan bir button click edildiğinde fire eder.
-* `onAuxClickCapture`: `onAuxClick`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* `onBeforeInput`: Bir [`InputEvent` handler](#inputevent-handler) function’ı. Editable bir element’in value’su modify edilmeden önce fire eder. React henüz native [`beforeinput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event) event’ini kullanmaz; bunun yerine diğer event’leri kullanarak onu polyfill etmeye çalışır.
-* `onBeforeInputCapture`: `onBeforeInput`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* `onBlur`: Bir [`FocusEvent` handler](#focusevent-handler) function’ı. Bir element focus kaybettiğinde fire eder. Built-in browser [`blur`](https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event) event’inden farklı olarak, React’ta `onBlur` event’i bubble eder.
-* `onBlurCapture`: `onBlur`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointing device üzerindeki primary button click edildiğinde fire eder.
-* `onClickCapture`: `onClick`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onCompositionStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event): Bir [`CompositionEvent` handler](#compositionevent-handler) function’ı. Bir [input method editor](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) yeni bir composition session başlattığında fire eder.
-* `onCompositionStartCapture`: `onCompositionStart`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onCompositionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event): Bir [`CompositionEvent` handler](#compositionevent-handler) function’ı. Bir [input method editor](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) bir composition session’ı tamamladığında veya iptal ettiğinde fire eder.
-* `onCompositionEndCapture`: `onCompositionEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onCompositionUpdate`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionupdate_event): Bir [`CompositionEvent` handler](#compositionevent-handler) function’ı. Bir [input method editor](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) yeni bir character aldığında fire eder.
-* `onCompositionUpdateCapture`: `onCompositionUpdate`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onContextMenu`](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. User bir context menu açmaya çalıştığında fire eder.
-* `onContextMenuCapture`: `onContextMenu`’nün [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onCopy`](https://developer.mozilla.org/en-US/docs/Web/API/Element/copy_event): Bir [`ClipboardEvent` handler](#clipboardevent-handler) function’ı. User clipboard’a bir şey copy etmeye çalıştığında fire eder.
-* `onCopyCapture`: `onCopy`’nin [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onCut`](https://developer.mozilla.org/en-US/docs/Web/API/Element/cut_event): Bir [`ClipboardEvent` handler](#clipboardevent-handler) function’ı. User clipboard’a bir şey cut etmeye çalıştığında fire eder.
-* `onCutCapture`: `onCut`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* `onDoubleClick`: Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. User iki kez click ettiğinde fire eder. Browser [`dblclick` event](https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event)’ine karşılık gelir.
-* `onDoubleClickCapture`: `onDoubleClick`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onDrag`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. User bir şeyi drag ederken fire eder.
-* `onDragCapture`: `onDrag`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onDragEnd`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. User bir şeyi drag etmeyi bıraktığında fire eder.
-* `onDragEndCapture`: `onDragEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onDragEnter`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. Drag edilen content valid bir drop target’a girdiğinde fire eder.
-* `onDragEnterCapture`: `onDragEnter`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onDragOver`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. Drag edilen content valid bir drop target üzerinde drag edilirken fire eder. Drop’a izin vermek için burada `e.preventDefault()` çağırmanız gerekir.
-* `onDragOverCapture`: `onDragOver`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onDragStart`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. User bir element’i drag etmeye başladığında fire eder.
-* `onDragStartCapture`: `onDragStart`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onDrop`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. Valid bir drop target üzerine bir şey drop edildiğinde fire eder.
-* `onDropCapture`: `onDrop`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* `onFocus`: Bir [`FocusEvent` handler](#focusevent-handler) function’ı. Bir element focus aldığında fire eder. Built-in browser [`focus`](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event) event’inden farklı olarak, React’ta `onFocus` event’i bubble eder.
-* `onFocusCapture`: `onFocus`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onGotPointerCapture`](https://developer.mozilla.org/en-US/docs/Web/API/Element/gotpointercapture_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir element programmatically bir pointer’ı capture ettiğinde fire eder.
-* `onGotPointerCaptureCapture`: `onGotPointerCapture`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onKeyDown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event): Bir [`KeyboardEvent` handler](#keyboardevent-handler) function’ı. Bir key basıldığında fire eder.
-* `onKeyDownCapture`: `onKeyDown`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
+* [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang): Bir string. Element’in language’ını belirtir.
+* [`onAnimationEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event): Bir [`AnimationEvent` handler](#animationevent-handler) function’ı. Bir CSS animation tamamlandığında fire olur.
+* `onAnimationEndCapture`: `onAnimationEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onAnimationIteration`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event): Bir [`AnimationEvent` handler](#animationevent-handler) function’ı. Bir CSS animation iteration’ı bittiğinde ve bir diğeri başladığında fire olur.
+* `onAnimationIterationCapture`: `onAnimationIteration`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onAnimationStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event): Bir [`AnimationEvent` handler](#animationevent-handler) function’ı. Bir CSS animation başladığında fire olur.
+* `onAnimationStartCapture`: `onAnimationStart`, ancak [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olur.
+* [`onAuxClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Primary olmayan pointer button’a click edildiğinde fire olur.
+* `onAuxClickCapture`: `onAuxClick`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* `onBeforeInput`: Bir [`InputEvent` handler](#inputevent-handler) function’ı. Editable bir element’in value’su değiştirilmeden önce fire olur. React henüz native [`beforeinput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event) event’ini kullanmaz; bunun yerine diğer event’leri kullanarak bunu polyfill etmeye çalışır.
+* `onBeforeInputCapture`: `onBeforeInput`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* `onBlur`: Bir [`FocusEvent` handler](#focusevent-handler) function’ı. Bir element focus’u kaybettiğinde fire olur. Built-in browser [`blur`](https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event) event’inin aksine, React’te `onBlur` event’i bubble eder.
+* `onBlurCapture`: `onBlur`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointing device üzerindeki primary button’a click edildiğinde fire olur.
+* `onClickCapture`: `onClick`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onCompositionStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event): Bir [`CompositionEvent` handler](#compositionevent-handler) function’ı. Bir [input method editor](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) yeni bir composition session başlattığında fire olur.
+* `onCompositionStartCapture`: `onCompositionStart`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onCompositionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event): Bir [`CompositionEvent` handler](#compositionevent-handler) function’ı. Bir [input method editor](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) bir composition session’ı tamamladığında veya iptal ettiğinde fire olur.
+* `onCompositionEndCapture`: `onCompositionEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onCompositionUpdate`](https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionupdate_event): Bir [`CompositionEvent` handler](#compositionevent-handler) function’ı. Bir [input method editor](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) yeni bir character aldığında fire olur.
+* `onCompositionUpdateCapture`: `onCompositionUpdate`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onContextMenu`](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. User bir context menu açmaya çalıştığında fire olur.
+* `onContextMenuCapture`: `onContextMenu`’nün [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onCopy`](https://developer.mozilla.org/en-US/docs/Web/API/Element/copy_event): Bir [`ClipboardEvent` handler](#clipboardevent-handler) function’ı. User clipboard’a bir şey copy etmeye çalıştığında fire olur.
+* `onCopyCapture`: `onCopy`’nin [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onCut`](https://developer.mozilla.org/en-US/docs/Web/API/Element/cut_event): Bir [`ClipboardEvent` handler](#clipboardevent-handler) function’ı. User clipboard’a bir şey cut etmeye çalıştığında fire olur.
+* `onCutCapture`: `onCut`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* `onDoubleClick`: Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. User iki kez click ettiğinde fire olur. Browser [`dblclick` event](https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event)’ine karşılık gelir.
+* `onDoubleClickCapture`: `onDoubleClick`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onDrag`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. User bir şeyi drag ederken fire olur.
+* `onDragCapture`: `onDrag`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onDragEnd`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. User bir şeyi drag etmeyi bıraktığında fire olur.
+* `onDragEndCapture`: `onDragEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onDragEnter`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. Drag edilen content geçerli bir drop target’a girdiğinde fire olur.
+* `onDragEnterCapture`: `onDragEnter`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onDragOver`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. Drag edilen content geçerli bir drop target üzerinde drag edilirken fire olur. Drop’a izin vermek için burada `e.preventDefault()` çağırmalısınız.
+* `onDragOverCapture`: `onDragOver`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onDragStart`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. User bir element’i drag etmeye başladığında fire olur.
+* `onDragStartCapture`: `onDragStart`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onDrop`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event): Bir [`DragEvent` handler](#dragevent-handler) function’ı. Bir şey geçerli bir drop target’a drop edildiğinde fire olur.
+* `onDropCapture`: `onDrop`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* `onFocus`: Bir [`FocusEvent` handler](#focusevent-handler) function’ı. Bir element focus aldığında fire olur. Built-in browser [`focus`](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event) event’inin aksine, React’te `onFocus` event’i bubble eder.
+* `onFocusCapture`: `onFocus`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onGotPointerCapture`](https://developer.mozilla.org/en-US/docs/Web/API/Element/gotpointercapture_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir element programmatically bir pointer’ı capture ettiğinde fire olur.
+* `onGotPointerCaptureCapture`: `onGotPointerCapture`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onKeyDown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event): Bir [`KeyboardEvent` handler](#keyboardevent-handler) function’ı. Bir key basıldığında fire olur.
+* `onKeyDownCapture`: `onKeyDown`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
 * [`onKeyPress`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event): Bir [`KeyboardEvent` handler](#keyboardevent-handler) function’ı. Deprecated. Bunun yerine `onKeyDown` veya `onBeforeInput` kullanın.
-* `onKeyPressCapture`: `onKeyPress`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onKeyUp`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event): Bir [`KeyboardEvent` handler](#keyboardevent-handler) function’ı. Bir key serbest bırakıldığında fire eder.
-* `onKeyUpCapture`: `onKeyUp`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onLostPointerCapture`](https://developer.mozilla.org/en-US/docs/Web/API/Element/lostpointercapture_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir element bir pointer’ı capture etmeyi bıraktığında fire eder.
-* `onLostPointerCaptureCapture`: `onLostPointerCapture`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onMouseDown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer basıldığında fire eder.
-* `onMouseDownCapture`: `onMouseDown`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onMouseEnter`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bir element’in içine hareket ettiğinde fire eder. Capture phase’i yoktur. Bunun yerine, `onMouseLeave` ve `onMouseEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
-* [`onMouseLeave`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bir element’in dışına hareket ettiğinde fire eder. Capture phase’i yoktur. Bunun yerine, `onMouseLeave` ve `onMouseEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
-* [`onMouseMove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer coordinate’leri değiştiğinde fire eder.
-* `onMouseMoveCapture`: `onMouseMove`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onMouseOut`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bir element’in dışına hareket ettiğinde veya bir child element’in içine hareket ettiğinde fire eder.
-* `onMouseOutCapture`: `onMouseOut`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onMouseUp`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer serbest bırakıldığında fire eder.
-* `onMouseUpCapture`: `onMouseUp`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onPointerCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointercancel_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Browser bir pointer interaction’ı cancel ettiğinde fire eder.
-* `onPointerCancelCapture`: `onPointerCancel`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onPointerDown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerdown_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer active hale geldiğinde fire eder.
-* `onPointerDownCapture`: `onPointerDown`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onPointerEnter`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerenter_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer bir element’in içine hareket ettiğinde fire eder. Capture phase’i yoktur. Bunun yerine, `onPointerLeave` ve `onPointerEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
-* [`onPointerLeave`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerleave_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer bir element’in dışına hareket ettiğinde fire eder. Capture phase’i yoktur. Bunun yerine, `onPointerLeave` ve `onPointerEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
-* [`onPointerMove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointermove_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer coordinate’leri değiştiğinde fire eder.
-* `onPointerMoveCapture`: `onPointerMove`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onPointerOut`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerout_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer bir element’in dışına hareket ettiğinde, pointer interaction cancel edildiğinde ve [birkaç başka nedenle](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerout_event) fire eder.
-* `onPointerOutCapture`: `onPointerOut`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onPointerUp`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerup_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer artık active olmadığında fire eder.
-* `onPointerUpCapture`: `onPointerUp`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onPaste`](https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event): Bir [`ClipboardEvent` handler](#clipboardevent-handler) function’ı. User clipboard’dan bir şey paste etmeye çalıştığında fire eder.
-* `onPasteCapture`: `onPaste`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onScroll`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event): Bir [`Event` handler](#event-handler) function’ı. Bir element scroll edildiğinde fire eder. Bu event bubble etmez.
-* `onScrollCapture`: `onScroll`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): Bir [`Event` handler](#event-handler) function’ı. Bir input gibi editable bir element içindeki selection değiştikten sonra fire eder. React, `onSelect` event’ini `contentEditable={true}` element’lerinde de çalışacak şekilde extend eder. Ek olarak React, empty selection ve edit’lerde de fire edecek şekilde extend eder (bu selection’ı etkileyebilir).
-* `onSelectCapture`: `onSelect`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onTouchCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchcancel_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Browser bir touch interaction’ı cancel ettiğinde fire eder.
-* `onTouchCancelCapture`: `onTouchCancel`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onTouchEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchend_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Bir veya daha fazla touch point kaldırıldığında fire eder.
-* `onTouchEndCapture`: `onTouchEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onTouchMove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Bir veya daha fazla touch point hareket ettirildiğinde fire eder.
-* `onTouchMoveCapture`: `onTouchMove`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onTouchStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Bir veya daha fazla touch point yerleştirildiğinde fire eder.
-* `onTouchStartCapture`: `onTouchStart`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onTransitionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event): Bir [`TransitionEvent` handler](#transitionevent-handler) function’ı. Bir CSS transition tamamlandığında fire eder.
-* `onTransitionEndCapture`: `onTransitionEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
-* [`onWheel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event): Bir [`WheelEvent` handler](#wheelevent-handler) function’ı. User bir wheel button’ı döndürdüğünde fire eder.
-* `onWheelCapture`: `onWheel`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire eden bir versiyonu.
+* `onKeyPressCapture`: `onKeyPress`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onKeyUp`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event): Bir [`KeyboardEvent` handler](#keyboardevent-handler) function’ı. Bir key bırakıldığında fire olur.
+* `onKeyUpCapture`: `onKeyUp`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onLostPointerCapture`](https://developer.mozilla.org/en-US/docs/Web/API/Element/lostpointercapture_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir element bir pointer’ı capture etmeyi bıraktığında fire olur.
+* `onLostPointerCaptureCapture`: `onLostPointerCapture`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onMouseDown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer basıldığında fire olur.
+* `onMouseDownCapture`: `onMouseDown`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onMouseEnter`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bir element’in içine hareket ettiğinde fire olur. Capture phase’i yoktur. Bunun yerine, `onMouseLeave` ve `onMouseEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
+* [`onMouseLeave`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bir element’in dışına hareket ettiğinde fire olur. Capture phase’i yoktur. Bunun yerine, `onMouseLeave` ve `onMouseEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
+* [`onMouseMove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer koordinat değiştirdiğinde fire olur.
+* `onMouseMoveCapture`: `onMouseMove`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onMouseOut`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bir element’in dışına hareket ettiğinde veya bir child element’e girdiğinde fire olur.
+* `onMouseOutCapture`: `onMouseOut`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onMouseUp`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event): Bir [`MouseEvent` handler](#mouseevent-handler) function’ı. Pointer bırakıldığında fire olur.
+* `onMouseUpCapture`: `onMouseUp`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onPointerCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointercancel_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Browser bir pointer interaction’ı iptal ettiğinde fire olur.
+* `onPointerCancelCapture`: `onPointerCancel`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onPointerDown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerdown_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer active olduğunda fire olur.
+* `onPointerDownCapture`: `onPointerDown`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onPointerEnter`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerenter_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer bir element’in içine hareket ettiğinde fire olur. Capture phase’i yoktur. Bunun yerine, `onPointerLeave` ve `onPointerEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
+* [`onPointerLeave`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerleave_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer bir element’in dışına hareket ettiğinde fire olur. Capture phase’i yoktur. Bunun yerine, `onPointerLeave` ve `onPointerEnter`, çıkılan element’ten girilen element’e doğru propagate eder.
+* [`onPointerMove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointermove_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer koordinat değiştirdiğinde fire olur.
+* `onPointerMoveCapture`: `onPointerMove`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onPointerOut`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerout_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer bir element’in dışına hareket ettiğinde, pointer interaction iptal edildiğinde ve [birkaç başka nedenle](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerout_event) fire olur.
+* `onPointerOutCapture`: `onPointerOut`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onPointerUp`](https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerup_event): Bir [`PointerEvent` handler](#pointerevent-handler) function’ı. Bir pointer artık active olmadığında fire olur.
+* `onPointerUpCapture`: `onPointerUp`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onPaste`](https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event): Bir [`ClipboardEvent` handler](#clipboardevent-handler) function’ı. User clipboard’dan bir şey paste etmeye çalıştığında fire olur.
+* `onPasteCapture`: `onPaste`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onScroll`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event): Bir [`Event` handler](#event-handler) function’ı. Bir element scrolled olduğunda fire olur. Bu event bubble etmez.
+* `onScrollCapture`: `onScroll`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): Bir [`Event` handler](#event-handler) function’ı. Input gibi editable bir element içindeki selection değiştikten sonra fire olur. React, `onSelect` event’ini `contentEditable={true}` element’ler için de çalışacak şekilde extend eder. Ayrıca React, bunu empty selection ve edit’lerde de fire olacak şekilde extend eder (bu selection’ı etkileyebilir).
+* `onSelectCapture`: `onSelect`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onTouchCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchcancel_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Browser bir touch interaction’ı iptal ettiğinde fire olur.
+* `onTouchCancelCapture`: `onTouchCancel`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onTouchEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchend_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Bir veya daha fazla touch point kaldırıldığında fire olur.
+* `onTouchEndCapture`: `onTouchEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onTouchMove`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Bir veya daha fazla touch point hareket ettirildiğinde fire olur.
+* `onTouchMoveCapture`: `onTouchMove`’un [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onTouchStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event): Bir [`TouchEvent` handler](#touchevent-handler) function’ı. Bir veya daha fazla touch point yerleştirildiğinde fire olur.
+* `onTouchStartCapture`: `onTouchStart`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onTransitionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event): Bir [`TransitionEvent` handler](#transitionevent-handler) function’ı. Bir CSS transition tamamlandığında fire olur.
+* `onTransitionEndCapture`: `onTransitionEnd`’in [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
+* [`onWheel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event): Bir [`WheelEvent` handler](#wheelevent-handler) function’ı. User bir wheel button’ı döndürdüğünde fire olur.
+* `onWheelCapture`: `onWheel`’ın [capture phase](/learn/responding-to-events#capture-phase-events)’de fire olan bir versiyonu.
 * [`role`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Assistive technology’ler için element role’ünü açıkça belirtir.
-* [`slot`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Shadow DOM kullanırken slot name’i belirtir. React’ta equivalent pattern genellikle JSX’i props olarak pass ederek elde edilir; örneğin `<Layout left={<Sidebar />} right={<Content />} />`.
-* [`spellCheck`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck): Bir boolean veya null. Açıkça `true` veya `false` olarak set edilirse, spellchecking’i enable veya disable eder.
+* [`slot`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles): Bir string. Shadow DOM kullanırken slot name’i belirtir. React’te eşdeğer pattern genellikle JSX’i props olarak pass ederek elde edilir; örneğin `<Layout left={<Sidebar />} right={<Content />} />`.
+* [`spellCheck`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck): Bir boolean veya null. Açıkça `true` veya `false` olarak set edilirse, spellchecking’i etkinleştirir veya devre dışı bırakır.
 * [`tabIndex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex): Bir number. Default Tab button behavior’ını override eder. [`-1` ve `0` dışındaki value’ları kullanmaktan kaçının.](https://www.tpgi.com/using-the-tabindex-attribute/)
 * [`title`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title): Bir string. Element için tooltip text’ini belirtir.
-* [`translate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/translate): `'yes'` veya `'no'`. `'no'` pass etmek, element content’inin translate edilmesini engeller.
+* [`translate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/translate): `'yes'` veya `'no'`. `'no'` pass etmek, element content’ini çevrilmekten hariç tutar.
 
 Prop olarak özel nitelikler de verebilirsiniz, örneğin `ozelprop="herhangiBirDeger"`. Bu, üçüncü parti kütüphaneleri entegre ederken işinize yarayabilir. Özel nitelik isimlerinin küçük harflerle yazılması ve `on` ile başlamaması gerekmektedir. Değer bir stringe dönüştürülecek. Eğer `null` veya `undefined` verirseniz bu özel nitelik kaldırılacaktır.
 
@@ -303,7 +304,7 @@ React olay nesneleri bazı standart [`Event`](https://developer.mozilla.org/en-U
 * [`bubbles`](https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles): Bir boolean. Event’in DOM boyunca bubble edip etmediğini return eder.
 * [`cancelable`](https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable): Bir boolean. Event’in cancel edilip edilemeyeceğini return eder.
 * [`currentTarget`](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget): Bir DOM node. React tree içinde current handler’ın attach edildiği node’u return eder.
-* [`defaultPrevented`](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented): Bir boolean. `preventDefault` çağrılıp çağrılmadığını return eder.
+* [`defaultPrevented`](https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented): Bir boolean. `preventDefault`’un çağrılıp çağrılmadığını return eder.
 * [`eventPhase`](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase): Bir number. Event’in şu anda hangi phase’de olduğunu return eder.
 * [`isTrusted`](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted): Bir boolean. Event’in user tarafından başlatılıp başlatılmadığını return eder.
 * [`target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target): Bir DOM node. Event’in gerçekleştiği node’u return eder (bu uzak bir child olabilir).
@@ -661,7 +662,7 @@ Fare olayları için bir olay yöneticisi tipi.
   * [`touches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches)
   * [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches)
 
-  Ayrıca inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) property’lerini de içerir: 
+  Ayrıca inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) property’lerini de içerir:
 
   * [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   * [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
@@ -832,7 +833,7 @@ export default function Avatar({ user }) {
 
 CSS sınıflarını koşulsal olarak uygulamak için `className` string'ini JavaScript'i kullanarak kendiniz üretmeniz gerekiyor.
 
-Örneğin, `className={'row ' + (isSelected ? 'selected': '')}`, `isSelected`'ın `true` olup olmamasına göre `className="row"` veya `className="row selected"` üretecektir. 
+Örneğin, `className={'row ' + (isSelected ? 'selected': '')}`, `isSelected`'ın `true` olup olmamasına göre `className="row"` veya `className="row selected"` üretecektir.
 
 Bunu daha okunaklı hale getirmek için [`classnames`](https://github.com/JedWatson/classnames) gibi minik yardımcı bir kütüphane kullanabilirsiniz:
 
@@ -964,7 +965,7 @@ const md = new Remarkable();
 
 function renderMarkdownToHTML(markdown) {
   // Bu yöntem, YALNIZCA sonuçta oluşan HTML
-  // aynı kullanıcıya gösterildiği ve Markdown 
+  // aynı kullanıcıya gösterildiği ve Markdown
   // ayrıştırıcısında hata olmadığına
   // emin olduğunuz için güvenlidir.
   const renderedHTML = md.render(markdown);

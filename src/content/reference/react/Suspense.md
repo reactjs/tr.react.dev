@@ -216,7 +216,7 @@ Suspense, veri bir efekt ya da olay yöneticisi içinde fetch edildiğinde **tes
 
 Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
 
-Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz support edilmemektedir. Suspense-enabled bir data source implement etmek için gereken requirements unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için official API, React’in future bir version’ında release edilecektir.
+Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
 
 </Note>
 
@@ -365,7 +365,7 @@ async function getBio() {
 
   return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    ve Ringo Starr’dan oluşan İngiliz bir rock band’di.`;
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -626,7 +626,7 @@ async function getBio() {
 
   return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    ve Ringo Starr’dan oluşan İngiliz bir rock band’di.`;
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -876,7 +876,7 @@ input { margin: 10px; }
 
 </Sandpack>
 
-Yaygın bir alternative UI pattern, list’i update etmeyi *defer* etmek ve yeni result’lar hazır olana kadar previous result’ları göstermeye devam etmektir. [`useDeferredValue`](/reference/react/useDeferredValue) Hook’u, query’nin deferred bir version’ını aşağıya pass etmenizi sağlar:
+Yaygın bir alternatif UI pattern’i, list’i update etmeyi *defer* etmek ve yeni sonuçlar hazır olana kadar önceki sonuçları göstermeye devam etmektir. [`useDeferredValue`](/reference/react/useDeferredValue) Hook’u, query’nin deferred bir version’ını aşağıya pass etmenizi sağlar:
 
 ```js {3,11}
 export default function App() {
@@ -1252,7 +1252,7 @@ async function getBio() {
 
   return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    ve Ringo Starr’dan oluşan İngiliz bir rock band’di.`;
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -1563,7 +1563,7 @@ async function getBio() {
 
   return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    ve Ringo Starr’dan oluşan İngiliz bir rock band’di.`;
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -1873,7 +1873,7 @@ async function getBio() {
 
   return `The Beatles, 1960 yılında Liverpool’da kurulan,
     John Lennon, Paul McCartney, George Harrison
-    ve Ringo Starr’dan oluşan İngiliz bir rock band’di.`;
+    ve Ringo Starr’dan oluşan bir İngiliz rock grubuydu.`;
 }
 
 async function getAlbums() {
@@ -1996,7 +1996,7 @@ Bir transition sırasında, React açığa çıkarılmış içeriği gizlemekten
 
 Bir kullanıcının profil sayfasına gitmeye çalıştığınızı hayal edin, ve bir şey askıya alınsın. Eğer bu güncelleme bir transition ile sarılırsa, zaten görünen içerik için fallback tetiklenmeyecektir. Bu beklenen davranıştır.
 
-Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalıştığınızı düşünün. Bu durumda, fallback'i göstermek mantıklı olacaktır. Örneğin, bir kullanıcının zaman çizelgesi başka bir kullanıcının zaman çizelgesinden *farklı içerik*'tir. Bir `key` belirterek, React'e farklı kullanıcıların profillerini farklı bileşenler olarak ele almasını ve navigasyon sırasında Suspense sınırlarını sıfırlamasını sağlarsınız. Suspense entegreli router'lar bunu otomatik olarak yapmalıdır. 
+Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalıştığınızı düşünün. Bu durumda, fallback'i göstermek mantıklı olacaktır. Örneğin, bir kullanıcının zaman çizelgesi başka bir kullanıcının zaman çizelgesinden *farklı içerik*'tir. Bir `key` belirterek, React'e farklı kullanıcıların profillerini farklı bileşenler olarak ele almasını ve navigasyon sırasında Suspense sınırlarını sıfırlamasını sağlarsınız. Suspense entegreli router'lar bunu otomatik olarak yapmalıdır.
 
 ---
 
@@ -2004,8 +2004,8 @@ Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalış
 
 Eğer [stream'leyen sunucu render etme API'leri](/reference/react-dom/server)nden birini (ya da onlara bağlı bir framework) kullanıyorsanız, React sunucuda hataları ele almak için `<Suspense>` sınırlarınızı kullanacaktır. Eğer bir bileşen sunucuda bir hata throw ederse, React sunucu render'ını iptal etmeyecektir. Bunun yerine, onun üzerindeki en yakın `<Suspense>` bileşenini bulacak ve oluşturulan sunucu HTML'ine bileşenin fallback'ini (örneğin bir yükleniyor çarkı) dahil edecektir. Kullanıcı ilk olarak bir yükleniyor çarkı görecektir.
 
-İstemci tarafında (client), React aynı bileşeni yeniden render etmeye çalışır.  
-Eğer istemci tarafında da hata oluşursa, React bu hatayı fırlatır (**throw**) ve en yakın [Error Boundary](/reference/react/Component#static-getderivedstatefromerror) bileşenini gösterir. Ancak, istemci tarafında hata oluşmazsa, React kullanıcıya hatayı göstermez;  
+İstemci tarafında (client), React aynı bileşeni yeniden render etmeye çalışır.
+Eğer istemci tarafında da hata oluşursa, React bu hatayı fırlatır (**throw**) ve en yakın [Error Boundary](/reference/react/Component#static-getderivedstatefromerror) bileşenini gösterir. Ancak, istemci tarafında hata oluşmazsa, React kullanıcıya hatayı göstermez;
 çünkü içerik sonuçta başarılı bir şekilde görüntülenmiştir.
 
 Bunu bazı bileşenlerin sunucuda yüklenmemesini sağlamak için kullanabilirsiniz. Bunu yapmak için, sunucu ortamında bir hata throw edin ve ardından HTML'lerini fallback'lerle değiştirmek için `<Suspense>` sınırı içine alın:

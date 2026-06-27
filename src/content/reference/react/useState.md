@@ -1156,7 +1156,7 @@ Bu modeli anlaması zor olabilir ve genel olarak bu modelden kaçınılması en 
 function handleClick() {
   console.log(count);  // 0
 
-  setCount(count + 1); // 1 ile yeniden render iste 
+  setCount(count + 1); // 1 ile yeniden render iste
   console.log(count);  // Hala 0!
 
   setTimeout(() => {

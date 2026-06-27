@@ -38,7 +38,7 @@ Prop drilling
 
 </DiagramGroup>
 
-Veriyi prop'lar ile aktarmadan ağaçtaki bileşenlere "ışınlamanın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün! 
+Veriyi prop'lar ile aktarmadan ağaçtaki bileşenlere "ışınlamanın" bir yolu olsa harika olmaz mıydı? React'ın context özelliği sayesinde bu mümkün!
 
 ## Context: prop'ları aktarmanın alternatif bir yolu {/*context-an-alternative-to-passing-props*/}
 
@@ -855,12 +855,13 @@ Context kullanmadan önce düşünmeniz için bir kaç alternatif:
 
 Eğer bu yaklaşımların ikiside işinize yaramıyor ise, o zaman context'i kullanmayı düşünebilirsiniz.
 
-* **Theming:** App’iniz user’ın görünümü değiştirmesine izin veriyorsa (örn. dark mode), app’inizin en üstüne bir context provider koyabilir ve görsel görünümünü ayarlaması gereken component’lerde bu context’i kullanabilirsiniz.
+* **Theming:** App’iniz kullanıcının görünümü değiştirmesine izin veriyorsa (örn. dark mode), app’inizin en üstüne bir context provider koyabilir ve görsel görünümünü ayarlaması gereken component’lerde bu context’i kullanabilirsiniz.
 * **Current account:** Birçok component, şu anda login olmuş user’ı bilmeye ihtiyaç duyabilir. Bunu context’e koymak, tree’nin herhangi bir yerinden okumayı kolaylaştırır. Bazı app’ler aynı anda birden fazla account ile işlem yapmanıza da izin verir (örn. farklı bir user olarak yorum bırakmak için). Bu durumlarda, UI’ın bir bölümünü farklı bir current account value’ya sahip nested provider ile sarmalamak kullanışlı olabilir.
 * **Routing:** Çoğu routing solution, current route’u tutmak için internal olarak context kullanır. Her link’in active olup olmadığını "bilmesi" bu şekilde olur. Kendi router’ınızı build ediyorsanız, siz de bunu yapmak isteyebilirsiniz.
-* **Managing state:** App’iniz büyüdükçe, app’inizin üst kısmına daha yakın konumda çok fazla state’iniz olabilir. Aşağıdaki birçok distant component bunu değiştirmek isteyebilir. Complex state’i manage etmek ve bunu distant component’lere çok fazla zahmet olmadan pass etmek için [context ile birlikte reducer kullanmak](/learn/scaling-up-with-reducer-and-context) yaygındır.
+* **Managing state:** App’iniz büyüdükçe, app’inizin üst kısmına daha yakın konumda çok fazla state’iniz olabilir. Aşağıdaki birçok uzak component bunu değiştirmek isteyebilir. Complex state’i yönetmek ve bunu uzak component’lere çok fazla zahmet olmadan pass etmek için [context ile birlikte reducer kullanmak](/learn/scaling-up-with-reducer-and-context) yaygındır.
 
 Context yalnızca static value’larla sınırlı değildir. Bir sonraki render’da farklı bir value pass ederseniz, React onu aşağıda okuyan tüm component’leri update eder! Bu yüzden context çoğu zaman state ile birlikte kullanılır.
+
 
 Genellikle, bazı bilgilere ağacın farklı bölümlerindeki bileşenler tarafından ihtiyaç duyulması, context'in işinize yarayacağına dair güzel bir göstergedir.
 
@@ -966,7 +967,7 @@ export const places = [{
   imageId: 'K9HVAGH'
 }, {
   id: 1,
-  name: 'Tayvan, Taichung’daki Rainbow Village',
+  name: 'Rainbow Village in Taichung, Taiwan',
   description: 'Evleri yıkımdan kurtarmak için yerel bir sakin olan Huang Yung-Fu, 1924 yılında bu 1.200 evin tamamını boyadı.',
   imageId: '9EAYZrt'
 }, {
@@ -977,8 +978,7 @@ export const places = [{
 }, {
   id: 3,
   name: 'Brezilya, Rio de Janeiro’daki Selarón Merdivenleri',
-  description: 'Bu landmark, Şili doğumlu sanatçı Jorge Selarón tarafından "Brezilya halkına bir saygı duruşu" olarak oluşturuldu.',
-  imageId: 'aeO3rpI'
+  description: 'Bu landmark, Şili doğumlu sanatçı Jorge Selarón tarafından "Brezilya halkına bir saygı duruşu" olarak oluşturuldu.', imageId: 'aeO3rpI'
 }, {
   id: 4,
   name: 'Burano, İtalya',
@@ -1125,8 +1125,8 @@ export const places = [{
   imageId: 'kxsph5C'
 }, {
   id: 5,
-  name: 'Chefchaouen, Fas',
-  description: 'Evlerin neden maviye boyandığına dair birkaç teori vardır; bunlar arasında rengin sivrisinekleri uzaklaştırması veya gökyüzünü ve cenneti sembolize etmesi bulunur.',
+  name: 'Chefchaouen, Marocco',
+  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
   imageId: 'rTqKo46'
 }, {
   id: 6,

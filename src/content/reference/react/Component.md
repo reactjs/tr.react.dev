@@ -1277,7 +1277,7 @@ Hata sınırları şunlar için hataları yakalamaz:
 - Event handler’lar [(daha fazla bilgi edinin)](/learn/responding-to-events)
 - [Server side rendering](/reference/react-dom/server)
 - Error boundary’nin kendisinde throw edilen error’lar (children’larında değil)
-- Asynchronous code (örn. `setTimeout` veya `requestAnimationFrame` callback’leri); bir exception, [`useTransition`](/reference/react/useTransition) Hook’u tarafından return edilen [`startTransition`](/reference/react/useTransition#starttransition) function’ının kullanımıdır. Transition function içinde throw edilen error’lar error boundary’ler tarafından catch edilir [(daha fazla bilgi edinin)](/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)
+- Asynchronous code (örn. `setTimeout` veya `requestAnimationFrame` callback’leri); bunun bir istisnası, [`useTransition`](/reference/react/useTransition) Hook’u tarafından return edilen [`startTransition`](/reference/react/useTransition#starttransition) function’ının kullanımıdır. Transition function içinde throw edilen error’lar error boundary’ler tarafından catch edilir [(daha fazla bilgi edinin)](/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)
 
 </Note>
 
