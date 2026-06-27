@@ -294,11 +294,7 @@ setPerson({
 });
 ```
 
-<<<<<<< HEAD
-Form şimdi çalışıyor!
-=======
-Now the form works!
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Artık form çalışıyor!
 
 Her input alanı için nasıl ayrı bir state değişkeni bildirmediğinize dikkat edin. Büyük formlar için, tüm verileri bir nesnede gruplanmış halde tutmak doğru bir şekilde güncellediğiniz sürece--çok uygundur!
 
@@ -375,11 +371,7 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
-Dikkat edilmesi gereken bir nokta, `...` spread sözdiziminin "yüzeysel" olmasıdır--yalnızca bir seviye derinliğe kadar kopyalar. Bu kopyalama işlemini hızlı yapar, ancak iç içe geçmiş bir özelliği güncellemek istiyorsanız, birden fazla kez kullanmanız gerekecektir.
-=======
-Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+`...` spread syntax’inin "shallow" olduğunu unutmayın--yalnızca bir level deep kopyalama yapar. Bu onu hızlı yapar, ancak nested property update etmek istiyorsanız bunu birden fazla kez kullanmanız gerektiği anlamına da gelir.
 
 <DeepDive>
 
