@@ -432,11 +432,7 @@ body > div > div { padding: 20px; }
 
 Aşağıdaki objede, tam resim URL'si dört parçaya bölünmüştür: temel URL, `imageId`, `imageSize` ve dosya uzantısı.
 
-<<<<<<< HEAD
-Resim URL'sini bu özellikleri bir araya getirecek şekilde istiyoruz: temel URL (her zaman `'https://i.imgur.com/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve dosya uzantısı (her zaman `'.jpg'`). Ancak, `<img>` etiketinin `srcyi belirtme biçiminde bir sorun var.
-=======
-We want the image URL to combine these attributes together: base URL (always `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`), and file extension (always `'.jpg'`). However, something is wrong with how the `<img>` tag specifies its `src`.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Image URL’nin şu attribute’ları bir araya getirmesini istiyoruz: base URL (her zaman `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve file extension (her zaman `'.jpg'`). Ancak `<img>` tag’inin `src`’yi belirtme şeklinde bir sorun var.
 
 Bu hatayı düzeltebilir misiniz?
 
