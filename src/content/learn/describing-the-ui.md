@@ -526,15 +526,9 @@ Bileşenlerin saf, öngörülebilir fonksiyonlar olarak nasıl yazılacağını 
 
 ## Arayüzünüzü bir ağaç olarak düşünün {/*your-ui-as-a-tree*/}
 
-<<<<<<< HEAD
-React, bileşenler ve modüller arasındaki ilişkileri modellemek için ağaçları kullanır.
+React, component’ler ve module’ler arasındaki relationship’leri modellemek için tree’leri kullanır.
 
-React render ağacı, bileşenler arasındaki üst ve alt ilişkisinin bir temsilidir.
-=======
-React uses trees to model the relationships between components and modules.
-
-A React render tree is a representation of the parent and child relationship between components.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Bir React render tree, component’ler arasındaki parent ve child relationship’inin bir representation’ıdır.
 
 <Diagram name="generic_render_tree" height={250} width={500} alt="Her bir düğümün bir bileşeni temsil ettiği beş düğümlü bir ağaç grafiği. Kök düğüm ağaç grafiğinin en üstünde yer alır ve 'Kök Bileşen' olarak etiketlenmiştir. 'Bileşen A' ve 'Bileşen C' olarak etiketlenmiş iki düğüme uzanan iki oku vardır. Okların her biri 'render' ile etiketlenmiştir. 'Bileşen A', 'Bileşen B' etiketli bir düğüme giden tek bir 'render' okuna sahiptir. 'C Bileşeni', 'D Bileşeni' etiketli bir düğüme giden tek bir 'render' okuna sahiptir.">
 
@@ -544,11 +538,7 @@ A React render tree is a representation of the parent and child relationship bet
 
 Ağacın tepesine, kök bileşene yakın bileşenler üst düzey bileşenler olarak kabul edilir. Alt elemanı olmayan bileşenler yaprak bileşenlerdir. Bileşenlerin bu şekilde kategorize edilmesi, veri akışını ve render etme performansını anlamak için kullanışlıdır.
 
-<<<<<<< HEAD
-JavaScript modülleri arasındaki ilişkiyi modellemek, uygulamanızı anlamanın bir başka yararlı yoludur. Bunu modül bağımlılık ağacı olarak adlandırıyoruz.
-=======
-Modelling the relationship between JavaScript modules is another useful way to understand your app. We refer to it as a module dependency tree.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+JavaScript module’leri arasındaki relationship’i modellemek, app’inizi anlamanın başka bir faydalı yoludur. Buna module dependency tree diyoruz.
 
 <Diagram name="generic_dependency_tree" height={250} width={500} alt="Beş düğümlü bir ağaç grafiği. Her düğüm bir JavaScript modülünü temsil eder. En üstteki düğüm 'RootModule.js' olarak etiketlenmiştir. Bu düğümün düğümlere uzanan üç oku vardır: 'ModuleA.js', 'ModuleB.js' ve 'ModuleC.js'. Her ok 'imports' olarak etiketlenmiştir. 'ModuleC.js' düğümü, 'ModuleD.js' etiketli bir düğüme işaret eden tek bir 'imports' okuna sahiptir.">
 
@@ -556,11 +546,7 @@ Modelling the relationship between JavaScript modules is another useful way to u
 
 </Diagram>
 
-<<<<<<< HEAD
-Bağımlılık ağacı genellikle derleme araçları tarafından istemcinin indirmesi ve renderlaması için ilgili tüm JavaScript kodunu paketlemek için kullanılır. Büyük bir paket boyutu, React uygulamaları için kullanıcı deneyimini geriletir. Modül bağımlılık ağacını anlamak, bu tür sorunları ayıklamak için yardımcı olur.
-=======
-A dependency tree is often used by build tools to bundle all the relevant JavaScript code for the client to download and render. A large bundle size regresses user experience for React apps. Understanding the module dependency tree is helpful to debug such issues.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Bir dependency tree, genellikle build tool’lar tarafından client’ın indirip render edebilmesi için ilgili tüm JavaScript code’unu bundle etmek amacıyla kullanılır. Büyük bundle size, React app’lerinde user experience’ı kötüleştirir. Module dependency tree’yi anlamak, bu tür issue’ları debug etmek için faydalıdır.
 
 <LearnMore path="/learn/understanding-your-ui-as-a-tree">
 
