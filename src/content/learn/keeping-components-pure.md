@@ -27,23 +27,13 @@ Saf fonksiyonların bir örneğini zaten biliyor olabilirsiniz: matematikteki fo
 
 Bu formülü ele alalım: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-<<<<<<< HEAD
-Eğer <Math><MathI>x</MathI> = 2</Math> ise <Math><MathI>y</MathI> = 4</Math>'tür. Her zaman. 
+Eğer <Math><MathI>x</MathI> = 2</Math> ise <Math><MathI>y</MathI> = 4</Math>. Her zaman.
 
-Eğer <Math><MathI>x</MathI> = 3</Math> ise <Math><MathI>y</MathI> = 6</Math>'dır. Her zaman. 
+Eğer <Math><MathI>x</MathI> = 3</Math> ise <Math><MathI>y</MathI> = 6</Math>. Her zaman.
 
-Eğer <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> günün zamanına veya borsanın durumuna bağlı olarak bazen <Math>9</Math> ya da <Math>–1</Math> veya <Math>2.5</Math> olmaz. 
+Eğer <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> günün saatine veya borsanın durumuna bağlı olarak bazen <Math>9</Math>, <Math>–1</Math> ya da <Math>2.5</Math> olmaz.
 
-Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> _her zaman_ <Math>6</Math>'dır. 
-=======
-If <Math><MathI>x</MathI> = 2</Math> then <Math><MathI>y</MathI> = 4</Math>. Always.
-
-If <Math><MathI>x</MathI> = 3</Math> then <Math><MathI>y</MathI> = 6</Math>. Always.
-
-If <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> won't sometimes be <Math>9</Math> or <Math>–1</Math> or <Math>2.5</Math> depending on the time of day or the state of the stock market.
-
-If <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> and <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> will _always_ be <Math>6</Math>.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Eğer <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ve <Math><MathI>x</MathI> = 3</Math> ise, <MathI>y</MathI> _her zaman_ <Math>6</Math> olur.
 
 Eğer bunu bir JavaScript fonksiyonuna çevirseydik, şöyle görünürdü:
 
@@ -85,18 +75,11 @@ export default function App() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-`Drinkers` parametresine `{2}` değerini verip, `Recipe'ye` geçerseniz, `2 bardak su` içeren JSX'i döndürür. Her zaman.
-=======
-When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+`Recipe`’ye `drinkers={2}` pass ettiğinizde, `2 cups of water` içeren JSX return eder. Her zaman.
 
-`Drinkers` parametresine `{4}` değerini verip, `4 bardak su` içeren JSX’i döndürür. Her zaman.
+`Recipe`’ye `drinkers={4}` pass ettiğinizde, `4 bardak su` içeren JSX return eder. Her zaman.
 
-<<<<<<< HEAD
-=======
-Just like a math formula.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Tıpkı bir math formula gibi.
 
 Tıpkı bir matematik formülü gibi.
 
@@ -234,23 +217,13 @@ Saf işlevler yazmak biraz alışkanlık ve disiplin gerektirir. Ama aynı zaman
 
 <Recap>
 
-<<<<<<< HEAD
-* Bir bileşen saf olmalıdır, yani:
-  * **Kendi işine bakar.** İşlemeden önce var olan hiçbir nesneyi veya değişkeni değiştirmemelidir.
-  * **Aynı girdiler, aynı çıktılar.** Aynı girdiler verildiğinde, bir bileşen her zaman aynı JSX'i döndürmelidir. 
-* Oluşturma herhangi bir zamanda gerçekleşebilir, bu nedenle bileşenler birbirinin oluşturma sırasına bağlı olmamalıdır.
-* Bileşenlerinizin render için kullandığı girdilerin hiçbirini mutasyona uğratmamalısınız. Buna props, state ve context dahildir. Ekranı güncellemek için, önceden var olan nesneleri değiştirmek yerine [state "oluşturun".](/learn/state-a-components-memory)
-* Döndürdüğünüz JSX'te bileşeninizin mantığını ifade etmeye çalışın. "Bir şeyleri değiştirmeniz" gerektiğinde, bunu genellikle bir olay yöneticilerinde yapmak isteyeceksiniz. Son çare olarak, `useEffect`'i kullanabilirsiniz.
-* Saf fonksiyonlar yazmak biraz pratik gerektirir, ancak React'in paradigmasının gücünü açığa çıkarır.
-=======
-* A component must be pure, meaning:
-  * **It minds its own business.** It should not change any objects or variables that existed before rendering.
-  * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX.
-* Rendering can happen at any time, so components should not depend on each others' rendering sequence.
-* You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](/learn/state-a-components-memory) instead of mutating preexisting objects.
-* Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
-* Writing pure functions takes a bit of practice, but it unlocks the power of React's paradigm.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+* Bir component pure olmalıdır, yani:
+  * **Kendi işine bakar.** Rendering’den önce var olan hiçbir object’i veya variable’ı değiştirmemelidir.
+  * **Aynı input’lar, aynı output.** Aynı input’lar verildiğinde, bir component her zaman aynı JSX’i return etmelidir.
+* Rendering herhangi bir zamanda gerçekleşebilir, bu yüzden component’ler birbirlerinin rendering sequence’ına bağlı olmamalıdır.
+* Component’lerinizin rendering için kullandığı input’ların hiçbirini mutate etmemelisiniz. Buna props, state ve context dahildir. Ekranı update etmek için, önceden var olan object’leri mutate etmek yerine ["set" state](/learn/state-a-components-memory) kullanın.
+* Component logic’inizi return ettiğiniz JSX içinde ifade etmeye çalışın. "Bir şeyleri değiştirmek" gerektiğinde, bunu genellikle bir event handler içinde yapmak istersiniz. Son çare olarak `useEffect` kullanabilirsiniz.
+* Pure function yazmak biraz pratik gerektirir, ancak React’in paradigm’ının gücünü ortaya çıkarır.
 
 </Recap>
 
