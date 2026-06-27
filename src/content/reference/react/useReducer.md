@@ -38,15 +38,9 @@ function MyComponent() {
 
 #### Parametreler {/*parameters*/}
 
-<<<<<<< HEAD
-* `reducer`: State'in nasıl güncelleneceğini belirleyen reducer fonksiyonudur. Saf hâlde (pure) olmalı, state'i ve işlemi(action) argüman olarak almalı ve bir sonraki state'i döndürmelidir. State ve işlem herhangi bir tür olabilir.
-* `initialArg`: Başlangıç state'inin hesaplandığı değerdir. Herhangi bir türden bir değer olabilir. Başlangıç state'inin nasıl hesaplandığı, sonraki `init` argümanına bağlıdır.
-* **isteğe bağlı** `init`: Başlangıç state'ini döndürmesi gereken başlatıcı fonksiyondur. Belirtilmezse, başlangıç state'i `initialArg` olarak ayarlanır. Aksi takdirde, başlangıç state'i `init(initialArg)` çağrısının sonucuna ayarlanır.
-=======
-* `reducer`: The reducer function that specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. State and action can be of any types.
-* `initialArg`: The value from which the initial state is calculated. It can be a value of any type. How the initial state is calculated from it depends on the next `init` argument.
-* **optional** `init`: The initializer function that should return the initial state. If it's not specified, the initial state is set to `initialArg`. Otherwise, the initial state is set to the result of calling `init(initialArg)`.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+* `reducer`: State’in nasıl update edileceğini belirten reducer function. Pure olmalıdır, state ve action’ı argument olarak almalı ve next state’i return etmelidir. State ve action herhangi bir type’ta olabilir.
+* `initialArg`: Initial state’in hesaplandığı value. Herhangi bir type’ta value olabilir. Initial state’in bundan nasıl hesaplanacağı, sonraki `init` argument’ına bağlıdır.
+* **optional** `init`: Initial state’i return etmesi gereken initializer function. Belirtilmezse, initial state `initialArg` olarak set edilir. Aksi halde initial state, `init(initialArg)` çağrısının result’ı olarak set edilir.
 
 #### Dönüş değerleri {/*returns*/}
 
