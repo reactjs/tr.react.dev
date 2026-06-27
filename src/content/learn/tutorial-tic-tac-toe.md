@@ -337,11 +337,7 @@ import './styles.css';
 import App from './App';
 ```
 
-<<<<<<< HEAD
-1-5 satırları gerekli tüm parçaları bir araya getirir:
-=======
-Lines 1-5 bring all the necessary pieces together:
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+1-5. satırlar gerekli tüm parçaları bir araya getirir:
 
 * React
 * React'in web tarayıcıları ile konuşması için kütüphane (React DOM)
@@ -555,11 +551,7 @@ export default function Board() {
 }
 ```
 
-<<<<<<< HEAD
-Tarayıcının `div`'lerinin aksine, kendi bileşenleriniz olan `Board` ve `Square` büyük harfle başlamak zorundadır.
-=======
-Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Browser `div`’lerinden farklı olarak, kendi component’leriniz olan `Board` ve `Square`’in capital letter ile başlaması gerektiğine dikkat edin.
 
 Şuna bir göz atalım:
 
@@ -1102,11 +1094,7 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
-<<<<<<< HEAD
-Şimdi `onSquareClick` prop'unu `Board` bileşenindeki `handleClick` adını vereceğiniz bir fonksiyona bağlayacaksınız. `onSquareClick`'i `handleClick`'e bağlamak için ilk `Square` bileşeninin `onSquareClick` prop'una bir fonksiyon ileteceksiniz:
-=======
-Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component:
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Şimdi `onSquareClick` prop’unu, `Board` component’i içinde `handleClick` adını vereceğiniz bir function’a bağlayacaksınız. `onSquareClick`’i `handleClick`’e bağlamak için, ilk `Square` component’inin `onSquareClick` prop’una bir function pass edeceksiniz:
 
 ```js {7}
 export default function Board() {
@@ -2084,23 +2072,14 @@ export default function Game() {
 }
 ```
 
-<<<<<<< HEAD
-Aşağıda kodunuzun nasıl olması gerektiğini görebilirsiniz. Geliştirici araçları konsolunda şunu söyleyen bir hata görmeniz gerektiğine dikkat edin: 
-=======
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says:
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Kodunuzun aşağıdaki gibi görünmesi gerektiğini görebilirsiniz. Developer tools console’da şunu söyleyen bir error görmeniz gerektiğini unutmayın:
 
 <ConsoleBlock level="warning">
 Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
 Hata: Bir dizi veya yineleyicideki her alt eleman benzersiz bir "key" (anahtar) prop'una sahip olmalıdır. &#96;Game'in&#96; render metodunu kontrol edin.
 </ConsoleBlock>
-<<<<<<< HEAD
-  
-Bu hatayı bir sonraki bölümde düzelteceksiniz.
-=======
 
-You'll fix this error in the next section.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Bu error’ı bir sonraki section’da fix edeceksiniz.
 
 <Sandpack>
 
