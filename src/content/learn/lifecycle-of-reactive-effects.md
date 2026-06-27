@@ -294,11 +294,7 @@ React'in `roomId` değiştikten sonra Efektinizin yeniden senkronize edilmesi ge
 ```js {1,3,8}
 function ChatRoom({ roomId }) { // roomId özelliği zaman içinde değişebilir
   useEffect(() => {
-<<<<<<< HEAD
-    const connection = createConnection(serverUrl, roomId); // Bu Efektte roomId'yi okur
-=======
-    const connection = createConnection(serverUrl, roomId); // This Effect reads roomId
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+    const connection = createConnection(serverUrl, roomId); // Bu Effect roomId’yi okur
     connection.connect();
     return () => {
       connection.disconnect();
