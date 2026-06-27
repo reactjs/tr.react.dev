@@ -42,11 +42,7 @@ export default function Avatar() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-Burada, `"https://i.imgur.com/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak iletildi.
-=======
-Here, `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+Burada `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak pass ediliyor.
 
 Ancak `src` veya `alt` metnini dinamik olarak belirtmek isterseniz ne olur?  **`" `ve` "` yerine `{ `ve` }` ile değiştirerek JavaScript'ten bir değer** kullanabilirsiniz:
 
