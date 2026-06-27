@@ -246,11 +246,7 @@ Children’ları clone etmek, veri akışının uygulamanızda nasıl ilerlediğ
 
 ### Render prop ile veri aktarımı {/*passing-data-with-a-render-prop*/}
 
-<<<<<<< HEAD
-`cloneElement` kullanmak yerine, `renderItem` gibi bir *render prop* kabul etmeyi düşünebilirsiniz. Burada `List`, `renderItem`’ı bir prop olarak alır. `List`, her item için `renderItem`’ı çağırır ve `isHighlighted`’ı bir argüman olarak geçirir:
-=======
-Instead of using `cloneElement`, consider accepting a *render prop* like `renderItem`. Here, `List` receives `renderItem` as a prop. `List` calls `renderItem` for every item and passes `isHighlighted` as an argument:
->>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
+`cloneElement` kullanmak yerine, `renderItem` gibi bir *render prop* kabul etmeyi düşünün. Burada `List`, `renderItem`’ı prop olarak alır. `List`, her item için `renderItem`’ı çağırır ve `isHighlighted`’ı argument olarak pass eder:
 
 ```js {1,7}
 export default function List({ items, renderItem }) {
