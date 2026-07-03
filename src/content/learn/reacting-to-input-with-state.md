@@ -379,7 +379,7 @@ State içeriğinde kopyalardan kaçınmak istersiniz ve bu yüzden yalnızca ger
 
 İşte state değişkenleriniz hakkında sorabileceğiniz bazı sorular:
 
-* **Bu state bir paradoksa sebep oluyor mu?** Örneğin, hem `isTyping` hem de `isSubmitting`, `true` olamaz. Paradoks genellikle state'in yeterince kısıtlanmadığı anlamına gelir. İki boolean'ın dört muhtemelen kombinasyonu vardır, ancak sadece üç tanesi geçerli state'e karşılık gelir. "İmkansız" state'i kaldırmak için bunları, değeri `'typing'`, `'submitting'`, veya `'success'`'ten biri olması gereken `status` içinde birleştirebilirsiniz 
+* **Bu state bir paradoksa sebep oluyor mu?** Örneğin, hem `isTyping` hem de `isSubmitting`, `true` olamaz. Paradoks genellikle state'in yeterince kısıtlanmadığı anlamına gelir. İki boolean'ın dört muhtemelen kombinasyonu vardır, ancak sadece üç tanesi geçerli state'e karşılık gelir. "İmkansız" state'i kaldırmak için bunları, değeri `'typing'`, `'submitting'`, veya `'success'`'ten biri olması gereken `status` içinde birleştirebilirsiniz
 * **Aynı bilgi başka bir state değişkeninde zaten mevcut mu?** Bir diğer paradoks: `isEmpty` ve `isTyping` aynı anda `true` olamazlar. Bunları ayrı state değişkenleri haline getirerek, senkronize olmamaları ve hatalara neden olmaları riskini alırsınız. Neyse ki, `isEmpty`'yi kaldırıp yerine `answer.length === 0`'ı kontrol edebilirsiniz.
 * **Aynı bilgiye bir başka state değişkeninin tersini alarak erişebiliyor musunuz?** `error !== null` kontrolünü yapabildiğiniz için `isError`'a ihtiyacınız yok.
 

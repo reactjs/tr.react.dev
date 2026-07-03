@@ -689,7 +689,7 @@ export default function Gallery() {
         profession: 'jeokimyager',
         discovery: 'okyanus suyundaki karbondioksiti ölçmek için bir yöntem',
         awards: [
-          'Jeokimya alanında Miyake Ödülü', 
+          'Jeokimya alanında Miyake Ödülü',
           'Tanaka Ödülü'
         ],
       }} />

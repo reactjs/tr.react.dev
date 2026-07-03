@@ -1290,7 +1290,7 @@ export const LevelContext = createContext(0);
 
 ### Nesneler ve fonksiyonları geçirirken tekrar render işlemlerini optimize etmek {/*nesneler-ve-fonksiyonları-geçirirken-tekrar-render-işlemlerini-optimize-etmek*/}
 
-Herhangi bir değeri, nesne veya fonksiyon dahil, context aracılığıyla iletebilirsiniz. 
+Herhangi bir değeri, nesne veya fonksiyon dahil, context aracılığıyla iletebilirsiniz.
 
 ```js [[2, 10, "{ currentUser, login }"]]
 function MyApp() {

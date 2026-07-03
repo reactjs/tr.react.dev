@@ -56,10 +56,10 @@ Bu `<textarea>` propları hem kontrollü hem de kotrolsüz metin alanları için
 * `onChange`: [`olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu.  [Kontrollü metin alanları](#controlling-a-text-area-with-a-state-variable) için gereklidir. Kullanıcı tarafından, girdi değeri değiştiği anda çalışır (örneğin, klavyede tuşa her basıldığında çalışır). Tarayıcı `input` olayı](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) gibi çalışır.
 * `onChangeCapture`: [Yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalışan `onChange`'in bir versiyonudur.
 * [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Değer, kullanıcı tarafından değiştirildiği anda çalıştırılır. Tarihsel nedenlerden dolayı, React'te benzer şekilde çalışan `onChange`'i kullanmak yaygındır.
-* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan versiyonudur. 
+* `onInputCapture`: `onInput`'un [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan versiyonudur.
 * [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. Bir girdi, form gönderiminde doğrulamayı geçemezse çalıştırılır. Yerleşik `invalid` olayının aksine, React `onInvalid` olayı kabarcık şeklinde yayılır (bubbles).
 * `onInvalidCapture`: `onInvalid`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyionudur.
-* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/select_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. `<textarea>` içindeki seçilen alanın değişmesiyle tetiklenir. React, `onSelect` olayını boş seçim ve düzenlemelerde de (seçimi etkileyebilir) çalıştırır. 
+* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement/select_event): [`Olay` yöneticisi](/reference/react-dom/components/common#event-handler) fonksiyonu. `<textarea>` içindeki seçilen alanın değişmesiyle tetiklenir. React, `onSelect` olayını boş seçim ve düzenlemelerde de (seçimi etkileyebilir) çalıştırır.
 * `onSelectCapture`: `onSelect`'in [yakalama aşamasında](/learn/responding-to-events#capture-phase-events) çalıştırılan bir versiyonudur.
 * [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#placeholder): String. Metin alanı boşken ekranda soluk renkte görüntülenir.
 * [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#readonly): Boolean. Eğer `true` ise, metin alanı kullanıcı tarafından düzenlenemez.
@@ -145,7 +145,7 @@ input { margin: 5px; }
 
 ### Metin alanına başlangıç değeri verme {/*providing-an-initial-value-for-a-text-area*/}
 
-`defaultValue` değerini string olarak ileterek metin alanına başlangıç değeri verebilirsiniz. 
+`defaultValue` değerini string olarak ileterek metin alanına başlangıç değeri verebilirsiniz.
 <Sandpack>
 
 ```js
@@ -199,7 +199,7 @@ export default function EditPost() {
     // formDatayı fetch gövdesi olarak iletebilirsiniz:
     fetch('/some-api', { method: form.method, body: formData });
 
-    // formDatayı Düz nesne gibi de kullanabilirsiniz 
+    // formDatayı Düz nesne gibi de kullanabilirsiniz
     const formJson = Object.fromEntries(formData.entries());
     console.log(formJson);
   }
@@ -345,7 +345,7 @@ Metin alanınızı `value` değeri ile render ederken `onChange` olay yöneticis
 
 <ConsoleBlock level="error">
 
-`onChange` yöneticisi olmayan bir form alanına `value` propu verdiniz. Bu, salt okunur bir alan oluşturacaktır. Alanın değişken olması gerekiyorsa `defaultValue` kullanın. Aksi takdirde, `onChange` veya `readOnly` olarak ayarlayın. 
+`onChange` yöneticisi olmayan bir form alanına `value` propu verdiniz. Bu, salt okunur bir alan oluşturacaktır. Alanın değişken olması gerekiyorsa `defaultValue` kullanın. Aksi takdirde, `onChange` veya `readOnly` olarak ayarlayın.
 
 </ConsoleBlock>
 

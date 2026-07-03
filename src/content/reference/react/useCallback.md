@@ -660,7 +660,7 @@ button[type="button"] {
 
 </Sandpack>
 
-Çoğu zaman önbelleklemeye gerek kalmadan kod iyi çalışır. Etkileşimleriniz yeterince hızlıysa, önbelleklemeye ihtiyacınız yoktur. 
+Çoğu zaman önbelleklemeye gerek kalmadan kod iyi çalışır. Etkileşimleriniz yeterince hızlıysa, önbelleklemeye ihtiyacınız yoktur.
 
 Uygulamanızı gerçekte neyin yavaşlattığına dair gerçekçi bir fikir edinmek için React'ı üretim modunda çalıştırmanız, [React Developer Tools](/learn/react-developer-tools)'u devre dışı bırakmanız ve uygulamanızın kullanıcılarınınkine benzer cihazlar kullanmanız gerektiğini unutmayın.
 

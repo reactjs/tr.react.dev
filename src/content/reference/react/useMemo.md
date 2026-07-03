@@ -1293,7 +1293,7 @@ Ayrıca, mutasyon olmadan [nesneleri güncelleme](/learn/updating-objects-in-sta
 Buradaki kod çalışmıyor:
 
 ```js {1-2,5}
-  // 🔴 () => { ile bir ok fonksiyonundan bir nesne döndüremezsiniz 
+  // 🔴 () => { ile bir ok fonksiyonundan bir nesne döndüremezsiniz
   const searchOptions = useMemo(() => {
     matchMode: 'whole-word',
     text: text

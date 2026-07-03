@@ -77,7 +77,7 @@ Render performansını ölçmek için `<Profiler>` bileşenini bir React ağacı
 </App>
 ```
 
-`<Profiler>` iki prop alır: bir `id` (string) ve React'in ağaç içinde bir bileşen her güncelleme "commit" ettiğinde çağırdığı `onRender` callback'i (fonksiyon). 
+`<Profiler>` iki prop alır: bir `id` (string) ve React'in ağaç içinde bir bileşen her güncelleme "commit" ettiğinde çağırdığı `onRender` callback'i (fonksiyon).
 
 <Pitfall>
 

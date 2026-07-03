@@ -4,7 +4,7 @@ title: "Yerleşik React API'leri"
 
 <Intro>
 
-[Hooks](/reference/react/hooks) ve [Components](/reference/react/components)’e ek olarak,  
+[Hooks](/reference/react/hooks) ve [Components](/reference/react/components)’e ek olarak,
 `react` paketi bileşen tanımlamak için faydalı birkaç başka API daha dışa aktarır (**export eder**). Bu sayfa, modern React API’lerinin geri kalanını listeler.
 
 </Intro>

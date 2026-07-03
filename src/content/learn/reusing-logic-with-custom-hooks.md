@@ -4,7 +4,7 @@ title: 'Özel Hook''lar ile Mantığı Tekrar Kullanma'
 
 <Intro>
 
-React, `useState`, `useContext`, ve `useEffect` gibi birkaç yerleşik Hook ile birlikte gelir. Bazen, bazı daha spesifik amaçlar için bir Hook olmasını isteyeceksiniz: örneğin, veri çekmek için, kullanıcının çevrimiçi olup olmadığını takip etmek için veya bir sohbet odasına bağlanmak için. Bu Hook'ları React'te bulamayabilirsiniz, ancak uygulamanızın ihtiyaçları için kendi Hook'larınızı oluşturabilirsiniz. 
+React, `useState`, `useContext`, ve `useEffect` gibi birkaç yerleşik Hook ile birlikte gelir. Bazen, bazı daha spesifik amaçlar için bir Hook olmasını isteyeceksiniz: örneğin, veri çekmek için, kullanıcının çevrimiçi olup olmadığını takip etmek için veya bir sohbet odasına bağlanmak için. Bu Hook'ları React'te bulamayabilirsiniz, ancak uygulamanızın ihtiyaçları için kendi Hook'larınızı oluşturabilirsiniz.
 
 </Intro>
 
@@ -274,7 +274,7 @@ function useAuth() {
 }
 ```
 
-Teknik olarak, bu React tarafından zorunlu kılınmıyor. Prensipte, başka Hook'ları çağırmayan bir Hook yapabilirsiniz. Bu genellikle kafa karıştırıcı ve limitleyicidir, bu yüzden bu örüntüden uzak durmak en iyisidir. Ancak, işe yarayacağı nadir durumlar bulunabilir. Örneğin: belki şu anda fonksiyonunuz hiçbir Hook kullanmıyordur, ancak gelecekte ona bazı Hook çağrıları eklemeyi planlıyorsunuzdur. O zaman, fonksiyonu `use` önekiyle adlandırmak mantıklıdır: 
+Teknik olarak, bu React tarafından zorunlu kılınmıyor. Prensipte, başka Hook'ları çağırmayan bir Hook yapabilirsiniz. Bu genellikle kafa karıştırıcı ve limitleyicidir, bu yüzden bu örüntüden uzak durmak en iyisidir. Ancak, işe yarayacağı nadir durumlar bulunabilir. Örneğin: belki şu anda fonksiyonunuz hiçbir Hook kullanmıyordur, ancak gelecekte ona bazı Hook çağrıları eklemeyi planlıyorsunuzdur. O zaman, fonksiyonu `use` önekiyle adlandırmak mantıklıdır:
 
 ```js {3-4}
 // ✅ İyi: Gelecekte muhtemelen başka Hook'ları kullanacak bir Hook
@@ -1264,7 +1264,7 @@ function ChatRoom({ roomId }) {
 
 ### Özel Hook'lar daha iyi kalıplara geçiş yapmanıza yardımcı olur {/*custom-hooks-help-you-migrate-to-better-patterns*/}
 
-Efekt'ler bir ["kaçış yolu"](/learn/escape-hatches)'dur: Efekt'leri "React'ten dışarı çıkmak" zorunda kaldığınızda ve daha iyi bir yerleşik çözüm olmadığında kullanırsınız. Zamanla, React ekibinin amacı daha spesifik problemlere daha spesifik çözümler sağlayarak uygulamanızdaki Efekt'lerin sayısını minimuma indirmektir. Efekt'lerinizi özel Hook'larla sarmak, bu çözümler mevcut olduğunda kodunuzu güncellemeyi kolaylaştırır.  
+Efekt'ler bir ["kaçış yolu"](/learn/escape-hatches)'dur: Efekt'leri "React'ten dışarı çıkmak" zorunda kaldığınızda ve daha iyi bir yerleşik çözüm olmadığında kullanırsınız. Zamanla, React ekibinin amacı daha spesifik problemlere daha spesifik çözümler sağlayarak uygulamanızdaki Efekt'lerin sayısını minimuma indirmektir. Efekt'lerinizi özel Hook'larla sarmak, bu çözümler mevcut olduğunda kodunuzu güncellemeyi kolaylaştırır.
 
 Şu örneğe geri dönelim:
 

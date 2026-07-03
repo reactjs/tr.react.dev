@@ -103,7 +103,7 @@ function subscribe(callback) {
 
 <Note>
 
-Her özel Hook'a hata ayıklama değeri eklemeyin. Paylaşılan kütüphanelerde bulunan ve incelenmesi zor olan karmaşık bir iç veri yapısına sahip olan özel Hook'lar için kullanıldığında daha faydalıdır. 
+Her özel Hook'a hata ayıklama değeri eklemeyin. Paylaşılan kütüphanelerde bulunan ve incelenmesi zor olan karmaşık bir iç veri yapısına sahip olan özel Hook'lar için kullanıldığında daha faydalıdır.
 
 </Note>
 

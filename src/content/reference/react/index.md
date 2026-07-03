@@ -21,7 +21,7 @@ Programatik React özellikleri:
 
 ## React DOM {/*react-dom*/}
 
-React DOM, yalnızca web uygulamaları (tarayıcı DOM ortamında çalışan) için desteklenen özellikleri içerir.  
+React DOM, yalnızca web uygulamaları (tarayıcı DOM ortamında çalışan) için desteklenen özellikleri içerir.
 Bu bölüm aşağıdaki başlıklara ayrılmıştır:
 
 * [Hooks](/reference/react-dom/hooks) - Tarayıcı DOM ortamında çalışan web uygulamaları için kullanılan Hook’lar.

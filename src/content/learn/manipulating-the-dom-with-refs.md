@@ -1146,7 +1146,7 @@ button { display: block; margin-bottom: 10px; }
 
 <Solution>
 
-`SearchButton`'a bir `onClick` prop'u eklemeniz ve `SearchButton` bunu tarayıcıya `<button>`'a iletmesini sağlamanız gerekir. Ayrıca `<SearchInput>`'a bir ref ileteceksiniz bu da onu asıl `<input>`'a iletecek ve onu dolduracaktır. Son olarak tıklama yöneticisinde bu ref içinde depolanan DOM elemanına `focus`'u çağırmalısınız. 
+`SearchButton`'a bir `onClick` prop'u eklemeniz ve `SearchButton` bunu tarayıcıya `<button>`'a iletmesini sağlamanız gerekir. Ayrıca `<SearchInput>`'a bir ref ileteceksiniz bu da onu asıl `<input>`'a iletecek ve onu dolduracaktır. Son olarak tıklama yöneticisinde bu ref içinde depolanan DOM elemanına `focus`'u çağırmalısınız.
 
 <Sandpack>
 

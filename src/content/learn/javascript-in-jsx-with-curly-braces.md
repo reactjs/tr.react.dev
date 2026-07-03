@@ -42,7 +42,7 @@ export default function Avatar() {
 
 </Sandpack>
 
-Burada `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak pass ediliyor.
+Burada, `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak pass ediliyor.
 
 Ancak `src` veya `alt` metnini dinamik olarak belirtmek isterseniz ne olur?  **`" `ve` "` yerine `{ `ve` }` ile değiştirerek JavaScript'ten bir değer** kullanabilirsiniz:
 
@@ -288,7 +288,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Sorunu bulabilir misin ? 
+Sorunu bulabilir misin ?
 
 <Hint>Süslü parantezlerin içine ne koyduğumuza bakalım. Oraya doğru şeyi mi koyuyoruz?</Hint>
 
@@ -428,7 +428,7 @@ body > div > div { padding: 20px; }
 
 Aşağıdaki objede, tam resim URL'si dört parçaya bölünmüştür: temel URL, `imageId`, `imageSize` ve dosya uzantısı.
 
-Image URL’in şu attribute’ları bir araya getirmesini istiyoruz: base URL (her zaman `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve file extension (her zaman `'.jpg'`). Ancak `<img>` tag’inin `src`’yi nasıl belirttiğiyle ilgili bir şey yanlış.
+Image URL’nin şu attribute’ları bir araya getirmesini istiyoruz: base URL (her zaman `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve file extension (her zaman `'.jpg'`). Ancak `<img>` tag’inin `src`’yi belirtme şeklinde bir sorun var.
 
 Bu hatayı düzeltebilir misiniz?
 

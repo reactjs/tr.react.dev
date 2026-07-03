@@ -64,7 +64,7 @@ Strict Modu aşağıdaki geliştirici davranışlarını etkinleştirir:
 Strict Modu, `<StrictMode>` bileşeni altındaki tüm bileşenler için yalnızca geliştirme amaçlı ekstra kontroller sağlar. Bu kontroller, bileşenlerinizdeki hataları erkenden bulmanıza yardımcı olur.
 
 
-Tüm projenizde Strict Modu etkilenştirmek için, render sırasında kök bileşeninizi `<StrictMode>` bileşeni ile sarın. 
+Tüm projenizde Strict Modu etkilenştirmek için, render sırasında kök bileşeninizi `<StrictMode>` bileşeni ile sarın.
 
 ```js {6,8}
 import { StrictMode } from 'react';
@@ -100,7 +100,7 @@ Strict Modu geliştirme sırasında aşağıdaki kontrolleri etkinleştirir:
 
 ### Strict Modu uygulamanın bir parçası için etkinleştirme {/*enabling-strict-mode-for-a-part-of-the-app*/}
 
-Strict Modu uygulamanızın herhangi bir parçası için de etkinleştirebilirsiniz: 
+Strict Modu uygulamanızın herhangi bir parçası için de etkinleştirebilirsiniz:
 
 ```js {7,12}
 import { StrictMode } from 'react';
@@ -140,7 +140,7 @@ Bu kuralı çiğneyen bileşenler öngörülemeyecek şekilde davranırlar ve ha
 - [`useState`](/reference/react/useState), [`set` fonksiyonları](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), ya da [`useReducer`](/reference/react/useReducer)'a iletilen fonksiyonlar.
 - [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([tüm listeye göz atınt](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)) gibi bazı sınıf bileşeni metodları
 
-Eğer saf bir fonksiyonsa, iki kez çalıştırmak hiçbir şeyi değiştirmez çünkü saf fonksiyonlar her zaman aynı sonucu üretir. Ancak, saf olmayan bir fonksiyonsa (örneğin, aldığı veriyi değiştiriyorsa), iki kez çalıştırmak farkedilir olma eğilimindedir (zaten bu sebepten saf değil) Bu durum hatayı erkenden farketmenize ve çözmenize yardımcı olur. 
+Eğer saf bir fonksiyonsa, iki kez çalıştırmak hiçbir şeyi değiştirmez çünkü saf fonksiyonlar her zaman aynı sonucu üretir. Ancak, saf olmayan bir fonksiyonsa (örneğin, aldığı veriyi değiştiriyorsa), iki kez çalıştırmak farkedilir olma eğilimindedir (zaten bu sebepten saf değil) Bu durum hatayı erkenden farketmenize ve çözmenize yardımcı olur.
 
 **Strict Modunda iki kez render etmenin hataları erkenden nasıl bulduğuna dair bir örnek:**
 
