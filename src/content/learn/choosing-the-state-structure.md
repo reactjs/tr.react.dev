@@ -1823,23 +1823,13 @@ Bazı durumlarda iç içe state'in bazı parçalarını alt bileşenlere taşıy
 
 <Recap>
 
-<<<<<<< HEAD
-* Eğer iki farklı state değişkeni hep aynı anda güncelleniyorsa bunları tek bir state değişkeninde birleştirmeyi değerlendirin.
-* "İmkansız" state'ler oluşturmaktan kaçınmak için state değişkenlerini dikkatle seçin.
-* State'inizi, onu güncellerken hata yapma ihtimalini en aza indirgeyecek şekilde yapılandırın.
-* State'inizi senkronize tutmaya çalışmak yerine gereksiz ve yinelenen şekilde yapılandırmaktan kaçının.
-* Güncellemeleri engellemek istediğiniz durumlar haricinde prop'ları state *içine* koymayın.
-* Seçim (selection) gibi UI kalıpları için state'te objenin kendisi yerine IDsini ya da indeksini tutun.
-* Eğer derinlemesine iç içe geçmiş state'i güncellemek karmaşıksa onu düz bir yapıya getirmeye çalışın.
-=======
-* If two state variables always update together, consider merging them into one.
-* Choose your state variables carefully to avoid creating "impossible" states.
-* Structure your state in a way that reduces the chances that you'll make a mistake updating it.
-* Avoid redundant and duplicate state so that you don't need to keep it in sync.
-* Don't put props *into* state unless you specifically want to prevent updates.
-* For UI patterns like selection, keep ID or index in state instead of the object itself.
-* If updating deeply nested state is complicated, try flattening it.
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
+* İki state variable her zaman birlikte update oluyorsa, bunları tek bir state içinde merge etmeyi düşünün.
+* "Impossible" state’ler oluşturmamak için state variable’larınızı dikkatli seçin.
+* State’inizi, update ederken hata yapma ihtimalinizi azaltacak şekilde structure edin.
+* Redundant ve duplicate state’ten kaçının; böylece onu sync tutmanız gerekmez.
+* Özellikle update’leri engellemek istemiyorsanız, props’u state’in *içine* koymayın.
+* Selection gibi UI pattern’leri için object’in kendisi yerine ID veya index’i state içinde tutun.
+* Deeply nested state’i update etmek complicated ise, onu flatten etmeyi deneyin.
 
 </Recap>
 
