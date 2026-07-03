@@ -42,11 +42,7 @@ export default function Avatar() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-Burada, `"https://i.imgur.com/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak iletildi.
-=======
-Here, `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
+Burada `"https://react.dev/images/docs/scientists/7vQD0fPs.jpg"` ve `"Gregorio Y. Zara"` string olarak pass ediliyor.
 
 Ancak `src` veya `alt` metnini dinamik olarak belirtmek isterseniz ne olur?  **`" `ve` "` yerine `{ `ve` }` ile değiştirerek JavaScript'ten bir değer** kullanabilirsiniz:
 
@@ -432,11 +428,7 @@ body > div > div { padding: 20px; }
 
 Aşağıdaki objede, tam resim URL'si dört parçaya bölünmüştür: temel URL, `imageId`, `imageSize` ve dosya uzantısı.
 
-<<<<<<< HEAD
-Resim URL'sini bu özellikleri bir araya getirecek şekilde istiyoruz: temel URL (her zaman `'https://i.imgur.com/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve dosya uzantısı (her zaman `'.jpg'`). Ancak, `<img>` etiketinin `srcyi belirtme biçiminde bir sorun var.
-=======
-We want the image URL to combine these attributes together: base URL (always `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`), and file extension (always `'.jpg'`). However, something is wrong with how the `<img>` tag specifies its `src`.
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
+Image URL’in şu attribute’ları bir araya getirmesini istiyoruz: base URL (her zaman `'https://react.dev/images/docs/scientists/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`) ve file extension (her zaman `'.jpg'`). Ancak `<img>` tag’inin `src`’yi nasıl belirttiğiyle ilgili bir şey yanlış.
 
 Bu hatayı düzeltebilir misiniz?
 
