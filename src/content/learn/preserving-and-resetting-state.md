@@ -103,11 +103,7 @@ label {
 
 </Sandpack>
 
-<<<<<<< HEAD
 Bunlar ağaç olarak nasıl görünüyor:
-=======
-Here's how these look as a tree:
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 <DiagramGroup>
 
@@ -517,11 +513,7 @@ export default function App() {
   return (
     <div>
       {isPaused ? (
-<<<<<<< HEAD
         <p>Sonra görüşürüz!</p> 
-=======
-        <p>See you later!</p>
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
       ) : (
         <Counter />
       )}
@@ -1458,26 +1450,16 @@ export default function App() {
   if (reverse) {
     return (
       <>
-<<<<<<< HEAD
         <Field label="Ad" /> 
         <Field label="Soyad" />
-=======
-        <Field label="Last name" />
-        <Field label="First name" />
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-<<<<<<< HEAD
         <Field label="Ad" /> 
         <Field label="Soyad" />
-=======
-        <Field label="First name" />
-        <Field label="Last name" />
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
         {checkbox}
       </>
     );
@@ -1530,26 +1512,16 @@ export default function App() {
   if (reverse) {
     return (
       <>
-<<<<<<< HEAD
         <Field key="lastName" label="Ad" /> 
         <Field key="firstName" label="Soyad" />
-=======
-        <Field key="lastName" label="Last name" />
-        <Field key="firstName" label="First name" />
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
         {checkbox}
       </>
     );
   } else {
     return (
       <>
-<<<<<<< HEAD
         <Field key="firstName" label="Ad" /> 
         <Field key="lastName" label="Soyad" />
-=======
-        <Field key="firstName" label="First name" />
-        <Field key="lastName" label="Last name" />
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
         {checkbox}
       </>
     );
