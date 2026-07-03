@@ -724,11 +724,7 @@ React'e yeniden rendermanın atlanabileceğini söylemek için `false` döndür�
 
 #### Uyarılar {/*shouldcomponentupdate-caveats*/}
 
-<<<<<<< HEAD
-- Bu metod *yalnızca* bir performans optimizasyonu olarak mevcuttur. Bileşeniniz onsuz bozuluyorsa, önce onu düzeltin.
-=======
-- This method *only* exists as a performance optimization. If your component breaks without it, fix that first.
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
+- Bu method *yalnızca* performance optimization olarak vardır. Component’iniz onsuz bozuluyorsa, önce bunu fix edin.
 
 - `shouldComponentUpdate`'i elle yazmak yerine [`PureComponent`](/reference/react/PureComponent) kullanmayı düşünün. `PureComponent`, prop'ları ve state'i yüzeysel olarak karşılaştırır ve gerekli bir güncellemeyi atlama şansınızı azaltır.
 
@@ -1278,17 +1274,10 @@ Varsayılan olarak, uygulamanız renderlama sırasında bir hata fırlatırsa, R
 <Note>
 Hata sınırları şunlar için hataları yakalamaz:
 
-<<<<<<< HEAD
-- Olay işleyicileri [(daha fazla bilgi)](/learn/responding-to-events)
-- [Sunucu taraflı renderlama](/reference/react-dom/server)
-- Hata sınırının kendisinde (alt bileşenleri yerine) fırlatılan hatalar
-- Asenkron kod (örneğin `setTimeout` veya `requestAnimationFrame` geri çağrıları); bunun bir istisnası [`useTransition`](/reference/react/useTransition) Hook'u tarafından döndürülen [`startTransition`](/reference/react/useTransition#starttransition) fonksiyonunun kullanımıdır. Geçiş fonksiyonu içinde fırlatılan hatalar hata sınırları tarafından yakalanır [(daha fazla bilgi)](/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)
-=======
-- Event handlers [(learn more)](/learn/responding-to-events)
+- Event handler’lar [(daha fazla bilgi edinin)](/learn/responding-to-events)
 - [Server side rendering](/reference/react-dom/server)
-- Errors thrown in the error boundary itself (rather than its children)
-- Asynchronous code (e.g. `setTimeout` or `requestAnimationFrame` callbacks); an exception is the usage of the [`startTransition`](/reference/react/useTransition#starttransition) function returned by the [`useTransition`](/reference/react/useTransition) Hook. Errors thrown inside the transition function are caught by error boundaries [(learn more)](/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
+- Error boundary’nin kendisinde throw edilen error’lar (children’larında değil)
+- Asynchronous code (örn. `setTimeout` veya `requestAnimationFrame` callback’leri); bir exception, [`useTransition`](/reference/react/useTransition) Hook’u tarafından return edilen [`startTransition`](/reference/react/useTransition#starttransition) function’ının kullanımıdır. Transition function içinde throw edilen error’lar error boundary’ler tarafından catch edilir [(daha fazla bilgi edinin)](/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)
 
 </Note>
 
