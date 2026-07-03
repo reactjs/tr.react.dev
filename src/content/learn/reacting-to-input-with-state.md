@@ -517,13 +517,8 @@ export default function Picture() {
     <div className="background background--active">
       <img
         className="picture"
-<<<<<<< HEAD
-        alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
-        src="https://i.imgur.com/5qwVYb1.jpeg"
-=======
-        alt="Rainbow houses in Kampung Pelangi, Indonesia"
+        alt="Endonezya, Kampung Pelangi’deki gökkuşağı renkli evler"
         src="https://react.dev/images/docs/scientists/5qwVYb1.jpeg"
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
       />
     </div>
   );
@@ -598,13 +593,8 @@ export default function Picture() {
           setIsActive(true);
         }}
         className={pictureClassName}
-<<<<<<< HEAD
-        alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
-        src="https://i.imgur.com/5qwVYb1.jpeg"
-=======
-        alt="Rainbow houses in Kampung Pelangi, Indonesia"
+        alt="Endonezya, Kampung Pelangi’deki gökkuşağı renkli evler"
         src="https://react.dev/images/docs/scientists/5qwVYb1.jpeg"
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
       />
     </div>
   );
@@ -658,13 +648,8 @@ export default function Picture() {
       >
         <img
           className="picture picture--active"
-<<<<<<< HEAD
-          alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
-          src="https://i.imgur.com/5qwVYb1.jpeg"
-=======
-          alt="Rainbow houses in Kampung Pelangi, Indonesia"
+          alt="Endonezya, Kampung Pelangi’deki gökkuşağı renkli evler"
           src="https://react.dev/images/docs/scientists/5qwVYb1.jpeg"
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
           onClick={e => e.stopPropagation()}
         />
       </div>
@@ -674,13 +659,8 @@ export default function Picture() {
     <div className="background background--active">
       <img
         className="picture"
-<<<<<<< HEAD
-        alt="Kampung Pelangi'deki (Endonezya) gökkuşağı evleri"
-        src="https://i.imgur.com/5qwVYb1.jpeg"
-=======
-        alt="Rainbow houses in Kampung Pelangi, Indonesia"
+        alt="Endonezya, Kampung Pelangi’deki gökkuşağı renkli evler"
         src="https://react.dev/images/docs/scientists/5qwVYb1.jpeg"
->>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
         onClick={() => setIsActive(true)}
       />
     </div>
