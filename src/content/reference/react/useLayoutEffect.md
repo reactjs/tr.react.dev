@@ -47,7 +47,11 @@ function Tooltip() {
 
 #### Parametreler {/*parameters*/}
 
+<<<<<<< HEAD
 * `setup`: Effect’inizin mantığını içeren fonksiyondur. `setup` fonksiyonunuz isteğe bağlı olarak bir *cleanup* (temizleme) fonksiyonu döndürebilir. Bileşeniniz [commit edilmeden önce](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React `setup` fonksiyonunu çalıştırır. Dependency’leri değişmiş her commit’ten sonra React, önce (varsa) eski değerlerle *cleanup* fonksiyonunu çalıştırır, ardından yeni değerlerle `setup` fonksiyonunu çalıştırır. Bileşeniniz DOM’dan kaldırılmadan önce React *cleanup* fonksiyonunu çalıştırır.
+=======
+* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. After your [component commits](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom) to the DOM and before the browser repaints the screen, React will run your setup function. After every commit with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
+>>>>>>> 2639f369946f763fff9a2572b0d7c4b9e2f83ebd
 
 * **opsiyonel** `dependencies`: `setup` kodu içinde referans verilen tüm reactive value’ların listesidir. Reactive value’lar; props, state ve bileşen gövdesi içinde doğrudan tanımlanan tüm değişkenler ve fonksiyonları kapsar. Eğer linter’ınız [React için yapılandırılmışsa](/learn/editor-setup#linting), her reactive value’nun dependency olarak doğru şekilde belirtildiğini doğrular. Dependency listesi sabit sayıda öğe içermeli ve `[dep1, dep2, dep3]` şeklinde inline olarak yazılmalıdır. React, her bir dependency’yi önceki değeriyle [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) karşılaştırması kullanarak kıyaslar. Bu argümanı atladığınızda, Effect’iniz bileşenin her commit’inden sonra yeniden çalışır.
 
