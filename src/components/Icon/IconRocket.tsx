@@ -9,7 +9,7 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {memo} from 'react';
+import {memo, type JSX} from 'react';
 
 export const IconRocket = memo<
   JSX.IntrinsicElements['svg'] & {title?: string; size?: 's' | 'md'}

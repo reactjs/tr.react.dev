@@ -9,7 +9,7 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {memo} from 'react';
+import {memo, type JSX} from 'react';
 
 export const IconNote = memo<JSX.IntrinsicElements['svg']>(function IconNote({
   className,
