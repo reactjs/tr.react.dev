@@ -6,11 +6,7 @@ title: <Fragment> (<>...</>)
 
 `<Fragment>`, genellikle `<>...</>` syntax’ı ile kullanılır ve element’leri bir wrapper node olmadan gruplamanızı sağlar.
 
-<<<<<<< HEAD
-<Canary> Fragment'ler ayrıca ref'leri de kabul edebilir, bu da sarmalayıcı öğe eklemeden alt DOM düğümleriyle etkileşimde bulunmanı sağlar. Aşağıda referans ve kullanım örneklerini görebilirsin. </Canary>
-=======
-<Canary>Fragments can also accept refs, which enable interacting with underlying DOM nodes without adding wrapper elements.</Canary>
->>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
+<Canary>Fragment’lar ayrıca ref kabul edebilir; bu da wrapper element eklemeden underlying DOM node’larıyla etkileşim kurmayı sağlar.</Canary>
 
 ```js
 <>
@@ -33,68 +29,31 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
-<<<<<<< HEAD
-- **optional** `key`: Açık `<Fragment>` sözdizimi ile tanımlanan Fragment'ler [key] alabilir. (/learn/rendering-lists#keeping-list-items-in-order-with-key)
-- <CanaryBadge /> **optional** `ref`: Bir ref objesi (örneğin [`useRef`](/reference/react/useRef) ile oluşturulmuş) veya [callback function](/reference/react-dom/components/common#ref-callback). React, Fragment tarafından sarılan DOM düğümleriyle etkileşim kurmak için yöntemler içeren bir `FragmentInstance`'ı ref değeri olarak sağlar.
-
-### <CanaryBadge /> FragmentInstance {/*fragmentinstance*/}
-
-Fragment'e bir ref verdiğinde, React Fragment tarafından sarılan DOM düğümleriyle etkileşim için yöntemler içeren bir `FragmentInstance` nesnesi sağlar:
-
-**Olay yönetimi yöntemleri:**
-- `addEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarına bir olay dinleyici ekler.
-- `removeEventListener(type, listener, options?)`: Fragment'in tüm birinci seviyedeki DOM çocuklarından bir olay dinleyici kaldırır.
-- `dispatchEvent(event)`: Fragment'in sanal bir çocuğuna bir olay gönderir; eklenen dinleyicileri çağırır ve DOM üstüne kabarcık yapabilir.
-
-**Layout method’ları:**
-- `compareDocumentPosition(otherNode)`: Fragment’in document position’ını başka bir node ile karşılaştırır.
-  - Fragment’in children’ları varsa, native `compareDocumentPosition` value’su return edilir.
-  - Empty Fragment’ler, React tree içindeki positioning’i karşılaştırmayı dener ve `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` içerir.
-  - Portaling veya diğer insertion’lar nedeniyle React tree ve DOM tree içinde farklı relationship’e sahip element’ler `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC` olur.
-- `getClientRects()`: Tüm children’ların bounding rectangle’larını temsil eden `DOMRect` object’lerinden oluşan flat bir array return eder.
-- `getRootNode()`: Fragment’in parent DOM node’unu içeren root node’u return eder.
-
-**Odak (focus) yönetimi yöntemleri:**
-- `focus(options?)`: Fragment'teki ilk odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.
-- `focusLast(options?)`: Fragment'teki son odaklanabilir DOM düğümünü odaklar. Odak derinlemesine, çocuklar üzerinde denenir.
-- `blur()`: Eğer `document.activeElement` Fragment içindeyse odak kaldırılır.
-
-**Gözlemleme (observer) yöntemleri:**
-- `observeUsing(observer)`: Fragment'in DOM çocuklarını bir `IntersectionObserver` veya `ResizeObserver` ile gözlemlemeye başlar.
-- `unobserveUsing(observer)`: Belirtilen observer ile Fragment'in DOM çocuklarını gözlemlemeyi durdurur.
-=======
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
-- <CanaryBadge /> **optional** `ref`: A ref object (e.g. from [`useRef`](/reference/react/useRef)) or [callback function](/reference/react-dom/components/common#ref-callback). React provides a `FragmentInstance` as the ref value that implements methods for interacting with the DOM nodes wrapped by the Fragment.
->>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
+- **optional** `key`: Açık `<Fragment>` syntax’iyle tanımlanan Fragment’lar [key’lere](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
+- <CanaryBadge /> **optional** `ref`: Bir ref object’i (örn. [`useRef`](/reference/react/useRef)’ten gelen) veya [callback function](/reference/react-dom/components/common#ref-callback). React, ref value olarak Fragment tarafından sarılan DOM node’larıyla etkileşim kurmak için method’lar implemente eden bir `FragmentInstance` sağlar.
 
 #### Uyarılar {/*caveats*/}
 
-<<<<<<< HEAD
-- Eğer bir Fragment'a key değeri geçirmek istiyorsanız, <>...</> sözdizimini kullanamazsınız. 'React'ten Fragment'ı içe aktarmanız ve `<Fragment key={anahtar}>...</Fragment>` şeklinde render etmeniz gerekmektedir.
+* Bir Fragment’a `key` geçirmek istiyorsanız, `<>...</>` syntax’ini kullanamazsınız. `'react'` içinden `Fragment`’ı açıkça import etmeniz ve `<Fragment key={yourKey}>...</Fragment>` şeklinde render etmeniz gerekir.
 
-- React, `<><AltEleman /></>`'dan `[<AltEleman />]`'a veya geriye dönerken, ya da `<><AltEleman /></>`'dan `<AltEleman />`'a ve geriye dönerken [state sıfırlamaz](/learn/preserving-and-resetting-state). Bu durum yalnızca tek seviye derinlikte çalışır: örneğin, `<><><AltEleman /></></>`'dan `<AltEleman />`'a geçmek durumu sıfırlar. Kesin anlamları [burada](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) görebilirsiniz.
-=======
-* If you want to pass `key` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment key={yourKey}>...</Fragment>`.
+* React, `<><Child /></>` render etmekten `[<Child />]` render etmeye geçtiğinizde veya geri döndüğünüzde ya da `<><Child /></>` render etmekten `<Child />` render etmeye geçtiğinizde ve geri döndüğünüzde [state’i resetlemez](/learn/preserving-and-resetting-state). Bu yalnızca tek bir seviye derinlikte çalışır: örneğin, `<><><Child /></></>` yapısından `<Child />` yapısına geçmek state’i resetler. Kesin semantiklere [buradan](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) bakabilirsiniz.
 
-* React does not [reset state](/learn/preserving-and-resetting-state) when you go from rendering `<><Child /></>` to `[<Child />]` or back, or when you go from rendering `<><Child /></>` to `<Child />` and back. This only works a single level deep: for example, going from `<><><Child /></></>` to `<Child />` resets the state. See the precise semantics [here.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
->>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
-
-* <CanaryBadge /> If you want to pass `ref` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment ref={yourRef}>...</Fragment>`.
+* <CanaryBadge /> Bir Fragment’a `ref` geçirmek istiyorsanız, `<>...</>` syntax’ini kullanamazsınız. `'react'` içinden `Fragment`’ı açıkça import etmeniz ve render etmeniz gerekir`<Fragment ref={yourRef}>...</Fragment>`.
 
 ---
 
 ### <CanaryBadge /> `FragmentInstance` {/*fragmentinstance*/}
 
-When you pass a `ref` to a Fragment, React provides a `FragmentInstance` object. It implements methods for interacting with the first-level DOM children wrapped by the Fragment.
+Bir Fragment’a `ref` geçirdiğinizde, React bir `FragmentInstance` object’i sağlar. Bu object, Fragment tarafından sarılan birinci seviye DOM child’larıyla etkileşim kurmak için method’lar implemente eder.
 
-* [`addEventListener`](#addeventlistener) and [`removeEventListener`](#removeeventlistener) manage event listeners across all first-level DOM children.
-* [`dispatchEvent`](#dispatchevent) dispatches an event on the Fragment, which can bubble to the DOM parent.
-* [`focus`](#focus), [`focusLast`](#focuslast), and [`blur`](#blur) manage focus across all nested children depth-first.
-* [`observeUsing`](#observeusing) and [`unobserveUsing`](#unobserveusing) attach and detach `IntersectionObserver` or `ResizeObserver` instances.
-* [`getClientRects`](#getclientrects) returns bounding rectangles of all first-level DOM children.
-* [`getRootNode`](#getrootnode) returns the root node of the Fragment's parent.
-* [`compareDocumentPosition`](#comparedocumentposition) compares the Fragment's position with another node.
-* [`scrollIntoView`](#scrollintoview) scrolls the Fragment's children into view.
+* [`addEventListener`](#addeventlistener) ve [`removeEventListener`](#removeeventlistener), tüm birinci seviye DOM child’ları üzerinde event listener’ları yönetir.
+* [`dispatchEvent`](#dispatchevent), Fragment üzerinde bir event dispatch eder; bu event DOM parent’a bubble olabilir.
+* [`focus`](#focus), [`focusLast`](#focuslast) ve [`blur`](#blur), tüm nested child’lar üzerinde depth-first şekilde focus’u yönetir.
+* [`observeUsing`](#observeusing) ve [`unobserveUsing`](#unobserveusing), `IntersectionObserver` veya `ResizeObserver` instance’larını attach ve detach eder.
+* [`getClientRects`](#getclientrects), tüm birinci seviye DOM child’larının bounding rectangle’larını döndürür.
+* [`getRootNode`](#getrootnode), Fragment’ın parent’ının root node’unu döndürür.
+* [`compareDocumentPosition`](#comparedocumentposition), Fragment’ın konumunu başka bir node ile karşılaştırır.
+* [`scrollIntoView`](#scrollintoview), Fragment’ın child’larını görünüme kaydırır.
 
 ---
 
@@ -502,17 +461,11 @@ function PostBody({ body }) {
 
 ---
 
-<<<<<<< HEAD
-### <CanaryBadge /> Fragment ref'lerini DOM etkileşimi için kullanma {/*using-fragment-refs-for-dom-interaction*/}
+### <CanaryBadge /> Wrapper element olmadan event listener ekleme {/*adding-event-listeners-without-wrapper*/}
 
-Fragment ref'leri, ekstra sarmalayıcı öğe eklemeden Fragment tarafından sarılan DOM düğümleriyle etkileşimde bulunmanı sağlar. Bu, olay yönetimi, görünürlük takibi, odak yönetimi ve `ReactDOM.findDOMNode()` gibi kullanım dışı kalmış desenlerin yerine geçmek için faydalıdır.
-=======
-### <CanaryBadge /> Adding event listeners without a wrapper element {/*adding-event-listeners-without-wrapper*/}
-
-Fragment `ref`s let you add event listeners to a group of elements without adding a wrapper DOM node. Use a [ref callback](/reference/react-dom/components/common#ref-callback) to attach and clean up listeners:
+Fragment `ref`leri, wrapper DOM node’u eklemeden bir grup elemente event listener eklemenizi sağlar. Listener’ları attach etmek ve cleanup yapmak için bir [ref callback](/reference/react-dom/components/common#ref-callback) kullanın:
 
 <Sandpack>
->>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
 
 ```js
 import { Fragment, useState, useRef, useEffect } from 'react';
@@ -597,15 +550,9 @@ Methods like `addEventListener`, `observeUsing`, and `getClientRects` operate on
 
 ---
 
-<<<<<<< HEAD
-### <CanaryBadge /> Fragment ref'leri ile görünürlüğü izleme {/*tracking-visibility-with-fragment-refs*/}
+### <CanaryBadge /> Bir grup element üzerinde focus yönetme {/*managing-focus-across-elements*/}
 
-Fragment ref'leri, görünürlük takibi ve intersection gözlemi için faydalıdır. Bu sayede, alt Component'ların ref açığa çıkarmasına gerek kalmadan içeriğin ne zaman görünür hale geldiğini izleyebilirsin:
-=======
-### <CanaryBadge /> Managing focus across a group of elements {/*managing-focus-across-elements*/}
-
-Fragment `ref`s provide `focus`, `focusLast`, and `blur` methods that operate across all DOM nodes within the Fragment:
->>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
+Fragment `ref`leri, Fragment içindeki tüm DOM node’ları üzerinde çalışan `focus`, `focusLast` ve `blur` method’larını sağlar:
 
 <Sandpack>
 
