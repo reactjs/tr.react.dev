@@ -625,7 +625,7 @@ let moreButton = document.getElementById('moreButton');
 let description = document.getElementById('description');
 let image = document.getElementById('image');
 let sculptureList = [{
-  name: 'Homenaje a la Neurocirugía',
+ name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
   description: 'Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.',
   url: 'https://react.dev/images/docs/scientists/Mx7dA2Y.jpg',
