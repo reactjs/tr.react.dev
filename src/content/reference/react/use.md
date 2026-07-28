@@ -4,11 +4,7 @@ title: use
 
 <Intro>
 
-<<<<<<< HEAD
-`use`, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi bir kaynağın değerini okumanıza olanak sağlayan bir React API'ıdır.
-=======
-`use` is a React API that lets you read the value of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+`use`, bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) değerini okumanızı sağlayan bir React API’sidir.
 
 ```js
 const value = use(resource);
@@ -24,11 +20,7 @@ const value = use(resource);
 
 ### `use(context)` {/*use-context*/}
 
-<<<<<<< HEAD
-[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi kaynakların değerini okumak için bileşeninizde `use` API'ını çağırabilirsiniz.
-=======
-Call `use` with a [context](/learn/passing-data-deeply-with-context) to read its value. Unlike [`useContext`](/reference/react/useContext), `use` can be called within loops and conditional statements like `if`.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Değerini okumak için `use`’u bir [context](/learn/passing-data-deeply-with-context) ile çağırın. [`useContext`](/reference/react/useContext)’in aksine, `use` loop’lar ve `if` gibi conditional statement’lar içinde çağrılabilir.
 
 ```js
 import { use } from 'react';
@@ -39,50 +31,26 @@ function Button() {
 ```
 Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler içerisinde `use` kullanılabilir. Diğer React Hook'lar gibi, `use` kullanan fonksiyon bir Bileşen veya Hook olmalıdır.
 
-<<<<<<< HEAD
-Bir Pomise ile çağırıldığında; `use` API, [`Suspense`](/reference/react/Suspense) ve [hata sınırları](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre olur. `use`'a iletilen Promise beklenirken, `use` çağrısı yapan bileşen askıya alınır. Eğer `use` çağrısı yapan bileşen Suspense içerisine alınırsa yedek görünüm görüntülenecektir. Promise çözümlendiğinde ise; Suspense yedek görünümü, `use` API'ı tarafından döndürülen değerleri kullanarak oluşturulan bileşenler ile yer değiştirir. Eğer `use`'a iletilen Promise reddedilir ise, en yakındaki Hata Sınırının yedek görünümü görüntülenecektir.
+[Daha fazla örneği aşağıda görün.](#usage-context)
 
-Bir Promise ile çağrıldığında, `use` API’si [`Suspense`](/reference/react/Suspense) ve [Error Boundaries](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre çalışır. `use` çağrısı yapan bileşen, `use` fonksiyonuna iletilen Promise beklemede (**pending**) olduğu sürece *askıya alınır* (**suspend olur**). Eğer bu bileşen bir Suspense boundary içine sarılmışsa, fallback içerik gösterilir. Promise çözümlendiğinde (**resolved**), Suspense fallback kaldırılır ve `use` API’si tarafından döndürülen veriyi kullanan bileşenler render edilir. Eğer `use` fonksiyonuna iletilen Promise reddedilirse (**rejected**), en yakın Error Boundary’nin fallback içeriği gösterilir.
+#### Parametreler {/*context-parameters*/}
 
-#### Parametreler {/*parameters*/}
+* `context`: [`createContext`](/reference/react/createContext) ile oluşturulmuş bir [context](/learn/passing-data-deeply-with-context).
 
-* `resource`: Bu, bir değeri okumak istediğiniz verinin kaynağıdır. Kaynak, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) olabilir.
+#### Döndürür {/*context-returns*/}
 
-#### Dönüş Değerleri {/*returns*/}
+Geçirilen context için context value’yu döndürür; bu değer, çağrıyı yapan component’in üstündeki en yakın context provider tarafından belirlenir. Eğer provider yoksa, döndürülen değer [`createContext`](/reference/react/createContext)’e geçirilen `defaultValue` olur.
 
-`use` API, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynaktan çözümlenen veriyi döndürür.
+#### Uyarılar {/*context-caveats*/}
 
-The `use` API returns the value that was read from the resource like the resolved value of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
-
-#### Caveats {/*caveats*/}
-
-* `use` API'si bir Bileşen veya Hook içinde çağrılmalıdır.
-* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde veri çekerken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, `await` çağrıldığında render'a başlar, oysa `use` veri çözümlandıktan sonra bileşeni yeniden render eder.
-* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde Promise'ler oluşturmayı ve bunları [İstemci Bileşenleri](/reference/rsc/use-client) içine iletmeyi, İstemci Bileşenleri içinde Promise'ler oluşturmaya tercih edin. Client Bileşenleri içinde oluşturulan Promise'ler her render işleminde yeniden oluşturulur. Sunucu Bileşenlerin'den İstemci Bileşenleri'e geçirilen Promise'ler yeniden render'lar arasında sabittir. [Bu örneğe bakın](#streaming-data-from-server-to-client).
----
-
-## Kullanım {/*usage*/}
-=======
-[See more examples below.](#usage-context)
-
-#### Parameters {/*context-parameters*/}
-
-* `context`: A [context](/learn/passing-data-deeply-with-context) created with [`createContext`](/reference/react/createContext).
-
-#### Returns {/*context-returns*/}
-
-The context value for the passed context, determined by the closest context provider above the calling component. If there is no provider, the returned value is the `defaultValue` passed to [`createContext`](/reference/react/createContext).
-
-#### Caveats {/*context-caveats*/}
-
-* `use` must be called inside a Component or a Hook.
-* Reading context with `use` is not supported in [Server Components](/reference/rsc/server-components).
+* `use`, bir Component veya Hook içinde çağrılmalıdır.
+* `use` ile context okumak [Server Components](/reference/rsc/server-components) içinde desteklenmez.
 
 ---
 
 ### `use(promise)` {/*use-promise*/}
 
-Call `use` with a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to read its resolved value. The component calling `use` *suspends* while the Promise is pending. Despite its name, `use` is not a Hook. Unlike Hooks, it can be called inside loops and conditional statements like `if`.
+Resolved value’sunu okumak için `use`’u bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ile çağırın. `use` çağıran component, Promise pending durumdayken *suspend* olur. İsminin aksine, `use` bir Hook değildir. Hook’ların aksine, loop’lar ve `if` gibi conditional statement’lar içinde çağrılabilir.
 
 ```js
 import { use } from 'react';
@@ -114,16 +82,12 @@ The resolved value of the Promise.
 ---
 
 ## Usage (Context) {/*usage-context*/}
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 
 ### `use` ile context okumak {/*reading-context-with-use*/}
 
 `use`'a [context](/learn/passing-data-deeply-with-context) aktarıldığında, [`useContext`](/reference/react/useContext) gibi çalışacaktır. `useContext` bileşende üst seviye olarak çağırılmak zorundayken; `use` ifadesi, `if` gibi koşullu ifadelerin ve `for` gibi döngü ifadelerinin içerisinde kullanılabilir. Çok daha esnek kullanılabildiğinden dolayı `use` ifadesi, `useContext` yerine tercih edilebilir.
 
-<<<<<<< HEAD
-=======
-When a [context](/learn/passing-data-deeply-with-context) is passed to `use`, it works similarly to [`useContext`](/reference/react/useContext). While `useContext` must be called at the top level of your component, `use` can be called inside conditionals like `if` and loops like `for`.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Bir [context](/learn/passing-data-deeply-with-context), `use`’a geçirildiğinde [`useContext`](/reference/react/useContext) ile benzer şekilde çalışır. `useContext` component’inizin top-level’ında çağrılmak zorundayken, `use` `if` gibi conditional’lar ve `for` gibi loop’lar içinde çağrılabilir.
 
 ```js [[2, 4, "theme"], [1, 4, "ThemeContext"]]
 import { use } from 'react';
@@ -258,15 +222,9 @@ function Button({ show, children }) {
 
 </Sandpack>
 
-<<<<<<< HEAD
-### Sunucudan istemciye veri aktarımı {/*streaming-data-from-server-to-client*/}
+### Context’ten Promise okuma {/*reading-a-promise-from-context*/}
 
-Sunucudan gelen veri; <CodeStep step={1}>Sunucu Bileşeni</CodeStep>'nden <CodeStep step={2}>İstemci Bileşeni</CodeStep>'ne Promise biçiminde prop olarak aktarılır.
-=======
-### Reading a Promise from context {/*reading-a-promise-from-context*/}
-
-To share asynchronous data without prop drilling, set a Promise as a context value, then read it with `use(context)` and resolve it with `use(promise)`:
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Prop drilling olmadan asynchronous data paylaşmak için, bir Promise’i context value olarak ayarlayın, ardından `use(context)` ile okuyun ve `use(promise)` ile resolve edin:
 
 ```js
 import { use } from 'react';
@@ -1072,11 +1030,7 @@ export default function App() {
 }
 ```
 
-<<<<<<< HEAD
-<CodeStep step={2}>İstemci Bileşeni</CodeStep> prop olarak iletilen Promise'i alır ve <CodeStep step={5}>`use`</CodeStep> API'ına ileterek kullanır. Bu yöntem Sunucu Bileşeni içerisinde oluşturulan <CodeStep step={4}>Promise</CodeStep>'ten alınan verinin <CodeStep step={2}>İstemci Bileşeni</CodeStep> tarafından okunmasına olanak tanır.
-=======
-The Client Component then takes the Promise it received as a prop and passes it to the `use` API. This allows the Client Component to read the value from the Promise that was initially created by the Server Component.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Client Component daha sonra prop olarak aldığı Promise’i alır ve `use` API’sine geçirir. Bu, Client Component’in başlangıçta Server Component tarafından oluşturulan Promise’ten gelen değeri okumasını sağlar.
 
 ```js
 // message.js
@@ -1089,12 +1043,7 @@ export function Message({ messagePromise }) {
   return <p>Aktarılan Mesaj: {messageContent}</p>;
 }
 ```
-<<<<<<< HEAD
-
-<CodeStep step={2}>`Message`</CodeStep> bir <CodeStep step={3}>[`Suspense`](/reference/react/Suspense)</CodeStep> içerisinde olduğu için Promise çözümleninceye kadar yedek görünüm görüntülenecektir. Promise çözümlendiğinde değer <CodeStep step={5}>`use`</CodeStep> API tarafından okunacak ve <CodeStep step={2}>`Message`</CodeStep> bileşeni Suspense'in yedek görünüm ile yer değiştirecektir.
-=======
-Because `Message` is wrapped in a [Suspense](/reference/react/Suspense) boundary, the fallback will be displayed until the Promise is resolved. When the Promise is resolved, the value will be read by the `use` API and the `Message` component will replace the Suspense fallback.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+`Message`, bir [Suspense](/reference/react/Suspense) boundary’si ile sarıldığı için, Promise resolve edilene kadar fallback gösterilir. Promise resolve edildiğinde, değer `use` API’si tarafından okunur ve `Message` component’i Suspense fallback’inin yerini alır.
 
 <Sandpack>
 
@@ -1161,65 +1110,29 @@ root.render(
 
 </Sandpack>
 
-<<<<<<< HEAD
-<Note>
-
-Sunucu Bileşeni'nden İstemci Bileşeni'ne Promise aktarıldığında çözümlenen değer sunucu ile istemci arasından geçmesi için serileştirilebilir olması gerekir. Fonksiyonlar gibi veri türleri serileştirilemezler ve Promise'in çözümlenen değeri olamazlar.
-
-</Note>
-
-
-=======
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 <DeepDive>
 
 #### Promise'i Sunucu Bileşeninde mi yoksa İstemci Bileşeninde mi çözümlemeliyim? {/*resolve-promise-in-server-or-client-component*/}
 
-<<<<<<< HEAD
-Promise, Sunucu Bileşeni'nden İstemci Bileşeni'ne aktarılabilir ve İstemci Bileşeni içerisinde `use` API kullanarak çözümlenebilir. Yanı sıra istersen Promise'i Sunucu Bileşeni içerisinde `await` kullanarak çözümleyebilir ve gerekli veriyi İstemci Bileşeni içerisine prop olarak iletebilirsin.
-=======
-A Promise can be resolved with `await` in a Server Component, or passed as a prop to a Client Component and resolved there with `use`.
+Bir Promise, bir Server Component içinde `await` ile resolve edilebilir veya bir Client Component’e prop olarak geçirilip orada `use` ile resolve edilebilir.
 
-Using `await` in a Server Component suspends the Server Component itself, and the Client Component receives the resolved value as a prop:
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Bir Server Component içinde `await` kullanmak Server Component’in kendisini suspend eder ve Client Component resolved value’yu prop olarak alır:
 
 ```js
 // Server Component
 export default async function App() {
-  // Will suspend the Server Component.
+  // Server Component’i suspend eder.
   const messageContent = await fetchMessage();
   return <Message messageContent={messageContent} />;
 }
 ```
 
-<<<<<<< HEAD
-Ancak bir [Sunucu Bileşeninde](/reference/rsc/server-components) `await` kullanmak, `await` deyimi bitene kadar bileşenin oluşturulmasını engelleyecektir. Bir Sunucu Bileşeninden bir İstemci Bileşenine bir Promise geçirmek, Promise'in Sunucu Bileşeninin oluşturulmasını engellemesini önler.
-
-</DeepDive>
-
-### Reddedilen Promise'ler ile başa çıkmak {/*dealing-with-rejected-promises*/}
-
-Bazen `use`'a aktarılan Promise reddedilebilir. Reddedilen Promise'leri şu şekilde yönetebilirsiniz:
-
-1. [Error Boundary ile kullanıcılara hata gösterme](#displaying-an-error-to-users-with-error-boundary)
-2. [`Promise.catch` ile alternatif değer sağlama](#providing-an-alternative-value-with-promise-catch)
-
-<Pitfall>
-`use`, try-catch bloğu içerisinde çağırılamaz. Try-catch bloğu yerine [bileşeni Error Boundary içerisine ekleyin](#displaying-an-error-to-users-with-error-boundary), ya da [Promise'in `.catch` methodundan yararlanarak alternatif bir değer sağlayın](#providing-an-alternative-value-with-promise-catch).
-</Pitfall>
-
-#### Error Boundary ile kullanıcılara hata gösterme {/*displaying-an-error-to-users-with-error-boundary*/}
-
-Bir Promise reddedildiğinde kullanıcıya hata göstermek istiyorsanız, [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) kullanabilirsiniz.
-Error Boundary kullanmak için, `use` API’sini çağırdığınız bileşeni bir Error Boundary ile sarın.
-Eğer `use` fonksiyonuna iletilen Promise reddedilirse, Error Boundary için tanımlanan fallback içerik görüntülenecektir.
-=======
-A Server Component can also start a Promise without awaiting it and pass the Promise to a Client Component. The Server Component returns immediately, and the Client Component suspends when it calls `use`:
+Bir Server Component ayrıca bir Promise’i await etmeden başlatabilir ve Promise’i bir Client Component’e geçirebilir. Server Component hemen return eder ve Client Component `use` çağırdığında suspend olur:
 
 ```js
 // Server Component
 export default function App() {
-  // Not awaited: starts here, resolves on the client.
+  // Await edilmedi: burada başlar, client’ta resolve olur.
   const messagePromise = fetchMessage();
   return <Message messagePromise={messagePromise} />;
 }
@@ -1231,28 +1144,27 @@ export default function App() {
 import { use } from 'react';
 
 export function Message({ messagePromise }) {
-  // Will suspend until the data is available.
+  // Data available olana kadar suspend eder.
   const messageContent = use(messagePromise);
   return <p>{messageContent}</p>;
 }
 ```
 
-Prefer `await` in a Server Component when possible, since it keeps the data fetching on the server. If a Server Component above already awaits the data, pass the resolved value down as a prop instead of creating a new Promise to call `use`.
+Mümkün olduğunda Server Component içinde `await` kullanmayı tercih edin; çünkü bu, data fetching’i server tarafında tutar. Eğer üstteki bir Server Component data’yı zaten await ediyorsa, `use` çağırmak için yeni bir Promise oluşturmak yerine resolved value’yu prop olarak aşağı geçirin.
 
-You can also pass promise as a prop to a Client Component without awaiting it, and then read it with `use(promise)` to suspend deeper in the tree. This allows more of the surrounding UI to complete while the Promise is pending. A common case is interactive content like popovers and tooltips, where the data is needed only after a hover or click. Client Components can't `await`, so they rely on `use` to suspend on a Promise.
+Ayrıca promise’i await etmeden bir Client Component’e prop olarak geçirebilir ve ardından tree’nin daha derininde suspend etmek için `use(promise)` ile okuyabilirsiniz. Bu, Promise pending durumdayken çevredeki UI’ın daha büyük bir kısmının tamamlanmasına olanak tanır. Yaygın bir durum, popover ve tooltip gibi interactive content’lerdir; burada data yalnızca hover veya click sonrasında gerekir. Client Component’ler `await` kullanamaz, bu yüzden bir Promise üzerinde suspend olmak için `use`’a güvenirler.
 
-In either case, wrap the component that reads the Promise in a Suspense boundary so React can show a fallback while the Promise is pending. See [Revealing content together at once](/reference/react/Suspense#revealing-content-together-at-once) for guidance on boundary placement.
+Her iki durumda da, Promise’i okuyan component’i bir Suspense boundary ile sarın; böylece React, Promise pending durumdayken bir fallback gösterebilir. Boundary placement konusunda rehberlik için [Revealing content together at once](/reference/react/Suspense#revealing-content-together-at-once) bölümüne bakın.
 
 </DeepDive>
 
 ---
 
-### Displaying an error with an Error Boundary {/*displaying-an-error-with-an-error-boundary*/}
+### Error Boundary ile hata gösterme {/*displaying-an-error-with-an-error-boundary*/}
 
-If the Promise passed to `use` is rejected, the error propagates to the nearest [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). Wrap the component that calls `use` in an Error Boundary to display a fallback when the Promise is rejected.
+`use`’a geçirilen Promise rejected olursa, error en yakın [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary)’ye propagate edilir. Promise rejected olduğunda bir fallback göstermek için `use` çağıran component’i bir Error Boundary ile sarın.
 
-In the example below, `fetchData` rejects on the first attempt and succeeds on retry. The Error Boundary catches the rejection and shows a fallback with a "Try again" button.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Aşağıdaki örnekte, `fetchData` ilk denemede reject olur ve retry sırasında başarılı olur. Error Boundary rejection’ı yakalar ve "Try again" button’u olan bir fallback gösterir.
 
 <Sandpack>
 
@@ -1273,33 +1185,22 @@ export default function App() {
   }
 
   return (
-<<<<<<< HEAD
-    <ErrorBoundary fallback={<p>⚠️Bir şeyler yanlış gitti</p>}>
-      <Suspense fallback={<p>⌛Mesaj indiriliyor...</p>}>
-        <Message messagePromise={messagePromise} />
-=======
     <ErrorBoundary
       resetKeys={[albumsPromise]}
       fallbackRender={() => (
         <>
-          <p>⚠️ Something went wrong loading the albums.</p>
-          <button onClick={handleRetry}>Try again</button>
+          <p>⚠️ Albümler yüklenirken bir sorun oluştu.</p>
+          <button onClick={handleRetry}>Tekrar deneyin</button>
         </>
       )}
     >
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<p>Yükleniyor...</p>}>
         <Albums albumsPromise={albumsPromise} />
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
       </Suspense>
     </ErrorBoundary>
   );
 }
 
-<<<<<<< HEAD
-function Message({ messagePromise }) {
-  const content = use(messagePromise);
-  return <p>Aktarılan mesaj: {content}</p>;
-=======
 function Albums({ albumsPromise }) {
   const albums = use(albumsPromise);
   return (
@@ -1311,14 +1212,13 @@ function Albums({ albumsPromise }) {
       ))}
     </ul>
   );
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 }
 ```
 
 ```js src/data.js hidden
-// Note: the way you would do data fetching depends on
-// the framework that you use together with Suspense.
-// Normally, the caching logic would be inside a framework.
+// Not: data fetching’i nasıl yapacağınız,
+// Suspense ile birlikte kullandığınız framework’e bağlıdır.
+// Normalde caching logic bir framework içinde olur.
 
 let cache = new Map();
 let retried = false;
@@ -1330,46 +1230,12 @@ export function fetchData(url) {
   return cache.get(url);
 }
 
-<<<<<<< HEAD
-export default function App() {
-  const [messagePromise, setMessagePromise] = useState(null);
-  const [show, setShow] = useState(false);
-  function download() {
-    setMessagePromise(fetchMessage());
-    setShow(true);
-  }
-
-  if (show) {
-    return <MessageContainer messagePromise={messagePromise} />;
-  } else {
-    return <button onClick={download}>Mesajı İndir</button>;
-  }
-=======
 export function refetchData(url) {
   cache.delete(url);
   retried = true;
   return fetchData(url);
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 }
 
-<<<<<<< HEAD
-```js src/index.js hidden
-import React, { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles.css';
-
-// TODO: Bu örneği,
-// Codesandbox Sunucu Bileşeni
-// demo ortamı oluşturulduğunda güncelleyin
-import App from './App';
-
-const root = createRoot(document.getElementById('root'));
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
-=======
 async function getData(url) {
   // Add a fake delay to make the loading state visible.
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -1399,7 +1265,6 @@ async function getData(url) {
   }
   throw new Error('Not implemented');
 }
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 ```
 
 ```json package.json hidden
@@ -1415,66 +1280,13 @@ async function getData(url) {
 ```
 </Sandpack>
 
-<<<<<<< HEAD
-#### `Promise.catch` methodunu kullanarak alternatif bir veri sunmak {/*providing-an-alternative-value-with-promise-catch*/}
-
-Eğer `use`'a aktarılan Promise reddedildiğinde yerine alternatif bir değer sağlamak istiyorsan Promise'in <CodeStep step={1}>[`catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)</CodeStep> methodunu kullanabilirsin.
-
-```js [[1, 6, "catch"],[2, 7, "return"]]
-import { Message } from './message.js';
-
-export default function App() {
-  const messagePromise = new Promise((resolve, reject) => {
-    reject();
-  }).catch(() => {
-    return "yeni mesaj bulunamadı.";
-  });
-
-  return (
-    <Suspense fallback={<p>Mesaj bekleniyor...</p>}>
-      <Message messagePromise={messagePromise} />
-    </Suspense>
-  );
-}
-```
-
-Promise'in <CodeStep step={1}>`catch`</CodeStep> methodunu kullanmak için Promise objesinden <CodeStep step={1}>`catch`</CodeStep>'i çağır. <CodeStep step={1}>`catch`</CodeStep> tek bir argüman alır: Bir hata mesajını argüman olarak alan bir fonksiyon. <CodeStep step={1}>`catch`</CodeStep>'e geçirilen fonskiyon tarafından döndürülen her şey, Promise'in çözümlenen değeri olarak kullanılacaktır.
-
-=======
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 ---
 
 ## Sorun Giderme {/*troubleshooting*/}
 
-<<<<<<< HEAD
-### "Suspense İstisnası: Bu gerçek bir hata değil!" {/*suspense-exception-error*/}
+### Şu hatayı alıyorum: "Suspense Exception: This is not a real error!" {/*suspense-exception-error*/}
 
-Ya `use` fonksiyonunu bir **React Component** veya **Hook** fonksiyonu dışında çağırıyorsunuz,
-ya da `use`’u bir **try–catch** bloğu içinde çağırıyorsunuz. Eğer `use`’u bir try–catch bloğu içinde çağırıyorsanız, bileşeninizi bir **Error Boundary** ile sarın,
-veya Promise’in `catch` metodunu kullanarak hatayı yakalayın ve Promise’i başka bir değerle çözümleyin (**resolve edin**). [Bu örneklere bakın](#dealing-with-rejected-promises).
-
-Eğer `use`'u bir React Bileşeni veya Hook fonksiyonu dışında çağırıyorsanız `use` çağrısını bir React Bileşeni veya Hook fonksiyonu içerisine taşıyın.
-
-```jsx
-function MessageComponent({messagePromise}) {
-  function download() {
-    // ❌ `use`, bir Bileşen veya Hook olmayan fonksiyon tarafından çağırılıyor
-    const message = use(messagePromise);
-    // ...
-```
-
-Bunun yerine, `use` fonksiyonunu herhangi bir bileşen kapanışının dışında çağırın. `use` fonksiyonunu çağıran fonksiyon bir bileşen veya Hook olmalıdır.
-
-```jsx
-function MessageComponent({messagePromise}) {
-  // ✅ `use`, bir component’ten çağrılıyor.
-  const message = use(messagePromise);
-  // ...
-```
-=======
-### I'm getting an error: "Suspense Exception: This is not a real error!" {/*suspense-exception-error*/}
-
-You are calling `use` inside a try-catch block. `use` throws internally to integrate with Suspense, so it cannot be wrapped in try-catch. Instead, wrap the component that calls `use` in an [Error Boundary](#displaying-an-error-with-an-error-boundary) to handle errors.
+`use`’u bir try-catch block’u içinde çağırıyorsunuz. `use`, Suspense ile entegre olmak için internal olarak throw eder, bu yüzden try-catch ile sarılamaz. Bunun yerine, error’ları handle etmek için `use` çağıran component’i bir [Error Boundary](#displaying-an-error-with-an-error-boundary) ile sarın.
 
 ```jsx
 function Albums({ albumsPromise }) {
@@ -1487,7 +1299,7 @@ function Albums({ albumsPromise }) {
   // ...
 ```
 
-Instead, wrap the component in an Error Boundary:
+Bunun yerine, component’i bir Error Boundary ile sarın:
 
 ```jsx
 function Albums({ albumsPromise }) {
@@ -1505,11 +1317,11 @@ function Albums({ albumsPromise }) {
 
 ---
 
-### I'm getting a warning: "A component was suspended by an uncached promise" {/*uncached-promise-error*/}
+### Şu uyarıyı alıyorum: "A component was suspended by an uncached promise" {/*uncached-promise-error*/}
 
-The Promise passed to `use` is not cached, so React cannot reuse it across re-renders.
+`use`’a geçirilen Promise cache’lenmemiştir, bu yüzden React onu re-render’lar arasında yeniden kullanamaz.
 
-This commonly happens when calling `fetch` or an `async` function directly in render:
+Bu durum genellikle render sırasında doğrudan `fetch` veya bir `async` function çağrıldığında olur:
 
 ```js
 function Albums() {
@@ -1519,12 +1331,11 @@ function Albums() {
 }
 ```
 
-To fix this, cache the Promise so the same instance is reused:
+Bunu düzeltmek için, aynı instance’ın yeniden kullanılmasını sağlayacak şekilde Promise’i cache’leyin:
 
 ```js
 // ✅ fetchData returns the same Promise for the same URL
 const albums = use(fetchData('/albums'));
 ```
 
-See [caching Promises for Client Components](#caching-promises-for-client-components) for more details.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+Daha fazla detay için [Client Components için Promise cache’leme](#caching-promises-for-client-components) bölümüne bakın.

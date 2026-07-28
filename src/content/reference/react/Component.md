@@ -1009,11 +1009,7 @@ State türetmek ayrıntılı koda yol açar ve bileşenlerinizi düşünmeyi zor
 
 #### Uyarılar {/*static-getderivedstatefromprops-caveats*/}
 
-<<<<<<< HEAD
-- Bu metod, nedeni ne olursa olsun *her* renderlamada tetiklenir. Bu, yalnızca üst bileşenin yeniden renderlamaya neden olduğunda tetiklenen ve yerel `setState` sonucu olarak tetiklenmeyen [`UNSAFE_componentWillReceiveProps`](#unsafe_cmoponentwillreceiveprops)'tan farklıdır.
-=======
-- This method is fired on *every* render, regardless of the cause. This is different from [`UNSAFE_componentWillReceiveProps`](#unsafe_componentwillreceiveprops), which only fires when the parent causes a re-render and not as a result of a local `setState`.
->>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
+- Bu method, nedeni ne olursa olsun *her* render’da tetiklenir. Bu, yalnızca parent bir re-render’a neden olduğunda tetiklenen ve local `setState` sonucu tetiklenmeyen [`UNSAFE_componentWillReceiveProps`](#unsafe_componentwillreceiveprops)’tan farklıdır.
 
 - Bu metod, bileşen örneğine erişime sahip değildir. İsterseniz, `static getDerivedStateFromProps` ve diğer sınıf metodları arasında, bileşen prop'larının ve state'inin saf fonksiyonlarını sınıf tanımının dışında çıkararak bazı kodları yeniden kullanabilirsiniz.
 
