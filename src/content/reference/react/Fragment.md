@@ -38,7 +38,7 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 * React, `<><Child /></>` render etmekten `[<Child />]` render etmeye geçtiğinizde veya geri döndüğünüzde ya da `<><Child /></>` render etmekten `<Child />` render etmeye geçtiğinizde ve geri döndüğünüzde [state’i resetlemez](/learn/preserving-and-resetting-state). Bu yalnızca tek bir seviye derinlikte çalışır: örneğin, `<><><Child /></></>` yapısından `<Child />` yapısına geçmek state’i resetler. Kesin semantiklere [buradan](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) bakabilirsiniz.
 
-* <CanaryBadge /> Bir Fragment’a `ref` geçirmek istiyorsanız, `<>...</>` syntax’ini kullanamazsınız. `'react'` içinden `Fragment`’ı açıkça import etmeniz ve render etmeniz gerekir`<Fragment ref={yourRef}>...</Fragment>`.
+* <CanaryBadge /> Bir Fragment’a `ref` geçirmek istiyorsanız, `<>...</>` syntax’ini kullanamazsınız. `'react'` içinden `Fragment`’ı açıkça import etmeniz ve `<Fragment ref={yourRef}>...</Fragment>` şeklinde render etmeniz gerekir.
 
 ---
 
@@ -46,14 +46,14 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 Bir Fragment’a `ref` geçirdiğinizde, React bir `FragmentInstance` object’i sağlar. Bu object, Fragment tarafından sarılan birinci seviye DOM child’larıyla etkileşim kurmak için method’lar implemente eder.
 
-* [`addEventListener`](#addeventlistener) ve [`removeEventListener`](#removeeventlistener), tüm birinci seviye DOM child’ları üzerinde event listener’ları yönetir.
-* [`dispatchEvent`](#dispatchevent), Fragment üzerinde bir event dispatch eder; bu event DOM parent’a bubble olabilir.
-* [`focus`](#focus), [`focusLast`](#focuslast) ve [`blur`](#blur), tüm nested child’lar üzerinde depth-first şekilde focus’u yönetir.
-* [`observeUsing`](#observeusing) ve [`unobserveUsing`](#unobserveusing), `IntersectionObserver` veya `ResizeObserver` instance’larını attach ve detach eder.
-* [`getClientRects`](#getclientrects), tüm birinci seviye DOM child’larının bounding rectangle’larını döndürür.
-* [`getRootNode`](#getrootnode), Fragment’ın parent’ının root node’unu döndürür.
-* [`compareDocumentPosition`](#comparedocumentposition), Fragment’ın konumunu başka bir node ile karşılaştırır.
-* [`scrollIntoView`](#scrollintoview), Fragment’ın child’larını görünüme kaydırır.
+* [`addEventListener`](#addeventlistener) and [`removeEventListener`](#removeeventlistener) manage event listeners across all first-level DOM children.
+* [`dispatchEvent`](#dispatchevent) dispatches an event on the Fragment, which can bubble to the DOM parent.
+* [`focus`](#focus), [`focusLast`](#focuslast), and [`blur`](#blur) manage focus across all nested children depth-first.
+* [`observeUsing`](#observeusing) and [`unobserveUsing`](#unobserveusing) attach and detach `IntersectionObserver` or `ResizeObserver` instances.
+* [`getClientRects`](#getclientrects) returns bounding rectangles of all first-level DOM children.
+* [`getRootNode`](#getrootnode) returns the root node of the Fragment's parent.
+* [`compareDocumentPosition`](#comparedocumentposition) compares the Fragment's position with another node.
+* [`scrollIntoView`](#scrollintoview) scrolls the Fragment's children into view.
 
 ---
 
