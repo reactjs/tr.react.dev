@@ -473,7 +473,7 @@ function Albums() {
 }
 ```
 
-Instead, pass a Promise from a cache, a Suspense-enabled framework, or a Server Component:
+Instead, pass a Promise from a cache, a [Suspense-enabled framework](/reference/react/Suspense#suspense-enabled-frameworks), or a Server Component:
 
 ```js
 // ✅ fetchData reads the Promise from a cache.
@@ -539,7 +539,7 @@ The `fetchData` function returns the same Promise each time it's called with the
 
 <Note>
 
-The way you cache Promises depends on the framework you use with Suspense. Frameworks typically provide built-in caching mechanisms. If you don't use a framework, you can use a simple module-level cache like the one above, or a [Suspense-enabled data source](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading).
+The way you cache Promises depends on the framework you use with Suspense. Frameworks typically provide built-in caching mechanisms. If you don't use a framework, you can use a simple module-level cache like the one above, or a [Suspense-enabled data source](/reference/react/Suspense#what-activates-a-suspense-boundary).
 
 </Note>
 
@@ -663,7 +663,7 @@ This cache pattern is the foundation for [re-fetching data](#re-fetching-data-in
 
 <Pitfall>
 
-Don't skip calling `use` based on whether a Promise is already settled.
+##### Don't skip calling `use` based on whether a Promise is already settled. {/*conditional-use*/}
 
 Unlike other hooks, `use` can be called inside conditions and loops — but it must always be called for the Promise itself. Never read `promise.status` or `promise.value` directly to bypass `use`; always pass the Promise to `use` and let React handle it.
 
@@ -1114,47 +1114,89 @@ root.render(
 
 #### Promise'i Sunucu Bileşeninde mi yoksa İstemci Bileşeninde mi çözümlemeliyim? {/*resolve-promise-in-server-or-client-component*/}
 
+<<<<<<< HEAD
 Bir Promise, bir Server Component içinde `await` ile resolve edilebilir veya bir Client Component’e prop olarak geçirilip orada `use` ile resolve edilebilir.
 
 Bir Server Component içinde `await` kullanmak Server Component’in kendisini suspend eder ve Client Component resolved value’yu prop olarak alır:
+=======
+If you have a Promise, at some point you need to unwrap it to read its value. You unwrap it with `await` in a Server Component, and with `use` in a Client Component.
+
+Usually, the simplest option is to `await` the Promise where you create it. The Server Component suspends until the data is ready, and everything below it waits too:
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
 ```js
 // Server Component
 export default async function App() {
+<<<<<<< HEAD
   // Server Component’i suspend eder.
+=======
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
   const messageContent = await fetchMessage();
   return <Message messageContent={messageContent} />;
 }
 ```
 
+<<<<<<< HEAD
 Bir Server Component ayrıca bir Promise’i await etmeden başlatabilir ve Promise’i bir Client Component’e geçirebilir. Server Component hemen return eder ve Client Component `use` çağırdığında suspend olur:
+=======
+However, you don't have to unwrap it right away. You can pass the Promise down as a prop, and unwrap it deeper in the tree. The component that reads the Promise still suspends, but only that part of the tree waits for the data. Wrap that component in a [`<Suspense>`](/reference/react/Suspense) boundary to show a fallback while the rest of the page renders immediately.
+
+For example, a deeper Server Component can `await` the Promise it receives:
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
 ```js
+import { Suspense } from 'react';
+
 // Server Component
 export default function App() {
+<<<<<<< HEAD
   // Await edilmedi: burada başlar, client’ta resolve olur.
+=======
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
   const messagePromise = fetchMessage();
-  return <Message messagePromise={messagePromise} />;
+  return (
+    <Suspense fallback={<p>⌛Downloading message...</p>}>
+      <Message messagePromise={messagePromise} />
+    </Suspense>
+  );
+}
+
+// Server Component
+async function Message({ messagePromise }) {
+  const messageContent = await messagePromise;
+  return <p>{messageContent}</p>;
 }
 ```
+
+Or, in a separate file, a Client Component can unwrap the same Promise with `use`:
 
 ```js
 // Client Component
 'use client';
+
 import { use } from 'react';
 
 export function Message({ messagePromise }) {
+<<<<<<< HEAD
   // Data available olana kadar suspend eder.
+=======
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
   const messageContent = use(messagePromise);
   return <p>{messageContent}</p>;
 }
 ```
 
+<<<<<<< HEAD
 Mümkün olduğunda Server Component içinde `await` kullanmayı tercih edin; çünkü bu, data fetching’i server tarafında tutar. Eğer üstteki bir Server Component data’yı zaten await ediyorsa, `use` çağırmak için yeni bir Promise oluşturmak yerine resolved value’yu prop olarak aşağı geçirin.
 
 Ayrıca promise’i await etmeden bir Client Component’e prop olarak geçirebilir ve ardından tree’nin daha derininde suspend etmek için `use(promise)` ile okuyabilirsiniz. Bu, Promise pending durumdayken çevredeki UI’ın daha büyük bir kısmının tamamlanmasına olanak tanır. Yaygın bir durum, popover ve tooltip gibi interactive content’lerdir; burada data yalnızca hover veya click sonrasında gerekir. Client Component’ler `await` kullanamaz, bu yüzden bir Promise üzerinde suspend olmak için `use`’a güvenirler.
 
 Her iki durumda da, Promise’i okuyan component’i bir Suspense boundary ile sarın; böylece React, Promise pending durumdayken bir fallback gösterebilir. Boundary placement konusunda rehberlik için [Revealing content together at once](/reference/react/Suspense#revealing-content-together-at-once) bölümüne bakın.
+=======
+Passing the Promise down works the same way in both cases. Both suspend where the Promise is read, and both unblock the UI above. The only difference is that Client Components can't `await` during render, so they unwrap the Promise with `use` instead. A common case is interactive content like popovers and tooltips, where the data is only needed after a hover or click.
+
+See [Revealing content together at once](/reference/react/Suspense#revealing-content-together-at-once) for guidance on where to place Suspense boundaries.
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
 </DeepDive>
 

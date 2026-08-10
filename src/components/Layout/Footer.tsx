@@ -346,8 +346,13 @@ export function Footer() {
           <FooterLink href="/community" isHeader={true}>
             Topluluk
           </FooterLink>
+<<<<<<< HEAD
           <FooterLink href="https://github.com/facebook/react/blob/main/CODE_OF_CONDUCT.md">
             Davranış Kuralları
+=======
+          <FooterLink href="https://github.com/react/react/blob/main/CODE_OF_CONDUCT.md">
+            Code of Conduct
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
           </FooterLink>
           <FooterLink href="/community/team">Takımla Tanışın</FooterLink>
           <FooterLink href="/community/docs-contributors">
@@ -388,7 +393,7 @@ export function Footer() {
             </ExternalLink>
             <ExternalLink
               aria-label="React on Github"
-              href="https://github.com/facebook/react"
+              href="https://github.com/react/react"
               className={socialLinkClasses}>
               <IconGitHub />
             </ExternalLink>
