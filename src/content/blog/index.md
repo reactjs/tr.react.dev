@@ -150,7 +150,11 @@ React ekibi birkaç güncellemeyi paylaşmaktan heyecan duyuyor:
 
 ### Tüm sürüm notları {/*all-release-notes*/}
 
+<<<<<<< HEAD
 Her React sürümü kendi blog yazısını hak etmez, ancak React deposundaki [`CHANGELOG.md`](https://github.com/facebook/react/blob/main/CHANGELOG.md) dosyasında ve [Releases](https://github.com/facebook/react/releases) sayfasında her sürüm için ayrıntılı bir değişiklik günlüğü bulabilirsiniz.
+=======
+Not every React release deserves its own blog post, but you can find a detailed changelog for every release in the [`CHANGELOG.md`](https://github.com/react/react/blob/main/CHANGELOG.md) file in the React repository, as well as on the [Releases](https://github.com/react/react/releases) page.
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
 ---
 

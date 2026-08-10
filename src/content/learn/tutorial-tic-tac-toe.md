@@ -899,6 +899,7 @@ body {
 
 ### React Geliştirici Araçları {/*react-developer-tools*/}
 
+<<<<<<< HEAD
 React DevTools, React bileşenlerinizin prop'larını ve state'ini kontrol etmenize olanak sağlar. React DevTools sekmesini CodeSandbox'ın _browser_ bölümünün en altında bulabilirsiniz:
 
 ![CodeSandbox'ta React DevTools](../images/tutorial/codesandbox-devtools.png)
@@ -906,12 +907,26 @@ React DevTools, React bileşenlerinizin prop'larını ve state'ini kontrol etmen
 Ekrandaki herhangi bir bileşeni incelemek için, React DevTools'un sol üst köşesindeki butonu kullanın:
 
 ![React DevTools kullanarak ekrandaki bileşenleri seçmek](../images/tutorial/devtools-select.gif)
+=======
+React Developer Tools let you check the props and the state of your React components. It is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension.
 
-<Note>
+After you install it, a new *Components* tab will appear in your browser Developer Tools for sites using React. If you're following along in CodeSandbox, you'd need to first open your sandbox preview in a new tab:
 
+![opening in new tab](../images/tutorial/sandbox-new-tab.png)
+
+Then, on the preview page, open your browser's DevTools and find the *Components* tab:
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
+
+![components tab](../images/tutorial/components-tab.png)
+
+<<<<<<< HEAD
 Yerel geliştirme için, React DevTools, [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) ve [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) tarayıcılarında eklentiye sahiptir. Eklentiyi kurun ve React kullanan sitelerde tarayıcınızın Geliştirici Araçlarında *Components(bileşenler)* sekmesi gözükecektir.
+=======
+To inspect a particular component on the screen, use the button in the top left corner of the Components tab:
 
-</Note>
+![inspecting with devtools](../images/tutorial/devtools-inspect.gif)
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
+
 
 ## Oyunu tamamlama {/*completing-the-game*/}
 
