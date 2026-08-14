@@ -4,11 +4,7 @@ title: use
 
 <Intro>
 
-<<<<<<< HEAD
-`use`, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi bir kaynağın değerini okumanıza olanak sağlayan bir React API'ıdır.
-=======
-`use` is a React API that lets you read the value of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
->>>>>>> 2639f369946f763fff9a2572b0d7c4b9e2f83ebd
+`use`, bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) değerini okumanızı sağlayan bir React API’sidir.
 
 ```js
 const value = use(resource);
@@ -24,11 +20,7 @@ const value = use(resource);
 
 ### `use(context)` {/*use-context*/}
 
-<<<<<<< HEAD
-[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi kaynakların değerini okumak için bileşeninizde `use` API'ını çağırabilirsiniz.
-=======
 Call `use` with a [context](/learn/passing-data-deeply-with-context) to read its value. Unlike [`useContext`](/reference/react/useContext), `use` can be called within loops and conditional statements like `if`.
->>>>>>> 2639f369946f763fff9a2572b0d7c4b9e2f83ebd
 
 ```js
 import { use } from 'react';
@@ -39,30 +31,6 @@ function Button() {
 ```
 Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler içerisinde `use` kullanılabilir. Diğer React Hook'lar gibi, `use` kullanan fonksiyon bir Bileşen veya Hook olmalıdır.
 
-<<<<<<< HEAD
-Bir Pomise ile çağırıldığında; `use` API, [`Suspense`](/reference/react/Suspense) ve [hata sınırları](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre olur. `use`'a iletilen Promise beklenirken, `use` çağrısı yapan bileşen askıya alınır. Eğer `use` çağrısı yapan bileşen Suspense içerisine alınırsa yedek görünüm görüntülenecektir. Promise çözümlendiğinde ise; Suspense yedek görünümü, `use` API'ı tarafından döndürülen değerleri kullanarak oluşturulan bileşenler ile yer değiştirir. Eğer `use`'a iletilen Promise reddedilir ise, en yakındaki Hata Sınırının yedek görünümü görüntülenecektir.
-
-Bir Promise ile çağrıldığında, `use` API’si [`Suspense`](/reference/react/Suspense) ve [Error Boundaries](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) ile entegre çalışır. `use` çağrısı yapan bileşen, `use` fonksiyonuna iletilen Promise beklemede (**pending**) olduğu sürece *askıya alınır* (**suspend olur**). Eğer bu bileşen bir Suspense boundary içine sarılmışsa, fallback içerik gösterilir. Promise çözümlendiğinde (**resolved**), Suspense fallback kaldırılır ve `use` API’si tarafından döndürülen veriyi kullanan bileşenler render edilir. Eğer `use` fonksiyonuna iletilen Promise reddedilirse (**rejected**), en yakın Error Boundary’nin fallback içeriği gösterilir.
-
-#### Parametreler {/*parameters*/}
-
-* `resource`: Bu, bir değeri okumak istediğiniz verinin kaynağıdır. Kaynak, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) olabilir.
-
-#### Dönüş Değerleri {/*returns*/}
-
-`use` API, [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ya da [context](/learn/passing-data-deeply-with-context) gibi bir kaynaktan çözümlenen veriyi döndürür.
-
-The `use` API returns the value that was read from the resource like the resolved value of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
-
-#### Caveats {/*caveats*/}
-
-* `use` API'si bir Bileşen veya Hook içinde çağrılmalıdır.
-* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde veri çekerken, `use` yerine `async` ve `await` kullanmayı tercih edin. `async` ve `await`, `await` çağrıldığında render'a başlar, oysa `use` veri çözümlandıktan sonra bileşeni yeniden render eder.
-* [Sunucu Bileşenleri](/reference/rsc/server-components) içinde Promise'ler oluşturmayı ve bunları [İstemci Bileşenleri](/reference/rsc/use-client) içine iletmeyi, İstemci Bileşenleri içinde Promise'ler oluşturmaya tercih edin. Client Bileşenleri içinde oluşturulan Promise'ler her render işleminde yeniden oluşturulur. Sunucu Bileşenlerin'den İstemci Bileşenleri'e geçirilen Promise'ler yeniden render'lar arasında sabittir. [Bu örneğe bakın](#streaming-data-from-server-to-client).
----
-
-## Kullanım {/*usage*/}
-=======
 [See more examples below.](#usage-context)
 
 #### Parameters {/*context-parameters*/}
@@ -114,7 +82,6 @@ The resolved value of the Promise.
 ---
 
 ## Usage (Context) {/*usage-context*/}
->>>>>>> 2639f369946f763fff9a2572b0d7c4b9e2f83ebd
 
 ### `use` ile context okumak {/*reading-context-with-use*/}
 
