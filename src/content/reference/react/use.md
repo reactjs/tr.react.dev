@@ -20,7 +20,7 @@ const value = use(resource);
 
 ### `use(context)` {/*use-context*/}
 
-Call `use` with a [context](/learn/passing-data-deeply-with-context) to read its value. Unlike [`useContext`](/reference/react/useContext), `use` can be called within loops and conditional statements like `if`.
+Değerini okumak için `use`’u bir [context](/learn/passing-data-deeply-with-context) ile çağırın. [`useContext`](/reference/react/useContext)’in aksine, `use` loop’lar ve `if` gibi conditional statement’lar içinde çağrılabilir.
 
 ```js
 import { use } from 'react';
@@ -39,18 +39,18 @@ Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler iç
 
 #### Returns {/*context-returns*/}
 
-The context value for the passed context, determined by the closest context provider above the calling component. If there is no provider, the returned value is the `defaultValue` passed to [`createContext`](/reference/react/createContext).
+Geçirilen context için context value’yu döndürür; bu değer, çağrıyı yapan component’in üstündeki en yakın context provider tarafından belirlenir. Eğer provider yoksa, döndürülen değer [`createContext`](/reference/react/createContext)’e geçirilen `defaultValue` olur.
 
-#### Caveats {/*context-caveats*/}
+#### Uyarılar {/*context-caveats*/}
 
-* `use` must be called inside a Component or a Hook.
-* Reading context with `use` is not supported in [Server Components](/reference/rsc/server-components).
+* `use`, bir Component veya Hook içinde çağrılmalıdır.
+* `use` ile context okumak [Server Components](/reference/rsc/server-components) içinde desteklenmez.
 
 ---
 
 ### `use(promise)` {/*use-promise*/}
 
-Call `use` with a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to read its resolved value. The component calling `use` *suspends* while the Promise is pending. Despite its name, `use` is not a Hook. Unlike Hooks, it can be called inside loops and conditional statements like `if`.
+Resolved value’sunu okumak için `use`’u bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) ile çağırın. `use` çağıran component, Promise pending durumdayken *suspend* olur. İsminin aksine, `use` bir Hook değildir. Hook’ların aksine, loop’lar ve `if` gibi conditional statement’lar içinde çağrılabilir.
 
 ```js
 import { use } from 'react';
@@ -60,37 +60,34 @@ function MessageComponent({ messagePromise }) {
   // ...
 ```
 
-If the component that calls `use` is wrapped in a [Suspense](/reference/react/Suspense) boundary, the fallback will be displayed while the Promise is pending. Once the Promise is resolved, the Suspense fallback is replaced by the rendered components using the data returned by `use`. If the Promise is rejected, the fallback of the nearest [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) will be displayed.
+`use` çağıran component bir [Suspense](/reference/react/Suspense) boundary’si ile sarılmışsa, Promise pending durumdayken fallback gösterilir. Promise resolve edildiğinde, Suspense fallback’i `use` tarafından döndürülen data’yı kullanan rendered component’lerle değiştirilir. Promise rejected olursa, en yakın [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary)’nin fallback’i gösterilir.
 
-[See more examples below.](#usage-promises)
+[Daha fazla örneği aşağıda görün.](#usage-promises)
 
-#### Parameters {/*promise-parameters*/}
+#### Parametreler {/*promise-parameters*/}
 
-* `promise`: A [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) whose resolved value you want to read. The Promise must be [cached](#caching-promises-for-client-components) so that the same instance is reused across re-renders.
+* `promise`: Resolved value’sunu okumak istediğiniz bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). Promise, re-render’lar arasında aynı instance’ın yeniden kullanılabilmesi için [cache’lenmiş](#caching-promises-for-client-components) olmalıdır.
 
 #### Returns {/*promise-returns*/}
 
-The resolved value of the Promise.
+Promise’in resolved value’su.
 
-#### Caveats {/*promise-caveats*/}
+#### Uyarılar {/*promise-caveats*/}
 
-* `use` must be called inside a Component or a Hook.
-* `use` cannot be called inside a try-catch block. Instead, wrap your component in an [Error Boundary](#displaying-an-error-with-an-error-boundary) to catch the error and display a fallback.
-* Promises passed to `use` must be cached so the same Promise instance is reused across re-renders. [See caching Promises below.](#caching-promises-for-client-components)
-* When passing a Promise from a Server Component to a Client Component, its resolved value must be [serializable](/reference/rsc/use-client#serializable-types).
+* `use`, bir Component veya Hook içinde çağrılmalıdır.
+* `use`, try-catch block’u içinde çağrılamaz. Bunun yerine, error’ı yakalamak ve fallback göstermek için component’inizi bir [Error Boundary](#displaying-an-error-with-an-error-boundary) ile sarın.
+* `use`’a geçirilen Promise’ler, aynı Promise instance’ının re-render’lar arasında yeniden kullanılabilmesi için cache’lenmelidir. [Aşağıdaki Promise cache’leme bölümüne bakın.](#caching-promises-for-client-components)
+* Bir Server Component’ten bir Client Component’e Promise geçirirken, resolved value’su [serializable](/reference/rsc/use-client#serializable-types) olmalıdır.
 
 ---
 
-## Usage (Context) {/*usage-context*/}
+## Kullanım (Context) {/*usage-context*/}
 
 ### `use` ile context okumak {/*reading-context-with-use*/}
 
 `use`'a [context](/learn/passing-data-deeply-with-context) aktarıldığında, [`useContext`](/reference/react/useContext) gibi çalışacaktır. `useContext` bileşende üst seviye olarak çağırılmak zorundayken; `use` ifadesi, `if` gibi koşullu ifadelerin ve `for` gibi döngü ifadelerinin içerisinde kullanılabilir. Çok daha esnek kullanılabildiğinden dolayı `use` ifadesi, `useContext` yerine tercih edilebilir.
 
-<<<<<<< HEAD
-=======
-When a [context](/learn/passing-data-deeply-with-context) is passed to `use`, it works similarly to [`useContext`](/reference/react/useContext). While `useContext` must be called at the top level of your component, `use` can be called inside conditionals like `if` and loops like `for`.
->>>>>>> 2639f369946f763fff9a2572b0d7c4b9e2f83ebd
+Bir [context](/learn/passing-data-deeply-with-context), `use`’a geçirildiğinde [`useContext`](/reference/react/useContext) ile benzer şekilde çalışır. `useContext` component’inizin top-level’ında çağrılmak zorundayken, `use` `if` gibi conditional’lar ve `for` gibi loop’lar içinde çağrılabilir.
 
 ```js [[2, 4, "theme"], [1, 4, "ThemeContext"]]
 import { use } from 'react';
@@ -225,15 +222,9 @@ function Button({ show, children }) {
 
 </Sandpack>
 
-<<<<<<< HEAD
-### Sunucudan istemciye veri aktarımı {/*streaming-data-from-server-to-client*/}
+### Context’ten Promise okuma {/*reading-a-promise-from-context*/}
 
-Sunucudan gelen veri; <CodeStep step={1}>Sunucu Bileşeni</CodeStep>'nden <CodeStep step={2}>İstemci Bileşeni</CodeStep>'ne Promise biçiminde prop olarak aktarılır.
-=======
-### Reading a Promise from context {/*reading-a-promise-from-context*/}
-
-To share asynchronous data without prop drilling, set a Promise as a context value, then read it with `use(context)` and resolve it with `use(promise)`:
->>>>>>> 2639f369946f763fff9a2572b0d7c4b9e2f83ebd
+Prop drilling olmadan asynchronous data paylaşmak için, bir Promise’i context value olarak ayarlayın, ardından `use(context)` ile okuyun ve `use(promise)` ile resolve edin:
 
 ```js
 import { use } from 'react';
@@ -246,13 +237,13 @@ function Profile() {
 }
 ```
 
-Reading the value requires two `use` calls because the context value itself isn't awaited. See [Before you use context](/learn/passing-data-deeply-with-context#before-you-use-context) for alternatives to consider before reaching for context.
+Değeri okumak iki `use` çağrısı gerektirir çünkü context value’nun kendisi await edilmez. Context’e başvurmadan önce değerlendirilebilecek alternatifler için [Context’i kullanmadan önce](/learn/passing-data-deeply-with-context#before-you-use-context) bölümüne bakın.
 
-Wrap the components that read the Promise in a [Suspense](/reference/react/Suspense) boundary so only that subtree suspends while the Promise is pending. See [Usage (Promises)](#usage-promises) below for more on reading Promises with `use`.
+Promise’i okuyan component’leri bir [Suspense](/reference/react/Suspense) boundary’si ile sarın; böylece Promise pending durumdayken yalnızca o subtree suspend olur. `use` ile Promise okuma hakkında daha fazlası için aşağıdaki [Kullanım (Promises)](#usage-promises) bölümüne bakın.
 
 <Pitfall>
 
-When this pattern is used with [Server Components](/reference/rsc/server-components), refetching the Promise requires refetching the Server Component that sets the Promise in context. Avoid setting the Promise in context high in the tree, since that would refetch large parts of the app unnecessarily.
+Bu pattern [Server Components](/reference/rsc/server-components) ile kullanıldığında, Promise’i refetch etmek context’te Promise’i ayarlayan Server Component’i refetch etmeyi gerektirir. Promise’i tree’nin yüksek seviyelerinde context’e koymaktan kaçının; çünkü bu, app’in büyük bölümlerini gereksiz yere refetch eder.
 
 </Pitfall>
 
