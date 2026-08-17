@@ -10,7 +10,11 @@ React milyonlarca geliştiriciden oluşan bir topluluğa sahiptir. Bu sayfada bi
 
 ## Davranış Kuralları {/*code-of-conduct*/}
 
+<<<<<<< HEAD
 React topluluklarına katılmadan önce, [lütfen Davranış Kurallarımızı okuyun.](https://github.com/facebook/react/blob/main/CODE_OF_CONDUCT.md) Biz, [Katkı Sağlayıcı Tüzüğünü](https://www.contributor-covenant.org/) benimsedik ve tüm topluluk üyelerinin bu kurallara uymasını bekliyoruz.
+=======
+Before participating in React's communities, [please read our Code of Conduct.](https://github.com/react/react/blob/main/CODE_OF_CONDUCT.md) We have adopted the [Contributor Covenant](https://www.contributor-covenant.org/) and we expect that all community members adhere to the guidelines within.
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 ## Stack Overflow {/*stack-overflow*/}
 
