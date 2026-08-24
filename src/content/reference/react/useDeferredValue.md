@@ -86,6 +86,7 @@ Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en s
 
 <Note>
 
+<<<<<<< HEAD
 Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığınız varsayılmaktadır:
 
 - Suspense'in etkinleştirildiği çerçevelerle veri çekme [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/getting-started/fetching-data#with-suspense)
@@ -93,6 +94,11 @@ Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığ�
 - [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
 
 [Suspense ve sınırlamaları hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
+=======
+This example assumes you use a data source that [activates a Suspense boundary](/reference/react/Suspense#what-activates-a-suspense-boundary), such as a Promise you read with [`use`](/reference/react/use).
+
+[Learn more about Suspense.](/reference/react/Suspense)
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 </Note>
 
@@ -706,6 +712,8 @@ export default SlowList;
 ```css
 .items {
   padding: 0;
+  max-height: 300px;
+  overflow: auto;
 }
 
 .item {
@@ -783,6 +791,8 @@ export default SlowList;
 ```css
 .items {
   padding: 0;
+  max-height: 300px;
+  overflow: auto;
 }
 
 .item {
