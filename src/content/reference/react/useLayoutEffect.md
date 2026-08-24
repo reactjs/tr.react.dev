@@ -734,7 +734,13 @@ Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç f
 
 - `useLayoutEffect`'i [`useEffect`](/reference/react/useEffect) ile değiştirin. Bu, React'a ekrana çizme işlemini bloke etmesine gerek olmadan ilk render sonucunu görüntüleyebileceğini söyler (çünkü efektiniz çalışmadan önce HTML render edilmiş olacaktır).
 
+<<<<<<< HEAD
 - Alternatif olarak, [bileşeninizi yalnızca istemci taraflı render olacak şekilde işaretleyin](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content). Böylece bileşen sunucu tarafında render edilirken en yakındaki [`<Suspense>`](/reference/react/Suspense) sınırına (boundary) yüklenme fallback'i olarak verilen bileşen (örneğin, spinner veya glimmer) ile değiştirilir.
+=======
+- <CanaryBadge /> Alternatively, call [`use(browser())`](/reference/react/use#use-browser) to mark the component as browser-only. React will replace its content up to the closest [`<Suspense>`](/reference/react/Suspense) boundary with a loading fallback (for example, a spinner or a glimmer) during server rendering.
+
+- Alternatively, [mark your component as client-only.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) This tells React to replace its content up to the closest `<Suspense>` boundary with a loading fallback during server rendering.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 - Alternatif olarak, `useLayoutEffect` kullanan bileşeni hidratlama sonrasında render ettirebilirsiniz. Başlangıç değeri `false` olan `isMounted` isminde bir state oluşturun ve `useEffect` içerisinde `true` olarak ayarlayın. Render ederken lojiğiniz şöyle olabilir: `return isMounted ? <RealContent /> : <FallbackContent />`. Sunucudayken veya hidratlama sırasında, kullanıcı `useLayoutEffect` çağırılmayan `FallbackContent`'i görür. İstemci tarafında React, içeriği `RealContent` ile değiştirir.
 
