@@ -42,6 +42,8 @@ React work is organized into working groups, each responsible for an area of the
 
 <TeamMember name="Aurora Scharff" permalink="aurora-scharff" photo="/images/team/gh-aurorascharff.jpg" github="aurorascharff" title="Engineer at Vercel" group="Docs & Community" />
 
+<TeamMember name="Bartosz Kaszubowski" permalink="bartosz-kaszubowski" photo="/images/team/gh-simek.png" github="simek" bsky="simek.dev" title="Engineer" group="Docs & Community" />
+
 <TeamMember name="Brent Vatne" permalink="brent-vatne" photo="/images/team/gh-brentvatne.jpg" github="brentvatne" title="Engineer at Expo" group="React Native" />
 
 <TeamMember name="Dan Abramov" permalink="dan-abramov" photo="/images/team/gaearon.jpg" github="gaearon" bsky="danabra.mov" title="Engineer at Vercel" group="Docs & Community">
@@ -77,7 +79,7 @@ React work is organized into working groups, each responsible for an area of the
 <TeamMember name="Michał Pierzchała" permalink="michal-pierzchala" photo="/images/team/gh-thymikee.jpg" github="thymikee" title="Engineer at Callstack" group="React Native" />
 
 <TeamMember name="Mike Vitousek" permalink="mike-vitousek" photo="/images/team/mike.jpg" github="mvitousek" title="Engineer at Meta" group="Compiler">
-    Mike went to grad school dreaming of becoming a professor but realized that he liked building things a lot more than writing grant applications. Mike joined Meta to work on Javascript infrastructure, which ultimately led him to work on the React Compiler. When not hacking on either Javascript or OCaml, Mike can often be found hiking or skiing in the Pacific Northwest.
+    Mike went to grad school dreaming of becoming a professor but realized that he liked building things a lot more than writing grant applications. Mike joined Meta to work on JavaScript infrastructure, which ultimately led him to work on the React Compiler. When not hacking on either Javascript or OCaml, Mike can often be found hiking or skiing in the Pacific Northwest.
 </TeamMember>
 
 <TeamMember name="Pieter De Baets" permalink="pieter-de-baets" photo="/images/team/gh-javache.jpg" github="javache" title="Engineer at Meta" group="Compiler, Fiber, React Native" />
@@ -102,8 +104,6 @@ React work is organized into working groups, each responsible for an area of the
 
 <TeamMember name="Vitali Zaidman" permalink="vitali-zaidman" photo="/images/team/gh-vzaidman.jpg" github="vzaidman" title="Engineer at Meta" group="DevX" />
 
-<TeamMember name="Vojtěch Šimek" permalink="vojtech-simek" photo="/images/team/gh-simek.png" github="simek" title="Developer" group="Docs & Community" />
-
 ## Advisors {/*advisors*/}
 
 <TeamMember name="Eli White" permalink="eli-white" photo="/images/team/eli-white.jpg" github="elicwhite" twitter="Eli_White" threads="elicwhite" title="Engineer at Meta">
@@ -115,7 +115,7 @@ React work is organized into working groups, each responsible for an area of the
 </TeamMember>
 
 <TeamMember name="Jimmy Lai" permalink="jimmy-lai" photo="/images/team/jimmy-lai.jpg" github="feedthejim" title="Engineering Director, Next.js at Vercel">
-    Like many others, Jimmy started programming with the hopes of being able to work in the gaming industry. Fast forward a few years, he somehow decided that React and Javascript were pretty fun and that helping other developers build fast experiences was a more interesting life goal. After starting his career at Meta, working on product infrastructure and (briefly) on React Native, Jimmy now works at Vercel, where he helps his team build Next.js. He sadly does not get much time for video games anymore.
+    Like many others, Jimmy started programming with the hopes of being able to work in the gaming industry. Fast forward a few years, he somehow decided that React and JavaScript were pretty fun and that helping other developers build fast experiences was a more interesting life goal. After starting his career at Meta, working on product infrastructure and (briefly) on React Native, Jimmy now works at Vercel, where he helps his team build Next.js. He sadly does not get much time for video games anymore.
 </TeamMember>
 
 <TeamMember name="Seth Webster" permalink="seth-webster" photo="/images/team/seth.jpg" github="sethwebster" twitter="sethwebster" threads="sethwebster" personal="sethwebster.com" title="Executive Director, React Foundation, Chief Developer Evangelist at Expo">
