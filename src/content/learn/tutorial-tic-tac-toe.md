@@ -899,19 +899,20 @@ body {
 
 ### React Geliştirici Araçları {/*react-developer-tools*/}
 
-React DevTools, React bileşenlerinizin prop'larını ve state'ini kontrol etmenize olanak sağlar. React DevTools sekmesini CodeSandbox'ın _browser_ bölümünün en altında bulabilirsiniz:
+React Developer Tools, React component’lerinizin props ve state’ini kontrol etmenizi sağlar. [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) ve [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension olarak kullanılabilir.
 
-![CodeSandbox'ta React DevTools](../images/tutorial/codesandbox-devtools.png)
+Yükledikten sonra, React kullanan siteler için browser Developer Tools içinde yeni bir *Components* tab’ı görünür. CodeSandbox’ta takip ediyorsanız, önce sandbox preview’unuzu yeni bir tab’da açmanız gerekir:
 
-Ekrandaki herhangi bir bileşeni incelemek için, React DevTools'un sol üst köşesindeki butonu kullanın:
+![yeni tab’da açma](../images/tutorial/sandbox-new-tab.png)
 
-![React DevTools kullanarak ekrandaki bileşenleri seçmek](../images/tutorial/devtools-select.gif)
+Ardından preview sayfasında browser’ınızın DevTools’unu açın ve *Components* tab’ını bulun:
 
-<Note>
+![components tab](../images/tutorial/components-tab.png)
 
-Yerel geliştirme için, React DevTools, [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) ve [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) tarayıcılarında eklentiye sahiptir. Eklentiyi kurun ve React kullanan sitelerde tarayıcınızın Geliştirici Araçlarında *Components(bileşenler)* sekmesi gözükecektir.
+Ekrandaki belirli bir component’i inspect etmek için Components tab’ının sol üst köşesindeki button’u kullanın:
 
-</Note>
+![devtools ile inspect etme](../images/tutorial/devtools-inspect.gif)
+
 
 ## Oyunu tamamlama {/*completing-the-game*/}
 
