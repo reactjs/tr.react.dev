@@ -487,9 +487,17 @@ document.getElementById('render').addEventListener('click', () => {
 export async function flushReadableStreamToFrame(readable, frame) {
   const doc = frame.contentWindow.document;
   const decoder = new TextDecoder();
-  for await (const chunk of readable) {
-    doc.write(decoder.decode(chunk, { stream: true }));
+  const reader = readable.getReader();
+
+  while (true) {
+    const {done, value} = await reader.read();
+    if (done) {
+      break;
+    }
+    doc.write(decoder.decode(value, {stream: true}));
   }
+
+  doc.write(decoder.decode());
   doc.close();
 }
 ```
@@ -2386,6 +2394,158 @@ Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniy
 
 ---
 
+### <CanaryBadge /> Providing a fallback for browser-only content {/*providing-a-fallback-for-browser-only-content*/}
+
+A Suspense boundary can provide a fallback for a browser-only component. Wrap the component in `<Suspense>` and call [`use(browser())`](/reference/react/use#use-browser) inside it.
+
+Click **Reload** to see the loading fallback in the initial HTML. After hydration, React displays the draft loaded from `localStorage`.
+
+<Sandpack>
+
+```js src/App.js active
+import { Suspense, use, useState } from 'react';
+import { browser } from 'react-dom';
+
+function SavedDraft() {
+  use(browser('The draft is stored in localStorage.'));
+  const [draft, setDraft] = useState(
+    () => localStorage.getItem('draft') ?? ''
+  );
+
+  function handleChange(event) {
+    const nextDraft = event.target.value;
+    setDraft(nextDraft);
+    localStorage.setItem('draft', nextDraft);
+  }
+
+  return (
+    <label>
+      Draft:
+      <textarea
+        value={draft}
+        onChange={handleChange}
+        rows={4}
+        cols={30}
+      />
+    </label>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <h1>Saved draft</h1>
+      <Suspense fallback={<p>Loading draft...</p>}>
+        <SavedDraft />
+      </Suspense>
+    </>
+  );
+}
+```
+
+```js src/Document.js hidden
+import App from './App.js';
+
+export default function Document() {
+  return (
+    <html lang="en">
+      <head>
+        <title>Saved draft</title>
+        <style>{`
+          h1 { font-size: 24px; margin-top: 0; }
+          label, textarea { display: block; }
+          textarea { margin-top: 5px; }
+        `}</style>
+      </head>
+      <body>
+        <App />
+      </body>
+    </html>
+  );
+}
+```
+
+```js src/index.js hidden
+import { hydrateRoot } from 'react-dom/client';
+import { renderToReadableStream } from 'react-dom/server';
+import Document from './Document.js';
+import { flushReadableStreamToFrame } from './demo-helpers.js';
+import './styles.css';
+
+async function main(frame) {
+  const stream = await renderToReadableStream(<Document />);
+  await flushReadableStreamToFrame(stream, frame);
+
+  // Wait so both the fallback and hydrated content are visible.
+  await new Promise(resolve => setTimeout(resolve, 1200));
+  hydrateRoot(frame.contentDocument, <Document />);
+}
+
+main(document.getElementById('preview'));
+```
+
+```js src/demo-helpers.js hidden
+export async function flushReadableStreamToFrame(readable, frame) {
+  const doc = frame.contentWindow.document;
+  const decoder = new TextDecoder();
+  const reader = readable.getReader();
+
+  while (true) {
+    const {done, value} = await reader.read();
+    if (done) {
+      break;
+    }
+    doc.write(decoder.decode(value, {stream: true}));
+  }
+
+  doc.write(decoder.decode());
+  doc.close();
+}
+```
+
+```html public/index.html hidden
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Browser-only rendering</title>
+</head>
+<body>
+  <iframe id="preview" title="Rendered page"></iframe>
+</body>
+</html>
+```
+
+```css src/styles.css hidden
+iframe {
+  width: 100%;
+  height: 160px;
+  border: 0;
+}
+```
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+</Sandpack>
+
+During server rendering, React includes the Suspense boundary's fallback in the HTML. In the browser, React replaces the fallback with the saved draft.
+
+---
+
 ### Waiting for a stylesheet to load {/*waiting-for-a-stylesheet-to-load*/}
 
 [`<link rel="stylesheet">` ve bir `precedence` prop’u](/reference/react-dom/components/link#special-rendering-behavior) ile render edilen bir stylesheet, content’in unstyled görünmemesi için stylesheet yüklenene kadar, bir timeout’a kadar Suspense boundary’yi block eder.
@@ -2732,8 +2892,8 @@ button:hover {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
@@ -2890,8 +3050,8 @@ hr {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
@@ -3023,8 +3183,8 @@ hr {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
@@ -3240,8 +3400,8 @@ hr {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
