@@ -299,21 +299,7 @@ Stream işleminin, React'ın tarayıcıya yüklenmesini veya uygulamanızın etk
 
 <Note>
 
-<<<<<<< HEAD
-**Sadece Suspense özelliğine sahip veri kaynakları Suspense bileşenini etkinleştirir.** Şunları içerir:
-
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/getting-started/react-essentials) gibi Suspense özelliği etkin framework'lerde veri getirme
-- [`lazy`](/reference/react/lazy) ile bileşen kodunu temvel yükleme (lazy-loading).
-- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
-
-Effect veya olay yöneticisi içinde veri alınırken Suspense **tespit edilmez**.
-
-Yukarıdaki `Posts` bileşenininde veri getirmenin tam yolu framework'ünüze bağlıdır. Suspense özelliği etkin bir framework kullanırsanız, detayları framework'ünüzün veri getirme dokümantasyonunun içinde bulabilirsiniz.
-
-Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
-=======
-Only data read from a source that [activates a Suspense boundary](/reference/react/Suspense#what-activates-a-suspense-boundary), such as a Promise read with [`use`](/reference/react/use), will suspend during rendering. Suspense does not detect data fetched inside an Effect or event handler.
->>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
+Yalnızca [`use`](/reference/react/use) ile okunan bir Promise gibi, [Suspense boundary’yi aktive eden](/reference/react/Suspense#what-activates-a-suspense-boundary) bir kaynaktan okunan data rendering sırasında suspend olur. Suspense, bir Effect veya event handler içinde fetch edilen data’yı detect etmez.
 
 </Note>
 

@@ -52,20 +52,23 @@ title: <Suspense>
 
 ---
 
-<<<<<<< HEAD
-## Kullanım {/*usage*/}
-=======
-### What activates a Suspense boundary {/*what-activates-a-suspense-boundary*/}
+### Suspense boundary’yi ne aktive eder? {/*what-activates-a-suspense-boundary*/}
 
-A Suspense boundary waits for its content to be ready before revealing it. Any of the following keeps a boundary from revealing its content:
+Bir Suspense boundary, content’ini reveal etmeden önce onun hazır olmasını bekler. Aşağıdakilerden herhangi biri, bir boundary’nin content’ini reveal etmesini engeller:
 
-- Lazy-loading component code with [`lazy`](/reference/react/lazy).
-- Reading a Promise with [`use`](/reference/react/use), including data streamed from [Server Components](/reference/rsc/server-components) or loaded through a [Suspense-enabled framework](#suspense-enabled-frameworks).
-- Loading a stylesheet rendered with [`<link rel="stylesheet">` and a `precedence` prop.](/reference/react-dom/components/link#special-rendering-behavior) React blocks the boundary until the stylesheet loads, up to a timeout. [See an example below.](#waiting-for-a-stylesheet-to-load)
-- Waiting for a large boundary's HTML to arrive during streaming server rendering. Sending HTML takes time, so a boundary with enough content activates even when nothing in it suspends. React reveals the content as the HTML arrives.
-- <CanaryBadge /> Loading fonts. Suspense doesn't wait for fonts by default, but a [`<ViewTransition>`](/reference/react/ViewTransition) update waits for new fonts to load, up to a timeout, so text doesn't flash with a fallback font. [See an example below.](#waiting-for-a-font-to-load)
-- <CanaryBadge /> Loading images. Suspense doesn't wait for images by default, but during a [`<ViewTransition>`](/reference/react/ViewTransition) update, React blocks the boundary until the image loads, up to a timeout. Adding an `onLoad` handler opts a specific image out. [See an example below.](#waiting-for-an-image-to-load)
-- <ExperimentalBadge /> Performing CPU-bound render work inside a [`<Suspense defer>`](#props) boundary.
+- [`lazy`](/reference/react/lazy) ile component code’unu lazy-load etmek.
+
+- [Server Components](/reference/rsc/server-components)’tan stream edilen veya [Suspense-enabled framework](#suspense-enabled-frameworks) üzerinden yüklenen data dahil olmak üzere, [`use`](/reference/react/use) ile bir Promise okumak.
+
+- [`<link rel="stylesheet">` ve bir `precedence` prop’u](/reference/react-dom/components/link#special-rendering-behavior) ile render edilen bir stylesheet’i yüklemek. React, stylesheet yüklenene kadar, bir timeout’a kadar boundary’yi block eder. [Aşağıdaki örneğe bakın.](#waiting-for-a-stylesheet-to-load)
+
+- Streaming server rendering sırasında büyük bir boundary’nin HTML’inin gelmesini beklemek. HTML göndermek zaman alır; bu yüzden yeterince content içeren bir boundary, içinde hiçbir şey suspend olmasa bile aktive olur. React, HTML geldikçe content’i reveal eder.
+
+- <CanaryBadge /> Font yüklemek. Suspense default olarak font’ları beklemez, ancak bir [`<ViewTransition>`](/reference/react/ViewTransition) update’i, text’in fallback font ile flash etmemesi için yeni font’ların yüklenmesini bir timeout’a kadar bekler. [Aşağıdaki örneğe bakın.](#waiting-for-a-font-to-load)
+
+- <CanaryBadge /> Image yüklemek. Suspense default olarak image’ları beklemez, ancak bir [`<ViewTransition>`](/reference/react/ViewTransition) update’i sırasında React, image yüklenene kadar, bir timeout’a kadar boundary’yi block eder. `onLoad` handler eklemek belirli bir image’ı bu davranışın dışına çıkarır. [Aşağıdaki örneğe bakın.](#waiting-for-an-image-to-load)
+
+- <ExperimentalBadge /> Bir [`<Suspense defer>`](#props) boundary’si içinde CPU-bound render work gerçekleştirmek.
 
 <Note>
 
@@ -80,7 +83,6 @@ Without a framework, you can read a Promise with `use` directly, as long as the 
 ---
 
 ## Usage {/*usage*/}
->>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 ### İçerik yüklenirken bir fallback gösterme {/*displaying-a-fallback-while-content-is-loading*/}
 
@@ -249,19 +251,6 @@ async function getAlbums() {
 
 By contrast, code that fetches data outside of `use`, such as inside an Effect, does not activate the boundary:
 
-<<<<<<< HEAD
-**Sadece Suspense özellikli veri kaynakları Suspense bileşenini aktive edecektir.** Bunlara örnek olarak:
-
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense) gibi Suspense özellikli framework'leri veri getirme
-- Bileşen kodunu [`lazy`](/reference/react/lazy) ile tembel yükleme
-- Önbelleğe alınmış bir Promise değerini [`use`](/reference/react/use) ile okuma
-
-Suspense, veri bir efekt ya da olay yöneticisi içinde fetch edildiğinde **tespit etmez**.
-
-Yukarıdaki `Albums` bileşeninin içinde veri yüklemek için kullanacağınız tam yol framework'ünüze bağlıdır. Eğer Suspense özellikli bir framework kullanıyorsanız, detayları framwork'ün veri fetch etme dokümantasyonunda bulabilirsiniz.
-
-Opinionated bir framework kullanmadan Suspense-enabled data fetching henüz desteklenmemektedir. Suspense-enabled bir data source implement etmek için gereken requirement’lar unstable ve undocumented durumdadır. Data source’ları Suspense ile integrate etmek için resmi bir API, React’in gelecekteki bir version’ında yayınlanacaktır.
-=======
 <Sandpack>
 
 ```js src/App.js hidden
@@ -303,7 +292,6 @@ export default function ArtistPage({ artist }) {
     </>
   );
 }
->>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 function Loading() {
   return <h2>🌀 Loading...</h2>;
@@ -2280,24 +2268,15 @@ main {
 
 ### Navigasyon sırasında Suspense sınırlarını sıfırlama {/*resetting-suspense-boundaries-on-navigation*/}
 
-<<<<<<< HEAD
-Bir transition sırasında, React açığa çıkarılmış içeriği gizlemekten kaçınır. Ancak, bir sayfaya farklı parametrelerle giderseniz, React'e bunun *farklı* bir içerik olduğunu söylemek isteyebilirsiniz. Bunu bir `key` ile ifade edebilirsiniz:
-=======
-During a Transition, React avoids hiding already revealed content. However, when you navigate to *different* content, such as another user's profile, you'll want the boundary to show the fallback instead of the previous content. You can express this with a `key`:
->>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
+Bir Transition sırasında React, zaten reveal edilmiş content’i hide etmekten kaçınır. Ancak başka bir kullanıcının profili gibi **farklı** content’e navigate ettiğinizde, boundary’nin önceki content yerine fallback göstermesini istersiniz. Bunu bir `key` ile ifade edebilirsiniz:
 
 ```js
 <ProfilePage key={queryParams.id} />
 ```
 
-<<<<<<< HEAD
-Bir kullanıcının profil sayfasına gitmeye çalıştığınızı hayal edin, ve bir şey askıya alınsın. Eğer bu güncelleme bir transition ile sarılırsa, zaten görünen içerik için fallback tetiklenmeyecektir. Bu beklenen davranıştır.
+Farklı bir `key` ile React, profile’ları farklı content olarak ele alır ve navigation sırasında Suspense boundary’yi resetler. `key`, boundary’nin kendisine veya onun üstündeki bir component’e verilebilir. Suspense-integrated router’lar bunu otomatik olarak yapmalıdır.
 
-Ancak, şimdi iki farklı kullanıcı profili arasında geçiş yapmaya çalıştığınızı düşünün. Bu durumda, fallback'i göstermek mantıklı olacaktır. Örneğin, bir kullanıcının zaman çizelgesi başka bir kullanıcının zaman çizelgesinden *farklı içerik*'tir. Bir `key` belirterek, React'e farklı kullanıcıların profillerini farklı bileşenler olarak ele almasını ve navigasyon sırasında Suspense sınırlarını sıfırlamasını sağlarsınız. Suspense entegreli router'lar bunu otomatik olarak yapmalıdır.
-=======
-With a different `key`, React treats the profiles as different content and resets the Suspense boundary during navigation. The `key` can go on the boundary itself or on a component above it. Suspense-integrated routers should do this automatically.
-
-In the example below, opening the profile page loads the first profile. Pressing "Bob" navigates to a different profile, and the `key` resets the boundary, so the fallback shows instead of the previous user's bio. Try removing the `key`: the previous bio stays visible while the next one loads:
+Aşağıdaki örnekte, profile sayfasını açmak ilk profile’ı yükler. "Bob"a basmak farklı bir profile’a navigate eder ve `key` boundary’yi resetlediği için önceki kullanıcının bio’su yerine fallback gösterilir. `key`’i kaldırmayı deneyin: bir sonraki yüklenirken önceki bio görünür kalır:
 
 <Sandpack>
 
@@ -2381,7 +2360,6 @@ button {
 ```
 
 </Sandpack>
->>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 ---
 
@@ -2412,16 +2390,13 @@ Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniy
 
 ---
 
-<<<<<<< HEAD
-## Hata ayıklama {/*troubleshooting*/}
-=======
-### Waiting for a stylesheet to load {/*waiting-for-a-stylesheet-to-load*/}
+### Stylesheet’in yüklenmesini bekleme {/*waiting-for-a-stylesheet-to-load*/}
 
-A stylesheet rendered with [`<link rel="stylesheet">` and a `precedence` prop](/reference/react-dom/components/link#special-rendering-behavior) blocks the Suspense boundary until the stylesheet loads, up to a timeout, so the content doesn't appear unstyled.
+[`<link rel="stylesheet">` ve bir `precedence` prop’u](/reference/react-dom/components/link#special-rendering-behavior) ile render edilen bir stylesheet, content’in unstyled görünmemesi için stylesheet yüklenene kadar, bir timeout’a kadar Suspense boundary’yi block eder.
 
-In the example below, the `Card` component renders a stylesheet with `precedence`. Press "Show card": React shows the fallback until the stylesheet has loaded, and then reveals the card with its styles applied.
+Aşağıdaki örnekte, `Card` component’i `precedence` ile bir stylesheet render eder. "Show card"a basın: React, stylesheet yüklenene kadar fallback’i gösterir ve ardından card’ı style’ları uygulanmış şekilde reveal eder.
 
-For comparison, the second button performs the same update without React, in a separate document. Nothing waits for the stylesheet, so the card's text appears in a fallback font first and then switches:
+Karşılaştırma için, ikinci button aynı update’i React olmadan, ayrı bir document içinde gerçekleştirir. Hiçbir şey stylesheet’i beklemez, bu yüzden card’ın text’i önce fallback font ile görünür ve ardından değişir:
 
 <Sandpack>
 
@@ -3281,7 +3256,6 @@ hr {
 ---
 
 ## Troubleshooting {/*troubleshooting*/}
->>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 ### Kullanıcı arayüzünün bir güncelleme sırasında bir fallback ile değiştirilmesini nasıl engellerim? {/*preventing-unwanted-fallbacks*/}
 
