@@ -29,7 +29,6 @@ function Button() {
   const theme = use(ThemeContext);
   // ...
 ```
-Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler içerisinde `use` kullanılabilir. Diğer React Hook'lar gibi, `use` kullanan fonksiyon bir Bileşen veya Hook olmalıdır.
 
 [See more examples below.](#usage-context)
 
