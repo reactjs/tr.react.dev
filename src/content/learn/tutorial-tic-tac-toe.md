@@ -901,11 +901,11 @@ body {
 
 React Developer Tools, React component’lerinizin props ve state’ini kontrol etmenizi sağlar. [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) ve [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension olarak kullanılabilir.
 
-Yükledikten sonra, React kullanan siteler için browser Developer Tools içinde yeni bir **Components** tab’ı görünür. CodeSandbox’ta takip ediyorsanız, önce sandbox preview’unuzu yeni bir tab’da açmanız gerekir:
+Yükledikten sonra, React kullanan siteler için browser Developer Tools içinde yeni bir *Components* tab’ı görünür. CodeSandbox’ta takip ediyorsanız, önce sandbox preview’unuzu yeni bir tab’da açmanız gerekir:
 
 ![yeni tab’da açma](../images/tutorial/sandbox-new-tab.png)
 
-Ardından preview sayfasında browser’ınızın DevTools’unu açın ve **Components** tab’ını bulun:
+Ardından preview sayfasında browser’ınızın DevTools’unu açın ve *Components* tab’ını bulun:
 
 ![components tab](../images/tutorial/components-tab.png)
 

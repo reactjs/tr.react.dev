@@ -24,10 +24,9 @@ title: <Suspense>
 ### `<Suspense>` {/*suspense*/}
 
 #### Props {/*props*/}
-
 * `children`: Render etmek istediğiniz gerçek UI. Eğer `children` rendering sırasında suspend olursa, Suspense boundary `fallback` render etmeye geçer.
 
-* `fallback`: Gerçek UI henüz yüklenmeyi bitirmediyse, onun yerine render edilecek alternatif UI. Herhangi bir geçerli React node kabul edilir; ancak pratikte fallback genellikle loading spinner veya skeleton gibi hafif bir placeholder view’dur. Suspense, `children` suspend olduğunda otomatik olarak `fallback`’e geçer ve data hazır olduğunda tekrar `children`’a döner. Eğer `fallback` rendering sırasında suspend olursa, en yakın parent Suspense boundary’yi aktive eder.
+* `fallback`: Gerçek UI henüz yüklenmeyi bitirmediyse, onun yerine render edilecek alternatif UI. Herhangi bir geçerli React node kabul edilir; ancak pratikte fallback genellikle loading spinner veya skeleton gibi hafif bir placeholder view’dur. `children` suspend olduğunda Suspense otomatik olarak `fallback`’e geçer, data hazır olduğunda tekrar `children`’a döner. Eğer `fallback` rendering sırasında suspend olursa, en yakın parent Suspense boundary’yi aktive eder.
 
 * <ExperimentalBadge /> **optional** `defer`: Bir boolean. `true` olduğunda, içlerinde hiçbir şey suspend olmasa bile React önce `fallback`’i gösterebilir ve `children`’ı daha sonra render veya stream edebilir. Render edilmesi pahalı olan content için kullanın. Default değeri `false`’tur.
 
@@ -69,11 +68,11 @@ Bir Suspense boundary, content’ini reveal etmeden önce onun hazır olmasını
 
 <Note>
 
-#### Suspense-enabled frameworks {/*suspense-enabled-frameworks*/}
+#### Suspense-enabled framework’ler {/*suspense-enabled-frameworks*/}
 
-A *Suspense-enabled framework* gives you a way to read data in your component in a way that activates the closest Suspense boundary. The exact way you load your data depends on your framework, and you'll find the details in its documentation. Under the hood, a Suspense-enabled framework maintains a cache of Promises and calls [`use`](/reference/react/use) to suspend on a Promise.
+Bir **Suspense-enabled framework**, component’inizde data’yı en yakın Suspense boundary’yi aktive edecek şekilde okumanız için bir yol sağlar. Data’nızı tam olarak nasıl load edeceğiniz framework’ünüze bağlıdır ve detayları onun documentation’ında bulursunuz. Under the hood, Suspense-enabled bir framework Promise’lerden oluşan bir cache tutar ve bir Promise üzerinde suspend olmak için [`use`](/reference/react/use) çağırır.
 
-Without a framework, you can read a Promise with `use` directly, as long as the Promise is [cached so the same instance is reused across renders.](/reference/react/use#caching-promises-for-client-components)
+Framework olmadan, Promise [render’lar arasında aynı instance yeniden kullanılacak şekilde cache’lendiği](/reference/react/use#caching-promises-for-client-components) sürece doğrudan `use` ile bir Promise okuyabilirsiniz.
 
 </Note>
 
@@ -246,7 +245,7 @@ async function getAlbums() {
 
 </Sandpack>
 
-By contrast, code that fetches data outside of `use`, such as inside an Effect, does not activate the boundary:
+Buna karşılık, bir Effect içinde olduğu gibi `use` dışında data fetch eden code, boundary’yi aktive etmez:
 
 <Sandpack>
 
@@ -2387,7 +2386,7 @@ Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniy
 
 ---
 
-### Stylesheet’in yüklenmesini bekleme {/*waiting-for-a-stylesheet-to-load*/}
+### Waiting for a stylesheet to load {/*waiting-for-a-stylesheet-to-load*/}
 
 [`<link rel="stylesheet">` ve bir `precedence` prop’u](/reference/react-dom/components/link#special-rendering-behavior) ile render edilen bir stylesheet, content’in unstyled görünmemesi için stylesheet yüklenene kadar, bir timeout’a kadar Suspense boundary’yi block eder.
 

@@ -68,7 +68,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 
   * **optional** `onShellReady`: [Initial shell](#specifying-what-goes-into-the-shell) render edildikten hemen sonra tetiklenen bir callback. Burada [status code’u ayarlayabilir](#setting-the-status-code) ve streaming’i başlatmak için `pipe` çağırabilirsiniz. React, shell’den sonra ek [content’i stream eder](#streaming-more-content-as-it-loads) ve HTML loading fallback’lerini content ile değiştiren inline `<script>` tag’lerini de beraberinde gönderir.
 
-  * **optional** `onShellError`: Initial shell render edilirken bir error oluşursa tetiklenen bir callback. Error’ı argüman olarak alır. Stream’den henüz hiç byte emit edilmemiştir ve ne `onShellReady` ne de `onAllReady` çağrılır; bu yüzden [fallback HTML shell output edebilirsiniz](#recovering-from-errors-inside-the-shell).
+  * **optional** `onShellError`: Initial shell render edilirken bir hata oluşursa tetiklenen bir callback. Error’ı argüman olarak alır. Stream’den henüz hiç byte emit edilmemiştir ve ne `onShellReady` ne de `onAllReady` çağrılır; bu yüzden [fallback HTML shell output edebilirsiniz](#recovering-from-errors-inside-the-shell).
 
   * **optional** `progressiveChunkSize`: Bir chunk içindeki byte sayısı. [Default heuristic hakkında daha fazla okuyun.](https://github.com/react/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
 
