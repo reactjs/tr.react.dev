@@ -179,7 +179,44 @@ Paketleyici, ardından veriyi, render edilen Sunucu Bileşenlerini ve dinamik İ
 
 Sunucu Bileşenleri, sunucudan tekrar alınıp veriye erişip yeniden render edilerek dinamik hale getirilebilir. Bu yeni uygulama mimarisi, sunucu odaklı Çok Sayfalı Uygulamalar'ın basit “istek/cevap” zihniyet modelini, istemci odaklı Tek Sayfa Uygulamalarının sorunsuz etkileşimiyle birleştirir ve size her iki dünyanın da en iyisini sunar.
 
+<<<<<<< HEAD
 ### Sunucu Bileşenlerine Etkileşim Ekleme {/*adding-interactivity-to-server-components*/}
+=======
+### Rendering a context provider in a Server Component {/*rendering-a-context-provider-in-a-server-component*/}
+
+Server Components cannot create context, but they can render a context provider imported from a Client Component module.
+
+Create and export the context from a file with the [`'use client'`](/reference/rsc/use-client) directive:
+
+```js
+// user-context.js
+'use client';
+import { createContext } from 'react';
+
+export const UserContext = createContext(null);
+```
+
+Then import and render the context directly from a Server Component:
+
+```js
+// server-component.js
+import { UserContext } from './user-context';
+
+export async function Layout({ children }) {
+  const currentUser = await getCurrentUser();
+
+  return (
+    <UserContext value={currentUser}>
+      {children}
+    </UserContext>
+  );
+}
+```
+
+Client Components rendered inside this provider can read its value with [`use`](/reference/react/use) or [`useContext`](/reference/react/useContext).
+
+### Adding interactivity to Server Components {/*adding-interactivity-to-server-components*/}
+>>>>>>> 8efce7853d0fc59e615ed1c253799cf1798b8428
 
 Sunucu Bileşenleri tarayıcıya gönderilmez, bu yüzden `useState` gibi etkileşimli API'leri kullanamazlar. Sunucu Bileşenlerine etkileşim eklemek için, bunları `"use client"` direktifini kullanarak İstemci Bileşeni ile birleştirebilirsiniz.
 

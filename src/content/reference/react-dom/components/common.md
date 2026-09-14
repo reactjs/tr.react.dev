@@ -28,7 +28,11 @@ title: "Ortak bileşenler (örn. <div>)"
 
 * `children`: Bir React düğümü (bir eleman, bir string, bir sayı, [bir portal,](/reference/react-dom/createPortal) `null`, `undefined` ve boolean'lar gibi boş bir düğüm, veya diğer React düğümlerinden bir dizi). Bileşenin içeriğini belirtir. JSX kullandığınızda, `children` prop'unu genellikle etiketleri iç içe `<div><span /></div>` gibi yerleştirerek üstü kapalı olarak belirteceksiniz.
 
+<<<<<<< HEAD
 * `dangerouslySetInnerHTML`: İçinde saf bir HTML string'i bulunan `{ __html: '<p>herhangi bir html</p>' }` biçiminde bir nesne. DOM düğümünün [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) özelliğini geçersiz kılar ve içeriye verilen HTML'i gösterir. Bunu kullanırken son derece dikkatli olmalısınız! Eğer içteki HTML güvenilir değilse (mesela kullanıcı verisine dayanan bir şeyse), bir [XSS](https://tr.wikipedia.org/wiki/Siteler_aras%C4%B1_betik_%C3%A7al%C4%B1%C5%9Ft%C4%B1rma) riski ortaya çıkarırsınız. [`dangerouslySetInnerHTML` kullanımıyla ilgili daha fazlasını okuyun.](#dangerously-setting-the-inner-html)
+=======
+* `dangerouslySetInnerHTML`: An object of the form `{ __html: '<p>some html</p>' }` with a raw HTML string or [`TrustedHTML`](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) value inside. Overrides the [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) property of the DOM node and displays the passed HTML inside. This should be used with extreme caution! If the HTML inside isn't trusted (for example, if it's based on user data), you risk introducing an [XSS](https://en.wikipedia.org/wiki/Cross-site_scripting) vulnerability. [Read more about using `dangerouslySetInnerHTML`.](#dangerously-setting-the-inner-html)
+>>>>>>> 8efce7853d0fc59e615ed1c253799cf1798b8428
 
 * `ref`: [`useRef`](/reference/react/useRef) veya [`createRef`](/reference/react/createRef)'ten bir ref nesnesi, veya [`ref` callback fonksiyonu,](#ref-callback) veya [eski sürüm ref'leri](https://tr.legacy.reactjs.org/docs/refs-and-the-dom.html#legacy-api-string-refs) için bir string. Bu düğümde ref'iniz DOM elemanıyla doldurulacaktır. [DOM'u ref'lerle manipüle etmeyle ilgili daha fazlasını okuyun.](#manipulating-a-dom-node-with-a-ref)
 
@@ -923,7 +927,11 @@ Daha ileri düzey kullanım durumları için `ref` niteliği ayrıca bir [callba
 
 ### İç HTML'i tehlikeli bir şekilde ayarlama {/*dangerously-setting-the-inner-html*/}
 
+<<<<<<< HEAD
 Bir elemana şu şekilde düz bir HTML string'i verebilirsiniz:
+=======
+You can pass a raw HTML string or a [`TrustedHTML`](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) value to an element like so:
+>>>>>>> 8efce7853d0fc59e615ed1c253799cf1798b8428
 
 ```js
 const markup = { __html: '<p>düz bir html içeriği</p>' };
@@ -932,7 +940,13 @@ return <div dangerouslySetInnerHTML={markup} />;
 
 **Bu tehlikelidir. Altta yatan DOM'un [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) özelliğinde olduğu gibi, son derece dikkatli kullanmanız gerekir. Eğer ki biçimlendirme (markup) çok güvenilir bir kaynaktan gelmiyorsa, bu şekilde bir [XSS](https://tr.wikipedia.org/wiki/Siteler_aras%C4%B1_betik_%C3%A7al%C4%B1%C5%9Ft%C4%B1rma) zayıflığı oluşturmak gereksizdir.**
 
+<<<<<<< HEAD
 Örneğin, eğer Markdown'ı HTML'e dönüştüren bir Markdown kütüphanesi kullanıyorsanız, ayrıştırıcısında herhangi bir hata olmadığına güveniyorsanız ve kullanıcı yalnızca kendi girdisini görüyorsa, sonuçta oluşan HTML'i şöyle görüntüleyebilirsiniz:
+=======
+If your site enforces [Trusted Types](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API), pass a `TrustedHTML` value created by your security policy as `__html`. React passes the value to the browser without converting it to a string, allowing the browser to validate it. Your policy must still ensure that any input used to create the value is trusted and sanitized.
+
+For example, if you use a Markdown library that converts Markdown to HTML, you trust that its parser doesn't contain bugs, and the user only sees their own input, you can display the resulting HTML like this:
+>>>>>>> 8efce7853d0fc59e615ed1c253799cf1798b8428
 
 <Sandpack>
 
