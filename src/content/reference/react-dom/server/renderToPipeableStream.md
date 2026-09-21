@@ -49,27 +49,16 @@ const { pipe } = renderToPipeableStream(<App />, {
 * `reactNode`: HTML'e render etmek istediğiniz React düğümüdür. Örneğin, `<App />` gibi bir JSX bileşeni. Belgenin tamamını temsil etmesi beklediğinden dolayı `App` bileşeni `<html>` etiketini render etmelidir.
 
 * **optional** `options`: Streaming options içeren bir object.
-
   * **optional** `bootstrapScriptContent`: Belirtilirse, bu string inline bir `<script>` tag’i içine yerleştirilir.
-
   * **optional** `bootstrapScripts`: Sayfada emit edilecek `<script>` tag’leri için string URL’lerden oluşan bir array. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) çağıran `<script>`’i dahil etmek için bunu kullanın. Client tarafında React’i hiç çalıştırmak istemiyorsanız bunu atlayın.
-
   * **optional** `bootstrapModules`: `bootstrapScripts` gibidir, ancak bunun yerine [`<script type="module">`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) emit eder.
-
   * **optional** `identifierPrefix`: React’in [`useId`](/reference/react/useId) tarafından oluşturulan ID’ler için kullandığı string prefix. Aynı sayfada birden fazla root kullanırken conflict’leri önlemek için kullanışlıdır. [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters)’a geçirilen prefix ile aynı olmalıdır.
-
   * **optional** `namespaceURI`: Stream için root [namespace URI](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS#important_namespace_uris)’sini içeren bir string. Default olarak normal HTML’dir. SVG için `'http://www.w3.org/2000/svg'`, MathML için `'http://www.w3.org/1998/Math/MathML'` geçirin.
-
   * **optional** `nonce`: [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) için script’lere izin veren bir [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) string’i.
-
   * **optional** `onAllReady`: Hem [shell](#specifying-what-goes-into-the-shell) hem de tüm ek [content](#streaming-more-content-as-it-loads) dahil olmak üzere tüm rendering tamamlandığında tetiklenen bir callback. Bunu `onShellReady` yerine [crawler’lar ve static generation](#waiting-for-all-content-to-load-for-crawlers-and-static-generation) için kullanabilirsiniz. Burada streaming’i başlatırsanız progressive loading elde etmezsiniz. Stream final HTML’i içerir.
-
   * **optional** `onError`: [Recoverable](#recovering-from-errors-outside-the-shell) olsun ya da [olmasın](#recovering-from-errors-inside-the-shell), server error olduğunda tetiklenen bir callback. Default olarak yalnızca `console.error` çağırır. [Crash report’ları loglamak](#logging-crashes-on-the-server) için override ederseniz, yine de `console.error` çağırdığınızdan emin olun. Shell emit edilmeden önce [status code’u ayarlamak](#setting-the-status-code) için de kullanabilirsiniz.
-
   * **optional** `onShellReady`: [Initial shell](#specifying-what-goes-into-the-shell) render edildikten hemen sonra tetiklenen bir callback. Burada [status code’u ayarlayabilir](#setting-the-status-code) ve streaming’i başlatmak için `pipe` çağırabilirsiniz. React, shell’den sonra ek [content’i stream eder](#streaming-more-content-as-it-loads) ve HTML loading fallback’lerini content ile değiştiren inline `<script>` tag’lerini de beraberinde gönderir.
-
-  * **optional** `onShellError`: Initial shell render edilirken bir hata oluşursa tetiklenen bir callback. Error’ı argüman olarak alır. Stream’den henüz hiç byte emit edilmemiştir ve ne `onShellReady` ne de `onAllReady` çağrılır; bu yüzden [fallback HTML shell output edebilirsiniz](#recovering-from-errors-inside-the-shell).
-
+  * **optional** `onShellError`: Initial shell render edilirken bir error oluşursa tetiklenen bir callback. Error’ı argüman olarak alır. Stream’den henüz hiç byte emit edilmemiştir ve ne `onShellReady` ne de `onAllReady` çağrılır; bu yüzden [fallback HTML shell output edebilirsiniz](#recovering-from-errors-inside-the-shell).
   * **optional** `progressiveChunkSize`: Bir chunk içindeki byte sayısı. [Default heuristic hakkında daha fazla okuyun.](https://github.com/react/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
 
 
