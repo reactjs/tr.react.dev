@@ -6,7 +6,11 @@ title: <Fragment> (<>...</>)
 
 `<Fragment>`, genellikle `<>...</>` syntax’ı ile kullanılır ve element’leri bir wrapper node olmadan gruplamanızı sağlar.
 
+<<<<<<< HEAD
 <Canary>Fragment’lar ayrıca ref kabul edebilir; bu da wrapper element eklemeden underlying DOM node’larıyla etkileşim kurmayı sağlar.</Canary>
+=======
+Fragments can also accept refs, which enable interacting with underlying DOM nodes without adding wrapper elements.
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 ```js
 <>
@@ -29,8 +33,13 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 #### Prop'lar {/*props*/}
 
+<<<<<<< HEAD
 - **optional** `key`: Açık `<Fragment>` syntax’iyle tanımlanan Fragment’lar [key’lere](/learn/rendering-lists#keeping-list-items-in-order-with-key) sahip olabilir.
 - <CanaryBadge /> **optional** `ref`: Bir ref object’i (örn. [`useRef`](/reference/react/useRef)’ten gelen) veya [callback function](/reference/react-dom/components/common#ref-callback). React, ref value olarak Fragment tarafından sarılan DOM node’larıyla etkileşim kurmak için method’lar implemente eden bir `FragmentInstance` sağlar.
+=======
+- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
+- **optional** `ref`: A ref object (e.g. from [`useRef`](/reference/react/useRef)) or [callback function](/reference/react-dom/components/common#ref-callback). React provides a `FragmentInstance` as the ref value that implements methods for interacting with the DOM nodes wrapped by the Fragment.
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 #### Uyarılar {/*caveats*/}
 
@@ -38,11 +47,15 @@ Tek bir elemana ihtiyaç duyduğunuz durumlarda, elemanları `<Fragment>` içine
 
 * React, `<><Child /></>` render etmekten `[<Child />]` render etmeye geçtiğinizde veya geri döndüğünüzde ya da `<><Child /></>` render etmekten `<Child />` render etmeye geçtiğinizde ve geri döndüğünüzde [state’i resetlemez](/learn/preserving-and-resetting-state). Bu yalnızca tek bir seviye derinlikte çalışır: örneğin, `<><><Child /></></>` yapısından `<Child />` yapısına geçmek state’i resetler. Kesin semantiklere [buradan](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b) bakabilirsiniz.
 
+<<<<<<< HEAD
 * <CanaryBadge /> Bir Fragment’a `ref` geçirmek istiyorsanız, `<>...</>` syntax’ini kullanamazsınız. `'react'` içinden `Fragment`’ı açıkça import etmeniz ve `<Fragment ref={yourRef}>...</Fragment>` şeklinde render etmeniz gerekir.
+=======
+* If you want to pass `ref` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment ref={yourRef}>...</Fragment>`.
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 ---
 
-### <CanaryBadge /> `FragmentInstance` {/*fragmentinstance*/}
+### `FragmentInstance` {/*fragmentinstance*/}
 
 Bir Fragment’a `ref` geçirdiğinizde, React bir `FragmentInstance` object’i sağlar. Bu object, Fragment tarafından sarılan birinci seviye DOM child’larıyla etkileşim kurmak için method’lar implemente eder.
 
@@ -461,7 +474,11 @@ function PostBody({ body }) {
 
 ---
 
+<<<<<<< HEAD
 ### <CanaryBadge /> Wrapper element olmadan event listener ekleme {/*adding-event-listeners-without-wrapper*/}
+=======
+### Adding event listeners without a wrapper element {/*adding-event-listeners-without-wrapper*/}
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 Fragment `ref`leri, wrapper DOM node’u eklemeden bir grup elemente event listener eklemenizi sağlar. Listener’ları attach etmek ve cleanup yapmak için bir [ref callback](/reference/react-dom/components/common#ref-callback) kullanın:
 
@@ -513,8 +530,8 @@ export default function App() {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-f1f7ed2a-20260904",
+    "react-dom": "19.3.0-canary-f1f7ed2a-20260904",
     "react-scripts": "latest"
   }
 }
@@ -550,7 +567,11 @@ Bir `FragmentInstance`, Fragment’ın **birinci seviye host (DOM) child’ları
 
 ---
 
+<<<<<<< HEAD
 ### <CanaryBadge /> Bir grup element üzerinde focus yönetme {/*managing-focus-across-elements*/}
+=======
+### Managing focus across a group of elements {/*managing-focus-across-elements*/}
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 Fragment `ref`leri, Fragment içindeki tüm DOM node’ları üzerinde çalışan `focus`, `focusLast` ve `blur` method’larını sağlar:
 
@@ -622,8 +643,8 @@ label {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-f1f7ed2a-20260904",
+    "react-dom": "19.3.0-canary-f1f7ed2a-20260904",
     "react-scripts": "latest"
   }
 }
@@ -635,7 +656,11 @@ label {
 
 ---
 
+<<<<<<< HEAD
 ### <CanaryBadge /> Bir grup elementi görünüme kaydırma {/*scrolling-group-into-view*/}
+=======
+### Scrolling a group of elements into view {/*scrolling-group-into-view*/}
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 Wrapper element olmadan bir Fragment’ın child’larını görünüme kaydırmak için `scrollIntoView` kullanın. İlk child’ı en üste kaydırmak için `true` geçirin (veya argümanı atlayın). Son child’ı en alta kaydırmak için `false` geçirin:
 
@@ -718,8 +743,8 @@ p {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-f1f7ed2a-20260904",
+    "react-dom": "19.3.0-canary-f1f7ed2a-20260904",
     "react-scripts": "latest"
   }
 }
@@ -729,7 +754,11 @@ p {
 
 ---
 
+<<<<<<< HEAD
 ### <CanaryBadge /> Wrapper element olmadan visibility observe etme {/*observing-visibility-without-wrapper*/}
+=======
+### Observing visibility without a wrapper element {/*observing-visibility-without-wrapper*/}
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 Bir Fragment’ın tüm birinci seviye DOM child’larına `IntersectionObserver` attach etmek için `observeUsing` kullanın. Bu, child component’lerin `ref` expose etmesini veya wrapper element eklemeyi gerektirmeden visibility’yi track etmenizi sağlar:
 
@@ -830,8 +859,8 @@ export default function Card({ title }) {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-f1f7ed2a-20260904",
+    "react-dom": "19.3.0-canary-f1f7ed2a-20260904",
     "react-scripts": "latest"
   }
 }
@@ -841,7 +870,11 @@ export default function Card({ title }) {
 
 ---
 
+<<<<<<< HEAD
 ### <CanaryBadge /> Global IntersectionObserver cache’leme {/*caching-global-intersection-observer*/}
+=======
+### Caching a global IntersectionObserver {/*caching-global-intersection-observer*/}
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 Çok sayıda observer’a sahip siteler için yaygın bir performance optimization, config başına tek bir IntersectionObserver paylaşmak ve entry’lerini hangi element’in intersect ettiğine göre doğru callback’lere yönlendirmektir. Fragment `ref`leri, `reactFragments` property’si üzerinden aynı pattern’i destekler.
 
@@ -1020,8 +1053,8 @@ export default function Card({ title, className }) {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-f1f7ed2a-20260904",
+    "react-dom": "19.3.0-canary-f1f7ed2a-20260904",
     "react-scripts": "latest"
   }
 }
