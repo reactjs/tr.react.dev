@@ -179,7 +179,7 @@ Sunucu Fonksiyon'lar, sunucu uç noktalarıdır ve istemci kodunda her yerde ça
 
 Bir Sunucu Fonksiyon'u bir [form](/reference/react-dom/components/form) dışında kullanırken, Sunucu Fonksiyon'u bir [Transition](/reference/react/useTransition) içinde çağırın, bu sayede yükleme göstergesi gösterebilir, [iyimser durum güncellemeleri](/reference/react/useOptimistic) yapabilir ve beklenmeyen hataları yönetebilirsiniz. Formlar, otomatik olarak Sunucu Fonksiyon'ları geçişler içinde sarar.
 
-```js {9-12}
+```js {9-14}
 import incrementLike from './actions';
 import { useState, useTransition } from 'react';
 
@@ -190,7 +190,9 @@ function LikeButton() {
   const onClick = () => {
     startTransition(async () => {
       const currentCount = await incrementLike();
-      setLikeCount(currentCount);
+      startTransition(() => {
+        setLikeCount(currentCount);
+      });
     });
   };
 
