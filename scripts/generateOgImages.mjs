@@ -14,7 +14,10 @@ import path from 'path';
 import satori from 'satori';
 import {Resvg} from '@resvg/resvg-js';
 import matter from 'gray-matter';
+<<<<<<< sync-383a1e92
 import opentype from '@shuding/opentype.js';
+=======
+>>>>>>> main
 
 const ROOT = process.cwd();
 const CONTENT_DIR = path.join(ROOT, 'src', 'content');
