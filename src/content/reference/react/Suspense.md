@@ -37,6 +37,14 @@ title: <Suspense>
 - React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 - React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 
+- Suspense, data’nın bir Effect veya event handler içinde fetch edildiğini detect etmez. Yalnızca [aşağıda listelenen durumlarda](#what-activates-a-suspense-boundary) aktive olur.
+- React, ilk kez mount olamadan önce suspend olan render’lar için hiçbir state’i preserve etmez. Component yüklendiğinde, React suspended tree’yi sıfırdan yeniden render etmeyi dener.
+- Suspense tree için content gösteriyorken tree tekrar suspend olursa, buna neden olan update [`startTransition`](/reference/react/startTransition) veya [`useDeferredValue`](/reference/react/useDeferredValue) tarafından oluşturulmadığı sürece `fallback` tekrar gösterilir.
+- React, suspended content’i son reveal’dan itibaren ölçülen en fazla 300ms’de bir reveal eder. Bu pencere içinde ready olan boundary’ler tek tek değil, [birlikte reveal edilir](/blog/2025/10/01/react-19-2#batching-suspense-boundaries-for-ssr).
+- React, tekrar suspend olduğu için zaten visible olan content’i hide etmek zorunda kalırsa, content tree içindeki [layout Effects](/reference/react/useLayoutEffect)’leri cleanup eder. Content tekrar gösterilmeye hazır olduğunda, React layout Effects’i tekrar çalıştırır. Bu, DOM layout’unu ölçen Effects’in content hidden durumdayken bunu yapmaya çalışmamasını sağlar.
+- React includes under-the-hood optimizations like *Streaming Server Rendering* and *Selective Hydration* that are integrated with Suspense. Read [an architectural overview](https://github.com/reactwg/react-18/discussions/37) and watch [a technical talk](https://www.youtube.com/watch?v=pj5N-Khihgc) to learn more.
+- React *Server Render'ını Stream etme* ve *Selektif Hydrate Etme* gibi Suspense ile entegre olan altta yatan optimizasyonlar içerir. Daha fazla bilgi almak için [mimari bir bakışı](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik bir konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
+
 ---
 
 ### Suspense boundary’yi ne aktive eder? {/*what-activates-a-suspense-boundary*/}
@@ -49,16 +57,15 @@ Bir Suspense boundary, content’ini reveal etmeden önce onun hazır olmasını
 - Streaming server rendering sırasında büyük bir boundary’nin HTML’inin gelmesini beklemek. HTML göndermek zaman alır; bu yüzden yeterince content içeren bir boundary, içinde hiçbir şey suspend olmasa bile aktive olur. React, HTML geldikçe content’i reveal eder.
 - <CanaryBadge /> Font yüklemek. Suspense default olarak font’ları beklemez, ancak bir [`<ViewTransition>`](/reference/react/ViewTransition) update’i, text’in fallback font ile flash etmemesi için yeni font’ların yüklenmesini bir timeout’a kadar bekler. [Aşağıdaki örneğe bakın.](#waiting-for-a-font-to-load)
 - <CanaryBadge /> Image yüklemek. Suspense default olarak image’ları beklemez, ancak bir [`<ViewTransition>`](/reference/react/ViewTransition) update’i sırasında React, image yüklenene kadar, bir timeout’a kadar boundary’yi block eder. `onLoad` handler eklemek belirli bir image’ı bu davranışın dışına çıkarır. [Aşağıdaki örneğe bakın.](#waiting-for-an-image-to-load)
-
 - <ExperimentalBadge /> Bir [`<Suspense defer>`](#props) boundary’si içinde CPU-bound render work gerçekleştirmek.
 
 <Note>
 
 #### Suspense-enabled frameworks {/*suspense-enabled-frameworks*/}
 
-A *Suspense-enabled framework* gives you a way to read data in your component in a way that activates the closest Suspense boundary. The exact way you load your data depends on your framework, and you'll find the details in its documentation. Under the hood, a Suspense-enabled framework maintains a cache of Promises and calls [`use`](/reference/react/use) to suspend on a Promise.
+Bir **Suspense-enabled framework**, component’inizde data’yı en yakın Suspense boundary’yi aktive edecek şekilde okumanız için bir yol sağlar. Data’nızı tam olarak nasıl load edeceğiniz framework’ünüze bağlıdır ve detayları onun documentation’ında bulursunuz. Under the hood, Suspense-enabled bir framework Promise’lerden oluşan bir cache tutar ve bir Promise üzerinde suspend olmak için [`use`](/reference/react/use) çağırır.
 
-Without a framework, you can read a Promise with `use` directly, as long as the Promise is [cached so the same instance is reused across renders.](/reference/react/use#caching-promises-for-client-components)
+Framework olmadan, Promise [render’lar arasında aynı instance yeniden kullanılacak şekilde cache’lendiği](/reference/react/use#caching-promises-for-client-components) sürece doğrudan `use` ile bir Promise okuyabilirsiniz.
 
 </Note>
 
