@@ -86,19 +86,9 @@ Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en s
 
 <Note>
 
-<<<<<<< HEAD
-Bu örnekte Suspense etkinleştirilmiş veri kaynaklarından birini kullandığınız varsayılmaktadır:
+Bu örnek, [`use`](/reference/react/use) ile okuduğunuz bir Promise gibi, [Suspense boundary’yi aktive eden](/reference/react/Suspense#what-activates-a-suspense-boundary) bir data source kullandığınızı varsayar.
 
-- Suspense'in etkinleştirildiği çerçevelerle veri çekme [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) ve [Next.js](https://nextjs.org/docs/app/getting-started/fetching-data#with-suspense)
-- [`lazy`](/reference/react/lazy) ile bileşen kodunun lazy yüklenmesi
-- [`use`](/reference/react/use) ile bir Promise'in değerini okuma.
-
-[Suspense ve sınırlamaları hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
-=======
-This example assumes you use a data source that [activates a Suspense boundary](/reference/react/Suspense#what-activates-a-suspense-boundary), such as a Promise you read with [`use`](/reference/react/use).
-
-[Learn more about Suspense.](/reference/react/Suspense)
->>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
+[Suspense hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 
 </Note>
 
