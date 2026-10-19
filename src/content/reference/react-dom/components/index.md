@@ -36,6 +36,7 @@ React'te bu elemanlar kendilerine `value` prop'u iletildiğinde *[kontrol edileb
 
 Bu yerleşik tarayıcı bileşenleri, harici kaynakları yüklemenizi ya da sayfanıza meta verilerle açıklamalar eklemenizi sağlar.
 
+* [`<img>`](/reference/react-dom/components/img)
 * [`<link>`](/reference/react-dom/components/link)
 * [`<meta>`](/reference/react-dom/components/meta)
 * [`<script>`](/reference/react-dom/components/script)
@@ -91,7 +92,7 @@ React tüm yerleşik tarayıcı HTML bileşenlerini destekler. Bu şunları içe
 * [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html)
 * [`<i>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)
 * [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
-* [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
+* [`<img>`](/reference/react-dom/components/img)
 * [`<input>`](/reference/react-dom/components/input)
 * [`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins)
 * [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
