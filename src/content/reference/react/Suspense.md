@@ -29,20 +29,13 @@ title: <Suspense>
 * <ExperimentalBadge /> **optional** `defer`: Bir boolean. `true` olduğunda, içlerinde hiçbir şey suspend olmasa bile React önce `fallback`’i gösterebilir ve `children`’ı daha sonra render veya stream edebilir. Render edilmesi pahalı olan content için kullanın. Default değeri `false`’tur.
 
 #### Uyarılar {/*caveats*/}
-- Suspense, data’nın bir Effect veya event handler içinde fetch edildiğini detect etmez. Yalnızca [aşağıda listelenen durumlarda](#what-activates-a-suspense-boundary) aktive olur.
-- React, ilk kez mount olamadan önce suspend olan render’lar için hiçbir state’i preserve etmez. Component yüklendiğinde, React suspended tree’yi sıfırdan yeniden render etmeyi dener.
-- Suspense tree için content gösteriyorken tree tekrar suspend olursa, buna neden olan update [`startTransition`](/reference/react/startTransition) veya [`useDeferredValue`](/reference/react/useDeferredValue) tarafından oluşturulmadığı sürece `fallback` tekrar gösterilir.
-- React, suspended content’i son reveal’dan itibaren ölçülen en fazla 300ms’de bir reveal eder. Bu pencere içinde ready olan boundary’ler tek tek değil, [birlikte reveal edilir](/blog/2025/10/01/react-19-2#batching-suspense-boundaries-for-ssr).
-- React, tekrar suspend olduğu için zaten visible olan content’i hide etmek zorunda kalırsa, content tree içindeki [layout Effects](/reference/react/useLayoutEffect)’leri cleanup eder. Content tekrar gösterilmeye hazır olduğunda, React layout Effects’i tekrar çalıştırır. Bu, DOM layout’unu ölçen Effects’in content hidden durumdayken bunu yapmaya çalışmamasını sağlar.
-- React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
-- React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 
 - Suspense, data’nın bir Effect veya event handler içinde fetch edildiğini detect etmez. Yalnızca [aşağıda listelenen durumlarda](#what-activates-a-suspense-boundary) aktive olur.
 - React, ilk kez mount olamadan önce suspend olan render’lar için hiçbir state’i preserve etmez. Component yüklendiğinde, React suspended tree’yi sıfırdan yeniden render etmeyi dener.
 - Suspense tree için content gösteriyorken tree tekrar suspend olursa, buna neden olan update [`startTransition`](/reference/react/startTransition) veya [`useDeferredValue`](/reference/react/useDeferredValue) tarafından oluşturulmadığı sürece `fallback` tekrar gösterilir.
 - React, suspended content’i son reveal’dan itibaren ölçülen en fazla 300ms’de bir reveal eder. Bu pencere içinde ready olan boundary’ler tek tek değil, [birlikte reveal edilir](/blog/2025/10/01/react-19-2#batching-suspense-boundaries-for-ssr).
 - React, tekrar suspend olduğu için zaten visible olan content’i hide etmek zorunda kalırsa, content tree içindeki [layout Effects](/reference/react/useLayoutEffect)’leri cleanup eder. Content tekrar gösterilmeye hazır olduğunda, React layout Effects’i tekrar çalıştırır. Bu, DOM layout’unu ölçen Effects’in content hidden durumdayken bunu yapmaya çalışmamasını sağlar.
-- React includes under-the-hood optimizations like *Streaming Server Rendering* and *Selective Hydration* that are integrated with Suspense. Read [an architectural overview](https://github.com/reactwg/react-18/discussions/37) and watch [a technical talk](https://www.youtube.com/watch?v=pj5N-Khihgc) to learn more.
+- React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 - React *Server Render'ını Stream etme* ve *Selektif Hydrate Etme* gibi Suspense ile entegre olan altta yatan optimizasyonlar içerir. Daha fazla bilgi almak için [mimari bir bakışı](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik bir konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 
 ---
@@ -63,9 +56,9 @@ Bir Suspense boundary, content’ini reveal etmeden önce onun hazır olmasını
 
 #### Suspense-enabled frameworks {/*suspense-enabled-frameworks*/}
 
-Bir **Suspense-enabled framework**, component’inizde data’yı en yakın Suspense boundary’yi aktive edecek şekilde okumanız için bir yol sağlar. Data’nızı tam olarak nasıl load edeceğiniz framework’ünüze bağlıdır ve detayları onun documentation’ında bulursunuz. Under the hood, Suspense-enabled bir framework Promise’lerden oluşan bir cache tutar ve bir Promise üzerinde suspend olmak için [`use`](/reference/react/use) çağırır.
+A *Suspense-enabled framework* gives you a way to read data in your component in a way that activates the closest Suspense boundary. The exact way you load your data depends on your framework, and you'll find the details in its documentation. Under the hood, a Suspense-enabled framework maintains a cache of Promises and calls [`use`](/reference/react/use) to suspend on a Promise.
 
-Framework olmadan, Promise [render’lar arasında aynı instance yeniden kullanılacak şekilde cache’lendiği](/reference/react/use#caching-promises-for-client-components) sürece doğrudan `use` ile bir Promise okuyabilirsiniz.
+Without a framework, you can read a Promise with `use` directly, as long as the Promise is [cached so the same instance is reused across renders.](/reference/react/use#caching-promises-for-client-components)
 
 </Note>
 
@@ -238,7 +231,7 @@ async function getAlbums() {
 
 </Sandpack>
 
-By contrast, code that fetches data outside of `use`, such as inside an Effect, does not activate the boundary:
+Buna karşılık, bir Effect içinde olduğu gibi `use` dışında data fetch eden code, boundary’yi aktive etmez:
 
 <Sandpack>
 
@@ -480,9 +473,17 @@ document.getElementById('render').addEventListener('click', () => {
 export async function flushReadableStreamToFrame(readable, frame) {
   const doc = frame.contentWindow.document;
   const decoder = new TextDecoder();
-  for await (const chunk of readable) {
-    doc.write(decoder.decode(chunk, { stream: true }));
+  const reader = readable.getReader();
+
+  while (true) {
+    const {done, value} = await reader.read();
+    if (done) {
+      break;
+    }
+    doc.write(decoder.decode(value, {stream: true}));
   }
+
+  doc.write(decoder.decode());
   doc.close();
 }
 ```
@@ -2379,13 +2380,165 @@ Sunucu HTML'i yükleniyor çarkını içerecektir. İstemci tarafında yükleniy
 
 ---
 
-### Stylesheet’in yüklenmesini bekleme {/*waiting-for-a-stylesheet-to-load*/}
+### <CanaryBadge /> Browser-only content için fallback sağlama {/*providing-a-fallback-for-browser-only-content*/}
 
-[`<link rel="stylesheet">` ve bir `precedence` prop’u](/reference/react-dom/components/link#special-rendering-behavior) ile render edilen bir stylesheet, content’in unstyled görünmemesi için stylesheet yüklenene kadar, bir timeout’a kadar Suspense boundary’yi block eder.
+Bir Suspense boundary, browser-only bir component için fallback sağlayabilir. Component’i `<Suspense>` ile sarın ve içinde [`use(browser())`](/reference/react/use#use-browser) çağırın.
 
-Aşağıdaki örnekte, `Card` component’i `precedence` ile bir stylesheet render eder. "Show card"a basın: React, stylesheet yüklenene kadar fallback’i gösterir ve ardından card’ı style’ları uygulanmış şekilde reveal eder.
+Initial HTML içindeki loading fallback’i görmek için **Reload**’a tıklayın. Hydration sonrasında React, `localStorage`’dan yüklenen draft’ı gösterir.
 
-Karşılaştırma için, ikinci button aynı update’i React olmadan, ayrı bir document içinde gerçekleştirir. Hiçbir şey stylesheet’i beklemez, bu yüzden card’ın text’i önce fallback font ile görünür ve ardından değişir:
+<Sandpack>
+
+```js src/App.js active
+import { Suspense, use, useState } from 'react';
+import { browser } from 'react-dom';
+
+function SavedDraft() {
+  use(browser('The draft is stored in localStorage.'));
+  const [draft, setDraft] = useState(
+    () => localStorage.getItem('draft') ?? ''
+  );
+
+  function handleChange(event) {
+    const nextDraft = event.target.value;
+    setDraft(nextDraft);
+    localStorage.setItem('draft', nextDraft);
+  }
+
+  return (
+    <label>
+      Draft:
+      <textarea
+        value={draft}
+        onChange={handleChange}
+        rows={4}
+        cols={30}
+      />
+    </label>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <h1>Saved draft</h1>
+      <Suspense fallback={<p>Loading draft...</p>}>
+        <SavedDraft />
+      </Suspense>
+    </>
+  );
+}
+```
+
+```js src/Document.js hidden
+import App from './App.js';
+
+export default function Document() {
+  return (
+    <html lang="en">
+      <head>
+        <title>Saved draft</title>
+        <style>{`
+          h1 { font-size: 24px; margin-top: 0; }
+          label, textarea { display: block; }
+          textarea { margin-top: 5px; }
+        `}</style>
+      </head>
+      <body>
+        <App />
+      </body>
+    </html>
+  );
+}
+```
+
+```js src/index.js hidden
+import { hydrateRoot } from 'react-dom/client';
+import { renderToReadableStream } from 'react-dom/server';
+import Document from './Document.js';
+import { flushReadableStreamToFrame } from './demo-helpers.js';
+import './styles.css';
+
+async function main(frame) {
+  const stream = await renderToReadableStream(<Document />);
+  await flushReadableStreamToFrame(stream, frame);
+
+  // Wait so both the fallback and hydrated content are visible.
+  await new Promise(resolve => setTimeout(resolve, 1200));
+  hydrateRoot(frame.contentDocument, <Document />);
+}
+
+main(document.getElementById('preview'));
+```
+
+```js src/demo-helpers.js hidden
+export async function flushReadableStreamToFrame(readable, frame) {
+  const doc = frame.contentWindow.document;
+  const decoder = new TextDecoder();
+  const reader = readable.getReader();
+
+  while (true) {
+    const {done, value} = await reader.read();
+    if (done) {
+      break;
+    }
+    doc.write(decoder.decode(value, {stream: true}));
+  }
+
+  doc.write(decoder.decode());
+  doc.close();
+}
+```
+
+```html public/index.html hidden
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Browser-only rendering</title>
+</head>
+<body>
+  <iframe id="preview" title="Rendered page"></iframe>
+</body>
+</html>
+```
+
+```css src/styles.css hidden
+iframe {
+  width: 100%;
+  height: 160px;
+  border: 0;
+}
+```
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+</Sandpack>
+
+During server rendering, React includes the Suspense boundary's fallback in the HTML. In the browser, React replaces the fallback with the saved draft.
+
+---
+
+### Waiting for a stylesheet to load {/*waiting-for-a-stylesheet-to-load*/}
+
+A stylesheet rendered with [`<link rel="stylesheet">` and a `precedence` prop](/reference/react-dom/components/link#special-rendering-behavior) blocks the Suspense boundary until the stylesheet loads, up to a timeout, so the content doesn't appear unstyled.
+
+In the example below, the `Card` component renders a stylesheet with `precedence`. Press "Show card": React shows the fallback until the stylesheet has loaded, and then reveals the card with its styles applied.
+
+For comparison, the second button performs the same update without React, in a separate document. Nothing waits for the stylesheet, so the card's text appears in a fallback font first and then switches:
 
 <Sandpack>
 
@@ -2725,8 +2878,8 @@ button:hover {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
@@ -2883,8 +3036,8 @@ hr {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
@@ -3016,8 +3169,8 @@ hr {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
@@ -3233,8 +3386,8 @@ hr {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "canary",
-    "react-dom": "canary",
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
     "react-scripts": "latest"
   }
 }
