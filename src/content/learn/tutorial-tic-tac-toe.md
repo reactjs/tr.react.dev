@@ -1138,7 +1138,11 @@ JavaScript [closure'ları](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 
 </Note>
 
+<<<<<<< HEAD
 Artık tahtaya X'leri ekleyebilirsiniz... ama sadece solt üst kareye. `handleClick` fonksiyonunuz sadece sol üst kareyi (`0`) güncelleyecek şekilde kodlanmıştır. Hadi şimdi `handleClick` fonksiyonunu herhangi bir kareyi güncelleyecek şekilde düzenleyelim. Güncellenecek karenin indeksini alacak şekilde `handleClick` fonksiyonuna `i` argümanını ekleyelim:
+=======
+Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add a parameter `i` to the `handleClick` function that takes the index of the square to update:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {4,6}
 export default function Board() {

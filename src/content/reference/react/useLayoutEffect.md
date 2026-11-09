@@ -734,7 +734,11 @@ Bununla birlikte bu sorunla karşılaştığınızda seçebileceğiniz birkaç f
 
 - `useLayoutEffect`'i [`useEffect`](/reference/react/useEffect) ile değiştirin. Bu, React'a ekrana çizme işlemini bloke etmesine gerek olmadan ilk render sonucunu görüntüleyebileceğini söyler (çünkü efektiniz çalışmadan önce HTML render edilmiş olacaktır).
 
+<<<<<<< HEAD
 - <CanaryBadge /> Alternatif olarak, component’i browser-only olarak işaretlemek için [`use(browser())`](/reference/react/use#use-browser) çağırın. React, server rendering sırasında en yakın [`<Suspense>`](/reference/react/Suspense) boundary’ye kadar olan content’ini bir loading fallback (örneğin spinner veya glimmer) ile değiştirir.
+=======
+- Alternatively, call [`use(browser())`](/reference/react/use#use-browser) to mark the component as browser-only. React will replace its content up to the closest [`<Suspense>`](/reference/react/Suspense) boundary with a loading fallback (for example, a spinner or a glimmer) during server rendering.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 - Alternatif olarak, [component’inizi client-only olarak işaretleyin.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) Bu, React’e server rendering sırasında en yakın `<Suspense>` boundary’ye kadar olan content’ini bir loading fallback ile değiştirmesini söyler.
 

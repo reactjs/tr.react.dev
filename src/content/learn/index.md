@@ -336,7 +336,11 @@ function MyButton() {
 }
 ```
 
+<<<<<<< HEAD
 React bileşen fonksiyonunuzu yeniden çağıracaktır. Bu sefer `count` değeri `1` olacaktır. Daha sonra `2`. Ve bu böyle devam edecektir.
+=======
+Calling `setCount` tells React to call your component function again. This is called a *re-render*. This time, `count` will be `1`. Then it will be `2`. And so on.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 Aynı bileşeni birden fazla render edersiniz, her biri kendi state'ine sahip olacaktır. Her butona ayrı ayrı tıklayın:
 
