@@ -15,8 +15,14 @@ title: "Yerleşik React Hook'ları"
 
 Bir bileşene state eklemek için bu Hook'lardan birini kullanın:
 
+<<<<<<< HEAD
 * [`useState`](/reference/react/useState) direkt olarak güncelleyebileceğiniz bir state değişkeni bildirir.
 * [`useReducer`](/reference/react/useReducer) [reducer fonksiyonu](/learn/extracting-state-logic-into-a-reducer) ile güncellenebilen bir state değişkeni bildirir.
+=======
+* [`useState`](/reference/react/useState) declares a state variable that you can update directly.
+* [`useReducer`](/reference/react/useReducer) declares a state variable with the update logic inside a [reducer function.](/learn/extracting-state-logic-into-a-reducer)
+* [`useOptimistic`](/reference/react/useOptimistic) lets you show a different state while an async action is pending.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js
 function ImageGallery() {

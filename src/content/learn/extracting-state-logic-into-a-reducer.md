@@ -874,7 +874,11 @@ Reducers'ların dezavantajları da yok değil! İşte bunları karşılaştırab
 - **Test etme:** Reducer, bileşeninize bağlı olmayan saf bir fonksiyondur. Bu, onu izole olarak ayrı ayrı dışa aktarabileceğiniz ve test edebileceğiniz anlamına gelir. Genellikle bileşenleri daha gerçekçi bir ortamda test etmek en iyisi olsa da karmaşık state güncelleme mantığı için reducer'unuzun belirli bir başlangıç state'i ve işlem için belirli bir state döndürdüğünü doğrulamak yararlı olabilir.
 - **Kişisel tercih:** Bazı insanlar reducer'ları sever, bazıları sevmez. Bu sorun değil. Bu bir tercih meselesidir. Her zaman `useState` ve `useReducer` arasında dönüşümlü olarak geçiş yapabilirsiniz: bunlar eşdeğerdir!
 
+<<<<<<< HEAD
 Bazı bileşenlerde yanlış state güncellemeleri nedeniyle sık sık hatalarla karşılaşıyorsanız ve koda daha fazla yapılandırma getirmek istiyorsanız bir reducer kullanmanızı öneririz. Her şey için reducer kullanmak zorunda değilsiniz: farklı kombinler yapmaktan çekinmeyin! Hatta aynı bileşende `useState` ve `useReducer` bile kullanabilirsiniz.
+=======
+We recommend using a reducer if you often encounter bugs due to incorrect state updates in some component, and want to introduce more structure to its code. You don't have to use reducers for everything: feel free to mix and match! You can even use `useState` and `useReducer` in the same component.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ## İyi bir reducer yazmak {/*writing-reducers-well*/}
 

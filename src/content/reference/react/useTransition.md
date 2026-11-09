@@ -661,7 +661,7 @@ export default function TabButton({ action, children, isActive }) {
     return <b className="pending">{children}</b>;
   }
   return (
-    <button onClick={async () => {
+    <button onClick={() => {
       startTransition(async () => {
         // await the action that's passed in.
         // This allows it to be either sync or async.
@@ -1567,7 +1567,7 @@ main {
 
 ### Bir hata sınırı ile kullanıcılara bir hatayı gösterme {/*displaying-an-error-to-users-with-error-boundary*/}
 
-If a function passed to `startTransition` throws an error, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
+If a function passed to `startTransition` throws an error or returns a rejected Promise, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
 
 <Sandpack>
 
@@ -1684,7 +1684,7 @@ startTransition(() => {
 });
 ```
 
-The function you pass to `startTransition` must be synchronous. You can't mark an update as a Transition like this:
+The function you pass to `startTransition` can be synchronous or asynchronous. However, updates scheduled in a `setTimeout` callback aren't marked as Transitions:
 
 ```js
 startTransition(() => {
@@ -1740,6 +1740,14 @@ This is a JavaScript limitation due to React losing the scope of the async conte
 
 `useTransition`, bir Hook olduğu için bileşenin dışından çağrılamaz. Bu durumlarda, [`startTransition`](/reference/react/startTransition) adlı bağımsız bir metod kullanabilirsiniz. Bu yöntem aynı şekilde çalışır, ancak `isPending` belirteçini sağlamaz.
 
+<<<<<<< HEAD
+=======
+You can't call `useTransition` outside a component because it's a Hook. In this
+case, the standalone [`startTransition`](/reference/react/startTransition)
+function can mark state updates as Transitions. It does not provide the
+`isPending` flag. Because the standalone function is not associated with a
+component, an Error Boundary cannot handle errors from its Transition.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ---
 

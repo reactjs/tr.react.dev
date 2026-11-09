@@ -19,7 +19,11 @@ State bileşenler arasında izole edilmiştir. React, kullanıcı arayüzü (UI)
 
 ## Kullanıcı arayüzü (UI) ağacı {/*the-ui-tree*/}
 
+<<<<<<< HEAD
 Tarayıcılar, kullanıcı arayüzünü modellemek için pek çok ağaç yapısı kullanırlar. [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) HTML elementlerini temsil eder, [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) aynı şeyi CSS için yapar. Bir [Erişilebilirlik ağacı](https://developer.mozilla.org/docs/Glossary/Accessibility_tree) bile var!
+=======
+React builds [render trees](/learn/understanding-your-ui-as-a-tree#the-render-tree) for the component structure in your UI.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 React, oluşturduğunuz kullanıcı arayüzünü yönetmek ve modellek için de ağaç yapılarını kullanır. React, JSX'inizden **kullanıcı arayüzü ağaçları** oluşturur. Ardından React DOM, tarayıcı DOM elementlerini güncelleyerek kullanıcı arayüzü ağacı ile eşleşmesini sağlar. (React Native bu ağaçları mobil platformlara özgü elementlere çevirir.)
 
