@@ -94,26 +94,26 @@ function BrowserOnly() {
 }
 ```
 
-During server rendering, the component calling `use(browser())` suspends and React includes the closest [`<Suspense>`](/reference/react/Suspense) boundary's fallback in the HTML. In the browser, `use(browser())` returns `undefined`, so the component renders normally.
+Server rendering sırasında `use(browser())` çağıran component suspend olur ve React, en yakın [`<Suspense>`](/reference/react/Suspense) boundary’sinin fallback’ini HTML’e dahil eder. Browser’da `use(browser())`, `undefined` döndürür; böylece component normal şekilde render edilir.
 
-[See an example below.](#rendering-a-component-only-in-the-browser)
+[Aşağıdaki örneğe bakın.](#rendering-a-component-only-in-the-browser)
 
-#### Parameters {/*browser-parameters*/}
+#### Parametreler {/*browser-parameters*/}
 
-* `browserValue`: The value returned by [`browser`](/reference/react-dom/browser).
+* `browserValue`: [`browser`](/reference/react-dom/browser) tarafından döndürülen value.
 
-#### Returns {/*browser-returns*/}
+#### Döndürür {/*browser-returns*/}
 
-`use(browser())` returns `undefined` in the browser.
+`use(browser())`, browser’da `undefined` döndürür.
 
-#### Caveats {/*browser-caveats*/}
+#### Uyarılar {/*browser-caveats*/}
 
-* The component calling `use(browser())` must be inside a `<Suspense>` boundary during server rendering. Without one, server rendering fails.
-* In a React Server Components app, `use(browser())` must be called from a [Client Component](/reference/rsc/use-client), not a [Server Component](/reference/rsc/server-components).
+* `use(browser())` çağıran component, server rendering sırasında bir `<Suspense>` boundary’si içinde olmalıdır. Aksi takdirde server rendering başarısız olur.
+* Bir React Server Components app’inde, `use(browser())` bir [Server Component](/reference/rsc/server-components) içinden değil, bir [Client Component](/reference/rsc/use-client) içinden çağrılmalıdır.
 
 ---
 
-## Usage (Context) {/*usage-context*/}
+## Kullanım (Context) {/*usage-context*/}
 
 ### `use` ile context okumak {/*reading-context-with-use*/}
 
@@ -1204,11 +1204,11 @@ Suspense boundary’lerinin nereye yerleştirileceği konusunda rehberlik için 
 
 ---
 
-### Displaying an error with an Error Boundary {/*displaying-an-error-with-an-error-boundary*/}
+### Error Boundary ile error gösterme {/*displaying-an-error-with-an-error-boundary*/}
 
-If the Promise passed to `use` is rejected, the error propagates to the nearest [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). Wrap the component that calls `use` in an Error Boundary to display a fallback when the Promise is rejected.
+`use`’a geçirilen Promise rejected olursa, error en yakın [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary)’ye propagate edilir. Promise rejected olduğunda fallback göstermek için `use` çağıran component’i bir Error Boundary ile sarın.
 
-In the example below, `fetchData` rejects on the first attempt and succeeds on retry. The Error Boundary catches the rejection and shows a fallback with a "Try again" button.
+Aşağıdaki örnekte, `fetchData` ilk denemede rejected olur ve retry sonrasında başarılı olur. Error Boundary rejection’ı yakalar ve "Try again" button’u içeren bir fallback gösterir.
 
 <Sandpack>
 
@@ -1476,7 +1476,7 @@ iframe {
 
 </Sandpack>
 
-During server rendering, `use(browser())` suspends the component and React includes the closest Suspense boundary's fallback in the HTML. In the browser, `use(browser())` returns `undefined` and the saved draft renders normally.
+Server rendering sırasında `use(browser())` component’i suspend eder ve React, en yakın Suspense boundary’sinin fallback’ini HTML’e dahil eder. Browser’da `use(browser())`, `undefined` döndürür ve kaydedilmiş draft normal şekilde render edilir.
 
 ---
 

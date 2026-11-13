@@ -24,7 +24,7 @@ title: "Yerleşik React API'leri"
 
 ## Kaynak API'ları {/*resource-apis*/}
 
-*Kaynaklar*, bir bileşen tarafından durumlarının bir parçası olmadan erişilebilir. Örneğin, bir bileşen, bir Promise'den mesaj okuyabilir veya bir context'ten stil bilgisi alabilir.
+**Kaynaklar**, bir component tarafından state’lerinin bir parçası olmadan erişilebilir. Örneğin, bir component bir Promise’den mesaj okuyabilir veya bir context’ten style bilgisi alabilir.
 
 [`use`](/reference/react/use)’a şu resource type’larını geçirebilirsiniz:
 
