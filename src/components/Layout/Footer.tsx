@@ -347,7 +347,7 @@ export function Footer() {
             Topluluk
           </FooterLink>
           <FooterLink href="https://github.com/react/react/blob/main/CODE_OF_CONDUCT.md">
-            Davranış Kuralları 1{' '}
+            Davranış Kuralları
           </FooterLink>
           <FooterLink href="/community/team">Takımla Tanışın</FooterLink>
           <FooterLink href="/community/docs-contributors">

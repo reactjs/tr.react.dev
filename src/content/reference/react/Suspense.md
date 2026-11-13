@@ -36,7 +36,6 @@ title: <Suspense>
 - React, suspended content’i son reveal’dan itibaren ölçülen en fazla 300ms’de bir reveal eder. Bu pencere içinde ready olan boundary’ler tek tek değil, [birlikte reveal edilir](/blog/2025/10/01/react-19-2#batching-suspense-boundaries-for-ssr).
 - React, tekrar suspend olduğu için zaten visible olan content’i hide etmek zorunda kalırsa, content tree içindeki [layout Effects](/reference/react/useLayoutEffect)’leri cleanup eder. Content tekrar gösterilmeye hazır olduğunda, React layout Effects’i tekrar çalıştırır. Bu, DOM layout’unu ölçen Effects’in content hidden durumdayken bunu yapmaya çalışmamasını sağlar.
 - React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
-- React, Suspense ile entegre olan **Streaming Server Rendering** ve **Selective Hydration** gibi under-the-hood optimizasyonlar içerir. Daha fazla bilgi edinmek için [mimari overview](https://github.com/reactwg/react-18/discussions/37) okuyun ve [teknik konuşmayı](https://www.youtube.com/watch?v=pj5N-Khihgc) izleyin.
 
 ---
 

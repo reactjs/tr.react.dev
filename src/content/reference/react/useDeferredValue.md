@@ -86,8 +86,8 @@ Güncellemeler esnasında, <CodeStep step={2}>ertelenmiş değer</CodeStep> en s
 
 <Note>
 
-Bu örnek, [`use`](/reference/react/use) ile okuduğunuz bir Promise gibi [Suspense boundary’yi aktive eden](/reference/react/Suspense#what-activates-a-suspense-boundary) bir data source kullandığınızı varsayar.\
-\
+Bu örnek, [`use`](/reference/react/use) ile okuduğunuz bir Promise gibi, [Suspense boundary’yi aktive eden](/reference/react/Suspense#what-activates-a-suspense-boundary) bir data source kullandığınızı varsayar.
+
 [Suspense hakkında daha fazla bilgi edinin.](/reference/react/Suspense)
 
 </Note>
