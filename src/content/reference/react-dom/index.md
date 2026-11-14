@@ -30,6 +30,12 @@ Bu API'ler, kaynakların (örneğin, betikler, stil sayfaları ve fontlar) önce
 * [`preinit`](/reference/react-dom/preinit), harici bir betiği önceden yükleyip değerlendirmenize veya bir stil sayfasını yükleyip yerleştirmenize olanak tanır.
 * [`preinitModule`](/reference/react-dom/preinitModule), bir ESM modülünü önceden yükleyip değerlendirmenizi sağlar.
 
+## Server Rendering APIs {/*server-rendering-apis*/}
+
+This API controls how components render on the server:
+
+* <CanaryBadge /> [`browser`](/reference/react-dom/browser) lets you mark a component as browser-only during server rendering.
+
 ---
 
 ## Giriş noktaları {/*entry-points*/}

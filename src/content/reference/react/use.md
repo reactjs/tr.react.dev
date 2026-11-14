@@ -4,7 +4,7 @@ title: use
 
 <Intro>
 
-`use`, bir [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) değerini okumanızı sağlayan bir React API’sidir.
+`use`, rendering sırasında [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) veya [context](/learn/passing-data-deeply-with-context) gibi bir resource’u okumanızı sağlayan bir React API’sidir.
 
 ```js
 const value = use(resource);
@@ -29,7 +29,6 @@ function Button() {
   const theme = use(ThemeContext);
   // ...
 ```
-Diğer React Hook'ların aksine, Döngülerin ve `if` gibi koşullu ifadeler içerisinde `use` kullanılabilir. Diğer React Hook'lar gibi, `use` kullanan fonksiyon bir Bileşen veya Hook olmalıdır.
 
 [See more examples below.](#usage-context)
 
@@ -78,6 +77,39 @@ Promise’in resolved value’su.
 * `use`, try-catch block’u içinde çağrılamaz. Bunun yerine, error’ı yakalamak ve fallback göstermek için component’inizi bir [Error Boundary](#displaying-an-error-with-an-error-boundary) ile sarın.
 * `use`’a geçirilen Promise’ler, aynı Promise instance’ının re-render’lar arasında yeniden kullanılabilmesi için cache’lenmelidir. [Aşağıdaki Promise cache’leme bölümüne bakın.](#caching-promises-for-client-components)
 * Bir Server Component’ten bir Client Component’e Promise geçirirken, resolved value’su [serializable](/reference/rsc/use-client#serializable-types) olmalıdır.
+
+---
+
+### <CanaryBadge /> `use(browser())` {/*use-browser*/}
+
+Call `use` with the value returned by [`browser`](/reference/react-dom/browser) in a component that should only render in the browser:
+
+```js
+import { use } from 'react';
+import { browser } from 'react-dom';
+
+function BrowserOnly() {
+  use(browser('This component requires browser APIs.'));
+  return <BrowserContent />;
+}
+```
+
+Server rendering sırasında `use(browser())` çağıran component suspend olur ve React, en yakın [`<Suspense>`](/reference/react/Suspense) boundary’sinin fallback’ini HTML’e dahil eder. Browser’da `use(browser())`, `undefined` döndürür; böylece component normal şekilde render edilir.
+
+[Aşağıdaki örneğe bakın.](#rendering-a-component-only-in-the-browser)
+
+#### Parametreler {/*browser-parameters*/}
+
+* `browserValue`: [`browser`](/reference/react-dom/browser) tarafından döndürülen value.
+
+#### Döndürür {/*browser-returns*/}
+
+`use(browser())`, browser’da `undefined` döndürür.
+
+#### Uyarılar {/*browser-caveats*/}
+
+* `use(browser())` çağıran component, server rendering sırasında bir `<Suspense>` boundary’si içinde olmalıdır. Aksi takdirde server rendering başarısız olur.
+* Bir React Server Components app’inde, `use(browser())` bir [Server Component](/reference/rsc/server-components) içinden değil, bir [Client Component](/reference/rsc/use-client) içinden çağrılmalıdır.
 
 ---
 
@@ -473,7 +505,7 @@ function Albums() {
 }
 ```
 
-Instead, pass a Promise from a cache, a Suspense-enabled framework, or a Server Component:
+Instead, pass a Promise from a cache, a [Suspense-enabled framework](/reference/react/Suspense#suspense-enabled-frameworks), or a Server Component:
 
 ```js
 // ✅ fetchData reads the Promise from a cache.
@@ -539,7 +571,7 @@ The `fetchData` function returns the same Promise each time it's called with the
 
 <Note>
 
-The way you cache Promises depends on the framework you use with Suspense. Frameworks typically provide built-in caching mechanisms. If you don't use a framework, you can use a simple module-level cache like the one above, or a [Suspense-enabled data source](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading).
+The way you cache Promises depends on the framework you use with Suspense. Frameworks typically provide built-in caching mechanisms. If you don't use a framework, you can use a simple module-level cache like the one above, or a [Suspense-enabled data source](/reference/react/Suspense#what-activates-a-suspense-boundary).
 
 </Note>
 
@@ -663,7 +695,7 @@ This cache pattern is the foundation for [re-fetching data](#re-fetching-data-in
 
 <Pitfall>
 
-Don't skip calling `use` based on whether a Promise is already settled.
+##### Don't skip calling `use` based on whether a Promise is already settled. {/*conditional-use*/}
 
 Unlike other hooks, `use` can be called inside conditions and loops — but it must always be called for the Promise itself. Never read `promise.status` or `promise.value` directly to bypass `use`; always pass the Promise to `use` and let React handle it.
 
@@ -1114,29 +1146,43 @@ root.render(
 
 #### Promise'i Sunucu Bileşeninde mi yoksa İstemci Bileşeninde mi çözümlemeliyim? {/*resolve-promise-in-server-or-client-component*/}
 
-Bir Promise, bir Server Component içinde `await` ile resolve edilebilir veya bir Client Component’e prop olarak geçirilip orada `use` ile resolve edilebilir.
+Elinizde bir Promise varsa, bir noktada value’sunu okumak için onu unwrap etmeniz gerekir. Bir Server Component içinde `await` ile, bir Client Component içinde ise `use` ile unwrap edersiniz.
 
-Bir Server Component içinde `await` kullanmak Server Component’in kendisini suspend eder ve Client Component resolved value’yu prop olarak alır:
+Genellikle en basit seçenek, Promise’i oluşturduğunuz yerde `await` etmektir. Server Component, data hazır olana kadar suspend olur ve altındaki her şey de bekler:
 
 ```js
 // Server Component
 export default async function App() {
-  // Server Component’i suspend eder.
   const messageContent = await fetchMessage();
   return <Message messageContent={messageContent} />;
 }
 ```
 
-Bir Server Component ayrıca bir Promise’i await etmeden başlatabilir ve Promise’i bir Client Component’e geçirebilir. Server Component hemen return eder ve Client Component `use` çağırdığında suspend olur:
+Ancak onu hemen unwrap etmek zorunda değilsiniz. Promise’i prop olarak aşağı geçirebilir ve tree’nin daha derininde unwrap edebilirsiniz. Promise’i okuyan component yine suspend olur, ancak data’yı yalnızca tree’nin o bölümü bekler. Sayfanın geri kalanı hemen render olurken fallback göstermek için bu component’i bir [`<Suspense>`](/reference/react/Suspense) boundary’si ile sarın.
+
+Örneğin, daha derindeki bir Server Component aldığı Promise’i `await` edebilir:
 
 ```js
+import { Suspense } from 'react';
+
 // Server Component
 export default function App() {
-  // Await edilmedi: burada başlar, client’ta resolve olur.
   const messagePromise = fetchMessage();
-  return <Message messagePromise={messagePromise} />;
+  return (
+    <Suspense fallback={<p>⌛Downloading message...</p>}>
+      <Message messagePromise={messagePromise} />
+    </Suspense>
+  );
+}
+
+// Server Component
+async function Message({ messagePromise }) {
+  const messageContent = await messagePromise;
+  return <p>{messageContent}</p>;
 }
 ```
+
+Or, in a separate file, a Client Component can unwrap the same Promise with `use`:
 
 ```js
 // Client Component
@@ -1145,27 +1191,24 @@ export default function App() {
 import { use } from 'react';
 
 export function Message({ messagePromise }) {
-  // Data available olana kadar suspend eder.
   const messageContent = use(messagePromise);
   return <p>{messageContent}</p>;
 }
 ```
 
-Mümkün olduğunda Server Component içinde `await` kullanmayı tercih edin; çünkü bu, data fetching’i server tarafında tutar. Eğer üstteki bir Server Component data’yı zaten await ediyorsa, `use` çağırmak için yeni bir Promise oluşturmak yerine resolved value’yu prop olarak aşağı geçirin.
+Promise’i aşağı geçirmek her iki durumda da aynı şekilde çalışır. İkisi de Promise’in okunduğu yerde suspend olur ve ikisi de üstteki UI’ın unblock olmasını sağlar. Tek fark, Client Component’lerin render sırasında `await` kullanamamasıdır; bu yüzden Promise’i bunun yerine `use` ile unwrap ederler. Yaygın bir durum, popover ve tooltip gibi interactive content’lerdir; burada data yalnızca hover veya click sonrasında gerekir.
 
-Ayrıca promise’i await etmeden bir Client Component’e prop olarak geçirebilir ve ardından tree’nin daha derininde suspend etmek için `use(promise)` ile okuyabilirsiniz. Bu, Promise pending durumdayken çevredeki UI’ın daha büyük bir kısmının tamamlanmasına olanak tanır. Yaygın bir durum, popover ve tooltip gibi interactive content’lerdir; burada data yalnızca hover veya click sonrasında gerekir. Client Component’ler `await` kullanamaz, bu yüzden bir Promise üzerinde suspend olmak için `use`’a güvenirler.
-
-Her iki durumda da, Promise’i okuyan component’i bir Suspense boundary ile sarın; böylece React, Promise pending durumdayken bir fallback gösterebilir. Boundary placement konusunda rehberlik için [Revealing content together at once](/reference/react/Suspense#revealing-content-together-at-once) bölümüne bakın.
+Suspense boundary’lerinin nereye yerleştirileceği konusunda rehberlik için [Revealing content together at once](/reference/react/Suspense#revealing-content-together-at-once) bölümüne bakın.
 
 </DeepDive>
 
 ---
 
-### Displaying an error with an Error Boundary {/*displaying-an-error-with-an-error-boundary*/}
+### Error Boundary ile error gösterme {/*displaying-an-error-with-an-error-boundary*/}
 
-If the Promise passed to `use` is rejected, the error propagates to the nearest [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). Wrap the component that calls `use` in an Error Boundary to display a fallback when the Promise is rejected.
+`use`’a geçirilen Promise rejected olursa, error en yakın [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary)’ye propagate edilir. Promise rejected olduğunda fallback göstermek için `use` çağıran component’i bir Error Boundary ile sarın.
 
-In the example below, `fetchData` rejects on the first attempt and succeeds on retry. The Error Boundary catches the rejection and shows a fallback with a "Try again" button.
+Aşağıdaki örnekte, `fetchData` ilk denemede rejected olur ve retry sonrasında başarılı olur. Error Boundary rejection’ı yakalar ve "Try again" button’u içeren bir fallback gösterir.
 
 <Sandpack>
 
@@ -1283,7 +1326,161 @@ async function getData(url) {
 
 ---
 
-## Sorun Giderme {/*troubleshooting*/}
+## Kullanım (Browser) {/*usage-browser*/}
+
+### <CanaryBadge /> Bir component’i yalnızca browser’da render etme {/*rendering-a-component-only-in-the-browser*/}
+
+Yalnızca browser’da render edilmesi gereken bir component içinde [`browser`](/reference/react-dom/browser) tarafından döndürülen value’yu `use`’a geçirin.
+
+Initial HTML içindeki loading fallback’i görmek için **Reload**’a tıklayın. Hydration sonrasında React, `localStorage`’dan yüklenen draft’ı gösterir.
+
+<Sandpack>
+
+```js src/App.js active
+import { Suspense, use, useState } from 'react';
+import { browser } from 'react-dom';
+
+function SavedDraft() {
+  use(browser('The draft is stored in localStorage.'));
+  const [draft, setDraft] = useState(
+    () => localStorage.getItem('draft') ?? ''
+  );
+
+  function handleChange(event) {
+    const nextDraft = event.target.value;
+    setDraft(nextDraft);
+    localStorage.setItem('draft', nextDraft);
+  }
+
+  return (
+    <label>
+      Draft:
+      <textarea
+        value={draft}
+        onChange={handleChange}
+        rows={4}
+        cols={30}
+      />
+    </label>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <h1>Saved draft</h1>
+      <Suspense fallback={<p>Loading draft...</p>}>
+        <SavedDraft />
+      </Suspense>
+    </>
+  );
+}
+```
+
+```js src/Document.js hidden
+import App from './App.js';
+
+export default function Document() {
+  return (
+    <html lang="en">
+      <head>
+        <title>Saved draft</title>
+        <style>{`
+          h1 { font-size: 24px; margin-top: 0; }
+          label, textarea { display: block; }
+          textarea { margin-top: 5px; }
+        `}</style>
+      </head>
+      <body>
+        <App />
+      </body>
+    </html>
+  );
+}
+```
+
+```js src/index.js hidden
+import { hydrateRoot } from 'react-dom/client';
+import { renderToReadableStream } from 'react-dom/server';
+import Document from './Document.js';
+import { flushReadableStreamToFrame } from './demo-helpers.js';
+import './styles.css';
+
+async function main(frame) {
+  const stream = await renderToReadableStream(<Document />);
+  await flushReadableStreamToFrame(stream, frame);
+
+  // Wait so both the fallback and hydrated content are visible.
+  await new Promise(resolve => setTimeout(resolve, 1200));
+  hydrateRoot(frame.contentDocument, <Document />);
+}
+
+main(document.getElementById('preview'));
+```
+
+```js src/demo-helpers.js hidden
+export async function flushReadableStreamToFrame(readable, frame) {
+  const doc = frame.contentWindow.document;
+  const decoder = new TextDecoder();
+  const reader = readable.getReader();
+
+  while (true) {
+    const {done, value} = await reader.read();
+    if (done) {
+      break;
+    }
+    doc.write(decoder.decode(value, {stream: true}));
+  }
+
+  doc.write(decoder.decode());
+  doc.close();
+}
+```
+
+```html public/index.html hidden
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Browser-only rendering</title>
+</head>
+<body>
+  <iframe id="preview" title="Rendered page"></iframe>
+</body>
+</html>
+```
+
+```css src/styles.css hidden
+iframe {
+  width: 100%;
+  height: 160px;
+  border: 0;
+}
+```
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "19.3.0-canary-eb8feb71-20260814",
+    "react-dom": "19.3.0-canary-eb8feb71-20260814",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+</Sandpack>
+
+Server rendering sırasında `use(browser())` component’i suspend eder ve React, en yakın Suspense boundary’sinin fallback’ini HTML’e dahil eder. Browser’da `use(browser())`, `undefined` döndürür ve kaydedilmiş draft normal şekilde render edilir.
+
+---
+
+## Troubleshooting {/*troubleshooting*/}
 
 ### Şu hatayı alıyorum: "Suspense Exception: This is not a real error!" {/*suspense-exception-error*/}
 
