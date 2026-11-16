@@ -5,7 +5,7 @@ titleForTitleTag: "'use server' direktif"
 
 <RSC>
 
-`'use server'` is for use with [using React Server Components](/reference/rsc/server-components).
+`'use server'` is for use with [React Server Components](/reference/rsc/server-components).
 
 </RSC>
 
@@ -139,7 +139,7 @@ Sunucu Fonksiyonu sonucuna dayalı olarak UI'yı güncellemek ve kademeli iyile�
 // requestUsername.js
 'use server';
 
-export default async function requestUsername(formData) {
+export default async function requestUsername(prevState, formData) {
   const username = formData.get('username');
   if (canRequest(username)) {
     // ...
@@ -198,8 +198,13 @@ function LikeButton() {
 
   return (
     <>
+<<<<<<< HEAD
       <p>Toplam Beğeni: {likeCount}</p>
       <button onClick={onClick} disabled={isPending}>Beğen</button>;
+=======
+      <p>Total Likes: {likeCount}</p>
+      <button onClick={onClick} disabled={isPending}>Like</button>
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
     </>
   );
 }
