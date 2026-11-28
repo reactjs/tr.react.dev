@@ -334,7 +334,11 @@ function MyComponent() {
 
 </Note>
 
+<<<<<<< HEAD
 [`useMemo`](/reference/react/useMemo) Hook’u, bir fonksiyon çağrısından elde edilen **önbelleğe alınmış** (*memorized*) bir değeri **oluşturur veya yeniden erişir** ve yalnızca ikinci parametre olarak verilen bağımlılıklar (**dependencies**) değiştiğinde fonksiyonu yeniden çalıştırır. Hook’un dönüş değeri, ilk parametredeki fonksiyonun dönüş değerinden **türetilir** (*inferred*). Daha net olmak için Hook’a bir **type argument** sağlayabilirsiniz.
+=======
+The [`useMemo`](/reference/react/useMemo) Hooks will create/re-access a memoized value from a function call, re-running the function only when dependencies passed as the 2nd parameter are changed. The result of calling the Hook is inferred from the return value from the function in the first parameter. You can be more explicit by providing a type argument to the Hook.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```ts
 // visibleTodos’un tipi, filterTodos’un dönen değerinden çıkarılır.

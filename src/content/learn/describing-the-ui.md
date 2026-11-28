@@ -530,7 +530,11 @@ React, component’ler ve module’ler arasındaki ilişkileri modellemek için 
 
 Bir React render tree, component’ler arasındaki parent ve child ilişkisinin bir temsilidir.
 
+<<<<<<< HEAD
 <Diagram name="generic_render_tree" height={250} width={500} alt="Her bir düğümün bir bileşeni temsil ettiği beş düğümlü bir ağaç grafiği. Kök düğüm ağaç grafiğinin en üstünde yer alır ve 'Kök Bileşen' olarak etiketlenmiştir. 'Bileşen A' ve 'Bileşen C' olarak etiketlenmiş iki düğüme uzanan iki oku vardır. Okların her biri 'render' ile etiketlenmiştir. 'Bileşen A', 'Bileşen B' etiketli bir düğüme giden tek bir 'render' okuna sahiptir. 'C Bileşeni', 'D Bileşeni' etiketli bir düğüme giden tek bir 'render' okuna sahiptir.">
+=======
+<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top of the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 Örnek bir React render ağacı.
 

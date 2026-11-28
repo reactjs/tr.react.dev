@@ -1366,7 +1366,11 @@ Ağaçta `value` verilmemiş bir sağlayıcı olabilir:
 
 `value` belirtmeyi unutursanız, `value={undefined}` geçmiş gibi davranır .
 
+<<<<<<< HEAD
 Yanlışlıkla farklı bir özellik adı kullanmış da olabilirsiniz:
+=======
+You may have also used a different prop name by mistake:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {1,2}
 // 🚩 Çalışmıyor: prop “değer” olarak adlandırılmalıdır

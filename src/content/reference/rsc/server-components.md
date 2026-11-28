@@ -100,18 +100,27 @@ Sunucu Bileşenleri olmadan, dinamik verileri istemcide bir Efekt ile almak yayg
 ```js
 // bundle.js
 function Note({id}) {
+<<<<<<< HEAD
   const [note, setNote] = useState('');
   // NOT: İlk render'dan *sonra* yüklenir.
+=======
+  const [note, setNote] = useState(null);
+  // NOTE: loads *after* first render.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
   useEffect(() => {
     fetch(`/api/notes/${id}`).then(data => {
       setNote(data.note);
     });
   }, [id]);
 
+  if (!note) {
+    return null;
+  }
+
   return (
     <div>
       <Author id={note.authorId} />
-      <p>{note}</p>
+      <p>{note.content}</p>
     </div>
   );
 }
@@ -155,7 +164,7 @@ async function Note({id}) {
   return (
     <div>
       <Author id={note.authorId} />
-      <p>{note}</p>
+      <p>{note.content}</p>
     </div>
   );
 }
@@ -179,7 +188,44 @@ Paketleyici, ardından veriyi, render edilen Sunucu Bileşenlerini ve dinamik İ
 
 Sunucu Bileşenleri, sunucudan tekrar alınıp veriye erişip yeniden render edilerek dinamik hale getirilebilir. Bu yeni uygulama mimarisi, sunucu odaklı Çok Sayfalı Uygulamalar'ın basit “istek/cevap” zihniyet modelini, istemci odaklı Tek Sayfa Uygulamalarının sorunsuz etkileşimiyle birleştirir ve size her iki dünyanın da en iyisini sunar.
 
+<<<<<<< HEAD
 ### Sunucu Bileşenlerine Etkileşim Ekleme {/*adding-interactivity-to-server-components*/}
+=======
+### Rendering a context provider in a Server Component {/*rendering-a-context-provider-in-a-server-component*/}
+
+Server Components cannot create context, but they can render a context provider imported from a Client Component module.
+
+Create and export the context from a file with the [`'use client'`](/reference/rsc/use-client) directive:
+
+```js
+// user-context.js
+'use client';
+import { createContext } from 'react';
+
+export const UserContext = createContext(null);
+```
+
+Then import and render the context directly from a Server Component:
+
+```js
+// server-component.js
+import { UserContext } from './user-context';
+
+export async function Layout({ children }) {
+  const currentUser = await getCurrentUser();
+
+  return (
+    <UserContext value={currentUser}>
+      {children}
+    </UserContext>
+  );
+}
+```
+
+Client Components rendered inside this provider can read its value with [`use`](/reference/react/use) or [`useContext`](/reference/react/useContext).
+
+### Adding interactivity to Server Components {/*adding-interactivity-to-server-components*/}
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 Sunucu Bileşenleri tarayıcıya gönderilmez, bu yüzden `useState` gibi etkileşimli API'leri kullanamazlar. Sunucu Bileşenlerine etkileşim eklemek için, bunları `"use client"` direktifini kullanarak İstemci Bileşeni ile birleştirebilirsiniz.
 
@@ -269,8 +315,13 @@ async function Page({id}) {
   const commentsPromise = db.comments.get(note.id);
   return (
     <div>
+<<<<<<< HEAD
       {note}
       <Suspense fallback={<p>Yorumlar Yükleniyor...</p>}>
+=======
+      <p>{note.content}</p>
+      <Suspense fallback={<p>Loading Comments...</p>}>
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
         <Comments commentsPromise={commentsPromise} />
       </Suspense>
     </div>
