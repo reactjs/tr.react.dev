@@ -34,7 +34,7 @@ Bu API'ler, kaynakların (örneğin, betikler, stil sayfaları ve fontlar) önce
 
 This API controls how components render on the server:
 
-* <CanaryBadge /> [`browser`](/reference/react-dom/browser) lets you mark a component as browser-only during server rendering.
+* [`browser`](/reference/react-dom/browser) lets you mark a component as browser-only during server rendering.
 
 ---
 

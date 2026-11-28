@@ -80,7 +80,7 @@ Promise’in resolved value’su.
 
 ---
 
-### <CanaryBadge /> `use(browser())` {/*use-browser*/}
+### `use(browser())` {/*use-browser*/}
 
 Call `use` with the value returned by [`browser`](/reference/react-dom/browser) in a component that should only render in the browser:
 
@@ -1328,7 +1328,11 @@ async function getData(url) {
 
 ## Kullanım (Browser) {/*usage-browser*/}
 
+<<<<<<< HEAD
 ### <CanaryBadge /> Bir component’i yalnızca browser’da render etme {/*rendering-a-component-only-in-the-browser*/}
+=======
+### Rendering a component only in the browser {/*rendering-a-component-only-in-the-browser*/}
+>>>>>>> 0821e7d9428a6c58c922765b891bbffba9ed6249
 
 Yalnızca browser’da render edilmesi gereken bir component içinde [`browser`](/reference/react-dom/browser) tarafından döndürülen value’yu `use`’a geçirin.
 
@@ -1461,8 +1465,8 @@ iframe {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "19.3.0-canary-eb8feb71-20260814",
-    "react-dom": "19.3.0-canary-eb8feb71-20260814",
+    "react": "19.3.0-canary-f1f7ed2a-20260904",
+    "react-dom": "19.3.0-canary-f1f7ed2a-20260904",
     "react-scripts": "latest"
   },
   "scripts": {
